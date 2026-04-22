@@ -1,0 +1,41 @@
+{
+  "name": "archivist",
+  "version": "1.0.0",
+  "author": "Coroboros <ob@coroboros.com> (https://github.com/coroboros)",
+  "description": "Archivist — the canonical Claude reference: auto-synced Anthropic docs, curated team insights, and opinionated Claude Code configuration.",
+  "type": "module",
+  "bin": {},
+  "main": "scripts/update-docs.js",
+  "files": [
+    "/scripts"
+  ],
+  "scripts": {
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
+    "update": "bun scripts/update-docs.js",
+    "index": "bun scripts/build-docs-index.js",
+    "zip": "bun scripts/zip.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:coroboros/archivist.git"
+  },
+  "keywords": [
+    "anthropic",
+    "claude",
+    "claude-code",
+    "archivist",
+    "reference",
+    "documentation",
+    "knowledge-base",
+    "insights"
+  ],
+  "packageManager": "pnpm@10.33.0",
+  "devDependencies": {
+    "@biomejs/biome": "^2.0.0"
+  },
+  "private": false,
+  "preferGlobal": false,
+  "analyze": false,
+  "license": "MIT"
+}

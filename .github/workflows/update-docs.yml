@@ -1,0 +1,236 @@
+name: Update, Version, Publish, and Sync Docs
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Runs every 12 hours
+    - cron: '0 */12 * * *'
+
+env:
+  DOCS_PATH: 'docs'
+  DOCS_CODE_FOLDER_NAME: 'code'
+  DOCS_DEVELOPER_FOLDER_NAME: 'developer'
+  DOCS_RESOURCES_FOLDER_NAME: 'resources'
+  DOCS_API_FOLDER_NAME: 'api'
+  MAX_REMOVED_FILES_PERCENTAGE: "${{ vars.MAX_REMOVED_FILES_PERCENTAGE || '25' }}"
+
+jobs:
+  update-and-publish:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      ########################################################################
+      # GENERATE DOCS
+      ########################################################################
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'pnpm'
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Run docs update script
+        run: bun scripts/update-docs.js
+
+      - name: Cleanup README files when docs are unchanged
+        run: |
+          FOLDERS=(
+            "${DOCS_CODE_FOLDER_NAME}"
+            "${DOCS_DEVELOPER_FOLDER_NAME}"
+            "${DOCS_RESOURCES_FOLDER_NAME}"
+            "${DOCS_API_FOLDER_NAME}"
+          )
+
+          for folder_name in "${FOLDERS[@]}"; do
+            README="${DOCS_PATH}/${folder_name}/${folder_name}-README.md"
+
+            [ -f "$README" ] || continue
+
+            REAL_CHANGES=$(git status --porcelain "${DOCS_PATH}/${folder_name}/" \
+              | grep -v "${folder_name}-README.md" || true)
+
+            if [ -z "$REAL_CHANGES" ]; then
+              echo "No real changes in ${folder_name}, reverting README"
+              git checkout -- "$README"
+            else
+              echo "Real changes detected in ${folder_name}, keeping README"
+            fi
+          done
+
+      - name: Check for file changes
+        id: git_status
+        run: |
+          echo "Max allowed removed percentage: ${MAX_REMOVED_FILES_PERCENTAGE}%"
+          echo "Docs path: ${DOCS_PATH}"
+
+          CHANGED_FILES="$(
+            git status --porcelain \
+              "${DOCS_PATH}/${DOCS_CODE_FOLDER_NAME}/" \
+              "${DOCS_PATH}/${DOCS_DEVELOPER_FOLDER_NAME}/" \
+              "${DOCS_PATH}/${DOCS_RESOURCES_FOLDER_NAME}/" \
+              "${DOCS_PATH}/${DOCS_API_FOLDER_NAME}/" \
+            || true
+          )"
+
+          if [ -z "$CHANGED_FILES" ]; then
+            echo "No relevant changes detected."
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          echo "Relevant changes detected:"
+          echo "$CHANGED_FILES"
+          echo "has_changes=true" >> $GITHUB_OUTPUT
+
+          FOLDERS=(
+            "${DOCS_CODE_FOLDER_NAME}"
+            "${DOCS_DEVELOPER_FOLDER_NAME}"
+            "${DOCS_RESOURCES_FOLDER_NAME}"
+            "${DOCS_API_FOLDER_NAME}"
+          )
+
+          CRITICAL=false
+
+          if git rev-parse --verify --quiet HEAD >/dev/null; then
+            HAVE_HEAD=true
+          else
+            HAVE_HEAD=false
+          fi
+
+          for folder_name in "${FOLDERS[@]}"; do
+            FOLDER_PATH="${DOCS_PATH}/${folder_name}"
+
+            if [ ! -d "$FOLDER_PATH" ]; then
+              echo "❌ CRITICAL: Folder '${FOLDER_PATH}' is missing in working tree. Aborting."
+              CRITICAL=true
+              continue
+            fi
+
+            if [ "$HAVE_HEAD" = true ]; then
+              TOTAL_FOLDER_FILES="$(git ls-tree -r --name-only HEAD -- "$FOLDER_PATH" | wc -l | tr -d '[:space:]')"
+              REMOVED_FOLDER_FILES="$(git diff --name-only --diff-filter=D HEAD -- "$FOLDER_PATH" 2>/dev/null | wc -l | tr -d '[:space:]')"
+            else
+              CURRENT_FOLDER_FILES="$(find "$FOLDER_PATH" -type f 2>/dev/null | wc -l | tr -d '[:space:]')"
+              REMOVED_FOLDER_FILES="$(echo "$CHANGED_FILES" | grep "^ D " | grep "$FOLDER_PATH" | wc -l | tr -d '[:space:]')"
+
+              if [ "$CURRENT_FOLDER_FILES" -eq 0 ] && [ "$REMOVED_FOLDER_FILES" -eq 0 ]; then
+                TOTAL_FOLDER_FILES=0
+              else
+                TOTAL_FOLDER_FILES=$(( CURRENT_FOLDER_FILES + REMOVED_FOLDER_FILES ))
+              fi
+            fi
+
+            TOTAL_FOLDER_FILES="${TOTAL_FOLDER_FILES:-0}"
+            REMOVED_FOLDER_FILES="${REMOVED_FOLDER_FILES:-0}"
+
+            if [ "$TOTAL_FOLDER_FILES" -eq 0 ]; then
+              echo "❌ CRITICAL: Folder '$FOLDER_PATH' has 0 files in total (before deletion). Aborting."
+              CRITICAL=true
+              continue
+            fi
+
+            FOLDER_PERCENTAGE=$(( REMOVED_FOLDER_FILES * 100 / TOTAL_FOLDER_FILES ))
+
+            echo "Folder check: $folder_name → removed ${REMOVED_FOLDER_FILES}/${TOTAL_FOLDER_FILES} (${FOLDER_PERCENTAGE}%)"
+
+            if [ "$FOLDER_PERCENTAGE" -ge "$MAX_REMOVED_FILES_PERCENTAGE" ]; then
+              echo "❌ CRITICAL: Folder '${folder_name}' exceeds safe deletion threshold (${FOLDER_PERCENTAGE}% ≥ ${MAX_REMOVED_FILES_PERCENTAGE}%)."
+              CRITICAL=true
+            fi
+          done
+
+          if [ "$CRITICAL" = true ]; then
+            echo "❌ CRITICAL: deletion threshold exceeded or missing folders detected. Please check logs above. Aborting."
+            exit 1
+          fi
+
+          echo "All folder checks passed."
+          exit 0
+
+      ########################################################################
+      # VERSION + RELEASE
+      ########################################################################
+      - name: Configure Git user
+        if: steps.git_status.outputs.has_changes == 'true'
+        run: |
+          git config --global user.name "GitHub Actions Bot"
+          git config --global user.email "actions-bot@github.com"
+
+      - name: Bump package version
+        if: steps.git_status.outputs.has_changes == 'true'
+        id: version
+        run: |
+          pnpm version patch --no-git-tag-version --commit-hooks false
+          NEW_VERSION=$(node -p "require('./package.json').version")
+          echo "version_number=${NEW_VERSION}" >> $GITHUB_OUTPUT
+
+      - name: Generate Changelog
+        id: changelog_generator
+        if: steps.git_status.outputs.has_changes == 'true'
+        run: |
+          NEW_VERSION="${{ steps.version.outputs.version_number }}"
+          HEADER="## 🤖 v${NEW_VERSION} - $(date +'%d/%m/%Y')"
+
+          echo -e "$HEADER\n\nFile Changes:\n" > new_entry.tmp
+
+          git status --porcelain \
+            "${DOCS_PATH}/${DOCS_CODE_FOLDER_NAME}/" \
+            "${DOCS_PATH}/${DOCS_DEVELOPER_FOLDER_NAME}/" \
+            "${DOCS_PATH}/${DOCS_RESOURCES_FOLDER_NAME}/" \
+            "${DOCS_PATH}/${DOCS_API_FOLDER_NAME}/" \
+          | while IFS= read -r line; do
+            case "$line" in
+              " M "*) echo "- Modified: \`${line:3}\`" >> new_entry.tmp ;;
+              " D "*) echo "- Deleted: \`${line:3}\`" >> new_entry.tmp ;;
+              "?? "*) echo "- Added: \`${line:3}\`" >> new_entry.tmp ;;
+            esac
+          done
+
+          echo "body<<EOF" >> $GITHUB_OUTPUT
+          cat new_entry.tmp >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+          tail -n +2 CHANGELOG.md 2>/dev/null > old.tmp
+
+          { echo "# Changelog"; echo ""; cat new_entry.tmp; echo ""; cat old.tmp; } > CHANGELOG.md
+
+          rm new_entry.tmp old.tmp
+
+      - name: Commit, Tag, and Push
+        if: steps.git_status.outputs.has_changes == 'true'
+        run: |
+          git add \
+            "${DOCS_PATH}/${DOCS_CODE_FOLDER_NAME}/" \
+            "${DOCS_PATH}/${DOCS_DEVELOPER_FOLDER_NAME}/" \
+            "${DOCS_PATH}/${DOCS_RESOURCES_FOLDER_NAME}/" \
+            "${DOCS_PATH}/${DOCS_API_FOLDER_NAME}/" \
+            "${DOCS_PATH}/INDEX.md" \
+            CHANGELOG.md package.json pnpm-lock.yaml
+          git commit -m "docs: release v${{ steps.version.outputs.version_number }}"
+          git tag "${{ steps.version.outputs.version_number }}"
+          git push
+          git push --tags
+
+      - name: Create GitHub Release
+        if: steps.git_status.outputs.has_changes == 'true'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: "${{ steps.version.outputs.version_number }}"
+          name: "${{ steps.version.outputs.version_number }}"
+          body: "${{ steps.changelog_generator.outputs.body }}"
