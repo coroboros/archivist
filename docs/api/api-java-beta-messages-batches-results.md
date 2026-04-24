@@ -71,8 +71,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
-
 ### Returns
 
 - `class BetaMessageBatchIndividualResponse:`
@@ -1011,10 +1009,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `Optional<String> content`
 
               Summary of compacted content, or null if compaction failed
-
-            - `Optional<String> encryptedContent`
-
-              Opaque metadata from prior compaction, to be round-tripped verbatim
 
             - `JsonValue; type "compaction"constant`
 

@@ -484,7 +484,6 @@ The SDK defines methods that accept files through the `MultipartField` class:
 
 ```java nocheck
 import com.anthropic.core.MultipartField;
-import com.anthropic.models.beta.AnthropicBeta;
 import com.anthropic.models.beta.files.FileMetadata;
 import com.anthropic.models.beta.files.FileUploadParams;
 
@@ -495,7 +494,6 @@ FileUploadParams params = FileUploadParams.builder()
       .contentType("application/pdf")
       .build()
   )
-  .addBeta(AnthropicBeta.FILES_API_2025_04_14)
   .build();
 
 FileMetadata fileMetadata = client.beta().files().upload(params);
@@ -505,7 +503,6 @@ Or from an `InputStream`:
 
 ```java nocheck
 import com.anthropic.core.MultipartField;
-import com.anthropic.models.beta.AnthropicBeta;
 import com.anthropic.models.beta.files.FileMetadata;
 import com.anthropic.models.beta.files.FileUploadParams;
 
@@ -517,7 +514,6 @@ FileUploadParams params = FileUploadParams.builder()
       .contentType("application/pdf")
       .build()
   )
-  .addBeta(AnthropicBeta.FILES_API_2025_04_14)
   .build();
 
 FileMetadata fileMetadata = client.beta().files().upload(params);
@@ -527,7 +523,6 @@ Or from in-memory bytes:
 
 ```java nocheck
 import com.anthropic.core.MultipartField;
-import com.anthropic.models.beta.AnthropicBeta;
 import com.anthropic.models.beta.files.FileMetadata;
 import com.anthropic.models.beta.files.FileUploadParams;
 
@@ -539,7 +534,6 @@ FileUploadParams params = FileUploadParams.builder()
       .contentType("text/plain")
       .build()
   )
-  .addBeta(AnthropicBeta.FILES_API_2025_04_14)
   .build();
 
 FileMetadata fileMetadata = client.beta().files().upload(params);

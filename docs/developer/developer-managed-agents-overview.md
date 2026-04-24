@@ -91,7 +91,7 @@ To get started, you need:
 2. The beta header above on all requests
 3. Access to Claude Managed Agents (enabled by default for all API accounts)
 
-Certain features ([outcomes](./developer-managed-agents-define-outcomes.md), [multiagent](./developer-managed-agents-multi-agent.md), and [memory](./developer-managed-agents-memory.md)) are in research preview. [Request access](https://claude.com/form/claude-managed-agents) to try them.
+Certain features ([outcomes](./developer-managed-agents-define-outcomes.md) and [multiagent](./developer-managed-agents-multi-agent.md)) are in research preview. [Request access](https://claude.com/form/claude-managed-agents) to try them.
 
 ## Rate limits
 
@@ -99,7 +99,7 @@ Managed Agents endpoints are rate-limited per organization:
 
 | Operation | Limit |
 | --- | --- |
-| Create endpoints (agents, sessions, environments, etc.) | 60 requests per minute |
+| Create endpoints (agents, sessions, environments, etc.) | 300 requests per minute |
 | Read endpoints (retrieve, list, stream, etc.) | 600 requests per minute |
 
 Organization-level [spend limits and tier-based rate limits](../api/api-rate-limits.md) also apply.

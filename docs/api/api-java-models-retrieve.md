@@ -69,8 +69,6 @@ The Models API response can be used to determine information about a specific mo
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
-
 ### Returns
 
 - `class ModelInfo:`
@@ -178,14 +176,6 @@ The Models API response can be used to determine information about a specific mo
       - `boolean supported`
 
         Whether this capability is supported by the model.
-
-      - `Optional<CapabilitySupport> xhigh`
-
-        Indicates whether a capability is supported.
-
-        - `boolean supported`
-
-          Whether this capability is supported by the model.
 
     - `CapabilitySupport imageInput`
 

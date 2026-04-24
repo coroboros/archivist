@@ -56,8 +56,6 @@ generated: true
 
   - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
-  - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
-
 ### Beta API Error
 
 - `class BetaApiError:`
@@ -386,8 +384,6 @@ The Models API response can be used to determine which models are available for 
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
-
 ### Returns
 
 - `class BetaModelInfo:`
@@ -495,14 +491,6 @@ The Models API response can be used to determine which models are available for 
       - `boolean supported`
 
         Whether this capability is supported by the model.
-
-      - `Optional<BetaCapabilitySupport> xhigh`
-
-        Indicates whether a capability is supported.
-
-        - `boolean supported`
-
-          Whether this capability is supported by the model.
 
     - `BetaCapabilitySupport imageInput`
 
@@ -667,8 +655,6 @@ The Models API response can be used to determine information about a specific mo
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
-
 ### Returns
 
 - `class BetaModelInfo:`
@@ -776,14 +762,6 @@ The Models API response can be used to determine information about a specific mo
       - `boolean supported`
 
         Whether this capability is supported by the model.
-
-      - `Optional<BetaCapabilitySupport> xhigh`
-
-        Indicates whether a capability is supported.
-
-        - `boolean supported`
-
-          Whether this capability is supported by the model.
 
     - `BetaCapabilitySupport imageInput`
 
@@ -970,14 +948,6 @@ public final class Main {
 
     Whether this capability is supported by the model.
 
-  - `Optional<BetaCapabilitySupport> xhigh`
-
-    Indicates whether a capability is supported.
-
-    - `boolean supported`
-
-      Whether this capability is supported by the model.
-
 ### Beta Model Capabilities
 
 - `class BetaModelCapabilities:`
@@ -1079,14 +1049,6 @@ public final class Main {
     - `boolean supported`
 
       Whether this capability is supported by the model.
-
-    - `Optional<BetaCapabilitySupport> xhigh`
-
-      Indicates whether a capability is supported.
-
-      - `boolean supported`
-
-        Whether this capability is supported by the model.
 
   - `BetaCapabilitySupport imageInput`
 
@@ -1247,14 +1209,6 @@ public final class Main {
       - `boolean supported`
 
         Whether this capability is supported by the model.
-
-      - `Optional<BetaCapabilitySupport> xhigh`
-
-        Indicates whether a capability is supported.
-
-        - `boolean supported`
-
-          Whether this capability is supported by the model.
 
     - `BetaCapabilitySupport imageInput`
 
@@ -1449,8 +1403,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
-
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
   - `long maxTokens`
 
@@ -4098,10 +4050,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
               - `TTL_1H("1h")`
 
-          - `Optional<String> encryptedContent`
-
-            Opaque metadata from prior compaction, to be round-tripped verbatim
-
     - `Role role`
 
       - `USER("user")`
@@ -5992,19 +5940,15 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
     Used to remove "long tail" low probability responses. [Learn more technical details here](https://towardsdatascience.com/how-to-sample-from-language-models-682bceb97277).
 
-    Recommended for advanced use cases only. You usually only need to use `temperature`.
+    Recommended for advanced use cases only.
 
   - `Optional<Double> topP`
 
     Use nucleus sampling.
 
-    In nucleus sampling, we compute the cumulative distribution over all the options for each subsequent token in decreasing probability order and cut it off once it reaches a particular probability specified by `top_p`. You should either alter `temperature` or `top_p`, but not both.
+    In nucleus sampling, we compute the cumulative distribution over all the options for each subsequent token in decreasing probability order and cut it off once it reaches a particular probability specified by `top_p`.
 
-    Recommended for advanced use cases only. You usually only need to use `temperature`.
-
-  - `Optional<String> userProfileId`
-
-    The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
+    Recommended for advanced use cases only.
 
 ### Returns
 
@@ -6927,10 +6871,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         Summary of compacted content, or null if compaction failed
 
-      - `Optional<String> encryptedContent`
-
-        Opaque metadata from prior compaction, to be round-tripped verbatim
-
       - `JsonValue; type "compaction"constant`
 
         - `COMPACTION("compaction")`
@@ -7490,8 +7430,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
-
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
   - `List<BetaMessageParam> messages`
 
@@ -10130,10 +10068,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
               - `TTL_5M("5m")`
 
               - `TTL_1H("1h")`
-
-          - `Optional<String> encryptedContent`
-
-            Opaque metadata from prior compaction, to be round-tripped verbatim
 
     - `Role role`
 
@@ -13816,10 +13750,6 @@ public final class Main {
 
     Summary of compacted content, or null if compaction failed
 
-  - `Optional<String> encryptedContent`
-
-    Opaque metadata from prior compaction, to be round-tripped verbatim
-
   - `JsonValue; type "compaction"constant`
 
     - `COMPACTION("compaction")`
@@ -13867,19 +13797,11 @@ public final class Main {
 
       - `TTL_1H("1h")`
 
-  - `Optional<String> encryptedContent`
-
-    Opaque metadata from prior compaction, to be round-tripped verbatim
-
 ### Beta Compaction Content Block Delta
 
 - `class BetaCompactionContentBlockDelta:`
 
   - `Optional<String> content`
-
-  - `Optional<String> encryptedContent`
-
-    Opaque metadata from prior compaction, to be round-tripped verbatim
 
   - `JsonValue; type "compaction_delta"constant`
 
@@ -14892,10 +14814,6 @@ public final class Main {
     - `Optional<String> content`
 
       Summary of compacted content, or null if compaction failed
-
-    - `Optional<String> encryptedContent`
-
-      Opaque metadata from prior compaction, to be round-tripped verbatim
 
     - `JsonValue; type "compaction"constant`
 
@@ -17488,10 +17406,6 @@ public final class Main {
 
         - `TTL_1H("1h")`
 
-    - `Optional<String> encryptedContent`
-
-      Opaque metadata from prior compaction, to be round-tripped verbatim
-
 ### Beta Content Block Source
 
 - `class BetaContentBlockSource:`
@@ -19711,10 +19625,6 @@ public final class Main {
       - `Optional<String> content`
 
         Summary of compacted content, or null if compaction failed
-
-      - `Optional<String> encryptedContent`
-
-        Opaque metadata from prior compaction, to be round-tripped verbatim
 
       - `JsonValue; type "compaction"constant`
 
@@ -23046,10 +22956,6 @@ public final class Main {
 
             - `TTL_1H("1h")`
 
-        - `Optional<String> encryptedContent`
-
-          Opaque metadata from prior compaction, to be round-tripped verbatim
-
   - `Role role`
 
     - `USER("user")`
@@ -23096,8 +23002,6 @@ public final class Main {
 
     - `HIGH("high")`
 
-    - `XHIGH("xhigh")`
-
     - `MAX("max")`
 
   - `Optional<BetaJsonOutputFormat> format`
@@ -23111,24 +23015,6 @@ public final class Main {
     - `JsonValue; type "json_schema"constant`
 
       - `JSON_SCHEMA("json_schema")`
-
-  - `Optional<BetaTokenTaskBudget> taskBudget`
-
-    User-configurable total token budget across contexts.
-
-    - `long total`
-
-      Total token budget across all contexts in the session.
-
-    - `JsonValue; type "tokens"constant`
-
-      The budget type. Currently only 'tokens' is supported.
-
-      - `TOKENS("tokens")`
-
-    - `Optional<Long> remaining`
-
-      Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
 ### Beta Plain Text Source
 
@@ -23278,10 +23164,6 @@ public final class Main {
 
     - `Optional<String> content`
 
-    - `Optional<String> encryptedContent`
-
-      Opaque metadata from prior compaction, to be round-tripped verbatim
-
     - `JsonValue; type "compaction_delta"constant`
 
       - `COMPACTION_DELTA("compaction_delta")`
@@ -23421,10 +23303,6 @@ public final class Main {
     - `class BetaCompactionContentBlockDelta:`
 
       - `Optional<String> content`
-
-      - `Optional<String> encryptedContent`
-
-        Opaque metadata from prior compaction, to be round-tripped verbatim
 
       - `JsonValue; type "compaction_delta"constant`
 
@@ -24293,10 +24171,6 @@ public final class Main {
       - `Optional<String> content`
 
         Summary of compacted content, or null if compaction failed
-
-      - `Optional<String> encryptedContent`
-
-        Opaque metadata from prior compaction, to be round-tripped verbatim
 
       - `JsonValue; type "compaction"constant`
 
@@ -25604,10 +25478,6 @@ public final class Main {
         - `Optional<String> content`
 
           Summary of compacted content, or null if compaction failed
-
-        - `Optional<String> encryptedContent`
-
-          Opaque metadata from prior compaction, to be round-tripped verbatim
 
         - `JsonValue; type "compaction"constant`
 
@@ -27014,10 +26884,6 @@ public final class Main {
           - `Optional<String> content`
 
             Summary of compacted content, or null if compaction failed
-
-          - `Optional<String> encryptedContent`
-
-            Opaque metadata from prior compaction, to be round-tripped verbatim
 
           - `JsonValue; type "compaction"constant`
 
@@ -28716,10 +28582,6 @@ public final class Main {
 
           Summary of compacted content, or null if compaction failed
 
-        - `Optional<String> encryptedContent`
-
-          Opaque metadata from prior compaction, to be round-tripped verbatim
-
         - `JsonValue; type "compaction"constant`
 
           - `COMPACTION("compaction")`
@@ -28863,10 +28725,6 @@ public final class Main {
       - `class BetaCompactionContentBlockDelta:`
 
         - `Optional<String> content`
-
-        - `Optional<String> encryptedContent`
-
-          Opaque metadata from prior compaction, to be round-tripped verbatim
 
         - `JsonValue; type "compaction_delta"constant`
 
@@ -30657,26 +30515,6 @@ public final class Main {
     - `THINKING_TURNS("thinking_turns")`
 
   - `long value`
-
-### Beta Token Task Budget
-
-- `class BetaTokenTaskBudget:`
-
-  User-configurable total token budget across contexts.
-
-  - `long total`
-
-    Total token budget across all contexts in the session.
-
-  - `JsonValue; type "tokens"constant`
-
-    The budget type. Currently only 'tokens' is supported.
-
-    - `TOKENS("tokens")`
-
-  - `Optional<Long> remaining`
-
-    Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
 ### Beta Tool
 
@@ -36232,8 +36070,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
-
   - `List<Request> requests`
 
     List of requests for prompt completion. Each is an individual request to create a Message.
@@ -38896,10 +38732,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `TTL_1H("1h")`
 
-              - `Optional<String> encryptedContent`
-
-                Opaque metadata from prior compaction, to be round-tripped verbatim
-
         - `Role role`
 
           - `USER("user")`
@@ -39207,8 +39039,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `HIGH("high")`
 
-          - `XHIGH("xhigh")`
-
           - `MAX("max")`
 
         - `Optional<BetaJsonOutputFormat> format`
@@ -39222,24 +39052,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
           - `JsonValue; type "json_schema"constant`
 
             - `JSON_SCHEMA("json_schema")`
-
-        - `Optional<BetaTokenTaskBudget> taskBudget`
-
-          User-configurable total token budget across contexts.
-
-          - `long total`
-
-            Total token budget across all contexts in the session.
-
-          - `JsonValue; type "tokens"constant`
-
-            The budget type. Currently only 'tokens' is supported.
-
-            - `TOKENS("tokens")`
-
-          - `Optional<Long> remaining`
-
-            Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
       - `Optional<BetaJsonOutputFormat> outputFormat`
 
@@ -41153,19 +40965,15 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
         Used to remove "long tail" low probability responses. [Learn more technical details here](https://towardsdatascience.com/how-to-sample-from-language-models-682bceb97277).
 
-        Recommended for advanced use cases only. You usually only need to use `temperature`.
+        Recommended for advanced use cases only.
 
       - `Optional<Double> topP`
 
         Use nucleus sampling.
 
-        In nucleus sampling, we compute the cumulative distribution over all the options for each subsequent token in decreasing probability order and cut it off once it reaches a particular probability specified by `top_p`. You should either alter `temperature` or `top_p`, but not both.
+        In nucleus sampling, we compute the cumulative distribution over all the options for each subsequent token in decreasing probability order and cut it off once it reaches a particular probability specified by `top_p`.
 
-        Recommended for advanced use cases only. You usually only need to use `temperature`.
-
-      - `Optional<String> userProfileId`
-
-        The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
+        Recommended for advanced use cases only.
 
 ### Returns
 
@@ -41355,8 +41163,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
-
 ### Returns
 
 - `class BetaMessageBatch:`
@@ -41544,8 +41350,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
-
 ### Returns
 
 - `class BetaMessageBatch:`
@@ -41724,8 +41528,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
-
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
 ### Returns
 
@@ -41906,8 +41708,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
-
 ### Returns
 
 - `class BetaDeletedMessageBatch:`
@@ -42012,8 +41812,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
-
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
 ### Returns
 
@@ -42953,10 +42751,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `Optional<String> content`
 
               Summary of compacted content, or null if compaction failed
-
-            - `Optional<String> encryptedContent`
-
-              Opaque metadata from prior compaction, to be round-tripped verbatim
 
             - `JsonValue; type "compaction"constant`
 
@@ -44706,10 +44500,6 @@ public final class Main {
 
               Summary of compacted content, or null if compaction failed
 
-            - `Optional<String> encryptedContent`
-
-              Opaque metadata from prior compaction, to be round-tripped verbatim
-
             - `JsonValue; type "compaction"constant`
 
               - `COMPACTION("compaction")`
@@ -46244,10 +46034,6 @@ public final class Main {
 
             Summary of compacted content, or null if compaction failed
 
-          - `Optional<String> encryptedContent`
-
-            Opaque metadata from prior compaction, to be round-tripped verbatim
-
           - `JsonValue; type "compaction"constant`
 
             - `COMPACTION("compaction")`
@@ -47744,10 +47530,6 @@ public final class Main {
 
           Summary of compacted content, or null if compaction failed
 
-        - `Optional<String> encryptedContent`
-
-          Opaque metadata from prior compaction, to be round-tripped verbatim
-
         - `JsonValue; type "compaction"constant`
 
           - `COMPACTION("compaction")`
@@ -48282,8 +48064,6 @@ Create Agent
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
-
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
   - `Model model`
 
@@ -49047,8 +48827,6 @@ List Agents
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
-
 ### Returns
 
 - `class BetaManagedAgentsAgent:`
@@ -49430,8 +49208,6 @@ Get Agent
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
-
 ### Returns
 
 - `class BetaManagedAgentsAgent:`
@@ -49808,8 +49584,6 @@ Update Agent
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
-
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
   - `long version`
 
@@ -50557,8 +50331,6 @@ Archive Agent
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
-
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
 ### Returns
 
@@ -52219,8 +51991,6 @@ List Agent Versions
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
-
 ### Returns
 
 - `class BetaManagedAgentsAgent:`
@@ -52598,8 +52368,6 @@ Create a new environment with the specified configuration.
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
-
   - `String name`
 
     Human-readable name for the environment
@@ -52835,8 +52603,6 @@ List environments with pagination support.
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
-
 ### Returns
 
 - `class BetaEnvironment:`
@@ -53040,8 +52806,6 @@ Retrieve a specific environment by ID.
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
-
 ### Returns
 
 - `class BetaEnvironment:`
@@ -53244,8 +53008,6 @@ Update an existing environment's configuration.
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
-
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
   - `Optional<BetaCloudConfigParams> config`
 
@@ -53469,8 +53231,6 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
-
 ### Returns
 
 - `class BetaEnvironmentDeleteResponse:`
@@ -53569,8 +53329,6 @@ Archive an environment by ID. Archived environments cannot be used to create new
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
-
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
 ### Returns
 
@@ -54222,8 +53980,6 @@ Create Session
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
-
   - `Agent agent`
 
     Agent identifier. Accepts the `agent` ID string, which pins the latest version for the session, or an `agent` object with both id and version specified.
@@ -54317,6 +54073,30 @@ Create Session
       - `Optional<String> mountPath`
 
         Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
+
+    - `class BetaManagedAgentsMemoryStoreResourceParam:`
+
+      Parameters for attaching a memory store to an agent session.
+
+      - `String memoryStoreId`
+
+        The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+      - `Type type`
+
+        - `MEMORY_STORE("memory_store")`
+
+      - `Optional<Access> access`
+
+        Access mode for an attached memory store.
+
+        - `READ_WRITE("read_write")`
+
+        - `READ_ONLY("read_only")`
+
+      - `Optional<String> instructions`
+
+        Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
   - `Optional<String> title`
 
@@ -54686,6 +54466,42 @@ Create Session
 
         A timestamp in RFC 3339 format
 
+    - `class BetaManagedAgentsMemoryStoreResource:`
+
+      A memory store attached to an agent session.
+
+      - `String memoryStoreId`
+
+        The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+      - `Type type`
+
+        - `MEMORY_STORE("memory_store")`
+
+      - `Optional<Access> access`
+
+        Access mode for an attached memory store.
+
+        - `READ_WRITE("read_write")`
+
+        - `READ_ONLY("read_only")`
+
+      - `Optional<String> description`
+
+        Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+      - `Optional<String> instructions`
+
+        Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+      - `Optional<String> mountPath`
+
+        Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+      - `Optional<String> name`
+
+        Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
+
   - `BetaManagedAgentsSessionStats stats`
 
     Timing statistics for a session.
@@ -54881,8 +54697,6 @@ List Sessions
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
-
 ### Returns
 
 - `class BetaManagedAgentsSession:`
@@ -55242,6 +55056,42 @@ List Sessions
       - `LocalDateTime updatedAt`
 
         A timestamp in RFC 3339 format
+
+    - `class BetaManagedAgentsMemoryStoreResource:`
+
+      A memory store attached to an agent session.
+
+      - `String memoryStoreId`
+
+        The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+      - `Type type`
+
+        - `MEMORY_STORE("memory_store")`
+
+      - `Optional<Access> access`
+
+        Access mode for an attached memory store.
+
+        - `READ_WRITE("read_write")`
+
+        - `READ_ONLY("read_only")`
+
+      - `Optional<String> description`
+
+        Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+      - `Optional<String> instructions`
+
+        Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+      - `Optional<String> mountPath`
+
+        Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+      - `Optional<String> name`
+
+        Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
   - `BetaManagedAgentsSessionStats stats`
 
@@ -55392,8 +55242,6 @@ Get Session
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
-
 ### Returns
 
 - `class BetaManagedAgentsSession:`
@@ -55754,6 +55602,42 @@ Get Session
 
         A timestamp in RFC 3339 format
 
+    - `class BetaManagedAgentsMemoryStoreResource:`
+
+      A memory store attached to an agent session.
+
+      - `String memoryStoreId`
+
+        The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+      - `Type type`
+
+        - `MEMORY_STORE("memory_store")`
+
+      - `Optional<Access> access`
+
+        Access mode for an attached memory store.
+
+        - `READ_WRITE("read_write")`
+
+        - `READ_ONLY("read_only")`
+
+      - `Optional<String> description`
+
+        Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+      - `Optional<String> instructions`
+
+        Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+      - `Optional<String> mountPath`
+
+        Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+      - `Optional<String> name`
+
+        Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
+
   - `BetaManagedAgentsSessionStats stats`
 
     Timing statistics for a session.
@@ -55902,8 +55786,6 @@ Update Session
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
-
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
   - `Optional<Metadata> metadata`
 
@@ -56277,6 +56159,42 @@ Update Session
 
         A timestamp in RFC 3339 format
 
+    - `class BetaManagedAgentsMemoryStoreResource:`
+
+      A memory store attached to an agent session.
+
+      - `String memoryStoreId`
+
+        The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+      - `Type type`
+
+        - `MEMORY_STORE("memory_store")`
+
+      - `Optional<Access> access`
+
+        Access mode for an attached memory store.
+
+        - `READ_WRITE("read_write")`
+
+        - `READ_ONLY("read_only")`
+
+      - `Optional<String> description`
+
+        Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+      - `Optional<String> instructions`
+
+        Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+      - `Optional<String> mountPath`
+
+        Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+      - `Optional<String> name`
+
+        Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
+
   - `BetaManagedAgentsSessionStats stats`
 
     Timing statistics for a session.
@@ -56426,8 +56344,6 @@ Delete Session
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
-
 ### Returns
 
 - `class BetaManagedAgentsDeletedSession:`
@@ -56522,8 +56438,6 @@ Archive Session
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
-
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
 ### Returns
 
@@ -56885,6 +56799,42 @@ Archive Session
 
         A timestamp in RFC 3339 format
 
+    - `class BetaManagedAgentsMemoryStoreResource:`
+
+      A memory store attached to an agent session.
+
+      - `String memoryStoreId`
+
+        The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+      - `Type type`
+
+        - `MEMORY_STORE("memory_store")`
+
+      - `Optional<Access> access`
+
+        Access mode for an attached memory store.
+
+        - `READ_WRITE("read_write")`
+
+        - `READ_ONLY("read_only")`
+
+      - `Optional<String> description`
+
+        Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+      - `Optional<String> instructions`
+
+        Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+      - `Optional<String> mountPath`
+
+        Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+      - `Optional<String> name`
+
+        Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
+
   - `BetaManagedAgentsSessionStats stats`
 
     Timing statistics for a session.
@@ -57105,6 +57055,32 @@ public final class Main {
   - `Optional<String> mountPath`
 
     Mount path in the container. Defaults to `/workspace/<repo-name>`.
+
+### Beta Managed Agents Memory Store Resource Param
+
+- `class BetaManagedAgentsMemoryStoreResourceParam:`
+
+  Parameters for attaching a memory store to an agent session.
+
+  - `String memoryStoreId`
+
+    The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+  - `Type type`
+
+    - `MEMORY_STORE("memory_store")`
+
+  - `Optional<Access> access`
+
+    Access mode for an attached memory store.
+
+    - `READ_WRITE("read_write")`
+
+    - `READ_ONLY("read_only")`
+
+  - `Optional<String> instructions`
+
+    Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
 ### Beta Managed Agents Session
 
@@ -57465,6 +57441,42 @@ public final class Main {
       - `LocalDateTime updatedAt`
 
         A timestamp in RFC 3339 format
+
+    - `class BetaManagedAgentsMemoryStoreResource:`
+
+      A memory store attached to an agent session.
+
+      - `String memoryStoreId`
+
+        The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+      - `Type type`
+
+        - `MEMORY_STORE("memory_store")`
+
+      - `Optional<Access> access`
+
+        Access mode for an attached memory store.
+
+        - `READ_WRITE("read_write")`
+
+        - `READ_ONLY("read_only")`
+
+      - `Optional<String> description`
+
+        Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+      - `Optional<String> instructions`
+
+        Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+      - `Optional<String> mountPath`
+
+        Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+      - `Optional<String> name`
+
+        Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
   - `BetaManagedAgentsSessionStats stats`
 
@@ -57933,8 +57945,6 @@ List Events
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
-
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
 ### Returns
 
@@ -59389,8 +59399,6 @@ Send Events
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
-
   - `List<BetaManagedAgentsEventParams> events`
 
     Events to send to the `session`.
@@ -60225,8 +60233,6 @@ Stream Events
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
-
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
 ### Returns
 
@@ -67586,8 +67592,6 @@ Add Session Resource
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
-
   - `BetaManagedAgentsFileResourceParams betaManagedAgentsFileResourceParams`
 
     Mount a file uploaded via the Files API into the session.
@@ -67713,11 +67717,11 @@ List Session Resources
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
-
 ### Returns
 
 - `class BetaManagedAgentsSessionResource: A class that can be one of several variants.union`
+
+  A memory store attached to an agent session.
 
   - `class BetaManagedAgentsGitHubRepositoryResource:`
 
@@ -67780,6 +67784,42 @@ List Session Resources
     - `LocalDateTime updatedAt`
 
       A timestamp in RFC 3339 format
+
+  - `class BetaManagedAgentsMemoryStoreResource:`
+
+    A memory store attached to an agent session.
+
+    - `String memoryStoreId`
+
+      The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+    - `Type type`
+
+      - `MEMORY_STORE("memory_store")`
+
+    - `Optional<Access> access`
+
+      Access mode for an attached memory store.
+
+      - `READ_WRITE("read_write")`
+
+      - `READ_ONLY("read_only")`
+
+    - `Optional<String> description`
+
+      Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+    - `Optional<String> instructions`
+
+      Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+    - `Optional<String> mountPath`
+
+      Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+    - `Optional<String> name`
+
+      Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
 ### Example
 
@@ -67866,8 +67906,6 @@ Get Session Resource
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
-
 ### Returns
 
 - `class ResourceRetrieveResponse: A class that can be one of several variants.union`
@@ -67935,6 +67973,42 @@ Get Session Resource
     - `LocalDateTime updatedAt`
 
       A timestamp in RFC 3339 format
+
+  - `class BetaManagedAgentsMemoryStoreResource:`
+
+    A memory store attached to an agent session.
+
+    - `String memoryStoreId`
+
+      The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+    - `Type type`
+
+      - `MEMORY_STORE("memory_store")`
+
+    - `Optional<Access> access`
+
+      Access mode for an attached memory store.
+
+      - `READ_WRITE("read_write")`
+
+      - `READ_ONLY("read_only")`
+
+    - `Optional<String> description`
+
+      Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+    - `Optional<String> instructions`
+
+      Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+    - `Optional<String> mountPath`
+
+      Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+    - `Optional<String> name`
+
+      Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
 ### Example
 
@@ -68025,8 +68099,6 @@ Update Session Resource
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
-
   - `String authorizationToken`
 
     New authorization token for the resource. Currently only `github_repository` resources support token rotation.
@@ -68098,6 +68170,42 @@ Update Session Resource
     - `LocalDateTime updatedAt`
 
       A timestamp in RFC 3339 format
+
+  - `class BetaManagedAgentsMemoryStoreResource:`
+
+    A memory store attached to an agent session.
+
+    - `String memoryStoreId`
+
+      The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+    - `Type type`
+
+      - `MEMORY_STORE("memory_store")`
+
+    - `Optional<Access> access`
+
+      Access mode for an attached memory store.
+
+      - `READ_WRITE("read_write")`
+
+      - `READ_ONLY("read_only")`
+
+    - `Optional<String> description`
+
+      Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+    - `Optional<String> instructions`
+
+      Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+    - `Optional<String> mountPath`
+
+      Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+    - `Optional<String> name`
+
+      Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
 ### Example
 
@@ -68188,8 +68296,6 @@ Delete Session Resource
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
-
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
 ### Returns
 
@@ -68308,9 +68414,49 @@ public final class Main {
 
         - `COMMIT("commit")`
 
+### Beta Managed Agents Memory Store Resource
+
+- `class BetaManagedAgentsMemoryStoreResource:`
+
+  A memory store attached to an agent session.
+
+  - `String memoryStoreId`
+
+    The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+  - `Type type`
+
+    - `MEMORY_STORE("memory_store")`
+
+  - `Optional<Access> access`
+
+    Access mode for an attached memory store.
+
+    - `READ_WRITE("read_write")`
+
+    - `READ_ONLY("read_only")`
+
+  - `Optional<String> description`
+
+    Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+  - `Optional<String> instructions`
+
+    Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+  - `Optional<String> mountPath`
+
+    Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+  - `Optional<String> name`
+
+    Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
+
 ### Beta Managed Agents Session Resource
 
 - `class BetaManagedAgentsSessionResource: A class that can be one of several variants.union`
+
+  A memory store attached to an agent session.
 
   - `class BetaManagedAgentsGitHubRepositoryResource:`
 
@@ -68374,6 +68520,42 @@ public final class Main {
 
       A timestamp in RFC 3339 format
 
+  - `class BetaManagedAgentsMemoryStoreResource:`
+
+    A memory store attached to an agent session.
+
+    - `String memoryStoreId`
+
+      The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+    - `Type type`
+
+      - `MEMORY_STORE("memory_store")`
+
+    - `Optional<Access> access`
+
+      Access mode for an attached memory store.
+
+      - `READ_WRITE("read_write")`
+
+      - `READ_ONLY("read_only")`
+
+    - `Optional<String> description`
+
+      Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+    - `Optional<String> instructions`
+
+      Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+    - `Optional<String> mountPath`
+
+      Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+    - `Optional<String> name`
+
+      Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
+
 # Vaults
 
 ## Create
@@ -68435,8 +68617,6 @@ Create Vault
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
-
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
   - `String displayName`
 
@@ -68576,8 +68756,6 @@ List Vaults
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
-
 ### Returns
 
 - `class BetaManagedAgentsVault:`
@@ -68695,8 +68873,6 @@ Get Vault
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
-
 ### Returns
 
 - `class BetaManagedAgentsVault:`
@@ -68813,8 +68989,6 @@ Update Vault
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
-
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
   - `Optional<String> displayName`
 
@@ -68941,8 +69115,6 @@ Delete Vault
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
-
 ### Returns
 
 - `class BetaManagedAgentsDeletedVault:`
@@ -69039,8 +69211,6 @@ Archive Vault
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
-
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
 ### Returns
 
@@ -69210,8 +69380,6 @@ Create Credential
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
-
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
   - `Auth auth`
 
@@ -69543,8 +69711,6 @@ List Credentials
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
-
 ### Returns
 
 - `class BetaManagedAgentsCredential:`
@@ -69747,8 +69913,6 @@ Get Credential
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
-
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
 ### Returns
 
@@ -69956,8 +70120,6 @@ Update Credential
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
-
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
   - `Optional<Auth> auth`
 
@@ -70246,8 +70408,6 @@ Delete Credential
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
-
 ### Returns
 
 - `class BetaManagedAgentsDeletedCredential:`
@@ -70350,8 +70510,6 @@ Archive Credential
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
-
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
 ### Returns
 
@@ -71132,6 +71290,2256 @@ public final class Main {
 
     Updated OAuth client secret.
 
+# Memory Stores
+
+## Create
+
+`BetaManagedAgentsMemoryStore beta().memoryStores().create(MemoryStoreCreateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())`
+
+**post** `/v1/memory_stores`
+
+CreateMemoryStore
+
+### Parameters
+
+- `MemoryStoreCreateParams params`
+
+  - `Optional<List<AnthropicBeta>> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+  - `String name`
+
+  - `Optional<String> description`
+
+  - `Optional<Metadata> metadata`
+
+### Returns
+
+- `class BetaManagedAgentsMemoryStore:`
+
+  - `String id`
+
+  - `Type type`
+
+    - `MEMORY_STORE("memory_store")`
+
+  - `Optional<LocalDateTime> archivedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Optional<LocalDateTime> createdAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Optional<String> description`
+
+  - `Optional<Metadata> metadata`
+
+  - `Optional<String> name`
+
+  - `Optional<LocalDateTime> updatedAt`
+
+    A timestamp in RFC 3339 format
+
+### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.memorystores.BetaManagedAgentsMemoryStore;
+import com.anthropic.models.beta.memorystores.MemoryStoreCreateParams;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        MemoryStoreCreateParams params = MemoryStoreCreateParams.builder()
+            .name("x")
+            .build();
+        BetaManagedAgentsMemoryStore betaManagedAgentsMemoryStore = client.beta().memoryStores().create(params);
+    }
+}
+```
+
+## List
+
+`MemoryStoreListPage beta().memoryStores().list(MemoryStoreListParamsparams = MemoryStoreListParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
+
+**get** `/v1/memory_stores`
+
+ListMemoryStores
+
+### Parameters
+
+- `MemoryStoreListParams params`
+
+  - `Optional<LocalDateTime> createdAtGte`
+
+    Return stores created at or after this time (inclusive).
+
+  - `Optional<LocalDateTime> createdAtLte`
+
+    Return stores created at or before this time (inclusive).
+
+  - `Optional<Boolean> includeArchived`
+
+    Query parameter for include_archived
+
+  - `Optional<Long> limit`
+
+    Query parameter for limit
+
+  - `Optional<String> page`
+
+    Query parameter for page
+
+  - `Optional<List<AnthropicBeta>> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+### Returns
+
+- `class BetaManagedAgentsMemoryStore:`
+
+  - `String id`
+
+  - `Type type`
+
+    - `MEMORY_STORE("memory_store")`
+
+  - `Optional<LocalDateTime> archivedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Optional<LocalDateTime> createdAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Optional<String> description`
+
+  - `Optional<Metadata> metadata`
+
+  - `Optional<String> name`
+
+  - `Optional<LocalDateTime> updatedAt`
+
+    A timestamp in RFC 3339 format
+
+### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.memorystores.MemoryStoreListPage;
+import com.anthropic.models.beta.memorystores.MemoryStoreListParams;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        MemoryStoreListPage page = client.beta().memoryStores().list();
+    }
+}
+```
+
+## Retrieve
+
+`BetaManagedAgentsMemoryStore beta().memoryStores().retrieve(MemoryStoreRetrieveParamsparams = MemoryStoreRetrieveParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
+
+**get** `/v1/memory_stores/{memory_store_id}`
+
+GetMemoryStore
+
+### Parameters
+
+- `MemoryStoreRetrieveParams params`
+
+  - `Optional<String> memoryStoreId`
+
+  - `Optional<List<AnthropicBeta>> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+### Returns
+
+- `class BetaManagedAgentsMemoryStore:`
+
+  - `String id`
+
+  - `Type type`
+
+    - `MEMORY_STORE("memory_store")`
+
+  - `Optional<LocalDateTime> archivedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Optional<LocalDateTime> createdAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Optional<String> description`
+
+  - `Optional<Metadata> metadata`
+
+  - `Optional<String> name`
+
+  - `Optional<LocalDateTime> updatedAt`
+
+    A timestamp in RFC 3339 format
+
+### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.memorystores.BetaManagedAgentsMemoryStore;
+import com.anthropic.models.beta.memorystores.MemoryStoreRetrieveParams;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        BetaManagedAgentsMemoryStore betaManagedAgentsMemoryStore = client.beta().memoryStores().retrieve("memory_store_id");
+    }
+}
+```
+
+## Update
+
+`BetaManagedAgentsMemoryStore beta().memoryStores().update(MemoryStoreUpdateParamsparams = MemoryStoreUpdateParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
+
+**post** `/v1/memory_stores/{memory_store_id}`
+
+UpdateMemoryStore
+
+### Parameters
+
+- `MemoryStoreUpdateParams params`
+
+  - `Optional<String> memoryStoreId`
+
+  - `Optional<List<AnthropicBeta>> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+  - `Optional<String> description`
+
+  - `Optional<Metadata> metadata`
+
+    Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve. The stored bag is limited to 16 keys (up to 64 chars each) with values up to 512 chars.
+
+  - `Optional<String> name`
+
+### Returns
+
+- `class BetaManagedAgentsMemoryStore:`
+
+  - `String id`
+
+  - `Type type`
+
+    - `MEMORY_STORE("memory_store")`
+
+  - `Optional<LocalDateTime> archivedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Optional<LocalDateTime> createdAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Optional<String> description`
+
+  - `Optional<Metadata> metadata`
+
+  - `Optional<String> name`
+
+  - `Optional<LocalDateTime> updatedAt`
+
+    A timestamp in RFC 3339 format
+
+### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.memorystores.BetaManagedAgentsMemoryStore;
+import com.anthropic.models.beta.memorystores.MemoryStoreUpdateParams;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        BetaManagedAgentsMemoryStore betaManagedAgentsMemoryStore = client.beta().memoryStores().update("memory_store_id");
+    }
+}
+```
+
+## Delete
+
+`BetaManagedAgentsDeletedMemoryStore beta().memoryStores().delete(MemoryStoreDeleteParamsparams = MemoryStoreDeleteParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
+
+**delete** `/v1/memory_stores/{memory_store_id}`
+
+DeleteMemoryStore
+
+### Parameters
+
+- `MemoryStoreDeleteParams params`
+
+  - `Optional<String> memoryStoreId`
+
+  - `Optional<List<AnthropicBeta>> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+### Returns
+
+- `class BetaManagedAgentsDeletedMemoryStore:`
+
+  - `String id`
+
+  - `Type type`
+
+    - `MEMORY_STORE_DELETED("memory_store_deleted")`
+
+### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.memorystores.BetaManagedAgentsDeletedMemoryStore;
+import com.anthropic.models.beta.memorystores.MemoryStoreDeleteParams;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        BetaManagedAgentsDeletedMemoryStore betaManagedAgentsDeletedMemoryStore = client.beta().memoryStores().delete("memory_store_id");
+    }
+}
+```
+
+## Archive
+
+`BetaManagedAgentsMemoryStore beta().memoryStores().archive(MemoryStoreArchiveParamsparams = MemoryStoreArchiveParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
+
+**post** `/v1/memory_stores/{memory_store_id}/archive`
+
+ArchiveMemoryStore
+
+### Parameters
+
+- `MemoryStoreArchiveParams params`
+
+  - `Optional<String> memoryStoreId`
+
+  - `Optional<List<AnthropicBeta>> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+### Returns
+
+- `class BetaManagedAgentsMemoryStore:`
+
+  - `String id`
+
+  - `Type type`
+
+    - `MEMORY_STORE("memory_store")`
+
+  - `Optional<LocalDateTime> archivedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Optional<LocalDateTime> createdAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Optional<String> description`
+
+  - `Optional<Metadata> metadata`
+
+  - `Optional<String> name`
+
+  - `Optional<LocalDateTime> updatedAt`
+
+    A timestamp in RFC 3339 format
+
+### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.memorystores.BetaManagedAgentsMemoryStore;
+import com.anthropic.models.beta.memorystores.MemoryStoreArchiveParams;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        BetaManagedAgentsMemoryStore betaManagedAgentsMemoryStore = client.beta().memoryStores().archive("memory_store_id");
+    }
+}
+```
+
+## Domain Types
+
+### Beta Managed Agents Deleted Memory Store
+
+- `class BetaManagedAgentsDeletedMemoryStore:`
+
+  - `String id`
+
+  - `Type type`
+
+    - `MEMORY_STORE_DELETED("memory_store_deleted")`
+
+### Beta Managed Agents Memory Store
+
+- `class BetaManagedAgentsMemoryStore:`
+
+  - `String id`
+
+  - `Type type`
+
+    - `MEMORY_STORE("memory_store")`
+
+  - `Optional<LocalDateTime> archivedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Optional<LocalDateTime> createdAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Optional<String> description`
+
+  - `Optional<Metadata> metadata`
+
+  - `Optional<String> name`
+
+  - `Optional<LocalDateTime> updatedAt`
+
+    A timestamp in RFC 3339 format
+
+# Memories
+
+## Create
+
+`BetaManagedAgentsMemory beta().memoryStores().memories().create(MemoryCreateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())`
+
+**post** `/v1/memory_stores/{memory_store_id}/memories`
+
+CreateMemory
+
+### Parameters
+
+- `MemoryCreateParams params`
+
+  - `Optional<String> memoryStoreId`
+
+  - `Optional<BetaManagedAgentsMemoryView> view`
+
+    Query parameter for view
+
+  - `Optional<List<AnthropicBeta>> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+  - `Optional<String> content`
+
+  - `String path`
+
+### Returns
+
+- `class BetaManagedAgentsMemory:`
+
+  - `String id`
+
+  - `String contentSha256`
+
+  - `long contentSizeBytes`
+
+  - `LocalDateTime createdAt`
+
+    A timestamp in RFC 3339 format
+
+  - `String memoryStoreId`
+
+  - `String memoryVersionId`
+
+  - `String path`
+
+  - `Type type`
+
+    - `MEMORY("memory")`
+
+  - `LocalDateTime updatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Optional<String> content`
+
+### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.memorystores.memories.BetaManagedAgentsMemory;
+import com.anthropic.models.beta.memorystores.memories.MemoryCreateParams;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        MemoryCreateParams params = MemoryCreateParams.builder()
+            .memoryStoreId("memory_store_id")
+            .content("content")
+            .path("xx")
+            .build();
+        BetaManagedAgentsMemory betaManagedAgentsMemory = client.beta().memoryStores().memories().create(params);
+    }
+}
+```
+
+## List
+
+`MemoryListPage beta().memoryStores().memories().list(MemoryListParamsparams = MemoryListParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
+
+**get** `/v1/memory_stores/{memory_store_id}/memories`
+
+ListMemories
+
+### Parameters
+
+- `MemoryListParams params`
+
+  - `Optional<String> memoryStoreId`
+
+  - `Optional<Long> depth`
+
+    Query parameter for depth
+
+  - `Optional<Long> limit`
+
+    Query parameter for limit
+
+  - `Optional<Order> order`
+
+    Query parameter for order
+
+    - `ASC("asc")`
+
+    - `DESC("desc")`
+
+  - `Optional<String> orderBy`
+
+    Query parameter for order_by
+
+  - `Optional<String> page`
+
+    Query parameter for page
+
+  - `Optional<String> pathPrefix`
+
+    Optional path prefix filter (raw string-prefix match; include a trailing slash for directory-scoped lists). This value appears in request URLs. Do not include secrets or personally identifiable information.
+
+  - `Optional<BetaManagedAgentsMemoryView> view`
+
+    Query parameter for view
+
+  - `Optional<List<AnthropicBeta>> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+### Returns
+
+- `class BetaManagedAgentsMemoryListItem: A class that can be one of several variants.union`
+
+  - `class BetaManagedAgentsMemory:`
+
+    - `String id`
+
+    - `String contentSha256`
+
+    - `long contentSizeBytes`
+
+    - `LocalDateTime createdAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String memoryStoreId`
+
+    - `String memoryVersionId`
+
+    - `String path`
+
+    - `Type type`
+
+      - `MEMORY("memory")`
+
+    - `LocalDateTime updatedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Optional<String> content`
+
+  - `class BetaManagedAgentsMemoryPrefix:`
+
+    - `String path`
+
+    - `Type type`
+
+      - `MEMORY_PREFIX("memory_prefix")`
+
+### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.memorystores.memories.MemoryListPage;
+import com.anthropic.models.beta.memorystores.memories.MemoryListParams;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        MemoryListPage page = client.beta().memoryStores().memories().list("memory_store_id");
+    }
+}
+```
+
+## Retrieve
+
+`BetaManagedAgentsMemory beta().memoryStores().memories().retrieve(MemoryRetrieveParamsparams, RequestOptionsrequestOptions = RequestOptions.none())`
+
+**get** `/v1/memory_stores/{memory_store_id}/memories/{memory_id}`
+
+GetMemory
+
+### Parameters
+
+- `MemoryRetrieveParams params`
+
+  - `String memoryStoreId`
+
+  - `Optional<String> memoryId`
+
+  - `Optional<BetaManagedAgentsMemoryView> view`
+
+    Query parameter for view
+
+  - `Optional<List<AnthropicBeta>> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+### Returns
+
+- `class BetaManagedAgentsMemory:`
+
+  - `String id`
+
+  - `String contentSha256`
+
+  - `long contentSizeBytes`
+
+  - `LocalDateTime createdAt`
+
+    A timestamp in RFC 3339 format
+
+  - `String memoryStoreId`
+
+  - `String memoryVersionId`
+
+  - `String path`
+
+  - `Type type`
+
+    - `MEMORY("memory")`
+
+  - `LocalDateTime updatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Optional<String> content`
+
+### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.memorystores.memories.BetaManagedAgentsMemory;
+import com.anthropic.models.beta.memorystores.memories.MemoryRetrieveParams;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        MemoryRetrieveParams params = MemoryRetrieveParams.builder()
+            .memoryStoreId("memory_store_id")
+            .memoryId("memory_id")
+            .build();
+        BetaManagedAgentsMemory betaManagedAgentsMemory = client.beta().memoryStores().memories().retrieve(params);
+    }
+}
+```
+
+## Update
+
+`BetaManagedAgentsMemory beta().memoryStores().memories().update(MemoryUpdateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())`
+
+**post** `/v1/memory_stores/{memory_store_id}/memories/{memory_id}`
+
+UpdateMemory
+
+### Parameters
+
+- `MemoryUpdateParams params`
+
+  - `String memoryStoreId`
+
+  - `Optional<String> memoryId`
+
+  - `Optional<BetaManagedAgentsMemoryView> view`
+
+    Query parameter for view
+
+  - `Optional<List<AnthropicBeta>> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+  - `Optional<String> content`
+
+  - `Optional<String> path`
+
+  - `Optional<BetaManagedAgentsPrecondition> precondition`
+
+### Returns
+
+- `class BetaManagedAgentsMemory:`
+
+  - `String id`
+
+  - `String contentSha256`
+
+  - `long contentSizeBytes`
+
+  - `LocalDateTime createdAt`
+
+    A timestamp in RFC 3339 format
+
+  - `String memoryStoreId`
+
+  - `String memoryVersionId`
+
+  - `String path`
+
+  - `Type type`
+
+    - `MEMORY("memory")`
+
+  - `LocalDateTime updatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Optional<String> content`
+
+### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.memorystores.memories.BetaManagedAgentsMemory;
+import com.anthropic.models.beta.memorystores.memories.MemoryUpdateParams;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        MemoryUpdateParams params = MemoryUpdateParams.builder()
+            .memoryStoreId("memory_store_id")
+            .memoryId("memory_id")
+            .build();
+        BetaManagedAgentsMemory betaManagedAgentsMemory = client.beta().memoryStores().memories().update(params);
+    }
+}
+```
+
+## Delete
+
+`BetaManagedAgentsDeletedMemory beta().memoryStores().memories().delete(MemoryDeleteParamsparams, RequestOptionsrequestOptions = RequestOptions.none())`
+
+**delete** `/v1/memory_stores/{memory_store_id}/memories/{memory_id}`
+
+DeleteMemory
+
+### Parameters
+
+- `MemoryDeleteParams params`
+
+  - `String memoryStoreId`
+
+  - `Optional<String> memoryId`
+
+  - `Optional<String> expectedContentSha256`
+
+    Query parameter for expected_content_sha256
+
+  - `Optional<List<AnthropicBeta>> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+### Returns
+
+- `class BetaManagedAgentsDeletedMemory:`
+
+  - `String id`
+
+  - `Type type`
+
+    - `MEMORY_DELETED("memory_deleted")`
+
+### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.memorystores.memories.BetaManagedAgentsDeletedMemory;
+import com.anthropic.models.beta.memorystores.memories.MemoryDeleteParams;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        MemoryDeleteParams params = MemoryDeleteParams.builder()
+            .memoryStoreId("memory_store_id")
+            .memoryId("memory_id")
+            .build();
+        BetaManagedAgentsDeletedMemory betaManagedAgentsDeletedMemory = client.beta().memoryStores().memories().delete(params);
+    }
+}
+```
+
+## Domain Types
+
+### Beta Managed Agents Content Sha256 Precondition
+
+- `class BetaManagedAgentsContentSha256Precondition:`
+
+  - `Type type`
+
+    - `CONTENT_SHA256("content_sha256")`
+
+  - `Optional<String> contentSha256`
+
+### Beta Managed Agents Deleted Memory
+
+- `class BetaManagedAgentsDeletedMemory:`
+
+  - `String id`
+
+  - `Type type`
+
+    - `MEMORY_DELETED("memory_deleted")`
+
+### Beta Managed Agents Memory
+
+- `class BetaManagedAgentsMemory:`
+
+  - `String id`
+
+  - `String contentSha256`
+
+  - `long contentSizeBytes`
+
+  - `LocalDateTime createdAt`
+
+    A timestamp in RFC 3339 format
+
+  - `String memoryStoreId`
+
+  - `String memoryVersionId`
+
+  - `String path`
+
+  - `Type type`
+
+    - `MEMORY("memory")`
+
+  - `LocalDateTime updatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Optional<String> content`
+
+### Beta Managed Agents Memory List Item
+
+- `class BetaManagedAgentsMemoryListItem: A class that can be one of several variants.union`
+
+  - `class BetaManagedAgentsMemory:`
+
+    - `String id`
+
+    - `String contentSha256`
+
+    - `long contentSizeBytes`
+
+    - `LocalDateTime createdAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String memoryStoreId`
+
+    - `String memoryVersionId`
+
+    - `String path`
+
+    - `Type type`
+
+      - `MEMORY("memory")`
+
+    - `LocalDateTime updatedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Optional<String> content`
+
+  - `class BetaManagedAgentsMemoryPrefix:`
+
+    - `String path`
+
+    - `Type type`
+
+      - `MEMORY_PREFIX("memory_prefix")`
+
+### Beta Managed Agents Memory Path Conflict Error
+
+- `class BetaManagedAgentsMemoryPathConflictError:`
+
+  - `Type type`
+
+    - `MEMORY_PATH_CONFLICT_ERROR("memory_path_conflict_error")`
+
+  - `Optional<String> conflictingMemoryId`
+
+  - `Optional<String> conflictingPath`
+
+  - `Optional<String> message`
+
+### Beta Managed Agents Memory Precondition Failed Error
+
+- `class BetaManagedAgentsMemoryPreconditionFailedError:`
+
+  - `Type type`
+
+    - `MEMORY_PRECONDITION_FAILED_ERROR("memory_precondition_failed_error")`
+
+  - `Optional<String> message`
+
+### Beta Managed Agents Memory Prefix
+
+- `class BetaManagedAgentsMemoryPrefix:`
+
+  - `String path`
+
+  - `Type type`
+
+    - `MEMORY_PREFIX("memory_prefix")`
+
+### Beta Managed Agents Memory View
+
+- `enum BetaManagedAgentsMemoryView:`
+
+  MemoryView enum
+
+  - `BASIC("basic")`
+
+  - `FULL("full")`
+
+### Beta Managed Agents Precondition
+
+- `class BetaManagedAgentsPrecondition:`
+
+  - `Type type`
+
+    - `CONTENT_SHA256("content_sha256")`
+
+  - `Optional<String> contentSha256`
+
+# Memory Versions
+
+## List
+
+`MemoryVersionListPage beta().memoryStores().memoryVersions().list(MemoryVersionListParamsparams = MemoryVersionListParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
+
+**get** `/v1/memory_stores/{memory_store_id}/memory_versions`
+
+ListMemoryVersions
+
+### Parameters
+
+- `MemoryVersionListParams params`
+
+  - `Optional<String> memoryStoreId`
+
+  - `Optional<String> apiKeyId`
+
+    Query parameter for api_key_id
+
+  - `Optional<LocalDateTime> createdAtGte`
+
+    Return versions created at or after this time (inclusive).
+
+  - `Optional<LocalDateTime> createdAtLte`
+
+    Return versions created at or before this time (inclusive).
+
+  - `Optional<Long> limit`
+
+    Query parameter for limit
+
+  - `Optional<String> memoryId`
+
+    Query parameter for memory_id
+
+  - `Optional<BetaManagedAgentsMemoryVersionOperation> operation`
+
+    Query parameter for operation
+
+  - `Optional<String> page`
+
+    Query parameter for page
+
+  - `Optional<String> sessionId`
+
+    Query parameter for session_id
+
+  - `Optional<BetaManagedAgentsMemoryView> view`
+
+    Query parameter for view
+
+  - `Optional<List<AnthropicBeta>> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+### Returns
+
+- `class BetaManagedAgentsMemoryVersion:`
+
+  - `String id`
+
+  - `LocalDateTime createdAt`
+
+    A timestamp in RFC 3339 format
+
+  - `String memoryId`
+
+  - `String memoryStoreId`
+
+  - `BetaManagedAgentsMemoryVersionOperation operation`
+
+    MemoryVersionOperation enum
+
+    - `CREATED("created")`
+
+    - `MODIFIED("modified")`
+
+    - `DELETED("deleted")`
+
+  - `Type type`
+
+    - `MEMORY_VERSION("memory_version")`
+
+  - `Optional<String> content`
+
+  - `Optional<String> contentSha256`
+
+  - `Optional<Long> contentSizeBytes`
+
+  - `Optional<BetaManagedAgentsActor> createdBy`
+
+    - `class BetaManagedAgentsSessionActor:`
+
+      - `String sessionId`
+
+      - `Type type`
+
+        - `SESSION_ACTOR("session_actor")`
+
+    - `class BetaManagedAgentsApiActor:`
+
+      - `String apiKeyId`
+
+      - `Type type`
+
+        - `API_ACTOR("api_actor")`
+
+    - `class BetaManagedAgentsUserActor:`
+
+      - `Type type`
+
+        - `USER_ACTOR("user_actor")`
+
+      - `String userId`
+
+  - `Optional<String> path`
+
+  - `Optional<LocalDateTime> redactedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Optional<BetaManagedAgentsActor> redactedBy`
+
+    - `class BetaManagedAgentsSessionActor:`
+
+      - `String sessionId`
+
+      - `Type type`
+
+        - `SESSION_ACTOR("session_actor")`
+
+    - `class BetaManagedAgentsApiActor:`
+
+      - `String apiKeyId`
+
+      - `Type type`
+
+        - `API_ACTOR("api_actor")`
+
+    - `class BetaManagedAgentsUserActor:`
+
+      - `Type type`
+
+        - `USER_ACTOR("user_actor")`
+
+      - `String userId`
+
+### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.memorystores.memoryversions.MemoryVersionListPage;
+import com.anthropic.models.beta.memorystores.memoryversions.MemoryVersionListParams;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        MemoryVersionListPage page = client.beta().memoryStores().memoryVersions().list("memory_store_id");
+    }
+}
+```
+
+## Retrieve
+
+`BetaManagedAgentsMemoryVersion beta().memoryStores().memoryVersions().retrieve(MemoryVersionRetrieveParamsparams, RequestOptionsrequestOptions = RequestOptions.none())`
+
+**get** `/v1/memory_stores/{memory_store_id}/memory_versions/{memory_version_id}`
+
+GetMemoryVersion
+
+### Parameters
+
+- `MemoryVersionRetrieveParams params`
+
+  - `String memoryStoreId`
+
+  - `Optional<String> memoryVersionId`
+
+  - `Optional<BetaManagedAgentsMemoryView> view`
+
+    Query parameter for view
+
+  - `Optional<List<AnthropicBeta>> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+### Returns
+
+- `class BetaManagedAgentsMemoryVersion:`
+
+  - `String id`
+
+  - `LocalDateTime createdAt`
+
+    A timestamp in RFC 3339 format
+
+  - `String memoryId`
+
+  - `String memoryStoreId`
+
+  - `BetaManagedAgentsMemoryVersionOperation operation`
+
+    MemoryVersionOperation enum
+
+    - `CREATED("created")`
+
+    - `MODIFIED("modified")`
+
+    - `DELETED("deleted")`
+
+  - `Type type`
+
+    - `MEMORY_VERSION("memory_version")`
+
+  - `Optional<String> content`
+
+  - `Optional<String> contentSha256`
+
+  - `Optional<Long> contentSizeBytes`
+
+  - `Optional<BetaManagedAgentsActor> createdBy`
+
+    - `class BetaManagedAgentsSessionActor:`
+
+      - `String sessionId`
+
+      - `Type type`
+
+        - `SESSION_ACTOR("session_actor")`
+
+    - `class BetaManagedAgentsApiActor:`
+
+      - `String apiKeyId`
+
+      - `Type type`
+
+        - `API_ACTOR("api_actor")`
+
+    - `class BetaManagedAgentsUserActor:`
+
+      - `Type type`
+
+        - `USER_ACTOR("user_actor")`
+
+      - `String userId`
+
+  - `Optional<String> path`
+
+  - `Optional<LocalDateTime> redactedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Optional<BetaManagedAgentsActor> redactedBy`
+
+    - `class BetaManagedAgentsSessionActor:`
+
+      - `String sessionId`
+
+      - `Type type`
+
+        - `SESSION_ACTOR("session_actor")`
+
+    - `class BetaManagedAgentsApiActor:`
+
+      - `String apiKeyId`
+
+      - `Type type`
+
+        - `API_ACTOR("api_actor")`
+
+    - `class BetaManagedAgentsUserActor:`
+
+      - `Type type`
+
+        - `USER_ACTOR("user_actor")`
+
+      - `String userId`
+
+### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.memorystores.memoryversions.BetaManagedAgentsMemoryVersion;
+import com.anthropic.models.beta.memorystores.memoryversions.MemoryVersionRetrieveParams;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        MemoryVersionRetrieveParams params = MemoryVersionRetrieveParams.builder()
+            .memoryStoreId("memory_store_id")
+            .memoryVersionId("memory_version_id")
+            .build();
+        BetaManagedAgentsMemoryVersion betaManagedAgentsMemoryVersion = client.beta().memoryStores().memoryVersions().retrieve(params);
+    }
+}
+```
+
+## Redact
+
+`BetaManagedAgentsMemoryVersion beta().memoryStores().memoryVersions().redact(MemoryVersionRedactParamsparams, RequestOptionsrequestOptions = RequestOptions.none())`
+
+**post** `/v1/memory_stores/{memory_store_id}/memory_versions/{memory_version_id}/redact`
+
+RedactMemoryVersion
+
+### Parameters
+
+- `MemoryVersionRedactParams params`
+
+  - `String memoryStoreId`
+
+  - `Optional<String> memoryVersionId`
+
+  - `Optional<List<AnthropicBeta>> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+### Returns
+
+- `class BetaManagedAgentsMemoryVersion:`
+
+  - `String id`
+
+  - `LocalDateTime createdAt`
+
+    A timestamp in RFC 3339 format
+
+  - `String memoryId`
+
+  - `String memoryStoreId`
+
+  - `BetaManagedAgentsMemoryVersionOperation operation`
+
+    MemoryVersionOperation enum
+
+    - `CREATED("created")`
+
+    - `MODIFIED("modified")`
+
+    - `DELETED("deleted")`
+
+  - `Type type`
+
+    - `MEMORY_VERSION("memory_version")`
+
+  - `Optional<String> content`
+
+  - `Optional<String> contentSha256`
+
+  - `Optional<Long> contentSizeBytes`
+
+  - `Optional<BetaManagedAgentsActor> createdBy`
+
+    - `class BetaManagedAgentsSessionActor:`
+
+      - `String sessionId`
+
+      - `Type type`
+
+        - `SESSION_ACTOR("session_actor")`
+
+    - `class BetaManagedAgentsApiActor:`
+
+      - `String apiKeyId`
+
+      - `Type type`
+
+        - `API_ACTOR("api_actor")`
+
+    - `class BetaManagedAgentsUserActor:`
+
+      - `Type type`
+
+        - `USER_ACTOR("user_actor")`
+
+      - `String userId`
+
+  - `Optional<String> path`
+
+  - `Optional<LocalDateTime> redactedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Optional<BetaManagedAgentsActor> redactedBy`
+
+    - `class BetaManagedAgentsSessionActor:`
+
+      - `String sessionId`
+
+      - `Type type`
+
+        - `SESSION_ACTOR("session_actor")`
+
+    - `class BetaManagedAgentsApiActor:`
+
+      - `String apiKeyId`
+
+      - `Type type`
+
+        - `API_ACTOR("api_actor")`
+
+    - `class BetaManagedAgentsUserActor:`
+
+      - `Type type`
+
+        - `USER_ACTOR("user_actor")`
+
+      - `String userId`
+
+### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.memorystores.memoryversions.BetaManagedAgentsMemoryVersion;
+import com.anthropic.models.beta.memorystores.memoryversions.MemoryVersionRedactParams;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        MemoryVersionRedactParams params = MemoryVersionRedactParams.builder()
+            .memoryStoreId("memory_store_id")
+            .memoryVersionId("memory_version_id")
+            .build();
+        BetaManagedAgentsMemoryVersion betaManagedAgentsMemoryVersion = client.beta().memoryStores().memoryVersions().redact(params);
+    }
+}
+```
+
+## Domain Types
+
+### Beta Managed Agents Actor
+
+- `class BetaManagedAgentsActor: A class that can be one of several variants.union`
+
+  - `class BetaManagedAgentsSessionActor:`
+
+    - `String sessionId`
+
+    - `Type type`
+
+      - `SESSION_ACTOR("session_actor")`
+
+  - `class BetaManagedAgentsApiActor:`
+
+    - `String apiKeyId`
+
+    - `Type type`
+
+      - `API_ACTOR("api_actor")`
+
+  - `class BetaManagedAgentsUserActor:`
+
+    - `Type type`
+
+      - `USER_ACTOR("user_actor")`
+
+    - `String userId`
+
+### Beta Managed Agents API Actor
+
+- `class BetaManagedAgentsApiActor:`
+
+  - `String apiKeyId`
+
+  - `Type type`
+
+    - `API_ACTOR("api_actor")`
+
+### Beta Managed Agents Memory Version
+
+- `class BetaManagedAgentsMemoryVersion:`
+
+  - `String id`
+
+  - `LocalDateTime createdAt`
+
+    A timestamp in RFC 3339 format
+
+  - `String memoryId`
+
+  - `String memoryStoreId`
+
+  - `BetaManagedAgentsMemoryVersionOperation operation`
+
+    MemoryVersionOperation enum
+
+    - `CREATED("created")`
+
+    - `MODIFIED("modified")`
+
+    - `DELETED("deleted")`
+
+  - `Type type`
+
+    - `MEMORY_VERSION("memory_version")`
+
+  - `Optional<String> content`
+
+  - `Optional<String> contentSha256`
+
+  - `Optional<Long> contentSizeBytes`
+
+  - `Optional<BetaManagedAgentsActor> createdBy`
+
+    - `class BetaManagedAgentsSessionActor:`
+
+      - `String sessionId`
+
+      - `Type type`
+
+        - `SESSION_ACTOR("session_actor")`
+
+    - `class BetaManagedAgentsApiActor:`
+
+      - `String apiKeyId`
+
+      - `Type type`
+
+        - `API_ACTOR("api_actor")`
+
+    - `class BetaManagedAgentsUserActor:`
+
+      - `Type type`
+
+        - `USER_ACTOR("user_actor")`
+
+      - `String userId`
+
+  - `Optional<String> path`
+
+  - `Optional<LocalDateTime> redactedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Optional<BetaManagedAgentsActor> redactedBy`
+
+    - `class BetaManagedAgentsSessionActor:`
+
+      - `String sessionId`
+
+      - `Type type`
+
+        - `SESSION_ACTOR("session_actor")`
+
+    - `class BetaManagedAgentsApiActor:`
+
+      - `String apiKeyId`
+
+      - `Type type`
+
+        - `API_ACTOR("api_actor")`
+
+    - `class BetaManagedAgentsUserActor:`
+
+      - `Type type`
+
+        - `USER_ACTOR("user_actor")`
+
+      - `String userId`
+
+### Beta Managed Agents Memory Version Operation
+
+- `enum BetaManagedAgentsMemoryVersionOperation:`
+
+  MemoryVersionOperation enum
+
+  - `CREATED("created")`
+
+  - `MODIFIED("modified")`
+
+  - `DELETED("deleted")`
+
+### Beta Managed Agents Session Actor
+
+- `class BetaManagedAgentsSessionActor:`
+
+  - `String sessionId`
+
+  - `Type type`
+
+    - `SESSION_ACTOR("session_actor")`
+
+### Beta Managed Agents User Actor
+
+- `class BetaManagedAgentsUserActor:`
+
+  - `Type type`
+
+    - `USER_ACTOR("user_actor")`
+
+  - `String userId`
+
 # Files
 
 ## Upload
@@ -71193,8 +73601,6 @@ Upload File
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
-
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
   - `String file`
 
@@ -71355,8 +73761,6 @@ List Files
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
-
 ### Returns
 
 - `class FileMetadata:`
@@ -71494,8 +73898,6 @@ Download File
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
-
 ### Example
 
 ```java
@@ -71580,8 +73982,6 @@ Get File Metadata
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
-
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
 ### Returns
 
@@ -71719,8 +74119,6 @@ Delete File
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
-
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
 ### Returns
 
@@ -71905,8 +74303,6 @@ Create Skill
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
-
   - `Optional<String> displayTitle`
 
     Display title for the skill.
@@ -72066,8 +74462,6 @@ List Skills
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
-
 ### Returns
 
 - `class SkillListResponse:`
@@ -72199,8 +74593,6 @@ Get Skill
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
-
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
 ### Returns
 
@@ -72334,8 +74726,6 @@ Delete Skill
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
-
 ### Returns
 
 - `class SkillDeleteResponse:`
@@ -72440,8 +74830,6 @@ Create Skill Version
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
-
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
   - `Optional<List<String>> files`
 
@@ -72594,8 +74982,6 @@ List Skill Versions
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
-
 ### Returns
 
 - `class VersionListResponse:`
@@ -72736,8 +75122,6 @@ Get Skill Version
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
-
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
 ### Returns
 
@@ -72884,8 +75268,6 @@ Delete Skill Version
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
-
 ### Returns
 
 - `class VersionDeleteResponse:`
@@ -72926,730 +75308,3 @@ public final class Main {
     }
 }
 ```
-
-# User Profiles
-
-## Create
-
-`BetaUserProfile beta().userProfiles().create(UserProfileCreateParamsparams = UserProfileCreateParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
-
-**post** `/v1/user_profiles`
-
-Create User Profile
-
-### Parameters
-
-- `UserProfileCreateParams params`
-
-  - `Optional<List<AnthropicBeta>> betas`
-
-    Optional header to specify the beta version(s) you want to use.
-
-    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
-
-    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
-
-    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
-
-    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
-
-    - `PDFS_2024_09_25("pdfs-2024-09-25")`
-
-    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
-
-    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
-
-    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
-
-    - `FILES_API_2025_04_14("files-api-2025-04-14")`
-
-    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
-
-    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
-
-    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
-
-    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
-
-    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
-
-    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
-
-    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
-
-    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
-
-    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
-
-    - `SKILLS_2025_10_02("skills-2025-10-02")`
-
-    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
-
-    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
-
-    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
-
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
-
-  - `Optional<String> externalId`
-
-    Platform's own identifier for this user. Not enforced unique. Maximum 255 characters.
-
-  - `Optional<Metadata> metadata`
-
-    Free-form key-value data to attach to this user profile. Maximum 16 keys, with keys up to 64 characters and values up to 512 characters. Values must be non-empty strings.
-
-### Returns
-
-- `class BetaUserProfile:`
-
-  - `String id`
-
-    Unique identifier for this user profile, prefixed `uprof_`.
-
-  - `LocalDateTime createdAt`
-
-    A timestamp in RFC 3339 format
-
-  - `Metadata metadata`
-
-    Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
-
-  - `TrustGrants trustGrants`
-
-    Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
-
-    - `Status status`
-
-      Status of the trust grant.
-
-      - `ACTIVE("active")`
-
-      - `PENDING("pending")`
-
-      - `REJECTED("rejected")`
-
-  - `Type type`
-
-    Object type. Always `user_profile`.
-
-    - `USER_PROFILE("user_profile")`
-
-  - `LocalDateTime updatedAt`
-
-    A timestamp in RFC 3339 format
-
-  - `Optional<String> externalId`
-
-    Platform's own identifier for this user. Not enforced unique.
-
-### Example
-
-```java
-package com.anthropic.example;
-
-import com.anthropic.client.AnthropicClient;
-import com.anthropic.client.okhttp.AnthropicOkHttpClient;
-import com.anthropic.models.beta.userprofiles.BetaUserProfile;
-import com.anthropic.models.beta.userprofiles.UserProfileCreateParams;
-
-public final class Main {
-    private Main() {}
-
-    public static void main(String[] args) {
-        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
-
-        BetaUserProfile betaUserProfile = client.beta().userProfiles().create();
-    }
-}
-```
-
-## List
-
-`UserProfileListPage beta().userProfiles().list(UserProfileListParamsparams = UserProfileListParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
-
-**get** `/v1/user_profiles`
-
-List User Profiles
-
-### Parameters
-
-- `UserProfileListParams params`
-
-  - `Optional<Long> limit`
-
-    Query parameter for limit
-
-  - `Optional<Order> order`
-
-    Query parameter for order
-
-    - `ASC("asc")`
-
-    - `DESC("desc")`
-
-  - `Optional<String> page`
-
-    Query parameter for page
-
-  - `Optional<List<AnthropicBeta>> betas`
-
-    Optional header to specify the beta version(s) you want to use.
-
-    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
-
-    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
-
-    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
-
-    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
-
-    - `PDFS_2024_09_25("pdfs-2024-09-25")`
-
-    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
-
-    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
-
-    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
-
-    - `FILES_API_2025_04_14("files-api-2025-04-14")`
-
-    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
-
-    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
-
-    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
-
-    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
-
-    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
-
-    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
-
-    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
-
-    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
-
-    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
-
-    - `SKILLS_2025_10_02("skills-2025-10-02")`
-
-    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
-
-    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
-
-    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
-
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
-
-### Returns
-
-- `class BetaUserProfile:`
-
-  - `String id`
-
-    Unique identifier for this user profile, prefixed `uprof_`.
-
-  - `LocalDateTime createdAt`
-
-    A timestamp in RFC 3339 format
-
-  - `Metadata metadata`
-
-    Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
-
-  - `TrustGrants trustGrants`
-
-    Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
-
-    - `Status status`
-
-      Status of the trust grant.
-
-      - `ACTIVE("active")`
-
-      - `PENDING("pending")`
-
-      - `REJECTED("rejected")`
-
-  - `Type type`
-
-    Object type. Always `user_profile`.
-
-    - `USER_PROFILE("user_profile")`
-
-  - `LocalDateTime updatedAt`
-
-    A timestamp in RFC 3339 format
-
-  - `Optional<String> externalId`
-
-    Platform's own identifier for this user. Not enforced unique.
-
-### Example
-
-```java
-package com.anthropic.example;
-
-import com.anthropic.client.AnthropicClient;
-import com.anthropic.client.okhttp.AnthropicOkHttpClient;
-import com.anthropic.models.beta.userprofiles.UserProfileListPage;
-import com.anthropic.models.beta.userprofiles.UserProfileListParams;
-
-public final class Main {
-    private Main() {}
-
-    public static void main(String[] args) {
-        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
-
-        UserProfileListPage page = client.beta().userProfiles().list();
-    }
-}
-```
-
-## Retrieve
-
-`BetaUserProfile beta().userProfiles().retrieve(UserProfileRetrieveParamsparams = UserProfileRetrieveParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
-
-**get** `/v1/user_profiles/{user_profile_id}`
-
-Get User Profile
-
-### Parameters
-
-- `UserProfileRetrieveParams params`
-
-  - `Optional<String> userProfileId`
-
-  - `Optional<List<AnthropicBeta>> betas`
-
-    Optional header to specify the beta version(s) you want to use.
-
-    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
-
-    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
-
-    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
-
-    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
-
-    - `PDFS_2024_09_25("pdfs-2024-09-25")`
-
-    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
-
-    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
-
-    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
-
-    - `FILES_API_2025_04_14("files-api-2025-04-14")`
-
-    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
-
-    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
-
-    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
-
-    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
-
-    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
-
-    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
-
-    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
-
-    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
-
-    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
-
-    - `SKILLS_2025_10_02("skills-2025-10-02")`
-
-    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
-
-    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
-
-    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
-
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
-
-### Returns
-
-- `class BetaUserProfile:`
-
-  - `String id`
-
-    Unique identifier for this user profile, prefixed `uprof_`.
-
-  - `LocalDateTime createdAt`
-
-    A timestamp in RFC 3339 format
-
-  - `Metadata metadata`
-
-    Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
-
-  - `TrustGrants trustGrants`
-
-    Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
-
-    - `Status status`
-
-      Status of the trust grant.
-
-      - `ACTIVE("active")`
-
-      - `PENDING("pending")`
-
-      - `REJECTED("rejected")`
-
-  - `Type type`
-
-    Object type. Always `user_profile`.
-
-    - `USER_PROFILE("user_profile")`
-
-  - `LocalDateTime updatedAt`
-
-    A timestamp in RFC 3339 format
-
-  - `Optional<String> externalId`
-
-    Platform's own identifier for this user. Not enforced unique.
-
-### Example
-
-```java
-package com.anthropic.example;
-
-import com.anthropic.client.AnthropicClient;
-import com.anthropic.client.okhttp.AnthropicOkHttpClient;
-import com.anthropic.models.beta.userprofiles.BetaUserProfile;
-import com.anthropic.models.beta.userprofiles.UserProfileRetrieveParams;
-
-public final class Main {
-    private Main() {}
-
-    public static void main(String[] args) {
-        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
-
-        BetaUserProfile betaUserProfile = client.beta().userProfiles().retrieve("uprof_011CZkZCu8hGbp5mYRQgUmz9");
-    }
-}
-```
-
-## Update
-
-`BetaUserProfile beta().userProfiles().update(UserProfileUpdateParamsparams = UserProfileUpdateParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
-
-**post** `/v1/user_profiles/{user_profile_id}`
-
-Update User Profile
-
-### Parameters
-
-- `UserProfileUpdateParams params`
-
-  - `Optional<String> userProfileId`
-
-  - `Optional<List<AnthropicBeta>> betas`
-
-    Optional header to specify the beta version(s) you want to use.
-
-    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
-
-    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
-
-    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
-
-    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
-
-    - `PDFS_2024_09_25("pdfs-2024-09-25")`
-
-    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
-
-    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
-
-    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
-
-    - `FILES_API_2025_04_14("files-api-2025-04-14")`
-
-    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
-
-    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
-
-    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
-
-    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
-
-    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
-
-    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
-
-    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
-
-    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
-
-    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
-
-    - `SKILLS_2025_10_02("skills-2025-10-02")`
-
-    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
-
-    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
-
-    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
-
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
-
-  - `Optional<String> externalId`
-
-    If present, replaces the stored external_id. Omit to leave unchanged. Maximum 255 characters.
-
-  - `Optional<Metadata> metadata`
-
-    Key-value pairs to merge into the stored metadata. Keys provided overwrite existing values. To remove a key, set its value to an empty string. Keys not provided are left unchanged. Maximum 16 keys, with keys up to 64 characters and values up to 512 characters.
-
-### Returns
-
-- `class BetaUserProfile:`
-
-  - `String id`
-
-    Unique identifier for this user profile, prefixed `uprof_`.
-
-  - `LocalDateTime createdAt`
-
-    A timestamp in RFC 3339 format
-
-  - `Metadata metadata`
-
-    Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
-
-  - `TrustGrants trustGrants`
-
-    Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
-
-    - `Status status`
-
-      Status of the trust grant.
-
-      - `ACTIVE("active")`
-
-      - `PENDING("pending")`
-
-      - `REJECTED("rejected")`
-
-  - `Type type`
-
-    Object type. Always `user_profile`.
-
-    - `USER_PROFILE("user_profile")`
-
-  - `LocalDateTime updatedAt`
-
-    A timestamp in RFC 3339 format
-
-  - `Optional<String> externalId`
-
-    Platform's own identifier for this user. Not enforced unique.
-
-### Example
-
-```java
-package com.anthropic.example;
-
-import com.anthropic.client.AnthropicClient;
-import com.anthropic.client.okhttp.AnthropicOkHttpClient;
-import com.anthropic.models.beta.userprofiles.BetaUserProfile;
-import com.anthropic.models.beta.userprofiles.UserProfileUpdateParams;
-
-public final class Main {
-    private Main() {}
-
-    public static void main(String[] args) {
-        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
-
-        BetaUserProfile betaUserProfile = client.beta().userProfiles().update("uprof_011CZkZCu8hGbp5mYRQgUmz9");
-    }
-}
-```
-
-## Create Enrollment URL
-
-`BetaUserProfileEnrollmentUrl beta().userProfiles().createEnrollmentUrl(UserProfileCreateEnrollmentUrlParamsparams = UserProfileCreateEnrollmentUrlParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
-
-**post** `/v1/user_profiles/{user_profile_id}/enrollment_url`
-
-Create Enrollment URL
-
-### Parameters
-
-- `UserProfileCreateEnrollmentUrlParams params`
-
-  - `Optional<String> userProfileId`
-
-  - `Optional<List<AnthropicBeta>> betas`
-
-    Optional header to specify the beta version(s) you want to use.
-
-    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
-
-    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
-
-    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
-
-    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
-
-    - `PDFS_2024_09_25("pdfs-2024-09-25")`
-
-    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
-
-    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
-
-    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
-
-    - `FILES_API_2025_04_14("files-api-2025-04-14")`
-
-    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
-
-    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
-
-    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
-
-    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
-
-    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
-
-    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
-
-    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
-
-    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
-
-    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
-
-    - `SKILLS_2025_10_02("skills-2025-10-02")`
-
-    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
-
-    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
-
-    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
-
-    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
-
-### Returns
-
-- `class BetaUserProfileEnrollmentUrl:`
-
-  - `LocalDateTime expiresAt`
-
-    A timestamp in RFC 3339 format
-
-  - `Type type`
-
-    Object type. Always `enrollment_url`.
-
-    - `ENROLLMENT_URL("enrollment_url")`
-
-  - `String url`
-
-    Enrollment URL to send to the end user. Valid until `expires_at`.
-
-### Example
-
-```java
-package com.anthropic.example;
-
-import com.anthropic.client.AnthropicClient;
-import com.anthropic.client.okhttp.AnthropicOkHttpClient;
-import com.anthropic.models.beta.userprofiles.BetaUserProfileEnrollmentUrl;
-import com.anthropic.models.beta.userprofiles.UserProfileCreateEnrollmentUrlParams;
-
-public final class Main {
-    private Main() {}
-
-    public static void main(String[] args) {
-        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
-
-        BetaUserProfileEnrollmentUrl betaUserProfileEnrollmentUrl = client.beta().userProfiles().createEnrollmentUrl("uprof_011CZkZCu8hGbp5mYRQgUmz9");
-    }
-}
-```
-
-## Domain Types
-
-### Beta User Profile
-
-- `class BetaUserProfile:`
-
-  - `String id`
-
-    Unique identifier for this user profile, prefixed `uprof_`.
-
-  - `LocalDateTime createdAt`
-
-    A timestamp in RFC 3339 format
-
-  - `Metadata metadata`
-
-    Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
-
-  - `TrustGrants trustGrants`
-
-    Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
-
-    - `Status status`
-
-      Status of the trust grant.
-
-      - `ACTIVE("active")`
-
-      - `PENDING("pending")`
-
-      - `REJECTED("rejected")`
-
-  - `Type type`
-
-    Object type. Always `user_profile`.
-
-    - `USER_PROFILE("user_profile")`
-
-  - `LocalDateTime updatedAt`
-
-    A timestamp in RFC 3339 format
-
-  - `Optional<String> externalId`
-
-    Platform's own identifier for this user. Not enforced unique.
-
-### Beta User Profile Enrollment URL
-
-- `class BetaUserProfileEnrollmentUrl:`
-
-  - `LocalDateTime expiresAt`
-
-    A timestamp in RFC 3339 format
-
-  - `Type type`
-
-    Object type. Always `enrollment_url`.
-
-    - `ENROLLMENT_URL("enrollment_url")`
-
-  - `String url`
-
-    Enrollment URL to send to the end user. Valid until `expires_at`.
-
-### Beta User Profile Trust Grant
-
-- `class BetaUserProfileTrustGrant:`
-
-  - `Status status`
-
-    Status of the trust grant.
-
-    - `ACTIVE("active")`
-
-    - `PENDING("pending")`
-
-    - `REJECTED("rejected")`

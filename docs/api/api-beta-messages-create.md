@@ -21,7 +21,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 20 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -66,8 +66,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
     - `"output-300k-2026-03-24"`
 
     - `"advisor-tool-2026-03-01"`
-
-    - `"user-profiles-2026-03-24"`
 
 ### Body Parameters
 
@@ -2676,7 +2674,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
             - `"1h"`
 
-      - `BetaCompactionBlockParam = object { content, type, cache_control, encrypted_content }`
+      - `BetaCompactionBlockParam = object { content, type, cache_control }`
 
         A compaction block containing summary of previous context.
 
@@ -2716,10 +2714,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
             - `"5m"`
 
             - `"1h"`
-
-        - `encrypted_content: optional string`
-
-          Opaque metadata from prior compaction, to be round-tripped verbatim
 
   - `role: "user" or "assistant"`
 
@@ -3026,7 +3020,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
   Configuration options for the model's output, such as the output format.
 
-  - `effort: optional "low" or "medium" or "high" or 2 more`
+  - `effort: optional "low" or "medium" or "high" or "max"`
 
     All possible effort levels.
 
@@ -3035,8 +3029,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
     - `"medium"`
 
     - `"high"`
-
-    - `"xhigh"`
 
     - `"max"`
 
@@ -3051,24 +3043,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
     - `type: "json_schema"`
 
       - `"json_schema"`
-
-  - `task_budget: optional BetaTokenTaskBudget`
-
-    User-configurable total token budget across contexts.
-
-    - `total: number`
-
-      Total token budget across all contexts in the session.
-
-    - `type: "tokens"`
-
-      The budget type. Currently only 'tokens' is supported.
-
-      - `"tokens"`
-
-    - `remaining: optional number`
-
-      Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
 - `output_format: optional BetaJSONOutputFormat`
 
@@ -4990,19 +4964,15 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
   Used to remove "long tail" low probability responses. [Learn more technical details here](https://towardsdatascience.com/how-to-sample-from-language-models-682bceb97277).
 
-  Recommended for advanced use cases only. You usually only need to use `temperature`.
+  Recommended for advanced use cases only.
 
 - `top_p: optional number`
 
   Use nucleus sampling.
 
-  In nucleus sampling, we compute the cumulative distribution over all the options for each subsequent token in decreasing probability order and cut it off once it reaches a particular probability specified by `top_p`. You should either alter `temperature` or `top_p`, but not both.
+  In nucleus sampling, we compute the cumulative distribution over all the options for each subsequent token in decreasing probability order and cut it off once it reaches a particular probability specified by `top_p`.
 
-  Recommended for advanced use cases only. You usually only need to use `temperature`.
-
-- `user_profile_id: optional string`
-
-  The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
+  Recommended for advanced use cases only.
 
 ### Returns
 
@@ -5913,7 +5883,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         - `"container_upload"`
 
-    - `BetaCompactionBlock = object { content, encrypted_content, type }`
+    - `BetaCompactionBlock = object { content, type }`
 
       A compaction block returned when autocompact is triggered.
 
@@ -5924,10 +5894,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
       - `content: string`
 
         Summary of compacted content, or null if compaction failed
-
-      - `encrypted_content: string`
-
-        Opaque metadata from prior compaction, to be round-tripped verbatim
 
       - `type: "compaction"`
 

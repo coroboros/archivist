@@ -21,7 +21,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 20 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -67,8 +67,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     - `"advisor-tool-2026-03-01"`
 
-    - `"user-profiles-2026-03-24"`
-
 ### Body Parameters
 
 - `requests: array of object { custom_id, params }`
@@ -81,7 +79,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     Must be unique for each request within the Message Batch.
 
-  - `params: object { max_tokens, messages, model, 20 more }`
+  - `params: object { max_tokens, messages, model, 19 more }`
 
     Messages API creation parameters for the individual request.
 
@@ -2692,7 +2690,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 - `"1h"`
 
-          - `BetaCompactionBlockParam = object { content, type, cache_control, encrypted_content }`
+          - `BetaCompactionBlockParam = object { content, type, cache_control }`
 
             A compaction block containing summary of previous context.
 
@@ -2732,10 +2730,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
                 - `"5m"`
 
                 - `"1h"`
-
-            - `encrypted_content: optional string`
-
-              Opaque metadata from prior compaction, to be round-tripped verbatim
 
       - `role: "user" or "assistant"`
 
@@ -3042,7 +3036,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
       Configuration options for the model's output, such as the output format.
 
-      - `effort: optional "low" or "medium" or "high" or 2 more`
+      - `effort: optional "low" or "medium" or "high" or "max"`
 
         All possible effort levels.
 
@@ -3051,8 +3045,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
         - `"medium"`
 
         - `"high"`
-
-        - `"xhigh"`
 
         - `"max"`
 
@@ -3067,24 +3059,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
         - `type: "json_schema"`
 
           - `"json_schema"`
-
-      - `task_budget: optional BetaTokenTaskBudget`
-
-        User-configurable total token budget across contexts.
-
-        - `total: number`
-
-          Total token budget across all contexts in the session.
-
-        - `type: "tokens"`
-
-          The budget type. Currently only 'tokens' is supported.
-
-          - `"tokens"`
-
-        - `remaining: optional number`
-
-          Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
     - `output_format: optional BetaJSONOutputFormat`
 
@@ -5006,19 +4980,15 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
       Used to remove "long tail" low probability responses. [Learn more technical details here](https://towardsdatascience.com/how-to-sample-from-language-models-682bceb97277).
 
-      Recommended for advanced use cases only. You usually only need to use `temperature`.
+      Recommended for advanced use cases only.
 
     - `top_p: optional number`
 
       Use nucleus sampling.
 
-      In nucleus sampling, we compute the cumulative distribution over all the options for each subsequent token in decreasing probability order and cut it off once it reaches a particular probability specified by `top_p`. You should either alter `temperature` or `top_p`, but not both.
+      In nucleus sampling, we compute the cumulative distribution over all the options for each subsequent token in decreasing probability order and cut it off once it reaches a particular probability specified by `top_p`.
 
-      Recommended for advanced use cases only. You usually only need to use `temperature`.
-
-    - `user_profile_id: optional string`
-
-      The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
+      Recommended for advanced use cases only.
 
 ### Returns
 

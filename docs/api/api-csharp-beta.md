@@ -280,8 +280,6 @@ The Models API response can be used to determine which models are available for 
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
-    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
-
 ### Returns
 
 - `class ModelListPageResponse:`
@@ -391,14 +389,6 @@ The Models API response can be used to determine which models are available for 
         - `required Boolean Supported`
 
           Whether this capability is supported by the model.
-
-        - `required BetaCapabilitySupport? Xhigh`
-
-          Indicates whether a capability is supported.
-
-          - `required Boolean Supported`
-
-            Whether this capability is supported by the model.
 
       - `required BetaCapabilitySupport ImageInput`
 
@@ -564,8 +554,6 @@ The Models API response can be used to determine information about a specific mo
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
-    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
-
 ### Returns
 
 - `class BetaModelInfo:`
@@ -673,14 +661,6 @@ The Models API response can be used to determine information about a specific mo
       - `required Boolean Supported`
 
         Whether this capability is supported by the model.
-
-      - `required BetaCapabilitySupport? Xhigh`
-
-        Indicates whether a capability is supported.
-
-        - `required Boolean Supported`
-
-          Whether this capability is supported by the model.
 
     - `required BetaCapabilitySupport ImageInput`
 
@@ -854,14 +834,6 @@ Console.WriteLine(betaModelInfo);
 
     Whether this capability is supported by the model.
 
-  - `required BetaCapabilitySupport? Xhigh`
-
-    Indicates whether a capability is supported.
-
-    - `required Boolean Supported`
-
-      Whether this capability is supported by the model.
-
 ### Beta Model Capabilities
 
 - `class BetaModelCapabilities:`
@@ -963,14 +935,6 @@ Console.WriteLine(betaModelInfo);
     - `required Boolean Supported`
 
       Whether this capability is supported by the model.
-
-    - `required BetaCapabilitySupport? Xhigh`
-
-      Indicates whether a capability is supported.
-
-      - `required Boolean Supported`
-
-        Whether this capability is supported by the model.
 
   - `required BetaCapabilitySupport ImageInput`
 
@@ -1131,14 +1095,6 @@ Console.WriteLine(betaModelInfo);
       - `required Boolean Supported`
 
         Whether this capability is supported by the model.
-
-      - `required BetaCapabilitySupport? Xhigh`
-
-        Indicates whether a capability is supported.
-
-        - `required Boolean Supported`
-
-          Whether this capability is supported by the model.
 
     - `required BetaCapabilitySupport ImageInput`
 
@@ -3572,10 +3528,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
               - `"1h"Ttl1h`
 
-          - `string? EncryptedContent`
-
-            Opaque metadata from prior compaction, to be round-tripped verbatim
-
     - `required Role Role`
 
       - `"user"User`
@@ -5314,19 +5266,15 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
     Used to remove "long tail" low probability responses. [Learn more technical details here](https://towardsdatascience.com/how-to-sample-from-language-models-682bceb97277).
 
-    Recommended for advanced use cases only. You usually only need to use `temperature`.
+    Recommended for advanced use cases only.
 
   - `Double topP`
 
     Body param: Use nucleus sampling.
 
-    In nucleus sampling, we compute the cumulative distribution over all the options for each subsequent token in decreasing probability order and cut it off once it reaches a particular probability specified by `top_p`. You should either alter `temperature` or `top_p`, but not both.
+    In nucleus sampling, we compute the cumulative distribution over all the options for each subsequent token in decreasing probability order and cut it off once it reaches a particular probability specified by `top_p`.
 
-    Recommended for advanced use cases only. You usually only need to use `temperature`.
-
-  - `string? userProfileID`
-
-    Body param: The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
+    Recommended for advanced use cases only.
 
   - `IReadOnlyList<AnthropicBeta> betas`
 
@@ -5375,8 +5323,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
-
-    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
 ### Returns
 
@@ -6168,10 +6114,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
       - `required string? Content`
 
         Summary of compacted content, or null if compaction failed
-
-      - `required string? EncryptedContent`
-
-        Opaque metadata from prior compaction, to be round-tripped verbatim
 
       - `JsonElement Type "compaction"constant`
 
@@ -8942,10 +8884,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
               - `"1h"Ttl1h`
 
-          - `string? EncryptedContent`
-
-            Opaque metadata from prior compaction, to be round-tripped verbatim
-
     - `required Role Role`
 
       - `"user"User`
@@ -10658,8 +10596,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
-    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
-
 ### Returns
 
 - `class BetaMessageTokensCount:`
@@ -12298,10 +12234,6 @@ Console.WriteLine(betaMessageTokensCount);
 
     Summary of compacted content, or null if compaction failed
 
-  - `required string? EncryptedContent`
-
-    Opaque metadata from prior compaction, to be round-tripped verbatim
-
   - `JsonElement Type "compaction"constant`
 
 ### Beta Compaction Block Param
@@ -12343,19 +12275,11 @@ Console.WriteLine(betaMessageTokensCount);
 
       - `"1h"Ttl1h`
 
-  - `string? EncryptedContent`
-
-    Opaque metadata from prior compaction, to be round-tripped verbatim
-
 ### Beta Compaction Content Block Delta
 
 - `class BetaCompactionContentBlockDelta:`
 
   - `required string? Content`
-
-  - `required string? EncryptedContent`
-
-    Opaque metadata from prior compaction, to be round-tripped verbatim
 
   - `JsonElement Type "compaction_delta"constant`
 
@@ -13228,10 +13152,6 @@ Console.WriteLine(betaMessageTokensCount);
     - `required string? Content`
 
       Summary of compacted content, or null if compaction failed
-
-    - `required string? EncryptedContent`
-
-      Opaque metadata from prior compaction, to be round-tripped verbatim
 
     - `JsonElement Type "compaction"constant`
 
@@ -15464,10 +15384,6 @@ Console.WriteLine(betaMessageTokensCount);
 
         - `"1h"Ttl1h`
 
-    - `string? EncryptedContent`
-
-      Opaque metadata from prior compaction, to be round-tripped verbatim
-
 ### Beta Content Block Source
 
 - `class BetaContentBlockSource:`
@@ -17385,10 +17301,6 @@ Console.WriteLine(betaMessageTokensCount);
       - `required string? Content`
 
         Summary of compacted content, or null if compaction failed
-
-      - `required string? EncryptedContent`
-
-        Opaque metadata from prior compaction, to be round-tripped verbatim
 
       - `JsonElement Type "compaction"constant`
 
@@ -20336,10 +20248,6 @@ Console.WriteLine(betaMessageTokensCount);
 
             - `"1h"Ttl1h`
 
-        - `string? EncryptedContent`
-
-          Opaque metadata from prior compaction, to be round-tripped verbatim
-
   - `required Role Role`
 
     - `"user"User`
@@ -20386,8 +20294,6 @@ Console.WriteLine(betaMessageTokensCount);
 
     - `"high"High`
 
-    - `"xhigh"Xhigh`
-
     - `"max"Max`
 
   - `BetaJsonOutputFormat? Format`
@@ -20399,22 +20305,6 @@ Console.WriteLine(betaMessageTokensCount);
       The JSON schema of the format
 
     - `JsonElement Type "json_schema"constant`
-
-  - `BetaTokenTaskBudget? TaskBudget`
-
-    User-configurable total token budget across contexts.
-
-    - `required Long Total`
-
-      Total token budget across all contexts in the session.
-
-    - `JsonElement Type "tokens"constant`
-
-      The budget type. Currently only 'tokens' is supported.
-
-    - `Long? Remaining`
-
-      Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
 ### Beta Plain Text Source
 
@@ -20540,10 +20430,6 @@ Console.WriteLine(betaMessageTokensCount);
 
     - `required string? Content`
 
-    - `required string? EncryptedContent`
-
-      Opaque metadata from prior compaction, to be round-tripped verbatim
-
     - `JsonElement Type "compaction_delta"constant`
 
 ### Beta Raw Content Block Delta Event
@@ -20661,10 +20547,6 @@ Console.WriteLine(betaMessageTokensCount);
     - `class BetaCompactionContentBlockDelta:`
 
       - `required string? Content`
-
-      - `required string? EncryptedContent`
-
-        Opaque metadata from prior compaction, to be round-tripped verbatim
 
       - `JsonElement Type "compaction_delta"constant`
 
@@ -21399,10 +21281,6 @@ Console.WriteLine(betaMessageTokensCount);
       - `required string? Content`
 
         Summary of compacted content, or null if compaction failed
-
-      - `required string? EncryptedContent`
-
-        Opaque metadata from prior compaction, to be round-tripped verbatim
 
       - `JsonElement Type "compaction"constant`
 
@@ -22560,10 +22438,6 @@ Console.WriteLine(betaMessageTokensCount);
         - `required string? Content`
 
           Summary of compacted content, or null if compaction failed
-
-        - `required string? EncryptedContent`
-
-          Opaque metadata from prior compaction, to be round-tripped verbatim
 
         - `JsonElement Type "compaction"constant`
 
@@ -23818,10 +23692,6 @@ Console.WriteLine(betaMessageTokensCount);
           - `required string? Content`
 
             Summary of compacted content, or null if compaction failed
-
-          - `required string? EncryptedContent`
-
-            Opaque metadata from prior compaction, to be round-tripped verbatim
 
           - `JsonElement Type "compaction"constant`
 
@@ -25354,10 +25224,6 @@ Console.WriteLine(betaMessageTokensCount);
 
           Summary of compacted content, or null if compaction failed
 
-        - `required string? EncryptedContent`
-
-          Opaque metadata from prior compaction, to be round-tripped verbatim
-
         - `JsonElement Type "compaction"constant`
 
     - `required Long Index`
@@ -25477,10 +25343,6 @@ Console.WriteLine(betaMessageTokensCount);
       - `class BetaCompactionContentBlockDelta:`
 
         - `required string? Content`
-
-        - `required string? EncryptedContent`
-
-          Opaque metadata from prior compaction, to be round-tripped verbatim
 
         - `JsonElement Type "compaction_delta"constant`
 
@@ -27049,24 +26911,6 @@ Console.WriteLine(betaMessageTokensCount);
   - `JsonElement Type "thinking_turns"constant`
 
   - `required Long Value`
-
-### Beta Token Task Budget
-
-- `class BetaTokenTaskBudget:`
-
-  User-configurable total token budget across contexts.
-
-  - `required Long Total`
-
-    Total token budget across all contexts in the session.
-
-  - `JsonElement Type "tokens"constant`
-
-    The budget type. Currently only 'tokens' is supported.
-
-  - `Long? Remaining`
-
-    Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
 ### Beta Tool
 
@@ -34280,10 +34124,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `"1h"Ttl1h`
 
-              - `string? EncryptedContent`
-
-                Opaque metadata from prior compaction, to be round-tripped verbatim
-
         - `required Role Role`
 
           - `"user"User`
@@ -34565,8 +34405,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `"high"High`
 
-          - `"xhigh"Xhigh`
-
           - `"max"Max`
 
         - `BetaJsonOutputFormat? Format`
@@ -34578,22 +34416,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             The JSON schema of the format
 
           - `JsonElement Type "json_schema"constant`
-
-        - `BetaTokenTaskBudget? TaskBudget`
-
-          User-configurable total token budget across contexts.
-
-          - `required Long Total`
-
-            Total token budget across all contexts in the session.
-
-          - `JsonElement Type "tokens"constant`
-
-            The budget type. Currently only 'tokens' is supported.
-
-          - `Long? Remaining`
-
-            Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
       - `BetaJsonOutputFormat? OutputFormat`
 
@@ -36341,19 +36163,15 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
         Used to remove "long tail" low probability responses. [Learn more technical details here](https://towardsdatascience.com/how-to-sample-from-language-models-682bceb97277).
 
-        Recommended for advanced use cases only. You usually only need to use `temperature`.
+        Recommended for advanced use cases only.
 
       - `Double TopP`
 
         Use nucleus sampling.
 
-        In nucleus sampling, we compute the cumulative distribution over all the options for each subsequent token in decreasing probability order and cut it off once it reaches a particular probability specified by `top_p`. You should either alter `temperature` or `top_p`, but not both.
+        In nucleus sampling, we compute the cumulative distribution over all the options for each subsequent token in decreasing probability order and cut it off once it reaches a particular probability specified by `top_p`.
 
-        Recommended for advanced use cases only. You usually only need to use `temperature`.
-
-      - `string? UserProfileID`
-
-        The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
+        Recommended for advanced use cases only.
 
   - `IReadOnlyList<AnthropicBeta> betas`
 
@@ -36402,8 +36220,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
-
-    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
 ### Returns
 
@@ -36578,11 +36394,6 @@ BatchCreateParams parameters = new()
                             { "foo", JsonSerializer.SerializeToElement("bar") }
                         },
                     },
-                    TaskBudget = new()
-                    {
-                        Total = 1024,
-                        Remaining = 0,
-                    },
                 },
                 OutputFormat = new()
                 {
@@ -36666,7 +36477,6 @@ BatchCreateParams parameters = new()
                 ],
                 TopK = 5,
                 TopP = 0.7,
-                UserProfileID = "user_profile_id",
             },
         },
     ],
@@ -36742,8 +36552,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
-
-    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
 ### Returns
 
@@ -36918,8 +36726,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
-
-    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
 ### Returns
 
@@ -37103,8 +36909,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
-    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
-
 ### Returns
 
 - `class BetaMessageBatch:`
@@ -37271,8 +37075,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
-    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
-
 ### Returns
 
 - `class BetaDeletedMessageBatch:`
@@ -37364,8 +37166,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
-
-    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
 ### Returns
 
@@ -38175,10 +37975,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `required string? Content`
 
               Summary of compacted content, or null if compaction failed
-
-            - `required string? EncryptedContent`
-
-              Opaque metadata from prior compaction, to be round-tripped verbatim
 
             - `JsonElement Type "compaction"constant`
 
@@ -39711,10 +39507,6 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
               Summary of compacted content, or null if compaction failed
 
-            - `required string? EncryptedContent`
-
-              Opaque metadata from prior compaction, to be round-tripped verbatim
-
             - `JsonElement Type "compaction"constant`
 
         - `required BetaContextManagementResponse? ContextManagement`
@@ -41073,10 +40865,6 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
             Summary of compacted content, or null if compaction failed
 
-          - `required string? EncryptedContent`
-
-            Opaque metadata from prior compaction, to be round-tripped verbatim
-
           - `JsonElement Type "compaction"constant`
 
       - `required BetaContextManagementResponse? ContextManagement`
@@ -42397,10 +42185,6 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
           Summary of compacted content, or null if compaction failed
 
-        - `required string? EncryptedContent`
-
-          Opaque metadata from prior compaction, to be round-tripped verbatim
-
         - `JsonElement Type "compaction"constant`
 
     - `required BetaContextManagementResponse? ContextManagement`
@@ -43278,8 +43062,6 @@ Create Agent
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
-    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
-
 ### Returns
 
 - `class BetaManagedAgentsAgent:`
@@ -43668,8 +43450,6 @@ List Agents
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
-    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
-
 ### Returns
 
 - `class AgentListPageResponse:`
@@ -44051,8 +43831,6 @@ Get Agent
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
-
-    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
 ### Returns
 
@@ -44791,8 +44569,6 @@ Update Agent
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
-    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
-
 ### Returns
 
 - `class BetaManagedAgentsAgent:`
@@ -45164,8 +44940,6 @@ Archive Agent
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
-
-    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
 ### Returns
 
@@ -46776,8 +46550,6 @@ List Agent Versions
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
-    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
-
 ### Returns
 
 - `class VersionListPageResponse:`
@@ -47176,8 +46948,6 @@ Create a new environment with the specified configuration.
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
-    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
-
 ### Returns
 
 - `class BetaEnvironment:`
@@ -47371,8 +47141,6 @@ List environments with pagination support.
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
-
-    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
 ### Returns
 
@@ -47570,8 +47338,6 @@ Retrieve a specific environment by ID.
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
-
-    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
 ### Returns
 
@@ -47781,8 +47547,6 @@ Update an existing environment's configuration.
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
-    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
-
 ### Returns
 
 - `class BetaEnvironment:`
@@ -47970,8 +47734,6 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
-    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
-
 ### Returns
 
 - `class BetaEnvironmentDeleteResponse:`
@@ -48060,8 +47822,6 @@ Archive an environment by ID. Archived environments cannot be used to create new
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
-
-    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
 ### Returns
 
@@ -48715,6 +48475,30 @@ Create Session
 
         Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
 
+    - `class BetaManagedAgentsMemoryStoreResourceParam:`
+
+      Parameters for attaching a memory store to an agent session.
+
+      - `required string MemoryStoreID`
+
+        The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+      - `required Type Type`
+
+        - `"memory_store"MemoryStore`
+
+      - `Access? Access`
+
+        Access mode for an attached memory store.
+
+        - `"read_write"ReadWrite`
+
+        - `"read_only"ReadOnly`
+
+      - `string? Instructions`
+
+        Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
   - `string? title`
 
     Body param: Human-readable session title.
@@ -48770,8 +48554,6 @@ Create Session
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
-
-    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
 ### Returns
 
@@ -49133,6 +48915,42 @@ Create Session
 
         A timestamp in RFC 3339 format
 
+    - `class BetaManagedAgentsMemoryStoreResource:`
+
+      A memory store attached to an agent session.
+
+      - `required string MemoryStoreID`
+
+        The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+      - `required Type Type`
+
+        - `"memory_store"MemoryStore`
+
+      - `Access? Access`
+
+        Access mode for an attached memory store.
+
+        - `"read_write"ReadWrite`
+
+        - `"read_only"ReadOnly`
+
+      - `string Description`
+
+        Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+      - `string? Instructions`
+
+        Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+      - `string? MountPath`
+
+        Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+      - `string? Name`
+
+        Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
+
   - `required BetaManagedAgentsSessionStats Stats`
 
     Timing statistics for a session.
@@ -49316,8 +49134,6 @@ List Sessions
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
-
-    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
 ### Returns
 
@@ -49683,6 +49499,42 @@ List Sessions
 
           A timestamp in RFC 3339 format
 
+      - `class BetaManagedAgentsMemoryStoreResource:`
+
+        A memory store attached to an agent session.
+
+        - `required string MemoryStoreID`
+
+          The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+        - `required Type Type`
+
+          - `"memory_store"MemoryStore`
+
+        - `Access? Access`
+
+          Access mode for an attached memory store.
+
+          - `"read_write"ReadWrite`
+
+          - `"read_only"ReadOnly`
+
+        - `string Description`
+
+          Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+        - `string? Instructions`
+
+          Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+        - `string? MountPath`
+
+          Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+        - `string? Name`
+
+          Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
+
     - `required BetaManagedAgentsSessionStats Stats`
 
       Timing statistics for a session.
@@ -49828,8 +49680,6 @@ Get Session
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
-
-    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
 ### Returns
 
@@ -50190,6 +50040,42 @@ Get Session
       - `required DateTimeOffset UpdatedAt`
 
         A timestamp in RFC 3339 format
+
+    - `class BetaManagedAgentsMemoryStoreResource:`
+
+      A memory store attached to an agent session.
+
+      - `required string MemoryStoreID`
+
+        The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+      - `required Type Type`
+
+        - `"memory_store"MemoryStore`
+
+      - `Access? Access`
+
+        Access mode for an attached memory store.
+
+        - `"read_write"ReadWrite`
+
+        - `"read_only"ReadOnly`
+
+      - `string Description`
+
+        Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+      - `string? Instructions`
+
+        Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+      - `string? MountPath`
+
+        Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+      - `string? Name`
+
+        Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
   - `required BetaManagedAgentsSessionStats Stats`
 
@@ -50346,8 +50232,6 @@ Update Session
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
-    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
-
 ### Returns
 
 - `class BetaManagedAgentsSession:`
@@ -50707,6 +50591,42 @@ Update Session
       - `required DateTimeOffset UpdatedAt`
 
         A timestamp in RFC 3339 format
+
+    - `class BetaManagedAgentsMemoryStoreResource:`
+
+      A memory store attached to an agent session.
+
+      - `required string MemoryStoreID`
+
+        The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+      - `required Type Type`
+
+        - `"memory_store"MemoryStore`
+
+      - `Access? Access`
+
+        Access mode for an attached memory store.
+
+        - `"read_write"ReadWrite`
+
+        - `"read_only"ReadOnly`
+
+      - `string Description`
+
+        Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+      - `string? Instructions`
+
+        Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+      - `string? MountPath`
+
+        Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+      - `string? Name`
+
+        Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
   - `required BetaManagedAgentsSessionStats Stats`
 
@@ -50851,8 +50771,6 @@ Delete Session
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
-    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
-
 ### Returns
 
 - `class BetaManagedAgentsDeletedSession:`
@@ -50941,8 +50859,6 @@ Archive Session
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
-
-    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
 ### Returns
 
@@ -51303,6 +51219,42 @@ Archive Session
       - `required DateTimeOffset UpdatedAt`
 
         A timestamp in RFC 3339 format
+
+    - `class BetaManagedAgentsMemoryStoreResource:`
+
+      A memory store attached to an agent session.
+
+      - `required string MemoryStoreID`
+
+        The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+      - `required Type Type`
+
+        - `"memory_store"MemoryStore`
+
+      - `Access? Access`
+
+        Access mode for an attached memory store.
+
+        - `"read_write"ReadWrite`
+
+        - `"read_only"ReadOnly`
+
+      - `string Description`
+
+        Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+      - `string? Instructions`
+
+        Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+      - `string? MountPath`
+
+        Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+      - `string? Name`
+
+        Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
   - `required BetaManagedAgentsSessionStats Stats`
 
@@ -51516,6 +51468,32 @@ Console.WriteLine(betaManagedAgentsSession);
   - `string? MountPath`
 
     Mount path in the container. Defaults to `/workspace/<repo-name>`.
+
+### Beta Managed Agents Memory Store Resource Param
+
+- `class BetaManagedAgentsMemoryStoreResourceParam:`
+
+  Parameters for attaching a memory store to an agent session.
+
+  - `required string MemoryStoreID`
+
+    The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+  - `required Type Type`
+
+    - `"memory_store"MemoryStore`
+
+  - `Access? Access`
+
+    Access mode for an attached memory store.
+
+    - `"read_write"ReadWrite`
+
+    - `"read_only"ReadOnly`
+
+  - `string? Instructions`
+
+    Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
 ### Beta Managed Agents Session
 
@@ -51876,6 +51854,42 @@ Console.WriteLine(betaManagedAgentsSession);
       - `required DateTimeOffset UpdatedAt`
 
         A timestamp in RFC 3339 format
+
+    - `class BetaManagedAgentsMemoryStoreResource:`
+
+      A memory store attached to an agent session.
+
+      - `required string MemoryStoreID`
+
+        The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+      - `required Type Type`
+
+        - `"memory_store"MemoryStore`
+
+      - `Access? Access`
+
+        Access mode for an attached memory store.
+
+        - `"read_write"ReadWrite`
+
+        - `"read_only"ReadOnly`
+
+      - `string Description`
+
+        Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+      - `string? Instructions`
+
+        Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+      - `string? MountPath`
+
+        Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+      - `string? Name`
+
+        Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
   - `required BetaManagedAgentsSessionStats Stats`
 
@@ -52346,8 +52360,6 @@ List Events
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
-
-    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
 ### Returns
 
@@ -54158,8 +54170,6 @@ Send Events
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
-    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
-
 ### Returns
 
 - `class BetaManagedAgentsSendSessionEvents:`
@@ -54641,8 +54651,6 @@ Stream Events
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
-
-    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
 ### Returns
 
@@ -62010,8 +62018,6 @@ Add Session Resource
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
-    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
-
 ### Returns
 
 - `class BetaManagedAgentsFileResource:`
@@ -62121,8 +62127,6 @@ List Session Resources
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
-    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
-
 ### Returns
 
 - `class ResourceListPageResponse:`
@@ -62194,6 +62198,42 @@ List Session Resources
       - `required DateTimeOffset UpdatedAt`
 
         A timestamp in RFC 3339 format
+
+    - `class BetaManagedAgentsMemoryStoreResource:`
+
+      A memory store attached to an agent session.
+
+      - `required string MemoryStoreID`
+
+        The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+      - `required Type Type`
+
+        - `"memory_store"MemoryStore`
+
+      - `Access? Access`
+
+        Access mode for an attached memory store.
+
+        - `"read_write"ReadWrite`
+
+        - `"read_only"ReadOnly`
+
+      - `string Description`
+
+        Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+      - `string? Instructions`
+
+        Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+      - `string? MountPath`
+
+        Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+      - `string? Name`
+
+        Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
   - `string? NextPage`
 
@@ -62282,8 +62322,6 @@ Get Session Resource
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
-    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
-
 ### Returns
 
 - `class ResourceRetrieveResponse: A class that can be one of several variants.union`
@@ -62351,6 +62389,42 @@ Get Session Resource
     - `required DateTimeOffset UpdatedAt`
 
       A timestamp in RFC 3339 format
+
+  - `class BetaManagedAgentsMemoryStoreResource:`
+
+    A memory store attached to an agent session.
+
+    - `required string MemoryStoreID`
+
+      The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+    - `required Type Type`
+
+      - `"memory_store"MemoryStore`
+
+    - `Access? Access`
+
+      Access mode for an attached memory store.
+
+      - `"read_write"ReadWrite`
+
+      - `"read_only"ReadOnly`
+
+    - `string Description`
+
+      Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+    - `string? Instructions`
+
+      Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+    - `string? MountPath`
+
+      Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+    - `string? Name`
+
+      Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
 ### Example
 
@@ -62438,8 +62512,6 @@ Update Session Resource
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
-    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
-
 ### Returns
 
 - `class ResourceUpdateResponse: A class that can be one of several variants.union`
@@ -62507,6 +62579,42 @@ Update Session Resource
     - `required DateTimeOffset UpdatedAt`
 
       A timestamp in RFC 3339 format
+
+  - `class BetaManagedAgentsMemoryStoreResource:`
+
+    A memory store attached to an agent session.
+
+    - `required string MemoryStoreID`
+
+      The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+    - `required Type Type`
+
+      - `"memory_store"MemoryStore`
+
+    - `Access? Access`
+
+      Access mode for an attached memory store.
+
+      - `"read_write"ReadWrite`
+
+      - `"read_only"ReadOnly`
+
+    - `string Description`
+
+      Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+    - `string? Instructions`
+
+      Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+    - `string? MountPath`
+
+      Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+    - `string? Name`
+
+      Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
 ### Example
 
@@ -62590,8 +62698,6 @@ Delete Session Resource
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
-
-    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
 ### Returns
 
@@ -62699,9 +62805,49 @@ Console.WriteLine(betaManagedAgentsDeleteSessionResource);
 
         - `"commit"Commit`
 
+### Beta Managed Agents Memory Store Resource
+
+- `class BetaManagedAgentsMemoryStoreResource:`
+
+  A memory store attached to an agent session.
+
+  - `required string MemoryStoreID`
+
+    The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+  - `required Type Type`
+
+    - `"memory_store"MemoryStore`
+
+  - `Access? Access`
+
+    Access mode for an attached memory store.
+
+    - `"read_write"ReadWrite`
+
+    - `"read_only"ReadOnly`
+
+  - `string Description`
+
+    Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+  - `string? Instructions`
+
+    Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+  - `string? MountPath`
+
+    Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+  - `string? Name`
+
+    Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
+
 ### Beta Managed Agents Session Resource
 
 - `class BetaManagedAgentsSessionResource: A class that can be one of several variants.union`
+
+  A memory store attached to an agent session.
 
   - `class BetaManagedAgentsGitHubRepositoryResource:`
 
@@ -62764,6 +62910,42 @@ Console.WriteLine(betaManagedAgentsDeleteSessionResource);
     - `required DateTimeOffset UpdatedAt`
 
       A timestamp in RFC 3339 format
+
+  - `class BetaManagedAgentsMemoryStoreResource:`
+
+    A memory store attached to an agent session.
+
+    - `required string MemoryStoreID`
+
+      The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+    - `required Type Type`
+
+      - `"memory_store"MemoryStore`
+
+    - `Access? Access`
+
+      Access mode for an attached memory store.
+
+      - `"read_write"ReadWrite`
+
+      - `"read_only"ReadOnly`
+
+    - `string Description`
+
+      Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+    - `string? Instructions`
+
+      Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+    - `string? MountPath`
+
+      Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+    - `string? Name`
+
+      Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
 # Vaults
 
@@ -62834,8 +63016,6 @@ Create Vault
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
-
-    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
 ### Returns
 
@@ -62952,8 +63132,6 @@ List Vaults
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
-
-    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
 ### Returns
 
@@ -63072,8 +63250,6 @@ Get Vault
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
-
-    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
 ### Returns
 
@@ -63194,8 +63370,6 @@ Update Vault
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
-    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
-
 ### Returns
 
 - `class BetaManagedAgentsVault:`
@@ -63307,8 +63481,6 @@ Delete Vault
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
-    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
-
 ### Returns
 
 - `class BetaManagedAgentsDeletedVault:`
@@ -63399,8 +63571,6 @@ Archive Vault
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
-
-    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
 ### Returns
 
@@ -63673,8 +63843,6 @@ Create Credential
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
-    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
-
 ### Returns
 
 - `class BetaManagedAgentsCredential:`
@@ -63888,8 +64056,6 @@ List Credentials
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
-    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
-
 ### Returns
 
 - `class CredentialListPageResponse:`
@@ -64098,8 +64264,6 @@ Get Credential
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
-
-    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
 ### Returns
 
@@ -64381,8 +64545,6 @@ Update Credential
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
-    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
-
 ### Returns
 
 - `class BetaManagedAgentsCredential:`
@@ -64583,8 +64745,6 @@ Delete Credential
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
-    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
-
 ### Returns
 
 - `class BetaManagedAgentsDeletedCredential:`
@@ -64680,8 +64840,6 @@ Archive Credential
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
-
-    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
 ### Returns
 
@@ -65451,6 +65609,2186 @@ Console.WriteLine(betaManagedAgentsCredential);
 
     Updated OAuth client secret.
 
+# Memory Stores
+
+## Create
+
+`BetaManagedAgentsMemoryStore Beta.MemoryStores.Create(MemoryStoreCreateParamsparameters, CancellationTokencancellationToken = default)`
+
+**post** `/v1/memory_stores`
+
+CreateMemoryStore
+
+### Parameters
+
+- `MemoryStoreCreateParams parameters`
+
+  - `required string name`
+
+    Body param
+
+  - `string description`
+
+    Body param
+
+  - `IReadOnlyDictionary<string, string> metadata`
+
+    Body param
+
+  - `IReadOnlyList<AnthropicBeta> betas`
+
+    Header param: Optional header to specify the beta version(s) you want to use.
+
+    - `"message-batches-2024-09-24"MessageBatches2024_09_24`
+
+    - `"prompt-caching-2024-07-31"PromptCaching2024_07_31`
+
+    - `"computer-use-2024-10-22"ComputerUse2024_10_22`
+
+    - `"computer-use-2025-01-24"ComputerUse2025_01_24`
+
+    - `"pdfs-2024-09-25"Pdfs2024_09_25`
+
+    - `"token-counting-2024-11-01"TokenCounting2024_11_01`
+
+    - `"token-efficient-tools-2025-02-19"TokenEfficientTools2025_02_19`
+
+    - `"output-128k-2025-02-19"Output128k2025_02_19`
+
+    - `"files-api-2025-04-14"FilesApi2025_04_14`
+
+    - `"mcp-client-2025-04-04"McpClient2025_04_04`
+
+    - `"mcp-client-2025-11-20"McpClient2025_11_20`
+
+    - `"dev-full-thinking-2025-05-14"DevFullThinking2025_05_14`
+
+    - `"interleaved-thinking-2025-05-14"InterleavedThinking2025_05_14`
+
+    - `"code-execution-2025-05-22"CodeExecution2025_05_22`
+
+    - `"extended-cache-ttl-2025-04-11"ExtendedCacheTtl2025_04_11`
+
+    - `"context-1m-2025-08-07"Context1m2025_08_07`
+
+    - `"context-management-2025-06-27"ContextManagement2025_06_27`
+
+    - `"model-context-window-exceeded-2025-08-26"ModelContextWindowExceeded2025_08_26`
+
+    - `"skills-2025-10-02"Skills2025_10_02`
+
+    - `"fast-mode-2026-02-01"FastMode2026_02_01`
+
+    - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
+### Returns
+
+- `class BetaManagedAgentsMemoryStore:`
+
+  - `required string ID`
+
+  - `required Type Type`
+
+    - `"memory_store"MemoryStore`
+
+  - `DateTimeOffset? ArchivedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `DateTimeOffset CreatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `string Description`
+
+  - `IReadOnlyDictionary<string, string> Metadata`
+
+  - `string Name`
+
+  - `DateTimeOffset UpdatedAt`
+
+    A timestamp in RFC 3339 format
+
+### Example
+
+```csharp
+MemoryStoreCreateParams parameters = new() { Name = "x" };
+
+var betaManagedAgentsMemoryStore = await client.Beta.MemoryStores.Create(parameters);
+
+Console.WriteLine(betaManagedAgentsMemoryStore);
+```
+
+## List
+
+`MemoryStoreListPageResponse Beta.MemoryStores.List(MemoryStoreListParams?parameters, CancellationTokencancellationToken = default)`
+
+**get** `/v1/memory_stores`
+
+ListMemoryStores
+
+### Parameters
+
+- `MemoryStoreListParams parameters`
+
+  - `DateTimeOffset createdAtGte`
+
+    Query param: Return stores created at or after this time (inclusive).
+
+  - `DateTimeOffset createdAtLte`
+
+    Query param: Return stores created at or before this time (inclusive).
+
+  - `Boolean includeArchived`
+
+    Query param: Query parameter for include_archived
+
+  - `Int limit`
+
+    Query param: Query parameter for limit
+
+  - `string page`
+
+    Query param: Query parameter for page
+
+  - `IReadOnlyList<AnthropicBeta> betas`
+
+    Header param: Optional header to specify the beta version(s) you want to use.
+
+    - `"message-batches-2024-09-24"MessageBatches2024_09_24`
+
+    - `"prompt-caching-2024-07-31"PromptCaching2024_07_31`
+
+    - `"computer-use-2024-10-22"ComputerUse2024_10_22`
+
+    - `"computer-use-2025-01-24"ComputerUse2025_01_24`
+
+    - `"pdfs-2024-09-25"Pdfs2024_09_25`
+
+    - `"token-counting-2024-11-01"TokenCounting2024_11_01`
+
+    - `"token-efficient-tools-2025-02-19"TokenEfficientTools2025_02_19`
+
+    - `"output-128k-2025-02-19"Output128k2025_02_19`
+
+    - `"files-api-2025-04-14"FilesApi2025_04_14`
+
+    - `"mcp-client-2025-04-04"McpClient2025_04_04`
+
+    - `"mcp-client-2025-11-20"McpClient2025_11_20`
+
+    - `"dev-full-thinking-2025-05-14"DevFullThinking2025_05_14`
+
+    - `"interleaved-thinking-2025-05-14"InterleavedThinking2025_05_14`
+
+    - `"code-execution-2025-05-22"CodeExecution2025_05_22`
+
+    - `"extended-cache-ttl-2025-04-11"ExtendedCacheTtl2025_04_11`
+
+    - `"context-1m-2025-08-07"Context1m2025_08_07`
+
+    - `"context-management-2025-06-27"ContextManagement2025_06_27`
+
+    - `"model-context-window-exceeded-2025-08-26"ModelContextWindowExceeded2025_08_26`
+
+    - `"skills-2025-10-02"Skills2025_10_02`
+
+    - `"fast-mode-2026-02-01"FastMode2026_02_01`
+
+    - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
+### Returns
+
+- `class MemoryStoreListPageResponse:`
+
+  - `IReadOnlyList<BetaManagedAgentsMemoryStore> Data`
+
+    - `required string ID`
+
+    - `required Type Type`
+
+      - `"memory_store"MemoryStore`
+
+    - `DateTimeOffset? ArchivedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `DateTimeOffset CreatedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `string Description`
+
+    - `IReadOnlyDictionary<string, string> Metadata`
+
+    - `string Name`
+
+    - `DateTimeOffset UpdatedAt`
+
+      A timestamp in RFC 3339 format
+
+  - `string? NextPage`
+
+### Example
+
+```csharp
+MemoryStoreListParams parameters = new();
+
+var page = await client.Beta.MemoryStores.List(parameters);
+await foreach (var item in page.Paginate())
+{
+    Console.WriteLine(item);
+}
+```
+
+## Retrieve
+
+`BetaManagedAgentsMemoryStore Beta.MemoryStores.Retrieve(MemoryStoreRetrieveParamsparameters, CancellationTokencancellationToken = default)`
+
+**get** `/v1/memory_stores/{memory_store_id}`
+
+GetMemoryStore
+
+### Parameters
+
+- `MemoryStoreRetrieveParams parameters`
+
+  - `required string memoryStoreID`
+
+    Path parameter memory_store_id
+
+  - `IReadOnlyList<AnthropicBeta> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `"message-batches-2024-09-24"MessageBatches2024_09_24`
+
+    - `"prompt-caching-2024-07-31"PromptCaching2024_07_31`
+
+    - `"computer-use-2024-10-22"ComputerUse2024_10_22`
+
+    - `"computer-use-2025-01-24"ComputerUse2025_01_24`
+
+    - `"pdfs-2024-09-25"Pdfs2024_09_25`
+
+    - `"token-counting-2024-11-01"TokenCounting2024_11_01`
+
+    - `"token-efficient-tools-2025-02-19"TokenEfficientTools2025_02_19`
+
+    - `"output-128k-2025-02-19"Output128k2025_02_19`
+
+    - `"files-api-2025-04-14"FilesApi2025_04_14`
+
+    - `"mcp-client-2025-04-04"McpClient2025_04_04`
+
+    - `"mcp-client-2025-11-20"McpClient2025_11_20`
+
+    - `"dev-full-thinking-2025-05-14"DevFullThinking2025_05_14`
+
+    - `"interleaved-thinking-2025-05-14"InterleavedThinking2025_05_14`
+
+    - `"code-execution-2025-05-22"CodeExecution2025_05_22`
+
+    - `"extended-cache-ttl-2025-04-11"ExtendedCacheTtl2025_04_11`
+
+    - `"context-1m-2025-08-07"Context1m2025_08_07`
+
+    - `"context-management-2025-06-27"ContextManagement2025_06_27`
+
+    - `"model-context-window-exceeded-2025-08-26"ModelContextWindowExceeded2025_08_26`
+
+    - `"skills-2025-10-02"Skills2025_10_02`
+
+    - `"fast-mode-2026-02-01"FastMode2026_02_01`
+
+    - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
+### Returns
+
+- `class BetaManagedAgentsMemoryStore:`
+
+  - `required string ID`
+
+  - `required Type Type`
+
+    - `"memory_store"MemoryStore`
+
+  - `DateTimeOffset? ArchivedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `DateTimeOffset CreatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `string Description`
+
+  - `IReadOnlyDictionary<string, string> Metadata`
+
+  - `string Name`
+
+  - `DateTimeOffset UpdatedAt`
+
+    A timestamp in RFC 3339 format
+
+### Example
+
+```csharp
+MemoryStoreRetrieveParams parameters = new()
+{
+    MemoryStoreID = "memory_store_id"
+};
+
+var betaManagedAgentsMemoryStore = await client.Beta.MemoryStores.Retrieve(parameters);
+
+Console.WriteLine(betaManagedAgentsMemoryStore);
+```
+
+## Update
+
+`BetaManagedAgentsMemoryStore Beta.MemoryStores.Update(MemoryStoreUpdateParamsparameters, CancellationTokencancellationToken = default)`
+
+**post** `/v1/memory_stores/{memory_store_id}`
+
+UpdateMemoryStore
+
+### Parameters
+
+- `MemoryStoreUpdateParams parameters`
+
+  - `required string memoryStoreID`
+
+    Path param: Path parameter memory_store_id
+
+  - `string? description`
+
+    Body param
+
+  - `IReadOnlyDictionary<string, string>? metadata`
+
+    Body param: Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve. The stored bag is limited to 16 keys (up to 64 chars each) with values up to 512 chars.
+
+  - `string? name`
+
+    Body param
+
+  - `IReadOnlyList<AnthropicBeta> betas`
+
+    Header param: Optional header to specify the beta version(s) you want to use.
+
+    - `"message-batches-2024-09-24"MessageBatches2024_09_24`
+
+    - `"prompt-caching-2024-07-31"PromptCaching2024_07_31`
+
+    - `"computer-use-2024-10-22"ComputerUse2024_10_22`
+
+    - `"computer-use-2025-01-24"ComputerUse2025_01_24`
+
+    - `"pdfs-2024-09-25"Pdfs2024_09_25`
+
+    - `"token-counting-2024-11-01"TokenCounting2024_11_01`
+
+    - `"token-efficient-tools-2025-02-19"TokenEfficientTools2025_02_19`
+
+    - `"output-128k-2025-02-19"Output128k2025_02_19`
+
+    - `"files-api-2025-04-14"FilesApi2025_04_14`
+
+    - `"mcp-client-2025-04-04"McpClient2025_04_04`
+
+    - `"mcp-client-2025-11-20"McpClient2025_11_20`
+
+    - `"dev-full-thinking-2025-05-14"DevFullThinking2025_05_14`
+
+    - `"interleaved-thinking-2025-05-14"InterleavedThinking2025_05_14`
+
+    - `"code-execution-2025-05-22"CodeExecution2025_05_22`
+
+    - `"extended-cache-ttl-2025-04-11"ExtendedCacheTtl2025_04_11`
+
+    - `"context-1m-2025-08-07"Context1m2025_08_07`
+
+    - `"context-management-2025-06-27"ContextManagement2025_06_27`
+
+    - `"model-context-window-exceeded-2025-08-26"ModelContextWindowExceeded2025_08_26`
+
+    - `"skills-2025-10-02"Skills2025_10_02`
+
+    - `"fast-mode-2026-02-01"FastMode2026_02_01`
+
+    - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
+### Returns
+
+- `class BetaManagedAgentsMemoryStore:`
+
+  - `required string ID`
+
+  - `required Type Type`
+
+    - `"memory_store"MemoryStore`
+
+  - `DateTimeOffset? ArchivedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `DateTimeOffset CreatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `string Description`
+
+  - `IReadOnlyDictionary<string, string> Metadata`
+
+  - `string Name`
+
+  - `DateTimeOffset UpdatedAt`
+
+    A timestamp in RFC 3339 format
+
+### Example
+
+```csharp
+MemoryStoreUpdateParams parameters = new()
+{
+    MemoryStoreID = "memory_store_id"
+};
+
+var betaManagedAgentsMemoryStore = await client.Beta.MemoryStores.Update(parameters);
+
+Console.WriteLine(betaManagedAgentsMemoryStore);
+```
+
+## Delete
+
+`BetaManagedAgentsDeletedMemoryStore Beta.MemoryStores.Delete(MemoryStoreDeleteParamsparameters, CancellationTokencancellationToken = default)`
+
+**delete** `/v1/memory_stores/{memory_store_id}`
+
+DeleteMemoryStore
+
+### Parameters
+
+- `MemoryStoreDeleteParams parameters`
+
+  - `required string memoryStoreID`
+
+    Path parameter memory_store_id
+
+  - `IReadOnlyList<AnthropicBeta> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `"message-batches-2024-09-24"MessageBatches2024_09_24`
+
+    - `"prompt-caching-2024-07-31"PromptCaching2024_07_31`
+
+    - `"computer-use-2024-10-22"ComputerUse2024_10_22`
+
+    - `"computer-use-2025-01-24"ComputerUse2025_01_24`
+
+    - `"pdfs-2024-09-25"Pdfs2024_09_25`
+
+    - `"token-counting-2024-11-01"TokenCounting2024_11_01`
+
+    - `"token-efficient-tools-2025-02-19"TokenEfficientTools2025_02_19`
+
+    - `"output-128k-2025-02-19"Output128k2025_02_19`
+
+    - `"files-api-2025-04-14"FilesApi2025_04_14`
+
+    - `"mcp-client-2025-04-04"McpClient2025_04_04`
+
+    - `"mcp-client-2025-11-20"McpClient2025_11_20`
+
+    - `"dev-full-thinking-2025-05-14"DevFullThinking2025_05_14`
+
+    - `"interleaved-thinking-2025-05-14"InterleavedThinking2025_05_14`
+
+    - `"code-execution-2025-05-22"CodeExecution2025_05_22`
+
+    - `"extended-cache-ttl-2025-04-11"ExtendedCacheTtl2025_04_11`
+
+    - `"context-1m-2025-08-07"Context1m2025_08_07`
+
+    - `"context-management-2025-06-27"ContextManagement2025_06_27`
+
+    - `"model-context-window-exceeded-2025-08-26"ModelContextWindowExceeded2025_08_26`
+
+    - `"skills-2025-10-02"Skills2025_10_02`
+
+    - `"fast-mode-2026-02-01"FastMode2026_02_01`
+
+    - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
+### Returns
+
+- `class BetaManagedAgentsDeletedMemoryStore:`
+
+  - `required string ID`
+
+  - `required Type Type`
+
+    - `"memory_store_deleted"MemoryStoreDeleted`
+
+### Example
+
+```csharp
+MemoryStoreDeleteParams parameters = new()
+{
+    MemoryStoreID = "memory_store_id"
+};
+
+var betaManagedAgentsDeletedMemoryStore = await client.Beta.MemoryStores.Delete(parameters);
+
+Console.WriteLine(betaManagedAgentsDeletedMemoryStore);
+```
+
+## Archive
+
+`BetaManagedAgentsMemoryStore Beta.MemoryStores.Archive(MemoryStoreArchiveParamsparameters, CancellationTokencancellationToken = default)`
+
+**post** `/v1/memory_stores/{memory_store_id}/archive`
+
+ArchiveMemoryStore
+
+### Parameters
+
+- `MemoryStoreArchiveParams parameters`
+
+  - `required string memoryStoreID`
+
+    Path parameter memory_store_id
+
+  - `IReadOnlyList<AnthropicBeta> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `"message-batches-2024-09-24"MessageBatches2024_09_24`
+
+    - `"prompt-caching-2024-07-31"PromptCaching2024_07_31`
+
+    - `"computer-use-2024-10-22"ComputerUse2024_10_22`
+
+    - `"computer-use-2025-01-24"ComputerUse2025_01_24`
+
+    - `"pdfs-2024-09-25"Pdfs2024_09_25`
+
+    - `"token-counting-2024-11-01"TokenCounting2024_11_01`
+
+    - `"token-efficient-tools-2025-02-19"TokenEfficientTools2025_02_19`
+
+    - `"output-128k-2025-02-19"Output128k2025_02_19`
+
+    - `"files-api-2025-04-14"FilesApi2025_04_14`
+
+    - `"mcp-client-2025-04-04"McpClient2025_04_04`
+
+    - `"mcp-client-2025-11-20"McpClient2025_11_20`
+
+    - `"dev-full-thinking-2025-05-14"DevFullThinking2025_05_14`
+
+    - `"interleaved-thinking-2025-05-14"InterleavedThinking2025_05_14`
+
+    - `"code-execution-2025-05-22"CodeExecution2025_05_22`
+
+    - `"extended-cache-ttl-2025-04-11"ExtendedCacheTtl2025_04_11`
+
+    - `"context-1m-2025-08-07"Context1m2025_08_07`
+
+    - `"context-management-2025-06-27"ContextManagement2025_06_27`
+
+    - `"model-context-window-exceeded-2025-08-26"ModelContextWindowExceeded2025_08_26`
+
+    - `"skills-2025-10-02"Skills2025_10_02`
+
+    - `"fast-mode-2026-02-01"FastMode2026_02_01`
+
+    - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
+### Returns
+
+- `class BetaManagedAgentsMemoryStore:`
+
+  - `required string ID`
+
+  - `required Type Type`
+
+    - `"memory_store"MemoryStore`
+
+  - `DateTimeOffset? ArchivedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `DateTimeOffset CreatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `string Description`
+
+  - `IReadOnlyDictionary<string, string> Metadata`
+
+  - `string Name`
+
+  - `DateTimeOffset UpdatedAt`
+
+    A timestamp in RFC 3339 format
+
+### Example
+
+```csharp
+MemoryStoreArchiveParams parameters = new()
+{
+    MemoryStoreID = "memory_store_id"
+};
+
+var betaManagedAgentsMemoryStore = await client.Beta.MemoryStores.Archive(parameters);
+
+Console.WriteLine(betaManagedAgentsMemoryStore);
+```
+
+## Domain Types
+
+### Beta Managed Agents Deleted Memory Store
+
+- `class BetaManagedAgentsDeletedMemoryStore:`
+
+  - `required string ID`
+
+  - `required Type Type`
+
+    - `"memory_store_deleted"MemoryStoreDeleted`
+
+### Beta Managed Agents Memory Store
+
+- `class BetaManagedAgentsMemoryStore:`
+
+  - `required string ID`
+
+  - `required Type Type`
+
+    - `"memory_store"MemoryStore`
+
+  - `DateTimeOffset? ArchivedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `DateTimeOffset CreatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `string Description`
+
+  - `IReadOnlyDictionary<string, string> Metadata`
+
+  - `string Name`
+
+  - `DateTimeOffset UpdatedAt`
+
+    A timestamp in RFC 3339 format
+
+# Memories
+
+## Create
+
+`BetaManagedAgentsMemory Beta.MemoryStores.Memories.Create(MemoryCreateParamsparameters, CancellationTokencancellationToken = default)`
+
+**post** `/v1/memory_stores/{memory_store_id}/memories`
+
+CreateMemory
+
+### Parameters
+
+- `MemoryCreateParams parameters`
+
+  - `required string memoryStoreID`
+
+    Path param: Path parameter memory_store_id
+
+  - `required string? content`
+
+    Body param
+
+  - `required string path`
+
+    Body param
+
+  - `BetaManagedAgentsMemoryView view`
+
+    Query param: Query parameter for view
+
+  - `IReadOnlyList<AnthropicBeta> betas`
+
+    Header param: Optional header to specify the beta version(s) you want to use.
+
+    - `"message-batches-2024-09-24"MessageBatches2024_09_24`
+
+    - `"prompt-caching-2024-07-31"PromptCaching2024_07_31`
+
+    - `"computer-use-2024-10-22"ComputerUse2024_10_22`
+
+    - `"computer-use-2025-01-24"ComputerUse2025_01_24`
+
+    - `"pdfs-2024-09-25"Pdfs2024_09_25`
+
+    - `"token-counting-2024-11-01"TokenCounting2024_11_01`
+
+    - `"token-efficient-tools-2025-02-19"TokenEfficientTools2025_02_19`
+
+    - `"output-128k-2025-02-19"Output128k2025_02_19`
+
+    - `"files-api-2025-04-14"FilesApi2025_04_14`
+
+    - `"mcp-client-2025-04-04"McpClient2025_04_04`
+
+    - `"mcp-client-2025-11-20"McpClient2025_11_20`
+
+    - `"dev-full-thinking-2025-05-14"DevFullThinking2025_05_14`
+
+    - `"interleaved-thinking-2025-05-14"InterleavedThinking2025_05_14`
+
+    - `"code-execution-2025-05-22"CodeExecution2025_05_22`
+
+    - `"extended-cache-ttl-2025-04-11"ExtendedCacheTtl2025_04_11`
+
+    - `"context-1m-2025-08-07"Context1m2025_08_07`
+
+    - `"context-management-2025-06-27"ContextManagement2025_06_27`
+
+    - `"model-context-window-exceeded-2025-08-26"ModelContextWindowExceeded2025_08_26`
+
+    - `"skills-2025-10-02"Skills2025_10_02`
+
+    - `"fast-mode-2026-02-01"FastMode2026_02_01`
+
+    - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
+### Returns
+
+- `class BetaManagedAgentsMemory:`
+
+  - `required string ID`
+
+  - `required string ContentSha256`
+
+  - `required Int ContentSizeBytes`
+
+  - `required DateTimeOffset CreatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `required string MemoryStoreID`
+
+  - `required string MemoryVersionID`
+
+  - `required string Path`
+
+  - `required Type Type`
+
+    - `"memory"Memory`
+
+  - `required DateTimeOffset UpdatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `string? Content`
+
+### Example
+
+```csharp
+MemoryCreateParams parameters = new()
+{
+    MemoryStoreID = "memory_store_id",
+    Content = "content",
+    Path = "xx",
+};
+
+var betaManagedAgentsMemory = await client.Beta.MemoryStores.Memories.Create(parameters);
+
+Console.WriteLine(betaManagedAgentsMemory);
+```
+
+## List
+
+`MemoryListPageResponse Beta.MemoryStores.Memories.List(MemoryListParamsparameters, CancellationTokencancellationToken = default)`
+
+**get** `/v1/memory_stores/{memory_store_id}/memories`
+
+ListMemories
+
+### Parameters
+
+- `MemoryListParams parameters`
+
+  - `required string memoryStoreID`
+
+    Path param: Path parameter memory_store_id
+
+  - `Int depth`
+
+    Query param: Query parameter for depth
+
+  - `Int limit`
+
+    Query param: Query parameter for limit
+
+  - `Order order`
+
+    Query param: Query parameter for order
+
+    - `"asc"Asc`
+
+    - `"desc"Desc`
+
+  - `string orderBy`
+
+    Query param: Query parameter for order_by
+
+  - `string page`
+
+    Query param: Query parameter for page
+
+  - `string pathPrefix`
+
+    Query param: Optional path prefix filter (raw string-prefix match; include a trailing slash for directory-scoped lists). This value appears in request URLs. Do not include secrets or personally identifiable information.
+
+  - `BetaManagedAgentsMemoryView view`
+
+    Query param: Query parameter for view
+
+  - `IReadOnlyList<AnthropicBeta> betas`
+
+    Header param: Optional header to specify the beta version(s) you want to use.
+
+    - `"message-batches-2024-09-24"MessageBatches2024_09_24`
+
+    - `"prompt-caching-2024-07-31"PromptCaching2024_07_31`
+
+    - `"computer-use-2024-10-22"ComputerUse2024_10_22`
+
+    - `"computer-use-2025-01-24"ComputerUse2025_01_24`
+
+    - `"pdfs-2024-09-25"Pdfs2024_09_25`
+
+    - `"token-counting-2024-11-01"TokenCounting2024_11_01`
+
+    - `"token-efficient-tools-2025-02-19"TokenEfficientTools2025_02_19`
+
+    - `"output-128k-2025-02-19"Output128k2025_02_19`
+
+    - `"files-api-2025-04-14"FilesApi2025_04_14`
+
+    - `"mcp-client-2025-04-04"McpClient2025_04_04`
+
+    - `"mcp-client-2025-11-20"McpClient2025_11_20`
+
+    - `"dev-full-thinking-2025-05-14"DevFullThinking2025_05_14`
+
+    - `"interleaved-thinking-2025-05-14"InterleavedThinking2025_05_14`
+
+    - `"code-execution-2025-05-22"CodeExecution2025_05_22`
+
+    - `"extended-cache-ttl-2025-04-11"ExtendedCacheTtl2025_04_11`
+
+    - `"context-1m-2025-08-07"Context1m2025_08_07`
+
+    - `"context-management-2025-06-27"ContextManagement2025_06_27`
+
+    - `"model-context-window-exceeded-2025-08-26"ModelContextWindowExceeded2025_08_26`
+
+    - `"skills-2025-10-02"Skills2025_10_02`
+
+    - `"fast-mode-2026-02-01"FastMode2026_02_01`
+
+    - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
+### Returns
+
+- `class MemoryListPageResponse:`
+
+  - `IReadOnlyList<BetaManagedAgentsMemoryListItem> Data`
+
+    - `class BetaManagedAgentsMemory:`
+
+      - `required string ID`
+
+      - `required string ContentSha256`
+
+      - `required Int ContentSizeBytes`
+
+      - `required DateTimeOffset CreatedAt`
+
+        A timestamp in RFC 3339 format
+
+      - `required string MemoryStoreID`
+
+      - `required string MemoryVersionID`
+
+      - `required string Path`
+
+      - `required Type Type`
+
+        - `"memory"Memory`
+
+      - `required DateTimeOffset UpdatedAt`
+
+        A timestamp in RFC 3339 format
+
+      - `string? Content`
+
+    - `class BetaManagedAgentsMemoryPrefix:`
+
+      - `required string Path`
+
+      - `required Type Type`
+
+        - `"memory_prefix"MemoryPrefix`
+
+  - `string? NextPage`
+
+### Example
+
+```csharp
+MemoryListParams parameters = new() { MemoryStoreID = "memory_store_id" };
+
+var page = await client.Beta.MemoryStores.Memories.List(parameters);
+await foreach (var item in page.Paginate())
+{
+    Console.WriteLine(item);
+}
+```
+
+## Retrieve
+
+`BetaManagedAgentsMemory Beta.MemoryStores.Memories.Retrieve(MemoryRetrieveParamsparameters, CancellationTokencancellationToken = default)`
+
+**get** `/v1/memory_stores/{memory_store_id}/memories/{memory_id}`
+
+GetMemory
+
+### Parameters
+
+- `MemoryRetrieveParams parameters`
+
+  - `required string memoryStoreID`
+
+    Path param: Path parameter memory_store_id
+
+  - `required string memoryID`
+
+    Path param: Path parameter memory_id
+
+  - `BetaManagedAgentsMemoryView view`
+
+    Query param: Query parameter for view
+
+  - `IReadOnlyList<AnthropicBeta> betas`
+
+    Header param: Optional header to specify the beta version(s) you want to use.
+
+    - `"message-batches-2024-09-24"MessageBatches2024_09_24`
+
+    - `"prompt-caching-2024-07-31"PromptCaching2024_07_31`
+
+    - `"computer-use-2024-10-22"ComputerUse2024_10_22`
+
+    - `"computer-use-2025-01-24"ComputerUse2025_01_24`
+
+    - `"pdfs-2024-09-25"Pdfs2024_09_25`
+
+    - `"token-counting-2024-11-01"TokenCounting2024_11_01`
+
+    - `"token-efficient-tools-2025-02-19"TokenEfficientTools2025_02_19`
+
+    - `"output-128k-2025-02-19"Output128k2025_02_19`
+
+    - `"files-api-2025-04-14"FilesApi2025_04_14`
+
+    - `"mcp-client-2025-04-04"McpClient2025_04_04`
+
+    - `"mcp-client-2025-11-20"McpClient2025_11_20`
+
+    - `"dev-full-thinking-2025-05-14"DevFullThinking2025_05_14`
+
+    - `"interleaved-thinking-2025-05-14"InterleavedThinking2025_05_14`
+
+    - `"code-execution-2025-05-22"CodeExecution2025_05_22`
+
+    - `"extended-cache-ttl-2025-04-11"ExtendedCacheTtl2025_04_11`
+
+    - `"context-1m-2025-08-07"Context1m2025_08_07`
+
+    - `"context-management-2025-06-27"ContextManagement2025_06_27`
+
+    - `"model-context-window-exceeded-2025-08-26"ModelContextWindowExceeded2025_08_26`
+
+    - `"skills-2025-10-02"Skills2025_10_02`
+
+    - `"fast-mode-2026-02-01"FastMode2026_02_01`
+
+    - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
+### Returns
+
+- `class BetaManagedAgentsMemory:`
+
+  - `required string ID`
+
+  - `required string ContentSha256`
+
+  - `required Int ContentSizeBytes`
+
+  - `required DateTimeOffset CreatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `required string MemoryStoreID`
+
+  - `required string MemoryVersionID`
+
+  - `required string Path`
+
+  - `required Type Type`
+
+    - `"memory"Memory`
+
+  - `required DateTimeOffset UpdatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `string? Content`
+
+### Example
+
+```csharp
+MemoryRetrieveParams parameters = new()
+{
+    MemoryStoreID = "memory_store_id",
+    MemoryID = "memory_id",
+};
+
+var betaManagedAgentsMemory = await client.Beta.MemoryStores.Memories.Retrieve(parameters);
+
+Console.WriteLine(betaManagedAgentsMemory);
+```
+
+## Update
+
+`BetaManagedAgentsMemory Beta.MemoryStores.Memories.Update(MemoryUpdateParamsparameters, CancellationTokencancellationToken = default)`
+
+**post** `/v1/memory_stores/{memory_store_id}/memories/{memory_id}`
+
+UpdateMemory
+
+### Parameters
+
+- `MemoryUpdateParams parameters`
+
+  - `required string memoryStoreID`
+
+    Path param: Path parameter memory_store_id
+
+  - `required string memoryID`
+
+    Path param: Path parameter memory_id
+
+  - `BetaManagedAgentsMemoryView view`
+
+    Query param: Query parameter for view
+
+  - `string? content`
+
+    Body param
+
+  - `string? path`
+
+    Body param
+
+  - `BetaManagedAgentsPrecondition precondition`
+
+    Body param
+
+  - `IReadOnlyList<AnthropicBeta> betas`
+
+    Header param: Optional header to specify the beta version(s) you want to use.
+
+    - `"message-batches-2024-09-24"MessageBatches2024_09_24`
+
+    - `"prompt-caching-2024-07-31"PromptCaching2024_07_31`
+
+    - `"computer-use-2024-10-22"ComputerUse2024_10_22`
+
+    - `"computer-use-2025-01-24"ComputerUse2025_01_24`
+
+    - `"pdfs-2024-09-25"Pdfs2024_09_25`
+
+    - `"token-counting-2024-11-01"TokenCounting2024_11_01`
+
+    - `"token-efficient-tools-2025-02-19"TokenEfficientTools2025_02_19`
+
+    - `"output-128k-2025-02-19"Output128k2025_02_19`
+
+    - `"files-api-2025-04-14"FilesApi2025_04_14`
+
+    - `"mcp-client-2025-04-04"McpClient2025_04_04`
+
+    - `"mcp-client-2025-11-20"McpClient2025_11_20`
+
+    - `"dev-full-thinking-2025-05-14"DevFullThinking2025_05_14`
+
+    - `"interleaved-thinking-2025-05-14"InterleavedThinking2025_05_14`
+
+    - `"code-execution-2025-05-22"CodeExecution2025_05_22`
+
+    - `"extended-cache-ttl-2025-04-11"ExtendedCacheTtl2025_04_11`
+
+    - `"context-1m-2025-08-07"Context1m2025_08_07`
+
+    - `"context-management-2025-06-27"ContextManagement2025_06_27`
+
+    - `"model-context-window-exceeded-2025-08-26"ModelContextWindowExceeded2025_08_26`
+
+    - `"skills-2025-10-02"Skills2025_10_02`
+
+    - `"fast-mode-2026-02-01"FastMode2026_02_01`
+
+    - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
+### Returns
+
+- `class BetaManagedAgentsMemory:`
+
+  - `required string ID`
+
+  - `required string ContentSha256`
+
+  - `required Int ContentSizeBytes`
+
+  - `required DateTimeOffset CreatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `required string MemoryStoreID`
+
+  - `required string MemoryVersionID`
+
+  - `required string Path`
+
+  - `required Type Type`
+
+    - `"memory"Memory`
+
+  - `required DateTimeOffset UpdatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `string? Content`
+
+### Example
+
+```csharp
+MemoryUpdateParams parameters = new()
+{
+    MemoryStoreID = "memory_store_id",
+    MemoryID = "memory_id",
+};
+
+var betaManagedAgentsMemory = await client.Beta.MemoryStores.Memories.Update(parameters);
+
+Console.WriteLine(betaManagedAgentsMemory);
+```
+
+## Delete
+
+`BetaManagedAgentsDeletedMemory Beta.MemoryStores.Memories.Delete(MemoryDeleteParamsparameters, CancellationTokencancellationToken = default)`
+
+**delete** `/v1/memory_stores/{memory_store_id}/memories/{memory_id}`
+
+DeleteMemory
+
+### Parameters
+
+- `MemoryDeleteParams parameters`
+
+  - `required string memoryStoreID`
+
+    Path param: Path parameter memory_store_id
+
+  - `required string memoryID`
+
+    Path param: Path parameter memory_id
+
+  - `string expectedContentSha256`
+
+    Query param: Query parameter for expected_content_sha256
+
+  - `IReadOnlyList<AnthropicBeta> betas`
+
+    Header param: Optional header to specify the beta version(s) you want to use.
+
+    - `"message-batches-2024-09-24"MessageBatches2024_09_24`
+
+    - `"prompt-caching-2024-07-31"PromptCaching2024_07_31`
+
+    - `"computer-use-2024-10-22"ComputerUse2024_10_22`
+
+    - `"computer-use-2025-01-24"ComputerUse2025_01_24`
+
+    - `"pdfs-2024-09-25"Pdfs2024_09_25`
+
+    - `"token-counting-2024-11-01"TokenCounting2024_11_01`
+
+    - `"token-efficient-tools-2025-02-19"TokenEfficientTools2025_02_19`
+
+    - `"output-128k-2025-02-19"Output128k2025_02_19`
+
+    - `"files-api-2025-04-14"FilesApi2025_04_14`
+
+    - `"mcp-client-2025-04-04"McpClient2025_04_04`
+
+    - `"mcp-client-2025-11-20"McpClient2025_11_20`
+
+    - `"dev-full-thinking-2025-05-14"DevFullThinking2025_05_14`
+
+    - `"interleaved-thinking-2025-05-14"InterleavedThinking2025_05_14`
+
+    - `"code-execution-2025-05-22"CodeExecution2025_05_22`
+
+    - `"extended-cache-ttl-2025-04-11"ExtendedCacheTtl2025_04_11`
+
+    - `"context-1m-2025-08-07"Context1m2025_08_07`
+
+    - `"context-management-2025-06-27"ContextManagement2025_06_27`
+
+    - `"model-context-window-exceeded-2025-08-26"ModelContextWindowExceeded2025_08_26`
+
+    - `"skills-2025-10-02"Skills2025_10_02`
+
+    - `"fast-mode-2026-02-01"FastMode2026_02_01`
+
+    - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
+### Returns
+
+- `class BetaManagedAgentsDeletedMemory:`
+
+  - `required string ID`
+
+  - `required Type Type`
+
+    - `"memory_deleted"MemoryDeleted`
+
+### Example
+
+```csharp
+MemoryDeleteParams parameters = new()
+{
+    MemoryStoreID = "memory_store_id",
+    MemoryID = "memory_id",
+};
+
+var betaManagedAgentsDeletedMemory = await client.Beta.MemoryStores.Memories.Delete(parameters);
+
+Console.WriteLine(betaManagedAgentsDeletedMemory);
+```
+
+## Domain Types
+
+### Beta Managed Agents Content Sha256 Precondition
+
+- `class BetaManagedAgentsContentSha256Precondition:`
+
+  - `required Type Type`
+
+    - `"content_sha256"ContentSha256`
+
+  - `string ContentSha256`
+
+### Beta Managed Agents Deleted Memory
+
+- `class BetaManagedAgentsDeletedMemory:`
+
+  - `required string ID`
+
+  - `required Type Type`
+
+    - `"memory_deleted"MemoryDeleted`
+
+### Beta Managed Agents Memory
+
+- `class BetaManagedAgentsMemory:`
+
+  - `required string ID`
+
+  - `required string ContentSha256`
+
+  - `required Int ContentSizeBytes`
+
+  - `required DateTimeOffset CreatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `required string MemoryStoreID`
+
+  - `required string MemoryVersionID`
+
+  - `required string Path`
+
+  - `required Type Type`
+
+    - `"memory"Memory`
+
+  - `required DateTimeOffset UpdatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `string? Content`
+
+### Beta Managed Agents Memory List Item
+
+- `class BetaManagedAgentsMemoryListItem: A class that can be one of several variants.union`
+
+  - `class BetaManagedAgentsMemory:`
+
+    - `required string ID`
+
+    - `required string ContentSha256`
+
+    - `required Int ContentSizeBytes`
+
+    - `required DateTimeOffset CreatedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `required string MemoryStoreID`
+
+    - `required string MemoryVersionID`
+
+    - `required string Path`
+
+    - `required Type Type`
+
+      - `"memory"Memory`
+
+    - `required DateTimeOffset UpdatedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `string? Content`
+
+  - `class BetaManagedAgentsMemoryPrefix:`
+
+    - `required string Path`
+
+    - `required Type Type`
+
+      - `"memory_prefix"MemoryPrefix`
+
+### Beta Managed Agents Memory Path Conflict Error
+
+- `class BetaManagedAgentsMemoryPathConflictError:`
+
+  - `required Type Type`
+
+    - `"memory_path_conflict_error"MemoryPathConflictError`
+
+  - `string ConflictingMemoryID`
+
+  - `string ConflictingPath`
+
+  - `string Message`
+
+### Beta Managed Agents Memory Precondition Failed Error
+
+- `class BetaManagedAgentsMemoryPreconditionFailedError:`
+
+  - `required Type Type`
+
+    - `"memory_precondition_failed_error"MemoryPreconditionFailedError`
+
+  - `string Message`
+
+### Beta Managed Agents Memory Prefix
+
+- `class BetaManagedAgentsMemoryPrefix:`
+
+  - `required string Path`
+
+  - `required Type Type`
+
+    - `"memory_prefix"MemoryPrefix`
+
+### Beta Managed Agents Memory View
+
+- `enum BetaManagedAgentsMemoryView:`
+
+  MemoryView enum
+
+  - `"basic"Basic`
+
+  - `"full"Full`
+
+### Beta Managed Agents Precondition
+
+- `class BetaManagedAgentsPrecondition:`
+
+  - `required Type Type`
+
+    - `"content_sha256"ContentSha256`
+
+  - `string ContentSha256`
+
+# Memory Versions
+
+## List
+
+`MemoryVersionListPageResponse Beta.MemoryStores.MemoryVersions.List(MemoryVersionListParamsparameters, CancellationTokencancellationToken = default)`
+
+**get** `/v1/memory_stores/{memory_store_id}/memory_versions`
+
+ListMemoryVersions
+
+### Parameters
+
+- `MemoryVersionListParams parameters`
+
+  - `required string memoryStoreID`
+
+    Path param: Path parameter memory_store_id
+
+  - `string apiKeyID`
+
+    Query param: Query parameter for api_key_id
+
+  - `DateTimeOffset createdAtGte`
+
+    Query param: Return versions created at or after this time (inclusive).
+
+  - `DateTimeOffset createdAtLte`
+
+    Query param: Return versions created at or before this time (inclusive).
+
+  - `Int limit`
+
+    Query param: Query parameter for limit
+
+  - `string memoryID`
+
+    Query param: Query parameter for memory_id
+
+  - `BetaManagedAgentsMemoryVersionOperation operation`
+
+    Query param: Query parameter for operation
+
+  - `string page`
+
+    Query param: Query parameter for page
+
+  - `string sessionID`
+
+    Query param: Query parameter for session_id
+
+  - `BetaManagedAgentsMemoryView view`
+
+    Query param: Query parameter for view
+
+  - `IReadOnlyList<AnthropicBeta> betas`
+
+    Header param: Optional header to specify the beta version(s) you want to use.
+
+    - `"message-batches-2024-09-24"MessageBatches2024_09_24`
+
+    - `"prompt-caching-2024-07-31"PromptCaching2024_07_31`
+
+    - `"computer-use-2024-10-22"ComputerUse2024_10_22`
+
+    - `"computer-use-2025-01-24"ComputerUse2025_01_24`
+
+    - `"pdfs-2024-09-25"Pdfs2024_09_25`
+
+    - `"token-counting-2024-11-01"TokenCounting2024_11_01`
+
+    - `"token-efficient-tools-2025-02-19"TokenEfficientTools2025_02_19`
+
+    - `"output-128k-2025-02-19"Output128k2025_02_19`
+
+    - `"files-api-2025-04-14"FilesApi2025_04_14`
+
+    - `"mcp-client-2025-04-04"McpClient2025_04_04`
+
+    - `"mcp-client-2025-11-20"McpClient2025_11_20`
+
+    - `"dev-full-thinking-2025-05-14"DevFullThinking2025_05_14`
+
+    - `"interleaved-thinking-2025-05-14"InterleavedThinking2025_05_14`
+
+    - `"code-execution-2025-05-22"CodeExecution2025_05_22`
+
+    - `"extended-cache-ttl-2025-04-11"ExtendedCacheTtl2025_04_11`
+
+    - `"context-1m-2025-08-07"Context1m2025_08_07`
+
+    - `"context-management-2025-06-27"ContextManagement2025_06_27`
+
+    - `"model-context-window-exceeded-2025-08-26"ModelContextWindowExceeded2025_08_26`
+
+    - `"skills-2025-10-02"Skills2025_10_02`
+
+    - `"fast-mode-2026-02-01"FastMode2026_02_01`
+
+    - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
+### Returns
+
+- `class MemoryVersionListPageResponse:`
+
+  - `IReadOnlyList<BetaManagedAgentsMemoryVersion> Data`
+
+    - `required string ID`
+
+    - `required DateTimeOffset CreatedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `required string MemoryID`
+
+    - `required string MemoryStoreID`
+
+    - `required BetaManagedAgentsMemoryVersionOperation Operation`
+
+      MemoryVersionOperation enum
+
+      - `"created"Created`
+
+      - `"modified"Modified`
+
+      - `"deleted"Deleted`
+
+    - `required Type Type`
+
+      - `"memory_version"MemoryVersion`
+
+    - `string? Content`
+
+    - `string? ContentSha256`
+
+    - `Int? ContentSizeBytes`
+
+    - `BetaManagedAgentsActor CreatedBy`
+
+      - `class BetaManagedAgentsSessionActor:`
+
+        - `required string SessionID`
+
+        - `required Type Type`
+
+          - `"session_actor"SessionActor`
+
+      - `class BetaManagedAgentsApiActor:`
+
+        - `required string ApiKeyID`
+
+        - `required Type Type`
+
+          - `"api_actor"ApiActor`
+
+      - `class BetaManagedAgentsUserActor:`
+
+        - `required Type Type`
+
+          - `"user_actor"UserActor`
+
+        - `required string UserID`
+
+    - `string? Path`
+
+    - `DateTimeOffset? RedactedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `BetaManagedAgentsActor RedactedBy`
+
+      - `class BetaManagedAgentsSessionActor:`
+
+        - `required string SessionID`
+
+        - `required Type Type`
+
+          - `"session_actor"SessionActor`
+
+      - `class BetaManagedAgentsApiActor:`
+
+        - `required string ApiKeyID`
+
+        - `required Type Type`
+
+          - `"api_actor"ApiActor`
+
+      - `class BetaManagedAgentsUserActor:`
+
+        - `required Type Type`
+
+          - `"user_actor"UserActor`
+
+        - `required string UserID`
+
+  - `string? NextPage`
+
+### Example
+
+```csharp
+MemoryVersionListParams parameters = new()
+{
+    MemoryStoreID = "memory_store_id"
+};
+
+var page = await client.Beta.MemoryStores.MemoryVersions.List(parameters);
+await foreach (var item in page.Paginate())
+{
+    Console.WriteLine(item);
+}
+```
+
+## Retrieve
+
+`BetaManagedAgentsMemoryVersion Beta.MemoryStores.MemoryVersions.Retrieve(MemoryVersionRetrieveParamsparameters, CancellationTokencancellationToken = default)`
+
+**get** `/v1/memory_stores/{memory_store_id}/memory_versions/{memory_version_id}`
+
+GetMemoryVersion
+
+### Parameters
+
+- `MemoryVersionRetrieveParams parameters`
+
+  - `required string memoryStoreID`
+
+    Path param: Path parameter memory_store_id
+
+  - `required string memoryVersionID`
+
+    Path param: Path parameter memory_version_id
+
+  - `BetaManagedAgentsMemoryView view`
+
+    Query param: Query parameter for view
+
+  - `IReadOnlyList<AnthropicBeta> betas`
+
+    Header param: Optional header to specify the beta version(s) you want to use.
+
+    - `"message-batches-2024-09-24"MessageBatches2024_09_24`
+
+    - `"prompt-caching-2024-07-31"PromptCaching2024_07_31`
+
+    - `"computer-use-2024-10-22"ComputerUse2024_10_22`
+
+    - `"computer-use-2025-01-24"ComputerUse2025_01_24`
+
+    - `"pdfs-2024-09-25"Pdfs2024_09_25`
+
+    - `"token-counting-2024-11-01"TokenCounting2024_11_01`
+
+    - `"token-efficient-tools-2025-02-19"TokenEfficientTools2025_02_19`
+
+    - `"output-128k-2025-02-19"Output128k2025_02_19`
+
+    - `"files-api-2025-04-14"FilesApi2025_04_14`
+
+    - `"mcp-client-2025-04-04"McpClient2025_04_04`
+
+    - `"mcp-client-2025-11-20"McpClient2025_11_20`
+
+    - `"dev-full-thinking-2025-05-14"DevFullThinking2025_05_14`
+
+    - `"interleaved-thinking-2025-05-14"InterleavedThinking2025_05_14`
+
+    - `"code-execution-2025-05-22"CodeExecution2025_05_22`
+
+    - `"extended-cache-ttl-2025-04-11"ExtendedCacheTtl2025_04_11`
+
+    - `"context-1m-2025-08-07"Context1m2025_08_07`
+
+    - `"context-management-2025-06-27"ContextManagement2025_06_27`
+
+    - `"model-context-window-exceeded-2025-08-26"ModelContextWindowExceeded2025_08_26`
+
+    - `"skills-2025-10-02"Skills2025_10_02`
+
+    - `"fast-mode-2026-02-01"FastMode2026_02_01`
+
+    - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
+### Returns
+
+- `class BetaManagedAgentsMemoryVersion:`
+
+  - `required string ID`
+
+  - `required DateTimeOffset CreatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `required string MemoryID`
+
+  - `required string MemoryStoreID`
+
+  - `required BetaManagedAgentsMemoryVersionOperation Operation`
+
+    MemoryVersionOperation enum
+
+    - `"created"Created`
+
+    - `"modified"Modified`
+
+    - `"deleted"Deleted`
+
+  - `required Type Type`
+
+    - `"memory_version"MemoryVersion`
+
+  - `string? Content`
+
+  - `string? ContentSha256`
+
+  - `Int? ContentSizeBytes`
+
+  - `BetaManagedAgentsActor CreatedBy`
+
+    - `class BetaManagedAgentsSessionActor:`
+
+      - `required string SessionID`
+
+      - `required Type Type`
+
+        - `"session_actor"SessionActor`
+
+    - `class BetaManagedAgentsApiActor:`
+
+      - `required string ApiKeyID`
+
+      - `required Type Type`
+
+        - `"api_actor"ApiActor`
+
+    - `class BetaManagedAgentsUserActor:`
+
+      - `required Type Type`
+
+        - `"user_actor"UserActor`
+
+      - `required string UserID`
+
+  - `string? Path`
+
+  - `DateTimeOffset? RedactedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `BetaManagedAgentsActor RedactedBy`
+
+    - `class BetaManagedAgentsSessionActor:`
+
+      - `required string SessionID`
+
+      - `required Type Type`
+
+        - `"session_actor"SessionActor`
+
+    - `class BetaManagedAgentsApiActor:`
+
+      - `required string ApiKeyID`
+
+      - `required Type Type`
+
+        - `"api_actor"ApiActor`
+
+    - `class BetaManagedAgentsUserActor:`
+
+      - `required Type Type`
+
+        - `"user_actor"UserActor`
+
+      - `required string UserID`
+
+### Example
+
+```csharp
+MemoryVersionRetrieveParams parameters = new()
+{
+    MemoryStoreID = "memory_store_id",
+    MemoryVersionID = "memory_version_id",
+};
+
+var betaManagedAgentsMemoryVersion = await client.Beta.MemoryStores.MemoryVersions.Retrieve(parameters);
+
+Console.WriteLine(betaManagedAgentsMemoryVersion);
+```
+
+## Redact
+
+`BetaManagedAgentsMemoryVersion Beta.MemoryStores.MemoryVersions.Redact(MemoryVersionRedactParamsparameters, CancellationTokencancellationToken = default)`
+
+**post** `/v1/memory_stores/{memory_store_id}/memory_versions/{memory_version_id}/redact`
+
+RedactMemoryVersion
+
+### Parameters
+
+- `MemoryVersionRedactParams parameters`
+
+  - `required string memoryStoreID`
+
+    Path param: Path parameter memory_store_id
+
+  - `required string memoryVersionID`
+
+    Path param: Path parameter memory_version_id
+
+  - `IReadOnlyList<AnthropicBeta> betas`
+
+    Header param: Optional header to specify the beta version(s) you want to use.
+
+    - `"message-batches-2024-09-24"MessageBatches2024_09_24`
+
+    - `"prompt-caching-2024-07-31"PromptCaching2024_07_31`
+
+    - `"computer-use-2024-10-22"ComputerUse2024_10_22`
+
+    - `"computer-use-2025-01-24"ComputerUse2025_01_24`
+
+    - `"pdfs-2024-09-25"Pdfs2024_09_25`
+
+    - `"token-counting-2024-11-01"TokenCounting2024_11_01`
+
+    - `"token-efficient-tools-2025-02-19"TokenEfficientTools2025_02_19`
+
+    - `"output-128k-2025-02-19"Output128k2025_02_19`
+
+    - `"files-api-2025-04-14"FilesApi2025_04_14`
+
+    - `"mcp-client-2025-04-04"McpClient2025_04_04`
+
+    - `"mcp-client-2025-11-20"McpClient2025_11_20`
+
+    - `"dev-full-thinking-2025-05-14"DevFullThinking2025_05_14`
+
+    - `"interleaved-thinking-2025-05-14"InterleavedThinking2025_05_14`
+
+    - `"code-execution-2025-05-22"CodeExecution2025_05_22`
+
+    - `"extended-cache-ttl-2025-04-11"ExtendedCacheTtl2025_04_11`
+
+    - `"context-1m-2025-08-07"Context1m2025_08_07`
+
+    - `"context-management-2025-06-27"ContextManagement2025_06_27`
+
+    - `"model-context-window-exceeded-2025-08-26"ModelContextWindowExceeded2025_08_26`
+
+    - `"skills-2025-10-02"Skills2025_10_02`
+
+    - `"fast-mode-2026-02-01"FastMode2026_02_01`
+
+    - `"output-300k-2026-03-24"Output300k2026_03_24`
+
+    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
+
+### Returns
+
+- `class BetaManagedAgentsMemoryVersion:`
+
+  - `required string ID`
+
+  - `required DateTimeOffset CreatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `required string MemoryID`
+
+  - `required string MemoryStoreID`
+
+  - `required BetaManagedAgentsMemoryVersionOperation Operation`
+
+    MemoryVersionOperation enum
+
+    - `"created"Created`
+
+    - `"modified"Modified`
+
+    - `"deleted"Deleted`
+
+  - `required Type Type`
+
+    - `"memory_version"MemoryVersion`
+
+  - `string? Content`
+
+  - `string? ContentSha256`
+
+  - `Int? ContentSizeBytes`
+
+  - `BetaManagedAgentsActor CreatedBy`
+
+    - `class BetaManagedAgentsSessionActor:`
+
+      - `required string SessionID`
+
+      - `required Type Type`
+
+        - `"session_actor"SessionActor`
+
+    - `class BetaManagedAgentsApiActor:`
+
+      - `required string ApiKeyID`
+
+      - `required Type Type`
+
+        - `"api_actor"ApiActor`
+
+    - `class BetaManagedAgentsUserActor:`
+
+      - `required Type Type`
+
+        - `"user_actor"UserActor`
+
+      - `required string UserID`
+
+  - `string? Path`
+
+  - `DateTimeOffset? RedactedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `BetaManagedAgentsActor RedactedBy`
+
+    - `class BetaManagedAgentsSessionActor:`
+
+      - `required string SessionID`
+
+      - `required Type Type`
+
+        - `"session_actor"SessionActor`
+
+    - `class BetaManagedAgentsApiActor:`
+
+      - `required string ApiKeyID`
+
+      - `required Type Type`
+
+        - `"api_actor"ApiActor`
+
+    - `class BetaManagedAgentsUserActor:`
+
+      - `required Type Type`
+
+        - `"user_actor"UserActor`
+
+      - `required string UserID`
+
+### Example
+
+```csharp
+MemoryVersionRedactParams parameters = new()
+{
+    MemoryStoreID = "memory_store_id",
+    MemoryVersionID = "memory_version_id",
+};
+
+var betaManagedAgentsMemoryVersion = await client.Beta.MemoryStores.MemoryVersions.Redact(parameters);
+
+Console.WriteLine(betaManagedAgentsMemoryVersion);
+```
+
+## Domain Types
+
+### Beta Managed Agents Actor
+
+- `class BetaManagedAgentsActor: A class that can be one of several variants.union`
+
+  - `class BetaManagedAgentsSessionActor:`
+
+    - `required string SessionID`
+
+    - `required Type Type`
+
+      - `"session_actor"SessionActor`
+
+  - `class BetaManagedAgentsApiActor:`
+
+    - `required string ApiKeyID`
+
+    - `required Type Type`
+
+      - `"api_actor"ApiActor`
+
+  - `class BetaManagedAgentsUserActor:`
+
+    - `required Type Type`
+
+      - `"user_actor"UserActor`
+
+    - `required string UserID`
+
+### Beta Managed Agents API Actor
+
+- `class BetaManagedAgentsApiActor:`
+
+  - `required string ApiKeyID`
+
+  - `required Type Type`
+
+    - `"api_actor"ApiActor`
+
+### Beta Managed Agents Memory Version
+
+- `class BetaManagedAgentsMemoryVersion:`
+
+  - `required string ID`
+
+  - `required DateTimeOffset CreatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `required string MemoryID`
+
+  - `required string MemoryStoreID`
+
+  - `required BetaManagedAgentsMemoryVersionOperation Operation`
+
+    MemoryVersionOperation enum
+
+    - `"created"Created`
+
+    - `"modified"Modified`
+
+    - `"deleted"Deleted`
+
+  - `required Type Type`
+
+    - `"memory_version"MemoryVersion`
+
+  - `string? Content`
+
+  - `string? ContentSha256`
+
+  - `Int? ContentSizeBytes`
+
+  - `BetaManagedAgentsActor CreatedBy`
+
+    - `class BetaManagedAgentsSessionActor:`
+
+      - `required string SessionID`
+
+      - `required Type Type`
+
+        - `"session_actor"SessionActor`
+
+    - `class BetaManagedAgentsApiActor:`
+
+      - `required string ApiKeyID`
+
+      - `required Type Type`
+
+        - `"api_actor"ApiActor`
+
+    - `class BetaManagedAgentsUserActor:`
+
+      - `required Type Type`
+
+        - `"user_actor"UserActor`
+
+      - `required string UserID`
+
+  - `string? Path`
+
+  - `DateTimeOffset? RedactedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `BetaManagedAgentsActor RedactedBy`
+
+    - `class BetaManagedAgentsSessionActor:`
+
+      - `required string SessionID`
+
+      - `required Type Type`
+
+        - `"session_actor"SessionActor`
+
+    - `class BetaManagedAgentsApiActor:`
+
+      - `required string ApiKeyID`
+
+      - `required Type Type`
+
+        - `"api_actor"ApiActor`
+
+    - `class BetaManagedAgentsUserActor:`
+
+      - `required Type Type`
+
+        - `"user_actor"UserActor`
+
+      - `required string UserID`
+
+### Beta Managed Agents Memory Version Operation
+
+- `enum BetaManagedAgentsMemoryVersionOperation:`
+
+  MemoryVersionOperation enum
+
+  - `"created"Created`
+
+  - `"modified"Modified`
+
+  - `"deleted"Deleted`
+
+### Beta Managed Agents Session Actor
+
+- `class BetaManagedAgentsSessionActor:`
+
+  - `required string SessionID`
+
+  - `required Type Type`
+
+    - `"session_actor"SessionActor`
+
+### Beta Managed Agents User Actor
+
+- `class BetaManagedAgentsUserActor:`
+
+  - `required Type Type`
+
+    - `"user_actor"UserActor`
+
+  - `required string UserID`
+
 # Files
 
 ## Upload
@@ -65516,8 +67854,6 @@ Upload File
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
-
-    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
 ### Returns
 
@@ -65657,8 +67993,6 @@ List Files
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
-
-    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
 ### Returns
 
@@ -65800,8 +68134,6 @@ Download File
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
-    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
-
 ### Example
 
 ```csharp
@@ -65875,8 +68207,6 @@ Get File Metadata
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
-
-    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
 ### Returns
 
@@ -65999,8 +68329,6 @@ Delete File
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
-
-    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
 ### Returns
 
@@ -66180,8 +68508,6 @@ Create Skill
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
-    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
-
 ### Returns
 
 - `class SkillCreateResponse:`
@@ -66317,8 +68643,6 @@ List Skills
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
-
-    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
 ### Returns
 
@@ -66459,8 +68783,6 @@ Get Skill
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
-    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
-
 ### Returns
 
 - `class SkillRetrieveResponse:`
@@ -66582,8 +68904,6 @@ Delete Skill
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
-    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
-
 ### Returns
 
 - `class SkillDeleteResponse:`
@@ -66683,8 +69003,6 @@ Create Skill Version
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
-
-    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
 ### Returns
 
@@ -66819,8 +69137,6 @@ List Skill Versions
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
-
-    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
 ### Returns
 
@@ -66966,8 +69282,6 @@ Get Skill Version
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
-    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
-
 ### Returns
 
 - `class VersionRetrieveResponse:`
@@ -67102,8 +69416,6 @@ Delete Skill Version
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
-    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
-
 ### Returns
 
 - `class VersionDeleteResponse:`
@@ -67133,700 +69445,3 @@ var version = await client.Beta.Skills.Versions.Delete(parameters);
 
 Console.WriteLine(version);
 ```
-
-# User Profiles
-
-## Create
-
-`BetaUserProfile Beta.UserProfiles.Create(UserProfileCreateParams?parameters, CancellationTokencancellationToken = default)`
-
-**post** `/v1/user_profiles`
-
-Create User Profile
-
-### Parameters
-
-- `UserProfileCreateParams parameters`
-
-  - `string? externalID`
-
-    Body param: Platform's own identifier for this user. Not enforced unique. Maximum 255 characters.
-
-  - `IReadOnlyDictionary<string, string> metadata`
-
-    Body param: Free-form key-value data to attach to this user profile. Maximum 16 keys, with keys up to 64 characters and values up to 512 characters. Values must be non-empty strings.
-
-  - `IReadOnlyList<AnthropicBeta> betas`
-
-    Header param: Optional header to specify the beta version(s) you want to use.
-
-    - `"message-batches-2024-09-24"MessageBatches2024_09_24`
-
-    - `"prompt-caching-2024-07-31"PromptCaching2024_07_31`
-
-    - `"computer-use-2024-10-22"ComputerUse2024_10_22`
-
-    - `"computer-use-2025-01-24"ComputerUse2025_01_24`
-
-    - `"pdfs-2024-09-25"Pdfs2024_09_25`
-
-    - `"token-counting-2024-11-01"TokenCounting2024_11_01`
-
-    - `"token-efficient-tools-2025-02-19"TokenEfficientTools2025_02_19`
-
-    - `"output-128k-2025-02-19"Output128k2025_02_19`
-
-    - `"files-api-2025-04-14"FilesApi2025_04_14`
-
-    - `"mcp-client-2025-04-04"McpClient2025_04_04`
-
-    - `"mcp-client-2025-11-20"McpClient2025_11_20`
-
-    - `"dev-full-thinking-2025-05-14"DevFullThinking2025_05_14`
-
-    - `"interleaved-thinking-2025-05-14"InterleavedThinking2025_05_14`
-
-    - `"code-execution-2025-05-22"CodeExecution2025_05_22`
-
-    - `"extended-cache-ttl-2025-04-11"ExtendedCacheTtl2025_04_11`
-
-    - `"context-1m-2025-08-07"Context1m2025_08_07`
-
-    - `"context-management-2025-06-27"ContextManagement2025_06_27`
-
-    - `"model-context-window-exceeded-2025-08-26"ModelContextWindowExceeded2025_08_26`
-
-    - `"skills-2025-10-02"Skills2025_10_02`
-
-    - `"fast-mode-2026-02-01"FastMode2026_02_01`
-
-    - `"output-300k-2026-03-24"Output300k2026_03_24`
-
-    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
-
-    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
-
-### Returns
-
-- `class BetaUserProfile:`
-
-  - `required string ID`
-
-    Unique identifier for this user profile, prefixed `uprof_`.
-
-  - `required DateTimeOffset CreatedAt`
-
-    A timestamp in RFC 3339 format
-
-  - `required IReadOnlyDictionary<string, string> Metadata`
-
-    Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
-
-  - `required IReadOnlyDictionary<string, BetaUserProfileTrustGrant> TrustGrants`
-
-    Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
-
-    - `required Status Status`
-
-      Status of the trust grant.
-
-      - `"active"Active`
-
-      - `"pending"Pending`
-
-      - `"rejected"Rejected`
-
-  - `required Type Type`
-
-    Object type. Always `user_profile`.
-
-    - `"user_profile"UserProfile`
-
-  - `required DateTimeOffset UpdatedAt`
-
-    A timestamp in RFC 3339 format
-
-  - `string? ExternalID`
-
-    Platform's own identifier for this user. Not enforced unique.
-
-### Example
-
-```csharp
-UserProfileCreateParams parameters = new();
-
-var betaUserProfile = await client.Beta.UserProfiles.Create(parameters);
-
-Console.WriteLine(betaUserProfile);
-```
-
-## List
-
-`UserProfileListPageResponse Beta.UserProfiles.List(UserProfileListParams?parameters, CancellationTokencancellationToken = default)`
-
-**get** `/v1/user_profiles`
-
-List User Profiles
-
-### Parameters
-
-- `UserProfileListParams parameters`
-
-  - `Int limit`
-
-    Query param: Query parameter for limit
-
-  - `Order order`
-
-    Query param: Query parameter for order
-
-    - `"asc"Asc`
-
-    - `"desc"Desc`
-
-  - `string page`
-
-    Query param: Query parameter for page
-
-  - `IReadOnlyList<AnthropicBeta> betas`
-
-    Header param: Optional header to specify the beta version(s) you want to use.
-
-    - `"message-batches-2024-09-24"MessageBatches2024_09_24`
-
-    - `"prompt-caching-2024-07-31"PromptCaching2024_07_31`
-
-    - `"computer-use-2024-10-22"ComputerUse2024_10_22`
-
-    - `"computer-use-2025-01-24"ComputerUse2025_01_24`
-
-    - `"pdfs-2024-09-25"Pdfs2024_09_25`
-
-    - `"token-counting-2024-11-01"TokenCounting2024_11_01`
-
-    - `"token-efficient-tools-2025-02-19"TokenEfficientTools2025_02_19`
-
-    - `"output-128k-2025-02-19"Output128k2025_02_19`
-
-    - `"files-api-2025-04-14"FilesApi2025_04_14`
-
-    - `"mcp-client-2025-04-04"McpClient2025_04_04`
-
-    - `"mcp-client-2025-11-20"McpClient2025_11_20`
-
-    - `"dev-full-thinking-2025-05-14"DevFullThinking2025_05_14`
-
-    - `"interleaved-thinking-2025-05-14"InterleavedThinking2025_05_14`
-
-    - `"code-execution-2025-05-22"CodeExecution2025_05_22`
-
-    - `"extended-cache-ttl-2025-04-11"ExtendedCacheTtl2025_04_11`
-
-    - `"context-1m-2025-08-07"Context1m2025_08_07`
-
-    - `"context-management-2025-06-27"ContextManagement2025_06_27`
-
-    - `"model-context-window-exceeded-2025-08-26"ModelContextWindowExceeded2025_08_26`
-
-    - `"skills-2025-10-02"Skills2025_10_02`
-
-    - `"fast-mode-2026-02-01"FastMode2026_02_01`
-
-    - `"output-300k-2026-03-24"Output300k2026_03_24`
-
-    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
-
-    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
-
-### Returns
-
-- `class UserProfileListPageResponse:`
-
-  - `required IReadOnlyList<BetaUserProfile> Data`
-
-    User profiles on this page.
-
-    - `required string ID`
-
-      Unique identifier for this user profile, prefixed `uprof_`.
-
-    - `required DateTimeOffset CreatedAt`
-
-      A timestamp in RFC 3339 format
-
-    - `required IReadOnlyDictionary<string, string> Metadata`
-
-      Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
-
-    - `required IReadOnlyDictionary<string, BetaUserProfileTrustGrant> TrustGrants`
-
-      Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
-
-      - `required Status Status`
-
-        Status of the trust grant.
-
-        - `"active"Active`
-
-        - `"pending"Pending`
-
-        - `"rejected"Rejected`
-
-    - `required Type Type`
-
-      Object type. Always `user_profile`.
-
-      - `"user_profile"UserProfile`
-
-    - `required DateTimeOffset UpdatedAt`
-
-      A timestamp in RFC 3339 format
-
-    - `string? ExternalID`
-
-      Platform's own identifier for this user. Not enforced unique.
-
-  - `string? NextPage`
-
-    Cursor for the next page, or `null` when there are no more results.
-
-### Example
-
-```csharp
-UserProfileListParams parameters = new();
-
-var page = await client.Beta.UserProfiles.List(parameters);
-await foreach (var item in page.Paginate())
-{
-    Console.WriteLine(item);
-}
-```
-
-## Retrieve
-
-`BetaUserProfile Beta.UserProfiles.Retrieve(UserProfileRetrieveParamsparameters, CancellationTokencancellationToken = default)`
-
-**get** `/v1/user_profiles/{user_profile_id}`
-
-Get User Profile
-
-### Parameters
-
-- `UserProfileRetrieveParams parameters`
-
-  - `required string userProfileID`
-
-    Path parameter user_profile_id
-
-  - `IReadOnlyList<AnthropicBeta> betas`
-
-    Optional header to specify the beta version(s) you want to use.
-
-    - `"message-batches-2024-09-24"MessageBatches2024_09_24`
-
-    - `"prompt-caching-2024-07-31"PromptCaching2024_07_31`
-
-    - `"computer-use-2024-10-22"ComputerUse2024_10_22`
-
-    - `"computer-use-2025-01-24"ComputerUse2025_01_24`
-
-    - `"pdfs-2024-09-25"Pdfs2024_09_25`
-
-    - `"token-counting-2024-11-01"TokenCounting2024_11_01`
-
-    - `"token-efficient-tools-2025-02-19"TokenEfficientTools2025_02_19`
-
-    - `"output-128k-2025-02-19"Output128k2025_02_19`
-
-    - `"files-api-2025-04-14"FilesApi2025_04_14`
-
-    - `"mcp-client-2025-04-04"McpClient2025_04_04`
-
-    - `"mcp-client-2025-11-20"McpClient2025_11_20`
-
-    - `"dev-full-thinking-2025-05-14"DevFullThinking2025_05_14`
-
-    - `"interleaved-thinking-2025-05-14"InterleavedThinking2025_05_14`
-
-    - `"code-execution-2025-05-22"CodeExecution2025_05_22`
-
-    - `"extended-cache-ttl-2025-04-11"ExtendedCacheTtl2025_04_11`
-
-    - `"context-1m-2025-08-07"Context1m2025_08_07`
-
-    - `"context-management-2025-06-27"ContextManagement2025_06_27`
-
-    - `"model-context-window-exceeded-2025-08-26"ModelContextWindowExceeded2025_08_26`
-
-    - `"skills-2025-10-02"Skills2025_10_02`
-
-    - `"fast-mode-2026-02-01"FastMode2026_02_01`
-
-    - `"output-300k-2026-03-24"Output300k2026_03_24`
-
-    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
-
-    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
-
-### Returns
-
-- `class BetaUserProfile:`
-
-  - `required string ID`
-
-    Unique identifier for this user profile, prefixed `uprof_`.
-
-  - `required DateTimeOffset CreatedAt`
-
-    A timestamp in RFC 3339 format
-
-  - `required IReadOnlyDictionary<string, string> Metadata`
-
-    Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
-
-  - `required IReadOnlyDictionary<string, BetaUserProfileTrustGrant> TrustGrants`
-
-    Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
-
-    - `required Status Status`
-
-      Status of the trust grant.
-
-      - `"active"Active`
-
-      - `"pending"Pending`
-
-      - `"rejected"Rejected`
-
-  - `required Type Type`
-
-    Object type. Always `user_profile`.
-
-    - `"user_profile"UserProfile`
-
-  - `required DateTimeOffset UpdatedAt`
-
-    A timestamp in RFC 3339 format
-
-  - `string? ExternalID`
-
-    Platform's own identifier for this user. Not enforced unique.
-
-### Example
-
-```csharp
-UserProfileRetrieveParams parameters = new()
-{
-    UserProfileID = "uprof_011CZkZCu8hGbp5mYRQgUmz9"
-};
-
-var betaUserProfile = await client.Beta.UserProfiles.Retrieve(parameters);
-
-Console.WriteLine(betaUserProfile);
-```
-
-## Update
-
-`BetaUserProfile Beta.UserProfiles.Update(UserProfileUpdateParamsparameters, CancellationTokencancellationToken = default)`
-
-**post** `/v1/user_profiles/{user_profile_id}`
-
-Update User Profile
-
-### Parameters
-
-- `UserProfileUpdateParams parameters`
-
-  - `required string userProfileID`
-
-    Path param: Path parameter user_profile_id
-
-  - `string? externalID`
-
-    Body param: If present, replaces the stored external_id. Omit to leave unchanged. Maximum 255 characters.
-
-  - `IReadOnlyDictionary<string, string> metadata`
-
-    Body param: Key-value pairs to merge into the stored metadata. Keys provided overwrite existing values. To remove a key, set its value to an empty string. Keys not provided are left unchanged. Maximum 16 keys, with keys up to 64 characters and values up to 512 characters.
-
-  - `IReadOnlyList<AnthropicBeta> betas`
-
-    Header param: Optional header to specify the beta version(s) you want to use.
-
-    - `"message-batches-2024-09-24"MessageBatches2024_09_24`
-
-    - `"prompt-caching-2024-07-31"PromptCaching2024_07_31`
-
-    - `"computer-use-2024-10-22"ComputerUse2024_10_22`
-
-    - `"computer-use-2025-01-24"ComputerUse2025_01_24`
-
-    - `"pdfs-2024-09-25"Pdfs2024_09_25`
-
-    - `"token-counting-2024-11-01"TokenCounting2024_11_01`
-
-    - `"token-efficient-tools-2025-02-19"TokenEfficientTools2025_02_19`
-
-    - `"output-128k-2025-02-19"Output128k2025_02_19`
-
-    - `"files-api-2025-04-14"FilesApi2025_04_14`
-
-    - `"mcp-client-2025-04-04"McpClient2025_04_04`
-
-    - `"mcp-client-2025-11-20"McpClient2025_11_20`
-
-    - `"dev-full-thinking-2025-05-14"DevFullThinking2025_05_14`
-
-    - `"interleaved-thinking-2025-05-14"InterleavedThinking2025_05_14`
-
-    - `"code-execution-2025-05-22"CodeExecution2025_05_22`
-
-    - `"extended-cache-ttl-2025-04-11"ExtendedCacheTtl2025_04_11`
-
-    - `"context-1m-2025-08-07"Context1m2025_08_07`
-
-    - `"context-management-2025-06-27"ContextManagement2025_06_27`
-
-    - `"model-context-window-exceeded-2025-08-26"ModelContextWindowExceeded2025_08_26`
-
-    - `"skills-2025-10-02"Skills2025_10_02`
-
-    - `"fast-mode-2026-02-01"FastMode2026_02_01`
-
-    - `"output-300k-2026-03-24"Output300k2026_03_24`
-
-    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
-
-    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
-
-### Returns
-
-- `class BetaUserProfile:`
-
-  - `required string ID`
-
-    Unique identifier for this user profile, prefixed `uprof_`.
-
-  - `required DateTimeOffset CreatedAt`
-
-    A timestamp in RFC 3339 format
-
-  - `required IReadOnlyDictionary<string, string> Metadata`
-
-    Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
-
-  - `required IReadOnlyDictionary<string, BetaUserProfileTrustGrant> TrustGrants`
-
-    Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
-
-    - `required Status Status`
-
-      Status of the trust grant.
-
-      - `"active"Active`
-
-      - `"pending"Pending`
-
-      - `"rejected"Rejected`
-
-  - `required Type Type`
-
-    Object type. Always `user_profile`.
-
-    - `"user_profile"UserProfile`
-
-  - `required DateTimeOffset UpdatedAt`
-
-    A timestamp in RFC 3339 format
-
-  - `string? ExternalID`
-
-    Platform's own identifier for this user. Not enforced unique.
-
-### Example
-
-```csharp
-UserProfileUpdateParams parameters = new()
-{
-    UserProfileID = "uprof_011CZkZCu8hGbp5mYRQgUmz9"
-};
-
-var betaUserProfile = await client.Beta.UserProfiles.Update(parameters);
-
-Console.WriteLine(betaUserProfile);
-```
-
-## Create Enrollment URL
-
-`BetaUserProfileEnrollmentUrl Beta.UserProfiles.CreateEnrollmentUrl(UserProfileCreateEnrollmentUrlParamsparameters, CancellationTokencancellationToken = default)`
-
-**post** `/v1/user_profiles/{user_profile_id}/enrollment_url`
-
-Create Enrollment URL
-
-### Parameters
-
-- `UserProfileCreateEnrollmentUrlParams parameters`
-
-  - `required string userProfileID`
-
-    Path parameter user_profile_id
-
-  - `IReadOnlyList<AnthropicBeta> betas`
-
-    Optional header to specify the beta version(s) you want to use.
-
-    - `"message-batches-2024-09-24"MessageBatches2024_09_24`
-
-    - `"prompt-caching-2024-07-31"PromptCaching2024_07_31`
-
-    - `"computer-use-2024-10-22"ComputerUse2024_10_22`
-
-    - `"computer-use-2025-01-24"ComputerUse2025_01_24`
-
-    - `"pdfs-2024-09-25"Pdfs2024_09_25`
-
-    - `"token-counting-2024-11-01"TokenCounting2024_11_01`
-
-    - `"token-efficient-tools-2025-02-19"TokenEfficientTools2025_02_19`
-
-    - `"output-128k-2025-02-19"Output128k2025_02_19`
-
-    - `"files-api-2025-04-14"FilesApi2025_04_14`
-
-    - `"mcp-client-2025-04-04"McpClient2025_04_04`
-
-    - `"mcp-client-2025-11-20"McpClient2025_11_20`
-
-    - `"dev-full-thinking-2025-05-14"DevFullThinking2025_05_14`
-
-    - `"interleaved-thinking-2025-05-14"InterleavedThinking2025_05_14`
-
-    - `"code-execution-2025-05-22"CodeExecution2025_05_22`
-
-    - `"extended-cache-ttl-2025-04-11"ExtendedCacheTtl2025_04_11`
-
-    - `"context-1m-2025-08-07"Context1m2025_08_07`
-
-    - `"context-management-2025-06-27"ContextManagement2025_06_27`
-
-    - `"model-context-window-exceeded-2025-08-26"ModelContextWindowExceeded2025_08_26`
-
-    - `"skills-2025-10-02"Skills2025_10_02`
-
-    - `"fast-mode-2026-02-01"FastMode2026_02_01`
-
-    - `"output-300k-2026-03-24"Output300k2026_03_24`
-
-    - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
-
-    - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
-
-### Returns
-
-- `class BetaUserProfileEnrollmentUrl:`
-
-  - `required DateTimeOffset ExpiresAt`
-
-    A timestamp in RFC 3339 format
-
-  - `required Type Type`
-
-    Object type. Always `enrollment_url`.
-
-    - `"enrollment_url"EnrollmentUrl`
-
-  - `required string Url`
-
-    Enrollment URL to send to the end user. Valid until `expires_at`.
-
-### Example
-
-```csharp
-UserProfileCreateEnrollmentUrlParams parameters = new()
-{
-    UserProfileID = "uprof_011CZkZCu8hGbp5mYRQgUmz9"
-};
-
-var betaUserProfileEnrollmentUrl = await client.Beta.UserProfiles.CreateEnrollmentUrl(parameters);
-
-Console.WriteLine(betaUserProfileEnrollmentUrl);
-```
-
-## Domain Types
-
-### Beta User Profile
-
-- `class BetaUserProfile:`
-
-  - `required string ID`
-
-    Unique identifier for this user profile, prefixed `uprof_`.
-
-  - `required DateTimeOffset CreatedAt`
-
-    A timestamp in RFC 3339 format
-
-  - `required IReadOnlyDictionary<string, string> Metadata`
-
-    Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
-
-  - `required IReadOnlyDictionary<string, BetaUserProfileTrustGrant> TrustGrants`
-
-    Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
-
-    - `required Status Status`
-
-      Status of the trust grant.
-
-      - `"active"Active`
-
-      - `"pending"Pending`
-
-      - `"rejected"Rejected`
-
-  - `required Type Type`
-
-    Object type. Always `user_profile`.
-
-    - `"user_profile"UserProfile`
-
-  - `required DateTimeOffset UpdatedAt`
-
-    A timestamp in RFC 3339 format
-
-  - `string? ExternalID`
-
-    Platform's own identifier for this user. Not enforced unique.
-
-### Beta User Profile Enrollment URL
-
-- `class BetaUserProfileEnrollmentUrl:`
-
-  - `required DateTimeOffset ExpiresAt`
-
-    A timestamp in RFC 3339 format
-
-  - `required Type Type`
-
-    Object type. Always `enrollment_url`.
-
-    - `"enrollment_url"EnrollmentUrl`
-
-  - `required string Url`
-
-    Enrollment URL to send to the end user. Valid until `expires_at`.
-
-### Beta User Profile Trust Grant
-
-- `class BetaUserProfileTrustGrant:`
-
-  - `required Status Status`
-
-    Status of the trust grant.
-
-    - `"active"Active`
-
-    - `"pending"Pending`
-
-    - `"rejected"Rejected`

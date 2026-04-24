@@ -2657,10 +2657,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
               - `"1h"`
 
-          - `encrypted_content?: string | null`
-
-            Opaque metadata from prior compaction, to be round-tripped verbatim
-
     - `role: "user" | "assistant"`
 
       - `"user"`
@@ -2914,7 +2910,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
     Body param: Configuration options for the model's output, such as the output format.
 
-    - `effort?: "low" | "medium" | "high" | 2 more | null`
+    - `effort?: "low" | "medium" | "high" | "max" | null`
 
       All possible effort levels.
 
@@ -2923,8 +2919,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
       - `"medium"`
 
       - `"high"`
-
-      - `"xhigh"`
 
       - `"max"`
 
@@ -2939,24 +2933,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
       - `type: "json_schema"`
 
         - `"json_schema"`
-
-    - `task_budget?: BetaTokenTaskBudget | null`
-
-      User-configurable total token budget across contexts.
-
-      - `total: number`
-
-        Total token budget across all contexts in the session.
-
-      - `type: "tokens"`
-
-        The budget type. Currently only 'tokens' is supported.
-
-        - `"tokens"`
-
-      - `remaining?: number | null`
-
-        Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
   - `output_format?: BetaJSONOutputFormat | null`
 
@@ -4842,7 +4818,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 19 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -4887,8 +4863,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
       - `"output-300k-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
-
-      - `"user-profiles-2026-03-24"`
 
 ### Returns
 

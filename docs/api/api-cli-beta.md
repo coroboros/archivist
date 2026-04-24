@@ -304,7 +304,7 @@ The Models API response can be used to determine which models are available for 
 
           Whether this capability is supported by the model.
 
-      - `effort: object { high, low, max, 3 more }`
+      - `effort: object { high, low, max, 2 more }`
 
         Effort (reasoning_effort) support and available levels.
 
@@ -343,14 +343,6 @@ The Models API response can be used to determine which models are available for 
         - `supported: boolean`
 
           Whether this capability is supported by the model.
-
-        - `xhigh: object { supported }`
-
-          Indicates whether a capability is supported.
-
-          - `supported: boolean`
-
-            Whether this capability is supported by the model.
 
       - `image_input: object { supported }`
 
@@ -533,7 +525,7 @@ The Models API response can be used to determine information about a specific mo
 
         Whether this capability is supported by the model.
 
-    - `effort: object { high, low, max, 3 more }`
+    - `effort: object { high, low, max, 2 more }`
 
       Effort (reasoning_effort) support and available levels.
 
@@ -572,14 +564,6 @@ The Models API response can be used to determine information about a specific mo
       - `supported: boolean`
 
         Whether this capability is supported by the model.
-
-      - `xhigh: object { supported }`
-
-        Indicates whether a capability is supported.
-
-        - `supported: boolean`
-
-          Whether this capability is supported by the model.
 
     - `image_input: object { supported }`
 
@@ -711,7 +695,7 @@ ant beta:models retrieve \
 
 ### Beta Effort Capability
 
-- `beta_effort_capability: object { high, low, max, 3 more }`
+- `beta_effort_capability: object { high, low, max, 2 more }`
 
   Effort (reasoning_effort) capability details.
 
@@ -750,14 +734,6 @@ ant beta:models retrieve \
   - `supported: boolean`
 
     Whether this capability is supported by the model.
-
-  - `xhigh: object { supported }`
-
-    Indicates whether a capability is supported.
-
-    - `supported: boolean`
-
-      Whether this capability is supported by the model.
 
 ### Beta Model Capabilities
 
@@ -821,7 +797,7 @@ ant beta:models retrieve \
 
       Whether this capability is supported by the model.
 
-  - `effort: object { high, low, max, 3 more }`
+  - `effort: object { high, low, max, 2 more }`
 
     Effort (reasoning_effort) support and available levels.
 
@@ -860,14 +836,6 @@ ant beta:models retrieve \
     - `supported: boolean`
 
       Whether this capability is supported by the model.
-
-    - `xhigh: object { supported }`
-
-      Indicates whether a capability is supported.
-
-      - `supported: boolean`
-
-        Whether this capability is supported by the model.
 
   - `image_input: object { supported }`
 
@@ -989,7 +957,7 @@ ant beta:models retrieve \
 
         Whether this capability is supported by the model.
 
-    - `effort: object { high, low, max, 3 more }`
+    - `effort: object { high, low, max, 2 more }`
 
       Effort (reasoning_effort) support and available levels.
 
@@ -1028,14 +996,6 @@ ant beta:models retrieve \
       - `supported: boolean`
 
         Whether this capability is supported by the model.
-
-      - `xhigh: object { supported }`
-
-        Indicates whether a capability is supported.
-
-        - `supported: boolean`
-
-          Whether this capability is supported by the model.
 
     - `image_input: object { supported }`
 
@@ -1270,7 +1230,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
   Body param: An object describing metadata about the request.
 
-- `--output-config: optional object { effort, format, task_budget }`
+- `--output-config: optional object { effort, format }`
 
   Body param: Configuration options for the model's output, such as the output format.
 
@@ -1394,19 +1354,15 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
   Used to remove "long tail" low probability responses. [Learn more technical details here](https://towardsdatascience.com/how-to-sample-from-language-models-682bceb97277).
 
-  Recommended for advanced use cases only. You usually only need to use `temperature`.
+  Recommended for advanced use cases only.
 
 - `--top-p: optional number`
 
   Body param: Use nucleus sampling.
 
-  In nucleus sampling, we compute the cumulative distribution over all the options for each subsequent token in decreasing probability order and cut it off once it reaches a particular probability specified by `top_p`. You should either alter `temperature` or `top_p`, but not both.
+  In nucleus sampling, we compute the cumulative distribution over all the options for each subsequent token in decreasing probability order and cut it off once it reaches a particular probability specified by `top_p`.
 
-  Recommended for advanced use cases only. You usually only need to use `temperature`.
-
-- `--user-profile-id: optional string`
-
-  Body param: The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
+  Recommended for advanced use cases only.
 
 - `--beta: optional array of AnthropicBeta`
 
@@ -2191,7 +2147,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `type: "container_upload"`
 
-    - `beta_compaction_block: object { content, encrypted_content, type }`
+    - `beta_compaction_block: object { content, type }`
 
       A compaction block returned when autocompact is triggered.
 
@@ -2202,10 +2158,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
       - `content: string`
 
         Summary of compacted content, or null if compaction failed
-
-      - `encrypted_content: string`
-
-        Opaque metadata from prior compaction, to be round-tripped verbatim
 
       - `type: "compaction"`
 
@@ -2753,7 +2705,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
   Body param: MCP servers to be utilized in this request
 
-- `--output-config: optional object { effort, format, task_budget }`
+- `--output-config: optional object { effort, format }`
 
   Body param: Configuration options for the model's output, such as the output format.
 
@@ -4467,7 +4419,7 @@ ant beta:messages count-tokens \
 
 ### Beta Compaction Block
 
-- `beta_compaction_block: object { content, encrypted_content, type }`
+- `beta_compaction_block: object { content, type }`
 
   A compaction block returned when autocompact is triggered.
 
@@ -4479,15 +4431,11 @@ ant beta:messages count-tokens \
 
     Summary of compacted content, or null if compaction failed
 
-  - `encrypted_content: string`
-
-    Opaque metadata from prior compaction, to be round-tripped verbatim
-
   - `type: "compaction"`
 
 ### Beta Compaction Block Param
 
-- `beta_compaction_block_param: object { content, type, cache_control, encrypted_content }`
+- `beta_compaction_block_param: object { content, type, cache_control }`
 
   A compaction block containing summary of previous context.
 
@@ -4524,19 +4472,11 @@ ant beta:messages count-tokens \
 
       - `"1h"`
 
-  - `encrypted_content: optional string`
-
-    Opaque metadata from prior compaction, to be round-tripped verbatim
-
 ### Beta Compaction Content Block Delta
 
-- `beta_compaction_content_block_delta: object { content, encrypted_content, type }`
+- `beta_compaction_content_block_delta: object { content, type }`
 
   - `content: string`
-
-  - `encrypted_content: string`
-
-    Opaque metadata from prior compaction, to be round-tripped verbatim
 
   - `type: "compaction_delta"`
 
@@ -5398,7 +5338,7 @@ ant beta:messages count-tokens \
 
     - `type: "container_upload"`
 
-  - `beta_compaction_block: object { content, encrypted_content, type }`
+  - `beta_compaction_block: object { content, type }`
 
     A compaction block returned when autocompact is triggered.
 
@@ -5409,10 +5349,6 @@ ant beta:messages count-tokens \
     - `content: string`
 
       Summary of compacted content, or null if compaction failed
-
-    - `encrypted_content: string`
-
-      Opaque metadata from prior compaction, to be round-tripped verbatim
 
     - `type: "compaction"`
 
@@ -7604,7 +7540,7 @@ ant beta:messages count-tokens \
 
         - `"1h"`
 
-  - `beta_compaction_block_param: object { content, type, cache_control, encrypted_content }`
+  - `beta_compaction_block_param: object { content, type, cache_control }`
 
     A compaction block containing summary of previous context.
 
@@ -7640,10 +7576,6 @@ ant beta:messages count-tokens \
         - `"5m"`
 
         - `"1h"`
-
-    - `encrypted_content: optional string`
-
-      Opaque metadata from prior compaction, to be round-tripped verbatim
 
 ### Beta Content Block Source
 
@@ -9745,7 +9677,7 @@ ant beta:messages count-tokens \
 
       - `type: "container_upload"`
 
-    - `beta_compaction_block: object { content, encrypted_content, type }`
+    - `beta_compaction_block: object { content, type }`
 
       A compaction block returned when autocompact is triggered.
 
@@ -9756,10 +9688,6 @@ ant beta:messages count-tokens \
       - `content: string`
 
         Summary of compacted content, or null if compaction failed
-
-      - `encrypted_content: string`
-
-        Opaque metadata from prior compaction, to be round-tripped verbatim
 
       - `type: "compaction"`
 
@@ -12662,7 +12590,7 @@ ant beta:messages count-tokens \
 
           - `"1h"`
 
-    - `beta_compaction_block_param: object { content, type, cache_control, encrypted_content }`
+    - `beta_compaction_block_param: object { content, type, cache_control }`
 
       A compaction block containing summary of previous context.
 
@@ -12699,10 +12627,6 @@ ant beta:messages count-tokens \
 
           - `"1h"`
 
-      - `encrypted_content: optional string`
-
-        Opaque metadata from prior compaction, to be round-tripped verbatim
-
   - `role: "user" or "assistant"`
 
     - `"user"`
@@ -12737,9 +12661,9 @@ ant beta:messages count-tokens \
 
 ### Beta Output Config
 
-- `beta_output_config: object { effort, format, task_budget }`
+- `beta_output_config: object { effort, format }`
 
-  - `effort: optional "low" or "medium" or "high" or 2 more`
+  - `effort: optional "low" or "medium" or "high" or "max"`
 
     All possible effort levels.
 
@@ -12748,8 +12672,6 @@ ant beta:messages count-tokens \
     - `"medium"`
 
     - `"high"`
-
-    - `"xhigh"`
 
     - `"max"`
 
@@ -12762,22 +12684,6 @@ ant beta:messages count-tokens \
       The JSON schema of the format
 
     - `type: "json_schema"`
-
-  - `task_budget: optional object { total, type, remaining }`
-
-    User-configurable total token budget across contexts.
-
-    - `total: number`
-
-      Total token budget across all contexts in the session.
-
-    - `type: "tokens"`
-
-      The budget type. Currently only 'tokens' is supported.
-
-    - `remaining: optional number`
-
-      Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
 ### Beta Plain Text Source
 
@@ -12899,13 +12805,9 @@ ant beta:messages count-tokens \
 
     - `type: "signature_delta"`
 
-  - `beta_compaction_content_block_delta: object { content, encrypted_content, type }`
+  - `beta_compaction_content_block_delta: object { content, type }`
 
     - `content: string`
-
-    - `encrypted_content: string`
-
-      Opaque metadata from prior compaction, to be round-tripped verbatim
 
     - `type: "compaction_delta"`
 
@@ -13021,13 +12923,9 @@ ant beta:messages count-tokens \
 
       - `type: "signature_delta"`
 
-    - `beta_compaction_content_block_delta: object { content, encrypted_content, type }`
+    - `beta_compaction_content_block_delta: object { content, type }`
 
       - `content: string`
-
-      - `encrypted_content: string`
-
-        Opaque metadata from prior compaction, to be round-tripped verbatim
 
       - `type: "compaction_delta"`
 
@@ -13751,7 +13649,7 @@ ant beta:messages count-tokens \
 
       - `type: "container_upload"`
 
-    - `beta_compaction_block: object { content, encrypted_content, type }`
+    - `beta_compaction_block: object { content, type }`
 
       A compaction block returned when autocompact is triggered.
 
@@ -13762,10 +13660,6 @@ ant beta:messages count-tokens \
       - `content: string`
 
         Summary of compacted content, or null if compaction failed
-
-      - `encrypted_content: string`
-
-        Opaque metadata from prior compaction, to be round-tripped verbatim
 
       - `type: "compaction"`
 
@@ -14912,7 +14806,7 @@ ant beta:messages count-tokens \
 
         - `type: "container_upload"`
 
-      - `beta_compaction_block: object { content, encrypted_content, type }`
+      - `beta_compaction_block: object { content, type }`
 
         A compaction block returned when autocompact is triggered.
 
@@ -14923,10 +14817,6 @@ ant beta:messages count-tokens \
         - `content: string`
 
           Summary of compacted content, or null if compaction failed
-
-        - `encrypted_content: string`
-
-          Opaque metadata from prior compaction, to be round-tripped verbatim
 
         - `type: "compaction"`
 
@@ -16170,7 +16060,7 @@ ant beta:messages count-tokens \
 
           - `type: "container_upload"`
 
-        - `beta_compaction_block: object { content, encrypted_content, type }`
+        - `beta_compaction_block: object { content, type }`
 
           A compaction block returned when autocompact is triggered.
 
@@ -16181,10 +16071,6 @@ ant beta:messages count-tokens \
           - `content: string`
 
             Summary of compacted content, or null if compaction failed
-
-          - `encrypted_content: string`
-
-            Opaque metadata from prior compaction, to be round-tripped verbatim
 
           - `type: "compaction"`
 
@@ -17705,7 +17591,7 @@ ant beta:messages count-tokens \
 
         - `type: "container_upload"`
 
-      - `beta_compaction_block: object { content, encrypted_content, type }`
+      - `beta_compaction_block: object { content, type }`
 
         A compaction block returned when autocompact is triggered.
 
@@ -17716,10 +17602,6 @@ ant beta:messages count-tokens \
         - `content: string`
 
           Summary of compacted content, or null if compaction failed
-
-        - `encrypted_content: string`
-
-          Opaque metadata from prior compaction, to be round-tripped verbatim
 
         - `type: "compaction"`
 
@@ -17837,13 +17719,9 @@ ant beta:messages count-tokens \
 
         - `type: "signature_delta"`
 
-      - `beta_compaction_content_block_delta: object { content, encrypted_content, type }`
+      - `beta_compaction_content_block_delta: object { content, type }`
 
         - `content: string`
-
-        - `encrypted_content: string`
-
-          Opaque metadata from prior compaction, to be round-tripped verbatim
 
         - `type: "compaction_delta"`
 
@@ -19412,24 +19290,6 @@ ant beta:messages count-tokens \
   - `type: "thinking_turns"`
 
   - `value: number`
-
-### Beta Token Task Budget
-
-- `beta_token_task_budget: object { total, type, remaining }`
-
-  User-configurable total token budget across contexts.
-
-  - `total: number`
-
-    Total token budget across all contexts in the session.
-
-  - `type: "tokens"`
-
-    The budget type. Currently only 'tokens' is supported.
-
-  - `remaining: optional number`
-
-    Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
 ### Beta Tool
 
@@ -25673,7 +25533,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `type: "container_upload"`
 
-          - `beta_compaction_block: object { content, encrypted_content, type }`
+          - `beta_compaction_block: object { content, type }`
 
             A compaction block returned when autocompact is triggered.
 
@@ -25684,10 +25544,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `content: string`
 
               Summary of compacted content, or null if compaction failed
-
-            - `encrypted_content: string`
-
-              Opaque metadata from prior compaction, to be round-tripped verbatim
 
             - `type: "compaction"`
 
@@ -27205,7 +27061,7 @@ ant beta:messages:batches results \
 
             - `type: "container_upload"`
 
-          - `beta_compaction_block: object { content, encrypted_content, type }`
+          - `beta_compaction_block: object { content, type }`
 
             A compaction block returned when autocompact is triggered.
 
@@ -27216,10 +27072,6 @@ ant beta:messages:batches results \
             - `content: string`
 
               Summary of compacted content, or null if compaction failed
-
-            - `encrypted_content: string`
-
-              Opaque metadata from prior compaction, to be round-tripped verbatim
 
             - `type: "compaction"`
 
@@ -28567,7 +28419,7 @@ ant beta:messages:batches results \
 
           - `type: "container_upload"`
 
-        - `beta_compaction_block: object { content, encrypted_content, type }`
+        - `beta_compaction_block: object { content, type }`
 
           A compaction block returned when autocompact is triggered.
 
@@ -28578,10 +28430,6 @@ ant beta:messages:batches results \
           - `content: string`
 
             Summary of compacted content, or null if compaction failed
-
-          - `encrypted_content: string`
-
-            Opaque metadata from prior compaction, to be round-tripped verbatim
 
           - `type: "compaction"`
 
@@ -29891,7 +29739,7 @@ ant beta:messages:batches results \
 
         - `type: "container_upload"`
 
-      - `beta_compaction_block: object { content, encrypted_content, type }`
+      - `beta_compaction_block: object { content, type }`
 
         A compaction block returned when autocompact is triggered.
 
@@ -29902,10 +29750,6 @@ ant beta:messages:batches results \
         - `content: string`
 
           Summary of compacted content, or null if compaction failed
-
-        - `encrypted_content: string`
-
-          Opaque metadata from prior compaction, to be round-tripped verbatim
 
         - `type: "compaction"`
 
@@ -34842,7 +34686,7 @@ Create Session
 
   Body param: Arbitrary key-value metadata attached to the session. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
-- `--resource: optional array of BetaManagedAgentsGitHubRepositoryResourceParams or BetaManagedAgentsFileResourceParams`
+- `--resource: optional array of BetaManagedAgentsGitHubRepositoryResourceParams or BetaManagedAgentsFileResourceParams or BetaManagedAgentsMemoryStoreResourceParam`
 
   Body param: Resources (e.g. repositories, files) to mount into the session's container.
 
@@ -35217,6 +35061,42 @@ Create Session
       - `updated_at: string`
 
         A timestamp in RFC 3339 format
+
+    - `beta_managed_agents_memory_store_resource: object { memory_store_id, type, access, 4 more }`
+
+      A memory store attached to an agent session.
+
+      - `memory_store_id: string`
+
+        The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+      - `type: "memory_store"`
+
+        - `"memory_store"`
+
+      - `access: optional "read_write" or "read_only"`
+
+        Access mode for an attached memory store.
+
+        - `"read_write"`
+
+        - `"read_only"`
+
+      - `description: optional string`
+
+        Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+      - `instructions: optional string`
+
+        Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+      - `mount_path: optional string`
+
+        Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+      - `name: optional string`
+
+        Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
   - `stats: object { active_seconds, duration_seconds }`
 
@@ -35711,6 +35591,42 @@ List Sessions
 
           A timestamp in RFC 3339 format
 
+      - `beta_managed_agents_memory_store_resource: object { memory_store_id, type, access, 4 more }`
+
+        A memory store attached to an agent session.
+
+        - `memory_store_id: string`
+
+          The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+        - `type: "memory_store"`
+
+          - `"memory_store"`
+
+        - `access: optional "read_write" or "read_only"`
+
+          Access mode for an attached memory store.
+
+          - `"read_write"`
+
+          - `"read_only"`
+
+        - `description: optional string`
+
+          Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+        - `instructions: optional string`
+
+          Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+        - `mount_path: optional string`
+
+          Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+        - `name: optional string`
+
+          Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
+
     - `stats: object { active_seconds, duration_seconds }`
 
       Timing statistics for a session.
@@ -36165,6 +36081,42 @@ Get Session
       - `updated_at: string`
 
         A timestamp in RFC 3339 format
+
+    - `beta_managed_agents_memory_store_resource: object { memory_store_id, type, access, 4 more }`
+
+      A memory store attached to an agent session.
+
+      - `memory_store_id: string`
+
+        The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+      - `type: "memory_store"`
+
+        - `"memory_store"`
+
+      - `access: optional "read_write" or "read_only"`
+
+        Access mode for an attached memory store.
+
+        - `"read_write"`
+
+        - `"read_only"`
+
+      - `description: optional string`
+
+        Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+      - `instructions: optional string`
+
+        Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+      - `mount_path: optional string`
+
+        Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+      - `name: optional string`
+
+        Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
   - `stats: object { active_seconds, duration_seconds }`
 
@@ -36629,6 +36581,42 @@ Update Session
       - `updated_at: string`
 
         A timestamp in RFC 3339 format
+
+    - `beta_managed_agents_memory_store_resource: object { memory_store_id, type, access, 4 more }`
+
+      A memory store attached to an agent session.
+
+      - `memory_store_id: string`
+
+        The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+      - `type: "memory_store"`
+
+        - `"memory_store"`
+
+      - `access: optional "read_write" or "read_only"`
+
+        Access mode for an attached memory store.
+
+        - `"read_write"`
+
+        - `"read_only"`
+
+      - `description: optional string`
+
+        Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+      - `instructions: optional string`
+
+        Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+      - `mount_path: optional string`
+
+        Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+      - `name: optional string`
+
+        Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
   - `stats: object { active_seconds, duration_seconds }`
 
@@ -37120,6 +37108,42 @@ Archive Session
 
         A timestamp in RFC 3339 format
 
+    - `beta_managed_agents_memory_store_resource: object { memory_store_id, type, access, 4 more }`
+
+      A memory store attached to an agent session.
+
+      - `memory_store_id: string`
+
+        The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+      - `type: "memory_store"`
+
+        - `"memory_store"`
+
+      - `access: optional "read_write" or "read_only"`
+
+        Access mode for an attached memory store.
+
+        - `"read_write"`
+
+        - `"read_only"`
+
+      - `description: optional string`
+
+        Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+      - `instructions: optional string`
+
+        Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+      - `mount_path: optional string`
+
+        Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+      - `name: optional string`
+
+        Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
+
   - `stats: object { active_seconds, duration_seconds }`
 
     Timing statistics for a session.
@@ -37327,6 +37351,32 @@ ant beta:sessions archive \
   - `mount_path: optional string`
 
     Mount path in the container. Defaults to `/workspace/<repo-name>`.
+
+### Beta Managed Agents Memory Store Resource Param
+
+- `beta_managed_agents_memory_store_resource_param: object { memory_store_id, type, access, instructions }`
+
+  Parameters for attaching a memory store to an agent session.
+
+  - `memory_store_id: string`
+
+    The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+  - `type: "memory_store"`
+
+    - `"memory_store"`
+
+  - `access: optional "read_write" or "read_only"`
+
+    Access mode for an attached memory store.
+
+    - `"read_write"`
+
+    - `"read_only"`
+
+  - `instructions: optional string`
+
+    Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
 ### Beta Managed Agents Session
 
@@ -37687,6 +37737,42 @@ ant beta:sessions archive \
       - `updated_at: string`
 
         A timestamp in RFC 3339 format
+
+    - `beta_managed_agents_memory_store_resource: object { memory_store_id, type, access, 4 more }`
+
+      A memory store attached to an agent session.
+
+      - `memory_store_id: string`
+
+        The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+      - `type: "memory_store"`
+
+        - `"memory_store"`
+
+      - `access: optional "read_write" or "read_only"`
+
+        Access mode for an attached memory store.
+
+        - `"read_write"`
+
+        - `"read_only"`
+
+      - `description: optional string`
+
+        Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+      - `instructions: optional string`
+
+        Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+      - `mount_path: optional string`
+
+        Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+      - `name: optional string`
+
+        Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
   - `stats: object { active_seconds, duration_seconds }`
 
@@ -47375,6 +47461,42 @@ List Session Resources
 
         A timestamp in RFC 3339 format
 
+    - `beta_managed_agents_memory_store_resource: object { memory_store_id, type, access, 4 more }`
+
+      A memory store attached to an agent session.
+
+      - `memory_store_id: string`
+
+        The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+      - `type: "memory_store"`
+
+        - `"memory_store"`
+
+      - `access: optional "read_write" or "read_only"`
+
+        Access mode for an attached memory store.
+
+        - `"read_write"`
+
+        - `"read_only"`
+
+      - `description: optional string`
+
+        Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+      - `instructions: optional string`
+
+        Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+      - `mount_path: optional string`
+
+        Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+      - `name: optional string`
+
+        Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
+
   - `next_page: optional string`
 
     Opaque cursor for the next page. Null when no more results.
@@ -47411,7 +47533,7 @@ Get Session Resource
 
 ### Returns
 
-- `BetaSessionResourceGetResponse: BetaManagedAgentsGitHubRepositoryResource or BetaManagedAgentsFileResource`
+- `BetaSessionResourceGetResponse: BetaManagedAgentsGitHubRepositoryResource or BetaManagedAgentsFileResource or BetaManagedAgentsMemoryStoreResource`
 
   The requested session resource.
 
@@ -47477,6 +47599,42 @@ Get Session Resource
 
       A timestamp in RFC 3339 format
 
+  - `beta_managed_agents_memory_store_resource: object { memory_store_id, type, access, 4 more }`
+
+    A memory store attached to an agent session.
+
+    - `memory_store_id: string`
+
+      The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+    - `type: "memory_store"`
+
+      - `"memory_store"`
+
+    - `access: optional "read_write" or "read_only"`
+
+      Access mode for an attached memory store.
+
+      - `"read_write"`
+
+      - `"read_only"`
+
+    - `description: optional string`
+
+      Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+    - `instructions: optional string`
+
+      Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+    - `mount_path: optional string`
+
+      Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+    - `name: optional string`
+
+      Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
+
 ### Example
 
 ```cli
@@ -47514,7 +47672,7 @@ Update Session Resource
 
 ### Returns
 
-- `BetaSessionResourceUpdateResponse: BetaManagedAgentsGitHubRepositoryResource or BetaManagedAgentsFileResource`
+- `BetaSessionResourceUpdateResponse: BetaManagedAgentsGitHubRepositoryResource or BetaManagedAgentsFileResource or BetaManagedAgentsMemoryStoreResource`
 
   The updated session resource.
 
@@ -47579,6 +47737,42 @@ Update Session Resource
     - `updated_at: string`
 
       A timestamp in RFC 3339 format
+
+  - `beta_managed_agents_memory_store_resource: object { memory_store_id, type, access, 4 more }`
+
+    A memory store attached to an agent session.
+
+    - `memory_store_id: string`
+
+      The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+    - `type: "memory_store"`
+
+      - `"memory_store"`
+
+    - `access: optional "read_write" or "read_only"`
+
+      Access mode for an attached memory store.
+
+      - `"read_write"`
+
+      - `"read_only"`
+
+    - `description: optional string`
+
+      Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+    - `instructions: optional string`
+
+      Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+    - `mount_path: optional string`
+
+      Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+    - `name: optional string`
+
+      Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
 ### Example
 
@@ -47713,9 +47907,49 @@ ant beta:sessions:resources delete \
 
         - `"commit"`
 
+### Beta Managed Agents Memory Store Resource
+
+- `beta_managed_agents_memory_store_resource: object { memory_store_id, type, access, 4 more }`
+
+  A memory store attached to an agent session.
+
+  - `memory_store_id: string`
+
+    The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+  - `type: "memory_store"`
+
+    - `"memory_store"`
+
+  - `access: optional "read_write" or "read_only"`
+
+    Access mode for an attached memory store.
+
+    - `"read_write"`
+
+    - `"read_only"`
+
+  - `description: optional string`
+
+    Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+  - `instructions: optional string`
+
+    Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+  - `mount_path: optional string`
+
+    Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+  - `name: optional string`
+
+    Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
+
 ### Beta Managed Agents Session Resource
 
-- `beta_managed_agents_session_resource: BetaManagedAgentsGitHubRepositoryResource or BetaManagedAgentsFileResource`
+- `beta_managed_agents_session_resource: BetaManagedAgentsGitHubRepositoryResource or BetaManagedAgentsFileResource or BetaManagedAgentsMemoryStoreResource`
+
+  A memory store attached to an agent session.
 
   - `beta_managed_agents_github_repository_resource: object { id, created_at, mount_path, 4 more }`
 
@@ -47778,6 +48012,42 @@ ant beta:sessions:resources delete \
     - `updated_at: string`
 
       A timestamp in RFC 3339 format
+
+  - `beta_managed_agents_memory_store_resource: object { memory_store_id, type, access, 4 more }`
+
+    A memory store attached to an agent session.
+
+    - `memory_store_id: string`
+
+      The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+    - `type: "memory_store"`
+
+      - `"memory_store"`
+
+    - `access: optional "read_write" or "read_only"`
+
+      Access mode for an attached memory store.
+
+      - `"read_write"`
+
+      - `"read_only"`
+
+    - `description: optional string`
+
+      Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+    - `instructions: optional string`
+
+      Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+    - `mount_path: optional string`
+
+      Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+    - `name: optional string`
+
+      Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
 # Vaults
 
@@ -49661,6 +49931,1470 @@ ant beta:vaults:credentials archive \
 
     Updated OAuth client secret.
 
+# Memory Stores
+
+## Create
+
+`$ ant beta:memory-stores create`
+
+**post** `/v1/memory_stores`
+
+CreateMemoryStore
+
+### Parameters
+
+- `--name: string`
+
+  Body param
+
+- `--description: optional string`
+
+  Body param
+
+- `--metadata: optional map[string]`
+
+  Body param
+
+- `--beta: optional array of AnthropicBeta`
+
+  Header param: Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `beta_managed_agents_memory_store: object { id, type, archived_at, 5 more }`
+
+  - `id: string`
+
+  - `type: "memory_store"`
+
+    - `"memory_store"`
+
+  - `archived_at: optional string`
+
+    A timestamp in RFC 3339 format
+
+  - `created_at: optional string`
+
+    A timestamp in RFC 3339 format
+
+  - `description: optional string`
+
+  - `metadata: optional map[string]`
+
+  - `name: optional string`
+
+  - `updated_at: optional string`
+
+    A timestamp in RFC 3339 format
+
+### Example
+
+```cli
+ant beta:memory-stores create \
+  --api-key my-anthropic-api-key \
+  --name x
+```
+
+## List
+
+`$ ant beta:memory-stores list`
+
+**get** `/v1/memory_stores`
+
+ListMemoryStores
+
+### Parameters
+
+- `--created-at-gte: optional string`
+
+  Query param: Return stores created at or after this time (inclusive).
+
+- `--created-at-lte: optional string`
+
+  Query param: Return stores created at or before this time (inclusive).
+
+- `--include-archived: optional boolean`
+
+  Query param: Query parameter for include_archived
+
+- `--limit: optional number`
+
+  Query param: Query parameter for limit
+
+- `--page: optional string`
+
+  Query param: Query parameter for page
+
+- `--beta: optional array of AnthropicBeta`
+
+  Header param: Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `BetaManagedAgentsListMemoryStoresResponse: object { data, next_page }`
+
+  - `data: optional array of BetaManagedAgentsMemoryStore`
+
+    - `id: string`
+
+    - `type: "memory_store"`
+
+      - `"memory_store"`
+
+    - `archived_at: optional string`
+
+      A timestamp in RFC 3339 format
+
+    - `created_at: optional string`
+
+      A timestamp in RFC 3339 format
+
+    - `description: optional string`
+
+    - `metadata: optional map[string]`
+
+    - `name: optional string`
+
+    - `updated_at: optional string`
+
+      A timestamp in RFC 3339 format
+
+  - `next_page: optional string`
+
+### Example
+
+```cli
+ant beta:memory-stores list \
+  --api-key my-anthropic-api-key
+```
+
+## Retrieve
+
+`$ ant beta:memory-stores retrieve`
+
+**get** `/v1/memory_stores/{memory_store_id}`
+
+GetMemoryStore
+
+### Parameters
+
+- `--memory-store-id: string`
+
+  Path parameter memory_store_id
+
+- `--beta: optional array of AnthropicBeta`
+
+  Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `beta_managed_agents_memory_store: object { id, type, archived_at, 5 more }`
+
+  - `id: string`
+
+  - `type: "memory_store"`
+
+    - `"memory_store"`
+
+  - `archived_at: optional string`
+
+    A timestamp in RFC 3339 format
+
+  - `created_at: optional string`
+
+    A timestamp in RFC 3339 format
+
+  - `description: optional string`
+
+  - `metadata: optional map[string]`
+
+  - `name: optional string`
+
+  - `updated_at: optional string`
+
+    A timestamp in RFC 3339 format
+
+### Example
+
+```cli
+ant beta:memory-stores retrieve \
+  --api-key my-anthropic-api-key \
+  --memory-store-id memory_store_id
+```
+
+## Update
+
+`$ ant beta:memory-stores update`
+
+**post** `/v1/memory_stores/{memory_store_id}`
+
+UpdateMemoryStore
+
+### Parameters
+
+- `--memory-store-id: string`
+
+  Path param: Path parameter memory_store_id
+
+- `--description: optional string`
+
+  Body param
+
+- `--metadata: optional map[string]`
+
+  Body param: Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve. The stored bag is limited to 16 keys (up to 64 chars each) with values up to 512 chars.
+
+- `--name: optional string`
+
+  Body param
+
+- `--beta: optional array of AnthropicBeta`
+
+  Header param: Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `beta_managed_agents_memory_store: object { id, type, archived_at, 5 more }`
+
+  - `id: string`
+
+  - `type: "memory_store"`
+
+    - `"memory_store"`
+
+  - `archived_at: optional string`
+
+    A timestamp in RFC 3339 format
+
+  - `created_at: optional string`
+
+    A timestamp in RFC 3339 format
+
+  - `description: optional string`
+
+  - `metadata: optional map[string]`
+
+  - `name: optional string`
+
+  - `updated_at: optional string`
+
+    A timestamp in RFC 3339 format
+
+### Example
+
+```cli
+ant beta:memory-stores update \
+  --api-key my-anthropic-api-key \
+  --memory-store-id memory_store_id
+```
+
+## Delete
+
+`$ ant beta:memory-stores delete`
+
+**delete** `/v1/memory_stores/{memory_store_id}`
+
+DeleteMemoryStore
+
+### Parameters
+
+- `--memory-store-id: string`
+
+  Path parameter memory_store_id
+
+- `--beta: optional array of AnthropicBeta`
+
+  Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `beta_managed_agents_deleted_memory_store: object { id, type }`
+
+  - `id: string`
+
+  - `type: "memory_store_deleted"`
+
+    - `"memory_store_deleted"`
+
+### Example
+
+```cli
+ant beta:memory-stores delete \
+  --api-key my-anthropic-api-key \
+  --memory-store-id memory_store_id
+```
+
+## Archive
+
+`$ ant beta:memory-stores archive`
+
+**post** `/v1/memory_stores/{memory_store_id}/archive`
+
+ArchiveMemoryStore
+
+### Parameters
+
+- `--memory-store-id: string`
+
+  Path parameter memory_store_id
+
+- `--beta: optional array of AnthropicBeta`
+
+  Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `beta_managed_agents_memory_store: object { id, type, archived_at, 5 more }`
+
+  - `id: string`
+
+  - `type: "memory_store"`
+
+    - `"memory_store"`
+
+  - `archived_at: optional string`
+
+    A timestamp in RFC 3339 format
+
+  - `created_at: optional string`
+
+    A timestamp in RFC 3339 format
+
+  - `description: optional string`
+
+  - `metadata: optional map[string]`
+
+  - `name: optional string`
+
+  - `updated_at: optional string`
+
+    A timestamp in RFC 3339 format
+
+### Example
+
+```cli
+ant beta:memory-stores archive \
+  --api-key my-anthropic-api-key \
+  --memory-store-id memory_store_id
+```
+
+## Domain Types
+
+### Beta Managed Agents Deleted Memory Store
+
+- `beta_managed_agents_deleted_memory_store: object { id, type }`
+
+  - `id: string`
+
+  - `type: "memory_store_deleted"`
+
+    - `"memory_store_deleted"`
+
+### Beta Managed Agents Memory Store
+
+- `beta_managed_agents_memory_store: object { id, type, archived_at, 5 more }`
+
+  - `id: string`
+
+  - `type: "memory_store"`
+
+    - `"memory_store"`
+
+  - `archived_at: optional string`
+
+    A timestamp in RFC 3339 format
+
+  - `created_at: optional string`
+
+    A timestamp in RFC 3339 format
+
+  - `description: optional string`
+
+  - `metadata: optional map[string]`
+
+  - `name: optional string`
+
+  - `updated_at: optional string`
+
+    A timestamp in RFC 3339 format
+
+# Memories
+
+## Create
+
+`$ ant beta:memory-stores:memories create`
+
+**post** `/v1/memory_stores/{memory_store_id}/memories`
+
+CreateMemory
+
+### Parameters
+
+- `--memory-store-id: string`
+
+  Path param: Path parameter memory_store_id
+
+- `--content: string`
+
+  Body param
+
+- `--path: string`
+
+  Body param
+
+- `--view: optional "basic" or "full"`
+
+  Query param: Query parameter for view
+
+- `--beta: optional array of AnthropicBeta`
+
+  Header param: Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `beta_managed_agents_memory: object { id, content_sha256, content_size_bytes, 7 more }`
+
+  - `id: string`
+
+  - `content_sha256: string`
+
+  - `content_size_bytes: number`
+
+  - `created_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `memory_store_id: string`
+
+  - `memory_version_id: string`
+
+  - `path: string`
+
+  - `type: "memory"`
+
+    - `"memory"`
+
+  - `updated_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `content: optional string`
+
+### Example
+
+```cli
+ant beta:memory-stores:memories create \
+  --api-key my-anthropic-api-key \
+  --memory-store-id memory_store_id \
+  --content content \
+  --path xx
+```
+
+## List
+
+`$ ant beta:memory-stores:memories list`
+
+**get** `/v1/memory_stores/{memory_store_id}/memories`
+
+ListMemories
+
+### Parameters
+
+- `--memory-store-id: string`
+
+  Path param: Path parameter memory_store_id
+
+- `--depth: optional number`
+
+  Query param: Query parameter for depth
+
+- `--limit: optional number`
+
+  Query param: Query parameter for limit
+
+- `--order: optional "asc" or "desc"`
+
+  Query param: Query parameter for order
+
+- `--order-by: optional string`
+
+  Query param: Query parameter for order_by
+
+- `--page: optional string`
+
+  Query param: Query parameter for page
+
+- `--path-prefix: optional string`
+
+  Query param: Optional path prefix filter (raw string-prefix match; include a trailing slash for directory-scoped lists). This value appears in request URLs. Do not include secrets or personally identifiable information.
+
+- `--view: optional "basic" or "full"`
+
+  Query param: Query parameter for view
+
+- `--beta: optional array of AnthropicBeta`
+
+  Header param: Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `BetaManagedAgentsListMemoriesResult: object { data, next_page }`
+
+  - `data: optional array of BetaManagedAgentsMemoryListItem`
+
+    - `beta_managed_agents_memory: object { id, content_sha256, content_size_bytes, 7 more }`
+
+      - `id: string`
+
+      - `content_sha256: string`
+
+      - `content_size_bytes: number`
+
+      - `created_at: string`
+
+        A timestamp in RFC 3339 format
+
+      - `memory_store_id: string`
+
+      - `memory_version_id: string`
+
+      - `path: string`
+
+      - `type: "memory"`
+
+        - `"memory"`
+
+      - `updated_at: string`
+
+        A timestamp in RFC 3339 format
+
+      - `content: optional string`
+
+    - `beta_managed_agents_memory_prefix: object { path, type }`
+
+      - `path: string`
+
+      - `type: "memory_prefix"`
+
+        - `"memory_prefix"`
+
+  - `next_page: optional string`
+
+### Example
+
+```cli
+ant beta:memory-stores:memories list \
+  --api-key my-anthropic-api-key \
+  --memory-store-id memory_store_id
+```
+
+## Retrieve
+
+`$ ant beta:memory-stores:memories retrieve`
+
+**get** `/v1/memory_stores/{memory_store_id}/memories/{memory_id}`
+
+GetMemory
+
+### Parameters
+
+- `--memory-store-id: string`
+
+  Path param: Path parameter memory_store_id
+
+- `--memory-id: string`
+
+  Path param: Path parameter memory_id
+
+- `--view: optional "basic" or "full"`
+
+  Query param: Query parameter for view
+
+- `--beta: optional array of AnthropicBeta`
+
+  Header param: Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `beta_managed_agents_memory: object { id, content_sha256, content_size_bytes, 7 more }`
+
+  - `id: string`
+
+  - `content_sha256: string`
+
+  - `content_size_bytes: number`
+
+  - `created_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `memory_store_id: string`
+
+  - `memory_version_id: string`
+
+  - `path: string`
+
+  - `type: "memory"`
+
+    - `"memory"`
+
+  - `updated_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `content: optional string`
+
+### Example
+
+```cli
+ant beta:memory-stores:memories retrieve \
+  --api-key my-anthropic-api-key \
+  --memory-store-id memory_store_id \
+  --memory-id memory_id
+```
+
+## Update
+
+`$ ant beta:memory-stores:memories update`
+
+**post** `/v1/memory_stores/{memory_store_id}/memories/{memory_id}`
+
+UpdateMemory
+
+### Parameters
+
+- `--memory-store-id: string`
+
+  Path param: Path parameter memory_store_id
+
+- `--memory-id: string`
+
+  Path param: Path parameter memory_id
+
+- `--view: optional "basic" or "full"`
+
+  Query param: Query parameter for view
+
+- `--content: optional string`
+
+  Body param
+
+- `--path: optional string`
+
+  Body param
+
+- `--precondition: optional object { type, content_sha256 }`
+
+  Body param
+
+- `--beta: optional array of AnthropicBeta`
+
+  Header param: Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `beta_managed_agents_memory: object { id, content_sha256, content_size_bytes, 7 more }`
+
+  - `id: string`
+
+  - `content_sha256: string`
+
+  - `content_size_bytes: number`
+
+  - `created_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `memory_store_id: string`
+
+  - `memory_version_id: string`
+
+  - `path: string`
+
+  - `type: "memory"`
+
+    - `"memory"`
+
+  - `updated_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `content: optional string`
+
+### Example
+
+```cli
+ant beta:memory-stores:memories update \
+  --api-key my-anthropic-api-key \
+  --memory-store-id memory_store_id \
+  --memory-id memory_id
+```
+
+## Delete
+
+`$ ant beta:memory-stores:memories delete`
+
+**delete** `/v1/memory_stores/{memory_store_id}/memories/{memory_id}`
+
+DeleteMemory
+
+### Parameters
+
+- `--memory-store-id: string`
+
+  Path param: Path parameter memory_store_id
+
+- `--memory-id: string`
+
+  Path param: Path parameter memory_id
+
+- `--expected-content-sha256: optional string`
+
+  Query param: Query parameter for expected_content_sha256
+
+- `--beta: optional array of AnthropicBeta`
+
+  Header param: Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `beta_managed_agents_deleted_memory: object { id, type }`
+
+  - `id: string`
+
+  - `type: "memory_deleted"`
+
+    - `"memory_deleted"`
+
+### Example
+
+```cli
+ant beta:memory-stores:memories delete \
+  --api-key my-anthropic-api-key \
+  --memory-store-id memory_store_id \
+  --memory-id memory_id
+```
+
+## Domain Types
+
+### Beta Managed Agents Content Sha256 Precondition
+
+- `beta_managed_agents_content_sha256_precondition: object { type, content_sha256 }`
+
+  - `type: "content_sha256"`
+
+    - `"content_sha256"`
+
+  - `content_sha256: optional string`
+
+### Beta Managed Agents Deleted Memory
+
+- `beta_managed_agents_deleted_memory: object { id, type }`
+
+  - `id: string`
+
+  - `type: "memory_deleted"`
+
+    - `"memory_deleted"`
+
+### Beta Managed Agents Memory
+
+- `beta_managed_agents_memory: object { id, content_sha256, content_size_bytes, 7 more }`
+
+  - `id: string`
+
+  - `content_sha256: string`
+
+  - `content_size_bytes: number`
+
+  - `created_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `memory_store_id: string`
+
+  - `memory_version_id: string`
+
+  - `path: string`
+
+  - `type: "memory"`
+
+    - `"memory"`
+
+  - `updated_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `content: optional string`
+
+### Beta Managed Agents Memory List Item
+
+- `beta_managed_agents_memory_list_item: BetaManagedAgentsMemory or BetaManagedAgentsMemoryPrefix`
+
+  - `beta_managed_agents_memory: object { id, content_sha256, content_size_bytes, 7 more }`
+
+    - `id: string`
+
+    - `content_sha256: string`
+
+    - `content_size_bytes: number`
+
+    - `created_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `memory_store_id: string`
+
+    - `memory_version_id: string`
+
+    - `path: string`
+
+    - `type: "memory"`
+
+      - `"memory"`
+
+    - `updated_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `content: optional string`
+
+  - `beta_managed_agents_memory_prefix: object { path, type }`
+
+    - `path: string`
+
+    - `type: "memory_prefix"`
+
+      - `"memory_prefix"`
+
+### Beta Managed Agents Memory Path Conflict Error
+
+- `beta_managed_agents_memory_path_conflict_error: object { type, conflicting_memory_id, conflicting_path, message }`
+
+  - `type: "memory_path_conflict_error"`
+
+    - `"memory_path_conflict_error"`
+
+  - `conflicting_memory_id: optional string`
+
+  - `conflicting_path: optional string`
+
+  - `message: optional string`
+
+### Beta Managed Agents Memory Precondition Failed Error
+
+- `beta_managed_agents_memory_precondition_failed_error: object { type, message }`
+
+  - `type: "memory_precondition_failed_error"`
+
+    - `"memory_precondition_failed_error"`
+
+  - `message: optional string`
+
+### Beta Managed Agents Memory Prefix
+
+- `beta_managed_agents_memory_prefix: object { path, type }`
+
+  - `path: string`
+
+  - `type: "memory_prefix"`
+
+    - `"memory_prefix"`
+
+### Beta Managed Agents Memory View
+
+- `beta_managed_agents_memory_view: "basic" or "full"`
+
+  MemoryView enum
+
+  - `"basic"`
+
+  - `"full"`
+
+### Beta Managed Agents Precondition
+
+- `beta_managed_agents_precondition: object { type, content_sha256 }`
+
+  - `type: "content_sha256"`
+
+    - `"content_sha256"`
+
+  - `content_sha256: optional string`
+
+# Memory Versions
+
+## List
+
+`$ ant beta:memory-stores:memory-versions list`
+
+**get** `/v1/memory_stores/{memory_store_id}/memory_versions`
+
+ListMemoryVersions
+
+### Parameters
+
+- `--memory-store-id: string`
+
+  Path param: Path parameter memory_store_id
+
+- `--api-key-id: optional string`
+
+  Query param: Query parameter for api_key_id
+
+- `--created-at-gte: optional string`
+
+  Query param: Return versions created at or after this time (inclusive).
+
+- `--created-at-lte: optional string`
+
+  Query param: Return versions created at or before this time (inclusive).
+
+- `--limit: optional number`
+
+  Query param: Query parameter for limit
+
+- `--memory-id: optional string`
+
+  Query param: Query parameter for memory_id
+
+- `--operation: optional "created" or "modified" or "deleted"`
+
+  Query param: Query parameter for operation
+
+- `--page: optional string`
+
+  Query param: Query parameter for page
+
+- `--session-id: optional string`
+
+  Query param: Query parameter for session_id
+
+- `--view: optional "basic" or "full"`
+
+  Query param: Query parameter for view
+
+- `--beta: optional array of AnthropicBeta`
+
+  Header param: Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `BetaManagedAgentsListMemoryVersionsResult: object { data, next_page }`
+
+  - `data: optional array of BetaManagedAgentsMemoryVersion`
+
+    - `id: string`
+
+    - `created_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `memory_id: string`
+
+    - `memory_store_id: string`
+
+    - `operation: "created" or "modified" or "deleted"`
+
+      MemoryVersionOperation enum
+
+      - `"created"`
+
+      - `"modified"`
+
+      - `"deleted"`
+
+    - `type: "memory_version"`
+
+      - `"memory_version"`
+
+    - `content: optional string`
+
+    - `content_sha256: optional string`
+
+    - `content_size_bytes: optional number`
+
+    - `created_by: optional BetaManagedAgentsSessionActor or BetaManagedAgentsAPIActor or BetaManagedAgentsUserActor`
+
+      - `beta_managed_agents_session_actor: object { session_id, type }`
+
+        - `session_id: string`
+
+        - `type: "session_actor"`
+
+          - `"session_actor"`
+
+      - `beta_managed_agents_api_actor: object { api_key_id, type }`
+
+        - `api_key_id: string`
+
+        - `type: "api_actor"`
+
+          - `"api_actor"`
+
+      - `beta_managed_agents_user_actor: object { type, user_id }`
+
+        - `type: "user_actor"`
+
+          - `"user_actor"`
+
+        - `user_id: string`
+
+    - `path: optional string`
+
+    - `redacted_at: optional string`
+
+      A timestamp in RFC 3339 format
+
+    - `redacted_by: optional BetaManagedAgentsSessionActor or BetaManagedAgentsAPIActor or BetaManagedAgentsUserActor`
+
+      - `beta_managed_agents_session_actor: object { session_id, type }`
+
+        - `session_id: string`
+
+        - `type: "session_actor"`
+
+          - `"session_actor"`
+
+      - `beta_managed_agents_api_actor: object { api_key_id, type }`
+
+        - `api_key_id: string`
+
+        - `type: "api_actor"`
+
+          - `"api_actor"`
+
+      - `beta_managed_agents_user_actor: object { type, user_id }`
+
+        - `type: "user_actor"`
+
+          - `"user_actor"`
+
+        - `user_id: string`
+
+  - `next_page: optional string`
+
+### Example
+
+```cli
+ant beta:memory-stores:memory-versions list \
+  --api-key my-anthropic-api-key \
+  --memory-store-id memory_store_id
+```
+
+## Retrieve
+
+`$ ant beta:memory-stores:memory-versions retrieve`
+
+**get** `/v1/memory_stores/{memory_store_id}/memory_versions/{memory_version_id}`
+
+GetMemoryVersion
+
+### Parameters
+
+- `--memory-store-id: string`
+
+  Path param: Path parameter memory_store_id
+
+- `--memory-version-id: string`
+
+  Path param: Path parameter memory_version_id
+
+- `--view: optional "basic" or "full"`
+
+  Query param: Query parameter for view
+
+- `--beta: optional array of AnthropicBeta`
+
+  Header param: Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `beta_managed_agents_memory_version: object { id, created_at, memory_id, 10 more }`
+
+  - `id: string`
+
+  - `created_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `memory_id: string`
+
+  - `memory_store_id: string`
+
+  - `operation: "created" or "modified" or "deleted"`
+
+    MemoryVersionOperation enum
+
+    - `"created"`
+
+    - `"modified"`
+
+    - `"deleted"`
+
+  - `type: "memory_version"`
+
+    - `"memory_version"`
+
+  - `content: optional string`
+
+  - `content_sha256: optional string`
+
+  - `content_size_bytes: optional number`
+
+  - `created_by: optional BetaManagedAgentsSessionActor or BetaManagedAgentsAPIActor or BetaManagedAgentsUserActor`
+
+    - `beta_managed_agents_session_actor: object { session_id, type }`
+
+      - `session_id: string`
+
+      - `type: "session_actor"`
+
+        - `"session_actor"`
+
+    - `beta_managed_agents_api_actor: object { api_key_id, type }`
+
+      - `api_key_id: string`
+
+      - `type: "api_actor"`
+
+        - `"api_actor"`
+
+    - `beta_managed_agents_user_actor: object { type, user_id }`
+
+      - `type: "user_actor"`
+
+        - `"user_actor"`
+
+      - `user_id: string`
+
+  - `path: optional string`
+
+  - `redacted_at: optional string`
+
+    A timestamp in RFC 3339 format
+
+  - `redacted_by: optional BetaManagedAgentsSessionActor or BetaManagedAgentsAPIActor or BetaManagedAgentsUserActor`
+
+    - `beta_managed_agents_session_actor: object { session_id, type }`
+
+      - `session_id: string`
+
+      - `type: "session_actor"`
+
+        - `"session_actor"`
+
+    - `beta_managed_agents_api_actor: object { api_key_id, type }`
+
+      - `api_key_id: string`
+
+      - `type: "api_actor"`
+
+        - `"api_actor"`
+
+    - `beta_managed_agents_user_actor: object { type, user_id }`
+
+      - `type: "user_actor"`
+
+        - `"user_actor"`
+
+      - `user_id: string`
+
+### Example
+
+```cli
+ant beta:memory-stores:memory-versions retrieve \
+  --api-key my-anthropic-api-key \
+  --memory-store-id memory_store_id \
+  --memory-version-id memory_version_id
+```
+
+## Redact
+
+`$ ant beta:memory-stores:memory-versions redact`
+
+**post** `/v1/memory_stores/{memory_store_id}/memory_versions/{memory_version_id}/redact`
+
+RedactMemoryVersion
+
+### Parameters
+
+- `--memory-store-id: string`
+
+  Path param: Path parameter memory_store_id
+
+- `--memory-version-id: string`
+
+  Path param: Path parameter memory_version_id
+
+- `--beta: optional array of AnthropicBeta`
+
+  Header param: Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `beta_managed_agents_memory_version: object { id, created_at, memory_id, 10 more }`
+
+  - `id: string`
+
+  - `created_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `memory_id: string`
+
+  - `memory_store_id: string`
+
+  - `operation: "created" or "modified" or "deleted"`
+
+    MemoryVersionOperation enum
+
+    - `"created"`
+
+    - `"modified"`
+
+    - `"deleted"`
+
+  - `type: "memory_version"`
+
+    - `"memory_version"`
+
+  - `content: optional string`
+
+  - `content_sha256: optional string`
+
+  - `content_size_bytes: optional number`
+
+  - `created_by: optional BetaManagedAgentsSessionActor or BetaManagedAgentsAPIActor or BetaManagedAgentsUserActor`
+
+    - `beta_managed_agents_session_actor: object { session_id, type }`
+
+      - `session_id: string`
+
+      - `type: "session_actor"`
+
+        - `"session_actor"`
+
+    - `beta_managed_agents_api_actor: object { api_key_id, type }`
+
+      - `api_key_id: string`
+
+      - `type: "api_actor"`
+
+        - `"api_actor"`
+
+    - `beta_managed_agents_user_actor: object { type, user_id }`
+
+      - `type: "user_actor"`
+
+        - `"user_actor"`
+
+      - `user_id: string`
+
+  - `path: optional string`
+
+  - `redacted_at: optional string`
+
+    A timestamp in RFC 3339 format
+
+  - `redacted_by: optional BetaManagedAgentsSessionActor or BetaManagedAgentsAPIActor or BetaManagedAgentsUserActor`
+
+    - `beta_managed_agents_session_actor: object { session_id, type }`
+
+      - `session_id: string`
+
+      - `type: "session_actor"`
+
+        - `"session_actor"`
+
+    - `beta_managed_agents_api_actor: object { api_key_id, type }`
+
+      - `api_key_id: string`
+
+      - `type: "api_actor"`
+
+        - `"api_actor"`
+
+    - `beta_managed_agents_user_actor: object { type, user_id }`
+
+      - `type: "user_actor"`
+
+        - `"user_actor"`
+
+      - `user_id: string`
+
+### Example
+
+```cli
+ant beta:memory-stores:memory-versions redact \
+  --api-key my-anthropic-api-key \
+  --memory-store-id memory_store_id \
+  --memory-version-id memory_version_id
+```
+
+## Domain Types
+
+### Beta Managed Agents Actor
+
+- `beta_managed_agents_actor: BetaManagedAgentsSessionActor or BetaManagedAgentsAPIActor or BetaManagedAgentsUserActor`
+
+  - `beta_managed_agents_session_actor: object { session_id, type }`
+
+    - `session_id: string`
+
+    - `type: "session_actor"`
+
+      - `"session_actor"`
+
+  - `beta_managed_agents_api_actor: object { api_key_id, type }`
+
+    - `api_key_id: string`
+
+    - `type: "api_actor"`
+
+      - `"api_actor"`
+
+  - `beta_managed_agents_user_actor: object { type, user_id }`
+
+    - `type: "user_actor"`
+
+      - `"user_actor"`
+
+    - `user_id: string`
+
+### Beta Managed Agents API Actor
+
+- `beta_managed_agents_api_actor: object { api_key_id, type }`
+
+  - `api_key_id: string`
+
+  - `type: "api_actor"`
+
+    - `"api_actor"`
+
+### Beta Managed Agents Memory Version
+
+- `beta_managed_agents_memory_version: object { id, created_at, memory_id, 10 more }`
+
+  - `id: string`
+
+  - `created_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `memory_id: string`
+
+  - `memory_store_id: string`
+
+  - `operation: "created" or "modified" or "deleted"`
+
+    MemoryVersionOperation enum
+
+    - `"created"`
+
+    - `"modified"`
+
+    - `"deleted"`
+
+  - `type: "memory_version"`
+
+    - `"memory_version"`
+
+  - `content: optional string`
+
+  - `content_sha256: optional string`
+
+  - `content_size_bytes: optional number`
+
+  - `created_by: optional BetaManagedAgentsSessionActor or BetaManagedAgentsAPIActor or BetaManagedAgentsUserActor`
+
+    - `beta_managed_agents_session_actor: object { session_id, type }`
+
+      - `session_id: string`
+
+      - `type: "session_actor"`
+
+        - `"session_actor"`
+
+    - `beta_managed_agents_api_actor: object { api_key_id, type }`
+
+      - `api_key_id: string`
+
+      - `type: "api_actor"`
+
+        - `"api_actor"`
+
+    - `beta_managed_agents_user_actor: object { type, user_id }`
+
+      - `type: "user_actor"`
+
+        - `"user_actor"`
+
+      - `user_id: string`
+
+  - `path: optional string`
+
+  - `redacted_at: optional string`
+
+    A timestamp in RFC 3339 format
+
+  - `redacted_by: optional BetaManagedAgentsSessionActor or BetaManagedAgentsAPIActor or BetaManagedAgentsUserActor`
+
+    - `beta_managed_agents_session_actor: object { session_id, type }`
+
+      - `session_id: string`
+
+      - `type: "session_actor"`
+
+        - `"session_actor"`
+
+    - `beta_managed_agents_api_actor: object { api_key_id, type }`
+
+      - `api_key_id: string`
+
+      - `type: "api_actor"`
+
+        - `"api_actor"`
+
+    - `beta_managed_agents_user_actor: object { type, user_id }`
+
+      - `type: "user_actor"`
+
+        - `"user_actor"`
+
+      - `user_id: string`
+
+### Beta Managed Agents Memory Version Operation
+
+- `beta_managed_agents_memory_version_operation: "created" or "modified" or "deleted"`
+
+  MemoryVersionOperation enum
+
+  - `"created"`
+
+  - `"modified"`
+
+  - `"deleted"`
+
+### Beta Managed Agents Session Actor
+
+- `beta_managed_agents_session_actor: object { session_id, type }`
+
+  - `session_id: string`
+
+  - `type: "session_actor"`
+
+    - `"session_actor"`
+
+### Beta Managed Agents User Actor
+
+- `beta_managed_agents_user_actor: object { type, user_id }`
+
+  - `type: "user_actor"`
+
+    - `"user_actor"`
+
+  - `user_id: string`
+
 # Files
 
 ## Upload
@@ -50679,433 +52413,3 @@ ant beta:skills:versions delete \
   --skill-id skill_id \
   --version version
 ```
-
-# User Profiles
-
-## Create
-
-`$ ant beta:user-profiles create`
-
-**post** `/v1/user_profiles`
-
-Create User Profile
-
-### Parameters
-
-- `--external-id: optional string`
-
-  Body param: Platform's own identifier for this user. Not enforced unique. Maximum 255 characters.
-
-- `--metadata: optional map[string]`
-
-  Body param: Free-form key-value data to attach to this user profile. Maximum 16 keys, with keys up to 64 characters and values up to 512 characters. Values must be non-empty strings.
-
-- `--beta: optional array of AnthropicBeta`
-
-  Header param: Optional header to specify the beta version(s) you want to use.
-
-### Returns
-
-- `beta_user_profile: object { id, created_at, metadata, 4 more }`
-
-  - `id: string`
-
-    Unique identifier for this user profile, prefixed `uprof_`.
-
-  - `created_at: string`
-
-    A timestamp in RFC 3339 format
-
-  - `metadata: map[string]`
-
-    Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
-
-  - `trust_grants: map[BetaUserProfileTrustGrant]`
-
-    Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
-
-    - `status: "active" or "pending" or "rejected"`
-
-      Status of the trust grant.
-
-      - `"active"`
-
-      - `"pending"`
-
-      - `"rejected"`
-
-  - `type: "user_profile"`
-
-    Object type. Always `user_profile`.
-
-    - `"user_profile"`
-
-  - `updated_at: string`
-
-    A timestamp in RFC 3339 format
-
-  - `external_id: optional string`
-
-    Platform's own identifier for this user. Not enforced unique.
-
-### Example
-
-```cli
-ant beta:user-profiles create \
-  --api-key my-anthropic-api-key
-```
-
-## List
-
-`$ ant beta:user-profiles list`
-
-**get** `/v1/user_profiles`
-
-List User Profiles
-
-### Parameters
-
-- `--limit: optional number`
-
-  Query param: Query parameter for limit
-
-- `--order: optional "asc" or "desc"`
-
-  Query param: Query parameter for order
-
-- `--page: optional string`
-
-  Query param: Query parameter for page
-
-- `--beta: optional array of AnthropicBeta`
-
-  Header param: Optional header to specify the beta version(s) you want to use.
-
-### Returns
-
-- `BetaListUserProfilesResponse: object { data, next_page }`
-
-  - `data: array of BetaUserProfile`
-
-    User profiles on this page.
-
-    - `id: string`
-
-      Unique identifier for this user profile, prefixed `uprof_`.
-
-    - `created_at: string`
-
-      A timestamp in RFC 3339 format
-
-    - `metadata: map[string]`
-
-      Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
-
-    - `trust_grants: map[BetaUserProfileTrustGrant]`
-
-      Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
-
-      - `status: "active" or "pending" or "rejected"`
-
-        Status of the trust grant.
-
-        - `"active"`
-
-        - `"pending"`
-
-        - `"rejected"`
-
-    - `type: "user_profile"`
-
-      Object type. Always `user_profile`.
-
-      - `"user_profile"`
-
-    - `updated_at: string`
-
-      A timestamp in RFC 3339 format
-
-    - `external_id: optional string`
-
-      Platform's own identifier for this user. Not enforced unique.
-
-  - `next_page: optional string`
-
-    Cursor for the next page, or `null` when there are no more results.
-
-### Example
-
-```cli
-ant beta:user-profiles list \
-  --api-key my-anthropic-api-key
-```
-
-## Retrieve
-
-`$ ant beta:user-profiles retrieve`
-
-**get** `/v1/user_profiles/{user_profile_id}`
-
-Get User Profile
-
-### Parameters
-
-- `--user-profile-id: string`
-
-  Path parameter user_profile_id
-
-- `--beta: optional array of AnthropicBeta`
-
-  Optional header to specify the beta version(s) you want to use.
-
-### Returns
-
-- `beta_user_profile: object { id, created_at, metadata, 4 more }`
-
-  - `id: string`
-
-    Unique identifier for this user profile, prefixed `uprof_`.
-
-  - `created_at: string`
-
-    A timestamp in RFC 3339 format
-
-  - `metadata: map[string]`
-
-    Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
-
-  - `trust_grants: map[BetaUserProfileTrustGrant]`
-
-    Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
-
-    - `status: "active" or "pending" or "rejected"`
-
-      Status of the trust grant.
-
-      - `"active"`
-
-      - `"pending"`
-
-      - `"rejected"`
-
-  - `type: "user_profile"`
-
-    Object type. Always `user_profile`.
-
-    - `"user_profile"`
-
-  - `updated_at: string`
-
-    A timestamp in RFC 3339 format
-
-  - `external_id: optional string`
-
-    Platform's own identifier for this user. Not enforced unique.
-
-### Example
-
-```cli
-ant beta:user-profiles retrieve \
-  --api-key my-anthropic-api-key \
-  --user-profile-id uprof_011CZkZCu8hGbp5mYRQgUmz9
-```
-
-## Update
-
-`$ ant beta:user-profiles update`
-
-**post** `/v1/user_profiles/{user_profile_id}`
-
-Update User Profile
-
-### Parameters
-
-- `--user-profile-id: string`
-
-  Path param: Path parameter user_profile_id
-
-- `--external-id: optional string`
-
-  Body param: If present, replaces the stored external_id. Omit to leave unchanged. Maximum 255 characters.
-
-- `--metadata: optional map[string]`
-
-  Body param: Key-value pairs to merge into the stored metadata. Keys provided overwrite existing values. To remove a key, set its value to an empty string. Keys not provided are left unchanged. Maximum 16 keys, with keys up to 64 characters and values up to 512 characters.
-
-- `--beta: optional array of AnthropicBeta`
-
-  Header param: Optional header to specify the beta version(s) you want to use.
-
-### Returns
-
-- `beta_user_profile: object { id, created_at, metadata, 4 more }`
-
-  - `id: string`
-
-    Unique identifier for this user profile, prefixed `uprof_`.
-
-  - `created_at: string`
-
-    A timestamp in RFC 3339 format
-
-  - `metadata: map[string]`
-
-    Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
-
-  - `trust_grants: map[BetaUserProfileTrustGrant]`
-
-    Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
-
-    - `status: "active" or "pending" or "rejected"`
-
-      Status of the trust grant.
-
-      - `"active"`
-
-      - `"pending"`
-
-      - `"rejected"`
-
-  - `type: "user_profile"`
-
-    Object type. Always `user_profile`.
-
-    - `"user_profile"`
-
-  - `updated_at: string`
-
-    A timestamp in RFC 3339 format
-
-  - `external_id: optional string`
-
-    Platform's own identifier for this user. Not enforced unique.
-
-### Example
-
-```cli
-ant beta:user-profiles update \
-  --api-key my-anthropic-api-key \
-  --user-profile-id uprof_011CZkZCu8hGbp5mYRQgUmz9
-```
-
-## Create Enrollment URL
-
-`$ ant beta:user-profiles create-enrollment-url`
-
-**post** `/v1/user_profiles/{user_profile_id}/enrollment_url`
-
-Create Enrollment URL
-
-### Parameters
-
-- `--user-profile-id: string`
-
-  Path parameter user_profile_id
-
-- `--beta: optional array of AnthropicBeta`
-
-  Optional header to specify the beta version(s) you want to use.
-
-### Returns
-
-- `beta_user_profile_enrollment_url: object { expires_at, type, url }`
-
-  - `expires_at: string`
-
-    A timestamp in RFC 3339 format
-
-  - `type: "enrollment_url"`
-
-    Object type. Always `enrollment_url`.
-
-    - `"enrollment_url"`
-
-  - `url: string`
-
-    Enrollment URL to send to the end user. Valid until `expires_at`.
-
-### Example
-
-```cli
-ant beta:user-profiles create-enrollment-url \
-  --api-key my-anthropic-api-key \
-  --user-profile-id uprof_011CZkZCu8hGbp5mYRQgUmz9
-```
-
-## Domain Types
-
-### Beta User Profile
-
-- `beta_user_profile: object { id, created_at, metadata, 4 more }`
-
-  - `id: string`
-
-    Unique identifier for this user profile, prefixed `uprof_`.
-
-  - `created_at: string`
-
-    A timestamp in RFC 3339 format
-
-  - `metadata: map[string]`
-
-    Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
-
-  - `trust_grants: map[BetaUserProfileTrustGrant]`
-
-    Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
-
-    - `status: "active" or "pending" or "rejected"`
-
-      Status of the trust grant.
-
-      - `"active"`
-
-      - `"pending"`
-
-      - `"rejected"`
-
-  - `type: "user_profile"`
-
-    Object type. Always `user_profile`.
-
-    - `"user_profile"`
-
-  - `updated_at: string`
-
-    A timestamp in RFC 3339 format
-
-  - `external_id: optional string`
-
-    Platform's own identifier for this user. Not enforced unique.
-
-### Beta User Profile Enrollment URL
-
-- `beta_user_profile_enrollment_url: object { expires_at, type, url }`
-
-  - `expires_at: string`
-
-    A timestamp in RFC 3339 format
-
-  - `type: "enrollment_url"`
-
-    Object type. Always `enrollment_url`.
-
-    - `"enrollment_url"`
-
-  - `url: string`
-
-    Enrollment URL to send to the end user. Valid until `expires_at`.
-
-### Beta User Profile Trust Grant
-
-- `beta_user_profile_trust_grant: object { status }`
-
-  - `status: "active" or "pending" or "rejected"`
-
-    Status of the trust grant.
-
-    - `"active"`
-
-    - `"pending"`
-
-    - `"rejected"`
