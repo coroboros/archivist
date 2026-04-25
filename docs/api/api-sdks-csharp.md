@@ -431,7 +431,7 @@ The SDK is typed for convenient usage of the documented API. However, it also su
 <Note>
 For detailed platform setup guides with code examples, see:
 - [Amazon Bedrock](../developer/developer-build-with-claude-claude-in-amazon-bedrock.md)
-- [Amazon Bedrock (legacy)](../developer/developer-build-with-claude-claude-on-amazon-bedrock.md)
+- [Amazon Bedrock (legacy)](../developer/developer-build-with-claude-claude-on-amazon-bedrock-legacy.md)
 - [Microsoft Foundry](../developer/developer-build-with-claude-claude-in-microsoft-foundry.md)
 </Note>
 

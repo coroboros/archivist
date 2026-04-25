@@ -33,7 +33,7 @@ Update API Key
 
 ### Returns
 
-- `APIKey = object { id, created_at, created_by, 5 more }`
+- `APIKey = object { id, created_at, created_by, 6 more }`
 
   - `id: string`
 
@@ -55,6 +55,10 @@ Update API Key
 
       Type of the actor that created the object.
 
+  - `expires_at: string`
+
+    RFC 3339 datetime string indicating when the API Key expires, or `null` if it never expires.
+
   - `name: string`
 
     Name of the API key.
@@ -63,7 +67,7 @@ Update API Key
 
     Partially redacted hint for the API key.
 
-  - `status: "active" or "inactive" or "archived"`
+  - `status: "active" or "inactive" or "archived" or "expired"`
 
     Status of the API key.
 
@@ -72,6 +76,8 @@ Update API Key
     - `"inactive"`
 
     - `"archived"`
+
+    - `"expired"`
 
   - `type: "api_key"`
 

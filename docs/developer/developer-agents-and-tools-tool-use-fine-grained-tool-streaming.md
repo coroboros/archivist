@@ -330,7 +330,7 @@ When wrapping invalid JSON, make sure to properly escape any quotes or special c
   <Card title="Streaming messages" href="./developer-build-with-claude-streaming.md">
     Full reference for server-sent events and stream event types.
   </Card>
-  <Card title="Handle tool calls" href="https://platform.claude.com/docs/en/agents-and-tools/tool-use/handle-tool-calls.md">
+  <Card title="Handle tool calls" href="./developer-agents-and-tools-tool-use-handle-tool-calls.md">
     Execute tools and return results in the required message format.
   </Card>
   <Card title="Tool reference" href="./developer-agents-and-tools-tool-use-tool-reference.md">

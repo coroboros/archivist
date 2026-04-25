@@ -2,7 +2,7 @@
 
 _This repository is a mirror of the official [Claude Platform](https://platform.claude.com/docs/en/) documentation (Developer). It is updated automatically._
 
-**Last updated:** Fri, 24 Apr 2026 01:20:56 GMT
+**Last updated:** Sat, 25 Apr 2026 01:14:21 GMT
 
 ---
 
@@ -20,6 +20,15 @@ _This repository is a mirror of the official [Claude Platform](https://platform.
 - [Agent Skills | Claude Api Skill](./developer-agents-and-tools-agent-skills-claude-api-skill.md)
 - [Tool Use | Overview](./developer-agents-and-tools-tool-use-overview.md)
 - [Tool Use | How Tool Use Works](./developer-agents-and-tools-tool-use-how-tool-use-works.md)
+- [Tool Use | Build A Tool Using Agent](./developer-agents-and-tools-tool-use-build-a-tool-using-agent.md)
+- [Tool Use | Define Tools](./developer-agents-and-tools-tool-use-define-tools.md)
+- [Tool Use | Handle Tool Calls](./developer-agents-and-tools-tool-use-handle-tool-calls.md)
+- [Tool Use | Parallel Tool Use](./developer-agents-and-tools-tool-use-parallel-tool-use.md)
+- [Tool Use | Tool Runner](./developer-agents-and-tools-tool-use-tool-runner.md)
+- [Tool Use | Strict Tool Use](./developer-agents-and-tools-tool-use-strict-tool-use.md)
+- [Tool Use | Tool Use With Prompt Caching](./developer-agents-and-tools-tool-use-tool-use-with-prompt-caching.md)
+- [Tool Use | Server Tools](./developer-agents-and-tools-tool-use-server-tools.md)
+- [Tool Use | Troubleshooting Tool Use](./developer-agents-and-tools-tool-use-troubleshooting-tool-use.md)
 - [Tool Use | Web Search Tool](./developer-agents-and-tools-tool-use-web-search-tool.md)
 - [Tool Use | Web Fetch Tool](./developer-agents-and-tools-tool-use-web-fetch-tool.md)
 - [Tool Use | Code Execution Tool](./developer-agents-and-tools-tool-use-code-execution-tool.md)
@@ -29,6 +38,8 @@ _This repository is a mirror of the official [Claude Platform](https://platform.
 - [Tool Use | Computer Use Tool](./developer-agents-and-tools-tool-use-computer-use-tool.md)
 - [Tool Use | Text Editor Tool](./developer-agents-and-tools-tool-use-text-editor-tool.md)
 - [Tool Use | Tool Reference](./developer-agents-and-tools-tool-use-tool-reference.md)
+- [Tool Use | Manage Tool Context](./developer-agents-and-tools-tool-use-manage-tool-context.md)
+- [Tool Use | Tool Combinations](./developer-agents-and-tools-tool-use-tool-combinations.md)
 - [Tool Use | Tool Search Tool](./developer-agents-and-tools-tool-use-tool-search-tool.md)
 - [Tool Use | Programmatic Tool Calling](./developer-agents-and-tools-tool-use-programmatic-tool-calling.md)
 - [Tool Use | Fine Grained Tool Streaming](./developer-agents-and-tools-tool-use-fine-grained-tool-streaming.md)
@@ -74,8 +85,9 @@ _This repository is a mirror of the official [Claude Platform](https://platform.
 - [Api And Data Retention](./developer-build-with-claude-api-and-data-retention.md)
 - [Claude Code Analytics Api](./developer-build-with-claude-claude-code-analytics-api.md)
 - [Usage Cost Api](./developer-build-with-claude-usage-cost-api.md)
+- [Rate Limits Api](./developer-build-with-claude-rate-limits-api.md)
 - [Claude In Amazon Bedrock](./developer-build-with-claude-claude-in-amazon-bedrock.md)
-- [Claude On Amazon Bedrock](./developer-build-with-claude-claude-on-amazon-bedrock.md)
+- [Claude On Amazon Bedrock Legacy](./developer-build-with-claude-claude-on-amazon-bedrock-legacy.md)
 - [Claude In Microsoft Foundry](./developer-build-with-claude-claude-in-microsoft-foundry.md)
 - [Claude On Vertex Ai](./developer-build-with-claude-claude-on-vertex-ai.md)
 

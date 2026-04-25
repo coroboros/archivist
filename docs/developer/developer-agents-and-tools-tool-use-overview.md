@@ -76,7 +76,7 @@ For connecting to MCP servers, see the [MCP connector](./developer-agents-and-to
 <Tip>
 **Guarantee schema conformance with strict tool use**
 
-Add `strict: true` to your tool definitions to ensure Claude's tool calls always match your schema exactly. See [Strict tool use](https://platform.claude.com/docs/en/agents-and-tools/tool-use/strict-tool-use.md).
+Add `strict: true` to your tool definitions to ensure Claude's tool calls always match your schema exactly. See [Strict tool use](./developer-agents-and-tools-tool-use-strict-tool-use.md).
 </Tip>
 
 Tool access is one of the highest-leverage primitives you can give an agent. On benchmarks like [LAB-Bench FigQA](https://lab-bench.org/) (scientific figure interpretation) and [SWE-bench](https://www.swebench.com/) (real-world software engineering), adding even basic tools produces outsized capability gains, often surpassing human expert baselines.
@@ -85,7 +85,7 @@ Tool access is one of the highest-leverage primitives you can give an agent. On 
 
 ## Tool use examples
 
-For a complete hands-on walkthrough, see the [tutorial](https://platform.claude.com/docs/en/agents-and-tools/tool-use/build-a-tool-using-agent.md). For reference examples of individual concepts, see [Define tools](https://platform.claude.com/docs/en/agents-and-tools/tool-use/define-tools.md) and [Handle tool calls](https://platform.claude.com/docs/en/agents-and-tools/tool-use/handle-tool-calls.md).
+For a complete hands-on walkthrough, see the [tutorial](./developer-agents-and-tools-tool-use-build-a-tool-using-agent.md). For reference examples of individual concepts, see [Define tools](./developer-agents-and-tools-tool-use-define-tools.md) and [Handle tool calls](./developer-agents-and-tools-tool-use-handle-tool-calls.md).
 
 <section title="What happens when Claude needs more information">
 
@@ -158,7 +158,7 @@ When you send a tool use prompt, just like any other API request, the response w
   <Card href="./developer-agents-and-tools-tool-use-how-tool-use-works.md" title="Understand the concepts">
     Where tools run, how the loop works, and when to use tools.
   </Card>
-  <Card href="https://platform.claude.com/docs/en/agents-and-tools/tool-use/build-a-tool-using-agent.md" title="Build step by step">
+  <Card href="./developer-agents-and-tools-tool-use-build-a-tool-using-agent.md" title="Build step by step">
     The tutorial: from a single tool call to production.
   </Card>
   <Card href="./developer-agents-and-tools-tool-use-tool-reference.md" title="Browse all tools">

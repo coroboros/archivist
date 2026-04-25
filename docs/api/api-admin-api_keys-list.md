@@ -29,7 +29,7 @@ List API Keys
 
   Defaults to `20`. Ranges from `1` to `1000`.
 
-- `status: optional "active" or "inactive" or "archived"`
+- `status: optional "active" or "inactive" or "archived" or "expired"`
 
   Filter by API key status.
 
@@ -38,6 +38,8 @@ List API Keys
   - `"inactive"`
 
   - `"archived"`
+
+  - `"expired"`
 
 - `workspace_id: optional string`
 
@@ -67,6 +69,10 @@ List API Keys
 
       Type of the actor that created the object.
 
+  - `expires_at: string`
+
+    RFC 3339 datetime string indicating when the API Key expires, or `null` if it never expires.
+
   - `name: string`
 
     Name of the API key.
@@ -75,7 +81,7 @@ List API Keys
 
     Partially redacted hint for the API key.
 
-  - `status: "active" or "inactive" or "archived"`
+  - `status: "active" or "inactive" or "archived" or "expired"`
 
     Status of the API key.
 
@@ -84,6 +90,8 @@ List API Keys
     - `"inactive"`
 
     - `"archived"`
+
+    - `"expired"`
 
   - `type: "api_key"`
 

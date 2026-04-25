@@ -2524,7 +2524,7 @@ puts message.parsed_output
 
 ## Strict tool use
 
-For enforcing JSON Schema compliance on tool inputs with grammar-constrained sampling, see [Strict tool use](https://platform.claude.com/docs/en/agents-and-tools/tool-use/strict-tool-use.md).
+For enforcing JSON Schema compliance on tool inputs with grammar-constrained sampling, see [Strict tool use](./developer-agents-and-tools-tool-use-strict-tool-use.md).
 
 ## Using both features together
 

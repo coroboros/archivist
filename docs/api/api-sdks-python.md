@@ -774,7 +774,7 @@ response = client.beta.messages.create(
 <Note>
 For detailed platform setup guides with code examples, see:
 - [Amazon Bedrock](../developer/developer-build-with-claude-claude-in-amazon-bedrock.md)
-- [Amazon Bedrock (legacy)](../developer/developer-build-with-claude-claude-on-amazon-bedrock.md)
+- [Amazon Bedrock (legacy)](../developer/developer-build-with-claude-claude-on-amazon-bedrock-legacy.md)
 - [Google Vertex AI](../developer/developer-build-with-claude-claude-on-vertex-ai.md)
 - [Microsoft Foundry](../developer/developer-build-with-claude-claude-in-microsoft-foundry.md)
 </Note>

@@ -15,7 +15,7 @@ Create Invite
 
   Email of the User.
 
-- `role: "user" or "developer" or "billing" or 2 more`
+- `role: "user" or "developer" or "billing" or "claude_code_user"`
 
   Role for the invited User. Cannot be "admin".
 
@@ -26,8 +26,6 @@ Create Invite
   - `"billing"`
 
   - `"claude_code_user"`
-
-  - `"managed"`
 
 ### Returns
 
@@ -49,7 +47,7 @@ Create Invite
 
     RFC 3339 datetime string indicating when the Invite was created.
 
-  - `role: "user" or "developer" or "billing" or 3 more`
+  - `role: "user" or "developer" or "billing" or 2 more`
 
     Organization role of the User.
 
@@ -62,8 +60,6 @@ Create Invite
     - `"admin"`
 
     - `"claude_code_user"`
-
-    - `"managed"`
 
   - `status: "accepted" or "expired" or "deleted" or "pending"`
 

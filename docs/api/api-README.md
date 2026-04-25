@@ -2,7 +2,7 @@
 
 _This repository is a mirror of the official [Claude Platform](https://platform.claude.com/docs/en/) documentation (Api). It is updated automatically._
 
-**Last updated:** Fri, 24 Apr 2026 12:53:48 GMT
+**Last updated:** Sat, 25 Apr 2026 01:14:21 GMT
 
 ---
 
@@ -1142,6 +1142,8 @@ _This repository is a mirror of the official [Claude Platform](https://platform.
 - [Admin | List](./api-admin-workspaces-members-list.md)
 - [Admin | Update](./api-admin-workspaces-members-update.md)
 - [Admin | Delete](./api-admin-workspaces-members-delete.md)
+- [Admin | Rate_limits](./api-admin-workspaces-rate_limits.md)
+- [Admin | List](./api-admin-workspaces-rate_limits-list.md)
 - [Admin | Api_keys](./api-admin-api_keys.md)
 - [Admin | Retrieve](./api-admin-api_keys-retrieve.md)
 - [Admin | List](./api-admin-api_keys-list.md)
@@ -1151,6 +1153,8 @@ _This repository is a mirror of the official [Claude Platform](https://platform.
 - [Admin | Retrieve_claude_code](./api-admin-usage_report-retrieve_claude_code.md)
 - [Admin | Cost_report](./api-admin-cost_report.md)
 - [Admin | Retrieve](./api-admin-cost_report-retrieve.md)
+- [Admin | Rate_limits](./api-admin-rate_limits.md)
+- [Admin | List](./api-admin-rate_limits-list.md)
 
 ## Get Started
 

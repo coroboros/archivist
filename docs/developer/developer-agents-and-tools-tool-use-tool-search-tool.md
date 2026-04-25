@@ -713,7 +713,7 @@ For a complete example using embeddings, see the [tool search with embeddings co
 
 <Note>
   The tool search tool is not compatible with [tool use
-  examples](https://platform.claude.com/docs/en/agents-and-tools/tool-use/define-tools.md#providing-tool-use-examples).
+  examples](./developer-agents-and-tools-tool-use-define-tools.md#providing-tool-use-examples).
   If you need to provide examples of tool usage, use standard tool calling
   without tool search.
 </Note>
@@ -821,7 +821,7 @@ Errors during tool execution return a 200 response with error information in the
 
 ## Prompt caching
 
-For how `defer_loading` preserves prompt caching, see [Tool use with prompt caching](https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-use-with-prompt-caching.md).
+For how `defer_loading` preserves prompt caching, see [Tool use with prompt caching](./developer-agents-and-tools-tool-use-tool-use-with-prompt-caching.md).
 
 The system automatically expands `tool_reference` blocks throughout the entire conversation history, so Claude can reuse discovered tools in subsequent turns without re-searching.
 
@@ -909,10 +909,10 @@ Tool search tool usage is tracked in the response usage object:
   <Card title="MCP connector" icon="plug" href="./developer-agents-and-tools-mcp-connector.md">
     Configure MCP toolsets with deferred loading.
   </Card>
-  <Card title="Prompt caching" icon="bolt" href="https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-use-with-prompt-caching.md">
+  <Card title="Prompt caching" icon="bolt" href="./developer-agents-and-tools-tool-use-tool-use-with-prompt-caching.md">
     Combine tool search with cached tool definitions.
   </Card>
-  <Card title="Define tools" icon="hammer" href="https://platform.claude.com/docs/en/agents-and-tools/tool-use/define-tools.md">
+  <Card title="Define tools" icon="hammer" href="./developer-agents-and-tools-tool-use-define-tools.md">
     Step-by-step guide for defining tools.
   </Card>
 </CardGroup>

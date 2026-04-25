@@ -86,7 +86,7 @@ Streaming with `anthropic.messages.stream(...)` exposes various helpers includin
 
 ## Input schema and tool calling
 
-The SDK provides helper mechanisms to define structured data classes for tools and let Claude automatically execute them. For detailed documentation on tool use patterns including the tool runner, see [Tool Runner (SDK)](https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-runner.md).
+The SDK provides helper mechanisms to define structured data classes for tools and let Claude automatically execute them. For detailed documentation on tool use patterns including the tool runner, see [Tool Runner (SDK)](../developer/developer-agents-and-tools-tool-use-tool-runner.md).
 
 ```ruby hidelines={1}
 require "anthropic"
@@ -400,7 +400,7 @@ response = anthropic.request(
 <Note>
 For detailed platform setup guides with code examples, see:
 - [Amazon Bedrock](../developer/developer-build-with-claude-claude-in-amazon-bedrock.md)
-- [Amazon Bedrock (legacy)](../developer/developer-build-with-claude-claude-on-amazon-bedrock.md)
+- [Amazon Bedrock (legacy)](../developer/developer-build-with-claude-claude-on-amazon-bedrock-legacy.md)
 - [Google Vertex AI](../developer/developer-build-with-claude-claude-on-vertex-ai.md)
 </Note>
 

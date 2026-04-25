@@ -4014,7 +4014,7 @@ The billed output token count will **not** match the visible token count in the 
 
 ### Feature compatibility
 
-- Thinking isn't compatible with `temperature` or `top_k` modifications as well as [forced tool use](https://platform.claude.com/docs/en/agents-and-tools/tool-use/define-tools.md#forcing-tool-use).
+- Thinking isn't compatible with `temperature` or `top_k` modifications as well as [forced tool use](./developer-agents-and-tools-tool-use-define-tools.md#forcing-tool-use).
 - When thinking is enabled, you can set `top_p` to values between 1 and 0.95.
 - You can't pre-fill responses when thinking is enabled.
 - Changes to the thinking budget invalidate cached prompt prefixes that include messages. However, cached system prompts and tool definitions will continue to work when thinking parameters change.

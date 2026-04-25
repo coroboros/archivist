@@ -304,7 +304,7 @@ main().catch(console.error);
 
         **Gradle:**
         ```groovy
-        implementation("com.anthropic:anthropic-java:2.20.0")
+        implementation("com.anthropic:anthropic-java:2.27.0")
         ```
 
         **Maven:**
@@ -312,7 +312,7 @@ main().catch(console.error);
         <dependency>
           <groupId>com.anthropic</groupId>
           <artifactId>anthropic-java</artifactId>
-          <version>2.20.0</version>
+          <version>2.27.0</version>
         </dependency>
         ```
       </Step>

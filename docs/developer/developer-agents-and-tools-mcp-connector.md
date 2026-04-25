@@ -675,7 +675,7 @@ import {
 
 ### Use MCP tools
 
-Convert MCP tools for use with the SDK's [tool runner](https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-runner.md), which handles tool execution automatically:
+Convert MCP tools for use with the SDK's [tool runner](./developer-agents-and-tools-tool-use-tool-runner.md), which handles tool execution automatically:
 
 ```typescript nocheck hidelines={1}
 import Anthropic from "@anthropic-ai/sdk";

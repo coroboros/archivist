@@ -1260,7 +1260,7 @@ Tool definitions can be cached by placing `cache_control` on the last tool in yo
 
 On the first request, `cache_creation_input_tokens` reflects the token count of all tool definitions. On subsequent requests within the cache lifetime, those tokens appear under `cache_read_input_tokens` instead.
 
-For detailed interaction between tool definitions, `defer_loading`, and cache invalidation, see [Tool use with prompt caching](https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-use-with-prompt-caching.md).
+For detailed interaction between tool definitions, `defer_loading`, and cache invalidation, see [Tool use with prompt caching](./developer-agents-and-tools-tool-use-tool-use-with-prompt-caching.md).
 
 </section>
 

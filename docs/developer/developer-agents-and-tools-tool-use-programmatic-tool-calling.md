@@ -1450,7 +1450,7 @@ For ZDR eligibility across all features, see [API and data retention](./develope
   <Card title="Tool Use Overview" icon="wrench" href="./developer-agents-and-tools-tool-use-overview.md">
     Understand the fundamentals of tool use with Claude.
   </Card>
-  <Card title="Define tools" icon="hammer" href="https://platform.claude.com/docs/en/agents-and-tools/tool-use/define-tools.md">
+  <Card title="Define tools" icon="hammer" href="./developer-agents-and-tools-tool-use-define-tools.md">
     Step-by-step guide for defining tools.
   </Card>
 </CardGroup>

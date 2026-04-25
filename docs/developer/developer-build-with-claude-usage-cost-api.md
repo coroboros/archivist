@@ -133,7 +133,7 @@ bucket_width=1d" \
 <Tip>
 To retrieve your organization's API key IDs, use the [List API Keys](https://platform.claude.com/docs/en/api/admin-api/apikeys/list-api-keys.md) endpoint.
 
-To retrieve your organization's workspace IDs, use the [List Workspaces](https://platform.claude.com/docs/en/api/admin-api/workspaces/list-workspaces.md) endpoint, or find your organization's workspace IDs in the Anthropic Console.
+To retrieve your organization's workspace IDs, use the [List Workspaces](https://platform.claude.com/docs/en/api/admin-api/workspaces/list-workspaces.md) endpoint, or find your organization's workspace IDs in the Claude Console.
 </Tip>
 
 #### Data residency
@@ -311,4 +311,5 @@ The Usage and Cost APIs can be used to help you deliver a better experience for 
 - [Prompt caching](./developer-build-with-claude-prompt-caching.md) - Optimize costs with caching
 - [Batch processing](./developer-build-with-claude-batch-processing.md) - 50% discount on batch requests
 - [Rate limits](../api/api-rate-limits.md) - Understand usage tiers
+- [Rate Limits API](./developer-build-with-claude-rate-limits-api.md) - Read your configured rate limits
 - [Data residency](./developer-build-with-claude-data-residency.md) - Control inference geography

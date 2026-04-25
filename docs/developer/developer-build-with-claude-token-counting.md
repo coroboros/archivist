@@ -213,7 +213,7 @@ puts response
 ### Count tokens in messages with tools
 
 <Note>
-[Server tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/server-tools.md) token counts only apply to the first sampling call.
+[Server tool](./developer-agents-and-tools-tool-use-server-tools.md) token counts only apply to the first sampling call.
 </Note>
 
 <CodeGroup>

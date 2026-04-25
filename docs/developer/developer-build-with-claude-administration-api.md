@@ -201,6 +201,10 @@ Track your organization's usage and costs with the [Usage and Cost API](./develo
 
 Monitor developer productivity and Claude Code adoption with the [Claude Code Analytics API](./developer-build-with-claude-claude-code-analytics-api.md).
 
+## Rate limits
+
+Read the rate limits configured for your organization and its workspaces with the [Rate Limits API](./developer-build-with-claude-rate-limits-api.md).
+
 ## Best practices
 
 To effectively use the Admin API:

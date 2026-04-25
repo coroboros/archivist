@@ -78,7 +78,7 @@ Create Invite
 
   Email of the User.
 
-- `role: "user" or "developer" or "billing" or 2 more`
+- `role: "user" or "developer" or "billing" or "claude_code_user"`
 
   Role for the invited User. Cannot be "admin".
 
@@ -89,8 +89,6 @@ Create Invite
   - `"billing"`
 
   - `"claude_code_user"`
-
-  - `"managed"`
 
 ### Returns
 
@@ -112,7 +110,7 @@ Create Invite
 
     RFC 3339 datetime string indicating when the Invite was created.
 
-  - `role: "user" or "developer" or "billing" or 3 more`
+  - `role: "user" or "developer" or "billing" or 2 more`
 
     Organization role of the User.
 
@@ -125,8 +123,6 @@ Create Invite
     - `"admin"`
 
     - `"claude_code_user"`
-
-    - `"managed"`
 
   - `status: "accepted" or "expired" or "deleted" or "pending"`
 
@@ -193,7 +189,7 @@ Get Invite
 
     RFC 3339 datetime string indicating when the Invite was created.
 
-  - `role: "user" or "developer" or "billing" or 3 more`
+  - `role: "user" or "developer" or "billing" or 2 more`
 
     Organization role of the User.
 
@@ -206,8 +202,6 @@ Get Invite
     - `"admin"`
 
     - `"claude_code_user"`
-
-    - `"managed"`
 
   - `status: "accepted" or "expired" or "deleted" or "pending"`
 
@@ -279,7 +273,7 @@ List Invites
 
     RFC 3339 datetime string indicating when the Invite was created.
 
-  - `role: "user" or "developer" or "billing" or 3 more`
+  - `role: "user" or "developer" or "billing" or 2 more`
 
     Organization role of the User.
 
@@ -292,8 +286,6 @@ List Invites
     - `"admin"`
 
     - `"claude_code_user"`
-
-    - `"managed"`
 
   - `status: "accepted" or "expired" or "deleted" or "pending"`
 
@@ -392,7 +384,7 @@ curl https://api.anthropic.com/v1/organizations/invites/$INVITE_ID \
 
     RFC 3339 datetime string indicating when the Invite was created.
 
-  - `role: "user" or "developer" or "billing" or 3 more`
+  - `role: "user" or "developer" or "billing" or 2 more`
 
     Organization role of the User.
 
@@ -405,8 +397,6 @@ curl https://api.anthropic.com/v1/organizations/invites/$INVITE_ID \
     - `"admin"`
 
     - `"claude_code_user"`
-
-    - `"managed"`
 
   - `status: "accepted" or "expired" or "deleted" or "pending"`
 
@@ -478,7 +468,7 @@ Get User
 
     Name of the User.
 
-  - `role: "user" or "developer" or "billing" or 3 more`
+  - `role: "user" or "developer" or "billing" or 2 more`
 
     Organization role of the User.
 
@@ -491,8 +481,6 @@ Get User
     - `"admin"`
 
     - `"claude_code_user"`
-
-    - `"managed"`
 
   - `type: "user"`
 
@@ -556,7 +544,7 @@ List Users
 
     Name of the User.
 
-  - `role: "user" or "developer" or "billing" or 3 more`
+  - `role: "user" or "developer" or "billing" or 2 more`
 
     Organization role of the User.
 
@@ -569,8 +557,6 @@ List Users
     - `"admin"`
 
     - `"claude_code_user"`
-
-    - `"managed"`
 
   - `type: "user"`
 
@@ -614,7 +600,7 @@ Update User
 
 ### Body Parameters
 
-- `role: "user" or "developer" or "billing" or 2 more`
+- `role: "user" or "developer" or "billing" or "claude_code_user"`
 
   New role for the User. Cannot be "admin".
 
@@ -625,8 +611,6 @@ Update User
   - `"billing"`
 
   - `"claude_code_user"`
-
-  - `"managed"`
 
 ### Returns
 
@@ -648,7 +632,7 @@ Update User
 
     Name of the User.
 
-  - `role: "user" or "developer" or "billing" or 3 more`
+  - `role: "user" or "developer" or "billing" or 2 more`
 
     Organization role of the User.
 
@@ -661,8 +645,6 @@ Update User
     - `"admin"`
 
     - `"claude_code_user"`
-
-    - `"managed"`
 
   - `type: "user"`
 
@@ -741,7 +723,7 @@ curl https://api.anthropic.com/v1/organizations/users/$USER_ID \
 
     Name of the User.
 
-  - `role: "user" or "developer" or "billing" or 3 more`
+  - `role: "user" or "developer" or "billing" or 2 more`
 
     Organization role of the User.
 
@@ -754,8 +736,6 @@ curl https://api.anthropic.com/v1/organizations/users/$USER_ID \
     - `"admin"`
 
     - `"claude_code_user"`
-
-    - `"managed"`
 
   - `type: "user"`
 
@@ -1067,8 +1047,6 @@ Update Workspace
 
 - `workspace_id: string`
 
-  ID of the Workspace.
-
 ### Body Parameters
 
 - `name: string`
@@ -1168,8 +1146,6 @@ Archive Workspace
 ### Path Parameters
 
 - `workspace_id: string`
-
-  ID of the Workspace.
 
 ### Returns
 
@@ -1630,6 +1606,162 @@ curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/members
 
     ID of the Workspace.
 
+# Rate Limits
+
+## List
+
+**get** `/v1/organizations/workspaces/{workspace_id}/rate_limits`
+
+List rate-limit overrides configured for a workspace.
+
+Returns only the groups and limiter types that have a workspace-level
+override. Groups without overrides inherit the organization limits and
+are not listed; use `GET /v1/organizations/rate_limits` to see those.
+
+### Path Parameters
+
+- `workspace_id: string`
+
+  The ID of the workspace.
+
+### Query Parameters
+
+- `group_type: optional "model_group" or "batch" or "token_count" or 3 more`
+
+  Filter by group type.
+
+  - `"model_group"`
+
+  - `"batch"`
+
+  - `"token_count"`
+
+  - `"files"`
+
+  - `"skills"`
+
+  - `"web_search"`
+
+- `page: optional string`
+
+  Opaque cursor from a previous response's `next_page`.
+
+### Returns
+
+- `data: array of object { group_type, limits, models, type }`
+
+  Rate-limit entries for the workspace, one per group that has at least one override.
+
+  - `group_type: "model_group" or "batch" or "token_count" or 3 more`
+
+    The kind of rate-limit group this entry represents. `model_group` entries apply to a family of models (listed in `models`); other values apply to an API-surface category and have `models` set to `null`.
+
+    - `"model_group"`
+
+    - `"batch"`
+
+    - `"token_count"`
+
+    - `"files"`
+
+    - `"skills"`
+
+    - `"web_search"`
+
+  - `limits: array of object { org_limit, type, value }`
+
+    The limiter values overridden for this group in this workspace. Limiter types without a workspace override are omitted and inherit the organization value.
+
+    - `org_limit: number`
+
+      The organization-level value for the same limiter type, for reference. `null` when the organization has no limit configured for this limiter type.
+
+    - `type: string`
+
+      The limiter type (for example, `requests_per_minute` or `input_tokens_per_minute`).
+
+    - `value: number`
+
+      The workspace-level override value for this limiter type.
+
+  - `models: array of string`
+
+    Model names this entry's limits apply to, including aliases. `null` when `group_type` is not `"model_group"`.
+
+  - `type: "workspace_rate_limit"`
+
+    Object type. Always `workspace_rate_limit` for workspace rate-limit entries.
+
+    - `"workspace_rate_limit"`
+
+- `next_page: string`
+
+  Token to provide in as `page` in the subsequent request to retrieve the next page of data.
+
+### Example
+
+```http
+curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/rate_limits \
+    -H 'anthropic-version: 2023-06-01' \
+    -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
+```
+
+## Domain Types
+
+### Rate Limit List Response
+
+- `RateLimitListResponse = object { data, next_page }`
+
+  - `data: array of object { group_type, limits, models, type }`
+
+    Rate-limit entries for the workspace, one per group that has at least one override.
+
+    - `group_type: "model_group" or "batch" or "token_count" or 3 more`
+
+      The kind of rate-limit group this entry represents. `model_group` entries apply to a family of models (listed in `models`); other values apply to an API-surface category and have `models` set to `null`.
+
+      - `"model_group"`
+
+      - `"batch"`
+
+      - `"token_count"`
+
+      - `"files"`
+
+      - `"skills"`
+
+      - `"web_search"`
+
+    - `limits: array of object { org_limit, type, value }`
+
+      The limiter values overridden for this group in this workspace. Limiter types without a workspace override are omitted and inherit the organization value.
+
+      - `org_limit: number`
+
+        The organization-level value for the same limiter type, for reference. `null` when the organization has no limit configured for this limiter type.
+
+      - `type: string`
+
+        The limiter type (for example, `requests_per_minute` or `input_tokens_per_minute`).
+
+      - `value: number`
+
+        The workspace-level override value for this limiter type.
+
+    - `models: array of string`
+
+      Model names this entry's limits apply to, including aliases. `null` when `group_type` is not `"model_group"`.
+
+    - `type: "workspace_rate_limit"`
+
+      Object type. Always `workspace_rate_limit` for workspace rate-limit entries.
+
+      - `"workspace_rate_limit"`
+
+  - `next_page: string`
+
+    Token to provide in as `page` in the subsequent request to retrieve the next page of data.
+
 # API Keys
 
 ## Retrieve
@@ -1646,7 +1778,7 @@ Get API Key
 
 ### Returns
 
-- `APIKey = object { id, created_at, created_by, 5 more }`
+- `APIKey = object { id, created_at, created_by, 6 more }`
 
   - `id: string`
 
@@ -1668,6 +1800,10 @@ Get API Key
 
       Type of the actor that created the object.
 
+  - `expires_at: string`
+
+    RFC 3339 datetime string indicating when the API Key expires, or `null` if it never expires.
+
   - `name: string`
 
     Name of the API key.
@@ -1676,7 +1812,7 @@ Get API Key
 
     Partially redacted hint for the API key.
 
-  - `status: "active" or "inactive" or "archived"`
+  - `status: "active" or "inactive" or "archived" or "expired"`
 
     Status of the API key.
 
@@ -1685,6 +1821,8 @@ Get API Key
     - `"inactive"`
 
     - `"archived"`
+
+    - `"expired"`
 
   - `type: "api_key"`
 
@@ -1732,7 +1870,7 @@ List API Keys
 
   Defaults to `20`. Ranges from `1` to `1000`.
 
-- `status: optional "active" or "inactive" or "archived"`
+- `status: optional "active" or "inactive" or "archived" or "expired"`
 
   Filter by API key status.
 
@@ -1741,6 +1879,8 @@ List API Keys
   - `"inactive"`
 
   - `"archived"`
+
+  - `"expired"`
 
 - `workspace_id: optional string`
 
@@ -1770,6 +1910,10 @@ List API Keys
 
       Type of the actor that created the object.
 
+  - `expires_at: string`
+
+    RFC 3339 datetime string indicating when the API Key expires, or `null` if it never expires.
+
   - `name: string`
 
     Name of the API key.
@@ -1778,7 +1922,7 @@ List API Keys
 
     Partially redacted hint for the API key.
 
-  - `status: "active" or "inactive" or "archived"`
+  - `status: "active" or "inactive" or "archived" or "expired"`
 
     Status of the API key.
 
@@ -1787,6 +1931,8 @@ List API Keys
     - `"inactive"`
 
     - `"archived"`
+
+    - `"expired"`
 
   - `type: "api_key"`
 
@@ -1850,7 +1996,7 @@ Update API Key
 
 ### Returns
 
-- `APIKey = object { id, created_at, created_by, 5 more }`
+- `APIKey = object { id, created_at, created_by, 6 more }`
 
   - `id: string`
 
@@ -1872,6 +2018,10 @@ Update API Key
 
       Type of the actor that created the object.
 
+  - `expires_at: string`
+
+    RFC 3339 datetime string indicating when the API Key expires, or `null` if it never expires.
+
   - `name: string`
 
     Name of the API key.
@@ -1880,7 +2030,7 @@ Update API Key
 
     Partially redacted hint for the API key.
 
-  - `status: "active" or "inactive" or "archived"`
+  - `status: "active" or "inactive" or "archived" or "expired"`
 
     Status of the API key.
 
@@ -1889,6 +2039,8 @@ Update API Key
     - `"inactive"`
 
     - `"archived"`
+
+    - `"expired"`
 
   - `type: "api_key"`
 
@@ -1927,6 +2079,10 @@ Get Messages Usage Report
   Time buckets that start on or after this RFC 3339 timestamp will be returned.
   Each time bucket will be snapped to the start of the minute/hour/day in UTC.
 
+- `account_ids: optional array of string`
+
+  Restrict usage returned to the specified user account ID(s).
+
 - `api_key_ids: optional array of string`
 
   Restrict usage returned to the specified API key ID(s).
@@ -1953,7 +2109,7 @@ Get Messages Usage Report
 
   Time buckets that end before this RFC 3339 timestamp will be returned.
 
-- `group_by: optional array of "api_key_id" or "workspace_id" or "model" or 4 more`
+- `group_by: optional array of "api_key_id" or "workspace_id" or "model" or 6 more`
 
   Group by any subset of the available options. Grouping by `speed` requires the `fast-mode-2026-02-01` beta header.
 
@@ -1970,6 +2126,10 @@ Get Messages Usage Report
   - `"inference_geo"`
 
   - `"speed"`
+
+  - `"account_id"`
+
+  - `"service_account_id"`
 
 - `inference_geos: optional array of "global" or "us" or "not_available"`
 
@@ -1998,6 +2158,10 @@ Get Messages Usage Report
 
   Optionally set to the `next_page` token from the previous response.
 
+- `service_account_ids: optional array of string`
+
+  Restrict usage returned to the specified service account ID(s).
+
 - `service_tiers: optional array of "standard" or "batch" or "priority" or 3 more`
 
   Restrict usage returned to the specified service tier(s).
@@ -2016,7 +2180,7 @@ Get Messages Usage Report
 
 - `speeds: optional array of "standard" or "fast"`
 
-  Restrict usage returned to the specified speed(s) (research preview).
+  Restrict usage returned to the specified speed(s) (Claude Code research preview).
   Requires the `fast-mode-2026-02-01` beta header.
 
   - `"standard"`
@@ -2045,9 +2209,13 @@ Get Messages Usage Report
 
       End of the time bucket (exclusive) in RFC 3339 format.
 
-    - `results: array of object { api_key_id, cache_creation, cache_read_input_tokens, 9 more }`
+    - `results: array of object { account_id, api_key_id, cache_creation, 10 more }`
 
       List of usage items for this time bucket.  There may be multiple items if one or more `group_by[]` parameters are specified.
+
+      - `account_id: string`
+
+        ID of the user account that made the request. `null` if not grouping by account or for non-OAuth requests.
 
       - `api_key_id: string`
 
@@ -2098,6 +2266,10 @@ Get Messages Usage Report
 
           The number of web search requests made.
 
+      - `service_account_id: string`
+
+        ID of the service account that made the request. `null` if not grouping by service account or for non-OIDC-federation requests.
+
       - `service_tier: "standard" or "batch" or "priority" or 3 more`
 
         Service tier used. `null` if not grouping by service tier.
@@ -2113,15 +2285,6 @@ Get Messages Usage Report
         - `"flex"`
 
         - `"flex_discount"`
-
-      - `speed: "standard" or "fast"`
-
-        Speed of the usage (research preview). `null` if not grouping by speed.
-        Only returned when the `fast-mode-2026-02-01` beta header is provided.
-
-        - `"standard"`
-
-        - `"fast"`
 
       - `uncached_input_tokens: number`
 
@@ -2488,9 +2651,13 @@ curl https://api.anthropic.com/v1/organizations/usage_report/claude_code \
 
       End of the time bucket (exclusive) in RFC 3339 format.
 
-    - `results: array of object { api_key_id, cache_creation, cache_read_input_tokens, 9 more }`
+    - `results: array of object { account_id, api_key_id, cache_creation, 10 more }`
 
       List of usage items for this time bucket.  There may be multiple items if one or more `group_by[]` parameters are specified.
+
+      - `account_id: string`
+
+        ID of the user account that made the request. `null` if not grouping by account or for non-OAuth requests.
 
       - `api_key_id: string`
 
@@ -2541,6 +2708,10 @@ curl https://api.anthropic.com/v1/organizations/usage_report/claude_code \
 
           The number of web search requests made.
 
+      - `service_account_id: string`
+
+        ID of the service account that made the request. `null` if not grouping by service account or for non-OIDC-federation requests.
+
       - `service_tier: "standard" or "batch" or "priority" or 3 more`
 
         Service tier used. `null` if not grouping by service tier.
@@ -2556,15 +2727,6 @@ curl https://api.anthropic.com/v1/organizations/usage_report/claude_code \
         - `"flex"`
 
         - `"flex_discount"`
-
-      - `speed: "standard" or "fast"`
-
-        Speed of the usage (research preview). `null` if not grouping by speed.
-        Only returned when the `fast-mode-2026-02-01` beta header is provided.
-
-        - `"standard"`
-
-        - `"fast"`
 
       - `uncached_input_tokens: number`
 
@@ -2645,7 +2807,7 @@ Get Cost Report
 
       End of the time bucket (exclusive) in RFC 3339 format.
 
-    - `results: array of object { amount, context_window, cost_type, 8 more }`
+    - `results: array of object { amount, context_window, cost_type, 7 more }`
 
       List of cost items for this time bucket. There may be multiple items if one or more `group_by[]` parameters are specified.
 
@@ -2661,7 +2823,7 @@ Get Cost Report
 
         - `"200k-1M"`
 
-      - `cost_type: "tokens" or "web_search" or "code_execution"`
+      - `cost_type: "tokens" or "web_search" or "code_execution" or "session_usage"`
 
         Type of cost. `null` if not grouping by description.
 
@@ -2670,6 +2832,8 @@ Get Cost Report
         - `"web_search"`
 
         - `"code_execution"`
+
+        - `"session_usage"`
 
       - `currency: string`
 
@@ -2695,15 +2859,6 @@ Get Cost Report
         - `"standard"`
 
         - `"batch"`
-
-      - `speed: "standard" or "fast"`
-
-        Speed used (research preview). `null` if not grouping by speed, or for non-token costs.
-        Only returned when the `fast-mode-2026-02-01` beta header is provided.
-
-        - `"standard"`
-
-        - `"fast"`
 
       - `token_type: "uncached_input_tokens" or "output_tokens" or "cache_read_input_tokens" or 2 more`
 
@@ -2755,7 +2910,7 @@ curl https://api.anthropic.com/v1/organizations/cost_report \
 
       End of the time bucket (exclusive) in RFC 3339 format.
 
-    - `results: array of object { amount, context_window, cost_type, 8 more }`
+    - `results: array of object { amount, context_window, cost_type, 7 more }`
 
       List of cost items for this time bucket. There may be multiple items if one or more `group_by[]` parameters are specified.
 
@@ -2771,7 +2926,7 @@ curl https://api.anthropic.com/v1/organizations/cost_report \
 
         - `"200k-1M"`
 
-      - `cost_type: "tokens" or "web_search" or "code_execution"`
+      - `cost_type: "tokens" or "web_search" or "code_execution" or "session_usage"`
 
         Type of cost. `null` if not grouping by description.
 
@@ -2780,6 +2935,8 @@ curl https://api.anthropic.com/v1/organizations/cost_report \
         - `"web_search"`
 
         - `"code_execution"`
+
+        - `"session_usage"`
 
       - `currency: string`
 
@@ -2806,15 +2963,6 @@ curl https://api.anthropic.com/v1/organizations/cost_report \
 
         - `"batch"`
 
-      - `speed: "standard" or "fast"`
-
-        Speed used (research preview). `null` if not grouping by speed, or for non-token costs.
-        Only returned when the `fast-mode-2026-02-01` beta header is provided.
-
-        - `"standard"`
-
-        - `"fast"`
-
       - `token_type: "uncached_input_tokens" or "output_tokens" or "cache_read_input_tokens" or 2 more`
 
         Type of token. `null` if not grouping by description or for non-token costs.
@@ -2840,6 +2988,152 @@ curl https://api.anthropic.com/v1/organizations/cost_report \
   - `has_more: boolean`
 
     Indicates if there are more results.
+
+  - `next_page: string`
+
+    Token to provide in as `page` in the subsequent request to retrieve the next page of data.
+
+# Rate Limits
+
+## List
+
+**get** `/v1/organizations/rate_limits`
+
+List Messages API rate limits for your organization.
+
+Each entry corresponds to one rate-limit group (either a model family
+or an API-surface category such as the Files API or Message Batches)
+and contains the set of limiter values that apply to it.
+
+### Query Parameters
+
+- `group_type: optional "model_group" or "batch" or "token_count" or 3 more`
+
+  Filter by group type.
+
+  - `"model_group"`
+
+  - `"batch"`
+
+  - `"token_count"`
+
+  - `"files"`
+
+  - `"skills"`
+
+  - `"web_search"`
+
+- `model: optional string`
+
+  Filter to the single entry containing this model. Accepts full model names and aliases. Returns 404 if the model is not found or has no rate limits for this organization.
+
+- `page: optional string`
+
+  Opaque cursor from a previous response's `next_page`.
+
+### Returns
+
+- `data: array of object { group_type, limits, models, type }`
+
+  Rate-limit entries for the organization, one per group.
+
+  - `group_type: "model_group" or "batch" or "token_count" or 3 more`
+
+    The kind of rate-limit group this entry represents. `model_group` entries apply to a family of models (listed in `models`); other values apply to an API-surface category and have `models` set to `null`.
+
+    - `"model_group"`
+
+    - `"batch"`
+
+    - `"token_count"`
+
+    - `"files"`
+
+    - `"skills"`
+
+    - `"web_search"`
+
+  - `limits: array of object { type, value }`
+
+    The limiter values that apply to this group.
+
+    - `type: string`
+
+      The limiter type (for example, `requests_per_minute` or `input_tokens_per_minute`).
+
+    - `value: number`
+
+      The configured limit value for this limiter type.
+
+  - `models: array of string`
+
+    Model names this entry's limits apply to, including aliases. `null` when `group_type` is not `"model_group"`.
+
+  - `type: "rate_limit"`
+
+    Object type. Always `rate_limit` for organization rate-limit entries.
+
+    - `"rate_limit"`
+
+- `next_page: string`
+
+  Token to provide in as `page` in the subsequent request to retrieve the next page of data.
+
+### Example
+
+```http
+curl https://api.anthropic.com/v1/organizations/rate_limits \
+    -H 'anthropic-version: 2023-06-01' \
+    -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
+```
+
+## Domain Types
+
+### Rate Limit List Response
+
+- `RateLimitListResponse = object { data, next_page }`
+
+  - `data: array of object { group_type, limits, models, type }`
+
+    Rate-limit entries for the organization, one per group.
+
+    - `group_type: "model_group" or "batch" or "token_count" or 3 more`
+
+      The kind of rate-limit group this entry represents. `model_group` entries apply to a family of models (listed in `models`); other values apply to an API-surface category and have `models` set to `null`.
+
+      - `"model_group"`
+
+      - `"batch"`
+
+      - `"token_count"`
+
+      - `"files"`
+
+      - `"skills"`
+
+      - `"web_search"`
+
+    - `limits: array of object { type, value }`
+
+      The limiter values that apply to this group.
+
+      - `type: string`
+
+        The limiter type (for example, `requests_per_minute` or `input_tokens_per_minute`).
+
+      - `value: number`
+
+        The configured limit value for this limiter type.
+
+    - `models: array of string`
+
+      Model names this entry's limits apply to, including aliases. `null` when `group_type` is not `"model_group"`.
+
+    - `type: "rate_limit"`
+
+      Object type. Always `rate_limit` for organization rate-limit entries.
+
+      - `"rate_limit"`
 
   - `next_page: string`
 

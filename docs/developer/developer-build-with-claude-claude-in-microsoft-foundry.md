@@ -57,7 +57,7 @@ dotnet add package Anthropic.Foundry
 <Tabs>
 <Tab title="Gradle">
 ```kotlin
-implementation("com.anthropic:anthropic-java-foundry:2.20.0")
+implementation("com.anthropic:anthropic-java-foundry:2.27.0")
 ```
 </Tab>
 <Tab title="Maven">
@@ -65,7 +65,7 @@ implementation("com.anthropic:anthropic-java-foundry:2.20.0")
 <dependency>
     <groupId>com.anthropic</groupId>
     <artifactId>anthropic-java-foundry</artifactId>
-    <version>2.20.0</version>
+    <version>2.27.0</version>
 </dependency>
 ```
 </Tab>

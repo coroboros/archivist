@@ -16,7 +16,7 @@ The latest web search tool version (`web_search_20260209`) supports **dynamic fi
 For [Claude Mythos Preview](https://anthropic.com/glasswing), web search is supported on the Claude API, Microsoft Foundry, and Google Vertex AI. Web search is not available for Mythos Preview on Amazon Bedrock.
 </Note>
 
-For Zero Data Retention eligibility and the `allowed_callers` workaround, see [Server tools](https://platform.claude.com/docs/en/agents-and-tools/tool-use/server-tools.md#zdr-and-allowed-callers).
+For Zero Data Retention eligibility and the `allowed_callers` workaround, see [Server tools](./developer-agents-and-tools-tool-use-server-tools.md#zdr-and-allowed-callers).
 
 For model support, see the [Tool reference](./developer-agents-and-tools-tool-use-tool-reference.md).
 
@@ -503,7 +503,7 @@ The `max_uses` parameter limits the number of searches performed. If Claude atte
 
 #### Domain filtering
 
-For domain filtering with `allowed_domains` and `blocked_domains`, see [Server tools](https://platform.claude.com/docs/en/agents-and-tools/tool-use/server-tools.md#domain-filtering).
+For domain filtering with `allowed_domains` and `blocked_domains`, see [Server tools](./developer-agents-and-tools-tool-use-server-tools.md#domain-filtering).
 
 #### Localization
 
@@ -631,11 +631,11 @@ These are the possible error codes:
 
 #### `pause_turn` stop reason
 
-For continuing after a `pause_turn` stop reason, see [Server tools](https://platform.claude.com/docs/en/agents-and-tools/tool-use/server-tools.md#the-server-side-loop-and-pause-turn).
+For continuing after a `pause_turn` stop reason, see [Server tools](./developer-agents-and-tools-tool-use-server-tools.md#the-server-side-loop-and-pause-turn).
 
 ## Prompt caching
 
-For caching tool definitions across turns, see [Tool use with prompt caching](https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-use-with-prompt-caching.md).
+For caching tool definitions across turns, see [Tool use with prompt caching](./developer-agents-and-tools-tool-use-tool-use-with-prompt-caching.md).
 
 ## Streaming
 
@@ -693,7 +693,7 @@ Each web search counts as one use, regardless of the number of results returned.
 ## Next steps
 
 <CardGroup>
-  <Card href="https://platform.claude.com/docs/en/agents-and-tools/tool-use/server-tools.md" title="Server tools">
+  <Card href="./developer-agents-and-tools-tool-use-server-tools.md" title="Server tools">
     Shared mechanics for Anthropic-executed tools.
   </Card>
   <Card href="./developer-agents-and-tools-tool-use-tool-reference.md" title="Tool reference">

@@ -38,7 +38,7 @@ Get User
 
     Name of the User.
 
-  - `role: "user" or "developer" or "billing" or 3 more`
+  - `role: "user" or "developer" or "billing" or 2 more`
 
     Organization role of the User.
 
@@ -51,8 +51,6 @@ Get User
     - `"admin"`
 
     - `"claude_code_user"`
-
-    - `"managed"`
 
   - `type: "user"`
 
@@ -116,7 +114,7 @@ List Users
 
     Name of the User.
 
-  - `role: "user" or "developer" or "billing" or 3 more`
+  - `role: "user" or "developer" or "billing" or 2 more`
 
     Organization role of the User.
 
@@ -129,8 +127,6 @@ List Users
     - `"admin"`
 
     - `"claude_code_user"`
-
-    - `"managed"`
 
   - `type: "user"`
 
@@ -174,7 +170,7 @@ Update User
 
 ### Body Parameters
 
-- `role: "user" or "developer" or "billing" or 2 more`
+- `role: "user" or "developer" or "billing" or "claude_code_user"`
 
   New role for the User. Cannot be "admin".
 
@@ -185,8 +181,6 @@ Update User
   - `"billing"`
 
   - `"claude_code_user"`
-
-  - `"managed"`
 
 ### Returns
 
@@ -208,7 +202,7 @@ Update User
 
     Name of the User.
 
-  - `role: "user" or "developer" or "billing" or 3 more`
+  - `role: "user" or "developer" or "billing" or 2 more`
 
     Organization role of the User.
 
@@ -221,8 +215,6 @@ Update User
     - `"admin"`
 
     - `"claude_code_user"`
-
-    - `"managed"`
 
   - `type: "user"`
 
@@ -301,7 +293,7 @@ curl https://api.anthropic.com/v1/organizations/users/$USER_ID \
 
     Name of the User.
 
-  - `role: "user" or "developer" or "billing" or 3 more`
+  - `role: "user" or "developer" or "billing" or 2 more`
 
     Organization role of the User.
 
@@ -314,8 +306,6 @@ curl https://api.anthropic.com/v1/organizations/users/$USER_ID \
     - `"admin"`
 
     - `"claude_code_user"`
-
-    - `"managed"`
 
   - `type: "user"`
 

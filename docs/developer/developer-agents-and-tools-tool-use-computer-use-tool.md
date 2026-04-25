@@ -571,7 +571,7 @@ Here are some tips on how to get the best quality outputs:
 
 ### System prompts
 
-When one of the Anthropic-schema tools is requested via the Claude API, a computer use-specific system prompt is generated. It's similar to the [tool use system prompt](https://platform.claude.com/docs/en/agents-and-tools/tool-use/define-tools.md#tool-use-system-prompt) but starts with:
+When one of the Anthropic-schema tools is requested via the Claude API, a computer use-specific system prompt is generated. It's similar to the [tool use system prompt](./developer-agents-and-tools-tool-use-define-tools.md#tool-use-system-prompt) but starts with:
 
 > You have access to a set of functions you can use to answer the user's question. This includes access to a sandboxed computing environment. You do NOT currently have the ability to inspect files or interact with external resources, except by invoking the below functions.
 
@@ -724,7 +724,7 @@ For combining computer use with extended thinking, see [Extended thinking](./dev
 
 ### Augmenting computer use with other tools
 
-To add other tools alongside computer use, include them in the same `tools` array. The quick start above shows this pattern with the [bash tool](./developer-agents-and-tools-tool-use-bash-tool.md) and [text editor tool](./developer-agents-and-tools-tool-use-text-editor-tool.md). You can add your own [custom tool definitions](https://platform.claude.com/docs/en/agents-and-tools/tool-use/define-tools.md) the same way.
+To add other tools alongside computer use, include them in the same `tools` array. The quick start above shows this pattern with the [bash tool](./developer-agents-and-tools-tool-use-bash-tool.md) and [text editor tool](./developer-agents-and-tools-tool-use-text-editor-tool.md). You can add your own [custom tool definitions](./developer-agents-and-tools-tool-use-define-tools.md) the same way.
 
 ### Build a custom computer use environment
 

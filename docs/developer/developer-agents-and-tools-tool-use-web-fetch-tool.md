@@ -22,7 +22,7 @@ For [Claude Mythos Preview](https://anthropic.com/glasswing), web fetch is suppo
 Use the [feedback form](https://forms.gle/NhWcgmkcvPCMmPE86) to provide feedback on the quality of the model responses, the API itself, or the quality of the documentation.
 </Note>
 
-For Zero Data Retention eligibility and the `allowed_callers` workaround, see [Server tools](https://platform.claude.com/docs/en/agents-and-tools/tool-use/server-tools.md#zdr-and-allowed-callers).
+For Zero Data Retention eligibility and the `allowed_callers` workaround, see [Server tools](./developer-agents-and-tools-tool-use-server-tools.md#zdr-and-allowed-callers).
 
 <Warning>
 Enabling the web fetch tool in environments where Claude processes untrusted input alongside sensitive data poses data exfiltration risks. Only use this tool in trusted environments or when handling non-sensitive data.
@@ -523,7 +523,7 @@ The `max_uses` parameter limits the number of web fetches performed. If Claude a
 
 #### Domain filtering
 
-For domain filtering with `allowed_domains` and `blocked_domains`, see [Server tools](https://platform.claude.com/docs/en/agents-and-tools/tool-use/server-tools.md#domain-filtering).
+For domain filtering with `allowed_domains` and `blocked_domains`, see [Server tools](./developer-agents-and-tools-tool-use-server-tools.md#domain-filtering).
 
 #### Content limits
 
@@ -724,7 +724,7 @@ In this workflow, Claude will:
 
 ## Prompt caching
 
-For caching tool definitions across turns, see [Tool use with prompt caching](https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-use-with-prompt-caching.md).
+For caching tool definitions across turns, see [Tool use with prompt caching](./developer-agents-and-tools-tool-use-tool-use-with-prompt-caching.md).
 
 ## Streaming
 
@@ -787,7 +787,7 @@ Example token usage for typical content:
 ## Next steps
 
 <CardGroup>
-  <Card href="https://platform.claude.com/docs/en/agents-and-tools/tool-use/server-tools.md" title="Server tools">
+  <Card href="./developer-agents-and-tools-tool-use-server-tools.md" title="Server tools">
     Shared mechanics for Anthropic-executed tools.
   </Card>
   <Card href="./developer-agents-and-tools-tool-use-tool-reference.md" title="Tool reference">
