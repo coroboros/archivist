@@ -120,7 +120,7 @@ For more details on cloud execution, see [Claude Code on the web](./code-claude-
 
 * Review all suggested changes before approval
 * Use project-specific permission settings for sensitive repositories
-* Consider using [devcontainers](./code-devcontainer.md) for additional isolation
+* Consider using [dev containers](./code-devcontainer.md) for additional isolation
 * Regularly audit your permission settings with `/permissions`
 
 ### Team security

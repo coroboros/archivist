@@ -140,12 +140,12 @@ const response = await client.beta.messages.create({
       }
     ]
   }
-} as unknown as Anthropic.Beta.Messages.MessageCreateParamsNonStreaming);
+});
 
 // Append the response (including any compaction block) to continue the conversation
 messages.push({
   role: "assistant",
-  content: response.content as unknown as Anthropic.Beta.Messages.BetaContentBlockParam[]
+  content: response.content
 });
 ```
 
@@ -392,7 +392,7 @@ const response = await client.beta.messages.create({
       }
     ]
   }
-} as unknown as Anthropic.Beta.Messages.MessageCreateParamsNonStreaming);
+});
 ```
 
 ```csharp C# hidelines={1..13,-2..}
@@ -621,7 +621,7 @@ const response = await client.beta.messages.create({
       }
     ]
   }
-} as unknown as Anthropic.Beta.Messages.MessageCreateParamsNonStreaming);
+});
 ```
 
 ```csharp C#
@@ -881,14 +881,14 @@ let response = await client.beta.messages.create({
       }
     ]
   }
-} as unknown as Anthropic.Beta.Messages.MessageCreateParamsNonStreaming);
+});
 
 // Check if compaction triggered a pause
-if ((response.stop_reason as string) === "compaction") {
+if (response.stop_reason === "compaction") {
   // Response contains only the compaction block
   messages.push({
     role: "assistant",
-    content: response.content as unknown as Anthropic.Beta.Messages.BetaContentBlockParam[]
+    content: response.content
   });
 
   // Continue the request
@@ -900,7 +900,7 @@ if ((response.stop_reason as string) === "compaction") {
     context_management: {
       edits: [{ type: "compact_20260112" }]
     }
-  } as unknown as Anthropic.Beta.Messages.MessageCreateParamsNonStreaming);
+  });
 }
 ```
 
@@ -1297,12 +1297,12 @@ const response = await client.beta.messages.create({
   context_management: {
     edits: [{ type: "compact_20260112" }]
   }
-} as unknown as Anthropic.Beta.Messages.MessageCreateParamsNonStreaming);
+});
 
 // After receiving a response with a compaction block
 messages.push({
   role: "assistant",
-  content: response.content as unknown as Anthropic.Beta.Messages.BetaContentBlockParam[]
+  content: response.content
 });
 
 // Continue the conversation
@@ -1316,7 +1316,7 @@ const nextResponse = await client.beta.messages.create({
   context_management: {
     edits: [{ type: "compact_20260112" }]
   }
-} as unknown as Anthropic.Beta.Messages.MessageCreateParamsNonStreaming);
+});
 ```
 
 ```csharp C#
@@ -1594,7 +1594,7 @@ with client.beta.messages.stream(
 
         elif event.type == "content_block_delta":
             if event.delta.type == "compaction_delta":
-                print(f"Compaction complete: {len(event.delta.content)} chars")
+                print(f"Compaction complete: {len(event.delta.content or '')} chars")
             elif event.delta.type == "text_delta":
                 print(event.delta.text, end="", flush=True)
 
@@ -1603,7 +1603,7 @@ with client.beta.messages.stream(
     messages.append({"role": "assistant", "content": message.content})
 ```
 
-```typescript TypeScript nocheck hidelines={1..2}
+```typescript TypeScript hidelines={1..2}
 import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
@@ -1617,22 +1617,18 @@ const stream = await client.beta.messages.stream({
   context_management: {
     edits: [{ type: "compact_20260112" }]
   }
-} as unknown as Anthropic.Beta.Messages.BetaMessageStreamParams);
+});
 
 for await (const event of stream) {
   if (event.type === "content_block_start") {
-    if ((event.content_block as { type: string }).type === "compaction") {
+    if (event.content_block.type === "compaction") {
       console.log("Compaction started...");
     } else if (event.content_block.type === "text") {
       console.log("Text response started...");
     }
   } else if (event.type === "content_block_delta") {
-    if ((event.delta as { type: string }).type === "compaction_delta") {
-      console.log(
-        `Compaction complete: ${
-          (event.delta as unknown as { content: string }).content.length
-        } chars`
-      );
+    if (event.delta.type === "compaction_delta") {
+      console.log(`Compaction complete: ${event.delta.content?.length ?? 0} chars`);
     } else if (event.delta.type === "text_delta") {
       process.stdout.write(event.delta.text);
     }
@@ -1643,7 +1639,7 @@ for await (const event of stream) {
 const message = await stream.finalMessage();
 messages.push({
   role: "assistant",
-  content: message.content as unknown as Anthropic.Beta.Messages.BetaContentBlockParam[]
+  content: message.content
 });
 ```
 
@@ -1828,7 +1824,7 @@ foreach ($stream as $event) {
         }
     } elseif ($event->type === 'content_block_delta') {
         if ($event->delta->type === 'compaction_delta') {
-            echo "Compaction complete: " . strlen($event->delta->content) . " chars\n";
+            echo "Compaction complete: " . strlen($event->delta->content ?? '') . " chars\n";
         } elseif ($event->delta->type === 'text_delta') {
             echo $event->delta->text;
         }
@@ -1862,7 +1858,7 @@ stream.each do |event|
     end
   when :content_block_delta
     if event.delta.type == :compaction_delta
-      puts "Compaction complete: #{event.delta.content.length} chars"
+      puts "Compaction complete: #{(event.delta.content || "").length} chars"
     elsif event.delta.type == :text_delta
       print event.delta.text
     end
@@ -1964,7 +1960,7 @@ const response = await client.beta.messages.create({
   context_management: {
     edits: [{ type: "compact_20260112" }]
   }
-} as unknown as Anthropic.Beta.Messages.MessageCreateParamsNonStreaming);
+});
 ```
 
 ```csharp C#
@@ -2238,7 +2234,7 @@ const countResponse = await client.beta.messages.countTokens({
   context_management: {
     edits: [{ type: "compact_20260112" }]
   }
-} as unknown as Anthropic.Beta.Messages.MessageCountTokensParams);
+});
 
 console.log(`Current tokens: ${countResponse.input_tokens}`);
 console.log(`Original tokens: ${countResponse.context_management!.original_input_tokens}`);
