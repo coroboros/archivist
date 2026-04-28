@@ -10,7 +10,7 @@
 Auto-synced official docs and curated Anthropic team insights, built for **deterministic local lookup** via the Claude Code CLI — no RAG, no retrieval blind spots.
 
 [![latest](https://img.shields.io/github/v/release/coroboros/archivist?style=flat-square&label=latest&color=000000)](https://github.com/coroboros/archivist/releases)
-[![ci • sync-docs](https://img.shields.io/github/actions/workflow/status/coroboros/archivist/sync-docs.yml?branch=main&style=flat-square&label=ci%20%E2%80%A2%20sync-docs&color=000000)](https://github.com/coroboros/archivist/actions/workflows/sync-docs.yml)
+[![sync-docs](https://img.shields.io/github/actions/workflow/status/coroboros/archivist/sync-docs.yml?branch=main&style=flat-square&label=sync-docs&color=000000)](https://github.com/coroboros/archivist/actions/workflows/sync-docs.yml)
 [![branch](https://img.shields.io/badge/branch-stable-000000?style=flat-square)](https://github.com/coroboros/archivist)
 [![license](https://img.shields.io/badge/license-MIT-000000?style=flat-square)](https://opensource.org/licenses/MIT)
 [![stars](https://img.shields.io/github/stars/coroboros/archivist?style=flat-square&label=stars&color=000000)](https://github.com/coroboros/archivist)
