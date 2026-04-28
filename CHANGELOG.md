@@ -1,5 +1,13 @@
 # Changelog
 
+## 🧑‍💻 v1.0.11 - 28/04/2026
+
+### Refactoring
+- Renamed workflow `update-docs.yml` → `sync-docs.yml` — file path, internal `name:` field, and references in `README.md`, `CLAUDE.md`, and `.claude/rules/changelog.md` all aligned
+
+### Documentation
+- README badge label simplified to `sync-docs` — convention with sister repo `coroboros/agent-skills`: `ci` reserved for lint/build/test workflows, cron jobs use their function name
+
 ## 🤖 v1.0.10 - 28/04/2026
 
 File Changes:
