@@ -12,7 +12,7 @@ paths:
 
 Version headers MUST include a leading emoji distinguishing authorship — required because this repo interleaves CI auto-fetch entries (every 12h) with manual entries:
 
-- `🤖` for CI-authored entries (the `update-docs` workflow)
+- `🤖` for CI-authored entries (the `sync-docs` workflow)
 - `🧑‍💻` for human/assistant-authored entries
 
 Example:
@@ -29,4 +29,4 @@ Example:
 
 ## Prepend workflow
 
-When prepending a new entry: prefix the version header with `🧑‍💻` for manual or human-initiated entries. `🤖` is reserved for the `update-docs` CI workflow — do not use it for manual entries.
+When prepending a new entry: prefix the version header with `🧑‍💻` for manual or human-initiated entries. `🤖` is reserved for the `sync-docs` CI workflow — do not use it for manual entries.

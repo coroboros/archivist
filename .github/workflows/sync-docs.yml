@@ -1,4 +1,4 @@
-name: Update, Version, Publish, and Sync Docs
+name: sync-docs
 
 on:
   workflow_dispatch:

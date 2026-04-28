@@ -10,7 +10,7 @@
 Auto-synced official docs and curated Anthropic team insights, built for **deterministic local lookup** via the Claude Code CLI — no RAG, no retrieval blind spots.
 
 [![latest](https://img.shields.io/github/v/release/coroboros/archivist?style=flat-square&label=latest&color=000000)](https://github.com/coroboros/archivist/releases)
-[![ci](https://img.shields.io/github/actions/workflow/status/coroboros/archivist/update-docs.yml?style=flat-square&label=ci&color=000000)](https://github.com/coroboros/archivist/actions/workflows/update-docs.yml)
+[![sync-docs](https://img.shields.io/github/actions/workflow/status/coroboros/archivist/sync-docs.yml?branch=main&style=flat-square&label=sync-docs&color=000000)](https://github.com/coroboros/archivist/actions/workflows/sync-docs.yml)
 [![branch](https://img.shields.io/badge/branch-stable-000000?style=flat-square)](https://github.com/coroboros/archivist)
 [![license](https://img.shields.io/badge/license-MIT-000000?style=flat-square)](https://opensource.org/licenses/MIT)
 [![stars](https://img.shields.io/github/stars/coroboros/archivist?style=flat-square&label=stars&color=000000)](https://github.com/coroboros/archivist)
@@ -31,7 +31,7 @@ Auto-synced official docs and curated Anthropic team insights, built for **deter
 
 ## Documentation
 
-Auto-updated mirror of the official Claude documentation, refreshed every 12h via [GitHub Actions](./.github/workflows/update-docs.yml). Structure follows [Claude Project Knowledge Base best practices](./docs/insights/claude-project-knowledge-bases-best-practices.md).
+Auto-updated mirror of the official Claude documentation, refreshed every 12h via [GitHub Actions](./.github/workflows/sync-docs.yml). Structure follows [Claude Project Knowledge Base best practices](./docs/insights/claude-project-knowledge-bases-best-practices.md).
 
 | Section | Source | Link |
 |---------|--------|------|
@@ -116,7 +116,7 @@ For high-precision work (regulated content, technical writing, audit-grade resea
 
 ## Automated Updates
 
-The [GitHub Actions workflow](./.github/workflows/update-docs.yml) runs every 12h:
+The [GitHub Actions workflow](./.github/workflows/sync-docs.yml) runs every 12h:
 
 1. Fetches latest Claude docs from Anthropic sitemaps
 2. Generates markdown files with YAML frontmatter
