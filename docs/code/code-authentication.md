@@ -31,7 +31,7 @@ You can authenticate with any of these account types:
 
 To log out and re-authenticate, type `/logout` at the Claude Code prompt.
 
-If you're having trouble logging in, see [authentication troubleshooting](./code-troubleshooting.md#authentication-issues).
+If you're having trouble logging in, see [authentication troubleshooting](./code-troubleshoot-install.md#login-and-authentication).
 
 ## Set up team authentication
 

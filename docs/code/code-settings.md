@@ -919,4 +919,4 @@ See the [tools reference](./code-tools-reference.md) for the full list and Bash 
 * [Permissions](./code-permissions.md): permission system, rule syntax, tool-specific patterns, and managed policies
 * [Authentication](./code-authentication.md): set up user access to Claude Code
 * [Debug your configuration](./code-debug-your-config.md): diagnose why a setting, hook, or MCP server isn't taking effect
-* [Troubleshooting](./code-troubleshooting.md): installation, authentication, and platform issues
+* [Troubleshoot installation and login](./code-troubleshoot-install.md): installation, authentication, and platform issues
