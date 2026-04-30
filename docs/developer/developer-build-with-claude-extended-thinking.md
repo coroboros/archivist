@@ -333,7 +333,7 @@ The `budget_tokens` parameter determines the maximum number of tokens Claude is 
 [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.7, and Claude Opus 4.6 support up to 128k output tokens. Claude Sonnet 4.6 and Claude Haiku 4.5 support up to 64k. See the [models overview](./developer-about-claude-models-overview.md) for limits on legacy models. On the [Message Batches API](./developer-build-with-claude-batch-processing.md#extended-output-beta), the `output-300k-2026-03-24` [beta header](../api/api-beta-headers.md) raises the output limit to 300k for Opus 4.7, Opus 4.6, and Sonnet 4.6.
 </Note>
 
-`budget_tokens` must be set to a value less than `max_tokens`. However, when using [interleaved thinking with tools](#interleaved-thinking), you can exceed this limit as the token limit becomes your entire context window.
+`budget_tokens` must be set to a value less than `max_tokens`. However, when using [interleaved thinking with tools](#interleaved-thinking), you can exceed this limit as the token limit becomes your entire context window. Because `budget_tokens` must be less than `max_tokens`, extended thinking cannot be combined with `max_tokens: 0` ([cache pre-warming](./developer-build-with-claude-prompt-caching.md#pre-warming-the-cache)).
 
 ### Summarized thinking
 
