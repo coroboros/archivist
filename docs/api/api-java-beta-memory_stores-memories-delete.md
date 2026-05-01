@@ -9,7 +9,7 @@ generated: true
 
 **delete** `/v1/memory_stores/{memory_store_id}/memories/{memory_id}`
 
-DeleteMemory
+Delete a memory
 
 ### Parameters
 
@@ -69,13 +69,19 @@ DeleteMemory
 
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
+    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
 ### Returns
 
 - `class BetaManagedAgentsDeletedMemory:`
 
+  Tombstone returned by [Delete a memory](./api-beta-memory_stores-memories-delete.md). The memory's version history persists and remains listable via [List memory versions](./api-beta-memory_stores-memory_versions-list.md) until the store itself is deleted.
+
   - `String id`
+
+    ID of the deleted memory (a `mem_...` value).
 
   - `Type type`
 

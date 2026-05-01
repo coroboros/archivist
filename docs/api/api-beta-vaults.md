@@ -20,7 +20,7 @@ Create Vault
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 20 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -63,6 +63,8 @@ Create Vault
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
 
     - `"advisor-tool-2026-03-01"`
 
@@ -151,7 +153,7 @@ List Vaults
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 20 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -194,6 +196,8 @@ List Vaults
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
 
     - `"advisor-tool-2026-03-01"`
 
@@ -262,7 +266,7 @@ Get Vault
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 20 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -305,6 +309,8 @@ Get Vault
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
 
     - `"advisor-tool-2026-03-01"`
 
@@ -369,7 +375,7 @@ Update Vault
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 20 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -412,6 +418,8 @@ Update Vault
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
 
     - `"advisor-tool-2026-03-01"`
 
@@ -488,7 +496,7 @@ Delete Vault
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 20 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -531,6 +539,8 @@ Delete Vault
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
 
     - `"advisor-tool-2026-03-01"`
 
@@ -576,7 +586,7 @@ Archive Vault
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 20 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -619,6 +629,8 @@ Archive Vault
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
 
     - `"advisor-tool-2026-03-01"`
 
@@ -736,7 +748,7 @@ Create Credential
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 20 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -779,6 +791,8 @@ Create Credential
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
 
     - `"advisor-tool-2026-03-01"`
 
@@ -1059,7 +1073,7 @@ List Credentials
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 20 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -1102,6 +1116,8 @@ List Credentials
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
 
     - `"advisor-tool-2026-03-01"`
 
@@ -1256,7 +1272,7 @@ Get Credential
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 20 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -1299,6 +1315,8 @@ Get Credential
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
 
     - `"advisor-tool-2026-03-01"`
 
@@ -1449,7 +1467,7 @@ Update Credential
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 20 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -1492,6 +1510,8 @@ Update Credential
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
 
     - `"advisor-tool-2026-03-01"`
 
@@ -1726,7 +1746,7 @@ Delete Credential
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 20 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -1769,6 +1789,8 @@ Delete Credential
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
 
     - `"advisor-tool-2026-03-01"`
 
@@ -1816,7 +1838,7 @@ Archive Credential
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 20 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -1859,6 +1881,8 @@ Archive Credential
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
 
     - `"advisor-tool-2026-03-01"`
 

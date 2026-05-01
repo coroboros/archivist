@@ -42,7 +42,7 @@ List Events
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 20 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -85,6 +85,8 @@ List Events
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
 
     - `"advisor-tool-2026-03-01"`
 
@@ -1489,7 +1491,7 @@ Send Events
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 20 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -1532,6 +1534,8 @@ Send Events
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
 
     - `"advisor-tool-2026-03-01"`
 
@@ -2320,7 +2324,7 @@ Stream Events
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 19 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 20 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -2363,6 +2367,8 @@ Stream Events
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
 
     - `"advisor-tool-2026-03-01"`
 

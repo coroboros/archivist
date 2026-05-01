@@ -38,7 +38,7 @@ The Models API response can be used to determine which models are available for 
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 19 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 20 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -81,6 +81,8 @@ The Models API response can be used to determine which models are available for 
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
 
     - `"advisor-tool-2026-03-01"`
 
@@ -191,6 +193,14 @@ The Models API response can be used to determine which models are available for 
       - `supported: bool`
 
         Whether this capability is supported by the model.
+
+      - `xhigh: Optional[BetaCapabilitySupport]`
+
+        Indicates whether a capability is supported.
+
+        - `supported: bool`
+
+          Whether this capability is supported by the model.
 
     - `image_input: BetaCapabilitySupport`
 
@@ -304,7 +314,7 @@ The Models API response can be used to determine information about a specific mo
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 19 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 20 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -347,6 +357,8 @@ The Models API response can be used to determine information about a specific mo
     - `"fast-mode-2026-02-01"`
 
     - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
 
     - `"advisor-tool-2026-03-01"`
 
@@ -457,6 +469,14 @@ The Models API response can be used to determine information about a specific mo
       - `supported: bool`
 
         Whether this capability is supported by the model.
+
+      - `xhigh: Optional[BetaCapabilitySupport]`
+
+        Indicates whether a capability is supported.
+
+        - `supported: bool`
+
+          Whether this capability is supported by the model.
 
     - `image_input: BetaCapabilitySupport`
 
@@ -637,6 +657,14 @@ print(beta_model_info.id)
 
     Whether this capability is supported by the model.
 
+  - `xhigh: Optional[BetaCapabilitySupport]`
+
+    Indicates whether a capability is supported.
+
+    - `supported: bool`
+
+      Whether this capability is supported by the model.
+
 ### Beta Model Capabilities
 
 - `class BetaModelCapabilities: …`
@@ -738,6 +766,14 @@ print(beta_model_info.id)
     - `supported: bool`
 
       Whether this capability is supported by the model.
+
+    - `xhigh: Optional[BetaCapabilitySupport]`
+
+      Indicates whether a capability is supported.
+
+      - `supported: bool`
+
+        Whether this capability is supported by the model.
 
   - `image_input: BetaCapabilitySupport`
 
@@ -898,6 +934,14 @@ print(beta_model_info.id)
       - `supported: bool`
 
         Whether this capability is supported by the model.
+
+      - `xhigh: Optional[BetaCapabilitySupport]`
+
+        Indicates whether a capability is supported.
+
+        - `supported: bool`
+
+          Whether this capability is supported by the model.
 
     - `image_input: BetaCapabilitySupport`
 

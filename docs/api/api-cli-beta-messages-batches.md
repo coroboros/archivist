@@ -1360,7 +1360,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `type: "container_upload"`
 
-          - `beta_compaction_block: object { content, type }`
+          - `beta_compaction_block: object { content, encrypted_content, type }`
 
             A compaction block returned when autocompact is triggered.
 
@@ -1371,6 +1371,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `content: string`
 
               Summary of compacted content, or null if compaction failed
+
+            - `encrypted_content: string`
+
+              Opaque metadata from prior compaction, to be round-tripped verbatim
 
             - `type: "compaction"`
 
@@ -2888,7 +2892,7 @@ ant beta:messages:batches results \
 
             - `type: "container_upload"`
 
-          - `beta_compaction_block: object { content, type }`
+          - `beta_compaction_block: object { content, encrypted_content, type }`
 
             A compaction block returned when autocompact is triggered.
 
@@ -2899,6 +2903,10 @@ ant beta:messages:batches results \
             - `content: string`
 
               Summary of compacted content, or null if compaction failed
+
+            - `encrypted_content: string`
+
+              Opaque metadata from prior compaction, to be round-tripped verbatim
 
             - `type: "compaction"`
 
@@ -4246,7 +4254,7 @@ ant beta:messages:batches results \
 
           - `type: "container_upload"`
 
-        - `beta_compaction_block: object { content, type }`
+        - `beta_compaction_block: object { content, encrypted_content, type }`
 
           A compaction block returned when autocompact is triggered.
 
@@ -4257,6 +4265,10 @@ ant beta:messages:batches results \
           - `content: string`
 
             Summary of compacted content, or null if compaction failed
+
+          - `encrypted_content: string`
+
+            Opaque metadata from prior compaction, to be round-tripped verbatim
 
           - `type: "compaction"`
 
@@ -5566,7 +5578,7 @@ ant beta:messages:batches results \
 
         - `type: "container_upload"`
 
-      - `beta_compaction_block: object { content, type }`
+      - `beta_compaction_block: object { content, encrypted_content, type }`
 
         A compaction block returned when autocompact is triggered.
 
@@ -5577,6 +5589,10 @@ ant beta:messages:batches results \
         - `content: string`
 
           Summary of compacted content, or null if compaction failed
+
+        - `encrypted_content: string`
+
+          Opaque metadata from prior compaction, to be round-tripped verbatim
 
         - `type: "compaction"`
 

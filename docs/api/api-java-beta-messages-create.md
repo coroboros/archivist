@@ -65,6 +65,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
+    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
   - `long maxTokens`
@@ -72,6 +74,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
     The maximum number of tokens to generate before stopping.
 
     Note that our models may stop _before_ reaching this maximum. This parameter only specifies the absolute maximum number of tokens to generate.
+
+    Set to `0` to populate the [prompt cache](https://docs.claude.com/en/docs/build-with-claude/prompt-caching#pre-warming-the-cache) without generating a response.
 
     Different models have different maximum values for this parameter.  See [models](https://docs.claude.com/en/docs/models-overview) for details.
 
@@ -2713,6 +2717,10 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
               - `TTL_1H("1h")`
 
+          - `Optional<String> encryptedContent`
+
+            Opaque metadata from prior compaction, to be round-tripped verbatim
+
     - `Role role`
 
       - `USER("user")`
@@ -4613,6 +4621,10 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
     Recommended for advanced use cases only.
 
+  - `Optional<String> userProfileId`
+
+    The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
+
 ### Returns
 
 - `class BetaMessage:`
@@ -5533,6 +5545,10 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
       - `Optional<String> content`
 
         Summary of compacted content, or null if compaction failed
+
+      - `Optional<String> encryptedContent`
+
+        Opaque metadata from prior compaction, to be round-tripped verbatim
 
       - `JsonValue; type "compaction"constant`
 

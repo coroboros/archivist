@@ -12,7 +12,7 @@ generated: true
 
 **get** `/v1/memory_stores/{memory_store_id}/memory_versions`
 
-ListMemoryVersions
+List memory versions
 
 ### Parameters
 
@@ -106,13 +106,19 @@ ListMemoryVersions
 
       - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
 ### Returns
 
 - `type BetaManagedAgentsMemoryVersion struct{…}`
 
+  A `memory_version` object: one immutable, attributed row in a memory's append-only history. Every non-no-op mutation to a memory produces a new version. Versions belong to the store (not the individual memory) and persist after the memory is deleted. Retrieving a redacted version returns 200 with `content`, `path`, `content_size_bytes`, and `content_sha256` set to `null`; branch on `redacted_at`, not HTTP status.
+
   - `ID string`
+
+    Unique identifier for this version (a `memver_...` value).
 
   - `CreatedAt Time`
 
@@ -120,11 +126,15 @@ ListMemoryVersions
 
   - `MemoryID string`
 
+    ID of the memory this version snapshots (a `mem_...` value). Remains valid after the memory is deleted; pass it as `memory_id` to [List memory versions](./api-beta-memory_stores-memory_versions-list.md) to retrieve the full lineage including the `deleted` row.
+
   - `MemoryStoreID string`
+
+    ID of the memory store this version belongs to (a `memstore_...` value).
 
   - `Operation BetaManagedAgentsMemoryVersionOperation`
 
-    MemoryVersionOperation enum
+    The kind of mutation a `memory_version` records. Every non-no-op mutation to a memory appends exactly one version row with one of these values.
 
     - `const BetaManagedAgentsMemoryVersionOperationCreated BetaManagedAgentsMemoryVersionOperation = "created"`
 
@@ -138,15 +148,27 @@ ListMemoryVersions
 
   - `Content string`
 
+    The memory's UTF-8 text content as of this version. `null` when `view=basic`, when `operation` is `deleted`, or when `redacted_at` is set.
+
   - `ContentSha256 string`
+
+    Lowercase hex SHA-256 digest of `content` as of this version (64 characters). `null` when `redacted_at` is set or `operation` is `deleted`. Populated regardless of `view` otherwise.
 
   - `ContentSizeBytes int64`
 
+    Size of `content` in bytes as of this version. `null` when `redacted_at` is set or `operation` is `deleted`. Populated regardless of `view` otherwise.
+
   - `CreatedBy BetaManagedAgentsActorUnion`
+
+    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](https://platform.claude.com/docs/en/api/sessions-retrieve.md).
 
     - `type BetaManagedAgentsSessionActor struct{…}`
 
+      Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
+
       - `SessionID string`
+
+        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](https://platform.claude.com/docs/en/api/sessions-retrieve.md) for further provenance.
 
       - `Type BetaManagedAgentsSessionActorType`
 
@@ -154,7 +176,11 @@ ListMemoryVersions
 
     - `type BetaManagedAgentsAPIActor struct{…}`
 
+      Attribution for a write made directly via the public API (outside of any session).
+
       - `APIKeyID string`
+
+        ID of the API key that performed the write. This identifies the key, not the secret.
 
       - `Type BetaManagedAgentsAPIActorType`
 
@@ -162,13 +188,19 @@ ListMemoryVersions
 
     - `type BetaManagedAgentsUserActor struct{…}`
 
+      Attribution for a write made by a human user through the Anthropic Console.
+
       - `Type BetaManagedAgentsUserActorType`
 
         - `const BetaManagedAgentsUserActorTypeUserActor BetaManagedAgentsUserActorType = "user_actor"`
 
       - `UserID string`
 
+        ID of the user who performed the write (a `user_...` value).
+
   - `Path string`
+
+    The memory's path at the time of this write. `null` if and only if `redacted_at` is set.
 
   - `RedactedAt Time`
 
@@ -176,9 +208,15 @@ ListMemoryVersions
 
   - `RedactedBy BetaManagedAgentsActorUnion`
 
+    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](https://platform.claude.com/docs/en/api/sessions-retrieve.md).
+
     - `type BetaManagedAgentsSessionActor struct{…}`
 
+      Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
+
       - `SessionID string`
+
+        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](https://platform.claude.com/docs/en/api/sessions-retrieve.md) for further provenance.
 
       - `Type BetaManagedAgentsSessionActorType`
 
@@ -186,7 +224,11 @@ ListMemoryVersions
 
     - `type BetaManagedAgentsAPIActor struct{…}`
 
+      Attribution for a write made directly via the public API (outside of any session).
+
       - `APIKeyID string`
+
+        ID of the API key that performed the write. This identifies the key, not the secret.
 
       - `Type BetaManagedAgentsAPIActorType`
 
@@ -194,11 +236,15 @@ ListMemoryVersions
 
     - `type BetaManagedAgentsUserActor struct{…}`
 
+      Attribution for a write made by a human user through the Anthropic Console.
+
       - `Type BetaManagedAgentsUserActorType`
 
         - `const BetaManagedAgentsUserActorTypeUserActor BetaManagedAgentsUserActorType = "user_actor"`
 
       - `UserID string`
+
+        ID of the user who performed the write (a `user_...` value).
 
 ### Example
 
@@ -237,7 +283,7 @@ func main() {
 
 **get** `/v1/memory_stores/{memory_store_id}/memory_versions/{memory_version_id}`
 
-GetMemoryVersion
+Retrieve a memory version
 
 ### Parameters
 
@@ -303,13 +349,19 @@ GetMemoryVersion
 
       - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
 ### Returns
 
 - `type BetaManagedAgentsMemoryVersion struct{…}`
 
+  A `memory_version` object: one immutable, attributed row in a memory's append-only history. Every non-no-op mutation to a memory produces a new version. Versions belong to the store (not the individual memory) and persist after the memory is deleted. Retrieving a redacted version returns 200 with `content`, `path`, `content_size_bytes`, and `content_sha256` set to `null`; branch on `redacted_at`, not HTTP status.
+
   - `ID string`
+
+    Unique identifier for this version (a `memver_...` value).
 
   - `CreatedAt Time`
 
@@ -317,11 +369,15 @@ GetMemoryVersion
 
   - `MemoryID string`
 
+    ID of the memory this version snapshots (a `mem_...` value). Remains valid after the memory is deleted; pass it as `memory_id` to [List memory versions](./api-beta-memory_stores-memory_versions-list.md) to retrieve the full lineage including the `deleted` row.
+
   - `MemoryStoreID string`
+
+    ID of the memory store this version belongs to (a `memstore_...` value).
 
   - `Operation BetaManagedAgentsMemoryVersionOperation`
 
-    MemoryVersionOperation enum
+    The kind of mutation a `memory_version` records. Every non-no-op mutation to a memory appends exactly one version row with one of these values.
 
     - `const BetaManagedAgentsMemoryVersionOperationCreated BetaManagedAgentsMemoryVersionOperation = "created"`
 
@@ -335,15 +391,27 @@ GetMemoryVersion
 
   - `Content string`
 
+    The memory's UTF-8 text content as of this version. `null` when `view=basic`, when `operation` is `deleted`, or when `redacted_at` is set.
+
   - `ContentSha256 string`
+
+    Lowercase hex SHA-256 digest of `content` as of this version (64 characters). `null` when `redacted_at` is set or `operation` is `deleted`. Populated regardless of `view` otherwise.
 
   - `ContentSizeBytes int64`
 
+    Size of `content` in bytes as of this version. `null` when `redacted_at` is set or `operation` is `deleted`. Populated regardless of `view` otherwise.
+
   - `CreatedBy BetaManagedAgentsActorUnion`
+
+    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](https://platform.claude.com/docs/en/api/sessions-retrieve.md).
 
     - `type BetaManagedAgentsSessionActor struct{…}`
 
+      Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
+
       - `SessionID string`
+
+        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](https://platform.claude.com/docs/en/api/sessions-retrieve.md) for further provenance.
 
       - `Type BetaManagedAgentsSessionActorType`
 
@@ -351,7 +419,11 @@ GetMemoryVersion
 
     - `type BetaManagedAgentsAPIActor struct{…}`
 
+      Attribution for a write made directly via the public API (outside of any session).
+
       - `APIKeyID string`
+
+        ID of the API key that performed the write. This identifies the key, not the secret.
 
       - `Type BetaManagedAgentsAPIActorType`
 
@@ -359,13 +431,19 @@ GetMemoryVersion
 
     - `type BetaManagedAgentsUserActor struct{…}`
 
+      Attribution for a write made by a human user through the Anthropic Console.
+
       - `Type BetaManagedAgentsUserActorType`
 
         - `const BetaManagedAgentsUserActorTypeUserActor BetaManagedAgentsUserActorType = "user_actor"`
 
       - `UserID string`
 
+        ID of the user who performed the write (a `user_...` value).
+
   - `Path string`
+
+    The memory's path at the time of this write. `null` if and only if `redacted_at` is set.
 
   - `RedactedAt Time`
 
@@ -373,9 +451,15 @@ GetMemoryVersion
 
   - `RedactedBy BetaManagedAgentsActorUnion`
 
+    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](https://platform.claude.com/docs/en/api/sessions-retrieve.md).
+
     - `type BetaManagedAgentsSessionActor struct{…}`
 
+      Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
+
       - `SessionID string`
+
+        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](https://platform.claude.com/docs/en/api/sessions-retrieve.md) for further provenance.
 
       - `Type BetaManagedAgentsSessionActorType`
 
@@ -383,7 +467,11 @@ GetMemoryVersion
 
     - `type BetaManagedAgentsAPIActor struct{…}`
 
+      Attribution for a write made directly via the public API (outside of any session).
+
       - `APIKeyID string`
+
+        ID of the API key that performed the write. This identifies the key, not the secret.
 
       - `Type BetaManagedAgentsAPIActorType`
 
@@ -391,11 +479,15 @@ GetMemoryVersion
 
     - `type BetaManagedAgentsUserActor struct{…}`
 
+      Attribution for a write made by a human user through the Anthropic Console.
+
       - `Type BetaManagedAgentsUserActorType`
 
         - `const BetaManagedAgentsUserActorTypeUserActor BetaManagedAgentsUserActorType = "user_actor"`
 
       - `UserID string`
+
+        ID of the user who performed the write (a `user_...` value).
 
 ### Example
 
@@ -434,7 +526,7 @@ func main() {
 
 **post** `/v1/memory_stores/{memory_store_id}/memory_versions/{memory_version_id}/redact`
 
-RedactMemoryVersion
+Redact a memory version
 
 ### Parameters
 
@@ -496,13 +588,19 @@ RedactMemoryVersion
 
       - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
 ### Returns
 
 - `type BetaManagedAgentsMemoryVersion struct{…}`
 
+  A `memory_version` object: one immutable, attributed row in a memory's append-only history. Every non-no-op mutation to a memory produces a new version. Versions belong to the store (not the individual memory) and persist after the memory is deleted. Retrieving a redacted version returns 200 with `content`, `path`, `content_size_bytes`, and `content_sha256` set to `null`; branch on `redacted_at`, not HTTP status.
+
   - `ID string`
+
+    Unique identifier for this version (a `memver_...` value).
 
   - `CreatedAt Time`
 
@@ -510,11 +608,15 @@ RedactMemoryVersion
 
   - `MemoryID string`
 
+    ID of the memory this version snapshots (a `mem_...` value). Remains valid after the memory is deleted; pass it as `memory_id` to [List memory versions](./api-beta-memory_stores-memory_versions-list.md) to retrieve the full lineage including the `deleted` row.
+
   - `MemoryStoreID string`
+
+    ID of the memory store this version belongs to (a `memstore_...` value).
 
   - `Operation BetaManagedAgentsMemoryVersionOperation`
 
-    MemoryVersionOperation enum
+    The kind of mutation a `memory_version` records. Every non-no-op mutation to a memory appends exactly one version row with one of these values.
 
     - `const BetaManagedAgentsMemoryVersionOperationCreated BetaManagedAgentsMemoryVersionOperation = "created"`
 
@@ -528,15 +630,27 @@ RedactMemoryVersion
 
   - `Content string`
 
+    The memory's UTF-8 text content as of this version. `null` when `view=basic`, when `operation` is `deleted`, or when `redacted_at` is set.
+
   - `ContentSha256 string`
+
+    Lowercase hex SHA-256 digest of `content` as of this version (64 characters). `null` when `redacted_at` is set or `operation` is `deleted`. Populated regardless of `view` otherwise.
 
   - `ContentSizeBytes int64`
 
+    Size of `content` in bytes as of this version. `null` when `redacted_at` is set or `operation` is `deleted`. Populated regardless of `view` otherwise.
+
   - `CreatedBy BetaManagedAgentsActorUnion`
+
+    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](https://platform.claude.com/docs/en/api/sessions-retrieve.md).
 
     - `type BetaManagedAgentsSessionActor struct{…}`
 
+      Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
+
       - `SessionID string`
+
+        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](https://platform.claude.com/docs/en/api/sessions-retrieve.md) for further provenance.
 
       - `Type BetaManagedAgentsSessionActorType`
 
@@ -544,7 +658,11 @@ RedactMemoryVersion
 
     - `type BetaManagedAgentsAPIActor struct{…}`
 
+      Attribution for a write made directly via the public API (outside of any session).
+
       - `APIKeyID string`
+
+        ID of the API key that performed the write. This identifies the key, not the secret.
 
       - `Type BetaManagedAgentsAPIActorType`
 
@@ -552,13 +670,19 @@ RedactMemoryVersion
 
     - `type BetaManagedAgentsUserActor struct{…}`
 
+      Attribution for a write made by a human user through the Anthropic Console.
+
       - `Type BetaManagedAgentsUserActorType`
 
         - `const BetaManagedAgentsUserActorTypeUserActor BetaManagedAgentsUserActorType = "user_actor"`
 
       - `UserID string`
 
+        ID of the user who performed the write (a `user_...` value).
+
   - `Path string`
+
+    The memory's path at the time of this write. `null` if and only if `redacted_at` is set.
 
   - `RedactedAt Time`
 
@@ -566,9 +690,15 @@ RedactMemoryVersion
 
   - `RedactedBy BetaManagedAgentsActorUnion`
 
+    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](https://platform.claude.com/docs/en/api/sessions-retrieve.md).
+
     - `type BetaManagedAgentsSessionActor struct{…}`
 
+      Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
+
       - `SessionID string`
+
+        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](https://platform.claude.com/docs/en/api/sessions-retrieve.md) for further provenance.
 
       - `Type BetaManagedAgentsSessionActorType`
 
@@ -576,7 +706,11 @@ RedactMemoryVersion
 
     - `type BetaManagedAgentsAPIActor struct{…}`
 
+      Attribution for a write made directly via the public API (outside of any session).
+
       - `APIKeyID string`
+
+        ID of the API key that performed the write. This identifies the key, not the secret.
 
       - `Type BetaManagedAgentsAPIActorType`
 
@@ -584,11 +718,15 @@ RedactMemoryVersion
 
     - `type BetaManagedAgentsUserActor struct{…}`
 
+      Attribution for a write made by a human user through the Anthropic Console.
+
       - `Type BetaManagedAgentsUserActorType`
 
         - `const BetaManagedAgentsUserActorTypeUserActor BetaManagedAgentsUserActorType = "user_actor"`
 
       - `UserID string`
+
+        ID of the user who performed the write (a `user_...` value).
 
 ### Example
 
@@ -627,9 +765,15 @@ func main() {
 
 - `type BetaManagedAgentsActorUnion interface{…}`
 
+  Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](https://platform.claude.com/docs/en/api/sessions-retrieve.md).
+
   - `type BetaManagedAgentsSessionActor struct{…}`
 
+    Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
+
     - `SessionID string`
+
+      ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](https://platform.claude.com/docs/en/api/sessions-retrieve.md) for further provenance.
 
     - `Type BetaManagedAgentsSessionActorType`
 
@@ -637,7 +781,11 @@ func main() {
 
   - `type BetaManagedAgentsAPIActor struct{…}`
 
+    Attribution for a write made directly via the public API (outside of any session).
+
     - `APIKeyID string`
+
+      ID of the API key that performed the write. This identifies the key, not the secret.
 
     - `Type BetaManagedAgentsAPIActorType`
 
@@ -645,17 +793,25 @@ func main() {
 
   - `type BetaManagedAgentsUserActor struct{…}`
 
+    Attribution for a write made by a human user through the Anthropic Console.
+
     - `Type BetaManagedAgentsUserActorType`
 
       - `const BetaManagedAgentsUserActorTypeUserActor BetaManagedAgentsUserActorType = "user_actor"`
 
     - `UserID string`
 
+      ID of the user who performed the write (a `user_...` value).
+
 ### Beta Managed Agents API Actor
 
 - `type BetaManagedAgentsAPIActor struct{…}`
 
+  Attribution for a write made directly via the public API (outside of any session).
+
   - `APIKeyID string`
+
+    ID of the API key that performed the write. This identifies the key, not the secret.
 
   - `Type BetaManagedAgentsAPIActorType`
 
@@ -665,7 +821,11 @@ func main() {
 
 - `type BetaManagedAgentsMemoryVersion struct{…}`
 
+  A `memory_version` object: one immutable, attributed row in a memory's append-only history. Every non-no-op mutation to a memory produces a new version. Versions belong to the store (not the individual memory) and persist after the memory is deleted. Retrieving a redacted version returns 200 with `content`, `path`, `content_size_bytes`, and `content_sha256` set to `null`; branch on `redacted_at`, not HTTP status.
+
   - `ID string`
+
+    Unique identifier for this version (a `memver_...` value).
 
   - `CreatedAt Time`
 
@@ -673,11 +833,15 @@ func main() {
 
   - `MemoryID string`
 
+    ID of the memory this version snapshots (a `mem_...` value). Remains valid after the memory is deleted; pass it as `memory_id` to [List memory versions](./api-beta-memory_stores-memory_versions-list.md) to retrieve the full lineage including the `deleted` row.
+
   - `MemoryStoreID string`
+
+    ID of the memory store this version belongs to (a `memstore_...` value).
 
   - `Operation BetaManagedAgentsMemoryVersionOperation`
 
-    MemoryVersionOperation enum
+    The kind of mutation a `memory_version` records. Every non-no-op mutation to a memory appends exactly one version row with one of these values.
 
     - `const BetaManagedAgentsMemoryVersionOperationCreated BetaManagedAgentsMemoryVersionOperation = "created"`
 
@@ -691,15 +855,27 @@ func main() {
 
   - `Content string`
 
+    The memory's UTF-8 text content as of this version. `null` when `view=basic`, when `operation` is `deleted`, or when `redacted_at` is set.
+
   - `ContentSha256 string`
+
+    Lowercase hex SHA-256 digest of `content` as of this version (64 characters). `null` when `redacted_at` is set or `operation` is `deleted`. Populated regardless of `view` otherwise.
 
   - `ContentSizeBytes int64`
 
+    Size of `content` in bytes as of this version. `null` when `redacted_at` is set or `operation` is `deleted`. Populated regardless of `view` otherwise.
+
   - `CreatedBy BetaManagedAgentsActorUnion`
+
+    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](https://platform.claude.com/docs/en/api/sessions-retrieve.md).
 
     - `type BetaManagedAgentsSessionActor struct{…}`
 
+      Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
+
       - `SessionID string`
+
+        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](https://platform.claude.com/docs/en/api/sessions-retrieve.md) for further provenance.
 
       - `Type BetaManagedAgentsSessionActorType`
 
@@ -707,7 +883,11 @@ func main() {
 
     - `type BetaManagedAgentsAPIActor struct{…}`
 
+      Attribution for a write made directly via the public API (outside of any session).
+
       - `APIKeyID string`
+
+        ID of the API key that performed the write. This identifies the key, not the secret.
 
       - `Type BetaManagedAgentsAPIActorType`
 
@@ -715,13 +895,19 @@ func main() {
 
     - `type BetaManagedAgentsUserActor struct{…}`
 
+      Attribution for a write made by a human user through the Anthropic Console.
+
       - `Type BetaManagedAgentsUserActorType`
 
         - `const BetaManagedAgentsUserActorTypeUserActor BetaManagedAgentsUserActorType = "user_actor"`
 
       - `UserID string`
 
+        ID of the user who performed the write (a `user_...` value).
+
   - `Path string`
+
+    The memory's path at the time of this write. `null` if and only if `redacted_at` is set.
 
   - `RedactedAt Time`
 
@@ -729,9 +915,15 @@ func main() {
 
   - `RedactedBy BetaManagedAgentsActorUnion`
 
+    Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](https://platform.claude.com/docs/en/api/sessions-retrieve.md).
+
     - `type BetaManagedAgentsSessionActor struct{…}`
 
+      Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
+
       - `SessionID string`
+
+        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](https://platform.claude.com/docs/en/api/sessions-retrieve.md) for further provenance.
 
       - `Type BetaManagedAgentsSessionActorType`
 
@@ -739,7 +931,11 @@ func main() {
 
     - `type BetaManagedAgentsAPIActor struct{…}`
 
+      Attribution for a write made directly via the public API (outside of any session).
+
       - `APIKeyID string`
+
+        ID of the API key that performed the write. This identifies the key, not the secret.
 
       - `Type BetaManagedAgentsAPIActorType`
 
@@ -747,17 +943,21 @@ func main() {
 
     - `type BetaManagedAgentsUserActor struct{…}`
 
+      Attribution for a write made by a human user through the Anthropic Console.
+
       - `Type BetaManagedAgentsUserActorType`
 
         - `const BetaManagedAgentsUserActorTypeUserActor BetaManagedAgentsUserActorType = "user_actor"`
 
       - `UserID string`
 
+        ID of the user who performed the write (a `user_...` value).
+
 ### Beta Managed Agents Memory Version Operation
 
 - `type BetaManagedAgentsMemoryVersionOperation string`
 
-  MemoryVersionOperation enum
+  The kind of mutation a `memory_version` records. Every non-no-op mutation to a memory appends exactly one version row with one of these values.
 
   - `const BetaManagedAgentsMemoryVersionOperationCreated BetaManagedAgentsMemoryVersionOperation = "created"`
 
@@ -769,7 +969,11 @@ func main() {
 
 - `type BetaManagedAgentsSessionActor struct{…}`
 
+  Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
+
   - `SessionID string`
+
+    ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](https://platform.claude.com/docs/en/api/sessions-retrieve.md) for further provenance.
 
   - `Type BetaManagedAgentsSessionActorType`
 
@@ -779,8 +983,12 @@ func main() {
 
 - `type BetaManagedAgentsUserActor struct{…}`
 
+  Attribution for a write made by a human user through the Anthropic Console.
+
   - `Type BetaManagedAgentsUserActorType`
 
     - `const BetaManagedAgentsUserActorTypeUserActor BetaManagedAgentsUserActorType = "user_actor"`
 
   - `UserID string`
+
+    ID of the user who performed the write (a `user_...` value).

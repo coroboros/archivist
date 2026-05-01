@@ -23,19 +23,19 @@ List Sessions
 
     Query param: Filter by agent version. Only applies when agent_id is also set.
 
-  - `createdAtGt?: string`
+  - `"created_at[gt]"?: string`
 
     Query param: Return sessions created after this time (exclusive).
 
-  - `createdAtGte?: string`
+  - `"created_at[gte]"?: string`
 
     Query param: Return sessions created at or after this time (inclusive).
 
-  - `createdAtLt?: string`
+  - `"created_at[lt]"?: string`
 
     Query param: Return sessions created before this time (exclusive).
 
-  - `createdAtLte?: string`
+  - `"created_at[lte]"?: string`
 
     Query param: Return sessions created at or before this time (inclusive).
 
@@ -46,6 +46,10 @@ List Sessions
   - `limit?: number`
 
     Query param: Maximum number of results to return.
+
+  - `memory_store_id?: string`
+
+    Query param: Filter sessions whose resources contain a memory_store with this memory store ID.
 
   - `order?: "asc" | "desc"`
 
@@ -65,7 +69,7 @@ List Sessions
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 19 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -108,6 +112,8 @@ List Sessions
       - `"fast-mode-2026-02-01"`
 
       - `"output-300k-2026-03-24"`
+
+      - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
 

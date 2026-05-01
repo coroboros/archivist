@@ -30,7 +30,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     Must be unique for each request within the Message Batch.
 
-  - `params: { max_tokens, messages, model, 19 more}`
+  - `params: { max_tokens, messages, model, 20 more}`
 
     Messages API creation parameters for the individual request.
 
@@ -41,6 +41,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
       The maximum number of tokens to generate before stopping.
 
       Note that our models may stop _before_ reaching this maximum. This parameter only specifies the absolute maximum number of tokens to generate.
+
+      Set to `0` to populate the [prompt cache](https://docs.claude.com/en/docs/build-with-claude/prompt-caching#pre-warming-the-cache) without generating a response.
 
       Different models have different maximum values for this parameter.  See [models](https://docs.claude.com/en/docs/models-overview) for details.
 
@@ -2682,6 +2684,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 - `:"1h"`
 
+            - `encrypted_content: String`
+
+              Opaque metadata from prior compaction, to be round-tripped verbatim
+
       - `role: :user | :assistant`
 
         - `:user`
@@ -2987,7 +2993,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
       Configuration options for the model's output, such as the output format.
 
-      - `effort: :low | :medium | :high | :max`
+      - `effort: :low | :medium | :high | 2 more`
 
         All possible effort levels.
 
@@ -2996,6 +3002,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
         - `:medium`
 
         - `:high`
+
+        - `:xhigh`
 
         - `:max`
 
@@ -3010,6 +3018,24 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
         - `type: :json_schema`
 
           - `:json_schema`
+
+      - `task_budget: BetaTokenTaskBudget`
+
+        User-configurable total token budget across contexts.
+
+        - `total: Integer`
+
+          Total token budget across all contexts in the session.
+
+        - `type: :tokens`
+
+          The budget type. Currently only 'tokens' is supported.
+
+          - `:tokens`
+
+        - `remaining: Integer`
+
+          Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
     - `output_format: BetaJSONOutputFormat`
 
@@ -4941,13 +4967,17 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
       Recommended for advanced use cases only.
 
+    - `user_profile_id: String`
+
+      The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
+
 - `betas: Array[AnthropicBeta]`
 
   Optional header to specify the beta version(s) you want to use.
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 20 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -4990,6 +5020,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `:"fast-mode-2026-02-01"`
 
     - `:"output-300k-2026-03-24"`
+
+    - `:"user-profiles-2026-03-24"`
 
     - `:"advisor-tool-2026-03-01"`
 
@@ -5124,7 +5156,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 20 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -5167,6 +5199,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `:"fast-mode-2026-02-01"`
 
     - `:"output-300k-2026-03-24"`
+
+    - `:"user-profiles-2026-03-24"`
 
     - `:"advisor-tool-2026-03-01"`
 
@@ -5304,7 +5338,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 20 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -5347,6 +5381,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `:"fast-mode-2026-02-01"`
 
     - `:"output-300k-2026-03-24"`
+
+    - `:"user-profiles-2026-03-24"`
 
     - `:"advisor-tool-2026-03-01"`
 
@@ -5476,7 +5512,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 20 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -5519,6 +5555,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `:"fast-mode-2026-02-01"`
 
     - `:"output-300k-2026-03-24"`
+
+    - `:"user-profiles-2026-03-24"`
 
     - `:"advisor-tool-2026-03-01"`
 
@@ -5648,7 +5686,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 20 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -5691,6 +5729,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `:"fast-mode-2026-02-01"`
 
     - `:"output-300k-2026-03-24"`
+
+    - `:"user-profiles-2026-03-24"`
 
     - `:"advisor-tool-2026-03-01"`
 
@@ -5746,7 +5786,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 20 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -5789,6 +5829,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `:"fast-mode-2026-02-01"`
 
     - `:"output-300k-2026-03-24"`
+
+    - `:"user-profiles-2026-03-24"`
 
     - `:"advisor-tool-2026-03-01"`
 
@@ -6730,6 +6772,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `content: String`
 
               Summary of compacted content, or null if compaction failed
+
+            - `encrypted_content: String`
+
+              Opaque metadata from prior compaction, to be round-tripped verbatim
 
             - `type: :compaction`
 
@@ -8485,6 +8531,10 @@ puts(beta_message_batch_individual_response)
 
               Summary of compacted content, or null if compaction failed
 
+            - `encrypted_content: String`
+
+              Opaque metadata from prior compaction, to be round-tripped verbatim
+
             - `type: :compaction`
 
               - `:compaction`
@@ -10035,6 +10085,10 @@ puts(beta_message_batch_individual_response)
 
             Summary of compacted content, or null if compaction failed
 
+          - `encrypted_content: String`
+
+            Opaque metadata from prior compaction, to be round-tripped verbatim
+
           - `type: :compaction`
 
             - `:compaction`
@@ -11546,6 +11600,10 @@ puts(beta_message_batch_individual_response)
         - `content: String`
 
           Summary of compacted content, or null if compaction failed
+
+        - `encrypted_content: String`
+
+          Opaque metadata from prior compaction, to be round-tripped verbatim
 
         - `type: :compaction`
 

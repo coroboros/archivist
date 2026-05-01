@@ -148,7 +148,7 @@ Create Session
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 20 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -191,6 +191,8 @@ Create Session
     - `:"fast-mode-2026-02-01"`
 
     - `:"output-300k-2026-03-24"`
+
+    - `:"user-profiles-2026-03-24"`
 
     - `:"advisor-tool-2026-03-01"`
 
@@ -721,6 +723,10 @@ List Sessions
 
   Maximum number of results to return.
 
+- `memory_store_id: String`
+
+  Filter sessions whose resources contain a memory_store with this memory store ID.
+
 - `order: :asc | :desc`
 
   Sort direction for results, ordered by created_at. Defaults to desc (newest first).
@@ -739,7 +745,7 @@ List Sessions
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 20 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -782,6 +788,8 @@ List Sessions
     - `:"fast-mode-2026-02-01"`
 
     - `:"output-300k-2026-03-24"`
+
+    - `:"user-profiles-2026-03-24"`
 
     - `:"advisor-tool-2026-03-01"`
 
@@ -1285,7 +1293,7 @@ Get Session
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 20 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -1328,6 +1336,8 @@ Get Session
     - `:"fast-mode-2026-02-01"`
 
     - `:"output-300k-2026-03-24"`
+
+    - `:"user-profiles-2026-03-24"`
 
     - `:"advisor-tool-2026-03-01"`
 
@@ -1843,7 +1853,7 @@ Update Session
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 20 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -1886,6 +1896,8 @@ Update Session
     - `:"fast-mode-2026-02-01"`
 
     - `:"output-300k-2026-03-24"`
+
+    - `:"user-profiles-2026-03-24"`
 
     - `:"advisor-tool-2026-03-01"`
 
@@ -2389,7 +2401,7 @@ Delete Session
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 20 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -2432,6 +2444,8 @@ Delete Session
     - `:"fast-mode-2026-02-01"`
 
     - `:"output-300k-2026-03-24"`
+
+    - `:"user-profiles-2026-03-24"`
 
     - `:"advisor-tool-2026-03-01"`
 
@@ -2477,7 +2491,7 @@ Archive Session
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 20 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -2520,6 +2534,8 @@ Archive Session
     - `:"fast-mode-2026-02-01"`
 
     - `:"output-300k-2026-03-24"`
+
+    - `:"user-profiles-2026-03-24"`
 
     - `:"advisor-tool-2026-03-01"`
 
@@ -4001,7 +4017,7 @@ List Events
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 20 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -4044,6 +4060,8 @@ List Events
     - `:"fast-mode-2026-02-01"`
 
     - `:"output-300k-2026-03-24"`
+
+    - `:"user-profiles-2026-03-24"`
 
     - `:"advisor-tool-2026-03-01"`
 
@@ -5799,7 +5817,7 @@ Send Events
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 20 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -5842,6 +5860,8 @@ Send Events
     - `:"fast-mode-2026-02-01"`
 
     - `:"output-300k-2026-03-24"`
+
+    - `:"user-profiles-2026-03-24"`
 
     - `:"advisor-tool-2026-03-01"`
 
@@ -6268,7 +6288,7 @@ Stream Events
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 20 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -6311,6 +6331,8 @@ Stream Events
     - `:"fast-mode-2026-02-01"`
 
     - `:"output-300k-2026-03-24"`
+
+    - `:"user-profiles-2026-03-24"`
 
     - `:"advisor-tool-2026-03-01"`
 
@@ -13630,7 +13652,7 @@ Add Session Resource
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 20 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -13673,6 +13695,8 @@ Add Session Resource
     - `:"fast-mode-2026-02-01"`
 
     - `:"output-300k-2026-03-24"`
+
+    - `:"user-profiles-2026-03-24"`
 
     - `:"advisor-tool-2026-03-01"`
 
@@ -13740,7 +13764,7 @@ List Session Resources
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 20 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -13783,6 +13807,8 @@ List Session Resources
     - `:"fast-mode-2026-02-01"`
 
     - `:"output-300k-2026-03-24"`
+
+    - `:"user-profiles-2026-03-24"`
 
     - `:"advisor-tool-2026-03-01"`
 
@@ -13922,7 +13948,7 @@ Get Session Resource
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 20 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -13965,6 +13991,8 @@ Get Session Resource
     - `:"fast-mode-2026-02-01"`
 
     - `:"output-300k-2026-03-24"`
+
+    - `:"user-profiles-2026-03-24"`
 
     - `:"advisor-tool-2026-03-01"`
 
@@ -14111,7 +14139,7 @@ Update Session Resource
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 20 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -14154,6 +14182,8 @@ Update Session Resource
     - `:"fast-mode-2026-02-01"`
 
     - `:"output-300k-2026-03-24"`
+
+    - `:"user-profiles-2026-03-24"`
 
     - `:"advisor-tool-2026-03-01"`
 
@@ -14297,7 +14327,7 @@ Delete Session Resource
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 19 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 20 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -14340,6 +14370,8 @@ Delete Session Resource
     - `:"fast-mode-2026-02-01"`
 
     - `:"output-300k-2026-03-24"`
+
+    - `:"user-profiles-2026-03-24"`
 
     - `:"advisor-tool-2026-03-01"`
 
