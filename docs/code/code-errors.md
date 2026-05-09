@@ -37,10 +37,12 @@ Match the message you see in your terminal to a section below.
 | `Not logged in · Please run /login`                                                  | [Authentication](#not-logged-in)                                                                                              |
 | `Invalid API key`                                                                    | [Authentication](#invalid-api-key)                                                                                            |
 | `This organization has been disabled`                                                | [Authentication](#this-organization-has-been-disabled)                                                                        |
+| `Routines are disabled by your organization's policy`                                | [Authentication](#routines-are-disabled-by-your-organizations-policy)                                                         |
 | `OAuth token revoked` / `OAuth token has expired`                                    | [Authentication](#oauth-token-revoked-or-expired)                                                                             |
 | `does not meet scope requirement user:profile`                                       | [Authentication](#oauth-scope-requirement)                                                                                    |
 | `Unable to connect to API`                                                           | [Network](#unable-to-connect-to-api)                                                                                          |
 | `SSL certificate verification failed`                                                | [Network](#ssl-certificate-errors)                                                                                            |
+| `403` with `x-deny-reason: host_not_allowed` in a cloud or routine session           | [Network](#host-not-allowed-in-a-cloud-session)                                                                               |
 | `Prompt is too long`                                                                 | [Request errors](#prompt-is-too-long)                                                                                         |
 | `Error during compaction: Conversation too long`                                     | [Request errors](#error-during-compaction-conversation-too-long)                                                              |
 | `Request too large`                                                                  | [Request errors](#request-too-large)                                                                                          |
@@ -257,6 +259,21 @@ Environment variables take precedence over `/login`, so a key exported in your s
 * Run `/status` afterward to confirm the active credential is your subscription
 * If no environment variable is set and the error persists, the disabled organization is the one tied to your `/login`. Contact support or sign in with a different account.
 
+### Routines are disabled by your organization's policy
+
+Your Team or Enterprise admin has turned off routines at the organization level. The error appears when you try to create or run a routine, including from `/schedule` and the [Routines](./code-routines.md) UI on claude.ai/code.
+
+```text theme={null}
+Routines are disabled by your organization's policy.
+```
+
+This is a server-side setting, so it cannot be overridden from local settings, environment variables, or CLI flags.
+
+**What to do:**
+
+* Ask your admin to enable the **Routines** toggle at [claude.ai/admin-settings/claude-code](https://claude.ai/admin-settings/claude-code)
+* For one-off scheduled work that does not require organization-level routines, see [scheduled tasks](./code-scheduled-tasks.md)
+
 ### OAuth token revoked or expired
 
 Your saved login is no longer valid. A revoked token means you signed out everywhere or an admin removed access; an expired token means the automatic refresh failed mid-session.
@@ -288,7 +305,7 @@ OAuth token does not meet scope requirement: user:profile
 
 ## Network and connection errors
 
-These errors mean Claude Code could not reach the API at all. They almost always originate in your local network, proxy, or firewall rather than Anthropic infrastructure.
+These errors mean a network request from Claude Code failed to reach its destination. They usually originate in your local network, proxy, or firewall, or in the cloud environment's network policy.
 
 ### Unable to connect to API
 
@@ -313,7 +330,7 @@ Common causes include no internet access, a VPN that blocks `api.anthropic.com`,
 * Ensure your firewall allows the hosts listed in [Network access requirements](./code-network-config.md#network-access-requirements)
 * Intermittent failures are [retried automatically](#automatic-retries); persistent failures point to a local network issue
 
-If `curl` succeeds but Claude Code still fails, the cause is usually something between Node.js and the network rather than the network itself:
+If `curl` succeeds but Claude Code still fails, the cause is usually something between the runtime and the network rather than the network itself:
 
 * On Linux and WSL, check `/etc/resolv.conf` for an unreachable nameserver. WSL in particular can inherit a broken resolver from the host.
 * On macOS, a VPN client that was disconnected or uninstalled can leave a tunnel interface or routing rule behind. Check `ifconfig` for stale `utun` interfaces and remove the VPN's network extension in System Settings.
@@ -321,7 +338,7 @@ If `curl` succeeds but Claude Code still fails, the cause is usually something b
 
 ### SSL certificate errors
 
-A proxy or security appliance on your network is intercepting TLS traffic with its own certificate, and Node.js does not trust it.
+A proxy or security appliance on your network is intercepting TLS traffic with its own certificate, and Claude Code does not trust it.
 
 ```text theme={null}
 Unable to connect to API: SSL certificate verification failed. Check your proxy or corporate SSL certificates
@@ -330,9 +347,30 @@ Unable to connect to API: Self-signed certificate detected
 
 **What to do:**
 
-* Export your organization's CA bundle and point Node at it with `NODE_EXTRA_CA_CERTS=/path/to/ca-bundle.pem`
+* Export your organization's CA bundle and point Claude Code at it with `NODE_EXTRA_CA_CERTS=/path/to/ca-bundle.pem`
 * See [Network configuration](./code-network-config.md#custom-ca-certificates) for full setup instructions
 * Do not set `NODE_TLS_REJECT_UNAUTHORIZED=0`, which disables certificate validation entirely
+
+### Host not allowed in a cloud session
+
+An outbound HTTP request from a cloud session or routine was blocked by the environment's network policy.
+
+```text theme={null}
+HTTP 403
+x-deny-reason: host_not_allowed
+```
+
+You may also see a TLS certificate that doesn't match the destination's real certificate. The cloud environment routes outbound traffic through a proxy that enforces the network policy, so a mismatched certificate means the proxy terminated the connection, not the destination.
+
+This is not a client-side network problem. Cloud sessions and [routines](./code-routines.md) run inside a sandboxed environment whose outbound traffic is filtered to the environment's allowlist. The **Default** environment uses **Trusted** access, which permits the [default allowlist](./code-claude-code-on-the-web.md#default-allowed-domains) of package registries, cloud provider APIs, container registries, and common development domains but blocks everything else.
+
+**What to do:**
+
+* Open the routine for editing, or start a cloud session. Select the cloud icon showing your environment's name, such as **Default**, to open the selector. Hover over your environment and click the settings icon.
+* In the **Update cloud environment** dialog, change **Network access** from **Trusted** to **Custom**, then add the blocked domain to **Allowed domains**. Enter one domain per line. Check **Also include default list of common package managers** to keep the [default allowlist](./code-claude-code-on-the-web.md#default-allowed-domains) alongside your custom domains. Select **Full** instead if you want unrestricted access.
+* Click **Save changes**. The next run uses the updated allowlist.
+
+See [Network access](./code-claude-code-on-the-web.md#network-access) for access levels and the default allowlist. Local CLI sessions are not affected by this policy.
 
 ## Request errors
 
@@ -493,7 +531,7 @@ Claude Code adjusts these values automatically on the Anthropic API. You typical
 **What to do:**
 
 * Lower `MAX_THINKING_TOKENS`, or raise [`CLAUDE_CODE_MAX_OUTPUT_TOKENS`](./code-env-vars.md) above the thinking budget
-* See [Extended thinking](./code-common-workflows.md#use-extended-thinking-thinking-mode) for how the budget interacts with output length
+* See [Extended thinking](./code-model-config.md#extended-thinking) for how the budget interacts with output length
 
 ### Tool use or thinking block mismatch
 

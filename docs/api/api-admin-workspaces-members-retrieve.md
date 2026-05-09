@@ -1,4 +1,5 @@
 ---
+title: "Retrieve"
 source: "https://platform.claude.com/docs/en/api/admin/workspaces/members/retrieve"
 category: "api"
 generated: true

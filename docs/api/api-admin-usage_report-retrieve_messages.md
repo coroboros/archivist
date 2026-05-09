@@ -1,4 +1,5 @@
 ---
+title: "Retrieve Messages"
 source: "https://platform.claude.com/docs/en/api/admin/usage_report/retrieve_messages"
 category: "api"
 generated: true

@@ -20,7 +20,7 @@ For a conceptual overview of what each feature does and when to use it, see [Ext
 
 ## Control filesystem settings with settingSources
 
-The setting sources option ([`setting_sources`](./code-agent-sdk/python.md#claude-agent-options) in Python, [`settingSources`](./code-agent-sdk/typescript.md#setting-source) in TypeScript) controls which filesystem-based settings the SDK loads. Pass an explicit list to opt in to specific sources, or pass an empty array to disable user, project, and local settings.
+The setting sources option ([`setting_sources`](./code-agent-sdk/python.md#claudeagentoptions) in Python, [`settingSources`](./code-agent-sdk/typescript.md#settingsource) in TypeScript) controls which filesystem-based settings the SDK loads. Pass an explicit list to opt in to specific sources, or pass an empty array to disable user, project, and local settings.
 
 This example loads both user-level and project-level settings by setting `settingSources` to `["user", "project"]`:
 
@@ -71,7 +71,7 @@ This example loads both user-level and project-level settings by setting `settin
   ```
 </CodeGroup>
 
-Each source loads settings from a specific location, where `<cwd>` is the working directory you pass via the `cwd` option (or the process's current directory if unset). For the full type definition, see [`SettingSource`](./code-agent-sdk/typescript.md#setting-source) (TypeScript) or [`SettingSource`](./code-agent-sdk/python.md#setting-source) (Python).
+Each source loads settings from a specific location, where `<cwd>` is the working directory you pass via the `cwd` option, or the process's current directory if unset. For the full type definition, see [`SettingSource`](./code-agent-sdk/typescript.md#settingsource) (TypeScript) or [`SettingSource`](./code-agent-sdk/python.md#settingsource) (Python).
 
 | Source      | What it loads                                                                                   | Location                                                                                                                            |
 | :---------- | :---------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------- |
@@ -125,7 +125,7 @@ For how to structure and organize CLAUDE.md content, see [Manage Claude's memory
 
 Skills are markdown files that give your agent specialized knowledge and invocable workflows. Unlike `CLAUDE.md` (which loads every session), skills load on demand. The agent receives skill descriptions at startup and loads the full content when relevant.
 
-Skills are discovered from the filesystem through `settingSources`. With default options, user and project skills load automatically. The `Skill` tool is enabled by default when you don't specify `allowedTools`. If you are using an `allowedTools` allowlist, include `"Skill"` explicitly.
+Skills are discovered from the filesystem through `settingSources`. When the `skills` option on `query()` is omitted, discovered user and project skills are enabled and the Skill tool is available, matching CLI behavior. To control which skills are enabled, pass `skills` as `"all"`, a list of skill names, or `[]` to disable all. The SDK enables the Skill tool automatically when `skills` is set, so you do not need to add it to `allowedTools`.
 
 <CodeGroup>
   ```python Python theme={null}
@@ -137,7 +137,8 @@ Skills are discovered from the filesystem through `settingSources`. With default
       prompt="Review this PR using our code review checklist",
       options=ClaudeAgentOptions(
           setting_sources=["user", "project"],
-          allowed_tools=["Skill", "Read", "Grep", "Glob"],
+          skills="all",
+          allowed_tools=["Read", "Grep", "Glob"],
       ),
   ):
       if isinstance(message, ResultMessage) and message.subtype == "success":
@@ -153,7 +154,8 @@ Skills are discovered from the filesystem through `settingSources`. With default
     prompt: "Review this PR using our code review checklist",
     options: {
       settingSources: ["user", "project"],
-      allowedTools: ["Skill", "Read", "Grep", "Glob"]
+      skills: "all",
+      allowedTools: ["Read", "Grep", "Glob"]
     }
   })) {
     if (message.type === "result" && message.subtype === "success") {
@@ -266,8 +268,8 @@ The Agent SDK gives you access to several ways to extend your agent's behavior. 
 | You want to...                                                                                    | Use                                           | SDK surface                                                                                                                                                    |
 | :------------------------------------------------------------------------------------------------ | :-------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Set project conventions your agent always follows                                                 | [CLAUDE.md](./code-memory.md)                       | `settingSources: ["project"]` loads it automatically                                                                                                           |
-| Give the agent reference material it loads when relevant                                          | [Skills](./code-agent-sdk/skills.md)                | `settingSources` + `allowedTools: ["Skill"]`                                                                                                                   |
-| Run a reusable workflow (deploy, review, release)                                                 | [User-invocable skills](./code-agent-sdk/skills.md) | `settingSources` + `allowedTools: ["Skill"]`                                                                                                                   |
+| Give the agent reference material it loads when relevant                                          | [Skills](./code-agent-sdk/skills.md)                | `settingSources` + `skills` option                                                                                                                             |
+| Run a reusable workflow (deploy, review, release)                                                 | [User-invocable skills](./code-agent-sdk/skills.md) | `settingSources` + `skills` option                                                                                                                             |
 | Delegate an isolated subtask to a fresh context (research, review)                                | [Subagents](./code-agent-sdk/subagents.md)          | `agents` parameter + `allowedTools: ["Agent"]`                                                                                                                 |
 | Coordinate multiple Claude Code instances with shared task lists and direct inter-agent messaging | [Agent teams](./code-agent-teams.md)                | Not directly configured via SDK options. Agent teams are a CLI feature where one session acts as the team lead, coordinating work across independent teammates |
 | Run deterministic logic on tool calls (audit, block, transform)                                   | [Hooks](./code-agent-sdk/hooks.md)                  | `hooks` parameter with callbacks, or shell scripts loaded via `settingSources`                                                                                 |

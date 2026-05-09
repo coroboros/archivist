@@ -1,4 +1,5 @@
 ---
+title: "Delete"
 source: "https://platform.claude.com/docs/en/api/admin/invites/delete"
 category: "api"
 generated: true

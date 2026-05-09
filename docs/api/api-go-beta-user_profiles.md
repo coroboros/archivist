@@ -26,6 +26,20 @@ Create User Profile
 
     Body param: Free-form key-value data to attach to this user profile. Maximum 16 keys, with keys up to 64 characters and values up to 512 characters. Values must be non-empty strings.
 
+  - `Name param.Field[string]`
+
+    Body param: Display name of the entity this profile represents. Required when relationship is `resold` (the resold-to company's name); optional otherwise. Maximum 255 characters.
+
+  - `Relationship param.Field[BetaUserProfileNewParamsRelationship]`
+
+    Body param: How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+
+    - `const BetaUserProfileNewParamsRelationshipExternal BetaUserProfileNewParamsRelationship = "external"`
+
+    - `const BetaUserProfileNewParamsRelationshipResold BetaUserProfileNewParamsRelationship = "resold"`
+
+    - `const BetaUserProfileNewParamsRelationshipInternal BetaUserProfileNewParamsRelationship = "internal"`
+
   - `Betas param.Field[[]AnthropicBeta]`
 
     Header param: Optional header to specify the beta version(s) you want to use.
@@ -80,6 +94,8 @@ Create User Profile
 
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
+      - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
+
 ### Returns
 
 - `type BetaUserProfile struct{…}`
@@ -95,6 +111,16 @@ Create User Profile
   - `Metadata map[string, string]`
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
+  - `Relationship BetaUserProfileRelationship`
+
+    How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+
+    - `const BetaUserProfileRelationshipExternal BetaUserProfileRelationship = "external"`
+
+    - `const BetaUserProfileRelationshipResold BetaUserProfileRelationship = "resold"`
+
+    - `const BetaUserProfileRelationshipInternal BetaUserProfileRelationship = "internal"`
 
   - `TrustGrants map[string, BetaUserProfileTrustGrant]`
 
@@ -123,6 +149,10 @@ Create User Profile
   - `ExternalID string`
 
     Platform's own identifier for this user. Not enforced unique.
+
+  - `Name string`
+
+    Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
 
 ### Example
 
@@ -233,6 +263,8 @@ List User Profiles
 
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
+      - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
+
 ### Returns
 
 - `type BetaUserProfile struct{…}`
@@ -248,6 +280,16 @@ List User Profiles
   - `Metadata map[string, string]`
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
+  - `Relationship BetaUserProfileRelationship`
+
+    How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+
+    - `const BetaUserProfileRelationshipExternal BetaUserProfileRelationship = "external"`
+
+    - `const BetaUserProfileRelationshipResold BetaUserProfileRelationship = "resold"`
+
+    - `const BetaUserProfileRelationshipInternal BetaUserProfileRelationship = "internal"`
 
   - `TrustGrants map[string, BetaUserProfileTrustGrant]`
 
@@ -276,6 +318,10 @@ List User Profiles
   - `ExternalID string`
 
     Platform's own identifier for this user. Not enforced unique.
+
+  - `Name string`
+
+    Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
 
 ### Example
 
@@ -372,6 +418,8 @@ Get User Profile
 
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
+      - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
+
 ### Returns
 
 - `type BetaUserProfile struct{…}`
@@ -387,6 +435,16 @@ Get User Profile
   - `Metadata map[string, string]`
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
+  - `Relationship BetaUserProfileRelationship`
+
+    How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+
+    - `const BetaUserProfileRelationshipExternal BetaUserProfileRelationship = "external"`
+
+    - `const BetaUserProfileRelationshipResold BetaUserProfileRelationship = "resold"`
+
+    - `const BetaUserProfileRelationshipInternal BetaUserProfileRelationship = "internal"`
 
   - `TrustGrants map[string, BetaUserProfileTrustGrant]`
 
@@ -415,6 +473,10 @@ Get User Profile
   - `ExternalID string`
 
     Platform's own identifier for this user. Not enforced unique.
+
+  - `Name string`
+
+    Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
 
 ### Example
 
@@ -468,6 +530,20 @@ Update User Profile
   - `Metadata param.Field[map[string, string]]`
 
     Body param: Key-value pairs to merge into the stored metadata. Keys provided overwrite existing values. To remove a key, set its value to an empty string. Keys not provided are left unchanged. Maximum 16 keys, with keys up to 64 characters and values up to 512 characters.
+
+  - `Name param.Field[string]`
+
+    Body param: If present, replaces the stored name. Omit to leave unchanged. Maximum 255 characters.
+
+  - `Relationship param.Field[BetaUserProfileUpdateParamsRelationship]`
+
+    Body param: How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+
+    - `const BetaUserProfileUpdateParamsRelationshipExternal BetaUserProfileUpdateParamsRelationship = "external"`
+
+    - `const BetaUserProfileUpdateParamsRelationshipResold BetaUserProfileUpdateParamsRelationship = "resold"`
+
+    - `const BetaUserProfileUpdateParamsRelationshipInternal BetaUserProfileUpdateParamsRelationship = "internal"`
 
   - `Betas param.Field[[]AnthropicBeta]`
 
@@ -523,6 +599,8 @@ Update User Profile
 
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
+      - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
+
 ### Returns
 
 - `type BetaUserProfile struct{…}`
@@ -538,6 +616,16 @@ Update User Profile
   - `Metadata map[string, string]`
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
+  - `Relationship BetaUserProfileRelationship`
+
+    How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+
+    - `const BetaUserProfileRelationshipExternal BetaUserProfileRelationship = "external"`
+
+    - `const BetaUserProfileRelationshipResold BetaUserProfileRelationship = "resold"`
+
+    - `const BetaUserProfileRelationshipInternal BetaUserProfileRelationship = "internal"`
 
   - `TrustGrants map[string, BetaUserProfileTrustGrant]`
 
@@ -566,6 +654,10 @@ Update User Profile
   - `ExternalID string`
 
     Platform's own identifier for this user. Not enforced unique.
+
+  - `Name string`
+
+    Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
 
 ### Example
 
@@ -666,6 +758,8 @@ Create Enrollment URL
 
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
+      - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
+
 ### Returns
 
 - `type BetaUserProfileEnrollmentURL struct{…}`
@@ -733,6 +827,16 @@ func main() {
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
+  - `Relationship BetaUserProfileRelationship`
+
+    How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+
+    - `const BetaUserProfileRelationshipExternal BetaUserProfileRelationship = "external"`
+
+    - `const BetaUserProfileRelationshipResold BetaUserProfileRelationship = "resold"`
+
+    - `const BetaUserProfileRelationshipInternal BetaUserProfileRelationship = "internal"`
+
   - `TrustGrants map[string, BetaUserProfileTrustGrant]`
 
     Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
@@ -760,6 +864,10 @@ func main() {
   - `ExternalID string`
 
     Platform's own identifier for this user. Not enforced unique.
+
+  - `Name string`
+
+    Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
 
 ### Beta User Profile Enrollment URL
 

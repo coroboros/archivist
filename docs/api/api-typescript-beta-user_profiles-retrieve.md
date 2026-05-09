@@ -1,4 +1,5 @@
 ---
+title: "Retrieve"
 source: "https://platform.claude.com/docs/en/api/typescript/beta/user_profiles/retrieve"
 category: "api"
 generated: true
@@ -23,7 +24,7 @@ Get User Profile
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -71,6 +72,8 @@ Get User Profile
 
       - `"advisor-tool-2026-03-01"`
 
+      - `"managed-agents-2026-04-01"`
+
 ### Returns
 
 - `BetaUserProfile`
@@ -86,6 +89,16 @@ Get User Profile
   - `metadata: Record<string, string>`
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
+  - `relationship: "external" | "resold" | "internal"`
+
+    How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+
+    - `"external"`
+
+    - `"resold"`
+
+    - `"internal"`
 
   - `trust_grants: Record<string, BetaUserProfileTrustGrant>`
 
@@ -114,6 +127,10 @@ Get User Profile
   - `external_id?: string | null`
 
     Platform's own identifier for this user. Not enforced unique.
+
+  - `name?: string | null`
+
+    Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
 
 ### Example
 

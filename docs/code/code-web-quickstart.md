@@ -212,6 +212,16 @@ The setup script exited with a non-zero status, which blocks the session from st
 
 To debug, add `set -x` at the top of the script to see which command failed. For non-critical commands, append `|| true` so they don't block session start.
 
+### New sessions hang or time out during setup
+
+If new sessions stall on the setup script step or fail with a generic container error before the script finishes, the script is likely exceeding the roughly five-minute time budget for building the [environment cache](./code-claude-code-on-the-web.md#environment-caching). Heavy steps such as pulling large Docker images, syncing full dependency trees, or downloading model weights often push the total over the limit, especially when they run one after another.
+
+To fix this, trim the script so it reliably finishes in under five minutes:
+
+* Run independent installs in parallel with `&` and a final `wait` instead of running them serially.
+* Move the largest downloads out of the setup script and into a [SessionStart hook](./code-claude-code-on-the-web.md#setup-scripts-vs-sessionstart-hooks) that launches them in the background, so the session becomes usable while they finish.
+* Remove long retry sleeps from the setup script, since a stalled retry loop counts against the budget.
+
 ### Session keeps running after closing the tab
 
 This is by design. Closing the tab or navigating away doesn't stop the session. It continues running in the background until Claude finishes the current task, then idles. From the sidebar, you can [archive a session](./code-claude-code-on-the-web.md#archive-sessions) to hide it from your list, or [delete it](./code-claude-code-on-the-web.md#delete-sessions) to remove it permanently.

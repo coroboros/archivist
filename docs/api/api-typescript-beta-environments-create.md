@@ -1,4 +1,5 @@
 ---
+title: "Create"
 source: "https://platform.claude.com/docs/en/api/typescript/beta/environments/create"
 category: "api"
 generated: true
@@ -121,7 +122,7 @@ Create a new environment with the specified configuration.
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 20 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 21 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -168,6 +169,8 @@ Create a new environment with the specified configuration.
       - `"user-profiles-2026-03-24"`
 
       - `"advisor-tool-2026-03-01"`
+
+      - `"managed-agents-2026-04-01"`
 
 ### Returns
 

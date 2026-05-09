@@ -1,4 +1,5 @@
 ---
+title: "Upload"
 source: "https://platform.claude.com/docs/en/api/cli/beta/files/upload"
 category: "api"
 generated: true

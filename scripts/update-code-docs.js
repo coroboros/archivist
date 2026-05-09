@@ -15,11 +15,14 @@ const DOCS = {
 };
 
 /**
- * Extracts the first H1 title from markdown content.
+ * Extracts a title from markdown content. Prefers the first H1; falls back to
+ * the first H2 since some pages ship without an H1.
  */
 function extractTitle(content) {
-  const match = content.match(/^#\s+(.+)$/m);
-  return match ? match[1].trim() : null;
+  const h1 = content.match(/^#\s+(.+)$/m);
+  if (h1) return h1[1].trim();
+  const h2 = content.match(/^##\s+(.+)$/m);
+  return h2 ? h2[1].trim() : null;
 }
 
 /**

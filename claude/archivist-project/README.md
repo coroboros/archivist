@@ -10,7 +10,7 @@ A ready-to-use Claude Project foundation: an XML [system prompt](./system-prompt
 
 1. Create a new Claude Project named `Archivist`
 2. Paste the [system prompt](./system-prompt.xml) into the project's custom instructions
-3. Upload knowledge base folders: `docs/code/`, `docs/developer/`, `docs/resources/`, optionally `docs/api/` and `docs/insights/`
+3. Upload knowledge base folders: `docs/code/`, `docs/build-with-claude/`, `docs/agents-and-tools/`, `docs/managed-agents/`, `docs/manage-claude/`, `docs/test-and-evaluate/`, `docs/release-notes/`, `docs/general/`, optionally `docs/api/` and `docs/insights/`
 
 **Keeping docs updated:** Fork this repo, then connect it as a GitHub data source in your Claude Project. The GitHub Actions workflow auto-refreshes docs every 12h — click **Sync** in Project Settings to pull the latest into your knowledge base, no re-upload needed. Alternatively, run `pnpm update` locally and re-upload.
 
@@ -26,7 +26,7 @@ When you run `claude` inside a cloned copy of this repo, Claude uses **`Grep`** 
 
 - **Every line of every doc is reachable.** A search for `--worktree` returns every match across the entire mirror, every time, in the same order.
 - **Full files load into context** — chunk boundaries don't exist; structural cues (tables, code blocks, frontmatter) stay intact.
-- **Cross-references resolve dynamically** — Claude follows links across `docs/api/ ↔ docs/code/ ↔ docs/developer/` in a single turn.
+- **Cross-references resolve dynamically** — Claude follows links across `docs/api/ ↔ docs/code/ ↔ docs/build-with-claude/ ↔ docs/agents-and-tools/` in a single turn.
 - **Failure mode**: if a fact isn't in the docs, Claude says so. No silent fabrication.
 
 ### Probabilistic access — Claude Project + RAG
@@ -65,7 +65,7 @@ The CLI path returns the correct answer in one `Grep` call.
 | Use case | Recommended path |
 |----------|------------------|
 | Writing technical docs / regulated content (e.g. compliance lessons) | Claude Code CLI |
-| Refining skills, cross-referencing API ↔ Code ↔ Developer | Claude Code CLI |
+| Refining skills, cross-referencing API ↔ Code ↔ Platform guides | Claude Code CLI |
 | Audit-grade research, "is this still true in current docs?" | Claude Code CLI |
 | Quick conceptual question on mobile or away from terminal | Claude Project (accept RAG limits) |
 | Onboarding non-technical teammates to Claude's ecosystem | Claude Project (accept RAG limits) |

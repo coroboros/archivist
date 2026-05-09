@@ -132,7 +132,7 @@ Learn more: [Adjust effort level](./code-model-config.md#adjust-effort-level)
 
 Visible step-by-step reasoning the model performs before responding. You can cap thinking tokens with `MAX_THINKING_TOKENS` or adjust the [effort level](#effort-level). Thinking appears in gray italic text in the terminal.
 
-Learn more: [Use extended thinking](./code-common-workflows.md#use-extended-thinking-thinking-mode)
+Learn more: [Use extended thinking](./code-model-config.md#extended-thinking)
 
 ## H
 
@@ -298,7 +298,7 @@ Learn more: [Tools available to Claude](./code-tools-reference.md)
 
 An isolation mode that runs Claude in a separate git worktree under `.claude/worktrees/`, enabled with the `-w` flag or `isolation: worktree` in subagent config. Changes stay on a separate branch in a separate directory, so parallel agents don't overwrite each other's files.
 
-Learn more: [Run parallel sessions with git worktrees](./code-common-workflows.md#run-parallel-claude-code-sessions-with-git-worktrees)
+Learn more: [Run parallel sessions with git worktrees](./code-worktrees.md)
 
 ***
 

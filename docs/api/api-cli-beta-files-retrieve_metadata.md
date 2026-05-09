@@ -1,4 +1,5 @@
 ---
+title: "Retrieve Metadata"
 source: "https://platform.claude.com/docs/en/api/cli/beta/files/retrieve_metadata"
 category: "api"
 generated: true

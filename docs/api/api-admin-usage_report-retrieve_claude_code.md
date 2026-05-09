@@ -1,4 +1,5 @@
 ---
+title: "Retrieve Claude Code"
 source: "https://platform.claude.com/docs/en/api/admin/usage_report/retrieve_claude_code"
 category: "api"
 generated: true
