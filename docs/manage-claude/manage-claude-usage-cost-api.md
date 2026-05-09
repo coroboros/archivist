@@ -21,7 +21,7 @@ This API enables you to better monitor, analyze, and optimize your Claude implem
 * **Accurate Usage Tracking:** Get precise token counts and usage patterns instead of relying solely on response token counting
 * **Cost Reconciliation:** Match internal records with Anthropic billing for finance and accounting teams
 * **Product performance and improvement:** Monitor product performance while measuring if changes to the system have improved it, or setup alerting
-* **[Rate limit](https://platform.claude.com/docs/en/api/rate-limits.md) and [Priority Tier](https://platform.claude.com/docs/en/api/service-tiers.md#get-started-with-priority-tier) optimization:** Optimize features like [prompt caching](../build-with-claude/build-with-claude-prompt-caching.md) or specific prompts to make the most of one’s allocated capacity, or purchase dedicated capacity.
+* **[Rate limit](../api/api-rate-limits.md) and [Priority Tier](../api/api-service-tiers.md#get-started-with-priority-tier) optimization:** Optimize features like [prompt caching](../build-with-claude/build-with-claude-prompt-caching.md) or specific prompts to make the most of one’s allocated capacity, or purchase dedicated capacity.
 * **Advanced Analysis:** Perform deeper data analysis than what's available in Console
 
 <Check>
@@ -307,9 +307,9 @@ The Usage and Cost APIs can be used to help you deliver a better experience for 
 
 - [Admin API](./manage-claude-admin-api.md)
 - [Admin API reference](../api/api-admin.md)
-- [Pricing](https://platform.claude.com/docs/en/about-claude/pricing.md)
+- [Pricing](../about-claude/about-claude-pricing.md)
 - [Prompt caching](../build-with-claude/build-with-claude-prompt-caching.md) - Optimize costs with caching
 - [Batch processing](../build-with-claude/build-with-claude-batch-processing.md) - 50% discount on batch requests
-- [Rate limits](https://platform.claude.com/docs/en/api/rate-limits.md) - Understand usage tiers
+- [Rate limits](../api/api-rate-limits.md) - Understand usage tiers
 - [Rate Limits API](./manage-claude-rate-limits-api.md) - Read your configured rate limits
 - [Data residency](./manage-claude-data-residency.md) - Control inference geography

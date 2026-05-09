@@ -27,7 +27,7 @@ The Compliance API uses two key types, and which one you create depends on which
 | **Compliance Access Key** (`sk-ant-api01-...`) | **claude.ai** > **Organization settings** > **Data and privacy**  | Activity Feed, chats, files, projects, users, and organization metadata                                        | Yes (all endpoints)            |
 | **Admin API key** (`sk-ant-admin01-...`)           | **Claude Console** > **Settings** > **Admin keys**  | The [Admin API](./manage-claude-admin-api.md) and the Compliance API Activity Feed  | Activity Feed only             |
 | **Analytics API key**                          | **claude.ai** > **Analytics** > **API keys**        | The [Claude Enterprise Analytics API](https://support.claude.com/en/articles/13694757-claude-enterprise-analytics-api-access-engagement-and-adoption-data)                                                                            | No                             |
-| **Claude API key** (`sk-ant-api03-...`)        | **Claude Console** > **Settings** > **API keys**    | Calling Claude models through the [Claude API](https://platform.claude.com/docs/en/api/overview.md)                                          | No                             |
+| **Claude API key** (`sk-ant-api03-...`)        | **Claude Console** > **Settings** > **API keys**    | Calling Claude models through the [Claude API](../api/api-overview.md)                                          | No                             |
 
 A Claude Enterprise tenant has one **parent organization** that centralizes identity, SSO, and SCIM for every workload organization beneath it. These workload organizations are the parent's **linked organizations**.
 

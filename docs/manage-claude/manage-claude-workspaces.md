@@ -209,7 +209,7 @@ Workspace limits can be set lower than (but not higher than) your organization's
 - Organization-wide limits always apply, even if workspace limits add up to more
 </Note>
 
-For detailed information on rate limits and how they work, see [Rate limits](https://platform.claude.com/docs/en/api/rate-limits.md). You can also read your current organization and workspace rate limits programmatically with the [Rate Limits API](./manage-claude-rate-limits-api.md).
+For detailed information on rate limits and how they work, see [Rate limits](../api/api-rate-limits.md). You can also read your current organization and workspace rate limits programmatically with the [Rate Limits API](./manage-claude-rate-limits-api.md).
 
 ## Usage and cost tracking
 
@@ -320,5 +320,5 @@ API keys persist in their current state as they are scoped to the organization a
 
 - [Admin API](./manage-claude-admin-api.md)
 - [Admin API reference](../api/api-admin.md)
-- [Rate limits](https://platform.claude.com/docs/en/api/rate-limits.md)
+- [Rate limits](../api/api-rate-limits.md)
 - [Usage and Cost API](./manage-claude-usage-cost-api.md)

@@ -6,13 +6,14 @@ Rules for authoring and maintaining content under `docs/`.
 
 The following folders are overwritten by the update script (`pnpm update`) and must never be edited by hand:
 
-- `docs/api/`
+- `docs/about-claude/`
 - `docs/agents-and-tools/`
+- `docs/api/`
 - `docs/build-with-claude/`
 - `docs/manage-claude/`
 - `docs/managed-agents/`
-- `docs/test-and-evaluate/`
 - `docs/release-notes/`
+- `docs/test-and-evaluate/`
 - `docs/general/` (fallback bucket for orphan top-level pages)
 - `docs/code/`
 

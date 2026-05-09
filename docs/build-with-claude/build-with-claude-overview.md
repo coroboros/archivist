@@ -28,8 +28,8 @@ Features on the Claude Platform are assigned one of the following availability c
 
 | Classification | Description |
 |----------------|-------------|
-| **Beta**<sup>*</sup> | Preview features used for gathering feedback and iterating on a less mature use case. Availability may be limited, including through sign-up requirements or waitlists, and may not be publicly announced. <br/><br/> Features may change significantly or be discontinued based on feedback. Not guaranteed for ongoing production use. Breaking changes are possible with notice, and some platform-specific limitations may apply. Beta features have a [beta header](https://platform.claude.com/docs/en/api/beta-headers.md). |
-| **Generally available (GA)** | Feature is stable, fully supported, and recommended for production use. Should not have a beta header or other indicator that the feature is in a preview state. Covered by standard API [versioning](https://platform.claude.com/docs/en/api/versioning.md) guarantees. |
+| **Beta**<sup>*</sup> | Preview features used for gathering feedback and iterating on a less mature use case. Availability may be limited, including through sign-up requirements or waitlists, and may not be publicly announced. <br/><br/> Features may change significantly or be discontinued based on feedback. Not guaranteed for ongoing production use. Breaking changes are possible with notice, and some platform-specific limitations may apply. Beta features have a [beta header](../api/api-beta-headers.md). |
+| **Generally available (GA)** | Feature is stable, fully supported, and recommended for production use. Should not have a beta header or other indicator that the feature is in a preview state. Covered by standard API [versioning](../api/api-versioning.md) guarantees. |
 | **Deprecated** | Feature is still functional but no longer recommended. A migration path and removal timeline are provided. |
 | **Retired** | Feature is no longer available. |
 

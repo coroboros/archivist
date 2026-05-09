@@ -16,7 +16,7 @@ Every Compliance API error message with cause and fix, organized by HTTP status 
 
 This page lists the response messages each documented Compliance API endpoint returns, the cause, and the fix.
 
-The Compliance API returns errors in an error format consistent with the rest of the [Anthropic error format](https://platform.claude.com/docs/en/api/errors.md): a non-2xx status code, a `request-id` response header, and a JSON body with an `error` object containing `type` and `message`. Include the `request-id` header value when you escalate to support.
+The Compliance API returns errors in an error format consistent with the rest of the [Anthropic error format](../api/api-errors.md): a non-2xx status code, a `request-id` response header, and a JSON body with an `error` object containing `type` and `message`. Include the `request-id` header value when you escalate to support.
 
 ```json
 {
@@ -266,7 +266,7 @@ If you poll the [Activity Feed](./manage-claude-compliance-activity-feed.md) on 
 
 A 500 from the Compliance API carries an `x-should-retry: false` response header when the failure is deterministic. Anthropic SDKs honor this header automatically. If you use a generic HTTP retry library that retries on every 5xx, suppress retries when `x-should-retry` is `false`; retrying this error fails identically on every attempt.
 
-A 500 without the `x-should-retry: false` header is transient: retry with exponential backoff (start at 1 second, double up to 60 seconds). The same applies to 502, 503, 504, and 529 responses. See [Errors](https://platform.claude.com/docs/en/api/errors.md) for the platform-wide retry semantics.
+A 500 without the `x-should-retry: false` header is transient: retry with exponential backoff (start at 1 second, double up to 60 seconds). The same applies to 502, 503, 504, and 529 responses. See [Errors](../api/api-errors.md) for the platform-wide retry semantics.
 
 For service-wide incidents, check [status.anthropic.com](https://status.anthropic.com).
 
@@ -288,7 +288,7 @@ Response exceeds maximum of 1,000 organizations. Contact support for assistance 
   <Card title="Compliance API FAQ" href="./manage-claude-compliance-faq.md">
     Common questions about access, scopes, retention, and integration.
   </Card>
-  <Card title="Errors" href="https://platform.claude.com/docs/en/api/errors.md">
+  <Card title="Errors" href="../api/api-errors.md">
     The platform-wide error catalog and retry semantics.
   </Card>
 </CardGroup>

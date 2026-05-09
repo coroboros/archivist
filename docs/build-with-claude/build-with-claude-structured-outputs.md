@@ -22,7 +22,7 @@ Structured outputs are generally available on the Claude API for [Claude Mythos 
 </Note>
 
 <Note>
-This feature qualifies for [Zero Data Retention (ZDR)](https://platform.claude.com/docs/en/build-with-claude/api-and-data-retention.md) with limited technical retention. See the [Data retention](#data-retention) section for details on what is retained and why.
+This feature qualifies for [Zero Data Retention (ZDR)](./build-with-claude-api-and-data-retention.md) with limited technical retention. See the [Data retention](#data-retention) section for details on what is retained and why.
 </Note>
 
 <Tip>
@@ -1008,7 +1008,7 @@ func main() {
 </Tab>
 <Tab title="Java">
 
-Java examples on this page use [JDK 25 compact source file](https://openjdk.org/jeps/512) syntax; see the [Java SDK requirements](https://platform.claude.com/docs/en/api/sdks/java.md#requirements) for the substitution on earlier JDKs.
+Java examples on this page use [JDK 25 compact source file](https://openjdk.org/jeps/512) syntax; see the [Java SDK requirements](../api/api-sdks-java.md#requirements) for the substitution on earlier JDKs.
 
 **`outputConfig(Class<T>)` method**
 

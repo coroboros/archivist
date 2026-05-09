@@ -43,7 +43,9 @@ pnpm zip api code     # specific folders
 
 ### Documentation mirror (`docs/`)
 
-Auto-generated markdown files fetched from Anthropic's official documentation sitemap. Folders mirror upstream sections 1:1: `api/`, `agents-and-tools/`, `build-with-claude/`, `manage-claude/`, `managed-agents/`, `test-and-evaluate/`, `release-notes/`, `general/` (fallback for orphan top-level pages) from `platform.claude.com`; `code/` from `code.claude.com`; plus hand-curated `insights/`. Each section has a `{section}-README.md` index file that is regenerated on update.
+Auto-generated markdown files fetched from Anthropic's official documentation sitemap. Folders mirror upstream sections 1:1: `about-claude/`, `agents-and-tools/`, `api/`, `build-with-claude/`, `manage-claude/`, `managed-agents/`, `release-notes/`, `test-and-evaluate/`, `general/` (fallback for orphan top-level pages) from `platform.claude.com`; `code/` from `code.claude.com`; plus hand-curated `insights/`. Each section has a `{section}-README.md` index file that is regenerated on update.
+
+The EN sitemap is incomplete for human-facing sections, so `update-platform-docs.js` augments it with URLs from the DE locale sitemap (rewritten back to EN), via `RECOVERY_SECTIONS`. 404s on recovered URLs drop silently at fetch time.
 
 Editing rules for each subfolder live in `.claude/rules/doc-authoring.md`.
 

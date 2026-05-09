@@ -11,7 +11,7 @@ Enable natural citations for RAG applications by providing search results with s
 ---
 
 <Note>
-This feature is eligible for [Zero Data Retention (ZDR)](https://platform.claude.com/docs/en/build-with-claude/api-and-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
+This feature is eligible for [Zero Data Retention (ZDR)](./build-with-claude-api-and-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 </Note>
 
 Search result content blocks enable natural citations with proper source attribution, bringing web search-quality citations to your custom applications. This feature is particularly powerful for RAG (Retrieval-Augmented Generation) applications where you need Claude to cite sources accurately.
@@ -24,11 +24,11 @@ The search results feature is available on the following models:
 - Claude Sonnet 4.5 (`claude-sonnet-4-5-20250929`)
 - Claude Opus 4.5 (`claude-opus-4-5-20251101`)
 - Claude Opus 4.1 (`claude-opus-4-1-20250805`)
-- Claude Opus 4 ([deprecated](https://platform.claude.com/docs/en/about-claude/model-deprecations.md)) (`claude-opus-4-20250514`)
-- Claude Sonnet 4 ([deprecated](https://platform.claude.com/docs/en/about-claude/model-deprecations.md)) (`claude-sonnet-4-20250514`)
-- Claude Sonnet 3.7 ([deprecated](https://platform.claude.com/docs/en/about-claude/model-deprecations.md)) (`claude-3-7-sonnet-20250219`)
+- Claude Opus 4 ([deprecated](../about-claude/about-claude-model-deprecations.md)) (`claude-opus-4-20250514`)
+- Claude Sonnet 4 ([deprecated](../about-claude/about-claude-model-deprecations.md)) (`claude-sonnet-4-20250514`)
+- Claude Sonnet 3.7 ([deprecated](../about-claude/about-claude-model-deprecations.md)) (`claude-3-7-sonnet-20250219`)
 - Claude Haiku 4.5 (`claude-haiku-4-5-20251001`)
-- Claude Haiku 3.5 ([deprecated](https://platform.claude.com/docs/en/about-claude/model-deprecations.md)) (`claude-3-5-haiku-20241022`)
+- Claude Haiku 3.5 ([deprecated](../about-claude/about-claude-model-deprecations.md)) (`claude-3-5-haiku-20241022`)
 
 ## Key benefits
 

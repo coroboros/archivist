@@ -15,7 +15,7 @@ This guide walks you through the process of setting up and making API calls to C
 Regional availability: At launch, Claude is available as a Global Standard deployment type in Foundry resources (US DataZone coming soon). Pricing for Claude in the Microsoft Marketplace uses Anthropic's standard API pricing. Visit the [pricing page](https://claude.com/pricing#api) for details.
 
 <Note>
-Foundry is supported by the C#, Java, PHP, Python, and TypeScript SDKs. The Go and Ruby SDKs do not currently support Microsoft Foundry. For available SDK platform integrations, see [Client SDKs](https://platform.claude.com/docs/en/api/client-sdks.md).
+Foundry is supported by the C#, Java, PHP, Python, and TypeScript SDKs. The Go and Ruby SDKs do not currently support Microsoft Foundry. For available SDK platform integrations, see [Client SDKs](../api/api-client-sdks.md).
 </Note>
 
 ## Preview
@@ -32,7 +32,7 @@ Before you begin, ensure you have:
 
 ## Install an SDK
 
-Anthropic's [client SDKs](https://platform.claude.com/docs/en/api/client-sdks.md) support Foundry through platform-specific packages.
+Anthropic's [client SDKs](../api/api-client-sdks.md) support Foundry through platform-specific packages.
 
 <Tabs>
 <Tab title="Python">
@@ -586,6 +586,6 @@ Foundry does not include Anthropic's standard rate limit headers (`anthropic-rat
 
 - **Foundry documentation:** [ai.azure.com/catalog](https://ai.azure.com/catalog/publishers/anthropic)
 - **Azure pricing:** [azure.microsoft.com/en-us/pricing](https://azure.microsoft.com/en-us/pricing/)
-- **Anthropic pricing details:** [Pricing documentation](https://platform.claude.com/docs/en/about-claude/pricing.md#third-party-platform-pricing)
+- **Anthropic pricing details:** [Pricing documentation](../about-claude/about-claude-pricing.md#third-party-platform-pricing)
 - **Authentication guide:** See the [authentication section](#authentication) above
 - **Azure portal:** [portal.azure.com](https://portal.azure.com/)

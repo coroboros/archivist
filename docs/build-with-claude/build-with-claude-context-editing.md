@@ -11,7 +11,7 @@ Automatically manage conversation context as it grows with context editing.
 ---
 
 <Note>
-This feature is eligible for [Zero Data Retention (ZDR)](https://platform.claude.com/docs/en/build-with-claude/api-and-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
+This feature is eligible for [Zero Data Retention (ZDR)](./build-with-claude-api-and-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 </Note>
 
 ## Overview
@@ -29,7 +29,7 @@ Context editing allows you to selectively clear specific content from conversati
 | Approach | Where it runs | Strategies | How it works |
 |----------|---------------|------------|--------------|
 | **Server-side** | API | Tool result clearing (`clear_tool_uses_20250919`)<br/>Thinking block clearing (`clear_thinking_20251015`) | Applied before the prompt reaches Claude. Clears specific content from conversation history. Each strategy can be configured independently. |
-| **Client-side** | SDK | Compaction | Available in [Python, TypeScript, and Ruby SDKs](https://platform.claude.com/docs/en/api/client-sdks.md) when using [`tool_runner`](../agents-and-tools/agents-and-tools-tool-use-tool-runner.md). Generates a summary and replaces full conversation history. See [Client-side compaction](#client-side-compaction-sdk) below. |
+| **Client-side** | SDK | Compaction | Available in [Python, TypeScript, and Ruby SDKs](../api/api-client-sdks.md) when using [`tool_runner`](../agents-and-tools/agents-and-tools-tool-use-tool-runner.md). Generates a summary and replaces full conversation history. See [Client-side compaction](#client-side-compaction-sdk) below. |
 
 ## Server-side strategies
 
@@ -2105,7 +2105,7 @@ For the full memory tool reference including commands and examples, see [Memory 
 </Warning>
 
 <Note>
-Compaction is available in the [Python, TypeScript, and Ruby SDKs](https://platform.claude.com/docs/en/api/client-sdks.md) when using the [`tool_runner` method](../agents-and-tools/agents-and-tools-tool-use-tool-runner.md).
+Compaction is available in the [Python, TypeScript, and Ruby SDKs](../api/api-client-sdks.md) when using the [`tool_runner` method](../agents-and-tools/agents-and-tools-tool-use-tool-runner.md).
 </Note>
 
 Compaction is an SDK feature that automatically manages conversation context by generating summaries when token usage grows too large. Unlike server-side context editing strategies that clear content, compaction instructs Claude to summarize the conversation history, then replaces the full history with that summary. This allows Claude to continue working on long-running tasks that would otherwise exceed the [context window](./build-with-claude-context-windows.md).

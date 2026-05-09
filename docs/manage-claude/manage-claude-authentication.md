@@ -24,7 +24,7 @@ Both methods grant the same access to Claude API endpoints. Choose API keys to g
 API keys are static secrets that you generate in the Claude Console and pass on every request.
 
 - **Create a key:** Go to [Settings → API keys](https://platform.claude.com/settings/keys) in the Claude Console. Use [workspaces](https://platform.claude.com/settings/workspaces) to scope keys by project or environment.
-- **Send the key:** Set the `x-api-key` header on direct HTTP requests, or set the `ANTHROPIC_API_KEY` environment variable and the [client SDKs](https://platform.claude.com/docs/en/api/client-sdks.md) pick it up automatically.
+- **Send the key:** Set the `x-api-key` header on direct HTTP requests, or set the `ANTHROPIC_API_KEY` environment variable and the [client SDKs](../api/api-client-sdks.md) pick it up automatically.
 
 ```http
 POST /v1/messages
@@ -148,7 +148,7 @@ To configure federation, you create three resources in the Claude Console (a ser
   <Card title="WIF reference" icon="book" href="./manage-claude-wif-reference.md">
     Environment variables, validation rules, profile configuration, and error reference
   </Card>
-  <Card title="Client SDKs" icon="code" href="https://platform.claude.com/docs/en/api/client-sdks.md">
+  <Card title="Client SDKs" icon="code" href="../api/api-client-sdks.md">
     Python, TypeScript, Go, Java, C#, Ruby, PHP, and the CLI
   </Card>
 </CardGroup>

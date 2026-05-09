@@ -18,7 +18,7 @@ Batch processing is a powerful approach for handling large volumes of requests e
 The Message Batches API is Anthropic's first implementation of this pattern.
 
 <Note>
-This feature is **not** eligible for [Zero Data Retention (ZDR)](https://platform.claude.com/docs/en/build-with-claude/api-and-data-retention.md). Data is retained according to the feature's standard retention policy.
+This feature is **not** eligible for [Zero Data Retention (ZDR)](./build-with-claude-api-and-data-retention.md). Data is retained according to the feature's standard retention policy.
 </Note>
 
 ---
@@ -48,13 +48,13 @@ This is especially useful for bulk operations that don't require immediate resul
 - The system processes each batch as fast as possible, with most batches completing within 1 hour. You can access batch results when all messages have completed or after 24 hours, whichever comes first. Batches expire if processing does not complete within 24 hours.
 - Batch results are available for 29 days after creation. After that, you may still view the Batch, but its results will no longer be available for download.
 - Batches are scoped to a [Workspace](/settings/workspaces). You may view all batches (and their results) that were created within the Workspace that your API key belongs to.
-- Rate limits apply to both Batches API HTTP requests and the number of requests within a batch waiting to be processed. See [Message Batches API rate limits](https://platform.claude.com/docs/en/api/rate-limits.md#message-batches-api). Additionally, processing may be slowed down based on current demand and your request volume. In that case, you may see more requests expiring after 24 hours.
+- Rate limits apply to both Batches API HTTP requests and the number of requests within a batch waiting to be processed. See [Message Batches API rate limits](../api/api-rate-limits.md#message-batches-api). Additionally, processing may be slowed down based on current demand and your request volume. In that case, you may see more requests expiring after 24 hours.
 - Due to high throughput and concurrent processing, batches may go slightly over your Workspace's configured [spend limit](/settings/limits).
 - Each batched request must have `max_tokens` of at least `1`. `max_tokens: 0` ([cache pre-warming](./build-with-claude-prompt-caching.md#pre-warming-the-cache)) is not supported inside a batch, since an ephemeral cache entry written during batch processing would likely expire before the follow-up request runs.
 
 ### Supported models
 
-All [active models](https://platform.claude.com/docs/en/about-claude/models/overview.md) support the Message Batches API.
+All [active models](../about-claude/about-claude-models-overview.md) support the Message Batches API.
 
 ### What can be batched
 Any request that you can make to the Messages API can be included in a batch. This includes:
@@ -86,10 +86,10 @@ The Batches API offers significant cost savings. All usage is charged at 50% of 
 | Claude Sonnet 4.6   | $1.50 / MTok     | $7.50 / MTok    |
 | Claude Sonnet 4.5   | $1.50 / MTok     | $7.50 / MTok    |
 | Claude Sonnet 4   | $1.50 / MTok     | $7.50 / MTok    |
-| Claude Sonnet 3.7 ([deprecated](https://platform.claude.com/docs/en/about-claude/model-deprecations.md)) | $1.50 / MTok     | $7.50 / MTok    |
+| Claude Sonnet 3.7 ([deprecated](../about-claude/about-claude-model-deprecations.md)) | $1.50 / MTok     | $7.50 / MTok    |
 | Claude Haiku 4.5  | $0.50 / MTok     | $2.50 / MTok    |
 | Claude Haiku 3.5  | $0.40 / MTok     | $2 / MTok       |
-| Claude Opus 3 ([deprecated](https://platform.claude.com/docs/en/about-claude/model-deprecations.md))  | $7.50 / MTok     | $37.50 / MTok   |
+| Claude Opus 3 ([deprecated](../about-claude/about-claude-model-deprecations.md))  | $7.50 / MTok     | $37.50 / MTok   |
 | Claude Haiku 3    | $0.125 / MTok    | $0.625 / MTok   |
 
 ---
@@ -1164,7 +1164,7 @@ The results are in `.jsonl` format, where each line is a valid JSON object repre
 {"custom_id":"my-first-request","result":{"type":"succeeded","message":{"id":"msg_01FqfsLoHwgeFbguDgpz48m7","type":"message","role":"assistant","model":"claude-opus-4-7","content":[{"type":"text","text":"Hello! How can I assist you today? Feel free to ask me any questions or let me know if there's anything you'd like to chat about."}],"stop_reason":"end_turn","stop_sequence":null,"usage":{"input_tokens":10,"output_tokens":34}}}}
 ```
 
-If your result has an error, its `result.error` will be set to the standard [error shape](https://platform.claude.com/docs/en/api/errors.md#error-shapes).
+If your result has an error, its `result.error` will be set to the standard [error shape](../api/api-errors.md#error-shapes).
 
 <Tip>
   **Batch results may not match input order**
@@ -2204,7 +2204,7 @@ For ZDR eligibility across all features, see [API and data retention](../manage-
 
   <section title="Are there Message Batches API rate limits and do they interact with the Messages API rate limits?">
 
-    The Message Batches API has HTTP requests-based rate limits in addition to limits on the number of requests in need of processing. See [Message Batches API rate limits](https://platform.claude.com/docs/en/api/rate-limits.md#message-batches-api). Usage of the Batches API does not affect rate limits in the Messages API.
+    The Message Batches API has HTTP requests-based rate limits in addition to limits on the number of requests in need of processing. See [Message Batches API rate limits](../api/api-rate-limits.md#message-batches-api). Usage of the Batches API does not affect rate limits in the Messages API.
   
 </section>
 

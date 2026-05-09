@@ -14,7 +14,7 @@ Token counting enables you to determine the number of tokens in a message before
 - Optimize prompts to be a specific length
 
 <Note>
-This feature is eligible for [Zero Data Retention (ZDR)](https://platform.claude.com/docs/en/build-with-claude/api-and-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
+This feature is eligible for [Zero Data Retention (ZDR)](./build-with-claude-api-and-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 </Note>
 
 ---
@@ -30,7 +30,7 @@ Token counts may include tokens added automatically by Anthropic for system opti
 </Note>
 
 ### Supported models
-All [active models](https://platform.claude.com/docs/en/about-claude/models/overview.md) support token counting.
+All [active models](../about-claude/about-claude-models-overview.md) support token counting.
 
 ### Count tokens in basic messages
 
@@ -1604,7 +1604,7 @@ puts response
 
 ## Pricing and rate limits
 
-Token counting is **free to use** but subject to requests per minute rate limits based on your [usage tier](https://platform.claude.com/docs/en/api/rate-limits.md#rate-limits). If you need higher limits, contact sales through the [Claude Console](/settings/limits).
+Token counting is **free to use** but subject to requests per minute rate limits based on your [usage tier](../api/api-rate-limits.md#rate-limits). If you need higher limits, contact sales through the [Claude Console](/settings/limits).
 
 | Usage tier | Requests per minute (RPM) |
 |------------|---------------------------|

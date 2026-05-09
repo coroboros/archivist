@@ -14,7 +14,7 @@ The legacy Amazon Bedrock integration for Claude models, using InvokeModel and C
 This page covers the legacy Amazon Bedrock integration: the `InvokeModel` and `Converse` APIs with ARN-versioned model identifiers and AWS event-stream encoding. For models available on the Messages-API Bedrock endpoint, see [Claude in Amazon Bedrock](./build-with-claude-claude-in-amazon-bedrock.md), which uses the Messages API at `/anthropic/v1/messages` with SSE streaming.
 </Note>
 
-Calling Claude through Bedrock slightly differs from how you would call Claude when using Anthropic's client SDKs. This guide walks you through completing an API call to Claude on Bedrock using one of Anthropic's [client SDKs](https://platform.claude.com/docs/en/api/client-sdks.md).
+Calling Claude through Bedrock slightly differs from how you would call Claude when using Anthropic's client SDKs. This guide walks you through completing an API call to Claude on Bedrock using one of Anthropic's [client SDKs](../api/api-client-sdks.md).
 
 Note that this guide assumes you have already signed up for an [AWS account](https://portal.aws.amazon.com/billing/signup) and configured programmatic access.
 
@@ -30,7 +30,7 @@ aws sts get-caller-identity
 
 ## Install an SDK for accessing Bedrock
 
-Anthropic's [client SDKs](https://platform.claude.com/docs/en/api/client-sdks.md) support Bedrock. You can also use an AWS SDK like `boto3` directly.
+Anthropic's [client SDKs](../api/api-client-sdks.md) support Bedrock. You can also use an AWS SDK like `boto3` directly.
 
 <Tabs>
 <Tab title="Python">
@@ -534,7 +534,7 @@ The following examples show how to generate text from Claude on Bedrock:
   ```
 </CodeGroup>
 
-See the [client SDKs](https://platform.claude.com/docs/en/api/client-sdks.md) for more details, and the [official Bedrock documentation](https://docs.aws.amazon.com/bedrock/).
+See the [client SDKs](../api/api-client-sdks.md) for more details, and the [official Bedrock documentation](https://docs.aws.amazon.com/bedrock/).
 
 ### Bearer token authentication
 
@@ -647,7 +647,7 @@ Turning on this service does not give AWS or Anthropic any access to your conten
 </Note>
 
 ## Feature support
-For all currently supported features on Bedrock, see [API features overview](https://platform.claude.com/docs/en/api/overview.md).
+For all currently supported features on Bedrock, see [API features overview](../api/api-overview.md).
 
 ### PDF support on Bedrock
 
@@ -973,4 +973,4 @@ message = client.messages.create(
 - **AWS Bedrock pricing:** [aws.amazon.com/bedrock/pricing](https://aws.amazon.com/bedrock/pricing/)
 - **AWS pricing documentation:** [Bedrock pricing guide](https://docs.aws.amazon.com/bedrock/latest/userguide/bedrock-pricing.html)
 - **AWS blog post:** [Introducing Claude Sonnet 4.5 in Amazon Bedrock](https://aws.amazon.com/blogs/aws/introducing-claude-sonnet-4-5-in-amazon-bedrock-anthropics-most-intelligent-model-best-for-coding-and-complex-agents/)
-- **Anthropic pricing details:** [Pricing documentation](https://platform.claude.com/docs/en/about-claude/pricing.md#third-party-platform-pricing)
+- **Anthropic pricing details:** [Pricing documentation](../about-claude/about-claude-pricing.md#third-party-platform-pricing)

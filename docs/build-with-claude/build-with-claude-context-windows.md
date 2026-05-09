@@ -9,7 +9,7 @@ generated: true
 ---
 
 <Note>
-This feature is eligible for [Zero Data Retention (ZDR)](https://platform.claude.com/docs/en/build-with-claude/api-and-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
+This feature is eligible for [Zero Data Retention (ZDR)](./build-with-claude-api-and-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 </Note>
 
 As conversations grow, you'll eventually approach context window limits. This guide explains how context windows work and introduces strategies for managing them effectively.
@@ -103,7 +103,7 @@ For more information about using tools with extended thinking, see the [extended
 
 [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6 have a 1M-token context window. Other Claude models, including Claude Sonnet 4.5 and Sonnet 4 (deprecated), have a 200k-token context window.
 
-A single request can include up to 600 images or PDF pages (100 for models with a 200k-token context window). When sending many images or large documents, you may approach [request size limits](https://platform.claude.com/docs/en/api/overview.md#request-size-limits) before the token limit.
+A single request can include up to 600 images or PDF pages (100 for models with a 200k-token context window). When sending many images or large documents, you may approach [request size limits](../api/api-overview.md#request-size-limits) before the token limit.
 
 ## Context awareness in Claude Sonnet 4.6, Sonnet 4.5, and Haiku 4.5
 
@@ -138,7 +138,7 @@ Context awareness is particularly valuable for:
 For agents that span multiple sessions, design your state artifacts so that context recovery is fast when a new session starts. The [memory tool's multi-session pattern](../agents-and-tools/agents-and-tools-tool-use-memory-tool.md#multi-session-software-development-pattern) walks through a concrete approach. See also [Effective harnesses for long-running agents](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents).
 </Tip>
 
-For prompting guidance on leveraging context awareness, see the [prompting best practices guide](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices.md#context-awareness-and-multi-window-workflows).
+For prompting guidance on leveraging context awareness, see the [prompting best practices guide](./build-with-claude-prompt-engineering-claude-prompting-best-practices.md#context-awareness-and-multi-window-workflows).
 
 ## Managing context with compaction
 
@@ -154,7 +154,7 @@ Newer Claude models (starting with Claude Sonnet 3.7) return a validation error 
 
 Use the [token counting API](./build-with-claude-token-counting.md) to estimate token usage before sending messages to Claude. This helps you plan and stay within context window limits.
 
-See the [model comparison](https://platform.claude.com/docs/en/about-claude/models/overview.md#latest-models-comparison) table for a list of context window sizes by model.
+See the [model comparison](../about-claude/about-claude-models-overview.md#latest-models-comparison) table for a list of context window sizes by model.
 
 ## Next steps
 <CardGroup cols={2}>
@@ -164,7 +164,7 @@ See the [model comparison](https://platform.claude.com/docs/en/about-claude/mode
   <Card title="Context editing" icon="pen" href="./build-with-claude-context-editing.md">
     Fine-grained strategies like tool result clearing and thinking block clearing.
   </Card>
-  <Card title="Model comparison table" icon="scales" href="https://platform.claude.com/docs/en/about-claude/models/overview.md">
+  <Card title="Model comparison table" icon="scales" href="../about-claude/about-claude-models-overview.md">
     See the model comparison table for a list of context window sizes and input / output token pricing by model.
   </Card>
   <Card title="Extended thinking overview" icon="settings" href="./build-with-claude-extended-thinking.md">

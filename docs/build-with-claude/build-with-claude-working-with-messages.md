@@ -21,7 +21,7 @@ Anthropic offers two ways to build with Claude, each suited to different use cas
 This guide covers common patterns for working with the Messages API, including basic requests, multi-turn conversations, prefill techniques, and vision capabilities. For complete API specifications, see the [Messages API reference](../api/api-messages-create.md).
 
 <Note>
-This feature is eligible for [Zero Data Retention (ZDR)](https://platform.claude.com/docs/en/build-with-claude/api-and-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
+This feature is eligible for [Zero Data Retention (ZDR)](./build-with-claude-api-and-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 </Note>
 
 ## Basic request and response
@@ -397,7 +397,7 @@ puts message
 You can pre-fill part of Claude's response in the last position of the input messages list. This can be used to shape Claude's response. The example below uses `"max_tokens": 1` to get a single multiple choice answer from Claude.
 
 <Warning>
-Prefilling is not supported on [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6. Requests using prefill with these models return a 400 error. Use [structured outputs](./build-with-claude-structured-outputs.md) or system prompt instructions instead. See the [migration guide](https://platform.claude.com/docs/en/about-claude/models/migration-guide.md) for migration patterns.
+Prefilling is not supported on [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6. Requests using prefill with these models return a 400 error. Use [structured outputs](./build-with-claude-structured-outputs.md) or system prompt instructions instead. See the [migration guide](../about-claude/about-claude-models-migration-guide.md) for migration patterns.
 </Warning>
 
 <CodeGroup>

@@ -11,7 +11,7 @@ Manage where model inference runs and where data is stored with geographic contr
 ---
 
 <Note>
-This feature is eligible for [Zero Data Retention (ZDR)](https://platform.claude.com/docs/en/build-with-claude/api-and-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
+This feature is eligible for [Zero Data Retention (ZDR)](../build-with-claude/build-with-claude-api-and-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 </Note>
 
 Data residency controls let you manage where your data is processed and stored. Two independent settings govern this:
@@ -124,7 +124,7 @@ The response `usage` object includes an `inference_geo` field indicating where i
 The `inference_geo` parameter is supported on Claude Opus 4.6 and all subsequent models. Older models released before Opus 4.6 do not support the parameter. Requests with `inference_geo` on legacy models return a 400 error.
 
 <Note>
-The `inference_geo` parameter is only available on the Claude API (1P). On third-party platforms (AWS Bedrock, Google Vertex AI), the inference region is determined by the endpoint URL or inference profile, so `inference_geo` is not applicable. The `inference_geo` parameter is also not available via the [OpenAI SDK compatibility endpoint](https://platform.claude.com/docs/en/api/openai-sdk.md).
+The `inference_geo` parameter is only available on the Claude API (1P). On third-party platforms (AWS Bedrock, Google Vertex AI), the inference region is determined by the endpoint URL or inference profile, so `inference_geo` is not applicable. The `inference_geo` parameter is also not available via the [OpenAI SDK compatibility endpoint](../api/api-openai-sdk.md).
 </Note>
 
 ### Workspace-level restrictions
@@ -154,10 +154,10 @@ Data residency pricing varies by model generation:
 - **Global routing** (`inference_geo: "global"` or omitted): Standard pricing applies.
 - **Older models:** Existing pricing is unchanged regardless of `inference_geo` settings.
 
-This pricing applies to the Claude API (1P) only. Third-party platforms (AWS Bedrock, Google Vertex AI) have their own regional pricing. See the [pricing page](https://platform.claude.com/docs/en/about-claude/pricing.md#data-residency-pricing) for details.
+This pricing applies to the Claude API (1P) only. Third-party platforms (AWS Bedrock, Google Vertex AI) have their own regional pricing. See the [pricing page](../about-claude/about-claude-pricing.md#data-residency-pricing) for details.
 
 <Note>
-If you use [Priority Tier](https://platform.claude.com/docs/en/api/service-tiers.md), the 1.1x multiplier for US-only inference also affects how tokens are counted against your Priority Tier capacity. Each token consumed with `inference_geo: "us"` draws down 1.1 tokens from your committed TPM, consistent with how other pricing multipliers (such as prompt caching) affect burndown rates.
+If you use [Priority Tier](../api/api-service-tiers.md), the 1.1x multiplier for US-only inference also affects how tokens are counted against your Priority Tier capacity. Each token consumed with `inference_geo: "us"` draws down 1.1 tokens from your committed TPM, consistent with how other pricing multipliers (such as prompt caching) affect burndown rates.
 </Note>
 
 ## Batch API support
@@ -202,7 +202,7 @@ Legacy models are unaffected by this migration. For current pricing on newer mod
 ## Next steps
 
 <CardGroup>
-  <Card title="Pricing" icon="dollar-sign" href="https://platform.claude.com/docs/en/about-claude/pricing.md">
+  <Card title="Pricing" icon="dollar-sign" href="../about-claude/about-claude-pricing.md">
     View data residency pricing details.
   </Card>
   <Card title="Workspaces" icon="building" href="./manage-claude-workspaces.md">
