@@ -1,5 +1,11 @@
 # Changelog
 
+## 🧑‍💻 v1.1.1 - 09/05/2026 — Recover EN release-notes via DE locale mirror
+
+### Fixes
+- `/en/release-notes/*` URLs are live but absent from the EN sitemap (only DE/ES/FR/IT/JA/KO/PT-BR/RU/ZH-CN/ZH-TW expose them). Added a recovery path in `update-platform-docs.js` that mirrors release-notes URLs from the DE sitemap to EN — `release-notes-overview.md` and `release-notes-system-prompts.md` now populate correctly.
+- Restored `release-notes` to the `DOCS_FOLDERS` env var in `.github/workflows/sync-docs.yml` (was excluded as a workaround in v1.1.0).
+
 ## 🧑‍💻 v1.1.0 - 09/05/2026 — Mirror upstream sitemap structure + CI failure alerts
 
 ### Features

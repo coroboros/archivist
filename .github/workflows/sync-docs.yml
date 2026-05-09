@@ -9,11 +9,8 @@ on:
 env:
   DOCS_PATH: 'docs'
   # Space-separated list of subfolders the safety guard tracks. Must match what
-  # the update scripts produce. `release-notes` is intentionally absent: the EN
-  # sitemap does not currently expose /en/release-notes/* URLs, so the section
-  # is configured in scripts/update-platform-docs.js but pruned at build time.
-  # Re-add it here when upstream restores those URLs.
-  DOCS_FOLDERS: 'api agents-and-tools build-with-claude manage-claude managed-agents test-and-evaluate general code'
+  # the update scripts produce.
+  DOCS_FOLDERS: 'api agents-and-tools build-with-claude manage-claude managed-agents test-and-evaluate release-notes general code'
   MAX_REMOVED_FILES_PERCENTAGE: "${{ vars.MAX_REMOVED_FILES_PERCENTAGE || '25' }}"
 
 jobs:

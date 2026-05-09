@@ -7,6 +7,11 @@ const URL_PREFIX = 'https://platform.claude.com/docs/en/';
 const PATHS_TO_IGNORE = [];
 const PATHS_TO_IGNORE_REGEXP =
   PATHS_TO_IGNORE.length > 0 ? new RegExp(`(${PATHS_TO_IGNORE.join('|')})`) : null;
+// Some EN sections are live pages but missing from the EN sitemap (currently
+// release-notes). We recover them by mirroring URLs from another locale that
+// IS in the sitemap. 404s on recovered URLs are silently skipped at fetch time.
+const RECOVERY_LOCALE_PREFIX = 'https://platform.claude.com/docs/de/';
+const RECOVERY_SECTIONS = ['/release-notes/'];
 const DOCS_DIR = 'docs';
 const FALLBACK_TYPE = 'general';
 // NOTE: key and type MUST be the same. Folders mirror upstream sitemap top-level sections;
@@ -188,11 +193,22 @@ async function fetchAllUrlsFromSitemap() {
   const xml = await response.text();
   const allUrls = [...xml.matchAll(/<loc>(.*?)<\/loc>/g)].map((m) => m[1]);
 
-  const filteredUrls = allUrls.filter(
+  const enUrls = allUrls.filter(
     (url) => url.startsWith(URL_PREFIX) && !PATHS_TO_IGNORE_REGEXP?.test(url),
   );
 
-  console.log(`   ${filteredUrls.length} Claude Platform URLs found.`);
+  // Recover EN URLs missing from the sitemap by mirroring a known-complete
+  // locale. Dead URLs (404 in EN) are silently skipped at fetch time.
+  const recoveredUrls = allUrls
+    .filter((u) => u.startsWith(RECOVERY_LOCALE_PREFIX))
+    .filter((u) => RECOVERY_SECTIONS.some((s) => u.includes(s)))
+    .map((u) => u.replace(RECOVERY_LOCALE_PREFIX, URL_PREFIX));
+
+  const filteredUrls = [...new Set([...enUrls, ...recoveredUrls])];
+
+  console.log(
+    `   ${filteredUrls.length} Claude Platform URLs found (${enUrls.length} via EN sitemap, +${filteredUrls.length - enUrls.length} recovered from ${RECOVERY_LOCALE_PREFIX}).`,
+  );
 
   if (filteredUrls.length === 0) {
     throw new Error('No Claude Platform URLs found.');
