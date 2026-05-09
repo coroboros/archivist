@@ -331,7 +331,7 @@ Every SDK resolves credentials in the same five-tier order: constructor argument
   `ANTHROPIC_API_KEY` sits above the federation tiers, so a leftover key in the
   environment silently shadows federation. When migrating a workload from API
   keys to Workload Identity Federation, confirm `ANTHROPIC_API_KEY` is unset everywhere that workload
-  runs (container env, CI secrets, shell profiles). The CLI's [`ant auth status`](https://platform.claude.com/docs/en/api/sdks/cli.md#check-authentication-status)
+  runs (container env, CI secrets, shell profiles). The CLI's [`ant auth status`](../api/api-sdks-cli.md#check-authentication-status)
   command reports which source won.
 </Warning>
 

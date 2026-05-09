@@ -11,7 +11,7 @@ Server-side context compaction for managing long conversations that approach con
 ---
 
 <Note>
-This feature is eligible for [Zero Data Retention (ZDR)](https://platform.claude.com/docs/en/build-with-claude/api-and-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
+This feature is eligible for [Zero Data Retention (ZDR)](./build-with-claude-api-and-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 </Note>
 
 <Tip>
@@ -31,7 +31,7 @@ This is ideal for:
 - Task-oriented prompts that require a lot of follow-up work (often tool use) that may exceed the context window
 
 <Note>
-Compaction is in beta. Include the [beta header](https://platform.claude.com/docs/en/api/beta-headers.md) `compact-2026-01-12` in your API requests to use this feature.
+Compaction is in beta. Include the [beta header](../api/api-beta-headers.md) `compact-2026-01-12` in your API requests to use this feature.
 </Note>
 
 ## Supported models

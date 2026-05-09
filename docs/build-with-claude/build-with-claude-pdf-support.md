@@ -11,7 +11,7 @@ Process PDFs with Claude. Extract text, analyze charts, and understand visual co
 ---
 
 <Note>
-This feature is eligible for [Zero Data Retention (ZDR)](https://platform.claude.com/docs/en/build-with-claude/api-and-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
+This feature is eligible for [Zero Data Retention (ZDR)](./build-with-claude-api-and-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 </Note>
 
 You can ask Claude about any text, pictures, charts, and tables in PDFs you provide. Some sample use cases:
@@ -27,7 +27,7 @@ Claude works with any standard PDF. Ensure your request size meets these require
 
 | Requirement | Limit |
 |------------|--------|
-| Maximum request size | 32&nbsp;MB ([varies by platform](https://platform.claude.com/docs/en/api/overview.md#request-size-limits)) |
+| Maximum request size | 32&nbsp;MB ([varies by platform](../api/api-overview.md#request-size-limits)) |
 | Maximum pages per request | 600 (100 for models with a 200k-token context window) |
 | Format | Standard PDF (no passwords/encryption) |
 
@@ -41,7 +41,7 @@ Since PDF support relies on Claude's vision capabilities, it is subject to the s
 
 ### Supported platforms and models
 
-PDF support is currently supported via direct API access and Google Vertex AI. All [active models](https://platform.claude.com/docs/en/about-claude/models/overview.md) support PDF processing.
+PDF support is currently supported via direct API access and Google Vertex AI. All [active models](../about-claude/about-claude-models-overview.md) support PDF processing.
 
 PDF support is now available on Amazon Bedrock with the following considerations:
 

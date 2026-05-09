@@ -19,7 +19,7 @@ For complete API reference including request/response schemas and all parameters
 </Note>
 
 <Note>
-This feature is **not** eligible for [Zero Data Retention (ZDR)](https://platform.claude.com/docs/en/build-with-claude/api-and-data-retention.md). Data is retained according to the feature's standard retention policy.
+This feature is **not** eligible for [Zero Data Retention (ZDR)](./build-with-claude-api-and-data-retention.md). Data is retained according to the feature's standard retention policy.
 </Note>
 
 ## Quick links

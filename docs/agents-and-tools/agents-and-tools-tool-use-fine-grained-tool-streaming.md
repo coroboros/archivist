@@ -11,7 +11,7 @@ Stream tool inputs character-by-character for latency-sensitive applications.
 ---
 
 <Note>
-This feature is eligible for [Zero Data Retention (ZDR)](https://platform.claude.com/docs/en/build-with-claude/api-and-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
+This feature is eligible for [Zero Data Retention (ZDR)](../build-with-claude/build-with-claude-api-and-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 </Note>
 
 Fine-grained tool streaming is generally available on all models and all platforms. It enables [streaming](../build-with-claude/build-with-claude-streaming.md) of tool use parameter values without buffering or JSON validation, reducing the latency to begin receiving large parameters.

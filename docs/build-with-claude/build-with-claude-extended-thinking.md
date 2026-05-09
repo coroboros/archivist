@@ -9,7 +9,7 @@ generated: true
 ---
 
 <Note>
-This feature is eligible for [Zero Data Retention (ZDR)](https://platform.claude.com/docs/en/build-with-claude/api-and-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
+This feature is eligible for [Zero Data Retention (ZDR)](./build-with-claude-api-and-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 </Note>
 
 Extended thinking gives Claude enhanced reasoning capabilities for complex tasks, while providing varying levels of transparency into its step-by-step thought process before it delivers its final answer.
@@ -320,7 +320,7 @@ The `budget_tokens` parameter determines the maximum number of tokens Claude is 
 </Warning>
 
 <Note>
-[Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.7, and Claude Opus 4.6 support up to 128k output tokens. Claude Sonnet 4.6 and Claude Haiku 4.5 support up to 64k. See the [models overview](https://platform.claude.com/docs/en/about-claude/models/overview.md) for limits on legacy models. On the [Message Batches API](./build-with-claude-batch-processing.md#extended-output-beta), the `output-300k-2026-03-24` [beta header](https://platform.claude.com/docs/en/api/beta-headers.md) raises the output limit to 300k for Opus 4.7, Opus 4.6, and Sonnet 4.6.
+[Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.7, and Claude Opus 4.6 support up to 128k output tokens. Claude Sonnet 4.6 and Claude Haiku 4.5 support up to 64k. See the [models overview](../about-claude/about-claude-models-overview.md) for limits on legacy models. On the [Message Batches API](./build-with-claude-batch-processing.md#extended-output-beta), the `output-300k-2026-03-24` [beta header](../api/api-beta-headers.md) raises the output limit to 300k for Opus 4.7, Opus 4.6, and Sonnet 4.6.
 </Note>
 
 `budget_tokens` must be set to a value less than `max_tokens`. However, when using [interleaved thinking with tools](#interleaved-thinking), you can exceed this limit as the token limit becomes your entire context window. Because `budget_tokens` must be less than `max_tokens`, extended thinking cannot be combined with `max_tokens: 0` ([cache pre-warming](./build-with-claude-prompt-caching.md#pre-warming-the-cache)).
@@ -2032,7 +2032,7 @@ With interleaved thinking, Claude can:
 - **Claude Opus 4.7**: Interleaved thinking is automatically enabled when using [adaptive thinking](./build-with-claude-adaptive-thinking.md) (the only supported thinking mode on Opus 4.7). No beta header is needed.
 - **Claude Opus 4.6**: Interleaved thinking is automatically enabled when using [adaptive thinking](./build-with-claude-adaptive-thinking.md). No beta header is needed. The `interleaved-thinking-2025-05-14` beta header is **deprecated** on Opus 4.6 and is safely ignored if included.
 - **Claude Sonnet 4.6**: Interleaved thinking is automatically enabled when using [adaptive thinking](./build-with-claude-adaptive-thinking.md) (recommended). The `interleaved-thinking-2025-05-14` beta header with manual extended thinking (`thinking: {type: "enabled"}`) is still functional but deprecated.
-- **Other Claude 4 models** (Opus 4.5, Opus 4.1, Opus 4 (deprecated), Sonnet 4.5, Sonnet 4 (deprecated)): Add [the beta header](https://platform.claude.com/docs/en/api/beta-headers.md) `interleaved-thinking-2025-05-14` to your API request to enable interleaved thinking.
+- **Other Claude 4 models** (Opus 4.5, Opus 4.1, Opus 4 (deprecated), Sonnet 4.5, Sonnet 4 (deprecated)): Add [the beta header](../api/api-beta-headers.md) `interleaved-thinking-2025-05-14` to your API request to enable interleaved thinking.
 
 Here are some important considerations for interleaved thinking:
 - With interleaved thinking, the `budget_tokens` can exceed the `max_tokens` parameter, as it represents the total budget across all thinking blocks within one assistant turn.
@@ -3818,7 +3818,7 @@ For earlier models (Claude Sonnet 4.5, Opus 4.1, etc.), thinking blocks from pre
 
 ## Pricing
 
-For complete pricing information including base rates, cache writes, cache hits, and output tokens, see the [pricing page](https://platform.claude.com/docs/en/about-claude/pricing.md).
+For complete pricing information including base rates, cache writes, cache hits, and output tokens, see the [pricing page](../about-claude/about-claude-pricing.md).
 
 The thinking process incurs charges for:
 - Tokens used during thinking (output tokens)
@@ -3870,7 +3870,7 @@ The billed output token count will **not** match the visible token count in the 
 
 - **Task selection:** Use extended thinking for particularly complex tasks that benefit from step-by-step reasoning, like math, coding, and analysis.
 - **Context handling:** You don't need to remove previous thinking blocks yourself. On Opus 4.5+ and Sonnet 4.6+, the Claude API keeps thinking blocks from previous turns by default; on earlier Opus/Sonnet models and all Haiku models, it automatically ignores them and they aren't included when calculating context usage.
-- **Prompt engineering:** Review the [extended thinking prompting tips](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices.md#leverage-thinking-and-interleaved-thinking-capabilities) if you want to maximize Claude's thinking capabilities.
+- **Prompt engineering:** Review the [extended thinking prompting tips](./build-with-claude-prompt-engineering-claude-prompting-best-practices.md#leverage-thinking-and-interleaved-thinking-capabilities) if you want to maximize Claude's thinking capabilities.
 
 ## Next steps
 
@@ -3878,7 +3878,7 @@ The billed output token count will **not** match the visible token count in the 
   <Card title="Try the extended thinking cookbook" icon="book" href="https://platform.claude.com/cookbook/extended-thinking-extended-thinking">
     Explore practical examples of thinking in the cookbook.
   </Card>
-  <Card title="Extended thinking prompting tips" icon="code" href="https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices.md">
+  <Card title="Extended thinking prompting tips" icon="code" href="./build-with-claude-prompt-engineering-claude-prompting-best-practices.md">
     Learn prompt engineering best practices for extended thinking.
   </Card>
 </CardGroup>

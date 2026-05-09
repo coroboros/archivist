@@ -205,7 +205,7 @@ CEL conditions are security boundaries. An expression that evaluates to `true` f
 
 ### Token exchange errors
 
-`POST /v1/oauth/token` returns errors in the standard [API error shape](https://platform.claude.com/docs/en/api/errors.md). The SDK wraps exchange failures in a typed `FederationExchangeError` (or language equivalent) that exposes the HTTP status, the response body, and the `request_id`.
+`POST /v1/oauth/token` returns errors in the standard [API error shape](../api/api-errors.md). The SDK wraps exchange failures in a typed `FederationExchangeError` (or language equivalent) that exposes the HTTP status, the response body, and the `request_id`.
 
 | Status | Error | Cause | Resolution |
 | :--- | :--- | :--- | :--- |

@@ -54,7 +54,7 @@ When working with multilingual content:
 2. **Use native scripts**: Submit text in its native script rather than transliteration for optimal results
 3. **Consider cultural context**: Effective communication often requires cultural and regional awareness beyond pure translation
 
-Also follow the general [prompt engineering guidelines](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/overview.md) to better improve Claude's performance.
+Also follow the general [prompt engineering guidelines](./build-with-claude-prompt-engineering-overview.md) to better improve Claude's performance.
 
 ***
 
@@ -65,7 +65,7 @@ Also follow the general [prompt engineering guidelines](https://platform.claude.
 - Even in languages with fewer digital resources, Claude maintains meaningful capabilities
 
 <CardGroup cols={1}>
-  <Card title="Prompt Engineering Guide" icon="edit" href="https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/overview.md">
+  <Card title="Prompt Engineering Guide" icon="edit" href="./build-with-claude-prompt-engineering-overview.md">
     Master the art of prompt crafting to get the most out of Claude.
   </Card>
 </CardGroup>

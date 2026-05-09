@@ -394,7 +394,7 @@ Event streams may also include any number of `ping` events.
 
 ### Error events
 
-The API may occasionally send [errors](https://platform.claude.com/docs/en/api/errors.md) in the event stream. For example, during periods of high usage, you may receive an `overloaded_error`, which would normally correspond to an HTTP 529 in a non-streaming context:
+The API may occasionally send [errors](../api/api-errors.md) in the event stream. For example, during periods of high usage, you may receive an `overloaded_error`, which would normally correspond to an HTTP 529 in a non-streaming context:
 
 ```sse Example error
 event: error
@@ -403,7 +403,7 @@ data: {"type": "error", "error": {"type": "overloaded_error", "message": "Overlo
 
 ### Other events
 
-In accordance with the [versioning policy](https://platform.claude.com/docs/en/api/versioning.md), new event types may be added, and your code should handle unknown event types gracefully.
+In accordance with the [versioning policy](../api/api-versioning.md), new event types may be added, and your code should handle unknown event types gracefully.
 
 ## Content block delta types
 
@@ -421,7 +421,7 @@ data: {"type": "content_block_delta","index": 0,"delta": {"type": "text_delta", 
 
 The deltas for `tool_use` content blocks correspond to updates for the `input` field of the block. To support maximum granularity, the deltas are _partial JSON strings_, whereas the final `tool_use.input` is always an _object_.
 
-You can accumulate the string deltas and parse the JSON once you receive a `content_block_stop` event, by using a library like [Pydantic](https://docs.pydantic.dev/latest/concepts/json/#partial-json-parsing) to do partial JSON parsing, or by using the [SDKs](https://platform.claude.com/docs/en/api/client-sdks.md), which provide helpers to access parsed incremental values.
+You can accumulate the string deltas and parse the JSON once you receive a `content_block_stop` event, by using a library like [Pydantic](https://docs.pydantic.dev/latest/concepts/json/#partial-json-parsing) to do partial JSON parsing, or by using the [SDKs](../api/api-client-sdks.md), which provide helpers to access parsed incremental values.
 
 A `tool_use` content block delta looks like:
 ```sse Input JSON delta
@@ -452,7 +452,7 @@ data: {"type": "content_block_delta", "index": 0, "delta": {"type": "signature_d
 
 ## Full HTTP stream response
 
-Use the [client SDKs](https://platform.claude.com/docs/en/api/client-sdks.md) when using streaming mode. However, if you are building a direct API integration, you need to handle these events yourself.
+Use the [client SDKs](../api/api-client-sdks.md) when using streaming mode. However, if you are building a direct API integration, you need to handle these events yourself.
 
 A stream response consists of:
 1. A `message_start` event

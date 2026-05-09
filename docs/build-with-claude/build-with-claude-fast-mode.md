@@ -17,7 +17,7 @@ Fast mode is in beta (research preview). [Join the waitlist](https://claude.com/
 </Note>
 
 <Note>
-This feature is eligible for [Zero Data Retention (ZDR)](https://platform.claude.com/docs/en/build-with-claude/api-and-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
+This feature is eligible for [Zero Data Retention (ZDR)](./build-with-claude-api-and-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 </Note>
 
 ## Supported models
@@ -231,10 +231,10 @@ Fast mode is priced at 6x standard Opus rates across the full context window, in
 
 Fast mode pricing stacks with other pricing modifiers:
 
-- [Prompt caching multipliers](https://platform.claude.com/docs/en/about-claude/pricing.md#model-pricing) apply on top of fast mode pricing
+- [Prompt caching multipliers](../about-claude/about-claude-pricing.md#model-pricing) apply on top of fast mode pricing
 - [Data residency](../manage-claude/manage-claude-data-residency.md) multipliers apply on top of fast mode pricing
 
-For complete pricing details, see the [pricing page](https://platform.claude.com/docs/en/about-claude/pricing.md#fast-mode-pricing).
+For complete pricing details, see the [pricing page](../about-claude/about-claude-pricing.md#fast-mode-pricing).
 
 ## Rate limits
 
@@ -251,7 +251,7 @@ The response includes headers that indicate your fast mode rate limit status:
 | `anthropic-fast-output-tokens-remaining` | Remaining fast mode output tokens |
 | `anthropic-fast-output-tokens-reset` | Time when the fast mode output token limit resets |
 
-For tier-specific rate limits, see the [rate limits page](https://platform.claude.com/docs/en/api/rate-limits.md).
+For tier-specific rate limits, see the [rate limits page](../api/api-rate-limits.md).
 
 ## Checking which speed was used
 
@@ -812,15 +812,15 @@ message = create_message_with_fast_fallback(
 - **Supported models:** Fast mode is currently supported on Opus 4.6 only. Sending `speed: "fast"` with an unsupported model returns an error.
 - **TTFT:** Fast mode's benefits are focused on output tokens per second (OTPS), not time to first token (TTFT).
 - **Batch API:** Fast mode is not available with the [Batch API](./build-with-claude-batch-processing.md).
-- **Priority Tier:** Fast mode is not available with [Priority Tier](https://platform.claude.com/docs/en/api/service-tiers.md).
+- **Priority Tier:** Fast mode is not available with [Priority Tier](../api/api-service-tiers.md).
 
 ## Next steps
 
 <CardGroup>
-  <Card title="Pricing" icon="dollar-sign" href="https://platform.claude.com/docs/en/about-claude/pricing.md">
+  <Card title="Pricing" icon="dollar-sign" href="../about-claude/about-claude-pricing.md">
     View detailed fast mode pricing information.
   </Card>
-  <Card title="Rate limits" icon="gauge" href="https://platform.claude.com/docs/en/api/rate-limits.md">
+  <Card title="Rate limits" icon="gauge" href="../api/api-rate-limits.md">
     Check rate limit tiers for fast mode.
   </Card>
   <Card title="Effort parameter" icon="sliders" href="./build-with-claude-effort.md">

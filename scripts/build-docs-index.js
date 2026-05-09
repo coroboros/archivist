@@ -10,6 +10,7 @@ const OUTPUT_FILE = path.join(DOCS_DIR, 'INDEX.md');
 // (large endpoint reference, lower navigation value).
 const SECTION_ORDER = [
   'code',
+  'about-claude',
   'agents-and-tools',
   'build-with-claude',
   'manage-claude',

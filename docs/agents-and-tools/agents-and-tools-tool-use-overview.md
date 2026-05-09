@@ -135,16 +135,16 @@ When you use `tools`, we also automatically include a special system prompt for 
 | Claude Sonnet 4.6          | `auto`, `none`<hr />`any`, `tool`   | 346 tokens<hr />313 tokens |
 | Claude Sonnet 4.5          | `auto`, `none`<hr />`any`, `tool`   | 346 tokens<hr />313 tokens |
 | Claude Sonnet 4          | `auto`, `none`<hr />`any`, `tool`   | 346 tokens<hr />313 tokens |
-| Claude Sonnet 3.7 ([deprecated](https://platform.claude.com/docs/en/about-claude/model-deprecations.md))        | `auto`, `none`<hr />`any`, `tool`   | 346 tokens<hr />313 tokens |
+| Claude Sonnet 3.7 ([deprecated](../about-claude/about-claude-model-deprecations.md))        | `auto`, `none`<hr />`any`, `tool`   | 346 tokens<hr />313 tokens |
 | Claude Haiku 4.5         | `auto`, `none`<hr />`any`, `tool`   | 346 tokens<hr />313 tokens |
 | Claude Haiku 3.5         | `auto`, `none`<hr />`any`, `tool`   | 264 tokens<hr />340 tokens |
-| Claude Opus 3 ([deprecated](https://platform.claude.com/docs/en/about-claude/model-deprecations.md))            | `auto`, `none`<hr />`any`, `tool`   | 530 tokens<hr />281 tokens |
+| Claude Opus 3 ([deprecated](../about-claude/about-claude-model-deprecations.md))            | `auto`, `none`<hr />`any`, `tool`   | 530 tokens<hr />281 tokens |
 | Claude Sonnet 3          | `auto`, `none`<hr />`any`, `tool`   | 159 tokens<hr />235 tokens |
 | Claude Haiku 3           | `auto`, `none`<hr />`any`, `tool`   | 264 tokens<hr />340 tokens |
 
 These token counts are added to your normal input and output tokens to calculate the total cost of a request.
 
-Refer to the [models overview table](https://platform.claude.com/docs/en/about-claude/models/overview.md#latest-models-comparison) for current per-model prices.
+Refer to the [models overview table](../about-claude/about-claude-models-overview.md#latest-models-comparison) for current per-model prices.
 
 When you send a tool use prompt, just like any other API request, the response will output both input and output token counts as part of the reported `usage` metrics.
 

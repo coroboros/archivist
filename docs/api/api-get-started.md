@@ -93,7 +93,7 @@ Make your first API call to Claude and build a simple web search assistant.
         brew install anthropics/tap/ant
         ```
 
-        For other installation methods, see [Installation](https://platform.claude.com/docs/en/api/sdks/cli.md#installation) in the CLI reference.
+        For other installation methods, see [Installation](./api-sdks-cli.md#installation) in the CLI reference.
       </Step>
 
       <Step title="Make your first API call">
@@ -442,13 +442,13 @@ You made your first API call. Next, learn the Messages API patterns you'll use i
 Once you're comfortable with the basics, explore further:
 
 <CardGroup cols={3}>
-  <Card title="Models overview" icon="brain" href="https://platform.claude.com/docs/en/about-claude/models/overview.md">
+  <Card title="Models overview" icon="brain" href="../about-claude/about-claude-models-overview.md">
     Compare Claude models by capability and cost.
   </Card>
   <Card title="Features overview" icon="list" href="../build-with-claude/build-with-claude-overview.md">
     Browse all Claude capabilities: tools, context management, structured outputs, and more.
   </Card>
-  <Card title="Client SDKs" icon="code-brackets" href="https://platform.claude.com/docs/en/api/client-sdks.md">
+  <Card title="Client SDKs" icon="code-brackets" href="./api-client-sdks.md">
     Reference documentation for Python, TypeScript, Java, and other client libraries.
   </Card>
 </CardGroup>

@@ -7,16 +7,33 @@ const URL_PREFIX = 'https://platform.claude.com/docs/en/';
 const PATHS_TO_IGNORE = [];
 const PATHS_TO_IGNORE_REGEXP =
   PATHS_TO_IGNORE.length > 0 ? new RegExp(`(${PATHS_TO_IGNORE.join('|')})`) : null;
-// Some EN sections are live pages but missing from the EN sitemap (currently
-// release-notes). We recover them by mirroring URLs from another locale that
-// IS in the sitemap. 404s on recovered URLs are silently skipped at fetch time.
+// The EN sitemap carries ~1,300 SDK reference URLs and under-indexes
+// human-facing sections (`about-claude`, most of `build-with-claude`,
+// non-SDK `api`, etc.). Non-EN locale sitemaps each carry ~130 balanced URLs
+// covering those sections. Recovery mirrors URLs from a locale that IS in
+// the sitemap and rewrites the prefix back to EN. The fetch silently skips
+// 404s on recovered URLs, so adding more sections is safe.
 const RECOVERY_LOCALE_PREFIX = 'https://platform.claude.com/docs/de/';
-const RECOVERY_SECTIONS = ['/release-notes/'];
+const RECOVERY_SECTIONS = [
+  '/about-claude/',
+  '/agents-and-tools/',
+  '/api/',
+  '/build-with-claude/',
+  '/managed-agents/',
+  '/release-notes/',
+  '/test-and-evaluate/',
+];
 const DOCS_DIR = 'docs';
 const FALLBACK_TYPE = 'general';
 // NOTE: key and type MUST be the same. Folders mirror upstream sitemap top-level sections;
 // `general` is the fallback bucket for orphan pages (intro, future additions).
 const DOCS = {
+  'about-claude': {
+    name: 'Platform | About Claude',
+    paths: ['/about-claude/'],
+    readmePath: `${DOCS_DIR}/about-claude/about-claude-README.md`,
+    type: 'about-claude',
+  },
   api: {
     name: 'Platform | API',
     paths: ['/api/', '/get-started'],
@@ -152,11 +169,17 @@ async function downloadAndSaveDocs(allUrls, filenamesByURLs) {
           return response.text();
         })
         .then((text) => {
-          // Some upstream URLs (currently /api/php/* and /api/terraform/*) have
-          // no real markdown source — the .md endpoint serves the rendered HTML
-          // page instead. Skip those so the mirror stays clean. If Anthropic
-          // adds markdown later, the file appears automatically on the next run.
-          if (text.trimStart().startsWith('<!DOCTYPE')) {
+          // Some upstream URLs have no real markdown source. Skip them so the
+          // mirror stays clean. Two known shapes:
+          //   1. HTML page (`<!DOCTYPE …>`) — e.g. `/api/php/*`, `/api/terraform/*`,
+          //      most section-index pages (`/about-claude.md`, `/getting-started.md`).
+          //   2. JSX placeholder (`<HomePage />`, etc.) — e.g. `/home.md` returns the
+          //      single tag with no content. Detected by absence of any `#` heading
+          //      in a short body.
+          // If Anthropic ships real markdown later, the file appears automatically.
+          const trimmed = text.trimStart();
+          const hasHeading = /^#{1,6}\s/m.test(text);
+          if (trimmed.startsWith('<!DOCTYPE') || (!hasHeading && trimmed.length < 200)) {
             skipped.push(mdUrl);
             return;
           }

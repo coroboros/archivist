@@ -1,6 +1,18 @@
 # Changelog
 
-## 🧑‍💻 v1.1.0 - 09/05/2026 — Mirror upstream sitemap restructure + CI failure alerts
+## 🧑‍💻 v1.2.0 - 09/05/2026
+
+### Features
+- New `docs/about-claude/` section (12 pages — `models/overview`, `models/migration-guide`, `models/whats-new-claude-4-7`, `models/choosing-a-model`, `use-case-guides/overview`, `use-case-guides/customer-support-chat`, `use-case-guides/legal-summarization`, `use-case-guides/content-moderation`, `use-case-guides/ticket-routing`, `pricing`, `glossary`, `model-deprecations`). Surfaces Anthropic's foundational docs that the EN sitemap omits entirely.
+
+### Fixes
+- `update-platform-docs.js`: widened the DE-locale fallback from `/release-notes/` only to `[/about-claude/, /agents-and-tools/, /api/, /build-with-claude/, /managed-agents/, /release-notes/, /test-and-evaluate/]`. The EN sitemap carries ~1,300 SDK references and under-indexes human-facing sections. Non-EN locale sitemaps each carry ~130 balanced URLs covering the gaps. Recovered ~50 pages: `api/client-sdks`, `api/overview`, `api/sdks/{cli,csharp,go,java,php,python,ruby,typescript}`, `api/{errors,rate-limits,versioning,beta-headers,ip-addresses,openai-sdk,service-tiers,supported-regions}`, `agents-and-tools/agent-skills/claude-api-skill`, `build-with-claude/prompt-engineering/{overview,claude-prompting-best-practices,prompting-tools}`, `build-with-claude/{administration-api,api-and-data-retention,claude-code-analytics-api,claude-on-amazon-bedrock,data-residency,usage-cost-api,workspaces}`, `test-and-evaluate/{develop-tests,eval-tool,strengthen-guardrails/*}` (7 pages), `managed-agents/migration`. Internal link rewrites that previously fell back to external `platform.claude.com` URLs now resolve locally — 91 broken-into-external links restored across the mirror (725 → 634).
+- `update-platform-docs.js`: hardened the stub-page skip. Previously skipped only HTML responses (`<!DOCTYPE …>`); now also catches JSX-only placeholders (`<HomePage />` etc.) — short bodies with no Markdown heading.
+
+### Documentation
+- `CLAUDE.md` and `.claude/rules/doc-authoring.md`: added `docs/about-claude/` to the auto-generated folder list; documented the EN-sitemap gap and the DE-recovery mechanism.
+
+## 🧑‍💻 v1.1.0 - 09/05/2026
 
 ### Features
 - Restructured `docs/` to mirror the upstream `platform.claude.com` sitemap 1:1: new sections `agents-and-tools/`, `build-with-claude/`, `manage-claude/`, `managed-agents/`, `test-and-evaluate/`, `release-notes/`, `general/` (fallback for orphan top-level pages). Removed dead `developer/` and `resources/` — the upstream `/en/about-claude/*` and `/en/resources/*` paths no longer exist.

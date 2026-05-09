@@ -52,7 +52,7 @@ Follow these steps to go from zero to a working Claude integration.
   <Step title="Choose the right model">
     Compare Claude models by capability and cost to pick the best fit for your use case.
 
-    [See the models overview](https://platform.claude.com/docs/en/about-claude/models/overview.md)
+    [See the models overview](../about-claude/about-claude-models-overview.md)
   </Step>
   <Step title="Explore features and tools">
     Discover what Claude can do: extended thinking, web search, file handling, structured outputs, and more.
@@ -71,7 +71,7 @@ Anthropic provides developer tools to help you build and scale applications with
   <Card title="Developer Console" icon="computer" href="/">
     Prototype and test prompts in your browser with the Workbench and prompt generator.
   </Card>
-  <Card title="API Reference" icon="code" href="https://platform.claude.com/docs/en/api/overview.md">
+  <Card title="API Reference" icon="code" href="../api/api-overview.md">
     Explore the full Claude API and client SDK documentation.
   </Card>
   <Card title="Claude Cookbook" icon="chef-hat" href="https://platform.claude.com/cookbooks">

@@ -70,7 +70,7 @@ Establish approval gates for these dimensions before deploying any Skill:
 
 Require Skill authors to submit evaluation suites with 3-5 representative queries per Skill, covering cases where the Skill should trigger, should not trigger, and ambiguous edge cases. Require testing across the models your organization uses (Haiku, Sonnet, Opus), since Skill effectiveness varies by model.
 
-For detailed guidance on building evaluations, see [evaluation and iteration](./agents-and-tools-agent-skills-best-practices.md#evaluation-and-iteration) in best practices. For general evaluation methodology, see [develop test cases](https://platform.claude.com/docs/en/test-and-evaluate/develop-tests.md).
+For detailed guidance on building evaluations, see [evaluation and iteration](./agents-and-tools-agent-skills-best-practices.md#evaluation-and-iteration) in best practices. For general evaluation methodology, see [develop test cases](../test-and-evaluate/test-and-evaluate-develop-tests.md).
 
 ### Using evaluations for lifecycle decisions
 

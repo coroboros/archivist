@@ -38,7 +38,7 @@ The maximal number of images per message or request is:
 The maximal dimensions per image are 8000x8000 px. If you submit more than 20 images in one API request, this limit is reduced to 2000x2000 px.
 
 <Note>
-While the API supports up to 600 images per request, [request size limits](https://platform.claude.com/docs/en/api/overview.md#request-size-limits) (32&nbsp;MB for standard endpoints; lower on some third-party platforms) can be reached first. For many images, consider uploading with the [Files API](#files-api-image-example) and referencing by `file_id` to keep request payloads small.
+While the API supports up to 600 images per request, [request size limits](../api/api-overview.md#request-size-limits) (32&nbsp;MB for standard endpoints; lower on some third-party platforms) can be reached first. For many images, consider uploading with the [Files API](#files-api-image-example) and referencing by `file_id` to keep request payloads small.
 
 Even when using the Files API, requests with many large images can fail before reaching the 600-image count. Reduce image dimensions or file sizes (for example, by downsampling) before uploading (see [Evaluate image size](#evaluate-image-size)).
 </Note>
@@ -108,12 +108,12 @@ When providing images to Claude, keep the following in mind for best results:
 
 ## Prompt examples
 
-Many of the [prompting techniques](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/overview.md) that work well for text-based interactions with Claude can also be applied to image-based prompts.
+Many of the [prompting techniques](./build-with-claude-prompt-engineering-overview.md) that work well for text-based interactions with Claude can also be applied to image-based prompts.
 
 These examples demonstrate best practice prompt structures involving images.
 
 <Tip>
-  Just as [placing long documents before your query](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices.md#long-context-prompting) improves results in text prompts, Claude works best when images come before text. Images placed after text or interpolated with text still perform well, but if your use case allows it, prefer an image-then-text structure.
+  Just as [placing long documents before your query](./build-with-claude-prompt-engineering-claude-prompting-best-practices.md#long-context-prompting) improves results in text prompts, Claude works best when images come before text. Images placed after text or interpolated with text still perform well, but if your use case allows it, prefer an image-then-text structure.
 </Tip>
 
 ### About the prompt examples

@@ -11,13 +11,13 @@ Give Claude an advisory token budget for the full agentic loop to help the model
 ---
 
 <Note>
-This feature is eligible for [Zero Data Retention (ZDR)](https://platform.claude.com/docs/en/build-with-claude/api-and-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
+This feature is eligible for [Zero Data Retention (ZDR)](./build-with-claude-api-and-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 </Note>
 
 Task budgets let you tell Claude how many tokens it has for a full agentic loop, including thinking, tool calls, tool results, and output. The model sees a running countdown and uses it to prioritize work and finish gracefully as the budget is consumed.
 
 <Note>
-Task budgets are in public beta on [Claude Opus 4.7](https://platform.claude.com/docs/en/about-claude/models/overview.md). Set the `task-budgets-2026-03-13` beta header to opt in.
+Task budgets are in public beta on [Claude Opus 4.7](../about-claude/about-claude-models-overview.md). Set the `task-budgets-2026-03-13` beta header to opt in.
 </Note>
 
 ## When to use task budgets

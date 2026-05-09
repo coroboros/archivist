@@ -47,7 +47,7 @@ The `/v1/organizations/rate_limits` endpoint returns the rate limits applied at 
 - **Rate limit groups:** Each entry in the response represents one rate limit group. Model rate limits are grouped so that several model versions share a single set of limits, and other groups cover resources such as the Message Batches API, the Files API, the Token Counting API, agent skills, and the web search tool.
 - **`group_type`:** Identifies which category of limits the entry covers. See [Filtering by group type](#filtering-by-group-type) for the list of values.
 - **`models` list:** For `model_group` entries, the `models` field lists every model ID and alias that counts against that group's limits. Use this list to look up which group any model string falls under. For other group types, `models` is `null`.
-- **`limits` list:** Each group carries a list of `{type, value}` pairs. The `type` field identifies the limiter (such as `requests_per_minute`, `input_tokens_per_minute`, or `output_tokens_per_minute`) and `value` is the configured limit. See [Rate limits](https://platform.claude.com/docs/en/api/rate-limits.md) for how each limiter is measured and enforced.
+- **`limits` list:** Each group carries a list of `{type, value}` pairs. The `type` field identifies the limiter (such as `requests_per_minute`, `input_tokens_per_minute`, or `output_tokens_per_minute`) and `value` is the configured limit. See [Rate limits](../api/api-rate-limits.md) for how each limiter is measured and enforced.
 
 For complete parameter details and response schemas, see the [Organization Rate Limits API reference](../api/api-admin-rate_limits-list.md).
 
@@ -176,7 +176,7 @@ No. To set workspace rate limits, open the workspace in the [Claude Console](/se
 
 ## See also
 
-- [Rate limits](https://platform.claude.com/docs/en/api/rate-limits.md)
+- [Rate limits](../api/api-rate-limits.md)
 - [Admin API](./manage-claude-admin-api.md)
 - [Admin API reference](../api/api-admin.md)
 - [Workspaces](./manage-claude-workspaces.md)

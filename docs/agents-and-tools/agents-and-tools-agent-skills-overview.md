@@ -11,7 +11,7 @@ Agent Skills are modular capabilities that extend Claude's functionality. Each S
 ---
 
 <Note>
-This feature is **not** eligible for [Zero Data Retention (ZDR)](https://platform.claude.com/docs/en/build-with-claude/api-and-data-retention.md). Data is retained according to the feature's standard retention policy.
+This feature is **not** eligible for [Zero Data Retention (ZDR)](../build-with-claude/build-with-claude-api-and-data-retention.md). Data is retained according to the feature's standard retention policy.
 </Note>
 
 ## Why use Skills
@@ -265,7 +265,7 @@ These Skills are available on the Claude API and claude.ai. See the [quickstart 
 
 Anthropic also publishes open-source Skills in the [skills repository](https://github.com/anthropics/skills):
 
-- **[Claude API](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/claude-api-skill.md)**: Provides Claude with up-to-date API reference material, SDK documentation, and best practices for 8 programming languages. Bundled with Claude Code and also available for installation from the skills repository.
+- **[Claude API](./agents-and-tools-agent-skills-claude-api-skill.md)**: Provides Claude with up-to-date API reference material, SDK documentation, and best practices for 8 programming languages. Bundled with Claude Code and also available for installation from the skills repository.
 
 ### Custom Skills examples
 

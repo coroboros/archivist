@@ -11,7 +11,7 @@ Let Claude dynamically determine when and how much to use extended thinking with
 ---
 
 <Note>
-This feature is eligible for [Zero Data Retention (ZDR)](https://platform.claude.com/docs/en/build-with-claude/api-and-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
+This feature is eligible for [Zero Data Retention (ZDR)](./build-with-claude-api-and-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 </Note>
 
 Adaptive thinking is the recommended way to use [extended thinking](./build-with-claude-extended-thinking.md) with Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6, and is the default mode on [Claude Mythos Preview](https://anthropic.com/glasswing) (where it auto-applies whenever `thinking` is unset). Instead of manually setting a thinking token budget, adaptive thinking lets Claude dynamically determine when and how much to use extended thinking based on the complexity of each request. On Claude Opus 4.7, adaptive thinking is the **only** supported thinking mode; manual `thinking: {type: "enabled", budget_tokens: N}` is no longer accepted.
@@ -897,7 +897,7 @@ Here are some important considerations on thinking encryption:
 
 ### Pricing
 
-For complete pricing information including base rates, cache writes, cache hits, and output tokens, see the [pricing page](https://platform.claude.com/docs/en/about-claude/pricing.md).
+For complete pricing information including base rates, cache writes, cache hits, and output tokens, see the [pricing page](../about-claude/about-claude-pricing.md).
 
 The thinking process incurs charges for:
 - Tokens used during thinking (output tokens)
