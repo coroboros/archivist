@@ -1,4 +1,5 @@
 ---
+title: "Retrieve"
 source: "https://platform.claude.com/docs/en/api/go/beta/user_profiles/retrieve"
 category: "api"
 generated: true

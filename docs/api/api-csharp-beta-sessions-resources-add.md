@@ -1,4 +1,5 @@
 ---
+title: "Add"
 source: "https://platform.claude.com/docs/en/api/csharp/beta/sessions/resources/add"
 category: "api"
 generated: true

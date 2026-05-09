@@ -1,4 +1,5 @@
 ---
+title: "Delete"
 source: "https://platform.claude.com/docs/en/api/python/beta/memory_stores/memories/delete"
 category: "api"
 generated: true

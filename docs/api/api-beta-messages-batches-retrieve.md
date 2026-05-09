@@ -1,4 +1,5 @@
 ---
+title: "Retrieve"
 source: "https://platform.claude.com/docs/en/api/beta/messages/batches/retrieve"
 category: "api"
 generated: true

@@ -1,4 +1,5 @@
 ---
+title: "Content"
 source: "https://platform.claude.com/docs/en/api/compliance/apps/chats/files/content"
 category: "api"
 generated: true

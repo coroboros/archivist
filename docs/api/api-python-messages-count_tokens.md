@@ -1,4 +1,5 @@
 ---
+title: "Count Tokens"
 source: "https://platform.claude.com/docs/en/api/python/messages/count_tokens"
 category: "api"
 generated: true

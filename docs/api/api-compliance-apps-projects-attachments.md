@@ -1,4 +1,5 @@
 ---
+title: "Attachments"
 source: "https://platform.claude.com/docs/en/api/compliance/apps/projects/attachments"
 category: "api"
 generated: true

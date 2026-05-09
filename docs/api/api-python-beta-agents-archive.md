@@ -1,4 +1,5 @@
 ---
+title: "Archive"
 source: "https://platform.claude.com/docs/en/api/python/beta/agents/archive"
 category: "api"
 generated: true

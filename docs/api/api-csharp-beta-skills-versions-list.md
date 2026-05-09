@@ -1,4 +1,5 @@
 ---
+title: "List"
 source: "https://platform.claude.com/docs/en/api/csharp/beta/skills/versions/list"
 category: "api"
 generated: true

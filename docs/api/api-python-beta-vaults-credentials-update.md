@@ -1,4 +1,5 @@
 ---
+title: "Update"
 source: "https://platform.claude.com/docs/en/api/python/beta/vaults/credentials/update"
 category: "api"
 generated: true

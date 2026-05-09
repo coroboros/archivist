@@ -1,4 +1,5 @@
 ---
+title: "Send"
 source: "https://platform.claude.com/docs/en/api/python/beta/sessions/events/send"
 category: "api"
 generated: true

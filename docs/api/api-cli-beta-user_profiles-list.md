@@ -1,4 +1,5 @@
 ---
+title: "List"
 source: "https://platform.claude.com/docs/en/api/cli/beta/user_profiles/list"
 category: "api"
 generated: true

@@ -1,5 +1,15 @@
 # Changelog
 
+## 🧑‍💻 v1.2.0 - 09/05/2026 — Manual full sync + HTML-blob skip + title fallback
+
+### Features
+- `update-platform-docs.js` now skips upstream URLs whose `.md` endpoint returns rendered HTML instead of markdown (currently `/api/php/*` and `/api/terraform/*` — Anthropic doesn't publish markdown for those SDK languages). 246 useless HTML blobs removed from `docs/api/` (1308 → 1062 files). If markdown becomes available later, the files reappear automatically on the next run.
+- `extractTitle` falls back to the first H2 when no H1 exists, so SDK API ref pages (`## Create`, `## List`, …) get proper `title:` frontmatter. After this change, only 1 file out of 1288 lacks a title (a legitimate `method not available in this language` stub).
+
+### Documentation
+- Manual sync of every section against the live upstream sitemap so the CI baseline reflects current reality (avoids triggering the deletion safety guard on the next scheduled run).
+- `claude/archivist-project/README.md`: replaced legacy `docs/developer/` and `docs/resources/` references with the new section list (`build-with-claude/`, `agents-and-tools/`, `manage-claude/`, `managed-agents/`, `test-and-evaluate/`, `release-notes/`, `general/`).
+
 ## 🧑‍💻 v1.1.1 - 09/05/2026 — Recover EN release-notes via DE locale mirror
 
 ### Fixes

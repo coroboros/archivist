@@ -1,4 +1,5 @@
 ---
+title: "List"
 source: "https://platform.claude.com/docs/en/api/compliance/organizations/roles/permissions/list"
 category: "api"
 generated: true

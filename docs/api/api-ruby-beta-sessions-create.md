@@ -1,4 +1,5 @@
 ---
+title: "Create"
 source: "https://platform.claude.com/docs/en/api/ruby/beta/sessions/create"
 category: "api"
 generated: true

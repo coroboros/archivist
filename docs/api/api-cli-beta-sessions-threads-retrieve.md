@@ -1,4 +1,5 @@
 ---
+title: "Retrieve"
 source: "https://platform.claude.com/docs/en/api/cli/beta/sessions/threads/retrieve"
 category: "api"
 generated: true

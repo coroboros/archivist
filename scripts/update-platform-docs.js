@@ -68,11 +68,15 @@ const DOCS = {
 };
 
 /**
- * Extracts the first H1 title from markdown content.
+ * Extracts a title from markdown content. Prefers the first H1; falls back to
+ * the first H2 since many SDK API ref pages (e.g. `## Create`, `## List`) ship
+ * without an H1.
  */
 function extractTitle(content) {
-  const match = content.match(/^#\s+(.+)$/m);
-  return match ? match[1].trim() : null;
+  const h1 = content.match(/^#\s+(.+)$/m);
+  if (h1) return h1[1].trim();
+  const h2 = content.match(/^##\s+(.+)$/m);
+  return h2 ? h2[1].trim() : null;
 }
 
 /**
@@ -133,6 +137,8 @@ function determineDocType(url) {
 async function downloadAndSaveDocs(allUrls, filenamesByURLs) {
   console.log('📖 3. Downloading, rewriting, and saving documentation...');
   const promises = [];
+  const skipped = [];
+  const written = new Set();
 
   for (const url of allUrls) {
     const mdUrl = `${url}.md`;
@@ -146,10 +152,18 @@ async function downloadAndSaveDocs(allUrls, filenamesByURLs) {
           return response.text();
         })
         .then((text) => {
-          console.log(`   -> Processing ${filePath}`);
+          // Some upstream URLs (currently /api/php/* and /api/terraform/*) have
+          // no real markdown source — the .md endpoint serves the rendered HTML
+          // page instead. Skip those so the mirror stays clean. If Anthropic
+          // adds markdown later, the file appears automatically on the next run.
+          if (text.trimStart().startsWith('<!DOCTYPE')) {
+            skipped.push(mdUrl);
+            return;
+          }
           const rewritten = rewriteLocalLinks(text, filenamesByURLs, url);
           const { docType } = filenamesByURLs[url];
           const frontmatter = buildFrontmatter(text, url, docType);
+          written.add(url);
           return fs.writeFile(filePath, frontmatter + rewritten, 'utf8');
         })
         .catch((error) => {
@@ -159,7 +173,8 @@ async function downloadAndSaveDocs(allUrls, filenamesByURLs) {
   }
 
   await Promise.all(promises);
-  console.log('   File processing complete.');
+  console.log(`   ${written.size} files written, ${skipped.length} skipped (HTML-only upstream).`);
+  return written;
 }
 
 /**
@@ -384,9 +399,10 @@ async function run() {
   const filenamesByURLs = await fetchAllUrlsFromSitemap();
   const allUrls = Object.keys(filenamesByURLs);
 
-  await downloadAndSaveDocs(allUrls, filenamesByURLs);
-  await generateReadmeFiles(allUrls, filenamesByURLs);
-  await pruneEmptySections(allUrls, filenamesByURLs);
+  const writtenUrls = await downloadAndSaveDocs(allUrls, filenamesByURLs);
+  const writtenList = [...writtenUrls];
+  await generateReadmeFiles(writtenList, filenamesByURLs);
+  await pruneEmptySections(writtenList, filenamesByURLs);
 
   console.log('\n✅ Claude Platform documentation updated successfully!');
 }

@@ -1,4 +1,5 @@
 ---
+title: "Upload"
 source: "https://platform.claude.com/docs/en/api/csharp/beta/files/upload"
 category: "api"
 generated: true

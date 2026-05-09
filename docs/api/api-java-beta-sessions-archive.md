@@ -1,4 +1,5 @@
 ---
+title: "Archive"
 source: "https://platform.claude.com/docs/en/api/java/beta/sessions/archive"
 category: "api"
 generated: true

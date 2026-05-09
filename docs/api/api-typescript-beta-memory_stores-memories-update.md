@@ -1,4 +1,5 @@
 ---
+title: "Update"
 source: "https://platform.claude.com/docs/en/api/typescript/beta/memory_stores/memories/update"
 category: "api"
 generated: true

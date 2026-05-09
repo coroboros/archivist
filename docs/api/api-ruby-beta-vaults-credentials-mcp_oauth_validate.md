@@ -1,4 +1,5 @@
 ---
+title: "MCP OAuth Validate"
 source: "https://platform.claude.com/docs/en/api/ruby/beta/vaults/credentials/mcp_oauth_validate"
 category: "api"
 generated: true

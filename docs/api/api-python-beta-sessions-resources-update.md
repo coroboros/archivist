@@ -1,4 +1,5 @@
 ---
+title: "Update"
 source: "https://platform.claude.com/docs/en/api/python/beta/sessions/resources/update"
 category: "api"
 generated: true

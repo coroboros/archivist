@@ -1,4 +1,5 @@
 ---
+title: "Create"
 source: "https://platform.claude.com/docs/en/api/python/beta/sessions/create"
 category: "api"
 generated: true

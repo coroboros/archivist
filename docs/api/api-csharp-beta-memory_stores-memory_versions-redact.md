@@ -1,4 +1,5 @@
 ---
+title: "Redact"
 source: "https://platform.claude.com/docs/en/api/csharp/beta/memory_stores/memory_versions/redact"
 category: "api"
 generated: true

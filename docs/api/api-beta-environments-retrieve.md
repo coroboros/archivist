@@ -1,4 +1,5 @@
 ---
+title: "Retrieve"
 source: "https://platform.claude.com/docs/en/api/beta/environments/retrieve"
 category: "api"
 generated: true

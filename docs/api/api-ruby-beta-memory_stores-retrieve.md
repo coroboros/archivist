@@ -1,4 +1,5 @@
 ---
+title: "Retrieve"
 source: "https://platform.claude.com/docs/en/api/ruby/beta/memory_stores/retrieve"
 category: "api"
 generated: true

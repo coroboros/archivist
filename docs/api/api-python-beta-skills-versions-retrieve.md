@@ -1,4 +1,5 @@
 ---
+title: "Retrieve"
 source: "https://platform.claude.com/docs/en/api/python/beta/skills/versions/retrieve"
 category: "api"
 generated: true

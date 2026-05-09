@@ -1,4 +1,5 @@
 ---
+title: "List"
 source: "https://platform.claude.com/docs/en/api/ruby/beta/models/list"
 category: "api"
 generated: true

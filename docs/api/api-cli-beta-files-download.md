@@ -1,4 +1,5 @@
 ---
+title: "Download"
 source: "https://platform.claude.com/docs/en/api/cli/beta/files/download"
 category: "api"
 generated: true

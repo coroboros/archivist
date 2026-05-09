@@ -1,4 +1,5 @@
 ---
+title: "Stream"
 source: "https://platform.claude.com/docs/en/api/beta/sessions/events/stream"
 category: "api"
 generated: true

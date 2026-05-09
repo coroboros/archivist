@@ -1,4 +1,5 @@
 ---
+title: "Add"
 source: "https://platform.claude.com/docs/en/api/python/beta/sessions/resources/add"
 category: "api"
 generated: true

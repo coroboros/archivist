@@ -1,4 +1,5 @@
 ---
+title: "Delete"
 source: "https://platform.claude.com/docs/en/api/java/beta/sessions/resources/delete"
 category: "api"
 generated: true

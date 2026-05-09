@@ -1,4 +1,5 @@
 ---
+title: "Create"
 source: "https://platform.claude.com/docs/en/api/java/beta/agents/create"
 category: "api"
 generated: true

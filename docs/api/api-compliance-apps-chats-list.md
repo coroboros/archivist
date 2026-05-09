@@ -1,4 +1,5 @@
 ---
+title: "List"
 source: "https://platform.claude.com/docs/en/api/compliance/apps/chats/list"
 category: "api"
 generated: true

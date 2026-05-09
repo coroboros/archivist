@@ -1,4 +1,5 @@
 ---
+title: "Create"
 source: "https://platform.claude.com/docs/en/api/java/beta/vaults/credentials/create"
 category: "api"
 generated: true

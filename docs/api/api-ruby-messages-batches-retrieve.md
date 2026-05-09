@@ -1,4 +1,5 @@
 ---
+title: "Retrieve"
 source: "https://platform.claude.com/docs/en/api/ruby/messages/batches/retrieve"
 category: "api"
 generated: true

@@ -1,4 +1,5 @@
 ---
+title: "Delete"
 source: "https://platform.claude.com/docs/en/api/compliance/apps/projects/delete"
 category: "api"
 generated: true

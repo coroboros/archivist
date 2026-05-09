@@ -1,4 +1,5 @@
 ---
+title: "Archive"
 source: "https://platform.claude.com/docs/en/api/ruby/beta/vaults/archive"
 category: "api"
 generated: true

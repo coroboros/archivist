@@ -1,4 +1,5 @@
 ---
+title: "Create"
 source: "https://platform.claude.com/docs/en/api/typescript/beta/skills/create"
 category: "api"
 generated: true

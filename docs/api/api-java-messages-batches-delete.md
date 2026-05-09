@@ -1,4 +1,5 @@
 ---
+title: "Delete"
 source: "https://platform.claude.com/docs/en/api/java/messages/batches/delete"
 category: "api"
 generated: true

@@ -1,4 +1,5 @@
 ---
+title: "Delete"
 source: "https://platform.claude.com/docs/en/api/typescript/beta/messages/batches/delete"
 category: "api"
 generated: true

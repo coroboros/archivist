@@ -1,4 +1,5 @@
 ---
+title: "Cancel"
 source: "https://platform.claude.com/docs/en/api/typescript/messages/batches/cancel"
 category: "api"
 generated: true

@@ -1,4 +1,5 @@
 ---
+title: "Update"
 source: "https://platform.claude.com/docs/en/api/java/beta/user_profiles/update"
 category: "api"
 generated: true

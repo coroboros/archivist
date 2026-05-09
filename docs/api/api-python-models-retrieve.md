@@ -1,4 +1,5 @@
 ---
+title: "Retrieve"
 source: "https://platform.claude.com/docs/en/api/python/models/retrieve"
 category: "api"
 generated: true

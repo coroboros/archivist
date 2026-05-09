@@ -1,4 +1,5 @@
 ---
+title: "List"
 source: "https://platform.claude.com/docs/en/api/typescript/beta/sessions/resources/list"
 category: "api"
 generated: true

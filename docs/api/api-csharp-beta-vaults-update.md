@@ -1,4 +1,5 @@
 ---
+title: "Update"
 source: "https://platform.claude.com/docs/en/api/csharp/beta/vaults/update"
 category: "api"
 generated: true

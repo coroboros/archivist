@@ -1,4 +1,5 @@
 ---
+title: "Archive"
 source: "https://platform.claude.com/docs/en/api/beta/vaults/credentials/archive"
 category: "api"
 generated: true

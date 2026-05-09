@@ -1,4 +1,5 @@
 ---
+title: "Results"
 source: "https://platform.claude.com/docs/en/api/cli/messages/batches/results"
 category: "api"
 generated: true

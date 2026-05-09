@@ -1,4 +1,5 @@
 ---
+title: "Create"
 source: "https://platform.claude.com/docs/en/api/cli/messages/create"
 category: "api"
 generated: true

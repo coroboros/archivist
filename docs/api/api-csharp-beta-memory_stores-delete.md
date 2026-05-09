@@ -1,4 +1,5 @@
 ---
+title: "Delete"
 source: "https://platform.claude.com/docs/en/api/csharp/beta/memory_stores/delete"
 category: "api"
 generated: true

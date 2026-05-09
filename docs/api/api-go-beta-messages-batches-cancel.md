@@ -1,4 +1,5 @@
 ---
+title: "Cancel"
 source: "https://platform.claude.com/docs/en/api/go/beta/messages/batches/cancel"
 category: "api"
 generated: true

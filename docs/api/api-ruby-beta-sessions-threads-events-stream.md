@@ -1,4 +1,5 @@
 ---
+title: "Stream"
 source: "https://platform.claude.com/docs/en/api/ruby/beta/sessions/threads/events/stream"
 category: "api"
 generated: true

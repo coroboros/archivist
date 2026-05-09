@@ -1,4 +1,5 @@
 ---
+title: "Retrieve"
 source: "https://platform.claude.com/docs/en/api/compliance/apps/projects/documents/retrieve"
 category: "api"
 generated: true

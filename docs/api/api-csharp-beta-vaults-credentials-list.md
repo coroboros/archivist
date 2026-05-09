@@ -1,4 +1,5 @@
 ---
+title: "List"
 source: "https://platform.claude.com/docs/en/api/csharp/beta/vaults/credentials/list"
 category: "api"
 generated: true
