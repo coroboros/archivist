@@ -17,7 +17,7 @@ Create Vault
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 20 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 21 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -64,6 +64,8 @@ Create Vault
     - `"user-profiles-2026-03-24"`
 
     - `"advisor-tool-2026-03-01"`
+
+    - `"managed-agents-2026-04-01"`
 
 ### Body Parameters
 
@@ -118,6 +120,9 @@ curl https://api.anthropic.com/v1/vaults \
     -H 'anthropic-beta: managed-agents-2026-04-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY" \
     -d '{
-          "display_name": "Example vault"
+          "display_name": "Example vault",
+          "metadata": {
+            "environment": "production"
+          }
         }'
 ```

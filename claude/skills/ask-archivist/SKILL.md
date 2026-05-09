@@ -1,7 +1,7 @@
 ---
 name: ask-archivist
 description: Consult a local mirror of Anthropic's official docs for authoritative answers about Claude Code (CLI flags, non-interactive mode, hooks, MCP, subagents, slash commands, skills, plugins, CLAUDE.md, sandboxing, worktrees, checkpointing, statusline, settings.json, agent teams), the Claude Agent SDK (agents, tools, state, streaming, managed agents), and the Claude API (messages, tool use, prompt caching, files, batch, citations, extended thinking, vision, pricing, rate limits, endpoints). Use whenever the user asks how anything in Claude's ecosystem works or behaves — features, flags, parameters, limits, configuration — including casual phrasing, French, typos, and questions that don't explicitly say "check docs". Also triggers on "does X support Y / can I do Z / what's the diff between A and B / how do I configure …" and on complaints about Claude Code behavior the user wants to change. Deterministic Grep + full-file Read over the local mirror — never training data. Cites paths and source URLs.
-argument-hint: "[--section <api|code|developer|resources|insights>] [--tag <tag>] <question>"
+argument-hint: "[--section <api|code|agents-and-tools|build-with-claude|manage-claude|managed-agents|test-and-evaluate|release-notes|general|insights>] [--tag <tag>] <question>"
 allowed-tools: Bash Grep Read Glob
 metadata:
   author: coroboros
@@ -61,7 +61,7 @@ Otherwise → proceed to the lookup workflow. The resolved mirror path is `$MIRR
 Extract:
 
 - **Question text** — the free-form user question.
-- **Section filter** (optional) — `--section api|code|developer|resources|insights` limits the search to that folder.
+- **Section filter** (optional) — `--section api|code|agents-and-tools|build-with-claude|manage-claude|managed-agents|test-and-evaluate|release-notes|general|insights` limits the search to that folder.
 - **Tag filter** (optional) — `--tag <tag>` limits to docs whose YAML frontmatter `tags:` array includes `<tag>`.
 
 Identify 2–4 substantive keywords. Prefer exact Anthropic terminology (flag names, feature names, product names, exact CLI tokens) over paraphrases — that is the whole point of the deterministic path.
@@ -86,11 +86,16 @@ When the INDEX Grep returned nothing useful for a topical query, also fall back 
 
 When multiple matches span sections, order candidates by:
 
-1. `docs/code/` — Claude Code CLI, features, workflows (~107 files)
-2. `docs/developer/` — platform/developer guides, SDK references (~93 files)
-3. `docs/insights/` — hand-curated deep-dives, best practices, building skills (~6 files)
-4. `docs/resources/` — high-level overviews (~7 files)
-5. `docs/api/` — **deprioritized**. ~1034 auto-generated endpoint refs. Mostly noise unless the user explicitly wants an endpoint, wire format, status code, header, or request/response schema. Promote `api/` only when keywords clearly signal API-endpoint specificity (`curl`, `POST /v1/…`, endpoint, header, request body, response schema, rate limit).
+1. `docs/code/` — Claude Code CLI, features, workflows. High signal for any CLI / agent-SDK question.
+2. `docs/build-with-claude/` — core platform feature guides (caching, thinking, streaming, citations, vision, files…).
+3. `docs/agents-and-tools/` — tool use, Agent Skills, MCP connector / remote MCP servers.
+4. `docs/managed-agents/` — Anthropic-hosted agents: setup, sessions, environments, vaults.
+5. `docs/manage-claude/` — admin / governance plane: workspaces, data residency, WIF, rate-limits API, compliance.
+6. `docs/insights/` — hand-curated deep-dives, best practices, building skills.
+7. `docs/test-and-evaluate/` — guardrail strengthening, eval workflows.
+8. `docs/release-notes/` — changelogs and version notes (small, mostly summary).
+9. `docs/general/` — orphan top-level pages (`intro`, anything not yet categorized).
+10. `docs/api/` — **deprioritized**. ~1300 auto-generated endpoint refs. Mostly noise unless the user explicitly wants an endpoint, wire format, status code, header, or request/response schema. Promote `api/` only when keywords clearly signal API-endpoint specificity (`curl`, `POST /v1/…`, endpoint, header, request body, response schema, rate limit).
 
 `--section X` overrides all of the above and restricts to that one folder.
 
@@ -131,7 +136,7 @@ The subagent is a user-chosen escape-hatch, not an automatic fallback. Name it, 
 - Never invent flag names, parameter signatures, pricing, or limits.
 - Never skip the INDEX `Grep` shortcut when the mirror is present — it is the cheapest deterministic path.
 - Never `Read` `docs/INDEX.md` in full; always `Grep` it.
-- Never promote `docs/api/` over `docs/code/` or `docs/developer/` unless the query is specifically about an API endpoint.
+- Never promote `docs/api/` over `docs/code/`, `docs/build-with-claude/`, or `docs/agents-and-tools/` unless the query is specifically about an API endpoint.
 
 ## Output example
 
@@ -150,4 +155,4 @@ Use `claude --worktree <path>` to launch Claude Code inside a git worktree. The 
 ## Notes on the mirror
 
 - `docs/INDEX.md` is auto-generated by `scripts/build-docs-index.js` in the mirror repo. It lists every topic (H1 + H2 headings + frontmatter tags) that appears in 2+ docs. It is a cross-section shortlist, not an index of every heading.
-- Filenames follow `<section>-<slug>.md` (e.g. `code-cli-reference.md`, `api-beta-skills.md`, `developer-build-with-claude-files.md`). Useful for `Glob` when a section-scoped name pattern is faster than INDEX lookup.
+- Filenames follow `<section>-<slug>.md` (e.g. `code-cli-reference.md`, `api-beta-skills.md`, `build-with-claude-files.md`, `managed-agents-overview.md`). Useful for `Glob` when a section-scoped name pattern is faster than INDEX lookup.

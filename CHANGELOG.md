@@ -1,5 +1,19 @@
 # Changelog
 
+## 🧑‍💻 v1.1.0 - 09/05/2026 — Mirror upstream sitemap structure + CI failure alerts
+
+### Features
+- Restructured `docs/` to mirror the upstream `platform.claude.com` sitemap 1:1: new sections `agents-and-tools/`, `build-with-claude/`, `manage-claude/`, `managed-agents/`, `test-and-evaluate/`, `general/` (fallback). Removed dead `developer/` and `resources/` (the upstream `/en/about-claude/*` and `/en/resources/*` paths no longer exist). `release-notes/` is configured but pruned at build time until upstream restores `/en/release-notes/*` URLs.
+- Added a `failure()` step to `.github/workflows/sync-docs.yml` that opens (or de-duplicates) a `sync-docs-failure`-labelled GitHub Issue with the run URL when the workflow aborts.
+
+### Fixes
+- `update-platform-docs.js`: replaced hardcoded `docsByType` initialization (a hidden footgun that silenced any new section) with a dynamic `Object.fromEntries` over the `DOCS` config keys.
+- `build-docs-index.js`: discover sections from the filesystem instead of a hardcoded list, so the index automatically picks up new folders.
+
+### Documentation
+- Removed legacy "Telegram notification" mention from `CLAUDE.md` — never implemented in the workflow.
+- Updated `README.md`, `CLAUDE.md`, `.claude/rules/doc-authoring.md`, and `claude/skills/ask-archivist/SKILL.md` to reflect the new folder list and section priorities.
+
 ## 🤖 v1.0.18 - 02/05/2026
 
 File Changes:

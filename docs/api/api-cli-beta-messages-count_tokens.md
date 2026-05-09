@@ -94,7 +94,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
 - `--output-format: optional object { schema, type }`
 
-  Body param: Deprecated: Use `output_config.format` instead. See [structured outputs](../developer/developer-build-with-claude-structured-outputs.md)
+  Body param: Deprecated: Use `output_config.format` instead. See [structured outputs](../build-with-claude/build-with-claude-structured-outputs.md)
 
   A schema to specify Claude's output format in responses. This parameter will be removed in a future release.
 

@@ -4,10 +4,13 @@ import path from 'node:path';
 // --- Configuration ---
 const SITEMAP_URL = 'https://platform.claude.com/sitemap.xml';
 const URL_PREFIX = 'https://platform.claude.com/docs/en/';
-const PATHS_TO_IGNORE = ['/release-notes/'];
-const PATHS_TO_IGNORE_REGEXP = new RegExp(`(${PATHS_TO_IGNORE.join('|')})`);
+const PATHS_TO_IGNORE = [];
+const PATHS_TO_IGNORE_REGEXP =
+  PATHS_TO_IGNORE.length > 0 ? new RegExp(`(${PATHS_TO_IGNORE.join('|')})`) : null;
 const DOCS_DIR = 'docs';
-// NOTE: key and type MUST be the same
+const FALLBACK_TYPE = 'general';
+// NOTE: key and type MUST be the same. Folders mirror upstream sitemap top-level sections;
+// `general` is the fallback bucket for orphan pages (intro, future additions).
 const DOCS = {
   api: {
     name: 'Platform | API',
@@ -15,17 +18,47 @@ const DOCS = {
     readmePath: `${DOCS_DIR}/api/api-README.md`,
     type: 'api',
   },
-  developer: {
-    name: 'Platform | Developer',
-    paths: [], // all the rest
-    readmePath: `${DOCS_DIR}/developer/developer-README.md`,
-    type: 'developer',
+  'agents-and-tools': {
+    name: 'Platform | Agents & Tools',
+    paths: ['/agents-and-tools/'],
+    readmePath: `${DOCS_DIR}/agents-and-tools/agents-and-tools-README.md`,
+    type: 'agents-and-tools',
   },
-  resources: {
-    name: 'Platform | Resources',
-    paths: ['/resources/', '/about-claude/glossary', '/about-claude/use-case-guides/'],
-    readmePath: `${DOCS_DIR}/resources/resources-README.md`,
-    type: 'resources',
+  'build-with-claude': {
+    name: 'Platform | Build with Claude',
+    paths: ['/build-with-claude/'],
+    readmePath: `${DOCS_DIR}/build-with-claude/build-with-claude-README.md`,
+    type: 'build-with-claude',
+  },
+  'manage-claude': {
+    name: 'Platform | Manage Claude',
+    paths: ['/manage-claude/'],
+    readmePath: `${DOCS_DIR}/manage-claude/manage-claude-README.md`,
+    type: 'manage-claude',
+  },
+  'managed-agents': {
+    name: 'Platform | Managed Agents',
+    paths: ['/managed-agents/'],
+    readmePath: `${DOCS_DIR}/managed-agents/managed-agents-README.md`,
+    type: 'managed-agents',
+  },
+  'test-and-evaluate': {
+    name: 'Platform | Test & Evaluate',
+    paths: ['/test-and-evaluate/'],
+    readmePath: `${DOCS_DIR}/test-and-evaluate/test-and-evaluate-README.md`,
+    type: 'test-and-evaluate',
+  },
+  'release-notes': {
+    name: 'Platform | Release Notes',
+    paths: ['/release-notes/'],
+    readmePath: `${DOCS_DIR}/release-notes/release-notes-README.md`,
+    type: 'release-notes',
+  },
+  [FALLBACK_TYPE]: {
+    name: 'Platform | General',
+    paths: [], // fallback for anything not matched above
+    readmePath: `${DOCS_DIR}/${FALLBACK_TYPE}/${FALLBACK_TYPE}-README.md`,
+    type: FALLBACK_TYPE,
   },
 };
 
@@ -85,7 +118,7 @@ function determineDocType(url) {
       if (cleaned.startsWith(startPath)) return type;
     }
   }
-  return DOCS.developer.type;
+  return FALLBACK_TYPE;
 }
 
 /**
@@ -156,7 +189,7 @@ async function fetchAllUrlsFromSitemap() {
   const allUrls = [...xml.matchAll(/<loc>(.*?)<\/loc>/g)].map((m) => m[1]);
 
   const filteredUrls = allUrls.filter(
-    (url) => url.startsWith(URL_PREFIX) && !PATHS_TO_IGNORE_REGEXP.test(url),
+    (url) => url.startsWith(URL_PREFIX) && !PATHS_TO_IGNORE_REGEXP?.test(url),
   );
 
   console.log(`   ${filteredUrls.length} Claude Platform URLs found.`);
@@ -192,17 +225,14 @@ async function fetchAllUrlsFromSitemap() {
 }
 
 /**
- * Generates individual README.md files for each documentation type (developer, api, resources),
- * each containing a full table of contents for its own section only.
+ * Generates individual README.md files for each documentation type (one per
+ * key in DOCS), each containing a full table of contents for its own section
+ * only. Empty sections are skipped.
  */
 async function generateReadmeFiles(allUrls, filenamesByURLs) {
   console.log('👓 4. Generating README files...');
 
-  const docsByType = {
-    [DOCS.api.type]: [],
-    [DOCS.developer.type]: [],
-    [DOCS.resources.type]: [],
-  };
+  const docsByType = Object.fromEntries(Object.keys(DOCS).map((t) => [t, []]));
 
   for (const url of allUrls) {
     const entry = filenamesByURLs[url];
@@ -214,9 +244,10 @@ async function generateReadmeFiles(allUrls, filenamesByURLs) {
     if (items.length === 0) continue;
 
     const readmePath = DOCS[docType].readmePath;
+    const humanName = DOCS[docType].name;
 
-    let readme = `# Claude Platform Docs (${docType.charAt(0).toUpperCase() + docType.slice(1)})\n\n`;
-    readme += `_This repository is a mirror of the official [Claude Platform](${URL_PREFIX}) documentation (${docType.charAt(0).toUpperCase() + docType.slice(1)}). It is updated automatically._\n\n`;
+    let readme = `# ${humanName}\n\n`;
+    readme += `_This repository is a mirror of the official [Claude Platform](${URL_PREFIX}) documentation (${humanName}). It is updated automatically._\n\n`;
     readme += `**Last updated:** ${new Date().toUTCString()}\n\n`;
     readme += '---\n\n';
 
@@ -312,6 +343,23 @@ function rewriteLocalLinks(content, filenamesByURLs, currentUrl) {
 }
 
 /**
+ * Removes section folders that received no URLs in this run. Upstream sometimes
+ * holds an empty section (e.g. release-notes only exists in /de/ today); we
+ * don't want orphan empty dirs polluting the index.
+ */
+async function pruneEmptySections(allUrls, filenamesByURLs) {
+  const populated = new Set();
+  for (const url of allUrls) populated.add(filenamesByURLs[url].docType);
+
+  for (const docType of Object.keys(DOCS)) {
+    if (populated.has(docType)) continue;
+    const directoryPath = path.join(DOCS_DIR, docType);
+    await fs.rm(directoryPath, { force: true, recursive: true });
+    console.log(`   -> Pruned empty section '${directoryPath}' (no upstream URLs).`);
+  }
+}
+
+/**
  * The main function that orchestrates the entire mirroring process.
  */
 async function run() {
@@ -322,6 +370,7 @@ async function run() {
 
   await downloadAndSaveDocs(allUrls, filenamesByURLs);
   await generateReadmeFiles(allUrls, filenamesByURLs);
+  await pruneEmptySections(allUrls, filenamesByURLs);
 
   console.log('\n✅ Claude Platform documentation updated successfully!');
 }

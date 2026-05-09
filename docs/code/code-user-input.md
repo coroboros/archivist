@@ -59,11 +59,11 @@ The callback fires in two cases:
 
 Once you've passed a `canUseTool` callback in your query options, it fires when Claude wants to use a tool that isn't auto-approved. Your callback receives three arguments:
 
-| Argument                            | Description                                                                                                                                                                                                                                                                                                                             |
-| ----------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `toolName`                          | The name of the tool Claude wants to use (e.g., `"Bash"`, `"Write"`, `"Edit"`)                                                                                                                                                                                                                                                          |
-| `input`                             | The parameters Claude is passing to the tool. Contents vary by tool.                                                                                                                                                                                                                                                                    |
-| `options` (TS) / `context` (Python) | Additional context including optional `suggestions` (proposed `PermissionUpdate` entries to avoid re-prompting) and a cancellation signal. In TypeScript, `signal` is an `AbortSignal`; in Python, the signal field is reserved for future use. See [`ToolPermissionContext`](./code-agent-sdk/python.md#tool-permission-context) for Python. |
+| Argument                            | Description                                                                                                                                                                                                                                                                                                                           |
+| ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `toolName`                          | The name of the tool Claude wants to use (e.g., `"Bash"`, `"Write"`, `"Edit"`)                                                                                                                                                                                                                                                        |
+| `input`                             | The parameters Claude is passing to the tool. Contents vary by tool.                                                                                                                                                                                                                                                                  |
+| `options` (TS) / `context` (Python) | Additional context including optional `suggestions` (proposed `PermissionUpdate` entries to avoid re-prompting) and a cancellation signal. In TypeScript, `signal` is an `AbortSignal`; in Python, the signal field is reserved for future use. See [`ToolPermissionContext`](./code-agent-sdk/python.md#toolpermissioncontext) for Python. |
 
 The `input` object contains tool-specific parameters. Common examples:
 
@@ -74,7 +74,7 @@ The `input` object contains tool-specific parameters. Common examples:
 | `Edit`  | `file_path`, `old_string`, `new_string` |
 | `Read`  | `file_path`, `offset`, `limit`          |
 
-See the SDK reference for complete input schemas: [Python](./code-agent-sdk/python.md#tool-input-output-types) | [TypeScript](./code-agent-sdk/typescript.md#tool-input-types).
+See the SDK reference for complete input schemas: [Python](./code-agent-sdk/python.md#tool-input%2Foutput-types) | [TypeScript](./code-agent-sdk/typescript.md#tool-input-types).
 
 You can display this information to the user so they can decide whether to allow or reject the action, then return the appropriate response.
 
@@ -480,7 +480,7 @@ The following steps show how to handle clarifying questions:
     | `question` field (e.g., `"How should I format the output?"`) | Key    |
     | Selected option's `label` field (e.g., `"Summary"`)          | Value  |
 
-    For multi-select questions, join multiple labels with `", "`. If you [support free-text input](#support-free-text-input), use the user's custom text as the value.
+    For multi-select questions, pass an array of labels or join them with `", "`. If you [support free-text input](#support-free-text-input), use the user's custom text as the value.
 
     <CodeGroup>
       ```python Python theme={null}
@@ -489,7 +489,7 @@ The following steps show how to handle clarifying questions:
               "questions": input_data.get("questions", []),
               "answers": {
                   "How should I format the output?": "Summary",
-                  "Which sections should I include?": "Introduction, Conclusion",
+                  "Which sections should I include?": ["Introduction", "Conclusion"],
               },
           }
       )
@@ -590,7 +590,7 @@ Return an `answers` object mapping each question's `question` field to the selec
 | `questions` | Pass through the original questions array (required for tool processing) |
 | `answers`   | Object where keys are question text and values are selected labels       |
 
-For multi-select questions, join multiple labels with `", "`. For free-text input, use the user's custom text directly.
+For multi-select questions, pass an array of labels or join them with `", "`. For free-text input, use the user's custom text directly.
 
 ```json theme={null}
 {
@@ -599,7 +599,7 @@ For multi-select questions, join multiple labels with `", "`. For free-text inpu
   ],
   "answers": {
     "How should I format the output?": "Summary",
-    "Which sections should I include?": "Introduction, Conclusion"
+    "Which sections should I include?": ["Introduction", "Conclusion"]
   }
 }
 ```
@@ -813,4 +813,4 @@ Custom tools give you full control over the interaction, but require more implem
 
 * [Configure permissions](./code-agent-sdk/permissions.md): set up permission modes and rules
 * [Control execution with hooks](./code-agent-sdk/hooks.md): run custom code at key points in the agent lifecycle
-* [TypeScript SDK reference](./code-agent-sdk/typescript.md#can-use-tool): full canUseTool API documentation
+* [TypeScript SDK reference](./code-agent-sdk/typescript.md#canusetool): full canUseTool API documentation

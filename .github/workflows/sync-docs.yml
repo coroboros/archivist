@@ -8,10 +8,12 @@ on:
 
 env:
   DOCS_PATH: 'docs'
-  DOCS_CODE_FOLDER_NAME: 'code'
-  DOCS_DEVELOPER_FOLDER_NAME: 'developer'
-  DOCS_RESOURCES_FOLDER_NAME: 'resources'
-  DOCS_API_FOLDER_NAME: 'api'
+  # Space-separated list of subfolders the safety guard tracks. Must match what
+  # the update scripts produce. `release-notes` is intentionally absent: the EN
+  # sitemap does not currently expose /en/release-notes/* URLs, so the section
+  # is configured in scripts/update-platform-docs.js but pruned at build time.
+  # Re-add it here when upstream restores those URLs.
+  DOCS_FOLDERS: 'api agents-and-tools build-with-claude manage-claude managed-agents test-and-evaluate general code'
   MAX_REMOVED_FILES_PERCENTAGE: "${{ vars.MAX_REMOVED_FILES_PERCENTAGE || '25' }}"
 
 jobs:
@@ -20,6 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      issues: write
 
     steps:
       - name: Checkout code
@@ -50,14 +53,7 @@ jobs:
 
       - name: Cleanup README files when docs are unchanged
         run: |
-          FOLDERS=(
-            "${DOCS_CODE_FOLDER_NAME}"
-            "${DOCS_DEVELOPER_FOLDER_NAME}"
-            "${DOCS_RESOURCES_FOLDER_NAME}"
-            "${DOCS_API_FOLDER_NAME}"
-          )
-
-          for folder_name in "${FOLDERS[@]}"; do
+          for folder_name in ${DOCS_FOLDERS}; do
             README="${DOCS_PATH}/${folder_name}/${folder_name}-README.md"
 
             [ -f "$README" ] || continue
@@ -79,14 +75,12 @@ jobs:
           echo "Max allowed removed percentage: ${MAX_REMOVED_FILES_PERCENTAGE}%"
           echo "Docs path: ${DOCS_PATH}"
 
-          CHANGED_FILES="$(
-            git status --porcelain \
-              "${DOCS_PATH}/${DOCS_CODE_FOLDER_NAME}/" \
-              "${DOCS_PATH}/${DOCS_DEVELOPER_FOLDER_NAME}/" \
-              "${DOCS_PATH}/${DOCS_RESOURCES_FOLDER_NAME}/" \
-              "${DOCS_PATH}/${DOCS_API_FOLDER_NAME}/" \
-            || true
-          )"
+          DOCS_PATHS=()
+          for folder_name in ${DOCS_FOLDERS}; do
+            DOCS_PATHS+=("${DOCS_PATH}/${folder_name}/")
+          done
+
+          CHANGED_FILES="$(git status --porcelain "${DOCS_PATHS[@]}" || true)"
 
           if [ -z "$CHANGED_FILES" ]; then
             echo "No relevant changes detected."
@@ -98,13 +92,6 @@ jobs:
           echo "$CHANGED_FILES"
           echo "has_changes=true" >> $GITHUB_OUTPUT
 
-          FOLDERS=(
-            "${DOCS_CODE_FOLDER_NAME}"
-            "${DOCS_DEVELOPER_FOLDER_NAME}"
-            "${DOCS_RESOURCES_FOLDER_NAME}"
-            "${DOCS_API_FOLDER_NAME}"
-          )
-
           CRITICAL=false
 
           if git rev-parse --verify --quiet HEAD >/dev/null; then
@@ -113,7 +100,7 @@ jobs:
             HAVE_HEAD=false
           fi
 
-          for folder_name in "${FOLDERS[@]}"; do
+          for folder_name in ${DOCS_FOLDERS}; do
             FOLDER_PATH="${DOCS_PATH}/${folder_name}"
 
             if [ ! -d "$FOLDER_PATH" ]; then
@@ -189,11 +176,12 @@ jobs:
 
           echo -e "$HEADER\n\nFile Changes:\n" > new_entry.tmp
 
-          git status --porcelain \
-            "${DOCS_PATH}/${DOCS_CODE_FOLDER_NAME}/" \
-            "${DOCS_PATH}/${DOCS_DEVELOPER_FOLDER_NAME}/" \
-            "${DOCS_PATH}/${DOCS_RESOURCES_FOLDER_NAME}/" \
-            "${DOCS_PATH}/${DOCS_API_FOLDER_NAME}/" \
+          DOCS_PATHS=()
+          for folder_name in ${DOCS_FOLDERS}; do
+            DOCS_PATHS+=("${DOCS_PATH}/${folder_name}/")
+          done
+
+          git status --porcelain "${DOCS_PATHS[@]}" \
           | while IFS= read -r line; do
             case "$line" in
               " M "*) echo "- Modified: \`${line:3}\`" >> new_entry.tmp ;;
@@ -215,11 +203,12 @@ jobs:
       - name: Commit, Tag, and Push
         if: steps.git_status.outputs.has_changes == 'true'
         run: |
-          git add \
-            "${DOCS_PATH}/${DOCS_CODE_FOLDER_NAME}/" \
-            "${DOCS_PATH}/${DOCS_DEVELOPER_FOLDER_NAME}/" \
-            "${DOCS_PATH}/${DOCS_RESOURCES_FOLDER_NAME}/" \
-            "${DOCS_PATH}/${DOCS_API_FOLDER_NAME}/" \
+          DOCS_PATHS=()
+          for folder_name in ${DOCS_FOLDERS}; do
+            DOCS_PATHS+=("${DOCS_PATH}/${folder_name}/")
+          done
+
+          git add "${DOCS_PATHS[@]}" \
             "${DOCS_PATH}/INDEX.md" \
             CHANGELOG.md package.json pnpm-lock.yaml
           git commit -m "docs: release v${{ steps.version.outputs.version_number }}"
@@ -234,3 +223,45 @@ jobs:
           tag_name: "${{ steps.version.outputs.version_number }}"
           name: "${{ steps.version.outputs.version_number }}"
           body: "${{ steps.changelog_generator.outputs.body }}"
+
+      ########################################################################
+      # FAILURE NOTIFICATION
+      ########################################################################
+      - name: Open issue on failure
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const today = new Date().toISOString().slice(0, 10);
+            const title = `sync-docs failed on ${today}`;
+            const runUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            const body = [
+              `Workflow run: ${runUrl}`,
+              '',
+              'Likely causes:',
+              '- Per-folder deletion threshold exceeded (upstream restructuring or sitemap change).',
+              '- Network/HTTP failure when fetching the sitemap or a doc page.',
+              '- A new top-level section appeared in the upstream sitemap that the script does not recognize yet.',
+              '',
+              'Action: inspect the logs at the link above. If upstream restructured, update `scripts/update-platform-docs.js` (DOCS config) and the `DOCS_FOLDERS` env var in this workflow.',
+            ].join('\n');
+
+            const existing = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              labels: 'sync-docs-failure',
+            });
+
+            if (existing.data.some((i) => i.title === title)) {
+              core.info('Issue for today already open — skipping.');
+              return;
+            }
+
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title,
+              body,
+              labels: ['sync-docs-failure'],
+            });

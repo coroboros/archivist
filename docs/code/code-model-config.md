@@ -23,6 +23,10 @@ For the `model` setting in Claude Code, you can configure either:
   * Foundry: a deployment name
   * Vertex: a version name
 
+<Note>
+  `ANTHROPIC_BASE_URL` changes where requests are sent, not which model answers them. To route Claude through an LLM gateway, see [LLM gateway configuration](./code-llm-gateway.md).
+</Note>
+
 ### Model aliases
 
 Model aliases provide a convenient way to select model settings without
@@ -195,7 +199,9 @@ Each level trades token spend against capability. The default suits most coding 
 
 The effort scale is calibrated per model, so the same level name does not represent the same underlying value across models.
 
-For one-off deep reasoning without changing your session setting, include "ultrathink" in your prompt. This adds an in-context instruction telling the model to reason more on that turn; it does not change the effort level sent to the API.
+#### Use ultrathink for one-off deep reasoning
+
+Include `ultrathink` anywhere in your prompt to request deeper reasoning on that turn without changing your session effort setting. Claude Code recognizes the keyword and adds an in-context instruction. The effort level sent to the API is unchanged. Other phrases such as "think", "think hard", and "think more" are passed through as ordinary prompt text and are not recognized as keywords.
 
 #### Set the effort level
 
@@ -219,6 +225,18 @@ Adaptive reasoning makes thinking optional on each step, so Claude can respond f
 Opus 4.7 always uses adaptive reasoning. The fixed thinking budget mode and `CLAUDE_CODE_DISABLE_ADAPTIVE_THINKING` do not apply to it.
 
 On Opus 4.6 and Sonnet 4.6, you can set `CLAUDE_CODE_DISABLE_ADAPTIVE_THINKING=1` to revert to the previous fixed thinking budget controlled by `MAX_THINKING_TOKENS`. See [environment variables](./code-env-vars.md).
+
+### Extended thinking
+
+Extended thinking is the reasoning Claude emits before responding. On models that support [adaptive reasoning](#adjust-effort-level), the effort level is the primary control for how much thinking happens; the settings below turn thinking on or off and control how it displays.
+
+| Control                        | How to set it                                                                                                                                       |
+| :----------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Toggle for the current session | Press `Option+T` on macOS or `Alt+T` on Windows and Linux                                                                                           |
+| Set the global default         | Run `/config` and toggle thinking mode. Saved as `alwaysThinkingEnabled` in `~/.claude/settings.json`                                               |
+| Disable regardless of effort   | Set [`MAX_THINKING_TOKENS=0`](./code-env-vars.md). Other values apply only with a [fixed thinking budget](#adaptive-reasoning-and-fixed-thinking-budgets) |
+
+Thinking output is collapsed by default. Press `Ctrl+O` to toggle verbose mode and see the reasoning as gray italic text. Interactive sessions on the Anthropic API receive redacted thinking blocks by default, so set `showThinkingSummaries: true` in [settings](./code-settings.md) if you want the full summaries available when you expand. You are charged for all thinking tokens generated, even when collapsed or redacted.
 
 ### Extended context
 
@@ -258,7 +276,7 @@ You can see which model you're currently using in several ways:
 
 ## Add a custom model option
 
-Use `ANTHROPIC_CUSTOM_MODEL_OPTION` to add a single custom entry to the `/model` picker without replacing the built-in aliases. This is useful for testing model IDs that Claude Code does not list by default. For LLM gateway deployments, Claude Code populates the picker automatically from the gateway's `/v1/models` endpoint, so this variable is needed only when discovery does not return the model you want. See [LLM gateway model selection](./code-llm-gateway.md#model-selection).
+Use `ANTHROPIC_CUSTOM_MODEL_OPTION` to add a single custom entry to the `/model` picker without replacing the built-in aliases. This is useful for testing model IDs that Claude Code does not list by default. For LLM gateway deployments, Claude Code can populate the picker from the gateway's `/v1/models` endpoint when `CLAUDE_CODE_ENABLE_GATEWAY_MODEL_DISCOVERY=1` is set, so this variable is needed only when discovery is disabled or does not return the model you want. See [LLM gateway model selection](./code-llm-gateway.md#model-selection).
 
 This example sets all three variables to make a gateway-routed Opus deployment selectable:
 
@@ -333,14 +351,14 @@ These variables take effect on third-party providers such as Bedrock, Vertex AI,
 
 The same `_NAME`, `_DESCRIPTION`, and `_SUPPORTED_CAPABILITIES` suffixes are available for `ANTHROPIC_DEFAULT_SONNET_MODEL`, `ANTHROPIC_DEFAULT_HAIKU_MODEL`, and `ANTHROPIC_CUSTOM_MODEL_OPTION`.
 
-Claude Code enables features like [effort levels](#adjust-effort-level) and [extended thinking](./code-common-workflows.md#use-extended-thinking-thinking-mode) by matching the model ID against known patterns. Provider-specific IDs such as Bedrock ARNs or custom deployment names often don't match these patterns, leaving supported features disabled. Set `_SUPPORTED_CAPABILITIES` to tell Claude Code which features the model actually supports:
+Claude Code enables features like [effort levels](#adjust-effort-level) and [extended thinking](#extended-thinking) by matching the model ID against known patterns. Provider-specific IDs such as Bedrock ARNs or custom deployment names often don't match these patterns, leaving supported features disabled. Set `_SUPPORTED_CAPABILITIES` to tell Claude Code which features the model actually supports:
 
 | Capability value       | Enables                                                                         |
 | ---------------------- | ------------------------------------------------------------------------------- |
 | `effort`               | [Effort levels](#adjust-effort-level) and the `/effort` command                 |
 | `xhigh_effort`         | {/* min-version: 2.1.111 */}The `xhigh` effort level                            |
 | `max_effort`           | The `max` effort level                                                          |
-| `thinking`             | [Extended thinking](./code-common-workflows.md#use-extended-thinking-thinking-mode)   |
+| `thinking`             | [Extended thinking](#extended-thinking)                                         |
 | `adaptive_thinking`    | Adaptive reasoning that dynamically allocates thinking based on task complexity |
 | `interleaved_thinking` | Thinking between tool calls                                                     |
 

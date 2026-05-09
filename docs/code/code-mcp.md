@@ -271,6 +271,8 @@ claude mcp add --transport http secure-api https://api.example.com/mcp \
   --header "Authorization: Bearer your-token"
 ```
 
+When configuring MCP servers via JSON in `.mcp.json`, `~/.claude.json`, or `claude mcp add-json`, the `type` field accepts `streamable-http` as an alias for `http`. The MCP specification uses the name `streamable-http` for this transport, so configurations copied from server documentation work without modification.
+
 ### Option 2: Add a remote SSE server
 
 <Warning>
@@ -332,6 +334,10 @@ claude mcp remove github
 # (within Claude Code) Check server status
 /mcp
 ```
+
+The `/mcp` panel shows the tool count next to each connected server and flags servers that advertise the tools capability but expose no tools.
+
+The server name `workspace` is reserved for internal use. If your configuration defines a server with that name, Claude Code skips it at load time and shows a warning asking you to rename it.
 
 ### Dynamic tool updates
 
@@ -429,7 +435,7 @@ See the [plugin components reference](./code-plugins-reference.md#mcp-servers) f
 
 ## MCP installation scopes
 
-MCP servers can be configured at three scopes. The scope you choose controls which projects the server loads in and whether the configuration is shared with your team.
+MCP servers can be configured at three scopes. The scope you choose controls which projects the server loads in and whether the configuration is shared with your team. Administrators can also deploy servers at the enterprise level via [managed configuration](#managed-mcp-configuration).
 
 | Scope                     | Loads in             | Shared with team         | Stored in                   |
 | ------------------------- | -------------------- | ------------------------ | --------------------------- |
@@ -1191,6 +1197,8 @@ The following `.mcp.json` entry exempts one HTTP server while leaving other serv
 
 The `alwaysLoad` field is available on all server types and requires Claude Code v2.1.121 or later. An MCP server can also mark individual tools as always-loaded by including `"anthropic/alwaysLoad": true` in the tool's `_meta` object, which has the same effect for that tool only.
 
+Setting `alwaysLoad: true` also blocks startup until the server connects, capped at the standard 5-second connect timeout. This applies even when [`MCP_CONNECTION_NONBLOCKING=1`](./code-env-vars.md) is set, since the tools must be present when the first prompt is built. Other servers still connect in the background when nonblocking is enabled.
+
 ## Use MCP prompts as commands
 
 MCP servers can expose prompts that become available as commands in Claude Code.
@@ -1358,6 +1366,8 @@ URL patterns support wildcards using `*` to match any sequence of characters. Th
 * `https://mcp.company.com/*` - Allow all paths on a specific domain
 * `https://*.example.com/*` - Allow any subdomain of example.com
 * `http://localhost:*/*` - Allow any port on localhost
+
+Hostname matching is case-insensitive and ignores a trailing FQDN dot, matching DNS semantics. A pattern like `*://Mcp.Example.com/*` matches `https://mcp.example.com/api`, and `https://mcp.example.com.` is treated the same as `https://mcp.example.com`. Paths remain case-sensitive.
 
 **Remote server behavior**:
 

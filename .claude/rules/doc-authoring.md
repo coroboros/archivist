@@ -7,11 +7,16 @@ Rules for authoring and maintaining content under `docs/`.
 The following folders are overwritten by the update script (`pnpm update`) and must never be edited by hand:
 
 - `docs/api/`
+- `docs/agents-and-tools/`
+- `docs/build-with-claude/`
+- `docs/manage-claude/`
+- `docs/managed-agents/`
+- `docs/test-and-evaluate/`
+- `docs/release-notes/`
+- `docs/general/` (fallback bucket for orphan top-level pages)
 - `docs/code/`
-- `docs/developer/`
-- `docs/resources/`
 
-Each of these folders has a `{section}-README.md` index that is regenerated on every update run. Manual edits are lost on the next CI fetch (every 12h).
+Platform folders mirror the upstream sitemap top-level sections 1:1 (config: `DOCS` in `scripts/update-platform-docs.js`). Each folder has a `{section}-README.md` index that is regenerated on every update run. Manual edits are lost on the next CI fetch (every 12h).
 
 ## Insights (`docs/insights/`)
 

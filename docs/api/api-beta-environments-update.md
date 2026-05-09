@@ -21,7 +21,7 @@ Update an existing environment's configuration.
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 20 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 21 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -68,6 +68,8 @@ Update an existing environment's configuration.
     - `"user-profiles-2026-03-24"`
 
     - `"advisor-tool-2026-03-01"`
+
+    - `"managed-agents-2026-04-01"`
 
 ### Body Parameters
 
@@ -300,21 +302,6 @@ curl https://api.anthropic.com/v1/environments/$ENVIRONMENT_ID \
     -H 'anthropic-beta: managed-agents-2026-04-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY" \
     -d '{
-          "config": {
-            "type": "cloud",
-            "networking": {
-              "type": "limited",
-              "allow_package_managers": true,
-              "allowed_hosts": [
-                "api.example.com"
-              ]
-            },
-            "packages": {
-              "pip": [
-                "pandas",
-                "numpy"
-              ]
-            }
-          }
+          "description": "Python environment with data-analysis packages."
         }'
 ```

@@ -18,7 +18,7 @@ Create Agent
 
 - `--model: BetaManagedAgentsModelConfigParams`
 
-  Body param: Model identifier. Accepts the [model string](../developer/developer-about-claude-models-overview.md#latest-models-comparison), e.g. `claude-opus-4-6`, or a `model_config` object for additional configuration control
+  Body param: Model identifier. Accepts the [model string](https://platform.claude.com/docs/en/about-claude/models/overview.md#latest-models-comparison), e.g. `claude-opus-4-6`, or a `model_config` object for additional configuration control
 
 - `--name: string`
 
@@ -35,6 +35,10 @@ Create Agent
 - `--metadata: optional map[string]`
 
   Body param: Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
+- `--multiagent: optional object { agents, type }`
+
+  Body param: A coordinator topology: the session's primary thread orchestrates work by spawning session threads, each running an agent drawn from the `agents` roster.
 
 - `--skill: optional array of BetaManagedAgentsSkillParams`
 
@@ -54,7 +58,7 @@ Create Agent
 
 ### Returns
 
-- `beta_managed_agents_agent: object { id, archived_at, created_at, 11 more }`
+- `beta_managed_agents_agent: object { id, archived_at, created_at, 12 more }`
 
   A Managed Agents `agent`.
 
@@ -135,6 +139,26 @@ Create Agent
       - `"standard"`
 
       - `"fast"`
+
+  - `multiagent: object { agents, type }`
+
+    Resolved coordinator topology with a concrete agent roster.
+
+    - `agents: array of BetaManagedAgentsAgentReference`
+
+      Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+      - `id: string`
+
+      - `type: "agent"`
+
+        - `"agent"`
+
+      - `version: number`
+
+    - `type: "coordinator"`
+
+      - `"coordinator"`
 
   - `name: string`
 
@@ -477,6 +501,26 @@ List Agents
 
         - `"fast"`
 
+    - `multiagent: object { agents, type }`
+
+      Resolved coordinator topology with a concrete agent roster.
+
+      - `agents: array of BetaManagedAgentsAgentReference`
+
+        Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+        - `id: string`
+
+        - `type: "agent"`
+
+          - `"agent"`
+
+        - `version: number`
+
+      - `type: "coordinator"`
+
+        - `"coordinator"`
+
     - `name: string`
 
     - `skills: array of BetaManagedAgentsAnthropicSkill or BetaManagedAgentsCustomSkill`
@@ -722,7 +766,7 @@ Get Agent
 
 ### Returns
 
-- `beta_managed_agents_agent: object { id, archived_at, created_at, 11 more }`
+- `beta_managed_agents_agent: object { id, archived_at, created_at, 12 more }`
 
   A Managed Agents `agent`.
 
@@ -803,6 +847,26 @@ Get Agent
       - `"standard"`
 
       - `"fast"`
+
+  - `multiagent: object { agents, type }`
+
+    Resolved coordinator topology with a concrete agent roster.
+
+    - `agents: array of BetaManagedAgentsAgentReference`
+
+      Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+      - `id: string`
+
+      - `type: "agent"`
+
+        - `"agent"`
+
+      - `version: number`
+
+    - `type: "coordinator"`
+
+      - `"coordinator"`
 
   - `name: string`
 
@@ -1054,7 +1118,11 @@ Update Agent
 
 - `--model: optional BetaManagedAgentsModelConfigParams`
 
-  Body param: Model identifier. Accepts the [model string](../developer/developer-about-claude-models-overview.md#latest-models-comparison), e.g. `claude-opus-4-6`, or a `model_config` object for additional configuration control. Omit to preserve. Cannot be cleared.
+  Body param: Model identifier. Accepts the [model string](https://platform.claude.com/docs/en/about-claude/models/overview.md#latest-models-comparison), e.g. `claude-opus-4-6`, or a `model_config` object for additional configuration control. Omit to preserve. Cannot be cleared.
+
+- `--multiagent: optional object { agents, type }`
+
+  Body param: A coordinator topology: the session's primary thread orchestrates work by spawning session threads, each running an agent drawn from the `agents` roster.
 
 - `--name: optional string`
 
@@ -1078,7 +1146,7 @@ Update Agent
 
 ### Returns
 
-- `beta_managed_agents_agent: object { id, archived_at, created_at, 11 more }`
+- `beta_managed_agents_agent: object { id, archived_at, created_at, 12 more }`
 
   A Managed Agents `agent`.
 
@@ -1159,6 +1227,26 @@ Update Agent
       - `"standard"`
 
       - `"fast"`
+
+  - `multiagent: object { agents, type }`
+
+    Resolved coordinator topology with a concrete agent roster.
+
+    - `agents: array of BetaManagedAgentsAgentReference`
+
+      Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+      - `id: string`
+
+      - `type: "agent"`
+
+        - `"agent"`
+
+      - `version: number`
+
+    - `type: "coordinator"`
+
+      - `"coordinator"`
 
   - `name: string`
 
@@ -1399,7 +1487,7 @@ Archive Agent
 
 ### Returns
 
-- `beta_managed_agents_agent: object { id, archived_at, created_at, 11 more }`
+- `beta_managed_agents_agent: object { id, archived_at, created_at, 12 more }`
 
   A Managed Agents `agent`.
 
@@ -1480,6 +1568,26 @@ Archive Agent
       - `"standard"`
 
       - `"fast"`
+
+  - `multiagent: object { agents, type }`
+
+    Resolved coordinator topology with a concrete agent roster.
+
+    - `agents: array of BetaManagedAgentsAgentReference`
+
+      Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+      - `id: string`
+
+      - `type: "agent"`
+
+        - `"agent"`
+
+      - `version: number`
+
+    - `type: "coordinator"`
+
+      - `"coordinator"`
 
   - `name: string`
 
@@ -1703,7 +1811,7 @@ ant beta:agents archive \
 
 ### Beta Managed Agents Agent
 
-- `beta_managed_agents_agent: object { id, archived_at, created_at, 11 more }`
+- `beta_managed_agents_agent: object { id, archived_at, created_at, 12 more }`
 
   A Managed Agents `agent`.
 
@@ -1784,6 +1892,26 @@ ant beta:agents archive \
       - `"standard"`
 
       - `"fast"`
+
+  - `multiagent: object { agents, type }`
+
+    Resolved coordinator topology with a concrete agent roster.
+
+    - `agents: array of BetaManagedAgentsAgentReference`
+
+      Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+      - `id: string`
+
+      - `type: "agent"`
+
+        - `"agent"`
+
+      - `version: number`
+
+    - `type: "coordinator"`
+
+      - `"coordinator"`
 
   - `name: string`
 
@@ -1994,6 +2122,20 @@ ant beta:agents archive \
   - `version: number`
 
     The agent's current version. Starts at 1 and increments when the agent is modified.
+
+### Beta Managed Agents Agent Reference
+
+- `beta_managed_agents_agent_reference: object { id, type, version }`
+
+  A resolved agent reference with a concrete version.
+
+  - `id: string`
+
+  - `type: "agent"`
+
+    - `"agent"`
+
+  - `version: number`
 
 ### Beta Managed Agents Agent Tool Config
 
@@ -2871,6 +3013,78 @@ ant beta:agents archive \
 
     - `"fast"`
 
+### Beta Managed Agents Multiagent Coordinator
+
+- `beta_managed_agents_multiagent_coordinator: object { agents, type }`
+
+  Resolved coordinator topology with a concrete agent roster.
+
+  - `agents: array of BetaManagedAgentsAgentReference`
+
+    Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+    - `id: string`
+
+    - `type: "agent"`
+
+      - `"agent"`
+
+    - `version: number`
+
+  - `type: "coordinator"`
+
+    - `"coordinator"`
+
+### Beta Managed Agents Multiagent Coordinator Params
+
+- `beta_managed_agents_multiagent_coordinator_params: object { agents, type }`
+
+  A coordinator topology: the session's primary thread orchestrates work by spawning session threads, each running an agent drawn from the `agents` roster.
+
+  - `agents: array of BetaManagedAgentsMultiagentRosterEntryParams`
+
+    Agents the coordinator may spawn as session threads. 1–20 entries. Each entry is an agent ID string, a versioned `{"type":"agent","id","version"}` reference, or `{"type":"self"}` to allow recursive self-invocation. Entries must reference distinct agents (after resolving `self` and string forms); at most one `self`. Referenced agents must exist, must not be archived, and must not themselves have `multiagent` set (depth limit 1).
+
+    - `union_member_0: string`
+
+    - `beta_managed_agents_agent_params: object { id, type, version }`
+
+      Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
+
+      - `id: string`
+
+        The `agent` ID.
+
+      - `type: "agent"`
+
+        - `"agent"`
+
+      - `version: optional number`
+
+        The specific `agent` version to use. Omit to use the latest version. Must be at least 1 if specified.
+
+    - `beta_managed_agents_multiagent_self_params: object { type }`
+
+      Sentinel roster entry meaning "the agent that owns this configuration". Resolved server-side to a concrete agent reference.
+
+      - `type: "self"`
+
+        - `"self"`
+
+  - `type: "coordinator"`
+
+    - `"coordinator"`
+
+### Beta Managed Agents Multiagent Self Params
+
+- `beta_managed_agents_multiagent_self_params: object { type }`
+
+  Sentinel roster entry meaning "the agent that owns this configuration". Resolved server-side to a concrete agent reference.
+
+  - `type: "self"`
+
+    - `"self"`
+
 ### Beta Managed Agents Skill Params
 
 - `beta_managed_agents_skill_params: BetaManagedAgentsAnthropicSkillParams or BetaManagedAgentsCustomSkillParams`
@@ -3042,6 +3256,26 @@ List Agent Versions
         - `"standard"`
 
         - `"fast"`
+
+    - `multiagent: object { agents, type }`
+
+      Resolved coordinator topology with a concrete agent roster.
+
+      - `agents: array of BetaManagedAgentsAgentReference`
+
+        Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+        - `id: string`
+
+        - `type: "agent"`
+
+          - `"agent"`
+
+        - `version: number`
+
+      - `type: "coordinator"`
+
+        - `"coordinator"`
 
     - `name: string`
 

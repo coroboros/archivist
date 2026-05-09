@@ -33,11 +33,18 @@ Auto-synced official docs and curated Anthropic team insights, built for **deter
 
 Auto-updated mirror of the official Claude documentation, refreshed every 12h via [GitHub Actions](./.github/workflows/sync-docs.yml). Structure follows [Claude Project Knowledge Base best practices](./docs/insights/claude-project-knowledge-bases-best-practices.md).
 
+Folders mirror the official upstream sitemap sections 1:1, so navigation matches `platform.claude.com` and `code.claude.com`.
+
 | Section | Source | Link |
 |---------|--------|------|
 | API | platform.claude.com | [docs/api](./docs/api/api-README.md) |
-| Developer | platform.claude.com | [docs/developer](./docs/developer/developer-README.md) |
-| Resources | platform.claude.com | [docs/resources](./docs/resources/resources-README.md) |
+| Agents & Tools | platform.claude.com | [docs/agents-and-tools](./docs/agents-and-tools/agents-and-tools-README.md) |
+| Build with Claude | platform.claude.com | [docs/build-with-claude](./docs/build-with-claude/build-with-claude-README.md) |
+| Manage Claude | platform.claude.com | [docs/manage-claude](./docs/manage-claude/manage-claude-README.md) |
+| Managed Agents | platform.claude.com | [docs/managed-agents](./docs/managed-agents/managed-agents-README.md) |
+| Test & Evaluate | platform.claude.com | [docs/test-and-evaluate](./docs/test-and-evaluate/test-and-evaluate-README.md) |
+| Release Notes | platform.claude.com | [docs/release-notes](./docs/release-notes/release-notes-README.md) |
+| General | platform.claude.com | [docs/general](./docs/general/general-README.md) |
 | Claude Code | code.claude.com | [docs/code](./docs/code/code-README.md) |
 | Insights | Curated from Anthropic team | [docs/insights](./docs/insights/insights-README.md) |
 | **Cross-section topic index** | Auto-generated from H1/H2/tags | [**docs/INDEX.md**](./docs/INDEX.md) |
