@@ -1,4 +1,5 @@
 ---
+title: "Update"
 source: "https://platform.claude.com/docs/en/api/admin/api_keys/update"
 category: "api"
 generated: true

@@ -58,6 +58,8 @@ generated: true
 
   - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
+  - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
 ### Beta API Error
 
 - `class BetaApiError:`
@@ -388,6 +390,8 @@ The Models API response can be used to determine which models are available for 
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
 ### Returns
 
 - `class BetaModelInfo:`
@@ -668,6 +672,8 @@ The Models API response can be used to determine information about a specific mo
     - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
 
 ### Returns
 
@@ -1452,6 +1458,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
   - `long maxTokens`
 
     The maximum number of tokens to generate before stopping.
@@ -1588,13 +1596,23 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
               - `String citedText`
 
+                The full text of the cited block range, concatenated.
+
+                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
               - `long documentIndex`
 
               - `Optional<String> documentTitle`
 
               - `long endBlockIndex`
 
+                Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
               - `long startBlockIndex`
+
+                0-based index of the first cited block in the source's `content` array.
 
               - `JsonValue; type "content_block_location"constant`
 
@@ -1618,13 +1636,27 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
               - `String citedText`
 
+                The full text of the cited block range, concatenated.
+
+                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
               - `long endBlockIndex`
 
+                Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
               - `long searchResultIndex`
+
+                0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                Counted separately from `document_index`; server-side web search results are not included in this count.
 
               - `String source`
 
               - `long startBlockIndex`
+
+                0-based index of the first cited block in the source's `content` array.
 
               - `Optional<String> title`
 
@@ -1802,13 +1834,23 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
                         - `String citedText`
 
+                          The full text of the cited block range, concatenated.
+
+                          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                         - `long documentIndex`
 
                         - `Optional<String> documentTitle`
 
                         - `long endBlockIndex`
 
+                          Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                         - `long startBlockIndex`
+
+                          0-based index of the first cited block in the source's `content` array.
 
                         - `JsonValue; type "content_block_location"constant`
 
@@ -1832,13 +1874,27 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
                         - `String citedText`
 
+                          The full text of the cited block range, concatenated.
+
+                          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                         - `long endBlockIndex`
 
+                          Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                         - `long searchResultIndex`
+
+                          0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                          Counted separately from `document_index`; server-side web search results are not included in this count.
 
                         - `String source`
 
                         - `long startBlockIndex`
+
+                          0-based index of the first cited block in the source's `content` array.
 
                         - `Optional<String> title`
 
@@ -2037,13 +2093,23 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
                 - `String citedText`
 
+                  The full text of the cited block range, concatenated.
+
+                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                 - `long documentIndex`
 
                 - `Optional<String> documentTitle`
 
                 - `long endBlockIndex`
 
+                  Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                 - `long startBlockIndex`
+
+                  0-based index of the first cited block in the source's `content` array.
 
                 - `JsonValue; type "content_block_location"constant`
 
@@ -2067,13 +2133,27 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
                 - `String citedText`
 
+                  The full text of the cited block range, concatenated.
+
+                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                 - `long endBlockIndex`
 
+                  Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                 - `long searchResultIndex`
+
+                  0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                  Counted separately from `document_index`; server-side web search results are not included in this count.
 
                 - `String source`
 
                 - `long startBlockIndex`
+
+                  0-based index of the first cited block in the source's `content` array.
 
                 - `Optional<String> title`
 
@@ -2305,13 +2385,23 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
                     - `String citedText`
 
+                      The full text of the cited block range, concatenated.
+
+                      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                     - `long documentIndex`
 
                     - `Optional<String> documentTitle`
 
                     - `long endBlockIndex`
 
+                      Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                     - `long startBlockIndex`
+
+                      0-based index of the first cited block in the source's `content` array.
 
                     - `JsonValue; type "content_block_location"constant`
 
@@ -2335,13 +2425,27 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
                     - `String citedText`
 
+                      The full text of the cited block range, concatenated.
+
+                      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                     - `long endBlockIndex`
 
+                      Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                     - `long searchResultIndex`
+
+                      0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                      Counted separately from `document_index`; server-side web search results are not included in this count.
 
                     - `String source`
 
                     - `long startBlockIndex`
+
+                      0-based index of the first cited block in the source's `content` array.
 
                     - `Optional<String> title`
 
@@ -2485,13 +2589,23 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
                       - `String citedText`
 
+                        The full text of the cited block range, concatenated.
+
+                        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                       - `long documentIndex`
 
                       - `Optional<String> documentTitle`
 
                       - `long endBlockIndex`
 
+                        Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                       - `long startBlockIndex`
+
+                        0-based index of the first cited block in the source's `content` array.
 
                       - `JsonValue; type "content_block_location"constant`
 
@@ -2515,13 +2629,27 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
                       - `String citedText`
 
+                        The full text of the cited block range, concatenated.
+
+                        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                       - `long endBlockIndex`
 
+                        Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                       - `long searchResultIndex`
+
+                        0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                        Counted separately from `document_index`; server-side web search results are not included in this count.
 
                       - `String source`
 
                       - `long startBlockIndex`
+
+                        0-based index of the first cited block in the source's `content` array.
 
                       - `Optional<String> title`
 
@@ -2669,13 +2797,23 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
                               - `String citedText`
 
+                                The full text of the cited block range, concatenated.
+
+                                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                               - `long documentIndex`
 
                               - `Optional<String> documentTitle`
 
                               - `long endBlockIndex`
 
+                                Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                               - `long startBlockIndex`
+
+                                0-based index of the first cited block in the source's `content` array.
 
                               - `JsonValue; type "content_block_location"constant`
 
@@ -2699,13 +2837,27 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
                               - `String citedText`
 
+                                The full text of the cited block range, concatenated.
+
+                                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                               - `long endBlockIndex`
 
+                                Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                               - `long searchResultIndex`
+
+                                0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                                Counted separately from `document_index`; server-side web search results are not included in this count.
 
                               - `String source`
 
                               - `long startBlockIndex`
+
+                                0-based index of the first cited block in the source's `content` array.
 
                               - `Optional<String> title`
 
@@ -3181,13 +3333,23 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
                               - `String citedText`
 
+                                The full text of the cited block range, concatenated.
+
+                                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                               - `long documentIndex`
 
                               - `Optional<String> documentTitle`
 
                               - `long endBlockIndex`
 
+                                Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                               - `long startBlockIndex`
+
+                                0-based index of the first cited block in the source's `content` array.
 
                               - `JsonValue; type "content_block_location"constant`
 
@@ -3211,13 +3373,27 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
                               - `String citedText`
 
+                                The full text of the cited block range, concatenated.
+
+                                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                               - `long endBlockIndex`
 
+                                Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                               - `long searchResultIndex`
+
+                                0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                                Counted separately from `document_index`; server-side web search results are not included in this count.
 
                               - `String source`
 
                               - `long startBlockIndex`
+
+                                0-based index of the first cited block in the source's `content` array.
 
                               - `Optional<String> title`
 
@@ -3979,13 +4155,23 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
                   - `String citedText`
 
+                    The full text of the cited block range, concatenated.
+
+                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                   - `long documentIndex`
 
                   - `Optional<String> documentTitle`
 
                   - `long endBlockIndex`
 
+                    Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                   - `long startBlockIndex`
+
+                    0-based index of the first cited block in the source's `content` array.
 
                   - `JsonValue; type "content_block_location"constant`
 
@@ -4009,13 +4195,27 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
                   - `String citedText`
 
+                    The full text of the cited block range, concatenated.
+
+                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                   - `long endBlockIndex`
 
+                    Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                   - `long searchResultIndex`
+
+                    0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                    Counted separately from `document_index`; server-side web search results are not included in this count.
 
                   - `String source`
 
                   - `long startBlockIndex`
+
+                    0-based index of the first cited block in the source's `content` array.
 
                   - `Optional<String> title`
 
@@ -4194,7 +4394,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
   - `Optional<BetaJsonOutputFormat> outputFormat`
 
-    Deprecated: Use `output_config.format` instead. See [structured outputs](../developer/developer-build-with-claude-structured-outputs.md)
+    Deprecated: Use `output_config.format` instead. See [structured outputs](../build-with-claude/build-with-claude-structured-outputs.md)
 
     A schema to specify Claude's output format in responses. This parameter will be removed in a future release.
 
@@ -4301,13 +4501,23 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           - `String citedText`
 
+            The full text of the cited block range, concatenated.
+
+            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
           - `long documentIndex`
 
           - `Optional<String> documentTitle`
 
           - `long endBlockIndex`
 
+            Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
           - `long startBlockIndex`
+
+            0-based index of the first cited block in the source's `content` array.
 
           - `JsonValue; type "content_block_location"constant`
 
@@ -4331,13 +4541,27 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           - `String citedText`
 
+            The full text of the cited block range, concatenated.
+
+            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
           - `long endBlockIndex`
 
+            Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
           - `long searchResultIndex`
+
+            0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+            Counted separately from `document_index`; server-side web search results are not included in this count.
 
           - `String source`
 
           - `long startBlockIndex`
+
+            0-based index of the first cited block in the source's `content` array.
 
           - `Optional<String> title`
 
@@ -6127,15 +6351,25 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           - `String citedText`
 
+            The full text of the cited block range, concatenated.
+
+            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
           - `long documentIndex`
 
           - `Optional<String> documentTitle`
 
           - `long endBlockIndex`
 
+            Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
           - `Optional<String> fileId`
 
           - `long startBlockIndex`
+
+            0-based index of the first cited block in the source's `content` array.
 
           - `JsonValue; type "content_block_location"constant`
 
@@ -6159,13 +6393,27 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           - `String citedText`
 
+            The full text of the cited block range, concatenated.
+
+            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
           - `long endBlockIndex`
 
+            Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
           - `long searchResultIndex`
+
+            0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+            Counted separately from `document_index`; server-side web search results are not included in this count.
 
           - `String source`
 
           - `long startBlockIndex`
+
+            0-based index of the first cited block in the source's `content` array.
 
           - `Optional<String> title`
 
@@ -6847,15 +7095,25 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
               - `String citedText`
 
+                The full text of the cited block range, concatenated.
+
+                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
               - `long documentIndex`
 
               - `Optional<String> documentTitle`
 
               - `long endBlockIndex`
 
+                Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
               - `Optional<String> fileId`
 
               - `long startBlockIndex`
+
+                0-based index of the first cited block in the source's `content` array.
 
               - `JsonValue; type "content_block_location"constant`
 
@@ -6879,13 +7137,27 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
               - `String citedText`
 
+                The full text of the cited block range, concatenated.
+
+                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
               - `long endBlockIndex`
 
+                Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
               - `long searchResultIndex`
+
+                0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                Counted separately from `document_index`; server-side web search results are not included in this count.
 
               - `String source`
 
               - `long startBlockIndex`
+
+                0-based index of the first cited block in the source's `content` array.
 
               - `Optional<String> title`
 
@@ -7495,6 +7767,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
   - `List<BetaMessageParam> messages`
 
     Input messages.
@@ -7621,13 +7895,23 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
               - `String citedText`
 
+                The full text of the cited block range, concatenated.
+
+                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
               - `long documentIndex`
 
               - `Optional<String> documentTitle`
 
               - `long endBlockIndex`
 
+                Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
               - `long startBlockIndex`
+
+                0-based index of the first cited block in the source's `content` array.
 
               - `JsonValue; type "content_block_location"constant`
 
@@ -7651,13 +7935,27 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
               - `String citedText`
 
+                The full text of the cited block range, concatenated.
+
+                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
               - `long endBlockIndex`
 
+                Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
               - `long searchResultIndex`
+
+                0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                Counted separately from `document_index`; server-side web search results are not included in this count.
 
               - `String source`
 
               - `long startBlockIndex`
+
+                0-based index of the first cited block in the source's `content` array.
 
               - `Optional<String> title`
 
@@ -7835,13 +8133,23 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
                         - `String citedText`
 
+                          The full text of the cited block range, concatenated.
+
+                          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                         - `long documentIndex`
 
                         - `Optional<String> documentTitle`
 
                         - `long endBlockIndex`
 
+                          Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                         - `long startBlockIndex`
+
+                          0-based index of the first cited block in the source's `content` array.
 
                         - `JsonValue; type "content_block_location"constant`
 
@@ -7865,13 +8173,27 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
                         - `String citedText`
 
+                          The full text of the cited block range, concatenated.
+
+                          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                         - `long endBlockIndex`
 
+                          Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                         - `long searchResultIndex`
+
+                          0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                          Counted separately from `document_index`; server-side web search results are not included in this count.
 
                         - `String source`
 
                         - `long startBlockIndex`
+
+                          0-based index of the first cited block in the source's `content` array.
 
                         - `Optional<String> title`
 
@@ -8070,13 +8392,23 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
                 - `String citedText`
 
+                  The full text of the cited block range, concatenated.
+
+                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                 - `long documentIndex`
 
                 - `Optional<String> documentTitle`
 
                 - `long endBlockIndex`
 
+                  Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                 - `long startBlockIndex`
+
+                  0-based index of the first cited block in the source's `content` array.
 
                 - `JsonValue; type "content_block_location"constant`
 
@@ -8100,13 +8432,27 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
                 - `String citedText`
 
+                  The full text of the cited block range, concatenated.
+
+                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                 - `long endBlockIndex`
 
+                  Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                 - `long searchResultIndex`
+
+                  0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                  Counted separately from `document_index`; server-side web search results are not included in this count.
 
                 - `String source`
 
                 - `long startBlockIndex`
+
+                  0-based index of the first cited block in the source's `content` array.
 
                 - `Optional<String> title`
 
@@ -8338,13 +8684,23 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
                     - `String citedText`
 
+                      The full text of the cited block range, concatenated.
+
+                      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                     - `long documentIndex`
 
                     - `Optional<String> documentTitle`
 
                     - `long endBlockIndex`
 
+                      Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                     - `long startBlockIndex`
+
+                      0-based index of the first cited block in the source's `content` array.
 
                     - `JsonValue; type "content_block_location"constant`
 
@@ -8368,13 +8724,27 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
                     - `String citedText`
 
+                      The full text of the cited block range, concatenated.
+
+                      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                     - `long endBlockIndex`
 
+                      Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                     - `long searchResultIndex`
+
+                      0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                      Counted separately from `document_index`; server-side web search results are not included in this count.
 
                     - `String source`
 
                     - `long startBlockIndex`
+
+                      0-based index of the first cited block in the source's `content` array.
 
                     - `Optional<String> title`
 
@@ -8518,13 +8888,23 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
                       - `String citedText`
 
+                        The full text of the cited block range, concatenated.
+
+                        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                       - `long documentIndex`
 
                       - `Optional<String> documentTitle`
 
                       - `long endBlockIndex`
 
+                        Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                       - `long startBlockIndex`
+
+                        0-based index of the first cited block in the source's `content` array.
 
                       - `JsonValue; type "content_block_location"constant`
 
@@ -8548,13 +8928,27 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
                       - `String citedText`
 
+                        The full text of the cited block range, concatenated.
+
+                        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                       - `long endBlockIndex`
 
+                        Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                       - `long searchResultIndex`
+
+                        0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                        Counted separately from `document_index`; server-side web search results are not included in this count.
 
                       - `String source`
 
                       - `long startBlockIndex`
+
+                        0-based index of the first cited block in the source's `content` array.
 
                       - `Optional<String> title`
 
@@ -8702,13 +9096,23 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
                               - `String citedText`
 
+                                The full text of the cited block range, concatenated.
+
+                                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                               - `long documentIndex`
 
                               - `Optional<String> documentTitle`
 
                               - `long endBlockIndex`
 
+                                Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                               - `long startBlockIndex`
+
+                                0-based index of the first cited block in the source's `content` array.
 
                               - `JsonValue; type "content_block_location"constant`
 
@@ -8732,13 +9136,27 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
                               - `String citedText`
 
+                                The full text of the cited block range, concatenated.
+
+                                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                               - `long endBlockIndex`
 
+                                Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                               - `long searchResultIndex`
+
+                                0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                                Counted separately from `document_index`; server-side web search results are not included in this count.
 
                               - `String source`
 
                               - `long startBlockIndex`
+
+                                0-based index of the first cited block in the source's `content` array.
 
                               - `Optional<String> title`
 
@@ -9214,13 +9632,23 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
                               - `String citedText`
 
+                                The full text of the cited block range, concatenated.
+
+                                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                               - `long documentIndex`
 
                               - `Optional<String> documentTitle`
 
                               - `long endBlockIndex`
 
+                                Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                               - `long startBlockIndex`
+
+                                0-based index of the first cited block in the source's `content` array.
 
                               - `JsonValue; type "content_block_location"constant`
 
@@ -9244,13 +9672,27 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
                               - `String citedText`
 
+                                The full text of the cited block range, concatenated.
+
+                                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                               - `long endBlockIndex`
 
+                                Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                               - `long searchResultIndex`
+
+                                0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                                Counted separately from `document_index`; server-side web search results are not included in this count.
 
                               - `String source`
 
                               - `long startBlockIndex`
+
+                                0-based index of the first cited block in the source's `content` array.
 
                               - `Optional<String> title`
 
@@ -10012,13 +10454,23 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
                   - `String citedText`
 
+                    The full text of the cited block range, concatenated.
+
+                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                   - `long documentIndex`
 
                   - `Optional<String> documentTitle`
 
                   - `long endBlockIndex`
 
+                    Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                   - `long startBlockIndex`
+
+                    0-based index of the first cited block in the source's `content` array.
 
                   - `JsonValue; type "content_block_location"constant`
 
@@ -10042,13 +10494,27 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
                   - `String citedText`
 
+                    The full text of the cited block range, concatenated.
+
+                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                   - `long endBlockIndex`
 
+                    Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                   - `long searchResultIndex`
+
+                    0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                    Counted separately from `document_index`; server-side web search results are not included in this count.
 
                   - `String source`
 
                   - `long startBlockIndex`
+
+                    0-based index of the first cited block in the source's `content` array.
 
                   - `Optional<String> title`
 
@@ -10185,7 +10651,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
   - `Optional<BetaJsonOutputFormat> outputFormat`
 
-    Deprecated: Use `output_config.format` instead. See [structured outputs](../developer/developer-build-with-claude-structured-outputs.md)
+    Deprecated: Use `output_config.format` instead. See [structured outputs](../build-with-claude/build-with-claude-structured-outputs.md)
 
     A schema to specify Claude's output format in responses. This parameter will be removed in a future release.
 
@@ -10274,13 +10740,23 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
           - `String citedText`
 
+            The full text of the cited block range, concatenated.
+
+            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
           - `long documentIndex`
 
           - `Optional<String> documentTitle`
 
           - `long endBlockIndex`
 
+            Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
           - `long startBlockIndex`
+
+            0-based index of the first cited block in the source's `content` array.
 
           - `JsonValue; type "content_block_location"constant`
 
@@ -10304,13 +10780,27 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
           - `String citedText`
 
+            The full text of the cited block range, concatenated.
+
+            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
           - `long endBlockIndex`
 
+            Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
           - `long searchResultIndex`
+
+            0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+            Counted separately from `document_index`; server-side web search results are not included in this count.
 
           - `String source`
 
           - `long startBlockIndex`
+
+            0-based index of the first cited block in the source's `content` array.
 
           - `Optional<String> title`
 
@@ -12832,15 +13322,25 @@ public final class Main {
 
   - `String citedText`
 
+    The full text of the cited block range, concatenated.
+
+    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
   - `long documentIndex`
 
   - `Optional<String> documentTitle`
 
   - `long endBlockIndex`
 
+    Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
   - `Optional<String> fileId`
 
   - `long startBlockIndex`
+
+    0-based index of the first cited block in the source's `content` array.
 
   - `JsonValue; type "content_block_location"constant`
 
@@ -12852,13 +13352,23 @@ public final class Main {
 
   - `String citedText`
 
+    The full text of the cited block range, concatenated.
+
+    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
   - `long documentIndex`
 
   - `Optional<String> documentTitle`
 
   - `long endBlockIndex`
 
+    Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
   - `long startBlockIndex`
+
+    0-based index of the first cited block in the source's `content` array.
 
   - `JsonValue; type "content_block_location"constant`
 
@@ -12908,13 +13418,27 @@ public final class Main {
 
   - `String citedText`
 
+    The full text of the cited block range, concatenated.
+
+    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
   - `long endBlockIndex`
 
+    Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
   - `long searchResultIndex`
+
+    0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+    Counted separately from `document_index`; server-side web search results are not included in this count.
 
   - `String source`
 
   - `long startBlockIndex`
+
+    0-based index of the first cited block in the source's `content` array.
 
   - `Optional<String> title`
 
@@ -12928,13 +13452,27 @@ public final class Main {
 
   - `String citedText`
 
+    The full text of the cited block range, concatenated.
+
+    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
   - `long endBlockIndex`
 
+    Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
   - `long searchResultIndex`
+
+    0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+    Counted separately from `document_index`; server-side web search results are not included in this count.
 
   - `String source`
 
   - `long startBlockIndex`
+
+    0-based index of the first cited block in the source's `content` array.
 
   - `Optional<String> title`
 
@@ -13010,15 +13548,25 @@ public final class Main {
 
       - `String citedText`
 
+        The full text of the cited block range, concatenated.
+
+        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
       - `long documentIndex`
 
       - `Optional<String> documentTitle`
 
       - `long endBlockIndex`
 
+        Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
       - `Optional<String> fileId`
 
       - `long startBlockIndex`
+
+        0-based index of the first cited block in the source's `content` array.
 
       - `JsonValue; type "content_block_location"constant`
 
@@ -13042,13 +13590,27 @@ public final class Main {
 
       - `String citedText`
 
+        The full text of the cited block range, concatenated.
+
+        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
       - `long endBlockIndex`
 
+        Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
       - `long searchResultIndex`
+
+        0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+        Counted separately from `document_index`; server-side web search results are not included in this count.
 
       - `String source`
 
       - `long startBlockIndex`
+
+        0-based index of the first cited block in the source's `content` array.
 
       - `Optional<String> title`
 
@@ -14093,15 +14655,25 @@ public final class Main {
 
         - `String citedText`
 
+          The full text of the cited block range, concatenated.
+
+          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
         - `long documentIndex`
 
         - `Optional<String> documentTitle`
 
         - `long endBlockIndex`
 
+          Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
         - `Optional<String> fileId`
 
         - `long startBlockIndex`
+
+          0-based index of the first cited block in the source's `content` array.
 
         - `JsonValue; type "content_block_location"constant`
 
@@ -14125,13 +14697,27 @@ public final class Main {
 
         - `String citedText`
 
+          The full text of the cited block range, concatenated.
+
+          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
         - `long endBlockIndex`
 
+          Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
         - `long searchResultIndex`
+
+          0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+          Counted separately from `document_index`; server-side web search results are not included in this count.
 
         - `String source`
 
         - `long startBlockIndex`
+
+          0-based index of the first cited block in the source's `content` array.
 
         - `Optional<String> title`
 
@@ -14813,15 +15399,25 @@ public final class Main {
 
             - `String citedText`
 
+              The full text of the cited block range, concatenated.
+
+              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
             - `long documentIndex`
 
             - `Optional<String> documentTitle`
 
             - `long endBlockIndex`
 
+              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
             - `Optional<String> fileId`
 
             - `long startBlockIndex`
+
+              0-based index of the first cited block in the source's `content` array.
 
             - `JsonValue; type "content_block_location"constant`
 
@@ -14845,13 +15441,27 @@ public final class Main {
 
             - `String citedText`
 
+              The full text of the cited block range, concatenated.
+
+              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
             - `long endBlockIndex`
 
+              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
             - `long searchResultIndex`
+
+              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+              Counted separately from `document_index`; server-side web search results are not included in this count.
 
             - `String source`
 
             - `long startBlockIndex`
+
+              0-based index of the first cited block in the source's `content` array.
 
             - `Optional<String> title`
 
@@ -14978,13 +15588,23 @@ public final class Main {
 
         - `String citedText`
 
+          The full text of the cited block range, concatenated.
+
+          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
         - `long documentIndex`
 
         - `Optional<String> documentTitle`
 
         - `long endBlockIndex`
 
+          Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
         - `long startBlockIndex`
+
+          0-based index of the first cited block in the source's `content` array.
 
         - `JsonValue; type "content_block_location"constant`
 
@@ -15008,13 +15628,27 @@ public final class Main {
 
         - `String citedText`
 
+          The full text of the cited block range, concatenated.
+
+          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
         - `long endBlockIndex`
 
+          Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
         - `long searchResultIndex`
+
+          0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+          Counted separately from `document_index`; server-side web search results are not included in this count.
 
         - `String source`
 
         - `long startBlockIndex`
+
+          0-based index of the first cited block in the source's `content` array.
 
         - `Optional<String> title`
 
@@ -15192,13 +15826,23 @@ public final class Main {
 
                   - `String citedText`
 
+                    The full text of the cited block range, concatenated.
+
+                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                   - `long documentIndex`
 
                   - `Optional<String> documentTitle`
 
                   - `long endBlockIndex`
 
+                    Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                   - `long startBlockIndex`
+
+                    0-based index of the first cited block in the source's `content` array.
 
                   - `JsonValue; type "content_block_location"constant`
 
@@ -15222,13 +15866,27 @@ public final class Main {
 
                   - `String citedText`
 
+                    The full text of the cited block range, concatenated.
+
+                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                   - `long endBlockIndex`
 
+                    Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                   - `long searchResultIndex`
+
+                    0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                    Counted separately from `document_index`; server-side web search results are not included in this count.
 
                   - `String source`
 
                   - `long startBlockIndex`
+
+                    0-based index of the first cited block in the source's `content` array.
 
                   - `Optional<String> title`
 
@@ -15427,13 +16085,23 @@ public final class Main {
 
           - `String citedText`
 
+            The full text of the cited block range, concatenated.
+
+            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
           - `long documentIndex`
 
           - `Optional<String> documentTitle`
 
           - `long endBlockIndex`
 
+            Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
           - `long startBlockIndex`
+
+            0-based index of the first cited block in the source's `content` array.
 
           - `JsonValue; type "content_block_location"constant`
 
@@ -15457,13 +16125,27 @@ public final class Main {
 
           - `String citedText`
 
+            The full text of the cited block range, concatenated.
+
+            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
           - `long endBlockIndex`
 
+            Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
           - `long searchResultIndex`
+
+            0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+            Counted separately from `document_index`; server-side web search results are not included in this count.
 
           - `String source`
 
           - `long startBlockIndex`
+
+            0-based index of the first cited block in the source's `content` array.
 
           - `Optional<String> title`
 
@@ -15695,13 +16377,23 @@ public final class Main {
 
               - `String citedText`
 
+                The full text of the cited block range, concatenated.
+
+                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
               - `long documentIndex`
 
               - `Optional<String> documentTitle`
 
               - `long endBlockIndex`
 
+                Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
               - `long startBlockIndex`
+
+                0-based index of the first cited block in the source's `content` array.
 
               - `JsonValue; type "content_block_location"constant`
 
@@ -15725,13 +16417,27 @@ public final class Main {
 
               - `String citedText`
 
+                The full text of the cited block range, concatenated.
+
+                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
               - `long endBlockIndex`
 
+                Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
               - `long searchResultIndex`
+
+                0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                Counted separately from `document_index`; server-side web search results are not included in this count.
 
               - `String source`
 
               - `long startBlockIndex`
+
+                0-based index of the first cited block in the source's `content` array.
 
               - `Optional<String> title`
 
@@ -15875,13 +16581,23 @@ public final class Main {
 
                 - `String citedText`
 
+                  The full text of the cited block range, concatenated.
+
+                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                 - `long documentIndex`
 
                 - `Optional<String> documentTitle`
 
                 - `long endBlockIndex`
 
+                  Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                 - `long startBlockIndex`
+
+                  0-based index of the first cited block in the source's `content` array.
 
                 - `JsonValue; type "content_block_location"constant`
 
@@ -15905,13 +16621,27 @@ public final class Main {
 
                 - `String citedText`
 
+                  The full text of the cited block range, concatenated.
+
+                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                 - `long endBlockIndex`
 
+                  Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                 - `long searchResultIndex`
+
+                  0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                  Counted separately from `document_index`; server-side web search results are not included in this count.
 
                 - `String source`
 
                 - `long startBlockIndex`
+
+                  0-based index of the first cited block in the source's `content` array.
 
                 - `Optional<String> title`
 
@@ -16059,13 +16789,23 @@ public final class Main {
 
                         - `String citedText`
 
+                          The full text of the cited block range, concatenated.
+
+                          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                         - `long documentIndex`
 
                         - `Optional<String> documentTitle`
 
                         - `long endBlockIndex`
 
+                          Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                         - `long startBlockIndex`
+
+                          0-based index of the first cited block in the source's `content` array.
 
                         - `JsonValue; type "content_block_location"constant`
 
@@ -16089,13 +16829,27 @@ public final class Main {
 
                         - `String citedText`
 
+                          The full text of the cited block range, concatenated.
+
+                          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                         - `long endBlockIndex`
 
+                          Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                         - `long searchResultIndex`
+
+                          0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                          Counted separately from `document_index`; server-side web search results are not included in this count.
 
                         - `String source`
 
                         - `long startBlockIndex`
+
+                          0-based index of the first cited block in the source's `content` array.
 
                         - `Optional<String> title`
 
@@ -16571,13 +17325,23 @@ public final class Main {
 
                         - `String citedText`
 
+                          The full text of the cited block range, concatenated.
+
+                          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                         - `long documentIndex`
 
                         - `Optional<String> documentTitle`
 
                         - `long endBlockIndex`
 
+                          Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                         - `long startBlockIndex`
+
+                          0-based index of the first cited block in the source's `content` array.
 
                         - `JsonValue; type "content_block_location"constant`
 
@@ -16601,13 +17365,27 @@ public final class Main {
 
                         - `String citedText`
 
+                          The full text of the cited block range, concatenated.
+
+                          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                         - `long endBlockIndex`
 
+                          Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                         - `long searchResultIndex`
+
+                          0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                          Counted separately from `document_index`; server-side web search results are not included in this count.
 
                         - `String source`
 
                         - `long startBlockIndex`
+
+                          0-based index of the first cited block in the source's `content` array.
 
                         - `Optional<String> title`
 
@@ -17369,13 +18147,23 @@ public final class Main {
 
             - `String citedText`
 
+              The full text of the cited block range, concatenated.
+
+              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
             - `long documentIndex`
 
             - `Optional<String> documentTitle`
 
             - `long endBlockIndex`
 
+              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
             - `long startBlockIndex`
+
+              0-based index of the first cited block in the source's `content` array.
 
             - `JsonValue; type "content_block_location"constant`
 
@@ -17399,13 +18187,27 @@ public final class Main {
 
             - `String citedText`
 
+              The full text of the cited block range, concatenated.
+
+              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
             - `long endBlockIndex`
 
+              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
             - `long searchResultIndex`
+
+              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+              Counted separately from `document_index`; server-side web search results are not included in this count.
 
             - `String source`
 
             - `long startBlockIndex`
+
+              0-based index of the first cited block in the source's `content` array.
 
             - `Optional<String> title`
 
@@ -17573,13 +18375,23 @@ public final class Main {
 
             - `String citedText`
 
+              The full text of the cited block range, concatenated.
+
+              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
             - `long documentIndex`
 
             - `Optional<String> documentTitle`
 
             - `long endBlockIndex`
 
+              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
             - `long startBlockIndex`
+
+              0-based index of the first cited block in the source's `content` array.
 
             - `JsonValue; type "content_block_location"constant`
 
@@ -17603,13 +18415,27 @@ public final class Main {
 
             - `String citedText`
 
+              The full text of the cited block range, concatenated.
+
+              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
             - `long endBlockIndex`
 
+              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
             - `long searchResultIndex`
+
+              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+              Counted separately from `document_index`; server-side web search results are not included in this count.
 
             - `String source`
 
             - `long startBlockIndex`
+
+              0-based index of the first cited block in the source's `content` array.
 
             - `Optional<String> title`
 
@@ -17759,13 +18585,23 @@ public final class Main {
 
         - `String citedText`
 
+          The full text of the cited block range, concatenated.
+
+          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
         - `long documentIndex`
 
         - `Optional<String> documentTitle`
 
         - `long endBlockIndex`
 
+          Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
         - `long startBlockIndex`
+
+          0-based index of the first cited block in the source's `content` array.
 
         - `JsonValue; type "content_block_location"constant`
 
@@ -17789,13 +18625,27 @@ public final class Main {
 
         - `String citedText`
 
+          The full text of the cited block range, concatenated.
+
+          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
         - `long endBlockIndex`
 
+          Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
         - `long searchResultIndex`
+
+          0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+          Counted separately from `document_index`; server-side web search results are not included in this count.
 
         - `String source`
 
         - `long startBlockIndex`
+
+          0-based index of the first cited block in the source's `content` array.
 
         - `Optional<String> title`
 
@@ -18343,15 +19193,25 @@ public final class Main {
 
           - `String citedText`
 
+            The full text of the cited block range, concatenated.
+
+            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
           - `long documentIndex`
 
           - `Optional<String> documentTitle`
 
           - `long endBlockIndex`
 
+            Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
           - `Optional<String> fileId`
 
           - `long startBlockIndex`
+
+            0-based index of the first cited block in the source's `content` array.
 
           - `JsonValue; type "content_block_location"constant`
 
@@ -18375,13 +19235,27 @@ public final class Main {
 
           - `String citedText`
 
+            The full text of the cited block range, concatenated.
+
+            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
           - `long endBlockIndex`
 
+            Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
           - `long searchResultIndex`
+
+            0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+            Counted separately from `document_index`; server-side web search results are not included in this count.
 
           - `String source`
 
           - `long startBlockIndex`
+
+            0-based index of the first cited block in the source's `content` array.
 
           - `Optional<String> title`
 
@@ -18912,15 +19786,25 @@ public final class Main {
 
           - `String citedText`
 
+            The full text of the cited block range, concatenated.
+
+            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
           - `long documentIndex`
 
           - `Optional<String> documentTitle`
 
           - `long endBlockIndex`
 
+            Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
           - `Optional<String> fileId`
 
           - `long startBlockIndex`
+
+            0-based index of the first cited block in the source's `content` array.
 
           - `JsonValue; type "content_block_location"constant`
 
@@ -18944,13 +19828,27 @@ public final class Main {
 
           - `String citedText`
 
+            The full text of the cited block range, concatenated.
+
+            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
           - `long endBlockIndex`
 
+            Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
           - `long searchResultIndex`
+
+            0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+            Counted separately from `document_index`; server-side web search results are not included in this count.
 
           - `String source`
 
           - `long startBlockIndex`
+
+            0-based index of the first cited block in the source's `content` array.
 
           - `Optional<String> title`
 
@@ -19632,15 +20530,25 @@ public final class Main {
 
               - `String citedText`
 
+                The full text of the cited block range, concatenated.
+
+                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
               - `long documentIndex`
 
               - `Optional<String> documentTitle`
 
               - `long endBlockIndex`
 
+                Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
               - `Optional<String> fileId`
 
               - `long startBlockIndex`
+
+                0-based index of the first cited block in the source's `content` array.
 
               - `JsonValue; type "content_block_location"constant`
 
@@ -19664,13 +20572,27 @@ public final class Main {
 
               - `String citedText`
 
+                The full text of the cited block range, concatenated.
+
+                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
               - `long endBlockIndex`
 
+                Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
               - `long searchResultIndex`
+
+                0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                Counted separately from `document_index`; server-side web search results are not included in this count.
 
               - `String source`
 
               - `long startBlockIndex`
+
+                0-based index of the first cited block in the source's `content` array.
 
               - `Optional<String> title`
 
@@ -20536,13 +21458,23 @@ public final class Main {
 
             - `String citedText`
 
+              The full text of the cited block range, concatenated.
+
+              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
             - `long documentIndex`
 
             - `Optional<String> documentTitle`
 
             - `long endBlockIndex`
 
+              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
             - `long startBlockIndex`
+
+              0-based index of the first cited block in the source's `content` array.
 
             - `JsonValue; type "content_block_location"constant`
 
@@ -20566,13 +21498,27 @@ public final class Main {
 
             - `String citedText`
 
+              The full text of the cited block range, concatenated.
+
+              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
             - `long endBlockIndex`
 
+              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
             - `long searchResultIndex`
+
+              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+              Counted separately from `document_index`; server-side web search results are not included in this count.
 
             - `String source`
 
             - `long startBlockIndex`
+
+              0-based index of the first cited block in the source's `content` array.
 
             - `Optional<String> title`
 
@@ -20750,13 +21696,23 @@ public final class Main {
 
                       - `String citedText`
 
+                        The full text of the cited block range, concatenated.
+
+                        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                       - `long documentIndex`
 
                       - `Optional<String> documentTitle`
 
                       - `long endBlockIndex`
 
+                        Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                       - `long startBlockIndex`
+
+                        0-based index of the first cited block in the source's `content` array.
 
                       - `JsonValue; type "content_block_location"constant`
 
@@ -20780,13 +21736,27 @@ public final class Main {
 
                       - `String citedText`
 
+                        The full text of the cited block range, concatenated.
+
+                        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                       - `long endBlockIndex`
 
+                        Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                       - `long searchResultIndex`
+
+                        0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                        Counted separately from `document_index`; server-side web search results are not included in this count.
 
                       - `String source`
 
                       - `long startBlockIndex`
+
+                        0-based index of the first cited block in the source's `content` array.
 
                       - `Optional<String> title`
 
@@ -20985,13 +21955,23 @@ public final class Main {
 
               - `String citedText`
 
+                The full text of the cited block range, concatenated.
+
+                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
               - `long documentIndex`
 
               - `Optional<String> documentTitle`
 
               - `long endBlockIndex`
 
+                Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
               - `long startBlockIndex`
+
+                0-based index of the first cited block in the source's `content` array.
 
               - `JsonValue; type "content_block_location"constant`
 
@@ -21015,13 +21995,27 @@ public final class Main {
 
               - `String citedText`
 
+                The full text of the cited block range, concatenated.
+
+                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
               - `long endBlockIndex`
 
+                Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
               - `long searchResultIndex`
+
+                0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                Counted separately from `document_index`; server-side web search results are not included in this count.
 
               - `String source`
 
               - `long startBlockIndex`
+
+                0-based index of the first cited block in the source's `content` array.
 
               - `Optional<String> title`
 
@@ -21253,13 +22247,23 @@ public final class Main {
 
                   - `String citedText`
 
+                    The full text of the cited block range, concatenated.
+
+                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                   - `long documentIndex`
 
                   - `Optional<String> documentTitle`
 
                   - `long endBlockIndex`
 
+                    Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                   - `long startBlockIndex`
+
+                    0-based index of the first cited block in the source's `content` array.
 
                   - `JsonValue; type "content_block_location"constant`
 
@@ -21283,13 +22287,27 @@ public final class Main {
 
                   - `String citedText`
 
+                    The full text of the cited block range, concatenated.
+
+                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                   - `long endBlockIndex`
 
+                    Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                   - `long searchResultIndex`
+
+                    0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                    Counted separately from `document_index`; server-side web search results are not included in this count.
 
                   - `String source`
 
                   - `long startBlockIndex`
+
+                    0-based index of the first cited block in the source's `content` array.
 
                   - `Optional<String> title`
 
@@ -21433,13 +22451,23 @@ public final class Main {
 
                     - `String citedText`
 
+                      The full text of the cited block range, concatenated.
+
+                      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                     - `long documentIndex`
 
                     - `Optional<String> documentTitle`
 
                     - `long endBlockIndex`
 
+                      Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                     - `long startBlockIndex`
+
+                      0-based index of the first cited block in the source's `content` array.
 
                     - `JsonValue; type "content_block_location"constant`
 
@@ -21463,13 +22491,27 @@ public final class Main {
 
                     - `String citedText`
 
+                      The full text of the cited block range, concatenated.
+
+                      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                     - `long endBlockIndex`
 
+                      Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                     - `long searchResultIndex`
+
+                      0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                      Counted separately from `document_index`; server-side web search results are not included in this count.
 
                     - `String source`
 
                     - `long startBlockIndex`
+
+                      0-based index of the first cited block in the source's `content` array.
 
                     - `Optional<String> title`
 
@@ -21617,13 +22659,23 @@ public final class Main {
 
                             - `String citedText`
 
+                              The full text of the cited block range, concatenated.
+
+                              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                             - `long documentIndex`
 
                             - `Optional<String> documentTitle`
 
                             - `long endBlockIndex`
 
+                              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                             - `long startBlockIndex`
+
+                              0-based index of the first cited block in the source's `content` array.
 
                             - `JsonValue; type "content_block_location"constant`
 
@@ -21647,13 +22699,27 @@ public final class Main {
 
                             - `String citedText`
 
+                              The full text of the cited block range, concatenated.
+
+                              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                             - `long endBlockIndex`
 
+                              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                             - `long searchResultIndex`
+
+                              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                              Counted separately from `document_index`; server-side web search results are not included in this count.
 
                             - `String source`
 
                             - `long startBlockIndex`
+
+                              0-based index of the first cited block in the source's `content` array.
 
                             - `Optional<String> title`
 
@@ -22129,13 +23195,23 @@ public final class Main {
 
                             - `String citedText`
 
+                              The full text of the cited block range, concatenated.
+
+                              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                             - `long documentIndex`
 
                             - `Optional<String> documentTitle`
 
                             - `long endBlockIndex`
 
+                              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                             - `long startBlockIndex`
+
+                              0-based index of the first cited block in the source's `content` array.
 
                             - `JsonValue; type "content_block_location"constant`
 
@@ -22159,13 +23235,27 @@ public final class Main {
 
                             - `String citedText`
 
+                              The full text of the cited block range, concatenated.
+
+                              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                             - `long endBlockIndex`
 
+                              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                             - `long searchResultIndex`
+
+                              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                              Counted separately from `document_index`; server-side web search results are not included in this count.
 
                             - `String source`
 
                             - `long startBlockIndex`
+
+                              0-based index of the first cited block in the source's `content` array.
 
                             - `Optional<String> title`
 
@@ -22927,13 +24017,23 @@ public final class Main {
 
                 - `String citedText`
 
+                  The full text of the cited block range, concatenated.
+
+                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                 - `long documentIndex`
 
                 - `Optional<String> documentTitle`
 
                 - `long endBlockIndex`
 
+                  Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                 - `long startBlockIndex`
+
+                  0-based index of the first cited block in the source's `content` array.
 
                 - `JsonValue; type "content_block_location"constant`
 
@@ -22957,13 +24057,27 @@ public final class Main {
 
                 - `String citedText`
 
+                  The full text of the cited block range, concatenated.
+
+                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                 - `long endBlockIndex`
 
+                  Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                 - `long searchResultIndex`
+
+                  0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                  Counted separately from `document_index`; server-side web search results are not included in this count.
 
                 - `String source`
 
                 - `long startBlockIndex`
+
+                  0-based index of the first cited block in the source's `content` array.
 
                 - `Optional<String> title`
 
@@ -23104,7 +24218,7 @@ public final class Main {
 
   - `Optional<BetaJsonOutputFormat> format`
 
-    A schema to specify Claude's output format in responses. See [structured outputs](../developer/developer-build-with-claude-structured-outputs.md)
+    A schema to specify Claude's output format in responses. See [structured outputs](../build-with-claude/build-with-claude-structured-outputs.md)
 
     - `Schema schema`
 
@@ -23210,15 +24324,25 @@ public final class Main {
 
         - `String citedText`
 
+          The full text of the cited block range, concatenated.
+
+          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
         - `long documentIndex`
 
         - `Optional<String> documentTitle`
 
         - `long endBlockIndex`
 
+          Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
         - `Optional<String> fileId`
 
         - `long startBlockIndex`
+
+          0-based index of the first cited block in the source's `content` array.
 
         - `JsonValue; type "content_block_location"constant`
 
@@ -23242,13 +24366,27 @@ public final class Main {
 
         - `String citedText`
 
+          The full text of the cited block range, concatenated.
+
+          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
         - `long endBlockIndex`
 
+          Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
         - `long searchResultIndex`
+
+          0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+          Counted separately from `document_index`; server-side web search results are not included in this count.
 
         - `String source`
 
         - `long startBlockIndex`
+
+          0-based index of the first cited block in the source's `content` array.
 
         - `Optional<String> title`
 
@@ -23354,15 +24492,25 @@ public final class Main {
 
           - `String citedText`
 
+            The full text of the cited block range, concatenated.
+
+            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
           - `long documentIndex`
 
           - `Optional<String> documentTitle`
 
           - `long endBlockIndex`
 
+            Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
           - `Optional<String> fileId`
 
           - `long startBlockIndex`
+
+            0-based index of the first cited block in the source's `content` array.
 
           - `JsonValue; type "content_block_location"constant`
 
@@ -23386,13 +24534,27 @@ public final class Main {
 
           - `String citedText`
 
+            The full text of the cited block range, concatenated.
+
+            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
           - `long endBlockIndex`
 
+            Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
           - `long searchResultIndex`
+
+            0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+            Counted separately from `document_index`; server-side web search results are not included in this count.
 
           - `String source`
 
           - `long startBlockIndex`
+
+            0-based index of the first cited block in the source's `content` array.
 
           - `Optional<String> title`
 
@@ -23494,15 +24656,25 @@ public final class Main {
 
           - `String citedText`
 
+            The full text of the cited block range, concatenated.
+
+            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
           - `long documentIndex`
 
           - `Optional<String> documentTitle`
 
           - `long endBlockIndex`
 
+            Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
           - `Optional<String> fileId`
 
           - `long startBlockIndex`
+
+            0-based index of the first cited block in the source's `content` array.
 
           - `JsonValue; type "content_block_location"constant`
 
@@ -23526,13 +24698,27 @@ public final class Main {
 
           - `String citedText`
 
+            The full text of the cited block range, concatenated.
+
+            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
           - `long endBlockIndex`
 
+            Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
           - `long searchResultIndex`
+
+            0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+            Counted separately from `document_index`; server-side web search results are not included in this count.
 
           - `String source`
 
           - `long startBlockIndex`
+
+            0-based index of the first cited block in the source's `content` array.
 
           - `Optional<String> title`
 
@@ -24214,15 +25400,25 @@ public final class Main {
 
               - `String citedText`
 
+                The full text of the cited block range, concatenated.
+
+                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
               - `long documentIndex`
 
               - `Optional<String> documentTitle`
 
               - `long endBlockIndex`
 
+                Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
               - `Optional<String> fileId`
 
               - `long startBlockIndex`
+
+                0-based index of the first cited block in the source's `content` array.
 
               - `JsonValue; type "content_block_location"constant`
 
@@ -24246,13 +25442,27 @@ public final class Main {
 
               - `String citedText`
 
+                The full text of the cited block range, concatenated.
+
+                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
               - `long endBlockIndex`
 
+                Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
               - `long searchResultIndex`
+
+                0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                Counted separately from `document_index`; server-side web search results are not included in this count.
 
               - `String source`
 
               - `long startBlockIndex`
+
+                0-based index of the first cited block in the source's `content` array.
 
               - `Optional<String> title`
 
@@ -24805,15 +26015,25 @@ public final class Main {
 
             - `String citedText`
 
+              The full text of the cited block range, concatenated.
+
+              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
             - `long documentIndex`
 
             - `Optional<String> documentTitle`
 
             - `long endBlockIndex`
 
+              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
             - `Optional<String> fileId`
 
             - `long startBlockIndex`
+
+              0-based index of the first cited block in the source's `content` array.
 
             - `JsonValue; type "content_block_location"constant`
 
@@ -24837,13 +26057,27 @@ public final class Main {
 
             - `String citedText`
 
+              The full text of the cited block range, concatenated.
+
+              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
             - `long endBlockIndex`
 
+              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
             - `long searchResultIndex`
+
+              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+              Counted separately from `document_index`; server-side web search results are not included in this count.
 
             - `String source`
 
             - `long startBlockIndex`
+
+              0-based index of the first cited block in the source's `content` array.
 
             - `Optional<String> title`
 
@@ -25525,15 +26759,25 @@ public final class Main {
 
                 - `String citedText`
 
+                  The full text of the cited block range, concatenated.
+
+                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                 - `long documentIndex`
 
                 - `Optional<String> documentTitle`
 
                 - `long endBlockIndex`
 
+                  Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                 - `Optional<String> fileId`
 
                 - `long startBlockIndex`
+
+                  0-based index of the first cited block in the source's `content` array.
 
                 - `JsonValue; type "content_block_location"constant`
 
@@ -25557,13 +26801,27 @@ public final class Main {
 
                 - `String citedText`
 
+                  The full text of the cited block range, concatenated.
+
+                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                 - `long endBlockIndex`
 
+                  Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                 - `long searchResultIndex`
+
+                  0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                  Counted separately from `document_index`; server-side web search results are not included in this count.
 
                 - `String source`
 
                 - `long startBlockIndex`
+
+                  0-based index of the first cited block in the source's `content` array.
 
                 - `Optional<String> title`
 
@@ -26215,15 +27473,25 @@ public final class Main {
 
               - `String citedText`
 
+                The full text of the cited block range, concatenated.
+
+                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
               - `long documentIndex`
 
               - `Optional<String> documentTitle`
 
               - `long endBlockIndex`
 
+                Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
               - `Optional<String> fileId`
 
               - `long startBlockIndex`
+
+                0-based index of the first cited block in the source's `content` array.
 
               - `JsonValue; type "content_block_location"constant`
 
@@ -26247,13 +27515,27 @@ public final class Main {
 
               - `String citedText`
 
+                The full text of the cited block range, concatenated.
+
+                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
               - `long endBlockIndex`
 
+                Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
               - `long searchResultIndex`
+
+                0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                Counted separately from `document_index`; server-side web search results are not included in this count.
 
               - `String source`
 
               - `long startBlockIndex`
+
+                0-based index of the first cited block in the source's `content` array.
 
               - `Optional<String> title`
 
@@ -26935,15 +28217,25 @@ public final class Main {
 
                   - `String citedText`
 
+                    The full text of the cited block range, concatenated.
+
+                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                   - `long documentIndex`
 
                   - `Optional<String> documentTitle`
 
                   - `long endBlockIndex`
 
+                    Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                   - `Optional<String> fileId`
 
                   - `long startBlockIndex`
+
+                    0-based index of the first cited block in the source's `content` array.
 
                   - `JsonValue; type "content_block_location"constant`
 
@@ -26967,13 +28259,27 @@ public final class Main {
 
                   - `String citedText`
 
+                    The full text of the cited block range, concatenated.
+
+                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                   - `long endBlockIndex`
 
+                    Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                   - `long searchResultIndex`
+
+                    0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                    Counted separately from `document_index`; server-side web search results are not included in this count.
 
                   - `String source`
 
                   - `long startBlockIndex`
+
+                    0-based index of the first cited block in the source's `content` array.
 
                   - `Optional<String> title`
 
@@ -27916,15 +29222,25 @@ public final class Main {
 
             - `String citedText`
 
+              The full text of the cited block range, concatenated.
+
+              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
             - `long documentIndex`
 
             - `Optional<String> documentTitle`
 
             - `long endBlockIndex`
 
+              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
             - `Optional<String> fileId`
 
             - `long startBlockIndex`
+
+              0-based index of the first cited block in the source's `content` array.
 
             - `JsonValue; type "content_block_location"constant`
 
@@ -27948,13 +29264,27 @@ public final class Main {
 
             - `String citedText`
 
+              The full text of the cited block range, concatenated.
+
+              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
             - `long endBlockIndex`
 
+              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
             - `long searchResultIndex`
+
+              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+              Counted separately from `document_index`; server-side web search results are not included in this count.
 
             - `String source`
 
             - `long startBlockIndex`
+
+              0-based index of the first cited block in the source's `content` array.
 
             - `Optional<String> title`
 
@@ -28636,15 +29966,25 @@ public final class Main {
 
                 - `String citedText`
 
+                  The full text of the cited block range, concatenated.
+
+                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                 - `long documentIndex`
 
                 - `Optional<String> documentTitle`
 
                 - `long endBlockIndex`
 
+                  Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                 - `Optional<String> fileId`
 
                 - `long startBlockIndex`
+
+                  0-based index of the first cited block in the source's `content` array.
 
                 - `JsonValue; type "content_block_location"constant`
 
@@ -28668,13 +30008,27 @@ public final class Main {
 
                 - `String citedText`
 
+                  The full text of the cited block range, concatenated.
+
+                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                 - `long endBlockIndex`
 
+                  Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                 - `long searchResultIndex`
+
+                  0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                  Counted separately from `document_index`; server-side web search results are not included in this count.
 
                 - `String source`
 
                 - `long startBlockIndex`
+
+                  0-based index of the first cited block in the source's `content` array.
 
                 - `Optional<String> title`
 
@@ -28796,15 +30150,25 @@ public final class Main {
 
             - `String citedText`
 
+              The full text of the cited block range, concatenated.
+
+              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
             - `long documentIndex`
 
             - `Optional<String> documentTitle`
 
             - `long endBlockIndex`
 
+              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
             - `Optional<String> fileId`
 
             - `long startBlockIndex`
+
+              0-based index of the first cited block in the source's `content` array.
 
             - `JsonValue; type "content_block_location"constant`
 
@@ -28828,13 +30192,27 @@ public final class Main {
 
             - `String citedText`
 
+              The full text of the cited block range, concatenated.
+
+              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
             - `long endBlockIndex`
 
+              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
             - `long searchResultIndex`
+
+              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+              Counted separately from `document_index`; server-side web search results are not included in this count.
 
             - `String source`
 
             - `long startBlockIndex`
+
+              0-based index of the first cited block in the source's `content` array.
 
             - `Optional<String> title`
 
@@ -29041,13 +30419,23 @@ public final class Main {
 
                 - `String citedText`
 
+                  The full text of the cited block range, concatenated.
+
+                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                 - `long documentIndex`
 
                 - `Optional<String> documentTitle`
 
                 - `long endBlockIndex`
 
+                  Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                 - `long startBlockIndex`
+
+                  0-based index of the first cited block in the source's `content` array.
 
                 - `JsonValue; type "content_block_location"constant`
 
@@ -29071,13 +30459,27 @@ public final class Main {
 
                 - `String citedText`
 
+                  The full text of the cited block range, concatenated.
+
+                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                 - `long endBlockIndex`
 
+                  Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                 - `long searchResultIndex`
+
+                  0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                  Counted separately from `document_index`; server-side web search results are not included in this count.
 
                 - `String source`
 
                 - `long startBlockIndex`
+
+                  0-based index of the first cited block in the source's `content` array.
 
                 - `Optional<String> title`
 
@@ -29339,13 +30741,23 @@ public final class Main {
 
           - `String citedText`
 
+            The full text of the cited block range, concatenated.
+
+            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
           - `long documentIndex`
 
           - `Optional<String> documentTitle`
 
           - `long endBlockIndex`
 
+            Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
           - `long startBlockIndex`
+
+            0-based index of the first cited block in the source's `content` array.
 
           - `JsonValue; type "content_block_location"constant`
 
@@ -29369,13 +30781,27 @@ public final class Main {
 
           - `String citedText`
 
+            The full text of the cited block range, concatenated.
+
+            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
           - `long endBlockIndex`
 
+            Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
           - `long searchResultIndex`
+
+            0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+            Counted separately from `document_index`; server-side web search results are not included in this count.
 
           - `String source`
 
           - `long startBlockIndex`
+
+            0-based index of the first cited block in the source's `content` array.
 
           - `Optional<String> title`
 
@@ -29458,13 +30884,23 @@ public final class Main {
 
         - `String citedText`
 
+          The full text of the cited block range, concatenated.
+
+          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
         - `long documentIndex`
 
         - `Optional<String> documentTitle`
 
         - `long endBlockIndex`
 
+          Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
         - `long startBlockIndex`
+
+          0-based index of the first cited block in the source's `content` array.
 
         - `JsonValue; type "content_block_location"constant`
 
@@ -29488,13 +30924,27 @@ public final class Main {
 
         - `String citedText`
 
+          The full text of the cited block range, concatenated.
+
+          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
         - `long endBlockIndex`
 
+          Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
         - `long searchResultIndex`
+
+          0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+          Counted separately from `document_index`; server-side web search results are not included in this count.
 
         - `String source`
 
         - `long startBlockIndex`
+
+          0-based index of the first cited block in the source's `content` array.
 
         - `Optional<String> title`
 
@@ -29838,15 +31288,25 @@ public final class Main {
 
       - `String citedText`
 
+        The full text of the cited block range, concatenated.
+
+        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
       - `long documentIndex`
 
       - `Optional<String> documentTitle`
 
       - `long endBlockIndex`
 
+        Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
       - `Optional<String> fileId`
 
       - `long startBlockIndex`
+
+        0-based index of the first cited block in the source's `content` array.
 
       - `JsonValue; type "content_block_location"constant`
 
@@ -29870,13 +31330,27 @@ public final class Main {
 
       - `String citedText`
 
+        The full text of the cited block range, concatenated.
+
+        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
       - `long endBlockIndex`
 
+        Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
       - `long searchResultIndex`
+
+        0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+        Counted separately from `document_index`; server-side web search results are not included in this count.
 
       - `String source`
 
       - `long startBlockIndex`
+
+        0-based index of the first cited block in the source's `content` array.
 
       - `Optional<String> title`
 
@@ -29961,13 +31435,23 @@ public final class Main {
 
       - `String citedText`
 
+        The full text of the cited block range, concatenated.
+
+        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
       - `long documentIndex`
 
       - `Optional<String> documentTitle`
 
       - `long endBlockIndex`
 
+        Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
       - `long startBlockIndex`
+
+        0-based index of the first cited block in the source's `content` array.
 
       - `JsonValue; type "content_block_location"constant`
 
@@ -29991,13 +31475,27 @@ public final class Main {
 
       - `String citedText`
 
+        The full text of the cited block range, concatenated.
+
+        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
       - `long endBlockIndex`
 
+        Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
       - `long searchResultIndex`
+
+        0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+        Counted separately from `document_index`; server-side web search results are not included in this count.
 
       - `String source`
 
       - `long startBlockIndex`
+
+        0-based index of the first cited block in the source's `content` array.
 
       - `Optional<String> title`
 
@@ -30049,15 +31547,25 @@ public final class Main {
 
     - `String citedText`
 
+      The full text of the cited block range, concatenated.
+
+      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
     - `long documentIndex`
 
     - `Optional<String> documentTitle`
 
     - `long endBlockIndex`
 
+      Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
     - `Optional<String> fileId`
 
     - `long startBlockIndex`
+
+      0-based index of the first cited block in the source's `content` array.
 
     - `JsonValue; type "content_block_location"constant`
 
@@ -30081,13 +31589,27 @@ public final class Main {
 
     - `String citedText`
 
+      The full text of the cited block range, concatenated.
+
+      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
     - `long endBlockIndex`
 
+      Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
     - `long searchResultIndex`
+
+      0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+      Counted separately from `document_index`; server-side web search results are not included in this count.
 
     - `String source`
 
     - `long startBlockIndex`
+
+      0-based index of the first cited block in the source's `content` array.
 
     - `Optional<String> title`
 
@@ -30135,13 +31657,23 @@ public final class Main {
 
     - `String citedText`
 
+      The full text of the cited block range, concatenated.
+
+      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
     - `long documentIndex`
 
     - `Optional<String> documentTitle`
 
     - `long endBlockIndex`
 
+      Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
     - `long startBlockIndex`
+
+      0-based index of the first cited block in the source's `content` array.
 
     - `JsonValue; type "content_block_location"constant`
 
@@ -30165,13 +31697,27 @@ public final class Main {
 
     - `String citedText`
 
+      The full text of the cited block range, concatenated.
+
+      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
     - `long endBlockIndex`
 
+      Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
     - `long searchResultIndex`
+
+      0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+      Counted separately from `document_index`; server-side web search results are not included in this count.
 
     - `String source`
 
     - `long startBlockIndex`
+
+      0-based index of the first cited block in the source's `content` array.
 
     - `Optional<String> title`
 
@@ -31359,13 +32905,23 @@ public final class Main {
 
             - `String citedText`
 
+              The full text of the cited block range, concatenated.
+
+              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
             - `long documentIndex`
 
             - `Optional<String> documentTitle`
 
             - `long endBlockIndex`
 
+              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
             - `long startBlockIndex`
+
+              0-based index of the first cited block in the source's `content` array.
 
             - `JsonValue; type "content_block_location"constant`
 
@@ -31389,13 +32945,27 @@ public final class Main {
 
             - `String citedText`
 
+              The full text of the cited block range, concatenated.
+
+              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
             - `long endBlockIndex`
 
+              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
             - `long searchResultIndex`
+
+              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+              Counted separately from `document_index`; server-side web search results are not included in this count.
 
             - `String source`
 
             - `long startBlockIndex`
+
+              0-based index of the first cited block in the source's `content` array.
 
             - `Optional<String> title`
 
@@ -31539,13 +33109,23 @@ public final class Main {
 
               - `String citedText`
 
+                The full text of the cited block range, concatenated.
+
+                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
               - `long documentIndex`
 
               - `Optional<String> documentTitle`
 
               - `long endBlockIndex`
 
+                Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
               - `long startBlockIndex`
+
+                0-based index of the first cited block in the source's `content` array.
 
               - `JsonValue; type "content_block_location"constant`
 
@@ -31569,13 +33149,27 @@ public final class Main {
 
               - `String citedText`
 
+                The full text of the cited block range, concatenated.
+
+                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
               - `long endBlockIndex`
 
+                Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
               - `long searchResultIndex`
+
+                0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                Counted separately from `document_index`; server-side web search results are not included in this count.
 
               - `String source`
 
               - `long startBlockIndex`
+
+                0-based index of the first cited block in the source's `content` array.
 
               - `Optional<String> title`
 
@@ -31723,13 +33317,23 @@ public final class Main {
 
                       - `String citedText`
 
+                        The full text of the cited block range, concatenated.
+
+                        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                       - `long documentIndex`
 
                       - `Optional<String> documentTitle`
 
                       - `long endBlockIndex`
 
+                        Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                       - `long startBlockIndex`
+
+                        0-based index of the first cited block in the source's `content` array.
 
                       - `JsonValue; type "content_block_location"constant`
 
@@ -31753,13 +33357,27 @@ public final class Main {
 
                       - `String citedText`
 
+                        The full text of the cited block range, concatenated.
+
+                        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                       - `long endBlockIndex`
 
+                        Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                       - `long searchResultIndex`
+
+                        0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                        Counted separately from `document_index`; server-side web search results are not included in this count.
 
                       - `String source`
 
                       - `long startBlockIndex`
+
+                        0-based index of the first cited block in the source's `content` array.
 
                       - `Optional<String> title`
 
@@ -34664,13 +36282,23 @@ public final class Main {
 
                   - `String citedText`
 
+                    The full text of the cited block range, concatenated.
+
+                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                   - `long documentIndex`
 
                   - `Optional<String> documentTitle`
 
                   - `long endBlockIndex`
 
+                    Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                   - `long startBlockIndex`
+
+                    0-based index of the first cited block in the source's `content` array.
 
                   - `JsonValue; type "content_block_location"constant`
 
@@ -34694,13 +36322,27 @@ public final class Main {
 
                   - `String citedText`
 
+                    The full text of the cited block range, concatenated.
+
+                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                   - `long endBlockIndex`
 
+                    Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                   - `long searchResultIndex`
+
+                    0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                    Counted separately from `document_index`; server-side web search results are not included in this count.
 
                   - `String source`
 
                   - `long startBlockIndex`
+
+                    0-based index of the first cited block in the source's `content` array.
 
                   - `Optional<String> title`
 
@@ -35336,13 +36978,23 @@ public final class Main {
 
                       - `String citedText`
 
+                        The full text of the cited block range, concatenated.
+
+                        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                       - `long documentIndex`
 
                       - `Optional<String> documentTitle`
 
                       - `long endBlockIndex`
 
+                        Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                       - `long startBlockIndex`
+
+                        0-based index of the first cited block in the source's `content` array.
 
                       - `JsonValue; type "content_block_location"constant`
 
@@ -35366,13 +37018,27 @@ public final class Main {
 
                       - `String citedText`
 
+                        The full text of the cited block range, concatenated.
+
+                        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                       - `long endBlockIndex`
 
+                        Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                       - `long searchResultIndex`
+
+                        0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                        Counted separately from `document_index`; server-side web search results are not included in this count.
 
                       - `String source`
 
                       - `long startBlockIndex`
+
+                        0-based index of the first cited block in the source's `content` array.
 
                       - `Optional<String> title`
 
@@ -36236,6 +37902,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
   - `List<Request> requests`
 
     List of requests for prompt completion. Each is an individual request to create a Message.
@@ -36388,13 +38056,23 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `String citedText`
 
+                    The full text of the cited block range, concatenated.
+
+                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                   - `long documentIndex`
 
                   - `Optional<String> documentTitle`
 
                   - `long endBlockIndex`
 
+                    Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                   - `long startBlockIndex`
+
+                    0-based index of the first cited block in the source's `content` array.
 
                   - `JsonValue; type "content_block_location"constant`
 
@@ -36418,13 +38096,27 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `String citedText`
 
+                    The full text of the cited block range, concatenated.
+
+                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                   - `long endBlockIndex`
 
+                    Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                   - `long searchResultIndex`
+
+                    0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                    Counted separately from `document_index`; server-side web search results are not included in this count.
 
                   - `String source`
 
                   - `long startBlockIndex`
+
+                    0-based index of the first cited block in the source's `content` array.
 
                   - `Optional<String> title`
 
@@ -36602,13 +38294,23 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                             - `String citedText`
 
+                              The full text of the cited block range, concatenated.
+
+                              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                             - `long documentIndex`
 
                             - `Optional<String> documentTitle`
 
                             - `long endBlockIndex`
 
+                              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                             - `long startBlockIndex`
+
+                              0-based index of the first cited block in the source's `content` array.
 
                             - `JsonValue; type "content_block_location"constant`
 
@@ -36632,13 +38334,27 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                             - `String citedText`
 
+                              The full text of the cited block range, concatenated.
+
+                              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                             - `long endBlockIndex`
 
+                              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                             - `long searchResultIndex`
+
+                              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                              Counted separately from `document_index`; server-side web search results are not included in this count.
 
                             - `String source`
 
                             - `long startBlockIndex`
+
+                              0-based index of the first cited block in the source's `content` array.
 
                             - `Optional<String> title`
 
@@ -36837,13 +38553,23 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                     - `String citedText`
 
+                      The full text of the cited block range, concatenated.
+
+                      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                     - `long documentIndex`
 
                     - `Optional<String> documentTitle`
 
                     - `long endBlockIndex`
 
+                      Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                     - `long startBlockIndex`
+
+                      0-based index of the first cited block in the source's `content` array.
 
                     - `JsonValue; type "content_block_location"constant`
 
@@ -36867,13 +38593,27 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                     - `String citedText`
 
+                      The full text of the cited block range, concatenated.
+
+                      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                     - `long endBlockIndex`
 
+                      Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                     - `long searchResultIndex`
+
+                      0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                      Counted separately from `document_index`; server-side web search results are not included in this count.
 
                     - `String source`
 
                     - `long startBlockIndex`
+
+                      0-based index of the first cited block in the source's `content` array.
 
                     - `Optional<String> title`
 
@@ -37105,13 +38845,23 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                         - `String citedText`
 
+                          The full text of the cited block range, concatenated.
+
+                          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                         - `long documentIndex`
 
                         - `Optional<String> documentTitle`
 
                         - `long endBlockIndex`
 
+                          Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                         - `long startBlockIndex`
+
+                          0-based index of the first cited block in the source's `content` array.
 
                         - `JsonValue; type "content_block_location"constant`
 
@@ -37135,13 +38885,27 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                         - `String citedText`
 
+                          The full text of the cited block range, concatenated.
+
+                          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                         - `long endBlockIndex`
 
+                          Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                         - `long searchResultIndex`
+
+                          0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                          Counted separately from `document_index`; server-side web search results are not included in this count.
 
                         - `String source`
 
                         - `long startBlockIndex`
+
+                          0-based index of the first cited block in the source's `content` array.
 
                         - `Optional<String> title`
 
@@ -37285,13 +39049,23 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                           - `String citedText`
 
+                            The full text of the cited block range, concatenated.
+
+                            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                           - `long documentIndex`
 
                           - `Optional<String> documentTitle`
 
                           - `long endBlockIndex`
 
+                            Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                           - `long startBlockIndex`
+
+                            0-based index of the first cited block in the source's `content` array.
 
                           - `JsonValue; type "content_block_location"constant`
 
@@ -37315,13 +39089,27 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                           - `String citedText`
 
+                            The full text of the cited block range, concatenated.
+
+                            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                           - `long endBlockIndex`
 
+                            Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                           - `long searchResultIndex`
+
+                            0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                            Counted separately from `document_index`; server-side web search results are not included in this count.
 
                           - `String source`
 
                           - `long startBlockIndex`
+
+                            0-based index of the first cited block in the source's `content` array.
 
                           - `Optional<String> title`
 
@@ -37469,13 +39257,23 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                                   - `String citedText`
 
+                                    The full text of the cited block range, concatenated.
+
+                                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                                   - `long documentIndex`
 
                                   - `Optional<String> documentTitle`
 
                                   - `long endBlockIndex`
 
+                                    Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                                   - `long startBlockIndex`
+
+                                    0-based index of the first cited block in the source's `content` array.
 
                                   - `JsonValue; type "content_block_location"constant`
 
@@ -37499,13 +39297,27 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                                   - `String citedText`
 
+                                    The full text of the cited block range, concatenated.
+
+                                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                                   - `long endBlockIndex`
 
+                                    Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                                   - `long searchResultIndex`
+
+                                    0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                                    Counted separately from `document_index`; server-side web search results are not included in this count.
 
                                   - `String source`
 
                                   - `long startBlockIndex`
+
+                                    0-based index of the first cited block in the source's `content` array.
 
                                   - `Optional<String> title`
 
@@ -37981,13 +39793,23 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                                   - `String citedText`
 
+                                    The full text of the cited block range, concatenated.
+
+                                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                                   - `long documentIndex`
 
                                   - `Optional<String> documentTitle`
 
                                   - `long endBlockIndex`
 
+                                    Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                                   - `long startBlockIndex`
+
+                                    0-based index of the first cited block in the source's `content` array.
 
                                   - `JsonValue; type "content_block_location"constant`
 
@@ -38011,13 +39833,27 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                                   - `String citedText`
 
+                                    The full text of the cited block range, concatenated.
+
+                                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                                   - `long endBlockIndex`
 
+                                    Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                                   - `long searchResultIndex`
+
+                                    0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                                    Counted separately from `document_index`; server-side web search results are not included in this count.
 
                                   - `String source`
 
                                   - `long startBlockIndex`
+
+                                    0-based index of the first cited block in the source's `content` array.
 
                                   - `Optional<String> title`
 
@@ -38779,13 +40615,23 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                       - `String citedText`
 
+                        The full text of the cited block range, concatenated.
+
+                        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                       - `long documentIndex`
 
                       - `Optional<String> documentTitle`
 
                       - `long endBlockIndex`
 
+                        Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                       - `long startBlockIndex`
+
+                        0-based index of the first cited block in the source's `content` array.
 
                       - `JsonValue; type "content_block_location"constant`
 
@@ -38809,13 +40655,27 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                       - `String citedText`
 
+                        The full text of the cited block range, concatenated.
+
+                        Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                       - `long endBlockIndex`
 
+                        Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                        Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                       - `long searchResultIndex`
+
+                        0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                        Counted separately from `document_index`; server-side web search results are not included in this count.
 
                       - `String source`
 
                       - `long startBlockIndex`
+
+                        0-based index of the first cited block in the source's `content` array.
 
                       - `Optional<String> title`
 
@@ -39217,7 +41077,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
         - `Optional<BetaJsonOutputFormat> format`
 
-          A schema to specify Claude's output format in responses. See [structured outputs](../developer/developer-build-with-claude-structured-outputs.md)
+          A schema to specify Claude's output format in responses. See [structured outputs](../build-with-claude/build-with-claude-structured-outputs.md)
 
           - `Schema schema`
 
@@ -39247,7 +41107,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
       - `Optional<BetaJsonOutputFormat> outputFormat`
 
-        Deprecated: Use `output_config.format` instead. See [structured outputs](../developer/developer-build-with-claude-structured-outputs.md)
+        Deprecated: Use `output_config.format` instead. See [structured outputs](../build-with-claude/build-with-claude-structured-outputs.md)
 
         A schema to specify Claude's output format in responses. This parameter will be removed in a future release.
 
@@ -39368,13 +41228,23 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `String citedText`
 
+                The full text of the cited block range, concatenated.
+
+                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
               - `long documentIndex`
 
               - `Optional<String> documentTitle`
 
               - `long endBlockIndex`
 
+                Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
               - `long startBlockIndex`
+
+                0-based index of the first cited block in the source's `content` array.
 
               - `JsonValue; type "content_block_location"constant`
 
@@ -39398,13 +41268,27 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `String citedText`
 
+                The full text of the cited block range, concatenated.
+
+                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
               - `long endBlockIndex`
 
+                Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
               - `long searchResultIndex`
+
+                0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                Counted separately from `document_index`; server-side web search results are not included in this count.
 
               - `String source`
 
               - `long startBlockIndex`
+
+                0-based index of the first cited block in the source's `content` array.
 
               - `Optional<String> title`
 
@@ -41361,6 +43245,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
 ### Returns
 
 - `class BetaMessageBatch:`
@@ -41550,6 +43436,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
 ### Returns
 
 - `class BetaMessageBatch:`
@@ -41730,6 +43618,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
 
 ### Returns
 
@@ -41912,6 +43802,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
 ### Returns
 
 - `class BetaDeletedMessageBatch:`
@@ -42018,6 +43910,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
 
 ### Returns
 
@@ -42156,15 +44050,25 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 - `String citedText`
 
+                  The full text of the cited block range, concatenated.
+
+                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                 - `long documentIndex`
 
                 - `Optional<String> documentTitle`
 
                 - `long endBlockIndex`
 
+                  Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                 - `Optional<String> fileId`
 
                 - `long startBlockIndex`
+
+                  0-based index of the first cited block in the source's `content` array.
 
                 - `JsonValue; type "content_block_location"constant`
 
@@ -42188,13 +44092,27 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 - `String citedText`
 
+                  The full text of the cited block range, concatenated.
+
+                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                 - `long endBlockIndex`
 
+                  Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                 - `long searchResultIndex`
+
+                  0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                  Counted separately from `document_index`; server-side web search results are not included in this count.
 
                 - `String source`
 
                 - `long startBlockIndex`
+
+                  0-based index of the first cited block in the source's `content` array.
 
                 - `Optional<String> title`
 
@@ -42876,15 +44794,25 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                     - `String citedText`
 
+                      The full text of the cited block range, concatenated.
+
+                      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                     - `long documentIndex`
 
                     - `Optional<String> documentTitle`
 
                     - `long endBlockIndex`
 
+                      Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                     - `Optional<String> fileId`
 
                     - `long startBlockIndex`
+
+                      0-based index of the first cited block in the source's `content` array.
 
                     - `JsonValue; type "content_block_location"constant`
 
@@ -42908,13 +44836,27 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                     - `String citedText`
 
+                      The full text of the cited block range, concatenated.
+
+                      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                     - `long endBlockIndex`
 
+                      Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                     - `long searchResultIndex`
+
+                      0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                      Counted separately from `document_index`; server-side web search results are not included in this count.
 
                     - `String source`
 
                     - `long startBlockIndex`
+
+                      0-based index of the first cited block in the source's `content` array.
 
                     - `Optional<String> title`
 
@@ -43908,15 +45850,25 @@ public final class Main {
 
                 - `String citedText`
 
+                  The full text of the cited block range, concatenated.
+
+                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                 - `long documentIndex`
 
                 - `Optional<String> documentTitle`
 
                 - `long endBlockIndex`
 
+                  Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                 - `Optional<String> fileId`
 
                 - `long startBlockIndex`
+
+                  0-based index of the first cited block in the source's `content` array.
 
                 - `JsonValue; type "content_block_location"constant`
 
@@ -43940,13 +45892,27 @@ public final class Main {
 
                 - `String citedText`
 
+                  The full text of the cited block range, concatenated.
+
+                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                 - `long endBlockIndex`
 
+                  Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                 - `long searchResultIndex`
+
+                  0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                  Counted separately from `document_index`; server-side web search results are not included in this count.
 
                 - `String source`
 
                 - `long startBlockIndex`
+
+                  0-based index of the first cited block in the source's `content` array.
 
                 - `Optional<String> title`
 
@@ -44628,15 +46594,25 @@ public final class Main {
 
                     - `String citedText`
 
+                      The full text of the cited block range, concatenated.
+
+                      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                     - `long documentIndex`
 
                     - `Optional<String> documentTitle`
 
                     - `long endBlockIndex`
 
+                      Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                     - `Optional<String> fileId`
 
                     - `long startBlockIndex`
+
+                      0-based index of the first cited block in the source's `content` array.
 
                     - `JsonValue; type "content_block_location"constant`
 
@@ -44660,13 +46636,27 @@ public final class Main {
 
                     - `String citedText`
 
+                      The full text of the cited block range, concatenated.
+
+                      Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                     - `long endBlockIndex`
 
+                      Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                      Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                     - `long searchResultIndex`
+
+                      0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                      Counted separately from `document_index`; server-side web search results are not included in this count.
 
                     - `String source`
 
                     - `long startBlockIndex`
+
+                      0-based index of the first cited block in the source's `content` array.
 
                     - `Optional<String> title`
 
@@ -45446,15 +47436,25 @@ public final class Main {
 
               - `String citedText`
 
+                The full text of the cited block range, concatenated.
+
+                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
               - `long documentIndex`
 
               - `Optional<String> documentTitle`
 
               - `long endBlockIndex`
 
+                Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
               - `Optional<String> fileId`
 
               - `long startBlockIndex`
+
+                0-based index of the first cited block in the source's `content` array.
 
               - `JsonValue; type "content_block_location"constant`
 
@@ -45478,13 +47478,27 @@ public final class Main {
 
               - `String citedText`
 
+                The full text of the cited block range, concatenated.
+
+                Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
               - `long endBlockIndex`
 
+                Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
               - `long searchResultIndex`
+
+                0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                Counted separately from `document_index`; server-side web search results are not included in this count.
 
               - `String source`
 
               - `long startBlockIndex`
+
+                0-based index of the first cited block in the source's `content` array.
 
               - `Optional<String> title`
 
@@ -46166,15 +48180,25 @@ public final class Main {
 
                   - `String citedText`
 
+                    The full text of the cited block range, concatenated.
+
+                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                   - `long documentIndex`
 
                   - `Optional<String> documentTitle`
 
                   - `long endBlockIndex`
 
+                    Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                   - `Optional<String> fileId`
 
                   - `long startBlockIndex`
+
+                    0-based index of the first cited block in the source's `content` array.
 
                   - `JsonValue; type "content_block_location"constant`
 
@@ -46198,13 +48222,27 @@ public final class Main {
 
                   - `String citedText`
 
+                    The full text of the cited block range, concatenated.
+
+                    Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                   - `long endBlockIndex`
 
+                    Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                    Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                   - `long searchResultIndex`
+
+                    0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                    Counted separately from `document_index`; server-side web search results are not included in this count.
 
                   - `String source`
 
                   - `long startBlockIndex`
+
+                    0-based index of the first cited block in the source's `content` array.
 
                   - `Optional<String> title`
 
@@ -46946,15 +48984,25 @@ public final class Main {
 
             - `String citedText`
 
+              The full text of the cited block range, concatenated.
+
+              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
             - `long documentIndex`
 
             - `Optional<String> documentTitle`
 
             - `long endBlockIndex`
 
+              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
             - `Optional<String> fileId`
 
             - `long startBlockIndex`
+
+              0-based index of the first cited block in the source's `content` array.
 
             - `JsonValue; type "content_block_location"constant`
 
@@ -46978,13 +49026,27 @@ public final class Main {
 
             - `String citedText`
 
+              The full text of the cited block range, concatenated.
+
+              Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
             - `long endBlockIndex`
 
+              Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+              Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
             - `long searchResultIndex`
+
+              0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+              Counted separately from `document_index`; server-side web search results are not included in this count.
 
             - `String source`
 
             - `long startBlockIndex`
+
+              0-based index of the first cited block in the source's `content` array.
 
             - `Optional<String> title`
 
@@ -47666,15 +49728,25 @@ public final class Main {
 
                 - `String citedText`
 
+                  The full text of the cited block range, concatenated.
+
+                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                 - `long documentIndex`
 
                 - `Optional<String> documentTitle`
 
                 - `long endBlockIndex`
 
+                  Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                 - `Optional<String> fileId`
 
                 - `long startBlockIndex`
+
+                  0-based index of the first cited block in the source's `content` array.
 
                 - `JsonValue; type "content_block_location"constant`
 
@@ -47698,13 +49770,27 @@ public final class Main {
 
                 - `String citedText`
 
+                  The full text of the cited block range, concatenated.
+
+                  Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
                 - `long endBlockIndex`
 
+                  Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+                  Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
                 - `long searchResultIndex`
+
+                  0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+                  Counted separately from `document_index`; server-side web search results are not included in this count.
 
                 - `String source`
 
                 - `long startBlockIndex`
+
+                  0-based index of the first cited block in the source's `content` array.
 
                 - `Optional<String> title`
 
@@ -48289,9 +50375,11 @@ Create Agent
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
   - `Model model`
 
-    Model identifier. Accepts the [model string](../developer/developer-about-claude-models-overview.md#latest-models-comparison), e.g. `claude-opus-4-6`, or a `model_config` object for additional configuration control
+    Model identifier. Accepts the [model string](https://platform.claude.com/docs/en/about-claude/models/overview.md#latest-models-comparison), e.g. `claude-opus-4-6`, or a `model_config` object for additional configuration control
 
     - `enum BetaManagedAgentsModel:`
 
@@ -48416,6 +50504,10 @@ Create Agent
   - `Optional<Metadata> metadata`
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
+  - `Optional<BetaManagedAgentsMultiagentParams> multiagent`
+
+    A coordinator topology: the session's primary thread orchestrates work by spawning session threads, each running an agent drawn from the `agents` roster.
 
   - `Optional<List<BetaManagedAgentsSkillParams>> skills`
 
@@ -48735,6 +50827,26 @@ Create Agent
 
       - `FAST("fast")`
 
+  - `Optional<BetaManagedAgentsMultiagent> multiagent`
+
+    Resolved coordinator topology with a concrete agent roster.
+
+    - `List<BetaManagedAgentsAgentReference> agents`
+
+      Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+      - `String id`
+
+      - `Type type`
+
+        - `AGENT("agent")`
+
+      - `long version`
+
+    - `Type type`
+
+      - `COORDINATOR("coordinator")`
+
   - `String name`
 
   - `List<Skill> skills`
@@ -49053,6 +51165,8 @@ List Agents
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
 ### Returns
 
 - `class BetaManagedAgentsAgent:`
@@ -49136,6 +51250,26 @@ List Agents
       - `STANDARD("standard")`
 
       - `FAST("fast")`
+
+  - `Optional<BetaManagedAgentsMultiagent> multiagent`
+
+    Resolved coordinator topology with a concrete agent roster.
+
+    - `List<BetaManagedAgentsAgentReference> agents`
+
+      Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+      - `String id`
+
+      - `Type type`
+
+        - `AGENT("agent")`
+
+      - `long version`
+
+    - `Type type`
+
+      - `COORDINATOR("coordinator")`
 
   - `String name`
 
@@ -49436,6 +51570,8 @@ Get Agent
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
 ### Returns
 
 - `class BetaManagedAgentsAgent:`
@@ -49519,6 +51655,26 @@ Get Agent
       - `STANDARD("standard")`
 
       - `FAST("fast")`
+
+  - `Optional<BetaManagedAgentsMultiagent> multiagent`
+
+    Resolved coordinator topology with a concrete agent roster.
+
+    - `List<BetaManagedAgentsAgentReference> agents`
+
+      Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+      - `String id`
+
+      - `Type type`
+
+        - `AGENT("agent")`
+
+      - `long version`
+
+    - `Type type`
+
+      - `COORDINATOR("coordinator")`
 
   - `String name`
 
@@ -49815,6 +51971,8 @@ Update Agent
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
   - `long version`
 
     The agent's current version, used to prevent concurrent overwrites. Obtain this value from a create or retrieve response. The request fails if this does not match the server's current version.
@@ -49845,7 +52003,7 @@ Update Agent
 
   - `Optional<Model> model`
 
-    Model identifier. Accepts the [model string](../developer/developer-about-claude-models-overview.md#latest-models-comparison), e.g. `claude-opus-4-6`, or a `model_config` object for additional configuration control. Omit to preserve. Cannot be cleared.
+    Model identifier. Accepts the [model string](https://platform.claude.com/docs/en/about-claude/models/overview.md#latest-models-comparison), e.g. `claude-opus-4-6`, or a `model_config` object for additional configuration control. Omit to preserve. Cannot be cleared.
 
     - `enum BetaManagedAgentsModel:`
 
@@ -49942,6 +52100,10 @@ Update Agent
         - `STANDARD("standard")`
 
         - `FAST("fast")`
+
+  - `Optional<BetaManagedAgentsMultiagentParams> multiagent`
+
+    A coordinator topology: the session's primary thread orchestrates work by spawning session threads, each running an agent drawn from the `agents` roster.
 
   - `Optional<String> name`
 
@@ -50265,6 +52427,26 @@ Update Agent
 
       - `FAST("fast")`
 
+  - `Optional<BetaManagedAgentsMultiagent> multiagent`
+
+    Resolved coordinator topology with a concrete agent roster.
+
+    - `List<BetaManagedAgentsAgentReference> agents`
+
+      Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+      - `String id`
+
+      - `Type type`
+
+        - `AGENT("agent")`
+
+      - `long version`
+
+    - `Type type`
+
+      - `COORDINATOR("coordinator")`
+
   - `String name`
 
   - `List<Skill> skills`
@@ -50564,6 +52746,8 @@ Archive Agent
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
 ### Returns
 
 - `class BetaManagedAgentsAgent:`
@@ -50647,6 +52831,26 @@ Archive Agent
       - `STANDARD("standard")`
 
       - `FAST("fast")`
+
+  - `Optional<BetaManagedAgentsMultiagent> multiagent`
+
+    Resolved coordinator topology with a concrete agent roster.
+
+    - `List<BetaManagedAgentsAgentReference> agents`
+
+      Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+      - `String id`
+
+      - `Type type`
+
+        - `AGENT("agent")`
+
+      - `long version`
+
+    - `Type type`
+
+      - `COORDINATOR("coordinator")`
 
   - `String name`
 
@@ -50965,6 +53169,26 @@ public final class Main {
 
       - `FAST("fast")`
 
+  - `Optional<BetaManagedAgentsMultiagent> multiagent`
+
+    Resolved coordinator topology with a concrete agent roster.
+
+    - `List<BetaManagedAgentsAgentReference> agents`
+
+      Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+      - `String id`
+
+      - `Type type`
+
+        - `AGENT("agent")`
+
+      - `long version`
+
+    - `Type type`
+
+      - `COORDINATOR("coordinator")`
+
   - `String name`
 
   - `List<Skill> skills`
@@ -51174,6 +53398,20 @@ public final class Main {
   - `long version`
 
     The agent's current version. Starts at 1 and increments when the agent is modified.
+
+### Beta Managed Agents Agent Reference
+
+- `class BetaManagedAgentsAgentReference:`
+
+  A resolved agent reference with a concrete version.
+
+  - `String id`
+
+  - `Type type`
+
+    - `AGENT("agent")`
+
+  - `long version`
 
 ### Beta Managed Agents Agent Tool Config
 
@@ -52095,6 +54333,78 @@ public final class Main {
 
     - `FAST("fast")`
 
+### Beta Managed Agents Multiagent Coordinator
+
+- `class BetaManagedAgentsMultiagentCoordinator:`
+
+  Resolved coordinator topology with a concrete agent roster.
+
+  - `List<BetaManagedAgentsAgentReference> agents`
+
+    Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+    - `String id`
+
+    - `Type type`
+
+      - `AGENT("agent")`
+
+    - `long version`
+
+  - `Type type`
+
+    - `COORDINATOR("coordinator")`
+
+### Beta Managed Agents Multiagent Coordinator Params
+
+- `class BetaManagedAgentsMultiagentCoordinatorParams:`
+
+  A coordinator topology: the session's primary thread orchestrates work by spawning session threads, each running an agent drawn from the `agents` roster.
+
+  - `List<BetaManagedAgentsMultiagentRosterEntryParams> agents`
+
+    Agents the coordinator may spawn as session threads. 1–20 entries. Each entry is an agent ID string, a versioned `{"type":"agent","id","version"}` reference, or `{"type":"self"}` to allow recursive self-invocation. Entries must reference distinct agents (after resolving `self` and string forms); at most one `self`. Referenced agents must exist, must not be archived, and must not themselves have `multiagent` set (depth limit 1).
+
+    - `String`
+
+    - `class BetaManagedAgentsAgentParams:`
+
+      Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
+
+      - `String id`
+
+        The `agent` ID.
+
+      - `Type type`
+
+        - `AGENT("agent")`
+
+      - `Optional<Long> version`
+
+        The specific `agent` version to use. Omit to use the latest version. Must be at least 1 if specified.
+
+    - `class BetaManagedAgentsMultiagentSelfParams:`
+
+      Sentinel roster entry meaning "the agent that owns this configuration". Resolved server-side to a concrete agent reference.
+
+      - `Type type`
+
+        - `SELF("self")`
+
+  - `Type type`
+
+    - `COORDINATOR("coordinator")`
+
+### Beta Managed Agents Multiagent Self Params
+
+- `class BetaManagedAgentsMultiagentSelfParams:`
+
+  Sentinel roster entry meaning "the agent that owns this configuration". Resolved server-side to a concrete agent reference.
+
+  - `Type type`
+
+    - `SELF("self")`
+
 ### Beta Managed Agents Skill Params
 
 - `class BetaManagedAgentsSkillParams: A class that can be one of several variants.union`
@@ -52225,6 +54535,8 @@ List Agent Versions
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
 ### Returns
 
 - `class BetaManagedAgentsAgent:`
@@ -52308,6 +54620,26 @@ List Agent Versions
       - `STANDARD("standard")`
 
       - `FAST("fast")`
+
+  - `Optional<BetaManagedAgentsMultiagent> multiagent`
+
+    Resolved coordinator topology with a concrete agent roster.
+
+    - `List<BetaManagedAgentsAgentReference> agents`
+
+      Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+      - `String id`
+
+      - `Type type`
+
+        - `AGENT("agent")`
+
+      - `long version`
+
+    - `Type type`
+
+      - `COORDINATOR("coordinator")`
 
   - `String name`
 
@@ -52604,6 +54936,8 @@ Create a new environment with the specified configuration.
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
   - `String name`
 
     Human-readable name for the environment
@@ -52841,6 +55175,8 @@ List environments with pagination support.
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
 ### Returns
 
 - `class BetaEnvironment:`
@@ -53046,6 +55382,8 @@ Retrieve a specific environment by ID.
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
 ### Returns
 
 - `class BetaEnvironment:`
@@ -53250,6 +55588,8 @@ Update an existing environment's configuration.
     - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
 
   - `Optional<BetaCloudConfigParams> config`
 
@@ -53475,6 +55815,8 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
 ### Returns
 
 - `class BetaEnvironmentDeleteResponse:`
@@ -53575,6 +55917,8 @@ Archive an environment by ID. Archived environments cannot be used to create new
     - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
 
 ### Returns
 
@@ -54228,6 +56572,8 @@ Create Session
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
   - `Agent agent`
 
     Agent identifier. Accepts the `agent` ID string, which pins the latest version for the session, or an `agent` object with both id and version specified.
@@ -54433,6 +56779,290 @@ Create Session
         - `STANDARD("standard")`
 
         - `FAST("fast")`
+
+    - `Optional<BetaManagedAgentsSessionMultiagentCoordinator> multiagent`
+
+      Resolved coordinator topology with full agent definitions for each roster member.
+
+      - `List<BetaManagedAgentsSessionThreadAgent> agents`
+
+        Full `agent` definitions the coordinator may spawn as session threads.
+
+        - `String id`
+
+        - `Optional<String> description`
+
+        - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
+
+          - `String name`
+
+          - `Type type`
+
+            - `URL("url")`
+
+          - `String url`
+
+        - `BetaManagedAgentsModelConfig model`
+
+          Model identifier and configuration.
+
+          - `BetaManagedAgentsModel id`
+
+            The model that will power your agent.
+
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
+
+              Frontier intelligence for long-running agents and coding
+
+            - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+              Most intelligent model for building agents and coding
+
+            - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+              Best combination of speed and intelligence
+
+            - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+              Fastest model with near-frontier intelligence
+
+            - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+              Fastest model with near-frontier intelligence
+
+            - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+              High-performance model for agents and coding
+
+            - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+              High-performance model for agents and coding
+
+          - `Optional<Speed> speed`
+
+            Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+            - `STANDARD("standard")`
+
+            - `FAST("fast")`
+
+        - `String name`
+
+        - `List<Skill> skills`
+
+          - `class BetaManagedAgentsAnthropicSkill:`
+
+            A resolved Anthropic-managed skill.
+
+            - `String skillId`
+
+            - `Type type`
+
+              - `ANTHROPIC("anthropic")`
+
+            - `String version`
+
+          - `class BetaManagedAgentsCustomSkill:`
+
+            A resolved user-created custom skill.
+
+            - `String skillId`
+
+            - `Type type`
+
+              - `CUSTOM("custom")`
+
+            - `String version`
+
+        - `Optional<String> system`
+
+        - `List<Tool> tools`
+
+          - `class BetaManagedAgentsAgentToolset20260401:`
+
+            - `List<BetaManagedAgentsAgentToolConfig> configs`
+
+              - `boolean enabled`
+
+              - `Name name`
+
+                Built-in agent tool identifier.
+
+                - `BASH("bash")`
+
+                - `EDIT("edit")`
+
+                - `READ("read")`
+
+                - `WRITE("write")`
+
+                - `GLOB("glob")`
+
+                - `GREP("grep")`
+
+                - `WEB_FETCH("web_fetch")`
+
+                - `WEB_SEARCH("web_search")`
+
+              - `PermissionPolicy permissionPolicy`
+
+                Permission policy for tool execution.
+
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                  - `Type type`
+
+                    - `ALWAYS_ALLOW("always_allow")`
+
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                  Tool calls require user confirmation before execution.
+
+                  - `Type type`
+
+                    - `ALWAYS_ASK("always_ask")`
+
+            - `BetaManagedAgentsAgentToolsetDefaultConfig defaultConfig`
+
+              Resolved default configuration for agent tools.
+
+              - `boolean enabled`
+
+              - `PermissionPolicy permissionPolicy`
+
+                Permission policy for tool execution.
+
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                  - `Type type`
+
+                    - `ALWAYS_ALLOW("always_allow")`
+
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                  Tool calls require user confirmation before execution.
+
+                  - `Type type`
+
+                    - `ALWAYS_ASK("always_ask")`
+
+            - `Type type`
+
+              - `AGENT_TOOLSET_20260401("agent_toolset_20260401")`
+
+          - `class BetaManagedAgentsMcpToolset:`
+
+            - `List<BetaManagedAgentsMcpToolConfig> configs`
+
+              - `boolean enabled`
+
+              - `String name`
+
+              - `PermissionPolicy permissionPolicy`
+
+                Permission policy for tool execution.
+
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                  - `Type type`
+
+                    - `ALWAYS_ALLOW("always_allow")`
+
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                  Tool calls require user confirmation before execution.
+
+                  - `Type type`
+
+                    - `ALWAYS_ASK("always_ask")`
+
+            - `BetaManagedAgentsMcpToolsetDefaultConfig defaultConfig`
+
+              Resolved default configuration for all tools from an MCP server.
+
+              - `boolean enabled`
+
+              - `PermissionPolicy permissionPolicy`
+
+                Permission policy for tool execution.
+
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                  - `Type type`
+
+                    - `ALWAYS_ALLOW("always_allow")`
+
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                  Tool calls require user confirmation before execution.
+
+                  - `Type type`
+
+                    - `ALWAYS_ASK("always_ask")`
+
+            - `String mcpServerName`
+
+            - `Type type`
+
+              - `MCP_TOOLSET("mcp_toolset")`
+
+          - `class BetaManagedAgentsCustomTool:`
+
+            A custom tool as returned in API responses.
+
+            - `String description`
+
+            - `BetaManagedAgentsCustomToolInputSchema inputSchema`
+
+              JSON Schema for custom tool input parameters.
+
+              - `Optional<Properties> properties`
+
+                JSON Schema properties defining the tool's input parameters.
+
+              - `Optional<List<String>> required`
+
+                List of required property names.
+
+              - `Optional<Type> type`
+
+                Must be 'object' for tool input schemas.
+
+                - `OBJECT("object")`
+
+            - `String name`
+
+            - `Type type`
+
+              - `CUSTOM("custom")`
+
+        - `Type type`
+
+          - `AGENT("agent")`
+
+        - `long version`
+
+      - `Type type`
+
+        - `COORDINATOR("coordinator")`
 
     - `String name`
 
@@ -54649,6 +57279,38 @@ Create Session
   - `String environmentId`
 
   - `Metadata metadata`
+
+  - `List<BetaManagedAgentsOutcomeEvaluationResource> outcomeEvaluations`
+
+    Per-outcome evaluation state. One entry per define_outcome event sent to the session.
+
+    - `Optional<LocalDateTime> completedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String description`
+
+      What the agent should produce.
+
+    - `Optional<String> explanation`
+
+      Grader's verdict text from the most recent evaluation. For satisfied, explains why criteria are met; for needs_revision (intermediate), what's missing; for failed, why unrecoverable.
+
+    - `long iteration`
+
+      0-indexed revision cycle the outcome is currently on.
+
+    - `String outcomeId`
+
+      Server-generated outc_ ID for this outcome.
+
+    - `String result`
+
+      Current evaluation state. 'pending' before the agent begins work; 'running' while producing or revising; 'evaluating' while the grader scores; 'satisfied'/'max_iterations_reached'/'failed'/'interrupted' are terminal.
+
+    - `Type type`
+
+      - `OUTCOME_EVALUATION("outcome_evaluation")`
 
   - `List<BetaManagedAgentsSessionResource> resources`
 
@@ -54901,6 +57563,18 @@ List Sessions
 
     Opaque pagination cursor from a previous response's next_page.
 
+  - `Optional<List<Status>> statuses`
+
+    Filter by session status. Repeat the parameter to match any of multiple statuses.
+
+    - `RESCHEDULING("rescheduling")`
+
+    - `RUNNING("running")`
+
+    - `IDLE("idle")`
+
+    - `TERMINATED("terminated")`
+
   - `Optional<List<AnthropicBeta>> betas`
 
     Optional header to specify the beta version(s) you want to use.
@@ -54950,6 +57624,8 @@ List Sessions
     - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
 
 ### Returns
 
@@ -55030,6 +57706,290 @@ List Sessions
         - `STANDARD("standard")`
 
         - `FAST("fast")`
+
+    - `Optional<BetaManagedAgentsSessionMultiagentCoordinator> multiagent`
+
+      Resolved coordinator topology with full agent definitions for each roster member.
+
+      - `List<BetaManagedAgentsSessionThreadAgent> agents`
+
+        Full `agent` definitions the coordinator may spawn as session threads.
+
+        - `String id`
+
+        - `Optional<String> description`
+
+        - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
+
+          - `String name`
+
+          - `Type type`
+
+            - `URL("url")`
+
+          - `String url`
+
+        - `BetaManagedAgentsModelConfig model`
+
+          Model identifier and configuration.
+
+          - `BetaManagedAgentsModel id`
+
+            The model that will power your agent.
+
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
+
+              Frontier intelligence for long-running agents and coding
+
+            - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+              Most intelligent model for building agents and coding
+
+            - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+              Best combination of speed and intelligence
+
+            - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+              Fastest model with near-frontier intelligence
+
+            - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+              Fastest model with near-frontier intelligence
+
+            - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+              High-performance model for agents and coding
+
+            - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+              High-performance model for agents and coding
+
+          - `Optional<Speed> speed`
+
+            Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+            - `STANDARD("standard")`
+
+            - `FAST("fast")`
+
+        - `String name`
+
+        - `List<Skill> skills`
+
+          - `class BetaManagedAgentsAnthropicSkill:`
+
+            A resolved Anthropic-managed skill.
+
+            - `String skillId`
+
+            - `Type type`
+
+              - `ANTHROPIC("anthropic")`
+
+            - `String version`
+
+          - `class BetaManagedAgentsCustomSkill:`
+
+            A resolved user-created custom skill.
+
+            - `String skillId`
+
+            - `Type type`
+
+              - `CUSTOM("custom")`
+
+            - `String version`
+
+        - `Optional<String> system`
+
+        - `List<Tool> tools`
+
+          - `class BetaManagedAgentsAgentToolset20260401:`
+
+            - `List<BetaManagedAgentsAgentToolConfig> configs`
+
+              - `boolean enabled`
+
+              - `Name name`
+
+                Built-in agent tool identifier.
+
+                - `BASH("bash")`
+
+                - `EDIT("edit")`
+
+                - `READ("read")`
+
+                - `WRITE("write")`
+
+                - `GLOB("glob")`
+
+                - `GREP("grep")`
+
+                - `WEB_FETCH("web_fetch")`
+
+                - `WEB_SEARCH("web_search")`
+
+              - `PermissionPolicy permissionPolicy`
+
+                Permission policy for tool execution.
+
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                  - `Type type`
+
+                    - `ALWAYS_ALLOW("always_allow")`
+
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                  Tool calls require user confirmation before execution.
+
+                  - `Type type`
+
+                    - `ALWAYS_ASK("always_ask")`
+
+            - `BetaManagedAgentsAgentToolsetDefaultConfig defaultConfig`
+
+              Resolved default configuration for agent tools.
+
+              - `boolean enabled`
+
+              - `PermissionPolicy permissionPolicy`
+
+                Permission policy for tool execution.
+
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                  - `Type type`
+
+                    - `ALWAYS_ALLOW("always_allow")`
+
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                  Tool calls require user confirmation before execution.
+
+                  - `Type type`
+
+                    - `ALWAYS_ASK("always_ask")`
+
+            - `Type type`
+
+              - `AGENT_TOOLSET_20260401("agent_toolset_20260401")`
+
+          - `class BetaManagedAgentsMcpToolset:`
+
+            - `List<BetaManagedAgentsMcpToolConfig> configs`
+
+              - `boolean enabled`
+
+              - `String name`
+
+              - `PermissionPolicy permissionPolicy`
+
+                Permission policy for tool execution.
+
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                  - `Type type`
+
+                    - `ALWAYS_ALLOW("always_allow")`
+
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                  Tool calls require user confirmation before execution.
+
+                  - `Type type`
+
+                    - `ALWAYS_ASK("always_ask")`
+
+            - `BetaManagedAgentsMcpToolsetDefaultConfig defaultConfig`
+
+              Resolved default configuration for all tools from an MCP server.
+
+              - `boolean enabled`
+
+              - `PermissionPolicy permissionPolicy`
+
+                Permission policy for tool execution.
+
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                  - `Type type`
+
+                    - `ALWAYS_ALLOW("always_allow")`
+
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                  Tool calls require user confirmation before execution.
+
+                  - `Type type`
+
+                    - `ALWAYS_ASK("always_ask")`
+
+            - `String mcpServerName`
+
+            - `Type type`
+
+              - `MCP_TOOLSET("mcp_toolset")`
+
+          - `class BetaManagedAgentsCustomTool:`
+
+            A custom tool as returned in API responses.
+
+            - `String description`
+
+            - `BetaManagedAgentsCustomToolInputSchema inputSchema`
+
+              JSON Schema for custom tool input parameters.
+
+              - `Optional<Properties> properties`
+
+                JSON Schema properties defining the tool's input parameters.
+
+              - `Optional<List<String>> required`
+
+                List of required property names.
+
+              - `Optional<Type> type`
+
+                Must be 'object' for tool input schemas.
+
+                - `OBJECT("object")`
+
+            - `String name`
+
+            - `Type type`
+
+              - `CUSTOM("custom")`
+
+        - `Type type`
+
+          - `AGENT("agent")`
+
+        - `long version`
+
+      - `Type type`
+
+        - `COORDINATOR("coordinator")`
 
     - `String name`
 
@@ -55246,6 +58206,38 @@ List Sessions
   - `String environmentId`
 
   - `Metadata metadata`
+
+  - `List<BetaManagedAgentsOutcomeEvaluationResource> outcomeEvaluations`
+
+    Per-outcome evaluation state. One entry per define_outcome event sent to the session.
+
+    - `Optional<LocalDateTime> completedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String description`
+
+      What the agent should produce.
+
+    - `Optional<String> explanation`
+
+      Grader's verdict text from the most recent evaluation. For satisfied, explains why criteria are met; for needs_revision (intermediate), what's missing; for failed, why unrecoverable.
+
+    - `long iteration`
+
+      0-indexed revision cycle the outcome is currently on.
+
+    - `String outcomeId`
+
+      Server-generated outc_ ID for this outcome.
+
+    - `String result`
+
+      Current evaluation state. 'pending' before the agent begins work; 'running' while producing or revising; 'evaluating' while the grader scores; 'satisfied'/'max_iterations_reached'/'failed'/'interrupted' are terminal.
+
+    - `Type type`
+
+      - `OUTCOME_EVALUATION("outcome_evaluation")`
 
   - `List<BetaManagedAgentsSessionResource> resources`
 
@@ -55498,6 +58490,8 @@ Get Session
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
 ### Returns
 
 - `class BetaManagedAgentsSession:`
@@ -55577,6 +58571,290 @@ Get Session
         - `STANDARD("standard")`
 
         - `FAST("fast")`
+
+    - `Optional<BetaManagedAgentsSessionMultiagentCoordinator> multiagent`
+
+      Resolved coordinator topology with full agent definitions for each roster member.
+
+      - `List<BetaManagedAgentsSessionThreadAgent> agents`
+
+        Full `agent` definitions the coordinator may spawn as session threads.
+
+        - `String id`
+
+        - `Optional<String> description`
+
+        - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
+
+          - `String name`
+
+          - `Type type`
+
+            - `URL("url")`
+
+          - `String url`
+
+        - `BetaManagedAgentsModelConfig model`
+
+          Model identifier and configuration.
+
+          - `BetaManagedAgentsModel id`
+
+            The model that will power your agent.
+
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
+
+              Frontier intelligence for long-running agents and coding
+
+            - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+              Most intelligent model for building agents and coding
+
+            - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+              Best combination of speed and intelligence
+
+            - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+              Fastest model with near-frontier intelligence
+
+            - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+              Fastest model with near-frontier intelligence
+
+            - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+              High-performance model for agents and coding
+
+            - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+              High-performance model for agents and coding
+
+          - `Optional<Speed> speed`
+
+            Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+            - `STANDARD("standard")`
+
+            - `FAST("fast")`
+
+        - `String name`
+
+        - `List<Skill> skills`
+
+          - `class BetaManagedAgentsAnthropicSkill:`
+
+            A resolved Anthropic-managed skill.
+
+            - `String skillId`
+
+            - `Type type`
+
+              - `ANTHROPIC("anthropic")`
+
+            - `String version`
+
+          - `class BetaManagedAgentsCustomSkill:`
+
+            A resolved user-created custom skill.
+
+            - `String skillId`
+
+            - `Type type`
+
+              - `CUSTOM("custom")`
+
+            - `String version`
+
+        - `Optional<String> system`
+
+        - `List<Tool> tools`
+
+          - `class BetaManagedAgentsAgentToolset20260401:`
+
+            - `List<BetaManagedAgentsAgentToolConfig> configs`
+
+              - `boolean enabled`
+
+              - `Name name`
+
+                Built-in agent tool identifier.
+
+                - `BASH("bash")`
+
+                - `EDIT("edit")`
+
+                - `READ("read")`
+
+                - `WRITE("write")`
+
+                - `GLOB("glob")`
+
+                - `GREP("grep")`
+
+                - `WEB_FETCH("web_fetch")`
+
+                - `WEB_SEARCH("web_search")`
+
+              - `PermissionPolicy permissionPolicy`
+
+                Permission policy for tool execution.
+
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                  - `Type type`
+
+                    - `ALWAYS_ALLOW("always_allow")`
+
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                  Tool calls require user confirmation before execution.
+
+                  - `Type type`
+
+                    - `ALWAYS_ASK("always_ask")`
+
+            - `BetaManagedAgentsAgentToolsetDefaultConfig defaultConfig`
+
+              Resolved default configuration for agent tools.
+
+              - `boolean enabled`
+
+              - `PermissionPolicy permissionPolicy`
+
+                Permission policy for tool execution.
+
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                  - `Type type`
+
+                    - `ALWAYS_ALLOW("always_allow")`
+
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                  Tool calls require user confirmation before execution.
+
+                  - `Type type`
+
+                    - `ALWAYS_ASK("always_ask")`
+
+            - `Type type`
+
+              - `AGENT_TOOLSET_20260401("agent_toolset_20260401")`
+
+          - `class BetaManagedAgentsMcpToolset:`
+
+            - `List<BetaManagedAgentsMcpToolConfig> configs`
+
+              - `boolean enabled`
+
+              - `String name`
+
+              - `PermissionPolicy permissionPolicy`
+
+                Permission policy for tool execution.
+
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                  - `Type type`
+
+                    - `ALWAYS_ALLOW("always_allow")`
+
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                  Tool calls require user confirmation before execution.
+
+                  - `Type type`
+
+                    - `ALWAYS_ASK("always_ask")`
+
+            - `BetaManagedAgentsMcpToolsetDefaultConfig defaultConfig`
+
+              Resolved default configuration for all tools from an MCP server.
+
+              - `boolean enabled`
+
+              - `PermissionPolicy permissionPolicy`
+
+                Permission policy for tool execution.
+
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                  - `Type type`
+
+                    - `ALWAYS_ALLOW("always_allow")`
+
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                  Tool calls require user confirmation before execution.
+
+                  - `Type type`
+
+                    - `ALWAYS_ASK("always_ask")`
+
+            - `String mcpServerName`
+
+            - `Type type`
+
+              - `MCP_TOOLSET("mcp_toolset")`
+
+          - `class BetaManagedAgentsCustomTool:`
+
+            A custom tool as returned in API responses.
+
+            - `String description`
+
+            - `BetaManagedAgentsCustomToolInputSchema inputSchema`
+
+              JSON Schema for custom tool input parameters.
+
+              - `Optional<Properties> properties`
+
+                JSON Schema properties defining the tool's input parameters.
+
+              - `Optional<List<String>> required`
+
+                List of required property names.
+
+              - `Optional<Type> type`
+
+                Must be 'object' for tool input schemas.
+
+                - `OBJECT("object")`
+
+            - `String name`
+
+            - `Type type`
+
+              - `CUSTOM("custom")`
+
+        - `Type type`
+
+          - `AGENT("agent")`
+
+        - `long version`
+
+      - `Type type`
+
+        - `COORDINATOR("coordinator")`
 
     - `String name`
 
@@ -55793,6 +59071,38 @@ Get Session
   - `String environmentId`
 
   - `Metadata metadata`
+
+  - `List<BetaManagedAgentsOutcomeEvaluationResource> outcomeEvaluations`
+
+    Per-outcome evaluation state. One entry per define_outcome event sent to the session.
+
+    - `Optional<LocalDateTime> completedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String description`
+
+      What the agent should produce.
+
+    - `Optional<String> explanation`
+
+      Grader's verdict text from the most recent evaluation. For satisfied, explains why criteria are met; for needs_revision (intermediate), what's missing; for failed, why unrecoverable.
+
+    - `long iteration`
+
+      0-indexed revision cycle the outcome is currently on.
+
+    - `String outcomeId`
+
+      Server-generated outc_ ID for this outcome.
+
+    - `String result`
+
+      Current evaluation state. 'pending' before the agent begins work; 'running' while producing or revising; 'evaluating' while the grader scores; 'satisfied'/'max_iterations_reached'/'failed'/'interrupted' are terminal.
+
+    - `Type type`
+
+      - `OUTCOME_EVALUATION("outcome_evaluation")`
 
   - `List<BetaManagedAgentsSessionResource> resources`
 
@@ -56045,6 +59355,8 @@ Update Session
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
   - `Optional<Metadata> metadata`
 
     Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve.
@@ -56136,6 +59448,290 @@ Update Session
         - `STANDARD("standard")`
 
         - `FAST("fast")`
+
+    - `Optional<BetaManagedAgentsSessionMultiagentCoordinator> multiagent`
+
+      Resolved coordinator topology with full agent definitions for each roster member.
+
+      - `List<BetaManagedAgentsSessionThreadAgent> agents`
+
+        Full `agent` definitions the coordinator may spawn as session threads.
+
+        - `String id`
+
+        - `Optional<String> description`
+
+        - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
+
+          - `String name`
+
+          - `Type type`
+
+            - `URL("url")`
+
+          - `String url`
+
+        - `BetaManagedAgentsModelConfig model`
+
+          Model identifier and configuration.
+
+          - `BetaManagedAgentsModel id`
+
+            The model that will power your agent.
+
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
+
+              Frontier intelligence for long-running agents and coding
+
+            - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+              Most intelligent model for building agents and coding
+
+            - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+              Best combination of speed and intelligence
+
+            - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+              Fastest model with near-frontier intelligence
+
+            - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+              Fastest model with near-frontier intelligence
+
+            - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+              High-performance model for agents and coding
+
+            - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+              High-performance model for agents and coding
+
+          - `Optional<Speed> speed`
+
+            Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+            - `STANDARD("standard")`
+
+            - `FAST("fast")`
+
+        - `String name`
+
+        - `List<Skill> skills`
+
+          - `class BetaManagedAgentsAnthropicSkill:`
+
+            A resolved Anthropic-managed skill.
+
+            - `String skillId`
+
+            - `Type type`
+
+              - `ANTHROPIC("anthropic")`
+
+            - `String version`
+
+          - `class BetaManagedAgentsCustomSkill:`
+
+            A resolved user-created custom skill.
+
+            - `String skillId`
+
+            - `Type type`
+
+              - `CUSTOM("custom")`
+
+            - `String version`
+
+        - `Optional<String> system`
+
+        - `List<Tool> tools`
+
+          - `class BetaManagedAgentsAgentToolset20260401:`
+
+            - `List<BetaManagedAgentsAgentToolConfig> configs`
+
+              - `boolean enabled`
+
+              - `Name name`
+
+                Built-in agent tool identifier.
+
+                - `BASH("bash")`
+
+                - `EDIT("edit")`
+
+                - `READ("read")`
+
+                - `WRITE("write")`
+
+                - `GLOB("glob")`
+
+                - `GREP("grep")`
+
+                - `WEB_FETCH("web_fetch")`
+
+                - `WEB_SEARCH("web_search")`
+
+              - `PermissionPolicy permissionPolicy`
+
+                Permission policy for tool execution.
+
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                  - `Type type`
+
+                    - `ALWAYS_ALLOW("always_allow")`
+
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                  Tool calls require user confirmation before execution.
+
+                  - `Type type`
+
+                    - `ALWAYS_ASK("always_ask")`
+
+            - `BetaManagedAgentsAgentToolsetDefaultConfig defaultConfig`
+
+              Resolved default configuration for agent tools.
+
+              - `boolean enabled`
+
+              - `PermissionPolicy permissionPolicy`
+
+                Permission policy for tool execution.
+
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                  - `Type type`
+
+                    - `ALWAYS_ALLOW("always_allow")`
+
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                  Tool calls require user confirmation before execution.
+
+                  - `Type type`
+
+                    - `ALWAYS_ASK("always_ask")`
+
+            - `Type type`
+
+              - `AGENT_TOOLSET_20260401("agent_toolset_20260401")`
+
+          - `class BetaManagedAgentsMcpToolset:`
+
+            - `List<BetaManagedAgentsMcpToolConfig> configs`
+
+              - `boolean enabled`
+
+              - `String name`
+
+              - `PermissionPolicy permissionPolicy`
+
+                Permission policy for tool execution.
+
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                  - `Type type`
+
+                    - `ALWAYS_ALLOW("always_allow")`
+
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                  Tool calls require user confirmation before execution.
+
+                  - `Type type`
+
+                    - `ALWAYS_ASK("always_ask")`
+
+            - `BetaManagedAgentsMcpToolsetDefaultConfig defaultConfig`
+
+              Resolved default configuration for all tools from an MCP server.
+
+              - `boolean enabled`
+
+              - `PermissionPolicy permissionPolicy`
+
+                Permission policy for tool execution.
+
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                  - `Type type`
+
+                    - `ALWAYS_ALLOW("always_allow")`
+
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                  Tool calls require user confirmation before execution.
+
+                  - `Type type`
+
+                    - `ALWAYS_ASK("always_ask")`
+
+            - `String mcpServerName`
+
+            - `Type type`
+
+              - `MCP_TOOLSET("mcp_toolset")`
+
+          - `class BetaManagedAgentsCustomTool:`
+
+            A custom tool as returned in API responses.
+
+            - `String description`
+
+            - `BetaManagedAgentsCustomToolInputSchema inputSchema`
+
+              JSON Schema for custom tool input parameters.
+
+              - `Optional<Properties> properties`
+
+                JSON Schema properties defining the tool's input parameters.
+
+              - `Optional<List<String>> required`
+
+                List of required property names.
+
+              - `Optional<Type> type`
+
+                Must be 'object' for tool input schemas.
+
+                - `OBJECT("object")`
+
+            - `String name`
+
+            - `Type type`
+
+              - `CUSTOM("custom")`
+
+        - `Type type`
+
+          - `AGENT("agent")`
+
+        - `long version`
+
+      - `Type type`
+
+        - `COORDINATOR("coordinator")`
 
     - `String name`
 
@@ -56352,6 +59948,38 @@ Update Session
   - `String environmentId`
 
   - `Metadata metadata`
+
+  - `List<BetaManagedAgentsOutcomeEvaluationResource> outcomeEvaluations`
+
+    Per-outcome evaluation state. One entry per define_outcome event sent to the session.
+
+    - `Optional<LocalDateTime> completedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String description`
+
+      What the agent should produce.
+
+    - `Optional<String> explanation`
+
+      Grader's verdict text from the most recent evaluation. For satisfied, explains why criteria are met; for needs_revision (intermediate), what's missing; for failed, why unrecoverable.
+
+    - `long iteration`
+
+      0-indexed revision cycle the outcome is currently on.
+
+    - `String outcomeId`
+
+      Server-generated outc_ ID for this outcome.
+
+    - `String result`
+
+      Current evaluation state. 'pending' before the agent begins work; 'running' while producing or revising; 'evaluating' while the grader scores; 'satisfied'/'max_iterations_reached'/'failed'/'interrupted' are terminal.
+
+    - `Type type`
+
+      - `OUTCOME_EVALUATION("outcome_evaluation")`
 
   - `List<BetaManagedAgentsSessionResource> resources`
 
@@ -56604,6 +60232,8 @@ Delete Session
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
 ### Returns
 
 - `class BetaManagedAgentsDeletedSession:`
@@ -56701,6 +60331,8 @@ Archive Session
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
 ### Returns
 
 - `class BetaManagedAgentsSession:`
@@ -56780,6 +60412,290 @@ Archive Session
         - `STANDARD("standard")`
 
         - `FAST("fast")`
+
+    - `Optional<BetaManagedAgentsSessionMultiagentCoordinator> multiagent`
+
+      Resolved coordinator topology with full agent definitions for each roster member.
+
+      - `List<BetaManagedAgentsSessionThreadAgent> agents`
+
+        Full `agent` definitions the coordinator may spawn as session threads.
+
+        - `String id`
+
+        - `Optional<String> description`
+
+        - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
+
+          - `String name`
+
+          - `Type type`
+
+            - `URL("url")`
+
+          - `String url`
+
+        - `BetaManagedAgentsModelConfig model`
+
+          Model identifier and configuration.
+
+          - `BetaManagedAgentsModel id`
+
+            The model that will power your agent.
+
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
+
+              Frontier intelligence for long-running agents and coding
+
+            - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+              Most intelligent model for building agents and coding
+
+            - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+              Best combination of speed and intelligence
+
+            - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+              Fastest model with near-frontier intelligence
+
+            - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+              Fastest model with near-frontier intelligence
+
+            - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+              High-performance model for agents and coding
+
+            - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+              High-performance model for agents and coding
+
+          - `Optional<Speed> speed`
+
+            Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+            - `STANDARD("standard")`
+
+            - `FAST("fast")`
+
+        - `String name`
+
+        - `List<Skill> skills`
+
+          - `class BetaManagedAgentsAnthropicSkill:`
+
+            A resolved Anthropic-managed skill.
+
+            - `String skillId`
+
+            - `Type type`
+
+              - `ANTHROPIC("anthropic")`
+
+            - `String version`
+
+          - `class BetaManagedAgentsCustomSkill:`
+
+            A resolved user-created custom skill.
+
+            - `String skillId`
+
+            - `Type type`
+
+              - `CUSTOM("custom")`
+
+            - `String version`
+
+        - `Optional<String> system`
+
+        - `List<Tool> tools`
+
+          - `class BetaManagedAgentsAgentToolset20260401:`
+
+            - `List<BetaManagedAgentsAgentToolConfig> configs`
+
+              - `boolean enabled`
+
+              - `Name name`
+
+                Built-in agent tool identifier.
+
+                - `BASH("bash")`
+
+                - `EDIT("edit")`
+
+                - `READ("read")`
+
+                - `WRITE("write")`
+
+                - `GLOB("glob")`
+
+                - `GREP("grep")`
+
+                - `WEB_FETCH("web_fetch")`
+
+                - `WEB_SEARCH("web_search")`
+
+              - `PermissionPolicy permissionPolicy`
+
+                Permission policy for tool execution.
+
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                  - `Type type`
+
+                    - `ALWAYS_ALLOW("always_allow")`
+
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                  Tool calls require user confirmation before execution.
+
+                  - `Type type`
+
+                    - `ALWAYS_ASK("always_ask")`
+
+            - `BetaManagedAgentsAgentToolsetDefaultConfig defaultConfig`
+
+              Resolved default configuration for agent tools.
+
+              - `boolean enabled`
+
+              - `PermissionPolicy permissionPolicy`
+
+                Permission policy for tool execution.
+
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                  - `Type type`
+
+                    - `ALWAYS_ALLOW("always_allow")`
+
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                  Tool calls require user confirmation before execution.
+
+                  - `Type type`
+
+                    - `ALWAYS_ASK("always_ask")`
+
+            - `Type type`
+
+              - `AGENT_TOOLSET_20260401("agent_toolset_20260401")`
+
+          - `class BetaManagedAgentsMcpToolset:`
+
+            - `List<BetaManagedAgentsMcpToolConfig> configs`
+
+              - `boolean enabled`
+
+              - `String name`
+
+              - `PermissionPolicy permissionPolicy`
+
+                Permission policy for tool execution.
+
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                  - `Type type`
+
+                    - `ALWAYS_ALLOW("always_allow")`
+
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                  Tool calls require user confirmation before execution.
+
+                  - `Type type`
+
+                    - `ALWAYS_ASK("always_ask")`
+
+            - `BetaManagedAgentsMcpToolsetDefaultConfig defaultConfig`
+
+              Resolved default configuration for all tools from an MCP server.
+
+              - `boolean enabled`
+
+              - `PermissionPolicy permissionPolicy`
+
+                Permission policy for tool execution.
+
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                  - `Type type`
+
+                    - `ALWAYS_ALLOW("always_allow")`
+
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                  Tool calls require user confirmation before execution.
+
+                  - `Type type`
+
+                    - `ALWAYS_ASK("always_ask")`
+
+            - `String mcpServerName`
+
+            - `Type type`
+
+              - `MCP_TOOLSET("mcp_toolset")`
+
+          - `class BetaManagedAgentsCustomTool:`
+
+            A custom tool as returned in API responses.
+
+            - `String description`
+
+            - `BetaManagedAgentsCustomToolInputSchema inputSchema`
+
+              JSON Schema for custom tool input parameters.
+
+              - `Optional<Properties> properties`
+
+                JSON Schema properties defining the tool's input parameters.
+
+              - `Optional<List<String>> required`
+
+                List of required property names.
+
+              - `Optional<Type> type`
+
+                Must be 'object' for tool input schemas.
+
+                - `OBJECT("object")`
+
+            - `String name`
+
+            - `Type type`
+
+              - `CUSTOM("custom")`
+
+        - `Type type`
+
+          - `AGENT("agent")`
+
+        - `long version`
+
+      - `Type type`
+
+        - `COORDINATOR("coordinator")`
 
     - `String name`
 
@@ -56996,6 +60912,38 @@ Archive Session
   - `String environmentId`
 
   - `Metadata metadata`
+
+  - `List<BetaManagedAgentsOutcomeEvaluationResource> outcomeEvaluations`
+
+    Per-outcome evaluation state. One entry per define_outcome event sent to the session.
+
+    - `Optional<LocalDateTime> completedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String description`
+
+      What the agent should produce.
+
+    - `Optional<String> explanation`
+
+      Grader's verdict text from the most recent evaluation. For satisfied, explains why criteria are met; for needs_revision (intermediate), what's missing; for failed, why unrecoverable.
+
+    - `long iteration`
+
+      0-indexed revision cycle the outcome is currently on.
+
+    - `String outcomeId`
+
+      Server-generated outc_ ID for this outcome.
+
+    - `String result`
+
+      Current evaluation state. 'pending' before the agent begins work; 'running' while producing or revising; 'evaluating' while the grader scores; 'satisfied'/'max_iterations_reached'/'failed'/'interrupted' are terminal.
+
+    - `Type type`
+
+      - `OUTCOME_EVALUATION("outcome_evaluation")`
 
   - `List<BetaManagedAgentsSessionResource> resources`
 
@@ -57344,6 +61292,134 @@ public final class Main {
 
     Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
+### Beta Managed Agents Multiagent
+
+- `class BetaManagedAgentsMultiagent:`
+
+  Resolved coordinator topology with a concrete agent roster.
+
+  - `List<BetaManagedAgentsAgentReference> agents`
+
+    Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+    - `String id`
+
+    - `Type type`
+
+      - `AGENT("agent")`
+
+    - `long version`
+
+  - `Type type`
+
+    - `COORDINATOR("coordinator")`
+
+### Beta Managed Agents Multiagent Params
+
+- `class BetaManagedAgentsMultiagentParams:`
+
+  A coordinator topology: the session's primary thread orchestrates work by spawning session threads, each running an agent drawn from the `agents` roster.
+
+  - `List<BetaManagedAgentsMultiagentRosterEntryParams> agents`
+
+    Agents the coordinator may spawn as session threads. 1–20 entries. Each entry is an agent ID string, a versioned `{"type":"agent","id","version"}` reference, or `{"type":"self"}` to allow recursive self-invocation. Entries must reference distinct agents (after resolving `self` and string forms); at most one `self`. Referenced agents must exist, must not be archived, and must not themselves have `multiagent` set (depth limit 1).
+
+    - `String`
+
+    - `class BetaManagedAgentsAgentParams:`
+
+      Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
+
+      - `String id`
+
+        The `agent` ID.
+
+      - `Type type`
+
+        - `AGENT("agent")`
+
+      - `Optional<Long> version`
+
+        The specific `agent` version to use. Omit to use the latest version. Must be at least 1 if specified.
+
+    - `class BetaManagedAgentsMultiagentSelfParams:`
+
+      Sentinel roster entry meaning "the agent that owns this configuration". Resolved server-side to a concrete agent reference.
+
+      - `Type type`
+
+        - `SELF("self")`
+
+  - `Type type`
+
+    - `COORDINATOR("coordinator")`
+
+### Beta Managed Agents Multiagent Roster Entry Params
+
+- `class BetaManagedAgentsMultiagentRosterEntryParams: A class that can be one of several variants.union`
+
+  An entry in a multiagent roster: an agent ID string, a versioned agent reference, or `self`.
+
+  - `String`
+
+  - `class BetaManagedAgentsAgentParams:`
+
+    Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
+
+    - `String id`
+
+      The `agent` ID.
+
+    - `Type type`
+
+      - `AGENT("agent")`
+
+    - `Optional<Long> version`
+
+      The specific `agent` version to use. Omit to use the latest version. Must be at least 1 if specified.
+
+  - `class BetaManagedAgentsMultiagentSelfParams:`
+
+    Sentinel roster entry meaning "the agent that owns this configuration". Resolved server-side to a concrete agent reference.
+
+    - `Type type`
+
+      - `SELF("self")`
+
+### Beta Managed Agents Outcome Evaluation Resource
+
+- `class BetaManagedAgentsOutcomeEvaluationResource:`
+
+  Evaluation state for a single outcome defined via a define_outcome event.
+
+  - `Optional<LocalDateTime> completedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `String description`
+
+    What the agent should produce.
+
+  - `Optional<String> explanation`
+
+    Grader's verdict text from the most recent evaluation. For satisfied, explains why criteria are met; for needs_revision (intermediate), what's missing; for failed, why unrecoverable.
+
+  - `long iteration`
+
+    0-indexed revision cycle the outcome is currently on.
+
+  - `String outcomeId`
+
+    Server-generated outc_ ID for this outcome.
+
+  - `String result`
+
+    Current evaluation state. 'pending' before the agent begins work; 'running' while producing or revising; 'evaluating' while the grader scores; 'satisfied'/'max_iterations_reached'/'failed'/'interrupted' are terminal.
+
+  - `Type type`
+
+    - `OUTCOME_EVALUATION("outcome_evaluation")`
+
 ### Beta Managed Agents Session
 
 - `class BetaManagedAgentsSession:`
@@ -57355,6 +61431,1344 @@ public final class Main {
   - `BetaManagedAgentsSessionAgent agent`
 
     Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
+
+    - `String id`
+
+    - `Optional<String> description`
+
+    - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
+
+      - `String name`
+
+      - `Type type`
+
+        - `URL("url")`
+
+      - `String url`
+
+    - `BetaManagedAgentsModelConfig model`
+
+      Model identifier and configuration.
+
+      - `BetaManagedAgentsModel id`
+
+        The model that will power your agent.
+
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
+
+          Frontier intelligence for long-running agents and coding
+
+        - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+          Most intelligent model for building agents and coding
+
+        - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+          Best combination of speed and intelligence
+
+        - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+          Fastest model with near-frontier intelligence
+
+        - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+          Fastest model with near-frontier intelligence
+
+        - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+          High-performance model for agents and coding
+
+        - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+          High-performance model for agents and coding
+
+      - `Optional<Speed> speed`
+
+        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+        - `STANDARD("standard")`
+
+        - `FAST("fast")`
+
+    - `Optional<BetaManagedAgentsSessionMultiagentCoordinator> multiagent`
+
+      Resolved coordinator topology with full agent definitions for each roster member.
+
+      - `List<BetaManagedAgentsSessionThreadAgent> agents`
+
+        Full `agent` definitions the coordinator may spawn as session threads.
+
+        - `String id`
+
+        - `Optional<String> description`
+
+        - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
+
+          - `String name`
+
+          - `Type type`
+
+            - `URL("url")`
+
+          - `String url`
+
+        - `BetaManagedAgentsModelConfig model`
+
+          Model identifier and configuration.
+
+          - `BetaManagedAgentsModel id`
+
+            The model that will power your agent.
+
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
+
+              Frontier intelligence for long-running agents and coding
+
+            - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+              Most intelligent model for building agents and coding
+
+            - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+              Best combination of speed and intelligence
+
+            - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+              Fastest model with near-frontier intelligence
+
+            - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+              Fastest model with near-frontier intelligence
+
+            - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+              High-performance model for agents and coding
+
+            - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+              High-performance model for agents and coding
+
+          - `Optional<Speed> speed`
+
+            Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+            - `STANDARD("standard")`
+
+            - `FAST("fast")`
+
+        - `String name`
+
+        - `List<Skill> skills`
+
+          - `class BetaManagedAgentsAnthropicSkill:`
+
+            A resolved Anthropic-managed skill.
+
+            - `String skillId`
+
+            - `Type type`
+
+              - `ANTHROPIC("anthropic")`
+
+            - `String version`
+
+          - `class BetaManagedAgentsCustomSkill:`
+
+            A resolved user-created custom skill.
+
+            - `String skillId`
+
+            - `Type type`
+
+              - `CUSTOM("custom")`
+
+            - `String version`
+
+        - `Optional<String> system`
+
+        - `List<Tool> tools`
+
+          - `class BetaManagedAgentsAgentToolset20260401:`
+
+            - `List<BetaManagedAgentsAgentToolConfig> configs`
+
+              - `boolean enabled`
+
+              - `Name name`
+
+                Built-in agent tool identifier.
+
+                - `BASH("bash")`
+
+                - `EDIT("edit")`
+
+                - `READ("read")`
+
+                - `WRITE("write")`
+
+                - `GLOB("glob")`
+
+                - `GREP("grep")`
+
+                - `WEB_FETCH("web_fetch")`
+
+                - `WEB_SEARCH("web_search")`
+
+              - `PermissionPolicy permissionPolicy`
+
+                Permission policy for tool execution.
+
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                  - `Type type`
+
+                    - `ALWAYS_ALLOW("always_allow")`
+
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                  Tool calls require user confirmation before execution.
+
+                  - `Type type`
+
+                    - `ALWAYS_ASK("always_ask")`
+
+            - `BetaManagedAgentsAgentToolsetDefaultConfig defaultConfig`
+
+              Resolved default configuration for agent tools.
+
+              - `boolean enabled`
+
+              - `PermissionPolicy permissionPolicy`
+
+                Permission policy for tool execution.
+
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                  - `Type type`
+
+                    - `ALWAYS_ALLOW("always_allow")`
+
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                  Tool calls require user confirmation before execution.
+
+                  - `Type type`
+
+                    - `ALWAYS_ASK("always_ask")`
+
+            - `Type type`
+
+              - `AGENT_TOOLSET_20260401("agent_toolset_20260401")`
+
+          - `class BetaManagedAgentsMcpToolset:`
+
+            - `List<BetaManagedAgentsMcpToolConfig> configs`
+
+              - `boolean enabled`
+
+              - `String name`
+
+              - `PermissionPolicy permissionPolicy`
+
+                Permission policy for tool execution.
+
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                  - `Type type`
+
+                    - `ALWAYS_ALLOW("always_allow")`
+
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                  Tool calls require user confirmation before execution.
+
+                  - `Type type`
+
+                    - `ALWAYS_ASK("always_ask")`
+
+            - `BetaManagedAgentsMcpToolsetDefaultConfig defaultConfig`
+
+              Resolved default configuration for all tools from an MCP server.
+
+              - `boolean enabled`
+
+              - `PermissionPolicy permissionPolicy`
+
+                Permission policy for tool execution.
+
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                  - `Type type`
+
+                    - `ALWAYS_ALLOW("always_allow")`
+
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                  Tool calls require user confirmation before execution.
+
+                  - `Type type`
+
+                    - `ALWAYS_ASK("always_ask")`
+
+            - `String mcpServerName`
+
+            - `Type type`
+
+              - `MCP_TOOLSET("mcp_toolset")`
+
+          - `class BetaManagedAgentsCustomTool:`
+
+            A custom tool as returned in API responses.
+
+            - `String description`
+
+            - `BetaManagedAgentsCustomToolInputSchema inputSchema`
+
+              JSON Schema for custom tool input parameters.
+
+              - `Optional<Properties> properties`
+
+                JSON Schema properties defining the tool's input parameters.
+
+              - `Optional<List<String>> required`
+
+                List of required property names.
+
+              - `Optional<Type> type`
+
+                Must be 'object' for tool input schemas.
+
+                - `OBJECT("object")`
+
+            - `String name`
+
+            - `Type type`
+
+              - `CUSTOM("custom")`
+
+        - `Type type`
+
+          - `AGENT("agent")`
+
+        - `long version`
+
+      - `Type type`
+
+        - `COORDINATOR("coordinator")`
+
+    - `String name`
+
+    - `List<Skill> skills`
+
+      - `class BetaManagedAgentsAnthropicSkill:`
+
+        A resolved Anthropic-managed skill.
+
+        - `String skillId`
+
+        - `Type type`
+
+          - `ANTHROPIC("anthropic")`
+
+        - `String version`
+
+      - `class BetaManagedAgentsCustomSkill:`
+
+        A resolved user-created custom skill.
+
+        - `String skillId`
+
+        - `Type type`
+
+          - `CUSTOM("custom")`
+
+        - `String version`
+
+    - `Optional<String> system`
+
+    - `List<Tool> tools`
+
+      - `class BetaManagedAgentsAgentToolset20260401:`
+
+        - `List<BetaManagedAgentsAgentToolConfig> configs`
+
+          - `boolean enabled`
+
+          - `Name name`
+
+            Built-in agent tool identifier.
+
+            - `BASH("bash")`
+
+            - `EDIT("edit")`
+
+            - `READ("read")`
+
+            - `WRITE("write")`
+
+            - `GLOB("glob")`
+
+            - `GREP("grep")`
+
+            - `WEB_FETCH("web_fetch")`
+
+            - `WEB_SEARCH("web_search")`
+
+          - `PermissionPolicy permissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+              - `Type type`
+
+                - `ALWAYS_ALLOW("always_allow")`
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+              - `Type type`
+
+                - `ALWAYS_ASK("always_ask")`
+
+        - `BetaManagedAgentsAgentToolsetDefaultConfig defaultConfig`
+
+          Resolved default configuration for agent tools.
+
+          - `boolean enabled`
+
+          - `PermissionPolicy permissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+              - `Type type`
+
+                - `ALWAYS_ALLOW("always_allow")`
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+              - `Type type`
+
+                - `ALWAYS_ASK("always_ask")`
+
+        - `Type type`
+
+          - `AGENT_TOOLSET_20260401("agent_toolset_20260401")`
+
+      - `class BetaManagedAgentsMcpToolset:`
+
+        - `List<BetaManagedAgentsMcpToolConfig> configs`
+
+          - `boolean enabled`
+
+          - `String name`
+
+          - `PermissionPolicy permissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+              - `Type type`
+
+                - `ALWAYS_ALLOW("always_allow")`
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+              - `Type type`
+
+                - `ALWAYS_ASK("always_ask")`
+
+        - `BetaManagedAgentsMcpToolsetDefaultConfig defaultConfig`
+
+          Resolved default configuration for all tools from an MCP server.
+
+          - `boolean enabled`
+
+          - `PermissionPolicy permissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+              - `Type type`
+
+                - `ALWAYS_ALLOW("always_allow")`
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+              - `Type type`
+
+                - `ALWAYS_ASK("always_ask")`
+
+        - `String mcpServerName`
+
+        - `Type type`
+
+          - `MCP_TOOLSET("mcp_toolset")`
+
+      - `class BetaManagedAgentsCustomTool:`
+
+        A custom tool as returned in API responses.
+
+        - `String description`
+
+        - `BetaManagedAgentsCustomToolInputSchema inputSchema`
+
+          JSON Schema for custom tool input parameters.
+
+          - `Optional<Properties> properties`
+
+            JSON Schema properties defining the tool's input parameters.
+
+          - `Optional<List<String>> required`
+
+            List of required property names.
+
+          - `Optional<Type> type`
+
+            Must be 'object' for tool input schemas.
+
+            - `OBJECT("object")`
+
+        - `String name`
+
+        - `Type type`
+
+          - `CUSTOM("custom")`
+
+    - `Type type`
+
+      - `AGENT("agent")`
+
+    - `long version`
+
+  - `Optional<LocalDateTime> archivedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `LocalDateTime createdAt`
+
+    A timestamp in RFC 3339 format
+
+  - `String environmentId`
+
+  - `Metadata metadata`
+
+  - `List<BetaManagedAgentsOutcomeEvaluationResource> outcomeEvaluations`
+
+    Per-outcome evaluation state. One entry per define_outcome event sent to the session.
+
+    - `Optional<LocalDateTime> completedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String description`
+
+      What the agent should produce.
+
+    - `Optional<String> explanation`
+
+      Grader's verdict text from the most recent evaluation. For satisfied, explains why criteria are met; for needs_revision (intermediate), what's missing; for failed, why unrecoverable.
+
+    - `long iteration`
+
+      0-indexed revision cycle the outcome is currently on.
+
+    - `String outcomeId`
+
+      Server-generated outc_ ID for this outcome.
+
+    - `String result`
+
+      Current evaluation state. 'pending' before the agent begins work; 'running' while producing or revising; 'evaluating' while the grader scores; 'satisfied'/'max_iterations_reached'/'failed'/'interrupted' are terminal.
+
+    - `Type type`
+
+      - `OUTCOME_EVALUATION("outcome_evaluation")`
+
+  - `List<BetaManagedAgentsSessionResource> resources`
+
+    - `class BetaManagedAgentsGitHubRepositoryResource:`
+
+      - `String id`
+
+      - `LocalDateTime createdAt`
+
+        A timestamp in RFC 3339 format
+
+      - `String mountPath`
+
+      - `Type type`
+
+        - `GITHUB_REPOSITORY("github_repository")`
+
+      - `LocalDateTime updatedAt`
+
+        A timestamp in RFC 3339 format
+
+      - `String url`
+
+      - `Optional<Checkout> checkout`
+
+        - `class BetaManagedAgentsBranchCheckout:`
+
+          - `String name`
+
+            Branch name to check out.
+
+          - `Type type`
+
+            - `BRANCH("branch")`
+
+        - `class BetaManagedAgentsCommitCheckout:`
+
+          - `String sha`
+
+            Full commit SHA to check out.
+
+          - `Type type`
+
+            - `COMMIT("commit")`
+
+    - `class BetaManagedAgentsFileResource:`
+
+      - `String id`
+
+      - `LocalDateTime createdAt`
+
+        A timestamp in RFC 3339 format
+
+      - `String fileId`
+
+      - `String mountPath`
+
+      - `Type type`
+
+        - `FILE("file")`
+
+      - `LocalDateTime updatedAt`
+
+        A timestamp in RFC 3339 format
+
+    - `class BetaManagedAgentsMemoryStoreResource:`
+
+      A memory store attached to an agent session.
+
+      - `String memoryStoreId`
+
+        The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+      - `Type type`
+
+        - `MEMORY_STORE("memory_store")`
+
+      - `Optional<Access> access`
+
+        Access mode for an attached memory store.
+
+        - `READ_WRITE("read_write")`
+
+        - `READ_ONLY("read_only")`
+
+      - `Optional<String> description`
+
+        Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
+
+      - `Optional<String> instructions`
+
+        Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+      - `Optional<String> mountPath`
+
+        Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
+
+      - `Optional<String> name`
+
+        Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
+
+  - `BetaManagedAgentsSessionStats stats`
+
+    Timing statistics for a session.
+
+    - `Optional<Double> activeSeconds`
+
+      Cumulative time in seconds the session spent in running status. Excludes idle time.
+
+    - `Optional<Double> durationSeconds`
+
+      Elapsed time since session creation in seconds. For terminated sessions, frozen at the final update.
+
+  - `Status status`
+
+    SessionStatus enum
+
+    - `RESCHEDULING("rescheduling")`
+
+    - `RUNNING("running")`
+
+    - `IDLE("idle")`
+
+    - `TERMINATED("terminated")`
+
+  - `Optional<String> title`
+
+  - `Type type`
+
+    - `SESSION("session")`
+
+  - `LocalDateTime updatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `BetaManagedAgentsSessionUsage usage`
+
+    Cumulative token usage for a session across all turns.
+
+    - `Optional<BetaManagedAgentsCacheCreationUsage> cacheCreation`
+
+      Prompt-cache creation token usage broken down by cache lifetime.
+
+      - `Optional<Long> ephemeral1hInputTokens`
+
+        Tokens used to create 1-hour ephemeral cache entries.
+
+      - `Optional<Long> ephemeral5mInputTokens`
+
+        Tokens used to create 5-minute ephemeral cache entries.
+
+    - `Optional<Long> cacheReadInputTokens`
+
+      Total tokens read from prompt cache.
+
+    - `Optional<Long> inputTokens`
+
+      Total input tokens consumed across all turns.
+
+    - `Optional<Long> outputTokens`
+
+      Total output tokens generated across all turns.
+
+  - `List<String> vaultIds`
+
+    Vault IDs attached to the session at creation. Empty when no vaults were supplied.
+
+### Beta Managed Agents Session Agent
+
+- `class BetaManagedAgentsSessionAgent:`
+
+  Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
+
+  - `String id`
+
+  - `Optional<String> description`
+
+  - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
+
+    - `String name`
+
+    - `Type type`
+
+      - `URL("url")`
+
+    - `String url`
+
+  - `BetaManagedAgentsModelConfig model`
+
+    Model identifier and configuration.
+
+    - `BetaManagedAgentsModel id`
+
+      The model that will power your agent.
+
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
+
+        Frontier intelligence for long-running agents and coding
+
+      - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+        Most intelligent model for building agents and coding
+
+      - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+        Best combination of speed and intelligence
+
+      - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+        Fastest model with near-frontier intelligence
+
+      - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+        Fastest model with near-frontier intelligence
+
+      - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+        Premium model combining maximum intelligence with practical performance
+
+      - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+        Premium model combining maximum intelligence with practical performance
+
+      - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+        High-performance model for agents and coding
+
+      - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+        High-performance model for agents and coding
+
+    - `Optional<Speed> speed`
+
+      Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+      - `STANDARD("standard")`
+
+      - `FAST("fast")`
+
+  - `Optional<BetaManagedAgentsSessionMultiagentCoordinator> multiagent`
+
+    Resolved coordinator topology with full agent definitions for each roster member.
+
+    - `List<BetaManagedAgentsSessionThreadAgent> agents`
+
+      Full `agent` definitions the coordinator may spawn as session threads.
+
+      - `String id`
+
+      - `Optional<String> description`
+
+      - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
+
+        - `String name`
+
+        - `Type type`
+
+          - `URL("url")`
+
+        - `String url`
+
+      - `BetaManagedAgentsModelConfig model`
+
+        Model identifier and configuration.
+
+        - `BetaManagedAgentsModel id`
+
+          The model that will power your agent.
+
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+            Most intelligent model for building agents and coding
+
+          - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+            Best combination of speed and intelligence
+
+          - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+            Fastest model with near-frontier intelligence
+
+          - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+            Fastest model with near-frontier intelligence
+
+          - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+            High-performance model for agents and coding
+
+          - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+            High-performance model for agents and coding
+
+        - `Optional<Speed> speed`
+
+          Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+          - `STANDARD("standard")`
+
+          - `FAST("fast")`
+
+      - `String name`
+
+      - `List<Skill> skills`
+
+        - `class BetaManagedAgentsAnthropicSkill:`
+
+          A resolved Anthropic-managed skill.
+
+          - `String skillId`
+
+          - `Type type`
+
+            - `ANTHROPIC("anthropic")`
+
+          - `String version`
+
+        - `class BetaManagedAgentsCustomSkill:`
+
+          A resolved user-created custom skill.
+
+          - `String skillId`
+
+          - `Type type`
+
+            - `CUSTOM("custom")`
+
+          - `String version`
+
+      - `Optional<String> system`
+
+      - `List<Tool> tools`
+
+        - `class BetaManagedAgentsAgentToolset20260401:`
+
+          - `List<BetaManagedAgentsAgentToolConfig> configs`
+
+            - `boolean enabled`
+
+            - `Name name`
+
+              Built-in agent tool identifier.
+
+              - `BASH("bash")`
+
+              - `EDIT("edit")`
+
+              - `READ("read")`
+
+              - `WRITE("write")`
+
+              - `GLOB("glob")`
+
+              - `GREP("grep")`
+
+              - `WEB_FETCH("web_fetch")`
+
+              - `WEB_SEARCH("web_search")`
+
+            - `PermissionPolicy permissionPolicy`
+
+              Permission policy for tool execution.
+
+              - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                Tool calls are automatically approved without user confirmation.
+
+                - `Type type`
+
+                  - `ALWAYS_ALLOW("always_allow")`
+
+              - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                Tool calls require user confirmation before execution.
+
+                - `Type type`
+
+                  - `ALWAYS_ASK("always_ask")`
+
+          - `BetaManagedAgentsAgentToolsetDefaultConfig defaultConfig`
+
+            Resolved default configuration for agent tools.
+
+            - `boolean enabled`
+
+            - `PermissionPolicy permissionPolicy`
+
+              Permission policy for tool execution.
+
+              - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                Tool calls are automatically approved without user confirmation.
+
+                - `Type type`
+
+                  - `ALWAYS_ALLOW("always_allow")`
+
+              - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                Tool calls require user confirmation before execution.
+
+                - `Type type`
+
+                  - `ALWAYS_ASK("always_ask")`
+
+          - `Type type`
+
+            - `AGENT_TOOLSET_20260401("agent_toolset_20260401")`
+
+        - `class BetaManagedAgentsMcpToolset:`
+
+          - `List<BetaManagedAgentsMcpToolConfig> configs`
+
+            - `boolean enabled`
+
+            - `String name`
+
+            - `PermissionPolicy permissionPolicy`
+
+              Permission policy for tool execution.
+
+              - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                Tool calls are automatically approved without user confirmation.
+
+                - `Type type`
+
+                  - `ALWAYS_ALLOW("always_allow")`
+
+              - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                Tool calls require user confirmation before execution.
+
+                - `Type type`
+
+                  - `ALWAYS_ASK("always_ask")`
+
+          - `BetaManagedAgentsMcpToolsetDefaultConfig defaultConfig`
+
+            Resolved default configuration for all tools from an MCP server.
+
+            - `boolean enabled`
+
+            - `PermissionPolicy permissionPolicy`
+
+              Permission policy for tool execution.
+
+              - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                Tool calls are automatically approved without user confirmation.
+
+                - `Type type`
+
+                  - `ALWAYS_ALLOW("always_allow")`
+
+              - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                Tool calls require user confirmation before execution.
+
+                - `Type type`
+
+                  - `ALWAYS_ASK("always_ask")`
+
+          - `String mcpServerName`
+
+          - `Type type`
+
+            - `MCP_TOOLSET("mcp_toolset")`
+
+        - `class BetaManagedAgentsCustomTool:`
+
+          A custom tool as returned in API responses.
+
+          - `String description`
+
+          - `BetaManagedAgentsCustomToolInputSchema inputSchema`
+
+            JSON Schema for custom tool input parameters.
+
+            - `Optional<Properties> properties`
+
+              JSON Schema properties defining the tool's input parameters.
+
+            - `Optional<List<String>> required`
+
+              List of required property names.
+
+            - `Optional<Type> type`
+
+              Must be 'object' for tool input schemas.
+
+              - `OBJECT("object")`
+
+          - `String name`
+
+          - `Type type`
+
+            - `CUSTOM("custom")`
+
+      - `Type type`
+
+        - `AGENT("agent")`
+
+      - `long version`
+
+    - `Type type`
+
+      - `COORDINATOR("coordinator")`
+
+  - `String name`
+
+  - `List<Skill> skills`
+
+    - `class BetaManagedAgentsAnthropicSkill:`
+
+      A resolved Anthropic-managed skill.
+
+      - `String skillId`
+
+      - `Type type`
+
+        - `ANTHROPIC("anthropic")`
+
+      - `String version`
+
+    - `class BetaManagedAgentsCustomSkill:`
+
+      A resolved user-created custom skill.
+
+      - `String skillId`
+
+      - `Type type`
+
+        - `CUSTOM("custom")`
+
+      - `String version`
+
+  - `Optional<String> system`
+
+  - `List<Tool> tools`
+
+    - `class BetaManagedAgentsAgentToolset20260401:`
+
+      - `List<BetaManagedAgentsAgentToolConfig> configs`
+
+        - `boolean enabled`
+
+        - `Name name`
+
+          Built-in agent tool identifier.
+
+          - `BASH("bash")`
+
+          - `EDIT("edit")`
+
+          - `READ("read")`
+
+          - `WRITE("write")`
+
+          - `GLOB("glob")`
+
+          - `GREP("grep")`
+
+          - `WEB_FETCH("web_fetch")`
+
+          - `WEB_SEARCH("web_search")`
+
+        - `PermissionPolicy permissionPolicy`
+
+          Permission policy for tool execution.
+
+          - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+            Tool calls are automatically approved without user confirmation.
+
+            - `Type type`
+
+              - `ALWAYS_ALLOW("always_allow")`
+
+          - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+            Tool calls require user confirmation before execution.
+
+            - `Type type`
+
+              - `ALWAYS_ASK("always_ask")`
+
+      - `BetaManagedAgentsAgentToolsetDefaultConfig defaultConfig`
+
+        Resolved default configuration for agent tools.
+
+        - `boolean enabled`
+
+        - `PermissionPolicy permissionPolicy`
+
+          Permission policy for tool execution.
+
+          - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+            Tool calls are automatically approved without user confirmation.
+
+            - `Type type`
+
+              - `ALWAYS_ALLOW("always_allow")`
+
+          - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+            Tool calls require user confirmation before execution.
+
+            - `Type type`
+
+              - `ALWAYS_ASK("always_ask")`
+
+      - `Type type`
+
+        - `AGENT_TOOLSET_20260401("agent_toolset_20260401")`
+
+    - `class BetaManagedAgentsMcpToolset:`
+
+      - `List<BetaManagedAgentsMcpToolConfig> configs`
+
+        - `boolean enabled`
+
+        - `String name`
+
+        - `PermissionPolicy permissionPolicy`
+
+          Permission policy for tool execution.
+
+          - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+            Tool calls are automatically approved without user confirmation.
+
+            - `Type type`
+
+              - `ALWAYS_ALLOW("always_allow")`
+
+          - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+            Tool calls require user confirmation before execution.
+
+            - `Type type`
+
+              - `ALWAYS_ASK("always_ask")`
+
+      - `BetaManagedAgentsMcpToolsetDefaultConfig defaultConfig`
+
+        Resolved default configuration for all tools from an MCP server.
+
+        - `boolean enabled`
+
+        - `PermissionPolicy permissionPolicy`
+
+          Permission policy for tool execution.
+
+          - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+            Tool calls are automatically approved without user confirmation.
+
+            - `Type type`
+
+              - `ALWAYS_ALLOW("always_allow")`
+
+          - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+            Tool calls require user confirmation before execution.
+
+            - `Type type`
+
+              - `ALWAYS_ASK("always_ask")`
+
+      - `String mcpServerName`
+
+      - `Type type`
+
+        - `MCP_TOOLSET("mcp_toolset")`
+
+    - `class BetaManagedAgentsCustomTool:`
+
+      A custom tool as returned in API responses.
+
+      - `String description`
+
+      - `BetaManagedAgentsCustomToolInputSchema inputSchema`
+
+        JSON Schema for custom tool input parameters.
+
+        - `Optional<Properties> properties`
+
+          JSON Schema properties defining the tool's input parameters.
+
+        - `Optional<List<String>> required`
+
+          List of required property names.
+
+        - `Optional<Type> type`
+
+          Must be 'object' for tool input schemas.
+
+          - `OBJECT("object")`
+
+      - `String name`
+
+      - `Type type`
+
+        - `CUSTOM("custom")`
+
+  - `Type type`
+
+    - `AGENT("agent")`
+
+  - `long version`
+
+### Beta Managed Agents Session Multiagent Coordinator
+
+- `class BetaManagedAgentsSessionMultiagentCoordinator:`
+
+  Resolved coordinator topology with full agent definitions for each roster member.
+
+  - `List<BetaManagedAgentsSessionThreadAgent> agents`
+
+    Full `agent` definitions the coordinator may spawn as session threads.
 
     - `String id`
 
@@ -57628,461 +63042,9 @@ public final class Main {
 
     - `long version`
 
-  - `Optional<LocalDateTime> archivedAt`
-
-    A timestamp in RFC 3339 format
-
-  - `LocalDateTime createdAt`
-
-    A timestamp in RFC 3339 format
-
-  - `String environmentId`
-
-  - `Metadata metadata`
-
-  - `List<BetaManagedAgentsSessionResource> resources`
-
-    - `class BetaManagedAgentsGitHubRepositoryResource:`
-
-      - `String id`
-
-      - `LocalDateTime createdAt`
-
-        A timestamp in RFC 3339 format
-
-      - `String mountPath`
-
-      - `Type type`
-
-        - `GITHUB_REPOSITORY("github_repository")`
-
-      - `LocalDateTime updatedAt`
-
-        A timestamp in RFC 3339 format
-
-      - `String url`
-
-      - `Optional<Checkout> checkout`
-
-        - `class BetaManagedAgentsBranchCheckout:`
-
-          - `String name`
-
-            Branch name to check out.
-
-          - `Type type`
-
-            - `BRANCH("branch")`
-
-        - `class BetaManagedAgentsCommitCheckout:`
-
-          - `String sha`
-
-            Full commit SHA to check out.
-
-          - `Type type`
-
-            - `COMMIT("commit")`
-
-    - `class BetaManagedAgentsFileResource:`
-
-      - `String id`
-
-      - `LocalDateTime createdAt`
-
-        A timestamp in RFC 3339 format
-
-      - `String fileId`
-
-      - `String mountPath`
-
-      - `Type type`
-
-        - `FILE("file")`
-
-      - `LocalDateTime updatedAt`
-
-        A timestamp in RFC 3339 format
-
-    - `class BetaManagedAgentsMemoryStoreResource:`
-
-      A memory store attached to an agent session.
-
-      - `String memoryStoreId`
-
-        The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
-
-      - `Type type`
-
-        - `MEMORY_STORE("memory_store")`
-
-      - `Optional<Access> access`
-
-        Access mode for an attached memory store.
-
-        - `READ_WRITE("read_write")`
-
-        - `READ_ONLY("read_only")`
-
-      - `Optional<String> description`
-
-        Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
-
-      - `Optional<String> instructions`
-
-        Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
-
-      - `Optional<String> mountPath`
-
-        Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
-
-      - `Optional<String> name`
-
-        Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
-
-  - `BetaManagedAgentsSessionStats stats`
-
-    Timing statistics for a session.
-
-    - `Optional<Double> activeSeconds`
-
-      Cumulative time in seconds the session spent in running status. Excludes idle time.
-
-    - `Optional<Double> durationSeconds`
-
-      Elapsed time since session creation in seconds. For terminated sessions, frozen at the final update.
-
-  - `Status status`
-
-    SessionStatus enum
-
-    - `RESCHEDULING("rescheduling")`
-
-    - `RUNNING("running")`
-
-    - `IDLE("idle")`
-
-    - `TERMINATED("terminated")`
-
-  - `Optional<String> title`
-
   - `Type type`
 
-    - `SESSION("session")`
-
-  - `LocalDateTime updatedAt`
-
-    A timestamp in RFC 3339 format
-
-  - `BetaManagedAgentsSessionUsage usage`
-
-    Cumulative token usage for a session across all turns.
-
-    - `Optional<BetaManagedAgentsCacheCreationUsage> cacheCreation`
-
-      Prompt-cache creation token usage broken down by cache lifetime.
-
-      - `Optional<Long> ephemeral1hInputTokens`
-
-        Tokens used to create 1-hour ephemeral cache entries.
-
-      - `Optional<Long> ephemeral5mInputTokens`
-
-        Tokens used to create 5-minute ephemeral cache entries.
-
-    - `Optional<Long> cacheReadInputTokens`
-
-      Total tokens read from prompt cache.
-
-    - `Optional<Long> inputTokens`
-
-      Total input tokens consumed across all turns.
-
-    - `Optional<Long> outputTokens`
-
-      Total output tokens generated across all turns.
-
-  - `List<String> vaultIds`
-
-    Vault IDs attached to the session at creation. Empty when no vaults were supplied.
-
-### Beta Managed Agents Session Agent
-
-- `class BetaManagedAgentsSessionAgent:`
-
-  Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
-
-  - `String id`
-
-  - `Optional<String> description`
-
-  - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
-
-    - `String name`
-
-    - `Type type`
-
-      - `URL("url")`
-
-    - `String url`
-
-  - `BetaManagedAgentsModelConfig model`
-
-    Model identifier and configuration.
-
-    - `BetaManagedAgentsModel id`
-
-      The model that will power your agent.
-
-      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-      - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
-
-        Frontier intelligence for long-running agents and coding
-
-      - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
-
-        Most intelligent model for building agents and coding
-
-      - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
-
-        Best combination of speed and intelligence
-
-      - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
-
-        Fastest model with near-frontier intelligence
-
-      - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
-
-        Fastest model with near-frontier intelligence
-
-      - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
-
-        Premium model combining maximum intelligence with practical performance
-
-      - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
-
-        Premium model combining maximum intelligence with practical performance
-
-      - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
-
-        High-performance model for agents and coding
-
-      - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
-
-        High-performance model for agents and coding
-
-    - `Optional<Speed> speed`
-
-      Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
-
-      - `STANDARD("standard")`
-
-      - `FAST("fast")`
-
-  - `String name`
-
-  - `List<Skill> skills`
-
-    - `class BetaManagedAgentsAnthropicSkill:`
-
-      A resolved Anthropic-managed skill.
-
-      - `String skillId`
-
-      - `Type type`
-
-        - `ANTHROPIC("anthropic")`
-
-      - `String version`
-
-    - `class BetaManagedAgentsCustomSkill:`
-
-      A resolved user-created custom skill.
-
-      - `String skillId`
-
-      - `Type type`
-
-        - `CUSTOM("custom")`
-
-      - `String version`
-
-  - `Optional<String> system`
-
-  - `List<Tool> tools`
-
-    - `class BetaManagedAgentsAgentToolset20260401:`
-
-      - `List<BetaManagedAgentsAgentToolConfig> configs`
-
-        - `boolean enabled`
-
-        - `Name name`
-
-          Built-in agent tool identifier.
-
-          - `BASH("bash")`
-
-          - `EDIT("edit")`
-
-          - `READ("read")`
-
-          - `WRITE("write")`
-
-          - `GLOB("glob")`
-
-          - `GREP("grep")`
-
-          - `WEB_FETCH("web_fetch")`
-
-          - `WEB_SEARCH("web_search")`
-
-        - `PermissionPolicy permissionPolicy`
-
-          Permission policy for tool execution.
-
-          - `class BetaManagedAgentsAlwaysAllowPolicy:`
-
-            Tool calls are automatically approved without user confirmation.
-
-            - `Type type`
-
-              - `ALWAYS_ALLOW("always_allow")`
-
-          - `class BetaManagedAgentsAlwaysAskPolicy:`
-
-            Tool calls require user confirmation before execution.
-
-            - `Type type`
-
-              - `ALWAYS_ASK("always_ask")`
-
-      - `BetaManagedAgentsAgentToolsetDefaultConfig defaultConfig`
-
-        Resolved default configuration for agent tools.
-
-        - `boolean enabled`
-
-        - `PermissionPolicy permissionPolicy`
-
-          Permission policy for tool execution.
-
-          - `class BetaManagedAgentsAlwaysAllowPolicy:`
-
-            Tool calls are automatically approved without user confirmation.
-
-            - `Type type`
-
-              - `ALWAYS_ALLOW("always_allow")`
-
-          - `class BetaManagedAgentsAlwaysAskPolicy:`
-
-            Tool calls require user confirmation before execution.
-
-            - `Type type`
-
-              - `ALWAYS_ASK("always_ask")`
-
-      - `Type type`
-
-        - `AGENT_TOOLSET_20260401("agent_toolset_20260401")`
-
-    - `class BetaManagedAgentsMcpToolset:`
-
-      - `List<BetaManagedAgentsMcpToolConfig> configs`
-
-        - `boolean enabled`
-
-        - `String name`
-
-        - `PermissionPolicy permissionPolicy`
-
-          Permission policy for tool execution.
-
-          - `class BetaManagedAgentsAlwaysAllowPolicy:`
-
-            Tool calls are automatically approved without user confirmation.
-
-            - `Type type`
-
-              - `ALWAYS_ALLOW("always_allow")`
-
-          - `class BetaManagedAgentsAlwaysAskPolicy:`
-
-            Tool calls require user confirmation before execution.
-
-            - `Type type`
-
-              - `ALWAYS_ASK("always_ask")`
-
-      - `BetaManagedAgentsMcpToolsetDefaultConfig defaultConfig`
-
-        Resolved default configuration for all tools from an MCP server.
-
-        - `boolean enabled`
-
-        - `PermissionPolicy permissionPolicy`
-
-          Permission policy for tool execution.
-
-          - `class BetaManagedAgentsAlwaysAllowPolicy:`
-
-            Tool calls are automatically approved without user confirmation.
-
-            - `Type type`
-
-              - `ALWAYS_ALLOW("always_allow")`
-
-          - `class BetaManagedAgentsAlwaysAskPolicy:`
-
-            Tool calls require user confirmation before execution.
-
-            - `Type type`
-
-              - `ALWAYS_ASK("always_ask")`
-
-      - `String mcpServerName`
-
-      - `Type type`
-
-        - `MCP_TOOLSET("mcp_toolset")`
-
-    - `class BetaManagedAgentsCustomTool:`
-
-      A custom tool as returned in API responses.
-
-      - `String description`
-
-      - `BetaManagedAgentsCustomToolInputSchema inputSchema`
-
-        JSON Schema for custom tool input parameters.
-
-        - `Optional<Properties> properties`
-
-          JSON Schema properties defining the tool's input parameters.
-
-        - `Optional<List<String>> required`
-
-          List of required property names.
-
-        - `Optional<Type> type`
-
-          Must be 'object' for tool input schemas.
-
-          - `OBJECT("object")`
-
-      - `String name`
-
-      - `Type type`
-
-        - `CUSTOM("custom")`
-
-  - `Type type`
-
-    - `AGENT("agent")`
-
-  - `long version`
+    - `COORDINATOR("coordinator")`
 
 ### Beta Managed Agents Session Stats
 
@@ -58144,6 +63106,22 @@ List Events
 
   - `Optional<String> sessionId`
 
+  - `Optional<LocalDateTime> createdAtGt`
+
+    Return events created after this time (exclusive).
+
+  - `Optional<LocalDateTime> createdAtGte`
+
+    Return events created at or after this time (inclusive).
+
+  - `Optional<LocalDateTime> createdAtLt`
+
+    Return events created before this time (exclusive).
+
+  - `Optional<LocalDateTime> createdAtLte`
+
+    Return events created at or before this time (inclusive).
+
   - `Optional<Long> limit`
 
     Query parameter for limit
@@ -58159,6 +63137,10 @@ List Events
   - `Optional<String> page`
 
     Opaque pagination cursor from a previous response's next_page.
+
+  - `Optional<List<String>> types`
+
+    Filter by event type. Values match the `type` field on returned events (for example, `user.message` or `agent.tool_use`). Omit to return all event types.
 
   - `Optional<List<AnthropicBeta>> betas`
 
@@ -58209,6 +63191,8 @@ List Events
     - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
 
 ### Returns
 
@@ -58394,6 +63378,10 @@ List Events
 
       A timestamp in RFC 3339 format
 
+    - `Optional<String> sessionThreadId`
+
+      If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
+
   - `class BetaManagedAgentsUserToolConfirmationEvent:`
 
     A tool confirmation event that approves or denies a pending tool execution.
@@ -58425,6 +63413,10 @@ List Events
     - `Optional<LocalDateTime> processedAt`
 
       A timestamp in RFC 3339 format
+
+    - `Optional<String> sessionThreadId`
+
+      When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
   - `class BetaManagedAgentsUserCustomToolResultEvent:`
 
@@ -58596,6 +63588,10 @@ List Events
 
       A timestamp in RFC 3339 format
 
+    - `Optional<String> sessionThreadId`
+
+      Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
+
   - `class BetaManagedAgentsAgentCustomToolUseEvent:`
 
     Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result.
@@ -58619,6 +63615,10 @@ List Events
     - `Type type`
 
       - `AGENT_CUSTOM_TOOL_USE("agent.custom_tool_use")`
+
+    - `Optional<String> sessionThreadId`
+
+      When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
 
   - `class BetaManagedAgentsAgentMessageEvent:`
 
@@ -58701,6 +63701,10 @@ List Events
       - `ASK("ask")`
 
       - `DENY("deny")`
+
+    - `Optional<String> sessionThreadId`
+
+      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
   - `class BetaManagedAgentsAgentMcpToolResultEvent:`
 
@@ -58906,6 +63910,10 @@ List Events
 
       - `DENY("deny")`
 
+    - `Optional<String> sessionThreadId`
+
+      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
+
   - `class BetaManagedAgentsAgentToolResultEvent:`
 
     Event representing the result of an agent tool execution.
@@ -59075,6 +64083,346 @@ List Events
     - `Optional<Boolean> isError`
 
       Whether the tool execution resulted in an error.
+
+  - `class BetaManagedAgentsAgentThreadMessageReceivedEvent:`
+
+    Delivery event written to the target thread's input stream when an agent-to-agent message arrives.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `List<Content> content`
+
+      Message content blocks.
+
+      - `class BetaManagedAgentsTextBlock:`
+
+        Regular text content.
+
+        - `String text`
+
+          The text content.
+
+        - `Type type`
+
+          - `TEXT("text")`
+
+      - `class BetaManagedAgentsImageBlock:`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for image source variants.
+
+          - `class BetaManagedAgentsBase64ImageSource:`
+
+            Base64-encoded image data.
+
+            - `String data`
+
+              Base64-encoded image data.
+
+            - `String mediaType`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsUrlImageSource:`
+
+            Image referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the image to fetch.
+
+          - `class BetaManagedAgentsFileImageSource:`
+
+            Image referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `IMAGE("image")`
+
+      - `class BetaManagedAgentsDocumentBlock:`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for document source variants.
+
+          - `class BetaManagedAgentsBase64DocumentSource:`
+
+            Base64-encoded document data.
+
+            - `String data`
+
+              Base64-encoded document data.
+
+            - `String mediaType`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsPlainTextDocumentSource:`
+
+            Plain text document content.
+
+            - `String data`
+
+              The plain text content.
+
+            - `MediaType mediaType`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `TEXT_PLAIN("text/plain")`
+
+            - `Type type`
+
+              - `TEXT("text")`
+
+          - `class BetaManagedAgentsUrlDocumentSource:`
+
+            Document referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the document to fetch.
+
+          - `class BetaManagedAgentsFileDocumentSource:`
+
+            Document referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `DOCUMENT("document")`
+
+        - `Optional<String> context`
+
+          Additional context about the document for the model.
+
+        - `Optional<String> title`
+
+          The title of the document.
+
+    - `String fromSessionThreadId`
+
+      Public `sthr_` ID of the thread that sent the message.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `AGENT_THREAD_MESSAGE_RECEIVED("agent.thread_message_received")`
+
+    - `Optional<String> fromAgentName`
+
+      Name of the callable agent this message came from. Absent when received from the primary agent.
+
+  - `class BetaManagedAgentsAgentThreadMessageSentEvent:`
+
+    Observability event emitted to the sender's output stream when an agent-to-agent message is sent.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `List<Content> content`
+
+      Message content blocks.
+
+      - `class BetaManagedAgentsTextBlock:`
+
+        Regular text content.
+
+        - `String text`
+
+          The text content.
+
+        - `Type type`
+
+          - `TEXT("text")`
+
+      - `class BetaManagedAgentsImageBlock:`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for image source variants.
+
+          - `class BetaManagedAgentsBase64ImageSource:`
+
+            Base64-encoded image data.
+
+            - `String data`
+
+              Base64-encoded image data.
+
+            - `String mediaType`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsUrlImageSource:`
+
+            Image referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the image to fetch.
+
+          - `class BetaManagedAgentsFileImageSource:`
+
+            Image referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `IMAGE("image")`
+
+      - `class BetaManagedAgentsDocumentBlock:`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for document source variants.
+
+          - `class BetaManagedAgentsBase64DocumentSource:`
+
+            Base64-encoded document data.
+
+            - `String data`
+
+              Base64-encoded document data.
+
+            - `String mediaType`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsPlainTextDocumentSource:`
+
+            Plain text document content.
+
+            - `String data`
+
+              The plain text content.
+
+            - `MediaType mediaType`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `TEXT_PLAIN("text/plain")`
+
+            - `Type type`
+
+              - `TEXT("text")`
+
+          - `class BetaManagedAgentsUrlDocumentSource:`
+
+            Document referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the document to fetch.
+
+          - `class BetaManagedAgentsFileDocumentSource:`
+
+            Document referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `DOCUMENT("document")`
+
+        - `Optional<String> context`
+
+          Additional context about the document for the model.
+
+        - `Optional<String> title`
+
+          The title of the document.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String toSessionThreadId`
+
+      Public `sthr_` ID of the thread the message was sent to.
+
+    - `Type type`
+
+      - `AGENT_THREAD_MESSAGE_SENT("agent.thread_message_sent")`
+
+    - `Optional<String> toAgentName`
+
+      Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
   - `class BetaManagedAgentsAgentThreadContextCompactedEvent:`
 
@@ -59496,6 +64844,118 @@ List Events
 
       - `SESSION_STATUS_TERMINATED("session.status_terminated")`
 
+  - `class BetaManagedAgentsSessionThreadCreatedEvent:`
+
+    Emitted when a subagent is spawned as a new thread. Written to the parent thread's output stream so clients observing the session see child creation.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `String agentName`
+
+      Name of the callable agent the thread runs.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String sessionThreadId`
+
+      Public `sthr_` ID of the newly created thread.
+
+    - `Type type`
+
+      - `SESSION_THREAD_CREATED("session.thread_created")`
+
+  - `class BetaManagedAgentsSpanOutcomeEvaluationStartEvent:`
+
+    Emitted when an outcome evaluation cycle begins.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `long iteration`
+
+      0-indexed revision cycle. 0 is the first evaluation; 1 is the re-evaluation after the first revision; etc.
+
+    - `String outcomeId`
+
+      The `outc_` ID of the outcome being evaluated.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `SPAN_OUTCOME_EVALUATION_START("span.outcome_evaluation_start")`
+
+  - `class BetaManagedAgentsSpanOutcomeEvaluationEndEvent:`
+
+    Emitted when an outcome evaluation cycle completes. Carries the verdict and aggregate token usage. A verdict of `needs_revision` means another evaluation cycle follows; `satisfied`, `max_iterations_reached`, `failed`, or `interrupted` are terminal — no further evaluation cycles follow.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `String explanation`
+
+      Human-readable explanation of the verdict. For `needs_revision`, describes which criteria failed and why.
+
+    - `long iteration`
+
+      0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
+
+    - `String outcomeEvaluationStartId`
+
+      The id of the corresponding `span.outcome_evaluation_start` event.
+
+    - `String outcomeId`
+
+      The `outc_` ID of the outcome being evaluated.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String result`
+
+      Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs_revision': criteria not met, another revision cycle follows. 'max_iterations_reached': evaluation budget exhausted with criteria still unmet — one final acknowledgment turn follows before the session goes idle, but no further evaluation runs. 'failed': grader determined the rubric does not apply to the deliverables. 'interrupted': user sent an interrupt while evaluation was in progress.
+
+    - `Type type`
+
+      - `SPAN_OUTCOME_EVALUATION_END("span.outcome_evaluation_end")`
+
+    - `BetaManagedAgentsSpanModelUsage usage`
+
+      Token usage for a single model request.
+
+      - `long cacheCreationInputTokens`
+
+        Tokens used to create prompt cache in this request.
+
+      - `long cacheReadInputTokens`
+
+        Tokens read from prompt cache in this request.
+
+      - `long inputTokens`
+
+        Input tokens consumed by this request.
+
+      - `long outputTokens`
+
+        Output tokens generated by this request.
+
+      - `Optional<Speed> speed`
+
+        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+        - `STANDARD("standard")`
+
+        - `FAST("fast")`
+
   - `class BetaManagedAgentsSpanModelRequestStartEvent:`
 
     Emitted when a model request is initiated by the agent.
@@ -59564,6 +65024,86 @@ List Events
 
       - `SPAN_MODEL_REQUEST_END("span.model_request_end")`
 
+  - `class BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent:`
+
+    Periodic heartbeat emitted while an outcome evaluation cycle is in progress. Distinguishes 'evaluation is actively running' from 'evaluation is stuck' between the corresponding `span.outcome_evaluation_start` and `span.outcome_evaluation_end` events.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `long iteration`
+
+      0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
+
+    - `String outcomeId`
+
+      The `outc_` ID of the outcome being evaluated.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `SPAN_OUTCOME_EVALUATION_ONGOING("span.outcome_evaluation_ongoing")`
+
+  - `class BetaManagedAgentsUserDefineOutcomeEvent:`
+
+    Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `String description`
+
+      What the agent should produce. Copied from the input event.
+
+    - `Optional<Long> maxIterations`
+
+      Evaluate-then-revise cycles before giving up. Default 3, max 20.
+
+    - `String outcomeId`
+
+      Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Rubric rubric`
+
+      Rubric for grading the quality of an outcome.
+
+      - `class BetaManagedAgentsFileRubric:`
+
+        Rubric referenced by a file uploaded via the Files API.
+
+        - `String fileId`
+
+          ID of the rubric file.
+
+        - `Type type`
+
+          - `FILE("file")`
+
+      - `class BetaManagedAgentsTextRubric:`
+
+        Rubric content provided inline as text.
+
+        - `String content`
+
+          Rubric content. Plain text or markdown — the grader treats it as freeform text.
+
+        - `Type type`
+
+          - `TEXT("text")`
+
+    - `Type type`
+
+      - `USER_DEFINE_OUTCOME("user.define_outcome")`
+
   - `class BetaManagedAgentsSessionDeletedEvent:`
 
     Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
@@ -59579,6 +65119,134 @@ List Events
     - `Type type`
 
       - `SESSION_DELETED("session.deleted")`
+
+  - `class BetaManagedAgentsSessionThreadStatusRunningEvent:`
+
+    A session thread has begun executing. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `String agentName`
+
+      Name of the agent the thread runs.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String sessionThreadId`
+
+      Public sthr_ ID of the thread that started running.
+
+    - `Type type`
+
+      - `SESSION_THREAD_STATUS_RUNNING("session.thread_status_running")`
+
+  - `class BetaManagedAgentsSessionThreadStatusIdleEvent:`
+
+    A session thread has yielded and is awaiting input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `String agentName`
+
+      Name of the agent the thread runs.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String sessionThreadId`
+
+      Public sthr_ ID of the thread that went idle.
+
+    - `StopReason stopReason`
+
+      The agent completed its turn naturally and is ready for the next user message.
+
+      - `class BetaManagedAgentsSessionEndTurn:`
+
+        The agent completed its turn naturally and is ready for the next user message.
+
+        - `Type type`
+
+          - `END_TURN("end_turn")`
+
+      - `class BetaManagedAgentsSessionRequiresAction:`
+
+        The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
+
+        - `List<String> eventIds`
+
+          The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
+
+        - `Type type`
+
+          - `REQUIRES_ACTION("requires_action")`
+
+      - `class BetaManagedAgentsSessionRetriesExhausted:`
+
+        The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+
+        - `Type type`
+
+          - `RETRIES_EXHAUSTED("retries_exhausted")`
+
+    - `Type type`
+
+      - `SESSION_THREAD_STATUS_IDLE("session.thread_status_idle")`
+
+  - `class BetaManagedAgentsSessionThreadStatusTerminatedEvent:`
+
+    A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `String agentName`
+
+      Name of the agent the thread runs.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String sessionThreadId`
+
+      Public sthr_ ID of the thread that terminated.
+
+    - `Type type`
+
+      - `SESSION_THREAD_STATUS_TERMINATED("session.thread_status_terminated")`
+
+  - `class BetaManagedAgentsSessionThreadStatusRescheduledEvent:`
+
+    A session thread hit a transient error and is retrying automatically. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `String agentName`
+
+      Name of the agent the thread runs.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String sessionThreadId`
+
+      Public sthr_ ID of the thread that is retrying.
+
+    - `Type type`
+
+      - `SESSION_THREAD_STATUS_RESCHEDULED("session.thread_status_rescheduled")`
 
 ### Example
 
@@ -59664,6 +65332,8 @@ Send Events
     - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
 
   - `List<BetaManagedAgentsEventParams> events`
 
@@ -59830,6 +65500,10 @@ Send Events
       - `Type type`
 
         - `USER_INTERRUPT("user.interrupt")`
+
+      - `Optional<String> sessionThreadId`
+
+        If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
     - `class BetaManagedAgentsUserToolConfirmationEventParams:`
 
@@ -60016,6 +65690,50 @@ Send Events
       - `Optional<Boolean> isError`
 
         Whether the tool execution resulted in an error.
+
+    - `class BetaManagedAgentsUserDefineOutcomeEventParams:`
+
+      Parameters for defining an outcome the agent should work toward. The agent begins work on receipt.
+
+      - `String description`
+
+        What the agent should produce. This is the task specification.
+
+      - `Rubric rubric`
+
+        Rubric for grading the quality of an outcome.
+
+        - `class BetaManagedAgentsFileRubricParams:`
+
+          Rubric referenced by a file uploaded via the Files API.
+
+          - `String fileId`
+
+            ID of the rubric file.
+
+          - `Type type`
+
+            - `FILE("file")`
+
+        - `class BetaManagedAgentsTextRubricParams:`
+
+          Rubric content provided inline as text.
+
+          - `String content`
+
+            Rubric content. Plain text or markdown — the grader treats it as freeform text. Maximum 262144 characters.
+
+          - `Type type`
+
+            - `TEXT("text")`
+
+      - `Type type`
+
+        - `USER_DEFINE_OUTCOME("user.define_outcome")`
+
+      - `Optional<Long> maxIterations`
+
+        Eval→revision cycles before giving up. Default 3, max 20.
 
 ### Returns
 
@@ -60205,6 +65923,10 @@ Send Events
 
         A timestamp in RFC 3339 format
 
+      - `Optional<String> sessionThreadId`
+
+        If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
+
     - `class BetaManagedAgentsUserToolConfirmationEvent:`
 
       A tool confirmation event that approves or denies a pending tool execution.
@@ -60236,6 +65958,10 @@ Send Events
       - `Optional<LocalDateTime> processedAt`
 
         A timestamp in RFC 3339 format
+
+      - `Optional<String> sessionThreadId`
+
+        When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
     - `class BetaManagedAgentsUserCustomToolResultEvent:`
 
@@ -60407,6 +66133,66 @@ Send Events
 
         A timestamp in RFC 3339 format
 
+      - `Optional<String> sessionThreadId`
+
+        Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
+
+    - `class BetaManagedAgentsUserDefineOutcomeEvent:`
+
+      Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
+
+      - `String id`
+
+        Unique identifier for this event.
+
+      - `String description`
+
+        What the agent should produce. Copied from the input event.
+
+      - `Optional<Long> maxIterations`
+
+        Evaluate-then-revise cycles before giving up. Default 3, max 20.
+
+      - `String outcomeId`
+
+        Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
+
+      - `LocalDateTime processedAt`
+
+        A timestamp in RFC 3339 format
+
+      - `Rubric rubric`
+
+        Rubric for grading the quality of an outcome.
+
+        - `class BetaManagedAgentsFileRubric:`
+
+          Rubric referenced by a file uploaded via the Files API.
+
+          - `String fileId`
+
+            ID of the rubric file.
+
+          - `Type type`
+
+            - `FILE("file")`
+
+        - `class BetaManagedAgentsTextRubric:`
+
+          Rubric content provided inline as text.
+
+          - `String content`
+
+            Rubric content. Plain text or markdown — the grader treats it as freeform text.
+
+          - `Type type`
+
+            - `TEXT("text")`
+
+      - `Type type`
+
+        - `USER_DEFINE_OUTCOME("user.define_outcome")`
+
 ### Example
 
 ```java
@@ -60501,6 +66287,8 @@ Stream Events
     - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
 
 ### Returns
 
@@ -60686,6 +66474,10 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
+    - `Optional<String> sessionThreadId`
+
+      If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
+
   - `class BetaManagedAgentsUserToolConfirmationEvent:`
 
     A tool confirmation event that approves or denies a pending tool execution.
@@ -60717,6 +66509,10 @@ Stream Events
     - `Optional<LocalDateTime> processedAt`
 
       A timestamp in RFC 3339 format
+
+    - `Optional<String> sessionThreadId`
+
+      When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
   - `class BetaManagedAgentsUserCustomToolResultEvent:`
 
@@ -60888,6 +66684,10 @@ Stream Events
 
       A timestamp in RFC 3339 format
 
+    - `Optional<String> sessionThreadId`
+
+      Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
+
   - `class BetaManagedAgentsAgentCustomToolUseEvent:`
 
     Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result.
@@ -60911,6 +66711,10 @@ Stream Events
     - `Type type`
 
       - `AGENT_CUSTOM_TOOL_USE("agent.custom_tool_use")`
+
+    - `Optional<String> sessionThreadId`
+
+      When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
 
   - `class BetaManagedAgentsAgentMessageEvent:`
 
@@ -60993,6 +66797,10 @@ Stream Events
       - `ASK("ask")`
 
       - `DENY("deny")`
+
+    - `Optional<String> sessionThreadId`
+
+      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
   - `class BetaManagedAgentsAgentMcpToolResultEvent:`
 
@@ -61198,6 +67006,10 @@ Stream Events
 
       - `DENY("deny")`
 
+    - `Optional<String> sessionThreadId`
+
+      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
+
   - `class BetaManagedAgentsAgentToolResultEvent:`
 
     Event representing the result of an agent tool execution.
@@ -61367,6 +67179,346 @@ Stream Events
     - `Optional<Boolean> isError`
 
       Whether the tool execution resulted in an error.
+
+  - `class BetaManagedAgentsAgentThreadMessageReceivedEvent:`
+
+    Delivery event written to the target thread's input stream when an agent-to-agent message arrives.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `List<Content> content`
+
+      Message content blocks.
+
+      - `class BetaManagedAgentsTextBlock:`
+
+        Regular text content.
+
+        - `String text`
+
+          The text content.
+
+        - `Type type`
+
+          - `TEXT("text")`
+
+      - `class BetaManagedAgentsImageBlock:`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for image source variants.
+
+          - `class BetaManagedAgentsBase64ImageSource:`
+
+            Base64-encoded image data.
+
+            - `String data`
+
+              Base64-encoded image data.
+
+            - `String mediaType`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsUrlImageSource:`
+
+            Image referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the image to fetch.
+
+          - `class BetaManagedAgentsFileImageSource:`
+
+            Image referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `IMAGE("image")`
+
+      - `class BetaManagedAgentsDocumentBlock:`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for document source variants.
+
+          - `class BetaManagedAgentsBase64DocumentSource:`
+
+            Base64-encoded document data.
+
+            - `String data`
+
+              Base64-encoded document data.
+
+            - `String mediaType`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsPlainTextDocumentSource:`
+
+            Plain text document content.
+
+            - `String data`
+
+              The plain text content.
+
+            - `MediaType mediaType`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `TEXT_PLAIN("text/plain")`
+
+            - `Type type`
+
+              - `TEXT("text")`
+
+          - `class BetaManagedAgentsUrlDocumentSource:`
+
+            Document referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the document to fetch.
+
+          - `class BetaManagedAgentsFileDocumentSource:`
+
+            Document referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `DOCUMENT("document")`
+
+        - `Optional<String> context`
+
+          Additional context about the document for the model.
+
+        - `Optional<String> title`
+
+          The title of the document.
+
+    - `String fromSessionThreadId`
+
+      Public `sthr_` ID of the thread that sent the message.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `AGENT_THREAD_MESSAGE_RECEIVED("agent.thread_message_received")`
+
+    - `Optional<String> fromAgentName`
+
+      Name of the callable agent this message came from. Absent when received from the primary agent.
+
+  - `class BetaManagedAgentsAgentThreadMessageSentEvent:`
+
+    Observability event emitted to the sender's output stream when an agent-to-agent message is sent.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `List<Content> content`
+
+      Message content blocks.
+
+      - `class BetaManagedAgentsTextBlock:`
+
+        Regular text content.
+
+        - `String text`
+
+          The text content.
+
+        - `Type type`
+
+          - `TEXT("text")`
+
+      - `class BetaManagedAgentsImageBlock:`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for image source variants.
+
+          - `class BetaManagedAgentsBase64ImageSource:`
+
+            Base64-encoded image data.
+
+            - `String data`
+
+              Base64-encoded image data.
+
+            - `String mediaType`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsUrlImageSource:`
+
+            Image referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the image to fetch.
+
+          - `class BetaManagedAgentsFileImageSource:`
+
+            Image referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `IMAGE("image")`
+
+      - `class BetaManagedAgentsDocumentBlock:`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for document source variants.
+
+          - `class BetaManagedAgentsBase64DocumentSource:`
+
+            Base64-encoded document data.
+
+            - `String data`
+
+              Base64-encoded document data.
+
+            - `String mediaType`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsPlainTextDocumentSource:`
+
+            Plain text document content.
+
+            - `String data`
+
+              The plain text content.
+
+            - `MediaType mediaType`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `TEXT_PLAIN("text/plain")`
+
+            - `Type type`
+
+              - `TEXT("text")`
+
+          - `class BetaManagedAgentsUrlDocumentSource:`
+
+            Document referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the document to fetch.
+
+          - `class BetaManagedAgentsFileDocumentSource:`
+
+            Document referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `DOCUMENT("document")`
+
+        - `Optional<String> context`
+
+          Additional context about the document for the model.
+
+        - `Optional<String> title`
+
+          The title of the document.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String toSessionThreadId`
+
+      Public `sthr_` ID of the thread the message was sent to.
+
+    - `Type type`
+
+      - `AGENT_THREAD_MESSAGE_SENT("agent.thread_message_sent")`
+
+    - `Optional<String> toAgentName`
+
+      Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
   - `class BetaManagedAgentsAgentThreadContextCompactedEvent:`
 
@@ -61788,6 +67940,118 @@ Stream Events
 
       - `SESSION_STATUS_TERMINATED("session.status_terminated")`
 
+  - `class BetaManagedAgentsSessionThreadCreatedEvent:`
+
+    Emitted when a subagent is spawned as a new thread. Written to the parent thread's output stream so clients observing the session see child creation.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `String agentName`
+
+      Name of the callable agent the thread runs.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String sessionThreadId`
+
+      Public `sthr_` ID of the newly created thread.
+
+    - `Type type`
+
+      - `SESSION_THREAD_CREATED("session.thread_created")`
+
+  - `class BetaManagedAgentsSpanOutcomeEvaluationStartEvent:`
+
+    Emitted when an outcome evaluation cycle begins.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `long iteration`
+
+      0-indexed revision cycle. 0 is the first evaluation; 1 is the re-evaluation after the first revision; etc.
+
+    - `String outcomeId`
+
+      The `outc_` ID of the outcome being evaluated.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `SPAN_OUTCOME_EVALUATION_START("span.outcome_evaluation_start")`
+
+  - `class BetaManagedAgentsSpanOutcomeEvaluationEndEvent:`
+
+    Emitted when an outcome evaluation cycle completes. Carries the verdict and aggregate token usage. A verdict of `needs_revision` means another evaluation cycle follows; `satisfied`, `max_iterations_reached`, `failed`, or `interrupted` are terminal — no further evaluation cycles follow.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `String explanation`
+
+      Human-readable explanation of the verdict. For `needs_revision`, describes which criteria failed and why.
+
+    - `long iteration`
+
+      0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
+
+    - `String outcomeEvaluationStartId`
+
+      The id of the corresponding `span.outcome_evaluation_start` event.
+
+    - `String outcomeId`
+
+      The `outc_` ID of the outcome being evaluated.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String result`
+
+      Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs_revision': criteria not met, another revision cycle follows. 'max_iterations_reached': evaluation budget exhausted with criteria still unmet — one final acknowledgment turn follows before the session goes idle, but no further evaluation runs. 'failed': grader determined the rubric does not apply to the deliverables. 'interrupted': user sent an interrupt while evaluation was in progress.
+
+    - `Type type`
+
+      - `SPAN_OUTCOME_EVALUATION_END("span.outcome_evaluation_end")`
+
+    - `BetaManagedAgentsSpanModelUsage usage`
+
+      Token usage for a single model request.
+
+      - `long cacheCreationInputTokens`
+
+        Tokens used to create prompt cache in this request.
+
+      - `long cacheReadInputTokens`
+
+        Tokens read from prompt cache in this request.
+
+      - `long inputTokens`
+
+        Input tokens consumed by this request.
+
+      - `long outputTokens`
+
+        Output tokens generated by this request.
+
+      - `Optional<Speed> speed`
+
+        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+        - `STANDARD("standard")`
+
+        - `FAST("fast")`
+
   - `class BetaManagedAgentsSpanModelRequestStartEvent:`
 
     Emitted when a model request is initiated by the agent.
@@ -61856,6 +68120,86 @@ Stream Events
 
       - `SPAN_MODEL_REQUEST_END("span.model_request_end")`
 
+  - `class BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent:`
+
+    Periodic heartbeat emitted while an outcome evaluation cycle is in progress. Distinguishes 'evaluation is actively running' from 'evaluation is stuck' between the corresponding `span.outcome_evaluation_start` and `span.outcome_evaluation_end` events.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `long iteration`
+
+      0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
+
+    - `String outcomeId`
+
+      The `outc_` ID of the outcome being evaluated.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `SPAN_OUTCOME_EVALUATION_ONGOING("span.outcome_evaluation_ongoing")`
+
+  - `class BetaManagedAgentsUserDefineOutcomeEvent:`
+
+    Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `String description`
+
+      What the agent should produce. Copied from the input event.
+
+    - `Optional<Long> maxIterations`
+
+      Evaluate-then-revise cycles before giving up. Default 3, max 20.
+
+    - `String outcomeId`
+
+      Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Rubric rubric`
+
+      Rubric for grading the quality of an outcome.
+
+      - `class BetaManagedAgentsFileRubric:`
+
+        Rubric referenced by a file uploaded via the Files API.
+
+        - `String fileId`
+
+          ID of the rubric file.
+
+        - `Type type`
+
+          - `FILE("file")`
+
+      - `class BetaManagedAgentsTextRubric:`
+
+        Rubric content provided inline as text.
+
+        - `String content`
+
+          Rubric content. Plain text or markdown — the grader treats it as freeform text.
+
+        - `Type type`
+
+          - `TEXT("text")`
+
+    - `Type type`
+
+      - `USER_DEFINE_OUTCOME("user.define_outcome")`
+
   - `class BetaManagedAgentsSessionDeletedEvent:`
 
     Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
@@ -61871,6 +68215,134 @@ Stream Events
     - `Type type`
 
       - `SESSION_DELETED("session.deleted")`
+
+  - `class BetaManagedAgentsSessionThreadStatusRunningEvent:`
+
+    A session thread has begun executing. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `String agentName`
+
+      Name of the agent the thread runs.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String sessionThreadId`
+
+      Public sthr_ ID of the thread that started running.
+
+    - `Type type`
+
+      - `SESSION_THREAD_STATUS_RUNNING("session.thread_status_running")`
+
+  - `class BetaManagedAgentsSessionThreadStatusIdleEvent:`
+
+    A session thread has yielded and is awaiting input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `String agentName`
+
+      Name of the agent the thread runs.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String sessionThreadId`
+
+      Public sthr_ ID of the thread that went idle.
+
+    - `StopReason stopReason`
+
+      The agent completed its turn naturally and is ready for the next user message.
+
+      - `class BetaManagedAgentsSessionEndTurn:`
+
+        The agent completed its turn naturally and is ready for the next user message.
+
+        - `Type type`
+
+          - `END_TURN("end_turn")`
+
+      - `class BetaManagedAgentsSessionRequiresAction:`
+
+        The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
+
+        - `List<String> eventIds`
+
+          The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
+
+        - `Type type`
+
+          - `REQUIRES_ACTION("requires_action")`
+
+      - `class BetaManagedAgentsSessionRetriesExhausted:`
+
+        The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+
+        - `Type type`
+
+          - `RETRIES_EXHAUSTED("retries_exhausted")`
+
+    - `Type type`
+
+      - `SESSION_THREAD_STATUS_IDLE("session.thread_status_idle")`
+
+  - `class BetaManagedAgentsSessionThreadStatusTerminatedEvent:`
+
+    A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `String agentName`
+
+      Name of the agent the thread runs.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String sessionThreadId`
+
+      Public sthr_ ID of the thread that terminated.
+
+    - `Type type`
+
+      - `SESSION_THREAD_STATUS_TERMINATED("session.thread_status_terminated")`
+
+  - `class BetaManagedAgentsSessionThreadStatusRescheduledEvent:`
+
+    A session thread hit a transient error and is retrying automatically. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `String agentName`
+
+      Name of the agent the thread runs.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String sessionThreadId`
+
+      Public sthr_ ID of the thread that is retrying.
+
+    - `Type type`
+
+      - `SESSION_THREAD_STATUS_RESCHEDULED("session.thread_status_rescheduled")`
 
 ### Example
 
@@ -61921,6 +68393,10 @@ public final class Main {
   - `Type type`
 
     - `AGENT_CUSTOM_TOOL_USE("agent.custom_tool_use")`
+
+  - `Optional<String> sessionThreadId`
+
+    When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
 
 ### Beta Managed Agents Agent MCP Tool Result Event
 
@@ -62134,6 +68610,10 @@ public final class Main {
 
     - `DENY("deny")`
 
+  - `Optional<String> sessionThreadId`
+
+    When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
+
 ### Beta Managed Agents Agent Message Event
 
 - `class BetaManagedAgentsAgentMessageEvent:`
@@ -62199,6 +68679,350 @@ public final class Main {
   - `Type type`
 
     - `AGENT_THREAD_CONTEXT_COMPACTED("agent.thread_context_compacted")`
+
+### Beta Managed Agents Agent Thread Message Received Event
+
+- `class BetaManagedAgentsAgentThreadMessageReceivedEvent:`
+
+  Delivery event written to the target thread's input stream when an agent-to-agent message arrives.
+
+  - `String id`
+
+    Unique identifier for this event.
+
+  - `List<Content> content`
+
+    Message content blocks.
+
+    - `class BetaManagedAgentsTextBlock:`
+
+      Regular text content.
+
+      - `String text`
+
+        The text content.
+
+      - `Type type`
+
+        - `TEXT("text")`
+
+    - `class BetaManagedAgentsImageBlock:`
+
+      Image content specified directly as base64 data or as a reference via a URL.
+
+      - `Source source`
+
+        Union type for image source variants.
+
+        - `class BetaManagedAgentsBase64ImageSource:`
+
+          Base64-encoded image data.
+
+          - `String data`
+
+            Base64-encoded image data.
+
+          - `String mediaType`
+
+            MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+          - `Type type`
+
+            - `BASE64("base64")`
+
+        - `class BetaManagedAgentsUrlImageSource:`
+
+          Image referenced by URL.
+
+          - `Type type`
+
+            - `URL("url")`
+
+          - `String url`
+
+            URL of the image to fetch.
+
+        - `class BetaManagedAgentsFileImageSource:`
+
+          Image referenced by file ID.
+
+          - `String fileId`
+
+            ID of a previously uploaded file.
+
+          - `Type type`
+
+            - `FILE("file")`
+
+      - `Type type`
+
+        - `IMAGE("image")`
+
+    - `class BetaManagedAgentsDocumentBlock:`
+
+      Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+      - `Source source`
+
+        Union type for document source variants.
+
+        - `class BetaManagedAgentsBase64DocumentSource:`
+
+          Base64-encoded document data.
+
+          - `String data`
+
+            Base64-encoded document data.
+
+          - `String mediaType`
+
+            MIME type of the document (e.g., "application/pdf").
+
+          - `Type type`
+
+            - `BASE64("base64")`
+
+        - `class BetaManagedAgentsPlainTextDocumentSource:`
+
+          Plain text document content.
+
+          - `String data`
+
+            The plain text content.
+
+          - `MediaType mediaType`
+
+            MIME type of the text content. Must be "text/plain".
+
+            - `TEXT_PLAIN("text/plain")`
+
+          - `Type type`
+
+            - `TEXT("text")`
+
+        - `class BetaManagedAgentsUrlDocumentSource:`
+
+          Document referenced by URL.
+
+          - `Type type`
+
+            - `URL("url")`
+
+          - `String url`
+
+            URL of the document to fetch.
+
+        - `class BetaManagedAgentsFileDocumentSource:`
+
+          Document referenced by file ID.
+
+          - `String fileId`
+
+            ID of a previously uploaded file.
+
+          - `Type type`
+
+            - `FILE("file")`
+
+      - `Type type`
+
+        - `DOCUMENT("document")`
+
+      - `Optional<String> context`
+
+        Additional context about the document for the model.
+
+      - `Optional<String> title`
+
+        The title of the document.
+
+  - `String fromSessionThreadId`
+
+    Public `sthr_` ID of the thread that sent the message.
+
+  - `LocalDateTime processedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Type type`
+
+    - `AGENT_THREAD_MESSAGE_RECEIVED("agent.thread_message_received")`
+
+  - `Optional<String> fromAgentName`
+
+    Name of the callable agent this message came from. Absent when received from the primary agent.
+
+### Beta Managed Agents Agent Thread Message Sent Event
+
+- `class BetaManagedAgentsAgentThreadMessageSentEvent:`
+
+  Observability event emitted to the sender's output stream when an agent-to-agent message is sent.
+
+  - `String id`
+
+    Unique identifier for this event.
+
+  - `List<Content> content`
+
+    Message content blocks.
+
+    - `class BetaManagedAgentsTextBlock:`
+
+      Regular text content.
+
+      - `String text`
+
+        The text content.
+
+      - `Type type`
+
+        - `TEXT("text")`
+
+    - `class BetaManagedAgentsImageBlock:`
+
+      Image content specified directly as base64 data or as a reference via a URL.
+
+      - `Source source`
+
+        Union type for image source variants.
+
+        - `class BetaManagedAgentsBase64ImageSource:`
+
+          Base64-encoded image data.
+
+          - `String data`
+
+            Base64-encoded image data.
+
+          - `String mediaType`
+
+            MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+          - `Type type`
+
+            - `BASE64("base64")`
+
+        - `class BetaManagedAgentsUrlImageSource:`
+
+          Image referenced by URL.
+
+          - `Type type`
+
+            - `URL("url")`
+
+          - `String url`
+
+            URL of the image to fetch.
+
+        - `class BetaManagedAgentsFileImageSource:`
+
+          Image referenced by file ID.
+
+          - `String fileId`
+
+            ID of a previously uploaded file.
+
+          - `Type type`
+
+            - `FILE("file")`
+
+      - `Type type`
+
+        - `IMAGE("image")`
+
+    - `class BetaManagedAgentsDocumentBlock:`
+
+      Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+      - `Source source`
+
+        Union type for document source variants.
+
+        - `class BetaManagedAgentsBase64DocumentSource:`
+
+          Base64-encoded document data.
+
+          - `String data`
+
+            Base64-encoded document data.
+
+          - `String mediaType`
+
+            MIME type of the document (e.g., "application/pdf").
+
+          - `Type type`
+
+            - `BASE64("base64")`
+
+        - `class BetaManagedAgentsPlainTextDocumentSource:`
+
+          Plain text document content.
+
+          - `String data`
+
+            The plain text content.
+
+          - `MediaType mediaType`
+
+            MIME type of the text content. Must be "text/plain".
+
+            - `TEXT_PLAIN("text/plain")`
+
+          - `Type type`
+
+            - `TEXT("text")`
+
+        - `class BetaManagedAgentsUrlDocumentSource:`
+
+          Document referenced by URL.
+
+          - `Type type`
+
+            - `URL("url")`
+
+          - `String url`
+
+            URL of the document to fetch.
+
+        - `class BetaManagedAgentsFileDocumentSource:`
+
+          Document referenced by file ID.
+
+          - `String fileId`
+
+            ID of a previously uploaded file.
+
+          - `Type type`
+
+            - `FILE("file")`
+
+      - `Type type`
+
+        - `DOCUMENT("document")`
+
+      - `Optional<String> context`
+
+        Additional context about the document for the model.
+
+      - `Optional<String> title`
+
+        The title of the document.
+
+  - `LocalDateTime processedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `String toSessionThreadId`
+
+    Public `sthr_` ID of the thread the message was sent to.
+
+  - `Type type`
+
+    - `AGENT_THREAD_MESSAGE_SENT("agent.thread_message_sent")`
+
+  - `Optional<String> toAgentName`
+
+    Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
 ### Beta Managed Agents Agent Tool Result Event
 
@@ -62407,6 +69231,10 @@ public final class Main {
     - `ASK("ask")`
 
     - `DENY("deny")`
+
+  - `Optional<String> sessionThreadId`
+
+    When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
 ### Beta Managed Agents Base64 Document Source
 
@@ -62734,6 +69562,10 @@ public final class Main {
 
       - `USER_INTERRUPT("user.interrupt")`
 
+    - `Optional<String> sessionThreadId`
+
+      If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
+
   - `class BetaManagedAgentsUserToolConfirmationEventParams:`
 
     Parameters for confirming or denying a tool execution request.
@@ -62920,6 +69752,50 @@ public final class Main {
 
       Whether the tool execution resulted in an error.
 
+  - `class BetaManagedAgentsUserDefineOutcomeEventParams:`
+
+    Parameters for defining an outcome the agent should work toward. The agent begins work on receipt.
+
+    - `String description`
+
+      What the agent should produce. This is the task specification.
+
+    - `Rubric rubric`
+
+      Rubric for grading the quality of an outcome.
+
+      - `class BetaManagedAgentsFileRubricParams:`
+
+        Rubric referenced by a file uploaded via the Files API.
+
+        - `String fileId`
+
+          ID of the rubric file.
+
+        - `Type type`
+
+          - `FILE("file")`
+
+      - `class BetaManagedAgentsTextRubricParams:`
+
+        Rubric content provided inline as text.
+
+        - `String content`
+
+          Rubric content. Plain text or markdown — the grader treats it as freeform text. Maximum 262144 characters.
+
+        - `Type type`
+
+          - `TEXT("text")`
+
+    - `Type type`
+
+      - `USER_DEFINE_OUTCOME("user.define_outcome")`
+
+    - `Optional<Long> maxIterations`
+
+      Eval→revision cycles before giving up. Default 3, max 20.
+
 ### Beta Managed Agents File Document Source
 
 - `class BetaManagedAgentsFileDocumentSource:`
@@ -62943,6 +69819,34 @@ public final class Main {
   - `String fileId`
 
     ID of a previously uploaded file.
+
+  - `Type type`
+
+    - `FILE("file")`
+
+### Beta Managed Agents File Rubric
+
+- `class BetaManagedAgentsFileRubric:`
+
+  Rubric referenced by a file uploaded via the Files API.
+
+  - `String fileId`
+
+    ID of the rubric file.
+
+  - `Type type`
+
+    - `FILE("file")`
+
+### Beta Managed Agents File Rubric Params
+
+- `class BetaManagedAgentsFileRubricParams:`
+
+  Rubric referenced by a file uploaded via the Files API.
+
+  - `String fileId`
+
+    ID of the rubric file.
 
   - `Type type`
 
@@ -63458,6 +70362,10 @@ public final class Main {
 
         A timestamp in RFC 3339 format
 
+      - `Optional<String> sessionThreadId`
+
+        If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
+
     - `class BetaManagedAgentsUserToolConfirmationEvent:`
 
       A tool confirmation event that approves or denies a pending tool execution.
@@ -63489,6 +70397,10 @@ public final class Main {
       - `Optional<LocalDateTime> processedAt`
 
         A timestamp in RFC 3339 format
+
+      - `Optional<String> sessionThreadId`
+
+        When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
     - `class BetaManagedAgentsUserCustomToolResultEvent:`
 
@@ -63659,6 +70571,66 @@ public final class Main {
       - `Optional<LocalDateTime> processedAt`
 
         A timestamp in RFC 3339 format
+
+      - `Optional<String> sessionThreadId`
+
+        Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
+
+    - `class BetaManagedAgentsUserDefineOutcomeEvent:`
+
+      Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
+
+      - `String id`
+
+        Unique identifier for this event.
+
+      - `String description`
+
+        What the agent should produce. Copied from the input event.
+
+      - `Optional<Long> maxIterations`
+
+        Evaluate-then-revise cycles before giving up. Default 3, max 20.
+
+      - `String outcomeId`
+
+        Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
+
+      - `LocalDateTime processedAt`
+
+        A timestamp in RFC 3339 format
+
+      - `Rubric rubric`
+
+        Rubric for grading the quality of an outcome.
+
+        - `class BetaManagedAgentsFileRubric:`
+
+          Rubric referenced by a file uploaded via the Files API.
+
+          - `String fileId`
+
+            ID of the rubric file.
+
+          - `Type type`
+
+            - `FILE("file")`
+
+        - `class BetaManagedAgentsTextRubric:`
+
+          Rubric content provided inline as text.
+
+          - `String content`
+
+            Rubric content. Plain text or markdown — the grader treats it as freeform text.
+
+          - `Type type`
+
+            - `TEXT("text")`
+
+      - `Type type`
+
+        - `USER_DEFINE_OUTCOME("user.define_outcome")`
 
 ### Beta Managed Agents Session Deleted Event
 
@@ -64182,6 +71154,10 @@ public final class Main {
 
       A timestamp in RFC 3339 format
 
+    - `Optional<String> sessionThreadId`
+
+      If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
+
   - `class BetaManagedAgentsUserToolConfirmationEvent:`
 
     A tool confirmation event that approves or denies a pending tool execution.
@@ -64213,6 +71189,10 @@ public final class Main {
     - `Optional<LocalDateTime> processedAt`
 
       A timestamp in RFC 3339 format
+
+    - `Optional<String> sessionThreadId`
+
+      When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
   - `class BetaManagedAgentsUserCustomToolResultEvent:`
 
@@ -64384,6 +71364,10 @@ public final class Main {
 
       A timestamp in RFC 3339 format
 
+    - `Optional<String> sessionThreadId`
+
+      Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
+
   - `class BetaManagedAgentsAgentCustomToolUseEvent:`
 
     Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result.
@@ -64407,6 +71391,10 @@ public final class Main {
     - `Type type`
 
       - `AGENT_CUSTOM_TOOL_USE("agent.custom_tool_use")`
+
+    - `Optional<String> sessionThreadId`
+
+      When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
 
   - `class BetaManagedAgentsAgentMessageEvent:`
 
@@ -64489,6 +71477,10 @@ public final class Main {
       - `ASK("ask")`
 
       - `DENY("deny")`
+
+    - `Optional<String> sessionThreadId`
+
+      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
   - `class BetaManagedAgentsAgentMcpToolResultEvent:`
 
@@ -64694,6 +71686,10 @@ public final class Main {
 
       - `DENY("deny")`
 
+    - `Optional<String> sessionThreadId`
+
+      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
+
   - `class BetaManagedAgentsAgentToolResultEvent:`
 
     Event representing the result of an agent tool execution.
@@ -64863,6 +71859,346 @@ public final class Main {
     - `Optional<Boolean> isError`
 
       Whether the tool execution resulted in an error.
+
+  - `class BetaManagedAgentsAgentThreadMessageReceivedEvent:`
+
+    Delivery event written to the target thread's input stream when an agent-to-agent message arrives.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `List<Content> content`
+
+      Message content blocks.
+
+      - `class BetaManagedAgentsTextBlock:`
+
+        Regular text content.
+
+        - `String text`
+
+          The text content.
+
+        - `Type type`
+
+          - `TEXT("text")`
+
+      - `class BetaManagedAgentsImageBlock:`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for image source variants.
+
+          - `class BetaManagedAgentsBase64ImageSource:`
+
+            Base64-encoded image data.
+
+            - `String data`
+
+              Base64-encoded image data.
+
+            - `String mediaType`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsUrlImageSource:`
+
+            Image referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the image to fetch.
+
+          - `class BetaManagedAgentsFileImageSource:`
+
+            Image referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `IMAGE("image")`
+
+      - `class BetaManagedAgentsDocumentBlock:`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for document source variants.
+
+          - `class BetaManagedAgentsBase64DocumentSource:`
+
+            Base64-encoded document data.
+
+            - `String data`
+
+              Base64-encoded document data.
+
+            - `String mediaType`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsPlainTextDocumentSource:`
+
+            Plain text document content.
+
+            - `String data`
+
+              The plain text content.
+
+            - `MediaType mediaType`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `TEXT_PLAIN("text/plain")`
+
+            - `Type type`
+
+              - `TEXT("text")`
+
+          - `class BetaManagedAgentsUrlDocumentSource:`
+
+            Document referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the document to fetch.
+
+          - `class BetaManagedAgentsFileDocumentSource:`
+
+            Document referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `DOCUMENT("document")`
+
+        - `Optional<String> context`
+
+          Additional context about the document for the model.
+
+        - `Optional<String> title`
+
+          The title of the document.
+
+    - `String fromSessionThreadId`
+
+      Public `sthr_` ID of the thread that sent the message.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `AGENT_THREAD_MESSAGE_RECEIVED("agent.thread_message_received")`
+
+    - `Optional<String> fromAgentName`
+
+      Name of the callable agent this message came from. Absent when received from the primary agent.
+
+  - `class BetaManagedAgentsAgentThreadMessageSentEvent:`
+
+    Observability event emitted to the sender's output stream when an agent-to-agent message is sent.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `List<Content> content`
+
+      Message content blocks.
+
+      - `class BetaManagedAgentsTextBlock:`
+
+        Regular text content.
+
+        - `String text`
+
+          The text content.
+
+        - `Type type`
+
+          - `TEXT("text")`
+
+      - `class BetaManagedAgentsImageBlock:`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for image source variants.
+
+          - `class BetaManagedAgentsBase64ImageSource:`
+
+            Base64-encoded image data.
+
+            - `String data`
+
+              Base64-encoded image data.
+
+            - `String mediaType`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsUrlImageSource:`
+
+            Image referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the image to fetch.
+
+          - `class BetaManagedAgentsFileImageSource:`
+
+            Image referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `IMAGE("image")`
+
+      - `class BetaManagedAgentsDocumentBlock:`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for document source variants.
+
+          - `class BetaManagedAgentsBase64DocumentSource:`
+
+            Base64-encoded document data.
+
+            - `String data`
+
+              Base64-encoded document data.
+
+            - `String mediaType`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsPlainTextDocumentSource:`
+
+            Plain text document content.
+
+            - `String data`
+
+              The plain text content.
+
+            - `MediaType mediaType`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `TEXT_PLAIN("text/plain")`
+
+            - `Type type`
+
+              - `TEXT("text")`
+
+          - `class BetaManagedAgentsUrlDocumentSource:`
+
+            Document referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the document to fetch.
+
+          - `class BetaManagedAgentsFileDocumentSource:`
+
+            Document referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `DOCUMENT("document")`
+
+        - `Optional<String> context`
+
+          Additional context about the document for the model.
+
+        - `Optional<String> title`
+
+          The title of the document.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String toSessionThreadId`
+
+      Public `sthr_` ID of the thread the message was sent to.
+
+    - `Type type`
+
+      - `AGENT_THREAD_MESSAGE_SENT("agent.thread_message_sent")`
+
+    - `Optional<String> toAgentName`
+
+      Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
   - `class BetaManagedAgentsAgentThreadContextCompactedEvent:`
 
@@ -65284,6 +72620,118 @@ public final class Main {
 
       - `SESSION_STATUS_TERMINATED("session.status_terminated")`
 
+  - `class BetaManagedAgentsSessionThreadCreatedEvent:`
+
+    Emitted when a subagent is spawned as a new thread. Written to the parent thread's output stream so clients observing the session see child creation.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `String agentName`
+
+      Name of the callable agent the thread runs.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String sessionThreadId`
+
+      Public `sthr_` ID of the newly created thread.
+
+    - `Type type`
+
+      - `SESSION_THREAD_CREATED("session.thread_created")`
+
+  - `class BetaManagedAgentsSpanOutcomeEvaluationStartEvent:`
+
+    Emitted when an outcome evaluation cycle begins.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `long iteration`
+
+      0-indexed revision cycle. 0 is the first evaluation; 1 is the re-evaluation after the first revision; etc.
+
+    - `String outcomeId`
+
+      The `outc_` ID of the outcome being evaluated.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `SPAN_OUTCOME_EVALUATION_START("span.outcome_evaluation_start")`
+
+  - `class BetaManagedAgentsSpanOutcomeEvaluationEndEvent:`
+
+    Emitted when an outcome evaluation cycle completes. Carries the verdict and aggregate token usage. A verdict of `needs_revision` means another evaluation cycle follows; `satisfied`, `max_iterations_reached`, `failed`, or `interrupted` are terminal — no further evaluation cycles follow.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `String explanation`
+
+      Human-readable explanation of the verdict. For `needs_revision`, describes which criteria failed and why.
+
+    - `long iteration`
+
+      0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
+
+    - `String outcomeEvaluationStartId`
+
+      The id of the corresponding `span.outcome_evaluation_start` event.
+
+    - `String outcomeId`
+
+      The `outc_` ID of the outcome being evaluated.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String result`
+
+      Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs_revision': criteria not met, another revision cycle follows. 'max_iterations_reached': evaluation budget exhausted with criteria still unmet — one final acknowledgment turn follows before the session goes idle, but no further evaluation runs. 'failed': grader determined the rubric does not apply to the deliverables. 'interrupted': user sent an interrupt while evaluation was in progress.
+
+    - `Type type`
+
+      - `SPAN_OUTCOME_EVALUATION_END("span.outcome_evaluation_end")`
+
+    - `BetaManagedAgentsSpanModelUsage usage`
+
+      Token usage for a single model request.
+
+      - `long cacheCreationInputTokens`
+
+        Tokens used to create prompt cache in this request.
+
+      - `long cacheReadInputTokens`
+
+        Tokens read from prompt cache in this request.
+
+      - `long inputTokens`
+
+        Input tokens consumed by this request.
+
+      - `long outputTokens`
+
+        Output tokens generated by this request.
+
+      - `Optional<Speed> speed`
+
+        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+        - `STANDARD("standard")`
+
+        - `FAST("fast")`
+
   - `class BetaManagedAgentsSpanModelRequestStartEvent:`
 
     Emitted when a model request is initiated by the agent.
@@ -65352,6 +72800,86 @@ public final class Main {
 
       - `SPAN_MODEL_REQUEST_END("span.model_request_end")`
 
+  - `class BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent:`
+
+    Periodic heartbeat emitted while an outcome evaluation cycle is in progress. Distinguishes 'evaluation is actively running' from 'evaluation is stuck' between the corresponding `span.outcome_evaluation_start` and `span.outcome_evaluation_end` events.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `long iteration`
+
+      0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
+
+    - `String outcomeId`
+
+      The `outc_` ID of the outcome being evaluated.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `SPAN_OUTCOME_EVALUATION_ONGOING("span.outcome_evaluation_ongoing")`
+
+  - `class BetaManagedAgentsUserDefineOutcomeEvent:`
+
+    Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `String description`
+
+      What the agent should produce. Copied from the input event.
+
+    - `Optional<Long> maxIterations`
+
+      Evaluate-then-revise cycles before giving up. Default 3, max 20.
+
+    - `String outcomeId`
+
+      Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Rubric rubric`
+
+      Rubric for grading the quality of an outcome.
+
+      - `class BetaManagedAgentsFileRubric:`
+
+        Rubric referenced by a file uploaded via the Files API.
+
+        - `String fileId`
+
+          ID of the rubric file.
+
+        - `Type type`
+
+          - `FILE("file")`
+
+      - `class BetaManagedAgentsTextRubric:`
+
+        Rubric content provided inline as text.
+
+        - `String content`
+
+          Rubric content. Plain text or markdown — the grader treats it as freeform text.
+
+        - `Type type`
+
+          - `TEXT("text")`
+
+    - `Type type`
+
+      - `USER_DEFINE_OUTCOME("user.define_outcome")`
+
   - `class BetaManagedAgentsSessionDeletedEvent:`
 
     Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
@@ -65367,6 +72895,134 @@ public final class Main {
     - `Type type`
 
       - `SESSION_DELETED("session.deleted")`
+
+  - `class BetaManagedAgentsSessionThreadStatusRunningEvent:`
+
+    A session thread has begun executing. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `String agentName`
+
+      Name of the agent the thread runs.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String sessionThreadId`
+
+      Public sthr_ ID of the thread that started running.
+
+    - `Type type`
+
+      - `SESSION_THREAD_STATUS_RUNNING("session.thread_status_running")`
+
+  - `class BetaManagedAgentsSessionThreadStatusIdleEvent:`
+
+    A session thread has yielded and is awaiting input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `String agentName`
+
+      Name of the agent the thread runs.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String sessionThreadId`
+
+      Public sthr_ ID of the thread that went idle.
+
+    - `StopReason stopReason`
+
+      The agent completed its turn naturally and is ready for the next user message.
+
+      - `class BetaManagedAgentsSessionEndTurn:`
+
+        The agent completed its turn naturally and is ready for the next user message.
+
+        - `Type type`
+
+          - `END_TURN("end_turn")`
+
+      - `class BetaManagedAgentsSessionRequiresAction:`
+
+        The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
+
+        - `List<String> eventIds`
+
+          The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
+
+        - `Type type`
+
+          - `REQUIRES_ACTION("requires_action")`
+
+      - `class BetaManagedAgentsSessionRetriesExhausted:`
+
+        The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+
+        - `Type type`
+
+          - `RETRIES_EXHAUSTED("retries_exhausted")`
+
+    - `Type type`
+
+      - `SESSION_THREAD_STATUS_IDLE("session.thread_status_idle")`
+
+  - `class BetaManagedAgentsSessionThreadStatusTerminatedEvent:`
+
+    A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `String agentName`
+
+      Name of the agent the thread runs.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String sessionThreadId`
+
+      Public sthr_ ID of the thread that terminated.
+
+    - `Type type`
+
+      - `SESSION_THREAD_STATUS_TERMINATED("session.thread_status_terminated")`
+
+  - `class BetaManagedAgentsSessionThreadStatusRescheduledEvent:`
+
+    A session thread hit a transient error and is retrying automatically. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `String agentName`
+
+      Name of the agent the thread runs.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String sessionThreadId`
+
+      Public sthr_ ID of the thread that is retrying.
+
+    - `Type type`
+
+      - `SESSION_THREAD_STATUS_RESCHEDULED("session.thread_status_rescheduled")`
 
 ### Beta Managed Agents Session Requires Action
 
@@ -65496,6 +73152,168 @@ public final class Main {
 
     - `SESSION_STATUS_TERMINATED("session.status_terminated")`
 
+### Beta Managed Agents Session Thread Created Event
+
+- `class BetaManagedAgentsSessionThreadCreatedEvent:`
+
+  Emitted when a subagent is spawned as a new thread. Written to the parent thread's output stream so clients observing the session see child creation.
+
+  - `String id`
+
+    Unique identifier for this event.
+
+  - `String agentName`
+
+    Name of the callable agent the thread runs.
+
+  - `LocalDateTime processedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `String sessionThreadId`
+
+    Public `sthr_` ID of the newly created thread.
+
+  - `Type type`
+
+    - `SESSION_THREAD_CREATED("session.thread_created")`
+
+### Beta Managed Agents Session Thread Status Idle Event
+
+- `class BetaManagedAgentsSessionThreadStatusIdleEvent:`
+
+  A session thread has yielded and is awaiting input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+  - `String id`
+
+    Unique identifier for this event.
+
+  - `String agentName`
+
+    Name of the agent the thread runs.
+
+  - `LocalDateTime processedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `String sessionThreadId`
+
+    Public sthr_ ID of the thread that went idle.
+
+  - `StopReason stopReason`
+
+    The agent completed its turn naturally and is ready for the next user message.
+
+    - `class BetaManagedAgentsSessionEndTurn:`
+
+      The agent completed its turn naturally and is ready for the next user message.
+
+      - `Type type`
+
+        - `END_TURN("end_turn")`
+
+    - `class BetaManagedAgentsSessionRequiresAction:`
+
+      The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
+
+      - `List<String> eventIds`
+
+        The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
+
+      - `Type type`
+
+        - `REQUIRES_ACTION("requires_action")`
+
+    - `class BetaManagedAgentsSessionRetriesExhausted:`
+
+      The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+
+      - `Type type`
+
+        - `RETRIES_EXHAUSTED("retries_exhausted")`
+
+  - `Type type`
+
+    - `SESSION_THREAD_STATUS_IDLE("session.thread_status_idle")`
+
+### Beta Managed Agents Session Thread Status Rescheduled Event
+
+- `class BetaManagedAgentsSessionThreadStatusRescheduledEvent:`
+
+  A session thread hit a transient error and is retrying automatically. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+  - `String id`
+
+    Unique identifier for this event.
+
+  - `String agentName`
+
+    Name of the agent the thread runs.
+
+  - `LocalDateTime processedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `String sessionThreadId`
+
+    Public sthr_ ID of the thread that is retrying.
+
+  - `Type type`
+
+    - `SESSION_THREAD_STATUS_RESCHEDULED("session.thread_status_rescheduled")`
+
+### Beta Managed Agents Session Thread Status Running Event
+
+- `class BetaManagedAgentsSessionThreadStatusRunningEvent:`
+
+  A session thread has begun executing. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+  - `String id`
+
+    Unique identifier for this event.
+
+  - `String agentName`
+
+    Name of the agent the thread runs.
+
+  - `LocalDateTime processedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `String sessionThreadId`
+
+    Public sthr_ ID of the thread that started running.
+
+  - `Type type`
+
+    - `SESSION_THREAD_STATUS_RUNNING("session.thread_status_running")`
+
+### Beta Managed Agents Session Thread Status Terminated Event
+
+- `class BetaManagedAgentsSessionThreadStatusTerminatedEvent:`
+
+  A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+  - `String id`
+
+    Unique identifier for this event.
+
+  - `String agentName`
+
+    Name of the agent the thread runs.
+
+  - `LocalDateTime processedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `String sessionThreadId`
+
+    Public sthr_ ID of the thread that terminated.
+
+  - `Type type`
+
+    - `SESSION_THREAD_STATUS_TERMINATED("session.thread_status_terminated")`
+
 ### Beta Managed Agents Span Model Request End Event
 
 - `class BetaManagedAgentsSpanModelRequestEndEvent:`
@@ -65597,6 +73415,124 @@ public final class Main {
     - `STANDARD("standard")`
 
     - `FAST("fast")`
+
+### Beta Managed Agents Span Outcome Evaluation End Event
+
+- `class BetaManagedAgentsSpanOutcomeEvaluationEndEvent:`
+
+  Emitted when an outcome evaluation cycle completes. Carries the verdict and aggregate token usage. A verdict of `needs_revision` means another evaluation cycle follows; `satisfied`, `max_iterations_reached`, `failed`, or `interrupted` are terminal — no further evaluation cycles follow.
+
+  - `String id`
+
+    Unique identifier for this event.
+
+  - `String explanation`
+
+    Human-readable explanation of the verdict. For `needs_revision`, describes which criteria failed and why.
+
+  - `long iteration`
+
+    0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
+
+  - `String outcomeEvaluationStartId`
+
+    The id of the corresponding `span.outcome_evaluation_start` event.
+
+  - `String outcomeId`
+
+    The `outc_` ID of the outcome being evaluated.
+
+  - `LocalDateTime processedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `String result`
+
+    Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs_revision': criteria not met, another revision cycle follows. 'max_iterations_reached': evaluation budget exhausted with criteria still unmet — one final acknowledgment turn follows before the session goes idle, but no further evaluation runs. 'failed': grader determined the rubric does not apply to the deliverables. 'interrupted': user sent an interrupt while evaluation was in progress.
+
+  - `Type type`
+
+    - `SPAN_OUTCOME_EVALUATION_END("span.outcome_evaluation_end")`
+
+  - `BetaManagedAgentsSpanModelUsage usage`
+
+    Token usage for a single model request.
+
+    - `long cacheCreationInputTokens`
+
+      Tokens used to create prompt cache in this request.
+
+    - `long cacheReadInputTokens`
+
+      Tokens read from prompt cache in this request.
+
+    - `long inputTokens`
+
+      Input tokens consumed by this request.
+
+    - `long outputTokens`
+
+      Output tokens generated by this request.
+
+    - `Optional<Speed> speed`
+
+      Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+      - `STANDARD("standard")`
+
+      - `FAST("fast")`
+
+### Beta Managed Agents Span Outcome Evaluation Ongoing Event
+
+- `class BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent:`
+
+  Periodic heartbeat emitted while an outcome evaluation cycle is in progress. Distinguishes 'evaluation is actively running' from 'evaluation is stuck' between the corresponding `span.outcome_evaluation_start` and `span.outcome_evaluation_end` events.
+
+  - `String id`
+
+    Unique identifier for this event.
+
+  - `long iteration`
+
+    0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
+
+  - `String outcomeId`
+
+    The `outc_` ID of the outcome being evaluated.
+
+  - `LocalDateTime processedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Type type`
+
+    - `SPAN_OUTCOME_EVALUATION_ONGOING("span.outcome_evaluation_ongoing")`
+
+### Beta Managed Agents Span Outcome Evaluation Start Event
+
+- `class BetaManagedAgentsSpanOutcomeEvaluationStartEvent:`
+
+  Emitted when an outcome evaluation cycle begins.
+
+  - `String id`
+
+    Unique identifier for this event.
+
+  - `long iteration`
+
+    0-indexed revision cycle. 0 is the first evaluation; 1 is the re-evaluation after the first revision; etc.
+
+  - `String outcomeId`
+
+    The `outc_` ID of the outcome being evaluated.
+
+  - `LocalDateTime processedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Type type`
+
+    - `SPAN_OUTCOME_EVALUATION_START("span.outcome_evaluation_start")`
 
 ### Beta Managed Agents Stream Session Events
 
@@ -65782,6 +73718,10 @@ public final class Main {
 
       A timestamp in RFC 3339 format
 
+    - `Optional<String> sessionThreadId`
+
+      If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
+
   - `class BetaManagedAgentsUserToolConfirmationEvent:`
 
     A tool confirmation event that approves or denies a pending tool execution.
@@ -65813,6 +73753,10 @@ public final class Main {
     - `Optional<LocalDateTime> processedAt`
 
       A timestamp in RFC 3339 format
+
+    - `Optional<String> sessionThreadId`
+
+      When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
   - `class BetaManagedAgentsUserCustomToolResultEvent:`
 
@@ -65984,6 +73928,10 @@ public final class Main {
 
       A timestamp in RFC 3339 format
 
+    - `Optional<String> sessionThreadId`
+
+      Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
+
   - `class BetaManagedAgentsAgentCustomToolUseEvent:`
 
     Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result.
@@ -66007,6 +73955,10 @@ public final class Main {
     - `Type type`
 
       - `AGENT_CUSTOM_TOOL_USE("agent.custom_tool_use")`
+
+    - `Optional<String> sessionThreadId`
+
+      When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
 
   - `class BetaManagedAgentsAgentMessageEvent:`
 
@@ -66089,6 +74041,10 @@ public final class Main {
       - `ASK("ask")`
 
       - `DENY("deny")`
+
+    - `Optional<String> sessionThreadId`
+
+      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
   - `class BetaManagedAgentsAgentMcpToolResultEvent:`
 
@@ -66294,6 +74250,10 @@ public final class Main {
 
       - `DENY("deny")`
 
+    - `Optional<String> sessionThreadId`
+
+      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
+
   - `class BetaManagedAgentsAgentToolResultEvent:`
 
     Event representing the result of an agent tool execution.
@@ -66463,6 +74423,346 @@ public final class Main {
     - `Optional<Boolean> isError`
 
       Whether the tool execution resulted in an error.
+
+  - `class BetaManagedAgentsAgentThreadMessageReceivedEvent:`
+
+    Delivery event written to the target thread's input stream when an agent-to-agent message arrives.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `List<Content> content`
+
+      Message content blocks.
+
+      - `class BetaManagedAgentsTextBlock:`
+
+        Regular text content.
+
+        - `String text`
+
+          The text content.
+
+        - `Type type`
+
+          - `TEXT("text")`
+
+      - `class BetaManagedAgentsImageBlock:`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for image source variants.
+
+          - `class BetaManagedAgentsBase64ImageSource:`
+
+            Base64-encoded image data.
+
+            - `String data`
+
+              Base64-encoded image data.
+
+            - `String mediaType`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsUrlImageSource:`
+
+            Image referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the image to fetch.
+
+          - `class BetaManagedAgentsFileImageSource:`
+
+            Image referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `IMAGE("image")`
+
+      - `class BetaManagedAgentsDocumentBlock:`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for document source variants.
+
+          - `class BetaManagedAgentsBase64DocumentSource:`
+
+            Base64-encoded document data.
+
+            - `String data`
+
+              Base64-encoded document data.
+
+            - `String mediaType`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsPlainTextDocumentSource:`
+
+            Plain text document content.
+
+            - `String data`
+
+              The plain text content.
+
+            - `MediaType mediaType`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `TEXT_PLAIN("text/plain")`
+
+            - `Type type`
+
+              - `TEXT("text")`
+
+          - `class BetaManagedAgentsUrlDocumentSource:`
+
+            Document referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the document to fetch.
+
+          - `class BetaManagedAgentsFileDocumentSource:`
+
+            Document referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `DOCUMENT("document")`
+
+        - `Optional<String> context`
+
+          Additional context about the document for the model.
+
+        - `Optional<String> title`
+
+          The title of the document.
+
+    - `String fromSessionThreadId`
+
+      Public `sthr_` ID of the thread that sent the message.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `AGENT_THREAD_MESSAGE_RECEIVED("agent.thread_message_received")`
+
+    - `Optional<String> fromAgentName`
+
+      Name of the callable agent this message came from. Absent when received from the primary agent.
+
+  - `class BetaManagedAgentsAgentThreadMessageSentEvent:`
+
+    Observability event emitted to the sender's output stream when an agent-to-agent message is sent.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `List<Content> content`
+
+      Message content blocks.
+
+      - `class BetaManagedAgentsTextBlock:`
+
+        Regular text content.
+
+        - `String text`
+
+          The text content.
+
+        - `Type type`
+
+          - `TEXT("text")`
+
+      - `class BetaManagedAgentsImageBlock:`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for image source variants.
+
+          - `class BetaManagedAgentsBase64ImageSource:`
+
+            Base64-encoded image data.
+
+            - `String data`
+
+              Base64-encoded image data.
+
+            - `String mediaType`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsUrlImageSource:`
+
+            Image referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the image to fetch.
+
+          - `class BetaManagedAgentsFileImageSource:`
+
+            Image referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `IMAGE("image")`
+
+      - `class BetaManagedAgentsDocumentBlock:`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for document source variants.
+
+          - `class BetaManagedAgentsBase64DocumentSource:`
+
+            Base64-encoded document data.
+
+            - `String data`
+
+              Base64-encoded document data.
+
+            - `String mediaType`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsPlainTextDocumentSource:`
+
+            Plain text document content.
+
+            - `String data`
+
+              The plain text content.
+
+            - `MediaType mediaType`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `TEXT_PLAIN("text/plain")`
+
+            - `Type type`
+
+              - `TEXT("text")`
+
+          - `class BetaManagedAgentsUrlDocumentSource:`
+
+            Document referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the document to fetch.
+
+          - `class BetaManagedAgentsFileDocumentSource:`
+
+            Document referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `DOCUMENT("document")`
+
+        - `Optional<String> context`
+
+          Additional context about the document for the model.
+
+        - `Optional<String> title`
+
+          The title of the document.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String toSessionThreadId`
+
+      Public `sthr_` ID of the thread the message was sent to.
+
+    - `Type type`
+
+      - `AGENT_THREAD_MESSAGE_SENT("agent.thread_message_sent")`
+
+    - `Optional<String> toAgentName`
+
+      Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
   - `class BetaManagedAgentsAgentThreadContextCompactedEvent:`
 
@@ -66884,6 +75184,118 @@ public final class Main {
 
       - `SESSION_STATUS_TERMINATED("session.status_terminated")`
 
+  - `class BetaManagedAgentsSessionThreadCreatedEvent:`
+
+    Emitted when a subagent is spawned as a new thread. Written to the parent thread's output stream so clients observing the session see child creation.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `String agentName`
+
+      Name of the callable agent the thread runs.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String sessionThreadId`
+
+      Public `sthr_` ID of the newly created thread.
+
+    - `Type type`
+
+      - `SESSION_THREAD_CREATED("session.thread_created")`
+
+  - `class BetaManagedAgentsSpanOutcomeEvaluationStartEvent:`
+
+    Emitted when an outcome evaluation cycle begins.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `long iteration`
+
+      0-indexed revision cycle. 0 is the first evaluation; 1 is the re-evaluation after the first revision; etc.
+
+    - `String outcomeId`
+
+      The `outc_` ID of the outcome being evaluated.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `SPAN_OUTCOME_EVALUATION_START("span.outcome_evaluation_start")`
+
+  - `class BetaManagedAgentsSpanOutcomeEvaluationEndEvent:`
+
+    Emitted when an outcome evaluation cycle completes. Carries the verdict and aggregate token usage. A verdict of `needs_revision` means another evaluation cycle follows; `satisfied`, `max_iterations_reached`, `failed`, or `interrupted` are terminal — no further evaluation cycles follow.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `String explanation`
+
+      Human-readable explanation of the verdict. For `needs_revision`, describes which criteria failed and why.
+
+    - `long iteration`
+
+      0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
+
+    - `String outcomeEvaluationStartId`
+
+      The id of the corresponding `span.outcome_evaluation_start` event.
+
+    - `String outcomeId`
+
+      The `outc_` ID of the outcome being evaluated.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String result`
+
+      Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs_revision': criteria not met, another revision cycle follows. 'max_iterations_reached': evaluation budget exhausted with criteria still unmet — one final acknowledgment turn follows before the session goes idle, but no further evaluation runs. 'failed': grader determined the rubric does not apply to the deliverables. 'interrupted': user sent an interrupt while evaluation was in progress.
+
+    - `Type type`
+
+      - `SPAN_OUTCOME_EVALUATION_END("span.outcome_evaluation_end")`
+
+    - `BetaManagedAgentsSpanModelUsage usage`
+
+      Token usage for a single model request.
+
+      - `long cacheCreationInputTokens`
+
+        Tokens used to create prompt cache in this request.
+
+      - `long cacheReadInputTokens`
+
+        Tokens read from prompt cache in this request.
+
+      - `long inputTokens`
+
+        Input tokens consumed by this request.
+
+      - `long outputTokens`
+
+        Output tokens generated by this request.
+
+      - `Optional<Speed> speed`
+
+        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+        - `STANDARD("standard")`
+
+        - `FAST("fast")`
+
   - `class BetaManagedAgentsSpanModelRequestStartEvent:`
 
     Emitted when a model request is initiated by the agent.
@@ -66952,6 +75364,86 @@ public final class Main {
 
       - `SPAN_MODEL_REQUEST_END("span.model_request_end")`
 
+  - `class BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent:`
+
+    Periodic heartbeat emitted while an outcome evaluation cycle is in progress. Distinguishes 'evaluation is actively running' from 'evaluation is stuck' between the corresponding `span.outcome_evaluation_start` and `span.outcome_evaluation_end` events.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `long iteration`
+
+      0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
+
+    - `String outcomeId`
+
+      The `outc_` ID of the outcome being evaluated.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `SPAN_OUTCOME_EVALUATION_ONGOING("span.outcome_evaluation_ongoing")`
+
+  - `class BetaManagedAgentsUserDefineOutcomeEvent:`
+
+    Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `String description`
+
+      What the agent should produce. Copied from the input event.
+
+    - `Optional<Long> maxIterations`
+
+      Evaluate-then-revise cycles before giving up. Default 3, max 20.
+
+    - `String outcomeId`
+
+      Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Rubric rubric`
+
+      Rubric for grading the quality of an outcome.
+
+      - `class BetaManagedAgentsFileRubric:`
+
+        Rubric referenced by a file uploaded via the Files API.
+
+        - `String fileId`
+
+          ID of the rubric file.
+
+        - `Type type`
+
+          - `FILE("file")`
+
+      - `class BetaManagedAgentsTextRubric:`
+
+        Rubric content provided inline as text.
+
+        - `String content`
+
+          Rubric content. Plain text or markdown — the grader treats it as freeform text.
+
+        - `Type type`
+
+          - `TEXT("text")`
+
+    - `Type type`
+
+      - `USER_DEFINE_OUTCOME("user.define_outcome")`
+
   - `class BetaManagedAgentsSessionDeletedEvent:`
 
     Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
@@ -66968,6 +75460,134 @@ public final class Main {
 
       - `SESSION_DELETED("session.deleted")`
 
+  - `class BetaManagedAgentsSessionThreadStatusRunningEvent:`
+
+    A session thread has begun executing. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `String agentName`
+
+      Name of the agent the thread runs.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String sessionThreadId`
+
+      Public sthr_ ID of the thread that started running.
+
+    - `Type type`
+
+      - `SESSION_THREAD_STATUS_RUNNING("session.thread_status_running")`
+
+  - `class BetaManagedAgentsSessionThreadStatusIdleEvent:`
+
+    A session thread has yielded and is awaiting input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `String agentName`
+
+      Name of the agent the thread runs.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String sessionThreadId`
+
+      Public sthr_ ID of the thread that went idle.
+
+    - `StopReason stopReason`
+
+      The agent completed its turn naturally and is ready for the next user message.
+
+      - `class BetaManagedAgentsSessionEndTurn:`
+
+        The agent completed its turn naturally and is ready for the next user message.
+
+        - `Type type`
+
+          - `END_TURN("end_turn")`
+
+      - `class BetaManagedAgentsSessionRequiresAction:`
+
+        The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
+
+        - `List<String> eventIds`
+
+          The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
+
+        - `Type type`
+
+          - `REQUIRES_ACTION("requires_action")`
+
+      - `class BetaManagedAgentsSessionRetriesExhausted:`
+
+        The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+
+        - `Type type`
+
+          - `RETRIES_EXHAUSTED("retries_exhausted")`
+
+    - `Type type`
+
+      - `SESSION_THREAD_STATUS_IDLE("session.thread_status_idle")`
+
+  - `class BetaManagedAgentsSessionThreadStatusTerminatedEvent:`
+
+    A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `String agentName`
+
+      Name of the agent the thread runs.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String sessionThreadId`
+
+      Public sthr_ ID of the thread that terminated.
+
+    - `Type type`
+
+      - `SESSION_THREAD_STATUS_TERMINATED("session.thread_status_terminated")`
+
+  - `class BetaManagedAgentsSessionThreadStatusRescheduledEvent:`
+
+    A session thread hit a transient error and is retrying automatically. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `String agentName`
+
+      Name of the agent the thread runs.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String sessionThreadId`
+
+      Public sthr_ ID of the thread that is retrying.
+
+    - `Type type`
+
+      - `SESSION_THREAD_STATUS_RESCHEDULED("session.thread_status_rescheduled")`
+
 ### Beta Managed Agents Text Block
 
 - `class BetaManagedAgentsTextBlock:`
@@ -66977,6 +75597,34 @@ public final class Main {
   - `String text`
 
     The text content.
+
+  - `Type type`
+
+    - `TEXT("text")`
+
+### Beta Managed Agents Text Rubric
+
+- `class BetaManagedAgentsTextRubric:`
+
+  Rubric content provided inline as text.
+
+  - `String content`
+
+    Rubric content. Plain text or markdown — the grader treats it as freeform text.
+
+  - `Type type`
+
+    - `TEXT("text")`
+
+### Beta Managed Agents Text Rubric Params
+
+- `class BetaManagedAgentsTextRubricParams:`
+
+  Rubric content provided inline as text.
+
+  - `String content`
+
+    Rubric content. Plain text or markdown — the grader treats it as freeform text. Maximum 262144 characters.
 
   - `Type type`
 
@@ -67224,6 +75872,10 @@ public final class Main {
 
     A timestamp in RFC 3339 format
 
+  - `Optional<String> sessionThreadId`
+
+    Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
+
 ### Beta Managed Agents User Custom Tool Result Event Params
 
 - `class BetaManagedAgentsUserCustomToolResultEventParams:`
@@ -67388,6 +76040,110 @@ public final class Main {
 
     Whether the tool execution resulted in an error.
 
+### Beta Managed Agents User Define Outcome Event
+
+- `class BetaManagedAgentsUserDefineOutcomeEvent:`
+
+  Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
+
+  - `String id`
+
+    Unique identifier for this event.
+
+  - `String description`
+
+    What the agent should produce. Copied from the input event.
+
+  - `Optional<Long> maxIterations`
+
+    Evaluate-then-revise cycles before giving up. Default 3, max 20.
+
+  - `String outcomeId`
+
+    Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
+
+  - `LocalDateTime processedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Rubric rubric`
+
+    Rubric for grading the quality of an outcome.
+
+    - `class BetaManagedAgentsFileRubric:`
+
+      Rubric referenced by a file uploaded via the Files API.
+
+      - `String fileId`
+
+        ID of the rubric file.
+
+      - `Type type`
+
+        - `FILE("file")`
+
+    - `class BetaManagedAgentsTextRubric:`
+
+      Rubric content provided inline as text.
+
+      - `String content`
+
+        Rubric content. Plain text or markdown — the grader treats it as freeform text.
+
+      - `Type type`
+
+        - `TEXT("text")`
+
+  - `Type type`
+
+    - `USER_DEFINE_OUTCOME("user.define_outcome")`
+
+### Beta Managed Agents User Define Outcome Event Params
+
+- `class BetaManagedAgentsUserDefineOutcomeEventParams:`
+
+  Parameters for defining an outcome the agent should work toward. The agent begins work on receipt.
+
+  - `String description`
+
+    What the agent should produce. This is the task specification.
+
+  - `Rubric rubric`
+
+    Rubric for grading the quality of an outcome.
+
+    - `class BetaManagedAgentsFileRubricParams:`
+
+      Rubric referenced by a file uploaded via the Files API.
+
+      - `String fileId`
+
+        ID of the rubric file.
+
+      - `Type type`
+
+        - `FILE("file")`
+
+    - `class BetaManagedAgentsTextRubricParams:`
+
+      Rubric content provided inline as text.
+
+      - `String content`
+
+        Rubric content. Plain text or markdown — the grader treats it as freeform text. Maximum 262144 characters.
+
+      - `Type type`
+
+        - `TEXT("text")`
+
+  - `Type type`
+
+    - `USER_DEFINE_OUTCOME("user.define_outcome")`
+
+  - `Optional<Long> maxIterations`
+
+    Eval→revision cycles before giving up. Default 3, max 20.
+
 ### Beta Managed Agents User Interrupt Event
 
 - `class BetaManagedAgentsUserInterruptEvent:`
@@ -67406,6 +76162,10 @@ public final class Main {
 
     A timestamp in RFC 3339 format
 
+  - `Optional<String> sessionThreadId`
+
+    If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
+
 ### Beta Managed Agents User Interrupt Event Params
 
 - `class BetaManagedAgentsUserInterruptEventParams:`
@@ -67415,6 +76175,10 @@ public final class Main {
   - `Type type`
 
     - `USER_INTERRUPT("user.interrupt")`
+
+  - `Optional<String> sessionThreadId`
+
+    If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
 ### Beta Managed Agents User Message Event
 
@@ -67770,6 +76534,10 @@ public final class Main {
 
     A timestamp in RFC 3339 format
 
+  - `Optional<String> sessionThreadId`
+
+    When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
+
 ### Beta Managed Agents User Tool Confirmation Event Params
 
 - `class BetaManagedAgentsUserToolConfirmationEventParams:`
@@ -67861,6 +76629,8 @@ Add Session Resource
     - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
 
   - `BetaManagedAgentsFileResourceParams betaManagedAgentsFileResourceParams`
 
@@ -67988,6 +76758,8 @@ List Session Resources
     - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
 
 ### Returns
 
@@ -68179,6 +76951,8 @@ Get Session Resource
     - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
 
 ### Returns
 
@@ -68374,6 +77148,8 @@ Update Session Resource
     - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
 
   - `String authorizationToken`
 
@@ -68574,6 +77350,8 @@ Delete Session Resource
     - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
 
 ### Returns
 
@@ -68834,6 +77612,8454 @@ public final class Main {
 
       Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
+# Threads
+
+## List
+
+`ThreadListPage beta().sessions().threads().list(ThreadListParamsparams = ThreadListParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
+
+**get** `/v1/sessions/{session_id}/threads`
+
+List Session Threads
+
+### Parameters
+
+- `ThreadListParams params`
+
+  - `Optional<String> sessionId`
+
+  - `Optional<Long> limit`
+
+    Maximum results per page. Defaults to 1000.
+
+  - `Optional<String> page`
+
+    Opaque pagination cursor from a previous response's next_page. Forward-only.
+
+  - `Optional<List<AnthropicBeta>> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
+### Returns
+
+- `class BetaManagedAgentsSessionThread:`
+
+  An execution thread within a `session`. Each session has one primary thread plus zero or more child threads spawned by the coordinator.
+
+  - `String id`
+
+    Unique identifier for this thread.
+
+  - `BetaManagedAgentsSessionThreadAgent agent`
+
+    Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
+
+    - `String id`
+
+    - `Optional<String> description`
+
+    - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
+
+      - `String name`
+
+      - `Type type`
+
+        - `URL("url")`
+
+      - `String url`
+
+    - `BetaManagedAgentsModelConfig model`
+
+      Model identifier and configuration.
+
+      - `BetaManagedAgentsModel id`
+
+        The model that will power your agent.
+
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
+
+          Frontier intelligence for long-running agents and coding
+
+        - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+          Most intelligent model for building agents and coding
+
+        - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+          Best combination of speed and intelligence
+
+        - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+          Fastest model with near-frontier intelligence
+
+        - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+          Fastest model with near-frontier intelligence
+
+        - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+          High-performance model for agents and coding
+
+        - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+          High-performance model for agents and coding
+
+      - `Optional<Speed> speed`
+
+        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+        - `STANDARD("standard")`
+
+        - `FAST("fast")`
+
+    - `String name`
+
+    - `List<Skill> skills`
+
+      - `class BetaManagedAgentsAnthropicSkill:`
+
+        A resolved Anthropic-managed skill.
+
+        - `String skillId`
+
+        - `Type type`
+
+          - `ANTHROPIC("anthropic")`
+
+        - `String version`
+
+      - `class BetaManagedAgentsCustomSkill:`
+
+        A resolved user-created custom skill.
+
+        - `String skillId`
+
+        - `Type type`
+
+          - `CUSTOM("custom")`
+
+        - `String version`
+
+    - `Optional<String> system`
+
+    - `List<Tool> tools`
+
+      - `class BetaManagedAgentsAgentToolset20260401:`
+
+        - `List<BetaManagedAgentsAgentToolConfig> configs`
+
+          - `boolean enabled`
+
+          - `Name name`
+
+            Built-in agent tool identifier.
+
+            - `BASH("bash")`
+
+            - `EDIT("edit")`
+
+            - `READ("read")`
+
+            - `WRITE("write")`
+
+            - `GLOB("glob")`
+
+            - `GREP("grep")`
+
+            - `WEB_FETCH("web_fetch")`
+
+            - `WEB_SEARCH("web_search")`
+
+          - `PermissionPolicy permissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+              - `Type type`
+
+                - `ALWAYS_ALLOW("always_allow")`
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+              - `Type type`
+
+                - `ALWAYS_ASK("always_ask")`
+
+        - `BetaManagedAgentsAgentToolsetDefaultConfig defaultConfig`
+
+          Resolved default configuration for agent tools.
+
+          - `boolean enabled`
+
+          - `PermissionPolicy permissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+              - `Type type`
+
+                - `ALWAYS_ALLOW("always_allow")`
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+              - `Type type`
+
+                - `ALWAYS_ASK("always_ask")`
+
+        - `Type type`
+
+          - `AGENT_TOOLSET_20260401("agent_toolset_20260401")`
+
+      - `class BetaManagedAgentsMcpToolset:`
+
+        - `List<BetaManagedAgentsMcpToolConfig> configs`
+
+          - `boolean enabled`
+
+          - `String name`
+
+          - `PermissionPolicy permissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+              - `Type type`
+
+                - `ALWAYS_ALLOW("always_allow")`
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+              - `Type type`
+
+                - `ALWAYS_ASK("always_ask")`
+
+        - `BetaManagedAgentsMcpToolsetDefaultConfig defaultConfig`
+
+          Resolved default configuration for all tools from an MCP server.
+
+          - `boolean enabled`
+
+          - `PermissionPolicy permissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+              - `Type type`
+
+                - `ALWAYS_ALLOW("always_allow")`
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+              - `Type type`
+
+                - `ALWAYS_ASK("always_ask")`
+
+        - `String mcpServerName`
+
+        - `Type type`
+
+          - `MCP_TOOLSET("mcp_toolset")`
+
+      - `class BetaManagedAgentsCustomTool:`
+
+        A custom tool as returned in API responses.
+
+        - `String description`
+
+        - `BetaManagedAgentsCustomToolInputSchema inputSchema`
+
+          JSON Schema for custom tool input parameters.
+
+          - `Optional<Properties> properties`
+
+            JSON Schema properties defining the tool's input parameters.
+
+          - `Optional<List<String>> required`
+
+            List of required property names.
+
+          - `Optional<Type> type`
+
+            Must be 'object' for tool input schemas.
+
+            - `OBJECT("object")`
+
+        - `String name`
+
+        - `Type type`
+
+          - `CUSTOM("custom")`
+
+    - `Type type`
+
+      - `AGENT("agent")`
+
+    - `long version`
+
+  - `Optional<LocalDateTime> archivedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `LocalDateTime createdAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Optional<String> parentThreadId`
+
+    Parent thread that spawned this thread. Null for the primary thread.
+
+  - `String sessionId`
+
+    The session this thread belongs to.
+
+  - `Optional<BetaManagedAgentsSessionThreadStats> stats`
+
+    Timing statistics for a session thread.
+
+    - `Optional<Double> activeSeconds`
+
+      Cumulative time in seconds the thread spent actively running. Excludes idle time.
+
+    - `Optional<Double> durationSeconds`
+
+      Elapsed time since thread creation in seconds. For archived threads, frozen at the final update.
+
+    - `Optional<Double> startupSeconds`
+
+      Time in seconds for the thread to begin running. Zero for child threads, which start immediately.
+
+  - `BetaManagedAgentsSessionThreadStatus status`
+
+    SessionThreadStatus enum
+
+    - `RUNNING("running")`
+
+    - `IDLE("idle")`
+
+    - `RESCHEDULING("rescheduling")`
+
+    - `TERMINATED("terminated")`
+
+  - `Type type`
+
+    - `SESSION_THREAD("session_thread")`
+
+  - `LocalDateTime updatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Optional<BetaManagedAgentsSessionThreadUsage> usage`
+
+    Cumulative token usage for a session thread across all turns.
+
+    - `Optional<BetaManagedAgentsCacheCreationUsage> cacheCreation`
+
+      Prompt-cache creation token usage broken down by cache lifetime.
+
+      - `Optional<Long> ephemeral1hInputTokens`
+
+        Tokens used to create 1-hour ephemeral cache entries.
+
+      - `Optional<Long> ephemeral5mInputTokens`
+
+        Tokens used to create 5-minute ephemeral cache entries.
+
+    - `Optional<Long> cacheReadInputTokens`
+
+      Total tokens read from prompt cache.
+
+    - `Optional<Long> inputTokens`
+
+      Total input tokens consumed across all turns.
+
+    - `Optional<Long> outputTokens`
+
+      Total output tokens generated across all turns.
+
+### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.sessions.threads.ThreadListPage;
+import com.anthropic.models.beta.sessions.threads.ThreadListParams;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        ThreadListPage page = client.beta().sessions().threads().list("sesn_011CZkZAtmR3yMPDzynEDxu7");
+    }
+}
+```
+
+## Retrieve
+
+`BetaManagedAgentsSessionThread beta().sessions().threads().retrieve(ThreadRetrieveParamsparams, RequestOptionsrequestOptions = RequestOptions.none())`
+
+**get** `/v1/sessions/{session_id}/threads/{thread_id}`
+
+Get Session Thread
+
+### Parameters
+
+- `ThreadRetrieveParams params`
+
+  - `String sessionId`
+
+  - `Optional<String> threadId`
+
+  - `Optional<List<AnthropicBeta>> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
+### Returns
+
+- `class BetaManagedAgentsSessionThread:`
+
+  An execution thread within a `session`. Each session has one primary thread plus zero or more child threads spawned by the coordinator.
+
+  - `String id`
+
+    Unique identifier for this thread.
+
+  - `BetaManagedAgentsSessionThreadAgent agent`
+
+    Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
+
+    - `String id`
+
+    - `Optional<String> description`
+
+    - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
+
+      - `String name`
+
+      - `Type type`
+
+        - `URL("url")`
+
+      - `String url`
+
+    - `BetaManagedAgentsModelConfig model`
+
+      Model identifier and configuration.
+
+      - `BetaManagedAgentsModel id`
+
+        The model that will power your agent.
+
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
+
+          Frontier intelligence for long-running agents and coding
+
+        - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+          Most intelligent model for building agents and coding
+
+        - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+          Best combination of speed and intelligence
+
+        - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+          Fastest model with near-frontier intelligence
+
+        - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+          Fastest model with near-frontier intelligence
+
+        - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+          High-performance model for agents and coding
+
+        - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+          High-performance model for agents and coding
+
+      - `Optional<Speed> speed`
+
+        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+        - `STANDARD("standard")`
+
+        - `FAST("fast")`
+
+    - `String name`
+
+    - `List<Skill> skills`
+
+      - `class BetaManagedAgentsAnthropicSkill:`
+
+        A resolved Anthropic-managed skill.
+
+        - `String skillId`
+
+        - `Type type`
+
+          - `ANTHROPIC("anthropic")`
+
+        - `String version`
+
+      - `class BetaManagedAgentsCustomSkill:`
+
+        A resolved user-created custom skill.
+
+        - `String skillId`
+
+        - `Type type`
+
+          - `CUSTOM("custom")`
+
+        - `String version`
+
+    - `Optional<String> system`
+
+    - `List<Tool> tools`
+
+      - `class BetaManagedAgentsAgentToolset20260401:`
+
+        - `List<BetaManagedAgentsAgentToolConfig> configs`
+
+          - `boolean enabled`
+
+          - `Name name`
+
+            Built-in agent tool identifier.
+
+            - `BASH("bash")`
+
+            - `EDIT("edit")`
+
+            - `READ("read")`
+
+            - `WRITE("write")`
+
+            - `GLOB("glob")`
+
+            - `GREP("grep")`
+
+            - `WEB_FETCH("web_fetch")`
+
+            - `WEB_SEARCH("web_search")`
+
+          - `PermissionPolicy permissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+              - `Type type`
+
+                - `ALWAYS_ALLOW("always_allow")`
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+              - `Type type`
+
+                - `ALWAYS_ASK("always_ask")`
+
+        - `BetaManagedAgentsAgentToolsetDefaultConfig defaultConfig`
+
+          Resolved default configuration for agent tools.
+
+          - `boolean enabled`
+
+          - `PermissionPolicy permissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+              - `Type type`
+
+                - `ALWAYS_ALLOW("always_allow")`
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+              - `Type type`
+
+                - `ALWAYS_ASK("always_ask")`
+
+        - `Type type`
+
+          - `AGENT_TOOLSET_20260401("agent_toolset_20260401")`
+
+      - `class BetaManagedAgentsMcpToolset:`
+
+        - `List<BetaManagedAgentsMcpToolConfig> configs`
+
+          - `boolean enabled`
+
+          - `String name`
+
+          - `PermissionPolicy permissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+              - `Type type`
+
+                - `ALWAYS_ALLOW("always_allow")`
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+              - `Type type`
+
+                - `ALWAYS_ASK("always_ask")`
+
+        - `BetaManagedAgentsMcpToolsetDefaultConfig defaultConfig`
+
+          Resolved default configuration for all tools from an MCP server.
+
+          - `boolean enabled`
+
+          - `PermissionPolicy permissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+              - `Type type`
+
+                - `ALWAYS_ALLOW("always_allow")`
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+              - `Type type`
+
+                - `ALWAYS_ASK("always_ask")`
+
+        - `String mcpServerName`
+
+        - `Type type`
+
+          - `MCP_TOOLSET("mcp_toolset")`
+
+      - `class BetaManagedAgentsCustomTool:`
+
+        A custom tool as returned in API responses.
+
+        - `String description`
+
+        - `BetaManagedAgentsCustomToolInputSchema inputSchema`
+
+          JSON Schema for custom tool input parameters.
+
+          - `Optional<Properties> properties`
+
+            JSON Schema properties defining the tool's input parameters.
+
+          - `Optional<List<String>> required`
+
+            List of required property names.
+
+          - `Optional<Type> type`
+
+            Must be 'object' for tool input schemas.
+
+            - `OBJECT("object")`
+
+        - `String name`
+
+        - `Type type`
+
+          - `CUSTOM("custom")`
+
+    - `Type type`
+
+      - `AGENT("agent")`
+
+    - `long version`
+
+  - `Optional<LocalDateTime> archivedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `LocalDateTime createdAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Optional<String> parentThreadId`
+
+    Parent thread that spawned this thread. Null for the primary thread.
+
+  - `String sessionId`
+
+    The session this thread belongs to.
+
+  - `Optional<BetaManagedAgentsSessionThreadStats> stats`
+
+    Timing statistics for a session thread.
+
+    - `Optional<Double> activeSeconds`
+
+      Cumulative time in seconds the thread spent actively running. Excludes idle time.
+
+    - `Optional<Double> durationSeconds`
+
+      Elapsed time since thread creation in seconds. For archived threads, frozen at the final update.
+
+    - `Optional<Double> startupSeconds`
+
+      Time in seconds for the thread to begin running. Zero for child threads, which start immediately.
+
+  - `BetaManagedAgentsSessionThreadStatus status`
+
+    SessionThreadStatus enum
+
+    - `RUNNING("running")`
+
+    - `IDLE("idle")`
+
+    - `RESCHEDULING("rescheduling")`
+
+    - `TERMINATED("terminated")`
+
+  - `Type type`
+
+    - `SESSION_THREAD("session_thread")`
+
+  - `LocalDateTime updatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Optional<BetaManagedAgentsSessionThreadUsage> usage`
+
+    Cumulative token usage for a session thread across all turns.
+
+    - `Optional<BetaManagedAgentsCacheCreationUsage> cacheCreation`
+
+      Prompt-cache creation token usage broken down by cache lifetime.
+
+      - `Optional<Long> ephemeral1hInputTokens`
+
+        Tokens used to create 1-hour ephemeral cache entries.
+
+      - `Optional<Long> ephemeral5mInputTokens`
+
+        Tokens used to create 5-minute ephemeral cache entries.
+
+    - `Optional<Long> cacheReadInputTokens`
+
+      Total tokens read from prompt cache.
+
+    - `Optional<Long> inputTokens`
+
+      Total input tokens consumed across all turns.
+
+    - `Optional<Long> outputTokens`
+
+      Total output tokens generated across all turns.
+
+### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.sessions.threads.BetaManagedAgentsSessionThread;
+import com.anthropic.models.beta.sessions.threads.ThreadRetrieveParams;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        ThreadRetrieveParams params = ThreadRetrieveParams.builder()
+            .sessionId("sesn_011CZkZAtmR3yMPDzynEDxu7")
+            .threadId("sthr_011CZkZVWa6oIjw0rgXZpnBt")
+            .build();
+        BetaManagedAgentsSessionThread betaManagedAgentsSessionThread = client.beta().sessions().threads().retrieve(params);
+    }
+}
+```
+
+## Archive
+
+`BetaManagedAgentsSessionThread beta().sessions().threads().archive(ThreadArchiveParamsparams, RequestOptionsrequestOptions = RequestOptions.none())`
+
+**post** `/v1/sessions/{session_id}/threads/{thread_id}/archive`
+
+Archive Session Thread
+
+### Parameters
+
+- `ThreadArchiveParams params`
+
+  - `String sessionId`
+
+  - `Optional<String> threadId`
+
+  - `Optional<List<AnthropicBeta>> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
+### Returns
+
+- `class BetaManagedAgentsSessionThread:`
+
+  An execution thread within a `session`. Each session has one primary thread plus zero or more child threads spawned by the coordinator.
+
+  - `String id`
+
+    Unique identifier for this thread.
+
+  - `BetaManagedAgentsSessionThreadAgent agent`
+
+    Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
+
+    - `String id`
+
+    - `Optional<String> description`
+
+    - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
+
+      - `String name`
+
+      - `Type type`
+
+        - `URL("url")`
+
+      - `String url`
+
+    - `BetaManagedAgentsModelConfig model`
+
+      Model identifier and configuration.
+
+      - `BetaManagedAgentsModel id`
+
+        The model that will power your agent.
+
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
+
+          Frontier intelligence for long-running agents and coding
+
+        - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+          Most intelligent model for building agents and coding
+
+        - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+          Best combination of speed and intelligence
+
+        - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+          Fastest model with near-frontier intelligence
+
+        - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+          Fastest model with near-frontier intelligence
+
+        - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+          High-performance model for agents and coding
+
+        - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+          High-performance model for agents and coding
+
+      - `Optional<Speed> speed`
+
+        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+        - `STANDARD("standard")`
+
+        - `FAST("fast")`
+
+    - `String name`
+
+    - `List<Skill> skills`
+
+      - `class BetaManagedAgentsAnthropicSkill:`
+
+        A resolved Anthropic-managed skill.
+
+        - `String skillId`
+
+        - `Type type`
+
+          - `ANTHROPIC("anthropic")`
+
+        - `String version`
+
+      - `class BetaManagedAgentsCustomSkill:`
+
+        A resolved user-created custom skill.
+
+        - `String skillId`
+
+        - `Type type`
+
+          - `CUSTOM("custom")`
+
+        - `String version`
+
+    - `Optional<String> system`
+
+    - `List<Tool> tools`
+
+      - `class BetaManagedAgentsAgentToolset20260401:`
+
+        - `List<BetaManagedAgentsAgentToolConfig> configs`
+
+          - `boolean enabled`
+
+          - `Name name`
+
+            Built-in agent tool identifier.
+
+            - `BASH("bash")`
+
+            - `EDIT("edit")`
+
+            - `READ("read")`
+
+            - `WRITE("write")`
+
+            - `GLOB("glob")`
+
+            - `GREP("grep")`
+
+            - `WEB_FETCH("web_fetch")`
+
+            - `WEB_SEARCH("web_search")`
+
+          - `PermissionPolicy permissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+              - `Type type`
+
+                - `ALWAYS_ALLOW("always_allow")`
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+              - `Type type`
+
+                - `ALWAYS_ASK("always_ask")`
+
+        - `BetaManagedAgentsAgentToolsetDefaultConfig defaultConfig`
+
+          Resolved default configuration for agent tools.
+
+          - `boolean enabled`
+
+          - `PermissionPolicy permissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+              - `Type type`
+
+                - `ALWAYS_ALLOW("always_allow")`
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+              - `Type type`
+
+                - `ALWAYS_ASK("always_ask")`
+
+        - `Type type`
+
+          - `AGENT_TOOLSET_20260401("agent_toolset_20260401")`
+
+      - `class BetaManagedAgentsMcpToolset:`
+
+        - `List<BetaManagedAgentsMcpToolConfig> configs`
+
+          - `boolean enabled`
+
+          - `String name`
+
+          - `PermissionPolicy permissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+              - `Type type`
+
+                - `ALWAYS_ALLOW("always_allow")`
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+              - `Type type`
+
+                - `ALWAYS_ASK("always_ask")`
+
+        - `BetaManagedAgentsMcpToolsetDefaultConfig defaultConfig`
+
+          Resolved default configuration for all tools from an MCP server.
+
+          - `boolean enabled`
+
+          - `PermissionPolicy permissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+              - `Type type`
+
+                - `ALWAYS_ALLOW("always_allow")`
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+              - `Type type`
+
+                - `ALWAYS_ASK("always_ask")`
+
+        - `String mcpServerName`
+
+        - `Type type`
+
+          - `MCP_TOOLSET("mcp_toolset")`
+
+      - `class BetaManagedAgentsCustomTool:`
+
+        A custom tool as returned in API responses.
+
+        - `String description`
+
+        - `BetaManagedAgentsCustomToolInputSchema inputSchema`
+
+          JSON Schema for custom tool input parameters.
+
+          - `Optional<Properties> properties`
+
+            JSON Schema properties defining the tool's input parameters.
+
+          - `Optional<List<String>> required`
+
+            List of required property names.
+
+          - `Optional<Type> type`
+
+            Must be 'object' for tool input schemas.
+
+            - `OBJECT("object")`
+
+        - `String name`
+
+        - `Type type`
+
+          - `CUSTOM("custom")`
+
+    - `Type type`
+
+      - `AGENT("agent")`
+
+    - `long version`
+
+  - `Optional<LocalDateTime> archivedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `LocalDateTime createdAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Optional<String> parentThreadId`
+
+    Parent thread that spawned this thread. Null for the primary thread.
+
+  - `String sessionId`
+
+    The session this thread belongs to.
+
+  - `Optional<BetaManagedAgentsSessionThreadStats> stats`
+
+    Timing statistics for a session thread.
+
+    - `Optional<Double> activeSeconds`
+
+      Cumulative time in seconds the thread spent actively running. Excludes idle time.
+
+    - `Optional<Double> durationSeconds`
+
+      Elapsed time since thread creation in seconds. For archived threads, frozen at the final update.
+
+    - `Optional<Double> startupSeconds`
+
+      Time in seconds for the thread to begin running. Zero for child threads, which start immediately.
+
+  - `BetaManagedAgentsSessionThreadStatus status`
+
+    SessionThreadStatus enum
+
+    - `RUNNING("running")`
+
+    - `IDLE("idle")`
+
+    - `RESCHEDULING("rescheduling")`
+
+    - `TERMINATED("terminated")`
+
+  - `Type type`
+
+    - `SESSION_THREAD("session_thread")`
+
+  - `LocalDateTime updatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Optional<BetaManagedAgentsSessionThreadUsage> usage`
+
+    Cumulative token usage for a session thread across all turns.
+
+    - `Optional<BetaManagedAgentsCacheCreationUsage> cacheCreation`
+
+      Prompt-cache creation token usage broken down by cache lifetime.
+
+      - `Optional<Long> ephemeral1hInputTokens`
+
+        Tokens used to create 1-hour ephemeral cache entries.
+
+      - `Optional<Long> ephemeral5mInputTokens`
+
+        Tokens used to create 5-minute ephemeral cache entries.
+
+    - `Optional<Long> cacheReadInputTokens`
+
+      Total tokens read from prompt cache.
+
+    - `Optional<Long> inputTokens`
+
+      Total input tokens consumed across all turns.
+
+    - `Optional<Long> outputTokens`
+
+      Total output tokens generated across all turns.
+
+### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.sessions.threads.BetaManagedAgentsSessionThread;
+import com.anthropic.models.beta.sessions.threads.ThreadArchiveParams;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        ThreadArchiveParams params = ThreadArchiveParams.builder()
+            .sessionId("sesn_011CZkZAtmR3yMPDzynEDxu7")
+            .threadId("sthr_011CZkZVWa6oIjw0rgXZpnBt")
+            .build();
+        BetaManagedAgentsSessionThread betaManagedAgentsSessionThread = client.beta().sessions().threads().archive(params);
+    }
+}
+```
+
+## Domain Types
+
+### Beta Managed Agents Session Thread
+
+- `class BetaManagedAgentsSessionThread:`
+
+  An execution thread within a `session`. Each session has one primary thread plus zero or more child threads spawned by the coordinator.
+
+  - `String id`
+
+    Unique identifier for this thread.
+
+  - `BetaManagedAgentsSessionThreadAgent agent`
+
+    Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
+
+    - `String id`
+
+    - `Optional<String> description`
+
+    - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
+
+      - `String name`
+
+      - `Type type`
+
+        - `URL("url")`
+
+      - `String url`
+
+    - `BetaManagedAgentsModelConfig model`
+
+      Model identifier and configuration.
+
+      - `BetaManagedAgentsModel id`
+
+        The model that will power your agent.
+
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
+
+          Frontier intelligence for long-running agents and coding
+
+        - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+          Most intelligent model for building agents and coding
+
+        - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+          Best combination of speed and intelligence
+
+        - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+          Fastest model with near-frontier intelligence
+
+        - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+          Fastest model with near-frontier intelligence
+
+        - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+          High-performance model for agents and coding
+
+        - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+          High-performance model for agents and coding
+
+      - `Optional<Speed> speed`
+
+        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+        - `STANDARD("standard")`
+
+        - `FAST("fast")`
+
+    - `String name`
+
+    - `List<Skill> skills`
+
+      - `class BetaManagedAgentsAnthropicSkill:`
+
+        A resolved Anthropic-managed skill.
+
+        - `String skillId`
+
+        - `Type type`
+
+          - `ANTHROPIC("anthropic")`
+
+        - `String version`
+
+      - `class BetaManagedAgentsCustomSkill:`
+
+        A resolved user-created custom skill.
+
+        - `String skillId`
+
+        - `Type type`
+
+          - `CUSTOM("custom")`
+
+        - `String version`
+
+    - `Optional<String> system`
+
+    - `List<Tool> tools`
+
+      - `class BetaManagedAgentsAgentToolset20260401:`
+
+        - `List<BetaManagedAgentsAgentToolConfig> configs`
+
+          - `boolean enabled`
+
+          - `Name name`
+
+            Built-in agent tool identifier.
+
+            - `BASH("bash")`
+
+            - `EDIT("edit")`
+
+            - `READ("read")`
+
+            - `WRITE("write")`
+
+            - `GLOB("glob")`
+
+            - `GREP("grep")`
+
+            - `WEB_FETCH("web_fetch")`
+
+            - `WEB_SEARCH("web_search")`
+
+          - `PermissionPolicy permissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+              - `Type type`
+
+                - `ALWAYS_ALLOW("always_allow")`
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+              - `Type type`
+
+                - `ALWAYS_ASK("always_ask")`
+
+        - `BetaManagedAgentsAgentToolsetDefaultConfig defaultConfig`
+
+          Resolved default configuration for agent tools.
+
+          - `boolean enabled`
+
+          - `PermissionPolicy permissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+              - `Type type`
+
+                - `ALWAYS_ALLOW("always_allow")`
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+              - `Type type`
+
+                - `ALWAYS_ASK("always_ask")`
+
+        - `Type type`
+
+          - `AGENT_TOOLSET_20260401("agent_toolset_20260401")`
+
+      - `class BetaManagedAgentsMcpToolset:`
+
+        - `List<BetaManagedAgentsMcpToolConfig> configs`
+
+          - `boolean enabled`
+
+          - `String name`
+
+          - `PermissionPolicy permissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+              - `Type type`
+
+                - `ALWAYS_ALLOW("always_allow")`
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+              - `Type type`
+
+                - `ALWAYS_ASK("always_ask")`
+
+        - `BetaManagedAgentsMcpToolsetDefaultConfig defaultConfig`
+
+          Resolved default configuration for all tools from an MCP server.
+
+          - `boolean enabled`
+
+          - `PermissionPolicy permissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+              - `Type type`
+
+                - `ALWAYS_ALLOW("always_allow")`
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+              - `Type type`
+
+                - `ALWAYS_ASK("always_ask")`
+
+        - `String mcpServerName`
+
+        - `Type type`
+
+          - `MCP_TOOLSET("mcp_toolset")`
+
+      - `class BetaManagedAgentsCustomTool:`
+
+        A custom tool as returned in API responses.
+
+        - `String description`
+
+        - `BetaManagedAgentsCustomToolInputSchema inputSchema`
+
+          JSON Schema for custom tool input parameters.
+
+          - `Optional<Properties> properties`
+
+            JSON Schema properties defining the tool's input parameters.
+
+          - `Optional<List<String>> required`
+
+            List of required property names.
+
+          - `Optional<Type> type`
+
+            Must be 'object' for tool input schemas.
+
+            - `OBJECT("object")`
+
+        - `String name`
+
+        - `Type type`
+
+          - `CUSTOM("custom")`
+
+    - `Type type`
+
+      - `AGENT("agent")`
+
+    - `long version`
+
+  - `Optional<LocalDateTime> archivedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `LocalDateTime createdAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Optional<String> parentThreadId`
+
+    Parent thread that spawned this thread. Null for the primary thread.
+
+  - `String sessionId`
+
+    The session this thread belongs to.
+
+  - `Optional<BetaManagedAgentsSessionThreadStats> stats`
+
+    Timing statistics for a session thread.
+
+    - `Optional<Double> activeSeconds`
+
+      Cumulative time in seconds the thread spent actively running. Excludes idle time.
+
+    - `Optional<Double> durationSeconds`
+
+      Elapsed time since thread creation in seconds. For archived threads, frozen at the final update.
+
+    - `Optional<Double> startupSeconds`
+
+      Time in seconds for the thread to begin running. Zero for child threads, which start immediately.
+
+  - `BetaManagedAgentsSessionThreadStatus status`
+
+    SessionThreadStatus enum
+
+    - `RUNNING("running")`
+
+    - `IDLE("idle")`
+
+    - `RESCHEDULING("rescheduling")`
+
+    - `TERMINATED("terminated")`
+
+  - `Type type`
+
+    - `SESSION_THREAD("session_thread")`
+
+  - `LocalDateTime updatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `Optional<BetaManagedAgentsSessionThreadUsage> usage`
+
+    Cumulative token usage for a session thread across all turns.
+
+    - `Optional<BetaManagedAgentsCacheCreationUsage> cacheCreation`
+
+      Prompt-cache creation token usage broken down by cache lifetime.
+
+      - `Optional<Long> ephemeral1hInputTokens`
+
+        Tokens used to create 1-hour ephemeral cache entries.
+
+      - `Optional<Long> ephemeral5mInputTokens`
+
+        Tokens used to create 5-minute ephemeral cache entries.
+
+    - `Optional<Long> cacheReadInputTokens`
+
+      Total tokens read from prompt cache.
+
+    - `Optional<Long> inputTokens`
+
+      Total input tokens consumed across all turns.
+
+    - `Optional<Long> outputTokens`
+
+      Total output tokens generated across all turns.
+
+### Beta Managed Agents Session Thread Agent
+
+- `class BetaManagedAgentsSessionThreadAgent:`
+
+  Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
+
+  - `String id`
+
+  - `Optional<String> description`
+
+  - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
+
+    - `String name`
+
+    - `Type type`
+
+      - `URL("url")`
+
+    - `String url`
+
+  - `BetaManagedAgentsModelConfig model`
+
+    Model identifier and configuration.
+
+    - `BetaManagedAgentsModel id`
+
+      The model that will power your agent.
+
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
+
+        Frontier intelligence for long-running agents and coding
+
+      - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+        Most intelligent model for building agents and coding
+
+      - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+        Best combination of speed and intelligence
+
+      - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+        Fastest model with near-frontier intelligence
+
+      - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+        Fastest model with near-frontier intelligence
+
+      - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+        Premium model combining maximum intelligence with practical performance
+
+      - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+        Premium model combining maximum intelligence with practical performance
+
+      - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+        High-performance model for agents and coding
+
+      - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+        High-performance model for agents and coding
+
+    - `Optional<Speed> speed`
+
+      Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+      - `STANDARD("standard")`
+
+      - `FAST("fast")`
+
+  - `String name`
+
+  - `List<Skill> skills`
+
+    - `class BetaManagedAgentsAnthropicSkill:`
+
+      A resolved Anthropic-managed skill.
+
+      - `String skillId`
+
+      - `Type type`
+
+        - `ANTHROPIC("anthropic")`
+
+      - `String version`
+
+    - `class BetaManagedAgentsCustomSkill:`
+
+      A resolved user-created custom skill.
+
+      - `String skillId`
+
+      - `Type type`
+
+        - `CUSTOM("custom")`
+
+      - `String version`
+
+  - `Optional<String> system`
+
+  - `List<Tool> tools`
+
+    - `class BetaManagedAgentsAgentToolset20260401:`
+
+      - `List<BetaManagedAgentsAgentToolConfig> configs`
+
+        - `boolean enabled`
+
+        - `Name name`
+
+          Built-in agent tool identifier.
+
+          - `BASH("bash")`
+
+          - `EDIT("edit")`
+
+          - `READ("read")`
+
+          - `WRITE("write")`
+
+          - `GLOB("glob")`
+
+          - `GREP("grep")`
+
+          - `WEB_FETCH("web_fetch")`
+
+          - `WEB_SEARCH("web_search")`
+
+        - `PermissionPolicy permissionPolicy`
+
+          Permission policy for tool execution.
+
+          - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+            Tool calls are automatically approved without user confirmation.
+
+            - `Type type`
+
+              - `ALWAYS_ALLOW("always_allow")`
+
+          - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+            Tool calls require user confirmation before execution.
+
+            - `Type type`
+
+              - `ALWAYS_ASK("always_ask")`
+
+      - `BetaManagedAgentsAgentToolsetDefaultConfig defaultConfig`
+
+        Resolved default configuration for agent tools.
+
+        - `boolean enabled`
+
+        - `PermissionPolicy permissionPolicy`
+
+          Permission policy for tool execution.
+
+          - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+            Tool calls are automatically approved without user confirmation.
+
+            - `Type type`
+
+              - `ALWAYS_ALLOW("always_allow")`
+
+          - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+            Tool calls require user confirmation before execution.
+
+            - `Type type`
+
+              - `ALWAYS_ASK("always_ask")`
+
+      - `Type type`
+
+        - `AGENT_TOOLSET_20260401("agent_toolset_20260401")`
+
+    - `class BetaManagedAgentsMcpToolset:`
+
+      - `List<BetaManagedAgentsMcpToolConfig> configs`
+
+        - `boolean enabled`
+
+        - `String name`
+
+        - `PermissionPolicy permissionPolicy`
+
+          Permission policy for tool execution.
+
+          - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+            Tool calls are automatically approved without user confirmation.
+
+            - `Type type`
+
+              - `ALWAYS_ALLOW("always_allow")`
+
+          - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+            Tool calls require user confirmation before execution.
+
+            - `Type type`
+
+              - `ALWAYS_ASK("always_ask")`
+
+      - `BetaManagedAgentsMcpToolsetDefaultConfig defaultConfig`
+
+        Resolved default configuration for all tools from an MCP server.
+
+        - `boolean enabled`
+
+        - `PermissionPolicy permissionPolicy`
+
+          Permission policy for tool execution.
+
+          - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+            Tool calls are automatically approved without user confirmation.
+
+            - `Type type`
+
+              - `ALWAYS_ALLOW("always_allow")`
+
+          - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+            Tool calls require user confirmation before execution.
+
+            - `Type type`
+
+              - `ALWAYS_ASK("always_ask")`
+
+      - `String mcpServerName`
+
+      - `Type type`
+
+        - `MCP_TOOLSET("mcp_toolset")`
+
+    - `class BetaManagedAgentsCustomTool:`
+
+      A custom tool as returned in API responses.
+
+      - `String description`
+
+      - `BetaManagedAgentsCustomToolInputSchema inputSchema`
+
+        JSON Schema for custom tool input parameters.
+
+        - `Optional<Properties> properties`
+
+          JSON Schema properties defining the tool's input parameters.
+
+        - `Optional<List<String>> required`
+
+          List of required property names.
+
+        - `Optional<Type> type`
+
+          Must be 'object' for tool input schemas.
+
+          - `OBJECT("object")`
+
+      - `String name`
+
+      - `Type type`
+
+        - `CUSTOM("custom")`
+
+  - `Type type`
+
+    - `AGENT("agent")`
+
+  - `long version`
+
+### Beta Managed Agents Session Thread Stats
+
+- `class BetaManagedAgentsSessionThreadStats:`
+
+  Timing statistics for a session thread.
+
+  - `Optional<Double> activeSeconds`
+
+    Cumulative time in seconds the thread spent actively running. Excludes idle time.
+
+  - `Optional<Double> durationSeconds`
+
+    Elapsed time since thread creation in seconds. For archived threads, frozen at the final update.
+
+  - `Optional<Double> startupSeconds`
+
+    Time in seconds for the thread to begin running. Zero for child threads, which start immediately.
+
+### Beta Managed Agents Session Thread Status
+
+- `enum BetaManagedAgentsSessionThreadStatus:`
+
+  SessionThreadStatus enum
+
+  - `RUNNING("running")`
+
+  - `IDLE("idle")`
+
+  - `RESCHEDULING("rescheduling")`
+
+  - `TERMINATED("terminated")`
+
+### Beta Managed Agents Session Thread Usage
+
+- `class BetaManagedAgentsSessionThreadUsage:`
+
+  Cumulative token usage for a session thread across all turns.
+
+  - `Optional<BetaManagedAgentsCacheCreationUsage> cacheCreation`
+
+    Prompt-cache creation token usage broken down by cache lifetime.
+
+    - `Optional<Long> ephemeral1hInputTokens`
+
+      Tokens used to create 1-hour ephemeral cache entries.
+
+    - `Optional<Long> ephemeral5mInputTokens`
+
+      Tokens used to create 5-minute ephemeral cache entries.
+
+  - `Optional<Long> cacheReadInputTokens`
+
+    Total tokens read from prompt cache.
+
+  - `Optional<Long> inputTokens`
+
+    Total input tokens consumed across all turns.
+
+  - `Optional<Long> outputTokens`
+
+    Total output tokens generated across all turns.
+
+### Beta Managed Agents Stream Session Thread Events
+
+- `class BetaManagedAgentsStreamSessionThreadEvents: A class that can be one of several variants.union`
+
+  Server-sent event in a single thread's stream.
+
+  - `class BetaManagedAgentsUserMessageEvent:`
+
+    A user message event in the session conversation.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `List<Content> content`
+
+      Array of content blocks comprising the user message.
+
+      - `class BetaManagedAgentsTextBlock:`
+
+        Regular text content.
+
+        - `String text`
+
+          The text content.
+
+        - `Type type`
+
+          - `TEXT("text")`
+
+      - `class BetaManagedAgentsImageBlock:`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for image source variants.
+
+          - `class BetaManagedAgentsBase64ImageSource:`
+
+            Base64-encoded image data.
+
+            - `String data`
+
+              Base64-encoded image data.
+
+            - `String mediaType`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsUrlImageSource:`
+
+            Image referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the image to fetch.
+
+          - `class BetaManagedAgentsFileImageSource:`
+
+            Image referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `IMAGE("image")`
+
+      - `class BetaManagedAgentsDocumentBlock:`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for document source variants.
+
+          - `class BetaManagedAgentsBase64DocumentSource:`
+
+            Base64-encoded document data.
+
+            - `String data`
+
+              Base64-encoded document data.
+
+            - `String mediaType`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsPlainTextDocumentSource:`
+
+            Plain text document content.
+
+            - `String data`
+
+              The plain text content.
+
+            - `MediaType mediaType`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `TEXT_PLAIN("text/plain")`
+
+            - `Type type`
+
+              - `TEXT("text")`
+
+          - `class BetaManagedAgentsUrlDocumentSource:`
+
+            Document referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the document to fetch.
+
+          - `class BetaManagedAgentsFileDocumentSource:`
+
+            Document referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `DOCUMENT("document")`
+
+        - `Optional<String> context`
+
+          Additional context about the document for the model.
+
+        - `Optional<String> title`
+
+          The title of the document.
+
+    - `Type type`
+
+      - `USER_MESSAGE("user.message")`
+
+    - `Optional<LocalDateTime> processedAt`
+
+      A timestamp in RFC 3339 format
+
+  - `class BetaManagedAgentsUserInterruptEvent:`
+
+    An interrupt event that pauses agent execution and returns control to the user.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `Type type`
+
+      - `USER_INTERRUPT("user.interrupt")`
+
+    - `Optional<LocalDateTime> processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Optional<String> sessionThreadId`
+
+      If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
+
+  - `class BetaManagedAgentsUserToolConfirmationEvent:`
+
+    A tool confirmation event that approves or denies a pending tool execution.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `Result result`
+
+      UserToolConfirmationResult enum
+
+      - `ALLOW("allow")`
+
+      - `DENY("deny")`
+
+    - `String toolUseId`
+
+      The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](./api-beta-sessions-events-list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
+
+    - `Type type`
+
+      - `USER_TOOL_CONFIRMATION("user.tool_confirmation")`
+
+    - `Optional<String> denyMessage`
+
+      Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
+
+    - `Optional<LocalDateTime> processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Optional<String> sessionThreadId`
+
+      When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
+
+  - `class BetaManagedAgentsUserCustomToolResultEvent:`
+
+    Event sent by the client providing the result of a custom tool execution.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `String customToolUseId`
+
+      The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](./api-beta-sessions-events-list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
+
+    - `Type type`
+
+      - `USER_CUSTOM_TOOL_RESULT("user.custom_tool_result")`
+
+    - `Optional<List<Content>> content`
+
+      The result content returned by the tool.
+
+      - `class BetaManagedAgentsTextBlock:`
+
+        Regular text content.
+
+        - `String text`
+
+          The text content.
+
+        - `Type type`
+
+          - `TEXT("text")`
+
+      - `class BetaManagedAgentsImageBlock:`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for image source variants.
+
+          - `class BetaManagedAgentsBase64ImageSource:`
+
+            Base64-encoded image data.
+
+            - `String data`
+
+              Base64-encoded image data.
+
+            - `String mediaType`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsUrlImageSource:`
+
+            Image referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the image to fetch.
+
+          - `class BetaManagedAgentsFileImageSource:`
+
+            Image referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `IMAGE("image")`
+
+      - `class BetaManagedAgentsDocumentBlock:`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for document source variants.
+
+          - `class BetaManagedAgentsBase64DocumentSource:`
+
+            Base64-encoded document data.
+
+            - `String data`
+
+              Base64-encoded document data.
+
+            - `String mediaType`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsPlainTextDocumentSource:`
+
+            Plain text document content.
+
+            - `String data`
+
+              The plain text content.
+
+            - `MediaType mediaType`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `TEXT_PLAIN("text/plain")`
+
+            - `Type type`
+
+              - `TEXT("text")`
+
+          - `class BetaManagedAgentsUrlDocumentSource:`
+
+            Document referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the document to fetch.
+
+          - `class BetaManagedAgentsFileDocumentSource:`
+
+            Document referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `DOCUMENT("document")`
+
+        - `Optional<String> context`
+
+          Additional context about the document for the model.
+
+        - `Optional<String> title`
+
+          The title of the document.
+
+    - `Optional<Boolean> isError`
+
+      Whether the tool execution resulted in an error.
+
+    - `Optional<LocalDateTime> processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Optional<String> sessionThreadId`
+
+      Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
+
+  - `class BetaManagedAgentsAgentCustomToolUseEvent:`
+
+    Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `Input input`
+
+      Input parameters for the tool call.
+
+    - `String name`
+
+      Name of the custom tool being called.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `AGENT_CUSTOM_TOOL_USE("agent.custom_tool_use")`
+
+    - `Optional<String> sessionThreadId`
+
+      When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
+
+  - `class BetaManagedAgentsAgentMessageEvent:`
+
+    An agent response event in the session conversation.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `List<BetaManagedAgentsTextBlock> content`
+
+      Array of text blocks comprising the agent response.
+
+      - `String text`
+
+        The text content.
+
+      - `Type type`
+
+        - `TEXT("text")`
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `AGENT_MESSAGE("agent.message")`
+
+  - `class BetaManagedAgentsAgentThinkingEvent:`
+
+    Indicates the agent is making forward progress via extended thinking. A progress signal, not a content carrier.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `AGENT_THINKING("agent.thinking")`
+
+  - `class BetaManagedAgentsAgentMcpToolUseEvent:`
+
+    Event emitted when the agent invokes a tool provided by an MCP server.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `Input input`
+
+      Input parameters for the tool call.
+
+    - `String mcpServerName`
+
+      Name of the MCP server providing the tool.
+
+    - `String name`
+
+      Name of the MCP tool being used.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `AGENT_MCP_TOOL_USE("agent.mcp_tool_use")`
+
+    - `Optional<EvaluatedPermission> evaluatedPermission`
+
+      AgentEvaluatedPermission enum
+
+      - `ALLOW("allow")`
+
+      - `ASK("ask")`
+
+      - `DENY("deny")`
+
+    - `Optional<String> sessionThreadId`
+
+      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
+
+  - `class BetaManagedAgentsAgentMcpToolResultEvent:`
+
+    Event representing the result of an MCP tool execution.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `String mcpToolUseId`
+
+      The id of the `agent.mcp_tool_use` event this result corresponds to.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `AGENT_MCP_TOOL_RESULT("agent.mcp_tool_result")`
+
+    - `Optional<List<Content>> content`
+
+      The result content returned by the tool.
+
+      - `class BetaManagedAgentsTextBlock:`
+
+        Regular text content.
+
+        - `String text`
+
+          The text content.
+
+        - `Type type`
+
+          - `TEXT("text")`
+
+      - `class BetaManagedAgentsImageBlock:`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for image source variants.
+
+          - `class BetaManagedAgentsBase64ImageSource:`
+
+            Base64-encoded image data.
+
+            - `String data`
+
+              Base64-encoded image data.
+
+            - `String mediaType`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsUrlImageSource:`
+
+            Image referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the image to fetch.
+
+          - `class BetaManagedAgentsFileImageSource:`
+
+            Image referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `IMAGE("image")`
+
+      - `class BetaManagedAgentsDocumentBlock:`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for document source variants.
+
+          - `class BetaManagedAgentsBase64DocumentSource:`
+
+            Base64-encoded document data.
+
+            - `String data`
+
+              Base64-encoded document data.
+
+            - `String mediaType`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsPlainTextDocumentSource:`
+
+            Plain text document content.
+
+            - `String data`
+
+              The plain text content.
+
+            - `MediaType mediaType`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `TEXT_PLAIN("text/plain")`
+
+            - `Type type`
+
+              - `TEXT("text")`
+
+          - `class BetaManagedAgentsUrlDocumentSource:`
+
+            Document referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the document to fetch.
+
+          - `class BetaManagedAgentsFileDocumentSource:`
+
+            Document referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `DOCUMENT("document")`
+
+        - `Optional<String> context`
+
+          Additional context about the document for the model.
+
+        - `Optional<String> title`
+
+          The title of the document.
+
+    - `Optional<Boolean> isError`
+
+      Whether the tool execution resulted in an error.
+
+  - `class BetaManagedAgentsAgentToolUseEvent:`
+
+    Event emitted when the agent invokes a built-in agent tool.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `Input input`
+
+      Input parameters for the tool call.
+
+    - `String name`
+
+      Name of the agent tool being used.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `AGENT_TOOL_USE("agent.tool_use")`
+
+    - `Optional<EvaluatedPermission> evaluatedPermission`
+
+      AgentEvaluatedPermission enum
+
+      - `ALLOW("allow")`
+
+      - `ASK("ask")`
+
+      - `DENY("deny")`
+
+    - `Optional<String> sessionThreadId`
+
+      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
+
+  - `class BetaManagedAgentsAgentToolResultEvent:`
+
+    Event representing the result of an agent tool execution.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String toolUseId`
+
+      The id of the `agent.tool_use` event this result corresponds to.
+
+    - `Type type`
+
+      - `AGENT_TOOL_RESULT("agent.tool_result")`
+
+    - `Optional<List<Content>> content`
+
+      The result content returned by the tool.
+
+      - `class BetaManagedAgentsTextBlock:`
+
+        Regular text content.
+
+        - `String text`
+
+          The text content.
+
+        - `Type type`
+
+          - `TEXT("text")`
+
+      - `class BetaManagedAgentsImageBlock:`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for image source variants.
+
+          - `class BetaManagedAgentsBase64ImageSource:`
+
+            Base64-encoded image data.
+
+            - `String data`
+
+              Base64-encoded image data.
+
+            - `String mediaType`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsUrlImageSource:`
+
+            Image referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the image to fetch.
+
+          - `class BetaManagedAgentsFileImageSource:`
+
+            Image referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `IMAGE("image")`
+
+      - `class BetaManagedAgentsDocumentBlock:`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for document source variants.
+
+          - `class BetaManagedAgentsBase64DocumentSource:`
+
+            Base64-encoded document data.
+
+            - `String data`
+
+              Base64-encoded document data.
+
+            - `String mediaType`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsPlainTextDocumentSource:`
+
+            Plain text document content.
+
+            - `String data`
+
+              The plain text content.
+
+            - `MediaType mediaType`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `TEXT_PLAIN("text/plain")`
+
+            - `Type type`
+
+              - `TEXT("text")`
+
+          - `class BetaManagedAgentsUrlDocumentSource:`
+
+            Document referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the document to fetch.
+
+          - `class BetaManagedAgentsFileDocumentSource:`
+
+            Document referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `DOCUMENT("document")`
+
+        - `Optional<String> context`
+
+          Additional context about the document for the model.
+
+        - `Optional<String> title`
+
+          The title of the document.
+
+    - `Optional<Boolean> isError`
+
+      Whether the tool execution resulted in an error.
+
+  - `class BetaManagedAgentsAgentThreadMessageReceivedEvent:`
+
+    Delivery event written to the target thread's input stream when an agent-to-agent message arrives.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `List<Content> content`
+
+      Message content blocks.
+
+      - `class BetaManagedAgentsTextBlock:`
+
+        Regular text content.
+
+        - `String text`
+
+          The text content.
+
+        - `Type type`
+
+          - `TEXT("text")`
+
+      - `class BetaManagedAgentsImageBlock:`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for image source variants.
+
+          - `class BetaManagedAgentsBase64ImageSource:`
+
+            Base64-encoded image data.
+
+            - `String data`
+
+              Base64-encoded image data.
+
+            - `String mediaType`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsUrlImageSource:`
+
+            Image referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the image to fetch.
+
+          - `class BetaManagedAgentsFileImageSource:`
+
+            Image referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `IMAGE("image")`
+
+      - `class BetaManagedAgentsDocumentBlock:`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for document source variants.
+
+          - `class BetaManagedAgentsBase64DocumentSource:`
+
+            Base64-encoded document data.
+
+            - `String data`
+
+              Base64-encoded document data.
+
+            - `String mediaType`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsPlainTextDocumentSource:`
+
+            Plain text document content.
+
+            - `String data`
+
+              The plain text content.
+
+            - `MediaType mediaType`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `TEXT_PLAIN("text/plain")`
+
+            - `Type type`
+
+              - `TEXT("text")`
+
+          - `class BetaManagedAgentsUrlDocumentSource:`
+
+            Document referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the document to fetch.
+
+          - `class BetaManagedAgentsFileDocumentSource:`
+
+            Document referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `DOCUMENT("document")`
+
+        - `Optional<String> context`
+
+          Additional context about the document for the model.
+
+        - `Optional<String> title`
+
+          The title of the document.
+
+    - `String fromSessionThreadId`
+
+      Public `sthr_` ID of the thread that sent the message.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `AGENT_THREAD_MESSAGE_RECEIVED("agent.thread_message_received")`
+
+    - `Optional<String> fromAgentName`
+
+      Name of the callable agent this message came from. Absent when received from the primary agent.
+
+  - `class BetaManagedAgentsAgentThreadMessageSentEvent:`
+
+    Observability event emitted to the sender's output stream when an agent-to-agent message is sent.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `List<Content> content`
+
+      Message content blocks.
+
+      - `class BetaManagedAgentsTextBlock:`
+
+        Regular text content.
+
+        - `String text`
+
+          The text content.
+
+        - `Type type`
+
+          - `TEXT("text")`
+
+      - `class BetaManagedAgentsImageBlock:`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for image source variants.
+
+          - `class BetaManagedAgentsBase64ImageSource:`
+
+            Base64-encoded image data.
+
+            - `String data`
+
+              Base64-encoded image data.
+
+            - `String mediaType`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsUrlImageSource:`
+
+            Image referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the image to fetch.
+
+          - `class BetaManagedAgentsFileImageSource:`
+
+            Image referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `IMAGE("image")`
+
+      - `class BetaManagedAgentsDocumentBlock:`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for document source variants.
+
+          - `class BetaManagedAgentsBase64DocumentSource:`
+
+            Base64-encoded document data.
+
+            - `String data`
+
+              Base64-encoded document data.
+
+            - `String mediaType`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsPlainTextDocumentSource:`
+
+            Plain text document content.
+
+            - `String data`
+
+              The plain text content.
+
+            - `MediaType mediaType`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `TEXT_PLAIN("text/plain")`
+
+            - `Type type`
+
+              - `TEXT("text")`
+
+          - `class BetaManagedAgentsUrlDocumentSource:`
+
+            Document referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the document to fetch.
+
+          - `class BetaManagedAgentsFileDocumentSource:`
+
+            Document referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `DOCUMENT("document")`
+
+        - `Optional<String> context`
+
+          Additional context about the document for the model.
+
+        - `Optional<String> title`
+
+          The title of the document.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String toSessionThreadId`
+
+      Public `sthr_` ID of the thread the message was sent to.
+
+    - `Type type`
+
+      - `AGENT_THREAD_MESSAGE_SENT("agent.thread_message_sent")`
+
+    - `Optional<String> toAgentName`
+
+      Name of the callable agent this message was sent to. Absent when sent to the primary agent.
+
+  - `class BetaManagedAgentsAgentThreadContextCompactedEvent:`
+
+    Indicates that context compaction (summarization) occurred during the session.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `AGENT_THREAD_CONTEXT_COMPACTED("agent.thread_context_compacted")`
+
+  - `class BetaManagedAgentsSessionErrorEvent:`
+
+    An error event indicating a problem occurred during session execution.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `Error error`
+
+      An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
+
+      - `class BetaManagedAgentsUnknownError:`
+
+        An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
+
+        - `String message`
+
+          Human-readable error description.
+
+        - `RetryStatus retryStatus`
+
+          What the client should do next in response to this error.
+
+          - `class BetaManagedAgentsRetryStatusRetrying:`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+            - `Type type`
+
+              - `RETRYING("retrying")`
+
+          - `class BetaManagedAgentsRetryStatusExhausted:`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+            - `Type type`
+
+              - `EXHAUSTED("exhausted")`
+
+          - `class BetaManagedAgentsRetryStatusTerminal:`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+            - `Type type`
+
+              - `TERMINAL("terminal")`
+
+        - `Type type`
+
+          - `UNKNOWN_ERROR("unknown_error")`
+
+      - `class BetaManagedAgentsModelOverloadedError:`
+
+        The model is currently overloaded. Emitted after automatic retries are exhausted.
+
+        - `String message`
+
+          Human-readable error description.
+
+        - `RetryStatus retryStatus`
+
+          What the client should do next in response to this error.
+
+          - `class BetaManagedAgentsRetryStatusRetrying:`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+            - `Type type`
+
+              - `RETRYING("retrying")`
+
+          - `class BetaManagedAgentsRetryStatusExhausted:`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+            - `Type type`
+
+              - `EXHAUSTED("exhausted")`
+
+          - `class BetaManagedAgentsRetryStatusTerminal:`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+            - `Type type`
+
+              - `TERMINAL("terminal")`
+
+        - `Type type`
+
+          - `MODEL_OVERLOADED_ERROR("model_overloaded_error")`
+
+      - `class BetaManagedAgentsModelRateLimitedError:`
+
+        The model request was rate-limited.
+
+        - `String message`
+
+          Human-readable error description.
+
+        - `RetryStatus retryStatus`
+
+          What the client should do next in response to this error.
+
+          - `class BetaManagedAgentsRetryStatusRetrying:`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+            - `Type type`
+
+              - `RETRYING("retrying")`
+
+          - `class BetaManagedAgentsRetryStatusExhausted:`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+            - `Type type`
+
+              - `EXHAUSTED("exhausted")`
+
+          - `class BetaManagedAgentsRetryStatusTerminal:`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+            - `Type type`
+
+              - `TERMINAL("terminal")`
+
+        - `Type type`
+
+          - `MODEL_RATE_LIMITED_ERROR("model_rate_limited_error")`
+
+      - `class BetaManagedAgentsModelRequestFailedError:`
+
+        A model request failed for a reason other than overload or rate-limiting.
+
+        - `String message`
+
+          Human-readable error description.
+
+        - `RetryStatus retryStatus`
+
+          What the client should do next in response to this error.
+
+          - `class BetaManagedAgentsRetryStatusRetrying:`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+            - `Type type`
+
+              - `RETRYING("retrying")`
+
+          - `class BetaManagedAgentsRetryStatusExhausted:`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+            - `Type type`
+
+              - `EXHAUSTED("exhausted")`
+
+          - `class BetaManagedAgentsRetryStatusTerminal:`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+            - `Type type`
+
+              - `TERMINAL("terminal")`
+
+        - `Type type`
+
+          - `MODEL_REQUEST_FAILED_ERROR("model_request_failed_error")`
+
+      - `class BetaManagedAgentsMcpConnectionFailedError:`
+
+        Failed to connect to an MCP server.
+
+        - `String mcpServerName`
+
+          Name of the MCP server that failed to connect.
+
+        - `String message`
+
+          Human-readable error description.
+
+        - `RetryStatus retryStatus`
+
+          What the client should do next in response to this error.
+
+          - `class BetaManagedAgentsRetryStatusRetrying:`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+            - `Type type`
+
+              - `RETRYING("retrying")`
+
+          - `class BetaManagedAgentsRetryStatusExhausted:`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+            - `Type type`
+
+              - `EXHAUSTED("exhausted")`
+
+          - `class BetaManagedAgentsRetryStatusTerminal:`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+            - `Type type`
+
+              - `TERMINAL("terminal")`
+
+        - `Type type`
+
+          - `MCP_CONNECTION_FAILED_ERROR("mcp_connection_failed_error")`
+
+      - `class BetaManagedAgentsMcpAuthenticationFailedError:`
+
+        Authentication to an MCP server failed.
+
+        - `String mcpServerName`
+
+          Name of the MCP server that failed authentication.
+
+        - `String message`
+
+          Human-readable error description.
+
+        - `RetryStatus retryStatus`
+
+          What the client should do next in response to this error.
+
+          - `class BetaManagedAgentsRetryStatusRetrying:`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+            - `Type type`
+
+              - `RETRYING("retrying")`
+
+          - `class BetaManagedAgentsRetryStatusExhausted:`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+            - `Type type`
+
+              - `EXHAUSTED("exhausted")`
+
+          - `class BetaManagedAgentsRetryStatusTerminal:`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+            - `Type type`
+
+              - `TERMINAL("terminal")`
+
+        - `Type type`
+
+          - `MCP_AUTHENTICATION_FAILED_ERROR("mcp_authentication_failed_error")`
+
+      - `class BetaManagedAgentsBillingError:`
+
+        The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
+
+        - `String message`
+
+          Human-readable error description.
+
+        - `RetryStatus retryStatus`
+
+          What the client should do next in response to this error.
+
+          - `class BetaManagedAgentsRetryStatusRetrying:`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+            - `Type type`
+
+              - `RETRYING("retrying")`
+
+          - `class BetaManagedAgentsRetryStatusExhausted:`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+            - `Type type`
+
+              - `EXHAUSTED("exhausted")`
+
+          - `class BetaManagedAgentsRetryStatusTerminal:`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+            - `Type type`
+
+              - `TERMINAL("terminal")`
+
+        - `Type type`
+
+          - `BILLING_ERROR("billing_error")`
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `SESSION_ERROR("session.error")`
+
+  - `class BetaManagedAgentsSessionStatusRescheduledEvent:`
+
+    Indicates the session is recovering from an error state and is rescheduled for execution.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `SESSION_STATUS_RESCHEDULED("session.status_rescheduled")`
+
+  - `class BetaManagedAgentsSessionStatusRunningEvent:`
+
+    Indicates the session is actively running and the agent is working.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `SESSION_STATUS_RUNNING("session.status_running")`
+
+  - `class BetaManagedAgentsSessionStatusIdleEvent:`
+
+    Indicates the agent has paused and is awaiting user input.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `StopReason stopReason`
+
+      The agent completed its turn naturally and is ready for the next user message.
+
+      - `class BetaManagedAgentsSessionEndTurn:`
+
+        The agent completed its turn naturally and is ready for the next user message.
+
+        - `Type type`
+
+          - `END_TURN("end_turn")`
+
+      - `class BetaManagedAgentsSessionRequiresAction:`
+
+        The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
+
+        - `List<String> eventIds`
+
+          The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
+
+        - `Type type`
+
+          - `REQUIRES_ACTION("requires_action")`
+
+      - `class BetaManagedAgentsSessionRetriesExhausted:`
+
+        The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+
+        - `Type type`
+
+          - `RETRIES_EXHAUSTED("retries_exhausted")`
+
+    - `Type type`
+
+      - `SESSION_STATUS_IDLE("session.status_idle")`
+
+  - `class BetaManagedAgentsSessionStatusTerminatedEvent:`
+
+    Indicates the session has terminated, either due to an error or completion.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `SESSION_STATUS_TERMINATED("session.status_terminated")`
+
+  - `class BetaManagedAgentsSessionThreadCreatedEvent:`
+
+    Emitted when a subagent is spawned as a new thread. Written to the parent thread's output stream so clients observing the session see child creation.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `String agentName`
+
+      Name of the callable agent the thread runs.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String sessionThreadId`
+
+      Public `sthr_` ID of the newly created thread.
+
+    - `Type type`
+
+      - `SESSION_THREAD_CREATED("session.thread_created")`
+
+  - `class BetaManagedAgentsSpanOutcomeEvaluationStartEvent:`
+
+    Emitted when an outcome evaluation cycle begins.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `long iteration`
+
+      0-indexed revision cycle. 0 is the first evaluation; 1 is the re-evaluation after the first revision; etc.
+
+    - `String outcomeId`
+
+      The `outc_` ID of the outcome being evaluated.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `SPAN_OUTCOME_EVALUATION_START("span.outcome_evaluation_start")`
+
+  - `class BetaManagedAgentsSpanOutcomeEvaluationEndEvent:`
+
+    Emitted when an outcome evaluation cycle completes. Carries the verdict and aggregate token usage. A verdict of `needs_revision` means another evaluation cycle follows; `satisfied`, `max_iterations_reached`, `failed`, or `interrupted` are terminal — no further evaluation cycles follow.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `String explanation`
+
+      Human-readable explanation of the verdict. For `needs_revision`, describes which criteria failed and why.
+
+    - `long iteration`
+
+      0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
+
+    - `String outcomeEvaluationStartId`
+
+      The id of the corresponding `span.outcome_evaluation_start` event.
+
+    - `String outcomeId`
+
+      The `outc_` ID of the outcome being evaluated.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String result`
+
+      Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs_revision': criteria not met, another revision cycle follows. 'max_iterations_reached': evaluation budget exhausted with criteria still unmet — one final acknowledgment turn follows before the session goes idle, but no further evaluation runs. 'failed': grader determined the rubric does not apply to the deliverables. 'interrupted': user sent an interrupt while evaluation was in progress.
+
+    - `Type type`
+
+      - `SPAN_OUTCOME_EVALUATION_END("span.outcome_evaluation_end")`
+
+    - `BetaManagedAgentsSpanModelUsage usage`
+
+      Token usage for a single model request.
+
+      - `long cacheCreationInputTokens`
+
+        Tokens used to create prompt cache in this request.
+
+      - `long cacheReadInputTokens`
+
+        Tokens read from prompt cache in this request.
+
+      - `long inputTokens`
+
+        Input tokens consumed by this request.
+
+      - `long outputTokens`
+
+        Output tokens generated by this request.
+
+      - `Optional<Speed> speed`
+
+        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+        - `STANDARD("standard")`
+
+        - `FAST("fast")`
+
+  - `class BetaManagedAgentsSpanModelRequestStartEvent:`
+
+    Emitted when a model request is initiated by the agent.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `SPAN_MODEL_REQUEST_START("span.model_request_start")`
+
+  - `class BetaManagedAgentsSpanModelRequestEndEvent:`
+
+    Emitted when a model request completes.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `Optional<Boolean> isError`
+
+      Whether the model request resulted in an error.
+
+    - `String modelRequestStartId`
+
+      The id of the corresponding `span.model_request_start` event.
+
+    - `BetaManagedAgentsSpanModelUsage modelUsage`
+
+      Token usage for a single model request.
+
+      - `long cacheCreationInputTokens`
+
+        Tokens used to create prompt cache in this request.
+
+      - `long cacheReadInputTokens`
+
+        Tokens read from prompt cache in this request.
+
+      - `long inputTokens`
+
+        Input tokens consumed by this request.
+
+      - `long outputTokens`
+
+        Output tokens generated by this request.
+
+      - `Optional<Speed> speed`
+
+        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+        - `STANDARD("standard")`
+
+        - `FAST("fast")`
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `SPAN_MODEL_REQUEST_END("span.model_request_end")`
+
+  - `class BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent:`
+
+    Periodic heartbeat emitted while an outcome evaluation cycle is in progress. Distinguishes 'evaluation is actively running' from 'evaluation is stuck' between the corresponding `span.outcome_evaluation_start` and `span.outcome_evaluation_end` events.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `long iteration`
+
+      0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
+
+    - `String outcomeId`
+
+      The `outc_` ID of the outcome being evaluated.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `SPAN_OUTCOME_EVALUATION_ONGOING("span.outcome_evaluation_ongoing")`
+
+  - `class BetaManagedAgentsUserDefineOutcomeEvent:`
+
+    Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `String description`
+
+      What the agent should produce. Copied from the input event.
+
+    - `Optional<Long> maxIterations`
+
+      Evaluate-then-revise cycles before giving up. Default 3, max 20.
+
+    - `String outcomeId`
+
+      Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Rubric rubric`
+
+      Rubric for grading the quality of an outcome.
+
+      - `class BetaManagedAgentsFileRubric:`
+
+        Rubric referenced by a file uploaded via the Files API.
+
+        - `String fileId`
+
+          ID of the rubric file.
+
+        - `Type type`
+
+          - `FILE("file")`
+
+      - `class BetaManagedAgentsTextRubric:`
+
+        Rubric content provided inline as text.
+
+        - `String content`
+
+          Rubric content. Plain text or markdown — the grader treats it as freeform text.
+
+        - `Type type`
+
+          - `TEXT("text")`
+
+    - `Type type`
+
+      - `USER_DEFINE_OUTCOME("user.define_outcome")`
+
+  - `class BetaManagedAgentsSessionDeletedEvent:`
+
+    Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `SESSION_DELETED("session.deleted")`
+
+  - `class BetaManagedAgentsSessionThreadStatusRunningEvent:`
+
+    A session thread has begun executing. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `String agentName`
+
+      Name of the agent the thread runs.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String sessionThreadId`
+
+      Public sthr_ ID of the thread that started running.
+
+    - `Type type`
+
+      - `SESSION_THREAD_STATUS_RUNNING("session.thread_status_running")`
+
+  - `class BetaManagedAgentsSessionThreadStatusIdleEvent:`
+
+    A session thread has yielded and is awaiting input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `String agentName`
+
+      Name of the agent the thread runs.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String sessionThreadId`
+
+      Public sthr_ ID of the thread that went idle.
+
+    - `StopReason stopReason`
+
+      The agent completed its turn naturally and is ready for the next user message.
+
+      - `class BetaManagedAgentsSessionEndTurn:`
+
+        The agent completed its turn naturally and is ready for the next user message.
+
+        - `Type type`
+
+          - `END_TURN("end_turn")`
+
+      - `class BetaManagedAgentsSessionRequiresAction:`
+
+        The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
+
+        - `List<String> eventIds`
+
+          The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
+
+        - `Type type`
+
+          - `REQUIRES_ACTION("requires_action")`
+
+      - `class BetaManagedAgentsSessionRetriesExhausted:`
+
+        The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+
+        - `Type type`
+
+          - `RETRIES_EXHAUSTED("retries_exhausted")`
+
+    - `Type type`
+
+      - `SESSION_THREAD_STATUS_IDLE("session.thread_status_idle")`
+
+  - `class BetaManagedAgentsSessionThreadStatusTerminatedEvent:`
+
+    A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `String agentName`
+
+      Name of the agent the thread runs.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String sessionThreadId`
+
+      Public sthr_ ID of the thread that terminated.
+
+    - `Type type`
+
+      - `SESSION_THREAD_STATUS_TERMINATED("session.thread_status_terminated")`
+
+  - `class BetaManagedAgentsSessionThreadStatusRescheduledEvent:`
+
+    A session thread hit a transient error and is retrying automatically. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `String agentName`
+
+      Name of the agent the thread runs.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String sessionThreadId`
+
+      Public sthr_ ID of the thread that is retrying.
+
+    - `Type type`
+
+      - `SESSION_THREAD_STATUS_RESCHEDULED("session.thread_status_rescheduled")`
+
+# Events
+
+## List
+
+`EventListPage beta().sessions().threads().events().list(EventListParamsparams, RequestOptionsrequestOptions = RequestOptions.none())`
+
+**get** `/v1/sessions/{session_id}/threads/{thread_id}/events`
+
+List Session Thread Events
+
+### Parameters
+
+- `EventListParams params`
+
+  - `String sessionId`
+
+  - `Optional<String> threadId`
+
+  - `Optional<Long> limit`
+
+    Query parameter for limit
+
+  - `Optional<String> page`
+
+    Query parameter for page
+
+  - `Optional<List<AnthropicBeta>> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
+### Returns
+
+- `class BetaManagedAgentsSessionEvent: A class that can be one of several variants.union`
+
+  Union type for all event types in a session.
+
+  - `class BetaManagedAgentsUserMessageEvent:`
+
+    A user message event in the session conversation.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `List<Content> content`
+
+      Array of content blocks comprising the user message.
+
+      - `class BetaManagedAgentsTextBlock:`
+
+        Regular text content.
+
+        - `String text`
+
+          The text content.
+
+        - `Type type`
+
+          - `TEXT("text")`
+
+      - `class BetaManagedAgentsImageBlock:`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for image source variants.
+
+          - `class BetaManagedAgentsBase64ImageSource:`
+
+            Base64-encoded image data.
+
+            - `String data`
+
+              Base64-encoded image data.
+
+            - `String mediaType`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsUrlImageSource:`
+
+            Image referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the image to fetch.
+
+          - `class BetaManagedAgentsFileImageSource:`
+
+            Image referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `IMAGE("image")`
+
+      - `class BetaManagedAgentsDocumentBlock:`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for document source variants.
+
+          - `class BetaManagedAgentsBase64DocumentSource:`
+
+            Base64-encoded document data.
+
+            - `String data`
+
+              Base64-encoded document data.
+
+            - `String mediaType`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsPlainTextDocumentSource:`
+
+            Plain text document content.
+
+            - `String data`
+
+              The plain text content.
+
+            - `MediaType mediaType`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `TEXT_PLAIN("text/plain")`
+
+            - `Type type`
+
+              - `TEXT("text")`
+
+          - `class BetaManagedAgentsUrlDocumentSource:`
+
+            Document referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the document to fetch.
+
+          - `class BetaManagedAgentsFileDocumentSource:`
+
+            Document referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `DOCUMENT("document")`
+
+        - `Optional<String> context`
+
+          Additional context about the document for the model.
+
+        - `Optional<String> title`
+
+          The title of the document.
+
+    - `Type type`
+
+      - `USER_MESSAGE("user.message")`
+
+    - `Optional<LocalDateTime> processedAt`
+
+      A timestamp in RFC 3339 format
+
+  - `class BetaManagedAgentsUserInterruptEvent:`
+
+    An interrupt event that pauses agent execution and returns control to the user.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `Type type`
+
+      - `USER_INTERRUPT("user.interrupt")`
+
+    - `Optional<LocalDateTime> processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Optional<String> sessionThreadId`
+
+      If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
+
+  - `class BetaManagedAgentsUserToolConfirmationEvent:`
+
+    A tool confirmation event that approves or denies a pending tool execution.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `Result result`
+
+      UserToolConfirmationResult enum
+
+      - `ALLOW("allow")`
+
+      - `DENY("deny")`
+
+    - `String toolUseId`
+
+      The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](./api-beta-sessions-events-list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
+
+    - `Type type`
+
+      - `USER_TOOL_CONFIRMATION("user.tool_confirmation")`
+
+    - `Optional<String> denyMessage`
+
+      Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
+
+    - `Optional<LocalDateTime> processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Optional<String> sessionThreadId`
+
+      When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
+
+  - `class BetaManagedAgentsUserCustomToolResultEvent:`
+
+    Event sent by the client providing the result of a custom tool execution.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `String customToolUseId`
+
+      The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](./api-beta-sessions-events-list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
+
+    - `Type type`
+
+      - `USER_CUSTOM_TOOL_RESULT("user.custom_tool_result")`
+
+    - `Optional<List<Content>> content`
+
+      The result content returned by the tool.
+
+      - `class BetaManagedAgentsTextBlock:`
+
+        Regular text content.
+
+        - `String text`
+
+          The text content.
+
+        - `Type type`
+
+          - `TEXT("text")`
+
+      - `class BetaManagedAgentsImageBlock:`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for image source variants.
+
+          - `class BetaManagedAgentsBase64ImageSource:`
+
+            Base64-encoded image data.
+
+            - `String data`
+
+              Base64-encoded image data.
+
+            - `String mediaType`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsUrlImageSource:`
+
+            Image referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the image to fetch.
+
+          - `class BetaManagedAgentsFileImageSource:`
+
+            Image referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `IMAGE("image")`
+
+      - `class BetaManagedAgentsDocumentBlock:`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for document source variants.
+
+          - `class BetaManagedAgentsBase64DocumentSource:`
+
+            Base64-encoded document data.
+
+            - `String data`
+
+              Base64-encoded document data.
+
+            - `String mediaType`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsPlainTextDocumentSource:`
+
+            Plain text document content.
+
+            - `String data`
+
+              The plain text content.
+
+            - `MediaType mediaType`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `TEXT_PLAIN("text/plain")`
+
+            - `Type type`
+
+              - `TEXT("text")`
+
+          - `class BetaManagedAgentsUrlDocumentSource:`
+
+            Document referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the document to fetch.
+
+          - `class BetaManagedAgentsFileDocumentSource:`
+
+            Document referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `DOCUMENT("document")`
+
+        - `Optional<String> context`
+
+          Additional context about the document for the model.
+
+        - `Optional<String> title`
+
+          The title of the document.
+
+    - `Optional<Boolean> isError`
+
+      Whether the tool execution resulted in an error.
+
+    - `Optional<LocalDateTime> processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Optional<String> sessionThreadId`
+
+      Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
+
+  - `class BetaManagedAgentsAgentCustomToolUseEvent:`
+
+    Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `Input input`
+
+      Input parameters for the tool call.
+
+    - `String name`
+
+      Name of the custom tool being called.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `AGENT_CUSTOM_TOOL_USE("agent.custom_tool_use")`
+
+    - `Optional<String> sessionThreadId`
+
+      When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
+
+  - `class BetaManagedAgentsAgentMessageEvent:`
+
+    An agent response event in the session conversation.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `List<BetaManagedAgentsTextBlock> content`
+
+      Array of text blocks comprising the agent response.
+
+      - `String text`
+
+        The text content.
+
+      - `Type type`
+
+        - `TEXT("text")`
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `AGENT_MESSAGE("agent.message")`
+
+  - `class BetaManagedAgentsAgentThinkingEvent:`
+
+    Indicates the agent is making forward progress via extended thinking. A progress signal, not a content carrier.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `AGENT_THINKING("agent.thinking")`
+
+  - `class BetaManagedAgentsAgentMcpToolUseEvent:`
+
+    Event emitted when the agent invokes a tool provided by an MCP server.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `Input input`
+
+      Input parameters for the tool call.
+
+    - `String mcpServerName`
+
+      Name of the MCP server providing the tool.
+
+    - `String name`
+
+      Name of the MCP tool being used.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `AGENT_MCP_TOOL_USE("agent.mcp_tool_use")`
+
+    - `Optional<EvaluatedPermission> evaluatedPermission`
+
+      AgentEvaluatedPermission enum
+
+      - `ALLOW("allow")`
+
+      - `ASK("ask")`
+
+      - `DENY("deny")`
+
+    - `Optional<String> sessionThreadId`
+
+      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
+
+  - `class BetaManagedAgentsAgentMcpToolResultEvent:`
+
+    Event representing the result of an MCP tool execution.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `String mcpToolUseId`
+
+      The id of the `agent.mcp_tool_use` event this result corresponds to.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `AGENT_MCP_TOOL_RESULT("agent.mcp_tool_result")`
+
+    - `Optional<List<Content>> content`
+
+      The result content returned by the tool.
+
+      - `class BetaManagedAgentsTextBlock:`
+
+        Regular text content.
+
+        - `String text`
+
+          The text content.
+
+        - `Type type`
+
+          - `TEXT("text")`
+
+      - `class BetaManagedAgentsImageBlock:`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for image source variants.
+
+          - `class BetaManagedAgentsBase64ImageSource:`
+
+            Base64-encoded image data.
+
+            - `String data`
+
+              Base64-encoded image data.
+
+            - `String mediaType`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsUrlImageSource:`
+
+            Image referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the image to fetch.
+
+          - `class BetaManagedAgentsFileImageSource:`
+
+            Image referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `IMAGE("image")`
+
+      - `class BetaManagedAgentsDocumentBlock:`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for document source variants.
+
+          - `class BetaManagedAgentsBase64DocumentSource:`
+
+            Base64-encoded document data.
+
+            - `String data`
+
+              Base64-encoded document data.
+
+            - `String mediaType`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsPlainTextDocumentSource:`
+
+            Plain text document content.
+
+            - `String data`
+
+              The plain text content.
+
+            - `MediaType mediaType`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `TEXT_PLAIN("text/plain")`
+
+            - `Type type`
+
+              - `TEXT("text")`
+
+          - `class BetaManagedAgentsUrlDocumentSource:`
+
+            Document referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the document to fetch.
+
+          - `class BetaManagedAgentsFileDocumentSource:`
+
+            Document referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `DOCUMENT("document")`
+
+        - `Optional<String> context`
+
+          Additional context about the document for the model.
+
+        - `Optional<String> title`
+
+          The title of the document.
+
+    - `Optional<Boolean> isError`
+
+      Whether the tool execution resulted in an error.
+
+  - `class BetaManagedAgentsAgentToolUseEvent:`
+
+    Event emitted when the agent invokes a built-in agent tool.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `Input input`
+
+      Input parameters for the tool call.
+
+    - `String name`
+
+      Name of the agent tool being used.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `AGENT_TOOL_USE("agent.tool_use")`
+
+    - `Optional<EvaluatedPermission> evaluatedPermission`
+
+      AgentEvaluatedPermission enum
+
+      - `ALLOW("allow")`
+
+      - `ASK("ask")`
+
+      - `DENY("deny")`
+
+    - `Optional<String> sessionThreadId`
+
+      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
+
+  - `class BetaManagedAgentsAgentToolResultEvent:`
+
+    Event representing the result of an agent tool execution.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String toolUseId`
+
+      The id of the `agent.tool_use` event this result corresponds to.
+
+    - `Type type`
+
+      - `AGENT_TOOL_RESULT("agent.tool_result")`
+
+    - `Optional<List<Content>> content`
+
+      The result content returned by the tool.
+
+      - `class BetaManagedAgentsTextBlock:`
+
+        Regular text content.
+
+        - `String text`
+
+          The text content.
+
+        - `Type type`
+
+          - `TEXT("text")`
+
+      - `class BetaManagedAgentsImageBlock:`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for image source variants.
+
+          - `class BetaManagedAgentsBase64ImageSource:`
+
+            Base64-encoded image data.
+
+            - `String data`
+
+              Base64-encoded image data.
+
+            - `String mediaType`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsUrlImageSource:`
+
+            Image referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the image to fetch.
+
+          - `class BetaManagedAgentsFileImageSource:`
+
+            Image referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `IMAGE("image")`
+
+      - `class BetaManagedAgentsDocumentBlock:`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for document source variants.
+
+          - `class BetaManagedAgentsBase64DocumentSource:`
+
+            Base64-encoded document data.
+
+            - `String data`
+
+              Base64-encoded document data.
+
+            - `String mediaType`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsPlainTextDocumentSource:`
+
+            Plain text document content.
+
+            - `String data`
+
+              The plain text content.
+
+            - `MediaType mediaType`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `TEXT_PLAIN("text/plain")`
+
+            - `Type type`
+
+              - `TEXT("text")`
+
+          - `class BetaManagedAgentsUrlDocumentSource:`
+
+            Document referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the document to fetch.
+
+          - `class BetaManagedAgentsFileDocumentSource:`
+
+            Document referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `DOCUMENT("document")`
+
+        - `Optional<String> context`
+
+          Additional context about the document for the model.
+
+        - `Optional<String> title`
+
+          The title of the document.
+
+    - `Optional<Boolean> isError`
+
+      Whether the tool execution resulted in an error.
+
+  - `class BetaManagedAgentsAgentThreadMessageReceivedEvent:`
+
+    Delivery event written to the target thread's input stream when an agent-to-agent message arrives.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `List<Content> content`
+
+      Message content blocks.
+
+      - `class BetaManagedAgentsTextBlock:`
+
+        Regular text content.
+
+        - `String text`
+
+          The text content.
+
+        - `Type type`
+
+          - `TEXT("text")`
+
+      - `class BetaManagedAgentsImageBlock:`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for image source variants.
+
+          - `class BetaManagedAgentsBase64ImageSource:`
+
+            Base64-encoded image data.
+
+            - `String data`
+
+              Base64-encoded image data.
+
+            - `String mediaType`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsUrlImageSource:`
+
+            Image referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the image to fetch.
+
+          - `class BetaManagedAgentsFileImageSource:`
+
+            Image referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `IMAGE("image")`
+
+      - `class BetaManagedAgentsDocumentBlock:`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for document source variants.
+
+          - `class BetaManagedAgentsBase64DocumentSource:`
+
+            Base64-encoded document data.
+
+            - `String data`
+
+              Base64-encoded document data.
+
+            - `String mediaType`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsPlainTextDocumentSource:`
+
+            Plain text document content.
+
+            - `String data`
+
+              The plain text content.
+
+            - `MediaType mediaType`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `TEXT_PLAIN("text/plain")`
+
+            - `Type type`
+
+              - `TEXT("text")`
+
+          - `class BetaManagedAgentsUrlDocumentSource:`
+
+            Document referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the document to fetch.
+
+          - `class BetaManagedAgentsFileDocumentSource:`
+
+            Document referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `DOCUMENT("document")`
+
+        - `Optional<String> context`
+
+          Additional context about the document for the model.
+
+        - `Optional<String> title`
+
+          The title of the document.
+
+    - `String fromSessionThreadId`
+
+      Public `sthr_` ID of the thread that sent the message.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `AGENT_THREAD_MESSAGE_RECEIVED("agent.thread_message_received")`
+
+    - `Optional<String> fromAgentName`
+
+      Name of the callable agent this message came from. Absent when received from the primary agent.
+
+  - `class BetaManagedAgentsAgentThreadMessageSentEvent:`
+
+    Observability event emitted to the sender's output stream when an agent-to-agent message is sent.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `List<Content> content`
+
+      Message content blocks.
+
+      - `class BetaManagedAgentsTextBlock:`
+
+        Regular text content.
+
+        - `String text`
+
+          The text content.
+
+        - `Type type`
+
+          - `TEXT("text")`
+
+      - `class BetaManagedAgentsImageBlock:`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for image source variants.
+
+          - `class BetaManagedAgentsBase64ImageSource:`
+
+            Base64-encoded image data.
+
+            - `String data`
+
+              Base64-encoded image data.
+
+            - `String mediaType`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsUrlImageSource:`
+
+            Image referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the image to fetch.
+
+          - `class BetaManagedAgentsFileImageSource:`
+
+            Image referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `IMAGE("image")`
+
+      - `class BetaManagedAgentsDocumentBlock:`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for document source variants.
+
+          - `class BetaManagedAgentsBase64DocumentSource:`
+
+            Base64-encoded document data.
+
+            - `String data`
+
+              Base64-encoded document data.
+
+            - `String mediaType`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsPlainTextDocumentSource:`
+
+            Plain text document content.
+
+            - `String data`
+
+              The plain text content.
+
+            - `MediaType mediaType`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `TEXT_PLAIN("text/plain")`
+
+            - `Type type`
+
+              - `TEXT("text")`
+
+          - `class BetaManagedAgentsUrlDocumentSource:`
+
+            Document referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the document to fetch.
+
+          - `class BetaManagedAgentsFileDocumentSource:`
+
+            Document referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `DOCUMENT("document")`
+
+        - `Optional<String> context`
+
+          Additional context about the document for the model.
+
+        - `Optional<String> title`
+
+          The title of the document.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String toSessionThreadId`
+
+      Public `sthr_` ID of the thread the message was sent to.
+
+    - `Type type`
+
+      - `AGENT_THREAD_MESSAGE_SENT("agent.thread_message_sent")`
+
+    - `Optional<String> toAgentName`
+
+      Name of the callable agent this message was sent to. Absent when sent to the primary agent.
+
+  - `class BetaManagedAgentsAgentThreadContextCompactedEvent:`
+
+    Indicates that context compaction (summarization) occurred during the session.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `AGENT_THREAD_CONTEXT_COMPACTED("agent.thread_context_compacted")`
+
+  - `class BetaManagedAgentsSessionErrorEvent:`
+
+    An error event indicating a problem occurred during session execution.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `Error error`
+
+      An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
+
+      - `class BetaManagedAgentsUnknownError:`
+
+        An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
+
+        - `String message`
+
+          Human-readable error description.
+
+        - `RetryStatus retryStatus`
+
+          What the client should do next in response to this error.
+
+          - `class BetaManagedAgentsRetryStatusRetrying:`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+            - `Type type`
+
+              - `RETRYING("retrying")`
+
+          - `class BetaManagedAgentsRetryStatusExhausted:`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+            - `Type type`
+
+              - `EXHAUSTED("exhausted")`
+
+          - `class BetaManagedAgentsRetryStatusTerminal:`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+            - `Type type`
+
+              - `TERMINAL("terminal")`
+
+        - `Type type`
+
+          - `UNKNOWN_ERROR("unknown_error")`
+
+      - `class BetaManagedAgentsModelOverloadedError:`
+
+        The model is currently overloaded. Emitted after automatic retries are exhausted.
+
+        - `String message`
+
+          Human-readable error description.
+
+        - `RetryStatus retryStatus`
+
+          What the client should do next in response to this error.
+
+          - `class BetaManagedAgentsRetryStatusRetrying:`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+            - `Type type`
+
+              - `RETRYING("retrying")`
+
+          - `class BetaManagedAgentsRetryStatusExhausted:`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+            - `Type type`
+
+              - `EXHAUSTED("exhausted")`
+
+          - `class BetaManagedAgentsRetryStatusTerminal:`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+            - `Type type`
+
+              - `TERMINAL("terminal")`
+
+        - `Type type`
+
+          - `MODEL_OVERLOADED_ERROR("model_overloaded_error")`
+
+      - `class BetaManagedAgentsModelRateLimitedError:`
+
+        The model request was rate-limited.
+
+        - `String message`
+
+          Human-readable error description.
+
+        - `RetryStatus retryStatus`
+
+          What the client should do next in response to this error.
+
+          - `class BetaManagedAgentsRetryStatusRetrying:`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+            - `Type type`
+
+              - `RETRYING("retrying")`
+
+          - `class BetaManagedAgentsRetryStatusExhausted:`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+            - `Type type`
+
+              - `EXHAUSTED("exhausted")`
+
+          - `class BetaManagedAgentsRetryStatusTerminal:`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+            - `Type type`
+
+              - `TERMINAL("terminal")`
+
+        - `Type type`
+
+          - `MODEL_RATE_LIMITED_ERROR("model_rate_limited_error")`
+
+      - `class BetaManagedAgentsModelRequestFailedError:`
+
+        A model request failed for a reason other than overload or rate-limiting.
+
+        - `String message`
+
+          Human-readable error description.
+
+        - `RetryStatus retryStatus`
+
+          What the client should do next in response to this error.
+
+          - `class BetaManagedAgentsRetryStatusRetrying:`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+            - `Type type`
+
+              - `RETRYING("retrying")`
+
+          - `class BetaManagedAgentsRetryStatusExhausted:`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+            - `Type type`
+
+              - `EXHAUSTED("exhausted")`
+
+          - `class BetaManagedAgentsRetryStatusTerminal:`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+            - `Type type`
+
+              - `TERMINAL("terminal")`
+
+        - `Type type`
+
+          - `MODEL_REQUEST_FAILED_ERROR("model_request_failed_error")`
+
+      - `class BetaManagedAgentsMcpConnectionFailedError:`
+
+        Failed to connect to an MCP server.
+
+        - `String mcpServerName`
+
+          Name of the MCP server that failed to connect.
+
+        - `String message`
+
+          Human-readable error description.
+
+        - `RetryStatus retryStatus`
+
+          What the client should do next in response to this error.
+
+          - `class BetaManagedAgentsRetryStatusRetrying:`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+            - `Type type`
+
+              - `RETRYING("retrying")`
+
+          - `class BetaManagedAgentsRetryStatusExhausted:`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+            - `Type type`
+
+              - `EXHAUSTED("exhausted")`
+
+          - `class BetaManagedAgentsRetryStatusTerminal:`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+            - `Type type`
+
+              - `TERMINAL("terminal")`
+
+        - `Type type`
+
+          - `MCP_CONNECTION_FAILED_ERROR("mcp_connection_failed_error")`
+
+      - `class BetaManagedAgentsMcpAuthenticationFailedError:`
+
+        Authentication to an MCP server failed.
+
+        - `String mcpServerName`
+
+          Name of the MCP server that failed authentication.
+
+        - `String message`
+
+          Human-readable error description.
+
+        - `RetryStatus retryStatus`
+
+          What the client should do next in response to this error.
+
+          - `class BetaManagedAgentsRetryStatusRetrying:`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+            - `Type type`
+
+              - `RETRYING("retrying")`
+
+          - `class BetaManagedAgentsRetryStatusExhausted:`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+            - `Type type`
+
+              - `EXHAUSTED("exhausted")`
+
+          - `class BetaManagedAgentsRetryStatusTerminal:`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+            - `Type type`
+
+              - `TERMINAL("terminal")`
+
+        - `Type type`
+
+          - `MCP_AUTHENTICATION_FAILED_ERROR("mcp_authentication_failed_error")`
+
+      - `class BetaManagedAgentsBillingError:`
+
+        The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
+
+        - `String message`
+
+          Human-readable error description.
+
+        - `RetryStatus retryStatus`
+
+          What the client should do next in response to this error.
+
+          - `class BetaManagedAgentsRetryStatusRetrying:`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+            - `Type type`
+
+              - `RETRYING("retrying")`
+
+          - `class BetaManagedAgentsRetryStatusExhausted:`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+            - `Type type`
+
+              - `EXHAUSTED("exhausted")`
+
+          - `class BetaManagedAgentsRetryStatusTerminal:`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+            - `Type type`
+
+              - `TERMINAL("terminal")`
+
+        - `Type type`
+
+          - `BILLING_ERROR("billing_error")`
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `SESSION_ERROR("session.error")`
+
+  - `class BetaManagedAgentsSessionStatusRescheduledEvent:`
+
+    Indicates the session is recovering from an error state and is rescheduled for execution.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `SESSION_STATUS_RESCHEDULED("session.status_rescheduled")`
+
+  - `class BetaManagedAgentsSessionStatusRunningEvent:`
+
+    Indicates the session is actively running and the agent is working.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `SESSION_STATUS_RUNNING("session.status_running")`
+
+  - `class BetaManagedAgentsSessionStatusIdleEvent:`
+
+    Indicates the agent has paused and is awaiting user input.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `StopReason stopReason`
+
+      The agent completed its turn naturally and is ready for the next user message.
+
+      - `class BetaManagedAgentsSessionEndTurn:`
+
+        The agent completed its turn naturally and is ready for the next user message.
+
+        - `Type type`
+
+          - `END_TURN("end_turn")`
+
+      - `class BetaManagedAgentsSessionRequiresAction:`
+
+        The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
+
+        - `List<String> eventIds`
+
+          The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
+
+        - `Type type`
+
+          - `REQUIRES_ACTION("requires_action")`
+
+      - `class BetaManagedAgentsSessionRetriesExhausted:`
+
+        The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+
+        - `Type type`
+
+          - `RETRIES_EXHAUSTED("retries_exhausted")`
+
+    - `Type type`
+
+      - `SESSION_STATUS_IDLE("session.status_idle")`
+
+  - `class BetaManagedAgentsSessionStatusTerminatedEvent:`
+
+    Indicates the session has terminated, either due to an error or completion.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `SESSION_STATUS_TERMINATED("session.status_terminated")`
+
+  - `class BetaManagedAgentsSessionThreadCreatedEvent:`
+
+    Emitted when a subagent is spawned as a new thread. Written to the parent thread's output stream so clients observing the session see child creation.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `String agentName`
+
+      Name of the callable agent the thread runs.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String sessionThreadId`
+
+      Public `sthr_` ID of the newly created thread.
+
+    - `Type type`
+
+      - `SESSION_THREAD_CREATED("session.thread_created")`
+
+  - `class BetaManagedAgentsSpanOutcomeEvaluationStartEvent:`
+
+    Emitted when an outcome evaluation cycle begins.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `long iteration`
+
+      0-indexed revision cycle. 0 is the first evaluation; 1 is the re-evaluation after the first revision; etc.
+
+    - `String outcomeId`
+
+      The `outc_` ID of the outcome being evaluated.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `SPAN_OUTCOME_EVALUATION_START("span.outcome_evaluation_start")`
+
+  - `class BetaManagedAgentsSpanOutcomeEvaluationEndEvent:`
+
+    Emitted when an outcome evaluation cycle completes. Carries the verdict and aggregate token usage. A verdict of `needs_revision` means another evaluation cycle follows; `satisfied`, `max_iterations_reached`, `failed`, or `interrupted` are terminal — no further evaluation cycles follow.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `String explanation`
+
+      Human-readable explanation of the verdict. For `needs_revision`, describes which criteria failed and why.
+
+    - `long iteration`
+
+      0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
+
+    - `String outcomeEvaluationStartId`
+
+      The id of the corresponding `span.outcome_evaluation_start` event.
+
+    - `String outcomeId`
+
+      The `outc_` ID of the outcome being evaluated.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String result`
+
+      Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs_revision': criteria not met, another revision cycle follows. 'max_iterations_reached': evaluation budget exhausted with criteria still unmet — one final acknowledgment turn follows before the session goes idle, but no further evaluation runs. 'failed': grader determined the rubric does not apply to the deliverables. 'interrupted': user sent an interrupt while evaluation was in progress.
+
+    - `Type type`
+
+      - `SPAN_OUTCOME_EVALUATION_END("span.outcome_evaluation_end")`
+
+    - `BetaManagedAgentsSpanModelUsage usage`
+
+      Token usage for a single model request.
+
+      - `long cacheCreationInputTokens`
+
+        Tokens used to create prompt cache in this request.
+
+      - `long cacheReadInputTokens`
+
+        Tokens read from prompt cache in this request.
+
+      - `long inputTokens`
+
+        Input tokens consumed by this request.
+
+      - `long outputTokens`
+
+        Output tokens generated by this request.
+
+      - `Optional<Speed> speed`
+
+        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+        - `STANDARD("standard")`
+
+        - `FAST("fast")`
+
+  - `class BetaManagedAgentsSpanModelRequestStartEvent:`
+
+    Emitted when a model request is initiated by the agent.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `SPAN_MODEL_REQUEST_START("span.model_request_start")`
+
+  - `class BetaManagedAgentsSpanModelRequestEndEvent:`
+
+    Emitted when a model request completes.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `Optional<Boolean> isError`
+
+      Whether the model request resulted in an error.
+
+    - `String modelRequestStartId`
+
+      The id of the corresponding `span.model_request_start` event.
+
+    - `BetaManagedAgentsSpanModelUsage modelUsage`
+
+      Token usage for a single model request.
+
+      - `long cacheCreationInputTokens`
+
+        Tokens used to create prompt cache in this request.
+
+      - `long cacheReadInputTokens`
+
+        Tokens read from prompt cache in this request.
+
+      - `long inputTokens`
+
+        Input tokens consumed by this request.
+
+      - `long outputTokens`
+
+        Output tokens generated by this request.
+
+      - `Optional<Speed> speed`
+
+        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+        - `STANDARD("standard")`
+
+        - `FAST("fast")`
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `SPAN_MODEL_REQUEST_END("span.model_request_end")`
+
+  - `class BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent:`
+
+    Periodic heartbeat emitted while an outcome evaluation cycle is in progress. Distinguishes 'evaluation is actively running' from 'evaluation is stuck' between the corresponding `span.outcome_evaluation_start` and `span.outcome_evaluation_end` events.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `long iteration`
+
+      0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
+
+    - `String outcomeId`
+
+      The `outc_` ID of the outcome being evaluated.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `SPAN_OUTCOME_EVALUATION_ONGOING("span.outcome_evaluation_ongoing")`
+
+  - `class BetaManagedAgentsUserDefineOutcomeEvent:`
+
+    Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `String description`
+
+      What the agent should produce. Copied from the input event.
+
+    - `Optional<Long> maxIterations`
+
+      Evaluate-then-revise cycles before giving up. Default 3, max 20.
+
+    - `String outcomeId`
+
+      Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Rubric rubric`
+
+      Rubric for grading the quality of an outcome.
+
+      - `class BetaManagedAgentsFileRubric:`
+
+        Rubric referenced by a file uploaded via the Files API.
+
+        - `String fileId`
+
+          ID of the rubric file.
+
+        - `Type type`
+
+          - `FILE("file")`
+
+      - `class BetaManagedAgentsTextRubric:`
+
+        Rubric content provided inline as text.
+
+        - `String content`
+
+          Rubric content. Plain text or markdown — the grader treats it as freeform text.
+
+        - `Type type`
+
+          - `TEXT("text")`
+
+    - `Type type`
+
+      - `USER_DEFINE_OUTCOME("user.define_outcome")`
+
+  - `class BetaManagedAgentsSessionDeletedEvent:`
+
+    Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `SESSION_DELETED("session.deleted")`
+
+  - `class BetaManagedAgentsSessionThreadStatusRunningEvent:`
+
+    A session thread has begun executing. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `String agentName`
+
+      Name of the agent the thread runs.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String sessionThreadId`
+
+      Public sthr_ ID of the thread that started running.
+
+    - `Type type`
+
+      - `SESSION_THREAD_STATUS_RUNNING("session.thread_status_running")`
+
+  - `class BetaManagedAgentsSessionThreadStatusIdleEvent:`
+
+    A session thread has yielded and is awaiting input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `String agentName`
+
+      Name of the agent the thread runs.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String sessionThreadId`
+
+      Public sthr_ ID of the thread that went idle.
+
+    - `StopReason stopReason`
+
+      The agent completed its turn naturally and is ready for the next user message.
+
+      - `class BetaManagedAgentsSessionEndTurn:`
+
+        The agent completed its turn naturally and is ready for the next user message.
+
+        - `Type type`
+
+          - `END_TURN("end_turn")`
+
+      - `class BetaManagedAgentsSessionRequiresAction:`
+
+        The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
+
+        - `List<String> eventIds`
+
+          The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
+
+        - `Type type`
+
+          - `REQUIRES_ACTION("requires_action")`
+
+      - `class BetaManagedAgentsSessionRetriesExhausted:`
+
+        The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+
+        - `Type type`
+
+          - `RETRIES_EXHAUSTED("retries_exhausted")`
+
+    - `Type type`
+
+      - `SESSION_THREAD_STATUS_IDLE("session.thread_status_idle")`
+
+  - `class BetaManagedAgentsSessionThreadStatusTerminatedEvent:`
+
+    A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `String agentName`
+
+      Name of the agent the thread runs.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String sessionThreadId`
+
+      Public sthr_ ID of the thread that terminated.
+
+    - `Type type`
+
+      - `SESSION_THREAD_STATUS_TERMINATED("session.thread_status_terminated")`
+
+  - `class BetaManagedAgentsSessionThreadStatusRescheduledEvent:`
+
+    A session thread hit a transient error and is retrying automatically. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `String agentName`
+
+      Name of the agent the thread runs.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String sessionThreadId`
+
+      Public sthr_ ID of the thread that is retrying.
+
+    - `Type type`
+
+      - `SESSION_THREAD_STATUS_RESCHEDULED("session.thread_status_rescheduled")`
+
+### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.sessions.threads.events.EventListPage;
+import com.anthropic.models.beta.sessions.threads.events.EventListParams;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        EventListParams params = EventListParams.builder()
+            .sessionId("sesn_011CZkZAtmR3yMPDzynEDxu7")
+            .threadId("sthr_011CZkZVWa6oIjw0rgXZpnBt")
+            .build();
+        EventListPage page = client.beta().sessions().threads().events().list(params);
+    }
+}
+```
+
+## Stream
+
+`BetaManagedAgentsStreamSessionThreadEvents beta().sessions().threads().events().streamStreaming(EventStreamParamsparams, RequestOptionsrequestOptions = RequestOptions.none())`
+
+**get** `/v1/sessions/{session_id}/threads/{thread_id}/stream`
+
+Stream Session Thread Events
+
+### Parameters
+
+- `EventStreamParams params`
+
+  - `String sessionId`
+
+  - `Optional<String> threadId`
+
+  - `Optional<List<AnthropicBeta>> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
+### Returns
+
+- `class BetaManagedAgentsStreamSessionThreadEvents: A class that can be one of several variants.union`
+
+  Server-sent event in a single thread's stream.
+
+  - `class BetaManagedAgentsUserMessageEvent:`
+
+    A user message event in the session conversation.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `List<Content> content`
+
+      Array of content blocks comprising the user message.
+
+      - `class BetaManagedAgentsTextBlock:`
+
+        Regular text content.
+
+        - `String text`
+
+          The text content.
+
+        - `Type type`
+
+          - `TEXT("text")`
+
+      - `class BetaManagedAgentsImageBlock:`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for image source variants.
+
+          - `class BetaManagedAgentsBase64ImageSource:`
+
+            Base64-encoded image data.
+
+            - `String data`
+
+              Base64-encoded image data.
+
+            - `String mediaType`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsUrlImageSource:`
+
+            Image referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the image to fetch.
+
+          - `class BetaManagedAgentsFileImageSource:`
+
+            Image referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `IMAGE("image")`
+
+      - `class BetaManagedAgentsDocumentBlock:`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for document source variants.
+
+          - `class BetaManagedAgentsBase64DocumentSource:`
+
+            Base64-encoded document data.
+
+            - `String data`
+
+              Base64-encoded document data.
+
+            - `String mediaType`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsPlainTextDocumentSource:`
+
+            Plain text document content.
+
+            - `String data`
+
+              The plain text content.
+
+            - `MediaType mediaType`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `TEXT_PLAIN("text/plain")`
+
+            - `Type type`
+
+              - `TEXT("text")`
+
+          - `class BetaManagedAgentsUrlDocumentSource:`
+
+            Document referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the document to fetch.
+
+          - `class BetaManagedAgentsFileDocumentSource:`
+
+            Document referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `DOCUMENT("document")`
+
+        - `Optional<String> context`
+
+          Additional context about the document for the model.
+
+        - `Optional<String> title`
+
+          The title of the document.
+
+    - `Type type`
+
+      - `USER_MESSAGE("user.message")`
+
+    - `Optional<LocalDateTime> processedAt`
+
+      A timestamp in RFC 3339 format
+
+  - `class BetaManagedAgentsUserInterruptEvent:`
+
+    An interrupt event that pauses agent execution and returns control to the user.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `Type type`
+
+      - `USER_INTERRUPT("user.interrupt")`
+
+    - `Optional<LocalDateTime> processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Optional<String> sessionThreadId`
+
+      If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
+
+  - `class BetaManagedAgentsUserToolConfirmationEvent:`
+
+    A tool confirmation event that approves or denies a pending tool execution.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `Result result`
+
+      UserToolConfirmationResult enum
+
+      - `ALLOW("allow")`
+
+      - `DENY("deny")`
+
+    - `String toolUseId`
+
+      The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](./api-beta-sessions-events-list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
+
+    - `Type type`
+
+      - `USER_TOOL_CONFIRMATION("user.tool_confirmation")`
+
+    - `Optional<String> denyMessage`
+
+      Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
+
+    - `Optional<LocalDateTime> processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Optional<String> sessionThreadId`
+
+      When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
+
+  - `class BetaManagedAgentsUserCustomToolResultEvent:`
+
+    Event sent by the client providing the result of a custom tool execution.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `String customToolUseId`
+
+      The id of the `agent.custom_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](./api-beta-sessions-events-list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
+
+    - `Type type`
+
+      - `USER_CUSTOM_TOOL_RESULT("user.custom_tool_result")`
+
+    - `Optional<List<Content>> content`
+
+      The result content returned by the tool.
+
+      - `class BetaManagedAgentsTextBlock:`
+
+        Regular text content.
+
+        - `String text`
+
+          The text content.
+
+        - `Type type`
+
+          - `TEXT("text")`
+
+      - `class BetaManagedAgentsImageBlock:`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for image source variants.
+
+          - `class BetaManagedAgentsBase64ImageSource:`
+
+            Base64-encoded image data.
+
+            - `String data`
+
+              Base64-encoded image data.
+
+            - `String mediaType`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsUrlImageSource:`
+
+            Image referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the image to fetch.
+
+          - `class BetaManagedAgentsFileImageSource:`
+
+            Image referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `IMAGE("image")`
+
+      - `class BetaManagedAgentsDocumentBlock:`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for document source variants.
+
+          - `class BetaManagedAgentsBase64DocumentSource:`
+
+            Base64-encoded document data.
+
+            - `String data`
+
+              Base64-encoded document data.
+
+            - `String mediaType`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsPlainTextDocumentSource:`
+
+            Plain text document content.
+
+            - `String data`
+
+              The plain text content.
+
+            - `MediaType mediaType`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `TEXT_PLAIN("text/plain")`
+
+            - `Type type`
+
+              - `TEXT("text")`
+
+          - `class BetaManagedAgentsUrlDocumentSource:`
+
+            Document referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the document to fetch.
+
+          - `class BetaManagedAgentsFileDocumentSource:`
+
+            Document referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `DOCUMENT("document")`
+
+        - `Optional<String> context`
+
+          Additional context about the document for the model.
+
+        - `Optional<String> title`
+
+          The title of the document.
+
+    - `Optional<Boolean> isError`
+
+      Whether the tool execution resulted in an error.
+
+    - `Optional<LocalDateTime> processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Optional<String> sessionThreadId`
+
+      Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
+
+  - `class BetaManagedAgentsAgentCustomToolUseEvent:`
+
+    Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `Input input`
+
+      Input parameters for the tool call.
+
+    - `String name`
+
+      Name of the custom tool being called.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `AGENT_CUSTOM_TOOL_USE("agent.custom_tool_use")`
+
+    - `Optional<String> sessionThreadId`
+
+      When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
+
+  - `class BetaManagedAgentsAgentMessageEvent:`
+
+    An agent response event in the session conversation.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `List<BetaManagedAgentsTextBlock> content`
+
+      Array of text blocks comprising the agent response.
+
+      - `String text`
+
+        The text content.
+
+      - `Type type`
+
+        - `TEXT("text")`
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `AGENT_MESSAGE("agent.message")`
+
+  - `class BetaManagedAgentsAgentThinkingEvent:`
+
+    Indicates the agent is making forward progress via extended thinking. A progress signal, not a content carrier.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `AGENT_THINKING("agent.thinking")`
+
+  - `class BetaManagedAgentsAgentMcpToolUseEvent:`
+
+    Event emitted when the agent invokes a tool provided by an MCP server.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `Input input`
+
+      Input parameters for the tool call.
+
+    - `String mcpServerName`
+
+      Name of the MCP server providing the tool.
+
+    - `String name`
+
+      Name of the MCP tool being used.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `AGENT_MCP_TOOL_USE("agent.mcp_tool_use")`
+
+    - `Optional<EvaluatedPermission> evaluatedPermission`
+
+      AgentEvaluatedPermission enum
+
+      - `ALLOW("allow")`
+
+      - `ASK("ask")`
+
+      - `DENY("deny")`
+
+    - `Optional<String> sessionThreadId`
+
+      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
+
+  - `class BetaManagedAgentsAgentMcpToolResultEvent:`
+
+    Event representing the result of an MCP tool execution.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `String mcpToolUseId`
+
+      The id of the `agent.mcp_tool_use` event this result corresponds to.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `AGENT_MCP_TOOL_RESULT("agent.mcp_tool_result")`
+
+    - `Optional<List<Content>> content`
+
+      The result content returned by the tool.
+
+      - `class BetaManagedAgentsTextBlock:`
+
+        Regular text content.
+
+        - `String text`
+
+          The text content.
+
+        - `Type type`
+
+          - `TEXT("text")`
+
+      - `class BetaManagedAgentsImageBlock:`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for image source variants.
+
+          - `class BetaManagedAgentsBase64ImageSource:`
+
+            Base64-encoded image data.
+
+            - `String data`
+
+              Base64-encoded image data.
+
+            - `String mediaType`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsUrlImageSource:`
+
+            Image referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the image to fetch.
+
+          - `class BetaManagedAgentsFileImageSource:`
+
+            Image referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `IMAGE("image")`
+
+      - `class BetaManagedAgentsDocumentBlock:`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for document source variants.
+
+          - `class BetaManagedAgentsBase64DocumentSource:`
+
+            Base64-encoded document data.
+
+            - `String data`
+
+              Base64-encoded document data.
+
+            - `String mediaType`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsPlainTextDocumentSource:`
+
+            Plain text document content.
+
+            - `String data`
+
+              The plain text content.
+
+            - `MediaType mediaType`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `TEXT_PLAIN("text/plain")`
+
+            - `Type type`
+
+              - `TEXT("text")`
+
+          - `class BetaManagedAgentsUrlDocumentSource:`
+
+            Document referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the document to fetch.
+
+          - `class BetaManagedAgentsFileDocumentSource:`
+
+            Document referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `DOCUMENT("document")`
+
+        - `Optional<String> context`
+
+          Additional context about the document for the model.
+
+        - `Optional<String> title`
+
+          The title of the document.
+
+    - `Optional<Boolean> isError`
+
+      Whether the tool execution resulted in an error.
+
+  - `class BetaManagedAgentsAgentToolUseEvent:`
+
+    Event emitted when the agent invokes a built-in agent tool.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `Input input`
+
+      Input parameters for the tool call.
+
+    - `String name`
+
+      Name of the agent tool being used.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `AGENT_TOOL_USE("agent.tool_use")`
+
+    - `Optional<EvaluatedPermission> evaluatedPermission`
+
+      AgentEvaluatedPermission enum
+
+      - `ALLOW("allow")`
+
+      - `ASK("ask")`
+
+      - `DENY("deny")`
+
+    - `Optional<String> sessionThreadId`
+
+      When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
+
+  - `class BetaManagedAgentsAgentToolResultEvent:`
+
+    Event representing the result of an agent tool execution.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String toolUseId`
+
+      The id of the `agent.tool_use` event this result corresponds to.
+
+    - `Type type`
+
+      - `AGENT_TOOL_RESULT("agent.tool_result")`
+
+    - `Optional<List<Content>> content`
+
+      The result content returned by the tool.
+
+      - `class BetaManagedAgentsTextBlock:`
+
+        Regular text content.
+
+        - `String text`
+
+          The text content.
+
+        - `Type type`
+
+          - `TEXT("text")`
+
+      - `class BetaManagedAgentsImageBlock:`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for image source variants.
+
+          - `class BetaManagedAgentsBase64ImageSource:`
+
+            Base64-encoded image data.
+
+            - `String data`
+
+              Base64-encoded image data.
+
+            - `String mediaType`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsUrlImageSource:`
+
+            Image referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the image to fetch.
+
+          - `class BetaManagedAgentsFileImageSource:`
+
+            Image referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `IMAGE("image")`
+
+      - `class BetaManagedAgentsDocumentBlock:`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for document source variants.
+
+          - `class BetaManagedAgentsBase64DocumentSource:`
+
+            Base64-encoded document data.
+
+            - `String data`
+
+              Base64-encoded document data.
+
+            - `String mediaType`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsPlainTextDocumentSource:`
+
+            Plain text document content.
+
+            - `String data`
+
+              The plain text content.
+
+            - `MediaType mediaType`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `TEXT_PLAIN("text/plain")`
+
+            - `Type type`
+
+              - `TEXT("text")`
+
+          - `class BetaManagedAgentsUrlDocumentSource:`
+
+            Document referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the document to fetch.
+
+          - `class BetaManagedAgentsFileDocumentSource:`
+
+            Document referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `DOCUMENT("document")`
+
+        - `Optional<String> context`
+
+          Additional context about the document for the model.
+
+        - `Optional<String> title`
+
+          The title of the document.
+
+    - `Optional<Boolean> isError`
+
+      Whether the tool execution resulted in an error.
+
+  - `class BetaManagedAgentsAgentThreadMessageReceivedEvent:`
+
+    Delivery event written to the target thread's input stream when an agent-to-agent message arrives.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `List<Content> content`
+
+      Message content blocks.
+
+      - `class BetaManagedAgentsTextBlock:`
+
+        Regular text content.
+
+        - `String text`
+
+          The text content.
+
+        - `Type type`
+
+          - `TEXT("text")`
+
+      - `class BetaManagedAgentsImageBlock:`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for image source variants.
+
+          - `class BetaManagedAgentsBase64ImageSource:`
+
+            Base64-encoded image data.
+
+            - `String data`
+
+              Base64-encoded image data.
+
+            - `String mediaType`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsUrlImageSource:`
+
+            Image referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the image to fetch.
+
+          - `class BetaManagedAgentsFileImageSource:`
+
+            Image referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `IMAGE("image")`
+
+      - `class BetaManagedAgentsDocumentBlock:`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for document source variants.
+
+          - `class BetaManagedAgentsBase64DocumentSource:`
+
+            Base64-encoded document data.
+
+            - `String data`
+
+              Base64-encoded document data.
+
+            - `String mediaType`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsPlainTextDocumentSource:`
+
+            Plain text document content.
+
+            - `String data`
+
+              The plain text content.
+
+            - `MediaType mediaType`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `TEXT_PLAIN("text/plain")`
+
+            - `Type type`
+
+              - `TEXT("text")`
+
+          - `class BetaManagedAgentsUrlDocumentSource:`
+
+            Document referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the document to fetch.
+
+          - `class BetaManagedAgentsFileDocumentSource:`
+
+            Document referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `DOCUMENT("document")`
+
+        - `Optional<String> context`
+
+          Additional context about the document for the model.
+
+        - `Optional<String> title`
+
+          The title of the document.
+
+    - `String fromSessionThreadId`
+
+      Public `sthr_` ID of the thread that sent the message.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `AGENT_THREAD_MESSAGE_RECEIVED("agent.thread_message_received")`
+
+    - `Optional<String> fromAgentName`
+
+      Name of the callable agent this message came from. Absent when received from the primary agent.
+
+  - `class BetaManagedAgentsAgentThreadMessageSentEvent:`
+
+    Observability event emitted to the sender's output stream when an agent-to-agent message is sent.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `List<Content> content`
+
+      Message content blocks.
+
+      - `class BetaManagedAgentsTextBlock:`
+
+        Regular text content.
+
+        - `String text`
+
+          The text content.
+
+        - `Type type`
+
+          - `TEXT("text")`
+
+      - `class BetaManagedAgentsImageBlock:`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for image source variants.
+
+          - `class BetaManagedAgentsBase64ImageSource:`
+
+            Base64-encoded image data.
+
+            - `String data`
+
+              Base64-encoded image data.
+
+            - `String mediaType`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsUrlImageSource:`
+
+            Image referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the image to fetch.
+
+          - `class BetaManagedAgentsFileImageSource:`
+
+            Image referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `IMAGE("image")`
+
+      - `class BetaManagedAgentsDocumentBlock:`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `Source source`
+
+          Union type for document source variants.
+
+          - `class BetaManagedAgentsBase64DocumentSource:`
+
+            Base64-encoded document data.
+
+            - `String data`
+
+              Base64-encoded document data.
+
+            - `String mediaType`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `Type type`
+
+              - `BASE64("base64")`
+
+          - `class BetaManagedAgentsPlainTextDocumentSource:`
+
+            Plain text document content.
+
+            - `String data`
+
+              The plain text content.
+
+            - `MediaType mediaType`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `TEXT_PLAIN("text/plain")`
+
+            - `Type type`
+
+              - `TEXT("text")`
+
+          - `class BetaManagedAgentsUrlDocumentSource:`
+
+            Document referenced by URL.
+
+            - `Type type`
+
+              - `URL("url")`
+
+            - `String url`
+
+              URL of the document to fetch.
+
+          - `class BetaManagedAgentsFileDocumentSource:`
+
+            Document referenced by file ID.
+
+            - `String fileId`
+
+              ID of a previously uploaded file.
+
+            - `Type type`
+
+              - `FILE("file")`
+
+        - `Type type`
+
+          - `DOCUMENT("document")`
+
+        - `Optional<String> context`
+
+          Additional context about the document for the model.
+
+        - `Optional<String> title`
+
+          The title of the document.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String toSessionThreadId`
+
+      Public `sthr_` ID of the thread the message was sent to.
+
+    - `Type type`
+
+      - `AGENT_THREAD_MESSAGE_SENT("agent.thread_message_sent")`
+
+    - `Optional<String> toAgentName`
+
+      Name of the callable agent this message was sent to. Absent when sent to the primary agent.
+
+  - `class BetaManagedAgentsAgentThreadContextCompactedEvent:`
+
+    Indicates that context compaction (summarization) occurred during the session.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `AGENT_THREAD_CONTEXT_COMPACTED("agent.thread_context_compacted")`
+
+  - `class BetaManagedAgentsSessionErrorEvent:`
+
+    An error event indicating a problem occurred during session execution.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `Error error`
+
+      An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
+
+      - `class BetaManagedAgentsUnknownError:`
+
+        An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
+
+        - `String message`
+
+          Human-readable error description.
+
+        - `RetryStatus retryStatus`
+
+          What the client should do next in response to this error.
+
+          - `class BetaManagedAgentsRetryStatusRetrying:`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+            - `Type type`
+
+              - `RETRYING("retrying")`
+
+          - `class BetaManagedAgentsRetryStatusExhausted:`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+            - `Type type`
+
+              - `EXHAUSTED("exhausted")`
+
+          - `class BetaManagedAgentsRetryStatusTerminal:`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+            - `Type type`
+
+              - `TERMINAL("terminal")`
+
+        - `Type type`
+
+          - `UNKNOWN_ERROR("unknown_error")`
+
+      - `class BetaManagedAgentsModelOverloadedError:`
+
+        The model is currently overloaded. Emitted after automatic retries are exhausted.
+
+        - `String message`
+
+          Human-readable error description.
+
+        - `RetryStatus retryStatus`
+
+          What the client should do next in response to this error.
+
+          - `class BetaManagedAgentsRetryStatusRetrying:`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+            - `Type type`
+
+              - `RETRYING("retrying")`
+
+          - `class BetaManagedAgentsRetryStatusExhausted:`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+            - `Type type`
+
+              - `EXHAUSTED("exhausted")`
+
+          - `class BetaManagedAgentsRetryStatusTerminal:`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+            - `Type type`
+
+              - `TERMINAL("terminal")`
+
+        - `Type type`
+
+          - `MODEL_OVERLOADED_ERROR("model_overloaded_error")`
+
+      - `class BetaManagedAgentsModelRateLimitedError:`
+
+        The model request was rate-limited.
+
+        - `String message`
+
+          Human-readable error description.
+
+        - `RetryStatus retryStatus`
+
+          What the client should do next in response to this error.
+
+          - `class BetaManagedAgentsRetryStatusRetrying:`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+            - `Type type`
+
+              - `RETRYING("retrying")`
+
+          - `class BetaManagedAgentsRetryStatusExhausted:`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+            - `Type type`
+
+              - `EXHAUSTED("exhausted")`
+
+          - `class BetaManagedAgentsRetryStatusTerminal:`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+            - `Type type`
+
+              - `TERMINAL("terminal")`
+
+        - `Type type`
+
+          - `MODEL_RATE_LIMITED_ERROR("model_rate_limited_error")`
+
+      - `class BetaManagedAgentsModelRequestFailedError:`
+
+        A model request failed for a reason other than overload or rate-limiting.
+
+        - `String message`
+
+          Human-readable error description.
+
+        - `RetryStatus retryStatus`
+
+          What the client should do next in response to this error.
+
+          - `class BetaManagedAgentsRetryStatusRetrying:`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+            - `Type type`
+
+              - `RETRYING("retrying")`
+
+          - `class BetaManagedAgentsRetryStatusExhausted:`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+            - `Type type`
+
+              - `EXHAUSTED("exhausted")`
+
+          - `class BetaManagedAgentsRetryStatusTerminal:`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+            - `Type type`
+
+              - `TERMINAL("terminal")`
+
+        - `Type type`
+
+          - `MODEL_REQUEST_FAILED_ERROR("model_request_failed_error")`
+
+      - `class BetaManagedAgentsMcpConnectionFailedError:`
+
+        Failed to connect to an MCP server.
+
+        - `String mcpServerName`
+
+          Name of the MCP server that failed to connect.
+
+        - `String message`
+
+          Human-readable error description.
+
+        - `RetryStatus retryStatus`
+
+          What the client should do next in response to this error.
+
+          - `class BetaManagedAgentsRetryStatusRetrying:`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+            - `Type type`
+
+              - `RETRYING("retrying")`
+
+          - `class BetaManagedAgentsRetryStatusExhausted:`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+            - `Type type`
+
+              - `EXHAUSTED("exhausted")`
+
+          - `class BetaManagedAgentsRetryStatusTerminal:`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+            - `Type type`
+
+              - `TERMINAL("terminal")`
+
+        - `Type type`
+
+          - `MCP_CONNECTION_FAILED_ERROR("mcp_connection_failed_error")`
+
+      - `class BetaManagedAgentsMcpAuthenticationFailedError:`
+
+        Authentication to an MCP server failed.
+
+        - `String mcpServerName`
+
+          Name of the MCP server that failed authentication.
+
+        - `String message`
+
+          Human-readable error description.
+
+        - `RetryStatus retryStatus`
+
+          What the client should do next in response to this error.
+
+          - `class BetaManagedAgentsRetryStatusRetrying:`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+            - `Type type`
+
+              - `RETRYING("retrying")`
+
+          - `class BetaManagedAgentsRetryStatusExhausted:`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+            - `Type type`
+
+              - `EXHAUSTED("exhausted")`
+
+          - `class BetaManagedAgentsRetryStatusTerminal:`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+            - `Type type`
+
+              - `TERMINAL("terminal")`
+
+        - `Type type`
+
+          - `MCP_AUTHENTICATION_FAILED_ERROR("mcp_authentication_failed_error")`
+
+      - `class BetaManagedAgentsBillingError:`
+
+        The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
+
+        - `String message`
+
+          Human-readable error description.
+
+        - `RetryStatus retryStatus`
+
+          What the client should do next in response to this error.
+
+          - `class BetaManagedAgentsRetryStatusRetrying:`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+            - `Type type`
+
+              - `RETRYING("retrying")`
+
+          - `class BetaManagedAgentsRetryStatusExhausted:`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+            - `Type type`
+
+              - `EXHAUSTED("exhausted")`
+
+          - `class BetaManagedAgentsRetryStatusTerminal:`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+            - `Type type`
+
+              - `TERMINAL("terminal")`
+
+        - `Type type`
+
+          - `BILLING_ERROR("billing_error")`
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `SESSION_ERROR("session.error")`
+
+  - `class BetaManagedAgentsSessionStatusRescheduledEvent:`
+
+    Indicates the session is recovering from an error state and is rescheduled for execution.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `SESSION_STATUS_RESCHEDULED("session.status_rescheduled")`
+
+  - `class BetaManagedAgentsSessionStatusRunningEvent:`
+
+    Indicates the session is actively running and the agent is working.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `SESSION_STATUS_RUNNING("session.status_running")`
+
+  - `class BetaManagedAgentsSessionStatusIdleEvent:`
+
+    Indicates the agent has paused and is awaiting user input.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `StopReason stopReason`
+
+      The agent completed its turn naturally and is ready for the next user message.
+
+      - `class BetaManagedAgentsSessionEndTurn:`
+
+        The agent completed its turn naturally and is ready for the next user message.
+
+        - `Type type`
+
+          - `END_TURN("end_turn")`
+
+      - `class BetaManagedAgentsSessionRequiresAction:`
+
+        The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
+
+        - `List<String> eventIds`
+
+          The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
+
+        - `Type type`
+
+          - `REQUIRES_ACTION("requires_action")`
+
+      - `class BetaManagedAgentsSessionRetriesExhausted:`
+
+        The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+
+        - `Type type`
+
+          - `RETRIES_EXHAUSTED("retries_exhausted")`
+
+    - `Type type`
+
+      - `SESSION_STATUS_IDLE("session.status_idle")`
+
+  - `class BetaManagedAgentsSessionStatusTerminatedEvent:`
+
+    Indicates the session has terminated, either due to an error or completion.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `SESSION_STATUS_TERMINATED("session.status_terminated")`
+
+  - `class BetaManagedAgentsSessionThreadCreatedEvent:`
+
+    Emitted when a subagent is spawned as a new thread. Written to the parent thread's output stream so clients observing the session see child creation.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `String agentName`
+
+      Name of the callable agent the thread runs.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String sessionThreadId`
+
+      Public `sthr_` ID of the newly created thread.
+
+    - `Type type`
+
+      - `SESSION_THREAD_CREATED("session.thread_created")`
+
+  - `class BetaManagedAgentsSpanOutcomeEvaluationStartEvent:`
+
+    Emitted when an outcome evaluation cycle begins.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `long iteration`
+
+      0-indexed revision cycle. 0 is the first evaluation; 1 is the re-evaluation after the first revision; etc.
+
+    - `String outcomeId`
+
+      The `outc_` ID of the outcome being evaluated.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `SPAN_OUTCOME_EVALUATION_START("span.outcome_evaluation_start")`
+
+  - `class BetaManagedAgentsSpanOutcomeEvaluationEndEvent:`
+
+    Emitted when an outcome evaluation cycle completes. Carries the verdict and aggregate token usage. A verdict of `needs_revision` means another evaluation cycle follows; `satisfied`, `max_iterations_reached`, `failed`, or `interrupted` are terminal — no further evaluation cycles follow.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `String explanation`
+
+      Human-readable explanation of the verdict. For `needs_revision`, describes which criteria failed and why.
+
+    - `long iteration`
+
+      0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
+
+    - `String outcomeEvaluationStartId`
+
+      The id of the corresponding `span.outcome_evaluation_start` event.
+
+    - `String outcomeId`
+
+      The `outc_` ID of the outcome being evaluated.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String result`
+
+      Evaluation verdict. 'satisfied': criteria met, session goes idle. 'needs_revision': criteria not met, another revision cycle follows. 'max_iterations_reached': evaluation budget exhausted with criteria still unmet — one final acknowledgment turn follows before the session goes idle, but no further evaluation runs. 'failed': grader determined the rubric does not apply to the deliverables. 'interrupted': user sent an interrupt while evaluation was in progress.
+
+    - `Type type`
+
+      - `SPAN_OUTCOME_EVALUATION_END("span.outcome_evaluation_end")`
+
+    - `BetaManagedAgentsSpanModelUsage usage`
+
+      Token usage for a single model request.
+
+      - `long cacheCreationInputTokens`
+
+        Tokens used to create prompt cache in this request.
+
+      - `long cacheReadInputTokens`
+
+        Tokens read from prompt cache in this request.
+
+      - `long inputTokens`
+
+        Input tokens consumed by this request.
+
+      - `long outputTokens`
+
+        Output tokens generated by this request.
+
+      - `Optional<Speed> speed`
+
+        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+        - `STANDARD("standard")`
+
+        - `FAST("fast")`
+
+  - `class BetaManagedAgentsSpanModelRequestStartEvent:`
+
+    Emitted when a model request is initiated by the agent.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `SPAN_MODEL_REQUEST_START("span.model_request_start")`
+
+  - `class BetaManagedAgentsSpanModelRequestEndEvent:`
+
+    Emitted when a model request completes.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `Optional<Boolean> isError`
+
+      Whether the model request resulted in an error.
+
+    - `String modelRequestStartId`
+
+      The id of the corresponding `span.model_request_start` event.
+
+    - `BetaManagedAgentsSpanModelUsage modelUsage`
+
+      Token usage for a single model request.
+
+      - `long cacheCreationInputTokens`
+
+        Tokens used to create prompt cache in this request.
+
+      - `long cacheReadInputTokens`
+
+        Tokens read from prompt cache in this request.
+
+      - `long inputTokens`
+
+        Input tokens consumed by this request.
+
+      - `long outputTokens`
+
+        Output tokens generated by this request.
+
+      - `Optional<Speed> speed`
+
+        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+        - `STANDARD("standard")`
+
+        - `FAST("fast")`
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `SPAN_MODEL_REQUEST_END("span.model_request_end")`
+
+  - `class BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent:`
+
+    Periodic heartbeat emitted while an outcome evaluation cycle is in progress. Distinguishes 'evaluation is actively running' from 'evaluation is stuck' between the corresponding `span.outcome_evaluation_start` and `span.outcome_evaluation_end` events.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `long iteration`
+
+      0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
+
+    - `String outcomeId`
+
+      The `outc_` ID of the outcome being evaluated.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `SPAN_OUTCOME_EVALUATION_ONGOING("span.outcome_evaluation_ongoing")`
+
+  - `class BetaManagedAgentsUserDefineOutcomeEvent:`
+
+    Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `String description`
+
+      What the agent should produce. Copied from the input event.
+
+    - `Optional<Long> maxIterations`
+
+      Evaluate-then-revise cycles before giving up. Default 3, max 20.
+
+    - `String outcomeId`
+
+      Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Rubric rubric`
+
+      Rubric for grading the quality of an outcome.
+
+      - `class BetaManagedAgentsFileRubric:`
+
+        Rubric referenced by a file uploaded via the Files API.
+
+        - `String fileId`
+
+          ID of the rubric file.
+
+        - `Type type`
+
+          - `FILE("file")`
+
+      - `class BetaManagedAgentsTextRubric:`
+
+        Rubric content provided inline as text.
+
+        - `String content`
+
+          Rubric content. Plain text or markdown — the grader treats it as freeform text.
+
+        - `Type type`
+
+          - `TEXT("text")`
+
+    - `Type type`
+
+      - `USER_DEFINE_OUTCOME("user.define_outcome")`
+
+  - `class BetaManagedAgentsSessionDeletedEvent:`
+
+    Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `SESSION_DELETED("session.deleted")`
+
+  - `class BetaManagedAgentsSessionThreadStatusRunningEvent:`
+
+    A session thread has begun executing. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `String agentName`
+
+      Name of the agent the thread runs.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String sessionThreadId`
+
+      Public sthr_ ID of the thread that started running.
+
+    - `Type type`
+
+      - `SESSION_THREAD_STATUS_RUNNING("session.thread_status_running")`
+
+  - `class BetaManagedAgentsSessionThreadStatusIdleEvent:`
+
+    A session thread has yielded and is awaiting input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `String agentName`
+
+      Name of the agent the thread runs.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String sessionThreadId`
+
+      Public sthr_ ID of the thread that went idle.
+
+    - `StopReason stopReason`
+
+      The agent completed its turn naturally and is ready for the next user message.
+
+      - `class BetaManagedAgentsSessionEndTurn:`
+
+        The agent completed its turn naturally and is ready for the next user message.
+
+        - `Type type`
+
+          - `END_TURN("end_turn")`
+
+      - `class BetaManagedAgentsSessionRequiresAction:`
+
+        The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
+
+        - `List<String> eventIds`
+
+          The ids of events the agent is blocked on. Resolving fewer than all re-emits `session.status_idle` with the remainder.
+
+        - `Type type`
+
+          - `REQUIRES_ACTION("requires_action")`
+
+      - `class BetaManagedAgentsSessionRetriesExhausted:`
+
+        The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+
+        - `Type type`
+
+          - `RETRIES_EXHAUSTED("retries_exhausted")`
+
+    - `Type type`
+
+      - `SESSION_THREAD_STATUS_IDLE("session.thread_status_idle")`
+
+  - `class BetaManagedAgentsSessionThreadStatusTerminatedEvent:`
+
+    A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `String agentName`
+
+      Name of the agent the thread runs.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String sessionThreadId`
+
+      Public sthr_ ID of the thread that terminated.
+
+    - `Type type`
+
+      - `SESSION_THREAD_STATUS_TERMINATED("session.thread_status_terminated")`
+
+  - `class BetaManagedAgentsSessionThreadStatusRescheduledEvent:`
+
+    A session thread hit a transient error and is retrying automatically. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `String agentName`
+
+      Name of the agent the thread runs.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `String sessionThreadId`
+
+      Public sthr_ ID of the thread that is retrying.
+
+    - `Type type`
+
+      - `SESSION_THREAD_STATUS_RESCHEDULED("session.thread_status_rescheduled")`
+
+### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.core.http.StreamResponse;
+import com.anthropic.models.beta.sessions.threads.BetaManagedAgentsStreamSessionThreadEvents;
+import com.anthropic.models.beta.sessions.threads.events.EventStreamParams;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        EventStreamParams params = EventStreamParams.builder()
+            .sessionId("sesn_011CZkZAtmR3yMPDzynEDxu7")
+            .threadId("sthr_011CZkZVWa6oIjw0rgXZpnBt")
+            .build();
+        StreamResponse<BetaManagedAgentsStreamSessionThreadEvents> betaManagedAgentsStreamSessionThreadEvents = client.beta().sessions().threads().events().streamStreaming(params);
+    }
+}
+```
+
 # Vaults
 
 ## Create
@@ -68897,6 +86123,8 @@ Create Vault
     - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
 
   - `String displayName`
 
@@ -69038,6 +86266,8 @@ List Vaults
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
 ### Returns
 
 - `class BetaManagedAgentsVault:`
@@ -69157,6 +86387,8 @@ Get Vault
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
 ### Returns
 
 - `class BetaManagedAgentsVault:`
@@ -69275,6 +86507,8 @@ Update Vault
     - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
 
   - `Optional<String> displayName`
 
@@ -69403,6 +86637,8 @@ Delete Vault
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
 ### Returns
 
 - `class BetaManagedAgentsDeletedVault:`
@@ -69501,6 +86737,8 @@ Archive Vault
     - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
 
 ### Returns
 
@@ -69672,6 +86910,8 @@ Create Credential
     - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
 
   - `Auth auth`
 
@@ -70005,6 +87245,8 @@ List Credentials
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
 ### Returns
 
 - `class BetaManagedAgentsCredential:`
@@ -70209,6 +87451,8 @@ Get Credential
     - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
 
 ### Returns
 
@@ -70418,6 +87662,8 @@ Update Credential
     - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
 
   - `Optional<Auth> auth`
 
@@ -70708,6 +87954,8 @@ Delete Credential
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
 ### Returns
 
 - `class BetaManagedAgentsDeletedCredential:`
@@ -70812,6 +88060,8 @@ Archive Credential
     - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
 
 ### Returns
 
@@ -70956,6 +88206,199 @@ public final class Main {
 }
 ```
 
+## MCP OAuth Validate
+
+`BetaManagedAgentsCredentialValidation beta().vaults().credentials().mcpOAuthValidate(CredentialMcpOAuthValidateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())`
+
+**post** `/v1/vaults/{vault_id}/credentials/{credential_id}/mcp_oauth_validate`
+
+Validate Credential
+
+### Parameters
+
+- `CredentialMcpOAuthValidateParams params`
+
+  - `String vaultId`
+
+  - `Optional<String> credentialId`
+
+  - `Optional<List<AnthropicBeta>> betas`
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+    - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
+
+    - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+    - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
+
+    - `MCP_CLIENT_2025_11_20("mcp-client-2025-11-20")`
+
+    - `DEV_FULL_THINKING_2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `INTERLEAVED_THINKING_2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
+
+    - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
+
+    - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+    - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
+
+    - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
+
+    - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
+
+    - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
+### Returns
+
+- `class BetaManagedAgentsCredentialValidation:`
+
+  Result of live-probing a credential against its configured MCP server.
+
+  - `String credentialId`
+
+    Unique identifier of the credential that was validated.
+
+  - `boolean hasRefreshToken`
+
+    Whether the credential has a refresh token configured.
+
+  - `Optional<BetaManagedAgentsMcpProbe> mcpProbe`
+
+    The failing step of an MCP validation probe.
+
+    - `Optional<BetaManagedAgentsRefreshHttpResponse> httpResponse`
+
+      An HTTP response captured during a credential validation probe.
+
+      - `String body`
+
+        Response body. May be truncated and has sensitive values scrubbed.
+
+      - `boolean bodyTruncated`
+
+        Whether `body` was truncated.
+
+      - `String contentType`
+
+        Value of the `Content-Type` response header.
+
+      - `long statusCode`
+
+        HTTP status code.
+
+    - `String method`
+
+      The MCP method that failed (for example `initialize` or `tools/list`).
+
+  - `Optional<BetaManagedAgentsRefreshObject> refresh`
+
+    Outcome of a refresh-token exchange attempted during credential validation.
+
+    - `Optional<BetaManagedAgentsRefreshHttpResponse> httpResponse`
+
+      An HTTP response captured during a credential validation probe.
+
+      - `String body`
+
+        Response body. May be truncated and has sensitive values scrubbed.
+
+      - `boolean bodyTruncated`
+
+        Whether `body` was truncated.
+
+      - `String contentType`
+
+        Value of the `Content-Type` response header.
+
+      - `long statusCode`
+
+        HTTP status code.
+
+    - `Status status`
+
+      Outcome of a refresh-token exchange attempted during credential validation.
+
+      - `SUCCEEDED("succeeded")`
+
+      - `FAILED("failed")`
+
+      - `CONNECT_ERROR("connect_error")`
+
+      - `NO_REFRESH_TOKEN("no_refresh_token")`
+
+  - `BetaManagedAgentsCredentialValidationStatus status`
+
+    Overall verdict of a credential validation probe.
+
+    - `VALID("valid")`
+
+    - `INVALID("invalid")`
+
+    - `UNKNOWN("unknown")`
+
+  - `Type type`
+
+    - `VAULT_CREDENTIAL_VALIDATION("vault_credential_validation")`
+
+  - `LocalDateTime validatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `String vaultId`
+
+    Identifier of the vault containing the credential.
+
+### Example
+
+```java
+package com.anthropic.example;
+
+import com.anthropic.client.AnthropicClient;
+import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+import com.anthropic.models.beta.vaults.credentials.BetaManagedAgentsCredentialValidation;
+import com.anthropic.models.beta.vaults.credentials.CredentialMcpOAuthValidateParams;
+
+public final class Main {
+    private Main() {}
+
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+        CredentialMcpOAuthValidateParams params = CredentialMcpOAuthValidateParams.builder()
+            .vaultId("vlt_011CZkZDLs7fYzm1hXNPeRjv")
+            .credentialId("vcrd_011CZkZEMt8gZan2iYOQfSkw")
+            .build();
+        BetaManagedAgentsCredentialValidation betaManagedAgentsCredentialValidation = client.beta().vaults().credentials().mcpOAuthValidate(params);
+    }
+}
+```
+
 ## Domain Types
 
 ### Beta Managed Agents Credential
@@ -71075,6 +88518,118 @@ public final class Main {
   - `Optional<String> displayName`
 
     Human-readable name for the credential.
+
+### Beta Managed Agents Credential Validation
+
+- `class BetaManagedAgentsCredentialValidation:`
+
+  Result of live-probing a credential against its configured MCP server.
+
+  - `String credentialId`
+
+    Unique identifier of the credential that was validated.
+
+  - `boolean hasRefreshToken`
+
+    Whether the credential has a refresh token configured.
+
+  - `Optional<BetaManagedAgentsMcpProbe> mcpProbe`
+
+    The failing step of an MCP validation probe.
+
+    - `Optional<BetaManagedAgentsRefreshHttpResponse> httpResponse`
+
+      An HTTP response captured during a credential validation probe.
+
+      - `String body`
+
+        Response body. May be truncated and has sensitive values scrubbed.
+
+      - `boolean bodyTruncated`
+
+        Whether `body` was truncated.
+
+      - `String contentType`
+
+        Value of the `Content-Type` response header.
+
+      - `long statusCode`
+
+        HTTP status code.
+
+    - `String method`
+
+      The MCP method that failed (for example `initialize` or `tools/list`).
+
+  - `Optional<BetaManagedAgentsRefreshObject> refresh`
+
+    Outcome of a refresh-token exchange attempted during credential validation.
+
+    - `Optional<BetaManagedAgentsRefreshHttpResponse> httpResponse`
+
+      An HTTP response captured during a credential validation probe.
+
+      - `String body`
+
+        Response body. May be truncated and has sensitive values scrubbed.
+
+      - `boolean bodyTruncated`
+
+        Whether `body` was truncated.
+
+      - `String contentType`
+
+        Value of the `Content-Type` response header.
+
+      - `long statusCode`
+
+        HTTP status code.
+
+    - `Status status`
+
+      Outcome of a refresh-token exchange attempted during credential validation.
+
+      - `SUCCEEDED("succeeded")`
+
+      - `FAILED("failed")`
+
+      - `CONNECT_ERROR("connect_error")`
+
+      - `NO_REFRESH_TOKEN("no_refresh_token")`
+
+  - `BetaManagedAgentsCredentialValidationStatus status`
+
+    Overall verdict of a credential validation probe.
+
+    - `VALID("valid")`
+
+    - `INVALID("invalid")`
+
+    - `UNKNOWN("unknown")`
+
+  - `Type type`
+
+    - `VAULT_CREDENTIAL_VALIDATION("vault_credential_validation")`
+
+  - `LocalDateTime validatedAt`
+
+    A timestamp in RFC 3339 format
+
+  - `String vaultId`
+
+    Identifier of the vault containing the credential.
+
+### Beta Managed Agents Credential Validation Status
+
+- `enum BetaManagedAgentsCredentialValidationStatus:`
+
+  Overall verdict of a credential validation probe.
+
+  - `VALID("valid")`
+
+  - `INVALID("invalid")`
+
+  - `UNKNOWN("unknown")`
 
 ### Beta Managed Agents Deleted Credential
 
@@ -71450,6 +89005,96 @@ public final class Main {
 
           Updated OAuth client secret.
 
+### Beta Managed Agents MCP Probe
+
+- `class BetaManagedAgentsMcpProbe:`
+
+  The failing step of an MCP validation probe.
+
+  - `Optional<BetaManagedAgentsRefreshHttpResponse> httpResponse`
+
+    An HTTP response captured during a credential validation probe.
+
+    - `String body`
+
+      Response body. May be truncated and has sensitive values scrubbed.
+
+    - `boolean bodyTruncated`
+
+      Whether `body` was truncated.
+
+    - `String contentType`
+
+      Value of the `Content-Type` response header.
+
+    - `long statusCode`
+
+      HTTP status code.
+
+  - `String method`
+
+    The MCP method that failed (for example `initialize` or `tools/list`).
+
+### Beta Managed Agents Refresh HTTP Response
+
+- `class BetaManagedAgentsRefreshHttpResponse:`
+
+  An HTTP response captured during a credential validation probe.
+
+  - `String body`
+
+    Response body. May be truncated and has sensitive values scrubbed.
+
+  - `boolean bodyTruncated`
+
+    Whether `body` was truncated.
+
+  - `String contentType`
+
+    Value of the `Content-Type` response header.
+
+  - `long statusCode`
+
+    HTTP status code.
+
+### Beta Managed Agents Refresh Object
+
+- `class BetaManagedAgentsRefreshObject:`
+
+  Outcome of a refresh-token exchange attempted during credential validation.
+
+  - `Optional<BetaManagedAgentsRefreshHttpResponse> httpResponse`
+
+    An HTTP response captured during a credential validation probe.
+
+    - `String body`
+
+      Response body. May be truncated and has sensitive values scrubbed.
+
+    - `boolean bodyTruncated`
+
+      Whether `body` was truncated.
+
+    - `String contentType`
+
+      Value of the `Content-Type` response header.
+
+    - `long statusCode`
+
+      HTTP status code.
+
+  - `Status status`
+
+    Outcome of a refresh-token exchange attempted during credential validation.
+
+    - `SUCCEEDED("succeeded")`
+
+    - `FAILED("failed")`
+
+    - `CONNECT_ERROR("connect_error")`
+
+    - `NO_REFRESH_TOKEN("no_refresh_token")`
+
 ### Beta Managed Agents Static Bearer Auth Response
 
 - `class BetaManagedAgentsStaticBearerAuthResponse:`
@@ -71656,6 +89301,8 @@ Create a memory store
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
   - `String name`
 
     Human-readable name for the store. Required; 1–255 characters; no control characters. The mount-path slug under `/mnt/memory/` is derived from this name (lowercased, non-alphanumeric runs collapsed to a hyphen). Names need not be unique within a workspace.
@@ -71812,6 +89459,8 @@ List memory stores
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
 ### Returns
 
 - `class BetaManagedAgentsMemoryStore:`
@@ -71935,6 +89584,8 @@ Retrieve a memory store
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
 ### Returns
 
 - `class BetaManagedAgentsMemoryStore:`
@@ -72057,6 +89708,8 @@ Update a memory store
     - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
 
   - `Optional<String> description`
 
@@ -72193,6 +89846,8 @@ Delete a memory store
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
 ### Returns
 
 - `class BetaManagedAgentsDeletedMemoryStore:`
@@ -72291,6 +89946,8 @@ Archive a memory store
     - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
 
 ### Returns
 
@@ -72475,6 +90132,8 @@ Create a memory
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
   - `Optional<String> content`
 
     UTF-8 text content for the new memory. Maximum 100 kB (102,400 bytes). Required; pass `""` explicitly to create an empty memory.
@@ -72651,6 +90310,8 @@ List memories
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
 ### Returns
 
 - `class BetaManagedAgentsMemoryListItem: A class that can be one of several variants.union`
@@ -72804,6 +90465,8 @@ Retrieve a memory
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
 ### Returns
 
 - `class BetaManagedAgentsMemory:`
@@ -72944,6 +90607,8 @@ Update a memory
     - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
 
   - `Optional<String> content`
 
@@ -73097,6 +90762,8 @@ Delete a memory
     - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
 
 ### Returns
 
@@ -73553,6 +91220,8 @@ List memory versions
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
 ### Returns
 
 - `class BetaManagedAgentsMemoryVersion:`
@@ -73780,6 +91449,8 @@ Retrieve a memory version
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
 ### Returns
 
 - `class BetaManagedAgentsMemoryVersion:`
@@ -74006,6 +91677,8 @@ Redact a memory version
     - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
 
 ### Returns
 
@@ -74466,6 +92139,8 @@ Upload File
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
   - `String file`
 
     The file to upload
@@ -74627,6 +92302,8 @@ List Files
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
 ### Returns
 
 - `class FileMetadata:`
@@ -74766,6 +92443,8 @@ Download File
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
 ### Example
 
 ```java
@@ -74852,6 +92531,8 @@ Get File Metadata
     - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
 
 ### Returns
 
@@ -74991,6 +92672,8 @@ Delete File
     - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
 
 ### Returns
 
@@ -75177,6 +92860,8 @@ Create Skill
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
   - `Optional<String> displayTitle`
 
     Display title for the skill.
@@ -75338,6 +93023,8 @@ List Skills
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
 ### Returns
 
 - `class SkillListResponse:`
@@ -75471,6 +93158,8 @@ Get Skill
     - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
 
 ### Returns
 
@@ -75606,6 +93295,8 @@ Delete Skill
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
 ### Returns
 
 - `class SkillDeleteResponse:`
@@ -75712,6 +93403,8 @@ Create Skill Version
     - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
 
   - `Optional<List<String>> files`
 
@@ -75866,6 +93559,8 @@ List Skill Versions
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
 ### Returns
 
 - `class VersionListResponse:`
@@ -76008,6 +93703,8 @@ Get Skill Version
     - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
+
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
 
 ### Returns
 
@@ -76156,6 +93853,8 @@ Delete Skill Version
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
 ### Returns
 
 - `class VersionDeleteResponse:`
@@ -76261,6 +93960,8 @@ Create User Profile
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
   - `Optional<String> externalId`
 
     Platform's own identifier for this user. Not enforced unique. Maximum 255 characters.
@@ -76268,6 +93969,20 @@ Create User Profile
   - `Optional<Metadata> metadata`
 
     Free-form key-value data to attach to this user profile. Maximum 16 keys, with keys up to 64 characters and values up to 512 characters. Values must be non-empty strings.
+
+  - `Optional<String> name`
+
+    Display name of the entity this profile represents. Required when relationship is `resold` (the resold-to company's name); optional otherwise. Maximum 255 characters.
+
+  - `Optional<Relationship> relationship`
+
+    How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+
+    - `EXTERNAL("external")`
+
+    - `RESOLD("resold")`
+
+    - `INTERNAL("internal")`
 
 ### Returns
 
@@ -76284,6 +93999,16 @@ Create User Profile
   - `Metadata metadata`
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
+  - `Relationship relationship`
+
+    How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+
+    - `EXTERNAL("external")`
+
+    - `RESOLD("resold")`
+
+    - `INTERNAL("internal")`
 
   - `TrustGrants trustGrants`
 
@@ -76312,6 +94037,10 @@ Create User Profile
   - `Optional<String> externalId`
 
     Platform's own identifier for this user. Not enforced unique.
+
+  - `Optional<String> name`
+
+    Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
 
 ### Example
 
@@ -76412,6 +94141,8 @@ List User Profiles
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
 ### Returns
 
 - `class BetaUserProfile:`
@@ -76427,6 +94158,16 @@ List User Profiles
   - `Metadata metadata`
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
+  - `Relationship relationship`
+
+    How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+
+    - `EXTERNAL("external")`
+
+    - `RESOLD("resold")`
+
+    - `INTERNAL("internal")`
 
   - `TrustGrants trustGrants`
 
@@ -76455,6 +94196,10 @@ List User Profiles
   - `Optional<String> externalId`
 
     Platform's own identifier for this user. Not enforced unique.
+
+  - `Optional<String> name`
+
+    Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
 
 ### Example
 
@@ -76541,6 +94286,8 @@ Get User Profile
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
 ### Returns
 
 - `class BetaUserProfile:`
@@ -76556,6 +94303,16 @@ Get User Profile
   - `Metadata metadata`
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
+  - `Relationship relationship`
+
+    How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+
+    - `EXTERNAL("external")`
+
+    - `RESOLD("resold")`
+
+    - `INTERNAL("internal")`
 
   - `TrustGrants trustGrants`
 
@@ -76584,6 +94341,10 @@ Get User Profile
   - `Optional<String> externalId`
 
     Platform's own identifier for this user. Not enforced unique.
+
+  - `Optional<String> name`
+
+    Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
 
 ### Example
 
@@ -76670,6 +94431,8 @@ Update User Profile
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
   - `Optional<String> externalId`
 
     If present, replaces the stored external_id. Omit to leave unchanged. Maximum 255 characters.
@@ -76677,6 +94440,20 @@ Update User Profile
   - `Optional<Metadata> metadata`
 
     Key-value pairs to merge into the stored metadata. Keys provided overwrite existing values. To remove a key, set its value to an empty string. Keys not provided are left unchanged. Maximum 16 keys, with keys up to 64 characters and values up to 512 characters.
+
+  - `Optional<String> name`
+
+    If present, replaces the stored name. Omit to leave unchanged. Maximum 255 characters.
+
+  - `Optional<Relationship> relationship`
+
+    How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+
+    - `EXTERNAL("external")`
+
+    - `RESOLD("resold")`
+
+    - `INTERNAL("internal")`
 
 ### Returns
 
@@ -76693,6 +94470,16 @@ Update User Profile
   - `Metadata metadata`
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
+  - `Relationship relationship`
+
+    How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+
+    - `EXTERNAL("external")`
+
+    - `RESOLD("resold")`
+
+    - `INTERNAL("internal")`
 
   - `TrustGrants trustGrants`
 
@@ -76721,6 +94508,10 @@ Update User Profile
   - `Optional<String> externalId`
 
     Platform's own identifier for this user. Not enforced unique.
+
+  - `Optional<String> name`
+
+    Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
 
 ### Example
 
@@ -76807,6 +94598,8 @@ Create Enrollment URL
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
+    - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
+
 ### Returns
 
 - `class BetaUserProfileEnrollmentUrl:`
@@ -76864,6 +94657,16 @@ public final class Main {
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
+  - `Relationship relationship`
+
+    How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+
+    - `EXTERNAL("external")`
+
+    - `RESOLD("resold")`
+
+    - `INTERNAL("internal")`
+
   - `TrustGrants trustGrants`
 
     Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
@@ -76891,6 +94694,10 @@ public final class Main {
   - `Optional<String> externalId`
 
     Platform's own identifier for this user. Not enforced unique.
+
+  - `Optional<String> name`
+
+    Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
 
 ### Beta User Profile Enrollment URL
 
@@ -76923,3 +94730,1391 @@ public final class Main {
     - `PENDING("pending")`
 
     - `REJECTED("rejected")`
+
+# Webhooks
+
+## Domain Types
+
+### Beta Webhook Event
+
+- `class BetaWebhookEvent:`
+
+  - `String id`
+
+    Unique event identifier for idempotency.
+
+  - `LocalDateTime createdAt`
+
+    RFC 3339 timestamp when the event occurred.
+
+  - `BetaWebhookEventData data`
+
+    - `class BetaWebhookSessionCreatedEventData:`
+
+      - `String id`
+
+        ID of the resource that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "session.created"constant`
+
+        - `SESSION_CREATED("session.created")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookSessionPendingEventData:`
+
+      - `String id`
+
+        ID of the resource that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "session.pending"constant`
+
+        - `SESSION_PENDING("session.pending")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookSessionRunningEventData:`
+
+      - `String id`
+
+        ID of the resource that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "session.running"constant`
+
+        - `SESSION_RUNNING("session.running")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookSessionIdledEventData:`
+
+      - `String id`
+
+        ID of the resource that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "session.idled"constant`
+
+        - `SESSION_IDLED("session.idled")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookSessionRequiresActionEventData:`
+
+      - `String id`
+
+        ID of the resource that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "session.requires_action"constant`
+
+        - `SESSION_REQUIRES_ACTION("session.requires_action")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookSessionArchivedEventData:`
+
+      - `String id`
+
+        ID of the resource that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "session.archived"constant`
+
+        - `SESSION_ARCHIVED("session.archived")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookSessionDeletedEventData:`
+
+      - `String id`
+
+        ID of the resource that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "session.deleted"constant`
+
+        - `SESSION_DELETED("session.deleted")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookSessionStatusRescheduledEventData:`
+
+      - `String id`
+
+        ID of the resource that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "session.status_rescheduled"constant`
+
+        - `SESSION_STATUS_RESCHEDULED("session.status_rescheduled")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookSessionStatusRunStartedEventData:`
+
+      - `String id`
+
+        ID of the resource that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "session.status_run_started"constant`
+
+        - `SESSION_STATUS_RUN_STARTED("session.status_run_started")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookSessionStatusIdledEventData:`
+
+      - `String id`
+
+        ID of the resource that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "session.status_idled"constant`
+
+        - `SESSION_STATUS_IDLED("session.status_idled")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookSessionStatusTerminatedEventData:`
+
+      - `String id`
+
+        ID of the resource that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "session.status_terminated"constant`
+
+        - `SESSION_STATUS_TERMINATED("session.status_terminated")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookSessionThreadCreatedEventData:`
+
+      - `String id`
+
+        ID of the resource that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "session.thread_created"constant`
+
+        - `SESSION_THREAD_CREATED("session.thread_created")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookSessionThreadIdledEventData:`
+
+      - `String id`
+
+        ID of the resource that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "session.thread_idled"constant`
+
+        - `SESSION_THREAD_IDLED("session.thread_idled")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookSessionThreadTerminatedEventData:`
+
+      - `String id`
+
+        ID of the resource that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "session.thread_terminated"constant`
+
+        - `SESSION_THREAD_TERMINATED("session.thread_terminated")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookSessionOutcomeEvaluationEndedEventData:`
+
+      - `String id`
+
+        ID of the resource that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "session.outcome_evaluation_ended"constant`
+
+        - `SESSION_OUTCOME_EVALUATION_ENDED("session.outcome_evaluation_ended")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookVaultCreatedEventData:`
+
+      - `String id`
+
+        ID of the resource that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "vault.created"constant`
+
+        - `VAULT_CREATED("vault.created")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookVaultArchivedEventData:`
+
+      - `String id`
+
+        ID of the resource that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "vault.archived"constant`
+
+        - `VAULT_ARCHIVED("vault.archived")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookVaultDeletedEventData:`
+
+      - `String id`
+
+        ID of the resource that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "vault.deleted"constant`
+
+        - `VAULT_DELETED("vault.deleted")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookVaultCredentialCreatedEventData:`
+
+      - `String id`
+
+        ID of the resource that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "vault_credential.created"constant`
+
+        - `VAULT_CREDENTIAL_CREATED("vault_credential.created")`
+
+      - `String vaultId`
+
+        ID of the vault that owns this credential.
+
+      - `String workspaceId`
+
+    - `class BetaWebhookVaultCredentialArchivedEventData:`
+
+      - `String id`
+
+        ID of the resource that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "vault_credential.archived"constant`
+
+        - `VAULT_CREDENTIAL_ARCHIVED("vault_credential.archived")`
+
+      - `String vaultId`
+
+        ID of the vault that owns this credential.
+
+      - `String workspaceId`
+
+    - `class BetaWebhookVaultCredentialDeletedEventData:`
+
+      - `String id`
+
+        ID of the resource that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "vault_credential.deleted"constant`
+
+        - `VAULT_CREDENTIAL_DELETED("vault_credential.deleted")`
+
+      - `String vaultId`
+
+        ID of the vault that owns this credential.
+
+      - `String workspaceId`
+
+    - `class BetaWebhookVaultCredentialRefreshFailedEventData:`
+
+      - `String id`
+
+        ID of the resource that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "vault_credential.refresh_failed"constant`
+
+        - `VAULT_CREDENTIAL_REFRESH_FAILED("vault_credential.refresh_failed")`
+
+      - `String vaultId`
+
+        ID of the vault that owns this credential.
+
+      - `String workspaceId`
+
+  - `JsonValue; type "event"constant`
+
+    Object type. Always `event` for webhook payloads.
+
+    - `EVENT("event")`
+
+### Beta Webhook Event Data
+
+- `class BetaWebhookEventData: A class that can be one of several variants.union`
+
+  - `class BetaWebhookSessionCreatedEventData:`
+
+    - `String id`
+
+      ID of the resource that triggered the event.
+
+    - `String organizationId`
+
+    - `JsonValue; type "session.created"constant`
+
+      - `SESSION_CREATED("session.created")`
+
+    - `String workspaceId`
+
+  - `class BetaWebhookSessionPendingEventData:`
+
+    - `String id`
+
+      ID of the resource that triggered the event.
+
+    - `String organizationId`
+
+    - `JsonValue; type "session.pending"constant`
+
+      - `SESSION_PENDING("session.pending")`
+
+    - `String workspaceId`
+
+  - `class BetaWebhookSessionRunningEventData:`
+
+    - `String id`
+
+      ID of the resource that triggered the event.
+
+    - `String organizationId`
+
+    - `JsonValue; type "session.running"constant`
+
+      - `SESSION_RUNNING("session.running")`
+
+    - `String workspaceId`
+
+  - `class BetaWebhookSessionIdledEventData:`
+
+    - `String id`
+
+      ID of the resource that triggered the event.
+
+    - `String organizationId`
+
+    - `JsonValue; type "session.idled"constant`
+
+      - `SESSION_IDLED("session.idled")`
+
+    - `String workspaceId`
+
+  - `class BetaWebhookSessionRequiresActionEventData:`
+
+    - `String id`
+
+      ID of the resource that triggered the event.
+
+    - `String organizationId`
+
+    - `JsonValue; type "session.requires_action"constant`
+
+      - `SESSION_REQUIRES_ACTION("session.requires_action")`
+
+    - `String workspaceId`
+
+  - `class BetaWebhookSessionArchivedEventData:`
+
+    - `String id`
+
+      ID of the resource that triggered the event.
+
+    - `String organizationId`
+
+    - `JsonValue; type "session.archived"constant`
+
+      - `SESSION_ARCHIVED("session.archived")`
+
+    - `String workspaceId`
+
+  - `class BetaWebhookSessionDeletedEventData:`
+
+    - `String id`
+
+      ID of the resource that triggered the event.
+
+    - `String organizationId`
+
+    - `JsonValue; type "session.deleted"constant`
+
+      - `SESSION_DELETED("session.deleted")`
+
+    - `String workspaceId`
+
+  - `class BetaWebhookSessionStatusRescheduledEventData:`
+
+    - `String id`
+
+      ID of the resource that triggered the event.
+
+    - `String organizationId`
+
+    - `JsonValue; type "session.status_rescheduled"constant`
+
+      - `SESSION_STATUS_RESCHEDULED("session.status_rescheduled")`
+
+    - `String workspaceId`
+
+  - `class BetaWebhookSessionStatusRunStartedEventData:`
+
+    - `String id`
+
+      ID of the resource that triggered the event.
+
+    - `String organizationId`
+
+    - `JsonValue; type "session.status_run_started"constant`
+
+      - `SESSION_STATUS_RUN_STARTED("session.status_run_started")`
+
+    - `String workspaceId`
+
+  - `class BetaWebhookSessionStatusIdledEventData:`
+
+    - `String id`
+
+      ID of the resource that triggered the event.
+
+    - `String organizationId`
+
+    - `JsonValue; type "session.status_idled"constant`
+
+      - `SESSION_STATUS_IDLED("session.status_idled")`
+
+    - `String workspaceId`
+
+  - `class BetaWebhookSessionStatusTerminatedEventData:`
+
+    - `String id`
+
+      ID of the resource that triggered the event.
+
+    - `String organizationId`
+
+    - `JsonValue; type "session.status_terminated"constant`
+
+      - `SESSION_STATUS_TERMINATED("session.status_terminated")`
+
+    - `String workspaceId`
+
+  - `class BetaWebhookSessionThreadCreatedEventData:`
+
+    - `String id`
+
+      ID of the resource that triggered the event.
+
+    - `String organizationId`
+
+    - `JsonValue; type "session.thread_created"constant`
+
+      - `SESSION_THREAD_CREATED("session.thread_created")`
+
+    - `String workspaceId`
+
+  - `class BetaWebhookSessionThreadIdledEventData:`
+
+    - `String id`
+
+      ID of the resource that triggered the event.
+
+    - `String organizationId`
+
+    - `JsonValue; type "session.thread_idled"constant`
+
+      - `SESSION_THREAD_IDLED("session.thread_idled")`
+
+    - `String workspaceId`
+
+  - `class BetaWebhookSessionThreadTerminatedEventData:`
+
+    - `String id`
+
+      ID of the resource that triggered the event.
+
+    - `String organizationId`
+
+    - `JsonValue; type "session.thread_terminated"constant`
+
+      - `SESSION_THREAD_TERMINATED("session.thread_terminated")`
+
+    - `String workspaceId`
+
+  - `class BetaWebhookSessionOutcomeEvaluationEndedEventData:`
+
+    - `String id`
+
+      ID of the resource that triggered the event.
+
+    - `String organizationId`
+
+    - `JsonValue; type "session.outcome_evaluation_ended"constant`
+
+      - `SESSION_OUTCOME_EVALUATION_ENDED("session.outcome_evaluation_ended")`
+
+    - `String workspaceId`
+
+  - `class BetaWebhookVaultCreatedEventData:`
+
+    - `String id`
+
+      ID of the resource that triggered the event.
+
+    - `String organizationId`
+
+    - `JsonValue; type "vault.created"constant`
+
+      - `VAULT_CREATED("vault.created")`
+
+    - `String workspaceId`
+
+  - `class BetaWebhookVaultArchivedEventData:`
+
+    - `String id`
+
+      ID of the resource that triggered the event.
+
+    - `String organizationId`
+
+    - `JsonValue; type "vault.archived"constant`
+
+      - `VAULT_ARCHIVED("vault.archived")`
+
+    - `String workspaceId`
+
+  - `class BetaWebhookVaultDeletedEventData:`
+
+    - `String id`
+
+      ID of the resource that triggered the event.
+
+    - `String organizationId`
+
+    - `JsonValue; type "vault.deleted"constant`
+
+      - `VAULT_DELETED("vault.deleted")`
+
+    - `String workspaceId`
+
+  - `class BetaWebhookVaultCredentialCreatedEventData:`
+
+    - `String id`
+
+      ID of the resource that triggered the event.
+
+    - `String organizationId`
+
+    - `JsonValue; type "vault_credential.created"constant`
+
+      - `VAULT_CREDENTIAL_CREATED("vault_credential.created")`
+
+    - `String vaultId`
+
+      ID of the vault that owns this credential.
+
+    - `String workspaceId`
+
+  - `class BetaWebhookVaultCredentialArchivedEventData:`
+
+    - `String id`
+
+      ID of the resource that triggered the event.
+
+    - `String organizationId`
+
+    - `JsonValue; type "vault_credential.archived"constant`
+
+      - `VAULT_CREDENTIAL_ARCHIVED("vault_credential.archived")`
+
+    - `String vaultId`
+
+      ID of the vault that owns this credential.
+
+    - `String workspaceId`
+
+  - `class BetaWebhookVaultCredentialDeletedEventData:`
+
+    - `String id`
+
+      ID of the resource that triggered the event.
+
+    - `String organizationId`
+
+    - `JsonValue; type "vault_credential.deleted"constant`
+
+      - `VAULT_CREDENTIAL_DELETED("vault_credential.deleted")`
+
+    - `String vaultId`
+
+      ID of the vault that owns this credential.
+
+    - `String workspaceId`
+
+  - `class BetaWebhookVaultCredentialRefreshFailedEventData:`
+
+    - `String id`
+
+      ID of the resource that triggered the event.
+
+    - `String organizationId`
+
+    - `JsonValue; type "vault_credential.refresh_failed"constant`
+
+      - `VAULT_CREDENTIAL_REFRESH_FAILED("vault_credential.refresh_failed")`
+
+    - `String vaultId`
+
+      ID of the vault that owns this credential.
+
+    - `String workspaceId`
+
+### Beta Webhook Session Archived Event Data
+
+- `class BetaWebhookSessionArchivedEventData:`
+
+  - `String id`
+
+    ID of the resource that triggered the event.
+
+  - `String organizationId`
+
+  - `JsonValue; type "session.archived"constant`
+
+    - `SESSION_ARCHIVED("session.archived")`
+
+  - `String workspaceId`
+
+### Beta Webhook Session Created Event Data
+
+- `class BetaWebhookSessionCreatedEventData:`
+
+  - `String id`
+
+    ID of the resource that triggered the event.
+
+  - `String organizationId`
+
+  - `JsonValue; type "session.created"constant`
+
+    - `SESSION_CREATED("session.created")`
+
+  - `String workspaceId`
+
+### Beta Webhook Session Deleted Event Data
+
+- `class BetaWebhookSessionDeletedEventData:`
+
+  - `String id`
+
+    ID of the resource that triggered the event.
+
+  - `String organizationId`
+
+  - `JsonValue; type "session.deleted"constant`
+
+    - `SESSION_DELETED("session.deleted")`
+
+  - `String workspaceId`
+
+### Beta Webhook Session Idled Event Data
+
+- `class BetaWebhookSessionIdledEventData:`
+
+  - `String id`
+
+    ID of the resource that triggered the event.
+
+  - `String organizationId`
+
+  - `JsonValue; type "session.idled"constant`
+
+    - `SESSION_IDLED("session.idled")`
+
+  - `String workspaceId`
+
+### Beta Webhook Session Outcome Evaluation Ended Event Data
+
+- `class BetaWebhookSessionOutcomeEvaluationEndedEventData:`
+
+  - `String id`
+
+    ID of the resource that triggered the event.
+
+  - `String organizationId`
+
+  - `JsonValue; type "session.outcome_evaluation_ended"constant`
+
+    - `SESSION_OUTCOME_EVALUATION_ENDED("session.outcome_evaluation_ended")`
+
+  - `String workspaceId`
+
+### Beta Webhook Session Pending Event Data
+
+- `class BetaWebhookSessionPendingEventData:`
+
+  - `String id`
+
+    ID of the resource that triggered the event.
+
+  - `String organizationId`
+
+  - `JsonValue; type "session.pending"constant`
+
+    - `SESSION_PENDING("session.pending")`
+
+  - `String workspaceId`
+
+### Beta Webhook Session Requires Action Event Data
+
+- `class BetaWebhookSessionRequiresActionEventData:`
+
+  - `String id`
+
+    ID of the resource that triggered the event.
+
+  - `String organizationId`
+
+  - `JsonValue; type "session.requires_action"constant`
+
+    - `SESSION_REQUIRES_ACTION("session.requires_action")`
+
+  - `String workspaceId`
+
+### Beta Webhook Session Running Event Data
+
+- `class BetaWebhookSessionRunningEventData:`
+
+  - `String id`
+
+    ID of the resource that triggered the event.
+
+  - `String organizationId`
+
+  - `JsonValue; type "session.running"constant`
+
+    - `SESSION_RUNNING("session.running")`
+
+  - `String workspaceId`
+
+### Beta Webhook Session Status Idled Event Data
+
+- `class BetaWebhookSessionStatusIdledEventData:`
+
+  - `String id`
+
+    ID of the resource that triggered the event.
+
+  - `String organizationId`
+
+  - `JsonValue; type "session.status_idled"constant`
+
+    - `SESSION_STATUS_IDLED("session.status_idled")`
+
+  - `String workspaceId`
+
+### Beta Webhook Session Status Rescheduled Event Data
+
+- `class BetaWebhookSessionStatusRescheduledEventData:`
+
+  - `String id`
+
+    ID of the resource that triggered the event.
+
+  - `String organizationId`
+
+  - `JsonValue; type "session.status_rescheduled"constant`
+
+    - `SESSION_STATUS_RESCHEDULED("session.status_rescheduled")`
+
+  - `String workspaceId`
+
+### Beta Webhook Session Status Run Started Event Data
+
+- `class BetaWebhookSessionStatusRunStartedEventData:`
+
+  - `String id`
+
+    ID of the resource that triggered the event.
+
+  - `String organizationId`
+
+  - `JsonValue; type "session.status_run_started"constant`
+
+    - `SESSION_STATUS_RUN_STARTED("session.status_run_started")`
+
+  - `String workspaceId`
+
+### Beta Webhook Session Status Terminated Event Data
+
+- `class BetaWebhookSessionStatusTerminatedEventData:`
+
+  - `String id`
+
+    ID of the resource that triggered the event.
+
+  - `String organizationId`
+
+  - `JsonValue; type "session.status_terminated"constant`
+
+    - `SESSION_STATUS_TERMINATED("session.status_terminated")`
+
+  - `String workspaceId`
+
+### Beta Webhook Session Thread Created Event Data
+
+- `class BetaWebhookSessionThreadCreatedEventData:`
+
+  - `String id`
+
+    ID of the resource that triggered the event.
+
+  - `String organizationId`
+
+  - `JsonValue; type "session.thread_created"constant`
+
+    - `SESSION_THREAD_CREATED("session.thread_created")`
+
+  - `String workspaceId`
+
+### Beta Webhook Session Thread Idled Event Data
+
+- `class BetaWebhookSessionThreadIdledEventData:`
+
+  - `String id`
+
+    ID of the resource that triggered the event.
+
+  - `String organizationId`
+
+  - `JsonValue; type "session.thread_idled"constant`
+
+    - `SESSION_THREAD_IDLED("session.thread_idled")`
+
+  - `String workspaceId`
+
+### Beta Webhook Session Thread Terminated Event Data
+
+- `class BetaWebhookSessionThreadTerminatedEventData:`
+
+  - `String id`
+
+    ID of the resource that triggered the event.
+
+  - `String organizationId`
+
+  - `JsonValue; type "session.thread_terminated"constant`
+
+    - `SESSION_THREAD_TERMINATED("session.thread_terminated")`
+
+  - `String workspaceId`
+
+### Beta Webhook Vault Archived Event Data
+
+- `class BetaWebhookVaultArchivedEventData:`
+
+  - `String id`
+
+    ID of the resource that triggered the event.
+
+  - `String organizationId`
+
+  - `JsonValue; type "vault.archived"constant`
+
+    - `VAULT_ARCHIVED("vault.archived")`
+
+  - `String workspaceId`
+
+### Beta Webhook Vault Created Event Data
+
+- `class BetaWebhookVaultCreatedEventData:`
+
+  - `String id`
+
+    ID of the resource that triggered the event.
+
+  - `String organizationId`
+
+  - `JsonValue; type "vault.created"constant`
+
+    - `VAULT_CREATED("vault.created")`
+
+  - `String workspaceId`
+
+### Beta Webhook Vault Credential Archived Event Data
+
+- `class BetaWebhookVaultCredentialArchivedEventData:`
+
+  - `String id`
+
+    ID of the resource that triggered the event.
+
+  - `String organizationId`
+
+  - `JsonValue; type "vault_credential.archived"constant`
+
+    - `VAULT_CREDENTIAL_ARCHIVED("vault_credential.archived")`
+
+  - `String vaultId`
+
+    ID of the vault that owns this credential.
+
+  - `String workspaceId`
+
+### Beta Webhook Vault Credential Created Event Data
+
+- `class BetaWebhookVaultCredentialCreatedEventData:`
+
+  - `String id`
+
+    ID of the resource that triggered the event.
+
+  - `String organizationId`
+
+  - `JsonValue; type "vault_credential.created"constant`
+
+    - `VAULT_CREDENTIAL_CREATED("vault_credential.created")`
+
+  - `String vaultId`
+
+    ID of the vault that owns this credential.
+
+  - `String workspaceId`
+
+### Beta Webhook Vault Credential Deleted Event Data
+
+- `class BetaWebhookVaultCredentialDeletedEventData:`
+
+  - `String id`
+
+    ID of the resource that triggered the event.
+
+  - `String organizationId`
+
+  - `JsonValue; type "vault_credential.deleted"constant`
+
+    - `VAULT_CREDENTIAL_DELETED("vault_credential.deleted")`
+
+  - `String vaultId`
+
+    ID of the vault that owns this credential.
+
+  - `String workspaceId`
+
+### Beta Webhook Vault Credential Refresh Failed Event Data
+
+- `class BetaWebhookVaultCredentialRefreshFailedEventData:`
+
+  - `String id`
+
+    ID of the resource that triggered the event.
+
+  - `String organizationId`
+
+  - `JsonValue; type "vault_credential.refresh_failed"constant`
+
+    - `VAULT_CREDENTIAL_REFRESH_FAILED("vault_credential.refresh_failed")`
+
+  - `String vaultId`
+
+    ID of the vault that owns this credential.
+
+  - `String workspaceId`
+
+### Beta Webhook Vault Deleted Event Data
+
+- `class BetaWebhookVaultDeletedEventData:`
+
+  - `String id`
+
+    ID of the resource that triggered the event.
+
+  - `String organizationId`
+
+  - `JsonValue; type "vault.deleted"constant`
+
+    - `VAULT_DELETED("vault.deleted")`
+
+  - `String workspaceId`
+
+### Unwrap Webhook Event
+
+- `class UnwrapWebhookEvent:`
+
+  - `String id`
+
+    Unique event identifier for idempotency.
+
+  - `LocalDateTime createdAt`
+
+    RFC 3339 timestamp when the event occurred.
+
+  - `BetaWebhookEventData data`
+
+    - `class BetaWebhookSessionCreatedEventData:`
+
+      - `String id`
+
+        ID of the resource that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "session.created"constant`
+
+        - `SESSION_CREATED("session.created")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookSessionPendingEventData:`
+
+      - `String id`
+
+        ID of the resource that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "session.pending"constant`
+
+        - `SESSION_PENDING("session.pending")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookSessionRunningEventData:`
+
+      - `String id`
+
+        ID of the resource that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "session.running"constant`
+
+        - `SESSION_RUNNING("session.running")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookSessionIdledEventData:`
+
+      - `String id`
+
+        ID of the resource that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "session.idled"constant`
+
+        - `SESSION_IDLED("session.idled")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookSessionRequiresActionEventData:`
+
+      - `String id`
+
+        ID of the resource that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "session.requires_action"constant`
+
+        - `SESSION_REQUIRES_ACTION("session.requires_action")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookSessionArchivedEventData:`
+
+      - `String id`
+
+        ID of the resource that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "session.archived"constant`
+
+        - `SESSION_ARCHIVED("session.archived")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookSessionDeletedEventData:`
+
+      - `String id`
+
+        ID of the resource that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "session.deleted"constant`
+
+        - `SESSION_DELETED("session.deleted")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookSessionStatusRescheduledEventData:`
+
+      - `String id`
+
+        ID of the resource that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "session.status_rescheduled"constant`
+
+        - `SESSION_STATUS_RESCHEDULED("session.status_rescheduled")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookSessionStatusRunStartedEventData:`
+
+      - `String id`
+
+        ID of the resource that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "session.status_run_started"constant`
+
+        - `SESSION_STATUS_RUN_STARTED("session.status_run_started")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookSessionStatusIdledEventData:`
+
+      - `String id`
+
+        ID of the resource that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "session.status_idled"constant`
+
+        - `SESSION_STATUS_IDLED("session.status_idled")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookSessionStatusTerminatedEventData:`
+
+      - `String id`
+
+        ID of the resource that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "session.status_terminated"constant`
+
+        - `SESSION_STATUS_TERMINATED("session.status_terminated")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookSessionThreadCreatedEventData:`
+
+      - `String id`
+
+        ID of the resource that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "session.thread_created"constant`
+
+        - `SESSION_THREAD_CREATED("session.thread_created")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookSessionThreadIdledEventData:`
+
+      - `String id`
+
+        ID of the resource that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "session.thread_idled"constant`
+
+        - `SESSION_THREAD_IDLED("session.thread_idled")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookSessionThreadTerminatedEventData:`
+
+      - `String id`
+
+        ID of the resource that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "session.thread_terminated"constant`
+
+        - `SESSION_THREAD_TERMINATED("session.thread_terminated")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookSessionOutcomeEvaluationEndedEventData:`
+
+      - `String id`
+
+        ID of the resource that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "session.outcome_evaluation_ended"constant`
+
+        - `SESSION_OUTCOME_EVALUATION_ENDED("session.outcome_evaluation_ended")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookVaultCreatedEventData:`
+
+      - `String id`
+
+        ID of the resource that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "vault.created"constant`
+
+        - `VAULT_CREATED("vault.created")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookVaultArchivedEventData:`
+
+      - `String id`
+
+        ID of the resource that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "vault.archived"constant`
+
+        - `VAULT_ARCHIVED("vault.archived")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookVaultDeletedEventData:`
+
+      - `String id`
+
+        ID of the resource that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "vault.deleted"constant`
+
+        - `VAULT_DELETED("vault.deleted")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookVaultCredentialCreatedEventData:`
+
+      - `String id`
+
+        ID of the resource that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "vault_credential.created"constant`
+
+        - `VAULT_CREDENTIAL_CREATED("vault_credential.created")`
+
+      - `String vaultId`
+
+        ID of the vault that owns this credential.
+
+      - `String workspaceId`
+
+    - `class BetaWebhookVaultCredentialArchivedEventData:`
+
+      - `String id`
+
+        ID of the resource that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "vault_credential.archived"constant`
+
+        - `VAULT_CREDENTIAL_ARCHIVED("vault_credential.archived")`
+
+      - `String vaultId`
+
+        ID of the vault that owns this credential.
+
+      - `String workspaceId`
+
+    - `class BetaWebhookVaultCredentialDeletedEventData:`
+
+      - `String id`
+
+        ID of the resource that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "vault_credential.deleted"constant`
+
+        - `VAULT_CREDENTIAL_DELETED("vault_credential.deleted")`
+
+      - `String vaultId`
+
+        ID of the vault that owns this credential.
+
+      - `String workspaceId`
+
+    - `class BetaWebhookVaultCredentialRefreshFailedEventData:`
+
+      - `String id`
+
+        ID of the resource that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "vault_credential.refresh_failed"constant`
+
+        - `VAULT_CREDENTIAL_REFRESH_FAILED("vault_credential.refresh_failed")`
+
+      - `String vaultId`
+
+        ID of the vault that owns this credential.
+
+      - `String workspaceId`
+
+  - `JsonValue; type "event"constant`
+
+    Object type. Always `event` for webhook payloads.
+
+    - `EVENT("event")`

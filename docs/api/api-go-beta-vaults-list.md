@@ -1,4 +1,5 @@
 ---
+title: "List"
 source: "https://platform.claude.com/docs/en/api/go/beta/vaults/list"
 category: "api"
 generated: true
@@ -80,6 +81,8 @@ List Vaults
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
+
+      - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
 
 ### Returns
 

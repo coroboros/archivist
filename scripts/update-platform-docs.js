@@ -4,10 +4,18 @@ import path from 'node:path';
 // --- Configuration ---
 const SITEMAP_URL = 'https://platform.claude.com/sitemap.xml';
 const URL_PREFIX = 'https://platform.claude.com/docs/en/';
-const PATHS_TO_IGNORE = ['/release-notes/'];
-const PATHS_TO_IGNORE_REGEXP = new RegExp(`(${PATHS_TO_IGNORE.join('|')})`);
+const PATHS_TO_IGNORE = [];
+const PATHS_TO_IGNORE_REGEXP =
+  PATHS_TO_IGNORE.length > 0 ? new RegExp(`(${PATHS_TO_IGNORE.join('|')})`) : null;
+// Some EN sections are live pages but missing from the EN sitemap (currently
+// release-notes). We recover them by mirroring URLs from another locale that
+// IS in the sitemap. 404s on recovered URLs are silently skipped at fetch time.
+const RECOVERY_LOCALE_PREFIX = 'https://platform.claude.com/docs/de/';
+const RECOVERY_SECTIONS = ['/release-notes/'];
 const DOCS_DIR = 'docs';
-// NOTE: key and type MUST be the same
+const FALLBACK_TYPE = 'general';
+// NOTE: key and type MUST be the same. Folders mirror upstream sitemap top-level sections;
+// `general` is the fallback bucket for orphan pages (intro, future additions).
 const DOCS = {
   api: {
     name: 'Platform | API',
@@ -15,26 +23,60 @@ const DOCS = {
     readmePath: `${DOCS_DIR}/api/api-README.md`,
     type: 'api',
   },
-  developer: {
-    name: 'Platform | Developer',
-    paths: [], // all the rest
-    readmePath: `${DOCS_DIR}/developer/developer-README.md`,
-    type: 'developer',
+  'agents-and-tools': {
+    name: 'Platform | Agents & Tools',
+    paths: ['/agents-and-tools/'],
+    readmePath: `${DOCS_DIR}/agents-and-tools/agents-and-tools-README.md`,
+    type: 'agents-and-tools',
   },
-  resources: {
-    name: 'Platform | Resources',
-    paths: ['/resources/', '/about-claude/glossary', '/about-claude/use-case-guides/'],
-    readmePath: `${DOCS_DIR}/resources/resources-README.md`,
-    type: 'resources',
+  'build-with-claude': {
+    name: 'Platform | Build with Claude',
+    paths: ['/build-with-claude/'],
+    readmePath: `${DOCS_DIR}/build-with-claude/build-with-claude-README.md`,
+    type: 'build-with-claude',
+  },
+  'manage-claude': {
+    name: 'Platform | Manage Claude',
+    paths: ['/manage-claude/'],
+    readmePath: `${DOCS_DIR}/manage-claude/manage-claude-README.md`,
+    type: 'manage-claude',
+  },
+  'managed-agents': {
+    name: 'Platform | Managed Agents',
+    paths: ['/managed-agents/'],
+    readmePath: `${DOCS_DIR}/managed-agents/managed-agents-README.md`,
+    type: 'managed-agents',
+  },
+  'test-and-evaluate': {
+    name: 'Platform | Test & Evaluate',
+    paths: ['/test-and-evaluate/'],
+    readmePath: `${DOCS_DIR}/test-and-evaluate/test-and-evaluate-README.md`,
+    type: 'test-and-evaluate',
+  },
+  'release-notes': {
+    name: 'Platform | Release Notes',
+    paths: ['/release-notes/'],
+    readmePath: `${DOCS_DIR}/release-notes/release-notes-README.md`,
+    type: 'release-notes',
+  },
+  [FALLBACK_TYPE]: {
+    name: 'Platform | General',
+    paths: [], // fallback for anything not matched above
+    readmePath: `${DOCS_DIR}/${FALLBACK_TYPE}/${FALLBACK_TYPE}-README.md`,
+    type: FALLBACK_TYPE,
   },
 };
 
 /**
- * Extracts the first H1 title from markdown content.
+ * Extracts a title from markdown content. Prefers the first H1; falls back to
+ * the first H2 since many SDK API ref pages (e.g. `## Create`, `## List`) ship
+ * without an H1.
  */
 function extractTitle(content) {
-  const match = content.match(/^#\s+(.+)$/m);
-  return match ? match[1].trim() : null;
+  const h1 = content.match(/^#\s+(.+)$/m);
+  if (h1) return h1[1].trim();
+  const h2 = content.match(/^##\s+(.+)$/m);
+  return h2 ? h2[1].trim() : null;
 }
 
 /**
@@ -85,7 +127,7 @@ function determineDocType(url) {
       if (cleaned.startsWith(startPath)) return type;
     }
   }
-  return DOCS.developer.type;
+  return FALLBACK_TYPE;
 }
 
 /**
@@ -95,6 +137,8 @@ function determineDocType(url) {
 async function downloadAndSaveDocs(allUrls, filenamesByURLs) {
   console.log('📖 3. Downloading, rewriting, and saving documentation...');
   const promises = [];
+  const skipped = [];
+  const written = new Set();
 
   for (const url of allUrls) {
     const mdUrl = `${url}.md`;
@@ -108,10 +152,18 @@ async function downloadAndSaveDocs(allUrls, filenamesByURLs) {
           return response.text();
         })
         .then((text) => {
-          console.log(`   -> Processing ${filePath}`);
+          // Some upstream URLs (currently /api/php/* and /api/terraform/*) have
+          // no real markdown source — the .md endpoint serves the rendered HTML
+          // page instead. Skip those so the mirror stays clean. If Anthropic
+          // adds markdown later, the file appears automatically on the next run.
+          if (text.trimStart().startsWith('<!DOCTYPE')) {
+            skipped.push(mdUrl);
+            return;
+          }
           const rewritten = rewriteLocalLinks(text, filenamesByURLs, url);
           const { docType } = filenamesByURLs[url];
           const frontmatter = buildFrontmatter(text, url, docType);
+          written.add(url);
           return fs.writeFile(filePath, frontmatter + rewritten, 'utf8');
         })
         .catch((error) => {
@@ -121,7 +173,8 @@ async function downloadAndSaveDocs(allUrls, filenamesByURLs) {
   }
 
   await Promise.all(promises);
-  console.log('   File processing complete.');
+  console.log(`   ${written.size} files written, ${skipped.length} skipped (HTML-only upstream).`);
+  return written;
 }
 
 /**
@@ -155,11 +208,22 @@ async function fetchAllUrlsFromSitemap() {
   const xml = await response.text();
   const allUrls = [...xml.matchAll(/<loc>(.*?)<\/loc>/g)].map((m) => m[1]);
 
-  const filteredUrls = allUrls.filter(
-    (url) => url.startsWith(URL_PREFIX) && !PATHS_TO_IGNORE_REGEXP.test(url),
+  const enUrls = allUrls.filter(
+    (url) => url.startsWith(URL_PREFIX) && !PATHS_TO_IGNORE_REGEXP?.test(url),
   );
 
-  console.log(`   ${filteredUrls.length} Claude Platform URLs found.`);
+  // Recover EN URLs missing from the sitemap by mirroring a known-complete
+  // locale. Dead URLs (404 in EN) are silently skipped at fetch time.
+  const recoveredUrls = allUrls
+    .filter((u) => u.startsWith(RECOVERY_LOCALE_PREFIX))
+    .filter((u) => RECOVERY_SECTIONS.some((s) => u.includes(s)))
+    .map((u) => u.replace(RECOVERY_LOCALE_PREFIX, URL_PREFIX));
+
+  const filteredUrls = [...new Set([...enUrls, ...recoveredUrls])];
+
+  console.log(
+    `   ${filteredUrls.length} Claude Platform URLs found (${enUrls.length} via EN sitemap, +${filteredUrls.length - enUrls.length} recovered from ${RECOVERY_LOCALE_PREFIX}).`,
+  );
 
   if (filteredUrls.length === 0) {
     throw new Error('No Claude Platform URLs found.');
@@ -192,17 +256,14 @@ async function fetchAllUrlsFromSitemap() {
 }
 
 /**
- * Generates individual README.md files for each documentation type (developer, api, resources),
- * each containing a full table of contents for its own section only.
+ * Generates individual README.md files for each documentation type (one per
+ * key in DOCS), each containing a full table of contents for its own section
+ * only. Empty sections are skipped.
  */
 async function generateReadmeFiles(allUrls, filenamesByURLs) {
   console.log('👓 4. Generating README files...');
 
-  const docsByType = {
-    [DOCS.api.type]: [],
-    [DOCS.developer.type]: [],
-    [DOCS.resources.type]: [],
-  };
+  const docsByType = Object.fromEntries(Object.keys(DOCS).map((t) => [t, []]));
 
   for (const url of allUrls) {
     const entry = filenamesByURLs[url];
@@ -214,9 +275,10 @@ async function generateReadmeFiles(allUrls, filenamesByURLs) {
     if (items.length === 0) continue;
 
     const readmePath = DOCS[docType].readmePath;
+    const humanName = DOCS[docType].name;
 
-    let readme = `# Claude Platform Docs (${docType.charAt(0).toUpperCase() + docType.slice(1)})\n\n`;
-    readme += `_This repository is a mirror of the official [Claude Platform](${URL_PREFIX}) documentation (${docType.charAt(0).toUpperCase() + docType.slice(1)}). It is updated automatically._\n\n`;
+    let readme = `# ${humanName}\n\n`;
+    readme += `_This repository is a mirror of the official [Claude Platform](${URL_PREFIX}) documentation (${humanName}). It is updated automatically._\n\n`;
     readme += `**Last updated:** ${new Date().toUTCString()}\n\n`;
     readme += '---\n\n';
 
@@ -312,6 +374,23 @@ function rewriteLocalLinks(content, filenamesByURLs, currentUrl) {
 }
 
 /**
+ * Removes section folders that received no URLs in this run. Upstream sometimes
+ * holds an empty section (e.g. release-notes only exists in /de/ today); we
+ * don't want orphan empty dirs polluting the index.
+ */
+async function pruneEmptySections(allUrls, filenamesByURLs) {
+  const populated = new Set();
+  for (const url of allUrls) populated.add(filenamesByURLs[url].docType);
+
+  for (const docType of Object.keys(DOCS)) {
+    if (populated.has(docType)) continue;
+    const directoryPath = path.join(DOCS_DIR, docType);
+    await fs.rm(directoryPath, { force: true, recursive: true });
+    console.log(`   -> Pruned empty section '${directoryPath}' (no upstream URLs).`);
+  }
+}
+
+/**
  * The main function that orchestrates the entire mirroring process.
  */
 async function run() {
@@ -320,8 +399,10 @@ async function run() {
   const filenamesByURLs = await fetchAllUrlsFromSitemap();
   const allUrls = Object.keys(filenamesByURLs);
 
-  await downloadAndSaveDocs(allUrls, filenamesByURLs);
-  await generateReadmeFiles(allUrls, filenamesByURLs);
+  const writtenUrls = await downloadAndSaveDocs(allUrls, filenamesByURLs);
+  const writtenList = [...writtenUrls];
+  await generateReadmeFiles(writtenList, filenamesByURLs);
+  await pruneEmptySections(writtenList, filenamesByURLs);
 
   console.log('\n✅ Claude Platform documentation updated successfully!');
 }

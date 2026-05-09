@@ -1,5 +1,23 @@
 # Changelog
 
+## 🧑‍💻 v1.1.0 - 09/05/2026 — Mirror upstream sitemap restructure + CI failure alerts
+
+### Features
+- Restructured `docs/` to mirror the upstream `platform.claude.com` sitemap 1:1: new sections `agents-and-tools/`, `build-with-claude/`, `manage-claude/`, `managed-agents/`, `test-and-evaluate/`, `release-notes/`, `general/` (fallback for orphan top-level pages). Removed dead `developer/` and `resources/` — the upstream `/en/about-claude/*` and `/en/resources/*` paths no longer exist.
+- Added a `failure()` step to `.github/workflows/sync-docs.yml` that opens (or de-duplicates) a `sync-docs-failure`-labelled GitHub Issue with the run URL when the workflow aborts.
+- `update-platform-docs.js` now skips upstream URLs whose `.md` endpoint returns rendered HTML instead of markdown (currently `/api/php/*` and `/api/terraform/*` — Anthropic doesn't publish markdown for those SDK languages). 246 useless HTML blobs removed from `docs/api/` (1308 → 1062 files). If markdown becomes available later, the files reappear automatically on the next run.
+- `extractTitle` falls back to the first H2 when no H1 exists, so SDK API ref pages (`## Create`, `## List`, …) get proper `title:` frontmatter — consistent across `update-platform-docs.js` and `update-code-docs.js`. After this change, only 1 file out of 1288 lacks a title (a legitimate `method not available in this language` stub).
+
+### Fixes
+- `update-platform-docs.js`: replaced hardcoded `docsByType` initialization (a hidden footgun that silenced any new section) with a dynamic `Object.fromEntries` over the `DOCS` config keys.
+- `build-docs-index.js`: discover sections from the filesystem instead of a hardcoded list, so the index automatically picks up new folders.
+- `/en/release-notes/*` URLs are live but absent from the EN sitemap (only DE/ES/FR/IT/JA/KO/PT-BR/RU/ZH-CN/ZH-TW expose them). Added a recovery path in `update-platform-docs.js` that mirrors release-notes URLs from the DE sitemap to EN — `release-notes-overview.md` and `release-notes-system-prompts.md` now populate correctly.
+
+### Documentation
+- Manual sync of every section against the live upstream sitemap so the CI baseline reflects current reality (avoids triggering the deletion safety guard on the next scheduled run).
+- Removed legacy "Telegram notification" mention from `CLAUDE.md` — never implemented in the workflow.
+- Updated `README.md`, `CLAUDE.md`, `.claude/rules/doc-authoring.md`, `claude/skills/ask-archivist/SKILL.md`, and `claude/archivist-project/README.md` to reflect the new folder list and section priorities.
+
 ## 🤖 v1.0.18 - 02/05/2026
 
 File Changes:

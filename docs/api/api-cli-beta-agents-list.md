@@ -1,4 +1,5 @@
 ---
+title: "List"
 source: "https://platform.claude.com/docs/en/api/cli/beta/agents/list"
 category: "api"
 generated: true
@@ -124,6 +125,26 @@ List Agents
         - `"standard"`
 
         - `"fast"`
+
+    - `multiagent: object { agents, type }`
+
+      Resolved coordinator topology with a concrete agent roster.
+
+      - `agents: array of BetaManagedAgentsAgentReference`
+
+        Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+        - `id: string`
+
+        - `type: "agent"`
+
+          - `"agent"`
+
+        - `version: number`
+
+      - `type: "coordinator"`
+
+        - `"coordinator"`
 
     - `name: string`
 

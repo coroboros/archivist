@@ -1,4 +1,5 @@
 ---
+title: "Create"
 source: "https://platform.claude.com/docs/en/api/csharp/beta/agents/create"
 category: "api"
 generated: true
@@ -17,7 +18,7 @@ Create Agent
 
   - `required Model model`
 
-    Body param: Model identifier. Accepts the [model string](../developer/developer-about-claude-models-overview.md#latest-models-comparison), e.g. `claude-opus-4-6`, or a `model_config` object for additional configuration control
+    Body param: Model identifier. Accepts the [model string](https://platform.claude.com/docs/en/about-claude/models/overview.md#latest-models-comparison), e.g. `claude-opus-4-6`, or a `model_config` object for additional configuration control
 
     - `enum BetaManagedAgentsModel:`
 
@@ -142,6 +143,10 @@ Create Agent
   - `IReadOnlyDictionary<string, string> metadata`
 
     Body param: Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
+  - `BetaManagedAgentsMultiagentParams? multiagent`
+
+    Body param: A coordinator topology: the session's primary thread orchestrates work by spawning session threads, each running an agent drawn from the `agents` roster.
 
   - `IReadOnlyList<BetaManagedAgentsSkillParams> skills`
 
@@ -427,6 +432,8 @@ Create Agent
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
+    - `"managed-agents-2026-04-01"ManagedAgents2026_04_01`
+
 ### Returns
 
 - `class BetaManagedAgentsAgent:`
@@ -510,6 +517,26 @@ Create Agent
       - `"standard"Standard`
 
       - `"fast"Fast`
+
+  - `required BetaManagedAgentsMultiagent? Multiagent`
+
+    Resolved coordinator topology with a concrete agent roster.
+
+    - `required IReadOnlyList<BetaManagedAgentsAgentReference> Agents`
+
+      Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+      - `required string ID`
+
+      - `required Type Type`
+
+        - `"agent"Agent`
+
+      - `required Int Version`
+
+    - `required Type Type`
+
+      - `"coordinator"Coordinator`
 
   - `required string Name`
 

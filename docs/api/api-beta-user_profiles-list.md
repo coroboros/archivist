@@ -1,4 +1,5 @@
 ---
+title: "List"
 source: "https://platform.claude.com/docs/en/api/beta/user_profiles/list"
 category: "api"
 generated: true
@@ -35,7 +36,7 @@ List User Profiles
 
   - `UnionMember0 = string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 20 more`
+  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 21 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -83,6 +84,8 @@ List User Profiles
 
     - `"advisor-tool-2026-03-01"`
 
+    - `"managed-agents-2026-04-01"`
+
 ### Returns
 
 - `data: array of BetaUserProfile`
@@ -100,6 +103,16 @@ List User Profiles
   - `metadata: map[string]`
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
+  - `relationship: "external" or "resold" or "internal"`
+
+    How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+
+    - `"external"`
+
+    - `"resold"`
+
+    - `"internal"`
 
   - `trust_grants: map[BetaUserProfileTrustGrant]`
 
@@ -128,6 +141,10 @@ List User Profiles
   - `external_id: optional string`
 
     Platform's own identifier for this user. Not enforced unique.
+
+  - `name: optional string`
+
+    Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
 
 - `next_page: string`
 

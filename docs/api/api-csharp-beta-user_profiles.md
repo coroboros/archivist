@@ -26,6 +26,20 @@ Create User Profile
 
     Body param: Free-form key-value data to attach to this user profile. Maximum 16 keys, with keys up to 64 characters and values up to 512 characters. Values must be non-empty strings.
 
+  - `string? name`
+
+    Body param: Display name of the entity this profile represents. Required when relationship is `resold` (the resold-to company's name); optional otherwise. Maximum 255 characters.
+
+  - `Relationship relationship`
+
+    Body param: How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+
+    - `"external"External`
+
+    - `"resold"Resold`
+
+    - `"internal"Internal`
+
   - `IReadOnlyList<AnthropicBeta> betas`
 
     Header param: Optional header to specify the beta version(s) you want to use.
@@ -76,6 +90,8 @@ Create User Profile
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
+    - `"managed-agents-2026-04-01"ManagedAgents2026_04_01`
+
 ### Returns
 
 - `class BetaUserProfile:`
@@ -91,6 +107,16 @@ Create User Profile
   - `required IReadOnlyDictionary<string, string> Metadata`
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
+  - `required Relationship Relationship`
+
+    How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+
+    - `"external"External`
+
+    - `"resold"Resold`
+
+    - `"internal"Internal`
 
   - `required IReadOnlyDictionary<string, BetaUserProfileTrustGrant> TrustGrants`
 
@@ -119,6 +145,10 @@ Create User Profile
   - `string? ExternalID`
 
     Platform's own identifier for this user. Not enforced unique.
+
+  - `string? Name`
+
+    Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
 
 ### Example
 
@@ -208,6 +238,8 @@ List User Profiles
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
+    - `"managed-agents-2026-04-01"ManagedAgents2026_04_01`
+
 ### Returns
 
 - `class UserProfileListPageResponse:`
@@ -227,6 +259,16 @@ List User Profiles
     - `required IReadOnlyDictionary<string, string> Metadata`
 
       Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
+    - `required Relationship Relationship`
+
+      How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+
+      - `"external"External`
+
+      - `"resold"Resold`
+
+      - `"internal"Internal`
 
     - `required IReadOnlyDictionary<string, BetaUserProfileTrustGrant> TrustGrants`
 
@@ -255,6 +297,10 @@ List User Profiles
     - `string? ExternalID`
 
       Platform's own identifier for this user. Not enforced unique.
+
+    - `string? Name`
+
+      Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
 
   - `required string? NextPage`
 
@@ -338,6 +384,8 @@ Get User Profile
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
+    - `"managed-agents-2026-04-01"ManagedAgents2026_04_01`
+
 ### Returns
 
 - `class BetaUserProfile:`
@@ -353,6 +401,16 @@ Get User Profile
   - `required IReadOnlyDictionary<string, string> Metadata`
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
+  - `required Relationship Relationship`
+
+    How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+
+    - `"external"External`
+
+    - `"resold"Resold`
+
+    - `"internal"Internal`
 
   - `required IReadOnlyDictionary<string, BetaUserProfileTrustGrant> TrustGrants`
 
@@ -381,6 +439,10 @@ Get User Profile
   - `string? ExternalID`
 
     Platform's own identifier for this user. Not enforced unique.
+
+  - `string? Name`
+
+    Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
 
 ### Example
 
@@ -418,6 +480,20 @@ Update User Profile
   - `IReadOnlyDictionary<string, string> metadata`
 
     Body param: Key-value pairs to merge into the stored metadata. Keys provided overwrite existing values. To remove a key, set its value to an empty string. Keys not provided are left unchanged. Maximum 16 keys, with keys up to 64 characters and values up to 512 characters.
+
+  - `string? name`
+
+    Body param: If present, replaces the stored name. Omit to leave unchanged. Maximum 255 characters.
+
+  - `Relationship? relationship`
+
+    Body param: How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+
+    - `"external"External`
+
+    - `"resold"Resold`
+
+    - `"internal"Internal`
 
   - `IReadOnlyList<AnthropicBeta> betas`
 
@@ -469,6 +545,8 @@ Update User Profile
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
+    - `"managed-agents-2026-04-01"ManagedAgents2026_04_01`
+
 ### Returns
 
 - `class BetaUserProfile:`
@@ -484,6 +562,16 @@ Update User Profile
   - `required IReadOnlyDictionary<string, string> Metadata`
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
+  - `required Relationship Relationship`
+
+    How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+
+    - `"external"External`
+
+    - `"resold"Resold`
+
+    - `"internal"Internal`
 
   - `required IReadOnlyDictionary<string, BetaUserProfileTrustGrant> TrustGrants`
 
@@ -512,6 +600,10 @@ Update User Profile
   - `string? ExternalID`
 
     Platform's own identifier for this user. Not enforced unique.
+
+  - `string? Name`
+
+    Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
 
 ### Example
 
@@ -592,6 +684,8 @@ Create Enrollment URL
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
+    - `"managed-agents-2026-04-01"ManagedAgents2026_04_01`
+
 ### Returns
 
 - `class BetaUserProfileEnrollmentUrl:`
@@ -641,6 +735,16 @@ Console.WriteLine(betaUserProfileEnrollmentUrl);
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
+  - `required Relationship Relationship`
+
+    How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+
+    - `"external"External`
+
+    - `"resold"Resold`
+
+    - `"internal"Internal`
+
   - `required IReadOnlyDictionary<string, BetaUserProfileTrustGrant> TrustGrants`
 
     Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
@@ -668,6 +772,10 @@ Console.WriteLine(betaUserProfileEnrollmentUrl);
   - `string? ExternalID`
 
     Platform's own identifier for this user. Not enforced unique.
+
+  - `string? Name`
+
+    Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
 
 ### Beta User Profile Enrollment URL
 

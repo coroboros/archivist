@@ -1,4 +1,5 @@
 ---
+title: "Archive"
 source: "https://platform.claude.com/docs/en/api/ruby/beta/agents/archive"
 category: "api"
 generated: true
@@ -21,7 +22,7 @@ Archive Agent
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 20 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 21 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -68,6 +69,8 @@ Archive Agent
     - `:"user-profiles-2026-03-24"`
 
     - `:"advisor-tool-2026-03-01"`
+
+    - `:"managed-agents-2026-04-01"`
 
 ### Returns
 
@@ -160,6 +163,26 @@ Archive Agent
       - `:standard`
 
       - `:fast`
+
+  - `multiagent: BetaManagedAgentsMultiagent`
+
+    Resolved coordinator topology with a concrete agent roster.
+
+    - `agents: Array[BetaManagedAgentsAgentReference]`
+
+      Agents the coordinator may spawn as session threads, each resolved to a specific version.
+
+      - `id: String`
+
+      - `type: :agent`
+
+        - `:agent`
+
+      - `version: Integer`
+
+    - `type: :coordinator`
+
+      - `:coordinator`
 
   - `name: String`
 

@@ -4,7 +4,43 @@ import path from 'node:path';
 // --- Configuration ---
 const DOCS_DIR = 'docs';
 const OUTPUT_FILE = path.join(DOCS_DIR, 'INDEX.md');
-const SECTIONS = ['api', 'code', 'developer', 'resources', 'insights'];
+
+// Section ordering hints. Sections discovered at runtime are placed in this order
+// when present, then the rest follows alphabetically. `api` is intentionally last
+// (large endpoint reference, lower navigation value).
+const SECTION_ORDER = [
+  'code',
+  'agents-and-tools',
+  'build-with-claude',
+  'manage-claude',
+  'managed-agents',
+  'test-and-evaluate',
+  'release-notes',
+  'general',
+  'insights',
+  'api',
+];
+
+/**
+ * Discovers section directories under DOCS_DIR (any subdir containing at least
+ * one .md file) and orders them by SECTION_ORDER, with unknown sections
+ * appended alphabetically.
+ */
+async function discoverSections() {
+  const entries = await fs.readdir(DOCS_DIR, { withFileTypes: true });
+  const found = [];
+  for (const entry of entries) {
+    if (!entry.isDirectory()) continue;
+    const dir = path.join(DOCS_DIR, entry.name);
+    const files = await fs.readdir(dir);
+    if (files.some((f) => f.endsWith('.md'))) {
+      found.push(entry.name);
+    }
+  }
+  const known = SECTION_ORDER.filter((s) => found.includes(s));
+  const unknown = found.filter((s) => !SECTION_ORDER.includes(s)).sort();
+  return [...known, ...unknown];
+}
 
 // Boilerplate H2 headings that are not real cross-cutting topics.
 // Kept short — overflagging would hide real topics.
@@ -165,12 +201,12 @@ function slugify(text) {
  *   - topicMap: Map<slug, { display, occurrences: Array<{ section, file, title, heading }> }>
  *   - tagMap: Map<tag, Array<{ section, file, title }>>
  */
-async function buildIndex() {
+async function buildIndex(sections) {
   const sectionStats = {};
   const topicMap = new Map();
   const tagMap = new Map();
 
-  for (const section of SECTIONS) {
+  for (const section of sections) {
     const files = await readSectionFiles(section);
     sectionStats[section] = files.length;
 
@@ -216,7 +252,7 @@ async function buildIndex() {
  * Renders the cross-section topics block — only topics appearing in
  * MIN_TOPIC_FREQUENCY+ files, sorted by frequency (desc) then alpha.
  */
-function renderTopics(topicMap) {
+function renderTopics(topicMap, sections) {
   const rows = [];
   for (const { display, occurrences } of topicMap.values()) {
     if (occurrences.length < MIN_TOPIC_FREQUENCY) continue;
@@ -251,7 +287,7 @@ function renderTopics(topicMap) {
       grouped[occ.section].push(occ);
     }
 
-    for (const section of SECTIONS) {
+    for (const section of sections) {
       if (!grouped[section]) continue;
       out += `- **${section}** — `;
       const items = grouped[section].map((occ) => `[${occ.file}](./${occ.file})`);
@@ -287,10 +323,10 @@ function renderTags(tagMap) {
 /**
  * Renders the at-a-glance counts table.
  */
-function renderStats(sectionStats) {
+function renderStats(sectionStats, sections) {
   let out = '| Section | Files | Index |\n';
   out += '|---------|-------|-------|\n';
-  for (const section of SECTIONS) {
+  for (const section of sections) {
     const count = sectionStats[section] || 0;
     const readmePath = `${section}/${section}-README.md`;
     out += `| ${section} | ${count} | [${readmePath}](./${readmePath}) |\n`;
@@ -301,7 +337,7 @@ function renderStats(sectionStats) {
 /**
  * Writes the final INDEX.md file.
  */
-async function writeIndex(sectionStats, topicMap, tagMap) {
+async function writeIndex(sectionStats, topicMap, tagMap, sections) {
   const totalFiles = Object.values(sectionStats).reduce((a, b) => a + b, 0);
   const topicsSurfaced = [...topicMap.values()].filter(
     (v) => v.occurrences.length >= MIN_TOPIC_FREQUENCY,
@@ -316,18 +352,18 @@ async function writeIndex(sectionStats, topicMap, tagMap) {
     '',
     `**Last updated:** ${new Date().toUTCString()}`,
     '',
-    `**Coverage:** ${totalFiles} docs across ${SECTIONS.length} sections, ${topicsSurfaced} cross-cutting topics, ${tagMap.size} tags.`,
+    `**Coverage:** ${totalFiles} docs across ${sections.length} sections, ${topicsSurfaced} cross-cutting topics, ${tagMap.size} tags.`,
     '',
     '---',
     '',
     '## At a glance',
     '',
-    renderStats(sectionStats),
+    renderStats(sectionStats, sections),
     '---',
     '',
     '## Topics (cross-section)',
     '',
-    renderTopics(topicMap),
+    renderTopics(topicMap, sections),
     '---',
     '',
     '## Tags',
@@ -343,8 +379,10 @@ async function writeIndex(sectionStats, topicMap, tagMap) {
  */
 async function run() {
   console.log('🧭 Building docs/INDEX.md ...');
-  const { sectionStats, topicMap, tagMap } = await buildIndex();
-  await writeIndex(sectionStats, topicMap, tagMap);
+  const sections = await discoverSections();
+  console.log(`   -> Sections discovered: ${sections.join(', ')}`);
+  const { sectionStats, topicMap, tagMap } = await buildIndex(sections);
+  await writeIndex(sectionStats, topicMap, tagMap, sections);
   console.log(
     `   -> Wrote ${OUTPUT_FILE} (${[...topicMap.values()].filter((v) => v.occurrences.length >= MIN_TOPIC_FREQUENCY).length} topics, ${tagMap.size} tags).`,
   );
