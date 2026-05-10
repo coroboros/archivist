@@ -109,7 +109,7 @@ Use `ask-archivist` by default for precision work. Fall back to `claude-code-gui
 3. Use the system prompt at claude/archivist-project/system-prompt.xml
 ```
 
-Convenient for mobile, non-technical users, or quick queries away from a terminal — but **understand the tradeoff before relying on it for precise work**:
+Convenient for non-technical users or away-from-terminal queries — but **understand the tradeoff before relying on it for precise work**:
 
 - Claude Projects use **RAG** (retrieval-augmented generation) once content exceeds the context window: docs are chunked, embedded, and retrieved by semantic similarity to your query.
 - RAG is **probabilistic**: the relevant chunk may not surface in the top-k results, especially when your query phrasing differs from the doc's wording. Misses are silent — the model fills gaps with training-data approximations.

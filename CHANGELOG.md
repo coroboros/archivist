@@ -1,5 +1,10 @@
 # Changelog
 
+## 🧑‍💻 v1.2.3 - 10/05/2026
+
+### Documentation
+- Tighten phrasing in `README.md` Claude Project alternative section.
+
 ## 🤖 v1.2.2 - 10/05/2026
 
 File Changes:
