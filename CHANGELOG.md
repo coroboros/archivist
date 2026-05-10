@@ -1,5 +1,10 @@
 # Changelog
 
+## 🧑‍💻 v1.2.4 - 10/05/2026
+
+### Documentation
+- Slim `CLAUDE.md` from 76 to 61 lines: drop Claude Code boilerplate, fold the "Project Overview" subhead into the intro, rewrite the "not a typical app" defensive negation in the positive form. Aligns with the new `~/.claude/rules/writing.md` principles.
+
 ## 🧑‍💻 v1.2.3 - 10/05/2026
 
 ### Documentation
