@@ -1,5 +1,17 @@
 # Changelog
 
+## 🤖 v1.2.5 - 10/05/2026
+
+File Changes:
+
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-errors.md`
+- Modified: `docs/code/code-hooks.md`
+- Modified: `docs/code/code-mcp.md`
+- Modified: `docs/code/code-overview.md`
+- Modified: `docs/code/code-plugins.md`
+
+
 ## 🧑‍💻 v1.2.4 - 10/05/2026
 
 ### Documentation
