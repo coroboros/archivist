@@ -1,76 +1,61 @@
-# CLAUDE.md
+# Archivist
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+Canonical Claude ecosystem reference: mirrors Anthropic's official documentation (auto-synced every 12h via GitHub Actions), curates insights from Anthropic team members, ships the `ask-archivist` companion skill for deterministic doc lookup, and includes an optional Claude Project framework. Reference repo only — docs + insights, no build, no tests, no TypeScript.
 
-## Project Overview
-
-Archivist is the canonical Claude ecosystem reference. It mirrors Anthropic's official documentation (auto-synced every 12h via GitHub Actions), curates insights from Anthropic team members, ships the `ask-archivist` companion skill for deterministic doc lookup, and includes an optional Claude Project framework.
-
-Skills have been extracted to [coroboros/agent-skills](https://github.com/coroboros/agent-skills). Personal Claude Code configuration (settings, hooks, scripts, rules) has been extracted to [coroboros/claude-config](https://github.com/coroboros/claude-config) — archivist is docs + insights only.
-
-This is **not a typical app** — it's a reference repo. There is no build step, no tests, and no TypeScript.
+Skills extracted to [coroboros/agent-skills](https://github.com/coroboros/agent-skills); personal Claude Code config to [coroboros/claude-config](https://github.com/coroboros/claude-config).
 
 ## Canonical rules
-
-Repo-specific rules:
 
 @.claude/rules/doc-authoring.md
 @.claude/rules/changelog.md    # OVERRIDES ~/.claude/rules/changelog.md — emoji prefix (🤖 CI / 🧑‍💻 human)
 
-Global rules (`~/.claude/rules/*`) inherit automatically — tech-standards, writing, find-docs, git-conventions, privacy, overrides. Git-conventions divergences are stated inline below:
+Global rules (`~/.claude/rules/*`) inherit automatically. Git-conventions divergence:
 
 - **Git** — branch `main`; every human/assistant change ships as a release, even chores (patch for fixes/chores, minor for features or notable changes — per-change visibility beats batched changelogs); release body opens with `## vX.Y.Z — Title` as the FIRST heading, before any grouped sections; bump via `pnpm version patch|minor`. All other rules in `@~/.claude/rules/git-conventions.md` apply.
 
 ## Commands
 
 ```bash
-# Lint & format
-pnpm lint
+pnpm lint              # Biome check
 pnpm lint:fix
-
-# Fetch latest official Claude docs from Anthropic's sitemap (fetch + index)
-pnpm update
-
-# Rebuild the cross-section topic index (docs/INDEX.md) only
-pnpm index
-
-# Zip docs folders for upload to Claude Projects
-pnpm zip              # all folders
-pnpm zip api code     # specific folders
+pnpm update            # Fetch latest official Claude docs from Anthropic's sitemap (fetch + index)
+pnpm index             # Rebuild docs/INDEX.md only
+pnpm zip               # Zip docs folders for upload to Claude Projects (all)
+pnpm zip api code      # Specific folders
 ```
 
 ## Architecture
 
-### Documentation mirror (`docs/`)
+### `docs/`
 
-Auto-generated markdown files fetched from Anthropic's official documentation sitemap. Folders mirror upstream sections 1:1: `about-claude/`, `agents-and-tools/`, `api/`, `build-with-claude/`, `manage-claude/`, `managed-agents/`, `release-notes/`, `test-and-evaluate/`, `general/` (fallback for orphan top-level pages) from `platform.claude.com`; `code/` from `code.claude.com`; plus hand-curated `insights/`. Each section has a `{section}-README.md` index file that is regenerated on update.
+Auto-generated markdown mirroring Anthropic's sitemap. Folder structure tracks upstream sections 1:1: `about-claude/`, `agents-and-tools/`, `api/`, `build-with-claude/`, `manage-claude/`, `managed-agents/`, `release-notes/`, `test-and-evaluate/`, `general/` (fallback for orphan top-level pages) from `platform.claude.com`; `code/` from `code.claude.com`; plus hand-curated `insights/`. Each section has a `{section}-README.md` regenerated on update.
 
-The EN sitemap is incomplete for human-facing sections, so `update-platform-docs.js` augments it with URLs from the DE locale sitemap (rewritten back to EN), via `RECOVERY_SECTIONS`. 404s on recovered URLs drop silently at fetch time.
+The EN sitemap is incomplete for human-facing sections, so `update-platform-docs.js` augments it via the DE locale sitemap (rewritten back to EN) through `RECOVERY_SECTIONS`. 404s on recovered URLs drop silently at fetch time.
 
-Editing rules for each subfolder live in `.claude/rules/doc-authoring.md`.
+Per-folder editing rules: `.claude/rules/doc-authoring.md`.
 
-### Update scripts (`scripts/`)
+### `scripts/`
 
-- `update-docs.js` — orchestrator, runs `update-code-docs`, `update-platform-docs`, and `build-docs-index` in parallel
-- `update-platform-docs.js` — fetches platform docs from Anthropic's XML sitemap, routes URLs into folders mirroring upstream top-level sections (config in `DOCS`), converts HTML to markdown
-- `update-code-docs.js` — fetches Claude Code docs from a separate sitemap
-- `build-docs-index.js` — scans every section, extracts H1/H2 + YAML `tags`, writes the cross-section topic index to `docs/INDEX.md`
-- `zip.js` — creates `.zip` archives of doc folders for Claude Project uploads
+- `update-docs.js` — orchestrator (parallel: code, platform, index)
+- `update-platform-docs.js` — platform docs from XML sitemap, routes URLs into folders mirroring upstream top-level sections (config: `DOCS`), HTML → markdown
+- `update-code-docs.js` — Claude Code docs from a separate sitemap
+- `build-docs-index.js` — scans every section, extracts H1/H2 + YAML `tags`, writes `docs/INDEX.md`
+- `zip.js` — `.zip` archives of doc folders for Claude Project uploads
 
-### Companion skill (`claude/skills/ask-archivist/`)
+### Companion skill
 
-- `SKILL.md` — deterministic-lookup skill that wraps the INDEX → Grep → Read → cite workflow over this mirror. Public template; install instructions in `README.md`.
+`claude/skills/ask-archivist/SKILL.md` — deterministic-lookup over this mirror (INDEX → Grep → Read → cite). Public template; install instructions in `README.md`.
 
-### Claude Project framework (`claude/archivist-project/`)
+### Claude Project framework
 
-- `system-prompt.xml` — XML system prompt for building an "Archivist" assistant in Claude Projects
+`claude/archivist-project/system-prompt.xml` — XML system prompt for an "Archivist" assistant in Claude Projects.
 
-## Key Details
+## Key details
 
 - **Runtime**: Bun (scripts), Node.js 22 (pinned via `.node-version`, used by pnpm in CI)
 - **Package manager**: pnpm (Corepack)
 - **Linter/Formatter**: Biome (`biome check --write`)
 - **Language**: Plain JavaScript (ES modules), no TypeScript
-- **CI**: GitHub Actions workflow (`.github/workflows/sync-docs.yml`) runs every 12h, fetches docs, auto-versions with `pnpm version patch`, commits, tags, and creates GitHub releases. On failure, it auto-opens a `sync-docs-failure`-labelled issue (de-duped per day) so silent breakage cannot happen.
-- **Safety guard**: The CI workflow aborts if more than 25% of files in any docs folder are deleted (configurable via `MAX_REMOVED_FILES_PERCENTAGE`)
-- **Versioning**: SemVer, auto-patched by CI on doc changes. CHANGELOG.md is auto-generated by CI; manual releases follow the inline **Git** rule in `## Canonical rules` (overrides global `~/.claude/rules/git-conventions.md`).
+- **CI**: `.github/workflows/sync-docs.yml` runs every 12h, auto-versions with `pnpm version patch`, commits, tags, creates GitHub releases. On failure, auto-opens a `sync-docs-failure`-labelled issue (de-duped per day) so silent breakage cannot happen.
+- **Safety guard**: CI aborts if more than 25% of files in any docs folder are deleted (configurable via `MAX_REMOVED_FILES_PERCENTAGE`)
+- **Versioning**: SemVer, auto-patched by CI on doc changes. Manual releases follow the inline **Git** rule above (overrides global `~/.claude/rules/git-conventions.md`).
