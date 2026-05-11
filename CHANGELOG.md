@@ -1,5 +1,17 @@
 # Changelog
 
+## 🤖 v1.2.7 - 11/05/2026
+
+File Changes:
+
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-glossary.md`
+- Modified: `docs/code/code-hooks.md`
+- Modified: `docs/code/code-mcp.md`
+- Modified: `docs/code/code-permissions.md`
+- Modified: `docs/code/code-quickstart.md`
+
+
 ## 🤖 v1.2.6 - 11/05/2026
 
 File Changes:

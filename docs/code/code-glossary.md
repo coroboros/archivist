@@ -292,6 +292,12 @@ An action Claude can take: read a file, edit code, run a shell command, search t
 
 Learn more: [Tools available to Claude](./code-tools-reference.md)
 
+### Turn
+
+One complete response from Claude within a [session](#session). A turn begins when you send a message and ends when Claude finishes responding, with any number of [tool](#tool) calls in between. [Stop hooks](#hook) fire at the end of each turn. A session consists of many turns, and the [agentic loop](#agentic-loop) describes what happens inside one.
+
+Learn more: [How Claude Code works](./code-how-claude-code-works.md#the-agentic-loop)
+
 ## W
 
 ### Worktree isolation
