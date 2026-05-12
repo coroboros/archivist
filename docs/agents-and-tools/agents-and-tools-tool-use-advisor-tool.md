@@ -50,7 +50,7 @@ If you request an invalid pair, the API returns a `400 invalid_request_error` na
 
 ## Platform availability
 
-The advisor tool is available in beta on the Claude API (Anthropic).
+The advisor tool is available in beta on the Claude API and on [Claude Platform on AWS](../build-with-claude/build-with-claude-claude-platform-on-aws.md). It is not currently available on Amazon Bedrock, Vertex AI, or Microsoft Foundry.
 
 ## Quick start
 
@@ -342,7 +342,7 @@ The `server_tool_use.input` is always empty. The server constructs the advisor's
 
 ### Result variants
 
-The `advisor_tool_result.content` field is a discriminated union. Which variant you receive depends on the advisor model:
+The `advisor_tool_result.content` field is a discriminated union. For successful calls, the variant depends on the advisor model:
 
 | Variant                   | Fields              | Returned when                                                       |
 | ------------------------- | ------------------- | ------------------------------------------------------------------- |
@@ -569,7 +569,7 @@ The executor can search the web, call the advisor, and use your custom tools in 
 | ---------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [Batch processing](../build-with-claude/build-with-claude-batch-processing.md)         | Supported. `usage.iterations` is reported per item.                                                                                                                                                                                                                                |
 | [Token counting](../build-with-claude/build-with-claude-token-counting.md)      | Returns the executor's first-iteration input tokens only. For a rough advisor estimate, call `count_tokens` with `model` set to the advisor model and the same messages.                                                                                                           |
-| [Context editing](../build-with-claude/build-with-claude-context-editing.md) | `clear_tool_uses` is not yet fully compatible with advisor tool blocks; full support is planned for a follow-up release. With `clear_thinking`, see the caching warning above.                                                                                                    |
+| [Context editing](../build-with-claude/build-with-claude-context-editing.md) | `clear_tool_uses` is not fully compatible with advisor tool blocks. With `clear_thinking`, see the earlier caching warning.                                                                                                    |
 | `pause_turn`                                                     | A dangling advisor call ends the response with `stop_reason: "pause_turn"` and the `server_tool_use` block as the last content block. The advisor executes on resumption. See [Server tools](./agents-and-tools-tool-use-server-tools.md#the-server-side-loop-and-pause-turn). |
 
 ## Best practices
@@ -636,4 +636,4 @@ For coding tasks, pairing a Sonnet executor at medium [effort](../build-with-cla
 - **Advisor output does not stream.** Expect a pause in the stream while the sub-inference runs.
 - **No built-in conversation-level cap on advisor calls.** Track and cap them client-side.
 - **`max_tokens` applies to executor output only.** It does not bound advisor tokens.
-- **Anthropic Priority Tier** is honored per model. Priority Tier on the executor model does not extend to the advisor; you need Priority Tier on the advisor model specifically.
+- **[Priority Tier](../api/api-service-tiers.md)** is honored for each model. Priority Tier on the executor model does not extend to the advisor; you need Priority Tier on the advisor model specifically.

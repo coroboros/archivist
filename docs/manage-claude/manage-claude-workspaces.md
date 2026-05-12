@@ -180,12 +180,12 @@ For complete parameter details, see the [Workspace Members API reference](https:
 API keys are scoped to a specific workspace. When you create an API key in a workspace, it can only access resources within that workspace.
 
 Resources scoped to workspaces include:
-- **Files** created via the [Files API](../build-with-claude/build-with-claude-files.md)
-- **Message Batches** created via the [Batch API](../build-with-claude/build-with-claude-batch-processing.md)
-- **Skills** created via the [Skills API](../build-with-claude/build-with-claude-skills-guide.md)
+- **Files** created through the [Files API](../build-with-claude/build-with-claude-files.md)
+- **Message Batches** created through the [Batch API](../build-with-claude/build-with-claude-batch-processing.md)
+- **Skills** created through the [Skills API](../build-with-claude/build-with-claude-skills-guide.md)
 
 <Note>
-Starting February 5, 2026, [prompt caches](../build-with-claude/build-with-claude-prompt-caching.md) will also be isolated per workspace (applies to the Claude API and Azure only).
+[Prompt caches](../build-with-claude/build-with-claude-prompt-caching.md) are also isolated per workspace on the Claude API, [Claude Platform on AWS](../build-with-claude/build-with-claude-claude-platform-on-aws.md), and [Microsoft Foundry](../build-with-claude/build-with-claude-claude-in-microsoft-foundry.md) (in beta). On Amazon Bedrock and Vertex AI, prompt caches are isolated per organization.
 </Note>
 
 <Tip>
@@ -223,7 +223,7 @@ workspace_ids[]=wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ&\
 group_by[]=workspace_id&\
 bucket_width=1d" \
   --header "anthropic-version: 2023-06-01" \
-  --header "x-api-key: $ADMIN_API_KEY"
+  --header "x-api-key: $ANTHROPIC_ADMIN_KEY"
 ```
 
 Usage and costs attributed to the Default Workspace have a `null` value for `workspace_id`.

@@ -10,7 +10,7 @@ Install and configure the Anthropic Python SDK with sync and async client suppor
 
 ---
 
-The Anthropic Python SDK provides convenient access to the Anthropic REST API from Python applications. It supports both synchronous and asynchronous operations, streaming, and integrations with AWS Bedrock and Google Vertex AI.
+The Anthropic Python SDK provides convenient access to the Anthropic REST API from Python applications. It supports both synchronous and asynchronous operations, streaming, and integrations with Amazon Bedrock, Vertex AI, Microsoft Foundry, and Claude Platform on AWS.
 
 <Info>
 For API feature documentation with code examples, see the [API reference](./api-overview.md). This page covers Python-specific SDK features and configuration.
@@ -22,17 +22,22 @@ For API feature documentation with code examples, see the [API reference](./api-
 pip install anthropic
 ```
 
-For platform-specific integrations, install with extras:
+For platform-specific integrations or improved async performance, install with extras:
 
 ```bash
-# For AWS Bedrock support
-pip install anthropic[bedrock]
+# For Amazon Bedrock support
+pip install "anthropic[bedrock]"
 
-# For Google Vertex AI support
-pip install anthropic[vertex]
+# For Vertex AI support
+pip install "anthropic[vertex]"
+
+# For Claude Platform on AWS support
+pip install "anthropic[aws]"
+
+# Microsoft Foundry support is included in the base package
 
 # For improved async performance with aiohttp
-pip install anthropic[aiohttp]
+pip install "anthropic[aiohttp]"
 ```
 
 ## Requirements
@@ -210,7 +215,7 @@ asyncio.run(main())
 
 Streaming with `client.messages.stream(...)` exposes various helpers including accumulation and SDK-specific events.
 
-Alternatively, you can use `client.messages.create(..., stream=True)` which only returns an async iterable of the events in the stream and uses less memory (it doesn't build up a final message object for you).
+Alternatively, you can use `client.messages.create(..., stream=True)` which only returns an iterable of the events in the stream and uses less memory (it doesn't build up a final message object for you).
 
 ## Token counting
 
@@ -233,11 +238,11 @@ print(count.input_tokens)  # 10
 
 ## Tool use
 
-This SDK provides support for tool use, also known as function calling. More details can be found in the [tool use overview](../agents-and-tools/agents-and-tools-tool-use-overview.md).
+This SDK provides support for tool use, also known as function calling. For more details, see [Tool use with Claude](../agents-and-tools/agents-and-tools-tool-use-overview.md).
 
 ### Tool helpers
 
-The SDK provides helpers for defining and running tools as pure Python functions. You can use the `@beta_tool` decorator for more control:
+The SDK provides helpers for defining and running tools as pure Python functions. The `@beta_tool` decorator generates the tool schema from the function signature and docstring:
 
 ```python
 import json
@@ -251,9 +256,9 @@ def get_weather(location: str) -> str:
     """Get the weather for a given location.
 
     Args:
-        location: The city and state, e.g. San Francisco, CA
+        location: The city and state, for example, San Francisco, CA
     Returns:
-        A dictionary containing the location, temperature, and weather condition.
+        A JSON-encoded string with the location, temperature, and weather condition.
     """
     return json.dumps(
         {
@@ -329,10 +334,9 @@ for entry in result_stream:
 
 Request parameters that correspond to file uploads can be passed in many different forms:
 
-- A `PathLike` object (e.g., `pathlib.Path`)
+- A `PathLike` object (for example, `pathlib.Path`)
 - A tuple of `(filename, content, content_type)`
 - A `BinaryIO` file-like object
-- The return value of the `toFile` helper
 
 ```python nocheck
 from pathlib import Path
@@ -393,6 +397,7 @@ Error codes are as follows:
 | 401 | `AuthenticationError` |
 | 403 | `PermissionDeniedError` |
 | 404 | `NotFoundError` |
+| 409 | `ConflictError` |
 | 422 | `UnprocessableEntityError` |
 | 429 | `RateLimitError` |
 | >=500 | `InternalServerError` |
@@ -400,7 +405,7 @@ Error codes are as follows:
 
 ## Request IDs
 
-> For more information on debugging requests, see the [errors documentation](./api-errors.md#request-id).
+> For more information on debugging requests, see [Request ID](./api-errors.md#request-id).
 
 All object responses in the SDK provide a `_request_id` property which is added from the `request-id` response header so that you can quickly log failing requests and report them back to Anthropic.
 
@@ -419,7 +424,7 @@ Unlike other properties that use an `_` prefix, the `_request_id` property is pu
 
 ## Retries
 
-Certain errors are automatically retried 2 times by default, with a short exponential backoff. Connection errors (for example, due to a network connectivity problem), 408 Request Timeout, 409 Conflict, 429 Rate Limit, and >=500 Internal errors are all retried by default.
+Certain errors are automatically retried 2 times by default, with a short exponential backoff. Connection errors (for example, because of a network connectivity problem), 408 Request Timeout, 409 Conflict, 429 Rate Limit, and >=500 Internal errors are all retried by default.
 
 You can use the `max_retries` option to configure or disable this:
 
@@ -611,9 +616,9 @@ if response.my_field is None:
 
 ## Advanced usage
 
-### Accessing raw response data (e.g., headers)
+### Accessing raw response data (for example, headers)
 
-The "raw" `Response` returned by `httpx` can be accessed via the `.with_raw_response` property on the client. This is useful for accessing response headers or other metadata:
+The "raw" `Response` returned by `httpx` can be accessed through the `.with_raw_response` property on the client. This is useful for accessing response headers or other metadata:
 
 ```python hidelines={1..2}
 from anthropic import Anthropic
@@ -626,7 +631,7 @@ response = client.messages.with_raw_response.create(
     model="claude-opus-4-7",
 )
 
-print(response.headers.get("x-request-id"))
+print(response.headers.get("request-id"))
 message = (
     response.parse()
 )  # get the object that `messages.create()` would have returned
@@ -645,7 +650,7 @@ with client.messages.with_streaming_response.create(
     messages=[{"role": "user", "content": "Hello, Claude"}],
     model="claude-opus-4-7",
 ) as response:
-    print(response.headers.get("x-request-id"))
+    print(response.headers.get("request-id"))
 
     for line in response.iter_lines():
         print(line)
@@ -657,7 +662,7 @@ The context manager is required so that the response will reliably be closed.
 
 The SDK uses the standard library `logging` module.
 
-You can enable logging by setting the environment variable `ANTHROPIC_LOG` to one of `debug`, `info`, `warn`, or `off`:
+You can enable logging by setting the environment variable `ANTHROPIC_LOG` to `debug` or `info`:
 
 ```bash
 export ANTHROPIC_LOG=debug
@@ -777,18 +782,22 @@ response = client.beta.messages.create(
 For detailed platform setup guides with code examples, see:
 - [Amazon Bedrock](../build-with-claude/build-with-claude-claude-in-amazon-bedrock.md)
 - [Amazon Bedrock (legacy)](../build-with-claude/build-with-claude-claude-on-amazon-bedrock-legacy.md)
-- [Google Vertex AI](../build-with-claude/build-with-claude-claude-on-vertex-ai.md)
+- [Vertex AI](../build-with-claude/build-with-claude-claude-on-vertex-ai.md)
 - [Microsoft Foundry](../build-with-claude/build-with-claude-claude-in-microsoft-foundry.md)
+- [Claude Platform on AWS](../build-with-claude/build-with-claude-claude-platform-on-aws.md)
 </Note>
 
-All four client classes are included in the base `anthropic` package:
+All five client classes are included in the base `anthropic` package:
 
 | Provider | Client | Extra dependencies |
 |-----------|--------|-------------------|
-| Bedrock | `from anthropic import AnthropicBedrockMantle` | `pip install anthropic[bedrock]` |
-| Bedrock (`bedrock-runtime` path) | `from anthropic import AnthropicBedrock` | `pip install anthropic[bedrock]` |
-| Vertex AI | `from anthropic import AnthropicVertex` | `pip install anthropic[vertex]` |
+| Bedrock | `from anthropic import AnthropicBedrockMantle` | `pip install "anthropic[bedrock]"` |
+| Bedrock (`bedrock-runtime` path) | `from anthropic import AnthropicBedrock` | `pip install "anthropic[bedrock]"` |
+| Vertex AI | `from anthropic import AnthropicVertex` | `pip install "anthropic[vertex]"` |
 | Foundry | `from anthropic import AnthropicFoundry` | None |
+| Claude Platform on AWS | `from anthropic import AnthropicAWS` | `pip install "anthropic[aws]"` |
+
+The `AnthropicAWS` client is in beta. Pass `workspace_id` to the constructor or set the `ANTHROPIC_AWS_WORKSPACE_ID` environment variable.
 
 Use `AnthropicBedrockMantle` for new projects; `AnthropicBedrock` remains for existing applications using the Bedrock `InvokeModel` API.
 
@@ -814,5 +823,5 @@ print(anthropic.__version__)
 
 - [GitHub repository](https://github.com/anthropics/anthropic-sdk-python)
 - [API reference](./api-overview.md)
-- [Streaming guide](../build-with-claude/build-with-claude-streaming.md)
-- [Tool use guide](../agents-and-tools/agents-and-tools-tool-use-overview.md)
+- [Streaming Messages](../build-with-claude/build-with-claude-streaming.md)
+- [Tool use with Claude](../agents-and-tools/agents-and-tools-tool-use-overview.md)

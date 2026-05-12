@@ -41,13 +41,11 @@ Since PDF support relies on Claude's vision capabilities, it is subject to the s
 
 ### Supported platforms and models
 
-PDF support is currently supported via direct API access and Google Vertex AI. All [active models](../about-claude/about-claude-models-overview.md) support PDF processing.
+PDF support is available on the Claude API, [Claude Platform on AWS](./build-with-claude-claude-platform-on-aws.md), [Amazon Bedrock](./build-with-claude-claude-in-amazon-bedrock.md) (see [Amazon Bedrock PDF support](#amazon-bedrock-pdf-support)), [Vertex AI](./build-with-claude-claude-on-vertex-ai.md), and [Microsoft Foundry](./build-with-claude-claude-in-microsoft-foundry.md). All [active models](../about-claude/about-claude-models-overview.md) support PDF processing.
 
-PDF support is now available on Amazon Bedrock with the following considerations:
+### Amazon Bedrock PDF support
 
-### Amazon Bedrock PDF Support
-
-When using PDF support through Amazon Bedrock's Converse API, there are two distinct document processing modes:
+When using PDF support through Bedrock's Converse API, there are two distinct document processing modes:
 
 <Note>
 **Important:** To access Claude's full visual PDF understanding capabilities in the Converse API, you must enable citations. Without citations enabled, the API falls back to basic text extraction only. Learn more about [working with citations](./build-with-claude-citations.md).
@@ -68,14 +66,14 @@ When using PDF support through Amazon Bedrock's Converse API, there are two dist
    - Uses approximately 7,000 tokens for a 3-page PDF
    - **Requires citations to be enabled** in the Converse API
 
-#### Key Limitations
+#### Key limitations
 
 - **Converse API**: Visual PDF analysis requires citations to be enabled. There is currently no option to use visual analysis without citations (unlike the InvokeModel API).
 - **InvokeModel API**: Provides full control over PDF processing without forced citations.
 
-#### Common Issues
+#### Common issues
 
-If customers report that Claude isn't seeing images or charts in their PDFs when using the Converse API, they likely need to enable the citations flag. Without it, Converse falls back to basic text extraction only.
+If Claude isn't seeing images or charts in your PDFs when using the Converse API, you likely need to enable the citations flag. Without it, Converse falls back to basic text extraction only.
 
 <Note>
 This is a known constraint with the Converse API. For applications that require visual PDF analysis without citations, consider using the InvokeModel API instead.
@@ -501,7 +499,7 @@ curl -sSo document.pdf https://assets.anthropic.com/m/1cd9d098ac3e6467/original/
 # First, upload your PDF to the Files API
 FILE_ID=$(ant beta:files upload \
   --file ./document.pdf \
-  --transform id --format yaml)
+  --transform id --raw-output)
 
 # Then use the returned file_id in your message
 ant beta:messages create \

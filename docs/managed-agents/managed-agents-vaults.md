@@ -49,7 +49,7 @@ echo "$vault_id"  # "vlt_01ABC..."
 VAULT_ID=$(ant beta:vaults create \
   --display-name "Alice" \
   --metadata '{external_user_id: usr_abc123}' \
-  --transform id --format yaml)
+  --transform id --raw-output)
 ````
 
   
@@ -185,7 +185,7 @@ EOF
 CREDENTIAL_ID=$(ant beta:vaults:credentials create \
   --vault-id "$VAULT_ID" \
   --display-name "Alice's Slack" \
-  --transform id --format yaml <<'EOF'
+  --transform id --raw-output <<'EOF'
 auth:
   type: mcp_oauth
   mcp_server_url: https://mcp.slack.com/mcp
@@ -552,7 +552,7 @@ SESSION_ID=$(ant beta:sessions create \
   --environment-id "$ENVIRONMENT_ID" \
   --vault-id "$VAULT_ID" \
   --title "Alice's Slack digest" \
-  --transform id --format yaml)
+  --transform id --raw-output)
 ````
 
   

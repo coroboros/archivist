@@ -135,7 +135,7 @@ Error codes are as follows:
 
 Certain errors are automatically retried 2 times by default, with a short exponential backoff.
 
-Connection errors (for example, due to a network connectivity problem), 408 Request Timeout, 409 Conflict, 429 Rate Limit, >=500 Internal errors, and timeouts are all retried by default.
+Connection errors (for example, because of a network connectivity problem), 408 Request Timeout, 409 Conflict, 429 Rate Limit, >=500 Internal errors, and timeouts are all retried by default.
 
 You can use the `maxRetries` option to configure or disable this:
 
@@ -236,6 +236,27 @@ $response = $client->request(
 );
 ```
 
+## Platform integrations
+
+<Note>
+For detailed platform setup guides with code examples, see:
+- [Amazon Bedrock](../build-with-claude/build-with-claude-claude-in-amazon-bedrock.md)
+- [Amazon Bedrock (legacy)](../build-with-claude/build-with-claude-claude-on-amazon-bedrock-legacy.md)
+- [Vertex AI](../build-with-claude/build-with-claude-claude-on-vertex-ai.md)
+- [Microsoft Foundry](../build-with-claude/build-with-claude-claude-in-microsoft-foundry.md)
+- [Claude Platform on AWS](../build-with-claude/build-with-claude-claude-platform-on-aws.md)
+</Note>
+
+The PHP SDK supports the following platforms:
+
+- **Bedrock:** `Anthropic\Bedrock\MantleClient`. Use `new MantleClient(awsRegion: ...)`.
+- **Bedrock (legacy):** `Anthropic\Bedrock\Client`. Use `::fromEnvironment()` or `::withCredentials()`.
+- **Vertex AI:** `Anthropic\Vertex\Client`. Use `::fromEnvironment()`.
+- **Foundry:** `Anthropic\Foundry\Client`. Use `::withCredentials()`.
+- **Claude Platform on AWS:** `Anthropic\Aws\Client` (requires `aws/aws-sdk-php` as a soft dependency). Use `new Anthropic\Aws\Client(workspaceId: ...)` or set `ANTHROPIC_AWS_WORKSPACE_ID`. Available in beta.
+
+Use `MantleClient` for new projects; `Anthropic\Bedrock\Client` remains for existing applications using the Bedrock `InvokeModel` API.
+
 ## Semantic versioning
 
 This package follows [SemVer](https://semver.org/spec/v2.0.0.html) conventions. As the library is in initial development and has a major version of `0`, APIs may change at any time.
@@ -247,4 +268,4 @@ This package considers improvements to the (non-runtime) PHPDoc type definitions
 - [GitHub repository](https://github.com/anthropics/anthropic-sdk-php)
 - [Packagist](https://packagist.org/packages/anthropic-ai/sdk)
 - [API reference](./api-overview.md)
-- [Streaming guide](../build-with-claude/build-with-claude-streaming.md)
+- [Streaming Messages](../build-with-claude/build-with-claude-streaming.md)

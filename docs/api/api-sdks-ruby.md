@@ -10,7 +10,7 @@ Install and configure the Anthropic Ruby SDK with Sorbet types, streaming helper
 
 ---
 
-The Anthropic Ruby library provides convenient access to the Anthropic REST API from any Ruby 3.2.0+ application. It ships with comprehensive types and docstrings in Yard, RBS, and RBI. The standard library's `net/http` is used as the HTTP transport, with connection pooling via the `connection_pool` gem.
+The Anthropic Ruby library provides convenient access to the Anthropic REST API from any Ruby 3.2.0+ application. It ships with comprehensive types and docstrings in Yard, RBS, and RBI. The standard library's `net/http` is used as the HTTP transport, with connection pooling through the `connection_pool` gem.
 
 <Info>
 For API feature documentation with code examples, see the [API reference](./api-overview.md). This page covers Ruby-specific SDK features and configuration.
@@ -118,11 +118,11 @@ anthropic.beta.messages.tool_runner(
 
 ## Structured outputs
 
-For complete structured outputs documentation including Ruby examples, see [Structured Outputs](../build-with-claude/build-with-claude-structured-outputs.md).
+For complete structured outputs documentation including Ruby examples, see [Structured outputs](../build-with-claude/build-with-claude-structured-outputs.md).
 
 ## Handling errors
 
-When the library is unable to connect to the API, or if the API returns a non-success status code (i.e., 4xx or 5xx response), a subclass of `Anthropic::Errors::APIError` will be thrown:
+When the library is unable to connect to the API, or if the API returns a non-success status code (that is, 4xx or 5xx response), a subclass of `Anthropic::Errors::APIError` is raised:
 
 ```ruby hidelines={1}
 require "anthropic"
@@ -164,7 +164,7 @@ Error codes are as follows:
 
 Certain errors will be automatically retried 2 times by default, with a short exponential backoff.
 
-Connection errors (for example, due to a network connectivity problem), 408 Request Timeout, 409 Conflict, 429 Rate Limit, >=500 Internal errors, and timeouts will all be retried by default.
+Connection errors (for example, because of a network connectivity problem), 408 Request Timeout, 409 Conflict, 429 Rate Limit, >=500 Internal errors, and timeouts are all retried by default.
 
 You can use the `max_retries` option to configure or disable this:
 
@@ -185,12 +185,12 @@ anthropic.messages.create(
 
 ## Timeouts
 
-By default, requests will time out after 600 seconds. You can use the timeout option to configure or disable this:
+By default, requests time out after 10 minutes. You can use the `timeout` option to configure this:
 
 ```ruby
 # Configure the default for all requests:
 anthropic = Anthropic::Client.new(
-  timeout: nil # default is 600
+  timeout: 20 # 20 seconds (default is 10 minutes)
 )
 
 # Or, configure per-request:
@@ -345,9 +345,9 @@ All parameter and response objects inherit from `Anthropic::Internal::Type::Base
 
 The `Anthropic::Client` instances are threadsafe, but are only fork-safe when there are no in-flight HTTP requests.
 
-Each instance of `Anthropic::Client` has its own HTTP connection pool with a default size of 99. As such, the recommendation is to instantiate the client once per application in most settings.
+Each instance of `Anthropic::Client` has its own HTTP connection pool with a default size of 99. As such, the recommendation is to create the client once per application in most settings.
 
-When all available connections from the pool are checked out, requests wait for a new connection to become available, with queue time counting towards the request timeout.
+When all available connections from the pool are checked out, requests wait for a new connection to become available, with queue time counting toward the request timeout.
 
 Unless otherwise specified, other classes in the SDK do not have locks protecting their underlying data structure.
 
@@ -404,13 +404,16 @@ response = anthropic.request(
 For detailed platform setup guides with code examples, see:
 - [Amazon Bedrock](../build-with-claude/build-with-claude-claude-in-amazon-bedrock.md)
 - [Amazon Bedrock (legacy)](../build-with-claude/build-with-claude-claude-on-amazon-bedrock-legacy.md)
-- [Google Vertex AI](../build-with-claude/build-with-claude-claude-on-vertex-ai.md)
+- [Vertex AI](../build-with-claude/build-with-claude-claude-on-vertex-ai.md)
+- [Claude Platform on AWS](../build-with-claude/build-with-claude-claude-platform-on-aws.md)
 </Note>
 
-The Ruby SDK supports Bedrock and Vertex AI through dedicated client classes:
+The Ruby SDK supports the following platforms:
 
 - **Bedrock:** `Anthropic::BedrockMantleClient`, or `Anthropic::BedrockClient` for the `bedrock-runtime` path. `Anthropic::BedrockMantleClient` requires the `aws-sdk-core` gem; `Anthropic::BedrockClient` requires the `aws-sdk-bedrockruntime` gem.
 - **Vertex AI:** `Anthropic::VertexClient`. Requires the `googleauth` gem.
+- **Foundry:** Not currently supported in the Ruby SDK. See [Claude in Microsoft Foundry](../build-with-claude/build-with-claude-claude-in-microsoft-foundry.md) for supported SDKs.
+- **Claude Platform on AWS:** Part of the main `anthropic` gem (requires the `aws-sdk-core` gem). Provides `Anthropic::AWSClient`. Pass `workspace_id:` to the constructor or set the `ANTHROPIC_AWS_WORKSPACE_ID` environment variable (see [Workspaces](../build-with-claude/build-with-claude-claude-platform-on-aws.md#workspaces)). Available in beta.
 
 Use `Anthropic::BedrockMantleClient` for new projects; `Anthropic::BedrockClient` remains for existing applications using the Bedrock `InvokeModel` API.
 
@@ -423,6 +426,6 @@ This package considers improvements to the (non-runtime) `*.rbi` and `*.rbs` typ
 ## Additional resources
 
 - [GitHub repository](https://github.com/anthropics/anthropic-sdk-ruby)
-- [RubyDoc documentation](https://gemdocs.org/gems/anthropic)
+- [YARD documentation](https://gemdocs.org/gems/anthropic)
 - [API reference](./api-overview.md)
-- [Streaming guide](../build-with-claude/build-with-claude-streaming.md)
+- [Streaming Messages](../build-with-claude/build-with-claude-streaming.md)

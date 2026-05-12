@@ -479,7 +479,7 @@ Work on a feature in one terminal while Claude fixes a bug in another, without t
 claude --worktree feature-auth
 ```
 
-Run the same command with a different name in a second terminal to start an isolated parallel session. See [Worktrees](./code-worktrees.md) for cleanup, `.worktreeinclude`, and non-git VCS support.
+Run the same command with a different name in a second terminal to start an isolated parallel session. See [Worktrees](./code-worktrees.md) for cleanup, `.worktreeinclude`, and non-git VCS support. To monitor parallel sessions from one screen instead of separate terminals, see [background agents](./code-agent-view.md).
 
 ## Plan before editing
 

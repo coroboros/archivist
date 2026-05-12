@@ -14,14 +14,14 @@ Stream tool inputs character-by-character for latency-sensitive applications.
 This feature is eligible for [Zero Data Retention (ZDR)](../build-with-claude/build-with-claude-api-and-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 </Note>
 
-Fine-grained tool streaming is generally available on all models and all platforms. It enables [streaming](../build-with-claude/build-with-claude-streaming.md) of tool use parameter values without buffering or JSON validation, reducing the latency to begin receiving large parameters.
+Fine-grained tool streaming is available on all models and all platforms. It enables [streaming](../build-with-claude/build-with-claude-streaming.md) of tool use parameter values without buffering or JSON validation, reducing the latency to begin receiving large parameters.
 
 <Warning>
 When using fine-grained tool streaming, you may potentially receive invalid or partial JSON inputs. Make sure to account for these edge cases in your code.
 </Warning>
 
 ## How to use fine-grained tool streaming
-Fine-grained tool streaming is available on all models and all platforms (Claude API, Amazon Bedrock, Google Vertex AI, and Microsoft Foundry). To use it, set `eager_input_streaming` to `true` on any user-defined tool where you want fine-grained streaming enabled, and enable streaming on your request.
+Fine-grained tool streaming is supported on the Claude API, [Claude Platform on AWS](../build-with-claude/build-with-claude-claude-platform-on-aws.md), [Amazon Bedrock](../build-with-claude/build-with-claude-claude-in-amazon-bedrock.md), [Vertex AI](../build-with-claude/build-with-claude-claude-on-vertex-ai.md), and [Microsoft Foundry](../build-with-claude/build-with-claude-claude-in-microsoft-foundry.md). To use it, set `eager_input_streaming` to `true` on any user-defined tool where you want fine-grained streaming enabled, and enable streaming on your request.
 
 Here's an example of how to use fine-grained tool streaming with the API:
 
@@ -181,7 +181,7 @@ Here's an example of how to use fine-grained tool streaming with the API:
 In this example, fine-grained tool streaming enables Claude to stream the lines of a long poem into the tool call `make_file` without buffering to validate if the `lines_of_text` parameter is valid JSON. This means you can see the parameter stream as it arrives, without having to wait for the entire parameter to buffer and validate.
 
 <Note>
-With fine-grained tool streaming, tool use chunks start streaming faster, and are often longer and contain fewer word breaks. This is due to differences in chunking behavior.
+With fine-grained tool streaming, tool use chunks start streaming faster, and are often longer and contain fewer word breaks. This is because of differences in chunking behavior.
 
 Example:
 
@@ -193,8 +193,8 @@ Chunk 3: 'peScri'
 Chunk 4: 'pt 5.0 5.1 '
 Chunk 5: '5.2 5'
 Chunk 6: '.3'
-Chunk 8: ' new f'
-Chunk 9: 'eatur'
+Chunk 7: ' new f'
+Chunk 8: 'eatur'
 ...
 ```
 

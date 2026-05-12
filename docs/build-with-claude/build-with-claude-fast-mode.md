@@ -57,7 +57,7 @@ curl https://api.anthropic.com/v1/messages \
 ```bash CLI
 ant beta:messages create \
   --beta fast-mode-2026-02-01 \
-  --transform 'content.0.text' --format yaml <<'YAML'
+  --transform 'content.0.text' --raw-output <<'YAML'
 model: claude-opus-4-6
 max_tokens: 4096
 speed: fast
@@ -231,7 +231,7 @@ Fast mode is priced at 6x standard Opus rates across the full context window, in
 
 Fast mode pricing stacks with other pricing modifiers:
 
-- [Prompt caching multipliers](../about-claude/about-claude-pricing.md#model-pricing) apply on top of fast mode pricing
+- [Prompt caching multipliers](../about-claude/about-claude-pricing.md#prompt-caching) apply on top of fast mode pricing
 - [Data residency](../manage-claude/manage-claude-data-residency.md) multipliers apply on top of fast mode pricing
 
 For complete pricing details, see the [pricing page](../about-claude/about-claude-pricing.md#fast-mode-pricing).
@@ -274,7 +274,7 @@ curl https://api.anthropic.com/v1/messages \
 
 ```bash CLI
 ant beta:messages create --beta fast-mode-2026-02-01 \
-  --transform usage.speed --format yaml <<'YAML'
+  --transform usage.speed --raw-output <<'YAML'
 model: claude-opus-4-6
 max_tokens: 1024
 speed: fast
@@ -399,7 +399,7 @@ echo $response->usage->speed;  // "fast" or "standard"
 ```
 
 ```ruby Ruby nocheck
-response = anthropic.beta.messages.create(
+response = client.beta.messages.create(
   model: "claude-opus-4-6",
   max_tokens: 1024,
   speed: "fast",
@@ -421,8 +421,8 @@ puts(response.usage.speed)  # "fast" or "standard"
   "stop_reason": "end_turn",
   "stop_sequence": null,
   "usage": {
-    "input_tokens": 523,
-    "output_tokens": 1842,
+    "input_tokens": 8,
+    "output_tokens": 12,
     "speed": "fast"
   }
 }
@@ -813,6 +813,7 @@ message = create_message_with_fast_fallback(
 - **TTFT:** Fast mode's benefits are focused on output tokens per second (OTPS), not time to first token (TTFT).
 - **Batch API:** Fast mode is not available with the [Batch API](./build-with-claude-batch-processing.md).
 - **Priority Tier:** Fast mode is not available with [Priority Tier](../api/api-service-tiers.md).
+- **Claude Platform on AWS:** Fast mode is not available on [Claude Platform on AWS](./build-with-claude-claude-platform-on-aws.md).
 
 ## Next steps
 
