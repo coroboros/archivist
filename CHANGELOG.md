@@ -1,5 +1,10 @@
 # Changelog
 
+## 🧑‍💻 v1.2.11 - 13/05/2026
+
+### Documentation
+- Cross-reference [forrestchang's CLAUDE.md compilation](https://github.com/forrestchang/andrej-karpathy-skills/blob/main/CLAUDE.md) alongside the Karpathy origin X post in `docs/insights/claude-code-key-practices.md`.
+
 ## 🤖 v1.2.10 - 13/05/2026
 
 File Changes:
