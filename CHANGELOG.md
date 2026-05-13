@@ -1,5 +1,15 @@
 # Changelog
 
+## 🤖 v1.2.12 - 13/05/2026
+
+File Changes:
+
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-permissions.md`
+- Modified: `docs/code/code-plugins.md`
+- Modified: `docs/code/code-quickstart.md`
+
+
 ## 🧑‍💻 v1.2.11 - 13/05/2026
 
 ### Documentation
