@@ -1,5 +1,51 @@
 # Changelog
 
+## 🤖 v1.2.10 - 13/05/2026
+
+File Changes:
+
+- Modified: `docs/api/api-README.md`
+- Modified: `docs/api/api-rate-limits.md`
+- Modified: `docs/build-with-claude/build-with-claude-README.md`
+- Modified: `docs/build-with-claude/build-with-claude-fast-mode.md`
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-agent-teams.md`
+- Modified: `docs/code/code-agent-view.md`
+- Modified: `docs/code/code-changelog.md`
+- Modified: `docs/code/code-claude-code-features.md`
+- Modified: `docs/code/code-claude-code-on-the-web.md`
+- Modified: `docs/code/code-cli-reference.md`
+- Modified: `docs/code/code-commands.md`
+- Modified: `docs/code/code-data-usage.md`
+- Modified: `docs/code/code-discover-plugins.md`
+- Modified: `docs/code/code-env-vars.md`
+- Modified: `docs/code/code-fast-mode.md`
+- Modified: `docs/code/code-goal.md`
+- Modified: `docs/code/code-hooks.md`
+- Modified: `docs/code/code-model-config.md`
+- Modified: `docs/code/code-modifying-system-prompts.md`
+- Modified: `docs/code/code-monitoring-usage.md`
+- Modified: `docs/code/code-output-styles.md`
+- Modified: `docs/code/code-plugins-reference.md`
+- Modified: `docs/code/code-python.md`
+- Modified: `docs/code/code-routines.md`
+- Modified: `docs/code/code-sandboxing.md`
+- Modified: `docs/code/code-security.md`
+- Modified: `docs/code/code-server-managed-settings.md`
+- Modified: `docs/code/code-settings.md`
+- Modified: `docs/code/code-skills.md`
+- Modified: `docs/code/code-todo-tracking.md`
+- Modified: `docs/code/code-tools-reference.md`
+- Modified: `docs/code/code-typescript.md`
+- Modified: `docs/code/code-user-input.md`
+- Modified: `docs/code/code-web-quickstart.md`
+- Modified: `docs/code/code-worktrees.md`
+- Modified: `docs/managed-agents/managed-agents-README.md`
+- Modified: `docs/managed-agents/managed-agents-agent-setup.md`
+- Modified: `docs/release-notes/release-notes-README.md`
+- Modified: `docs/release-notes/release-notes-overview.md`
+
+
 ## 🤖 v1.2.9 - 12/05/2026
 
 File Changes:
