@@ -760,7 +760,7 @@ Where you add a hook determines its scope:
 | [Plugin](./code-plugins.md) `hooks/hooks.json`                   | When plugin is enabled             | Yes, bundled with the plugin       |
 | [Skill](./code-skills.md) or [agent](./code-sub-agents.md) frontmatter | While the skill or agent is active | Yes, defined in the component file |
 
-Run [`/hooks`](./code-hooks.md#the-hooks-menu) in Claude Code to browse all configured hooks grouped by event. To disable all hooks at once, set `"disableAllHooks": true` in your settings file.
+Run [`/hooks`](./code-hooks.md#the-hooks-menu) in Claude Code to browse all configured hooks grouped by event. To disable hooks, set `"disableAllHooks": true` in your settings file. Hooks configured in managed settings still run unless `disableAllHooks` is also set there.
 
 If you edit settings files directly while Claude Code is running, the file watcher normally picks up hook changes automatically.
 

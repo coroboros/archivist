@@ -20,7 +20,7 @@ This feature is **not** eligible for [Zero Data Retention (ZDR)](./build-with-cl
 
 ## Supported models
 
-Referencing a `file_id` in a Messages request is supported in all models that support the given file type. For example, [images](./build-with-claude-vision.md) are supported in all Claude 3+ models, [PDFs](./build-with-claude-pdf-support.md) in all Claude 3.5+ models, and [various other file types](../agents-and-tools/agents-and-tools-tool-use-code-execution-tool.md#supported-file-types) for the code execution tool in Claude Haiku 4.5 plus all Claude 3.7+ models.
+Referencing a `file_id` in a Messages request is supported on all models that support the given file type. [Images](./build-with-claude-vision.md) are supported on all current Claude models. For [PDFs](./build-with-claude-pdf-support.md) and [other file types with the code execution tool](../agents-and-tools/agents-and-tools-tool-use-code-execution-tool.md#model-compatibility), see the linked pages for model support.
 
 The Files API is available on the Claude API, [Claude Platform on AWS](./build-with-claude-claude-platform-on-aws.md), and [Microsoft Foundry](./build-with-claude-claude-in-microsoft-foundry.md). It is not currently available on Amazon Bedrock or Vertex AI.
 
@@ -394,7 +394,7 @@ The Files API supports different file types that correspond to different content
 | PDF | `application/pdf` | `document` | Text analysis, document processing |
 | Plain text | `text/plain` | `document` | Text analysis, processing |
 | Images | `image/jpeg`, `image/png`, `image/gif`, `image/webp` | `image` | Image analysis, visual tasks |
-| [Datasets, others](../agents-and-tools/agents-and-tools-tool-use-code-execution-tool.md#supported-file-types) | Varies | `container_upload` | Analyze data, create visualizations  |
+| [Datasets, others](../agents-and-tools/agents-and-tools-tool-use-code-execution-tool.md#upload-and-analyze-your-own-files) | Varies | `container_upload` | Analyze data, create visualizations  |
 
 ### Working with other file formats
 
