@@ -1,5 +1,16 @@
 # Changelog
 
+## 🤖 v1.2.14 - 14/05/2026
+
+File Changes:
+
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-agent-view.md`
+- Modified: `docs/code/code-goal.md`
+- Modified: `docs/code/code-permissions.md`
+- Modified: `docs/code/code-skills.md`
+
+
 ## 🤖 v1.2.13 - 14/05/2026
 
 File Changes:
