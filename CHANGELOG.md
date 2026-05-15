@@ -1,5 +1,10 @@
 # Changelog
 
+## 🧑‍💻 v1.3.0 - 15/05/2026
+
+### Documentation
+- Add curated insights article `docs/insights/claude-code-html-effectiveness.md` — "Using Claude Code: The Unreasonable Effectiveness of HTML" by Thariq Shihipar ([@trq212](https://x.com/trq212)): the case for HTML over Markdown as Claude Code's output format for specs, code review, reports, design prototypes, and throwaway editors. Listed in `docs/insights/insights-README.md`; `docs/INDEX.md` regenerated.
+
 ## 🤖 v1.2.15 - 15/05/2026
 
 File Changes:
