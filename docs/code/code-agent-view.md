@@ -80,6 +80,8 @@ Run `claude agents` to open agent view. It takes over the full terminal and list
 
 The list shows every background session you've started, across all your projects. A session working in one repository and another in a different worktree both appear here, regardless of which directory you opened agent view from. Interactive sessions you have open in other terminals don't appear until you [background them](#from-inside-a-session). [Subagents](./code-sub-agents.md) and [teammates](./code-agent-teams.md) a session spawns aren't listed as separate rows.
 
+To scope the view to one project, launch with `claude agents --cwd <path>`. Only sessions started under that directory appear, including any running in a [worktree](./code-worktrees.md) dispatched from it.
+
 ```text theme={null}
 Pinned
   ✽ clawd walk cycle          Write assets/sprites/clawd-walk.png           3m
@@ -269,6 +271,12 @@ To run a specific subagent as the session's main agent, combine `--bg` with `--a
 claude --agent code-reviewer --bg "address review comments on PR 1234"
 ```
 
+Pass `--name` to set the session's display name in agent view instead of the auto-generated one:
+
+```bash theme={null}
+claude --bg --name "flaky-test-fix" "investigate the flaky SettingsChangeDetector test"
+```
+
 After backgrounding, Claude prints the session's short ID and the commands for managing it:
 
 ```text theme={null}
@@ -301,7 +309,9 @@ Each background session can run on a different model. To override it for one ses
 
 ### Permission mode, model, and effort
 
-A dispatched session reads its [settings](./code-settings.md) and [permission mode](./code-permissions.md) from the directory it runs in, the same as if you had started `claude` there.
+A background session reads its [settings](./code-settings.md) from the directory it runs in, the same as if you had started `claude` there.
+
+The [permission mode](./code-permissions.md) depends on how you started the session. Backgrounding an existing session with `/bg` or `←` keeps the current permission mode, so a session you switched to `acceptEdits` or `auto` stays in that mode after detaching. Dispatching from the agent view input or running `claude --bg` from your shell uses the `defaultMode` from that directory's settings, or the `permissionMode` from the dispatched [subagent's frontmatter](./code-sub-agents.md#supported-frontmatter-fields).
 
 To set defaults for every session you dispatch from agent view, pass any of `--permission-mode`, `--model`, or `--effort` when opening it:
 
@@ -345,7 +355,7 @@ Every background session has a short ID you can use from the shell. The ID is pr
 
 | Command                | Purpose                                                                                    |
 | :--------------------- | :----------------------------------------------------------------------------------------- |
-| `claude agents`        | Open agent view                                                                            |
+| `claude agents`        | Open agent view. Pass `--cwd <path>` to list only sessions started under that directory    |
 | `claude attach <id>`   | Attach to a session in this terminal                                                       |
 | `claude logs <id>`     | Print the session's recent output                                                          |
 | `claude stop <id>`     | Stop a session. Also accepts `claude kill`                                                 |
