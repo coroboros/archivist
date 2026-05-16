@@ -1,5 +1,48 @@
 # Changelog
 
+## 🤖 v1.3.2 - 16/05/2026
+
+File Changes:
+
+- Modified: `docs/agents-and-tools/agents-and-tools-README.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-advisor-tool.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-parallel-tool-use.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-tool-runner.md`
+- Modified: `docs/api/api-README.md`
+- Modified: `docs/api/api-client-sdks.md`
+- Modified: `docs/api/api-get-started.md`
+- Modified: `docs/api/api-sdks-cli.md`
+- Modified: `docs/api/api-sdks-java.md`
+- Modified: `docs/build-with-claude/build-with-claude-README.md`
+- Modified: `docs/build-with-claude/build-with-claude-claude-in-amazon-bedrock.md`
+- Modified: `docs/build-with-claude/build-with-claude-claude-in-microsoft-foundry.md`
+- Modified: `docs/build-with-claude/build-with-claude-claude-on-amazon-bedrock-legacy.md`
+- Modified: `docs/build-with-claude/build-with-claude-claude-on-amazon-bedrock.md`
+- Modified: `docs/build-with-claude/build-with-claude-claude-on-vertex-ai.md`
+- Modified: `docs/build-with-claude/build-with-claude-claude-platform-on-aws.md`
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-amazon-bedrock.md`
+- Modified: `docs/code/code-changelog.md`
+- Modified: `docs/code/code-claude-directory.md`
+- Modified: `docs/code/code-data-usage.md`
+- Modified: `docs/code/code-env-vars.md`
+- Modified: `docs/code/code-errors.md`
+- Modified: `docs/code/code-google-vertex-ai.md`
+- Modified: `docs/code/code-mcp.md`
+- Modified: `docs/code/code-microsoft-foundry.md`
+- Modified: `docs/code/code-permissions.md`
+- Modified: `docs/code/code-plugins.md`
+- Modified: `docs/code/code-quickstart.md`
+- Modified: `docs/code/code-skills.md`
+- Modified: `docs/code/code-slash-commands.md`
+- Modified: `docs/code/code-streaming-vs-single-mode.md`
+- Modified: `docs/code/code-subagents.md`
+- Modified: `docs/code/code-tool-search.md`
+- Modified: `docs/code/code-typescript.md`
+- Modified: `docs/managed-agents/managed-agents-README.md`
+- Modified: `docs/managed-agents/managed-agents-quickstart.md`
+
+
 ## 🤖 v1.3.1 - 15/05/2026
 
 File Changes:
