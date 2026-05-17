@@ -1,5 +1,19 @@
 # Changelog
 
+## 🤖 v1.3.4 - 17/05/2026
+
+File Changes:
+
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-mcp.md`
+- Modified: `docs/code/code-microsoft-foundry.md`
+- Modified: `docs/code/code-model-config.md`
+- Modified: `docs/code/code-overview.md`
+- Modified: `docs/code/code-permissions.md`
+- Modified: `docs/code/code-plugins.md`
+- Modified: `docs/code/code-skills.md`
+
+
 ## 🤖 v1.3.3 - 16/05/2026
 
 File Changes:
