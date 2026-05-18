@@ -1,5 +1,13 @@
 # Changelog
 
+## 🧑‍💻 v1.4.0 - 18/05/2026
+
+### Documentation
+
+- Added insight `docs/insights/mcp-code-execution.md` — distilled from Anthropic's "Code execution with MCP" (Nov 4, 2025); added a new MCP section to `insights-README.md`
+- Corrected "Prefer skills + CLI over MCPs" in `claude-code-key-practices.md`: scoped to context economics, added the code-execution MCP exception
+
+
 ## 🤖 v1.3.6 - 18/05/2026
 
 File Changes:

@@ -23,7 +23,7 @@ Distilled from [Boris Cherny's workflow](./claude-code-workflow-boris-cherny.md)
 
 **Use hooks for deterministic logic.** `PreToolUse` for bash validation, `PostToolUse` for auto-formatting, `Stop` for notifications, `SessionStart` for dynamic context loading. Don't put deterministic checks in prompts — put them in hooks. ([source](./claude-code-hidden-features.md))
 
-**Prefer skills + CLI over MCPs.** Skills load on-demand; MCPs consume context permanently. Replace heavy MCPs (Playwright, etc.) with CLI tools like `dev-browser` that Claude calls via Bash. ([source](./skills-how-anthropic-uses-skills.md))
+**Prefer skills + CLI over standard MCP — with one exception.** Every connected MCP server's tool definitions sit in context permanently; skills load on-demand. Replace heavy MCPs (Playwright, etc.) with CLI tools like `dev-browser` that Claude calls via Bash. The exception is code-execution MCP — tools exposed as code, loaded on demand — which erases the definition cost and wins for large API surfaces. ([source](./skills-how-anthropic-uses-skills.md), [code execution with MCP](./mcp-code-execution.md))
 
 **Use Opus for everything.** It's the best coding model — less steering, better tool use, faster end-to-end even though it's slower per-token. On Opus 4.7, keep the default `xhigh` effort for most agentic work; only drop to `high` for concurrent sessions or cost sensitivity, and reserve `max` for genuinely hard problems. ([source](./claude-code-workflow-boris-cherny.md), [Opus 4.7 guide](./claude-code-best-practices-opus-4-7.md))
 

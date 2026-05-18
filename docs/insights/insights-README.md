@@ -22,3 +22,7 @@ This folder is maintained manually and is **not part of the automated official d
 
 - [Lessons from Building Claude Code: How We Use Skills](./skills-how-anthropic-uses-skills.md)
 - [The Complete Guide to Building Skills for Claude](./skills-complete-guide-to-building-skills-for-claude.md)
+
+## MCP
+
+- [Code execution with MCP: Building more efficient agents](./mcp-code-execution.md)
