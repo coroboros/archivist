@@ -2918,6 +2918,11 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
     This allows you to control how Claude manages context across multiple requests, such as whether to clear function results or not.
 
+  - `Diagnostics param.Field[BetaDiagnosticsParamResp]`
+
+    Body param: Request-level diagnostics. Currently carries the previous response
+    id for prompt-cache divergence reporting.
+
   - `InferenceGeo param.Field[string]`
 
     Body param: Specifies the geographic region for inference processing. If not specified, the workspace's `default_inference_geo` is used.
@@ -4854,6 +4859,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
 
+      - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
+
 ### Returns
 
 - `type BetaMessage struct{…}`
@@ -5872,6 +5879,67 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
           The type of context management edit applied.
 
           - `const ClearThinking20251015ClearThinking20251015 ClearThinking20251015 = "clear_thinking_20251015"`
+
+  - `Diagnostics BetaDiagnostics`
+
+    Response envelope for request-level diagnostics. Present (possibly
+    null) whenever the caller supplied `diagnostics` on the request.
+
+    - `CacheMissReason BetaDiagnosticsCacheMissReasonUnion`
+
+      Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+      - `type BetaCacheMissModelChanged struct{…}`
+
+        - `CacheMissedInputTokens int64`
+
+          Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+        - `Type ModelChanged`
+
+          - `const ModelChangedModelChanged ModelChanged = "model_changed"`
+
+      - `type BetaCacheMissSystemChanged struct{…}`
+
+        - `CacheMissedInputTokens int64`
+
+          Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+        - `Type SystemChanged`
+
+          - `const SystemChangedSystemChanged SystemChanged = "system_changed"`
+
+      - `type BetaCacheMissToolsChanged struct{…}`
+
+        - `CacheMissedInputTokens int64`
+
+          Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+        - `Type ToolsChanged`
+
+          - `const ToolsChangedToolsChanged ToolsChanged = "tools_changed"`
+
+      - `type BetaCacheMissMessagesChanged struct{…}`
+
+        - `CacheMissedInputTokens int64`
+
+          Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+        - `Type MessagesChanged`
+
+          - `const MessagesChangedMessagesChanged MessagesChanged = "messages_changed"`
+
+      - `type BetaCacheMissPreviousMessageNotFound struct{…}`
+
+        - `Type PreviousMessageNotFound`
+
+          - `const PreviousMessageNotFoundPreviousMessageNotFound PreviousMessageNotFound = "previous_message_not_found"`
+
+      - `type BetaCacheMissUnavailable struct{…}`
+
+        - `Type Unavailable`
+
+          - `const UnavailableUnavailable Unavailable = "unavailable"`
 
   - `Model Model`
 
@@ -11098,6 +11166,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
 
+      - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
+
 ### Returns
 
 - `type BetaMessageTokensCount struct{…}`
@@ -11951,6 +12021,70 @@ func main() {
   - `Ephemeral5mInputTokens int64`
 
     The number of input tokens used to create the 5 minute cache entry.
+
+### Beta Cache Miss Messages Changed
+
+- `type BetaCacheMissMessagesChanged struct{…}`
+
+  - `CacheMissedInputTokens int64`
+
+    Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+  - `Type MessagesChanged`
+
+    - `const MessagesChangedMessagesChanged MessagesChanged = "messages_changed"`
+
+### Beta Cache Miss Model Changed
+
+- `type BetaCacheMissModelChanged struct{…}`
+
+  - `CacheMissedInputTokens int64`
+
+    Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+  - `Type ModelChanged`
+
+    - `const ModelChangedModelChanged ModelChanged = "model_changed"`
+
+### Beta Cache Miss Previous Message Not Found
+
+- `type BetaCacheMissPreviousMessageNotFound struct{…}`
+
+  - `Type PreviousMessageNotFound`
+
+    - `const PreviousMessageNotFoundPreviousMessageNotFound PreviousMessageNotFound = "previous_message_not_found"`
+
+### Beta Cache Miss System Changed
+
+- `type BetaCacheMissSystemChanged struct{…}`
+
+  - `CacheMissedInputTokens int64`
+
+    Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+  - `Type SystemChanged`
+
+    - `const SystemChangedSystemChanged SystemChanged = "system_changed"`
+
+### Beta Cache Miss Tools Changed
+
+- `type BetaCacheMissToolsChanged struct{…}`
+
+  - `CacheMissedInputTokens int64`
+
+    Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+  - `Type ToolsChanged`
+
+    - `const ToolsChangedToolsChanged ToolsChanged = "tools_changed"`
+
+### Beta Cache Miss Unavailable
+
+- `type BetaCacheMissUnavailable struct{…}`
+
+  - `Type Unavailable`
+
+    - `const UnavailableUnavailable Unavailable = "unavailable"`
 
 ### Beta Citation Char Location
 
@@ -17564,6 +17698,80 @@ func main() {
 
     The original token count before context management was applied
 
+### Beta Diagnostics
+
+- `type BetaDiagnostics struct{…}`
+
+  Response envelope for request-level diagnostics. Present (possibly
+  null) whenever the caller supplied `diagnostics` on the request.
+
+  - `CacheMissReason BetaDiagnosticsCacheMissReasonUnion`
+
+    Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+    - `type BetaCacheMissModelChanged struct{…}`
+
+      - `CacheMissedInputTokens int64`
+
+        Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+      - `Type ModelChanged`
+
+        - `const ModelChangedModelChanged ModelChanged = "model_changed"`
+
+    - `type BetaCacheMissSystemChanged struct{…}`
+
+      - `CacheMissedInputTokens int64`
+
+        Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+      - `Type SystemChanged`
+
+        - `const SystemChangedSystemChanged SystemChanged = "system_changed"`
+
+    - `type BetaCacheMissToolsChanged struct{…}`
+
+      - `CacheMissedInputTokens int64`
+
+        Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+      - `Type ToolsChanged`
+
+        - `const ToolsChangedToolsChanged ToolsChanged = "tools_changed"`
+
+    - `type BetaCacheMissMessagesChanged struct{…}`
+
+      - `CacheMissedInputTokens int64`
+
+        Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+      - `Type MessagesChanged`
+
+        - `const MessagesChangedMessagesChanged MessagesChanged = "messages_changed"`
+
+    - `type BetaCacheMissPreviousMessageNotFound struct{…}`
+
+      - `Type PreviousMessageNotFound`
+
+        - `const PreviousMessageNotFoundPreviousMessageNotFound PreviousMessageNotFound = "previous_message_not_found"`
+
+    - `type BetaCacheMissUnavailable struct{…}`
+
+      - `Type Unavailable`
+
+        - `const UnavailableUnavailable Unavailable = "unavailable"`
+
+### Beta Diagnostics Param
+
+- `type BetaDiagnosticsParamResp struct{…}`
+
+  Request-level diagnostics. Currently carries the previous response
+  id for prompt-cache divergence reporting.
+
+  - `PreviousMessageID string`
+
+    The `id` (`msg_...`) from this client's previous /v1/messages response. The server compares that request's prompt fingerprint against this one and returns `diagnostics.cache_miss_reason` when the prompt-cache prefix could not be reused. Pass `null` on the first turn to opt in without a prior message to compare.
+
 ### Beta Direct Caller
 
 - `type BetaDirectCaller struct{…}`
@@ -19571,6 +19779,67 @@ func main() {
           The type of context management edit applied.
 
           - `const ClearThinking20251015ClearThinking20251015 ClearThinking20251015 = "clear_thinking_20251015"`
+
+  - `Diagnostics BetaDiagnostics`
+
+    Response envelope for request-level diagnostics. Present (possibly
+    null) whenever the caller supplied `diagnostics` on the request.
+
+    - `CacheMissReason BetaDiagnosticsCacheMissReasonUnion`
+
+      Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+      - `type BetaCacheMissModelChanged struct{…}`
+
+        - `CacheMissedInputTokens int64`
+
+          Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+        - `Type ModelChanged`
+
+          - `const ModelChangedModelChanged ModelChanged = "model_changed"`
+
+      - `type BetaCacheMissSystemChanged struct{…}`
+
+        - `CacheMissedInputTokens int64`
+
+          Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+        - `Type SystemChanged`
+
+          - `const SystemChangedSystemChanged SystemChanged = "system_changed"`
+
+      - `type BetaCacheMissToolsChanged struct{…}`
+
+        - `CacheMissedInputTokens int64`
+
+          Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+        - `Type ToolsChanged`
+
+          - `const ToolsChangedToolsChanged ToolsChanged = "tools_changed"`
+
+      - `type BetaCacheMissMessagesChanged struct{…}`
+
+        - `CacheMissedInputTokens int64`
+
+          Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+        - `Type MessagesChanged`
+
+          - `const MessagesChangedMessagesChanged MessagesChanged = "messages_changed"`
+
+      - `type BetaCacheMissPreviousMessageNotFound struct{…}`
+
+        - `Type PreviousMessageNotFound`
+
+          - `const PreviousMessageNotFoundPreviousMessageNotFound PreviousMessageNotFound = "previous_message_not_found"`
+
+      - `type BetaCacheMissUnavailable struct{…}`
+
+        - `Type Unavailable`
+
+          - `const UnavailableUnavailable Unavailable = "unavailable"`
 
   - `Model Model`
 
@@ -25829,6 +26098,67 @@ func main() {
 
             - `const ClearThinking20251015ClearThinking20251015 ClearThinking20251015 = "clear_thinking_20251015"`
 
+    - `Diagnostics BetaDiagnostics`
+
+      Response envelope for request-level diagnostics. Present (possibly
+      null) whenever the caller supplied `diagnostics` on the request.
+
+      - `CacheMissReason BetaDiagnosticsCacheMissReasonUnion`
+
+        Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+        - `type BetaCacheMissModelChanged struct{…}`
+
+          - `CacheMissedInputTokens int64`
+
+            Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+          - `Type ModelChanged`
+
+            - `const ModelChangedModelChanged ModelChanged = "model_changed"`
+
+        - `type BetaCacheMissSystemChanged struct{…}`
+
+          - `CacheMissedInputTokens int64`
+
+            Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+          - `Type SystemChanged`
+
+            - `const SystemChangedSystemChanged SystemChanged = "system_changed"`
+
+        - `type BetaCacheMissToolsChanged struct{…}`
+
+          - `CacheMissedInputTokens int64`
+
+            Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+          - `Type ToolsChanged`
+
+            - `const ToolsChangedToolsChanged ToolsChanged = "tools_changed"`
+
+        - `type BetaCacheMissMessagesChanged struct{…}`
+
+          - `CacheMissedInputTokens int64`
+
+            Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+          - `Type MessagesChanged`
+
+            - `const MessagesChangedMessagesChanged MessagesChanged = "messages_changed"`
+
+        - `type BetaCacheMissPreviousMessageNotFound struct{…}`
+
+          - `Type PreviousMessageNotFound`
+
+            - `const PreviousMessageNotFoundPreviousMessageNotFound PreviousMessageNotFound = "previous_message_not_found"`
+
+        - `type BetaCacheMissUnavailable struct{…}`
+
+          - `Type Unavailable`
+
+            - `const UnavailableUnavailable Unavailable = "unavailable"`
+
     - `Model Model`
 
       The model that will complete your prompt.
@@ -27302,6 +27632,67 @@ func main() {
               The type of context management edit applied.
 
               - `const ClearThinking20251015ClearThinking20251015 ClearThinking20251015 = "clear_thinking_20251015"`
+
+      - `Diagnostics BetaDiagnostics`
+
+        Response envelope for request-level diagnostics. Present (possibly
+        null) whenever the caller supplied `diagnostics` on the request.
+
+        - `CacheMissReason BetaDiagnosticsCacheMissReasonUnion`
+
+          Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+          - `type BetaCacheMissModelChanged struct{…}`
+
+            - `CacheMissedInputTokens int64`
+
+              Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+            - `Type ModelChanged`
+
+              - `const ModelChangedModelChanged ModelChanged = "model_changed"`
+
+          - `type BetaCacheMissSystemChanged struct{…}`
+
+            - `CacheMissedInputTokens int64`
+
+              Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+            - `Type SystemChanged`
+
+              - `const SystemChangedSystemChanged SystemChanged = "system_changed"`
+
+          - `type BetaCacheMissToolsChanged struct{…}`
+
+            - `CacheMissedInputTokens int64`
+
+              Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+            - `Type ToolsChanged`
+
+              - `const ToolsChangedToolsChanged ToolsChanged = "tools_changed"`
+
+          - `type BetaCacheMissMessagesChanged struct{…}`
+
+            - `CacheMissedInputTokens int64`
+
+              Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+            - `Type MessagesChanged`
+
+              - `const MessagesChangedMessagesChanged MessagesChanged = "messages_changed"`
+
+          - `type BetaCacheMissPreviousMessageNotFound struct{…}`
+
+            - `Type PreviousMessageNotFound`
+
+              - `const PreviousMessageNotFoundPreviousMessageNotFound PreviousMessageNotFound = "previous_message_not_found"`
+
+          - `type BetaCacheMissUnavailable struct{…}`
+
+            - `Type Unavailable`
+
+              - `const UnavailableUnavailable Unavailable = "unavailable"`
 
       - `Model Model`
 
@@ -39943,6 +40334,15 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `Value int64`
 
+      - `Diagnostics BetaDiagnosticsParamResp`
+
+        Request-level diagnostics. Currently carries the previous response
+        id for prompt-cache divergence reporting.
+
+        - `PreviousMessageID string`
+
+          The `id` (`msg_...`) from this client's previous /v1/messages response. The server compares that request's prompt fingerprint against this one and returns `diagnostics.cache_miss_reason` when the prompt-cache prefix could not be reused. Pass `null` on the first turn to opt in without a prior message to compare.
+
       - `InferenceGeo string`
 
         Specifies the geographic region for inference processing. If not specified, the workspace's `default_inference_geo` is used.
@@ -42037,6 +42437,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
 
+      - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
+
 ### Returns
 
 - `type BetaMessageBatch struct{…}`
@@ -42241,6 +42643,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
+
+      - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
 ### Returns
 
@@ -42447,6 +42851,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
 
+      - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
+
 ### Returns
 
 - `type BetaMessageBatch struct{…}`
@@ -42639,6 +43045,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
+
+      - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
 ### Returns
 
@@ -42837,6 +43245,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
 
+      - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
+
 ### Returns
 
 - `type BetaDeletedMessageBatch struct{…}`
@@ -42959,6 +43369,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
+
+      - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
 ### Returns
 
@@ -43996,6 +44408,67 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
                 The type of context management edit applied.
 
                 - `const ClearThinking20251015ClearThinking20251015 ClearThinking20251015 = "clear_thinking_20251015"`
+
+        - `Diagnostics BetaDiagnostics`
+
+          Response envelope for request-level diagnostics. Present (possibly
+          null) whenever the caller supplied `diagnostics` on the request.
+
+          - `CacheMissReason BetaDiagnosticsCacheMissReasonUnion`
+
+            Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+            - `type BetaCacheMissModelChanged struct{…}`
+
+              - `CacheMissedInputTokens int64`
+
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+              - `Type ModelChanged`
+
+                - `const ModelChangedModelChanged ModelChanged = "model_changed"`
+
+            - `type BetaCacheMissSystemChanged struct{…}`
+
+              - `CacheMissedInputTokens int64`
+
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+              - `Type SystemChanged`
+
+                - `const SystemChangedSystemChanged SystemChanged = "system_changed"`
+
+            - `type BetaCacheMissToolsChanged struct{…}`
+
+              - `CacheMissedInputTokens int64`
+
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+              - `Type ToolsChanged`
+
+                - `const ToolsChangedToolsChanged ToolsChanged = "tools_changed"`
+
+            - `type BetaCacheMissMessagesChanged struct{…}`
+
+              - `CacheMissedInputTokens int64`
+
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+              - `Type MessagesChanged`
+
+                - `const MessagesChangedMessagesChanged MessagesChanged = "messages_changed"`
+
+            - `type BetaCacheMissPreviousMessageNotFound struct{…}`
+
+              - `Type PreviousMessageNotFound`
+
+                - `const PreviousMessageNotFoundPreviousMessageNotFound PreviousMessageNotFound = "previous_message_not_found"`
+
+            - `type BetaCacheMissUnavailable struct{…}`
+
+              - `Type Unavailable`
+
+                - `const UnavailableUnavailable Unavailable = "unavailable"`
 
         - `Model Model`
 
@@ -45825,6 +46298,67 @@ func main() {
 
                 - `const ClearThinking20251015ClearThinking20251015 ClearThinking20251015 = "clear_thinking_20251015"`
 
+        - `Diagnostics BetaDiagnostics`
+
+          Response envelope for request-level diagnostics. Present (possibly
+          null) whenever the caller supplied `diagnostics` on the request.
+
+          - `CacheMissReason BetaDiagnosticsCacheMissReasonUnion`
+
+            Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+            - `type BetaCacheMissModelChanged struct{…}`
+
+              - `CacheMissedInputTokens int64`
+
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+              - `Type ModelChanged`
+
+                - `const ModelChangedModelChanged ModelChanged = "model_changed"`
+
+            - `type BetaCacheMissSystemChanged struct{…}`
+
+              - `CacheMissedInputTokens int64`
+
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+              - `Type SystemChanged`
+
+                - `const SystemChangedSystemChanged SystemChanged = "system_changed"`
+
+            - `type BetaCacheMissToolsChanged struct{…}`
+
+              - `CacheMissedInputTokens int64`
+
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+              - `Type ToolsChanged`
+
+                - `const ToolsChangedToolsChanged ToolsChanged = "tools_changed"`
+
+            - `type BetaCacheMissMessagesChanged struct{…}`
+
+              - `CacheMissedInputTokens int64`
+
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+              - `Type MessagesChanged`
+
+                - `const MessagesChangedMessagesChanged MessagesChanged = "messages_changed"`
+
+            - `type BetaCacheMissPreviousMessageNotFound struct{…}`
+
+              - `Type PreviousMessageNotFound`
+
+                - `const PreviousMessageNotFoundPreviousMessageNotFound PreviousMessageNotFound = "previous_message_not_found"`
+
+            - `type BetaCacheMissUnavailable struct{…}`
+
+              - `Type Unavailable`
+
+                - `const UnavailableUnavailable Unavailable = "unavailable"`
+
         - `Model Model`
 
           The model that will complete your prompt.
@@ -47427,6 +47961,67 @@ func main() {
 
               - `const ClearThinking20251015ClearThinking20251015 ClearThinking20251015 = "clear_thinking_20251015"`
 
+      - `Diagnostics BetaDiagnostics`
+
+        Response envelope for request-level diagnostics. Present (possibly
+        null) whenever the caller supplied `diagnostics` on the request.
+
+        - `CacheMissReason BetaDiagnosticsCacheMissReasonUnion`
+
+          Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+          - `type BetaCacheMissModelChanged struct{…}`
+
+            - `CacheMissedInputTokens int64`
+
+              Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+            - `Type ModelChanged`
+
+              - `const ModelChangedModelChanged ModelChanged = "model_changed"`
+
+          - `type BetaCacheMissSystemChanged struct{…}`
+
+            - `CacheMissedInputTokens int64`
+
+              Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+            - `Type SystemChanged`
+
+              - `const SystemChangedSystemChanged SystemChanged = "system_changed"`
+
+          - `type BetaCacheMissToolsChanged struct{…}`
+
+            - `CacheMissedInputTokens int64`
+
+              Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+            - `Type ToolsChanged`
+
+              - `const ToolsChangedToolsChanged ToolsChanged = "tools_changed"`
+
+          - `type BetaCacheMissMessagesChanged struct{…}`
+
+            - `CacheMissedInputTokens int64`
+
+              Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+            - `Type MessagesChanged`
+
+              - `const MessagesChangedMessagesChanged MessagesChanged = "messages_changed"`
+
+          - `type BetaCacheMissPreviousMessageNotFound struct{…}`
+
+            - `Type PreviousMessageNotFound`
+
+              - `const PreviousMessageNotFoundPreviousMessageNotFound PreviousMessageNotFound = "previous_message_not_found"`
+
+          - `type BetaCacheMissUnavailable struct{…}`
+
+            - `Type Unavailable`
+
+              - `const UnavailableUnavailable Unavailable = "unavailable"`
+
       - `Model Model`
 
         The model that will complete your prompt.
@@ -48990,6 +49585,67 @@ func main() {
             The type of context management edit applied.
 
             - `const ClearThinking20251015ClearThinking20251015 ClearThinking20251015 = "clear_thinking_20251015"`
+
+    - `Diagnostics BetaDiagnostics`
+
+      Response envelope for request-level diagnostics. Present (possibly
+      null) whenever the caller supplied `diagnostics` on the request.
+
+      - `CacheMissReason BetaDiagnosticsCacheMissReasonUnion`
+
+        Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+        - `type BetaCacheMissModelChanged struct{…}`
+
+          - `CacheMissedInputTokens int64`
+
+            Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+          - `Type ModelChanged`
+
+            - `const ModelChangedModelChanged ModelChanged = "model_changed"`
+
+        - `type BetaCacheMissSystemChanged struct{…}`
+
+          - `CacheMissedInputTokens int64`
+
+            Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+          - `Type SystemChanged`
+
+            - `const SystemChangedSystemChanged SystemChanged = "system_changed"`
+
+        - `type BetaCacheMissToolsChanged struct{…}`
+
+          - `CacheMissedInputTokens int64`
+
+            Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+          - `Type ToolsChanged`
+
+            - `const ToolsChangedToolsChanged ToolsChanged = "tools_changed"`
+
+        - `type BetaCacheMissMessagesChanged struct{…}`
+
+          - `CacheMissedInputTokens int64`
+
+            Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+          - `Type MessagesChanged`
+
+            - `const MessagesChangedMessagesChanged MessagesChanged = "messages_changed"`
+
+        - `type BetaCacheMissPreviousMessageNotFound struct{…}`
+
+          - `Type PreviousMessageNotFound`
+
+            - `const PreviousMessageNotFoundPreviousMessageNotFound PreviousMessageNotFound = "previous_message_not_found"`
+
+        - `type BetaCacheMissUnavailable struct{…}`
+
+          - `Type Unavailable`
+
+            - `const UnavailableUnavailable Unavailable = "unavailable"`
 
     - `Model Model`
 

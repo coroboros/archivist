@@ -20,7 +20,7 @@ Data residency controls let you manage where your data is processed and stored. 
 - **Workspace geo:** Controls where data is stored at rest and where endpoint processing (such as image transcoding and code execution) happens. Configured at the workspace level in the [Claude Console](https://platform.claude.com).
 
 <Note>
-[Claude Managed Agents](../managed-agents/managed-agents-overview.md) does not support the `inference_geo` parameter, but respects the Workspace geo configured in Console.
+[Claude Managed Agents](../managed-agents/managed-agents-overview.md) does not support the `inference_geo` parameter, but respects the Workspace geo configured in Console. With [self-hosted sandboxes](../managed-agents/managed-agents-self-hosted-sandboxes.md), tool execution and the sandbox filesystem stay on infrastructure you control.
 </Note>
 
 ## Inference geo

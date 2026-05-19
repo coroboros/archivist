@@ -16,7 +16,7 @@ Archive Workspace
 
 ### Returns
 
-- `Workspace = object { id, archived_at, created_at, 4 more }`
+- `Workspace = object { id, archived_at, created_at, 5 more }`
 
   - `id: string`
 
@@ -59,6 +59,10 @@ Archive Workspace
   - `name: string`
 
     Name of the Workspace.
+
+  - `tags: map[string]`
+
+    User-defined tags as string key-value pairs. Keys may not begin with `anthropic`.
 
   - `type: "workspace"`
 

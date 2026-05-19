@@ -40,7 +40,7 @@ Claude Managed Agents is built around four concepts:
 | Concept | Description |
 |---------|-------------|
 | **Agent** | The model, system prompt, tools, MCP servers, and skills |
-| **Environment** | A configured container template (packages, network access) |
+| **Environment** | Configuration for where sessions run: an Anthropic-managed cloud container, or a self-hosted sandbox on your own infrastructure |
 | **Session** | A running agent instance within an environment, performing a specific task and generating outputs |
 | **Events** | Messages exchanged between your application and the agent (user turns, tool results, status updates) |
 
@@ -51,7 +51,7 @@ Claude Managed Agents is built around four concepts:
     Define the model, system prompt, tools, MCP servers, and skills. Create the agent once and reference it by ID across sessions.
   </Step>
   <Step title="Create an environment">
-    Configure a cloud container with pre-installed packages (Python, Node.js, Go, etc.), network access rules, and mounted files.
+    Configure where the agent runs: a cloud container, or a [self-hosted sandbox](./managed-agents-self-hosted-sandboxes.md) on your own infrastructure.
   </Step>
   <Step title="Start a session">
     Launch a session that references your agent and environment configuration.
@@ -70,6 +70,7 @@ Claude Managed Agents is best for workloads that need:
 
 - **Long-running execution:** Tasks that run for minutes or hours with multiple tool calls
 - **Cloud infrastructure:** Secure containers with pre-installed packages and network access
+- **Self-hosted execution:** Sandboxes on infrastructure you control for compliance or data-residency requirements
 - **Minimal infrastructure:** No need to build your own agent loop, sandbox, or tool execution layer
 - **Stateful sessions:** Persistent filesystems and conversation history across multiple interactions
 

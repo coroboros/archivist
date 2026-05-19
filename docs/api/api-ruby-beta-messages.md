@@ -3131,6 +3131,15 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         - `value: Integer`
 
+- `diagnostics: BetaDiagnosticsParam`
+
+  Request-level diagnostics. Currently carries the previous response
+  id for prompt-cache divergence reporting.
+
+  - `previous_message_id: String`
+
+    The `id` (`msg_...`) from this client's previous /v1/messages response. The server compares that request's prompt fingerprint against this one and returns `diagnostics.cache_miss_reason` when the prompt-cache prefix could not be reused. Pass `null` on the first turn to opt in without a prior message to compare.
+
 - `inference_geo: String`
 
   Specifies the geographic region for inference processing. If not specified, the workspace's `default_inference_geo` is used.
@@ -5177,7 +5186,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 21 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 22 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -5226,6 +5235,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
     - `:"advisor-tool-2026-03-01"`
 
     - `:"managed-agents-2026-04-01"`
+
+    - `:"cache-diagnosis-2026-04-07"`
 
 ### Returns
 
@@ -6245,6 +6256,67 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
           The type of context management edit applied.
 
           - `:clear_thinking_20251015`
+
+  - `diagnostics: BetaDiagnostics`
+
+    Response envelope for request-level diagnostics. Present (possibly
+    null) whenever the caller supplied `diagnostics` on the request.
+
+    - `cache_miss_reason: BetaCacheMissModelChanged | BetaCacheMissSystemChanged | BetaCacheMissToolsChanged | 3 more`
+
+      Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+      - `class BetaCacheMissModelChanged`
+
+        - `cache_missed_input_tokens: Integer`
+
+          Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+        - `type: :model_changed`
+
+          - `:model_changed`
+
+      - `class BetaCacheMissSystemChanged`
+
+        - `cache_missed_input_tokens: Integer`
+
+          Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+        - `type: :system_changed`
+
+          - `:system_changed`
+
+      - `class BetaCacheMissToolsChanged`
+
+        - `cache_missed_input_tokens: Integer`
+
+          Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+        - `type: :tools_changed`
+
+          - `:tools_changed`
+
+      - `class BetaCacheMissMessagesChanged`
+
+        - `cache_missed_input_tokens: Integer`
+
+          Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+        - `type: :messages_changed`
+
+          - `:messages_changed`
+
+      - `class BetaCacheMissPreviousMessageNotFound`
+
+        - `type: :previous_message_not_found`
+
+          - `:previous_message_not_found`
+
+      - `class BetaCacheMissUnavailable`
+
+        - `type: :unavailable`
+
+          - `:unavailable`
 
   - `model: Model`
 
@@ -11762,7 +11834,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 21 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 22 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -11811,6 +11883,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
     - `:"advisor-tool-2026-03-01"`
 
     - `:"managed-agents-2026-04-01"`
+
+    - `:"cache-diagnosis-2026-04-07"`
 
 ### Returns
 
@@ -12645,6 +12719,70 @@ puts(beta_message_tokens_count)
   - `ephemeral_5m_input_tokens: Integer`
 
     The number of input tokens used to create the 5 minute cache entry.
+
+### Beta Cache Miss Messages Changed
+
+- `class BetaCacheMissMessagesChanged`
+
+  - `cache_missed_input_tokens: Integer`
+
+    Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+  - `type: :messages_changed`
+
+    - `:messages_changed`
+
+### Beta Cache Miss Model Changed
+
+- `class BetaCacheMissModelChanged`
+
+  - `cache_missed_input_tokens: Integer`
+
+    Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+  - `type: :model_changed`
+
+    - `:model_changed`
+
+### Beta Cache Miss Previous Message Not Found
+
+- `class BetaCacheMissPreviousMessageNotFound`
+
+  - `type: :previous_message_not_found`
+
+    - `:previous_message_not_found`
+
+### Beta Cache Miss System Changed
+
+- `class BetaCacheMissSystemChanged`
+
+  - `cache_missed_input_tokens: Integer`
+
+    Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+  - `type: :system_changed`
+
+    - `:system_changed`
+
+### Beta Cache Miss Tools Changed
+
+- `class BetaCacheMissToolsChanged`
+
+  - `cache_missed_input_tokens: Integer`
+
+    Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+  - `type: :tools_changed`
+
+    - `:tools_changed`
+
+### Beta Cache Miss Unavailable
+
+- `class BetaCacheMissUnavailable`
+
+  - `type: :unavailable`
+
+    - `:unavailable`
 
 ### Beta Citation Char Location
 
@@ -18260,6 +18398,80 @@ puts(beta_message_tokens_count)
 
     The original token count before context management was applied
 
+### Beta Diagnostics
+
+- `class BetaDiagnostics`
+
+  Response envelope for request-level diagnostics. Present (possibly
+  null) whenever the caller supplied `diagnostics` on the request.
+
+  - `cache_miss_reason: BetaCacheMissModelChanged | BetaCacheMissSystemChanged | BetaCacheMissToolsChanged | 3 more`
+
+    Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+    - `class BetaCacheMissModelChanged`
+
+      - `cache_missed_input_tokens: Integer`
+
+        Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+      - `type: :model_changed`
+
+        - `:model_changed`
+
+    - `class BetaCacheMissSystemChanged`
+
+      - `cache_missed_input_tokens: Integer`
+
+        Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+      - `type: :system_changed`
+
+        - `:system_changed`
+
+    - `class BetaCacheMissToolsChanged`
+
+      - `cache_missed_input_tokens: Integer`
+
+        Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+      - `type: :tools_changed`
+
+        - `:tools_changed`
+
+    - `class BetaCacheMissMessagesChanged`
+
+      - `cache_missed_input_tokens: Integer`
+
+        Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+      - `type: :messages_changed`
+
+        - `:messages_changed`
+
+    - `class BetaCacheMissPreviousMessageNotFound`
+
+      - `type: :previous_message_not_found`
+
+        - `:previous_message_not_found`
+
+    - `class BetaCacheMissUnavailable`
+
+      - `type: :unavailable`
+
+        - `:unavailable`
+
+### Beta Diagnostics Param
+
+- `class BetaDiagnosticsParam`
+
+  Request-level diagnostics. Currently carries the previous response
+  id for prompt-cache divergence reporting.
+
+  - `previous_message_id: String`
+
+    The `id` (`msg_...`) from this client's previous /v1/messages response. The server compares that request's prompt fingerprint against this one and returns `diagnostics.cache_miss_reason` when the prompt-cache prefix could not be reused. Pass `null` on the first turn to opt in without a prior message to compare.
+
 ### Beta Direct Caller
 
 - `class BetaDirectCaller`
@@ -20267,6 +20479,67 @@ puts(beta_message_tokens_count)
           The type of context management edit applied.
 
           - `:clear_thinking_20251015`
+
+  - `diagnostics: BetaDiagnostics`
+
+    Response envelope for request-level diagnostics. Present (possibly
+    null) whenever the caller supplied `diagnostics` on the request.
+
+    - `cache_miss_reason: BetaCacheMissModelChanged | BetaCacheMissSystemChanged | BetaCacheMissToolsChanged | 3 more`
+
+      Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+      - `class BetaCacheMissModelChanged`
+
+        - `cache_missed_input_tokens: Integer`
+
+          Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+        - `type: :model_changed`
+
+          - `:model_changed`
+
+      - `class BetaCacheMissSystemChanged`
+
+        - `cache_missed_input_tokens: Integer`
+
+          Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+        - `type: :system_changed`
+
+          - `:system_changed`
+
+      - `class BetaCacheMissToolsChanged`
+
+        - `cache_missed_input_tokens: Integer`
+
+          Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+        - `type: :tools_changed`
+
+          - `:tools_changed`
+
+      - `class BetaCacheMissMessagesChanged`
+
+        - `cache_missed_input_tokens: Integer`
+
+          Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+        - `type: :messages_changed`
+
+          - `:messages_changed`
+
+      - `class BetaCacheMissPreviousMessageNotFound`
+
+        - `type: :previous_message_not_found`
+
+          - `:previous_message_not_found`
+
+      - `class BetaCacheMissUnavailable`
+
+        - `type: :unavailable`
+
+          - `:unavailable`
 
   - `model: Model`
 
@@ -26529,6 +26802,67 @@ puts(beta_message_tokens_count)
 
             - `:clear_thinking_20251015`
 
+    - `diagnostics: BetaDiagnostics`
+
+      Response envelope for request-level diagnostics. Present (possibly
+      null) whenever the caller supplied `diagnostics` on the request.
+
+      - `cache_miss_reason: BetaCacheMissModelChanged | BetaCacheMissSystemChanged | BetaCacheMissToolsChanged | 3 more`
+
+        Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+        - `class BetaCacheMissModelChanged`
+
+          - `cache_missed_input_tokens: Integer`
+
+            Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+          - `type: :model_changed`
+
+            - `:model_changed`
+
+        - `class BetaCacheMissSystemChanged`
+
+          - `cache_missed_input_tokens: Integer`
+
+            Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+          - `type: :system_changed`
+
+            - `:system_changed`
+
+        - `class BetaCacheMissToolsChanged`
+
+          - `cache_missed_input_tokens: Integer`
+
+            Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+          - `type: :tools_changed`
+
+            - `:tools_changed`
+
+        - `class BetaCacheMissMessagesChanged`
+
+          - `cache_missed_input_tokens: Integer`
+
+            Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+          - `type: :messages_changed`
+
+            - `:messages_changed`
+
+        - `class BetaCacheMissPreviousMessageNotFound`
+
+          - `type: :previous_message_not_found`
+
+            - `:previous_message_not_found`
+
+        - `class BetaCacheMissUnavailable`
+
+          - `type: :unavailable`
+
+            - `:unavailable`
+
     - `model: Model`
 
       The model that will complete your prompt.
@@ -28002,6 +28336,67 @@ puts(beta_message_tokens_count)
               The type of context management edit applied.
 
               - `:clear_thinking_20251015`
+
+      - `diagnostics: BetaDiagnostics`
+
+        Response envelope for request-level diagnostics. Present (possibly
+        null) whenever the caller supplied `diagnostics` on the request.
+
+        - `cache_miss_reason: BetaCacheMissModelChanged | BetaCacheMissSystemChanged | BetaCacheMissToolsChanged | 3 more`
+
+          Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+          - `class BetaCacheMissModelChanged`
+
+            - `cache_missed_input_tokens: Integer`
+
+              Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+            - `type: :model_changed`
+
+              - `:model_changed`
+
+          - `class BetaCacheMissSystemChanged`
+
+            - `cache_missed_input_tokens: Integer`
+
+              Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+            - `type: :system_changed`
+
+              - `:system_changed`
+
+          - `class BetaCacheMissToolsChanged`
+
+            - `cache_missed_input_tokens: Integer`
+
+              Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+            - `type: :tools_changed`
+
+              - `:tools_changed`
+
+          - `class BetaCacheMissMessagesChanged`
+
+            - `cache_missed_input_tokens: Integer`
+
+              Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+            - `type: :messages_changed`
+
+              - `:messages_changed`
+
+          - `class BetaCacheMissPreviousMessageNotFound`
+
+            - `type: :previous_message_not_found`
+
+              - `:previous_message_not_found`
+
+          - `class BetaCacheMissUnavailable`
+
+            - `type: :unavailable`
+
+              - `:unavailable`
 
       - `model: Model`
 
@@ -37530,7 +37925,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     Must be unique for each request within the Message Batch.
 
-  - `params: { max_tokens, messages, model, 20 more}`
+  - `params: { max_tokens, messages, model, 21 more}`
 
     Messages API creation parameters for the individual request.
 
@@ -40647,6 +41042,15 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `value: Integer`
 
+    - `diagnostics: BetaDiagnosticsParam`
+
+      Request-level diagnostics. Currently carries the previous response
+      id for prompt-cache divergence reporting.
+
+      - `previous_message_id: String`
+
+        The `id` (`msg_...`) from this client's previous /v1/messages response. The server compares that request's prompt fingerprint against this one and returns `diagnostics.cache_miss_reason` when the prompt-cache prefix could not be reused. Pass `null` on the first turn to opt in without a prior message to compare.
+
     - `inference_geo: String`
 
       Specifies the geographic region for inference processing. If not specified, the workspace's `default_inference_geo` is used.
@@ -42693,7 +43097,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 21 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 22 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -42742,6 +43146,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `:"advisor-tool-2026-03-01"`
 
     - `:"managed-agents-2026-04-01"`
+
+    - `:"cache-diagnosis-2026-04-07"`
 
 ### Returns
 
@@ -42874,7 +43280,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 21 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 22 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -42923,6 +43329,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `:"advisor-tool-2026-03-01"`
 
     - `:"managed-agents-2026-04-01"`
+
+    - `:"cache-diagnosis-2026-04-07"`
 
 ### Returns
 
@@ -43058,7 +43466,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 21 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 22 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -43107,6 +43515,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `:"advisor-tool-2026-03-01"`
 
     - `:"managed-agents-2026-04-01"`
+
+    - `:"cache-diagnosis-2026-04-07"`
 
 ### Returns
 
@@ -43234,7 +43644,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 21 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 22 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -43283,6 +43693,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `:"advisor-tool-2026-03-01"`
 
     - `:"managed-agents-2026-04-01"`
+
+    - `:"cache-diagnosis-2026-04-07"`
 
 ### Returns
 
@@ -43410,7 +43822,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 21 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 22 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -43459,6 +43871,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `:"advisor-tool-2026-03-01"`
 
     - `:"managed-agents-2026-04-01"`
+
+    - `:"cache-diagnosis-2026-04-07"`
 
 ### Returns
 
@@ -43512,7 +43926,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
   - `String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 21 more`
+  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 22 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -43561,6 +43975,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `:"advisor-tool-2026-03-01"`
 
     - `:"managed-agents-2026-04-01"`
+
+    - `:"cache-diagnosis-2026-04-07"`
 
 ### Returns
 
@@ -44598,6 +45014,67 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
                 The type of context management edit applied.
 
                 - `:clear_thinking_20251015`
+
+        - `diagnostics: BetaDiagnostics`
+
+          Response envelope for request-level diagnostics. Present (possibly
+          null) whenever the caller supplied `diagnostics` on the request.
+
+          - `cache_miss_reason: BetaCacheMissModelChanged | BetaCacheMissSystemChanged | BetaCacheMissToolsChanged | 3 more`
+
+            Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+            - `class BetaCacheMissModelChanged`
+
+              - `cache_missed_input_tokens: Integer`
+
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+              - `type: :model_changed`
+
+                - `:model_changed`
+
+            - `class BetaCacheMissSystemChanged`
+
+              - `cache_missed_input_tokens: Integer`
+
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+              - `type: :system_changed`
+
+                - `:system_changed`
+
+            - `class BetaCacheMissToolsChanged`
+
+              - `cache_missed_input_tokens: Integer`
+
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+              - `type: :tools_changed`
+
+                - `:tools_changed`
+
+            - `class BetaCacheMissMessagesChanged`
+
+              - `cache_missed_input_tokens: Integer`
+
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+              - `type: :messages_changed`
+
+                - `:messages_changed`
+
+            - `class BetaCacheMissPreviousMessageNotFound`
+
+              - `type: :previous_message_not_found`
+
+                - `:previous_message_not_found`
+
+            - `class BetaCacheMissUnavailable`
+
+              - `type: :unavailable`
+
+                - `:unavailable`
 
         - `model: Model`
 
@@ -46405,6 +46882,67 @@ puts(beta_message_batch_individual_response)
 
                 - `:clear_thinking_20251015`
 
+        - `diagnostics: BetaDiagnostics`
+
+          Response envelope for request-level diagnostics. Present (possibly
+          null) whenever the caller supplied `diagnostics` on the request.
+
+          - `cache_miss_reason: BetaCacheMissModelChanged | BetaCacheMissSystemChanged | BetaCacheMissToolsChanged | 3 more`
+
+            Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+            - `class BetaCacheMissModelChanged`
+
+              - `cache_missed_input_tokens: Integer`
+
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+              - `type: :model_changed`
+
+                - `:model_changed`
+
+            - `class BetaCacheMissSystemChanged`
+
+              - `cache_missed_input_tokens: Integer`
+
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+              - `type: :system_changed`
+
+                - `:system_changed`
+
+            - `class BetaCacheMissToolsChanged`
+
+              - `cache_missed_input_tokens: Integer`
+
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+              - `type: :tools_changed`
+
+                - `:tools_changed`
+
+            - `class BetaCacheMissMessagesChanged`
+
+              - `cache_missed_input_tokens: Integer`
+
+                Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+              - `type: :messages_changed`
+
+                - `:messages_changed`
+
+            - `class BetaCacheMissPreviousMessageNotFound`
+
+              - `type: :previous_message_not_found`
+
+                - `:previous_message_not_found`
+
+            - `class BetaCacheMissUnavailable`
+
+              - `type: :unavailable`
+
+                - `:unavailable`
+
         - `model: Model`
 
           The model that will complete your prompt.
@@ -48007,6 +48545,67 @@ puts(beta_message_batch_individual_response)
 
               - `:clear_thinking_20251015`
 
+      - `diagnostics: BetaDiagnostics`
+
+        Response envelope for request-level diagnostics. Present (possibly
+        null) whenever the caller supplied `diagnostics` on the request.
+
+        - `cache_miss_reason: BetaCacheMissModelChanged | BetaCacheMissSystemChanged | BetaCacheMissToolsChanged | 3 more`
+
+          Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+          - `class BetaCacheMissModelChanged`
+
+            - `cache_missed_input_tokens: Integer`
+
+              Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+            - `type: :model_changed`
+
+              - `:model_changed`
+
+          - `class BetaCacheMissSystemChanged`
+
+            - `cache_missed_input_tokens: Integer`
+
+              Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+            - `type: :system_changed`
+
+              - `:system_changed`
+
+          - `class BetaCacheMissToolsChanged`
+
+            - `cache_missed_input_tokens: Integer`
+
+              Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+            - `type: :tools_changed`
+
+              - `:tools_changed`
+
+          - `class BetaCacheMissMessagesChanged`
+
+            - `cache_missed_input_tokens: Integer`
+
+              Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+            - `type: :messages_changed`
+
+              - `:messages_changed`
+
+          - `class BetaCacheMissPreviousMessageNotFound`
+
+            - `type: :previous_message_not_found`
+
+              - `:previous_message_not_found`
+
+          - `class BetaCacheMissUnavailable`
+
+            - `type: :unavailable`
+
+              - `:unavailable`
+
       - `model: Model`
 
         The model that will complete your prompt.
@@ -49570,6 +50169,67 @@ puts(beta_message_batch_individual_response)
             The type of context management edit applied.
 
             - `:clear_thinking_20251015`
+
+    - `diagnostics: BetaDiagnostics`
+
+      Response envelope for request-level diagnostics. Present (possibly
+      null) whenever the caller supplied `diagnostics` on the request.
+
+      - `cache_miss_reason: BetaCacheMissModelChanged | BetaCacheMissSystemChanged | BetaCacheMissToolsChanged | 3 more`
+
+        Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
+
+        - `class BetaCacheMissModelChanged`
+
+          - `cache_missed_input_tokens: Integer`
+
+            Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+          - `type: :model_changed`
+
+            - `:model_changed`
+
+        - `class BetaCacheMissSystemChanged`
+
+          - `cache_missed_input_tokens: Integer`
+
+            Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+          - `type: :system_changed`
+
+            - `:system_changed`
+
+        - `class BetaCacheMissToolsChanged`
+
+          - `cache_missed_input_tokens: Integer`
+
+            Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+          - `type: :tools_changed`
+
+            - `:tools_changed`
+
+        - `class BetaCacheMissMessagesChanged`
+
+          - `cache_missed_input_tokens: Integer`
+
+            Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
+
+          - `type: :messages_changed`
+
+            - `:messages_changed`
+
+        - `class BetaCacheMissPreviousMessageNotFound`
+
+          - `type: :previous_message_not_found`
+
+            - `:previous_message_not_found`
+
+        - `class BetaCacheMissUnavailable`
+
+          - `type: :unavailable`
+
+            - `:unavailable`
 
     - `model: Model`
 
