@@ -533,7 +533,6 @@ The following capabilities are not currently available on Claude Platform on AWS
 - **OAuth authentication:** Not supported. Use SigV4 or API key authentication.
 - **Fast mode:** Not available on Claude Platform on AWS.
 - **OpenAI-compatible API endpoints:** Not available on Claude Platform on AWS.
-- **Workspace-level inference geography controls:** `allowed_inference_geos` and `default_inference_geo` are not available. Set `inference_geo` on each request instead.
 
 ## Data residency
 
@@ -543,7 +542,7 @@ Claude Platform on AWS supports the following inference geographies:
 - **Global:** Inference can route to any Anthropic-operated data center worldwide. Standard pricing applies.
 
 <Note>
-The AWS region your workspace is bound to controls which gateway endpoint you call and where AWS-side resources (IAM, CloudTrail, billing) are scoped. It does not pin where model inference runs. To pin inference to a specific geography, set `inference_geo` on each request.
+The AWS region your workspace is bound to controls which gateway endpoint you call and where AWS-side resources (IAM, CloudTrail, billing) are scoped. It does not pin where model inference runs. To pin inference to a specific geography, set `inference_geo` on each request or configure a workspace default.
 </Note>
 
 Set the inference geography per request with the `inference_geo` parameter:
@@ -706,9 +705,9 @@ puts message
 ```
 </CodeGroup>
 
-If you omit `inference_geo`, the request defaults to `global`.
+If you omit `inference_geo`, the request uses the workspace's `default_inference_geo` if one is configured, otherwise `global`.
 
-Workspace-level inference geography controls (`allowed_inference_geos` and `default_inference_geo`) are not available on Claude Platform on AWS. Set `inference_geo` on each request instead.
+Workspace-level inference geography controls (`allowed_inference_geos` and `default_inference_geo`) are also available on Claude Platform on AWS. See [Workspace-level restrictions](../manage-claude/manage-claude-data-residency.md#workspace-level-restrictions).
 
 ## Workspaces
 

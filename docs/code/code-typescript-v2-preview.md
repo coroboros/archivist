@@ -1,5 +1,5 @@
 ---
-title: "TypeScript SDK V2 session API (deprecated)"
+title: "TypeScript SDK V2 session API (removed)"
 source: "https://code.claude.com/docs/en/agent-sdk/typescript-v2-preview"
 category: "code"
 generated: true
@@ -8,12 +8,14 @@ generated: true
 > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt
 > Use this file to discover all available pages before exploring further.
 
-# TypeScript SDK V2 session API (deprecated)
+# TypeScript SDK V2 session API (removed)
 
-> Reference for the deprecated V2 TypeScript Agent SDK session API, with session-based send/stream patterns for multi-turn conversations.
+> Reference for the removed V2 TypeScript Agent SDK session API, with session-based send/stream patterns for multi-turn conversations.
 
 <Warning>
-  The V2 session API functions `unstable_v2_createSession`, `unstable_v2_resumeSession`, and `unstable_v2_prompt` are deprecated and will be removed in a future release. Use the [V1 `query()` API](./code-agent-sdk/typescript.md) instead.
+  The V2 session API is no longer supported. TypeScript Agent SDK 0.3.142 removes `unstable_v2_createSession`, `unstable_v2_resumeSession`, `unstable_v2_prompt`, and the `SDKSession` and `SDKSessionOptions` types.
+
+  To migrate, use the [`query()` API](./code-agent-sdk/typescript.md) and the [session options](./code-agent-sdk/sessions.md) it accepts. Pass an `AsyncIterable<SDKUserMessage>` for multi-turn conversations, or `options.resume` to continue a saved session. This page is kept for reference if you maintain code on Agent SDK 0.2.x or earlier.
 </Warning>
 
 V2 was an experimental session API that removed the need for async generators and yield coordination. Instead of managing generator state across turns, each turn was a separate `send()`/`stream()` cycle. The API surface reduced to three concepts:
@@ -24,10 +26,10 @@ V2 was an experimental session API that removed the need for async generators an
 
 ## Installation
 
-The V2 interface is included in the existing SDK package:
+Agent SDK 0.2.x is the last version that includes the V2 interface. The package version jumped from 0.2.x directly to 0.3.142, so the removal version above and the install pin below describe the same boundary. To install the last V2-compatible release, pin the major and minor version:
 
 ```bash theme={null}
-npm install @anthropic-ai/claude-agent-sdk
+npm install @anthropic-ai/claude-agent-sdk@0.2
 ```
 
 <Note>

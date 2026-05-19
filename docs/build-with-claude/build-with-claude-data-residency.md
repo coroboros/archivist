@@ -136,10 +136,6 @@ Workspace settings also support restricting which inference geos are available:
 
 These settings can be configured through the Console or the [Admin API](../manage-claude/manage-claude-admin-api.md) under the `data_residency` field.
 
-<Note>
-**Claude Platform on AWS:** Workspace-level inference geography controls (`allowed_inference_geos` and `default_inference_geo`) are not available. Use the per-request `inference_geo` parameter instead.
-</Note>
-
 ## Workspace geo
 
 Workspace geo is set when you create a workspace and can't be changed afterwards. Currently, `"us"` is the only available workspace geo.

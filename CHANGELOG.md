@@ -1,5 +1,72 @@
 # Changelog
 
+## 🤖 v1.4.2 - 19/05/2026
+
+File Changes:
+
+- Modified: `docs/agents-and-tools/agents-and-tools-README.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-computer-use-tool.md`
+- Modified: `docs/build-with-claude/build-with-claude-README.md`
+- Modified: `docs/build-with-claude/build-with-claude-api-and-data-retention.md`
+- Modified: `docs/build-with-claude/build-with-claude-claude-platform-on-aws.md`
+- Modified: `docs/build-with-claude/build-with-claude-compaction.md`
+- Modified: `docs/build-with-claude/build-with-claude-data-residency.md`
+- Modified: `docs/build-with-claude/build-with-claude-prompt-caching.md`
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-agent-loop.md`
+- Modified: `docs/code/code-agent-view.md`
+- Modified: `docs/code/code-cli-reference.md`
+- Modified: `docs/code/code-code-review.md`
+- Modified: `docs/code/code-commands.md`
+- Modified: `docs/code/code-debug-your-config.md`
+- Modified: `docs/code/code-desktop.md`
+- Modified: `docs/code/code-discover-plugins.md`
+- Modified: `docs/code/code-env-vars.md`
+- Modified: `docs/code/code-errors.md`
+- Modified: `docs/code/code-fast-mode.md`
+- Modified: `docs/code/code-features-overview.md`
+- Modified: `docs/code/code-hooks-guide.md`
+- Modified: `docs/code/code-hooks.md`
+- Modified: `docs/code/code-jetbrains.md`
+- Modified: `docs/code/code-mcp.md`
+- Modified: `docs/code/code-model-config.md`
+- Modified: `docs/code/code-overview.md`
+- Modified: `docs/code/code-permission-modes.md`
+- Modified: `docs/code/code-permissions.md`
+- Modified: `docs/code/code-plugin-dependencies.md`
+- Modified: `docs/code/code-plugin-marketplaces.md`
+- Modified: `docs/code/code-plugins-reference.md`
+- Modified: `docs/code/code-python.md`
+- Modified: `docs/code/code-remote-control.md`
+- Modified: `docs/code/code-routines.md`
+- Modified: `docs/code/code-scheduled-tasks.md`
+- Modified: `docs/code/code-sessions.md`
+- Modified: `docs/code/code-settings.md`
+- Modified: `docs/code/code-skills.md`
+- Modified: `docs/code/code-statusline.md`
+- Modified: `docs/code/code-sub-agents.md`
+- Modified: `docs/code/code-todo-tracking.md`
+- Modified: `docs/code/code-tools-reference.md`
+- Modified: `docs/code/code-typescript-v2-preview.md`
+- Modified: `docs/code/code-typescript.md`
+- Modified: `docs/code/code-ultrareview.md`
+- Modified: `docs/code/code-vs-code.md`
+- Modified: `docs/manage-claude/manage-claude-README.md`
+- Modified: `docs/manage-claude/manage-claude-api-and-data-retention.md`
+- Modified: `docs/manage-claude/manage-claude-compliance-activity-feed.md`
+- Modified: `docs/manage-claude/manage-claude-compliance-api-access.md`
+- Modified: `docs/manage-claude/manage-claude-compliance-api.md`
+- Modified: `docs/manage-claude/manage-claude-compliance-content-data.md`
+- Modified: `docs/manage-claude/manage-claude-compliance-errors.md`
+- Modified: `docs/manage-claude/manage-claude-compliance-faq.md`
+- Modified: `docs/manage-claude/manage-claude-compliance-integration-patterns.md`
+- Modified: `docs/manage-claude/manage-claude-compliance-org-data.md`
+- Modified: `docs/manage-claude/manage-claude-data-residency.md`
+- Modified: `docs/release-notes/release-notes-README.md`
+- Modified: `docs/release-notes/release-notes-overview.md`
+- Added: `docs/build-with-claude/build-with-claude-cache-diagnostics.md`
+
+
 ## 🤖 v1.4.1 - 18/05/2026
 
 File Changes:

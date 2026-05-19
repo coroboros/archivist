@@ -11,7 +11,7 @@ Choose between polling and cursor-driven Activity Feed consumption, correlate Co
 ---
 
 <Note>
-  The Compliance API is available only on the Claude Enterprise plan and must be enabled before use. See [Get access to the Compliance API](./manage-claude-compliance-api-access.md).
+  The Compliance API is enabled on request. Claude Enterprise organizations have access to the full API; Claude Console organizations have access to the [Activity Feed](./manage-claude-compliance-activity-feed.md) only. See [Get access to the Compliance API](./manage-claude-compliance-api-access.md).
 </Note>
 
 <Check>
@@ -31,6 +31,7 @@ Both patterns share these constraints:
 - Activities are queryable within 1 minute of occurring and retained for 6 years.
 - The maximum `limit` for each page is 5,000.
 - Cursor values are opaque strings that you must not parse.
+- Requests are limited to 600 per minute per [parent organization](./manage-claude-compliance-api.md#how-the-compliance-api-works), shared across every key, every linked organization, and every `/v1/compliance/*` endpoint; see [429 Too Many Requests](./manage-claude-compliance-errors.md#429-too-many-requests) for the response headers and retry contract.
 
 | Pattern | Choose when |
 | :---- | :---- |
@@ -108,7 +109,7 @@ Each `Activity` carries fields you can join against events already in your SIEM 
 
 `actor.user_id` and `actor.email_address` are present when `actor.type` is `user_actor`; check the discriminator before reading them. `user_id` is a stable, opaque identifier for the user account: it is consistent across every Compliance API endpoint and activity payload, and it does not change when the user's email or display name changes. Use `user_id`, not `email_address`, as the primary join key.
 
-Calls to the Compliance API itself emit `compliance_api_accessed` activities. Ingest these alongside other activity types so your SIEM records who queried compliance data, and when. Filter on `actor.type` `api_actor` and `actor.api_key_id` to attribute each access to a specific Compliance Access Key or Admin API key.
+Calls to the Compliance API itself emit `compliance_api_accessed` activities. Ingest these alongside other activity types so your SIEM records who queried compliance data, and when. Pass `activity_types[]=compliance_api_accessed` to scope the query, then in your client, read `actor.api_key_id` from each activity whose `actor.type` is `api_actor` to attribute the access to a specific Compliance Access Key or Admin API key.
 
 ## Plan content retention
 

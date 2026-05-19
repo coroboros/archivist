@@ -11,7 +11,13 @@ Retrieve, filter, and paginate your organization's Compliance API Activity Feed.
 ---
 
 <Note>
-  The Compliance API is available only on the Claude Enterprise plan and must be enabled before use. See [Get access to the Compliance API](./manage-claude-compliance-api-access.md).
+  The Compliance API is enabled on request. Claude Enterprise organizations have access to the full API; Claude Console organizations have access to the [Activity Feed](./manage-claude-compliance-activity-feed.md) only. See [Get access to the Compliance API](./manage-claude-compliance-api-access.md).
+</Note>
+:
+    same wording, but "Activity Feed (this page)" as plain text so this page
+    doesn't link to itself. Keep in sync with content/snippets/compliance-api-availability.mdx. */}
+<Note>
+  The Compliance API is enabled on request. Claude Enterprise organizations have access to the full API; Claude Console organizations have access to the Activity Feed (this page) only. See [Get access to the Compliance API](./manage-claude-compliance-api-access.md).
 </Note>
 
 <Check>
@@ -169,8 +175,8 @@ The `actor` field is a discriminated union. The `type` discriminator tells you w
 | `scim_directory_sync_actor` | An identity provider (such as Okta, Microsoft Entra ID, or JumpCloud) pushed a change through SCIM directory sync. | `workos_event_id`, `directory_id`, `idp_connection_type` (nullable; for example `OktaSCIMV2`, `AzureSCIMV2`) |
 
 <Note>
-  **Build forward-compatible parsers.** Pass through unrecognized `type` and
-  `actor.type` values, and ignore fields your parser does not expect, so your
+  **Build forward-compatible handlers.** Pass through unrecognized `type` and
+  `actor.type` values, and ignore fields your handler does not expect, so your
   integration keeps working when new activity types ship.
 </Note>
 
