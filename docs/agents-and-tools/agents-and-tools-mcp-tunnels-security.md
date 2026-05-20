@@ -100,7 +100,8 @@ Follow these steps to decommission a tunnel and remove all stored credentials.
         ```
       </Tab>
       <Tab title="Docker Compose">
-        ```bash
+        
+        ```bash nocheck
         sudo rm -rf data
         ```
       </Tab>

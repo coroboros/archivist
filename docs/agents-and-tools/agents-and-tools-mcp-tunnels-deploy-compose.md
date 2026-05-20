@@ -26,7 +26,7 @@ You need:
   - **Manual.** Skip programmatic access. You'll [get the tunnel token from the Console](./agents-and-tools-mcp-tunnels-console.md#get-the-connection-details), generate a CA and server certificate yourself, and [register the CA in the Console](./agents-and-tools-mcp-tunnels-console.md#add-a-ca-certificate).
 - **A host with Docker and Docker Compose** installed. The manual flow also requires `openssl` (1.1.1 or newer).
 - **Outbound network connectivity** from the host to `api.anthropic.com` (443 TCP) and the tunnel edge (7844 TCP and UDP). See the full [network requirements](./agents-and-tools-mcp-tunnels-overview.md#network-requirements).
-- **One or more MCP servers** running and reachable from the host on the addresses you'll configure under `routes`. If you don't have one yet, [use the sample server below](#optional-use-a-sample-mcp-server).
+- **One or more MCP servers** running and reachable from the host on the addresses you'll configure under `routes`. If you don't have one yet, [use the sample server](#optional-use-a-sample-mcp-server).
 
 ## Optional: Use a sample MCP server
 
@@ -51,7 +51,7 @@ if __name__ == "__main__":
 EOF
 ```
 
-The Install steps below `cd` into `mcp-tunnel/` and note where to add the corresponding service and route.
+The following Install steps `cd` into `mcp-tunnel/` and note where to add the corresponding service and route.
 
 ## Install
 
@@ -64,7 +64,8 @@ The `setup` service uses Workload Identity Federation to fetch the tunnel token,
 
 <Steps>
   <Step title="Prepare the deployment directory">
-    ```bash
+    
+    ```bash nocheck
     mkdir -p mcp-tunnel/{config,data}
     cd mcp-tunnel
     sudo chown 65532:65532 data
@@ -185,7 +186,8 @@ The `setup` service uses Workload Identity Federation to fetch the tunnel token,
 
     Retrieve your tunnel domain and export it for later steps:
 
-    ```bash
+    
+    ```bash nocheck
     export TUNNEL_DOMAIN=$(sudo cat data/tunnel-domain)
     echo "$TUNNEL_DOMAIN"
     ```
@@ -216,7 +218,8 @@ The `setup` service uses Workload Identity Federation to fetch the tunnel token,
   </Step>
 
   <Step title="Start the deployment">
-    ```bash
+    
+    ```bash nocheck
     export TUNNEL_TOKEN=$(sudo cat data/tunnel-token)
     docker compose up -d
     ```
@@ -398,7 +401,7 @@ Run the commands in this section from inside the `mcp-tunnel/` deployment direct
 
 With programmatic access, increment `--token-version` in the `setup` service command, set the Workload Identity Federation identifiers, mint a fresh OIDC JWT (it will have expired since install), and re-run setup:
 
-```bash
+```bash nocheck
 # Edit docker-compose.yaml: increment the integer in the setup service's
 # --token-version argument (for example, --token-version=1 to
 # --token-version=2). The setup binary refuses to rotate when the value

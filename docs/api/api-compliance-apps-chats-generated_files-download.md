@@ -1,10 +1,10 @@
 ---
-title: "Content"
-source: "https://platform.claude.com/docs/en/api/compliance/apps/chats/generated_files/content"
+title: "Download"
+source: "https://platform.claude.com/docs/en/api/compliance/apps/chats/generated_files/download"
 category: "api"
 generated: true
 ---
-## Content
+## Download
 
 **get** `/v1/compliance/apps/chats/generated-files/{claude_gen_file_id}/content`
 

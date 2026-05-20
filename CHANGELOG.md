@@ -1,5 +1,105 @@
 # Changelog
 
+## 🤖 v1.4.4 - 20/05/2026
+
+File Changes:
+
+- Modified: `docs/agents-and-tools/agents-and-tools-README.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-agent-skills-claude-api-skill.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-agent-skills-quickstart.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-mcp-tunnels-deploy-compose.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-mcp-tunnels-security.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-bash-tool.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-code-execution-tool.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-computer-use-tool.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-define-tools.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-overview.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-web-fetch-tool.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-web-search-tool.md`
+- Modified: `docs/api/api-README.md`
+- Modified: `docs/api/api-client-sdks.md`
+- Modified: `docs/api/api-compliance-activities-list.md`
+- Modified: `docs/api/api-compliance-activities.md`
+- Deleted: `docs/api/api-compliance-apps-artifacts-content.md`
+- Modified: `docs/api/api-compliance-apps-artifacts.md`
+- Deleted: `docs/api/api-compliance-apps-chats-files-content.md`
+- Modified: `docs/api/api-compliance-apps-chats-files-retrieve.md`
+- Modified: `docs/api/api-compliance-apps-chats-files.md`
+- Deleted: `docs/api/api-compliance-apps-chats-generated_files-content.md`
+- Modified: `docs/api/api-compliance-apps-chats-generated_files.md`
+- Modified: `docs/api/api-compliance-apps-chats-messages.md`
+- Modified: `docs/api/api-compliance-apps-chats.md`
+- Modified: `docs/api/api-compliance-apps-projects-attachments.md`
+- Modified: `docs/api/api-compliance-apps-projects-documents.md`
+- Modified: `docs/api/api-compliance-apps-projects-list.md`
+- Modified: `docs/api/api-compliance-apps-projects-retrieve.md`
+- Modified: `docs/api/api-compliance-apps-projects.md`
+- Modified: `docs/api/api-compliance-apps.md`
+- Modified: `docs/api/api-compliance-organizations-users-list.md`
+- Modified: `docs/api/api-compliance-organizations-users.md`
+- Modified: `docs/api/api-compliance-organizations.md`
+- Modified: `docs/api/api-compliance.md`
+- Modified: `docs/api/api-get-started.md`
+- Modified: `docs/api/api-sdks-cli.md`
+- Modified: `docs/api/api-sdks-java.md`
+- Modified: `docs/build-with-claude/build-with-claude-README.md`
+- Modified: `docs/build-with-claude/build-with-claude-adaptive-thinking.md`
+- Modified: `docs/build-with-claude/build-with-claude-claude-in-amazon-bedrock.md`
+- Modified: `docs/build-with-claude/build-with-claude-claude-in-microsoft-foundry.md`
+- Modified: `docs/build-with-claude/build-with-claude-claude-on-amazon-bedrock-legacy.md`
+- Modified: `docs/build-with-claude/build-with-claude-claude-on-amazon-bedrock.md`
+- Modified: `docs/build-with-claude/build-with-claude-claude-on-vertex-ai.md`
+- Modified: `docs/build-with-claude/build-with-claude-claude-platform-on-aws.md`
+- Modified: `docs/build-with-claude/build-with-claude-extended-thinking.md`
+- Modified: `docs/build-with-claude/build-with-claude-files.md`
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-agent-view.md`
+- Modified: `docs/code/code-amazon-bedrock.md`
+- Modified: `docs/code/code-changelog.md`
+- Modified: `docs/code/code-channels-reference.md`
+- Modified: `docs/code/code-claude-platform-on-aws.md`
+- Modified: `docs/code/code-cli-reference.md`
+- Modified: `docs/code/code-context-window.md`
+- Modified: `docs/code/code-costs.md`
+- Modified: `docs/code/code-custom-tools.md`
+- Modified: `docs/code/code-discover-plugins.md`
+- Modified: `docs/code/code-env-vars.md`
+- Modified: `docs/code/code-google-vertex-ai.md`
+- Modified: `docs/code/code-hooks.md`
+- Modified: `docs/code/code-mcp.md`
+- Modified: `docs/code/code-microsoft-foundry.md`
+- Modified: `docs/code/code-model-config.md`
+- Modified: `docs/code/code-modifying-system-prompts.md`
+- Modified: `docs/code/code-output-styles.md`
+- Modified: `docs/code/code-overview.md`
+- Modified: `docs/code/code-permissions.md`
+- Modified: `docs/code/code-python.md`
+- Modified: `docs/code/code-quickstart.md`
+- Modified: `docs/code/code-routines.md`
+- Modified: `docs/code/code-settings.md`
+- Modified: `docs/code/code-statusline.md`
+- Modified: `docs/code/code-sub-agents.md`
+- Modified: `docs/code/code-typescript.md`
+- Modified: `docs/general/general-README.md`
+- Modified: `docs/general/general-intro.md`
+- Modified: `docs/manage-claude/manage-claude-README.md`
+- Modified: `docs/manage-claude/manage-claude-compliance-activity-feed.md`
+- Modified: `docs/manage-claude/manage-claude-compliance-content-data.md`
+- Modified: `docs/manage-claude/manage-claude-compliance-org-data.md`
+- Modified: `docs/managed-agents/managed-agents-README.md`
+- Modified: `docs/managed-agents/managed-agents-quickstart.md`
+- Modified: `docs/managed-agents/managed-agents-self-hosted-sandboxes.md`
+- Added: `docs/api/api-compliance-apps-artifacts-download.md`
+- Added: `docs/api/api-compliance-apps-artifacts-retrieve.md`
+- Added: `docs/api/api-compliance-apps-chats-files-download.md`
+- Added: `docs/api/api-compliance-apps-chats-generated_files-download.md`
+- Added: `docs/api/api-compliance-apps-chats-generated_files-retrieve.md`
+- Added: `docs/api/api-compliance-apps-chats-messages-list.md`
+- Added: `docs/api/api-compliance-apps-projects-attachments-list.md`
+- Added: `docs/api/api-compliance-apps-projects-documents-metadata.md`
+- Added: `docs/code/code-prompt-caching.md`
+
+
 ## 🤖 v1.4.3 - 19/05/2026
 
 File Changes:

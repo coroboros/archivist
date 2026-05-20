@@ -41,6 +41,10 @@ Detailed project information including description, instructions, and counts
 
   Project creation timestamp
 
+- `deleted_at: string`
+
+  Timestamp when the project was deleted by an end user, or null otherwise
+
 - `description: string`
 
   Project description
@@ -60,6 +64,10 @@ Detailed project information including description, instructions, and counts
 - `organization_id: string`
 
   Organization identifier (tagged ID)
+
+- `organization_uuid: string`
+
+  Organization UUID this project belongs to
 
 - `updated_at: string`
 
