@@ -24,7 +24,7 @@ Claude Code's **Default** output style is the existing system prompt, designed t
 
 There are three additional built-in output styles:
 
-* **Proactive**: Claude executes immediately, makes reasonable assumptions instead of pausing for routine decisions, and prefers action over planning. This applies the same guidance as [auto mode](./code-permission-modes.md#eliminate-prompts-with-auto-mode) without changing your permission mode, so you still see permission prompts before tools run.
+* **Proactive**: Claude executes immediately, makes reasonable assumptions instead of pausing for routine decisions, and prefers action over planning. This is stronger autonomous-execution guidance than [auto mode](./code-permission-modes.md#eliminate-prompts-with-auto-mode) applies, and it works without changing your permission mode, so you still see permission prompts before tools run.
 
 * **Explanatory**: Provides educational "Insights" in between helping you complete software engineering tasks. Helps you understand implementation choices and codebase patterns.
 
@@ -120,6 +120,6 @@ Several features customize how Claude Code behaves. Output styles modify the sys
 ## Related resources
 
 * [Settings](./code-settings.md): where the `outputStyle` field lives and how settings precedence works
-* [Permission modes](./code-permission-modes.md): the Proactive style mirrors auto mode without changing your permission mode
+* [Permission modes](./code-permission-modes.md): how the Proactive style compares to auto mode
 * [Plugins](./code-plugins.md): package and distribute output styles alongside skills, hooks, and agents
 * [Debug your configuration](./code-debug-your-config.md): diagnose why an output style isn't taking effect
