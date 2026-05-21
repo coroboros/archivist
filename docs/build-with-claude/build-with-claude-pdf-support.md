@@ -94,6 +94,10 @@ Let's start with a simple example using the Messages API. You can provide PDFs t
 2. As a base64-encoded PDF in `document` content blocks
 3. By a `file_id` from the [Files API](./build-with-claude-files.md)
 
+<Note>
+On Amazon Bedrock and Vertex AI, only base64-encoded sources are currently available.
+</Note>
+
 #### Option 1: URL-based PDF document
 
 The simplest approach is to reference a PDF directly from a URL:

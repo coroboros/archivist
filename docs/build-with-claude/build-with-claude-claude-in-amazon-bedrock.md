@@ -347,23 +347,24 @@ Upgrading to a newer Claude model? In Claude Code, run `/claude-api migrate` to 
 
 ## Feature support
 
-Claude in Amazon Bedrock supports features that run inside the model. Features that require Anthropic-operated infrastructure are not available.
+For the full feature list with Amazon Bedrock availability, see [Features overview](./build-with-claude-overview.md).
 
-**Supported:**
+### Supported feature highlights
 
-- Messages API (`/anthropic/v1/messages`)
-- Prompt caching
-- Extended thinking
-- Tool use (client-defined tools)
-- Citations
-- Structured outputs
+- [Messages API](../api/api-messages-create.md) (`/anthropic/v1/messages`)
+- [Prompt caching](./build-with-claude-prompt-caching.md)
+- [Extended thinking](./build-with-claude-extended-thinking.md)
+- [Tool use](../agents-and-tools/agents-and-tools-tool-use-overview.md), including the [Bash tool](../agents-and-tools/agents-and-tools-tool-use-bash-tool.md), [Computer use tool](../agents-and-tools/agents-and-tools-tool-use-computer-use-tool.md), [Memory tool](../agents-and-tools/agents-and-tools-tool-use-memory-tool.md), and [Text editor tool](../agents-and-tools/agents-and-tools-tool-use-text-editor-tool.md)
+- [Citations](./build-with-claude-citations.md)
+- [Structured outputs](./build-with-claude-structured-outputs.md)
 
-**Not supported:**
+### Features not supported
 
-- Anthropic-defined tools (Web Search, Web Fetch, Remote MCP, Memory, Files API, Computer Use, Skills, Code Execution)
+- Input sources (URL sources for images and documents, Files API)
+- Server-side tools (code execution, web search, web fetch, advisor)
+- Agent infrastructure (Agent Skills, MCP connector, programmatic tool calling)
+- API endpoints (Message Batches, Models, Admin, Compliance, Usage and Cost)
 - Claude Managed Agents
-- Message Batches API
-- `/v1/users` endpoint
 
 ## Regions
 
@@ -411,8 +412,6 @@ Default quota is 2 million input tokens per minute (TPM). You can request up to 
 ## Data retention
 
 Data handling for this offering is governed by Amazon Bedrock. For details, see [Data protection in Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/data-protection.html).
-
-Zero data retention (ZDR) is available. To enable ZDR for your account, contact AWS support.
 
 ## Monitoring and logging
 

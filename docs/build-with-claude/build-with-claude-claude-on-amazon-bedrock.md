@@ -649,7 +649,24 @@ Turning on this service does not give AWS or Anthropic any access to your conten
 </Note>
 
 ## Feature support
-For all currently supported features on Bedrock, see [Features overview](./build-with-claude-overview.md).
+For the full feature list with Amazon Bedrock availability, see [Features overview](./build-with-claude-overview.md).
+
+### Supported feature highlights
+
+- [Messages API](../api/api-messages-create.md)
+- [Prompt caching](./build-with-claude-prompt-caching.md)
+- [Extended thinking](./build-with-claude-extended-thinking.md)
+- [Tool use](../agents-and-tools/agents-and-tools-tool-use-overview.md), including the [Bash tool](../agents-and-tools/agents-and-tools-tool-use-bash-tool.md), [Computer use tool](../agents-and-tools/agents-and-tools-tool-use-computer-use-tool.md), [Memory tool](../agents-and-tools/agents-and-tools-tool-use-memory-tool.md), and [Text editor tool](../agents-and-tools/agents-and-tools-tool-use-text-editor-tool.md)
+- [Citations](./build-with-claude-citations.md)
+- [Structured outputs](./build-with-claude-structured-outputs.md)
+
+### Features not supported
+
+- Input sources (URL sources for images and documents, Files API)
+- Server-side tools (code execution, web search, web fetch, advisor)
+- Agent infrastructure (Agent Skills, MCP connector, programmatic tool calling)
+- API endpoints (Message Batches, Models, Admin, Compliance, Usage and Cost)
+- Claude Managed Agents
 
 ### PDF support on Bedrock
 

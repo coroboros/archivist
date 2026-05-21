@@ -840,7 +840,7 @@ Changes to `tool_choice` or the presence/absence of images anywhere in the promp
 If you find that 5 minutes is too short, Anthropic also offers a 1-hour cache duration [at additional cost](#pricing).
 
 <Note>
-The 1-hour cache duration is available on the Claude API, [Claude Platform on AWS](./build-with-claude-claude-platform-on-aws.md), [Vertex AI](./build-with-claude-claude-on-vertex-ai.md), and [Microsoft Foundry](./build-with-claude-claude-in-microsoft-foundry.md) (beta). Bedrock does not support the 1-hour cache duration.
+The 1-hour cache duration is available on the Claude API, [Claude Platform on AWS](./build-with-claude-claude-platform-on-aws.md), [Amazon Bedrock](./build-with-claude-claude-in-amazon-bedrock.md), [Amazon Bedrock (legacy)](./build-with-claude-claude-on-amazon-bedrock-legacy.md), [Vertex AI](./build-with-claude-claude-on-vertex-ai.md), and [Microsoft Foundry](./build-with-claude-claude-in-microsoft-foundry.md) (beta).
 </Note>
 
 To use the extended cache, include `ttl` in the `cache_control` definition like this:

@@ -437,8 +437,7 @@ end
   	agent, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
   		Name: "Task Runner",
   		Model: anthropic.BetaManagedAgentsModelConfigParams{
-  			ID:   anthropic.BetaManagedAgentsModelClaudeOpus4_7,
-  			Type: anthropic.BetaManagedAgentsModelConfigParamsTypeModelConfig,
+  			ID: anthropic.BetaManagedAgentsModelClaudeOpus4_7,
   		},
   		Tools: []anthropic.BetaAgentNewParamsToolUnion{{
   			OfAgentToolset20260401: &anthropic.BetaManagedAgentsAgentToolset20260401Params{
@@ -468,7 +467,7 @@ end
   	defer stream.Close()
 
   	_, err = client.Beta.Sessions.Events.Send(ctx, session.ID, anthropic.BetaSessionEventSendParams{
-  		Events: []anthropic.SendEventsParamsUnion{{
+  		Events: []anthropic.BetaManagedAgentsEventParamsUnion{{
   			OfUserMessage: &anthropic.BetaManagedAgentsUserMessageEventParams{
   				Type: anthropic.BetaManagedAgentsUserMessageEventParamsTypeUserMessage,
   				Content: []anthropic.BetaManagedAgentsUserMessageEventParamsContentUnion{{
@@ -795,8 +794,7 @@ await client.Beta.Agents.Update(agent.ID, new()
 _, err = client.Beta.Agents.Update(ctx, agent.ID, anthropic.BetaAgentUpdateParams{
 	Version: agent.Version,
 	Model: anthropic.BetaManagedAgentsModelConfigParams{
-		ID:   anthropic.BetaManagedAgentsModelClaudeOpus4_7,
-		Type: anthropic.BetaManagedAgentsModelConfigParamsTypeModelConfig,
+		ID: anthropic.BetaManagedAgentsModelClaudeOpus4_7,
 	},
 })
 if err != nil {

@@ -126,8 +126,7 @@ var agent = await client.Beta.Agents.Create(new()
 agent, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
 	Name: "Coding Assistant",
 	Model: anthropic.BetaManagedAgentsModelConfigParams{
-		ID:   "claude-opus-4-7",
-		Type: anthropic.BetaManagedAgentsModelConfigParamsTypeModelConfig,
+		ID: "claude-opus-4-7",
 	},
 	Tools: []anthropic.BetaAgentNewParamsToolUnion{{
 		OfAgentToolset20260401: &anthropic.BetaManagedAgentsAgentToolset20260401Params{
@@ -142,6 +141,7 @@ agent, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
 if err != nil {
 	panic(err)
 }
+_ = agent
 ```
 
 ```java Java
@@ -360,8 +360,7 @@ var agent = await client.Beta.Agents.Create(new()
 agent, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
 	Name: "Weather Agent",
 	Model: anthropic.BetaManagedAgentsModelConfigParams{
-		ID:   "claude-opus-4-7",
-		Type: anthropic.BetaManagedAgentsModelConfigParamsTypeModelConfig,
+		ID: "claude-opus-4-7",
 	},
 	Tools: []anthropic.BetaAgentNewParamsToolUnion{{
 		OfAgentToolset20260401: &anthropic.BetaManagedAgentsAgentToolset20260401Params{
@@ -388,6 +387,7 @@ agent, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
 if err != nil {
 	panic(err)
 }
+_ = agent
 ```
 
 ```java Java

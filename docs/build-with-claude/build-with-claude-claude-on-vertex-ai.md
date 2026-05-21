@@ -10,7 +10,7 @@ Anthropic's Claude models are available through [Vertex AI](https://cloud.google
 
 ---
 
-The Vertex API for accessing Claude is nearly-identical to the [Messages API](../api/api-messages-create.md) and supports all of the same options, with two key differences:
+The Vertex API for accessing Claude is nearly identical to the [Messages API](../api/api-messages-create.md), with two key differences in request format:
 
 * In Vertex, `model` is not passed in the request body. Instead, it is specified in the Google Cloud endpoint URL.
 * In Vertex, `anthropic_version` is passed in the request body (rather than as a header), and must be set to the value `vertex-2023-10-16`.
@@ -351,6 +351,10 @@ See the [client SDKs](../api/api-client-sdks.md) and the official [Vertex AI doc
 
 Claude is also available through [Amazon Bedrock](./build-with-claude-claude-in-amazon-bedrock.md), [Claude Platform on AWS](./build-with-claude-claude-platform-on-aws.md), and [Microsoft Foundry](./build-with-claude-claude-in-microsoft-foundry.md).
 
+## Data retention
+
+Data handling for this offering is governed by Google Cloud Vertex AI. For details, see [Vertex AI and zero data retention](https://cloud.google.com/vertex-ai/generative-ai/docs/data-governance).
+
 ## Activity logging
 
 Vertex provides a [request-response logging service](https://cloud.google.com/vertex-ai/generative-ai/docs/multimodal/request-response-logging) that allows customers to log the prompts and completions associated with your usage.
@@ -362,7 +366,25 @@ Turning on this service does not give Google or Anthropic any access to your con
 </Note>
 
 ## Feature support
-For all currently supported features on Vertex AI, see [API features overview](./build-with-claude-overview.md).
+For the full feature list with Vertex AI availability, see [Features overview](./build-with-claude-overview.md).
+
+### Supported feature highlights
+
+- [Messages API](../api/api-messages-create.md)
+- [Prompt caching](./build-with-claude-prompt-caching.md)
+- [Extended thinking](./build-with-claude-extended-thinking.md)
+- [Tool use](../agents-and-tools/agents-and-tools-tool-use-overview.md), including the [Bash tool](../agents-and-tools/agents-and-tools-tool-use-bash-tool.md), [Computer use tool](../agents-and-tools/agents-and-tools-tool-use-computer-use-tool.md), [Memory tool](../agents-and-tools/agents-and-tools-tool-use-memory-tool.md), and [Text editor tool](../agents-and-tools/agents-and-tools-tool-use-text-editor-tool.md)
+- [Web search tool](../agents-and-tools/agents-and-tools-tool-use-web-search-tool.md)
+- [Citations](./build-with-claude-citations.md)
+- [Structured outputs](./build-with-claude-structured-outputs.md)
+
+### Features not supported
+
+- Input sources (URL sources for images and documents, Files API)
+- Server-side tools (code execution, web fetch, advisor)
+- Agent infrastructure (Agent Skills, MCP connector, programmatic tool calling)
+- API endpoints (Message Batches, Models, Admin, Compliance, Usage and Cost)
+- Claude Managed Agents
 
 ### Context window
 

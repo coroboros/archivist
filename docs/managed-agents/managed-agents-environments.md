@@ -81,9 +81,9 @@ console.log(`Environment ID: ${environment.id}`);
 var environment = await client.Beta.Environments.Create(new()
 {
     Name = "python-dev",
-    Config = new()
+    Config = new BetaCloudConfigParams
     {
-        Networking = new UnrestrictedNetwork(),
+        Networking = new BetaUnrestrictedNetwork(),
     },
 });
 
@@ -94,9 +94,11 @@ Console.WriteLine($"Environment ID: {environment.ID}");
 ````go
 environment, err := client.Beta.Environments.New(ctx, anthropic.BetaEnvironmentNewParams{
 	Name: "python-dev",
-	Config: anthropic.BetaCloudConfigParams{
-		Networking: anthropic.BetaCloudConfigParamsNetworkingUnion{
-			OfUnrestricted: &anthropic.UnrestrictedNetworkParam{},
+	Config: anthropic.BetaEnvironmentNewParamsConfigUnion{
+		OfCloud: &anthropic.BetaCloudConfigParams{
+			Networking: anthropic.BetaCloudConfigParamsNetworkingUnion{
+				OfUnrestricted: &anthropic.BetaUnrestrictedNetworkParam{},
+			},
 		},
 	},
 })
@@ -112,7 +114,7 @@ fmt.Printf("Environment ID: %s\n", environment.ID)
 var environment = client.beta().environments().create(EnvironmentCreateParams.builder()
     .name("python-dev")
     .config(BetaCloudConfigParams.builder()
-        .networking(UnrestrictedNetwork.builder().build())
+        .networking(BetaUnrestrictedNetwork.builder().build())
         .build())
     .build());
 IO.println("Environment ID: " + environment.id());
@@ -307,14 +309,14 @@ const environment = await client.beta.environments.create({
 var environment = await client.Beta.Environments.Create(new()
 {
     Name = "data-analysis",
-    Config = new()
+    Config = new BetaCloudConfigParams
     {
         Packages = new()
         {
             Pip = ["pandas", "numpy", "scikit-learn"],
             Npm = ["express"],
         },
-        Networking = new UnrestrictedNetwork(),
+        Networking = new BetaUnrestrictedNetwork(),
     },
 });
 ```
@@ -322,19 +324,22 @@ var environment = await client.Beta.Environments.Create(new()
 ```go Go
 environment, err := client.Beta.Environments.New(ctx, anthropic.BetaEnvironmentNewParams{
 	Name: "data-analysis",
-	Config: anthropic.BetaCloudConfigParams{
-		Packages: anthropic.BetaPackagesParams{
-			Pip: []string{"pandas", "numpy", "scikit-learn"},
-			Npm: []string{"express"},
-		},
-		Networking: anthropic.BetaCloudConfigParamsNetworkingUnion{
-			OfUnrestricted: &anthropic.UnrestrictedNetworkParam{},
+	Config: anthropic.BetaEnvironmentNewParamsConfigUnion{
+		OfCloud: &anthropic.BetaCloudConfigParams{
+			Packages: anthropic.BetaPackagesParams{
+				Pip: []string{"pandas", "numpy", "scikit-learn"},
+				Npm: []string{"express"},
+			},
+			Networking: anthropic.BetaCloudConfigParamsNetworkingUnion{
+				OfUnrestricted: &anthropic.BetaUnrestrictedNetworkParam{},
+			},
 		},
 	},
 })
 if err != nil {
 	panic(err)
 }
+_ = environment
 ```
 
 ```java Java
@@ -345,7 +350,7 @@ var environment = client.beta().environments().create(EnvironmentCreateParams.bu
             .pip(List.of("pandas", "numpy", "scikit-learn"))
             .npm(List.of("express"))
             .build())
-        .networking(UnrestrictedNetwork.builder().build())
+        .networking(BetaUnrestrictedNetwork.builder().build())
         .build())
     .build());
 ```
@@ -461,6 +466,7 @@ config := anthropic.BetaCloudConfigParams{
 		},
 	},
 }
+_ = config
 ```
 
 ```java Java

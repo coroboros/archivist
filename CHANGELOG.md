@@ -1,5 +1,68 @@
 # Changelog
 
+## 🤖 v1.4.6 - 21/05/2026
+
+File Changes:
+
+- Modified: `docs/agents-and-tools/agents-and-tools-README.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-mcp-tunnels-overview.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-fine-grained-tool-streaming.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-web-fetch-tool.md`
+- Modified: `docs/api/api-README.md`
+- Modified: `docs/api/api-sdks-cli.md`
+- Modified: `docs/api/api-sdks-php.md`
+- Modified: `docs/build-with-claude/build-with-claude-README.md`
+- Modified: `docs/build-with-claude/build-with-claude-api-and-data-retention.md`
+- Modified: `docs/build-with-claude/build-with-claude-batch-processing.md`
+- Modified: `docs/build-with-claude/build-with-claude-claude-in-amazon-bedrock.md`
+- Modified: `docs/build-with-claude/build-with-claude-claude-in-microsoft-foundry.md`
+- Modified: `docs/build-with-claude/build-with-claude-claude-on-amazon-bedrock-legacy.md`
+- Modified: `docs/build-with-claude/build-with-claude-claude-on-amazon-bedrock.md`
+- Modified: `docs/build-with-claude/build-with-claude-claude-on-vertex-ai.md`
+- Modified: `docs/build-with-claude/build-with-claude-claude-platform-on-aws.md`
+- Modified: `docs/build-with-claude/build-with-claude-fast-mode.md`
+- Modified: `docs/build-with-claude/build-with-claude-overview.md`
+- Modified: `docs/build-with-claude/build-with-claude-pdf-support.md`
+- Modified: `docs/build-with-claude/build-with-claude-prompt-caching.md`
+- Modified: `docs/build-with-claude/build-with-claude-vision.md`
+- Modified: `docs/build-with-claude/build-with-claude-workspaces.md`
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-changelog.md`
+- Modified: `docs/code/code-commands.md`
+- Modified: `docs/code/code-desktop-quickstart.md`
+- Modified: `docs/code/code-desktop.md`
+- Modified: `docs/code/code-hooks.md`
+- Modified: `docs/code/code-how-claude-code-works.md`
+- Modified: `docs/code/code-mcp.md`
+- Modified: `docs/code/code-overview.md`
+- Modified: `docs/code/code-permissions.md`
+- Modified: `docs/code/code-scheduled-tasks.md`
+- Modified: `docs/code/code-tools-reference.md`
+- Modified: `docs/manage-claude/manage-claude-README.md`
+- Modified: `docs/manage-claude/manage-claude-api-and-data-retention.md`
+- Modified: `docs/manage-claude/manage-claude-workspaces.md`
+- Modified: `docs/managed-agents/managed-agents-README.md`
+- Modified: `docs/managed-agents/managed-agents-agent-setup.md`
+- Modified: `docs/managed-agents/managed-agents-environments.md`
+- Modified: `docs/managed-agents/managed-agents-events-and-streaming.md`
+- Modified: `docs/managed-agents/managed-agents-files.md`
+- Modified: `docs/managed-agents/managed-agents-github.md`
+- Modified: `docs/managed-agents/managed-agents-mcp-connector.md`
+- Modified: `docs/managed-agents/managed-agents-memory.md`
+- Modified: `docs/managed-agents/managed-agents-migration.md`
+- Modified: `docs/managed-agents/managed-agents-multi-agent.md`
+- Modified: `docs/managed-agents/managed-agents-overview.md`
+- Modified: `docs/managed-agents/managed-agents-permission-policies.md`
+- Modified: `docs/managed-agents/managed-agents-quickstart.md`
+- Modified: `docs/managed-agents/managed-agents-self-hosted-sandboxes.md`
+- Modified: `docs/managed-agents/managed-agents-skills.md`
+- Modified: `docs/managed-agents/managed-agents-tools.md`
+- Modified: `docs/managed-agents/managed-agents-vaults.md`
+- Added: `docs/code/code-plugin-hints.md`
+- Added: `docs/code/code-prompt-library.md`
+- Added: `docs/code/code-session-storage.md`
+
+
 ## 🤖 v1.4.5 - 20/05/2026
 
 File Changes:

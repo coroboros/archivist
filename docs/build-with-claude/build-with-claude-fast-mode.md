@@ -814,7 +814,7 @@ message = create_message_with_fast_fallback(
 - **TTFT:** Fast mode's benefits are focused on output tokens per second (OTPS), not time to first token (TTFT).
 - **Batch API:** Fast mode is not available with the [Batch API](./build-with-claude-batch-processing.md).
 - **Priority Tier:** Fast mode is not available with [Priority Tier](../api/api-service-tiers.md).
-- **Claude Platform on AWS:** Fast mode is not available on [Claude Platform on AWS](./build-with-claude-claude-platform-on-aws.md).
+- **Claude Platform on AWS:** Fast mode is not currently available on [Claude Platform on AWS](./build-with-claude-claude-platform-on-aws.md).
 
 ## Next steps
 
