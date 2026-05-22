@@ -1,5 +1,50 @@
 # Changelog
 
+## 🤖 v1.4.8 - 22/05/2026
+
+File Changes:
+
+- Modified: `docs/agents-and-tools/agents-and-tools-README.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-mcp-tunnels-console.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-mcp-tunnels-deploy-compose.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-mcp-tunnels-deploy-helm.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-mcp-tunnels-quickstart.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-mcp-tunnels-reference.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-mcp-tunnels-security.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-mcp-tunnels-troubleshooting.md`
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-admin-setup.md`
+- Modified: `docs/code/code-agent-view.md`
+- Modified: `docs/code/code-auto-mode-config.md`
+- Modified: `docs/code/code-changelog.md`
+- Modified: `docs/code/code-commands.md`
+- Modified: `docs/code/code-desktop.md`
+- Modified: `docs/code/code-devcontainer.md`
+- Modified: `docs/code/code-env-vars.md`
+- Modified: `docs/code/code-errors.md`
+- Modified: `docs/code/code-features-overview.md`
+- Modified: `docs/code/code-glossary.md`
+- Modified: `docs/code/code-interactive-mode.md`
+- Modified: `docs/code/code-keybindings.md`
+- Modified: `docs/code/code-model-config.md`
+- Modified: `docs/code/code-permission-modes.md`
+- Modified: `docs/code/code-permissions.md`
+- Modified: `docs/code/code-plugin-marketplaces.md`
+- Modified: `docs/code/code-plugins.md`
+- Modified: `docs/code/code-quickstart.md`
+- Modified: `docs/code/code-sandboxing.md`
+- Modified: `docs/code/code-scheduled-tasks.md`
+- Modified: `docs/code/code-security.md`
+- Modified: `docs/code/code-server-managed-settings.md`
+- Modified: `docs/code/code-settings.md`
+- Modified: `docs/code/code-setup.md`
+- Modified: `docs/code/code-tools-reference.md`
+- Modified: `docs/code/code-troubleshoot-install.md`
+- Modified: `docs/code/code-typescript.md`
+- Added: `docs/code/code-managed-mcp.md`
+- Added: `docs/code/code-sandbox-environments.md`
+
+
 ## 🤖 v1.4.7 - 21/05/2026
 
 File Changes:

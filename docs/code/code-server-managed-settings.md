@@ -129,7 +129,7 @@ Most [settings keys](./code-settings.md#available-settings) work in any scope. A
 Server-managed settings have the following limitations:
 
 * Settings apply uniformly to all users in the organization. Per-group configurations are not yet supported.
-* [MCP server configurations](./code-mcp.md#managed-mcp-configuration) cannot be distributed through server-managed settings.
+* A [`managed-mcp.json`](./code-managed-mcp.md) file cannot be distributed through server-managed settings. Deliver the `allowedMcpServers` and `deniedMcpServers` policy keys there instead.
 * Settings restricted to OS-level policy sources, such as `policyHelper` and `wslInheritsWindowsSettings`, are not honored. Deploy them through MDM or a system `managed-settings.json` file instead.
 
 ## Settings delivery
