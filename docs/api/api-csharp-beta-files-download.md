@@ -1,10 +1,10 @@
 ---
-title: "Download"
+title: "Download File"
 source: "https://platform.claude.com/docs/en/api/csharp/beta/files/download"
 category: "api"
 generated: true
 ---
-## Download
+## Download File
 
 `HttpResponse Beta.Files.Download(FileDownloadParamsparameters, CancellationTokencancellationToken = default)`
 

@@ -1,10 +1,10 @@
 ---
-title: "Delete"
+title: "Delete a memory store"
 source: "https://platform.claude.com/docs/en/api/java/beta/memory_stores/delete"
 category: "api"
 generated: true
 ---
-## Delete
+## Delete a memory store
 
 `BetaManagedAgentsDeletedMemoryStore beta().memoryStores().delete(MemoryStoreDeleteParamsparams = MemoryStoreDeleteParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
 
@@ -104,5 +104,14 @@ public final class Main {
 
         BetaManagedAgentsDeletedMemoryStore betaManagedAgentsDeletedMemoryStore = client.beta().memoryStores().delete("memory_store_id");
     }
+}
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "type": "memory_store_deleted"
 }
 ```

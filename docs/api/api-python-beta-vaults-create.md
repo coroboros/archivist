@@ -1,10 +1,10 @@
 ---
-title: "Create"
+title: "Create Vault"
 source: "https://platform.claude.com/docs/en/api/python/beta/vaults/create"
 category: "api"
 generated: true
 ---
-## Create
+## Create Vault
 
 `beta.vaults.create(VaultCreateParams**kwargs)  -> BetaManagedAgentsVault`
 
@@ -127,4 +127,20 @@ beta_managed_agents_vault = client.beta.vaults.create(
     display_name="Example vault",
 )
 print(beta_managed_agents_vault.id)
+```
+
+#### Response
+
+```json
+{
+  "id": "vlt_011CZkZDLs7fYzm1hXNPeRjv",
+  "archived_at": null,
+  "created_at": "2026-03-15T10:00:00Z",
+  "display_name": "Example vault",
+  "metadata": {
+    "environment": "production"
+  },
+  "type": "vault",
+  "updated_at": "2026-03-15T10:00:00Z"
+}
 ```

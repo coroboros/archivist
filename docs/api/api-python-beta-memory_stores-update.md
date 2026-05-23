@@ -1,10 +1,10 @@
 ---
-title: "Update"
+title: "Update a memory store"
 source: "https://platform.claude.com/docs/en/api/python/beta/memory_stores/update"
 category: "api"
 generated: true
 ---
-## Update
+## Update a memory store
 
 `beta.memory_stores.update(strmemory_store_id, MemoryStoreUpdateParams**kwargs)  -> BetaManagedAgentsMemoryStore`
 
@@ -137,4 +137,21 @@ beta_managed_agents_memory_store = client.beta.memory_stores.update(
     memory_store_id="memory_store_id",
 )
 print(beta_managed_agents_memory_store.id)
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "name": "name",
+  "type": "memory_store",
+  "updated_at": "2019-12-27T18:11:19.117Z",
+  "archived_at": "2019-12-27T18:11:19.117Z",
+  "description": "description",
+  "metadata": {
+    "foo": "string"
+  }
+}
 ```

@@ -1,10 +1,10 @@
 ---
-title: "Stats"
+title: "Get Queue Statistics"
 source: "https://platform.claude.com/docs/en/api/cli/beta/environments/work/stats"
 category: "api"
 generated: true
 ---
-## Stats
+## Get Queue Statistics
 
 `$ ant beta:environments:work stats`
 
@@ -54,4 +54,16 @@ Get statistics about the work queue for an environment.
 ant beta:environments:work stats \
   --api-key my-anthropic-api-key \
   --environment-id env_011CZkZ9X2dpNyB7HsEFoRfW
+```
+
+#### Response
+
+```json
+{
+  "depth": 0,
+  "oldest_queued_at": "oldest_queued_at",
+  "pending": 0,
+  "type": "work_queue_stats",
+  "workers_polling": 0
+}
 ```

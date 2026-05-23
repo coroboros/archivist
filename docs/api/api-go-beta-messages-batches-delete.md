@@ -1,10 +1,10 @@
 ---
-title: "Delete"
+title: "Delete a Message Batch"
 source: "https://platform.claude.com/docs/en/api/go/beta/messages/batches/delete"
 category: "api"
 generated: true
 ---
-## Delete
+## Delete a Message Batch
 
 `client.Beta.Messages.Batches.Delete(ctx, messageBatchID, body) (*BetaDeletedMessageBatch, error)`
 
@@ -126,5 +126,14 @@ func main() {
     panic(err.Error())
   }
   fmt.Printf("%+v\n", betaDeletedMessageBatch.ID)
+}
+```
+
+#### Response
+
+```json
+{
+  "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
+  "type": "message_batch_deleted"
 }
 ```

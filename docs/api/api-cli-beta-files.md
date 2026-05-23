@@ -6,7 +6,7 @@ generated: true
 ---
 # Files
 
-## Upload
+## Upload File
 
 `$ ant beta:files upload`
 
@@ -80,7 +80,25 @@ ant beta:files upload \
   --file 'Example data'
 ```
 
-## List
+#### Response
+
+```json
+{
+  "id": "file_011CNha8iCJcU1wXNR6q4V8w",
+  "created_at": "2025-04-15T18:37:24.100435Z",
+  "filename": "document.pdf",
+  "mime_type": "application/pdf",
+  "size_bytes": 102400,
+  "type": "file",
+  "downloadable": false,
+  "scope": {
+    "id": "id",
+    "type": "session"
+  }
+}
+```
+
+## List Files
 
 `$ ant beta:files list`
 
@@ -183,7 +201,32 @@ ant beta:files list \
   --api-key my-anthropic-api-key
 ```
 
-## Download
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "id": "file_011CNha8iCJcU1wXNR6q4V8w",
+      "created_at": "2025-04-15T18:37:24.100435Z",
+      "filename": "document.pdf",
+      "mime_type": "application/pdf",
+      "size_bytes": 102400,
+      "type": "file",
+      "downloadable": false,
+      "scope": {
+        "id": "id",
+        "type": "session"
+      }
+    }
+  ],
+  "first_id": "file_011CNha8iCJcU1wXNR6q4V8w",
+  "has_more": true,
+  "last_id": "file_013Zva2CMHLNnXjNJJKqJ2EF"
+}
+```
+
+## Download File
 
 `$ ant beta:files download`
 
@@ -213,7 +256,7 @@ ant beta:files download \
   --file-id file_id
 ```
 
-## Retrieve Metadata
+## Get File Metadata
 
 `$ ant beta:files retrieve-metadata`
 
@@ -287,7 +330,25 @@ ant beta:files retrieve-metadata \
   --file-id file_id
 ```
 
-## Delete
+#### Response
+
+```json
+{
+  "id": "file_011CNha8iCJcU1wXNR6q4V8w",
+  "created_at": "2025-04-15T18:37:24.100435Z",
+  "filename": "document.pdf",
+  "mime_type": "application/pdf",
+  "size_bytes": 102400,
+  "type": "file",
+  "downloadable": false,
+  "scope": {
+    "id": "id",
+    "type": "session"
+  }
+}
+```
+
+## Delete File
 
 `$ ant beta:files delete`
 
@@ -327,6 +388,15 @@ Delete File
 ant beta:files delete \
   --api-key my-anthropic-api-key \
   --file-id file_id
+```
+
+#### Response
+
+```json
+{
+  "id": "file_011CNha8iCJcU1wXNR6q4V8w",
+  "type": "file_deleted"
+}
 ```
 
 ## Domain Types

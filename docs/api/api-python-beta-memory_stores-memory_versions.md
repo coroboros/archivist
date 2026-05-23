@@ -6,7 +6,7 @@ generated: true
 ---
 # Memory Versions
 
-## List
+## List memory versions
 
 `beta.memory_stores.memory_versions.list(strmemory_store_id, MemoryVersionListParams**kwargs)  -> SyncPageCursor[BetaManagedAgentsMemoryVersion]`
 
@@ -222,42 +222,6 @@ List memory versions
 
     Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](https://platform.claude.com/docs/en/api/sessions-retrieve.md).
 
-    - `class BetaManagedAgentsSessionActor: …`
-
-      Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
-
-      - `session_id: str`
-
-        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](https://platform.claude.com/docs/en/api/sessions-retrieve.md) for further provenance.
-
-      - `type: Literal["session_actor"]`
-
-        - `"session_actor"`
-
-    - `class BetaManagedAgentsAPIActor: …`
-
-      Attribution for a write made directly via the public API (outside of any session).
-
-      - `api_key_id: str`
-
-        ID of the API key that performed the write. This identifies the key, not the secret.
-
-      - `type: Literal["api_actor"]`
-
-        - `"api_actor"`
-
-    - `class BetaManagedAgentsUserActor: …`
-
-      Attribution for a write made by a human user through the Anthropic Console.
-
-      - `type: Literal["user_actor"]`
-
-        - `"user_actor"`
-
-      - `user_id: str`
-
-        ID of the user who performed the write (a `user_...` value).
-
 ### Example
 
 ```python
@@ -274,7 +238,38 @@ page = page.data[0]
 print(page.id)
 ```
 
-## Retrieve
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "id": "id",
+      "created_at": "2019-12-27T18:11:19.117Z",
+      "memory_id": "memory_id",
+      "memory_store_id": "memory_store_id",
+      "operation": "created",
+      "type": "memory_version",
+      "content": "content",
+      "content_sha256": "content_sha256",
+      "content_size_bytes": 0,
+      "created_by": {
+        "session_id": "x",
+        "type": "session_actor"
+      },
+      "path": "path",
+      "redacted_at": "2019-12-27T18:11:19.117Z",
+      "redacted_by": {
+        "session_id": "x",
+        "type": "session_actor"
+      }
+    }
+  ],
+  "next_page": "next_page"
+}
+```
+
+## Retrieve a memory version
 
 `beta.memory_stores.memory_versions.retrieve(strmemory_version_id, MemoryVersionRetrieveParams**kwargs)  -> BetaManagedAgentsMemoryVersion`
 
@@ -454,42 +449,6 @@ Retrieve a memory version
 
     Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](https://platform.claude.com/docs/en/api/sessions-retrieve.md).
 
-    - `class BetaManagedAgentsSessionActor: …`
-
-      Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
-
-      - `session_id: str`
-
-        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](https://platform.claude.com/docs/en/api/sessions-retrieve.md) for further provenance.
-
-      - `type: Literal["session_actor"]`
-
-        - `"session_actor"`
-
-    - `class BetaManagedAgentsAPIActor: …`
-
-      Attribution for a write made directly via the public API (outside of any session).
-
-      - `api_key_id: str`
-
-        ID of the API key that performed the write. This identifies the key, not the secret.
-
-      - `type: Literal["api_actor"]`
-
-        - `"api_actor"`
-
-    - `class BetaManagedAgentsUserActor: …`
-
-      Attribution for a write made by a human user through the Anthropic Console.
-
-      - `type: Literal["user_actor"]`
-
-        - `"user_actor"`
-
-      - `user_id: str`
-
-        ID of the user who performed the write (a `user_...` value).
-
 ### Example
 
 ```python
@@ -506,7 +465,33 @@ beta_managed_agents_memory_version = client.beta.memory_stores.memory_versions.r
 print(beta_managed_agents_memory_version.id)
 ```
 
-## Redact
+#### Response
+
+```json
+{
+  "id": "id",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "memory_id": "memory_id",
+  "memory_store_id": "memory_store_id",
+  "operation": "created",
+  "type": "memory_version",
+  "content": "content",
+  "content_sha256": "content_sha256",
+  "content_size_bytes": 0,
+  "created_by": {
+    "session_id": "x",
+    "type": "session_actor"
+  },
+  "path": "path",
+  "redacted_at": "2019-12-27T18:11:19.117Z",
+  "redacted_by": {
+    "session_id": "x",
+    "type": "session_actor"
+  }
+}
+```
+
+## Redact a memory version
 
 `beta.memory_stores.memory_versions.redact(strmemory_version_id, MemoryVersionRedactParams**kwargs)  -> BetaManagedAgentsMemoryVersion`
 
@@ -678,42 +663,6 @@ Redact a memory version
 
     Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](https://platform.claude.com/docs/en/api/sessions-retrieve.md).
 
-    - `class BetaManagedAgentsSessionActor: …`
-
-      Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
-
-      - `session_id: str`
-
-        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](https://platform.claude.com/docs/en/api/sessions-retrieve.md) for further provenance.
-
-      - `type: Literal["session_actor"]`
-
-        - `"session_actor"`
-
-    - `class BetaManagedAgentsAPIActor: …`
-
-      Attribution for a write made directly via the public API (outside of any session).
-
-      - `api_key_id: str`
-
-        ID of the API key that performed the write. This identifies the key, not the secret.
-
-      - `type: Literal["api_actor"]`
-
-        - `"api_actor"`
-
-    - `class BetaManagedAgentsUserActor: …`
-
-      Attribution for a write made by a human user through the Anthropic Console.
-
-      - `type: Literal["user_actor"]`
-
-        - `"user_actor"`
-
-      - `user_id: str`
-
-        ID of the user who performed the write (a `user_...` value).
-
 ### Example
 
 ```python
@@ -728,6 +677,32 @@ beta_managed_agents_memory_version = client.beta.memory_stores.memory_versions.r
     memory_store_id="memory_store_id",
 )
 print(beta_managed_agents_memory_version.id)
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "memory_id": "memory_id",
+  "memory_store_id": "memory_store_id",
+  "operation": "created",
+  "type": "memory_version",
+  "content": "content",
+  "content_sha256": "content_sha256",
+  "content_size_bytes": 0,
+  "created_by": {
+    "session_id": "x",
+    "type": "session_actor"
+  },
+  "path": "path",
+  "redacted_at": "2019-12-27T18:11:19.117Z",
+  "redacted_by": {
+    "session_id": "x",
+    "type": "session_actor"
+  }
+}
 ```
 
 ## Domain Types
@@ -887,42 +862,6 @@ print(beta_managed_agents_memory_version.id)
   - `redacted_by: Optional[BetaManagedAgentsActor]`
 
     Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](https://platform.claude.com/docs/en/api/sessions-retrieve.md).
-
-    - `class BetaManagedAgentsSessionActor: …`
-
-      Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
-
-      - `session_id: str`
-
-        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](https://platform.claude.com/docs/en/api/sessions-retrieve.md) for further provenance.
-
-      - `type: Literal["session_actor"]`
-
-        - `"session_actor"`
-
-    - `class BetaManagedAgentsAPIActor: …`
-
-      Attribution for a write made directly via the public API (outside of any session).
-
-      - `api_key_id: str`
-
-        ID of the API key that performed the write. This identifies the key, not the secret.
-
-      - `type: Literal["api_actor"]`
-
-        - `"api_actor"`
-
-    - `class BetaManagedAgentsUserActor: …`
-
-      Attribution for a write made by a human user through the Anthropic Console.
-
-      - `type: Literal["user_actor"]`
-
-        - `"user_actor"`
-
-      - `user_id: str`
-
-        ID of the user who performed the write (a `user_...` value).
 
 ### Beta Managed Agents Memory Version Operation
 

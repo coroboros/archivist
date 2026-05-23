@@ -1,10 +1,10 @@
 ---
-title: "MCP OAuth Validate"
+title: "Validate Credential"
 source: "https://platform.claude.com/docs/en/api/cli/beta/vaults/credentials/mcp_oauth_validate"
 category: "api"
 generated: true
 ---
-## MCP OAuth Validate
+## Validate Credential
 
 `$ ant beta:vaults:credentials mcp-oauth-validate`
 
@@ -133,4 +133,35 @@ ant beta:vaults:credentials mcp-oauth-validate \
   --api-key my-anthropic-api-key \
   --vault-id vlt_011CZkZDLs7fYzm1hXNPeRjv \
   --credential-id vcrd_011CZkZEMt8gZan2iYOQfSkw
+```
+
+#### Response
+
+```json
+{
+  "credential_id": "vcrd_011CZkZEMt8gZan2iYOQfSkw",
+  "has_refresh_token": true,
+  "mcp_probe": {
+    "http_response": {
+      "body": "body",
+      "body_truncated": true,
+      "content_type": "content_type",
+      "status_code": 0
+    },
+    "method": "method"
+  },
+  "refresh": {
+    "http_response": {
+      "body": "body",
+      "body_truncated": true,
+      "content_type": "content_type",
+      "status_code": 0
+    },
+    "status": "succeeded"
+  },
+  "status": "valid",
+  "type": "vault_credential_validation",
+  "validated_at": "2026-03-15T10:00:00Z",
+  "vault_id": "vlt_011CZkZDLs7fYzm1hXNPeRjv"
+}
 ```

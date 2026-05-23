@@ -1,10 +1,10 @@
 ---
-title: "Heartbeat"
+title: "Record Heartbeat"
 source: "https://platform.claude.com/docs/en/api/csharp/beta/environments/work/heartbeat"
 category: "api"
 generated: true
 ---
-## Heartbeat
+## Record Heartbeat
 
 `BetaSelfHostedWorkHeartbeatResponse Beta.Environments.Work.Heartbeat(WorkHeartbeatParamsparameters, CancellationTokencancellationToken = default)`
 
@@ -136,4 +136,16 @@ WorkHeartbeatParams parameters = new()
 var betaSelfHostedWorkHeartbeatResponse = await client.Beta.Environments.Work.Heartbeat(parameters);
 
 Console.WriteLine(betaSelfHostedWorkHeartbeatResponse);
+```
+
+#### Response
+
+```json
+{
+  "last_heartbeat": "last_heartbeat",
+  "lease_extended": true,
+  "state": "queued",
+  "ttl_seconds": 0,
+  "type": "work_heartbeat"
+}
 ```

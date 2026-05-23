@@ -1,10 +1,10 @@
 ---
-title: "Delete"
+title: "Delete a Message Batch"
 source: "https://platform.claude.com/docs/en/api/beta/messages/batches/delete"
 category: "api"
 generated: true
 ---
-## Delete
+## Delete a Message Batch
 
 **delete** `/v1/messages/batches/{message_batch_id}`
 
@@ -26,9 +26,9 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
   Optional header to specify the beta version(s) you want to use.
 
-  - `UnionMember0 = string`
+  - `string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -82,7 +82,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
 ### Returns
 
-- `BetaDeletedMessageBatch = object { id, type }`
+- `BetaDeletedMessageBatch object { id, type }`
 
   - `id: string`
 
@@ -104,4 +104,13 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: message-batches-2024-09-24' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
+```
+
+#### Response
+
+```json
+{
+  "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
+  "type": "message_batch_deleted"
+}
 ```

@@ -6,7 +6,7 @@ generated: true
 ---
 # Files
 
-## Upload
+## Upload File
 
 `client.Beta.Files.Upload(ctx, params) (*FileMetadata, error)`
 
@@ -161,7 +161,25 @@ func main() {
 }
 ```
 
-## List
+#### Response
+
+```json
+{
+  "id": "file_011CNha8iCJcU1wXNR6q4V8w",
+  "created_at": "2025-04-15T18:37:24.100435Z",
+  "filename": "document.pdf",
+  "mime_type": "application/pdf",
+  "size_bytes": 102400,
+  "type": "file",
+  "downloadable": false,
+  "scope": {
+    "id": "id",
+    "type": "session"
+  }
+}
+```
+
+## List Files
 
 `client.Beta.Files.List(ctx, params) (*Page[FileMetadata], error)`
 
@@ -328,7 +346,32 @@ func main() {
 }
 ```
 
-## Download
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "id": "file_011CNha8iCJcU1wXNR6q4V8w",
+      "created_at": "2025-04-15T18:37:24.100435Z",
+      "filename": "document.pdf",
+      "mime_type": "application/pdf",
+      "size_bytes": 102400,
+      "type": "file",
+      "downloadable": false,
+      "scope": {
+        "id": "id",
+        "type": "session"
+      }
+    }
+  ],
+  "first_id": "file_011CNha8iCJcU1wXNR6q4V8w",
+  "has_more": true,
+  "last_id": "file_013Zva2CMHLNnXjNJJKqJ2EF"
+}
+```
+
+## Download File
 
 `client.Beta.Files.Download(ctx, fileID, query) (*Response, error)`
 
@@ -437,7 +480,7 @@ func main() {
 }
 ```
 
-## Retrieve Metadata
+## Get File Metadata
 
 `client.Beta.Files.GetMetadata(ctx, fileID, query) (*FileMetadata, error)`
 
@@ -594,7 +637,25 @@ func main() {
 }
 ```
 
-## Delete
+#### Response
+
+```json
+{
+  "id": "file_011CNha8iCJcU1wXNR6q4V8w",
+  "created_at": "2025-04-15T18:37:24.100435Z",
+  "filename": "document.pdf",
+  "mime_type": "application/pdf",
+  "size_bytes": 102400,
+  "type": "file",
+  "downloadable": false,
+  "scope": {
+    "id": "id",
+    "type": "session"
+  }
+}
+```
+
+## Delete File
 
 `client.Beta.Files.Delete(ctx, fileID, body) (*DeletedFile, error)`
 
@@ -712,6 +773,15 @@ func main() {
     panic(err.Error())
   }
   fmt.Printf("%+v\n", deletedFile.ID)
+}
+```
+
+#### Response
+
+```json
+{
+  "id": "file_011CNha8iCJcU1wXNR6q4V8w",
+  "type": "file_deleted"
 }
 ```
 

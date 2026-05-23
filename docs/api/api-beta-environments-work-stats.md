@@ -1,10 +1,10 @@
 ---
-title: "Stats"
+title: "Get Queue Statistics"
 source: "https://platform.claude.com/docs/en/api/beta/environments/work/stats"
 category: "api"
 generated: true
 ---
-## Stats
+## Get Queue Statistics
 
 **get** `/v1/environments/{environment_id}/work/stats`
 
@@ -20,9 +20,9 @@ Get statistics about the work queue for an environment.
 
   Optional header to specify the beta version(s) you want to use.
 
-  - `UnionMember0 = string`
+  - `string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -76,7 +76,7 @@ Get statistics about the work queue for an environment.
 
 ### Returns
 
-- `BetaSelfHostedWorkQueueStats = object { depth, oldest_queued_at, pending, 2 more }`
+- `BetaSelfHostedWorkQueueStats object { depth, oldest_queued_at, pending, 2 more }`
 
   Statistics about the work queue for an environment.
 
@@ -111,4 +111,16 @@ curl https://api.anthropic.com/v1/environments/$ENVIRONMENT_ID/work/stats \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: managed-agents-2026-04-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
+```
+
+#### Response
+
+```json
+{
+  "depth": 0,
+  "oldest_queued_at": "oldest_queued_at",
+  "pending": 0,
+  "type": "work_queue_stats",
+  "workers_polling": 0
+}
 ```

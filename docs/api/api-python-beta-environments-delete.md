@@ -1,10 +1,10 @@
 ---
-title: "Delete"
+title: "Delete Environment"
 source: "https://platform.claude.com/docs/en/api/python/beta/environments/delete"
 category: "api"
 generated: true
 ---
-## Delete
+## Delete Environment
 
 `beta.environments.delete(strenvironment_id, EnvironmentDeleteParams**kwargs)  -> BetaEnvironmentDeleteResponse`
 
@@ -103,4 +103,13 @@ beta_environment_delete_response = client.beta.environments.delete(
     environment_id="env_011CZkZ9X2dpNyB7HsEFoRfW",
 )
 print(beta_environment_delete_response.id)
+```
+
+#### Response
+
+```json
+{
+  "id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
+  "type": "environment_deleted"
+}
 ```

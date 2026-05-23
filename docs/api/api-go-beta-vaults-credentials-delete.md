@@ -1,10 +1,10 @@
 ---
-title: "Delete"
+title: "Delete Credential"
 source: "https://platform.claude.com/docs/en/api/go/beta/vaults/credentials/delete"
 category: "api"
 generated: true
 ---
-## Delete
+## Delete Credential
 
 `client.Beta.Vaults.Credentials.Delete(ctx, credentialID, params) (*BetaManagedAgentsDeletedCredential, error)`
 
@@ -122,5 +122,14 @@ func main() {
     panic(err.Error())
   }
   fmt.Printf("%+v\n", betaManagedAgentsDeletedCredential.ID)
+}
+```
+
+#### Response
+
+```json
+{
+  "id": "vcrd_011CZkZEMt8gZan2iYOQfSkw",
+  "type": "vault_credential_deleted"
 }
 ```

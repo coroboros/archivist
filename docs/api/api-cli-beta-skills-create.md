@@ -1,10 +1,10 @@
 ---
-title: "Create"
+title: "Create Skill"
 source: "https://platform.claude.com/docs/en/api/cli/beta/skills/create"
 category: "api"
 generated: true
 ---
-## Create
+## Create Skill
 
 `$ ant beta:skills create`
 
@@ -80,4 +80,18 @@ Create Skill
 ```cli
 ant beta:skills create \
   --api-key my-anthropic-api-key
+```
+
+#### Response
+
+```json
+{
+  "id": "skill_01JAbcdefghijklmnopqrstuvw",
+  "created_at": "2024-10-30T23:58:27.427722Z",
+  "display_title": "My Custom Skill",
+  "latest_version": "1759178010641129",
+  "source": "custom",
+  "type": "type",
+  "updated_at": "2024-10-30T23:58:27.427722Z"
+}
 ```

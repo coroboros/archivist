@@ -1,10 +1,10 @@
 ---
-title: "Delete"
+title: "Delete Session"
 source: "https://platform.claude.com/docs/en/api/cli/beta/sessions/delete"
 category: "api"
 generated: true
 ---
-## Delete
+## Delete Session
 
 `$ ant beta:sessions delete`
 
@@ -40,4 +40,13 @@ Delete Session
 ant beta:sessions delete \
   --api-key my-anthropic-api-key \
   --session-id sesn_011CZkZAtmR3yMPDzynEDxu7
+```
+
+#### Response
+
+```json
+{
+  "id": "sesn_011CZkZAtmR3yMPDzynEDxu7",
+  "type": "session_deleted"
+}
 ```

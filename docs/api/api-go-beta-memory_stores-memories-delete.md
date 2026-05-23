@@ -1,10 +1,10 @@
 ---
-title: "Delete"
+title: "Delete a memory"
 source: "https://platform.claude.com/docs/en/api/go/beta/memory_stores/memories/delete"
 category: "api"
 generated: true
 ---
-## Delete
+## Delete a memory
 
 `client.Beta.MemoryStores.Memories.Delete(ctx, memoryID, params) (*BetaManagedAgentsDeletedMemory, error)`
 
@@ -126,5 +126,14 @@ func main() {
     panic(err.Error())
   }
   fmt.Printf("%+v\n", betaManagedAgentsDeletedMemory.ID)
+}
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "type": "memory_deleted"
 }
 ```

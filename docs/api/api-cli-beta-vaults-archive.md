@@ -1,10 +1,10 @@
 ---
-title: "Archive"
+title: "Archive Vault"
 source: "https://platform.claude.com/docs/en/api/cli/beta/vaults/archive"
 category: "api"
 generated: true
 ---
-## Archive
+## Archive Vault
 
 `$ ant beta:vaults archive`
 
@@ -62,4 +62,20 @@ Archive Vault
 ant beta:vaults archive \
   --api-key my-anthropic-api-key \
   --vault-id vlt_011CZkZDLs7fYzm1hXNPeRjv
+```
+
+#### Response
+
+```json
+{
+  "id": "vlt_011CZkZDLs7fYzm1hXNPeRjv",
+  "archived_at": null,
+  "created_at": "2026-03-15T10:00:00Z",
+  "display_name": "Example vault",
+  "metadata": {
+    "environment": "production"
+  },
+  "type": "vault",
+  "updated_at": "2026-03-15T10:00:00Z"
+}
 ```

@@ -1,10 +1,10 @@
 ---
-title: "Delete"
+title: "Delete Skill"
 source: "https://platform.claude.com/docs/en/api/python/beta/skills/delete"
 category: "api"
 generated: true
 ---
-## Delete
+## Delete Skill
 
 `beta.skills.delete(strskill_id, SkillDeleteParams**kwargs)  -> SkillDeleteResponse`
 
@@ -107,4 +107,13 @@ skill = client.beta.skills.delete(
     skill_id="skill_id",
 )
 print(skill.id)
+```
+
+#### Response
+
+```json
+{
+  "id": "skill_01JAbcdefghijklmnopqrstuvw",
+  "type": "type"
+}
 ```

@@ -1,10 +1,10 @@
 ---
-title: "Create"
+title: "Create a memory"
 source: "https://platform.claude.com/docs/en/api/go/beta/memory_stores/memories/create"
 category: "api"
 generated: true
 ---
-## Create
+## Create a memory
 
 `client.Beta.MemoryStores.Memories.New(ctx, memoryStoreID, params) (*BetaManagedAgentsMemory, error)`
 
@@ -163,5 +163,22 @@ func main() {
     panic(err.Error())
   }
   fmt.Printf("%+v\n", betaManagedAgentsMemory.ID)
+}
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "content_sha256": "content_sha256",
+  "content_size_bytes": 0,
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "memory_store_id": "memory_store_id",
+  "memory_version_id": "memory_version_id",
+  "path": "path",
+  "type": "memory",
+  "updated_at": "2019-12-27T18:11:19.117Z",
+  "content": "content"
 }
 ```

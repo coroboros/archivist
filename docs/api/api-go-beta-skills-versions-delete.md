@@ -1,10 +1,10 @@
 ---
-title: "Delete"
+title: "Delete Skill Version"
 source: "https://platform.claude.com/docs/en/api/go/beta/skills/versions/delete"
 category: "api"
 generated: true
 ---
-## Delete
+## Delete Skill Version
 
 `client.Beta.Skills.Versions.Delete(ctx, version, params) (*BetaSkillVersionDeleteResponse, error)`
 
@@ -130,5 +130,14 @@ func main() {
     panic(err.Error())
   }
   fmt.Printf("%+v\n", version.ID)
+}
+```
+
+#### Response
+
+```json
+{
+  "id": "1759178010641129",
+  "type": "type"
 }
 ```

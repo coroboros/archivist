@@ -6,7 +6,7 @@ generated: true
 ---
 # Files
 
-## Upload
+## Upload File
 
 `beta.files.upload(FileUploadParams**kwargs)  -> FileMetadata`
 
@@ -145,7 +145,25 @@ file_metadata = client.beta.files.upload(
 print(file_metadata.id)
 ```
 
-## List
+#### Response
+
+```json
+{
+  "id": "file_011CNha8iCJcU1wXNR6q4V8w",
+  "created_at": "2025-04-15T18:37:24.100435Z",
+  "filename": "document.pdf",
+  "mime_type": "application/pdf",
+  "size_bytes": 102400,
+  "type": "file",
+  "downloadable": false,
+  "scope": {
+    "id": "id",
+    "type": "session"
+  }
+}
+```
+
+## List Files
 
 `beta.files.list(FileListParams**kwargs)  -> SyncPage[FileMetadata]`
 
@@ -297,7 +315,32 @@ page = page.data[0]
 print(page.id)
 ```
 
-## Download
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "id": "file_011CNha8iCJcU1wXNR6q4V8w",
+      "created_at": "2025-04-15T18:37:24.100435Z",
+      "filename": "document.pdf",
+      "mime_type": "application/pdf",
+      "size_bytes": 102400,
+      "type": "file",
+      "downloadable": false,
+      "scope": {
+        "id": "id",
+        "type": "session"
+      }
+    }
+  ],
+  "first_id": "file_011CNha8iCJcU1wXNR6q4V8w",
+  "has_more": true,
+  "last_id": "file_013Zva2CMHLNnXjNJJKqJ2EF"
+}
+```
+
+## Download File
 
 `beta.files.download(strfile_id, FileDownloadParams**kwargs)  -> BinaryResponseContent`
 
@@ -390,7 +433,7 @@ content = response.read()
 print(content)
 ```
 
-## Retrieve Metadata
+## Get File Metadata
 
 `beta.files.retrieve_metadata(strfile_id, FileRetrieveMetadataParams**kwargs)  -> FileMetadata`
 
@@ -529,7 +572,25 @@ file_metadata = client.beta.files.retrieve_metadata(
 print(file_metadata.id)
 ```
 
-## Delete
+#### Response
+
+```json
+{
+  "id": "file_011CNha8iCJcU1wXNR6q4V8w",
+  "created_at": "2025-04-15T18:37:24.100435Z",
+  "filename": "document.pdf",
+  "mime_type": "application/pdf",
+  "size_bytes": 102400,
+  "type": "file",
+  "downloadable": false,
+  "scope": {
+    "id": "id",
+    "type": "session"
+  }
+}
+```
+
+## Delete File
 
 `beta.files.delete(strfile_id, FileDeleteParams**kwargs)  -> DeletedFile`
 
@@ -630,6 +691,15 @@ deleted_file = client.beta.files.delete(
     file_id="file_id",
 )
 print(deleted_file.id)
+```
+
+#### Response
+
+```json
+{
+  "id": "file_011CNha8iCJcU1wXNR6q4V8w",
+  "type": "file_deleted"
+}
 ```
 
 ## Domain Types

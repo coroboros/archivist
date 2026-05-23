@@ -6,7 +6,7 @@ generated: true
 ---
 # Completions
 
-## Create
+## Create a Text Completion
 
 `$ ant completions create`
 
@@ -207,6 +207,18 @@ ant completions create \
 Human: Hello, world!
 
 Assistant:'
+```
+
+#### Response
+
+```json
+{
+  "id": "compl_018CKm6gsux7P8yMcwZbeCPw",
+  "completion": " Hello! My name is Claude.",
+  "model": "claude-2.1",
+  "stop_reason": "stop_sequence",
+  "type": "completion"
+}
 ```
 
 ## Domain Types

@@ -1,10 +1,10 @@
 ---
-title: "Delete"
+title: "Delete a Message Batch"
 source: "https://platform.claude.com/docs/en/api/ruby/messages/batches/delete"
 category: "api"
 generated: true
 ---
-## Delete
+## Delete a Message Batch
 
 `messages.batches.delete(message_batch_id) -> DeletedMessageBatch`
 
@@ -48,4 +48,13 @@ anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
 deleted_message_batch = anthropic.messages.batches.delete("message_batch_id")
 
 puts(deleted_message_batch)
+```
+
+#### Response
+
+```json
+{
+  "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
+  "type": "message_batch_deleted"
+}
 ```

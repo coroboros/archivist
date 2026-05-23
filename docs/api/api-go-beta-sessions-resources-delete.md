@@ -1,10 +1,10 @@
 ---
-title: "Delete"
+title: "Delete Session Resource"
 source: "https://platform.claude.com/docs/en/api/go/beta/sessions/resources/delete"
 category: "api"
 generated: true
 ---
-## Delete
+## Delete Session Resource
 
 `client.Beta.Sessions.Resources.Delete(ctx, resourceID, params) (*BetaManagedAgentsDeleteSessionResource, error)`
 
@@ -120,5 +120,14 @@ func main() {
     panic(err.Error())
   }
   fmt.Printf("%+v\n", betaManagedAgentsDeleteSessionResource.ID)
+}
+```
+
+#### Response
+
+```json
+{
+  "id": "sesrsc_011CZkZBJq5dWxk9fVLNcPht",
+  "type": "session_resource_deleted"
 }
 ```

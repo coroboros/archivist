@@ -1,10 +1,10 @@
 ---
-title: "MCP OAuth Validate"
+title: "Validate Credential"
 source: "https://platform.claude.com/docs/en/api/csharp/beta/vaults/credentials/mcp_oauth_validate"
 category: "api"
 generated: true
 ---
-## MCP OAuth Validate
+## Validate Credential
 
 `BetaManagedAgentsCredentialValidation Beta.Vaults.Credentials.McpOAuthValidate(CredentialMcpOAuthValidateParamsparameters, CancellationTokencancellationToken = default)`
 
@@ -128,22 +128,6 @@ Validate Credential
 
       An HTTP response captured during a credential validation probe.
 
-      - `required string Body`
-
-        Response body. May be truncated and has sensitive values scrubbed.
-
-      - `required Boolean BodyTruncated`
-
-        Whether `body` was truncated.
-
-      - `required string ContentType`
-
-        Value of the `Content-Type` response header.
-
-      - `required Int StatusCode`
-
-        HTTP status code.
-
     - `required Status Status`
 
       Outcome of a refresh-token exchange attempted during credential validation.
@@ -190,4 +174,35 @@ CredentialMcpOAuthValidateParams parameters = new()
 var betaManagedAgentsCredentialValidation = await client.Beta.Vaults.Credentials.McpOAuthValidate(parameters);
 
 Console.WriteLine(betaManagedAgentsCredentialValidation);
+```
+
+#### Response
+
+```json
+{
+  "credential_id": "vcrd_011CZkZEMt8gZan2iYOQfSkw",
+  "has_refresh_token": true,
+  "mcp_probe": {
+    "http_response": {
+      "body": "body",
+      "body_truncated": true,
+      "content_type": "content_type",
+      "status_code": 0
+    },
+    "method": "method"
+  },
+  "refresh": {
+    "http_response": {
+      "body": "body",
+      "body_truncated": true,
+      "content_type": "content_type",
+      "status_code": 0
+    },
+    "status": "succeeded"
+  },
+  "status": "valid",
+  "type": "vault_credential_validation",
+  "validated_at": "2026-03-15T10:00:00Z",
+  "vault_id": "vlt_011CZkZDLs7fYzm1hXNPeRjv"
+}
 ```

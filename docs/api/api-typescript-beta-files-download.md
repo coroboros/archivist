@@ -1,10 +1,10 @@
 ---
-title: "Download"
+title: "Download File"
 source: "https://platform.claude.com/docs/en/api/typescript/beta/files/download"
 category: "api"
 generated: true
 ---
-## Download
+## Download File
 
 `client.beta.files.download(stringfileID, FileDownloadParamsparams?, RequestOptionsoptions?): Response`
 

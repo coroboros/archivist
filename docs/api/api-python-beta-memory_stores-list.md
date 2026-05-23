@@ -1,10 +1,10 @@
 ---
-title: "List"
+title: "List memory stores"
 source: "https://platform.claude.com/docs/en/api/python/beta/memory_stores/list"
 category: "api"
 generated: true
 ---
-## List
+## List memory stores
 
 `beta.memory_stores.list(MemoryStoreListParams**kwargs)  -> SyncPageCursor[BetaManagedAgentsMemoryStore]`
 
@@ -142,4 +142,26 @@ client = Anthropic(
 page = client.beta.memory_stores.list()
 page = page.data[0]
 print(page.id)
+```
+
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "id": "id",
+      "created_at": "2019-12-27T18:11:19.117Z",
+      "name": "name",
+      "type": "memory_store",
+      "updated_at": "2019-12-27T18:11:19.117Z",
+      "archived_at": "2019-12-27T18:11:19.117Z",
+      "description": "description",
+      "metadata": {
+        "foo": "string"
+      }
+    }
+  ],
+  "next_page": "next_page"
+}
 ```

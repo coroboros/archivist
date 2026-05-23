@@ -1,10 +1,10 @@
 ---
-title: "Retrieve"
+title: "Get Work Item"
 source: "https://platform.claude.com/docs/en/api/typescript/beta/environments/work/retrieve"
 category: "api"
 generated: true
 ---
-## Retrieve
+## Get Work Item
 
 `client.beta.environments.work.retrieve(stringworkID, WorkRetrieveParamsparams, RequestOptionsoptions?): BetaSelfHostedWork`
 
@@ -176,4 +176,28 @@ const betaSelfHostedWork = await client.beta.environments.work.retrieve('work_id
 });
 
 console.log(betaSelfHostedWork.id);
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "acknowledged_at": "acknowledged_at",
+  "created_at": "created_at",
+  "data": {
+    "id": "id",
+    "type": "session"
+  },
+  "environment_id": "environment_id",
+  "latest_heartbeat_at": "latest_heartbeat_at",
+  "metadata": {
+    "foo": "string"
+  },
+  "started_at": "started_at",
+  "state": "queued",
+  "stop_requested_at": "stop_requested_at",
+  "stopped_at": "stopped_at",
+  "type": "work"
+}
 ```

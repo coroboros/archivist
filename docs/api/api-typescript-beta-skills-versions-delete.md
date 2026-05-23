@@ -1,10 +1,10 @@
 ---
-title: "Delete"
+title: "Delete Skill Version"
 source: "https://platform.claude.com/docs/en/api/typescript/beta/skills/versions/delete"
 category: "api"
 generated: true
 ---
-## Delete
+## Delete Skill Version
 
 `client.beta.skills.versions.delete(stringversion, VersionDeleteParamsparams, RequestOptionsoptions?): VersionDeleteResponse`
 
@@ -114,4 +114,13 @@ const client = new Anthropic({
 const version = await client.beta.skills.versions.delete('version', { skill_id: 'skill_id' });
 
 console.log(version.id);
+```
+
+#### Response
+
+```json
+{
+  "id": "1759178010641129",
+  "type": "type"
+}
 ```

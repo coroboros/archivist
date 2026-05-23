@@ -1,10 +1,10 @@
 ---
-title: "Update"
+title: "Update Session Resource"
 source: "https://platform.claude.com/docs/en/api/ruby/beta/sessions/resources/update"
 category: "api"
 generated: true
 ---
-## Update
+## Update Session Resource
 
 `beta.sessions.resources.update(resource_id, **kwargs) -> ResourceUpdateResponse`
 
@@ -26,9 +26,9 @@ Update Session Resource
 
   Optional header to specify the beta version(s) you want to use.
 
-  - `String`
+  - `String = String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 22 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 22 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -198,4 +198,21 @@ resource = anthropic.beta.sessions.resources.update(
 )
 
 puts(resource)
+```
+
+#### Response
+
+```json
+{
+  "id": "sesrsc_011CZkZCKr6eXyl0gWMOdQiu",
+  "created_at": "2026-03-15T10:00:00Z",
+  "mount_path": "/workspace/example-repo",
+  "type": "github_repository",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "url": "https://github.com/example-org/example-repo",
+  "checkout": {
+    "name": "main",
+    "type": "branch"
+  }
+}
 ```

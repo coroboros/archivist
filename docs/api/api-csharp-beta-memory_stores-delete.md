@@ -1,10 +1,10 @@
 ---
-title: "Delete"
+title: "Delete a memory store"
 source: "https://platform.claude.com/docs/en/api/csharp/beta/memory_stores/delete"
 category: "api"
 generated: true
 ---
-## Delete
+## Delete a memory store
 
 `BetaManagedAgentsDeletedMemoryStore Beta.MemoryStores.Delete(MemoryStoreDeleteParamsparameters, CancellationTokencancellationToken = default)`
 
@@ -99,4 +99,13 @@ MemoryStoreDeleteParams parameters = new()
 var betaManagedAgentsDeletedMemoryStore = await client.Beta.MemoryStores.Delete(parameters);
 
 Console.WriteLine(betaManagedAgentsDeletedMemoryStore);
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "type": "memory_store_deleted"
+}
 ```

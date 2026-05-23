@@ -1,10 +1,10 @@
 ---
-title: "Delete"
+title: "Delete a Message Batch"
 source: "https://platform.claude.com/docs/en/api/typescript/messages/batches/delete"
 category: "api"
 generated: true
 ---
-## Delete
+## Delete a Message Batch
 
 `client.messages.batches.delete(stringmessageBatchID, RequestOptionsoptions?): DeletedMessageBatch`
 
@@ -50,4 +50,13 @@ const client = new Anthropic({
 const deletedMessageBatch = await client.messages.batches.delete('message_batch_id');
 
 console.log(deletedMessageBatch.id);
+```
+
+#### Response
+
+```json
+{
+  "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
+  "type": "message_batch_deleted"
+}
 ```

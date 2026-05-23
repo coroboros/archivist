@@ -1,10 +1,10 @@
 ---
-title: "Update"
+title: "Update User Profile"
 source: "https://platform.claude.com/docs/en/api/csharp/beta/user_profiles/update"
 category: "api"
 generated: true
 ---
-## Update
+## Update User Profile
 
 `BetaUserProfile Beta.UserProfiles.Update(UserProfileUpdateParamsparameters, CancellationTokencancellationToken = default)`
 
@@ -165,4 +165,24 @@ UserProfileUpdateParams parameters = new()
 var betaUserProfile = await client.Beta.UserProfiles.Update(parameters);
 
 Console.WriteLine(betaUserProfile);
+```
+
+#### Response
+
+```json
+{
+  "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
+  "created_at": "2026-03-15T10:00:00Z",
+  "metadata": {},
+  "relationship": "external",
+  "trust_grants": {
+    "cyber": {
+      "status": "active"
+    }
+  },
+  "type": "user_profile",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "external_id": "user_12345",
+  "name": "Example User"
+}
 ```

@@ -1,10 +1,10 @@
 ---
-title: "Update"
+title: "Update Vault"
 source: "https://platform.claude.com/docs/en/api/cli/beta/vaults/update"
 category: "api"
 generated: true
 ---
-## Update
+## Update Vault
 
 `$ ant beta:vaults update`
 
@@ -70,4 +70,20 @@ Update Vault
 ant beta:vaults update \
   --api-key my-anthropic-api-key \
   --vault-id vlt_011CZkZDLs7fYzm1hXNPeRjv
+```
+
+#### Response
+
+```json
+{
+  "id": "vlt_011CZkZDLs7fYzm1hXNPeRjv",
+  "archived_at": null,
+  "created_at": "2026-03-15T10:00:00Z",
+  "display_name": "Example vault",
+  "metadata": {
+    "environment": "production"
+  },
+  "type": "vault",
+  "updated_at": "2026-03-15T10:00:00Z"
+}
 ```

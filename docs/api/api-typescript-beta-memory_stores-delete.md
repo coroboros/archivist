@@ -1,10 +1,10 @@
 ---
-title: "Delete"
+title: "Delete a memory store"
 source: "https://platform.claude.com/docs/en/api/typescript/beta/memory_stores/delete"
 category: "api"
 generated: true
 ---
-## Delete
+## Delete a memory store
 
 `client.beta.memoryStores.delete(stringmemoryStoreID, MemoryStoreDeleteParamsparams?, RequestOptionsoptions?): BetaManagedAgentsDeletedMemoryStore`
 
@@ -104,4 +104,13 @@ const betaManagedAgentsDeletedMemoryStore = await client.beta.memoryStores.delet
 );
 
 console.log(betaManagedAgentsDeletedMemoryStore.id);
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "type": "memory_store_deleted"
+}
 ```

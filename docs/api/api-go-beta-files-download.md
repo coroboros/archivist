@@ -1,10 +1,10 @@
 ---
-title: "Download"
+title: "Download File"
 source: "https://platform.claude.com/docs/en/api/go/beta/files/download"
 category: "api"
 generated: true
 ---
-## Download
+## Download File
 
 `client.Beta.Files.Download(ctx, fileID, query) (*Response, error)`
 

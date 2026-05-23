@@ -1,10 +1,10 @@
 ---
-title: "Delete"
+title: "Delete Session"
 source: "https://platform.claude.com/docs/en/api/java/beta/sessions/delete"
 category: "api"
 generated: true
 ---
-## Delete
+## Delete Session
 
 `BetaManagedAgentsDeletedSession beta().sessions().delete(SessionDeleteParamsparams = SessionDeleteParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
 
@@ -102,5 +102,14 @@ public final class Main {
 
         BetaManagedAgentsDeletedSession betaManagedAgentsDeletedSession = client.beta().sessions().delete("sesn_011CZkZAtmR3yMPDzynEDxu7");
     }
+}
+```
+
+#### Response
+
+```json
+{
+  "id": "sesn_011CZkZAtmR3yMPDzynEDxu7",
+  "type": "session_deleted"
 }
 ```

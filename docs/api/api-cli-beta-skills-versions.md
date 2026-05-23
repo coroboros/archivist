@@ -6,7 +6,7 @@ generated: true
 ---
 # Versions
 
-## Create
+## Create Skill Version
 
 `$ ant beta:skills:versions create`
 
@@ -88,7 +88,22 @@ ant beta:skills:versions create \
   --skill-id skill_id
 ```
 
-## List
+#### Response
+
+```json
+{
+  "id": "skillver_01JAbcdefghijklmnopqrstuvw",
+  "created_at": "2024-10-30T23:58:27.427722Z",
+  "description": "A custom skill for doing something useful",
+  "directory": "my-skill",
+  "name": "my-skill",
+  "skill_id": "skill_01JAbcdefghijklmnopqrstuvw",
+  "type": "type",
+  "version": "1759178010641129"
+}
+```
+
+## List Skill Versions
 
 `$ ant beta:skills:versions list`
 
@@ -186,7 +201,28 @@ ant beta:skills:versions list \
   --skill-id skill_id
 ```
 
-## Download
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "id": "skillver_01JAbcdefghijklmnopqrstuvw",
+      "created_at": "2024-10-30T23:58:27.427722Z",
+      "description": "A custom skill for doing something useful",
+      "directory": "my-skill",
+      "name": "my-skill",
+      "skill_id": "skill_01JAbcdefghijklmnopqrstuvw",
+      "type": "type",
+      "version": "1759178010641129"
+    }
+  ],
+  "has_more": true,
+  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
+}
+```
+
+## Download Skill Version Content
 
 `$ ant beta:skills:versions download`
 
@@ -225,7 +261,7 @@ ant beta:skills:versions download \
   --version version
 ```
 
-## Retrieve
+## Get Skill Version
 
 `$ ant beta:skills:versions retrieve`
 
@@ -308,7 +344,22 @@ ant beta:skills:versions retrieve \
   --version version
 ```
 
-## Delete
+#### Response
+
+```json
+{
+  "id": "skillver_01JAbcdefghijklmnopqrstuvw",
+  "created_at": "2024-10-30T23:58:27.427722Z",
+  "description": "A custom skill for doing something useful",
+  "directory": "my-skill",
+  "name": "my-skill",
+  "skill_id": "skill_01JAbcdefghijklmnopqrstuvw",
+  "type": "type",
+  "version": "1759178010641129"
+}
+```
+
+## Delete Skill Version
 
 `$ ant beta:skills:versions delete`
 
@@ -357,4 +408,13 @@ ant beta:skills:versions delete \
   --api-key my-anthropic-api-key \
   --skill-id skill_id \
   --version version
+```
+
+#### Response
+
+```json
+{
+  "id": "1759178010641129",
+  "type": "type"
+}
 ```

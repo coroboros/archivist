@@ -1,10 +1,10 @@
 ---
-title: "Retrieve"
+title: "Get Work Item"
 source: "https://platform.claude.com/docs/en/api/cli/beta/environments/work/retrieve"
 category: "api"
 generated: true
 ---
-## Retrieve
+## Get Work Item
 
 `$ ant beta:environments:work retrieve`
 
@@ -111,4 +111,28 @@ ant beta:environments:work retrieve \
   --api-key my-anthropic-api-key \
   --environment-id env_011CZkZ9X2dpNyB7HsEFoRfW \
   --work-id work_id
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "acknowledged_at": "acknowledged_at",
+  "created_at": "created_at",
+  "data": {
+    "id": "id",
+    "type": "session"
+  },
+  "environment_id": "environment_id",
+  "latest_heartbeat_at": "latest_heartbeat_at",
+  "metadata": {
+    "foo": "string"
+  },
+  "started_at": "started_at",
+  "state": "queued",
+  "stop_requested_at": "stop_requested_at",
+  "stopped_at": "stopped_at",
+  "type": "work"
+}
 ```

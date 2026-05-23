@@ -1,10 +1,10 @@
 ---
-title: "Delete"
+title: "Delete a Message Batch"
 source: "https://platform.claude.com/docs/en/api/csharp/beta/messages/batches/delete"
 category: "api"
 generated: true
 ---
-## Delete
+## Delete a Message Batch
 
 `BetaDeletedMessageBatch Beta.Messages.Batches.Delete(BatchDeleteParamsparameters, CancellationTokencancellationToken = default)`
 
@@ -100,4 +100,13 @@ BatchDeleteParams parameters = new() { MessageBatchID = "message_batch_id" };
 var betaDeletedMessageBatch = await client.Beta.Messages.Batches.Delete(parameters);
 
 Console.WriteLine(betaDeletedMessageBatch);
+```
+
+#### Response
+
+```json
+{
+  "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
+  "type": "message_batch_deleted"
+}
 ```

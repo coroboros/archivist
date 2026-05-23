@@ -1,10 +1,10 @@
 ---
-title: "Download"
+title: "Download Skill Version Content"
 source: "https://platform.claude.com/docs/en/api/cli/beta/skills/versions/download"
 category: "api"
 generated: true
 ---
-## Download
+## Download Skill Version Content
 
 `$ ant beta:skills:versions download`
 

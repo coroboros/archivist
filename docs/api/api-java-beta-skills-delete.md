@@ -1,10 +1,10 @@
 ---
-title: "Delete"
+title: "Delete Skill"
 source: "https://platform.claude.com/docs/en/api/java/beta/skills/delete"
 category: "api"
 generated: true
 ---
-## Delete
+## Delete Skill
 
 `SkillDeleteResponse beta().skills().delete(SkillDeleteParamsparams = SkillDeleteParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
 
@@ -110,5 +110,14 @@ public final class Main {
 
         SkillDeleteResponse skill = client.beta().skills().delete("skill_id");
     }
+}
+```
+
+#### Response
+
+```json
+{
+  "id": "skill_01JAbcdefghijklmnopqrstuvw",
+  "type": "type"
 }
 ```

@@ -1,10 +1,10 @@
 ---
-title: "Add"
+title: "Add Session Resource"
 source: "https://platform.claude.com/docs/en/api/ruby/beta/sessions/resources/add"
 category: "api"
 generated: true
 ---
-## Add
+## Add Session Resource
 
 `beta.sessions.resources.add(session_id, **kwargs) -> BetaManagedAgentsFileResource`
 
@@ -32,9 +32,9 @@ Add Session Resource
 
   Optional header to specify the beta version(s) you want to use.
 
-  - `String`
+  - `String = String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 22 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 22 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -122,4 +122,17 @@ beta_managed_agents_file_resource = anthropic.beta.sessions.resources.add(
 )
 
 puts(beta_managed_agents_file_resource)
+```
+
+#### Response
+
+```json
+{
+  "id": "sesrsc_011CZkZBJq5dWxk9fVLNcPht",
+  "created_at": "2026-03-15T10:00:00Z",
+  "file_id": "file_011CNha8iCJcU1wXNR6q4V8w",
+  "mount_path": "/uploads/receipt.pdf",
+  "type": "file",
+  "updated_at": "2026-03-15T10:00:00Z"
+}
 ```

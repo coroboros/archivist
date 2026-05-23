@@ -1,10 +1,10 @@
 ---
-title: "List"
+title: "List Skill Versions"
 source: "https://platform.claude.com/docs/en/api/typescript/beta/skills/versions/list"
 category: "api"
 generated: true
 ---
-## List
+## List Skill Versions
 
 `client.beta.skills.versions.list(stringskillID, VersionListParamsparams?, RequestOptionsoptions?): PageCursor<VersionListResponse>`
 
@@ -150,5 +150,26 @@ const client = new Anthropic({
 // Automatically fetches more pages as needed.
 for await (const versionListResponse of client.beta.skills.versions.list('skill_id')) {
   console.log(versionListResponse.id);
+}
+```
+
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "id": "skillver_01JAbcdefghijklmnopqrstuvw",
+      "created_at": "2024-10-30T23:58:27.427722Z",
+      "description": "A custom skill for doing something useful",
+      "directory": "my-skill",
+      "name": "my-skill",
+      "skill_id": "skill_01JAbcdefghijklmnopqrstuvw",
+      "type": "type",
+      "version": "1759178010641129"
+    }
+  ],
+  "has_more": true,
+  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
 }
 ```

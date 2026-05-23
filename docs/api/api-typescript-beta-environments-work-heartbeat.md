@@ -1,10 +1,10 @@
 ---
-title: "Heartbeat"
+title: "Record Heartbeat"
 source: "https://platform.claude.com/docs/en/api/typescript/beta/environments/work/heartbeat"
 category: "api"
 generated: true
 ---
-## Heartbeat
+## Record Heartbeat
 
 `client.beta.environments.work.heartbeat(stringworkID, WorkHeartbeatParamsparams, RequestOptionsoptions?): BetaSelfHostedWorkHeartbeatResponse`
 
@@ -143,4 +143,16 @@ const betaSelfHostedWorkHeartbeatResponse = await client.beta.environments.work.
 );
 
 console.log(betaSelfHostedWorkHeartbeatResponse.last_heartbeat);
+```
+
+#### Response
+
+```json
+{
+  "last_heartbeat": "last_heartbeat",
+  "lease_extended": true,
+  "state": "queued",
+  "ttl_seconds": 0,
+  "type": "work_heartbeat"
+}
 ```

@@ -1,10 +1,10 @@
 ---
-title: "Download"
+title: "Download Skill Version Content"
 source: "https://platform.claude.com/docs/en/api/beta/skills/versions/download"
 category: "api"
 generated: true
 ---
-## Download
+## Download Skill Version Content
 
 **get** `/v1/skills/{skill_id}/versions/{version}/content`
 
@@ -30,9 +30,9 @@ Download a skill version's content as a zip archive.
 
   Optional header to specify the beta version(s) you want to use.
 
-  - `UnionMember0 = string`
+  - `string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
 
     - `"message-batches-2024-09-24"`
 

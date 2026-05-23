@@ -1,10 +1,10 @@
 ---
-title: "Download"
+title: "Download Skill Version Content"
 source: "https://platform.claude.com/docs/en/api/go/beta/skills/versions/download"
 category: "api"
 generated: true
 ---
-## Download
+## Download Skill Version Content
 
 `client.Beta.Skills.Versions.Download(ctx, version, params) (*Response, error)`
 

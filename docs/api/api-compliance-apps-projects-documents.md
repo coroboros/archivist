@@ -6,7 +6,7 @@ generated: true
 ---
 # Documents
 
-## Retrieve
+## Get project document content
 
 **get** `/v1/compliance/apps/projects/documents/{document_id}`
 
@@ -62,7 +62,22 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/documents/$DOCUMENT_I
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
-## Metadata
+#### Response
+
+```json
+{
+  "id": "id",
+  "content": "content",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "filename": "filename",
+  "user": {
+    "id": "id",
+    "email_address": "email_address"
+  }
+}
+```
+
+## Get project document metadata
 
 **get** `/v1/compliance/apps/projects/documents/{document_id}/metadata`
 
@@ -134,7 +149,25 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/documents/$DOCUMENT_I
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
-## Delete
+#### Response
+
+```json
+{
+  "id": "id",
+  "claude_project_id": "claude_project_id",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "filename": "filename",
+  "md5": "md5",
+  "mime_type": "text/plain",
+  "size_bytes": 0,
+  "user": {
+    "id": "id",
+    "email_address": "email_address"
+  }
+}
+```
+
+## Delete project document
 
 **delete** `/v1/compliance/apps/projects/documents/{document_id}`
 
@@ -175,11 +208,20 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/documents/$DOCUMENT_I
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
+#### Response
+
+```json
+{
+  "id": "id",
+  "type": "claude_project_document_deleted"
+}
+```
+
 ## Domain Types
 
 ### Document Retrieve Response
 
-- `DocumentRetrieveResponse = object { id, content, created_at, 2 more }`
+- `DocumentRetrieveResponse object { id, content, created_at, 2 more }`
 
   Project document information for compliance responses.
 
@@ -213,7 +255,7 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/documents/$DOCUMENT_I
 
 ### Document Metadata Response
 
-- `DocumentMetadataResponse = object { id, claude_project_id, created_at, 5 more }`
+- `DocumentMetadataResponse object { id, claude_project_id, created_at, 5 more }`
 
   Project document metadata for GET /v1/compliance/apps/projects/documents/{document_id}/metadata.
 
@@ -264,7 +306,7 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/documents/$DOCUMENT_I
 
 ### Document Delete Response
 
-- `DocumentDeleteResponse = object { id, type }`
+- `DocumentDeleteResponse object { id, type }`
 
   Response for deleting a project document.
 

@@ -1,10 +1,10 @@
 ---
-title: "Delete"
+title: "Delete Session Resource"
 source: "https://platform.claude.com/docs/en/api/csharp/beta/sessions/resources/delete"
 category: "api"
 generated: true
 ---
-## Delete
+## Delete Session Resource
 
 `BetaManagedAgentsDeleteSessionResource Beta.Sessions.Resources.Delete(ResourceDeleteParamsparameters, CancellationTokencancellationToken = default)`
 
@@ -102,4 +102,13 @@ ResourceDeleteParams parameters = new()
 var betaManagedAgentsDeleteSessionResource = await client.Beta.Sessions.Resources.Delete(parameters);
 
 Console.WriteLine(betaManagedAgentsDeleteSessionResource);
+```
+
+#### Response
+
+```json
+{
+  "id": "sesrsc_011CZkZBJq5dWxk9fVLNcPht",
+  "type": "session_resource_deleted"
+}
 ```

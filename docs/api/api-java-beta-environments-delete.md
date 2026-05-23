@@ -1,10 +1,10 @@
 ---
-title: "Delete"
+title: "Delete Environment"
 source: "https://platform.claude.com/docs/en/api/java/beta/environments/delete"
 category: "api"
 generated: true
 ---
-## Delete
+## Delete Environment
 
 `BetaEnvironmentDeleteResponse beta().environments().delete(EnvironmentDeleteParamsparams = EnvironmentDeleteParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
 
@@ -106,5 +106,14 @@ public final class Main {
 
         BetaEnvironmentDeleteResponse betaEnvironmentDeleteResponse = client.beta().environments().delete("env_011CZkZ9X2dpNyB7HsEFoRfW");
     }
+}
+```
+
+#### Response
+
+```json
+{
+  "id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
+  "type": "environment_deleted"
 }
 ```

@@ -1,10 +1,10 @@
 ---
-title: "Delete"
+title: "Delete Environment"
 source: "https://platform.claude.com/docs/en/api/go/beta/environments/delete"
 category: "api"
 generated: true
 ---
-## Delete
+## Delete Environment
 
 `client.Beta.Environments.Delete(ctx, environmentID, body) (*BetaEnvironmentDeleteResponse, error)`
 
@@ -120,5 +120,14 @@ func main() {
     panic(err.Error())
   }
   fmt.Printf("%+v\n", betaEnvironmentDeleteResponse.ID)
+}
+```
+
+#### Response
+
+```json
+{
+  "id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
+  "type": "environment_deleted"
 }
 ```

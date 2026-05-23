@@ -6,7 +6,7 @@ generated: true
 ---
 # Memory Stores
 
-## Create
+## Create a memory store
 
 `BetaManagedAgentsMemoryStore Beta.MemoryStores.Create(MemoryStoreCreateParamsparameters, CancellationTokencancellationToken = default)`
 
@@ -132,7 +132,24 @@ var betaManagedAgentsMemoryStore = await client.Beta.MemoryStores.Create(paramet
 Console.WriteLine(betaManagedAgentsMemoryStore);
 ```
 
-## List
+#### Response
+
+```json
+{
+  "id": "id",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "name": "name",
+  "type": "memory_store",
+  "updated_at": "2019-12-27T18:11:19.117Z",
+  "archived_at": "2019-12-27T18:11:19.117Z",
+  "description": "description",
+  "metadata": {
+    "foo": "string"
+  }
+}
+```
+
+## List memory stores
 
 `MemoryStoreListPageResponse Beta.MemoryStores.List(MemoryStoreListParams?parameters, CancellationTokencancellationToken = default)`
 
@@ -276,7 +293,29 @@ await foreach (var item in page.Paginate())
 }
 ```
 
-## Retrieve
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "id": "id",
+      "created_at": "2019-12-27T18:11:19.117Z",
+      "name": "name",
+      "type": "memory_store",
+      "updated_at": "2019-12-27T18:11:19.117Z",
+      "archived_at": "2019-12-27T18:11:19.117Z",
+      "description": "description",
+      "metadata": {
+        "foo": "string"
+      }
+    }
+  ],
+  "next_page": "next_page"
+}
+```
+
+## Retrieve a memory store
 
 `BetaManagedAgentsMemoryStore Beta.MemoryStores.Retrieve(MemoryStoreRetrieveParamsparameters, CancellationTokencancellationToken = default)`
 
@@ -397,7 +436,24 @@ var betaManagedAgentsMemoryStore = await client.Beta.MemoryStores.Retrieve(param
 Console.WriteLine(betaManagedAgentsMemoryStore);
 ```
 
-## Update
+#### Response
+
+```json
+{
+  "id": "id",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "name": "name",
+  "type": "memory_store",
+  "updated_at": "2019-12-27T18:11:19.117Z",
+  "archived_at": "2019-12-27T18:11:19.117Z",
+  "description": "description",
+  "metadata": {
+    "foo": "string"
+  }
+}
+```
+
+## Update a memory store
 
 `BetaManagedAgentsMemoryStore Beta.MemoryStores.Update(MemoryStoreUpdateParamsparameters, CancellationTokencancellationToken = default)`
 
@@ -530,7 +586,24 @@ var betaManagedAgentsMemoryStore = await client.Beta.MemoryStores.Update(paramet
 Console.WriteLine(betaManagedAgentsMemoryStore);
 ```
 
-## Delete
+#### Response
+
+```json
+{
+  "id": "id",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "name": "name",
+  "type": "memory_store",
+  "updated_at": "2019-12-27T18:11:19.117Z",
+  "archived_at": "2019-12-27T18:11:19.117Z",
+  "description": "description",
+  "metadata": {
+    "foo": "string"
+  }
+}
+```
+
+## Delete a memory store
 
 `BetaManagedAgentsDeletedMemoryStore Beta.MemoryStores.Delete(MemoryStoreDeleteParamsparameters, CancellationTokencancellationToken = default)`
 
@@ -627,7 +700,16 @@ var betaManagedAgentsDeletedMemoryStore = await client.Beta.MemoryStores.Delete(
 Console.WriteLine(betaManagedAgentsDeletedMemoryStore);
 ```
 
-## Archive
+#### Response
+
+```json
+{
+  "id": "id",
+  "type": "memory_store_deleted"
+}
+```
+
+## Archive a memory store
 
 `BetaManagedAgentsMemoryStore Beta.MemoryStores.Archive(MemoryStoreArchiveParamsparameters, CancellationTokencancellationToken = default)`
 
@@ -748,6 +830,23 @@ var betaManagedAgentsMemoryStore = await client.Beta.MemoryStores.Archive(parame
 Console.WriteLine(betaManagedAgentsMemoryStore);
 ```
 
+#### Response
+
+```json
+{
+  "id": "id",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "name": "name",
+  "type": "memory_store",
+  "updated_at": "2019-12-27T18:11:19.117Z",
+  "archived_at": "2019-12-27T18:11:19.117Z",
+  "description": "description",
+  "metadata": {
+    "foo": "string"
+  }
+}
+```
+
 ## Domain Types
 
 ### Beta Managed Agents Deleted Memory Store
@@ -804,7 +903,7 @@ Console.WriteLine(betaManagedAgentsMemoryStore);
 
 # Memories
 
-## Create
+## Create a memory
 
 `BetaManagedAgentsMemory Beta.MemoryStores.Memories.Create(MemoryCreateParamsparameters, CancellationTokencancellationToken = default)`
 
@@ -947,7 +1046,24 @@ var betaManagedAgentsMemory = await client.Beta.MemoryStores.Memories.Create(par
 Console.WriteLine(betaManagedAgentsMemory);
 ```
 
-## List
+#### Response
+
+```json
+{
+  "id": "id",
+  "content_sha256": "content_sha256",
+  "content_size_bytes": 0,
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "memory_store_id": "memory_store_id",
+  "memory_version_id": "memory_version_id",
+  "path": "path",
+  "type": "memory",
+  "updated_at": "2019-12-27T18:11:19.117Z",
+  "content": "content"
+}
+```
+
+## List memories
 
 `MemoryListPageResponse Beta.MemoryStores.Memories.List(MemoryListParamsparameters, CancellationTokencancellationToken = default)`
 
@@ -1131,7 +1247,29 @@ await foreach (var item in page.Paginate())
 }
 ```
 
-## Retrieve
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "id": "id",
+      "content_sha256": "content_sha256",
+      "content_size_bytes": 0,
+      "created_at": "2019-12-27T18:11:19.117Z",
+      "memory_store_id": "memory_store_id",
+      "memory_version_id": "memory_version_id",
+      "path": "path",
+      "type": "memory",
+      "updated_at": "2019-12-27T18:11:19.117Z",
+      "content": "content"
+    }
+  ],
+  "next_page": "next_page"
+}
+```
+
+## Retrieve a memory
 
 `BetaManagedAgentsMemory Beta.MemoryStores.Memories.Retrieve(MemoryRetrieveParamsparameters, CancellationTokencancellationToken = default)`
 
@@ -1269,7 +1407,24 @@ var betaManagedAgentsMemory = await client.Beta.MemoryStores.Memories.Retrieve(p
 Console.WriteLine(betaManagedAgentsMemory);
 ```
 
-## Update
+#### Response
+
+```json
+{
+  "id": "id",
+  "content_sha256": "content_sha256",
+  "content_size_bytes": 0,
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "memory_store_id": "memory_store_id",
+  "memory_version_id": "memory_version_id",
+  "path": "path",
+  "type": "memory",
+  "updated_at": "2019-12-27T18:11:19.117Z",
+  "content": "content"
+}
+```
+
+## Update a memory
 
 `BetaManagedAgentsMemory Beta.MemoryStores.Memories.Update(MemoryUpdateParamsparameters, CancellationTokencancellationToken = default)`
 
@@ -1419,7 +1574,24 @@ var betaManagedAgentsMemory = await client.Beta.MemoryStores.Memories.Update(par
 Console.WriteLine(betaManagedAgentsMemory);
 ```
 
-## Delete
+#### Response
+
+```json
+{
+  "id": "id",
+  "content_sha256": "content_sha256",
+  "content_size_bytes": 0,
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "memory_store_id": "memory_store_id",
+  "memory_version_id": "memory_version_id",
+  "path": "path",
+  "type": "memory",
+  "updated_at": "2019-12-27T18:11:19.117Z",
+  "content": "content"
+}
+```
+
+## Delete a memory
 
 `BetaManagedAgentsDeletedMemory Beta.MemoryStores.Memories.Delete(MemoryDeleteParamsparameters, CancellationTokencancellationToken = default)`
 
@@ -1523,6 +1695,15 @@ MemoryDeleteParams parameters = new()
 var betaManagedAgentsDeletedMemory = await client.Beta.MemoryStores.Memories.Delete(parameters);
 
 Console.WriteLine(betaManagedAgentsDeletedMemory);
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "type": "memory_deleted"
+}
 ```
 
 ## Domain Types
@@ -1823,7 +2004,7 @@ Console.WriteLine(betaManagedAgentsDeletedMemory);
 
 # Memory Versions
 
-## List
+## List memory versions
 
 `MemoryVersionListPageResponse Beta.MemoryStores.MemoryVersions.List(MemoryVersionListParamsparameters, CancellationTokencancellationToken = default)`
 
@@ -2033,42 +2214,6 @@ List memory versions
 
       Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](https://platform.claude.com/docs/en/api/sessions-retrieve.md).
 
-      - `class BetaManagedAgentsSessionActor:`
-
-        Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
-
-        - `required string SessionID`
-
-          ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](https://platform.claude.com/docs/en/api/sessions-retrieve.md) for further provenance.
-
-        - `required Type Type`
-
-          - `"session_actor"SessionActor`
-
-      - `class BetaManagedAgentsApiActor:`
-
-        Attribution for a write made directly via the public API (outside of any session).
-
-        - `required string ApiKeyID`
-
-          ID of the API key that performed the write. This identifies the key, not the secret.
-
-        - `required Type Type`
-
-          - `"api_actor"ApiActor`
-
-      - `class BetaManagedAgentsUserActor:`
-
-        Attribution for a write made by a human user through the Anthropic Console.
-
-        - `required Type Type`
-
-          - `"user_actor"UserActor`
-
-        - `required string UserID`
-
-          ID of the user who performed the write (a `user_...` value).
-
   - `string? NextPage`
 
     Opaque cursor for the next page (a `page_...` value), or `null` if there are no more results. Pass as `page` on the next request.
@@ -2088,7 +2233,38 @@ await foreach (var item in page.Paginate())
 }
 ```
 
-## Retrieve
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "id": "id",
+      "created_at": "2019-12-27T18:11:19.117Z",
+      "memory_id": "memory_id",
+      "memory_store_id": "memory_store_id",
+      "operation": "created",
+      "type": "memory_version",
+      "content": "content",
+      "content_sha256": "content_sha256",
+      "content_size_bytes": 0,
+      "created_by": {
+        "session_id": "x",
+        "type": "session_actor"
+      },
+      "path": "path",
+      "redacted_at": "2019-12-27T18:11:19.117Z",
+      "redacted_by": {
+        "session_id": "x",
+        "type": "session_actor"
+      }
+    }
+  ],
+  "next_page": "next_page"
+}
+```
+
+## Retrieve a memory version
 
 `BetaManagedAgentsMemoryVersion Beta.MemoryStores.MemoryVersions.Retrieve(MemoryVersionRetrieveParamsparameters, CancellationTokencancellationToken = default)`
 
@@ -2266,42 +2442,6 @@ Retrieve a memory version
 
     Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](https://platform.claude.com/docs/en/api/sessions-retrieve.md).
 
-    - `class BetaManagedAgentsSessionActor:`
-
-      Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
-
-      - `required string SessionID`
-
-        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](https://platform.claude.com/docs/en/api/sessions-retrieve.md) for further provenance.
-
-      - `required Type Type`
-
-        - `"session_actor"SessionActor`
-
-    - `class BetaManagedAgentsApiActor:`
-
-      Attribution for a write made directly via the public API (outside of any session).
-
-      - `required string ApiKeyID`
-
-        ID of the API key that performed the write. This identifies the key, not the secret.
-
-      - `required Type Type`
-
-        - `"api_actor"ApiActor`
-
-    - `class BetaManagedAgentsUserActor:`
-
-      Attribution for a write made by a human user through the Anthropic Console.
-
-      - `required Type Type`
-
-        - `"user_actor"UserActor`
-
-      - `required string UserID`
-
-        ID of the user who performed the write (a `user_...` value).
-
 ### Example
 
 ```csharp
@@ -2316,7 +2456,33 @@ var betaManagedAgentsMemoryVersion = await client.Beta.MemoryStores.MemoryVersio
 Console.WriteLine(betaManagedAgentsMemoryVersion);
 ```
 
-## Redact
+#### Response
+
+```json
+{
+  "id": "id",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "memory_id": "memory_id",
+  "memory_store_id": "memory_store_id",
+  "operation": "created",
+  "type": "memory_version",
+  "content": "content",
+  "content_sha256": "content_sha256",
+  "content_size_bytes": 0,
+  "created_by": {
+    "session_id": "x",
+    "type": "session_actor"
+  },
+  "path": "path",
+  "redacted_at": "2019-12-27T18:11:19.117Z",
+  "redacted_by": {
+    "session_id": "x",
+    "type": "session_actor"
+  }
+}
+```
+
+## Redact a memory version
 
 `BetaManagedAgentsMemoryVersion Beta.MemoryStores.MemoryVersions.Redact(MemoryVersionRedactParamsparameters, CancellationTokencancellationToken = default)`
 
@@ -2490,42 +2656,6 @@ Redact a memory version
 
     Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](https://platform.claude.com/docs/en/api/sessions-retrieve.md).
 
-    - `class BetaManagedAgentsSessionActor:`
-
-      Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
-
-      - `required string SessionID`
-
-        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](https://platform.claude.com/docs/en/api/sessions-retrieve.md) for further provenance.
-
-      - `required Type Type`
-
-        - `"session_actor"SessionActor`
-
-    - `class BetaManagedAgentsApiActor:`
-
-      Attribution for a write made directly via the public API (outside of any session).
-
-      - `required string ApiKeyID`
-
-        ID of the API key that performed the write. This identifies the key, not the secret.
-
-      - `required Type Type`
-
-        - `"api_actor"ApiActor`
-
-    - `class BetaManagedAgentsUserActor:`
-
-      Attribution for a write made by a human user through the Anthropic Console.
-
-      - `required Type Type`
-
-        - `"user_actor"UserActor`
-
-      - `required string UserID`
-
-        ID of the user who performed the write (a `user_...` value).
-
 ### Example
 
 ```csharp
@@ -2538,6 +2668,32 @@ MemoryVersionRedactParams parameters = new()
 var betaManagedAgentsMemoryVersion = await client.Beta.MemoryStores.MemoryVersions.Redact(parameters);
 
 Console.WriteLine(betaManagedAgentsMemoryVersion);
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "memory_id": "memory_id",
+  "memory_store_id": "memory_store_id",
+  "operation": "created",
+  "type": "memory_version",
+  "content": "content",
+  "content_sha256": "content_sha256",
+  "content_size_bytes": 0,
+  "created_by": {
+    "session_id": "x",
+    "type": "session_actor"
+  },
+  "path": "path",
+  "redacted_at": "2019-12-27T18:11:19.117Z",
+  "redacted_by": {
+    "session_id": "x",
+    "type": "session_actor"
+  }
+}
 ```
 
 ## Domain Types
@@ -2697,42 +2853,6 @@ Console.WriteLine(betaManagedAgentsMemoryVersion);
   - `BetaManagedAgentsActor RedactedBy`
 
     Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](https://platform.claude.com/docs/en/api/sessions-retrieve.md).
-
-    - `class BetaManagedAgentsSessionActor:`
-
-      Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
-
-      - `required string SessionID`
-
-        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](https://platform.claude.com/docs/en/api/sessions-retrieve.md) for further provenance.
-
-      - `required Type Type`
-
-        - `"session_actor"SessionActor`
-
-    - `class BetaManagedAgentsApiActor:`
-
-      Attribution for a write made directly via the public API (outside of any session).
-
-      - `required string ApiKeyID`
-
-        ID of the API key that performed the write. This identifies the key, not the secret.
-
-      - `required Type Type`
-
-        - `"api_actor"ApiActor`
-
-    - `class BetaManagedAgentsUserActor:`
-
-      Attribution for a write made by a human user through the Anthropic Console.
-
-      - `required Type Type`
-
-        - `"user_actor"UserActor`
-
-      - `required string UserID`
-
-        ID of the user who performed the write (a `user_...` value).
 
 ### Beta Managed Agents Memory Version Operation
 

@@ -1,10 +1,10 @@
 ---
-title: "Download"
+title: "Download Skill Version Content"
 source: "https://platform.claude.com/docs/en/api/python/beta/skills/versions/download"
 category: "api"
 generated: true
 ---
-## Download
+## Download Skill Version Content
 
 `beta.skills.versions.download(strversion, VersionDownloadParams**kwargs)  -> BinaryResponseContent`
 

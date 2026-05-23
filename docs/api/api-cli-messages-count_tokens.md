@@ -1,10 +1,10 @@
 ---
-title: "Count Tokens"
+title: "Count tokens in a Message"
 source: "https://platform.claude.com/docs/en/api/cli/messages/count_tokens"
 category: "api"
 generated: true
 ---
-## Count Tokens
+## Count tokens in a Message
 
 `$ ant messages count-tokens`
 
@@ -180,4 +180,12 @@ ant messages count-tokens \
   --api-key my-anthropic-api-key \
   --message '{content: [{text: x, type: text}], role: user}' \
   --model claude-opus-4-6
+```
+
+#### Response
+
+```json
+{
+  "input_tokens": 2095
+}
 ```

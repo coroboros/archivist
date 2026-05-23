@@ -1,10 +1,10 @@
 ---
-title: "Retrieve"
+title: "Get Vault"
 source: "https://platform.claude.com/docs/en/api/beta/vaults/retrieve"
 category: "api"
 generated: true
 ---
-## Retrieve
+## Get Vault
 
 **get** `/v1/vaults/{vault_id}`
 
@@ -20,9 +20,9 @@ Get Vault
 
   Optional header to specify the beta version(s) you want to use.
 
-  - `UnionMember0 = string`
+  - `string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -76,7 +76,7 @@ Get Vault
 
 ### Returns
 
-- `BetaManagedAgentsVault = object { id, archived_at, created_at, 4 more }`
+- `BetaManagedAgentsVault object { id, archived_at, created_at, 4 more }`
 
   A vault that stores credentials for use by agents during sessions.
 
@@ -115,4 +115,20 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: managed-agents-2026-04-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
+```
+
+#### Response
+
+```json
+{
+  "id": "vlt_011CZkZDLs7fYzm1hXNPeRjv",
+  "archived_at": null,
+  "created_at": "2026-03-15T10:00:00Z",
+  "display_name": "Example vault",
+  "metadata": {
+    "environment": "production"
+  },
+  "type": "vault",
+  "updated_at": "2026-03-15T10:00:00Z"
+}
 ```

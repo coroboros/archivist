@@ -1,10 +1,10 @@
 ---
-title: "Archive"
+title: "Archive a memory store"
 source: "https://platform.claude.com/docs/en/api/csharp/beta/memory_stores/archive"
 category: "api"
 generated: true
 ---
-## Archive
+## Archive a memory store
 
 `BetaManagedAgentsMemoryStore Beta.MemoryStores.Archive(MemoryStoreArchiveParamsparameters, CancellationTokencancellationToken = default)`
 
@@ -123,4 +123,21 @@ MemoryStoreArchiveParams parameters = new()
 var betaManagedAgentsMemoryStore = await client.Beta.MemoryStores.Archive(parameters);
 
 Console.WriteLine(betaManagedAgentsMemoryStore);
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "name": "name",
+  "type": "memory_store",
+  "updated_at": "2019-12-27T18:11:19.117Z",
+  "archived_at": "2019-12-27T18:11:19.117Z",
+  "description": "description",
+  "metadata": {
+    "foo": "string"
+  }
+}
 ```

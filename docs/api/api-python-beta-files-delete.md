@@ -1,10 +1,10 @@
 ---
-title: "Delete"
+title: "Delete File"
 source: "https://platform.claude.com/docs/en/api/python/beta/files/delete"
 category: "api"
 generated: true
 ---
-## Delete
+## Delete File
 
 `beta.files.delete(strfile_id, FileDeleteParams**kwargs)  -> DeletedFile`
 
@@ -105,4 +105,13 @@ deleted_file = client.beta.files.delete(
     file_id="file_id",
 )
 print(deleted_file.id)
+```
+
+#### Response
+
+```json
+{
+  "id": "file_011CNha8iCJcU1wXNR6q4V8w",
+  "type": "file_deleted"
+}
 ```

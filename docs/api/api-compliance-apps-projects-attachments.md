@@ -6,7 +6,7 @@ generated: true
 ---
 # Attachments
 
-## List
+## List project attachments
 
 **get** `/v1/compliance/apps/projects/{project_id}/attachments`
 
@@ -53,7 +53,7 @@ NotFoundException: If project doesn't exist or project_id format is invalid
 
   List of attachments sorted chronologically by created_at, tie break by id
 
-  - `ComplianceProjectFileReference = object { id, created_at, filename, 2 more }`
+  - `ComplianceProjectFileReference object { id, created_at, filename, 2 more }`
 
     File attachment reference for compliance responses.
 
@@ -79,7 +79,7 @@ NotFoundException: If project doesn't exist or project_id format is invalid
 
       - `"project_file"`
 
-  - `ComplianceProjectDocReference = object { id, created_at, filename, 2 more }`
+  - `ComplianceProjectDocReference object { id, created_at, filename, 2 more }`
 
     Project document attachment reference for compliance responses.
 
@@ -122,6 +122,24 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/$PROJECT_ID/attachmen
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "id": "id",
+      "created_at": "2019-12-27T18:11:19.117Z",
+      "filename": "filename",
+      "mime_type": "mime_type",
+      "type": "project_file"
+    }
+  ],
+  "has_more": true,
+  "next_page": "next_page"
+}
+```
+
 ## Domain Types
 
 ### Attachment List Response
@@ -130,7 +148,7 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/$PROJECT_ID/attachmen
 
   File attachment reference for compliance responses.
 
-  - `ComplianceProjectFileReference = object { id, created_at, filename, 2 more }`
+  - `ComplianceProjectFileReference object { id, created_at, filename, 2 more }`
 
     File attachment reference for compliance responses.
 
@@ -156,7 +174,7 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/$PROJECT_ID/attachmen
 
       - `"project_file"`
 
-  - `ComplianceProjectDocReference = object { id, created_at, filename, 2 more }`
+  - `ComplianceProjectDocReference object { id, created_at, filename, 2 more }`
 
     Project document attachment reference for compliance responses.
 

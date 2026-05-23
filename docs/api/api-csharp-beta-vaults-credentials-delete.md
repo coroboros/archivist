@@ -1,10 +1,10 @@
 ---
-title: "Delete"
+title: "Delete Credential"
 source: "https://platform.claude.com/docs/en/api/csharp/beta/vaults/credentials/delete"
 category: "api"
 generated: true
 ---
-## Delete
+## Delete Credential
 
 `BetaManagedAgentsDeletedCredential Beta.Vaults.Credentials.Delete(CredentialDeleteParamsparameters, CancellationTokencancellationToken = default)`
 
@@ -104,4 +104,13 @@ CredentialDeleteParams parameters = new()
 var betaManagedAgentsDeletedCredential = await client.Beta.Vaults.Credentials.Delete(parameters);
 
 Console.WriteLine(betaManagedAgentsDeletedCredential);
+```
+
+#### Response
+
+```json
+{
+  "id": "vcrd_011CZkZEMt8gZan2iYOQfSkw",
+  "type": "vault_credential_deleted"
+}
 ```

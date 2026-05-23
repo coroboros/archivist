@@ -1,10 +1,10 @@
 ---
-title: "Retrieve"
+title: "Get Skill Version"
 source: "https://platform.claude.com/docs/en/api/python/beta/skills/versions/retrieve"
 category: "api"
 generated: true
 ---
-## Retrieve
+## Get Skill Version
 
 `beta.skills.versions.retrieve(strversion, VersionRetrieveParams**kwargs)  -> VersionRetrieveResponse`
 
@@ -146,4 +146,19 @@ version = client.beta.skills.versions.retrieve(
     skill_id="skill_id",
 )
 print(version.id)
+```
+
+#### Response
+
+```json
+{
+  "id": "skillver_01JAbcdefghijklmnopqrstuvw",
+  "created_at": "2024-10-30T23:58:27.427722Z",
+  "description": "A custom skill for doing something useful",
+  "directory": "my-skill",
+  "name": "my-skill",
+  "skill_id": "skill_01JAbcdefghijklmnopqrstuvw",
+  "type": "type",
+  "version": "1759178010641129"
+}
 ```

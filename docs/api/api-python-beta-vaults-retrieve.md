@@ -1,10 +1,10 @@
 ---
-title: "Retrieve"
+title: "Get Vault"
 source: "https://platform.claude.com/docs/en/api/python/beta/vaults/retrieve"
 category: "api"
 generated: true
 ---
-## Retrieve
+## Get Vault
 
 `beta.vaults.retrieve(strvault_id, VaultRetrieveParams**kwargs)  -> BetaManagedAgentsVault`
 
@@ -121,4 +121,20 @@ beta_managed_agents_vault = client.beta.vaults.retrieve(
     vault_id="vlt_011CZkZDLs7fYzm1hXNPeRjv",
 )
 print(beta_managed_agents_vault.id)
+```
+
+#### Response
+
+```json
+{
+  "id": "vlt_011CZkZDLs7fYzm1hXNPeRjv",
+  "archived_at": null,
+  "created_at": "2026-03-15T10:00:00Z",
+  "display_name": "Example vault",
+  "metadata": {
+    "environment": "production"
+  },
+  "type": "vault",
+  "updated_at": "2026-03-15T10:00:00Z"
+}
 ```

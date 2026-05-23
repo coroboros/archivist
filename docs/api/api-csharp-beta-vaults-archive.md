@@ -1,10 +1,10 @@
 ---
-title: "Archive"
+title: "Archive Vault"
 source: "https://platform.claude.com/docs/en/api/csharp/beta/vaults/archive"
 category: "api"
 generated: true
 ---
-## Archive
+## Archive Vault
 
 `BetaManagedAgentsVault Beta.Vaults.Archive(VaultArchiveParamsparameters, CancellationTokencancellationToken = default)`
 
@@ -119,4 +119,20 @@ VaultArchiveParams parameters = new()
 var betaManagedAgentsVault = await client.Beta.Vaults.Archive(parameters);
 
 Console.WriteLine(betaManagedAgentsVault);
+```
+
+#### Response
+
+```json
+{
+  "id": "vlt_011CZkZDLs7fYzm1hXNPeRjv",
+  "archived_at": null,
+  "created_at": "2026-03-15T10:00:00Z",
+  "display_name": "Example vault",
+  "metadata": {
+    "environment": "production"
+  },
+  "type": "vault",
+  "updated_at": "2026-03-15T10:00:00Z"
+}
 ```

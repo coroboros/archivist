@@ -1,10 +1,10 @@
 ---
-title: "Retrieve Metadata"
+title: "Get File Metadata"
 source: "https://platform.claude.com/docs/en/api/java/beta/files/retrieve_metadata"
 category: "api"
 generated: true
 ---
-## Retrieve Metadata
+## Get File Metadata
 
 `FileMetadata beta().files().retrieveMetadata(FileRetrieveMetadataParamsparams = FileRetrieveMetadataParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
 
@@ -144,5 +144,23 @@ public final class Main {
 
         FileMetadata fileMetadata = client.beta().files().retrieveMetadata("file_id");
     }
+}
+```
+
+#### Response
+
+```json
+{
+  "id": "file_011CNha8iCJcU1wXNR6q4V8w",
+  "created_at": "2025-04-15T18:37:24.100435Z",
+  "filename": "document.pdf",
+  "mime_type": "application/pdf",
+  "size_bytes": 102400,
+  "type": "file",
+  "downloadable": false,
+  "scope": {
+    "id": "id",
+    "type": "session"
+  }
 }
 ```

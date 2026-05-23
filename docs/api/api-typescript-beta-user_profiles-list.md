@@ -1,10 +1,10 @@
 ---
-title: "List"
+title: "List User Profiles"
 source: "https://platform.claude.com/docs/en/api/typescript/beta/user_profiles/list"
 category: "api"
 generated: true
 ---
-## List
+## List User Profiles
 
 `client.beta.userProfiles.list(UserProfileListParamsparams?, RequestOptionsoptions?): PageCursor<BetaUserProfile>`
 
@@ -160,5 +160,30 @@ const client = new Anthropic({
 // Automatically fetches more pages as needed.
 for await (const betaUserProfile of client.beta.userProfiles.list()) {
   console.log(betaUserProfile.id);
+}
+```
+
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
+      "created_at": "2026-03-15T10:00:00Z",
+      "metadata": {},
+      "relationship": "external",
+      "trust_grants": {
+        "cyber": {
+          "status": "active"
+        }
+      },
+      "type": "user_profile",
+      "updated_at": "2026-03-15T10:00:00Z",
+      "external_id": "user_12345",
+      "name": "Example User"
+    }
+  ],
+  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
 }
 ```

@@ -1,10 +1,10 @@
 ---
-title: "Delete"
+title: "Delete Workspace Member"
 source: "https://platform.claude.com/docs/en/api/admin/workspaces/members/delete"
 category: "api"
 generated: true
 ---
-## Delete
+## Delete Workspace Member
 
 **delete** `/v1/organizations/workspaces/{workspace_id}/members/{user_id}`
 
@@ -45,4 +45,14 @@ curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/members
     -X DELETE \
     -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
+```
+
+#### Response
+
+```json
+{
+  "type": "workspace_member_deleted",
+  "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+  "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
+}
 ```

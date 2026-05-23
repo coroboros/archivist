@@ -1,10 +1,10 @@
 ---
-title: "List"
+title: "List memories"
 source: "https://platform.claude.com/docs/en/api/csharp/beta/memory_stores/memories/list"
 category: "api"
 generated: true
 ---
-## List
+## List memories
 
 `MemoryListPageResponse Beta.MemoryStores.Memories.List(MemoryListParamsparameters, CancellationTokencancellationToken = default)`
 
@@ -185,5 +185,27 @@ var page = await client.Beta.MemoryStores.Memories.List(parameters);
 await foreach (var item in page.Paginate())
 {
     Console.WriteLine(item);
+}
+```
+
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "id": "id",
+      "content_sha256": "content_sha256",
+      "content_size_bytes": 0,
+      "created_at": "2019-12-27T18:11:19.117Z",
+      "memory_store_id": "memory_store_id",
+      "memory_version_id": "memory_version_id",
+      "path": "path",
+      "type": "memory",
+      "updated_at": "2019-12-27T18:11:19.117Z",
+      "content": "content"
+    }
+  ],
+  "next_page": "next_page"
 }
 ```

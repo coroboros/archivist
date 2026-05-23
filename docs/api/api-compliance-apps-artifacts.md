@@ -6,7 +6,7 @@ generated: true
 ---
 # Artifacts
 
-## Retrieve
+## Get artifact metadata
 
 **get** `/v1/compliance/apps/artifacts/{artifact_version_id}`
 
@@ -68,7 +68,22 @@ curl https://api.anthropic.com/v1/compliance/apps/artifacts/$ARTIFACT_VERSION_ID
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
-## Download
+#### Response
+
+```json
+{
+  "id": "id",
+  "artifact_type": "artifact_type",
+  "claude_chat_id": "claude_chat_id",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "md5": "md5",
+  "size_bytes": 0,
+  "title": "title",
+  "version_id": "version_id"
+}
+```
+
+## Download artifact content
 
 **get** `/v1/compliance/apps/artifacts/{artifact_version_id}/content`
 
@@ -97,7 +112,7 @@ curl https://api.anthropic.com/v1/compliance/apps/artifacts/$ARTIFACT_VERSION_ID
 
 ### Artifact Retrieve Response
 
-- `ArtifactRetrieveResponse = object { id, artifact_type, claude_chat_id, 5 more }`
+- `ArtifactRetrieveResponse object { id, artifact_type, claude_chat_id, 5 more }`
 
   Artifact version metadata for GET /v1/compliance/apps/artifacts/{artifact_version_id}.
 

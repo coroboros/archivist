@@ -1,10 +1,10 @@
 ---
-title: "List"
+title: "List Skills"
 source: "https://platform.claude.com/docs/en/api/typescript/beta/skills/list"
 category: "api"
 generated: true
 ---
-## List
+## List Skills
 
 `client.beta.skills.list(SkillListParamsparams?, RequestOptionsoptions?): PageCursor<SkillListResponse>`
 
@@ -152,5 +152,25 @@ const client = new Anthropic({
 // Automatically fetches more pages as needed.
 for await (const skillListResponse of client.beta.skills.list()) {
   console.log(skillListResponse.id);
+}
+```
+
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "id": "skill_01JAbcdefghijklmnopqrstuvw",
+      "created_at": "2024-10-30T23:58:27.427722Z",
+      "display_title": "My Custom Skill",
+      "latest_version": "1759178010641129",
+      "source": "custom",
+      "type": "type",
+      "updated_at": "2024-10-30T23:58:27.427722Z"
+    }
+  ],
+  "has_more": true,
+  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
 }
 ```

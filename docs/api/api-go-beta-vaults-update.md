@@ -1,10 +1,10 @@
 ---
-title: "Update"
+title: "Update Vault"
 source: "https://platform.claude.com/docs/en/api/go/beta/vaults/update"
 category: "api"
 generated: true
 ---
-## Update
+## Update Vault
 
 `client.Beta.Vaults.Update(ctx, vaultID, params) (*BetaManagedAgentsVault, error)`
 
@@ -146,5 +146,21 @@ func main() {
     panic(err.Error())
   }
   fmt.Printf("%+v\n", betaManagedAgentsVault.ID)
+}
+```
+
+#### Response
+
+```json
+{
+  "id": "vlt_011CZkZDLs7fYzm1hXNPeRjv",
+  "archived_at": null,
+  "created_at": "2026-03-15T10:00:00Z",
+  "display_name": "Example vault",
+  "metadata": {
+    "environment": "production"
+  },
+  "type": "vault",
+  "updated_at": "2026-03-15T10:00:00Z"
 }
 ```

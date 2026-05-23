@@ -1,10 +1,10 @@
 ---
-title: "Create"
+title: "Create a memory"
 source: "https://platform.claude.com/docs/en/api/java/beta/memory_stores/memories/create"
 category: "api"
 generated: true
 ---
-## Create
+## Create a memory
 
 `BetaManagedAgentsMemory beta().memoryStores().memories().create(MemoryCreateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())`
 
@@ -153,5 +153,22 @@ public final class Main {
             .build();
         BetaManagedAgentsMemory betaManagedAgentsMemory = client.beta().memoryStores().memories().create(params);
     }
+}
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "content_sha256": "content_sha256",
+  "content_size_bytes": 0,
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "memory_store_id": "memory_store_id",
+  "memory_version_id": "memory_version_id",
+  "path": "path",
+  "type": "memory",
+  "updated_at": "2019-12-27T18:11:19.117Z",
+  "content": "content"
 }
 ```

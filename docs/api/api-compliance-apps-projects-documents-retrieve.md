@@ -1,10 +1,10 @@
 ---
-title: "Retrieve"
+title: "Get project document content"
 source: "https://platform.claude.com/docs/en/api/compliance/apps/projects/documents/retrieve"
 category: "api"
 generated: true
 ---
-## Retrieve
+## Get project document content
 
 **get** `/v1/compliance/apps/projects/documents/{document_id}`
 
@@ -58,4 +58,19 @@ Project document information including content and metadata
 ```http
 curl https://api.anthropic.com/v1/compliance/apps/projects/documents/$DOCUMENT_ID \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "content": "content",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "filename": "filename",
+  "user": {
+    "id": "id",
+    "email_address": "email_address"
+  }
+}
 ```

@@ -1,10 +1,10 @@
 ---
-title: "Download"
+title: "Download File"
 source: "https://platform.claude.com/docs/en/api/java/beta/files/download"
 category: "api"
 generated: true
 ---
-## Download
+## Download File
 
 `HttpResponse beta().files().download(FileDownloadParamsparams = FileDownloadParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
 

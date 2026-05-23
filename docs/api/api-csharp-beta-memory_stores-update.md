@@ -1,10 +1,10 @@
 ---
-title: "Update"
+title: "Update a memory store"
 source: "https://platform.claude.com/docs/en/api/csharp/beta/memory_stores/update"
 category: "api"
 generated: true
 ---
-## Update
+## Update a memory store
 
 `BetaManagedAgentsMemoryStore Beta.MemoryStores.Update(MemoryStoreUpdateParamsparameters, CancellationTokencancellationToken = default)`
 
@@ -135,4 +135,21 @@ MemoryStoreUpdateParams parameters = new()
 var betaManagedAgentsMemoryStore = await client.Beta.MemoryStores.Update(parameters);
 
 Console.WriteLine(betaManagedAgentsMemoryStore);
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "name": "name",
+  "type": "memory_store",
+  "updated_at": "2019-12-27T18:11:19.117Z",
+  "archived_at": "2019-12-27T18:11:19.117Z",
+  "description": "description",
+  "metadata": {
+    "foo": "string"
+  }
+}
 ```

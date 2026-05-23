@@ -1,10 +1,10 @@
 ---
-title: "Me"
+title: "Get Current Organization"
 source: "https://platform.claude.com/docs/en/api/admin/organizations/me"
 category: "api"
 generated: true
 ---
-## Me
+## Get Current Organization
 
 **get** `/v1/organizations/me`
 
@@ -12,7 +12,7 @@ Retrieve information about the organization associated with the authenticated AP
 
 ### Returns
 
-- `Organization = object { id, name, type }`
+- `Organization object { id, name, type }`
 
   - `id: string`
 
@@ -36,4 +36,14 @@ Retrieve information about the organization associated with the authenticated AP
 curl https://api.anthropic.com/v1/organizations/me \
     -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
+```
+
+#### Response
+
+```json
+{
+  "id": "12345678-1234-5678-1234-567812345678",
+  "name": "Organization Name",
+  "type": "organization"
+}
 ```

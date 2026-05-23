@@ -1,10 +1,10 @@
 ---
-title: "Download"
+title: "Download artifact content"
 source: "https://platform.claude.com/docs/en/api/compliance/apps/artifacts/download"
 category: "api"
 generated: true
 ---
-## Download
+## Download artifact content
 
 **get** `/v1/compliance/apps/artifacts/{artifact_version_id}/content`
 

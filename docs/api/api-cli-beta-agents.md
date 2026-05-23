@@ -6,7 +6,7 @@ generated: true
 ---
 # Agents
 
-## Create
+## Create Agent
 
 `$ ant beta:agents create`
 
@@ -252,17 +252,9 @@ Create Agent
 
             Tool calls are automatically approved without user confirmation.
 
-            - `type: "always_allow"`
-
-              - `"always_allow"`
-
           - `beta_managed_agents_always_ask_policy: object { type }`
 
             Tool calls require user confirmation before execution.
-
-            - `type: "always_ask"`
-
-              - `"always_ask"`
 
       - `type: "agent_toolset_20260401"`
 
@@ -284,17 +276,9 @@ Create Agent
 
             Tool calls are automatically approved without user confirmation.
 
-            - `type: "always_allow"`
-
-              - `"always_allow"`
-
           - `beta_managed_agents_always_ask_policy: object { type }`
 
             Tool calls require user confirmation before execution.
-
-            - `type: "always_ask"`
-
-              - `"always_ask"`
 
       - `default_config: object { enabled, permission_policy }`
 
@@ -310,17 +294,9 @@ Create Agent
 
             Tool calls are automatically approved without user confirmation.
 
-            - `type: "always_allow"`
-
-              - `"always_allow"`
-
           - `beta_managed_agents_always_ask_policy: object { type }`
 
             Tool calls require user confirmation before execution.
-
-            - `type: "always_ask"`
-
-              - `"always_ask"`
 
       - `mcp_server_name: string`
 
@@ -379,7 +355,79 @@ ant beta:agents create \
   --name 'My First Agent'
 ```
 
-## List
+#### Response
+
+```json
+{
+  "id": "agent_011CZkYpogX7uDKUyvBTophP",
+  "archived_at": null,
+  "created_at": "2026-03-15T10:00:00Z",
+  "description": "A general-purpose starter agent.",
+  "mcp_servers": [
+    {
+      "name": "example-mcp",
+      "type": "url",
+      "url": "https://example-server.modelcontextprotocol.io/sse"
+    }
+  ],
+  "metadata": {
+    "foo": "bar"
+  },
+  "model": {
+    "id": "claude-sonnet-4-6",
+    "speed": "standard"
+  },
+  "multiagent": {
+    "agents": [
+      {
+        "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+        "type": "agent",
+        "version": 1
+      }
+    ],
+    "type": "coordinator"
+  },
+  "name": "My First Agent",
+  "skills": [
+    {
+      "skill_id": "xlsx",
+      "type": "anthropic",
+      "version": "1"
+    },
+    {
+      "skill_id": "skill_011CZkZFNu9hAbo3jZPRgTlx",
+      "type": "custom",
+      "version": "2"
+    }
+  ],
+  "system": "You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user's task end to end.",
+  "tools": [
+    {
+      "configs": [
+        {
+          "enabled": true,
+          "name": "bash",
+          "permission_policy": {
+            "type": "always_allow"
+          }
+        }
+      ],
+      "default_config": {
+        "enabled": true,
+        "permission_policy": {
+          "type": "always_ask"
+        }
+      },
+      "type": "agent_toolset_20260401"
+    }
+  ],
+  "type": "agent",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "version": 1
+}
+```
+
+## List Agents
 
 `$ ant beta:agents list`
 
@@ -613,17 +661,9 @@ List Agents
 
               Tool calls are automatically approved without user confirmation.
 
-              - `type: "always_allow"`
-
-                - `"always_allow"`
-
             - `beta_managed_agents_always_ask_policy: object { type }`
 
               Tool calls require user confirmation before execution.
-
-              - `type: "always_ask"`
-
-                - `"always_ask"`
 
         - `type: "agent_toolset_20260401"`
 
@@ -645,17 +685,9 @@ List Agents
 
               Tool calls are automatically approved without user confirmation.
 
-              - `type: "always_allow"`
-
-                - `"always_allow"`
-
             - `beta_managed_agents_always_ask_policy: object { type }`
 
               Tool calls require user confirmation before execution.
-
-              - `type: "always_ask"`
-
-                - `"always_ask"`
 
         - `default_config: object { enabled, permission_policy }`
 
@@ -671,17 +703,9 @@ List Agents
 
               Tool calls are automatically approved without user confirmation.
 
-              - `type: "always_allow"`
-
-                - `"always_allow"`
-
             - `beta_managed_agents_always_ask_policy: object { type }`
 
               Tool calls require user confirmation before execution.
-
-              - `type: "always_ask"`
-
-                - `"always_ask"`
 
         - `mcp_server_name: string`
 
@@ -742,7 +766,84 @@ ant beta:agents list \
   --api-key my-anthropic-api-key
 ```
 
-## Retrieve
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "id": "agent_011CZkYpogX7uDKUyvBTophP",
+      "archived_at": null,
+      "created_at": "2026-03-15T10:00:00Z",
+      "description": "A general-purpose starter agent.",
+      "mcp_servers": [
+        {
+          "name": "example-mcp",
+          "type": "url",
+          "url": "https://example-server.modelcontextprotocol.io/sse"
+        }
+      ],
+      "metadata": {
+        "foo": "bar"
+      },
+      "model": {
+        "id": "claude-sonnet-4-6",
+        "speed": "standard"
+      },
+      "multiagent": {
+        "agents": [
+          {
+            "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+            "type": "agent",
+            "version": 1
+          }
+        ],
+        "type": "coordinator"
+      },
+      "name": "My First Agent",
+      "skills": [
+        {
+          "skill_id": "xlsx",
+          "type": "anthropic",
+          "version": "1"
+        },
+        {
+          "skill_id": "skill_011CZkZFNu9hAbo3jZPRgTlx",
+          "type": "custom",
+          "version": "2"
+        }
+      ],
+      "system": "You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user's task end to end.",
+      "tools": [
+        {
+          "configs": [
+            {
+              "enabled": true,
+              "name": "bash",
+              "permission_policy": {
+                "type": "always_allow"
+              }
+            }
+          ],
+          "default_config": {
+            "enabled": true,
+            "permission_policy": {
+              "type": "always_ask"
+            }
+          },
+          "type": "agent_toolset_20260401"
+        }
+      ],
+      "type": "agent",
+      "updated_at": "2026-03-15T10:00:00Z",
+      "version": 1
+    }
+  ],
+  "next_page": "next_page"
+}
+```
+
+## Get Agent
 
 `$ ant beta:agents retrieve`
 
@@ -960,17 +1061,9 @@ Get Agent
 
             Tool calls are automatically approved without user confirmation.
 
-            - `type: "always_allow"`
-
-              - `"always_allow"`
-
           - `beta_managed_agents_always_ask_policy: object { type }`
 
             Tool calls require user confirmation before execution.
-
-            - `type: "always_ask"`
-
-              - `"always_ask"`
 
       - `type: "agent_toolset_20260401"`
 
@@ -992,17 +1085,9 @@ Get Agent
 
             Tool calls are automatically approved without user confirmation.
 
-            - `type: "always_allow"`
-
-              - `"always_allow"`
-
           - `beta_managed_agents_always_ask_policy: object { type }`
 
             Tool calls require user confirmation before execution.
-
-            - `type: "always_ask"`
-
-              - `"always_ask"`
 
       - `default_config: object { enabled, permission_policy }`
 
@@ -1018,17 +1103,9 @@ Get Agent
 
             Tool calls are automatically approved without user confirmation.
 
-            - `type: "always_allow"`
-
-              - `"always_allow"`
-
           - `beta_managed_agents_always_ask_policy: object { type }`
 
             Tool calls require user confirmation before execution.
-
-            - `type: "always_ask"`
-
-              - `"always_ask"`
 
       - `mcp_server_name: string`
 
@@ -1086,7 +1163,79 @@ ant beta:agents retrieve \
   --agent-id agent_011CZkYpogX7uDKUyvBTophP
 ```
 
-## Update
+#### Response
+
+```json
+{
+  "id": "agent_011CZkYpogX7uDKUyvBTophP",
+  "archived_at": null,
+  "created_at": "2026-03-15T10:00:00Z",
+  "description": "A general-purpose starter agent.",
+  "mcp_servers": [
+    {
+      "name": "example-mcp",
+      "type": "url",
+      "url": "https://example-server.modelcontextprotocol.io/sse"
+    }
+  ],
+  "metadata": {
+    "foo": "bar"
+  },
+  "model": {
+    "id": "claude-sonnet-4-6",
+    "speed": "standard"
+  },
+  "multiagent": {
+    "agents": [
+      {
+        "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+        "type": "agent",
+        "version": 1
+      }
+    ],
+    "type": "coordinator"
+  },
+  "name": "My First Agent",
+  "skills": [
+    {
+      "skill_id": "xlsx",
+      "type": "anthropic",
+      "version": "1"
+    },
+    {
+      "skill_id": "skill_011CZkZFNu9hAbo3jZPRgTlx",
+      "type": "custom",
+      "version": "2"
+    }
+  ],
+  "system": "You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user's task end to end.",
+  "tools": [
+    {
+      "configs": [
+        {
+          "enabled": true,
+          "name": "bash",
+          "permission_policy": {
+            "type": "always_allow"
+          }
+        }
+      ],
+      "default_config": {
+        "enabled": true,
+        "permission_policy": {
+          "type": "always_ask"
+        }
+      },
+      "type": "agent_toolset_20260401"
+    }
+  ],
+  "type": "agent",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "version": 1
+}
+```
+
+## Update Agent
 
 `$ ant beta:agents update`
 
@@ -1340,17 +1489,9 @@ Update Agent
 
             Tool calls are automatically approved without user confirmation.
 
-            - `type: "always_allow"`
-
-              - `"always_allow"`
-
           - `beta_managed_agents_always_ask_policy: object { type }`
 
             Tool calls require user confirmation before execution.
-
-            - `type: "always_ask"`
-
-              - `"always_ask"`
 
       - `type: "agent_toolset_20260401"`
 
@@ -1372,17 +1513,9 @@ Update Agent
 
             Tool calls are automatically approved without user confirmation.
 
-            - `type: "always_allow"`
-
-              - `"always_allow"`
-
           - `beta_managed_agents_always_ask_policy: object { type }`
 
             Tool calls require user confirmation before execution.
-
-            - `type: "always_ask"`
-
-              - `"always_ask"`
 
       - `default_config: object { enabled, permission_policy }`
 
@@ -1398,17 +1531,9 @@ Update Agent
 
             Tool calls are automatically approved without user confirmation.
 
-            - `type: "always_allow"`
-
-              - `"always_allow"`
-
           - `beta_managed_agents_always_ask_policy: object { type }`
 
             Tool calls require user confirmation before execution.
-
-            - `type: "always_ask"`
-
-              - `"always_ask"`
 
       - `mcp_server_name: string`
 
@@ -1467,7 +1592,79 @@ ant beta:agents update \
   --version 1
 ```
 
-## Archive
+#### Response
+
+```json
+{
+  "id": "agent_011CZkYpogX7uDKUyvBTophP",
+  "archived_at": null,
+  "created_at": "2026-03-15T10:00:00Z",
+  "description": "A general-purpose starter agent.",
+  "mcp_servers": [
+    {
+      "name": "example-mcp",
+      "type": "url",
+      "url": "https://example-server.modelcontextprotocol.io/sse"
+    }
+  ],
+  "metadata": {
+    "foo": "bar"
+  },
+  "model": {
+    "id": "claude-sonnet-4-6",
+    "speed": "standard"
+  },
+  "multiagent": {
+    "agents": [
+      {
+        "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+        "type": "agent",
+        "version": 1
+      }
+    ],
+    "type": "coordinator"
+  },
+  "name": "My First Agent",
+  "skills": [
+    {
+      "skill_id": "xlsx",
+      "type": "anthropic",
+      "version": "1"
+    },
+    {
+      "skill_id": "skill_011CZkZFNu9hAbo3jZPRgTlx",
+      "type": "custom",
+      "version": "2"
+    }
+  ],
+  "system": "You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user's task end to end.",
+  "tools": [
+    {
+      "configs": [
+        {
+          "enabled": true,
+          "name": "bash",
+          "permission_policy": {
+            "type": "always_allow"
+          }
+        }
+      ],
+      "default_config": {
+        "enabled": true,
+        "permission_policy": {
+          "type": "always_ask"
+        }
+      },
+      "type": "agent_toolset_20260401"
+    }
+  ],
+  "type": "agent",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "version": 1
+}
+```
+
+## Archive Agent
 
 `$ ant beta:agents archive`
 
@@ -1681,17 +1878,9 @@ Archive Agent
 
             Tool calls are automatically approved without user confirmation.
 
-            - `type: "always_allow"`
-
-              - `"always_allow"`
-
           - `beta_managed_agents_always_ask_policy: object { type }`
 
             Tool calls require user confirmation before execution.
-
-            - `type: "always_ask"`
-
-              - `"always_ask"`
 
       - `type: "agent_toolset_20260401"`
 
@@ -1713,17 +1902,9 @@ Archive Agent
 
             Tool calls are automatically approved without user confirmation.
 
-            - `type: "always_allow"`
-
-              - `"always_allow"`
-
           - `beta_managed_agents_always_ask_policy: object { type }`
 
             Tool calls require user confirmation before execution.
-
-            - `type: "always_ask"`
-
-              - `"always_ask"`
 
       - `default_config: object { enabled, permission_policy }`
 
@@ -1739,17 +1920,9 @@ Archive Agent
 
             Tool calls are automatically approved without user confirmation.
 
-            - `type: "always_allow"`
-
-              - `"always_allow"`
-
           - `beta_managed_agents_always_ask_policy: object { type }`
 
             Tool calls require user confirmation before execution.
-
-            - `type: "always_ask"`
-
-              - `"always_ask"`
 
       - `mcp_server_name: string`
 
@@ -1805,6 +1978,78 @@ Archive Agent
 ant beta:agents archive \
   --api-key my-anthropic-api-key \
   --agent-id agent_011CZkYpogX7uDKUyvBTophP
+```
+
+#### Response
+
+```json
+{
+  "id": "agent_011CZkYpogX7uDKUyvBTophP",
+  "archived_at": null,
+  "created_at": "2026-03-15T10:00:00Z",
+  "description": "A general-purpose starter agent.",
+  "mcp_servers": [
+    {
+      "name": "example-mcp",
+      "type": "url",
+      "url": "https://example-server.modelcontextprotocol.io/sse"
+    }
+  ],
+  "metadata": {
+    "foo": "bar"
+  },
+  "model": {
+    "id": "claude-sonnet-4-6",
+    "speed": "standard"
+  },
+  "multiagent": {
+    "agents": [
+      {
+        "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+        "type": "agent",
+        "version": 1
+      }
+    ],
+    "type": "coordinator"
+  },
+  "name": "My First Agent",
+  "skills": [
+    {
+      "skill_id": "xlsx",
+      "type": "anthropic",
+      "version": "1"
+    },
+    {
+      "skill_id": "skill_011CZkZFNu9hAbo3jZPRgTlx",
+      "type": "custom",
+      "version": "2"
+    }
+  ],
+  "system": "You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user's task end to end.",
+  "tools": [
+    {
+      "configs": [
+        {
+          "enabled": true,
+          "name": "bash",
+          "permission_policy": {
+            "type": "always_allow"
+          }
+        }
+      ],
+      "default_config": {
+        "enabled": true,
+        "permission_policy": {
+          "type": "always_ask"
+        }
+      },
+      "type": "agent_toolset_20260401"
+    }
+  ],
+  "type": "agent",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "version": 1
+}
 ```
 
 ## Domain Types
@@ -2005,17 +2250,9 @@ ant beta:agents archive \
 
             Tool calls are automatically approved without user confirmation.
 
-            - `type: "always_allow"`
-
-              - `"always_allow"`
-
           - `beta_managed_agents_always_ask_policy: object { type }`
 
             Tool calls require user confirmation before execution.
-
-            - `type: "always_ask"`
-
-              - `"always_ask"`
 
       - `type: "agent_toolset_20260401"`
 
@@ -2037,17 +2274,9 @@ ant beta:agents archive \
 
             Tool calls are automatically approved without user confirmation.
 
-            - `type: "always_allow"`
-
-              - `"always_allow"`
-
           - `beta_managed_agents_always_ask_policy: object { type }`
 
             Tool calls require user confirmation before execution.
-
-            - `type: "always_ask"`
-
-              - `"always_ask"`
 
       - `default_config: object { enabled, permission_policy }`
 
@@ -2063,17 +2292,9 @@ ant beta:agents archive \
 
             Tool calls are automatically approved without user confirmation.
 
-            - `type: "always_allow"`
-
-              - `"always_allow"`
-
           - `beta_managed_agents_always_ask_policy: object { type }`
 
             Tool calls require user confirmation before execution.
-
-            - `type: "always_ask"`
-
-              - `"always_ask"`
 
       - `mcp_server_name: string`
 
@@ -2355,17 +2576,9 @@ ant beta:agents archive \
 
         Tool calls are automatically approved without user confirmation.
 
-        - `type: "always_allow"`
-
-          - `"always_allow"`
-
       - `beta_managed_agents_always_ask_policy: object { type }`
 
         Tool calls require user confirmation before execution.
-
-        - `type: "always_ask"`
-
-          - `"always_ask"`
 
   - `type: "agent_toolset_20260401"`
 
@@ -2528,17 +2741,9 @@ ant beta:agents archive \
 
         Tool calls are automatically approved without user confirmation.
 
-        - `type: "always_allow"`
-
-          - `"always_allow"`
-
       - `beta_managed_agents_always_ask_policy: object { type }`
 
         Tool calls require user confirmation before execution.
-
-        - `type: "always_ask"`
-
-          - `"always_ask"`
 
 ### Beta Managed Agents Agent Toolset20260401 Read Input
 
@@ -2867,17 +3072,9 @@ ant beta:agents archive \
 
         Tool calls are automatically approved without user confirmation.
 
-        - `type: "always_allow"`
-
-          - `"always_allow"`
-
       - `beta_managed_agents_always_ask_policy: object { type }`
 
         Tool calls require user confirmation before execution.
-
-        - `type: "always_ask"`
-
-          - `"always_ask"`
 
   - `mcp_server_name: string`
 
@@ -3005,17 +3202,9 @@ ant beta:agents archive \
 
         Tool calls are automatically approved without user confirmation.
 
-        - `type: "always_allow"`
-
-          - `"always_allow"`
-
       - `beta_managed_agents_always_ask_policy: object { type }`
 
         Tool calls require user confirmation before execution.
-
-        - `type: "always_ask"`
-
-          - `"always_ask"`
 
 ### Beta Managed Agents Model Config
 
@@ -3367,17 +3556,9 @@ ant beta:agents archive \
 
             Tool calls are automatically approved without user confirmation.
 
-            - `type: "always_allow"`
-
-              - `"always_allow"`
-
           - `beta_managed_agents_always_ask_policy: object { type }`
 
             Tool calls require user confirmation before execution.
-
-            - `type: "always_ask"`
-
-              - `"always_ask"`
 
       - `type: "agent_toolset_20260401"`
 
@@ -3399,17 +3580,9 @@ ant beta:agents archive \
 
             Tool calls are automatically approved without user confirmation.
 
-            - `type: "always_allow"`
-
-              - `"always_allow"`
-
           - `beta_managed_agents_always_ask_policy: object { type }`
 
             Tool calls require user confirmation before execution.
-
-            - `type: "always_ask"`
-
-              - `"always_ask"`
 
       - `default_config: object { enabled, permission_policy }`
 
@@ -3425,17 +3598,9 @@ ant beta:agents archive \
 
             Tool calls are automatically approved without user confirmation.
 
-            - `type: "always_allow"`
-
-              - `"always_allow"`
-
           - `beta_managed_agents_always_ask_policy: object { type }`
 
             Tool calls require user confirmation before execution.
-
-            - `type: "always_ask"`
-
-              - `"always_ask"`
 
       - `mcp_server_name: string`
 
@@ -3537,7 +3702,7 @@ ant beta:agents archive \
 
 # Versions
 
-## List
+## List Agent Versions
 
 `$ ant beta:agents:versions list`
 
@@ -3763,17 +3928,9 @@ List Agent Versions
 
               Tool calls are automatically approved without user confirmation.
 
-              - `type: "always_allow"`
-
-                - `"always_allow"`
-
             - `beta_managed_agents_always_ask_policy: object { type }`
 
               Tool calls require user confirmation before execution.
-
-              - `type: "always_ask"`
-
-                - `"always_ask"`
 
         - `type: "agent_toolset_20260401"`
 
@@ -3795,17 +3952,9 @@ List Agent Versions
 
               Tool calls are automatically approved without user confirmation.
 
-              - `type: "always_allow"`
-
-                - `"always_allow"`
-
             - `beta_managed_agents_always_ask_policy: object { type }`
 
               Tool calls require user confirmation before execution.
-
-              - `type: "always_ask"`
-
-                - `"always_ask"`
 
         - `default_config: object { enabled, permission_policy }`
 
@@ -3821,17 +3970,9 @@ List Agent Versions
 
               Tool calls are automatically approved without user confirmation.
 
-              - `type: "always_allow"`
-
-                - `"always_allow"`
-
             - `beta_managed_agents_always_ask_policy: object { type }`
 
               Tool calls require user confirmation before execution.
-
-              - `type: "always_ask"`
-
-                - `"always_ask"`
 
         - `mcp_server_name: string`
 
@@ -3891,4 +4032,81 @@ List Agent Versions
 ant beta:agents:versions list \
   --api-key my-anthropic-api-key \
   --agent-id agent_011CZkYpogX7uDKUyvBTophP
+```
+
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "id": "agent_011CZkYpogX7uDKUyvBTophP",
+      "archived_at": null,
+      "created_at": "2026-03-15T10:00:00Z",
+      "description": "A general-purpose starter agent.",
+      "mcp_servers": [
+        {
+          "name": "example-mcp",
+          "type": "url",
+          "url": "https://example-server.modelcontextprotocol.io/sse"
+        }
+      ],
+      "metadata": {
+        "foo": "bar"
+      },
+      "model": {
+        "id": "claude-sonnet-4-6",
+        "speed": "standard"
+      },
+      "multiagent": {
+        "agents": [
+          {
+            "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+            "type": "agent",
+            "version": 1
+          }
+        ],
+        "type": "coordinator"
+      },
+      "name": "My First Agent",
+      "skills": [
+        {
+          "skill_id": "xlsx",
+          "type": "anthropic",
+          "version": "1"
+        },
+        {
+          "skill_id": "skill_011CZkZFNu9hAbo3jZPRgTlx",
+          "type": "custom",
+          "version": "2"
+        }
+      ],
+      "system": "You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user's task end to end.",
+      "tools": [
+        {
+          "configs": [
+            {
+              "enabled": true,
+              "name": "bash",
+              "permission_policy": {
+                "type": "always_allow"
+              }
+            }
+          ],
+          "default_config": {
+            "enabled": true,
+            "permission_policy": {
+              "type": "always_ask"
+            }
+          },
+          "type": "agent_toolset_20260401"
+        }
+      ],
+      "type": "agent",
+      "updated_at": "2026-03-15T10:00:00Z",
+      "version": 1
+    }
+  ],
+  "next_page": "next_page"
+}
 ```

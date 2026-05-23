@@ -1,10 +1,10 @@
 ---
-title: "Delete"
+title: "Delete Session Resource"
 source: "https://platform.claude.com/docs/en/api/cli/beta/sessions/resources/delete"
 category: "api"
 generated: true
 ---
-## Delete
+## Delete Session Resource
 
 `$ ant beta:sessions:resources delete`
 
@@ -45,4 +45,13 @@ ant beta:sessions:resources delete \
   --api-key my-anthropic-api-key \
   --session-id sesn_011CZkZAtmR3yMPDzynEDxu7 \
   --resource-id sesrsc_011CZkZBJq5dWxk9fVLNcPht
+```
+
+#### Response
+
+```json
+{
+  "id": "sesrsc_011CZkZBJq5dWxk9fVLNcPht",
+  "type": "session_resource_deleted"
+}
 ```

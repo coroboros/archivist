@@ -1,10 +1,10 @@
 ---
-title: "Archive"
+title: "Archive Tunnel"
 source: "https://platform.claude.com/docs/en/api/admin/mcp_tunnels/archive"
 category: "api"
 generated: true
 ---
-## Archive
+## Archive Tunnel
 
 **post** `/v1/organizations/tunnels/{tunnel_id}/archive`
 
@@ -72,4 +72,18 @@ curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID/archive \
     -X POST \
     -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_WIF_BEARER_TOKEN"
+```
+
+#### Response
+
+```json
+{
+  "id": "tnl_01Hx9Kp2RtQvMn3sWbYdLcF8",
+  "archived_at": "2024-11-01T23:59:27.427722Z",
+  "created_at": "2024-10-30T23:58:27.427722Z",
+  "display_name": "Production",
+  "domain": "a1b2c3d4.tunnel.anthropic.com",
+  "type": "tunnel",
+  "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
+}
 ```

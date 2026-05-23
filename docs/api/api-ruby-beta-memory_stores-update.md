@@ -1,10 +1,10 @@
 ---
-title: "Update"
+title: "Update a memory store"
 source: "https://platform.claude.com/docs/en/api/ruby/beta/memory_stores/update"
 category: "api"
 generated: true
 ---
-## Update
+## Update a memory store
 
 `beta.memory_stores.update(memory_store_id, **kwargs) -> BetaManagedAgentsMemoryStore`
 
@@ -32,9 +32,9 @@ Update a memory store
 
   Optional header to specify the beta version(s) you want to use.
 
-  - `String`
+  - `String = String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 22 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 22 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -134,4 +134,21 @@ anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
 beta_managed_agents_memory_store = anthropic.beta.memory_stores.update("memory_store_id")
 
 puts(beta_managed_agents_memory_store)
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "name": "name",
+  "type": "memory_store",
+  "updated_at": "2019-12-27T18:11:19.117Z",
+  "archived_at": "2019-12-27T18:11:19.117Z",
+  "description": "description",
+  "metadata": {
+    "foo": "string"
+  }
+}
 ```

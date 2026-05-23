@@ -1,10 +1,10 @@
 ---
-title: "Delete"
+title: "Delete Invite"
 source: "https://platform.claude.com/docs/en/api/admin/invites/delete"
 category: "api"
 generated: true
 ---
-## Delete
+## Delete Invite
 
 **delete** `/v1/organizations/invites/{invite_id}`
 
@@ -37,4 +37,13 @@ curl https://api.anthropic.com/v1/organizations/invites/$INVITE_ID \
     -X DELETE \
     -H 'anthropic-version: 2023-06-01' \
     -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
+```
+
+#### Response
+
+```json
+{
+  "id": "invite_015gWxCN9Hfg2QhZwTK7Mdeu",
+  "type": "invite_deleted"
+}
 ```

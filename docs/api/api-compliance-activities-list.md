@@ -1,10 +1,10 @@
 ---
-title: "List"
+title: "Query compliance activities"
 source: "https://platform.claude.com/docs/en/api/compliance/activities/list"
 category: "api"
 generated: true
 ---
-## List
+## Query compliance activities
 
 **get** `/v1/compliance/activities`
 
@@ -1287,7 +1287,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
   List of activity records. Each element's `type` field identifies which activity it is and which additional fields are present.
 
-  - `AccountDeleted = object { actor, id, created_at, 3 more }`
+  - `AccountDeleted object { actor, id, created_at, 3 more }`
 
     User-initiated self-service account deletion.
 
@@ -1325,7 +1325,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"account_deleted"`
 
-  - `AdminAPIKeyCreated = object { actor, admin_api_key_id, scopes, 5 more }`
+  - `AdminAPIKeyCreated object { actor, admin_api_key_id, scopes, 5 more }`
 
     An admin API key was created.
 
@@ -1371,7 +1371,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"admin_api_key_created"`
 
-  - `AdminAPIKeyDeleted = object { actor, admin_api_key_id, id, 4 more }`
+  - `AdminAPIKeyDeleted object { actor, admin_api_key_id, id, 4 more }`
 
     An admin API key was deleted.
 
@@ -1413,7 +1413,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"admin_api_key_deleted"`
 
-  - `AdminAPIKeyUpdated = object { actor, admin_api_key_id, updates, 5 more }`
+  - `AdminAPIKeyUpdated object { actor, admin_api_key_id, updates, 5 more }`
 
     An admin API key was updated (renamed or activated/deactivated).
 
@@ -1467,7 +1467,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"admin_api_key_updated"`
 
-  - `AdminConnectorRequestResolved = object { actor, decision, mcp_server_id, 6 more }`
+  - `AdminConnectorRequestResolved object { actor, decision, mcp_server_id, 6 more }`
 
     Admin approved or dismissed pending member requests to enable an MCP connector.
 
@@ -1515,7 +1515,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"admin_connector_request_resolved"`
 
-  - `AdminRequestCreated = object { actor, request_type, id, 4 more }`
+  - `AdminRequestCreated object { actor, request_type, id, 4 more }`
 
     Admin request created by an org member (seat upgrade, limit increase, join org, end-user invite).
 
@@ -1555,7 +1555,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"admin_request_created"`
 
-  - `AgeVerified = object { actor, id, created_at, 3 more }`
+  - `AgeVerified object { actor, id, created_at, 3 more }`
 
     User age was verified.
 
@@ -1593,7 +1593,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"age_verified"`
 
-  - `AnonymousMobileLoginAttempted = object { actor, id, created_at, 3 more }`
+  - `AnonymousMobileLoginAttempted object { actor, id, created_at, 3 more }`
 
     Anonymous mobile login was attempted.
 
@@ -1629,7 +1629,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"anonymous_mobile_login_attempted"`
 
-  - `APIKeyCreated = object { actor, api_key_id, scopes, 5 more }`
+  - `APIKeyCreated object { actor, api_key_id, scopes, 5 more }`
 
     Activity logged when a new API key is created.
 
@@ -1675,13 +1675,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"api_key_created"`
 
-  - `ClaudeArtifactAccessFailed = object { actor, claude_artifact_id, claude_artifact_version_id, 5 more }`
+  - `ClaudeArtifactAccessFailed object { actor, claude_artifact_id, claude_artifact_version_id, 5 more }`
 
     An attempt to access an artifact failed.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -1695,7 +1695,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `UnauthenticatedUserActor = object { ip_address, user_agent, type, unauthenticated_email_address }`
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
 
         - `ip_address: string`
 
@@ -1731,7 +1731,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"claude_artifact_access_failed"`
 
-  - `ClaudeArtifactCreated = object { actor, claude_artifact_id, id, 4 more }`
+  - `ClaudeArtifactCreated object { actor, claude_artifact_id, id, 4 more }`
 
     An artifact was created.
 
@@ -1771,7 +1771,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"claude_artifact_created"`
 
-  - `ClaudePublishedArtifactDeleted = object { actor, claude_published_artifact_id, id, 4 more }`
+  - `ClaudePublishedArtifactDeleted object { actor, claude_published_artifact_id, id, 4 more }`
 
     A published artifact was unpublished/deleted by its creator.
 
@@ -1811,7 +1811,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"claude_published_artifact_deleted"`
 
-  - `ClaudeArtifactPublished = object { actor, artifact_type, claude_published_artifact_id, 6 more }`
+  - `ClaudeArtifactPublished object { actor, artifact_type, claude_published_artifact_id, 6 more }`
 
     An artifact was published and made publicly accessible.
 
@@ -1859,7 +1859,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"claude_artifact_published"`
 
-  - `ClaudeArtifactSharingUpdated = object { actor, audience, claude_artifact_id, 6 more }`
+  - `ClaudeArtifactSharingUpdated object { actor, audience, claude_artifact_id, 6 more }`
 
     An artifact's sharing settings were updated.
 
@@ -1909,7 +1909,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"claude_artifact_sharing_updated"`
 
-  - `ClaudeArtifactViewed = object { actor, claude_artifact_id, id, 4 more }`
+  - `ClaudeArtifactViewed object { actor, claude_artifact_id, id, 4 more }`
 
     An artifact was viewed.
 
@@ -1949,7 +1949,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"claude_artifact_viewed"`
 
-  - `AuditLogExportAccessed = object { actor, id, created_at, 3 more }`
+  - `AuditLogExportAccessed object { actor, id, created_at, 3 more }`
 
     Audit log export file was accessed/downloaded via signed URL.
 
@@ -1987,7 +1987,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"audit_log_export_accessed"`
 
-  - `AuditLogExportStarted = object { actor, id, created_at, 5 more }`
+  - `AuditLogExportStarted object { actor, id, created_at, 5 more }`
 
     Audit log export was initiated.
 
@@ -2033,7 +2033,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"audit_log_export_started"`
 
-  - `BillingEmailsUpdated = object { actor, id, cc_email_count, 6 more }`
+  - `BillingEmailsUpdated object { actor, id, cc_email_count, 6 more }`
 
     The organization's billing email recipients were updated.
 
@@ -2083,13 +2083,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"billing_emails_updated"`
 
-  - `ClaudeChatAccessFailed = object { actor, claude_chat_id, id, 4 more }`
+  - `ClaudeChatAccessFailed object { actor, claude_chat_id, id, 4 more }`
 
     An attempt to access a chat failed.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -2103,7 +2103,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `UnauthenticatedUserActor = object { ip_address, user_agent, type, unauthenticated_email_address }`
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
 
         - `ip_address: string`
 
@@ -2137,7 +2137,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"claude_chat_access_failed"`
 
-  - `ClaudeChatCreated = object { actor, claude_chat_id, id, 5 more }`
+  - `ClaudeChatCreated object { actor, claude_chat_id, id, 5 more }`
 
     User created a chat.
 
@@ -2181,7 +2181,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"claude_chat_created"`
 
-  - `ClaudeChatDeleted = object { actor, claude_chat_id, id, 5 more }`
+  - `ClaudeChatDeleted object { actor, claude_chat_id, id, 5 more }`
 
     User deleted a chat.
 
@@ -2225,13 +2225,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"claude_chat_deleted"`
 
-  - `ClaudeChatDeletionFailed = object { actor, claude_chat_id, id, 4 more }`
+  - `ClaudeChatDeletionFailed object { actor, claude_chat_id, id, 4 more }`
 
     A request to delete a chat failed.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -2245,7 +2245,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `UnauthenticatedUserActor = object { ip_address, user_agent, type, unauthenticated_email_address }`
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
 
         - `ip_address: string`
 
@@ -2279,7 +2279,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"claude_chat_deletion_failed"`
 
-  - `ClaudeChatSettingsUpdated = object { actor, claude_chat_id, id, 5 more }`
+  - `ClaudeChatSettingsUpdated object { actor, claude_chat_id, id, 5 more }`
 
     User updated the settings for a conversation.
 
@@ -2323,7 +2323,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"claude_chat_settings_updated"`
 
-  - `ClaudeChatSnapshotCreated = object { actor, claude_chat_id, claude_chat_snapshot_id, 5 more }`
+  - `ClaudeChatSnapshotCreated object { actor, claude_chat_id, claude_chat_snapshot_id, 5 more }`
 
     User created/shared a chat snapshot.
 
@@ -2365,13 +2365,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"claude_chat_snapshot_created"`
 
-  - `ClaudeChatSnapshotViewed = object { actor, claude_chat_snapshot_id, id, 5 more }`
+  - `ClaudeChatSnapshotViewed object { actor, claude_chat_snapshot_id, id, 5 more }`
 
     User viewed a chat snapshot (authenticated or public/unauthenticated).
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -2385,7 +2385,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `UnauthenticatedUserActor = object { ip_address, user_agent, type, unauthenticated_email_address }`
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
 
         - `ip_address: string`
 
@@ -2421,7 +2421,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"claude_chat_snapshot_viewed"`
 
-  - `ClaudeChatUpdated = object { actor, claude_chat_id, id, 5 more }`
+  - `ClaudeChatUpdated object { actor, claude_chat_id, id, 5 more }`
 
     User updated the chat metadata (e.g name, model).
 
@@ -2465,7 +2465,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"claude_chat_updated"`
 
-  - `ClaudeChatViewed = object { actor, claude_chat_id, id, 5 more }`
+  - `ClaudeChatViewed object { actor, claude_chat_id, id, 5 more }`
 
     User viewed a chat.
 
@@ -2509,7 +2509,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"claude_chat_viewed"`
 
-  - `ClaudeCodeReviewConfigUpdated = object { actor, enabled, id, 7 more }`
+  - `ClaudeCodeReviewConfigUpdated object { actor, enabled, id, 7 more }`
 
     Claude Code Review configuration was enabled/disabled for an org.
 
@@ -2563,7 +2563,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"claude_code_review_config_updated"`
 
-  - `ClaudeCodeReviewRepositoryAdded = object { actor, config_id, repo_name, 7 more }`
+  - `ClaudeCodeReviewRepositoryAdded object { actor, config_id, repo_name, 7 more }`
 
     A repository was added to org-level Claude Code Review configuration.
 
@@ -2617,7 +2617,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"claude_code_review_repository_added"`
 
-  - `ClaudeCodeReviewRepositoryRemoved = object { actor, config_id, repo_name, 6 more }`
+  - `ClaudeCodeReviewRepositoryRemoved object { actor, config_id, repo_name, 6 more }`
 
     A repository was removed from org-level Claude Code Review configuration.
 
@@ -2667,7 +2667,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"claude_code_review_repository_removed"`
 
-  - `ClaudeCodeReviewRepositoryUpdated = object { actor, config_id, repo_name, 8 more }`
+  - `ClaudeCodeReviewRepositoryUpdated object { actor, config_id, repo_name, 8 more }`
 
     A Claude Code Review repository configuration was updated.
 
@@ -2725,7 +2725,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"claude_code_review_repository_updated"`
 
-  - `ClaudeCodeSecurityCenterConfigUpdated = object { actor, enabled, id, 5 more }`
+  - `ClaudeCodeSecurityCenterConfigUpdated object { actor, enabled, id, 5 more }`
 
     Claude Code Security Center scanning was enabled/disabled for an org.
 
@@ -2771,7 +2771,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"claude_code_security_center_config_updated"`
 
-  - `ClaudeCodeSecurityScanCancelled = object { actor, scan_project_id, scans_cancelled, 5 more }`
+  - `ClaudeCodeSecurityScanCancelled object { actor, scan_project_id, scans_cancelled, 5 more }`
 
     In-flight Claude Code Security scans were cancelled for a project.
 
@@ -2815,7 +2815,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"claude_code_security_scan_cancelled"`
 
-  - `ClaudeCodeSecurityScanProjectUpdated = object { action, actor, scan_project_id, 5 more }`
+  - `ClaudeCodeSecurityScanProjectUpdated object { action, actor, scan_project_id, 5 more }`
 
     A Claude Code Security scan project was archived or unarchived.
 
@@ -2863,7 +2863,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"claude_code_security_scan_project_updated"`
 
-  - `ClaudeCodeSecurityScanScheduleDeleted = object { actor, scan_project_id, id, 4 more }`
+  - `ClaudeCodeSecurityScanScheduleDeleted object { actor, scan_project_id, id, 4 more }`
 
     A recurring scan schedule was deleted for a Claude Code Security project.
 
@@ -2905,7 +2905,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"claude_code_security_scan_schedule_deleted"`
 
-  - `ClaudeCodeSecurityScanScheduleUpdated = object { actor, cadence, scan_project_id, 5 more }`
+  - `ClaudeCodeSecurityScanScheduleUpdated object { actor, cadence, scan_project_id, 5 more }`
 
     A recurring scan schedule was set or replaced for a Claude Code Security project.
 
@@ -2949,7 +2949,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"claude_code_security_scan_schedule_updated"`
 
-  - `ClaudeCodeSecurityWebhookCreated = object { actor, scan_project_id, url, 6 more }`
+  - `ClaudeCodeSecurityWebhookCreated object { actor, scan_project_id, url, 6 more }`
 
     An outbound webhook was created for a Claude Code Security scan project.
 
@@ -2997,7 +2997,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"claude_code_security_webhook_created"`
 
-  - `ClaudeCodeSecurityWebhookDeleted = object { actor, scan_project_id, webhook_id, 5 more }`
+  - `ClaudeCodeSecurityWebhookDeleted object { actor, scan_project_id, webhook_id, 5 more }`
 
     An outbound webhook for a Claude Code Security scan project was deleted.
 
@@ -3043,7 +3043,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"claude_code_security_webhook_deleted"`
 
-  - `ClaudeCodeSecurityWebhookSecretUpdated = object { actor, scan_project_id, webhook_id, 5 more }`
+  - `ClaudeCodeSecurityWebhookSecretUpdated object { actor, scan_project_id, webhook_id, 5 more }`
 
     The HMAC signing secret for a Claude Code Security webhook was rotated.
 
@@ -3089,7 +3089,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"claude_code_security_webhook_secret_updated"`
 
-  - `ClaudeCodeSecurityWebhookUpdated = object { actor, scan_project_id, webhook_id, 5 more }`
+  - `ClaudeCodeSecurityWebhookUpdated object { actor, scan_project_id, webhook_id, 5 more }`
 
     An outbound webhook for a Claude Code Security scan project was updated.
 
@@ -3135,7 +3135,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"claude_code_security_webhook_updated"`
 
-  - `ClaudeCodeTeamMemoryACLUpdated = object { action, actor, group_id, 6 more }`
+  - `ClaudeCodeTeamMemoryACLUpdated object { action, actor, group_id, 6 more }`
 
     An RBAC group was added to or removed from the Claude Code team-memory ACL.
 
@@ -3189,7 +3189,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"claude_code_team_memory_acl_updated"`
 
-  - `CliPluginExecPolicyUpdated = object { actor, cli_name, marketplace_id, 9 more }`
+  - `CliPluginExecPolicyUpdated object { actor, cli_name, marketplace_id, 9 more }`
 
     Admin set or cleared the per-op permission ceiling for a plugin CLI.
 
@@ -3251,7 +3251,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"cli_plugin_exec_policy_updated"`
 
-  - `ClaudeCommandCreated = object { actor, id, command_id, 5 more }`
+  - `ClaudeCommandCreated object { actor, id, command_id, 5 more }`
 
     Command was created.
 
@@ -3293,7 +3293,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"claude_command_created"`
 
-  - `ClaudeCommandDeleted = object { actor, id, command_id, 5 more }`
+  - `ClaudeCommandDeleted object { actor, id, command_id, 5 more }`
 
     Command was deleted.
 
@@ -3335,7 +3335,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"claude_command_deleted"`
 
-  - `ClaudeCommandReplaced = object { actor, id, command_id, 5 more }`
+  - `ClaudeCommandReplaced object { actor, id, command_id, 5 more }`
 
     Command was replaced.
 
@@ -3377,7 +3377,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"claude_command_replaced"`
 
-  - `ComplianceAPIAccessed = object { actor, request_id, request_method, 8 more }`
+  - `ComplianceAPIAccessed object { actor, request_id, request_method, 8 more }`
 
     Logging event auto-generated for each compliance API request.
 
@@ -3435,7 +3435,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"compliance_api_accessed"`
 
-  - `DesktopExtensionAllowlisted = object { actor, extension_id, id, 4 more }`
+  - `DesktopExtensionAllowlisted object { actor, extension_id, id, 4 more }`
 
     A desktop extension was added to an org's allowlist.
 
@@ -3477,7 +3477,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"desktop_extension_allowlisted"`
 
-  - `DesktopExtensionBlocklisted = object { actor, extension_id, id, 4 more }`
+  - `DesktopExtensionBlocklisted object { actor, extension_id, id, 4 more }`
 
     A desktop extension was added to the global blocklist.
 
@@ -3519,7 +3519,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"desktop_extension_blocklisted"`
 
-  - `DesktopExtensionDeleted = object { actor, extension_id, id, 5 more }`
+  - `DesktopExtensionDeleted object { actor, extension_id, id, 5 more }`
 
     A desktop extension was deleted, either globally by an admin or org-scoped by an org owner.
 
@@ -3565,7 +3565,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       Specific version deleted (null if all versions)
 
-  - `DesktopExtensionRemovedFromAllowlist = object { actor, extension_id, id, 4 more }`
+  - `DesktopExtensionRemovedFromAllowlist object { actor, extension_id, id, 4 more }`
 
     A desktop extension was removed from an org's allowlist.
 
@@ -3607,7 +3607,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"desktop_extension_removed_from_allowlist"`
 
-  - `DesktopExtensionUnblocked = object { actor, extension_id, id, 4 more }`
+  - `DesktopExtensionUnblocked object { actor, extension_id, id, 4 more }`
 
     A desktop extension was removed from the global blocklist.
 
@@ -3649,7 +3649,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"desktop_extension_unblocked"`
 
-  - `DesktopExtensionUploaded = object { actor, extension_id, version, 5 more }`
+  - `DesktopExtensionUploaded object { actor, extension_id, version, 5 more }`
 
     A desktop extension was uploaded, either globally by an admin or org-scoped by an org owner.
 
@@ -3695,7 +3695,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"desktop_extension_uploaded"`
 
-  - `DesktopExtensionVersionUploaded = object { actor, extension_id, version, 5 more }`
+  - `DesktopExtensionVersionUploaded object { actor, extension_id, version, 5 more }`
 
     A new version of an existing org-owned desktop extension was uploaded.
 
@@ -3741,7 +3741,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"desktop_extension_version_uploaded"`
 
-  - `DomainClaimInitiated = object { actor, id, created_at, 3 more }`
+  - `DomainClaimInitiated object { actor, id, created_at, 3 more }`
 
     Domain capture claim initiated over personal accounts on verified domains.
 
@@ -3779,7 +3779,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"domain_claim_initiated"`
 
-  - `EndUserInviteRequested = object { actor, invitee_email, id, 4 more }`
+  - `EndUserInviteRequested object { actor, invitee_email, id, 4 more }`
 
     Non-admin member submitted an invite request for a new org member.
 
@@ -3819,13 +3819,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"end_user_invite_requested"`
 
-  - `ExtraUsageBillingEnabled = object { actor, id, created_at, 3 more }`
+  - `ExtraUsageBillingEnabled object { actor, id, created_at, 3 more }`
 
     Usage credit billing was enabled for an organization.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { email_address, type }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -3839,7 +3839,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `AnthropicActor = object { email_address, type }`
+      - `AnthropicActor object { email_address, type }`
 
         - `email_address: optional string`
 
@@ -3867,13 +3867,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"extra_usage_billing_enabled"`
 
-  - `ExtraUsageCreditGranted = object { actor, id, created_at, 3 more }`
+  - `ExtraUsageCreditGranted object { actor, id, created_at, 3 more }`
 
     A promotional usage credit grant was claimed.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { email_address, type }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -3887,7 +3887,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `AnthropicActor = object { email_address, type }`
+      - `AnthropicActor object { email_address, type }`
 
         - `email_address: optional string`
 
@@ -3915,13 +3915,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"extra_usage_credit_granted"`
 
-  - `ExtraUsageSpendLimitCreated = object { actor, id, amount, 8 more }`
+  - `ExtraUsageSpendLimitCreated object { actor, id, amount, 8 more }`
 
     Usage credit spend limit was created.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { email_address, type }  or object { api_key_id, ip_address, user_agent, type }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -3935,7 +3935,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `AnthropicActor = object { email_address, type }`
+      - `AnthropicActor object { email_address, type }`
 
         - `email_address: optional string`
 
@@ -3943,7 +3943,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"anthropic_actor"`
 
-      - `APIActor = object { api_key_id, ip_address, user_agent, type }`
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
         - `api_key_id: string`
 
@@ -3995,13 +3995,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       Tagged ID of the user who performed the action.
 
-  - `ExtraUsageSpendLimitDeleted = object { actor, id, created_at, 5 more }`
+  - `ExtraUsageSpendLimitDeleted object { actor, id, created_at, 5 more }`
 
     Usage credit spend limit was deleted.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { email_address, type }  or object { api_key_id, ip_address, user_agent, type }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -4015,7 +4015,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `AnthropicActor = object { email_address, type }`
+      - `AnthropicActor object { email_address, type }`
 
         - `email_address: optional string`
 
@@ -4023,7 +4023,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"anthropic_actor"`
 
-      - `APIActor = object { api_key_id, ip_address, user_agent, type }`
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
         - `api_key_id: string`
 
@@ -4063,7 +4063,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       Tagged ID of the user who performed the action.
 
-  - `ExtraUsageSpendLimitIncreaseRequestApproved = object { actor, id, amount, 7 more }`
+  - `ExtraUsageSpendLimitIncreaseRequestApproved object { actor, id, amount, 7 more }`
 
     A usage credit spend limit increase request was approved.
 
@@ -4107,7 +4107,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"extra_usage_spend_limit_increase_request_approved"`
 
-  - `ExtraUsageSpendLimitIncreaseRequestDenied = object { actor, id, created_at, 5 more }`
+  - `ExtraUsageSpendLimitIncreaseRequestDenied object { actor, id, created_at, 5 more }`
 
     A usage credit spend limit increase request was denied.
 
@@ -4147,13 +4147,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"extra_usage_spend_limit_increase_request_denied"`
 
-  - `ExtraUsageSpendLimitUpdated = object { actor, id, amount, 8 more }`
+  - `ExtraUsageSpendLimitUpdated object { actor, id, amount, 8 more }`
 
     Usage credit spend limit was updated.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { email_address, type }  or object { api_key_id, ip_address, user_agent, type }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -4167,7 +4167,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `AnthropicActor = object { email_address, type }`
+      - `AnthropicActor object { email_address, type }`
 
         - `email_address: optional string`
 
@@ -4175,7 +4175,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"anthropic_actor"`
 
-      - `APIActor = object { api_key_id, ip_address, user_agent, type }`
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
         - `api_key_id: string`
 
@@ -4227,13 +4227,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       Tagged ID of the user who performed the action.
 
-  - `ClaudeFileAccessFailed = object { actor, claude_file_id, filename, 7 more }`
+  - `ClaudeFileAccessFailed object { actor, claude_file_id, filename, 7 more }`
 
     An attempt to access a file failed.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -4247,7 +4247,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `UnauthenticatedUserActor = object { ip_address, user_agent, type, unauthenticated_email_address }`
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
 
         - `ip_address: string`
 
@@ -4291,7 +4291,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"claude_file_access_failed"`
 
-  - `ClaudeFileDeleted = object { actor, claude_file_id, filename, 5 more }`
+  - `ClaudeFileDeleted object { actor, claude_file_id, filename, 5 more }`
 
     A file was deleted.
 
@@ -4333,7 +4333,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"claude_file_deleted"`
 
-  - `ClaudeFileUploaded = object { actor, claude_file_id, filename, 7 more }`
+  - `ClaudeFileUploaded object { actor, claude_file_id, filename, 7 more }`
 
     A file was uploaded.
 
@@ -4383,7 +4383,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"claude_file_uploaded"`
 
-  - `ClaudeFileViewed = object { actor, claude_file_id, filename, 7 more }`
+  - `ClaudeFileViewed object { actor, claude_file_id, filename, 7 more }`
 
     A file was viewed.
 
@@ -4433,7 +4433,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"claude_file_viewed"`
 
-  - `GheConfigurationCreated = object { actor, ghe_configuration_id, id, 4 more }`
+  - `GheConfigurationCreated object { actor, ghe_configuration_id, id, 4 more }`
 
     Admin created a GHE configuration.
 
@@ -4475,7 +4475,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"ghe_configuration_created"`
 
-  - `GheConfigurationDeleted = object { actor, ghe_configuration_id, id, 4 more }`
+  - `GheConfigurationDeleted object { actor, ghe_configuration_id, id, 4 more }`
 
     Admin deleted a GHE configuration.
 
@@ -4517,7 +4517,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"ghe_configuration_deleted"`
 
-  - `GheConfigurationUpdated = object { actor, ghe_configuration_id, id, 4 more }`
+  - `GheConfigurationUpdated object { actor, ghe_configuration_id, id, 4 more }`
 
     Admin updated a GHE configuration.
 
@@ -4559,7 +4559,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"ghe_configuration_updated"`
 
-  - `GheUserConnected = object { actor, id, created_at, 4 more }`
+  - `GheUserConnected object { actor, id, created_at, 4 more }`
 
     User connected to a GHE instance.
 
@@ -4601,7 +4601,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"ghe_user_connected"`
 
-  - `GheUserDisconnected = object { actor, id, created_at, 4 more }`
+  - `GheUserDisconnected object { actor, id, created_at, 4 more }`
 
     User disconnected from a GHE instance.
 
@@ -4643,7 +4643,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"ghe_user_disconnected"`
 
-  - `GheWebhookSignatureInvalid = object { actor, ghe_configuration_id, id, 4 more }`
+  - `GheWebhookSignatureInvalid object { actor, ghe_configuration_id, id, 4 more }`
 
     Webhook signature validation failed.
 
@@ -4683,7 +4683,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"ghe_webhook_signature_invalid"`
 
-  - `ClaudeGitHubIntegrationCreated = object { actor, integration_id, id, 6 more }`
+  - `ClaudeGitHubIntegrationCreated object { actor, integration_id, id, 6 more }`
 
     A GitHub integration was enabled for the organization.
 
@@ -4727,7 +4727,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"claude_github_integration_created"`
 
-  - `ClaudeGitHubIntegrationDeleted = object { actor, integration_id, id, 6 more }`
+  - `ClaudeGitHubIntegrationDeleted object { actor, integration_id, id, 6 more }`
 
     A GitHub integration was disabled for the organization.
 
@@ -4771,7 +4771,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"claude_github_integration_deleted"`
 
-  - `ClaudeGitHubIntegrationUpdated = object { actor, integration_id, id, 6 more }`
+  - `ClaudeGitHubIntegrationUpdated object { actor, integration_id, id, 6 more }`
 
     A GitHub integration's configuration was updated.
 
@@ -4815,7 +4815,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"claude_github_integration_updated"`
 
-  - `ClaudeGdriveIntegrationCreated = object { actor, integration_id, id, 5 more }`
+  - `ClaudeGdriveIntegrationCreated object { actor, integration_id, id, 5 more }`
 
     A Google Drive integration was enabled for the organization.
 
@@ -4857,7 +4857,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"claude_gdrive_integration_created"`
 
-  - `ClaudeGdriveIntegrationDeleted = object { actor, integration_id, id, 5 more }`
+  - `ClaudeGdriveIntegrationDeleted object { actor, integration_id, id, 5 more }`
 
     A Google Drive integration was disabled for the organization.
 
@@ -4899,7 +4899,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"claude_gdrive_integration_deleted"`
 
-  - `ClaudeGdriveIntegrationUpdated = object { actor, integration_id, id, 5 more }`
+  - `ClaudeGdriveIntegrationUpdated object { actor, integration_id, id, 5 more }`
 
     A Google Drive integration's configuration was updated.
 
@@ -4941,13 +4941,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"claude_gdrive_integration_updated"`
 
-  - `GroupCreated = object { actor, group_id, group_name, 5 more }`
+  - `GroupCreated object { actor, group_id, group_name, 5 more }`
 
     A group was created (RBAC admin or SCIM provisioning).
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { api_key_id, ip_address, user_agent, type }  or object { directory_id, workos_event_id, idp_connection_type, type }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -4961,7 +4961,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `APIActor = object { api_key_id, ip_address, user_agent, type }`
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
         - `api_key_id: string`
 
@@ -4973,7 +4973,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"api_actor"`
 
-      - `ScimDirectorySyncActor = object { directory_id, workos_event_id, idp_connection_type, type }`
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
 
         - `directory_id: string`
 
@@ -5013,13 +5013,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"group_created"`
 
-  - `GroupDeleted = object { actor, group_id, id, 4 more }`
+  - `GroupDeleted object { actor, group_id, id, 4 more }`
 
     A group was deleted (RBAC admin or SCIM provisioning).
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { api_key_id, ip_address, user_agent, type }  or object { directory_id, workos_event_id, idp_connection_type, type }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -5033,7 +5033,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `APIActor = object { api_key_id, ip_address, user_agent, type }`
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
         - `api_key_id: string`
 
@@ -5045,7 +5045,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"api_actor"`
 
-      - `ScimDirectorySyncActor = object { directory_id, workos_event_id, idp_connection_type, type }`
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
 
         - `directory_id: string`
 
@@ -5081,7 +5081,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"group_deleted"`
 
-  - `GroupListViewed = object { actor, id, created_at, 3 more }`
+  - `GroupListViewed object { actor, id, created_at, 3 more }`
 
     Admin viewed the list of RBAC groups.
 
@@ -5119,13 +5119,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"group_list_viewed"`
 
-  - `GroupMemberAdded = object { actor, group_id, member_ids, 5 more }`
+  - `GroupMemberAdded object { actor, group_id, member_ids, 5 more }`
 
     One or more members were added to a group.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { api_key_id, ip_address, user_agent, type }  or object { directory_id, workos_event_id, idp_connection_type, type }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -5139,7 +5139,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `APIActor = object { api_key_id, ip_address, user_agent, type }`
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
         - `api_key_id: string`
 
@@ -5151,7 +5151,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"api_actor"`
 
-      - `ScimDirectorySyncActor = object { directory_id, workos_event_id, idp_connection_type, type }`
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
 
         - `directory_id: string`
 
@@ -5191,7 +5191,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"group_member_added"`
 
-  - `GroupMemberListViewed = object { actor, group_id, id, 4 more }`
+  - `GroupMemberListViewed object { actor, group_id, id, 4 more }`
 
     Admin viewed the members of an RBAC group.
 
@@ -5233,13 +5233,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"group_member_list_viewed"`
 
-  - `GroupMemberRemoved = object { actor, group_id, member_ids, 5 more }`
+  - `GroupMemberRemoved object { actor, group_id, member_ids, 5 more }`
 
     One or more members were removed from a group.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { api_key_id, ip_address, user_agent, type }  or object { directory_id, workos_event_id, idp_connection_type, type }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -5253,7 +5253,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `APIActor = object { api_key_id, ip_address, user_agent, type }`
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
         - `api_key_id: string`
 
@@ -5265,7 +5265,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"api_actor"`
 
-      - `ScimDirectorySyncActor = object { directory_id, workos_event_id, idp_connection_type, type }`
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
 
         - `directory_id: string`
 
@@ -5305,13 +5305,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"group_member_removed"`
 
-  - `GroupUpdated = object { actor, group_id, id, 4 more }`
+  - `GroupUpdated object { actor, group_id, id, 4 more }`
 
     A group was updated (RBAC admin or SCIM provisioning).
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { api_key_id, ip_address, user_agent, type }  or object { directory_id, workos_event_id, idp_connection_type, type }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -5325,7 +5325,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `APIActor = object { api_key_id, ip_address, user_agent, type }`
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
         - `api_key_id: string`
 
@@ -5337,7 +5337,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"api_actor"`
 
-      - `ScimDirectorySyncActor = object { directory_id, workos_event_id, idp_connection_type, type }`
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
 
         - `directory_id: string`
 
@@ -5373,13 +5373,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"group_updated"`
 
-  - `GroupViewed = object { actor, group_id, id, 4 more }`
+  - `GroupViewed object { actor, group_id, id, 4 more }`
 
     A group was viewed.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { api_key_id, ip_address, user_agent, type }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -5393,7 +5393,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `APIActor = object { api_key_id, ip_address, user_agent, type }`
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
         - `api_key_id: string`
 
@@ -5429,7 +5429,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"group_viewed"`
 
-  - `IntegrationUserConnected = object { actor, id, created_at, 4 more }`
+  - `IntegrationUserConnected object { actor, id, created_at, 4 more }`
 
     User connected to an integration.
 
@@ -5469,7 +5469,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"integration_user_connected"`
 
-  - `IntegrationUserDisconnected = object { actor, id, created_at, 4 more }`
+  - `IntegrationUserDisconnected object { actor, id, created_at, 4 more }`
 
     User disconnected from an integration.
 
@@ -5509,7 +5509,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"integration_user_disconnected"`
 
-  - `InvoiceCollectionMethodUpdated = object { actor, id, created_at, 4 more }`
+  - `InvoiceCollectionMethodUpdated object { actor, id, created_at, 4 more }`
 
     Invoice collection method was changed.
 
@@ -5551,7 +5551,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"invoice_collection_method_updated"`
 
-  - `UserLoggedOut = object { actor, id, created_at, 3 more }`
+  - `UserLoggedOut object { actor, id, created_at, 3 more }`
 
     A user signed out of one or all sessions.
 
@@ -5589,13 +5589,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"user_logged_out"`
 
-  - `LtiLaunchInitiated = object { actor, id, created_at, 3 more }`
+  - `LtiLaunchInitiated object { actor, id, created_at, 3 more }`
 
     LTI launch was initiated.
 
     - `actor: object { ip_address, user_agent, type, unauthenticated_email_address }  or object { email_address, ip_address, user_agent, 2 more }`
 
-      - `UnauthenticatedUserActor = object { ip_address, user_agent, type, unauthenticated_email_address }`
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
 
         - `ip_address: string`
 
@@ -5607,7 +5607,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
         - `unauthenticated_email_address: optional string`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -5641,13 +5641,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"lti_launch_initiated"`
 
-  - `LtiLaunchSuccess = object { actor, id, created_at, 3 more }`
+  - `LtiLaunchSuccess object { actor, id, created_at, 3 more }`
 
     LTI launch completed successfully.
 
     - `actor: object { ip_address, user_agent, type, unauthenticated_email_address }  or object { email_address, ip_address, user_agent, 2 more }`
 
-      - `UnauthenticatedUserActor = object { ip_address, user_agent, type, unauthenticated_email_address }`
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
 
         - `ip_address: string`
 
@@ -5659,7 +5659,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
         - `unauthenticated_email_address: optional string`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -5693,7 +5693,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"lti_launch_success"`
 
-  - `LtiPlatformCreated = object { actor, lti_platform_id, lti_platform_issuer, 5 more }`
+  - `LtiPlatformCreated object { actor, lti_platform_id, lti_platform_issuer, 5 more }`
 
     Admin created an LTI platform integration.
 
@@ -5739,7 +5739,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"lti_platform_created"`
 
-  - `LtiPlatformUpdated = object { actor, lti_platform_id, id, 5 more }`
+  - `LtiPlatformUpdated object { actor, lti_platform_id, id, 5 more }`
 
     Admin updated an LTI platform integration.
 
@@ -5785,7 +5785,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"lti_platform_updated"`
 
-  - `MagicLinkLoginFailed = object { actor, id, created_at, 3 more }`
+  - `MagicLinkLoginFailed object { actor, id, created_at, 3 more }`
 
     A magic link sign-in attempt failed.
 
@@ -5821,7 +5821,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"magic_link_login_failed"`
 
-  - `MagicLinkLoginInitiated = object { actor, id, created_at, 3 more }`
+  - `MagicLinkLoginInitiated object { actor, id, created_at, 3 more }`
 
     A user requested a magic link sign-in email.
 
@@ -5857,7 +5857,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"magic_link_login_initiated"`
 
-  - `MagicLinkLoginSucceeded = object { actor, id, auth_method, 5 more }`
+  - `MagicLinkLoginSucceeded object { actor, id, auth_method, 5 more }`
 
     A user successfully signed in with a magic link email.
 
@@ -5907,7 +5907,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"magic_link_login_succeeded"`
 
-  - `ManagedOrganizationSetupCompleted = object { actor, id, created_at, 3 more }`
+  - `ManagedOrganizationSetupCompleted object { actor, id, created_at, 3 more }`
 
     Managed (AWS Marketplace) organization setup was completed.
 
@@ -5945,7 +5945,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"managed_organization_setup_completed"`
 
-  - `MarketplaceCreated = object { actor, marketplace_id, id, 4 more }`
+  - `MarketplaceCreated object { actor, marketplace_id, id, 4 more }`
 
     Admin created an organization marketplace.
 
@@ -5987,7 +5987,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"marketplace_created"`
 
-  - `MarketplaceDeleted = object { actor, marketplace_id, id, 4 more }`
+  - `MarketplaceDeleted object { actor, marketplace_id, id, 4 more }`
 
     Admin deleted an organization marketplace.
 
@@ -6029,7 +6029,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"marketplace_deleted"`
 
-  - `MarketplaceUpdated = object { actor, marketplace_id, id, 4 more }`
+  - `MarketplaceUpdated object { actor, marketplace_id, id, 4 more }`
 
     Admin updated an organization marketplace.
 
@@ -6071,7 +6071,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"marketplace_updated"`
 
-  - `MarketplaceWebhookDeleted = object { actor, marketplace_id, id, 4 more }`
+  - `MarketplaceWebhookDeleted object { actor, marketplace_id, id, 4 more }`
 
     Admin removed the GitHub push webhook for a marketplace.
 
@@ -6113,7 +6113,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"marketplace_webhook_deleted"`
 
-  - `MarketplaceWebhookProvisioned = object { actor, marketplace_id, id, 5 more }`
+  - `MarketplaceWebhookProvisioned object { actor, marketplace_id, id, 5 more }`
 
     Admin provisioned a GitHub push webhook for a marketplace.
 
@@ -6159,7 +6159,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"marketplace_webhook_provisioned"`
 
-  - `McpServerCreated = object { actor, mcp_server_id, mcp_server_name, 5 more }`
+  - `McpServerCreated object { actor, mcp_server_id, mcp_server_name, 5 more }`
 
     An MCP server was added to the organization.
 
@@ -6205,7 +6205,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"mcp_server_created"`
 
-  - `McpServerDeleted = object { actor, mcp_server_id, mcp_server_name, 5 more }`
+  - `McpServerDeleted object { actor, mcp_server_id, mcp_server_name, 5 more }`
 
     An MCP server was removed from the organization.
 
@@ -6251,7 +6251,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"mcp_server_deleted"`
 
-  - `McpServerUpdated = object { actor, mcp_server_id, mcp_server_name, 5 more }`
+  - `McpServerUpdated object { actor, mcp_server_id, mcp_server_name, 5 more }`
 
     An MCP server's configuration was updated.
 
@@ -6297,7 +6297,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"mcp_server_updated"`
 
-  - `McpToolPolicyUpdated = object { actor, max_permission, mcp_server_id, 7 more }`
+  - `McpToolPolicyUpdated object { actor, max_permission, mcp_server_id, 7 more }`
 
     The permission restriction for an MCP tool was set or cleared.
 
@@ -6351,13 +6351,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"mcp_tool_policy_updated"`
 
-  - `OrgAnalyticsAPICapabilityUpdated = object { actor, id, created_at, 3 more }`
+  - `OrgAnalyticsAPICapabilityUpdated object { actor, id, created_at, 3 more }`
 
     Organization analytics_api capability was enabled or disabled.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { email_address, type }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -6371,7 +6371,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `AnthropicActor = object { email_address, type }`
+      - `AnthropicActor object { email_address, type }`
 
         - `email_address: optional string`
 
@@ -6399,13 +6399,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"org_analytics_api_capability_updated"`
 
-  - `OrgBulkDeleteInitiated = object { actor, id, created_at, 3 more }`
+  - `OrgBulkDeleteInitiated object { actor, id, created_at, 3 more }`
 
     Organization bulk deletion was initiated.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { email_address, type }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -6419,7 +6419,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `AnthropicActor = object { email_address, type }`
+      - `AnthropicActor object { email_address, type }`
 
         - `email_address: optional string`
 
@@ -6447,13 +6447,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"org_bulk_delete_initiated"`
 
-  - `OrgClaudeCodeDataSharingDisabled = object { actor, id, created_at, 3 more }`
+  - `OrgClaudeCodeDataSharingDisabled object { actor, id, created_at, 3 more }`
 
     Organization Claude Code data sharing was disabled.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { email_address, type }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -6467,7 +6467,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `AnthropicActor = object { email_address, type }`
+      - `AnthropicActor object { email_address, type }`
 
         - `email_address: optional string`
 
@@ -6495,13 +6495,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"org_claude_code_data_sharing_disabled"`
 
-  - `OrgClaudeCodeDataSharingEnabled = object { actor, id, created_at, 3 more }`
+  - `OrgClaudeCodeDataSharingEnabled object { actor, id, created_at, 3 more }`
 
     Organization Claude Code data sharing was enabled.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { email_address, type }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -6515,7 +6515,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `AnthropicActor = object { email_address, type }`
+      - `AnthropicActor object { email_address, type }`
 
         - `email_address: optional string`
 
@@ -6543,7 +6543,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"org_claude_code_data_sharing_enabled"`
 
-  - `OrgClaudeCodeDesktopDisabled = object { actor, id, created_at, 3 more }`
+  - `OrgClaudeCodeDesktopDisabled object { actor, id, created_at, 3 more }`
 
     Organization Claude Code Desktop was disabled.
 
@@ -6581,7 +6581,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"org_claude_code_desktop_disabled"`
 
-  - `OrgClaudeCodeDesktopEnabled = object { actor, id, created_at, 3 more }`
+  - `OrgClaudeCodeDesktopEnabled object { actor, id, created_at, 3 more }`
 
     Organization Claude Code Desktop was enabled.
 
@@ -6619,13 +6619,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"org_claude_code_desktop_enabled"`
 
-  - `OrgComplianceAPISettingsUpdated = object { actor, id, compliance_api_enabled, 5 more }`
+  - `OrgComplianceAPISettingsUpdated object { actor, id, compliance_api_enabled, 5 more }`
 
     Organization compliance API settings were updated.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { email_address, type }  or object { admin_api_key_id, ip_address, user_agent, type }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -6639,7 +6639,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `AnthropicActor = object { email_address, type }`
+      - `AnthropicActor object { email_address, type }`
 
         - `email_address: optional string`
 
@@ -6647,7 +6647,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"anthropic_actor"`
 
-      - `AdminAPIKeyActor = object { admin_api_key_id, ip_address, user_agent, type }`
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
         - `admin_api_key_id: string`
 
@@ -6683,7 +6683,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"org_compliance_api_settings_updated"`
 
-  - `OrgCoworkAgentDisabled = object { actor, id, created_at, 3 more }`
+  - `OrgCoworkAgentDisabled object { actor, id, created_at, 3 more }`
 
     Organization Cowork Agent was disabled.
 
@@ -6721,7 +6721,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"org_cowork_agent_disabled"`
 
-  - `OrgCoworkAgentEnabled = object { actor, id, created_at, 3 more }`
+  - `OrgCoworkAgentEnabled object { actor, id, created_at, 3 more }`
 
     Organization Cowork Agent was enabled.
 
@@ -6759,7 +6759,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"org_cowork_agent_enabled"`
 
-  - `OrgCoworkDisabled = object { actor, id, created_at, 3 more }`
+  - `OrgCoworkDisabled object { actor, id, created_at, 3 more }`
 
     Organization cowork was disabled.
 
@@ -6797,7 +6797,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"org_cowork_disabled"`
 
-  - `OrgCoworkEnabled = object { actor, id, created_at, 3 more }`
+  - `OrgCoworkEnabled object { actor, id, created_at, 3 more }`
 
     Organization cowork was enabled.
 
@@ -6835,13 +6835,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"org_cowork_enabled"`
 
-  - `OrgCreationBlocked = object { actor, id, created_at, 4 more }`
+  - `OrgCreationBlocked object { actor, id, created_at, 4 more }`
 
     Organization creation was blocked.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { email_address, type }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -6855,7 +6855,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `AnthropicActor = object { email_address, type }`
+      - `AnthropicActor object { email_address, type }`
 
         - `email_address: optional string`
 
@@ -6885,7 +6885,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"org_creation_blocked"`
 
-  - `OrgDataExportAccessed = object { actor, id, created_at, 3 more }`
+  - `OrgDataExportAccessed object { actor, id, created_at, 3 more }`
 
     Organization data export file was accessed/downloaded via signed URL.
 
@@ -6923,13 +6923,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"org_data_export_accessed"`
 
-  - `OrgDataExportCompleted = object { actor, id, created_at, 3 more }`
+  - `OrgDataExportCompleted object { actor, id, created_at, 3 more }`
 
     Organization data export was completed.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { email_address, type }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -6943,7 +6943,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `AnthropicActor = object { email_address, type }`
+      - `AnthropicActor object { email_address, type }`
 
         - `email_address: optional string`
 
@@ -6971,13 +6971,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"org_data_export_completed"`
 
-  - `OrgDataExportStarted = object { actor, id, created_at, 3 more }`
+  - `OrgDataExportStarted object { actor, id, created_at, 3 more }`
 
     Organization data export was started.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { email_address, type }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -6991,7 +6991,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `AnthropicActor = object { email_address, type }`
+      - `AnthropicActor object { email_address, type }`
 
         - `email_address: optional string`
 
@@ -7019,13 +7019,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"org_data_export_started"`
 
-  - `OrgDeletedViaBulk = object { actor, id, created_at, 3 more }`
+  - `OrgDeletedViaBulk object { actor, id, created_at, 3 more }`
 
     Organization was deleted via bulk operation.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { email_address, type }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -7039,7 +7039,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `AnthropicActor = object { email_address, type }`
+      - `AnthropicActor object { email_address, type }`
 
         - `email_address: optional string`
 
@@ -7067,7 +7067,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"org_deleted_via_bulk"`
 
-  - `OrgDeletionRequested = object { actor, id, created_at, 3 more }`
+  - `OrgDeletionRequested object { actor, id, created_at, 3 more }`
 
     Organization deletion was requested.
 
@@ -7105,13 +7105,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"org_deletion_requested"`
 
-  - `OrgDirectoryResyncCompleted = object { actor, resync_uuid, id, 4 more }`
+  - `OrgDirectoryResyncCompleted object { actor, resync_uuid, id, 4 more }`
 
     Organization directory resync completed successfully.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { email_address, type }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -7125,7 +7125,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `AnthropicActor = object { email_address, type }`
+      - `AnthropicActor object { email_address, type }`
 
         - `email_address: optional string`
 
@@ -7155,13 +7155,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"org_directory_resync_completed"`
 
-  - `OrgDirectoryResyncFailed = object { actor, resync_uuid, id, 4 more }`
+  - `OrgDirectoryResyncFailed object { actor, resync_uuid, id, 4 more }`
 
     Organization directory resync failed.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { email_address, type }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -7175,7 +7175,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `AnthropicActor = object { email_address, type }`
+      - `AnthropicActor object { email_address, type }`
 
         - `email_address: optional string`
 
@@ -7205,13 +7205,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"org_directory_resync_failed"`
 
-  - `OrgDirectoryResyncStarted = object { actor, resync_uuid, sync_destinations, 5 more }`
+  - `OrgDirectoryResyncStarted object { actor, resync_uuid, sync_destinations, 5 more }`
 
     Organization directory resync was started asynchronously.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { email_address, type }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -7225,7 +7225,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `AnthropicActor = object { email_address, type }`
+      - `AnthropicActor object { email_address, type }`
 
         - `email_address: optional string`
 
@@ -7257,13 +7257,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"org_directory_resync_started"`
 
-  - `OrgDirectorySyncActivated = object { actor, id, created_at, 3 more }`
+  - `OrgDirectorySyncActivated object { actor, id, created_at, 3 more }`
 
     Organization directory sync was activated.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { email_address, type }  or object { directory_id, workos_event_id, idp_connection_type, type }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -7277,7 +7277,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `AnthropicActor = object { email_address, type }`
+      - `AnthropicActor object { email_address, type }`
 
         - `email_address: optional string`
 
@@ -7285,7 +7285,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"anthropic_actor"`
 
-      - `ScimDirectorySyncActor = object { directory_id, workos_event_id, idp_connection_type, type }`
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
 
         - `directory_id: string`
 
@@ -7317,13 +7317,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"org_directory_sync_activated"`
 
-  - `OrgDirectorySyncAddInitiated = object { actor, id, created_at, 3 more }`
+  - `OrgDirectorySyncAddInitiated object { actor, id, created_at, 3 more }`
 
     Organization directory sync setup was initiated.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { email_address, type }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -7337,7 +7337,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `AnthropicActor = object { email_address, type }`
+      - `AnthropicActor object { email_address, type }`
 
         - `email_address: optional string`
 
@@ -7365,13 +7365,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"org_directory_sync_add_initiated"`
 
-  - `OrgDirectorySyncDeleted = object { actor, id, created_at, 3 more }`
+  - `OrgDirectorySyncDeleted object { actor, id, created_at, 3 more }`
 
     Organization directory sync was deleted.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { email_address, type }  or object { directory_id, workos_event_id, idp_connection_type, type }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -7385,7 +7385,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `AnthropicActor = object { email_address, type }`
+      - `AnthropicActor object { email_address, type }`
 
         - `email_address: optional string`
 
@@ -7393,7 +7393,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"anthropic_actor"`
 
-      - `ScimDirectorySyncActor = object { directory_id, workos_event_id, idp_connection_type, type }`
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
 
         - `directory_id: string`
 
@@ -7425,7 +7425,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"org_directory_sync_deleted"`
 
-  - `OrgDiscoverabilityDisabled = object { actor, id, created_at, 3 more }`
+  - `OrgDiscoverabilityDisabled object { actor, id, created_at, 3 more }`
 
     Admin disabled organization discoverability.
 
@@ -7463,7 +7463,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"org_discoverability_disabled"`
 
-  - `OrgDiscoverabilityEnabled = object { actor, id, created_at, 3 more }`
+  - `OrgDiscoverabilityEnabled object { actor, id, created_at, 3 more }`
 
     Admin enabled organization discoverability.
 
@@ -7501,7 +7501,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"org_discoverability_enabled"`
 
-  - `OrgDiscoverabilitySettingsUpdated = object { actor, id, created_at, 3 more }`
+  - `OrgDiscoverabilitySettingsUpdated object { actor, id, created_at, 3 more }`
 
     Admin updated organization discoverability settings.
 
@@ -7539,13 +7539,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"org_discoverability_settings_updated"`
 
-  - `OrgDomainAddInitiated = object { actor, id, created_at, 3 more }`
+  - `OrgDomainAddInitiated object { actor, id, created_at, 3 more }`
 
     Organization domain verification was initiated.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { email_address, type }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -7559,7 +7559,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `AnthropicActor = object { email_address, type }`
+      - `AnthropicActor object { email_address, type }`
 
         - `email_address: optional string`
 
@@ -7587,13 +7587,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"org_domain_add_initiated"`
 
-  - `OrgDomainRemoved = object { actor, id, created_at, 4 more }`
+  - `OrgDomainRemoved object { actor, id, created_at, 4 more }`
 
     Organization domain was removed.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { email_address, type }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -7607,7 +7607,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `AnthropicActor = object { email_address, type }`
+      - `AnthropicActor object { email_address, type }`
 
         - `email_address: optional string`
 
@@ -7637,13 +7637,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"org_domain_removed"`
 
-  - `OrgDomainVerified = object { actor, id, created_at, 4 more }`
+  - `OrgDomainVerified object { actor, id, created_at, 4 more }`
 
     Organization domain was verified.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { email_address, type }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -7657,7 +7657,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `AnthropicActor = object { email_address, type }`
+      - `AnthropicActor object { email_address, type }`
 
         - `email_address: optional string`
 
@@ -7687,7 +7687,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"org_domain_verified"`
 
-  - `OrgHipaaSelfServeEnabled = object { actor, baa_content_hash, baa_version_label, 6 more }`
+  - `OrgHipaaSelfServeEnabled object { actor, baa_content_hash, baa_version_label, 6 more }`
 
     A primary owner click-accepted the BAA and enabled HIPAA protections
     for the organization via the self-serve flow.
@@ -7732,13 +7732,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"org_hipaa_self_serve_enabled"`
 
-  - `OrgIPRestrictionCreated = object { actor, id, created_at, 3 more }`
+  - `OrgIPRestrictionCreated object { actor, id, created_at, 3 more }`
 
     Organization IP restriction was created.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { email_address, type }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -7752,7 +7752,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `AnthropicActor = object { email_address, type }`
+      - `AnthropicActor object { email_address, type }`
 
         - `email_address: optional string`
 
@@ -7780,13 +7780,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"org_ip_restriction_created"`
 
-  - `OrgIPRestrictionDeleted = object { actor, id, created_at, 3 more }`
+  - `OrgIPRestrictionDeleted object { actor, id, created_at, 3 more }`
 
     Organization IP restriction was deleted.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { email_address, type }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -7800,7 +7800,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `AnthropicActor = object { email_address, type }`
+      - `AnthropicActor object { email_address, type }`
 
         - `email_address: optional string`
 
@@ -7828,13 +7828,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"org_ip_restriction_deleted"`
 
-  - `OrgIPRestrictionUpdated = object { actor, id, created_at, 3 more }`
+  - `OrgIPRestrictionUpdated object { actor, id, created_at, 3 more }`
 
     Organization IP restriction was updated.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { email_address, type }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -7848,7 +7848,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `AnthropicActor = object { email_address, type }`
+      - `AnthropicActor object { email_address, type }`
 
         - `email_address: optional string`
 
@@ -7876,7 +7876,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"org_ip_restriction_updated"`
 
-  - `OrgInviteLinkDisabled = object { actor, id, created_at, 3 more }`
+  - `OrgInviteLinkDisabled object { actor, id, created_at, 3 more }`
 
     Organization invite link was disabled.
 
@@ -7914,7 +7914,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"org_invite_link_disabled"`
 
-  - `OrgInviteLinkGenerated = object { actor, id, created_at, 3 more }`
+  - `OrgInviteLinkGenerated object { actor, id, created_at, 3 more }`
 
     Organization invite link was generated.
 
@@ -7952,7 +7952,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"org_invite_link_generated"`
 
-  - `OrgInviteLinkRegenerated = object { actor, id, created_at, 3 more }`
+  - `OrgInviteLinkRegenerated object { actor, id, created_at, 3 more }`
 
     Organization invite link was regenerated (previous link invalidated).
 
@@ -7990,13 +7990,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"org_invite_link_regenerated"`
 
-  - `OrgInviteViewed = object { actor, invite_id, id, 4 more }`
+  - `OrgInviteViewed object { actor, invite_id, id, 4 more }`
 
     An organization invite was viewed.
 
     - `actor: object { admin_api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }`
 
-      - `AdminAPIKeyActor = object { admin_api_key_id, ip_address, user_agent, type }`
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
         - `admin_api_key_id: string`
 
@@ -8008,7 +8008,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"admin_api_key_actor"`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -8046,13 +8046,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"org_invite_viewed"`
 
-  - `OrgInvitesListed = object { actor, id, created_at, 3 more }`
+  - `OrgInvitesListed object { actor, id, created_at, 3 more }`
 
     Organization invites were listed.
 
     - `actor: object { admin_api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }`
 
-      - `AdminAPIKeyActor = object { admin_api_key_id, ip_address, user_agent, type }`
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
         - `admin_api_key_id: string`
 
@@ -8064,7 +8064,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"admin_api_key_actor"`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -8098,7 +8098,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"org_invites_listed"`
 
-  - `OrgJoinProposalDecided = object { actor, approved, id, 4 more }`
+  - `OrgJoinProposalDecided object { actor, approved, id, 4 more }`
 
     Approve or reject decision on a parent-org join proposal.
 
@@ -8138,7 +8138,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"org_join_proposal_decided"`
 
-  - `OrgJoinRequestApproved = object { actor, id, created_at, 3 more }`
+  - `OrgJoinRequestApproved object { actor, id, created_at, 3 more }`
 
     Admin approved a join request.
 
@@ -8176,7 +8176,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"org_join_request_approved"`
 
-  - `OrgJoinRequestCreated = object { actor, id, created_at, 3 more }`
+  - `OrgJoinRequestCreated object { actor, id, created_at, 3 more }`
 
     User requested to join an organization.
 
@@ -8214,7 +8214,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"org_join_request_created"`
 
-  - `OrgJoinRequestDismissed = object { actor, id, created_at, 3 more }`
+  - `OrgJoinRequestDismissed object { actor, id, created_at, 3 more }`
 
     Admin dismissed a join request.
 
@@ -8252,7 +8252,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"org_join_request_dismissed"`
 
-  - `OrgJoinRequestInstantApproved = object { actor, id, created_at, 3 more }`
+  - `OrgJoinRequestInstantApproved object { actor, id, created_at, 3 more }`
 
     Join request was instantly approved.
 
@@ -8290,7 +8290,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"org_join_request_instant_approved"`
 
-  - `OrgJoinRequestsBulkDismissed = object { actor, id, created_at, 3 more }`
+  - `OrgJoinRequestsBulkDismissed object { actor, id, created_at, 3 more }`
 
     Admin bulk-dismissed join requests.
 
@@ -8328,13 +8328,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"org_join_requests_bulk_dismissed"`
 
-  - `OrgMagicLinkSecondFactorToggled = object { actor, enabled, id, 4 more }`
+  - `OrgMagicLinkSecondFactorToggled object { actor, enabled, id, 4 more }`
 
     Organization magic link second factor was toggled.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { email_address, type }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -8348,7 +8348,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `AnthropicActor = object { email_address, type }`
+      - `AnthropicActor object { email_address, type }`
 
         - `email_address: optional string`
 
@@ -8378,7 +8378,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"org_magic_link_second_factor_toggled"`
 
-  - `OrgMemberInvitesDisabled = object { actor, id, created_at, 3 more }`
+  - `OrgMemberInvitesDisabled object { actor, id, created_at, 3 more }`
 
     Admin disabled member invites for the organization.
 
@@ -8416,7 +8416,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"org_member_invites_disabled"`
 
-  - `OrgMemberInvitesEnabled = object { actor, id, created_at, 3 more }`
+  - `OrgMemberInvitesEnabled object { actor, id, created_at, 3 more }`
 
     Admin enabled member invites for the organization.
 
@@ -8454,13 +8454,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"org_member_invites_enabled"`
 
-  - `OrgMembersExported = object { actor, id, created_at, 3 more }`
+  - `OrgMembersExported object { actor, id, created_at, 3 more }`
 
     Organization members list was exported as CSV.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { email_address, type }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -8474,7 +8474,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `AnthropicActor = object { email_address, type }`
+      - `AnthropicActor object { email_address, type }`
 
         - `email_address: optional string`
 
@@ -8502,13 +8502,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"org_members_exported"`
 
-  - `OrgParentJoinProposalCreated = object { actor, id, created_at, 3 more }`
+  - `OrgParentJoinProposalCreated object { actor, id, created_at, 3 more }`
 
     Organization parent join proposal was created.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { email_address, type }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -8522,7 +8522,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `AnthropicActor = object { email_address, type }`
+      - `AnthropicActor object { email_address, type }`
 
         - `email_address: optional string`
 
@@ -8550,13 +8550,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"org_parent_join_proposal_created"`
 
-  - `OrgParentSearchPerformed = object { actor, id, created_at, 3 more }`
+  - `OrgParentSearchPerformed object { actor, id, created_at, 3 more }`
 
     Organization parent search was performed.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { email_address, type }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -8570,7 +8570,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `AnthropicActor = object { email_address, type }`
+      - `AnthropicActor object { email_address, type }`
 
         - `email_address: optional string`
 
@@ -8598,13 +8598,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"org_parent_search_performed"`
 
-  - `OrgSSOAddInitiated = object { actor, id, created_at, 3 more }`
+  - `OrgSSOAddInitiated object { actor, id, created_at, 3 more }`
 
     Organization SSO setup was initiated.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { email_address, type }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -8618,7 +8618,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `AnthropicActor = object { email_address, type }`
+      - `AnthropicActor object { email_address, type }`
 
         - `email_address: optional string`
 
@@ -8646,13 +8646,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"org_sso_add_initiated"`
 
-  - `OrgSSOConnectionActivated = object { actor, id, connection_id, 5 more }`
+  - `OrgSSOConnectionActivated object { actor, id, connection_id, 5 more }`
 
     Organization SSO connection was activated.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { email_address, type }  or object { directory_id, workos_event_id, idp_connection_type, type }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -8666,7 +8666,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `AnthropicActor = object { email_address, type }`
+      - `AnthropicActor object { email_address, type }`
 
         - `email_address: optional string`
 
@@ -8674,7 +8674,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"anthropic_actor"`
 
-      - `ScimDirectorySyncActor = object { directory_id, workos_event_id, idp_connection_type, type }`
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
 
         - `directory_id: string`
 
@@ -8710,13 +8710,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"org_sso_connection_activated"`
 
-  - `OrgSSOConnectionDeactivated = object { actor, id, connection_id, 4 more }`
+  - `OrgSSOConnectionDeactivated object { actor, id, connection_id, 4 more }`
 
     Organization SSO connection was deactivated.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { email_address, type }  or object { directory_id, workos_event_id, idp_connection_type, type }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -8730,7 +8730,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `AnthropicActor = object { email_address, type }`
+      - `AnthropicActor object { email_address, type }`
 
         - `email_address: optional string`
 
@@ -8738,7 +8738,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"anthropic_actor"`
 
-      - `ScimDirectorySyncActor = object { directory_id, workos_event_id, idp_connection_type, type }`
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
 
         - `directory_id: string`
 
@@ -8772,13 +8772,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"org_sso_connection_deactivated"`
 
-  - `OrgSSOConnectionDeleted = object { actor, id, connection_id, 4 more }`
+  - `OrgSSOConnectionDeleted object { actor, id, connection_id, 4 more }`
 
     Organization SSO connection was deleted.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { email_address, type }  or object { directory_id, workos_event_id, idp_connection_type, type }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -8792,7 +8792,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `AnthropicActor = object { email_address, type }`
+      - `AnthropicActor object { email_address, type }`
 
         - `email_address: optional string`
 
@@ -8800,7 +8800,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"anthropic_actor"`
 
-      - `ScimDirectorySyncActor = object { directory_id, workos_event_id, idp_connection_type, type }`
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
 
         - `directory_id: string`
 
@@ -8834,13 +8834,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"org_sso_connection_deleted"`
 
-  - `OrgSSOGroupRoleMappingsUpdated = object { actor, id, created_at, 3 more }`
+  - `OrgSSOGroupRoleMappingsUpdated object { actor, id, created_at, 3 more }`
 
     Organization SSO group role mappings were updated.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { email_address, type }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -8854,7 +8854,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `AnthropicActor = object { email_address, type }`
+      - `AnthropicActor object { email_address, type }`
 
         - `email_address: optional string`
 
@@ -8882,13 +8882,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"org_sso_group_role_mappings_updated"`
 
-  - `OrgSSOProvisioningModeChanged = object { actor, id, created_at, 5 more }`
+  - `OrgSSOProvisioningModeChanged object { actor, id, created_at, 5 more }`
 
     Organization SSO provisioning mode was changed.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { email_address, type }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -8902,7 +8902,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `AnthropicActor = object { email_address, type }`
+      - `AnthropicActor object { email_address, type }`
 
         - `email_address: optional string`
 
@@ -8934,13 +8934,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"org_sso_provisioning_mode_changed"`
 
-  - `OrgSSOSeatTierAssignmentToggled = object { actor, enabled, id, 4 more }`
+  - `OrgSSOSeatTierAssignmentToggled object { actor, enabled, id, 4 more }`
 
     Organization SSO seat tier assignment was toggled.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { email_address, type }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -8954,7 +8954,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `AnthropicActor = object { email_address, type }`
+      - `AnthropicActor object { email_address, type }`
 
         - `email_address: optional string`
 
@@ -8984,13 +8984,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"org_sso_seat_tier_assignment_toggled"`
 
-  - `OrgSSOSeatTierMappingsUpdated = object { actor, id, created_at, 3 more }`
+  - `OrgSSOSeatTierMappingsUpdated object { actor, id, created_at, 3 more }`
 
     Organization SSO seat tier mappings were updated.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { email_address, type }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -9004,7 +9004,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `AnthropicActor = object { email_address, type }`
+      - `AnthropicActor object { email_address, type }`
 
         - `email_address: optional string`
 
@@ -9032,13 +9032,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"org_sso_seat_tier_mappings_updated"`
 
-  - `OrgSSOToggled = object { actor, enabled, id, 4 more }`
+  - `OrgSSOToggled object { actor, enabled, id, 4 more }`
 
     Organization SSO was toggled on or off.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { email_address, type }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -9052,7 +9052,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `AnthropicActor = object { email_address, type }`
+      - `AnthropicActor object { email_address, type }`
 
         - `email_address: optional string`
 
@@ -9082,13 +9082,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"org_sso_toggled"`
 
-  - `OrgSyncDeletingSynchronizedFilesStarted = object { actor, id, created_at, 3 more }`
+  - `OrgSyncDeletingSynchronizedFilesStarted object { actor, id, created_at, 3 more }`
 
     Organization started deleting synchronized files.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { email_address, type }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -9102,7 +9102,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `AnthropicActor = object { email_address, type }`
+      - `AnthropicActor object { email_address, type }`
 
         - `email_address: optional string`
 
@@ -9130,13 +9130,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"org_sync_deleting_synchronized_files_started"`
 
-  - `OrgSyncSynchronizedFilesDeleted = object { actor, id, created_at, 3 more }`
+  - `OrgSyncSynchronizedFilesDeleted object { actor, id, created_at, 3 more }`
 
     Organization synchronized files were deleted.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { email_address, type }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -9150,7 +9150,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `AnthropicActor = object { email_address, type }`
+      - `AnthropicActor object { email_address, type }`
 
         - `email_address: optional string`
 
@@ -9178,13 +9178,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"org_sync_synchronized_files_deleted"`
 
-  - `OrgTaintAdded = object { actor, id, created_at, 4 more }`
+  - `OrgTaintAdded object { actor, id, created_at, 4 more }`
 
     A taint was added to an organization.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { email_address, type }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -9198,7 +9198,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `AnthropicActor = object { email_address, type }`
+      - `AnthropicActor object { email_address, type }`
 
         - `email_address: optional string`
 
@@ -9228,13 +9228,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"org_taint_added"`
 
-  - `OrgTaintRemoved = object { actor, id, created_at, 4 more }`
+  - `OrgTaintRemoved object { actor, id, created_at, 4 more }`
 
     A taint was removed from an organization.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { email_address, type }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -9248,7 +9248,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `AnthropicActor = object { email_address, type }`
+      - `AnthropicActor object { email_address, type }`
 
         - `email_address: optional string`
 
@@ -9278,13 +9278,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"org_taint_removed"`
 
-  - `OrgUserDeleted = object { actor, id, created_at, 5 more }`
+  - `OrgUserDeleted object { actor, id, created_at, 5 more }`
 
     User was removed from organization.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { email_address, type }  or object { admin_api_key_id, ip_address, user_agent, type }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -9298,7 +9298,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `AnthropicActor = object { email_address, type }`
+      - `AnthropicActor object { email_address, type }`
 
         - `email_address: optional string`
 
@@ -9306,7 +9306,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"anthropic_actor"`
 
-      - `AdminAPIKeyActor = object { admin_api_key_id, ip_address, user_agent, type }`
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
         - `admin_api_key_id: string`
 
@@ -9342,7 +9342,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"org_user_deleted"`
 
-  - `OrgUserInviteAccepted = object { actor, id, created_at, 4 more }`
+  - `OrgUserInviteAccepted object { actor, id, created_at, 4 more }`
 
     Organization user invite was accepted.
 
@@ -9382,13 +9382,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"org_user_invite_accepted"`
 
-  - `OrgUserInviteDeleted = object { actor, id, created_at, 4 more }`
+  - `OrgUserInviteDeleted object { actor, id, created_at, 4 more }`
 
     Organization user invite was deleted.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { email_address, type }  or object { admin_api_key_id, ip_address, user_agent, type }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -9402,7 +9402,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `AnthropicActor = object { email_address, type }`
+      - `AnthropicActor object { email_address, type }`
 
         - `email_address: optional string`
 
@@ -9410,7 +9410,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"anthropic_actor"`
 
-      - `AdminAPIKeyActor = object { admin_api_key_id, ip_address, user_agent, type }`
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
         - `admin_api_key_id: string`
 
@@ -9444,13 +9444,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"org_user_invite_deleted"`
 
-  - `OrgUserInviteReSent = object { actor, id, created_at, 4 more }`
+  - `OrgUserInviteReSent object { actor, id, created_at, 4 more }`
 
     Organization user invite was re-sent.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { email_address, type }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -9464,7 +9464,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `AnthropicActor = object { email_address, type }`
+      - `AnthropicActor object { email_address, type }`
 
         - `email_address: optional string`
 
@@ -9494,7 +9494,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"org_user_invite_re_sent"`
 
-  - `OrgUserInviteRejected = object { actor, id, created_at, 4 more }`
+  - `OrgUserInviteRejected object { actor, id, created_at, 4 more }`
 
     Organization user invite was rejected.
 
@@ -9534,13 +9534,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"org_user_invite_rejected"`
 
-  - `OrgUserInviteSent = object { actor, id, created_at, 5 more }`
+  - `OrgUserInviteSent object { actor, id, created_at, 5 more }`
 
     Organization user invite was sent.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { email_address, type }  or object { admin_api_key_id, ip_address, user_agent, type }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -9554,7 +9554,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `AnthropicActor = object { email_address, type }`
+      - `AnthropicActor object { email_address, type }`
 
         - `email_address: optional string`
 
@@ -9562,7 +9562,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"anthropic_actor"`
 
-      - `AdminAPIKeyActor = object { admin_api_key_id, ip_address, user_agent, type }`
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
         - `admin_api_key_id: string`
 
@@ -9598,7 +9598,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"org_user_invite_sent"`
 
-  - `OrgUserLeft = object { actor, id, created_at, 4 more }`
+  - `OrgUserLeft object { actor, id, created_at, 4 more }`
 
     User removed themselves from organization.
 
@@ -9638,13 +9638,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"org_user_left"`
 
-  - `OrgUserViewed = object { actor, user_id, id, 4 more }`
+  - `OrgUserViewed object { actor, user_id, id, 4 more }`
 
     An organization user was viewed.
 
     - `actor: object { admin_api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }`
 
-      - `AdminAPIKeyActor = object { admin_api_key_id, ip_address, user_agent, type }`
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
         - `admin_api_key_id: string`
 
@@ -9656,7 +9656,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"admin_api_key_actor"`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -9694,13 +9694,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"org_user_viewed"`
 
-  - `OrgUsersListed = object { actor, id, created_at, 3 more }`
+  - `OrgUsersListed object { actor, id, created_at, 3 more }`
 
     Organization users were listed.
 
     - `actor: object { admin_api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }`
 
-      - `AdminAPIKeyActor = object { admin_api_key_id, ip_address, user_agent, type }`
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
         - `admin_api_key_id: string`
 
@@ -9712,7 +9712,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"admin_api_key_actor"`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -9746,7 +9746,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"org_users_listed"`
 
-  - `OrgWorkAcrossAppsDisabled = object { actor, id, created_at, 3 more }`
+  - `OrgWorkAcrossAppsDisabled object { actor, id, created_at, 3 more }`
 
     Organization Work Across Apps was disabled.
 
@@ -9784,7 +9784,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"org_work_across_apps_disabled"`
 
-  - `OrgWorkAcrossAppsEnabled = object { actor, id, created_at, 3 more }`
+  - `OrgWorkAcrossAppsEnabled object { actor, id, created_at, 3 more }`
 
     Organization Work Across Apps was enabled.
 
@@ -9822,7 +9822,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"org_work_across_apps_enabled"`
 
-  - `OrganizationAddressUpdated = object { actor, id, billing_address_updated, 7 more }`
+  - `OrganizationAddressUpdated object { actor, id, billing_address_updated, 7 more }`
 
     The organization's billing or shipping address was updated.
 
@@ -9868,7 +9868,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"organization_address_updated"`
 
-  - `OrganizationIconDeleted = object { actor, id, created_at, 3 more }`
+  - `OrganizationIconDeleted object { actor, id, created_at, 3 more }`
 
     Organization's custom icon deleted.
 
@@ -9906,7 +9906,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"organization_icon_deleted"`
 
-  - `OrganizationIconUpdated = object { actor, id, created_at, 3 more }`
+  - `OrganizationIconUpdated object { actor, id, created_at, 3 more }`
 
     Organization's custom icon uploaded or replaced.
 
@@ -9944,13 +9944,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"organization_icon_updated"`
 
-  - `ClaudeOrganizationSettingsUpdated = object { actor, updates, id, 4 more }`
+  - `ClaudeOrganizationSettingsUpdated object { actor, updates, id, 4 more }`
 
     Organization settings were updated.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { email_address, type }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -9964,7 +9964,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `AnthropicActor = object { email_address, type }`
+      - `AnthropicActor object { email_address, type }`
 
         - `email_address: optional string`
 
@@ -9974,7 +9974,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `updates: array of object { current_value, previous_value, type }  or object { current_value, previous_value, type }  or object { current_value, previous_value, type }  or 38 more`
 
-      - `OrganizationName = object { current_value, previous_value, type }`
+      - `OrganizationName object { current_value, previous_value, type }`
 
         - `current_value: string`
 
@@ -9984,7 +9984,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"name"`
 
-      - `OrganizationCapabilities = object { current_value, previous_value, type }`
+      - `OrganizationCapabilities object { current_value, previous_value, type }`
 
         - `current_value: array of string`
 
@@ -9994,7 +9994,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"capabilities"`
 
-      - `OrganizationRedactContent = object { current_value, previous_value, type }`
+      - `OrganizationRedactContent object { current_value, previous_value, type }`
 
         - `current_value: boolean`
 
@@ -10004,7 +10004,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"redact_content"`
 
-      - `PublicProjectsEnabled = object { current_value, previous_value, type }`
+      - `PublicProjectsEnabled object { current_value, previous_value, type }`
 
         - `current_value: boolean`
 
@@ -10014,7 +10014,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"public_projects_enabled"`
 
-      - `WebSearchEnabled = object { current_value, previous_value, type }`
+      - `WebSearchEnabled object { current_value, previous_value, type }`
 
         - `current_value: boolean`
 
@@ -10024,7 +10024,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"web_search_enabled"`
 
-      - `GeolocationEnabled = object { current_value, previous_value, type }`
+      - `GeolocationEnabled object { current_value, previous_value, type }`
 
         - `current_value: boolean`
 
@@ -10034,7 +10034,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"geolocation_enabled"`
 
-      - `OrgMemoryEnabledSetting = object { current_value, previous_value, type }`
+      - `OrgMemoryEnabledSetting object { current_value, previous_value, type }`
 
         - `current_value: boolean`
 
@@ -10044,7 +10044,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"enabled_saffron"`
 
-      - `DataRetentionPeriods = object { current_value, previous_value, type }`
+      - `DataRetentionPeriods object { current_value, previous_value, type }`
 
         - `current_value: array of object { data_type, duration, timescale }`
 
@@ -10090,7 +10090,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"data_retention_periods"`
 
-      - `MembersLimit = object { current_value, previous_value, type }`
+      - `MembersLimit object { current_value, previous_value, type }`
 
         - `current_value: number`
 
@@ -10100,7 +10100,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"members_limit"`
 
-      - `ClaudeAPIInArtifactsEnabled = object { current_value, previous_value, type }`
+      - `ClaudeAPIInArtifactsEnabled object { current_value, previous_value, type }`
 
         - `current_value: boolean`
 
@@ -10110,7 +10110,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"claude_api_in_artifacts_enabled"`
 
-      - `WorkbenchCompletionFeedbackEnabled = object { current_value, previous_value, type }`
+      - `WorkbenchCompletionFeedbackEnabled object { current_value, previous_value, type }`
 
         - `current_value: boolean`
 
@@ -10120,7 +10120,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"workbench_completion_feedback_enabled"`
 
-      - `ClaudeAICompletionFeedbackEnabled = object { current_value, previous_value, type }`
+      - `ClaudeAICompletionFeedbackEnabled object { current_value, previous_value, type }`
 
         - `current_value: boolean`
 
@@ -10130,7 +10130,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"claude_ai_completion_feedback_enabled"`
 
-      - `ClaudeAIIntegrationSharingEnabled = object { current_value, previous_value, type }`
+      - `ClaudeAIIntegrationSharingEnabled object { current_value, previous_value, type }`
 
         - `current_value: boolean`
 
@@ -10140,7 +10140,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"claude_ai_integration_sharing_enabled"`
 
-      - `ClaudeAIChatSharingEnabled = object { current_value, previous_value, type }`
+      - `ClaudeAIChatSharingEnabled object { current_value, previous_value, type }`
 
         - `current_value: boolean`
 
@@ -10150,7 +10150,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"claude_ai_chat_sharing_enabled"`
 
-      - `ClaudeAiccrSharingEnabled = object { current_value, previous_value, type }`
+      - `ClaudeAiccrSharingEnabled object { current_value, previous_value, type }`
 
         - `current_value: boolean`
 
@@ -10160,7 +10160,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"claude_ai_ccr_sharing_enabled"`
 
-      - `BatchesDownloadUiVisibility = object { current_value, previous_value, type }`
+      - `BatchesDownloadUiVisibility object { current_value, previous_value, type }`
 
         - `current_value: "all" or "none" or "selected"`
 
@@ -10182,7 +10182,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"batches_download_ui_visibility"`
 
-      - `AllowedInviteDomains = object { current_value, previous_value, type }`
+      - `AllowedInviteDomains object { current_value, previous_value, type }`
 
         - `current_value: array of string`
 
@@ -10192,7 +10192,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"allowed_invite_domains"`
 
-      - `WebSearchAPISettingsChanged = object { current_value, previous_value, type }`
+      - `WebSearchAPISettingsChanged object { current_value, previous_value, type }`
 
         - `current_value: object { domain_filters, is_enabled }`
 
@@ -10222,7 +10222,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"web_search_api_settings"`
 
-      - `WebFetchAPISettingsChanged = object { current_value, previous_value, type }`
+      - `WebFetchAPISettingsChanged object { current_value, previous_value, type }`
 
         - `current_value: object { domain_filters, is_enabled }`
 
@@ -10252,7 +10252,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"web_fetch_api_settings"`
 
-      - `DefaultWorkspaceSettings = object { current_value, previous_value, type }`
+      - `DefaultWorkspaceSettings object { current_value, previous_value, type }`
 
         - `current_value: object { enable_api_keys }`
 
@@ -10266,7 +10266,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"default_workspace_settings"`
 
-      - `BatchesDownloadUiEnabledWorkspaceIDs = object { current_value, previous_value, type }`
+      - `BatchesDownloadUiEnabledWorkspaceIDs object { current_value, previous_value, type }`
 
         - `current_value: array of string`
 
@@ -10276,7 +10276,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"batches_download_ui_enabled_workspace_ids"`
 
-      - `ClaudeCodeManagedSettings = object { current_value, current_version, previous_value, 3 more }`
+      - `ClaudeCodeManagedSettings object { current_value, current_version, previous_value, 3 more }`
 
         The organization's Claude Code managed settings were changed.
 
@@ -10297,7 +10297,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"claude_code_managed_settings"`
 
-      - `AccountSessionDurationSeconds = object { current_value, previous_value, type }`
+      - `AccountSessionDurationSeconds object { current_value, previous_value, type }`
 
         Tracks changes to the enterprise account session duration setting (in seconds).
 
@@ -10309,7 +10309,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"account_session_duration_seconds"`
 
-      - `VcsConnections = object { current_value, previous_value, type }`
+      - `VcsConnections object { current_value, previous_value, type }`
 
         Tracks changes to VCS (GitHub, etc.) organization connections.
 
@@ -10345,7 +10345,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"vcs_connections"`
 
-      - `DisabledAdminRequestTypes = object { current_value, previous_value, type }`
+      - `DisabledAdminRequestTypes object { current_value, previous_value, type }`
 
         Tracks changes to which admin request types are disabled.
 
@@ -10357,7 +10357,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"disabled_admin_request_types"`
 
-      - `CodeExecutionNetworkEgressEnabled = object { current_value, previous_value, type }`
+      - `CodeExecutionNetworkEgressEnabled object { current_value, previous_value, type }`
 
         - `current_value: boolean`
 
@@ -10367,7 +10367,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"code_execution_network_egress_enabled"`
 
-      - `CodeExecutionDomainAllowlistChanged = object { current_value, previous_value, type }`
+      - `CodeExecutionDomainAllowlistChanged object { current_value, previous_value, type }`
 
         - `current_value: array of string`
 
@@ -10377,7 +10377,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"code_execution_domain_allowlist_changed"`
 
-      - `CodeExecutionDomainAllowlistTemplateChanged = object { current_value, previous_value, type }`
+      - `CodeExecutionDomainAllowlistTemplateChanged object { current_value, previous_value, type }`
 
         - `current_value: "custom" or "full_egress" or "package_managers"`
 
@@ -10399,7 +10399,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"code_execution_domain_allowlist_template_changed"`
 
-      - `ChatEnabled = object { current_value, previous_value, type }`
+      - `ChatEnabled object { current_value, previous_value, type }`
 
         - `current_value: boolean`
 
@@ -10409,7 +10409,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"chat_enabled"`
 
-      - `ClaudeCodeQuickWebSetupEnabled = object { current_value, previous_value, type }`
+      - `ClaudeCodeQuickWebSetupEnabled object { current_value, previous_value, type }`
 
         - `current_value: boolean`
 
@@ -10419,7 +10419,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"claude_code_quick_web_setup_enabled"`
 
-      - `ClaudeCodeTeamMemoryMode = object { current_value, previous_value, type }`
+      - `ClaudeCodeTeamMemoryMode object { current_value, previous_value, type }`
 
         - `current_value: "all_org_members" or "github_repo" or "off" or "specific_groups"`
 
@@ -10445,7 +10445,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"claude_code_team_memory_mode"`
 
-      - `BrowserExtensionSettingsUpdated = object { current_value, previous_value, type }`
+      - `BrowserExtensionSettingsUpdated object { current_value, previous_value, type }`
 
         - `current_value: map[unknown]`
 
@@ -10455,7 +10455,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"browser_extension_settings"`
 
-      - `DesktopExtensionAllowlistEnabled = object { current_value, previous_value, type }`
+      - `DesktopExtensionAllowlistEnabled object { current_value, previous_value, type }`
 
         - `current_value: boolean`
 
@@ -10465,7 +10465,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"is_desktop_extension_allowlist_enabled"`
 
-      - `ClaudeDesignEnabled = object { current_value, previous_value, type }`
+      - `ClaudeDesignEnabled object { current_value, previous_value, type }`
 
         - `current_value: boolean`
 
@@ -10475,7 +10475,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"claude_ai_design_enabled"`
 
-      - `ClaudeAISkillSharingEnabled = object { current_value, previous_value, type }`
+      - `ClaudeAISkillSharingEnabled object { current_value, previous_value, type }`
 
         - `current_value: boolean`
 
@@ -10485,7 +10485,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"claude_ai_skill_sharing_enabled"`
 
-      - `ClaudeAISkillSharingOrgEnabled = object { current_value, previous_value, type }`
+      - `ClaudeAISkillSharingOrgEnabled object { current_value, previous_value, type }`
 
         - `current_value: boolean`
 
@@ -10495,7 +10495,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"claude_ai_skill_sharing_org_enabled"`
 
-      - `ClaudeCodeRemoteControlEnabled = object { current_value, previous_value, type }`
+      - `ClaudeCodeRemoteControlEnabled object { current_value, previous_value, type }`
 
         - `current_value: boolean`
 
@@ -10505,7 +10505,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"claude_code_remote_control_enabled"`
 
-      - `ClaudeCodeRoutinesEnabled = object { current_value, previous_value, type }`
+      - `ClaudeCodeRoutinesEnabled object { current_value, previous_value, type }`
 
         - `current_value: boolean`
 
@@ -10515,7 +10515,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"claude_code_routines_enabled"`
 
-      - `FrontierServicesDataUseEnabled = object { current_value, previous_value, type }`
+      - `FrontierServicesDataUseEnabled object { current_value, previous_value, type }`
 
         - `current_value: boolean`
 
@@ -10525,7 +10525,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"frontier_services_data_use_enabled"`
 
-      - `LtiCourseProjectsEnabled = object { current_value, previous_value, type }`
+      - `LtiCourseProjectsEnabled object { current_value, previous_value, type }`
 
         - `current_value: boolean`
 
@@ -10535,7 +10535,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"lti_course_projects_enabled"`
 
-      - `ManagedAgentsEnabled = object { current_value, previous_value, type }`
+      - `ManagedAgentsEnabled object { current_value, previous_value, type }`
 
         - `current_value: boolean`
 
@@ -10565,13 +10565,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"claude_organization_settings_updated"`
 
-  - `OwnedProjectsAccessRestored = object { actor, id, created_at, 4 more }`
+  - `OwnedProjectsAccessRestored object { actor, id, created_at, 4 more }`
 
     Access to owned projects was restored.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { email_address, type }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -10585,7 +10585,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `AnthropicActor = object { email_address, type }`
+      - `AnthropicActor object { email_address, type }`
 
         - `email_address: optional string`
 
@@ -10615,7 +10615,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `user_id: optional string`
 
-  - `PaymentMethodUpdated = object { actor, id, created_at, 3 more }`
+  - `PaymentMethodUpdated object { actor, id, created_at, 3 more }`
 
     The organization's default payment method was updated.
 
@@ -10653,13 +10653,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"payment_method_updated"`
 
-  - `PhoneCodeSent = object { actor, id, created_at, 3 more }`
+  - `PhoneCodeSent object { actor, id, created_at, 3 more }`
 
     User requested a phone verification code.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -10673,7 +10673,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `UnauthenticatedUserActor = object { ip_address, user_agent, type, unauthenticated_email_address }`
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
 
         - `ip_address: string`
 
@@ -10705,7 +10705,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"phone_code_sent"`
 
-  - `PhoneCodeVerified = object { actor, id, created_at, 3 more }`
+  - `PhoneCodeVerified object { actor, id, created_at, 3 more }`
 
     User successfully verified their phone code.
 
@@ -10743,13 +10743,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"phone_code_verified"`
 
-  - `PlatformAPIKeyCreated = object { actor, api_key_id, id, 4 more }`
+  - `PlatformAPIKeyCreated object { actor, api_key_id, id, 4 more }`
 
     An API key was created.
 
     - `actor: object { admin_api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }`
 
-      - `AdminAPIKeyActor = object { admin_api_key_id, ip_address, user_agent, type }`
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
         - `admin_api_key_id: string`
 
@@ -10761,7 +10761,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"admin_api_key_actor"`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -10799,13 +10799,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"platform_api_key_created"`
 
-  - `PlatformAPIKeyUpdated = object { actor, api_key_id, updates, 5 more }`
+  - `PlatformAPIKeyUpdated object { actor, api_key_id, updates, 5 more }`
 
     An API key was updated.
 
     - `actor: object { admin_api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }`
 
-      - `AdminAPIKeyActor = object { admin_api_key_id, ip_address, user_agent, type }`
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
         - `admin_api_key_id: string`
 
@@ -10817,7 +10817,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"admin_api_key_actor"`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -10869,13 +10869,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"platform_api_key_updated"`
 
-  - `PlatformCostReportViewed = object { actor, id, created_at, 3 more }`
+  - `PlatformCostReportViewed object { actor, id, created_at, 3 more }`
 
     The cost report was viewed.
 
     - `actor: object { admin_api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }`
 
-      - `AdminAPIKeyActor = object { admin_api_key_id, ip_address, user_agent, type }`
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
         - `admin_api_key_id: string`
 
@@ -10887,7 +10887,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"admin_api_key_actor"`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -10921,13 +10921,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"platform_cost_report_viewed"`
 
-  - `PlatformFederationIssuerArchived = object { actor, federation_issuer_id, id, 4 more }`
+  - `PlatformFederationIssuerArchived object { actor, federation_issuer_id, id, 4 more }`
 
     An OIDC federation issuer was archived.
 
     - `actor: object { admin_api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }`
 
-      - `AdminAPIKeyActor = object { admin_api_key_id, ip_address, user_agent, type }`
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
         - `admin_api_key_id: string`
 
@@ -10939,7 +10939,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"admin_api_key_actor"`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -10977,13 +10977,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"platform_federation_issuer_archived"`
 
-  - `PlatformFederationIssuerUpdated = object { actor, federation_issuer_id, updates, 5 more }`
+  - `PlatformFederationIssuerUpdated object { actor, federation_issuer_id, updates, 5 more }`
 
     An OIDC federation issuer was updated.
 
     - `actor: object { admin_api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }`
 
-      - `AdminAPIKeyActor = object { admin_api_key_id, ip_address, user_agent, type }`
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
         - `admin_api_key_id: string`
 
@@ -10995,7 +10995,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"admin_api_key_actor"`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -11061,13 +11061,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"platform_federation_issuer_updated"`
 
-  - `PlatformFederationRuleArchived = object { actor, federation_rule_id, id, 4 more }`
+  - `PlatformFederationRuleArchived object { actor, federation_rule_id, id, 4 more }`
 
     An OIDC federation rule was archived.
 
     - `actor: object { admin_api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }`
 
-      - `AdminAPIKeyActor = object { admin_api_key_id, ip_address, user_agent, type }`
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
         - `admin_api_key_id: string`
 
@@ -11079,7 +11079,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"admin_api_key_actor"`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -11117,13 +11117,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"platform_federation_rule_archived"`
 
-  - `PlatformFederationRuleUpdated = object { actor, federation_rule_id, updates, 5 more }`
+  - `PlatformFederationRuleUpdated object { actor, federation_rule_id, updates, 5 more }`
 
     An OIDC federation rule was updated.
 
     - `actor: object { admin_api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }`
 
-      - `AdminAPIKeyActor = object { admin_api_key_id, ip_address, user_agent, type }`
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
         - `admin_api_key_id: string`
 
@@ -11135,7 +11135,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"admin_api_key_actor"`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -11209,13 +11209,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"platform_federation_rule_updated"`
 
-  - `PlatformFederationRuleWorkspaceAdded = object { actor, federation_rule_id, workspace_id, 5 more }`
+  - `PlatformFederationRuleWorkspaceAdded object { actor, federation_rule_id, workspace_id, 5 more }`
 
     A federation rule was enabled for a workspace.
 
     - `actor: object { admin_api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }`
 
-      - `AdminAPIKeyActor = object { admin_api_key_id, ip_address, user_agent, type }`
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
         - `admin_api_key_id: string`
 
@@ -11227,7 +11227,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"admin_api_key_actor"`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -11269,13 +11269,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"platform_federation_rule_workspace_added"`
 
-  - `PlatformFederationRuleWorkspaceRemoved = object { actor, federation_rule_id, workspace_id, 5 more }`
+  - `PlatformFederationRuleWorkspaceRemoved object { actor, federation_rule_id, workspace_id, 5 more }`
 
     A federation rule was disabled for a workspace.
 
     - `actor: object { admin_api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }`
 
-      - `AdminAPIKeyActor = object { admin_api_key_id, ip_address, user_agent, type }`
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
         - `admin_api_key_id: string`
 
@@ -11287,7 +11287,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"admin_api_key_actor"`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -11329,13 +11329,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"platform_federation_rule_workspace_removed"`
 
-  - `PlatformFileContentDownloaded = object { actor, file_id, id, 4 more }`
+  - `PlatformFileContentDownloaded object { actor, file_id, id, 4 more }`
 
     Activity logged when file content is downloaded via GET /v1/files/{file_id}/content.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { api_key_id, ip_address, user_agent, type }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -11349,7 +11349,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `APIActor = object { api_key_id, ip_address, user_agent, type }`
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
         - `api_key_id: string`
 
@@ -11385,13 +11385,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"platform_file_content_downloaded"`
 
-  - `PlatformFileDeleted = object { actor, file_id, id, 4 more }`
+  - `PlatformFileDeleted object { actor, file_id, id, 4 more }`
 
     Activity logged when a file is deleted via DELETE /v1/files/{file_id}.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { api_key_id, ip_address, user_agent, type }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -11405,7 +11405,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `APIActor = object { api_key_id, ip_address, user_agent, type }`
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
         - `api_key_id: string`
 
@@ -11441,13 +11441,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"platform_file_deleted"`
 
-  - `PlatformFileUploaded = object { actor, file_id, id, 5 more }`
+  - `PlatformFileUploaded object { actor, file_id, id, 5 more }`
 
     Activity logged when a file is uploaded via POST /v1/files.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { api_key_id, ip_address, user_agent, type }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -11461,7 +11461,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `APIActor = object { api_key_id, ip_address, user_agent, type }`
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
         - `api_key_id: string`
 
@@ -11501,13 +11501,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"platform_file_uploaded"`
 
-  - `PlatformServiceAccountArchived = object { actor, service_account_id, id, 4 more }`
+  - `PlatformServiceAccountArchived object { actor, service_account_id, id, 4 more }`
 
     A service account was archived.
 
     - `actor: object { admin_api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }`
 
-      - `AdminAPIKeyActor = object { admin_api_key_id, ip_address, user_agent, type }`
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
         - `admin_api_key_id: string`
 
@@ -11519,7 +11519,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"admin_api_key_actor"`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -11557,13 +11557,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"platform_service_account_archived"`
 
-  - `PlatformServiceAccountUpdated = object { actor, service_account_id, updates, 5 more }`
+  - `PlatformServiceAccountUpdated object { actor, service_account_id, updates, 5 more }`
 
     A service account was updated.
 
     - `actor: object { admin_api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }`
 
-      - `AdminAPIKeyActor = object { admin_api_key_id, ip_address, user_agent, type }`
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
         - `admin_api_key_id: string`
 
@@ -11575,7 +11575,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"admin_api_key_actor"`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -11623,13 +11623,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"platform_service_account_updated"`
 
-  - `PlatformServiceAccountWorkspaceMemberAdded = object { actor, service_account_id, workspace_id, 5 more }`
+  - `PlatformServiceAccountWorkspaceMemberAdded object { actor, service_account_id, workspace_id, 5 more }`
 
     A service account was added as a member of a workspace.
 
     - `actor: object { admin_api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }`
 
-      - `AdminAPIKeyActor = object { admin_api_key_id, ip_address, user_agent, type }`
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
         - `admin_api_key_id: string`
 
@@ -11641,7 +11641,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"admin_api_key_actor"`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -11683,13 +11683,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"platform_service_account_workspace_member_added"`
 
-  - `PlatformServiceAccountWorkspaceMemberRemoved = object { actor, service_account_id, workspace_id, 5 more }`
+  - `PlatformServiceAccountWorkspaceMemberRemoved object { actor, service_account_id, workspace_id, 5 more }`
 
     A service account was removed from a workspace.
 
     - `actor: object { admin_api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }`
 
-      - `AdminAPIKeyActor = object { admin_api_key_id, ip_address, user_agent, type }`
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
         - `admin_api_key_id: string`
 
@@ -11701,7 +11701,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"admin_api_key_actor"`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -11743,13 +11743,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"platform_service_account_workspace_member_removed"`
 
-  - `PlatformServiceAccountWorkspaceMemberUpdated = object { actor, service_account_id, updates, 6 more }`
+  - `PlatformServiceAccountWorkspaceMemberUpdated object { actor, service_account_id, updates, 6 more }`
 
     A service account's workspace membership role was updated.
 
     - `actor: object { admin_api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }`
 
-      - `AdminAPIKeyActor = object { admin_api_key_id, ip_address, user_agent, type }`
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
         - `admin_api_key_id: string`
 
@@ -11761,7 +11761,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"admin_api_key_actor"`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -11813,7 +11813,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"platform_service_account_workspace_member_updated"`
 
-  - `PlatformSigningKeyCreated = object { actor, algorithm, key_backing_type, 7 more }`
+  - `PlatformSigningKeyCreated object { actor, algorithm, key_backing_type, 7 more }`
 
     Activity logged when a new request-signing key is registered for the org.
 
@@ -11867,7 +11867,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"platform_signing_key_created"`
 
-  - `PlatformSigningKeyDeleted = object { actor, algorithm, key_backing_type, 7 more }`
+  - `PlatformSigningKeyDeleted object { actor, algorithm, key_backing_type, 7 more }`
 
     Activity logged when a signing key is permanently deleted.
 
@@ -11921,7 +11921,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"platform_signing_key_deleted"`
 
-  - `PlatformSigningKeyRotated = object { actor, algorithm, key_group_identifier, 7 more }`
+  - `PlatformSigningKeyRotated object { actor, algorithm, key_group_identifier, 7 more }`
 
     Activity logged when an in-memory signing key is rotated.
 
@@ -11975,13 +11975,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"platform_signing_key_rotated"`
 
-  - `PlatformSkillVersionCreated = object { actor, skill_id, version, 5 more }`
+  - `PlatformSkillVersionCreated object { actor, skill_id, version, 5 more }`
 
     Activity logged when a skill version is created via POST /v1/skills/{skill_id}/versions.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { api_key_id, ip_address, user_agent, type }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -11995,7 +11995,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `APIActor = object { api_key_id, ip_address, user_agent, type }`
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
         - `api_key_id: string`
 
@@ -12035,13 +12035,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"platform_skill_version_created"`
 
-  - `PlatformSkillVersionDeleted = object { actor, skill_id, version, 5 more }`
+  - `PlatformSkillVersionDeleted object { actor, skill_id, version, 5 more }`
 
     Activity logged when a skill version is deleted via DELETE /v1/skills/{skill_id}/versions/{version}.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { api_key_id, ip_address, user_agent, type }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -12055,7 +12055,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `APIActor = object { api_key_id, ip_address, user_agent, type }`
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
         - `api_key_id: string`
 
@@ -12095,7 +12095,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"platform_skill_version_deleted"`
 
-  - `PlatformSpendLimitAlertEmailsUpdated = object { actor, id, alert_emails, 5 more }`
+  - `PlatformSpendLimitAlertEmailsUpdated object { actor, id, alert_emails, 5 more }`
 
     Spend limit alert email addresses and role targets were updated for an org.
 
@@ -12141,7 +12141,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"platform_spend_limit_alert_emails_updated"`
 
-  - `PlatformSpendLimitCreated = object { actor, id, created_at, 5 more }`
+  - `PlatformSpendLimitCreated object { actor, id, created_at, 5 more }`
 
     An org-level fixed-dollar spend limit was created.
 
@@ -12187,7 +12187,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"platform_spend_limit_created"`
 
-  - `PlatformSpendLimitDeleted = object { actor, id, created_at, 4 more }`
+  - `PlatformSpendLimitDeleted object { actor, id, created_at, 4 more }`
 
     An org-level spend limit was removed.
 
@@ -12229,7 +12229,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"platform_spend_limit_deleted"`
 
-  - `PlatformSpendLimitUpdated = object { actor, id, created_at, 5 more }`
+  - `PlatformSpendLimitUpdated object { actor, id, created_at, 5 more }`
 
     An org-level spend limit snooze/ignore state was changed.
 
@@ -12275,13 +12275,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"platform_spend_limit_updated"`
 
-  - `PlatformUsageReportClaudeCodeViewed = object { actor, id, created_at, 3 more }`
+  - `PlatformUsageReportClaudeCodeViewed object { actor, id, created_at, 3 more }`
 
     The Claude Code usage report was viewed.
 
     - `actor: object { admin_api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }`
 
-      - `AdminAPIKeyActor = object { admin_api_key_id, ip_address, user_agent, type }`
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
         - `admin_api_key_id: string`
 
@@ -12293,7 +12293,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"admin_api_key_actor"`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -12327,13 +12327,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"platform_usage_report_claude_code_viewed"`
 
-  - `PlatformUsageReportMessagesViewed = object { actor, id, created_at, 3 more }`
+  - `PlatformUsageReportMessagesViewed object { actor, id, created_at, 3 more }`
 
     The messages usage report was viewed.
 
     - `actor: object { admin_api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }`
 
-      - `AdminAPIKeyActor = object { admin_api_key_id, ip_address, user_agent, type }`
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
         - `admin_api_key_id: string`
 
@@ -12345,7 +12345,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"admin_api_key_actor"`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -12379,13 +12379,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"platform_usage_report_messages_viewed"`
 
-  - `PlatformWorkspaceArchived = object { actor, workspace_id, id, 4 more }`
+  - `PlatformWorkspaceArchived object { actor, workspace_id, id, 4 more }`
 
     A workspace was archived.
 
     - `actor: object { admin_api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }`
 
-      - `AdminAPIKeyActor = object { admin_api_key_id, ip_address, user_agent, type }`
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
         - `admin_api_key_id: string`
 
@@ -12397,7 +12397,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"admin_api_key_actor"`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -12435,13 +12435,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"platform_workspace_archived"`
 
-  - `PlatformWorkspaceCreated = object { actor, workspace_id, id, 4 more }`
+  - `PlatformWorkspaceCreated object { actor, workspace_id, id, 4 more }`
 
     A workspace was created.
 
     - `actor: object { admin_api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }`
 
-      - `AdminAPIKeyActor = object { admin_api_key_id, ip_address, user_agent, type }`
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
         - `admin_api_key_id: string`
 
@@ -12453,7 +12453,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"admin_api_key_actor"`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -12491,13 +12491,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"platform_workspace_created"`
 
-  - `PlatformWorkspaceMemberAdded = object { actor, user_id, workspace_id, 5 more }`
+  - `PlatformWorkspaceMemberAdded object { actor, user_id, workspace_id, 5 more }`
 
     A member was added to a workspace.
 
     - `actor: object { admin_api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }`
 
-      - `AdminAPIKeyActor = object { admin_api_key_id, ip_address, user_agent, type }`
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
         - `admin_api_key_id: string`
 
@@ -12509,7 +12509,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"admin_api_key_actor"`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -12551,13 +12551,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"platform_workspace_member_added"`
 
-  - `PlatformWorkspaceMemberRemoved = object { actor, user_id, workspace_id, 5 more }`
+  - `PlatformWorkspaceMemberRemoved object { actor, user_id, workspace_id, 5 more }`
 
     A member was removed from a workspace.
 
     - `actor: object { admin_api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }`
 
-      - `AdminAPIKeyActor = object { admin_api_key_id, ip_address, user_agent, type }`
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
         - `admin_api_key_id: string`
 
@@ -12569,7 +12569,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"admin_api_key_actor"`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -12611,13 +12611,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"platform_workspace_member_removed"`
 
-  - `PlatformWorkspaceMemberUpdated = object { actor, updates, user_id, 6 more }`
+  - `PlatformWorkspaceMemberUpdated object { actor, updates, user_id, 6 more }`
 
     A workspace member was updated.
 
     - `actor: object { admin_api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }`
 
-      - `AdminAPIKeyActor = object { admin_api_key_id, ip_address, user_agent, type }`
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
         - `admin_api_key_id: string`
 
@@ -12629,7 +12629,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"admin_api_key_actor"`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -12681,13 +12681,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"platform_workspace_member_updated"`
 
-  - `PlatformWorkspaceMemberViewed = object { actor, user_id, workspace_id, 5 more }`
+  - `PlatformWorkspaceMemberViewed object { actor, user_id, workspace_id, 5 more }`
 
     A workspace member was viewed.
 
     - `actor: object { admin_api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }`
 
-      - `AdminAPIKeyActor = object { admin_api_key_id, ip_address, user_agent, type }`
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
         - `admin_api_key_id: string`
 
@@ -12699,7 +12699,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"admin_api_key_actor"`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -12741,13 +12741,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"platform_workspace_member_viewed"`
 
-  - `PlatformWorkspaceMembersListed = object { actor, workspace_id, id, 4 more }`
+  - `PlatformWorkspaceMembersListed object { actor, workspace_id, id, 4 more }`
 
     Workspace members were listed.
 
     - `actor: object { admin_api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }`
 
-      - `AdminAPIKeyActor = object { admin_api_key_id, ip_address, user_agent, type }`
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
         - `admin_api_key_id: string`
 
@@ -12759,7 +12759,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"admin_api_key_actor"`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -12797,7 +12797,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"platform_workspace_members_listed"`
 
-  - `PlatformWorkspaceRateLimitDeleted = object { actor, limiter_type, model_group, 6 more }`
+  - `PlatformWorkspaceRateLimitDeleted object { actor, limiter_type, model_group, 6 more }`
 
     A workspace rate limit was deleted.
 
@@ -12847,7 +12847,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"platform_workspace_rate_limit_deleted"`
 
-  - `PlatformWorkspaceRateLimitUpdated = object { actor, limiter_type, model_group, 7 more }`
+  - `PlatformWorkspaceRateLimitUpdated object { actor, limiter_type, model_group, 7 more }`
 
     A workspace rate limit was created or updated.
 
@@ -12901,13 +12901,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"platform_workspace_rate_limit_updated"`
 
-  - `PlatformWorkspaceUpdated = object { actor, updates, workspace_id, 5 more }`
+  - `PlatformWorkspaceUpdated object { actor, updates, workspace_id, 5 more }`
 
     A workspace was updated.
 
     - `actor: object { admin_api_key_id, ip_address, user_agent, type }  or object { email_address, ip_address, user_agent, 2 more }`
 
-      - `AdminAPIKeyActor = object { admin_api_key_id, ip_address, user_agent, type }`
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
         - `admin_api_key_id: string`
 
@@ -12919,7 +12919,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"admin_api_key_actor"`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -12973,7 +12973,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"platform_workspace_updated"`
 
-  - `ClaudePluginCreated = object { actor, id, created_at, 5 more }`
+  - `ClaudePluginCreated object { actor, id, created_at, 5 more }`
 
     Plugin was created.
 
@@ -13015,7 +13015,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"claude_plugin_created"`
 
-  - `ClaudePluginDeleted = object { actor, id, created_at, 5 more }`
+  - `ClaudePluginDeleted object { actor, id, created_at, 5 more }`
 
     Plugin was deleted.
 
@@ -13057,7 +13057,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"claude_plugin_deleted"`
 
-  - `PluginInstallationPreferenceUpdated = object { actor, marketplace_id, plugin_name, 9 more }`
+  - `PluginInstallationPreferenceUpdated object { actor, marketplace_id, plugin_name, 9 more }`
 
     An org admin changed the installation preference for a plugin.
 
@@ -13119,7 +13119,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"plugin_installation_preference_updated"`
 
-  - `ClaudePluginReplaced = object { actor, id, created_at, 5 more }`
+  - `ClaudePluginReplaced object { actor, id, created_at, 5 more }`
 
     Plugin was replaced.
 
@@ -13161,7 +13161,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"claude_plugin_replaced"`
 
-  - `ClaudePluginUpdated = object { actor, id, created_at, 5 more }`
+  - `ClaudePluginUpdated object { actor, id, created_at, 5 more }`
 
     Plugin was updated.
 
@@ -13203,7 +13203,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"claude_plugin_updated"`
 
-  - `PrepaidAutoRechargeDisabled = object { actor, id, created_at, 3 more }`
+  - `PrepaidAutoRechargeDisabled object { actor, id, created_at, 3 more }`
 
     Auto-recharge was disabled for API prepaid org.
 
@@ -13241,7 +13241,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"prepaid_auto_recharge_disabled"`
 
-  - `PrepaidAutoRechargeUpdated = object { actor, id, created_at, 5 more }`
+  - `PrepaidAutoRechargeUpdated object { actor, id, created_at, 5 more }`
 
     Auto-recharge settings were updated for API prepaid org.
 
@@ -13287,13 +13287,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"prepaid_auto_recharge_updated"`
 
-  - `PrepaidExtraUsageAutoReloadDisabled = object { actor, id, created_at, 3 more }`
+  - `PrepaidExtraUsageAutoReloadDisabled object { actor, id, created_at, 3 more }`
 
     Prepaid usage credit auto-reload was disabled.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { email_address, type }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -13307,7 +13307,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `AnthropicActor = object { email_address, type }`
+      - `AnthropicActor object { email_address, type }`
 
         - `email_address: optional string`
 
@@ -13335,13 +13335,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"prepaid_extra_usage_auto_reload_disabled"`
 
-  - `PrepaidExtraUsageAutoReloadEnabled = object { actor, id, created_at, 3 more }`
+  - `PrepaidExtraUsageAutoReloadEnabled object { actor, id, created_at, 3 more }`
 
     Prepaid usage credit auto-reload was enabled.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { email_address, type }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -13355,7 +13355,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `AnthropicActor = object { email_address, type }`
+      - `AnthropicActor object { email_address, type }`
 
         - `email_address: optional string`
 
@@ -13383,13 +13383,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"prepaid_extra_usage_auto_reload_enabled"`
 
-  - `PrepaidExtraUsageAutoReloadSettingsUpdated = object { actor, id, created_at, 3 more }`
+  - `PrepaidExtraUsageAutoReloadSettingsUpdated object { actor, id, created_at, 3 more }`
 
     Prepaid usage credit auto-reload settings were updated.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { email_address, type }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -13403,7 +13403,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `AnthropicActor = object { email_address, type }`
+      - `AnthropicActor object { email_address, type }`
 
         - `email_address: optional string`
 
@@ -13431,7 +13431,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"prepaid_extra_usage_auto_reload_settings_updated"`
 
-  - `PrimaryOwnerTransferred = object { actor, new_owner_id, previous_owner_id, 5 more }`
+  - `PrimaryOwnerTransferred object { actor, new_owner_id, previous_owner_id, 5 more }`
 
     Primary owner role was transferred to another org member.
 
@@ -13473,7 +13473,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"primary_owner_transferred"`
 
-  - `ClaudeProjectArchived = object { actor, claude_project_id, id, 4 more }`
+  - `ClaudeProjectArchived object { actor, claude_project_id, id, 4 more }`
 
     A Claude project was archived.
 
@@ -13513,7 +13513,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"claude_project_archived"`
 
-  - `ClaudeProjectCreated = object { actor, claude_project_id, id, 4 more }`
+  - `ClaudeProjectCreated object { actor, claude_project_id, id, 4 more }`
 
     A Claude project was created.
 
@@ -13553,7 +13553,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"claude_project_created"`
 
-  - `ClaudeProjectDeleted = object { actor, claude_project_id, id, 4 more }`
+  - `ClaudeProjectDeleted object { actor, claude_project_id, id, 4 more }`
 
     A Claude project was deleted.
 
@@ -13593,13 +13593,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"claude_project_deleted"`
 
-  - `ClaudeProjectDocumentAccessFailed = object { actor, claude_project_document_id, claude_project_id, 6 more }`
+  - `ClaudeProjectDocumentAccessFailed object { actor, claude_project_document_id, claude_project_id, 6 more }`
 
     An attempt to access a document in a Claude project failed.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -13613,7 +13613,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `UnauthenticatedUserActor = object { ip_address, user_agent, type, unauthenticated_email_address }`
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
 
         - `ip_address: string`
 
@@ -13651,7 +13651,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"claude_project_document_access_failed"`
 
-  - `ClaudeProjectDocumentDeleted = object { actor, claude_project_document_id, claude_project_id, 6 more }`
+  - `ClaudeProjectDocumentDeleted object { actor, claude_project_document_id, claude_project_id, 6 more }`
 
     A document was deleted from a Claude project.
 
@@ -13695,13 +13695,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"claude_project_document_deleted"`
 
-  - `ClaudeProjectDocumentDeletionFailed = object { actor, claude_project_document_id, claude_project_id, 6 more }`
+  - `ClaudeProjectDocumentDeletionFailed object { actor, claude_project_document_id, claude_project_id, 6 more }`
 
     A request to delete a document from a Claude project failed.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -13715,7 +13715,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `UnauthenticatedUserActor = object { ip_address, user_agent, type, unauthenticated_email_address }`
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
 
         - `ip_address: string`
 
@@ -13753,7 +13753,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"claude_project_document_deletion_failed"`
 
-  - `ClaudeProjectDocumentUploaded = object { actor, claude_project_document_id, claude_project_id, 6 more }`
+  - `ClaudeProjectDocumentUploaded object { actor, claude_project_document_id, claude_project_id, 6 more }`
 
     A document was uploaded to a Claude project.
 
@@ -13797,7 +13797,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"claude_project_document_uploaded"`
 
-  - `ClaudeProjectDocumentViewed = object { actor, claude_project_document_id, claude_project_id, 6 more }`
+  - `ClaudeProjectDocumentViewed object { actor, claude_project_document_id, claude_project_id, 6 more }`
 
     A document in a Claude project was viewed.
 
@@ -13841,13 +13841,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"claude_project_document_viewed"`
 
-  - `ClaudeProjectFileAccessFailed = object { actor, claude_file_id, claude_project_id, 5 more }`
+  - `ClaudeProjectFileAccessFailed object { actor, claude_file_id, claude_project_id, 5 more }`
 
     An attempt to access a file in a Claude project failed.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -13861,7 +13861,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `UnauthenticatedUserActor = object { ip_address, user_agent, type, unauthenticated_email_address }`
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
 
         - `ip_address: string`
 
@@ -13897,13 +13897,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"claude_project_file_access_failed"`
 
-  - `ClaudeProjectFileDeleted = object { actor, claude_file_id, claude_project_id, 5 more }`
+  - `ClaudeProjectFileDeleted object { actor, claude_file_id, claude_project_id, 5 more }`
 
     A file was deleted from a Claude project.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -13917,7 +13917,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `UnauthenticatedUserActor = object { ip_address, user_agent, type, unauthenticated_email_address }`
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
 
         - `ip_address: string`
 
@@ -13953,13 +13953,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"claude_project_file_deleted"`
 
-  - `ClaudeProjectFileDeletionFailed = object { actor, claude_file_id, claude_project_id, 5 more }`
+  - `ClaudeProjectFileDeletionFailed object { actor, claude_file_id, claude_project_id, 5 more }`
 
     A request to delete a file from a Claude project failed.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -13973,7 +13973,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `UnauthenticatedUserActor = object { ip_address, user_agent, type, unauthenticated_email_address }`
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
 
         - `ip_address: string`
 
@@ -14009,13 +14009,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"claude_project_file_deletion_failed"`
 
-  - `ClaudeProjectFileUploaded = object { actor, claude_file_id, claude_project_id, 6 more }`
+  - `ClaudeProjectFileUploaded object { actor, claude_file_id, claude_project_id, 6 more }`
 
     A file was uploaded to a Claude project.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -14029,7 +14029,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `UnauthenticatedUserActor = object { ip_address, user_agent, type, unauthenticated_email_address }`
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
 
         - `ip_address: string`
 
@@ -14067,7 +14067,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"claude_project_file_uploaded"`
 
-  - `ClaudeProjectReported = object { actor, claude_project_id, id, 4 more }`
+  - `ClaudeProjectReported object { actor, claude_project_id, id, 4 more }`
 
     A Claude project was reported.
 
@@ -14107,7 +14107,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"claude_project_reported"`
 
-  - `ClaudeProjectSharingUpdated = object { actor, audience, claude_project_id, 5 more }`
+  - `ClaudeProjectSharingUpdated object { actor, audience, claude_project_id, 5 more }`
 
     A Claude project's sharing settings were updated.
 
@@ -14129,13 +14129,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       Sharing audience for the project. If empty, this it's only visible to the creating user.
 
-      - `ProjectSharingAudiencePublic = object { type }`
+      - `ProjectSharingAudiencePublic object { type }`
 
         - `type: optional "public"`
 
           - `"public"`
 
-      - `ProjectSharingAudienceOrganization = object { type }`
+      - `ProjectSharingAudienceOrganization object { type }`
 
         - `type: optional "organization"`
 
@@ -14163,7 +14163,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"claude_project_sharing_updated"`
 
-  - `ClaudeProjectViewed = object { actor, claude_project_id, id, 5 more }`
+  - `ClaudeProjectViewed object { actor, claude_project_id, id, 5 more }`
 
     A Claude project was viewed.
 
@@ -14205,7 +14205,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"claude_project_viewed"`
 
-  - `ClaudePubsecIdentityConfigured = object { actor, idp_saml_config_updated, magic_link_toggled, 6 more }`
+  - `ClaudePubsecIdentityConfigured object { actor, idp_saml_config_updated, magic_link_toggled, 6 more }`
 
     SAML IdP configuration updated for a public sector organization.
 
@@ -14249,7 +14249,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"claude_pubsec_identity_configured"`
 
-  - `RbacRoleAssigned = object { actor, principal_id, principal_type, 6 more }`
+  - `RbacRoleAssigned object { actor, principal_id, principal_type, 6 more }`
 
     Admin assigned an RBAC custom role to a principal.
 
@@ -14299,7 +14299,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"rbac_role_assigned"`
 
-  - `RbacRoleCreated = object { actor, role_id, role_name, 5 more }`
+  - `RbacRoleCreated object { actor, role_id, role_name, 5 more }`
 
     Admin created an RBAC custom role.
 
@@ -14345,7 +14345,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"rbac_role_created"`
 
-  - `RbacRoleDeleted = object { actor, role_id, id, 4 more }`
+  - `RbacRoleDeleted object { actor, role_id, id, 4 more }`
 
     Admin deleted an RBAC custom role.
 
@@ -14387,7 +14387,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"rbac_role_deleted"`
 
-  - `RbacRolePermissionAdded = object { action, actor, resource_id, 7 more }`
+  - `RbacRolePermissionAdded object { action, actor, resource_id, 7 more }`
 
     Admin added a permission to an RBAC custom role.
 
@@ -14441,7 +14441,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"rbac_role_permission_added"`
 
-  - `RbacRolePermissionRemoved = object { action, actor, resource_id, 7 more }`
+  - `RbacRolePermissionRemoved object { action, actor, resource_id, 7 more }`
 
     Admin removed a permission from an RBAC custom role.
 
@@ -14495,7 +14495,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"rbac_role_permission_removed"`
 
-  - `RbacRoleUnassigned = object { actor, principal_id, principal_type, 6 more }`
+  - `RbacRoleUnassigned object { actor, principal_id, principal_type, 6 more }`
 
     Admin unassigned an RBAC custom role from a principal.
 
@@ -14545,7 +14545,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"rbac_role_unassigned"`
 
-  - `RbacRoleUpdated = object { actor, role_id, id, 4 more }`
+  - `RbacRoleUpdated object { actor, role_id, id, 4 more }`
 
     Admin updated an RBAC custom role.
 
@@ -14587,13 +14587,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"rbac_role_updated"`
 
-  - `RoleAssignmentGranted = object { actor, id, created_at, 8 more }`
+  - `RoleAssignmentGranted object { actor, id, created_at, 8 more }`
 
     Role assignment was granted.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { email_address, type }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -14607,7 +14607,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `AnthropicActor = object { email_address, type }`
+      - `AnthropicActor object { email_address, type }`
 
         - `email_address: optional string`
 
@@ -14645,13 +14645,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"role_assignment_granted"`
 
-  - `RoleAssignmentRevoked = object { actor, id, created_at, 8 more }`
+  - `RoleAssignmentRevoked object { actor, id, created_at, 8 more }`
 
     Role assignment was revoked.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { email_address, type }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -14665,7 +14665,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `AnthropicActor = object { email_address, type }`
+      - `AnthropicActor object { email_address, type }`
 
         - `email_address: optional string`
 
@@ -14703,7 +14703,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"role_assignment_revoked"`
 
-  - `SSOLoginFailed = object { actor, id, created_at, 3 more }`
+  - `SSOLoginFailed object { actor, id, created_at, 3 more }`
 
     An SSO sign-in attempt failed.
 
@@ -14739,7 +14739,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"sso_login_failed"`
 
-  - `SSOLoginInitiated = object { actor, id, created_at, 3 more }`
+  - `SSOLoginInitiated object { actor, id, created_at, 3 more }`
 
     A user started an SSO sign-in flow.
 
@@ -14775,7 +14775,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"sso_login_initiated"`
 
-  - `SSOLoginSucceeded = object { actor, id, auth_method, 5 more }`
+  - `SSOLoginSucceeded object { actor, id, auth_method, 5 more }`
 
     A user successfully signed in with SSO.
 
@@ -14825,13 +14825,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"sso_login_succeeded"`
 
-  - `SSOSecondFactorMagicLink = object { actor, id, created_at, 3 more }`
+  - `SSOSecondFactorMagicLink object { actor, id, created_at, 3 more }`
 
     SSO second factor magic link was used.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -14845,7 +14845,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `UnauthenticatedUserActor = object { ip_address, user_agent, type, unauthenticated_email_address }`
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
 
         - `ip_address: string`
 
@@ -14877,13 +14877,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"sso_second_factor_magic_link"`
 
-  - `ScimUserCreated = object { actor, user_id, id, 4 more }`
+  - `ScimUserCreated object { actor, user_id, id, 4 more }`
 
     A SCIM user was provisioned.
 
     - `actor: object { api_key_id, ip_address, user_agent, type }  or object { directory_id, workos_event_id, idp_connection_type, type }`
 
-      - `APIActor = object { api_key_id, ip_address, user_agent, type }`
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
         - `api_key_id: string`
 
@@ -14895,7 +14895,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"api_actor"`
 
-      - `ScimDirectorySyncActor = object { directory_id, workos_event_id, idp_connection_type, type }`
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
 
         - `directory_id: string`
 
@@ -14929,13 +14929,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"scim_user_created"`
 
-  - `ScimUserDeleted = object { actor, user_id, id, 4 more }`
+  - `ScimUserDeleted object { actor, user_id, id, 4 more }`
 
     A SCIM user was deleted.
 
     - `actor: object { api_key_id, ip_address, user_agent, type }  or object { directory_id, workos_event_id, idp_connection_type, type }`
 
-      - `APIActor = object { api_key_id, ip_address, user_agent, type }`
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
         - `api_key_id: string`
 
@@ -14947,7 +14947,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"api_actor"`
 
-      - `ScimDirectorySyncActor = object { directory_id, workos_event_id, idp_connection_type, type }`
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
 
         - `directory_id: string`
 
@@ -14981,13 +14981,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"scim_user_deleted"`
 
-  - `ScimUserUpdated = object { actor, user_id, id, 4 more }`
+  - `ScimUserUpdated object { actor, user_id, id, 4 more }`
 
     A SCIM user was updated.
 
     - `actor: object { api_key_id, ip_address, user_agent, type }  or object { directory_id, workos_event_id, idp_connection_type, type }`
 
-      - `APIActor = object { api_key_id, ip_address, user_agent, type }`
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
         - `api_key_id: string`
 
@@ -14999,7 +14999,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"api_actor"`
 
-      - `ScimDirectorySyncActor = object { directory_id, workos_event_id, idp_connection_type, type }`
+      - `ScimDirectorySyncActor object { directory_id, workos_event_id, idp_connection_type, type }`
 
         - `directory_id: string`
 
@@ -15033,7 +15033,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"scim_user_updated"`
 
-  - `ScopedAPIKeyDeleted = object { actor, api_key_id, api_key_name, 6 more }`
+  - `ScopedAPIKeyDeleted object { actor, api_key_id, api_key_name, 6 more }`
 
     A scoped API key was deleted.
 
@@ -15083,7 +15083,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"scoped_api_key_deleted"`
 
-  - `ScopedAPIKeyUpdated = object { actor, api_key_id, updates, 5 more }`
+  - `ScopedAPIKeyUpdated object { actor, api_key_id, updates, 5 more }`
 
     A scoped API key was renamed or its activation state changed.
 
@@ -15137,7 +15137,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"scoped_api_key_updated"`
 
-  - `SeatTierChangesCancelled = object { actor, id, created_at, 3 more }`
+  - `SeatTierChangesCancelled object { actor, id, created_at, 3 more }`
 
     Scheduled seat tier downgrades were cancelled.
 
@@ -15175,7 +15175,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"seat_tier_changes_cancelled"`
 
-  - `SeatTiersPurchased = object { actor, id, created_at, 4 more }`
+  - `SeatTiersPurchased object { actor, id, created_at, 4 more }`
 
     Seat tiers were purchased or upgraded on a subscription.
 
@@ -15217,7 +15217,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"seat_tiers_purchased"`
 
-  - `ServiceCreated = object { actor, service_name, id, 4 more }`
+  - `ServiceCreated object { actor, service_name, id, 4 more }`
 
     Activity logged when an org service is explicitly created.
 
@@ -15259,7 +15259,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"service_created"`
 
-  - `ServiceDeleted = object { actor, service_name, id, 4 more }`
+  - `ServiceDeleted object { actor, service_name, id, 4 more }`
 
     Activity logged when an org service is deleted.
 
@@ -15301,7 +15301,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"service_deleted"`
 
-  - `ServiceKeyCreated = object { actor, is_service_created, key_name, 8 more }`
+  - `ServiceKeyCreated object { actor, is_service_created, key_name, 8 more }`
 
     Activity logged when a new org service key is created.
 
@@ -15359,7 +15359,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"service_key_created"`
 
-  - `ServiceKeyRevoked = object { actor, service_key_id, service_name, 5 more }`
+  - `ServiceKeyRevoked object { actor, service_key_id, service_name, 5 more }`
 
     Activity logged when an org service key is revoked.
 
@@ -15405,7 +15405,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"service_key_revoked"`
 
-  - `SessionRevoked = object { actor, id, created_at, 3 more }`
+  - `SessionRevoked object { actor, id, created_at, 3 more }`
 
     User revoked a specific session.
 
@@ -15443,13 +15443,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"session_revoked"`
 
-  - `SessionShareAccessed = object { actor, id, created_at, 4 more }`
+  - `SessionShareAccessed object { actor, id, created_at, 4 more }`
 
     Session share was accessed.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -15463,7 +15463,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `UnauthenticatedUserActor = object { ip_address, user_agent, type, unauthenticated_email_address }`
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
 
         - `ip_address: string`
 
@@ -15497,13 +15497,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"session_share_accessed"`
 
-  - `SessionShareCreated = object { actor, id, created_at, 4 more }`
+  - `SessionShareCreated object { actor, id, created_at, 4 more }`
 
     Session share was created.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -15517,7 +15517,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `UnauthenticatedUserActor = object { ip_address, user_agent, type, unauthenticated_email_address }`
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
 
         - `ip_address: string`
 
@@ -15551,13 +15551,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"session_share_created"`
 
-  - `SessionShareRevoked = object { actor, id, created_at, 4 more }`
+  - `SessionShareRevoked object { actor, id, created_at, 4 more }`
 
     Session share was revoked.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { ip_address, user_agent, type, unauthenticated_email_address }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -15571,7 +15571,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `UnauthenticatedUserActor = object { ip_address, user_agent, type, unauthenticated_email_address }`
+      - `UnauthenticatedUserActor object { ip_address, user_agent, type, unauthenticated_email_address }`
 
         - `ip_address: string`
 
@@ -15605,13 +15605,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"session_share_revoked"`
 
-  - `ClaudeSkillCreated = object { actor, id, created_at, 5 more }`
+  - `ClaudeSkillCreated object { actor, id, created_at, 5 more }`
 
     Skill was created.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { api_key_id, ip_address, user_agent, type }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -15625,7 +15625,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `APIActor = object { api_key_id, ip_address, user_agent, type }`
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
         - `api_key_id: string`
 
@@ -15661,13 +15661,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"claude_skill_created"`
 
-  - `ClaudeSkillDeleted = object { actor, id, created_at, 5 more }`
+  - `ClaudeSkillDeleted object { actor, id, created_at, 5 more }`
 
     Skill was deleted.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { api_key_id, ip_address, user_agent, type }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -15681,7 +15681,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `APIActor = object { api_key_id, ip_address, user_agent, type }`
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
         - `api_key_id: string`
 
@@ -15717,7 +15717,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"claude_skill_deleted"`
 
-  - `ClaudeSkillDisabled = object { actor, id, created_at, 5 more }`
+  - `ClaudeSkillDisabled object { actor, id, created_at, 5 more }`
 
     User disabled a skill for their account.
 
@@ -15759,7 +15759,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"claude_skill_disabled"`
 
-  - `ClaudeSkillEnabled = object { actor, id, created_at, 5 more }`
+  - `ClaudeSkillEnabled object { actor, id, created_at, 5 more }`
 
     User enabled a skill for their account.
 
@@ -15801,13 +15801,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"claude_skill_enabled"`
 
-  - `ClaudeSkillReplaced = object { actor, id, created_at, 5 more }`
+  - `ClaudeSkillReplaced object { actor, id, created_at, 5 more }`
 
     Skill was replaced.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { api_key_id, ip_address, user_agent, type }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -15821,7 +15821,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `APIActor = object { api_key_id, ip_address, user_agent, type }`
+      - `APIActor object { api_key_id, ip_address, user_agent, type }`
 
         - `api_key_id: string`
 
@@ -15857,7 +15857,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"claude_skill_replaced"`
 
-  - `SocialLoginSucceeded = object { actor, provider, id, 6 more }`
+  - `SocialLoginSucceeded object { actor, provider, id, 6 more }`
 
     A user successfully signed in with a social identity provider (Google, Apple, or Microsoft).
 
@@ -15915,7 +15915,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"social_login_succeeded"`
 
-  - `SubscriptionCancellationScheduled = object { actor, id, created_at, 3 more }`
+  - `SubscriptionCancellationScheduled object { actor, id, created_at, 3 more }`
 
     Subscription cancellation was scheduled at end of billing period.
 
@@ -15953,7 +15953,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"subscription_cancellation_scheduled"`
 
-  - `SubscriptionQuantityUpdated = object { actor, added_seats, new_quantity, 6 more }`
+  - `SubscriptionQuantityUpdated object { actor, added_seats, new_quantity, 6 more }`
 
     Contracted subscription seat quantity was updated.
 
@@ -15997,7 +15997,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"subscription_quantity_updated"`
 
-  - `SubscriptionRenewed = object { actor, id, billing_interval, 5 more }`
+  - `SubscriptionRenewed object { actor, id, billing_interval, 5 more }`
 
     A cancelled subscription was renewed.
 
@@ -16043,7 +16043,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"subscription_renewed"`
 
-  - `SubscriptionResumed = object { actor, id, created_at, 3 more }`
+  - `SubscriptionResumed object { actor, id, created_at, 3 more }`
 
     A scheduled subscription cancellation was reversed.
 
@@ -16081,7 +16081,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"subscription_resumed"`
 
-  - `SubscriptionStarted = object { actor, id, billing_interval, 6 more }`
+  - `SubscriptionStarted object { actor, id, billing_interval, 6 more }`
 
     A new subscription was created (Team or Enterprise).
 
@@ -16131,7 +16131,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"subscription_started"`
 
-  - `SubscriptionUpgraded = object { actor, id, created_at, 5 more }`
+  - `SubscriptionUpgraded object { actor, id, created_at, 5 more }`
 
     Subscription plan was upgraded (e.g. Team to Enterprise).
 
@@ -16177,7 +16177,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"subscription_upgraded"`
 
-  - `TunnelTokenMinted = object { actor, token_id, id, 5 more }`
+  - `TunnelTokenMinted object { actor, token_id, id, 5 more }`
 
     An OAuth bearer token for the tunnel management API was minted.
 
@@ -16219,7 +16219,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"tunnel_token_minted"`
 
-  - `TunnelTokenRevoked = object { actor, token_id, id, 4 more }`
+  - `TunnelTokenRevoked object { actor, token_id, id, 4 more }`
 
     An OAuth bearer token for the tunnel management API was revoked.
 
@@ -16259,7 +16259,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"tunnel_token_revoked"`
 
-  - `UserConsentRecorded = object { actor, consent_type, entity_id, 6 more }`
+  - `UserConsentRecorded object { actor, consent_type, entity_id, 6 more }`
 
     User granted a consent for a specific entity (e.g. consumer health consent for an MCP server).
 
@@ -16303,7 +16303,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"user_consent_recorded"`
 
-  - `UserConsentRevoked = object { actor, id, consent_id, 7 more }`
+  - `UserConsentRevoked object { actor, id, consent_id, 7 more }`
 
     User revoked a previously granted consent for a specific entity.
 
@@ -16349,13 +16349,13 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"user_consent_revoked"`
 
-  - `ClaudeUserRoleUpdated = object { actor, current_role, previous_role, 7 more }`
+  - `ClaudeUserRoleUpdated object { actor, current_role, previous_role, 7 more }`
 
     A user's role within the organization was changed, or the user was added to or removed from the organization.
 
     - `actor: object { email_address, ip_address, user_agent, 2 more }  or object { admin_api_key_id, ip_address, user_agent, type }`
 
-      - `UserActor = object { email_address, ip_address, user_agent, 2 more }`
+      - `UserActor object { email_address, ip_address, user_agent, 2 more }`
 
         - `email_address: string`
 
@@ -16369,7 +16369,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"user_actor"`
 
-      - `AdminAPIKeyActor = object { admin_api_key_id, ip_address, user_agent, type }`
+      - `AdminAPIKeyActor object { admin_api_key_id, ip_address, user_agent, type }`
 
         - `admin_api_key_id: string`
 
@@ -16417,7 +16417,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"claude_user_role_updated"`
 
-  - `ClaudeUserSettingsUpdated = object { actor, updates, id, 4 more }`
+  - `ClaudeUserSettingsUpdated object { actor, updates, id, 4 more }`
 
     User updated their personal settings.
 
@@ -16437,7 +16437,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
     - `updates: array of object { current_value, previous_value, type }  or object { current_value, previous_value, type }  or object { current_value, previous_value, type }  or 19 more`
 
-      - `FullName = object { current_value, previous_value, type }`
+      - `FullName object { current_value, previous_value, type }`
 
         - `current_value: string`
 
@@ -16447,7 +16447,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"full_name"`
 
-      - `DisplayName = object { current_value, previous_value, type }`
+      - `DisplayName object { current_value, previous_value, type }`
 
         - `current_value: string`
 
@@ -16457,7 +16457,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"display_name"`
 
-      - `ArtifactsEnabled = object { current_value, previous_value, type }`
+      - `ArtifactsEnabled object { current_value, previous_value, type }`
 
         - `current_value: boolean`
 
@@ -16467,7 +16467,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"artifacts_enabled"`
 
-      - `LatexEnabled = object { current_value, previous_value, type }`
+      - `LatexEnabled object { current_value, previous_value, type }`
 
         - `current_value: boolean`
 
@@ -16477,7 +16477,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"latex_enabled"`
 
-      - `AnalysisToolEnabled = object { current_value, previous_value, type }`
+      - `AnalysisToolEnabled object { current_value, previous_value, type }`
 
         - `current_value: boolean`
 
@@ -16487,7 +16487,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"analysis_tool_enabled"`
 
-      - `ChatSuggestionsEnabled = object { current_value, previous_value, type }`
+      - `ChatSuggestionsEnabled object { current_value, previous_value, type }`
 
         - `current_value: boolean`
 
@@ -16497,7 +16497,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"chat_suggestions_enabled"`
 
-      - `MultimodalPdfsEnabled = object { current_value, previous_value, type }`
+      - `MultimodalPdfsEnabled object { current_value, previous_value, type }`
 
         - `current_value: boolean`
 
@@ -16507,7 +16507,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"multimodal_pdfs_enabled"`
 
-      - `GDriveEnabled = object { current_value, previous_value, type }`
+      - `GDriveEnabled object { current_value, previous_value, type }`
 
         - `current_value: boolean`
 
@@ -16517,7 +16517,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"gdrive_enabled"`
 
-      - `GDriveIndexingEnabled = object { current_value, previous_value, type }`
+      - `GDriveIndexingEnabled object { current_value, previous_value, type }`
 
         - `current_value: boolean`
 
@@ -16527,7 +16527,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"gdrive_indexing_enabled"`
 
-      - `WebSearchEnabled = object { current_value, previous_value, type }`
+      - `WebSearchEnabled object { current_value, previous_value, type }`
 
         - `current_value: boolean`
 
@@ -16537,7 +16537,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"web_search_enabled"`
 
-      - `GeolocationEnabled = object { current_value, previous_value, type }`
+      - `GeolocationEnabled object { current_value, previous_value, type }`
 
         - `current_value: boolean`
 
@@ -16547,7 +16547,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"geolocation_enabled"`
 
-      - `UserMemoryEnabledSetting = object { current_value, previous_value, type }`
+      - `UserMemoryEnabledSetting object { current_value, previous_value, type }`
 
         - `current_value: boolean`
 
@@ -16557,7 +16557,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"enabled_saffron"`
 
-      - `McpToolsEnabled = object { current_value, previous_value, type }`
+      - `McpToolsEnabled object { current_value, previous_value, type }`
 
         - `current_value: map[boolean]`
 
@@ -16567,7 +16567,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"mcp_tools_enabled"`
 
-      - `CliOpPermissionsEnabled = object { current_value, previous_value, type }`
+      - `CliOpPermissionsEnabled object { current_value, previous_value, type }`
 
         - `current_value: map[string]`
 
@@ -16577,7 +16577,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"cli_op_permissions_enabled"`
 
-      - `GoogleDriveSearchEnabled = object { current_value, previous_value, type }`
+      - `GoogleDriveSearchEnabled object { current_value, previous_value, type }`
 
         - `current_value: boolean`
 
@@ -16587,7 +16587,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"google_drive_search_enabled"`
 
-      - `GmailIntegrationEnabled = object { current_value, previous_value, type }`
+      - `GmailIntegrationEnabled object { current_value, previous_value, type }`
 
         - `current_value: boolean`
 
@@ -16597,7 +16597,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"gmail_integration_enabled"`
 
-      - `GoogleCalendarIntegrationEnabled = object { current_value, previous_value, type }`
+      - `GoogleCalendarIntegrationEnabled object { current_value, previous_value, type }`
 
         - `current_value: boolean`
 
@@ -16607,7 +16607,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"google_calendar_integration_enabled"`
 
-      - `ThinkingModeEnabled = object { current_value, previous_value, type }`
+      - `ThinkingModeEnabled object { current_value, previous_value, type }`
 
         - `current_value: "adaptive" or "extended" or "off"`
 
@@ -16629,7 +16629,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"thinking_mode_enabled"`
 
-      - `ResearchModeEnabled = object { current_value, previous_value, type }`
+      - `ResearchModeEnabled object { current_value, previous_value, type }`
 
         - `current_value: boolean`
 
@@ -16639,7 +16639,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"research_mode_enabled"`
 
-      - `ComputerUseEnabled = object { current_value, previous_value, type }`
+      - `ComputerUseEnabled object { current_value, previous_value, type }`
 
         - `current_value: boolean`
 
@@ -16649,7 +16649,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"computer_use_enabled"`
 
-      - `ClaudeAPIInArtifactsEnabled = object { current_value, previous_value, type }`
+      - `ClaudeAPIInArtifactsEnabled object { current_value, previous_value, type }`
 
         - `current_value: boolean`
 
@@ -16659,7 +16659,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
           - `"claude_api_in_artifacts_enabled"`
 
-      - `ConversationPreferences = object { type }`
+      - `ConversationPreferences object { type }`
 
         The 'conversation_preferences' for the user were updated. Values omitted.
 
@@ -16687,7 +16687,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       - `"claude_user_settings_updated"`
 
-  - `WorkspaceMemberSpendLimitCreated = object { actor, id, account_id, 7 more }`
+  - `WorkspaceMemberSpendLimitCreated object { actor, id, account_id, 7 more }`
 
     A per-member or workspace-default Claude Code spend limit was created.
 
@@ -16741,7 +16741,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       Tagged ID of the workspace.
 
-  - `WorkspaceMemberSpendLimitDeleted = object { actor, id, account_id, 6 more }`
+  - `WorkspaceMemberSpendLimitDeleted object { actor, id, account_id, 6 more }`
 
     A per-member or workspace-default Claude Code spend limit was deleted.
 
@@ -16791,7 +16791,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       Tagged ID of the workspace.
 
-  - `WorkspaceMemberSpendLimitUpdated = object { actor, id, account_id, 7 more }`
+  - `WorkspaceMemberSpendLimitUpdated object { actor, id, account_id, 7 more }`
 
     A per-member Claude Code spend limit amount was updated.
 
@@ -16845,7 +16845,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       Tagged ID of the workspace.
 
-  - `WorkspaceSpendLimitCreated = object { actor, id, created_at, 6 more }`
+  - `WorkspaceSpendLimitCreated object { actor, id, created_at, 6 more }`
 
     A workspace-level API spend limit was created.
 
@@ -16895,7 +16895,7 @@ Returns a paginated list of compliance activities that can be filtered by variou
 
       Tagged ID of the workspace.
 
-  - `WorkspaceSpendLimitDeleted = object { actor, id, created_at, 5 more }`
+  - `WorkspaceSpendLimitDeleted object { actor, id, created_at, 5 more }`
 
     A workspace-level API spend limit was deleted.
 
@@ -16952,4 +16952,30 @@ Returns a paginated list of compliance activities that can be filtered by variou
 ```http
 curl https://api.anthropic.com/v1/compliance/activities \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
+```
+
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "actor": {
+        "email_address": "dev@stainless.com",
+        "ip_address": "ip_address",
+        "user_agent": "user_agent",
+        "user_id": "user_id",
+        "type": "user_actor"
+      },
+      "id": "id",
+      "created_at": "2019-12-27T18:11:19.117Z",
+      "organization_id": "organization_id",
+      "organization_uuid": "organization_uuid",
+      "type": "account_deleted"
+    }
+  ],
+  "first_id": "first_id",
+  "has_more": true,
+  "last_id": "last_id"
+}
 ```

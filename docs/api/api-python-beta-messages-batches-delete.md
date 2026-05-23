@@ -1,10 +1,10 @@
 ---
-title: "Delete"
+title: "Delete a Message Batch"
 source: "https://platform.claude.com/docs/en/api/python/beta/messages/batches/delete"
 category: "api"
 generated: true
 ---
-## Delete
+## Delete a Message Batch
 
 `beta.messages.batches.delete(strmessage_batch_id, BatchDeleteParams**kwargs)  -> BetaDeletedMessageBatch`
 
@@ -109,4 +109,13 @@ beta_deleted_message_batch = client.beta.messages.batches.delete(
     message_batch_id="message_batch_id",
 )
 print(beta_deleted_message_batch.id)
+```
+
+#### Response
+
+```json
+{
+  "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
+  "type": "message_batch_deleted"
+}
 ```

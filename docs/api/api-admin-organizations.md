@@ -6,7 +6,7 @@ generated: true
 ---
 # Organizations
 
-## Me
+## Get Current Organization
 
 **get** `/v1/organizations/me`
 
@@ -14,7 +14,7 @@ Retrieve information about the organization associated with the authenticated AP
 
 ### Returns
 
-- `Organization = object { id, name, type }`
+- `Organization object { id, name, type }`
 
   - `id: string`
 
@@ -40,11 +40,21 @@ curl https://api.anthropic.com/v1/organizations/me \
     -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
 ```
 
+#### Response
+
+```json
+{
+  "id": "12345678-1234-5678-1234-567812345678",
+  "name": "Organization Name",
+  "type": "organization"
+}
+```
+
 ## Domain Types
 
 ### Organization
 
-- `Organization = object { id, name, type }`
+- `Organization object { id, name, type }`
 
   - `id: string`
 

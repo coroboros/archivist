@@ -1,10 +1,10 @@
 ---
-title: "Delete"
+title: "Delete Skill"
 source: "https://platform.claude.com/docs/en/api/csharp/beta/skills/delete"
 category: "api"
 generated: true
 ---
-## Delete
+## Delete Skill
 
 `SkillDeleteResponse Beta.Skills.Delete(SkillDeleteParamsparameters, CancellationTokencancellationToken = default)`
 
@@ -100,4 +100,13 @@ SkillDeleteParams parameters = new() { SkillID = "skill_id" };
 var skill = await client.Beta.Skills.Delete(parameters);
 
 Console.WriteLine(skill);
+```
+
+#### Response
+
+```json
+{
+  "id": "skill_01JAbcdefghijklmnopqrstuvw",
+  "type": "type"
+}
 ```

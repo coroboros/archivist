@@ -1,10 +1,10 @@
 ---
-title: "Delete"
+title: "Delete Session"
 source: "https://platform.claude.com/docs/en/api/typescript/beta/sessions/delete"
 category: "api"
 generated: true
 ---
-## Delete
+## Delete Session
 
 `client.beta.sessions.delete(stringsessionID, SessionDeleteParamsparams?, RequestOptionsoptions?): BetaManagedAgentsDeletedSession`
 
@@ -102,4 +102,13 @@ const betaManagedAgentsDeletedSession = await client.beta.sessions.delete(
 );
 
 console.log(betaManagedAgentsDeletedSession.id);
+```
+
+#### Response
+
+```json
+{
+  "id": "sesn_011CZkZAtmR3yMPDzynEDxu7",
+  "type": "session_deleted"
+}
 ```

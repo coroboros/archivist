@@ -1,10 +1,10 @@
 ---
-title: "Metadata"
+title: "Get project document metadata"
 source: "https://platform.claude.com/docs/en/api/compliance/apps/projects/documents/metadata"
 category: "api"
 generated: true
 ---
-## Metadata
+## Get project document metadata
 
 **get** `/v1/compliance/apps/projects/documents/{document_id}/metadata`
 
@@ -74,4 +74,22 @@ consumer can dedupe or match hashes without downloading every document.
 ```http
 curl https://api.anthropic.com/v1/compliance/apps/projects/documents/$DOCUMENT_ID/metadata \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "claude_project_id": "claude_project_id",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "filename": "filename",
+  "md5": "md5",
+  "mime_type": "text/plain",
+  "size_bytes": 0,
+  "user": {
+    "id": "id",
+    "email_address": "email_address"
+  }
+}
 ```

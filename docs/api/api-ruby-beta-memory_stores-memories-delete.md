@@ -1,10 +1,10 @@
 ---
-title: "Delete"
+title: "Delete a memory"
 source: "https://platform.claude.com/docs/en/api/ruby/beta/memory_stores/memories/delete"
 category: "api"
 generated: true
 ---
-## Delete
+## Delete a memory
 
 `beta.memory_stores.memories.delete(memory_id, **kwargs) -> BetaManagedAgentsDeletedMemory`
 
@@ -26,9 +26,9 @@ Delete a memory
 
   Optional header to specify the beta version(s) you want to use.
 
-  - `String`
+  - `String = String`
 
-  - `:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 22 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 22 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -104,4 +104,13 @@ anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
 beta_managed_agents_deleted_memory = anthropic.beta.memory_stores.memories.delete("memory_id", memory_store_id: "memory_store_id")
 
 puts(beta_managed_agents_deleted_memory)
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "type": "memory_deleted"
+}
 ```

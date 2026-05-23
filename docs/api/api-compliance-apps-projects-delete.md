@@ -1,10 +1,10 @@
 ---
-title: "Delete"
+title: "Delete project"
 source: "https://platform.claude.com/docs/en/api/compliance/apps/projects/delete"
 category: "api"
 generated: true
 ---
-## Delete
+## Delete project
 
 **delete** `/v1/compliance/apps/projects/{project_id}`
 
@@ -54,4 +54,13 @@ NotFoundException: If project doesn't exist or already deleted
 curl https://api.anthropic.com/v1/compliance/apps/projects/$PROJECT_ID \
     -X DELETE \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "type": "claude_project_deleted"
+}
 ```

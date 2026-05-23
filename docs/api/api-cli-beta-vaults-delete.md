@@ -1,10 +1,10 @@
 ---
-title: "Delete"
+title: "Delete Vault"
 source: "https://platform.claude.com/docs/en/api/cli/beta/vaults/delete"
 category: "api"
 generated: true
 ---
-## Delete
+## Delete Vault
 
 `$ ant beta:vaults delete`
 
@@ -42,4 +42,13 @@ Delete Vault
 ant beta:vaults delete \
   --api-key my-anthropic-api-key \
   --vault-id vlt_011CZkZDLs7fYzm1hXNPeRjv
+```
+
+#### Response
+
+```json
+{
+  "id": "vlt_011CZkZDLs7fYzm1hXNPeRjv",
+  "type": "vault_deleted"
+}
 ```

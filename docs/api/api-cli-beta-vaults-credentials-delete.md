@@ -1,10 +1,10 @@
 ---
-title: "Delete"
+title: "Delete Credential"
 source: "https://platform.claude.com/docs/en/api/cli/beta/vaults/credentials/delete"
 category: "api"
 generated: true
 ---
-## Delete
+## Delete Credential
 
 `$ ant beta:vaults:credentials delete`
 
@@ -47,4 +47,13 @@ ant beta:vaults:credentials delete \
   --api-key my-anthropic-api-key \
   --vault-id vlt_011CZkZDLs7fYzm1hXNPeRjv \
   --credential-id vcrd_011CZkZEMt8gZan2iYOQfSkw
+```
+
+#### Response
+
+```json
+{
+  "id": "vcrd_011CZkZEMt8gZan2iYOQfSkw",
+  "type": "vault_credential_deleted"
+}
 ```

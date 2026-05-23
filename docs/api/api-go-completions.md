@@ -6,7 +6,7 @@ generated: true
 ---
 # Completions
 
-## Create
+## Create a Text Completion
 
 `client.Completions.New(ctx, params) (*Completion, error)`
 
@@ -289,6 +289,18 @@ func main() {
     panic(err.Error())
   }
   fmt.Printf("%+v\n", completion.ID)
+}
+```
+
+#### Response
+
+```json
+{
+  "id": "compl_018CKm6gsux7P8yMcwZbeCPw",
+  "completion": " Hello! My name is Claude.",
+  "model": "claude-2.1",
+  "stop_reason": "stop_sequence",
+  "type": "completion"
 }
 ```
 

@@ -1,10 +1,10 @@
 ---
-title: "Delete"
+title: "Delete Vault"
 source: "https://platform.claude.com/docs/en/api/csharp/beta/vaults/delete"
 category: "api"
 generated: true
 ---
-## Delete
+## Delete Vault
 
 `BetaManagedAgentsDeletedVault Beta.Vaults.Delete(VaultDeleteParamsparameters, CancellationTokencancellationToken = default)`
 
@@ -99,4 +99,13 @@ VaultDeleteParams parameters = new()
 var betaManagedAgentsDeletedVault = await client.Beta.Vaults.Delete(parameters);
 
 Console.WriteLine(betaManagedAgentsDeletedVault);
+```
+
+#### Response
+
+```json
+{
+  "id": "vlt_011CZkZDLs7fYzm1hXNPeRjv",
+  "type": "vault_deleted"
+}
 ```

@@ -1,10 +1,10 @@
 ---
-title: "Retrieve"
+title: "Get project details"
 source: "https://platform.claude.com/docs/en/api/compliance/apps/projects/retrieve"
 category: "api"
 generated: true
 ---
-## Retrieve
+## Get project details
 
 **get** `/v1/compliance/apps/projects/{project_id}`
 
@@ -90,4 +90,27 @@ Detailed project information including description, instructions, and counts
 ```http
 curl https://api.anthropic.com/v1/compliance/apps/projects/$PROJECT_ID \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "attachments_count": 0,
+  "chats_count": 0,
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "deleted_at": "2019-12-27T18:11:19.117Z",
+  "description": "description",
+  "instructions": "instructions",
+  "is_private": true,
+  "name": "name",
+  "organization_id": "organization_id",
+  "organization_uuid": "organization_uuid",
+  "updated_at": "2019-12-27T18:11:19.117Z",
+  "user": {
+    "id": "id",
+    "email_address": "email_address"
+  }
+}
 ```

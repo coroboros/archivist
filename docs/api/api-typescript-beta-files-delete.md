@@ -1,10 +1,10 @@
 ---
-title: "Delete"
+title: "Delete File"
 source: "https://platform.claude.com/docs/en/api/typescript/beta/files/delete"
 category: "api"
 generated: true
 ---
-## Delete
+## Delete File
 
 `client.beta.files.delete(stringfileID, FileDeleteParamsparams?, RequestOptionsoptions?): DeletedFile`
 
@@ -106,4 +106,13 @@ const client = new Anthropic({
 const deletedFile = await client.beta.files.delete('file_id');
 
 console.log(deletedFile.id);
+```
+
+#### Response
+
+```json
+{
+  "id": "file_011CNha8iCJcU1wXNR6q4V8w",
+  "type": "file_deleted"
+}
 ```

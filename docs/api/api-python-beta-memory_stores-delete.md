@@ -1,10 +1,10 @@
 ---
-title: "Delete"
+title: "Delete a memory store"
 source: "https://platform.claude.com/docs/en/api/python/beta/memory_stores/delete"
 category: "api"
 generated: true
 ---
-## Delete
+## Delete a memory store
 
 `beta.memory_stores.delete(strmemory_store_id, MemoryStoreDeleteParams**kwargs)  -> BetaManagedAgentsDeletedMemoryStore`
 
@@ -101,4 +101,13 @@ beta_managed_agents_deleted_memory_store = client.beta.memory_stores.delete(
     memory_store_id="memory_store_id",
 )
 print(beta_managed_agents_deleted_memory_store.id)
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "type": "memory_store_deleted"
+}
 ```

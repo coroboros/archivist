@@ -1,10 +1,10 @@
 ---
-title: "Heartbeat"
+title: "Record Heartbeat"
 source: "https://platform.claude.com/docs/en/api/cli/beta/environments/work/heartbeat"
 category: "api"
 generated: true
 ---
-## Heartbeat
+## Record Heartbeat
 
 `$ ant beta:environments:work heartbeat`
 
@@ -79,4 +79,16 @@ ant beta:environments:work heartbeat \
   --api-key my-anthropic-api-key \
   --environment-id env_011CZkZ9X2dpNyB7HsEFoRfW \
   --work-id work_id
+```
+
+#### Response
+
+```json
+{
+  "last_heartbeat": "last_heartbeat",
+  "lease_extended": true,
+  "state": "queued",
+  "ttl_seconds": 0,
+  "type": "work_heartbeat"
+}
 ```

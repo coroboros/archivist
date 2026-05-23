@@ -1,10 +1,10 @@
 ---
-title: "List"
+title: "List Session Resources"
 source: "https://platform.claude.com/docs/en/api/beta/sessions/resources/list"
 category: "api"
 generated: true
 ---
-## List
+## List Session Resources
 
 **get** `/v1/sessions/{session_id}/resources`
 
@@ -30,9 +30,9 @@ List Session Resources
 
   Optional header to specify the beta version(s) you want to use.
 
-  - `UnionMember0 = string`
+  - `string`
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -90,7 +90,7 @@ List Session Resources
 
   Resources for the session, ordered by `created_at`.
 
-  - `BetaManagedAgentsGitHubRepositoryResource = object { id, created_at, mount_path, 4 more }`
+  - `BetaManagedAgentsGitHubRepositoryResource object { id, created_at, mount_path, 4 more }`
 
     - `id: string`
 
@@ -112,7 +112,7 @@ List Session Resources
 
     - `checkout: optional BetaManagedAgentsBranchCheckout or BetaManagedAgentsCommitCheckout`
 
-      - `BetaManagedAgentsBranchCheckout = object { name, type }`
+      - `BetaManagedAgentsBranchCheckout object { name, type }`
 
         - `name: string`
 
@@ -122,7 +122,7 @@ List Session Resources
 
           - `"branch"`
 
-      - `BetaManagedAgentsCommitCheckout = object { sha, type }`
+      - `BetaManagedAgentsCommitCheckout object { sha, type }`
 
         - `sha: string`
 
@@ -132,7 +132,7 @@ List Session Resources
 
           - `"commit"`
 
-  - `BetaManagedAgentsFileResource = object { id, created_at, file_id, 3 more }`
+  - `BetaManagedAgentsFileResource object { id, created_at, file_id, 3 more }`
 
     - `id: string`
 
@@ -152,7 +152,7 @@ List Session Resources
 
       A timestamp in RFC 3339 format
 
-  - `BetaManagedAgentsMemoryStoreResource = object { memory_store_id, type, access, 4 more }`
+  - `BetaManagedAgentsMemoryStoreResource object { memory_store_id, type, access, 4 more }`
 
     A memory store attached to an agent session.
 
@@ -199,4 +199,34 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/resources \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: managed-agents-2026-04-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
+```
+
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "id": "sesrsc_011CZkZBJq5dWxk9fVLNcPht",
+      "created_at": "2026-03-15T10:00:00Z",
+      "file_id": "file_011CNha8iCJcU1wXNR6q4V8w",
+      "mount_path": "/uploads/receipt.pdf",
+      "type": "file",
+      "updated_at": "2026-03-15T10:00:00Z"
+    },
+    {
+      "id": "sesrsc_011CZkZCKr6eXyl0gWMOdQiu",
+      "created_at": "2026-03-15T10:00:00Z",
+      "mount_path": "/workspace/example-repo",
+      "type": "github_repository",
+      "updated_at": "2026-03-15T10:00:00Z",
+      "url": "https://github.com/example-org/example-repo",
+      "checkout": {
+        "name": "main",
+        "type": "branch"
+      }
+    }
+  ],
+  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
+}
 ```

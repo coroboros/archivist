@@ -1,10 +1,10 @@
 ---
-title: "Retrieve"
+title: "Get Vault"
 source: "https://platform.claude.com/docs/en/api/cli/beta/vaults/retrieve"
 category: "api"
 generated: true
 ---
-## Retrieve
+## Get Vault
 
 `$ ant beta:vaults retrieve`
 
@@ -62,4 +62,20 @@ Get Vault
 ant beta:vaults retrieve \
   --api-key my-anthropic-api-key \
   --vault-id vlt_011CZkZDLs7fYzm1hXNPeRjv
+```
+
+#### Response
+
+```json
+{
+  "id": "vlt_011CZkZDLs7fYzm1hXNPeRjv",
+  "archived_at": null,
+  "created_at": "2026-03-15T10:00:00Z",
+  "display_name": "Example vault",
+  "metadata": {
+    "environment": "production"
+  },
+  "type": "vault",
+  "updated_at": "2026-03-15T10:00:00Z"
+}
 ```

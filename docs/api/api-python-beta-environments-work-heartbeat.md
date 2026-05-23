@@ -1,10 +1,10 @@
 ---
-title: "Heartbeat"
+title: "Record Heartbeat"
 source: "https://platform.claude.com/docs/en/api/python/beta/environments/work/heartbeat"
 category: "api"
 generated: true
 ---
-## Heartbeat
+## Record Heartbeat
 
 `beta.environments.work.heartbeat(strwork_id, WorkHeartbeatParams**kwargs)  -> BetaSelfHostedWorkHeartbeatResponse`
 
@@ -138,4 +138,16 @@ beta_self_hosted_work_heartbeat_response = client.beta.environments.work.heartbe
     environment_id="env_011CZkZ9X2dpNyB7HsEFoRfW",
 )
 print(beta_self_hosted_work_heartbeat_response.last_heartbeat)
+```
+
+#### Response
+
+```json
+{
+  "last_heartbeat": "last_heartbeat",
+  "lease_extended": true,
+  "state": "queued",
+  "ttl_seconds": 0,
+  "type": "work_heartbeat"
+}
 ```

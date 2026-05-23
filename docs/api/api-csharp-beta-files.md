@@ -6,7 +6,7 @@ generated: true
 ---
 # Files
 
-## Upload
+## Upload File
 
 `FileMetadata Beta.Files.Upload(FileUploadParamsparameters, CancellationTokencancellationToken = default)`
 
@@ -137,7 +137,25 @@ var fileMetadata = await client.Beta.Files.Upload(parameters);
 Console.WriteLine(fileMetadata);
 ```
 
-## List
+#### Response
+
+```json
+{
+  "id": "file_011CNha8iCJcU1wXNR6q4V8w",
+  "created_at": "2025-04-15T18:37:24.100435Z",
+  "filename": "document.pdf",
+  "mime_type": "application/pdf",
+  "size_bytes": 102400,
+  "type": "file",
+  "downloadable": false,
+  "scope": {
+    "id": "id",
+    "type": "session"
+  }
+}
+```
+
+## List Files
 
 `FileListPageResponse Beta.Files.List(FileListParams?parameters, CancellationTokencancellationToken = default)`
 
@@ -297,7 +315,32 @@ await foreach (var item in page.Paginate())
 }
 ```
 
-## Download
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "id": "file_011CNha8iCJcU1wXNR6q4V8w",
+      "created_at": "2025-04-15T18:37:24.100435Z",
+      "filename": "document.pdf",
+      "mime_type": "application/pdf",
+      "size_bytes": 102400,
+      "type": "file",
+      "downloadable": false,
+      "scope": {
+        "id": "id",
+        "type": "session"
+      }
+    }
+  ],
+  "first_id": "file_011CNha8iCJcU1wXNR6q4V8w",
+  "has_more": true,
+  "last_id": "file_013Zva2CMHLNnXjNJJKqJ2EF"
+}
+```
+
+## Download File
 
 `HttpResponse Beta.Files.Download(FileDownloadParamsparameters, CancellationTokencancellationToken = default)`
 
@@ -377,7 +420,7 @@ var response = await client.Beta.Files.Download(parameters);
 Console.WriteLine(response);
 ```
 
-## Retrieve Metadata
+## Get File Metadata
 
 `FileMetadata Beta.Files.RetrieveMetadata(FileRetrieveMetadataParamsparameters, CancellationTokencancellationToken = default)`
 
@@ -505,7 +548,25 @@ var fileMetadata = await client.Beta.Files.RetrieveMetadata(parameters);
 Console.WriteLine(fileMetadata);
 ```
 
-## Delete
+#### Response
+
+```json
+{
+  "id": "file_011CNha8iCJcU1wXNR6q4V8w",
+  "created_at": "2025-04-15T18:37:24.100435Z",
+  "filename": "document.pdf",
+  "mime_type": "application/pdf",
+  "size_bytes": 102400,
+  "type": "file",
+  "downloadable": false,
+  "scope": {
+    "id": "id",
+    "type": "session"
+  }
+}
+```
+
+## Delete File
 
 `DeletedFile Beta.Files.Delete(FileDeleteParamsparameters, CancellationTokencancellationToken = default)`
 
@@ -599,6 +660,15 @@ FileDeleteParams parameters = new() { FileID = "file_id" };
 var deletedFile = await client.Beta.Files.Delete(parameters);
 
 Console.WriteLine(deletedFile);
+```
+
+#### Response
+
+```json
+{
+  "id": "file_011CNha8iCJcU1wXNR6q4V8w",
+  "type": "file_deleted"
+}
 ```
 
 ## Domain Types

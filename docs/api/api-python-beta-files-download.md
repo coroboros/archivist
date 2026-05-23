@@ -1,10 +1,10 @@
 ---
-title: "Download"
+title: "Download File"
 source: "https://platform.claude.com/docs/en/api/python/beta/files/download"
 category: "api"
 generated: true
 ---
-## Download
+## Download File
 
 `beta.files.download(strfile_id, FileDownloadParams**kwargs)  -> BinaryResponseContent`
 

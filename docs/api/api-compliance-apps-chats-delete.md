@@ -1,10 +1,10 @@
 ---
-title: "Delete"
+title: "Delete chat"
 source: "https://platform.claude.com/docs/en/api/compliance/apps/chats/delete"
 category: "api"
 generated: true
 ---
-## Delete
+## Delete chat
 
 **delete** `/v1/compliance/apps/chats/{claude_chat_id}`
 
@@ -39,4 +39,13 @@ files. This is a destructive operation that cannot be undone.
 curl https://api.anthropic.com/v1/compliance/apps/chats/$CLAUDE_CHAT_ID \
     -X DELETE \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
+```
+
+#### Response
+
+```json
+{
+  "id": "claude_chat_abc123",
+  "type": "claude_chat_deleted"
+}
 ```

@@ -6,7 +6,7 @@ generated: true
 ---
 # Memory Versions
 
-## List
+## List memory versions
 
 `$ ant beta:memory-stores:memory-versions list`
 
@@ -168,37 +168,13 @@ List memory versions
 
         Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
 
-        - `session_id: string`
-
-          ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](https://platform.claude.com/docs/en/api/sessions-retrieve.md) for further provenance.
-
-        - `type: "session_actor"`
-
-          - `"session_actor"`
-
       - `beta_managed_agents_api_actor: object { api_key_id, type }`
 
         Attribution for a write made directly via the public API (outside of any session).
 
-        - `api_key_id: string`
-
-          ID of the API key that performed the write. This identifies the key, not the secret.
-
-        - `type: "api_actor"`
-
-          - `"api_actor"`
-
       - `beta_managed_agents_user_actor: object { type, user_id }`
 
         Attribution for a write made by a human user through the Anthropic Console.
-
-        - `type: "user_actor"`
-
-          - `"user_actor"`
-
-        - `user_id: string`
-
-          ID of the user who performed the write (a `user_...` value).
 
   - `next_page: optional string`
 
@@ -212,7 +188,38 @@ ant beta:memory-stores:memory-versions list \
   --memory-store-id memory_store_id
 ```
 
-## Retrieve
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "id": "id",
+      "created_at": "2019-12-27T18:11:19.117Z",
+      "memory_id": "memory_id",
+      "memory_store_id": "memory_store_id",
+      "operation": "created",
+      "type": "memory_version",
+      "content": "content",
+      "content_sha256": "content_sha256",
+      "content_size_bytes": 0,
+      "created_by": {
+        "session_id": "x",
+        "type": "session_actor"
+      },
+      "path": "path",
+      "redacted_at": "2019-12-27T18:11:19.117Z",
+      "redacted_by": {
+        "session_id": "x",
+        "type": "session_actor"
+      }
+    }
+  ],
+  "next_page": "next_page"
+}
+```
+
+## Retrieve a memory version
 
 `$ ant beta:memory-stores:memory-versions retrieve`
 
@@ -342,37 +349,13 @@ Retrieve a memory version
 
       Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
 
-      - `session_id: string`
-
-        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](https://platform.claude.com/docs/en/api/sessions-retrieve.md) for further provenance.
-
-      - `type: "session_actor"`
-
-        - `"session_actor"`
-
     - `beta_managed_agents_api_actor: object { api_key_id, type }`
 
       Attribution for a write made directly via the public API (outside of any session).
 
-      - `api_key_id: string`
-
-        ID of the API key that performed the write. This identifies the key, not the secret.
-
-      - `type: "api_actor"`
-
-        - `"api_actor"`
-
     - `beta_managed_agents_user_actor: object { type, user_id }`
 
       Attribution for a write made by a human user through the Anthropic Console.
-
-      - `type: "user_actor"`
-
-        - `"user_actor"`
-
-      - `user_id: string`
-
-        ID of the user who performed the write (a `user_...` value).
 
 ### Example
 
@@ -383,7 +366,33 @@ ant beta:memory-stores:memory-versions retrieve \
   --memory-version-id memory_version_id
 ```
 
-## Redact
+#### Response
+
+```json
+{
+  "id": "id",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "memory_id": "memory_id",
+  "memory_store_id": "memory_store_id",
+  "operation": "created",
+  "type": "memory_version",
+  "content": "content",
+  "content_sha256": "content_sha256",
+  "content_size_bytes": 0,
+  "created_by": {
+    "session_id": "x",
+    "type": "session_actor"
+  },
+  "path": "path",
+  "redacted_at": "2019-12-27T18:11:19.117Z",
+  "redacted_by": {
+    "session_id": "x",
+    "type": "session_actor"
+  }
+}
+```
+
+## Redact a memory version
 
 `$ ant beta:memory-stores:memory-versions redact`
 
@@ -509,37 +518,13 @@ Redact a memory version
 
       Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
 
-      - `session_id: string`
-
-        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](https://platform.claude.com/docs/en/api/sessions-retrieve.md) for further provenance.
-
-      - `type: "session_actor"`
-
-        - `"session_actor"`
-
     - `beta_managed_agents_api_actor: object { api_key_id, type }`
 
       Attribution for a write made directly via the public API (outside of any session).
 
-      - `api_key_id: string`
-
-        ID of the API key that performed the write. This identifies the key, not the secret.
-
-      - `type: "api_actor"`
-
-        - `"api_actor"`
-
     - `beta_managed_agents_user_actor: object { type, user_id }`
 
       Attribution for a write made by a human user through the Anthropic Console.
-
-      - `type: "user_actor"`
-
-        - `"user_actor"`
-
-      - `user_id: string`
-
-        ID of the user who performed the write (a `user_...` value).
 
 ### Example
 
@@ -548,6 +533,32 @@ ant beta:memory-stores:memory-versions redact \
   --api-key my-anthropic-api-key \
   --memory-store-id memory_store_id \
   --memory-version-id memory_version_id
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "memory_id": "memory_id",
+  "memory_store_id": "memory_store_id",
+  "operation": "created",
+  "type": "memory_version",
+  "content": "content",
+  "content_sha256": "content_sha256",
+  "content_size_bytes": 0,
+  "created_by": {
+    "session_id": "x",
+    "type": "session_actor"
+  },
+  "path": "path",
+  "redacted_at": "2019-12-27T18:11:19.117Z",
+  "redacted_by": {
+    "session_id": "x",
+    "type": "session_actor"
+  }
+}
 ```
 
 ## Domain Types
@@ -712,37 +723,13 @@ ant beta:memory-stores:memory-versions redact \
 
       Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
 
-      - `session_id: string`
-
-        ID of the session that performed the write (a `sesn_...` value). Look up the session via [Retrieve a session](https://platform.claude.com/docs/en/api/sessions-retrieve.md) for further provenance.
-
-      - `type: "session_actor"`
-
-        - `"session_actor"`
-
     - `beta_managed_agents_api_actor: object { api_key_id, type }`
 
       Attribution for a write made directly via the public API (outside of any session).
 
-      - `api_key_id: string`
-
-        ID of the API key that performed the write. This identifies the key, not the secret.
-
-      - `type: "api_actor"`
-
-        - `"api_actor"`
-
     - `beta_managed_agents_user_actor: object { type, user_id }`
 
       Attribution for a write made by a human user through the Anthropic Console.
-
-      - `type: "user_actor"`
-
-        - `"user_actor"`
-
-      - `user_id: string`
-
-        ID of the user who performed the write (a `user_...` value).
 
 ### Beta Managed Agents Memory Version Operation
 

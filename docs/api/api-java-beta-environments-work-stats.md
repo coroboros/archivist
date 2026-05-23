@@ -1,10 +1,10 @@
 ---
-title: "Stats"
+title: "Get Queue Statistics"
 source: "https://platform.claude.com/docs/en/api/java/beta/environments/work/stats"
 category: "api"
 generated: true
 ---
-## Stats
+## Get Queue Statistics
 
 `BetaSelfHostedWorkQueueStats beta().environments().work().stats(WorkStatsParamsparams = WorkStatsParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
 
@@ -120,5 +120,17 @@ public final class Main {
 
         BetaSelfHostedWorkQueueStats betaSelfHostedWorkQueueStats = client.beta().environments().work().stats("env_011CZkZ9X2dpNyB7HsEFoRfW");
     }
+}
+```
+
+#### Response
+
+```json
+{
+  "depth": 0,
+  "oldest_queued_at": "oldest_queued_at",
+  "pending": 0,
+  "type": "work_queue_stats",
+  "workers_polling": 0
 }
 ```

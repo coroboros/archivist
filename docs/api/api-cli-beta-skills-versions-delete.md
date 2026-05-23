@@ -1,10 +1,10 @@
 ---
-title: "Delete"
+title: "Delete Skill Version"
 source: "https://platform.claude.com/docs/en/api/cli/beta/skills/versions/delete"
 category: "api"
 generated: true
 ---
-## Delete
+## Delete Skill Version
 
 `$ ant beta:skills:versions delete`
 
@@ -53,4 +53,13 @@ ant beta:skills:versions delete \
   --api-key my-anthropic-api-key \
   --skill-id skill_id \
   --version version
+```
+
+#### Response
+
+```json
+{
+  "id": "1759178010641129",
+  "type": "type"
+}
 ```

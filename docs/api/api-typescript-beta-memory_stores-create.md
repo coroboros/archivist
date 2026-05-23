@@ -1,10 +1,10 @@
 ---
-title: "Create"
+title: "Create a memory store"
 source: "https://platform.claude.com/docs/en/api/typescript/beta/memory_stores/create"
 category: "api"
 generated: true
 ---
-## Create
+## Create a memory store
 
 `client.beta.memoryStores.create(MemoryStoreCreateParamsparams, RequestOptionsoptions?): BetaManagedAgentsMemoryStore`
 
@@ -136,4 +136,21 @@ const client = new Anthropic({
 const betaManagedAgentsMemoryStore = await client.beta.memoryStores.create({ name: 'x' });
 
 console.log(betaManagedAgentsMemoryStore.id);
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "name": "name",
+  "type": "memory_store",
+  "updated_at": "2019-12-27T18:11:19.117Z",
+  "archived_at": "2019-12-27T18:11:19.117Z",
+  "description": "description",
+  "metadata": {
+    "foo": "string"
+  }
+}
 ```

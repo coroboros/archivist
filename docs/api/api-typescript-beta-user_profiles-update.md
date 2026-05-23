@@ -1,10 +1,10 @@
 ---
-title: "Update"
+title: "Update User Profile"
 source: "https://platform.claude.com/docs/en/api/typescript/beta/user_profiles/update"
 category: "api"
 generated: true
 ---
-## Update
+## Update User Profile
 
 `client.beta.userProfiles.update(stringuserProfileID, UserProfileUpdateParamsparams, RequestOptionsoptions?): BetaUserProfile`
 
@@ -168,4 +168,24 @@ const client = new Anthropic({
 const betaUserProfile = await client.beta.userProfiles.update('uprof_011CZkZCu8hGbp5mYRQgUmz9');
 
 console.log(betaUserProfile.id);
+```
+
+#### Response
+
+```json
+{
+  "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
+  "created_at": "2026-03-15T10:00:00Z",
+  "metadata": {},
+  "relationship": "external",
+  "trust_grants": {
+    "cyber": {
+      "status": "active"
+    }
+  },
+  "type": "user_profile",
+  "updated_at": "2026-03-15T10:00:00Z",
+  "external_id": "user_12345",
+  "name": "Example User"
+}
 ```
