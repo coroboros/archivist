@@ -1,5 +1,20 @@
 # Changelog
 
+## 🤖 v1.4.13 - 24/05/2026
+
+File Changes:
+
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-code-review.md`
+- Modified: `docs/code/code-hooks.md`
+- Modified: `docs/code/code-mcp.md`
+- Modified: `docs/code/code-plugins.md`
+- Modified: `docs/code/code-sandboxing.md`
+- Modified: `docs/code/code-sessions.md`
+- Modified: `docs/code/code-skills.md`
+- Modified: `docs/code/code-tools-reference.md`
+
+
 ## 🤖 v1.4.12 - 24/05/2026
 
 File Changes:
