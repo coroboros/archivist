@@ -1,5 +1,37 @@
 # Changelog
 
+## 🤖 v1.4.16 - 26/05/2026
+
+File Changes:
+
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-agent-view.md`
+- Modified: `docs/code/code-claude-directory.md`
+- Modified: `docs/code/code-commands.md`
+- Modified: `docs/code/code-costs.md`
+- Modified: `docs/code/code-discover-plugins.md`
+- Modified: `docs/code/code-env-vars.md`
+- Modified: `docs/code/code-fast-mode.md`
+- Modified: `docs/code/code-features-overview.md`
+- Modified: `docs/code/code-github-enterprise-server.md`
+- Modified: `docs/code/code-hooks.md`
+- Modified: `docs/code/code-keybindings.md`
+- Modified: `docs/code/code-managed-mcp.md`
+- Modified: `docs/code/code-mcp.md`
+- Modified: `docs/code/code-monitoring-usage.md`
+- Modified: `docs/code/code-output-styles.md`
+- Modified: `docs/code/code-overview.md`
+- Modified: `docs/code/code-permissions.md`
+- Modified: `docs/code/code-plugins.md`
+- Modified: `docs/code/code-prompt-caching.md`
+- Modified: `docs/code/code-remote-control.md`
+- Modified: `docs/code/code-sessions.md`
+- Modified: `docs/code/code-settings.md`
+- Modified: `docs/code/code-sub-agents.md`
+- Modified: `docs/code/code-tools-reference.md`
+- Modified: `docs/code/code-typescript.md`
+
+
 ## 🤖 v1.4.15 - 25/05/2026
 
 File Changes:
