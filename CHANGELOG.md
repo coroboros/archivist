@@ -1,5 +1,18 @@
 # Changelog
 
+## 🤖 v1.4.19 - 27/05/2026
+
+File Changes:
+
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-hooks.md`
+- Modified: `docs/code/code-interactive-mode.md`
+- Modified: `docs/code/code-overview.md`
+- Modified: `docs/code/code-plugins.md`
+- Modified: `docs/code/code-quickstart.md`
+- Modified: `docs/code/code-skills.md`
+
+
 ## 🤖 v1.4.18 - 27/05/2026
 
 File Changes:
