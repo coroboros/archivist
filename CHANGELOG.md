@@ -1,5 +1,25 @@
 # Changelog
 
+## 🤖 v1.4.21 - 28/05/2026
+
+File Changes:
+
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-agent-view.md`
+- Modified: `docs/code/code-commands.md`
+- Modified: `docs/code/code-hooks.md`
+- Modified: `docs/code/code-keybindings.md`
+- Modified: `docs/code/code-mcp.md`
+- Modified: `docs/code/code-model-config.md`
+- Modified: `docs/code/code-monitoring-usage.md`
+- Modified: `docs/code/code-plugins.md`
+- Modified: `docs/code/code-settings.md`
+- Modified: `docs/code/code-setup.md`
+- Modified: `docs/code/code-skills.md`
+- Modified: `docs/code/code-statusline.md`
+- Modified: `docs/code/code-sub-agents.md`
+
+
 ## 🤖 v1.4.20 - 28/05/2026
 
 File Changes:
