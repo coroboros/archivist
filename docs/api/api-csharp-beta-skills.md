@@ -84,6 +84,10 @@ Create Skill
 
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
 
+    - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
+
+    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
+
 ### Returns
 
 - `class SkillCreateResponse:`
@@ -239,6 +243,10 @@ List Skills
     - `"managed-agents-2026-04-01"ManagedAgents2026_04_01`
 
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
+
+    - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
+
+    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
 
 ### Returns
 
@@ -405,6 +413,10 @@ Get Skill
 
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
 
+    - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
+
+    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
+
 ### Returns
 
 - `class SkillRetrieveResponse:`
@@ -546,6 +558,10 @@ Delete Skill
 
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
 
+    - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
+
+    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
+
 ### Returns
 
 - `class SkillDeleteResponse:`
@@ -660,6 +676,10 @@ Create Skill Version
     - `"managed-agents-2026-04-01"ManagedAgents2026_04_01`
 
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
+
+    - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
+
+    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
 
 ### Returns
 
@@ -815,6 +835,10 @@ List Skill Versions
     - `"managed-agents-2026-04-01"ManagedAgents2026_04_01`
 
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
+
+    - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
+
+    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
 
 ### Returns
 
@@ -987,6 +1011,10 @@ Download a skill version's content as a zip archive.
 
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
 
+    - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
+
+    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
+
 ### Example
 
 ```csharp
@@ -1078,6 +1106,10 @@ Get Skill Version
     - `"managed-agents-2026-04-01"ManagedAgents2026_04_01`
 
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
+
+    - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
+
+    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
 
 ### Returns
 
@@ -1233,6 +1265,10 @@ Delete Skill Version
     - `"managed-agents-2026-04-01"ManagedAgents2026_04_01`
 
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
+
+    - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
+
+    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
 
 ### Returns
 

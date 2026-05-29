@@ -15,17 +15,18 @@ This feature is eligible for [Zero Data Retention (ZDR)](./build-with-claude-api
 Extended thinking gives Claude enhanced reasoning capabilities for complex tasks, while providing varying levels of transparency into its step-by-step thought process before it delivers its final answer.
 
 <Note>
-For Claude Opus 4.7, use [adaptive thinking](./build-with-claude-adaptive-thinking.md) (`thinking: {type: "adaptive"}`) with the [effort parameter](./build-with-claude-effort.md). Manual extended thinking (`thinking: {type: "enabled", budget_tokens: N}`) is no longer supported on Claude Opus 4.7 and returns a 400 error. For Claude Opus 4.6 and Claude Sonnet 4.6, adaptive thinking is also recommended; the manual configuration is still functional on these models but is deprecated and will be removed in a future model release.
+For <NextOpus /> and Claude Opus 4.7, set `thinking: {type: "adaptive"}` to enable [adaptive thinking](./build-with-claude-adaptive-thinking.md) and use the [effort parameter](./build-with-claude-effort.md) to control thinking depth. On both models, manual extended thinking (`thinking: {type: "enabled", budget_tokens: N}`) is not supported and returns a 400 error. With adaptive thinking, the model decides when and how much to think based on each request, so it triggers thinking only as needed. For Claude Opus 4.6 and Claude Sonnet 4.6, adaptive thinking is also recommended; the manual configuration is still functional on these models but is deprecated and will be removed in a future model release.
 </Note>
 
 ## Supported models
 
-Manual extended thinking (`thinking: {type: "enabled", budget_tokens: N}`) is supported on all current Claude models **except Claude Opus 4.7**, where it is no longer accepted and returns a 400 error. A few models have mode-specific behavior:
+Manual extended thinking (`thinking: {type: "enabled", budget_tokens: N}`) is supported on all current Claude models **except <NextOpus /> and Claude Opus 4.7**, where it is no longer accepted and returns a 400 error. A few models have mode-specific behavior:
 
-- **Claude Opus 4.7 (`claude-opus-4-7`):** manual extended thinking is no longer supported. Use [adaptive thinking](./build-with-claude-adaptive-thinking.md) (`thinking: {type: "adaptive"}`) with the [effort parameter](./build-with-claude-effort.md) instead.
+- **<NextOpus /> (<NextOpusId />):** manual extended thinking is not supported and returns a 400 error. Use [adaptive thinking](./build-with-claude-adaptive-thinking.md) (`thinking: {type: "adaptive"}`) with the [effort parameter](./build-with-claude-effort.md) instead. The model determines whether and how much to use extended thinking based on each request.
+- **Claude Opus 4.7 (claude-opus-4-7):** manual extended thinking is no longer supported. Use [adaptive thinking](./build-with-claude-adaptive-thinking.md) (`thinking: {type: "adaptive"}`) with the [effort parameter](./build-with-claude-effort.md) instead.
 - **[Claude Mythos Preview](https://anthropic.com/glasswing):** [adaptive thinking](./build-with-claude-adaptive-thinking.md) is the default; `thinking: {type: "enabled", budget_tokens: N}` is also accepted. `thinking: {type: "disabled"}` is not supported, and `display` defaults to `"omitted"` rather than returning thinking content. Pass `display: "summarized"` to receive summaries.
-- **Claude Opus 4.6 (`claude-opus-4-6`):** [adaptive thinking](./build-with-claude-adaptive-thinking.md) recommended; manual mode (`type: "enabled"`) is deprecated but still functional.
-- **Claude Sonnet 4.6 (`claude-sonnet-4-6`):** [adaptive thinking](./build-with-claude-adaptive-thinking.md) recommended; manual mode (`type: "enabled"`) with [interleaved mode](#interleaved-thinking) is deprecated but still functional.
+- **Claude Opus 4.6 (claude-opus-4-6):** [adaptive thinking](./build-with-claude-adaptive-thinking.md) recommended; manual mode (`type: "enabled"`) is deprecated but still functional.
+- **Claude Sonnet 4.6 (claude-sonnet-4-6):** [adaptive thinking](./build-with-claude-adaptive-thinking.md) recommended; manual mode (`type: "enabled"`) with [interleaved mode](#interleaved-thinking) is deprecated but still functional.
 
 <Note>
 Thinking behavior differs across Claude model versions. See [Differences in thinking across model versions](#differences-in-thinking-across-model-versions) for details.
@@ -318,14 +319,14 @@ The `budget_tokens` parameter determines the maximum number of tokens Claude is 
 </Warning>
 
 <Note>
-[Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.7, and Claude Opus 4.6 support up to 128k output tokens. Claude Sonnet 4.6 and Claude Haiku 4.5 support up to 64k. See the [models overview](../about-claude/about-claude-models-overview.md) for limits on legacy models. On the [Message Batches API](./build-with-claude-batch-processing.md#extended-output-beta), the `output-300k-2026-03-24` [beta header](../api/api-beta-headers.md) raises the output limit to 300k for Opus 4.7, Opus 4.6, and Sonnet 4.6.
+[Claude Mythos Preview](https://anthropic.com/glasswing), <NextOpus />, Claude Opus 4.7, and Claude Opus 4.6 support up to 128k output tokens. Claude Sonnet 4.6 and Claude Haiku 4.5 support up to 64k. See the [models overview](../about-claude/about-claude-models-overview.md) for limits on legacy models. On the [Message Batches API](./build-with-claude-batch-processing.md#extended-output-beta), the `output-300k-2026-03-24` [beta header](../api/api-beta-headers.md) raises the output limit to 300k for <NextOpus />, Opus 4.7, Opus 4.6, and Sonnet 4.6.
 </Note>
 
 `budget_tokens` must be set to a value less than `max_tokens`. However, when using [interleaved thinking with tools](#interleaved-thinking), you can exceed this limit as the token limit becomes your entire context window. Because `budget_tokens` must be less than `max_tokens`, extended thinking cannot be combined with `max_tokens: 0` ([cache pre-warming](./build-with-claude-prompt-caching.md#pre-warming-the-cache)).
 
 ### Summarized thinking
 
-With extended thinking enabled, the Messages API for Claude 4 models returns a summary of Claude's full thinking process. Summarized thinking provides the full intelligence benefits of extended thinking, while preventing misuse. This is the default behavior on Claude 4 models when the `display` field on the thinking configuration is unset or set to `"summarized"`. On Claude Opus 4.7 and [Claude Mythos Preview](https://anthropic.com/glasswing), `display` defaults to `"omitted"` instead, so you must set `display: "summarized"` explicitly to receive summarized thinking.
+With extended thinking enabled, the Messages API for Claude 4 models returns a summary of Claude's full thinking process. Summarized thinking provides the full intelligence benefits of extended thinking, while preventing misuse. This is the default behavior on Claude 4 models when the `display` field on the thinking configuration is unset or set to `"summarized"`. On Claude Opus 4.8, Claude Opus 4.7, and [Claude Mythos Preview](https://anthropic.com/glasswing), `display` defaults to `"omitted"` instead, so you must set `display: "summarized"` explicitly to receive summarized thinking.
 
 Here are some important considerations for summarized thinking:
 
@@ -345,7 +346,7 @@ In rare cases where you need access to full thinking output for Claude 4 models,
 The `display` field on the thinking configuration controls how thinking content is returned in API responses. It accepts two values:
 
 - `"summarized"`: Thinking blocks contain summarized thinking text. See [Summarized thinking](#summarized-thinking) for details. This is the default on Claude Opus 4.6, Claude Sonnet 4.6, and earlier Claude 4 models.
-- `"omitted"`: Thinking blocks are returned with an empty `thinking` field. The `signature` field still carries the encrypted full thinking for multi-turn continuity (see [Thinking encryption](#thinking-encryption)). This is the default on Claude Opus 4.7 and [Claude Mythos Preview](https://anthropic.com/glasswing).
+- `"omitted"`: Thinking blocks are returned with an empty `thinking` field. The `signature` field still carries the encrypted full thinking for multi-turn continuity (see [Thinking encryption](#thinking-encryption)). This is the default on Claude Opus 4.8, Claude Opus 4.7, and [Claude Mythos Preview](https://anthropic.com/glasswing).
 
 Setting `display: "omitted"` is useful when your application doesn't surface thinking content to users. The primary benefit is **faster time-to-first-text-token when streaming:** The server skips streaming thinking tokens entirely and delivers only the signature, so the final text response begins streaming sooner.
 
@@ -2024,6 +2025,7 @@ With interleaved thinking, Claude can:
 - Make more nuanced decisions based on intermediate results
 
 **Model support:**
+- **<NextOpus />**: Interleaved thinking is automatically enabled when using [adaptive thinking](./build-with-claude-adaptive-thinking.md) (the only supported thinking mode on <NextOpus />). No beta header is needed.
 - **[Claude Mythos Preview](https://anthropic.com/glasswing)**: Interleaved thinking happens automatically. Every inter-tool reasoning step moves into a thinking block instead of plain text, and thinking blocks are preserved across turns by default. No beta header is needed or supported.
 - **Claude Opus 4.7**: Interleaved thinking is automatically enabled when using [adaptive thinking](./build-with-claude-adaptive-thinking.md) (the only supported thinking mode on Opus 4.7). No beta header is needed.
 - **Claude Opus 4.6**: Interleaved thinking is automatically enabled when using [adaptive thinking](./build-with-claude-adaptive-thinking.md). No beta header is needed. The `interleaved-thinking-2025-05-14` beta header is **deprecated** on Opus 4.6 and is safely ignored if included.
@@ -2033,8 +2035,8 @@ With interleaved thinking, Claude can:
 Here are some important considerations for interleaved thinking:
 - With interleaved thinking, the `budget_tokens` can exceed the `max_tokens` parameter, as it represents the total budget across all thinking blocks within one assistant turn.
 - Interleaved thinking is only supported for [tools used via the Messages API](../agents-and-tools/agents-and-tools-tool-use-overview.md).
-- The Claude API and [Claude Platform on AWS](./build-with-claude-claude-platform-on-aws.md) accept `interleaved-thinking-2025-05-14` in requests to any model without returning an error. On models that don't support interleaved thinking, the header is ignored. On Claude Opus 4.7 and Claude Opus 4.6, it's deprecated and safely ignored. On Claude Mythos Preview, it's not needed and safely ignored.
-- On partner-operated platforms (for example, [Amazon Bedrock](./build-with-claude-claude-in-amazon-bedrock.md) and [Vertex AI](./build-with-claude-claude-on-vertex-ai.md)), if you pass `interleaved-thinking-2025-05-14` to any model aside from Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 4.6, Claude Opus 4.5, Claude Opus 4.1, Opus 4 (deprecated), Sonnet 4.5, or Sonnet 4 (deprecated), your request will fail.
+- The Claude API and [Claude Platform on AWS](./build-with-claude-claude-platform-on-aws.md) accept `interleaved-thinking-2025-05-14` in requests to any model without returning an error. On models that don't support interleaved thinking, the header is ignored. On <NextOpus />, Claude Opus 4.7, and Claude Opus 4.6, it's deprecated and safely ignored. On Claude Mythos Preview, it's not needed and safely ignored.
+- On partner-operated platforms (for example, [Amazon Bedrock](./build-with-claude-claude-in-amazon-bedrock.md) and [Vertex AI](./build-with-claude-claude-on-vertex-ai.md)), if you pass `interleaved-thinking-2025-05-14` to any model aside from <NextOpus />, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 4.6, Claude Opus 4.5, Claude Opus 4.1, Opus 4 (deprecated), Sonnet 4.5, or Sonnet 4 (deprecated), your request will fail.
 
 <section title="Tool use without interleaved thinking">
 
@@ -3781,11 +3783,11 @@ If your code filters content blocks by type (for example, `block.type == "thinki
 
 The Messages API handles thinking differently across Claude model versions. The following table gives a condensed comparison:
 
-| Feature | Claude 4 models (pre-Opus 4.5) | Claude Opus 4.5 | Claude Sonnet 4.6 | Claude Opus 4.6 ([adaptive thinking](./build-with-claude-adaptive-thinking.md)) | Claude Opus 4.7 ([adaptive thinking](./build-with-claude-adaptive-thinking.md)) | [Claude Mythos Preview](https://anthropic.com/glasswing) ([adaptive thinking](./build-with-claude-adaptive-thinking.md)) |
-|---------|-------------------------------|--------------------------|------------------|--------------------------|--------------------------|--------------------------|
-| **Thinking output** | Returns summarized thinking | Returns summarized thinking | Returns summarized thinking | Returns summarized thinking | Omitted by default; set `display: "summarized"` to receive summarized thinking | Omitted by default; set `display: "summarized"` to receive summarized thinking. Raw thinking tokens are never returned. |
-| **Interleaved thinking** | Supported with `interleaved-thinking-2025-05-14` beta header | Supported with `interleaved-thinking-2025-05-14` beta header | Supported with `interleaved-thinking-2025-05-14` beta header or automatic with [adaptive thinking](./build-with-claude-adaptive-thinking.md) | Automatic with adaptive thinking (beta header deprecated and safely ignored) | Automatic with adaptive thinking (beta header deprecated and safely ignored) | Automatic with adaptive thinking (beta header not needed and safely ignored). Inter-tool reasoning moves into thinking blocks on this model. |
-| **Thinking block preservation** | Not preserved across turns | **Preserved by default** | **Preserved by default** | **Preserved by default** | **Preserved by default** | **Preserved by default.** Blocks are stripped when continuing the conversation on a model that does not support the Mythos thinking format. |
+| Feature | Claude 4 models (pre-Opus 4.5) | Claude Opus 4.5 | Claude Sonnet 4.6 | Claude Opus 4.6 ([adaptive thinking](./build-with-claude-adaptive-thinking.md)) | Claude Opus 4.7 ([adaptive thinking](./build-with-claude-adaptive-thinking.md)) | <NextOpus /> ([adaptive thinking](./build-with-claude-adaptive-thinking.md)) | [Claude Mythos Preview](https://anthropic.com/glasswing) ([adaptive thinking](./build-with-claude-adaptive-thinking.md)) |
+|---------|-------------------------------|--------------------------|------------------|--------------------------|--------------------------|--------------------------|--------------------------|
+| **Thinking output** | Returns summarized thinking | Returns summarized thinking | Returns summarized thinking | Returns summarized thinking | Omitted by default; set `display: "summarized"` to receive summarized thinking | Omitted by default; set `display: "summarized"` to receive summarized thinking | Omitted by default; set `display: "summarized"` to receive summarized thinking. Raw thinking tokens are never returned. |
+| **Interleaved thinking** | Supported with `interleaved-thinking-2025-05-14` beta header | Supported with `interleaved-thinking-2025-05-14` beta header | Supported with `interleaved-thinking-2025-05-14` beta header or automatic with [adaptive thinking](./build-with-claude-adaptive-thinking.md) | Automatic with adaptive thinking (beta header deprecated and safely ignored) | Automatic with adaptive thinking (beta header deprecated and safely ignored) | Automatic with adaptive thinking (beta header deprecated and safely ignored) | Automatic with adaptive thinking (beta header not needed and safely ignored). Inter-tool reasoning moves into thinking blocks on this model. |
+| **Thinking block preservation** | Not preserved across turns | **Preserved by default** | **Preserved by default** | **Preserved by default** | **Preserved by default** | **Preserved by default** | **Preserved by default.** Blocks are stripped when continuing the conversation on a model that does not support the Mythos thinking format. |
 
 ### Thinking block preservation by model
 

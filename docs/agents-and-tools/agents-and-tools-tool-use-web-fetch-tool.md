@@ -12,7 +12,7 @@ Fetch and read content from specific URLs to augment Claude's context with live 
 
 The web fetch tool allows Claude to retrieve full content from specified web pages and PDF documents.
 
-The latest web fetch tool version (`web_fetch_20260209`) supports **dynamic filtering** with [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6. Claude can write and execute code to filter fetched content before it reaches the context window, keeping only relevant information and discarding the rest. This reduces token consumption while maintaining response quality. The previous tool version (`web_fetch_20250910`) remains available without dynamic filtering.
+The latest web fetch tool version (`web_fetch_20260209`) supports **dynamic filtering** with Claude Opus 4.8, [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6. Claude can write and execute code to filter fetched content before it reaches the context window, keeping only relevant information and discarding the rest. This reduces token consumption while maintaining response quality. The previous tool version (`web_fetch_20250910`) remains available without dynamic filtering.
 
 <Note>
 For [Claude Mythos Preview](https://anthropic.com/glasswing), web fetch is available on the Claude API and Microsoft Foundry. It is not currently available for Mythos Preview on Amazon Bedrock or Vertex AI.
@@ -73,7 +73,7 @@ curl https://api.anthropic.com/v1/messages \
     --header "anthropic-version: 2023-06-01" \
     --header "content-type: application/json" \
     --data '{
-        "model": "claude-opus-4-7",
+        "model": "claude-opus-4-8",
         "max_tokens": 4096,
         "messages": [
             {
@@ -90,7 +90,7 @@ curl https://api.anthropic.com/v1/messages \
 
 ```bash CLI
 ant messages create <<'YAML'
-model: claude-opus-4-7
+model: claude-opus-4-8
 max_tokens: 4096
 messages:
   - role: user
@@ -109,7 +109,7 @@ import anthropic
 client = anthropic.Anthropic()
 
 response = client.messages.create(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=4096,
     messages=[
         {
@@ -129,7 +129,7 @@ const anthropic = new Anthropic();
 
 async function main() {
   const response = await anthropic.messages.create({
-    model: "claude-opus-4-7",
+    model: "claude-opus-4-8",
     max_tokens: 4096,
     messages: [
       {
@@ -155,7 +155,7 @@ AnthropicClient client = new();
 
 var parameters = new MessageCreateParams
 {
-    Model = Model.ClaudeOpus4_7,
+    Model = Model.ClaudeOpus4_8,
     MaxTokens = 4096,
     Messages = [new() { Role = Role.User, Content = "Fetch the content at https://example.com/research-paper and extract the key findings." }],
     Tools = [new ToolUnion(new WebFetchTool20260209())]
@@ -180,7 +180,7 @@ func main() {
 	client := anthropic.NewClient()
 
 	response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-		Model:     anthropic.ModelClaudeOpus4_7,
+		Model:     anthropic.ModelClaudeOpus4_8,
 		MaxTokens: 4096,
 		Messages: []anthropic.MessageParam{
 			anthropic.NewUserMessage(anthropic.NewTextBlock("Fetch the content at https://example.com/research-paper and extract the key findings.")),
@@ -208,7 +208,7 @@ void main() {
     AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
     MessageCreateParams params = MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_4_7)
+        .model(Model.CLAUDE_OPUS_4_8)
         .maxTokens(4096L)
         .addUserMessage("Fetch the content at https://example.com/research-paper and extract the key findings.")
         .addTool(WebFetchTool20260209.builder().build())
@@ -231,7 +231,7 @@ $message = $client->messages->create(
     messages: [
         ['role' => 'user', 'content' => 'Fetch the content at https://example.com/research-paper and extract the key findings.']
     ],
-    model: 'claude-opus-4-7',
+    model: 'claude-opus-4-8',
     tools: [[
         'type' => 'web_fetch_20260209',
         'name' => 'web_fetch',
@@ -246,7 +246,7 @@ require "anthropic"
 client = Anthropic::Client.new
 
 message = client.messages.create(
-  model: "claude-opus-4-7",
+  model: "claude-opus-4-8",
   max_tokens: 4096,
   messages: [
     { role: "user", content: "Fetch the content at https://example.com/research-paper and extract the key findings." }
@@ -271,7 +271,7 @@ curl https://api.anthropic.com/v1/messages \
     --header "anthropic-version: 2023-06-01" \
     --header "content-type: application/json" \
     --data '{
-        "model": "claude-opus-4-7",
+        "model": "claude-opus-4-8",
         "max_tokens": 1024,
         "messages": [
             {
@@ -289,7 +289,7 @@ curl https://api.anthropic.com/v1/messages \
 
 ```bash CLI
 ant messages create \
-  --model claude-opus-4-7 \
+  --model claude-opus-4-8 \
   --max-tokens 1024 \
   --message '{role: user, content: "Please analyze the content at https://example.com/article"}' \
   --tool '{type: web_fetch_20250910, name: web_fetch, max_uses: 5}'
@@ -301,7 +301,7 @@ import anthropic
 client = anthropic.Anthropic()
 
 response = client.messages.create(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=1024,
     messages=[
         {
@@ -321,7 +321,7 @@ const client = new Anthropic();
 
 async function main() {
   const response = await client.messages.create({
-    model: "claude-opus-4-7",
+    model: "claude-opus-4-8",
     max_tokens: 1024,
     messages: [
       {
@@ -352,7 +352,7 @@ AnthropicClient client = new();
 
 var parameters = new MessageCreateParams
 {
-    Model = Model.ClaudeOpus4_7,
+    Model = Model.ClaudeOpus4_8,
     MaxTokens = 1024,
     Messages = [new() { Role = Role.User, Content = "Please analyze the content at https://example.com/article" }],
     Tools = [new ToolUnion(new WebFetchTool20250910() { MaxUses = 5 })]
@@ -377,7 +377,7 @@ func main() {
 	client := anthropic.NewClient()
 
 	response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-		Model:     anthropic.ModelClaudeOpus4_7,
+		Model:     anthropic.ModelClaudeOpus4_8,
 		MaxTokens: 1024,
 		Messages: []anthropic.MessageParam{
 			anthropic.NewUserMessage(anthropic.NewTextBlock("Please analyze the content at https://example.com/article")),
@@ -407,7 +407,7 @@ void main() {
     AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
     MessageCreateParams params = MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_4_7)
+        .model(Model.CLAUDE_OPUS_4_8)
         .maxTokens(1024L)
         .addUserMessage("Please analyze the content at https://example.com/article")
         .addTool(WebFetchTool20250910.builder()
@@ -432,7 +432,7 @@ $message = $client->messages->create(
     messages: [
         ['role' => 'user', 'content' => 'Please analyze the content at https://example.com/article']
     ],
-    model: 'claude-opus-4-7',
+    model: 'claude-opus-4-8',
     tools: [[
         'type' => 'web_fetch_20250910',
         'name' => 'web_fetch',
@@ -448,7 +448,7 @@ require "anthropic"
 client = Anthropic::Client.new
 
 message = client.messages.create(
-  model: "claude-opus-4-7",
+  model: "claude-opus-4-8",
   max_tokens: 1024,
   messages: [
     { role: "user", content: "Please analyze the content at https://example.com/article" }
@@ -670,7 +670,7 @@ import anthropic
 client = anthropic.Anthropic()
 
 response = client.messages.create(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=4096,
     messages=[
         {

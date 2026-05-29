@@ -56,7 +56,7 @@ func main() {
 		Messages: []anthropic.MessageParam{
 			anthropic.NewUserMessage(anthropic.NewTextBlock("What is a quaternion?")),
 		},
-		Model: anthropic.ModelClaudeOpus4_7,
+		Model: anthropic.ModelClaudeOpus4_8,
 	})
 	if err != nil {
 		panic(err.Error())
@@ -75,7 +75,7 @@ messages := []anthropic.MessageParam{
 }
 
 message, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-	Model:     anthropic.ModelClaudeOpus4_7,
+	Model:     anthropic.ModelClaudeOpus4_8,
 	Messages:  messages,
 	MaxTokens: 1024,
 })
@@ -91,7 +91,7 @@ messages = append(messages, anthropic.NewUserMessage(
 ))
 
 message, err = client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-	Model:     anthropic.ModelClaudeOpus4_7,
+	Model:     anthropic.ModelClaudeOpus4_8,
 	Messages:  messages,
 	MaxTokens: 1024,
 })
@@ -108,7 +108,7 @@ fmt.Printf("%+v\n", message.Content)
 ```go hidelines={1}
 messages := []anthropic.MessageParam{anthropic.NewUserMessage(anthropic.NewTextBlock("Hello"))}
 message, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-	Model:     anthropic.ModelClaudeOpus4_7,
+	Model:     anthropic.ModelClaudeOpus4_8,
 	MaxTokens: 1024,
 	System: []anthropic.TextBlockParam{
 		{Text: "Be very serious at all times."},
@@ -128,7 +128,7 @@ fmt.Printf("%+v\n", message.Content)
 content := "What is a quaternion?"
 
 stream := client.Messages.NewStreaming(context.TODO(), anthropic.MessageNewParams{
-	Model:     anthropic.ModelClaudeOpus4_7,
+	Model:     anthropic.ModelClaudeOpus4_8,
 	MaxTokens: 1024,
 	Messages: []anthropic.MessageParam{
 		anthropic.NewUserMessage(anthropic.NewTextBlock(content)),
@@ -198,7 +198,7 @@ func main() {
 
 	for {
 		message, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-			Model:     anthropic.ModelClaudeOpus4_7,
+			Model:     anthropic.ModelClaudeOpus4_8,
 			MaxTokens: 1024,
 			Messages:  messages,
 			Tools:     tools,
@@ -416,7 +416,7 @@ import (
 
 func main() {
 	original := anthropic.MessageNewParams{
-		Model:     anthropic.ModelClaudeOpus4_7,
+		Model:     anthropic.ModelClaudeOpus4_8,
 		MaxTokens: 1024,
 		Messages: []anthropic.MessageParam{
 			anthropic.NewUserMessage(anthropic.NewTextBlock("hello")),
@@ -584,7 +584,7 @@ func main() {
 			}},
 			Role: anthropic.MessageParamRoleUser,
 		}},
-		Model: anthropic.ModelClaudeOpus4_7,
+		Model: anthropic.ModelClaudeOpus4_8,
 	})
 	if err != nil {
 		var apierr *anthropic.Error
@@ -639,7 +639,7 @@ func main() {
 					}},
 					Role: anthropic.MessageParamRoleUser,
 				}},
-				Model: anthropic.ModelClaudeOpus4_7,
+				Model: anthropic.ModelClaudeOpus4_8,
 			},
 			option.WithMaxRetries(5),
 		)
@@ -682,7 +682,7 @@ func main() {
 					}},
 					Role: anthropic.MessageParamRoleUser,
 				}},
-				Model: anthropic.ModelClaudeOpus4_7,
+				Model: anthropic.ModelClaudeOpus4_8,
 			},
 			// This sets the per-retry timeout
 			option.WithRequestTimeout(20*time.Second),
@@ -807,7 +807,7 @@ import (
 	"github.com/anthropics/anthropic-sdk-go/option"
 )
 
-var _ = anthropic.ModelClaudeOpus4_7
+var _ = anthropic.ModelClaudeOpus4_8
 
 func LogReq(req *http.Request)                              {}
 func LogRes(res *http.Response, err error, d time.Duration) {}
@@ -897,7 +897,7 @@ func main() {
 				}},
 				Role: anthropic.MessageParamRoleUser,
 			}},
-			Model: anthropic.ModelClaudeOpus4_7,
+			Model: anthropic.ModelClaudeOpus4_8,
 		},
 		option.WithResponseInto(&response),
 	)

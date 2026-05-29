@@ -72,6 +72,10 @@ Create a new environment with the specified configuration.
 
     - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
 
+    - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
+
+    - `MID_CONVERSATION_SYSTEM_2026_04_07("mid-conversation-system-2026-04-07")`
+
   - `String name`
 
     Human-readable name for the environment
@@ -487,6 +491,10 @@ List environments with pagination support.
 
     - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
 
+    - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
+
+    - `MID_CONVERSATION_SYSTEM_2026_04_07("mid-conversation-system-2026-04-07")`
+
 ### Returns
 
 - `class BetaEnvironment:`
@@ -772,6 +780,10 @@ Retrieve a specific environment by ID.
 
     - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
 
+    - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
+
+    - `MID_CONVERSATION_SYSTEM_2026_04_07("mid-conversation-system-2026-04-07")`
+
 ### Returns
 
 - `class BetaEnvironment:`
@@ -1051,6 +1063,10 @@ Update an existing environment's configuration.
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
 
     - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
+
+    - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
+
+    - `MID_CONVERSATION_SYSTEM_2026_04_07("mid-conversation-system-2026-04-07")`
 
   - `Optional<Config> config`
 
@@ -1454,6 +1470,10 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
     - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
 
+    - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
+
+    - `MID_CONVERSATION_SYSTEM_2026_04_07("mid-conversation-system-2026-04-07")`
+
 ### Returns
 
 - `class BetaEnvironmentDeleteResponse:`
@@ -1567,6 +1587,10 @@ Archive an environment by ID. Archived environments cannot be used to create new
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
 
     - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
+
+    - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
+
+    - `MID_CONVERSATION_SYSTEM_2026_04_07("mid-conversation-system-2026-04-07")`
 
 ### Returns
 
@@ -2347,6 +2371,10 @@ Retrieve detailed information about a specific work item.
 
     - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
 
+    - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
+
+    - `MID_CONVERSATION_SYSTEM_2026_04_07("mid-conversation-system-2026-04-07")`
+
 ### Returns
 
 - `class BetaSelfHostedWork:`
@@ -2554,6 +2582,10 @@ Long poll for work items in the queue.
 
     - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
 
+    - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
+
+    - `MID_CONVERSATION_SYSTEM_2026_04_07("mid-conversation-system-2026-04-07")`
+
   - `Optional<String> anthropicWorkerId`
 
     Unique identifier for the specific worker polling, used to track aggregated environment-level work metrics in Console
@@ -2755,6 +2787,10 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
 
     - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
+
+    - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
+
+    - `MID_CONVERSATION_SYSTEM_2026_04_07("mid-conversation-system-2026-04-07")`
 
 ### Returns
 
@@ -2965,6 +3001,10 @@ Record a heartbeat for a work item to maintain the lease.
 
     - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
 
+    - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
+
+    - `MID_CONVERSATION_SYSTEM_2026_04_07("mid-conversation-system-2026-04-07")`
+
 ### Returns
 
 - `class BetaSelfHostedWorkHeartbeatResponse:`
@@ -3111,6 +3151,10 @@ Stop a work item, initiating graceful or forced shutdown.
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
 
     - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
+
+    - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
+
+    - `MID_CONVERSATION_SYSTEM_2026_04_07("mid-conversation-system-2026-04-07")`
 
   - `BetaSelfHostedWorkStopRequest betaSelfHostedWorkStopRequest`
 
@@ -3325,6 +3369,10 @@ List work items in an environment.
 
     - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
 
+    - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
+
+    - `MID_CONVERSATION_SYSTEM_2026_04_07("mid-conversation-system-2026-04-07")`
+
 ### Returns
 
 - `class BetaSelfHostedWork:`
@@ -3526,6 +3574,10 @@ Update work item metadata with merge semantics.
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
 
     - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
+
+    - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
+
+    - `MID_CONVERSATION_SYSTEM_2026_04_07("mid-conversation-system-2026-04-07")`
 
   - `BetaSelfHostedWorkUpdateRequest betaSelfHostedWorkUpdateRequest`
 
@@ -3734,6 +3786,10 @@ Get statistics about the work queue for an environment.
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
 
     - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
+
+    - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
+
+    - `MID_CONVERSATION_SYSTEM_2026_04_07("mid-conversation-system-2026-04-07")`
 
 ### Returns
 

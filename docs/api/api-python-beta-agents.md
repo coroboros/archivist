@@ -394,7 +394,7 @@ Create Agent
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 22 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 24 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -445,6 +445,10 @@ Create Agent
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -878,7 +882,7 @@ List Agents
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 22 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 24 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -929,6 +933,10 @@ List Agents
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -1351,7 +1359,7 @@ Get Agent
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 22 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 24 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -1402,6 +1410,10 @@ Get Agent
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -2192,7 +2204,7 @@ Update Agent
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 22 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 24 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -2243,6 +2255,10 @@ Update Agent
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -2658,7 +2674,7 @@ Archive Agent
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 22 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 24 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -2709,6 +2725,10 @@ Archive Agent
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -4915,7 +4935,7 @@ List Agent Versions
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 22 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 24 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -4966,6 +4986,10 @@ List Agent Versions
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 

@@ -60,7 +60,7 @@ List Events
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 22 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 24 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -111,6 +111,10 @@ List Events
     - `:"managed-agents-2026-04-01"`
 
     - `:"cache-diagnosis-2026-04-07"`
+
+    - `:"thinking-token-count-2026-05-13"`
+
+    - `:"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -2240,7 +2244,7 @@ Send Events
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 22 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 24 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -2291,6 +2295,10 @@ Send Events
     - `:"managed-agents-2026-04-01"`
 
     - `:"cache-diagnosis-2026-04-07"`
+
+    - `:"thinking-token-count-2026-05-13"`
+
+    - `:"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -2757,7 +2765,7 @@ Stream Events
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 22 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 24 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -2808,6 +2816,10 @@ Stream Events
     - `:"managed-agents-2026-04-01"`
 
     - `:"cache-diagnosis-2026-04-07"`
+
+    - `:"thinking-token-count-2026-05-13"`
+
+    - `:"mid-conversation-system-2026-04-07"`
 
 ### Returns
 

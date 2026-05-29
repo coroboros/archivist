@@ -62,6 +62,10 @@ generated: true
 
   - `"cache-diagnosis-2026-04-07"`
 
+  - `"thinking-token-count-2026-05-13"`
+
+  - `"mid-conversation-system-2026-04-07"`
+
 ### Beta API Error
 
 - `BetaAPIError`
@@ -1220,6 +1224,9 @@ var_dump($betaMessage);
       }
     ],
     "output_tokens": 503,
+    "output_tokens_details": {
+      "thinking_tokens": 0
+    },
     "server_tool_use": {
       "web_fetch_requests": 2,
       "web_search_requests": 0
@@ -1566,6 +1573,10 @@ var_dump($betaMessageTokensCount);
 
     Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
 
+  - `?string stopReason`
+
+    The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
+
   - `"advisor_redacted_result" type`
 
 ### Beta Advisor Redacted Result Block Param
@@ -1578,9 +1589,15 @@ var_dump($betaMessageTokensCount);
 
   - `"advisor_redacted_result" type`
 
+  - `?string stopReason`
+
 ### Beta Advisor Result Block
 
 - `BetaAdvisorResultBlock`
+
+  - `?string stopReason`
+
+    The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
 
   - `string text`
 
@@ -1593,6 +1610,8 @@ var_dump($betaMessageTokensCount);
   - `string text`
 
   - `"advisor_result" type`
+
+  - `?string stopReason`
 
 ### Beta Advisor Tool 20260301
 
@@ -2449,15 +2468,15 @@ var_dump($betaMessageTokensCount);
 
 - `BetaCompactionBlockParam`
 
-  - `?string content`
-
-    Summary of previously compacted content, or null if compaction failed
-
   - `"compaction" type`
 
   - `?BetaCacheControlEphemeral cacheControl`
 
     Create a cache control breakpoint at this content block.
+
+  - `?string content`
+
+    Summary of previously compacted content, or null if compaction failed
 
   - `?string encryptedContent`
 
@@ -2979,19 +2998,31 @@ var_dump($betaMessageTokensCount);
 
   - `BetaCompactionBlockParam`
 
-    - `?string content`
-
-      Summary of previously compacted content, or null if compaction failed
-
     - `"compaction" type`
 
     - `?BetaCacheControlEphemeral cacheControl`
 
       Create a cache control breakpoint at this content block.
 
+    - `?string content`
+
+      Summary of previously compacted content, or null if compaction failed
+
     - `?string encryptedContent`
 
       Opaque metadata from prior compaction, to be round-tripped verbatim
+
+  - `BetaMidConversationSystemBlockParam`
+
+    - `list<BetaTextBlockParam> content`
+
+      System instruction text blocks.
+
+    - `"mid_conv_system" type`
+
+    - `?BetaCacheControlEphemeral cacheControl`
+
+      Create a cache control breakpoint at this content block.
 
 ### Beta Content Block Source
 
@@ -3714,6 +3745,15 @@ var_dump($betaMessageTokensCount);
 
     The cumulative number of output tokens which were used.
 
+  - `?OutputTokensDetails outputTokensDetails`
+
+    Breakdown of output tokens by category.
+
+    `output_tokens` remains the inclusive, authoritative total used for billing.
+    This object provides a read-only decomposition for observability — for example,
+    how many of the billed output tokens were spent on internal reasoning that may
+    have been summarized before being returned to you.
+
   - `?BetaServerToolUsage serverToolUse`
 
     The number of server tool requests.
@@ -3776,6 +3816,20 @@ var_dump($betaMessageTokensCount);
 
     This should be a uuid, hash value, or other opaque identifier. Anthropic may use this id to help detect abuse. Do not include any identifying information such as name, email address, or phone number.
 
+### Beta Mid Conversation System Block Param
+
+- `BetaMidConversationSystemBlockParam`
+
+  - `list<BetaTextBlockParam> content`
+
+    System instruction text blocks.
+
+  - `"mid_conv_system" type`
+
+  - `?BetaCacheControlEphemeral cacheControl`
+
+    Create a cache control breakpoint at this content block.
+
 ### Beta Output Config
 
 - `BetaOutputConfig`
@@ -3825,6 +3879,10 @@ var_dump($betaMessageTokensCount);
     - `"citations_delta" type`
 
   - `BetaThinkingDelta`
+
+    - `?int estimatedTokens`
+
+      Per-frame increment of a coarse, running estimate of the tokens this thinking block has produced so far. Present whenever the `thinking-token-count-2026-05-13` beta is set; `null` unless `thinking.display` resolves to `"omitted"` and a count is due this frame. Sum the increments across `thinking_delta` frames on this block for a progress indicator. Each increment is a non-negative multiple of a fixed quantum and the cadence is rate-limited, so this is a deliberately lossy display hint, not a billable count; `usage.output_tokens` remains authoritative.
 
     - `string thinking`
 
@@ -4657,6 +4715,10 @@ var_dump($betaMessageTokensCount);
 ### Beta Thinking Delta
 
 - `BetaThinkingDelta`
+
+  - `?int estimatedTokens`
+
+    Per-frame increment of a coarse, running estimate of the tokens this thinking block has produced so far. Present whenever the `thinking-token-count-2026-05-13` beta is set; `null` unless `thinking.display` resolves to `"omitted"` and a count is due this frame. Sum the increments across `thinking_delta` frames on this block for a progress indicator. Each increment is a non-negative multiple of a fixed quantum and the cadence is rate-limited, so this is a deliberately lossy display hint, not a billable count; `usage.output_tokens` remains authoritative.
 
   - `string thinking`
 
@@ -6110,6 +6172,15 @@ var_dump($betaMessageTokensCount);
 
     The number of output tokens which were used.
 
+  - `?OutputTokensDetails outputTokensDetails`
+
+    Breakdown of output tokens by category.
+
+    `output_tokens` remains the inclusive, authoritative total used for billing.
+    This object provides a read-only decomposition for observability — for example,
+    how many of the billed output tokens were spent on internal reasoning that may
+    have been summarized before being returned to you.
+
   - `?BetaServerToolUsage serverToolUse`
 
     The number of server tool requests.
@@ -6375,6 +6446,8 @@ var_dump($betaMessageTokensCount);
   - `"url_too_long"`
 
   - `"url_not_allowed"`
+
+  - `"url_not_in_prior_context"`
 
   - `"url_not_accessible"`
 

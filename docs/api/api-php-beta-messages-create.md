@@ -554,6 +554,9 @@ var_dump($betaMessage);
       }
     ],
     "output_tokens": 503,
+    "output_tokens_details": {
+      "thinking_tokens": 0
+    },
     "server_tool_use": {
       "web_fetch_requests": 2,
       "web_search_requests": 0

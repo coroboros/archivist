@@ -32,7 +32,7 @@ Precisely define your desired output format using JSON, XML, or custom templates
 
 ## Prefill Claude's response
 
-<Note>Prefilling is not supported on [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6. Use [structured outputs](../build-with-claude/build-with-claude-structured-outputs.md) or system prompt instructions instead.</Note>
+<Note>Prefilling is not supported on Claude Opus 4.8, [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6. Use [structured outputs](../build-with-claude/build-with-claude-structured-outputs.md) or system prompt instructions instead.</Note>
 
 Prefill the `Assistant` turn with your desired format. This trick bypasses Claude's friendly preamble and enforces your structure.
 

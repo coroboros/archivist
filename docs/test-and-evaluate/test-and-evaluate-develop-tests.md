@@ -158,7 +158,7 @@ Most use cases will need multidimensional evaluation along several success crite
 
     def get_completion(prompt: str):
         message = client.messages.create(
-            model="claude-opus-4-7",
+            model="claude-opus-4-8",
             max_tokens=50,
             messages=[{"role": "user", "content": prompt}],
         )
@@ -225,7 +225,7 @@ Most use cases will need multidimensional evaluation along several success crite
 
     def get_completion(prompt: str):
         message = client.messages.create(
-            model="claude-opus-4-7",
+            model="claude-opus-4-8",
             max_tokens=2048,
             messages=[{"role": "user", "content": prompt}],
         )
@@ -279,7 +279,7 @@ Most use cases will need multidimensional evaluation along several success crite
 
     def get_completion(prompt: str):
         message = client.messages.create(
-            model="claude-opus-4-7",
+            model="claude-opus-4-8",
             max_tokens=1024,
             messages=[{"role": "user", "content": prompt}],
         )
@@ -334,7 +334,7 @@ Most use cases will need multidimensional evaluation along several success crite
 
     def get_completion(prompt: str):
         message = client.messages.create(
-            model="claude-opus-4-7",
+            model="claude-opus-4-8",
             max_tokens=2048,
             messages=[{"role": "user", "content": prompt}],
         )
@@ -350,7 +350,7 @@ Most use cases will need multidimensional evaluation along several success crite
 
         # Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
         response = client.messages.create(
-            model="claude-opus-4-7",
+            model="claude-opus-4-8",
             max_tokens=50,
             messages=[{"role": "user", "content": tone_prompt}],
         )
@@ -400,7 +400,7 @@ Most use cases will need multidimensional evaluation along several success crite
 
     def get_completion(prompt: str):
         message = client.messages.create(
-            model="claude-opus-4-7",
+            model="claude-opus-4-8",
             max_tokens=1024,
             messages=[{"role": "user", "content": prompt}],
         )
@@ -424,7 +424,7 @@ Most use cases will need multidimensional evaluation along several success crite
 
         # Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
         response = client.messages.create(
-            model="claude-opus-4-7",
+            model="claude-opus-4-8",
             max_tokens=50,
             messages=[{"role": "user", "content": binary_prompt}],
         )
@@ -502,7 +502,7 @@ Most use cases will need multidimensional evaluation along several success crite
 
     def get_completion(conversation: list):
         message = client.messages.create(
-            model="claude-opus-4-7",
+            model="claude-opus-4-8",
             max_tokens=1024,
             messages=conversation,
         )
@@ -521,7 +521,7 @@ Most use cases will need multidimensional evaluation along several success crite
 
         # Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
         response = client.messages.create(
-            model="claude-opus-4-7",
+            model="claude-opus-4-8",
             max_tokens=50,
             messages=[{"role": "user", "content": ordinal_prompt}],
         )
@@ -579,7 +579,7 @@ def build_grader_prompt(answer, rubric):
 def grade_completion(output, golden_answer):
     grader_response = (
         client.messages.create(
-            model="claude-opus-4-7",
+            model="claude-opus-4-8",
             max_tokens=2048,
             messages=[
                 {"role": "user", "content": build_grader_prompt(output, golden_answer)}
@@ -611,7 +611,7 @@ eval_data = [
 
 def get_completion(prompt: str):
     message = client.messages.create(
-        model="claude-opus-4-7",
+        model="claude-opus-4-8",
         max_tokens=1024,
         messages=[{"role": "user", "content": prompt}],
     )

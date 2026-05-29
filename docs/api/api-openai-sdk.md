@@ -48,7 +48,7 @@ To use the OpenAI SDK compatibility feature, you'll need to:
     )
 
     response = client.chat.completions.create(
-        model="claude-opus-4-7",  # Claude model name
+        model="claude-opus-4-8",  # Claude model name
         messages=[
             {"role": "system", "content": "You are a helpful assistant."},
             {"role": "user", "content": "Who are you?"},
@@ -69,7 +69,7 @@ To use the OpenAI SDK compatibility feature, you'll need to:
 
     const response = await openai.chat.completions.create({
       messages: [{ role: "user", content: "Who are you?" }],
-      model: "claude-opus-4-7" // Claude model name
+      model: "claude-opus-4-8" // Claude model name
     });
 
     console.log(response.choices[0].message.content);

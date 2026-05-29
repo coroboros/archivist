@@ -66,6 +66,10 @@ generated: true
 
     - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
+    - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+    - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
+
 ### Beta API Error
 
 - `type BetaAPIError struct{…}`
@@ -404,6 +408,10 @@ The Models API response can be used to determine which models are available for 
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `type BetaModelInfo struct{…}`
@@ -719,6 +727,10 @@ The Models API response can be used to determine information about a specific mo
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
+
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -1903,6 +1915,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
                 - `const BetaWebFetchToolResultErrorCodeURLNotAllowed BetaWebFetchToolResultErrorCode = "url_not_allowed"`
 
+                - `const BetaWebFetchToolResultErrorCodeURLNotInPriorContext BetaWebFetchToolResultErrorCode = "url_not_in_prior_context"`
+
                 - `const BetaWebFetchToolResultErrorCodeURLNotAccessible BetaWebFetchToolResultErrorCode = "url_not_accessible"`
 
                 - `const BetaWebFetchToolResultErrorCodeUnsupportedContentType BetaWebFetchToolResultErrorCode = "unsupported_content_type"`
@@ -1989,6 +2003,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
                 - `const AdvisorResultAdvisorResult AdvisorResult = "advisor_result"`
 
+              - `StopReason string`
+
             - `type BetaAdvisorRedactedResultBlockParamResp struct{…}`
 
               - `EncryptedContent string`
@@ -1998,6 +2014,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
               - `Type AdvisorRedactedResult`
 
                 - `const AdvisorRedactedResultAdvisorRedactedResult AdvisorRedactedResult = "advisor_redacted_result"`
+
+              - `StopReason string`
 
           - `ToolUseID string`
 
@@ -2334,10 +2352,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
           When content is None, the block represents a failed compaction. The server
           treats these as no-ops. Empty string content is not allowed.
 
-          - `Content string`
-
-            Summary of previously compacted content, or null if compaction failed
-
           - `Type Compaction`
 
             - `const CompactionCompaction Compaction = "compaction"`
@@ -2346,15 +2360,50 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
             Create a cache control breakpoint at this content block.
 
+          - `Content string`
+
+            Summary of previously compacted content, or null if compaction failed
+
           - `EncryptedContent string`
 
             Opaque metadata from prior compaction, to be round-tripped verbatim
+
+        - `type BetaMidConversationSystemBlockParamResp struct{…}`
+
+          System instructions that appear mid-conversation.
+
+          Use this block to provide or update system-level instructions at a specific
+          point in the conversation, rather than only via the top-level `system` parameter.
+
+          - `Content []BetaTextBlockParamResp`
+
+            System instruction text blocks.
+
+            - `Text string`
+
+            - `Type Text`
+
+            - `CacheControl BetaCacheControlEphemeral`
+
+              Create a cache control breakpoint at this content block.
+
+            - `Citations []BetaTextCitationParamUnionResp`
+
+          - `Type MidConvSystem`
+
+            - `const MidConvSystemMidConvSystem MidConvSystem = "mid_conv_system"`
+
+          - `CacheControl BetaCacheControlEphemeral`
+
+            Create a cache control breakpoint at this content block.
 
     - `Role BetaMessageParamRole`
 
       - `const BetaMessageParamRoleUser BetaMessageParamRole = "user"`
 
       - `const BetaMessageParamRoleAssistant BetaMessageParamRole = "assistant"`
+
+      - `const BetaMessageParamRoleSystem BetaMessageParamRole = "system"`
 
   - `Model param.Field[Model]`
 
@@ -3447,6 +3496,10 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+          - `const ModelClaudeOpus4_8 Model = "claude-opus-4-8"`
+
+            Frontier intelligence for long-running agents and coding
+
           - `const ModelClaudeOpus4_7 Model = "claude-opus-4-7"`
 
             Frontier intelligence for long-running agents and coding
@@ -3741,6 +3794,10 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
+
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -4111,6 +4168,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
             - `const BetaWebFetchToolResultErrorCodeURLNotAllowed BetaWebFetchToolResultErrorCode = "url_not_allowed"`
 
+            - `const BetaWebFetchToolResultErrorCodeURLNotInPriorContext BetaWebFetchToolResultErrorCode = "url_not_in_prior_context"`
+
             - `const BetaWebFetchToolResultErrorCodeURLNotAccessible BetaWebFetchToolResultErrorCode = "url_not_accessible"`
 
             - `const BetaWebFetchToolResultErrorCodeUnsupportedContentType BetaWebFetchToolResultErrorCode = "unsupported_content_type"`
@@ -4227,6 +4286,10 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         - `type BetaAdvisorResultBlock struct{…}`
 
+          - `StopReason string`
+
+            The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+
           - `Text string`
 
           - `Type AdvisorResult`
@@ -4238,6 +4301,10 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
           - `EncryptedContent string`
 
             Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+          - `StopReason string`
+
+            The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
           - `Type AdvisorRedactedResult`
 
@@ -4672,6 +4739,10 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+      - `const ModelClaudeOpus4_8 Model = "claude-opus-4-8"`
+
+        Frontier intelligence for long-running agents and coding
+
       - `const ModelClaudeOpus4_7 Model = "claude-opus-4-7"`
 
         Frontier intelligence for long-running agents and coding
@@ -4969,6 +5040,26 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       The number of output tokens which were used.
 
+    - `OutputTokensDetails BetaUsageOutputTokensDetails`
+
+      Breakdown of output tokens by category.
+
+      `output_tokens` remains the inclusive, authoritative total used for billing.
+      This object provides a read-only decomposition for observability — for example,
+      how many of the billed output tokens were spent on internal reasoning that may
+      have been summarized before being returned to you.
+
+      - `ThinkingTokens int64`
+
+        Number of output tokens the model generated as internal reasoning, including
+        the thinking-block delimiter tokens.
+
+        Reflects the raw reasoning the model produced, not the (possibly shorter)
+        summarized thinking text returned in the response body. Computed by
+        re-tokenizing the raw reasoning text, so it may differ from the model's exact
+        generation count by a small number of tokens. Always ≤ `output_tokens`;
+        `output_tokens - thinking_tokens` approximates the non-reasoning output.
+
     - `ServerToolUse BetaServerToolUsage`
 
       The number of server tool requests.
@@ -5116,6 +5207,9 @@ func main() {
       }
     ],
     "output_tokens": 503,
+    "output_tokens_details": {
+      "thinking_tokens": 0
+    },
     "server_tool_use": {
       "web_fetch_requests": 2,
       "web_search_requests": 0
@@ -5710,6 +5804,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
                 - `const BetaWebFetchToolResultErrorCodeURLNotAllowed BetaWebFetchToolResultErrorCode = "url_not_allowed"`
 
+                - `const BetaWebFetchToolResultErrorCodeURLNotInPriorContext BetaWebFetchToolResultErrorCode = "url_not_in_prior_context"`
+
                 - `const BetaWebFetchToolResultErrorCodeURLNotAccessible BetaWebFetchToolResultErrorCode = "url_not_accessible"`
 
                 - `const BetaWebFetchToolResultErrorCodeUnsupportedContentType BetaWebFetchToolResultErrorCode = "unsupported_content_type"`
@@ -5796,6 +5892,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
                 - `const AdvisorResultAdvisorResult AdvisorResult = "advisor_result"`
 
+              - `StopReason string`
+
             - `type BetaAdvisorRedactedResultBlockParamResp struct{…}`
 
               - `EncryptedContent string`
@@ -5805,6 +5903,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
               - `Type AdvisorRedactedResult`
 
                 - `const AdvisorRedactedResultAdvisorRedactedResult AdvisorRedactedResult = "advisor_redacted_result"`
+
+              - `StopReason string`
 
           - `ToolUseID string`
 
@@ -6141,10 +6241,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
           When content is None, the block represents a failed compaction. The server
           treats these as no-ops. Empty string content is not allowed.
 
-          - `Content string`
-
-            Summary of previously compacted content, or null if compaction failed
-
           - `Type Compaction`
 
             - `const CompactionCompaction Compaction = "compaction"`
@@ -6153,15 +6249,50 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
             Create a cache control breakpoint at this content block.
 
+          - `Content string`
+
+            Summary of previously compacted content, or null if compaction failed
+
           - `EncryptedContent string`
 
             Opaque metadata from prior compaction, to be round-tripped verbatim
+
+        - `type BetaMidConversationSystemBlockParamResp struct{…}`
+
+          System instructions that appear mid-conversation.
+
+          Use this block to provide or update system-level instructions at a specific
+          point in the conversation, rather than only via the top-level `system` parameter.
+
+          - `Content []BetaTextBlockParamResp`
+
+            System instruction text blocks.
+
+            - `Text string`
+
+            - `Type Text`
+
+            - `CacheControl BetaCacheControlEphemeral`
+
+              Create a cache control breakpoint at this content block.
+
+            - `Citations []BetaTextCitationParamUnionResp`
+
+          - `Type MidConvSystem`
+
+            - `const MidConvSystemMidConvSystem MidConvSystem = "mid_conv_system"`
+
+          - `CacheControl BetaCacheControlEphemeral`
+
+            Create a cache control breakpoint at this content block.
 
     - `Role BetaMessageParamRole`
 
       - `const BetaMessageParamRoleUser BetaMessageParamRole = "user"`
 
       - `const BetaMessageParamRoleAssistant BetaMessageParamRole = "assistant"`
+
+      - `const BetaMessageParamRoleSystem BetaMessageParamRole = "system"`
 
   - `Model param.Field[Model]`
 
@@ -7181,6 +7312,10 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+          - `const ModelClaudeOpus4_8 Model = "claude-opus-4-8"`
+
+            Frontier intelligence for long-running agents and coding
+
           - `const ModelClaudeOpus4_7 Model = "claude-opus-4-7"`
 
             Frontier intelligence for long-running agents and coding
@@ -7456,6 +7591,10 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `type BetaMessageTokensCount struct{…}`
@@ -7562,6 +7701,10 @@ func main() {
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+      - `const ModelClaudeOpus4_8 Model = "claude-opus-4-8"`
+
+        Frontier intelligence for long-running agents and coding
+
       - `const ModelClaudeOpus4_7 Model = "claude-opus-4-7"`
 
         Frontier intelligence for long-running agents and coding
@@ -7650,6 +7793,10 @@ func main() {
 
     Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
 
+  - `StopReason string`
+
+    The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
+
   - `Type AdvisorRedactedResult`
 
     - `const AdvisorRedactedResultAdvisorRedactedResult AdvisorRedactedResult = "advisor_redacted_result"`
@@ -7666,9 +7813,15 @@ func main() {
 
     - `const AdvisorRedactedResultAdvisorRedactedResult AdvisorRedactedResult = "advisor_redacted_result"`
 
+  - `StopReason string`
+
 ### Beta Advisor Result Block
 
 - `type BetaAdvisorResultBlock struct{…}`
+
+  - `StopReason string`
+
+    The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
 
   - `Text string`
 
@@ -7686,6 +7839,8 @@ func main() {
 
     - `const AdvisorResultAdvisorResult AdvisorResult = "advisor_result"`
 
+  - `StopReason string`
+
 ### Beta Advisor Tool 20260301
 
 - `type BetaAdvisorTool20260301 struct{…}`
@@ -7701,6 +7856,10 @@ func main() {
       The model that will complete your prompt.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `const ModelClaudeOpus4_8 Model = "claude-opus-4-8"`
+
+        Frontier intelligence for long-running agents and coding
 
       - `const ModelClaudeOpus4_7 Model = "claude-opus-4-7"`
 
@@ -7859,6 +8018,10 @@ func main() {
 
     - `type BetaAdvisorResultBlock struct{…}`
 
+      - `StopReason string`
+
+        The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+
       - `Text string`
 
       - `Type AdvisorResult`
@@ -7870,6 +8033,10 @@ func main() {
       - `EncryptedContent string`
 
         Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+      - `StopReason string`
+
+        The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
       - `Type AdvisorRedactedResult`
 
@@ -7915,6 +8082,8 @@ func main() {
 
         - `const AdvisorResultAdvisorResult AdvisorResult = "advisor_result"`
 
+      - `StopReason string`
+
     - `type BetaAdvisorRedactedResultBlockParamResp struct{…}`
 
       - `EncryptedContent string`
@@ -7924,6 +8093,8 @@ func main() {
       - `Type AdvisorRedactedResult`
 
         - `const AdvisorRedactedResultAdvisorRedactedResult AdvisorRedactedResult = "advisor_redacted_result"`
+
+      - `StopReason string`
 
   - `ToolUseID string`
 
@@ -9486,10 +9657,6 @@ func main() {
   When content is None, the block represents a failed compaction. The server
   treats these as no-ops. Empty string content is not allowed.
 
-  - `Content string`
-
-    Summary of previously compacted content, or null if compaction failed
-
   - `Type Compaction`
 
     - `const CompactionCompaction Compaction = "compaction"`
@@ -9516,6 +9683,10 @@ func main() {
       - `const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"`
 
       - `const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"`
+
+  - `Content string`
+
+    Summary of previously compacted content, or null if compaction failed
 
   - `EncryptedContent string`
 
@@ -9991,6 +10162,8 @@ func main() {
 
           - `const BetaWebFetchToolResultErrorCodeURLNotAllowed BetaWebFetchToolResultErrorCode = "url_not_allowed"`
 
+          - `const BetaWebFetchToolResultErrorCodeURLNotInPriorContext BetaWebFetchToolResultErrorCode = "url_not_in_prior_context"`
+
           - `const BetaWebFetchToolResultErrorCodeURLNotAccessible BetaWebFetchToolResultErrorCode = "url_not_accessible"`
 
           - `const BetaWebFetchToolResultErrorCodeUnsupportedContentType BetaWebFetchToolResultErrorCode = "unsupported_content_type"`
@@ -10107,6 +10280,10 @@ func main() {
 
       - `type BetaAdvisorResultBlock struct{…}`
 
+        - `StopReason string`
+
+          The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+
         - `Text string`
 
         - `Type AdvisorResult`
@@ -10118,6 +10295,10 @@ func main() {
         - `EncryptedContent string`
 
           Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+        - `StopReason string`
+
+          The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
         - `Type AdvisorRedactedResult`
 
@@ -10956,6 +11137,8 @@ func main() {
 
           - `const BetaWebFetchToolResultErrorCodeURLNotAllowed BetaWebFetchToolResultErrorCode = "url_not_allowed"`
 
+          - `const BetaWebFetchToolResultErrorCodeURLNotInPriorContext BetaWebFetchToolResultErrorCode = "url_not_in_prior_context"`
+
           - `const BetaWebFetchToolResultErrorCodeURLNotAccessible BetaWebFetchToolResultErrorCode = "url_not_accessible"`
 
           - `const BetaWebFetchToolResultErrorCodeUnsupportedContentType BetaWebFetchToolResultErrorCode = "unsupported_content_type"`
@@ -11042,6 +11225,8 @@ func main() {
 
           - `const AdvisorResultAdvisorResult AdvisorResult = "advisor_result"`
 
+        - `StopReason string`
+
       - `type BetaAdvisorRedactedResultBlockParamResp struct{…}`
 
         - `EncryptedContent string`
@@ -11051,6 +11236,8 @@ func main() {
         - `Type AdvisorRedactedResult`
 
           - `const AdvisorRedactedResultAdvisorRedactedResult AdvisorRedactedResult = "advisor_redacted_result"`
+
+        - `StopReason string`
 
     - `ToolUseID string`
 
@@ -11387,10 +11574,6 @@ func main() {
     When content is None, the block represents a failed compaction. The server
     treats these as no-ops. Empty string content is not allowed.
 
-    - `Content string`
-
-      Summary of previously compacted content, or null if compaction failed
-
     - `Type Compaction`
 
       - `const CompactionCompaction Compaction = "compaction"`
@@ -11399,9 +11582,42 @@ func main() {
 
       Create a cache control breakpoint at this content block.
 
+    - `Content string`
+
+      Summary of previously compacted content, or null if compaction failed
+
     - `EncryptedContent string`
 
       Opaque metadata from prior compaction, to be round-tripped verbatim
+
+  - `type BetaMidConversationSystemBlockParamResp struct{…}`
+
+    System instructions that appear mid-conversation.
+
+    Use this block to provide or update system-level instructions at a specific
+    point in the conversation, rather than only via the top-level `system` parameter.
+
+    - `Content []BetaTextBlockParamResp`
+
+      System instruction text blocks.
+
+      - `Text string`
+
+      - `Type Text`
+
+      - `CacheControl BetaCacheControlEphemeral`
+
+        Create a cache control breakpoint at this content block.
+
+      - `Citations []BetaTextCitationParamUnionResp`
+
+    - `Type MidConvSystem`
+
+      - `const MidConvSystemMidConvSystem MidConvSystem = "mid_conv_system"`
+
+    - `CacheControl BetaCacheControlEphemeral`
+
+      Create a cache control breakpoint at this content block.
 
 ### Beta Content Block Source
 
@@ -12353,6 +12569,10 @@ func main() {
         The model that will complete your prompt.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `const ModelClaudeOpus4_8 Model = "claude-opus-4-8"`
+
+          Frontier intelligence for long-running agents and coding
 
         - `const ModelClaudeOpus4_7 Model = "claude-opus-4-7"`
 
@@ -13365,6 +13585,8 @@ func main() {
 
             - `const BetaWebFetchToolResultErrorCodeURLNotAllowed BetaWebFetchToolResultErrorCode = "url_not_allowed"`
 
+            - `const BetaWebFetchToolResultErrorCodeURLNotInPriorContext BetaWebFetchToolResultErrorCode = "url_not_in_prior_context"`
+
             - `const BetaWebFetchToolResultErrorCodeURLNotAccessible BetaWebFetchToolResultErrorCode = "url_not_accessible"`
 
             - `const BetaWebFetchToolResultErrorCodeUnsupportedContentType BetaWebFetchToolResultErrorCode = "unsupported_content_type"`
@@ -13481,6 +13703,10 @@ func main() {
 
         - `type BetaAdvisorResultBlock struct{…}`
 
+          - `StopReason string`
+
+            The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+
           - `Text string`
 
           - `Type AdvisorResult`
@@ -13492,6 +13718,10 @@ func main() {
           - `EncryptedContent string`
 
             Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+          - `StopReason string`
+
+            The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
           - `Type AdvisorRedactedResult`
 
@@ -13926,6 +14156,10 @@ func main() {
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+      - `const ModelClaudeOpus4_8 Model = "claude-opus-4-8"`
+
+        Frontier intelligence for long-running agents and coding
+
       - `const ModelClaudeOpus4_7 Model = "claude-opus-4-7"`
 
         Frontier intelligence for long-running agents and coding
@@ -14223,6 +14457,26 @@ func main() {
 
       The number of output tokens which were used.
 
+    - `OutputTokensDetails BetaUsageOutputTokensDetails`
+
+      Breakdown of output tokens by category.
+
+      `output_tokens` remains the inclusive, authoritative total used for billing.
+      This object provides a read-only decomposition for observability — for example,
+      how many of the billed output tokens were spent on internal reasoning that may
+      have been summarized before being returned to you.
+
+      - `ThinkingTokens int64`
+
+        Number of output tokens the model generated as internal reasoning, including
+        the thinking-block delimiter tokens.
+
+        Reflects the raw reasoning the model produced, not the (possibly shorter)
+        summarized thinking text returned in the response body. Computed by
+        re-tokenizing the raw reasoning text, so it may differ from the model's exact
+        generation count by a small number of tokens. Always ≤ `output_tokens`;
+        `output_tokens - thinking_tokens` approximates the non-reasoning output.
+
     - `ServerToolUse BetaServerToolUsage`
 
       The number of server tool requests.
@@ -14379,6 +14633,10 @@ func main() {
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+          - `const ModelClaudeOpus4_8 Model = "claude-opus-4-8"`
+
+            Frontier intelligence for long-running agents and coding
+
           - `const ModelClaudeOpus4_7 Model = "claude-opus-4-7"`
 
             Frontier intelligence for long-running agents and coding
@@ -14462,6 +14720,26 @@ func main() {
   - `OutputTokens int64`
 
     The cumulative number of output tokens which were used.
+
+  - `OutputTokensDetails BetaMessageDeltaUsageOutputTokensDetails`
+
+    Breakdown of output tokens by category.
+
+    `output_tokens` remains the inclusive, authoritative total used for billing.
+    This object provides a read-only decomposition for observability — for example,
+    how many of the billed output tokens were spent on internal reasoning that may
+    have been summarized before being returned to you.
+
+    - `ThinkingTokens int64`
+
+      Number of output tokens the model generated as internal reasoning, including
+      the thinking-block delimiter tokens.
+
+      Reflects the raw reasoning the model produced, not the (possibly shorter)
+      summarized thinking text returned in the response body. Computed by
+      re-tokenizing the raw reasoning text, so it may differ from the model's exact
+      generation count by a small number of tokens. Always ≤ `output_tokens`;
+      `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
   - `ServerToolUse BetaServerToolUsage`
 
@@ -15036,6 +15314,8 @@ func main() {
 
               - `const BetaWebFetchToolResultErrorCodeURLNotAllowed BetaWebFetchToolResultErrorCode = "url_not_allowed"`
 
+              - `const BetaWebFetchToolResultErrorCodeURLNotInPriorContext BetaWebFetchToolResultErrorCode = "url_not_in_prior_context"`
+
               - `const BetaWebFetchToolResultErrorCodeURLNotAccessible BetaWebFetchToolResultErrorCode = "url_not_accessible"`
 
               - `const BetaWebFetchToolResultErrorCodeUnsupportedContentType BetaWebFetchToolResultErrorCode = "unsupported_content_type"`
@@ -15122,6 +15402,8 @@ func main() {
 
               - `const AdvisorResultAdvisorResult AdvisorResult = "advisor_result"`
 
+            - `StopReason string`
+
           - `type BetaAdvisorRedactedResultBlockParamResp struct{…}`
 
             - `EncryptedContent string`
@@ -15131,6 +15413,8 @@ func main() {
             - `Type AdvisorRedactedResult`
 
               - `const AdvisorRedactedResultAdvisorRedactedResult AdvisorRedactedResult = "advisor_redacted_result"`
+
+            - `StopReason string`
 
         - `ToolUseID string`
 
@@ -15467,10 +15751,6 @@ func main() {
         When content is None, the block represents a failed compaction. The server
         treats these as no-ops. Empty string content is not allowed.
 
-        - `Content string`
-
-          Summary of previously compacted content, or null if compaction failed
-
         - `Type Compaction`
 
           - `const CompactionCompaction Compaction = "compaction"`
@@ -15479,15 +15759,50 @@ func main() {
 
           Create a cache control breakpoint at this content block.
 
+        - `Content string`
+
+          Summary of previously compacted content, or null if compaction failed
+
         - `EncryptedContent string`
 
           Opaque metadata from prior compaction, to be round-tripped verbatim
+
+      - `type BetaMidConversationSystemBlockParamResp struct{…}`
+
+        System instructions that appear mid-conversation.
+
+        Use this block to provide or update system-level instructions at a specific
+        point in the conversation, rather than only via the top-level `system` parameter.
+
+        - `Content []BetaTextBlockParamResp`
+
+          System instruction text blocks.
+
+          - `Text string`
+
+          - `Type Text`
+
+          - `CacheControl BetaCacheControlEphemeral`
+
+            Create a cache control breakpoint at this content block.
+
+          - `Citations []BetaTextCitationParamUnionResp`
+
+        - `Type MidConvSystem`
+
+          - `const MidConvSystemMidConvSystem MidConvSystem = "mid_conv_system"`
+
+        - `CacheControl BetaCacheControlEphemeral`
+
+          Create a cache control breakpoint at this content block.
 
   - `Role BetaMessageParamRole`
 
     - `const BetaMessageParamRoleUser BetaMessageParamRole = "user"`
 
     - `const BetaMessageParamRoleAssistant BetaMessageParamRole = "assistant"`
+
+    - `const BetaMessageParamRoleSystem BetaMessageParamRole = "system"`
 
 ### Beta Message Tokens Count
 
@@ -15514,6 +15829,162 @@ func main() {
     An external identifier for the user who is associated with the request.
 
     This should be a uuid, hash value, or other opaque identifier. Anthropic may use this id to help detect abuse. Do not include any identifying information such as name, email address, or phone number.
+
+### Beta Mid Conversation System Block Param
+
+- `type BetaMidConversationSystemBlockParamResp struct{…}`
+
+  System instructions that appear mid-conversation.
+
+  Use this block to provide or update system-level instructions at a specific
+  point in the conversation, rather than only via the top-level `system` parameter.
+
+  - `Content []BetaTextBlockParamResp`
+
+    System instruction text blocks.
+
+    - `Text string`
+
+    - `Type Text`
+
+      - `const TextText Text = "text"`
+
+    - `CacheControl BetaCacheControlEphemeral`
+
+      Create a cache control breakpoint at this content block.
+
+      - `Type Ephemeral`
+
+        - `const EphemeralEphemeral Ephemeral = "ephemeral"`
+
+      - `TTL BetaCacheControlEphemeralTTL`
+
+        The time-to-live for the cache control breakpoint.
+
+        This may be one the following values:
+
+        - `5m`: 5 minutes
+        - `1h`: 1 hour
+
+        Defaults to `5m`.
+
+        - `const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"`
+
+        - `const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"`
+
+    - `Citations []BetaTextCitationParamUnionResp`
+
+      - `type BetaCitationCharLocationParamResp struct{…}`
+
+        - `CitedText string`
+
+        - `DocumentIndex int64`
+
+        - `DocumentTitle string`
+
+        - `EndCharIndex int64`
+
+        - `StartCharIndex int64`
+
+        - `Type CharLocation`
+
+          - `const CharLocationCharLocation CharLocation = "char_location"`
+
+      - `type BetaCitationPageLocationParamResp struct{…}`
+
+        - `CitedText string`
+
+        - `DocumentIndex int64`
+
+        - `DocumentTitle string`
+
+        - `EndPageNumber int64`
+
+        - `StartPageNumber int64`
+
+        - `Type PageLocation`
+
+          - `const PageLocationPageLocation PageLocation = "page_location"`
+
+      - `type BetaCitationContentBlockLocationParamResp struct{…}`
+
+        - `CitedText string`
+
+          The full text of the cited block range, concatenated.
+
+          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
+        - `DocumentIndex int64`
+
+        - `DocumentTitle string`
+
+        - `EndBlockIndex int64`
+
+          Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
+        - `StartBlockIndex int64`
+
+          0-based index of the first cited block in the source's `content` array.
+
+        - `Type ContentBlockLocation`
+
+          - `const ContentBlockLocationContentBlockLocation ContentBlockLocation = "content_block_location"`
+
+      - `type BetaCitationWebSearchResultLocationParamResp struct{…}`
+
+        - `CitedText string`
+
+        - `EncryptedIndex string`
+
+        - `Title string`
+
+        - `Type WebSearchResultLocation`
+
+          - `const WebSearchResultLocationWebSearchResultLocation WebSearchResultLocation = "web_search_result_location"`
+
+        - `URL string`
+
+      - `type BetaCitationSearchResultLocationParamResp struct{…}`
+
+        - `CitedText string`
+
+          The full text of the cited block range, concatenated.
+
+          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
+        - `EndBlockIndex int64`
+
+          Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
+        - `SearchResultIndex int64`
+
+          0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+          Counted separately from `document_index`; server-side web search results are not included in this count.
+
+        - `Source string`
+
+        - `StartBlockIndex int64`
+
+          0-based index of the first cited block in the source's `content` array.
+
+        - `Title string`
+
+        - `Type SearchResultLocation`
+
+          - `const SearchResultLocationSearchResultLocation SearchResultLocation = "search_result_location"`
+
+  - `Type MidConvSystem`
+
+    - `const MidConvSystemMidConvSystem MidConvSystem = "mid_conv_system"`
+
+  - `CacheControl BetaCacheControlEphemeral`
+
+    Create a cache control breakpoint at this content block.
 
 ### Beta Output Config
 
@@ -15717,6 +16188,10 @@ func main() {
 
   - `type BetaThinkingDelta struct{…}`
 
+    - `EstimatedTokens int64`
+
+      Per-frame increment of a coarse, running estimate of the tokens this thinking block has produced so far. Present whenever the `thinking-token-count-2026-05-13` beta is set; `null` unless `thinking.display` resolves to `"omitted"` and a count is due this frame. Sum the increments across `thinking_delta` frames on this block for a progress indicator. Each increment is a non-negative multiple of a fixed quantum and the cadence is rate-limited, so this is a deliberately lossy display hint, not a billable count; `usage.output_tokens` remains authoritative.
+
     - `Thinking string`
 
     - `Type ThinkingDelta`
@@ -15884,6 +16359,10 @@ func main() {
         - `const CitationsDeltaCitationsDelta CitationsDelta = "citations_delta"`
 
     - `type BetaThinkingDelta struct{…}`
+
+      - `EstimatedTokens int64`
+
+        Per-frame increment of a coarse, running estimate of the tokens this thinking block has produced so far. Present whenever the `thinking-token-count-2026-05-13` beta is set; `null` unless `thinking.display` resolves to `"omitted"` and a count is due this frame. Sum the increments across `thinking_delta` frames on this block for a progress indicator. Each increment is a non-negative multiple of a fixed quantum and the cadence is rate-limited, so this is a deliberately lossy display hint, not a billable count; `usage.output_tokens` remains authoritative.
 
       - `Thinking string`
 
@@ -16223,6 +16702,8 @@ func main() {
 
             - `const BetaWebFetchToolResultErrorCodeURLNotAllowed BetaWebFetchToolResultErrorCode = "url_not_allowed"`
 
+            - `const BetaWebFetchToolResultErrorCodeURLNotInPriorContext BetaWebFetchToolResultErrorCode = "url_not_in_prior_context"`
+
             - `const BetaWebFetchToolResultErrorCodeURLNotAccessible BetaWebFetchToolResultErrorCode = "url_not_accessible"`
 
             - `const BetaWebFetchToolResultErrorCodeUnsupportedContentType BetaWebFetchToolResultErrorCode = "unsupported_content_type"`
@@ -16339,6 +16820,10 @@ func main() {
 
         - `type BetaAdvisorResultBlock struct{…}`
 
+          - `StopReason string`
+
+            The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+
           - `Text string`
 
           - `Type AdvisorResult`
@@ -16350,6 +16835,10 @@ func main() {
           - `EncryptedContent string`
 
             Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+          - `StopReason string`
+
+            The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
           - `Type AdvisorRedactedResult`
 
@@ -16945,6 +17434,10 @@ func main() {
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+            - `const ModelClaudeOpus4_8 Model = "claude-opus-4-8"`
+
+              Frontier intelligence for long-running agents and coding
+
             - `const ModelClaudeOpus4_7 Model = "claude-opus-4-7"`
 
               Frontier intelligence for long-running agents and coding
@@ -17028,6 +17521,26 @@ func main() {
     - `OutputTokens int64`
 
       The cumulative number of output tokens which were used.
+
+    - `OutputTokensDetails BetaMessageDeltaUsageOutputTokensDetails`
+
+      Breakdown of output tokens by category.
+
+      `output_tokens` remains the inclusive, authoritative total used for billing.
+      This object provides a read-only decomposition for observability — for example,
+      how many of the billed output tokens were spent on internal reasoning that may
+      have been summarized before being returned to you.
+
+      - `ThinkingTokens int64`
+
+        Number of output tokens the model generated as internal reasoning, including
+        the thinking-block delimiter tokens.
+
+        Reflects the raw reasoning the model produced, not the (possibly shorter)
+        summarized thinking text returned in the response body. Computed by
+        re-tokenizing the raw reasoning text, so it may differ from the model's exact
+        generation count by a small number of tokens. Always ≤ `output_tokens`;
+        `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
     - `ServerToolUse BetaServerToolUsage`
 
@@ -17412,6 +17925,8 @@ func main() {
 
               - `const BetaWebFetchToolResultErrorCodeURLNotAllowed BetaWebFetchToolResultErrorCode = "url_not_allowed"`
 
+              - `const BetaWebFetchToolResultErrorCodeURLNotInPriorContext BetaWebFetchToolResultErrorCode = "url_not_in_prior_context"`
+
               - `const BetaWebFetchToolResultErrorCodeURLNotAccessible BetaWebFetchToolResultErrorCode = "url_not_accessible"`
 
               - `const BetaWebFetchToolResultErrorCodeUnsupportedContentType BetaWebFetchToolResultErrorCode = "unsupported_content_type"`
@@ -17528,6 +18043,10 @@ func main() {
 
           - `type BetaAdvisorResultBlock struct{…}`
 
+            - `StopReason string`
+
+              The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+
             - `Text string`
 
             - `Type AdvisorResult`
@@ -17539,6 +18058,10 @@ func main() {
             - `EncryptedContent string`
 
               Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+            - `StopReason string`
+
+              The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
             - `Type AdvisorRedactedResult`
 
@@ -17973,6 +18496,10 @@ func main() {
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+        - `const ModelClaudeOpus4_8 Model = "claude-opus-4-8"`
+
+          Frontier intelligence for long-running agents and coding
+
         - `const ModelClaudeOpus4_7 Model = "claude-opus-4-7"`
 
           Frontier intelligence for long-running agents and coding
@@ -18269,6 +18796,26 @@ func main() {
       - `OutputTokens int64`
 
         The number of output tokens which were used.
+
+      - `OutputTokensDetails BetaUsageOutputTokensDetails`
+
+        Breakdown of output tokens by category.
+
+        `output_tokens` remains the inclusive, authoritative total used for billing.
+        This object provides a read-only decomposition for observability — for example,
+        how many of the billed output tokens were spent on internal reasoning that may
+        have been summarized before being returned to you.
+
+        - `ThinkingTokens int64`
+
+          Number of output tokens the model generated as internal reasoning, including
+          the thinking-block delimiter tokens.
+
+          Reflects the raw reasoning the model produced, not the (possibly shorter)
+          summarized thinking text returned in the response body. Computed by
+          re-tokenizing the raw reasoning text, so it may differ from the model's exact
+          generation count by a small number of tokens. Always ≤ `output_tokens`;
+          `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
       - `ServerToolUse BetaServerToolUsage`
 
@@ -18685,6 +19232,8 @@ func main() {
 
                 - `const BetaWebFetchToolResultErrorCodeURLNotAllowed BetaWebFetchToolResultErrorCode = "url_not_allowed"`
 
+                - `const BetaWebFetchToolResultErrorCodeURLNotInPriorContext BetaWebFetchToolResultErrorCode = "url_not_in_prior_context"`
+
                 - `const BetaWebFetchToolResultErrorCodeURLNotAccessible BetaWebFetchToolResultErrorCode = "url_not_accessible"`
 
                 - `const BetaWebFetchToolResultErrorCodeUnsupportedContentType BetaWebFetchToolResultErrorCode = "unsupported_content_type"`
@@ -18801,6 +19350,10 @@ func main() {
 
             - `type BetaAdvisorResultBlock struct{…}`
 
+              - `StopReason string`
+
+                The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+
               - `Text string`
 
               - `Type AdvisorResult`
@@ -18812,6 +19365,10 @@ func main() {
               - `EncryptedContent string`
 
                 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+              - `StopReason string`
+
+                The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
               - `Type AdvisorRedactedResult`
 
@@ -19246,6 +19803,10 @@ func main() {
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+          - `const ModelClaudeOpus4_8 Model = "claude-opus-4-8"`
+
+            Frontier intelligence for long-running agents and coding
+
           - `const ModelClaudeOpus4_7 Model = "claude-opus-4-7"`
 
             Frontier intelligence for long-running agents and coding
@@ -19543,6 +20104,26 @@ func main() {
 
           The number of output tokens which were used.
 
+        - `OutputTokensDetails BetaUsageOutputTokensDetails`
+
+          Breakdown of output tokens by category.
+
+          `output_tokens` remains the inclusive, authoritative total used for billing.
+          This object provides a read-only decomposition for observability — for example,
+          how many of the billed output tokens were spent on internal reasoning that may
+          have been summarized before being returned to you.
+
+          - `ThinkingTokens int64`
+
+            Number of output tokens the model generated as internal reasoning, including
+            the thinking-block delimiter tokens.
+
+            Reflects the raw reasoning the model produced, not the (possibly shorter)
+            summarized thinking text returned in the response body. Computed by
+            re-tokenizing the raw reasoning text, so it may differ from the model's exact
+            generation count by a small number of tokens. Always ≤ `output_tokens`;
+            `output_tokens - thinking_tokens` approximates the non-reasoning output.
+
         - `ServerToolUse BetaServerToolUsage`
 
           The number of server tool requests.
@@ -19638,6 +20219,26 @@ func main() {
       - `OutputTokens int64`
 
         The cumulative number of output tokens which were used.
+
+      - `OutputTokensDetails BetaMessageDeltaUsageOutputTokensDetails`
+
+        Breakdown of output tokens by category.
+
+        `output_tokens` remains the inclusive, authoritative total used for billing.
+        This object provides a read-only decomposition for observability — for example,
+        how many of the billed output tokens were spent on internal reasoning that may
+        have been summarized before being returned to you.
+
+        - `ThinkingTokens int64`
+
+          Number of output tokens the model generated as internal reasoning, including
+          the thinking-block delimiter tokens.
+
+          Reflects the raw reasoning the model produced, not the (possibly shorter)
+          summarized thinking text returned in the response body. Computed by
+          re-tokenizing the raw reasoning text, so it may differ from the model's exact
+          generation count by a small number of tokens. Always ≤ `output_tokens`;
+          `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
       - `ServerToolUse BetaServerToolUsage`
 
@@ -19740,6 +20341,10 @@ func main() {
           - `const CitationsDeltaCitationsDelta CitationsDelta = "citations_delta"`
 
       - `type BetaThinkingDelta struct{…}`
+
+        - `EstimatedTokens int64`
+
+          Per-frame increment of a coarse, running estimate of the tokens this thinking block has produced so far. Present whenever the `thinking-token-count-2026-05-13` beta is set; `null` unless `thinking.display` resolves to `"omitted"` and a count is due this frame. Sum the increments across `thinking_delta` frames on this block for a progress indicator. Each increment is a non-negative multiple of a fixed quantum and the cadence is rate-limited, so this is a deliberately lossy display hint, not a billable count; `usage.output_tokens` remains authoritative.
 
         - `Thinking string`
 
@@ -21628,6 +22233,10 @@ func main() {
 ### Beta Thinking Delta
 
 - `type BetaThinkingDelta struct{…}`
+
+  - `EstimatedTokens int64`
+
+    Per-frame increment of a coarse, running estimate of the tokens this thinking block has produced so far. Present whenever the `thinking-token-count-2026-05-13` beta is set; `null` unless `thinking.display` resolves to `"omitted"` and a count is due this frame. Sum the increments across `thinking_delta` frames on this block for a progress indicator. Each increment is a non-negative multiple of a fixed quantum and the cadence is rate-limited, so this is a deliberately lossy display hint, not a billable count; `usage.output_tokens` remains authoritative.
 
   - `Thinking string`
 
@@ -24004,6 +24613,10 @@ func main() {
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+        - `const ModelClaudeOpus4_8 Model = "claude-opus-4-8"`
+
+          Frontier intelligence for long-running agents and coding
+
         - `const ModelClaudeOpus4_7 Model = "claude-opus-4-7"`
 
           Frontier intelligence for long-running agents and coding
@@ -24506,6 +25119,10 @@ func main() {
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+          - `const ModelClaudeOpus4_8 Model = "claude-opus-4-8"`
+
+            Frontier intelligence for long-running agents and coding
+
           - `const ModelClaudeOpus4_7 Model = "claude-opus-4-7"`
 
             Frontier intelligence for long-running agents and coding
@@ -24589,6 +25206,26 @@ func main() {
   - `OutputTokens int64`
 
     The number of output tokens which were used.
+
+  - `OutputTokensDetails BetaUsageOutputTokensDetails`
+
+    Breakdown of output tokens by category.
+
+    `output_tokens` remains the inclusive, authoritative total used for billing.
+    This object provides a read-only decomposition for observability — for example,
+    how many of the billed output tokens were spent on internal reasoning that may
+    have been summarized before being returned to you.
+
+    - `ThinkingTokens int64`
+
+      Number of output tokens the model generated as internal reasoning, including
+      the thinking-block delimiter tokens.
+
+      Reflects the raw reasoning the model produced, not the (possibly shorter)
+      summarized thinking text returned in the response body. Computed by
+      re-tokenizing the raw reasoning text, so it may differ from the model's exact
+      generation count by a small number of tokens. Always ≤ `output_tokens`;
+      `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
   - `ServerToolUse BetaServerToolUsage`
 
@@ -25226,6 +25863,8 @@ func main() {
 
         - `const BetaWebFetchToolResultErrorCodeURLNotAllowed BetaWebFetchToolResultErrorCode = "url_not_allowed"`
 
+        - `const BetaWebFetchToolResultErrorCodeURLNotInPriorContext BetaWebFetchToolResultErrorCode = "url_not_in_prior_context"`
+
         - `const BetaWebFetchToolResultErrorCodeURLNotAccessible BetaWebFetchToolResultErrorCode = "url_not_accessible"`
 
         - `const BetaWebFetchToolResultErrorCodeUnsupportedContentType BetaWebFetchToolResultErrorCode = "unsupported_content_type"`
@@ -25347,6 +25986,8 @@ func main() {
         - `const BetaWebFetchToolResultErrorCodeURLTooLong BetaWebFetchToolResultErrorCode = "url_too_long"`
 
         - `const BetaWebFetchToolResultErrorCodeURLNotAllowed BetaWebFetchToolResultErrorCode = "url_not_allowed"`
+
+        - `const BetaWebFetchToolResultErrorCodeURLNotInPriorContext BetaWebFetchToolResultErrorCode = "url_not_in_prior_context"`
 
         - `const BetaWebFetchToolResultErrorCodeURLNotAccessible BetaWebFetchToolResultErrorCode = "url_not_accessible"`
 
@@ -25683,6 +26324,8 @@ func main() {
 
     - `const BetaWebFetchToolResultErrorCodeURLNotAllowed BetaWebFetchToolResultErrorCode = "url_not_allowed"`
 
+    - `const BetaWebFetchToolResultErrorCodeURLNotInPriorContext BetaWebFetchToolResultErrorCode = "url_not_in_prior_context"`
+
     - `const BetaWebFetchToolResultErrorCodeURLNotAccessible BetaWebFetchToolResultErrorCode = "url_not_accessible"`
 
     - `const BetaWebFetchToolResultErrorCodeUnsupportedContentType BetaWebFetchToolResultErrorCode = "unsupported_content_type"`
@@ -25709,6 +26352,8 @@ func main() {
 
     - `const BetaWebFetchToolResultErrorCodeURLNotAllowed BetaWebFetchToolResultErrorCode = "url_not_allowed"`
 
+    - `const BetaWebFetchToolResultErrorCodeURLNotInPriorContext BetaWebFetchToolResultErrorCode = "url_not_in_prior_context"`
+
     - `const BetaWebFetchToolResultErrorCodeURLNotAccessible BetaWebFetchToolResultErrorCode = "url_not_accessible"`
 
     - `const BetaWebFetchToolResultErrorCodeUnsupportedContentType BetaWebFetchToolResultErrorCode = "unsupported_content_type"`
@@ -25732,6 +26377,8 @@ func main() {
   - `const BetaWebFetchToolResultErrorCodeURLTooLong BetaWebFetchToolResultErrorCode = "url_too_long"`
 
   - `const BetaWebFetchToolResultErrorCodeURLNotAllowed BetaWebFetchToolResultErrorCode = "url_not_allowed"`
+
+  - `const BetaWebFetchToolResultErrorCodeURLNotInPriorContext BetaWebFetchToolResultErrorCode = "url_not_in_prior_context"`
 
   - `const BetaWebFetchToolResultErrorCodeURLNotAccessible BetaWebFetchToolResultErrorCode = "url_not_accessible"`
 
@@ -26880,6 +27527,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                     - `const BetaWebFetchToolResultErrorCodeURLNotAllowed BetaWebFetchToolResultErrorCode = "url_not_allowed"`
 
+                    - `const BetaWebFetchToolResultErrorCodeURLNotInPriorContext BetaWebFetchToolResultErrorCode = "url_not_in_prior_context"`
+
                     - `const BetaWebFetchToolResultErrorCodeURLNotAccessible BetaWebFetchToolResultErrorCode = "url_not_accessible"`
 
                     - `const BetaWebFetchToolResultErrorCodeUnsupportedContentType BetaWebFetchToolResultErrorCode = "unsupported_content_type"`
@@ -26966,6 +27615,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                     - `const AdvisorResultAdvisorResult AdvisorResult = "advisor_result"`
 
+                  - `StopReason string`
+
                 - `type BetaAdvisorRedactedResultBlockParamResp struct{…}`
 
                   - `EncryptedContent string`
@@ -26975,6 +27626,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
                   - `Type AdvisorRedactedResult`
 
                     - `const AdvisorRedactedResultAdvisorRedactedResult AdvisorRedactedResult = "advisor_redacted_result"`
+
+                  - `StopReason string`
 
               - `ToolUseID string`
 
@@ -27311,10 +27964,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
               When content is None, the block represents a failed compaction. The server
               treats these as no-ops. Empty string content is not allowed.
 
-              - `Content string`
-
-                Summary of previously compacted content, or null if compaction failed
-
               - `Type Compaction`
 
                 - `const CompactionCompaction Compaction = "compaction"`
@@ -27323,15 +27972,50 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 Create a cache control breakpoint at this content block.
 
+              - `Content string`
+
+                Summary of previously compacted content, or null if compaction failed
+
               - `EncryptedContent string`
 
                 Opaque metadata from prior compaction, to be round-tripped verbatim
+
+            - `type BetaMidConversationSystemBlockParamResp struct{…}`
+
+              System instructions that appear mid-conversation.
+
+              Use this block to provide or update system-level instructions at a specific
+              point in the conversation, rather than only via the top-level `system` parameter.
+
+              - `Content []BetaTextBlockParamResp`
+
+                System instruction text blocks.
+
+                - `Text string`
+
+                - `Type Text`
+
+                - `CacheControl BetaCacheControlEphemeral`
+
+                  Create a cache control breakpoint at this content block.
+
+                - `Citations []BetaTextCitationParamUnionResp`
+
+              - `Type MidConvSystem`
+
+                - `const MidConvSystemMidConvSystem MidConvSystem = "mid_conv_system"`
+
+              - `CacheControl BetaCacheControlEphemeral`
+
+                Create a cache control breakpoint at this content block.
 
         - `Role BetaMessageParamRole`
 
           - `const BetaMessageParamRoleUser BetaMessageParamRole = "user"`
 
           - `const BetaMessageParamRoleAssistant BetaMessageParamRole = "assistant"`
+
+          - `const BetaMessageParamRoleSystem BetaMessageParamRole = "system"`
 
       - `Model Model`
 
@@ -27344,6 +28028,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
           The model that will complete your prompt.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `const ModelClaudeOpus4_8 Model = "claude-opus-4-8"`
+
+            Frontier intelligence for long-running agents and coding
 
           - `const ModelClaudeOpus4_7 Model = "claude-opus-4-7"`
 
@@ -28983,6 +29671,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `type BetaMessageBatch struct{…}`
@@ -29212,6 +29904,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
+
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -29443,6 +30139,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `type BetaMessageBatch struct{…}`
@@ -29668,6 +30368,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `type BetaMessageBatch struct{…}`
@@ -29890,6 +30594,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `type BetaDeletedMessageBatch struct{…}`
@@ -30023,6 +30731,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
+
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -30411,6 +31123,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `const BetaWebFetchToolResultErrorCodeURLNotAllowed BetaWebFetchToolResultErrorCode = "url_not_allowed"`
 
+                  - `const BetaWebFetchToolResultErrorCodeURLNotInPriorContext BetaWebFetchToolResultErrorCode = "url_not_in_prior_context"`
+
                   - `const BetaWebFetchToolResultErrorCodeURLNotAccessible BetaWebFetchToolResultErrorCode = "url_not_accessible"`
 
                   - `const BetaWebFetchToolResultErrorCodeUnsupportedContentType BetaWebFetchToolResultErrorCode = "unsupported_content_type"`
@@ -30527,6 +31241,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `type BetaAdvisorResultBlock struct{…}`
 
+                - `StopReason string`
+
+                  The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+
                 - `Text string`
 
                 - `Type AdvisorResult`
@@ -30538,6 +31256,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
                 - `EncryptedContent string`
 
                   Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+                - `StopReason string`
+
+                  The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
                 - `Type AdvisorRedactedResult`
 
@@ -30972,6 +31694,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+            - `const ModelClaudeOpus4_8 Model = "claude-opus-4-8"`
+
+              Frontier intelligence for long-running agents and coding
+
             - `const ModelClaudeOpus4_7 Model = "claude-opus-4-7"`
 
               Frontier intelligence for long-running agents and coding
@@ -31268,6 +31994,26 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
           - `OutputTokens int64`
 
             The number of output tokens which were used.
+
+          - `OutputTokensDetails BetaUsageOutputTokensDetails`
+
+            Breakdown of output tokens by category.
+
+            `output_tokens` remains the inclusive, authoritative total used for billing.
+            This object provides a read-only decomposition for observability — for example,
+            how many of the billed output tokens were spent on internal reasoning that may
+            have been summarized before being returned to you.
+
+            - `ThinkingTokens int64`
+
+              Number of output tokens the model generated as internal reasoning, including
+              the thinking-block delimiter tokens.
+
+              Reflects the raw reasoning the model produced, not the (possibly shorter)
+              summarized thinking text returned in the response body. Computed by
+              re-tokenizing the raw reasoning text, so it may differ from the model's exact
+              generation count by a small number of tokens. Always ≤ `output_tokens`;
+              `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
           - `ServerToolUse BetaServerToolUsage`
 
@@ -32038,6 +32784,8 @@ func main() {
 
                   - `const BetaWebFetchToolResultErrorCodeURLNotAllowed BetaWebFetchToolResultErrorCode = "url_not_allowed"`
 
+                  - `const BetaWebFetchToolResultErrorCodeURLNotInPriorContext BetaWebFetchToolResultErrorCode = "url_not_in_prior_context"`
+
                   - `const BetaWebFetchToolResultErrorCodeURLNotAccessible BetaWebFetchToolResultErrorCode = "url_not_accessible"`
 
                   - `const BetaWebFetchToolResultErrorCodeUnsupportedContentType BetaWebFetchToolResultErrorCode = "unsupported_content_type"`
@@ -32154,6 +32902,10 @@ func main() {
 
               - `type BetaAdvisorResultBlock struct{…}`
 
+                - `StopReason string`
+
+                  The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+
                 - `Text string`
 
                 - `Type AdvisorResult`
@@ -32165,6 +32917,10 @@ func main() {
                 - `EncryptedContent string`
 
                   Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+                - `StopReason string`
+
+                  The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
                 - `Type AdvisorRedactedResult`
 
@@ -32599,6 +33355,10 @@ func main() {
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+            - `const ModelClaudeOpus4_8 Model = "claude-opus-4-8"`
+
+              Frontier intelligence for long-running agents and coding
+
             - `const ModelClaudeOpus4_7 Model = "claude-opus-4-7"`
 
               Frontier intelligence for long-running agents and coding
@@ -32895,6 +33655,26 @@ func main() {
           - `OutputTokens int64`
 
             The number of output tokens which were used.
+
+          - `OutputTokensDetails BetaUsageOutputTokensDetails`
+
+            Breakdown of output tokens by category.
+
+            `output_tokens` remains the inclusive, authoritative total used for billing.
+            This object provides a read-only decomposition for observability — for example,
+            how many of the billed output tokens were spent on internal reasoning that may
+            have been summarized before being returned to you.
+
+            - `ThinkingTokens int64`
+
+              Number of output tokens the model generated as internal reasoning, including
+              the thinking-block delimiter tokens.
+
+              Reflects the raw reasoning the model produced, not the (possibly shorter)
+              summarized thinking text returned in the response body. Computed by
+              re-tokenizing the raw reasoning text, so it may differ from the model's exact
+              generation count by a small number of tokens. Always ≤ `output_tokens`;
+              `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
           - `ServerToolUse BetaServerToolUsage`
 
@@ -33439,6 +34219,8 @@ func main() {
 
                 - `const BetaWebFetchToolResultErrorCodeURLNotAllowed BetaWebFetchToolResultErrorCode = "url_not_allowed"`
 
+                - `const BetaWebFetchToolResultErrorCodeURLNotInPriorContext BetaWebFetchToolResultErrorCode = "url_not_in_prior_context"`
+
                 - `const BetaWebFetchToolResultErrorCodeURLNotAccessible BetaWebFetchToolResultErrorCode = "url_not_accessible"`
 
                 - `const BetaWebFetchToolResultErrorCodeUnsupportedContentType BetaWebFetchToolResultErrorCode = "unsupported_content_type"`
@@ -33555,6 +34337,10 @@ func main() {
 
             - `type BetaAdvisorResultBlock struct{…}`
 
+              - `StopReason string`
+
+                The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+
               - `Text string`
 
               - `Type AdvisorResult`
@@ -33566,6 +34352,10 @@ func main() {
               - `EncryptedContent string`
 
                 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+              - `StopReason string`
+
+                The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
               - `Type AdvisorRedactedResult`
 
@@ -34000,6 +34790,10 @@ func main() {
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+          - `const ModelClaudeOpus4_8 Model = "claude-opus-4-8"`
+
+            Frontier intelligence for long-running agents and coding
+
           - `const ModelClaudeOpus4_7 Model = "claude-opus-4-7"`
 
             Frontier intelligence for long-running agents and coding
@@ -34296,6 +35090,26 @@ func main() {
         - `OutputTokens int64`
 
           The number of output tokens which were used.
+
+        - `OutputTokensDetails BetaUsageOutputTokensDetails`
+
+          Breakdown of output tokens by category.
+
+          `output_tokens` remains the inclusive, authoritative total used for billing.
+          This object provides a read-only decomposition for observability — for example,
+          how many of the billed output tokens were spent on internal reasoning that may
+          have been summarized before being returned to you.
+
+          - `ThinkingTokens int64`
+
+            Number of output tokens the model generated as internal reasoning, including
+            the thinking-block delimiter tokens.
+
+            Reflects the raw reasoning the model produced, not the (possibly shorter)
+            summarized thinking text returned in the response body. Computed by
+            re-tokenizing the raw reasoning text, so it may differ from the model's exact
+            generation count by a small number of tokens. Always ≤ `output_tokens`;
+            `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
         - `ServerToolUse BetaServerToolUsage`
 
@@ -34802,6 +35616,8 @@ func main() {
 
               - `const BetaWebFetchToolResultErrorCodeURLNotAllowed BetaWebFetchToolResultErrorCode = "url_not_allowed"`
 
+              - `const BetaWebFetchToolResultErrorCodeURLNotInPriorContext BetaWebFetchToolResultErrorCode = "url_not_in_prior_context"`
+
               - `const BetaWebFetchToolResultErrorCodeURLNotAccessible BetaWebFetchToolResultErrorCode = "url_not_accessible"`
 
               - `const BetaWebFetchToolResultErrorCodeUnsupportedContentType BetaWebFetchToolResultErrorCode = "unsupported_content_type"`
@@ -34918,6 +35734,10 @@ func main() {
 
           - `type BetaAdvisorResultBlock struct{…}`
 
+            - `StopReason string`
+
+              The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+
             - `Text string`
 
             - `Type AdvisorResult`
@@ -34929,6 +35749,10 @@ func main() {
             - `EncryptedContent string`
 
               Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+            - `StopReason string`
+
+              The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
             - `Type AdvisorRedactedResult`
 
@@ -35363,6 +36187,10 @@ func main() {
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+        - `const ModelClaudeOpus4_8 Model = "claude-opus-4-8"`
+
+          Frontier intelligence for long-running agents and coding
+
         - `const ModelClaudeOpus4_7 Model = "claude-opus-4-7"`
 
           Frontier intelligence for long-running agents and coding
@@ -35659,6 +36487,26 @@ func main() {
       - `OutputTokens int64`
 
         The number of output tokens which were used.
+
+      - `OutputTokensDetails BetaUsageOutputTokensDetails`
+
+        Breakdown of output tokens by category.
+
+        `output_tokens` remains the inclusive, authoritative total used for billing.
+        This object provides a read-only decomposition for observability — for example,
+        how many of the billed output tokens were spent on internal reasoning that may
+        have been summarized before being returned to you.
+
+        - `ThinkingTokens int64`
+
+          Number of output tokens the model generated as internal reasoning, including
+          the thinking-block delimiter tokens.
+
+          Reflects the raw reasoning the model produced, not the (possibly shorter)
+          summarized thinking text returned in the response body. Computed by
+          re-tokenizing the raw reasoning text, so it may differ from the model's exact
+          generation count by a small number of tokens. Always ≤ `output_tokens`;
+          `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
       - `ServerToolUse BetaServerToolUsage`
 
@@ -36073,6 +36921,10 @@ Create Agent
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
+
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -36564,6 +37416,10 @@ List Agents
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `type BetaManagedAgentsAgent struct{…}`
@@ -37041,6 +37897,10 @@ Get Agent
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
+
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -37827,6 +38687,10 @@ Update Agent
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `type BetaManagedAgentsAgent struct{…}`
@@ -38299,6 +39163,10 @@ Archive Agent
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
+
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -40515,6 +41383,10 @@ List Agent Versions
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `type BetaManagedAgentsAgent struct{…}`
@@ -41115,6 +41987,10 @@ Create a new environment with the specified configuration.
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `type BetaEnvironment struct{…}`
@@ -41415,6 +42291,10 @@ List environments with pagination support.
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `type BetaEnvironment struct{…}`
@@ -41709,6 +42589,10 @@ Retrieve a specific environment by ID.
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
+
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -42126,6 +43010,10 @@ Update an existing environment's configuration.
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `type BetaEnvironment struct{…}`
@@ -42420,6 +43308,10 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `type BetaEnvironmentDeleteResponse struct{…}`
@@ -42547,6 +43439,10 @@ Archive an environment by ID. Archived environments cannot be used to create new
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
+
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -43343,6 +44239,10 @@ Retrieve detailed information about a specific work item.
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `type BetaSelfHostedWork struct{…}`
@@ -43560,6 +44460,10 @@ Long poll for work items in the queue.
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
+
   - `AnthropicWorkerID param.Field[string]`
 
     Header param: Unique identifier for the specific worker polling, used to track aggregated environment-level work metrics in Console
@@ -43776,6 +44680,10 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
+
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -43998,6 +44906,10 @@ Record a heartbeat for a work item to maintain the lease.
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `type BetaSelfHostedWorkHeartbeatResponse struct{…}`
@@ -44160,6 +45072,10 @@ Stop a work item, initiating graceful or forced shutdown.
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
+
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -44380,6 +45296,10 @@ List work items in an environment.
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
+
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -44603,6 +45523,10 @@ Update work item metadata with merge semantics.
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `type BetaSelfHostedWork struct{…}`
@@ -44814,6 +45738,10 @@ Get statistics about the work queue for an environment.
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
+
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -45358,6 +46286,10 @@ Create Session
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
+
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -46222,6 +47154,10 @@ List Sessions
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `type BetaManagedAgentsSession struct{…}`
@@ -47028,6 +47964,10 @@ Get Session
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
+
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -47851,6 +48791,10 @@ Update Session
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `type BetaManagedAgentsSession struct{…}`
@@ -48657,6 +49601,10 @@ Delete Session
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `type BetaManagedAgentsDeletedSession struct{…}`
@@ -48780,6 +49728,10 @@ Archive Session
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
+
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -51831,6 +52783,10 @@ List Events
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `type BetaManagedAgentsSessionEventUnion interface{…}`
@@ -54032,6 +54988,10 @@ Send Events
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `type BetaManagedAgentsSendSessionEvents struct{…}`
@@ -54576,6 +55536,10 @@ Stream Events
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
+
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -64197,6 +65161,10 @@ Add Session Resource
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `type BetaManagedAgentsFileResource struct{…}`
@@ -64345,6 +65313,10 @@ List Session Resources
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
+
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -64587,6 +65559,10 @@ Get Session Resource
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `type BetaSessionResourceGetResponseUnion interface{…}`
@@ -64819,6 +65795,10 @@ Update Session Resource
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `type BetaSessionResourceUpdateResponseUnion interface{…}`
@@ -65047,6 +66027,10 @@ Delete Session Resource
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
+
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -65403,6 +66387,10 @@ List Session Threads
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
+
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -65941,6 +66929,10 @@ Get Session Thread
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `type BetaManagedAgentsSessionThread struct{…}`
@@ -66472,6 +67464,10 @@ Archive Session Thread
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
+
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -69153,6 +70149,10 @@ List Session Thread Events
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `type BetaManagedAgentsSessionEventUnion interface{…}`
@@ -71004,6 +72004,10 @@ Stream Session Thread Events
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
+
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -72859,6 +73863,10 @@ Create Vault
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `type BetaManagedAgentsVault struct{…}`
@@ -73018,6 +74026,10 @@ List Vaults
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `type BetaManagedAgentsVault struct{…}`
@@ -73171,6 +74183,10 @@ Get Vault
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
+
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -73333,6 +74349,10 @@ Update Vault
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `type BetaManagedAgentsVault struct{…}`
@@ -73486,6 +74506,10 @@ Delete Vault
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `type BetaManagedAgentsDeletedVault struct{…}`
@@ -73611,6 +74635,10 @@ Archive Vault
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
+
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -73925,6 +74953,10 @@ Create Credential
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `type BetaManagedAgentsCredential struct{…}`
@@ -74185,6 +75217,10 @@ List Credentials
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `type BetaManagedAgentsCredential struct{…}`
@@ -74435,6 +75471,10 @@ Get Credential
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
+
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -74762,6 +75802,10 @@ Update Credential
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `type BetaManagedAgentsCredential struct{…}`
@@ -75008,6 +76052,10 @@ Delete Credential
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `type BetaManagedAgentsDeletedCredential struct{…}`
@@ -75137,6 +76185,10 @@ Archive Credential
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
+
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -75383,6 +76435,10 @@ Validate Credential
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
+
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -76436,6 +77492,10 @@ Create a memory store
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `type BetaManagedAgentsMemoryStore struct{…}`
@@ -76608,6 +77668,10 @@ List memory stores
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `type BetaManagedAgentsMemoryStore struct{…}`
@@ -76766,6 +77830,10 @@ Retrieve a memory store
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
+
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -76937,6 +78005,10 @@ Update a memory store
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `type BetaManagedAgentsMemoryStore struct{…}`
@@ -77095,6 +78167,10 @@ Delete a memory store
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `type BetaManagedAgentsDeletedMemoryStore struct{…}`
@@ -77220,6 +78296,10 @@ Archive a memory store
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
+
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -77447,6 +78527,10 @@ Create a memory
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `type BetaManagedAgentsMemory struct{…}`
@@ -77646,6 +78730,10 @@ List memories
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `type BetaManagedAgentsMemoryListItemUnion interface{…}`
@@ -77841,6 +78929,10 @@ Retrieve a memory
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `type BetaManagedAgentsMemory struct{…}`
@@ -78027,6 +79119,10 @@ Update a memory
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `type BetaManagedAgentsMemory struct{…}`
@@ -78200,6 +79296,10 @@ Delete a memory
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
+
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -78679,6 +79779,10 @@ List memory versions
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `type BetaManagedAgentsMemoryVersion struct{…}`
@@ -78921,6 +80025,10 @@ Retrieve a memory version
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `type BetaManagedAgentsMemoryVersion struct{…}`
@@ -79153,6 +80261,10 @@ Redact a memory version
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
+
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -79585,6 +80697,10 @@ Upload File
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `type FileMetadata struct{…}`
@@ -79772,6 +80888,10 @@ List Files
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `type FileMetadata struct{…}`
@@ -79950,6 +81070,10 @@ Download File
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `type BetaFileDownloadResponse interface{…}`
@@ -80058,6 +81182,10 @@ Get File Metadata
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
+
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -80233,6 +81361,10 @@ Delete File
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
+
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -80458,6 +81590,10 @@ Create Skill
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `type BetaSkillNewResponse struct{…}`
@@ -80635,6 +81771,10 @@ List Skills
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `type BetaSkillListResponse struct{…}`
@@ -80803,6 +81943,10 @@ Get Skill
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `type BetaSkillGetResponse struct{…}`
@@ -80969,6 +82113,10 @@ Delete Skill
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `type BetaSkillDeleteResponse struct{…}`
@@ -81108,6 +82256,10 @@ Create Skill Version
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
+
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -81288,6 +82440,10 @@ List Skill Versions
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
+
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -81471,6 +82627,10 @@ Download a skill version's content as a zip archive.
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `type BetaSkillVersionDownloadResponse interface{…}`
@@ -81587,6 +82747,10 @@ Get Skill Version
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
+
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -81764,6 +82928,10 @@ Delete Skill Version
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `type BetaSkillVersionDeleteResponse struct{…}`
@@ -81913,6 +83081,10 @@ Create User Profile
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
+
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -82105,6 +83277,10 @@ List User Profiles
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `type BetaUserProfile struct{…}`
@@ -82286,6 +83462,10 @@ Get User Profile
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
+
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -82490,6 +83670,10 @@ Update User Profile
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
 
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
+
 ### Returns
 
 - `type BetaUserProfile struct{…}`
@@ -82670,6 +83854,10 @@ Create Enrollment URL
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
+
+      - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+      - `const AnthropicBetaMidConversationSystem2026_04_07 AnthropicBeta = "mid-conversation-system-2026-04-07"`
 
 ### Returns
 

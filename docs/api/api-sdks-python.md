@@ -63,7 +63,7 @@ message = client.messages.create(
             "content": "Hello, Claude",
         }
     ],
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
 )
 print(message.content)
 ```
@@ -95,7 +95,7 @@ async def main() -> None:
                 "content": "Hello, Claude",
             }
         ],
-        model="claude-opus-4-7",
+        model="claude-opus-4-8",
     )
     print(message.content)
 
@@ -126,7 +126,7 @@ async def main() -> None:
                     "content": "Hello, Claude",
                 }
             ],
-            model="claude-opus-4-7",
+            model="claude-opus-4-8",
         )
         print(message.content)
 
@@ -151,7 +151,7 @@ stream = client.messages.create(
             "content": "Hello, Claude",
         }
     ],
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     stream=True,
 )
 for event in stream:
@@ -173,7 +173,7 @@ stream = await client.messages.create(
             "content": "Hello, Claude",
         }
     ],
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     stream=True,
 )
 async for event in stream:
@@ -200,7 +200,7 @@ async def main() -> None:
                 "content": "Say hello there!",
             }
         ],
-        model="claude-opus-4-7",
+        model="claude-opus-4-8",
     ) as stream:
         async for text in stream.text_stream:
             print(text, end="", flush=True)
@@ -231,7 +231,7 @@ You can also count tokens before making a request:
 
 ```python
 count = client.messages.count_tokens(
-    model="claude-opus-4-7", messages=[{"role": "user", "content": "Hello, world"}]
+    model="claude-opus-4-8", messages=[{"role": "user", "content": "Hello, world"}]
 )
 print(count.input_tokens)  # 10
 ```
@@ -272,7 +272,7 @@ def get_weather(location: str) -> str:
 # Use the tool_runner to automatically handle tool calls
 runner = client.beta.messages.tool_runner(
     max_tokens=1024,
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     tools=[get_weather],
     messages=[
         {"role": "user", "content": "What is the weather in SF?"},
@@ -298,7 +298,7 @@ client.messages.batches.create(
         {
             "custom_id": "my-first-request",
             "params": {
-                "model": "claude-opus-4-7",
+                "model": "claude-opus-4-8",
                 "max_tokens": 1024,
                 "messages": [{"role": "user", "content": "Hello, world"}],
             },
@@ -306,7 +306,7 @@ client.messages.batches.create(
         {
             "custom_id": "my-second-request",
             "params": {
-                "model": "claude-opus-4-7",
+                "model": "claude-opus-4-8",
                 "max_tokens": 1024,
                 "messages": [{"role": "user", "content": "Hi again, friend"}],
             },
@@ -376,7 +376,7 @@ try:
                 "content": "Hello, Claude",
             }
         ],
-        model="claude-opus-4-7",
+        model="claude-opus-4-8",
     )
 except anthropic.APIConnectionError as e:
     print("The server could not be reached")
@@ -413,7 +413,7 @@ All object responses in the SDK provide a `_request_id` property which is added 
 message = client.messages.create(
     max_tokens=1024,
     messages=[{"role": "user", "content": "Hello, Claude"}],
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
 )
 print(message._request_id)  # e.g., req_018EeWyXxfu5pfWkrYcMdjWG
 ```
@@ -440,7 +440,7 @@ client = Anthropic(
 client.with_options(max_retries=5).messages.create(
     max_tokens=1024,
     messages=[{"role": "user", "content": "Hello, Claude"}],
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
 )
 ```
 
@@ -466,7 +466,7 @@ client = Anthropic(
 client.with_options(timeout=5.0).messages.create(
     max_tokens=1024,
     messages=[{"role": "user", "content": "Hello, Claude"}],
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
 )
 ```
 
@@ -570,7 +570,7 @@ client = Anthropic(
 client.messages.with_raw_response.create(
     max_tokens=1024,
     messages=[{"role": "user", "content": "Hello, Claude"}],
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     extra_headers={"anthropic-version": "My-Custom-Value"},
 )
 ```
@@ -603,7 +603,7 @@ In responses, you can distinguish between fields that are explicitly `null` vers
 
 ```python nocheck
 response = client.messages.create(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=1024,
     messages=[{"role": "user", "content": "Hello"}],
 )
@@ -628,7 +628,7 @@ client = Anthropic()
 response = client.messages.with_raw_response.create(
     max_tokens=1024,
     messages=[{"role": "user", "content": "Hello, Claude"}],
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
 )
 
 print(response.headers.get("request-id"))
@@ -648,7 +648,7 @@ The `.with_raw_response` approach eagerly reads the full response body when you 
 with client.messages.with_streaming_response.create(
     max_tokens=1024,
     messages=[{"role": "user", "content": "Hello, Claude"}],
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
 ) as response:
     print(response.headers.get("request-id"))
 
@@ -755,7 +755,7 @@ from anthropic import Anthropic
 client = Anthropic()
 
 response = client.beta.messages.create(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=1024,
     messages=[
         {

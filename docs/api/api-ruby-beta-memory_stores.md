@@ -34,7 +34,7 @@ Create a memory store
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 22 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 24 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -85,6 +85,10 @@ Create a memory store
     - `:"managed-agents-2026-04-01"`
 
     - `:"cache-diagnosis-2026-04-07"`
+
+    - `:"thinking-token-count-2026-05-13"`
+
+    - `:"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -189,7 +193,7 @@ List memory stores
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 22 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 24 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -240,6 +244,10 @@ List memory stores
     - `:"managed-agents-2026-04-01"`
 
     - `:"cache-diagnosis-2026-04-07"`
+
+    - `:"thinking-token-count-2026-05-13"`
+
+    - `:"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -331,7 +339,7 @@ Retrieve a memory store
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 22 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 24 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -382,6 +390,10 @@ Retrieve a memory store
     - `:"managed-agents-2026-04-01"`
 
     - `:"cache-diagnosis-2026-04-07"`
+
+    - `:"thinking-token-count-2026-05-13"`
+
+    - `:"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -480,7 +492,7 @@ Update a memory store
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 22 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 24 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -531,6 +543,10 @@ Update a memory store
     - `:"managed-agents-2026-04-01"`
 
     - `:"cache-diagnosis-2026-04-07"`
+
+    - `:"thinking-token-count-2026-05-13"`
+
+    - `:"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -617,7 +633,7 @@ Delete a memory store
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 22 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 24 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -668,6 +684,10 @@ Delete a memory store
     - `:"managed-agents-2026-04-01"`
 
     - `:"cache-diagnosis-2026-04-07"`
+
+    - `:"thinking-token-count-2026-05-13"`
+
+    - `:"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -722,7 +742,7 @@ Archive a memory store
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 22 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 24 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -773,6 +793,10 @@ Archive a memory store
     - `:"managed-agents-2026-04-01"`
 
     - `:"cache-diagnosis-2026-04-07"`
+
+    - `:"thinking-token-count-2026-05-13"`
+
+    - `:"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -931,7 +955,7 @@ Create a memory
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 22 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 24 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -982,6 +1006,10 @@ Create a memory
     - `:"managed-agents-2026-04-01"`
 
     - `:"cache-diagnosis-2026-04-07"`
+
+    - `:"thinking-token-count-2026-05-13"`
+
+    - `:"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -1112,7 +1140,7 @@ List memories
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 22 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 24 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -1163,6 +1191,10 @@ List memories
     - `:"managed-agents-2026-04-01"`
 
     - `:"cache-diagnosis-2026-04-07"`
+
+    - `:"thinking-token-count-2026-05-13"`
+
+    - `:"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -1288,7 +1320,7 @@ Retrieve a memory
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 22 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 24 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -1339,6 +1371,10 @@ Retrieve a memory
     - `:"managed-agents-2026-04-01"`
 
     - `:"cache-diagnosis-2026-04-07"`
+
+    - `:"thinking-token-count-2026-05-13"`
+
+    - `:"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -1463,7 +1499,7 @@ Update a memory
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 22 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 24 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -1514,6 +1550,10 @@ Update a memory
     - `:"managed-agents-2026-04-01"`
 
     - `:"cache-diagnosis-2026-04-07"`
+
+    - `:"thinking-token-count-2026-05-13"`
+
+    - `:"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -1614,7 +1654,7 @@ Delete a memory
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 22 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 24 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -1665,6 +1705,10 @@ Delete a memory
     - `:"managed-agents-2026-04-01"`
 
     - `:"cache-diagnosis-2026-04-07"`
+
+    - `:"thinking-token-count-2026-05-13"`
+
+    - `:"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -2081,7 +2125,7 @@ List memory versions
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 22 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 24 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -2132,6 +2176,10 @@ List memory versions
     - `:"managed-agents-2026-04-01"`
 
     - `:"cache-diagnosis-2026-04-07"`
+
+    - `:"thinking-token-count-2026-05-13"`
+
+    - `:"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -2304,7 +2352,7 @@ Retrieve a memory version
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 22 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 24 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -2355,6 +2403,10 @@ Retrieve a memory version
     - `:"managed-agents-2026-04-01"`
 
     - `:"cache-diagnosis-2026-04-07"`
+
+    - `:"thinking-token-count-2026-05-13"`
+
+    - `:"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -2517,7 +2569,7 @@ Redact a memory version
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 22 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 24 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -2568,6 +2620,10 @@ Redact a memory version
     - `:"managed-agents-2026-04-01"`
 
     - `:"cache-diagnosis-2026-04-07"`
+
+    - `:"thinking-token-count-2026-05-13"`
+
+    - `:"mid-conversation-system-2026-04-07"`
 
 ### Returns
 

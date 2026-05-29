@@ -48,7 +48,7 @@ $client = new Client(
 $message = $client->messages->create(
   maxTokens: 1024,
   messages: [['role' => 'user', 'content' => 'Hello, Claude']],
-  model: 'claude-opus-4-7',
+  model: 'claude-opus-4-8',
 );
 
 echo $message->content[0]->text;
@@ -78,7 +78,7 @@ $client = new Client(
 $stream = $client->messages->createStream(
   maxTokens: 1024,
   messages: [['role' => 'user', 'content' => 'Hello, Claude']],
-  model: 'claude-opus-4-7',
+  model: 'claude-opus-4-8',
 );
 
 foreach ($stream as $event) {
@@ -112,7 +112,7 @@ try {
   $message = $client->messages->create(
     maxTokens: 1024,
     messages: [['role' => 'user', 'content' => 'Hello, Claude']],
-    model: 'claude-opus-4-7',
+    model: 'claude-opus-4-8',
   );
 } catch (APIConnectionException $e) {
   echo "The server could not be reached", PHP_EOL;
@@ -162,7 +162,7 @@ $client = new Client(requestOptions: RequestOptions::with(maxRetries: 0));
 $result = $client->messages->create(
   maxTokens: 1024,
   messages: [['role' => 'user', 'content' => 'Hello, Claude']],
-  model: 'claude-opus-4-7',
+  model: 'claude-opus-4-8',
   requestOptions: RequestOptions::with(maxRetries: 5),
 );
 ```
@@ -215,7 +215,7 @@ $client = new Client();
 $message = $client->messages->create(
   maxTokens: 1024,
   messages: [['role' => 'user', 'content' => 'Hello, Claude']],
-  model: 'claude-opus-4-7',
+  model: 'claude-opus-4-8',
   requestOptions: RequestOptions::with(
     extraQueryParams: ['my_query_parameter' => 'value'],
     extraBodyParams: ['my_body_parameter' => 'value'],

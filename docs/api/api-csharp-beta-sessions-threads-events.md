@@ -88,6 +88,10 @@ List Session Thread Events
 
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
 
+    - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
+
+    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
+
 ### Returns
 
 - `class EventListPageResponse:`
@@ -1922,6 +1926,10 @@ Stream Session Thread Events
     - `"managed-agents-2026-04-01"ManagedAgents2026_04_01`
 
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
+
+    - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
+
+    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
 
 ### Returns
 

@@ -32,7 +32,7 @@ List Session Threads
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 22 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 24 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -83,6 +83,10 @@ List Session Threads
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -560,7 +564,7 @@ Get Session Thread
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 22 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 24 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -611,6 +615,10 @@ Get Session Thread
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -1083,7 +1091,7 @@ Archive Session Thread
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 22 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 24 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -1134,6 +1142,10 @@ Archive Session Thread
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -3774,7 +3786,7 @@ List Session Thread Events
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 22 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 24 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -3825,6 +3837,10 @@ List Session Thread Events
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -5618,7 +5634,7 @@ Stream Session Thread Events
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 22 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 24 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -5669,6 +5685,10 @@ Stream Session Thread Events
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
