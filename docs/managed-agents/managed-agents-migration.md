@@ -25,8 +25,8 @@ If you built an agent by calling `messages.create` in a `while` loop, executing 
 | Before | After |
 | --- | --- |
 | You maintain the conversation history array and pass it back on every turn. | The session stores history server-side. Send events, receive events. |
-| You iterate `tool_use` content blocks, run each tool, and loop back with `tool_result` messages. | Pre-built tools run inside the container automatically. You only handle custom tools through `agent.custom_tool_use` events. |
-| You provision your own sandbox for running agent-generated code. | The session container handles code execution, file operations, and bash. |
+| You iterate `tool_use` content blocks, run each tool, and loop back with `tool_result` messages. | Pre-built tools run inside the sandbox automatically. You only handle custom tools through `agent.custom_tool_use` events. |
+| You provision your own sandbox for running agent-generated code. | The session sandbox handles code execution, file operations, and bash. |
 | You decide when the loop is done. | The session emits `session.status_idle` when the agent has nothing more to do. |
 
 ### Code comparison
@@ -614,7 +614,7 @@ If you built with the [Claude Agent SDK](https://code.claude.com/docs/en/agent-s
 | `ClaudeAgentOptions(...)` constructed per run | `client.beta.agents.create(...)` once; the Agent is persisted and versioned server-side. See [Agent setup](./managed-agents-agent-setup.md). |
 | `async with ClaudeSDKClient(...)` or `query(...)` | `client.beta.sessions.create(...)` then send and receive [events](./managed-agents-events-and-streaming.md). |
 | `@tool`-decorated functions dispatched automatically by the SDK | Declare as `{"type": "custom", ...}` on the Agent; your client handles `agent.custom_tool_use` events and replies with `user.custom_tool_result`. See [Tools](./managed-agents-tools.md). |
-| Built-in tools run in your process against your filesystem | `{"type": "agent_toolset_20260401"}` runs the same tools inside the session container against `/workspace`. |
+| Built-in tools run in your process against your filesystem | `{"type": "agent_toolset_20260401"}` runs the same tools inside the session sandbox against `/workspace`. |
 | `cwd`, `add_dirs` point at local paths | Upload or mount [files](./managed-agents-files.md) as session resources. |
 | `system_prompt` and the `CLAUDE.md` hierarchy | A single `system` string on the Agent. Each update produces a new server-side version; pin sessions to a specific version to promote or roll back without a deploy. See [Agent setup](./managed-agents-agent-setup.md). |
 | `mcp_servers` configured and authenticated in one place | Declare servers on the Agent; provide credentials through a [Vault](./managed-agents-vaults.md) on the Session. |

@@ -40,7 +40,7 @@ Claude Managed Agents is built around four concepts:
 | Concept | Description |
 |---------|-------------|
 | **Agent** | The model, system prompt, tools, MCP servers, and skills |
-| **Environment** | Configuration for where sessions run: an Anthropic-managed cloud container, or a self-hosted sandbox on your own infrastructure |
+| **Environment** | Configuration for where sessions run: an Anthropic-managed cloud sandbox, or a self-hosted sandbox on your own infrastructure |
 | **Session** | A running agent instance within an environment, performing a specific task and generating outputs |
 | **Events** | Messages exchanged between your application and the agent (user turns, tool results, status updates) |
 
@@ -51,7 +51,7 @@ Claude Managed Agents is built around four concepts:
     Define the model, system prompt, tools, MCP servers, and skills. Create the agent once and reference it by ID across sessions.
   </Step>
   <Step title="Create an environment">
-    Configure where the agent runs: a cloud container, or a [self-hosted sandbox](./managed-agents-self-hosted-sandboxes.md) on your own infrastructure.
+    Configure where the agent runs: a cloud sandbox, or a [self-hosted sandbox](./managed-agents-self-hosted-sandboxes.md) on your own infrastructure.
   </Step>
   <Step title="Start a session">
     Launch a session that references your agent and environment configuration.
@@ -69,7 +69,7 @@ Claude Managed Agents is built around four concepts:
 Claude Managed Agents is best for workloads that need:
 
 - **Long-running execution:** Tasks that run for minutes or hours with multiple tool calls
-- **Cloud infrastructure:** Secure containers with pre-installed packages and network access
+- **Cloud infrastructure:** Secure sandboxes with pre-installed packages and network access
 - **Self-hosted execution:** Sandboxes on infrastructure you control for compliance or data-residency requirements
 - **Minimal infrastructure:** No need to build your own agent loop, sandbox, or tool execution layer
 - **Stateful sessions:** Persistent filesystems and conversation history across multiple interactions
@@ -78,8 +78,8 @@ Claude Managed Agents is best for workloads that need:
 
 Claude Managed Agents gives Claude access to a set of built-in tools:
 
-- **Bash:** Run shell commands in the container
-- **File operations:** Read, write, edit, glob, and grep files in the container
+- **Bash:** Run shell commands in the sandbox
+- **File operations:** Read, write, edit, glob, and grep files in the sandbox
 - **Web search and fetch:** Search the web and retrieve content from URLs
 - **MCP servers:** Connect to external tool providers
 
@@ -98,7 +98,7 @@ To get started, you need:
 
 Certain features ([MCP tunnels](../agents-and-tools/agents-and-tools-mcp-tunnels-overview.md) and [dreaming](./managed-agents-dreams.md)) are in research preview. [Request access](https://claude.com/form/claude-managed-agents) to try them.
 
-Claude Managed Agents is stateful by design: sessions are long-running, resume cleanly after pauses, and store conversation history, container state, and outputs server-side. Because of this, Managed Agents is not currently eligible for [Zero Data Retention](../manage-claude/manage-claude-api-and-data-retention.md#zero-data-retention-zdr-scope) or HIPAA Business Associate Agreement (BAA) coverage. You retain control over this data: you can [delete sessions](./managed-agents-sessions.md#deleting-a-session), and separately delete any [files](../build-with-claude/build-with-claude-files.md#delete-a-file) you uploaded, at any time through the API. For eligibility across all features, see [API and data retention](../manage-claude/manage-claude-api-and-data-retention.md#feature-eligibility).
+Claude Managed Agents is stateful by design: sessions are long-running, resume cleanly after pauses, and store conversation history, sandbox state, and outputs server-side. Because of this, Managed Agents is not currently eligible for [Zero Data Retention](../manage-claude/manage-claude-api-and-data-retention.md#zero-data-retention-zdr-scope) or HIPAA Business Associate Agreement (BAA) coverage. You retain control over this data: you can [delete sessions](./managed-agents-sessions.md#deleting-a-session), and separately delete any [files](../build-with-claude/build-with-claude-files.md#delete-a-file) you uploaded, at any time through the API. For eligibility across all features, see [API and data retention](../manage-claude/manage-claude-api-and-data-retention.md#feature-eligibility).
 
 ## Rate limits
 

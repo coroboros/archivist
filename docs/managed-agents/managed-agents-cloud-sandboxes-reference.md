@@ -1,6 +1,6 @@
 ---
 title: "Cloud sandbox reference"
-source: "https://platform.claude.com/docs/en/managed-agents/cloud-containers"
+source: "https://platform.claude.com/docs/en/managed-agents/cloud-sandboxes-reference"
 category: "managed-agents"
 generated: true
 ---

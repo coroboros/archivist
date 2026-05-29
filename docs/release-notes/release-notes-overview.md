@@ -16,6 +16,9 @@ For release notes on Claude Apps, see the [Release notes for Claude Apps in the 
 For updates to Claude Code, see the [complete CHANGELOG.md](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md) in the `claude-code` repository.
 </Tip>
 
+### May 29, 2026
+- Claude Managed Agents [webhooks](../managed-agents/managed-agents-webhooks.md), [multiagent orchestration](../managed-agents/managed-agents-multi-agent.md), and [self-hosted sandboxes](../managed-agents/managed-agents-self-hosted-sandboxes.md) are now available on [Claude Platform on AWS](../build-with-claude/build-with-claude-claude-platform-on-aws.md). See [IAM actions for Claude Platform on AWS](https://platform.claude.com/docs/en/api/claude-platform-on-aws-iam-actions.md) for the new IAM actions and the `AnthropicSelfHostedEnvironmentAccess` managed policy.
+
 ### May 28, 2026
 - We've launched **<NextOpus />** (<NextOpusId />), our most capable generally available model. <NextOpus /> supports a [1M token context window](../build-with-claude/build-with-claude-context-windows.md) by default, 128k max output tokens, and the same set of tools and platform features as Claude Opus 4.7. See [What's new in <NextOpus />](https://platform.claude.com/docs/en/about-claude/models/whats-new-claude-4-8.md) for capability improvements, new features, and migration guidance.
 - We've launched [mid-conversation system messages](../build-with-claude/build-with-claude-mid-conversation-system-messages.md). On <NextOpus />, you can send `role: "system"` messages at non-first positions in the `messages` array, preserving prompt cache hits when instructions change during a long-running session. No beta header is required.
