@@ -1,5 +1,17 @@
 # Changelog
 
+## 🤖 v1.4.25 - 30/05/2026
+
+File Changes:
+
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-changelog.md`
+- Modified: `docs/code/code-mcp.md`
+- Modified: `docs/code/code-overview.md`
+- Modified: `docs/code/code-permissions.md`
+- Modified: `docs/code/code-skills.md`
+
+
 ## 🤖 v1.4.24 - 30/05/2026
 
 File Changes:
