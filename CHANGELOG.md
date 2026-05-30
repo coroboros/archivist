@@ -1,5 +1,58 @@
 # Changelog
 
+## 🤖 v1.4.24 - 30/05/2026
+
+File Changes:
+
+- Modified: `docs/agents-and-tools/agents-and-tools-README.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-mcp-connector.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-remote-mcp-servers.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-advisor-tool.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-computer-use-tool.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-overview.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-web-fetch-tool.md`
+- Modified: `docs/build-with-claude/build-with-claude-README.md`
+- Modified: `docs/build-with-claude/build-with-claude-adaptive-thinking.md`
+- Modified: `docs/build-with-claude/build-with-claude-context-windows.md`
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-agent-view.md`
+- Modified: `docs/code/code-changelog.md`
+- Modified: `docs/code/code-cli-reference.md`
+- Modified: `docs/code/code-desktop.md`
+- Modified: `docs/code/code-env-vars.md`
+- Modified: `docs/code/code-errors.md`
+- Modified: `docs/code/code-hosting.md`
+- Modified: `docs/code/code-interactive-mode.md`
+- Modified: `docs/code/code-keybindings.md`
+- Modified: `docs/code/code-mcp.md`
+- Modified: `docs/code/code-memory.md`
+- Modified: `docs/code/code-monitoring-usage.md`
+- Modified: `docs/code/code-permission-modes.md`
+- Modified: `docs/code/code-permissions.md`
+- Modified: `docs/code/code-plugin-marketplaces.md`
+- Modified: `docs/code/code-plugins-reference.md`
+- Modified: `docs/code/code-plugins.md`
+- Modified: `docs/code/code-quickstart.md`
+- Modified: `docs/code/code-settings.md`
+- Modified: `docs/code/code-skills.md`
+- Modified: `docs/code/code-statusline.md`
+- Modified: `docs/code/code-sub-agents.md`
+- Modified: `docs/code/code-subagents.md`
+- Modified: `docs/code/code-terminal-config.md`
+- Modified: `docs/code/code-tools-reference.md`
+- Modified: `docs/code/code-typescript.md`
+- Modified: `docs/code/code-user-input.md`
+- Modified: `docs/code/code-workflows.md`
+- Modified: `docs/code/code-worktrees.md`
+- Modified: `docs/managed-agents/managed-agents-README.md`
+- Modified: `docs/managed-agents/managed-agents-agent-setup.md`
+- Modified: `docs/managed-agents/managed-agents-events-and-streaming.md`
+- Modified: `docs/managed-agents/managed-agents-github.md`
+- Modified: `docs/managed-agents/managed-agents-memory.md`
+- Modified: `docs/managed-agents/managed-agents-multi-agent.md`
+- Modified: `docs/managed-agents/managed-agents-quickstart.md`
+
+
 ## 🤖 v1.4.23 - 29/05/2026
 
 File Changes:

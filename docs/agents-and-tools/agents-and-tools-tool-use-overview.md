@@ -83,6 +83,18 @@ Tool access is one of the highest-leverage primitives you can give an agent. On 
 
 ---
 
+## When Claude uses tools
+
+With the default `tool_choice` of `{"type": "auto"}`, Claude decides on each turn whether to call a tool or respond directly. It calls a tool when the request maps to that tool's described capability and the answer isn't already in context; it responds directly for stable knowledge, creative tasks, and conversational turns.
+
+This boundary is steerable through your system prompt. If Claude isn't calling tools when you expect, a light instruction like `"Use the tools to investigate before responding."` measurably increases tool use; a stronger form like `"Always call a tool first before responding."` pushes further. Conversely, `"Use your judgment about whether to call a tool or respond directly."` keeps triggering behavior conservative.
+
+For a hard guarantee rather than a nudge, use [`tool_choice`](./agents-and-tools-tool-use-define-tools.md#forcing-tool-use).
+
+Each server tool's page describes its own trigger boundary in more detail. See for example [the web search tool](./agents-and-tools-tool-use-web-search-tool.md) or [the code execution tool](./agents-and-tools-tool-use-code-execution-tool.md).
+
+---
+
 ## Tool use examples
 
 For a complete hands-on walkthrough, see the [tutorial](./agents-and-tools-tool-use-build-a-tool-using-agent.md). For reference examples of individual concepts, see [Define tools](./agents-and-tools-tool-use-define-tools.md) and [Handle tool calls](./agents-and-tools-tool-use-handle-tool-calls.md).

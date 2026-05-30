@@ -99,6 +99,8 @@ Claude 4 models support [interleaved thinking](./build-with-claude-extended-thin
 For more information about using tools with extended thinking, see the [extended thinking guide](./build-with-claude-extended-thinking.md#extended-thinking-with-tool-use).
 </Note>
 
+Claude's tool selection is designed to hold with large input documents — choosing the right tool (or correctly abstaining) when the conversation includes 100K+ tokens of non-tool context. For reducing context consumed by the tools themselves, see [Manage tool context](../agents-and-tools/agents-and-tools-tool-use-manage-tool-context.md), or defer tool definitions with the [tool search tool](../agents-and-tools/agents-and-tools-tool-use-tool-search-tool.md).
+
 <NextOpus />, [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6 have a 1M-token context window on the Claude API, Amazon Bedrock, and Vertex AI. On Microsoft Foundry, <NextOpus /> has a 200k-token context window. Other Claude models, including Claude Sonnet 4.5 and Sonnet 4 (deprecated), have a 200k-token context window.
 
 A single request can include up to 600 images or PDF pages (100 for models with a 200k-token context window). When sending many images or large documents, you may approach [request size limits](../api/api-overview.md#request-size-limits) before the token limit.

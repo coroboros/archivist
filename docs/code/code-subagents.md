@@ -583,6 +583,12 @@ This example creates a read-only analysis agent that can examine code but cannot
 | Code modification  | `Read`, `Edit`, `Write`, `Grep`, `Glob` | Full read/write access without command execution    |
 | Full access        | All tools                               | Inherits all tools from parent (omit `tools` field) |
 
+## Scale up with dynamic workflows
+
+Subagents work well for a few delegated tasks per turn. For runs that coordinate dozens to hundreds of agents, use the `Workflow` tool, which moves the orchestration into a script the runtime executes outside the conversation context. See [dynamic workflows](./code-workflows.md) for how workflows differ from turn-by-turn subagent delegation.
+
+The `Workflow` tool is available in the TypeScript Agent SDK v0.3.149 and later. Include `Workflow` in `allowedTools` to auto-approve workflow runs. The tool input and output schemas are listed in the [TypeScript reference](./code-agent-sdk/typescript.md#workflow).
+
 ## Troubleshooting
 
 ### Claude not delegating to subagents
@@ -604,4 +610,5 @@ On Windows, subagents with very long prompts may fail due to command line length
 ## Related documentation
 
 * [Claude Code subagents](./code-sub-agents.md): comprehensive subagent documentation including filesystem-based definitions
+* [Dynamic workflows](./code-workflows.md): orchestrate many subagents from a script for jobs too large for one conversation
 * [SDK overview](./code-agent-sdk/overview.md): getting started with the Claude Agent SDK
