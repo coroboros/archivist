@@ -1,5 +1,14 @@
 # Changelog
 
+## 🤖 v1.4.27 - 31/05/2026
+
+File Changes:
+
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-hooks.md`
+- Modified: `docs/code/code-quickstart.md`
+
+
 ## 🤖 v1.4.26 - 31/05/2026
 
 File Changes:
