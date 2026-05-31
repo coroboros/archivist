@@ -1,5 +1,20 @@
 # Changelog
 
+## 🤖 v1.4.26 - 31/05/2026
+
+File Changes:
+
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-hooks.md`
+- Modified: `docs/code/code-mcp.md`
+- Modified: `docs/code/code-plugins.md`
+- Modified: `docs/code/code-quickstart.md`
+- Modified: `docs/code/code-skills.md`
+- Modified: `docs/code/code-whats-new.md`
+- Added: `docs/code/code-2026-w21.md`
+- Added: `docs/code/code-2026-w22.md`
+
+
 ## 🤖 v1.4.25 - 30/05/2026
 
 File Changes:
