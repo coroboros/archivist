@@ -1,5 +1,105 @@
 # Changelog
 
+## 🤖 v1.4.30 - 02/06/2026
+
+File Changes:
+
+- Modified: `docs/agents-and-tools/agents-and-tools-README.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-mcp-tunnels-console.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-mcp-tunnels-deploy-compose.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-mcp-tunnels-deploy-helm.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-mcp-tunnels-overview.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-mcp-tunnels-quickstart.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-mcp-tunnels-reference.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-mcp-tunnels-security.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-mcp-tunnels-troubleshooting.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-programmatic-tool-calling.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-tool-reference.md`
+- Modified: `docs/api/api-README.md`
+- Modified: `docs/api/api-admin-workspaces-archive.md`
+- Modified: `docs/api/api-admin-workspaces-create.md`
+- Modified: `docs/api/api-admin-workspaces-list.md`
+- Modified: `docs/api/api-admin-workspaces-retrieve.md`
+- Modified: `docs/api/api-admin-workspaces-update.md`
+- Modified: `docs/api/api-admin-workspaces.md`
+- Modified: `docs/api/api-admin.md`
+- Modified: `docs/build-with-claude/build-with-claude-README.md`
+- Modified: `docs/build-with-claude/build-with-claude-claude-platform-on-aws.md`
+- Modified: `docs/build-with-claude/build-with-claude-mid-conversation-system-messages.md`
+- Modified: `docs/build-with-claude/build-with-claude-structured-outputs.md`
+- Modified: `docs/build-with-claude/build-with-claude-workspaces.md`
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-agent-view.md`
+- Modified: `docs/code/code-changelog.md`
+- Modified: `docs/code/code-claude-code-features.md`
+- Modified: `docs/code/code-cli-reference.md`
+- Modified: `docs/code/code-desktop.md`
+- Modified: `docs/code/code-discover-plugins.md`
+- Modified: `docs/code/code-features-overview.md`
+- Modified: `docs/code/code-glossary.md`
+- Modified: `docs/code/code-goal.md`
+- Modified: `docs/code/code-hooks-guide.md`
+- Modified: `docs/code/code-hooks.md`
+- Modified: `docs/code/code-large-codebases.md`
+- Modified: `docs/code/code-mcp.md`
+- Modified: `docs/code/code-model-config.md`
+- Modified: `docs/code/code-overview.md`
+- Modified: `docs/code/code-permission-modes.md`
+- Modified: `docs/code/code-plugins-reference.md`
+- Modified: `docs/code/code-plugins.md`
+- Modified: `docs/code/code-prompt-caching.md`
+- Modified: `docs/code/code-python.md`
+- Modified: `docs/code/code-scheduled-tasks.md`
+- Modified: `docs/code/code-security-guidance.md`
+- Modified: `docs/code/code-sessions.md`
+- Modified: `docs/code/code-skills.md`
+- Modified: `docs/code/code-slash-commands.md`
+- Modified: `docs/code/code-streaming-output.md`
+- Modified: `docs/code/code-streaming-vs-single-mode.md`
+- Modified: `docs/code/code-typescript.md`
+- Modified: `docs/code/code-voice-dictation.md`
+- Modified: `docs/code/code-workflows.md`
+- Modified: `docs/manage-claude/manage-claude-README.md`
+- Modified: `docs/manage-claude/manage-claude-wif-reference.md`
+- Modified: `docs/manage-claude/manage-claude-workload-identity-federation.md`
+- Modified: `docs/manage-claude/manage-claude-workspaces.md`
+- Modified: `docs/managed-agents/managed-agents-README.md`
+- Modified: `docs/managed-agents/managed-agents-agent-setup.md`
+- Modified: `docs/managed-agents/managed-agents-cloud-containers.md`
+- Modified: `docs/managed-agents/managed-agents-cloud-sandboxes-reference.md`
+- Modified: `docs/managed-agents/managed-agents-define-outcomes.md`
+- Modified: `docs/managed-agents/managed-agents-environments.md`
+- Modified: `docs/managed-agents/managed-agents-events-and-streaming.md`
+- Modified: `docs/managed-agents/managed-agents-files.md`
+- Modified: `docs/managed-agents/managed-agents-github.md`
+- Modified: `docs/managed-agents/managed-agents-mcp-connector.md`
+- Modified: `docs/managed-agents/managed-agents-memory.md`
+- Modified: `docs/managed-agents/managed-agents-multi-agent.md`
+- Modified: `docs/managed-agents/managed-agents-overview.md`
+- Modified: `docs/managed-agents/managed-agents-permission-policies.md`
+- Modified: `docs/managed-agents/managed-agents-quickstart.md`
+- Modified: `docs/managed-agents/managed-agents-self-hosted-sandboxes-security.md`
+- Modified: `docs/managed-agents/managed-agents-self-hosted-sandboxes.md`
+- Modified: `docs/managed-agents/managed-agents-sessions.md`
+- Modified: `docs/managed-agents/managed-agents-tools.md`
+- Modified: `docs/managed-agents/managed-agents-vaults.md`
+- Added: `docs/agents-and-tools/agents-and-tools-mcp-tunnels-concepts.md`
+- Added: `docs/api/api-admin-external_keys-create.md`
+- Added: `docs/api/api-admin-external_keys-delete.md`
+- Added: `docs/api/api-admin-external_keys-list.md`
+- Added: `docs/api/api-admin-external_keys-retrieve.md`
+- Added: `docs/api/api-admin-external_keys-update.md`
+- Added: `docs/api/api-admin-external_keys-validate.md`
+- Added: `docs/api/api-admin-external_keys.md`
+- Added: `docs/code/code-mcp-quickstart.md`
+- Added: `docs/manage-claude/manage-claude-cmek-aws-kms.md`
+- Added: `docs/manage-claude/manage-claude-cmek-azure-key-vault.md`
+- Added: `docs/manage-claude/manage-claude-cmek-google-cloud-kms.md`
+- Added: `docs/manage-claude/manage-claude-cmek.md`
+- Added: `docs/managed-agents/managed-agents-reference.md`
+- Added: `docs/managed-agents/managed-agents-session-operations.md`
+
+
 ## 🤖 v1.4.29 - 01/06/2026
 
 File Changes:

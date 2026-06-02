@@ -50,7 +50,7 @@ The `/loop` [bundled skill](./code-commands.md) is the quickest way to run a pro
 | Prompt only               | `/loop check the deploy`    | Your prompt runs at an [interval Claude chooses](#let-claude-choose-the-interval) each iteration              |
 | Interval only, or nothing | `/loop`                     | The [built-in maintenance prompt](#run-the-built-in-maintenance-prompt) runs, or your `loop.md` if one exists |
 
-You can also pass another command as the prompt, for example `/loop 20m /review-pr 1234`, to re-run a packaged workflow each iteration.
+You can also pass another command as the prompt, for example `/loop 20m /review-pr 1234`, to re-run a saved skill or command each iteration.
 
 ### Run on a fixed interval
 
