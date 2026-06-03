@@ -2912,7 +2912,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       The number of output tokens which were used.
 
-    - `output_tokens_details: OutputTokensDetails{ thinking_tokens}`
+    - `output_tokens_details: OutputTokensDetails`
 
       Breakdown of output tokens by category.
 
@@ -9535,7 +9535,7 @@ puts(message_tokens_count)
 
       The number of output tokens which were used.
 
-    - `output_tokens_details: OutputTokensDetails{ thinking_tokens}`
+    - `output_tokens_details: OutputTokensDetails`
 
       Breakdown of output tokens by category.
 
@@ -10330,7 +10330,7 @@ puts(message_tokens_count)
 
     The cumulative number of output tokens which were used.
 
-  - `output_tokens_details: OutputTokensDetails{ thinking_tokens}`
+  - `output_tokens_details: OutputTokensDetails`
 
     Breakdown of output tokens by category.
 
@@ -11519,6 +11519,21 @@ puts(message_tokens_count)
 
       - `:json_schema`
 
+### Output Tokens Details
+
+- `class OutputTokensDetails`
+
+  - `thinking_tokens: Integer`
+
+    Number of output tokens the model generated as internal reasoning, including
+    the thinking-block delimiter tokens.
+
+    Reflects the raw reasoning the model produced, not the (possibly shorter)
+    summarized thinking text returned in the response body. Computed by
+    re-tokenizing the raw reasoning text, so it may differ from the model's exact
+    generation count by a small number of tokens. Always ≤ `output_tokens`;
+    `output_tokens - thinking_tokens` approximates the non-reasoning output.
+
 ### Plain Text Source
 
 - `class PlainTextSource`
@@ -12595,7 +12610,7 @@ puts(message_tokens_count)
 
       The cumulative number of output tokens which were used.
 
-    - `output_tokens_details: OutputTokensDetails{ thinking_tokens}`
+    - `output_tokens_details: OutputTokensDetails`
 
       Breakdown of output tokens by category.
 
@@ -13515,7 +13530,7 @@ puts(message_tokens_count)
 
         The number of output tokens which were used.
 
-      - `output_tokens_details: OutputTokensDetails{ thinking_tokens}`
+      - `output_tokens_details: OutputTokensDetails`
 
         Breakdown of output tokens by category.
 
@@ -14459,7 +14474,7 @@ puts(message_tokens_count)
 
           The number of output tokens which were used.
 
-        - `output_tokens_details: OutputTokensDetails{ thinking_tokens}`
+        - `output_tokens_details: OutputTokensDetails`
 
           Breakdown of output tokens by category.
 
@@ -14553,7 +14568,7 @@ puts(message_tokens_count)
 
         The cumulative number of output tokens which were used.
 
-      - `output_tokens_details: OutputTokensDetails{ thinking_tokens}`
+      - `output_tokens_details: OutputTokensDetails`
 
         Breakdown of output tokens by category.
 
@@ -14561,17 +14576,6 @@ puts(message_tokens_count)
         This object provides a read-only decomposition for observability — for example,
         how many of the billed output tokens were spent on internal reasoning that may
         have been summarized before being returned to you.
-
-        - `thinking_tokens: Integer`
-
-          Number of output tokens the model generated as internal reasoning, including
-          the thinking-block delimiter tokens.
-
-          Reflects the raw reasoning the model produced, not the (possibly shorter)
-          summarized thinking text returned in the response body. Computed by
-          re-tokenizing the raw reasoning text, so it may differ from the model's exact
-          generation count by a small number of tokens. Always ≤ `output_tokens`;
-          `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
       - `server_tool_use: ServerToolUsage`
 
@@ -18080,7 +18084,7 @@ puts(message_tokens_count)
 
     The number of output tokens which were used.
 
-  - `output_tokens_details: OutputTokensDetails{ thinking_tokens}`
+  - `output_tokens_details: OutputTokensDetails`
 
     Breakdown of output tokens by category.
 
@@ -23337,7 +23341,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             The number of output tokens which were used.
 
-          - `output_tokens_details: OutputTokensDetails{ thinking_tokens}`
+          - `output_tokens_details: OutputTokensDetails`
 
             Breakdown of output tokens by category.
 
@@ -24613,7 +24617,7 @@ puts(message_batch_individual_response)
 
             The number of output tokens which were used.
 
-          - `output_tokens_details: OutputTokensDetails{ thinking_tokens}`
+          - `output_tokens_details: OutputTokensDetails`
 
             Breakdown of output tokens by category.
 
@@ -25685,7 +25689,7 @@ puts(message_batch_individual_response)
 
           The number of output tokens which were used.
 
-        - `output_tokens_details: OutputTokensDetails{ thinking_tokens}`
+        - `output_tokens_details: OutputTokensDetails`
 
           Breakdown of output tokens by category.
 
@@ -26719,7 +26723,7 @@ puts(message_batch_individual_response)
 
         The number of output tokens which were used.
 
-      - `output_tokens_details: OutputTokensDetails{ thinking_tokens}`
+      - `output_tokens_details: OutputTokensDetails`
 
         Breakdown of output tokens by category.
 

@@ -36,7 +36,7 @@ Create Skill Version
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 24 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 23 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -89,8 +89,6 @@ Create Skill Version
       - `"cache-diagnosis-2026-04-07"`
 
       - `"thinking-token-count-2026-05-13"`
-
-      - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -203,7 +201,7 @@ List Skill Versions
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 24 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 23 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -256,8 +254,6 @@ List Skill Versions
       - `"cache-diagnosis-2026-04-07"`
 
       - `"thinking-token-count-2026-05-13"`
-
-      - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -373,7 +369,7 @@ Download a skill version's content as a zip archive.
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 24 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 23 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -426,8 +422,6 @@ Download a skill version's content as a zip archive.
       - `"cache-diagnosis-2026-04-07"`
 
       - `"thinking-token-count-2026-05-13"`
-
-      - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -480,7 +474,7 @@ Get Skill Version
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 24 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 23 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -533,8 +527,6 @@ Get Skill Version
       - `"cache-diagnosis-2026-04-07"`
 
       - `"thinking-token-count-2026-05-13"`
-
-      - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -643,7 +635,7 @@ Delete Skill Version
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 24 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 23 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -696,8 +688,6 @@ Delete Skill Version
       - `"cache-diagnosis-2026-04-07"`
 
       - `"thinking-token-count-2026-05-13"`
-
-      - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 

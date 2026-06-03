@@ -3667,7 +3667,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             The number of output tokens which were used.
 
-          - `OutputTokensDetails UsageOutputTokensDetails`
+          - `OutputTokensDetails OutputTokensDetails`
 
             Breakdown of output tokens by category.
 
@@ -4959,7 +4959,7 @@ func main() {
 
             The number of output tokens which were used.
 
-          - `OutputTokensDetails UsageOutputTokensDetails`
+          - `OutputTokensDetails OutputTokensDetails`
 
             Breakdown of output tokens by category.
 
@@ -6031,7 +6031,7 @@ func main() {
 
           The number of output tokens which were used.
 
-        - `OutputTokensDetails UsageOutputTokensDetails`
+        - `OutputTokensDetails OutputTokensDetails`
 
           Breakdown of output tokens by category.
 
@@ -7065,7 +7065,7 @@ func main() {
 
         The number of output tokens which were used.
 
-      - `OutputTokensDetails UsageOutputTokensDetails`
+      - `OutputTokensDetails OutputTokensDetails`
 
         Breakdown of output tokens by category.
 

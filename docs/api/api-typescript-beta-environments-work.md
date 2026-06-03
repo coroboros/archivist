@@ -32,7 +32,7 @@ Retrieve detailed information about a specific work item.
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 24 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 23 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -85,8 +85,6 @@ Retrieve detailed information about a specific work item.
       - `"cache-diagnosis-2026-04-07"`
 
       - `"thinking-token-count-2026-05-13"`
-
-      - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -238,7 +236,7 @@ Long poll for work items in the queue.
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 24 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 23 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -291,8 +289,6 @@ Long poll for work items in the queue.
       - `"cache-diagnosis-2026-04-07"`
 
       - `"thinking-token-count-2026-05-13"`
-
-      - `"mid-conversation-system-2026-04-07"`
 
   - `"Anthropic-Worker-ID"?: string`
 
@@ -436,7 +432,7 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 24 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 23 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -489,8 +485,6 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
       - `"cache-diagnosis-2026-04-07"`
 
       - `"thinking-token-count-2026-05-13"`
-
-      - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -646,7 +640,7 @@ Record a heartbeat for a work item to maintain the lease.
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 24 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 23 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -699,8 +693,6 @@ Record a heartbeat for a work item to maintain the lease.
       - `"cache-diagnosis-2026-04-07"`
 
       - `"thinking-token-count-2026-05-13"`
-
-      - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -799,7 +791,7 @@ Stop a work item, initiating graceful or forced shutdown.
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 24 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 23 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -852,8 +844,6 @@ Stop a work item, initiating graceful or forced shutdown.
       - `"cache-diagnosis-2026-04-07"`
 
       - `"thinking-token-count-2026-05-13"`
-
-      - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -1005,7 +995,7 @@ List work items in an environment.
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 24 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 23 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -1058,8 +1048,6 @@ List work items in an environment.
       - `"cache-diagnosis-2026-04-07"`
 
       - `"thinking-token-count-2026-05-13"`
-
-      - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -1217,7 +1205,7 @@ Update work item metadata with merge semantics.
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 24 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 23 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -1270,8 +1258,6 @@ Update work item metadata with merge semantics.
       - `"cache-diagnosis-2026-04-07"`
 
       - `"thinking-token-count-2026-05-13"`
-
-      - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -1414,7 +1400,7 @@ Get statistics about the work queue for an environment.
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 24 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 23 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -1467,8 +1453,6 @@ Get statistics about the work queue for an environment.
       - `"cache-diagnosis-2026-04-07"`
 
       - `"thinking-token-count-2026-05-13"`
-
-      - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 

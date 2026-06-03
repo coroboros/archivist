@@ -132,7 +132,7 @@ Create Credential
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 24 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -185,8 +185,6 @@ Create Credential
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
-
-    - `:"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -376,7 +374,7 @@ List Credentials
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 24 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -429,8 +427,6 @@ List Credentials
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
-
-    - `:"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -608,7 +604,7 @@ Get Credential
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 24 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -661,8 +657,6 @@ Get Credential
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
-
-    - `:"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -918,7 +912,7 @@ Update Credential
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 24 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -971,8 +965,6 @@ Update Credential
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
-
-    - `:"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -1148,7 +1140,7 @@ Delete Credential
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 24 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -1201,8 +1193,6 @@ Delete Credential
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
-
-    - `:"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -1262,7 +1252,7 @@ Archive Credential
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 24 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -1315,8 +1305,6 @@ Archive Credential
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
-
-    - `:"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -1492,7 +1480,7 @@ Validate Credential
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 24 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -1545,8 +1533,6 @@ Validate Credential
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
-
-    - `:"mid-conversation-system-2026-04-07"`
 
 ### Returns
 

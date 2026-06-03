@@ -72,7 +72,7 @@ List memory versions
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 24 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 23 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -125,8 +125,6 @@ List memory versions
       - `"cache-diagnosis-2026-04-07"`
 
       - `"thinking-token-count-2026-05-13"`
-
-      - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -308,7 +306,7 @@ Retrieve a memory version
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 24 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 23 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -361,8 +359,6 @@ Retrieve a memory version
       - `"cache-diagnosis-2026-04-07"`
 
       - `"thinking-token-count-2026-05-13"`
-
-      - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 
@@ -531,7 +527,7 @@ Redact a memory version
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 24 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 23 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -584,8 +580,6 @@ Redact a memory version
       - `"cache-diagnosis-2026-04-07"`
 
       - `"thinking-token-count-2026-05-13"`
-
-      - `"mid-conversation-system-2026-04-07"`
 
 ### Returns
 

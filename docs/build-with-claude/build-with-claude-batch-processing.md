@@ -90,7 +90,7 @@ The Batches API offers significant cost savings. All usage is charged at 50% of 
 
 | Model             | Batch input      | Batch output    |
 |-------------------|------------------|-----------------|
-| <NextOpus />          | $2.50 / MTok     | $12.50 / MTok   |
+| Claude Opus 4.8       | $2.50 / MTok     | $12.50 / MTok   |
 | Claude Opus 4.7       | $2.50 / MTok     | $12.50 / MTok   |
 | Claude Opus 4.6       | $2.50 / MTok     | $12.50 / MTok   |
 | Claude Opus 4.5     | $2.50 / MTok     | $12.50 / MTok   |
@@ -377,9 +377,7 @@ public class BatchExample {
 
 use Anthropic\Client;
 
-$client = new Client(
-    apiKey: getenv("ANTHROPIC_API_KEY")
-);
+$client = new Client();
 
 $batch = $client->messages->batches->create(
     requests: [
@@ -665,7 +663,7 @@ public class MessageBatchPolling {
 
 use Anthropic\Client;
 
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+$client = new Client();
 $messageBatchId = getenv("MESSAGE_BATCH_ID");
 
 $messageBatch = null;
@@ -855,7 +853,7 @@ public class BatchListExample {
 
 use Anthropic\Client;
 
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+$client = new Client();
 
 // Automatically fetches more pages as needed
 foreach ($client->messages->batches->list(limit: 20)->pagingEachItem() as $messageBatch) {
@@ -1123,7 +1121,7 @@ public class BatchResultsExample {
 
 use Anthropic\Client;
 
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+$client = new Client();
 
 foreach ($client->messages->batches->resultsStream(messageBatchID: 'msgbatch_01HkcTjaV5uDC8jWR4ZsDV8d') as $result) {
     switch ($result->result->type) {
@@ -1306,7 +1304,7 @@ public class BatchCancelExample {
 
 use Anthropic\Client;
 
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+$client = new Client();
 
 $messageBatch = $client->messages->batches->cancel(
     messageBatchID: 'msgbatch_example_id',
@@ -1775,7 +1773,7 @@ public class BatchExample {
 
 use Anthropic\Client;
 
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+$client = new Client();
 
 $messageBatch = $client->messages->batches->create(
     requests: [

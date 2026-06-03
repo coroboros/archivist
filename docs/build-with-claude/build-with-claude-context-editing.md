@@ -273,7 +273,7 @@ public class WebSearchExample {
 
 use Anthropic\Client;
 
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+$client = new Client();
 
 $response = $client->beta->messages->create(
     maxTokens: 4096,
@@ -689,7 +689,7 @@ public class ContextManagementExample {
 
 use Anthropic\Client;
 
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+$client = new Client();
 
 $message = $client->beta->messages->create(
     maxTokens: 4096,
@@ -1020,7 +1020,7 @@ public class Main {
 
 use Anthropic\Client;
 
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+$client = new Client();
 
 $message = $client->beta->messages->create(
     maxTokens: 16000,
@@ -1375,7 +1375,7 @@ public class ContextManagementExample {
 
 use Anthropic\Client;
 
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+$client = new Client();
 
 $message = $client->beta->messages->create(
     maxTokens: 16000,
@@ -1787,7 +1787,7 @@ public class TokenCountExample {
 
 use Anthropic\Client;
 
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+$client = new Client();
 
 $response = $client->beta->messages->countTokens(
     messages: [
@@ -2044,7 +2044,7 @@ public class Main {
 
 use Anthropic\Client;
 
-$client = new Client(apiKey: getenv("ANTHROPIC_API_KEY"));
+$client = new Client();
 
 $response = $client->beta->messages->create(
     maxTokens: 4096,

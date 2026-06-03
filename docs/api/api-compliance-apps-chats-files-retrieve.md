@@ -28,6 +28,10 @@ download the bytes.
 
   File ID
 
+- `claude_chat_ids: array of string`
+
+  Chats this file is attached to. A file can be referenced by messages across multiple chats.
+
 - `created_at: string`
 
   File creation timestamp
@@ -71,6 +75,9 @@ curl https://api.anthropic.com/v1/compliance/apps/chats/files/$CLAUDE_FILE_ID \
   "created_at": "2024-01-15T10:30:00Z",
   "message_ids": [
     "claude_chat_msg_abc123"
+  ],
+  "claude_chat_ids": [
+    "claude_chat_def456"
   ]
 }
 ```

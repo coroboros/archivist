@@ -41,9 +41,7 @@ This library uses named parameters to specify optional arguments. Parameters wit
 
 use Anthropic\Client;
 
-$client = new Client(
-  apiKey: getenv("ANTHROPIC_API_KEY") ?: "my-anthropic-api-key"
-);
+$client = new Client();
 
 $message = $client->messages->create(
   maxTokens: 1024,
@@ -71,9 +69,7 @@ The SDK provides support for streaming responses using Server-Sent Events (SSE).
 
 use Anthropic\Client;
 
-$client = new Client(
-  apiKey: getenv("ANTHROPIC_API_KEY") ?: "my-anthropic-api-key"
-);
+$client = new Client();
 
 $stream = $client->messages->createStream(
   maxTokens: 1024,
@@ -178,9 +174,7 @@ This library provides auto-paginating iterators with each list response, so you 
 
 use Anthropic\Client;
 
-$client = new Client(
-  apiKey: getenv("ANTHROPIC_API_KEY") ?: "my-anthropic-api-key"
-);
+$client = new Client();
 
 $page = $client->beta->messages->batches->list(limit: 20);
 

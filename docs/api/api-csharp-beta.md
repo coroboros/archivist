@@ -288,8 +288,6 @@ The Models API response can be used to determine which models are available for 
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
-
 ### Returns
 
 - `class ModelListPageResponse:`
@@ -600,8 +598,6 @@ The Models API response can be used to determine information about a specific mo
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
-
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
 
 ### Returns
 
@@ -3425,8 +3421,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
-
 ### Returns
 
 - `class BetaMessage:`
@@ -4532,7 +4526,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       The number of output tokens which were used.
 
-    - `required OutputTokensDetails? OutputTokensDetails`
+    - `required BetaOutputTokensDetails? OutputTokensDetails`
 
       Breakdown of output tokens by category.
 
@@ -6852,8 +6846,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
-
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
 
 ### Returns
 
@@ -12717,7 +12709,7 @@ Console.WriteLine(betaMessageTokensCount);
 
       The number of output tokens which were used.
 
-    - `required OutputTokensDetails? OutputTokensDetails`
+    - `required BetaOutputTokensDetails? OutputTokensDetails`
 
       Breakdown of output tokens by category.
 
@@ -12967,7 +12959,7 @@ Console.WriteLine(betaMessageTokensCount);
 
     The cumulative number of output tokens which were used.
 
-  - `required OutputTokensDetails? OutputTokensDetails`
+  - `required BetaOutputTokensDetails? OutputTokensDetails`
 
     Breakdown of output tokens by category.
 
@@ -14139,6 +14131,21 @@ Console.WriteLine(betaMessageTokensCount);
     - `Long? Remaining`
 
       Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
+
+### Beta Output Tokens Details
+
+- `class BetaOutputTokensDetails:`
+
+  - `required Long ThinkingTokens`
+
+    Number of output tokens the model generated as internal reasoning, including
+    the thinking-block delimiter tokens.
+
+    Reflects the raw reasoning the model produced, not the (possibly shorter)
+    summarized thinking text returned in the response body. Computed by
+    re-tokenizing the raw reasoning text, so it may differ from the model's exact
+    generation count by a small number of tokens. Always ≤ `output_tokens`;
+    `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
 ### Beta Plain Text Source
 
@@ -15452,7 +15459,7 @@ Console.WriteLine(betaMessageTokensCount);
 
       The cumulative number of output tokens which were used.
 
-    - `required OutputTokensDetails? OutputTokensDetails`
+    - `required BetaOutputTokensDetails? OutputTokensDetails`
 
       Breakdown of output tokens by category.
 
@@ -16591,7 +16598,7 @@ Console.WriteLine(betaMessageTokensCount);
 
         The number of output tokens which were used.
 
-      - `required OutputTokensDetails? OutputTokensDetails`
+      - `required BetaOutputTokensDetails? OutputTokensDetails`
 
         Breakdown of output tokens by category.
 
@@ -17758,7 +17765,7 @@ Console.WriteLine(betaMessageTokensCount);
 
           The number of output tokens which were used.
 
-        - `required OutputTokensDetails? OutputTokensDetails`
+        - `required BetaOutputTokensDetails? OutputTokensDetails`
 
           Breakdown of output tokens by category.
 
@@ -17870,7 +17877,7 @@ Console.WriteLine(betaMessageTokensCount);
 
         The cumulative number of output tokens which were used.
 
-      - `required OutputTokensDetails? OutputTokensDetails`
+      - `required BetaOutputTokensDetails? OutputTokensDetails`
 
         Breakdown of output tokens by category.
 
@@ -17878,17 +17885,6 @@ Console.WriteLine(betaMessageTokensCount);
         This object provides a read-only decomposition for observability — for example,
         how many of the billed output tokens were spent on internal reasoning that may
         have been summarized before being returned to you.
-
-        - `required Long ThinkingTokens`
-
-          Number of output tokens the model generated as internal reasoning, including
-          the thinking-block delimiter tokens.
-
-          Reflects the raw reasoning the model produced, not the (possibly shorter)
-          summarized thinking text returned in the response body. Computed by
-          re-tokenizing the raw reasoning text, so it may differ from the model's exact
-          generation count by a small number of tokens. Always ≤ `output_tokens`;
-          `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
       - `required BetaServerToolUsage? ServerToolUse`
 
@@ -22329,7 +22325,7 @@ Console.WriteLine(betaMessageTokensCount);
 
     The number of output tokens which were used.
 
-  - `required OutputTokensDetails? OutputTokensDetails`
+  - `required BetaOutputTokensDetails? OutputTokensDetails`
 
     Breakdown of output tokens by category.
 
@@ -26335,8 +26331,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
-
 ### Returns
 
 - `class BetaMessageBatch:`
@@ -26710,8 +26704,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
-
 ### Returns
 
 - `class BetaMessageBatch:`
@@ -26916,8 +26908,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
-
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
 
 ### Returns
 
@@ -27139,8 +27129,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
-
 ### Returns
 
 - `class BetaMessageBatch:`
@@ -27338,8 +27326,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
-
 ### Returns
 
 - `class BetaDeletedMessageBatch:`
@@ -27448,8 +27434,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
-
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
 
 ### Returns
 
@@ -28574,7 +28558,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             The number of output tokens which were used.
 
-          - `required OutputTokensDetails? OutputTokensDetails`
+          - `required BetaOutputTokensDetails? OutputTokensDetails`
 
             Breakdown of output tokens by category.
 
@@ -30018,7 +30002,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
             The number of output tokens which were used.
 
-          - `required OutputTokensDetails? OutputTokensDetails`
+          - `required BetaOutputTokensDetails? OutputTokensDetails`
 
             Breakdown of output tokens by category.
 
@@ -31289,7 +31273,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
           The number of output tokens which were used.
 
-        - `required OutputTokensDetails? OutputTokensDetails`
+        - `required BetaOutputTokensDetails? OutputTokensDetails`
 
           Breakdown of output tokens by category.
 
@@ -32522,7 +32506,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
         The number of output tokens which were used.
 
-      - `required OutputTokensDetails? OutputTokensDetails`
+      - `required BetaOutputTokensDetails? OutputTokensDetails`
 
         Breakdown of output tokens by category.
 
@@ -32598,6 +32582,10 @@ Create Agent
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+      - `"claude-opus-4-8"ClaudeOpus4_8`
+
+        Frontier intelligence for long-running agents and coding
+
       - `"claude-opus-4-7"ClaudeOpus4_7`
 
         Frontier intelligence for long-running agents and coding
@@ -32643,6 +32631,10 @@ Create Agent
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-opus-4-8"ClaudeOpus4_8`
+
+          Frontier intelligence for long-running agents and coding
 
         - `"claude-opus-4-7"ClaudeOpus4_7`
 
@@ -32986,8 +32978,6 @@ Create Agent
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
-
 ### Returns
 
 - `class BetaManagedAgentsAgent:`
@@ -33027,6 +33017,10 @@ Create Agent
       The model that will power your agent.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-opus-4-8"ClaudeOpus4_8`
+
+        Frontier intelligence for long-running agents and coding
 
       - `"claude-opus-4-7"ClaudeOpus4_7`
 
@@ -33452,8 +33446,6 @@ List Agents
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
-
 ### Returns
 
 - `class AgentListPageResponse:`
@@ -33497,6 +33489,10 @@ List Agents
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-opus-4-8"ClaudeOpus4_8`
+
+          Frontier intelligence for long-running agents and coding
 
         - `"claude-opus-4-7"ClaudeOpus4_7`
 
@@ -33917,8 +33913,6 @@ Get Agent
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
-
 ### Returns
 
 - `class BetaManagedAgentsAgent:`
@@ -33958,6 +33952,10 @@ Get Agent
       The model that will power your agent.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-opus-4-8"ClaudeOpus4_8`
+
+        Frontier intelligence for long-running agents and coding
 
       - `"claude-opus-4-7"ClaudeOpus4_7`
 
@@ -34348,6 +34346,10 @@ Update Agent
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+      - `"claude-opus-4-8"ClaudeOpus4_8`
+
+        Frontier intelligence for long-running agents and coding
+
       - `"claude-opus-4-7"ClaudeOpus4_7`
 
         Frontier intelligence for long-running agents and coding
@@ -34393,6 +34395,10 @@ Update Agent
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-opus-4-8"ClaudeOpus4_8`
+
+          Frontier intelligence for long-running agents and coding
 
         - `"claude-opus-4-7"ClaudeOpus4_7`
 
@@ -34712,8 +34718,6 @@ Update Agent
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
-
 ### Returns
 
 - `class BetaManagedAgentsAgent:`
@@ -34753,6 +34757,10 @@ Update Agent
       The model that will power your agent.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-opus-4-8"ClaudeOpus4_8`
+
+        Frontier intelligence for long-running agents and coding
 
       - `"claude-opus-4-7"ClaudeOpus4_7`
 
@@ -35162,8 +35170,6 @@ Archive Agent
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
-
 ### Returns
 
 - `class BetaManagedAgentsAgent:`
@@ -35203,6 +35209,10 @@ Archive Agent
       The model that will power your agent.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-opus-4-8"ClaudeOpus4_8`
+
+        Frontier intelligence for long-running agents and coding
 
       - `"claude-opus-4-7"ClaudeOpus4_7`
 
@@ -35580,6 +35590,10 @@ Console.WriteLine(betaManagedAgentsAgent);
       The model that will power your agent.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-opus-4-8"ClaudeOpus4_8`
+
+        Frontier intelligence for long-running agents and coding
 
       - `"claude-opus-4-7"ClaudeOpus4_7`
 
@@ -36705,6 +36719,10 @@ Console.WriteLine(betaManagedAgentsAgent);
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+    - `"claude-opus-4-8"ClaudeOpus4_8`
+
+      Frontier intelligence for long-running agents and coding
+
     - `"claude-opus-4-7"ClaudeOpus4_7`
 
       Frontier intelligence for long-running agents and coding
@@ -36760,6 +36778,10 @@ Console.WriteLine(betaManagedAgentsAgent);
     The model that will power your agent.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `"claude-opus-4-8"ClaudeOpus4_8`
+
+      Frontier intelligence for long-running agents and coding
 
     - `"claude-opus-4-7"ClaudeOpus4_7`
 
@@ -36906,6 +36928,10 @@ Console.WriteLine(betaManagedAgentsAgent);
       The model that will power your agent.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-opus-4-8"ClaudeOpus4_8`
+
+        Frontier intelligence for long-running agents and coding
 
       - `"claude-opus-4-7"ClaudeOpus4_7`
 
@@ -37269,8 +37295,6 @@ List Agent Versions
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
-
 ### Returns
 
 - `class VersionListPageResponse:`
@@ -37314,6 +37338,10 @@ List Agent Versions
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-opus-4-8"ClaudeOpus4_8`
+
+          Frontier intelligence for long-running agents and coding
 
         - `"claude-opus-4-7"ClaudeOpus4_7`
 
@@ -37845,8 +37873,6 @@ Create a new environment with the specified configuration.
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
-
 ### Returns
 
 - `class BetaEnvironment:`
@@ -38117,8 +38143,6 @@ List environments with pagination support.
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
-
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
 
 ### Returns
 
@@ -38398,8 +38422,6 @@ Retrieve a specific environment by ID.
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
-
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
 
 ### Returns
 
@@ -38781,8 +38803,6 @@ Update an existing environment's configuration.
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
-
 ### Returns
 
 - `class BetaEnvironment:`
@@ -39047,8 +39067,6 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
-
 ### Returns
 
 - `class BetaEnvironmentDeleteResponse:`
@@ -39154,8 +39172,6 @@ Archive an environment by ID. Archived environments cannot be used to create new
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
-
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
 
 ### Returns
 
@@ -39890,8 +39906,6 @@ Retrieve detailed information about a specific work item.
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
-
 ### Returns
 
 - `class BetaSelfHostedWork:`
@@ -40088,8 +40102,6 @@ Long poll for work items in the queue.
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
-
   - `string anthropicWorkerID`
 
     Header param: Unique identifier for the specific worker polling, used to track aggregated environment-level work metrics in Console
@@ -40284,8 +40296,6 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
-
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
 
 ### Returns
 
@@ -40487,8 +40497,6 @@ Record a heartbeat for a work item to maintain the lease.
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
-
 ### Returns
 
 - `class BetaSelfHostedWorkHeartbeatResponse:`
@@ -40632,8 +40640,6 @@ Stop a work item, initiating graceful or forced shutdown.
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
-
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
 
 ### Returns
 
@@ -40830,8 +40836,6 @@ List work items in an environment.
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
-
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
 
 ### Returns
 
@@ -41039,8 +41043,6 @@ Update work item metadata with merge semantics.
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
-
 ### Returns
 
 - `class BetaSelfHostedWork:`
@@ -41225,8 +41227,6 @@ Get statistics about the work queue for an environment.
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
-
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
 
 ### Returns
 
@@ -41736,8 +41736,6 @@ Create Session
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
-
 ### Returns
 
 - `class BetaManagedAgentsSession:`
@@ -41773,6 +41771,10 @@ Create Session
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-opus-4-8"ClaudeOpus4_8`
+
+          Frontier intelligence for long-running agents and coding
 
         - `"claude-opus-4-7"ClaudeOpus4_7`
 
@@ -42575,8 +42577,6 @@ List Sessions
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
-
 ### Returns
 
 - `class SessionListPageResponse:`
@@ -42616,6 +42616,10 @@ List Sessions
           The model that will power your agent.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-opus-4-8"ClaudeOpus4_8`
+
+            Frontier intelligence for long-running agents and coding
 
           - `"claude-opus-4-7"ClaudeOpus4_7`
 
@@ -43369,8 +43373,6 @@ Get Session
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
-
 ### Returns
 
 - `class BetaManagedAgentsSession:`
@@ -43406,6 +43408,10 @@ Get Session
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-opus-4-8"ClaudeOpus4_8`
+
+          Frontier intelligence for long-running agents and coding
 
         - `"claude-opus-4-7"ClaudeOpus4_7`
 
@@ -44167,8 +44173,6 @@ Update Session
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
-
 ### Returns
 
 - `class BetaManagedAgentsSession:`
@@ -44204,6 +44208,10 @@ Update Session
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-opus-4-8"ClaudeOpus4_8`
+
+          Frontier intelligence for long-running agents and coding
 
         - `"claude-opus-4-7"ClaudeOpus4_7`
 
@@ -44949,8 +44957,6 @@ Delete Session
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
-
 ### Returns
 
 - `class BetaManagedAgentsDeletedSession:`
@@ -45057,8 +45063,6 @@ Archive Session
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
-
 ### Returns
 
 - `class BetaManagedAgentsSession:`
@@ -45094,6 +45098,10 @@ Archive Session
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-opus-4-8"ClaudeOpus4_8`
+
+          Frontier intelligence for long-running agents and coding
 
         - `"claude-opus-4-7"ClaudeOpus4_7`
 
@@ -46091,6 +46099,10 @@ Console.WriteLine(betaManagedAgentsSession);
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+        - `"claude-opus-4-8"ClaudeOpus4_8`
+
+          Frontier intelligence for long-running agents and coding
+
         - `"claude-opus-4-7"ClaudeOpus4_7`
 
           Frontier intelligence for long-running agents and coding
@@ -46613,6 +46625,10 @@ Console.WriteLine(betaManagedAgentsSession);
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+      - `"claude-opus-4-8"ClaudeOpus4_8`
+
+        Frontier intelligence for long-running agents and coding
+
       - `"claude-opus-4-7"ClaudeOpus4_7`
 
         Frontier intelligence for long-running agents and coding
@@ -47121,6 +47137,10 @@ Console.WriteLine(betaManagedAgentsSession);
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+        - `"claude-opus-4-8"ClaudeOpus4_8`
+
+          Frontier intelligence for long-running agents and coding
+
         - `"claude-opus-4-7"ClaudeOpus4_7`
 
           Frontier intelligence for long-running agents and coding
@@ -47408,6 +47428,10 @@ Console.WriteLine(betaManagedAgentsSession);
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-opus-4-8"ClaudeOpus4_8`
+
+          Frontier intelligence for long-running agents and coding
 
         - `"claude-opus-4-7"ClaudeOpus4_7`
 
@@ -48050,8 +48074,6 @@ List Events
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
-
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
 
 ### Returns
 
@@ -49483,6 +49505,10 @@ List Events
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+            - `"claude-opus-4-8"ClaudeOpus4_8`
+
+              Frontier intelligence for long-running agents and coding
+
             - `"claude-opus-4-7"ClaudeOpus4_7`
 
               Frontier intelligence for long-running agents and coding
@@ -50238,8 +50264,6 @@ Send Events
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
-
 ### Returns
 
 - `class BetaManagedAgentsSendSessionEvents:`
@@ -50771,8 +50795,6 @@ Stream Events
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
-
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
 
 ### Returns
 
@@ -52199,6 +52221,10 @@ Stream Events
           The model that will power your agent.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-opus-4-8"ClaudeOpus4_8`
+
+            Frontier intelligence for long-running agents and coding
 
           - `"claude-opus-4-7"ClaudeOpus4_7`
 
@@ -56508,6 +56534,10 @@ await foreach (var betaManagedAgentsStreamSessionEvents in client.Beta.Sessions.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+          - `"claude-opus-4-8"ClaudeOpus4_8`
+
+            Frontier intelligence for long-running agents and coding
+
           - `"claude-opus-4-7"ClaudeOpus4_7`
 
             Frontier intelligence for long-running agents and coding
@@ -58734,6 +58764,10 @@ await foreach (var betaManagedAgentsStreamSessionEvents in client.Beta.Sessions.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+          - `"claude-opus-4-8"ClaudeOpus4_8`
+
+            Frontier intelligence for long-running agents and coding
+
           - `"claude-opus-4-7"ClaudeOpus4_7`
 
             Frontier intelligence for long-running agents and coding
@@ -60360,8 +60394,6 @@ Add Session Resource
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
-
 ### Returns
 
 - `class BetaManagedAgentsFileResource:`
@@ -60491,8 +60523,6 @@ List Session Resources
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
-
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
 
 ### Returns
 
@@ -60727,8 +60757,6 @@ Get Session Resource
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
-
 ### Returns
 
 - `class ResourceRetrieveResponse: A class that can be one of several variants.union`
@@ -60944,8 +60972,6 @@ Update Session Resource
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
-
 ### Returns
 
 - `class ResourceUpdateResponse: A class that can be one of several variants.union`
@@ -61157,8 +61183,6 @@ Delete Session Resource
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
-
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
 
 ### Returns
 
@@ -61499,8 +61523,6 @@ List Session Threads
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
-
 ### Returns
 
 - `class ThreadListPageResponse:`
@@ -61542,6 +61564,10 @@ List Session Threads
           The model that will power your agent.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-opus-4-8"ClaudeOpus4_8`
+
+            Frontier intelligence for long-running agents and coding
 
           - `"claude-opus-4-7"ClaudeOpus4_7`
 
@@ -62022,8 +62048,6 @@ Get Session Thread
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
-
 ### Returns
 
 - `class BetaManagedAgentsSessionThread:`
@@ -62061,6 +62085,10 @@ Get Session Thread
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-opus-4-8"ClaudeOpus4_8`
+
+          Frontier intelligence for long-running agents and coding
 
         - `"claude-opus-4-7"ClaudeOpus4_7`
 
@@ -62531,8 +62559,6 @@ Archive Session Thread
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
-
 ### Returns
 
 - `class BetaManagedAgentsSessionThread:`
@@ -62570,6 +62596,10 @@ Archive Session Thread
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-opus-4-8"ClaudeOpus4_8`
+
+          Frontier intelligence for long-running agents and coding
 
         - `"claude-opus-4-7"ClaudeOpus4_7`
 
@@ -63003,6 +63033,10 @@ Console.WriteLine(betaManagedAgentsSessionThread);
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-opus-4-8"ClaudeOpus4_8`
+
+          Frontier intelligence for long-running agents and coding
 
         - `"claude-opus-4-7"ClaudeOpus4_7`
 
@@ -64796,6 +64830,10 @@ Console.WriteLine(betaManagedAgentsSessionThread);
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+          - `"claude-opus-4-8"ClaudeOpus4_8`
+
+            Frontier intelligence for long-running agents and coding
+
           - `"claude-opus-4-7"ClaudeOpus4_7`
 
             Frontier intelligence for long-running agents and coding
@@ -65171,8 +65209,6 @@ List Session Thread Events
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
-
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
 
 ### Returns
 
@@ -66604,6 +66640,10 @@ List Session Thread Events
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+            - `"claude-opus-4-8"ClaudeOpus4_8`
+
+              Frontier intelligence for long-running agents and coding
+
             - `"claude-opus-4-7"ClaudeOpus4_7`
 
               Frontier intelligence for long-running agents and coding
@@ -67010,8 +67050,6 @@ Stream Session Thread Events
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
-
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
 
 ### Returns
 
@@ -68439,6 +68477,10 @@ Stream Session Thread Events
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+          - `"claude-opus-4-8"ClaudeOpus4_8`
+
+            Frontier intelligence for long-running agents and coding
+
           - `"claude-opus-4-7"ClaudeOpus4_7`
 
             Frontier intelligence for long-running agents and coding
@@ -68838,8 +68880,6 @@ Create Vault
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
-
 ### Returns
 
 - `class BetaManagedAgentsVault:`
@@ -68979,8 +69019,6 @@ List Vaults
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
-
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
 
 ### Returns
 
@@ -69129,8 +69167,6 @@ Get Vault
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
-
 ### Returns
 
 - `class BetaManagedAgentsVault:`
@@ -69274,8 +69310,6 @@ Update Vault
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
-
 ### Returns
 
 - `class BetaManagedAgentsVault:`
@@ -69411,8 +69445,6 @@ Delete Vault
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
-
 ### Returns
 
 - `class BetaManagedAgentsDeletedVault:`
@@ -69520,8 +69552,6 @@ Archive Vault
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
-
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
 
 ### Returns
 
@@ -69818,8 +69848,6 @@ Create Credential
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
-
 ### Returns
 
 - `class BetaManagedAgentsCredential:`
@@ -70061,8 +70089,6 @@ List Credentials
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
-
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
 
 ### Returns
 
@@ -70306,8 +70332,6 @@ Get Credential
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
-
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
 
 ### Returns
 
@@ -70618,8 +70642,6 @@ Update Credential
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
-
 ### Returns
 
 - `class BetaManagedAgentsCredential:`
@@ -70849,8 +70871,6 @@ Delete Credential
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
-
 ### Returns
 
 - `class BetaManagedAgentsDeletedCredential:`
@@ -70963,8 +70983,6 @@ Archive Credential
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
-
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
 
 ### Returns
 
@@ -71194,8 +71212,6 @@ Validate Credential
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
-
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
 
 ### Returns
 
@@ -72230,8 +72246,6 @@ Create a memory store
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
-
 ### Returns
 
 - `class BetaManagedAgentsMemoryStore:`
@@ -72385,8 +72399,6 @@ List memory stores
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
-
 ### Returns
 
 - `class MemoryStoreListPageResponse:`
@@ -72538,8 +72550,6 @@ Retrieve a memory store
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
-
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
 
 ### Returns
 
@@ -72693,8 +72703,6 @@ Update a memory store
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
-
 ### Returns
 
 - `class BetaManagedAgentsMemoryStore:`
@@ -72835,8 +72843,6 @@ Delete a memory store
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
-
 ### Returns
 
 - `class BetaManagedAgentsDeletedMemoryStore:`
@@ -72944,8 +72950,6 @@ Archive a memory store
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
-
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
 
 ### Returns
 
@@ -73155,8 +73159,6 @@ Create a memory
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
-
 ### Returns
 
 - `class BetaManagedAgentsMemory:`
@@ -73338,8 +73340,6 @@ List memories
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
-
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
 
 ### Returns
 
@@ -73525,8 +73525,6 @@ Retrieve a memory
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
-
 ### Returns
 
 - `class BetaManagedAgentsMemory:`
@@ -73696,8 +73694,6 @@ Update a memory
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
-
 ### Returns
 
 - `class BetaManagedAgentsMemory:`
@@ -73854,8 +73850,6 @@ Delete a memory
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
-
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
 
 ### Returns
 
@@ -74300,8 +74294,6 @@ List memory versions
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
-
 ### Returns
 
 - `class MemoryVersionListPageResponse:`
@@ -74536,8 +74528,6 @@ Retrieve a memory version
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
-
 ### Returns
 
 - `class BetaManagedAgentsMemoryVersion:`
@@ -74753,8 +74743,6 @@ Redact a memory version
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
-
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
 
 ### Returns
 
@@ -75168,8 +75156,6 @@ Upload File
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
-
 ### Returns
 
 - `class FileMetadata:`
@@ -75334,8 +75320,6 @@ List Files
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
-
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
 
 ### Returns
 
@@ -75510,8 +75494,6 @@ Download File
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
-
 ### Example
 
 ```csharp
@@ -75593,8 +75575,6 @@ Get File Metadata
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
-
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
 
 ### Returns
 
@@ -75743,8 +75723,6 @@ Delete File
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
-
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
 
 ### Returns
 
@@ -75941,8 +75919,6 @@ Create Skill
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
-
 ### Returns
 
 - `class SkillCreateResponse:`
@@ -76100,8 +76076,6 @@ List Skills
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
-
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
 
 ### Returns
 
@@ -76270,8 +76244,6 @@ Get Skill
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
-
 ### Returns
 
 - `class SkillRetrieveResponse:`
@@ -76415,8 +76387,6 @@ Delete Skill
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
-
 ### Returns
 
 - `class SkillDeleteResponse:`
@@ -76533,8 +76503,6 @@ Create Skill Version
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
-
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
 
 ### Returns
 
@@ -76692,8 +76660,6 @@ List Skill Versions
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
-
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
 
 ### Returns
 
@@ -76868,8 +76834,6 @@ Download a skill version's content as a zip archive.
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
-
 ### Example
 
 ```csharp
@@ -76963,8 +76927,6 @@ Get Skill Version
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
-
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
 
 ### Returns
 
@@ -77123,8 +77085,6 @@ Delete Skill Version
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
-
 ### Returns
 
 - `class VersionDeleteResponse:`
@@ -77255,8 +77215,6 @@ Create User Profile
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
-
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
 
 ### Returns
 
@@ -77429,8 +77387,6 @@ List User Profiles
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
-
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
 
 ### Returns
 
@@ -77606,8 +77562,6 @@ Get User Profile
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
-
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
 
 ### Returns
 
@@ -77794,8 +77748,6 @@ Update User Profile
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
-
 ### Returns
 
 - `class BetaUserProfile:`
@@ -77958,8 +77910,6 @@ Create Enrollment URL
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
-
-    - `"mid-conversation-system-2026-04-07"MidConversationSystem2026_04_07`
 
 ### Returns
 
