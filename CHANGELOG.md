@@ -1,5 +1,48 @@
 # Changelog
 
+## 🤖 v1.4.34 - 04/06/2026
+
+File Changes:
+
+- Modified: `docs/build-with-claude/build-with-claude-README.md`
+- Modified: `docs/build-with-claude/build-with-claude-mid-conversation-effort-example.md`
+- Modified: `docs/build-with-claude/build-with-claude-vision.md`
+- Modified: `docs/code/code-2026-w18.md`
+- Modified: `docs/code/code-2026-w19.md`
+- Modified: `docs/code/code-2026-w20.md`
+- Modified: `docs/code/code-2026-w21.md`
+- Modified: `docs/code/code-2026-w22.md`
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-agent-view.md`
+- Modified: `docs/code/code-amazon-bedrock.md`
+- Modified: `docs/code/code-changelog.md`
+- Modified: `docs/code/code-chrome.md`
+- Modified: `docs/code/code-claude-directory.md`
+- Modified: `docs/code/code-commands.md`
+- Modified: `docs/code/code-context-window.md`
+- Modified: `docs/code/code-env-vars.md`
+- Modified: `docs/code/code-fast-mode.md`
+- Modified: `docs/code/code-fullscreen.md`
+- Modified: `docs/code/code-headless.md`
+- Modified: `docs/code/code-hooks-guide.md`
+- Modified: `docs/code/code-hooks.md`
+- Modified: `docs/code/code-mcp.md`
+- Modified: `docs/code/code-monitoring-usage.md`
+- Modified: `docs/code/code-overview.md`
+- Modified: `docs/code/code-permission-modes.md`
+- Modified: `docs/code/code-permissions.md`
+- Modified: `docs/code/code-prompt-caching.md`
+- Modified: `docs/code/code-settings.md`
+- Modified: `docs/code/code-skills.md`
+- Modified: `docs/code/code-sub-agents.md`
+- Modified: `docs/code/code-troubleshooting.md`
+- Modified: `docs/code/code-typescript.md`
+- Modified: `docs/managed-agents/managed-agents-README.md`
+- Modified: `docs/managed-agents/managed-agents-self-hosted-sandboxes.md`
+- Modified: `docs/test-and-evaluate/test-and-evaluate-README.md`
+- Modified: `docs/test-and-evaluate/test-and-evaluate-strengthen-guardrails-mitigate-jailbreaks.md`
+
+
 ## 🤖 v1.4.33 - 03/06/2026
 
 File Changes:
