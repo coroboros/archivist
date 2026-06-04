@@ -1,5 +1,32 @@
 # Changelog
 
+## 🤖 v1.4.35 - 04/06/2026
+
+File Changes:
+
+- Modified: `docs/agents-and-tools/agents-and-tools-README.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-code-execution-tool.md`
+- Modified: `docs/api/api-README.md`
+- Deleted: `docs/api/api-admin-mcp_tunnels-rotate_token.md`
+- Deleted: `docs/api/api-go-beta-user_profiles-update.md`
+- Deleted: `docs/api/api-python-beta-environments-work-stats.md`
+- Deleted: `docs/api/api-python-beta-messages-batches-list.md`
+- Deleted: `docs/api/api-ruby-beta-environments-work-retrieve.md`
+- Modified: `docs/build-with-claude/build-with-claude-README.md`
+- Modified: `docs/build-with-claude/build-with-claude-citations.md`
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-hooks.md`
+- Modified: `docs/code/code-mcp.md`
+- Modified: `docs/code/code-permissions.md`
+- Modified: `docs/code/code-plugins.md`
+- Modified: `docs/code/code-sessions.md`
+- Modified: `docs/general/general-README.md`
+- Modified: `docs/general/general-intro.md`
+- Modified: `docs/release-notes/release-notes-README.md`
+- Modified: `docs/release-notes/release-notes-overview.md`
+- Modified: `docs/release-notes/release-notes-system-prompts.md`
+
+
 ## 🤖 v1.4.34 - 04/06/2026
 
 File Changes:

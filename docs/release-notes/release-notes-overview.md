@@ -42,6 +42,9 @@ For updates to Claude Code, see the [complete CHANGELOG.md](https://github.com/a
 - We've deprecated [fast mode](../build-with-claude/build-with-claude-fast-mode.md) for Claude Opus 4.6, with removal approximately 30 days after launch. Migrate to fast mode for Claude Opus 4.8 or Claude Opus 4.7. Read more in [Fast mode](../build-with-claude/build-with-claude-fast-mode.md#supported-models).
 - For updates to claude.ai, Cowork, Claude for Microsoft 365, and other Claude apps in this release, see the [release notes for Claude Apps](https://support.claude.com/en/articles/12138966-release-notes).
 
+### May 27, 2026
+- The Messages API response now includes [`usage.output_tokens_details.thinking_tokens`](../build-with-claude/build-with-claude-extended-thinking.md#working-with-thinking-budgets), reporting how many of the billed output tokens were extended thinking. When streaming, the breakdown appears only on the final `message_delta` event. No beta header is required.
+
 ### May 19, 2026
 - [MCP tunnels](../agents-and-tools/agents-and-tools-mcp-tunnels-overview.md) is now available as a Research Preview, so you can connect to MCP servers in your private network.
 - Self-hosted sandboxes are now available for Claude Managed Agents, as an alternative to running tool execution in Anthropic's infrastructure. See [Self-hosted sandboxes](../managed-agents/managed-agents-self-hosted-sandboxes.md).
@@ -272,7 +275,7 @@ _<sup>* - Opus 4.1 does not allow both `temperature` and `top_p` parameters to b
 - We've launched [fine-grained tool streaming](../agents-and-tools/agents-and-tools-tool-use-fine-grained-tool-streaming.md) in public beta, a feature that enables Claude to stream tool use parameters without buffering / JSON validation. To enable fine-grained tool streaming, use the [beta header](../api/api-beta-headers.md) `fine-grained-tool-streaming-2025-05-14`.
 
 ### May 22, 2025
-- We've launched [Claude Opus 4 and Claude Sonnet 4](http://www.anthropic.com/news/claude-4), our latest models with extended thinking capabilities. Learn more in [Models overview](https://platform.claude.com/docs/en/about-claude/models.md).
+- We've launched [Claude Opus 4 and Claude Sonnet 4](https://www.anthropic.com/news/claude-4), our latest models with extended thinking capabilities. Learn more in [Models overview](https://platform.claude.com/docs/en/about-claude/models.md).
 - The default behavior of [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md) in Claude 4 models returns a summary of Claude's full thinking process, with the full thinking encrypted and returned in the `signature` field of `thinking` block output.
 - We've launched [interleaved thinking](../build-with-claude/build-with-claude-extended-thinking.md#interleaved-thinking) in public beta, a feature that enables Claude to think in between tool calls. To enable interleaved thinking, use the [beta header](../api/api-beta-headers.md) `interleaved-thinking-2025-05-14`.
 - We've launched the [Files API](../build-with-claude/build-with-claude-files.md) in public beta, enabling you to upload files and reference them in the Messages API and code execution tool.
@@ -305,7 +308,7 @@ _<sup>* - Opus 4.1 does not allow both `temperature` and `top_p` parameters to b
 - We've launched an OpenAI-compatible API endpoint, allowing you to test Claude models by changing just your API key, base URL, and model name in existing OpenAI integrations. This compatibility layer supports core chat completions functionality. Learn more in [OpenAI SDK compatibility](../api/api-openai-sdk.md).
 
 ### February 24th, 2025
-- We've launched [Claude Sonnet 3.7](http://www.anthropic.com/news/claude-3-7-sonnet), our most intelligent model yet. Claude Sonnet 3.7 can produce near-instant responses or show its extended thinking step-by-step. One model, two ways to think. Learn more about all Claude models in [Models overview](https://platform.claude.com/docs/en/about-claude/models.md).
+- We've launched [Claude Sonnet 3.7](https://www.anthropic.com/news/claude-3-7-sonnet), our most intelligent model yet. Claude Sonnet 3.7 can produce near-instant responses or show its extended thinking step-by-step. One model, two ways to think. Learn more about all Claude models in [Models overview](https://platform.claude.com/docs/en/about-claude/models.md).
 - We've added vision support to Claude Haiku 3.5, enabling the model to analyze and understand images.
 - We've released a token-efficient tool use implementation, improving overall performance when using tools with Claude. Learn more in [Tool use with Claude](../agents-and-tools/agents-and-tools-tool-use-overview.md).
 - We've changed the default temperature in the [Console](https://console.anthropic.com/workbench) for new prompts from 0 to 1 for consistency with the default temperature in the API. Existing saved prompts are unchanged.
@@ -439,7 +442,7 @@ We also released new official SDKs:
 
 ### June 20th, 2024
 
-- [Claude Sonnet 3.5](http://anthropic.com/news/claude-3-5-sonnet), our most intelligent model yet, is now generally available across the Claude API, Amazon Bedrock, and Vertex AI.
+- [Claude Sonnet 3.5](https://www.anthropic.com/news/claude-3-5-sonnet), our most intelligent model yet, is now generally available across the Claude API, Amazon Bedrock, and Vertex AI.
 
 ### May 30th, 2024
 
