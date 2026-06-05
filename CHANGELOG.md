@@ -1,5 +1,37 @@
 # Changelog
 
+## 🤖 v1.4.36 - 05/06/2026
+
+File Changes:
+
+- Modified: `docs/api/api-README.md`
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-agent-view.md`
+- Modified: `docs/code/code-changelog.md`
+- Modified: `docs/code/code-deep-links.md`
+- Modified: `docs/code/code-env-vars.md`
+- Modified: `docs/code/code-hooks.md`
+- Modified: `docs/code/code-mcp.md`
+- Modified: `docs/code/code-memory.md`
+- Modified: `docs/code/code-monitoring-usage.md`
+- Modified: `docs/code/code-permissions.md`
+- Modified: `docs/code/code-python.md`
+- Modified: `docs/code/code-quickstart.md`
+- Modified: `docs/code/code-skills.md`
+- Modified: `docs/code/code-tools-reference.md`
+- Modified: `docs/code/code-troubleshoot-install.md`
+- Modified: `docs/code/code-vs-code.md`
+- Modified: `docs/manage-claude/manage-claude-README.md`
+- Modified: `docs/manage-claude/manage-claude-compliance-api-access.md`
+- Modified: `docs/managed-agents/managed-agents-README.md`
+- Modified: `docs/managed-agents/managed-agents-dreams.md`
+- Added: `docs/api/api-admin-mcp_tunnels-rotate_token.md`
+- Added: `docs/api/api-go-beta-user_profiles-update.md`
+- Added: `docs/api/api-python-beta-environments-work-stats.md`
+- Added: `docs/api/api-python-beta-messages-batches-list.md`
+- Added: `docs/api/api-ruby-beta-environments-work-retrieve.md`
+
+
 ## 🤖 v1.4.35 - 04/06/2026
 
 File Changes:
