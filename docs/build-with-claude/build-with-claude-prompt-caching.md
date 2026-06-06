@@ -269,7 +269,7 @@ Prompt caching introduces a new pricing structure. The table below shows the pri
 | Claude Opus 4.7     | $5 / MTok         | $6.25 / MTok    | $10 / MTok      | $0.50 / MTok | $25 / MTok    |
 | Claude Opus 4.6     | $5 / MTok         | $6.25 / MTok    | $10 / MTok      | $0.50 / MTok | $25 / MTok    |
 | Claude Opus 4.5   | $5 / MTok         | $6.25 / MTok    | $10 / MTok      | $0.50 / MTok | $25 / MTok    |
-| Claude Opus 4.1   | $15 / MTok        | $18.75 / MTok   | $30 / MTok      | $1.50 / MTok | $75 / MTok    |
+| Claude Opus 4.1 ([deprecated](../about-claude/about-claude-model-deprecations.md)) | $15 / MTok        | $18.75 / MTok   | $30 / MTok      | $1.50 / MTok | $75 / MTok    |
 | Claude Opus 4 ([deprecated](../about-claude/about-claude-model-deprecations.md)) | $15 / MTok        | $18.75 / MTok   | $30 / MTok      | $1.50 / MTok | $75 / MTok    |
 | Claude Sonnet 4.6   | $3 / MTok         | $3.75 / MTok    | $6 / MTok       | $0.30 / MTok | $15 / MTok    |
 | Claude Sonnet 4.5   | $3 / MTok         | $3.75 / MTok    | $6 / MTok       | $0.30 / MTok | $15 / MTok    |
@@ -649,7 +649,7 @@ Adding more `cache_control` breakpoints doesn't increase your costs - you still 
 On the Claude API, [Claude Platform on AWS](./build-with-claude-claude-platform-on-aws.md), [Vertex AI](./build-with-claude-claude-on-vertex-ai.md), and [Microsoft Foundry](./build-with-claude-claude-in-microsoft-foundry.md) (beta), the minimum cacheable prompt length is:
 
 - 4,096 tokens for [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.7, Claude Opus 4.6, and Claude Opus 4.5
-- 1,024 tokens for Claude Opus 4.8, Claude Sonnet 4.6, Claude Sonnet 4.5, Claude Opus 4.1, Claude Opus 4 ([deprecated](../about-claude/about-claude-model-deprecations.md)), and Claude Sonnet 4 ([deprecated](../about-claude/about-claude-model-deprecations.md))
+- 1,024 tokens for Claude Opus 4.8, Claude Sonnet 4.6, Claude Sonnet 4.5, Claude Opus 4.1 ([deprecated](../about-claude/about-claude-model-deprecations.md)), Claude Opus 4 ([deprecated](../about-claude/about-claude-model-deprecations.md)), and Claude Sonnet 4 ([deprecated](../about-claude/about-claude-model-deprecations.md))
 - 4,096 tokens for Claude Haiku 4.5
 - 2,048 tokens for Claude Haiku 3.5 ([retired, except on Vertex AI](../about-claude/about-claude-model-deprecations.md))
 

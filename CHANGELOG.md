@@ -1,5 +1,63 @@
 # Changelog
 
+## 🤖 v1.4.38 - 06/06/2026
+
+File Changes:
+
+- Modified: `docs/agents-and-tools/agents-and-tools-README.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-code-execution-tool.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-computer-use-tool.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-overview.md`
+- Modified: `docs/api/api-README.md`
+- Modified: `docs/api/api-rate-limits.md`
+- Modified: `docs/build-with-claude/build-with-claude-README.md`
+- Modified: `docs/build-with-claude/build-with-claude-batch-processing.md`
+- Modified: `docs/build-with-claude/build-with-claude-claude-in-microsoft-foundry.md`
+- Modified: `docs/build-with-claude/build-with-claude-claude-on-amazon-bedrock-legacy.md`
+- Modified: `docs/build-with-claude/build-with-claude-claude-on-amazon-bedrock.md`
+- Modified: `docs/build-with-claude/build-with-claude-claude-on-vertex-ai.md`
+- Modified: `docs/build-with-claude/build-with-claude-context-editing.md`
+- Modified: `docs/build-with-claude/build-with-claude-extended-thinking.md`
+- Modified: `docs/build-with-claude/build-with-claude-handling-stop-reasons.md`
+- Modified: `docs/build-with-claude/build-with-claude-multilingual-support.md`
+- Modified: `docs/build-with-claude/build-with-claude-prompt-caching.md`
+- Modified: `docs/build-with-claude/build-with-claude-search-results.md`
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-admin-setup.md`
+- Modified: `docs/code/code-amazon-bedrock.md`
+- Modified: `docs/code/code-changelog.md`
+- Modified: `docs/code/code-claude-platform-on-aws.md`
+- Modified: `docs/code/code-commands.md`
+- Modified: `docs/code/code-discover-plugins.md`
+- Modified: `docs/code/code-env-vars.md`
+- Modified: `docs/code/code-errors.md`
+- Modified: `docs/code/code-google-vertex-ai.md`
+- Modified: `docs/code/code-headless.md`
+- Modified: `docs/code/code-hooks-guide.md`
+- Modified: `docs/code/code-interactive-mode.md`
+- Modified: `docs/code/code-mcp.md`
+- Modified: `docs/code/code-microsoft-foundry.md`
+- Modified: `docs/code/code-model-config.md`
+- Modified: `docs/code/code-monitoring-usage.md`
+- Modified: `docs/code/code-overview.md`
+- Modified: `docs/code/code-permissions.md`
+- Modified: `docs/code/code-plugins-reference.md`
+- Modified: `docs/code/code-plugins.md`
+- Modified: `docs/code/code-prompt-caching.md`
+- Modified: `docs/code/code-quickstart.md`
+- Modified: `docs/code/code-settings.md`
+- Modified: `docs/code/code-setup.md`
+- Modified: `docs/code/code-skills.md`
+- Modified: `docs/code/code-sub-agents.md`
+- Modified: `docs/code/code-subagents.md`
+- Modified: `docs/code/code-third-party-integrations.md`
+- Modified: `docs/release-notes/release-notes-README.md`
+- Modified: `docs/release-notes/release-notes-overview.md`
+- Modified: `docs/test-and-evaluate/test-and-evaluate-README.md`
+- Modified: `docs/test-and-evaluate/test-and-evaluate-eval-tool.md`
+- Modified: `docs/test-and-evaluate/test-and-evaluate-strengthen-guardrails-handle-streaming-refusals.md`
+
+
 ## 🤖 v1.4.37 - 05/06/2026
 
 File Changes:
