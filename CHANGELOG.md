@@ -1,5 +1,15 @@
 # Changelog
 
+## 🤖 v1.4.43 - 08/06/2026
+
+File Changes:
+
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-hooks.md`
+- Modified: `docs/code/code-mcp.md`
+- Modified: `docs/code/code-permissions.md`
+
+
 ## 🤖 v1.4.42 - 08/06/2026
 
 File Changes:
