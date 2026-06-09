@@ -134,7 +134,8 @@ Even in auto-allow mode, the following still apply:
 
 * Explicit [deny rules](./code-permissions.md) are always respected
 * `rm` or `rmdir` commands that target `/`, your home directory, or other critical system paths still trigger a permission prompt
-* [Ask rules](./code-permissions.md) apply to commands that fall back to the regular permission flow
+* Content-scoped [ask rules](./code-permissions.md) like `Bash(git push *)` still force a prompt even for sandboxed commands
+* A bare `Bash` ask rule, or the equivalent `Bash(*)` form, is skipped for commands that run sandboxed; it still applies to commands that fall back to the regular permission flow
 
 **Regular permissions mode**: All Bash commands go through the regular permission flow, even when sandboxed. This provides more control but requires more approvals.
 
@@ -270,11 +271,11 @@ The [claude-code repository's examples directory](https://github.com/anthropics/
 
 `/sandbox` is not a [permission mode](./code-permission-modes.md). Permission modes decide whether a tool call runs and whether you are prompted first, while the sandbox restricts what a Bash command can access once it runs. They differ in what they control and what replaces the per-action prompt:
 
-|                                                                    | What it controls                            | What replaces the prompt                                                                                                                        |
-| :----------------------------------------------------------------- | :------------------------------------------ | :---------------------------------------------------------------------------------------------------------------------------------------------- |
-| `/sandbox`                                                         | What a Bash command can access once it runs | The sandbox boundary itself, in [auto-allow mode](#sandbox-modes)                                                                               |
-| [Auto mode](./code-permission-modes.md#eliminate-prompts-with-auto-mode) | Whether each tool call runs                 | A classifier that reviews actions                                                                                                               |
-| `--dangerously-skip-permissions`                                   | Whether each tool call runs                 | Nothing. [Protected path](./code-permission-modes.md#protected-paths) checks are also skipped; only removing `/` or your home directory still prompts |
+|                                                                    | What it controls                            | What replaces the prompt                                                                                                                                                                                    |
+| :----------------------------------------------------------------- | :------------------------------------------ | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `/sandbox`                                                         | What a Bash command can access once it runs | The sandbox boundary itself, in [auto-allow mode](#sandbox-modes)                                                                                                                                           |
+| [Auto mode](./code-permission-modes.md#eliminate-prompts-with-auto-mode) | Whether each tool call runs                 | A classifier that reviews actions                                                                                                                                                                           |
+| `--dangerously-skip-permissions`                                   | Whether each tool call runs                 | Nothing. [Protected path](./code-permission-modes.md#protected-paths) checks are also skipped; only explicit [ask rules](./code-permissions.md#manage-permissions) and removing `/` or your home directory still prompt |
 
 The sandbox's [auto-allow mode](#sandbox-modes) is separate from [auto mode](./code-permission-modes.md#eliminate-prompts-with-auto-mode): auto-allow approves Bash commands because the sandbox boundary contains them, while auto mode uses a classifier to review actions. The two work independently and can be combined. To choose an isolation boundary for unattended runs, see [Sandbox environments](./code-sandbox-environments.md#how-isolation-relates-to-permission-modes).
 
