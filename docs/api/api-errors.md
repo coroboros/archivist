@@ -61,6 +61,12 @@ Errors are always returned as JSON, with a top-level `error` object that always 
 
 In accordance with the [versioning](./api-versioning.md) policy, the values within these objects may expand, and it is possible that the `type` values will grow over time.
 
+## SDK error types
+
+The official SDKs raise typed exceptions for these errors instead of returning raw JSON, and the class names and namespaces differ by language. For example, a 404 surfaces as `anthropic.NotFoundError` in Python, `Anthropic::Errors::NotFoundError` in Ruby, `com.anthropic.errors.NotFoundException` in Java, and as a single `*anthropic.Error` value (branch on `StatusCode`) in Go. Catch the SDK's typed classes rather than string-matching error messages, handling the most specific classes first. Each SDK page documents its full exception hierarchy:
+
+- [Python](https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/python.md#handling-errors) · [TypeScript](https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/typescript.md#handling-errors) · [C#](https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/csharp.md#error-handling) · [Go](https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/go.md#error-handling) · [Java](https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/java.md#error-handling) · [PHP](https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/php.md#error-handling) · [Ruby](https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/ruby.md#handling-errors)
+
 ## Request ID
 
 Every API response includes a unique `request-id` header. This header contains a value such as `req_018EeWyXxfu5pfWkrYcMdjWG`. When contacting support about a specific request, include this ID to help quickly resolve your issue.
@@ -156,7 +162,7 @@ manage the risk of network issues by allowing you to poll for results rather tha
 
 If you are building a direct API integration, you should be aware that setting a [TCP socket keep-alive](https://tldp.org/HOWTO/TCP-Keepalive-HOWTO/programming.html) can reduce the impact of idle connection timeouts on some networks.
 
-The [SDKs](./api-client-sdks.md) validate that your non-streaming Messages API requests are not expected to exceed a 10 minute timeout and
+The [SDKs](https://platform.claude.com/docs/en/cli-sdks-libraries/overview.md) validate that your non-streaming Messages API requests are not expected to exceed a 10 minute timeout and
 also will set a socket option for TCP keep-alive.
 
 If you don't need to process events incrementally, use `.stream()` with `.get_final_message()` (Python) or `.finalMessage()` (TypeScript) to get the complete `Message` object without writing event-handling code:

@@ -13,7 +13,7 @@ Access Claude's full platform capabilities through AWS with Anthropic-managed in
 Claude Platform on AWS gives you the full Anthropic platform experience, including the Messages API, Agent Skills, code execution, and beta features, accessible through your AWS account. Unlike [Amazon Bedrock](./build-with-claude-claude-in-amazon-bedrock.md), where AWS operates the inference stack, Anthropic operates Claude Platform on AWS. AWS provides the authentication layer (SigV4 or API key), IAM-based access control, and billing integration through AWS Marketplace.
 
 <Note>
-The Anthropic SDKs support Claude Platform on AWS. For per-language client availability, see [Client SDKs](../api/api-client-sdks.md).
+The Anthropic SDKs support Claude Platform on AWS.
 </Note>
 
 ## How the platform integration works
@@ -251,7 +251,7 @@ The client reads `AWS_REGION` from the environment if `aws_region`/`awsRegion` i
 
 ## Install an SDK
 
-Anthropic's [client SDKs](../api/api-client-sdks.md) support Claude Platform on AWS. Each SDK provides a platform-specific client class that handles SigV4 signing, region-based base URL construction, and the `anthropic-workspace-id` header.
+Anthropic's [client SDKs](https://platform.claude.com/docs/en/cli-sdks-libraries/overview.md) support Claude Platform on AWS. Each SDK provides a platform-specific client class that handles SigV4 signing, region-based base URL construction, and the `anthropic-workspace-id` header.
 
 <Tabs>
 <Tab title="Python">
@@ -759,7 +759,7 @@ Two Claude Console roles are available: **Admin** and **Developer**. The Admin r
 
 ### Available pages
 
-The **Through AWS gateway** column indicates whether the page reads and writes data through the AWS gateway (and is therefore governed by [IAM actions](https://platform.claude.com/docs/en/api/claude-platform-on-aws-iam-actions.md)). Pages marked **No** read organization-level metadata directly through Anthropic APIs and bypass IAM action checks.
+The **Through AWS gateway** column indicates whether the page reads and writes data through the AWS gateway (and is therefore governed by [IAM actions](https://platform.claude.com/docs/en/api/claude-platform-on-aws-iam-actions.md)). Pages marked **No** read organization-level metadata directly from Anthropic and bypass IAM action checks.
 
 | Page | Available | Through AWS gateway | Notes |
 | :--- | :--- | :--- | :--- |

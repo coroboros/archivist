@@ -18,17 +18,17 @@ This is an experimental API. Request and response shapes, rate limits, and token
 
 This endpoint is the HTTP entry point. POSTing to it starts a new run of an existing routine and returns the resulting session ID and URL. Typical callers are alerting systems, CI pipelines, and internal tools that need to start a Claude Code session programmatically.
 
-Calling this endpoint requires a claude.ai account on a Pro, Max, Team, or Enterprise plan with [Claude Code on the web](https://code.claude.com/docs/en/claude-code-on-the-web) enabled. Authenticate with a per-routine bearer token created in the Claude Code web UI rather than an Anthropic API key.
+Calling this endpoint requires a claude.ai account on a Pro, Max, Team, or Enterprise plan with [Claude Code on the web](https://code.claude.com/docs/en/claude-code-on-the-web) enabled. Authenticate with a per-routine bearer token created in the Claude Code web UI rather than a Claude API key.
 
 ## Differences from the Claude Platform
 
 The routine fire endpoint belongs to the Claude Code product surface, which differs from the Claude Platform APIs and SDKs in a few ways:
 
-| Aspect | This endpoint | Other Anthropic APIs |
+| Aspect | This endpoint | Claude Platform APIs |
 | :--- | :--- | :--- |
-| Authentication | `Authorization: Bearer` with a per-routine token (`sk-ant-oat01-...`) created at [claude.ai/code/routines](https://claude.ai/code/routines) | `x-api-key` with an Anthropic API key from Claude Console |
+| Authentication | `Authorization: Bearer` with a per-routine token (`sk-ant-oat01-...`) created at [claude.ai/code/routines](https://claude.ai/code/routines) | `x-api-key` with a Claude API key from Claude Console |
 | Token scope | One routine only; no read access | Workspace-level |
-| SDK support | None | Available in all [client SDKs](./api-client-sdks.md) |
+| SDK support | None | Available in all [client SDKs](https://platform.claude.com/docs/en/cli-sdks-libraries/overview.md) |
 | Billing | Claude Code subscription usage on claude.ai | Claude Platform usage |
 | Path namespace | `/v1/claude_code/...` | `/v1/...` |
 | Stability | Experimental; requires `anthropic-beta: experimental-cc-routine-2026-04-01` | Stable or standard beta |

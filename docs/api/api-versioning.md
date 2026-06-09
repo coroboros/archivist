@@ -6,27 +6,27 @@ generated: true
 ---
 # Versions
 
-When making API requests, you must send an `anthropic-version` request header. For example, `anthropic-version: 2023-06-01`. If you are using our [client SDKs](./api-client-sdks.md), this is handled for you automatically.
+When making API requests, you must send an `anthropic-version` request header. For example, `anthropic-version: 2023-06-01`. If you are using the [client SDKs](https://platform.claude.com/docs/en/cli-sdks-libraries/overview.md), this is handled for you automatically.
 
 ---
 
-For any given version with the Messages API, we will preserve:
+For any given version with the Messages API, Anthropic preserves:
 
 * Existing input parameters
 * Existing output parameters
 
-However, we may do the following:
+However, Anthropic may do the following:
 
 * Add additional optional inputs
 * Add additional values to the output
 * Change conditions for specific error types
 * Add new variants to enum-like output values (for example, streaming event types)
 
-Generally, if you are using the API as documented in this reference, we will not break your usage.
+Generally, if you are using the API as documented in this reference, Anthropic will not break your usage.
 
 ## Version history
 
-We always recommend using the latest API version whenever possible. Previous versions are considered deprecated and may be unavailable for new users.
+Anthropic recommends using the latest API version whenever possible. Previous versions are considered deprecated and may be unavailable for new users.
 
 * `2023-06-01`
    * New format for [streaming](../build-with-claude/build-with-claude-streaming.md) server-sent events (SSE):

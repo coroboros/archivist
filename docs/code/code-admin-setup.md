@@ -107,11 +107,11 @@ Cloud providers expose spend through AWS Cost Explorer, GCP Billing, or Azure Co
 
 On Team, Enterprise, Claude API, and cloud provider plans, Anthropic does not train models on your code or prompts. Your API provider determines retention and compliance posture.
 
-| Topic                     | What to know                                                                    | Where to start                                 |
-| :------------------------ | :------------------------------------------------------------------------------ | :--------------------------------------------- |
-| Data usage policy         | What Anthropic collects, how long it's retained, what's never used for training | [Data usage](./code-data-usage.md)                   |
-| Zero Data Retention (ZDR) | Nothing stored after the request completes. Available on Claude for Enterprise  | [Zero data retention](./code-zero-data-retention.md) |
-| Security architecture     | Network model, encryption, authentication, audit trail                          | [Security](./code-security.md)                       |
+| Topic                     | What to know                                                                                         | Where to start                                 |
+| :------------------------ | :--------------------------------------------------------------------------------------------------- | :--------------------------------------------- |
+| Data usage policy         | What Anthropic collects, how long it's retained, what's never used for training                      | [Data usage](./code-data-usage.md)                   |
+| Zero Data Retention (ZDR) | Nothing stored after the request completes. Available to qualified accounts on Claude for Enterprise | [Zero data retention](./code-zero-data-retention.md) |
+| Security architecture     | Network model, encryption, authentication, audit trail                                               | [Security](./code-security.md)                       |
 
 If you need request-level audit logging or to route traffic by data sensitivity, place an [LLM gateway](./code-llm-gateway.md) between developers and your provider. For regulatory requirements and certifications, see [Legal and compliance](./code-legal-and-compliance.md).
 

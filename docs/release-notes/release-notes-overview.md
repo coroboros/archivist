@@ -49,7 +49,7 @@ For updates to Claude Code, see the [complete CHANGELOG.md](https://github.com/a
 - The Messages API response now includes [`usage.output_tokens_details.thinking_tokens`](../build-with-claude/build-with-claude-extended-thinking.md#working-with-thinking-budgets), reporting how many of the billed output tokens were extended thinking. When streaming, the breakdown appears only on the final `message_delta` event. No beta header is required.
 
 ### May 19, 2026
-- [MCP tunnels](../agents-and-tools/agents-and-tools-mcp-tunnels-overview.md) is now available as a Research Preview, so you can connect to MCP servers in your private network.
+- [MCP tunnels](../agents-and-tools/agents-and-tools-mcp-tunnels-overview.md) is now available as a research preview, so you can connect to MCP servers in your private network.
 - Self-hosted sandboxes are now available for Claude Managed Agents, as an alternative to running tool execution in Anthropic's infrastructure. See [Self-hosted sandboxes](../managed-agents/managed-agents-self-hosted-sandboxes.md).
 - With Claude Managed Agents, you can now update the agent's MCP server and tool configurations associated with an active session.
 - With Claude Managed Agents, large outputs from `agent_toolset` and MCP tools exceeding 100K tokens are now automatically spilled to a file in the sandbox. The model receives a truncated preview with the file path and can read the full content from there.
@@ -96,7 +96,7 @@ For updates to Claude Code, see the [complete CHANGELOG.md](https://github.com/a
 
 ### April 8, 2026
 - We've launched **Claude Managed Agents** in public beta, a fully managed agent harness for running Claude as an autonomous agent with secure sandboxing, built-in tools, and server-sent event streaming. Create agents, configure containers, and run sessions through the API. All endpoints require the `managed-agents-2026-04-01` beta header. Learn more in [Claude Managed Agents overview](../managed-agents/managed-agents-overview.md).
-- We've launched the **`ant` CLI**, a command-line client for the Claude API that enables faster interaction with the Claude API, native integration with Claude Code, and versioning of API resources in YAML files. Learn more in the [CLI reference](../api/api-sdks-cli.md).
+- We've launched the **`ant` CLI**, a command-line client for the Claude API that enables faster interaction with the Claude API, native integration with Claude Code, and versioning of API resources in YAML files. Learn more in the [CLI quickstart](https://platform.claude.com/docs/en/cli-sdks-libraries/cli/quickstart.md).
 
 ### April 7, 2026
 - We announced [Claude Mythos Preview](https://anthropic.com/glasswing) is available as a gated research preview for defensive cybersecurity work as part of [Project Glasswing](https://anthropic.com/glasswing). Access is invitation-only.
@@ -308,7 +308,7 @@ _<sup>* - Opus 4.1 does not allow both `temperature` and `top_p` parameters to b
 ### February 27th, 2025
 - We've added URL source blocks for images and PDFs in the Messages API. You can now reference images and PDFs directly via URL instead of having to base64-encode them. Learn more in [Vision](../build-with-claude/build-with-claude-vision.md) and [PDF support](../build-with-claude/build-with-claude-pdf-support.md).
 - We've added support for a `none` option to the `tool_choice` parameter in the Messages API that prevents Claude from calling any tools. Additionally, you're no longer required to provide any `tools` when including `tool_use` and `tool_result` blocks.
-- We've launched an OpenAI-compatible API endpoint, allowing you to test Claude models by changing just your API key, base URL, and model name in existing OpenAI integrations. This compatibility layer supports core chat completions functionality. Learn more in [OpenAI SDK compatibility](../api/api-openai-sdk.md).
+- We've launched an OpenAI-compatible API endpoint, allowing you to test Claude models by changing just your API key, base URL, and model name in existing OpenAI integrations. This compatibility layer supports core chat completions functionality. Learn more in [OpenAI SDK compatibility](https://platform.claude.com/docs/en/cli-sdks-libraries/libraries/openai-sdk.md).
 
 ### February 24th, 2025
 - We've launched [Claude Sonnet 3.7](https://www.anthropic.com/news/claude-3-7-sonnet), our most intelligent model yet. Claude Sonnet 3.7 can produce near-instant responses or show its extended thinking step-by-step. One model, two ways to think. Learn more about all Claude models in [Models overview](https://platform.claude.com/docs/en/about-claude/models.md).

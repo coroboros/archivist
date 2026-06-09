@@ -1,5 +1,55 @@
 # Changelog
 
+## 🤖 v1.4.44 - 09/06/2026
+
+File Changes:
+
+- Modified: `docs/agents-and-tools/agents-and-tools-README.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-agent-skills-claude-api-skill.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-agent-skills-quickstart.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-advisor-tool.md`
+- Modified: `docs/api/api-README.md`
+- Modified: `docs/api/api-beta-headers.md`
+- Modified: `docs/api/api-claude-code-routines-fire.md`
+- Modified: `docs/api/api-client-sdks.md`
+- Modified: `docs/api/api-errors.md`
+- Modified: `docs/api/api-get-started.md`
+- Modified: `docs/api/api-openai-sdk.md`
+- Modified: `docs/api/api-overview.md`
+- Modified: `docs/api/api-rate-limits.md`
+- Deleted: `docs/api/api-sdks-cli.md`
+- Modified: `docs/api/api-versioning.md`
+- Modified: `docs/build-with-claude/build-with-claude-README.md`
+- Modified: `docs/build-with-claude/build-with-claude-claude-in-amazon-bedrock.md`
+- Modified: `docs/build-with-claude/build-with-claude-claude-in-microsoft-foundry.md`
+- Modified: `docs/build-with-claude/build-with-claude-claude-on-amazon-bedrock-legacy.md`
+- Modified: `docs/build-with-claude/build-with-claude-claude-on-amazon-bedrock.md`
+- Modified: `docs/build-with-claude/build-with-claude-claude-on-vertex-ai.md`
+- Modified: `docs/build-with-claude/build-with-claude-claude-platform-on-aws.md`
+- Modified: `docs/build-with-claude/build-with-claude-context-editing.md`
+- Modified: `docs/build-with-claude/build-with-claude-data-residency.md`
+- Modified: `docs/build-with-claude/build-with-claude-streaming.md`
+- Modified: `docs/build-with-claude/build-with-claude-structured-outputs.md`
+- Modified: `docs/build-with-claude/build-with-claude-task-budgets.md`
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-admin-setup.md`
+- Modified: `docs/code/code-agents.md`
+- Modified: `docs/code/code-changelog.md`
+- Modified: `docs/code/code-data-usage.md`
+- Modified: `docs/code/code-mcp.md`
+- Modified: `docs/code/code-plugins.md`
+- Modified: `docs/code/code-workflows.md`
+- Modified: `docs/code/code-zero-data-retention.md`
+- Modified: `docs/manage-claude/manage-claude-README.md`
+- Modified: `docs/manage-claude/manage-claude-authentication.md`
+- Modified: `docs/manage-claude/manage-claude-data-residency.md`
+- Modified: `docs/manage-claude/manage-claude-workload-identity-federation.md`
+- Modified: `docs/managed-agents/managed-agents-README.md`
+- Modified: `docs/managed-agents/managed-agents-dreams.md`
+- Modified: `docs/release-notes/release-notes-README.md`
+- Modified: `docs/release-notes/release-notes-overview.md`
+
+
 ## 🤖 v1.4.43 - 08/06/2026
 
 File Changes:

@@ -1008,7 +1008,7 @@ func main() {
 </Tab>
 <Tab title="Java">
 
-Java examples on this page use [JDK 25 compact source file](https://openjdk.org/jeps/512) syntax; see the [Java SDK requirements](../api/api-sdks-java.md#requirements) for the substitution on earlier JDKs.
+Java examples on this page use [JDK 25 compact source file](https://openjdk.org/jeps/512) syntax; see the [Java SDK requirements](https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/java.md#requirements) for the substitution on earlier JDKs.
 
 **`outputConfig(Class<T>)` method**
 

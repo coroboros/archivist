@@ -74,7 +74,7 @@ Use the `aws-bedrock-token-generator` CLI to mint a bearer token. Pass it in the
 
 ## Install an SDK
 
-Anthropic's [client SDKs](../api/api-client-sdks.md) support Claude in Amazon Bedrock through a Bedrock-specific package or module.
+Anthropic's [client SDKs](https://platform.claude.com/docs/en/cli-sdks-libraries/overview.md) support Claude in Amazon Bedrock through a Bedrock-specific package or module.
 
 <Tabs>
 <Tab title="Python">

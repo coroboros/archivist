@@ -304,6 +304,8 @@ The advisor itself runs without tools and without context management. Its thinki
 
 The `caching` object has the shape `{"type": "ephemeral", "ttl": "5m" | "1h"}`. Unlike `cache_control` on content blocks, this is not a breakpoint marker; it is an on/off switch. The server decides where cache boundaries go.
 
+The advisor tool also accepts the generic properties available on any tool definition: `cache_control`, `allowed_callers`, `defer_loading`, and `strict` (covered in [structured outputs](../build-with-claude/build-with-claude-structured-outputs.md)). See the [Tool reference](./agents-and-tools-tool-use-tool-reference.md#tool-definition-properties) for their semantics.
+
 ## Response structure
 
 ### Successful advisor call

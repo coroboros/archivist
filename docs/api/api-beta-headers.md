@@ -15,7 +15,7 @@ Beta headers allow you to access experimental features and new model capabilitie
 These features are subject to change and may be modified or removed in future releases.
 
 <Info>
-Beta headers are often used in conjunction with the [beta namespace in the client SDKs](./api-client-sdks.md#beta-namespace-in-client-sdks)
+Beta headers are often used in conjunction with the `beta` namespace exposed by each [client SDK](https://platform.claude.com/docs/en/cli-sdks-libraries/overview.md).
 </Info>
 
 ## How to use beta headers
