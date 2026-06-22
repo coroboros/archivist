@@ -1,5 +1,20 @@
 # Changelog
 
+## 🧑‍💻 v1.5.0 - 22/06/2026
+
+### Documentation
+
+- Added insight `docs/insights/claude-code-designing-loops-fable-5.md` — "Designing Loops with Fable 5" by Lance Martin: self-correction loops (`/goal`, `Outcomes`, verifier sub-agents) and memory as a cross-session outer loop.
+
+### Fixes
+
+- `update-platform-docs.js`: retain mirrored pages that still serve a live `.md` after dropping out of the upstream sitemap — re-seed discovery from `source:` URLs so only a real 404 removes a page.
+
+### Configuration
+
+- `sync-docs.yml`: dropped the failure-notification issue step and its `issues: write` permission.
+
+
 ## 🤖 v1.4.45 - 09/06/2026
 
 File Changes:

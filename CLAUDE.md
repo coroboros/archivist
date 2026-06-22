@@ -56,6 +56,6 @@ Per-folder editing rules: `.claude/rules/doc-authoring.md`.
 - **Package manager**: pnpm (Corepack)
 - **Linter/Formatter**: Biome (`biome check --write`)
 - **Language**: Plain JavaScript (ES modules), no TypeScript
-- **CI**: `.github/workflows/sync-docs.yml` runs every 12h, auto-versions with `pnpm version patch`, commits, tags, creates GitHub releases. On failure, auto-opens a `sync-docs-failure`-labelled issue (de-duped per day) so silent breakage cannot happen.
+- **CI**: `.github/workflows/sync-docs.yml` runs every 12h, auto-versions with `pnpm version patch`, commits, tags, creates GitHub releases. A failed run surfaces as a red run in the Actions tab — enable GitHub's failed-workflow notifications to be alerted.
 - **Safety guard**: CI aborts if more than 25% of files in any docs folder are deleted (configurable via `MAX_REMOVED_FILES_PERCENTAGE`)
 - **Versioning**: SemVer, auto-patched by CI on doc changes. Manual releases follow the inline **Git** rule above (overrides global `~/.claude/rules/git-conventions.md`).
