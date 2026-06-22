@@ -1,5 +1,12 @@
 # Changelog
 
+## 🧑‍💻 v1.5.0 - 22/06/2026
+
+### Documentation
+
+- Added insight `docs/insights/claude-code-designing-loops-fable-5.md` — "Designing Loops with Fable 5" by Lance Martin ([@RLanceMartin](https://x.com/RLanceMartin)): self-correction loops (`/goal`, `Outcomes`, verifier sub-agents over self-critique) and memory as a cross-session outer loop (the fail → investigate → verify → distill → consult progression). Listed under Claude Code in `insights-README.md`; `docs/INDEX.md` regenerated.
+
+
 ## 🤖 v1.4.45 - 09/06/2026
 
 File Changes:

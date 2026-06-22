@@ -10,6 +10,7 @@ This folder is maintained manually and is **not part of the automated official d
 
 - [Best Practices for Using Claude Opus 4.7 with Claude Code](./claude-code-best-practices-opus-4-7.md)
 - [Claude Code — Key Practices](./claude-code-key-practices.md)
+- [Designing Loops with Fable 5](./claude-code-designing-loops-fable-5.md)
 - [Hidden and Under-Utilized Features in Claude Code](./claude-code-hidden-features.md)
 - [How Boris Cherny Uses Claude Code (Creator Setup Guide)](./claude-code-workflow-boris-cherny.md)
 - [Using Claude Code: The Unreasonable Effectiveness of HTML](./claude-code-html-effectiveness.md)
