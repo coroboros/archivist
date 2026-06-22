@@ -21,8 +21,6 @@ The Message Batches API is Anthropic's first implementation of this pattern.
 This feature is **not** eligible for [Zero Data Retention (ZDR)](./build-with-claude-api-and-data-retention.md). Data is retained according to the feature's standard retention policy.
 </Note>
 
----
-
 # Message Batches API
 
 The Message Batches API is a powerful, cost-effective way to asynchronously process large volumes of [Messages](../api/api-messages-create.md) requests. This approach is well-suited to tasks that do not require immediate responses, with most batches finishing in less than 1 hour while reducing costs by 50% and increasing throughput.
@@ -83,26 +81,26 @@ A small number of Messages API parameters are **not** supported in batch request
 Since batches can take longer than 5 minutes to process, consider using the [1-hour cache duration](./build-with-claude-prompt-caching.md#1-hour-cache-duration) with prompt caching for better cache hit rates when processing batches with shared context.
 </Tip>
 
----
 ## Pricing
 
 The Batches API offers significant cost savings. All usage is charged at 50% of the standard API prices.
 
 | Model             | Batch input      | Batch output    |
 |-------------------|------------------|-----------------|
+| Claude Fable 5        | $5 / MTok        | $25 / MTok      |
+| Claude Mythos 5 ([limited availability](https://anthropic.com/glasswing)) | $5 / MTok        | $25 / MTok      |
 | Claude Opus 4.8       | $2.50 / MTok     | $12.50 / MTok   |
 | Claude Opus 4.7       | $2.50 / MTok     | $12.50 / MTok   |
 | Claude Opus 4.6       | $2.50 / MTok     | $12.50 / MTok   |
 | Claude Opus 4.5     | $2.50 / MTok     | $12.50 / MTok   |
 | Claude Opus 4.1 ([deprecated](../about-claude/about-claude-model-deprecations.md)) | $7.50 / MTok     | $37.50 / MTok   |
-| Claude Opus 4 ([deprecated](../about-claude/about-claude-model-deprecations.md)) | $7.50 / MTok     | $37.50 / MTok   |
+| Claude Opus 4 ([retired, except on Vertex AI](../about-claude/about-claude-model-deprecations.md)) | $7.50 / MTok     | $37.50 / MTok   |
 | Claude Sonnet 4.6   | $1.50 / MTok     | $7.50 / MTok    |
 | Claude Sonnet 4.5   | $1.50 / MTok     | $7.50 / MTok    |
-| Claude Sonnet 4 ([deprecated](../about-claude/about-claude-model-deprecations.md)) | $1.50 / MTok     | $7.50 / MTok    |
+| Claude Sonnet 4 ([retired, except on Bedrock and Vertex AI](../about-claude/about-claude-model-deprecations.md)) | $1.50 / MTok     | $7.50 / MTok    |
 | Claude Haiku 4.5  | $0.50 / MTok     | $2.50 / MTok    |
 | Claude Haiku 3.5 ([retired, except on Bedrock and Vertex AI](../about-claude/about-claude-model-deprecations.md)) | $0.40 / MTok     | $2 / MTok       |
 
----
 ## How to use the Message Batches API
 
 ### Prepare and create your batch
@@ -2172,14 +2170,12 @@ If experiencing unexpected behavior:
 
 Note that the failure of one request in a batch does not affect the processing of other requests.
 
----
 ## Batch storage and privacy
 
 - **Workspace isolation**: Batches are isolated within the Workspace they are created in. They can only be accessed by API keys associated with that Workspace, or users with permission to view Workspace batches in the Console.
 
 - **Result availability**: Batch results are available for 29 days after the batch is created, allowing ample time for retrieval and processing.
 
----
 ## Data retention
 
 Batch processing stores request and response data for up to 29 days after batch creation. You can delete a message batch at any time after processing using the `DELETE /v1/messages/batches/{batch_id}` endpoint. To delete an in-progress batch, cancel it first. Asynchronous processing requires server-side storage of both inputs and outputs until batch completion and result retrieval.
@@ -2246,3 +2242,14 @@ For ZDR eligibility across all features, see [API and data retention](../manage-
     Yes, it is possible to use prompt caching with Message Batches API. However, because asynchronous batch requests can be processed concurrently and in any order, cache hits are provided on a best-effort basis.
   
 </section>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Search results" icon="magnifying-glass" href="./build-with-claude-search-results.md">
+    Enable natural citations for RAG applications by providing search results with source attribution.
+  </Card>
+  <Card title="Prompt caching" icon="database" href="./build-with-claude-prompt-caching.md">
+    Reduce cost and latency by caching prompt prefixes shared across requests in a batch.
+  </Card>
+</CardGroup>

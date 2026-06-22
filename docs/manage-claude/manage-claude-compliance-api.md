@@ -10,11 +10,7 @@ Programmatic access to your organization's Claude activity, chats, files, projec
 
 ---
 
-<Note>
-  The Compliance API is enabled on request. Claude Enterprise organizations have access to the full API; Claude Console organizations have access to the [Activity Feed](./manage-claude-compliance-activity-feed.md) only. See [Get access to the Compliance API](./manage-claude-compliance-api-access.md).
-</Note>
-
-The Compliance API gives Claude Enterprise customers programmatic access to their organization's Activity Feed, the directory of users, roles, and groups across every linked organization, and, for claude.ai organizations, the underlying chats, files, and projects. Security, legal, and compliance teams use it to audit activity, retrieve or delete content, and feed events into downstream tooling.
+The Compliance API gives Claude Enterprise customers programmatic access to their organization's Activity Feed, the directory of users, roles, and groups across every linked organization, the effective settings in force for each organization, and, for claude.ai organizations, the underlying chats, files, and projects. Security, legal, and compliance teams use it to audit activity, retrieve or delete content, and feed events into downstream tooling.
 
 <Note>
   Two key types unlock the Compliance API. A **Compliance Access Key** (created in claude.ai) reaches every endpoint, and an **Admin API key** (created in Claude Console) reaches the Activity Feed only. See [Which key do you need?](./manage-claude-compliance-api-access.md#which-key-do-you-need) for the full key-type comparison.
@@ -98,8 +94,8 @@ Anthropic provides two analytics APIs: the Claude Enterprise Analytics API and t
   <Card href="./manage-claude-compliance-content-data.md" title="Retrieve and delete chats, files, and projects">
     Read chat content and attachments, then delete on demand. Compliance Access Key required.
   </Card>
-  <Card href="./manage-claude-compliance-org-data.md" title="List organizations, users, roles, and groups">
-    Enumerate linked organizations, members, roles, and directory groups.
+  <Card href="./manage-claude-compliance-org-data.md" title="List organizations, users, roles, groups, and settings">
+    Enumerate linked organizations, members, roles, and directory groups, and read each organization's effective settings.
   </Card>
   <Card href="./manage-claude-compliance-integration-patterns.md" title="Design your compliance integration">
     Choose a feed-consumption pattern, plan SIEM correlation, and decide your retention approach.

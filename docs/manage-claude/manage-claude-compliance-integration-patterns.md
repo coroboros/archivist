@@ -11,7 +11,7 @@ Choose between polling and cursor-driven Activity Feed consumption, correlate Co
 ---
 
 <Note>
-  The Compliance API is enabled on request. Claude Enterprise organizations have access to the full API; Claude Console organizations have access to the [Activity Feed](./manage-claude-compliance-activity-feed.md) only. See [Get access to the Compliance API](./manage-claude-compliance-api-access.md).
+  To enable the Compliance API, see [Get access to the Compliance API](./manage-claude-compliance-api-access.md).
 </Note>
 
 <Check>
@@ -79,7 +79,7 @@ Page through until `has_more` is `false`, then persist `first_id` from the final
 
 A production **catch-up** loop fetches activities recorded since your last poll by driving iteration off `has_more` and `first_id`:
 
-```text
+```text nowrap
 cursor = stored_cursor
 loop:
   page = GET /v1/compliance/activities?before_id={cursor}&limit=5000

@@ -6,6 +6,8 @@ generated: true
 ---
 # Streaming messages
 
+Stream Messages API responses incrementally with server-sent events, including text, tool use, and extended thinking deltas.
+
 ---
 
 When creating a Message, you can set `"stream": true` to incrementally stream the response using [server-sent events](https://developer.mozilla.org/en-US/Web/API/Server-sent%5Fevents/Using%5Fserver-sent%5Fevents) (SSE).
@@ -371,7 +373,7 @@ If you don't need to process text as it arrives, the SDKs provide a way to use s
     ```
 </CodeGroup>
 
-The `.stream()` call keeps the HTTP connection alive with server-sent events, then `.get_final_message()` (Python) or `.finalMessage()` (TypeScript) accumulates all events and returns the complete `Message` object. In Go, you call `message.Accumulate(event)` inside the stream loop to build the same complete `Message`. In Java, use `MessageAccumulator.create()` and call `accumulator.accumulate(event)` on each event. In Ruby, call `.accumulated_message` on the stream. In the PHP SDK, you iterate over stream events manually to accumulate the response.
+The `.stream()` call keeps the HTTP connection alive with server-sent events, then `.get_final_message()` (Python) or `.finalMessage()` (TypeScript) accumulates all events and returns the complete `Message` object. In Go, you call `message.Accumulate(event)` inside the stream loop to build the same complete `Message`. In Java, use `MessageAccumulator.create()` and call `accumulator.accumulate(event)` on each event. In C#, await the stream's `.Aggregate()` extension method to get the complete `Message`, or pass a `MessageContentAggregator` to `.CollectAsync()` to aggregate while handling events. In Ruby, call `.accumulated_message` on the stream. In the PHP SDK, you iterate over stream events manually to accumulate the response.
 
 ## Event types
 
@@ -380,7 +382,7 @@ Each server-sent event includes a named event type and associated JSON data. Eac
 Each stream uses the following event flow:
 
 1. `message_start`: contains a `Message` object with empty `content`.
-2. A series of content blocks, each of which have a `content_block_start`, one or more `content_block_delta` events, and a `content_block_stop` event. Each content block has an `index` that corresponds to its index in the final Message `content` array.
+2. A series of content blocks, each of which has a `content_block_start`, one or more `content_block_delta` events, and a `content_block_stop` event. Each content block has an `index` that corresponds to its index in the final Message `content` array. One exception: during [server-side fallback](./build-with-claude-refusals-and-fallback.md#server-side-fallback) responses, a `fallback` content block arrives at each model boundary as a `content_block_start` and `content_block_stop` pair with no deltas in between.
 3. One or more `message_delta` events, indicating top-level changes to the final `Message` object.
 4. A final `message_stop` event.
 
@@ -1733,3 +1735,23 @@ For Claude 4.6 and later models, the same capture-and-resume strategy applies, b
 
 1. **Use SDK features:** Leverage the SDK's built-in message accumulation and error handling capabilities
 2. **Handle content types:** Be aware that messages can contain multiple content blocks (`text`, `tool_use`, `thinking`). Tool use and extended thinking blocks cannot be partially recovered. You can resume streaming from the most recent text block.
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Stop reasons and fallback" icon="list" href="./build-with-claude-handling-stop-reasons.md">
+    Handle each `stop_reason` value once a stream completes.
+  </Card>
+  <Card title="Fine-grained tool streaming" icon="wrench" href="../agents-and-tools/agents-and-tools-tool-use-fine-grained-tool-streaming.md">
+    Stream tool input JSON without server-side buffering for lower latency.
+  </Card>
+  <Card title="Extended thinking" icon="brain" href="./build-with-claude-extended-thinking.md">
+    Stream extended thinking output with `thinking_delta` and `signature_delta` events.
+  </Card>
+  <Card title="Client SDKs" icon="code" href="https://platform.claude.com/docs/en/cli-sdks-libraries/overview.md">
+    Use the official SDKs, which handle streaming, accumulation, and reconnection for you.
+  </Card>
+  <Card title="Batch processing" icon="stack" href="./build-with-claude-batch-processing.md">
+    Process large volumes of requests asynchronously when you don't need real-time responses.
+  </Card>
+</CardGroup>

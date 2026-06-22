@@ -160,7 +160,7 @@ Create an external key config owned by the caller's organization.
 curl https://api.anthropic.com/v1/organizations/external_keys \
     -H 'Content-Type: application/json' \
     -H 'anthropic-version: 2023-06-01' \
-    -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY" \
+    -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN" \
     -d '{
           "display_name": "x",
           "provider_config": {
@@ -296,7 +296,7 @@ Results are ordered by creation time (newest first). Use the
 ```http
 curl https://api.anthropic.com/v1/organizations/external_keys \
     -H 'anthropic-version: 2023-06-01' \
-    -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
+    -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
 ```
 
 #### Response
@@ -416,7 +416,7 @@ Retrieve a single external key config in the caller's organization by ID.
 ```http
 curl https://api.anthropic.com/v1/organizations/external_keys/$EXTERNAL_KEY_ID \
     -H 'anthropic-version: 2023-06-01' \
-    -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
+    -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
 ```
 
 #### Response
@@ -602,7 +602,7 @@ encrypted data requires the original key identity to decrypt.
 curl https://api.anthropic.com/v1/organizations/external_keys/$EXTERNAL_KEY_ID \
     -H 'Content-Type: application/json' \
     -H 'anthropic-version: 2023-06-01' \
-    -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY" \
+    -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN" \
     -d '{}'
 ```
 
@@ -655,7 +655,7 @@ The request is rejected if any workspace still references this config.
 curl https://api.anthropic.com/v1/organizations/external_keys/$EXTERNAL_KEY_ID \
     -X DELETE \
     -H 'anthropic-version: 2023-06-01' \
-    -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
+    -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
 ```
 
 #### Response
@@ -708,7 +708,7 @@ message if it failed or timed out.
 curl https://api.anthropic.com/v1/organizations/external_keys/$EXTERNAL_KEY_ID/validate \
     -X POST \
     -H 'anthropic-version: 2023-06-01' \
-    -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
+    -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
 ```
 
 #### Response
@@ -809,89 +809,87 @@ curl https://api.anthropic.com/v1/organizations/external_keys/$EXTERNAL_KEY_ID/v
 
 ### External Key List Response
 
-- `ExternalKeyListResponse object { data, next_page }`
+- `ExternalKeyListResponse object { id, created_at, display_name, 4 more }`
 
-  Opaque-cursor page of external keys, ordered by creation time (newest first).
+  CMEK external key config belonging to the caller's organization.
 
-  - `data: array of object { id, created_at, display_name, 4 more }`
+  Configs are organization-scoped. Workspaces attach to a config; once any
+  workspace references it, the provider fields become effectively immutable
+  (existing encrypted data needs the config for decrypt).
 
-    - `id: string`
+  - `id: string`
 
-      Tagged ID of the external key config.
+    Tagged ID of the external key config.
 
-    - `created_at: string`
+  - `created_at: string`
 
-    - `display_name: string`
+  - `display_name: string`
 
-      Human-friendly display name.
+    Human-friendly display name.
 
-    - `geo: string`
+  - `geo: string`
 
-      Data residency geo. Selects which regional validator handles this key's encrypt/decrypt roundtrips.
+    Data residency geo. Selects which regional validator handles this key's encrypt/decrypt roundtrips.
 
-    - `provider_config: object { kms_arn, role_arn, type, region }  or object { key_name, type }  or object { key_name, tenant_id, type, 2 more }`
+  - `provider_config: object { kms_arn, role_arn, type, region }  or object { key_name, type }  or object { key_name, tenant_id, type, 2 more }`
 
-      KMS provider identity and auth coordinates.
+    KMS provider identity and auth coordinates.
 
-      - `Aws object { kms_arn, role_arn, type, region }`
+    - `Aws object { kms_arn, role_arn, type, region }`
 
-        - `kms_arn: string`
+      - `kms_arn: string`
 
-          Full ARN of the AWS KMS key.
+        Full ARN of the AWS KMS key.
 
-        - `role_arn: string`
+      - `role_arn: string`
 
-          IAM role ARN that Anthropic assumes to access the KMS key.
+        IAM role ARN that Anthropic assumes to access the KMS key.
 
-        - `type: "aws"`
+      - `type: "aws"`
 
-          - `"aws"`
+        - `"aws"`
 
-        - `region: optional string`
+      - `region: optional string`
 
-          AWS region. Derived from kms_arn if omitted.
+        AWS region. Derived from kms_arn if omitted.
 
-      - `Gcp object { key_name, type }`
+    - `Gcp object { key_name, type }`
 
-        - `key_name: string`
+      - `key_name: string`
 
-          Full resource name of the Cloud KMS key.
+        Full resource name of the Cloud KMS key.
 
-        - `type: "gcp"`
+      - `type: "gcp"`
 
-          - `"gcp"`
+        - `"gcp"`
 
-      - `Azure object { key_name, tenant_id, type, 2 more }`
+    - `Azure object { key_name, tenant_id, type, 2 more }`
 
-        - `key_name: string`
+      - `key_name: string`
 
-          Name of the key within the vault.
+        Name of the key within the vault.
 
-        - `tenant_id: string`
+      - `tenant_id: string`
 
-          Azure AD tenant ID.
+        Azure AD tenant ID.
 
-        - `type: "azure"`
+      - `type: "azure"`
 
-          - `"azure"`
+        - `"azure"`
 
-        - `vault_uri: string`
+      - `vault_uri: string`
 
-          Key Vault URI.
+        Key Vault URI.
 
-        - `client_id: optional string`
+      - `client_id: optional string`
 
-          Azure AD application (client) ID. Omit to use Anthropic's multi-tenant app. Provide only if using a single-tenant app registration in the customer's directory.
+        Azure AD application (client) ID. Omit to use Anthropic's multi-tenant app. Provide only if using a single-tenant app registration in the customer's directory.
 
-    - `type: "external_key"`
+  - `type: "external_key"`
 
-      - `"external_key"`
+    - `"external_key"`
 
-    - `updated_at: string`
-
-  - `next_page: string`
-
-    Opaque cursor for the next page, or null if no more results. Pass as `?page=` to fetch the next page.
+  - `updated_at: string`
 
 ### External Key Retrieve Response
 

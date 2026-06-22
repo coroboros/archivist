@@ -2553,6 +2553,14 @@ var_dump($messageTokensCount);
 
 - `Model`
 
+  - `"claude-fable-5"`
+
+    Next generation of intelligence for the hardest knowledge work and coding problems
+
+  - `"claude-mythos-5"`
+
+    Most capable model for cybersecurity and biology research
+
   - `"claude-opus-4-8"`
 
     Frontier intelligence for long-running agents and coding
@@ -3727,6 +3735,8 @@ var_dump($messageTokensCount);
   - `ToolSearchToolResultErrorCode errorCode`
 
   - `"tool_search_tool_result_error" type`
+
+  - `?string errorMessage`
 
 ### Tool Search Tool Search Result Block
 

@@ -261,6 +261,16 @@ Or inline in `plugin.json`:
 
 Plugin servers appear in the list with indicators showing they come from plugins.
 
+**Plugin MCP tool names**:
+
+Tools from a plugin-bundled MCP server include both the plugin name and the server key in their callable name. The full form is `mcp__plugin_<plugin-name>_<server-name>__<tool-name>`, where any character outside `A-Z`, `a-z`, `0-9`, `_`, and `-` is replaced with `_`. For the `database-tools` server bundled in a plugin named `my-plugin`, a `query` tool is callable as:
+
+```
+mcp__plugin_my-plugin_database-tools__query
+```
+
+Use this full name when referencing the tool in [permission rules](./code-permissions.md), a skill's `allowed-tools` list, or a [subagent's `tools` field](./code-sub-agents.md#available-tools).
+
 **Benefits of plugin MCP servers**:
 
 * **Bundled distribution**: Tools and servers packaged together
@@ -395,24 +405,6 @@ Environment variables can be expanded in:
 If a required environment variable is not set and has no default value, Claude Code will fail to parse the config.
 
 ## Practical examples
-
-{/* ### Example: Automate browser testing with Playwright
-
-```bash
-claude mcp add --transport stdio playwright -- npx -y @playwright/mcp@latest
-```
-
-Then write and run browser tests:
-
-```text
-Test if the login flow works with test@example.com
-```
-```text
-Take a screenshot of the checkout page on mobile
-```
-```text
-Verify that the search feature returns results
-``` */}
 
 ### Example: Monitor errors with Sentry
 
@@ -804,11 +796,29 @@ A server you've added in Claude Code takes [precedence](#scope-hierarchy-and-pre
 
 Some Anthropic-hosted connectors, such as Microsoft 365, Gmail, and Google Calendar, do not support local OAuth from Claude Code because the upstream identity provider only accepts the redirect URL that claude.ai registered. From v2.1.162, authenticating one of these hosts in `/mcp` shows a message directing you to connect it at Settings → Connectors on claude.ai instead. Once connected there, the connector appears in Claude Code automatically.
 
-To disable claude.ai MCP servers in Claude Code, set the `ENABLE_CLAUDEAI_MCP_SERVERS` environment variable to `false`:
+### Disable claude.ai connectors
+
+To disable claude.ai MCP servers in Claude Code, set [`disableClaudeAiConnectors`](./code-settings.md#available-settings) to `true` in any settings scope:
+
+```json theme={null}
+{
+  "disableClaudeAiConnectors": true
+}
+```
+
+This setting uses any-source-true semantics: `true` in any settings source takes precedence. A checked-in project `.claude/settings.json` can opt a repository out of cloud connectors, but a project-level `false` cannot re-enable connectors that a user- or policy-level `true` has disabled. Servers passed explicitly via `--mcp-config` are unaffected.
+
+You can also set the `ENABLE_CLAUDEAI_MCP_SERVERS` environment variable to `false`, which has the same effect for the current shell session:
 
 ```bash theme={null}
 ENABLE_CLAUDEAI_MCP_SERVERS=false claude
 ```
+
+To block individual claude.ai connectors instead of all of them, add them to [`deniedMcpServers`](./code-managed-mcp.md) by name or by URL pattern. For example, a `serverName` entry of `"claude.ai Slack"` blocks the Slack connector. To toggle a connector on or off for the current project only, use the `/mcp` panel.
+
+<Note>
+  These client-side settings govern local Claude Code sessions. In [Claude Code on the web](./code-claude-code-on-the-web.md) sessions, claude.ai connectors are provisioned by the remote host and arrive as explicit `--mcp-config` entries, so `disableClaudeAiConnectors` does not apply there. Connector URLs are also rewritten through the session proxy, so a `deniedMcpServers` `serverUrl` pattern targeting the vendor URL will not match. Manage which connectors a cloud session can use from your claude.ai organization settings.
+</Note>
 
 ## Use Claude Code as an MCP server
 
@@ -969,7 +979,7 @@ MCP servers can expose resources that you can reference using @ mentions, simila
 
 ## Scale with MCP Tool Search
 
-Tool search keeps MCP context usage low by deferring tool definitions until Claude needs them. Only tool names and server instructions load at session start, so adding more MCP servers has minimal impact on your context window.
+Tool search keeps MCP context usage low by deferring tool definitions until Claude needs them. Only tool names and server instructions load at session start, so adding more MCP servers has minimal impact on your context window. Claude Code does not impose a fixed per-server tool cap; the practical limit is your context window budget.
 
 ### How it works
 
@@ -993,7 +1003,7 @@ Claude Code truncates tool descriptions and server instructions at 2KB each. Kee
 
 Tool search is enabled by default: MCP tools are deferred and discovered on demand. Claude Code disables it by default on Vertex AI. It is also disabled when `ANTHROPIC_BASE_URL` points to a non-first-party host, since most proxies do not forward `tool_reference` blocks. Set `ENABLE_TOOL_SEARCH` explicitly to override either fallback.
 
-Tool search requires a model that supports `tool_reference` blocks: Sonnet 4 and later, or Opus 4 and later. Haiku models do not support it. On Vertex AI, tool search is supported for Claude Sonnet 4.5 and later and Claude Opus 4.5 and later.
+Tool search requires a model that supports `tool_reference` blocks. Haiku models do not support it. On Vertex AI, tool search is supported for Claude Sonnet 4.5 and later and Claude Opus 4.5 and later.
 
 Control tool search behavior with the `ENABLE_TOOL_SEARCH` environment variable:
 

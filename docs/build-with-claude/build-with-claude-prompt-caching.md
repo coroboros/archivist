@@ -265,15 +265,17 @@ Prompt caching introduces a new pricing structure. The table below shows the pri
 
 | Model             | Base Input Tokens | 5m Cache Writes | 1h Cache Writes | Cache Hits & Refreshes | Output Tokens |
 |-------------------|-------------------|-----------------|-----------------|----------------------|---------------|
+| Claude Fable 5      | $10 / MTok        | $12.50 / MTok   | $20 / MTok      | $1 / MTok | $50 / MTok    |
+| Claude Mythos 5 ([limited availability](https://anthropic.com/glasswing)) | $10 / MTok        | $12.50 / MTok   | $20 / MTok      | $1 / MTok | $50 / MTok    |
 | Claude Opus 4.8     | $5 / MTok         | $6.25 / MTok    | $10 / MTok      | $0.50 / MTok | $25 / MTok    |
 | Claude Opus 4.7     | $5 / MTok         | $6.25 / MTok    | $10 / MTok      | $0.50 / MTok | $25 / MTok    |
 | Claude Opus 4.6     | $5 / MTok         | $6.25 / MTok    | $10 / MTok      | $0.50 / MTok | $25 / MTok    |
 | Claude Opus 4.5   | $5 / MTok         | $6.25 / MTok    | $10 / MTok      | $0.50 / MTok | $25 / MTok    |
 | Claude Opus 4.1 ([deprecated](../about-claude/about-claude-model-deprecations.md)) | $15 / MTok        | $18.75 / MTok   | $30 / MTok      | $1.50 / MTok | $75 / MTok    |
-| Claude Opus 4 ([deprecated](../about-claude/about-claude-model-deprecations.md)) | $15 / MTok        | $18.75 / MTok   | $30 / MTok      | $1.50 / MTok | $75 / MTok    |
+| Claude Opus 4 ([retired, except on Vertex AI](../about-claude/about-claude-model-deprecations.md)) | $15 / MTok        | $18.75 / MTok   | $30 / MTok      | $1.50 / MTok | $75 / MTok    |
 | Claude Sonnet 4.6   | $3 / MTok         | $3.75 / MTok    | $6 / MTok       | $0.30 / MTok | $15 / MTok    |
 | Claude Sonnet 4.5   | $3 / MTok         | $3.75 / MTok    | $6 / MTok       | $0.30 / MTok | $15 / MTok    |
-| Claude Sonnet 4 ([deprecated](../about-claude/about-claude-model-deprecations.md)) | $3 / MTok         | $3.75 / MTok    | $6 / MTok       | $0.30 / MTok | $15 / MTok    |
+| Claude Sonnet 4 ([retired, except on Bedrock and Vertex AI](../about-claude/about-claude-model-deprecations.md)) | $3 / MTok         | $3.75 / MTok    | $6 / MTok       | $0.30 / MTok | $15 / MTok    |
 | Claude Haiku 4.5  | $1 / MTok         | $1.25 / MTok    | $2 / MTok       | $0.10 / MTok | $5 / MTok     |
 | Claude Haiku 3.5 ([retired, except on Bedrock and Vertex AI](../about-claude/about-claude-model-deprecations.md)) | $0.80 / MTok      | $1 / MTok       | $1.60 / MTok     | $0.08 / MTok | $4 / MTok     |
 
@@ -648,12 +650,14 @@ Adding more `cache_control` breakpoints doesn't increase your costs - you still 
 
 On the Claude API, [Claude Platform on AWS](./build-with-claude-claude-platform-on-aws.md), [Vertex AI](./build-with-claude-claude-on-vertex-ai.md), and [Microsoft Foundry](./build-with-claude-claude-in-microsoft-foundry.md) (beta), the minimum cacheable prompt length is:
 
-- 4,096 tokens for [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.7, Claude Opus 4.6, and Claude Opus 4.5
-- 1,024 tokens for Claude Opus 4.8, Claude Sonnet 4.6, Claude Sonnet 4.5, Claude Opus 4.1 ([deprecated](../about-claude/about-claude-model-deprecations.md)), Claude Opus 4 ([deprecated](../about-claude/about-claude-model-deprecations.md)), and Claude Sonnet 4 ([deprecated](../about-claude/about-claude-model-deprecations.md))
+- 512 tokens for Claude Fable 5 and [Claude Mythos 5](https://anthropic.com/glasswing)
+- 2,048 tokens for [Claude Mythos Preview](https://anthropic.com/glasswing) and Claude Opus 4.7
+- 4,096 tokens for Claude Opus 4.6 and Claude Opus 4.5
+- 1,024 tokens for Claude Opus 4.8, Claude Sonnet 4.6, Claude Sonnet 4.5, Claude Opus 4.1 ([deprecated](../about-claude/about-claude-model-deprecations.md)), Claude Opus 4 ([retired, except on Vertex AI](../about-claude/about-claude-model-deprecations.md)), and Claude Sonnet 4 ([retired, except on Bedrock and Vertex AI](../about-claude/about-claude-model-deprecations.md))
 - 4,096 tokens for Claude Haiku 4.5
 - 2,048 tokens for Claude Haiku 3.5 ([retired, except on Vertex AI](../about-claude/about-claude-model-deprecations.md))
 
-Model availability varies by platform.
+Model availability varies by platform, and so can the minimum for newly released models: on [Amazon Bedrock](./build-with-claude-claude-in-amazon-bedrock.md), the minimum cacheable prompt length for Claude Fable 5 and Claude Mythos 5 is 1,024 tokens.
 
 Shorter prompts cannot be cached, even if marked with `cache_control`. Any requests to cache fewer than this number of tokens will be processed without caching, and no error is returned. To verify whether a prompt was cached, check the response usage [fields](./build-with-claude-prompt-caching.md#tracking-cache-performance): if both `cache_creation_input_tokens` and `cache_read_input_tokens` are 0, the prompt was not cached (likely because it did not meet the minimum length requirement).
 
@@ -876,6 +880,8 @@ The response will include detailed cache information like the following:
 ```
 
 Note that the current `cache_creation_input_tokens` field equals the sum of the values in the `cache_creation` object.
+
+If you see `ephemeral_5m_input_tokens` writes you didn't request while using server tools such as web search, see [this guide on prompt caching and tool use](../agents-and-tools/agents-and-tools-tool-use-tool-use-with-prompt-caching.md#server-tool-results-are-cached-automatically).
 
 ### When to use the 1-hour cache
 

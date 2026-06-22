@@ -244,6 +244,10 @@ The Models API response can be used to determine which models are available for 
 
       Unique model identifier.
 
+    - `allowed_fallback_models: array of string`
+
+      Model IDs this model accepts as `fallbacks[i].model` on the Messages API. An empty list means the `fallbacks` parameter is not supported for this model as primary.
+
     - `capabilities: object { batch, citations, code_execution, 6 more }`
 
       Model capability information.
@@ -452,6 +456,9 @@ ant beta:models list \
   "data": [
     {
       "id": "claude-opus-4-6",
+      "allowed_fallback_models": [
+        "string"
+      ],
       "capabilities": {
         "batch": {
           "supported": true
@@ -548,11 +555,15 @@ The Models API response can be used to determine information about a specific mo
 
 ### Returns
 
-- `beta_model_info: object { id, capabilities, created_at, 4 more }`
+- `beta_model_info: object { id, allowed_fallback_models, capabilities, 5 more }`
 
   - `id: string`
 
     Unique model identifier.
+
+  - `allowed_fallback_models: array of string`
+
+    Model IDs this model accepts as `fallbacks[i].model` on the Messages API. An empty list means the `fallbacks` parameter is not supported for this model as primary.
 
   - `capabilities: object { batch, citations, code_execution, 6 more }`
 
@@ -749,6 +760,9 @@ ant beta:models retrieve \
 ```json
 {
   "id": "claude-opus-4-6",
+  "allowed_fallback_models": [
+    "string"
+  ],
   "capabilities": {
     "batch": {
       "supported": true
@@ -1078,11 +1092,15 @@ ant beta:models retrieve \
 
 ### Beta Model Info
 
-- `beta_model_info: object { id, capabilities, created_at, 4 more }`
+- `beta_model_info: object { id, allowed_fallback_models, capabilities, 5 more }`
 
   - `id: string`
 
     Unique model identifier.
+
+  - `allowed_fallback_models: array of string`
+
+    Model IDs this model accepts as `fallbacks[i].model` on the Messages API. An empty list means the `fallbacks` parameter is not supported for this model as primary.
 
   - `capabilities: object { batch, citations, code_execution, 6 more }`
 
@@ -1395,7 +1413,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
   There is a limit of 100,000 messages in a single request.
 
-- `--model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string`
+- `--model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
 
   Body param: The model that will complete your prompt.
 
@@ -1419,6 +1437,33 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
   Body param: Request-level diagnostics. Currently carries the previous response
   id for prompt-cache divergence reporting.
+
+- `--fallback-credit-token: optional string`
+
+  Body param: The `fallback_credit_token` from a prior refusal's `stop_details`.
+
+  When a preceding request was refused and returned a `fallback_credit_token`,
+  pass that code here on the retry to have the retry's cache-creation tokens
+  for the prefix that was warm on the refused model billed at the cache-read
+  rate. Must be redeemed by the same organization and workspace, with the same
+  request body (optionally extended by one appended `assistant` message whose
+  content is the partial text — with any trailing whitespace stripped from
+  the final text block — and paired server-tool blocks streamed before the
+  refusal; the appended-assistant form is not available for requests with
+  `output_format` set or forced `tool_choice`), on an eligible fallback
+  model, on the same platform,
+  and within 5 minutes of the refusal; a mismatch is a 400. A token minted
+  mid-server-tool-loop whose partial content was continuable may only be
+  redeemed with the appended-assistant form — if an exact-body retry is
+  rejected with a 400 saying the token must be redeemed by continuing the
+  partial response, retry with the appended-assistant form instead.
+
+  When the appended-assistant form is used on a model that otherwise disallows
+  assistant-turn prefill, this token also authorizes that one prefill.
+
+- `--fallback: optional array of BetaFallbackParam`
+
+  Body param: Opt-in server-side retry on one or more substitute models when the requested model declines for policy reasons. Tried in order: if the first entry also declines, the second is tried, and so on.
 
 - `--inference-geo: optional string`
 
@@ -1993,7 +2038,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         - `beta_advisor_tool_result_error: object { error_code, type }`
 
-          - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 3 more`
+          - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 4 more`
 
             - `"max_uses_exceeded"`
 
@@ -2006,6 +2051,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
             - `"unavailable"`
 
             - `"execution_time_exceeded"`
+
+            - `"model_not_found"`
 
           - `type: "advisor_tool_result_error"`
 
@@ -2299,6 +2346,122 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `type: "compaction"`
 
+    - `beta_fallback_block: object { from, to, type }`
+
+      Marks the point in `content` where one model's output gives way to the next.
+
+      One block appears per hop where a preceding model actually ran this turn and
+      declined. A turn routed directly by the sticky decision has no such boundary
+      and carries no block — the signal for whether a fallback model served the
+      response is the presence of a `fallback_message` entry in
+      `usage.iterations`, not this block.
+
+      The block is treated like a server-tool content block for streaming: it
+      arrives via the standard `content_block_start` / `content_block_stop`
+      pair and carries no deltas.
+
+      - `from: object { model }`
+
+        The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
+
+        - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
+
+          The model that will complete your prompt.
+
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-fable-5"`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
+
+          - `"claude-mythos-5"`
+
+            Most capable model for cybersecurity and biology research
+
+          - `"claude-opus-4-8"`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `"claude-opus-4-7"`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `"claude-mythos-preview"`
+
+            New class of intelligence, strongest in coding and cybersecurity
+
+          - `"claude-opus-4-6"`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `"claude-sonnet-4-6"`
+
+            Best combination of speed and intelligence
+
+          - `"claude-haiku-4-5"`
+
+            Fastest model with near-frontier intelligence
+
+          - `"claude-haiku-4-5-20251001"`
+
+            Fastest model with near-frontier intelligence
+
+          - `"claude-opus-4-5"`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `"claude-opus-4-5-20251101"`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `"claude-sonnet-4-5"`
+
+            High-performance model for agents and coding
+
+          - `"claude-sonnet-4-5-20250929"`
+
+            High-performance model for agents and coding
+
+          - `"claude-opus-4-1"`
+
+            Exceptional model for specialized complex tasks
+
+          - `"claude-opus-4-1-20250805"`
+
+            Exceptional model for specialized complex tasks
+
+          - `"claude-opus-4-0"`
+
+            Powerful model for complex tasks
+
+          - `"claude-opus-4-20250514"`
+
+            Powerful model for complex tasks
+
+          - `"claude-sonnet-4-0"`
+
+            High-performance model with extended thinking
+
+          - `"claude-sonnet-4-20250514"`
+
+            High-performance model with extended thinking
+
+          - `"claude-3-haiku-20240307"`
+
+            Fast and cost-effective model
+
+      - `to: object { model }`
+
+        The fallback model producing the content that follows this block. Its `model` is always the canonical id.
+
+        - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
+
+          The model that will complete your prompt.
+
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `type: "fallback"`
+
   - `context_management: object { applied_edits }`
 
     Context management response.
@@ -2386,11 +2549,19 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         - `type: "unavailable"`
 
-  - `model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string`
+  - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
 
     The model that will complete your prompt.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `"claude-fable-5"`
+
+      Next generation of intelligence for the hardest knowledge work and coding problems
+
+    - `"claude-mythos-5"`
+
+      Most capable model for cybersecurity and biology research
 
     - `"claude-opus-4-8"`
 
@@ -2470,11 +2641,11 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
     This will always be `"assistant"`.
 
-  - `stop_details: object { category, explanation, type }`
+  - `stop_details: object { category, explanation, fallback_credit_token, 3 more }`
 
     Structured information about a refusal.
 
-    - `category: "cyber" or "bio"`
+    - `category: "cyber" or "bio" or "reasoning_extraction"`
 
       The policy category that triggered the refusal.
 
@@ -2484,11 +2655,62 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `"bio"`
 
+      - `"reasoning_extraction"`
+
     - `explanation: string`
 
       Human-readable explanation of the refusal.
 
       This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+    - `fallback_credit_token: string`
+
+      Opaque code that refunds the cache-miss cost when retrying this refused
+      request on the fallback model. Pass it as `fallback_credit_token` on the
+      retry request. Expires 5 minutes after the refusal.
+
+      The retry is sent either with the same request body (`system`, `messages`,
+      `tools`, and other render-shaping fields), or with the same body plus one
+      appended `assistant` message whose content is the partial text (with any
+      trailing whitespace stripped from the final text block) and paired
+      server-tool blocks from this refusal — which also authorizes that
+      appended turn as an assistant-prefill continuation on models that otherwise
+      disallow prefill. A token minted mid-server-tool-loop whose partial content
+      was continuable may only be redeemed the second way — if a same-body retry
+      is rejected with a 400 saying the token must be redeemed by continuing the
+      partial response, retry the second way instead. Either way: same workspace,
+      same platform; a mismatch is a 400. Resending a token for an already-warm
+      prefix is permitted but yields no additional credit.
+
+      `null` when the refused model isn't eligible for a fallback credit.
+
+    - `fallback_has_prefill_claim: boolean`
+
+      Whether the accompanying `fallback_credit_token` may be redeemed with the
+      appended-assistant retry form. Only set when `fallback_credit_token` is
+      present.
+
+      `true`: retry by resending the same request body plus one appended
+      `assistant` message whose content is this response's `content` with any
+      trailing whitespace stripped from the final text block and unpaired
+      `tool_use` blocks omitted (the same appended-turn shape described on
+      `fallback_credit_token`), with the token attached. `false`: retry by
+      resending the original request body unchanged, with the token attached —
+      the appended-assistant form is not available for this refusal (no
+      continuable partial content, or the request uses `output_format` or a
+      `tool_choice` that forces tool use). One exception: when the request used
+      `output_format` or a forced `tool_choice` and the refusal arrived after
+      server tools (including MCP connector tools) had already executed, the
+      token may not be redeemable by either retry form; if the exact-body retry
+      is then rejected with a 400 saying the token must be redeemed by
+      continuing the partial response, discard the token and retry without it.
+
+      Advisory: if an appended-assistant retry is rejected with a 400 despite
+      `true`, fall back to resending the original request body with the token.
+
+    - `recommended_model: string`
+
+      The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
     - `type: "refusal"`
 
@@ -2575,7 +2797,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       The number of input tokens which were used.
 
-    - `iterations: array of BetaMessageIterationUsage or BetaCompactionIterationUsage or BetaAdvisorMessageIterationUsage`
+    - `iterations: array of BetaMessageIterationUsage or BetaCompactionIterationUsage or BetaAdvisorMessageIterationUsage or BetaFallbackMessageIterationUsage`
 
       Per-iteration token usage breakdown.
 
@@ -2585,7 +2807,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
       - Calculate the true context window size from the last iteration
       - Understand token accumulation across server-side tool use loops
 
-      - `beta_message_iteration_usage: object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 3 more }`
+      - `beta_message_iteration_usage: object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 4 more }`
 
         Token usage for a sampling iteration.
 
@@ -2612,6 +2834,92 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
         - `input_tokens: number`
 
           The number of input tokens which were used.
+
+        - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
+
+          The model that will complete your prompt.
+
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-fable-5"`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
+
+          - `"claude-mythos-5"`
+
+            Most capable model for cybersecurity and biology research
+
+          - `"claude-opus-4-8"`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `"claude-opus-4-7"`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `"claude-mythos-preview"`
+
+            New class of intelligence, strongest in coding and cybersecurity
+
+          - `"claude-opus-4-6"`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `"claude-sonnet-4-6"`
+
+            Best combination of speed and intelligence
+
+          - `"claude-haiku-4-5"`
+
+            Fastest model with near-frontier intelligence
+
+          - `"claude-haiku-4-5-20251001"`
+
+            Fastest model with near-frontier intelligence
+
+          - `"claude-opus-4-5"`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `"claude-opus-4-5-20251101"`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `"claude-sonnet-4-5"`
+
+            High-performance model for agents and coding
+
+          - `"claude-sonnet-4-5-20250929"`
+
+            High-performance model for agents and coding
+
+          - `"claude-opus-4-1"`
+
+            Exceptional model for specialized complex tasks
+
+          - `"claude-opus-4-1-20250805"`
+
+            Exceptional model for specialized complex tasks
+
+          - `"claude-opus-4-0"`
+
+            Powerful model for complex tasks
+
+          - `"claude-opus-4-20250514"`
+
+            Powerful model for complex tasks
+
+          - `"claude-sonnet-4-0"`
+
+            High-performance model with extended thinking
+
+          - `"claude-sonnet-4-20250514"`
+
+            High-performance model with extended thinking
+
+          - `"claude-3-haiku-20240307"`
+
+            Fast and cost-effective model
 
         - `output_tokens: number`
 
@@ -2685,11 +2993,19 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           The number of input tokens which were used.
 
-        - `model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string`
+        - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
 
           The model that will complete your prompt.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-fable-5"`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
+
+          - `"claude-mythos-5"`
+
+            Most capable model for cybersecurity and biology research
 
           - `"claude-opus-4-8"`
 
@@ -2770,6 +3086,133 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
         - `type: "advisor_message"`
 
           Usage for an advisor sub-inference iteration
+
+      - `beta_fallback_message_iteration_usage: object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 4 more }`
+
+        Token usage for the fallback-model attempt of a server-side fallback request.
+
+        Produced in place of a `message` entry for whichever hop served the
+        response. A declined hop produces the existing `message` entry. Whether
+        a fallback model served the response is signalled by the presence of this
+        entry in `usage.iterations`.
+
+        - `cache_creation: object { ephemeral_1h_input_tokens, ephemeral_5m_input_tokens }`
+
+          Breakdown of cached tokens by TTL
+
+          - `ephemeral_1h_input_tokens: number`
+
+            The number of input tokens used to create the 1 hour cache entry.
+
+          - `ephemeral_5m_input_tokens: number`
+
+            The number of input tokens used to create the 5 minute cache entry.
+
+        - `cache_creation_input_tokens: number`
+
+          The number of input tokens used to create the cache entry.
+
+        - `cache_read_input_tokens: number`
+
+          The number of input tokens read from the cache.
+
+        - `input_tokens: number`
+
+          The number of input tokens which were used.
+
+        - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
+
+          The model that will complete your prompt.
+
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-fable-5"`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
+
+          - `"claude-mythos-5"`
+
+            Most capable model for cybersecurity and biology research
+
+          - `"claude-opus-4-8"`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `"claude-opus-4-7"`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `"claude-mythos-preview"`
+
+            New class of intelligence, strongest in coding and cybersecurity
+
+          - `"claude-opus-4-6"`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `"claude-sonnet-4-6"`
+
+            Best combination of speed and intelligence
+
+          - `"claude-haiku-4-5"`
+
+            Fastest model with near-frontier intelligence
+
+          - `"claude-haiku-4-5-20251001"`
+
+            Fastest model with near-frontier intelligence
+
+          - `"claude-opus-4-5"`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `"claude-opus-4-5-20251101"`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `"claude-sonnet-4-5"`
+
+            High-performance model for agents and coding
+
+          - `"claude-sonnet-4-5-20250929"`
+
+            High-performance model for agents and coding
+
+          - `"claude-opus-4-1"`
+
+            Exceptional model for specialized complex tasks
+
+          - `"claude-opus-4-1-20250805"`
+
+            Exceptional model for specialized complex tasks
+
+          - `"claude-opus-4-0"`
+
+            Powerful model for complex tasks
+
+          - `"claude-opus-4-20250514"`
+
+            Powerful model for complex tasks
+
+          - `"claude-sonnet-4-0"`
+
+            High-performance model with extended thinking
+
+          - `"claude-sonnet-4-20250514"`
+
+            High-performance model with extended thinking
+
+          - `"claude-3-haiku-20240307"`
+
+            Fast and cost-effective model
+
+        - `output_tokens: number`
+
+          The number of output tokens which were used.
+
+        - `type: "fallback_message"`
+
+          Usage for the fallback-model attempt that served the response
 
     - `output_tokens: number`
 
@@ -2888,6 +3331,9 @@ ant beta:messages create \
   "stop_details": {
     "category": "cyber",
     "explanation": "explanation",
+    "fallback_credit_token": "fallback_credit_token",
+    "fallback_has_prefill_claim": true,
+    "recommended_model": "recommended_model",
     "type": "refusal"
   },
   "stop_reason": "end_turn",
@@ -2911,6 +3357,7 @@ ant beta:messages create \
         "cache_creation_input_tokens": 0,
         "cache_read_input_tokens": 0,
         "input_tokens": 0,
+        "model": "claude-fable-5",
         "output_tokens": 0,
         "type": "message"
       }
@@ -2994,7 +3441,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
   There is a limit of 100,000 messages in a single request.
 
-- `--model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string`
+- `--model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
 
   Body param: The model that will complete your prompt.
 
@@ -3182,11 +3629,19 @@ ant beta:messages count-tokens \
 
     The number of input tokens which were used.
 
-  - `model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string`
+  - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
 
     The model that will complete your prompt.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `"claude-fable-5"`
+
+      Next generation of intelligence for the hardest knowledge work and coding problems
+
+    - `"claude-mythos-5"`
+
+      Most capable model for cybersecurity and biology research
 
     - `"claude-opus-4-8"`
 
@@ -3318,13 +3773,21 @@ ant beta:messages count-tokens \
 
 ### Beta Advisor Tool 20260301
 
-- `beta_advisor_tool_20260301: object { model, name, type, 6 more }`
+- `beta_advisor_tool_20260301: object { model, name, type, 7 more }`
 
-  - `model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string`
+  - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
 
     The model that will complete your prompt.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `"claude-fable-5"`
+
+      Next generation of intelligence for the hardest knowledge work and coding problems
+
+    - `"claude-mythos-5"`
+
+      Most capable model for cybersecurity and biology research
 
     - `"claude-opus-4-8"`
 
@@ -3456,6 +3919,10 @@ ant beta:messages count-tokens \
 
     If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
+  - `max_tokens: optional number`
+
+    Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the server also emits a remaining-tokens budget block in the advisor's prompt so the advisor self-shapes toward the cap. When omitted, the advisor model's default output cap applies and no budget block is emitted.
+
   - `max_uses: optional number`
 
     Maximum number of times the tool can be used in the API request.
@@ -3472,7 +3939,7 @@ ant beta:messages count-tokens \
 
     - `beta_advisor_tool_result_error: object { error_code, type }`
 
-      - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 3 more`
+      - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 4 more`
 
         - `"max_uses_exceeded"`
 
@@ -3485,6 +3952,8 @@ ant beta:messages count-tokens \
         - `"unavailable"`
 
         - `"execution_time_exceeded"`
+
+        - `"model_not_found"`
 
       - `type: "advisor_tool_result_error"`
 
@@ -3522,7 +3991,7 @@ ant beta:messages count-tokens \
 
     - `beta_advisor_tool_result_error_param: object { error_code, type }`
 
-      - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 3 more`
+      - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 4 more`
 
         - `"max_uses_exceeded"`
 
@@ -3535,6 +4004,8 @@ ant beta:messages count-tokens \
         - `"unavailable"`
 
         - `"execution_time_exceeded"`
+
+        - `"model_not_found"`
 
       - `type: "advisor_tool_result_error"`
 
@@ -3585,7 +4056,7 @@ ant beta:messages count-tokens \
 
 - `beta_advisor_tool_result_error: object { error_code, type }`
 
-  - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 3 more`
+  - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 4 more`
 
     - `"max_uses_exceeded"`
 
@@ -3598,6 +4069,8 @@ ant beta:messages count-tokens \
     - `"unavailable"`
 
     - `"execution_time_exceeded"`
+
+    - `"model_not_found"`
 
   - `type: "advisor_tool_result_error"`
 
@@ -3605,7 +4078,7 @@ ant beta:messages count-tokens \
 
 - `beta_advisor_tool_result_error_param: object { error_code, type }`
 
-  - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 3 more`
+  - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 4 more`
 
     - `"max_uses_exceeded"`
 
@@ -3618,6 +4091,8 @@ ant beta:messages count-tokens \
     - `"unavailable"`
 
     - `"execution_time_exceeded"`
+
+    - `"model_not_found"`
 
   - `type: "advisor_tool_result_error"`
 
@@ -5110,7 +5585,7 @@ ant beta:messages count-tokens \
 
 ### Beta Content Block
 
-- `beta_content_block: BetaTextBlock or BetaThinkingBlock or BetaRedactedThinkingBlock or 13 more`
+- `beta_content_block: BetaTextBlock or BetaThinkingBlock or BetaRedactedThinkingBlock or 14 more`
 
   Response model for a file uploaded to the container.
 
@@ -5462,7 +5937,7 @@ ant beta:messages count-tokens \
 
       - `beta_advisor_tool_result_error: object { error_code, type }`
 
-        - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 3 more`
+        - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 4 more`
 
           - `"max_uses_exceeded"`
 
@@ -5475,6 +5950,8 @@ ant beta:messages count-tokens \
           - `"unavailable"`
 
           - `"execution_time_exceeded"`
+
+          - `"model_not_found"`
 
         - `type: "advisor_tool_result_error"`
 
@@ -5768,9 +6245,125 @@ ant beta:messages count-tokens \
 
     - `type: "compaction"`
 
+  - `beta_fallback_block: object { from, to, type }`
+
+    Marks the point in `content` where one model's output gives way to the next.
+
+    One block appears per hop where a preceding model actually ran this turn and
+    declined. A turn routed directly by the sticky decision has no such boundary
+    and carries no block — the signal for whether a fallback model served the
+    response is the presence of a `fallback_message` entry in
+    `usage.iterations`, not this block.
+
+    The block is treated like a server-tool content block for streaming: it
+    arrives via the standard `content_block_start` / `content_block_stop`
+    pair and carries no deltas.
+
+    - `from: object { model }`
+
+      The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
+
+      - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
+
+        The model that will complete your prompt.
+
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-fable-5"`
+
+          Next generation of intelligence for the hardest knowledge work and coding problems
+
+        - `"claude-mythos-5"`
+
+          Most capable model for cybersecurity and biology research
+
+        - `"claude-opus-4-8"`
+
+          Frontier intelligence for long-running agents and coding
+
+        - `"claude-opus-4-7"`
+
+          Frontier intelligence for long-running agents and coding
+
+        - `"claude-mythos-preview"`
+
+          New class of intelligence, strongest in coding and cybersecurity
+
+        - `"claude-opus-4-6"`
+
+          Frontier intelligence for long-running agents and coding
+
+        - `"claude-sonnet-4-6"`
+
+          Best combination of speed and intelligence
+
+        - `"claude-haiku-4-5"`
+
+          Fastest model with near-frontier intelligence
+
+        - `"claude-haiku-4-5-20251001"`
+
+          Fastest model with near-frontier intelligence
+
+        - `"claude-opus-4-5"`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `"claude-opus-4-5-20251101"`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `"claude-sonnet-4-5"`
+
+          High-performance model for agents and coding
+
+        - `"claude-sonnet-4-5-20250929"`
+
+          High-performance model for agents and coding
+
+        - `"claude-opus-4-1"`
+
+          Exceptional model for specialized complex tasks
+
+        - `"claude-opus-4-1-20250805"`
+
+          Exceptional model for specialized complex tasks
+
+        - `"claude-opus-4-0"`
+
+          Powerful model for complex tasks
+
+        - `"claude-opus-4-20250514"`
+
+          Powerful model for complex tasks
+
+        - `"claude-sonnet-4-0"`
+
+          High-performance model with extended thinking
+
+        - `"claude-sonnet-4-20250514"`
+
+          High-performance model with extended thinking
+
+        - `"claude-3-haiku-20240307"`
+
+          Fast and cost-effective model
+
+    - `to: object { model }`
+
+      The fallback model producing the content that follows this block. Its `model` is always the canonical id.
+
+      - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
+
+        The model that will complete your prompt.
+
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `type: "fallback"`
+
 ### Beta Content Block Param
 
-- `beta_content_block_param: BetaTextBlockParam or BetaImageBlockParam or BetaRequestDocumentBlock or 18 more`
+- `beta_content_block_param: BetaTextBlockParam or BetaImageBlockParam or BetaRequestDocumentBlock or 19 more`
 
   Regular text content.
 
@@ -6474,7 +7067,7 @@ ant beta:messages count-tokens \
 
       - `beta_advisor_tool_result_error_param: object { error_code, type }`
 
-        - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 3 more`
+        - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 4 more`
 
           - `"max_uses_exceeded"`
 
@@ -6487,6 +7080,8 @@ ant beta:messages count-tokens \
           - `"unavailable"`
 
           - `"execution_time_exceeded"`
+
+          - `"model_not_found"`
 
         - `type: "advisor_tool_result_error"`
 
@@ -6748,7 +7343,7 @@ ant beta:messages count-tokens \
 
     - `content: BetaToolSearchToolResultErrorParam or BetaToolSearchToolSearchResultBlockParam`
 
-      - `beta_tool_search_tool_result_error_param: object { error_code, type }`
+      - `beta_tool_search_tool_result_error_param: object { error_code, type, error_message }`
 
         - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or "execution_time_exceeded"`
 
@@ -6761,6 +7356,8 @@ ant beta:messages count-tokens \
           - `"execution_time_exceeded"`
 
         - `type: "tool_search_tool_result_error"`
+
+        - `error_message: optional string`
 
       - `beta_tool_search_tool_search_result_block_param: object { tool_references, type }`
 
@@ -6971,6 +7568,126 @@ ant beta:messages count-tokens \
         - `1h`: 1 hour
 
         Defaults to `5m`.
+
+  - `beta_fallback_block_param: object { from, to, type }`
+
+    A `fallback` block echoed back from a prior response.
+
+    Accepted in `messages[].content` and never rendered into the prompt,
+    not validated against the request's `fallbacks` chain or top-level
+    `model`, and stripped before the sticky-routing cache key is computed.
+
+    Callers should echo the assistant turn verbatim — block included. The
+    block's position is load-bearing for thinking verification: the thinking
+    runs on either side of a fallback hop carry independently-rooted
+    verification hash chains, and this block is the only record of where one
+    chain ends and the next begins. When thinking runs flank the boundary,
+    omitting the block merges the runs into one contiguous span whose hashes
+    cannot verify (the request is rejected), and moving it into the middle of
+    a single run splits that run's chain and is likewise rejected; between
+    non-thinking blocks the block's placement has no verification effect.
+
+    - `from: object { model }`
+
+      Identifies one hop of a fallback transition.
+
+      - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
+
+        The model that will complete your prompt.
+
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-fable-5"`
+
+          Next generation of intelligence for the hardest knowledge work and coding problems
+
+        - `"claude-mythos-5"`
+
+          Most capable model for cybersecurity and biology research
+
+        - `"claude-opus-4-8"`
+
+          Frontier intelligence for long-running agents and coding
+
+        - `"claude-opus-4-7"`
+
+          Frontier intelligence for long-running agents and coding
+
+        - `"claude-mythos-preview"`
+
+          New class of intelligence, strongest in coding and cybersecurity
+
+        - `"claude-opus-4-6"`
+
+          Frontier intelligence for long-running agents and coding
+
+        - `"claude-sonnet-4-6"`
+
+          Best combination of speed and intelligence
+
+        - `"claude-haiku-4-5"`
+
+          Fastest model with near-frontier intelligence
+
+        - `"claude-haiku-4-5-20251001"`
+
+          Fastest model with near-frontier intelligence
+
+        - `"claude-opus-4-5"`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `"claude-opus-4-5-20251101"`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `"claude-sonnet-4-5"`
+
+          High-performance model for agents and coding
+
+        - `"claude-sonnet-4-5-20250929"`
+
+          High-performance model for agents and coding
+
+        - `"claude-opus-4-1"`
+
+          Exceptional model for specialized complex tasks
+
+        - `"claude-opus-4-1-20250805"`
+
+          Exceptional model for specialized complex tasks
+
+        - `"claude-opus-4-0"`
+
+          Powerful model for complex tasks
+
+        - `"claude-opus-4-20250514"`
+
+          Powerful model for complex tasks
+
+        - `"claude-sonnet-4-0"`
+
+          High-performance model with extended thinking
+
+        - `"claude-sonnet-4-20250514"`
+
+          High-performance model with extended thinking
+
+        - `"claude-3-haiku-20240307"`
+
+          Fast and cost-effective model
+
+    - `to: object { model }`
+
+      Identifies one hop of a fallback transition.
+
+      - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
+
+        The model that will complete your prompt.
+
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `type: "fallback"`
 
 ### Beta Content Block Source
 
@@ -7622,6 +8339,744 @@ ant beta:messages count-tokens \
 
   - `type: "encrypted_code_execution_result"`
 
+### Beta Fallback Block
+
+- `beta_fallback_block: object { from, to, type }`
+
+  Marks the point in `content` where one model's output gives way to the next.
+
+  One block appears per hop where a preceding model actually ran this turn and
+  declined. A turn routed directly by the sticky decision has no such boundary
+  and carries no block — the signal for whether a fallback model served the
+  response is the presence of a `fallback_message` entry in
+  `usage.iterations`, not this block.
+
+  The block is treated like a server-tool content block for streaming: it
+  arrives via the standard `content_block_start` / `content_block_stop`
+  pair and carries no deltas.
+
+  - `from: object { model }`
+
+    The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
+
+    - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
+
+      The model that will complete your prompt.
+
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-fable-5"`
+
+        Next generation of intelligence for the hardest knowledge work and coding problems
+
+      - `"claude-mythos-5"`
+
+        Most capable model for cybersecurity and biology research
+
+      - `"claude-opus-4-8"`
+
+        Frontier intelligence for long-running agents and coding
+
+      - `"claude-opus-4-7"`
+
+        Frontier intelligence for long-running agents and coding
+
+      - `"claude-mythos-preview"`
+
+        New class of intelligence, strongest in coding and cybersecurity
+
+      - `"claude-opus-4-6"`
+
+        Frontier intelligence for long-running agents and coding
+
+      - `"claude-sonnet-4-6"`
+
+        Best combination of speed and intelligence
+
+      - `"claude-haiku-4-5"`
+
+        Fastest model with near-frontier intelligence
+
+      - `"claude-haiku-4-5-20251001"`
+
+        Fastest model with near-frontier intelligence
+
+      - `"claude-opus-4-5"`
+
+        Premium model combining maximum intelligence with practical performance
+
+      - `"claude-opus-4-5-20251101"`
+
+        Premium model combining maximum intelligence with practical performance
+
+      - `"claude-sonnet-4-5"`
+
+        High-performance model for agents and coding
+
+      - `"claude-sonnet-4-5-20250929"`
+
+        High-performance model for agents and coding
+
+      - `"claude-opus-4-1"`
+
+        Exceptional model for specialized complex tasks
+
+      - `"claude-opus-4-1-20250805"`
+
+        Exceptional model for specialized complex tasks
+
+      - `"claude-opus-4-0"`
+
+        Powerful model for complex tasks
+
+      - `"claude-opus-4-20250514"`
+
+        Powerful model for complex tasks
+
+      - `"claude-sonnet-4-0"`
+
+        High-performance model with extended thinking
+
+      - `"claude-sonnet-4-20250514"`
+
+        High-performance model with extended thinking
+
+      - `"claude-3-haiku-20240307"`
+
+        Fast and cost-effective model
+
+  - `to: object { model }`
+
+    The fallback model producing the content that follows this block. Its `model` is always the canonical id.
+
+    - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
+
+      The model that will complete your prompt.
+
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+  - `type: "fallback"`
+
+### Beta Fallback Block Param
+
+- `beta_fallback_block_param: object { from, to, type }`
+
+  A `fallback` block echoed back from a prior response.
+
+  Accepted in `messages[].content` and never rendered into the prompt,
+  not validated against the request's `fallbacks` chain or top-level
+  `model`, and stripped before the sticky-routing cache key is computed.
+
+  Callers should echo the assistant turn verbatim — block included. The
+  block's position is load-bearing for thinking verification: the thinking
+  runs on either side of a fallback hop carry independently-rooted
+  verification hash chains, and this block is the only record of where one
+  chain ends and the next begins. When thinking runs flank the boundary,
+  omitting the block merges the runs into one contiguous span whose hashes
+  cannot verify (the request is rejected), and moving it into the middle of
+  a single run splits that run's chain and is likewise rejected; between
+  non-thinking blocks the block's placement has no verification effect.
+
+  - `from: object { model }`
+
+    Identifies one hop of a fallback transition.
+
+    - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
+
+      The model that will complete your prompt.
+
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-fable-5"`
+
+        Next generation of intelligence for the hardest knowledge work and coding problems
+
+      - `"claude-mythos-5"`
+
+        Most capable model for cybersecurity and biology research
+
+      - `"claude-opus-4-8"`
+
+        Frontier intelligence for long-running agents and coding
+
+      - `"claude-opus-4-7"`
+
+        Frontier intelligence for long-running agents and coding
+
+      - `"claude-mythos-preview"`
+
+        New class of intelligence, strongest in coding and cybersecurity
+
+      - `"claude-opus-4-6"`
+
+        Frontier intelligence for long-running agents and coding
+
+      - `"claude-sonnet-4-6"`
+
+        Best combination of speed and intelligence
+
+      - `"claude-haiku-4-5"`
+
+        Fastest model with near-frontier intelligence
+
+      - `"claude-haiku-4-5-20251001"`
+
+        Fastest model with near-frontier intelligence
+
+      - `"claude-opus-4-5"`
+
+        Premium model combining maximum intelligence with practical performance
+
+      - `"claude-opus-4-5-20251101"`
+
+        Premium model combining maximum intelligence with practical performance
+
+      - `"claude-sonnet-4-5"`
+
+        High-performance model for agents and coding
+
+      - `"claude-sonnet-4-5-20250929"`
+
+        High-performance model for agents and coding
+
+      - `"claude-opus-4-1"`
+
+        Exceptional model for specialized complex tasks
+
+      - `"claude-opus-4-1-20250805"`
+
+        Exceptional model for specialized complex tasks
+
+      - `"claude-opus-4-0"`
+
+        Powerful model for complex tasks
+
+      - `"claude-opus-4-20250514"`
+
+        Powerful model for complex tasks
+
+      - `"claude-sonnet-4-0"`
+
+        High-performance model with extended thinking
+
+      - `"claude-sonnet-4-20250514"`
+
+        High-performance model with extended thinking
+
+      - `"claude-3-haiku-20240307"`
+
+        Fast and cost-effective model
+
+  - `to: object { model }`
+
+    Identifies one hop of a fallback transition.
+
+    - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
+
+      The model that will complete your prompt.
+
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+  - `type: "fallback"`
+
+### Beta Fallback Info
+
+- `beta_fallback_info: object { model }`
+
+  Identifies one hop of a fallback transition.
+
+  - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
+
+    The model that will complete your prompt.
+
+    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `"claude-fable-5"`
+
+      Next generation of intelligence for the hardest knowledge work and coding problems
+
+    - `"claude-mythos-5"`
+
+      Most capable model for cybersecurity and biology research
+
+    - `"claude-opus-4-8"`
+
+      Frontier intelligence for long-running agents and coding
+
+    - `"claude-opus-4-7"`
+
+      Frontier intelligence for long-running agents and coding
+
+    - `"claude-mythos-preview"`
+
+      New class of intelligence, strongest in coding and cybersecurity
+
+    - `"claude-opus-4-6"`
+
+      Frontier intelligence for long-running agents and coding
+
+    - `"claude-sonnet-4-6"`
+
+      Best combination of speed and intelligence
+
+    - `"claude-haiku-4-5"`
+
+      Fastest model with near-frontier intelligence
+
+    - `"claude-haiku-4-5-20251001"`
+
+      Fastest model with near-frontier intelligence
+
+    - `"claude-opus-4-5"`
+
+      Premium model combining maximum intelligence with practical performance
+
+    - `"claude-opus-4-5-20251101"`
+
+      Premium model combining maximum intelligence with practical performance
+
+    - `"claude-sonnet-4-5"`
+
+      High-performance model for agents and coding
+
+    - `"claude-sonnet-4-5-20250929"`
+
+      High-performance model for agents and coding
+
+    - `"claude-opus-4-1"`
+
+      Exceptional model for specialized complex tasks
+
+    - `"claude-opus-4-1-20250805"`
+
+      Exceptional model for specialized complex tasks
+
+    - `"claude-opus-4-0"`
+
+      Powerful model for complex tasks
+
+    - `"claude-opus-4-20250514"`
+
+      Powerful model for complex tasks
+
+    - `"claude-sonnet-4-0"`
+
+      High-performance model with extended thinking
+
+    - `"claude-sonnet-4-20250514"`
+
+      High-performance model with extended thinking
+
+    - `"claude-3-haiku-20240307"`
+
+      Fast and cost-effective model
+
+### Beta Fallback Info Param
+
+- `beta_fallback_info_param: object { model }`
+
+  Identifies one hop of a fallback transition.
+
+  - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
+
+    The model that will complete your prompt.
+
+    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `"claude-fable-5"`
+
+      Next generation of intelligence for the hardest knowledge work and coding problems
+
+    - `"claude-mythos-5"`
+
+      Most capable model for cybersecurity and biology research
+
+    - `"claude-opus-4-8"`
+
+      Frontier intelligence for long-running agents and coding
+
+    - `"claude-opus-4-7"`
+
+      Frontier intelligence for long-running agents and coding
+
+    - `"claude-mythos-preview"`
+
+      New class of intelligence, strongest in coding and cybersecurity
+
+    - `"claude-opus-4-6"`
+
+      Frontier intelligence for long-running agents and coding
+
+    - `"claude-sonnet-4-6"`
+
+      Best combination of speed and intelligence
+
+    - `"claude-haiku-4-5"`
+
+      Fastest model with near-frontier intelligence
+
+    - `"claude-haiku-4-5-20251001"`
+
+      Fastest model with near-frontier intelligence
+
+    - `"claude-opus-4-5"`
+
+      Premium model combining maximum intelligence with practical performance
+
+    - `"claude-opus-4-5-20251101"`
+
+      Premium model combining maximum intelligence with practical performance
+
+    - `"claude-sonnet-4-5"`
+
+      High-performance model for agents and coding
+
+    - `"claude-sonnet-4-5-20250929"`
+
+      High-performance model for agents and coding
+
+    - `"claude-opus-4-1"`
+
+      Exceptional model for specialized complex tasks
+
+    - `"claude-opus-4-1-20250805"`
+
+      Exceptional model for specialized complex tasks
+
+    - `"claude-opus-4-0"`
+
+      Powerful model for complex tasks
+
+    - `"claude-opus-4-20250514"`
+
+      Powerful model for complex tasks
+
+    - `"claude-sonnet-4-0"`
+
+      High-performance model with extended thinking
+
+    - `"claude-sonnet-4-20250514"`
+
+      High-performance model with extended thinking
+
+    - `"claude-3-haiku-20240307"`
+
+      Fast and cost-effective model
+
+### Beta Fallback Message Iteration Usage
+
+- `beta_fallback_message_iteration_usage: object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 4 more }`
+
+  Token usage for the fallback-model attempt of a server-side fallback request.
+
+  Produced in place of a `message` entry for whichever hop served the
+  response. A declined hop produces the existing `message` entry. Whether
+  a fallback model served the response is signalled by the presence of this
+  entry in `usage.iterations`.
+
+  - `cache_creation: object { ephemeral_1h_input_tokens, ephemeral_5m_input_tokens }`
+
+    Breakdown of cached tokens by TTL
+
+    - `ephemeral_1h_input_tokens: number`
+
+      The number of input tokens used to create the 1 hour cache entry.
+
+    - `ephemeral_5m_input_tokens: number`
+
+      The number of input tokens used to create the 5 minute cache entry.
+
+  - `cache_creation_input_tokens: number`
+
+    The number of input tokens used to create the cache entry.
+
+  - `cache_read_input_tokens: number`
+
+    The number of input tokens read from the cache.
+
+  - `input_tokens: number`
+
+    The number of input tokens which were used.
+
+  - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
+
+    The model that will complete your prompt.
+
+    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `"claude-fable-5"`
+
+      Next generation of intelligence for the hardest knowledge work and coding problems
+
+    - `"claude-mythos-5"`
+
+      Most capable model for cybersecurity and biology research
+
+    - `"claude-opus-4-8"`
+
+      Frontier intelligence for long-running agents and coding
+
+    - `"claude-opus-4-7"`
+
+      Frontier intelligence for long-running agents and coding
+
+    - `"claude-mythos-preview"`
+
+      New class of intelligence, strongest in coding and cybersecurity
+
+    - `"claude-opus-4-6"`
+
+      Frontier intelligence for long-running agents and coding
+
+    - `"claude-sonnet-4-6"`
+
+      Best combination of speed and intelligence
+
+    - `"claude-haiku-4-5"`
+
+      Fastest model with near-frontier intelligence
+
+    - `"claude-haiku-4-5-20251001"`
+
+      Fastest model with near-frontier intelligence
+
+    - `"claude-opus-4-5"`
+
+      Premium model combining maximum intelligence with practical performance
+
+    - `"claude-opus-4-5-20251101"`
+
+      Premium model combining maximum intelligence with practical performance
+
+    - `"claude-sonnet-4-5"`
+
+      High-performance model for agents and coding
+
+    - `"claude-sonnet-4-5-20250929"`
+
+      High-performance model for agents and coding
+
+    - `"claude-opus-4-1"`
+
+      Exceptional model for specialized complex tasks
+
+    - `"claude-opus-4-1-20250805"`
+
+      Exceptional model for specialized complex tasks
+
+    - `"claude-opus-4-0"`
+
+      Powerful model for complex tasks
+
+    - `"claude-opus-4-20250514"`
+
+      Powerful model for complex tasks
+
+    - `"claude-sonnet-4-0"`
+
+      High-performance model with extended thinking
+
+    - `"claude-sonnet-4-20250514"`
+
+      High-performance model with extended thinking
+
+    - `"claude-3-haiku-20240307"`
+
+      Fast and cost-effective model
+
+  - `output_tokens: number`
+
+    The number of output tokens which were used.
+
+  - `type: "fallback_message"`
+
+    Usage for the fallback-model attempt that served the response
+
+### Beta Fallback Param
+
+- `beta_fallback_param: object { model, max_tokens, output_config, 2 more }`
+
+  One entry in the `fallbacks` chain on a `/v1/messages` request.
+
+  `model` is required. The four override fields (`max_tokens`, `thinking`,
+  `output_config`, and `speed`) replace the corresponding top-level field
+  for this attempt only and are validated as if the request were made to
+  `model`. Any other key is rejected at parse time.
+
+  - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
+
+    The model that will complete your prompt.
+
+    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `"claude-fable-5"`
+
+      Next generation of intelligence for the hardest knowledge work and coding problems
+
+    - `"claude-mythos-5"`
+
+      Most capable model for cybersecurity and biology research
+
+    - `"claude-opus-4-8"`
+
+      Frontier intelligence for long-running agents and coding
+
+    - `"claude-opus-4-7"`
+
+      Frontier intelligence for long-running agents and coding
+
+    - `"claude-mythos-preview"`
+
+      New class of intelligence, strongest in coding and cybersecurity
+
+    - `"claude-opus-4-6"`
+
+      Frontier intelligence for long-running agents and coding
+
+    - `"claude-sonnet-4-6"`
+
+      Best combination of speed and intelligence
+
+    - `"claude-haiku-4-5"`
+
+      Fastest model with near-frontier intelligence
+
+    - `"claude-haiku-4-5-20251001"`
+
+      Fastest model with near-frontier intelligence
+
+    - `"claude-opus-4-5"`
+
+      Premium model combining maximum intelligence with practical performance
+
+    - `"claude-opus-4-5-20251101"`
+
+      Premium model combining maximum intelligence with practical performance
+
+    - `"claude-sonnet-4-5"`
+
+      High-performance model for agents and coding
+
+    - `"claude-sonnet-4-5-20250929"`
+
+      High-performance model for agents and coding
+
+    - `"claude-opus-4-1"`
+
+      Exceptional model for specialized complex tasks
+
+    - `"claude-opus-4-1-20250805"`
+
+      Exceptional model for specialized complex tasks
+
+    - `"claude-opus-4-0"`
+
+      Powerful model for complex tasks
+
+    - `"claude-opus-4-20250514"`
+
+      Powerful model for complex tasks
+
+    - `"claude-sonnet-4-0"`
+
+      High-performance model with extended thinking
+
+    - `"claude-sonnet-4-20250514"`
+
+      High-performance model with extended thinking
+
+    - `"claude-3-haiku-20240307"`
+
+      Fast and cost-effective model
+
+  - `max_tokens: optional number`
+
+  - `output_config: optional object { effort, format, task_budget }`
+
+    - `effort: optional "low" or "medium" or "high" or 2 more`
+
+      All possible effort levels.
+
+      - `"low"`
+
+      - `"medium"`
+
+      - `"high"`
+
+      - `"xhigh"`
+
+      - `"max"`
+
+    - `format: optional object { schema, type }`
+
+      A schema to specify Claude's output format in responses. See [structured outputs](../build-with-claude/build-with-claude-structured-outputs.md)
+
+      - `schema: map[unknown]`
+
+        The JSON schema of the format
+
+      - `type: "json_schema"`
+
+    - `task_budget: optional object { total, type, remaining }`
+
+      User-configurable total token budget across contexts.
+
+      - `total: number`
+
+        Total token budget across all contexts in the session.
+
+      - `type: "tokens"`
+
+        The budget type. Currently only 'tokens' is supported.
+
+      - `remaining: optional number`
+
+        Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
+
+  - `speed: optional "standard" or "fast"`
+
+    - `"standard"`
+
+    - `"fast"`
+
+  - `thinking: optional BetaThinkingConfigEnabled or BetaThinkingConfigDisabled or BetaThinkingConfigAdaptive`
+
+    - `beta_thinking_config_enabled: object { budget_tokens, type, display }`
+
+      - `budget_tokens: number`
+
+        Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
+
+        Must be ≥1024 and less than `max_tokens`.
+
+        See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
+
+      - `type: "enabled"`
+
+      - `display: optional "summarized" or "omitted"`
+
+        Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+
+        - `"summarized"`
+
+        - `"omitted"`
+
+    - `beta_thinking_config_disabled: object { type }`
+
+      - `type: "disabled"`
+
+    - `beta_thinking_config_adaptive: object { type, display }`
+
+      - `type: "adaptive"`
+
+      - `display: optional "summarized" or "omitted"`
+
+        Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+
+        - `"summarized"`
+
+        - `"omitted"`
+
 ### Beta File Document Source
 
 - `beta_file_document_source: object { file_id, type }`
@@ -7721,7 +9176,7 @@ ant beta:messages count-tokens \
 
 ### Beta Iterations Usage
 
-- `beta_iterations_usage: array of BetaMessageIterationUsage or BetaCompactionIterationUsage or BetaAdvisorMessageIterationUsage`
+- `beta_iterations_usage: array of BetaMessageIterationUsage or BetaCompactionIterationUsage or BetaAdvisorMessageIterationUsage or BetaFallbackMessageIterationUsage`
 
   Per-iteration token usage breakdown.
 
@@ -7731,7 +9186,7 @@ ant beta:messages count-tokens \
   - Calculate the true context window size from the last iteration
   - Understand token accumulation across server-side tool use loops
 
-  - `beta_message_iteration_usage: object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 3 more }`
+  - `beta_message_iteration_usage: object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 4 more }`
 
     Token usage for a sampling iteration.
 
@@ -7758,6 +9213,92 @@ ant beta:messages count-tokens \
     - `input_tokens: number`
 
       The number of input tokens which were used.
+
+    - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
+
+      The model that will complete your prompt.
+
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-fable-5"`
+
+        Next generation of intelligence for the hardest knowledge work and coding problems
+
+      - `"claude-mythos-5"`
+
+        Most capable model for cybersecurity and biology research
+
+      - `"claude-opus-4-8"`
+
+        Frontier intelligence for long-running agents and coding
+
+      - `"claude-opus-4-7"`
+
+        Frontier intelligence for long-running agents and coding
+
+      - `"claude-mythos-preview"`
+
+        New class of intelligence, strongest in coding and cybersecurity
+
+      - `"claude-opus-4-6"`
+
+        Frontier intelligence for long-running agents and coding
+
+      - `"claude-sonnet-4-6"`
+
+        Best combination of speed and intelligence
+
+      - `"claude-haiku-4-5"`
+
+        Fastest model with near-frontier intelligence
+
+      - `"claude-haiku-4-5-20251001"`
+
+        Fastest model with near-frontier intelligence
+
+      - `"claude-opus-4-5"`
+
+        Premium model combining maximum intelligence with practical performance
+
+      - `"claude-opus-4-5-20251101"`
+
+        Premium model combining maximum intelligence with practical performance
+
+      - `"claude-sonnet-4-5"`
+
+        High-performance model for agents and coding
+
+      - `"claude-sonnet-4-5-20250929"`
+
+        High-performance model for agents and coding
+
+      - `"claude-opus-4-1"`
+
+        Exceptional model for specialized complex tasks
+
+      - `"claude-opus-4-1-20250805"`
+
+        Exceptional model for specialized complex tasks
+
+      - `"claude-opus-4-0"`
+
+        Powerful model for complex tasks
+
+      - `"claude-opus-4-20250514"`
+
+        Powerful model for complex tasks
+
+      - `"claude-sonnet-4-0"`
+
+        High-performance model with extended thinking
+
+      - `"claude-sonnet-4-20250514"`
+
+        High-performance model with extended thinking
+
+      - `"claude-3-haiku-20240307"`
+
+        Fast and cost-effective model
 
     - `output_tokens: number`
 
@@ -7831,11 +9372,19 @@ ant beta:messages count-tokens \
 
       The number of input tokens which were used.
 
-    - `model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string`
+    - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
 
       The model that will complete your prompt.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-fable-5"`
+
+        Next generation of intelligence for the hardest knowledge work and coding problems
+
+      - `"claude-mythos-5"`
+
+        Most capable model for cybersecurity and biology research
 
       - `"claude-opus-4-8"`
 
@@ -7916,6 +9465,133 @@ ant beta:messages count-tokens \
     - `type: "advisor_message"`
 
       Usage for an advisor sub-inference iteration
+
+  - `beta_fallback_message_iteration_usage: object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 4 more }`
+
+    Token usage for the fallback-model attempt of a server-side fallback request.
+
+    Produced in place of a `message` entry for whichever hop served the
+    response. A declined hop produces the existing `message` entry. Whether
+    a fallback model served the response is signalled by the presence of this
+    entry in `usage.iterations`.
+
+    - `cache_creation: object { ephemeral_1h_input_tokens, ephemeral_5m_input_tokens }`
+
+      Breakdown of cached tokens by TTL
+
+      - `ephemeral_1h_input_tokens: number`
+
+        The number of input tokens used to create the 1 hour cache entry.
+
+      - `ephemeral_5m_input_tokens: number`
+
+        The number of input tokens used to create the 5 minute cache entry.
+
+    - `cache_creation_input_tokens: number`
+
+      The number of input tokens used to create the cache entry.
+
+    - `cache_read_input_tokens: number`
+
+      The number of input tokens read from the cache.
+
+    - `input_tokens: number`
+
+      The number of input tokens which were used.
+
+    - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
+
+      The model that will complete your prompt.
+
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-fable-5"`
+
+        Next generation of intelligence for the hardest knowledge work and coding problems
+
+      - `"claude-mythos-5"`
+
+        Most capable model for cybersecurity and biology research
+
+      - `"claude-opus-4-8"`
+
+        Frontier intelligence for long-running agents and coding
+
+      - `"claude-opus-4-7"`
+
+        Frontier intelligence for long-running agents and coding
+
+      - `"claude-mythos-preview"`
+
+        New class of intelligence, strongest in coding and cybersecurity
+
+      - `"claude-opus-4-6"`
+
+        Frontier intelligence for long-running agents and coding
+
+      - `"claude-sonnet-4-6"`
+
+        Best combination of speed and intelligence
+
+      - `"claude-haiku-4-5"`
+
+        Fastest model with near-frontier intelligence
+
+      - `"claude-haiku-4-5-20251001"`
+
+        Fastest model with near-frontier intelligence
+
+      - `"claude-opus-4-5"`
+
+        Premium model combining maximum intelligence with practical performance
+
+      - `"claude-opus-4-5-20251101"`
+
+        Premium model combining maximum intelligence with practical performance
+
+      - `"claude-sonnet-4-5"`
+
+        High-performance model for agents and coding
+
+      - `"claude-sonnet-4-5-20250929"`
+
+        High-performance model for agents and coding
+
+      - `"claude-opus-4-1"`
+
+        Exceptional model for specialized complex tasks
+
+      - `"claude-opus-4-1-20250805"`
+
+        Exceptional model for specialized complex tasks
+
+      - `"claude-opus-4-0"`
+
+        Powerful model for complex tasks
+
+      - `"claude-opus-4-20250514"`
+
+        Powerful model for complex tasks
+
+      - `"claude-sonnet-4-0"`
+
+        High-performance model with extended thinking
+
+      - `"claude-sonnet-4-20250514"`
+
+        High-performance model with extended thinking
+
+      - `"claude-3-haiku-20240307"`
+
+        Fast and cost-effective model
+
+    - `output_tokens: number`
+
+      The number of output tokens which were used.
+
+    - `type: "fallback_message"`
+
+      Usage for the fallback-model attempt that served the response
 
 ### Beta JSON Output Format
 
@@ -8842,7 +10518,7 @@ ant beta:messages count-tokens \
 
         - `beta_advisor_tool_result_error: object { error_code, type }`
 
-          - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 3 more`
+          - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 4 more`
 
             - `"max_uses_exceeded"`
 
@@ -8855,6 +10531,8 @@ ant beta:messages count-tokens \
             - `"unavailable"`
 
             - `"execution_time_exceeded"`
+
+            - `"model_not_found"`
 
           - `type: "advisor_tool_result_error"`
 
@@ -9148,6 +10826,122 @@ ant beta:messages count-tokens \
 
       - `type: "compaction"`
 
+    - `beta_fallback_block: object { from, to, type }`
+
+      Marks the point in `content` where one model's output gives way to the next.
+
+      One block appears per hop where a preceding model actually ran this turn and
+      declined. A turn routed directly by the sticky decision has no such boundary
+      and carries no block — the signal for whether a fallback model served the
+      response is the presence of a `fallback_message` entry in
+      `usage.iterations`, not this block.
+
+      The block is treated like a server-tool content block for streaming: it
+      arrives via the standard `content_block_start` / `content_block_stop`
+      pair and carries no deltas.
+
+      - `from: object { model }`
+
+        The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
+
+        - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
+
+          The model that will complete your prompt.
+
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-fable-5"`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
+
+          - `"claude-mythos-5"`
+
+            Most capable model for cybersecurity and biology research
+
+          - `"claude-opus-4-8"`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `"claude-opus-4-7"`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `"claude-mythos-preview"`
+
+            New class of intelligence, strongest in coding and cybersecurity
+
+          - `"claude-opus-4-6"`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `"claude-sonnet-4-6"`
+
+            Best combination of speed and intelligence
+
+          - `"claude-haiku-4-5"`
+
+            Fastest model with near-frontier intelligence
+
+          - `"claude-haiku-4-5-20251001"`
+
+            Fastest model with near-frontier intelligence
+
+          - `"claude-opus-4-5"`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `"claude-opus-4-5-20251101"`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `"claude-sonnet-4-5"`
+
+            High-performance model for agents and coding
+
+          - `"claude-sonnet-4-5-20250929"`
+
+            High-performance model for agents and coding
+
+          - `"claude-opus-4-1"`
+
+            Exceptional model for specialized complex tasks
+
+          - `"claude-opus-4-1-20250805"`
+
+            Exceptional model for specialized complex tasks
+
+          - `"claude-opus-4-0"`
+
+            Powerful model for complex tasks
+
+          - `"claude-opus-4-20250514"`
+
+            Powerful model for complex tasks
+
+          - `"claude-sonnet-4-0"`
+
+            High-performance model with extended thinking
+
+          - `"claude-sonnet-4-20250514"`
+
+            High-performance model with extended thinking
+
+          - `"claude-3-haiku-20240307"`
+
+            Fast and cost-effective model
+
+      - `to: object { model }`
+
+        The fallback model producing the content that follows this block. Its `model` is always the canonical id.
+
+        - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
+
+          The model that will complete your prompt.
+
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `type: "fallback"`
+
   - `context_management: object { applied_edits }`
 
     Context management response.
@@ -9235,11 +11029,19 @@ ant beta:messages count-tokens \
 
         - `type: "unavailable"`
 
-  - `model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string`
+  - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
 
     The model that will complete your prompt.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `"claude-fable-5"`
+
+      Next generation of intelligence for the hardest knowledge work and coding problems
+
+    - `"claude-mythos-5"`
+
+      Most capable model for cybersecurity and biology research
 
     - `"claude-opus-4-8"`
 
@@ -9319,11 +11121,11 @@ ant beta:messages count-tokens \
 
     This will always be `"assistant"`.
 
-  - `stop_details: object { category, explanation, type }`
+  - `stop_details: object { category, explanation, fallback_credit_token, 3 more }`
 
     Structured information about a refusal.
 
-    - `category: "cyber" or "bio"`
+    - `category: "cyber" or "bio" or "reasoning_extraction"`
 
       The policy category that triggered the refusal.
 
@@ -9333,11 +11135,62 @@ ant beta:messages count-tokens \
 
       - `"bio"`
 
+      - `"reasoning_extraction"`
+
     - `explanation: string`
 
       Human-readable explanation of the refusal.
 
       This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+    - `fallback_credit_token: string`
+
+      Opaque code that refunds the cache-miss cost when retrying this refused
+      request on the fallback model. Pass it as `fallback_credit_token` on the
+      retry request. Expires 5 minutes after the refusal.
+
+      The retry is sent either with the same request body (`system`, `messages`,
+      `tools`, and other render-shaping fields), or with the same body plus one
+      appended `assistant` message whose content is the partial text (with any
+      trailing whitespace stripped from the final text block) and paired
+      server-tool blocks from this refusal — which also authorizes that
+      appended turn as an assistant-prefill continuation on models that otherwise
+      disallow prefill. A token minted mid-server-tool-loop whose partial content
+      was continuable may only be redeemed the second way — if a same-body retry
+      is rejected with a 400 saying the token must be redeemed by continuing the
+      partial response, retry the second way instead. Either way: same workspace,
+      same platform; a mismatch is a 400. Resending a token for an already-warm
+      prefix is permitted but yields no additional credit.
+
+      `null` when the refused model isn't eligible for a fallback credit.
+
+    - `fallback_has_prefill_claim: boolean`
+
+      Whether the accompanying `fallback_credit_token` may be redeemed with the
+      appended-assistant retry form. Only set when `fallback_credit_token` is
+      present.
+
+      `true`: retry by resending the same request body plus one appended
+      `assistant` message whose content is this response's `content` with any
+      trailing whitespace stripped from the final text block and unpaired
+      `tool_use` blocks omitted (the same appended-turn shape described on
+      `fallback_credit_token`), with the token attached. `false`: retry by
+      resending the original request body unchanged, with the token attached —
+      the appended-assistant form is not available for this refusal (no
+      continuable partial content, or the request uses `output_format` or a
+      `tool_choice` that forces tool use). One exception: when the request used
+      `output_format` or a forced `tool_choice` and the refusal arrived after
+      server tools (including MCP connector tools) had already executed, the
+      token may not be redeemable by either retry form; if the exact-body retry
+      is then rejected with a 400 saying the token must be redeemed by
+      continuing the partial response, discard the token and retry without it.
+
+      Advisory: if an appended-assistant retry is rejected with a 400 despite
+      `true`, fall back to resending the original request body with the token.
+
+    - `recommended_model: string`
+
+      The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
     - `type: "refusal"`
 
@@ -9424,7 +11277,7 @@ ant beta:messages count-tokens \
 
       The number of input tokens which were used.
 
-    - `iterations: array of BetaMessageIterationUsage or BetaCompactionIterationUsage or BetaAdvisorMessageIterationUsage`
+    - `iterations: array of BetaMessageIterationUsage or BetaCompactionIterationUsage or BetaAdvisorMessageIterationUsage or BetaFallbackMessageIterationUsage`
 
       Per-iteration token usage breakdown.
 
@@ -9434,7 +11287,7 @@ ant beta:messages count-tokens \
       - Calculate the true context window size from the last iteration
       - Understand token accumulation across server-side tool use loops
 
-      - `beta_message_iteration_usage: object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 3 more }`
+      - `beta_message_iteration_usage: object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 4 more }`
 
         Token usage for a sampling iteration.
 
@@ -9461,6 +11314,92 @@ ant beta:messages count-tokens \
         - `input_tokens: number`
 
           The number of input tokens which were used.
+
+        - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
+
+          The model that will complete your prompt.
+
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-fable-5"`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
+
+          - `"claude-mythos-5"`
+
+            Most capable model for cybersecurity and biology research
+
+          - `"claude-opus-4-8"`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `"claude-opus-4-7"`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `"claude-mythos-preview"`
+
+            New class of intelligence, strongest in coding and cybersecurity
+
+          - `"claude-opus-4-6"`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `"claude-sonnet-4-6"`
+
+            Best combination of speed and intelligence
+
+          - `"claude-haiku-4-5"`
+
+            Fastest model with near-frontier intelligence
+
+          - `"claude-haiku-4-5-20251001"`
+
+            Fastest model with near-frontier intelligence
+
+          - `"claude-opus-4-5"`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `"claude-opus-4-5-20251101"`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `"claude-sonnet-4-5"`
+
+            High-performance model for agents and coding
+
+          - `"claude-sonnet-4-5-20250929"`
+
+            High-performance model for agents and coding
+
+          - `"claude-opus-4-1"`
+
+            Exceptional model for specialized complex tasks
+
+          - `"claude-opus-4-1-20250805"`
+
+            Exceptional model for specialized complex tasks
+
+          - `"claude-opus-4-0"`
+
+            Powerful model for complex tasks
+
+          - `"claude-opus-4-20250514"`
+
+            Powerful model for complex tasks
+
+          - `"claude-sonnet-4-0"`
+
+            High-performance model with extended thinking
+
+          - `"claude-sonnet-4-20250514"`
+
+            High-performance model with extended thinking
+
+          - `"claude-3-haiku-20240307"`
+
+            Fast and cost-effective model
 
         - `output_tokens: number`
 
@@ -9534,11 +11473,19 @@ ant beta:messages count-tokens \
 
           The number of input tokens which were used.
 
-        - `model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string`
+        - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
 
           The model that will complete your prompt.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-fable-5"`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
+
+          - `"claude-mythos-5"`
+
+            Most capable model for cybersecurity and biology research
 
           - `"claude-opus-4-8"`
 
@@ -9620,6 +11567,133 @@ ant beta:messages count-tokens \
 
           Usage for an advisor sub-inference iteration
 
+      - `beta_fallback_message_iteration_usage: object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 4 more }`
+
+        Token usage for the fallback-model attempt of a server-side fallback request.
+
+        Produced in place of a `message` entry for whichever hop served the
+        response. A declined hop produces the existing `message` entry. Whether
+        a fallback model served the response is signalled by the presence of this
+        entry in `usage.iterations`.
+
+        - `cache_creation: object { ephemeral_1h_input_tokens, ephemeral_5m_input_tokens }`
+
+          Breakdown of cached tokens by TTL
+
+          - `ephemeral_1h_input_tokens: number`
+
+            The number of input tokens used to create the 1 hour cache entry.
+
+          - `ephemeral_5m_input_tokens: number`
+
+            The number of input tokens used to create the 5 minute cache entry.
+
+        - `cache_creation_input_tokens: number`
+
+          The number of input tokens used to create the cache entry.
+
+        - `cache_read_input_tokens: number`
+
+          The number of input tokens read from the cache.
+
+        - `input_tokens: number`
+
+          The number of input tokens which were used.
+
+        - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
+
+          The model that will complete your prompt.
+
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-fable-5"`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
+
+          - `"claude-mythos-5"`
+
+            Most capable model for cybersecurity and biology research
+
+          - `"claude-opus-4-8"`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `"claude-opus-4-7"`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `"claude-mythos-preview"`
+
+            New class of intelligence, strongest in coding and cybersecurity
+
+          - `"claude-opus-4-6"`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `"claude-sonnet-4-6"`
+
+            Best combination of speed and intelligence
+
+          - `"claude-haiku-4-5"`
+
+            Fastest model with near-frontier intelligence
+
+          - `"claude-haiku-4-5-20251001"`
+
+            Fastest model with near-frontier intelligence
+
+          - `"claude-opus-4-5"`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `"claude-opus-4-5-20251101"`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `"claude-sonnet-4-5"`
+
+            High-performance model for agents and coding
+
+          - `"claude-sonnet-4-5-20250929"`
+
+            High-performance model for agents and coding
+
+          - `"claude-opus-4-1"`
+
+            Exceptional model for specialized complex tasks
+
+          - `"claude-opus-4-1-20250805"`
+
+            Exceptional model for specialized complex tasks
+
+          - `"claude-opus-4-0"`
+
+            Powerful model for complex tasks
+
+          - `"claude-opus-4-20250514"`
+
+            Powerful model for complex tasks
+
+          - `"claude-sonnet-4-0"`
+
+            High-performance model with extended thinking
+
+          - `"claude-sonnet-4-20250514"`
+
+            High-performance model with extended thinking
+
+          - `"claude-3-haiku-20240307"`
+
+            Fast and cost-effective model
+
+        - `output_tokens: number`
+
+          The number of output tokens which were used.
+
+        - `type: "fallback_message"`
+
+          Usage for the fallback-model attempt that served the response
+
     - `output_tokens: number`
 
       The number of output tokens which were used.
@@ -9690,7 +11764,7 @@ ant beta:messages count-tokens \
 
     The cumulative number of input tokens which were used.
 
-  - `iterations: array of BetaMessageIterationUsage or BetaCompactionIterationUsage or BetaAdvisorMessageIterationUsage`
+  - `iterations: array of BetaMessageIterationUsage or BetaCompactionIterationUsage or BetaAdvisorMessageIterationUsage or BetaFallbackMessageIterationUsage`
 
     Per-iteration token usage breakdown.
 
@@ -9700,7 +11774,7 @@ ant beta:messages count-tokens \
     - Calculate the true context window size from the last iteration
     - Understand token accumulation across server-side tool use loops
 
-    - `beta_message_iteration_usage: object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 3 more }`
+    - `beta_message_iteration_usage: object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 4 more }`
 
       Token usage for a sampling iteration.
 
@@ -9727,6 +11801,92 @@ ant beta:messages count-tokens \
       - `input_tokens: number`
 
         The number of input tokens which were used.
+
+      - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
+
+        The model that will complete your prompt.
+
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-fable-5"`
+
+          Next generation of intelligence for the hardest knowledge work and coding problems
+
+        - `"claude-mythos-5"`
+
+          Most capable model for cybersecurity and biology research
+
+        - `"claude-opus-4-8"`
+
+          Frontier intelligence for long-running agents and coding
+
+        - `"claude-opus-4-7"`
+
+          Frontier intelligence for long-running agents and coding
+
+        - `"claude-mythos-preview"`
+
+          New class of intelligence, strongest in coding and cybersecurity
+
+        - `"claude-opus-4-6"`
+
+          Frontier intelligence for long-running agents and coding
+
+        - `"claude-sonnet-4-6"`
+
+          Best combination of speed and intelligence
+
+        - `"claude-haiku-4-5"`
+
+          Fastest model with near-frontier intelligence
+
+        - `"claude-haiku-4-5-20251001"`
+
+          Fastest model with near-frontier intelligence
+
+        - `"claude-opus-4-5"`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `"claude-opus-4-5-20251101"`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `"claude-sonnet-4-5"`
+
+          High-performance model for agents and coding
+
+        - `"claude-sonnet-4-5-20250929"`
+
+          High-performance model for agents and coding
+
+        - `"claude-opus-4-1"`
+
+          Exceptional model for specialized complex tasks
+
+        - `"claude-opus-4-1-20250805"`
+
+          Exceptional model for specialized complex tasks
+
+        - `"claude-opus-4-0"`
+
+          Powerful model for complex tasks
+
+        - `"claude-opus-4-20250514"`
+
+          Powerful model for complex tasks
+
+        - `"claude-sonnet-4-0"`
+
+          High-performance model with extended thinking
+
+        - `"claude-sonnet-4-20250514"`
+
+          High-performance model with extended thinking
+
+        - `"claude-3-haiku-20240307"`
+
+          Fast and cost-effective model
 
       - `output_tokens: number`
 
@@ -9800,11 +11960,19 @@ ant beta:messages count-tokens \
 
         The number of input tokens which were used.
 
-      - `model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string`
+      - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
 
         The model that will complete your prompt.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-fable-5"`
+
+          Next generation of intelligence for the hardest knowledge work and coding problems
+
+        - `"claude-mythos-5"`
+
+          Most capable model for cybersecurity and biology research
 
         - `"claude-opus-4-8"`
 
@@ -9886,6 +12054,133 @@ ant beta:messages count-tokens \
 
         Usage for an advisor sub-inference iteration
 
+    - `beta_fallback_message_iteration_usage: object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 4 more }`
+
+      Token usage for the fallback-model attempt of a server-side fallback request.
+
+      Produced in place of a `message` entry for whichever hop served the
+      response. A declined hop produces the existing `message` entry. Whether
+      a fallback model served the response is signalled by the presence of this
+      entry in `usage.iterations`.
+
+      - `cache_creation: object { ephemeral_1h_input_tokens, ephemeral_5m_input_tokens }`
+
+        Breakdown of cached tokens by TTL
+
+        - `ephemeral_1h_input_tokens: number`
+
+          The number of input tokens used to create the 1 hour cache entry.
+
+        - `ephemeral_5m_input_tokens: number`
+
+          The number of input tokens used to create the 5 minute cache entry.
+
+      - `cache_creation_input_tokens: number`
+
+        The number of input tokens used to create the cache entry.
+
+      - `cache_read_input_tokens: number`
+
+        The number of input tokens read from the cache.
+
+      - `input_tokens: number`
+
+        The number of input tokens which were used.
+
+      - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
+
+        The model that will complete your prompt.
+
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-fable-5"`
+
+          Next generation of intelligence for the hardest knowledge work and coding problems
+
+        - `"claude-mythos-5"`
+
+          Most capable model for cybersecurity and biology research
+
+        - `"claude-opus-4-8"`
+
+          Frontier intelligence for long-running agents and coding
+
+        - `"claude-opus-4-7"`
+
+          Frontier intelligence for long-running agents and coding
+
+        - `"claude-mythos-preview"`
+
+          New class of intelligence, strongest in coding and cybersecurity
+
+        - `"claude-opus-4-6"`
+
+          Frontier intelligence for long-running agents and coding
+
+        - `"claude-sonnet-4-6"`
+
+          Best combination of speed and intelligence
+
+        - `"claude-haiku-4-5"`
+
+          Fastest model with near-frontier intelligence
+
+        - `"claude-haiku-4-5-20251001"`
+
+          Fastest model with near-frontier intelligence
+
+        - `"claude-opus-4-5"`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `"claude-opus-4-5-20251101"`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `"claude-sonnet-4-5"`
+
+          High-performance model for agents and coding
+
+        - `"claude-sonnet-4-5-20250929"`
+
+          High-performance model for agents and coding
+
+        - `"claude-opus-4-1"`
+
+          Exceptional model for specialized complex tasks
+
+        - `"claude-opus-4-1-20250805"`
+
+          Exceptional model for specialized complex tasks
+
+        - `"claude-opus-4-0"`
+
+          Powerful model for complex tasks
+
+        - `"claude-opus-4-20250514"`
+
+          Powerful model for complex tasks
+
+        - `"claude-sonnet-4-0"`
+
+          High-performance model with extended thinking
+
+        - `"claude-sonnet-4-20250514"`
+
+          High-performance model with extended thinking
+
+        - `"claude-3-haiku-20240307"`
+
+          Fast and cost-effective model
+
+      - `output_tokens: number`
+
+        The number of output tokens which were used.
+
+      - `type: "fallback_message"`
+
+        Usage for the fallback-model attempt that served the response
+
   - `output_tokens: number`
 
     The cumulative number of output tokens which were used.
@@ -9924,7 +12219,7 @@ ant beta:messages count-tokens \
 
 ### Beta Message Iteration Usage
 
-- `beta_message_iteration_usage: object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 3 more }`
+- `beta_message_iteration_usage: object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 4 more }`
 
   Token usage for a sampling iteration.
 
@@ -9951,6 +12246,92 @@ ant beta:messages count-tokens \
   - `input_tokens: number`
 
     The number of input tokens which were used.
+
+  - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
+
+    The model that will complete your prompt.
+
+    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `"claude-fable-5"`
+
+      Next generation of intelligence for the hardest knowledge work and coding problems
+
+    - `"claude-mythos-5"`
+
+      Most capable model for cybersecurity and biology research
+
+    - `"claude-opus-4-8"`
+
+      Frontier intelligence for long-running agents and coding
+
+    - `"claude-opus-4-7"`
+
+      Frontier intelligence for long-running agents and coding
+
+    - `"claude-mythos-preview"`
+
+      New class of intelligence, strongest in coding and cybersecurity
+
+    - `"claude-opus-4-6"`
+
+      Frontier intelligence for long-running agents and coding
+
+    - `"claude-sonnet-4-6"`
+
+      Best combination of speed and intelligence
+
+    - `"claude-haiku-4-5"`
+
+      Fastest model with near-frontier intelligence
+
+    - `"claude-haiku-4-5-20251001"`
+
+      Fastest model with near-frontier intelligence
+
+    - `"claude-opus-4-5"`
+
+      Premium model combining maximum intelligence with practical performance
+
+    - `"claude-opus-4-5-20251101"`
+
+      Premium model combining maximum intelligence with practical performance
+
+    - `"claude-sonnet-4-5"`
+
+      High-performance model for agents and coding
+
+    - `"claude-sonnet-4-5-20250929"`
+
+      High-performance model for agents and coding
+
+    - `"claude-opus-4-1"`
+
+      Exceptional model for specialized complex tasks
+
+    - `"claude-opus-4-1-20250805"`
+
+      Exceptional model for specialized complex tasks
+
+    - `"claude-opus-4-0"`
+
+      Powerful model for complex tasks
+
+    - `"claude-opus-4-20250514"`
+
+      Powerful model for complex tasks
+
+    - `"claude-sonnet-4-0"`
+
+      High-performance model with extended thinking
+
+    - `"claude-sonnet-4-20250514"`
+
+      High-performance model with extended thinking
+
+    - `"claude-3-haiku-20240307"`
+
+      Fast and cost-effective model
 
   - `output_tokens: number`
 
@@ -10666,7 +13047,7 @@ ant beta:messages count-tokens \
 
         - `beta_advisor_tool_result_error_param: object { error_code, type }`
 
-          - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 3 more`
+          - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 4 more`
 
             - `"max_uses_exceeded"`
 
@@ -10679,6 +13060,8 @@ ant beta:messages count-tokens \
             - `"unavailable"`
 
             - `"execution_time_exceeded"`
+
+            - `"model_not_found"`
 
           - `type: "advisor_tool_result_error"`
 
@@ -10940,7 +13323,7 @@ ant beta:messages count-tokens \
 
       - `content: BetaToolSearchToolResultErrorParam or BetaToolSearchToolSearchResultBlockParam`
 
-        - `beta_tool_search_tool_result_error_param: object { error_code, type }`
+        - `beta_tool_search_tool_result_error_param: object { error_code, type, error_message }`
 
           - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or "execution_time_exceeded"`
 
@@ -10953,6 +13336,8 @@ ant beta:messages count-tokens \
             - `"execution_time_exceeded"`
 
           - `type: "tool_search_tool_result_error"`
+
+          - `error_message: optional string`
 
         - `beta_tool_search_tool_search_result_block_param: object { tool_references, type }`
 
@@ -11163,6 +13548,126 @@ ant beta:messages count-tokens \
           - `1h`: 1 hour
 
           Defaults to `5m`.
+
+    - `beta_fallback_block_param: object { from, to, type }`
+
+      A `fallback` block echoed back from a prior response.
+
+      Accepted in `messages[].content` and never rendered into the prompt,
+      not validated against the request's `fallbacks` chain or top-level
+      `model`, and stripped before the sticky-routing cache key is computed.
+
+      Callers should echo the assistant turn verbatim — block included. The
+      block's position is load-bearing for thinking verification: the thinking
+      runs on either side of a fallback hop carry independently-rooted
+      verification hash chains, and this block is the only record of where one
+      chain ends and the next begins. When thinking runs flank the boundary,
+      omitting the block merges the runs into one contiguous span whose hashes
+      cannot verify (the request is rejected), and moving it into the middle of
+      a single run splits that run's chain and is likewise rejected; between
+      non-thinking blocks the block's placement has no verification effect.
+
+      - `from: object { model }`
+
+        Identifies one hop of a fallback transition.
+
+        - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
+
+          The model that will complete your prompt.
+
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-fable-5"`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
+
+          - `"claude-mythos-5"`
+
+            Most capable model for cybersecurity and biology research
+
+          - `"claude-opus-4-8"`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `"claude-opus-4-7"`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `"claude-mythos-preview"`
+
+            New class of intelligence, strongest in coding and cybersecurity
+
+          - `"claude-opus-4-6"`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `"claude-sonnet-4-6"`
+
+            Best combination of speed and intelligence
+
+          - `"claude-haiku-4-5"`
+
+            Fastest model with near-frontier intelligence
+
+          - `"claude-haiku-4-5-20251001"`
+
+            Fastest model with near-frontier intelligence
+
+          - `"claude-opus-4-5"`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `"claude-opus-4-5-20251101"`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `"claude-sonnet-4-5"`
+
+            High-performance model for agents and coding
+
+          - `"claude-sonnet-4-5-20250929"`
+
+            High-performance model for agents and coding
+
+          - `"claude-opus-4-1"`
+
+            Exceptional model for specialized complex tasks
+
+          - `"claude-opus-4-1-20250805"`
+
+            Exceptional model for specialized complex tasks
+
+          - `"claude-opus-4-0"`
+
+            Powerful model for complex tasks
+
+          - `"claude-opus-4-20250514"`
+
+            Powerful model for complex tasks
+
+          - `"claude-sonnet-4-0"`
+
+            High-performance model with extended thinking
+
+          - `"claude-sonnet-4-20250514"`
+
+            High-performance model with extended thinking
+
+          - `"claude-3-haiku-20240307"`
+
+            Fast and cost-effective model
+
+      - `to: object { model }`
+
+        Identifies one hop of a fallback transition.
+
+        - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
+
+          The model that will complete your prompt.
+
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `type: "fallback"`
 
   - `role: "user" or "assistant" or "system"`
 
@@ -11726,7 +14231,7 @@ ant beta:messages count-tokens \
 
 - `beta_raw_content_block_start_event: object { content_block, index, type }`
 
-  - `content_block: BetaTextBlock or BetaThinkingBlock or BetaRedactedThinkingBlock or 13 more`
+  - `content_block: BetaTextBlock or BetaThinkingBlock or BetaRedactedThinkingBlock or 14 more`
 
     Response model for a file uploaded to the container.
 
@@ -12078,7 +14583,7 @@ ant beta:messages count-tokens \
 
         - `beta_advisor_tool_result_error: object { error_code, type }`
 
-          - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 3 more`
+          - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 4 more`
 
             - `"max_uses_exceeded"`
 
@@ -12091,6 +14596,8 @@ ant beta:messages count-tokens \
             - `"unavailable"`
 
             - `"execution_time_exceeded"`
+
+            - `"model_not_found"`
 
           - `type: "advisor_tool_result_error"`
 
@@ -12384,6 +14891,122 @@ ant beta:messages count-tokens \
 
       - `type: "compaction"`
 
+    - `beta_fallback_block: object { from, to, type }`
+
+      Marks the point in `content` where one model's output gives way to the next.
+
+      One block appears per hop where a preceding model actually ran this turn and
+      declined. A turn routed directly by the sticky decision has no such boundary
+      and carries no block — the signal for whether a fallback model served the
+      response is the presence of a `fallback_message` entry in
+      `usage.iterations`, not this block.
+
+      The block is treated like a server-tool content block for streaming: it
+      arrives via the standard `content_block_start` / `content_block_stop`
+      pair and carries no deltas.
+
+      - `from: object { model }`
+
+        The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
+
+        - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
+
+          The model that will complete your prompt.
+
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-fable-5"`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
+
+          - `"claude-mythos-5"`
+
+            Most capable model for cybersecurity and biology research
+
+          - `"claude-opus-4-8"`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `"claude-opus-4-7"`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `"claude-mythos-preview"`
+
+            New class of intelligence, strongest in coding and cybersecurity
+
+          - `"claude-opus-4-6"`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `"claude-sonnet-4-6"`
+
+            Best combination of speed and intelligence
+
+          - `"claude-haiku-4-5"`
+
+            Fastest model with near-frontier intelligence
+
+          - `"claude-haiku-4-5-20251001"`
+
+            Fastest model with near-frontier intelligence
+
+          - `"claude-opus-4-5"`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `"claude-opus-4-5-20251101"`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `"claude-sonnet-4-5"`
+
+            High-performance model for agents and coding
+
+          - `"claude-sonnet-4-5-20250929"`
+
+            High-performance model for agents and coding
+
+          - `"claude-opus-4-1"`
+
+            Exceptional model for specialized complex tasks
+
+          - `"claude-opus-4-1-20250805"`
+
+            Exceptional model for specialized complex tasks
+
+          - `"claude-opus-4-0"`
+
+            Powerful model for complex tasks
+
+          - `"claude-opus-4-20250514"`
+
+            Powerful model for complex tasks
+
+          - `"claude-sonnet-4-0"`
+
+            High-performance model with extended thinking
+
+          - `"claude-sonnet-4-20250514"`
+
+            High-performance model with extended thinking
+
+          - `"claude-3-haiku-20240307"`
+
+            Fast and cost-effective model
+
+      - `to: object { model }`
+
+        The fallback model producing the content that follows this block. Its `model` is always the canonical id.
+
+        - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
+
+          The model that will complete your prompt.
+
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `type: "fallback"`
+
   - `index: number`
 
   - `type: "content_block_start"`
@@ -12470,11 +15093,11 @@ ant beta:messages count-tokens \
 
           Skill version or 'latest' for most recent version
 
-    - `stop_details: object { category, explanation, type }`
+    - `stop_details: object { category, explanation, fallback_credit_token, 3 more }`
 
       Structured information about a refusal.
 
-      - `category: "cyber" or "bio"`
+      - `category: "cyber" or "bio" or "reasoning_extraction"`
 
         The policy category that triggered the refusal.
 
@@ -12484,11 +15107,62 @@ ant beta:messages count-tokens \
 
         - `"bio"`
 
+        - `"reasoning_extraction"`
+
       - `explanation: string`
 
         Human-readable explanation of the refusal.
 
         This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+      - `fallback_credit_token: string`
+
+        Opaque code that refunds the cache-miss cost when retrying this refused
+        request on the fallback model. Pass it as `fallback_credit_token` on the
+        retry request. Expires 5 minutes after the refusal.
+
+        The retry is sent either with the same request body (`system`, `messages`,
+        `tools`, and other render-shaping fields), or with the same body plus one
+        appended `assistant` message whose content is the partial text (with any
+        trailing whitespace stripped from the final text block) and paired
+        server-tool blocks from this refusal — which also authorizes that
+        appended turn as an assistant-prefill continuation on models that otherwise
+        disallow prefill. A token minted mid-server-tool-loop whose partial content
+        was continuable may only be redeemed the second way — if a same-body retry
+        is rejected with a 400 saying the token must be redeemed by continuing the
+        partial response, retry the second way instead. Either way: same workspace,
+        same platform; a mismatch is a 400. Resending a token for an already-warm
+        prefix is permitted but yields no additional credit.
+
+        `null` when the refused model isn't eligible for a fallback credit.
+
+      - `fallback_has_prefill_claim: boolean`
+
+        Whether the accompanying `fallback_credit_token` may be redeemed with the
+        appended-assistant retry form. Only set when `fallback_credit_token` is
+        present.
+
+        `true`: retry by resending the same request body plus one appended
+        `assistant` message whose content is this response's `content` with any
+        trailing whitespace stripped from the final text block and unpaired
+        `tool_use` blocks omitted (the same appended-turn shape described on
+        `fallback_credit_token`), with the token attached. `false`: retry by
+        resending the original request body unchanged, with the token attached —
+        the appended-assistant form is not available for this refusal (no
+        continuable partial content, or the request uses `output_format` or a
+        `tool_choice` that forces tool use). One exception: when the request used
+        `output_format` or a forced `tool_choice` and the refusal arrived after
+        server tools (including MCP connector tools) had already executed, the
+        token may not be redeemable by either retry form; if the exact-body retry
+        is then rejected with a 400 saying the token must be redeemed by
+        continuing the partial response, discard the token and retry without it.
+
+        Advisory: if an appended-assistant retry is rejected with a 400 despite
+        `true`, fall back to resending the original request body with the token.
+
+      - `recommended_model: string`
+
+        The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
       - `type: "refusal"`
 
@@ -12538,7 +15212,7 @@ ant beta:messages count-tokens \
 
       The cumulative number of input tokens which were used.
 
-    - `iterations: array of BetaMessageIterationUsage or BetaCompactionIterationUsage or BetaAdvisorMessageIterationUsage`
+    - `iterations: array of BetaMessageIterationUsage or BetaCompactionIterationUsage or BetaAdvisorMessageIterationUsage or BetaFallbackMessageIterationUsage`
 
       Per-iteration token usage breakdown.
 
@@ -12548,7 +15222,7 @@ ant beta:messages count-tokens \
       - Calculate the true context window size from the last iteration
       - Understand token accumulation across server-side tool use loops
 
-      - `beta_message_iteration_usage: object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 3 more }`
+      - `beta_message_iteration_usage: object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 4 more }`
 
         Token usage for a sampling iteration.
 
@@ -12575,6 +15249,92 @@ ant beta:messages count-tokens \
         - `input_tokens: number`
 
           The number of input tokens which were used.
+
+        - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
+
+          The model that will complete your prompt.
+
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-fable-5"`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
+
+          - `"claude-mythos-5"`
+
+            Most capable model for cybersecurity and biology research
+
+          - `"claude-opus-4-8"`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `"claude-opus-4-7"`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `"claude-mythos-preview"`
+
+            New class of intelligence, strongest in coding and cybersecurity
+
+          - `"claude-opus-4-6"`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `"claude-sonnet-4-6"`
+
+            Best combination of speed and intelligence
+
+          - `"claude-haiku-4-5"`
+
+            Fastest model with near-frontier intelligence
+
+          - `"claude-haiku-4-5-20251001"`
+
+            Fastest model with near-frontier intelligence
+
+          - `"claude-opus-4-5"`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `"claude-opus-4-5-20251101"`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `"claude-sonnet-4-5"`
+
+            High-performance model for agents and coding
+
+          - `"claude-sonnet-4-5-20250929"`
+
+            High-performance model for agents and coding
+
+          - `"claude-opus-4-1"`
+
+            Exceptional model for specialized complex tasks
+
+          - `"claude-opus-4-1-20250805"`
+
+            Exceptional model for specialized complex tasks
+
+          - `"claude-opus-4-0"`
+
+            Powerful model for complex tasks
+
+          - `"claude-opus-4-20250514"`
+
+            Powerful model for complex tasks
+
+          - `"claude-sonnet-4-0"`
+
+            High-performance model with extended thinking
+
+          - `"claude-sonnet-4-20250514"`
+
+            High-performance model with extended thinking
+
+          - `"claude-3-haiku-20240307"`
+
+            Fast and cost-effective model
 
         - `output_tokens: number`
 
@@ -12648,11 +15408,19 @@ ant beta:messages count-tokens \
 
           The number of input tokens which were used.
 
-        - `model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string`
+        - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
 
           The model that will complete your prompt.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-fable-5"`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
+
+          - `"claude-mythos-5"`
+
+            Most capable model for cybersecurity and biology research
 
           - `"claude-opus-4-8"`
 
@@ -12733,6 +15501,133 @@ ant beta:messages count-tokens \
         - `type: "advisor_message"`
 
           Usage for an advisor sub-inference iteration
+
+      - `beta_fallback_message_iteration_usage: object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 4 more }`
+
+        Token usage for the fallback-model attempt of a server-side fallback request.
+
+        Produced in place of a `message` entry for whichever hop served the
+        response. A declined hop produces the existing `message` entry. Whether
+        a fallback model served the response is signalled by the presence of this
+        entry in `usage.iterations`.
+
+        - `cache_creation: object { ephemeral_1h_input_tokens, ephemeral_5m_input_tokens }`
+
+          Breakdown of cached tokens by TTL
+
+          - `ephemeral_1h_input_tokens: number`
+
+            The number of input tokens used to create the 1 hour cache entry.
+
+          - `ephemeral_5m_input_tokens: number`
+
+            The number of input tokens used to create the 5 minute cache entry.
+
+        - `cache_creation_input_tokens: number`
+
+          The number of input tokens used to create the cache entry.
+
+        - `cache_read_input_tokens: number`
+
+          The number of input tokens read from the cache.
+
+        - `input_tokens: number`
+
+          The number of input tokens which were used.
+
+        - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
+
+          The model that will complete your prompt.
+
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-fable-5"`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
+
+          - `"claude-mythos-5"`
+
+            Most capable model for cybersecurity and biology research
+
+          - `"claude-opus-4-8"`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `"claude-opus-4-7"`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `"claude-mythos-preview"`
+
+            New class of intelligence, strongest in coding and cybersecurity
+
+          - `"claude-opus-4-6"`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `"claude-sonnet-4-6"`
+
+            Best combination of speed and intelligence
+
+          - `"claude-haiku-4-5"`
+
+            Fastest model with near-frontier intelligence
+
+          - `"claude-haiku-4-5-20251001"`
+
+            Fastest model with near-frontier intelligence
+
+          - `"claude-opus-4-5"`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `"claude-opus-4-5-20251101"`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `"claude-sonnet-4-5"`
+
+            High-performance model for agents and coding
+
+          - `"claude-sonnet-4-5-20250929"`
+
+            High-performance model for agents and coding
+
+          - `"claude-opus-4-1"`
+
+            Exceptional model for specialized complex tasks
+
+          - `"claude-opus-4-1-20250805"`
+
+            Exceptional model for specialized complex tasks
+
+          - `"claude-opus-4-0"`
+
+            Powerful model for complex tasks
+
+          - `"claude-opus-4-20250514"`
+
+            Powerful model for complex tasks
+
+          - `"claude-sonnet-4-0"`
+
+            High-performance model with extended thinking
+
+          - `"claude-sonnet-4-20250514"`
+
+            High-performance model with extended thinking
+
+          - `"claude-3-haiku-20240307"`
+
+            Fast and cost-effective model
+
+        - `output_tokens: number`
+
+          The number of output tokens which were used.
+
+        - `type: "fallback_message"`
+
+          Usage for the fallback-model attempt that served the response
 
     - `output_tokens: number`
 
@@ -13191,7 +16086,7 @@ ant beta:messages count-tokens \
 
           - `beta_advisor_tool_result_error: object { error_code, type }`
 
-            - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 3 more`
+            - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 4 more`
 
               - `"max_uses_exceeded"`
 
@@ -13204,6 +16099,8 @@ ant beta:messages count-tokens \
               - `"unavailable"`
 
               - `"execution_time_exceeded"`
+
+              - `"model_not_found"`
 
             - `type: "advisor_tool_result_error"`
 
@@ -13497,6 +16394,122 @@ ant beta:messages count-tokens \
 
         - `type: "compaction"`
 
+      - `beta_fallback_block: object { from, to, type }`
+
+        Marks the point in `content` where one model's output gives way to the next.
+
+        One block appears per hop where a preceding model actually ran this turn and
+        declined. A turn routed directly by the sticky decision has no such boundary
+        and carries no block — the signal for whether a fallback model served the
+        response is the presence of a `fallback_message` entry in
+        `usage.iterations`, not this block.
+
+        The block is treated like a server-tool content block for streaming: it
+        arrives via the standard `content_block_start` / `content_block_stop`
+        pair and carries no deltas.
+
+        - `from: object { model }`
+
+          The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
+
+          - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
+
+            The model that will complete your prompt.
+
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `"claude-fable-5"`
+
+              Next generation of intelligence for the hardest knowledge work and coding problems
+
+            - `"claude-mythos-5"`
+
+              Most capable model for cybersecurity and biology research
+
+            - `"claude-opus-4-8"`
+
+              Frontier intelligence for long-running agents and coding
+
+            - `"claude-opus-4-7"`
+
+              Frontier intelligence for long-running agents and coding
+
+            - `"claude-mythos-preview"`
+
+              New class of intelligence, strongest in coding and cybersecurity
+
+            - `"claude-opus-4-6"`
+
+              Frontier intelligence for long-running agents and coding
+
+            - `"claude-sonnet-4-6"`
+
+              Best combination of speed and intelligence
+
+            - `"claude-haiku-4-5"`
+
+              Fastest model with near-frontier intelligence
+
+            - `"claude-haiku-4-5-20251001"`
+
+              Fastest model with near-frontier intelligence
+
+            - `"claude-opus-4-5"`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `"claude-opus-4-5-20251101"`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `"claude-sonnet-4-5"`
+
+              High-performance model for agents and coding
+
+            - `"claude-sonnet-4-5-20250929"`
+
+              High-performance model for agents and coding
+
+            - `"claude-opus-4-1"`
+
+              Exceptional model for specialized complex tasks
+
+            - `"claude-opus-4-1-20250805"`
+
+              Exceptional model for specialized complex tasks
+
+            - `"claude-opus-4-0"`
+
+              Powerful model for complex tasks
+
+            - `"claude-opus-4-20250514"`
+
+              Powerful model for complex tasks
+
+            - `"claude-sonnet-4-0"`
+
+              High-performance model with extended thinking
+
+            - `"claude-sonnet-4-20250514"`
+
+              High-performance model with extended thinking
+
+            - `"claude-3-haiku-20240307"`
+
+              Fast and cost-effective model
+
+        - `to: object { model }`
+
+          The fallback model producing the content that follows this block. Its `model` is always the canonical id.
+
+          - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
+
+            The model that will complete your prompt.
+
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `type: "fallback"`
+
     - `context_management: object { applied_edits }`
 
       Context management response.
@@ -13584,11 +16597,19 @@ ant beta:messages count-tokens \
 
           - `type: "unavailable"`
 
-    - `model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string`
+    - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
 
       The model that will complete your prompt.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-fable-5"`
+
+        Next generation of intelligence for the hardest knowledge work and coding problems
+
+      - `"claude-mythos-5"`
+
+        Most capable model for cybersecurity and biology research
 
       - `"claude-opus-4-8"`
 
@@ -13668,11 +16689,11 @@ ant beta:messages count-tokens \
 
       This will always be `"assistant"`.
 
-    - `stop_details: object { category, explanation, type }`
+    - `stop_details: object { category, explanation, fallback_credit_token, 3 more }`
 
       Structured information about a refusal.
 
-      - `category: "cyber" or "bio"`
+      - `category: "cyber" or "bio" or "reasoning_extraction"`
 
         The policy category that triggered the refusal.
 
@@ -13682,11 +16703,62 @@ ant beta:messages count-tokens \
 
         - `"bio"`
 
+        - `"reasoning_extraction"`
+
       - `explanation: string`
 
         Human-readable explanation of the refusal.
 
         This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+      - `fallback_credit_token: string`
+
+        Opaque code that refunds the cache-miss cost when retrying this refused
+        request on the fallback model. Pass it as `fallback_credit_token` on the
+        retry request. Expires 5 minutes after the refusal.
+
+        The retry is sent either with the same request body (`system`, `messages`,
+        `tools`, and other render-shaping fields), or with the same body plus one
+        appended `assistant` message whose content is the partial text (with any
+        trailing whitespace stripped from the final text block) and paired
+        server-tool blocks from this refusal — which also authorizes that
+        appended turn as an assistant-prefill continuation on models that otherwise
+        disallow prefill. A token minted mid-server-tool-loop whose partial content
+        was continuable may only be redeemed the second way — if a same-body retry
+        is rejected with a 400 saying the token must be redeemed by continuing the
+        partial response, retry the second way instead. Either way: same workspace,
+        same platform; a mismatch is a 400. Resending a token for an already-warm
+        prefix is permitted but yields no additional credit.
+
+        `null` when the refused model isn't eligible for a fallback credit.
+
+      - `fallback_has_prefill_claim: boolean`
+
+        Whether the accompanying `fallback_credit_token` may be redeemed with the
+        appended-assistant retry form. Only set when `fallback_credit_token` is
+        present.
+
+        `true`: retry by resending the same request body plus one appended
+        `assistant` message whose content is this response's `content` with any
+        trailing whitespace stripped from the final text block and unpaired
+        `tool_use` blocks omitted (the same appended-turn shape described on
+        `fallback_credit_token`), with the token attached. `false`: retry by
+        resending the original request body unchanged, with the token attached —
+        the appended-assistant form is not available for this refusal (no
+        continuable partial content, or the request uses `output_format` or a
+        `tool_choice` that forces tool use). One exception: when the request used
+        `output_format` or a forced `tool_choice` and the refusal arrived after
+        server tools (including MCP connector tools) had already executed, the
+        token may not be redeemable by either retry form; if the exact-body retry
+        is then rejected with a 400 saying the token must be redeemed by
+        continuing the partial response, discard the token and retry without it.
+
+        Advisory: if an appended-assistant retry is rejected with a 400 despite
+        `true`, fall back to resending the original request body with the token.
+
+      - `recommended_model: string`
+
+        The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
       - `type: "refusal"`
 
@@ -13773,7 +16845,7 @@ ant beta:messages count-tokens \
 
         The number of input tokens which were used.
 
-      - `iterations: array of BetaMessageIterationUsage or BetaCompactionIterationUsage or BetaAdvisorMessageIterationUsage`
+      - `iterations: array of BetaMessageIterationUsage or BetaCompactionIterationUsage or BetaAdvisorMessageIterationUsage or BetaFallbackMessageIterationUsage`
 
         Per-iteration token usage breakdown.
 
@@ -13783,7 +16855,7 @@ ant beta:messages count-tokens \
         - Calculate the true context window size from the last iteration
         - Understand token accumulation across server-side tool use loops
 
-        - `beta_message_iteration_usage: object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 3 more }`
+        - `beta_message_iteration_usage: object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 4 more }`
 
           Token usage for a sampling iteration.
 
@@ -13810,6 +16882,92 @@ ant beta:messages count-tokens \
           - `input_tokens: number`
 
             The number of input tokens which were used.
+
+          - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
+
+            The model that will complete your prompt.
+
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `"claude-fable-5"`
+
+              Next generation of intelligence for the hardest knowledge work and coding problems
+
+            - `"claude-mythos-5"`
+
+              Most capable model for cybersecurity and biology research
+
+            - `"claude-opus-4-8"`
+
+              Frontier intelligence for long-running agents and coding
+
+            - `"claude-opus-4-7"`
+
+              Frontier intelligence for long-running agents and coding
+
+            - `"claude-mythos-preview"`
+
+              New class of intelligence, strongest in coding and cybersecurity
+
+            - `"claude-opus-4-6"`
+
+              Frontier intelligence for long-running agents and coding
+
+            - `"claude-sonnet-4-6"`
+
+              Best combination of speed and intelligence
+
+            - `"claude-haiku-4-5"`
+
+              Fastest model with near-frontier intelligence
+
+            - `"claude-haiku-4-5-20251001"`
+
+              Fastest model with near-frontier intelligence
+
+            - `"claude-opus-4-5"`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `"claude-opus-4-5-20251101"`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `"claude-sonnet-4-5"`
+
+              High-performance model for agents and coding
+
+            - `"claude-sonnet-4-5-20250929"`
+
+              High-performance model for agents and coding
+
+            - `"claude-opus-4-1"`
+
+              Exceptional model for specialized complex tasks
+
+            - `"claude-opus-4-1-20250805"`
+
+              Exceptional model for specialized complex tasks
+
+            - `"claude-opus-4-0"`
+
+              Powerful model for complex tasks
+
+            - `"claude-opus-4-20250514"`
+
+              Powerful model for complex tasks
+
+            - `"claude-sonnet-4-0"`
+
+              High-performance model with extended thinking
+
+            - `"claude-sonnet-4-20250514"`
+
+              High-performance model with extended thinking
+
+            - `"claude-3-haiku-20240307"`
+
+              Fast and cost-effective model
 
           - `output_tokens: number`
 
@@ -13883,11 +17041,19 @@ ant beta:messages count-tokens \
 
             The number of input tokens which were used.
 
-          - `model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string`
+          - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
 
             The model that will complete your prompt.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `"claude-fable-5"`
+
+              Next generation of intelligence for the hardest knowledge work and coding problems
+
+            - `"claude-mythos-5"`
+
+              Most capable model for cybersecurity and biology research
 
             - `"claude-opus-4-8"`
 
@@ -13968,6 +17134,133 @@ ant beta:messages count-tokens \
           - `type: "advisor_message"`
 
             Usage for an advisor sub-inference iteration
+
+        - `beta_fallback_message_iteration_usage: object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 4 more }`
+
+          Token usage for the fallback-model attempt of a server-side fallback request.
+
+          Produced in place of a `message` entry for whichever hop served the
+          response. A declined hop produces the existing `message` entry. Whether
+          a fallback model served the response is signalled by the presence of this
+          entry in `usage.iterations`.
+
+          - `cache_creation: object { ephemeral_1h_input_tokens, ephemeral_5m_input_tokens }`
+
+            Breakdown of cached tokens by TTL
+
+            - `ephemeral_1h_input_tokens: number`
+
+              The number of input tokens used to create the 1 hour cache entry.
+
+            - `ephemeral_5m_input_tokens: number`
+
+              The number of input tokens used to create the 5 minute cache entry.
+
+          - `cache_creation_input_tokens: number`
+
+            The number of input tokens used to create the cache entry.
+
+          - `cache_read_input_tokens: number`
+
+            The number of input tokens read from the cache.
+
+          - `input_tokens: number`
+
+            The number of input tokens which were used.
+
+          - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
+
+            The model that will complete your prompt.
+
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `"claude-fable-5"`
+
+              Next generation of intelligence for the hardest knowledge work and coding problems
+
+            - `"claude-mythos-5"`
+
+              Most capable model for cybersecurity and biology research
+
+            - `"claude-opus-4-8"`
+
+              Frontier intelligence for long-running agents and coding
+
+            - `"claude-opus-4-7"`
+
+              Frontier intelligence for long-running agents and coding
+
+            - `"claude-mythos-preview"`
+
+              New class of intelligence, strongest in coding and cybersecurity
+
+            - `"claude-opus-4-6"`
+
+              Frontier intelligence for long-running agents and coding
+
+            - `"claude-sonnet-4-6"`
+
+              Best combination of speed and intelligence
+
+            - `"claude-haiku-4-5"`
+
+              Fastest model with near-frontier intelligence
+
+            - `"claude-haiku-4-5-20251001"`
+
+              Fastest model with near-frontier intelligence
+
+            - `"claude-opus-4-5"`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `"claude-opus-4-5-20251101"`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `"claude-sonnet-4-5"`
+
+              High-performance model for agents and coding
+
+            - `"claude-sonnet-4-5-20250929"`
+
+              High-performance model for agents and coding
+
+            - `"claude-opus-4-1"`
+
+              Exceptional model for specialized complex tasks
+
+            - `"claude-opus-4-1-20250805"`
+
+              Exceptional model for specialized complex tasks
+
+            - `"claude-opus-4-0"`
+
+              Powerful model for complex tasks
+
+            - `"claude-opus-4-20250514"`
+
+              Powerful model for complex tasks
+
+            - `"claude-sonnet-4-0"`
+
+              High-performance model with extended thinking
+
+            - `"claude-sonnet-4-20250514"`
+
+              High-performance model with extended thinking
+
+            - `"claude-3-haiku-20240307"`
+
+              Fast and cost-effective model
+
+          - `output_tokens: number`
+
+            The number of output tokens which were used.
+
+          - `type: "fallback_message"`
+
+            Usage for the fallback-model attempt that served the response
 
       - `output_tokens: number`
 
@@ -14454,7 +17747,7 @@ ant beta:messages count-tokens \
 
             - `beta_advisor_tool_result_error: object { error_code, type }`
 
-              - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 3 more`
+              - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 4 more`
 
                 - `"max_uses_exceeded"`
 
@@ -14467,6 +17760,8 @@ ant beta:messages count-tokens \
                 - `"unavailable"`
 
                 - `"execution_time_exceeded"`
+
+                - `"model_not_found"`
 
               - `type: "advisor_tool_result_error"`
 
@@ -14760,6 +18055,122 @@ ant beta:messages count-tokens \
 
           - `type: "compaction"`
 
+        - `beta_fallback_block: object { from, to, type }`
+
+          Marks the point in `content` where one model's output gives way to the next.
+
+          One block appears per hop where a preceding model actually ran this turn and
+          declined. A turn routed directly by the sticky decision has no such boundary
+          and carries no block — the signal for whether a fallback model served the
+          response is the presence of a `fallback_message` entry in
+          `usage.iterations`, not this block.
+
+          The block is treated like a server-tool content block for streaming: it
+          arrives via the standard `content_block_start` / `content_block_stop`
+          pair and carries no deltas.
+
+          - `from: object { model }`
+
+            The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
+
+            - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
+
+              The model that will complete your prompt.
+
+              See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+              - `"claude-fable-5"`
+
+                Next generation of intelligence for the hardest knowledge work and coding problems
+
+              - `"claude-mythos-5"`
+
+                Most capable model for cybersecurity and biology research
+
+              - `"claude-opus-4-8"`
+
+                Frontier intelligence for long-running agents and coding
+
+              - `"claude-opus-4-7"`
+
+                Frontier intelligence for long-running agents and coding
+
+              - `"claude-mythos-preview"`
+
+                New class of intelligence, strongest in coding and cybersecurity
+
+              - `"claude-opus-4-6"`
+
+                Frontier intelligence for long-running agents and coding
+
+              - `"claude-sonnet-4-6"`
+
+                Best combination of speed and intelligence
+
+              - `"claude-haiku-4-5"`
+
+                Fastest model with near-frontier intelligence
+
+              - `"claude-haiku-4-5-20251001"`
+
+                Fastest model with near-frontier intelligence
+
+              - `"claude-opus-4-5"`
+
+                Premium model combining maximum intelligence with practical performance
+
+              - `"claude-opus-4-5-20251101"`
+
+                Premium model combining maximum intelligence with practical performance
+
+              - `"claude-sonnet-4-5"`
+
+                High-performance model for agents and coding
+
+              - `"claude-sonnet-4-5-20250929"`
+
+                High-performance model for agents and coding
+
+              - `"claude-opus-4-1"`
+
+                Exceptional model for specialized complex tasks
+
+              - `"claude-opus-4-1-20250805"`
+
+                Exceptional model for specialized complex tasks
+
+              - `"claude-opus-4-0"`
+
+                Powerful model for complex tasks
+
+              - `"claude-opus-4-20250514"`
+
+                Powerful model for complex tasks
+
+              - `"claude-sonnet-4-0"`
+
+                High-performance model with extended thinking
+
+              - `"claude-sonnet-4-20250514"`
+
+                High-performance model with extended thinking
+
+              - `"claude-3-haiku-20240307"`
+
+                Fast and cost-effective model
+
+          - `to: object { model }`
+
+            The fallback model producing the content that follows this block. Its `model` is always the canonical id.
+
+            - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
+
+              The model that will complete your prompt.
+
+              See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `type: "fallback"`
+
       - `context_management: object { applied_edits }`
 
         Context management response.
@@ -14847,11 +18258,19 @@ ant beta:messages count-tokens \
 
             - `type: "unavailable"`
 
-      - `model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string`
+      - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
 
         The model that will complete your prompt.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-fable-5"`
+
+          Next generation of intelligence for the hardest knowledge work and coding problems
+
+        - `"claude-mythos-5"`
+
+          Most capable model for cybersecurity and biology research
 
         - `"claude-opus-4-8"`
 
@@ -14931,11 +18350,11 @@ ant beta:messages count-tokens \
 
         This will always be `"assistant"`.
 
-      - `stop_details: object { category, explanation, type }`
+      - `stop_details: object { category, explanation, fallback_credit_token, 3 more }`
 
         Structured information about a refusal.
 
-        - `category: "cyber" or "bio"`
+        - `category: "cyber" or "bio" or "reasoning_extraction"`
 
           The policy category that triggered the refusal.
 
@@ -14945,11 +18364,62 @@ ant beta:messages count-tokens \
 
           - `"bio"`
 
+          - `"reasoning_extraction"`
+
         - `explanation: string`
 
           Human-readable explanation of the refusal.
 
           This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+        - `fallback_credit_token: string`
+
+          Opaque code that refunds the cache-miss cost when retrying this refused
+          request on the fallback model. Pass it as `fallback_credit_token` on the
+          retry request. Expires 5 minutes after the refusal.
+
+          The retry is sent either with the same request body (`system`, `messages`,
+          `tools`, and other render-shaping fields), or with the same body plus one
+          appended `assistant` message whose content is the partial text (with any
+          trailing whitespace stripped from the final text block) and paired
+          server-tool blocks from this refusal — which also authorizes that
+          appended turn as an assistant-prefill continuation on models that otherwise
+          disallow prefill. A token minted mid-server-tool-loop whose partial content
+          was continuable may only be redeemed the second way — if a same-body retry
+          is rejected with a 400 saying the token must be redeemed by continuing the
+          partial response, retry the second way instead. Either way: same workspace,
+          same platform; a mismatch is a 400. Resending a token for an already-warm
+          prefix is permitted but yields no additional credit.
+
+          `null` when the refused model isn't eligible for a fallback credit.
+
+        - `fallback_has_prefill_claim: boolean`
+
+          Whether the accompanying `fallback_credit_token` may be redeemed with the
+          appended-assistant retry form. Only set when `fallback_credit_token` is
+          present.
+
+          `true`: retry by resending the same request body plus one appended
+          `assistant` message whose content is this response's `content` with any
+          trailing whitespace stripped from the final text block and unpaired
+          `tool_use` blocks omitted (the same appended-turn shape described on
+          `fallback_credit_token`), with the token attached. `false`: retry by
+          resending the original request body unchanged, with the token attached —
+          the appended-assistant form is not available for this refusal (no
+          continuable partial content, or the request uses `output_format` or a
+          `tool_choice` that forces tool use). One exception: when the request used
+          `output_format` or a forced `tool_choice` and the refusal arrived after
+          server tools (including MCP connector tools) had already executed, the
+          token may not be redeemable by either retry form; if the exact-body retry
+          is then rejected with a 400 saying the token must be redeemed by
+          continuing the partial response, discard the token and retry without it.
+
+          Advisory: if an appended-assistant retry is rejected with a 400 despite
+          `true`, fall back to resending the original request body with the token.
+
+        - `recommended_model: string`
+
+          The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
         - `type: "refusal"`
 
@@ -15036,7 +18506,7 @@ ant beta:messages count-tokens \
 
           The number of input tokens which were used.
 
-        - `iterations: array of BetaMessageIterationUsage or BetaCompactionIterationUsage or BetaAdvisorMessageIterationUsage`
+        - `iterations: array of BetaMessageIterationUsage or BetaCompactionIterationUsage or BetaAdvisorMessageIterationUsage or BetaFallbackMessageIterationUsage`
 
           Per-iteration token usage breakdown.
 
@@ -15046,7 +18516,7 @@ ant beta:messages count-tokens \
           - Calculate the true context window size from the last iteration
           - Understand token accumulation across server-side tool use loops
 
-          - `beta_message_iteration_usage: object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 3 more }`
+          - `beta_message_iteration_usage: object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 4 more }`
 
             Token usage for a sampling iteration.
 
@@ -15073,6 +18543,92 @@ ant beta:messages count-tokens \
             - `input_tokens: number`
 
               The number of input tokens which were used.
+
+            - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
+
+              The model that will complete your prompt.
+
+              See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+              - `"claude-fable-5"`
+
+                Next generation of intelligence for the hardest knowledge work and coding problems
+
+              - `"claude-mythos-5"`
+
+                Most capable model for cybersecurity and biology research
+
+              - `"claude-opus-4-8"`
+
+                Frontier intelligence for long-running agents and coding
+
+              - `"claude-opus-4-7"`
+
+                Frontier intelligence for long-running agents and coding
+
+              - `"claude-mythos-preview"`
+
+                New class of intelligence, strongest in coding and cybersecurity
+
+              - `"claude-opus-4-6"`
+
+                Frontier intelligence for long-running agents and coding
+
+              - `"claude-sonnet-4-6"`
+
+                Best combination of speed and intelligence
+
+              - `"claude-haiku-4-5"`
+
+                Fastest model with near-frontier intelligence
+
+              - `"claude-haiku-4-5-20251001"`
+
+                Fastest model with near-frontier intelligence
+
+              - `"claude-opus-4-5"`
+
+                Premium model combining maximum intelligence with practical performance
+
+              - `"claude-opus-4-5-20251101"`
+
+                Premium model combining maximum intelligence with practical performance
+
+              - `"claude-sonnet-4-5"`
+
+                High-performance model for agents and coding
+
+              - `"claude-sonnet-4-5-20250929"`
+
+                High-performance model for agents and coding
+
+              - `"claude-opus-4-1"`
+
+                Exceptional model for specialized complex tasks
+
+              - `"claude-opus-4-1-20250805"`
+
+                Exceptional model for specialized complex tasks
+
+              - `"claude-opus-4-0"`
+
+                Powerful model for complex tasks
+
+              - `"claude-opus-4-20250514"`
+
+                Powerful model for complex tasks
+
+              - `"claude-sonnet-4-0"`
+
+                High-performance model with extended thinking
+
+              - `"claude-sonnet-4-20250514"`
+
+                High-performance model with extended thinking
+
+              - `"claude-3-haiku-20240307"`
+
+                Fast and cost-effective model
 
             - `output_tokens: number`
 
@@ -15146,11 +18702,19 @@ ant beta:messages count-tokens \
 
               The number of input tokens which were used.
 
-            - `model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string`
+            - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
 
               The model that will complete your prompt.
 
               See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+              - `"claude-fable-5"`
+
+                Next generation of intelligence for the hardest knowledge work and coding problems
+
+              - `"claude-mythos-5"`
+
+                Most capable model for cybersecurity and biology research
 
               - `"claude-opus-4-8"`
 
@@ -15231,6 +18795,133 @@ ant beta:messages count-tokens \
             - `type: "advisor_message"`
 
               Usage for an advisor sub-inference iteration
+
+          - `beta_fallback_message_iteration_usage: object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 4 more }`
+
+            Token usage for the fallback-model attempt of a server-side fallback request.
+
+            Produced in place of a `message` entry for whichever hop served the
+            response. A declined hop produces the existing `message` entry. Whether
+            a fallback model served the response is signalled by the presence of this
+            entry in `usage.iterations`.
+
+            - `cache_creation: object { ephemeral_1h_input_tokens, ephemeral_5m_input_tokens }`
+
+              Breakdown of cached tokens by TTL
+
+              - `ephemeral_1h_input_tokens: number`
+
+                The number of input tokens used to create the 1 hour cache entry.
+
+              - `ephemeral_5m_input_tokens: number`
+
+                The number of input tokens used to create the 5 minute cache entry.
+
+            - `cache_creation_input_tokens: number`
+
+              The number of input tokens used to create the cache entry.
+
+            - `cache_read_input_tokens: number`
+
+              The number of input tokens read from the cache.
+
+            - `input_tokens: number`
+
+              The number of input tokens which were used.
+
+            - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
+
+              The model that will complete your prompt.
+
+              See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+              - `"claude-fable-5"`
+
+                Next generation of intelligence for the hardest knowledge work and coding problems
+
+              - `"claude-mythos-5"`
+
+                Most capable model for cybersecurity and biology research
+
+              - `"claude-opus-4-8"`
+
+                Frontier intelligence for long-running agents and coding
+
+              - `"claude-opus-4-7"`
+
+                Frontier intelligence for long-running agents and coding
+
+              - `"claude-mythos-preview"`
+
+                New class of intelligence, strongest in coding and cybersecurity
+
+              - `"claude-opus-4-6"`
+
+                Frontier intelligence for long-running agents and coding
+
+              - `"claude-sonnet-4-6"`
+
+                Best combination of speed and intelligence
+
+              - `"claude-haiku-4-5"`
+
+                Fastest model with near-frontier intelligence
+
+              - `"claude-haiku-4-5-20251001"`
+
+                Fastest model with near-frontier intelligence
+
+              - `"claude-opus-4-5"`
+
+                Premium model combining maximum intelligence with practical performance
+
+              - `"claude-opus-4-5-20251101"`
+
+                Premium model combining maximum intelligence with practical performance
+
+              - `"claude-sonnet-4-5"`
+
+                High-performance model for agents and coding
+
+              - `"claude-sonnet-4-5-20250929"`
+
+                High-performance model for agents and coding
+
+              - `"claude-opus-4-1"`
+
+                Exceptional model for specialized complex tasks
+
+              - `"claude-opus-4-1-20250805"`
+
+                Exceptional model for specialized complex tasks
+
+              - `"claude-opus-4-0"`
+
+                Powerful model for complex tasks
+
+              - `"claude-opus-4-20250514"`
+
+                Powerful model for complex tasks
+
+              - `"claude-sonnet-4-0"`
+
+                High-performance model with extended thinking
+
+              - `"claude-sonnet-4-20250514"`
+
+                High-performance model with extended thinking
+
+              - `"claude-3-haiku-20240307"`
+
+                Fast and cost-effective model
+
+            - `output_tokens: number`
+
+              The number of output tokens which were used.
+
+            - `type: "fallback_message"`
+
+              Usage for the fallback-model attempt that served the response
 
         - `output_tokens: number`
 
@@ -15316,11 +19007,11 @@ ant beta:messages count-tokens \
 
           Skills loaded in the container
 
-      - `stop_details: object { category, explanation, type }`
+      - `stop_details: object { category, explanation, fallback_credit_token, 3 more }`
 
         Structured information about a refusal.
 
-        - `category: "cyber" or "bio"`
+        - `category: "cyber" or "bio" or "reasoning_extraction"`
 
           The policy category that triggered the refusal.
 
@@ -15331,6 +19022,55 @@ ant beta:messages count-tokens \
           Human-readable explanation of the refusal.
 
           This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+        - `fallback_credit_token: string`
+
+          Opaque code that refunds the cache-miss cost when retrying this refused
+          request on the fallback model. Pass it as `fallback_credit_token` on the
+          retry request. Expires 5 minutes after the refusal.
+
+          The retry is sent either with the same request body (`system`, `messages`,
+          `tools`, and other render-shaping fields), or with the same body plus one
+          appended `assistant` message whose content is the partial text (with any
+          trailing whitespace stripped from the final text block) and paired
+          server-tool blocks from this refusal — which also authorizes that
+          appended turn as an assistant-prefill continuation on models that otherwise
+          disallow prefill. A token minted mid-server-tool-loop whose partial content
+          was continuable may only be redeemed the second way — if a same-body retry
+          is rejected with a 400 saying the token must be redeemed by continuing the
+          partial response, retry the second way instead. Either way: same workspace,
+          same platform; a mismatch is a 400. Resending a token for an already-warm
+          prefix is permitted but yields no additional credit.
+
+          `null` when the refused model isn't eligible for a fallback credit.
+
+        - `fallback_has_prefill_claim: boolean`
+
+          Whether the accompanying `fallback_credit_token` may be redeemed with the
+          appended-assistant retry form. Only set when `fallback_credit_token` is
+          present.
+
+          `true`: retry by resending the same request body plus one appended
+          `assistant` message whose content is this response's `content` with any
+          trailing whitespace stripped from the final text block and unpaired
+          `tool_use` blocks omitted (the same appended-turn shape described on
+          `fallback_credit_token`), with the token attached. `false`: retry by
+          resending the original request body unchanged, with the token attached —
+          the appended-assistant form is not available for this refusal (no
+          continuable partial content, or the request uses `output_format` or a
+          `tool_choice` that forces tool use). One exception: when the request used
+          `output_format` or a forced `tool_choice` and the refusal arrived after
+          server tools (including MCP connector tools) had already executed, the
+          token may not be redeemable by either retry form; if the exact-body retry
+          is then rejected with a 400 saying the token must be redeemed by
+          continuing the partial response, discard the token and retry without it.
+
+          Advisory: if an appended-assistant retry is rejected with a 400 despite
+          `true`, fall back to resending the original request body with the token.
+
+        - `recommended_model: string`
+
+          The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
         - `type: "refusal"`
 
@@ -15380,7 +19120,7 @@ ant beta:messages count-tokens \
 
         The cumulative number of input tokens which were used.
 
-      - `iterations: array of BetaMessageIterationUsage or BetaCompactionIterationUsage or BetaAdvisorMessageIterationUsage`
+      - `iterations: array of BetaMessageIterationUsage or BetaCompactionIterationUsage or BetaAdvisorMessageIterationUsage or BetaFallbackMessageIterationUsage`
 
         Per-iteration token usage breakdown.
 
@@ -15390,7 +19130,7 @@ ant beta:messages count-tokens \
         - Calculate the true context window size from the last iteration
         - Understand token accumulation across server-side tool use loops
 
-        - `beta_message_iteration_usage: object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 3 more }`
+        - `beta_message_iteration_usage: object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 4 more }`
 
           Token usage for a sampling iteration.
 
@@ -15401,6 +19141,15 @@ ant beta:messages count-tokens \
         - `beta_advisor_message_iteration_usage: object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 4 more }`
 
           Token usage for an advisor sub-inference iteration.
+
+        - `beta_fallback_message_iteration_usage: object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 4 more }`
+
+          Token usage for the fallback-model attempt of a server-side fallback request.
+
+          Produced in place of a `message` entry for whichever hop served the
+          response. A declined hop produces the existing `message` entry. Whether
+          a fallback model served the response is signalled by the presence of this
+          entry in `usage.iterations`.
 
       - `output_tokens: number`
 
@@ -15444,7 +19193,7 @@ ant beta:messages count-tokens \
 
   - `beta_raw_content_block_start_event: object { content_block, index, type }`
 
-    - `content_block: BetaTextBlock or BetaThinkingBlock or BetaRedactedThinkingBlock or 13 more`
+    - `content_block: BetaTextBlock or BetaThinkingBlock or BetaRedactedThinkingBlock or 14 more`
 
       Response model for a file uploaded to the container.
 
@@ -15619,6 +19368,30 @@ ant beta:messages count-tokens \
           Opaque metadata from prior compaction, to be round-tripped verbatim
 
         - `type: "compaction"`
+
+      - `beta_fallback_block: object { from, to, type }`
+
+        Marks the point in `content` where one model's output gives way to the next.
+
+        One block appears per hop where a preceding model actually ran this turn and
+        declined. A turn routed directly by the sticky decision has no such boundary
+        and carries no block — the signal for whether a fallback model served the
+        response is the presence of a `fallback_message` entry in
+        `usage.iterations`, not this block.
+
+        The block is treated like a server-tool content block for streaming: it
+        arrives via the standard `content_block_start` / `content_block_stop`
+        pair and carries no deltas.
+
+        - `from: object { model }`
+
+          The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
+
+        - `to: object { model }`
+
+          The fallback model producing the content that follows this block. Its `model` is always the canonical id.
+
+        - `type: "fallback"`
 
     - `index: number`
 
@@ -15800,11 +19573,11 @@ ant beta:messages count-tokens \
 
 ### Beta Refusal Stop Details
 
-- `beta_refusal_stop_details: object { category, explanation, type }`
+- `beta_refusal_stop_details: object { category, explanation, fallback_credit_token, 3 more }`
 
   Structured information about a refusal.
 
-  - `category: "cyber" or "bio"`
+  - `category: "cyber" or "bio" or "reasoning_extraction"`
 
     The policy category that triggered the refusal.
 
@@ -15814,11 +19587,62 @@ ant beta:messages count-tokens \
 
     - `"bio"`
 
+    - `"reasoning_extraction"`
+
   - `explanation: string`
 
     Human-readable explanation of the refusal.
 
     This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+  - `fallback_credit_token: string`
+
+    Opaque code that refunds the cache-miss cost when retrying this refused
+    request on the fallback model. Pass it as `fallback_credit_token` on the
+    retry request. Expires 5 minutes after the refusal.
+
+    The retry is sent either with the same request body (`system`, `messages`,
+    `tools`, and other render-shaping fields), or with the same body plus one
+    appended `assistant` message whose content is the partial text (with any
+    trailing whitespace stripped from the final text block) and paired
+    server-tool blocks from this refusal — which also authorizes that
+    appended turn as an assistant-prefill continuation on models that otherwise
+    disallow prefill. A token minted mid-server-tool-loop whose partial content
+    was continuable may only be redeemed the second way — if a same-body retry
+    is rejected with a 400 saying the token must be redeemed by continuing the
+    partial response, retry the second way instead. Either way: same workspace,
+    same platform; a mismatch is a 400. Resending a token for an already-warm
+    prefix is permitted but yields no additional credit.
+
+    `null` when the refused model isn't eligible for a fallback credit.
+
+  - `fallback_has_prefill_claim: boolean`
+
+    Whether the accompanying `fallback_credit_token` may be redeemed with the
+    appended-assistant retry form. Only set when `fallback_credit_token` is
+    present.
+
+    `true`: retry by resending the same request body plus one appended
+    `assistant` message whose content is this response's `content` with any
+    trailing whitespace stripped from the final text block and unpaired
+    `tool_use` blocks omitted (the same appended-turn shape described on
+    `fallback_credit_token`), with the token attached. `false`: retry by
+    resending the original request body unchanged, with the token attached —
+    the appended-assistant form is not available for this refusal (no
+    continuable partial content, or the request uses `output_format` or a
+    `tool_choice` that forces tool use). One exception: when the request used
+    `output_format` or a forced `tool_choice` and the refusal arrived after
+    server tools (including MCP connector tools) had already executed, the
+    token may not be redeemable by either retry form; if the exact-body retry
+    is then rejected with a 400 saying the token must be redeemed by
+    continuing the partial response, discard the token and retry without it.
+
+    Advisory: if an appended-assistant retry is rejected with a 400 despite
+    `true`, fall back to resending the original request body with the token.
+
+  - `recommended_model: string`
+
+    The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
   - `type: "refusal"`
 
@@ -18535,7 +22359,7 @@ ant beta:messages count-tokens \
 
   - `content: BetaToolSearchToolResultErrorParam or BetaToolSearchToolSearchResultBlockParam`
 
-    - `beta_tool_search_tool_result_error_param: object { error_code, type }`
+    - `beta_tool_search_tool_result_error_param: object { error_code, type, error_message }`
 
       - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or "execution_time_exceeded"`
 
@@ -18548,6 +22372,8 @@ ant beta:messages count-tokens \
         - `"execution_time_exceeded"`
 
       - `type: "tool_search_tool_result_error"`
+
+      - `error_message: optional string`
 
     - `beta_tool_search_tool_search_result_block_param: object { tool_references, type }`
 
@@ -18621,7 +22447,7 @@ ant beta:messages count-tokens \
 
 ### Beta Tool Search Tool Result Error Param
 
-- `beta_tool_search_tool_result_error_param: object { error_code, type }`
+- `beta_tool_search_tool_result_error_param: object { error_code, type, error_message }`
 
   - `error_code: "invalid_tool_input" or "unavailable" or "too_many_requests" or "execution_time_exceeded"`
 
@@ -18634,6 +22460,8 @@ ant beta:messages count-tokens \
     - `"execution_time_exceeded"`
 
   - `type: "tool_search_tool_result_error"`
+
+  - `error_message: optional string`
 
 ### Beta Tool Search Tool Search Result Block
 
@@ -19947,13 +23775,21 @@ ant beta:messages count-tokens \
 
       Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-  - `beta_advisor_tool_20260301: object { model, name, type, 6 more }`
+  - `beta_advisor_tool_20260301: object { model, name, type, 7 more }`
 
-    - `model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string`
+    - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
 
       The model that will complete your prompt.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-fable-5"`
+
+        Next generation of intelligence for the hardest knowledge work and coding problems
+
+      - `"claude-mythos-5"`
+
+        Most capable model for cybersecurity and biology research
 
       - `"claude-opus-4-8"`
 
@@ -20080,6 +23916,10 @@ ant beta:messages count-tokens \
     - `defer_loading: optional boolean`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+    - `max_tokens: optional number`
+
+      Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the server also emits a remaining-tokens budget block in the advisor's prompt so the advisor self-shapes toward the cap. When omitted, the advisor model's default output cap applies and no budget block is emitted.
 
     - `max_uses: optional number`
 
@@ -20386,7 +24226,7 @@ ant beta:messages count-tokens \
 
     The number of input tokens which were used.
 
-  - `iterations: array of BetaMessageIterationUsage or BetaCompactionIterationUsage or BetaAdvisorMessageIterationUsage`
+  - `iterations: array of BetaMessageIterationUsage or BetaCompactionIterationUsage or BetaAdvisorMessageIterationUsage or BetaFallbackMessageIterationUsage`
 
     Per-iteration token usage breakdown.
 
@@ -20396,7 +24236,7 @@ ant beta:messages count-tokens \
     - Calculate the true context window size from the last iteration
     - Understand token accumulation across server-side tool use loops
 
-    - `beta_message_iteration_usage: object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 3 more }`
+    - `beta_message_iteration_usage: object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 4 more }`
 
       Token usage for a sampling iteration.
 
@@ -20423,6 +24263,92 @@ ant beta:messages count-tokens \
       - `input_tokens: number`
 
         The number of input tokens which were used.
+
+      - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
+
+        The model that will complete your prompt.
+
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-fable-5"`
+
+          Next generation of intelligence for the hardest knowledge work and coding problems
+
+        - `"claude-mythos-5"`
+
+          Most capable model for cybersecurity and biology research
+
+        - `"claude-opus-4-8"`
+
+          Frontier intelligence for long-running agents and coding
+
+        - `"claude-opus-4-7"`
+
+          Frontier intelligence for long-running agents and coding
+
+        - `"claude-mythos-preview"`
+
+          New class of intelligence, strongest in coding and cybersecurity
+
+        - `"claude-opus-4-6"`
+
+          Frontier intelligence for long-running agents and coding
+
+        - `"claude-sonnet-4-6"`
+
+          Best combination of speed and intelligence
+
+        - `"claude-haiku-4-5"`
+
+          Fastest model with near-frontier intelligence
+
+        - `"claude-haiku-4-5-20251001"`
+
+          Fastest model with near-frontier intelligence
+
+        - `"claude-opus-4-5"`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `"claude-opus-4-5-20251101"`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `"claude-sonnet-4-5"`
+
+          High-performance model for agents and coding
+
+        - `"claude-sonnet-4-5-20250929"`
+
+          High-performance model for agents and coding
+
+        - `"claude-opus-4-1"`
+
+          Exceptional model for specialized complex tasks
+
+        - `"claude-opus-4-1-20250805"`
+
+          Exceptional model for specialized complex tasks
+
+        - `"claude-opus-4-0"`
+
+          Powerful model for complex tasks
+
+        - `"claude-opus-4-20250514"`
+
+          Powerful model for complex tasks
+
+        - `"claude-sonnet-4-0"`
+
+          High-performance model with extended thinking
+
+        - `"claude-sonnet-4-20250514"`
+
+          High-performance model with extended thinking
+
+        - `"claude-3-haiku-20240307"`
+
+          Fast and cost-effective model
 
       - `output_tokens: number`
 
@@ -20496,11 +24422,19 @@ ant beta:messages count-tokens \
 
         The number of input tokens which were used.
 
-      - `model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string`
+      - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
 
         The model that will complete your prompt.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-fable-5"`
+
+          Next generation of intelligence for the hardest knowledge work and coding problems
+
+        - `"claude-mythos-5"`
+
+          Most capable model for cybersecurity and biology research
 
         - `"claude-opus-4-8"`
 
@@ -20581,6 +24515,133 @@ ant beta:messages count-tokens \
       - `type: "advisor_message"`
 
         Usage for an advisor sub-inference iteration
+
+    - `beta_fallback_message_iteration_usage: object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 4 more }`
+
+      Token usage for the fallback-model attempt of a server-side fallback request.
+
+      Produced in place of a `message` entry for whichever hop served the
+      response. A declined hop produces the existing `message` entry. Whether
+      a fallback model served the response is signalled by the presence of this
+      entry in `usage.iterations`.
+
+      - `cache_creation: object { ephemeral_1h_input_tokens, ephemeral_5m_input_tokens }`
+
+        Breakdown of cached tokens by TTL
+
+        - `ephemeral_1h_input_tokens: number`
+
+          The number of input tokens used to create the 1 hour cache entry.
+
+        - `ephemeral_5m_input_tokens: number`
+
+          The number of input tokens used to create the 5 minute cache entry.
+
+      - `cache_creation_input_tokens: number`
+
+        The number of input tokens used to create the cache entry.
+
+      - `cache_read_input_tokens: number`
+
+        The number of input tokens read from the cache.
+
+      - `input_tokens: number`
+
+        The number of input tokens which were used.
+
+      - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
+
+        The model that will complete your prompt.
+
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-fable-5"`
+
+          Next generation of intelligence for the hardest knowledge work and coding problems
+
+        - `"claude-mythos-5"`
+
+          Most capable model for cybersecurity and biology research
+
+        - `"claude-opus-4-8"`
+
+          Frontier intelligence for long-running agents and coding
+
+        - `"claude-opus-4-7"`
+
+          Frontier intelligence for long-running agents and coding
+
+        - `"claude-mythos-preview"`
+
+          New class of intelligence, strongest in coding and cybersecurity
+
+        - `"claude-opus-4-6"`
+
+          Frontier intelligence for long-running agents and coding
+
+        - `"claude-sonnet-4-6"`
+
+          Best combination of speed and intelligence
+
+        - `"claude-haiku-4-5"`
+
+          Fastest model with near-frontier intelligence
+
+        - `"claude-haiku-4-5-20251001"`
+
+          Fastest model with near-frontier intelligence
+
+        - `"claude-opus-4-5"`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `"claude-opus-4-5-20251101"`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `"claude-sonnet-4-5"`
+
+          High-performance model for agents and coding
+
+        - `"claude-sonnet-4-5-20250929"`
+
+          High-performance model for agents and coding
+
+        - `"claude-opus-4-1"`
+
+          Exceptional model for specialized complex tasks
+
+        - `"claude-opus-4-1-20250805"`
+
+          Exceptional model for specialized complex tasks
+
+        - `"claude-opus-4-0"`
+
+          Powerful model for complex tasks
+
+        - `"claude-opus-4-20250514"`
+
+          Powerful model for complex tasks
+
+        - `"claude-sonnet-4-0"`
+
+          High-performance model with extended thinking
+
+        - `"claude-sonnet-4-20250514"`
+
+          High-performance model with extended thinking
+
+        - `"claude-3-haiku-20240307"`
+
+          Fast and cost-effective model
+
+      - `output_tokens: number`
+
+        The number of output tokens which were used.
+
+      - `type: "fallback_message"`
+
+        Usage for the fallback-model attempt that served the response
 
   - `output_tokens: number`
 
@@ -23257,7 +27318,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `beta_advisor_tool_result_error: object { error_code, type }`
 
-                - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 3 more`
+                - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 4 more`
 
                   - `"max_uses_exceeded"`
 
@@ -23270,6 +27331,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
                   - `"unavailable"`
 
                   - `"execution_time_exceeded"`
+
+                  - `"model_not_found"`
 
                 - `type: "advisor_tool_result_error"`
 
@@ -23563,6 +27626,122 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `type: "compaction"`
 
+          - `beta_fallback_block: object { from, to, type }`
+
+            Marks the point in `content` where one model's output gives way to the next.
+
+            One block appears per hop where a preceding model actually ran this turn and
+            declined. A turn routed directly by the sticky decision has no such boundary
+            and carries no block — the signal for whether a fallback model served the
+            response is the presence of a `fallback_message` entry in
+            `usage.iterations`, not this block.
+
+            The block is treated like a server-tool content block for streaming: it
+            arrives via the standard `content_block_start` / `content_block_stop`
+            pair and carries no deltas.
+
+            - `from: object { model }`
+
+              The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
+
+              - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
+
+                The model that will complete your prompt.
+
+                See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                - `"claude-fable-5"`
+
+                  Next generation of intelligence for the hardest knowledge work and coding problems
+
+                - `"claude-mythos-5"`
+
+                  Most capable model for cybersecurity and biology research
+
+                - `"claude-opus-4-8"`
+
+                  Frontier intelligence for long-running agents and coding
+
+                - `"claude-opus-4-7"`
+
+                  Frontier intelligence for long-running agents and coding
+
+                - `"claude-mythos-preview"`
+
+                  New class of intelligence, strongest in coding and cybersecurity
+
+                - `"claude-opus-4-6"`
+
+                  Frontier intelligence for long-running agents and coding
+
+                - `"claude-sonnet-4-6"`
+
+                  Best combination of speed and intelligence
+
+                - `"claude-haiku-4-5"`
+
+                  Fastest model with near-frontier intelligence
+
+                - `"claude-haiku-4-5-20251001"`
+
+                  Fastest model with near-frontier intelligence
+
+                - `"claude-opus-4-5"`
+
+                  Premium model combining maximum intelligence with practical performance
+
+                - `"claude-opus-4-5-20251101"`
+
+                  Premium model combining maximum intelligence with practical performance
+
+                - `"claude-sonnet-4-5"`
+
+                  High-performance model for agents and coding
+
+                - `"claude-sonnet-4-5-20250929"`
+
+                  High-performance model for agents and coding
+
+                - `"claude-opus-4-1"`
+
+                  Exceptional model for specialized complex tasks
+
+                - `"claude-opus-4-1-20250805"`
+
+                  Exceptional model for specialized complex tasks
+
+                - `"claude-opus-4-0"`
+
+                  Powerful model for complex tasks
+
+                - `"claude-opus-4-20250514"`
+
+                  Powerful model for complex tasks
+
+                - `"claude-sonnet-4-0"`
+
+                  High-performance model with extended thinking
+
+                - `"claude-sonnet-4-20250514"`
+
+                  High-performance model with extended thinking
+
+                - `"claude-3-haiku-20240307"`
+
+                  Fast and cost-effective model
+
+            - `to: object { model }`
+
+              The fallback model producing the content that follows this block. Its `model` is always the canonical id.
+
+              - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
+
+                The model that will complete your prompt.
+
+                See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `type: "fallback"`
+
         - `context_management: object { applied_edits }`
 
           Context management response.
@@ -23650,11 +27829,19 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `type: "unavailable"`
 
-        - `model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string`
+        - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
 
           The model that will complete your prompt.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-fable-5"`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
+
+          - `"claude-mythos-5"`
+
+            Most capable model for cybersecurity and biology research
 
           - `"claude-opus-4-8"`
 
@@ -23734,11 +27921,11 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           This will always be `"assistant"`.
 
-        - `stop_details: object { category, explanation, type }`
+        - `stop_details: object { category, explanation, fallback_credit_token, 3 more }`
 
           Structured information about a refusal.
 
-          - `category: "cyber" or "bio"`
+          - `category: "cyber" or "bio" or "reasoning_extraction"`
 
             The policy category that triggered the refusal.
 
@@ -23748,11 +27935,62 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `"bio"`
 
+            - `"reasoning_extraction"`
+
           - `explanation: string`
 
             Human-readable explanation of the refusal.
 
             This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+          - `fallback_credit_token: string`
+
+            Opaque code that refunds the cache-miss cost when retrying this refused
+            request on the fallback model. Pass it as `fallback_credit_token` on the
+            retry request. Expires 5 minutes after the refusal.
+
+            The retry is sent either with the same request body (`system`, `messages`,
+            `tools`, and other render-shaping fields), or with the same body plus one
+            appended `assistant` message whose content is the partial text (with any
+            trailing whitespace stripped from the final text block) and paired
+            server-tool blocks from this refusal — which also authorizes that
+            appended turn as an assistant-prefill continuation on models that otherwise
+            disallow prefill. A token minted mid-server-tool-loop whose partial content
+            was continuable may only be redeemed the second way — if a same-body retry
+            is rejected with a 400 saying the token must be redeemed by continuing the
+            partial response, retry the second way instead. Either way: same workspace,
+            same platform; a mismatch is a 400. Resending a token for an already-warm
+            prefix is permitted but yields no additional credit.
+
+            `null` when the refused model isn't eligible for a fallback credit.
+
+          - `fallback_has_prefill_claim: boolean`
+
+            Whether the accompanying `fallback_credit_token` may be redeemed with the
+            appended-assistant retry form. Only set when `fallback_credit_token` is
+            present.
+
+            `true`: retry by resending the same request body plus one appended
+            `assistant` message whose content is this response's `content` with any
+            trailing whitespace stripped from the final text block and unpaired
+            `tool_use` blocks omitted (the same appended-turn shape described on
+            `fallback_credit_token`), with the token attached. `false`: retry by
+            resending the original request body unchanged, with the token attached —
+            the appended-assistant form is not available for this refusal (no
+            continuable partial content, or the request uses `output_format` or a
+            `tool_choice` that forces tool use). One exception: when the request used
+            `output_format` or a forced `tool_choice` and the refusal arrived after
+            server tools (including MCP connector tools) had already executed, the
+            token may not be redeemable by either retry form; if the exact-body retry
+            is then rejected with a 400 saying the token must be redeemed by
+            continuing the partial response, discard the token and retry without it.
+
+            Advisory: if an appended-assistant retry is rejected with a 400 despite
+            `true`, fall back to resending the original request body with the token.
+
+          - `recommended_model: string`
+
+            The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
           - `type: "refusal"`
 
@@ -23839,7 +28077,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             The number of input tokens which were used.
 
-          - `iterations: array of BetaMessageIterationUsage or BetaCompactionIterationUsage or BetaAdvisorMessageIterationUsage`
+          - `iterations: array of BetaMessageIterationUsage or BetaCompactionIterationUsage or BetaAdvisorMessageIterationUsage or BetaFallbackMessageIterationUsage`
 
             Per-iteration token usage breakdown.
 
@@ -23849,7 +28087,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - Calculate the true context window size from the last iteration
             - Understand token accumulation across server-side tool use loops
 
-            - `beta_message_iteration_usage: object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 3 more }`
+            - `beta_message_iteration_usage: object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 4 more }`
 
               Token usage for a sampling iteration.
 
@@ -23876,6 +28114,92 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
               - `input_tokens: number`
 
                 The number of input tokens which were used.
+
+              - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
+
+                The model that will complete your prompt.
+
+                See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                - `"claude-fable-5"`
+
+                  Next generation of intelligence for the hardest knowledge work and coding problems
+
+                - `"claude-mythos-5"`
+
+                  Most capable model for cybersecurity and biology research
+
+                - `"claude-opus-4-8"`
+
+                  Frontier intelligence for long-running agents and coding
+
+                - `"claude-opus-4-7"`
+
+                  Frontier intelligence for long-running agents and coding
+
+                - `"claude-mythos-preview"`
+
+                  New class of intelligence, strongest in coding and cybersecurity
+
+                - `"claude-opus-4-6"`
+
+                  Frontier intelligence for long-running agents and coding
+
+                - `"claude-sonnet-4-6"`
+
+                  Best combination of speed and intelligence
+
+                - `"claude-haiku-4-5"`
+
+                  Fastest model with near-frontier intelligence
+
+                - `"claude-haiku-4-5-20251001"`
+
+                  Fastest model with near-frontier intelligence
+
+                - `"claude-opus-4-5"`
+
+                  Premium model combining maximum intelligence with practical performance
+
+                - `"claude-opus-4-5-20251101"`
+
+                  Premium model combining maximum intelligence with practical performance
+
+                - `"claude-sonnet-4-5"`
+
+                  High-performance model for agents and coding
+
+                - `"claude-sonnet-4-5-20250929"`
+
+                  High-performance model for agents and coding
+
+                - `"claude-opus-4-1"`
+
+                  Exceptional model for specialized complex tasks
+
+                - `"claude-opus-4-1-20250805"`
+
+                  Exceptional model for specialized complex tasks
+
+                - `"claude-opus-4-0"`
+
+                  Powerful model for complex tasks
+
+                - `"claude-opus-4-20250514"`
+
+                  Powerful model for complex tasks
+
+                - `"claude-sonnet-4-0"`
+
+                  High-performance model with extended thinking
+
+                - `"claude-sonnet-4-20250514"`
+
+                  High-performance model with extended thinking
+
+                - `"claude-3-haiku-20240307"`
+
+                  Fast and cost-effective model
 
               - `output_tokens: number`
 
@@ -23949,11 +28273,19 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 The number of input tokens which were used.
 
-              - `model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string`
+              - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
 
                 The model that will complete your prompt.
 
                 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                - `"claude-fable-5"`
+
+                  Next generation of intelligence for the hardest knowledge work and coding problems
+
+                - `"claude-mythos-5"`
+
+                  Most capable model for cybersecurity and biology research
 
                 - `"claude-opus-4-8"`
 
@@ -24034,6 +28366,133 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
               - `type: "advisor_message"`
 
                 Usage for an advisor sub-inference iteration
+
+            - `beta_fallback_message_iteration_usage: object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 4 more }`
+
+              Token usage for the fallback-model attempt of a server-side fallback request.
+
+              Produced in place of a `message` entry for whichever hop served the
+              response. A declined hop produces the existing `message` entry. Whether
+              a fallback model served the response is signalled by the presence of this
+              entry in `usage.iterations`.
+
+              - `cache_creation: object { ephemeral_1h_input_tokens, ephemeral_5m_input_tokens }`
+
+                Breakdown of cached tokens by TTL
+
+                - `ephemeral_1h_input_tokens: number`
+
+                  The number of input tokens used to create the 1 hour cache entry.
+
+                - `ephemeral_5m_input_tokens: number`
+
+                  The number of input tokens used to create the 5 minute cache entry.
+
+              - `cache_creation_input_tokens: number`
+
+                The number of input tokens used to create the cache entry.
+
+              - `cache_read_input_tokens: number`
+
+                The number of input tokens read from the cache.
+
+              - `input_tokens: number`
+
+                The number of input tokens which were used.
+
+              - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
+
+                The model that will complete your prompt.
+
+                See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                - `"claude-fable-5"`
+
+                  Next generation of intelligence for the hardest knowledge work and coding problems
+
+                - `"claude-mythos-5"`
+
+                  Most capable model for cybersecurity and biology research
+
+                - `"claude-opus-4-8"`
+
+                  Frontier intelligence for long-running agents and coding
+
+                - `"claude-opus-4-7"`
+
+                  Frontier intelligence for long-running agents and coding
+
+                - `"claude-mythos-preview"`
+
+                  New class of intelligence, strongest in coding and cybersecurity
+
+                - `"claude-opus-4-6"`
+
+                  Frontier intelligence for long-running agents and coding
+
+                - `"claude-sonnet-4-6"`
+
+                  Best combination of speed and intelligence
+
+                - `"claude-haiku-4-5"`
+
+                  Fastest model with near-frontier intelligence
+
+                - `"claude-haiku-4-5-20251001"`
+
+                  Fastest model with near-frontier intelligence
+
+                - `"claude-opus-4-5"`
+
+                  Premium model combining maximum intelligence with practical performance
+
+                - `"claude-opus-4-5-20251101"`
+
+                  Premium model combining maximum intelligence with practical performance
+
+                - `"claude-sonnet-4-5"`
+
+                  High-performance model for agents and coding
+
+                - `"claude-sonnet-4-5-20250929"`
+
+                  High-performance model for agents and coding
+
+                - `"claude-opus-4-1"`
+
+                  Exceptional model for specialized complex tasks
+
+                - `"claude-opus-4-1-20250805"`
+
+                  Exceptional model for specialized complex tasks
+
+                - `"claude-opus-4-0"`
+
+                  Powerful model for complex tasks
+
+                - `"claude-opus-4-20250514"`
+
+                  Powerful model for complex tasks
+
+                - `"claude-sonnet-4-0"`
+
+                  High-performance model with extended thinking
+
+                - `"claude-sonnet-4-20250514"`
+
+                  High-performance model with extended thinking
+
+                - `"claude-3-haiku-20240307"`
+
+                  Fast and cost-effective model
+
+              - `output_tokens: number`
+
+                The number of output tokens which were used.
+
+              - `type: "fallback_message"`
+
+                Usage for the fallback-model attempt that served the response
 
           - `output_tokens: number`
 
@@ -24794,7 +29253,7 @@ ant beta:messages:batches results \
 
               - `beta_advisor_tool_result_error: object { error_code, type }`
 
-                - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 3 more`
+                - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 4 more`
 
                   - `"max_uses_exceeded"`
 
@@ -24807,6 +29266,8 @@ ant beta:messages:batches results \
                   - `"unavailable"`
 
                   - `"execution_time_exceeded"`
+
+                  - `"model_not_found"`
 
                 - `type: "advisor_tool_result_error"`
 
@@ -25100,6 +29561,122 @@ ant beta:messages:batches results \
 
             - `type: "compaction"`
 
+          - `beta_fallback_block: object { from, to, type }`
+
+            Marks the point in `content` where one model's output gives way to the next.
+
+            One block appears per hop where a preceding model actually ran this turn and
+            declined. A turn routed directly by the sticky decision has no such boundary
+            and carries no block — the signal for whether a fallback model served the
+            response is the presence of a `fallback_message` entry in
+            `usage.iterations`, not this block.
+
+            The block is treated like a server-tool content block for streaming: it
+            arrives via the standard `content_block_start` / `content_block_stop`
+            pair and carries no deltas.
+
+            - `from: object { model }`
+
+              The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
+
+              - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
+
+                The model that will complete your prompt.
+
+                See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                - `"claude-fable-5"`
+
+                  Next generation of intelligence for the hardest knowledge work and coding problems
+
+                - `"claude-mythos-5"`
+
+                  Most capable model for cybersecurity and biology research
+
+                - `"claude-opus-4-8"`
+
+                  Frontier intelligence for long-running agents and coding
+
+                - `"claude-opus-4-7"`
+
+                  Frontier intelligence for long-running agents and coding
+
+                - `"claude-mythos-preview"`
+
+                  New class of intelligence, strongest in coding and cybersecurity
+
+                - `"claude-opus-4-6"`
+
+                  Frontier intelligence for long-running agents and coding
+
+                - `"claude-sonnet-4-6"`
+
+                  Best combination of speed and intelligence
+
+                - `"claude-haiku-4-5"`
+
+                  Fastest model with near-frontier intelligence
+
+                - `"claude-haiku-4-5-20251001"`
+
+                  Fastest model with near-frontier intelligence
+
+                - `"claude-opus-4-5"`
+
+                  Premium model combining maximum intelligence with practical performance
+
+                - `"claude-opus-4-5-20251101"`
+
+                  Premium model combining maximum intelligence with practical performance
+
+                - `"claude-sonnet-4-5"`
+
+                  High-performance model for agents and coding
+
+                - `"claude-sonnet-4-5-20250929"`
+
+                  High-performance model for agents and coding
+
+                - `"claude-opus-4-1"`
+
+                  Exceptional model for specialized complex tasks
+
+                - `"claude-opus-4-1-20250805"`
+
+                  Exceptional model for specialized complex tasks
+
+                - `"claude-opus-4-0"`
+
+                  Powerful model for complex tasks
+
+                - `"claude-opus-4-20250514"`
+
+                  Powerful model for complex tasks
+
+                - `"claude-sonnet-4-0"`
+
+                  High-performance model with extended thinking
+
+                - `"claude-sonnet-4-20250514"`
+
+                  High-performance model with extended thinking
+
+                - `"claude-3-haiku-20240307"`
+
+                  Fast and cost-effective model
+
+            - `to: object { model }`
+
+              The fallback model producing the content that follows this block. Its `model` is always the canonical id.
+
+              - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
+
+                The model that will complete your prompt.
+
+                See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `type: "fallback"`
+
         - `context_management: object { applied_edits }`
 
           Context management response.
@@ -25187,11 +29764,19 @@ ant beta:messages:batches results \
 
               - `type: "unavailable"`
 
-        - `model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string`
+        - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
 
           The model that will complete your prompt.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-fable-5"`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
+
+          - `"claude-mythos-5"`
+
+            Most capable model for cybersecurity and biology research
 
           - `"claude-opus-4-8"`
 
@@ -25271,11 +29856,11 @@ ant beta:messages:batches results \
 
           This will always be `"assistant"`.
 
-        - `stop_details: object { category, explanation, type }`
+        - `stop_details: object { category, explanation, fallback_credit_token, 3 more }`
 
           Structured information about a refusal.
 
-          - `category: "cyber" or "bio"`
+          - `category: "cyber" or "bio" or "reasoning_extraction"`
 
             The policy category that triggered the refusal.
 
@@ -25285,11 +29870,62 @@ ant beta:messages:batches results \
 
             - `"bio"`
 
+            - `"reasoning_extraction"`
+
           - `explanation: string`
 
             Human-readable explanation of the refusal.
 
             This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+          - `fallback_credit_token: string`
+
+            Opaque code that refunds the cache-miss cost when retrying this refused
+            request on the fallback model. Pass it as `fallback_credit_token` on the
+            retry request. Expires 5 minutes after the refusal.
+
+            The retry is sent either with the same request body (`system`, `messages`,
+            `tools`, and other render-shaping fields), or with the same body plus one
+            appended `assistant` message whose content is the partial text (with any
+            trailing whitespace stripped from the final text block) and paired
+            server-tool blocks from this refusal — which also authorizes that
+            appended turn as an assistant-prefill continuation on models that otherwise
+            disallow prefill. A token minted mid-server-tool-loop whose partial content
+            was continuable may only be redeemed the second way — if a same-body retry
+            is rejected with a 400 saying the token must be redeemed by continuing the
+            partial response, retry the second way instead. Either way: same workspace,
+            same platform; a mismatch is a 400. Resending a token for an already-warm
+            prefix is permitted but yields no additional credit.
+
+            `null` when the refused model isn't eligible for a fallback credit.
+
+          - `fallback_has_prefill_claim: boolean`
+
+            Whether the accompanying `fallback_credit_token` may be redeemed with the
+            appended-assistant retry form. Only set when `fallback_credit_token` is
+            present.
+
+            `true`: retry by resending the same request body plus one appended
+            `assistant` message whose content is this response's `content` with any
+            trailing whitespace stripped from the final text block and unpaired
+            `tool_use` blocks omitted (the same appended-turn shape described on
+            `fallback_credit_token`), with the token attached. `false`: retry by
+            resending the original request body unchanged, with the token attached —
+            the appended-assistant form is not available for this refusal (no
+            continuable partial content, or the request uses `output_format` or a
+            `tool_choice` that forces tool use). One exception: when the request used
+            `output_format` or a forced `tool_choice` and the refusal arrived after
+            server tools (including MCP connector tools) had already executed, the
+            token may not be redeemable by either retry form; if the exact-body retry
+            is then rejected with a 400 saying the token must be redeemed by
+            continuing the partial response, discard the token and retry without it.
+
+            Advisory: if an appended-assistant retry is rejected with a 400 despite
+            `true`, fall back to resending the original request body with the token.
+
+          - `recommended_model: string`
+
+            The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
           - `type: "refusal"`
 
@@ -25376,7 +30012,7 @@ ant beta:messages:batches results \
 
             The number of input tokens which were used.
 
-          - `iterations: array of BetaMessageIterationUsage or BetaCompactionIterationUsage or BetaAdvisorMessageIterationUsage`
+          - `iterations: array of BetaMessageIterationUsage or BetaCompactionIterationUsage or BetaAdvisorMessageIterationUsage or BetaFallbackMessageIterationUsage`
 
             Per-iteration token usage breakdown.
 
@@ -25386,7 +30022,7 @@ ant beta:messages:batches results \
             - Calculate the true context window size from the last iteration
             - Understand token accumulation across server-side tool use loops
 
-            - `beta_message_iteration_usage: object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 3 more }`
+            - `beta_message_iteration_usage: object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 4 more }`
 
               Token usage for a sampling iteration.
 
@@ -25413,6 +30049,92 @@ ant beta:messages:batches results \
               - `input_tokens: number`
 
                 The number of input tokens which were used.
+
+              - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
+
+                The model that will complete your prompt.
+
+                See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                - `"claude-fable-5"`
+
+                  Next generation of intelligence for the hardest knowledge work and coding problems
+
+                - `"claude-mythos-5"`
+
+                  Most capable model for cybersecurity and biology research
+
+                - `"claude-opus-4-8"`
+
+                  Frontier intelligence for long-running agents and coding
+
+                - `"claude-opus-4-7"`
+
+                  Frontier intelligence for long-running agents and coding
+
+                - `"claude-mythos-preview"`
+
+                  New class of intelligence, strongest in coding and cybersecurity
+
+                - `"claude-opus-4-6"`
+
+                  Frontier intelligence for long-running agents and coding
+
+                - `"claude-sonnet-4-6"`
+
+                  Best combination of speed and intelligence
+
+                - `"claude-haiku-4-5"`
+
+                  Fastest model with near-frontier intelligence
+
+                - `"claude-haiku-4-5-20251001"`
+
+                  Fastest model with near-frontier intelligence
+
+                - `"claude-opus-4-5"`
+
+                  Premium model combining maximum intelligence with practical performance
+
+                - `"claude-opus-4-5-20251101"`
+
+                  Premium model combining maximum intelligence with practical performance
+
+                - `"claude-sonnet-4-5"`
+
+                  High-performance model for agents and coding
+
+                - `"claude-sonnet-4-5-20250929"`
+
+                  High-performance model for agents and coding
+
+                - `"claude-opus-4-1"`
+
+                  Exceptional model for specialized complex tasks
+
+                - `"claude-opus-4-1-20250805"`
+
+                  Exceptional model for specialized complex tasks
+
+                - `"claude-opus-4-0"`
+
+                  Powerful model for complex tasks
+
+                - `"claude-opus-4-20250514"`
+
+                  Powerful model for complex tasks
+
+                - `"claude-sonnet-4-0"`
+
+                  High-performance model with extended thinking
+
+                - `"claude-sonnet-4-20250514"`
+
+                  High-performance model with extended thinking
+
+                - `"claude-3-haiku-20240307"`
+
+                  Fast and cost-effective model
 
               - `output_tokens: number`
 
@@ -25486,11 +30208,19 @@ ant beta:messages:batches results \
 
                 The number of input tokens which were used.
 
-              - `model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string`
+              - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
 
                 The model that will complete your prompt.
 
                 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                - `"claude-fable-5"`
+
+                  Next generation of intelligence for the hardest knowledge work and coding problems
+
+                - `"claude-mythos-5"`
+
+                  Most capable model for cybersecurity and biology research
 
                 - `"claude-opus-4-8"`
 
@@ -25571,6 +30301,133 @@ ant beta:messages:batches results \
               - `type: "advisor_message"`
 
                 Usage for an advisor sub-inference iteration
+
+            - `beta_fallback_message_iteration_usage: object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 4 more }`
+
+              Token usage for the fallback-model attempt of a server-side fallback request.
+
+              Produced in place of a `message` entry for whichever hop served the
+              response. A declined hop produces the existing `message` entry. Whether
+              a fallback model served the response is signalled by the presence of this
+              entry in `usage.iterations`.
+
+              - `cache_creation: object { ephemeral_1h_input_tokens, ephemeral_5m_input_tokens }`
+
+                Breakdown of cached tokens by TTL
+
+                - `ephemeral_1h_input_tokens: number`
+
+                  The number of input tokens used to create the 1 hour cache entry.
+
+                - `ephemeral_5m_input_tokens: number`
+
+                  The number of input tokens used to create the 5 minute cache entry.
+
+              - `cache_creation_input_tokens: number`
+
+                The number of input tokens used to create the cache entry.
+
+              - `cache_read_input_tokens: number`
+
+                The number of input tokens read from the cache.
+
+              - `input_tokens: number`
+
+                The number of input tokens which were used.
+
+              - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
+
+                The model that will complete your prompt.
+
+                See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                - `"claude-fable-5"`
+
+                  Next generation of intelligence for the hardest knowledge work and coding problems
+
+                - `"claude-mythos-5"`
+
+                  Most capable model for cybersecurity and biology research
+
+                - `"claude-opus-4-8"`
+
+                  Frontier intelligence for long-running agents and coding
+
+                - `"claude-opus-4-7"`
+
+                  Frontier intelligence for long-running agents and coding
+
+                - `"claude-mythos-preview"`
+
+                  New class of intelligence, strongest in coding and cybersecurity
+
+                - `"claude-opus-4-6"`
+
+                  Frontier intelligence for long-running agents and coding
+
+                - `"claude-sonnet-4-6"`
+
+                  Best combination of speed and intelligence
+
+                - `"claude-haiku-4-5"`
+
+                  Fastest model with near-frontier intelligence
+
+                - `"claude-haiku-4-5-20251001"`
+
+                  Fastest model with near-frontier intelligence
+
+                - `"claude-opus-4-5"`
+
+                  Premium model combining maximum intelligence with practical performance
+
+                - `"claude-opus-4-5-20251101"`
+
+                  Premium model combining maximum intelligence with practical performance
+
+                - `"claude-sonnet-4-5"`
+
+                  High-performance model for agents and coding
+
+                - `"claude-sonnet-4-5-20250929"`
+
+                  High-performance model for agents and coding
+
+                - `"claude-opus-4-1"`
+
+                  Exceptional model for specialized complex tasks
+
+                - `"claude-opus-4-1-20250805"`
+
+                  Exceptional model for specialized complex tasks
+
+                - `"claude-opus-4-0"`
+
+                  Powerful model for complex tasks
+
+                - `"claude-opus-4-20250514"`
+
+                  Powerful model for complex tasks
+
+                - `"claude-sonnet-4-0"`
+
+                  High-performance model with extended thinking
+
+                - `"claude-sonnet-4-20250514"`
+
+                  High-performance model with extended thinking
+
+                - `"claude-3-haiku-20240307"`
+
+                  Fast and cost-effective model
+
+              - `output_tokens: number`
+
+                The number of output tokens which were used.
+
+              - `type: "fallback_message"`
+
+                Usage for the fallback-model attempt that served the response
 
           - `output_tokens: number`
 
@@ -26161,7 +31018,7 @@ ant beta:messages:batches results \
 
             - `beta_advisor_tool_result_error: object { error_code, type }`
 
-              - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 3 more`
+              - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 4 more`
 
                 - `"max_uses_exceeded"`
 
@@ -26174,6 +31031,8 @@ ant beta:messages:batches results \
                 - `"unavailable"`
 
                 - `"execution_time_exceeded"`
+
+                - `"model_not_found"`
 
               - `type: "advisor_tool_result_error"`
 
@@ -26467,6 +31326,122 @@ ant beta:messages:batches results \
 
           - `type: "compaction"`
 
+        - `beta_fallback_block: object { from, to, type }`
+
+          Marks the point in `content` where one model's output gives way to the next.
+
+          One block appears per hop where a preceding model actually ran this turn and
+          declined. A turn routed directly by the sticky decision has no such boundary
+          and carries no block — the signal for whether a fallback model served the
+          response is the presence of a `fallback_message` entry in
+          `usage.iterations`, not this block.
+
+          The block is treated like a server-tool content block for streaming: it
+          arrives via the standard `content_block_start` / `content_block_stop`
+          pair and carries no deltas.
+
+          - `from: object { model }`
+
+            The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
+
+            - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
+
+              The model that will complete your prompt.
+
+              See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+              - `"claude-fable-5"`
+
+                Next generation of intelligence for the hardest knowledge work and coding problems
+
+              - `"claude-mythos-5"`
+
+                Most capable model for cybersecurity and biology research
+
+              - `"claude-opus-4-8"`
+
+                Frontier intelligence for long-running agents and coding
+
+              - `"claude-opus-4-7"`
+
+                Frontier intelligence for long-running agents and coding
+
+              - `"claude-mythos-preview"`
+
+                New class of intelligence, strongest in coding and cybersecurity
+
+              - `"claude-opus-4-6"`
+
+                Frontier intelligence for long-running agents and coding
+
+              - `"claude-sonnet-4-6"`
+
+                Best combination of speed and intelligence
+
+              - `"claude-haiku-4-5"`
+
+                Fastest model with near-frontier intelligence
+
+              - `"claude-haiku-4-5-20251001"`
+
+                Fastest model with near-frontier intelligence
+
+              - `"claude-opus-4-5"`
+
+                Premium model combining maximum intelligence with practical performance
+
+              - `"claude-opus-4-5-20251101"`
+
+                Premium model combining maximum intelligence with practical performance
+
+              - `"claude-sonnet-4-5"`
+
+                High-performance model for agents and coding
+
+              - `"claude-sonnet-4-5-20250929"`
+
+                High-performance model for agents and coding
+
+              - `"claude-opus-4-1"`
+
+                Exceptional model for specialized complex tasks
+
+              - `"claude-opus-4-1-20250805"`
+
+                Exceptional model for specialized complex tasks
+
+              - `"claude-opus-4-0"`
+
+                Powerful model for complex tasks
+
+              - `"claude-opus-4-20250514"`
+
+                Powerful model for complex tasks
+
+              - `"claude-sonnet-4-0"`
+
+                High-performance model with extended thinking
+
+              - `"claude-sonnet-4-20250514"`
+
+                High-performance model with extended thinking
+
+              - `"claude-3-haiku-20240307"`
+
+                Fast and cost-effective model
+
+          - `to: object { model }`
+
+            The fallback model producing the content that follows this block. Its `model` is always the canonical id.
+
+            - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
+
+              The model that will complete your prompt.
+
+              See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `type: "fallback"`
+
       - `context_management: object { applied_edits }`
 
         Context management response.
@@ -26554,11 +31529,19 @@ ant beta:messages:batches results \
 
             - `type: "unavailable"`
 
-      - `model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string`
+      - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
 
         The model that will complete your prompt.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-fable-5"`
+
+          Next generation of intelligence for the hardest knowledge work and coding problems
+
+        - `"claude-mythos-5"`
+
+          Most capable model for cybersecurity and biology research
 
         - `"claude-opus-4-8"`
 
@@ -26638,11 +31621,11 @@ ant beta:messages:batches results \
 
         This will always be `"assistant"`.
 
-      - `stop_details: object { category, explanation, type }`
+      - `stop_details: object { category, explanation, fallback_credit_token, 3 more }`
 
         Structured information about a refusal.
 
-        - `category: "cyber" or "bio"`
+        - `category: "cyber" or "bio" or "reasoning_extraction"`
 
           The policy category that triggered the refusal.
 
@@ -26652,11 +31635,62 @@ ant beta:messages:batches results \
 
           - `"bio"`
 
+          - `"reasoning_extraction"`
+
         - `explanation: string`
 
           Human-readable explanation of the refusal.
 
           This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+        - `fallback_credit_token: string`
+
+          Opaque code that refunds the cache-miss cost when retrying this refused
+          request on the fallback model. Pass it as `fallback_credit_token` on the
+          retry request. Expires 5 minutes after the refusal.
+
+          The retry is sent either with the same request body (`system`, `messages`,
+          `tools`, and other render-shaping fields), or with the same body plus one
+          appended `assistant` message whose content is the partial text (with any
+          trailing whitespace stripped from the final text block) and paired
+          server-tool blocks from this refusal — which also authorizes that
+          appended turn as an assistant-prefill continuation on models that otherwise
+          disallow prefill. A token minted mid-server-tool-loop whose partial content
+          was continuable may only be redeemed the second way — if a same-body retry
+          is rejected with a 400 saying the token must be redeemed by continuing the
+          partial response, retry the second way instead. Either way: same workspace,
+          same platform; a mismatch is a 400. Resending a token for an already-warm
+          prefix is permitted but yields no additional credit.
+
+          `null` when the refused model isn't eligible for a fallback credit.
+
+        - `fallback_has_prefill_claim: boolean`
+
+          Whether the accompanying `fallback_credit_token` may be redeemed with the
+          appended-assistant retry form. Only set when `fallback_credit_token` is
+          present.
+
+          `true`: retry by resending the same request body plus one appended
+          `assistant` message whose content is this response's `content` with any
+          trailing whitespace stripped from the final text block and unpaired
+          `tool_use` blocks omitted (the same appended-turn shape described on
+          `fallback_credit_token`), with the token attached. `false`: retry by
+          resending the original request body unchanged, with the token attached —
+          the appended-assistant form is not available for this refusal (no
+          continuable partial content, or the request uses `output_format` or a
+          `tool_choice` that forces tool use). One exception: when the request used
+          `output_format` or a forced `tool_choice` and the refusal arrived after
+          server tools (including MCP connector tools) had already executed, the
+          token may not be redeemable by either retry form; if the exact-body retry
+          is then rejected with a 400 saying the token must be redeemed by
+          continuing the partial response, discard the token and retry without it.
+
+          Advisory: if an appended-assistant retry is rejected with a 400 despite
+          `true`, fall back to resending the original request body with the token.
+
+        - `recommended_model: string`
+
+          The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
         - `type: "refusal"`
 
@@ -26743,7 +31777,7 @@ ant beta:messages:batches results \
 
           The number of input tokens which were used.
 
-        - `iterations: array of BetaMessageIterationUsage or BetaCompactionIterationUsage or BetaAdvisorMessageIterationUsage`
+        - `iterations: array of BetaMessageIterationUsage or BetaCompactionIterationUsage or BetaAdvisorMessageIterationUsage or BetaFallbackMessageIterationUsage`
 
           Per-iteration token usage breakdown.
 
@@ -26753,7 +31787,7 @@ ant beta:messages:batches results \
           - Calculate the true context window size from the last iteration
           - Understand token accumulation across server-side tool use loops
 
-          - `beta_message_iteration_usage: object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 3 more }`
+          - `beta_message_iteration_usage: object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 4 more }`
 
             Token usage for a sampling iteration.
 
@@ -26780,6 +31814,92 @@ ant beta:messages:batches results \
             - `input_tokens: number`
 
               The number of input tokens which were used.
+
+            - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
+
+              The model that will complete your prompt.
+
+              See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+              - `"claude-fable-5"`
+
+                Next generation of intelligence for the hardest knowledge work and coding problems
+
+              - `"claude-mythos-5"`
+
+                Most capable model for cybersecurity and biology research
+
+              - `"claude-opus-4-8"`
+
+                Frontier intelligence for long-running agents and coding
+
+              - `"claude-opus-4-7"`
+
+                Frontier intelligence for long-running agents and coding
+
+              - `"claude-mythos-preview"`
+
+                New class of intelligence, strongest in coding and cybersecurity
+
+              - `"claude-opus-4-6"`
+
+                Frontier intelligence for long-running agents and coding
+
+              - `"claude-sonnet-4-6"`
+
+                Best combination of speed and intelligence
+
+              - `"claude-haiku-4-5"`
+
+                Fastest model with near-frontier intelligence
+
+              - `"claude-haiku-4-5-20251001"`
+
+                Fastest model with near-frontier intelligence
+
+              - `"claude-opus-4-5"`
+
+                Premium model combining maximum intelligence with practical performance
+
+              - `"claude-opus-4-5-20251101"`
+
+                Premium model combining maximum intelligence with practical performance
+
+              - `"claude-sonnet-4-5"`
+
+                High-performance model for agents and coding
+
+              - `"claude-sonnet-4-5-20250929"`
+
+                High-performance model for agents and coding
+
+              - `"claude-opus-4-1"`
+
+                Exceptional model for specialized complex tasks
+
+              - `"claude-opus-4-1-20250805"`
+
+                Exceptional model for specialized complex tasks
+
+              - `"claude-opus-4-0"`
+
+                Powerful model for complex tasks
+
+              - `"claude-opus-4-20250514"`
+
+                Powerful model for complex tasks
+
+              - `"claude-sonnet-4-0"`
+
+                High-performance model with extended thinking
+
+              - `"claude-sonnet-4-20250514"`
+
+                High-performance model with extended thinking
+
+              - `"claude-3-haiku-20240307"`
+
+                Fast and cost-effective model
 
             - `output_tokens: number`
 
@@ -26853,11 +31973,19 @@ ant beta:messages:batches results \
 
               The number of input tokens which were used.
 
-            - `model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string`
+            - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
 
               The model that will complete your prompt.
 
               See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+              - `"claude-fable-5"`
+
+                Next generation of intelligence for the hardest knowledge work and coding problems
+
+              - `"claude-mythos-5"`
+
+                Most capable model for cybersecurity and biology research
 
               - `"claude-opus-4-8"`
 
@@ -26938,6 +32066,133 @@ ant beta:messages:batches results \
             - `type: "advisor_message"`
 
               Usage for an advisor sub-inference iteration
+
+          - `beta_fallback_message_iteration_usage: object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 4 more }`
+
+            Token usage for the fallback-model attempt of a server-side fallback request.
+
+            Produced in place of a `message` entry for whichever hop served the
+            response. A declined hop produces the existing `message` entry. Whether
+            a fallback model served the response is signalled by the presence of this
+            entry in `usage.iterations`.
+
+            - `cache_creation: object { ephemeral_1h_input_tokens, ephemeral_5m_input_tokens }`
+
+              Breakdown of cached tokens by TTL
+
+              - `ephemeral_1h_input_tokens: number`
+
+                The number of input tokens used to create the 1 hour cache entry.
+
+              - `ephemeral_5m_input_tokens: number`
+
+                The number of input tokens used to create the 5 minute cache entry.
+
+            - `cache_creation_input_tokens: number`
+
+              The number of input tokens used to create the cache entry.
+
+            - `cache_read_input_tokens: number`
+
+              The number of input tokens read from the cache.
+
+            - `input_tokens: number`
+
+              The number of input tokens which were used.
+
+            - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
+
+              The model that will complete your prompt.
+
+              See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+              - `"claude-fable-5"`
+
+                Next generation of intelligence for the hardest knowledge work and coding problems
+
+              - `"claude-mythos-5"`
+
+                Most capable model for cybersecurity and biology research
+
+              - `"claude-opus-4-8"`
+
+                Frontier intelligence for long-running agents and coding
+
+              - `"claude-opus-4-7"`
+
+                Frontier intelligence for long-running agents and coding
+
+              - `"claude-mythos-preview"`
+
+                New class of intelligence, strongest in coding and cybersecurity
+
+              - `"claude-opus-4-6"`
+
+                Frontier intelligence for long-running agents and coding
+
+              - `"claude-sonnet-4-6"`
+
+                Best combination of speed and intelligence
+
+              - `"claude-haiku-4-5"`
+
+                Fastest model with near-frontier intelligence
+
+              - `"claude-haiku-4-5-20251001"`
+
+                Fastest model with near-frontier intelligence
+
+              - `"claude-opus-4-5"`
+
+                Premium model combining maximum intelligence with practical performance
+
+              - `"claude-opus-4-5-20251101"`
+
+                Premium model combining maximum intelligence with practical performance
+
+              - `"claude-sonnet-4-5"`
+
+                High-performance model for agents and coding
+
+              - `"claude-sonnet-4-5-20250929"`
+
+                High-performance model for agents and coding
+
+              - `"claude-opus-4-1"`
+
+                Exceptional model for specialized complex tasks
+
+              - `"claude-opus-4-1-20250805"`
+
+                Exceptional model for specialized complex tasks
+
+              - `"claude-opus-4-0"`
+
+                Powerful model for complex tasks
+
+              - `"claude-opus-4-20250514"`
+
+                Powerful model for complex tasks
+
+              - `"claude-sonnet-4-0"`
+
+                High-performance model with extended thinking
+
+              - `"claude-sonnet-4-20250514"`
+
+                High-performance model with extended thinking
+
+              - `"claude-3-haiku-20240307"`
+
+                Fast and cost-effective model
+
+            - `output_tokens: number`
+
+              The number of output tokens which were used.
+
+            - `type: "fallback_message"`
+
+              Usage for the fallback-model attempt that served the response
 
         - `output_tokens: number`
 
@@ -27490,7 +32745,7 @@ ant beta:messages:batches results \
 
           - `beta_advisor_tool_result_error: object { error_code, type }`
 
-            - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 3 more`
+            - `error_code: "max_uses_exceeded" or "prompt_too_long" or "too_many_requests" or 4 more`
 
               - `"max_uses_exceeded"`
 
@@ -27503,6 +32758,8 @@ ant beta:messages:batches results \
               - `"unavailable"`
 
               - `"execution_time_exceeded"`
+
+              - `"model_not_found"`
 
             - `type: "advisor_tool_result_error"`
 
@@ -27796,6 +33053,122 @@ ant beta:messages:batches results \
 
         - `type: "compaction"`
 
+      - `beta_fallback_block: object { from, to, type }`
+
+        Marks the point in `content` where one model's output gives way to the next.
+
+        One block appears per hop where a preceding model actually ran this turn and
+        declined. A turn routed directly by the sticky decision has no such boundary
+        and carries no block — the signal for whether a fallback model served the
+        response is the presence of a `fallback_message` entry in
+        `usage.iterations`, not this block.
+
+        The block is treated like a server-tool content block for streaming: it
+        arrives via the standard `content_block_start` / `content_block_stop`
+        pair and carries no deltas.
+
+        - `from: object { model }`
+
+          The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
+
+          - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
+
+            The model that will complete your prompt.
+
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `"claude-fable-5"`
+
+              Next generation of intelligence for the hardest knowledge work and coding problems
+
+            - `"claude-mythos-5"`
+
+              Most capable model for cybersecurity and biology research
+
+            - `"claude-opus-4-8"`
+
+              Frontier intelligence for long-running agents and coding
+
+            - `"claude-opus-4-7"`
+
+              Frontier intelligence for long-running agents and coding
+
+            - `"claude-mythos-preview"`
+
+              New class of intelligence, strongest in coding and cybersecurity
+
+            - `"claude-opus-4-6"`
+
+              Frontier intelligence for long-running agents and coding
+
+            - `"claude-sonnet-4-6"`
+
+              Best combination of speed and intelligence
+
+            - `"claude-haiku-4-5"`
+
+              Fastest model with near-frontier intelligence
+
+            - `"claude-haiku-4-5-20251001"`
+
+              Fastest model with near-frontier intelligence
+
+            - `"claude-opus-4-5"`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `"claude-opus-4-5-20251101"`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `"claude-sonnet-4-5"`
+
+              High-performance model for agents and coding
+
+            - `"claude-sonnet-4-5-20250929"`
+
+              High-performance model for agents and coding
+
+            - `"claude-opus-4-1"`
+
+              Exceptional model for specialized complex tasks
+
+            - `"claude-opus-4-1-20250805"`
+
+              Exceptional model for specialized complex tasks
+
+            - `"claude-opus-4-0"`
+
+              Powerful model for complex tasks
+
+            - `"claude-opus-4-20250514"`
+
+              Powerful model for complex tasks
+
+            - `"claude-sonnet-4-0"`
+
+              High-performance model with extended thinking
+
+            - `"claude-sonnet-4-20250514"`
+
+              High-performance model with extended thinking
+
+            - `"claude-3-haiku-20240307"`
+
+              Fast and cost-effective model
+
+        - `to: object { model }`
+
+          The fallback model producing the content that follows this block. Its `model` is always the canonical id.
+
+          - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
+
+            The model that will complete your prompt.
+
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `type: "fallback"`
+
     - `context_management: object { applied_edits }`
 
       Context management response.
@@ -27883,11 +33256,19 @@ ant beta:messages:batches results \
 
           - `type: "unavailable"`
 
-    - `model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string`
+    - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
 
       The model that will complete your prompt.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-fable-5"`
+
+        Next generation of intelligence for the hardest knowledge work and coding problems
+
+      - `"claude-mythos-5"`
+
+        Most capable model for cybersecurity and biology research
 
       - `"claude-opus-4-8"`
 
@@ -27967,11 +33348,11 @@ ant beta:messages:batches results \
 
       This will always be `"assistant"`.
 
-    - `stop_details: object { category, explanation, type }`
+    - `stop_details: object { category, explanation, fallback_credit_token, 3 more }`
 
       Structured information about a refusal.
 
-      - `category: "cyber" or "bio"`
+      - `category: "cyber" or "bio" or "reasoning_extraction"`
 
         The policy category that triggered the refusal.
 
@@ -27981,11 +33362,62 @@ ant beta:messages:batches results \
 
         - `"bio"`
 
+        - `"reasoning_extraction"`
+
       - `explanation: string`
 
         Human-readable explanation of the refusal.
 
         This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+      - `fallback_credit_token: string`
+
+        Opaque code that refunds the cache-miss cost when retrying this refused
+        request on the fallback model. Pass it as `fallback_credit_token` on the
+        retry request. Expires 5 minutes after the refusal.
+
+        The retry is sent either with the same request body (`system`, `messages`,
+        `tools`, and other render-shaping fields), or with the same body plus one
+        appended `assistant` message whose content is the partial text (with any
+        trailing whitespace stripped from the final text block) and paired
+        server-tool blocks from this refusal — which also authorizes that
+        appended turn as an assistant-prefill continuation on models that otherwise
+        disallow prefill. A token minted mid-server-tool-loop whose partial content
+        was continuable may only be redeemed the second way — if a same-body retry
+        is rejected with a 400 saying the token must be redeemed by continuing the
+        partial response, retry the second way instead. Either way: same workspace,
+        same platform; a mismatch is a 400. Resending a token for an already-warm
+        prefix is permitted but yields no additional credit.
+
+        `null` when the refused model isn't eligible for a fallback credit.
+
+      - `fallback_has_prefill_claim: boolean`
+
+        Whether the accompanying `fallback_credit_token` may be redeemed with the
+        appended-assistant retry form. Only set when `fallback_credit_token` is
+        present.
+
+        `true`: retry by resending the same request body plus one appended
+        `assistant` message whose content is this response's `content` with any
+        trailing whitespace stripped from the final text block and unpaired
+        `tool_use` blocks omitted (the same appended-turn shape described on
+        `fallback_credit_token`), with the token attached. `false`: retry by
+        resending the original request body unchanged, with the token attached —
+        the appended-assistant form is not available for this refusal (no
+        continuable partial content, or the request uses `output_format` or a
+        `tool_choice` that forces tool use). One exception: when the request used
+        `output_format` or a forced `tool_choice` and the refusal arrived after
+        server tools (including MCP connector tools) had already executed, the
+        token may not be redeemable by either retry form; if the exact-body retry
+        is then rejected with a 400 saying the token must be redeemed by
+        continuing the partial response, discard the token and retry without it.
+
+        Advisory: if an appended-assistant retry is rejected with a 400 despite
+        `true`, fall back to resending the original request body with the token.
+
+      - `recommended_model: string`
+
+        The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
       - `type: "refusal"`
 
@@ -28072,7 +33504,7 @@ ant beta:messages:batches results \
 
         The number of input tokens which were used.
 
-      - `iterations: array of BetaMessageIterationUsage or BetaCompactionIterationUsage or BetaAdvisorMessageIterationUsage`
+      - `iterations: array of BetaMessageIterationUsage or BetaCompactionIterationUsage or BetaAdvisorMessageIterationUsage or BetaFallbackMessageIterationUsage`
 
         Per-iteration token usage breakdown.
 
@@ -28082,7 +33514,7 @@ ant beta:messages:batches results \
         - Calculate the true context window size from the last iteration
         - Understand token accumulation across server-side tool use loops
 
-        - `beta_message_iteration_usage: object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 3 more }`
+        - `beta_message_iteration_usage: object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 4 more }`
 
           Token usage for a sampling iteration.
 
@@ -28109,6 +33541,92 @@ ant beta:messages:batches results \
           - `input_tokens: number`
 
             The number of input tokens which were used.
+
+          - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
+
+            The model that will complete your prompt.
+
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `"claude-fable-5"`
+
+              Next generation of intelligence for the hardest knowledge work and coding problems
+
+            - `"claude-mythos-5"`
+
+              Most capable model for cybersecurity and biology research
+
+            - `"claude-opus-4-8"`
+
+              Frontier intelligence for long-running agents and coding
+
+            - `"claude-opus-4-7"`
+
+              Frontier intelligence for long-running agents and coding
+
+            - `"claude-mythos-preview"`
+
+              New class of intelligence, strongest in coding and cybersecurity
+
+            - `"claude-opus-4-6"`
+
+              Frontier intelligence for long-running agents and coding
+
+            - `"claude-sonnet-4-6"`
+
+              Best combination of speed and intelligence
+
+            - `"claude-haiku-4-5"`
+
+              Fastest model with near-frontier intelligence
+
+            - `"claude-haiku-4-5-20251001"`
+
+              Fastest model with near-frontier intelligence
+
+            - `"claude-opus-4-5"`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `"claude-opus-4-5-20251101"`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `"claude-sonnet-4-5"`
+
+              High-performance model for agents and coding
+
+            - `"claude-sonnet-4-5-20250929"`
+
+              High-performance model for agents and coding
+
+            - `"claude-opus-4-1"`
+
+              Exceptional model for specialized complex tasks
+
+            - `"claude-opus-4-1-20250805"`
+
+              Exceptional model for specialized complex tasks
+
+            - `"claude-opus-4-0"`
+
+              Powerful model for complex tasks
+
+            - `"claude-opus-4-20250514"`
+
+              Powerful model for complex tasks
+
+            - `"claude-sonnet-4-0"`
+
+              High-performance model with extended thinking
+
+            - `"claude-sonnet-4-20250514"`
+
+              High-performance model with extended thinking
+
+            - `"claude-3-haiku-20240307"`
+
+              Fast and cost-effective model
 
           - `output_tokens: number`
 
@@ -28182,11 +33700,19 @@ ant beta:messages:batches results \
 
             The number of input tokens which were used.
 
-          - `model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string`
+          - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
 
             The model that will complete your prompt.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `"claude-fable-5"`
+
+              Next generation of intelligence for the hardest knowledge work and coding problems
+
+            - `"claude-mythos-5"`
+
+              Most capable model for cybersecurity and biology research
 
             - `"claude-opus-4-8"`
 
@@ -28268,6 +33794,133 @@ ant beta:messages:batches results \
 
             Usage for an advisor sub-inference iteration
 
+        - `beta_fallback_message_iteration_usage: object { cache_creation, cache_creation_input_tokens, cache_read_input_tokens, 4 more }`
+
+          Token usage for the fallback-model attempt of a server-side fallback request.
+
+          Produced in place of a `message` entry for whichever hop served the
+          response. A declined hop produces the existing `message` entry. Whether
+          a fallback model served the response is signalled by the presence of this
+          entry in `usage.iterations`.
+
+          - `cache_creation: object { ephemeral_1h_input_tokens, ephemeral_5m_input_tokens }`
+
+            Breakdown of cached tokens by TTL
+
+            - `ephemeral_1h_input_tokens: number`
+
+              The number of input tokens used to create the 1 hour cache entry.
+
+            - `ephemeral_5m_input_tokens: number`
+
+              The number of input tokens used to create the 5 minute cache entry.
+
+          - `cache_creation_input_tokens: number`
+
+            The number of input tokens used to create the cache entry.
+
+          - `cache_read_input_tokens: number`
+
+            The number of input tokens read from the cache.
+
+          - `input_tokens: number`
+
+            The number of input tokens which were used.
+
+          - `model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string`
+
+            The model that will complete your prompt.
+
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `"claude-fable-5"`
+
+              Next generation of intelligence for the hardest knowledge work and coding problems
+
+            - `"claude-mythos-5"`
+
+              Most capable model for cybersecurity and biology research
+
+            - `"claude-opus-4-8"`
+
+              Frontier intelligence for long-running agents and coding
+
+            - `"claude-opus-4-7"`
+
+              Frontier intelligence for long-running agents and coding
+
+            - `"claude-mythos-preview"`
+
+              New class of intelligence, strongest in coding and cybersecurity
+
+            - `"claude-opus-4-6"`
+
+              Frontier intelligence for long-running agents and coding
+
+            - `"claude-sonnet-4-6"`
+
+              Best combination of speed and intelligence
+
+            - `"claude-haiku-4-5"`
+
+              Fastest model with near-frontier intelligence
+
+            - `"claude-haiku-4-5-20251001"`
+
+              Fastest model with near-frontier intelligence
+
+            - `"claude-opus-4-5"`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `"claude-opus-4-5-20251101"`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `"claude-sonnet-4-5"`
+
+              High-performance model for agents and coding
+
+            - `"claude-sonnet-4-5-20250929"`
+
+              High-performance model for agents and coding
+
+            - `"claude-opus-4-1"`
+
+              Exceptional model for specialized complex tasks
+
+            - `"claude-opus-4-1-20250805"`
+
+              Exceptional model for specialized complex tasks
+
+            - `"claude-opus-4-0"`
+
+              Powerful model for complex tasks
+
+            - `"claude-opus-4-20250514"`
+
+              Powerful model for complex tasks
+
+            - `"claude-sonnet-4-0"`
+
+              High-performance model with extended thinking
+
+            - `"claude-sonnet-4-20250514"`
+
+              High-performance model with extended thinking
+
+            - `"claude-3-haiku-20240307"`
+
+              Fast and cost-effective model
+
+          - `output_tokens: number`
+
+            The number of output tokens which were used.
+
+          - `type: "fallback_message"`
+
+            Usage for the fallback-model attempt that served the response
+
       - `output_tokens: number`
 
         The number of output tokens which were used.
@@ -28342,11 +33995,11 @@ Create Agent
 
 - `--name: string`
 
-  Body param: Human-readable name for the agent. 1-256 characters.
+  Body param: Human-readable name for the agent.
 
 - `--description: optional string`
 
-  Body param: Description of what the agent does. Up to 2048 characters.
+  Body param: Description of what the agent does.
 
 - `--mcp-server: optional array of BetaManagedAgentsURLMCPServerParams`
 
@@ -28362,11 +34015,11 @@ Create Agent
 
 - `--skill: optional array of BetaManagedAgentsSkillParams`
 
-  Body param: Skills available to the agent. Maximum 20.
+  Body param: Skills available to the agent.
 
 - `--system: optional string`
 
-  Body param: System prompt for the agent. Up to 100,000 characters.
+  Body param: System prompt for the agent.
 
 - `--tool: optional array of BetaManagedAgentsAgentToolset20260401Params or BetaManagedAgentsMCPToolsetParams or BetaManagedAgentsCustomToolParams`
 
@@ -28410,11 +34063,15 @@ Create Agent
 
     Model identifier and configuration.
 
-    - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+    - `id: "claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more or string`
 
       The model that will power your agent.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-fable-5"`
+
+        Next generation of intelligence for the hardest knowledge work and coding problems
 
       - `"claude-opus-4-8"`
 
@@ -28634,23 +34291,15 @@ Create Agent
 
       - `description: string`
 
-      - `input_schema: object { properties, required, type }`
+      - `input_schema: object { type, properties, required }`
 
         JSON Schema for custom tool input parameters.
 
+        - `type: "object"`
+
         - `properties: optional map[unknown]`
 
-          JSON Schema properties defining the tool's input parameters.
-
         - `required: optional array of string`
-
-          List of required property names.
-
-        - `type: optional "object"`
-
-          Must be 'object' for tool input schemas.
-
-          - `"object"`
 
       - `name: string`
 
@@ -28791,7 +34440,7 @@ List Agents
 
   Paginated list of agents.
 
-  - `data: optional array of BetaManagedAgentsAgent`
+  - `data: array of BetaManagedAgentsAgent`
 
     List of agents.
 
@@ -28823,11 +34472,15 @@ List Agents
 
       Model identifier and configuration.
 
-      - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+      - `id: "claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more or string`
 
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-fable-5"`
+
+          Next generation of intelligence for the hardest knowledge work and coding problems
 
         - `"claude-opus-4-8"`
 
@@ -29047,23 +34700,15 @@ List Agents
 
         - `description: string`
 
-        - `input_schema: object { properties, required, type }`
+        - `input_schema: object { type, properties, required }`
 
           JSON Schema for custom tool input parameters.
 
+          - `type: "object"`
+
           - `properties: optional map[unknown]`
 
-            JSON Schema properties defining the tool's input parameters.
-
           - `required: optional array of string`
-
-            List of required property names.
-
-          - `type: optional "object"`
-
-            Must be 'object' for tool input schemas.
-
-            - `"object"`
 
         - `name: string`
 
@@ -29227,11 +34872,15 @@ Get Agent
 
     Model identifier and configuration.
 
-    - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+    - `id: "claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more or string`
 
       The model that will power your agent.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-fable-5"`
+
+        Next generation of intelligence for the hardest knowledge work and coding problems
 
       - `"claude-opus-4-8"`
 
@@ -29451,23 +35100,15 @@ Get Agent
 
       - `description: string`
 
-      - `input_schema: object { properties, required, type }`
+      - `input_schema: object { type, properties, required }`
 
         JSON Schema for custom tool input parameters.
 
+        - `type: "object"`
+
         - `properties: optional map[unknown]`
 
-          JSON Schema properties defining the tool's input parameters.
-
         - `required: optional array of string`
-
-          List of required property names.
-
-        - `type: optional "object"`
-
-          Must be 'object' for tool input schemas.
-
-          - `"object"`
 
       - `name: string`
 
@@ -29587,7 +35228,7 @@ Update Agent
 
 - `--description: optional string`
 
-  Body param: Description. Up to 2048 characters. Omit to preserve; send empty string or null to clear.
+  Body param: Description. Omit to preserve; send empty string or null to clear.
 
 - `--mcp-server: optional array of BetaManagedAgentsURLMCPServerParams`
 
@@ -29607,15 +35248,15 @@ Update Agent
 
 - `--name: optional string`
 
-  Body param: Human-readable name. 1-256 characters. Omit to preserve. Cannot be cleared.
+  Body param: Human-readable name. Must be non-empty. Omit to preserve. Cannot be cleared.
 
 - `--skill: optional array of BetaManagedAgentsSkillParams`
 
-  Body param: Skills. Full replacement. Omit to preserve; send empty array or null to clear. Maximum 20.
+  Body param: Skills. Full replacement. Omit to preserve; send empty array or null to clear.
 
 - `--system: optional string`
 
-  Body param: System prompt. Up to 100,000 characters. Omit to preserve; send empty string or null to clear.
+  Body param: System prompt. Omit to preserve; send empty string or null to clear.
 
 - `--tool: optional array of BetaManagedAgentsAgentToolset20260401Params or BetaManagedAgentsMCPToolsetParams or BetaManagedAgentsCustomToolParams`
 
@@ -29659,11 +35300,15 @@ Update Agent
 
     Model identifier and configuration.
 
-    - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+    - `id: "claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more or string`
 
       The model that will power your agent.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-fable-5"`
+
+        Next generation of intelligence for the hardest knowledge work and coding problems
 
       - `"claude-opus-4-8"`
 
@@ -29883,23 +35528,15 @@ Update Agent
 
       - `description: string`
 
-      - `input_schema: object { properties, required, type }`
+      - `input_schema: object { type, properties, required }`
 
         JSON Schema for custom tool input parameters.
 
+        - `type: "object"`
+
         - `properties: optional map[unknown]`
 
-          JSON Schema properties defining the tool's input parameters.
-
         - `required: optional array of string`
-
-          List of required property names.
-
-        - `type: optional "object"`
-
-          Must be 'object' for tool input schemas.
-
-          - `"object"`
 
       - `name: string`
 
@@ -30052,11 +35689,15 @@ Archive Agent
 
     Model identifier and configuration.
 
-    - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+    - `id: "claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more or string`
 
       The model that will power your agent.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-fable-5"`
+
+        Next generation of intelligence for the hardest knowledge work and coding problems
 
       - `"claude-opus-4-8"`
 
@@ -30276,23 +35917,15 @@ Archive Agent
 
       - `description: string`
 
-      - `input_schema: object { properties, required, type }`
+      - `input_schema: object { type, properties, required }`
 
         JSON Schema for custom tool input parameters.
 
+        - `type: "object"`
+
         - `properties: optional map[unknown]`
 
-          JSON Schema properties defining the tool's input parameters.
-
         - `required: optional array of string`
-
-          List of required property names.
-
-        - `type: optional "object"`
-
-          Must be 'object' for tool input schemas.
-
-          - `"object"`
 
       - `name: string`
 
@@ -30428,11 +36061,15 @@ ant beta:agents archive \
 
     Model identifier and configuration.
 
-    - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+    - `id: "claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more or string`
 
       The model that will power your agent.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-fable-5"`
+
+        Next generation of intelligence for the hardest knowledge work and coding problems
 
       - `"claude-opus-4-8"`
 
@@ -30652,23 +36289,15 @@ ant beta:agents archive \
 
       - `description: string`
 
-      - `input_schema: object { properties, required, type }`
+      - `input_schema: object { type, properties, required }`
 
         JSON Schema for custom tool input parameters.
 
+        - `type: "object"`
+
         - `properties: optional map[unknown]`
 
-          JSON Schema properties defining the tool's input parameters.
-
         - `required: optional array of string`
-
-          List of required property names.
-
-        - `type: optional "object"`
-
-          Must be 'object' for tool input schemas.
-
-          - `"object"`
 
       - `name: string`
 
@@ -31214,23 +36843,15 @@ ant beta:agents archive \
 
   - `description: string`
 
-  - `input_schema: object { properties, required, type }`
+  - `input_schema: object { type, properties, required }`
 
     JSON Schema for custom tool input parameters.
 
+    - `type: "object"`
+
     - `properties: optional map[unknown]`
 
-      JSON Schema properties defining the tool's input parameters.
-
     - `required: optional array of string`
-
-      List of required property names.
-
-    - `type: optional "object"`
-
-      Must be 'object' for tool input schemas.
-
-      - `"object"`
 
   - `name: string`
 
@@ -31240,23 +36861,15 @@ ant beta:agents archive \
 
 ### Beta Managed Agents Custom Tool Input Schema
 
-- `beta_managed_agents_custom_tool_input_schema: object { properties, required, type }`
+- `beta_managed_agents_custom_tool_input_schema: object { type, properties, required }`
 
   JSON Schema for custom tool input parameters.
 
+  - `type: "object"`
+
   - `properties: optional map[unknown]`
 
-    JSON Schema properties defining the tool's input parameters.
-
   - `required: optional array of string`
-
-    List of required property names.
-
-  - `type: optional "object"`
-
-    Must be 'object' for tool input schemas.
-
-    - `"object"`
 
 ### Beta Managed Agents Custom Tool Params
 
@@ -31268,23 +36881,15 @@ ant beta:agents archive \
 
     Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-1024 characters.
 
-  - `input_schema: object { properties, required, type }`
+  - `input_schema: object { type, properties, required }`
 
     JSON Schema for custom tool input parameters.
 
+    - `type: "object"`
+
     - `properties: optional map[unknown]`
 
-      JSON Schema properties defining the tool's input parameters.
-
     - `required: optional array of string`
-
-      List of required property names.
-
-    - `type: optional "object"`
-
-      Must be 'object' for tool input schemas.
-
-      - `"object"`
 
   - `name: string`
 
@@ -31556,11 +37161,15 @@ ant beta:agents archive \
 
   Model identifier and configuration.
 
-  - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+  - `id: "claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more or string`
 
     The model that will power your agent.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `"claude-fable-5"`
+
+      Next generation of intelligence for the hardest knowledge work and coding problems
 
     - `"claude-opus-4-8"`
 
@@ -31616,11 +37225,15 @@ ant beta:agents archive \
 
   An object that defines additional configuration control over model use
 
-  - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+  - `id: "claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more or string`
 
     The model that will power your agent.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `"claude-fable-5"`
+
+      Next generation of intelligence for the hardest knowledge work and coding problems
 
     - `"claude-opus-4-8"`
 
@@ -31766,11 +37379,15 @@ ant beta:agents archive \
 
     Model identifier and configuration.
 
-    - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+    - `id: "claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more or string`
 
       The model that will power your agent.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-fable-5"`
+
+        Next generation of intelligence for the hardest knowledge work and coding problems
 
       - `"claude-opus-4-8"`
 
@@ -31970,23 +37587,15 @@ ant beta:agents archive \
 
       - `description: string`
 
-      - `input_schema: object { properties, required, type }`
+      - `input_schema: object { type, properties, required }`
 
         JSON Schema for custom tool input parameters.
 
+        - `type: "object"`
+
         - `properties: optional map[unknown]`
 
-          JSON Schema properties defining the tool's input parameters.
-
         - `required: optional array of string`
-
-          List of required property names.
-
-        - `type: optional "object"`
-
-          Must be 'object' for tool input schemas.
-
-          - `"object"`
 
       - `name: string`
 
@@ -32090,7 +37699,7 @@ List Agent Versions
 
   Paginated list of agent versions.
 
-  - `data: optional array of BetaManagedAgentsAgent`
+  - `data: array of BetaManagedAgentsAgent`
 
     Agent versions.
 
@@ -32122,11 +37731,15 @@ List Agent Versions
 
       Model identifier and configuration.
 
-      - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+      - `id: "claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more or string`
 
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-fable-5"`
+
+          Next generation of intelligence for the hardest knowledge work and coding problems
 
         - `"claude-opus-4-8"`
 
@@ -32346,23 +37959,15 @@ List Agent Versions
 
         - `description: string`
 
-        - `input_schema: object { properties, required, type }`
+        - `input_schema: object { type, properties, required }`
 
           JSON Schema for custom tool input parameters.
 
+          - `type: "object"`
+
           - `properties: optional map[unknown]`
 
-            JSON Schema properties defining the tool's input parameters.
-
           - `required: optional array of string`
-
-            List of required property names.
-
-          - `type: optional "object"`
-
-            Must be 'object' for tool input schemas.
-
-            - `"object"`
 
         - `name: string`
 
@@ -35351,7 +40956,7 @@ Create Session
 
 ### Returns
 
-- `beta_managed_agents_session: object { id, agent, archived_at, 12 more }`
+- `beta_managed_agents_session: object { id, agent, archived_at, 13 more }`
 
   A Managed Agents `session`.
 
@@ -35379,11 +40984,15 @@ Create Session
 
       Model identifier and configuration.
 
-      - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+      - `id: "claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more or string`
 
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-fable-5"`
+
+          Next generation of intelligence for the hardest knowledge work and coding problems
 
         - `"claude-opus-4-8"`
 
@@ -35457,7 +41066,7 @@ Create Session
 
           Model identifier and configuration.
 
-          - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+          - `id: "claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more or string`
 
             The model that will power your agent.
 
@@ -35617,23 +41226,15 @@ Create Session
 
             - `description: string`
 
-            - `input_schema: object { properties, required, type }`
+            - `input_schema: object { type, properties, required }`
 
               JSON Schema for custom tool input parameters.
 
+              - `type: "object"`
+
               - `properties: optional map[unknown]`
 
-                JSON Schema properties defining the tool's input parameters.
-
               - `required: optional array of string`
-
-                List of required property names.
-
-              - `type: optional "object"`
-
-                Must be 'object' for tool input schemas.
-
-                - `"object"`
 
             - `name: string`
 
@@ -35891,6 +41492,10 @@ Create Session
 
     Vault IDs attached to the session at creation. Empty when no vaults were supplied.
 
+  - `deployment_id: optional string`
+
+    Deployment ID when the session was created from a deployment reference. Null otherwise.
+
 ### Example
 
 ```cli
@@ -36063,7 +41668,8 @@ ant beta:sessions create \
   },
   "vault_ids": [
     "vlt_011CZkZDLs7fYzm1hXNPeRjv"
-  ]
+  ],
+  "deployment_id": "deployment_id"
 }
 ```
 
@@ -36101,6 +41707,10 @@ List Sessions
 
   Query param: Return sessions created at or before this time (inclusive).
 
+- `--deployment-id: optional string`
+
+  Query param: Filter sessions created by this deployment ID.
+
 - `--include-archived: optional boolean`
 
   Query param: When true, includes archived sessions. Default: false (exclude archived).
@@ -36119,7 +41729,7 @@ List Sessions
 
 - `--page: optional string`
 
-  Query param: Opaque pagination cursor from a previous response's next_page.
+  Query param: Opaque pagination cursor from a previous response.
 
 - `--status: optional array of "rescheduling" or "running" or "idle" or "terminated"`
 
@@ -36163,11 +41773,15 @@ List Sessions
 
         Model identifier and configuration.
 
-        - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+        - `id: "claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more or string`
 
           The model that will power your agent.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-fable-5"`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
 
           - `"claude-opus-4-8"`
 
@@ -36241,7 +41855,7 @@ List Sessions
 
             Model identifier and configuration.
 
-            - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+            - `id: "claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more or string`
 
               The model that will power your agent.
 
@@ -36401,23 +42015,15 @@ List Sessions
 
               - `description: string`
 
-              - `input_schema: object { properties, required, type }`
+              - `input_schema: object { type, properties, required }`
 
                 JSON Schema for custom tool input parameters.
 
+                - `type: "object"`
+
                 - `properties: optional map[unknown]`
 
-                  JSON Schema properties defining the tool's input parameters.
-
                 - `required: optional array of string`
-
-                  List of required property names.
-
-                - `type: optional "object"`
-
-                  Must be 'object' for tool input schemas.
-
-                  - `"object"`
 
               - `name: string`
 
@@ -36675,6 +42281,10 @@ List Sessions
 
       Vault IDs attached to the session at creation. Empty when no vaults were supplied.
 
+    - `deployment_id: optional string`
+
+      Deployment ID when the session was created from a deployment reference. Null otherwise.
+
   - `next_page: optional string`
 
     Opaque cursor for the next page. Null when no more results.
@@ -36851,7 +42461,8 @@ ant beta:sessions list \
       },
       "vault_ids": [
         "vlt_011CZkZDLs7fYzm1hXNPeRjv"
-      ]
+      ],
+      "deployment_id": "deployment_id"
     }
   ],
   "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
@@ -36878,7 +42489,7 @@ Get Session
 
 ### Returns
 
-- `beta_managed_agents_session: object { id, agent, archived_at, 12 more }`
+- `beta_managed_agents_session: object { id, agent, archived_at, 13 more }`
 
   A Managed Agents `session`.
 
@@ -36906,11 +42517,15 @@ Get Session
 
       Model identifier and configuration.
 
-      - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+      - `id: "claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more or string`
 
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-fable-5"`
+
+          Next generation of intelligence for the hardest knowledge work and coding problems
 
         - `"claude-opus-4-8"`
 
@@ -36984,7 +42599,7 @@ Get Session
 
           Model identifier and configuration.
 
-          - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+          - `id: "claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more or string`
 
             The model that will power your agent.
 
@@ -37144,23 +42759,15 @@ Get Session
 
             - `description: string`
 
-            - `input_schema: object { properties, required, type }`
+            - `input_schema: object { type, properties, required }`
 
               JSON Schema for custom tool input parameters.
 
+              - `type: "object"`
+
               - `properties: optional map[unknown]`
 
-                JSON Schema properties defining the tool's input parameters.
-
               - `required: optional array of string`
-
-                List of required property names.
-
-              - `type: optional "object"`
-
-                Must be 'object' for tool input schemas.
-
-                - `"object"`
 
             - `name: string`
 
@@ -37417,6 +43024,10 @@ Get Session
   - `vault_ids: array of string`
 
     Vault IDs attached to the session at creation. Empty when no vaults were supplied.
+
+  - `deployment_id: optional string`
+
+    Deployment ID when the session was created from a deployment reference. Null otherwise.
 
 ### Example
 
@@ -37589,7 +43200,8 @@ ant beta:sessions retrieve \
   },
   "vault_ids": [
     "vlt_011CZkZDLs7fYzm1hXNPeRjv"
-  ]
+  ],
+  "deployment_id": "deployment_id"
 }
 ```
 
@@ -37629,7 +43241,7 @@ Update Session
 
 ### Returns
 
-- `beta_managed_agents_session: object { id, agent, archived_at, 12 more }`
+- `beta_managed_agents_session: object { id, agent, archived_at, 13 more }`
 
   A Managed Agents `session`.
 
@@ -37657,11 +43269,15 @@ Update Session
 
       Model identifier and configuration.
 
-      - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+      - `id: "claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more or string`
 
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-fable-5"`
+
+          Next generation of intelligence for the hardest knowledge work and coding problems
 
         - `"claude-opus-4-8"`
 
@@ -37735,7 +43351,7 @@ Update Session
 
           Model identifier and configuration.
 
-          - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+          - `id: "claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more or string`
 
             The model that will power your agent.
 
@@ -37895,23 +43511,15 @@ Update Session
 
             - `description: string`
 
-            - `input_schema: object { properties, required, type }`
+            - `input_schema: object { type, properties, required }`
 
               JSON Schema for custom tool input parameters.
 
+              - `type: "object"`
+
               - `properties: optional map[unknown]`
 
-                JSON Schema properties defining the tool's input parameters.
-
               - `required: optional array of string`
-
-                List of required property names.
-
-              - `type: optional "object"`
-
-                Must be 'object' for tool input schemas.
-
-                - `"object"`
 
             - `name: string`
 
@@ -38168,6 +43776,10 @@ Update Session
   - `vault_ids: array of string`
 
     Vault IDs attached to the session at creation. Empty when no vaults were supplied.
+
+  - `deployment_id: optional string`
+
+    Deployment ID when the session was created from a deployment reference. Null otherwise.
 
 ### Example
 
@@ -38340,7 +43952,8 @@ ant beta:sessions update \
   },
   "vault_ids": [
     "vlt_011CZkZDLs7fYzm1hXNPeRjv"
-  ]
+  ],
+  "deployment_id": "deployment_id"
 }
 ```
 
@@ -38411,7 +44024,7 @@ Archive Session
 
 ### Returns
 
-- `beta_managed_agents_session: object { id, agent, archived_at, 12 more }`
+- `beta_managed_agents_session: object { id, agent, archived_at, 13 more }`
 
   A Managed Agents `session`.
 
@@ -38439,11 +44052,15 @@ Archive Session
 
       Model identifier and configuration.
 
-      - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+      - `id: "claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more or string`
 
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-fable-5"`
+
+          Next generation of intelligence for the hardest knowledge work and coding problems
 
         - `"claude-opus-4-8"`
 
@@ -38517,7 +44134,7 @@ Archive Session
 
           Model identifier and configuration.
 
-          - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+          - `id: "claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more or string`
 
             The model that will power your agent.
 
@@ -38677,23 +44294,15 @@ Archive Session
 
             - `description: string`
 
-            - `input_schema: object { properties, required, type }`
+            - `input_schema: object { type, properties, required }`
 
               JSON Schema for custom tool input parameters.
 
+              - `type: "object"`
+
               - `properties: optional map[unknown]`
 
-                JSON Schema properties defining the tool's input parameters.
-
               - `required: optional array of string`
-
-                List of required property names.
-
-              - `type: optional "object"`
-
-                Must be 'object' for tool input schemas.
-
-                - `"object"`
 
             - `name: string`
 
@@ -38951,6 +44560,10 @@ Archive Session
 
     Vault IDs attached to the session at creation. Empty when no vaults were supplied.
 
+  - `deployment_id: optional string`
+
+    Deployment ID when the session was created from a deployment reference. Null otherwise.
+
 ### Example
 
 ```cli
@@ -39122,7 +44735,8 @@ ant beta:sessions archive \
   },
   "vault_ids": [
     "vlt_011CZkZDLs7fYzm1hXNPeRjv"
-  ]
+  ],
+  "deployment_id": "deployment_id"
 }
 ```
 
@@ -39416,7 +45030,7 @@ ant beta:sessions archive \
 
 ### Beta Managed Agents Session
 
-- `beta_managed_agents_session: object { id, agent, archived_at, 12 more }`
+- `beta_managed_agents_session: object { id, agent, archived_at, 13 more }`
 
   A Managed Agents `session`.
 
@@ -39444,11 +45058,15 @@ ant beta:sessions archive \
 
       Model identifier and configuration.
 
-      - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+      - `id: "claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more or string`
 
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-fable-5"`
+
+          Next generation of intelligence for the hardest knowledge work and coding problems
 
         - `"claude-opus-4-8"`
 
@@ -39522,7 +45140,7 @@ ant beta:sessions archive \
 
           Model identifier and configuration.
 
-          - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+          - `id: "claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more or string`
 
             The model that will power your agent.
 
@@ -39682,23 +45300,15 @@ ant beta:sessions archive \
 
             - `description: string`
 
-            - `input_schema: object { properties, required, type }`
+            - `input_schema: object { type, properties, required }`
 
               JSON Schema for custom tool input parameters.
 
+              - `type: "object"`
+
               - `properties: optional map[unknown]`
 
-                JSON Schema properties defining the tool's input parameters.
-
               - `required: optional array of string`
-
-                List of required property names.
-
-              - `type: optional "object"`
-
-                Must be 'object' for tool input schemas.
-
-                - `"object"`
 
             - `name: string`
 
@@ -39956,6 +45566,10 @@ ant beta:sessions archive \
 
     Vault IDs attached to the session at creation. Empty when no vaults were supplied.
 
+  - `deployment_id: optional string`
+
+    Deployment ID when the session was created from a deployment reference. Null otherwise.
+
 ### Beta Managed Agents Session Agent
 
 - `beta_managed_agents_session_agent: object { id, description, mcp_servers, 8 more }`
@@ -39980,11 +45594,15 @@ ant beta:sessions archive \
 
     Model identifier and configuration.
 
-    - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+    - `id: "claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more or string`
 
       The model that will power your agent.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-fable-5"`
+
+        Next generation of intelligence for the hardest knowledge work and coding problems
 
       - `"claude-opus-4-8"`
 
@@ -40058,7 +45676,7 @@ ant beta:sessions archive \
 
         Model identifier and configuration.
 
-        - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+        - `id: "claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more or string`
 
           The model that will power your agent.
 
@@ -40218,23 +45836,15 @@ ant beta:sessions archive \
 
           - `description: string`
 
-          - `input_schema: object { properties, required, type }`
+          - `input_schema: object { type, properties, required }`
 
             JSON Schema for custom tool input parameters.
 
+            - `type: "object"`
+
             - `properties: optional map[unknown]`
 
-              JSON Schema properties defining the tool's input parameters.
-
             - `required: optional array of string`
-
-              List of required property names.
-
-            - `type: optional "object"`
-
-              Must be 'object' for tool input schemas.
-
-              - `"object"`
 
           - `name: string`
 
@@ -40448,23 +46058,15 @@ ant beta:sessions archive \
 
         Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-1024 characters.
 
-      - `input_schema: object { properties, required, type }`
+      - `input_schema: object { type, properties, required }`
 
         JSON Schema for custom tool input parameters.
 
+        - `type: "object"`
+
         - `properties: optional map[unknown]`
 
-          JSON Schema properties defining the tool's input parameters.
-
         - `required: optional array of string`
-
-          List of required property names.
-
-        - `type: optional "object"`
-
-          Must be 'object' for tool input schemas.
-
-          - `"object"`
 
       - `name: string`
 
@@ -40502,11 +46104,15 @@ ant beta:sessions archive \
 
       Model identifier and configuration.
 
-      - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+      - `id: "claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more or string`
 
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-fable-5"`
+
+          Next generation of intelligence for the hardest knowledge work and coding problems
 
         - `"claude-opus-4-8"`
 
@@ -40706,23 +46312,15 @@ ant beta:sessions archive \
 
         - `description: string`
 
-        - `input_schema: object { properties, required, type }`
+        - `input_schema: object { type, properties, required }`
 
           JSON Schema for custom tool input parameters.
 
+          - `type: "object"`
+
           - `properties: optional map[unknown]`
 
-            JSON Schema properties defining the tool's input parameters.
-
           - `required: optional array of string`
-
-            List of required property names.
-
-          - `type: optional "object"`
-
-            Must be 'object' for tool input schemas.
-
-            - `"object"`
 
         - `name: string`
 
@@ -40794,11 +46392,15 @@ ant beta:sessions archive \
 
       Model identifier and configuration.
 
-      - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+      - `id: "claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more or string`
 
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-fable-5"`
+
+          Next generation of intelligence for the hardest knowledge work and coding problems
 
         - `"claude-opus-4-8"`
 
@@ -40872,7 +46474,7 @@ ant beta:sessions archive \
 
           Model identifier and configuration.
 
-          - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+          - `id: "claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more or string`
 
             The model that will power your agent.
 
@@ -41032,23 +46634,15 @@ ant beta:sessions archive \
 
             - `description: string`
 
-            - `input_schema: object { properties, required, type }`
+            - `input_schema: object { type, properties, required }`
 
               JSON Schema for custom tool input parameters.
 
+              - `type: "object"`
+
               - `properties: optional map[unknown]`
 
-                JSON Schema properties defining the tool's input parameters.
-
               - `required: optional array of string`
-
-                List of required property names.
-
-              - `type: optional "object"`
-
-                Must be 'object' for tool input schemas.
-
-                - `"object"`
 
             - `name: string`
 
@@ -41133,6 +46727,50 @@ ant beta:sessions archive \
   - `output_tokens: optional number`
 
     Total output tokens generated across all turns.
+
+### Beta Managed Agents System Content Block
+
+- `beta_managed_agents_system_content_block: object { text, type }`
+
+  Regular text content.
+
+  - `text: string`
+
+    The text content.
+
+  - `type: "text"`
+
+    - `"text"`
+
+### Beta Managed Agents System Message Event
+
+- `beta_managed_agents_system_message_event: object { id, content, type, processed_at }`
+
+  A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+  - `id: string`
+
+    Unique identifier for this event.
+
+  - `content: array of BetaManagedAgentsSystemContentBlock`
+
+    System content blocks. Text-only.
+
+    - `text: string`
+
+      The text content.
+
+    - `type: "text"`
+
+      - `"text"`
+
+  - `type: "system.message"`
+
+    - `"system.message"`
+
+  - `processed_at: optional string`
+
+    A timestamp in RFC 3339 format
 
 ### Beta Managed Agents User Tool Result Event
 
@@ -42048,7 +47686,7 @@ List Events
 
         Unique identifier for this event.
 
-      - `error: BetaManagedAgentsUnknownError or BetaManagedAgentsModelOverloadedError or BetaManagedAgentsModelRateLimitedError or 4 more`
+      - `error: BetaManagedAgentsUnknownError or BetaManagedAgentsModelOverloadedError or BetaManagedAgentsModelRateLimitedError or 5 more`
 
         An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
@@ -42267,6 +47905,42 @@ List Events
           - `type: "billing_error"`
 
             - `"billing_error"`
+
+        - `beta_managed_agents_credential_host_unreachable_error: object { credential_id, message, retry_status, 2 more }`
+
+          An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+          - `credential_id: string`
+
+            ID of the affected credential.
+
+          - `message: string`
+
+            Human-readable error description.
+
+          - `retry_status: BetaManagedAgentsRetryStatusRetrying or BetaManagedAgentsRetryStatusExhausted or BetaManagedAgentsRetryStatusTerminal`
+
+            What the client should do next in response to this error.
+
+            - `beta_managed_agents_retry_status_retrying: object { type }`
+
+              The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+            - `beta_managed_agents_retry_status_exhausted: object { type }`
+
+              This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+            - `beta_managed_agents_retry_status_terminal: object { type }`
+
+              The session encountered a terminal error and will transition to `terminated` state.
+
+          - `type: "credential_host_unreachable_error"`
+
+            - `"credential_host_unreachable_error"`
+
+          - `vault_id: string`
+
+            ID of the vault containing the affected credential.
 
       - `processed_at: string`
 
@@ -42842,11 +48516,15 @@ List Events
 
           Model identifier and configuration.
 
-          - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+          - `id: "claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more or string`
 
             The model that will power your agent.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `"claude-fable-5"`
+
+              Next generation of intelligence for the hardest knowledge work and coding problems
 
             - `"claude-opus-4-8"`
 
@@ -42920,7 +48598,7 @@ List Events
 
               Model identifier and configuration.
 
-              - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+              - `id: "claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more or string`
 
                 The model that will power your agent.
 
@@ -43080,23 +48758,15 @@ List Events
 
                 - `description: string`
 
-                - `input_schema: object { properties, required, type }`
+                - `input_schema: object { type, properties, required }`
 
                   JSON Schema for custom tool input parameters.
 
+                  - `type: "object"`
+
                   - `properties: optional map[unknown]`
 
-                    JSON Schema properties defining the tool's input parameters.
-
                   - `required: optional array of string`
-
-                    List of required property names.
-
-                  - `type: optional "object"`
-
-                    Must be 'object' for tool input schemas.
-
-                    - `"object"`
 
                 - `name: string`
 
@@ -43151,6 +48821,34 @@ List Events
       - `title: optional string`
 
         The session's new title. Present only when the update changed it.
+
+    - `beta_managed_agents_system_message_event: object { id, content, type, processed_at }`
+
+      A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+      - `id: string`
+
+        Unique identifier for this event.
+
+      - `content: array of BetaManagedAgentsSystemContentBlock`
+
+        System content blocks. Text-only.
+
+        - `text: string`
+
+          The text content.
+
+        - `type: "text"`
+
+          - `"text"`
+
+      - `type: "system.message"`
+
+        - `"system.message"`
+
+      - `processed_at: optional string`
+
+        A timestamp in RFC 3339 format
 
   - `next_page: optional string`
 
@@ -43224,7 +48922,7 @@ Send Events
 
   Events that were successfully sent to the session.
 
-  - `data: optional array of BetaManagedAgentsUserMessageEvent or BetaManagedAgentsUserInterruptEvent or BetaManagedAgentsUserToolConfirmationEvent or 3 more`
+  - `data: optional array of BetaManagedAgentsUserMessageEvent or BetaManagedAgentsUserInterruptEvent or BetaManagedAgentsUserToolConfirmationEvent or 4 more`
 
     Sent events
 
@@ -43630,6 +49328,34 @@ Send Events
 
         Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
 
+    - `beta_managed_agents_system_message_event: object { id, content, type, processed_at }`
+
+      A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+      - `id: string`
+
+        Unique identifier for this event.
+
+      - `content: array of BetaManagedAgentsSystemContentBlock`
+
+        System content blocks. Text-only.
+
+        - `text: string`
+
+          The text content.
+
+        - `type: "text"`
+
+          - `"text"`
+
+      - `type: "system.message"`
+
+        - `"system.message"`
+
+      - `processed_at: optional string`
+
+        A timestamp in RFC 3339 format
+
 ### Example
 
 ```cli
@@ -43679,7 +49405,7 @@ Stream Events
 
 ### Returns
 
-- `beta_managed_agents_stream_session_events: BetaManagedAgentsUserMessageEvent or BetaManagedAgentsUserInterruptEvent or BetaManagedAgentsUserToolConfirmationEvent or 30 more`
+- `beta_managed_agents_stream_session_events: BetaManagedAgentsUserMessageEvent or BetaManagedAgentsUserInterruptEvent or BetaManagedAgentsUserToolConfirmationEvent or 31 more`
 
   Server-sent event in the session stream.
 
@@ -44323,7 +50049,7 @@ Stream Events
 
       Unique identifier for this event.
 
-    - `error: BetaManagedAgentsUnknownError or BetaManagedAgentsModelOverloadedError or BetaManagedAgentsModelRateLimitedError or 4 more`
+    - `error: BetaManagedAgentsUnknownError or BetaManagedAgentsModelOverloadedError or BetaManagedAgentsModelRateLimitedError or 5 more`
 
       An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
@@ -44542,6 +50268,42 @@ Stream Events
         - `type: "billing_error"`
 
           - `"billing_error"`
+
+      - `beta_managed_agents_credential_host_unreachable_error: object { credential_id, message, retry_status, 2 more }`
+
+        An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+        - `credential_id: string`
+
+          ID of the affected credential.
+
+        - `message: string`
+
+          Human-readable error description.
+
+        - `retry_status: BetaManagedAgentsRetryStatusRetrying or BetaManagedAgentsRetryStatusExhausted or BetaManagedAgentsRetryStatusTerminal`
+
+          What the client should do next in response to this error.
+
+          - `beta_managed_agents_retry_status_retrying: object { type }`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+          - `beta_managed_agents_retry_status_exhausted: object { type }`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+          - `beta_managed_agents_retry_status_terminal: object { type }`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+        - `type: "credential_host_unreachable_error"`
+
+          - `"credential_host_unreachable_error"`
+
+        - `vault_id: string`
+
+          ID of the vault containing the affected credential.
 
     - `processed_at: string`
 
@@ -45117,11 +50879,15 @@ Stream Events
 
         Model identifier and configuration.
 
-        - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+        - `id: "claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more or string`
 
           The model that will power your agent.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-fable-5"`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
 
           - `"claude-opus-4-8"`
 
@@ -45195,7 +50961,7 @@ Stream Events
 
             Model identifier and configuration.
 
-            - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+            - `id: "claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more or string`
 
               The model that will power your agent.
 
@@ -45355,23 +51121,15 @@ Stream Events
 
               - `description: string`
 
-              - `input_schema: object { properties, required, type }`
+              - `input_schema: object { type, properties, required }`
 
                 JSON Schema for custom tool input parameters.
 
+                - `type: "object"`
+
                 - `properties: optional map[unknown]`
 
-                  JSON Schema properties defining the tool's input parameters.
-
                 - `required: optional array of string`
-
-                  List of required property names.
-
-                - `type: optional "object"`
-
-                  Must be 'object' for tool input schemas.
-
-                  - `"object"`
 
               - `name: string`
 
@@ -45426,6 +51184,34 @@ Stream Events
     - `title: optional string`
 
       The session's new title. Present only when the update changed it.
+
+  - `beta_managed_agents_system_message_event: object { id, content, type, processed_at }`
+
+    A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `content: array of BetaManagedAgentsSystemContentBlock`
+
+      System content blocks. Text-only.
+
+      - `text: string`
+
+        The text content.
+
+      - `type: "text"`
+
+        - `"text"`
+
+    - `type: "system.message"`
+
+      - `"system.message"`
+
+    - `processed_at: optional string`
+
+      A timestamp in RFC 3339 format
 
 ### Example
 
@@ -46471,6 +52257,56 @@ ant beta:sessions:events stream \
 
     - `"billing_error"`
 
+### Beta Managed Agents Credential Host Unreachable Error
+
+- `beta_managed_agents_credential_host_unreachable_error: object { credential_id, message, retry_status, 2 more }`
+
+  An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+  - `credential_id: string`
+
+    ID of the affected credential.
+
+  - `message: string`
+
+    Human-readable error description.
+
+  - `retry_status: BetaManagedAgentsRetryStatusRetrying or BetaManagedAgentsRetryStatusExhausted or BetaManagedAgentsRetryStatusTerminal`
+
+    What the client should do next in response to this error.
+
+    - `beta_managed_agents_retry_status_retrying: object { type }`
+
+      The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+      - `type: "retrying"`
+
+        - `"retrying"`
+
+    - `beta_managed_agents_retry_status_exhausted: object { type }`
+
+      This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+      - `type: "exhausted"`
+
+        - `"exhausted"`
+
+    - `beta_managed_agents_retry_status_terminal: object { type }`
+
+      The session encountered a terminal error and will transition to `terminated` state.
+
+      - `type: "terminal"`
+
+        - `"terminal"`
+
+  - `type: "credential_host_unreachable_error"`
+
+    - `"credential_host_unreachable_error"`
+
+  - `vault_id: string`
+
+    ID of the vault containing the affected credential.
+
 ### Beta Managed Agents Document Block
 
 - `beta_managed_agents_document_block: object { source, type, context, title }`
@@ -46553,7 +52389,7 @@ ant beta:sessions:events stream \
 
 ### Beta Managed Agents Event Params
 
-- `beta_managed_agents_event_params: BetaManagedAgentsUserMessageEventParams or BetaManagedAgentsUserInterruptEventParams or BetaManagedAgentsUserToolConfirmationEventParams or 3 more`
+- `beta_managed_agents_event_params: BetaManagedAgentsUserMessageEventParams or BetaManagedAgentsUserInterruptEventParams or BetaManagedAgentsUserToolConfirmationEventParams or 4 more`
 
   Union type for event parameters that can be sent to a session.
 
@@ -46894,6 +52730,26 @@ ant beta:sessions:events stream \
     - `is_error: optional boolean`
 
       Whether the tool execution resulted in an error.
+
+  - `beta_managed_agents_system_message_event_params: object { content, type }`
+
+    Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
+
+    - `content: array of BetaManagedAgentsSystemContentBlock`
+
+      System content blocks to append. Text-only.
+
+      - `text: string`
+
+        The text content.
+
+      - `type: "text"`
+
+        - `"text"`
+
+    - `type: "system.message"`
+
+      - `"system.message"`
 
 ### Beta Managed Agents File Document Source
 
@@ -47341,7 +53197,7 @@ ant beta:sessions:events stream \
 
   Events that were successfully sent to the session.
 
-  - `data: optional array of BetaManagedAgentsUserMessageEvent or BetaManagedAgentsUserInterruptEvent or BetaManagedAgentsUserToolConfirmationEvent or 3 more`
+  - `data: optional array of BetaManagedAgentsUserMessageEvent or BetaManagedAgentsUserInterruptEvent or BetaManagedAgentsUserToolConfirmationEvent or 4 more`
 
     Sent events
 
@@ -47747,6 +53603,34 @@ ant beta:sessions:events stream \
 
         Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
 
+    - `beta_managed_agents_system_message_event: object { id, content, type, processed_at }`
+
+      A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+      - `id: string`
+
+        Unique identifier for this event.
+
+      - `content: array of BetaManagedAgentsSystemContentBlock`
+
+        System content blocks. Text-only.
+
+        - `text: string`
+
+          The text content.
+
+        - `type: "text"`
+
+          - `"text"`
+
+      - `type: "system.message"`
+
+        - `"system.message"`
+
+      - `processed_at: optional string`
+
+        A timestamp in RFC 3339 format
+
 ### Beta Managed Agents Session Deleted Event
 
 - `beta_managed_agents_session_deleted_event: object { id, processed_at, type }`
@@ -47785,7 +53669,7 @@ ant beta:sessions:events stream \
 
     Unique identifier for this event.
 
-  - `error: BetaManagedAgentsUnknownError or BetaManagedAgentsModelOverloadedError or BetaManagedAgentsModelRateLimitedError or 4 more`
+  - `error: BetaManagedAgentsUnknownError or BetaManagedAgentsModelOverloadedError or BetaManagedAgentsModelRateLimitedError or 5 more`
 
     An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
@@ -48005,6 +53889,42 @@ ant beta:sessions:events stream \
 
         - `"billing_error"`
 
+    - `beta_managed_agents_credential_host_unreachable_error: object { credential_id, message, retry_status, 2 more }`
+
+      An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+      - `credential_id: string`
+
+        ID of the affected credential.
+
+      - `message: string`
+
+        Human-readable error description.
+
+      - `retry_status: BetaManagedAgentsRetryStatusRetrying or BetaManagedAgentsRetryStatusExhausted or BetaManagedAgentsRetryStatusTerminal`
+
+        What the client should do next in response to this error.
+
+        - `beta_managed_agents_retry_status_retrying: object { type }`
+
+          The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+        - `beta_managed_agents_retry_status_exhausted: object { type }`
+
+          This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+        - `beta_managed_agents_retry_status_terminal: object { type }`
+
+          The session encountered a terminal error and will transition to `terminated` state.
+
+      - `type: "credential_host_unreachable_error"`
+
+        - `"credential_host_unreachable_error"`
+
+      - `vault_id: string`
+
+        ID of the vault containing the affected credential.
+
   - `processed_at: string`
 
     A timestamp in RFC 3339 format
@@ -48015,7 +53935,7 @@ ant beta:sessions:events stream \
 
 ### Beta Managed Agents Session Event
 
-- `beta_managed_agents_session_event: BetaManagedAgentsUserMessageEvent or BetaManagedAgentsUserInterruptEvent or BetaManagedAgentsUserToolConfirmationEvent or 30 more`
+- `beta_managed_agents_session_event: BetaManagedAgentsUserMessageEvent or BetaManagedAgentsUserInterruptEvent or BetaManagedAgentsUserToolConfirmationEvent or 31 more`
 
   Union type for all event types in a session.
 
@@ -48659,7 +54579,7 @@ ant beta:sessions:events stream \
 
       Unique identifier for this event.
 
-    - `error: BetaManagedAgentsUnknownError or BetaManagedAgentsModelOverloadedError or BetaManagedAgentsModelRateLimitedError or 4 more`
+    - `error: BetaManagedAgentsUnknownError or BetaManagedAgentsModelOverloadedError or BetaManagedAgentsModelRateLimitedError or 5 more`
 
       An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
@@ -48878,6 +54798,42 @@ ant beta:sessions:events stream \
         - `type: "billing_error"`
 
           - `"billing_error"`
+
+      - `beta_managed_agents_credential_host_unreachable_error: object { credential_id, message, retry_status, 2 more }`
+
+        An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+        - `credential_id: string`
+
+          ID of the affected credential.
+
+        - `message: string`
+
+          Human-readable error description.
+
+        - `retry_status: BetaManagedAgentsRetryStatusRetrying or BetaManagedAgentsRetryStatusExhausted or BetaManagedAgentsRetryStatusTerminal`
+
+          What the client should do next in response to this error.
+
+          - `beta_managed_agents_retry_status_retrying: object { type }`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+          - `beta_managed_agents_retry_status_exhausted: object { type }`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+          - `beta_managed_agents_retry_status_terminal: object { type }`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+        - `type: "credential_host_unreachable_error"`
+
+          - `"credential_host_unreachable_error"`
+
+        - `vault_id: string`
+
+          ID of the vault containing the affected credential.
 
     - `processed_at: string`
 
@@ -49453,11 +55409,15 @@ ant beta:sessions:events stream \
 
         Model identifier and configuration.
 
-        - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+        - `id: "claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more or string`
 
           The model that will power your agent.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-fable-5"`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
 
           - `"claude-opus-4-8"`
 
@@ -49531,7 +55491,7 @@ ant beta:sessions:events stream \
 
             Model identifier and configuration.
 
-            - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+            - `id: "claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more or string`
 
               The model that will power your agent.
 
@@ -49691,23 +55651,15 @@ ant beta:sessions:events stream \
 
               - `description: string`
 
-              - `input_schema: object { properties, required, type }`
+              - `input_schema: object { type, properties, required }`
 
                 JSON Schema for custom tool input parameters.
 
+                - `type: "object"`
+
                 - `properties: optional map[unknown]`
 
-                  JSON Schema properties defining the tool's input parameters.
-
                 - `required: optional array of string`
-
-                  List of required property names.
-
-                - `type: optional "object"`
-
-                  Must be 'object' for tool input schemas.
-
-                  - `"object"`
 
               - `name: string`
 
@@ -49762,6 +55714,34 @@ ant beta:sessions:events stream \
     - `title: optional string`
 
       The session's new title. Present only when the update changed it.
+
+  - `beta_managed_agents_system_message_event: object { id, content, type, processed_at }`
+
+    A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `content: array of BetaManagedAgentsSystemContentBlock`
+
+      System content blocks. Text-only.
+
+      - `text: string`
+
+        The text content.
+
+      - `type: "text"`
+
+        - `"text"`
+
+    - `type: "system.message"`
+
+      - `"system.message"`
+
+    - `processed_at: optional string`
+
+      A timestamp in RFC 3339 format
 
 ### Beta Managed Agents Session Requires Action
 
@@ -50275,7 +56255,7 @@ ant beta:sessions:events stream \
 
 ### Beta Managed Agents Stream Session Events
 
-- `beta_managed_agents_stream_session_events: BetaManagedAgentsUserMessageEvent or BetaManagedAgentsUserInterruptEvent or BetaManagedAgentsUserToolConfirmationEvent or 30 more`
+- `beta_managed_agents_stream_session_events: BetaManagedAgentsUserMessageEvent or BetaManagedAgentsUserInterruptEvent or BetaManagedAgentsUserToolConfirmationEvent or 31 more`
 
   Server-sent event in the session stream.
 
@@ -50919,7 +56899,7 @@ ant beta:sessions:events stream \
 
       Unique identifier for this event.
 
-    - `error: BetaManagedAgentsUnknownError or BetaManagedAgentsModelOverloadedError or BetaManagedAgentsModelRateLimitedError or 4 more`
+    - `error: BetaManagedAgentsUnknownError or BetaManagedAgentsModelOverloadedError or BetaManagedAgentsModelRateLimitedError or 5 more`
 
       An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
@@ -51138,6 +57118,42 @@ ant beta:sessions:events stream \
         - `type: "billing_error"`
 
           - `"billing_error"`
+
+      - `beta_managed_agents_credential_host_unreachable_error: object { credential_id, message, retry_status, 2 more }`
+
+        An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+        - `credential_id: string`
+
+          ID of the affected credential.
+
+        - `message: string`
+
+          Human-readable error description.
+
+        - `retry_status: BetaManagedAgentsRetryStatusRetrying or BetaManagedAgentsRetryStatusExhausted or BetaManagedAgentsRetryStatusTerminal`
+
+          What the client should do next in response to this error.
+
+          - `beta_managed_agents_retry_status_retrying: object { type }`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+          - `beta_managed_agents_retry_status_exhausted: object { type }`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+          - `beta_managed_agents_retry_status_terminal: object { type }`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+        - `type: "credential_host_unreachable_error"`
+
+          - `"credential_host_unreachable_error"`
+
+        - `vault_id: string`
+
+          ID of the vault containing the affected credential.
 
     - `processed_at: string`
 
@@ -51713,11 +57729,15 @@ ant beta:sessions:events stream \
 
         Model identifier and configuration.
 
-        - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+        - `id: "claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more or string`
 
           The model that will power your agent.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-fable-5"`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
 
           - `"claude-opus-4-8"`
 
@@ -51791,7 +57811,7 @@ ant beta:sessions:events stream \
 
             Model identifier and configuration.
 
-            - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+            - `id: "claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more or string`
 
               The model that will power your agent.
 
@@ -51951,23 +57971,15 @@ ant beta:sessions:events stream \
 
               - `description: string`
 
-              - `input_schema: object { properties, required, type }`
+              - `input_schema: object { type, properties, required }`
 
                 JSON Schema for custom tool input parameters.
 
+                - `type: "object"`
+
                 - `properties: optional map[unknown]`
 
-                  JSON Schema properties defining the tool's input parameters.
-
                 - `required: optional array of string`
-
-                  List of required property names.
-
-                - `type: optional "object"`
-
-                  Must be 'object' for tool input schemas.
-
-                  - `"object"`
 
               - `name: string`
 
@@ -52022,6 +58034,56 @@ ant beta:sessions:events stream \
     - `title: optional string`
 
       The session's new title. Present only when the update changed it.
+
+  - `beta_managed_agents_system_message_event: object { id, content, type, processed_at }`
+
+    A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `content: array of BetaManagedAgentsSystemContentBlock`
+
+      System content blocks. Text-only.
+
+      - `text: string`
+
+        The text content.
+
+      - `type: "text"`
+
+        - `"text"`
+
+    - `type: "system.message"`
+
+      - `"system.message"`
+
+    - `processed_at: optional string`
+
+      A timestamp in RFC 3339 format
+
+### Beta Managed Agents System Message Event Params
+
+- `beta_managed_agents_system_message_event_params: object { content, type }`
+
+  Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
+
+  - `content: array of BetaManagedAgentsSystemContentBlock`
+
+    System content blocks to append. Text-only.
+
+    - `text: string`
+
+      The text content.
+
+    - `type: "text"`
+
+      - `"text"`
+
+  - `type: "system.message"`
+
+    - `"system.message"`
 
 ### Beta Managed Agents Text Block
 
@@ -54171,11 +60233,15 @@ List Session Threads
 
         Model identifier and configuration.
 
-        - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+        - `id: "claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more or string`
 
           The model that will power your agent.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-fable-5"`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
 
           - `"claude-opus-4-8"`
 
@@ -54375,23 +60441,15 @@ List Session Threads
 
           - `description: string`
 
-          - `input_schema: object { properties, required, type }`
+          - `input_schema: object { type, properties, required }`
 
             JSON Schema for custom tool input parameters.
 
+            - `type: "object"`
+
             - `properties: optional map[unknown]`
 
-              JSON Schema properties defining the tool's input parameters.
-
             - `required: optional array of string`
-
-              List of required property names.
-
-            - `type: optional "object"`
-
-              Must be 'object' for tool input schemas.
-
-              - `"object"`
 
           - `name: string`
 
@@ -54631,11 +60689,15 @@ Get Session Thread
 
       Model identifier and configuration.
 
-      - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+      - `id: "claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more or string`
 
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-fable-5"`
+
+          Next generation of intelligence for the hardest knowledge work and coding problems
 
         - `"claude-opus-4-8"`
 
@@ -54835,23 +60897,15 @@ Get Session Thread
 
         - `description: string`
 
-        - `input_schema: object { properties, required, type }`
+        - `input_schema: object { type, properties, required }`
 
           JSON Schema for custom tool input parameters.
 
+          - `type: "object"`
+
           - `properties: optional map[unknown]`
 
-            JSON Schema properties defining the tool's input parameters.
-
           - `required: optional array of string`
-
-            List of required property names.
-
-          - `type: optional "object"`
-
-            Must be 'object' for tool input schemas.
-
-            - `"object"`
 
         - `name: string`
 
@@ -55083,11 +61137,15 @@ Archive Session Thread
 
       Model identifier and configuration.
 
-      - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+      - `id: "claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more or string`
 
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-fable-5"`
+
+          Next generation of intelligence for the hardest knowledge work and coding problems
 
         - `"claude-opus-4-8"`
 
@@ -55287,23 +61345,15 @@ Archive Session Thread
 
         - `description: string`
 
-        - `input_schema: object { properties, required, type }`
+        - `input_schema: object { type, properties, required }`
 
           JSON Schema for custom tool input parameters.
 
+          - `type: "object"`
+
           - `properties: optional map[unknown]`
 
-            JSON Schema properties defining the tool's input parameters.
-
           - `required: optional array of string`
-
-            List of required property names.
-
-          - `type: optional "object"`
-
-            Must be 'object' for tool input schemas.
-
-            - `"object"`
 
         - `name: string`
 
@@ -55515,11 +61565,15 @@ ant beta:sessions:threads archive \
 
       Model identifier and configuration.
 
-      - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+      - `id: "claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more or string`
 
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-fable-5"`
+
+          Next generation of intelligence for the hardest knowledge work and coding problems
 
         - `"claude-opus-4-8"`
 
@@ -55719,23 +61773,15 @@ ant beta:sessions:threads archive \
 
         - `description: string`
 
-        - `input_schema: object { properties, required, type }`
+        - `input_schema: object { type, properties, required }`
 
           JSON Schema for custom tool input parameters.
 
+          - `type: "object"`
+
           - `properties: optional map[unknown]`
 
-            JSON Schema properties defining the tool's input parameters.
-
           - `required: optional array of string`
-
-            List of required property names.
-
-          - `type: optional "object"`
-
-            Must be 'object' for tool input schemas.
-
-            - `"object"`
 
         - `name: string`
 
@@ -55893,7 +61939,7 @@ ant beta:sessions:threads archive \
 
 ### Beta Managed Agents Stream Session Thread Events
 
-- `beta_managed_agents_stream_session_thread_events: BetaManagedAgentsUserMessageEvent or BetaManagedAgentsUserInterruptEvent or BetaManagedAgentsUserToolConfirmationEvent or 30 more`
+- `beta_managed_agents_stream_session_thread_events: BetaManagedAgentsUserMessageEvent or BetaManagedAgentsUserInterruptEvent or BetaManagedAgentsUserToolConfirmationEvent or 31 more`
 
   Server-sent event in a single thread's stream.
 
@@ -56537,7 +62583,7 @@ ant beta:sessions:threads archive \
 
       Unique identifier for this event.
 
-    - `error: BetaManagedAgentsUnknownError or BetaManagedAgentsModelOverloadedError or BetaManagedAgentsModelRateLimitedError or 4 more`
+    - `error: BetaManagedAgentsUnknownError or BetaManagedAgentsModelOverloadedError or BetaManagedAgentsModelRateLimitedError or 5 more`
 
       An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
@@ -56756,6 +62802,42 @@ ant beta:sessions:threads archive \
         - `type: "billing_error"`
 
           - `"billing_error"`
+
+      - `beta_managed_agents_credential_host_unreachable_error: object { credential_id, message, retry_status, 2 more }`
+
+        An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+        - `credential_id: string`
+
+          ID of the affected credential.
+
+        - `message: string`
+
+          Human-readable error description.
+
+        - `retry_status: BetaManagedAgentsRetryStatusRetrying or BetaManagedAgentsRetryStatusExhausted or BetaManagedAgentsRetryStatusTerminal`
+
+          What the client should do next in response to this error.
+
+          - `beta_managed_agents_retry_status_retrying: object { type }`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+          - `beta_managed_agents_retry_status_exhausted: object { type }`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+          - `beta_managed_agents_retry_status_terminal: object { type }`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+        - `type: "credential_host_unreachable_error"`
+
+          - `"credential_host_unreachable_error"`
+
+        - `vault_id: string`
+
+          ID of the vault containing the affected credential.
 
     - `processed_at: string`
 
@@ -57331,11 +63413,15 @@ ant beta:sessions:threads archive \
 
         Model identifier and configuration.
 
-        - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+        - `id: "claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more or string`
 
           The model that will power your agent.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-fable-5"`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
 
           - `"claude-opus-4-8"`
 
@@ -57409,7 +63495,7 @@ ant beta:sessions:threads archive \
 
             Model identifier and configuration.
 
-            - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+            - `id: "claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more or string`
 
               The model that will power your agent.
 
@@ -57569,23 +63655,15 @@ ant beta:sessions:threads archive \
 
               - `description: string`
 
-              - `input_schema: object { properties, required, type }`
+              - `input_schema: object { type, properties, required }`
 
                 JSON Schema for custom tool input parameters.
 
+                - `type: "object"`
+
                 - `properties: optional map[unknown]`
 
-                  JSON Schema properties defining the tool's input parameters.
-
                 - `required: optional array of string`
-
-                  List of required property names.
-
-                - `type: optional "object"`
-
-                  Must be 'object' for tool input schemas.
-
-                  - `"object"`
 
               - `name: string`
 
@@ -57640,6 +63718,34 @@ ant beta:sessions:threads archive \
     - `title: optional string`
 
       The session's new title. Present only when the update changed it.
+
+  - `beta_managed_agents_system_message_event: object { id, content, type, processed_at }`
+
+    A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `content: array of BetaManagedAgentsSystemContentBlock`
+
+      System content blocks. Text-only.
+
+      - `text: string`
+
+        The text content.
+
+      - `type: "text"`
+
+        - `"text"`
+
+    - `type: "system.message"`
+
+      - `"system.message"`
+
+    - `processed_at: optional string`
+
+      A timestamp in RFC 3339 format
 
 # Events
 
@@ -58323,7 +64429,7 @@ List Session Thread Events
 
         Unique identifier for this event.
 
-      - `error: BetaManagedAgentsUnknownError or BetaManagedAgentsModelOverloadedError or BetaManagedAgentsModelRateLimitedError or 4 more`
+      - `error: BetaManagedAgentsUnknownError or BetaManagedAgentsModelOverloadedError or BetaManagedAgentsModelRateLimitedError or 5 more`
 
         An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
@@ -58542,6 +64648,42 @@ List Session Thread Events
           - `type: "billing_error"`
 
             - `"billing_error"`
+
+        - `beta_managed_agents_credential_host_unreachable_error: object { credential_id, message, retry_status, 2 more }`
+
+          An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+          - `credential_id: string`
+
+            ID of the affected credential.
+
+          - `message: string`
+
+            Human-readable error description.
+
+          - `retry_status: BetaManagedAgentsRetryStatusRetrying or BetaManagedAgentsRetryStatusExhausted or BetaManagedAgentsRetryStatusTerminal`
+
+            What the client should do next in response to this error.
+
+            - `beta_managed_agents_retry_status_retrying: object { type }`
+
+              The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+            - `beta_managed_agents_retry_status_exhausted: object { type }`
+
+              This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+            - `beta_managed_agents_retry_status_terminal: object { type }`
+
+              The session encountered a terminal error and will transition to `terminated` state.
+
+          - `type: "credential_host_unreachable_error"`
+
+            - `"credential_host_unreachable_error"`
+
+          - `vault_id: string`
+
+            ID of the vault containing the affected credential.
 
       - `processed_at: string`
 
@@ -59117,11 +65259,15 @@ List Session Thread Events
 
           Model identifier and configuration.
 
-          - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+          - `id: "claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more or string`
 
             The model that will power your agent.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `"claude-fable-5"`
+
+              Next generation of intelligence for the hardest knowledge work and coding problems
 
             - `"claude-opus-4-8"`
 
@@ -59195,7 +65341,7 @@ List Session Thread Events
 
               Model identifier and configuration.
 
-              - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+              - `id: "claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more or string`
 
                 The model that will power your agent.
 
@@ -59355,23 +65501,15 @@ List Session Thread Events
 
                 - `description: string`
 
-                - `input_schema: object { properties, required, type }`
+                - `input_schema: object { type, properties, required }`
 
                   JSON Schema for custom tool input parameters.
 
+                  - `type: "object"`
+
                   - `properties: optional map[unknown]`
 
-                    JSON Schema properties defining the tool's input parameters.
-
                   - `required: optional array of string`
-
-                    List of required property names.
-
-                  - `type: optional "object"`
-
-                    Must be 'object' for tool input schemas.
-
-                    - `"object"`
 
                 - `name: string`
 
@@ -59426,6 +65564,34 @@ List Session Thread Events
       - `title: optional string`
 
         The session's new title. Present only when the update changed it.
+
+    - `beta_managed_agents_system_message_event: object { id, content, type, processed_at }`
+
+      A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+      - `id: string`
+
+        Unique identifier for this event.
+
+      - `content: array of BetaManagedAgentsSystemContentBlock`
+
+        System content blocks. Text-only.
+
+        - `text: string`
+
+          The text content.
+
+        - `type: "text"`
+
+          - `"text"`
+
+      - `type: "system.message"`
+
+        - `"system.message"`
+
+      - `processed_at: optional string`
+
+        A timestamp in RFC 3339 format
 
   - `next_page: optional string`
 
@@ -59485,7 +65651,7 @@ Stream Session Thread Events
 
 ### Returns
 
-- `beta_managed_agents_stream_session_thread_events: BetaManagedAgentsUserMessageEvent or BetaManagedAgentsUserInterruptEvent or BetaManagedAgentsUserToolConfirmationEvent or 30 more`
+- `beta_managed_agents_stream_session_thread_events: BetaManagedAgentsUserMessageEvent or BetaManagedAgentsUserInterruptEvent or BetaManagedAgentsUserToolConfirmationEvent or 31 more`
 
   Server-sent event in a single thread's stream.
 
@@ -60129,7 +66295,7 @@ Stream Session Thread Events
 
       Unique identifier for this event.
 
-    - `error: BetaManagedAgentsUnknownError or BetaManagedAgentsModelOverloadedError or BetaManagedAgentsModelRateLimitedError or 4 more`
+    - `error: BetaManagedAgentsUnknownError or BetaManagedAgentsModelOverloadedError or BetaManagedAgentsModelRateLimitedError or 5 more`
 
       An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
@@ -60348,6 +66514,42 @@ Stream Session Thread Events
         - `type: "billing_error"`
 
           - `"billing_error"`
+
+      - `beta_managed_agents_credential_host_unreachable_error: object { credential_id, message, retry_status, 2 more }`
+
+        An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+        - `credential_id: string`
+
+          ID of the affected credential.
+
+        - `message: string`
+
+          Human-readable error description.
+
+        - `retry_status: BetaManagedAgentsRetryStatusRetrying or BetaManagedAgentsRetryStatusExhausted or BetaManagedAgentsRetryStatusTerminal`
+
+          What the client should do next in response to this error.
+
+          - `beta_managed_agents_retry_status_retrying: object { type }`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+          - `beta_managed_agents_retry_status_exhausted: object { type }`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+          - `beta_managed_agents_retry_status_terminal: object { type }`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+        - `type: "credential_host_unreachable_error"`
+
+          - `"credential_host_unreachable_error"`
+
+        - `vault_id: string`
+
+          ID of the vault containing the affected credential.
 
     - `processed_at: string`
 
@@ -60923,11 +67125,15 @@ Stream Session Thread Events
 
         Model identifier and configuration.
 
-        - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+        - `id: "claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more or string`
 
           The model that will power your agent.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-fable-5"`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
 
           - `"claude-opus-4-8"`
 
@@ -61001,7 +67207,7 @@ Stream Session Thread Events
 
             Model identifier and configuration.
 
-            - `id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string`
+            - `id: "claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more or string`
 
               The model that will power your agent.
 
@@ -61161,23 +67367,15 @@ Stream Session Thread Events
 
               - `description: string`
 
-              - `input_schema: object { properties, required, type }`
+              - `input_schema: object { type, properties, required }`
 
                 JSON Schema for custom tool input parameters.
 
+                - `type: "object"`
+
                 - `properties: optional map[unknown]`
 
-                  JSON Schema properties defining the tool's input parameters.
-
                 - `required: optional array of string`
-
-                  List of required property names.
-
-                - `type: optional "object"`
-
-                  Must be 'object' for tool input schemas.
-
-                  - `"object"`
 
               - `name: string`
 
@@ -61233,6 +67431,34 @@ Stream Session Thread Events
 
       The session's new title. Present only when the update changed it.
 
+  - `beta_managed_agents_system_message_event: object { id, content, type, processed_at }`
+
+    A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+    - `id: string`
+
+      Unique identifier for this event.
+
+    - `content: array of BetaManagedAgentsSystemContentBlock`
+
+      System content blocks. Text-only.
+
+      - `text: string`
+
+        The text content.
+
+      - `type: "text"`
+
+        - `"text"`
+
+    - `type: "system.message"`
+
+      - `"system.message"`
+
+    - `processed_at: optional string`
+
+      A timestamp in RFC 3339 format
+
 ### Example
 
 ```cli
@@ -61257,6 +67483,7973 @@ ant beta:sessions:threads:events stream \
   "processed_at": "2026-03-15T10:00:00Z"
 }
 ```
+
+# Deployments
+
+## Create Deployment
+
+`$ ant beta:deployments create`
+
+**post** `/v1/deployments`
+
+Create Deployment
+
+### Parameters
+
+- `--agent: string or BetaManagedAgentsAgentParams`
+
+  Body param: Agent to deploy. Accepts the `agent` ID string, which pins the latest version, or an `agent` object with both id and version specified. The agent must exist and not be archived.
+
+- `--environment-id: string`
+
+  Body param: ID of the `environment` defining the container configuration for sessions created from this deployment.
+
+- `--initial-event: array of BetaManagedAgentsDeploymentInitialEventParams`
+
+  Body param: Events to send to each session immediately after creation. At least 1, maximum 50.
+
+- `--name: string`
+
+  Body param: Human-readable name for the deployment.
+
+- `--description: optional string`
+
+  Body param: Description of what the deployment does.
+
+- `--metadata: optional map[string]`
+
+  Body param: Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
+- `--resource: optional array of BetaManagedAgentsGitHubRepositoryResourceParams or BetaManagedAgentsFileResourceParams or BetaManagedAgentsMemoryStoreResourceParam`
+
+  Body param: Resources (e.g. repositories, files) to mount into each session's container. Maximum 500.
+
+- `--schedule: optional object { expression, timezone, type }`
+
+  Body param: 5-field POSIX cron schedule. Literal wall-clock matching in the configured timezone.
+
+- `--vault-id: optional array of string`
+
+  Body param: Vault IDs for stored credentials the agent can use during sessions created from this deployment. Maximum 50.
+
+- `--beta: optional array of AnthropicBeta`
+
+  Header param: Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `beta_managed_agents_deployment: object { id, agent, archived_at, 13 more }`
+
+  A deployment is a configured instance of an agent — it binds the agent to everything needed to run it autonomously: an environment, credentials, initial events, and an optional schedule.
+
+  - `id: string`
+
+    Unique identifier for this deployment.
+
+  - `agent: object { id, type, version }`
+
+    A resolved agent reference with a concrete version.
+
+    - `id: string`
+
+    - `type: "agent"`
+
+      - `"agent"`
+
+    - `version: number`
+
+  - `archived_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `created_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `description: string`
+
+    Description of what the deployment does.
+
+  - `environment_id: string`
+
+    ID of the `environment` where sessions run.
+
+  - `initial_events: array of BetaManagedAgentsDeploymentInitialEvent`
+
+    Events sent to each session immediately after creation.
+
+    - `beta_managed_agents_deployment_user_message_event: object { content, type }`
+
+      A user message sent to the session.
+
+      - `content: array of BetaManagedAgentsTextBlock or BetaManagedAgentsImageBlock or BetaManagedAgentsDocumentBlock`
+
+        Array of content blocks for the user message.
+
+        - `beta_managed_agents_text_block: object { text, type }`
+
+          Regular text content.
+
+          - `text: string`
+
+            The text content.
+
+          - `type: "text"`
+
+            - `"text"`
+
+        - `beta_managed_agents_image_block: object { source, type }`
+
+          Image content specified directly as base64 data or as a reference via a URL.
+
+          - `source: BetaManagedAgentsBase64ImageSource or BetaManagedAgentsURLImageSource or BetaManagedAgentsFileImageSource`
+
+            Union type for image source variants.
+
+            - `beta_managed_agents_base64_image_source: object { data, media_type, type }`
+
+              Base64-encoded image data.
+
+              - `data: string`
+
+                Base64-encoded image data.
+
+              - `media_type: string`
+
+                MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+              - `type: "base64"`
+
+                - `"base64"`
+
+            - `beta_managed_agents_url_image_source: object { type, url }`
+
+              Image referenced by URL.
+
+              - `type: "url"`
+
+                - `"url"`
+
+              - `url: string`
+
+                URL of the image to fetch.
+
+            - `beta_managed_agents_file_image_source: object { file_id, type }`
+
+              Image referenced by file ID.
+
+              - `file_id: string`
+
+                ID of a previously uploaded file.
+
+              - `type: "file"`
+
+                - `"file"`
+
+          - `type: "image"`
+
+            - `"image"`
+
+        - `beta_managed_agents_document_block: object { source, type, context, title }`
+
+          Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+          - `source: BetaManagedAgentsBase64DocumentSource or BetaManagedAgentsPlainTextDocumentSource or BetaManagedAgentsURLDocumentSource or BetaManagedAgentsFileDocumentSource`
+
+            Union type for document source variants.
+
+            - `beta_managed_agents_base64_document_source: object { data, media_type, type }`
+
+              Base64-encoded document data.
+
+              - `data: string`
+
+                Base64-encoded document data.
+
+              - `media_type: string`
+
+                MIME type of the document (e.g., "application/pdf").
+
+              - `type: "base64"`
+
+                - `"base64"`
+
+            - `beta_managed_agents_plain_text_document_source: object { data, media_type, type }`
+
+              Plain text document content.
+
+              - `data: string`
+
+                The plain text content.
+
+              - `media_type: "text/plain"`
+
+                MIME type of the text content. Must be "text/plain".
+
+                - `"text/plain"`
+
+              - `type: "text"`
+
+                - `"text"`
+
+            - `beta_managed_agents_url_document_source: object { type, url }`
+
+              Document referenced by URL.
+
+              - `type: "url"`
+
+                - `"url"`
+
+              - `url: string`
+
+                URL of the document to fetch.
+
+            - `beta_managed_agents_file_document_source: object { file_id, type }`
+
+              Document referenced by file ID.
+
+              - `file_id: string`
+
+                ID of a previously uploaded file.
+
+              - `type: "file"`
+
+                - `"file"`
+
+          - `type: "document"`
+
+            - `"document"`
+
+          - `context: optional string`
+
+            Additional context about the document for the model.
+
+          - `title: optional string`
+
+            The title of the document.
+
+      - `type: "user.message"`
+
+        - `"user.message"`
+
+    - `beta_managed_agents_deployment_user_define_outcome_event: object { description, rubric, type, max_iterations }`
+
+      An outcome the agent should work toward. The agent begins work on receipt.
+
+      - `description: string`
+
+        What the agent should produce. This is the task specification.
+
+      - `rubric: BetaManagedAgentsFileRubric or BetaManagedAgentsTextRubric`
+
+        Rubric for grading the quality of an outcome.
+
+        - `beta_managed_agents_file_rubric: object { file_id, type }`
+
+          Rubric referenced by a file uploaded via the Files API.
+
+          - `file_id: string`
+
+            ID of the rubric file.
+
+          - `type: "file"`
+
+            - `"file"`
+
+        - `beta_managed_agents_text_rubric: object { content, type }`
+
+          Rubric content provided inline as text.
+
+          - `content: string`
+
+            Rubric content. Plain text or markdown — the grader treats it as freeform text.
+
+          - `type: "text"`
+
+            - `"text"`
+
+      - `type: "user.define_outcome"`
+
+        - `"user.define_outcome"`
+
+      - `max_iterations: optional number`
+
+        Eval→revision cycles before giving up. Default 3, max 20.
+
+    - `beta_managed_agents_deployment_system_message_event: object { content, type }`
+
+      Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
+
+      - `content: array of BetaManagedAgentsSystemContentBlock`
+
+        System content blocks to append. Text-only.
+
+        - `text: string`
+
+          The text content.
+
+        - `type: "text"`
+
+          - `"text"`
+
+      - `type: "system.message"`
+
+        - `"system.message"`
+
+  - `metadata: map[string]`
+
+    Arbitrary key-value metadata. Maximum 16 pairs.
+
+  - `name: string`
+
+    Human-readable name.
+
+  - `paused_reason: BetaManagedAgentsManualDeploymentPausedReason or BetaManagedAgentsErrorDeploymentPausedReason`
+
+    Why a deployment is paused. Non-null exactly when `status` is `paused`.
+
+    - `beta_managed_agents_manual_deployment_paused_reason: object { type }`
+
+      The caller invoked the pause endpoint on the deployment.
+
+      - `type: "manual"`
+
+        - `"manual"`
+
+    - `beta_managed_agents_error_deployment_paused_reason: object { error, type }`
+
+      A scheduled fire recorded a failed run whose error auto-pauses the deployment.
+
+      - `error: BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError or BetaManagedAgentsAgentArchivedDeploymentPausedReasonError or BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError or 11 more`
+
+        The error that triggered an auto-pause. Matches the failed run's `error.type`.
+
+        - `beta_managed_agents_environment_archived_deployment_paused_reason_error: object { type }`
+
+          The deployment's environment was archived.
+
+          - `type: "environment_archived_error"`
+
+            - `"environment_archived_error"`
+
+        - `beta_managed_agents_agent_archived_deployment_paused_reason_error: object { type }`
+
+          The deployment's agent was archived.
+
+          - `type: "agent_archived_error"`
+
+            - `"agent_archived_error"`
+
+        - `beta_managed_agents_environment_not_found_deployment_paused_reason_error: object { type }`
+
+          The deployment's environment no longer exists.
+
+          - `type: "environment_not_found_error"`
+
+            - `"environment_not_found_error"`
+
+        - `beta_managed_agents_vault_not_found_deployment_paused_reason_error: object { type }`
+
+          A vault referenced by the deployment no longer exists.
+
+          - `type: "vault_not_found_error"`
+
+            - `"vault_not_found_error"`
+
+        - `beta_managed_agents_file_not_found_deployment_paused_reason_error: object { type }`
+
+          A file resource referenced by the deployment no longer exists.
+
+          - `type: "file_not_found_error"`
+
+            - `"file_not_found_error"`
+
+        - `beta_managed_agents_session_resource_not_found_deployment_paused_reason_error: object { type }`
+
+          A referenced resource no longer exists and its kind was not reported.
+
+          - `type: "session_resource_not_found_error"`
+
+            - `"session_resource_not_found_error"`
+
+        - `beta_managed_agents_workspace_archived_deployment_paused_reason_error: object { type }`
+
+          The deployment's workspace was archived.
+
+          - `type: "workspace_archived_error"`
+
+            - `"workspace_archived_error"`
+
+        - `beta_managed_agents_organization_disabled_deployment_paused_reason_error: object { type }`
+
+          The deployment's organization is disabled.
+
+          - `type: "organization_disabled_error"`
+
+            - `"organization_disabled_error"`
+
+        - `beta_managed_agents_memory_store_archived_deployment_paused_reason_error: object { type }`
+
+          A memory store referenced by the deployment is archived.
+
+          - `type: "memory_store_archived_error"`
+
+            - `"memory_store_archived_error"`
+
+        - `beta_managed_agents_skill_not_found_deployment_paused_reason_error: object { type }`
+
+          A skill referenced by the deployment's agent no longer exists.
+
+          - `type: "skill_not_found_error"`
+
+            - `"skill_not_found_error"`
+
+        - `beta_managed_agents_vault_archived_deployment_paused_reason_error: object { type }`
+
+          A vault referenced by the deployment is archived.
+
+          - `type: "vault_archived_error"`
+
+            - `"vault_archived_error"`
+
+        - `beta_managed_agents_unknown_deployment_paused_reason_error: object { type }`
+
+          An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
+
+          - `type: "unknown_error"`
+
+            - `"unknown_error"`
+
+        - `beta_managed_agents_self_hosted_resources_unsupported_deployment_paused_reason_error: object { type }`
+
+          The deployment configures resources, but its environment is self-hosted and cannot mount them.
+
+          - `type: "self_hosted_resources_unsupported_error"`
+
+            - `"self_hosted_resources_unsupported_error"`
+
+        - `beta_managed_agents_mcp_egress_blocked_deployment_paused_reason_error: object { type }`
+
+          An MCP server host used by the deployment's agent is blocked by the environment's network policy.
+
+          - `type: "mcp_egress_blocked_error"`
+
+            - `"mcp_egress_blocked_error"`
+
+      - `type: "error"`
+
+        - `"error"`
+
+  - `resources: array of BetaManagedAgentsSessionResourceConfig`
+
+    Resources attached to sessions created from this deployment. Echoes the input minus write-only credentials.
+
+    - `beta_managed_agents_github_repository_resource_config: object { type, url, checkout, mount_path }`
+
+      A GitHub repository mounted into each session's container. The authorization token is write-only and never returned.
+
+      - `type: "github_repository"`
+
+        - `"github_repository"`
+
+      - `url: string`
+
+        Github URL of the repository
+
+      - `checkout: optional BetaManagedAgentsBranchCheckout or BetaManagedAgentsCommitCheckout`
+
+        Branch or commit to check out. Defaults to the repository's default branch.
+
+        - `beta_managed_agents_branch_checkout: object { name, type }`
+
+          - `name: string`
+
+            Branch name to check out.
+
+          - `type: "branch"`
+
+            - `"branch"`
+
+        - `beta_managed_agents_commit_checkout: object { sha, type }`
+
+          - `sha: string`
+
+            Full commit SHA to check out.
+
+          - `type: "commit"`
+
+            - `"commit"`
+
+      - `mount_path: optional string`
+
+        Mount path in the container. Defaults to `/workspace/<repo-name>`.
+
+    - `beta_managed_agents_file_resource_config: object { file_id, type, mount_path }`
+
+      A file mounted into each session's container.
+
+      - `file_id: string`
+
+        ID of a previously uploaded file.
+
+      - `type: "file"`
+
+        - `"file"`
+
+      - `mount_path: optional string`
+
+        Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
+
+    - `beta_managed_agents_memory_store_resource_config: object { memory_store_id, type, access, instructions }`
+
+      A memory store attached to each session created from this deployment.
+
+      - `memory_store_id: string`
+
+        The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+      - `type: "memory_store"`
+
+        - `"memory_store"`
+
+      - `access: optional "read_write" or "read_only"`
+
+        Access mode for an attached memory store.
+
+        - `"read_write"`
+
+        - `"read_only"`
+
+      - `instructions: optional string`
+
+        Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+  - `schedule: object { expression, timezone, type, 2 more }`
+
+    5-field POSIX cron schedule with computed runtime timestamps.
+
+    - `expression: string`
+
+      5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 * * 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
+
+    - `timezone: string`
+
+      IANA timezone identifier (e.g., "America/Los_Angeles", "UTC").
+
+    - `type: "cron"`
+
+      - `"cron"`
+
+    - `last_run_at: optional string`
+
+      A timestamp in RFC 3339 format
+
+    - `upcoming_runs_at: optional array of string`
+
+      Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused deployments (reflects what the schedule would do if unpaused); empty once the deployment is archived (`archived_at` set). Each fire is offset by a small per-schedule jitter, so a run will actually start at or shortly after its listed time.
+
+  - `status: "active" or "paused"`
+
+    Lifecycle status of a deployment.
+
+    - `"active"`
+
+    - `"paused"`
+
+  - `type: "deployment"`
+
+    - `"deployment"`
+
+  - `updated_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `vault_ids: array of string`
+
+    Vault IDs supplying stored credentials for sessions created from this deployment.
+
+### Example
+
+```cli
+ant beta:deployments create \
+  --api-key my-anthropic-api-key \
+  --agent string \
+  --environment-id x \
+  --initial-event "{content: [{text: 'Where is my order #1234?', type: text}], type: user.message}" \
+  --name x
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "agent": {
+    "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+    "type": "agent",
+    "version": 1
+  },
+  "archived_at": "2019-12-27T18:11:19.117Z",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "description": "description",
+  "environment_id": "environment_id",
+  "initial_events": [
+    {
+      "content": [
+        {
+          "text": "Where is my order #1234?",
+          "type": "text"
+        }
+      ],
+      "type": "user.message"
+    }
+  ],
+  "metadata": {
+    "foo": "string"
+  },
+  "name": "name",
+  "paused_reason": {
+    "type": "manual"
+  },
+  "resources": [
+    {
+      "type": "github_repository",
+      "url": "url",
+      "checkout": {
+        "name": "main",
+        "type": "branch"
+      },
+      "mount_path": "mount_path"
+    }
+  ],
+  "schedule": {
+    "expression": "x",
+    "timezone": "x",
+    "type": "cron",
+    "last_run_at": "2019-12-27T18:11:19.117Z",
+    "upcoming_runs_at": [
+      "2019-12-27T18:11:19.117Z"
+    ]
+  },
+  "status": "active",
+  "type": "deployment",
+  "updated_at": "2019-12-27T18:11:19.117Z",
+  "vault_ids": [
+    "string"
+  ]
+}
+```
+
+## List Deployments
+
+`$ ant beta:deployments list`
+
+**get** `/v1/deployments`
+
+List Deployments
+
+### Parameters
+
+- `--agent-id: optional string`
+
+  Query param: Filter by agent ID.
+
+- `--created-at-gte: optional string`
+
+  Query param: Return deployments created at or after this time (inclusive).
+
+- `--created-at-lte: optional string`
+
+  Query param: Return deployments created at or before this time (inclusive).
+
+- `--include-archived: optional boolean`
+
+  Query param: When true, includes archived deployments. Default: false (exclude archived).
+
+- `--limit: optional number`
+
+  Query param: Maximum results per page. Default 20, maximum 100.
+
+- `--page: optional string`
+
+  Query param: Opaque pagination cursor.
+
+- `--status: optional "active" or "paused"`
+
+  Query param: Filter by status: active or paused. Omit for both. To include archived deployments, use include_archived instead; the two cannot be combined.
+
+- `--beta: optional array of AnthropicBeta`
+
+  Header param: Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `BetaManagedAgentsListDeploymentsData: object { data, next_page }`
+
+  Paginated list of deployments.
+
+  - `data: array of BetaManagedAgentsDeployment`
+
+    List of deployments.
+
+    - `id: string`
+
+      Unique identifier for this deployment.
+
+    - `agent: object { id, type, version }`
+
+      A resolved agent reference with a concrete version.
+
+      - `id: string`
+
+      - `type: "agent"`
+
+        - `"agent"`
+
+      - `version: number`
+
+    - `archived_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `created_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `description: string`
+
+      Description of what the deployment does.
+
+    - `environment_id: string`
+
+      ID of the `environment` where sessions run.
+
+    - `initial_events: array of BetaManagedAgentsDeploymentInitialEvent`
+
+      Events sent to each session immediately after creation.
+
+      - `beta_managed_agents_deployment_user_message_event: object { content, type }`
+
+        A user message sent to the session.
+
+        - `content: array of BetaManagedAgentsTextBlock or BetaManagedAgentsImageBlock or BetaManagedAgentsDocumentBlock`
+
+          Array of content blocks for the user message.
+
+          - `beta_managed_agents_text_block: object { text, type }`
+
+            Regular text content.
+
+            - `text: string`
+
+              The text content.
+
+            - `type: "text"`
+
+              - `"text"`
+
+          - `beta_managed_agents_image_block: object { source, type }`
+
+            Image content specified directly as base64 data or as a reference via a URL.
+
+            - `source: BetaManagedAgentsBase64ImageSource or BetaManagedAgentsURLImageSource or BetaManagedAgentsFileImageSource`
+
+              Union type for image source variants.
+
+              - `beta_managed_agents_base64_image_source: object { data, media_type, type }`
+
+                Base64-encoded image data.
+
+                - `data: string`
+
+                  Base64-encoded image data.
+
+                - `media_type: string`
+
+                  MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+                - `type: "base64"`
+
+                  - `"base64"`
+
+              - `beta_managed_agents_url_image_source: object { type, url }`
+
+                Image referenced by URL.
+
+                - `type: "url"`
+
+                  - `"url"`
+
+                - `url: string`
+
+                  URL of the image to fetch.
+
+              - `beta_managed_agents_file_image_source: object { file_id, type }`
+
+                Image referenced by file ID.
+
+                - `file_id: string`
+
+                  ID of a previously uploaded file.
+
+                - `type: "file"`
+
+                  - `"file"`
+
+            - `type: "image"`
+
+              - `"image"`
+
+          - `beta_managed_agents_document_block: object { source, type, context, title }`
+
+            Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+            - `source: BetaManagedAgentsBase64DocumentSource or BetaManagedAgentsPlainTextDocumentSource or BetaManagedAgentsURLDocumentSource or BetaManagedAgentsFileDocumentSource`
+
+              Union type for document source variants.
+
+              - `beta_managed_agents_base64_document_source: object { data, media_type, type }`
+
+                Base64-encoded document data.
+
+                - `data: string`
+
+                  Base64-encoded document data.
+
+                - `media_type: string`
+
+                  MIME type of the document (e.g., "application/pdf").
+
+                - `type: "base64"`
+
+                  - `"base64"`
+
+              - `beta_managed_agents_plain_text_document_source: object { data, media_type, type }`
+
+                Plain text document content.
+
+                - `data: string`
+
+                  The plain text content.
+
+                - `media_type: "text/plain"`
+
+                  MIME type of the text content. Must be "text/plain".
+
+                  - `"text/plain"`
+
+                - `type: "text"`
+
+                  - `"text"`
+
+              - `beta_managed_agents_url_document_source: object { type, url }`
+
+                Document referenced by URL.
+
+                - `type: "url"`
+
+                  - `"url"`
+
+                - `url: string`
+
+                  URL of the document to fetch.
+
+              - `beta_managed_agents_file_document_source: object { file_id, type }`
+
+                Document referenced by file ID.
+
+                - `file_id: string`
+
+                  ID of a previously uploaded file.
+
+                - `type: "file"`
+
+                  - `"file"`
+
+            - `type: "document"`
+
+              - `"document"`
+
+            - `context: optional string`
+
+              Additional context about the document for the model.
+
+            - `title: optional string`
+
+              The title of the document.
+
+        - `type: "user.message"`
+
+          - `"user.message"`
+
+      - `beta_managed_agents_deployment_user_define_outcome_event: object { description, rubric, type, max_iterations }`
+
+        An outcome the agent should work toward. The agent begins work on receipt.
+
+        - `description: string`
+
+          What the agent should produce. This is the task specification.
+
+        - `rubric: BetaManagedAgentsFileRubric or BetaManagedAgentsTextRubric`
+
+          Rubric for grading the quality of an outcome.
+
+          - `beta_managed_agents_file_rubric: object { file_id, type }`
+
+            Rubric referenced by a file uploaded via the Files API.
+
+            - `file_id: string`
+
+              ID of the rubric file.
+
+            - `type: "file"`
+
+              - `"file"`
+
+          - `beta_managed_agents_text_rubric: object { content, type }`
+
+            Rubric content provided inline as text.
+
+            - `content: string`
+
+              Rubric content. Plain text or markdown — the grader treats it as freeform text.
+
+            - `type: "text"`
+
+              - `"text"`
+
+        - `type: "user.define_outcome"`
+
+          - `"user.define_outcome"`
+
+        - `max_iterations: optional number`
+
+          Eval→revision cycles before giving up. Default 3, max 20.
+
+      - `beta_managed_agents_deployment_system_message_event: object { content, type }`
+
+        Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
+
+        - `content: array of BetaManagedAgentsSystemContentBlock`
+
+          System content blocks to append. Text-only.
+
+          - `text: string`
+
+            The text content.
+
+          - `type: "text"`
+
+            - `"text"`
+
+        - `type: "system.message"`
+
+          - `"system.message"`
+
+    - `metadata: map[string]`
+
+      Arbitrary key-value metadata. Maximum 16 pairs.
+
+    - `name: string`
+
+      Human-readable name.
+
+    - `paused_reason: BetaManagedAgentsManualDeploymentPausedReason or BetaManagedAgentsErrorDeploymentPausedReason`
+
+      Why a deployment is paused. Non-null exactly when `status` is `paused`.
+
+      - `beta_managed_agents_manual_deployment_paused_reason: object { type }`
+
+        The caller invoked the pause endpoint on the deployment.
+
+        - `type: "manual"`
+
+          - `"manual"`
+
+      - `beta_managed_agents_error_deployment_paused_reason: object { error, type }`
+
+        A scheduled fire recorded a failed run whose error auto-pauses the deployment.
+
+        - `error: BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError or BetaManagedAgentsAgentArchivedDeploymentPausedReasonError or BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError or 11 more`
+
+          The error that triggered an auto-pause. Matches the failed run's `error.type`.
+
+          - `beta_managed_agents_environment_archived_deployment_paused_reason_error: object { type }`
+
+            The deployment's environment was archived.
+
+            - `type: "environment_archived_error"`
+
+              - `"environment_archived_error"`
+
+          - `beta_managed_agents_agent_archived_deployment_paused_reason_error: object { type }`
+
+            The deployment's agent was archived.
+
+            - `type: "agent_archived_error"`
+
+              - `"agent_archived_error"`
+
+          - `beta_managed_agents_environment_not_found_deployment_paused_reason_error: object { type }`
+
+            The deployment's environment no longer exists.
+
+            - `type: "environment_not_found_error"`
+
+              - `"environment_not_found_error"`
+
+          - `beta_managed_agents_vault_not_found_deployment_paused_reason_error: object { type }`
+
+            A vault referenced by the deployment no longer exists.
+
+            - `type: "vault_not_found_error"`
+
+              - `"vault_not_found_error"`
+
+          - `beta_managed_agents_file_not_found_deployment_paused_reason_error: object { type }`
+
+            A file resource referenced by the deployment no longer exists.
+
+            - `type: "file_not_found_error"`
+
+              - `"file_not_found_error"`
+
+          - `beta_managed_agents_session_resource_not_found_deployment_paused_reason_error: object { type }`
+
+            A referenced resource no longer exists and its kind was not reported.
+
+            - `type: "session_resource_not_found_error"`
+
+              - `"session_resource_not_found_error"`
+
+          - `beta_managed_agents_workspace_archived_deployment_paused_reason_error: object { type }`
+
+            The deployment's workspace was archived.
+
+            - `type: "workspace_archived_error"`
+
+              - `"workspace_archived_error"`
+
+          - `beta_managed_agents_organization_disabled_deployment_paused_reason_error: object { type }`
+
+            The deployment's organization is disabled.
+
+            - `type: "organization_disabled_error"`
+
+              - `"organization_disabled_error"`
+
+          - `beta_managed_agents_memory_store_archived_deployment_paused_reason_error: object { type }`
+
+            A memory store referenced by the deployment is archived.
+
+            - `type: "memory_store_archived_error"`
+
+              - `"memory_store_archived_error"`
+
+          - `beta_managed_agents_skill_not_found_deployment_paused_reason_error: object { type }`
+
+            A skill referenced by the deployment's agent no longer exists.
+
+            - `type: "skill_not_found_error"`
+
+              - `"skill_not_found_error"`
+
+          - `beta_managed_agents_vault_archived_deployment_paused_reason_error: object { type }`
+
+            A vault referenced by the deployment is archived.
+
+            - `type: "vault_archived_error"`
+
+              - `"vault_archived_error"`
+
+          - `beta_managed_agents_unknown_deployment_paused_reason_error: object { type }`
+
+            An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
+
+            - `type: "unknown_error"`
+
+              - `"unknown_error"`
+
+          - `beta_managed_agents_self_hosted_resources_unsupported_deployment_paused_reason_error: object { type }`
+
+            The deployment configures resources, but its environment is self-hosted and cannot mount them.
+
+            - `type: "self_hosted_resources_unsupported_error"`
+
+              - `"self_hosted_resources_unsupported_error"`
+
+          - `beta_managed_agents_mcp_egress_blocked_deployment_paused_reason_error: object { type }`
+
+            An MCP server host used by the deployment's agent is blocked by the environment's network policy.
+
+            - `type: "mcp_egress_blocked_error"`
+
+              - `"mcp_egress_blocked_error"`
+
+        - `type: "error"`
+
+          - `"error"`
+
+    - `resources: array of BetaManagedAgentsSessionResourceConfig`
+
+      Resources attached to sessions created from this deployment. Echoes the input minus write-only credentials.
+
+      - `beta_managed_agents_github_repository_resource_config: object { type, url, checkout, mount_path }`
+
+        A GitHub repository mounted into each session's container. The authorization token is write-only and never returned.
+
+        - `type: "github_repository"`
+
+          - `"github_repository"`
+
+        - `url: string`
+
+          Github URL of the repository
+
+        - `checkout: optional BetaManagedAgentsBranchCheckout or BetaManagedAgentsCommitCheckout`
+
+          Branch or commit to check out. Defaults to the repository's default branch.
+
+          - `beta_managed_agents_branch_checkout: object { name, type }`
+
+            - `name: string`
+
+              Branch name to check out.
+
+            - `type: "branch"`
+
+              - `"branch"`
+
+          - `beta_managed_agents_commit_checkout: object { sha, type }`
+
+            - `sha: string`
+
+              Full commit SHA to check out.
+
+            - `type: "commit"`
+
+              - `"commit"`
+
+        - `mount_path: optional string`
+
+          Mount path in the container. Defaults to `/workspace/<repo-name>`.
+
+      - `beta_managed_agents_file_resource_config: object { file_id, type, mount_path }`
+
+        A file mounted into each session's container.
+
+        - `file_id: string`
+
+          ID of a previously uploaded file.
+
+        - `type: "file"`
+
+          - `"file"`
+
+        - `mount_path: optional string`
+
+          Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
+
+      - `beta_managed_agents_memory_store_resource_config: object { memory_store_id, type, access, instructions }`
+
+        A memory store attached to each session created from this deployment.
+
+        - `memory_store_id: string`
+
+          The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+        - `type: "memory_store"`
+
+          - `"memory_store"`
+
+        - `access: optional "read_write" or "read_only"`
+
+          Access mode for an attached memory store.
+
+          - `"read_write"`
+
+          - `"read_only"`
+
+        - `instructions: optional string`
+
+          Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+    - `schedule: object { expression, timezone, type, 2 more }`
+
+      5-field POSIX cron schedule with computed runtime timestamps.
+
+      - `expression: string`
+
+        5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 * * 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
+
+      - `timezone: string`
+
+        IANA timezone identifier (e.g., "America/Los_Angeles", "UTC").
+
+      - `type: "cron"`
+
+        - `"cron"`
+
+      - `last_run_at: optional string`
+
+        A timestamp in RFC 3339 format
+
+      - `upcoming_runs_at: optional array of string`
+
+        Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused deployments (reflects what the schedule would do if unpaused); empty once the deployment is archived (`archived_at` set). Each fire is offset by a small per-schedule jitter, so a run will actually start at or shortly after its listed time.
+
+    - `status: "active" or "paused"`
+
+      Lifecycle status of a deployment.
+
+      - `"active"`
+
+      - `"paused"`
+
+    - `type: "deployment"`
+
+      - `"deployment"`
+
+    - `updated_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `vault_ids: array of string`
+
+      Vault IDs supplying stored credentials for sessions created from this deployment.
+
+  - `next_page: optional string`
+
+    Opaque cursor for the next page. Null when no more results.
+
+### Example
+
+```cli
+ant beta:deployments list \
+  --api-key my-anthropic-api-key
+```
+
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "id": "id",
+      "agent": {
+        "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+        "type": "agent",
+        "version": 1
+      },
+      "archived_at": "2019-12-27T18:11:19.117Z",
+      "created_at": "2019-12-27T18:11:19.117Z",
+      "description": "description",
+      "environment_id": "environment_id",
+      "initial_events": [
+        {
+          "content": [
+            {
+              "text": "Where is my order #1234?",
+              "type": "text"
+            }
+          ],
+          "type": "user.message"
+        }
+      ],
+      "metadata": {
+        "foo": "string"
+      },
+      "name": "name",
+      "paused_reason": {
+        "type": "manual"
+      },
+      "resources": [
+        {
+          "type": "github_repository",
+          "url": "url",
+          "checkout": {
+            "name": "main",
+            "type": "branch"
+          },
+          "mount_path": "mount_path"
+        }
+      ],
+      "schedule": {
+        "expression": "x",
+        "timezone": "x",
+        "type": "cron",
+        "last_run_at": "2019-12-27T18:11:19.117Z",
+        "upcoming_runs_at": [
+          "2019-12-27T18:11:19.117Z"
+        ]
+      },
+      "status": "active",
+      "type": "deployment",
+      "updated_at": "2019-12-27T18:11:19.117Z",
+      "vault_ids": [
+        "string"
+      ]
+    }
+  ],
+  "next_page": "next_page"
+}
+```
+
+## Get Deployment
+
+`$ ant beta:deployments retrieve`
+
+**get** `/v1/deployments/{deployment_id}`
+
+Get Deployment
+
+### Parameters
+
+- `--deployment-id: string`
+
+  Path parameter deployment_id
+
+- `--beta: optional array of AnthropicBeta`
+
+  Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `beta_managed_agents_deployment: object { id, agent, archived_at, 13 more }`
+
+  A deployment is a configured instance of an agent — it binds the agent to everything needed to run it autonomously: an environment, credentials, initial events, and an optional schedule.
+
+  - `id: string`
+
+    Unique identifier for this deployment.
+
+  - `agent: object { id, type, version }`
+
+    A resolved agent reference with a concrete version.
+
+    - `id: string`
+
+    - `type: "agent"`
+
+      - `"agent"`
+
+    - `version: number`
+
+  - `archived_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `created_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `description: string`
+
+    Description of what the deployment does.
+
+  - `environment_id: string`
+
+    ID of the `environment` where sessions run.
+
+  - `initial_events: array of BetaManagedAgentsDeploymentInitialEvent`
+
+    Events sent to each session immediately after creation.
+
+    - `beta_managed_agents_deployment_user_message_event: object { content, type }`
+
+      A user message sent to the session.
+
+      - `content: array of BetaManagedAgentsTextBlock or BetaManagedAgentsImageBlock or BetaManagedAgentsDocumentBlock`
+
+        Array of content blocks for the user message.
+
+        - `beta_managed_agents_text_block: object { text, type }`
+
+          Regular text content.
+
+          - `text: string`
+
+            The text content.
+
+          - `type: "text"`
+
+            - `"text"`
+
+        - `beta_managed_agents_image_block: object { source, type }`
+
+          Image content specified directly as base64 data or as a reference via a URL.
+
+          - `source: BetaManagedAgentsBase64ImageSource or BetaManagedAgentsURLImageSource or BetaManagedAgentsFileImageSource`
+
+            Union type for image source variants.
+
+            - `beta_managed_agents_base64_image_source: object { data, media_type, type }`
+
+              Base64-encoded image data.
+
+              - `data: string`
+
+                Base64-encoded image data.
+
+              - `media_type: string`
+
+                MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+              - `type: "base64"`
+
+                - `"base64"`
+
+            - `beta_managed_agents_url_image_source: object { type, url }`
+
+              Image referenced by URL.
+
+              - `type: "url"`
+
+                - `"url"`
+
+              - `url: string`
+
+                URL of the image to fetch.
+
+            - `beta_managed_agents_file_image_source: object { file_id, type }`
+
+              Image referenced by file ID.
+
+              - `file_id: string`
+
+                ID of a previously uploaded file.
+
+              - `type: "file"`
+
+                - `"file"`
+
+          - `type: "image"`
+
+            - `"image"`
+
+        - `beta_managed_agents_document_block: object { source, type, context, title }`
+
+          Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+          - `source: BetaManagedAgentsBase64DocumentSource or BetaManagedAgentsPlainTextDocumentSource or BetaManagedAgentsURLDocumentSource or BetaManagedAgentsFileDocumentSource`
+
+            Union type for document source variants.
+
+            - `beta_managed_agents_base64_document_source: object { data, media_type, type }`
+
+              Base64-encoded document data.
+
+              - `data: string`
+
+                Base64-encoded document data.
+
+              - `media_type: string`
+
+                MIME type of the document (e.g., "application/pdf").
+
+              - `type: "base64"`
+
+                - `"base64"`
+
+            - `beta_managed_agents_plain_text_document_source: object { data, media_type, type }`
+
+              Plain text document content.
+
+              - `data: string`
+
+                The plain text content.
+
+              - `media_type: "text/plain"`
+
+                MIME type of the text content. Must be "text/plain".
+
+                - `"text/plain"`
+
+              - `type: "text"`
+
+                - `"text"`
+
+            - `beta_managed_agents_url_document_source: object { type, url }`
+
+              Document referenced by URL.
+
+              - `type: "url"`
+
+                - `"url"`
+
+              - `url: string`
+
+                URL of the document to fetch.
+
+            - `beta_managed_agents_file_document_source: object { file_id, type }`
+
+              Document referenced by file ID.
+
+              - `file_id: string`
+
+                ID of a previously uploaded file.
+
+              - `type: "file"`
+
+                - `"file"`
+
+          - `type: "document"`
+
+            - `"document"`
+
+          - `context: optional string`
+
+            Additional context about the document for the model.
+
+          - `title: optional string`
+
+            The title of the document.
+
+      - `type: "user.message"`
+
+        - `"user.message"`
+
+    - `beta_managed_agents_deployment_user_define_outcome_event: object { description, rubric, type, max_iterations }`
+
+      An outcome the agent should work toward. The agent begins work on receipt.
+
+      - `description: string`
+
+        What the agent should produce. This is the task specification.
+
+      - `rubric: BetaManagedAgentsFileRubric or BetaManagedAgentsTextRubric`
+
+        Rubric for grading the quality of an outcome.
+
+        - `beta_managed_agents_file_rubric: object { file_id, type }`
+
+          Rubric referenced by a file uploaded via the Files API.
+
+          - `file_id: string`
+
+            ID of the rubric file.
+
+          - `type: "file"`
+
+            - `"file"`
+
+        - `beta_managed_agents_text_rubric: object { content, type }`
+
+          Rubric content provided inline as text.
+
+          - `content: string`
+
+            Rubric content. Plain text or markdown — the grader treats it as freeform text.
+
+          - `type: "text"`
+
+            - `"text"`
+
+      - `type: "user.define_outcome"`
+
+        - `"user.define_outcome"`
+
+      - `max_iterations: optional number`
+
+        Eval→revision cycles before giving up. Default 3, max 20.
+
+    - `beta_managed_agents_deployment_system_message_event: object { content, type }`
+
+      Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
+
+      - `content: array of BetaManagedAgentsSystemContentBlock`
+
+        System content blocks to append. Text-only.
+
+        - `text: string`
+
+          The text content.
+
+        - `type: "text"`
+
+          - `"text"`
+
+      - `type: "system.message"`
+
+        - `"system.message"`
+
+  - `metadata: map[string]`
+
+    Arbitrary key-value metadata. Maximum 16 pairs.
+
+  - `name: string`
+
+    Human-readable name.
+
+  - `paused_reason: BetaManagedAgentsManualDeploymentPausedReason or BetaManagedAgentsErrorDeploymentPausedReason`
+
+    Why a deployment is paused. Non-null exactly when `status` is `paused`.
+
+    - `beta_managed_agents_manual_deployment_paused_reason: object { type }`
+
+      The caller invoked the pause endpoint on the deployment.
+
+      - `type: "manual"`
+
+        - `"manual"`
+
+    - `beta_managed_agents_error_deployment_paused_reason: object { error, type }`
+
+      A scheduled fire recorded a failed run whose error auto-pauses the deployment.
+
+      - `error: BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError or BetaManagedAgentsAgentArchivedDeploymentPausedReasonError or BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError or 11 more`
+
+        The error that triggered an auto-pause. Matches the failed run's `error.type`.
+
+        - `beta_managed_agents_environment_archived_deployment_paused_reason_error: object { type }`
+
+          The deployment's environment was archived.
+
+          - `type: "environment_archived_error"`
+
+            - `"environment_archived_error"`
+
+        - `beta_managed_agents_agent_archived_deployment_paused_reason_error: object { type }`
+
+          The deployment's agent was archived.
+
+          - `type: "agent_archived_error"`
+
+            - `"agent_archived_error"`
+
+        - `beta_managed_agents_environment_not_found_deployment_paused_reason_error: object { type }`
+
+          The deployment's environment no longer exists.
+
+          - `type: "environment_not_found_error"`
+
+            - `"environment_not_found_error"`
+
+        - `beta_managed_agents_vault_not_found_deployment_paused_reason_error: object { type }`
+
+          A vault referenced by the deployment no longer exists.
+
+          - `type: "vault_not_found_error"`
+
+            - `"vault_not_found_error"`
+
+        - `beta_managed_agents_file_not_found_deployment_paused_reason_error: object { type }`
+
+          A file resource referenced by the deployment no longer exists.
+
+          - `type: "file_not_found_error"`
+
+            - `"file_not_found_error"`
+
+        - `beta_managed_agents_session_resource_not_found_deployment_paused_reason_error: object { type }`
+
+          A referenced resource no longer exists and its kind was not reported.
+
+          - `type: "session_resource_not_found_error"`
+
+            - `"session_resource_not_found_error"`
+
+        - `beta_managed_agents_workspace_archived_deployment_paused_reason_error: object { type }`
+
+          The deployment's workspace was archived.
+
+          - `type: "workspace_archived_error"`
+
+            - `"workspace_archived_error"`
+
+        - `beta_managed_agents_organization_disabled_deployment_paused_reason_error: object { type }`
+
+          The deployment's organization is disabled.
+
+          - `type: "organization_disabled_error"`
+
+            - `"organization_disabled_error"`
+
+        - `beta_managed_agents_memory_store_archived_deployment_paused_reason_error: object { type }`
+
+          A memory store referenced by the deployment is archived.
+
+          - `type: "memory_store_archived_error"`
+
+            - `"memory_store_archived_error"`
+
+        - `beta_managed_agents_skill_not_found_deployment_paused_reason_error: object { type }`
+
+          A skill referenced by the deployment's agent no longer exists.
+
+          - `type: "skill_not_found_error"`
+
+            - `"skill_not_found_error"`
+
+        - `beta_managed_agents_vault_archived_deployment_paused_reason_error: object { type }`
+
+          A vault referenced by the deployment is archived.
+
+          - `type: "vault_archived_error"`
+
+            - `"vault_archived_error"`
+
+        - `beta_managed_agents_unknown_deployment_paused_reason_error: object { type }`
+
+          An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
+
+          - `type: "unknown_error"`
+
+            - `"unknown_error"`
+
+        - `beta_managed_agents_self_hosted_resources_unsupported_deployment_paused_reason_error: object { type }`
+
+          The deployment configures resources, but its environment is self-hosted and cannot mount them.
+
+          - `type: "self_hosted_resources_unsupported_error"`
+
+            - `"self_hosted_resources_unsupported_error"`
+
+        - `beta_managed_agents_mcp_egress_blocked_deployment_paused_reason_error: object { type }`
+
+          An MCP server host used by the deployment's agent is blocked by the environment's network policy.
+
+          - `type: "mcp_egress_blocked_error"`
+
+            - `"mcp_egress_blocked_error"`
+
+      - `type: "error"`
+
+        - `"error"`
+
+  - `resources: array of BetaManagedAgentsSessionResourceConfig`
+
+    Resources attached to sessions created from this deployment. Echoes the input minus write-only credentials.
+
+    - `beta_managed_agents_github_repository_resource_config: object { type, url, checkout, mount_path }`
+
+      A GitHub repository mounted into each session's container. The authorization token is write-only and never returned.
+
+      - `type: "github_repository"`
+
+        - `"github_repository"`
+
+      - `url: string`
+
+        Github URL of the repository
+
+      - `checkout: optional BetaManagedAgentsBranchCheckout or BetaManagedAgentsCommitCheckout`
+
+        Branch or commit to check out. Defaults to the repository's default branch.
+
+        - `beta_managed_agents_branch_checkout: object { name, type }`
+
+          - `name: string`
+
+            Branch name to check out.
+
+          - `type: "branch"`
+
+            - `"branch"`
+
+        - `beta_managed_agents_commit_checkout: object { sha, type }`
+
+          - `sha: string`
+
+            Full commit SHA to check out.
+
+          - `type: "commit"`
+
+            - `"commit"`
+
+      - `mount_path: optional string`
+
+        Mount path in the container. Defaults to `/workspace/<repo-name>`.
+
+    - `beta_managed_agents_file_resource_config: object { file_id, type, mount_path }`
+
+      A file mounted into each session's container.
+
+      - `file_id: string`
+
+        ID of a previously uploaded file.
+
+      - `type: "file"`
+
+        - `"file"`
+
+      - `mount_path: optional string`
+
+        Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
+
+    - `beta_managed_agents_memory_store_resource_config: object { memory_store_id, type, access, instructions }`
+
+      A memory store attached to each session created from this deployment.
+
+      - `memory_store_id: string`
+
+        The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+      - `type: "memory_store"`
+
+        - `"memory_store"`
+
+      - `access: optional "read_write" or "read_only"`
+
+        Access mode for an attached memory store.
+
+        - `"read_write"`
+
+        - `"read_only"`
+
+      - `instructions: optional string`
+
+        Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+  - `schedule: object { expression, timezone, type, 2 more }`
+
+    5-field POSIX cron schedule with computed runtime timestamps.
+
+    - `expression: string`
+
+      5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 * * 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
+
+    - `timezone: string`
+
+      IANA timezone identifier (e.g., "America/Los_Angeles", "UTC").
+
+    - `type: "cron"`
+
+      - `"cron"`
+
+    - `last_run_at: optional string`
+
+      A timestamp in RFC 3339 format
+
+    - `upcoming_runs_at: optional array of string`
+
+      Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused deployments (reflects what the schedule would do if unpaused); empty once the deployment is archived (`archived_at` set). Each fire is offset by a small per-schedule jitter, so a run will actually start at or shortly after its listed time.
+
+  - `status: "active" or "paused"`
+
+    Lifecycle status of a deployment.
+
+    - `"active"`
+
+    - `"paused"`
+
+  - `type: "deployment"`
+
+    - `"deployment"`
+
+  - `updated_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `vault_ids: array of string`
+
+    Vault IDs supplying stored credentials for sessions created from this deployment.
+
+### Example
+
+```cli
+ant beta:deployments retrieve \
+  --api-key my-anthropic-api-key \
+  --deployment-id deployment_id
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "agent": {
+    "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+    "type": "agent",
+    "version": 1
+  },
+  "archived_at": "2019-12-27T18:11:19.117Z",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "description": "description",
+  "environment_id": "environment_id",
+  "initial_events": [
+    {
+      "content": [
+        {
+          "text": "Where is my order #1234?",
+          "type": "text"
+        }
+      ],
+      "type": "user.message"
+    }
+  ],
+  "metadata": {
+    "foo": "string"
+  },
+  "name": "name",
+  "paused_reason": {
+    "type": "manual"
+  },
+  "resources": [
+    {
+      "type": "github_repository",
+      "url": "url",
+      "checkout": {
+        "name": "main",
+        "type": "branch"
+      },
+      "mount_path": "mount_path"
+    }
+  ],
+  "schedule": {
+    "expression": "x",
+    "timezone": "x",
+    "type": "cron",
+    "last_run_at": "2019-12-27T18:11:19.117Z",
+    "upcoming_runs_at": [
+      "2019-12-27T18:11:19.117Z"
+    ]
+  },
+  "status": "active",
+  "type": "deployment",
+  "updated_at": "2019-12-27T18:11:19.117Z",
+  "vault_ids": [
+    "string"
+  ]
+}
+```
+
+## Update Deployment
+
+`$ ant beta:deployments update`
+
+**post** `/v1/deployments/{deployment_id}`
+
+Update Deployment
+
+### Parameters
+
+- `--deployment-id: string`
+
+  Path param: Path parameter deployment_id
+
+- `--agent: optional string or BetaManagedAgentsAgentParams`
+
+  Body param: Agent to deploy. Accepts the `agent` ID string, which re-pins to the latest version, or an `agent` object with both id and version specified. Omit to preserve. Cannot be cleared.
+
+- `--description: optional string`
+
+  Body param: Description. Omit to preserve; send empty string or null to clear.
+
+- `--environment-id: optional string`
+
+  Body param: ID of the `environment` where sessions run. Omit to preserve. Cannot be cleared.
+
+- `--initial-event: optional array of BetaManagedAgentsDeploymentInitialEventParams`
+
+  Body param: Initial events. Full replacement. Omit to preserve. Cannot be cleared. At least 1, maximum 50.
+
+- `--metadata: optional map[string]`
+
+  Body param: Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve. The stored bag is limited to 16 keys (up to 64 chars each) with values up to 512 chars.
+
+- `--name: optional string`
+
+  Body param: Human-readable name. Must be non-empty. Omit to preserve. Cannot be cleared.
+
+- `--resource: optional array of BetaManagedAgentsGitHubRepositoryResourceParams or BetaManagedAgentsFileResourceParams or BetaManagedAgentsMemoryStoreResourceParam`
+
+  Body param: Session resources. Full replacement. Omit to preserve; send empty array or null to clear. Maximum 500.
+
+- `--schedule: optional object { expression, timezone, type }`
+
+  Body param: 5-field POSIX cron schedule. Literal wall-clock matching in the configured timezone.
+
+- `--vault-id: optional array of string`
+
+  Body param: Vault IDs. Full replacement. Omit to preserve; send empty array or null to clear. Maximum 50.
+
+- `--beta: optional array of AnthropicBeta`
+
+  Header param: Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `beta_managed_agents_deployment: object { id, agent, archived_at, 13 more }`
+
+  A deployment is a configured instance of an agent — it binds the agent to everything needed to run it autonomously: an environment, credentials, initial events, and an optional schedule.
+
+  - `id: string`
+
+    Unique identifier for this deployment.
+
+  - `agent: object { id, type, version }`
+
+    A resolved agent reference with a concrete version.
+
+    - `id: string`
+
+    - `type: "agent"`
+
+      - `"agent"`
+
+    - `version: number`
+
+  - `archived_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `created_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `description: string`
+
+    Description of what the deployment does.
+
+  - `environment_id: string`
+
+    ID of the `environment` where sessions run.
+
+  - `initial_events: array of BetaManagedAgentsDeploymentInitialEvent`
+
+    Events sent to each session immediately after creation.
+
+    - `beta_managed_agents_deployment_user_message_event: object { content, type }`
+
+      A user message sent to the session.
+
+      - `content: array of BetaManagedAgentsTextBlock or BetaManagedAgentsImageBlock or BetaManagedAgentsDocumentBlock`
+
+        Array of content blocks for the user message.
+
+        - `beta_managed_agents_text_block: object { text, type }`
+
+          Regular text content.
+
+          - `text: string`
+
+            The text content.
+
+          - `type: "text"`
+
+            - `"text"`
+
+        - `beta_managed_agents_image_block: object { source, type }`
+
+          Image content specified directly as base64 data or as a reference via a URL.
+
+          - `source: BetaManagedAgentsBase64ImageSource or BetaManagedAgentsURLImageSource or BetaManagedAgentsFileImageSource`
+
+            Union type for image source variants.
+
+            - `beta_managed_agents_base64_image_source: object { data, media_type, type }`
+
+              Base64-encoded image data.
+
+              - `data: string`
+
+                Base64-encoded image data.
+
+              - `media_type: string`
+
+                MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+              - `type: "base64"`
+
+                - `"base64"`
+
+            - `beta_managed_agents_url_image_source: object { type, url }`
+
+              Image referenced by URL.
+
+              - `type: "url"`
+
+                - `"url"`
+
+              - `url: string`
+
+                URL of the image to fetch.
+
+            - `beta_managed_agents_file_image_source: object { file_id, type }`
+
+              Image referenced by file ID.
+
+              - `file_id: string`
+
+                ID of a previously uploaded file.
+
+              - `type: "file"`
+
+                - `"file"`
+
+          - `type: "image"`
+
+            - `"image"`
+
+        - `beta_managed_agents_document_block: object { source, type, context, title }`
+
+          Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+          - `source: BetaManagedAgentsBase64DocumentSource or BetaManagedAgentsPlainTextDocumentSource or BetaManagedAgentsURLDocumentSource or BetaManagedAgentsFileDocumentSource`
+
+            Union type for document source variants.
+
+            - `beta_managed_agents_base64_document_source: object { data, media_type, type }`
+
+              Base64-encoded document data.
+
+              - `data: string`
+
+                Base64-encoded document data.
+
+              - `media_type: string`
+
+                MIME type of the document (e.g., "application/pdf").
+
+              - `type: "base64"`
+
+                - `"base64"`
+
+            - `beta_managed_agents_plain_text_document_source: object { data, media_type, type }`
+
+              Plain text document content.
+
+              - `data: string`
+
+                The plain text content.
+
+              - `media_type: "text/plain"`
+
+                MIME type of the text content. Must be "text/plain".
+
+                - `"text/plain"`
+
+              - `type: "text"`
+
+                - `"text"`
+
+            - `beta_managed_agents_url_document_source: object { type, url }`
+
+              Document referenced by URL.
+
+              - `type: "url"`
+
+                - `"url"`
+
+              - `url: string`
+
+                URL of the document to fetch.
+
+            - `beta_managed_agents_file_document_source: object { file_id, type }`
+
+              Document referenced by file ID.
+
+              - `file_id: string`
+
+                ID of a previously uploaded file.
+
+              - `type: "file"`
+
+                - `"file"`
+
+          - `type: "document"`
+
+            - `"document"`
+
+          - `context: optional string`
+
+            Additional context about the document for the model.
+
+          - `title: optional string`
+
+            The title of the document.
+
+      - `type: "user.message"`
+
+        - `"user.message"`
+
+    - `beta_managed_agents_deployment_user_define_outcome_event: object { description, rubric, type, max_iterations }`
+
+      An outcome the agent should work toward. The agent begins work on receipt.
+
+      - `description: string`
+
+        What the agent should produce. This is the task specification.
+
+      - `rubric: BetaManagedAgentsFileRubric or BetaManagedAgentsTextRubric`
+
+        Rubric for grading the quality of an outcome.
+
+        - `beta_managed_agents_file_rubric: object { file_id, type }`
+
+          Rubric referenced by a file uploaded via the Files API.
+
+          - `file_id: string`
+
+            ID of the rubric file.
+
+          - `type: "file"`
+
+            - `"file"`
+
+        - `beta_managed_agents_text_rubric: object { content, type }`
+
+          Rubric content provided inline as text.
+
+          - `content: string`
+
+            Rubric content. Plain text or markdown — the grader treats it as freeform text.
+
+          - `type: "text"`
+
+            - `"text"`
+
+      - `type: "user.define_outcome"`
+
+        - `"user.define_outcome"`
+
+      - `max_iterations: optional number`
+
+        Eval→revision cycles before giving up. Default 3, max 20.
+
+    - `beta_managed_agents_deployment_system_message_event: object { content, type }`
+
+      Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
+
+      - `content: array of BetaManagedAgentsSystemContentBlock`
+
+        System content blocks to append. Text-only.
+
+        - `text: string`
+
+          The text content.
+
+        - `type: "text"`
+
+          - `"text"`
+
+      - `type: "system.message"`
+
+        - `"system.message"`
+
+  - `metadata: map[string]`
+
+    Arbitrary key-value metadata. Maximum 16 pairs.
+
+  - `name: string`
+
+    Human-readable name.
+
+  - `paused_reason: BetaManagedAgentsManualDeploymentPausedReason or BetaManagedAgentsErrorDeploymentPausedReason`
+
+    Why a deployment is paused. Non-null exactly when `status` is `paused`.
+
+    - `beta_managed_agents_manual_deployment_paused_reason: object { type }`
+
+      The caller invoked the pause endpoint on the deployment.
+
+      - `type: "manual"`
+
+        - `"manual"`
+
+    - `beta_managed_agents_error_deployment_paused_reason: object { error, type }`
+
+      A scheduled fire recorded a failed run whose error auto-pauses the deployment.
+
+      - `error: BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError or BetaManagedAgentsAgentArchivedDeploymentPausedReasonError or BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError or 11 more`
+
+        The error that triggered an auto-pause. Matches the failed run's `error.type`.
+
+        - `beta_managed_agents_environment_archived_deployment_paused_reason_error: object { type }`
+
+          The deployment's environment was archived.
+
+          - `type: "environment_archived_error"`
+
+            - `"environment_archived_error"`
+
+        - `beta_managed_agents_agent_archived_deployment_paused_reason_error: object { type }`
+
+          The deployment's agent was archived.
+
+          - `type: "agent_archived_error"`
+
+            - `"agent_archived_error"`
+
+        - `beta_managed_agents_environment_not_found_deployment_paused_reason_error: object { type }`
+
+          The deployment's environment no longer exists.
+
+          - `type: "environment_not_found_error"`
+
+            - `"environment_not_found_error"`
+
+        - `beta_managed_agents_vault_not_found_deployment_paused_reason_error: object { type }`
+
+          A vault referenced by the deployment no longer exists.
+
+          - `type: "vault_not_found_error"`
+
+            - `"vault_not_found_error"`
+
+        - `beta_managed_agents_file_not_found_deployment_paused_reason_error: object { type }`
+
+          A file resource referenced by the deployment no longer exists.
+
+          - `type: "file_not_found_error"`
+
+            - `"file_not_found_error"`
+
+        - `beta_managed_agents_session_resource_not_found_deployment_paused_reason_error: object { type }`
+
+          A referenced resource no longer exists and its kind was not reported.
+
+          - `type: "session_resource_not_found_error"`
+
+            - `"session_resource_not_found_error"`
+
+        - `beta_managed_agents_workspace_archived_deployment_paused_reason_error: object { type }`
+
+          The deployment's workspace was archived.
+
+          - `type: "workspace_archived_error"`
+
+            - `"workspace_archived_error"`
+
+        - `beta_managed_agents_organization_disabled_deployment_paused_reason_error: object { type }`
+
+          The deployment's organization is disabled.
+
+          - `type: "organization_disabled_error"`
+
+            - `"organization_disabled_error"`
+
+        - `beta_managed_agents_memory_store_archived_deployment_paused_reason_error: object { type }`
+
+          A memory store referenced by the deployment is archived.
+
+          - `type: "memory_store_archived_error"`
+
+            - `"memory_store_archived_error"`
+
+        - `beta_managed_agents_skill_not_found_deployment_paused_reason_error: object { type }`
+
+          A skill referenced by the deployment's agent no longer exists.
+
+          - `type: "skill_not_found_error"`
+
+            - `"skill_not_found_error"`
+
+        - `beta_managed_agents_vault_archived_deployment_paused_reason_error: object { type }`
+
+          A vault referenced by the deployment is archived.
+
+          - `type: "vault_archived_error"`
+
+            - `"vault_archived_error"`
+
+        - `beta_managed_agents_unknown_deployment_paused_reason_error: object { type }`
+
+          An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
+
+          - `type: "unknown_error"`
+
+            - `"unknown_error"`
+
+        - `beta_managed_agents_self_hosted_resources_unsupported_deployment_paused_reason_error: object { type }`
+
+          The deployment configures resources, but its environment is self-hosted and cannot mount them.
+
+          - `type: "self_hosted_resources_unsupported_error"`
+
+            - `"self_hosted_resources_unsupported_error"`
+
+        - `beta_managed_agents_mcp_egress_blocked_deployment_paused_reason_error: object { type }`
+
+          An MCP server host used by the deployment's agent is blocked by the environment's network policy.
+
+          - `type: "mcp_egress_blocked_error"`
+
+            - `"mcp_egress_blocked_error"`
+
+      - `type: "error"`
+
+        - `"error"`
+
+  - `resources: array of BetaManagedAgentsSessionResourceConfig`
+
+    Resources attached to sessions created from this deployment. Echoes the input minus write-only credentials.
+
+    - `beta_managed_agents_github_repository_resource_config: object { type, url, checkout, mount_path }`
+
+      A GitHub repository mounted into each session's container. The authorization token is write-only and never returned.
+
+      - `type: "github_repository"`
+
+        - `"github_repository"`
+
+      - `url: string`
+
+        Github URL of the repository
+
+      - `checkout: optional BetaManagedAgentsBranchCheckout or BetaManagedAgentsCommitCheckout`
+
+        Branch or commit to check out. Defaults to the repository's default branch.
+
+        - `beta_managed_agents_branch_checkout: object { name, type }`
+
+          - `name: string`
+
+            Branch name to check out.
+
+          - `type: "branch"`
+
+            - `"branch"`
+
+        - `beta_managed_agents_commit_checkout: object { sha, type }`
+
+          - `sha: string`
+
+            Full commit SHA to check out.
+
+          - `type: "commit"`
+
+            - `"commit"`
+
+      - `mount_path: optional string`
+
+        Mount path in the container. Defaults to `/workspace/<repo-name>`.
+
+    - `beta_managed_agents_file_resource_config: object { file_id, type, mount_path }`
+
+      A file mounted into each session's container.
+
+      - `file_id: string`
+
+        ID of a previously uploaded file.
+
+      - `type: "file"`
+
+        - `"file"`
+
+      - `mount_path: optional string`
+
+        Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
+
+    - `beta_managed_agents_memory_store_resource_config: object { memory_store_id, type, access, instructions }`
+
+      A memory store attached to each session created from this deployment.
+
+      - `memory_store_id: string`
+
+        The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+      - `type: "memory_store"`
+
+        - `"memory_store"`
+
+      - `access: optional "read_write" or "read_only"`
+
+        Access mode for an attached memory store.
+
+        - `"read_write"`
+
+        - `"read_only"`
+
+      - `instructions: optional string`
+
+        Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+  - `schedule: object { expression, timezone, type, 2 more }`
+
+    5-field POSIX cron schedule with computed runtime timestamps.
+
+    - `expression: string`
+
+      5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 * * 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
+
+    - `timezone: string`
+
+      IANA timezone identifier (e.g., "America/Los_Angeles", "UTC").
+
+    - `type: "cron"`
+
+      - `"cron"`
+
+    - `last_run_at: optional string`
+
+      A timestamp in RFC 3339 format
+
+    - `upcoming_runs_at: optional array of string`
+
+      Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused deployments (reflects what the schedule would do if unpaused); empty once the deployment is archived (`archived_at` set). Each fire is offset by a small per-schedule jitter, so a run will actually start at or shortly after its listed time.
+
+  - `status: "active" or "paused"`
+
+    Lifecycle status of a deployment.
+
+    - `"active"`
+
+    - `"paused"`
+
+  - `type: "deployment"`
+
+    - `"deployment"`
+
+  - `updated_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `vault_ids: array of string`
+
+    Vault IDs supplying stored credentials for sessions created from this deployment.
+
+### Example
+
+```cli
+ant beta:deployments update \
+  --api-key my-anthropic-api-key \
+  --deployment-id deployment_id
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "agent": {
+    "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+    "type": "agent",
+    "version": 1
+  },
+  "archived_at": "2019-12-27T18:11:19.117Z",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "description": "description",
+  "environment_id": "environment_id",
+  "initial_events": [
+    {
+      "content": [
+        {
+          "text": "Where is my order #1234?",
+          "type": "text"
+        }
+      ],
+      "type": "user.message"
+    }
+  ],
+  "metadata": {
+    "foo": "string"
+  },
+  "name": "name",
+  "paused_reason": {
+    "type": "manual"
+  },
+  "resources": [
+    {
+      "type": "github_repository",
+      "url": "url",
+      "checkout": {
+        "name": "main",
+        "type": "branch"
+      },
+      "mount_path": "mount_path"
+    }
+  ],
+  "schedule": {
+    "expression": "x",
+    "timezone": "x",
+    "type": "cron",
+    "last_run_at": "2019-12-27T18:11:19.117Z",
+    "upcoming_runs_at": [
+      "2019-12-27T18:11:19.117Z"
+    ]
+  },
+  "status": "active",
+  "type": "deployment",
+  "updated_at": "2019-12-27T18:11:19.117Z",
+  "vault_ids": [
+    "string"
+  ]
+}
+```
+
+## Archive Deployment
+
+`$ ant beta:deployments archive`
+
+**post** `/v1/deployments/{deployment_id}/archive`
+
+Archive Deployment
+
+### Parameters
+
+- `--deployment-id: string`
+
+  Path parameter deployment_id
+
+- `--beta: optional array of AnthropicBeta`
+
+  Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `beta_managed_agents_deployment: object { id, agent, archived_at, 13 more }`
+
+  A deployment is a configured instance of an agent — it binds the agent to everything needed to run it autonomously: an environment, credentials, initial events, and an optional schedule.
+
+  - `id: string`
+
+    Unique identifier for this deployment.
+
+  - `agent: object { id, type, version }`
+
+    A resolved agent reference with a concrete version.
+
+    - `id: string`
+
+    - `type: "agent"`
+
+      - `"agent"`
+
+    - `version: number`
+
+  - `archived_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `created_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `description: string`
+
+    Description of what the deployment does.
+
+  - `environment_id: string`
+
+    ID of the `environment` where sessions run.
+
+  - `initial_events: array of BetaManagedAgentsDeploymentInitialEvent`
+
+    Events sent to each session immediately after creation.
+
+    - `beta_managed_agents_deployment_user_message_event: object { content, type }`
+
+      A user message sent to the session.
+
+      - `content: array of BetaManagedAgentsTextBlock or BetaManagedAgentsImageBlock or BetaManagedAgentsDocumentBlock`
+
+        Array of content blocks for the user message.
+
+        - `beta_managed_agents_text_block: object { text, type }`
+
+          Regular text content.
+
+          - `text: string`
+
+            The text content.
+
+          - `type: "text"`
+
+            - `"text"`
+
+        - `beta_managed_agents_image_block: object { source, type }`
+
+          Image content specified directly as base64 data or as a reference via a URL.
+
+          - `source: BetaManagedAgentsBase64ImageSource or BetaManagedAgentsURLImageSource or BetaManagedAgentsFileImageSource`
+
+            Union type for image source variants.
+
+            - `beta_managed_agents_base64_image_source: object { data, media_type, type }`
+
+              Base64-encoded image data.
+
+              - `data: string`
+
+                Base64-encoded image data.
+
+              - `media_type: string`
+
+                MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+              - `type: "base64"`
+
+                - `"base64"`
+
+            - `beta_managed_agents_url_image_source: object { type, url }`
+
+              Image referenced by URL.
+
+              - `type: "url"`
+
+                - `"url"`
+
+              - `url: string`
+
+                URL of the image to fetch.
+
+            - `beta_managed_agents_file_image_source: object { file_id, type }`
+
+              Image referenced by file ID.
+
+              - `file_id: string`
+
+                ID of a previously uploaded file.
+
+              - `type: "file"`
+
+                - `"file"`
+
+          - `type: "image"`
+
+            - `"image"`
+
+        - `beta_managed_agents_document_block: object { source, type, context, title }`
+
+          Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+          - `source: BetaManagedAgentsBase64DocumentSource or BetaManagedAgentsPlainTextDocumentSource or BetaManagedAgentsURLDocumentSource or BetaManagedAgentsFileDocumentSource`
+
+            Union type for document source variants.
+
+            - `beta_managed_agents_base64_document_source: object { data, media_type, type }`
+
+              Base64-encoded document data.
+
+              - `data: string`
+
+                Base64-encoded document data.
+
+              - `media_type: string`
+
+                MIME type of the document (e.g., "application/pdf").
+
+              - `type: "base64"`
+
+                - `"base64"`
+
+            - `beta_managed_agents_plain_text_document_source: object { data, media_type, type }`
+
+              Plain text document content.
+
+              - `data: string`
+
+                The plain text content.
+
+              - `media_type: "text/plain"`
+
+                MIME type of the text content. Must be "text/plain".
+
+                - `"text/plain"`
+
+              - `type: "text"`
+
+                - `"text"`
+
+            - `beta_managed_agents_url_document_source: object { type, url }`
+
+              Document referenced by URL.
+
+              - `type: "url"`
+
+                - `"url"`
+
+              - `url: string`
+
+                URL of the document to fetch.
+
+            - `beta_managed_agents_file_document_source: object { file_id, type }`
+
+              Document referenced by file ID.
+
+              - `file_id: string`
+
+                ID of a previously uploaded file.
+
+              - `type: "file"`
+
+                - `"file"`
+
+          - `type: "document"`
+
+            - `"document"`
+
+          - `context: optional string`
+
+            Additional context about the document for the model.
+
+          - `title: optional string`
+
+            The title of the document.
+
+      - `type: "user.message"`
+
+        - `"user.message"`
+
+    - `beta_managed_agents_deployment_user_define_outcome_event: object { description, rubric, type, max_iterations }`
+
+      An outcome the agent should work toward. The agent begins work on receipt.
+
+      - `description: string`
+
+        What the agent should produce. This is the task specification.
+
+      - `rubric: BetaManagedAgentsFileRubric or BetaManagedAgentsTextRubric`
+
+        Rubric for grading the quality of an outcome.
+
+        - `beta_managed_agents_file_rubric: object { file_id, type }`
+
+          Rubric referenced by a file uploaded via the Files API.
+
+          - `file_id: string`
+
+            ID of the rubric file.
+
+          - `type: "file"`
+
+            - `"file"`
+
+        - `beta_managed_agents_text_rubric: object { content, type }`
+
+          Rubric content provided inline as text.
+
+          - `content: string`
+
+            Rubric content. Plain text or markdown — the grader treats it as freeform text.
+
+          - `type: "text"`
+
+            - `"text"`
+
+      - `type: "user.define_outcome"`
+
+        - `"user.define_outcome"`
+
+      - `max_iterations: optional number`
+
+        Eval→revision cycles before giving up. Default 3, max 20.
+
+    - `beta_managed_agents_deployment_system_message_event: object { content, type }`
+
+      Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
+
+      - `content: array of BetaManagedAgentsSystemContentBlock`
+
+        System content blocks to append. Text-only.
+
+        - `text: string`
+
+          The text content.
+
+        - `type: "text"`
+
+          - `"text"`
+
+      - `type: "system.message"`
+
+        - `"system.message"`
+
+  - `metadata: map[string]`
+
+    Arbitrary key-value metadata. Maximum 16 pairs.
+
+  - `name: string`
+
+    Human-readable name.
+
+  - `paused_reason: BetaManagedAgentsManualDeploymentPausedReason or BetaManagedAgentsErrorDeploymentPausedReason`
+
+    Why a deployment is paused. Non-null exactly when `status` is `paused`.
+
+    - `beta_managed_agents_manual_deployment_paused_reason: object { type }`
+
+      The caller invoked the pause endpoint on the deployment.
+
+      - `type: "manual"`
+
+        - `"manual"`
+
+    - `beta_managed_agents_error_deployment_paused_reason: object { error, type }`
+
+      A scheduled fire recorded a failed run whose error auto-pauses the deployment.
+
+      - `error: BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError or BetaManagedAgentsAgentArchivedDeploymentPausedReasonError or BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError or 11 more`
+
+        The error that triggered an auto-pause. Matches the failed run's `error.type`.
+
+        - `beta_managed_agents_environment_archived_deployment_paused_reason_error: object { type }`
+
+          The deployment's environment was archived.
+
+          - `type: "environment_archived_error"`
+
+            - `"environment_archived_error"`
+
+        - `beta_managed_agents_agent_archived_deployment_paused_reason_error: object { type }`
+
+          The deployment's agent was archived.
+
+          - `type: "agent_archived_error"`
+
+            - `"agent_archived_error"`
+
+        - `beta_managed_agents_environment_not_found_deployment_paused_reason_error: object { type }`
+
+          The deployment's environment no longer exists.
+
+          - `type: "environment_not_found_error"`
+
+            - `"environment_not_found_error"`
+
+        - `beta_managed_agents_vault_not_found_deployment_paused_reason_error: object { type }`
+
+          A vault referenced by the deployment no longer exists.
+
+          - `type: "vault_not_found_error"`
+
+            - `"vault_not_found_error"`
+
+        - `beta_managed_agents_file_not_found_deployment_paused_reason_error: object { type }`
+
+          A file resource referenced by the deployment no longer exists.
+
+          - `type: "file_not_found_error"`
+
+            - `"file_not_found_error"`
+
+        - `beta_managed_agents_session_resource_not_found_deployment_paused_reason_error: object { type }`
+
+          A referenced resource no longer exists and its kind was not reported.
+
+          - `type: "session_resource_not_found_error"`
+
+            - `"session_resource_not_found_error"`
+
+        - `beta_managed_agents_workspace_archived_deployment_paused_reason_error: object { type }`
+
+          The deployment's workspace was archived.
+
+          - `type: "workspace_archived_error"`
+
+            - `"workspace_archived_error"`
+
+        - `beta_managed_agents_organization_disabled_deployment_paused_reason_error: object { type }`
+
+          The deployment's organization is disabled.
+
+          - `type: "organization_disabled_error"`
+
+            - `"organization_disabled_error"`
+
+        - `beta_managed_agents_memory_store_archived_deployment_paused_reason_error: object { type }`
+
+          A memory store referenced by the deployment is archived.
+
+          - `type: "memory_store_archived_error"`
+
+            - `"memory_store_archived_error"`
+
+        - `beta_managed_agents_skill_not_found_deployment_paused_reason_error: object { type }`
+
+          A skill referenced by the deployment's agent no longer exists.
+
+          - `type: "skill_not_found_error"`
+
+            - `"skill_not_found_error"`
+
+        - `beta_managed_agents_vault_archived_deployment_paused_reason_error: object { type }`
+
+          A vault referenced by the deployment is archived.
+
+          - `type: "vault_archived_error"`
+
+            - `"vault_archived_error"`
+
+        - `beta_managed_agents_unknown_deployment_paused_reason_error: object { type }`
+
+          An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
+
+          - `type: "unknown_error"`
+
+            - `"unknown_error"`
+
+        - `beta_managed_agents_self_hosted_resources_unsupported_deployment_paused_reason_error: object { type }`
+
+          The deployment configures resources, but its environment is self-hosted and cannot mount them.
+
+          - `type: "self_hosted_resources_unsupported_error"`
+
+            - `"self_hosted_resources_unsupported_error"`
+
+        - `beta_managed_agents_mcp_egress_blocked_deployment_paused_reason_error: object { type }`
+
+          An MCP server host used by the deployment's agent is blocked by the environment's network policy.
+
+          - `type: "mcp_egress_blocked_error"`
+
+            - `"mcp_egress_blocked_error"`
+
+      - `type: "error"`
+
+        - `"error"`
+
+  - `resources: array of BetaManagedAgentsSessionResourceConfig`
+
+    Resources attached to sessions created from this deployment. Echoes the input minus write-only credentials.
+
+    - `beta_managed_agents_github_repository_resource_config: object { type, url, checkout, mount_path }`
+
+      A GitHub repository mounted into each session's container. The authorization token is write-only and never returned.
+
+      - `type: "github_repository"`
+
+        - `"github_repository"`
+
+      - `url: string`
+
+        Github URL of the repository
+
+      - `checkout: optional BetaManagedAgentsBranchCheckout or BetaManagedAgentsCommitCheckout`
+
+        Branch or commit to check out. Defaults to the repository's default branch.
+
+        - `beta_managed_agents_branch_checkout: object { name, type }`
+
+          - `name: string`
+
+            Branch name to check out.
+
+          - `type: "branch"`
+
+            - `"branch"`
+
+        - `beta_managed_agents_commit_checkout: object { sha, type }`
+
+          - `sha: string`
+
+            Full commit SHA to check out.
+
+          - `type: "commit"`
+
+            - `"commit"`
+
+      - `mount_path: optional string`
+
+        Mount path in the container. Defaults to `/workspace/<repo-name>`.
+
+    - `beta_managed_agents_file_resource_config: object { file_id, type, mount_path }`
+
+      A file mounted into each session's container.
+
+      - `file_id: string`
+
+        ID of a previously uploaded file.
+
+      - `type: "file"`
+
+        - `"file"`
+
+      - `mount_path: optional string`
+
+        Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
+
+    - `beta_managed_agents_memory_store_resource_config: object { memory_store_id, type, access, instructions }`
+
+      A memory store attached to each session created from this deployment.
+
+      - `memory_store_id: string`
+
+        The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+      - `type: "memory_store"`
+
+        - `"memory_store"`
+
+      - `access: optional "read_write" or "read_only"`
+
+        Access mode for an attached memory store.
+
+        - `"read_write"`
+
+        - `"read_only"`
+
+      - `instructions: optional string`
+
+        Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+  - `schedule: object { expression, timezone, type, 2 more }`
+
+    5-field POSIX cron schedule with computed runtime timestamps.
+
+    - `expression: string`
+
+      5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 * * 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
+
+    - `timezone: string`
+
+      IANA timezone identifier (e.g., "America/Los_Angeles", "UTC").
+
+    - `type: "cron"`
+
+      - `"cron"`
+
+    - `last_run_at: optional string`
+
+      A timestamp in RFC 3339 format
+
+    - `upcoming_runs_at: optional array of string`
+
+      Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused deployments (reflects what the schedule would do if unpaused); empty once the deployment is archived (`archived_at` set). Each fire is offset by a small per-schedule jitter, so a run will actually start at or shortly after its listed time.
+
+  - `status: "active" or "paused"`
+
+    Lifecycle status of a deployment.
+
+    - `"active"`
+
+    - `"paused"`
+
+  - `type: "deployment"`
+
+    - `"deployment"`
+
+  - `updated_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `vault_ids: array of string`
+
+    Vault IDs supplying stored credentials for sessions created from this deployment.
+
+### Example
+
+```cli
+ant beta:deployments archive \
+  --api-key my-anthropic-api-key \
+  --deployment-id deployment_id
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "agent": {
+    "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+    "type": "agent",
+    "version": 1
+  },
+  "archived_at": "2019-12-27T18:11:19.117Z",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "description": "description",
+  "environment_id": "environment_id",
+  "initial_events": [
+    {
+      "content": [
+        {
+          "text": "Where is my order #1234?",
+          "type": "text"
+        }
+      ],
+      "type": "user.message"
+    }
+  ],
+  "metadata": {
+    "foo": "string"
+  },
+  "name": "name",
+  "paused_reason": {
+    "type": "manual"
+  },
+  "resources": [
+    {
+      "type": "github_repository",
+      "url": "url",
+      "checkout": {
+        "name": "main",
+        "type": "branch"
+      },
+      "mount_path": "mount_path"
+    }
+  ],
+  "schedule": {
+    "expression": "x",
+    "timezone": "x",
+    "type": "cron",
+    "last_run_at": "2019-12-27T18:11:19.117Z",
+    "upcoming_runs_at": [
+      "2019-12-27T18:11:19.117Z"
+    ]
+  },
+  "status": "active",
+  "type": "deployment",
+  "updated_at": "2019-12-27T18:11:19.117Z",
+  "vault_ids": [
+    "string"
+  ]
+}
+```
+
+## Run Deployment Now
+
+`$ ant beta:deployments run`
+
+**post** `/v1/deployments/{deployment_id}/run`
+
+Run Deployment Now
+
+### Parameters
+
+- `--deployment-id: string`
+
+  Path parameter deployment_id
+
+- `--beta: optional array of AnthropicBeta`
+
+  Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `beta_managed_agents_deployment_run: object { id, agent, created_at, 5 more }`
+
+  A persistent, append-only record of a single deployment execution. Records session creation success or failure — no session lifecycle tracking.
+
+  - `id: string`
+
+    Unique identifier for this run (`drun_...`).
+
+  - `agent: object { id, type, version }`
+
+    A resolved agent reference with a concrete version.
+
+    - `id: string`
+
+    - `type: "agent"`
+
+      - `"agent"`
+
+    - `version: number`
+
+  - `created_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `deployment_id: string`
+
+    ID of the deployment that produced this run.
+
+  - `error: BetaManagedAgentsEnvironmentArchivedRunError or BetaManagedAgentsAgentArchivedRunError or BetaManagedAgentsEnvironmentNotFoundRunError or 13 more`
+
+    Why the run failed to create a session. The type identifies the failure; message is human-readable detail.
+
+    - `beta_managed_agents_environment_archived_run_error: object { message, type }`
+
+      The deployment's environment was archived.
+
+      - `message: string`
+
+        Human-readable error description.
+
+      - `type: "environment_archived_error"`
+
+        - `"environment_archived_error"`
+
+    - `beta_managed_agents_agent_archived_run_error: object { message, type }`
+
+      The deployment's agent was archived.
+
+      - `message: string`
+
+        Human-readable error description.
+
+      - `type: "agent_archived_error"`
+
+        - `"agent_archived_error"`
+
+    - `beta_managed_agents_environment_not_found_run_error: object { message, type }`
+
+      The deployment's environment no longer exists.
+
+      - `message: string`
+
+        Human-readable error description.
+
+      - `type: "environment_not_found_error"`
+
+        - `"environment_not_found_error"`
+
+    - `beta_managed_agents_vault_not_found_run_error: object { message, type }`
+
+      A vault referenced by the deployment no longer exists.
+
+      - `message: string`
+
+        Human-readable error description.
+
+      - `type: "vault_not_found_error"`
+
+        - `"vault_not_found_error"`
+
+    - `beta_managed_agents_vault_archived_run_error: object { message, type }`
+
+      A vault referenced by the deployment is archived.
+
+      - `message: string`
+
+        Human-readable error description.
+
+      - `type: "vault_archived_error"`
+
+        - `"vault_archived_error"`
+
+    - `beta_managed_agents_file_not_found_run_error: object { message, type }`
+
+      A file resource referenced by the deployment no longer exists.
+
+      - `message: string`
+
+        Human-readable error description.
+
+      - `type: "file_not_found_error"`
+
+        - `"file_not_found_error"`
+
+    - `beta_managed_agents_memory_store_archived_run_error: object { message, type }`
+
+      A memory store referenced by the deployment is archived.
+
+      - `message: string`
+
+        Human-readable error description.
+
+      - `type: "memory_store_archived_error"`
+
+        - `"memory_store_archived_error"`
+
+    - `beta_managed_agents_skill_not_found_run_error: object { message, type }`
+
+      A skill referenced by the deployment's agent no longer exists.
+
+      - `message: string`
+
+        Human-readable error description.
+
+      - `type: "skill_not_found_error"`
+
+        - `"skill_not_found_error"`
+
+    - `beta_managed_agents_session_resource_not_found_run_error: object { message, type }`
+
+      A referenced resource no longer exists and its kind was not reported.
+
+      - `message: string`
+
+        Human-readable error description.
+
+      - `type: "session_resource_not_found_error"`
+
+        - `"session_resource_not_found_error"`
+
+    - `beta_managed_agents_workspace_archived_run_error: object { message, type }`
+
+      The deployment's workspace was archived.
+
+      - `message: string`
+
+        Human-readable error description.
+
+      - `type: "workspace_archived_error"`
+
+        - `"workspace_archived_error"`
+
+    - `beta_managed_agents_organization_disabled_run_error: object { message, type }`
+
+      The deployment's organization is disabled.
+
+      - `message: string`
+
+        Human-readable error description.
+
+      - `type: "organization_disabled_error"`
+
+        - `"organization_disabled_error"`
+
+    - `beta_managed_agents_session_rate_limited_run_error: object { message, type }`
+
+      Session creation was rejected due to rate limiting. The schedule keeps firing; subsequent runs may succeed.
+
+      - `message: string`
+
+        Human-readable error description.
+
+      - `type: "session_rate_limited_error"`
+
+        - `"session_rate_limited_error"`
+
+    - `beta_managed_agents_session_creation_rejected_run_error: object { message, type }`
+
+      The session create request was rejected with a non-retryable validation error.
+
+      - `message: string`
+
+        Human-readable error description.
+
+      - `type: "session_creation_rejected_error"`
+
+        - `"session_creation_rejected_error"`
+
+    - `beta_managed_agents_unknown_run_error: object { message, type }`
+
+      An unknown or unexpected error caused the run to fail. A fallback variant; clients that do not recognize a new error type can match on message alone.
+
+      - `message: string`
+
+        Human-readable error description.
+
+      - `type: "unknown_error"`
+
+        - `"unknown_error"`
+
+    - `beta_managed_agents_self_hosted_resources_unsupported_run_error: object { message, type }`
+
+      The deployment configures resources, but its environment is self-hosted and cannot mount them.
+
+      - `message: string`
+
+        Human-readable error description.
+
+      - `type: "self_hosted_resources_unsupported_error"`
+
+        - `"self_hosted_resources_unsupported_error"`
+
+    - `beta_managed_agents_mcp_egress_blocked_run_error: object { message, type }`
+
+      An MCP server host used by the deployment's agent is blocked by the environment's network policy.
+
+      - `message: string`
+
+        Human-readable error description.
+
+      - `type: "mcp_egress_blocked_error"`
+
+        - `"mcp_egress_blocked_error"`
+
+  - `session_id: string`
+
+    Populated on success. Null on creation failure. Exactly one of session_id or error is non-null.
+
+  - `trigger_context: BetaManagedAgentsScheduleTriggerContext or BetaManagedAgentsManualTriggerContext`
+
+    Describes what triggered a deployment run, with trigger-specific metadata.
+
+    - `beta_managed_agents_schedule_trigger_context: object { scheduled_at, type }`
+
+      The run was fired by the deployment's cron schedule.
+
+      - `scheduled_at: string`
+
+        A timestamp in RFC 3339 format
+
+      - `type: "schedule"`
+
+        - `"schedule"`
+
+    - `beta_managed_agents_manual_trigger_context: object { type }`
+
+      The run was started manually by creating a session directly against the deployment.
+
+      - `type: "manual"`
+
+        - `"manual"`
+
+  - `type: "deployment_run"`
+
+    - `"deployment_run"`
+
+### Example
+
+```cli
+ant beta:deployments run \
+  --api-key my-anthropic-api-key \
+  --deployment-id deployment_id
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "agent": {
+    "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+    "type": "agent",
+    "version": 1
+  },
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "deployment_id": "deployment_id",
+  "error": {
+    "message": "message",
+    "type": "environment_archived_error"
+  },
+  "session_id": "session_id",
+  "trigger_context": {
+    "scheduled_at": "2019-12-27T18:11:19.117Z",
+    "type": "schedule"
+  },
+  "type": "deployment_run"
+}
+```
+
+## Pause Deployment
+
+`$ ant beta:deployments pause`
+
+**post** `/v1/deployments/{deployment_id}/pause`
+
+Pause Deployment
+
+### Parameters
+
+- `--deployment-id: string`
+
+  Path parameter deployment_id
+
+- `--beta: optional array of AnthropicBeta`
+
+  Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `beta_managed_agents_deployment: object { id, agent, archived_at, 13 more }`
+
+  A deployment is a configured instance of an agent — it binds the agent to everything needed to run it autonomously: an environment, credentials, initial events, and an optional schedule.
+
+  - `id: string`
+
+    Unique identifier for this deployment.
+
+  - `agent: object { id, type, version }`
+
+    A resolved agent reference with a concrete version.
+
+    - `id: string`
+
+    - `type: "agent"`
+
+      - `"agent"`
+
+    - `version: number`
+
+  - `archived_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `created_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `description: string`
+
+    Description of what the deployment does.
+
+  - `environment_id: string`
+
+    ID of the `environment` where sessions run.
+
+  - `initial_events: array of BetaManagedAgentsDeploymentInitialEvent`
+
+    Events sent to each session immediately after creation.
+
+    - `beta_managed_agents_deployment_user_message_event: object { content, type }`
+
+      A user message sent to the session.
+
+      - `content: array of BetaManagedAgentsTextBlock or BetaManagedAgentsImageBlock or BetaManagedAgentsDocumentBlock`
+
+        Array of content blocks for the user message.
+
+        - `beta_managed_agents_text_block: object { text, type }`
+
+          Regular text content.
+
+          - `text: string`
+
+            The text content.
+
+          - `type: "text"`
+
+            - `"text"`
+
+        - `beta_managed_agents_image_block: object { source, type }`
+
+          Image content specified directly as base64 data or as a reference via a URL.
+
+          - `source: BetaManagedAgentsBase64ImageSource or BetaManagedAgentsURLImageSource or BetaManagedAgentsFileImageSource`
+
+            Union type for image source variants.
+
+            - `beta_managed_agents_base64_image_source: object { data, media_type, type }`
+
+              Base64-encoded image data.
+
+              - `data: string`
+
+                Base64-encoded image data.
+
+              - `media_type: string`
+
+                MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+              - `type: "base64"`
+
+                - `"base64"`
+
+            - `beta_managed_agents_url_image_source: object { type, url }`
+
+              Image referenced by URL.
+
+              - `type: "url"`
+
+                - `"url"`
+
+              - `url: string`
+
+                URL of the image to fetch.
+
+            - `beta_managed_agents_file_image_source: object { file_id, type }`
+
+              Image referenced by file ID.
+
+              - `file_id: string`
+
+                ID of a previously uploaded file.
+
+              - `type: "file"`
+
+                - `"file"`
+
+          - `type: "image"`
+
+            - `"image"`
+
+        - `beta_managed_agents_document_block: object { source, type, context, title }`
+
+          Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+          - `source: BetaManagedAgentsBase64DocumentSource or BetaManagedAgentsPlainTextDocumentSource or BetaManagedAgentsURLDocumentSource or BetaManagedAgentsFileDocumentSource`
+
+            Union type for document source variants.
+
+            - `beta_managed_agents_base64_document_source: object { data, media_type, type }`
+
+              Base64-encoded document data.
+
+              - `data: string`
+
+                Base64-encoded document data.
+
+              - `media_type: string`
+
+                MIME type of the document (e.g., "application/pdf").
+
+              - `type: "base64"`
+
+                - `"base64"`
+
+            - `beta_managed_agents_plain_text_document_source: object { data, media_type, type }`
+
+              Plain text document content.
+
+              - `data: string`
+
+                The plain text content.
+
+              - `media_type: "text/plain"`
+
+                MIME type of the text content. Must be "text/plain".
+
+                - `"text/plain"`
+
+              - `type: "text"`
+
+                - `"text"`
+
+            - `beta_managed_agents_url_document_source: object { type, url }`
+
+              Document referenced by URL.
+
+              - `type: "url"`
+
+                - `"url"`
+
+              - `url: string`
+
+                URL of the document to fetch.
+
+            - `beta_managed_agents_file_document_source: object { file_id, type }`
+
+              Document referenced by file ID.
+
+              - `file_id: string`
+
+                ID of a previously uploaded file.
+
+              - `type: "file"`
+
+                - `"file"`
+
+          - `type: "document"`
+
+            - `"document"`
+
+          - `context: optional string`
+
+            Additional context about the document for the model.
+
+          - `title: optional string`
+
+            The title of the document.
+
+      - `type: "user.message"`
+
+        - `"user.message"`
+
+    - `beta_managed_agents_deployment_user_define_outcome_event: object { description, rubric, type, max_iterations }`
+
+      An outcome the agent should work toward. The agent begins work on receipt.
+
+      - `description: string`
+
+        What the agent should produce. This is the task specification.
+
+      - `rubric: BetaManagedAgentsFileRubric or BetaManagedAgentsTextRubric`
+
+        Rubric for grading the quality of an outcome.
+
+        - `beta_managed_agents_file_rubric: object { file_id, type }`
+
+          Rubric referenced by a file uploaded via the Files API.
+
+          - `file_id: string`
+
+            ID of the rubric file.
+
+          - `type: "file"`
+
+            - `"file"`
+
+        - `beta_managed_agents_text_rubric: object { content, type }`
+
+          Rubric content provided inline as text.
+
+          - `content: string`
+
+            Rubric content. Plain text or markdown — the grader treats it as freeform text.
+
+          - `type: "text"`
+
+            - `"text"`
+
+      - `type: "user.define_outcome"`
+
+        - `"user.define_outcome"`
+
+      - `max_iterations: optional number`
+
+        Eval→revision cycles before giving up. Default 3, max 20.
+
+    - `beta_managed_agents_deployment_system_message_event: object { content, type }`
+
+      Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
+
+      - `content: array of BetaManagedAgentsSystemContentBlock`
+
+        System content blocks to append. Text-only.
+
+        - `text: string`
+
+          The text content.
+
+        - `type: "text"`
+
+          - `"text"`
+
+      - `type: "system.message"`
+
+        - `"system.message"`
+
+  - `metadata: map[string]`
+
+    Arbitrary key-value metadata. Maximum 16 pairs.
+
+  - `name: string`
+
+    Human-readable name.
+
+  - `paused_reason: BetaManagedAgentsManualDeploymentPausedReason or BetaManagedAgentsErrorDeploymentPausedReason`
+
+    Why a deployment is paused. Non-null exactly when `status` is `paused`.
+
+    - `beta_managed_agents_manual_deployment_paused_reason: object { type }`
+
+      The caller invoked the pause endpoint on the deployment.
+
+      - `type: "manual"`
+
+        - `"manual"`
+
+    - `beta_managed_agents_error_deployment_paused_reason: object { error, type }`
+
+      A scheduled fire recorded a failed run whose error auto-pauses the deployment.
+
+      - `error: BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError or BetaManagedAgentsAgentArchivedDeploymentPausedReasonError or BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError or 11 more`
+
+        The error that triggered an auto-pause. Matches the failed run's `error.type`.
+
+        - `beta_managed_agents_environment_archived_deployment_paused_reason_error: object { type }`
+
+          The deployment's environment was archived.
+
+          - `type: "environment_archived_error"`
+
+            - `"environment_archived_error"`
+
+        - `beta_managed_agents_agent_archived_deployment_paused_reason_error: object { type }`
+
+          The deployment's agent was archived.
+
+          - `type: "agent_archived_error"`
+
+            - `"agent_archived_error"`
+
+        - `beta_managed_agents_environment_not_found_deployment_paused_reason_error: object { type }`
+
+          The deployment's environment no longer exists.
+
+          - `type: "environment_not_found_error"`
+
+            - `"environment_not_found_error"`
+
+        - `beta_managed_agents_vault_not_found_deployment_paused_reason_error: object { type }`
+
+          A vault referenced by the deployment no longer exists.
+
+          - `type: "vault_not_found_error"`
+
+            - `"vault_not_found_error"`
+
+        - `beta_managed_agents_file_not_found_deployment_paused_reason_error: object { type }`
+
+          A file resource referenced by the deployment no longer exists.
+
+          - `type: "file_not_found_error"`
+
+            - `"file_not_found_error"`
+
+        - `beta_managed_agents_session_resource_not_found_deployment_paused_reason_error: object { type }`
+
+          A referenced resource no longer exists and its kind was not reported.
+
+          - `type: "session_resource_not_found_error"`
+
+            - `"session_resource_not_found_error"`
+
+        - `beta_managed_agents_workspace_archived_deployment_paused_reason_error: object { type }`
+
+          The deployment's workspace was archived.
+
+          - `type: "workspace_archived_error"`
+
+            - `"workspace_archived_error"`
+
+        - `beta_managed_agents_organization_disabled_deployment_paused_reason_error: object { type }`
+
+          The deployment's organization is disabled.
+
+          - `type: "organization_disabled_error"`
+
+            - `"organization_disabled_error"`
+
+        - `beta_managed_agents_memory_store_archived_deployment_paused_reason_error: object { type }`
+
+          A memory store referenced by the deployment is archived.
+
+          - `type: "memory_store_archived_error"`
+
+            - `"memory_store_archived_error"`
+
+        - `beta_managed_agents_skill_not_found_deployment_paused_reason_error: object { type }`
+
+          A skill referenced by the deployment's agent no longer exists.
+
+          - `type: "skill_not_found_error"`
+
+            - `"skill_not_found_error"`
+
+        - `beta_managed_agents_vault_archived_deployment_paused_reason_error: object { type }`
+
+          A vault referenced by the deployment is archived.
+
+          - `type: "vault_archived_error"`
+
+            - `"vault_archived_error"`
+
+        - `beta_managed_agents_unknown_deployment_paused_reason_error: object { type }`
+
+          An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
+
+          - `type: "unknown_error"`
+
+            - `"unknown_error"`
+
+        - `beta_managed_agents_self_hosted_resources_unsupported_deployment_paused_reason_error: object { type }`
+
+          The deployment configures resources, but its environment is self-hosted and cannot mount them.
+
+          - `type: "self_hosted_resources_unsupported_error"`
+
+            - `"self_hosted_resources_unsupported_error"`
+
+        - `beta_managed_agents_mcp_egress_blocked_deployment_paused_reason_error: object { type }`
+
+          An MCP server host used by the deployment's agent is blocked by the environment's network policy.
+
+          - `type: "mcp_egress_blocked_error"`
+
+            - `"mcp_egress_blocked_error"`
+
+      - `type: "error"`
+
+        - `"error"`
+
+  - `resources: array of BetaManagedAgentsSessionResourceConfig`
+
+    Resources attached to sessions created from this deployment. Echoes the input minus write-only credentials.
+
+    - `beta_managed_agents_github_repository_resource_config: object { type, url, checkout, mount_path }`
+
+      A GitHub repository mounted into each session's container. The authorization token is write-only and never returned.
+
+      - `type: "github_repository"`
+
+        - `"github_repository"`
+
+      - `url: string`
+
+        Github URL of the repository
+
+      - `checkout: optional BetaManagedAgentsBranchCheckout or BetaManagedAgentsCommitCheckout`
+
+        Branch or commit to check out. Defaults to the repository's default branch.
+
+        - `beta_managed_agents_branch_checkout: object { name, type }`
+
+          - `name: string`
+
+            Branch name to check out.
+
+          - `type: "branch"`
+
+            - `"branch"`
+
+        - `beta_managed_agents_commit_checkout: object { sha, type }`
+
+          - `sha: string`
+
+            Full commit SHA to check out.
+
+          - `type: "commit"`
+
+            - `"commit"`
+
+      - `mount_path: optional string`
+
+        Mount path in the container. Defaults to `/workspace/<repo-name>`.
+
+    - `beta_managed_agents_file_resource_config: object { file_id, type, mount_path }`
+
+      A file mounted into each session's container.
+
+      - `file_id: string`
+
+        ID of a previously uploaded file.
+
+      - `type: "file"`
+
+        - `"file"`
+
+      - `mount_path: optional string`
+
+        Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
+
+    - `beta_managed_agents_memory_store_resource_config: object { memory_store_id, type, access, instructions }`
+
+      A memory store attached to each session created from this deployment.
+
+      - `memory_store_id: string`
+
+        The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+      - `type: "memory_store"`
+
+        - `"memory_store"`
+
+      - `access: optional "read_write" or "read_only"`
+
+        Access mode for an attached memory store.
+
+        - `"read_write"`
+
+        - `"read_only"`
+
+      - `instructions: optional string`
+
+        Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+  - `schedule: object { expression, timezone, type, 2 more }`
+
+    5-field POSIX cron schedule with computed runtime timestamps.
+
+    - `expression: string`
+
+      5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 * * 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
+
+    - `timezone: string`
+
+      IANA timezone identifier (e.g., "America/Los_Angeles", "UTC").
+
+    - `type: "cron"`
+
+      - `"cron"`
+
+    - `last_run_at: optional string`
+
+      A timestamp in RFC 3339 format
+
+    - `upcoming_runs_at: optional array of string`
+
+      Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused deployments (reflects what the schedule would do if unpaused); empty once the deployment is archived (`archived_at` set). Each fire is offset by a small per-schedule jitter, so a run will actually start at or shortly after its listed time.
+
+  - `status: "active" or "paused"`
+
+    Lifecycle status of a deployment.
+
+    - `"active"`
+
+    - `"paused"`
+
+  - `type: "deployment"`
+
+    - `"deployment"`
+
+  - `updated_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `vault_ids: array of string`
+
+    Vault IDs supplying stored credentials for sessions created from this deployment.
+
+### Example
+
+```cli
+ant beta:deployments pause \
+  --api-key my-anthropic-api-key \
+  --deployment-id deployment_id
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "agent": {
+    "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+    "type": "agent",
+    "version": 1
+  },
+  "archived_at": "2019-12-27T18:11:19.117Z",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "description": "description",
+  "environment_id": "environment_id",
+  "initial_events": [
+    {
+      "content": [
+        {
+          "text": "Where is my order #1234?",
+          "type": "text"
+        }
+      ],
+      "type": "user.message"
+    }
+  ],
+  "metadata": {
+    "foo": "string"
+  },
+  "name": "name",
+  "paused_reason": {
+    "type": "manual"
+  },
+  "resources": [
+    {
+      "type": "github_repository",
+      "url": "url",
+      "checkout": {
+        "name": "main",
+        "type": "branch"
+      },
+      "mount_path": "mount_path"
+    }
+  ],
+  "schedule": {
+    "expression": "x",
+    "timezone": "x",
+    "type": "cron",
+    "last_run_at": "2019-12-27T18:11:19.117Z",
+    "upcoming_runs_at": [
+      "2019-12-27T18:11:19.117Z"
+    ]
+  },
+  "status": "active",
+  "type": "deployment",
+  "updated_at": "2019-12-27T18:11:19.117Z",
+  "vault_ids": [
+    "string"
+  ]
+}
+```
+
+## Unpause Deployment
+
+`$ ant beta:deployments unpause`
+
+**post** `/v1/deployments/{deployment_id}/unpause`
+
+Unpause Deployment
+
+### Parameters
+
+- `--deployment-id: string`
+
+  Path parameter deployment_id
+
+- `--beta: optional array of AnthropicBeta`
+
+  Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `beta_managed_agents_deployment: object { id, agent, archived_at, 13 more }`
+
+  A deployment is a configured instance of an agent — it binds the agent to everything needed to run it autonomously: an environment, credentials, initial events, and an optional schedule.
+
+  - `id: string`
+
+    Unique identifier for this deployment.
+
+  - `agent: object { id, type, version }`
+
+    A resolved agent reference with a concrete version.
+
+    - `id: string`
+
+    - `type: "agent"`
+
+      - `"agent"`
+
+    - `version: number`
+
+  - `archived_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `created_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `description: string`
+
+    Description of what the deployment does.
+
+  - `environment_id: string`
+
+    ID of the `environment` where sessions run.
+
+  - `initial_events: array of BetaManagedAgentsDeploymentInitialEvent`
+
+    Events sent to each session immediately after creation.
+
+    - `beta_managed_agents_deployment_user_message_event: object { content, type }`
+
+      A user message sent to the session.
+
+      - `content: array of BetaManagedAgentsTextBlock or BetaManagedAgentsImageBlock or BetaManagedAgentsDocumentBlock`
+
+        Array of content blocks for the user message.
+
+        - `beta_managed_agents_text_block: object { text, type }`
+
+          Regular text content.
+
+          - `text: string`
+
+            The text content.
+
+          - `type: "text"`
+
+            - `"text"`
+
+        - `beta_managed_agents_image_block: object { source, type }`
+
+          Image content specified directly as base64 data or as a reference via a URL.
+
+          - `source: BetaManagedAgentsBase64ImageSource or BetaManagedAgentsURLImageSource or BetaManagedAgentsFileImageSource`
+
+            Union type for image source variants.
+
+            - `beta_managed_agents_base64_image_source: object { data, media_type, type }`
+
+              Base64-encoded image data.
+
+              - `data: string`
+
+                Base64-encoded image data.
+
+              - `media_type: string`
+
+                MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+              - `type: "base64"`
+
+                - `"base64"`
+
+            - `beta_managed_agents_url_image_source: object { type, url }`
+
+              Image referenced by URL.
+
+              - `type: "url"`
+
+                - `"url"`
+
+              - `url: string`
+
+                URL of the image to fetch.
+
+            - `beta_managed_agents_file_image_source: object { file_id, type }`
+
+              Image referenced by file ID.
+
+              - `file_id: string`
+
+                ID of a previously uploaded file.
+
+              - `type: "file"`
+
+                - `"file"`
+
+          - `type: "image"`
+
+            - `"image"`
+
+        - `beta_managed_agents_document_block: object { source, type, context, title }`
+
+          Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+          - `source: BetaManagedAgentsBase64DocumentSource or BetaManagedAgentsPlainTextDocumentSource or BetaManagedAgentsURLDocumentSource or BetaManagedAgentsFileDocumentSource`
+
+            Union type for document source variants.
+
+            - `beta_managed_agents_base64_document_source: object { data, media_type, type }`
+
+              Base64-encoded document data.
+
+              - `data: string`
+
+                Base64-encoded document data.
+
+              - `media_type: string`
+
+                MIME type of the document (e.g., "application/pdf").
+
+              - `type: "base64"`
+
+                - `"base64"`
+
+            - `beta_managed_agents_plain_text_document_source: object { data, media_type, type }`
+
+              Plain text document content.
+
+              - `data: string`
+
+                The plain text content.
+
+              - `media_type: "text/plain"`
+
+                MIME type of the text content. Must be "text/plain".
+
+                - `"text/plain"`
+
+              - `type: "text"`
+
+                - `"text"`
+
+            - `beta_managed_agents_url_document_source: object { type, url }`
+
+              Document referenced by URL.
+
+              - `type: "url"`
+
+                - `"url"`
+
+              - `url: string`
+
+                URL of the document to fetch.
+
+            - `beta_managed_agents_file_document_source: object { file_id, type }`
+
+              Document referenced by file ID.
+
+              - `file_id: string`
+
+                ID of a previously uploaded file.
+
+              - `type: "file"`
+
+                - `"file"`
+
+          - `type: "document"`
+
+            - `"document"`
+
+          - `context: optional string`
+
+            Additional context about the document for the model.
+
+          - `title: optional string`
+
+            The title of the document.
+
+      - `type: "user.message"`
+
+        - `"user.message"`
+
+    - `beta_managed_agents_deployment_user_define_outcome_event: object { description, rubric, type, max_iterations }`
+
+      An outcome the agent should work toward. The agent begins work on receipt.
+
+      - `description: string`
+
+        What the agent should produce. This is the task specification.
+
+      - `rubric: BetaManagedAgentsFileRubric or BetaManagedAgentsTextRubric`
+
+        Rubric for grading the quality of an outcome.
+
+        - `beta_managed_agents_file_rubric: object { file_id, type }`
+
+          Rubric referenced by a file uploaded via the Files API.
+
+          - `file_id: string`
+
+            ID of the rubric file.
+
+          - `type: "file"`
+
+            - `"file"`
+
+        - `beta_managed_agents_text_rubric: object { content, type }`
+
+          Rubric content provided inline as text.
+
+          - `content: string`
+
+            Rubric content. Plain text or markdown — the grader treats it as freeform text.
+
+          - `type: "text"`
+
+            - `"text"`
+
+      - `type: "user.define_outcome"`
+
+        - `"user.define_outcome"`
+
+      - `max_iterations: optional number`
+
+        Eval→revision cycles before giving up. Default 3, max 20.
+
+    - `beta_managed_agents_deployment_system_message_event: object { content, type }`
+
+      Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
+
+      - `content: array of BetaManagedAgentsSystemContentBlock`
+
+        System content blocks to append. Text-only.
+
+        - `text: string`
+
+          The text content.
+
+        - `type: "text"`
+
+          - `"text"`
+
+      - `type: "system.message"`
+
+        - `"system.message"`
+
+  - `metadata: map[string]`
+
+    Arbitrary key-value metadata. Maximum 16 pairs.
+
+  - `name: string`
+
+    Human-readable name.
+
+  - `paused_reason: BetaManagedAgentsManualDeploymentPausedReason or BetaManagedAgentsErrorDeploymentPausedReason`
+
+    Why a deployment is paused. Non-null exactly when `status` is `paused`.
+
+    - `beta_managed_agents_manual_deployment_paused_reason: object { type }`
+
+      The caller invoked the pause endpoint on the deployment.
+
+      - `type: "manual"`
+
+        - `"manual"`
+
+    - `beta_managed_agents_error_deployment_paused_reason: object { error, type }`
+
+      A scheduled fire recorded a failed run whose error auto-pauses the deployment.
+
+      - `error: BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError or BetaManagedAgentsAgentArchivedDeploymentPausedReasonError or BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError or 11 more`
+
+        The error that triggered an auto-pause. Matches the failed run's `error.type`.
+
+        - `beta_managed_agents_environment_archived_deployment_paused_reason_error: object { type }`
+
+          The deployment's environment was archived.
+
+          - `type: "environment_archived_error"`
+
+            - `"environment_archived_error"`
+
+        - `beta_managed_agents_agent_archived_deployment_paused_reason_error: object { type }`
+
+          The deployment's agent was archived.
+
+          - `type: "agent_archived_error"`
+
+            - `"agent_archived_error"`
+
+        - `beta_managed_agents_environment_not_found_deployment_paused_reason_error: object { type }`
+
+          The deployment's environment no longer exists.
+
+          - `type: "environment_not_found_error"`
+
+            - `"environment_not_found_error"`
+
+        - `beta_managed_agents_vault_not_found_deployment_paused_reason_error: object { type }`
+
+          A vault referenced by the deployment no longer exists.
+
+          - `type: "vault_not_found_error"`
+
+            - `"vault_not_found_error"`
+
+        - `beta_managed_agents_file_not_found_deployment_paused_reason_error: object { type }`
+
+          A file resource referenced by the deployment no longer exists.
+
+          - `type: "file_not_found_error"`
+
+            - `"file_not_found_error"`
+
+        - `beta_managed_agents_session_resource_not_found_deployment_paused_reason_error: object { type }`
+
+          A referenced resource no longer exists and its kind was not reported.
+
+          - `type: "session_resource_not_found_error"`
+
+            - `"session_resource_not_found_error"`
+
+        - `beta_managed_agents_workspace_archived_deployment_paused_reason_error: object { type }`
+
+          The deployment's workspace was archived.
+
+          - `type: "workspace_archived_error"`
+
+            - `"workspace_archived_error"`
+
+        - `beta_managed_agents_organization_disabled_deployment_paused_reason_error: object { type }`
+
+          The deployment's organization is disabled.
+
+          - `type: "organization_disabled_error"`
+
+            - `"organization_disabled_error"`
+
+        - `beta_managed_agents_memory_store_archived_deployment_paused_reason_error: object { type }`
+
+          A memory store referenced by the deployment is archived.
+
+          - `type: "memory_store_archived_error"`
+
+            - `"memory_store_archived_error"`
+
+        - `beta_managed_agents_skill_not_found_deployment_paused_reason_error: object { type }`
+
+          A skill referenced by the deployment's agent no longer exists.
+
+          - `type: "skill_not_found_error"`
+
+            - `"skill_not_found_error"`
+
+        - `beta_managed_agents_vault_archived_deployment_paused_reason_error: object { type }`
+
+          A vault referenced by the deployment is archived.
+
+          - `type: "vault_archived_error"`
+
+            - `"vault_archived_error"`
+
+        - `beta_managed_agents_unknown_deployment_paused_reason_error: object { type }`
+
+          An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
+
+          - `type: "unknown_error"`
+
+            - `"unknown_error"`
+
+        - `beta_managed_agents_self_hosted_resources_unsupported_deployment_paused_reason_error: object { type }`
+
+          The deployment configures resources, but its environment is self-hosted and cannot mount them.
+
+          - `type: "self_hosted_resources_unsupported_error"`
+
+            - `"self_hosted_resources_unsupported_error"`
+
+        - `beta_managed_agents_mcp_egress_blocked_deployment_paused_reason_error: object { type }`
+
+          An MCP server host used by the deployment's agent is blocked by the environment's network policy.
+
+          - `type: "mcp_egress_blocked_error"`
+
+            - `"mcp_egress_blocked_error"`
+
+      - `type: "error"`
+
+        - `"error"`
+
+  - `resources: array of BetaManagedAgentsSessionResourceConfig`
+
+    Resources attached to sessions created from this deployment. Echoes the input minus write-only credentials.
+
+    - `beta_managed_agents_github_repository_resource_config: object { type, url, checkout, mount_path }`
+
+      A GitHub repository mounted into each session's container. The authorization token is write-only and never returned.
+
+      - `type: "github_repository"`
+
+        - `"github_repository"`
+
+      - `url: string`
+
+        Github URL of the repository
+
+      - `checkout: optional BetaManagedAgentsBranchCheckout or BetaManagedAgentsCommitCheckout`
+
+        Branch or commit to check out. Defaults to the repository's default branch.
+
+        - `beta_managed_agents_branch_checkout: object { name, type }`
+
+          - `name: string`
+
+            Branch name to check out.
+
+          - `type: "branch"`
+
+            - `"branch"`
+
+        - `beta_managed_agents_commit_checkout: object { sha, type }`
+
+          - `sha: string`
+
+            Full commit SHA to check out.
+
+          - `type: "commit"`
+
+            - `"commit"`
+
+      - `mount_path: optional string`
+
+        Mount path in the container. Defaults to `/workspace/<repo-name>`.
+
+    - `beta_managed_agents_file_resource_config: object { file_id, type, mount_path }`
+
+      A file mounted into each session's container.
+
+      - `file_id: string`
+
+        ID of a previously uploaded file.
+
+      - `type: "file"`
+
+        - `"file"`
+
+      - `mount_path: optional string`
+
+        Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
+
+    - `beta_managed_agents_memory_store_resource_config: object { memory_store_id, type, access, instructions }`
+
+      A memory store attached to each session created from this deployment.
+
+      - `memory_store_id: string`
+
+        The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+      - `type: "memory_store"`
+
+        - `"memory_store"`
+
+      - `access: optional "read_write" or "read_only"`
+
+        Access mode for an attached memory store.
+
+        - `"read_write"`
+
+        - `"read_only"`
+
+      - `instructions: optional string`
+
+        Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+  - `schedule: object { expression, timezone, type, 2 more }`
+
+    5-field POSIX cron schedule with computed runtime timestamps.
+
+    - `expression: string`
+
+      5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 * * 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
+
+    - `timezone: string`
+
+      IANA timezone identifier (e.g., "America/Los_Angeles", "UTC").
+
+    - `type: "cron"`
+
+      - `"cron"`
+
+    - `last_run_at: optional string`
+
+      A timestamp in RFC 3339 format
+
+    - `upcoming_runs_at: optional array of string`
+
+      Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused deployments (reflects what the schedule would do if unpaused); empty once the deployment is archived (`archived_at` set). Each fire is offset by a small per-schedule jitter, so a run will actually start at or shortly after its listed time.
+
+  - `status: "active" or "paused"`
+
+    Lifecycle status of a deployment.
+
+    - `"active"`
+
+    - `"paused"`
+
+  - `type: "deployment"`
+
+    - `"deployment"`
+
+  - `updated_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `vault_ids: array of string`
+
+    Vault IDs supplying stored credentials for sessions created from this deployment.
+
+### Example
+
+```cli
+ant beta:deployments unpause \
+  --api-key my-anthropic-api-key \
+  --deployment-id deployment_id
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "agent": {
+    "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+    "type": "agent",
+    "version": 1
+  },
+  "archived_at": "2019-12-27T18:11:19.117Z",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "description": "description",
+  "environment_id": "environment_id",
+  "initial_events": [
+    {
+      "content": [
+        {
+          "text": "Where is my order #1234?",
+          "type": "text"
+        }
+      ],
+      "type": "user.message"
+    }
+  ],
+  "metadata": {
+    "foo": "string"
+  },
+  "name": "name",
+  "paused_reason": {
+    "type": "manual"
+  },
+  "resources": [
+    {
+      "type": "github_repository",
+      "url": "url",
+      "checkout": {
+        "name": "main",
+        "type": "branch"
+      },
+      "mount_path": "mount_path"
+    }
+  ],
+  "schedule": {
+    "expression": "x",
+    "timezone": "x",
+    "type": "cron",
+    "last_run_at": "2019-12-27T18:11:19.117Z",
+    "upcoming_runs_at": [
+      "2019-12-27T18:11:19.117Z"
+    ]
+  },
+  "status": "active",
+  "type": "deployment",
+  "updated_at": "2019-12-27T18:11:19.117Z",
+  "vault_ids": [
+    "string"
+  ]
+}
+```
+
+## Domain Types
+
+### Beta Managed Agents Agent Archived Deployment Paused Reason Error
+
+- `beta_managed_agents_agent_archived_deployment_paused_reason_error: object { type }`
+
+  The deployment's agent was archived.
+
+  - `type: "agent_archived_error"`
+
+    - `"agent_archived_error"`
+
+### Beta Managed Agents Cron Schedule
+
+- `beta_managed_agents_cron_schedule: object { expression, timezone, type, 2 more }`
+
+  5-field POSIX cron schedule with computed runtime timestamps.
+
+  - `expression: string`
+
+    5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 * * 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
+
+  - `timezone: string`
+
+    IANA timezone identifier (e.g., "America/Los_Angeles", "UTC").
+
+  - `type: "cron"`
+
+    - `"cron"`
+
+  - `last_run_at: optional string`
+
+    A timestamp in RFC 3339 format
+
+  - `upcoming_runs_at: optional array of string`
+
+    Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused deployments (reflects what the schedule would do if unpaused); empty once the deployment is archived (`archived_at` set). Each fire is offset by a small per-schedule jitter, so a run will actually start at or shortly after its listed time.
+
+### Beta Managed Agents Cron Schedule Params
+
+- `beta_managed_agents_cron_schedule_params: object { expression, timezone, type }`
+
+  5-field POSIX cron schedule. Literal wall-clock matching in the configured timezone.
+
+  - `expression: string`
+
+    5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 * * 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
+
+  - `timezone: string`
+
+    Required. IANA timezone identifier (e.g., "America/Los_Angeles", "UTC"). Validated against the IANA timezone database.
+
+  - `type: "cron"`
+
+    - `"cron"`
+
+### Beta Managed Agents Deployment
+
+- `beta_managed_agents_deployment: object { id, agent, archived_at, 13 more }`
+
+  A deployment is a configured instance of an agent — it binds the agent to everything needed to run it autonomously: an environment, credentials, initial events, and an optional schedule.
+
+  - `id: string`
+
+    Unique identifier for this deployment.
+
+  - `agent: object { id, type, version }`
+
+    A resolved agent reference with a concrete version.
+
+    - `id: string`
+
+    - `type: "agent"`
+
+      - `"agent"`
+
+    - `version: number`
+
+  - `archived_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `created_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `description: string`
+
+    Description of what the deployment does.
+
+  - `environment_id: string`
+
+    ID of the `environment` where sessions run.
+
+  - `initial_events: array of BetaManagedAgentsDeploymentInitialEvent`
+
+    Events sent to each session immediately after creation.
+
+    - `beta_managed_agents_deployment_user_message_event: object { content, type }`
+
+      A user message sent to the session.
+
+      - `content: array of BetaManagedAgentsTextBlock or BetaManagedAgentsImageBlock or BetaManagedAgentsDocumentBlock`
+
+        Array of content blocks for the user message.
+
+        - `beta_managed_agents_text_block: object { text, type }`
+
+          Regular text content.
+
+          - `text: string`
+
+            The text content.
+
+          - `type: "text"`
+
+            - `"text"`
+
+        - `beta_managed_agents_image_block: object { source, type }`
+
+          Image content specified directly as base64 data or as a reference via a URL.
+
+          - `source: BetaManagedAgentsBase64ImageSource or BetaManagedAgentsURLImageSource or BetaManagedAgentsFileImageSource`
+
+            Union type for image source variants.
+
+            - `beta_managed_agents_base64_image_source: object { data, media_type, type }`
+
+              Base64-encoded image data.
+
+              - `data: string`
+
+                Base64-encoded image data.
+
+              - `media_type: string`
+
+                MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+              - `type: "base64"`
+
+                - `"base64"`
+
+            - `beta_managed_agents_url_image_source: object { type, url }`
+
+              Image referenced by URL.
+
+              - `type: "url"`
+
+                - `"url"`
+
+              - `url: string`
+
+                URL of the image to fetch.
+
+            - `beta_managed_agents_file_image_source: object { file_id, type }`
+
+              Image referenced by file ID.
+
+              - `file_id: string`
+
+                ID of a previously uploaded file.
+
+              - `type: "file"`
+
+                - `"file"`
+
+          - `type: "image"`
+
+            - `"image"`
+
+        - `beta_managed_agents_document_block: object { source, type, context, title }`
+
+          Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+          - `source: BetaManagedAgentsBase64DocumentSource or BetaManagedAgentsPlainTextDocumentSource or BetaManagedAgentsURLDocumentSource or BetaManagedAgentsFileDocumentSource`
+
+            Union type for document source variants.
+
+            - `beta_managed_agents_base64_document_source: object { data, media_type, type }`
+
+              Base64-encoded document data.
+
+              - `data: string`
+
+                Base64-encoded document data.
+
+              - `media_type: string`
+
+                MIME type of the document (e.g., "application/pdf").
+
+              - `type: "base64"`
+
+                - `"base64"`
+
+            - `beta_managed_agents_plain_text_document_source: object { data, media_type, type }`
+
+              Plain text document content.
+
+              - `data: string`
+
+                The plain text content.
+
+              - `media_type: "text/plain"`
+
+                MIME type of the text content. Must be "text/plain".
+
+                - `"text/plain"`
+
+              - `type: "text"`
+
+                - `"text"`
+
+            - `beta_managed_agents_url_document_source: object { type, url }`
+
+              Document referenced by URL.
+
+              - `type: "url"`
+
+                - `"url"`
+
+              - `url: string`
+
+                URL of the document to fetch.
+
+            - `beta_managed_agents_file_document_source: object { file_id, type }`
+
+              Document referenced by file ID.
+
+              - `file_id: string`
+
+                ID of a previously uploaded file.
+
+              - `type: "file"`
+
+                - `"file"`
+
+          - `type: "document"`
+
+            - `"document"`
+
+          - `context: optional string`
+
+            Additional context about the document for the model.
+
+          - `title: optional string`
+
+            The title of the document.
+
+      - `type: "user.message"`
+
+        - `"user.message"`
+
+    - `beta_managed_agents_deployment_user_define_outcome_event: object { description, rubric, type, max_iterations }`
+
+      An outcome the agent should work toward. The agent begins work on receipt.
+
+      - `description: string`
+
+        What the agent should produce. This is the task specification.
+
+      - `rubric: BetaManagedAgentsFileRubric or BetaManagedAgentsTextRubric`
+
+        Rubric for grading the quality of an outcome.
+
+        - `beta_managed_agents_file_rubric: object { file_id, type }`
+
+          Rubric referenced by a file uploaded via the Files API.
+
+          - `file_id: string`
+
+            ID of the rubric file.
+
+          - `type: "file"`
+
+            - `"file"`
+
+        - `beta_managed_agents_text_rubric: object { content, type }`
+
+          Rubric content provided inline as text.
+
+          - `content: string`
+
+            Rubric content. Plain text or markdown — the grader treats it as freeform text.
+
+          - `type: "text"`
+
+            - `"text"`
+
+      - `type: "user.define_outcome"`
+
+        - `"user.define_outcome"`
+
+      - `max_iterations: optional number`
+
+        Eval→revision cycles before giving up. Default 3, max 20.
+
+    - `beta_managed_agents_deployment_system_message_event: object { content, type }`
+
+      Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
+
+      - `content: array of BetaManagedAgentsSystemContentBlock`
+
+        System content blocks to append. Text-only.
+
+        - `text: string`
+
+          The text content.
+
+        - `type: "text"`
+
+          - `"text"`
+
+      - `type: "system.message"`
+
+        - `"system.message"`
+
+  - `metadata: map[string]`
+
+    Arbitrary key-value metadata. Maximum 16 pairs.
+
+  - `name: string`
+
+    Human-readable name.
+
+  - `paused_reason: BetaManagedAgentsManualDeploymentPausedReason or BetaManagedAgentsErrorDeploymentPausedReason`
+
+    Why a deployment is paused. Non-null exactly when `status` is `paused`.
+
+    - `beta_managed_agents_manual_deployment_paused_reason: object { type }`
+
+      The caller invoked the pause endpoint on the deployment.
+
+      - `type: "manual"`
+
+        - `"manual"`
+
+    - `beta_managed_agents_error_deployment_paused_reason: object { error, type }`
+
+      A scheduled fire recorded a failed run whose error auto-pauses the deployment.
+
+      - `error: BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError or BetaManagedAgentsAgentArchivedDeploymentPausedReasonError or BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError or 11 more`
+
+        The error that triggered an auto-pause. Matches the failed run's `error.type`.
+
+        - `beta_managed_agents_environment_archived_deployment_paused_reason_error: object { type }`
+
+          The deployment's environment was archived.
+
+          - `type: "environment_archived_error"`
+
+            - `"environment_archived_error"`
+
+        - `beta_managed_agents_agent_archived_deployment_paused_reason_error: object { type }`
+
+          The deployment's agent was archived.
+
+          - `type: "agent_archived_error"`
+
+            - `"agent_archived_error"`
+
+        - `beta_managed_agents_environment_not_found_deployment_paused_reason_error: object { type }`
+
+          The deployment's environment no longer exists.
+
+          - `type: "environment_not_found_error"`
+
+            - `"environment_not_found_error"`
+
+        - `beta_managed_agents_vault_not_found_deployment_paused_reason_error: object { type }`
+
+          A vault referenced by the deployment no longer exists.
+
+          - `type: "vault_not_found_error"`
+
+            - `"vault_not_found_error"`
+
+        - `beta_managed_agents_file_not_found_deployment_paused_reason_error: object { type }`
+
+          A file resource referenced by the deployment no longer exists.
+
+          - `type: "file_not_found_error"`
+
+            - `"file_not_found_error"`
+
+        - `beta_managed_agents_session_resource_not_found_deployment_paused_reason_error: object { type }`
+
+          A referenced resource no longer exists and its kind was not reported.
+
+          - `type: "session_resource_not_found_error"`
+
+            - `"session_resource_not_found_error"`
+
+        - `beta_managed_agents_workspace_archived_deployment_paused_reason_error: object { type }`
+
+          The deployment's workspace was archived.
+
+          - `type: "workspace_archived_error"`
+
+            - `"workspace_archived_error"`
+
+        - `beta_managed_agents_organization_disabled_deployment_paused_reason_error: object { type }`
+
+          The deployment's organization is disabled.
+
+          - `type: "organization_disabled_error"`
+
+            - `"organization_disabled_error"`
+
+        - `beta_managed_agents_memory_store_archived_deployment_paused_reason_error: object { type }`
+
+          A memory store referenced by the deployment is archived.
+
+          - `type: "memory_store_archived_error"`
+
+            - `"memory_store_archived_error"`
+
+        - `beta_managed_agents_skill_not_found_deployment_paused_reason_error: object { type }`
+
+          A skill referenced by the deployment's agent no longer exists.
+
+          - `type: "skill_not_found_error"`
+
+            - `"skill_not_found_error"`
+
+        - `beta_managed_agents_vault_archived_deployment_paused_reason_error: object { type }`
+
+          A vault referenced by the deployment is archived.
+
+          - `type: "vault_archived_error"`
+
+            - `"vault_archived_error"`
+
+        - `beta_managed_agents_unknown_deployment_paused_reason_error: object { type }`
+
+          An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
+
+          - `type: "unknown_error"`
+
+            - `"unknown_error"`
+
+        - `beta_managed_agents_self_hosted_resources_unsupported_deployment_paused_reason_error: object { type }`
+
+          The deployment configures resources, but its environment is self-hosted and cannot mount them.
+
+          - `type: "self_hosted_resources_unsupported_error"`
+
+            - `"self_hosted_resources_unsupported_error"`
+
+        - `beta_managed_agents_mcp_egress_blocked_deployment_paused_reason_error: object { type }`
+
+          An MCP server host used by the deployment's agent is blocked by the environment's network policy.
+
+          - `type: "mcp_egress_blocked_error"`
+
+            - `"mcp_egress_blocked_error"`
+
+      - `type: "error"`
+
+        - `"error"`
+
+  - `resources: array of BetaManagedAgentsSessionResourceConfig`
+
+    Resources attached to sessions created from this deployment. Echoes the input minus write-only credentials.
+
+    - `beta_managed_agents_github_repository_resource_config: object { type, url, checkout, mount_path }`
+
+      A GitHub repository mounted into each session's container. The authorization token is write-only and never returned.
+
+      - `type: "github_repository"`
+
+        - `"github_repository"`
+
+      - `url: string`
+
+        Github URL of the repository
+
+      - `checkout: optional BetaManagedAgentsBranchCheckout or BetaManagedAgentsCommitCheckout`
+
+        Branch or commit to check out. Defaults to the repository's default branch.
+
+        - `beta_managed_agents_branch_checkout: object { name, type }`
+
+          - `name: string`
+
+            Branch name to check out.
+
+          - `type: "branch"`
+
+            - `"branch"`
+
+        - `beta_managed_agents_commit_checkout: object { sha, type }`
+
+          - `sha: string`
+
+            Full commit SHA to check out.
+
+          - `type: "commit"`
+
+            - `"commit"`
+
+      - `mount_path: optional string`
+
+        Mount path in the container. Defaults to `/workspace/<repo-name>`.
+
+    - `beta_managed_agents_file_resource_config: object { file_id, type, mount_path }`
+
+      A file mounted into each session's container.
+
+      - `file_id: string`
+
+        ID of a previously uploaded file.
+
+      - `type: "file"`
+
+        - `"file"`
+
+      - `mount_path: optional string`
+
+        Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
+
+    - `beta_managed_agents_memory_store_resource_config: object { memory_store_id, type, access, instructions }`
+
+      A memory store attached to each session created from this deployment.
+
+      - `memory_store_id: string`
+
+        The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+      - `type: "memory_store"`
+
+        - `"memory_store"`
+
+      - `access: optional "read_write" or "read_only"`
+
+        Access mode for an attached memory store.
+
+        - `"read_write"`
+
+        - `"read_only"`
+
+      - `instructions: optional string`
+
+        Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+  - `schedule: object { expression, timezone, type, 2 more }`
+
+    5-field POSIX cron schedule with computed runtime timestamps.
+
+    - `expression: string`
+
+      5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 * * 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
+
+    - `timezone: string`
+
+      IANA timezone identifier (e.g., "America/Los_Angeles", "UTC").
+
+    - `type: "cron"`
+
+      - `"cron"`
+
+    - `last_run_at: optional string`
+
+      A timestamp in RFC 3339 format
+
+    - `upcoming_runs_at: optional array of string`
+
+      Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused deployments (reflects what the schedule would do if unpaused); empty once the deployment is archived (`archived_at` set). Each fire is offset by a small per-schedule jitter, so a run will actually start at or shortly after its listed time.
+
+  - `status: "active" or "paused"`
+
+    Lifecycle status of a deployment.
+
+    - `"active"`
+
+    - `"paused"`
+
+  - `type: "deployment"`
+
+    - `"deployment"`
+
+  - `updated_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `vault_ids: array of string`
+
+    Vault IDs supplying stored credentials for sessions created from this deployment.
+
+### Beta Managed Agents Deployment Initial Event
+
+- `beta_managed_agents_deployment_initial_event: BetaManagedAgentsDeploymentUserMessageEvent or BetaManagedAgentsDeploymentUserDefineOutcomeEvent or BetaManagedAgentsDeploymentSystemMessageEvent`
+
+  An event sent to a session immediately after it is created. Supports `user.message`, `user.define_outcome`, and `system.message`.
+
+  - `beta_managed_agents_deployment_user_message_event: object { content, type }`
+
+    A user message sent to the session.
+
+    - `content: array of BetaManagedAgentsTextBlock or BetaManagedAgentsImageBlock or BetaManagedAgentsDocumentBlock`
+
+      Array of content blocks for the user message.
+
+      - `beta_managed_agents_text_block: object { text, type }`
+
+        Regular text content.
+
+        - `text: string`
+
+          The text content.
+
+        - `type: "text"`
+
+          - `"text"`
+
+      - `beta_managed_agents_image_block: object { source, type }`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `source: BetaManagedAgentsBase64ImageSource or BetaManagedAgentsURLImageSource or BetaManagedAgentsFileImageSource`
+
+          Union type for image source variants.
+
+          - `beta_managed_agents_base64_image_source: object { data, media_type, type }`
+
+            Base64-encoded image data.
+
+            - `data: string`
+
+              Base64-encoded image data.
+
+            - `media_type: string`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `type: "base64"`
+
+              - `"base64"`
+
+          - `beta_managed_agents_url_image_source: object { type, url }`
+
+            Image referenced by URL.
+
+            - `type: "url"`
+
+              - `"url"`
+
+            - `url: string`
+
+              URL of the image to fetch.
+
+          - `beta_managed_agents_file_image_source: object { file_id, type }`
+
+            Image referenced by file ID.
+
+            - `file_id: string`
+
+              ID of a previously uploaded file.
+
+            - `type: "file"`
+
+              - `"file"`
+
+        - `type: "image"`
+
+          - `"image"`
+
+      - `beta_managed_agents_document_block: object { source, type, context, title }`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `source: BetaManagedAgentsBase64DocumentSource or BetaManagedAgentsPlainTextDocumentSource or BetaManagedAgentsURLDocumentSource or BetaManagedAgentsFileDocumentSource`
+
+          Union type for document source variants.
+
+          - `beta_managed_agents_base64_document_source: object { data, media_type, type }`
+
+            Base64-encoded document data.
+
+            - `data: string`
+
+              Base64-encoded document data.
+
+            - `media_type: string`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `type: "base64"`
+
+              - `"base64"`
+
+          - `beta_managed_agents_plain_text_document_source: object { data, media_type, type }`
+
+            Plain text document content.
+
+            - `data: string`
+
+              The plain text content.
+
+            - `media_type: "text/plain"`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `"text/plain"`
+
+            - `type: "text"`
+
+              - `"text"`
+
+          - `beta_managed_agents_url_document_source: object { type, url }`
+
+            Document referenced by URL.
+
+            - `type: "url"`
+
+              - `"url"`
+
+            - `url: string`
+
+              URL of the document to fetch.
+
+          - `beta_managed_agents_file_document_source: object { file_id, type }`
+
+            Document referenced by file ID.
+
+            - `file_id: string`
+
+              ID of a previously uploaded file.
+
+            - `type: "file"`
+
+              - `"file"`
+
+        - `type: "document"`
+
+          - `"document"`
+
+        - `context: optional string`
+
+          Additional context about the document for the model.
+
+        - `title: optional string`
+
+          The title of the document.
+
+    - `type: "user.message"`
+
+      - `"user.message"`
+
+  - `beta_managed_agents_deployment_user_define_outcome_event: object { description, rubric, type, max_iterations }`
+
+    An outcome the agent should work toward. The agent begins work on receipt.
+
+    - `description: string`
+
+      What the agent should produce. This is the task specification.
+
+    - `rubric: BetaManagedAgentsFileRubric or BetaManagedAgentsTextRubric`
+
+      Rubric for grading the quality of an outcome.
+
+      - `beta_managed_agents_file_rubric: object { file_id, type }`
+
+        Rubric referenced by a file uploaded via the Files API.
+
+        - `file_id: string`
+
+          ID of the rubric file.
+
+        - `type: "file"`
+
+          - `"file"`
+
+      - `beta_managed_agents_text_rubric: object { content, type }`
+
+        Rubric content provided inline as text.
+
+        - `content: string`
+
+          Rubric content. Plain text or markdown — the grader treats it as freeform text.
+
+        - `type: "text"`
+
+          - `"text"`
+
+    - `type: "user.define_outcome"`
+
+      - `"user.define_outcome"`
+
+    - `max_iterations: optional number`
+
+      Eval→revision cycles before giving up. Default 3, max 20.
+
+  - `beta_managed_agents_deployment_system_message_event: object { content, type }`
+
+    Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
+
+    - `content: array of BetaManagedAgentsSystemContentBlock`
+
+      System content blocks to append. Text-only.
+
+      - `text: string`
+
+        The text content.
+
+      - `type: "text"`
+
+        - `"text"`
+
+    - `type: "system.message"`
+
+      - `"system.message"`
+
+### Beta Managed Agents Deployment Initial Event Params
+
+- `beta_managed_agents_deployment_initial_event_params: BetaManagedAgentsUserMessageEventParams or BetaManagedAgentsUserDefineOutcomeEventParams or BetaManagedAgentsSystemMessageEventParams`
+
+  An event sent to a session immediately after it is created. Supports `user.message`, `user.define_outcome`, and `system.message`.
+
+  - `beta_managed_agents_user_message_event_params: object { content, type }`
+
+    Parameters for sending a user message to the session.
+
+    - `content: array of BetaManagedAgentsTextBlock or BetaManagedAgentsImageBlock or BetaManagedAgentsDocumentBlock`
+
+      Array of content blocks for the user message.
+
+      - `beta_managed_agents_text_block: object { text, type }`
+
+        Regular text content.
+
+        - `text: string`
+
+          The text content.
+
+        - `type: "text"`
+
+          - `"text"`
+
+      - `beta_managed_agents_image_block: object { source, type }`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `source: BetaManagedAgentsBase64ImageSource or BetaManagedAgentsURLImageSource or BetaManagedAgentsFileImageSource`
+
+          Union type for image source variants.
+
+          - `beta_managed_agents_base64_image_source: object { data, media_type, type }`
+
+            Base64-encoded image data.
+
+            - `data: string`
+
+              Base64-encoded image data.
+
+            - `media_type: string`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `type: "base64"`
+
+              - `"base64"`
+
+          - `beta_managed_agents_url_image_source: object { type, url }`
+
+            Image referenced by URL.
+
+            - `type: "url"`
+
+              - `"url"`
+
+            - `url: string`
+
+              URL of the image to fetch.
+
+          - `beta_managed_agents_file_image_source: object { file_id, type }`
+
+            Image referenced by file ID.
+
+            - `file_id: string`
+
+              ID of a previously uploaded file.
+
+            - `type: "file"`
+
+              - `"file"`
+
+        - `type: "image"`
+
+          - `"image"`
+
+      - `beta_managed_agents_document_block: object { source, type, context, title }`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `source: BetaManagedAgentsBase64DocumentSource or BetaManagedAgentsPlainTextDocumentSource or BetaManagedAgentsURLDocumentSource or BetaManagedAgentsFileDocumentSource`
+
+          Union type for document source variants.
+
+          - `beta_managed_agents_base64_document_source: object { data, media_type, type }`
+
+            Base64-encoded document data.
+
+            - `data: string`
+
+              Base64-encoded document data.
+
+            - `media_type: string`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `type: "base64"`
+
+              - `"base64"`
+
+          - `beta_managed_agents_plain_text_document_source: object { data, media_type, type }`
+
+            Plain text document content.
+
+            - `data: string`
+
+              The plain text content.
+
+            - `media_type: "text/plain"`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `"text/plain"`
+
+            - `type: "text"`
+
+              - `"text"`
+
+          - `beta_managed_agents_url_document_source: object { type, url }`
+
+            Document referenced by URL.
+
+            - `type: "url"`
+
+              - `"url"`
+
+            - `url: string`
+
+              URL of the document to fetch.
+
+          - `beta_managed_agents_file_document_source: object { file_id, type }`
+
+            Document referenced by file ID.
+
+            - `file_id: string`
+
+              ID of a previously uploaded file.
+
+            - `type: "file"`
+
+              - `"file"`
+
+        - `type: "document"`
+
+          - `"document"`
+
+        - `context: optional string`
+
+          Additional context about the document for the model.
+
+        - `title: optional string`
+
+          The title of the document.
+
+    - `type: "user.message"`
+
+      - `"user.message"`
+
+  - `beta_managed_agents_user_define_outcome_event_params: object { description, rubric, type, max_iterations }`
+
+    Parameters for defining an outcome the agent should work toward. The agent begins work on receipt.
+
+    - `description: string`
+
+      What the agent should produce. This is the task specification.
+
+    - `rubric: BetaManagedAgentsFileRubricParams or BetaManagedAgentsTextRubricParams`
+
+      Rubric for grading the quality of an outcome.
+
+      - `beta_managed_agents_file_rubric_params: object { file_id, type }`
+
+        Rubric referenced by a file uploaded via the Files API.
+
+        - `file_id: string`
+
+          ID of the rubric file.
+
+        - `type: "file"`
+
+          - `"file"`
+
+      - `beta_managed_agents_text_rubric_params: object { content, type }`
+
+        Rubric content provided inline as text.
+
+        - `content: string`
+
+          Rubric content. Plain text or markdown — the grader treats it as freeform text. Maximum 262144 characters.
+
+        - `type: "text"`
+
+          - `"text"`
+
+    - `type: "user.define_outcome"`
+
+      - `"user.define_outcome"`
+
+    - `max_iterations: optional number`
+
+      Eval→revision cycles before giving up. Default 3, max 20.
+
+  - `beta_managed_agents_system_message_event_params: object { content, type }`
+
+    Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
+
+    - `content: array of BetaManagedAgentsSystemContentBlock`
+
+      System content blocks to append. Text-only.
+
+      - `text: string`
+
+        The text content.
+
+      - `type: "text"`
+
+        - `"text"`
+
+    - `type: "system.message"`
+
+      - `"system.message"`
+
+### Beta Managed Agents Deployment Paused Reason
+
+- `beta_managed_agents_deployment_paused_reason: BetaManagedAgentsManualDeploymentPausedReason or BetaManagedAgentsErrorDeploymentPausedReason`
+
+  Why a deployment is paused. Non-null exactly when `status` is `paused`.
+
+  - `beta_managed_agents_manual_deployment_paused_reason: object { type }`
+
+    The caller invoked the pause endpoint on the deployment.
+
+    - `type: "manual"`
+
+      - `"manual"`
+
+  - `beta_managed_agents_error_deployment_paused_reason: object { error, type }`
+
+    A scheduled fire recorded a failed run whose error auto-pauses the deployment.
+
+    - `error: BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError or BetaManagedAgentsAgentArchivedDeploymentPausedReasonError or BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError or 11 more`
+
+      The error that triggered an auto-pause. Matches the failed run's `error.type`.
+
+      - `beta_managed_agents_environment_archived_deployment_paused_reason_error: object { type }`
+
+        The deployment's environment was archived.
+
+        - `type: "environment_archived_error"`
+
+          - `"environment_archived_error"`
+
+      - `beta_managed_agents_agent_archived_deployment_paused_reason_error: object { type }`
+
+        The deployment's agent was archived.
+
+        - `type: "agent_archived_error"`
+
+          - `"agent_archived_error"`
+
+      - `beta_managed_agents_environment_not_found_deployment_paused_reason_error: object { type }`
+
+        The deployment's environment no longer exists.
+
+        - `type: "environment_not_found_error"`
+
+          - `"environment_not_found_error"`
+
+      - `beta_managed_agents_vault_not_found_deployment_paused_reason_error: object { type }`
+
+        A vault referenced by the deployment no longer exists.
+
+        - `type: "vault_not_found_error"`
+
+          - `"vault_not_found_error"`
+
+      - `beta_managed_agents_file_not_found_deployment_paused_reason_error: object { type }`
+
+        A file resource referenced by the deployment no longer exists.
+
+        - `type: "file_not_found_error"`
+
+          - `"file_not_found_error"`
+
+      - `beta_managed_agents_session_resource_not_found_deployment_paused_reason_error: object { type }`
+
+        A referenced resource no longer exists and its kind was not reported.
+
+        - `type: "session_resource_not_found_error"`
+
+          - `"session_resource_not_found_error"`
+
+      - `beta_managed_agents_workspace_archived_deployment_paused_reason_error: object { type }`
+
+        The deployment's workspace was archived.
+
+        - `type: "workspace_archived_error"`
+
+          - `"workspace_archived_error"`
+
+      - `beta_managed_agents_organization_disabled_deployment_paused_reason_error: object { type }`
+
+        The deployment's organization is disabled.
+
+        - `type: "organization_disabled_error"`
+
+          - `"organization_disabled_error"`
+
+      - `beta_managed_agents_memory_store_archived_deployment_paused_reason_error: object { type }`
+
+        A memory store referenced by the deployment is archived.
+
+        - `type: "memory_store_archived_error"`
+
+          - `"memory_store_archived_error"`
+
+      - `beta_managed_agents_skill_not_found_deployment_paused_reason_error: object { type }`
+
+        A skill referenced by the deployment's agent no longer exists.
+
+        - `type: "skill_not_found_error"`
+
+          - `"skill_not_found_error"`
+
+      - `beta_managed_agents_vault_archived_deployment_paused_reason_error: object { type }`
+
+        A vault referenced by the deployment is archived.
+
+        - `type: "vault_archived_error"`
+
+          - `"vault_archived_error"`
+
+      - `beta_managed_agents_unknown_deployment_paused_reason_error: object { type }`
+
+        An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
+
+        - `type: "unknown_error"`
+
+          - `"unknown_error"`
+
+      - `beta_managed_agents_self_hosted_resources_unsupported_deployment_paused_reason_error: object { type }`
+
+        The deployment configures resources, but its environment is self-hosted and cannot mount them.
+
+        - `type: "self_hosted_resources_unsupported_error"`
+
+          - `"self_hosted_resources_unsupported_error"`
+
+      - `beta_managed_agents_mcp_egress_blocked_deployment_paused_reason_error: object { type }`
+
+        An MCP server host used by the deployment's agent is blocked by the environment's network policy.
+
+        - `type: "mcp_egress_blocked_error"`
+
+          - `"mcp_egress_blocked_error"`
+
+    - `type: "error"`
+
+      - `"error"`
+
+### Beta Managed Agents Deployment Paused Reason Error
+
+- `beta_managed_agents_deployment_paused_reason_error: BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError or BetaManagedAgentsAgentArchivedDeploymentPausedReasonError or BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError or 11 more`
+
+  The error that triggered an auto-pause. Matches the failed run's `error.type`.
+
+  - `beta_managed_agents_environment_archived_deployment_paused_reason_error: object { type }`
+
+    The deployment's environment was archived.
+
+    - `type: "environment_archived_error"`
+
+      - `"environment_archived_error"`
+
+  - `beta_managed_agents_agent_archived_deployment_paused_reason_error: object { type }`
+
+    The deployment's agent was archived.
+
+    - `type: "agent_archived_error"`
+
+      - `"agent_archived_error"`
+
+  - `beta_managed_agents_environment_not_found_deployment_paused_reason_error: object { type }`
+
+    The deployment's environment no longer exists.
+
+    - `type: "environment_not_found_error"`
+
+      - `"environment_not_found_error"`
+
+  - `beta_managed_agents_vault_not_found_deployment_paused_reason_error: object { type }`
+
+    A vault referenced by the deployment no longer exists.
+
+    - `type: "vault_not_found_error"`
+
+      - `"vault_not_found_error"`
+
+  - `beta_managed_agents_file_not_found_deployment_paused_reason_error: object { type }`
+
+    A file resource referenced by the deployment no longer exists.
+
+    - `type: "file_not_found_error"`
+
+      - `"file_not_found_error"`
+
+  - `beta_managed_agents_session_resource_not_found_deployment_paused_reason_error: object { type }`
+
+    A referenced resource no longer exists and its kind was not reported.
+
+    - `type: "session_resource_not_found_error"`
+
+      - `"session_resource_not_found_error"`
+
+  - `beta_managed_agents_workspace_archived_deployment_paused_reason_error: object { type }`
+
+    The deployment's workspace was archived.
+
+    - `type: "workspace_archived_error"`
+
+      - `"workspace_archived_error"`
+
+  - `beta_managed_agents_organization_disabled_deployment_paused_reason_error: object { type }`
+
+    The deployment's organization is disabled.
+
+    - `type: "organization_disabled_error"`
+
+      - `"organization_disabled_error"`
+
+  - `beta_managed_agents_memory_store_archived_deployment_paused_reason_error: object { type }`
+
+    A memory store referenced by the deployment is archived.
+
+    - `type: "memory_store_archived_error"`
+
+      - `"memory_store_archived_error"`
+
+  - `beta_managed_agents_skill_not_found_deployment_paused_reason_error: object { type }`
+
+    A skill referenced by the deployment's agent no longer exists.
+
+    - `type: "skill_not_found_error"`
+
+      - `"skill_not_found_error"`
+
+  - `beta_managed_agents_vault_archived_deployment_paused_reason_error: object { type }`
+
+    A vault referenced by the deployment is archived.
+
+    - `type: "vault_archived_error"`
+
+      - `"vault_archived_error"`
+
+  - `beta_managed_agents_unknown_deployment_paused_reason_error: object { type }`
+
+    An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
+
+    - `type: "unknown_error"`
+
+      - `"unknown_error"`
+
+  - `beta_managed_agents_self_hosted_resources_unsupported_deployment_paused_reason_error: object { type }`
+
+    The deployment configures resources, but its environment is self-hosted and cannot mount them.
+
+    - `type: "self_hosted_resources_unsupported_error"`
+
+      - `"self_hosted_resources_unsupported_error"`
+
+  - `beta_managed_agents_mcp_egress_blocked_deployment_paused_reason_error: object { type }`
+
+    An MCP server host used by the deployment's agent is blocked by the environment's network policy.
+
+    - `type: "mcp_egress_blocked_error"`
+
+      - `"mcp_egress_blocked_error"`
+
+### Beta Managed Agents Deployment Status
+
+- `beta_managed_agents_deployment_status: "active" or "paused"`
+
+  Lifecycle status of a deployment.
+
+  - `"active"`
+
+  - `"paused"`
+
+### Beta Managed Agents Deployment System Message Event
+
+- `beta_managed_agents_deployment_system_message_event: object { content, type }`
+
+  Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
+
+  - `content: array of BetaManagedAgentsSystemContentBlock`
+
+    System content blocks to append. Text-only.
+
+    - `text: string`
+
+      The text content.
+
+    - `type: "text"`
+
+      - `"text"`
+
+  - `type: "system.message"`
+
+    - `"system.message"`
+
+### Beta Managed Agents Deployment User Define Outcome Event
+
+- `beta_managed_agents_deployment_user_define_outcome_event: object { description, rubric, type, max_iterations }`
+
+  An outcome the agent should work toward. The agent begins work on receipt.
+
+  - `description: string`
+
+    What the agent should produce. This is the task specification.
+
+  - `rubric: BetaManagedAgentsFileRubric or BetaManagedAgentsTextRubric`
+
+    Rubric for grading the quality of an outcome.
+
+    - `beta_managed_agents_file_rubric: object { file_id, type }`
+
+      Rubric referenced by a file uploaded via the Files API.
+
+      - `file_id: string`
+
+        ID of the rubric file.
+
+      - `type: "file"`
+
+        - `"file"`
+
+    - `beta_managed_agents_text_rubric: object { content, type }`
+
+      Rubric content provided inline as text.
+
+      - `content: string`
+
+        Rubric content. Plain text or markdown — the grader treats it as freeform text.
+
+      - `type: "text"`
+
+        - `"text"`
+
+  - `type: "user.define_outcome"`
+
+    - `"user.define_outcome"`
+
+  - `max_iterations: optional number`
+
+    Eval→revision cycles before giving up. Default 3, max 20.
+
+### Beta Managed Agents Deployment User Message Event
+
+- `beta_managed_agents_deployment_user_message_event: object { content, type }`
+
+  A user message sent to the session.
+
+  - `content: array of BetaManagedAgentsTextBlock or BetaManagedAgentsImageBlock or BetaManagedAgentsDocumentBlock`
+
+    Array of content blocks for the user message.
+
+    - `beta_managed_agents_text_block: object { text, type }`
+
+      Regular text content.
+
+      - `text: string`
+
+        The text content.
+
+      - `type: "text"`
+
+        - `"text"`
+
+    - `beta_managed_agents_image_block: object { source, type }`
+
+      Image content specified directly as base64 data or as a reference via a URL.
+
+      - `source: BetaManagedAgentsBase64ImageSource or BetaManagedAgentsURLImageSource or BetaManagedAgentsFileImageSource`
+
+        Union type for image source variants.
+
+        - `beta_managed_agents_base64_image_source: object { data, media_type, type }`
+
+          Base64-encoded image data.
+
+          - `data: string`
+
+            Base64-encoded image data.
+
+          - `media_type: string`
+
+            MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+          - `type: "base64"`
+
+            - `"base64"`
+
+        - `beta_managed_agents_url_image_source: object { type, url }`
+
+          Image referenced by URL.
+
+          - `type: "url"`
+
+            - `"url"`
+
+          - `url: string`
+
+            URL of the image to fetch.
+
+        - `beta_managed_agents_file_image_source: object { file_id, type }`
+
+          Image referenced by file ID.
+
+          - `file_id: string`
+
+            ID of a previously uploaded file.
+
+          - `type: "file"`
+
+            - `"file"`
+
+      - `type: "image"`
+
+        - `"image"`
+
+    - `beta_managed_agents_document_block: object { source, type, context, title }`
+
+      Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+      - `source: BetaManagedAgentsBase64DocumentSource or BetaManagedAgentsPlainTextDocumentSource or BetaManagedAgentsURLDocumentSource or BetaManagedAgentsFileDocumentSource`
+
+        Union type for document source variants.
+
+        - `beta_managed_agents_base64_document_source: object { data, media_type, type }`
+
+          Base64-encoded document data.
+
+          - `data: string`
+
+            Base64-encoded document data.
+
+          - `media_type: string`
+
+            MIME type of the document (e.g., "application/pdf").
+
+          - `type: "base64"`
+
+            - `"base64"`
+
+        - `beta_managed_agents_plain_text_document_source: object { data, media_type, type }`
+
+          Plain text document content.
+
+          - `data: string`
+
+            The plain text content.
+
+          - `media_type: "text/plain"`
+
+            MIME type of the text content. Must be "text/plain".
+
+            - `"text/plain"`
+
+          - `type: "text"`
+
+            - `"text"`
+
+        - `beta_managed_agents_url_document_source: object { type, url }`
+
+          Document referenced by URL.
+
+          - `type: "url"`
+
+            - `"url"`
+
+          - `url: string`
+
+            URL of the document to fetch.
+
+        - `beta_managed_agents_file_document_source: object { file_id, type }`
+
+          Document referenced by file ID.
+
+          - `file_id: string`
+
+            ID of a previously uploaded file.
+
+          - `type: "file"`
+
+            - `"file"`
+
+      - `type: "document"`
+
+        - `"document"`
+
+      - `context: optional string`
+
+        Additional context about the document for the model.
+
+      - `title: optional string`
+
+        The title of the document.
+
+  - `type: "user.message"`
+
+    - `"user.message"`
+
+### Beta Managed Agents Environment Archived Deployment Paused Reason Error
+
+- `beta_managed_agents_environment_archived_deployment_paused_reason_error: object { type }`
+
+  The deployment's environment was archived.
+
+  - `type: "environment_archived_error"`
+
+    - `"environment_archived_error"`
+
+### Beta Managed Agents Environment Not Found Deployment Paused Reason Error
+
+- `beta_managed_agents_environment_not_found_deployment_paused_reason_error: object { type }`
+
+  The deployment's environment no longer exists.
+
+  - `type: "environment_not_found_error"`
+
+    - `"environment_not_found_error"`
+
+### Beta Managed Agents Error Deployment Paused Reason
+
+- `beta_managed_agents_error_deployment_paused_reason: object { error, type }`
+
+  A scheduled fire recorded a failed run whose error auto-pauses the deployment.
+
+  - `error: BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError or BetaManagedAgentsAgentArchivedDeploymentPausedReasonError or BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError or 11 more`
+
+    The error that triggered an auto-pause. Matches the failed run's `error.type`.
+
+    - `beta_managed_agents_environment_archived_deployment_paused_reason_error: object { type }`
+
+      The deployment's environment was archived.
+
+      - `type: "environment_archived_error"`
+
+        - `"environment_archived_error"`
+
+    - `beta_managed_agents_agent_archived_deployment_paused_reason_error: object { type }`
+
+      The deployment's agent was archived.
+
+      - `type: "agent_archived_error"`
+
+        - `"agent_archived_error"`
+
+    - `beta_managed_agents_environment_not_found_deployment_paused_reason_error: object { type }`
+
+      The deployment's environment no longer exists.
+
+      - `type: "environment_not_found_error"`
+
+        - `"environment_not_found_error"`
+
+    - `beta_managed_agents_vault_not_found_deployment_paused_reason_error: object { type }`
+
+      A vault referenced by the deployment no longer exists.
+
+      - `type: "vault_not_found_error"`
+
+        - `"vault_not_found_error"`
+
+    - `beta_managed_agents_file_not_found_deployment_paused_reason_error: object { type }`
+
+      A file resource referenced by the deployment no longer exists.
+
+      - `type: "file_not_found_error"`
+
+        - `"file_not_found_error"`
+
+    - `beta_managed_agents_session_resource_not_found_deployment_paused_reason_error: object { type }`
+
+      A referenced resource no longer exists and its kind was not reported.
+
+      - `type: "session_resource_not_found_error"`
+
+        - `"session_resource_not_found_error"`
+
+    - `beta_managed_agents_workspace_archived_deployment_paused_reason_error: object { type }`
+
+      The deployment's workspace was archived.
+
+      - `type: "workspace_archived_error"`
+
+        - `"workspace_archived_error"`
+
+    - `beta_managed_agents_organization_disabled_deployment_paused_reason_error: object { type }`
+
+      The deployment's organization is disabled.
+
+      - `type: "organization_disabled_error"`
+
+        - `"organization_disabled_error"`
+
+    - `beta_managed_agents_memory_store_archived_deployment_paused_reason_error: object { type }`
+
+      A memory store referenced by the deployment is archived.
+
+      - `type: "memory_store_archived_error"`
+
+        - `"memory_store_archived_error"`
+
+    - `beta_managed_agents_skill_not_found_deployment_paused_reason_error: object { type }`
+
+      A skill referenced by the deployment's agent no longer exists.
+
+      - `type: "skill_not_found_error"`
+
+        - `"skill_not_found_error"`
+
+    - `beta_managed_agents_vault_archived_deployment_paused_reason_error: object { type }`
+
+      A vault referenced by the deployment is archived.
+
+      - `type: "vault_archived_error"`
+
+        - `"vault_archived_error"`
+
+    - `beta_managed_agents_unknown_deployment_paused_reason_error: object { type }`
+
+      An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
+
+      - `type: "unknown_error"`
+
+        - `"unknown_error"`
+
+    - `beta_managed_agents_self_hosted_resources_unsupported_deployment_paused_reason_error: object { type }`
+
+      The deployment configures resources, but its environment is self-hosted and cannot mount them.
+
+      - `type: "self_hosted_resources_unsupported_error"`
+
+        - `"self_hosted_resources_unsupported_error"`
+
+    - `beta_managed_agents_mcp_egress_blocked_deployment_paused_reason_error: object { type }`
+
+      An MCP server host used by the deployment's agent is blocked by the environment's network policy.
+
+      - `type: "mcp_egress_blocked_error"`
+
+        - `"mcp_egress_blocked_error"`
+
+  - `type: "error"`
+
+    - `"error"`
+
+### Beta Managed Agents File Not Found Deployment Paused Reason Error
+
+- `beta_managed_agents_file_not_found_deployment_paused_reason_error: object { type }`
+
+  A file resource referenced by the deployment no longer exists.
+
+  - `type: "file_not_found_error"`
+
+    - `"file_not_found_error"`
+
+### Beta Managed Agents File Resource Config
+
+- `beta_managed_agents_file_resource_config: object { file_id, type, mount_path }`
+
+  A file mounted into each session's container.
+
+  - `file_id: string`
+
+    ID of a previously uploaded file.
+
+  - `type: "file"`
+
+    - `"file"`
+
+  - `mount_path: optional string`
+
+    Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
+
+### Beta Managed Agents GitHub Repository Resource Config
+
+- `beta_managed_agents_github_repository_resource_config: object { type, url, checkout, mount_path }`
+
+  A GitHub repository mounted into each session's container. The authorization token is write-only and never returned.
+
+  - `type: "github_repository"`
+
+    - `"github_repository"`
+
+  - `url: string`
+
+    Github URL of the repository
+
+  - `checkout: optional BetaManagedAgentsBranchCheckout or BetaManagedAgentsCommitCheckout`
+
+    Branch or commit to check out. Defaults to the repository's default branch.
+
+    - `beta_managed_agents_branch_checkout: object { name, type }`
+
+      - `name: string`
+
+        Branch name to check out.
+
+      - `type: "branch"`
+
+        - `"branch"`
+
+    - `beta_managed_agents_commit_checkout: object { sha, type }`
+
+      - `sha: string`
+
+        Full commit SHA to check out.
+
+      - `type: "commit"`
+
+        - `"commit"`
+
+  - `mount_path: optional string`
+
+    Mount path in the container. Defaults to `/workspace/<repo-name>`.
+
+### Beta Managed Agents Manual Deployment Paused Reason
+
+- `beta_managed_agents_manual_deployment_paused_reason: object { type }`
+
+  The caller invoked the pause endpoint on the deployment.
+
+  - `type: "manual"`
+
+    - `"manual"`
+
+### Beta Managed Agents MCP Egress Blocked Deployment Paused Reason Error
+
+- `beta_managed_agents_mcp_egress_blocked_deployment_paused_reason_error: object { type }`
+
+  An MCP server host used by the deployment's agent is blocked by the environment's network policy.
+
+  - `type: "mcp_egress_blocked_error"`
+
+    - `"mcp_egress_blocked_error"`
+
+### Beta Managed Agents Memory Store Archived Deployment Paused Reason Error
+
+- `beta_managed_agents_memory_store_archived_deployment_paused_reason_error: object { type }`
+
+  A memory store referenced by the deployment is archived.
+
+  - `type: "memory_store_archived_error"`
+
+    - `"memory_store_archived_error"`
+
+### Beta Managed Agents Memory Store Resource Config
+
+- `beta_managed_agents_memory_store_resource_config: object { memory_store_id, type, access, instructions }`
+
+  A memory store attached to each session created from this deployment.
+
+  - `memory_store_id: string`
+
+    The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+  - `type: "memory_store"`
+
+    - `"memory_store"`
+
+  - `access: optional "read_write" or "read_only"`
+
+    Access mode for an attached memory store.
+
+    - `"read_write"`
+
+    - `"read_only"`
+
+  - `instructions: optional string`
+
+    Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+### Beta Managed Agents Organization Disabled Deployment Paused Reason Error
+
+- `beta_managed_agents_organization_disabled_deployment_paused_reason_error: object { type }`
+
+  The deployment's organization is disabled.
+
+  - `type: "organization_disabled_error"`
+
+    - `"organization_disabled_error"`
+
+### Beta Managed Agents Schedule
+
+- `beta_managed_agents_schedule: object { expression, timezone, type, 2 more }`
+
+  5-field POSIX cron schedule with computed runtime timestamps.
+
+  - `expression: string`
+
+    5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 * * 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
+
+  - `timezone: string`
+
+    IANA timezone identifier (e.g., "America/Los_Angeles", "UTC").
+
+  - `type: "cron"`
+
+    - `"cron"`
+
+  - `last_run_at: optional string`
+
+    A timestamp in RFC 3339 format
+
+  - `upcoming_runs_at: optional array of string`
+
+    Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused deployments (reflects what the schedule would do if unpaused); empty once the deployment is archived (`archived_at` set). Each fire is offset by a small per-schedule jitter, so a run will actually start at or shortly after its listed time.
+
+### Beta Managed Agents Schedule Params
+
+- `beta_managed_agents_schedule_params: object { expression, timezone, type }`
+
+  5-field POSIX cron schedule. Literal wall-clock matching in the configured timezone.
+
+  - `expression: string`
+
+    5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 * * 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
+
+  - `timezone: string`
+
+    Required. IANA timezone identifier (e.g., "America/Los_Angeles", "UTC"). Validated against the IANA timezone database.
+
+  - `type: "cron"`
+
+    - `"cron"`
+
+### Beta Managed Agents Self Hosted Resources Unsupported Deployment Paused Reason Error
+
+- `beta_managed_agents_self_hosted_resources_unsupported_deployment_paused_reason_error: object { type }`
+
+  The deployment configures resources, but its environment is self-hosted and cannot mount them.
+
+  - `type: "self_hosted_resources_unsupported_error"`
+
+    - `"self_hosted_resources_unsupported_error"`
+
+### Beta Managed Agents Session Resource Config
+
+- `beta_managed_agents_session_resource_config: BetaManagedAgentsGitHubRepositoryResourceConfig or BetaManagedAgentsFileResourceConfig or BetaManagedAgentsMemoryStoreResourceConfig`
+
+  A configured session resource. Echoes the input minus write-only credentials.
+
+  - `beta_managed_agents_github_repository_resource_config: object { type, url, checkout, mount_path }`
+
+    A GitHub repository mounted into each session's container. The authorization token is write-only and never returned.
+
+    - `type: "github_repository"`
+
+      - `"github_repository"`
+
+    - `url: string`
+
+      Github URL of the repository
+
+    - `checkout: optional BetaManagedAgentsBranchCheckout or BetaManagedAgentsCommitCheckout`
+
+      Branch or commit to check out. Defaults to the repository's default branch.
+
+      - `beta_managed_agents_branch_checkout: object { name, type }`
+
+        - `name: string`
+
+          Branch name to check out.
+
+        - `type: "branch"`
+
+          - `"branch"`
+
+      - `beta_managed_agents_commit_checkout: object { sha, type }`
+
+        - `sha: string`
+
+          Full commit SHA to check out.
+
+        - `type: "commit"`
+
+          - `"commit"`
+
+    - `mount_path: optional string`
+
+      Mount path in the container. Defaults to `/workspace/<repo-name>`.
+
+  - `beta_managed_agents_file_resource_config: object { file_id, type, mount_path }`
+
+    A file mounted into each session's container.
+
+    - `file_id: string`
+
+      ID of a previously uploaded file.
+
+    - `type: "file"`
+
+      - `"file"`
+
+    - `mount_path: optional string`
+
+      Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
+
+  - `beta_managed_agents_memory_store_resource_config: object { memory_store_id, type, access, instructions }`
+
+    A memory store attached to each session created from this deployment.
+
+    - `memory_store_id: string`
+
+      The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+    - `type: "memory_store"`
+
+      - `"memory_store"`
+
+    - `access: optional "read_write" or "read_only"`
+
+      Access mode for an attached memory store.
+
+      - `"read_write"`
+
+      - `"read_only"`
+
+    - `instructions: optional string`
+
+      Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+### Beta Managed Agents Session Resource Not Found Deployment Paused Reason Error
+
+- `beta_managed_agents_session_resource_not_found_deployment_paused_reason_error: object { type }`
+
+  A referenced resource no longer exists and its kind was not reported.
+
+  - `type: "session_resource_not_found_error"`
+
+    - `"session_resource_not_found_error"`
+
+### Beta Managed Agents Skill Not Found Deployment Paused Reason Error
+
+- `beta_managed_agents_skill_not_found_deployment_paused_reason_error: object { type }`
+
+  A skill referenced by the deployment's agent no longer exists.
+
+  - `type: "skill_not_found_error"`
+
+    - `"skill_not_found_error"`
+
+### Beta Managed Agents Unknown Deployment Paused Reason Error
+
+- `beta_managed_agents_unknown_deployment_paused_reason_error: object { type }`
+
+  An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
+
+  - `type: "unknown_error"`
+
+    - `"unknown_error"`
+
+### Beta Managed Agents Vault Archived Deployment Paused Reason Error
+
+- `beta_managed_agents_vault_archived_deployment_paused_reason_error: object { type }`
+
+  A vault referenced by the deployment is archived.
+
+  - `type: "vault_archived_error"`
+
+    - `"vault_archived_error"`
+
+### Beta Managed Agents Vault Not Found Deployment Paused Reason Error
+
+- `beta_managed_agents_vault_not_found_deployment_paused_reason_error: object { type }`
+
+  A vault referenced by the deployment no longer exists.
+
+  - `type: "vault_not_found_error"`
+
+    - `"vault_not_found_error"`
+
+### Beta Managed Agents Workspace Archived Deployment Paused Reason Error
+
+- `beta_managed_agents_workspace_archived_deployment_paused_reason_error: object { type }`
+
+  The deployment's workspace was archived.
+
+  - `type: "workspace_archived_error"`
+
+    - `"workspace_archived_error"`
+
+# Deployment Runs
+
+## List Deployment Runs
+
+`$ ant beta:deployment-runs list`
+
+**get** `/v1/deployment_runs`
+
+List Deployment Runs
+
+### Parameters
+
+- `--created-at-gt: optional string`
+
+  Query param: Return runs created strictly after this time (exclusive).
+
+- `--created-at-gte: optional string`
+
+  Query param: Return runs created at or after this time (inclusive).
+
+- `--created-at-lt: optional string`
+
+  Query param: Return runs created strictly before this time (exclusive).
+
+- `--created-at-lte: optional string`
+
+  Query param: Return runs created at or before this time (inclusive).
+
+- `--deployment-id: optional string`
+
+  Query param: Filter to a specific deployment. Omit to list across all deployments in the workspace. Filtering by a non-existent deployment_id returns 200 with empty data.
+
+- `--has-error: optional boolean`
+
+  Query param: Filter: true for runs with non-null error, false for runs with non-null session_id. Omit for all.
+
+- `--limit: optional number`
+
+  Query param: Maximum results per page. Default 20, maximum 1000.
+
+- `--page: optional string`
+
+  Query param: Opaque pagination cursor. Pass next_page from the previous response. Invalid or expired cursors return 400.
+
+- `--trigger-type: optional "schedule" or "manual"`
+
+  Query param: Filter runs by what triggered them. Omit to return all runs.
+
+- `--beta: optional array of AnthropicBeta`
+
+  Header param: Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `BetaManagedAgentsListDeploymentRunsData: object { data, next_page }`
+
+  Paginated list of deployment runs. Sorted by created_at descending (most recent first).
+
+  - `data: array of BetaManagedAgentsDeploymentRun`
+
+    List of deployment runs.
+
+    - `id: string`
+
+      Unique identifier for this run (`drun_...`).
+
+    - `agent: object { id, type, version }`
+
+      A resolved agent reference with a concrete version.
+
+      - `id: string`
+
+      - `type: "agent"`
+
+        - `"agent"`
+
+      - `version: number`
+
+    - `created_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `deployment_id: string`
+
+      ID of the deployment that produced this run.
+
+    - `error: BetaManagedAgentsEnvironmentArchivedRunError or BetaManagedAgentsAgentArchivedRunError or BetaManagedAgentsEnvironmentNotFoundRunError or 13 more`
+
+      Why the run failed to create a session. The type identifies the failure; message is human-readable detail.
+
+      - `beta_managed_agents_environment_archived_run_error: object { message, type }`
+
+        The deployment's environment was archived.
+
+        - `message: string`
+
+          Human-readable error description.
+
+        - `type: "environment_archived_error"`
+
+          - `"environment_archived_error"`
+
+      - `beta_managed_agents_agent_archived_run_error: object { message, type }`
+
+        The deployment's agent was archived.
+
+        - `message: string`
+
+          Human-readable error description.
+
+        - `type: "agent_archived_error"`
+
+          - `"agent_archived_error"`
+
+      - `beta_managed_agents_environment_not_found_run_error: object { message, type }`
+
+        The deployment's environment no longer exists.
+
+        - `message: string`
+
+          Human-readable error description.
+
+        - `type: "environment_not_found_error"`
+
+          - `"environment_not_found_error"`
+
+      - `beta_managed_agents_vault_not_found_run_error: object { message, type }`
+
+        A vault referenced by the deployment no longer exists.
+
+        - `message: string`
+
+          Human-readable error description.
+
+        - `type: "vault_not_found_error"`
+
+          - `"vault_not_found_error"`
+
+      - `beta_managed_agents_vault_archived_run_error: object { message, type }`
+
+        A vault referenced by the deployment is archived.
+
+        - `message: string`
+
+          Human-readable error description.
+
+        - `type: "vault_archived_error"`
+
+          - `"vault_archived_error"`
+
+      - `beta_managed_agents_file_not_found_run_error: object { message, type }`
+
+        A file resource referenced by the deployment no longer exists.
+
+        - `message: string`
+
+          Human-readable error description.
+
+        - `type: "file_not_found_error"`
+
+          - `"file_not_found_error"`
+
+      - `beta_managed_agents_memory_store_archived_run_error: object { message, type }`
+
+        A memory store referenced by the deployment is archived.
+
+        - `message: string`
+
+          Human-readable error description.
+
+        - `type: "memory_store_archived_error"`
+
+          - `"memory_store_archived_error"`
+
+      - `beta_managed_agents_skill_not_found_run_error: object { message, type }`
+
+        A skill referenced by the deployment's agent no longer exists.
+
+        - `message: string`
+
+          Human-readable error description.
+
+        - `type: "skill_not_found_error"`
+
+          - `"skill_not_found_error"`
+
+      - `beta_managed_agents_session_resource_not_found_run_error: object { message, type }`
+
+        A referenced resource no longer exists and its kind was not reported.
+
+        - `message: string`
+
+          Human-readable error description.
+
+        - `type: "session_resource_not_found_error"`
+
+          - `"session_resource_not_found_error"`
+
+      - `beta_managed_agents_workspace_archived_run_error: object { message, type }`
+
+        The deployment's workspace was archived.
+
+        - `message: string`
+
+          Human-readable error description.
+
+        - `type: "workspace_archived_error"`
+
+          - `"workspace_archived_error"`
+
+      - `beta_managed_agents_organization_disabled_run_error: object { message, type }`
+
+        The deployment's organization is disabled.
+
+        - `message: string`
+
+          Human-readable error description.
+
+        - `type: "organization_disabled_error"`
+
+          - `"organization_disabled_error"`
+
+      - `beta_managed_agents_session_rate_limited_run_error: object { message, type }`
+
+        Session creation was rejected due to rate limiting. The schedule keeps firing; subsequent runs may succeed.
+
+        - `message: string`
+
+          Human-readable error description.
+
+        - `type: "session_rate_limited_error"`
+
+          - `"session_rate_limited_error"`
+
+      - `beta_managed_agents_session_creation_rejected_run_error: object { message, type }`
+
+        The session create request was rejected with a non-retryable validation error.
+
+        - `message: string`
+
+          Human-readable error description.
+
+        - `type: "session_creation_rejected_error"`
+
+          - `"session_creation_rejected_error"`
+
+      - `beta_managed_agents_unknown_run_error: object { message, type }`
+
+        An unknown or unexpected error caused the run to fail. A fallback variant; clients that do not recognize a new error type can match on message alone.
+
+        - `message: string`
+
+          Human-readable error description.
+
+        - `type: "unknown_error"`
+
+          - `"unknown_error"`
+
+      - `beta_managed_agents_self_hosted_resources_unsupported_run_error: object { message, type }`
+
+        The deployment configures resources, but its environment is self-hosted and cannot mount them.
+
+        - `message: string`
+
+          Human-readable error description.
+
+        - `type: "self_hosted_resources_unsupported_error"`
+
+          - `"self_hosted_resources_unsupported_error"`
+
+      - `beta_managed_agents_mcp_egress_blocked_run_error: object { message, type }`
+
+        An MCP server host used by the deployment's agent is blocked by the environment's network policy.
+
+        - `message: string`
+
+          Human-readable error description.
+
+        - `type: "mcp_egress_blocked_error"`
+
+          - `"mcp_egress_blocked_error"`
+
+    - `session_id: string`
+
+      Populated on success. Null on creation failure. Exactly one of session_id or error is non-null.
+
+    - `trigger_context: BetaManagedAgentsScheduleTriggerContext or BetaManagedAgentsManualTriggerContext`
+
+      Describes what triggered a deployment run, with trigger-specific metadata.
+
+      - `beta_managed_agents_schedule_trigger_context: object { scheduled_at, type }`
+
+        The run was fired by the deployment's cron schedule.
+
+        - `scheduled_at: string`
+
+          A timestamp in RFC 3339 format
+
+        - `type: "schedule"`
+
+          - `"schedule"`
+
+      - `beta_managed_agents_manual_trigger_context: object { type }`
+
+        The run was started manually by creating a session directly against the deployment.
+
+        - `type: "manual"`
+
+          - `"manual"`
+
+    - `type: "deployment_run"`
+
+      - `"deployment_run"`
+
+  - `next_page: optional string`
+
+    Opaque cursor for the next page. Null when no more results.
+
+### Example
+
+```cli
+ant beta:deployment-runs list \
+  --api-key my-anthropic-api-key
+```
+
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "id": "id",
+      "agent": {
+        "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+        "type": "agent",
+        "version": 1
+      },
+      "created_at": "2019-12-27T18:11:19.117Z",
+      "deployment_id": "deployment_id",
+      "error": {
+        "message": "message",
+        "type": "environment_archived_error"
+      },
+      "session_id": "session_id",
+      "trigger_context": {
+        "scheduled_at": "2019-12-27T18:11:19.117Z",
+        "type": "schedule"
+      },
+      "type": "deployment_run"
+    }
+  ],
+  "next_page": "next_page"
+}
+```
+
+## Get Deployment Run
+
+`$ ant beta:deployment-runs retrieve`
+
+**get** `/v1/deployment_runs/{deployment_run_id}`
+
+Get Deployment Run
+
+### Parameters
+
+- `--deployment-run-id: string`
+
+  Path parameter deployment_run_id
+
+- `--beta: optional array of AnthropicBeta`
+
+  Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `beta_managed_agents_deployment_run: object { id, agent, created_at, 5 more }`
+
+  A persistent, append-only record of a single deployment execution. Records session creation success or failure — no session lifecycle tracking.
+
+  - `id: string`
+
+    Unique identifier for this run (`drun_...`).
+
+  - `agent: object { id, type, version }`
+
+    A resolved agent reference with a concrete version.
+
+    - `id: string`
+
+    - `type: "agent"`
+
+      - `"agent"`
+
+    - `version: number`
+
+  - `created_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `deployment_id: string`
+
+    ID of the deployment that produced this run.
+
+  - `error: BetaManagedAgentsEnvironmentArchivedRunError or BetaManagedAgentsAgentArchivedRunError or BetaManagedAgentsEnvironmentNotFoundRunError or 13 more`
+
+    Why the run failed to create a session. The type identifies the failure; message is human-readable detail.
+
+    - `beta_managed_agents_environment_archived_run_error: object { message, type }`
+
+      The deployment's environment was archived.
+
+      - `message: string`
+
+        Human-readable error description.
+
+      - `type: "environment_archived_error"`
+
+        - `"environment_archived_error"`
+
+    - `beta_managed_agents_agent_archived_run_error: object { message, type }`
+
+      The deployment's agent was archived.
+
+      - `message: string`
+
+        Human-readable error description.
+
+      - `type: "agent_archived_error"`
+
+        - `"agent_archived_error"`
+
+    - `beta_managed_agents_environment_not_found_run_error: object { message, type }`
+
+      The deployment's environment no longer exists.
+
+      - `message: string`
+
+        Human-readable error description.
+
+      - `type: "environment_not_found_error"`
+
+        - `"environment_not_found_error"`
+
+    - `beta_managed_agents_vault_not_found_run_error: object { message, type }`
+
+      A vault referenced by the deployment no longer exists.
+
+      - `message: string`
+
+        Human-readable error description.
+
+      - `type: "vault_not_found_error"`
+
+        - `"vault_not_found_error"`
+
+    - `beta_managed_agents_vault_archived_run_error: object { message, type }`
+
+      A vault referenced by the deployment is archived.
+
+      - `message: string`
+
+        Human-readable error description.
+
+      - `type: "vault_archived_error"`
+
+        - `"vault_archived_error"`
+
+    - `beta_managed_agents_file_not_found_run_error: object { message, type }`
+
+      A file resource referenced by the deployment no longer exists.
+
+      - `message: string`
+
+        Human-readable error description.
+
+      - `type: "file_not_found_error"`
+
+        - `"file_not_found_error"`
+
+    - `beta_managed_agents_memory_store_archived_run_error: object { message, type }`
+
+      A memory store referenced by the deployment is archived.
+
+      - `message: string`
+
+        Human-readable error description.
+
+      - `type: "memory_store_archived_error"`
+
+        - `"memory_store_archived_error"`
+
+    - `beta_managed_agents_skill_not_found_run_error: object { message, type }`
+
+      A skill referenced by the deployment's agent no longer exists.
+
+      - `message: string`
+
+        Human-readable error description.
+
+      - `type: "skill_not_found_error"`
+
+        - `"skill_not_found_error"`
+
+    - `beta_managed_agents_session_resource_not_found_run_error: object { message, type }`
+
+      A referenced resource no longer exists and its kind was not reported.
+
+      - `message: string`
+
+        Human-readable error description.
+
+      - `type: "session_resource_not_found_error"`
+
+        - `"session_resource_not_found_error"`
+
+    - `beta_managed_agents_workspace_archived_run_error: object { message, type }`
+
+      The deployment's workspace was archived.
+
+      - `message: string`
+
+        Human-readable error description.
+
+      - `type: "workspace_archived_error"`
+
+        - `"workspace_archived_error"`
+
+    - `beta_managed_agents_organization_disabled_run_error: object { message, type }`
+
+      The deployment's organization is disabled.
+
+      - `message: string`
+
+        Human-readable error description.
+
+      - `type: "organization_disabled_error"`
+
+        - `"organization_disabled_error"`
+
+    - `beta_managed_agents_session_rate_limited_run_error: object { message, type }`
+
+      Session creation was rejected due to rate limiting. The schedule keeps firing; subsequent runs may succeed.
+
+      - `message: string`
+
+        Human-readable error description.
+
+      - `type: "session_rate_limited_error"`
+
+        - `"session_rate_limited_error"`
+
+    - `beta_managed_agents_session_creation_rejected_run_error: object { message, type }`
+
+      The session create request was rejected with a non-retryable validation error.
+
+      - `message: string`
+
+        Human-readable error description.
+
+      - `type: "session_creation_rejected_error"`
+
+        - `"session_creation_rejected_error"`
+
+    - `beta_managed_agents_unknown_run_error: object { message, type }`
+
+      An unknown or unexpected error caused the run to fail. A fallback variant; clients that do not recognize a new error type can match on message alone.
+
+      - `message: string`
+
+        Human-readable error description.
+
+      - `type: "unknown_error"`
+
+        - `"unknown_error"`
+
+    - `beta_managed_agents_self_hosted_resources_unsupported_run_error: object { message, type }`
+
+      The deployment configures resources, but its environment is self-hosted and cannot mount them.
+
+      - `message: string`
+
+        Human-readable error description.
+
+      - `type: "self_hosted_resources_unsupported_error"`
+
+        - `"self_hosted_resources_unsupported_error"`
+
+    - `beta_managed_agents_mcp_egress_blocked_run_error: object { message, type }`
+
+      An MCP server host used by the deployment's agent is blocked by the environment's network policy.
+
+      - `message: string`
+
+        Human-readable error description.
+
+      - `type: "mcp_egress_blocked_error"`
+
+        - `"mcp_egress_blocked_error"`
+
+  - `session_id: string`
+
+    Populated on success. Null on creation failure. Exactly one of session_id or error is non-null.
+
+  - `trigger_context: BetaManagedAgentsScheduleTriggerContext or BetaManagedAgentsManualTriggerContext`
+
+    Describes what triggered a deployment run, with trigger-specific metadata.
+
+    - `beta_managed_agents_schedule_trigger_context: object { scheduled_at, type }`
+
+      The run was fired by the deployment's cron schedule.
+
+      - `scheduled_at: string`
+
+        A timestamp in RFC 3339 format
+
+      - `type: "schedule"`
+
+        - `"schedule"`
+
+    - `beta_managed_agents_manual_trigger_context: object { type }`
+
+      The run was started manually by creating a session directly against the deployment.
+
+      - `type: "manual"`
+
+        - `"manual"`
+
+  - `type: "deployment_run"`
+
+    - `"deployment_run"`
+
+### Example
+
+```cli
+ant beta:deployment-runs retrieve \
+  --api-key my-anthropic-api-key \
+  --deployment-run-id deployment_run_id
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "agent": {
+    "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+    "type": "agent",
+    "version": 1
+  },
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "deployment_id": "deployment_id",
+  "error": {
+    "message": "message",
+    "type": "environment_archived_error"
+  },
+  "session_id": "session_id",
+  "trigger_context": {
+    "scheduled_at": "2019-12-27T18:11:19.117Z",
+    "type": "schedule"
+  },
+  "type": "deployment_run"
+}
+```
+
+## Domain Types
+
+### Beta Managed Agents Agent Archived Run Error
+
+- `beta_managed_agents_agent_archived_run_error: object { message, type }`
+
+  The deployment's agent was archived.
+
+  - `message: string`
+
+    Human-readable error description.
+
+  - `type: "agent_archived_error"`
+
+    - `"agent_archived_error"`
+
+### Beta Managed Agents Deployment Run
+
+- `beta_managed_agents_deployment_run: object { id, agent, created_at, 5 more }`
+
+  A persistent, append-only record of a single deployment execution. Records session creation success or failure — no session lifecycle tracking.
+
+  - `id: string`
+
+    Unique identifier for this run (`drun_...`).
+
+  - `agent: object { id, type, version }`
+
+    A resolved agent reference with a concrete version.
+
+    - `id: string`
+
+    - `type: "agent"`
+
+      - `"agent"`
+
+    - `version: number`
+
+  - `created_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `deployment_id: string`
+
+    ID of the deployment that produced this run.
+
+  - `error: BetaManagedAgentsEnvironmentArchivedRunError or BetaManagedAgentsAgentArchivedRunError or BetaManagedAgentsEnvironmentNotFoundRunError or 13 more`
+
+    Why the run failed to create a session. The type identifies the failure; message is human-readable detail.
+
+    - `beta_managed_agents_environment_archived_run_error: object { message, type }`
+
+      The deployment's environment was archived.
+
+      - `message: string`
+
+        Human-readable error description.
+
+      - `type: "environment_archived_error"`
+
+        - `"environment_archived_error"`
+
+    - `beta_managed_agents_agent_archived_run_error: object { message, type }`
+
+      The deployment's agent was archived.
+
+      - `message: string`
+
+        Human-readable error description.
+
+      - `type: "agent_archived_error"`
+
+        - `"agent_archived_error"`
+
+    - `beta_managed_agents_environment_not_found_run_error: object { message, type }`
+
+      The deployment's environment no longer exists.
+
+      - `message: string`
+
+        Human-readable error description.
+
+      - `type: "environment_not_found_error"`
+
+        - `"environment_not_found_error"`
+
+    - `beta_managed_agents_vault_not_found_run_error: object { message, type }`
+
+      A vault referenced by the deployment no longer exists.
+
+      - `message: string`
+
+        Human-readable error description.
+
+      - `type: "vault_not_found_error"`
+
+        - `"vault_not_found_error"`
+
+    - `beta_managed_agents_vault_archived_run_error: object { message, type }`
+
+      A vault referenced by the deployment is archived.
+
+      - `message: string`
+
+        Human-readable error description.
+
+      - `type: "vault_archived_error"`
+
+        - `"vault_archived_error"`
+
+    - `beta_managed_agents_file_not_found_run_error: object { message, type }`
+
+      A file resource referenced by the deployment no longer exists.
+
+      - `message: string`
+
+        Human-readable error description.
+
+      - `type: "file_not_found_error"`
+
+        - `"file_not_found_error"`
+
+    - `beta_managed_agents_memory_store_archived_run_error: object { message, type }`
+
+      A memory store referenced by the deployment is archived.
+
+      - `message: string`
+
+        Human-readable error description.
+
+      - `type: "memory_store_archived_error"`
+
+        - `"memory_store_archived_error"`
+
+    - `beta_managed_agents_skill_not_found_run_error: object { message, type }`
+
+      A skill referenced by the deployment's agent no longer exists.
+
+      - `message: string`
+
+        Human-readable error description.
+
+      - `type: "skill_not_found_error"`
+
+        - `"skill_not_found_error"`
+
+    - `beta_managed_agents_session_resource_not_found_run_error: object { message, type }`
+
+      A referenced resource no longer exists and its kind was not reported.
+
+      - `message: string`
+
+        Human-readable error description.
+
+      - `type: "session_resource_not_found_error"`
+
+        - `"session_resource_not_found_error"`
+
+    - `beta_managed_agents_workspace_archived_run_error: object { message, type }`
+
+      The deployment's workspace was archived.
+
+      - `message: string`
+
+        Human-readable error description.
+
+      - `type: "workspace_archived_error"`
+
+        - `"workspace_archived_error"`
+
+    - `beta_managed_agents_organization_disabled_run_error: object { message, type }`
+
+      The deployment's organization is disabled.
+
+      - `message: string`
+
+        Human-readable error description.
+
+      - `type: "organization_disabled_error"`
+
+        - `"organization_disabled_error"`
+
+    - `beta_managed_agents_session_rate_limited_run_error: object { message, type }`
+
+      Session creation was rejected due to rate limiting. The schedule keeps firing; subsequent runs may succeed.
+
+      - `message: string`
+
+        Human-readable error description.
+
+      - `type: "session_rate_limited_error"`
+
+        - `"session_rate_limited_error"`
+
+    - `beta_managed_agents_session_creation_rejected_run_error: object { message, type }`
+
+      The session create request was rejected with a non-retryable validation error.
+
+      - `message: string`
+
+        Human-readable error description.
+
+      - `type: "session_creation_rejected_error"`
+
+        - `"session_creation_rejected_error"`
+
+    - `beta_managed_agents_unknown_run_error: object { message, type }`
+
+      An unknown or unexpected error caused the run to fail. A fallback variant; clients that do not recognize a new error type can match on message alone.
+
+      - `message: string`
+
+        Human-readable error description.
+
+      - `type: "unknown_error"`
+
+        - `"unknown_error"`
+
+    - `beta_managed_agents_self_hosted_resources_unsupported_run_error: object { message, type }`
+
+      The deployment configures resources, but its environment is self-hosted and cannot mount them.
+
+      - `message: string`
+
+        Human-readable error description.
+
+      - `type: "self_hosted_resources_unsupported_error"`
+
+        - `"self_hosted_resources_unsupported_error"`
+
+    - `beta_managed_agents_mcp_egress_blocked_run_error: object { message, type }`
+
+      An MCP server host used by the deployment's agent is blocked by the environment's network policy.
+
+      - `message: string`
+
+        Human-readable error description.
+
+      - `type: "mcp_egress_blocked_error"`
+
+        - `"mcp_egress_blocked_error"`
+
+  - `session_id: string`
+
+    Populated on success. Null on creation failure. Exactly one of session_id or error is non-null.
+
+  - `trigger_context: BetaManagedAgentsScheduleTriggerContext or BetaManagedAgentsManualTriggerContext`
+
+    Describes what triggered a deployment run, with trigger-specific metadata.
+
+    - `beta_managed_agents_schedule_trigger_context: object { scheduled_at, type }`
+
+      The run was fired by the deployment's cron schedule.
+
+      - `scheduled_at: string`
+
+        A timestamp in RFC 3339 format
+
+      - `type: "schedule"`
+
+        - `"schedule"`
+
+    - `beta_managed_agents_manual_trigger_context: object { type }`
+
+      The run was started manually by creating a session directly against the deployment.
+
+      - `type: "manual"`
+
+        - `"manual"`
+
+  - `type: "deployment_run"`
+
+    - `"deployment_run"`
+
+### Beta Managed Agents Environment Archived Run Error
+
+- `beta_managed_agents_environment_archived_run_error: object { message, type }`
+
+  The deployment's environment was archived.
+
+  - `message: string`
+
+    Human-readable error description.
+
+  - `type: "environment_archived_error"`
+
+    - `"environment_archived_error"`
+
+### Beta Managed Agents Environment Not Found Run Error
+
+- `beta_managed_agents_environment_not_found_run_error: object { message, type }`
+
+  The deployment's environment no longer exists.
+
+  - `message: string`
+
+    Human-readable error description.
+
+  - `type: "environment_not_found_error"`
+
+    - `"environment_not_found_error"`
+
+### Beta Managed Agents File Not Found Run Error
+
+- `beta_managed_agents_file_not_found_run_error: object { message, type }`
+
+  A file resource referenced by the deployment no longer exists.
+
+  - `message: string`
+
+    Human-readable error description.
+
+  - `type: "file_not_found_error"`
+
+    - `"file_not_found_error"`
+
+### Beta Managed Agents Manual Trigger Context
+
+- `beta_managed_agents_manual_trigger_context: object { type }`
+
+  The run was started manually by creating a session directly against the deployment.
+
+  - `type: "manual"`
+
+    - `"manual"`
+
+### Beta Managed Agents MCP Egress Blocked Run Error
+
+- `beta_managed_agents_mcp_egress_blocked_run_error: object { message, type }`
+
+  An MCP server host used by the deployment's agent is blocked by the environment's network policy.
+
+  - `message: string`
+
+    Human-readable error description.
+
+  - `type: "mcp_egress_blocked_error"`
+
+    - `"mcp_egress_blocked_error"`
+
+### Beta Managed Agents Memory Store Archived Run Error
+
+- `beta_managed_agents_memory_store_archived_run_error: object { message, type }`
+
+  A memory store referenced by the deployment is archived.
+
+  - `message: string`
+
+    Human-readable error description.
+
+  - `type: "memory_store_archived_error"`
+
+    - `"memory_store_archived_error"`
+
+### Beta Managed Agents Organization Disabled Run Error
+
+- `beta_managed_agents_organization_disabled_run_error: object { message, type }`
+
+  The deployment's organization is disabled.
+
+  - `message: string`
+
+    Human-readable error description.
+
+  - `type: "organization_disabled_error"`
+
+    - `"organization_disabled_error"`
+
+### Beta Managed Agents Schedule Trigger Context
+
+- `beta_managed_agents_schedule_trigger_context: object { scheduled_at, type }`
+
+  The run was fired by the deployment's cron schedule.
+
+  - `scheduled_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `type: "schedule"`
+
+    - `"schedule"`
+
+### Beta Managed Agents Self Hosted Resources Unsupported Run Error
+
+- `beta_managed_agents_self_hosted_resources_unsupported_run_error: object { message, type }`
+
+  The deployment configures resources, but its environment is self-hosted and cannot mount them.
+
+  - `message: string`
+
+    Human-readable error description.
+
+  - `type: "self_hosted_resources_unsupported_error"`
+
+    - `"self_hosted_resources_unsupported_error"`
+
+### Beta Managed Agents Session Creation Rejected Run Error
+
+- `beta_managed_agents_session_creation_rejected_run_error: object { message, type }`
+
+  The session create request was rejected with a non-retryable validation error.
+
+  - `message: string`
+
+    Human-readable error description.
+
+  - `type: "session_creation_rejected_error"`
+
+    - `"session_creation_rejected_error"`
+
+### Beta Managed Agents Session Rate Limited Run Error
+
+- `beta_managed_agents_session_rate_limited_run_error: object { message, type }`
+
+  Session creation was rejected due to rate limiting. The schedule keeps firing; subsequent runs may succeed.
+
+  - `message: string`
+
+    Human-readable error description.
+
+  - `type: "session_rate_limited_error"`
+
+    - `"session_rate_limited_error"`
+
+### Beta Managed Agents Session Resource Not Found Run Error
+
+- `beta_managed_agents_session_resource_not_found_run_error: object { message, type }`
+
+  A referenced resource no longer exists and its kind was not reported.
+
+  - `message: string`
+
+    Human-readable error description.
+
+  - `type: "session_resource_not_found_error"`
+
+    - `"session_resource_not_found_error"`
+
+### Beta Managed Agents Skill Not Found Run Error
+
+- `beta_managed_agents_skill_not_found_run_error: object { message, type }`
+
+  A skill referenced by the deployment's agent no longer exists.
+
+  - `message: string`
+
+    Human-readable error description.
+
+  - `type: "skill_not_found_error"`
+
+    - `"skill_not_found_error"`
+
+### Beta Managed Agents Trigger Context
+
+- `beta_managed_agents_trigger_context: BetaManagedAgentsScheduleTriggerContext or BetaManagedAgentsManualTriggerContext`
+
+  Describes what triggered a deployment run, with trigger-specific metadata.
+
+  - `beta_managed_agents_schedule_trigger_context: object { scheduled_at, type }`
+
+    The run was fired by the deployment's cron schedule.
+
+    - `scheduled_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `type: "schedule"`
+
+      - `"schedule"`
+
+  - `beta_managed_agents_manual_trigger_context: object { type }`
+
+    The run was started manually by creating a session directly against the deployment.
+
+    - `type: "manual"`
+
+      - `"manual"`
+
+### Beta Managed Agents Trigger Type
+
+- `beta_managed_agents_trigger_type: "schedule" or "manual"`
+
+  What triggered a deployment run.
+
+  - `"schedule"`
+
+  - `"manual"`
+
+### Beta Managed Agents Unknown Run Error
+
+- `beta_managed_agents_unknown_run_error: object { message, type }`
+
+  An unknown or unexpected error caused the run to fail. A fallback variant; clients that do not recognize a new error type can match on message alone.
+
+  - `message: string`
+
+    Human-readable error description.
+
+  - `type: "unknown_error"`
+
+    - `"unknown_error"`
+
+### Beta Managed Agents Vault Archived Run Error
+
+- `beta_managed_agents_vault_archived_run_error: object { message, type }`
+
+  A vault referenced by the deployment is archived.
+
+  - `message: string`
+
+    Human-readable error description.
+
+  - `type: "vault_archived_error"`
+
+    - `"vault_archived_error"`
+
+### Beta Managed Agents Vault Not Found Run Error
+
+- `beta_managed_agents_vault_not_found_run_error: object { message, type }`
+
+  A vault referenced by the deployment no longer exists.
+
+  - `message: string`
+
+    Human-readable error description.
+
+  - `type: "vault_not_found_error"`
+
+    - `"vault_not_found_error"`
+
+### Beta Managed Agents Workspace Archived Run Error
+
+- `beta_managed_agents_workspace_archived_run_error: object { message, type }`
+
+  The deployment's workspace was archived.
+
+  - `message: string`
+
+    Human-readable error description.
+
+  - `type: "workspace_archived_error"`
+
+    - `"workspace_archived_error"`
 
 # Vaults
 
@@ -61787,7 +75980,7 @@ Create Credential
 
   Path param: Path parameter vault_id
 
-- `--auth: BetaManagedAgentsMCPOAuthCreateParams or BetaManagedAgentsStaticBearerCreateParams`
+- `--auth: BetaManagedAgentsMCPOAuthCreateParams or BetaManagedAgentsStaticBearerCreateParams or BetaManagedAgentsEnvironmentVariableCreateParams`
 
   Body param: Authentication details for creating a credential.
 
@@ -61817,7 +76010,7 @@ Create Credential
 
     A timestamp in RFC 3339 format
 
-  - `auth: BetaManagedAgentsMCPOAuthAuthResponse or BetaManagedAgentsStaticBearerAuthResponse`
+  - `auth: BetaManagedAgentsMCPOAuthAuthResponse or BetaManagedAgentsStaticBearerAuthResponse or BetaManagedAgentsEnvironmentVariableAuthResponse`
 
     Authentication details for a credential.
 
@@ -61896,6 +76089,42 @@ Create Credential
       - `type: "static_bearer"`
 
         - `"static_bearer"`
+
+    - `beta_managed_agents_environment_variable_auth_response: object { networking, secret_name, type }`
+
+      Environment variable credential details. The secret value is never returned.
+
+      - `networking: BetaManagedAgentsUnrestrictedCredentialNetworkingResponse or BetaManagedAgentsLimitedCredentialNetworkingResponse`
+
+        Outbound hosts the secret value is substituted on.
+
+        - `beta_managed_agents_unrestricted_credential_networking_response: object { type }`
+
+          The secret is substituted on any host the session's Environment network policy permits egress to.
+
+          - `type: "unrestricted"`
+
+            - `"unrestricted"`
+
+        - `beta_managed_agents_limited_credential_networking_response: object { allowed_hosts, type }`
+
+          The secret is substituted only on requests to the listed hosts.
+
+          - `allowed_hosts: array of string`
+
+            Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+
+          - `type: "limited"`
+
+            - `"limited"`
+
+      - `secret_name: string`
+
+        Name of the environment variable.
+
+      - `type: "environment_variable"`
+
+        - `"environment_variable"`
 
   - `created_at: string`
 
@@ -61999,7 +76228,7 @@ List Credentials
 
       A timestamp in RFC 3339 format
 
-    - `auth: BetaManagedAgentsMCPOAuthAuthResponse or BetaManagedAgentsStaticBearerAuthResponse`
+    - `auth: BetaManagedAgentsMCPOAuthAuthResponse or BetaManagedAgentsStaticBearerAuthResponse or BetaManagedAgentsEnvironmentVariableAuthResponse`
 
       Authentication details for a credential.
 
@@ -62078,6 +76307,42 @@ List Credentials
         - `type: "static_bearer"`
 
           - `"static_bearer"`
+
+      - `beta_managed_agents_environment_variable_auth_response: object { networking, secret_name, type }`
+
+        Environment variable credential details. The secret value is never returned.
+
+        - `networking: BetaManagedAgentsUnrestrictedCredentialNetworkingResponse or BetaManagedAgentsLimitedCredentialNetworkingResponse`
+
+          Outbound hosts the secret value is substituted on.
+
+          - `beta_managed_agents_unrestricted_credential_networking_response: object { type }`
+
+            The secret is substituted on any host the session's Environment network policy permits egress to.
+
+            - `type: "unrestricted"`
+
+              - `"unrestricted"`
+
+          - `beta_managed_agents_limited_credential_networking_response: object { allowed_hosts, type }`
+
+            The secret is substituted only on requests to the listed hosts.
+
+            - `allowed_hosts: array of string`
+
+              Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+
+            - `type: "limited"`
+
+              - `"limited"`
+
+        - `secret_name: string`
+
+          Name of the environment variable.
+
+        - `type: "environment_variable"`
+
+          - `"environment_variable"`
 
     - `created_at: string`
 
@@ -62177,7 +76442,7 @@ Get Credential
 
     A timestamp in RFC 3339 format
 
-  - `auth: BetaManagedAgentsMCPOAuthAuthResponse or BetaManagedAgentsStaticBearerAuthResponse`
+  - `auth: BetaManagedAgentsMCPOAuthAuthResponse or BetaManagedAgentsStaticBearerAuthResponse or BetaManagedAgentsEnvironmentVariableAuthResponse`
 
     Authentication details for a credential.
 
@@ -62256,6 +76521,42 @@ Get Credential
       - `type: "static_bearer"`
 
         - `"static_bearer"`
+
+    - `beta_managed_agents_environment_variable_auth_response: object { networking, secret_name, type }`
+
+      Environment variable credential details. The secret value is never returned.
+
+      - `networking: BetaManagedAgentsUnrestrictedCredentialNetworkingResponse or BetaManagedAgentsLimitedCredentialNetworkingResponse`
+
+        Outbound hosts the secret value is substituted on.
+
+        - `beta_managed_agents_unrestricted_credential_networking_response: object { type }`
+
+          The secret is substituted on any host the session's Environment network policy permits egress to.
+
+          - `type: "unrestricted"`
+
+            - `"unrestricted"`
+
+        - `beta_managed_agents_limited_credential_networking_response: object { allowed_hosts, type }`
+
+          The secret is substituted only on requests to the listed hosts.
+
+          - `allowed_hosts: array of string`
+
+            Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+
+          - `type: "limited"`
+
+            - `"limited"`
+
+      - `secret_name: string`
+
+        Name of the environment variable.
+
+      - `type: "environment_variable"`
+
+        - `"environment_variable"`
 
   - `created_at: string`
 
@@ -62329,7 +76630,7 @@ Update Credential
 
   Path param: Path parameter credential_id
 
-- `--auth: optional BetaManagedAgentsMCPOAuthUpdateParams or BetaManagedAgentsStaticBearerUpdateParams`
+- `--auth: optional BetaManagedAgentsMCPOAuthUpdateParams or BetaManagedAgentsStaticBearerUpdateParams or BetaManagedAgentsEnvironmentVariableUpdateParams`
 
   Body param: Updated authentication details for a credential.
 
@@ -62359,7 +76660,7 @@ Update Credential
 
     A timestamp in RFC 3339 format
 
-  - `auth: BetaManagedAgentsMCPOAuthAuthResponse or BetaManagedAgentsStaticBearerAuthResponse`
+  - `auth: BetaManagedAgentsMCPOAuthAuthResponse or BetaManagedAgentsStaticBearerAuthResponse or BetaManagedAgentsEnvironmentVariableAuthResponse`
 
     Authentication details for a credential.
 
@@ -62438,6 +76739,42 @@ Update Credential
       - `type: "static_bearer"`
 
         - `"static_bearer"`
+
+    - `beta_managed_agents_environment_variable_auth_response: object { networking, secret_name, type }`
+
+      Environment variable credential details. The secret value is never returned.
+
+      - `networking: BetaManagedAgentsUnrestrictedCredentialNetworkingResponse or BetaManagedAgentsLimitedCredentialNetworkingResponse`
+
+        Outbound hosts the secret value is substituted on.
+
+        - `beta_managed_agents_unrestricted_credential_networking_response: object { type }`
+
+          The secret is substituted on any host the session's Environment network policy permits egress to.
+
+          - `type: "unrestricted"`
+
+            - `"unrestricted"`
+
+        - `beta_managed_agents_limited_credential_networking_response: object { allowed_hosts, type }`
+
+          The secret is substituted only on requests to the listed hosts.
+
+          - `allowed_hosts: array of string`
+
+            Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+
+          - `type: "limited"`
+
+            - `"limited"`
+
+      - `secret_name: string`
+
+        Name of the environment variable.
+
+      - `type: "environment_variable"`
+
+        - `"environment_variable"`
 
   - `created_at: string`
 
@@ -62583,7 +76920,7 @@ Archive Credential
 
     A timestamp in RFC 3339 format
 
-  - `auth: BetaManagedAgentsMCPOAuthAuthResponse or BetaManagedAgentsStaticBearerAuthResponse`
+  - `auth: BetaManagedAgentsMCPOAuthAuthResponse or BetaManagedAgentsStaticBearerAuthResponse or BetaManagedAgentsEnvironmentVariableAuthResponse`
 
     Authentication details for a credential.
 
@@ -62662,6 +76999,42 @@ Archive Credential
       - `type: "static_bearer"`
 
         - `"static_bearer"`
+
+    - `beta_managed_agents_environment_variable_auth_response: object { networking, secret_name, type }`
+
+      Environment variable credential details. The secret value is never returned.
+
+      - `networking: BetaManagedAgentsUnrestrictedCredentialNetworkingResponse or BetaManagedAgentsLimitedCredentialNetworkingResponse`
+
+        Outbound hosts the secret value is substituted on.
+
+        - `beta_managed_agents_unrestricted_credential_networking_response: object { type }`
+
+          The secret is substituted on any host the session's Environment network policy permits egress to.
+
+          - `type: "unrestricted"`
+
+            - `"unrestricted"`
+
+        - `beta_managed_agents_limited_credential_networking_response: object { allowed_hosts, type }`
+
+          The secret is substituted only on requests to the listed hosts.
+
+          - `allowed_hosts: array of string`
+
+            Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+
+          - `type: "limited"`
+
+            - `"limited"`
+
+      - `secret_name: string`
+
+        Name of the environment variable.
+
+      - `type: "environment_variable"`
+
+        - `"environment_variable"`
 
   - `created_at: string`
 
@@ -62895,7 +77268,7 @@ ant beta:vaults:credentials mcp-oauth-validate \
 
     A timestamp in RFC 3339 format
 
-  - `auth: BetaManagedAgentsMCPOAuthAuthResponse or BetaManagedAgentsStaticBearerAuthResponse`
+  - `auth: BetaManagedAgentsMCPOAuthAuthResponse or BetaManagedAgentsStaticBearerAuthResponse or BetaManagedAgentsEnvironmentVariableAuthResponse`
 
     Authentication details for a credential.
 
@@ -62975,6 +77348,42 @@ ant beta:vaults:credentials mcp-oauth-validate \
 
         - `"static_bearer"`
 
+    - `beta_managed_agents_environment_variable_auth_response: object { networking, secret_name, type }`
+
+      Environment variable credential details. The secret value is never returned.
+
+      - `networking: BetaManagedAgentsUnrestrictedCredentialNetworkingResponse or BetaManagedAgentsLimitedCredentialNetworkingResponse`
+
+        Outbound hosts the secret value is substituted on.
+
+        - `beta_managed_agents_unrestricted_credential_networking_response: object { type }`
+
+          The secret is substituted on any host the session's Environment network policy permits egress to.
+
+          - `type: "unrestricted"`
+
+            - `"unrestricted"`
+
+        - `beta_managed_agents_limited_credential_networking_response: object { allowed_hosts, type }`
+
+          The secret is substituted only on requests to the listed hosts.
+
+          - `allowed_hosts: array of string`
+
+            Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+
+          - `type: "limited"`
+
+            - `"limited"`
+
+      - `secret_name: string`
+
+        Name of the environment variable.
+
+      - `type: "environment_variable"`
+
+        - `"environment_variable"`
+
   - `created_at: string`
 
     A timestamp in RFC 3339 format
@@ -62998,6 +77407,32 @@ ant beta:vaults:credentials mcp-oauth-validate \
   - `display_name: optional string`
 
     Human-readable name for the credential.
+
+### Beta Managed Agents Credential Networking Params
+
+- `beta_managed_agents_credential_networking_params: BetaManagedAgentsUnrestrictedCredentialNetworkingParams or BetaManagedAgentsLimitedCredentialNetworkingParams`
+
+  Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
+
+  - `beta_managed_agents_unrestricted_credential_networking_params: object { type }`
+
+    Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
+
+    - `type: "unrestricted"`
+
+      - `"unrestricted"`
+
+  - `beta_managed_agents_limited_credential_networking_params: object { allowed_hosts, type }`
+
+    Substitute the secret only on requests to the listed hosts.
+
+    - `allowed_hosts: array of string`
+
+      Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
+
+    - `type: "limited"`
+
+      - `"limited"`
 
 ### Beta Managed Agents Credential Validation
 
@@ -63124,6 +77559,152 @@ ant beta:vaults:credentials mcp-oauth-validate \
   - `type: "vault_credential_deleted"`
 
     - `"vault_credential_deleted"`
+
+### Beta Managed Agents Environment Variable Auth Response
+
+- `beta_managed_agents_environment_variable_auth_response: object { networking, secret_name, type }`
+
+  Environment variable credential details. The secret value is never returned.
+
+  - `networking: BetaManagedAgentsUnrestrictedCredentialNetworkingResponse or BetaManagedAgentsLimitedCredentialNetworkingResponse`
+
+    Outbound hosts the secret value is substituted on.
+
+    - `beta_managed_agents_unrestricted_credential_networking_response: object { type }`
+
+      The secret is substituted on any host the session's Environment network policy permits egress to.
+
+      - `type: "unrestricted"`
+
+        - `"unrestricted"`
+
+    - `beta_managed_agents_limited_credential_networking_response: object { allowed_hosts, type }`
+
+      The secret is substituted only on requests to the listed hosts.
+
+      - `allowed_hosts: array of string`
+
+        Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+
+      - `type: "limited"`
+
+        - `"limited"`
+
+  - `secret_name: string`
+
+    Name of the environment variable.
+
+  - `type: "environment_variable"`
+
+    - `"environment_variable"`
+
+### Beta Managed Agents Environment Variable Create Params
+
+- `beta_managed_agents_environment_variable_create_params: object { networking, secret_name, secret_value, type }`
+
+  Parameters for creating an environment variable credential.
+
+  - `networking: BetaManagedAgentsUnrestrictedCredentialNetworkingParams or BetaManagedAgentsLimitedCredentialNetworkingParams`
+
+    Outbound hosts the secret value is substituted on.
+
+    - `beta_managed_agents_unrestricted_credential_networking_params: object { type }`
+
+      Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
+
+      - `type: "unrestricted"`
+
+        - `"unrestricted"`
+
+    - `beta_managed_agents_limited_credential_networking_params: object { allowed_hosts, type }`
+
+      Substitute the secret only on requests to the listed hosts.
+
+      - `allowed_hosts: array of string`
+
+        Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
+
+      - `type: "limited"`
+
+        - `"limited"`
+
+  - `secret_name: string`
+
+    Name of the environment variable. Immutable after create.
+
+  - `secret_value: string`
+
+    Secret value. Write-only; never returned in responses.
+
+  - `type: "environment_variable"`
+
+    - `"environment_variable"`
+
+### Beta Managed Agents Environment Variable Update Params
+
+- `beta_managed_agents_environment_variable_update_params: object { type, networking, secret_value }`
+
+  Parameters for updating an environment variable credential. `secret_name` is immutable.
+
+  - `type: "environment_variable"`
+
+    - `"environment_variable"`
+
+  - `networking: optional BetaManagedAgentsUnrestrictedCredentialNetworkingParams or BetaManagedAgentsLimitedCredentialNetworkingParams`
+
+    Updated networking scope. Full replacement.
+
+    - `beta_managed_agents_unrestricted_credential_networking_params: object { type }`
+
+      Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
+
+      - `type: "unrestricted"`
+
+        - `"unrestricted"`
+
+    - `beta_managed_agents_limited_credential_networking_params: object { allowed_hosts, type }`
+
+      Substitute the secret only on requests to the listed hosts.
+
+      - `allowed_hosts: array of string`
+
+        Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
+
+      - `type: "limited"`
+
+        - `"limited"`
+
+  - `secret_value: optional string`
+
+    Updated secret value.
+
+### Beta Managed Agents Limited Credential Networking Params
+
+- `beta_managed_agents_limited_credential_networking_params: object { allowed_hosts, type }`
+
+  Substitute the secret only on requests to the listed hosts.
+
+  - `allowed_hosts: array of string`
+
+    Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
+
+  - `type: "limited"`
+
+    - `"limited"`
+
+### Beta Managed Agents Limited Credential Networking Response
+
+- `beta_managed_agents_limited_credential_networking_response: object { allowed_hosts, type }`
+
+  The secret is substituted only on requests to the listed hosts.
+
+  - `allowed_hosts: array of string`
+
+    Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+
+  - `type: "limited"`
+
+    - `"limited"`
 
 ### Beta Managed Agents MCP OAuth Auth Response
 
@@ -63716,6 +78297,26 @@ ant beta:vaults:credentials mcp-oauth-validate \
   - `client_secret: optional string`
 
     Updated OAuth client secret.
+
+### Beta Managed Agents Unrestricted Credential Networking Params
+
+- `beta_managed_agents_unrestricted_credential_networking_params: object { type }`
+
+  Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
+
+  - `type: "unrestricted"`
+
+    - `"unrestricted"`
+
+### Beta Managed Agents Unrestricted Credential Networking Response
+
+- `beta_managed_agents_unrestricted_credential_networking_response: object { type }`
+
+  The secret is substituted on any host the session's Environment network policy permits egress to.
+
+  - `type: "unrestricted"`
+
+    - `"unrestricted"`
 
 # Memory Stores
 
@@ -67733,7 +82334,7 @@ ant beta:user-profiles create-enrollment-url \
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
 
@@ -67745,7 +82346,7 @@ ant beta:user-profiles create-enrollment-url \
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
 
@@ -67757,7 +82358,7 @@ ant beta:user-profiles create-enrollment-url \
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
 
@@ -67769,7 +82370,7 @@ ant beta:user-profiles create-enrollment-url \
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
 
@@ -67781,7 +82382,7 @@ ant beta:user-profiles create-enrollment-url \
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
 
@@ -67793,7 +82394,7 @@ ant beta:user-profiles create-enrollment-url \
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
 
@@ -67805,7 +82406,7 @@ ant beta:user-profiles create-enrollment-url \
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
 
@@ -67817,7 +82418,7 @@ ant beta:user-profiles create-enrollment-url \
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
 
@@ -67829,7 +82430,7 @@ ant beta:user-profiles create-enrollment-url \
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
 
@@ -67841,7 +82442,7 @@ ant beta:user-profiles create-enrollment-url \
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
 
@@ -67853,7 +82454,7 @@ ant beta:user-profiles create-enrollment-url \
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
 
@@ -67861,37 +82462,49 @@ ant beta:user-profiles create-enrollment-url \
 
       - `workspace_id: string`
 
-    - `beta_webhook_session_thread_created_event_data: object { id, organization_id, type, workspace_id }`
+    - `beta_webhook_session_thread_created_event_data: object { id, organization_id, session_thread_id, 2 more }`
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
+
+      - `session_thread_id: string`
+
+        ID of the session thread this event refers to.
 
       - `type: "session.thread_created"`
 
       - `workspace_id: string`
 
-    - `beta_webhook_session_thread_idled_event_data: object { id, organization_id, type, workspace_id }`
+    - `beta_webhook_session_thread_idled_event_data: object { id, organization_id, session_thread_id, 2 more }`
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
+
+      - `session_thread_id: string`
+
+        ID of the session thread this event refers to.
 
       - `type: "session.thread_idled"`
 
       - `workspace_id: string`
 
-    - `beta_webhook_session_thread_terminated_event_data: object { id, organization_id, type, workspace_id }`
+    - `beta_webhook_session_thread_terminated_event_data: object { id, organization_id, session_thread_id, 2 more }`
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
+
+      - `session_thread_id: string`
+
+        ID of the session thread this event refers to.
 
       - `type: "session.thread_terminated"`
 
@@ -67901,7 +82514,7 @@ ant beta:user-profiles create-enrollment-url \
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
 
@@ -67913,7 +82526,7 @@ ant beta:user-profiles create-enrollment-url \
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the vault that triggered the event.
 
       - `organization_id: string`
 
@@ -67925,7 +82538,7 @@ ant beta:user-profiles create-enrollment-url \
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the vault that triggered the event.
 
       - `organization_id: string`
 
@@ -67937,7 +82550,7 @@ ant beta:user-profiles create-enrollment-url \
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the vault that triggered the event.
 
       - `organization_id: string`
 
@@ -67949,7 +82562,7 @@ ant beta:user-profiles create-enrollment-url \
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the vault credential that triggered the event.
 
       - `organization_id: string`
 
@@ -67965,7 +82578,7 @@ ant beta:user-profiles create-enrollment-url \
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the vault credential that triggered the event.
 
       - `organization_id: string`
 
@@ -67981,7 +82594,7 @@ ant beta:user-profiles create-enrollment-url \
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the vault credential that triggered the event.
 
       - `organization_id: string`
 
@@ -67997,7 +82610,7 @@ ant beta:user-profiles create-enrollment-url \
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the vault credential that triggered the event.
 
       - `organization_id: string`
 
@@ -68021,7 +82634,7 @@ ant beta:user-profiles create-enrollment-url \
 
     - `id: string`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `organization_id: string`
 
@@ -68033,7 +82646,7 @@ ant beta:user-profiles create-enrollment-url \
 
     - `id: string`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `organization_id: string`
 
@@ -68045,7 +82658,7 @@ ant beta:user-profiles create-enrollment-url \
 
     - `id: string`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `organization_id: string`
 
@@ -68057,7 +82670,7 @@ ant beta:user-profiles create-enrollment-url \
 
     - `id: string`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `organization_id: string`
 
@@ -68069,7 +82682,7 @@ ant beta:user-profiles create-enrollment-url \
 
     - `id: string`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `organization_id: string`
 
@@ -68081,7 +82694,7 @@ ant beta:user-profiles create-enrollment-url \
 
     - `id: string`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `organization_id: string`
 
@@ -68093,7 +82706,7 @@ ant beta:user-profiles create-enrollment-url \
 
     - `id: string`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `organization_id: string`
 
@@ -68105,7 +82718,7 @@ ant beta:user-profiles create-enrollment-url \
 
     - `id: string`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `organization_id: string`
 
@@ -68117,7 +82730,7 @@ ant beta:user-profiles create-enrollment-url \
 
     - `id: string`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `organization_id: string`
 
@@ -68129,7 +82742,7 @@ ant beta:user-profiles create-enrollment-url \
 
     - `id: string`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `organization_id: string`
 
@@ -68141,7 +82754,7 @@ ant beta:user-profiles create-enrollment-url \
 
     - `id: string`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `organization_id: string`
 
@@ -68149,37 +82762,49 @@ ant beta:user-profiles create-enrollment-url \
 
     - `workspace_id: string`
 
-  - `beta_webhook_session_thread_created_event_data: object { id, organization_id, type, workspace_id }`
+  - `beta_webhook_session_thread_created_event_data: object { id, organization_id, session_thread_id, 2 more }`
 
     - `id: string`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `organization_id: string`
+
+    - `session_thread_id: string`
+
+      ID of the session thread this event refers to.
 
     - `type: "session.thread_created"`
 
     - `workspace_id: string`
 
-  - `beta_webhook_session_thread_idled_event_data: object { id, organization_id, type, workspace_id }`
+  - `beta_webhook_session_thread_idled_event_data: object { id, organization_id, session_thread_id, 2 more }`
 
     - `id: string`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `organization_id: string`
+
+    - `session_thread_id: string`
+
+      ID of the session thread this event refers to.
 
     - `type: "session.thread_idled"`
 
     - `workspace_id: string`
 
-  - `beta_webhook_session_thread_terminated_event_data: object { id, organization_id, type, workspace_id }`
+  - `beta_webhook_session_thread_terminated_event_data: object { id, organization_id, session_thread_id, 2 more }`
 
     - `id: string`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `organization_id: string`
+
+    - `session_thread_id: string`
+
+      ID of the session thread this event refers to.
 
     - `type: "session.thread_terminated"`
 
@@ -68189,7 +82814,7 @@ ant beta:user-profiles create-enrollment-url \
 
     - `id: string`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `organization_id: string`
 
@@ -68201,7 +82826,7 @@ ant beta:user-profiles create-enrollment-url \
 
     - `id: string`
 
-      ID of the resource that triggered the event.
+      ID of the vault that triggered the event.
 
     - `organization_id: string`
 
@@ -68213,7 +82838,7 @@ ant beta:user-profiles create-enrollment-url \
 
     - `id: string`
 
-      ID of the resource that triggered the event.
+      ID of the vault that triggered the event.
 
     - `organization_id: string`
 
@@ -68225,7 +82850,7 @@ ant beta:user-profiles create-enrollment-url \
 
     - `id: string`
 
-      ID of the resource that triggered the event.
+      ID of the vault that triggered the event.
 
     - `organization_id: string`
 
@@ -68237,7 +82862,7 @@ ant beta:user-profiles create-enrollment-url \
 
     - `id: string`
 
-      ID of the resource that triggered the event.
+      ID of the vault credential that triggered the event.
 
     - `organization_id: string`
 
@@ -68253,7 +82878,7 @@ ant beta:user-profiles create-enrollment-url \
 
     - `id: string`
 
-      ID of the resource that triggered the event.
+      ID of the vault credential that triggered the event.
 
     - `organization_id: string`
 
@@ -68269,7 +82894,7 @@ ant beta:user-profiles create-enrollment-url \
 
     - `id: string`
 
-      ID of the resource that triggered the event.
+      ID of the vault credential that triggered the event.
 
     - `organization_id: string`
 
@@ -68285,7 +82910,7 @@ ant beta:user-profiles create-enrollment-url \
 
     - `id: string`
 
-      ID of the resource that triggered the event.
+      ID of the vault credential that triggered the event.
 
     - `organization_id: string`
 
@@ -68303,7 +82928,7 @@ ant beta:user-profiles create-enrollment-url \
 
   - `id: string`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `organization_id: string`
 
@@ -68317,7 +82942,7 @@ ant beta:user-profiles create-enrollment-url \
 
   - `id: string`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `organization_id: string`
 
@@ -68331,7 +82956,7 @@ ant beta:user-profiles create-enrollment-url \
 
   - `id: string`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `organization_id: string`
 
@@ -68345,7 +82970,7 @@ ant beta:user-profiles create-enrollment-url \
 
   - `id: string`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `organization_id: string`
 
@@ -68359,7 +82984,7 @@ ant beta:user-profiles create-enrollment-url \
 
   - `id: string`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `organization_id: string`
 
@@ -68373,7 +82998,7 @@ ant beta:user-profiles create-enrollment-url \
 
   - `id: string`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `organization_id: string`
 
@@ -68387,7 +83012,7 @@ ant beta:user-profiles create-enrollment-url \
 
   - `id: string`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `organization_id: string`
 
@@ -68401,7 +83026,7 @@ ant beta:user-profiles create-enrollment-url \
 
   - `id: string`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `organization_id: string`
 
@@ -68415,7 +83040,7 @@ ant beta:user-profiles create-enrollment-url \
 
   - `id: string`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `organization_id: string`
 
@@ -68429,7 +83054,7 @@ ant beta:user-profiles create-enrollment-url \
 
   - `id: string`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `organization_id: string`
 
@@ -68443,7 +83068,7 @@ ant beta:user-profiles create-enrollment-url \
 
   - `id: string`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `organization_id: string`
 
@@ -68457,7 +83082,7 @@ ant beta:user-profiles create-enrollment-url \
 
   - `id: string`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `organization_id: string`
 
@@ -68467,13 +83092,17 @@ ant beta:user-profiles create-enrollment-url \
 
 ### Beta Webhook Session Thread Created Event Data
 
-- `beta_webhook_session_thread_created_event_data: object { id, organization_id, type, workspace_id }`
+- `beta_webhook_session_thread_created_event_data: object { id, organization_id, session_thread_id, 2 more }`
 
   - `id: string`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `organization_id: string`
+
+  - `session_thread_id: string`
+
+    ID of the session thread this event refers to.
 
   - `type: "session.thread_created"`
 
@@ -68481,13 +83110,17 @@ ant beta:user-profiles create-enrollment-url \
 
 ### Beta Webhook Session Thread Idled Event Data
 
-- `beta_webhook_session_thread_idled_event_data: object { id, organization_id, type, workspace_id }`
+- `beta_webhook_session_thread_idled_event_data: object { id, organization_id, session_thread_id, 2 more }`
 
   - `id: string`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `organization_id: string`
+
+  - `session_thread_id: string`
+
+    ID of the session thread this event refers to.
 
   - `type: "session.thread_idled"`
 
@@ -68495,13 +83128,17 @@ ant beta:user-profiles create-enrollment-url \
 
 ### Beta Webhook Session Thread Terminated Event Data
 
-- `beta_webhook_session_thread_terminated_event_data: object { id, organization_id, type, workspace_id }`
+- `beta_webhook_session_thread_terminated_event_data: object { id, organization_id, session_thread_id, 2 more }`
 
   - `id: string`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `organization_id: string`
+
+  - `session_thread_id: string`
+
+    ID of the session thread this event refers to.
 
   - `type: "session.thread_terminated"`
 
@@ -68513,7 +83150,7 @@ ant beta:user-profiles create-enrollment-url \
 
   - `id: string`
 
-    ID of the resource that triggered the event.
+    ID of the vault that triggered the event.
 
   - `organization_id: string`
 
@@ -68527,7 +83164,7 @@ ant beta:user-profiles create-enrollment-url \
 
   - `id: string`
 
-    ID of the resource that triggered the event.
+    ID of the vault that triggered the event.
 
   - `organization_id: string`
 
@@ -68541,7 +83178,7 @@ ant beta:user-profiles create-enrollment-url \
 
   - `id: string`
 
-    ID of the resource that triggered the event.
+    ID of the vault credential that triggered the event.
 
   - `organization_id: string`
 
@@ -68559,7 +83196,7 @@ ant beta:user-profiles create-enrollment-url \
 
   - `id: string`
 
-    ID of the resource that triggered the event.
+    ID of the vault credential that triggered the event.
 
   - `organization_id: string`
 
@@ -68577,7 +83214,7 @@ ant beta:user-profiles create-enrollment-url \
 
   - `id: string`
 
-    ID of the resource that triggered the event.
+    ID of the vault credential that triggered the event.
 
   - `organization_id: string`
 
@@ -68595,7 +83232,7 @@ ant beta:user-profiles create-enrollment-url \
 
   - `id: string`
 
-    ID of the resource that triggered the event.
+    ID of the vault credential that triggered the event.
 
   - `organization_id: string`
 
@@ -68613,7 +83250,7 @@ ant beta:user-profiles create-enrollment-url \
 
   - `id: string`
 
-    ID of the resource that triggered the event.
+    ID of the vault that triggered the event.
 
   - `organization_id: string`
 
@@ -68639,7 +83276,7 @@ ant beta:user-profiles create-enrollment-url \
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
 
@@ -68651,7 +83288,7 @@ ant beta:user-profiles create-enrollment-url \
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
 
@@ -68663,7 +83300,7 @@ ant beta:user-profiles create-enrollment-url \
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
 
@@ -68675,7 +83312,7 @@ ant beta:user-profiles create-enrollment-url \
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
 
@@ -68687,7 +83324,7 @@ ant beta:user-profiles create-enrollment-url \
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
 
@@ -68699,7 +83336,7 @@ ant beta:user-profiles create-enrollment-url \
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
 
@@ -68711,7 +83348,7 @@ ant beta:user-profiles create-enrollment-url \
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
 
@@ -68723,7 +83360,7 @@ ant beta:user-profiles create-enrollment-url \
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
 
@@ -68735,7 +83372,7 @@ ant beta:user-profiles create-enrollment-url \
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
 
@@ -68747,7 +83384,7 @@ ant beta:user-profiles create-enrollment-url \
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
 
@@ -68759,7 +83396,7 @@ ant beta:user-profiles create-enrollment-url \
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
 
@@ -68767,37 +83404,49 @@ ant beta:user-profiles create-enrollment-url \
 
       - `workspace_id: string`
 
-    - `beta_webhook_session_thread_created_event_data: object { id, organization_id, type, workspace_id }`
+    - `beta_webhook_session_thread_created_event_data: object { id, organization_id, session_thread_id, 2 more }`
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
+
+      - `session_thread_id: string`
+
+        ID of the session thread this event refers to.
 
       - `type: "session.thread_created"`
 
       - `workspace_id: string`
 
-    - `beta_webhook_session_thread_idled_event_data: object { id, organization_id, type, workspace_id }`
+    - `beta_webhook_session_thread_idled_event_data: object { id, organization_id, session_thread_id, 2 more }`
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
+
+      - `session_thread_id: string`
+
+        ID of the session thread this event refers to.
 
       - `type: "session.thread_idled"`
 
       - `workspace_id: string`
 
-    - `beta_webhook_session_thread_terminated_event_data: object { id, organization_id, type, workspace_id }`
+    - `beta_webhook_session_thread_terminated_event_data: object { id, organization_id, session_thread_id, 2 more }`
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
+
+      - `session_thread_id: string`
+
+        ID of the session thread this event refers to.
 
       - `type: "session.thread_terminated"`
 
@@ -68807,7 +83456,7 @@ ant beta:user-profiles create-enrollment-url \
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
 
@@ -68819,7 +83468,7 @@ ant beta:user-profiles create-enrollment-url \
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the vault that triggered the event.
 
       - `organization_id: string`
 
@@ -68831,7 +83480,7 @@ ant beta:user-profiles create-enrollment-url \
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the vault that triggered the event.
 
       - `organization_id: string`
 
@@ -68843,7 +83492,7 @@ ant beta:user-profiles create-enrollment-url \
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the vault that triggered the event.
 
       - `organization_id: string`
 
@@ -68855,7 +83504,7 @@ ant beta:user-profiles create-enrollment-url \
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the vault credential that triggered the event.
 
       - `organization_id: string`
 
@@ -68871,7 +83520,7 @@ ant beta:user-profiles create-enrollment-url \
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the vault credential that triggered the event.
 
       - `organization_id: string`
 
@@ -68887,7 +83536,7 @@ ant beta:user-profiles create-enrollment-url \
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the vault credential that triggered the event.
 
       - `organization_id: string`
 
@@ -68903,7 +83552,7 @@ ant beta:user-profiles create-enrollment-url \
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the vault credential that triggered the event.
 
       - `organization_id: string`
 

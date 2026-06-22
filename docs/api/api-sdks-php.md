@@ -52,7 +52,7 @@ $message = $client->messages->create(
 echo $message->content[0]->text;
 ```
 
-For authentication options including Workload Identity Federation, see [Authentication](https://platform.claude.com/docs/en/api/authentication/overview.md).
+For authentication options including Workload Identity Federation, see [Authentication](../manage-claude/manage-claude-authentication.md).
 
 ## Value objects
 

@@ -25,13 +25,15 @@ This API enables you to better monitor, analyze, and optimize your Claude Code a
 * **Usage justification:** Provide metrics to justify and expand Claude Code adoption internally
 
 <Check>
-  **Admin API key required**
-
-  This API is part of the [Admin API](./manage-claude-admin-api.md). These endpoints require an Admin API key (starting with `sk-ant-admin...`) that differs from standard API keys. Only organization members with the admin role can provision Admin API keys through the [Claude Console](/settings/admin-keys).
+  **Admin API key required.** These endpoints require an Admin API key, which is different from a standard Claude API key. See [Create an Admin API key](./manage-claude-admin-api-keys.md) to find where to create one for your organization type and which scopes to select.
 </Check>
 
 <Note>
 **Claude Platform on AWS:** The Claude Code Analytics API is not currently available. View Claude Code usage on the **Usage** page in the Claude Console instead.
+</Note>
+
+<Note>
+**Claude Enterprise organizations:** Claude Code activity for claude.ai users is reported by the Claude Enterprise Analytics API, which uses an Analytics API key instead of an Admin API key. See [Analytics APIs](./manage-claude-analytics-api.md) to find which API and key type your organization needs.
 </Note>
 
 ## Quick start
@@ -68,7 +70,7 @@ Track Claude Code usage, productivity metrics, and developer activity across you
 - **Cursor-based pagination**: Handle large datasets with stable pagination using opaque cursors
 - **Data freshness**: Metrics are available with up to 1-hour delay for consistency
 
-For complete parameter details and response schemas, see the [Claude Code Analytics API reference](https://platform.claude.com/docs/en/api/admin-api/claude-code/get-claude-code-usage-report.md).
+For complete parameter details and response schemas, see the [Claude Code Analytics API reference](../api/api-admin-usage_report-retrieve_claude_code.md).
 
 ### Basic examples
 

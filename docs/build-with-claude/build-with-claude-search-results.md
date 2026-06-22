@@ -25,8 +25,8 @@ The search results feature is available on the following models:
 - Claude Sonnet 4.5 (`claude-sonnet-4-5-20250929`)
 - Claude Opus 4.5 (`claude-opus-4-5-20251101`)
 - Claude Opus 4.1 ([deprecated](../about-claude/about-claude-model-deprecations.md)) (`claude-opus-4-1-20250805`)
-- Claude Opus 4 ([deprecated](../about-claude/about-claude-model-deprecations.md)) (`claude-opus-4-20250514`)
-- Claude Sonnet 4 ([deprecated](../about-claude/about-claude-model-deprecations.md)) (`claude-sonnet-4-20250514`)
+- Claude Opus 4 ([retired, except on Vertex AI](../about-claude/about-claude-model-deprecations.md)) (`claude-opus-4-20250514`)
+- Claude Sonnet 4 ([retired, except on Bedrock and Vertex AI](../about-claude/about-claude-model-deprecations.md)) (`claude-sonnet-4-20250514`)
 - Claude Haiku 4.5 (`claude-haiku-4-5-20251001`)
 - Claude Haiku 3.5 ([retired, except on Bedrock and Vertex AI](../about-claude/about-claude-model-deprecations.md)) (`claude-3-5-haiku-20241022`)
 
@@ -1513,3 +1513,20 @@ Citations are all-or-nothing: either all search results in a request must have c
 - Search result content blocks are available on Claude API, Amazon Bedrock, and Google Cloud's Vertex AI
 - Only text content is supported within search results (no images or other media)
 - The `content` array must contain at least one text block
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Citations" icon="book" href="./build-with-claude-citations.md">
+    Learn how citations work across documents, custom content, and search results.
+  </Card>
+  <Card title="Web search tool" icon="magnifying-glass" href="../agents-and-tools/agents-and-tools-tool-use-web-search-tool.md">
+    Let Claude search the web and cite sources automatically using a server tool.
+  </Card>
+  <Card title="Messages API reference" icon="code" href="../api/api-messages-create.md">
+    See the complete Messages API documentation, including content block types.
+  </Card>
+  <Card title="Prompt caching" icon="database" href="./build-with-claude-prompt-caching.md">
+    Cache search results with `cache_control` to reduce cost and latency on repeated requests.
+  </Card>
+</CardGroup>

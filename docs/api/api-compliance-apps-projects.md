@@ -45,6 +45,24 @@ are sorted chronologically (time ascending) by created_at.
 
   Opaque pagination token from a previous response's `next_page` field. Pass this to retrieve the next page of results. Clients should treat this value as an opaque string and not attempt to parse or interpret its contents, as the format may change without notice.
 
+- `updated_at: optional object { gt, gte, lt, lte }`
+
+  - `gt: optional string`
+
+    Filter projects updated after this time (RFC 3339 format)
+
+  - `gte: optional string`
+
+    Filter projects updated at or after this time (RFC 3339 format)
+
+  - `lt: optional string`
+
+    Filter projects updated before this time (RFC 3339 format)
+
+  - `lte: optional string`
+
+    Filter projects updated at or before this time (RFC 3339 format)
+
 - `user_ids: optional array of string`
 
   Filter by user IDs. Enumerate IDs via `GET /v1/compliance/organizations/{org_uuid}/users`.
@@ -493,11 +511,11 @@ GET /v1/compliance/apps/projects/documents/{claude_proj_doc_id} endpoint.
 
 ### Returns
 
-- `data: array of object { id, created_at, filename, 2 more }  or object { id, created_at, filename, 2 more }`
+- `data: array of object { id, created_at, filename, 4 more }  or object { id, created_at, filename, 3 more }`
 
   List of attachments sorted chronologically by created_at, tie break by id
 
-  - `ComplianceProjectFileReference object { id, created_at, filename, 2 more }`
+  - `ComplianceProjectFileReference object { id, created_at, filename, 4 more }`
 
     File attachment reference for compliance responses.
 
@@ -513,9 +531,17 @@ GET /v1/compliance/apps/projects/documents/{claude_proj_doc_id} endpoint.
 
       Display name of the file (e.g., 'document.pdf')
 
+    - `md5: string`
+
+      Lowercase hex MD5 of the file's preferred downloadable variant, when recorded. Null otherwise. Use the per-file `/metadata` endpoint for the authoritative value.
+
     - `mime_type: string`
 
-      MIME type of the file when it was uploaded (e.g., 'application/pdf')
+      MIME type of the file's preferred downloadable variant when one is recorded, else 'application/octet-stream'. Use the per-file `/metadata` endpoint for the authoritative value.
+
+    - `size_bytes: number`
+
+      Size in bytes of the file's preferred downloadable variant, when recorded. Null otherwise. Use the per-file `/metadata` endpoint for the authoritative value.
 
     - `type: "project_file"`
 
@@ -523,7 +549,7 @@ GET /v1/compliance/apps/projects/documents/{claude_proj_doc_id} endpoint.
 
       - `"project_file"`
 
-  - `ComplianceProjectDocReference object { id, created_at, filename, 2 more }`
+  - `ComplianceProjectDocReference object { id, created_at, filename, 3 more }`
 
     Project document attachment reference for compliance responses.
 
@@ -550,6 +576,10 @@ GET /v1/compliance/apps/projects/documents/{claude_proj_doc_id} endpoint.
       Discriminator marking this as a plain text document
 
       - `"project_doc"`
+
+    - `updated_at: string`
+
+      Last-modified timestamp of the document. Reserved for future use — currently always null.
 
 - `has_more: boolean`
 
@@ -575,7 +605,9 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/$PROJECT_ID/attachmen
       "id": "id",
       "created_at": "2019-12-27T18:11:19.117Z",
       "filename": "filename",
+      "md5": "md5",
       "mime_type": "mime_type",
+      "size_bytes": 0,
       "type": "project_file"
     }
   ],
@@ -588,11 +620,11 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/$PROJECT_ID/attachmen
 
 ### Attachment List Response
 
-- `AttachmentListResponse = object { id, created_at, filename, 2 more }  or object { id, created_at, filename, 2 more }`
+- `AttachmentListResponse = object { id, created_at, filename, 4 more }  or object { id, created_at, filename, 3 more }`
 
   File attachment reference for compliance responses.
 
-  - `ComplianceProjectFileReference object { id, created_at, filename, 2 more }`
+  - `ComplianceProjectFileReference object { id, created_at, filename, 4 more }`
 
     File attachment reference for compliance responses.
 
@@ -608,9 +640,17 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/$PROJECT_ID/attachmen
 
       Display name of the file (e.g., 'document.pdf')
 
+    - `md5: string`
+
+      Lowercase hex MD5 of the file's preferred downloadable variant, when recorded. Null otherwise. Use the per-file `/metadata` endpoint for the authoritative value.
+
     - `mime_type: string`
 
-      MIME type of the file when it was uploaded (e.g., 'application/pdf')
+      MIME type of the file's preferred downloadable variant when one is recorded, else 'application/octet-stream'. Use the per-file `/metadata` endpoint for the authoritative value.
+
+    - `size_bytes: number`
+
+      Size in bytes of the file's preferred downloadable variant, when recorded. Null otherwise. Use the per-file `/metadata` endpoint for the authoritative value.
 
     - `type: "project_file"`
 
@@ -618,7 +658,7 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/$PROJECT_ID/attachmen
 
       - `"project_file"`
 
-  - `ComplianceProjectDocReference object { id, created_at, filename, 2 more }`
+  - `ComplianceProjectDocReference object { id, created_at, filename, 3 more }`
 
     Project document attachment reference for compliance responses.
 
@@ -645,6 +685,329 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/$PROJECT_ID/attachmen
       Discriminator marking this as a plain text document
 
       - `"project_doc"`
+
+    - `updated_at: string`
+
+      Last-modified timestamp of the document. Reserved for future use — currently always null.
+
+# Collaborators
+
+## List project collaborators
+
+**get** `/v1/compliance/apps/projects/{project_id}/collaborators`
+
+List the users, groups, and organization-wide grants on a project.
+
+Each entry represents one active role assignment on the project. Principals
+are returned as a discriminated union on `type` — an individual user, an
+RBAC group, the whole organization, or all holders of an organization-level
+role.
+
+### Path Parameters
+
+- `project_id: string`
+
+  The project ID (tagged ID, e.g., claude_proj_abc123)
+
+### Query Parameters
+
+- `limit: optional number`
+
+  Maximum results (default: 20, max: 100)
+
+- `page: optional string`
+
+  Opaque pagination token from a previous response's `next_page` field. Pass this to retrieve the next page of results. Clients should treat this value as an opaque string and not attempt to parse or interpret its contents, as the format may change without notice.
+
+### Header Parameters
+
+- `"x-api-key": optional string`
+
+### Returns
+
+- `data: array of object { granted_at, role, type, user_id }  or object { granted_at, group_id, role, type }  or object { granted_at, organization_uuid, role, type }  or object { granted_at, organization_role, role, type }`
+
+  List of collaborators sorted chronologically by granted_at, tie break by the underlying role-assignment UUID
+
+  - `ComplianceProjectUserCollaborator object { granted_at, role, type, user_id }`
+
+    An individual user granted a role on a project.
+
+    - `granted_at: string`
+
+      When this collaborator was granted access (RFC 3339 format)
+
+    - `role: "admin" or "editor" or "owner" or "viewer"`
+
+      Role granted on the project
+
+      - `"admin"`
+
+      - `"editor"`
+
+      - `"owner"`
+
+      - `"viewer"`
+
+    - `type: "user"`
+
+      Discriminator marking this as an individual user collaborator
+
+      - `"user"`
+
+    - `user_id: string`
+
+      Identifier of the user granted access (tagged ID), or null if their account has since been deleted
+
+  - `ComplianceProjectGroupCollaborator object { granted_at, group_id, role, type }`
+
+    An RBAC group granted a role on a project.
+
+    - `granted_at: string`
+
+      When this collaborator was granted access (RFC 3339 format)
+
+    - `group_id: string`
+
+      Identifier of the group granted access (tagged ID)
+
+    - `role: "admin" or "editor" or "owner" or "viewer"`
+
+      Role granted on the project
+
+      - `"admin"`
+
+      - `"editor"`
+
+      - `"owner"`
+
+      - `"viewer"`
+
+    - `type: "group"`
+
+      Discriminator marking this as a group collaborator
+
+      - `"group"`
+
+  - `ComplianceProjectOrganizationCollaborator object { granted_at, organization_uuid, role, type }`
+
+    An entire organization granted a role on a project.
+
+    - `granted_at: string`
+
+      When this collaborator was granted access (RFC 3339 format)
+
+    - `organization_uuid: string`
+
+      UUID of the organization granted access
+
+    - `role: "admin" or "editor" or "owner" or "viewer"`
+
+      Role granted on the project
+
+      - `"admin"`
+
+      - `"editor"`
+
+      - `"owner"`
+
+      - `"viewer"`
+
+    - `type: "organization"`
+
+      Discriminator marking this as an organization-wide grant
+
+      - `"organization"`
+
+  - `ComplianceProjectOrganizationRoleCollaborator object { granted_at, organization_role, role, type }`
+
+    All holders of an organization-level role granted a role on a project.
+
+    - `granted_at: string`
+
+      When this collaborator was granted access (RFC 3339 format)
+
+    - `organization_role: string`
+
+      The organization-level role whose holders are granted access
+
+    - `role: "admin" or "editor" or "owner" or "viewer"`
+
+      Role granted on the project
+
+      - `"admin"`
+
+      - `"editor"`
+
+      - `"owner"`
+
+      - `"viewer"`
+
+    - `type: "organization_role"`
+
+      Discriminator marking this as a grant to all organization members holding a specific org-level role
+
+      - `"organization_role"`
+
+- `has_more: boolean`
+
+  Whether more records exist beyond the current result set
+
+- `next_page: string`
+
+  To get the next page, use the 'next_page' from the current response as the 'page' in your next request
+
+### Example
+
+```http
+curl https://api.anthropic.com/v1/compliance/apps/projects/$PROJECT_ID/collaborators \
+    -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
+```
+
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "granted_at": "2019-12-27T18:11:19.117Z",
+      "role": "admin",
+      "type": "user",
+      "user_id": "user_id"
+    }
+  ],
+  "has_more": true,
+  "next_page": "next_page"
+}
+```
+
+## Domain Types
+
+### Collaborator List Response
+
+- `CollaboratorListResponse = object { granted_at, role, type, user_id }  or object { granted_at, group_id, role, type }  or object { granted_at, organization_uuid, role, type }  or object { granted_at, organization_role, role, type }`
+
+  An individual user granted a role on a project.
+
+  - `ComplianceProjectUserCollaborator object { granted_at, role, type, user_id }`
+
+    An individual user granted a role on a project.
+
+    - `granted_at: string`
+
+      When this collaborator was granted access (RFC 3339 format)
+
+    - `role: "admin" or "editor" or "owner" or "viewer"`
+
+      Role granted on the project
+
+      - `"admin"`
+
+      - `"editor"`
+
+      - `"owner"`
+
+      - `"viewer"`
+
+    - `type: "user"`
+
+      Discriminator marking this as an individual user collaborator
+
+      - `"user"`
+
+    - `user_id: string`
+
+      Identifier of the user granted access (tagged ID), or null if their account has since been deleted
+
+  - `ComplianceProjectGroupCollaborator object { granted_at, group_id, role, type }`
+
+    An RBAC group granted a role on a project.
+
+    - `granted_at: string`
+
+      When this collaborator was granted access (RFC 3339 format)
+
+    - `group_id: string`
+
+      Identifier of the group granted access (tagged ID)
+
+    - `role: "admin" or "editor" or "owner" or "viewer"`
+
+      Role granted on the project
+
+      - `"admin"`
+
+      - `"editor"`
+
+      - `"owner"`
+
+      - `"viewer"`
+
+    - `type: "group"`
+
+      Discriminator marking this as a group collaborator
+
+      - `"group"`
+
+  - `ComplianceProjectOrganizationCollaborator object { granted_at, organization_uuid, role, type }`
+
+    An entire organization granted a role on a project.
+
+    - `granted_at: string`
+
+      When this collaborator was granted access (RFC 3339 format)
+
+    - `organization_uuid: string`
+
+      UUID of the organization granted access
+
+    - `role: "admin" or "editor" or "owner" or "viewer"`
+
+      Role granted on the project
+
+      - `"admin"`
+
+      - `"editor"`
+
+      - `"owner"`
+
+      - `"viewer"`
+
+    - `type: "organization"`
+
+      Discriminator marking this as an organization-wide grant
+
+      - `"organization"`
+
+  - `ComplianceProjectOrganizationRoleCollaborator object { granted_at, organization_role, role, type }`
+
+    All holders of an organization-level role granted a role on a project.
+
+    - `granted_at: string`
+
+      When this collaborator was granted access (RFC 3339 format)
+
+    - `organization_role: string`
+
+      The organization-level role whose holders are granted access
+
+    - `role: "admin" or "editor" or "owner" or "viewer"`
+
+      Role granted on the project
+
+      - `"admin"`
+
+      - `"editor"`
+
+      - `"owner"`
+
+      - `"viewer"`
+
+    - `type: "organization_role"`
+
+      Discriminator marking this as a grant to all organization members holding a specific org-level role
+
+      - `"organization_role"`
 
 # Documents
 

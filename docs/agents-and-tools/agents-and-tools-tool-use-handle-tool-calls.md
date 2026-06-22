@@ -57,7 +57,7 @@ When you receive a tool use response for a client tool, you should:
 2. Run the actual tool in your codebase corresponding to that tool name, passing in the tool `input`.
 3. Continue the conversation by sending a new message with the `role` of `user`, and a `content` block containing the `tool_result` type and the following information:
    - `tool_use_id`: The `id` of the tool use request this is a result for.
-   - `content` (optional): The result of the tool, as a string (for example, `"content": "15 degrees"`), a list of nested content blocks (for example, `"content": [{"type": "text", "text": "15 degrees"}]`), or a list of document blocks (for example, `"content": [{"type": "document", "source": {"type": "text", "media_type": "text/plain", "data": "15 degrees"}}]`). These content blocks can use the `text`, `image`, or `document` types.
+   - `content` (optional): The result of the tool, as a string (for example, `"content": "15 degrees"`), a list of nested content blocks (for example, `"content": [{"type": "text", "text": "15 degrees"}]`), or a list of document blocks (for example, `"content": [{"type": "document", "source": {"type": "text", "media_type": "text/plain", "data": "15 degrees"}}]`). These content blocks can use the `text`, `image`, `document`, or [`search_result`](../build-with-claude/build-with-claude-search-results.md) types.
    - `is_error` (optional): Set to `true` if the tool execution resulted in an error.
 
 <Note>
@@ -266,6 +266,14 @@ For web search specifically, possible error codes include:
 
 ## Next steps
 
-- For running multiple tools in one turn, see [Parallel tool use](./agents-and-tools-tool-use-parallel-tool-use.md).
-- For the SDK abstraction that automates this loop, see [Tool Runner](./agents-and-tools-tool-use-tool-runner.md).
-- For the full tool-use workflow, see [Define tools](./agents-and-tools-tool-use-define-tools.md).
+<CardGroup cols={3}>
+  <Card title="Parallel tool use" icon="grid" href="./agents-and-tools-tool-use-parallel-tool-use.md">
+    Handle responses where Claude calls several tools in a single turn.
+  </Card>
+  <Card title="Tool Runner (SDK)" icon="wrench" href="./agents-and-tools-tool-use-tool-runner.md">
+    Let the SDK manage the `tool_use` loop, result formatting, and retries for you.
+  </Card>
+  <Card title="Define tools" icon="hammer" href="./agents-and-tools-tool-use-define-tools.md">
+    Write schemas and descriptions that steer Claude toward the right tool.
+  </Card>
+</CardGroup>

@@ -73,7 +73,7 @@ With the Code tab open, choose a project and give Claude something to do.
   </Step>
 
   <Step title="Choose a model">
-    Select a model from the dropdown next to the send button. See [models](./code-model-config.md#available-models) for a comparison of Opus, Sonnet, and Haiku. You can change the model later from the same dropdown.
+    Select a model from the dropdown next to the send button. See [models](./code-model-config.md#available-models) for a comparison of the available models. You can change the model later from the same dropdown.
   </Step>
 
   <Step title="Tell Claude what to do">

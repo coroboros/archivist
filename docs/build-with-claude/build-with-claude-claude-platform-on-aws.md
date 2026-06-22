@@ -35,7 +35,7 @@ Both offerings let you use Claude through AWS, but they differ significantly in 
 | **Feature availability** | Typically same-day as Claude API (see [feature limitations](#features-not-supported)) | Per Amazon Bedrock release schedule | Per Amazon Bedrock release schedule |
 | **Agent Skills** | Available (beta) | Not available (requires code execution) | Not available |
 | **Beta features** | Pass through with `anthropic-beta` headers (see [feature limitations](#features-not-supported)) | `anthropic-beta` header not supported | `anthropic-beta` header not supported |
-| **Authentication** | AWS IAM / SigV4 or API key | AWS IAM / SigV4 | AWS IAM / SigV4 or bearer token (C#, Go, and Java SDKs only) |
+| **Authentication** | AWS IAM / SigV4 or API key | AWS IAM / SigV4 | AWS IAM / SigV4 or bearer token |
 | **Billing** | AWS Marketplace | AWS (native service) | AWS (native service) |
 | **Base URL** | `aws-external-anthropic.{region}.api.aws` | `bedrock-mantle.{region}.api.aws` | `bedrock-runtime.{region}.amazonaws.com` |
 | **SDK client** | Platform-specific client class (for example, `AnthropicAWS` in Python), in beta | `AnthropicBedrockMantle` | `AnthropicBedrock` / Bedrock SDK |
@@ -284,14 +284,14 @@ go get github.com/anthropics/anthropic-sdk-go
 
 <Tab title="Java">
 ```kotlin Gradle
-implementation("com.anthropic:anthropic-java-aws:2.35.0")
+implementation("com.anthropic:anthropic-java-aws:2.40.0")
 ```
 
 ```xml Maven
 <dependency>
   <groupId>com.anthropic</groupId>
   <artifactId>anthropic-java-aws</artifactId>
-  <version>2.35.0</version>
+  <version>2.40.0</version>
 </dependency>
 ```
 </Tab>
@@ -319,6 +319,7 @@ The following models are available on Claude Platform on AWS:
 
 | Model | Model ID |
 | :--- | :--- |
+| Claude Fable 5 | claude-fable-5 |
 | Claude Opus 4.8 | claude-opus-4-8 |
 | Claude Opus 4.7 | claude-opus-4-7 |
 | Claude Opus 4.6 | claude-opus-4-6 |
@@ -514,6 +515,8 @@ Claude Platform on AWS uses Claude API endpoints directly, which means you get f
 - **Batch processing:** Submit batch requests for high-throughput workloads.
 - **Prompt caching:** Cache tools, system prompts, and message history to reduce latency and cost. All prompt caching capabilities (5-minute TTL, 1-hour TTL, and automatic caching) are available.
 - **Files API:** Upload and reference files across requests.
+- **Customer-managed encryption keys (CMEK):** [CMEK](../manage-claude/manage-claude-cmek.md) is available with [AWS KMS](../manage-claude/manage-claude-cmek-aws-kms.md) keys only; Google Cloud KMS and Azure Key Vault keys cannot be registered. Create, validate, and attach keys in the [Claude Console](#using-the-claude-console); the `external_keys` Admin API endpoints are not currently available. The key must be in the same AWS region as the workspace it is attached to.
+- **Compliance API:** The [Compliance API](../manage-claude/manage-claude-compliance-api.md) is available. Access is authorized through AWS IAM.
 
 See the [comparison table](#claude-platform-on-aws-vs-amazon-bedrock) for feature-availability differences from Amazon Bedrock.
 
@@ -531,14 +534,13 @@ The following capabilities are not currently available on Claude Platform on AWS
 
 - **HIPAA readiness:** Anthropic's HIPAA-ready program is not available. See [API and data retention](../manage-claude/manage-claude-api-and-data-retention.md).
 
-- **Admin API:** Workspace endpoints (create, get, list, update, and archive on `/v1/organizations/workspaces`) are available. Other Admin API endpoints (organization members, workspace members, invites, API keys, usage reports, cost reports, and rate limit reports) are not currently available. View usage and cost data in the [Claude Console](#using-the-claude-console) instead. AWS IAM manages organization membership.
+- **Admin API:** Workspace endpoints (create, get, list, update, and archive on `/v1/organizations/workspaces`) are available. Other Admin API endpoints (organization members, workspace members, invites, API keys, usage reports, cost reports, rate limit reports, and external keys) are not currently available. Manage [CMEK](../manage-claude/manage-claude-cmek.md) keys in the Claude Console instead. View usage and cost data in the [Claude Console](#using-the-claude-console) instead. AWS IAM manages organization membership.
 - **Workspace member management:** Adding or removing users from individual workspaces is not available. AWS IAM policies on workspace ARNs control access.
 - **Spend limits:** Not available. Rely on AWS billing controls instead.
 - **Claude Code workspace and Analytics API:** The Claude Code workspace with automatic rate limits is not available. Claude Code usage appears in the general usage view rather than a dedicated screen.
 - **OAuth authentication:** Not supported. Use SigV4 or API key authentication.
 - **Fast mode:** Not available on Claude Platform on AWS.
 - **OpenAI-compatible API endpoints:** Not available on Claude Platform on AWS.
-- **Self-hosted sandbox work-list endpoint:** The `GET /v1/environments/{id}/work` endpoint, which lists pending work for a [self-hosted sandbox](../managed-agents/managed-agents-self-hosted-sandboxes.md), is not currently available. The other work endpoints (poll, ack, heartbeat, stop, post results, per-item get, and stats) work normally.
 - **MCP tunnels:** Only MCP servers exposed over the public internet are supported.
 
 ## Data residency

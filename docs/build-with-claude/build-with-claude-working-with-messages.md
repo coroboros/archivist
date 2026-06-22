@@ -197,7 +197,7 @@ The `temperature`, `top_p`, and `top_k` sampling parameters are not supported on
 }
 ```
 
-On Claude Opus 4.7 and later models, refusal responses (`stop_reason: "refusal"`) also include a `stop_details` object identifying the policy category that triggered the refusal. See [Handling stop reasons](./build-with-claude-handling-stop-reasons.md#refusal-categories) for the field reference and example handling code.
+On Claude Opus 4.7 and later models, refusal responses (`stop_reason: "refusal"`) also include a `stop_details` object identifying the policy category that triggered the refusal. See [Handling stop reasons](./build-with-claude-refusals-and-fallback.md#refusal-response) for the field reference and example handling code.
 
 ## Multiple conversational turns
 
@@ -413,7 +413,7 @@ See [Mid-conversation system messages](./build-with-claude-mid-conversation-syst
 You can pre-fill part of Claude's response in the last position of the input messages list. This can be used to shape Claude's response. The example below uses `"max_tokens": 1` to get a single multiple choice answer from Claude.
 
 <Warning>
-Prefilling is not supported on [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6. Requests using prefill with these models return a 400 error. Use [structured outputs](./build-with-claude-structured-outputs.md) or system prompt instructions instead. See the [migration guide](../about-claude/about-claude-models-migration-guide.md) for migration patterns.
+Prefilling is not supported on Claude Fable 5, [Claude Mythos 5](https://anthropic.com/glasswing), [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6. Requests using prefill with these models return a 400 error. Use [structured outputs](./build-with-claude-structured-outputs.md) on models that support it, or system prompt instructions, instead. See the [migration guide](../about-claude/about-claude-models-migration-guide.md) for migration patterns.
 </Warning>
 
 <CodeGroup>
@@ -1192,9 +1192,22 @@ Claude can read both text and images in requests. Images can be supplied using t
 }
 ```
 
-## Tool use and computer use
+## Next steps
 
-See the [tool use guide](../agents-and-tools/agents-and-tools-tool-use-overview.md) for examples of how to use tools with the Messages API.
-See the [computer use guide](../agents-and-tools/agents-and-tools-tool-use-computer-use-tool.md) for examples of how to control desktop computer environments with the Messages API.
-For guaranteed JSON output, see [Structured Outputs](./build-with-claude-structured-outputs.md).
-For an advisory token budget across a full agentic loop, set `output_config.task_budget`; see [Task budgets](./build-with-claude-task-budgets.md).
+<CardGroup cols={2}>
+  <Card title="Stop reasons and fallback" icon="list" href="./build-with-claude-handling-stop-reasons.md">
+    Handle each `stop_reason` value and decide what to do when a response ends.
+  </Card>
+  <Card title="Tool use with Claude" icon="wrench" href="../agents-and-tools/agents-and-tools-tool-use-overview.md">
+    Give Claude tools to call external services and APIs from within the Messages API.
+  </Card>
+  <Card title="Computer use tool" icon="computer" href="../agents-and-tools/agents-and-tools-tool-use-computer-use-tool.md">
+    Control desktop computer environments with the Messages API.
+  </Card>
+  <Card title="Structured outputs" icon="code-brackets" href="./build-with-claude-structured-outputs.md">
+    Get guaranteed, schema-validated JSON output from Claude.
+  </Card>
+  <Card title="Task budgets" icon="gauge" href="./build-with-claude-task-budgets.md">
+    Set an advisory token budget across a full agentic loop with `output_config.task_budget`.
+  </Card>
+</CardGroup>

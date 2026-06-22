@@ -26,7 +26,7 @@ generated: true
 
       - `ID string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `OrganizationID string`
 
@@ -40,7 +40,7 @@ generated: true
 
       - `ID string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `OrganizationID string`
 
@@ -54,7 +54,7 @@ generated: true
 
       - `ID string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `OrganizationID string`
 
@@ -68,7 +68,7 @@ generated: true
 
       - `ID string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `OrganizationID string`
 
@@ -82,7 +82,7 @@ generated: true
 
       - `ID string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `OrganizationID string`
 
@@ -96,7 +96,7 @@ generated: true
 
       - `ID string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `OrganizationID string`
 
@@ -110,7 +110,7 @@ generated: true
 
       - `ID string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `OrganizationID string`
 
@@ -124,7 +124,7 @@ generated: true
 
       - `ID string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `OrganizationID string`
 
@@ -138,7 +138,7 @@ generated: true
 
       - `ID string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `OrganizationID string`
 
@@ -152,7 +152,7 @@ generated: true
 
       - `ID string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `OrganizationID string`
 
@@ -166,7 +166,7 @@ generated: true
 
       - `ID string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `OrganizationID string`
 
@@ -180,9 +180,13 @@ generated: true
 
       - `ID string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `OrganizationID string`
+
+      - `SessionThreadID string`
+
+        ID of the session thread this event refers to.
 
       - `Type SessionThreadCreated`
 
@@ -194,9 +198,13 @@ generated: true
 
       - `ID string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `OrganizationID string`
+
+      - `SessionThreadID string`
+
+        ID of the session thread this event refers to.
 
       - `Type SessionThreadIdled`
 
@@ -208,9 +216,13 @@ generated: true
 
       - `ID string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `OrganizationID string`
+
+      - `SessionThreadID string`
+
+        ID of the session thread this event refers to.
 
       - `Type SessionThreadTerminated`
 
@@ -222,7 +234,7 @@ generated: true
 
       - `ID string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `OrganizationID string`
 
@@ -236,7 +248,7 @@ generated: true
 
       - `ID string`
 
-        ID of the resource that triggered the event.
+        ID of the vault that triggered the event.
 
       - `OrganizationID string`
 
@@ -250,7 +262,7 @@ generated: true
 
       - `ID string`
 
-        ID of the resource that triggered the event.
+        ID of the vault that triggered the event.
 
       - `OrganizationID string`
 
@@ -264,7 +276,7 @@ generated: true
 
       - `ID string`
 
-        ID of the resource that triggered the event.
+        ID of the vault that triggered the event.
 
       - `OrganizationID string`
 
@@ -278,7 +290,7 @@ generated: true
 
       - `ID string`
 
-        ID of the resource that triggered the event.
+        ID of the vault credential that triggered the event.
 
       - `OrganizationID string`
 
@@ -296,7 +308,7 @@ generated: true
 
       - `ID string`
 
-        ID of the resource that triggered the event.
+        ID of the vault credential that triggered the event.
 
       - `OrganizationID string`
 
@@ -314,7 +326,7 @@ generated: true
 
       - `ID string`
 
-        ID of the resource that triggered the event.
+        ID of the vault credential that triggered the event.
 
       - `OrganizationID string`
 
@@ -332,7 +344,7 @@ generated: true
 
       - `ID string`
 
-        ID of the resource that triggered the event.
+        ID of the vault credential that triggered the event.
 
       - `OrganizationID string`
 
@@ -360,7 +372,7 @@ generated: true
 
     - `ID string`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `OrganizationID string`
 
@@ -374,7 +386,7 @@ generated: true
 
     - `ID string`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `OrganizationID string`
 
@@ -388,7 +400,7 @@ generated: true
 
     - `ID string`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `OrganizationID string`
 
@@ -402,7 +414,7 @@ generated: true
 
     - `ID string`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `OrganizationID string`
 
@@ -416,7 +428,7 @@ generated: true
 
     - `ID string`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `OrganizationID string`
 
@@ -430,7 +442,7 @@ generated: true
 
     - `ID string`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `OrganizationID string`
 
@@ -444,7 +456,7 @@ generated: true
 
     - `ID string`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `OrganizationID string`
 
@@ -458,7 +470,7 @@ generated: true
 
     - `ID string`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `OrganizationID string`
 
@@ -472,7 +484,7 @@ generated: true
 
     - `ID string`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `OrganizationID string`
 
@@ -486,7 +498,7 @@ generated: true
 
     - `ID string`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `OrganizationID string`
 
@@ -500,7 +512,7 @@ generated: true
 
     - `ID string`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `OrganizationID string`
 
@@ -514,9 +526,13 @@ generated: true
 
     - `ID string`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `OrganizationID string`
+
+    - `SessionThreadID string`
+
+      ID of the session thread this event refers to.
 
     - `Type SessionThreadCreated`
 
@@ -528,9 +544,13 @@ generated: true
 
     - `ID string`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `OrganizationID string`
+
+    - `SessionThreadID string`
+
+      ID of the session thread this event refers to.
 
     - `Type SessionThreadIdled`
 
@@ -542,9 +562,13 @@ generated: true
 
     - `ID string`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `OrganizationID string`
+
+    - `SessionThreadID string`
+
+      ID of the session thread this event refers to.
 
     - `Type SessionThreadTerminated`
 
@@ -556,7 +580,7 @@ generated: true
 
     - `ID string`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `OrganizationID string`
 
@@ -570,7 +594,7 @@ generated: true
 
     - `ID string`
 
-      ID of the resource that triggered the event.
+      ID of the vault that triggered the event.
 
     - `OrganizationID string`
 
@@ -584,7 +608,7 @@ generated: true
 
     - `ID string`
 
-      ID of the resource that triggered the event.
+      ID of the vault that triggered the event.
 
     - `OrganizationID string`
 
@@ -598,7 +622,7 @@ generated: true
 
     - `ID string`
 
-      ID of the resource that triggered the event.
+      ID of the vault that triggered the event.
 
     - `OrganizationID string`
 
@@ -612,7 +636,7 @@ generated: true
 
     - `ID string`
 
-      ID of the resource that triggered the event.
+      ID of the vault credential that triggered the event.
 
     - `OrganizationID string`
 
@@ -630,7 +654,7 @@ generated: true
 
     - `ID string`
 
-      ID of the resource that triggered the event.
+      ID of the vault credential that triggered the event.
 
     - `OrganizationID string`
 
@@ -648,7 +672,7 @@ generated: true
 
     - `ID string`
 
-      ID of the resource that triggered the event.
+      ID of the vault credential that triggered the event.
 
     - `OrganizationID string`
 
@@ -666,7 +690,7 @@ generated: true
 
     - `ID string`
 
-      ID of the resource that triggered the event.
+      ID of the vault credential that triggered the event.
 
     - `OrganizationID string`
 
@@ -686,7 +710,7 @@ generated: true
 
   - `ID string`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `OrganizationID string`
 
@@ -702,7 +726,7 @@ generated: true
 
   - `ID string`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `OrganizationID string`
 
@@ -718,7 +742,7 @@ generated: true
 
   - `ID string`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `OrganizationID string`
 
@@ -734,7 +758,7 @@ generated: true
 
   - `ID string`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `OrganizationID string`
 
@@ -750,7 +774,7 @@ generated: true
 
   - `ID string`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `OrganizationID string`
 
@@ -766,7 +790,7 @@ generated: true
 
   - `ID string`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `OrganizationID string`
 
@@ -782,7 +806,7 @@ generated: true
 
   - `ID string`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `OrganizationID string`
 
@@ -798,7 +822,7 @@ generated: true
 
   - `ID string`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `OrganizationID string`
 
@@ -814,7 +838,7 @@ generated: true
 
   - `ID string`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `OrganizationID string`
 
@@ -830,7 +854,7 @@ generated: true
 
   - `ID string`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `OrganizationID string`
 
@@ -846,7 +870,7 @@ generated: true
 
   - `ID string`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `OrganizationID string`
 
@@ -862,7 +886,7 @@ generated: true
 
   - `ID string`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `OrganizationID string`
 
@@ -878,9 +902,13 @@ generated: true
 
   - `ID string`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `OrganizationID string`
+
+  - `SessionThreadID string`
+
+    ID of the session thread this event refers to.
 
   - `Type SessionThreadCreated`
 
@@ -894,9 +922,13 @@ generated: true
 
   - `ID string`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `OrganizationID string`
+
+  - `SessionThreadID string`
+
+    ID of the session thread this event refers to.
 
   - `Type SessionThreadIdled`
 
@@ -910,9 +942,13 @@ generated: true
 
   - `ID string`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `OrganizationID string`
+
+  - `SessionThreadID string`
+
+    ID of the session thread this event refers to.
 
   - `Type SessionThreadTerminated`
 
@@ -926,7 +962,7 @@ generated: true
 
   - `ID string`
 
-    ID of the resource that triggered the event.
+    ID of the vault that triggered the event.
 
   - `OrganizationID string`
 
@@ -942,7 +978,7 @@ generated: true
 
   - `ID string`
 
-    ID of the resource that triggered the event.
+    ID of the vault that triggered the event.
 
   - `OrganizationID string`
 
@@ -958,7 +994,7 @@ generated: true
 
   - `ID string`
 
-    ID of the resource that triggered the event.
+    ID of the vault credential that triggered the event.
 
   - `OrganizationID string`
 
@@ -978,7 +1014,7 @@ generated: true
 
   - `ID string`
 
-    ID of the resource that triggered the event.
+    ID of the vault credential that triggered the event.
 
   - `OrganizationID string`
 
@@ -998,7 +1034,7 @@ generated: true
 
   - `ID string`
 
-    ID of the resource that triggered the event.
+    ID of the vault credential that triggered the event.
 
   - `OrganizationID string`
 
@@ -1018,7 +1054,7 @@ generated: true
 
   - `ID string`
 
-    ID of the resource that triggered the event.
+    ID of the vault credential that triggered the event.
 
   - `OrganizationID string`
 
@@ -1038,7 +1074,7 @@ generated: true
 
   - `ID string`
 
-    ID of the resource that triggered the event.
+    ID of the vault that triggered the event.
 
   - `OrganizationID string`
 
@@ -1066,7 +1102,7 @@ generated: true
 
       - `ID string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `OrganizationID string`
 
@@ -1080,7 +1116,7 @@ generated: true
 
       - `ID string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `OrganizationID string`
 
@@ -1094,7 +1130,7 @@ generated: true
 
       - `ID string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `OrganizationID string`
 
@@ -1108,7 +1144,7 @@ generated: true
 
       - `ID string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `OrganizationID string`
 
@@ -1122,7 +1158,7 @@ generated: true
 
       - `ID string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `OrganizationID string`
 
@@ -1136,7 +1172,7 @@ generated: true
 
       - `ID string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `OrganizationID string`
 
@@ -1150,7 +1186,7 @@ generated: true
 
       - `ID string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `OrganizationID string`
 
@@ -1164,7 +1200,7 @@ generated: true
 
       - `ID string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `OrganizationID string`
 
@@ -1178,7 +1214,7 @@ generated: true
 
       - `ID string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `OrganizationID string`
 
@@ -1192,7 +1228,7 @@ generated: true
 
       - `ID string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `OrganizationID string`
 
@@ -1206,7 +1242,7 @@ generated: true
 
       - `ID string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `OrganizationID string`
 
@@ -1220,9 +1256,13 @@ generated: true
 
       - `ID string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `OrganizationID string`
+
+      - `SessionThreadID string`
+
+        ID of the session thread this event refers to.
 
       - `Type SessionThreadCreated`
 
@@ -1234,9 +1274,13 @@ generated: true
 
       - `ID string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `OrganizationID string`
+
+      - `SessionThreadID string`
+
+        ID of the session thread this event refers to.
 
       - `Type SessionThreadIdled`
 
@@ -1248,9 +1292,13 @@ generated: true
 
       - `ID string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `OrganizationID string`
+
+      - `SessionThreadID string`
+
+        ID of the session thread this event refers to.
 
       - `Type SessionThreadTerminated`
 
@@ -1262,7 +1310,7 @@ generated: true
 
       - `ID string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `OrganizationID string`
 
@@ -1276,7 +1324,7 @@ generated: true
 
       - `ID string`
 
-        ID of the resource that triggered the event.
+        ID of the vault that triggered the event.
 
       - `OrganizationID string`
 
@@ -1290,7 +1338,7 @@ generated: true
 
       - `ID string`
 
-        ID of the resource that triggered the event.
+        ID of the vault that triggered the event.
 
       - `OrganizationID string`
 
@@ -1304,7 +1352,7 @@ generated: true
 
       - `ID string`
 
-        ID of the resource that triggered the event.
+        ID of the vault that triggered the event.
 
       - `OrganizationID string`
 
@@ -1318,7 +1366,7 @@ generated: true
 
       - `ID string`
 
-        ID of the resource that triggered the event.
+        ID of the vault credential that triggered the event.
 
       - `OrganizationID string`
 
@@ -1336,7 +1384,7 @@ generated: true
 
       - `ID string`
 
-        ID of the resource that triggered the event.
+        ID of the vault credential that triggered the event.
 
       - `OrganizationID string`
 
@@ -1354,7 +1402,7 @@ generated: true
 
       - `ID string`
 
-        ID of the resource that triggered the event.
+        ID of the vault credential that triggered the event.
 
       - `OrganizationID string`
 
@@ -1372,7 +1420,7 @@ generated: true
 
       - `ID string`
 
-        ID of the resource that triggered the event.
+        ID of the vault credential that triggered the event.
 
       - `OrganizationID string`
 

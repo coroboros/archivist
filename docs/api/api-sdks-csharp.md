@@ -64,7 +64,7 @@ var message = await client.Messages.Create(parameters);
 Console.WriteLine(message);
 ```
 
-For authentication options including Workload Identity Federation, see [Authentication](https://platform.claude.com/docs/en/api/authentication/overview.md).
+For authentication options including Workload Identity Federation, see [Authentication](../manage-claude/manage-claude-authentication.md).
 
 ## Client configuration
 

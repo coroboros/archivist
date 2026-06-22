@@ -153,6 +153,7 @@ Rate limits are currently shared across all `inference_geo` values. Requests wit
 <Tab title="Tier 1">
 | Model                                                                                        | Maximum requests per minute (RPM) | Maximum input tokens per minute (ITPM) | Maximum output tokens per minute (OTPM) |
 | -------------------------------------------------------------------------------------------- | --------------------------------- | -------------------------------------- | --------------------------------------- |
+| Claude Fable 5                                                                               | 50                                | 100,000                                | 20,000                                  |
 | Claude Sonnet 4.x<sup>**</sup>                                                               | 50                                | 30,000                                 | 8,000                                   |
 | Claude Haiku 4.5                                                                             | 50                                | 50,000                                 | 10,000                                  |
 | Claude Haiku 3.5 ([retired, except on Bedrock and Vertex AI](../about-claude/about-claude-model-deprecations.md)) | 50                                | 50,000<sup>†</sup>                     | 10,000                                  |
@@ -162,6 +163,7 @@ Rate limits are currently shared across all `inference_geo` values. Requests wit
 <Tab title="Tier 2">
 | Model                                                                                        | Maximum requests per minute (RPM) | Maximum input tokens per minute (ITPM) | Maximum output tokens per minute (OTPM) |
 | -------------------------------------------------------------------------------------------- | --------------------------------- | -------------------------------------- | --------------------------------------- |
+| Claude Fable 5                                                                               | 1,000                             | 500,000                                | 100,000                                 |
 | Claude Sonnet 4.x<sup>**</sup>                                                               | 1,000                             | 450,000                                | 90,000                                  |
 | Claude Haiku 4.5                                                                             | 1,000                             | 450,000                                | 90,000                                  |
 | Claude Haiku 3.5 ([retired, except on Bedrock and Vertex AI](../about-claude/about-claude-model-deprecations.md)) | 1,000                             | 100,000<sup>†</sup>                    | 20,000                                  |
@@ -171,6 +173,7 @@ Rate limits are currently shared across all `inference_geo` values. Requests wit
 <Tab title="Tier 3">
 | Model                                                                                        | Maximum requests per minute (RPM) | Maximum input tokens per minute (ITPM) | Maximum output tokens per minute (OTPM) |
 | -------------------------------------------------------------------------------------------- | --------------------------------- | -------------------------------------- | --------------------------------------- |
+| Claude Fable 5                                                                               | 2,000                             | 1,500,000                              | 300,000                                 |
 | Claude Sonnet 4.x<sup>**</sup>                                                               | 2,000                             | 800,000                                | 160,000                                 |
 | Claude Haiku 4.5                                                                             | 2,000                             | 1,000,000                              | 200,000                                 |
 | Claude Haiku 3.5 ([retired, except on Bedrock and Vertex AI](../about-claude/about-claude-model-deprecations.md)) | 2,000                             | 200,000<sup>†</sup>                    | 40,000                                  |
@@ -180,6 +183,7 @@ Rate limits are currently shared across all `inference_geo` values. Requests wit
 <Tab title="Tier 4">
 | Model                                                                                        | Maximum requests per minute (RPM) | Maximum input tokens per minute (ITPM) | Maximum output tokens per minute (OTPM) |
 | -------------------------------------------------------------------------------------------- | --------------------------------- | -------------------------------------- | --------------------------------------- |
+| Claude Fable 5                                                                               | 4,000                             | 4,000,000                              | 800,000                                 |
 | Claude Sonnet 4.x<sup>**</sup>                                                               | 4,000                             | 2,000,000                              | 400,000                                 |
 | Claude Haiku 4.5                                                                             | 4,000                             | 4,000,000                              | 800,000                                 |
 | Claude Haiku 3.5 ([retired, except on Bedrock and Vertex AI](../about-claude/about-claude-model-deprecations.md)) | 4,000                             | 400,000<sup>†</sup>                    | 80,000                                  |
@@ -191,9 +195,9 @@ If you're seeking higher limits for an Enterprise use case, contact sales throug
 </Tab>
 </Tabs>
 
-_<sup>* - Opus rate limit is a total limit that applies to combined traffic across Claude Opus 4.8, Opus 4.7, Opus 4.6, Opus 4.5, Opus 4.1 ([deprecated](../about-claude/about-claude-model-deprecations.md)), and Opus 4 ([deprecated](../about-claude/about-claude-model-deprecations.md)).</sup>_
+_<sup>* - Opus rate limit is a total limit that applies to combined traffic across Claude Opus 4.8, Opus 4.7, Opus 4.6, Opus 4.5, and Opus 4.1 ([deprecated](../about-claude/about-claude-model-deprecations.md)).</sup>_
 
-_<sup>** - Sonnet 4.x rate limit is a total limit that applies to combined traffic across Sonnet 4.6, Sonnet 4.5, and Sonnet 4 ([deprecated](../about-claude/about-claude-model-deprecations.md)).</sup>_
+_<sup>** - Sonnet 4.x rate limit is a total limit that applies to combined traffic across Sonnet 4.6 and Sonnet 4.5.</sup>_
 
 _<sup>† - Limit counts `cache_read_input_tokens` towards ITPM usage.</sup>_
 

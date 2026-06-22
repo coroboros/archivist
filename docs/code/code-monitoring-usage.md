@@ -398,18 +398,18 @@ export OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4317
 
 All metrics and events share these standard attributes:
 
-| Attribute                            | Description                                                                                                                           | Controlled By                                              |
-| ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
-| `session.id`                         | Unique session identifier                                                                                                             | `OTEL_METRICS_INCLUDE_SESSION_ID` (default: true)          |
-| `app.version`                        | Current Claude Code version                                                                                                           | `OTEL_METRICS_INCLUDE_VERSION` (default: false)            |
-| `app.entrypoint`                     | How the session was launched, such as `cli`, `sdk-cli`, `sdk-ts`, `sdk-py`, or `claude-vscode`                                        | `OTEL_METRICS_INCLUDE_ENTRYPOINT` (default: false)         |
-| `organization.id`                    | Organization UUID (when authenticated)                                                                                                | Always included when available                             |
-| `user.account_uuid`                  | Account UUID (when authenticated)                                                                                                     | `OTEL_METRICS_INCLUDE_ACCOUNT_UUID` (default: true)        |
-| `user.account_id`                    | Account ID in tagged format matching Anthropic admin APIs (when authenticated), such as `user_01BWBeN28...`                           | `OTEL_METRICS_INCLUDE_ACCOUNT_UUID` (default: true)        |
-| `user.id`                            | Anonymous device/installation identifier, generated per Claude Code installation                                                      | Always included                                            |
-| `user.email`                         | User email address (when authenticated via OAuth)                                                                                     | Always included when available                             |
-| `terminal.type`                      | Terminal type, such as `iTerm.app`, `vscode`, `cursor`, or `tmux`                                                                     | Always included when detected                              |
-| Keys from `OTEL_RESOURCE_ATTRIBUTES` | Custom attributes you set, such as `department` or `team.id`. See [Multi-team organization support](#multi-team-organization-support) | `OTEL_METRICS_INCLUDE_RESOURCE_ATTRIBUTES` (default: true) |
+| Attribute                            | Description                                                                                                                                                                                                                          | Controlled By                                              |
+| ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------- |
+| `session.id`                         | Unique session identifier                                                                                                                                                                                                            | `OTEL_METRICS_INCLUDE_SESSION_ID` (default: true)          |
+| `app.version`                        | Current Claude Code version                                                                                                                                                                                                          | `OTEL_METRICS_INCLUDE_VERSION` (default: false)            |
+| `app.entrypoint`                     | How the session was launched, such as `cli`, `sdk-cli`, `sdk-ts`, `sdk-py`, or `claude-vscode`                                                                                                                                       | `OTEL_METRICS_INCLUDE_ENTRYPOINT` (default: false)         |
+| `organization.id`                    | Organization UUID (when authenticated)                                                                                                                                                                                               | Always included when available                             |
+| `user.account_uuid`                  | Account UUID (when authenticated)                                                                                                                                                                                                    | `OTEL_METRICS_INCLUDE_ACCOUNT_UUID` (default: true)        |
+| `user.account_id`                    | Account ID in tagged format matching Anthropic admin APIs (when authenticated), such as `user_01BWBeN28...`                                                                                                                          | `OTEL_METRICS_INCLUDE_ACCOUNT_UUID` (default: true)        |
+| `user.id`                            | Random anonymous identifier generated on first run and persisted in `~/.claude.json`. It contains no personal information and is not derived from your Claude account. Deleting the file produces a new unrelated value on next run. | Always included                                            |
+| `user.email`                         | User email address (when authenticated via OAuth)                                                                                                                                                                                    | Always included when available                             |
+| `terminal.type`                      | Terminal type, such as `iTerm.app`, `vscode`, `cursor`, or `tmux`                                                                                                                                                                    | Always included when detected                              |
+| Keys from `OTEL_RESOURCE_ATTRIBUTES` | Custom attributes you set, such as `department` or `team.id`. See [Multi-team organization support](#multi-team-organization-support)                                                                                                | `OTEL_METRICS_INCLUDE_RESOURCE_ATTRIBUTES` (default: true) |
 
 Events additionally include the following attributes. These are never attached to metrics because they would cause unbounded cardinality:
 
@@ -452,6 +452,7 @@ Incremented when code is added or removed.
 
 * All [standard attributes](#standard-attributes)
 * `type`: (`"added"`, `"removed"`)
+* `model`: Model identifier for the model that made the change (for example, "claude-sonnet-4-6"). {/* min-version: 2.1.172 */}Requires Claude Code v2.1.172 or later
 
 #### Pull request counter
 
@@ -638,7 +639,7 @@ Logged when an API request to Claude fails.
 
 #### API refusal event
 
-Logged when an API request returns `stop_reason: "refusal"`. Refusals arrive on a successful response stream rather than as an HTTP error, so the `api_error` event does not fire for them. This event lets you track refusal frequency.
+Logged when an API request returns `stop_reason: "refusal"`. Refusals arrive on a successful response stream rather than as an HTTP error, so the `api_error` event does not fire for them. This event lets you track refusal frequency and group refusals by the same attributes as `api_request` and `api_error`.
 
 **Event Name**: `claude_code.api_refusal`
 
@@ -650,6 +651,15 @@ Logged when an API request returns `stop_reason: "refusal"`. Refusals arrive on 
 * `event.sequence`: monotonically increasing counter for ordering events within a session
 * `model`: Model identifier from the request
 * `request_id`: Anthropic API request ID from the response's `request-id` header, such as `"req_011..."`. Present only when the API returns one.
+* `query_source`: Subsystem that issued the request, such as `"repl_main_thread"`, `"compact"`, or a subagent name. See [`api_request`](#api-request-event) for definitions.
+* `speed`: Either `"fast"` when [Fast mode](./code-fast-mode.md) is active, or `"normal"`
+* `attempt`: Retry attempt number. The first attempt is `1`.
+* `effort`: [Effort level](./code-model-config.md#adjust-effort-level) applied to the request. Absent when the model does not support effort.
+* `server_fallback_hop`: `true` when the API's server-side model fallback already retried this refusal on a different model, so the user did not see this particular refusal. `false` when the request ended in a refusal. A single turn can emit both a `true` hop event and a later `false` final event when the fallback model also refuses.
+* `has_category`: `true` when the API response carried a `stop_details.category` of `"cyber"`, `"bio"`, `"frontier_llm"`, or `"reasoning_extraction"`. `false` when the response carried no category or a value outside that set. Absent when `server_fallback_hop` is `true`, because hop blocks do not carry `stop_details`.
+* `has_explanation`: `true` when the API response carried a `stop_details.explanation`, otherwise `false`. Absent when `server_fallback_hop` is `true`.
+* `category`: The `stop_details.category` value from the API response. One of `"cyber"`, `"bio"`, `"frontier_llm"`, or `"reasoning_extraction"`. Only present when `OTEL_LOG_TOOL_DETAILS=1` is set and `has_category` is `true`.
+* `agent.name`, `skill.name`, `plugin.name`, `marketplace.name`, `mcp_server.name`, `mcp_tool.name`: Skill, plugin, agent, and MCP attribution for the request. See [Cost counter](#cost-counter) for definitions and redaction behavior.
 
 #### API request body event
 
@@ -829,6 +839,7 @@ Logged once per enabled plugin at session start. Use this event to inventory whi
 * `plugin_id_hash`: deterministic hash of the plugin name and marketplace, sent only to your configured exporter. Lets you count how many distinct third-party plugins are loaded across your fleet without recording their names
 * `has_hooks`: whether the plugin contributes hooks
 * `has_mcp`: whether the plugin contributes MCP servers
+* `host_owned_mcp`: `true` when the SDK host manages this plugin's MCP connections and Claude Code skipped reading the plugin's MCP server configuration, `false` otherwise. {/* min-version: 2.1.172 */}Requires Claude Code v2.1.172 or later
 * `skill_path_count`: number of skill directories the plugin declares
 * `command_path_count`: number of command directories the plugin declares
 * `agent_path_count`: number of agent directories the plugin declares
@@ -1016,7 +1027,7 @@ The exported metrics and events support a range of analyses:
 | ------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
 | `claude_code.token.usage`                                     | Break down by `type` (input/output), user, team, model, `skill.name`, `plugin.name`, or `agent.name` |
 | `claude_code.session.count`                                   | Track adoption and engagement over time                                                              |
-| `claude_code.lines_of_code.count`                             | Measure productivity by tracking code additions/removals                                             |
+| `claude_code.lines_of_code.count`                             | Measure productivity by tracking code additions and removals, broken down by model                   |
 | `claude_code.commit.count` & `claude_code.pull_request.count` | Understand impact on development workflows                                                           |
 
 ### Cost monitoring
@@ -1039,7 +1050,7 @@ Common alerts to consider:
 * Unusual token consumption
 * High session volume from specific users
 
-All metrics can be segmented by `user.account_uuid`, `user.account_id`, `organization.id`, `session.id`, `model`, and `app.version`.
+All metrics can be segmented by the [standard attributes](#standard-attributes). The `model` attribute is available on `claude_code.token.usage`, `claude_code.cost.usage`, and {/* min-version: 2.1.172 */}from v2.1.172, `claude_code.lines_of_code.count`. Per-model breakdowns of commits can only be approximated by joining against the token or cost metrics on `session.id`, since one session can span multiple models.
 
 ### Detect retry exhaustion
 
@@ -1135,20 +1146,20 @@ Your choice of metrics, logs, and traces backends determines the types of analys
 
 * **Time series databases (for example, Prometheus)**: Rate calculations, aggregated metrics
 * **Columnar stores (for example, ClickHouse)**: Complex queries, unique user analysis
-* **Full-featured observability platforms (for example, Honeycomb, Datadog)**: Advanced querying, visualization, alerting
+* **Full-featured observability platforms (for example, Honeycomb, Datadog, Grafana Cloud)**: Advanced querying, visualization, alerting
 
 ### For events/logs
 
 * **Log aggregation systems (for example, Elasticsearch, Loki)**: Full-text search, log analysis
 * **Columnar stores (for example, ClickHouse)**: Structured event analysis
-* **Full-featured observability platforms (for example, Honeycomb, Datadog)**: Correlation between metrics and events
+* **Full-featured observability platforms (for example, Honeycomb, Datadog, Grafana Cloud)**: Correlation between metrics and events
 
 ### For traces
 
 Choose a backend that supports distributed trace storage and span correlation:
 
 * **Distributed tracing systems (for example, Jaeger, Zipkin, Grafana Tempo)**: Span visualization, request waterfalls, latency analysis
-* **Full-featured observability platforms (for example, Honeycomb, Datadog)**: Trace search and correlation with metrics and logs
+* **Full-featured observability platforms (for example, Honeycomb, Datadog, Grafana Cloud)**: Trace search and correlation with metrics and logs
 
 For organizations requiring Daily/Weekly/Monthly Active User (DAU/WAU/MAU) metrics, consider backends that support efficient unique value queries.
 

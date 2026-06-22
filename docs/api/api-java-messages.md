@@ -866,6 +866,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
                 - `TOOL_SEARCH_TOOL_RESULT_ERROR("tool_search_tool_result_error")`
 
+              - `Optional<String> errorMessage`
+
             - `class ToolSearchToolSearchResultBlockParam:`
 
               - `List<ToolReferenceBlockParam> toolReferences`
@@ -2503,6 +2505,14 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+    - `CLAUDE_FABLE_5("claude-fable-5")`
+
+      Next generation of intelligence for the hardest knowledge work and coding problems
+
+    - `CLAUDE_MYTHOS_5("claude-mythos-5")`
+
+      Most capable model for cybersecurity and biology research
+
     - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
       Frontier intelligence for long-running agents and coding
@@ -2596,6 +2606,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
       - `CYBER("cyber")`
 
       - `BIO("bio")`
+
+      - `REASONING_EXTRACTION("reasoning_extraction")`
 
     - `Optional<String> explanation`
 
@@ -3668,6 +3680,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
               - `JsonValue; type "tool_search_tool_result_error"constant`
 
                 - `TOOL_SEARCH_TOOL_RESULT_ERROR("tool_search_tool_result_error")`
+
+              - `Optional<String> errorMessage`
 
             - `class ToolSearchToolSearchResultBlockParam:`
 
@@ -7332,6 +7346,8 @@ public final class Main {
 
           - `TOOL_SEARCH_TOOL_RESULT_ERROR("tool_search_tool_result_error")`
 
+        - `Optional<String> errorMessage`
+
       - `class ToolSearchToolSearchResultBlockParam:`
 
         - `List<ToolReferenceBlockParam> toolReferences`
@@ -8940,6 +8956,14 @@ public final class Main {
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+    - `CLAUDE_FABLE_5("claude-fable-5")`
+
+      Next generation of intelligence for the hardest knowledge work and coding problems
+
+    - `CLAUDE_MYTHOS_5("claude-mythos-5")`
+
+      Most capable model for cybersecurity and biology research
+
     - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
       Frontier intelligence for long-running agents and coding
@@ -9033,6 +9057,8 @@ public final class Main {
       - `CYBER("cyber")`
 
       - `BIO("bio")`
+
+      - `REASONING_EXTRACTION("reasoning_extraction")`
 
     - `Optional<String> explanation`
 
@@ -10743,6 +10769,8 @@ public final class Main {
 
               - `TOOL_SEARCH_TOOL_RESULT_ERROR("tool_search_tool_result_error")`
 
+            - `Optional<String> errorMessage`
+
           - `class ToolSearchToolSearchResultBlockParam:`
 
             - `List<ToolReferenceBlockParam> toolReferences`
@@ -11002,6 +11030,14 @@ public final class Main {
   The model that will complete your prompt.
 
   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+  - `CLAUDE_FABLE_5("claude-fable-5")`
+
+    Next generation of intelligence for the hardest knowledge work and coding problems
+
+  - `CLAUDE_MYTHOS_5("claude-mythos-5")`
+
+    Most capable model for cybersecurity and biology research
 
   - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
@@ -12138,6 +12174,8 @@ public final class Main {
 
         - `BIO("bio")`
 
+        - `REASONING_EXTRACTION("reasoning_extraction")`
+
       - `Optional<String> explanation`
 
         Human-readable explanation of the refusal.
@@ -12919,6 +12957,14 @@ public final class Main {
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+      - `CLAUDE_FABLE_5("claude-fable-5")`
+
+        Next generation of intelligence for the hardest knowledge work and coding problems
+
+      - `CLAUDE_MYTHOS_5("claude-mythos-5")`
+
+        Most capable model for cybersecurity and biology research
+
       - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
         Frontier intelligence for long-running agents and coding
@@ -13012,6 +13058,8 @@ public final class Main {
         - `CYBER("cyber")`
 
         - `BIO("bio")`
+
+        - `REASONING_EXTRACTION("reasoning_extraction")`
 
       - `Optional<String> explanation`
 
@@ -13855,6 +13903,14 @@ public final class Main {
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+        - `CLAUDE_FABLE_5("claude-fable-5")`
+
+          Next generation of intelligence for the hardest knowledge work and coding problems
+
+        - `CLAUDE_MYTHOS_5("claude-mythos-5")`
+
+          Most capable model for cybersecurity and biology research
+
         - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
           Frontier intelligence for long-running agents and coding
@@ -13948,6 +14004,8 @@ public final class Main {
           - `CYBER("cyber")`
 
           - `BIO("bio")`
+
+          - `REASONING_EXTRACTION("reasoning_extraction")`
 
         - `Optional<String> explanation`
 
@@ -14298,6 +14356,8 @@ public final class Main {
     - `CYBER("cyber")`
 
     - `BIO("bio")`
+
+    - `REASONING_EXTRACTION("reasoning_extraction")`
 
   - `Optional<String> explanation`
 
@@ -16427,6 +16487,8 @@ public final class Main {
 
         - `TOOL_SEARCH_TOOL_RESULT_ERROR("tool_search_tool_result_error")`
 
+      - `Optional<String> errorMessage`
+
     - `class ToolSearchToolSearchResultBlockParam:`
 
       - `List<ToolReferenceBlockParam> toolReferences`
@@ -16523,6 +16585,8 @@ public final class Main {
   - `JsonValue; type "tool_search_tool_result_error"constant`
 
     - `TOOL_SEARCH_TOOL_RESULT_ERROR("tool_search_tool_result_error")`
+
+  - `Optional<String> errorMessage`
 
 ### Tool Search Tool Search Result Block
 
@@ -20200,6 +20264,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                     - `TOOL_SEARCH_TOOL_RESULT_ERROR("tool_search_tool_result_error")`
 
+                  - `Optional<String> errorMessage`
+
                 - `class ToolSearchToolSearchResultBlockParam:`
 
                   - `List<ToolReferenceBlockParam> toolReferences`
@@ -20283,6 +20349,14 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
         The model that will complete your prompt.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `CLAUDE_FABLE_5("claude-fable-5")`
+
+          Next generation of intelligence for the hardest knowledge work and coding problems
+
+        - `CLAUDE_MYTHOS_5("claude-mythos-5")`
+
+          Most capable model for cybersecurity and biology research
 
         - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
@@ -22767,6 +22841,14 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+          - `CLAUDE_FABLE_5("claude-fable-5")`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
+
+          - `CLAUDE_MYTHOS_5("claude-mythos-5")`
+
+            Most capable model for cybersecurity and biology research
+
           - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
             Frontier intelligence for long-running agents and coding
@@ -22860,6 +22942,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `CYBER("cyber")`
 
             - `BIO("bio")`
+
+            - `REASONING_EXTRACTION("reasoning_extraction")`
 
           - `Optional<String> explanation`
 
@@ -24045,6 +24129,14 @@ public final class Main {
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+          - `CLAUDE_FABLE_5("claude-fable-5")`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
+
+          - `CLAUDE_MYTHOS_5("claude-mythos-5")`
+
+            Most capable model for cybersecurity and biology research
+
           - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
             Frontier intelligence for long-running agents and coding
@@ -24138,6 +24230,8 @@ public final class Main {
             - `CYBER("cyber")`
 
             - `BIO("bio")`
+
+            - `REASONING_EXTRACTION("reasoning_extraction")`
 
           - `Optional<String> explanation`
 
@@ -25109,6 +25203,14 @@ public final class Main {
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+        - `CLAUDE_FABLE_5("claude-fable-5")`
+
+          Next generation of intelligence for the hardest knowledge work and coding problems
+
+        - `CLAUDE_MYTHOS_5("claude-mythos-5")`
+
+          Most capable model for cybersecurity and biology research
+
         - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
           Frontier intelligence for long-running agents and coding
@@ -25202,6 +25304,8 @@ public final class Main {
           - `CYBER("cyber")`
 
           - `BIO("bio")`
+
+          - `REASONING_EXTRACTION("reasoning_extraction")`
 
         - `Optional<String> explanation`
 
@@ -26135,6 +26239,14 @@ public final class Main {
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+      - `CLAUDE_FABLE_5("claude-fable-5")`
+
+        Next generation of intelligence for the hardest knowledge work and coding problems
+
+      - `CLAUDE_MYTHOS_5("claude-mythos-5")`
+
+        Most capable model for cybersecurity and biology research
+
       - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
         Frontier intelligence for long-running agents and coding
@@ -26228,6 +26340,8 @@ public final class Main {
         - `CYBER("cyber")`
 
         - `BIO("bio")`
+
+        - `REASONING_EXTRACTION("reasoning_extraction")`
 
       - `Optional<String> explanation`
 

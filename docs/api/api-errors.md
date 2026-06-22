@@ -195,7 +195,7 @@ See [Streaming Messages](../build-with-claude/build-with-claude-streaming.md#get
 
 ### Prefill not supported
 
-Claude Opus 4.8, [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6 do not support prefilling assistant messages. Sending a request with a prefilled last assistant message to any of these models returns a 400 `invalid_request_error`:
+Claude Fable 5, [Claude Mythos 5](https://anthropic.com/glasswing), [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6 do not support prefilling assistant messages. Sending a request with a prefilled last assistant message to any of these models returns a 400 `invalid_request_error`:
 
 ```json
 {
@@ -207,7 +207,17 @@ Claude Opus 4.8, [Claude Mythos Preview](https://anthropic.com/glasswing), Claud
 }
 ```
 
-Use [structured outputs](../build-with-claude/build-with-claude-structured-outputs.md), system prompt instructions, or [`output_config.format`](../build-with-claude/build-with-claude-structured-outputs.md#json-outputs) instead.
+Use [structured outputs](../build-with-claude/build-with-claude-structured-outputs.md) on models that support it, system prompt instructions, or [`output_config.format`](../build-with-claude/build-with-claude-structured-outputs.md#json-outputs) instead.
+
+### Thinking blocks cannot be modified
+
+If the most recent assistant message contains `thinking` or `redacted_thinking` blocks that were edited, reordered, filtered out, or reconstructed before being sent back to the API, the request returns a 400 `invalid_request_error`. The error message starts with the position of the offending block (for example, `messages.1.content.0`) and contains:
+
+```text
+`thinking` or `redacted_thinking` blocks in the latest assistant message cannot be modified. These blocks must remain as they were in the original response.
+```
+
+With tool use, every `thinking` and `redacted_thinking` block from the assistant turn must be passed back exactly as received, including blocks whose `thinking` field is empty. Pass thinking blocks back unchanged, and if your application filters content blocks by type before resending, include both `thinking` and `redacted_thinking`. See [Preserving thinking blocks](../build-with-claude/build-with-claude-extended-thinking.md#preserving-thinking-blocks) and [Thinking output on Claude Fable 5 and Claude Mythos 5](../build-with-claude/build-with-claude-adaptive-thinking.md#thinking-output-on-claude-fable-5-and-claude-mythos-5).
 
 ### Outbound web identity federation disabled (Claude Platform on AWS)
 

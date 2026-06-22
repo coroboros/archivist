@@ -67,7 +67,7 @@ Retrieve a single tunnel in the caller's organization by ID.
 ```http
 curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_WIF_BEARER_TOKEN"
+    -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
 ```
 
 #### Response
@@ -170,7 +170,7 @@ archived tunnels are excluded unless `include_archived` is set.
 ```http
 curl https://api.anthropic.com/v1/organizations/tunnels \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_WIF_BEARER_TOKEN"
+    -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
 ```
 
 #### Response
@@ -240,7 +240,7 @@ access logs.
 curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID/reveal_token \
     -X POST \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_WIF_BEARER_TOKEN"
+    -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
 ```
 
 #### Response
@@ -306,7 +306,7 @@ restarted after rotation must use the new value. An optional
 curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID/rotate_token \
     -X POST \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_WIF_BEARER_TOKEN"
+    -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
 ```
 
 #### Response
@@ -386,7 +386,7 @@ tunnel returns the existing record unchanged.
 curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID/archive \
     -X POST \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_WIF_BEARER_TOKEN"
+    -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
 ```
 
 #### Response
@@ -445,47 +445,41 @@ curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID/archive \
 
 ### MCP Tunnel List Response
 
-- `MCPTunnelListResponse object { data, next_page }`
+- `MCPTunnelListResponse object { id, archived_at, created_at, 4 more }`
 
-  - `data: array of object { id, archived_at, created_at, 4 more }`
+  - `id: string`
 
-    - `id: string`
+    ID of the Tunnel.
 
-      ID of the Tunnel.
+  - `archived_at: string`
 
-    - `archived_at: string`
+    RFC 3339 datetime string indicating when the Tunnel was archived, or
+    `null` if it is not archived.
 
-      RFC 3339 datetime string indicating when the Tunnel was archived, or
-      `null` if it is not archived.
+  - `created_at: string`
 
-    - `created_at: string`
+    RFC 3339 datetime string indicating when the Tunnel was created.
 
-      RFC 3339 datetime string indicating when the Tunnel was created.
+  - `display_name: string`
 
-    - `display_name: string`
+    Human-readable name for the Tunnel (1–255 characters), or `null` if unset.
 
-      Human-readable name for the Tunnel (1–255 characters), or `null` if unset.
+  - `domain: string`
 
-    - `domain: string`
+    Anthropic-assigned hostname for the Tunnel. MCP server URLs whose host is a
+    subdomain of this value are routed through the Tunnel. Globally unique and
+    never reused, even after the Tunnel is archived.
 
-      Anthropic-assigned hostname for the Tunnel. MCP server URLs whose host is a
-      subdomain of this value are routed through the Tunnel. Globally unique and
-      never reused, even after the Tunnel is archived.
+  - `type: "tunnel"`
 
-    - `type: "tunnel"`
+    Object type. Always `tunnel` for Tunnels.
 
-      Object type. Always `tunnel` for Tunnels.
+    - `"tunnel"`
 
-      - `"tunnel"`
+  - `workspace_id: string`
 
-    - `workspace_id: string`
-
-      ID of the Workspace this Tunnel belongs to, or `null` for the default
-      Workspace. Immutable after creation.
-
-  - `next_page: string`
-
-    Opaque cursor for the next page, or `null` if there are no more results.
+    ID of the Workspace this Tunnel belongs to, or `null` for the default
+    Workspace. Immutable after creation.
 
 ### MCP Tunnel Reveal Token Response
 
@@ -637,7 +631,7 @@ holds at most two non-archived certificates.
 curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID/certificates \
     -H 'Content-Type: application/json' \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_WIF_BEARER_TOKEN" \
+    -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN" \
     -d '{
           "ca_certificate_pem": "-----BEGIN CERTIFICATE-----\\nMIIBexampleEXAMPLEexampleEXAMPLEexampleEXAMPLEexampleEXAMPLEexa\\n...illustrative placeholder, not a real certificate...\\n-----END CERTIFICATE-----\\n"
         }'
@@ -720,7 +714,7 @@ Retrieve a single certificate registered on a tunnel by ID.
 ```http
 curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID/certificates/$CERTIFICATE_ID \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_WIF_BEARER_TOKEN"
+    -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
 ```
 
 #### Response
@@ -820,7 +814,7 @@ Archived certificates are excluded unless `include_archived` is set.
 ```http
 curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID/certificates \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_WIF_BEARER_TOKEN"
+    -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
 ```
 
 #### Response
@@ -910,7 +904,7 @@ certificate is added.
 curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID/certificates/$CERTIFICATE_ID/archive \
     -X POST \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_WIF_BEARER_TOKEN"
+    -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
 ```
 
 #### Response
@@ -1003,45 +997,39 @@ curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID/certificates/
 
 ### Tunnel Certificate List Response
 
-- `TunnelCertificateListResponse object { data, next_page }`
+- `TunnelCertificateListResponse object { id, archived_at, created_at, 4 more }`
 
-  - `data: array of object { id, archived_at, created_at, 4 more }`
+  - `id: string`
 
-    - `id: string`
+    ID of the Tunnel Certificate.
 
-      ID of the Tunnel Certificate.
+  - `archived_at: string`
 
-    - `archived_at: string`
+    RFC 3339 datetime string indicating when the certificate was archived, or
+    `null` if it is not archived.
 
-      RFC 3339 datetime string indicating when the certificate was archived, or
-      `null` if it is not archived.
+  - `created_at: string`
 
-    - `created_at: string`
+    RFC 3339 datetime string indicating when the certificate was registered.
 
-      RFC 3339 datetime string indicating when the certificate was registered.
+  - `expires_at: string`
 
-    - `expires_at: string`
+    RFC 3339 datetime string indicating when the certificate expires, or
+    `null` if it does not expire.
 
-      RFC 3339 datetime string indicating when the certificate expires, or
-      `null` if it does not expire.
+  - `fingerprint: string`
 
-    - `fingerprint: string`
+    The certificate's SHA-256 fingerprint, as a lowercase hex string.
 
-      The certificate's SHA-256 fingerprint, as a lowercase hex string.
+  - `tunnel_id: string`
 
-    - `tunnel_id: string`
+    ID of the Tunnel this certificate is registered against.
 
-      ID of the Tunnel this certificate is registered against.
+  - `type: "tunnel_certificate"`
 
-    - `type: "tunnel_certificate"`
+    Object type. Always `tunnel_certificate` for Tunnel Certificates.
 
-      Object type. Always `tunnel_certificate` for Tunnel Certificates.
-
-      - `"tunnel_certificate"`
-
-  - `next_page: string`
-
-    Opaque cursor for the next page, or `null` if there are no more results.
+    - `"tunnel_certificate"`
 
 ### Tunnel Certificate Archive Response
 

@@ -59,6 +59,9 @@ Anthropic provides three kinds of official tooling for building with the Claude 
 Libraries and integrations expose Claude through another framework's API surface. They are not general-purpose Messages API clients.
 
 <CardGroup cols={3}>
+  <Card title="Apple Foundation Models" href="https://platform.claude.com/docs/en/cli-sdks-libraries/libraries/apple-foundation-models.md">
+    Swift package for Apple's `LanguageModelSession` API
+  </Card>
   <Card title="OpenAI SDK compatibility" href="https://platform.claude.com/docs/en/cli-sdks-libraries/libraries/openai-sdk.md">
     Use Claude through the OpenAI SDK surface
   </Card>

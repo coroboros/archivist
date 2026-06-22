@@ -15,7 +15,7 @@ The `claude-api` skill is an open-source [Agent Skill](./agents-and-tools-agent-
 - **Messages API:** The primary surface for single requests, streaming chat, tool use, batch processing, prompt caching, structured outputs, and custom agent loops.
 - **Claude Managed Agents (beta):** An Anthropic-hosted surface for server-managed stateful agents with Anthropic-hosted tool execution, persistent agent configs, and per-session sandboxes.
 
-It covers 8 programming languages for the Messages API (Python, TypeScript, C#, Go, Java, PHP, Ruby, and cURL) and 7 languages for Managed Agents (Python, TypeScript, Go, Java, PHP, Ruby, and cURL; C# is not currently supported).
+It covers 8 programming languages for both the Messages API and Managed Agents: Python, TypeScript, C#, Go, Java, PHP, Ruby, and cURL.
 
 The skill comes bundled with [Claude Code](https://code.claude.com/docs/en/overview) and is also available in the open-source [Anthropic skills repository](https://github.com/anthropics/skills/tree/main/skills/claude-api), where you can install it in any environment that supports Agent Skills.
 
@@ -39,7 +39,7 @@ When triggered, the skill equips Claude with:
 **For Managed Agents (beta):**
 
 - **Onboarding flow:** An interview-driven walkthrough for setting up a new Managed Agent from scratch, available via the `/claude-api managed-agents-onboard` subcommand
-- **Language-specific Managed Agents docs:** Creating persistent agents, starting sessions, streaming events, and handling tool confirmations for Python, TypeScript, Go, Java, PHP, Ruby, and cURL
+- **Language-specific Managed Agents docs:** Creating persistent agents, starting sessions, streaming events, and handling tool confirmations for Python, TypeScript, C#, Go, Java, PHP, Ruby, and cURL
 - **Client patterns:** Lossless stream reconnect, `processed_at` queued/processed gate, interrupt handling, file-mount gotchas, and credential handling
 - **Deployment constraints:** Managed Agents is available on the Claude API and [Claude Platform on AWS](../build-with-claude/build-with-claude-claude-platform-on-aws.md) only (not on Amazon Bedrock, Vertex AI, or Microsoft Foundry). The skill routes other deployments to the Messages API and tool use instead.
 
@@ -65,10 +65,10 @@ The skill detects your project's language automatically by examining project fil
 |------------|------------------|-------------|----------------|
 | Python     | Yes              | Yes (beta)  | Yes (beta)     |
 | TypeScript | Yes              | Yes (beta)  | Yes (beta)     |
-| C#         | Yes              | No          | No             |
-| Go         | Yes              | No          | Yes (beta)     |
-| Java       | Yes              | No          | Yes (beta)     |
-| PHP        | Yes              | No          | Yes (beta)     |
+| C#         | Yes              | Yes (beta)  | Yes (beta)     |
+| Go         | Yes              | Yes (beta)  | Yes (beta)     |
+| Java       | Yes              | Yes (beta)  | Yes (beta)     |
+| PHP        | Yes              | Yes (beta)  | Yes (beta)     |
 | Ruby       | Yes              | Yes (beta)  | Yes (beta)     |
 | cURL       | Yes              | N/A         | Yes (beta)     |
 
@@ -130,6 +130,7 @@ The skill handles:
 - **Effort calibration**, recommending an `output_config.effort` starting point for the target model (for example, `xhigh` for coding and agentic use cases on Claude Opus 4.8 and Claude Opus 4.7)
 - **Prompt-behavior tuning**, flagging length-control, tool-triggering, subagent, and instruction-following prompts that may behave differently on the target model
 - **Silent default handling**, opting back into thinking summarization (`thinking.display: "summarized"`) when reasoning is surfaced to users on Claude Opus 4.8 and Claude Opus 4.7
+- **Refusal fallback configuration**, adding `stop_reason: "refusal"` handling before reading response content and setting up a [fallback retry path](../build-with-claude/build-with-claude-refusals-and-fallback.md) when the target is Claude Fable 5 (the server-side `fallbacks` parameter, the SDK refusal-fallback middleware, or a fallback-credit retry), and updating fallback code written against earlier preview shapes
 
 As it edits, the skill explains each change and its motivation inline. On completion, it produces a checklist of items that require manual verification (typically integration tests, length-control prompt tuning, and cost/rate-limit re-baselining).
 

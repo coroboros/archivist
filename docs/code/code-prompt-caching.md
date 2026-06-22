@@ -77,6 +77,8 @@ Each model has its own cache. Switching with [`/model`](./code-model-config.md#s
 
 The [`opusplan` model setting](./code-model-config.md#opusplan-model-setting) resolves to Opus during plan mode and Sonnet during execution, so each plan-mode toggle is a model switch and starts a fresh cache.
 
+[Automatic model fallback](./code-model-config.md#automatic-model-fallback) on Fable 5 is also a model switch. When a safety classifier flags a request, Claude Code re-runs it on the default Opus model and the session continues there.
+
 ### Changing effort level
 
 The cache is keyed by [effort level](./code-model-config.md#adjust-effort-level) as well as model, so switching with `/effort` means the next request reads the entire conversation history with no cache hits. Once a conversation has started, Claude Code shows a confirmation dialog before applying an effort change that would invalidate the cache. A change that resolves to the same level already in effect, such as setting the model's default explicitly, skips the dialog and keeps the cache.
@@ -93,7 +95,7 @@ The cost applies once per conversation. After the first fast mode turn, Claude C
 
 ### Connecting or disconnecting an MCP server
 
-Tool definitions sit in the system prompt layer, so the cache invalidates when the set of tool definitions in the request changes between turns. Whether an [MCP server](./code-mcp.md) change does this depends on whether its tools are deferred by [tool search](./code-mcp.md#scale-with-mcp-tool-search) or loaded into the prefix:
+Tool definitions sit in the system prompt layer, so the cache invalidates when the set of tool definitions in the request changes between turns. Toggling the [advisor tool](./code-advisor.md) is an exception: its definition sits after the cache breakpoint, so enabling or disabling `/advisor` keeps the cached prefix intact. Whether an [MCP server](./code-mcp.md) change does this depends on whether its tools are deferred by [tool search](./code-mcp.md#scale-with-mcp-tool-search) or loaded into the prefix:
 
 * **Deferred tools**, the default on supported models: a server connecting, disconnecting, or changing its tool list only appends new content and doesn't disturb anything already cached.
 * **Tools loaded into the prefix**: any change to them invalidates the cache. This happens when [tool search is unavailable or disabled](./code-mcp.md#configure-tool-search), such as on Haiku models, on Vertex AI, or with a custom `ANTHROPIC_BASE_URL` gateway. It also happens for a server or tool marked [`alwaysLoad`](./code-mcp.md#exempt-a-server-from-deferral), and for definitions kept upfront by [threshold-based loading](./code-mcp.md#configure-tool-search).
@@ -242,6 +244,7 @@ Disabling caching is occasionally useful when debugging caching behavior with a 
 | `DISABLE_PROMPT_CACHING_HAIKU`  | Disable for Haiku only  |
 | `DISABLE_PROMPT_CACHING_SONNET` | Disable for Sonnet only |
 | `DISABLE_PROMPT_CACHING_OPUS`   | Disable for Opus only   |
+| `DISABLE_PROMPT_CACHING_FABLE`  | Disable for Fable only  |
 
 To set caching policy across an organization, put any of these or the [TTL variables](#cache-lifetime) in the `env` block of [managed settings](./code-settings.md#settings-files). For normal use, leave caching enabled.
 

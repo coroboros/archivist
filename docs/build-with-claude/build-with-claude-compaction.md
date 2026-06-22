@@ -38,6 +38,8 @@ Compaction is in beta. Include the [beta header](../api/api-beta-headers.md) `co
 
 Compaction is supported on the following models:
 
+- Claude Fable 5 (`claude-fable-5`)
+- [Claude Mythos 5](https://anthropic.com/glasswing) (`claude-mythos-5`)
 - [Claude Mythos Preview](https://anthropic.com/glasswing) (claude-mythos-preview)
 - Claude Opus 4.8 (claude-opus-4-8)
 - Claude Opus 4.7 (claude-opus-4-7)
@@ -1077,12 +1079,11 @@ public class CompactionPauseExample {
 }
 ```
 
-```php PHP nocheck hidelines={1..4}
+```php PHP hidelines={1..4}
 <?php
 
 use Anthropic\Client;
 
-// The PHP SDK does not yet expose a typed constant for the `compaction` stop reason; compare the string value directly.
 $client = new Client();
 $messages = [['role' => 'user', 'content' => 'Hello, Claude']];
 
@@ -3158,12 +3159,11 @@ public class CompactionExample {
 }
 ```
 
-```php PHP nocheck hidelines={1..4}
+```php PHP hidelines={1..4}
 <?php
 
 use Anthropic\Client;
 
-// The PHP SDK does not yet expose a typed constant for the `compaction` stop reason; compare the string value directly.
 $client = new Client();
 $messages = [];
 

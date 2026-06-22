@@ -90,6 +90,10 @@ The Models API response can be used to determine which models are available for 
 
     - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
 
+    - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
 ### Returns
 
 - `class BetaModelInfo:`
@@ -97,6 +101,10 @@ The Models API response can be used to determine which models are available for 
   - `String id`
 
     Unique model identifier.
+
+  - `Optional<List<String>> allowedFallbackModels`
+
+    Model IDs this model accepts as `fallbacks[i].model` on the Messages API. An empty list means the `fallbacks` parameter is not supported for this model as primary.
 
   - `Optional<BetaModelCapabilities> capabilities`
 
@@ -250,6 +258,9 @@ public final class Main {
   "data": [
     {
       "id": "claude-opus-4-6",
+      "allowed_fallback_models": [
+        "string"
+      ],
       "capabilities": {
         "batch": {
           "supported": true
@@ -398,6 +409,10 @@ The Models API response can be used to determine information about a specific mo
 
     - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
 
+    - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
 ### Returns
 
 - `class BetaModelInfo:`
@@ -405,6 +420,10 @@ The Models API response can be used to determine information about a specific mo
   - `String id`
 
     Unique model identifier.
+
+  - `Optional<List<String>> allowedFallbackModels`
+
+    Model IDs this model accepts as `fallbacks[i].model` on the Messages API. An empty list means the `fallbacks` parameter is not supported for this model as primary.
 
   - `Optional<BetaModelCapabilities> capabilities`
 
@@ -556,6 +575,9 @@ public final class Main {
 ```json
 {
   "id": "claude-opus-4-6",
+  "allowed_fallback_models": [
+    "string"
+  ],
   "capabilities": {
     "batch": {
       "supported": true
@@ -806,6 +828,10 @@ public final class Main {
   - `String id`
 
     Unique model identifier.
+
+  - `Optional<List<String>> allowedFallbackModels`
+
+    Model IDs this model accepts as `fallbacks[i].model` on the Messages API. An empty list means the `fallbacks` parameter is not supported for this model as primary.
 
   - `Optional<BetaModelCapabilities> capabilities`
 

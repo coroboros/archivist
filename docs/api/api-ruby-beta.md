@@ -10,11 +10,11 @@ generated: true
 
 ### Anthropic Beta
 
-- `AnthropicBeta = String | :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+- `AnthropicBeta = String | :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -67,6 +67,10 @@ generated: true
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
 
 ### Beta API Error
 
@@ -352,7 +356,7 @@ The Models API response can be used to determine which models are available for 
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -406,6 +410,10 @@ The Models API response can be used to determine which models are available for 
 
     - `:"thinking-token-count-2026-05-13"`
 
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
+
 ### Returns
 
 - `class BetaModelInfo`
@@ -413,6 +421,10 @@ The Models API response can be used to determine which models are available for 
   - `id: String`
 
     Unique model identifier.
+
+  - `allowed_fallback_models: Array[String]`
+
+    Model IDs this model accepts as `fallbacks[i].model` on the Messages API. An empty list means the `fallbacks` parameter is not supported for this model as primary.
 
   - `capabilities: BetaModelCapabilities`
 
@@ -557,6 +569,9 @@ puts(page)
   "data": [
     {
       "id": "claude-opus-4-6",
+      "allowed_fallback_models": [
+        "string"
+      ],
       "capabilities": {
         "batch": {
           "supported": true
@@ -653,7 +668,7 @@ The Models API response can be used to determine information about a specific mo
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -707,6 +722,10 @@ The Models API response can be used to determine information about a specific mo
 
     - `:"thinking-token-count-2026-05-13"`
 
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
+
 ### Returns
 
 - `class BetaModelInfo`
@@ -714,6 +733,10 @@ The Models API response can be used to determine information about a specific mo
   - `id: String`
 
     Unique model identifier.
+
+  - `allowed_fallback_models: Array[String]`
+
+    Model IDs this model accepts as `fallbacks[i].model` on the Messages API. An empty list means the `fallbacks` parameter is not supported for this model as primary.
 
   - `capabilities: BetaModelCapabilities`
 
@@ -856,6 +879,9 @@ puts(beta_model_info)
 ```json
 {
   "id": "claude-opus-4-6",
+  "allowed_fallback_models": [
+    "string"
+  ],
   "capabilities": {
     "batch": {
       "supported": true
@@ -1106,6 +1132,10 @@ puts(beta_model_info)
   - `id: String`
 
     Unique model identifier.
+
+  - `allowed_fallback_models: Array[String]`
+
+    Model IDs this model accepts as `fallbacks[i].model` on the Messages API. An empty list means the `fallbacks` parameter is not supported for this model as primary.
 
   - `capabilities: BetaModelCapabilities`
 
@@ -1935,7 +1965,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           - `class BetaAdvisorToolResultErrorParam`
 
-            - `error_code: :max_uses_exceeded | :prompt_too_long | :too_many_requests | 3 more`
+            - `error_code: :max_uses_exceeded | :prompt_too_long | :too_many_requests | 4 more`
 
               - `:max_uses_exceeded`
 
@@ -1948,6 +1978,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
               - `:unavailable`
 
               - `:execution_time_exceeded`
+
+              - `:model_not_found`
 
             - `type: :advisor_tool_result_error`
 
@@ -2209,6 +2241,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
               - `:tool_search_tool_result_error`
 
+            - `error_message: String`
+
           - `class BetaToolSearchToolSearchResultBlockParam`
 
             - `tool_references: Array[BetaToolReferenceBlockParam]`
@@ -2355,6 +2389,130 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           Create a cache control breakpoint at this content block.
 
+      - `class BetaFallbackBlockParam`
+
+        A `fallback` block echoed back from a prior response.
+
+        Accepted in `messages[].content` and never rendered into the prompt,
+        not validated against the request's `fallbacks` chain or top-level
+        `model`, and stripped before the sticky-routing cache key is computed.
+
+        Callers should echo the assistant turn verbatim — block included. The
+        block's position is load-bearing for thinking verification: the thinking
+        runs on either side of a fallback hop carry independently-rooted
+        verification hash chains, and this block is the only record of where one
+        chain ends and the next begins. When thinking runs flank the boundary,
+        omitting the block merges the runs into one contiguous span whose hashes
+        cannot verify (the request is rejected), and moving it into the middle of
+        a single run splits that run's chain and is likewise rejected; between
+        non-thinking blocks the block's placement has no verification effect.
+
+        - `from: BetaFallbackInfoParam`
+
+          Identifies one hop of a fallback transition.
+
+          - `model: Model`
+
+            The model that will complete your prompt.
+
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more`
+
+              The model that will complete your prompt.
+
+              See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+              - `:"claude-fable-5"`
+
+                Next generation of intelligence for the hardest knowledge work and coding problems
+
+              - `:"claude-mythos-5"`
+
+                Most capable model for cybersecurity and biology research
+
+              - `:"claude-opus-4-8"`
+
+                Frontier intelligence for long-running agents and coding
+
+              - `:"claude-opus-4-7"`
+
+                Frontier intelligence for long-running agents and coding
+
+              - `:"claude-mythos-preview"`
+
+                New class of intelligence, strongest in coding and cybersecurity
+
+              - `:"claude-opus-4-6"`
+
+                Frontier intelligence for long-running agents and coding
+
+              - `:"claude-sonnet-4-6"`
+
+                Best combination of speed and intelligence
+
+              - `:"claude-haiku-4-5"`
+
+                Fastest model with near-frontier intelligence
+
+              - `:"claude-haiku-4-5-20251001"`
+
+                Fastest model with near-frontier intelligence
+
+              - `:"claude-opus-4-5"`
+
+                Premium model combining maximum intelligence with practical performance
+
+              - `:"claude-opus-4-5-20251101"`
+
+                Premium model combining maximum intelligence with practical performance
+
+              - `:"claude-sonnet-4-5"`
+
+                High-performance model for agents and coding
+
+              - `:"claude-sonnet-4-5-20250929"`
+
+                High-performance model for agents and coding
+
+              - `:"claude-opus-4-1"`
+
+                Exceptional model for specialized complex tasks
+
+              - `:"claude-opus-4-1-20250805"`
+
+                Exceptional model for specialized complex tasks
+
+              - `:"claude-opus-4-0"`
+
+                Powerful model for complex tasks
+
+              - `:"claude-opus-4-20250514"`
+
+                Powerful model for complex tasks
+
+              - `:"claude-sonnet-4-0"`
+
+                High-performance model with extended thinking
+
+              - `:"claude-sonnet-4-20250514"`
+
+                High-performance model with extended thinking
+
+              - `:"claude-3-haiku-20240307"`
+
+                Fast and cost-effective model
+
+            - `String = String`
+
+        - `to: BetaFallbackInfoParam`
+
+          Identifies one hop of a fallback transition.
+
+        - `type: :fallback`
+
+          - `:fallback`
+
   - `role: :user | :assistant | :system`
 
     - `:user`
@@ -2368,86 +2526,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
   The model that will complete your prompt.
 
   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-  - `Model = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-mythos-preview" | 15 more`
-
-    The model that will complete your prompt.
-
-    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-    - `:"claude-opus-4-8"`
-
-      Frontier intelligence for long-running agents and coding
-
-    - `:"claude-opus-4-7"`
-
-      Frontier intelligence for long-running agents and coding
-
-    - `:"claude-mythos-preview"`
-
-      New class of intelligence, strongest in coding and cybersecurity
-
-    - `:"claude-opus-4-6"`
-
-      Frontier intelligence for long-running agents and coding
-
-    - `:"claude-sonnet-4-6"`
-
-      Best combination of speed and intelligence
-
-    - `:"claude-haiku-4-5"`
-
-      Fastest model with near-frontier intelligence
-
-    - `:"claude-haiku-4-5-20251001"`
-
-      Fastest model with near-frontier intelligence
-
-    - `:"claude-opus-4-5"`
-
-      Premium model combining maximum intelligence with practical performance
-
-    - `:"claude-opus-4-5-20251101"`
-
-      Premium model combining maximum intelligence with practical performance
-
-    - `:"claude-sonnet-4-5"`
-
-      High-performance model for agents and coding
-
-    - `:"claude-sonnet-4-5-20250929"`
-
-      High-performance model for agents and coding
-
-    - `:"claude-opus-4-1"`
-
-      Exceptional model for specialized complex tasks
-
-    - `:"claude-opus-4-1-20250805"`
-
-      Exceptional model for specialized complex tasks
-
-    - `:"claude-opus-4-0"`
-
-      Powerful model for complex tasks
-
-    - `:"claude-opus-4-20250514"`
-
-      Powerful model for complex tasks
-
-    - `:"claude-sonnet-4-0"`
-
-      High-performance model with extended thinking
-
-    - `:"claude-sonnet-4-20250514"`
-
-      High-performance model with extended thinking
-
-    - `:"claude-3-haiku-20240307"`
-
-      Fast and cost-effective model
-
-  - `String = String`
 
 - `cache_control: BetaCacheControlEphemeral`
 
@@ -2612,6 +2690,137 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
     The `id` (`msg_...`) from this client's previous /v1/messages response. The server compares that request's prompt fingerprint against this one and returns `diagnostics.cache_miss_reason` when the prompt-cache prefix could not be reused. Pass `null` on the first turn to opt in without a prior message to compare.
 
+- `fallback_credit_token: String`
+
+  The `fallback_credit_token` from a prior refusal's `stop_details`.
+
+  When a preceding request was refused and returned a `fallback_credit_token`,
+  pass that code here on the retry to have the retry's cache-creation tokens
+  for the prefix that was warm on the refused model billed at the cache-read
+  rate. Must be redeemed by the same organization and workspace, with the same
+  request body (optionally extended by one appended `assistant` message whose
+  content is the partial text — with any trailing whitespace stripped from
+  the final text block — and paired server-tool blocks streamed before the
+  refusal; the appended-assistant form is not available for requests with
+  `output_format` set or forced `tool_choice`), on an eligible fallback
+  model, on the same platform,
+  and within 5 minutes of the refusal; a mismatch is a 400. A token minted
+  mid-server-tool-loop whose partial content was continuable may only be
+  redeemed with the appended-assistant form — if an exact-body retry is
+  rejected with a 400 saying the token must be redeemed by continuing the
+  partial response, retry with the appended-assistant form instead.
+
+  When the appended-assistant form is used on a model that otherwise disallows
+  assistant-turn prefill, this token also authorizes that one prefill.
+
+- `fallbacks: Array[BetaFallbackParam]`
+
+  Opt-in server-side retry on one or more substitute models when the requested model declines for policy reasons. Tried in order: if the first entry also declines, the second is tried, and so on.
+
+  - `model: Model`
+
+    The model that will complete your prompt.
+
+    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+  - `max_tokens: Integer`
+
+  - `output_config: BetaOutputConfig`
+
+    - `effort: :low | :medium | :high | 2 more`
+
+      All possible effort levels.
+
+      - `:low`
+
+      - `:medium`
+
+      - `:high`
+
+      - `:xhigh`
+
+      - `:max`
+
+    - `format_: BetaJSONOutputFormat`
+
+      A schema to specify Claude's output format in responses. See [structured outputs](../build-with-claude/build-with-claude-structured-outputs.md)
+
+      - `schema: Hash[Symbol, untyped]`
+
+        The JSON schema of the format
+
+      - `type: :json_schema`
+
+        - `:json_schema`
+
+    - `task_budget: BetaTokenTaskBudget`
+
+      User-configurable total token budget across contexts.
+
+      - `total: Integer`
+
+        Total token budget across all contexts in the session.
+
+      - `type: :tokens`
+
+        The budget type. Currently only 'tokens' is supported.
+
+        - `:tokens`
+
+      - `remaining: Integer`
+
+        Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
+
+  - `speed: :standard | :fast`
+
+    - `:standard`
+
+    - `:fast`
+
+  - `thinking: BetaThinkingConfigEnabled | BetaThinkingConfigDisabled | BetaThinkingConfigAdaptive`
+
+    - `class BetaThinkingConfigEnabled`
+
+      - `budget_tokens: Integer`
+
+        Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
+
+        Must be ≥1024 and less than `max_tokens`.
+
+        See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
+
+      - `type: :enabled`
+
+        - `:enabled`
+
+      - `display_: :summarized | :omitted`
+
+        Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+
+        - `:summarized`
+
+        - `:omitted`
+
+    - `class BetaThinkingConfigDisabled`
+
+      - `type: :disabled`
+
+        - `:disabled`
+
+    - `class BetaThinkingConfigAdaptive`
+
+      - `type: :adaptive`
+
+        - `:adaptive`
+
+      - `display_: :summarized | :omitted`
+
+        Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+
+        - `:summarized`
+
+        - `:omitted`
+
 - `inference_geo: String`
 
   Specifies the geographic region for inference processing. If not specified, the workspace's `default_inference_geo` is used.
@@ -2649,50 +2858,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 - `output_config: BetaOutputConfig`
 
   Configuration options for the model's output, such as the output format.
-
-  - `effort: :low | :medium | :high | 2 more`
-
-    All possible effort levels.
-
-    - `:low`
-
-    - `:medium`
-
-    - `:high`
-
-    - `:xhigh`
-
-    - `:max`
-
-  - `format_: BetaJSONOutputFormat`
-
-    A schema to specify Claude's output format in responses. See [structured outputs](../build-with-claude/build-with-claude-structured-outputs.md)
-
-    - `schema: Hash[Symbol, untyped]`
-
-      The JSON schema of the format
-
-    - `type: :json_schema`
-
-      - `:json_schema`
-
-  - `task_budget: BetaTokenTaskBudget`
-
-    User-configurable total token budget across contexts.
-
-    - `total: Integer`
-
-      Total token budget across all contexts in the session.
-
-    - `type: :tokens`
-
-      The budget type. Currently only 'tokens' is supported.
-
-      - `:tokens`
-
-    - `remaining: Integer`
-
-      Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
 - `output_format: BetaJSONOutputFormat`
 
@@ -2770,45 +2935,9 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
   - `class BetaThinkingConfigEnabled`
 
-    - `budget_tokens: Integer`
-
-      Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
-
-      Must be ≥1024 and less than `max_tokens`.
-
-      See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
-
-    - `type: :enabled`
-
-      - `:enabled`
-
-    - `display_: :summarized | :omitted`
-
-      Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
-
-      - `:summarized`
-
-      - `:omitted`
-
   - `class BetaThinkingConfigDisabled`
 
-    - `type: :disabled`
-
-      - `:disabled`
-
   - `class BetaThinkingConfigAdaptive`
-
-    - `type: :adaptive`
-
-      - `:adaptive`
-
-    - `display_: :summarized | :omitted`
-
-      Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
-
-      - `:summarized`
-
-      - `:omitted`
 
 - `tool_choice: BetaToolChoice`
 
@@ -3826,6 +3955,10 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
+    - `max_tokens: Integer`
+
+      Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the server also emits a remaining-tokens budget block in the advisor's prompt so the advisor self-shapes toward the cap. When omitted, the advisor model's default output cap applies and no budget block is emitted.
+
     - `max_uses: Integer`
 
       Maximum number of times the tool can be used in the API request.
@@ -3967,7 +4100,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -4020,6 +4153,10 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
 
 ### Returns
 
@@ -4488,7 +4625,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         - `class BetaAdvisorToolResultError`
 
-          - `error_code: :max_uses_exceeded | :prompt_too_long | :too_many_requests | 3 more`
+          - `error_code: :max_uses_exceeded | :prompt_too_long | :too_many_requests | 4 more`
 
             - `:max_uses_exceeded`
 
@@ -4501,6 +4638,8 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
             - `:unavailable`
 
             - `:execution_time_exceeded`
+
+            - `:model_not_found`
 
           - `type: :advisor_tool_result_error`
 
@@ -4846,6 +4985,126 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
         - `:compaction`
 
+    - `class BetaFallbackBlock`
+
+      Marks the point in `content` where one model's output gives way to the next.
+
+      One block appears per hop where a preceding model actually ran this turn and
+      declined. A turn routed directly by the sticky decision has no such boundary
+      and carries no block — the signal for whether a fallback model served the
+      response is the presence of a `fallback_message` entry in
+      `usage.iterations`, not this block.
+
+      The block is treated like a server-tool content block for streaming: it
+      arrives via the standard `content_block_start` / `content_block_stop`
+      pair and carries no deltas.
+
+      - `from: BetaFallbackInfo`
+
+        The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
+
+        - `model: Model`
+
+          The model that will complete your prompt.
+
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more`
+
+            The model that will complete your prompt.
+
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `:"claude-fable-5"`
+
+              Next generation of intelligence for the hardest knowledge work and coding problems
+
+            - `:"claude-mythos-5"`
+
+              Most capable model for cybersecurity and biology research
+
+            - `:"claude-opus-4-8"`
+
+              Frontier intelligence for long-running agents and coding
+
+            - `:"claude-opus-4-7"`
+
+              Frontier intelligence for long-running agents and coding
+
+            - `:"claude-mythos-preview"`
+
+              New class of intelligence, strongest in coding and cybersecurity
+
+            - `:"claude-opus-4-6"`
+
+              Frontier intelligence for long-running agents and coding
+
+            - `:"claude-sonnet-4-6"`
+
+              Best combination of speed and intelligence
+
+            - `:"claude-haiku-4-5"`
+
+              Fastest model with near-frontier intelligence
+
+            - `:"claude-haiku-4-5-20251001"`
+
+              Fastest model with near-frontier intelligence
+
+            - `:"claude-opus-4-5"`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `:"claude-opus-4-5-20251101"`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `:"claude-sonnet-4-5"`
+
+              High-performance model for agents and coding
+
+            - `:"claude-sonnet-4-5-20250929"`
+
+              High-performance model for agents and coding
+
+            - `:"claude-opus-4-1"`
+
+              Exceptional model for specialized complex tasks
+
+            - `:"claude-opus-4-1-20250805"`
+
+              Exceptional model for specialized complex tasks
+
+            - `:"claude-opus-4-0"`
+
+              Powerful model for complex tasks
+
+            - `:"claude-opus-4-20250514"`
+
+              Powerful model for complex tasks
+
+            - `:"claude-sonnet-4-0"`
+
+              High-performance model with extended thinking
+
+            - `:"claude-sonnet-4-20250514"`
+
+              High-performance model with extended thinking
+
+            - `:"claude-3-haiku-20240307"`
+
+              Fast and cost-effective model
+
+          - `String = String`
+
+      - `to: BetaFallbackInfo`
+
+        The fallback model producing the content that follows this block. Its `model` is always the canonical id.
+
+      - `type: :fallback`
+
+        - `:fallback`
+
   - `context_management: BetaContextManagementResponse`
 
     Context management response.
@@ -4955,86 +5214,6 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-    - `Model = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-mythos-preview" | 15 more`
-
-      The model that will complete your prompt.
-
-      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-      - `:"claude-opus-4-8"`
-
-        Frontier intelligence for long-running agents and coding
-
-      - `:"claude-opus-4-7"`
-
-        Frontier intelligence for long-running agents and coding
-
-      - `:"claude-mythos-preview"`
-
-        New class of intelligence, strongest in coding and cybersecurity
-
-      - `:"claude-opus-4-6"`
-
-        Frontier intelligence for long-running agents and coding
-
-      - `:"claude-sonnet-4-6"`
-
-        Best combination of speed and intelligence
-
-      - `:"claude-haiku-4-5"`
-
-        Fastest model with near-frontier intelligence
-
-      - `:"claude-haiku-4-5-20251001"`
-
-        Fastest model with near-frontier intelligence
-
-      - `:"claude-opus-4-5"`
-
-        Premium model combining maximum intelligence with practical performance
-
-      - `:"claude-opus-4-5-20251101"`
-
-        Premium model combining maximum intelligence with practical performance
-
-      - `:"claude-sonnet-4-5"`
-
-        High-performance model for agents and coding
-
-      - `:"claude-sonnet-4-5-20250929"`
-
-        High-performance model for agents and coding
-
-      - `:"claude-opus-4-1"`
-
-        Exceptional model for specialized complex tasks
-
-      - `:"claude-opus-4-1-20250805"`
-
-        Exceptional model for specialized complex tasks
-
-      - `:"claude-opus-4-0"`
-
-        Powerful model for complex tasks
-
-      - `:"claude-opus-4-20250514"`
-
-        Powerful model for complex tasks
-
-      - `:"claude-sonnet-4-0"`
-
-        High-performance model with extended thinking
-
-      - `:"claude-sonnet-4-20250514"`
-
-        High-performance model with extended thinking
-
-      - `:"claude-3-haiku-20240307"`
-
-        Fast and cost-effective model
-
-    - `String = String`
-
   - `role: :assistant`
 
     Conversational role of the generated message.
@@ -5047,7 +5226,7 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
     Structured information about a refusal.
 
-    - `category: :cyber | :bio`
+    - `category: :cyber | :bio | :reasoning_extraction`
 
       The policy category that triggered the refusal.
 
@@ -5057,11 +5236,62 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
       - `:bio`
 
+      - `:reasoning_extraction`
+
     - `explanation: String`
 
       Human-readable explanation of the refusal.
 
       This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+    - `fallback_credit_token: String`
+
+      Opaque code that refunds the cache-miss cost when retrying this refused
+      request on the fallback model. Pass it as `fallback_credit_token` on the
+      retry request. Expires 5 minutes after the refusal.
+
+      The retry is sent either with the same request body (`system`, `messages`,
+      `tools`, and other render-shaping fields), or with the same body plus one
+      appended `assistant` message whose content is the partial text (with any
+      trailing whitespace stripped from the final text block) and paired
+      server-tool blocks from this refusal — which also authorizes that
+      appended turn as an assistant-prefill continuation on models that otherwise
+      disallow prefill. A token minted mid-server-tool-loop whose partial content
+      was continuable may only be redeemed the second way — if a same-body retry
+      is rejected with a 400 saying the token must be redeemed by continuing the
+      partial response, retry the second way instead. Either way: same workspace,
+      same platform; a mismatch is a 400. Resending a token for an already-warm
+      prefix is permitted but yields no additional credit.
+
+      `null` when the refused model isn't eligible for a fallback credit.
+
+    - `fallback_has_prefill_claim: bool`
+
+      Whether the accompanying `fallback_credit_token` may be redeemed with the
+      appended-assistant retry form. Only set when `fallback_credit_token` is
+      present.
+
+      `true`: retry by resending the same request body plus one appended
+      `assistant` message whose content is this response's `content` with any
+      trailing whitespace stripped from the final text block and unpaired
+      `tool_use` blocks omitted (the same appended-turn shape described on
+      `fallback_credit_token`), with the token attached. `false`: retry by
+      resending the original request body unchanged, with the token attached —
+      the appended-assistant form is not available for this refusal (no
+      continuable partial content, or the request uses `output_format` or a
+      `tool_choice` that forces tool use). One exception: when the request used
+      `output_format` or a forced `tool_choice` and the refusal arrived after
+      server tools (including MCP connector tools) had already executed, the
+      token may not be redeemable by either retry form; if the exact-body retry
+      is then rejected with a 400 saying the token must be redeemed by
+      continuing the partial response, discard the token and retry without it.
+
+      Advisory: if an appended-assistant retry is rejected with a 400 despite
+      `true`, fall back to resending the original request body with the token.
+
+    - `recommended_model: String`
+
+      The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
     - `type: :refusal`
 
@@ -5182,6 +5412,12 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
 
           The number of input tokens which were used.
 
+        - `model: Model`
+
+          The model that will complete your prompt.
+
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
         - `output_tokens: Integer`
 
           The number of output tokens which were used.
@@ -5257,6 +5493,47 @@ Learn more about the Messages API in our [user guide](https://docs.claude.com/en
           Usage for an advisor sub-inference iteration
 
           - `:advisor_message`
+
+      - `class BetaFallbackMessageIterationUsage`
+
+        Token usage for the fallback-model attempt of a server-side fallback request.
+
+        Produced in place of a `message` entry for whichever hop served the
+        response. A declined hop produces the existing `message` entry. Whether
+        a fallback model served the response is signalled by the presence of this
+        entry in `usage.iterations`.
+
+        - `cache_creation: BetaCacheCreation`
+
+          Breakdown of cached tokens by TTL
+
+        - `cache_creation_input_tokens: Integer`
+
+          The number of input tokens used to create the cache entry.
+
+        - `cache_read_input_tokens: Integer`
+
+          The number of input tokens read from the cache.
+
+        - `input_tokens: Integer`
+
+          The number of input tokens which were used.
+
+        - `model: Model`
+
+          The model that will complete your prompt.
+
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `output_tokens: Integer`
+
+          The number of output tokens which were used.
+
+        - `type: :fallback_message`
+
+          Usage for the fallback-model attempt that served the response
+
+          - `:fallback_message`
 
     - `output_tokens: Integer`
 
@@ -5381,6 +5658,9 @@ puts(beta_message)
   "stop_details": {
     "category": "cyber",
     "explanation": "explanation",
+    "fallback_credit_token": "fallback_credit_token",
+    "fallback_has_prefill_claim": true,
+    "recommended_model": "recommended_model",
     "type": "refusal"
   },
   "stop_reason": "end_turn",
@@ -5404,6 +5684,7 @@ puts(beta_message)
         "cache_creation_input_tokens": 0,
         "cache_read_input_tokens": 0,
         "input_tokens": 0,
+        "model": "claude-fable-5",
         "output_tokens": 0,
         "type": "message"
       }
@@ -6070,7 +6351,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
           - `class BetaAdvisorToolResultErrorParam`
 
-            - `error_code: :max_uses_exceeded | :prompt_too_long | :too_many_requests | 3 more`
+            - `error_code: :max_uses_exceeded | :prompt_too_long | :too_many_requests | 4 more`
 
               - `:max_uses_exceeded`
 
@@ -6083,6 +6364,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
               - `:unavailable`
 
               - `:execution_time_exceeded`
+
+              - `:model_not_found`
 
             - `type: :advisor_tool_result_error`
 
@@ -6344,6 +6627,8 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
               - `:tool_search_tool_result_error`
 
+            - `error_message: String`
+
           - `class BetaToolSearchToolSearchResultBlockParam`
 
             - `tool_references: Array[BetaToolReferenceBlockParam]`
@@ -6490,6 +6775,130 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
           Create a cache control breakpoint at this content block.
 
+      - `class BetaFallbackBlockParam`
+
+        A `fallback` block echoed back from a prior response.
+
+        Accepted in `messages[].content` and never rendered into the prompt,
+        not validated against the request's `fallbacks` chain or top-level
+        `model`, and stripped before the sticky-routing cache key is computed.
+
+        Callers should echo the assistant turn verbatim — block included. The
+        block's position is load-bearing for thinking verification: the thinking
+        runs on either side of a fallback hop carry independently-rooted
+        verification hash chains, and this block is the only record of where one
+        chain ends and the next begins. When thinking runs flank the boundary,
+        omitting the block merges the runs into one contiguous span whose hashes
+        cannot verify (the request is rejected), and moving it into the middle of
+        a single run splits that run's chain and is likewise rejected; between
+        non-thinking blocks the block's placement has no verification effect.
+
+        - `from: BetaFallbackInfoParam`
+
+          Identifies one hop of a fallback transition.
+
+          - `model: Model`
+
+            The model that will complete your prompt.
+
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more`
+
+              The model that will complete your prompt.
+
+              See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+              - `:"claude-fable-5"`
+
+                Next generation of intelligence for the hardest knowledge work and coding problems
+
+              - `:"claude-mythos-5"`
+
+                Most capable model for cybersecurity and biology research
+
+              - `:"claude-opus-4-8"`
+
+                Frontier intelligence for long-running agents and coding
+
+              - `:"claude-opus-4-7"`
+
+                Frontier intelligence for long-running agents and coding
+
+              - `:"claude-mythos-preview"`
+
+                New class of intelligence, strongest in coding and cybersecurity
+
+              - `:"claude-opus-4-6"`
+
+                Frontier intelligence for long-running agents and coding
+
+              - `:"claude-sonnet-4-6"`
+
+                Best combination of speed and intelligence
+
+              - `:"claude-haiku-4-5"`
+
+                Fastest model with near-frontier intelligence
+
+              - `:"claude-haiku-4-5-20251001"`
+
+                Fastest model with near-frontier intelligence
+
+              - `:"claude-opus-4-5"`
+
+                Premium model combining maximum intelligence with practical performance
+
+              - `:"claude-opus-4-5-20251101"`
+
+                Premium model combining maximum intelligence with practical performance
+
+              - `:"claude-sonnet-4-5"`
+
+                High-performance model for agents and coding
+
+              - `:"claude-sonnet-4-5-20250929"`
+
+                High-performance model for agents and coding
+
+              - `:"claude-opus-4-1"`
+
+                Exceptional model for specialized complex tasks
+
+              - `:"claude-opus-4-1-20250805"`
+
+                Exceptional model for specialized complex tasks
+
+              - `:"claude-opus-4-0"`
+
+                Powerful model for complex tasks
+
+              - `:"claude-opus-4-20250514"`
+
+                Powerful model for complex tasks
+
+              - `:"claude-sonnet-4-0"`
+
+                High-performance model with extended thinking
+
+              - `:"claude-sonnet-4-20250514"`
+
+                High-performance model with extended thinking
+
+              - `:"claude-3-haiku-20240307"`
+
+                Fast and cost-effective model
+
+            - `String = String`
+
+        - `to: BetaFallbackInfoParam`
+
+          Identifies one hop of a fallback transition.
+
+        - `type: :fallback`
+
+          - `:fallback`
+
   - `role: :user | :assistant | :system`
 
     - `:user`
@@ -6503,86 +6912,6 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
   The model that will complete your prompt.
 
   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-  - `Model = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-mythos-preview" | 15 more`
-
-    The model that will complete your prompt.
-
-    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-    - `:"claude-opus-4-8"`
-
-      Frontier intelligence for long-running agents and coding
-
-    - `:"claude-opus-4-7"`
-
-      Frontier intelligence for long-running agents and coding
-
-    - `:"claude-mythos-preview"`
-
-      New class of intelligence, strongest in coding and cybersecurity
-
-    - `:"claude-opus-4-6"`
-
-      Frontier intelligence for long-running agents and coding
-
-    - `:"claude-sonnet-4-6"`
-
-      Best combination of speed and intelligence
-
-    - `:"claude-haiku-4-5"`
-
-      Fastest model with near-frontier intelligence
-
-    - `:"claude-haiku-4-5-20251001"`
-
-      Fastest model with near-frontier intelligence
-
-    - `:"claude-opus-4-5"`
-
-      Premium model combining maximum intelligence with practical performance
-
-    - `:"claude-opus-4-5-20251101"`
-
-      Premium model combining maximum intelligence with practical performance
-
-    - `:"claude-sonnet-4-5"`
-
-      High-performance model for agents and coding
-
-    - `:"claude-sonnet-4-5-20250929"`
-
-      High-performance model for agents and coding
-
-    - `:"claude-opus-4-1"`
-
-      Exceptional model for specialized complex tasks
-
-    - `:"claude-opus-4-1-20250805"`
-
-      Exceptional model for specialized complex tasks
-
-    - `:"claude-opus-4-0"`
-
-      Powerful model for complex tasks
-
-    - `:"claude-opus-4-20250514"`
-
-      Powerful model for complex tasks
-
-    - `:"claude-sonnet-4-0"`
-
-      High-performance model with extended thinking
-
-    - `:"claude-sonnet-4-20250514"`
-
-      High-performance model with extended thinking
-
-    - `:"claude-3-haiku-20240307"`
-
-      Fast and cost-effective model
-
-  - `String = String`
 
 - `cache_control: BetaCacheControlEphemeral`
 
@@ -7872,6 +8201,10 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
+    - `max_tokens: Integer`
+
+      Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the server also emits a remaining-tokens budget block in the advisor's prompt so the advisor self-shapes toward the cap. When omitted, the advisor model's default output cap applies and no budget block is emitted.
+
     - `max_uses: Integer`
 
       Maximum number of times the tool can be used in the API request.
@@ -7993,7 +8326,7 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -8046,6 +8379,10 @@ Learn more about token counting in our [user guide](https://docs.claude.com/en/d
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
 
 ### Returns
 
@@ -8127,11 +8464,19 @@ puts(beta_message_tokens_count)
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-    - `Model = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-mythos-preview" | 15 more`
+    - `Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more`
 
       The model that will complete your prompt.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `:"claude-fable-5"`
+
+        Next generation of intelligence for the hardest knowledge work and coding problems
+
+      - `:"claude-mythos-5"`
+
+        Most capable model for cybersecurity and biology research
 
       - `:"claude-opus-4-8"`
 
@@ -8283,11 +8628,19 @@ puts(beta_message_tokens_count)
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-    - `Model = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-mythos-preview" | 15 more`
+    - `Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more`
 
       The model that will complete your prompt.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `:"claude-fable-5"`
+
+        Next generation of intelligence for the hardest knowledge work and coding problems
+
+      - `:"claude-mythos-5"`
+
+        Most capable model for cybersecurity and biology research
 
       - `:"claude-opus-4-8"`
 
@@ -8414,6 +8767,10 @@ puts(beta_message_tokens_count)
 
     If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
+  - `max_tokens: Integer`
+
+    Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the server also emits a remaining-tokens budget block in the advisor's prompt so the advisor self-shapes toward the cap. When omitted, the advisor model's default output cap applies and no budget block is emitted.
+
   - `max_uses: Integer`
 
     Maximum number of times the tool can be used in the API request.
@@ -8430,7 +8787,7 @@ puts(beta_message_tokens_count)
 
     - `class BetaAdvisorToolResultError`
 
-      - `error_code: :max_uses_exceeded | :prompt_too_long | :too_many_requests | 3 more`
+      - `error_code: :max_uses_exceeded | :prompt_too_long | :too_many_requests | 4 more`
 
         - `:max_uses_exceeded`
 
@@ -8443,6 +8800,8 @@ puts(beta_message_tokens_count)
         - `:unavailable`
 
         - `:execution_time_exceeded`
+
+        - `:model_not_found`
 
       - `type: :advisor_tool_result_error`
 
@@ -8488,7 +8847,7 @@ puts(beta_message_tokens_count)
 
     - `class BetaAdvisorToolResultErrorParam`
 
-      - `error_code: :max_uses_exceeded | :prompt_too_long | :too_many_requests | 3 more`
+      - `error_code: :max_uses_exceeded | :prompt_too_long | :too_many_requests | 4 more`
 
         - `:max_uses_exceeded`
 
@@ -8501,6 +8860,8 @@ puts(beta_message_tokens_count)
         - `:unavailable`
 
         - `:execution_time_exceeded`
+
+        - `:model_not_found`
 
       - `type: :advisor_tool_result_error`
 
@@ -8561,7 +8922,7 @@ puts(beta_message_tokens_count)
 
 - `class BetaAdvisorToolResultError`
 
-  - `error_code: :max_uses_exceeded | :prompt_too_long | :too_many_requests | 3 more`
+  - `error_code: :max_uses_exceeded | :prompt_too_long | :too_many_requests | 4 more`
 
     - `:max_uses_exceeded`
 
@@ -8574,6 +8935,8 @@ puts(beta_message_tokens_count)
     - `:unavailable`
 
     - `:execution_time_exceeded`
+
+    - `:model_not_found`
 
   - `type: :advisor_tool_result_error`
 
@@ -8583,7 +8946,7 @@ puts(beta_message_tokens_count)
 
 - `class BetaAdvisorToolResultErrorParam`
 
-  - `error_code: :max_uses_exceeded | :prompt_too_long | :too_many_requests | 3 more`
+  - `error_code: :max_uses_exceeded | :prompt_too_long | :too_many_requests | 4 more`
 
     - `:max_uses_exceeded`
 
@@ -8596,6 +8959,8 @@ puts(beta_message_tokens_count)
     - `:unavailable`
 
     - `:execution_time_exceeded`
+
+    - `:model_not_found`
 
   - `type: :advisor_tool_result_error`
 
@@ -10292,7 +10657,7 @@ puts(beta_message_tokens_count)
 
 ### Beta Content Block
 
-- `BetaContentBlock = BetaTextBlock | BetaThinkingBlock | BetaRedactedThinkingBlock | 13 more`
+- `BetaContentBlock = BetaTextBlock | BetaThinkingBlock | BetaRedactedThinkingBlock | 14 more`
 
   Response model for a file uploaded to the container.
 
@@ -10692,7 +11057,7 @@ puts(beta_message_tokens_count)
 
       - `class BetaAdvisorToolResultError`
 
-        - `error_code: :max_uses_exceeded | :prompt_too_long | :too_many_requests | 3 more`
+        - `error_code: :max_uses_exceeded | :prompt_too_long | :too_many_requests | 4 more`
 
           - `:max_uses_exceeded`
 
@@ -10705,6 +11070,8 @@ puts(beta_message_tokens_count)
           - `:unavailable`
 
           - `:execution_time_exceeded`
+
+          - `:model_not_found`
 
         - `type: :advisor_tool_result_error`
 
@@ -11050,9 +11417,129 @@ puts(beta_message_tokens_count)
 
       - `:compaction`
 
+  - `class BetaFallbackBlock`
+
+    Marks the point in `content` where one model's output gives way to the next.
+
+    One block appears per hop where a preceding model actually ran this turn and
+    declined. A turn routed directly by the sticky decision has no such boundary
+    and carries no block — the signal for whether a fallback model served the
+    response is the presence of a `fallback_message` entry in
+    `usage.iterations`, not this block.
+
+    The block is treated like a server-tool content block for streaming: it
+    arrives via the standard `content_block_start` / `content_block_stop`
+    pair and carries no deltas.
+
+    - `from: BetaFallbackInfo`
+
+      The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
+
+      - `model: Model`
+
+        The model that will complete your prompt.
+
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more`
+
+          The model that will complete your prompt.
+
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `:"claude-fable-5"`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
+
+          - `:"claude-mythos-5"`
+
+            Most capable model for cybersecurity and biology research
+
+          - `:"claude-opus-4-8"`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `:"claude-opus-4-7"`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `:"claude-mythos-preview"`
+
+            New class of intelligence, strongest in coding and cybersecurity
+
+          - `:"claude-opus-4-6"`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `:"claude-sonnet-4-6"`
+
+            Best combination of speed and intelligence
+
+          - `:"claude-haiku-4-5"`
+
+            Fastest model with near-frontier intelligence
+
+          - `:"claude-haiku-4-5-20251001"`
+
+            Fastest model with near-frontier intelligence
+
+          - `:"claude-opus-4-5"`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `:"claude-opus-4-5-20251101"`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `:"claude-sonnet-4-5"`
+
+            High-performance model for agents and coding
+
+          - `:"claude-sonnet-4-5-20250929"`
+
+            High-performance model for agents and coding
+
+          - `:"claude-opus-4-1"`
+
+            Exceptional model for specialized complex tasks
+
+          - `:"claude-opus-4-1-20250805"`
+
+            Exceptional model for specialized complex tasks
+
+          - `:"claude-opus-4-0"`
+
+            Powerful model for complex tasks
+
+          - `:"claude-opus-4-20250514"`
+
+            Powerful model for complex tasks
+
+          - `:"claude-sonnet-4-0"`
+
+            High-performance model with extended thinking
+
+          - `:"claude-sonnet-4-20250514"`
+
+            High-performance model with extended thinking
+
+          - `:"claude-3-haiku-20240307"`
+
+            Fast and cost-effective model
+
+        - `String = String`
+
+    - `to: BetaFallbackInfo`
+
+      The fallback model producing the content that follows this block. Its `model` is always the canonical id.
+
+    - `type: :fallback`
+
+      - `:fallback`
+
 ### Beta Content Block Param
 
-- `BetaContentBlockParam = BetaTextBlockParam | BetaImageBlockParam | BetaRequestDocumentBlock | 18 more`
+- `BetaContentBlockParam = BetaTextBlockParam | BetaImageBlockParam | BetaRequestDocumentBlock | 19 more`
 
   Regular text content.
 
@@ -11633,7 +12120,7 @@ puts(beta_message_tokens_count)
 
       - `class BetaAdvisorToolResultErrorParam`
 
-        - `error_code: :max_uses_exceeded | :prompt_too_long | :too_many_requests | 3 more`
+        - `error_code: :max_uses_exceeded | :prompt_too_long | :too_many_requests | 4 more`
 
           - `:max_uses_exceeded`
 
@@ -11646,6 +12133,8 @@ puts(beta_message_tokens_count)
           - `:unavailable`
 
           - `:execution_time_exceeded`
+
+          - `:model_not_found`
 
         - `type: :advisor_tool_result_error`
 
@@ -11907,6 +12396,8 @@ puts(beta_message_tokens_count)
 
           - `:tool_search_tool_result_error`
 
+        - `error_message: String`
+
       - `class BetaToolSearchToolSearchResultBlockParam`
 
         - `tool_references: Array[BetaToolReferenceBlockParam]`
@@ -12052,6 +12543,130 @@ puts(beta_message_tokens_count)
     - `cache_control: BetaCacheControlEphemeral`
 
       Create a cache control breakpoint at this content block.
+
+  - `class BetaFallbackBlockParam`
+
+    A `fallback` block echoed back from a prior response.
+
+    Accepted in `messages[].content` and never rendered into the prompt,
+    not validated against the request's `fallbacks` chain or top-level
+    `model`, and stripped before the sticky-routing cache key is computed.
+
+    Callers should echo the assistant turn verbatim — block included. The
+    block's position is load-bearing for thinking verification: the thinking
+    runs on either side of a fallback hop carry independently-rooted
+    verification hash chains, and this block is the only record of where one
+    chain ends and the next begins. When thinking runs flank the boundary,
+    omitting the block merges the runs into one contiguous span whose hashes
+    cannot verify (the request is rejected), and moving it into the middle of
+    a single run splits that run's chain and is likewise rejected; between
+    non-thinking blocks the block's placement has no verification effect.
+
+    - `from: BetaFallbackInfoParam`
+
+      Identifies one hop of a fallback transition.
+
+      - `model: Model`
+
+        The model that will complete your prompt.
+
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more`
+
+          The model that will complete your prompt.
+
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `:"claude-fable-5"`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
+
+          - `:"claude-mythos-5"`
+
+            Most capable model for cybersecurity and biology research
+
+          - `:"claude-opus-4-8"`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `:"claude-opus-4-7"`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `:"claude-mythos-preview"`
+
+            New class of intelligence, strongest in coding and cybersecurity
+
+          - `:"claude-opus-4-6"`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `:"claude-sonnet-4-6"`
+
+            Best combination of speed and intelligence
+
+          - `:"claude-haiku-4-5"`
+
+            Fastest model with near-frontier intelligence
+
+          - `:"claude-haiku-4-5-20251001"`
+
+            Fastest model with near-frontier intelligence
+
+          - `:"claude-opus-4-5"`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `:"claude-opus-4-5-20251101"`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `:"claude-sonnet-4-5"`
+
+            High-performance model for agents and coding
+
+          - `:"claude-sonnet-4-5-20250929"`
+
+            High-performance model for agents and coding
+
+          - `:"claude-opus-4-1"`
+
+            Exceptional model for specialized complex tasks
+
+          - `:"claude-opus-4-1-20250805"`
+
+            Exceptional model for specialized complex tasks
+
+          - `:"claude-opus-4-0"`
+
+            Powerful model for complex tasks
+
+          - `:"claude-opus-4-20250514"`
+
+            Powerful model for complex tasks
+
+          - `:"claude-sonnet-4-0"`
+
+            High-performance model with extended thinking
+
+          - `:"claude-sonnet-4-20250514"`
+
+            High-performance model with extended thinking
+
+          - `:"claude-3-haiku-20240307"`
+
+            Fast and cost-effective model
+
+        - `String = String`
+
+    - `to: BetaFallbackInfoParam`
+
+      Identifies one hop of a fallback transition.
+
+    - `type: :fallback`
+
+      - `:fallback`
 
 ### Beta Content Block Source
 
@@ -12775,6 +13390,796 @@ puts(beta_message_tokens_count)
 
     - `:encrypted_code_execution_result`
 
+### Beta Fallback Block
+
+- `class BetaFallbackBlock`
+
+  Marks the point in `content` where one model's output gives way to the next.
+
+  One block appears per hop where a preceding model actually ran this turn and
+  declined. A turn routed directly by the sticky decision has no such boundary
+  and carries no block — the signal for whether a fallback model served the
+  response is the presence of a `fallback_message` entry in
+  `usage.iterations`, not this block.
+
+  The block is treated like a server-tool content block for streaming: it
+  arrives via the standard `content_block_start` / `content_block_stop`
+  pair and carries no deltas.
+
+  - `from: BetaFallbackInfo`
+
+    The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
+
+    - `model: Model`
+
+      The model that will complete your prompt.
+
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more`
+
+        The model that will complete your prompt.
+
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `:"claude-fable-5"`
+
+          Next generation of intelligence for the hardest knowledge work and coding problems
+
+        - `:"claude-mythos-5"`
+
+          Most capable model for cybersecurity and biology research
+
+        - `:"claude-opus-4-8"`
+
+          Frontier intelligence for long-running agents and coding
+
+        - `:"claude-opus-4-7"`
+
+          Frontier intelligence for long-running agents and coding
+
+        - `:"claude-mythos-preview"`
+
+          New class of intelligence, strongest in coding and cybersecurity
+
+        - `:"claude-opus-4-6"`
+
+          Frontier intelligence for long-running agents and coding
+
+        - `:"claude-sonnet-4-6"`
+
+          Best combination of speed and intelligence
+
+        - `:"claude-haiku-4-5"`
+
+          Fastest model with near-frontier intelligence
+
+        - `:"claude-haiku-4-5-20251001"`
+
+          Fastest model with near-frontier intelligence
+
+        - `:"claude-opus-4-5"`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `:"claude-opus-4-5-20251101"`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `:"claude-sonnet-4-5"`
+
+          High-performance model for agents and coding
+
+        - `:"claude-sonnet-4-5-20250929"`
+
+          High-performance model for agents and coding
+
+        - `:"claude-opus-4-1"`
+
+          Exceptional model for specialized complex tasks
+
+        - `:"claude-opus-4-1-20250805"`
+
+          Exceptional model for specialized complex tasks
+
+        - `:"claude-opus-4-0"`
+
+          Powerful model for complex tasks
+
+        - `:"claude-opus-4-20250514"`
+
+          Powerful model for complex tasks
+
+        - `:"claude-sonnet-4-0"`
+
+          High-performance model with extended thinking
+
+        - `:"claude-sonnet-4-20250514"`
+
+          High-performance model with extended thinking
+
+        - `:"claude-3-haiku-20240307"`
+
+          Fast and cost-effective model
+
+      - `String = String`
+
+  - `to: BetaFallbackInfo`
+
+    The fallback model producing the content that follows this block. Its `model` is always the canonical id.
+
+  - `type: :fallback`
+
+    - `:fallback`
+
+### Beta Fallback Block Param
+
+- `class BetaFallbackBlockParam`
+
+  A `fallback` block echoed back from a prior response.
+
+  Accepted in `messages[].content` and never rendered into the prompt,
+  not validated against the request's `fallbacks` chain or top-level
+  `model`, and stripped before the sticky-routing cache key is computed.
+
+  Callers should echo the assistant turn verbatim — block included. The
+  block's position is load-bearing for thinking verification: the thinking
+  runs on either side of a fallback hop carry independently-rooted
+  verification hash chains, and this block is the only record of where one
+  chain ends and the next begins. When thinking runs flank the boundary,
+  omitting the block merges the runs into one contiguous span whose hashes
+  cannot verify (the request is rejected), and moving it into the middle of
+  a single run splits that run's chain and is likewise rejected; between
+  non-thinking blocks the block's placement has no verification effect.
+
+  - `from: BetaFallbackInfoParam`
+
+    Identifies one hop of a fallback transition.
+
+    - `model: Model`
+
+      The model that will complete your prompt.
+
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more`
+
+        The model that will complete your prompt.
+
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `:"claude-fable-5"`
+
+          Next generation of intelligence for the hardest knowledge work and coding problems
+
+        - `:"claude-mythos-5"`
+
+          Most capable model for cybersecurity and biology research
+
+        - `:"claude-opus-4-8"`
+
+          Frontier intelligence for long-running agents and coding
+
+        - `:"claude-opus-4-7"`
+
+          Frontier intelligence for long-running agents and coding
+
+        - `:"claude-mythos-preview"`
+
+          New class of intelligence, strongest in coding and cybersecurity
+
+        - `:"claude-opus-4-6"`
+
+          Frontier intelligence for long-running agents and coding
+
+        - `:"claude-sonnet-4-6"`
+
+          Best combination of speed and intelligence
+
+        - `:"claude-haiku-4-5"`
+
+          Fastest model with near-frontier intelligence
+
+        - `:"claude-haiku-4-5-20251001"`
+
+          Fastest model with near-frontier intelligence
+
+        - `:"claude-opus-4-5"`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `:"claude-opus-4-5-20251101"`
+
+          Premium model combining maximum intelligence with practical performance
+
+        - `:"claude-sonnet-4-5"`
+
+          High-performance model for agents and coding
+
+        - `:"claude-sonnet-4-5-20250929"`
+
+          High-performance model for agents and coding
+
+        - `:"claude-opus-4-1"`
+
+          Exceptional model for specialized complex tasks
+
+        - `:"claude-opus-4-1-20250805"`
+
+          Exceptional model for specialized complex tasks
+
+        - `:"claude-opus-4-0"`
+
+          Powerful model for complex tasks
+
+        - `:"claude-opus-4-20250514"`
+
+          Powerful model for complex tasks
+
+        - `:"claude-sonnet-4-0"`
+
+          High-performance model with extended thinking
+
+        - `:"claude-sonnet-4-20250514"`
+
+          High-performance model with extended thinking
+
+        - `:"claude-3-haiku-20240307"`
+
+          Fast and cost-effective model
+
+      - `String = String`
+
+  - `to: BetaFallbackInfoParam`
+
+    Identifies one hop of a fallback transition.
+
+  - `type: :fallback`
+
+    - `:fallback`
+
+### Beta Fallback Info
+
+- `class BetaFallbackInfo`
+
+  Identifies one hop of a fallback transition.
+
+  - `model: Model`
+
+    The model that will complete your prompt.
+
+    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more`
+
+      The model that will complete your prompt.
+
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `:"claude-fable-5"`
+
+        Next generation of intelligence for the hardest knowledge work and coding problems
+
+      - `:"claude-mythos-5"`
+
+        Most capable model for cybersecurity and biology research
+
+      - `:"claude-opus-4-8"`
+
+        Frontier intelligence for long-running agents and coding
+
+      - `:"claude-opus-4-7"`
+
+        Frontier intelligence for long-running agents and coding
+
+      - `:"claude-mythos-preview"`
+
+        New class of intelligence, strongest in coding and cybersecurity
+
+      - `:"claude-opus-4-6"`
+
+        Frontier intelligence for long-running agents and coding
+
+      - `:"claude-sonnet-4-6"`
+
+        Best combination of speed and intelligence
+
+      - `:"claude-haiku-4-5"`
+
+        Fastest model with near-frontier intelligence
+
+      - `:"claude-haiku-4-5-20251001"`
+
+        Fastest model with near-frontier intelligence
+
+      - `:"claude-opus-4-5"`
+
+        Premium model combining maximum intelligence with practical performance
+
+      - `:"claude-opus-4-5-20251101"`
+
+        Premium model combining maximum intelligence with practical performance
+
+      - `:"claude-sonnet-4-5"`
+
+        High-performance model for agents and coding
+
+      - `:"claude-sonnet-4-5-20250929"`
+
+        High-performance model for agents and coding
+
+      - `:"claude-opus-4-1"`
+
+        Exceptional model for specialized complex tasks
+
+      - `:"claude-opus-4-1-20250805"`
+
+        Exceptional model for specialized complex tasks
+
+      - `:"claude-opus-4-0"`
+
+        Powerful model for complex tasks
+
+      - `:"claude-opus-4-20250514"`
+
+        Powerful model for complex tasks
+
+      - `:"claude-sonnet-4-0"`
+
+        High-performance model with extended thinking
+
+      - `:"claude-sonnet-4-20250514"`
+
+        High-performance model with extended thinking
+
+      - `:"claude-3-haiku-20240307"`
+
+        Fast and cost-effective model
+
+    - `String = String`
+
+### Beta Fallback Info Param
+
+- `class BetaFallbackInfoParam`
+
+  Identifies one hop of a fallback transition.
+
+  - `model: Model`
+
+    The model that will complete your prompt.
+
+    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more`
+
+      The model that will complete your prompt.
+
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `:"claude-fable-5"`
+
+        Next generation of intelligence for the hardest knowledge work and coding problems
+
+      - `:"claude-mythos-5"`
+
+        Most capable model for cybersecurity and biology research
+
+      - `:"claude-opus-4-8"`
+
+        Frontier intelligence for long-running agents and coding
+
+      - `:"claude-opus-4-7"`
+
+        Frontier intelligence for long-running agents and coding
+
+      - `:"claude-mythos-preview"`
+
+        New class of intelligence, strongest in coding and cybersecurity
+
+      - `:"claude-opus-4-6"`
+
+        Frontier intelligence for long-running agents and coding
+
+      - `:"claude-sonnet-4-6"`
+
+        Best combination of speed and intelligence
+
+      - `:"claude-haiku-4-5"`
+
+        Fastest model with near-frontier intelligence
+
+      - `:"claude-haiku-4-5-20251001"`
+
+        Fastest model with near-frontier intelligence
+
+      - `:"claude-opus-4-5"`
+
+        Premium model combining maximum intelligence with practical performance
+
+      - `:"claude-opus-4-5-20251101"`
+
+        Premium model combining maximum intelligence with practical performance
+
+      - `:"claude-sonnet-4-5"`
+
+        High-performance model for agents and coding
+
+      - `:"claude-sonnet-4-5-20250929"`
+
+        High-performance model for agents and coding
+
+      - `:"claude-opus-4-1"`
+
+        Exceptional model for specialized complex tasks
+
+      - `:"claude-opus-4-1-20250805"`
+
+        Exceptional model for specialized complex tasks
+
+      - `:"claude-opus-4-0"`
+
+        Powerful model for complex tasks
+
+      - `:"claude-opus-4-20250514"`
+
+        Powerful model for complex tasks
+
+      - `:"claude-sonnet-4-0"`
+
+        High-performance model with extended thinking
+
+      - `:"claude-sonnet-4-20250514"`
+
+        High-performance model with extended thinking
+
+      - `:"claude-3-haiku-20240307"`
+
+        Fast and cost-effective model
+
+    - `String = String`
+
+### Beta Fallback Message Iteration Usage
+
+- `class BetaFallbackMessageIterationUsage`
+
+  Token usage for the fallback-model attempt of a server-side fallback request.
+
+  Produced in place of a `message` entry for whichever hop served the
+  response. A declined hop produces the existing `message` entry. Whether
+  a fallback model served the response is signalled by the presence of this
+  entry in `usage.iterations`.
+
+  - `cache_creation: BetaCacheCreation`
+
+    Breakdown of cached tokens by TTL
+
+    - `ephemeral_1h_input_tokens: Integer`
+
+      The number of input tokens used to create the 1 hour cache entry.
+
+    - `ephemeral_5m_input_tokens: Integer`
+
+      The number of input tokens used to create the 5 minute cache entry.
+
+  - `cache_creation_input_tokens: Integer`
+
+    The number of input tokens used to create the cache entry.
+
+  - `cache_read_input_tokens: Integer`
+
+    The number of input tokens read from the cache.
+
+  - `input_tokens: Integer`
+
+    The number of input tokens which were used.
+
+  - `model: Model`
+
+    The model that will complete your prompt.
+
+    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more`
+
+      The model that will complete your prompt.
+
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `:"claude-fable-5"`
+
+        Next generation of intelligence for the hardest knowledge work and coding problems
+
+      - `:"claude-mythos-5"`
+
+        Most capable model for cybersecurity and biology research
+
+      - `:"claude-opus-4-8"`
+
+        Frontier intelligence for long-running agents and coding
+
+      - `:"claude-opus-4-7"`
+
+        Frontier intelligence for long-running agents and coding
+
+      - `:"claude-mythos-preview"`
+
+        New class of intelligence, strongest in coding and cybersecurity
+
+      - `:"claude-opus-4-6"`
+
+        Frontier intelligence for long-running agents and coding
+
+      - `:"claude-sonnet-4-6"`
+
+        Best combination of speed and intelligence
+
+      - `:"claude-haiku-4-5"`
+
+        Fastest model with near-frontier intelligence
+
+      - `:"claude-haiku-4-5-20251001"`
+
+        Fastest model with near-frontier intelligence
+
+      - `:"claude-opus-4-5"`
+
+        Premium model combining maximum intelligence with practical performance
+
+      - `:"claude-opus-4-5-20251101"`
+
+        Premium model combining maximum intelligence with practical performance
+
+      - `:"claude-sonnet-4-5"`
+
+        High-performance model for agents and coding
+
+      - `:"claude-sonnet-4-5-20250929"`
+
+        High-performance model for agents and coding
+
+      - `:"claude-opus-4-1"`
+
+        Exceptional model for specialized complex tasks
+
+      - `:"claude-opus-4-1-20250805"`
+
+        Exceptional model for specialized complex tasks
+
+      - `:"claude-opus-4-0"`
+
+        Powerful model for complex tasks
+
+      - `:"claude-opus-4-20250514"`
+
+        Powerful model for complex tasks
+
+      - `:"claude-sonnet-4-0"`
+
+        High-performance model with extended thinking
+
+      - `:"claude-sonnet-4-20250514"`
+
+        High-performance model with extended thinking
+
+      - `:"claude-3-haiku-20240307"`
+
+        Fast and cost-effective model
+
+    - `String = String`
+
+  - `output_tokens: Integer`
+
+    The number of output tokens which were used.
+
+  - `type: :fallback_message`
+
+    Usage for the fallback-model attempt that served the response
+
+    - `:fallback_message`
+
+### Beta Fallback Param
+
+- `class BetaFallbackParam`
+
+  One entry in the `fallbacks` chain on a `/v1/messages` request.
+
+  `model` is required. The four override fields (`max_tokens`, `thinking`,
+  `output_config`, and `speed`) replace the corresponding top-level field
+  for this attempt only and are validated as if the request were made to
+  `model`. Any other key is rejected at parse time.
+
+  - `model: Model`
+
+    The model that will complete your prompt.
+
+    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more`
+
+      The model that will complete your prompt.
+
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `:"claude-fable-5"`
+
+        Next generation of intelligence for the hardest knowledge work and coding problems
+
+      - `:"claude-mythos-5"`
+
+        Most capable model for cybersecurity and biology research
+
+      - `:"claude-opus-4-8"`
+
+        Frontier intelligence for long-running agents and coding
+
+      - `:"claude-opus-4-7"`
+
+        Frontier intelligence for long-running agents and coding
+
+      - `:"claude-mythos-preview"`
+
+        New class of intelligence, strongest in coding and cybersecurity
+
+      - `:"claude-opus-4-6"`
+
+        Frontier intelligence for long-running agents and coding
+
+      - `:"claude-sonnet-4-6"`
+
+        Best combination of speed and intelligence
+
+      - `:"claude-haiku-4-5"`
+
+        Fastest model with near-frontier intelligence
+
+      - `:"claude-haiku-4-5-20251001"`
+
+        Fastest model with near-frontier intelligence
+
+      - `:"claude-opus-4-5"`
+
+        Premium model combining maximum intelligence with practical performance
+
+      - `:"claude-opus-4-5-20251101"`
+
+        Premium model combining maximum intelligence with practical performance
+
+      - `:"claude-sonnet-4-5"`
+
+        High-performance model for agents and coding
+
+      - `:"claude-sonnet-4-5-20250929"`
+
+        High-performance model for agents and coding
+
+      - `:"claude-opus-4-1"`
+
+        Exceptional model for specialized complex tasks
+
+      - `:"claude-opus-4-1-20250805"`
+
+        Exceptional model for specialized complex tasks
+
+      - `:"claude-opus-4-0"`
+
+        Powerful model for complex tasks
+
+      - `:"claude-opus-4-20250514"`
+
+        Powerful model for complex tasks
+
+      - `:"claude-sonnet-4-0"`
+
+        High-performance model with extended thinking
+
+      - `:"claude-sonnet-4-20250514"`
+
+        High-performance model with extended thinking
+
+      - `:"claude-3-haiku-20240307"`
+
+        Fast and cost-effective model
+
+    - `String = String`
+
+  - `max_tokens: Integer`
+
+  - `output_config: BetaOutputConfig`
+
+    - `effort: :low | :medium | :high | 2 more`
+
+      All possible effort levels.
+
+      - `:low`
+
+      - `:medium`
+
+      - `:high`
+
+      - `:xhigh`
+
+      - `:max`
+
+    - `format_: BetaJSONOutputFormat`
+
+      A schema to specify Claude's output format in responses. See [structured outputs](../build-with-claude/build-with-claude-structured-outputs.md)
+
+      - `schema: Hash[Symbol, untyped]`
+
+        The JSON schema of the format
+
+      - `type: :json_schema`
+
+        - `:json_schema`
+
+    - `task_budget: BetaTokenTaskBudget`
+
+      User-configurable total token budget across contexts.
+
+      - `total: Integer`
+
+        Total token budget across all contexts in the session.
+
+      - `type: :tokens`
+
+        The budget type. Currently only 'tokens' is supported.
+
+        - `:tokens`
+
+      - `remaining: Integer`
+
+        Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
+
+  - `speed: :standard | :fast`
+
+    - `:standard`
+
+    - `:fast`
+
+  - `thinking: BetaThinkingConfigEnabled | BetaThinkingConfigDisabled | BetaThinkingConfigAdaptive`
+
+    - `class BetaThinkingConfigEnabled`
+
+      - `budget_tokens: Integer`
+
+        Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
+
+        Must be ≥1024 and less than `max_tokens`.
+
+        See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
+
+      - `type: :enabled`
+
+        - `:enabled`
+
+      - `display_: :summarized | :omitted`
+
+        Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+
+        - `:summarized`
+
+        - `:omitted`
+
+    - `class BetaThinkingConfigDisabled`
+
+      - `type: :disabled`
+
+        - `:disabled`
+
+    - `class BetaThinkingConfigAdaptive`
+
+      - `type: :adaptive`
+
+        - `:adaptive`
+
+      - `display_: :summarized | :omitted`
+
+        Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+
+        - `:summarized`
+
+        - `:omitted`
+
 ### Beta File Document Source
 
 - `class BetaFileDocumentSource`
@@ -12894,7 +14299,7 @@ puts(beta_message_tokens_count)
 
 ### Beta Iterations Usage
 
-- `BetaIterationsUsage = Array[BetaMessageIterationUsage | BetaCompactionIterationUsage | BetaAdvisorMessageIterationUsage]`
+- `BetaIterationsUsage = Array[BetaMessageIterationUsage | BetaCompactionIterationUsage | BetaAdvisorMessageIterationUsage | BetaFallbackMessageIterationUsage]`
 
   Per-iteration token usage breakdown.
 
@@ -12932,77 +14337,25 @@ puts(beta_message_tokens_count)
 
       The number of input tokens which were used.
 
-    - `output_tokens: Integer`
-
-      The number of output tokens which were used.
-
-    - `type: :message`
-
-      Usage for a sampling iteration
-
-      - `:message`
-
-  - `class BetaCompactionIterationUsage`
-
-    Token usage for a compaction iteration.
-
-    - `cache_creation: BetaCacheCreation`
-
-      Breakdown of cached tokens by TTL
-
-    - `cache_creation_input_tokens: Integer`
-
-      The number of input tokens used to create the cache entry.
-
-    - `cache_read_input_tokens: Integer`
-
-      The number of input tokens read from the cache.
-
-    - `input_tokens: Integer`
-
-      The number of input tokens which were used.
-
-    - `output_tokens: Integer`
-
-      The number of output tokens which were used.
-
-    - `type: :compaction`
-
-      Usage for a compaction iteration
-
-      - `:compaction`
-
-  - `class BetaAdvisorMessageIterationUsage`
-
-    Token usage for an advisor sub-inference iteration.
-
-    - `cache_creation: BetaCacheCreation`
-
-      Breakdown of cached tokens by TTL
-
-    - `cache_creation_input_tokens: Integer`
-
-      The number of input tokens used to create the cache entry.
-
-    - `cache_read_input_tokens: Integer`
-
-      The number of input tokens read from the cache.
-
-    - `input_tokens: Integer`
-
-      The number of input tokens which were used.
-
     - `model: Model`
 
       The model that will complete your prompt.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `Model = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-mythos-preview" | 15 more`
+      - `Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more`
 
         The model that will complete your prompt.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `:"claude-fable-5"`
+
+          Next generation of intelligence for the hardest knowledge work and coding problems
+
+        - `:"claude-mythos-5"`
+
+          Most capable model for cybersecurity and biology research
 
         - `:"claude-opus-4-8"`
 
@@ -13082,11 +14435,118 @@ puts(beta_message_tokens_count)
 
       The number of output tokens which were used.
 
+    - `type: :message`
+
+      Usage for a sampling iteration
+
+      - `:message`
+
+  - `class BetaCompactionIterationUsage`
+
+    Token usage for a compaction iteration.
+
+    - `cache_creation: BetaCacheCreation`
+
+      Breakdown of cached tokens by TTL
+
+    - `cache_creation_input_tokens: Integer`
+
+      The number of input tokens used to create the cache entry.
+
+    - `cache_read_input_tokens: Integer`
+
+      The number of input tokens read from the cache.
+
+    - `input_tokens: Integer`
+
+      The number of input tokens which were used.
+
+    - `output_tokens: Integer`
+
+      The number of output tokens which were used.
+
+    - `type: :compaction`
+
+      Usage for a compaction iteration
+
+      - `:compaction`
+
+  - `class BetaAdvisorMessageIterationUsage`
+
+    Token usage for an advisor sub-inference iteration.
+
+    - `cache_creation: BetaCacheCreation`
+
+      Breakdown of cached tokens by TTL
+
+    - `cache_creation_input_tokens: Integer`
+
+      The number of input tokens used to create the cache entry.
+
+    - `cache_read_input_tokens: Integer`
+
+      The number of input tokens read from the cache.
+
+    - `input_tokens: Integer`
+
+      The number of input tokens which were used.
+
+    - `model: Model`
+
+      The model that will complete your prompt.
+
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `output_tokens: Integer`
+
+      The number of output tokens which were used.
+
     - `type: :advisor_message`
 
       Usage for an advisor sub-inference iteration
 
       - `:advisor_message`
+
+  - `class BetaFallbackMessageIterationUsage`
+
+    Token usage for the fallback-model attempt of a server-side fallback request.
+
+    Produced in place of a `message` entry for whichever hop served the
+    response. A declined hop produces the existing `message` entry. Whether
+    a fallback model served the response is signalled by the presence of this
+    entry in `usage.iterations`.
+
+    - `cache_creation: BetaCacheCreation`
+
+      Breakdown of cached tokens by TTL
+
+    - `cache_creation_input_tokens: Integer`
+
+      The number of input tokens used to create the cache entry.
+
+    - `cache_read_input_tokens: Integer`
+
+      The number of input tokens read from the cache.
+
+    - `input_tokens: Integer`
+
+      The number of input tokens which were used.
+
+    - `model: Model`
+
+      The model that will complete your prompt.
+
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `output_tokens: Integer`
+
+      The number of output tokens which were used.
+
+    - `type: :fallback_message`
+
+      Usage for the fallback-model attempt that served the response
+
+      - `:fallback_message`
 
 ### Beta JSON Output Format
 
@@ -14117,7 +15577,7 @@ puts(beta_message_tokens_count)
 
         - `class BetaAdvisorToolResultError`
 
-          - `error_code: :max_uses_exceeded | :prompt_too_long | :too_many_requests | 3 more`
+          - `error_code: :max_uses_exceeded | :prompt_too_long | :too_many_requests | 4 more`
 
             - `:max_uses_exceeded`
 
@@ -14130,6 +15590,8 @@ puts(beta_message_tokens_count)
             - `:unavailable`
 
             - `:execution_time_exceeded`
+
+            - `:model_not_found`
 
           - `type: :advisor_tool_result_error`
 
@@ -14475,6 +15937,126 @@ puts(beta_message_tokens_count)
 
         - `:compaction`
 
+    - `class BetaFallbackBlock`
+
+      Marks the point in `content` where one model's output gives way to the next.
+
+      One block appears per hop where a preceding model actually ran this turn and
+      declined. A turn routed directly by the sticky decision has no such boundary
+      and carries no block — the signal for whether a fallback model served the
+      response is the presence of a `fallback_message` entry in
+      `usage.iterations`, not this block.
+
+      The block is treated like a server-tool content block for streaming: it
+      arrives via the standard `content_block_start` / `content_block_stop`
+      pair and carries no deltas.
+
+      - `from: BetaFallbackInfo`
+
+        The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
+
+        - `model: Model`
+
+          The model that will complete your prompt.
+
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more`
+
+            The model that will complete your prompt.
+
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `:"claude-fable-5"`
+
+              Next generation of intelligence for the hardest knowledge work and coding problems
+
+            - `:"claude-mythos-5"`
+
+              Most capable model for cybersecurity and biology research
+
+            - `:"claude-opus-4-8"`
+
+              Frontier intelligence for long-running agents and coding
+
+            - `:"claude-opus-4-7"`
+
+              Frontier intelligence for long-running agents and coding
+
+            - `:"claude-mythos-preview"`
+
+              New class of intelligence, strongest in coding and cybersecurity
+
+            - `:"claude-opus-4-6"`
+
+              Frontier intelligence for long-running agents and coding
+
+            - `:"claude-sonnet-4-6"`
+
+              Best combination of speed and intelligence
+
+            - `:"claude-haiku-4-5"`
+
+              Fastest model with near-frontier intelligence
+
+            - `:"claude-haiku-4-5-20251001"`
+
+              Fastest model with near-frontier intelligence
+
+            - `:"claude-opus-4-5"`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `:"claude-opus-4-5-20251101"`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `:"claude-sonnet-4-5"`
+
+              High-performance model for agents and coding
+
+            - `:"claude-sonnet-4-5-20250929"`
+
+              High-performance model for agents and coding
+
+            - `:"claude-opus-4-1"`
+
+              Exceptional model for specialized complex tasks
+
+            - `:"claude-opus-4-1-20250805"`
+
+              Exceptional model for specialized complex tasks
+
+            - `:"claude-opus-4-0"`
+
+              Powerful model for complex tasks
+
+            - `:"claude-opus-4-20250514"`
+
+              Powerful model for complex tasks
+
+            - `:"claude-sonnet-4-0"`
+
+              High-performance model with extended thinking
+
+            - `:"claude-sonnet-4-20250514"`
+
+              High-performance model with extended thinking
+
+            - `:"claude-3-haiku-20240307"`
+
+              Fast and cost-effective model
+
+          - `String = String`
+
+      - `to: BetaFallbackInfo`
+
+        The fallback model producing the content that follows this block. Its `model` is always the canonical id.
+
+      - `type: :fallback`
+
+        - `:fallback`
+
   - `context_management: BetaContextManagementResponse`
 
     Context management response.
@@ -14584,86 +16166,6 @@ puts(beta_message_tokens_count)
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-    - `Model = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-mythos-preview" | 15 more`
-
-      The model that will complete your prompt.
-
-      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-      - `:"claude-opus-4-8"`
-
-        Frontier intelligence for long-running agents and coding
-
-      - `:"claude-opus-4-7"`
-
-        Frontier intelligence for long-running agents and coding
-
-      - `:"claude-mythos-preview"`
-
-        New class of intelligence, strongest in coding and cybersecurity
-
-      - `:"claude-opus-4-6"`
-
-        Frontier intelligence for long-running agents and coding
-
-      - `:"claude-sonnet-4-6"`
-
-        Best combination of speed and intelligence
-
-      - `:"claude-haiku-4-5"`
-
-        Fastest model with near-frontier intelligence
-
-      - `:"claude-haiku-4-5-20251001"`
-
-        Fastest model with near-frontier intelligence
-
-      - `:"claude-opus-4-5"`
-
-        Premium model combining maximum intelligence with practical performance
-
-      - `:"claude-opus-4-5-20251101"`
-
-        Premium model combining maximum intelligence with practical performance
-
-      - `:"claude-sonnet-4-5"`
-
-        High-performance model for agents and coding
-
-      - `:"claude-sonnet-4-5-20250929"`
-
-        High-performance model for agents and coding
-
-      - `:"claude-opus-4-1"`
-
-        Exceptional model for specialized complex tasks
-
-      - `:"claude-opus-4-1-20250805"`
-
-        Exceptional model for specialized complex tasks
-
-      - `:"claude-opus-4-0"`
-
-        Powerful model for complex tasks
-
-      - `:"claude-opus-4-20250514"`
-
-        Powerful model for complex tasks
-
-      - `:"claude-sonnet-4-0"`
-
-        High-performance model with extended thinking
-
-      - `:"claude-sonnet-4-20250514"`
-
-        High-performance model with extended thinking
-
-      - `:"claude-3-haiku-20240307"`
-
-        Fast and cost-effective model
-
-    - `String = String`
-
   - `role: :assistant`
 
     Conversational role of the generated message.
@@ -14676,7 +16178,7 @@ puts(beta_message_tokens_count)
 
     Structured information about a refusal.
 
-    - `category: :cyber | :bio`
+    - `category: :cyber | :bio | :reasoning_extraction`
 
       The policy category that triggered the refusal.
 
@@ -14686,11 +16188,62 @@ puts(beta_message_tokens_count)
 
       - `:bio`
 
+      - `:reasoning_extraction`
+
     - `explanation: String`
 
       Human-readable explanation of the refusal.
 
       This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+    - `fallback_credit_token: String`
+
+      Opaque code that refunds the cache-miss cost when retrying this refused
+      request on the fallback model. Pass it as `fallback_credit_token` on the
+      retry request. Expires 5 minutes after the refusal.
+
+      The retry is sent either with the same request body (`system`, `messages`,
+      `tools`, and other render-shaping fields), or with the same body plus one
+      appended `assistant` message whose content is the partial text (with any
+      trailing whitespace stripped from the final text block) and paired
+      server-tool blocks from this refusal — which also authorizes that
+      appended turn as an assistant-prefill continuation on models that otherwise
+      disallow prefill. A token minted mid-server-tool-loop whose partial content
+      was continuable may only be redeemed the second way — if a same-body retry
+      is rejected with a 400 saying the token must be redeemed by continuing the
+      partial response, retry the second way instead. Either way: same workspace,
+      same platform; a mismatch is a 400. Resending a token for an already-warm
+      prefix is permitted but yields no additional credit.
+
+      `null` when the refused model isn't eligible for a fallback credit.
+
+    - `fallback_has_prefill_claim: bool`
+
+      Whether the accompanying `fallback_credit_token` may be redeemed with the
+      appended-assistant retry form. Only set when `fallback_credit_token` is
+      present.
+
+      `true`: retry by resending the same request body plus one appended
+      `assistant` message whose content is this response's `content` with any
+      trailing whitespace stripped from the final text block and unpaired
+      `tool_use` blocks omitted (the same appended-turn shape described on
+      `fallback_credit_token`), with the token attached. `false`: retry by
+      resending the original request body unchanged, with the token attached —
+      the appended-assistant form is not available for this refusal (no
+      continuable partial content, or the request uses `output_format` or a
+      `tool_choice` that forces tool use). One exception: when the request used
+      `output_format` or a forced `tool_choice` and the refusal arrived after
+      server tools (including MCP connector tools) had already executed, the
+      token may not be redeemable by either retry form; if the exact-body retry
+      is then rejected with a 400 saying the token must be redeemed by
+      continuing the partial response, discard the token and retry without it.
+
+      Advisory: if an appended-assistant retry is rejected with a 400 despite
+      `true`, fall back to resending the original request body with the token.
+
+    - `recommended_model: String`
+
+      The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
     - `type: :refusal`
 
@@ -14811,6 +16364,12 @@ puts(beta_message_tokens_count)
 
           The number of input tokens which were used.
 
+        - `model: Model`
+
+          The model that will complete your prompt.
+
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
         - `output_tokens: Integer`
 
           The number of output tokens which were used.
@@ -14886,6 +16445,47 @@ puts(beta_message_tokens_count)
           Usage for an advisor sub-inference iteration
 
           - `:advisor_message`
+
+      - `class BetaFallbackMessageIterationUsage`
+
+        Token usage for the fallback-model attempt of a server-side fallback request.
+
+        Produced in place of a `message` entry for whichever hop served the
+        response. A declined hop produces the existing `message` entry. Whether
+        a fallback model served the response is signalled by the presence of this
+        entry in `usage.iterations`.
+
+        - `cache_creation: BetaCacheCreation`
+
+          Breakdown of cached tokens by TTL
+
+        - `cache_creation_input_tokens: Integer`
+
+          The number of input tokens used to create the cache entry.
+
+        - `cache_read_input_tokens: Integer`
+
+          The number of input tokens read from the cache.
+
+        - `input_tokens: Integer`
+
+          The number of input tokens which were used.
+
+        - `model: Model`
+
+          The model that will complete your prompt.
+
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `output_tokens: Integer`
+
+          The number of output tokens which were used.
+
+        - `type: :fallback_message`
+
+          Usage for the fallback-model attempt that served the response
+
+          - `:fallback_message`
 
     - `output_tokens: Integer`
 
@@ -14995,77 +16595,25 @@ puts(beta_message_tokens_count)
 
         The number of input tokens which were used.
 
-      - `output_tokens: Integer`
-
-        The number of output tokens which were used.
-
-      - `type: :message`
-
-        Usage for a sampling iteration
-
-        - `:message`
-
-    - `class BetaCompactionIterationUsage`
-
-      Token usage for a compaction iteration.
-
-      - `cache_creation: BetaCacheCreation`
-
-        Breakdown of cached tokens by TTL
-
-      - `cache_creation_input_tokens: Integer`
-
-        The number of input tokens used to create the cache entry.
-
-      - `cache_read_input_tokens: Integer`
-
-        The number of input tokens read from the cache.
-
-      - `input_tokens: Integer`
-
-        The number of input tokens which were used.
-
-      - `output_tokens: Integer`
-
-        The number of output tokens which were used.
-
-      - `type: :compaction`
-
-        Usage for a compaction iteration
-
-        - `:compaction`
-
-    - `class BetaAdvisorMessageIterationUsage`
-
-      Token usage for an advisor sub-inference iteration.
-
-      - `cache_creation: BetaCacheCreation`
-
-        Breakdown of cached tokens by TTL
-
-      - `cache_creation_input_tokens: Integer`
-
-        The number of input tokens used to create the cache entry.
-
-      - `cache_read_input_tokens: Integer`
-
-        The number of input tokens read from the cache.
-
-      - `input_tokens: Integer`
-
-        The number of input tokens which were used.
-
       - `model: Model`
 
         The model that will complete your prompt.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-        - `Model = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-mythos-preview" | 15 more`
+        - `Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more`
 
           The model that will complete your prompt.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `:"claude-fable-5"`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
+
+          - `:"claude-mythos-5"`
+
+            Most capable model for cybersecurity and biology research
 
           - `:"claude-opus-4-8"`
 
@@ -15145,11 +16693,118 @@ puts(beta_message_tokens_count)
 
         The number of output tokens which were used.
 
+      - `type: :message`
+
+        Usage for a sampling iteration
+
+        - `:message`
+
+    - `class BetaCompactionIterationUsage`
+
+      Token usage for a compaction iteration.
+
+      - `cache_creation: BetaCacheCreation`
+
+        Breakdown of cached tokens by TTL
+
+      - `cache_creation_input_tokens: Integer`
+
+        The number of input tokens used to create the cache entry.
+
+      - `cache_read_input_tokens: Integer`
+
+        The number of input tokens read from the cache.
+
+      - `input_tokens: Integer`
+
+        The number of input tokens which were used.
+
+      - `output_tokens: Integer`
+
+        The number of output tokens which were used.
+
+      - `type: :compaction`
+
+        Usage for a compaction iteration
+
+        - `:compaction`
+
+    - `class BetaAdvisorMessageIterationUsage`
+
+      Token usage for an advisor sub-inference iteration.
+
+      - `cache_creation: BetaCacheCreation`
+
+        Breakdown of cached tokens by TTL
+
+      - `cache_creation_input_tokens: Integer`
+
+        The number of input tokens used to create the cache entry.
+
+      - `cache_read_input_tokens: Integer`
+
+        The number of input tokens read from the cache.
+
+      - `input_tokens: Integer`
+
+        The number of input tokens which were used.
+
+      - `model: Model`
+
+        The model that will complete your prompt.
+
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `output_tokens: Integer`
+
+        The number of output tokens which were used.
+
       - `type: :advisor_message`
 
         Usage for an advisor sub-inference iteration
 
         - `:advisor_message`
+
+    - `class BetaFallbackMessageIterationUsage`
+
+      Token usage for the fallback-model attempt of a server-side fallback request.
+
+      Produced in place of a `message` entry for whichever hop served the
+      response. A declined hop produces the existing `message` entry. Whether
+      a fallback model served the response is signalled by the presence of this
+      entry in `usage.iterations`.
+
+      - `cache_creation: BetaCacheCreation`
+
+        Breakdown of cached tokens by TTL
+
+      - `cache_creation_input_tokens: Integer`
+
+        The number of input tokens used to create the cache entry.
+
+      - `cache_read_input_tokens: Integer`
+
+        The number of input tokens read from the cache.
+
+      - `input_tokens: Integer`
+
+        The number of input tokens which were used.
+
+      - `model: Model`
+
+        The model that will complete your prompt.
+
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `output_tokens: Integer`
+
+        The number of output tokens which were used.
+
+      - `type: :fallback_message`
+
+        Usage for the fallback-model attempt that served the response
+
+        - `:fallback_message`
 
   - `output_tokens: Integer`
 
@@ -15216,6 +16871,100 @@ puts(beta_message_tokens_count)
   - `input_tokens: Integer`
 
     The number of input tokens which were used.
+
+  - `model: Model`
+
+    The model that will complete your prompt.
+
+    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more`
+
+      The model that will complete your prompt.
+
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `:"claude-fable-5"`
+
+        Next generation of intelligence for the hardest knowledge work and coding problems
+
+      - `:"claude-mythos-5"`
+
+        Most capable model for cybersecurity and biology research
+
+      - `:"claude-opus-4-8"`
+
+        Frontier intelligence for long-running agents and coding
+
+      - `:"claude-opus-4-7"`
+
+        Frontier intelligence for long-running agents and coding
+
+      - `:"claude-mythos-preview"`
+
+        New class of intelligence, strongest in coding and cybersecurity
+
+      - `:"claude-opus-4-6"`
+
+        Frontier intelligence for long-running agents and coding
+
+      - `:"claude-sonnet-4-6"`
+
+        Best combination of speed and intelligence
+
+      - `:"claude-haiku-4-5"`
+
+        Fastest model with near-frontier intelligence
+
+      - `:"claude-haiku-4-5-20251001"`
+
+        Fastest model with near-frontier intelligence
+
+      - `:"claude-opus-4-5"`
+
+        Premium model combining maximum intelligence with practical performance
+
+      - `:"claude-opus-4-5-20251101"`
+
+        Premium model combining maximum intelligence with practical performance
+
+      - `:"claude-sonnet-4-5"`
+
+        High-performance model for agents and coding
+
+      - `:"claude-sonnet-4-5-20250929"`
+
+        High-performance model for agents and coding
+
+      - `:"claude-opus-4-1"`
+
+        Exceptional model for specialized complex tasks
+
+      - `:"claude-opus-4-1-20250805"`
+
+        Exceptional model for specialized complex tasks
+
+      - `:"claude-opus-4-0"`
+
+        Powerful model for complex tasks
+
+      - `:"claude-opus-4-20250514"`
+
+        Powerful model for complex tasks
+
+      - `:"claude-sonnet-4-0"`
+
+        High-performance model with extended thinking
+
+      - `:"claude-sonnet-4-20250514"`
+
+        High-performance model with extended thinking
+
+      - `:"claude-3-haiku-20240307"`
+
+        Fast and cost-effective model
+
+    - `String = String`
 
   - `output_tokens: Integer`
 
@@ -15814,7 +17563,7 @@ puts(beta_message_tokens_count)
 
           - `class BetaAdvisorToolResultErrorParam`
 
-            - `error_code: :max_uses_exceeded | :prompt_too_long | :too_many_requests | 3 more`
+            - `error_code: :max_uses_exceeded | :prompt_too_long | :too_many_requests | 4 more`
 
               - `:max_uses_exceeded`
 
@@ -15827,6 +17576,8 @@ puts(beta_message_tokens_count)
               - `:unavailable`
 
               - `:execution_time_exceeded`
+
+              - `:model_not_found`
 
             - `type: :advisor_tool_result_error`
 
@@ -16088,6 +17839,8 @@ puts(beta_message_tokens_count)
 
               - `:tool_search_tool_result_error`
 
+            - `error_message: String`
+
           - `class BetaToolSearchToolSearchResultBlockParam`
 
             - `tool_references: Array[BetaToolReferenceBlockParam]`
@@ -16233,6 +17986,130 @@ puts(beta_message_tokens_count)
         - `cache_control: BetaCacheControlEphemeral`
 
           Create a cache control breakpoint at this content block.
+
+      - `class BetaFallbackBlockParam`
+
+        A `fallback` block echoed back from a prior response.
+
+        Accepted in `messages[].content` and never rendered into the prompt,
+        not validated against the request's `fallbacks` chain or top-level
+        `model`, and stripped before the sticky-routing cache key is computed.
+
+        Callers should echo the assistant turn verbatim — block included. The
+        block's position is load-bearing for thinking verification: the thinking
+        runs on either side of a fallback hop carry independently-rooted
+        verification hash chains, and this block is the only record of where one
+        chain ends and the next begins. When thinking runs flank the boundary,
+        omitting the block merges the runs into one contiguous span whose hashes
+        cannot verify (the request is rejected), and moving it into the middle of
+        a single run splits that run's chain and is likewise rejected; between
+        non-thinking blocks the block's placement has no verification effect.
+
+        - `from: BetaFallbackInfoParam`
+
+          Identifies one hop of a fallback transition.
+
+          - `model: Model`
+
+            The model that will complete your prompt.
+
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more`
+
+              The model that will complete your prompt.
+
+              See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+              - `:"claude-fable-5"`
+
+                Next generation of intelligence for the hardest knowledge work and coding problems
+
+              - `:"claude-mythos-5"`
+
+                Most capable model for cybersecurity and biology research
+
+              - `:"claude-opus-4-8"`
+
+                Frontier intelligence for long-running agents and coding
+
+              - `:"claude-opus-4-7"`
+
+                Frontier intelligence for long-running agents and coding
+
+              - `:"claude-mythos-preview"`
+
+                New class of intelligence, strongest in coding and cybersecurity
+
+              - `:"claude-opus-4-6"`
+
+                Frontier intelligence for long-running agents and coding
+
+              - `:"claude-sonnet-4-6"`
+
+                Best combination of speed and intelligence
+
+              - `:"claude-haiku-4-5"`
+
+                Fastest model with near-frontier intelligence
+
+              - `:"claude-haiku-4-5-20251001"`
+
+                Fastest model with near-frontier intelligence
+
+              - `:"claude-opus-4-5"`
+
+                Premium model combining maximum intelligence with practical performance
+
+              - `:"claude-opus-4-5-20251101"`
+
+                Premium model combining maximum intelligence with practical performance
+
+              - `:"claude-sonnet-4-5"`
+
+                High-performance model for agents and coding
+
+              - `:"claude-sonnet-4-5-20250929"`
+
+                High-performance model for agents and coding
+
+              - `:"claude-opus-4-1"`
+
+                Exceptional model for specialized complex tasks
+
+              - `:"claude-opus-4-1-20250805"`
+
+                Exceptional model for specialized complex tasks
+
+              - `:"claude-opus-4-0"`
+
+                Powerful model for complex tasks
+
+              - `:"claude-opus-4-20250514"`
+
+                Powerful model for complex tasks
+
+              - `:"claude-sonnet-4-0"`
+
+                High-performance model with extended thinking
+
+              - `:"claude-sonnet-4-20250514"`
+
+                High-performance model with extended thinking
+
+              - `:"claude-3-haiku-20240307"`
+
+                Fast and cost-effective model
+
+            - `String = String`
+
+        - `to: BetaFallbackInfoParam`
+
+          Identifies one hop of a fallback transition.
+
+        - `type: :fallback`
+
+          - `:fallback`
 
   - `role: :user | :assistant | :system`
 
@@ -16853,7 +18730,7 @@ puts(beta_message_tokens_count)
 
 - `class BetaRawContentBlockStartEvent`
 
-  - `content_block: BetaTextBlock | BetaThinkingBlock | BetaRedactedThinkingBlock | 13 more`
+  - `content_block: BetaTextBlock | BetaThinkingBlock | BetaRedactedThinkingBlock | 14 more`
 
     Response model for a file uploaded to the container.
 
@@ -17253,7 +19130,7 @@ puts(beta_message_tokens_count)
 
         - `class BetaAdvisorToolResultError`
 
-          - `error_code: :max_uses_exceeded | :prompt_too_long | :too_many_requests | 3 more`
+          - `error_code: :max_uses_exceeded | :prompt_too_long | :too_many_requests | 4 more`
 
             - `:max_uses_exceeded`
 
@@ -17266,6 +19143,8 @@ puts(beta_message_tokens_count)
             - `:unavailable`
 
             - `:execution_time_exceeded`
+
+            - `:model_not_found`
 
           - `type: :advisor_tool_result_error`
 
@@ -17611,6 +19490,126 @@ puts(beta_message_tokens_count)
 
         - `:compaction`
 
+    - `class BetaFallbackBlock`
+
+      Marks the point in `content` where one model's output gives way to the next.
+
+      One block appears per hop where a preceding model actually ran this turn and
+      declined. A turn routed directly by the sticky decision has no such boundary
+      and carries no block — the signal for whether a fallback model served the
+      response is the presence of a `fallback_message` entry in
+      `usage.iterations`, not this block.
+
+      The block is treated like a server-tool content block for streaming: it
+      arrives via the standard `content_block_start` / `content_block_stop`
+      pair and carries no deltas.
+
+      - `from: BetaFallbackInfo`
+
+        The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
+
+        - `model: Model`
+
+          The model that will complete your prompt.
+
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more`
+
+            The model that will complete your prompt.
+
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `:"claude-fable-5"`
+
+              Next generation of intelligence for the hardest knowledge work and coding problems
+
+            - `:"claude-mythos-5"`
+
+              Most capable model for cybersecurity and biology research
+
+            - `:"claude-opus-4-8"`
+
+              Frontier intelligence for long-running agents and coding
+
+            - `:"claude-opus-4-7"`
+
+              Frontier intelligence for long-running agents and coding
+
+            - `:"claude-mythos-preview"`
+
+              New class of intelligence, strongest in coding and cybersecurity
+
+            - `:"claude-opus-4-6"`
+
+              Frontier intelligence for long-running agents and coding
+
+            - `:"claude-sonnet-4-6"`
+
+              Best combination of speed and intelligence
+
+            - `:"claude-haiku-4-5"`
+
+              Fastest model with near-frontier intelligence
+
+            - `:"claude-haiku-4-5-20251001"`
+
+              Fastest model with near-frontier intelligence
+
+            - `:"claude-opus-4-5"`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `:"claude-opus-4-5-20251101"`
+
+              Premium model combining maximum intelligence with practical performance
+
+            - `:"claude-sonnet-4-5"`
+
+              High-performance model for agents and coding
+
+            - `:"claude-sonnet-4-5-20250929"`
+
+              High-performance model for agents and coding
+
+            - `:"claude-opus-4-1"`
+
+              Exceptional model for specialized complex tasks
+
+            - `:"claude-opus-4-1-20250805"`
+
+              Exceptional model for specialized complex tasks
+
+            - `:"claude-opus-4-0"`
+
+              Powerful model for complex tasks
+
+            - `:"claude-opus-4-20250514"`
+
+              Powerful model for complex tasks
+
+            - `:"claude-sonnet-4-0"`
+
+              High-performance model with extended thinking
+
+            - `:"claude-sonnet-4-20250514"`
+
+              High-performance model with extended thinking
+
+            - `:"claude-3-haiku-20240307"`
+
+              Fast and cost-effective model
+
+          - `String = String`
+
+      - `to: BetaFallbackInfo`
+
+        The fallback model producing the content that follows this block. Its `model` is always the canonical id.
+
+      - `type: :fallback`
+
+        - `:fallback`
+
   - `index: Integer`
 
   - `type: :content_block_start`
@@ -17709,7 +19708,7 @@ puts(beta_message_tokens_count)
 
       Structured information about a refusal.
 
-      - `category: :cyber | :bio`
+      - `category: :cyber | :bio | :reasoning_extraction`
 
         The policy category that triggered the refusal.
 
@@ -17719,11 +19718,62 @@ puts(beta_message_tokens_count)
 
         - `:bio`
 
+        - `:reasoning_extraction`
+
       - `explanation: String`
 
         Human-readable explanation of the refusal.
 
         This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+      - `fallback_credit_token: String`
+
+        Opaque code that refunds the cache-miss cost when retrying this refused
+        request on the fallback model. Pass it as `fallback_credit_token` on the
+        retry request. Expires 5 minutes after the refusal.
+
+        The retry is sent either with the same request body (`system`, `messages`,
+        `tools`, and other render-shaping fields), or with the same body plus one
+        appended `assistant` message whose content is the partial text (with any
+        trailing whitespace stripped from the final text block) and paired
+        server-tool blocks from this refusal — which also authorizes that
+        appended turn as an assistant-prefill continuation on models that otherwise
+        disallow prefill. A token minted mid-server-tool-loop whose partial content
+        was continuable may only be redeemed the second way — if a same-body retry
+        is rejected with a 400 saying the token must be redeemed by continuing the
+        partial response, retry the second way instead. Either way: same workspace,
+        same platform; a mismatch is a 400. Resending a token for an already-warm
+        prefix is permitted but yields no additional credit.
+
+        `null` when the refused model isn't eligible for a fallback credit.
+
+      - `fallback_has_prefill_claim: bool`
+
+        Whether the accompanying `fallback_credit_token` may be redeemed with the
+        appended-assistant retry form. Only set when `fallback_credit_token` is
+        present.
+
+        `true`: retry by resending the same request body plus one appended
+        `assistant` message whose content is this response's `content` with any
+        trailing whitespace stripped from the final text block and unpaired
+        `tool_use` blocks omitted (the same appended-turn shape described on
+        `fallback_credit_token`), with the token attached. `false`: retry by
+        resending the original request body unchanged, with the token attached —
+        the appended-assistant form is not available for this refusal (no
+        continuable partial content, or the request uses `output_format` or a
+        `tool_choice` that forces tool use). One exception: when the request used
+        `output_format` or a forced `tool_choice` and the refusal arrived after
+        server tools (including MCP connector tools) had already executed, the
+        token may not be redeemable by either retry form; if the exact-body retry
+        is then rejected with a 400 saying the token must be redeemed by
+        continuing the partial response, discard the token and retry without it.
+
+        Advisory: if an appended-assistant retry is rejected with a 400 despite
+        `true`, fall back to resending the original request body with the token.
+
+      - `recommended_model: String`
+
+        The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
       - `type: :refusal`
 
@@ -17815,77 +19865,25 @@ puts(beta_message_tokens_count)
 
           The number of input tokens which were used.
 
-        - `output_tokens: Integer`
-
-          The number of output tokens which were used.
-
-        - `type: :message`
-
-          Usage for a sampling iteration
-
-          - `:message`
-
-      - `class BetaCompactionIterationUsage`
-
-        Token usage for a compaction iteration.
-
-        - `cache_creation: BetaCacheCreation`
-
-          Breakdown of cached tokens by TTL
-
-        - `cache_creation_input_tokens: Integer`
-
-          The number of input tokens used to create the cache entry.
-
-        - `cache_read_input_tokens: Integer`
-
-          The number of input tokens read from the cache.
-
-        - `input_tokens: Integer`
-
-          The number of input tokens which were used.
-
-        - `output_tokens: Integer`
-
-          The number of output tokens which were used.
-
-        - `type: :compaction`
-
-          Usage for a compaction iteration
-
-          - `:compaction`
-
-      - `class BetaAdvisorMessageIterationUsage`
-
-        Token usage for an advisor sub-inference iteration.
-
-        - `cache_creation: BetaCacheCreation`
-
-          Breakdown of cached tokens by TTL
-
-        - `cache_creation_input_tokens: Integer`
-
-          The number of input tokens used to create the cache entry.
-
-        - `cache_read_input_tokens: Integer`
-
-          The number of input tokens read from the cache.
-
-        - `input_tokens: Integer`
-
-          The number of input tokens which were used.
-
         - `model: Model`
 
           The model that will complete your prompt.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `Model = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-mythos-preview" | 15 more`
+          - `Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more`
 
             The model that will complete your prompt.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `:"claude-fable-5"`
+
+              Next generation of intelligence for the hardest knowledge work and coding problems
+
+            - `:"claude-mythos-5"`
+
+              Most capable model for cybersecurity and biology research
 
             - `:"claude-opus-4-8"`
 
@@ -17965,11 +19963,118 @@ puts(beta_message_tokens_count)
 
           The number of output tokens which were used.
 
+        - `type: :message`
+
+          Usage for a sampling iteration
+
+          - `:message`
+
+      - `class BetaCompactionIterationUsage`
+
+        Token usage for a compaction iteration.
+
+        - `cache_creation: BetaCacheCreation`
+
+          Breakdown of cached tokens by TTL
+
+        - `cache_creation_input_tokens: Integer`
+
+          The number of input tokens used to create the cache entry.
+
+        - `cache_read_input_tokens: Integer`
+
+          The number of input tokens read from the cache.
+
+        - `input_tokens: Integer`
+
+          The number of input tokens which were used.
+
+        - `output_tokens: Integer`
+
+          The number of output tokens which were used.
+
+        - `type: :compaction`
+
+          Usage for a compaction iteration
+
+          - `:compaction`
+
+      - `class BetaAdvisorMessageIterationUsage`
+
+        Token usage for an advisor sub-inference iteration.
+
+        - `cache_creation: BetaCacheCreation`
+
+          Breakdown of cached tokens by TTL
+
+        - `cache_creation_input_tokens: Integer`
+
+          The number of input tokens used to create the cache entry.
+
+        - `cache_read_input_tokens: Integer`
+
+          The number of input tokens read from the cache.
+
+        - `input_tokens: Integer`
+
+          The number of input tokens which were used.
+
+        - `model: Model`
+
+          The model that will complete your prompt.
+
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `output_tokens: Integer`
+
+          The number of output tokens which were used.
+
         - `type: :advisor_message`
 
           Usage for an advisor sub-inference iteration
 
           - `:advisor_message`
+
+      - `class BetaFallbackMessageIterationUsage`
+
+        Token usage for the fallback-model attempt of a server-side fallback request.
+
+        Produced in place of a `message` entry for whichever hop served the
+        response. A declined hop produces the existing `message` entry. Whether
+        a fallback model served the response is signalled by the presence of this
+        entry in `usage.iterations`.
+
+        - `cache_creation: BetaCacheCreation`
+
+          Breakdown of cached tokens by TTL
+
+        - `cache_creation_input_tokens: Integer`
+
+          The number of input tokens used to create the cache entry.
+
+        - `cache_read_input_tokens: Integer`
+
+          The number of input tokens read from the cache.
+
+        - `input_tokens: Integer`
+
+          The number of input tokens which were used.
+
+        - `model: Model`
+
+          The model that will complete your prompt.
+
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `output_tokens: Integer`
+
+          The number of output tokens which were used.
+
+        - `type: :fallback_message`
+
+          Usage for the fallback-model attempt that served the response
+
+          - `:fallback_message`
 
     - `output_tokens: Integer`
 
@@ -18476,7 +20581,7 @@ puts(beta_message_tokens_count)
 
           - `class BetaAdvisorToolResultError`
 
-            - `error_code: :max_uses_exceeded | :prompt_too_long | :too_many_requests | 3 more`
+            - `error_code: :max_uses_exceeded | :prompt_too_long | :too_many_requests | 4 more`
 
               - `:max_uses_exceeded`
 
@@ -18489,6 +20594,8 @@ puts(beta_message_tokens_count)
               - `:unavailable`
 
               - `:execution_time_exceeded`
+
+              - `:model_not_found`
 
             - `type: :advisor_tool_result_error`
 
@@ -18834,6 +20941,126 @@ puts(beta_message_tokens_count)
 
           - `:compaction`
 
+      - `class BetaFallbackBlock`
+
+        Marks the point in `content` where one model's output gives way to the next.
+
+        One block appears per hop where a preceding model actually ran this turn and
+        declined. A turn routed directly by the sticky decision has no such boundary
+        and carries no block — the signal for whether a fallback model served the
+        response is the presence of a `fallback_message` entry in
+        `usage.iterations`, not this block.
+
+        The block is treated like a server-tool content block for streaming: it
+        arrives via the standard `content_block_start` / `content_block_stop`
+        pair and carries no deltas.
+
+        - `from: BetaFallbackInfo`
+
+          The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
+
+          - `model: Model`
+
+            The model that will complete your prompt.
+
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more`
+
+              The model that will complete your prompt.
+
+              See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+              - `:"claude-fable-5"`
+
+                Next generation of intelligence for the hardest knowledge work and coding problems
+
+              - `:"claude-mythos-5"`
+
+                Most capable model for cybersecurity and biology research
+
+              - `:"claude-opus-4-8"`
+
+                Frontier intelligence for long-running agents and coding
+
+              - `:"claude-opus-4-7"`
+
+                Frontier intelligence for long-running agents and coding
+
+              - `:"claude-mythos-preview"`
+
+                New class of intelligence, strongest in coding and cybersecurity
+
+              - `:"claude-opus-4-6"`
+
+                Frontier intelligence for long-running agents and coding
+
+              - `:"claude-sonnet-4-6"`
+
+                Best combination of speed and intelligence
+
+              - `:"claude-haiku-4-5"`
+
+                Fastest model with near-frontier intelligence
+
+              - `:"claude-haiku-4-5-20251001"`
+
+                Fastest model with near-frontier intelligence
+
+              - `:"claude-opus-4-5"`
+
+                Premium model combining maximum intelligence with practical performance
+
+              - `:"claude-opus-4-5-20251101"`
+
+                Premium model combining maximum intelligence with practical performance
+
+              - `:"claude-sonnet-4-5"`
+
+                High-performance model for agents and coding
+
+              - `:"claude-sonnet-4-5-20250929"`
+
+                High-performance model for agents and coding
+
+              - `:"claude-opus-4-1"`
+
+                Exceptional model for specialized complex tasks
+
+              - `:"claude-opus-4-1-20250805"`
+
+                Exceptional model for specialized complex tasks
+
+              - `:"claude-opus-4-0"`
+
+                Powerful model for complex tasks
+
+              - `:"claude-opus-4-20250514"`
+
+                Powerful model for complex tasks
+
+              - `:"claude-sonnet-4-0"`
+
+                High-performance model with extended thinking
+
+              - `:"claude-sonnet-4-20250514"`
+
+                High-performance model with extended thinking
+
+              - `:"claude-3-haiku-20240307"`
+
+                Fast and cost-effective model
+
+            - `String = String`
+
+        - `to: BetaFallbackInfo`
+
+          The fallback model producing the content that follows this block. Its `model` is always the canonical id.
+
+        - `type: :fallback`
+
+          - `:fallback`
+
     - `context_management: BetaContextManagementResponse`
 
       Context management response.
@@ -18943,86 +21170,6 @@ puts(beta_message_tokens_count)
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `Model = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-mythos-preview" | 15 more`
-
-        The model that will complete your prompt.
-
-        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-        - `:"claude-opus-4-8"`
-
-          Frontier intelligence for long-running agents and coding
-
-        - `:"claude-opus-4-7"`
-
-          Frontier intelligence for long-running agents and coding
-
-        - `:"claude-mythos-preview"`
-
-          New class of intelligence, strongest in coding and cybersecurity
-
-        - `:"claude-opus-4-6"`
-
-          Frontier intelligence for long-running agents and coding
-
-        - `:"claude-sonnet-4-6"`
-
-          Best combination of speed and intelligence
-
-        - `:"claude-haiku-4-5"`
-
-          Fastest model with near-frontier intelligence
-
-        - `:"claude-haiku-4-5-20251001"`
-
-          Fastest model with near-frontier intelligence
-
-        - `:"claude-opus-4-5"`
-
-          Premium model combining maximum intelligence with practical performance
-
-        - `:"claude-opus-4-5-20251101"`
-
-          Premium model combining maximum intelligence with practical performance
-
-        - `:"claude-sonnet-4-5"`
-
-          High-performance model for agents and coding
-
-        - `:"claude-sonnet-4-5-20250929"`
-
-          High-performance model for agents and coding
-
-        - `:"claude-opus-4-1"`
-
-          Exceptional model for specialized complex tasks
-
-        - `:"claude-opus-4-1-20250805"`
-
-          Exceptional model for specialized complex tasks
-
-        - `:"claude-opus-4-0"`
-
-          Powerful model for complex tasks
-
-        - `:"claude-opus-4-20250514"`
-
-          Powerful model for complex tasks
-
-        - `:"claude-sonnet-4-0"`
-
-          High-performance model with extended thinking
-
-        - `:"claude-sonnet-4-20250514"`
-
-          High-performance model with extended thinking
-
-        - `:"claude-3-haiku-20240307"`
-
-          Fast and cost-effective model
-
-      - `String = String`
-
     - `role: :assistant`
 
       Conversational role of the generated message.
@@ -19035,7 +21182,7 @@ puts(beta_message_tokens_count)
 
       Structured information about a refusal.
 
-      - `category: :cyber | :bio`
+      - `category: :cyber | :bio | :reasoning_extraction`
 
         The policy category that triggered the refusal.
 
@@ -19045,11 +21192,62 @@ puts(beta_message_tokens_count)
 
         - `:bio`
 
+        - `:reasoning_extraction`
+
       - `explanation: String`
 
         Human-readable explanation of the refusal.
 
         This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+      - `fallback_credit_token: String`
+
+        Opaque code that refunds the cache-miss cost when retrying this refused
+        request on the fallback model. Pass it as `fallback_credit_token` on the
+        retry request. Expires 5 minutes after the refusal.
+
+        The retry is sent either with the same request body (`system`, `messages`,
+        `tools`, and other render-shaping fields), or with the same body plus one
+        appended `assistant` message whose content is the partial text (with any
+        trailing whitespace stripped from the final text block) and paired
+        server-tool blocks from this refusal — which also authorizes that
+        appended turn as an assistant-prefill continuation on models that otherwise
+        disallow prefill. A token minted mid-server-tool-loop whose partial content
+        was continuable may only be redeemed the second way — if a same-body retry
+        is rejected with a 400 saying the token must be redeemed by continuing the
+        partial response, retry the second way instead. Either way: same workspace,
+        same platform; a mismatch is a 400. Resending a token for an already-warm
+        prefix is permitted but yields no additional credit.
+
+        `null` when the refused model isn't eligible for a fallback credit.
+
+      - `fallback_has_prefill_claim: bool`
+
+        Whether the accompanying `fallback_credit_token` may be redeemed with the
+        appended-assistant retry form. Only set when `fallback_credit_token` is
+        present.
+
+        `true`: retry by resending the same request body plus one appended
+        `assistant` message whose content is this response's `content` with any
+        trailing whitespace stripped from the final text block and unpaired
+        `tool_use` blocks omitted (the same appended-turn shape described on
+        `fallback_credit_token`), with the token attached. `false`: retry by
+        resending the original request body unchanged, with the token attached —
+        the appended-assistant form is not available for this refusal (no
+        continuable partial content, or the request uses `output_format` or a
+        `tool_choice` that forces tool use). One exception: when the request used
+        `output_format` or a forced `tool_choice` and the refusal arrived after
+        server tools (including MCP connector tools) had already executed, the
+        token may not be redeemable by either retry form; if the exact-body retry
+        is then rejected with a 400 saying the token must be redeemed by
+        continuing the partial response, discard the token and retry without it.
+
+        Advisory: if an appended-assistant retry is rejected with a 400 despite
+        `true`, fall back to resending the original request body with the token.
+
+      - `recommended_model: String`
+
+        The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
       - `type: :refusal`
 
@@ -19170,6 +21368,12 @@ puts(beta_message_tokens_count)
 
             The number of input tokens which were used.
 
+          - `model: Model`
+
+            The model that will complete your prompt.
+
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
           - `output_tokens: Integer`
 
             The number of output tokens which were used.
@@ -19245,6 +21449,47 @@ puts(beta_message_tokens_count)
             Usage for an advisor sub-inference iteration
 
             - `:advisor_message`
+
+        - `class BetaFallbackMessageIterationUsage`
+
+          Token usage for the fallback-model attempt of a server-side fallback request.
+
+          Produced in place of a `message` entry for whichever hop served the
+          response. A declined hop produces the existing `message` entry. Whether
+          a fallback model served the response is signalled by the presence of this
+          entry in `usage.iterations`.
+
+          - `cache_creation: BetaCacheCreation`
+
+            Breakdown of cached tokens by TTL
+
+          - `cache_creation_input_tokens: Integer`
+
+            The number of input tokens used to create the cache entry.
+
+          - `cache_read_input_tokens: Integer`
+
+            The number of input tokens read from the cache.
+
+          - `input_tokens: Integer`
+
+            The number of input tokens which were used.
+
+          - `model: Model`
+
+            The model that will complete your prompt.
+
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `output_tokens: Integer`
+
+            The number of output tokens which were used.
+
+          - `type: :fallback_message`
+
+            Usage for the fallback-model attempt that served the response
+
+            - `:fallback_message`
 
       - `output_tokens: Integer`
 
@@ -19783,7 +22028,7 @@ puts(beta_message_tokens_count)
 
             - `class BetaAdvisorToolResultError`
 
-              - `error_code: :max_uses_exceeded | :prompt_too_long | :too_many_requests | 3 more`
+              - `error_code: :max_uses_exceeded | :prompt_too_long | :too_many_requests | 4 more`
 
                 - `:max_uses_exceeded`
 
@@ -19796,6 +22041,8 @@ puts(beta_message_tokens_count)
                 - `:unavailable`
 
                 - `:execution_time_exceeded`
+
+                - `:model_not_found`
 
               - `type: :advisor_tool_result_error`
 
@@ -20141,6 +22388,126 @@ puts(beta_message_tokens_count)
 
             - `:compaction`
 
+        - `class BetaFallbackBlock`
+
+          Marks the point in `content` where one model's output gives way to the next.
+
+          One block appears per hop where a preceding model actually ran this turn and
+          declined. A turn routed directly by the sticky decision has no such boundary
+          and carries no block — the signal for whether a fallback model served the
+          response is the presence of a `fallback_message` entry in
+          `usage.iterations`, not this block.
+
+          The block is treated like a server-tool content block for streaming: it
+          arrives via the standard `content_block_start` / `content_block_stop`
+          pair and carries no deltas.
+
+          - `from: BetaFallbackInfo`
+
+            The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
+
+            - `model: Model`
+
+              The model that will complete your prompt.
+
+              See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+              - `Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more`
+
+                The model that will complete your prompt.
+
+                See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                - `:"claude-fable-5"`
+
+                  Next generation of intelligence for the hardest knowledge work and coding problems
+
+                - `:"claude-mythos-5"`
+
+                  Most capable model for cybersecurity and biology research
+
+                - `:"claude-opus-4-8"`
+
+                  Frontier intelligence for long-running agents and coding
+
+                - `:"claude-opus-4-7"`
+
+                  Frontier intelligence for long-running agents and coding
+
+                - `:"claude-mythos-preview"`
+
+                  New class of intelligence, strongest in coding and cybersecurity
+
+                - `:"claude-opus-4-6"`
+
+                  Frontier intelligence for long-running agents and coding
+
+                - `:"claude-sonnet-4-6"`
+
+                  Best combination of speed and intelligence
+
+                - `:"claude-haiku-4-5"`
+
+                  Fastest model with near-frontier intelligence
+
+                - `:"claude-haiku-4-5-20251001"`
+
+                  Fastest model with near-frontier intelligence
+
+                - `:"claude-opus-4-5"`
+
+                  Premium model combining maximum intelligence with practical performance
+
+                - `:"claude-opus-4-5-20251101"`
+
+                  Premium model combining maximum intelligence with practical performance
+
+                - `:"claude-sonnet-4-5"`
+
+                  High-performance model for agents and coding
+
+                - `:"claude-sonnet-4-5-20250929"`
+
+                  High-performance model for agents and coding
+
+                - `:"claude-opus-4-1"`
+
+                  Exceptional model for specialized complex tasks
+
+                - `:"claude-opus-4-1-20250805"`
+
+                  Exceptional model for specialized complex tasks
+
+                - `:"claude-opus-4-0"`
+
+                  Powerful model for complex tasks
+
+                - `:"claude-opus-4-20250514"`
+
+                  Powerful model for complex tasks
+
+                - `:"claude-sonnet-4-0"`
+
+                  High-performance model with extended thinking
+
+                - `:"claude-sonnet-4-20250514"`
+
+                  High-performance model with extended thinking
+
+                - `:"claude-3-haiku-20240307"`
+
+                  Fast and cost-effective model
+
+              - `String = String`
+
+          - `to: BetaFallbackInfo`
+
+            The fallback model producing the content that follows this block. Its `model` is always the canonical id.
+
+          - `type: :fallback`
+
+            - `:fallback`
+
       - `context_management: BetaContextManagementResponse`
 
         Context management response.
@@ -20250,86 +22617,6 @@ puts(beta_message_tokens_count)
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-        - `Model = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-mythos-preview" | 15 more`
-
-          The model that will complete your prompt.
-
-          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-          - `:"claude-opus-4-8"`
-
-            Frontier intelligence for long-running agents and coding
-
-          - `:"claude-opus-4-7"`
-
-            Frontier intelligence for long-running agents and coding
-
-          - `:"claude-mythos-preview"`
-
-            New class of intelligence, strongest in coding and cybersecurity
-
-          - `:"claude-opus-4-6"`
-
-            Frontier intelligence for long-running agents and coding
-
-          - `:"claude-sonnet-4-6"`
-
-            Best combination of speed and intelligence
-
-          - `:"claude-haiku-4-5"`
-
-            Fastest model with near-frontier intelligence
-
-          - `:"claude-haiku-4-5-20251001"`
-
-            Fastest model with near-frontier intelligence
-
-          - `:"claude-opus-4-5"`
-
-            Premium model combining maximum intelligence with practical performance
-
-          - `:"claude-opus-4-5-20251101"`
-
-            Premium model combining maximum intelligence with practical performance
-
-          - `:"claude-sonnet-4-5"`
-
-            High-performance model for agents and coding
-
-          - `:"claude-sonnet-4-5-20250929"`
-
-            High-performance model for agents and coding
-
-          - `:"claude-opus-4-1"`
-
-            Exceptional model for specialized complex tasks
-
-          - `:"claude-opus-4-1-20250805"`
-
-            Exceptional model for specialized complex tasks
-
-          - `:"claude-opus-4-0"`
-
-            Powerful model for complex tasks
-
-          - `:"claude-opus-4-20250514"`
-
-            Powerful model for complex tasks
-
-          - `:"claude-sonnet-4-0"`
-
-            High-performance model with extended thinking
-
-          - `:"claude-sonnet-4-20250514"`
-
-            High-performance model with extended thinking
-
-          - `:"claude-3-haiku-20240307"`
-
-            Fast and cost-effective model
-
-        - `String = String`
-
       - `role: :assistant`
 
         Conversational role of the generated message.
@@ -20342,7 +22629,7 @@ puts(beta_message_tokens_count)
 
         Structured information about a refusal.
 
-        - `category: :cyber | :bio`
+        - `category: :cyber | :bio | :reasoning_extraction`
 
           The policy category that triggered the refusal.
 
@@ -20352,11 +22639,62 @@ puts(beta_message_tokens_count)
 
           - `:bio`
 
+          - `:reasoning_extraction`
+
         - `explanation: String`
 
           Human-readable explanation of the refusal.
 
           This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+        - `fallback_credit_token: String`
+
+          Opaque code that refunds the cache-miss cost when retrying this refused
+          request on the fallback model. Pass it as `fallback_credit_token` on the
+          retry request. Expires 5 minutes after the refusal.
+
+          The retry is sent either with the same request body (`system`, `messages`,
+          `tools`, and other render-shaping fields), or with the same body plus one
+          appended `assistant` message whose content is the partial text (with any
+          trailing whitespace stripped from the final text block) and paired
+          server-tool blocks from this refusal — which also authorizes that
+          appended turn as an assistant-prefill continuation on models that otherwise
+          disallow prefill. A token minted mid-server-tool-loop whose partial content
+          was continuable may only be redeemed the second way — if a same-body retry
+          is rejected with a 400 saying the token must be redeemed by continuing the
+          partial response, retry the second way instead. Either way: same workspace,
+          same platform; a mismatch is a 400. Resending a token for an already-warm
+          prefix is permitted but yields no additional credit.
+
+          `null` when the refused model isn't eligible for a fallback credit.
+
+        - `fallback_has_prefill_claim: bool`
+
+          Whether the accompanying `fallback_credit_token` may be redeemed with the
+          appended-assistant retry form. Only set when `fallback_credit_token` is
+          present.
+
+          `true`: retry by resending the same request body plus one appended
+          `assistant` message whose content is this response's `content` with any
+          trailing whitespace stripped from the final text block and unpaired
+          `tool_use` blocks omitted (the same appended-turn shape described on
+          `fallback_credit_token`), with the token attached. `false`: retry by
+          resending the original request body unchanged, with the token attached —
+          the appended-assistant form is not available for this refusal (no
+          continuable partial content, or the request uses `output_format` or a
+          `tool_choice` that forces tool use). One exception: when the request used
+          `output_format` or a forced `tool_choice` and the refusal arrived after
+          server tools (including MCP connector tools) had already executed, the
+          token may not be redeemable by either retry form; if the exact-body retry
+          is then rejected with a 400 saying the token must be redeemed by
+          continuing the partial response, discard the token and retry without it.
+
+          Advisory: if an appended-assistant retry is rejected with a 400 despite
+          `true`, fall back to resending the original request body with the token.
+
+        - `recommended_model: String`
+
+          The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
         - `type: :refusal`
 
@@ -20477,6 +22815,12 @@ puts(beta_message_tokens_count)
 
               The number of input tokens which were used.
 
+            - `model: Model`
+
+              The model that will complete your prompt.
+
+              See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
             - `output_tokens: Integer`
 
               The number of output tokens which were used.
@@ -20552,6 +22896,47 @@ puts(beta_message_tokens_count)
               Usage for an advisor sub-inference iteration
 
               - `:advisor_message`
+
+          - `class BetaFallbackMessageIterationUsage`
+
+            Token usage for the fallback-model attempt of a server-side fallback request.
+
+            Produced in place of a `message` entry for whichever hop served the
+            response. A declined hop produces the existing `message` entry. Whether
+            a fallback model served the response is signalled by the presence of this
+            entry in `usage.iterations`.
+
+            - `cache_creation: BetaCacheCreation`
+
+              Breakdown of cached tokens by TTL
+
+            - `cache_creation_input_tokens: Integer`
+
+              The number of input tokens used to create the cache entry.
+
+            - `cache_read_input_tokens: Integer`
+
+              The number of input tokens read from the cache.
+
+            - `input_tokens: Integer`
+
+              The number of input tokens which were used.
+
+            - `model: Model`
+
+              The model that will complete your prompt.
+
+              See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `output_tokens: Integer`
+
+              The number of output tokens which were used.
+
+            - `type: :fallback_message`
+
+              Usage for the fallback-model attempt that served the response
+
+              - `:fallback_message`
 
         - `output_tokens: Integer`
 
@@ -20694,7 +23079,7 @@ puts(beta_message_tokens_count)
 
   - `class BetaRawContentBlockStartEvent`
 
-    - `content_block: BetaTextBlock | BetaThinkingBlock | BetaRedactedThinkingBlock | 13 more`
+    - `content_block: BetaTextBlock | BetaThinkingBlock | BetaRedactedThinkingBlock | 14 more`
 
       Response model for a file uploaded to the container.
 
@@ -20737,6 +23122,20 @@ puts(beta_message_tokens_count)
         When content is None, it indicates the compaction failed to produce a valid
         summary (e.g., malformed output from the model). Clients may round-trip
         compaction blocks with null content; the server treats them as no-ops.
+
+      - `class BetaFallbackBlock`
+
+        Marks the point in `content` where one model's output gives way to the next.
+
+        One block appears per hop where a preceding model actually ran this turn and
+        declined. A turn routed directly by the sticky decision has no such boundary
+        and carries no block — the signal for whether a fallback model served the
+        response is the presence of a `fallback_message` entry in
+        `usage.iterations`, not this block.
+
+        The block is treated like a server-tool content block for streaming: it
+        arrives via the standard `content_block_start` / `content_block_stop`
+        pair and carries no deltas.
 
     - `index: Integer`
 
@@ -20854,7 +23253,7 @@ puts(beta_message_tokens_count)
 
   Structured information about a refusal.
 
-  - `category: :cyber | :bio`
+  - `category: :cyber | :bio | :reasoning_extraction`
 
     The policy category that triggered the refusal.
 
@@ -20864,11 +23263,62 @@ puts(beta_message_tokens_count)
 
     - `:bio`
 
+    - `:reasoning_extraction`
+
   - `explanation: String`
 
     Human-readable explanation of the refusal.
 
     This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+  - `fallback_credit_token: String`
+
+    Opaque code that refunds the cache-miss cost when retrying this refused
+    request on the fallback model. Pass it as `fallback_credit_token` on the
+    retry request. Expires 5 minutes after the refusal.
+
+    The retry is sent either with the same request body (`system`, `messages`,
+    `tools`, and other render-shaping fields), or with the same body plus one
+    appended `assistant` message whose content is the partial text (with any
+    trailing whitespace stripped from the final text block) and paired
+    server-tool blocks from this refusal — which also authorizes that
+    appended turn as an assistant-prefill continuation on models that otherwise
+    disallow prefill. A token minted mid-server-tool-loop whose partial content
+    was continuable may only be redeemed the second way — if a same-body retry
+    is rejected with a 400 saying the token must be redeemed by continuing the
+    partial response, retry the second way instead. Either way: same workspace,
+    same platform; a mismatch is a 400. Resending a token for an already-warm
+    prefix is permitted but yields no additional credit.
+
+    `null` when the refused model isn't eligible for a fallback credit.
+
+  - `fallback_has_prefill_claim: bool`
+
+    Whether the accompanying `fallback_credit_token` may be redeemed with the
+    appended-assistant retry form. Only set when `fallback_credit_token` is
+    present.
+
+    `true`: retry by resending the same request body plus one appended
+    `assistant` message whose content is this response's `content` with any
+    trailing whitespace stripped from the final text block and unpaired
+    `tool_use` blocks omitted (the same appended-turn shape described on
+    `fallback_credit_token`), with the token attached. `false`: retry by
+    resending the original request body unchanged, with the token attached —
+    the appended-assistant form is not available for this refusal (no
+    continuable partial content, or the request uses `output_format` or a
+    `tool_choice` that forces tool use). One exception: when the request used
+    `output_format` or a forced `tool_choice` and the refusal arrived after
+    server tools (including MCP connector tools) had already executed, the
+    token may not be redeemable by either retry form; if the exact-body retry
+    is then rejected with a 400 saying the token must be redeemed by
+    continuing the partial response, discard the token and retry without it.
+
+    Advisory: if an appended-assistant retry is rejected with a 400 despite
+    `true`, fall back to resending the original request body with the token.
+
+  - `recommended_model: String`
+
+    The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
   - `type: :refusal`
 
@@ -23790,6 +26240,8 @@ puts(beta_message_tokens_count)
 
         - `:tool_search_tool_result_error`
 
+      - `error_message: String`
+
     - `class BetaToolSearchToolSearchResultBlockParam`
 
       - `tool_references: Array[BetaToolReferenceBlockParam]`
@@ -23874,6 +26326,8 @@ puts(beta_message_tokens_count)
   - `type: :tool_search_tool_result_error`
 
     - `:tool_search_tool_result_error`
+
+  - `error_message: String`
 
 ### Beta Tool Search Tool Search Result Block
 
@@ -25051,11 +27505,19 @@ puts(beta_message_tokens_count)
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `Model = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-mythos-preview" | 15 more`
+      - `Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more`
 
         The model that will complete your prompt.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `:"claude-fable-5"`
+
+          Next generation of intelligence for the hardest knowledge work and coding problems
+
+        - `:"claude-mythos-5"`
+
+          Most capable model for cybersecurity and biology research
 
         - `:"claude-opus-4-8"`
 
@@ -25162,6 +27624,10 @@ puts(beta_message_tokens_count)
     - `defer_loading: bool`
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+    - `max_tokens: Integer`
+
+      Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the server also emits a remaining-tokens budget block in the advisor's prompt so the advisor self-shapes toward the cap. When omitted, the advisor model's default output cap applies and no budget block is emitted.
 
     - `max_uses: Integer`
 
@@ -25491,77 +27957,25 @@ puts(beta_message_tokens_count)
 
         The number of input tokens which were used.
 
-      - `output_tokens: Integer`
-
-        The number of output tokens which were used.
-
-      - `type: :message`
-
-        Usage for a sampling iteration
-
-        - `:message`
-
-    - `class BetaCompactionIterationUsage`
-
-      Token usage for a compaction iteration.
-
-      - `cache_creation: BetaCacheCreation`
-
-        Breakdown of cached tokens by TTL
-
-      - `cache_creation_input_tokens: Integer`
-
-        The number of input tokens used to create the cache entry.
-
-      - `cache_read_input_tokens: Integer`
-
-        The number of input tokens read from the cache.
-
-      - `input_tokens: Integer`
-
-        The number of input tokens which were used.
-
-      - `output_tokens: Integer`
-
-        The number of output tokens which were used.
-
-      - `type: :compaction`
-
-        Usage for a compaction iteration
-
-        - `:compaction`
-
-    - `class BetaAdvisorMessageIterationUsage`
-
-      Token usage for an advisor sub-inference iteration.
-
-      - `cache_creation: BetaCacheCreation`
-
-        Breakdown of cached tokens by TTL
-
-      - `cache_creation_input_tokens: Integer`
-
-        The number of input tokens used to create the cache entry.
-
-      - `cache_read_input_tokens: Integer`
-
-        The number of input tokens read from the cache.
-
-      - `input_tokens: Integer`
-
-        The number of input tokens which were used.
-
       - `model: Model`
 
         The model that will complete your prompt.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-        - `Model = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-mythos-preview" | 15 more`
+        - `Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more`
 
           The model that will complete your prompt.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `:"claude-fable-5"`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
+
+          - `:"claude-mythos-5"`
+
+            Most capable model for cybersecurity and biology research
 
           - `:"claude-opus-4-8"`
 
@@ -25641,11 +28055,118 @@ puts(beta_message_tokens_count)
 
         The number of output tokens which were used.
 
+      - `type: :message`
+
+        Usage for a sampling iteration
+
+        - `:message`
+
+    - `class BetaCompactionIterationUsage`
+
+      Token usage for a compaction iteration.
+
+      - `cache_creation: BetaCacheCreation`
+
+        Breakdown of cached tokens by TTL
+
+      - `cache_creation_input_tokens: Integer`
+
+        The number of input tokens used to create the cache entry.
+
+      - `cache_read_input_tokens: Integer`
+
+        The number of input tokens read from the cache.
+
+      - `input_tokens: Integer`
+
+        The number of input tokens which were used.
+
+      - `output_tokens: Integer`
+
+        The number of output tokens which were used.
+
+      - `type: :compaction`
+
+        Usage for a compaction iteration
+
+        - `:compaction`
+
+    - `class BetaAdvisorMessageIterationUsage`
+
+      Token usage for an advisor sub-inference iteration.
+
+      - `cache_creation: BetaCacheCreation`
+
+        Breakdown of cached tokens by TTL
+
+      - `cache_creation_input_tokens: Integer`
+
+        The number of input tokens used to create the cache entry.
+
+      - `cache_read_input_tokens: Integer`
+
+        The number of input tokens read from the cache.
+
+      - `input_tokens: Integer`
+
+        The number of input tokens which were used.
+
+      - `model: Model`
+
+        The model that will complete your prompt.
+
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `output_tokens: Integer`
+
+        The number of output tokens which were used.
+
       - `type: :advisor_message`
 
         Usage for an advisor sub-inference iteration
 
         - `:advisor_message`
+
+    - `class BetaFallbackMessageIterationUsage`
+
+      Token usage for the fallback-model attempt of a server-side fallback request.
+
+      Produced in place of a `message` entry for whichever hop served the
+      response. A declined hop produces the existing `message` entry. Whether
+      a fallback model served the response is signalled by the presence of this
+      entry in `usage.iterations`.
+
+      - `cache_creation: BetaCacheCreation`
+
+        Breakdown of cached tokens by TTL
+
+      - `cache_creation_input_tokens: Integer`
+
+        The number of input tokens used to create the cache entry.
+
+      - `cache_read_input_tokens: Integer`
+
+        The number of input tokens read from the cache.
+
+      - `input_tokens: Integer`
+
+        The number of input tokens which were used.
+
+      - `model: Model`
+
+        The model that will complete your prompt.
+
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `output_tokens: Integer`
+
+        The number of output tokens which were used.
+
+      - `type: :fallback_message`
+
+        Usage for the fallback-model attempt that served the response
+
+        - `:fallback_message`
 
   - `output_tokens: Integer`
 
@@ -27385,7 +29906,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
     Must be unique for each request within the Message Batch.
 
-  - `params: Params{ max_tokens, messages, model, 21 more}`
+  - `params: Params{ max_tokens, messages, model, 23 more}`
 
     Messages API creation parameters for the individual request.
 
@@ -28035,7 +30556,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `class BetaAdvisorToolResultErrorParam`
 
-                - `error_code: :max_uses_exceeded | :prompt_too_long | :too_many_requests | 3 more`
+                - `error_code: :max_uses_exceeded | :prompt_too_long | :too_many_requests | 4 more`
 
                   - `:max_uses_exceeded`
 
@@ -28048,6 +30569,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
                   - `:unavailable`
 
                   - `:execution_time_exceeded`
+
+                  - `:model_not_found`
 
                 - `type: :advisor_tool_result_error`
 
@@ -28309,6 +30832,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                   - `:tool_search_tool_result_error`
 
+                - `error_message: String`
+
               - `class BetaToolSearchToolSearchResultBlockParam`
 
                 - `tool_references: Array[BetaToolReferenceBlockParam]`
@@ -28455,6 +30980,130 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               Create a cache control breakpoint at this content block.
 
+          - `class BetaFallbackBlockParam`
+
+            A `fallback` block echoed back from a prior response.
+
+            Accepted in `messages[].content` and never rendered into the prompt,
+            not validated against the request's `fallbacks` chain or top-level
+            `model`, and stripped before the sticky-routing cache key is computed.
+
+            Callers should echo the assistant turn verbatim — block included. The
+            block's position is load-bearing for thinking verification: the thinking
+            runs on either side of a fallback hop carry independently-rooted
+            verification hash chains, and this block is the only record of where one
+            chain ends and the next begins. When thinking runs flank the boundary,
+            omitting the block merges the runs into one contiguous span whose hashes
+            cannot verify (the request is rejected), and moving it into the middle of
+            a single run splits that run's chain and is likewise rejected; between
+            non-thinking blocks the block's placement has no verification effect.
+
+            - `from: BetaFallbackInfoParam`
+
+              Identifies one hop of a fallback transition.
+
+              - `model: Model`
+
+                The model that will complete your prompt.
+
+                See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                - `Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more`
+
+                  The model that will complete your prompt.
+
+                  See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                  - `:"claude-fable-5"`
+
+                    Next generation of intelligence for the hardest knowledge work and coding problems
+
+                  - `:"claude-mythos-5"`
+
+                    Most capable model for cybersecurity and biology research
+
+                  - `:"claude-opus-4-8"`
+
+                    Frontier intelligence for long-running agents and coding
+
+                  - `:"claude-opus-4-7"`
+
+                    Frontier intelligence for long-running agents and coding
+
+                  - `:"claude-mythos-preview"`
+
+                    New class of intelligence, strongest in coding and cybersecurity
+
+                  - `:"claude-opus-4-6"`
+
+                    Frontier intelligence for long-running agents and coding
+
+                  - `:"claude-sonnet-4-6"`
+
+                    Best combination of speed and intelligence
+
+                  - `:"claude-haiku-4-5"`
+
+                    Fastest model with near-frontier intelligence
+
+                  - `:"claude-haiku-4-5-20251001"`
+
+                    Fastest model with near-frontier intelligence
+
+                  - `:"claude-opus-4-5"`
+
+                    Premium model combining maximum intelligence with practical performance
+
+                  - `:"claude-opus-4-5-20251101"`
+
+                    Premium model combining maximum intelligence with practical performance
+
+                  - `:"claude-sonnet-4-5"`
+
+                    High-performance model for agents and coding
+
+                  - `:"claude-sonnet-4-5-20250929"`
+
+                    High-performance model for agents and coding
+
+                  - `:"claude-opus-4-1"`
+
+                    Exceptional model for specialized complex tasks
+
+                  - `:"claude-opus-4-1-20250805"`
+
+                    Exceptional model for specialized complex tasks
+
+                  - `:"claude-opus-4-0"`
+
+                    Powerful model for complex tasks
+
+                  - `:"claude-opus-4-20250514"`
+
+                    Powerful model for complex tasks
+
+                  - `:"claude-sonnet-4-0"`
+
+                    High-performance model with extended thinking
+
+                  - `:"claude-sonnet-4-20250514"`
+
+                    High-performance model with extended thinking
+
+                  - `:"claude-3-haiku-20240307"`
+
+                    Fast and cost-effective model
+
+                - `String = String`
+
+            - `to: BetaFallbackInfoParam`
+
+              Identifies one hop of a fallback transition.
+
+            - `type: :fallback`
+
+              - `:fallback`
+
       - `role: :user | :assistant | :system`
 
         - `:user`
@@ -28468,86 +31117,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
       The model that will complete your prompt.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-      - `Model = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-mythos-preview" | 15 more`
-
-        The model that will complete your prompt.
-
-        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-        - `:"claude-opus-4-8"`
-
-          Frontier intelligence for long-running agents and coding
-
-        - `:"claude-opus-4-7"`
-
-          Frontier intelligence for long-running agents and coding
-
-        - `:"claude-mythos-preview"`
-
-          New class of intelligence, strongest in coding and cybersecurity
-
-        - `:"claude-opus-4-6"`
-
-          Frontier intelligence for long-running agents and coding
-
-        - `:"claude-sonnet-4-6"`
-
-          Best combination of speed and intelligence
-
-        - `:"claude-haiku-4-5"`
-
-          Fastest model with near-frontier intelligence
-
-        - `:"claude-haiku-4-5-20251001"`
-
-          Fastest model with near-frontier intelligence
-
-        - `:"claude-opus-4-5"`
-
-          Premium model combining maximum intelligence with practical performance
-
-        - `:"claude-opus-4-5-20251101"`
-
-          Premium model combining maximum intelligence with practical performance
-
-        - `:"claude-sonnet-4-5"`
-
-          High-performance model for agents and coding
-
-        - `:"claude-sonnet-4-5-20250929"`
-
-          High-performance model for agents and coding
-
-        - `:"claude-opus-4-1"`
-
-          Exceptional model for specialized complex tasks
-
-        - `:"claude-opus-4-1-20250805"`
-
-          Exceptional model for specialized complex tasks
-
-        - `:"claude-opus-4-0"`
-
-          Powerful model for complex tasks
-
-        - `:"claude-opus-4-20250514"`
-
-          Powerful model for complex tasks
-
-        - `:"claude-sonnet-4-0"`
-
-          High-performance model with extended thinking
-
-        - `:"claude-sonnet-4-20250514"`
-
-          High-performance model with extended thinking
-
-        - `:"claude-3-haiku-20240307"`
-
-          Fast and cost-effective model
-
-      - `String = String`
 
     - `cache_control: BetaCacheControlEphemeral`
 
@@ -28712,6 +31281,137 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
         The `id` (`msg_...`) from this client's previous /v1/messages response. The server compares that request's prompt fingerprint against this one and returns `diagnostics.cache_miss_reason` when the prompt-cache prefix could not be reused. Pass `null` on the first turn to opt in without a prior message to compare.
 
+    - `fallback_credit_token: String`
+
+      The `fallback_credit_token` from a prior refusal's `stop_details`.
+
+      When a preceding request was refused and returned a `fallback_credit_token`,
+      pass that code here on the retry to have the retry's cache-creation tokens
+      for the prefix that was warm on the refused model billed at the cache-read
+      rate. Must be redeemed by the same organization and workspace, with the same
+      request body (optionally extended by one appended `assistant` message whose
+      content is the partial text — with any trailing whitespace stripped from
+      the final text block — and paired server-tool blocks streamed before the
+      refusal; the appended-assistant form is not available for requests with
+      `output_format` set or forced `tool_choice`), on an eligible fallback
+      model, on the same platform,
+      and within 5 minutes of the refusal; a mismatch is a 400. A token minted
+      mid-server-tool-loop whose partial content was continuable may only be
+      redeemed with the appended-assistant form — if an exact-body retry is
+      rejected with a 400 saying the token must be redeemed by continuing the
+      partial response, retry with the appended-assistant form instead.
+
+      When the appended-assistant form is used on a model that otherwise disallows
+      assistant-turn prefill, this token also authorizes that one prefill.
+
+    - `fallbacks: Array[BetaFallbackParam]`
+
+      Opt-in server-side retry on one or more substitute models when the requested model declines for policy reasons. Tried in order: if the first entry also declines, the second is tried, and so on.
+
+      - `model: Model`
+
+        The model that will complete your prompt.
+
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `max_tokens: Integer`
+
+      - `output_config: BetaOutputConfig`
+
+        - `effort: :low | :medium | :high | 2 more`
+
+          All possible effort levels.
+
+          - `:low`
+
+          - `:medium`
+
+          - `:high`
+
+          - `:xhigh`
+
+          - `:max`
+
+        - `format_: BetaJSONOutputFormat`
+
+          A schema to specify Claude's output format in responses. See [structured outputs](../build-with-claude/build-with-claude-structured-outputs.md)
+
+          - `schema: Hash[Symbol, untyped]`
+
+            The JSON schema of the format
+
+          - `type: :json_schema`
+
+            - `:json_schema`
+
+        - `task_budget: BetaTokenTaskBudget`
+
+          User-configurable total token budget across contexts.
+
+          - `total: Integer`
+
+            Total token budget across all contexts in the session.
+
+          - `type: :tokens`
+
+            The budget type. Currently only 'tokens' is supported.
+
+            - `:tokens`
+
+          - `remaining: Integer`
+
+            Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
+
+      - `speed: :standard | :fast`
+
+        - `:standard`
+
+        - `:fast`
+
+      - `thinking: BetaThinkingConfigEnabled | BetaThinkingConfigDisabled | BetaThinkingConfigAdaptive`
+
+        - `class BetaThinkingConfigEnabled`
+
+          - `budget_tokens: Integer`
+
+            Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
+
+            Must be ≥1024 and less than `max_tokens`.
+
+            See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
+
+          - `type: :enabled`
+
+            - `:enabled`
+
+          - `display_: :summarized | :omitted`
+
+            Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+
+            - `:summarized`
+
+            - `:omitted`
+
+        - `class BetaThinkingConfigDisabled`
+
+          - `type: :disabled`
+
+            - `:disabled`
+
+        - `class BetaThinkingConfigAdaptive`
+
+          - `type: :adaptive`
+
+            - `:adaptive`
+
+          - `display_: :summarized | :omitted`
+
+            Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+
+            - `:summarized`
+
+            - `:omitted`
+
     - `inference_geo: String`
 
       Specifies the geographic region for inference processing. If not specified, the workspace's `default_inference_geo` is used.
@@ -28749,50 +31449,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `output_config: BetaOutputConfig`
 
       Configuration options for the model's output, such as the output format.
-
-      - `effort: :low | :medium | :high | 2 more`
-
-        All possible effort levels.
-
-        - `:low`
-
-        - `:medium`
-
-        - `:high`
-
-        - `:xhigh`
-
-        - `:max`
-
-      - `format_: BetaJSONOutputFormat`
-
-        A schema to specify Claude's output format in responses. See [structured outputs](../build-with-claude/build-with-claude-structured-outputs.md)
-
-        - `schema: Hash[Symbol, untyped]`
-
-          The JSON schema of the format
-
-        - `type: :json_schema`
-
-          - `:json_schema`
-
-      - `task_budget: BetaTokenTaskBudget`
-
-        User-configurable total token budget across contexts.
-
-        - `total: Integer`
-
-          Total token budget across all contexts in the session.
-
-        - `type: :tokens`
-
-          The budget type. Currently only 'tokens' is supported.
-
-          - `:tokens`
-
-        - `remaining: Integer`
-
-          Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
     - `output_format: BetaJSONOutputFormat`
 
@@ -28870,45 +31526,9 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
       - `class BetaThinkingConfigEnabled`
 
-        - `budget_tokens: Integer`
-
-          Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
-
-          Must be ≥1024 and less than `max_tokens`.
-
-          See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
-
-        - `type: :enabled`
-
-          - `:enabled`
-
-        - `display_: :summarized | :omitted`
-
-          Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
-
-          - `:summarized`
-
-          - `:omitted`
-
       - `class BetaThinkingConfigDisabled`
 
-        - `type: :disabled`
-
-          - `:disabled`
-
       - `class BetaThinkingConfigAdaptive`
-
-        - `type: :adaptive`
-
-          - `:adaptive`
-
-        - `display_: :summarized | :omitted`
-
-          Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
-
-          - `:summarized`
-
-          - `:omitted`
 
     - `tool_choice: BetaToolChoice`
 
@@ -29926,6 +32546,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
+        - `max_tokens: Integer`
+
+          Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the server also emits a remaining-tokens budget block in the advisor's prompt so the advisor self-shapes toward the cap. When omitted, the advisor model's default output cap applies and no budget block is emitted.
+
         - `max_uses: Integer`
 
           Maximum number of times the tool can be used in the API request.
@@ -30067,7 +32691,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -30120,6 +32744,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
 
 ### Returns
 
@@ -30275,7 +32903,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -30328,6 +32956,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
 
 ### Returns
 
@@ -30486,7 +33118,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -30539,6 +33171,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
 
 ### Returns
 
@@ -30696,7 +33332,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -30749,6 +33385,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
 
 ### Returns
 
@@ -30899,7 +33539,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -30952,6 +33592,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
 
 ### Returns
 
@@ -31014,7 +33658,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -31067,6 +33711,10 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
 
 ### Returns
 
@@ -31553,7 +34201,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `class BetaAdvisorToolResultError`
 
-                - `error_code: :max_uses_exceeded | :prompt_too_long | :too_many_requests | 3 more`
+                - `error_code: :max_uses_exceeded | :prompt_too_long | :too_many_requests | 4 more`
 
                   - `:max_uses_exceeded`
 
@@ -31566,6 +34214,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
                   - `:unavailable`
 
                   - `:execution_time_exceeded`
+
+                  - `:model_not_found`
 
                 - `type: :advisor_tool_result_error`
 
@@ -31911,6 +34561,126 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               - `:compaction`
 
+          - `class BetaFallbackBlock`
+
+            Marks the point in `content` where one model's output gives way to the next.
+
+            One block appears per hop where a preceding model actually ran this turn and
+            declined. A turn routed directly by the sticky decision has no such boundary
+            and carries no block — the signal for whether a fallback model served the
+            response is the presence of a `fallback_message` entry in
+            `usage.iterations`, not this block.
+
+            The block is treated like a server-tool content block for streaming: it
+            arrives via the standard `content_block_start` / `content_block_stop`
+            pair and carries no deltas.
+
+            - `from: BetaFallbackInfo`
+
+              The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
+
+              - `model: Model`
+
+                The model that will complete your prompt.
+
+                See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                - `Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more`
+
+                  The model that will complete your prompt.
+
+                  See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                  - `:"claude-fable-5"`
+
+                    Next generation of intelligence for the hardest knowledge work and coding problems
+
+                  - `:"claude-mythos-5"`
+
+                    Most capable model for cybersecurity and biology research
+
+                  - `:"claude-opus-4-8"`
+
+                    Frontier intelligence for long-running agents and coding
+
+                  - `:"claude-opus-4-7"`
+
+                    Frontier intelligence for long-running agents and coding
+
+                  - `:"claude-mythos-preview"`
+
+                    New class of intelligence, strongest in coding and cybersecurity
+
+                  - `:"claude-opus-4-6"`
+
+                    Frontier intelligence for long-running agents and coding
+
+                  - `:"claude-sonnet-4-6"`
+
+                    Best combination of speed and intelligence
+
+                  - `:"claude-haiku-4-5"`
+
+                    Fastest model with near-frontier intelligence
+
+                  - `:"claude-haiku-4-5-20251001"`
+
+                    Fastest model with near-frontier intelligence
+
+                  - `:"claude-opus-4-5"`
+
+                    Premium model combining maximum intelligence with practical performance
+
+                  - `:"claude-opus-4-5-20251101"`
+
+                    Premium model combining maximum intelligence with practical performance
+
+                  - `:"claude-sonnet-4-5"`
+
+                    High-performance model for agents and coding
+
+                  - `:"claude-sonnet-4-5-20250929"`
+
+                    High-performance model for agents and coding
+
+                  - `:"claude-opus-4-1"`
+
+                    Exceptional model for specialized complex tasks
+
+                  - `:"claude-opus-4-1-20250805"`
+
+                    Exceptional model for specialized complex tasks
+
+                  - `:"claude-opus-4-0"`
+
+                    Powerful model for complex tasks
+
+                  - `:"claude-opus-4-20250514"`
+
+                    Powerful model for complex tasks
+
+                  - `:"claude-sonnet-4-0"`
+
+                    High-performance model with extended thinking
+
+                  - `:"claude-sonnet-4-20250514"`
+
+                    High-performance model with extended thinking
+
+                  - `:"claude-3-haiku-20240307"`
+
+                    Fast and cost-effective model
+
+                - `String = String`
+
+            - `to: BetaFallbackInfo`
+
+              The fallback model producing the content that follows this block. Its `model` is always the canonical id.
+
+            - `type: :fallback`
+
+              - `:fallback`
+
         - `context_management: BetaContextManagementResponse`
 
           Context management response.
@@ -32020,86 +34790,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `Model = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-mythos-preview" | 15 more`
-
-            The model that will complete your prompt.
-
-            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-            - `:"claude-opus-4-8"`
-
-              Frontier intelligence for long-running agents and coding
-
-            - `:"claude-opus-4-7"`
-
-              Frontier intelligence for long-running agents and coding
-
-            - `:"claude-mythos-preview"`
-
-              New class of intelligence, strongest in coding and cybersecurity
-
-            - `:"claude-opus-4-6"`
-
-              Frontier intelligence for long-running agents and coding
-
-            - `:"claude-sonnet-4-6"`
-
-              Best combination of speed and intelligence
-
-            - `:"claude-haiku-4-5"`
-
-              Fastest model with near-frontier intelligence
-
-            - `:"claude-haiku-4-5-20251001"`
-
-              Fastest model with near-frontier intelligence
-
-            - `:"claude-opus-4-5"`
-
-              Premium model combining maximum intelligence with practical performance
-
-            - `:"claude-opus-4-5-20251101"`
-
-              Premium model combining maximum intelligence with practical performance
-
-            - `:"claude-sonnet-4-5"`
-
-              High-performance model for agents and coding
-
-            - `:"claude-sonnet-4-5-20250929"`
-
-              High-performance model for agents and coding
-
-            - `:"claude-opus-4-1"`
-
-              Exceptional model for specialized complex tasks
-
-            - `:"claude-opus-4-1-20250805"`
-
-              Exceptional model for specialized complex tasks
-
-            - `:"claude-opus-4-0"`
-
-              Powerful model for complex tasks
-
-            - `:"claude-opus-4-20250514"`
-
-              Powerful model for complex tasks
-
-            - `:"claude-sonnet-4-0"`
-
-              High-performance model with extended thinking
-
-            - `:"claude-sonnet-4-20250514"`
-
-              High-performance model with extended thinking
-
-            - `:"claude-3-haiku-20240307"`
-
-              Fast and cost-effective model
-
-          - `String = String`
-
         - `role: :assistant`
 
           Conversational role of the generated message.
@@ -32112,7 +34802,7 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           Structured information about a refusal.
 
-          - `category: :cyber | :bio`
+          - `category: :cyber | :bio | :reasoning_extraction`
 
             The policy category that triggered the refusal.
 
@@ -32122,11 +34812,62 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `:bio`
 
+            - `:reasoning_extraction`
+
           - `explanation: String`
 
             Human-readable explanation of the refusal.
 
             This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+          - `fallback_credit_token: String`
+
+            Opaque code that refunds the cache-miss cost when retrying this refused
+            request on the fallback model. Pass it as `fallback_credit_token` on the
+            retry request. Expires 5 minutes after the refusal.
+
+            The retry is sent either with the same request body (`system`, `messages`,
+            `tools`, and other render-shaping fields), or with the same body plus one
+            appended `assistant` message whose content is the partial text (with any
+            trailing whitespace stripped from the final text block) and paired
+            server-tool blocks from this refusal — which also authorizes that
+            appended turn as an assistant-prefill continuation on models that otherwise
+            disallow prefill. A token minted mid-server-tool-loop whose partial content
+            was continuable may only be redeemed the second way — if a same-body retry
+            is rejected with a 400 saying the token must be redeemed by continuing the
+            partial response, retry the second way instead. Either way: same workspace,
+            same platform; a mismatch is a 400. Resending a token for an already-warm
+            prefix is permitted but yields no additional credit.
+
+            `null` when the refused model isn't eligible for a fallback credit.
+
+          - `fallback_has_prefill_claim: bool`
+
+            Whether the accompanying `fallback_credit_token` may be redeemed with the
+            appended-assistant retry form. Only set when `fallback_credit_token` is
+            present.
+
+            `true`: retry by resending the same request body plus one appended
+            `assistant` message whose content is this response's `content` with any
+            trailing whitespace stripped from the final text block and unpaired
+            `tool_use` blocks omitted (the same appended-turn shape described on
+            `fallback_credit_token`), with the token attached. `false`: retry by
+            resending the original request body unchanged, with the token attached —
+            the appended-assistant form is not available for this refusal (no
+            continuable partial content, or the request uses `output_format` or a
+            `tool_choice` that forces tool use). One exception: when the request used
+            `output_format` or a forced `tool_choice` and the refusal arrived after
+            server tools (including MCP connector tools) had already executed, the
+            token may not be redeemable by either retry form; if the exact-body retry
+            is then rejected with a 400 saying the token must be redeemed by
+            continuing the partial response, discard the token and retry without it.
+
+            Advisory: if an appended-assistant retry is rejected with a 400 despite
+            `true`, fall back to resending the original request body with the token.
+
+          - `recommended_model: String`
+
+            The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
           - `type: :refusal`
 
@@ -32247,6 +34988,12 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                 The number of input tokens which were used.
 
+              - `model: Model`
+
+                The model that will complete your prompt.
+
+                See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
               - `output_tokens: Integer`
 
                 The number of output tokens which were used.
@@ -32322,6 +35069,47 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
                 Usage for an advisor sub-inference iteration
 
                 - `:advisor_message`
+
+            - `class BetaFallbackMessageIterationUsage`
+
+              Token usage for the fallback-model attempt of a server-side fallback request.
+
+              Produced in place of a `message` entry for whichever hop served the
+              response. A declined hop produces the existing `message` entry. Whether
+              a fallback model served the response is signalled by the presence of this
+              entry in `usage.iterations`.
+
+              - `cache_creation: BetaCacheCreation`
+
+                Breakdown of cached tokens by TTL
+
+              - `cache_creation_input_tokens: Integer`
+
+                The number of input tokens used to create the cache entry.
+
+              - `cache_read_input_tokens: Integer`
+
+                The number of input tokens read from the cache.
+
+              - `input_tokens: Integer`
+
+                The number of input tokens which were used.
+
+              - `model: Model`
+
+                The model that will complete your prompt.
+
+                See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+              - `output_tokens: Integer`
+
+                The number of output tokens which were used.
+
+              - `type: :fallback_message`
+
+                Usage for the fallback-model attempt that served the response
+
+                - `:fallback_message`
 
           - `output_tokens: Integer`
 
@@ -33192,7 +35980,7 @@ puts(beta_message_batch_individual_response)
 
               - `class BetaAdvisorToolResultError`
 
-                - `error_code: :max_uses_exceeded | :prompt_too_long | :too_many_requests | 3 more`
+                - `error_code: :max_uses_exceeded | :prompt_too_long | :too_many_requests | 4 more`
 
                   - `:max_uses_exceeded`
 
@@ -33205,6 +35993,8 @@ puts(beta_message_batch_individual_response)
                   - `:unavailable`
 
                   - `:execution_time_exceeded`
+
+                  - `:model_not_found`
 
                 - `type: :advisor_tool_result_error`
 
@@ -33550,6 +36340,126 @@ puts(beta_message_batch_individual_response)
 
               - `:compaction`
 
+          - `class BetaFallbackBlock`
+
+            Marks the point in `content` where one model's output gives way to the next.
+
+            One block appears per hop where a preceding model actually ran this turn and
+            declined. A turn routed directly by the sticky decision has no such boundary
+            and carries no block — the signal for whether a fallback model served the
+            response is the presence of a `fallback_message` entry in
+            `usage.iterations`, not this block.
+
+            The block is treated like a server-tool content block for streaming: it
+            arrives via the standard `content_block_start` / `content_block_stop`
+            pair and carries no deltas.
+
+            - `from: BetaFallbackInfo`
+
+              The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
+
+              - `model: Model`
+
+                The model that will complete your prompt.
+
+                See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                - `Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more`
+
+                  The model that will complete your prompt.
+
+                  See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                  - `:"claude-fable-5"`
+
+                    Next generation of intelligence for the hardest knowledge work and coding problems
+
+                  - `:"claude-mythos-5"`
+
+                    Most capable model for cybersecurity and biology research
+
+                  - `:"claude-opus-4-8"`
+
+                    Frontier intelligence for long-running agents and coding
+
+                  - `:"claude-opus-4-7"`
+
+                    Frontier intelligence for long-running agents and coding
+
+                  - `:"claude-mythos-preview"`
+
+                    New class of intelligence, strongest in coding and cybersecurity
+
+                  - `:"claude-opus-4-6"`
+
+                    Frontier intelligence for long-running agents and coding
+
+                  - `:"claude-sonnet-4-6"`
+
+                    Best combination of speed and intelligence
+
+                  - `:"claude-haiku-4-5"`
+
+                    Fastest model with near-frontier intelligence
+
+                  - `:"claude-haiku-4-5-20251001"`
+
+                    Fastest model with near-frontier intelligence
+
+                  - `:"claude-opus-4-5"`
+
+                    Premium model combining maximum intelligence with practical performance
+
+                  - `:"claude-opus-4-5-20251101"`
+
+                    Premium model combining maximum intelligence with practical performance
+
+                  - `:"claude-sonnet-4-5"`
+
+                    High-performance model for agents and coding
+
+                  - `:"claude-sonnet-4-5-20250929"`
+
+                    High-performance model for agents and coding
+
+                  - `:"claude-opus-4-1"`
+
+                    Exceptional model for specialized complex tasks
+
+                  - `:"claude-opus-4-1-20250805"`
+
+                    Exceptional model for specialized complex tasks
+
+                  - `:"claude-opus-4-0"`
+
+                    Powerful model for complex tasks
+
+                  - `:"claude-opus-4-20250514"`
+
+                    Powerful model for complex tasks
+
+                  - `:"claude-sonnet-4-0"`
+
+                    High-performance model with extended thinking
+
+                  - `:"claude-sonnet-4-20250514"`
+
+                    High-performance model with extended thinking
+
+                  - `:"claude-3-haiku-20240307"`
+
+                    Fast and cost-effective model
+
+                - `String = String`
+
+            - `to: BetaFallbackInfo`
+
+              The fallback model producing the content that follows this block. Its `model` is always the canonical id.
+
+            - `type: :fallback`
+
+              - `:fallback`
+
         - `context_management: BetaContextManagementResponse`
 
           Context management response.
@@ -33659,86 +36569,6 @@ puts(beta_message_batch_individual_response)
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `Model = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-mythos-preview" | 15 more`
-
-            The model that will complete your prompt.
-
-            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-            - `:"claude-opus-4-8"`
-
-              Frontier intelligence for long-running agents and coding
-
-            - `:"claude-opus-4-7"`
-
-              Frontier intelligence for long-running agents and coding
-
-            - `:"claude-mythos-preview"`
-
-              New class of intelligence, strongest in coding and cybersecurity
-
-            - `:"claude-opus-4-6"`
-
-              Frontier intelligence for long-running agents and coding
-
-            - `:"claude-sonnet-4-6"`
-
-              Best combination of speed and intelligence
-
-            - `:"claude-haiku-4-5"`
-
-              Fastest model with near-frontier intelligence
-
-            - `:"claude-haiku-4-5-20251001"`
-
-              Fastest model with near-frontier intelligence
-
-            - `:"claude-opus-4-5"`
-
-              Premium model combining maximum intelligence with practical performance
-
-            - `:"claude-opus-4-5-20251101"`
-
-              Premium model combining maximum intelligence with practical performance
-
-            - `:"claude-sonnet-4-5"`
-
-              High-performance model for agents and coding
-
-            - `:"claude-sonnet-4-5-20250929"`
-
-              High-performance model for agents and coding
-
-            - `:"claude-opus-4-1"`
-
-              Exceptional model for specialized complex tasks
-
-            - `:"claude-opus-4-1-20250805"`
-
-              Exceptional model for specialized complex tasks
-
-            - `:"claude-opus-4-0"`
-
-              Powerful model for complex tasks
-
-            - `:"claude-opus-4-20250514"`
-
-              Powerful model for complex tasks
-
-            - `:"claude-sonnet-4-0"`
-
-              High-performance model with extended thinking
-
-            - `:"claude-sonnet-4-20250514"`
-
-              High-performance model with extended thinking
-
-            - `:"claude-3-haiku-20240307"`
-
-              Fast and cost-effective model
-
-          - `String = String`
-
         - `role: :assistant`
 
           Conversational role of the generated message.
@@ -33751,7 +36581,7 @@ puts(beta_message_batch_individual_response)
 
           Structured information about a refusal.
 
-          - `category: :cyber | :bio`
+          - `category: :cyber | :bio | :reasoning_extraction`
 
             The policy category that triggered the refusal.
 
@@ -33761,11 +36591,62 @@ puts(beta_message_batch_individual_response)
 
             - `:bio`
 
+            - `:reasoning_extraction`
+
           - `explanation: String`
 
             Human-readable explanation of the refusal.
 
             This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+          - `fallback_credit_token: String`
+
+            Opaque code that refunds the cache-miss cost when retrying this refused
+            request on the fallback model. Pass it as `fallback_credit_token` on the
+            retry request. Expires 5 minutes after the refusal.
+
+            The retry is sent either with the same request body (`system`, `messages`,
+            `tools`, and other render-shaping fields), or with the same body plus one
+            appended `assistant` message whose content is the partial text (with any
+            trailing whitespace stripped from the final text block) and paired
+            server-tool blocks from this refusal — which also authorizes that
+            appended turn as an assistant-prefill continuation on models that otherwise
+            disallow prefill. A token minted mid-server-tool-loop whose partial content
+            was continuable may only be redeemed the second way — if a same-body retry
+            is rejected with a 400 saying the token must be redeemed by continuing the
+            partial response, retry the second way instead. Either way: same workspace,
+            same platform; a mismatch is a 400. Resending a token for an already-warm
+            prefix is permitted but yields no additional credit.
+
+            `null` when the refused model isn't eligible for a fallback credit.
+
+          - `fallback_has_prefill_claim: bool`
+
+            Whether the accompanying `fallback_credit_token` may be redeemed with the
+            appended-assistant retry form. Only set when `fallback_credit_token` is
+            present.
+
+            `true`: retry by resending the same request body plus one appended
+            `assistant` message whose content is this response's `content` with any
+            trailing whitespace stripped from the final text block and unpaired
+            `tool_use` blocks omitted (the same appended-turn shape described on
+            `fallback_credit_token`), with the token attached. `false`: retry by
+            resending the original request body unchanged, with the token attached —
+            the appended-assistant form is not available for this refusal (no
+            continuable partial content, or the request uses `output_format` or a
+            `tool_choice` that forces tool use). One exception: when the request used
+            `output_format` or a forced `tool_choice` and the refusal arrived after
+            server tools (including MCP connector tools) had already executed, the
+            token may not be redeemable by either retry form; if the exact-body retry
+            is then rejected with a 400 saying the token must be redeemed by
+            continuing the partial response, discard the token and retry without it.
+
+            Advisory: if an appended-assistant retry is rejected with a 400 despite
+            `true`, fall back to resending the original request body with the token.
+
+          - `recommended_model: String`
+
+            The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
           - `type: :refusal`
 
@@ -33886,6 +36767,12 @@ puts(beta_message_batch_individual_response)
 
                 The number of input tokens which were used.
 
+              - `model: Model`
+
+                The model that will complete your prompt.
+
+                See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
               - `output_tokens: Integer`
 
                 The number of output tokens which were used.
@@ -33961,6 +36848,47 @@ puts(beta_message_batch_individual_response)
                 Usage for an advisor sub-inference iteration
 
                 - `:advisor_message`
+
+            - `class BetaFallbackMessageIterationUsage`
+
+              Token usage for the fallback-model attempt of a server-side fallback request.
+
+              Produced in place of a `message` entry for whichever hop served the
+              response. A declined hop produces the existing `message` entry. Whether
+              a fallback model served the response is signalled by the presence of this
+              entry in `usage.iterations`.
+
+              - `cache_creation: BetaCacheCreation`
+
+                Breakdown of cached tokens by TTL
+
+              - `cache_creation_input_tokens: Integer`
+
+                The number of input tokens used to create the cache entry.
+
+              - `cache_read_input_tokens: Integer`
+
+                The number of input tokens read from the cache.
+
+              - `input_tokens: Integer`
+
+                The number of input tokens which were used.
+
+              - `model: Model`
+
+                The model that will complete your prompt.
+
+                See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+              - `output_tokens: Integer`
+
+                The number of output tokens which were used.
+
+              - `type: :fallback_message`
+
+                Usage for the fallback-model attempt that served the response
+
+                - `:fallback_message`
 
           - `output_tokens: Integer`
 
@@ -34627,7 +37555,7 @@ puts(beta_message_batch_individual_response)
 
             - `class BetaAdvisorToolResultError`
 
-              - `error_code: :max_uses_exceeded | :prompt_too_long | :too_many_requests | 3 more`
+              - `error_code: :max_uses_exceeded | :prompt_too_long | :too_many_requests | 4 more`
 
                 - `:max_uses_exceeded`
 
@@ -34640,6 +37568,8 @@ puts(beta_message_batch_individual_response)
                 - `:unavailable`
 
                 - `:execution_time_exceeded`
+
+                - `:model_not_found`
 
               - `type: :advisor_tool_result_error`
 
@@ -34985,6 +37915,126 @@ puts(beta_message_batch_individual_response)
 
             - `:compaction`
 
+        - `class BetaFallbackBlock`
+
+          Marks the point in `content` where one model's output gives way to the next.
+
+          One block appears per hop where a preceding model actually ran this turn and
+          declined. A turn routed directly by the sticky decision has no such boundary
+          and carries no block — the signal for whether a fallback model served the
+          response is the presence of a `fallback_message` entry in
+          `usage.iterations`, not this block.
+
+          The block is treated like a server-tool content block for streaming: it
+          arrives via the standard `content_block_start` / `content_block_stop`
+          pair and carries no deltas.
+
+          - `from: BetaFallbackInfo`
+
+            The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
+
+            - `model: Model`
+
+              The model that will complete your prompt.
+
+              See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+              - `Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more`
+
+                The model that will complete your prompt.
+
+                See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                - `:"claude-fable-5"`
+
+                  Next generation of intelligence for the hardest knowledge work and coding problems
+
+                - `:"claude-mythos-5"`
+
+                  Most capable model for cybersecurity and biology research
+
+                - `:"claude-opus-4-8"`
+
+                  Frontier intelligence for long-running agents and coding
+
+                - `:"claude-opus-4-7"`
+
+                  Frontier intelligence for long-running agents and coding
+
+                - `:"claude-mythos-preview"`
+
+                  New class of intelligence, strongest in coding and cybersecurity
+
+                - `:"claude-opus-4-6"`
+
+                  Frontier intelligence for long-running agents and coding
+
+                - `:"claude-sonnet-4-6"`
+
+                  Best combination of speed and intelligence
+
+                - `:"claude-haiku-4-5"`
+
+                  Fastest model with near-frontier intelligence
+
+                - `:"claude-haiku-4-5-20251001"`
+
+                  Fastest model with near-frontier intelligence
+
+                - `:"claude-opus-4-5"`
+
+                  Premium model combining maximum intelligence with practical performance
+
+                - `:"claude-opus-4-5-20251101"`
+
+                  Premium model combining maximum intelligence with practical performance
+
+                - `:"claude-sonnet-4-5"`
+
+                  High-performance model for agents and coding
+
+                - `:"claude-sonnet-4-5-20250929"`
+
+                  High-performance model for agents and coding
+
+                - `:"claude-opus-4-1"`
+
+                  Exceptional model for specialized complex tasks
+
+                - `:"claude-opus-4-1-20250805"`
+
+                  Exceptional model for specialized complex tasks
+
+                - `:"claude-opus-4-0"`
+
+                  Powerful model for complex tasks
+
+                - `:"claude-opus-4-20250514"`
+
+                  Powerful model for complex tasks
+
+                - `:"claude-sonnet-4-0"`
+
+                  High-performance model with extended thinking
+
+                - `:"claude-sonnet-4-20250514"`
+
+                  High-performance model with extended thinking
+
+                - `:"claude-3-haiku-20240307"`
+
+                  Fast and cost-effective model
+
+              - `String = String`
+
+          - `to: BetaFallbackInfo`
+
+            The fallback model producing the content that follows this block. Its `model` is always the canonical id.
+
+          - `type: :fallback`
+
+            - `:fallback`
+
       - `context_management: BetaContextManagementResponse`
 
         Context management response.
@@ -35094,86 +38144,6 @@ puts(beta_message_batch_individual_response)
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-        - `Model = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-mythos-preview" | 15 more`
-
-          The model that will complete your prompt.
-
-          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-          - `:"claude-opus-4-8"`
-
-            Frontier intelligence for long-running agents and coding
-
-          - `:"claude-opus-4-7"`
-
-            Frontier intelligence for long-running agents and coding
-
-          - `:"claude-mythos-preview"`
-
-            New class of intelligence, strongest in coding and cybersecurity
-
-          - `:"claude-opus-4-6"`
-
-            Frontier intelligence for long-running agents and coding
-
-          - `:"claude-sonnet-4-6"`
-
-            Best combination of speed and intelligence
-
-          - `:"claude-haiku-4-5"`
-
-            Fastest model with near-frontier intelligence
-
-          - `:"claude-haiku-4-5-20251001"`
-
-            Fastest model with near-frontier intelligence
-
-          - `:"claude-opus-4-5"`
-
-            Premium model combining maximum intelligence with practical performance
-
-          - `:"claude-opus-4-5-20251101"`
-
-            Premium model combining maximum intelligence with practical performance
-
-          - `:"claude-sonnet-4-5"`
-
-            High-performance model for agents and coding
-
-          - `:"claude-sonnet-4-5-20250929"`
-
-            High-performance model for agents and coding
-
-          - `:"claude-opus-4-1"`
-
-            Exceptional model for specialized complex tasks
-
-          - `:"claude-opus-4-1-20250805"`
-
-            Exceptional model for specialized complex tasks
-
-          - `:"claude-opus-4-0"`
-
-            Powerful model for complex tasks
-
-          - `:"claude-opus-4-20250514"`
-
-            Powerful model for complex tasks
-
-          - `:"claude-sonnet-4-0"`
-
-            High-performance model with extended thinking
-
-          - `:"claude-sonnet-4-20250514"`
-
-            High-performance model with extended thinking
-
-          - `:"claude-3-haiku-20240307"`
-
-            Fast and cost-effective model
-
-        - `String = String`
-
       - `role: :assistant`
 
         Conversational role of the generated message.
@@ -35186,7 +38156,7 @@ puts(beta_message_batch_individual_response)
 
         Structured information about a refusal.
 
-        - `category: :cyber | :bio`
+        - `category: :cyber | :bio | :reasoning_extraction`
 
           The policy category that triggered the refusal.
 
@@ -35196,11 +38166,62 @@ puts(beta_message_batch_individual_response)
 
           - `:bio`
 
+          - `:reasoning_extraction`
+
         - `explanation: String`
 
           Human-readable explanation of the refusal.
 
           This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+        - `fallback_credit_token: String`
+
+          Opaque code that refunds the cache-miss cost when retrying this refused
+          request on the fallback model. Pass it as `fallback_credit_token` on the
+          retry request. Expires 5 minutes after the refusal.
+
+          The retry is sent either with the same request body (`system`, `messages`,
+          `tools`, and other render-shaping fields), or with the same body plus one
+          appended `assistant` message whose content is the partial text (with any
+          trailing whitespace stripped from the final text block) and paired
+          server-tool blocks from this refusal — which also authorizes that
+          appended turn as an assistant-prefill continuation on models that otherwise
+          disallow prefill. A token minted mid-server-tool-loop whose partial content
+          was continuable may only be redeemed the second way — if a same-body retry
+          is rejected with a 400 saying the token must be redeemed by continuing the
+          partial response, retry the second way instead. Either way: same workspace,
+          same platform; a mismatch is a 400. Resending a token for an already-warm
+          prefix is permitted but yields no additional credit.
+
+          `null` when the refused model isn't eligible for a fallback credit.
+
+        - `fallback_has_prefill_claim: bool`
+
+          Whether the accompanying `fallback_credit_token` may be redeemed with the
+          appended-assistant retry form. Only set when `fallback_credit_token` is
+          present.
+
+          `true`: retry by resending the same request body plus one appended
+          `assistant` message whose content is this response's `content` with any
+          trailing whitespace stripped from the final text block and unpaired
+          `tool_use` blocks omitted (the same appended-turn shape described on
+          `fallback_credit_token`), with the token attached. `false`: retry by
+          resending the original request body unchanged, with the token attached —
+          the appended-assistant form is not available for this refusal (no
+          continuable partial content, or the request uses `output_format` or a
+          `tool_choice` that forces tool use). One exception: when the request used
+          `output_format` or a forced `tool_choice` and the refusal arrived after
+          server tools (including MCP connector tools) had already executed, the
+          token may not be redeemable by either retry form; if the exact-body retry
+          is then rejected with a 400 saying the token must be redeemed by
+          continuing the partial response, discard the token and retry without it.
+
+          Advisory: if an appended-assistant retry is rejected with a 400 despite
+          `true`, fall back to resending the original request body with the token.
+
+        - `recommended_model: String`
+
+          The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
         - `type: :refusal`
 
@@ -35321,6 +38342,12 @@ puts(beta_message_batch_individual_response)
 
               The number of input tokens which were used.
 
+            - `model: Model`
+
+              The model that will complete your prompt.
+
+              See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
             - `output_tokens: Integer`
 
               The number of output tokens which were used.
@@ -35396,6 +38423,47 @@ puts(beta_message_batch_individual_response)
               Usage for an advisor sub-inference iteration
 
               - `:advisor_message`
+
+          - `class BetaFallbackMessageIterationUsage`
+
+            Token usage for the fallback-model attempt of a server-side fallback request.
+
+            Produced in place of a `message` entry for whichever hop served the
+            response. A declined hop produces the existing `message` entry. Whether
+            a fallback model served the response is signalled by the presence of this
+            entry in `usage.iterations`.
+
+            - `cache_creation: BetaCacheCreation`
+
+              Breakdown of cached tokens by TTL
+
+            - `cache_creation_input_tokens: Integer`
+
+              The number of input tokens used to create the cache entry.
+
+            - `cache_read_input_tokens: Integer`
+
+              The number of input tokens read from the cache.
+
+            - `input_tokens: Integer`
+
+              The number of input tokens which were used.
+
+            - `model: Model`
+
+              The model that will complete your prompt.
+
+              See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `output_tokens: Integer`
+
+              The number of output tokens which were used.
+
+            - `type: :fallback_message`
+
+              Usage for the fallback-model attempt that served the response
+
+              - `:fallback_message`
 
         - `output_tokens: Integer`
 
@@ -36024,7 +39092,7 @@ puts(beta_message_batch_individual_response)
 
           - `class BetaAdvisorToolResultError`
 
-            - `error_code: :max_uses_exceeded | :prompt_too_long | :too_many_requests | 3 more`
+            - `error_code: :max_uses_exceeded | :prompt_too_long | :too_many_requests | 4 more`
 
               - `:max_uses_exceeded`
 
@@ -36037,6 +39105,8 @@ puts(beta_message_batch_individual_response)
               - `:unavailable`
 
               - `:execution_time_exceeded`
+
+              - `:model_not_found`
 
             - `type: :advisor_tool_result_error`
 
@@ -36382,6 +39452,126 @@ puts(beta_message_batch_individual_response)
 
           - `:compaction`
 
+      - `class BetaFallbackBlock`
+
+        Marks the point in `content` where one model's output gives way to the next.
+
+        One block appears per hop where a preceding model actually ran this turn and
+        declined. A turn routed directly by the sticky decision has no such boundary
+        and carries no block — the signal for whether a fallback model served the
+        response is the presence of a `fallback_message` entry in
+        `usage.iterations`, not this block.
+
+        The block is treated like a server-tool content block for streaming: it
+        arrives via the standard `content_block_start` / `content_block_stop`
+        pair and carries no deltas.
+
+        - `from: BetaFallbackInfo`
+
+          The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
+
+          - `model: Model`
+
+            The model that will complete your prompt.
+
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more`
+
+              The model that will complete your prompt.
+
+              See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+              - `:"claude-fable-5"`
+
+                Next generation of intelligence for the hardest knowledge work and coding problems
+
+              - `:"claude-mythos-5"`
+
+                Most capable model for cybersecurity and biology research
+
+              - `:"claude-opus-4-8"`
+
+                Frontier intelligence for long-running agents and coding
+
+              - `:"claude-opus-4-7"`
+
+                Frontier intelligence for long-running agents and coding
+
+              - `:"claude-mythos-preview"`
+
+                New class of intelligence, strongest in coding and cybersecurity
+
+              - `:"claude-opus-4-6"`
+
+                Frontier intelligence for long-running agents and coding
+
+              - `:"claude-sonnet-4-6"`
+
+                Best combination of speed and intelligence
+
+              - `:"claude-haiku-4-5"`
+
+                Fastest model with near-frontier intelligence
+
+              - `:"claude-haiku-4-5-20251001"`
+
+                Fastest model with near-frontier intelligence
+
+              - `:"claude-opus-4-5"`
+
+                Premium model combining maximum intelligence with practical performance
+
+              - `:"claude-opus-4-5-20251101"`
+
+                Premium model combining maximum intelligence with practical performance
+
+              - `:"claude-sonnet-4-5"`
+
+                High-performance model for agents and coding
+
+              - `:"claude-sonnet-4-5-20250929"`
+
+                High-performance model for agents and coding
+
+              - `:"claude-opus-4-1"`
+
+                Exceptional model for specialized complex tasks
+
+              - `:"claude-opus-4-1-20250805"`
+
+                Exceptional model for specialized complex tasks
+
+              - `:"claude-opus-4-0"`
+
+                Powerful model for complex tasks
+
+              - `:"claude-opus-4-20250514"`
+
+                Powerful model for complex tasks
+
+              - `:"claude-sonnet-4-0"`
+
+                High-performance model with extended thinking
+
+              - `:"claude-sonnet-4-20250514"`
+
+                High-performance model with extended thinking
+
+              - `:"claude-3-haiku-20240307"`
+
+                Fast and cost-effective model
+
+            - `String = String`
+
+        - `to: BetaFallbackInfo`
+
+          The fallback model producing the content that follows this block. Its `model` is always the canonical id.
+
+        - `type: :fallback`
+
+          - `:fallback`
+
     - `context_management: BetaContextManagementResponse`
 
       Context management response.
@@ -36491,86 +39681,6 @@ puts(beta_message_batch_individual_response)
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `Model = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-mythos-preview" | 15 more`
-
-        The model that will complete your prompt.
-
-        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-        - `:"claude-opus-4-8"`
-
-          Frontier intelligence for long-running agents and coding
-
-        - `:"claude-opus-4-7"`
-
-          Frontier intelligence for long-running agents and coding
-
-        - `:"claude-mythos-preview"`
-
-          New class of intelligence, strongest in coding and cybersecurity
-
-        - `:"claude-opus-4-6"`
-
-          Frontier intelligence for long-running agents and coding
-
-        - `:"claude-sonnet-4-6"`
-
-          Best combination of speed and intelligence
-
-        - `:"claude-haiku-4-5"`
-
-          Fastest model with near-frontier intelligence
-
-        - `:"claude-haiku-4-5-20251001"`
-
-          Fastest model with near-frontier intelligence
-
-        - `:"claude-opus-4-5"`
-
-          Premium model combining maximum intelligence with practical performance
-
-        - `:"claude-opus-4-5-20251101"`
-
-          Premium model combining maximum intelligence with practical performance
-
-        - `:"claude-sonnet-4-5"`
-
-          High-performance model for agents and coding
-
-        - `:"claude-sonnet-4-5-20250929"`
-
-          High-performance model for agents and coding
-
-        - `:"claude-opus-4-1"`
-
-          Exceptional model for specialized complex tasks
-
-        - `:"claude-opus-4-1-20250805"`
-
-          Exceptional model for specialized complex tasks
-
-        - `:"claude-opus-4-0"`
-
-          Powerful model for complex tasks
-
-        - `:"claude-opus-4-20250514"`
-
-          Powerful model for complex tasks
-
-        - `:"claude-sonnet-4-0"`
-
-          High-performance model with extended thinking
-
-        - `:"claude-sonnet-4-20250514"`
-
-          High-performance model with extended thinking
-
-        - `:"claude-3-haiku-20240307"`
-
-          Fast and cost-effective model
-
-      - `String = String`
-
     - `role: :assistant`
 
       Conversational role of the generated message.
@@ -36583,7 +39693,7 @@ puts(beta_message_batch_individual_response)
 
       Structured information about a refusal.
 
-      - `category: :cyber | :bio`
+      - `category: :cyber | :bio | :reasoning_extraction`
 
         The policy category that triggered the refusal.
 
@@ -36593,11 +39703,62 @@ puts(beta_message_batch_individual_response)
 
         - `:bio`
 
+        - `:reasoning_extraction`
+
       - `explanation: String`
 
         Human-readable explanation of the refusal.
 
         This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+      - `fallback_credit_token: String`
+
+        Opaque code that refunds the cache-miss cost when retrying this refused
+        request on the fallback model. Pass it as `fallback_credit_token` on the
+        retry request. Expires 5 minutes after the refusal.
+
+        The retry is sent either with the same request body (`system`, `messages`,
+        `tools`, and other render-shaping fields), or with the same body plus one
+        appended `assistant` message whose content is the partial text (with any
+        trailing whitespace stripped from the final text block) and paired
+        server-tool blocks from this refusal — which also authorizes that
+        appended turn as an assistant-prefill continuation on models that otherwise
+        disallow prefill. A token minted mid-server-tool-loop whose partial content
+        was continuable may only be redeemed the second way — if a same-body retry
+        is rejected with a 400 saying the token must be redeemed by continuing the
+        partial response, retry the second way instead. Either way: same workspace,
+        same platform; a mismatch is a 400. Resending a token for an already-warm
+        prefix is permitted but yields no additional credit.
+
+        `null` when the refused model isn't eligible for a fallback credit.
+
+      - `fallback_has_prefill_claim: bool`
+
+        Whether the accompanying `fallback_credit_token` may be redeemed with the
+        appended-assistant retry form. Only set when `fallback_credit_token` is
+        present.
+
+        `true`: retry by resending the same request body plus one appended
+        `assistant` message whose content is this response's `content` with any
+        trailing whitespace stripped from the final text block and unpaired
+        `tool_use` blocks omitted (the same appended-turn shape described on
+        `fallback_credit_token`), with the token attached. `false`: retry by
+        resending the original request body unchanged, with the token attached —
+        the appended-assistant form is not available for this refusal (no
+        continuable partial content, or the request uses `output_format` or a
+        `tool_choice` that forces tool use). One exception: when the request used
+        `output_format` or a forced `tool_choice` and the refusal arrived after
+        server tools (including MCP connector tools) had already executed, the
+        token may not be redeemable by either retry form; if the exact-body retry
+        is then rejected with a 400 saying the token must be redeemed by
+        continuing the partial response, discard the token and retry without it.
+
+        Advisory: if an appended-assistant retry is rejected with a 400 despite
+        `true`, fall back to resending the original request body with the token.
+
+      - `recommended_model: String`
+
+        The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
       - `type: :refusal`
 
@@ -36718,6 +39879,12 @@ puts(beta_message_batch_individual_response)
 
             The number of input tokens which were used.
 
+          - `model: Model`
+
+            The model that will complete your prompt.
+
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
           - `output_tokens: Integer`
 
             The number of output tokens which were used.
@@ -36794,6 +39961,47 @@ puts(beta_message_batch_individual_response)
 
             - `:advisor_message`
 
+        - `class BetaFallbackMessageIterationUsage`
+
+          Token usage for the fallback-model attempt of a server-side fallback request.
+
+          Produced in place of a `message` entry for whichever hop served the
+          response. A declined hop produces the existing `message` entry. Whether
+          a fallback model served the response is signalled by the presence of this
+          entry in `usage.iterations`.
+
+          - `cache_creation: BetaCacheCreation`
+
+            Breakdown of cached tokens by TTL
+
+          - `cache_creation_input_tokens: Integer`
+
+            The number of input tokens used to create the cache entry.
+
+          - `cache_read_input_tokens: Integer`
+
+            The number of input tokens read from the cache.
+
+          - `input_tokens: Integer`
+
+            The number of input tokens which were used.
+
+          - `model: Model`
+
+            The model that will complete your prompt.
+
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `output_tokens: Integer`
+
+            The number of output tokens which were used.
+
+          - `type: :fallback_message`
+
+            Usage for the fallback-model attempt that served the response
+
+            - `:fallback_message`
+
       - `output_tokens: Integer`
 
         The number of output tokens which were used.
@@ -36868,17 +40076,21 @@ Create Agent
 
   Model identifier. Accepts the [model string](../about-claude/about-claude-models-overview.md#latest-models-comparison), e.g. `claude-opus-4-6`, or a `model_config` object for additional configuration control
 
-  - `BetaManagedAgentsModel = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-opus-4-6" | 7 more | String`
+  - `BetaManagedAgentsModel = :"claude-fable-5" | :"claude-opus-4-8" | :"claude-opus-4-7" | 8 more | String`
 
     The model that will power your agent.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-    - `BetaManagedAgentsModel = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-opus-4-6" | 7 more`
+    - `BetaManagedAgentsModel = :"claude-fable-5" | :"claude-opus-4-8" | :"claude-opus-4-7" | 8 more`
 
       The model that will power your agent.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `:"claude-fable-5"`
+
+        Next generation of intelligence for the hardest knowledge work and coding problems
 
       - `:"claude-opus-4-8"`
 
@@ -36942,11 +40154,11 @@ Create Agent
 
 - `name: String`
 
-  Human-readable name for the agent. 1-256 characters.
+  Human-readable name for the agent.
 
 - `description: String`
 
-  Description of what the agent does. Up to 2048 characters.
+  Description of what the agent does.
 
 - `mcp_servers: Array[BetaManagedAgentsURLMCPServerParams]`
 
@@ -37008,7 +40220,7 @@ Create Agent
 
 - `skills: Array[BetaManagedAgentsSkillParams]`
 
-  Skills available to the agent. Maximum 20.
+  Skills available to the agent.
 
   - `class BetaManagedAgentsAnthropicSkillParams`
 
@@ -37044,7 +40256,7 @@ Create Agent
 
 - `system_: String`
 
-  System prompt for the agent. Up to 100,000 characters.
+  System prompt for the agent.
 
 - `tools: Array[BetaManagedAgentsAgentToolset20260401Params | BetaManagedAgentsMCPToolsetParams | BetaManagedAgentsCustomToolParams]`
 
@@ -37194,19 +40406,13 @@ Create Agent
 
       JSON Schema for custom tool input parameters.
 
-      - `properties: Hash[Symbol, untyped]`
-
-        JSON Schema properties defining the tool's input parameters.
-
-      - `required: Array[String]`
-
-        List of required property names.
-
       - `type: :object`
 
-        Must be 'object' for tool input schemas.
-
         - `:object`
+
+      - `properties: Hash[Symbol, untyped]`
+
+      - `required: Array[String]`
 
     - `name: String`
 
@@ -37222,7 +40428,7 @@ Create Agent
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -37276,6 +40482,10 @@ Create Agent
 
     - `:"thinking-token-count-2026-05-13"`
 
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
+
 ### Returns
 
 - `class BetaManagedAgentsAgent`
@@ -37316,11 +40526,15 @@ Create Agent
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `BetaManagedAgentsModel = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-opus-4-6" | 7 more`
+      - `BetaManagedAgentsModel = :"claude-fable-5" | :"claude-opus-4-8" | :"claude-opus-4-7" | 8 more`
 
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `:"claude-fable-5"`
+
+          Next generation of intelligence for the hardest knowledge work and coding problems
 
         - `:"claude-opus-4-8"`
 
@@ -37546,19 +40760,13 @@ Create Agent
 
         JSON Schema for custom tool input parameters.
 
-        - `properties: Hash[Symbol, untyped]`
-
-          JSON Schema properties defining the tool's input parameters.
-
-        - `required: Array[String]`
-
-          List of required property names.
-
         - `type: :object`
 
-          Must be 'object' for tool input schemas.
-
           - `:object`
+
+        - `properties: Hash[Symbol, untyped]`
+
+        - `required: Array[String]`
 
       - `name: String`
 
@@ -37698,7 +40906,7 @@ List Agents
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -37752,6 +40960,10 @@ List Agents
 
     - `:"thinking-token-count-2026-05-13"`
 
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
+
 ### Returns
 
 - `class BetaManagedAgentsAgent`
@@ -37792,11 +41004,15 @@ List Agents
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `BetaManagedAgentsModel = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-opus-4-6" | 7 more`
+      - `BetaManagedAgentsModel = :"claude-fable-5" | :"claude-opus-4-8" | :"claude-opus-4-7" | 8 more`
 
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `:"claude-fable-5"`
+
+          Next generation of intelligence for the hardest knowledge work and coding problems
 
         - `:"claude-opus-4-8"`
 
@@ -38022,19 +41238,13 @@ List Agents
 
         JSON Schema for custom tool input parameters.
 
-        - `properties: Hash[Symbol, untyped]`
-
-          JSON Schema properties defining the tool's input parameters.
-
-        - `required: Array[String]`
-
-          List of required property names.
-
         - `type: :object`
 
-          Must be 'object' for tool input schemas.
-
           - `:object`
+
+        - `properties: Hash[Symbol, untyped]`
+
+        - `required: Array[String]`
 
       - `name: String`
 
@@ -38165,7 +41375,7 @@ Get Agent
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -38219,6 +41429,10 @@ Get Agent
 
     - `:"thinking-token-count-2026-05-13"`
 
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
+
 ### Returns
 
 - `class BetaManagedAgentsAgent`
@@ -38259,11 +41473,15 @@ Get Agent
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `BetaManagedAgentsModel = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-opus-4-6" | 7 more`
+      - `BetaManagedAgentsModel = :"claude-fable-5" | :"claude-opus-4-8" | :"claude-opus-4-7" | 8 more`
 
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `:"claude-fable-5"`
+
+          Next generation of intelligence for the hardest knowledge work and coding problems
 
         - `:"claude-opus-4-8"`
 
@@ -38489,19 +41707,13 @@ Get Agent
 
         JSON Schema for custom tool input parameters.
 
-        - `properties: Hash[Symbol, untyped]`
-
-          JSON Schema properties defining the tool's input parameters.
-
-        - `required: Array[String]`
-
-          List of required property names.
-
         - `type: :object`
 
-          Must be 'object' for tool input schemas.
-
           - `:object`
+
+        - `properties: Hash[Symbol, untyped]`
+
+        - `required: Array[String]`
 
       - `name: String`
 
@@ -38623,7 +41835,7 @@ Update Agent
 
 - `description: String`
 
-  Description. Up to 2048 characters. Omit to preserve; send empty string or null to clear.
+  Description. Omit to preserve; send empty string or null to clear.
 
 - `mcp_servers: Array[BetaManagedAgentsURLMCPServerParams]`
 
@@ -38649,17 +41861,21 @@ Update Agent
 
   Model identifier. Accepts the [model string](../about-claude/about-claude-models-overview.md#latest-models-comparison), e.g. `claude-opus-4-6`, or a `model_config` object for additional configuration control. Omit to preserve. Cannot be cleared.
 
-  - `BetaManagedAgentsModel = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-opus-4-6" | 7 more | String`
+  - `BetaManagedAgentsModel = :"claude-fable-5" | :"claude-opus-4-8" | :"claude-opus-4-7" | 8 more | String`
 
     The model that will power your agent.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-    - `BetaManagedAgentsModel = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-opus-4-6" | 7 more`
+    - `BetaManagedAgentsModel = :"claude-fable-5" | :"claude-opus-4-8" | :"claude-opus-4-7" | 8 more`
 
       The model that will power your agent.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `:"claude-fable-5"`
+
+        Next generation of intelligence for the hardest knowledge work and coding problems
 
       - `:"claude-opus-4-8"`
 
@@ -38761,11 +41977,11 @@ Update Agent
 
 - `name: String`
 
-  Human-readable name. 1-256 characters. Omit to preserve. Cannot be cleared.
+  Human-readable name. Must be non-empty. Omit to preserve. Cannot be cleared.
 
 - `skills: Array[BetaManagedAgentsSkillParams]`
 
-  Skills. Full replacement. Omit to preserve; send empty array or null to clear. Maximum 20.
+  Skills. Full replacement. Omit to preserve; send empty array or null to clear.
 
   - `class BetaManagedAgentsAnthropicSkillParams`
 
@@ -38801,7 +42017,7 @@ Update Agent
 
 - `system_: String`
 
-  System prompt. Up to 100,000 characters. Omit to preserve; send empty string or null to clear.
+  System prompt. Omit to preserve; send empty string or null to clear.
 
 - `tools: Array[BetaManagedAgentsAgentToolset20260401Params | BetaManagedAgentsMCPToolsetParams | BetaManagedAgentsCustomToolParams]`
 
@@ -38951,19 +42167,13 @@ Update Agent
 
       JSON Schema for custom tool input parameters.
 
-      - `properties: Hash[Symbol, untyped]`
-
-        JSON Schema properties defining the tool's input parameters.
-
-      - `required: Array[String]`
-
-        List of required property names.
-
       - `type: :object`
 
-        Must be 'object' for tool input schemas.
-
         - `:object`
+
+      - `properties: Hash[Symbol, untyped]`
+
+      - `required: Array[String]`
 
     - `name: String`
 
@@ -38979,7 +42189,7 @@ Update Agent
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -39033,6 +42243,10 @@ Update Agent
 
     - `:"thinking-token-count-2026-05-13"`
 
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
+
 ### Returns
 
 - `class BetaManagedAgentsAgent`
@@ -39073,11 +42287,15 @@ Update Agent
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `BetaManagedAgentsModel = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-opus-4-6" | 7 more`
+      - `BetaManagedAgentsModel = :"claude-fable-5" | :"claude-opus-4-8" | :"claude-opus-4-7" | 8 more`
 
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `:"claude-fable-5"`
+
+          Next generation of intelligence for the hardest knowledge work and coding problems
 
         - `:"claude-opus-4-8"`
 
@@ -39303,19 +42521,13 @@ Update Agent
 
         JSON Schema for custom tool input parameters.
 
-        - `properties: Hash[Symbol, untyped]`
-
-          JSON Schema properties defining the tool's input parameters.
-
-        - `required: Array[String]`
-
-          List of required property names.
-
         - `type: :object`
 
-          Must be 'object' for tool input schemas.
-
           - `:object`
+
+        - `properties: Hash[Symbol, untyped]`
+
+        - `required: Array[String]`
 
       - `name: String`
 
@@ -39437,7 +42649,7 @@ Archive Agent
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -39491,6 +42703,10 @@ Archive Agent
 
     - `:"thinking-token-count-2026-05-13"`
 
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
+
 ### Returns
 
 - `class BetaManagedAgentsAgent`
@@ -39531,11 +42747,15 @@ Archive Agent
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `BetaManagedAgentsModel = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-opus-4-6" | 7 more`
+      - `BetaManagedAgentsModel = :"claude-fable-5" | :"claude-opus-4-8" | :"claude-opus-4-7" | 8 more`
 
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `:"claude-fable-5"`
+
+          Next generation of intelligence for the hardest knowledge work and coding problems
 
         - `:"claude-opus-4-8"`
 
@@ -39761,19 +42981,13 @@ Archive Agent
 
         JSON Schema for custom tool input parameters.
 
-        - `properties: Hash[Symbol, untyped]`
-
-          JSON Schema properties defining the tool's input parameters.
-
-        - `required: Array[String]`
-
-          List of required property names.
-
         - `type: :object`
 
-          Must be 'object' for tool input schemas.
-
           - `:object`
+
+        - `properties: Hash[Symbol, untyped]`
+
+        - `required: Array[String]`
 
       - `name: String`
 
@@ -39919,11 +43133,15 @@ puts(beta_managed_agents_agent)
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `BetaManagedAgentsModel = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-opus-4-6" | 7 more`
+      - `BetaManagedAgentsModel = :"claude-fable-5" | :"claude-opus-4-8" | :"claude-opus-4-7" | 8 more`
 
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `:"claude-fable-5"`
+
+          Next generation of intelligence for the hardest knowledge work and coding problems
 
         - `:"claude-opus-4-8"`
 
@@ -40149,19 +43367,13 @@ puts(beta_managed_agents_agent)
 
         JSON Schema for custom tool input parameters.
 
-        - `properties: Hash[Symbol, untyped]`
-
-          JSON Schema properties defining the tool's input parameters.
-
-        - `required: Array[String]`
-
-          List of required property names.
-
         - `type: :object`
 
-          Must be 'object' for tool input schemas.
-
           - `:object`
+
+        - `properties: Hash[Symbol, untyped]`
+
+        - `required: Array[String]`
 
       - `name: String`
 
@@ -40711,19 +43923,13 @@ puts(beta_managed_agents_agent)
 
     JSON Schema for custom tool input parameters.
 
-    - `properties: Hash[Symbol, untyped]`
-
-      JSON Schema properties defining the tool's input parameters.
-
-    - `required: Array[String]`
-
-      List of required property names.
-
     - `type: :object`
 
-      Must be 'object' for tool input schemas.
-
       - `:object`
+
+    - `properties: Hash[Symbol, untyped]`
+
+    - `required: Array[String]`
 
   - `name: String`
 
@@ -40737,19 +43943,13 @@ puts(beta_managed_agents_agent)
 
   JSON Schema for custom tool input parameters.
 
-  - `properties: Hash[Symbol, untyped]`
-
-    JSON Schema properties defining the tool's input parameters.
-
-  - `required: Array[String]`
-
-    List of required property names.
-
   - `type: :object`
 
-    Must be 'object' for tool input schemas.
-
     - `:object`
+
+  - `properties: Hash[Symbol, untyped]`
+
+  - `required: Array[String]`
 
 ### Beta Managed Agents Custom Tool Params
 
@@ -40765,19 +43965,13 @@ puts(beta_managed_agents_agent)
 
     JSON Schema for custom tool input parameters.
 
-    - `properties: Hash[Symbol, untyped]`
-
-      JSON Schema properties defining the tool's input parameters.
-
-    - `required: Array[String]`
-
-      List of required property names.
-
     - `type: :object`
 
-      Must be 'object' for tool input schemas.
-
       - `:object`
+
+    - `properties: Hash[Symbol, untyped]`
+
+    - `required: Array[String]`
 
   - `name: String`
 
@@ -41045,17 +44239,21 @@ puts(beta_managed_agents_agent)
 
 ### Beta Managed Agents Model
 
-- `BetaManagedAgentsModel = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-opus-4-6" | 7 more | String`
+- `BetaManagedAgentsModel = :"claude-fable-5" | :"claude-opus-4-8" | :"claude-opus-4-7" | 8 more | String`
 
   The model that will power your agent.
 
   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-  - `BetaManagedAgentsModel = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-opus-4-6" | 7 more`
+  - `BetaManagedAgentsModel = :"claude-fable-5" | :"claude-opus-4-8" | :"claude-opus-4-7" | 8 more`
 
     The model that will power your agent.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `:"claude-fable-5"`
+
+      Next generation of intelligence for the hardest knowledge work and coding problems
 
     - `:"claude-opus-4-8"`
 
@@ -41111,11 +44309,15 @@ puts(beta_managed_agents_agent)
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-    - `BetaManagedAgentsModel = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-opus-4-6" | 7 more`
+    - `BetaManagedAgentsModel = :"claude-fable-5" | :"claude-opus-4-8" | :"claude-opus-4-7" | 8 more`
 
       The model that will power your agent.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `:"claude-fable-5"`
+
+        Next generation of intelligence for the hardest knowledge work and coding problems
 
       - `:"claude-opus-4-8"`
 
@@ -41179,11 +44381,15 @@ puts(beta_managed_agents_agent)
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-    - `BetaManagedAgentsModel = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-opus-4-6" | 7 more`
+    - `BetaManagedAgentsModel = :"claude-fable-5" | :"claude-opus-4-8" | :"claude-opus-4-7" | 8 more`
 
       The model that will power your agent.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `:"claude-fable-5"`
+
+        Next generation of intelligence for the hardest knowledge work and coding problems
 
       - `:"claude-opus-4-8"`
 
@@ -41337,11 +44543,15 @@ puts(beta_managed_agents_agent)
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `BetaManagedAgentsModel = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-opus-4-6" | 7 more`
+      - `BetaManagedAgentsModel = :"claude-fable-5" | :"claude-opus-4-8" | :"claude-opus-4-7" | 8 more`
 
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `:"claude-fable-5"`
+
+          Next generation of intelligence for the hardest knowledge work and coding problems
 
         - `:"claude-opus-4-8"`
 
@@ -41547,19 +44757,13 @@ puts(beta_managed_agents_agent)
 
         JSON Schema for custom tool input parameters.
 
-        - `properties: Hash[Symbol, untyped]`
-
-          JSON Schema properties defining the tool's input parameters.
-
-        - `required: Array[String]`
-
-          List of required property names.
-
         - `type: :object`
 
-          Must be 'object' for tool input schemas.
-
           - `:object`
+
+        - `properties: Hash[Symbol, untyped]`
+
+        - `required: Array[String]`
 
       - `name: String`
 
@@ -41657,7 +44861,7 @@ List Agent Versions
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -41711,6 +44915,10 @@ List Agent Versions
 
     - `:"thinking-token-count-2026-05-13"`
 
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
+
 ### Returns
 
 - `class BetaManagedAgentsAgent`
@@ -41751,11 +44959,15 @@ List Agent Versions
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `BetaManagedAgentsModel = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-opus-4-6" | 7 more`
+      - `BetaManagedAgentsModel = :"claude-fable-5" | :"claude-opus-4-8" | :"claude-opus-4-7" | 8 more`
 
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `:"claude-fable-5"`
+
+          Next generation of intelligence for the hardest knowledge work and coding problems
 
         - `:"claude-opus-4-8"`
 
@@ -41981,19 +45193,13 @@ List Agent Versions
 
         JSON Schema for custom tool input parameters.
 
-        - `properties: Hash[Symbol, untyped]`
-
-          JSON Schema properties defining the tool's input parameters.
-
-        - `required: Array[String]`
-
-          List of required property names.
-
         - `type: :object`
 
-          Must be 'object' for tool input schemas.
-
           - `:object`
+
+        - `properties: Hash[Symbol, untyped]`
+
+        - `required: Array[String]`
 
       - `name: String`
 
@@ -42242,7 +45448,7 @@ Create a new environment with the specified configuration.
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -42295,6 +45501,10 @@ Create a new environment with the specified configuration.
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
 
 ### Returns
 
@@ -42527,7 +45737,7 @@ List environments with pagination support.
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -42580,6 +45790,10 @@ List environments with pagination support.
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
 
 ### Returns
 
@@ -42807,7 +46021,7 @@ Retrieve a specific environment by ID.
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -42860,6 +46074,10 @@ Retrieve a specific environment by ID.
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
 
 ### Returns
 
@@ -43204,7 +46422,7 @@ Update an existing environment's configuration.
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -43257,6 +46475,10 @@ Update an existing environment's configuration.
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
 
 ### Returns
 
@@ -43479,7 +46701,7 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -43532,6 +46754,10 @@ Delete an environment by ID. Returns a confirmation of the deletion.
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
 
 ### Returns
 
@@ -43588,7 +46814,7 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -43641,6 +46867,10 @@ Archive an environment by ID. Archived environments cannot be used to create new
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
 
 ### Returns
 
@@ -44362,7 +47592,7 @@ Retrieve detailed information about a specific work item.
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -44415,6 +47645,10 @@ Retrieve detailed information about a specific work item.
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
 
 ### Returns
 
@@ -44560,7 +47794,7 @@ Long poll for work items in the queue.
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -44613,6 +47847,10 @@ Long poll for work items in the queue.
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
 
 - `anthropic_worker_id: String`
 
@@ -44756,7 +47994,7 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -44809,6 +48047,10 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
 
 ### Returns
 
@@ -44956,7 +48198,7 @@ Record a heartbeat for a work item to maintain the lease.
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -45009,6 +48251,10 @@ Record a heartbeat for a work item to maintain the lease.
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
 
 ### Returns
 
@@ -45098,7 +48344,7 @@ Stop a work item, initiating graceful or forced shutdown.
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -45151,6 +48397,10 @@ Stop a work item, initiating graceful or forced shutdown.
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
 
 ### Returns
 
@@ -45296,7 +48546,7 @@ List work items in an environment.
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -45349,6 +48599,10 @@ List work items in an environment.
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
 
 ### Returns
 
@@ -45497,7 +48751,7 @@ Update work item metadata with merge semantics.
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -45550,6 +48804,10 @@ Update work item metadata with merge semantics.
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
 
 ### Returns
 
@@ -45689,7 +48947,7 @@ Get statistics about the work queue for an environment.
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -45742,6 +49000,10 @@ Get statistics about the work queue for an environment.
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
 
 ### Returns
 
@@ -46214,7 +49476,7 @@ Create Session
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -46268,6 +49530,10 @@ Create Session
 
     - `:"thinking-token-count-2026-05-13"`
 
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
+
 ### Returns
 
 - `class BetaManagedAgentsSession`
@@ -46304,11 +49570,15 @@ Create Session
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-        - `BetaManagedAgentsModel = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-opus-4-6" | 7 more`
+        - `BetaManagedAgentsModel = :"claude-fable-5" | :"claude-opus-4-8" | :"claude-opus-4-7" | 8 more`
 
           The model that will power your agent.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `:"claude-fable-5"`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
 
           - `:"claude-opus-4-8"`
 
@@ -46538,19 +49808,13 @@ Create Session
 
               JSON Schema for custom tool input parameters.
 
-              - `properties: Hash[Symbol, untyped]`
-
-                JSON Schema properties defining the tool's input parameters.
-
-              - `required: Array[String]`
-
-                List of required property names.
-
               - `type: :object`
 
-                Must be 'object' for tool input schemas.
-
                 - `:object`
+
+              - `properties: Hash[Symbol, untyped]`
+
+              - `required: Array[String]`
 
             - `name: String`
 
@@ -46807,6 +50071,10 @@ Create Session
   - `vault_ids: Array[String]`
 
     Vault IDs attached to the session at creation. Empty when no vaults were supplied.
+
+  - `deployment_id: String`
+
+    Deployment ID when the session was created from a deployment reference. Null otherwise.
 
 ### Example
 
@@ -46986,7 +50254,8 @@ puts(beta_managed_agents_session)
   },
   "vault_ids": [
     "vlt_011CZkZDLs7fYzm1hXNPeRjv"
-  ]
+  ],
+  "deployment_id": "deployment_id"
 }
 ```
 
@@ -47024,6 +50293,10 @@ List Sessions
 
   Return sessions created at or before this time (inclusive).
 
+- `deployment_id: String`
+
+  Filter sessions created by this deployment ID.
+
 - `include_archived: bool`
 
   When true, includes archived sessions. Default: false (exclude archived).
@@ -47046,7 +50319,7 @@ List Sessions
 
 - `page: String`
 
-  Opaque pagination cursor from a previous response's next_page.
+  Opaque pagination cursor from a previous response.
 
 - `statuses: Array[:rescheduling | :running | :idle | :terminated]`
 
@@ -47066,7 +50339,7 @@ List Sessions
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -47120,6 +50393,10 @@ List Sessions
 
     - `:"thinking-token-count-2026-05-13"`
 
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
+
 ### Returns
 
 - `class BetaManagedAgentsSession`
@@ -47156,11 +50433,15 @@ List Sessions
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-        - `BetaManagedAgentsModel = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-opus-4-6" | 7 more`
+        - `BetaManagedAgentsModel = :"claude-fable-5" | :"claude-opus-4-8" | :"claude-opus-4-7" | 8 more`
 
           The model that will power your agent.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `:"claude-fable-5"`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
 
           - `:"claude-opus-4-8"`
 
@@ -47390,19 +50671,13 @@ List Sessions
 
               JSON Schema for custom tool input parameters.
 
-              - `properties: Hash[Symbol, untyped]`
-
-                JSON Schema properties defining the tool's input parameters.
-
-              - `required: Array[String]`
-
-                List of required property names.
-
               - `type: :object`
 
-                Must be 'object' for tool input schemas.
-
                 - `:object`
+
+              - `properties: Hash[Symbol, untyped]`
+
+              - `required: Array[String]`
 
             - `name: String`
 
@@ -47659,6 +50934,10 @@ List Sessions
   - `vault_ids: Array[String]`
 
     Vault IDs attached to the session at creation. Empty when no vaults were supplied.
+
+  - `deployment_id: String`
+
+    Deployment ID when the session was created from a deployment reference. Null otherwise.
 
 ### Example
 
@@ -47837,7 +51116,8 @@ puts(page)
       },
       "vault_ids": [
         "vlt_011CZkZDLs7fYzm1hXNPeRjv"
-      ]
+      ],
+      "deployment_id": "deployment_id"
     }
   ],
   "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
@@ -47862,7 +51142,7 @@ Get Session
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -47916,6 +51196,10 @@ Get Session
 
     - `:"thinking-token-count-2026-05-13"`
 
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
+
 ### Returns
 
 - `class BetaManagedAgentsSession`
@@ -47952,11 +51236,15 @@ Get Session
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-        - `BetaManagedAgentsModel = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-opus-4-6" | 7 more`
+        - `BetaManagedAgentsModel = :"claude-fable-5" | :"claude-opus-4-8" | :"claude-opus-4-7" | 8 more`
 
           The model that will power your agent.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `:"claude-fable-5"`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
 
           - `:"claude-opus-4-8"`
 
@@ -48186,19 +51474,13 @@ Get Session
 
               JSON Schema for custom tool input parameters.
 
-              - `properties: Hash[Symbol, untyped]`
-
-                JSON Schema properties defining the tool's input parameters.
-
-              - `required: Array[String]`
-
-                List of required property names.
-
               - `type: :object`
 
-                Must be 'object' for tool input schemas.
-
                 - `:object`
+
+              - `properties: Hash[Symbol, untyped]`
+
+              - `required: Array[String]`
 
             - `name: String`
 
@@ -48456,6 +51738,10 @@ Get Session
 
     Vault IDs attached to the session at creation. Empty when no vaults were supplied.
 
+  - `deployment_id: String`
+
+    Deployment ID when the session was created from a deployment reference. Null otherwise.
+
 ### Example
 
 ```ruby
@@ -48631,7 +51917,8 @@ puts(beta_managed_agents_session)
   },
   "vault_ids": [
     "vlt_011CZkZDLs7fYzm1hXNPeRjv"
-  ]
+  ],
+  "deployment_id": "deployment_id"
 }
 ```
 
@@ -48815,19 +52102,13 @@ Update Session
 
         JSON Schema for custom tool input parameters.
 
-        - `properties: Hash[Symbol, untyped]`
-
-          JSON Schema properties defining the tool's input parameters.
-
-        - `required: Array[String]`
-
-          List of required property names.
-
         - `type: :object`
 
-          Must be 'object' for tool input schemas.
-
           - `:object`
+
+        - `properties: Hash[Symbol, untyped]`
+
+        - `required: Array[String]`
 
       - `name: String`
 
@@ -48855,7 +52136,7 @@ Update Session
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -48909,6 +52190,10 @@ Update Session
 
     - `:"thinking-token-count-2026-05-13"`
 
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
+
 ### Returns
 
 - `class BetaManagedAgentsSession`
@@ -48945,11 +52230,15 @@ Update Session
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-        - `BetaManagedAgentsModel = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-opus-4-6" | 7 more`
+        - `BetaManagedAgentsModel = :"claude-fable-5" | :"claude-opus-4-8" | :"claude-opus-4-7" | 8 more`
 
           The model that will power your agent.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `:"claude-fable-5"`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
 
           - `:"claude-opus-4-8"`
 
@@ -49179,19 +52468,13 @@ Update Session
 
               JSON Schema for custom tool input parameters.
 
-              - `properties: Hash[Symbol, untyped]`
-
-                JSON Schema properties defining the tool's input parameters.
-
-              - `required: Array[String]`
-
-                List of required property names.
-
               - `type: :object`
 
-                Must be 'object' for tool input schemas.
-
                 - `:object`
+
+              - `properties: Hash[Symbol, untyped]`
+
+              - `required: Array[String]`
 
             - `name: String`
 
@@ -49448,6 +52731,10 @@ Update Session
   - `vault_ids: Array[String]`
 
     Vault IDs attached to the session at creation. Empty when no vaults were supplied.
+
+  - `deployment_id: String`
+
+    Deployment ID when the session was created from a deployment reference. Null otherwise.
 
 ### Example
 
@@ -49624,7 +52911,8 @@ puts(beta_managed_agents_session)
   },
   "vault_ids": [
     "vlt_011CZkZDLs7fYzm1hXNPeRjv"
-  ]
+  ],
+  "deployment_id": "deployment_id"
 }
 ```
 
@@ -49646,7 +52934,7 @@ Delete Session
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -49699,6 +52987,10 @@ Delete Session
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
 
 ### Returns
 
@@ -49751,7 +53043,7 @@ Archive Session
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -49805,6 +53097,10 @@ Archive Session
 
     - `:"thinking-token-count-2026-05-13"`
 
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
+
 ### Returns
 
 - `class BetaManagedAgentsSession`
@@ -49841,11 +53137,15 @@ Archive Session
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-        - `BetaManagedAgentsModel = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-opus-4-6" | 7 more`
+        - `BetaManagedAgentsModel = :"claude-fable-5" | :"claude-opus-4-8" | :"claude-opus-4-7" | 8 more`
 
           The model that will power your agent.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `:"claude-fable-5"`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
 
           - `:"claude-opus-4-8"`
 
@@ -50075,19 +53375,13 @@ Archive Session
 
               JSON Schema for custom tool input parameters.
 
-              - `properties: Hash[Symbol, untyped]`
-
-                JSON Schema properties defining the tool's input parameters.
-
-              - `required: Array[String]`
-
-                List of required property names.
-
               - `type: :object`
 
-                Must be 'object' for tool input schemas.
-
                 - `:object`
+
+              - `properties: Hash[Symbol, untyped]`
+
+              - `required: Array[String]`
 
             - `name: String`
 
@@ -50345,6 +53639,10 @@ Archive Session
 
     Vault IDs attached to the session at creation. Empty when no vaults were supplied.
 
+  - `deployment_id: String`
+
+    Deployment ID when the session was created from a deployment reference. Null otherwise.
+
 ### Example
 
 ```ruby
@@ -50520,7 +53818,8 @@ puts(beta_managed_agents_session)
   },
   "vault_ids": [
     "vlt_011CZkZDLs7fYzm1hXNPeRjv"
-  ]
+  ],
+  "deployment_id": "deployment_id"
 }
 ```
 
@@ -50848,11 +54147,15 @@ puts(beta_managed_agents_session)
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-        - `BetaManagedAgentsModel = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-opus-4-6" | 7 more`
+        - `BetaManagedAgentsModel = :"claude-fable-5" | :"claude-opus-4-8" | :"claude-opus-4-7" | 8 more`
 
           The model that will power your agent.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `:"claude-fable-5"`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
 
           - `:"claude-opus-4-8"`
 
@@ -51082,19 +54385,13 @@ puts(beta_managed_agents_session)
 
               JSON Schema for custom tool input parameters.
 
-              - `properties: Hash[Symbol, untyped]`
-
-                JSON Schema properties defining the tool's input parameters.
-
-              - `required: Array[String]`
-
-                List of required property names.
-
               - `type: :object`
 
-                Must be 'object' for tool input schemas.
-
                 - `:object`
+
+              - `properties: Hash[Symbol, untyped]`
+
+              - `required: Array[String]`
 
             - `name: String`
 
@@ -51352,6 +54649,10 @@ puts(beta_managed_agents_session)
 
     Vault IDs attached to the session at creation. Empty when no vaults were supplied.
 
+  - `deployment_id: String`
+
+    Deployment ID when the session was created from a deployment reference. Null otherwise.
+
 ### Beta Managed Agents Session Agent
 
 - `class BetaManagedAgentsSessionAgent`
@@ -51382,11 +54683,15 @@ puts(beta_managed_agents_session)
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `BetaManagedAgentsModel = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-opus-4-6" | 7 more`
+      - `BetaManagedAgentsModel = :"claude-fable-5" | :"claude-opus-4-8" | :"claude-opus-4-7" | 8 more`
 
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `:"claude-fable-5"`
+
+          Next generation of intelligence for the hardest knowledge work and coding problems
 
         - `:"claude-opus-4-8"`
 
@@ -51616,19 +54921,13 @@ puts(beta_managed_agents_session)
 
             JSON Schema for custom tool input parameters.
 
-            - `properties: Hash[Symbol, untyped]`
-
-              JSON Schema properties defining the tool's input parameters.
-
-            - `required: Array[String]`
-
-              List of required property names.
-
             - `type: :object`
 
-              Must be 'object' for tool input schemas.
-
               - `:object`
+
+            - `properties: Hash[Symbol, untyped]`
+
+            - `required: Array[String]`
 
           - `name: String`
 
@@ -51846,19 +55145,13 @@ puts(beta_managed_agents_session)
 
         JSON Schema for custom tool input parameters.
 
-        - `properties: Hash[Symbol, untyped]`
-
-          JSON Schema properties defining the tool's input parameters.
-
-        - `required: Array[String]`
-
-          List of required property names.
-
         - `type: :object`
 
-          Must be 'object' for tool input schemas.
-
           - `:object`
+
+        - `properties: Hash[Symbol, untyped]`
+
+        - `required: Array[String]`
 
       - `name: String`
 
@@ -51902,11 +55195,15 @@ puts(beta_managed_agents_session)
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-        - `BetaManagedAgentsModel = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-opus-4-6" | 7 more`
+        - `BetaManagedAgentsModel = :"claude-fable-5" | :"claude-opus-4-8" | :"claude-opus-4-7" | 8 more`
 
           The model that will power your agent.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `:"claude-fable-5"`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
 
           - `:"claude-opus-4-8"`
 
@@ -52112,19 +55409,13 @@ puts(beta_managed_agents_session)
 
           JSON Schema for custom tool input parameters.
 
-          - `properties: Hash[Symbol, untyped]`
-
-            JSON Schema properties defining the tool's input parameters.
-
-          - `required: Array[String]`
-
-            List of required property names.
-
           - `type: :object`
 
-            Must be 'object' for tool input schemas.
-
             - `:object`
+
+          - `properties: Hash[Symbol, untyped]`
+
+          - `required: Array[String]`
 
         - `name: String`
 
@@ -52202,11 +55493,15 @@ puts(beta_managed_agents_session)
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-        - `BetaManagedAgentsModel = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-opus-4-6" | 7 more`
+        - `BetaManagedAgentsModel = :"claude-fable-5" | :"claude-opus-4-8" | :"claude-opus-4-7" | 8 more`
 
           The model that will power your agent.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `:"claude-fable-5"`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
 
           - `:"claude-opus-4-8"`
 
@@ -52436,19 +55731,13 @@ puts(beta_managed_agents_session)
 
               JSON Schema for custom tool input parameters.
 
-              - `properties: Hash[Symbol, untyped]`
-
-                JSON Schema properties defining the tool's input parameters.
-
-              - `required: Array[String]`
-
-                List of required property names.
-
               - `type: :object`
 
-                Must be 'object' for tool input schemas.
-
                 - `:object`
+
+              - `properties: Hash[Symbol, untyped]`
+
+              - `required: Array[String]`
 
             - `name: String`
 
@@ -52533,6 +55822,50 @@ puts(beta_managed_agents_session)
   - `output_tokens: Integer`
 
     Total output tokens generated across all turns.
+
+### Beta Managed Agents System Content Block
+
+- `class BetaManagedAgentsSystemContentBlock`
+
+  Regular text content.
+
+  - `text: String`
+
+    The text content.
+
+  - `type: :text`
+
+    - `:text`
+
+### Beta Managed Agents System Message Event
+
+- `class BetaManagedAgentsSystemMessageEvent`
+
+  A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+  - `id: String`
+
+    Unique identifier for this event.
+
+  - `content: Array[BetaManagedAgentsSystemContentBlock]`
+
+    System content blocks. Text-only.
+
+    - `text: String`
+
+      The text content.
+
+    - `type: :text`
+
+      - `:text`
+
+  - `type: :"system.message"`
+
+    - `:"system.message"`
+
+  - `processed_at: Time`
+
+    A timestamp in RFC 3339 format
 
 ### Beta Managed Agents User Tool Result Event
 
@@ -52802,7 +56135,7 @@ List Events
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -52856,9 +56189,13 @@ List Events
 
     - `:"thinking-token-count-2026-05-13"`
 
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
+
 ### Returns
 
-- `BetaManagedAgentsSessionEvent = BetaManagedAgentsUserMessageEvent | BetaManagedAgentsUserInterruptEvent | BetaManagedAgentsUserToolConfirmationEvent | 30 more`
+- `BetaManagedAgentsSessionEvent = BetaManagedAgentsUserMessageEvent | BetaManagedAgentsUserInterruptEvent | BetaManagedAgentsUserToolConfirmationEvent | 31 more`
 
   Union type for all event types in a session.
 
@@ -53502,7 +56839,7 @@ List Events
 
       Unique identifier for this event.
 
-    - `error: BetaManagedAgentsUnknownError | BetaManagedAgentsModelOverloadedError | BetaManagedAgentsModelRateLimitedError | 4 more`
+    - `error: BetaManagedAgentsUnknownError | BetaManagedAgentsModelOverloadedError | BetaManagedAgentsModelRateLimitedError | 5 more`
 
       An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
@@ -53721,6 +57058,42 @@ List Events
         - `type: :billing_error`
 
           - `:billing_error`
+
+      - `class BetaManagedAgentsCredentialHostUnreachableError`
+
+        An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+        - `credential_id: String`
+
+          ID of the affected credential.
+
+        - `message: String`
+
+          Human-readable error description.
+
+        - `retry_status: BetaManagedAgentsRetryStatusRetrying | BetaManagedAgentsRetryStatusExhausted | BetaManagedAgentsRetryStatusTerminal`
+
+          What the client should do next in response to this error.
+
+          - `class BetaManagedAgentsRetryStatusRetrying`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+          - `class BetaManagedAgentsRetryStatusExhausted`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+          - `class BetaManagedAgentsRetryStatusTerminal`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+        - `type: :credential_host_unreachable_error`
+
+          - `:credential_host_unreachable_error`
+
+        - `vault_id: String`
+
+          ID of the vault containing the affected credential.
 
     - `processed_at: Time`
 
@@ -54282,11 +57655,15 @@ List Events
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `BetaManagedAgentsModel = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-opus-4-6" | 7 more`
+          - `BetaManagedAgentsModel = :"claude-fable-5" | :"claude-opus-4-8" | :"claude-opus-4-7" | 8 more`
 
             The model that will power your agent.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `:"claude-fable-5"`
+
+              Next generation of intelligence for the hardest knowledge work and coding problems
 
             - `:"claude-opus-4-8"`
 
@@ -54516,19 +57893,13 @@ List Events
 
                 JSON Schema for custom tool input parameters.
 
-                - `properties: Hash[Symbol, untyped]`
-
-                  JSON Schema properties defining the tool's input parameters.
-
-                - `required: Array[String]`
-
-                  List of required property names.
-
                 - `type: :object`
 
-                  Must be 'object' for tool input schemas.
-
                   - `:object`
+
+                - `properties: Hash[Symbol, untyped]`
+
+                - `required: Array[String]`
 
               - `name: String`
 
@@ -54583,6 +57954,34 @@ List Events
     - `title: String`
 
       The session's new title. Present only when the update changed it.
+
+  - `class BetaManagedAgentsSystemMessageEvent`
+
+    A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+    - `id: String`
+
+      Unique identifier for this event.
+
+    - `content: Array[BetaManagedAgentsSystemContentBlock]`
+
+      System content blocks. Text-only.
+
+      - `text: String`
+
+        The text content.
+
+      - `type: :text`
+
+        - `:text`
+
+    - `type: :"system.message"`
+
+      - `:"system.message"`
+
+    - `processed_at: Time`
+
+      A timestamp in RFC 3339 format
 
 ### Example
 
@@ -54982,13 +58381,33 @@ Send Events
 
       Whether the tool execution resulted in an error.
 
+  - `class BetaManagedAgentsSystemMessageEventParams`
+
+    Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
+
+    - `content: Array[BetaManagedAgentsSystemContentBlock]`
+
+      System content blocks to append. Text-only.
+
+      - `text: String`
+
+        The text content.
+
+      - `type: :text`
+
+        - `:text`
+
+    - `type: :"system.message"`
+
+      - `:"system.message"`
+
 - `betas: Array[AnthropicBeta]`
 
   Optional header to specify the beta version(s) you want to use.
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -55042,13 +58461,17 @@ Send Events
 
     - `:"thinking-token-count-2026-05-13"`
 
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
+
 ### Returns
 
 - `class BetaManagedAgentsSendSessionEvents`
 
   Events that were successfully sent to the session.
 
-  - `data: Array[BetaManagedAgentsUserMessageEvent | BetaManagedAgentsUserInterruptEvent | BetaManagedAgentsUserToolConfirmationEvent | 3 more]`
+  - `data: Array[BetaManagedAgentsUserMessageEvent | BetaManagedAgentsUserInterruptEvent | BetaManagedAgentsUserToolConfirmationEvent | 4 more]`
 
     Sent events
 
@@ -55454,6 +58877,34 @@ Send Events
 
         Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
 
+    - `class BetaManagedAgentsSystemMessageEvent`
+
+      A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+      - `id: String`
+
+        Unique identifier for this event.
+
+      - `content: Array[BetaManagedAgentsSystemContentBlock]`
+
+        System content blocks. Text-only.
+
+        - `text: String`
+
+          The text content.
+
+        - `type: :text`
+
+          - `:text`
+
+      - `type: :"system.message"`
+
+        - `:"system.message"`
+
+      - `processed_at: Time`
+
+        A timestamp in RFC 3339 format
+
 ### Example
 
 ```ruby
@@ -55507,7 +58958,7 @@ Stream Events
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -55561,9 +59012,13 @@ Stream Events
 
     - `:"thinking-token-count-2026-05-13"`
 
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
+
 ### Returns
 
-- `BetaManagedAgentsStreamSessionEvents = BetaManagedAgentsUserMessageEvent | BetaManagedAgentsUserInterruptEvent | BetaManagedAgentsUserToolConfirmationEvent | 30 more`
+- `BetaManagedAgentsStreamSessionEvents = BetaManagedAgentsUserMessageEvent | BetaManagedAgentsUserInterruptEvent | BetaManagedAgentsUserToolConfirmationEvent | 31 more`
 
   Server-sent event in the session stream.
 
@@ -56207,7 +59662,7 @@ Stream Events
 
       Unique identifier for this event.
 
-    - `error: BetaManagedAgentsUnknownError | BetaManagedAgentsModelOverloadedError | BetaManagedAgentsModelRateLimitedError | 4 more`
+    - `error: BetaManagedAgentsUnknownError | BetaManagedAgentsModelOverloadedError | BetaManagedAgentsModelRateLimitedError | 5 more`
 
       An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
@@ -56426,6 +59881,42 @@ Stream Events
         - `type: :billing_error`
 
           - `:billing_error`
+
+      - `class BetaManagedAgentsCredentialHostUnreachableError`
+
+        An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+        - `credential_id: String`
+
+          ID of the affected credential.
+
+        - `message: String`
+
+          Human-readable error description.
+
+        - `retry_status: BetaManagedAgentsRetryStatusRetrying | BetaManagedAgentsRetryStatusExhausted | BetaManagedAgentsRetryStatusTerminal`
+
+          What the client should do next in response to this error.
+
+          - `class BetaManagedAgentsRetryStatusRetrying`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+          - `class BetaManagedAgentsRetryStatusExhausted`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+          - `class BetaManagedAgentsRetryStatusTerminal`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+        - `type: :credential_host_unreachable_error`
+
+          - `:credential_host_unreachable_error`
+
+        - `vault_id: String`
+
+          ID of the vault containing the affected credential.
 
     - `processed_at: Time`
 
@@ -56987,11 +60478,15 @@ Stream Events
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `BetaManagedAgentsModel = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-opus-4-6" | 7 more`
+          - `BetaManagedAgentsModel = :"claude-fable-5" | :"claude-opus-4-8" | :"claude-opus-4-7" | 8 more`
 
             The model that will power your agent.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `:"claude-fable-5"`
+
+              Next generation of intelligence for the hardest knowledge work and coding problems
 
             - `:"claude-opus-4-8"`
 
@@ -57221,19 +60716,13 @@ Stream Events
 
                 JSON Schema for custom tool input parameters.
 
-                - `properties: Hash[Symbol, untyped]`
-
-                  JSON Schema properties defining the tool's input parameters.
-
-                - `required: Array[String]`
-
-                  List of required property names.
-
                 - `type: :object`
 
-                  Must be 'object' for tool input schemas.
-
                   - `:object`
+
+                - `properties: Hash[Symbol, untyped]`
+
+                - `required: Array[String]`
 
               - `name: String`
 
@@ -57288,6 +60777,34 @@ Stream Events
     - `title: String`
 
       The session's new title. Present only when the update changed it.
+
+  - `class BetaManagedAgentsSystemMessageEvent`
+
+    A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+    - `id: String`
+
+      Unique identifier for this event.
+
+    - `content: Array[BetaManagedAgentsSystemContentBlock]`
+
+      System content blocks. Text-only.
+
+      - `text: String`
+
+        The text content.
+
+      - `type: :text`
+
+        - `:text`
+
+    - `type: :"system.message"`
+
+      - `:"system.message"`
+
+    - `processed_at: Time`
+
+      A timestamp in RFC 3339 format
 
 ### Example
 
@@ -58337,6 +61854,56 @@ puts(beta_managed_agents_stream_session_events)
 
     - `:billing_error`
 
+### Beta Managed Agents Credential Host Unreachable Error
+
+- `class BetaManagedAgentsCredentialHostUnreachableError`
+
+  An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+  - `credential_id: String`
+
+    ID of the affected credential.
+
+  - `message: String`
+
+    Human-readable error description.
+
+  - `retry_status: BetaManagedAgentsRetryStatusRetrying | BetaManagedAgentsRetryStatusExhausted | BetaManagedAgentsRetryStatusTerminal`
+
+    What the client should do next in response to this error.
+
+    - `class BetaManagedAgentsRetryStatusRetrying`
+
+      The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+      - `type: :retrying`
+
+        - `:retrying`
+
+    - `class BetaManagedAgentsRetryStatusExhausted`
+
+      This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+      - `type: :exhausted`
+
+        - `:exhausted`
+
+    - `class BetaManagedAgentsRetryStatusTerminal`
+
+      The session encountered a terminal error and will transition to `terminated` state.
+
+      - `type: :terminal`
+
+        - `:terminal`
+
+  - `type: :credential_host_unreachable_error`
+
+    - `:credential_host_unreachable_error`
+
+  - `vault_id: String`
+
+    ID of the vault containing the affected credential.
+
 ### Beta Managed Agents Document Block
 
 - `class BetaManagedAgentsDocumentBlock`
@@ -58419,7 +61986,7 @@ puts(beta_managed_agents_stream_session_events)
 
 ### Beta Managed Agents Event Params
 
-- `BetaManagedAgentsEventParams = BetaManagedAgentsUserMessageEventParams | BetaManagedAgentsUserInterruptEventParams | BetaManagedAgentsUserToolConfirmationEventParams | 3 more`
+- `BetaManagedAgentsEventParams = BetaManagedAgentsUserMessageEventParams | BetaManagedAgentsUserInterruptEventParams | BetaManagedAgentsUserToolConfirmationEventParams | 4 more`
 
   Union type for event parameters that can be sent to a session.
 
@@ -58760,6 +62327,26 @@ puts(beta_managed_agents_stream_session_events)
     - `is_error: bool`
 
       Whether the tool execution resulted in an error.
+
+  - `class BetaManagedAgentsSystemMessageEventParams`
+
+    Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
+
+    - `content: Array[BetaManagedAgentsSystemContentBlock]`
+
+      System content blocks to append. Text-only.
+
+      - `text: String`
+
+        The text content.
+
+      - `type: :text`
+
+        - `:text`
+
+    - `type: :"system.message"`
+
+      - `:"system.message"`
 
 ### Beta Managed Agents File Document Source
 
@@ -59207,7 +62794,7 @@ puts(beta_managed_agents_stream_session_events)
 
   Events that were successfully sent to the session.
 
-  - `data: Array[BetaManagedAgentsUserMessageEvent | BetaManagedAgentsUserInterruptEvent | BetaManagedAgentsUserToolConfirmationEvent | 3 more]`
+  - `data: Array[BetaManagedAgentsUserMessageEvent | BetaManagedAgentsUserInterruptEvent | BetaManagedAgentsUserToolConfirmationEvent | 4 more]`
 
     Sent events
 
@@ -59613,6 +63200,34 @@ puts(beta_managed_agents_stream_session_events)
 
         Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
 
+    - `class BetaManagedAgentsSystemMessageEvent`
+
+      A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+      - `id: String`
+
+        Unique identifier for this event.
+
+      - `content: Array[BetaManagedAgentsSystemContentBlock]`
+
+        System content blocks. Text-only.
+
+        - `text: String`
+
+          The text content.
+
+        - `type: :text`
+
+          - `:text`
+
+      - `type: :"system.message"`
+
+        - `:"system.message"`
+
+      - `processed_at: Time`
+
+        A timestamp in RFC 3339 format
+
 ### Beta Managed Agents Session Deleted Event
 
 - `class BetaManagedAgentsSessionDeletedEvent`
@@ -59651,7 +63266,7 @@ puts(beta_managed_agents_stream_session_events)
 
     Unique identifier for this event.
 
-  - `error: BetaManagedAgentsUnknownError | BetaManagedAgentsModelOverloadedError | BetaManagedAgentsModelRateLimitedError | 4 more`
+  - `error: BetaManagedAgentsUnknownError | BetaManagedAgentsModelOverloadedError | BetaManagedAgentsModelRateLimitedError | 5 more`
 
     An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
@@ -59871,6 +63486,42 @@ puts(beta_managed_agents_stream_session_events)
 
         - `:billing_error`
 
+    - `class BetaManagedAgentsCredentialHostUnreachableError`
+
+      An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+      - `credential_id: String`
+
+        ID of the affected credential.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `retry_status: BetaManagedAgentsRetryStatusRetrying | BetaManagedAgentsRetryStatusExhausted | BetaManagedAgentsRetryStatusTerminal`
+
+        What the client should do next in response to this error.
+
+        - `class BetaManagedAgentsRetryStatusRetrying`
+
+          The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+        - `class BetaManagedAgentsRetryStatusExhausted`
+
+          This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+        - `class BetaManagedAgentsRetryStatusTerminal`
+
+          The session encountered a terminal error and will transition to `terminated` state.
+
+      - `type: :credential_host_unreachable_error`
+
+        - `:credential_host_unreachable_error`
+
+      - `vault_id: String`
+
+        ID of the vault containing the affected credential.
+
   - `processed_at: Time`
 
     A timestamp in RFC 3339 format
@@ -59881,7 +63532,7 @@ puts(beta_managed_agents_stream_session_events)
 
 ### Beta Managed Agents Session Event
 
-- `BetaManagedAgentsSessionEvent = BetaManagedAgentsUserMessageEvent | BetaManagedAgentsUserInterruptEvent | BetaManagedAgentsUserToolConfirmationEvent | 30 more`
+- `BetaManagedAgentsSessionEvent = BetaManagedAgentsUserMessageEvent | BetaManagedAgentsUserInterruptEvent | BetaManagedAgentsUserToolConfirmationEvent | 31 more`
 
   Union type for all event types in a session.
 
@@ -60525,7 +64176,7 @@ puts(beta_managed_agents_stream_session_events)
 
       Unique identifier for this event.
 
-    - `error: BetaManagedAgentsUnknownError | BetaManagedAgentsModelOverloadedError | BetaManagedAgentsModelRateLimitedError | 4 more`
+    - `error: BetaManagedAgentsUnknownError | BetaManagedAgentsModelOverloadedError | BetaManagedAgentsModelRateLimitedError | 5 more`
 
       An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
@@ -60744,6 +64395,42 @@ puts(beta_managed_agents_stream_session_events)
         - `type: :billing_error`
 
           - `:billing_error`
+
+      - `class BetaManagedAgentsCredentialHostUnreachableError`
+
+        An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+        - `credential_id: String`
+
+          ID of the affected credential.
+
+        - `message: String`
+
+          Human-readable error description.
+
+        - `retry_status: BetaManagedAgentsRetryStatusRetrying | BetaManagedAgentsRetryStatusExhausted | BetaManagedAgentsRetryStatusTerminal`
+
+          What the client should do next in response to this error.
+
+          - `class BetaManagedAgentsRetryStatusRetrying`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+          - `class BetaManagedAgentsRetryStatusExhausted`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+          - `class BetaManagedAgentsRetryStatusTerminal`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+        - `type: :credential_host_unreachable_error`
+
+          - `:credential_host_unreachable_error`
+
+        - `vault_id: String`
+
+          ID of the vault containing the affected credential.
 
     - `processed_at: Time`
 
@@ -61305,11 +64992,15 @@ puts(beta_managed_agents_stream_session_events)
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `BetaManagedAgentsModel = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-opus-4-6" | 7 more`
+          - `BetaManagedAgentsModel = :"claude-fable-5" | :"claude-opus-4-8" | :"claude-opus-4-7" | 8 more`
 
             The model that will power your agent.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `:"claude-fable-5"`
+
+              Next generation of intelligence for the hardest knowledge work and coding problems
 
             - `:"claude-opus-4-8"`
 
@@ -61539,19 +65230,13 @@ puts(beta_managed_agents_stream_session_events)
 
                 JSON Schema for custom tool input parameters.
 
-                - `properties: Hash[Symbol, untyped]`
-
-                  JSON Schema properties defining the tool's input parameters.
-
-                - `required: Array[String]`
-
-                  List of required property names.
-
                 - `type: :object`
 
-                  Must be 'object' for tool input schemas.
-
                   - `:object`
+
+                - `properties: Hash[Symbol, untyped]`
+
+                - `required: Array[String]`
 
               - `name: String`
 
@@ -61606,6 +65291,34 @@ puts(beta_managed_agents_stream_session_events)
     - `title: String`
 
       The session's new title. Present only when the update changed it.
+
+  - `class BetaManagedAgentsSystemMessageEvent`
+
+    A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+    - `id: String`
+
+      Unique identifier for this event.
+
+    - `content: Array[BetaManagedAgentsSystemContentBlock]`
+
+      System content blocks. Text-only.
+
+      - `text: String`
+
+        The text content.
+
+      - `type: :text`
+
+        - `:text`
+
+    - `type: :"system.message"`
+
+      - `:"system.message"`
+
+    - `processed_at: Time`
+
+      A timestamp in RFC 3339 format
 
 ### Beta Managed Agents Session Requires Action
 
@@ -62119,7 +65832,7 @@ puts(beta_managed_agents_stream_session_events)
 
 ### Beta Managed Agents Stream Session Events
 
-- `BetaManagedAgentsStreamSessionEvents = BetaManagedAgentsUserMessageEvent | BetaManagedAgentsUserInterruptEvent | BetaManagedAgentsUserToolConfirmationEvent | 30 more`
+- `BetaManagedAgentsStreamSessionEvents = BetaManagedAgentsUserMessageEvent | BetaManagedAgentsUserInterruptEvent | BetaManagedAgentsUserToolConfirmationEvent | 31 more`
 
   Server-sent event in the session stream.
 
@@ -62763,7 +66476,7 @@ puts(beta_managed_agents_stream_session_events)
 
       Unique identifier for this event.
 
-    - `error: BetaManagedAgentsUnknownError | BetaManagedAgentsModelOverloadedError | BetaManagedAgentsModelRateLimitedError | 4 more`
+    - `error: BetaManagedAgentsUnknownError | BetaManagedAgentsModelOverloadedError | BetaManagedAgentsModelRateLimitedError | 5 more`
 
       An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
@@ -62982,6 +66695,42 @@ puts(beta_managed_agents_stream_session_events)
         - `type: :billing_error`
 
           - `:billing_error`
+
+      - `class BetaManagedAgentsCredentialHostUnreachableError`
+
+        An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+        - `credential_id: String`
+
+          ID of the affected credential.
+
+        - `message: String`
+
+          Human-readable error description.
+
+        - `retry_status: BetaManagedAgentsRetryStatusRetrying | BetaManagedAgentsRetryStatusExhausted | BetaManagedAgentsRetryStatusTerminal`
+
+          What the client should do next in response to this error.
+
+          - `class BetaManagedAgentsRetryStatusRetrying`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+          - `class BetaManagedAgentsRetryStatusExhausted`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+          - `class BetaManagedAgentsRetryStatusTerminal`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+        - `type: :credential_host_unreachable_error`
+
+          - `:credential_host_unreachable_error`
+
+        - `vault_id: String`
+
+          ID of the vault containing the affected credential.
 
     - `processed_at: Time`
 
@@ -63543,11 +67292,15 @@ puts(beta_managed_agents_stream_session_events)
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `BetaManagedAgentsModel = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-opus-4-6" | 7 more`
+          - `BetaManagedAgentsModel = :"claude-fable-5" | :"claude-opus-4-8" | :"claude-opus-4-7" | 8 more`
 
             The model that will power your agent.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `:"claude-fable-5"`
+
+              Next generation of intelligence for the hardest knowledge work and coding problems
 
             - `:"claude-opus-4-8"`
 
@@ -63777,19 +67530,13 @@ puts(beta_managed_agents_stream_session_events)
 
                 JSON Schema for custom tool input parameters.
 
-                - `properties: Hash[Symbol, untyped]`
-
-                  JSON Schema properties defining the tool's input parameters.
-
-                - `required: Array[String]`
-
-                  List of required property names.
-
                 - `type: :object`
 
-                  Must be 'object' for tool input schemas.
-
                   - `:object`
+
+                - `properties: Hash[Symbol, untyped]`
+
+                - `required: Array[String]`
 
               - `name: String`
 
@@ -63844,6 +67591,56 @@ puts(beta_managed_agents_stream_session_events)
     - `title: String`
 
       The session's new title. Present only when the update changed it.
+
+  - `class BetaManagedAgentsSystemMessageEvent`
+
+    A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+    - `id: String`
+
+      Unique identifier for this event.
+
+    - `content: Array[BetaManagedAgentsSystemContentBlock]`
+
+      System content blocks. Text-only.
+
+      - `text: String`
+
+        The text content.
+
+      - `type: :text`
+
+        - `:text`
+
+    - `type: :"system.message"`
+
+      - `:"system.message"`
+
+    - `processed_at: Time`
+
+      A timestamp in RFC 3339 format
+
+### Beta Managed Agents System Message Event Params
+
+- `class BetaManagedAgentsSystemMessageEventParams`
+
+  Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
+
+  - `content: Array[BetaManagedAgentsSystemContentBlock]`
+
+    System content blocks to append. Text-only.
+
+    - `text: String`
+
+      The text content.
+
+    - `type: :text`
+
+      - `:text`
+
+  - `type: :"system.message"`
+
+    - `:"system.message"`
 
 ### Beta Managed Agents Text Block
 
@@ -65125,7 +68922,7 @@ Add Session Resource
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -65178,6 +68975,10 @@ Add Session Resource
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
 
 ### Returns
 
@@ -65256,7 +69057,7 @@ List Session Resources
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -65309,6 +69110,10 @@ List Session Resources
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
 
 ### Returns
 
@@ -65476,7 +69281,7 @@ Get Session Resource
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -65529,6 +69334,10 @@ Get Session Resource
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
 
 ### Returns
 
@@ -65690,7 +69499,7 @@ Update Session Resource
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -65743,6 +69552,10 @@ Update Session Resource
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
 
 ### Returns
 
@@ -65901,7 +69714,7 @@ Delete Session Resource
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -65954,6 +69767,10 @@ Delete Session Resource
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
 
 ### Returns
 
@@ -66449,7 +70266,7 @@ List Session Threads
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -66503,6 +70320,10 @@ List Session Threads
 
     - `:"thinking-token-count-2026-05-13"`
 
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
+
 ### Returns
 
 - `class BetaManagedAgentsSessionThread`
@@ -66541,11 +70362,15 @@ List Session Threads
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-        - `BetaManagedAgentsModel = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-opus-4-6" | 7 more`
+        - `BetaManagedAgentsModel = :"claude-fable-5" | :"claude-opus-4-8" | :"claude-opus-4-7" | 8 more`
 
           The model that will power your agent.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `:"claude-fable-5"`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
 
           - `:"claude-opus-4-8"`
 
@@ -66751,19 +70576,13 @@ List Session Threads
 
           JSON Schema for custom tool input parameters.
 
-          - `properties: Hash[Symbol, untyped]`
-
-            JSON Schema properties defining the tool's input parameters.
-
-          - `required: Array[String]`
-
-            List of required property names.
-
           - `type: :object`
 
-            Must be 'object' for tool input schemas.
-
             - `:object`
+
+          - `properties: Hash[Symbol, untyped]`
+
+          - `required: Array[String]`
 
         - `name: String`
 
@@ -66969,7 +70788,7 @@ Get Session Thread
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -67023,6 +70842,10 @@ Get Session Thread
 
     - `:"thinking-token-count-2026-05-13"`
 
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
+
 ### Returns
 
 - `class BetaManagedAgentsSessionThread`
@@ -67061,11 +70884,15 @@ Get Session Thread
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-        - `BetaManagedAgentsModel = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-opus-4-6" | 7 more`
+        - `BetaManagedAgentsModel = :"claude-fable-5" | :"claude-opus-4-8" | :"claude-opus-4-7" | 8 more`
 
           The model that will power your agent.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `:"claude-fable-5"`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
 
           - `:"claude-opus-4-8"`
 
@@ -67271,19 +71098,13 @@ Get Session Thread
 
           JSON Schema for custom tool input parameters.
 
-          - `properties: Hash[Symbol, untyped]`
-
-            JSON Schema properties defining the tool's input parameters.
-
-          - `required: Array[String]`
-
-            List of required property names.
-
           - `type: :object`
 
-            Must be 'object' for tool input schemas.
-
             - `:object`
+
+          - `properties: Hash[Symbol, untyped]`
+
+          - `required: Array[String]`
 
         - `name: String`
 
@@ -67487,7 +71308,7 @@ Archive Session Thread
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -67541,6 +71362,10 @@ Archive Session Thread
 
     - `:"thinking-token-count-2026-05-13"`
 
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
+
 ### Returns
 
 - `class BetaManagedAgentsSessionThread`
@@ -67579,11 +71404,15 @@ Archive Session Thread
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-        - `BetaManagedAgentsModel = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-opus-4-6" | 7 more`
+        - `BetaManagedAgentsModel = :"claude-fable-5" | :"claude-opus-4-8" | :"claude-opus-4-7" | 8 more`
 
           The model that will power your agent.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `:"claude-fable-5"`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
 
           - `:"claude-opus-4-8"`
 
@@ -67789,19 +71618,13 @@ Archive Session Thread
 
           JSON Schema for custom tool input parameters.
 
-          - `properties: Hash[Symbol, untyped]`
-
-            JSON Schema properties defining the tool's input parameters.
-
-          - `required: Array[String]`
-
-            List of required property names.
-
           - `type: :object`
 
-            Must be 'object' for tool input schemas.
-
             - `:object`
+
+          - `properties: Hash[Symbol, untyped]`
+
+          - `required: Array[String]`
 
         - `name: String`
 
@@ -68025,11 +71848,15 @@ puts(beta_managed_agents_session_thread)
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-        - `BetaManagedAgentsModel = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-opus-4-6" | 7 more`
+        - `BetaManagedAgentsModel = :"claude-fable-5" | :"claude-opus-4-8" | :"claude-opus-4-7" | 8 more`
 
           The model that will power your agent.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `:"claude-fable-5"`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
 
           - `:"claude-opus-4-8"`
 
@@ -68235,19 +72062,13 @@ puts(beta_managed_agents_session_thread)
 
           JSON Schema for custom tool input parameters.
 
-          - `properties: Hash[Symbol, untyped]`
-
-            JSON Schema properties defining the tool's input parameters.
-
-          - `required: Array[String]`
-
-            List of required property names.
-
           - `type: :object`
 
-            Must be 'object' for tool input schemas.
-
             - `:object`
+
+          - `properties: Hash[Symbol, untyped]`
+
+          - `required: Array[String]`
 
         - `name: String`
 
@@ -68405,7 +72226,7 @@ puts(beta_managed_agents_session_thread)
 
 ### Beta Managed Agents Stream Session Thread Events
 
-- `BetaManagedAgentsStreamSessionThreadEvents = BetaManagedAgentsUserMessageEvent | BetaManagedAgentsUserInterruptEvent | BetaManagedAgentsUserToolConfirmationEvent | 30 more`
+- `BetaManagedAgentsStreamSessionThreadEvents = BetaManagedAgentsUserMessageEvent | BetaManagedAgentsUserInterruptEvent | BetaManagedAgentsUserToolConfirmationEvent | 31 more`
 
   Server-sent event in a single thread's stream.
 
@@ -69049,7 +72870,7 @@ puts(beta_managed_agents_session_thread)
 
       Unique identifier for this event.
 
-    - `error: BetaManagedAgentsUnknownError | BetaManagedAgentsModelOverloadedError | BetaManagedAgentsModelRateLimitedError | 4 more`
+    - `error: BetaManagedAgentsUnknownError | BetaManagedAgentsModelOverloadedError | BetaManagedAgentsModelRateLimitedError | 5 more`
 
       An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
@@ -69268,6 +73089,42 @@ puts(beta_managed_agents_session_thread)
         - `type: :billing_error`
 
           - `:billing_error`
+
+      - `class BetaManagedAgentsCredentialHostUnreachableError`
+
+        An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+        - `credential_id: String`
+
+          ID of the affected credential.
+
+        - `message: String`
+
+          Human-readable error description.
+
+        - `retry_status: BetaManagedAgentsRetryStatusRetrying | BetaManagedAgentsRetryStatusExhausted | BetaManagedAgentsRetryStatusTerminal`
+
+          What the client should do next in response to this error.
+
+          - `class BetaManagedAgentsRetryStatusRetrying`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+          - `class BetaManagedAgentsRetryStatusExhausted`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+          - `class BetaManagedAgentsRetryStatusTerminal`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+        - `type: :credential_host_unreachable_error`
+
+          - `:credential_host_unreachable_error`
+
+        - `vault_id: String`
+
+          ID of the vault containing the affected credential.
 
     - `processed_at: Time`
 
@@ -69829,11 +73686,15 @@ puts(beta_managed_agents_session_thread)
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `BetaManagedAgentsModel = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-opus-4-6" | 7 more`
+          - `BetaManagedAgentsModel = :"claude-fable-5" | :"claude-opus-4-8" | :"claude-opus-4-7" | 8 more`
 
             The model that will power your agent.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `:"claude-fable-5"`
+
+              Next generation of intelligence for the hardest knowledge work and coding problems
 
             - `:"claude-opus-4-8"`
 
@@ -70063,19 +73924,13 @@ puts(beta_managed_agents_session_thread)
 
                 JSON Schema for custom tool input parameters.
 
-                - `properties: Hash[Symbol, untyped]`
-
-                  JSON Schema properties defining the tool's input parameters.
-
-                - `required: Array[String]`
-
-                  List of required property names.
-
                 - `type: :object`
 
-                  Must be 'object' for tool input schemas.
-
                   - `:object`
+
+                - `properties: Hash[Symbol, untyped]`
+
+                - `required: Array[String]`
 
               - `name: String`
 
@@ -70131,6 +73986,34 @@ puts(beta_managed_agents_session_thread)
 
       The session's new title. Present only when the update changed it.
 
+  - `class BetaManagedAgentsSystemMessageEvent`
+
+    A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+    - `id: String`
+
+      Unique identifier for this event.
+
+    - `content: Array[BetaManagedAgentsSystemContentBlock]`
+
+      System content blocks. Text-only.
+
+      - `text: String`
+
+        The text content.
+
+      - `type: :text`
+
+        - `:text`
+
+    - `type: :"system.message"`
+
+      - `:"system.message"`
+
+    - `processed_at: Time`
+
+      A timestamp in RFC 3339 format
+
 # Events
 
 ## List Session Thread Events
@@ -70161,7 +74044,7 @@ List Session Thread Events
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -70215,9 +74098,13 @@ List Session Thread Events
 
     - `:"thinking-token-count-2026-05-13"`
 
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
+
 ### Returns
 
-- `BetaManagedAgentsSessionEvent = BetaManagedAgentsUserMessageEvent | BetaManagedAgentsUserInterruptEvent | BetaManagedAgentsUserToolConfirmationEvent | 30 more`
+- `BetaManagedAgentsSessionEvent = BetaManagedAgentsUserMessageEvent | BetaManagedAgentsUserInterruptEvent | BetaManagedAgentsUserToolConfirmationEvent | 31 more`
 
   Union type for all event types in a session.
 
@@ -70861,7 +74748,7 @@ List Session Thread Events
 
       Unique identifier for this event.
 
-    - `error: BetaManagedAgentsUnknownError | BetaManagedAgentsModelOverloadedError | BetaManagedAgentsModelRateLimitedError | 4 more`
+    - `error: BetaManagedAgentsUnknownError | BetaManagedAgentsModelOverloadedError | BetaManagedAgentsModelRateLimitedError | 5 more`
 
       An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
@@ -71080,6 +74967,42 @@ List Session Thread Events
         - `type: :billing_error`
 
           - `:billing_error`
+
+      - `class BetaManagedAgentsCredentialHostUnreachableError`
+
+        An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+        - `credential_id: String`
+
+          ID of the affected credential.
+
+        - `message: String`
+
+          Human-readable error description.
+
+        - `retry_status: BetaManagedAgentsRetryStatusRetrying | BetaManagedAgentsRetryStatusExhausted | BetaManagedAgentsRetryStatusTerminal`
+
+          What the client should do next in response to this error.
+
+          - `class BetaManagedAgentsRetryStatusRetrying`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+          - `class BetaManagedAgentsRetryStatusExhausted`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+          - `class BetaManagedAgentsRetryStatusTerminal`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+        - `type: :credential_host_unreachable_error`
+
+          - `:credential_host_unreachable_error`
+
+        - `vault_id: String`
+
+          ID of the vault containing the affected credential.
 
     - `processed_at: Time`
 
@@ -71641,11 +75564,15 @@ List Session Thread Events
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `BetaManagedAgentsModel = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-opus-4-6" | 7 more`
+          - `BetaManagedAgentsModel = :"claude-fable-5" | :"claude-opus-4-8" | :"claude-opus-4-7" | 8 more`
 
             The model that will power your agent.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `:"claude-fable-5"`
+
+              Next generation of intelligence for the hardest knowledge work and coding problems
 
             - `:"claude-opus-4-8"`
 
@@ -71875,19 +75802,13 @@ List Session Thread Events
 
                 JSON Schema for custom tool input parameters.
 
-                - `properties: Hash[Symbol, untyped]`
-
-                  JSON Schema properties defining the tool's input parameters.
-
-                - `required: Array[String]`
-
-                  List of required property names.
-
                 - `type: :object`
 
-                  Must be 'object' for tool input schemas.
-
                   - `:object`
+
+                - `properties: Hash[Symbol, untyped]`
+
+                - `required: Array[String]`
 
               - `name: String`
 
@@ -71942,6 +75863,34 @@ List Session Thread Events
     - `title: String`
 
       The session's new title. Present only when the update changed it.
+
+  - `class BetaManagedAgentsSystemMessageEvent`
+
+    A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+    - `id: String`
+
+      Unique identifier for this event.
+
+    - `content: Array[BetaManagedAgentsSystemContentBlock]`
+
+      System content blocks. Text-only.
+
+      - `text: String`
+
+        The text content.
+
+      - `type: :text`
+
+        - `:text`
+
+    - `type: :"system.message"`
+
+      - `:"system.message"`
+
+    - `processed_at: Time`
+
+      A timestamp in RFC 3339 format
 
 ### Example
 
@@ -71999,7 +75948,7 @@ Stream Session Thread Events
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -72053,9 +76002,13 @@ Stream Session Thread Events
 
     - `:"thinking-token-count-2026-05-13"`
 
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
+
 ### Returns
 
-- `BetaManagedAgentsStreamSessionThreadEvents = BetaManagedAgentsUserMessageEvent | BetaManagedAgentsUserInterruptEvent | BetaManagedAgentsUserToolConfirmationEvent | 30 more`
+- `BetaManagedAgentsStreamSessionThreadEvents = BetaManagedAgentsUserMessageEvent | BetaManagedAgentsUserInterruptEvent | BetaManagedAgentsUserToolConfirmationEvent | 31 more`
 
   Server-sent event in a single thread's stream.
 
@@ -72699,7 +76652,7 @@ Stream Session Thread Events
 
       Unique identifier for this event.
 
-    - `error: BetaManagedAgentsUnknownError | BetaManagedAgentsModelOverloadedError | BetaManagedAgentsModelRateLimitedError | 4 more`
+    - `error: BetaManagedAgentsUnknownError | BetaManagedAgentsModelOverloadedError | BetaManagedAgentsModelRateLimitedError | 5 more`
 
       An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
@@ -72918,6 +76871,42 @@ Stream Session Thread Events
         - `type: :billing_error`
 
           - `:billing_error`
+
+      - `class BetaManagedAgentsCredentialHostUnreachableError`
+
+        An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+        - `credential_id: String`
+
+          ID of the affected credential.
+
+        - `message: String`
+
+          Human-readable error description.
+
+        - `retry_status: BetaManagedAgentsRetryStatusRetrying | BetaManagedAgentsRetryStatusExhausted | BetaManagedAgentsRetryStatusTerminal`
+
+          What the client should do next in response to this error.
+
+          - `class BetaManagedAgentsRetryStatusRetrying`
+
+            The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+          - `class BetaManagedAgentsRetryStatusExhausted`
+
+            This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+          - `class BetaManagedAgentsRetryStatusTerminal`
+
+            The session encountered a terminal error and will transition to `terminated` state.
+
+        - `type: :credential_host_unreachable_error`
+
+          - `:credential_host_unreachable_error`
+
+        - `vault_id: String`
+
+          ID of the vault containing the affected credential.
 
     - `processed_at: Time`
 
@@ -73479,11 +77468,15 @@ Stream Session Thread Events
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `BetaManagedAgentsModel = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-opus-4-6" | 7 more`
+          - `BetaManagedAgentsModel = :"claude-fable-5" | :"claude-opus-4-8" | :"claude-opus-4-7" | 8 more`
 
             The model that will power your agent.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `:"claude-fable-5"`
+
+              Next generation of intelligence for the hardest knowledge work and coding problems
 
             - `:"claude-opus-4-8"`
 
@@ -73713,19 +77706,13 @@ Stream Session Thread Events
 
                 JSON Schema for custom tool input parameters.
 
-                - `properties: Hash[Symbol, untyped]`
-
-                  JSON Schema properties defining the tool's input parameters.
-
-                - `required: Array[String]`
-
-                  List of required property names.
-
                 - `type: :object`
 
-                  Must be 'object' for tool input schemas.
-
                   - `:object`
+
+                - `properties: Hash[Symbol, untyped]`
+
+                - `required: Array[String]`
 
               - `name: String`
 
@@ -73781,6 +77768,34 @@ Stream Session Thread Events
 
       The session's new title. Present only when the update changed it.
 
+  - `class BetaManagedAgentsSystemMessageEvent`
+
+    A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+    - `id: String`
+
+      Unique identifier for this event.
+
+    - `content: Array[BetaManagedAgentsSystemContentBlock]`
+
+      System content blocks. Text-only.
+
+      - `text: String`
+
+        The text content.
+
+      - `type: :text`
+
+        - `:text`
+
+    - `type: :"system.message"`
+
+      - `:"system.message"`
+
+    - `processed_at: Time`
+
+      A timestamp in RFC 3339 format
+
 ### Example
 
 ```ruby
@@ -73812,25 +77827,385 @@ puts(beta_managed_agents_stream_session_thread_events)
 }
 ```
 
-# Vaults
+# Deployments
 
-## Create Vault
+## Create Deployment
 
-`beta.vaults.create(**kwargs) -> BetaManagedAgentsVault`
+`beta.deployments.create(**kwargs) -> BetaManagedAgentsDeployment`
 
-**post** `/v1/vaults`
+**post** `/v1/deployments`
 
-Create Vault
+Create Deployment
 
 ### Parameters
 
-- `display_name: String`
+- `agent: String | BetaManagedAgentsAgentParams`
 
-  Human-readable name for the vault. 1-255 characters.
+  Agent to deploy. Accepts the `agent` ID string, which pins the latest version, or an `agent` object with both id and version specified. The agent must exist and not be archived.
+
+  - `String = String`
+
+  - `class BetaManagedAgentsAgentParams`
+
+    Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
+
+    - `id: String`
+
+      The `agent` ID.
+
+    - `type: :agent`
+
+      - `:agent`
+
+    - `version: Integer`
+
+      The specific `agent` version to use. Omit to use the latest version. Must be at least 1 if specified.
+
+- `environment_id: String`
+
+  ID of the `environment` defining the container configuration for sessions created from this deployment.
+
+- `initial_events: Array[BetaManagedAgentsDeploymentInitialEventParams]`
+
+  Events to send to each session immediately after creation. At least 1, maximum 50.
+
+  - `class BetaManagedAgentsUserMessageEventParams`
+
+    Parameters for sending a user message to the session.
+
+    - `content: Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock]`
+
+      Array of content blocks for the user message.
+
+      - `class BetaManagedAgentsTextBlock`
+
+        Regular text content.
+
+        - `text: String`
+
+          The text content.
+
+        - `type: :text`
+
+          - `:text`
+
+      - `class BetaManagedAgentsImageBlock`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
+
+          Union type for image source variants.
+
+          - `class BetaManagedAgentsBase64ImageSource`
+
+            Base64-encoded image data.
+
+            - `data: String`
+
+              Base64-encoded image data.
+
+            - `media_type: String`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `type: :base64`
+
+              - `:base64`
+
+          - `class BetaManagedAgentsURLImageSource`
+
+            Image referenced by URL.
+
+            - `type: :url`
+
+              - `:url`
+
+            - `url: String`
+
+              URL of the image to fetch.
+
+          - `class BetaManagedAgentsFileImageSource`
+
+            Image referenced by file ID.
+
+            - `file_id: String`
+
+              ID of a previously uploaded file.
+
+            - `type: :file`
+
+              - `:file`
+
+        - `type: :image`
+
+          - `:image`
+
+      - `class BetaManagedAgentsDocumentBlock`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
+
+          Union type for document source variants.
+
+          - `class BetaManagedAgentsBase64DocumentSource`
+
+            Base64-encoded document data.
+
+            - `data: String`
+
+              Base64-encoded document data.
+
+            - `media_type: String`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `type: :base64`
+
+              - `:base64`
+
+          - `class BetaManagedAgentsPlainTextDocumentSource`
+
+            Plain text document content.
+
+            - `data: String`
+
+              The plain text content.
+
+            - `media_type: :"text/plain"`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `:"text/plain"`
+
+            - `type: :text`
+
+              - `:text`
+
+          - `class BetaManagedAgentsURLDocumentSource`
+
+            Document referenced by URL.
+
+            - `type: :url`
+
+              - `:url`
+
+            - `url: String`
+
+              URL of the document to fetch.
+
+          - `class BetaManagedAgentsFileDocumentSource`
+
+            Document referenced by file ID.
+
+            - `file_id: String`
+
+              ID of a previously uploaded file.
+
+            - `type: :file`
+
+              - `:file`
+
+        - `type: :document`
+
+          - `:document`
+
+        - `context: String`
+
+          Additional context about the document for the model.
+
+        - `title: String`
+
+          The title of the document.
+
+    - `type: :"user.message"`
+
+      - `:"user.message"`
+
+  - `class BetaManagedAgentsUserDefineOutcomeEventParams`
+
+    Parameters for defining an outcome the agent should work toward. The agent begins work on receipt.
+
+    - `description: String`
+
+      What the agent should produce. This is the task specification.
+
+    - `rubric: BetaManagedAgentsFileRubricParams | BetaManagedAgentsTextRubricParams`
+
+      Rubric for grading the quality of an outcome.
+
+      - `class BetaManagedAgentsFileRubricParams`
+
+        Rubric referenced by a file uploaded via the Files API.
+
+        - `file_id: String`
+
+          ID of the rubric file.
+
+        - `type: :file`
+
+          - `:file`
+
+      - `class BetaManagedAgentsTextRubricParams`
+
+        Rubric content provided inline as text.
+
+        - `content: String`
+
+          Rubric content. Plain text or markdown — the grader treats it as freeform text. Maximum 262144 characters.
+
+        - `type: :text`
+
+          - `:text`
+
+    - `type: :"user.define_outcome"`
+
+      - `:"user.define_outcome"`
+
+    - `max_iterations: Integer`
+
+      Eval→revision cycles before giving up. Default 3, max 20.
+
+  - `class BetaManagedAgentsSystemMessageEventParams`
+
+    Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
+
+    - `content: Array[BetaManagedAgentsSystemContentBlock]`
+
+      System content blocks to append. Text-only.
+
+      - `text: String`
+
+        The text content.
+
+      - `type: :text`
+
+        - `:text`
+
+    - `type: :"system.message"`
+
+      - `:"system.message"`
+
+- `name: String`
+
+  Human-readable name for the deployment.
+
+- `description: String`
+
+  Description of what the deployment does.
 
 - `metadata: Hash[Symbol, String]`
 
-  Arbitrary key-value metadata to attach to the vault. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+  Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
+- `resources: Array[BetaManagedAgentsGitHubRepositoryResourceParams | BetaManagedAgentsFileResourceParams | BetaManagedAgentsMemoryStoreResourceParam]`
+
+  Resources (e.g. repositories, files) to mount into each session's container. Maximum 500.
+
+  - `class BetaManagedAgentsGitHubRepositoryResourceParams`
+
+    Mount a GitHub repository into the session's container.
+
+    - `authorization_token: String`
+
+      GitHub authorization token used to clone the repository.
+
+    - `type: :github_repository`
+
+      - `:github_repository`
+
+    - `url: String`
+
+      Github URL of the repository
+
+    - `checkout: BetaManagedAgentsBranchCheckout | BetaManagedAgentsCommitCheckout`
+
+      Branch or commit to check out. Defaults to the repository's default branch.
+
+      - `class BetaManagedAgentsBranchCheckout`
+
+        - `name: String`
+
+          Branch name to check out.
+
+        - `type: :branch`
+
+          - `:branch`
+
+      - `class BetaManagedAgentsCommitCheckout`
+
+        - `sha: String`
+
+          Full commit SHA to check out.
+
+        - `type: :commit`
+
+          - `:commit`
+
+    - `mount_path: String`
+
+      Mount path in the container. Defaults to `/workspace/<repo-name>`.
+
+  - `class BetaManagedAgentsFileResourceParams`
+
+    Mount a file uploaded via the Files API into the session.
+
+    - `file_id: String`
+
+      ID of a previously uploaded file.
+
+    - `type: :file`
+
+      - `:file`
+
+    - `mount_path: String`
+
+      Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
+
+  - `class BetaManagedAgentsMemoryStoreResourceParam`
+
+    Parameters for attaching a memory store to an agent session.
+
+    - `memory_store_id: String`
+
+      The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+    - `type: :memory_store`
+
+      - `:memory_store`
+
+    - `access: :read_write | :read_only`
+
+      Access mode for an attached memory store.
+
+      - `:read_write`
+
+      - `:read_only`
+
+    - `instructions: String`
+
+      Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+- `schedule: BetaManagedAgentsScheduleParams`
+
+  5-field POSIX cron schedule. Literal wall-clock matching in the configured timezone.
+
+  - `expression: String`
+
+    5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 * * 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
+
+  - `timezone: String`
+
+    Required. IANA timezone identifier (e.g., "America/Los_Angeles", "UTC"). Validated against the IANA timezone database.
+
+  - `type: :cron`
+
+    - `:cron`
+
+- `vault_ids: Array[String]`
+
+  Vault IDs for stored credentials the agent can use during sessions created from this deployment. Maximum 50.
 
 - `betas: Array[AnthropicBeta]`
 
@@ -73838,7 +78213,7 @@ Create Vault
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -73891,6 +78266,8903 @@ Create Vault
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
+
+### Returns
+
+- `class BetaManagedAgentsDeployment`
+
+  A deployment is a configured instance of an agent — it binds the agent to everything needed to run it autonomously: an environment, credentials, initial events, and an optional schedule.
+
+  - `id: String`
+
+    Unique identifier for this deployment.
+
+  - `agent: BetaManagedAgentsAgentReference`
+
+    A resolved agent reference with a concrete version.
+
+    - `id: String`
+
+    - `type: :agent`
+
+      - `:agent`
+
+    - `version: Integer`
+
+  - `archived_at: Time`
+
+    A timestamp in RFC 3339 format
+
+  - `created_at: Time`
+
+    A timestamp in RFC 3339 format
+
+  - `description: String`
+
+    Description of what the deployment does.
+
+  - `environment_id: String`
+
+    ID of the `environment` where sessions run.
+
+  - `initial_events: Array[BetaManagedAgentsDeploymentInitialEvent]`
+
+    Events sent to each session immediately after creation.
+
+    - `class BetaManagedAgentsDeploymentUserMessageEvent`
+
+      A user message sent to the session.
+
+      - `content: Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock]`
+
+        Array of content blocks for the user message.
+
+        - `class BetaManagedAgentsTextBlock`
+
+          Regular text content.
+
+          - `text: String`
+
+            The text content.
+
+          - `type: :text`
+
+            - `:text`
+
+        - `class BetaManagedAgentsImageBlock`
+
+          Image content specified directly as base64 data or as a reference via a URL.
+
+          - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
+
+            Union type for image source variants.
+
+            - `class BetaManagedAgentsBase64ImageSource`
+
+              Base64-encoded image data.
+
+              - `data: String`
+
+                Base64-encoded image data.
+
+              - `media_type: String`
+
+                MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+              - `type: :base64`
+
+                - `:base64`
+
+            - `class BetaManagedAgentsURLImageSource`
+
+              Image referenced by URL.
+
+              - `type: :url`
+
+                - `:url`
+
+              - `url: String`
+
+                URL of the image to fetch.
+
+            - `class BetaManagedAgentsFileImageSource`
+
+              Image referenced by file ID.
+
+              - `file_id: String`
+
+                ID of a previously uploaded file.
+
+              - `type: :file`
+
+                - `:file`
+
+          - `type: :image`
+
+            - `:image`
+
+        - `class BetaManagedAgentsDocumentBlock`
+
+          Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+          - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
+
+            Union type for document source variants.
+
+            - `class BetaManagedAgentsBase64DocumentSource`
+
+              Base64-encoded document data.
+
+              - `data: String`
+
+                Base64-encoded document data.
+
+              - `media_type: String`
+
+                MIME type of the document (e.g., "application/pdf").
+
+              - `type: :base64`
+
+                - `:base64`
+
+            - `class BetaManagedAgentsPlainTextDocumentSource`
+
+              Plain text document content.
+
+              - `data: String`
+
+                The plain text content.
+
+              - `media_type: :"text/plain"`
+
+                MIME type of the text content. Must be "text/plain".
+
+                - `:"text/plain"`
+
+              - `type: :text`
+
+                - `:text`
+
+            - `class BetaManagedAgentsURLDocumentSource`
+
+              Document referenced by URL.
+
+              - `type: :url`
+
+                - `:url`
+
+              - `url: String`
+
+                URL of the document to fetch.
+
+            - `class BetaManagedAgentsFileDocumentSource`
+
+              Document referenced by file ID.
+
+              - `file_id: String`
+
+                ID of a previously uploaded file.
+
+              - `type: :file`
+
+                - `:file`
+
+          - `type: :document`
+
+            - `:document`
+
+          - `context: String`
+
+            Additional context about the document for the model.
+
+          - `title: String`
+
+            The title of the document.
+
+      - `type: :"user.message"`
+
+        - `:"user.message"`
+
+    - `class BetaManagedAgentsDeploymentUserDefineOutcomeEvent`
+
+      An outcome the agent should work toward. The agent begins work on receipt.
+
+      - `description: String`
+
+        What the agent should produce. This is the task specification.
+
+      - `rubric: BetaManagedAgentsFileRubric | BetaManagedAgentsTextRubric`
+
+        Rubric for grading the quality of an outcome.
+
+        - `class BetaManagedAgentsFileRubric`
+
+          Rubric referenced by a file uploaded via the Files API.
+
+          - `file_id: String`
+
+            ID of the rubric file.
+
+          - `type: :file`
+
+            - `:file`
+
+        - `class BetaManagedAgentsTextRubric`
+
+          Rubric content provided inline as text.
+
+          - `content: String`
+
+            Rubric content. Plain text or markdown — the grader treats it as freeform text.
+
+          - `type: :text`
+
+            - `:text`
+
+      - `type: :"user.define_outcome"`
+
+        - `:"user.define_outcome"`
+
+      - `max_iterations: Integer`
+
+        Eval→revision cycles before giving up. Default 3, max 20.
+
+    - `class BetaManagedAgentsDeploymentSystemMessageEvent`
+
+      Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
+
+      - `content: Array[BetaManagedAgentsSystemContentBlock]`
+
+        System content blocks to append. Text-only.
+
+        - `text: String`
+
+          The text content.
+
+        - `type: :text`
+
+          - `:text`
+
+      - `type: :"system.message"`
+
+        - `:"system.message"`
+
+  - `metadata: Hash[Symbol, String]`
+
+    Arbitrary key-value metadata. Maximum 16 pairs.
+
+  - `name: String`
+
+    Human-readable name.
+
+  - `paused_reason: BetaManagedAgentsDeploymentPausedReason`
+
+    Why a deployment is paused. Non-null exactly when `status` is `paused`.
+
+    - `class BetaManagedAgentsManualDeploymentPausedReason`
+
+      The caller invoked the pause endpoint on the deployment.
+
+      - `type: :manual`
+
+        - `:manual`
+
+    - `class BetaManagedAgentsErrorDeploymentPausedReason`
+
+      A scheduled fire recorded a failed run whose error auto-pauses the deployment.
+
+      - `error: BetaManagedAgentsDeploymentPausedReasonError`
+
+        The error that triggered an auto-pause. Matches the failed run's `error.type`.
+
+        - `class BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError`
+
+          The deployment's environment was archived.
+
+          - `type: :environment_archived_error`
+
+            - `:environment_archived_error`
+
+        - `class BetaManagedAgentsAgentArchivedDeploymentPausedReasonError`
+
+          The deployment's agent was archived.
+
+          - `type: :agent_archived_error`
+
+            - `:agent_archived_error`
+
+        - `class BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError`
+
+          The deployment's environment no longer exists.
+
+          - `type: :environment_not_found_error`
+
+            - `:environment_not_found_error`
+
+        - `class BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError`
+
+          A vault referenced by the deployment no longer exists.
+
+          - `type: :vault_not_found_error`
+
+            - `:vault_not_found_error`
+
+        - `class BetaManagedAgentsFileNotFoundDeploymentPausedReasonError`
+
+          A file resource referenced by the deployment no longer exists.
+
+          - `type: :file_not_found_error`
+
+            - `:file_not_found_error`
+
+        - `class BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError`
+
+          A referenced resource no longer exists and its kind was not reported.
+
+          - `type: :session_resource_not_found_error`
+
+            - `:session_resource_not_found_error`
+
+        - `class BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError`
+
+          The deployment's workspace was archived.
+
+          - `type: :workspace_archived_error`
+
+            - `:workspace_archived_error`
+
+        - `class BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError`
+
+          The deployment's organization is disabled.
+
+          - `type: :organization_disabled_error`
+
+            - `:organization_disabled_error`
+
+        - `class BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError`
+
+          A memory store referenced by the deployment is archived.
+
+          - `type: :memory_store_archived_error`
+
+            - `:memory_store_archived_error`
+
+        - `class BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError`
+
+          A skill referenced by the deployment's agent no longer exists.
+
+          - `type: :skill_not_found_error`
+
+            - `:skill_not_found_error`
+
+        - `class BetaManagedAgentsVaultArchivedDeploymentPausedReasonError`
+
+          A vault referenced by the deployment is archived.
+
+          - `type: :vault_archived_error`
+
+            - `:vault_archived_error`
+
+        - `class BetaManagedAgentsUnknownDeploymentPausedReasonError`
+
+          An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
+
+          - `type: :unknown_error`
+
+            - `:unknown_error`
+
+        - `class BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError`
+
+          The deployment configures resources, but its environment is self-hosted and cannot mount them.
+
+          - `type: :self_hosted_resources_unsupported_error`
+
+            - `:self_hosted_resources_unsupported_error`
+
+        - `class BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError`
+
+          An MCP server host used by the deployment's agent is blocked by the environment's network policy.
+
+          - `type: :mcp_egress_blocked_error`
+
+            - `:mcp_egress_blocked_error`
+
+      - `type: :error`
+
+        - `:error`
+
+  - `resources: Array[BetaManagedAgentsSessionResourceConfig]`
+
+    Resources attached to sessions created from this deployment. Echoes the input minus write-only credentials.
+
+    - `class BetaManagedAgentsGitHubRepositoryResourceConfig`
+
+      A GitHub repository mounted into each session's container. The authorization token is write-only and never returned.
+
+      - `type: :github_repository`
+
+        - `:github_repository`
+
+      - `url: String`
+
+        Github URL of the repository
+
+      - `checkout: BetaManagedAgentsBranchCheckout | BetaManagedAgentsCommitCheckout`
+
+        Branch or commit to check out. Defaults to the repository's default branch.
+
+        - `class BetaManagedAgentsBranchCheckout`
+
+          - `name: String`
+
+            Branch name to check out.
+
+          - `type: :branch`
+
+            - `:branch`
+
+        - `class BetaManagedAgentsCommitCheckout`
+
+          - `sha: String`
+
+            Full commit SHA to check out.
+
+          - `type: :commit`
+
+            - `:commit`
+
+      - `mount_path: String`
+
+        Mount path in the container. Defaults to `/workspace/<repo-name>`.
+
+    - `class BetaManagedAgentsFileResourceConfig`
+
+      A file mounted into each session's container.
+
+      - `file_id: String`
+
+        ID of a previously uploaded file.
+
+      - `type: :file`
+
+        - `:file`
+
+      - `mount_path: String`
+
+        Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
+
+    - `class BetaManagedAgentsMemoryStoreResourceConfig`
+
+      A memory store attached to each session created from this deployment.
+
+      - `memory_store_id: String`
+
+        The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+      - `type: :memory_store`
+
+        - `:memory_store`
+
+      - `access: :read_write | :read_only`
+
+        Access mode for an attached memory store.
+
+        - `:read_write`
+
+        - `:read_only`
+
+      - `instructions: String`
+
+        Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+  - `schedule: BetaManagedAgentsSchedule`
+
+    5-field POSIX cron schedule with computed runtime timestamps.
+
+    - `expression: String`
+
+      5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 * * 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
+
+    - `timezone: String`
+
+      IANA timezone identifier (e.g., "America/Los_Angeles", "UTC").
+
+    - `type: :cron`
+
+      - `:cron`
+
+    - `last_run_at: Time`
+
+      A timestamp in RFC 3339 format
+
+    - `upcoming_runs_at: Array[Time]`
+
+      Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused deployments (reflects what the schedule would do if unpaused); empty once the deployment is archived (`archived_at` set). Each fire is offset by a small per-schedule jitter, so a run will actually start at or shortly after its listed time.
+
+  - `status: BetaManagedAgentsDeploymentStatus`
+
+    Lifecycle status of a deployment.
+
+    - `:active`
+
+    - `:paused`
+
+  - `type: :deployment`
+
+    - `:deployment`
+
+  - `updated_at: Time`
+
+    A timestamp in RFC 3339 format
+
+  - `vault_ids: Array[String]`
+
+    Vault IDs supplying stored credentials for sessions created from this deployment.
+
+### Example
+
+```ruby
+require "anthropic"
+
+anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
+
+beta_managed_agents_deployment = anthropic.beta.deployments.create(
+  agent: "string",
+  environment_id: "x",
+  initial_events: [{content: [{text: "Where is my order #1234?", type: :text}], type: :"user.message"}],
+  name: "x"
+)
+
+puts(beta_managed_agents_deployment)
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "agent": {
+    "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+    "type": "agent",
+    "version": 1
+  },
+  "archived_at": "2019-12-27T18:11:19.117Z",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "description": "description",
+  "environment_id": "environment_id",
+  "initial_events": [
+    {
+      "content": [
+        {
+          "text": "Where is my order #1234?",
+          "type": "text"
+        }
+      ],
+      "type": "user.message"
+    }
+  ],
+  "metadata": {
+    "foo": "string"
+  },
+  "name": "name",
+  "paused_reason": {
+    "type": "manual"
+  },
+  "resources": [
+    {
+      "type": "github_repository",
+      "url": "url",
+      "checkout": {
+        "name": "main",
+        "type": "branch"
+      },
+      "mount_path": "mount_path"
+    }
+  ],
+  "schedule": {
+    "expression": "x",
+    "timezone": "x",
+    "type": "cron",
+    "last_run_at": "2019-12-27T18:11:19.117Z",
+    "upcoming_runs_at": [
+      "2019-12-27T18:11:19.117Z"
+    ]
+  },
+  "status": "active",
+  "type": "deployment",
+  "updated_at": "2019-12-27T18:11:19.117Z",
+  "vault_ids": [
+    "string"
+  ]
+}
+```
+
+## List Deployments
+
+`beta.deployments.list(**kwargs) -> PageCursor<BetaManagedAgentsDeployment>`
+
+**get** `/v1/deployments`
+
+List Deployments
+
+### Parameters
+
+- `agent_id: String`
+
+  Filter by agent ID.
+
+- `created_at_gte: Time`
+
+  Return deployments created at or after this time (inclusive).
+
+- `created_at_lte: Time`
+
+  Return deployments created at or before this time (inclusive).
+
+- `include_archived: bool`
+
+  When true, includes archived deployments. Default: false (exclude archived).
+
+- `limit: Integer`
+
+  Maximum results per page. Default 20, maximum 100.
+
+- `page: String`
+
+  Opaque pagination cursor.
+
+- `status: BetaManagedAgentsDeploymentStatus`
+
+  Filter by status: active or paused. Omit for both. To include archived deployments, use include_archived instead; the two cannot be combined.
+
+  - `:active`
+
+  - `:paused`
+
+- `betas: Array[AnthropicBeta]`
+
+  Optional header to specify the beta version(s) you want to use.
+
+  - `String = String`
+
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
+
+    - `:"message-batches-2024-09-24"`
+
+    - `:"prompt-caching-2024-07-31"`
+
+    - `:"computer-use-2024-10-22"`
+
+    - `:"computer-use-2025-01-24"`
+
+    - `:"pdfs-2024-09-25"`
+
+    - `:"token-counting-2024-11-01"`
+
+    - `:"token-efficient-tools-2025-02-19"`
+
+    - `:"output-128k-2025-02-19"`
+
+    - `:"files-api-2025-04-14"`
+
+    - `:"mcp-client-2025-04-04"`
+
+    - `:"mcp-client-2025-11-20"`
+
+    - `:"dev-full-thinking-2025-05-14"`
+
+    - `:"interleaved-thinking-2025-05-14"`
+
+    - `:"code-execution-2025-05-22"`
+
+    - `:"extended-cache-ttl-2025-04-11"`
+
+    - `:"context-1m-2025-08-07"`
+
+    - `:"context-management-2025-06-27"`
+
+    - `:"model-context-window-exceeded-2025-08-26"`
+
+    - `:"skills-2025-10-02"`
+
+    - `:"fast-mode-2026-02-01"`
+
+    - `:"output-300k-2026-03-24"`
+
+    - `:"user-profiles-2026-03-24"`
+
+    - `:"advisor-tool-2026-03-01"`
+
+    - `:"managed-agents-2026-04-01"`
+
+    - `:"cache-diagnosis-2026-04-07"`
+
+    - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
+
+### Returns
+
+- `class BetaManagedAgentsDeployment`
+
+  A deployment is a configured instance of an agent — it binds the agent to everything needed to run it autonomously: an environment, credentials, initial events, and an optional schedule.
+
+  - `id: String`
+
+    Unique identifier for this deployment.
+
+  - `agent: BetaManagedAgentsAgentReference`
+
+    A resolved agent reference with a concrete version.
+
+    - `id: String`
+
+    - `type: :agent`
+
+      - `:agent`
+
+    - `version: Integer`
+
+  - `archived_at: Time`
+
+    A timestamp in RFC 3339 format
+
+  - `created_at: Time`
+
+    A timestamp in RFC 3339 format
+
+  - `description: String`
+
+    Description of what the deployment does.
+
+  - `environment_id: String`
+
+    ID of the `environment` where sessions run.
+
+  - `initial_events: Array[BetaManagedAgentsDeploymentInitialEvent]`
+
+    Events sent to each session immediately after creation.
+
+    - `class BetaManagedAgentsDeploymentUserMessageEvent`
+
+      A user message sent to the session.
+
+      - `content: Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock]`
+
+        Array of content blocks for the user message.
+
+        - `class BetaManagedAgentsTextBlock`
+
+          Regular text content.
+
+          - `text: String`
+
+            The text content.
+
+          - `type: :text`
+
+            - `:text`
+
+        - `class BetaManagedAgentsImageBlock`
+
+          Image content specified directly as base64 data or as a reference via a URL.
+
+          - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
+
+            Union type for image source variants.
+
+            - `class BetaManagedAgentsBase64ImageSource`
+
+              Base64-encoded image data.
+
+              - `data: String`
+
+                Base64-encoded image data.
+
+              - `media_type: String`
+
+                MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+              - `type: :base64`
+
+                - `:base64`
+
+            - `class BetaManagedAgentsURLImageSource`
+
+              Image referenced by URL.
+
+              - `type: :url`
+
+                - `:url`
+
+              - `url: String`
+
+                URL of the image to fetch.
+
+            - `class BetaManagedAgentsFileImageSource`
+
+              Image referenced by file ID.
+
+              - `file_id: String`
+
+                ID of a previously uploaded file.
+
+              - `type: :file`
+
+                - `:file`
+
+          - `type: :image`
+
+            - `:image`
+
+        - `class BetaManagedAgentsDocumentBlock`
+
+          Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+          - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
+
+            Union type for document source variants.
+
+            - `class BetaManagedAgentsBase64DocumentSource`
+
+              Base64-encoded document data.
+
+              - `data: String`
+
+                Base64-encoded document data.
+
+              - `media_type: String`
+
+                MIME type of the document (e.g., "application/pdf").
+
+              - `type: :base64`
+
+                - `:base64`
+
+            - `class BetaManagedAgentsPlainTextDocumentSource`
+
+              Plain text document content.
+
+              - `data: String`
+
+                The plain text content.
+
+              - `media_type: :"text/plain"`
+
+                MIME type of the text content. Must be "text/plain".
+
+                - `:"text/plain"`
+
+              - `type: :text`
+
+                - `:text`
+
+            - `class BetaManagedAgentsURLDocumentSource`
+
+              Document referenced by URL.
+
+              - `type: :url`
+
+                - `:url`
+
+              - `url: String`
+
+                URL of the document to fetch.
+
+            - `class BetaManagedAgentsFileDocumentSource`
+
+              Document referenced by file ID.
+
+              - `file_id: String`
+
+                ID of a previously uploaded file.
+
+              - `type: :file`
+
+                - `:file`
+
+          - `type: :document`
+
+            - `:document`
+
+          - `context: String`
+
+            Additional context about the document for the model.
+
+          - `title: String`
+
+            The title of the document.
+
+      - `type: :"user.message"`
+
+        - `:"user.message"`
+
+    - `class BetaManagedAgentsDeploymentUserDefineOutcomeEvent`
+
+      An outcome the agent should work toward. The agent begins work on receipt.
+
+      - `description: String`
+
+        What the agent should produce. This is the task specification.
+
+      - `rubric: BetaManagedAgentsFileRubric | BetaManagedAgentsTextRubric`
+
+        Rubric for grading the quality of an outcome.
+
+        - `class BetaManagedAgentsFileRubric`
+
+          Rubric referenced by a file uploaded via the Files API.
+
+          - `file_id: String`
+
+            ID of the rubric file.
+
+          - `type: :file`
+
+            - `:file`
+
+        - `class BetaManagedAgentsTextRubric`
+
+          Rubric content provided inline as text.
+
+          - `content: String`
+
+            Rubric content. Plain text or markdown — the grader treats it as freeform text.
+
+          - `type: :text`
+
+            - `:text`
+
+      - `type: :"user.define_outcome"`
+
+        - `:"user.define_outcome"`
+
+      - `max_iterations: Integer`
+
+        Eval→revision cycles before giving up. Default 3, max 20.
+
+    - `class BetaManagedAgentsDeploymentSystemMessageEvent`
+
+      Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
+
+      - `content: Array[BetaManagedAgentsSystemContentBlock]`
+
+        System content blocks to append. Text-only.
+
+        - `text: String`
+
+          The text content.
+
+        - `type: :text`
+
+          - `:text`
+
+      - `type: :"system.message"`
+
+        - `:"system.message"`
+
+  - `metadata: Hash[Symbol, String]`
+
+    Arbitrary key-value metadata. Maximum 16 pairs.
+
+  - `name: String`
+
+    Human-readable name.
+
+  - `paused_reason: BetaManagedAgentsDeploymentPausedReason`
+
+    Why a deployment is paused. Non-null exactly when `status` is `paused`.
+
+    - `class BetaManagedAgentsManualDeploymentPausedReason`
+
+      The caller invoked the pause endpoint on the deployment.
+
+      - `type: :manual`
+
+        - `:manual`
+
+    - `class BetaManagedAgentsErrorDeploymentPausedReason`
+
+      A scheduled fire recorded a failed run whose error auto-pauses the deployment.
+
+      - `error: BetaManagedAgentsDeploymentPausedReasonError`
+
+        The error that triggered an auto-pause. Matches the failed run's `error.type`.
+
+        - `class BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError`
+
+          The deployment's environment was archived.
+
+          - `type: :environment_archived_error`
+
+            - `:environment_archived_error`
+
+        - `class BetaManagedAgentsAgentArchivedDeploymentPausedReasonError`
+
+          The deployment's agent was archived.
+
+          - `type: :agent_archived_error`
+
+            - `:agent_archived_error`
+
+        - `class BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError`
+
+          The deployment's environment no longer exists.
+
+          - `type: :environment_not_found_error`
+
+            - `:environment_not_found_error`
+
+        - `class BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError`
+
+          A vault referenced by the deployment no longer exists.
+
+          - `type: :vault_not_found_error`
+
+            - `:vault_not_found_error`
+
+        - `class BetaManagedAgentsFileNotFoundDeploymentPausedReasonError`
+
+          A file resource referenced by the deployment no longer exists.
+
+          - `type: :file_not_found_error`
+
+            - `:file_not_found_error`
+
+        - `class BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError`
+
+          A referenced resource no longer exists and its kind was not reported.
+
+          - `type: :session_resource_not_found_error`
+
+            - `:session_resource_not_found_error`
+
+        - `class BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError`
+
+          The deployment's workspace was archived.
+
+          - `type: :workspace_archived_error`
+
+            - `:workspace_archived_error`
+
+        - `class BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError`
+
+          The deployment's organization is disabled.
+
+          - `type: :organization_disabled_error`
+
+            - `:organization_disabled_error`
+
+        - `class BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError`
+
+          A memory store referenced by the deployment is archived.
+
+          - `type: :memory_store_archived_error`
+
+            - `:memory_store_archived_error`
+
+        - `class BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError`
+
+          A skill referenced by the deployment's agent no longer exists.
+
+          - `type: :skill_not_found_error`
+
+            - `:skill_not_found_error`
+
+        - `class BetaManagedAgentsVaultArchivedDeploymentPausedReasonError`
+
+          A vault referenced by the deployment is archived.
+
+          - `type: :vault_archived_error`
+
+            - `:vault_archived_error`
+
+        - `class BetaManagedAgentsUnknownDeploymentPausedReasonError`
+
+          An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
+
+          - `type: :unknown_error`
+
+            - `:unknown_error`
+
+        - `class BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError`
+
+          The deployment configures resources, but its environment is self-hosted and cannot mount them.
+
+          - `type: :self_hosted_resources_unsupported_error`
+
+            - `:self_hosted_resources_unsupported_error`
+
+        - `class BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError`
+
+          An MCP server host used by the deployment's agent is blocked by the environment's network policy.
+
+          - `type: :mcp_egress_blocked_error`
+
+            - `:mcp_egress_blocked_error`
+
+      - `type: :error`
+
+        - `:error`
+
+  - `resources: Array[BetaManagedAgentsSessionResourceConfig]`
+
+    Resources attached to sessions created from this deployment. Echoes the input minus write-only credentials.
+
+    - `class BetaManagedAgentsGitHubRepositoryResourceConfig`
+
+      A GitHub repository mounted into each session's container. The authorization token is write-only and never returned.
+
+      - `type: :github_repository`
+
+        - `:github_repository`
+
+      - `url: String`
+
+        Github URL of the repository
+
+      - `checkout: BetaManagedAgentsBranchCheckout | BetaManagedAgentsCommitCheckout`
+
+        Branch or commit to check out. Defaults to the repository's default branch.
+
+        - `class BetaManagedAgentsBranchCheckout`
+
+          - `name: String`
+
+            Branch name to check out.
+
+          - `type: :branch`
+
+            - `:branch`
+
+        - `class BetaManagedAgentsCommitCheckout`
+
+          - `sha: String`
+
+            Full commit SHA to check out.
+
+          - `type: :commit`
+
+            - `:commit`
+
+      - `mount_path: String`
+
+        Mount path in the container. Defaults to `/workspace/<repo-name>`.
+
+    - `class BetaManagedAgentsFileResourceConfig`
+
+      A file mounted into each session's container.
+
+      - `file_id: String`
+
+        ID of a previously uploaded file.
+
+      - `type: :file`
+
+        - `:file`
+
+      - `mount_path: String`
+
+        Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
+
+    - `class BetaManagedAgentsMemoryStoreResourceConfig`
+
+      A memory store attached to each session created from this deployment.
+
+      - `memory_store_id: String`
+
+        The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+      - `type: :memory_store`
+
+        - `:memory_store`
+
+      - `access: :read_write | :read_only`
+
+        Access mode for an attached memory store.
+
+        - `:read_write`
+
+        - `:read_only`
+
+      - `instructions: String`
+
+        Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+  - `schedule: BetaManagedAgentsSchedule`
+
+    5-field POSIX cron schedule with computed runtime timestamps.
+
+    - `expression: String`
+
+      5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 * * 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
+
+    - `timezone: String`
+
+      IANA timezone identifier (e.g., "America/Los_Angeles", "UTC").
+
+    - `type: :cron`
+
+      - `:cron`
+
+    - `last_run_at: Time`
+
+      A timestamp in RFC 3339 format
+
+    - `upcoming_runs_at: Array[Time]`
+
+      Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused deployments (reflects what the schedule would do if unpaused); empty once the deployment is archived (`archived_at` set). Each fire is offset by a small per-schedule jitter, so a run will actually start at or shortly after its listed time.
+
+  - `status: BetaManagedAgentsDeploymentStatus`
+
+    Lifecycle status of a deployment.
+
+    - `:active`
+
+    - `:paused`
+
+  - `type: :deployment`
+
+    - `:deployment`
+
+  - `updated_at: Time`
+
+    A timestamp in RFC 3339 format
+
+  - `vault_ids: Array[String]`
+
+    Vault IDs supplying stored credentials for sessions created from this deployment.
+
+### Example
+
+```ruby
+require "anthropic"
+
+anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
+
+page = anthropic.beta.deployments.list
+
+puts(page)
+```
+
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "id": "id",
+      "agent": {
+        "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+        "type": "agent",
+        "version": 1
+      },
+      "archived_at": "2019-12-27T18:11:19.117Z",
+      "created_at": "2019-12-27T18:11:19.117Z",
+      "description": "description",
+      "environment_id": "environment_id",
+      "initial_events": [
+        {
+          "content": [
+            {
+              "text": "Where is my order #1234?",
+              "type": "text"
+            }
+          ],
+          "type": "user.message"
+        }
+      ],
+      "metadata": {
+        "foo": "string"
+      },
+      "name": "name",
+      "paused_reason": {
+        "type": "manual"
+      },
+      "resources": [
+        {
+          "type": "github_repository",
+          "url": "url",
+          "checkout": {
+            "name": "main",
+            "type": "branch"
+          },
+          "mount_path": "mount_path"
+        }
+      ],
+      "schedule": {
+        "expression": "x",
+        "timezone": "x",
+        "type": "cron",
+        "last_run_at": "2019-12-27T18:11:19.117Z",
+        "upcoming_runs_at": [
+          "2019-12-27T18:11:19.117Z"
+        ]
+      },
+      "status": "active",
+      "type": "deployment",
+      "updated_at": "2019-12-27T18:11:19.117Z",
+      "vault_ids": [
+        "string"
+      ]
+    }
+  ],
+  "next_page": "next_page"
+}
+```
+
+## Get Deployment
+
+`beta.deployments.retrieve(deployment_id, **kwargs) -> BetaManagedAgentsDeployment`
+
+**get** `/v1/deployments/{deployment_id}`
+
+Get Deployment
+
+### Parameters
+
+- `deployment_id: String`
+
+- `betas: Array[AnthropicBeta]`
+
+  Optional header to specify the beta version(s) you want to use.
+
+  - `String = String`
+
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
+
+    - `:"message-batches-2024-09-24"`
+
+    - `:"prompt-caching-2024-07-31"`
+
+    - `:"computer-use-2024-10-22"`
+
+    - `:"computer-use-2025-01-24"`
+
+    - `:"pdfs-2024-09-25"`
+
+    - `:"token-counting-2024-11-01"`
+
+    - `:"token-efficient-tools-2025-02-19"`
+
+    - `:"output-128k-2025-02-19"`
+
+    - `:"files-api-2025-04-14"`
+
+    - `:"mcp-client-2025-04-04"`
+
+    - `:"mcp-client-2025-11-20"`
+
+    - `:"dev-full-thinking-2025-05-14"`
+
+    - `:"interleaved-thinking-2025-05-14"`
+
+    - `:"code-execution-2025-05-22"`
+
+    - `:"extended-cache-ttl-2025-04-11"`
+
+    - `:"context-1m-2025-08-07"`
+
+    - `:"context-management-2025-06-27"`
+
+    - `:"model-context-window-exceeded-2025-08-26"`
+
+    - `:"skills-2025-10-02"`
+
+    - `:"fast-mode-2026-02-01"`
+
+    - `:"output-300k-2026-03-24"`
+
+    - `:"user-profiles-2026-03-24"`
+
+    - `:"advisor-tool-2026-03-01"`
+
+    - `:"managed-agents-2026-04-01"`
+
+    - `:"cache-diagnosis-2026-04-07"`
+
+    - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
+
+### Returns
+
+- `class BetaManagedAgentsDeployment`
+
+  A deployment is a configured instance of an agent — it binds the agent to everything needed to run it autonomously: an environment, credentials, initial events, and an optional schedule.
+
+  - `id: String`
+
+    Unique identifier for this deployment.
+
+  - `agent: BetaManagedAgentsAgentReference`
+
+    A resolved agent reference with a concrete version.
+
+    - `id: String`
+
+    - `type: :agent`
+
+      - `:agent`
+
+    - `version: Integer`
+
+  - `archived_at: Time`
+
+    A timestamp in RFC 3339 format
+
+  - `created_at: Time`
+
+    A timestamp in RFC 3339 format
+
+  - `description: String`
+
+    Description of what the deployment does.
+
+  - `environment_id: String`
+
+    ID of the `environment` where sessions run.
+
+  - `initial_events: Array[BetaManagedAgentsDeploymentInitialEvent]`
+
+    Events sent to each session immediately after creation.
+
+    - `class BetaManagedAgentsDeploymentUserMessageEvent`
+
+      A user message sent to the session.
+
+      - `content: Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock]`
+
+        Array of content blocks for the user message.
+
+        - `class BetaManagedAgentsTextBlock`
+
+          Regular text content.
+
+          - `text: String`
+
+            The text content.
+
+          - `type: :text`
+
+            - `:text`
+
+        - `class BetaManagedAgentsImageBlock`
+
+          Image content specified directly as base64 data or as a reference via a URL.
+
+          - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
+
+            Union type for image source variants.
+
+            - `class BetaManagedAgentsBase64ImageSource`
+
+              Base64-encoded image data.
+
+              - `data: String`
+
+                Base64-encoded image data.
+
+              - `media_type: String`
+
+                MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+              - `type: :base64`
+
+                - `:base64`
+
+            - `class BetaManagedAgentsURLImageSource`
+
+              Image referenced by URL.
+
+              - `type: :url`
+
+                - `:url`
+
+              - `url: String`
+
+                URL of the image to fetch.
+
+            - `class BetaManagedAgentsFileImageSource`
+
+              Image referenced by file ID.
+
+              - `file_id: String`
+
+                ID of a previously uploaded file.
+
+              - `type: :file`
+
+                - `:file`
+
+          - `type: :image`
+
+            - `:image`
+
+        - `class BetaManagedAgentsDocumentBlock`
+
+          Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+          - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
+
+            Union type for document source variants.
+
+            - `class BetaManagedAgentsBase64DocumentSource`
+
+              Base64-encoded document data.
+
+              - `data: String`
+
+                Base64-encoded document data.
+
+              - `media_type: String`
+
+                MIME type of the document (e.g., "application/pdf").
+
+              - `type: :base64`
+
+                - `:base64`
+
+            - `class BetaManagedAgentsPlainTextDocumentSource`
+
+              Plain text document content.
+
+              - `data: String`
+
+                The plain text content.
+
+              - `media_type: :"text/plain"`
+
+                MIME type of the text content. Must be "text/plain".
+
+                - `:"text/plain"`
+
+              - `type: :text`
+
+                - `:text`
+
+            - `class BetaManagedAgentsURLDocumentSource`
+
+              Document referenced by URL.
+
+              - `type: :url`
+
+                - `:url`
+
+              - `url: String`
+
+                URL of the document to fetch.
+
+            - `class BetaManagedAgentsFileDocumentSource`
+
+              Document referenced by file ID.
+
+              - `file_id: String`
+
+                ID of a previously uploaded file.
+
+              - `type: :file`
+
+                - `:file`
+
+          - `type: :document`
+
+            - `:document`
+
+          - `context: String`
+
+            Additional context about the document for the model.
+
+          - `title: String`
+
+            The title of the document.
+
+      - `type: :"user.message"`
+
+        - `:"user.message"`
+
+    - `class BetaManagedAgentsDeploymentUserDefineOutcomeEvent`
+
+      An outcome the agent should work toward. The agent begins work on receipt.
+
+      - `description: String`
+
+        What the agent should produce. This is the task specification.
+
+      - `rubric: BetaManagedAgentsFileRubric | BetaManagedAgentsTextRubric`
+
+        Rubric for grading the quality of an outcome.
+
+        - `class BetaManagedAgentsFileRubric`
+
+          Rubric referenced by a file uploaded via the Files API.
+
+          - `file_id: String`
+
+            ID of the rubric file.
+
+          - `type: :file`
+
+            - `:file`
+
+        - `class BetaManagedAgentsTextRubric`
+
+          Rubric content provided inline as text.
+
+          - `content: String`
+
+            Rubric content. Plain text or markdown — the grader treats it as freeform text.
+
+          - `type: :text`
+
+            - `:text`
+
+      - `type: :"user.define_outcome"`
+
+        - `:"user.define_outcome"`
+
+      - `max_iterations: Integer`
+
+        Eval→revision cycles before giving up. Default 3, max 20.
+
+    - `class BetaManagedAgentsDeploymentSystemMessageEvent`
+
+      Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
+
+      - `content: Array[BetaManagedAgentsSystemContentBlock]`
+
+        System content blocks to append. Text-only.
+
+        - `text: String`
+
+          The text content.
+
+        - `type: :text`
+
+          - `:text`
+
+      - `type: :"system.message"`
+
+        - `:"system.message"`
+
+  - `metadata: Hash[Symbol, String]`
+
+    Arbitrary key-value metadata. Maximum 16 pairs.
+
+  - `name: String`
+
+    Human-readable name.
+
+  - `paused_reason: BetaManagedAgentsDeploymentPausedReason`
+
+    Why a deployment is paused. Non-null exactly when `status` is `paused`.
+
+    - `class BetaManagedAgentsManualDeploymentPausedReason`
+
+      The caller invoked the pause endpoint on the deployment.
+
+      - `type: :manual`
+
+        - `:manual`
+
+    - `class BetaManagedAgentsErrorDeploymentPausedReason`
+
+      A scheduled fire recorded a failed run whose error auto-pauses the deployment.
+
+      - `error: BetaManagedAgentsDeploymentPausedReasonError`
+
+        The error that triggered an auto-pause. Matches the failed run's `error.type`.
+
+        - `class BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError`
+
+          The deployment's environment was archived.
+
+          - `type: :environment_archived_error`
+
+            - `:environment_archived_error`
+
+        - `class BetaManagedAgentsAgentArchivedDeploymentPausedReasonError`
+
+          The deployment's agent was archived.
+
+          - `type: :agent_archived_error`
+
+            - `:agent_archived_error`
+
+        - `class BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError`
+
+          The deployment's environment no longer exists.
+
+          - `type: :environment_not_found_error`
+
+            - `:environment_not_found_error`
+
+        - `class BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError`
+
+          A vault referenced by the deployment no longer exists.
+
+          - `type: :vault_not_found_error`
+
+            - `:vault_not_found_error`
+
+        - `class BetaManagedAgentsFileNotFoundDeploymentPausedReasonError`
+
+          A file resource referenced by the deployment no longer exists.
+
+          - `type: :file_not_found_error`
+
+            - `:file_not_found_error`
+
+        - `class BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError`
+
+          A referenced resource no longer exists and its kind was not reported.
+
+          - `type: :session_resource_not_found_error`
+
+            - `:session_resource_not_found_error`
+
+        - `class BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError`
+
+          The deployment's workspace was archived.
+
+          - `type: :workspace_archived_error`
+
+            - `:workspace_archived_error`
+
+        - `class BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError`
+
+          The deployment's organization is disabled.
+
+          - `type: :organization_disabled_error`
+
+            - `:organization_disabled_error`
+
+        - `class BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError`
+
+          A memory store referenced by the deployment is archived.
+
+          - `type: :memory_store_archived_error`
+
+            - `:memory_store_archived_error`
+
+        - `class BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError`
+
+          A skill referenced by the deployment's agent no longer exists.
+
+          - `type: :skill_not_found_error`
+
+            - `:skill_not_found_error`
+
+        - `class BetaManagedAgentsVaultArchivedDeploymentPausedReasonError`
+
+          A vault referenced by the deployment is archived.
+
+          - `type: :vault_archived_error`
+
+            - `:vault_archived_error`
+
+        - `class BetaManagedAgentsUnknownDeploymentPausedReasonError`
+
+          An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
+
+          - `type: :unknown_error`
+
+            - `:unknown_error`
+
+        - `class BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError`
+
+          The deployment configures resources, but its environment is self-hosted and cannot mount them.
+
+          - `type: :self_hosted_resources_unsupported_error`
+
+            - `:self_hosted_resources_unsupported_error`
+
+        - `class BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError`
+
+          An MCP server host used by the deployment's agent is blocked by the environment's network policy.
+
+          - `type: :mcp_egress_blocked_error`
+
+            - `:mcp_egress_blocked_error`
+
+      - `type: :error`
+
+        - `:error`
+
+  - `resources: Array[BetaManagedAgentsSessionResourceConfig]`
+
+    Resources attached to sessions created from this deployment. Echoes the input minus write-only credentials.
+
+    - `class BetaManagedAgentsGitHubRepositoryResourceConfig`
+
+      A GitHub repository mounted into each session's container. The authorization token is write-only and never returned.
+
+      - `type: :github_repository`
+
+        - `:github_repository`
+
+      - `url: String`
+
+        Github URL of the repository
+
+      - `checkout: BetaManagedAgentsBranchCheckout | BetaManagedAgentsCommitCheckout`
+
+        Branch or commit to check out. Defaults to the repository's default branch.
+
+        - `class BetaManagedAgentsBranchCheckout`
+
+          - `name: String`
+
+            Branch name to check out.
+
+          - `type: :branch`
+
+            - `:branch`
+
+        - `class BetaManagedAgentsCommitCheckout`
+
+          - `sha: String`
+
+            Full commit SHA to check out.
+
+          - `type: :commit`
+
+            - `:commit`
+
+      - `mount_path: String`
+
+        Mount path in the container. Defaults to `/workspace/<repo-name>`.
+
+    - `class BetaManagedAgentsFileResourceConfig`
+
+      A file mounted into each session's container.
+
+      - `file_id: String`
+
+        ID of a previously uploaded file.
+
+      - `type: :file`
+
+        - `:file`
+
+      - `mount_path: String`
+
+        Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
+
+    - `class BetaManagedAgentsMemoryStoreResourceConfig`
+
+      A memory store attached to each session created from this deployment.
+
+      - `memory_store_id: String`
+
+        The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+      - `type: :memory_store`
+
+        - `:memory_store`
+
+      - `access: :read_write | :read_only`
+
+        Access mode for an attached memory store.
+
+        - `:read_write`
+
+        - `:read_only`
+
+      - `instructions: String`
+
+        Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+  - `schedule: BetaManagedAgentsSchedule`
+
+    5-field POSIX cron schedule with computed runtime timestamps.
+
+    - `expression: String`
+
+      5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 * * 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
+
+    - `timezone: String`
+
+      IANA timezone identifier (e.g., "America/Los_Angeles", "UTC").
+
+    - `type: :cron`
+
+      - `:cron`
+
+    - `last_run_at: Time`
+
+      A timestamp in RFC 3339 format
+
+    - `upcoming_runs_at: Array[Time]`
+
+      Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused deployments (reflects what the schedule would do if unpaused); empty once the deployment is archived (`archived_at` set). Each fire is offset by a small per-schedule jitter, so a run will actually start at or shortly after its listed time.
+
+  - `status: BetaManagedAgentsDeploymentStatus`
+
+    Lifecycle status of a deployment.
+
+    - `:active`
+
+    - `:paused`
+
+  - `type: :deployment`
+
+    - `:deployment`
+
+  - `updated_at: Time`
+
+    A timestamp in RFC 3339 format
+
+  - `vault_ids: Array[String]`
+
+    Vault IDs supplying stored credentials for sessions created from this deployment.
+
+### Example
+
+```ruby
+require "anthropic"
+
+anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
+
+beta_managed_agents_deployment = anthropic.beta.deployments.retrieve("deployment_id")
+
+puts(beta_managed_agents_deployment)
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "agent": {
+    "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+    "type": "agent",
+    "version": 1
+  },
+  "archived_at": "2019-12-27T18:11:19.117Z",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "description": "description",
+  "environment_id": "environment_id",
+  "initial_events": [
+    {
+      "content": [
+        {
+          "text": "Where is my order #1234?",
+          "type": "text"
+        }
+      ],
+      "type": "user.message"
+    }
+  ],
+  "metadata": {
+    "foo": "string"
+  },
+  "name": "name",
+  "paused_reason": {
+    "type": "manual"
+  },
+  "resources": [
+    {
+      "type": "github_repository",
+      "url": "url",
+      "checkout": {
+        "name": "main",
+        "type": "branch"
+      },
+      "mount_path": "mount_path"
+    }
+  ],
+  "schedule": {
+    "expression": "x",
+    "timezone": "x",
+    "type": "cron",
+    "last_run_at": "2019-12-27T18:11:19.117Z",
+    "upcoming_runs_at": [
+      "2019-12-27T18:11:19.117Z"
+    ]
+  },
+  "status": "active",
+  "type": "deployment",
+  "updated_at": "2019-12-27T18:11:19.117Z",
+  "vault_ids": [
+    "string"
+  ]
+}
+```
+
+## Update Deployment
+
+`beta.deployments.update(deployment_id, **kwargs) -> BetaManagedAgentsDeployment`
+
+**post** `/v1/deployments/{deployment_id}`
+
+Update Deployment
+
+### Parameters
+
+- `deployment_id: String`
+
+- `agent: String | BetaManagedAgentsAgentParams`
+
+  Agent to deploy. Accepts the `agent` ID string, which re-pins to the latest version, or an `agent` object with both id and version specified. Omit to preserve. Cannot be cleared.
+
+  - `String = String`
+
+  - `class BetaManagedAgentsAgentParams`
+
+    Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
+
+    - `id: String`
+
+      The `agent` ID.
+
+    - `type: :agent`
+
+      - `:agent`
+
+    - `version: Integer`
+
+      The specific `agent` version to use. Omit to use the latest version. Must be at least 1 if specified.
+
+- `description: String`
+
+  Description. Omit to preserve; send empty string or null to clear.
+
+- `environment_id: String`
+
+  ID of the `environment` where sessions run. Omit to preserve. Cannot be cleared.
+
+- `initial_events: Array[BetaManagedAgentsDeploymentInitialEventParams]`
+
+  Initial events. Full replacement. Omit to preserve. Cannot be cleared. At least 1, maximum 50.
+
+  - `class BetaManagedAgentsUserMessageEventParams`
+
+    Parameters for sending a user message to the session.
+
+    - `content: Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock]`
+
+      Array of content blocks for the user message.
+
+      - `class BetaManagedAgentsTextBlock`
+
+        Regular text content.
+
+        - `text: String`
+
+          The text content.
+
+        - `type: :text`
+
+          - `:text`
+
+      - `class BetaManagedAgentsImageBlock`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
+
+          Union type for image source variants.
+
+          - `class BetaManagedAgentsBase64ImageSource`
+
+            Base64-encoded image data.
+
+            - `data: String`
+
+              Base64-encoded image data.
+
+            - `media_type: String`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `type: :base64`
+
+              - `:base64`
+
+          - `class BetaManagedAgentsURLImageSource`
+
+            Image referenced by URL.
+
+            - `type: :url`
+
+              - `:url`
+
+            - `url: String`
+
+              URL of the image to fetch.
+
+          - `class BetaManagedAgentsFileImageSource`
+
+            Image referenced by file ID.
+
+            - `file_id: String`
+
+              ID of a previously uploaded file.
+
+            - `type: :file`
+
+              - `:file`
+
+        - `type: :image`
+
+          - `:image`
+
+      - `class BetaManagedAgentsDocumentBlock`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
+
+          Union type for document source variants.
+
+          - `class BetaManagedAgentsBase64DocumentSource`
+
+            Base64-encoded document data.
+
+            - `data: String`
+
+              Base64-encoded document data.
+
+            - `media_type: String`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `type: :base64`
+
+              - `:base64`
+
+          - `class BetaManagedAgentsPlainTextDocumentSource`
+
+            Plain text document content.
+
+            - `data: String`
+
+              The plain text content.
+
+            - `media_type: :"text/plain"`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `:"text/plain"`
+
+            - `type: :text`
+
+              - `:text`
+
+          - `class BetaManagedAgentsURLDocumentSource`
+
+            Document referenced by URL.
+
+            - `type: :url`
+
+              - `:url`
+
+            - `url: String`
+
+              URL of the document to fetch.
+
+          - `class BetaManagedAgentsFileDocumentSource`
+
+            Document referenced by file ID.
+
+            - `file_id: String`
+
+              ID of a previously uploaded file.
+
+            - `type: :file`
+
+              - `:file`
+
+        - `type: :document`
+
+          - `:document`
+
+        - `context: String`
+
+          Additional context about the document for the model.
+
+        - `title: String`
+
+          The title of the document.
+
+    - `type: :"user.message"`
+
+      - `:"user.message"`
+
+  - `class BetaManagedAgentsUserDefineOutcomeEventParams`
+
+    Parameters for defining an outcome the agent should work toward. The agent begins work on receipt.
+
+    - `description: String`
+
+      What the agent should produce. This is the task specification.
+
+    - `rubric: BetaManagedAgentsFileRubricParams | BetaManagedAgentsTextRubricParams`
+
+      Rubric for grading the quality of an outcome.
+
+      - `class BetaManagedAgentsFileRubricParams`
+
+        Rubric referenced by a file uploaded via the Files API.
+
+        - `file_id: String`
+
+          ID of the rubric file.
+
+        - `type: :file`
+
+          - `:file`
+
+      - `class BetaManagedAgentsTextRubricParams`
+
+        Rubric content provided inline as text.
+
+        - `content: String`
+
+          Rubric content. Plain text or markdown — the grader treats it as freeform text. Maximum 262144 characters.
+
+        - `type: :text`
+
+          - `:text`
+
+    - `type: :"user.define_outcome"`
+
+      - `:"user.define_outcome"`
+
+    - `max_iterations: Integer`
+
+      Eval→revision cycles before giving up. Default 3, max 20.
+
+  - `class BetaManagedAgentsSystemMessageEventParams`
+
+    Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
+
+    - `content: Array[BetaManagedAgentsSystemContentBlock]`
+
+      System content blocks to append. Text-only.
+
+      - `text: String`
+
+        The text content.
+
+      - `type: :text`
+
+        - `:text`
+
+    - `type: :"system.message"`
+
+      - `:"system.message"`
+
+- `metadata: Hash[Symbol, String]`
+
+  Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve. The stored bag is limited to 16 keys (up to 64 chars each) with values up to 512 chars.
+
+- `name: String`
+
+  Human-readable name. Must be non-empty. Omit to preserve. Cannot be cleared.
+
+- `resources: Array[BetaManagedAgentsGitHubRepositoryResourceParams | BetaManagedAgentsFileResourceParams | BetaManagedAgentsMemoryStoreResourceParam]`
+
+  Session resources. Full replacement. Omit to preserve; send empty array or null to clear. Maximum 500.
+
+  - `class BetaManagedAgentsGitHubRepositoryResourceParams`
+
+    Mount a GitHub repository into the session's container.
+
+    - `authorization_token: String`
+
+      GitHub authorization token used to clone the repository.
+
+    - `type: :github_repository`
+
+      - `:github_repository`
+
+    - `url: String`
+
+      Github URL of the repository
+
+    - `checkout: BetaManagedAgentsBranchCheckout | BetaManagedAgentsCommitCheckout`
+
+      Branch or commit to check out. Defaults to the repository's default branch.
+
+      - `class BetaManagedAgentsBranchCheckout`
+
+        - `name: String`
+
+          Branch name to check out.
+
+        - `type: :branch`
+
+          - `:branch`
+
+      - `class BetaManagedAgentsCommitCheckout`
+
+        - `sha: String`
+
+          Full commit SHA to check out.
+
+        - `type: :commit`
+
+          - `:commit`
+
+    - `mount_path: String`
+
+      Mount path in the container. Defaults to `/workspace/<repo-name>`.
+
+  - `class BetaManagedAgentsFileResourceParams`
+
+    Mount a file uploaded via the Files API into the session.
+
+    - `file_id: String`
+
+      ID of a previously uploaded file.
+
+    - `type: :file`
+
+      - `:file`
+
+    - `mount_path: String`
+
+      Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
+
+  - `class BetaManagedAgentsMemoryStoreResourceParam`
+
+    Parameters for attaching a memory store to an agent session.
+
+    - `memory_store_id: String`
+
+      The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+    - `type: :memory_store`
+
+      - `:memory_store`
+
+    - `access: :read_write | :read_only`
+
+      Access mode for an attached memory store.
+
+      - `:read_write`
+
+      - `:read_only`
+
+    - `instructions: String`
+
+      Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+- `schedule: BetaManagedAgentsScheduleParams`
+
+  5-field POSIX cron schedule. Literal wall-clock matching in the configured timezone.
+
+  - `expression: String`
+
+    5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 * * 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
+
+  - `timezone: String`
+
+    Required. IANA timezone identifier (e.g., "America/Los_Angeles", "UTC"). Validated against the IANA timezone database.
+
+  - `type: :cron`
+
+    - `:cron`
+
+- `vault_ids: Array[String]`
+
+  Vault IDs. Full replacement. Omit to preserve; send empty array or null to clear. Maximum 50.
+
+- `betas: Array[AnthropicBeta]`
+
+  Optional header to specify the beta version(s) you want to use.
+
+  - `String = String`
+
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
+
+    - `:"message-batches-2024-09-24"`
+
+    - `:"prompt-caching-2024-07-31"`
+
+    - `:"computer-use-2024-10-22"`
+
+    - `:"computer-use-2025-01-24"`
+
+    - `:"pdfs-2024-09-25"`
+
+    - `:"token-counting-2024-11-01"`
+
+    - `:"token-efficient-tools-2025-02-19"`
+
+    - `:"output-128k-2025-02-19"`
+
+    - `:"files-api-2025-04-14"`
+
+    - `:"mcp-client-2025-04-04"`
+
+    - `:"mcp-client-2025-11-20"`
+
+    - `:"dev-full-thinking-2025-05-14"`
+
+    - `:"interleaved-thinking-2025-05-14"`
+
+    - `:"code-execution-2025-05-22"`
+
+    - `:"extended-cache-ttl-2025-04-11"`
+
+    - `:"context-1m-2025-08-07"`
+
+    - `:"context-management-2025-06-27"`
+
+    - `:"model-context-window-exceeded-2025-08-26"`
+
+    - `:"skills-2025-10-02"`
+
+    - `:"fast-mode-2026-02-01"`
+
+    - `:"output-300k-2026-03-24"`
+
+    - `:"user-profiles-2026-03-24"`
+
+    - `:"advisor-tool-2026-03-01"`
+
+    - `:"managed-agents-2026-04-01"`
+
+    - `:"cache-diagnosis-2026-04-07"`
+
+    - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
+
+### Returns
+
+- `class BetaManagedAgentsDeployment`
+
+  A deployment is a configured instance of an agent — it binds the agent to everything needed to run it autonomously: an environment, credentials, initial events, and an optional schedule.
+
+  - `id: String`
+
+    Unique identifier for this deployment.
+
+  - `agent: BetaManagedAgentsAgentReference`
+
+    A resolved agent reference with a concrete version.
+
+    - `id: String`
+
+    - `type: :agent`
+
+      - `:agent`
+
+    - `version: Integer`
+
+  - `archived_at: Time`
+
+    A timestamp in RFC 3339 format
+
+  - `created_at: Time`
+
+    A timestamp in RFC 3339 format
+
+  - `description: String`
+
+    Description of what the deployment does.
+
+  - `environment_id: String`
+
+    ID of the `environment` where sessions run.
+
+  - `initial_events: Array[BetaManagedAgentsDeploymentInitialEvent]`
+
+    Events sent to each session immediately after creation.
+
+    - `class BetaManagedAgentsDeploymentUserMessageEvent`
+
+      A user message sent to the session.
+
+      - `content: Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock]`
+
+        Array of content blocks for the user message.
+
+        - `class BetaManagedAgentsTextBlock`
+
+          Regular text content.
+
+          - `text: String`
+
+            The text content.
+
+          - `type: :text`
+
+            - `:text`
+
+        - `class BetaManagedAgentsImageBlock`
+
+          Image content specified directly as base64 data or as a reference via a URL.
+
+          - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
+
+            Union type for image source variants.
+
+            - `class BetaManagedAgentsBase64ImageSource`
+
+              Base64-encoded image data.
+
+              - `data: String`
+
+                Base64-encoded image data.
+
+              - `media_type: String`
+
+                MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+              - `type: :base64`
+
+                - `:base64`
+
+            - `class BetaManagedAgentsURLImageSource`
+
+              Image referenced by URL.
+
+              - `type: :url`
+
+                - `:url`
+
+              - `url: String`
+
+                URL of the image to fetch.
+
+            - `class BetaManagedAgentsFileImageSource`
+
+              Image referenced by file ID.
+
+              - `file_id: String`
+
+                ID of a previously uploaded file.
+
+              - `type: :file`
+
+                - `:file`
+
+          - `type: :image`
+
+            - `:image`
+
+        - `class BetaManagedAgentsDocumentBlock`
+
+          Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+          - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
+
+            Union type for document source variants.
+
+            - `class BetaManagedAgentsBase64DocumentSource`
+
+              Base64-encoded document data.
+
+              - `data: String`
+
+                Base64-encoded document data.
+
+              - `media_type: String`
+
+                MIME type of the document (e.g., "application/pdf").
+
+              - `type: :base64`
+
+                - `:base64`
+
+            - `class BetaManagedAgentsPlainTextDocumentSource`
+
+              Plain text document content.
+
+              - `data: String`
+
+                The plain text content.
+
+              - `media_type: :"text/plain"`
+
+                MIME type of the text content. Must be "text/plain".
+
+                - `:"text/plain"`
+
+              - `type: :text`
+
+                - `:text`
+
+            - `class BetaManagedAgentsURLDocumentSource`
+
+              Document referenced by URL.
+
+              - `type: :url`
+
+                - `:url`
+
+              - `url: String`
+
+                URL of the document to fetch.
+
+            - `class BetaManagedAgentsFileDocumentSource`
+
+              Document referenced by file ID.
+
+              - `file_id: String`
+
+                ID of a previously uploaded file.
+
+              - `type: :file`
+
+                - `:file`
+
+          - `type: :document`
+
+            - `:document`
+
+          - `context: String`
+
+            Additional context about the document for the model.
+
+          - `title: String`
+
+            The title of the document.
+
+      - `type: :"user.message"`
+
+        - `:"user.message"`
+
+    - `class BetaManagedAgentsDeploymentUserDefineOutcomeEvent`
+
+      An outcome the agent should work toward. The agent begins work on receipt.
+
+      - `description: String`
+
+        What the agent should produce. This is the task specification.
+
+      - `rubric: BetaManagedAgentsFileRubric | BetaManagedAgentsTextRubric`
+
+        Rubric for grading the quality of an outcome.
+
+        - `class BetaManagedAgentsFileRubric`
+
+          Rubric referenced by a file uploaded via the Files API.
+
+          - `file_id: String`
+
+            ID of the rubric file.
+
+          - `type: :file`
+
+            - `:file`
+
+        - `class BetaManagedAgentsTextRubric`
+
+          Rubric content provided inline as text.
+
+          - `content: String`
+
+            Rubric content. Plain text or markdown — the grader treats it as freeform text.
+
+          - `type: :text`
+
+            - `:text`
+
+      - `type: :"user.define_outcome"`
+
+        - `:"user.define_outcome"`
+
+      - `max_iterations: Integer`
+
+        Eval→revision cycles before giving up. Default 3, max 20.
+
+    - `class BetaManagedAgentsDeploymentSystemMessageEvent`
+
+      Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
+
+      - `content: Array[BetaManagedAgentsSystemContentBlock]`
+
+        System content blocks to append. Text-only.
+
+        - `text: String`
+
+          The text content.
+
+        - `type: :text`
+
+          - `:text`
+
+      - `type: :"system.message"`
+
+        - `:"system.message"`
+
+  - `metadata: Hash[Symbol, String]`
+
+    Arbitrary key-value metadata. Maximum 16 pairs.
+
+  - `name: String`
+
+    Human-readable name.
+
+  - `paused_reason: BetaManagedAgentsDeploymentPausedReason`
+
+    Why a deployment is paused. Non-null exactly when `status` is `paused`.
+
+    - `class BetaManagedAgentsManualDeploymentPausedReason`
+
+      The caller invoked the pause endpoint on the deployment.
+
+      - `type: :manual`
+
+        - `:manual`
+
+    - `class BetaManagedAgentsErrorDeploymentPausedReason`
+
+      A scheduled fire recorded a failed run whose error auto-pauses the deployment.
+
+      - `error: BetaManagedAgentsDeploymentPausedReasonError`
+
+        The error that triggered an auto-pause. Matches the failed run's `error.type`.
+
+        - `class BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError`
+
+          The deployment's environment was archived.
+
+          - `type: :environment_archived_error`
+
+            - `:environment_archived_error`
+
+        - `class BetaManagedAgentsAgentArchivedDeploymentPausedReasonError`
+
+          The deployment's agent was archived.
+
+          - `type: :agent_archived_error`
+
+            - `:agent_archived_error`
+
+        - `class BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError`
+
+          The deployment's environment no longer exists.
+
+          - `type: :environment_not_found_error`
+
+            - `:environment_not_found_error`
+
+        - `class BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError`
+
+          A vault referenced by the deployment no longer exists.
+
+          - `type: :vault_not_found_error`
+
+            - `:vault_not_found_error`
+
+        - `class BetaManagedAgentsFileNotFoundDeploymentPausedReasonError`
+
+          A file resource referenced by the deployment no longer exists.
+
+          - `type: :file_not_found_error`
+
+            - `:file_not_found_error`
+
+        - `class BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError`
+
+          A referenced resource no longer exists and its kind was not reported.
+
+          - `type: :session_resource_not_found_error`
+
+            - `:session_resource_not_found_error`
+
+        - `class BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError`
+
+          The deployment's workspace was archived.
+
+          - `type: :workspace_archived_error`
+
+            - `:workspace_archived_error`
+
+        - `class BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError`
+
+          The deployment's organization is disabled.
+
+          - `type: :organization_disabled_error`
+
+            - `:organization_disabled_error`
+
+        - `class BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError`
+
+          A memory store referenced by the deployment is archived.
+
+          - `type: :memory_store_archived_error`
+
+            - `:memory_store_archived_error`
+
+        - `class BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError`
+
+          A skill referenced by the deployment's agent no longer exists.
+
+          - `type: :skill_not_found_error`
+
+            - `:skill_not_found_error`
+
+        - `class BetaManagedAgentsVaultArchivedDeploymentPausedReasonError`
+
+          A vault referenced by the deployment is archived.
+
+          - `type: :vault_archived_error`
+
+            - `:vault_archived_error`
+
+        - `class BetaManagedAgentsUnknownDeploymentPausedReasonError`
+
+          An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
+
+          - `type: :unknown_error`
+
+            - `:unknown_error`
+
+        - `class BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError`
+
+          The deployment configures resources, but its environment is self-hosted and cannot mount them.
+
+          - `type: :self_hosted_resources_unsupported_error`
+
+            - `:self_hosted_resources_unsupported_error`
+
+        - `class BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError`
+
+          An MCP server host used by the deployment's agent is blocked by the environment's network policy.
+
+          - `type: :mcp_egress_blocked_error`
+
+            - `:mcp_egress_blocked_error`
+
+      - `type: :error`
+
+        - `:error`
+
+  - `resources: Array[BetaManagedAgentsSessionResourceConfig]`
+
+    Resources attached to sessions created from this deployment. Echoes the input minus write-only credentials.
+
+    - `class BetaManagedAgentsGitHubRepositoryResourceConfig`
+
+      A GitHub repository mounted into each session's container. The authorization token is write-only and never returned.
+
+      - `type: :github_repository`
+
+        - `:github_repository`
+
+      - `url: String`
+
+        Github URL of the repository
+
+      - `checkout: BetaManagedAgentsBranchCheckout | BetaManagedAgentsCommitCheckout`
+
+        Branch or commit to check out. Defaults to the repository's default branch.
+
+        - `class BetaManagedAgentsBranchCheckout`
+
+          - `name: String`
+
+            Branch name to check out.
+
+          - `type: :branch`
+
+            - `:branch`
+
+        - `class BetaManagedAgentsCommitCheckout`
+
+          - `sha: String`
+
+            Full commit SHA to check out.
+
+          - `type: :commit`
+
+            - `:commit`
+
+      - `mount_path: String`
+
+        Mount path in the container. Defaults to `/workspace/<repo-name>`.
+
+    - `class BetaManagedAgentsFileResourceConfig`
+
+      A file mounted into each session's container.
+
+      - `file_id: String`
+
+        ID of a previously uploaded file.
+
+      - `type: :file`
+
+        - `:file`
+
+      - `mount_path: String`
+
+        Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
+
+    - `class BetaManagedAgentsMemoryStoreResourceConfig`
+
+      A memory store attached to each session created from this deployment.
+
+      - `memory_store_id: String`
+
+        The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+      - `type: :memory_store`
+
+        - `:memory_store`
+
+      - `access: :read_write | :read_only`
+
+        Access mode for an attached memory store.
+
+        - `:read_write`
+
+        - `:read_only`
+
+      - `instructions: String`
+
+        Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+  - `schedule: BetaManagedAgentsSchedule`
+
+    5-field POSIX cron schedule with computed runtime timestamps.
+
+    - `expression: String`
+
+      5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 * * 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
+
+    - `timezone: String`
+
+      IANA timezone identifier (e.g., "America/Los_Angeles", "UTC").
+
+    - `type: :cron`
+
+      - `:cron`
+
+    - `last_run_at: Time`
+
+      A timestamp in RFC 3339 format
+
+    - `upcoming_runs_at: Array[Time]`
+
+      Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused deployments (reflects what the schedule would do if unpaused); empty once the deployment is archived (`archived_at` set). Each fire is offset by a small per-schedule jitter, so a run will actually start at or shortly after its listed time.
+
+  - `status: BetaManagedAgentsDeploymentStatus`
+
+    Lifecycle status of a deployment.
+
+    - `:active`
+
+    - `:paused`
+
+  - `type: :deployment`
+
+    - `:deployment`
+
+  - `updated_at: Time`
+
+    A timestamp in RFC 3339 format
+
+  - `vault_ids: Array[String]`
+
+    Vault IDs supplying stored credentials for sessions created from this deployment.
+
+### Example
+
+```ruby
+require "anthropic"
+
+anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
+
+beta_managed_agents_deployment = anthropic.beta.deployments.update("deployment_id")
+
+puts(beta_managed_agents_deployment)
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "agent": {
+    "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+    "type": "agent",
+    "version": 1
+  },
+  "archived_at": "2019-12-27T18:11:19.117Z",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "description": "description",
+  "environment_id": "environment_id",
+  "initial_events": [
+    {
+      "content": [
+        {
+          "text": "Where is my order #1234?",
+          "type": "text"
+        }
+      ],
+      "type": "user.message"
+    }
+  ],
+  "metadata": {
+    "foo": "string"
+  },
+  "name": "name",
+  "paused_reason": {
+    "type": "manual"
+  },
+  "resources": [
+    {
+      "type": "github_repository",
+      "url": "url",
+      "checkout": {
+        "name": "main",
+        "type": "branch"
+      },
+      "mount_path": "mount_path"
+    }
+  ],
+  "schedule": {
+    "expression": "x",
+    "timezone": "x",
+    "type": "cron",
+    "last_run_at": "2019-12-27T18:11:19.117Z",
+    "upcoming_runs_at": [
+      "2019-12-27T18:11:19.117Z"
+    ]
+  },
+  "status": "active",
+  "type": "deployment",
+  "updated_at": "2019-12-27T18:11:19.117Z",
+  "vault_ids": [
+    "string"
+  ]
+}
+```
+
+## Archive Deployment
+
+`beta.deployments.archive(deployment_id, **kwargs) -> BetaManagedAgentsDeployment`
+
+**post** `/v1/deployments/{deployment_id}/archive`
+
+Archive Deployment
+
+### Parameters
+
+- `deployment_id: String`
+
+- `betas: Array[AnthropicBeta]`
+
+  Optional header to specify the beta version(s) you want to use.
+
+  - `String = String`
+
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
+
+    - `:"message-batches-2024-09-24"`
+
+    - `:"prompt-caching-2024-07-31"`
+
+    - `:"computer-use-2024-10-22"`
+
+    - `:"computer-use-2025-01-24"`
+
+    - `:"pdfs-2024-09-25"`
+
+    - `:"token-counting-2024-11-01"`
+
+    - `:"token-efficient-tools-2025-02-19"`
+
+    - `:"output-128k-2025-02-19"`
+
+    - `:"files-api-2025-04-14"`
+
+    - `:"mcp-client-2025-04-04"`
+
+    - `:"mcp-client-2025-11-20"`
+
+    - `:"dev-full-thinking-2025-05-14"`
+
+    - `:"interleaved-thinking-2025-05-14"`
+
+    - `:"code-execution-2025-05-22"`
+
+    - `:"extended-cache-ttl-2025-04-11"`
+
+    - `:"context-1m-2025-08-07"`
+
+    - `:"context-management-2025-06-27"`
+
+    - `:"model-context-window-exceeded-2025-08-26"`
+
+    - `:"skills-2025-10-02"`
+
+    - `:"fast-mode-2026-02-01"`
+
+    - `:"output-300k-2026-03-24"`
+
+    - `:"user-profiles-2026-03-24"`
+
+    - `:"advisor-tool-2026-03-01"`
+
+    - `:"managed-agents-2026-04-01"`
+
+    - `:"cache-diagnosis-2026-04-07"`
+
+    - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
+
+### Returns
+
+- `class BetaManagedAgentsDeployment`
+
+  A deployment is a configured instance of an agent — it binds the agent to everything needed to run it autonomously: an environment, credentials, initial events, and an optional schedule.
+
+  - `id: String`
+
+    Unique identifier for this deployment.
+
+  - `agent: BetaManagedAgentsAgentReference`
+
+    A resolved agent reference with a concrete version.
+
+    - `id: String`
+
+    - `type: :agent`
+
+      - `:agent`
+
+    - `version: Integer`
+
+  - `archived_at: Time`
+
+    A timestamp in RFC 3339 format
+
+  - `created_at: Time`
+
+    A timestamp in RFC 3339 format
+
+  - `description: String`
+
+    Description of what the deployment does.
+
+  - `environment_id: String`
+
+    ID of the `environment` where sessions run.
+
+  - `initial_events: Array[BetaManagedAgentsDeploymentInitialEvent]`
+
+    Events sent to each session immediately after creation.
+
+    - `class BetaManagedAgentsDeploymentUserMessageEvent`
+
+      A user message sent to the session.
+
+      - `content: Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock]`
+
+        Array of content blocks for the user message.
+
+        - `class BetaManagedAgentsTextBlock`
+
+          Regular text content.
+
+          - `text: String`
+
+            The text content.
+
+          - `type: :text`
+
+            - `:text`
+
+        - `class BetaManagedAgentsImageBlock`
+
+          Image content specified directly as base64 data or as a reference via a URL.
+
+          - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
+
+            Union type for image source variants.
+
+            - `class BetaManagedAgentsBase64ImageSource`
+
+              Base64-encoded image data.
+
+              - `data: String`
+
+                Base64-encoded image data.
+
+              - `media_type: String`
+
+                MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+              - `type: :base64`
+
+                - `:base64`
+
+            - `class BetaManagedAgentsURLImageSource`
+
+              Image referenced by URL.
+
+              - `type: :url`
+
+                - `:url`
+
+              - `url: String`
+
+                URL of the image to fetch.
+
+            - `class BetaManagedAgentsFileImageSource`
+
+              Image referenced by file ID.
+
+              - `file_id: String`
+
+                ID of a previously uploaded file.
+
+              - `type: :file`
+
+                - `:file`
+
+          - `type: :image`
+
+            - `:image`
+
+        - `class BetaManagedAgentsDocumentBlock`
+
+          Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+          - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
+
+            Union type for document source variants.
+
+            - `class BetaManagedAgentsBase64DocumentSource`
+
+              Base64-encoded document data.
+
+              - `data: String`
+
+                Base64-encoded document data.
+
+              - `media_type: String`
+
+                MIME type of the document (e.g., "application/pdf").
+
+              - `type: :base64`
+
+                - `:base64`
+
+            - `class BetaManagedAgentsPlainTextDocumentSource`
+
+              Plain text document content.
+
+              - `data: String`
+
+                The plain text content.
+
+              - `media_type: :"text/plain"`
+
+                MIME type of the text content. Must be "text/plain".
+
+                - `:"text/plain"`
+
+              - `type: :text`
+
+                - `:text`
+
+            - `class BetaManagedAgentsURLDocumentSource`
+
+              Document referenced by URL.
+
+              - `type: :url`
+
+                - `:url`
+
+              - `url: String`
+
+                URL of the document to fetch.
+
+            - `class BetaManagedAgentsFileDocumentSource`
+
+              Document referenced by file ID.
+
+              - `file_id: String`
+
+                ID of a previously uploaded file.
+
+              - `type: :file`
+
+                - `:file`
+
+          - `type: :document`
+
+            - `:document`
+
+          - `context: String`
+
+            Additional context about the document for the model.
+
+          - `title: String`
+
+            The title of the document.
+
+      - `type: :"user.message"`
+
+        - `:"user.message"`
+
+    - `class BetaManagedAgentsDeploymentUserDefineOutcomeEvent`
+
+      An outcome the agent should work toward. The agent begins work on receipt.
+
+      - `description: String`
+
+        What the agent should produce. This is the task specification.
+
+      - `rubric: BetaManagedAgentsFileRubric | BetaManagedAgentsTextRubric`
+
+        Rubric for grading the quality of an outcome.
+
+        - `class BetaManagedAgentsFileRubric`
+
+          Rubric referenced by a file uploaded via the Files API.
+
+          - `file_id: String`
+
+            ID of the rubric file.
+
+          - `type: :file`
+
+            - `:file`
+
+        - `class BetaManagedAgentsTextRubric`
+
+          Rubric content provided inline as text.
+
+          - `content: String`
+
+            Rubric content. Plain text or markdown — the grader treats it as freeform text.
+
+          - `type: :text`
+
+            - `:text`
+
+      - `type: :"user.define_outcome"`
+
+        - `:"user.define_outcome"`
+
+      - `max_iterations: Integer`
+
+        Eval→revision cycles before giving up. Default 3, max 20.
+
+    - `class BetaManagedAgentsDeploymentSystemMessageEvent`
+
+      Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
+
+      - `content: Array[BetaManagedAgentsSystemContentBlock]`
+
+        System content blocks to append. Text-only.
+
+        - `text: String`
+
+          The text content.
+
+        - `type: :text`
+
+          - `:text`
+
+      - `type: :"system.message"`
+
+        - `:"system.message"`
+
+  - `metadata: Hash[Symbol, String]`
+
+    Arbitrary key-value metadata. Maximum 16 pairs.
+
+  - `name: String`
+
+    Human-readable name.
+
+  - `paused_reason: BetaManagedAgentsDeploymentPausedReason`
+
+    Why a deployment is paused. Non-null exactly when `status` is `paused`.
+
+    - `class BetaManagedAgentsManualDeploymentPausedReason`
+
+      The caller invoked the pause endpoint on the deployment.
+
+      - `type: :manual`
+
+        - `:manual`
+
+    - `class BetaManagedAgentsErrorDeploymentPausedReason`
+
+      A scheduled fire recorded a failed run whose error auto-pauses the deployment.
+
+      - `error: BetaManagedAgentsDeploymentPausedReasonError`
+
+        The error that triggered an auto-pause. Matches the failed run's `error.type`.
+
+        - `class BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError`
+
+          The deployment's environment was archived.
+
+          - `type: :environment_archived_error`
+
+            - `:environment_archived_error`
+
+        - `class BetaManagedAgentsAgentArchivedDeploymentPausedReasonError`
+
+          The deployment's agent was archived.
+
+          - `type: :agent_archived_error`
+
+            - `:agent_archived_error`
+
+        - `class BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError`
+
+          The deployment's environment no longer exists.
+
+          - `type: :environment_not_found_error`
+
+            - `:environment_not_found_error`
+
+        - `class BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError`
+
+          A vault referenced by the deployment no longer exists.
+
+          - `type: :vault_not_found_error`
+
+            - `:vault_not_found_error`
+
+        - `class BetaManagedAgentsFileNotFoundDeploymentPausedReasonError`
+
+          A file resource referenced by the deployment no longer exists.
+
+          - `type: :file_not_found_error`
+
+            - `:file_not_found_error`
+
+        - `class BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError`
+
+          A referenced resource no longer exists and its kind was not reported.
+
+          - `type: :session_resource_not_found_error`
+
+            - `:session_resource_not_found_error`
+
+        - `class BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError`
+
+          The deployment's workspace was archived.
+
+          - `type: :workspace_archived_error`
+
+            - `:workspace_archived_error`
+
+        - `class BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError`
+
+          The deployment's organization is disabled.
+
+          - `type: :organization_disabled_error`
+
+            - `:organization_disabled_error`
+
+        - `class BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError`
+
+          A memory store referenced by the deployment is archived.
+
+          - `type: :memory_store_archived_error`
+
+            - `:memory_store_archived_error`
+
+        - `class BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError`
+
+          A skill referenced by the deployment's agent no longer exists.
+
+          - `type: :skill_not_found_error`
+
+            - `:skill_not_found_error`
+
+        - `class BetaManagedAgentsVaultArchivedDeploymentPausedReasonError`
+
+          A vault referenced by the deployment is archived.
+
+          - `type: :vault_archived_error`
+
+            - `:vault_archived_error`
+
+        - `class BetaManagedAgentsUnknownDeploymentPausedReasonError`
+
+          An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
+
+          - `type: :unknown_error`
+
+            - `:unknown_error`
+
+        - `class BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError`
+
+          The deployment configures resources, but its environment is self-hosted and cannot mount them.
+
+          - `type: :self_hosted_resources_unsupported_error`
+
+            - `:self_hosted_resources_unsupported_error`
+
+        - `class BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError`
+
+          An MCP server host used by the deployment's agent is blocked by the environment's network policy.
+
+          - `type: :mcp_egress_blocked_error`
+
+            - `:mcp_egress_blocked_error`
+
+      - `type: :error`
+
+        - `:error`
+
+  - `resources: Array[BetaManagedAgentsSessionResourceConfig]`
+
+    Resources attached to sessions created from this deployment. Echoes the input minus write-only credentials.
+
+    - `class BetaManagedAgentsGitHubRepositoryResourceConfig`
+
+      A GitHub repository mounted into each session's container. The authorization token is write-only and never returned.
+
+      - `type: :github_repository`
+
+        - `:github_repository`
+
+      - `url: String`
+
+        Github URL of the repository
+
+      - `checkout: BetaManagedAgentsBranchCheckout | BetaManagedAgentsCommitCheckout`
+
+        Branch or commit to check out. Defaults to the repository's default branch.
+
+        - `class BetaManagedAgentsBranchCheckout`
+
+          - `name: String`
+
+            Branch name to check out.
+
+          - `type: :branch`
+
+            - `:branch`
+
+        - `class BetaManagedAgentsCommitCheckout`
+
+          - `sha: String`
+
+            Full commit SHA to check out.
+
+          - `type: :commit`
+
+            - `:commit`
+
+      - `mount_path: String`
+
+        Mount path in the container. Defaults to `/workspace/<repo-name>`.
+
+    - `class BetaManagedAgentsFileResourceConfig`
+
+      A file mounted into each session's container.
+
+      - `file_id: String`
+
+        ID of a previously uploaded file.
+
+      - `type: :file`
+
+        - `:file`
+
+      - `mount_path: String`
+
+        Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
+
+    - `class BetaManagedAgentsMemoryStoreResourceConfig`
+
+      A memory store attached to each session created from this deployment.
+
+      - `memory_store_id: String`
+
+        The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+      - `type: :memory_store`
+
+        - `:memory_store`
+
+      - `access: :read_write | :read_only`
+
+        Access mode for an attached memory store.
+
+        - `:read_write`
+
+        - `:read_only`
+
+      - `instructions: String`
+
+        Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+  - `schedule: BetaManagedAgentsSchedule`
+
+    5-field POSIX cron schedule with computed runtime timestamps.
+
+    - `expression: String`
+
+      5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 * * 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
+
+    - `timezone: String`
+
+      IANA timezone identifier (e.g., "America/Los_Angeles", "UTC").
+
+    - `type: :cron`
+
+      - `:cron`
+
+    - `last_run_at: Time`
+
+      A timestamp in RFC 3339 format
+
+    - `upcoming_runs_at: Array[Time]`
+
+      Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused deployments (reflects what the schedule would do if unpaused); empty once the deployment is archived (`archived_at` set). Each fire is offset by a small per-schedule jitter, so a run will actually start at or shortly after its listed time.
+
+  - `status: BetaManagedAgentsDeploymentStatus`
+
+    Lifecycle status of a deployment.
+
+    - `:active`
+
+    - `:paused`
+
+  - `type: :deployment`
+
+    - `:deployment`
+
+  - `updated_at: Time`
+
+    A timestamp in RFC 3339 format
+
+  - `vault_ids: Array[String]`
+
+    Vault IDs supplying stored credentials for sessions created from this deployment.
+
+### Example
+
+```ruby
+require "anthropic"
+
+anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
+
+beta_managed_agents_deployment = anthropic.beta.deployments.archive("deployment_id")
+
+puts(beta_managed_agents_deployment)
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "agent": {
+    "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+    "type": "agent",
+    "version": 1
+  },
+  "archived_at": "2019-12-27T18:11:19.117Z",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "description": "description",
+  "environment_id": "environment_id",
+  "initial_events": [
+    {
+      "content": [
+        {
+          "text": "Where is my order #1234?",
+          "type": "text"
+        }
+      ],
+      "type": "user.message"
+    }
+  ],
+  "metadata": {
+    "foo": "string"
+  },
+  "name": "name",
+  "paused_reason": {
+    "type": "manual"
+  },
+  "resources": [
+    {
+      "type": "github_repository",
+      "url": "url",
+      "checkout": {
+        "name": "main",
+        "type": "branch"
+      },
+      "mount_path": "mount_path"
+    }
+  ],
+  "schedule": {
+    "expression": "x",
+    "timezone": "x",
+    "type": "cron",
+    "last_run_at": "2019-12-27T18:11:19.117Z",
+    "upcoming_runs_at": [
+      "2019-12-27T18:11:19.117Z"
+    ]
+  },
+  "status": "active",
+  "type": "deployment",
+  "updated_at": "2019-12-27T18:11:19.117Z",
+  "vault_ids": [
+    "string"
+  ]
+}
+```
+
+## Run Deployment Now
+
+`beta.deployments.run(deployment_id, **kwargs) -> BetaManagedAgentsDeploymentRun`
+
+**post** `/v1/deployments/{deployment_id}/run`
+
+Run Deployment Now
+
+### Parameters
+
+- `deployment_id: String`
+
+- `betas: Array[AnthropicBeta]`
+
+  Optional header to specify the beta version(s) you want to use.
+
+  - `String = String`
+
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
+
+    - `:"message-batches-2024-09-24"`
+
+    - `:"prompt-caching-2024-07-31"`
+
+    - `:"computer-use-2024-10-22"`
+
+    - `:"computer-use-2025-01-24"`
+
+    - `:"pdfs-2024-09-25"`
+
+    - `:"token-counting-2024-11-01"`
+
+    - `:"token-efficient-tools-2025-02-19"`
+
+    - `:"output-128k-2025-02-19"`
+
+    - `:"files-api-2025-04-14"`
+
+    - `:"mcp-client-2025-04-04"`
+
+    - `:"mcp-client-2025-11-20"`
+
+    - `:"dev-full-thinking-2025-05-14"`
+
+    - `:"interleaved-thinking-2025-05-14"`
+
+    - `:"code-execution-2025-05-22"`
+
+    - `:"extended-cache-ttl-2025-04-11"`
+
+    - `:"context-1m-2025-08-07"`
+
+    - `:"context-management-2025-06-27"`
+
+    - `:"model-context-window-exceeded-2025-08-26"`
+
+    - `:"skills-2025-10-02"`
+
+    - `:"fast-mode-2026-02-01"`
+
+    - `:"output-300k-2026-03-24"`
+
+    - `:"user-profiles-2026-03-24"`
+
+    - `:"advisor-tool-2026-03-01"`
+
+    - `:"managed-agents-2026-04-01"`
+
+    - `:"cache-diagnosis-2026-04-07"`
+
+    - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
+
+### Returns
+
+- `class BetaManagedAgentsDeploymentRun`
+
+  A persistent, append-only record of a single deployment execution. Records session creation success or failure — no session lifecycle tracking.
+
+  - `id: String`
+
+    Unique identifier for this run (`drun_...`).
+
+  - `agent: BetaManagedAgentsAgentReference`
+
+    A resolved agent reference with a concrete version.
+
+    - `id: String`
+
+    - `type: :agent`
+
+      - `:agent`
+
+    - `version: Integer`
+
+  - `created_at: Time`
+
+    A timestamp in RFC 3339 format
+
+  - `deployment_id: String`
+
+    ID of the deployment that produced this run.
+
+  - `error: BetaManagedAgentsEnvironmentArchivedRunError | BetaManagedAgentsAgentArchivedRunError | BetaManagedAgentsEnvironmentNotFoundRunError | 13 more`
+
+    Why the run failed to create a session. The type identifies the failure; message is human-readable detail.
+
+    - `class BetaManagedAgentsEnvironmentArchivedRunError`
+
+      The deployment's environment was archived.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :environment_archived_error`
+
+        - `:environment_archived_error`
+
+    - `class BetaManagedAgentsAgentArchivedRunError`
+
+      The deployment's agent was archived.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :agent_archived_error`
+
+        - `:agent_archived_error`
+
+    - `class BetaManagedAgentsEnvironmentNotFoundRunError`
+
+      The deployment's environment no longer exists.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :environment_not_found_error`
+
+        - `:environment_not_found_error`
+
+    - `class BetaManagedAgentsVaultNotFoundRunError`
+
+      A vault referenced by the deployment no longer exists.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :vault_not_found_error`
+
+        - `:vault_not_found_error`
+
+    - `class BetaManagedAgentsVaultArchivedRunError`
+
+      A vault referenced by the deployment is archived.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :vault_archived_error`
+
+        - `:vault_archived_error`
+
+    - `class BetaManagedAgentsFileNotFoundRunError`
+
+      A file resource referenced by the deployment no longer exists.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :file_not_found_error`
+
+        - `:file_not_found_error`
+
+    - `class BetaManagedAgentsMemoryStoreArchivedRunError`
+
+      A memory store referenced by the deployment is archived.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :memory_store_archived_error`
+
+        - `:memory_store_archived_error`
+
+    - `class BetaManagedAgentsSkillNotFoundRunError`
+
+      A skill referenced by the deployment's agent no longer exists.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :skill_not_found_error`
+
+        - `:skill_not_found_error`
+
+    - `class BetaManagedAgentsSessionResourceNotFoundRunError`
+
+      A referenced resource no longer exists and its kind was not reported.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :session_resource_not_found_error`
+
+        - `:session_resource_not_found_error`
+
+    - `class BetaManagedAgentsWorkspaceArchivedRunError`
+
+      The deployment's workspace was archived.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :workspace_archived_error`
+
+        - `:workspace_archived_error`
+
+    - `class BetaManagedAgentsOrganizationDisabledRunError`
+
+      The deployment's organization is disabled.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :organization_disabled_error`
+
+        - `:organization_disabled_error`
+
+    - `class BetaManagedAgentsSessionRateLimitedRunError`
+
+      Session creation was rejected due to rate limiting. The schedule keeps firing; subsequent runs may succeed.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :session_rate_limited_error`
+
+        - `:session_rate_limited_error`
+
+    - `class BetaManagedAgentsSessionCreationRejectedRunError`
+
+      The session create request was rejected with a non-retryable validation error.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :session_creation_rejected_error`
+
+        - `:session_creation_rejected_error`
+
+    - `class BetaManagedAgentsUnknownRunError`
+
+      An unknown or unexpected error caused the run to fail. A fallback variant; clients that do not recognize a new error type can match on message alone.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :unknown_error`
+
+        - `:unknown_error`
+
+    - `class BetaManagedAgentsSelfHostedResourcesUnsupportedRunError`
+
+      The deployment configures resources, but its environment is self-hosted and cannot mount them.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :self_hosted_resources_unsupported_error`
+
+        - `:self_hosted_resources_unsupported_error`
+
+    - `class BetaManagedAgentsMCPEgressBlockedRunError`
+
+      An MCP server host used by the deployment's agent is blocked by the environment's network policy.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :mcp_egress_blocked_error`
+
+        - `:mcp_egress_blocked_error`
+
+  - `session_id: String`
+
+    Populated on success. Null on creation failure. Exactly one of session_id or error is non-null.
+
+  - `trigger_context: BetaManagedAgentsTriggerContext`
+
+    Describes what triggered a deployment run, with trigger-specific metadata.
+
+    - `class BetaManagedAgentsScheduleTriggerContext`
+
+      The run was fired by the deployment's cron schedule.
+
+      - `scheduled_at: Time`
+
+        A timestamp in RFC 3339 format
+
+      - `type: :schedule`
+
+        - `:schedule`
+
+    - `class BetaManagedAgentsManualTriggerContext`
+
+      The run was started manually by creating a session directly against the deployment.
+
+      - `type: :manual`
+
+        - `:manual`
+
+  - `type: :deployment_run`
+
+    - `:deployment_run`
+
+### Example
+
+```ruby
+require "anthropic"
+
+anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
+
+beta_managed_agents_deployment_run = anthropic.beta.deployments.run("deployment_id")
+
+puts(beta_managed_agents_deployment_run)
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "agent": {
+    "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+    "type": "agent",
+    "version": 1
+  },
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "deployment_id": "deployment_id",
+  "error": {
+    "message": "message",
+    "type": "environment_archived_error"
+  },
+  "session_id": "session_id",
+  "trigger_context": {
+    "scheduled_at": "2019-12-27T18:11:19.117Z",
+    "type": "schedule"
+  },
+  "type": "deployment_run"
+}
+```
+
+## Pause Deployment
+
+`beta.deployments.pause(deployment_id, **kwargs) -> BetaManagedAgentsDeployment`
+
+**post** `/v1/deployments/{deployment_id}/pause`
+
+Pause Deployment
+
+### Parameters
+
+- `deployment_id: String`
+
+- `betas: Array[AnthropicBeta]`
+
+  Optional header to specify the beta version(s) you want to use.
+
+  - `String = String`
+
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
+
+    - `:"message-batches-2024-09-24"`
+
+    - `:"prompt-caching-2024-07-31"`
+
+    - `:"computer-use-2024-10-22"`
+
+    - `:"computer-use-2025-01-24"`
+
+    - `:"pdfs-2024-09-25"`
+
+    - `:"token-counting-2024-11-01"`
+
+    - `:"token-efficient-tools-2025-02-19"`
+
+    - `:"output-128k-2025-02-19"`
+
+    - `:"files-api-2025-04-14"`
+
+    - `:"mcp-client-2025-04-04"`
+
+    - `:"mcp-client-2025-11-20"`
+
+    - `:"dev-full-thinking-2025-05-14"`
+
+    - `:"interleaved-thinking-2025-05-14"`
+
+    - `:"code-execution-2025-05-22"`
+
+    - `:"extended-cache-ttl-2025-04-11"`
+
+    - `:"context-1m-2025-08-07"`
+
+    - `:"context-management-2025-06-27"`
+
+    - `:"model-context-window-exceeded-2025-08-26"`
+
+    - `:"skills-2025-10-02"`
+
+    - `:"fast-mode-2026-02-01"`
+
+    - `:"output-300k-2026-03-24"`
+
+    - `:"user-profiles-2026-03-24"`
+
+    - `:"advisor-tool-2026-03-01"`
+
+    - `:"managed-agents-2026-04-01"`
+
+    - `:"cache-diagnosis-2026-04-07"`
+
+    - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
+
+### Returns
+
+- `class BetaManagedAgentsDeployment`
+
+  A deployment is a configured instance of an agent — it binds the agent to everything needed to run it autonomously: an environment, credentials, initial events, and an optional schedule.
+
+  - `id: String`
+
+    Unique identifier for this deployment.
+
+  - `agent: BetaManagedAgentsAgentReference`
+
+    A resolved agent reference with a concrete version.
+
+    - `id: String`
+
+    - `type: :agent`
+
+      - `:agent`
+
+    - `version: Integer`
+
+  - `archived_at: Time`
+
+    A timestamp in RFC 3339 format
+
+  - `created_at: Time`
+
+    A timestamp in RFC 3339 format
+
+  - `description: String`
+
+    Description of what the deployment does.
+
+  - `environment_id: String`
+
+    ID of the `environment` where sessions run.
+
+  - `initial_events: Array[BetaManagedAgentsDeploymentInitialEvent]`
+
+    Events sent to each session immediately after creation.
+
+    - `class BetaManagedAgentsDeploymentUserMessageEvent`
+
+      A user message sent to the session.
+
+      - `content: Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock]`
+
+        Array of content blocks for the user message.
+
+        - `class BetaManagedAgentsTextBlock`
+
+          Regular text content.
+
+          - `text: String`
+
+            The text content.
+
+          - `type: :text`
+
+            - `:text`
+
+        - `class BetaManagedAgentsImageBlock`
+
+          Image content specified directly as base64 data or as a reference via a URL.
+
+          - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
+
+            Union type for image source variants.
+
+            - `class BetaManagedAgentsBase64ImageSource`
+
+              Base64-encoded image data.
+
+              - `data: String`
+
+                Base64-encoded image data.
+
+              - `media_type: String`
+
+                MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+              - `type: :base64`
+
+                - `:base64`
+
+            - `class BetaManagedAgentsURLImageSource`
+
+              Image referenced by URL.
+
+              - `type: :url`
+
+                - `:url`
+
+              - `url: String`
+
+                URL of the image to fetch.
+
+            - `class BetaManagedAgentsFileImageSource`
+
+              Image referenced by file ID.
+
+              - `file_id: String`
+
+                ID of a previously uploaded file.
+
+              - `type: :file`
+
+                - `:file`
+
+          - `type: :image`
+
+            - `:image`
+
+        - `class BetaManagedAgentsDocumentBlock`
+
+          Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+          - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
+
+            Union type for document source variants.
+
+            - `class BetaManagedAgentsBase64DocumentSource`
+
+              Base64-encoded document data.
+
+              - `data: String`
+
+                Base64-encoded document data.
+
+              - `media_type: String`
+
+                MIME type of the document (e.g., "application/pdf").
+
+              - `type: :base64`
+
+                - `:base64`
+
+            - `class BetaManagedAgentsPlainTextDocumentSource`
+
+              Plain text document content.
+
+              - `data: String`
+
+                The plain text content.
+
+              - `media_type: :"text/plain"`
+
+                MIME type of the text content. Must be "text/plain".
+
+                - `:"text/plain"`
+
+              - `type: :text`
+
+                - `:text`
+
+            - `class BetaManagedAgentsURLDocumentSource`
+
+              Document referenced by URL.
+
+              - `type: :url`
+
+                - `:url`
+
+              - `url: String`
+
+                URL of the document to fetch.
+
+            - `class BetaManagedAgentsFileDocumentSource`
+
+              Document referenced by file ID.
+
+              - `file_id: String`
+
+                ID of a previously uploaded file.
+
+              - `type: :file`
+
+                - `:file`
+
+          - `type: :document`
+
+            - `:document`
+
+          - `context: String`
+
+            Additional context about the document for the model.
+
+          - `title: String`
+
+            The title of the document.
+
+      - `type: :"user.message"`
+
+        - `:"user.message"`
+
+    - `class BetaManagedAgentsDeploymentUserDefineOutcomeEvent`
+
+      An outcome the agent should work toward. The agent begins work on receipt.
+
+      - `description: String`
+
+        What the agent should produce. This is the task specification.
+
+      - `rubric: BetaManagedAgentsFileRubric | BetaManagedAgentsTextRubric`
+
+        Rubric for grading the quality of an outcome.
+
+        - `class BetaManagedAgentsFileRubric`
+
+          Rubric referenced by a file uploaded via the Files API.
+
+          - `file_id: String`
+
+            ID of the rubric file.
+
+          - `type: :file`
+
+            - `:file`
+
+        - `class BetaManagedAgentsTextRubric`
+
+          Rubric content provided inline as text.
+
+          - `content: String`
+
+            Rubric content. Plain text or markdown — the grader treats it as freeform text.
+
+          - `type: :text`
+
+            - `:text`
+
+      - `type: :"user.define_outcome"`
+
+        - `:"user.define_outcome"`
+
+      - `max_iterations: Integer`
+
+        Eval→revision cycles before giving up. Default 3, max 20.
+
+    - `class BetaManagedAgentsDeploymentSystemMessageEvent`
+
+      Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
+
+      - `content: Array[BetaManagedAgentsSystemContentBlock]`
+
+        System content blocks to append. Text-only.
+
+        - `text: String`
+
+          The text content.
+
+        - `type: :text`
+
+          - `:text`
+
+      - `type: :"system.message"`
+
+        - `:"system.message"`
+
+  - `metadata: Hash[Symbol, String]`
+
+    Arbitrary key-value metadata. Maximum 16 pairs.
+
+  - `name: String`
+
+    Human-readable name.
+
+  - `paused_reason: BetaManagedAgentsDeploymentPausedReason`
+
+    Why a deployment is paused. Non-null exactly when `status` is `paused`.
+
+    - `class BetaManagedAgentsManualDeploymentPausedReason`
+
+      The caller invoked the pause endpoint on the deployment.
+
+      - `type: :manual`
+
+        - `:manual`
+
+    - `class BetaManagedAgentsErrorDeploymentPausedReason`
+
+      A scheduled fire recorded a failed run whose error auto-pauses the deployment.
+
+      - `error: BetaManagedAgentsDeploymentPausedReasonError`
+
+        The error that triggered an auto-pause. Matches the failed run's `error.type`.
+
+        - `class BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError`
+
+          The deployment's environment was archived.
+
+          - `type: :environment_archived_error`
+
+            - `:environment_archived_error`
+
+        - `class BetaManagedAgentsAgentArchivedDeploymentPausedReasonError`
+
+          The deployment's agent was archived.
+
+          - `type: :agent_archived_error`
+
+            - `:agent_archived_error`
+
+        - `class BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError`
+
+          The deployment's environment no longer exists.
+
+          - `type: :environment_not_found_error`
+
+            - `:environment_not_found_error`
+
+        - `class BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError`
+
+          A vault referenced by the deployment no longer exists.
+
+          - `type: :vault_not_found_error`
+
+            - `:vault_not_found_error`
+
+        - `class BetaManagedAgentsFileNotFoundDeploymentPausedReasonError`
+
+          A file resource referenced by the deployment no longer exists.
+
+          - `type: :file_not_found_error`
+
+            - `:file_not_found_error`
+
+        - `class BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError`
+
+          A referenced resource no longer exists and its kind was not reported.
+
+          - `type: :session_resource_not_found_error`
+
+            - `:session_resource_not_found_error`
+
+        - `class BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError`
+
+          The deployment's workspace was archived.
+
+          - `type: :workspace_archived_error`
+
+            - `:workspace_archived_error`
+
+        - `class BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError`
+
+          The deployment's organization is disabled.
+
+          - `type: :organization_disabled_error`
+
+            - `:organization_disabled_error`
+
+        - `class BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError`
+
+          A memory store referenced by the deployment is archived.
+
+          - `type: :memory_store_archived_error`
+
+            - `:memory_store_archived_error`
+
+        - `class BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError`
+
+          A skill referenced by the deployment's agent no longer exists.
+
+          - `type: :skill_not_found_error`
+
+            - `:skill_not_found_error`
+
+        - `class BetaManagedAgentsVaultArchivedDeploymentPausedReasonError`
+
+          A vault referenced by the deployment is archived.
+
+          - `type: :vault_archived_error`
+
+            - `:vault_archived_error`
+
+        - `class BetaManagedAgentsUnknownDeploymentPausedReasonError`
+
+          An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
+
+          - `type: :unknown_error`
+
+            - `:unknown_error`
+
+        - `class BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError`
+
+          The deployment configures resources, but its environment is self-hosted and cannot mount them.
+
+          - `type: :self_hosted_resources_unsupported_error`
+
+            - `:self_hosted_resources_unsupported_error`
+
+        - `class BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError`
+
+          An MCP server host used by the deployment's agent is blocked by the environment's network policy.
+
+          - `type: :mcp_egress_blocked_error`
+
+            - `:mcp_egress_blocked_error`
+
+      - `type: :error`
+
+        - `:error`
+
+  - `resources: Array[BetaManagedAgentsSessionResourceConfig]`
+
+    Resources attached to sessions created from this deployment. Echoes the input minus write-only credentials.
+
+    - `class BetaManagedAgentsGitHubRepositoryResourceConfig`
+
+      A GitHub repository mounted into each session's container. The authorization token is write-only and never returned.
+
+      - `type: :github_repository`
+
+        - `:github_repository`
+
+      - `url: String`
+
+        Github URL of the repository
+
+      - `checkout: BetaManagedAgentsBranchCheckout | BetaManagedAgentsCommitCheckout`
+
+        Branch or commit to check out. Defaults to the repository's default branch.
+
+        - `class BetaManagedAgentsBranchCheckout`
+
+          - `name: String`
+
+            Branch name to check out.
+
+          - `type: :branch`
+
+            - `:branch`
+
+        - `class BetaManagedAgentsCommitCheckout`
+
+          - `sha: String`
+
+            Full commit SHA to check out.
+
+          - `type: :commit`
+
+            - `:commit`
+
+      - `mount_path: String`
+
+        Mount path in the container. Defaults to `/workspace/<repo-name>`.
+
+    - `class BetaManagedAgentsFileResourceConfig`
+
+      A file mounted into each session's container.
+
+      - `file_id: String`
+
+        ID of a previously uploaded file.
+
+      - `type: :file`
+
+        - `:file`
+
+      - `mount_path: String`
+
+        Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
+
+    - `class BetaManagedAgentsMemoryStoreResourceConfig`
+
+      A memory store attached to each session created from this deployment.
+
+      - `memory_store_id: String`
+
+        The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+      - `type: :memory_store`
+
+        - `:memory_store`
+
+      - `access: :read_write | :read_only`
+
+        Access mode for an attached memory store.
+
+        - `:read_write`
+
+        - `:read_only`
+
+      - `instructions: String`
+
+        Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+  - `schedule: BetaManagedAgentsSchedule`
+
+    5-field POSIX cron schedule with computed runtime timestamps.
+
+    - `expression: String`
+
+      5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 * * 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
+
+    - `timezone: String`
+
+      IANA timezone identifier (e.g., "America/Los_Angeles", "UTC").
+
+    - `type: :cron`
+
+      - `:cron`
+
+    - `last_run_at: Time`
+
+      A timestamp in RFC 3339 format
+
+    - `upcoming_runs_at: Array[Time]`
+
+      Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused deployments (reflects what the schedule would do if unpaused); empty once the deployment is archived (`archived_at` set). Each fire is offset by a small per-schedule jitter, so a run will actually start at or shortly after its listed time.
+
+  - `status: BetaManagedAgentsDeploymentStatus`
+
+    Lifecycle status of a deployment.
+
+    - `:active`
+
+    - `:paused`
+
+  - `type: :deployment`
+
+    - `:deployment`
+
+  - `updated_at: Time`
+
+    A timestamp in RFC 3339 format
+
+  - `vault_ids: Array[String]`
+
+    Vault IDs supplying stored credentials for sessions created from this deployment.
+
+### Example
+
+```ruby
+require "anthropic"
+
+anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
+
+beta_managed_agents_deployment = anthropic.beta.deployments.pause("deployment_id")
+
+puts(beta_managed_agents_deployment)
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "agent": {
+    "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+    "type": "agent",
+    "version": 1
+  },
+  "archived_at": "2019-12-27T18:11:19.117Z",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "description": "description",
+  "environment_id": "environment_id",
+  "initial_events": [
+    {
+      "content": [
+        {
+          "text": "Where is my order #1234?",
+          "type": "text"
+        }
+      ],
+      "type": "user.message"
+    }
+  ],
+  "metadata": {
+    "foo": "string"
+  },
+  "name": "name",
+  "paused_reason": {
+    "type": "manual"
+  },
+  "resources": [
+    {
+      "type": "github_repository",
+      "url": "url",
+      "checkout": {
+        "name": "main",
+        "type": "branch"
+      },
+      "mount_path": "mount_path"
+    }
+  ],
+  "schedule": {
+    "expression": "x",
+    "timezone": "x",
+    "type": "cron",
+    "last_run_at": "2019-12-27T18:11:19.117Z",
+    "upcoming_runs_at": [
+      "2019-12-27T18:11:19.117Z"
+    ]
+  },
+  "status": "active",
+  "type": "deployment",
+  "updated_at": "2019-12-27T18:11:19.117Z",
+  "vault_ids": [
+    "string"
+  ]
+}
+```
+
+## Unpause Deployment
+
+`beta.deployments.unpause(deployment_id, **kwargs) -> BetaManagedAgentsDeployment`
+
+**post** `/v1/deployments/{deployment_id}/unpause`
+
+Unpause Deployment
+
+### Parameters
+
+- `deployment_id: String`
+
+- `betas: Array[AnthropicBeta]`
+
+  Optional header to specify the beta version(s) you want to use.
+
+  - `String = String`
+
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
+
+    - `:"message-batches-2024-09-24"`
+
+    - `:"prompt-caching-2024-07-31"`
+
+    - `:"computer-use-2024-10-22"`
+
+    - `:"computer-use-2025-01-24"`
+
+    - `:"pdfs-2024-09-25"`
+
+    - `:"token-counting-2024-11-01"`
+
+    - `:"token-efficient-tools-2025-02-19"`
+
+    - `:"output-128k-2025-02-19"`
+
+    - `:"files-api-2025-04-14"`
+
+    - `:"mcp-client-2025-04-04"`
+
+    - `:"mcp-client-2025-11-20"`
+
+    - `:"dev-full-thinking-2025-05-14"`
+
+    - `:"interleaved-thinking-2025-05-14"`
+
+    - `:"code-execution-2025-05-22"`
+
+    - `:"extended-cache-ttl-2025-04-11"`
+
+    - `:"context-1m-2025-08-07"`
+
+    - `:"context-management-2025-06-27"`
+
+    - `:"model-context-window-exceeded-2025-08-26"`
+
+    - `:"skills-2025-10-02"`
+
+    - `:"fast-mode-2026-02-01"`
+
+    - `:"output-300k-2026-03-24"`
+
+    - `:"user-profiles-2026-03-24"`
+
+    - `:"advisor-tool-2026-03-01"`
+
+    - `:"managed-agents-2026-04-01"`
+
+    - `:"cache-diagnosis-2026-04-07"`
+
+    - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
+
+### Returns
+
+- `class BetaManagedAgentsDeployment`
+
+  A deployment is a configured instance of an agent — it binds the agent to everything needed to run it autonomously: an environment, credentials, initial events, and an optional schedule.
+
+  - `id: String`
+
+    Unique identifier for this deployment.
+
+  - `agent: BetaManagedAgentsAgentReference`
+
+    A resolved agent reference with a concrete version.
+
+    - `id: String`
+
+    - `type: :agent`
+
+      - `:agent`
+
+    - `version: Integer`
+
+  - `archived_at: Time`
+
+    A timestamp in RFC 3339 format
+
+  - `created_at: Time`
+
+    A timestamp in RFC 3339 format
+
+  - `description: String`
+
+    Description of what the deployment does.
+
+  - `environment_id: String`
+
+    ID of the `environment` where sessions run.
+
+  - `initial_events: Array[BetaManagedAgentsDeploymentInitialEvent]`
+
+    Events sent to each session immediately after creation.
+
+    - `class BetaManagedAgentsDeploymentUserMessageEvent`
+
+      A user message sent to the session.
+
+      - `content: Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock]`
+
+        Array of content blocks for the user message.
+
+        - `class BetaManagedAgentsTextBlock`
+
+          Regular text content.
+
+          - `text: String`
+
+            The text content.
+
+          - `type: :text`
+
+            - `:text`
+
+        - `class BetaManagedAgentsImageBlock`
+
+          Image content specified directly as base64 data or as a reference via a URL.
+
+          - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
+
+            Union type for image source variants.
+
+            - `class BetaManagedAgentsBase64ImageSource`
+
+              Base64-encoded image data.
+
+              - `data: String`
+
+                Base64-encoded image data.
+
+              - `media_type: String`
+
+                MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+              - `type: :base64`
+
+                - `:base64`
+
+            - `class BetaManagedAgentsURLImageSource`
+
+              Image referenced by URL.
+
+              - `type: :url`
+
+                - `:url`
+
+              - `url: String`
+
+                URL of the image to fetch.
+
+            - `class BetaManagedAgentsFileImageSource`
+
+              Image referenced by file ID.
+
+              - `file_id: String`
+
+                ID of a previously uploaded file.
+
+              - `type: :file`
+
+                - `:file`
+
+          - `type: :image`
+
+            - `:image`
+
+        - `class BetaManagedAgentsDocumentBlock`
+
+          Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+          - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
+
+            Union type for document source variants.
+
+            - `class BetaManagedAgentsBase64DocumentSource`
+
+              Base64-encoded document data.
+
+              - `data: String`
+
+                Base64-encoded document data.
+
+              - `media_type: String`
+
+                MIME type of the document (e.g., "application/pdf").
+
+              - `type: :base64`
+
+                - `:base64`
+
+            - `class BetaManagedAgentsPlainTextDocumentSource`
+
+              Plain text document content.
+
+              - `data: String`
+
+                The plain text content.
+
+              - `media_type: :"text/plain"`
+
+                MIME type of the text content. Must be "text/plain".
+
+                - `:"text/plain"`
+
+              - `type: :text`
+
+                - `:text`
+
+            - `class BetaManagedAgentsURLDocumentSource`
+
+              Document referenced by URL.
+
+              - `type: :url`
+
+                - `:url`
+
+              - `url: String`
+
+                URL of the document to fetch.
+
+            - `class BetaManagedAgentsFileDocumentSource`
+
+              Document referenced by file ID.
+
+              - `file_id: String`
+
+                ID of a previously uploaded file.
+
+              - `type: :file`
+
+                - `:file`
+
+          - `type: :document`
+
+            - `:document`
+
+          - `context: String`
+
+            Additional context about the document for the model.
+
+          - `title: String`
+
+            The title of the document.
+
+      - `type: :"user.message"`
+
+        - `:"user.message"`
+
+    - `class BetaManagedAgentsDeploymentUserDefineOutcomeEvent`
+
+      An outcome the agent should work toward. The agent begins work on receipt.
+
+      - `description: String`
+
+        What the agent should produce. This is the task specification.
+
+      - `rubric: BetaManagedAgentsFileRubric | BetaManagedAgentsTextRubric`
+
+        Rubric for grading the quality of an outcome.
+
+        - `class BetaManagedAgentsFileRubric`
+
+          Rubric referenced by a file uploaded via the Files API.
+
+          - `file_id: String`
+
+            ID of the rubric file.
+
+          - `type: :file`
+
+            - `:file`
+
+        - `class BetaManagedAgentsTextRubric`
+
+          Rubric content provided inline as text.
+
+          - `content: String`
+
+            Rubric content. Plain text or markdown — the grader treats it as freeform text.
+
+          - `type: :text`
+
+            - `:text`
+
+      - `type: :"user.define_outcome"`
+
+        - `:"user.define_outcome"`
+
+      - `max_iterations: Integer`
+
+        Eval→revision cycles before giving up. Default 3, max 20.
+
+    - `class BetaManagedAgentsDeploymentSystemMessageEvent`
+
+      Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
+
+      - `content: Array[BetaManagedAgentsSystemContentBlock]`
+
+        System content blocks to append. Text-only.
+
+        - `text: String`
+
+          The text content.
+
+        - `type: :text`
+
+          - `:text`
+
+      - `type: :"system.message"`
+
+        - `:"system.message"`
+
+  - `metadata: Hash[Symbol, String]`
+
+    Arbitrary key-value metadata. Maximum 16 pairs.
+
+  - `name: String`
+
+    Human-readable name.
+
+  - `paused_reason: BetaManagedAgentsDeploymentPausedReason`
+
+    Why a deployment is paused. Non-null exactly when `status` is `paused`.
+
+    - `class BetaManagedAgentsManualDeploymentPausedReason`
+
+      The caller invoked the pause endpoint on the deployment.
+
+      - `type: :manual`
+
+        - `:manual`
+
+    - `class BetaManagedAgentsErrorDeploymentPausedReason`
+
+      A scheduled fire recorded a failed run whose error auto-pauses the deployment.
+
+      - `error: BetaManagedAgentsDeploymentPausedReasonError`
+
+        The error that triggered an auto-pause. Matches the failed run's `error.type`.
+
+        - `class BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError`
+
+          The deployment's environment was archived.
+
+          - `type: :environment_archived_error`
+
+            - `:environment_archived_error`
+
+        - `class BetaManagedAgentsAgentArchivedDeploymentPausedReasonError`
+
+          The deployment's agent was archived.
+
+          - `type: :agent_archived_error`
+
+            - `:agent_archived_error`
+
+        - `class BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError`
+
+          The deployment's environment no longer exists.
+
+          - `type: :environment_not_found_error`
+
+            - `:environment_not_found_error`
+
+        - `class BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError`
+
+          A vault referenced by the deployment no longer exists.
+
+          - `type: :vault_not_found_error`
+
+            - `:vault_not_found_error`
+
+        - `class BetaManagedAgentsFileNotFoundDeploymentPausedReasonError`
+
+          A file resource referenced by the deployment no longer exists.
+
+          - `type: :file_not_found_error`
+
+            - `:file_not_found_error`
+
+        - `class BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError`
+
+          A referenced resource no longer exists and its kind was not reported.
+
+          - `type: :session_resource_not_found_error`
+
+            - `:session_resource_not_found_error`
+
+        - `class BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError`
+
+          The deployment's workspace was archived.
+
+          - `type: :workspace_archived_error`
+
+            - `:workspace_archived_error`
+
+        - `class BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError`
+
+          The deployment's organization is disabled.
+
+          - `type: :organization_disabled_error`
+
+            - `:organization_disabled_error`
+
+        - `class BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError`
+
+          A memory store referenced by the deployment is archived.
+
+          - `type: :memory_store_archived_error`
+
+            - `:memory_store_archived_error`
+
+        - `class BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError`
+
+          A skill referenced by the deployment's agent no longer exists.
+
+          - `type: :skill_not_found_error`
+
+            - `:skill_not_found_error`
+
+        - `class BetaManagedAgentsVaultArchivedDeploymentPausedReasonError`
+
+          A vault referenced by the deployment is archived.
+
+          - `type: :vault_archived_error`
+
+            - `:vault_archived_error`
+
+        - `class BetaManagedAgentsUnknownDeploymentPausedReasonError`
+
+          An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
+
+          - `type: :unknown_error`
+
+            - `:unknown_error`
+
+        - `class BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError`
+
+          The deployment configures resources, but its environment is self-hosted and cannot mount them.
+
+          - `type: :self_hosted_resources_unsupported_error`
+
+            - `:self_hosted_resources_unsupported_error`
+
+        - `class BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError`
+
+          An MCP server host used by the deployment's agent is blocked by the environment's network policy.
+
+          - `type: :mcp_egress_blocked_error`
+
+            - `:mcp_egress_blocked_error`
+
+      - `type: :error`
+
+        - `:error`
+
+  - `resources: Array[BetaManagedAgentsSessionResourceConfig]`
+
+    Resources attached to sessions created from this deployment. Echoes the input minus write-only credentials.
+
+    - `class BetaManagedAgentsGitHubRepositoryResourceConfig`
+
+      A GitHub repository mounted into each session's container. The authorization token is write-only and never returned.
+
+      - `type: :github_repository`
+
+        - `:github_repository`
+
+      - `url: String`
+
+        Github URL of the repository
+
+      - `checkout: BetaManagedAgentsBranchCheckout | BetaManagedAgentsCommitCheckout`
+
+        Branch or commit to check out. Defaults to the repository's default branch.
+
+        - `class BetaManagedAgentsBranchCheckout`
+
+          - `name: String`
+
+            Branch name to check out.
+
+          - `type: :branch`
+
+            - `:branch`
+
+        - `class BetaManagedAgentsCommitCheckout`
+
+          - `sha: String`
+
+            Full commit SHA to check out.
+
+          - `type: :commit`
+
+            - `:commit`
+
+      - `mount_path: String`
+
+        Mount path in the container. Defaults to `/workspace/<repo-name>`.
+
+    - `class BetaManagedAgentsFileResourceConfig`
+
+      A file mounted into each session's container.
+
+      - `file_id: String`
+
+        ID of a previously uploaded file.
+
+      - `type: :file`
+
+        - `:file`
+
+      - `mount_path: String`
+
+        Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
+
+    - `class BetaManagedAgentsMemoryStoreResourceConfig`
+
+      A memory store attached to each session created from this deployment.
+
+      - `memory_store_id: String`
+
+        The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+      - `type: :memory_store`
+
+        - `:memory_store`
+
+      - `access: :read_write | :read_only`
+
+        Access mode for an attached memory store.
+
+        - `:read_write`
+
+        - `:read_only`
+
+      - `instructions: String`
+
+        Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+  - `schedule: BetaManagedAgentsSchedule`
+
+    5-field POSIX cron schedule with computed runtime timestamps.
+
+    - `expression: String`
+
+      5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 * * 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
+
+    - `timezone: String`
+
+      IANA timezone identifier (e.g., "America/Los_Angeles", "UTC").
+
+    - `type: :cron`
+
+      - `:cron`
+
+    - `last_run_at: Time`
+
+      A timestamp in RFC 3339 format
+
+    - `upcoming_runs_at: Array[Time]`
+
+      Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused deployments (reflects what the schedule would do if unpaused); empty once the deployment is archived (`archived_at` set). Each fire is offset by a small per-schedule jitter, so a run will actually start at or shortly after its listed time.
+
+  - `status: BetaManagedAgentsDeploymentStatus`
+
+    Lifecycle status of a deployment.
+
+    - `:active`
+
+    - `:paused`
+
+  - `type: :deployment`
+
+    - `:deployment`
+
+  - `updated_at: Time`
+
+    A timestamp in RFC 3339 format
+
+  - `vault_ids: Array[String]`
+
+    Vault IDs supplying stored credentials for sessions created from this deployment.
+
+### Example
+
+```ruby
+require "anthropic"
+
+anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
+
+beta_managed_agents_deployment = anthropic.beta.deployments.unpause("deployment_id")
+
+puts(beta_managed_agents_deployment)
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "agent": {
+    "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+    "type": "agent",
+    "version": 1
+  },
+  "archived_at": "2019-12-27T18:11:19.117Z",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "description": "description",
+  "environment_id": "environment_id",
+  "initial_events": [
+    {
+      "content": [
+        {
+          "text": "Where is my order #1234?",
+          "type": "text"
+        }
+      ],
+      "type": "user.message"
+    }
+  ],
+  "metadata": {
+    "foo": "string"
+  },
+  "name": "name",
+  "paused_reason": {
+    "type": "manual"
+  },
+  "resources": [
+    {
+      "type": "github_repository",
+      "url": "url",
+      "checkout": {
+        "name": "main",
+        "type": "branch"
+      },
+      "mount_path": "mount_path"
+    }
+  ],
+  "schedule": {
+    "expression": "x",
+    "timezone": "x",
+    "type": "cron",
+    "last_run_at": "2019-12-27T18:11:19.117Z",
+    "upcoming_runs_at": [
+      "2019-12-27T18:11:19.117Z"
+    ]
+  },
+  "status": "active",
+  "type": "deployment",
+  "updated_at": "2019-12-27T18:11:19.117Z",
+  "vault_ids": [
+    "string"
+  ]
+}
+```
+
+## Domain Types
+
+### Beta Managed Agents Agent Archived Deployment Paused Reason Error
+
+- `class BetaManagedAgentsAgentArchivedDeploymentPausedReasonError`
+
+  The deployment's agent was archived.
+
+  - `type: :agent_archived_error`
+
+    - `:agent_archived_error`
+
+### Beta Managed Agents Cron Schedule
+
+- `class BetaManagedAgentsCronSchedule`
+
+  5-field POSIX cron schedule with computed runtime timestamps.
+
+  - `expression: String`
+
+    5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 * * 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
+
+  - `timezone: String`
+
+    IANA timezone identifier (e.g., "America/Los_Angeles", "UTC").
+
+  - `type: :cron`
+
+    - `:cron`
+
+  - `last_run_at: Time`
+
+    A timestamp in RFC 3339 format
+
+  - `upcoming_runs_at: Array[Time]`
+
+    Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused deployments (reflects what the schedule would do if unpaused); empty once the deployment is archived (`archived_at` set). Each fire is offset by a small per-schedule jitter, so a run will actually start at or shortly after its listed time.
+
+### Beta Managed Agents Cron Schedule Params
+
+- `class BetaManagedAgentsCronScheduleParams`
+
+  5-field POSIX cron schedule. Literal wall-clock matching in the configured timezone.
+
+  - `expression: String`
+
+    5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 * * 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
+
+  - `timezone: String`
+
+    Required. IANA timezone identifier (e.g., "America/Los_Angeles", "UTC"). Validated against the IANA timezone database.
+
+  - `type: :cron`
+
+    - `:cron`
+
+### Beta Managed Agents Deployment
+
+- `class BetaManagedAgentsDeployment`
+
+  A deployment is a configured instance of an agent — it binds the agent to everything needed to run it autonomously: an environment, credentials, initial events, and an optional schedule.
+
+  - `id: String`
+
+    Unique identifier for this deployment.
+
+  - `agent: BetaManagedAgentsAgentReference`
+
+    A resolved agent reference with a concrete version.
+
+    - `id: String`
+
+    - `type: :agent`
+
+      - `:agent`
+
+    - `version: Integer`
+
+  - `archived_at: Time`
+
+    A timestamp in RFC 3339 format
+
+  - `created_at: Time`
+
+    A timestamp in RFC 3339 format
+
+  - `description: String`
+
+    Description of what the deployment does.
+
+  - `environment_id: String`
+
+    ID of the `environment` where sessions run.
+
+  - `initial_events: Array[BetaManagedAgentsDeploymentInitialEvent]`
+
+    Events sent to each session immediately after creation.
+
+    - `class BetaManagedAgentsDeploymentUserMessageEvent`
+
+      A user message sent to the session.
+
+      - `content: Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock]`
+
+        Array of content blocks for the user message.
+
+        - `class BetaManagedAgentsTextBlock`
+
+          Regular text content.
+
+          - `text: String`
+
+            The text content.
+
+          - `type: :text`
+
+            - `:text`
+
+        - `class BetaManagedAgentsImageBlock`
+
+          Image content specified directly as base64 data or as a reference via a URL.
+
+          - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
+
+            Union type for image source variants.
+
+            - `class BetaManagedAgentsBase64ImageSource`
+
+              Base64-encoded image data.
+
+              - `data: String`
+
+                Base64-encoded image data.
+
+              - `media_type: String`
+
+                MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+              - `type: :base64`
+
+                - `:base64`
+
+            - `class BetaManagedAgentsURLImageSource`
+
+              Image referenced by URL.
+
+              - `type: :url`
+
+                - `:url`
+
+              - `url: String`
+
+                URL of the image to fetch.
+
+            - `class BetaManagedAgentsFileImageSource`
+
+              Image referenced by file ID.
+
+              - `file_id: String`
+
+                ID of a previously uploaded file.
+
+              - `type: :file`
+
+                - `:file`
+
+          - `type: :image`
+
+            - `:image`
+
+        - `class BetaManagedAgentsDocumentBlock`
+
+          Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+          - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
+
+            Union type for document source variants.
+
+            - `class BetaManagedAgentsBase64DocumentSource`
+
+              Base64-encoded document data.
+
+              - `data: String`
+
+                Base64-encoded document data.
+
+              - `media_type: String`
+
+                MIME type of the document (e.g., "application/pdf").
+
+              - `type: :base64`
+
+                - `:base64`
+
+            - `class BetaManagedAgentsPlainTextDocumentSource`
+
+              Plain text document content.
+
+              - `data: String`
+
+                The plain text content.
+
+              - `media_type: :"text/plain"`
+
+                MIME type of the text content. Must be "text/plain".
+
+                - `:"text/plain"`
+
+              - `type: :text`
+
+                - `:text`
+
+            - `class BetaManagedAgentsURLDocumentSource`
+
+              Document referenced by URL.
+
+              - `type: :url`
+
+                - `:url`
+
+              - `url: String`
+
+                URL of the document to fetch.
+
+            - `class BetaManagedAgentsFileDocumentSource`
+
+              Document referenced by file ID.
+
+              - `file_id: String`
+
+                ID of a previously uploaded file.
+
+              - `type: :file`
+
+                - `:file`
+
+          - `type: :document`
+
+            - `:document`
+
+          - `context: String`
+
+            Additional context about the document for the model.
+
+          - `title: String`
+
+            The title of the document.
+
+      - `type: :"user.message"`
+
+        - `:"user.message"`
+
+    - `class BetaManagedAgentsDeploymentUserDefineOutcomeEvent`
+
+      An outcome the agent should work toward. The agent begins work on receipt.
+
+      - `description: String`
+
+        What the agent should produce. This is the task specification.
+
+      - `rubric: BetaManagedAgentsFileRubric | BetaManagedAgentsTextRubric`
+
+        Rubric for grading the quality of an outcome.
+
+        - `class BetaManagedAgentsFileRubric`
+
+          Rubric referenced by a file uploaded via the Files API.
+
+          - `file_id: String`
+
+            ID of the rubric file.
+
+          - `type: :file`
+
+            - `:file`
+
+        - `class BetaManagedAgentsTextRubric`
+
+          Rubric content provided inline as text.
+
+          - `content: String`
+
+            Rubric content. Plain text or markdown — the grader treats it as freeform text.
+
+          - `type: :text`
+
+            - `:text`
+
+      - `type: :"user.define_outcome"`
+
+        - `:"user.define_outcome"`
+
+      - `max_iterations: Integer`
+
+        Eval→revision cycles before giving up. Default 3, max 20.
+
+    - `class BetaManagedAgentsDeploymentSystemMessageEvent`
+
+      Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
+
+      - `content: Array[BetaManagedAgentsSystemContentBlock]`
+
+        System content blocks to append. Text-only.
+
+        - `text: String`
+
+          The text content.
+
+        - `type: :text`
+
+          - `:text`
+
+      - `type: :"system.message"`
+
+        - `:"system.message"`
+
+  - `metadata: Hash[Symbol, String]`
+
+    Arbitrary key-value metadata. Maximum 16 pairs.
+
+  - `name: String`
+
+    Human-readable name.
+
+  - `paused_reason: BetaManagedAgentsDeploymentPausedReason`
+
+    Why a deployment is paused. Non-null exactly when `status` is `paused`.
+
+    - `class BetaManagedAgentsManualDeploymentPausedReason`
+
+      The caller invoked the pause endpoint on the deployment.
+
+      - `type: :manual`
+
+        - `:manual`
+
+    - `class BetaManagedAgentsErrorDeploymentPausedReason`
+
+      A scheduled fire recorded a failed run whose error auto-pauses the deployment.
+
+      - `error: BetaManagedAgentsDeploymentPausedReasonError`
+
+        The error that triggered an auto-pause. Matches the failed run's `error.type`.
+
+        - `class BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError`
+
+          The deployment's environment was archived.
+
+          - `type: :environment_archived_error`
+
+            - `:environment_archived_error`
+
+        - `class BetaManagedAgentsAgentArchivedDeploymentPausedReasonError`
+
+          The deployment's agent was archived.
+
+          - `type: :agent_archived_error`
+
+            - `:agent_archived_error`
+
+        - `class BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError`
+
+          The deployment's environment no longer exists.
+
+          - `type: :environment_not_found_error`
+
+            - `:environment_not_found_error`
+
+        - `class BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError`
+
+          A vault referenced by the deployment no longer exists.
+
+          - `type: :vault_not_found_error`
+
+            - `:vault_not_found_error`
+
+        - `class BetaManagedAgentsFileNotFoundDeploymentPausedReasonError`
+
+          A file resource referenced by the deployment no longer exists.
+
+          - `type: :file_not_found_error`
+
+            - `:file_not_found_error`
+
+        - `class BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError`
+
+          A referenced resource no longer exists and its kind was not reported.
+
+          - `type: :session_resource_not_found_error`
+
+            - `:session_resource_not_found_error`
+
+        - `class BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError`
+
+          The deployment's workspace was archived.
+
+          - `type: :workspace_archived_error`
+
+            - `:workspace_archived_error`
+
+        - `class BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError`
+
+          The deployment's organization is disabled.
+
+          - `type: :organization_disabled_error`
+
+            - `:organization_disabled_error`
+
+        - `class BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError`
+
+          A memory store referenced by the deployment is archived.
+
+          - `type: :memory_store_archived_error`
+
+            - `:memory_store_archived_error`
+
+        - `class BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError`
+
+          A skill referenced by the deployment's agent no longer exists.
+
+          - `type: :skill_not_found_error`
+
+            - `:skill_not_found_error`
+
+        - `class BetaManagedAgentsVaultArchivedDeploymentPausedReasonError`
+
+          A vault referenced by the deployment is archived.
+
+          - `type: :vault_archived_error`
+
+            - `:vault_archived_error`
+
+        - `class BetaManagedAgentsUnknownDeploymentPausedReasonError`
+
+          An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
+
+          - `type: :unknown_error`
+
+            - `:unknown_error`
+
+        - `class BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError`
+
+          The deployment configures resources, but its environment is self-hosted and cannot mount them.
+
+          - `type: :self_hosted_resources_unsupported_error`
+
+            - `:self_hosted_resources_unsupported_error`
+
+        - `class BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError`
+
+          An MCP server host used by the deployment's agent is blocked by the environment's network policy.
+
+          - `type: :mcp_egress_blocked_error`
+
+            - `:mcp_egress_blocked_error`
+
+      - `type: :error`
+
+        - `:error`
+
+  - `resources: Array[BetaManagedAgentsSessionResourceConfig]`
+
+    Resources attached to sessions created from this deployment. Echoes the input minus write-only credentials.
+
+    - `class BetaManagedAgentsGitHubRepositoryResourceConfig`
+
+      A GitHub repository mounted into each session's container. The authorization token is write-only and never returned.
+
+      - `type: :github_repository`
+
+        - `:github_repository`
+
+      - `url: String`
+
+        Github URL of the repository
+
+      - `checkout: BetaManagedAgentsBranchCheckout | BetaManagedAgentsCommitCheckout`
+
+        Branch or commit to check out. Defaults to the repository's default branch.
+
+        - `class BetaManagedAgentsBranchCheckout`
+
+          - `name: String`
+
+            Branch name to check out.
+
+          - `type: :branch`
+
+            - `:branch`
+
+        - `class BetaManagedAgentsCommitCheckout`
+
+          - `sha: String`
+
+            Full commit SHA to check out.
+
+          - `type: :commit`
+
+            - `:commit`
+
+      - `mount_path: String`
+
+        Mount path in the container. Defaults to `/workspace/<repo-name>`.
+
+    - `class BetaManagedAgentsFileResourceConfig`
+
+      A file mounted into each session's container.
+
+      - `file_id: String`
+
+        ID of a previously uploaded file.
+
+      - `type: :file`
+
+        - `:file`
+
+      - `mount_path: String`
+
+        Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
+
+    - `class BetaManagedAgentsMemoryStoreResourceConfig`
+
+      A memory store attached to each session created from this deployment.
+
+      - `memory_store_id: String`
+
+        The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+      - `type: :memory_store`
+
+        - `:memory_store`
+
+      - `access: :read_write | :read_only`
+
+        Access mode for an attached memory store.
+
+        - `:read_write`
+
+        - `:read_only`
+
+      - `instructions: String`
+
+        Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+  - `schedule: BetaManagedAgentsSchedule`
+
+    5-field POSIX cron schedule with computed runtime timestamps.
+
+    - `expression: String`
+
+      5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 * * 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
+
+    - `timezone: String`
+
+      IANA timezone identifier (e.g., "America/Los_Angeles", "UTC").
+
+    - `type: :cron`
+
+      - `:cron`
+
+    - `last_run_at: Time`
+
+      A timestamp in RFC 3339 format
+
+    - `upcoming_runs_at: Array[Time]`
+
+      Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused deployments (reflects what the schedule would do if unpaused); empty once the deployment is archived (`archived_at` set). Each fire is offset by a small per-schedule jitter, so a run will actually start at or shortly after its listed time.
+
+  - `status: BetaManagedAgentsDeploymentStatus`
+
+    Lifecycle status of a deployment.
+
+    - `:active`
+
+    - `:paused`
+
+  - `type: :deployment`
+
+    - `:deployment`
+
+  - `updated_at: Time`
+
+    A timestamp in RFC 3339 format
+
+  - `vault_ids: Array[String]`
+
+    Vault IDs supplying stored credentials for sessions created from this deployment.
+
+### Beta Managed Agents Deployment Initial Event
+
+- `BetaManagedAgentsDeploymentInitialEvent = BetaManagedAgentsDeploymentUserMessageEvent | BetaManagedAgentsDeploymentUserDefineOutcomeEvent | BetaManagedAgentsDeploymentSystemMessageEvent`
+
+  An event sent to a session immediately after it is created. Supports `user.message`, `user.define_outcome`, and `system.message`.
+
+  - `class BetaManagedAgentsDeploymentUserMessageEvent`
+
+    A user message sent to the session.
+
+    - `content: Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock]`
+
+      Array of content blocks for the user message.
+
+      - `class BetaManagedAgentsTextBlock`
+
+        Regular text content.
+
+        - `text: String`
+
+          The text content.
+
+        - `type: :text`
+
+          - `:text`
+
+      - `class BetaManagedAgentsImageBlock`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
+
+          Union type for image source variants.
+
+          - `class BetaManagedAgentsBase64ImageSource`
+
+            Base64-encoded image data.
+
+            - `data: String`
+
+              Base64-encoded image data.
+
+            - `media_type: String`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `type: :base64`
+
+              - `:base64`
+
+          - `class BetaManagedAgentsURLImageSource`
+
+            Image referenced by URL.
+
+            - `type: :url`
+
+              - `:url`
+
+            - `url: String`
+
+              URL of the image to fetch.
+
+          - `class BetaManagedAgentsFileImageSource`
+
+            Image referenced by file ID.
+
+            - `file_id: String`
+
+              ID of a previously uploaded file.
+
+            - `type: :file`
+
+              - `:file`
+
+        - `type: :image`
+
+          - `:image`
+
+      - `class BetaManagedAgentsDocumentBlock`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
+
+          Union type for document source variants.
+
+          - `class BetaManagedAgentsBase64DocumentSource`
+
+            Base64-encoded document data.
+
+            - `data: String`
+
+              Base64-encoded document data.
+
+            - `media_type: String`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `type: :base64`
+
+              - `:base64`
+
+          - `class BetaManagedAgentsPlainTextDocumentSource`
+
+            Plain text document content.
+
+            - `data: String`
+
+              The plain text content.
+
+            - `media_type: :"text/plain"`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `:"text/plain"`
+
+            - `type: :text`
+
+              - `:text`
+
+          - `class BetaManagedAgentsURLDocumentSource`
+
+            Document referenced by URL.
+
+            - `type: :url`
+
+              - `:url`
+
+            - `url: String`
+
+              URL of the document to fetch.
+
+          - `class BetaManagedAgentsFileDocumentSource`
+
+            Document referenced by file ID.
+
+            - `file_id: String`
+
+              ID of a previously uploaded file.
+
+            - `type: :file`
+
+              - `:file`
+
+        - `type: :document`
+
+          - `:document`
+
+        - `context: String`
+
+          Additional context about the document for the model.
+
+        - `title: String`
+
+          The title of the document.
+
+    - `type: :"user.message"`
+
+      - `:"user.message"`
+
+  - `class BetaManagedAgentsDeploymentUserDefineOutcomeEvent`
+
+    An outcome the agent should work toward. The agent begins work on receipt.
+
+    - `description: String`
+
+      What the agent should produce. This is the task specification.
+
+    - `rubric: BetaManagedAgentsFileRubric | BetaManagedAgentsTextRubric`
+
+      Rubric for grading the quality of an outcome.
+
+      - `class BetaManagedAgentsFileRubric`
+
+        Rubric referenced by a file uploaded via the Files API.
+
+        - `file_id: String`
+
+          ID of the rubric file.
+
+        - `type: :file`
+
+          - `:file`
+
+      - `class BetaManagedAgentsTextRubric`
+
+        Rubric content provided inline as text.
+
+        - `content: String`
+
+          Rubric content. Plain text or markdown — the grader treats it as freeform text.
+
+        - `type: :text`
+
+          - `:text`
+
+    - `type: :"user.define_outcome"`
+
+      - `:"user.define_outcome"`
+
+    - `max_iterations: Integer`
+
+      Eval→revision cycles before giving up. Default 3, max 20.
+
+  - `class BetaManagedAgentsDeploymentSystemMessageEvent`
+
+    Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
+
+    - `content: Array[BetaManagedAgentsSystemContentBlock]`
+
+      System content blocks to append. Text-only.
+
+      - `text: String`
+
+        The text content.
+
+      - `type: :text`
+
+        - `:text`
+
+    - `type: :"system.message"`
+
+      - `:"system.message"`
+
+### Beta Managed Agents Deployment Initial Event Params
+
+- `BetaManagedAgentsDeploymentInitialEventParams = BetaManagedAgentsUserMessageEventParams | BetaManagedAgentsUserDefineOutcomeEventParams | BetaManagedAgentsSystemMessageEventParams`
+
+  An event sent to a session immediately after it is created. Supports `user.message`, `user.define_outcome`, and `system.message`.
+
+  - `class BetaManagedAgentsUserMessageEventParams`
+
+    Parameters for sending a user message to the session.
+
+    - `content: Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock]`
+
+      Array of content blocks for the user message.
+
+      - `class BetaManagedAgentsTextBlock`
+
+        Regular text content.
+
+        - `text: String`
+
+          The text content.
+
+        - `type: :text`
+
+          - `:text`
+
+      - `class BetaManagedAgentsImageBlock`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
+
+          Union type for image source variants.
+
+          - `class BetaManagedAgentsBase64ImageSource`
+
+            Base64-encoded image data.
+
+            - `data: String`
+
+              Base64-encoded image data.
+
+            - `media_type: String`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `type: :base64`
+
+              - `:base64`
+
+          - `class BetaManagedAgentsURLImageSource`
+
+            Image referenced by URL.
+
+            - `type: :url`
+
+              - `:url`
+
+            - `url: String`
+
+              URL of the image to fetch.
+
+          - `class BetaManagedAgentsFileImageSource`
+
+            Image referenced by file ID.
+
+            - `file_id: String`
+
+              ID of a previously uploaded file.
+
+            - `type: :file`
+
+              - `:file`
+
+        - `type: :image`
+
+          - `:image`
+
+      - `class BetaManagedAgentsDocumentBlock`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
+
+          Union type for document source variants.
+
+          - `class BetaManagedAgentsBase64DocumentSource`
+
+            Base64-encoded document data.
+
+            - `data: String`
+
+              Base64-encoded document data.
+
+            - `media_type: String`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `type: :base64`
+
+              - `:base64`
+
+          - `class BetaManagedAgentsPlainTextDocumentSource`
+
+            Plain text document content.
+
+            - `data: String`
+
+              The plain text content.
+
+            - `media_type: :"text/plain"`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `:"text/plain"`
+
+            - `type: :text`
+
+              - `:text`
+
+          - `class BetaManagedAgentsURLDocumentSource`
+
+            Document referenced by URL.
+
+            - `type: :url`
+
+              - `:url`
+
+            - `url: String`
+
+              URL of the document to fetch.
+
+          - `class BetaManagedAgentsFileDocumentSource`
+
+            Document referenced by file ID.
+
+            - `file_id: String`
+
+              ID of a previously uploaded file.
+
+            - `type: :file`
+
+              - `:file`
+
+        - `type: :document`
+
+          - `:document`
+
+        - `context: String`
+
+          Additional context about the document for the model.
+
+        - `title: String`
+
+          The title of the document.
+
+    - `type: :"user.message"`
+
+      - `:"user.message"`
+
+  - `class BetaManagedAgentsUserDefineOutcomeEventParams`
+
+    Parameters for defining an outcome the agent should work toward. The agent begins work on receipt.
+
+    - `description: String`
+
+      What the agent should produce. This is the task specification.
+
+    - `rubric: BetaManagedAgentsFileRubricParams | BetaManagedAgentsTextRubricParams`
+
+      Rubric for grading the quality of an outcome.
+
+      - `class BetaManagedAgentsFileRubricParams`
+
+        Rubric referenced by a file uploaded via the Files API.
+
+        - `file_id: String`
+
+          ID of the rubric file.
+
+        - `type: :file`
+
+          - `:file`
+
+      - `class BetaManagedAgentsTextRubricParams`
+
+        Rubric content provided inline as text.
+
+        - `content: String`
+
+          Rubric content. Plain text or markdown — the grader treats it as freeform text. Maximum 262144 characters.
+
+        - `type: :text`
+
+          - `:text`
+
+    - `type: :"user.define_outcome"`
+
+      - `:"user.define_outcome"`
+
+    - `max_iterations: Integer`
+
+      Eval→revision cycles before giving up. Default 3, max 20.
+
+  - `class BetaManagedAgentsSystemMessageEventParams`
+
+    Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
+
+    - `content: Array[BetaManagedAgentsSystemContentBlock]`
+
+      System content blocks to append. Text-only.
+
+      - `text: String`
+
+        The text content.
+
+      - `type: :text`
+
+        - `:text`
+
+    - `type: :"system.message"`
+
+      - `:"system.message"`
+
+### Beta Managed Agents Deployment Paused Reason
+
+- `BetaManagedAgentsDeploymentPausedReason = BetaManagedAgentsManualDeploymentPausedReason | BetaManagedAgentsErrorDeploymentPausedReason`
+
+  Why a deployment is paused. Non-null exactly when `status` is `paused`.
+
+  - `class BetaManagedAgentsManualDeploymentPausedReason`
+
+    The caller invoked the pause endpoint on the deployment.
+
+    - `type: :manual`
+
+      - `:manual`
+
+  - `class BetaManagedAgentsErrorDeploymentPausedReason`
+
+    A scheduled fire recorded a failed run whose error auto-pauses the deployment.
+
+    - `error: BetaManagedAgentsDeploymentPausedReasonError`
+
+      The error that triggered an auto-pause. Matches the failed run's `error.type`.
+
+      - `class BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError`
+
+        The deployment's environment was archived.
+
+        - `type: :environment_archived_error`
+
+          - `:environment_archived_error`
+
+      - `class BetaManagedAgentsAgentArchivedDeploymentPausedReasonError`
+
+        The deployment's agent was archived.
+
+        - `type: :agent_archived_error`
+
+          - `:agent_archived_error`
+
+      - `class BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError`
+
+        The deployment's environment no longer exists.
+
+        - `type: :environment_not_found_error`
+
+          - `:environment_not_found_error`
+
+      - `class BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError`
+
+        A vault referenced by the deployment no longer exists.
+
+        - `type: :vault_not_found_error`
+
+          - `:vault_not_found_error`
+
+      - `class BetaManagedAgentsFileNotFoundDeploymentPausedReasonError`
+
+        A file resource referenced by the deployment no longer exists.
+
+        - `type: :file_not_found_error`
+
+          - `:file_not_found_error`
+
+      - `class BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError`
+
+        A referenced resource no longer exists and its kind was not reported.
+
+        - `type: :session_resource_not_found_error`
+
+          - `:session_resource_not_found_error`
+
+      - `class BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError`
+
+        The deployment's workspace was archived.
+
+        - `type: :workspace_archived_error`
+
+          - `:workspace_archived_error`
+
+      - `class BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError`
+
+        The deployment's organization is disabled.
+
+        - `type: :organization_disabled_error`
+
+          - `:organization_disabled_error`
+
+      - `class BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError`
+
+        A memory store referenced by the deployment is archived.
+
+        - `type: :memory_store_archived_error`
+
+          - `:memory_store_archived_error`
+
+      - `class BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError`
+
+        A skill referenced by the deployment's agent no longer exists.
+
+        - `type: :skill_not_found_error`
+
+          - `:skill_not_found_error`
+
+      - `class BetaManagedAgentsVaultArchivedDeploymentPausedReasonError`
+
+        A vault referenced by the deployment is archived.
+
+        - `type: :vault_archived_error`
+
+          - `:vault_archived_error`
+
+      - `class BetaManagedAgentsUnknownDeploymentPausedReasonError`
+
+        An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
+
+        - `type: :unknown_error`
+
+          - `:unknown_error`
+
+      - `class BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError`
+
+        The deployment configures resources, but its environment is self-hosted and cannot mount them.
+
+        - `type: :self_hosted_resources_unsupported_error`
+
+          - `:self_hosted_resources_unsupported_error`
+
+      - `class BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError`
+
+        An MCP server host used by the deployment's agent is blocked by the environment's network policy.
+
+        - `type: :mcp_egress_blocked_error`
+
+          - `:mcp_egress_blocked_error`
+
+    - `type: :error`
+
+      - `:error`
+
+### Beta Managed Agents Deployment Paused Reason Error
+
+- `BetaManagedAgentsDeploymentPausedReasonError = BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError | BetaManagedAgentsAgentArchivedDeploymentPausedReasonError | BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError | 11 more`
+
+  The error that triggered an auto-pause. Matches the failed run's `error.type`.
+
+  - `class BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError`
+
+    The deployment's environment was archived.
+
+    - `type: :environment_archived_error`
+
+      - `:environment_archived_error`
+
+  - `class BetaManagedAgentsAgentArchivedDeploymentPausedReasonError`
+
+    The deployment's agent was archived.
+
+    - `type: :agent_archived_error`
+
+      - `:agent_archived_error`
+
+  - `class BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError`
+
+    The deployment's environment no longer exists.
+
+    - `type: :environment_not_found_error`
+
+      - `:environment_not_found_error`
+
+  - `class BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError`
+
+    A vault referenced by the deployment no longer exists.
+
+    - `type: :vault_not_found_error`
+
+      - `:vault_not_found_error`
+
+  - `class BetaManagedAgentsFileNotFoundDeploymentPausedReasonError`
+
+    A file resource referenced by the deployment no longer exists.
+
+    - `type: :file_not_found_error`
+
+      - `:file_not_found_error`
+
+  - `class BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError`
+
+    A referenced resource no longer exists and its kind was not reported.
+
+    - `type: :session_resource_not_found_error`
+
+      - `:session_resource_not_found_error`
+
+  - `class BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError`
+
+    The deployment's workspace was archived.
+
+    - `type: :workspace_archived_error`
+
+      - `:workspace_archived_error`
+
+  - `class BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError`
+
+    The deployment's organization is disabled.
+
+    - `type: :organization_disabled_error`
+
+      - `:organization_disabled_error`
+
+  - `class BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError`
+
+    A memory store referenced by the deployment is archived.
+
+    - `type: :memory_store_archived_error`
+
+      - `:memory_store_archived_error`
+
+  - `class BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError`
+
+    A skill referenced by the deployment's agent no longer exists.
+
+    - `type: :skill_not_found_error`
+
+      - `:skill_not_found_error`
+
+  - `class BetaManagedAgentsVaultArchivedDeploymentPausedReasonError`
+
+    A vault referenced by the deployment is archived.
+
+    - `type: :vault_archived_error`
+
+      - `:vault_archived_error`
+
+  - `class BetaManagedAgentsUnknownDeploymentPausedReasonError`
+
+    An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
+
+    - `type: :unknown_error`
+
+      - `:unknown_error`
+
+  - `class BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError`
+
+    The deployment configures resources, but its environment is self-hosted and cannot mount them.
+
+    - `type: :self_hosted_resources_unsupported_error`
+
+      - `:self_hosted_resources_unsupported_error`
+
+  - `class BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError`
+
+    An MCP server host used by the deployment's agent is blocked by the environment's network policy.
+
+    - `type: :mcp_egress_blocked_error`
+
+      - `:mcp_egress_blocked_error`
+
+### Beta Managed Agents Deployment Status
+
+- `BetaManagedAgentsDeploymentStatus = :active | :paused`
+
+  Lifecycle status of a deployment.
+
+  - `:active`
+
+  - `:paused`
+
+### Beta Managed Agents Deployment System Message Event
+
+- `class BetaManagedAgentsDeploymentSystemMessageEvent`
+
+  Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
+
+  - `content: Array[BetaManagedAgentsSystemContentBlock]`
+
+    System content blocks to append. Text-only.
+
+    - `text: String`
+
+      The text content.
+
+    - `type: :text`
+
+      - `:text`
+
+  - `type: :"system.message"`
+
+    - `:"system.message"`
+
+### Beta Managed Agents Deployment User Define Outcome Event
+
+- `class BetaManagedAgentsDeploymentUserDefineOutcomeEvent`
+
+  An outcome the agent should work toward. The agent begins work on receipt.
+
+  - `description: String`
+
+    What the agent should produce. This is the task specification.
+
+  - `rubric: BetaManagedAgentsFileRubric | BetaManagedAgentsTextRubric`
+
+    Rubric for grading the quality of an outcome.
+
+    - `class BetaManagedAgentsFileRubric`
+
+      Rubric referenced by a file uploaded via the Files API.
+
+      - `file_id: String`
+
+        ID of the rubric file.
+
+      - `type: :file`
+
+        - `:file`
+
+    - `class BetaManagedAgentsTextRubric`
+
+      Rubric content provided inline as text.
+
+      - `content: String`
+
+        Rubric content. Plain text or markdown — the grader treats it as freeform text.
+
+      - `type: :text`
+
+        - `:text`
+
+  - `type: :"user.define_outcome"`
+
+    - `:"user.define_outcome"`
+
+  - `max_iterations: Integer`
+
+    Eval→revision cycles before giving up. Default 3, max 20.
+
+### Beta Managed Agents Deployment User Message Event
+
+- `class BetaManagedAgentsDeploymentUserMessageEvent`
+
+  A user message sent to the session.
+
+  - `content: Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock]`
+
+    Array of content blocks for the user message.
+
+    - `class BetaManagedAgentsTextBlock`
+
+      Regular text content.
+
+      - `text: String`
+
+        The text content.
+
+      - `type: :text`
+
+        - `:text`
+
+    - `class BetaManagedAgentsImageBlock`
+
+      Image content specified directly as base64 data or as a reference via a URL.
+
+      - `source: BetaManagedAgentsBase64ImageSource | BetaManagedAgentsURLImageSource | BetaManagedAgentsFileImageSource`
+
+        Union type for image source variants.
+
+        - `class BetaManagedAgentsBase64ImageSource`
+
+          Base64-encoded image data.
+
+          - `data: String`
+
+            Base64-encoded image data.
+
+          - `media_type: String`
+
+            MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+          - `type: :base64`
+
+            - `:base64`
+
+        - `class BetaManagedAgentsURLImageSource`
+
+          Image referenced by URL.
+
+          - `type: :url`
+
+            - `:url`
+
+          - `url: String`
+
+            URL of the image to fetch.
+
+        - `class BetaManagedAgentsFileImageSource`
+
+          Image referenced by file ID.
+
+          - `file_id: String`
+
+            ID of a previously uploaded file.
+
+          - `type: :file`
+
+            - `:file`
+
+      - `type: :image`
+
+        - `:image`
+
+    - `class BetaManagedAgentsDocumentBlock`
+
+      Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+      - `source: BetaManagedAgentsBase64DocumentSource | BetaManagedAgentsPlainTextDocumentSource | BetaManagedAgentsURLDocumentSource | BetaManagedAgentsFileDocumentSource`
+
+        Union type for document source variants.
+
+        - `class BetaManagedAgentsBase64DocumentSource`
+
+          Base64-encoded document data.
+
+          - `data: String`
+
+            Base64-encoded document data.
+
+          - `media_type: String`
+
+            MIME type of the document (e.g., "application/pdf").
+
+          - `type: :base64`
+
+            - `:base64`
+
+        - `class BetaManagedAgentsPlainTextDocumentSource`
+
+          Plain text document content.
+
+          - `data: String`
+
+            The plain text content.
+
+          - `media_type: :"text/plain"`
+
+            MIME type of the text content. Must be "text/plain".
+
+            - `:"text/plain"`
+
+          - `type: :text`
+
+            - `:text`
+
+        - `class BetaManagedAgentsURLDocumentSource`
+
+          Document referenced by URL.
+
+          - `type: :url`
+
+            - `:url`
+
+          - `url: String`
+
+            URL of the document to fetch.
+
+        - `class BetaManagedAgentsFileDocumentSource`
+
+          Document referenced by file ID.
+
+          - `file_id: String`
+
+            ID of a previously uploaded file.
+
+          - `type: :file`
+
+            - `:file`
+
+      - `type: :document`
+
+        - `:document`
+
+      - `context: String`
+
+        Additional context about the document for the model.
+
+      - `title: String`
+
+        The title of the document.
+
+  - `type: :"user.message"`
+
+    - `:"user.message"`
+
+### Beta Managed Agents Environment Archived Deployment Paused Reason Error
+
+- `class BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError`
+
+  The deployment's environment was archived.
+
+  - `type: :environment_archived_error`
+
+    - `:environment_archived_error`
+
+### Beta Managed Agents Environment Not Found Deployment Paused Reason Error
+
+- `class BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError`
+
+  The deployment's environment no longer exists.
+
+  - `type: :environment_not_found_error`
+
+    - `:environment_not_found_error`
+
+### Beta Managed Agents Error Deployment Paused Reason
+
+- `class BetaManagedAgentsErrorDeploymentPausedReason`
+
+  A scheduled fire recorded a failed run whose error auto-pauses the deployment.
+
+  - `error: BetaManagedAgentsDeploymentPausedReasonError`
+
+    The error that triggered an auto-pause. Matches the failed run's `error.type`.
+
+    - `class BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError`
+
+      The deployment's environment was archived.
+
+      - `type: :environment_archived_error`
+
+        - `:environment_archived_error`
+
+    - `class BetaManagedAgentsAgentArchivedDeploymentPausedReasonError`
+
+      The deployment's agent was archived.
+
+      - `type: :agent_archived_error`
+
+        - `:agent_archived_error`
+
+    - `class BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError`
+
+      The deployment's environment no longer exists.
+
+      - `type: :environment_not_found_error`
+
+        - `:environment_not_found_error`
+
+    - `class BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError`
+
+      A vault referenced by the deployment no longer exists.
+
+      - `type: :vault_not_found_error`
+
+        - `:vault_not_found_error`
+
+    - `class BetaManagedAgentsFileNotFoundDeploymentPausedReasonError`
+
+      A file resource referenced by the deployment no longer exists.
+
+      - `type: :file_not_found_error`
+
+        - `:file_not_found_error`
+
+    - `class BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError`
+
+      A referenced resource no longer exists and its kind was not reported.
+
+      - `type: :session_resource_not_found_error`
+
+        - `:session_resource_not_found_error`
+
+    - `class BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError`
+
+      The deployment's workspace was archived.
+
+      - `type: :workspace_archived_error`
+
+        - `:workspace_archived_error`
+
+    - `class BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError`
+
+      The deployment's organization is disabled.
+
+      - `type: :organization_disabled_error`
+
+        - `:organization_disabled_error`
+
+    - `class BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError`
+
+      A memory store referenced by the deployment is archived.
+
+      - `type: :memory_store_archived_error`
+
+        - `:memory_store_archived_error`
+
+    - `class BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError`
+
+      A skill referenced by the deployment's agent no longer exists.
+
+      - `type: :skill_not_found_error`
+
+        - `:skill_not_found_error`
+
+    - `class BetaManagedAgentsVaultArchivedDeploymentPausedReasonError`
+
+      A vault referenced by the deployment is archived.
+
+      - `type: :vault_archived_error`
+
+        - `:vault_archived_error`
+
+    - `class BetaManagedAgentsUnknownDeploymentPausedReasonError`
+
+      An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
+
+      - `type: :unknown_error`
+
+        - `:unknown_error`
+
+    - `class BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError`
+
+      The deployment configures resources, but its environment is self-hosted and cannot mount them.
+
+      - `type: :self_hosted_resources_unsupported_error`
+
+        - `:self_hosted_resources_unsupported_error`
+
+    - `class BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError`
+
+      An MCP server host used by the deployment's agent is blocked by the environment's network policy.
+
+      - `type: :mcp_egress_blocked_error`
+
+        - `:mcp_egress_blocked_error`
+
+  - `type: :error`
+
+    - `:error`
+
+### Beta Managed Agents File Not Found Deployment Paused Reason Error
+
+- `class BetaManagedAgentsFileNotFoundDeploymentPausedReasonError`
+
+  A file resource referenced by the deployment no longer exists.
+
+  - `type: :file_not_found_error`
+
+    - `:file_not_found_error`
+
+### Beta Managed Agents File Resource Config
+
+- `class BetaManagedAgentsFileResourceConfig`
+
+  A file mounted into each session's container.
+
+  - `file_id: String`
+
+    ID of a previously uploaded file.
+
+  - `type: :file`
+
+    - `:file`
+
+  - `mount_path: String`
+
+    Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
+
+### Beta Managed Agents GitHub Repository Resource Config
+
+- `class BetaManagedAgentsGitHubRepositoryResourceConfig`
+
+  A GitHub repository mounted into each session's container. The authorization token is write-only and never returned.
+
+  - `type: :github_repository`
+
+    - `:github_repository`
+
+  - `url: String`
+
+    Github URL of the repository
+
+  - `checkout: BetaManagedAgentsBranchCheckout | BetaManagedAgentsCommitCheckout`
+
+    Branch or commit to check out. Defaults to the repository's default branch.
+
+    - `class BetaManagedAgentsBranchCheckout`
+
+      - `name: String`
+
+        Branch name to check out.
+
+      - `type: :branch`
+
+        - `:branch`
+
+    - `class BetaManagedAgentsCommitCheckout`
+
+      - `sha: String`
+
+        Full commit SHA to check out.
+
+      - `type: :commit`
+
+        - `:commit`
+
+  - `mount_path: String`
+
+    Mount path in the container. Defaults to `/workspace/<repo-name>`.
+
+### Beta Managed Agents Manual Deployment Paused Reason
+
+- `class BetaManagedAgentsManualDeploymentPausedReason`
+
+  The caller invoked the pause endpoint on the deployment.
+
+  - `type: :manual`
+
+    - `:manual`
+
+### Beta Managed Agents MCP Egress Blocked Deployment Paused Reason Error
+
+- `class BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError`
+
+  An MCP server host used by the deployment's agent is blocked by the environment's network policy.
+
+  - `type: :mcp_egress_blocked_error`
+
+    - `:mcp_egress_blocked_error`
+
+### Beta Managed Agents Memory Store Archived Deployment Paused Reason Error
+
+- `class BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError`
+
+  A memory store referenced by the deployment is archived.
+
+  - `type: :memory_store_archived_error`
+
+    - `:memory_store_archived_error`
+
+### Beta Managed Agents Memory Store Resource Config
+
+- `class BetaManagedAgentsMemoryStoreResourceConfig`
+
+  A memory store attached to each session created from this deployment.
+
+  - `memory_store_id: String`
+
+    The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+  - `type: :memory_store`
+
+    - `:memory_store`
+
+  - `access: :read_write | :read_only`
+
+    Access mode for an attached memory store.
+
+    - `:read_write`
+
+    - `:read_only`
+
+  - `instructions: String`
+
+    Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+### Beta Managed Agents Organization Disabled Deployment Paused Reason Error
+
+- `class BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError`
+
+  The deployment's organization is disabled.
+
+  - `type: :organization_disabled_error`
+
+    - `:organization_disabled_error`
+
+### Beta Managed Agents Schedule
+
+- `class BetaManagedAgentsSchedule`
+
+  5-field POSIX cron schedule with computed runtime timestamps.
+
+  - `expression: String`
+
+    5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 * * 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
+
+  - `timezone: String`
+
+    IANA timezone identifier (e.g., "America/Los_Angeles", "UTC").
+
+  - `type: :cron`
+
+    - `:cron`
+
+  - `last_run_at: Time`
+
+    A timestamp in RFC 3339 format
+
+  - `upcoming_runs_at: Array[Time]`
+
+    Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused deployments (reflects what the schedule would do if unpaused); empty once the deployment is archived (`archived_at` set). Each fire is offset by a small per-schedule jitter, so a run will actually start at or shortly after its listed time.
+
+### Beta Managed Agents Schedule Params
+
+- `class BetaManagedAgentsScheduleParams`
+
+  5-field POSIX cron schedule. Literal wall-clock matching in the configured timezone.
+
+  - `expression: String`
+
+    5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 * * 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
+
+  - `timezone: String`
+
+    Required. IANA timezone identifier (e.g., "America/Los_Angeles", "UTC"). Validated against the IANA timezone database.
+
+  - `type: :cron`
+
+    - `:cron`
+
+### Beta Managed Agents Self Hosted Resources Unsupported Deployment Paused Reason Error
+
+- `class BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError`
+
+  The deployment configures resources, but its environment is self-hosted and cannot mount them.
+
+  - `type: :self_hosted_resources_unsupported_error`
+
+    - `:self_hosted_resources_unsupported_error`
+
+### Beta Managed Agents Session Resource Config
+
+- `BetaManagedAgentsSessionResourceConfig = BetaManagedAgentsGitHubRepositoryResourceConfig | BetaManagedAgentsFileResourceConfig | BetaManagedAgentsMemoryStoreResourceConfig`
+
+  A configured session resource. Echoes the input minus write-only credentials.
+
+  - `class BetaManagedAgentsGitHubRepositoryResourceConfig`
+
+    A GitHub repository mounted into each session's container. The authorization token is write-only and never returned.
+
+    - `type: :github_repository`
+
+      - `:github_repository`
+
+    - `url: String`
+
+      Github URL of the repository
+
+    - `checkout: BetaManagedAgentsBranchCheckout | BetaManagedAgentsCommitCheckout`
+
+      Branch or commit to check out. Defaults to the repository's default branch.
+
+      - `class BetaManagedAgentsBranchCheckout`
+
+        - `name: String`
+
+          Branch name to check out.
+
+        - `type: :branch`
+
+          - `:branch`
+
+      - `class BetaManagedAgentsCommitCheckout`
+
+        - `sha: String`
+
+          Full commit SHA to check out.
+
+        - `type: :commit`
+
+          - `:commit`
+
+    - `mount_path: String`
+
+      Mount path in the container. Defaults to `/workspace/<repo-name>`.
+
+  - `class BetaManagedAgentsFileResourceConfig`
+
+    A file mounted into each session's container.
+
+    - `file_id: String`
+
+      ID of a previously uploaded file.
+
+    - `type: :file`
+
+      - `:file`
+
+    - `mount_path: String`
+
+      Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
+
+  - `class BetaManagedAgentsMemoryStoreResourceConfig`
+
+    A memory store attached to each session created from this deployment.
+
+    - `memory_store_id: String`
+
+      The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+    - `type: :memory_store`
+
+      - `:memory_store`
+
+    - `access: :read_write | :read_only`
+
+      Access mode for an attached memory store.
+
+      - `:read_write`
+
+      - `:read_only`
+
+    - `instructions: String`
+
+      Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+### Beta Managed Agents Session Resource Not Found Deployment Paused Reason Error
+
+- `class BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError`
+
+  A referenced resource no longer exists and its kind was not reported.
+
+  - `type: :session_resource_not_found_error`
+
+    - `:session_resource_not_found_error`
+
+### Beta Managed Agents Skill Not Found Deployment Paused Reason Error
+
+- `class BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError`
+
+  A skill referenced by the deployment's agent no longer exists.
+
+  - `type: :skill_not_found_error`
+
+    - `:skill_not_found_error`
+
+### Beta Managed Agents Unknown Deployment Paused Reason Error
+
+- `class BetaManagedAgentsUnknownDeploymentPausedReasonError`
+
+  An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
+
+  - `type: :unknown_error`
+
+    - `:unknown_error`
+
+### Beta Managed Agents Vault Archived Deployment Paused Reason Error
+
+- `class BetaManagedAgentsVaultArchivedDeploymentPausedReasonError`
+
+  A vault referenced by the deployment is archived.
+
+  - `type: :vault_archived_error`
+
+    - `:vault_archived_error`
+
+### Beta Managed Agents Vault Not Found Deployment Paused Reason Error
+
+- `class BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError`
+
+  A vault referenced by the deployment no longer exists.
+
+  - `type: :vault_not_found_error`
+
+    - `:vault_not_found_error`
+
+### Beta Managed Agents Workspace Archived Deployment Paused Reason Error
+
+- `class BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError`
+
+  The deployment's workspace was archived.
+
+  - `type: :workspace_archived_error`
+
+    - `:workspace_archived_error`
+
+# Deployment Runs
+
+## List Deployment Runs
+
+`beta.deployment_runs.list(**kwargs) -> PageCursor<BetaManagedAgentsDeploymentRun>`
+
+**get** `/v1/deployment_runs`
+
+List Deployment Runs
+
+### Parameters
+
+- `created_at_gt: Time`
+
+  Return runs created strictly after this time (exclusive).
+
+- `created_at_gte: Time`
+
+  Return runs created at or after this time (inclusive).
+
+- `created_at_lt: Time`
+
+  Return runs created strictly before this time (exclusive).
+
+- `created_at_lte: Time`
+
+  Return runs created at or before this time (inclusive).
+
+- `deployment_id: String`
+
+  Filter to a specific deployment. Omit to list across all deployments in the workspace. Filtering by a non-existent deployment_id returns 200 with empty data.
+
+- `has_error: bool`
+
+  Filter: true for runs with non-null error, false for runs with non-null session_id. Omit for all.
+
+- `limit: Integer`
+
+  Maximum results per page. Default 20, maximum 1000.
+
+- `page: String`
+
+  Opaque pagination cursor. Pass next_page from the previous response. Invalid or expired cursors return 400.
+
+- `trigger_type: BetaManagedAgentsTriggerType`
+
+  Filter runs by what triggered them. Omit to return all runs.
+
+  - `:schedule`
+
+  - `:manual`
+
+- `betas: Array[AnthropicBeta]`
+
+  Optional header to specify the beta version(s) you want to use.
+
+  - `String = String`
+
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
+
+    - `:"message-batches-2024-09-24"`
+
+    - `:"prompt-caching-2024-07-31"`
+
+    - `:"computer-use-2024-10-22"`
+
+    - `:"computer-use-2025-01-24"`
+
+    - `:"pdfs-2024-09-25"`
+
+    - `:"token-counting-2024-11-01"`
+
+    - `:"token-efficient-tools-2025-02-19"`
+
+    - `:"output-128k-2025-02-19"`
+
+    - `:"files-api-2025-04-14"`
+
+    - `:"mcp-client-2025-04-04"`
+
+    - `:"mcp-client-2025-11-20"`
+
+    - `:"dev-full-thinking-2025-05-14"`
+
+    - `:"interleaved-thinking-2025-05-14"`
+
+    - `:"code-execution-2025-05-22"`
+
+    - `:"extended-cache-ttl-2025-04-11"`
+
+    - `:"context-1m-2025-08-07"`
+
+    - `:"context-management-2025-06-27"`
+
+    - `:"model-context-window-exceeded-2025-08-26"`
+
+    - `:"skills-2025-10-02"`
+
+    - `:"fast-mode-2026-02-01"`
+
+    - `:"output-300k-2026-03-24"`
+
+    - `:"user-profiles-2026-03-24"`
+
+    - `:"advisor-tool-2026-03-01"`
+
+    - `:"managed-agents-2026-04-01"`
+
+    - `:"cache-diagnosis-2026-04-07"`
+
+    - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
+
+### Returns
+
+- `class BetaManagedAgentsDeploymentRun`
+
+  A persistent, append-only record of a single deployment execution. Records session creation success or failure — no session lifecycle tracking.
+
+  - `id: String`
+
+    Unique identifier for this run (`drun_...`).
+
+  - `agent: BetaManagedAgentsAgentReference`
+
+    A resolved agent reference with a concrete version.
+
+    - `id: String`
+
+    - `type: :agent`
+
+      - `:agent`
+
+    - `version: Integer`
+
+  - `created_at: Time`
+
+    A timestamp in RFC 3339 format
+
+  - `deployment_id: String`
+
+    ID of the deployment that produced this run.
+
+  - `error: BetaManagedAgentsEnvironmentArchivedRunError | BetaManagedAgentsAgentArchivedRunError | BetaManagedAgentsEnvironmentNotFoundRunError | 13 more`
+
+    Why the run failed to create a session. The type identifies the failure; message is human-readable detail.
+
+    - `class BetaManagedAgentsEnvironmentArchivedRunError`
+
+      The deployment's environment was archived.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :environment_archived_error`
+
+        - `:environment_archived_error`
+
+    - `class BetaManagedAgentsAgentArchivedRunError`
+
+      The deployment's agent was archived.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :agent_archived_error`
+
+        - `:agent_archived_error`
+
+    - `class BetaManagedAgentsEnvironmentNotFoundRunError`
+
+      The deployment's environment no longer exists.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :environment_not_found_error`
+
+        - `:environment_not_found_error`
+
+    - `class BetaManagedAgentsVaultNotFoundRunError`
+
+      A vault referenced by the deployment no longer exists.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :vault_not_found_error`
+
+        - `:vault_not_found_error`
+
+    - `class BetaManagedAgentsVaultArchivedRunError`
+
+      A vault referenced by the deployment is archived.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :vault_archived_error`
+
+        - `:vault_archived_error`
+
+    - `class BetaManagedAgentsFileNotFoundRunError`
+
+      A file resource referenced by the deployment no longer exists.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :file_not_found_error`
+
+        - `:file_not_found_error`
+
+    - `class BetaManagedAgentsMemoryStoreArchivedRunError`
+
+      A memory store referenced by the deployment is archived.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :memory_store_archived_error`
+
+        - `:memory_store_archived_error`
+
+    - `class BetaManagedAgentsSkillNotFoundRunError`
+
+      A skill referenced by the deployment's agent no longer exists.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :skill_not_found_error`
+
+        - `:skill_not_found_error`
+
+    - `class BetaManagedAgentsSessionResourceNotFoundRunError`
+
+      A referenced resource no longer exists and its kind was not reported.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :session_resource_not_found_error`
+
+        - `:session_resource_not_found_error`
+
+    - `class BetaManagedAgentsWorkspaceArchivedRunError`
+
+      The deployment's workspace was archived.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :workspace_archived_error`
+
+        - `:workspace_archived_error`
+
+    - `class BetaManagedAgentsOrganizationDisabledRunError`
+
+      The deployment's organization is disabled.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :organization_disabled_error`
+
+        - `:organization_disabled_error`
+
+    - `class BetaManagedAgentsSessionRateLimitedRunError`
+
+      Session creation was rejected due to rate limiting. The schedule keeps firing; subsequent runs may succeed.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :session_rate_limited_error`
+
+        - `:session_rate_limited_error`
+
+    - `class BetaManagedAgentsSessionCreationRejectedRunError`
+
+      The session create request was rejected with a non-retryable validation error.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :session_creation_rejected_error`
+
+        - `:session_creation_rejected_error`
+
+    - `class BetaManagedAgentsUnknownRunError`
+
+      An unknown or unexpected error caused the run to fail. A fallback variant; clients that do not recognize a new error type can match on message alone.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :unknown_error`
+
+        - `:unknown_error`
+
+    - `class BetaManagedAgentsSelfHostedResourcesUnsupportedRunError`
+
+      The deployment configures resources, but its environment is self-hosted and cannot mount them.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :self_hosted_resources_unsupported_error`
+
+        - `:self_hosted_resources_unsupported_error`
+
+    - `class BetaManagedAgentsMCPEgressBlockedRunError`
+
+      An MCP server host used by the deployment's agent is blocked by the environment's network policy.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :mcp_egress_blocked_error`
+
+        - `:mcp_egress_blocked_error`
+
+  - `session_id: String`
+
+    Populated on success. Null on creation failure. Exactly one of session_id or error is non-null.
+
+  - `trigger_context: BetaManagedAgentsTriggerContext`
+
+    Describes what triggered a deployment run, with trigger-specific metadata.
+
+    - `class BetaManagedAgentsScheduleTriggerContext`
+
+      The run was fired by the deployment's cron schedule.
+
+      - `scheduled_at: Time`
+
+        A timestamp in RFC 3339 format
+
+      - `type: :schedule`
+
+        - `:schedule`
+
+    - `class BetaManagedAgentsManualTriggerContext`
+
+      The run was started manually by creating a session directly against the deployment.
+
+      - `type: :manual`
+
+        - `:manual`
+
+  - `type: :deployment_run`
+
+    - `:deployment_run`
+
+### Example
+
+```ruby
+require "anthropic"
+
+anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
+
+page = anthropic.beta.deployment_runs.list
+
+puts(page)
+```
+
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "id": "id",
+      "agent": {
+        "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+        "type": "agent",
+        "version": 1
+      },
+      "created_at": "2019-12-27T18:11:19.117Z",
+      "deployment_id": "deployment_id",
+      "error": {
+        "message": "message",
+        "type": "environment_archived_error"
+      },
+      "session_id": "session_id",
+      "trigger_context": {
+        "scheduled_at": "2019-12-27T18:11:19.117Z",
+        "type": "schedule"
+      },
+      "type": "deployment_run"
+    }
+  ],
+  "next_page": "next_page"
+}
+```
+
+## Get Deployment Run
+
+`beta.deployment_runs.retrieve(deployment_run_id, **kwargs) -> BetaManagedAgentsDeploymentRun`
+
+**get** `/v1/deployment_runs/{deployment_run_id}`
+
+Get Deployment Run
+
+### Parameters
+
+- `deployment_run_id: String`
+
+- `betas: Array[AnthropicBeta]`
+
+  Optional header to specify the beta version(s) you want to use.
+
+  - `String = String`
+
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
+
+    - `:"message-batches-2024-09-24"`
+
+    - `:"prompt-caching-2024-07-31"`
+
+    - `:"computer-use-2024-10-22"`
+
+    - `:"computer-use-2025-01-24"`
+
+    - `:"pdfs-2024-09-25"`
+
+    - `:"token-counting-2024-11-01"`
+
+    - `:"token-efficient-tools-2025-02-19"`
+
+    - `:"output-128k-2025-02-19"`
+
+    - `:"files-api-2025-04-14"`
+
+    - `:"mcp-client-2025-04-04"`
+
+    - `:"mcp-client-2025-11-20"`
+
+    - `:"dev-full-thinking-2025-05-14"`
+
+    - `:"interleaved-thinking-2025-05-14"`
+
+    - `:"code-execution-2025-05-22"`
+
+    - `:"extended-cache-ttl-2025-04-11"`
+
+    - `:"context-1m-2025-08-07"`
+
+    - `:"context-management-2025-06-27"`
+
+    - `:"model-context-window-exceeded-2025-08-26"`
+
+    - `:"skills-2025-10-02"`
+
+    - `:"fast-mode-2026-02-01"`
+
+    - `:"output-300k-2026-03-24"`
+
+    - `:"user-profiles-2026-03-24"`
+
+    - `:"advisor-tool-2026-03-01"`
+
+    - `:"managed-agents-2026-04-01"`
+
+    - `:"cache-diagnosis-2026-04-07"`
+
+    - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
+
+### Returns
+
+- `class BetaManagedAgentsDeploymentRun`
+
+  A persistent, append-only record of a single deployment execution. Records session creation success or failure — no session lifecycle tracking.
+
+  - `id: String`
+
+    Unique identifier for this run (`drun_...`).
+
+  - `agent: BetaManagedAgentsAgentReference`
+
+    A resolved agent reference with a concrete version.
+
+    - `id: String`
+
+    - `type: :agent`
+
+      - `:agent`
+
+    - `version: Integer`
+
+  - `created_at: Time`
+
+    A timestamp in RFC 3339 format
+
+  - `deployment_id: String`
+
+    ID of the deployment that produced this run.
+
+  - `error: BetaManagedAgentsEnvironmentArchivedRunError | BetaManagedAgentsAgentArchivedRunError | BetaManagedAgentsEnvironmentNotFoundRunError | 13 more`
+
+    Why the run failed to create a session. The type identifies the failure; message is human-readable detail.
+
+    - `class BetaManagedAgentsEnvironmentArchivedRunError`
+
+      The deployment's environment was archived.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :environment_archived_error`
+
+        - `:environment_archived_error`
+
+    - `class BetaManagedAgentsAgentArchivedRunError`
+
+      The deployment's agent was archived.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :agent_archived_error`
+
+        - `:agent_archived_error`
+
+    - `class BetaManagedAgentsEnvironmentNotFoundRunError`
+
+      The deployment's environment no longer exists.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :environment_not_found_error`
+
+        - `:environment_not_found_error`
+
+    - `class BetaManagedAgentsVaultNotFoundRunError`
+
+      A vault referenced by the deployment no longer exists.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :vault_not_found_error`
+
+        - `:vault_not_found_error`
+
+    - `class BetaManagedAgentsVaultArchivedRunError`
+
+      A vault referenced by the deployment is archived.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :vault_archived_error`
+
+        - `:vault_archived_error`
+
+    - `class BetaManagedAgentsFileNotFoundRunError`
+
+      A file resource referenced by the deployment no longer exists.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :file_not_found_error`
+
+        - `:file_not_found_error`
+
+    - `class BetaManagedAgentsMemoryStoreArchivedRunError`
+
+      A memory store referenced by the deployment is archived.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :memory_store_archived_error`
+
+        - `:memory_store_archived_error`
+
+    - `class BetaManagedAgentsSkillNotFoundRunError`
+
+      A skill referenced by the deployment's agent no longer exists.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :skill_not_found_error`
+
+        - `:skill_not_found_error`
+
+    - `class BetaManagedAgentsSessionResourceNotFoundRunError`
+
+      A referenced resource no longer exists and its kind was not reported.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :session_resource_not_found_error`
+
+        - `:session_resource_not_found_error`
+
+    - `class BetaManagedAgentsWorkspaceArchivedRunError`
+
+      The deployment's workspace was archived.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :workspace_archived_error`
+
+        - `:workspace_archived_error`
+
+    - `class BetaManagedAgentsOrganizationDisabledRunError`
+
+      The deployment's organization is disabled.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :organization_disabled_error`
+
+        - `:organization_disabled_error`
+
+    - `class BetaManagedAgentsSessionRateLimitedRunError`
+
+      Session creation was rejected due to rate limiting. The schedule keeps firing; subsequent runs may succeed.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :session_rate_limited_error`
+
+        - `:session_rate_limited_error`
+
+    - `class BetaManagedAgentsSessionCreationRejectedRunError`
+
+      The session create request was rejected with a non-retryable validation error.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :session_creation_rejected_error`
+
+        - `:session_creation_rejected_error`
+
+    - `class BetaManagedAgentsUnknownRunError`
+
+      An unknown or unexpected error caused the run to fail. A fallback variant; clients that do not recognize a new error type can match on message alone.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :unknown_error`
+
+        - `:unknown_error`
+
+    - `class BetaManagedAgentsSelfHostedResourcesUnsupportedRunError`
+
+      The deployment configures resources, but its environment is self-hosted and cannot mount them.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :self_hosted_resources_unsupported_error`
+
+        - `:self_hosted_resources_unsupported_error`
+
+    - `class BetaManagedAgentsMCPEgressBlockedRunError`
+
+      An MCP server host used by the deployment's agent is blocked by the environment's network policy.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :mcp_egress_blocked_error`
+
+        - `:mcp_egress_blocked_error`
+
+  - `session_id: String`
+
+    Populated on success. Null on creation failure. Exactly one of session_id or error is non-null.
+
+  - `trigger_context: BetaManagedAgentsTriggerContext`
+
+    Describes what triggered a deployment run, with trigger-specific metadata.
+
+    - `class BetaManagedAgentsScheduleTriggerContext`
+
+      The run was fired by the deployment's cron schedule.
+
+      - `scheduled_at: Time`
+
+        A timestamp in RFC 3339 format
+
+      - `type: :schedule`
+
+        - `:schedule`
+
+    - `class BetaManagedAgentsManualTriggerContext`
+
+      The run was started manually by creating a session directly against the deployment.
+
+      - `type: :manual`
+
+        - `:manual`
+
+  - `type: :deployment_run`
+
+    - `:deployment_run`
+
+### Example
+
+```ruby
+require "anthropic"
+
+anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
+
+beta_managed_agents_deployment_run = anthropic.beta.deployment_runs.retrieve("deployment_run_id")
+
+puts(beta_managed_agents_deployment_run)
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "agent": {
+    "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+    "type": "agent",
+    "version": 1
+  },
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "deployment_id": "deployment_id",
+  "error": {
+    "message": "message",
+    "type": "environment_archived_error"
+  },
+  "session_id": "session_id",
+  "trigger_context": {
+    "scheduled_at": "2019-12-27T18:11:19.117Z",
+    "type": "schedule"
+  },
+  "type": "deployment_run"
+}
+```
+
+## Domain Types
+
+### Beta Managed Agents Agent Archived Run Error
+
+- `class BetaManagedAgentsAgentArchivedRunError`
+
+  The deployment's agent was archived.
+
+  - `message: String`
+
+    Human-readable error description.
+
+  - `type: :agent_archived_error`
+
+    - `:agent_archived_error`
+
+### Beta Managed Agents Deployment Run
+
+- `class BetaManagedAgentsDeploymentRun`
+
+  A persistent, append-only record of a single deployment execution. Records session creation success or failure — no session lifecycle tracking.
+
+  - `id: String`
+
+    Unique identifier for this run (`drun_...`).
+
+  - `agent: BetaManagedAgentsAgentReference`
+
+    A resolved agent reference with a concrete version.
+
+    - `id: String`
+
+    - `type: :agent`
+
+      - `:agent`
+
+    - `version: Integer`
+
+  - `created_at: Time`
+
+    A timestamp in RFC 3339 format
+
+  - `deployment_id: String`
+
+    ID of the deployment that produced this run.
+
+  - `error: BetaManagedAgentsEnvironmentArchivedRunError | BetaManagedAgentsAgentArchivedRunError | BetaManagedAgentsEnvironmentNotFoundRunError | 13 more`
+
+    Why the run failed to create a session. The type identifies the failure; message is human-readable detail.
+
+    - `class BetaManagedAgentsEnvironmentArchivedRunError`
+
+      The deployment's environment was archived.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :environment_archived_error`
+
+        - `:environment_archived_error`
+
+    - `class BetaManagedAgentsAgentArchivedRunError`
+
+      The deployment's agent was archived.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :agent_archived_error`
+
+        - `:agent_archived_error`
+
+    - `class BetaManagedAgentsEnvironmentNotFoundRunError`
+
+      The deployment's environment no longer exists.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :environment_not_found_error`
+
+        - `:environment_not_found_error`
+
+    - `class BetaManagedAgentsVaultNotFoundRunError`
+
+      A vault referenced by the deployment no longer exists.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :vault_not_found_error`
+
+        - `:vault_not_found_error`
+
+    - `class BetaManagedAgentsVaultArchivedRunError`
+
+      A vault referenced by the deployment is archived.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :vault_archived_error`
+
+        - `:vault_archived_error`
+
+    - `class BetaManagedAgentsFileNotFoundRunError`
+
+      A file resource referenced by the deployment no longer exists.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :file_not_found_error`
+
+        - `:file_not_found_error`
+
+    - `class BetaManagedAgentsMemoryStoreArchivedRunError`
+
+      A memory store referenced by the deployment is archived.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :memory_store_archived_error`
+
+        - `:memory_store_archived_error`
+
+    - `class BetaManagedAgentsSkillNotFoundRunError`
+
+      A skill referenced by the deployment's agent no longer exists.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :skill_not_found_error`
+
+        - `:skill_not_found_error`
+
+    - `class BetaManagedAgentsSessionResourceNotFoundRunError`
+
+      A referenced resource no longer exists and its kind was not reported.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :session_resource_not_found_error`
+
+        - `:session_resource_not_found_error`
+
+    - `class BetaManagedAgentsWorkspaceArchivedRunError`
+
+      The deployment's workspace was archived.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :workspace_archived_error`
+
+        - `:workspace_archived_error`
+
+    - `class BetaManagedAgentsOrganizationDisabledRunError`
+
+      The deployment's organization is disabled.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :organization_disabled_error`
+
+        - `:organization_disabled_error`
+
+    - `class BetaManagedAgentsSessionRateLimitedRunError`
+
+      Session creation was rejected due to rate limiting. The schedule keeps firing; subsequent runs may succeed.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :session_rate_limited_error`
+
+        - `:session_rate_limited_error`
+
+    - `class BetaManagedAgentsSessionCreationRejectedRunError`
+
+      The session create request was rejected with a non-retryable validation error.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :session_creation_rejected_error`
+
+        - `:session_creation_rejected_error`
+
+    - `class BetaManagedAgentsUnknownRunError`
+
+      An unknown or unexpected error caused the run to fail. A fallback variant; clients that do not recognize a new error type can match on message alone.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :unknown_error`
+
+        - `:unknown_error`
+
+    - `class BetaManagedAgentsSelfHostedResourcesUnsupportedRunError`
+
+      The deployment configures resources, but its environment is self-hosted and cannot mount them.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :self_hosted_resources_unsupported_error`
+
+        - `:self_hosted_resources_unsupported_error`
+
+    - `class BetaManagedAgentsMCPEgressBlockedRunError`
+
+      An MCP server host used by the deployment's agent is blocked by the environment's network policy.
+
+      - `message: String`
+
+        Human-readable error description.
+
+      - `type: :mcp_egress_blocked_error`
+
+        - `:mcp_egress_blocked_error`
+
+  - `session_id: String`
+
+    Populated on success. Null on creation failure. Exactly one of session_id or error is non-null.
+
+  - `trigger_context: BetaManagedAgentsTriggerContext`
+
+    Describes what triggered a deployment run, with trigger-specific metadata.
+
+    - `class BetaManagedAgentsScheduleTriggerContext`
+
+      The run was fired by the deployment's cron schedule.
+
+      - `scheduled_at: Time`
+
+        A timestamp in RFC 3339 format
+
+      - `type: :schedule`
+
+        - `:schedule`
+
+    - `class BetaManagedAgentsManualTriggerContext`
+
+      The run was started manually by creating a session directly against the deployment.
+
+      - `type: :manual`
+
+        - `:manual`
+
+  - `type: :deployment_run`
+
+    - `:deployment_run`
+
+### Beta Managed Agents Environment Archived Run Error
+
+- `class BetaManagedAgentsEnvironmentArchivedRunError`
+
+  The deployment's environment was archived.
+
+  - `message: String`
+
+    Human-readable error description.
+
+  - `type: :environment_archived_error`
+
+    - `:environment_archived_error`
+
+### Beta Managed Agents Environment Not Found Run Error
+
+- `class BetaManagedAgentsEnvironmentNotFoundRunError`
+
+  The deployment's environment no longer exists.
+
+  - `message: String`
+
+    Human-readable error description.
+
+  - `type: :environment_not_found_error`
+
+    - `:environment_not_found_error`
+
+### Beta Managed Agents File Not Found Run Error
+
+- `class BetaManagedAgentsFileNotFoundRunError`
+
+  A file resource referenced by the deployment no longer exists.
+
+  - `message: String`
+
+    Human-readable error description.
+
+  - `type: :file_not_found_error`
+
+    - `:file_not_found_error`
+
+### Beta Managed Agents Manual Trigger Context
+
+- `class BetaManagedAgentsManualTriggerContext`
+
+  The run was started manually by creating a session directly against the deployment.
+
+  - `type: :manual`
+
+    - `:manual`
+
+### Beta Managed Agents MCP Egress Blocked Run Error
+
+- `class BetaManagedAgentsMCPEgressBlockedRunError`
+
+  An MCP server host used by the deployment's agent is blocked by the environment's network policy.
+
+  - `message: String`
+
+    Human-readable error description.
+
+  - `type: :mcp_egress_blocked_error`
+
+    - `:mcp_egress_blocked_error`
+
+### Beta Managed Agents Memory Store Archived Run Error
+
+- `class BetaManagedAgentsMemoryStoreArchivedRunError`
+
+  A memory store referenced by the deployment is archived.
+
+  - `message: String`
+
+    Human-readable error description.
+
+  - `type: :memory_store_archived_error`
+
+    - `:memory_store_archived_error`
+
+### Beta Managed Agents Organization Disabled Run Error
+
+- `class BetaManagedAgentsOrganizationDisabledRunError`
+
+  The deployment's organization is disabled.
+
+  - `message: String`
+
+    Human-readable error description.
+
+  - `type: :organization_disabled_error`
+
+    - `:organization_disabled_error`
+
+### Beta Managed Agents Schedule Trigger Context
+
+- `class BetaManagedAgentsScheduleTriggerContext`
+
+  The run was fired by the deployment's cron schedule.
+
+  - `scheduled_at: Time`
+
+    A timestamp in RFC 3339 format
+
+  - `type: :schedule`
+
+    - `:schedule`
+
+### Beta Managed Agents Self Hosted Resources Unsupported Run Error
+
+- `class BetaManagedAgentsSelfHostedResourcesUnsupportedRunError`
+
+  The deployment configures resources, but its environment is self-hosted and cannot mount them.
+
+  - `message: String`
+
+    Human-readable error description.
+
+  - `type: :self_hosted_resources_unsupported_error`
+
+    - `:self_hosted_resources_unsupported_error`
+
+### Beta Managed Agents Session Creation Rejected Run Error
+
+- `class BetaManagedAgentsSessionCreationRejectedRunError`
+
+  The session create request was rejected with a non-retryable validation error.
+
+  - `message: String`
+
+    Human-readable error description.
+
+  - `type: :session_creation_rejected_error`
+
+    - `:session_creation_rejected_error`
+
+### Beta Managed Agents Session Rate Limited Run Error
+
+- `class BetaManagedAgentsSessionRateLimitedRunError`
+
+  Session creation was rejected due to rate limiting. The schedule keeps firing; subsequent runs may succeed.
+
+  - `message: String`
+
+    Human-readable error description.
+
+  - `type: :session_rate_limited_error`
+
+    - `:session_rate_limited_error`
+
+### Beta Managed Agents Session Resource Not Found Run Error
+
+- `class BetaManagedAgentsSessionResourceNotFoundRunError`
+
+  A referenced resource no longer exists and its kind was not reported.
+
+  - `message: String`
+
+    Human-readable error description.
+
+  - `type: :session_resource_not_found_error`
+
+    - `:session_resource_not_found_error`
+
+### Beta Managed Agents Skill Not Found Run Error
+
+- `class BetaManagedAgentsSkillNotFoundRunError`
+
+  A skill referenced by the deployment's agent no longer exists.
+
+  - `message: String`
+
+    Human-readable error description.
+
+  - `type: :skill_not_found_error`
+
+    - `:skill_not_found_error`
+
+### Beta Managed Agents Trigger Context
+
+- `BetaManagedAgentsTriggerContext = BetaManagedAgentsScheduleTriggerContext | BetaManagedAgentsManualTriggerContext`
+
+  Describes what triggered a deployment run, with trigger-specific metadata.
+
+  - `class BetaManagedAgentsScheduleTriggerContext`
+
+    The run was fired by the deployment's cron schedule.
+
+    - `scheduled_at: Time`
+
+      A timestamp in RFC 3339 format
+
+    - `type: :schedule`
+
+      - `:schedule`
+
+  - `class BetaManagedAgentsManualTriggerContext`
+
+    The run was started manually by creating a session directly against the deployment.
+
+    - `type: :manual`
+
+      - `:manual`
+
+### Beta Managed Agents Trigger Type
+
+- `BetaManagedAgentsTriggerType = :schedule | :manual`
+
+  What triggered a deployment run.
+
+  - `:schedule`
+
+  - `:manual`
+
+### Beta Managed Agents Unknown Run Error
+
+- `class BetaManagedAgentsUnknownRunError`
+
+  An unknown or unexpected error caused the run to fail. A fallback variant; clients that do not recognize a new error type can match on message alone.
+
+  - `message: String`
+
+    Human-readable error description.
+
+  - `type: :unknown_error`
+
+    - `:unknown_error`
+
+### Beta Managed Agents Vault Archived Run Error
+
+- `class BetaManagedAgentsVaultArchivedRunError`
+
+  A vault referenced by the deployment is archived.
+
+  - `message: String`
+
+    Human-readable error description.
+
+  - `type: :vault_archived_error`
+
+    - `:vault_archived_error`
+
+### Beta Managed Agents Vault Not Found Run Error
+
+- `class BetaManagedAgentsVaultNotFoundRunError`
+
+  A vault referenced by the deployment no longer exists.
+
+  - `message: String`
+
+    Human-readable error description.
+
+  - `type: :vault_not_found_error`
+
+    - `:vault_not_found_error`
+
+### Beta Managed Agents Workspace Archived Run Error
+
+- `class BetaManagedAgentsWorkspaceArchivedRunError`
+
+  The deployment's workspace was archived.
+
+  - `message: String`
+
+    Human-readable error description.
+
+  - `type: :workspace_archived_error`
+
+    - `:workspace_archived_error`
+
+# Vaults
+
+## Create Vault
+
+`beta.vaults.create(**kwargs) -> BetaManagedAgentsVault`
+
+**post** `/v1/vaults`
+
+Create Vault
+
+### Parameters
+
+- `display_name: String`
+
+  Human-readable name for the vault. 1-255 characters.
+
+- `metadata: Hash[Symbol, String]`
+
+  Arbitrary key-value metadata to attach to the vault. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
+
+- `betas: Array[AnthropicBeta]`
+
+  Optional header to specify the beta version(s) you want to use.
+
+  - `String = String`
+
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
+
+    - `:"message-batches-2024-09-24"`
+
+    - `:"prompt-caching-2024-07-31"`
+
+    - `:"computer-use-2024-10-22"`
+
+    - `:"computer-use-2025-01-24"`
+
+    - `:"pdfs-2024-09-25"`
+
+    - `:"token-counting-2024-11-01"`
+
+    - `:"token-efficient-tools-2025-02-19"`
+
+    - `:"output-128k-2025-02-19"`
+
+    - `:"files-api-2025-04-14"`
+
+    - `:"mcp-client-2025-04-04"`
+
+    - `:"mcp-client-2025-11-20"`
+
+    - `:"dev-full-thinking-2025-05-14"`
+
+    - `:"interleaved-thinking-2025-05-14"`
+
+    - `:"code-execution-2025-05-22"`
+
+    - `:"extended-cache-ttl-2025-04-11"`
+
+    - `:"context-1m-2025-08-07"`
+
+    - `:"context-management-2025-06-27"`
+
+    - `:"model-context-window-exceeded-2025-08-26"`
+
+    - `:"skills-2025-10-02"`
+
+    - `:"fast-mode-2026-02-01"`
+
+    - `:"output-300k-2026-03-24"`
+
+    - `:"user-profiles-2026-03-24"`
+
+    - `:"advisor-tool-2026-03-01"`
+
+    - `:"managed-agents-2026-04-01"`
+
+    - `:"cache-diagnosis-2026-04-07"`
+
+    - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
 
 ### Returns
 
@@ -73982,7 +87254,7 @@ List Vaults
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -74035,6 +87307,10 @@ List Vaults
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
 
 ### Returns
 
@@ -74121,7 +87397,7 @@ Get Vault
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -74174,6 +87450,10 @@ Get Vault
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
 
 ### Returns
 
@@ -74263,7 +87543,7 @@ Update Vault
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -74316,6 +87596,10 @@ Update Vault
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
 
 ### Returns
 
@@ -74397,7 +87681,7 @@ Delete Vault
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -74450,6 +87734,10 @@ Delete Vault
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
 
 ### Returns
 
@@ -74504,7 +87792,7 @@ Archive Vault
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -74557,6 +87845,10 @@ Archive Vault
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
 
 ### Returns
 
@@ -74684,7 +87976,7 @@ Create Credential
 
 - `vault_id: String`
 
-- `auth: BetaManagedAgentsMCPOAuthCreateParams | BetaManagedAgentsStaticBearerCreateParams`
+- `auth: BetaManagedAgentsMCPOAuthCreateParams | BetaManagedAgentsStaticBearerCreateParams | BetaManagedAgentsEnvironmentVariableCreateParams`
 
   Authentication details for creating a credential.
 
@@ -74784,6 +88076,46 @@ Create Credential
 
       - `:static_bearer`
 
+  - `class BetaManagedAgentsEnvironmentVariableCreateParams`
+
+    Parameters for creating an environment variable credential.
+
+    - `networking: BetaManagedAgentsCredentialNetworkingParams`
+
+      Outbound hosts the secret value is substituted on.
+
+      - `class BetaManagedAgentsUnrestrictedCredentialNetworkingParams`
+
+        Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
+
+        - `type: :unrestricted`
+
+          - `:unrestricted`
+
+      - `class BetaManagedAgentsLimitedCredentialNetworkingParams`
+
+        Substitute the secret only on requests to the listed hosts.
+
+        - `allowed_hosts: Array[String]`
+
+          Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
+
+        - `type: :limited`
+
+          - `:limited`
+
+    - `secret_name: String`
+
+      Name of the environment variable. Immutable after create.
+
+    - `secret_value: String`
+
+      Secret value. Write-only; never returned in responses.
+
+    - `type: :environment_variable`
+
+      - `:environment_variable`
+
 - `display_name: String`
 
   Human-readable name for the credential. Up to 255 characters.
@@ -74798,7 +88130,7 @@ Create Credential
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -74852,6 +88184,10 @@ Create Credential
 
     - `:"thinking-token-count-2026-05-13"`
 
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
+
 ### Returns
 
 - `class BetaManagedAgentsCredential`
@@ -74866,7 +88202,7 @@ Create Credential
 
     A timestamp in RFC 3339 format
 
-  - `auth: BetaManagedAgentsMCPOAuthAuthResponse | BetaManagedAgentsStaticBearerAuthResponse`
+  - `auth: BetaManagedAgentsMCPOAuthAuthResponse | BetaManagedAgentsStaticBearerAuthResponse | BetaManagedAgentsEnvironmentVariableAuthResponse`
 
     Authentication details for a credential.
 
@@ -74945,6 +88281,42 @@ Create Credential
       - `type: :static_bearer`
 
         - `:static_bearer`
+
+    - `class BetaManagedAgentsEnvironmentVariableAuthResponse`
+
+      Environment variable credential details. The secret value is never returned.
+
+      - `networking: BetaManagedAgentsUnrestrictedCredentialNetworkingResponse | BetaManagedAgentsLimitedCredentialNetworkingResponse`
+
+        Outbound hosts the secret value is substituted on.
+
+        - `class BetaManagedAgentsUnrestrictedCredentialNetworkingResponse`
+
+          The secret is substituted on any host the session's Environment network policy permits egress to.
+
+          - `type: :unrestricted`
+
+            - `:unrestricted`
+
+        - `class BetaManagedAgentsLimitedCredentialNetworkingResponse`
+
+          The secret is substituted only on requests to the listed hosts.
+
+          - `allowed_hosts: Array[String]`
+
+            Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+
+          - `type: :limited`
+
+            - `:limited`
+
+      - `secret_name: String`
+
+        Name of the environment variable.
+
+      - `type: :environment_variable`
+
+        - `:environment_variable`
 
   - `created_at: Time`
 
@@ -75040,7 +88412,7 @@ List Credentials
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -75094,6 +88466,10 @@ List Credentials
 
     - `:"thinking-token-count-2026-05-13"`
 
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
+
 ### Returns
 
 - `class BetaManagedAgentsCredential`
@@ -75108,7 +88484,7 @@ List Credentials
 
     A timestamp in RFC 3339 format
 
-  - `auth: BetaManagedAgentsMCPOAuthAuthResponse | BetaManagedAgentsStaticBearerAuthResponse`
+  - `auth: BetaManagedAgentsMCPOAuthAuthResponse | BetaManagedAgentsStaticBearerAuthResponse | BetaManagedAgentsEnvironmentVariableAuthResponse`
 
     Authentication details for a credential.
 
@@ -75187,6 +88563,42 @@ List Credentials
       - `type: :static_bearer`
 
         - `:static_bearer`
+
+    - `class BetaManagedAgentsEnvironmentVariableAuthResponse`
+
+      Environment variable credential details. The secret value is never returned.
+
+      - `networking: BetaManagedAgentsUnrestrictedCredentialNetworkingResponse | BetaManagedAgentsLimitedCredentialNetworkingResponse`
+
+        Outbound hosts the secret value is substituted on.
+
+        - `class BetaManagedAgentsUnrestrictedCredentialNetworkingResponse`
+
+          The secret is substituted on any host the session's Environment network policy permits egress to.
+
+          - `type: :unrestricted`
+
+            - `:unrestricted`
+
+        - `class BetaManagedAgentsLimitedCredentialNetworkingResponse`
+
+          The secret is substituted only on requests to the listed hosts.
+
+          - `allowed_hosts: Array[String]`
+
+            Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+
+          - `type: :limited`
+
+            - `:limited`
+
+      - `secret_name: String`
+
+        Name of the environment variable.
+
+      - `type: :environment_variable`
+
+        - `:environment_variable`
 
   - `created_at: Time`
 
@@ -75270,7 +88682,7 @@ Get Credential
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -75324,6 +88736,10 @@ Get Credential
 
     - `:"thinking-token-count-2026-05-13"`
 
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
+
 ### Returns
 
 - `class BetaManagedAgentsCredential`
@@ -75338,7 +88754,7 @@ Get Credential
 
     A timestamp in RFC 3339 format
 
-  - `auth: BetaManagedAgentsMCPOAuthAuthResponse | BetaManagedAgentsStaticBearerAuthResponse`
+  - `auth: BetaManagedAgentsMCPOAuthAuthResponse | BetaManagedAgentsStaticBearerAuthResponse | BetaManagedAgentsEnvironmentVariableAuthResponse`
 
     Authentication details for a credential.
 
@@ -75417,6 +88833,42 @@ Get Credential
       - `type: :static_bearer`
 
         - `:static_bearer`
+
+    - `class BetaManagedAgentsEnvironmentVariableAuthResponse`
+
+      Environment variable credential details. The secret value is never returned.
+
+      - `networking: BetaManagedAgentsUnrestrictedCredentialNetworkingResponse | BetaManagedAgentsLimitedCredentialNetworkingResponse`
+
+        Outbound hosts the secret value is substituted on.
+
+        - `class BetaManagedAgentsUnrestrictedCredentialNetworkingResponse`
+
+          The secret is substituted on any host the session's Environment network policy permits egress to.
+
+          - `type: :unrestricted`
+
+            - `:unrestricted`
+
+        - `class BetaManagedAgentsLimitedCredentialNetworkingResponse`
+
+          The secret is substituted only on requests to the listed hosts.
+
+          - `allowed_hosts: Array[String]`
+
+            Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+
+          - `type: :limited`
+
+            - `:limited`
+
+      - `secret_name: String`
+
+        Name of the environment variable.
+
+      - `type: :environment_variable`
+
+        - `:environment_variable`
 
   - `created_at: Time`
 
@@ -75492,7 +88944,7 @@ Update Credential
 
 - `credential_id: String`
 
-- `auth: BetaManagedAgentsMCPOAuthUpdateParams | BetaManagedAgentsStaticBearerUpdateParams`
+- `auth: BetaManagedAgentsMCPOAuthUpdateParams | BetaManagedAgentsStaticBearerUpdateParams | BetaManagedAgentsEnvironmentVariableUpdateParams`
 
   Updated authentication details for a credential.
 
@@ -75564,6 +89016,42 @@ Update Credential
 
       Updated static bearer token value.
 
+  - `class BetaManagedAgentsEnvironmentVariableUpdateParams`
+
+    Parameters for updating an environment variable credential. `secret_name` is immutable.
+
+    - `type: :environment_variable`
+
+      - `:environment_variable`
+
+    - `networking: BetaManagedAgentsCredentialNetworkingParams`
+
+      Updated networking scope. Full replacement.
+
+      - `class BetaManagedAgentsUnrestrictedCredentialNetworkingParams`
+
+        Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
+
+        - `type: :unrestricted`
+
+          - `:unrestricted`
+
+      - `class BetaManagedAgentsLimitedCredentialNetworkingParams`
+
+        Substitute the secret only on requests to the listed hosts.
+
+        - `allowed_hosts: Array[String]`
+
+          Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
+
+        - `type: :limited`
+
+          - `:limited`
+
+    - `secret_value: String`
+
+      Updated secret value.
+
 - `display_name: String`
 
   Updated human-readable name for the credential. 1-255 characters.
@@ -75578,7 +89066,7 @@ Update Credential
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -75632,6 +89120,10 @@ Update Credential
 
     - `:"thinking-token-count-2026-05-13"`
 
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
+
 ### Returns
 
 - `class BetaManagedAgentsCredential`
@@ -75646,7 +89138,7 @@ Update Credential
 
     A timestamp in RFC 3339 format
 
-  - `auth: BetaManagedAgentsMCPOAuthAuthResponse | BetaManagedAgentsStaticBearerAuthResponse`
+  - `auth: BetaManagedAgentsMCPOAuthAuthResponse | BetaManagedAgentsStaticBearerAuthResponse | BetaManagedAgentsEnvironmentVariableAuthResponse`
 
     Authentication details for a credential.
 
@@ -75725,6 +89217,42 @@ Update Credential
       - `type: :static_bearer`
 
         - `:static_bearer`
+
+    - `class BetaManagedAgentsEnvironmentVariableAuthResponse`
+
+      Environment variable credential details. The secret value is never returned.
+
+      - `networking: BetaManagedAgentsUnrestrictedCredentialNetworkingResponse | BetaManagedAgentsLimitedCredentialNetworkingResponse`
+
+        Outbound hosts the secret value is substituted on.
+
+        - `class BetaManagedAgentsUnrestrictedCredentialNetworkingResponse`
+
+          The secret is substituted on any host the session's Environment network policy permits egress to.
+
+          - `type: :unrestricted`
+
+            - `:unrestricted`
+
+        - `class BetaManagedAgentsLimitedCredentialNetworkingResponse`
+
+          The secret is substituted only on requests to the listed hosts.
+
+          - `allowed_hosts: Array[String]`
+
+            Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+
+          - `type: :limited`
+
+            - `:limited`
+
+      - `secret_name: String`
+
+        Name of the environment variable.
+
+      - `type: :environment_variable`
+
+        - `:environment_variable`
 
   - `created_at: Time`
 
@@ -75806,7 +89334,7 @@ Delete Credential
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -75859,6 +89387,10 @@ Delete Credential
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
 
 ### Returns
 
@@ -75918,7 +89450,7 @@ Archive Credential
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -75972,6 +89504,10 @@ Archive Credential
 
     - `:"thinking-token-count-2026-05-13"`
 
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
+
 ### Returns
 
 - `class BetaManagedAgentsCredential`
@@ -75986,7 +89522,7 @@ Archive Credential
 
     A timestamp in RFC 3339 format
 
-  - `auth: BetaManagedAgentsMCPOAuthAuthResponse | BetaManagedAgentsStaticBearerAuthResponse`
+  - `auth: BetaManagedAgentsMCPOAuthAuthResponse | BetaManagedAgentsStaticBearerAuthResponse | BetaManagedAgentsEnvironmentVariableAuthResponse`
 
     Authentication details for a credential.
 
@@ -76065,6 +89601,42 @@ Archive Credential
       - `type: :static_bearer`
 
         - `:static_bearer`
+
+    - `class BetaManagedAgentsEnvironmentVariableAuthResponse`
+
+      Environment variable credential details. The secret value is never returned.
+
+      - `networking: BetaManagedAgentsUnrestrictedCredentialNetworkingResponse | BetaManagedAgentsLimitedCredentialNetworkingResponse`
+
+        Outbound hosts the secret value is substituted on.
+
+        - `class BetaManagedAgentsUnrestrictedCredentialNetworkingResponse`
+
+          The secret is substituted on any host the session's Environment network policy permits egress to.
+
+          - `type: :unrestricted`
+
+            - `:unrestricted`
+
+        - `class BetaManagedAgentsLimitedCredentialNetworkingResponse`
+
+          The secret is substituted only on requests to the listed hosts.
+
+          - `allowed_hosts: Array[String]`
+
+            Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+
+          - `type: :limited`
+
+            - `:limited`
+
+      - `secret_name: String`
+
+        Name of the environment variable.
+
+      - `type: :environment_variable`
+
+        - `:environment_variable`
 
   - `created_at: Time`
 
@@ -76146,7 +89718,7 @@ Validate Credential
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -76199,6 +89771,10 @@ Validate Credential
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
 
 ### Returns
 
@@ -76346,7 +89922,7 @@ puts(beta_managed_agents_credential_validation)
 
     A timestamp in RFC 3339 format
 
-  - `auth: BetaManagedAgentsMCPOAuthAuthResponse | BetaManagedAgentsStaticBearerAuthResponse`
+  - `auth: BetaManagedAgentsMCPOAuthAuthResponse | BetaManagedAgentsStaticBearerAuthResponse | BetaManagedAgentsEnvironmentVariableAuthResponse`
 
     Authentication details for a credential.
 
@@ -76426,6 +90002,42 @@ puts(beta_managed_agents_credential_validation)
 
         - `:static_bearer`
 
+    - `class BetaManagedAgentsEnvironmentVariableAuthResponse`
+
+      Environment variable credential details. The secret value is never returned.
+
+      - `networking: BetaManagedAgentsUnrestrictedCredentialNetworkingResponse | BetaManagedAgentsLimitedCredentialNetworkingResponse`
+
+        Outbound hosts the secret value is substituted on.
+
+        - `class BetaManagedAgentsUnrestrictedCredentialNetworkingResponse`
+
+          The secret is substituted on any host the session's Environment network policy permits egress to.
+
+          - `type: :unrestricted`
+
+            - `:unrestricted`
+
+        - `class BetaManagedAgentsLimitedCredentialNetworkingResponse`
+
+          The secret is substituted only on requests to the listed hosts.
+
+          - `allowed_hosts: Array[String]`
+
+            Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+
+          - `type: :limited`
+
+            - `:limited`
+
+      - `secret_name: String`
+
+        Name of the environment variable.
+
+      - `type: :environment_variable`
+
+        - `:environment_variable`
+
   - `created_at: Time`
 
     A timestamp in RFC 3339 format
@@ -76449,6 +90061,32 @@ puts(beta_managed_agents_credential_validation)
   - `display_name: String`
 
     Human-readable name for the credential.
+
+### Beta Managed Agents Credential Networking Params
+
+- `BetaManagedAgentsCredentialNetworkingParams = BetaManagedAgentsUnrestrictedCredentialNetworkingParams | BetaManagedAgentsLimitedCredentialNetworkingParams`
+
+  Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
+
+  - `class BetaManagedAgentsUnrestrictedCredentialNetworkingParams`
+
+    Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
+
+    - `type: :unrestricted`
+
+      - `:unrestricted`
+
+  - `class BetaManagedAgentsLimitedCredentialNetworkingParams`
+
+    Substitute the secret only on requests to the listed hosts.
+
+    - `allowed_hosts: Array[String]`
+
+      Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
+
+    - `type: :limited`
+
+      - `:limited`
 
 ### Beta Managed Agents Credential Validation
 
@@ -76559,6 +90197,152 @@ puts(beta_managed_agents_credential_validation)
   - `type: :vault_credential_deleted`
 
     - `:vault_credential_deleted`
+
+### Beta Managed Agents Environment Variable Auth Response
+
+- `class BetaManagedAgentsEnvironmentVariableAuthResponse`
+
+  Environment variable credential details. The secret value is never returned.
+
+  - `networking: BetaManagedAgentsUnrestrictedCredentialNetworkingResponse | BetaManagedAgentsLimitedCredentialNetworkingResponse`
+
+    Outbound hosts the secret value is substituted on.
+
+    - `class BetaManagedAgentsUnrestrictedCredentialNetworkingResponse`
+
+      The secret is substituted on any host the session's Environment network policy permits egress to.
+
+      - `type: :unrestricted`
+
+        - `:unrestricted`
+
+    - `class BetaManagedAgentsLimitedCredentialNetworkingResponse`
+
+      The secret is substituted only on requests to the listed hosts.
+
+      - `allowed_hosts: Array[String]`
+
+        Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+
+      - `type: :limited`
+
+        - `:limited`
+
+  - `secret_name: String`
+
+    Name of the environment variable.
+
+  - `type: :environment_variable`
+
+    - `:environment_variable`
+
+### Beta Managed Agents Environment Variable Create Params
+
+- `class BetaManagedAgentsEnvironmentVariableCreateParams`
+
+  Parameters for creating an environment variable credential.
+
+  - `networking: BetaManagedAgentsCredentialNetworkingParams`
+
+    Outbound hosts the secret value is substituted on.
+
+    - `class BetaManagedAgentsUnrestrictedCredentialNetworkingParams`
+
+      Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
+
+      - `type: :unrestricted`
+
+        - `:unrestricted`
+
+    - `class BetaManagedAgentsLimitedCredentialNetworkingParams`
+
+      Substitute the secret only on requests to the listed hosts.
+
+      - `allowed_hosts: Array[String]`
+
+        Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
+
+      - `type: :limited`
+
+        - `:limited`
+
+  - `secret_name: String`
+
+    Name of the environment variable. Immutable after create.
+
+  - `secret_value: String`
+
+    Secret value. Write-only; never returned in responses.
+
+  - `type: :environment_variable`
+
+    - `:environment_variable`
+
+### Beta Managed Agents Environment Variable Update Params
+
+- `class BetaManagedAgentsEnvironmentVariableUpdateParams`
+
+  Parameters for updating an environment variable credential. `secret_name` is immutable.
+
+  - `type: :environment_variable`
+
+    - `:environment_variable`
+
+  - `networking: BetaManagedAgentsCredentialNetworkingParams`
+
+    Updated networking scope. Full replacement.
+
+    - `class BetaManagedAgentsUnrestrictedCredentialNetworkingParams`
+
+      Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
+
+      - `type: :unrestricted`
+
+        - `:unrestricted`
+
+    - `class BetaManagedAgentsLimitedCredentialNetworkingParams`
+
+      Substitute the secret only on requests to the listed hosts.
+
+      - `allowed_hosts: Array[String]`
+
+        Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
+
+      - `type: :limited`
+
+        - `:limited`
+
+  - `secret_value: String`
+
+    Updated secret value.
+
+### Beta Managed Agents Limited Credential Networking Params
+
+- `class BetaManagedAgentsLimitedCredentialNetworkingParams`
+
+  Substitute the secret only on requests to the listed hosts.
+
+  - `allowed_hosts: Array[String]`
+
+    Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
+
+  - `type: :limited`
+
+    - `:limited`
+
+### Beta Managed Agents Limited Credential Networking Response
+
+- `class BetaManagedAgentsLimitedCredentialNetworkingResponse`
+
+  The secret is substituted only on requests to the listed hosts.
+
+  - `allowed_hosts: Array[String]`
+
+    Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+
+  - `type: :limited`
+
+    - `:limited`
 
 ### Beta Managed Agents MCP OAuth Auth Response
 
@@ -77152,6 +90936,26 @@ puts(beta_managed_agents_credential_validation)
 
     Updated OAuth client secret.
 
+### Beta Managed Agents Unrestricted Credential Networking Params
+
+- `class BetaManagedAgentsUnrestrictedCredentialNetworkingParams`
+
+  Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
+
+  - `type: :unrestricted`
+
+    - `:unrestricted`
+
+### Beta Managed Agents Unrestricted Credential Networking Response
+
+- `class BetaManagedAgentsUnrestrictedCredentialNetworkingResponse`
+
+  The secret is substituted on any host the session's Environment network policy permits egress to.
+
+  - `type: :unrestricted`
+
+    - `:unrestricted`
+
 # Memory Stores
 
 ## Create a memory store
@@ -77182,7 +90986,7 @@ Create a memory store
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -77235,6 +91039,10 @@ Create a memory store
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
 
 ### Returns
 
@@ -77339,7 +91147,7 @@ List memory stores
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -77392,6 +91200,10 @@ List memory stores
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
 
 ### Returns
 
@@ -77483,7 +91295,7 @@ Retrieve a memory store
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -77536,6 +91348,10 @@ Retrieve a memory store
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
 
 ### Returns
 
@@ -77634,7 +91450,7 @@ Update a memory store
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -77687,6 +91503,10 @@ Update a memory store
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
 
 ### Returns
 
@@ -77773,7 +91593,7 @@ Delete a memory store
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -77826,6 +91646,10 @@ Delete a memory store
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
 
 ### Returns
 
@@ -77880,7 +91704,7 @@ Archive a memory store
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -77933,6 +91757,10 @@ Archive a memory store
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
 
 ### Returns
 
@@ -78091,7 +91919,7 @@ Create a memory
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -78144,6 +91972,10 @@ Create a memory
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
 
 ### Returns
 
@@ -78274,7 +92106,7 @@ List memories
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -78327,6 +92159,10 @@ List memories
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
 
 ### Returns
 
@@ -78452,7 +92288,7 @@ Retrieve a memory
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -78505,6 +92341,10 @@ Retrieve a memory
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
 
 ### Returns
 
@@ -78629,7 +92469,7 @@ Update a memory
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -78682,6 +92522,10 @@ Update a memory
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
 
 ### Returns
 
@@ -78782,7 +92626,7 @@ Delete a memory
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -78835,6 +92679,10 @@ Delete a memory
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
 
 ### Returns
 
@@ -79251,7 +93099,7 @@ List memory versions
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -79304,6 +93152,10 @@ List memory versions
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
 
 ### Returns
 
@@ -79476,7 +93328,7 @@ Retrieve a memory version
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -79529,6 +93381,10 @@ Retrieve a memory version
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
 
 ### Returns
 
@@ -79691,7 +93547,7 @@ Redact a memory version
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -79744,6 +93600,10 @@ Redact a memory version
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
 
 ### Returns
 
@@ -80106,7 +93966,7 @@ Upload File
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -80159,6 +94019,10 @@ Upload File
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
 
 ### Returns
 
@@ -80276,7 +94140,7 @@ List Files
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -80329,6 +94193,10 @@ List Files
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
 
 ### Returns
 
@@ -80439,7 +94307,7 @@ Download File
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -80492,6 +94360,10 @@ Download File
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
 
 ### Returns
 
@@ -80529,7 +94401,7 @@ Get File Metadata
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -80582,6 +94454,10 @@ Get File Metadata
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
 
 ### Returns
 
@@ -80685,7 +94561,7 @@ Delete File
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -80738,6 +94614,10 @@ Delete File
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
 
 ### Returns
 
@@ -80890,7 +94770,7 @@ Create Skill
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -80943,6 +94823,10 @@ Create Skill
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
 
 ### Returns
 
@@ -81052,7 +94936,7 @@ List Skills
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -81105,6 +94989,10 @@ List Skills
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
 
 ### Returns
 
@@ -81205,7 +95093,7 @@ Get Skill
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -81258,6 +95146,10 @@ Get Skill
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
 
 ### Returns
 
@@ -81352,7 +95244,7 @@ Delete Skill
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -81405,6 +95297,10 @@ Delete Skill
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
 
 ### Returns
 
@@ -81626,7 +95522,7 @@ Create Skill Version
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -81679,6 +95575,10 @@ Create Skill Version
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
 
 ### Returns
 
@@ -81787,7 +95687,7 @@ List Skill Versions
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -81840,6 +95740,10 @@ List Skill Versions
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
 
 ### Returns
 
@@ -81950,7 +95854,7 @@ Download a skill version's content as a zip archive.
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -82003,6 +95907,10 @@ Download a skill version's content as a zip archive.
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
 
 ### Returns
 
@@ -82048,7 +95956,7 @@ Get Skill Version
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -82101,6 +96009,10 @@ Get Skill Version
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
 
 ### Returns
 
@@ -82205,7 +96117,7 @@ Delete Skill Version
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -82258,6 +96170,10 @@ Delete Skill Version
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
 
 ### Returns
 
@@ -82498,7 +96414,7 @@ Create User Profile
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -82551,6 +96467,10 @@ Create User Profile
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
 
 ### Returns
 
@@ -82674,7 +96594,7 @@ List User Profiles
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -82727,6 +96647,10 @@ List User Profiles
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
 
 ### Returns
 
@@ -82841,7 +96765,7 @@ Get User Profile
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -82894,6 +96818,10 @@ Get User Profile
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
 
 ### Returns
 
@@ -83025,7 +96953,7 @@ Update User Profile
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -83078,6 +97006,10 @@ Update User Profile
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
 
 ### Returns
 
@@ -83187,7 +97119,7 @@ Create Enrollment URL
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -83240,6 +97172,10 @@ Create Enrollment URL
     - `:"cache-diagnosis-2026-04-07"`
 
     - `:"thinking-token-count-2026-05-13"`
+
+    - `:"server-side-fallback-2026-06-01"`
+
+    - `:"fallback-credit-2026-06-01"`
 
 ### Returns
 
@@ -83395,7 +97331,7 @@ puts(beta_user_profile_enrollment_url)
 
       - `id: String`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: String`
 
@@ -83409,7 +97345,7 @@ puts(beta_user_profile_enrollment_url)
 
       - `id: String`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: String`
 
@@ -83423,7 +97359,7 @@ puts(beta_user_profile_enrollment_url)
 
       - `id: String`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: String`
 
@@ -83437,7 +97373,7 @@ puts(beta_user_profile_enrollment_url)
 
       - `id: String`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: String`
 
@@ -83451,7 +97387,7 @@ puts(beta_user_profile_enrollment_url)
 
       - `id: String`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: String`
 
@@ -83465,7 +97401,7 @@ puts(beta_user_profile_enrollment_url)
 
       - `id: String`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: String`
 
@@ -83479,7 +97415,7 @@ puts(beta_user_profile_enrollment_url)
 
       - `id: String`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: String`
 
@@ -83493,7 +97429,7 @@ puts(beta_user_profile_enrollment_url)
 
       - `id: String`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: String`
 
@@ -83507,7 +97443,7 @@ puts(beta_user_profile_enrollment_url)
 
       - `id: String`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: String`
 
@@ -83521,7 +97457,7 @@ puts(beta_user_profile_enrollment_url)
 
       - `id: String`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: String`
 
@@ -83535,7 +97471,7 @@ puts(beta_user_profile_enrollment_url)
 
       - `id: String`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: String`
 
@@ -83549,9 +97485,13 @@ puts(beta_user_profile_enrollment_url)
 
       - `id: String`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: String`
+
+      - `session_thread_id: String`
+
+        ID of the session thread this event refers to.
 
       - `type: :"session.thread_created"`
 
@@ -83563,9 +97503,13 @@ puts(beta_user_profile_enrollment_url)
 
       - `id: String`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: String`
+
+      - `session_thread_id: String`
+
+        ID of the session thread this event refers to.
 
       - `type: :"session.thread_idled"`
 
@@ -83577,9 +97521,13 @@ puts(beta_user_profile_enrollment_url)
 
       - `id: String`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: String`
+
+      - `session_thread_id: String`
+
+        ID of the session thread this event refers to.
 
       - `type: :"session.thread_terminated"`
 
@@ -83591,7 +97539,7 @@ puts(beta_user_profile_enrollment_url)
 
       - `id: String`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: String`
 
@@ -83605,7 +97553,7 @@ puts(beta_user_profile_enrollment_url)
 
       - `id: String`
 
-        ID of the resource that triggered the event.
+        ID of the vault that triggered the event.
 
       - `organization_id: String`
 
@@ -83619,7 +97567,7 @@ puts(beta_user_profile_enrollment_url)
 
       - `id: String`
 
-        ID of the resource that triggered the event.
+        ID of the vault that triggered the event.
 
       - `organization_id: String`
 
@@ -83633,7 +97581,7 @@ puts(beta_user_profile_enrollment_url)
 
       - `id: String`
 
-        ID of the resource that triggered the event.
+        ID of the vault that triggered the event.
 
       - `organization_id: String`
 
@@ -83647,7 +97595,7 @@ puts(beta_user_profile_enrollment_url)
 
       - `id: String`
 
-        ID of the resource that triggered the event.
+        ID of the vault credential that triggered the event.
 
       - `organization_id: String`
 
@@ -83665,7 +97613,7 @@ puts(beta_user_profile_enrollment_url)
 
       - `id: String`
 
-        ID of the resource that triggered the event.
+        ID of the vault credential that triggered the event.
 
       - `organization_id: String`
 
@@ -83683,7 +97631,7 @@ puts(beta_user_profile_enrollment_url)
 
       - `id: String`
 
-        ID of the resource that triggered the event.
+        ID of the vault credential that triggered the event.
 
       - `organization_id: String`
 
@@ -83701,7 +97649,7 @@ puts(beta_user_profile_enrollment_url)
 
       - `id: String`
 
-        ID of the resource that triggered the event.
+        ID of the vault credential that triggered the event.
 
       - `organization_id: String`
 
@@ -83729,7 +97677,7 @@ puts(beta_user_profile_enrollment_url)
 
     - `id: String`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `organization_id: String`
 
@@ -83743,7 +97691,7 @@ puts(beta_user_profile_enrollment_url)
 
     - `id: String`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `organization_id: String`
 
@@ -83757,7 +97705,7 @@ puts(beta_user_profile_enrollment_url)
 
     - `id: String`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `organization_id: String`
 
@@ -83771,7 +97719,7 @@ puts(beta_user_profile_enrollment_url)
 
     - `id: String`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `organization_id: String`
 
@@ -83785,7 +97733,7 @@ puts(beta_user_profile_enrollment_url)
 
     - `id: String`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `organization_id: String`
 
@@ -83799,7 +97747,7 @@ puts(beta_user_profile_enrollment_url)
 
     - `id: String`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `organization_id: String`
 
@@ -83813,7 +97761,7 @@ puts(beta_user_profile_enrollment_url)
 
     - `id: String`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `organization_id: String`
 
@@ -83827,7 +97775,7 @@ puts(beta_user_profile_enrollment_url)
 
     - `id: String`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `organization_id: String`
 
@@ -83841,7 +97789,7 @@ puts(beta_user_profile_enrollment_url)
 
     - `id: String`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `organization_id: String`
 
@@ -83855,7 +97803,7 @@ puts(beta_user_profile_enrollment_url)
 
     - `id: String`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `organization_id: String`
 
@@ -83869,7 +97817,7 @@ puts(beta_user_profile_enrollment_url)
 
     - `id: String`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `organization_id: String`
 
@@ -83883,9 +97831,13 @@ puts(beta_user_profile_enrollment_url)
 
     - `id: String`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `organization_id: String`
+
+    - `session_thread_id: String`
+
+      ID of the session thread this event refers to.
 
     - `type: :"session.thread_created"`
 
@@ -83897,9 +97849,13 @@ puts(beta_user_profile_enrollment_url)
 
     - `id: String`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `organization_id: String`
+
+    - `session_thread_id: String`
+
+      ID of the session thread this event refers to.
 
     - `type: :"session.thread_idled"`
 
@@ -83911,9 +97867,13 @@ puts(beta_user_profile_enrollment_url)
 
     - `id: String`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `organization_id: String`
+
+    - `session_thread_id: String`
+
+      ID of the session thread this event refers to.
 
     - `type: :"session.thread_terminated"`
 
@@ -83925,7 +97885,7 @@ puts(beta_user_profile_enrollment_url)
 
     - `id: String`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `organization_id: String`
 
@@ -83939,7 +97899,7 @@ puts(beta_user_profile_enrollment_url)
 
     - `id: String`
 
-      ID of the resource that triggered the event.
+      ID of the vault that triggered the event.
 
     - `organization_id: String`
 
@@ -83953,7 +97913,7 @@ puts(beta_user_profile_enrollment_url)
 
     - `id: String`
 
-      ID of the resource that triggered the event.
+      ID of the vault that triggered the event.
 
     - `organization_id: String`
 
@@ -83967,7 +97927,7 @@ puts(beta_user_profile_enrollment_url)
 
     - `id: String`
 
-      ID of the resource that triggered the event.
+      ID of the vault that triggered the event.
 
     - `organization_id: String`
 
@@ -83981,7 +97941,7 @@ puts(beta_user_profile_enrollment_url)
 
     - `id: String`
 
-      ID of the resource that triggered the event.
+      ID of the vault credential that triggered the event.
 
     - `organization_id: String`
 
@@ -83999,7 +97959,7 @@ puts(beta_user_profile_enrollment_url)
 
     - `id: String`
 
-      ID of the resource that triggered the event.
+      ID of the vault credential that triggered the event.
 
     - `organization_id: String`
 
@@ -84017,7 +97977,7 @@ puts(beta_user_profile_enrollment_url)
 
     - `id: String`
 
-      ID of the resource that triggered the event.
+      ID of the vault credential that triggered the event.
 
     - `organization_id: String`
 
@@ -84035,7 +97995,7 @@ puts(beta_user_profile_enrollment_url)
 
     - `id: String`
 
-      ID of the resource that triggered the event.
+      ID of the vault credential that triggered the event.
 
     - `organization_id: String`
 
@@ -84055,7 +98015,7 @@ puts(beta_user_profile_enrollment_url)
 
   - `id: String`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `organization_id: String`
 
@@ -84071,7 +98031,7 @@ puts(beta_user_profile_enrollment_url)
 
   - `id: String`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `organization_id: String`
 
@@ -84087,7 +98047,7 @@ puts(beta_user_profile_enrollment_url)
 
   - `id: String`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `organization_id: String`
 
@@ -84103,7 +98063,7 @@ puts(beta_user_profile_enrollment_url)
 
   - `id: String`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `organization_id: String`
 
@@ -84119,7 +98079,7 @@ puts(beta_user_profile_enrollment_url)
 
   - `id: String`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `organization_id: String`
 
@@ -84135,7 +98095,7 @@ puts(beta_user_profile_enrollment_url)
 
   - `id: String`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `organization_id: String`
 
@@ -84151,7 +98111,7 @@ puts(beta_user_profile_enrollment_url)
 
   - `id: String`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `organization_id: String`
 
@@ -84167,7 +98127,7 @@ puts(beta_user_profile_enrollment_url)
 
   - `id: String`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `organization_id: String`
 
@@ -84183,7 +98143,7 @@ puts(beta_user_profile_enrollment_url)
 
   - `id: String`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `organization_id: String`
 
@@ -84199,7 +98159,7 @@ puts(beta_user_profile_enrollment_url)
 
   - `id: String`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `organization_id: String`
 
@@ -84215,7 +98175,7 @@ puts(beta_user_profile_enrollment_url)
 
   - `id: String`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `organization_id: String`
 
@@ -84231,7 +98191,7 @@ puts(beta_user_profile_enrollment_url)
 
   - `id: String`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `organization_id: String`
 
@@ -84247,9 +98207,13 @@ puts(beta_user_profile_enrollment_url)
 
   - `id: String`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `organization_id: String`
+
+  - `session_thread_id: String`
+
+    ID of the session thread this event refers to.
 
   - `type: :"session.thread_created"`
 
@@ -84263,9 +98227,13 @@ puts(beta_user_profile_enrollment_url)
 
   - `id: String`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `organization_id: String`
+
+  - `session_thread_id: String`
+
+    ID of the session thread this event refers to.
 
   - `type: :"session.thread_idled"`
 
@@ -84279,9 +98247,13 @@ puts(beta_user_profile_enrollment_url)
 
   - `id: String`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `organization_id: String`
+
+  - `session_thread_id: String`
+
+    ID of the session thread this event refers to.
 
   - `type: :"session.thread_terminated"`
 
@@ -84295,7 +98267,7 @@ puts(beta_user_profile_enrollment_url)
 
   - `id: String`
 
-    ID of the resource that triggered the event.
+    ID of the vault that triggered the event.
 
   - `organization_id: String`
 
@@ -84311,7 +98283,7 @@ puts(beta_user_profile_enrollment_url)
 
   - `id: String`
 
-    ID of the resource that triggered the event.
+    ID of the vault that triggered the event.
 
   - `organization_id: String`
 
@@ -84327,7 +98299,7 @@ puts(beta_user_profile_enrollment_url)
 
   - `id: String`
 
-    ID of the resource that triggered the event.
+    ID of the vault credential that triggered the event.
 
   - `organization_id: String`
 
@@ -84347,7 +98319,7 @@ puts(beta_user_profile_enrollment_url)
 
   - `id: String`
 
-    ID of the resource that triggered the event.
+    ID of the vault credential that triggered the event.
 
   - `organization_id: String`
 
@@ -84367,7 +98339,7 @@ puts(beta_user_profile_enrollment_url)
 
   - `id: String`
 
-    ID of the resource that triggered the event.
+    ID of the vault credential that triggered the event.
 
   - `organization_id: String`
 
@@ -84387,7 +98359,7 @@ puts(beta_user_profile_enrollment_url)
 
   - `id: String`
 
-    ID of the resource that triggered the event.
+    ID of the vault credential that triggered the event.
 
   - `organization_id: String`
 
@@ -84407,7 +98379,7 @@ puts(beta_user_profile_enrollment_url)
 
   - `id: String`
 
-    ID of the resource that triggered the event.
+    ID of the vault that triggered the event.
 
   - `organization_id: String`
 
@@ -84435,7 +98407,7 @@ puts(beta_user_profile_enrollment_url)
 
       - `id: String`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: String`
 
@@ -84449,7 +98421,7 @@ puts(beta_user_profile_enrollment_url)
 
       - `id: String`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: String`
 
@@ -84463,7 +98435,7 @@ puts(beta_user_profile_enrollment_url)
 
       - `id: String`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: String`
 
@@ -84477,7 +98449,7 @@ puts(beta_user_profile_enrollment_url)
 
       - `id: String`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: String`
 
@@ -84491,7 +98463,7 @@ puts(beta_user_profile_enrollment_url)
 
       - `id: String`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: String`
 
@@ -84505,7 +98477,7 @@ puts(beta_user_profile_enrollment_url)
 
       - `id: String`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: String`
 
@@ -84519,7 +98491,7 @@ puts(beta_user_profile_enrollment_url)
 
       - `id: String`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: String`
 
@@ -84533,7 +98505,7 @@ puts(beta_user_profile_enrollment_url)
 
       - `id: String`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: String`
 
@@ -84547,7 +98519,7 @@ puts(beta_user_profile_enrollment_url)
 
       - `id: String`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: String`
 
@@ -84561,7 +98533,7 @@ puts(beta_user_profile_enrollment_url)
 
       - `id: String`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: String`
 
@@ -84575,7 +98547,7 @@ puts(beta_user_profile_enrollment_url)
 
       - `id: String`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: String`
 
@@ -84589,9 +98561,13 @@ puts(beta_user_profile_enrollment_url)
 
       - `id: String`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: String`
+
+      - `session_thread_id: String`
+
+        ID of the session thread this event refers to.
 
       - `type: :"session.thread_created"`
 
@@ -84603,9 +98579,13 @@ puts(beta_user_profile_enrollment_url)
 
       - `id: String`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: String`
+
+      - `session_thread_id: String`
+
+        ID of the session thread this event refers to.
 
       - `type: :"session.thread_idled"`
 
@@ -84617,9 +98597,13 @@ puts(beta_user_profile_enrollment_url)
 
       - `id: String`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: String`
+
+      - `session_thread_id: String`
+
+        ID of the session thread this event refers to.
 
       - `type: :"session.thread_terminated"`
 
@@ -84631,7 +98615,7 @@ puts(beta_user_profile_enrollment_url)
 
       - `id: String`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: String`
 
@@ -84645,7 +98629,7 @@ puts(beta_user_profile_enrollment_url)
 
       - `id: String`
 
-        ID of the resource that triggered the event.
+        ID of the vault that triggered the event.
 
       - `organization_id: String`
 
@@ -84659,7 +98643,7 @@ puts(beta_user_profile_enrollment_url)
 
       - `id: String`
 
-        ID of the resource that triggered the event.
+        ID of the vault that triggered the event.
 
       - `organization_id: String`
 
@@ -84673,7 +98657,7 @@ puts(beta_user_profile_enrollment_url)
 
       - `id: String`
 
-        ID of the resource that triggered the event.
+        ID of the vault that triggered the event.
 
       - `organization_id: String`
 
@@ -84687,7 +98671,7 @@ puts(beta_user_profile_enrollment_url)
 
       - `id: String`
 
-        ID of the resource that triggered the event.
+        ID of the vault credential that triggered the event.
 
       - `organization_id: String`
 
@@ -84705,7 +98689,7 @@ puts(beta_user_profile_enrollment_url)
 
       - `id: String`
 
-        ID of the resource that triggered the event.
+        ID of the vault credential that triggered the event.
 
       - `organization_id: String`
 
@@ -84723,7 +98707,7 @@ puts(beta_user_profile_enrollment_url)
 
       - `id: String`
 
-        ID of the resource that triggered the event.
+        ID of the vault credential that triggered the event.
 
       - `organization_id: String`
 
@@ -84741,7 +98725,7 @@ puts(beta_user_profile_enrollment_url)
 
       - `id: String`
 
-        ID of the resource that triggered the event.
+        ID of the vault credential that triggered the event.
 
       - `organization_id: String`
 

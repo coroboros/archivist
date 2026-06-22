@@ -6,11 +6,11 @@ generated: true
 ---
 # Fast mode (research preview)
 
-Higher output speed for supported Claude Opus models, delivering significantly faster token generation for latency-sensitive and agentic workflows.
+Get up to 2.5x higher output tokens per second from Claude Opus models.
 
 ---
 
-Fast mode provides significantly faster output token generation for Claude Opus 4.8, Claude Opus 4.7, and Claude Opus 4.6 at premium pricing. Set `speed: "fast"` in your API request to opt in. Fast mode delivers up to 2.5x higher output tokens per second from the same model.
+Fast mode delivers up to 2.5x higher output tokens per second from Claude Opus 4.8, Claude Opus 4.7, and Claude Opus 4.6 at premium pricing. Set `speed: "fast"` with the `fast-mode-2026-02-01` beta header on your request to opt in.
 
 <Note>
 Fast mode is in research preview. Contact your account manager to request access. If you do not have an account manager, [join the waitlist](https://claude.com/fast-mode) for fast mode.
@@ -29,7 +29,7 @@ Fast mode is supported on the following models:
 - Claude Opus 4.6 (claude-opus-4-6)
 
 <Note>
-Fast mode for Claude Opus 4.8 launches as a research preview on the Claude API, including Claude Managed Agents, only. It is not available on third-party platforms, including Vertex AI, Amazon Bedrock, and Microsoft Foundry.
+Fast mode for Claude Opus 4.8 launches as a research preview on the Claude API, including [Claude Managed Agents](../managed-agents/managed-agents-overview.md), only. It is not available on third-party platforms, including Vertex AI, Amazon Bedrock, and Microsoft Foundry.
 </Note>
 
 <Warning>
@@ -43,6 +43,7 @@ Fast mode runs the same model with a faster inference configuration. There is no
 - Up to 2.5x higher output tokens per second compared to standard speed
 - Speed benefits are focused on output tokens per second (OTPS), not time to first token (TTFT)
 - Same model weights and behavior (not a different model)
+- Compatible with [streaming](./build-with-claude-streaming.md), where the OTPS gain is most visible
 
 ## Basic usage
 
@@ -67,7 +68,8 @@ curl https://api.anthropic.com/v1/messages \
 ```bash CLI
 ant beta:messages create \
   --beta fast-mode-2026-02-01 \
-  --transform 'content.0.text' --raw-output <<'YAML'
+  --transform 'content.0.text' \
+  --raw-output <<'YAML'
 model: claude-opus-4-8
 max_tokens: 4096
 speed: fast
@@ -77,7 +79,7 @@ messages:
 YAML
 ```
 
-```python Python nocheck hidelines={1..2}
+```python Python hidelines={1..2}
 import anthropic
 
 client = anthropic.Anthropic()
@@ -237,8 +239,8 @@ Fast mode is priced at a per-model multiplier on standard rates across the full 
 
 | Model | Input | Output |
 |:------|:------|:-------|
-| Claude Opus 4.6 / Claude Opus 4.7 | $30 / MTok | $150 / MTok |
 | Claude Opus 4.8 | $10 / MTok | $50 / MTok |
+| Claude Opus 4.7 / Claude Opus 4.6 | $30 / MTok | $150 / MTok |
 
 Fast mode pricing stacks with other pricing modifiers:
 
@@ -266,7 +268,7 @@ For tier-specific rate limits, see the [rate limits page](../api/api-rate-limits
 
 ## Checking which speed was used
 
-The response `usage` object includes a `speed` field that indicates which speed was used, either `"fast"` or `"standard"`:
+The response `usage` object includes a `speed` field that indicates which speed was used, either `"fast"` or `"standard"`. Fast mode doesn't silently fall back to standard speed on rate limits or capacity (you'll get a `429` or `529` instead), so when you request `speed: "fast"` on a supported model, `usage.speed` is `"fast"`.
 
 <CodeGroup>
 ```bash cURL
@@ -284,8 +286,10 @@ curl https://api.anthropic.com/v1/messages \
 ```
 
 ```bash CLI
-ant beta:messages create --beta fast-mode-2026-02-01 \
-  --transform usage.speed --raw-output <<'YAML'
+ant beta:messages create \
+  --beta fast-mode-2026-02-01 \
+  --transform usage.speed \
+  --raw-output <<'YAML'
 model: claude-opus-4-8
 max_tokens: 1024
 speed: fast
@@ -295,7 +299,11 @@ messages:
 YAML
 ```
 
-```python Python nocheck
+```python Python hidelines={1..2}
+import anthropic
+
+client = anthropic.Anthropic()
+
 response = client.beta.messages.create(
     model="claude-opus-4-8",
     max_tokens=1024,
@@ -307,7 +315,11 @@ response = client.beta.messages.create(
 print(response.usage.speed)  # "fast" or "standard"
 ```
 
-```typescript TypeScript
+```typescript TypeScript hidelines={1..2}
+import Anthropic from "@anthropic-ai/sdk";
+
+const client = new Anthropic();
+
 const response = await client.beta.messages.create({
   model: "claude-opus-4-8",
   max_tokens: 1024,
@@ -409,7 +421,11 @@ $response = $client->beta->messages->create(
 echo $response->usage->speed;  // "fast" or "standard"
 ```
 
-```ruby Ruby nocheck
+```ruby Ruby hidelines={1..2}
+require "anthropic"
+
+client = Anthropic::Client.new
+
 response = client.beta.messages.create(
   model: "claude-opus-4-8",
   max_tokens: 1024,
@@ -445,7 +461,7 @@ To track fast mode usage and costs across your organization, see the [Usage and 
 
 ### Automatic retries
 
-When fast mode rate limits are exceeded, the API returns a `429` error with a `retry-after` header. The Anthropic SDKs automatically retry these requests up to 2 times by default (configurable via `max_retries`), waiting for the server-specified delay before each retry. Since fast mode uses continuous token replenishment, the `retry-after` delay is typically short and requests succeed once capacity is available.
+When fast mode rate limits are exceeded, the API returns a `429` error with a `retry-after` header. The Anthropic SDKs automatically retry these requests up to 2 times by default (configurable with `max_retries`), waiting for the server-specified delay before each retry. Because fast mode uses continuous token replenishment, the `retry-after` delay is typically short and requests succeed once capacity is available.
 
 ### Falling back to standard speed
 
@@ -455,7 +471,7 @@ If you'd prefer to fall back to standard speed rather than wait for fast mode ca
 Falling back from fast to standard speed will result in a [prompt cache](./build-with-claude-prompt-caching.md) miss. Requests at different speeds do not share cached prefixes.
 </Note>
 
-Since setting `max_retries` to `0` also disables retries for other transient errors (overloaded, internal server errors), the examples below re-issue the original request with default retries for those cases.
+Because setting `max_retries` to `0` also disables retries for other transient errors (overloaded, internal server errors), the following examples reissue the original request with default retries for those cases.
 
 <CodeGroup>
 ```bash CLI
@@ -497,7 +513,7 @@ YAML
 )
 ```
 
-```python Python nocheck hidelines={1..2}
+```python Python hidelines={1..2}
 import anthropic
 
 client = anthropic.Anthropic()
@@ -830,14 +846,17 @@ message = create_message_with_fast_fallback(
 
 ## Next steps
 
-<CardGroup>
-  <Card title="Pricing" icon="dollar-sign" href="../about-claude/about-claude-pricing.md">
-    View detailed fast mode pricing information.
+<CardGroup cols={2}>
+  <Card title="Structured outputs" icon="code-brackets" href="./build-with-claude-structured-outputs.md">
+    Get validated JSON results from agent workflows.
   </Card>
-  <Card title="Rate limits" icon="gauge" href="../api/api-rate-limits.md">
-    Check rate limit tiers for fast mode.
+  <Card title="Pricing" icon="calculator" href="../about-claude/about-claude-pricing.md">
+    Learn about Anthropic's pricing structure for models and features.
   </Card>
-  <Card title="Effort parameter" icon="sliders" href="./build-with-claude-effort.md">
-    Control token usage with the effort parameter.
+  <Card title="Effort" icon="gauge" href="./build-with-claude-effort.md">
+    Control how many tokens Claude uses when responding with the effort parameter, trading off between response thoroughness and token efficiency.
+  </Card>
+  <Card title="Streaming messages" icon="arrow-right" href="./build-with-claude-streaming.md">
+    Stream Messages API responses incrementally with server-sent events, including text, tool use, and extended thinking deltas.
   </Card>
 </CardGroup>

@@ -78,7 +78,7 @@ holds at most two non-archived certificates.
 curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID/certificates \
     -H 'Content-Type: application/json' \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_WIF_BEARER_TOKEN" \
+    -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN" \
     -d '{
           "ca_certificate_pem": "-----BEGIN CERTIFICATE-----\\nMIIBexampleEXAMPLEexampleEXAMPLEexampleEXAMPLEexampleEXAMPLEexa\\n...illustrative placeholder, not a real certificate...\\n-----END CERTIFICATE-----\\n"
         }'
@@ -161,7 +161,7 @@ Retrieve a single certificate registered on a tunnel by ID.
 ```http
 curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID/certificates/$CERTIFICATE_ID \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_WIF_BEARER_TOKEN"
+    -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
 ```
 
 #### Response
@@ -261,7 +261,7 @@ Archived certificates are excluded unless `include_archived` is set.
 ```http
 curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID/certificates \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_WIF_BEARER_TOKEN"
+    -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
 ```
 
 #### Response
@@ -351,7 +351,7 @@ certificate is added.
 curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID/certificates/$CERTIFICATE_ID/archive \
     -X POST \
     -H 'anthropic-version: 2023-06-01' \
-    -H "Authorization: Bearer $ANTHROPIC_WIF_BEARER_TOKEN"
+    -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
 ```
 
 #### Response
@@ -444,45 +444,39 @@ curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID/certificates/
 
 ### Tunnel Certificate List Response
 
-- `TunnelCertificateListResponse object { data, next_page }`
+- `TunnelCertificateListResponse object { id, archived_at, created_at, 4 more }`
 
-  - `data: array of object { id, archived_at, created_at, 4 more }`
+  - `id: string`
 
-    - `id: string`
+    ID of the Tunnel Certificate.
 
-      ID of the Tunnel Certificate.
+  - `archived_at: string`
 
-    - `archived_at: string`
+    RFC 3339 datetime string indicating when the certificate was archived, or
+    `null` if it is not archived.
 
-      RFC 3339 datetime string indicating when the certificate was archived, or
-      `null` if it is not archived.
+  - `created_at: string`
 
-    - `created_at: string`
+    RFC 3339 datetime string indicating when the certificate was registered.
 
-      RFC 3339 datetime string indicating when the certificate was registered.
+  - `expires_at: string`
 
-    - `expires_at: string`
+    RFC 3339 datetime string indicating when the certificate expires, or
+    `null` if it does not expire.
 
-      RFC 3339 datetime string indicating when the certificate expires, or
-      `null` if it does not expire.
+  - `fingerprint: string`
 
-    - `fingerprint: string`
+    The certificate's SHA-256 fingerprint, as a lowercase hex string.
 
-      The certificate's SHA-256 fingerprint, as a lowercase hex string.
+  - `tunnel_id: string`
 
-    - `tunnel_id: string`
+    ID of the Tunnel this certificate is registered against.
 
-      ID of the Tunnel this certificate is registered against.
+  - `type: "tunnel_certificate"`
 
-    - `type: "tunnel_certificate"`
+    Object type. Always `tunnel_certificate` for Tunnel Certificates.
 
-      Object type. Always `tunnel_certificate` for Tunnel Certificates.
-
-      - `"tunnel_certificate"`
-
-  - `next_page: string`
-
-    Opaque cursor for the next page, or `null` if there are no more results.
+    - `"tunnel_certificate"`
 
 ### Tunnel Certificate Archive Response
 

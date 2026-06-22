@@ -70,7 +70,9 @@ python3 -c "import boto3; print(boto3.client('iam').get_outbound_web_identity_fe
 
 ### Configure Anthropic
 
-Follow the [setup walkthrough](./manage-claude-workload-identity-federation.md#set-up-federation) to register a federation issuer, create an Anthropic service account, and create a federation rule in the Claude Console. Use these STS-specific values.
+In the Claude Console, open **Settings → Workload identity**, click **Connect workload**, and select the **AWS** tile. The wizard walks you through registering the issuer, creating a service account, and creating a federation rule.
+
+The wizard creates these resources for you. Use the following values whether you enter them in the wizard or send them to the [Admin API](./manage-claude-wif-admin-api.md):
 
 **Federation issuer:** Register the per-account STS issuer URL you copied in the prior step. It exposes a public JWKS endpoint, so use discovery mode.
 
@@ -78,7 +80,7 @@ Follow the [setup walkthrough](./manage-claude-workload-identity-federation.md#s
 {
   "name": "aws-sts",
   "issuer_url": "https://<uuid>.tokens.sts.global.api.aws",
-  "jwks_source": "discovery"
+  "jwks": { "type": "discovery" }
 }
 ```
 
@@ -567,7 +569,9 @@ This path additionally requires an EKS cluster with an [IAM OIDC provider enable
 
 ### Configure Anthropic
 
-Follow the [setup walkthrough](./manage-claude-workload-identity-federation.md#set-up-federation) to register a federation issuer, create an Anthropic service account, and create a federation rule in the Claude Console. Use these EKS-specific values.
+In the Claude Console, open **Settings → Workload identity**, click **Connect workload**, and select the **AWS** tile. The wizard walks you through registering the issuer, creating a service account, and creating a federation rule.
+
+The wizard creates these resources for you. Use the following values whether you enter them in the wizard or send them to the [Admin API](./manage-claude-wif-admin-api.md):
 
 **Federation issuer:** EKS issuers expose a public JWKS endpoint, so use discovery mode. The issuer URL must exactly match the token's `iss` claim. Register one issuer per cluster.
 
@@ -575,7 +579,7 @@ Follow the [setup walkthrough](./manage-claude-workload-identity-federation.md#s
 {
   "name": "prod-eks-uswest2",
   "issuer_url": "https://oidc.eks.us-west-2.amazonaws.com/id/6FA42E7BFDE8549CB...",
-  "jwks_source": "discovery"
+  "jwks": { "type": "discovery" }
 }
 ```
 
@@ -855,7 +859,7 @@ A `subject_prefix` of `arn:aws:iam::123456789012:role/*` matches every IAM role 
 Lock the rule's `match` block to the narrowest scope that fits your use case:
 
 - **Pin the full role ARN:** Use `subject_prefix: "arn:aws:iam::<account>:role/<role-name>"` with no trailing `*` so other roles in the account do not match.
-- **Pin the account ID:** Match the `aws_account` field of the token's `https://sts.amazonaws.com/` claim via the `claims` map or a CEL `condition` as a defense-in-depth check against a misconfigured prefix.
+- **Pin the account ID:** Match the `aws_account` field of the token's `https://sts.amazonaws.com/` claim with the `claims` map or a CEL `condition` as a defense-in-depth check against a misconfigured prefix.
 - **Pin namespace and service account on EKS:** Use the exact `system:serviceaccount:<namespace>:<name>` value with no `*` after the `system:serviceaccount:` prefix.
 - **Use a separate rule per environment:** Create distinct rules for production, staging, and development workloads rather than widening one prefix to cover them all.
 

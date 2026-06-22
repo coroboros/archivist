@@ -65,19 +65,20 @@ Each session runs in a fresh Anthropic-managed VM with your repository cloned. T
 
 Cloud sessions start from a fresh clone of your repository. Anything committed to the repo is available. Anything you've installed or configured only on your own machine is not.
 
-|                                                                       | Available in cloud sessions | Why                                                                                                                                              |
-| :-------------------------------------------------------------------- | :-------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------- |
-| Your repo's `CLAUDE.md`                                               | Yes                         | Part of the clone                                                                                                                                |
-| Your repo's `.claude/settings.json` hooks                             | Yes                         | Part of the clone                                                                                                                                |
-| Your repo's `.mcp.json` MCP servers                                   | Yes                         | Part of the clone                                                                                                                                |
-| Your repo's `.claude/rules/`                                          | Yes                         | Part of the clone                                                                                                                                |
-| Your repo's `.claude/skills/`, `.claude/agents/`, `.claude/commands/` | Yes                         | Part of the clone                                                                                                                                |
-| Plugins declared in `.claude/settings.json`                           | Yes                         | Installed at session start from the [marketplace](./code-plugin-marketplaces.md) you declared. Requires network access to reach the marketplace source |
-| Your user `~/.claude/CLAUDE.md`                                       | No                          | Lives on your machine, not in the repo                                                                                                           |
-| Plugins enabled only in your user settings                            | No                          | User-scoped `enabledPlugins` lives in `~/.claude/settings.json`. Declare them in the repo's `.claude/settings.json` instead                      |
-| MCP servers you added with `claude mcp add`                           | No                          | Those write to your local user config, not the repo. Declare the server in [`.mcp.json`](./code-mcp.md#project-scope) instead                          |
-| Static API tokens and credentials                                     | No                          | No dedicated secrets store exists yet. See below                                                                                                 |
-| Interactive auth like AWS SSO                                         | No                          | Not supported. SSO requires browser-based login that can't run in a cloud session                                                                |
+|                                                                           | Available in cloud sessions | Why                                                                                                                                                                        |
+| :------------------------------------------------------------------------ | :-------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Your repo's `CLAUDE.md`                                                   | Yes                         | Part of the clone                                                                                                                                                          |
+| Your repo's `.claude/settings.json` hooks                                 | Yes                         | Part of the clone                                                                                                                                                          |
+| Your repo's `.mcp.json` MCP servers                                       | Yes                         | Part of the clone                                                                                                                                                          |
+| Your repo's `.claude/rules/`                                              | Yes                         | Part of the clone                                                                                                                                                          |
+| Your repo's `.claude/skills/`, `.claude/agents/`, `.claude/commands/`     | Yes                         | Part of the clone                                                                                                                                                          |
+| Plugins declared in `.claude/settings.json`                               | Yes                         | Installed at session start from the [marketplace](./code-plugin-marketplaces.md) you declared. Requires network access to reach the marketplace source                           |
+| Your user `~/.claude/CLAUDE.md`                                           | No                          | Lives on your machine, not in the repo                                                                                                                                     |
+| Your user `~/.claude/skills/`, `~/.claude/agents/`, `~/.claude/commands/` | No                          | Live on your machine, not in the repo. Commit them to the repo's `.claude/` directory instead. Skills you enable on claude.ai are loaded into cloud sessions automatically |
+| Plugins enabled only in your user settings                                | No                          | User-scoped `enabledPlugins` lives in `~/.claude/settings.json`. Declare them in the repo's `.claude/settings.json` instead                                                |
+| MCP servers you added with `claude mcp add`                               | No                          | Those write to your local user config, not the repo. Declare the server in [`.mcp.json`](./code-mcp.md#project-scope) instead                                                    |
+| Static API tokens and credentials                                         | No                          | No dedicated secrets store exists yet. See below                                                                                                                           |
+| Interactive auth like AWS SSO                                             | No                          | Not supported. SSO requires browser-based login that can't run in a cloud session                                                                                          |
 
 To make configuration available in cloud sessions, commit it to the repo. A dedicated secrets store is not yet available. Both environment variables and setup scripts are stored in the environment configuration, visible to anyone who can edit that environment. If you need secrets in a cloud session, add them as environment variables with that visibility in mind.
 
@@ -119,11 +120,13 @@ The `gh` CLI is not pre-installed. If you need a `gh` command the built-in tools
   </Step>
 </Steps>
 
-### Link artifacts back to the session
+### Link output back to the session
 
 Each cloud session has a transcript URL on claude.ai, and the session can read its own ID from the `CLAUDE_CODE_REMOTE_SESSION_ID` environment variable. Use this to put a traceable link in PR bodies, commit messages, Slack posts, or generated reports so a reviewer can open the run that produced them.
 
-The variable's value uses a `cse_` prefix, while the transcript URL path takes the same ID with a `session_` prefix. Substitute the prefix when building the link. The following command prints the URL:
+As of v2.1.179, commits that Claude creates in a web session include a `Claude-Session: <url>` git trailer, and PR bodies include the session URL on its own line. {/* min-version: 2.1.182 */}From v2.1.182, set [`attribution.sessionUrl`](./code-settings.md#attribution-settings) to `false` to omit the trailer and the PR-body link.
+
+To include the session link in something other than a commit or PR, such as a Slack message Claude posts or a report file it writes, have Claude run the following command and use its output. The command converts the `cse_` prefix in the environment variable's value to the `session_` prefix that the transcript URL expects:
 
 ```bash theme={null}
 echo "https://claude.ai/code/${CLAUDE_CODE_REMOTE_SESSION_ID/#cse_/session_}"
@@ -323,6 +326,7 @@ Environments run behind an HTTP/HTTPS network proxy for security and abuse preve
 * Protection against malicious requests
 * Rate limiting and abuse prevention
 * Content filtering for enhanced security
+* A DNS-level audit trail of requested hostnames
 
 ### Default allowed domains
 
@@ -695,7 +699,7 @@ For context management specifically:
 | `/context` | Yes                     | Shows what's currently in the context window                                                                             |
 | `/clear`   | No                      | Start a new session from the sidebar instead                                                                             |
 
-Auto-compaction runs automatically when the context window approaches capacity, the same as in the CLI. To trigger it earlier, set [`CLAUDE_AUTOCOMPACT_PCT_OVERRIDE`](./code-env-vars.md) in your [environment variables](#configure-your-environment). For example, `CLAUDE_AUTOCOMPACT_PCT_OVERRIDE=70` compacts at 70% capacity instead of the default \~95%. To change the effective window size for compaction calculations, use [`CLAUDE_CODE_AUTO_COMPACT_WINDOW`](./code-env-vars.md).
+Auto-compaction runs automatically when the context window approaches capacity. To trigger it earlier, set [`CLAUDE_AUTOCOMPACT_PCT_OVERRIDE`](./code-env-vars.md) in your [environment variables](#configure-your-environment). For example, `CLAUDE_AUTOCOMPACT_PCT_OVERRIDE=70` compacts at 70% capacity instead of waiting until the window is nearly full. To change the effective window size for compaction calculations, use [`CLAUDE_CODE_AUTO_COMPACT_WINDOW`](./code-env-vars.md).
 
 [Subagents](./code-sub-agents.md) work the same way they do locally. Claude can spawn them with the Task tool to offload research or parallel work into a separate context window, keeping the main conversation lighter. Subagents defined in your repo's `.claude/agents/` are picked up automatically. [Agent teams](./code-agent-teams.md) are off by default but can be enabled by adding `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1` to your [environment variables](#configure-your-environment).
 
