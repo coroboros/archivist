@@ -110,6 +110,18 @@ function buildFrontmatter(content, url, category) {
   return lines.join('\n');
 }
 
+// Read only the frontmatter region; mirrored API-reference pages run to multiple MB.
+async function readFileHead(filePath, length) {
+  const handle = await fs.open(filePath, 'r');
+  try {
+    const buffer = Buffer.alloc(length);
+    const { bytesRead } = await handle.read(buffer, 0, length, 0);
+    return buffer.toString('utf8', 0, bytesRead);
+  } finally {
+    await handle.close();
+  }
+}
+
 /**
  * The sitemap and `llms.txt` stopped listing live human-facing pages
  * (`test-and-evaluate`, `release-notes`, parts of `build-with-claude`) and the
@@ -131,9 +143,13 @@ async function collectRetentionSeeds() {
 
     for (const file of entries) {
       if (!file.endsWith('.md') || file.endsWith('-README.md')) continue;
-      const content = await fs.readFile(path.join(directoryPath, file), 'utf8');
-      const match = content.match(/^source:\s*"([^"]+)"/m);
-      if (match?.[1].startsWith(URL_PREFIX)) seeds.add(match[1]);
+      try {
+        const head = await readFileHead(path.join(directoryPath, file), 4096);
+        const match = head.match(/^source:\s*"([^"]+)"/m);
+        if (match?.[1].startsWith(URL_PREFIX)) seeds.add(match[1]);
+      } catch {
+        // Unreadable file — skip; a real removal still surfaces as a 404 at fetch.
+      }
     }
   }
 
@@ -273,15 +289,18 @@ async function fetchAllUrlsFromSitemap(seedUrls = []) {
     .filter((u) => RECOVERY_SECTIONS.some((s) => u.includes(s)))
     .map((u) => u.replace(RECOVERY_LOCALE_PREFIX, URL_PREFIX));
 
-  const filteredUrls = [...new Set([...enUrls, ...recoveredUrls, ...seedUrls])];
-
-  console.log(
-    `   ${filteredUrls.length} Claude Platform URLs (${enUrls.length} EN sitemap, +${recoveredUrls.length} locale-recovered, +${seedUrls.length} retained from mirror; deduped).`,
-  );
-
-  if (filteredUrls.length === 0) {
+  // Abort on an empty/garbage sitemap before retention seeds can mask it.
+  const sitemapUrls = [...new Set([...enUrls, ...recoveredUrls])];
+  if (sitemapUrls.length === 0) {
     throw new Error('No Claude Platform URLs found.');
   }
+
+  const retained = seedUrls.filter((u) => !PATHS_TO_IGNORE_REGEXP?.test(u));
+  const filteredUrls = [...new Set([...sitemapUrls, ...retained])];
+
+  console.log(
+    `   ${filteredUrls.length} Claude Platform URLs (${sitemapUrls.length} from sitemap, +${filteredUrls.length - sitemapUrls.length} retained from mirror).`,
+  );
 
   const filenamesByURLs = {};
 
