@@ -6,6 +6,14 @@
 
 - Added insight `docs/insights/claude-code-designing-loops-fable-5.md` — "Designing Loops with Fable 5" by Lance Martin ([@RLanceMartin](https://x.com/RLanceMartin)): self-correction loops (`/goal`, `Outcomes`, verifier sub-agents over self-critique) and memory as a cross-session outer loop (the fail → investigate → verify → distill → consult progression). Listed under Claude Code in `insights-README.md`; `docs/INDEX.md` regenerated.
 
+### Fixes
+
+- `update-platform-docs.js`: retain pages dropped from the upstream sitemap/`llms.txt` that still serve a live `.md` — re-seed discovery from mirrored `source:` URLs so only a real 404 removes a page. Fixes the 12h sync failing since 10/06/2026 (`test-and-evaluate` and `release-notes` tripped the deletion guard).
+
+### Configuration
+
+- `sync-docs.yml`: removed the failure-notification issue step (notified no one) and its `issues: write` permission.
+
 
 ## 🤖 v1.4.45 - 09/06/2026
 

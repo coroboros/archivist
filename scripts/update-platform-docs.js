@@ -111,6 +111,37 @@ function buildFrontmatter(content, url, category) {
 }
 
 /**
+ * The sitemap and `llms.txt` stopped listing live human-facing pages
+ * (`test-and-evaluate`, `release-notes`, parts of `build-with-claude`) and the
+ * locale recovery no longer covers them. Re-seed discovery from already-mirrored
+ * `source:` URLs so only a genuine 404 removes a page.
+ */
+async function collectRetentionSeeds() {
+  const seeds = new Set();
+
+  for (const docType of Object.keys(DOCS)) {
+    const directoryPath = path.join(DOCS_DIR, docType);
+
+    let entries;
+    try {
+      entries = await fs.readdir(directoryPath);
+    } catch {
+      continue;
+    }
+
+    for (const file of entries) {
+      if (!file.endsWith('.md') || file.endsWith('-README.md')) continue;
+      const content = await fs.readFile(path.join(directoryPath, file), 'utf8');
+      const match = content.match(/^source:\s*"([^"]+)"/m);
+      if (match?.[1].startsWith(URL_PREFIX)) seeds.add(match[1]);
+    }
+  }
+
+  console.log(`   -> ${seeds.size} retention seeds collected from the existing mirror.`);
+  return [...seeds];
+}
+
+/**
  * Removes previously generated files and directories to ensure a clean build.
  */
 async function cleanPreviousBuild() {
@@ -215,7 +246,7 @@ function extractCategory(url, prefix = URL_PREFIX) {
 /**
  * Fetches all URLs from the site's sitemap and filters for the target documentation.
  */
-async function fetchAllUrlsFromSitemap() {
+async function fetchAllUrlsFromSitemap(seedUrls = []) {
   console.log('🗺️ 2. Fetching all URLs from the sitemap...');
   const response = await fetch(SITEMAP_URL, {
     headers: {
@@ -242,10 +273,10 @@ async function fetchAllUrlsFromSitemap() {
     .filter((u) => RECOVERY_SECTIONS.some((s) => u.includes(s)))
     .map((u) => u.replace(RECOVERY_LOCALE_PREFIX, URL_PREFIX));
 
-  const filteredUrls = [...new Set([...enUrls, ...recoveredUrls])];
+  const filteredUrls = [...new Set([...enUrls, ...recoveredUrls, ...seedUrls])];
 
   console.log(
-    `   ${filteredUrls.length} Claude Platform URLs found (${enUrls.length} via EN sitemap, +${filteredUrls.length - enUrls.length} recovered from ${RECOVERY_LOCALE_PREFIX}).`,
+    `   ${filteredUrls.length} Claude Platform URLs (${enUrls.length} EN sitemap, +${recoveredUrls.length} locale-recovered, +${seedUrls.length} retained from mirror; deduped).`,
   );
 
   if (filteredUrls.length === 0) {
@@ -417,9 +448,11 @@ async function pruneEmptySections(allUrls, filenamesByURLs) {
  * The main function that orchestrates the entire mirroring process.
  */
 async function run() {
+  // Seeds must be read before cleanPreviousBuild() wipes the section folders.
+  const seedUrls = await collectRetentionSeeds();
   await cleanPreviousBuild();
 
-  const filenamesByURLs = await fetchAllUrlsFromSitemap();
+  const filenamesByURLs = await fetchAllUrlsFromSitemap(seedUrls);
   const allUrls = Object.keys(filenamesByURLs);
 
   const writtenUrls = await downloadAndSaveDocs(allUrls, filenamesByURLs);
