@@ -1,5 +1,19 @@
 # Changelog
 
+## 🤖 v1.5.3 - 23/06/2026
+
+File Changes:
+
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-permissions.md`
+- Modified: `docs/code/code-skills.md`
+- Modified: `docs/managed-agents/managed-agents-README.md`
+- Modified: `docs/managed-agents/managed-agents-self-hosted-sandboxes.md`
+- Modified: `docs/release-notes/release-notes-README.md`
+- Modified: `docs/release-notes/release-notes-overview.md`
+- Added: `docs/code/code-typescript.md`
+
+
 ## 🤖 v1.5.2 - 23/06/2026
 
 File Changes:
