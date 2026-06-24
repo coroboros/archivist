@@ -1,5 +1,19 @@
 # Changelog
 
+## 🤖 v1.5.4 - 24/06/2026
+
+File Changes:
+
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-agent-view.md`
+- Modified: `docs/code/code-changelog.md`
+- Modified: `docs/code/code-claude-code-on-the-web.md`
+- Modified: `docs/code/code-overview.md`
+- Modified: `docs/code/code-permissions.md`
+- Modified: `docs/code/code-sessions.md`
+- Modified: `docs/code/code-slack.md`
+
+
 ## 🤖 v1.5.3 - 23/06/2026
 
 File Changes:
