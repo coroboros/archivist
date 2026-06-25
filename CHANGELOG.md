@@ -1,5 +1,39 @@
 # Changelog
 
+## 🤖 v1.5.7 - 25/06/2026
+
+File Changes:
+
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-admin-setup.md`
+- Modified: `docs/code/code-amazon-bedrock.md`
+- Modified: `docs/code/code-authentication.md`
+- Modified: `docs/code/code-changelog.md`
+- Modified: `docs/code/code-checkpointing.md`
+- Modified: `docs/code/code-claude-code-features.md`
+- Modified: `docs/code/code-costs.md`
+- Modified: `docs/code/code-discover-plugins.md`
+- Modified: `docs/code/code-env-vars.md`
+- Modified: `docs/code/code-errors.md`
+- Modified: `docs/code/code-fast-mode.md`
+- Modified: `docs/code/code-glossary.md`
+- Modified: `docs/code/code-hooks.md`
+- Modified: `docs/code/code-interactive-mode.md`
+- Modified: `docs/code/code-llm-gateway.md`
+- Modified: `docs/code/code-mcp.md`
+- Modified: `docs/code/code-model-config.md`
+- Modified: `docs/code/code-permissions.md`
+- Modified: `docs/code/code-plugins.md`
+- Modified: `docs/code/code-sandboxing.md`
+- Modified: `docs/code/code-server-managed-settings.md`
+- Modified: `docs/code/code-settings.md`
+- Modified: `docs/code/code-third-party-integrations.md`
+- Modified: `docs/code/code-typescript.md`
+- Added: `docs/code/code-llm-gateway-connect.md`
+- Added: `docs/code/code-llm-gateway-protocol.md`
+- Added: `docs/code/code-llm-gateway-rollout.md`
+
+
 ## 🤖 v1.5.6 - 25/06/2026
 
 File Changes:
