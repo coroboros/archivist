@@ -1,5 +1,39 @@
 # Changelog
 
+## 🤖 v1.5.6 - 25/06/2026
+
+File Changes:
+
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-admin-setup.md`
+- Modified: `docs/code/code-advisor.md`
+- Modified: `docs/code/code-amazon-bedrock.md`
+- Modified: `docs/code/code-changelog.md`
+- Modified: `docs/code/code-claude-code-features.md`
+- Modified: `docs/code/code-claude-code-on-the-web.md`
+- Modified: `docs/code/code-commands.md`
+- Modified: `docs/code/code-desktop.md`
+- Modified: `docs/code/code-discover-plugins.md`
+- Modified: `docs/code/code-env-vars.md`
+- Modified: `docs/code/code-errors.md`
+- Modified: `docs/code/code-fast-mode.md`
+- Modified: `docs/code/code-fullscreen.md`
+- Modified: `docs/code/code-github-actions.md`
+- Modified: `docs/code/code-glossary.md`
+- Modified: `docs/code/code-interactive-mode.md`
+- Modified: `docs/code/code-model-config.md`
+- Modified: `docs/code/code-monitoring-usage.md`
+- Modified: `docs/code/code-permission-modes.md`
+- Modified: `docs/code/code-permissions.md`
+- Modified: `docs/code/code-python.md`
+- Modified: `docs/code/code-sandboxing.md`
+- Modified: `docs/code/code-server-managed-settings.md`
+- Modified: `docs/code/code-settings.md`
+- Modified: `docs/code/code-sub-agents.md`
+- Modified: `docs/code/code-typescript.md`
+- Modified: `docs/code/code-voice-dictation.md`
+
+
 ## 🤖 v1.5.5 - 24/06/2026
 
 File Changes:
