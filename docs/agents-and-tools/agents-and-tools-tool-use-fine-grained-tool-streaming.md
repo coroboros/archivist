@@ -21,7 +21,7 @@ When using fine-grained tool streaming, you may potentially receive invalid or p
 </Warning>
 
 ## How to use fine-grained tool streaming
-Fine-grained tool streaming is supported on the Claude API, [Claude Platform on AWS](../build-with-claude/build-with-claude-claude-platform-on-aws.md), [Amazon Bedrock](../build-with-claude/build-with-claude-claude-in-amazon-bedrock.md), [Vertex AI](../build-with-claude/build-with-claude-claude-on-vertex-ai.md), and [Microsoft Foundry](../build-with-claude/build-with-claude-claude-in-microsoft-foundry.md). To use it, set `eager_input_streaming` to `true` on any user-defined tool where you want fine-grained streaming enabled, and enable streaming on your request.
+Fine-grained tool streaming is supported on the Claude API, [Claude Platform on AWS](../build-with-claude/build-with-claude-claude-platform-on-aws.md), [Amazon Bedrock](../build-with-claude/build-with-claude-claude-in-amazon-bedrock.md), [Google Cloud](../build-with-claude/build-with-claude-claude-on-vertex-ai.md), and [Microsoft Foundry](../build-with-claude/build-with-claude-claude-in-microsoft-foundry.md). To use it, set `eager_input_streaming` to `true` on any user-defined tool where you want fine-grained streaming enabled, and enable streaming on your request.
 
 Here's an example of how to use fine-grained tool streaming with the API:
 

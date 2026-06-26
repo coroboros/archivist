@@ -21,7 +21,7 @@ This API enables you to better monitor, analyze, and optimize your Claude implem
 * **Accurate Usage Tracking:** Get precise token counts and usage patterns instead of relying solely on response token counting
 * **Cost Reconciliation:** Match internal records with Anthropic billing for finance and accounting teams
 * **Product performance and improvement:** Monitor product performance while measuring if changes to the system have improved it, or setup alerting
-* **[Rate limit](../api/api-rate-limits.md) and [Priority Tier](../api/api-service-tiers.md#get-started-with-priority-tier) optimization:** Optimize features like [prompt caching](./build-with-claude-prompt-caching.md) or specific prompts to make the most of one’s allocated capacity, or purchase dedicated capacity.
+* **[Rate limit](../api/api-rate-limits.md) and [Priority Tier](../api/api-service-tiers.md#existing-priority-tier-commitments) optimization:** Optimize features like [prompt caching](./build-with-claude-prompt-caching.md) or specific prompts to make the most of your allocated capacity.
 * **Advanced Analysis:** Perform deeper data analysis than what's available in Console
 
 <Check>

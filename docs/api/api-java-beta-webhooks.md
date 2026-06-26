@@ -358,6 +358,20 @@ generated: true
 
       - `String workspaceId`
 
+    - `class BetaWebhookSessionUpdatedEventData:`
+
+      - `String id`
+
+        ID of the session that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "session.updated"constant`
+
+        - `SESSION_UPDATED("session.updated")`
+
+      - `String workspaceId`
+
   - `JsonValue; type "event"constant`
 
     Object type. Always `event` for webhook payloads.
@@ -704,6 +718,20 @@ generated: true
 
     - `String workspaceId`
 
+  - `class BetaWebhookSessionUpdatedEventData:`
+
+    - `String id`
+
+      ID of the session that triggered the event.
+
+    - `String organizationId`
+
+    - `JsonValue; type "session.updated"constant`
+
+      - `SESSION_UPDATED("session.updated")`
+
+    - `String workspaceId`
+
 ### Beta Webhook Session Archived Event Data
 
 - `class BetaWebhookSessionArchivedEventData:`
@@ -953,6 +981,22 @@ generated: true
   - `JsonValue; type "session.thread_terminated"constant`
 
     - `SESSION_THREAD_TERMINATED("session.thread_terminated")`
+
+  - `String workspaceId`
+
+### Beta Webhook Session Updated Event Data
+
+- `class BetaWebhookSessionUpdatedEventData:`
+
+  - `String id`
+
+    ID of the session that triggered the event.
+
+  - `String organizationId`
+
+  - `JsonValue; type "session.updated"constant`
+
+    - `SESSION_UPDATED("session.updated")`
 
   - `String workspaceId`
 
@@ -1431,6 +1475,20 @@ generated: true
       - `String vaultId`
 
         ID of the vault that owns this credential.
+
+      - `String workspaceId`
+
+    - `class BetaWebhookSessionUpdatedEventData:`
+
+      - `String id`
+
+        ID of the session that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "session.updated"constant`
+
+        - `SESSION_UPDATED("session.updated")`
 
       - `String workspaceId`
 

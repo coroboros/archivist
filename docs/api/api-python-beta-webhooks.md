@@ -358,6 +358,20 @@ generated: true
 
       - `workspace_id: str`
 
+    - `class BetaWebhookSessionUpdatedEventData: …`
+
+      - `id: str`
+
+        ID of the session that triggered the event.
+
+      - `organization_id: str`
+
+      - `type: Literal["session.updated"]`
+
+        - `"session.updated"`
+
+      - `workspace_id: str`
+
   - `type: Literal["event"]`
 
     Object type. Always `event` for webhook payloads.
@@ -704,6 +718,20 @@ generated: true
 
     - `workspace_id: str`
 
+  - `class BetaWebhookSessionUpdatedEventData: …`
+
+    - `id: str`
+
+      ID of the session that triggered the event.
+
+    - `organization_id: str`
+
+    - `type: Literal["session.updated"]`
+
+      - `"session.updated"`
+
+    - `workspace_id: str`
+
 ### Beta Webhook Session Archived Event Data
 
 - `class BetaWebhookSessionArchivedEventData: …`
@@ -953,6 +981,22 @@ generated: true
   - `type: Literal["session.thread_terminated"]`
 
     - `"session.thread_terminated"`
+
+  - `workspace_id: str`
+
+### Beta Webhook Session Updated Event Data
+
+- `class BetaWebhookSessionUpdatedEventData: …`
+
+  - `id: str`
+
+    ID of the session that triggered the event.
+
+  - `organization_id: str`
+
+  - `type: Literal["session.updated"]`
+
+    - `"session.updated"`
 
   - `workspace_id: str`
 
@@ -1431,6 +1475,20 @@ generated: true
       - `vault_id: str`
 
         ID of the vault that owns this credential.
+
+      - `workspace_id: str`
+
+    - `class BetaWebhookSessionUpdatedEventData: …`
+
+      - `id: str`
+
+        ID of the session that triggered the event.
+
+      - `organization_id: str`
+
+      - `type: Literal["session.updated"]`
+
+        - `"session.updated"`
 
       - `workspace_id: str`
 

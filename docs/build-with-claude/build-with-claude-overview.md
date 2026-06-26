@@ -35,7 +35,7 @@ Features on the Claude Platform are assigned one of the following availability c
 
 _<sup>*</sup> May carry a qualifier indicating narrower availability or added constraints (for example, "beta: research preview"). See the feature's page for details._
 
-**Platform labels:** Claude API (Anthropic first-party) · [Claude Platform on AWS](./build-with-claude-claude-platform-on-aws.md) (Anthropic-operated on AWS) · [Bedrock](./build-with-claude-claude-in-amazon-bedrock.md) (AWS-operated) · [Vertex AI](./build-with-claude-claude-on-vertex-ai.md) (Google-operated) · [Microsoft Foundry](./build-with-claude-claude-in-microsoft-foundry.md) (Anthropic-operated on Azure)
+**Platform labels:** Claude API (Anthropic first-party) · [Claude Platform on AWS](./build-with-claude-claude-platform-on-aws.md) (Anthropic-operated on AWS) · [Bedrock](./build-with-claude-claude-in-amazon-bedrock.md) (AWS-operated) · [Google Cloud](./build-with-claude-claude-on-vertex-ai.md) (Google-operated) · [Microsoft Foundry](./build-with-claude-claude-in-microsoft-foundry.md) (Anthropic-operated on Azure)
 
 ## Model capabilities
 

@@ -1028,26 +1028,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           Exceptional model for specialized complex tasks
 
-        - `CLAUDE_OPUS_4_0("claude-opus-4-0")`
-
-          Powerful model for complex tasks
-
-        - `CLAUDE_OPUS_4_20250514("claude-opus-4-20250514")`
-
-          Powerful model for complex tasks
-
-        - `CLAUDE_SONNET_4_0("claude-sonnet-4-0")`
-
-          High-performance model with extended thinking
-
-        - `CLAUDE_SONNET_4_20250514("claude-sonnet-4-20250514")`
-
-          High-performance model with extended thinking
-
-        - `CLAUDE_3_HAIKU_20240307("claude-3-haiku-20240307")`
-
-          Fast and cost-effective model
-
       - `Optional<CacheControlEphemeral> cacheControl`
 
         Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
@@ -1354,6 +1334,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+            - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
           - `Optional<CacheControlEphemeral> cacheControl`
 
             Create a cache control breakpoint at this content block.
@@ -1404,6 +1386,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+            - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
           - `Optional<CacheControlEphemeral> cacheControl`
 
             Create a cache control breakpoint at this content block.
@@ -1440,6 +1424,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+            - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
           - `Optional<CacheControlEphemeral> cacheControl`
 
             Create a cache control breakpoint at this content block.
@@ -1473,6 +1459,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
             - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+            - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
           - `Optional<CacheControlEphemeral> cacheControl`
 
@@ -1510,6 +1498,46 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+            - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
+          - `Optional<CacheControlEphemeral> cacheControl`
+
+            Create a cache control breakpoint at this content block.
+
+          - `Optional<Boolean> deferLoading`
+
+            If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+          - `Optional<Boolean> strict`
+
+            When true, guarantees schema validation on tool names and inputs
+
+        - `class CodeExecutionTool20260521:`
+
+          Code execution tool with REPL state persistence.
+
+          - `JsonValue; name "code_execution"constant`
+
+            Name of the tool.
+
+            This is how the tool will be called by the model and in `tool_use` blocks.
+
+            - `CODE_EXECUTION("code_execution")`
+
+          - `JsonValue; type "code_execution_20260521"constant`
+
+            - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
+          - `Optional<List<AllowedCaller>> allowedCallers`
+
+            - `DIRECT("direct")`
+
+            - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+            - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+            - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
           - `Optional<CacheControlEphemeral> cacheControl`
 
             Create a cache control breakpoint at this content block.
@@ -1543,6 +1571,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
             - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+            - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
           - `Optional<CacheControlEphemeral> cacheControl`
 
@@ -1580,6 +1610,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+            - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
           - `Optional<CacheControlEphemeral> cacheControl`
 
             Create a cache control breakpoint at this content block.
@@ -1616,6 +1648,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+            - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
           - `Optional<CacheControlEphemeral> cacheControl`
 
             Create a cache control breakpoint at this content block.
@@ -1651,6 +1685,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
             - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+            - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
           - `Optional<CacheControlEphemeral> cacheControl`
 
@@ -1691,6 +1727,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
             - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+            - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
           - `Optional<List<String>> allowedDomains`
 
@@ -1762,6 +1800,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+            - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
           - `Optional<List<String>> allowedDomains`
 
             List of domains to allow fetching from
@@ -1816,6 +1856,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+            - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
           - `Optional<List<String>> allowedDomains`
 
             If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
@@ -1865,6 +1907,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
             - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+            - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
           - `Optional<List<String>> allowedDomains`
 
@@ -1921,6 +1965,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
             - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+            - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
           - `Optional<List<String>> allowedDomains`
 
@@ -1982,6 +2028,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+            - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
           - `Optional<CacheControlEphemeral> cacheControl`
 
             Create a cache control breakpoint at this content block.
@@ -2017,6 +2065,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `CODE_EXECUTION_20250825("code_execution_20250825")`
 
             - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+            - `CODE_EXECUTION_20260521("code_execution_20260521")`
 
           - `Optional<CacheControlEphemeral> cacheControl`
 
@@ -3519,26 +3569,6 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             Exceptional model for specialized complex tasks
 
-          - `CLAUDE_OPUS_4_0("claude-opus-4-0")`
-
-            Powerful model for complex tasks
-
-          - `CLAUDE_OPUS_4_20250514("claude-opus-4-20250514")`
-
-            Powerful model for complex tasks
-
-          - `CLAUDE_SONNET_4_0("claude-sonnet-4-0")`
-
-            High-performance model with extended thinking
-
-          - `CLAUDE_SONNET_4_20250514("claude-sonnet-4-20250514")`
-
-            High-performance model with extended thinking
-
-          - `CLAUDE_3_HAIKU_20240307("claude-3-haiku-20240307")`
-
-            Fast and cost-effective model
-
         - `JsonValue; role "assistant"constant`
 
           Conversational role of the generated message.
@@ -3553,13 +3583,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           - `Optional<Category> category`
 
-            The policy category that triggered the refusal.
-
-            `null` when the refusal doesn't map to a named category.
+            The policy category that triggered a refusal.
 
             - `CYBER("cyber")`
 
             - `BIO("bio")`
+
+            - `FRONTIER_LLM("frontier_llm")`
 
             - `REASONING_EXTRACTION("reasoning_extraction")`
 
@@ -4807,26 +4837,6 @@ public final class Main {
 
             Exceptional model for specialized complex tasks
 
-          - `CLAUDE_OPUS_4_0("claude-opus-4-0")`
-
-            Powerful model for complex tasks
-
-          - `CLAUDE_OPUS_4_20250514("claude-opus-4-20250514")`
-
-            Powerful model for complex tasks
-
-          - `CLAUDE_SONNET_4_0("claude-sonnet-4-0")`
-
-            High-performance model with extended thinking
-
-          - `CLAUDE_SONNET_4_20250514("claude-sonnet-4-20250514")`
-
-            High-performance model with extended thinking
-
-          - `CLAUDE_3_HAIKU_20240307("claude-3-haiku-20240307")`
-
-            Fast and cost-effective model
-
         - `JsonValue; role "assistant"constant`
 
           Conversational role of the generated message.
@@ -4841,13 +4851,13 @@ public final class Main {
 
           - `Optional<Category> category`
 
-            The policy category that triggered the refusal.
-
-            `null` when the refusal doesn't map to a named category.
+            The policy category that triggered a refusal.
 
             - `CYBER("cyber")`
 
             - `BIO("bio")`
+
+            - `FRONTIER_LLM("frontier_llm")`
 
             - `REASONING_EXTRACTION("reasoning_extraction")`
 
@@ -5881,26 +5891,6 @@ public final class Main {
 
           Exceptional model for specialized complex tasks
 
-        - `CLAUDE_OPUS_4_0("claude-opus-4-0")`
-
-          Powerful model for complex tasks
-
-        - `CLAUDE_OPUS_4_20250514("claude-opus-4-20250514")`
-
-          Powerful model for complex tasks
-
-        - `CLAUDE_SONNET_4_0("claude-sonnet-4-0")`
-
-          High-performance model with extended thinking
-
-        - `CLAUDE_SONNET_4_20250514("claude-sonnet-4-20250514")`
-
-          High-performance model with extended thinking
-
-        - `CLAUDE_3_HAIKU_20240307("claude-3-haiku-20240307")`
-
-          Fast and cost-effective model
-
       - `JsonValue; role "assistant"constant`
 
         Conversational role of the generated message.
@@ -5915,13 +5905,13 @@ public final class Main {
 
         - `Optional<Category> category`
 
-          The policy category that triggered the refusal.
-
-          `null` when the refusal doesn't map to a named category.
+          The policy category that triggered a refusal.
 
           - `CYBER("cyber")`
 
           - `BIO("bio")`
+
+          - `FRONTIER_LLM("frontier_llm")`
 
           - `REASONING_EXTRACTION("reasoning_extraction")`
 
@@ -6917,26 +6907,6 @@ public final class Main {
 
         Exceptional model for specialized complex tasks
 
-      - `CLAUDE_OPUS_4_0("claude-opus-4-0")`
-
-        Powerful model for complex tasks
-
-      - `CLAUDE_OPUS_4_20250514("claude-opus-4-20250514")`
-
-        Powerful model for complex tasks
-
-      - `CLAUDE_SONNET_4_0("claude-sonnet-4-0")`
-
-        High-performance model with extended thinking
-
-      - `CLAUDE_SONNET_4_20250514("claude-sonnet-4-20250514")`
-
-        High-performance model with extended thinking
-
-      - `CLAUDE_3_HAIKU_20240307("claude-3-haiku-20240307")`
-
-        Fast and cost-effective model
-
     - `JsonValue; role "assistant"constant`
 
       Conversational role of the generated message.
@@ -6951,13 +6921,13 @@ public final class Main {
 
       - `Optional<Category> category`
 
-        The policy category that triggered the refusal.
-
-        `null` when the refusal doesn't map to a named category.
+        The policy category that triggered a refusal.
 
         - `CYBER("cyber")`
 
         - `BIO("bio")`
+
+        - `FRONTIER_LLM("frontier_llm")`
 
         - `REASONING_EXTRACTION("reasoning_extraction")`
 

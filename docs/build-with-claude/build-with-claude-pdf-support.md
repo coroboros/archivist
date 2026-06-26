@@ -41,7 +41,7 @@ Since PDF support relies on Claude's vision capabilities, it is subject to the s
 
 ### Supported platforms and models
 
-PDF support is available on the Claude API, [Claude Platform on AWS](./build-with-claude-claude-platform-on-aws.md), [Amazon Bedrock](./build-with-claude-claude-in-amazon-bedrock.md) (see [Amazon Bedrock PDF support](#amazon-bedrock-pdf-support)), [Vertex AI](./build-with-claude-claude-on-vertex-ai.md), and [Microsoft Foundry](./build-with-claude-claude-in-microsoft-foundry.md). All [active models](../about-claude/about-claude-models-overview.md) support PDF processing.
+PDF support is available on the Claude API, [Claude Platform on AWS](./build-with-claude-claude-platform-on-aws.md), [Amazon Bedrock](./build-with-claude-claude-in-amazon-bedrock.md) (see [Amazon Bedrock PDF support](#amazon-bedrock-pdf-support)), [Google Cloud](./build-with-claude-claude-on-vertex-ai.md), and [Microsoft Foundry](./build-with-claude-claude-in-microsoft-foundry.md). All [active models](../about-claude/about-claude-models-overview.md) support PDF processing.
 
 ### Amazon Bedrock PDF support
 
@@ -95,7 +95,7 @@ Let's start with a simple example using the Messages API. You can provide PDFs t
 3. By a `file_id` from the [Files API](./build-with-claude-files.md)
 
 <Note>
-On Amazon Bedrock and Vertex AI, only base64-encoded sources are currently available.
+On Amazon Bedrock and Google Cloud, only base64-encoded sources are currently available.
 </Note>
 
 #### Option 1: URL-based PDF document

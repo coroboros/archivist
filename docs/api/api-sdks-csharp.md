@@ -436,7 +436,7 @@ The SDK is typed for convenient usage of the documented API. However, it also su
 For detailed platform setup guides with code examples, see:
 - [Amazon Bedrock](../build-with-claude/build-with-claude-claude-in-amazon-bedrock.md)
 - [Amazon Bedrock (legacy)](../build-with-claude/build-with-claude-claude-on-amazon-bedrock-legacy.md)
-- [Vertex AI](../build-with-claude/build-with-claude-claude-on-vertex-ai.md)
+- [Google Cloud](../build-with-claude/build-with-claude-claude-on-vertex-ai.md)
 - [Microsoft Foundry](../build-with-claude/build-with-claude-claude-in-microsoft-foundry.md)
 - [Claude Platform on AWS](../build-with-claude/build-with-claude-claude-platform-on-aws.md)
 </Note>
@@ -444,7 +444,7 @@ For detailed platform setup guides with code examples, see:
 The C# SDK supports the following platforms through separate NuGet packages:
 
 - **Bedrock:** `Anthropic.Bedrock`. Use `AnthropicBedrockMantleClient` for the Messages-API Bedrock endpoint, or `AnthropicBedrockClient` (`bedrock-runtime` path). `AnthropicBedrockMantleClient` takes an optional `MantleAwsClientOptions` config object; `AnthropicBedrockClient` accepts `AnthropicBedrockCredentialsHelper.FromEnv()` or explicit credentials.
-- **Vertex AI:** `Anthropic.Vertex`. See [Vertex AI](../build-with-claude/build-with-claude-claude-on-vertex-ai.md) for client setup.
+- **Agent Platform:** `Anthropic.Vertex`. See [Claude on Google Cloud](../build-with-claude/build-with-claude-claude-on-vertex-ai.md) for client setup.
 - **Foundry:** `Anthropic.Foundry`. Use `AnthropicFoundryClient` with `DefaultAnthropicFoundryCredentials.FromEnv()` or explicit credentials.
 - **Claude Platform on AWS:** `Anthropic.Aws`. Use `AnthropicAwsClient`; set `WorkspaceId` on the client or the `ANTHROPIC_AWS_WORKSPACE_ID` environment variable (see [Workspaces](../build-with-claude/build-with-claude-claude-platform-on-aws.md#workspaces)). Available in beta.
 

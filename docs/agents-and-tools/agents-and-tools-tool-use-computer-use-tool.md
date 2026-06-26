@@ -13,7 +13,7 @@ Claude can interact with computer environments through the computer use tool, wh
 <Note>
 Computer use is in beta and requires a [beta header](../api/api-beta-headers.md):
 - `"computer-use-2025-11-24"` for Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 4.6, and Claude Opus 4.5
-- `"computer-use-2025-01-24"` for Claude Sonnet 4.5, Claude Haiku 4.5, Claude Opus 4.1 ([deprecated](../about-claude/about-claude-model-deprecations.md)), Claude Sonnet 4 ([retired, except on Bedrock and Vertex AI](../about-claude/about-claude-model-deprecations.md)), and Claude Opus 4 ([retired, except on Vertex AI](../about-claude/about-claude-model-deprecations.md))
+- `"computer-use-2025-01-24"` for Claude Sonnet 4.5, Claude Haiku 4.5, Claude Opus 4.1 ([deprecated](../about-claude/about-claude-model-deprecations.md)), Claude Sonnet 4 ([retired, except on Bedrock and Google Cloud](../about-claude/about-claude-model-deprecations.md)), and Claude Opus 4 ([retired, except on Google Cloud](../about-claude/about-claude-model-deprecations.md))
 
 Reach out through the [feedback form](https://forms.gle/H6UFuXaaLywri9hz6) to share your feedback on this feature.
 </Note>

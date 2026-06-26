@@ -358,6 +358,20 @@ generated: true
 
       - `workspace_id: String`
 
+    - `class BetaWebhookSessionUpdatedEventData`
+
+      - `id: String`
+
+        ID of the session that triggered the event.
+
+      - `organization_id: String`
+
+      - `type: :"session.updated"`
+
+        - `:"session.updated"`
+
+      - `workspace_id: String`
+
   - `type: :event`
 
     Object type. Always `event` for webhook payloads.
@@ -366,7 +380,7 @@ generated: true
 
 ### Beta Webhook Event Data
 
-- `BetaWebhookEventData = BetaWebhookSessionCreatedEventData | BetaWebhookSessionPendingEventData | BetaWebhookSessionRunningEventData | 19 more`
+- `BetaWebhookEventData = BetaWebhookSessionCreatedEventData | BetaWebhookSessionPendingEventData | BetaWebhookSessionRunningEventData | 20 more`
 
   - `class BetaWebhookSessionCreatedEventData`
 
@@ -704,6 +718,20 @@ generated: true
 
     - `workspace_id: String`
 
+  - `class BetaWebhookSessionUpdatedEventData`
+
+    - `id: String`
+
+      ID of the session that triggered the event.
+
+    - `organization_id: String`
+
+    - `type: :"session.updated"`
+
+      - `:"session.updated"`
+
+    - `workspace_id: String`
+
 ### Beta Webhook Session Archived Event Data
 
 - `class BetaWebhookSessionArchivedEventData`
@@ -953,6 +981,22 @@ generated: true
   - `type: :"session.thread_terminated"`
 
     - `:"session.thread_terminated"`
+
+  - `workspace_id: String`
+
+### Beta Webhook Session Updated Event Data
+
+- `class BetaWebhookSessionUpdatedEventData`
+
+  - `id: String`
+
+    ID of the session that triggered the event.
+
+  - `organization_id: String`
+
+  - `type: :"session.updated"`
+
+    - `:"session.updated"`
 
   - `workspace_id: String`
 
@@ -1431,6 +1475,20 @@ generated: true
       - `vault_id: String`
 
         ID of the vault that owns this credential.
+
+      - `workspace_id: String`
+
+    - `class BetaWebhookSessionUpdatedEventData`
+
+      - `id: String`
+
+        ID of the session that triggered the event.
+
+      - `organization_id: String`
+
+      - `type: :"session.updated"`
+
+        - `:"session.updated"`
 
       - `workspace_id: String`
 

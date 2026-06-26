@@ -194,6 +194,8 @@ If your organization has specific infrastructure requirements, compare the optio
   </tbody>
 </table>
 
+For a feature-by-feature breakdown of what's available on each option, see [Feature availability](./code-feature-availability.md).
+
 Select a deployment option to view setup instructions:
 
 * [Claude for Teams or Enterprise](./code-authentication.md#claude-for-teams-or-enterprise)

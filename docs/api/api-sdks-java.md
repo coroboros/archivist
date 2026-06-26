@@ -1089,7 +1089,7 @@ To use a completely custom HTTP client:
 For detailed platform setup guides with code examples, see:
 - [Amazon Bedrock](../build-with-claude/build-with-claude-claude-in-amazon-bedrock.md)
 - [Amazon Bedrock (legacy)](../build-with-claude/build-with-claude-claude-on-amazon-bedrock-legacy.md)
-- [Vertex AI](../build-with-claude/build-with-claude-claude-on-vertex-ai.md)
+- [Google Cloud](../build-with-claude/build-with-claude-claude-on-vertex-ai.md)
 - [Microsoft Foundry](../build-with-claude/build-with-claude-claude-in-microsoft-foundry.md)
 - [Claude Platform on AWS](../build-with-claude/build-with-claude-claude-platform-on-aws.md)
 </Note>
@@ -1097,7 +1097,7 @@ For detailed platform setup guides with code examples, see:
 The Java SDK supports the following platforms through separate dependencies that provide platform-specific `Backend` implementations:
 
 - **Bedrock:** `com.anthropic:anthropic-java-bedrock`: Use `BedrockMantleBackend.fromEnv()` or `BedrockMantleBackend.builder()` for the Messages-API Bedrock endpoint, or `BedrockBackend.fromEnv()` / `BedrockBackend.builder()` (`bedrock-runtime` path).
-- **Vertex AI:** `com.anthropic:anthropic-java-vertex`: Use `VertexBackend.fromEnv()` or `VertexBackend.builder()`.
+- **Agent Platform:** `com.anthropic:anthropic-java-vertex`: Use `VertexBackend.fromEnv()` or `VertexBackend.builder()`.
 - **Foundry:** `com.anthropic:anthropic-java-foundry`: Use `FoundryBackend.fromEnv()` or `FoundryBackend.builder()`.
 - **Claude Platform on AWS:** `com.anthropic:anthropic-java-aws`: Use `AwsBackend.fromEnv()` (reads `ANTHROPIC_AWS_WORKSPACE_ID` and the AWS default region/credential chain) or `AwsBackend.builder()`. Available in beta.
 

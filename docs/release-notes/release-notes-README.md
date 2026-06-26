@@ -2,12 +2,12 @@
 
 _This repository is a mirror of the official [Claude Platform](https://platform.claude.com/docs/en/) documentation (Platform | Release Notes). It is updated automatically._
 
-**Last updated:** Tue, 23 Jun 2026 14:45:31 GMT
+**Last updated:** Fri, 26 Jun 2026 03:34:48 GMT
 
 ---
 
 ## Release Notes
 
-- [Overview](./release-notes-overview.md)
 - [System Prompts](./release-notes-system-prompts.md)
+- [Overview](./release-notes-overview.md)
 

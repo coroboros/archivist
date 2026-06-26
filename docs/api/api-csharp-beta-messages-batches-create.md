@@ -986,19 +986,17 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
               A `fallback` block echoed back from a prior response.
 
-              Accepted in `messages[].content` and never rendered into the prompt,
-              not validated against the request's `fallbacks` chain or top-level
-              `model`, and stripped before the sticky-routing cache key is computed.
+              Accepted in `messages[].content` and not rendered into the prompt; not
+              validated against the request's `fallbacks` chain or top-level `model`.
 
-              Callers should echo the assistant turn verbatim — block included. The
-              block's position is load-bearing for thinking verification: the thinking
-              runs on either side of a fallback hop carry independently-rooted
-              verification hash chains, and this block is the only record of where one
-              chain ends and the next begins. When thinking runs flank the boundary,
-              omitting the block merges the runs into one contiguous span whose hashes
-              cannot verify (the request is rejected), and moving it into the middle of
-              a single run splits that run's chain and is likewise rejected; between
-              non-thinking blocks the block's placement has no verification effect.
+              Echo the assistant turn back verbatim, including this block in its
+              original position. The block marks the boundary between content produced
+              before and after a fallback hop, and the server relies on that boundary
+              to validate the turn: when thinking runs flank the boundary, omitting
+              the block merges them into one span the server cannot validate (the
+              request is rejected), and moving it into the middle of a single run is
+              likewise rejected; between non-thinking blocks the block's placement has
+              no validation effect.
 
               - `required BetaFallbackInfoParam From`
 
@@ -1070,31 +1068,15 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
                     Exceptional model for specialized complex tasks
 
-                  - `"claude-opus-4-0"ClaudeOpus4_0`
-
-                    Powerful model for complex tasks
-
-                  - `"claude-opus-4-20250514"ClaudeOpus4_20250514`
-
-                    Powerful model for complex tasks
-
-                  - `"claude-sonnet-4-0"ClaudeSonnet4_0`
-
-                    High-performance model with extended thinking
-
-                  - `"claude-sonnet-4-20250514"ClaudeSonnet4_20250514`
-
-                    High-performance model with extended thinking
-
-                  - `"claude-3-haiku-20240307"Claude_3_Haiku_20240307`
-
-                    Fast and cost-effective model
-
               - `required BetaFallbackInfoParam To`
 
                 Identifies one hop of a fallback transition.
 
               - `JsonElement Type "fallback"constant`
+
+              - `JsonElement Trigger`
+
+                The response block's `trigger`, echoed verbatim. Accepted and ignored by the server; any object or `null` is allowed.
 
         - `required Role Role`
 
@@ -1632,6 +1614,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `"code_execution_20260120"CodeExecution20260120`
 
+            - `"code_execution_20260521"CodeExecution20260521`
+
           - `BetaCacheControlEphemeral? CacheControl`
 
             Create a cache control breakpoint at this content block.
@@ -1678,6 +1662,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `"code_execution_20260120"CodeExecution20260120`
 
+            - `"code_execution_20260521"CodeExecution20260521`
+
           - `BetaCacheControlEphemeral? CacheControl`
 
             Create a cache control breakpoint at this content block.
@@ -1709,6 +1695,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `"code_execution_20250825"CodeExecution20250825`
 
             - `"code_execution_20260120"CodeExecution20260120`
+
+            - `"code_execution_20260521"CodeExecution20260521`
 
           - `BetaCacheControlEphemeral? CacheControl`
 
@@ -1742,6 +1730,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `"code_execution_20260120"CodeExecution20260120`
 
+            - `"code_execution_20260521"CodeExecution20260521`
+
           - `BetaCacheControlEphemeral? CacheControl`
 
             Create a cache control breakpoint at this content block.
@@ -1771,6 +1761,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `"code_execution_20250825"CodeExecution20250825`
 
             - `"code_execution_20260120"CodeExecution20260120`
+
+            - `"code_execution_20260521"CodeExecution20260521`
 
           - `BetaCacheControlEphemeral? CacheControl`
 
@@ -1803,6 +1795,42 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `"code_execution_20250825"CodeExecution20250825`
 
             - `"code_execution_20260120"CodeExecution20260120`
+
+            - `"code_execution_20260521"CodeExecution20260521`
+
+          - `BetaCacheControlEphemeral? CacheControl`
+
+            Create a cache control breakpoint at this content block.
+
+          - `Boolean DeferLoading`
+
+            If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
+
+          - `Boolean Strict`
+
+            When true, guarantees schema validation on tool names and inputs
+
+        - `class BetaCodeExecutionTool20260521:`
+
+          Code execution tool with REPL state persistence.
+
+          - `JsonElement Name "code_execution"constant`
+
+            Name of the tool.
+
+            This is how the tool will be called by the model and in `tool_use` blocks.
+
+          - `JsonElement Type "code_execution_20260521"constant`
+
+          - `IReadOnlyList<AllowedCaller> AllowedCallers`
+
+            - `"direct"Direct`
+
+            - `"code_execution_20250825"CodeExecution20250825`
+
+            - `"code_execution_20260120"CodeExecution20260120`
+
+            - `"code_execution_20260521"CodeExecution20260521`
 
           - `BetaCacheControlEphemeral? CacheControl`
 
@@ -1842,6 +1870,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `"code_execution_20260120"CodeExecution20260120`
 
+            - `"code_execution_20260521"CodeExecution20260521`
+
           - `BetaCacheControlEphemeral? CacheControl`
 
             Create a cache control breakpoint at this content block.
@@ -1877,6 +1907,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `"code_execution_20250825"CodeExecution20250825`
 
             - `"code_execution_20260120"CodeExecution20260120`
+
+            - `"code_execution_20260521"CodeExecution20260521`
 
           - `BetaCacheControlEphemeral? CacheControl`
 
@@ -1918,6 +1950,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `"code_execution_20260120"CodeExecution20260120`
 
+            - `"code_execution_20260521"CodeExecution20260521`
+
           - `BetaCacheControlEphemeral? CacheControl`
 
             Create a cache control breakpoint at this content block.
@@ -1953,6 +1987,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `"code_execution_20250825"CodeExecution20250825`
 
             - `"code_execution_20260120"CodeExecution20260120`
+
+            - `"code_execution_20260521"CodeExecution20260521`
 
           - `BetaCacheControlEphemeral? CacheControl`
 
@@ -1994,6 +2030,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `"code_execution_20260120"CodeExecution20260120`
 
+            - `"code_execution_20260521"CodeExecution20260521`
+
           - `BetaCacheControlEphemeral? CacheControl`
 
             Create a cache control breakpoint at this content block.
@@ -2034,6 +2072,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `"code_execution_20260120"CodeExecution20260120`
 
+            - `"code_execution_20260521"CodeExecution20260521`
+
           - `BetaCacheControlEphemeral? CacheControl`
 
             Create a cache control breakpoint at this content block.
@@ -2066,6 +2106,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `"code_execution_20260120"CodeExecution20260120`
 
+            - `"code_execution_20260521"CodeExecution20260521`
+
           - `BetaCacheControlEphemeral? CacheControl`
 
             Create a cache control breakpoint at this content block.
@@ -2097,6 +2139,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `"code_execution_20250825"CodeExecution20250825`
 
             - `"code_execution_20260120"CodeExecution20260120`
+
+            - `"code_execution_20260521"CodeExecution20260521`
 
           - `BetaCacheControlEphemeral? CacheControl`
 
@@ -2133,6 +2177,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `"code_execution_20250825"CodeExecution20250825`
 
             - `"code_execution_20260120"CodeExecution20260120`
+
+            - `"code_execution_20260521"CodeExecution20260521`
 
           - `IReadOnlyList<string>? AllowedDomains`
 
@@ -2198,6 +2244,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `"code_execution_20260120"CodeExecution20260120`
 
+            - `"code_execution_20260521"CodeExecution20260521`
+
           - `IReadOnlyList<string>? AllowedDomains`
 
             List of domains to allow fetching from
@@ -2248,6 +2296,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `"code_execution_20260120"CodeExecution20260120`
 
+            - `"code_execution_20260521"CodeExecution20260521`
+
           - `IReadOnlyList<string>? AllowedDomains`
 
             If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
@@ -2293,6 +2343,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `"code_execution_20250825"CodeExecution20250825`
 
             - `"code_execution_20260120"CodeExecution20260120`
+
+            - `"code_execution_20260521"CodeExecution20260521`
 
           - `IReadOnlyList<string>? AllowedDomains`
 
@@ -2345,6 +2397,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `"code_execution_20250825"CodeExecution20250825`
 
             - `"code_execution_20260120"CodeExecution20260120`
+
+            - `"code_execution_20260521"CodeExecution20260521`
 
           - `IReadOnlyList<string>? AllowedDomains`
 
@@ -2406,6 +2460,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `"code_execution_20260120"CodeExecution20260120`
 
+            - `"code_execution_20260521"CodeExecution20260521`
+
           - `BetaCacheControlEphemeral? CacheControl`
 
             Create a cache control breakpoint at this content block.
@@ -2452,6 +2508,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
             - `"code_execution_20260120"CodeExecution20260120`
 
+            - `"code_execution_20260521"CodeExecution20260521`
+
           - `BetaCacheControlEphemeral? CacheControl`
 
             Create a cache control breakpoint at this content block.
@@ -2485,6 +2543,8 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
             - `"code_execution_20250825"CodeExecution20250825`
 
             - `"code_execution_20260120"CodeExecution20260120`
+
+            - `"code_execution_20260521"CodeExecution20260521`
 
           - `BetaCacheControlEphemeral? CacheControl`
 

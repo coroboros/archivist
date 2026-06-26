@@ -88,14 +88,14 @@ Claude is available through the direct Claude API and through cloud platforms. C
 
 Access Claude through AWS, Google Cloud, or Microsoft Azure:
 - **Integrated** with cloud provider billing and IAM
-- **Feature availability varies by platform:** Anthropic-operated platforms include [Claude Platform on AWS](../build-with-claude/build-with-claude-claude-platform-on-aws.md) and [Microsoft Foundry](../build-with-claude/build-with-claude-claude-in-microsoft-foundry.md); partner-operated platforms include Amazon Bedrock and Vertex AI. See each platform's page for feature availability and timing.
+- **Feature availability varies by platform:** Anthropic-operated platforms include [Claude Platform on AWS](../build-with-claude/build-with-claude-claude-platform-on-aws.md) and [Microsoft Foundry](../build-with-claude/build-with-claude-claude-in-microsoft-foundry.md); partner-operated platforms include Amazon Bedrock and Google Cloud. See each platform's page for feature availability and timing.
 - **Best for:** Existing cloud commitments, specific compliance requirements, consolidated cloud billing
 
 | Platform | Provider | Documentation |
 |----------|----------|---------------|
 | Claude Platform on AWS | AWS (Anthropic-operated) | [Claude Platform on AWS](../build-with-claude/build-with-claude-claude-platform-on-aws.md) |
 | Amazon Bedrock | AWS | [Claude in Amazon Bedrock](../build-with-claude/build-with-claude-claude-in-amazon-bedrock.md) |
-| Vertex AI | Google Cloud | [Claude on Vertex AI](../build-with-claude/build-with-claude-claude-on-vertex-ai.md) |
+| Agent Platform | Google Cloud | [Claude on Google Cloud](../build-with-claude/build-with-claude-claude-on-vertex-ai.md) |
 | Microsoft Foundry | Microsoft Azure (Anthropic-operated) | [Claude in Microsoft Foundry](../build-with-claude/build-with-claude-claude-in-microsoft-foundry.md) |
 
 <Note>
@@ -116,7 +116,7 @@ Claude Managed Agents is available through the direct Claude API and [Claude Pla
 If you exceed these limits, you'll receive a 413 `request_too_large` error.
 
 <Note>
-Partner-operated platforms have their own request size limits: Vertex AI limits requests to 30 MB, and Bedrock limits requests to 20 MB. Claude Platform on AWS uses the same limits as the direct Claude API. Consult your platform's documentation for current values.
+Partner-operated platforms have their own request size limits: Google Cloud limits requests to 30 MB, and Bedrock limits requests to 20 MB. Claude Platform on AWS uses the same limits as the direct Claude API. Consult your platform's documentation for current values.
 </Note>
 
 ### Response headers
@@ -139,7 +139,7 @@ The API enforces rate limits and spend limits to prevent misuse and manage capac
 - **Spend limits**: Maximum monthly cost for API usage
 - **Rate limits**: Maximum number of requests per minute (RPM) and tokens per minute (TPM)
 
-You can view your organization's current limits in the [Console](/settings/limits). For higher limits or Priority Tier (enhanced service levels with committed spend), contact sales through the Console.
+You can view your organization's current limits in the [Console](/settings/limits). For higher limits, contact sales through the Console.
 
 For detailed information about limits, tiers, and the token bucket algorithm used for rate limiting, see [Rate limits](./api-rate-limits.md).
 
