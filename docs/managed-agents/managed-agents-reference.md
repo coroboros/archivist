@@ -116,9 +116,9 @@ Managed Agents endpoints are rate-limited per organization:
 | Operation | Limit |
 |-----------|-------|
 | Create endpoints (such as agents, sessions, and environments) | 300 requests per minute |
-| Read endpoints (such as retrieve, list, and stream) | 600 requests per minute |
+| Read endpoints (such as retrieve, list, and stream) | 1,200 requests per minute |
 
-Organization-level [spend limits and tier-based rate limits](../api/api-rate-limits.md) also apply.
+Organization-level [spend limits and usage-tier rate limits](../api/api-rate-limits.md) also apply.
 
 ## Branding guidelines
 

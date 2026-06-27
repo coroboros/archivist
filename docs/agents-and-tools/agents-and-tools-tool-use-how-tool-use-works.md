@@ -24,21 +24,21 @@ The primary axis along which tools differ is where the code executes. Every tool
 
 ### User-defined tools (client-executed)
 
-You write the schema, you execute the code, you return the results. This is the main event: the vast majority of tool-use traffic is user-defined tools calling into application-specific logic.
+You write the schema, you execute the code, you return the results. This is the main event: the vast majority of tool-use traffic is [user-defined tools](./agents-and-tools-tool-use-define-tools.md) calling into application-specific logic.
 
 When Claude decides to use one of your tools, the API response contains a `tool_use` block with the tool name and a JSON object of arguments. Your application extracts those arguments, runs the operation (a database query, an HTTP call, a file write, whatever the tool does), and sends the output back in a `tool_result` block on the next request. Claude never sees your implementation; it only sees the schema you provided and the result you returned.
 
 ### Anthropic-schema tools (client-executed)
 
-For a handful of common operations (running shell commands, editing files, controlling a browser, managing scratchpad memory), Anthropic publishes the tool schema and your application handles execution. The tools in this category are `bash`, `text_editor`, `computer`, and `memory`.
+For a handful of common operations (managing scratchpad memory, running shell commands, editing files, controlling a browser), Anthropic publishes the tool schema and your application handles execution. The tools in this category are [`memory`](./agents-and-tools-tool-use-memory-tool.md), [`bash`](./agents-and-tools-tool-use-bash-tool.md), [`text_editor`](./agents-and-tools-tool-use-text-editor-tool.md), and [`computer`](./agents-and-tools-tool-use-computer-use-tool.md).
 
 The execution model is identical to user-defined tools: the response contains a `tool_use` block, your code runs the operation, and you send back a `tool_result`. The reason to use an Anthropic-schema tool instead of defining your own equivalent is that these schemas are trained-in. Claude has been optimized on thousands of successful trajectories that use these exact tool signatures, so it calls them more reliably and recovers from errors more gracefully than it would with a custom tool that does the same thing. The schema is the interface the model already expects.
 
 ### Server-executed tools
 
-For `web_search`, `web_fetch`, `code_execution`, and `tool_search`, Anthropic runs the code. You enable the tool in your request and the server handles everything else. You never construct a `tool_result` block for these tools because the server-side loop executes the operation and feeds the output back to the model before the response reaches you.
+For [`web_search`](./agents-and-tools-tool-use-web-search-tool.md), [`web_fetch`](./agents-and-tools-tool-use-web-fetch-tool.md), [`code_execution`](./agents-and-tools-tool-use-code-execution-tool.md), and [`tool_search`](./agents-and-tools-tool-use-tool-search-tool.md), Anthropic runs the code. You enable the tool in your request and the server handles everything else. You never construct a `tool_result` block for these tools. When a turn calls only [server tools](./agents-and-tools-tool-use-server-tools.md), the server-side loop executes the operation and feeds the output back to the model before the response reaches you, unless the loop stops before it finishes, most often because it pauses.
 
-The response you receive contains `server_tool_use` blocks showing what ran and what came back, but by the time you see them, execution is already complete. Your application's job is to enable the tool and read the final answer, not to participate in the execution loop.
+The response you receive contains `server_tool_use` blocks showing what ran and what came back. In the common case, execution is already complete by the time you see them, and your application's job is to enable the tool and read the final answer rather than to participate in the execution loop; the main exceptions are a paused loop ([`pause_turn`](#the-server-side-loop)) and a turn that also calls a client tool.
 
 ## The agentic loop (client tools)
 
@@ -61,6 +61,8 @@ For the mechanics of building requests, handling parallel tool calls, and format
 Server-executed tools run their own loop inside Anthropic's infrastructure. A single request from your application might trigger several web searches or code executions before a response comes back. The model searches, reads results, decides to search again, and iterates until it has what it needs, all without your application participating.
 
 This internal loop has an iteration limit. If the model is still iterating when it hits the cap, the response comes back with `stop_reason: "pause_turn"` instead of `"end_turn"`. A paused turn means the work isn't finished; re-send the conversation (including the paused response) to let the model continue where it left off. See [Server tools](./agents-and-tools-tool-use-server-tools.md) for the continuation pattern.
+
+The loop also hands control back to you before a server tool runs if Claude calls that server tool and a client tool in the same group of parallel tool calls. The response then comes back with `stop_reason: "tool_use"` and a `server_tool_use` block that has no result block yet; the API runs it after you return the client tool results. See [Stop reasons and fallback](../build-with-claude/build-with-claude-handling-stop-reasons.md#tool-use) for the exact contract.
 
 ## When to use tools (and when not to)
 
@@ -85,7 +87,7 @@ Tool use doesn't fit when:
 | --- | --- | --- | --- |
 | User-defined client tools | Custom business logic, internal APIs, proprietary data | You handle execution and the agentic loop | [Define tools](./agents-and-tools-tool-use-define-tools.md) |
 | Anthropic-schema client tools | Standard dev operations (bash, file editing, browser control) | You handle execution; Claude calls the tool reliably because the schema is trained-in | [Tool reference](./agents-and-tools-tool-use-tool-reference.md) |
-| Server-executed tools | Web search, code sandbox, web fetch | Anthropic handles execution; you get results directly | [Server tools](./agents-and-tools-tool-use-server-tools.md) |
+| Server-executed tools | Web search, code sandbox, web fetch | Anthropic handles execution; you read the results instead of producing them | [Server tools](./agents-and-tools-tool-use-server-tools.md) |
 
 ## Next steps
 

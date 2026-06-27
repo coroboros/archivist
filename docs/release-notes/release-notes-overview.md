@@ -16,6 +16,12 @@ For release notes on Claude Apps, see the [Release notes for Claude Apps in the 
 For updates to Claude Code, see the [complete CHANGELOG.md](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md) in the `claude-code` repository.
 </Tip>
 
+### June 26, 2026
+- We've raised [rate limits](../api/api-rate-limits.md) across the Claude API. Claude Sonnet and Claude Haiku rate limits now match Claude Opus at every usage tier, and usage tiers have been consolidated into three: Start, Build, and Scale. Most organizations move to a higher tier, no organization receives lower limits than before, and no action is required. You can view your tier and current limits in the [Claude Console](/settings/limits).
+
+### June 25, 2026
+- We've deprecated [fast mode](../build-with-claude/build-with-claude-fast-mode.md) for Claude Opus 4.7, with removal on July 24, 2026. After removal, requests to `claude-opus-4-7` with `speed: "fast"` will return an error. Migrate to fast mode for Claude Opus 4.8. Read more in [Fast mode](../build-with-claude/build-with-claude-fast-mode.md#supported-models).
+
 ### June 18, 2026
 - The Python, TypeScript, Go, Java, Ruby, PHP, and C# SDKs now include support for `code_execution_20260120`, the [code execution tool](../agents-and-tools/agents-and-tools-tool-use-code-execution-tool.md) version that adds REPL state persistence and is the minimum version for [programmatic tool calling](../agents-and-tools/agents-and-tools-tool-use-programmatic-tool-calling.md). To adopt it, set the tool's `type` to `code_execution_20260120`; no beta header is required. It's available on Claude Fable 5, Claude Mythos 5, Claude Opus 4.5 and newer, and Claude Sonnet 4.5 and newer; see the [model compatibility table](../agents-and-tools/agents-and-tools-tool-use-code-execution-tool.md#model-compatibility).
 

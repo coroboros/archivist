@@ -134,12 +134,12 @@ Claude Platform on AWS adds an AWS request ID (`x-amzn-requestid`) alongside the
 
 ### Rate limits
 
-The API enforces rate limits and spend limits to prevent misuse and manage capacity. Limits are organized into usage tiers that increase automatically as you use the API. Each tier has:
+The API enforces rate limits and spend limits to prevent misuse and manage capacity. Limits are organized into usage tiers; your organization is placed on a tier automatically and can move to a higher tier over time. Each tier has:
 
 - **Spend limits**: Maximum monthly cost for API usage
 - **Rate limits**: Maximum number of requests per minute (RPM) and tokens per minute (TPM)
 
-You can view your organization's current limits in the [Console](/settings/limits). For higher limits, contact sales through the Console.
+You can view your organization's current limits in the [Console](/settings/limits). For higher limits, use **Request rate limit increase** on the [Limits](/settings/limits) page.
 
 For detailed information about limits, tiers, and the token bucket algorithm used for rate limiting, see [Rate limits](./api-rate-limits.md).
 
@@ -160,6 +160,6 @@ The Claude API is available in [many countries and regions](./api-supported-regi
     Python, TypeScript, C#, Go, Java, PHP, and Ruby
   </Card>
   <Card title="Rate limits" icon="gauge" href="./api-rate-limits.md">
-    Usage tiers, spend limits, and token bucket algorithm
+    Usage tiers, requesting higher limits, and the token bucket algorithm
   </Card>
 </CardGroup>

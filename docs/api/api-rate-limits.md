@@ -11,7 +11,7 @@ To mitigate misuse and manage capacity on the API, limits are in place on how mu
 ---
 
 <Note>
-**[Claude Platform on AWS](../build-with-claude/build-with-claude-claude-platform-on-aws.md):** The rate limits on this page apply. Billing and spend limits differ: spend limits are not available, and billing is through AWS Marketplace (not Anthropic credit purchases). Organizations start at Tier 1. Rate limit increases go through your Anthropic account representative; there is no automatic tier advancement, and per-workspace rate limit configuration is not available. [Fast mode](../build-with-claude/build-with-claude-fast-mode.md) is not available on Claude Platform on AWS.
+**[Claude Platform on AWS](../build-with-claude/build-with-claude-claude-platform-on-aws.md):** The rate limits on this page apply. Billing and spend limits differ: spend limits are not available, and billing is through AWS Marketplace (not Anthropic credit purchases). Organizations on Claude Platform on AWS are placed on the Start tier and do not move between usage tiers automatically. To request higher limits, contact your Anthropic account representative. Per-workspace rate limit configuration and [fast mode](../build-with-claude/build-with-claude-fast-mode.md) are not available on Claude Platform on AWS.
 </Note>
 
 There are two types of limits:
@@ -26,45 +26,26 @@ These limits apply to both Standard and Priority Tier usage. For more informatio
 ## About rate limits
 
 * Limits are designed to prevent API abuse, while minimizing impact on common customer usage patterns.
-* Limits are defined by **usage tier**, where each tier is associated with a different set of spend and rate limits.
-* Your organization will increase tiers automatically as you reach certain thresholds while using the API.
-  Limits are set at the organization level. You can see your organization's limits on the [Limits](/settings/limits) page in the [Claude Console](/).
+* Limits are defined by **usage tier**. Your organization is placed on a tier automatically and can move to a higher tier over time as you use the API.
+* Limits are set at the organization level. You can see your organization's tier and current limits on the [Limits](/settings/limits) page in the [Claude Console](/).
 * You might hit rate limits over shorter time intervals. For instance, a rate of 60 requests per minute (RPM) might be enforced as 1 request per second. Short bursts of requests can exceed the limit and trigger rate limit errors.
-* The limits outlined below are the standard tier limits. If you're seeking higher, custom limits, contact sales on the [Limits](/settings/limits) page.
+* The following limits are the standard limits for each tier. If you need higher limits, see [Requesting higher limits](#requesting-higher-limits).
 * The API uses the [token bucket algorithm](https://en.wikipedia.org/wiki/Token_bucket) to do rate limiting. This means that your capacity is continuously replenished up to your maximum limit, rather than being reset at fixed intervals.
 * All limits described here represent maximum allowed usage, not guaranteed minimums. These limits are intended to reduce unintentional overspend and ensure fair distribution of resources among users.
 
 ## Spend limits
 
-Each usage tier has a limit on how much you can spend on the API each calendar month. Once you reach the spend limit of your tier, until you qualify for the next tier, you will have to wait until the next month to be able to use the API again.
+Each of the Start, Build, and Scale tiers carries a monthly spend cap, which is the maximum your organization can spend on the API each calendar month. Once you reach your tier's spend cap, API usage pauses until the next month unless you request a higher limit. You can view your organization's monthly spend cap on the [Limits](/settings/limits) page.
 
-To qualify for the next tier, you must meet a deposit requirement. To minimize the risk of overfunding your account, you cannot deposit more than your monthly spend limit.
+| Usage tier | Monthly spend cap |
+| ---------- | ----------------- |
+| Start      | \$500             |
+| Build      | \$1,000           |
+| Scale      | \$200,000         |
 
-### Requirements to advance tier
+Organizations on the Custom tier have no monthly spend cap; limits are arranged with their account team.
 
-| Usage tier        | Credit purchase | Max credit purchase | Monthly spend limit |
-| ----------------- | --------------- | ------------------- | ------------------- |
-| Tier 1            | \$5             | \$500               | \$500               |
-| Tier 2            | \$40            | \$500               | \$500               |
-| Tier 3            | \$200           | \$1,000             | \$1,000             |
-| Tier 4            | \$400           | \$200,000           | \$200,000           |
-| Monthly Invoicing | N/A             | N/A                 | No limit            |
-
-<Note>
-**Credit purchase** shows the cumulative credit purchases (excluding tax) required to advance to that tier. You advance immediately upon reaching the threshold.
-
-**Max credit purchase** limits the maximum amount you can add to your account in a single transaction to prevent account overfunding.
-
-**Monthly spend limit** is the maximum you can spend on the API each calendar month at that tier.
-</Note>
-
-## Increasing your spend limits
-
-Your organization has two kinds of spend limits: a customer-set limit you control directly, and a tier-enforced ceiling set by your usage tier. Each has a different process for increasing it.
-
-### Customer-set spend limits
-
-You can set a spend limit lower than your tier's ceiling to control costs. To adjust it:
+You can also set your own spend limit below your tier's cap to control costs:
 
 <Steps>
   <Step title="Navigate to the Limits page">
@@ -74,19 +55,9 @@ You can set a spend limit lower than your tier's ceiling to control costs. To ad
     In the **Spend limits** section, click **Change Limit** (or **Set spend limit** if no limit is currently set).
   </Step>
   <Step title="Adjust your spend limit">
-    Enter a new value. Your customer-set limit cannot exceed your current tier's limit.
+    Enter a new value. Your spend limit cannot exceed your current tier's cap.
   </Step>
 </Steps>
-
-### Tier-enforced spend limits
-
-When you need a limit higher than your tier's ceiling (Tier 4's ceiling is $200,000 per month), click **Contact Sales** on the [Limits](/settings/limits) page. This opens the contact form in a new tab, and a member of the sales team will follow up by email when your organization is upgraded.
-
-Monthly Invoicing removes the monthly spend cap entirely and uses Net-30 payment terms by default.
-
-<Note>
-Support can also raise tier-enforced limits. For urgent needs, contact [support](https://support.anthropic.com).
-</Note>
 
 ## Rate limits
 
@@ -150,52 +121,42 @@ Rate limits are currently shared across all `inference_geo` values. Requests wit
 </Note>
 
 <Tabs>
-<Tab title="Tier 1">
-| Model                                                                                        | Maximum requests per minute (RPM) | Maximum input tokens per minute (ITPM) | Maximum output tokens per minute (OTPM) |
-| -------------------------------------------------------------------------------------------- | --------------------------------- | -------------------------------------- | --------------------------------------- |
-| Claude Fable 5                                                                               | 50                                | 100,000                                | 20,000                                  |
-| Claude Sonnet 4.x<sup>**</sup>                                                               | 50                                | 30,000                                 | 8,000                                   |
-| Claude Haiku 4.5                                                                             | 50                                | 50,000                                 | 10,000                                  |
-| Claude Haiku 3.5 ([retired, except on Bedrock and Google Cloud](../about-claude/about-claude-model-deprecations.md)) | 50                                | 50,000<sup>†</sup>                     | 10,000                                  |
-| Claude Opus 4.x<sup>*</sup>                                                                  | 50                                | 500,000                                | 80,000                                  |
-
-</Tab>
-<Tab title="Tier 2">
+<Tab title="Start tier">
 | Model                                                                                        | Maximum requests per minute (RPM) | Maximum input tokens per minute (ITPM) | Maximum output tokens per minute (OTPM) |
 | -------------------------------------------------------------------------------------------- | --------------------------------- | -------------------------------------- | --------------------------------------- |
 | Claude Fable 5                                                                               | 1,000                             | 500,000                                | 100,000                                 |
-| Claude Sonnet 4.x<sup>**</sup>                                                               | 1,000                             | 450,000                                | 90,000                                  |
-| Claude Haiku 4.5                                                                             | 1,000                             | 450,000                                | 90,000                                  |
+| Claude Opus 4.x<sup>*</sup>                                                                  | 1,000                             | 2,000,000                              | 400,000                                 |
+| Claude Sonnet 4.x<sup>**</sup>                                                               | 1,000                             | 2,000,000                              | 400,000                                 |
+| Claude Haiku 4.5                                                                             | 1,000                             | 2,000,000                              | 400,000                                 |
 | Claude Haiku 3.5 ([retired, except on Bedrock and Google Cloud](../about-claude/about-claude-model-deprecations.md)) | 1,000                             | 100,000<sup>†</sup>                    | 20,000                                  |
-| Claude Opus 4.x<sup>*</sup>                                                                  | 1,000                             | 2,000,000                              | 200,000                                 |
 
 </Tab>
-<Tab title="Tier 3">
+<Tab title="Build tier">
 | Model                                                                                        | Maximum requests per minute (RPM) | Maximum input tokens per minute (ITPM) | Maximum output tokens per minute (OTPM) |
 | -------------------------------------------------------------------------------------------- | --------------------------------- | -------------------------------------- | --------------------------------------- |
 | Claude Fable 5                                                                               | 2,000                             | 1,500,000                              | 300,000                                 |
-| Claude Sonnet 4.x<sup>**</sup>                                                               | 2,000                             | 800,000                                | 160,000                                 |
-| Claude Haiku 4.5                                                                             | 2,000                             | 1,000,000                              | 200,000                                 |
+| Claude Opus 4.x<sup>*</sup>                                                                  | 5,000                             | 5,000,000                              | 1,000,000                               |
+| Claude Sonnet 4.x<sup>**</sup>                                                               | 5,000                             | 5,000,000                              | 1,000,000                               |
+| Claude Haiku 4.5                                                                             | 5,000                             | 5,000,000                              | 1,000,000                               |
 | Claude Haiku 3.5 ([retired, except on Bedrock and Google Cloud](../about-claude/about-claude-model-deprecations.md)) | 2,000                             | 200,000<sup>†</sup>                    | 40,000                                  |
-| Claude Opus 4.x<sup>*</sup>                                                                  | 2,000                             | 5,000,000                              | 400,000                                 |
 
 </Tab>
-<Tab title="Tier 4">
+<Tab title="Scale tier">
 | Model                                                                                        | Maximum requests per minute (RPM) | Maximum input tokens per minute (ITPM) | Maximum output tokens per minute (OTPM) |
 | -------------------------------------------------------------------------------------------- | --------------------------------- | -------------------------------------- | --------------------------------------- |
 | Claude Fable 5                                                                               | 4,000                             | 4,000,000                              | 800,000                                 |
-| Claude Sonnet 4.x<sup>**</sup>                                                               | 4,000                             | 2,000,000                              | 400,000                                 |
-| Claude Haiku 4.5                                                                             | 4,000                             | 4,000,000                              | 800,000                                 |
+| Claude Opus 4.x<sup>*</sup>                                                                  | 10,000                            | 10,000,000                             | 2,000,000                               |
+| Claude Sonnet 4.x<sup>**</sup>                                                               | 10,000                            | 10,000,000                             | 2,000,000                               |
+| Claude Haiku 4.5                                                                             | 10,000                            | 10,000,000                             | 2,000,000                               |
 | Claude Haiku 3.5 ([retired, except on Bedrock and Google Cloud](../about-claude/about-claude-model-deprecations.md)) | 4,000                             | 400,000<sup>†</sup>                    | 80,000                                  |
-| Claude Opus 4.x<sup>*</sup>                                                                  | 4,000                             | 10,000,000                             | 800,000                                 |
 
 </Tab>
-<Tab title="Custom">
-If you're seeking higher limits for an Enterprise use case, contact sales through the [Claude Console](/settings/limits).
+<Tab title="Custom tier">
+If you need limits higher than the Scale tier, contact sales through the [Claude Console](/settings/limits).
 </Tab>
 </Tabs>
 
-_<sup>* - Opus rate limit is a total limit that applies to combined traffic across Claude Opus 4.8, Opus 4.7, Opus 4.6, Opus 4.5, and Opus 4.1 ([deprecated](../about-claude/about-claude-model-deprecations.md)).</sup>_
+_<sup>* - Opus rate limit is a total limit that applies to combined traffic across Claude Opus 4.8, Opus 4.7, Opus 4.6, and Opus 4.5.</sup>_
 
 _<sup>** - Sonnet 4.x rate limit is a total limit that applies to combined traffic across Sonnet 4.6 and Sonnet 4.5.</sup>_
 
@@ -206,28 +167,23 @@ _<sup>† - Limit counts `cache_read_input_tokens` towards ITPM usage.</sup>_
 The Message Batches API has its own set of rate limits which are shared across all models. These include a requests per minute (RPM) limit to all API endpoints and a limit on the number of batch requests that can be in the processing queue at the same time. A "batch request" here refers to part of a Message Batch. You may create a Message Batch containing thousands of batch requests, each of which count towards this limit. A batch request is considered part of the processing queue when it has yet to be successfully processed by the model.
 
 <Tabs>
-<Tab title="Tier 1">
-| Maximum requests per minute (RPM) | Maximum batch requests in processing queue | Maximum batch requests per batch |
-| --------------------------------- | ------------------------------------------ | -------------------------------- |
-| 50                                | 100,000                                    | 100,000                          |
-</Tab>
-<Tab title="Tier 2">
+<Tab title="Start tier">
 | Maximum requests per minute (RPM) | Maximum batch requests in processing queue | Maximum batch requests per batch |
 | --------------------------------- | ------------------------------------------ | -------------------------------- |
 | 1,000                             | 200,000                                    | 100,000                          |
 </Tab>
-<Tab title="Tier 3">
+<Tab title="Build tier">
 | Maximum requests per minute (RPM) | Maximum batch requests in processing queue | Maximum batch requests per batch |
 | --------------------------------- | ------------------------------------------ | -------------------------------- |
 | 2,000                             | 300,000                                    | 100,000                          |
 </Tab>
-<Tab title="Tier 4">
+<Tab title="Scale tier">
 | Maximum requests per minute (RPM) | Maximum batch requests in processing queue | Maximum batch requests per batch |
 | --------------------------------- | ------------------------------------------ | -------------------------------- |
 | 4,000                             | 500,000                                    | 100,000                          |
 </Tab>
-<Tab title="Custom">
-If you're seeking higher limits for an Enterprise use case, contact sales through the [Claude Console](/settings/limits).
+<Tab title="Custom tier">
+If you need limits higher than the Scale tier, contact sales through the [Claude Console](/settings/limits).
 </Tab>
 </Tabs>
 
@@ -238,7 +194,7 @@ If you're seeking higher limits for an Enterprise use case, contact sales throug
 | Operation | Limit |
 | --- | --- |
 | Create endpoints (for example, agents, sessions, and environments) | 300 requests per minute |
-| Read endpoints (for example, retrieve, list, and stream) | 600 requests per minute |
+| Read endpoints (for example, retrieve, list, and stream) | 1,200 requests per minute |
 
 ### Fast mode rate limits
 
@@ -259,6 +215,14 @@ In addition to providing token and request charts, the Usage page provides two s
 - The **Rate Limit - Output Tokens** chart includes:
   - Hourly maximum output tokens per minute
   - Your current output tokens per minute rate limit
+
+## Requesting higher limits
+
+To request higher rate limits or a higher monthly spend cap, use **Request rate limit increase** on the [Limits](/settings/limits) page.
+
+<Note>
+Support can also raise limits. For urgent needs, contact [support](https://support.anthropic.com).
+</Note>
 
 ## Setting lower limits for Workspaces
 

@@ -1,5 +1,109 @@
 # Changelog
 
+## 🤖 v1.5.10 - 27/06/2026
+
+File Changes:
+
+- Modified: `docs/agents-and-tools/agents-and-tools-README.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-handle-tool-calls.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-how-tool-use-works.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-overview.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-server-tools.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-troubleshooting-tool-use.md`
+- Modified: `docs/api/api-README.md`
+- Modified: `docs/api/api-compliance-activities-list.md`
+- Modified: `docs/api/api-compliance-activities.md`
+- Modified: `docs/api/api-compliance-apps-chats-list.md`
+- Modified: `docs/api/api-compliance-apps-chats-messages-list.md`
+- Modified: `docs/api/api-compliance-apps-chats-messages.md`
+- Modified: `docs/api/api-compliance-apps-chats.md`
+- Modified: `docs/api/api-compliance-apps-projects-documents-metadata.md`
+- Modified: `docs/api/api-compliance-apps-projects-documents-retrieve.md`
+- Modified: `docs/api/api-compliance-apps-projects-documents.md`
+- Modified: `docs/api/api-compliance-apps-projects-retrieve.md`
+- Modified: `docs/api/api-compliance-apps-projects.md`
+- Modified: `docs/api/api-compliance-apps.md`
+- Modified: `docs/api/api-compliance-code-artifacts-list.md`
+- Modified: `docs/api/api-compliance-code-artifacts.md`
+- Modified: `docs/api/api-compliance-code.md`
+- Modified: `docs/api/api-compliance-groups-list.md`
+- Modified: `docs/api/api-compliance-groups-members-list.md`
+- Modified: `docs/api/api-compliance-groups-members.md`
+- Modified: `docs/api/api-compliance-groups-retrieve.md`
+- Modified: `docs/api/api-compliance-groups.md`
+- Modified: `docs/api/api-compliance-organizations-list.md`
+- Modified: `docs/api/api-compliance-organizations-roles-list.md`
+- Modified: `docs/api/api-compliance-organizations-roles-permissions-list.md`
+- Modified: `docs/api/api-compliance-organizations-roles-permissions.md`
+- Modified: `docs/api/api-compliance-organizations-roles-retrieve.md`
+- Modified: `docs/api/api-compliance-organizations-roles.md`
+- Modified: `docs/api/api-compliance-organizations-settings-retrieve.md`
+- Modified: `docs/api/api-compliance-organizations-settings.md`
+- Modified: `docs/api/api-compliance-organizations-users-list.md`
+- Modified: `docs/api/api-compliance-organizations-users.md`
+- Modified: `docs/api/api-compliance-organizations.md`
+- Modified: `docs/api/api-compliance.md`
+- Modified: `docs/api/api-overview.md`
+- Modified: `docs/api/api-rate-limits.md`
+- Modified: `docs/build-with-claude/build-with-claude-README.md`
+- Modified: `docs/build-with-claude/build-with-claude-citations.md`
+- Modified: `docs/build-with-claude/build-with-claude-claude-platform-on-aws.md`
+- Modified: `docs/build-with-claude/build-with-claude-fast-mode.md`
+- Modified: `docs/build-with-claude/build-with-claude-handling-stop-reasons.md`
+- Modified: `docs/build-with-claude/build-with-claude-pdf-support.md`
+- Modified: `docs/build-with-claude/build-with-claude-token-counting.md`
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-admin-setup.md`
+- Modified: `docs/code/code-agent-teams.md`
+- Modified: `docs/code/code-agent-view.md`
+- Modified: `docs/code/code-artifacts.md`
+- Modified: `docs/code/code-auto-mode-config.md`
+- Modified: `docs/code/code-changelog.md`
+- Modified: `docs/code/code-channels.md`
+- Modified: `docs/code/code-claude-code-on-the-web.md`
+- Modified: `docs/code/code-devcontainer.md`
+- Modified: `docs/code/code-discover-plugins.md`
+- Modified: `docs/code/code-env-vars.md`
+- Modified: `docs/code/code-errors.md`
+- Modified: `docs/code/code-fast-mode.md`
+- Modified: `docs/code/code-fullscreen.md`
+- Modified: `docs/code/code-goal.md`
+- Modified: `docs/code/code-hooks.md`
+- Modified: `docs/code/code-interactive-mode.md`
+- Modified: `docs/code/code-llm-gateway-protocol.md`
+- Modified: `docs/code/code-llm-gateway.md`
+- Modified: `docs/code/code-model-config.md`
+- Modified: `docs/code/code-monitoring-usage.md`
+- Modified: `docs/code/code-permissions.md`
+- Modified: `docs/code/code-plugin-marketplaces.md`
+- Modified: `docs/code/code-sandbox-environments.md`
+- Modified: `docs/code/code-sandboxing.md`
+- Modified: `docs/code/code-sessions.md`
+- Modified: `docs/code/code-settings.md`
+- Modified: `docs/code/code-slash-commands.md`
+- Modified: `docs/code/code-sub-agents.md`
+- Modified: `docs/code/code-subagents.md`
+- Modified: `docs/code/code-tool-search.md`
+- Modified: `docs/code/code-tools-reference.md`
+- Modified: `docs/code/code-typescript.md`
+- Modified: `docs/code/code-voice-dictation.md`
+- Modified: `docs/code/code-whats-new.md`
+- Modified: `docs/code/code-workflows.md`
+- Modified: `docs/manage-claude/manage-claude-README.md`
+- Modified: `docs/manage-claude/manage-claude-cmek.md`
+- Modified: `docs/manage-claude/manage-claude-compliance-activity-feed.md`
+- Modified: `docs/manage-claude/manage-claude-compliance-errors.md`
+- Modified: `docs/manage-claude/manage-claude-compliance-org-data.md`
+- Modified: `docs/managed-agents/managed-agents-README.md`
+- Modified: `docs/managed-agents/managed-agents-agent-setup.md`
+- Modified: `docs/managed-agents/managed-agents-environments.md`
+- Modified: `docs/managed-agents/managed-agents-reference.md`
+- Modified: `docs/release-notes/release-notes-README.md`
+- Modified: `docs/release-notes/release-notes-overview.md`
+- Added: `docs/code/code-2026-w25.md`
+- Added: `docs/code/code-2026-w26.md`
+
+
 ## 🤖 v1.5.9 - 26/06/2026
 
 File Changes:
