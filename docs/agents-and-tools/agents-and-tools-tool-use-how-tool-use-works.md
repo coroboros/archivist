@@ -68,26 +68,26 @@ The loop also hands control back to you before a server tool runs if Claude call
 
 Tool use fits when the task requires something the model can't do from text alone:
 
-- **Actions with side effects.** Sending an email, writing a file, updating a record. The model can describe these actions, but only a tool can perform them.
-- **Fresh or external data.** Current prices, today's weather, the contents of a database. Anything outside the training data or specific to your system needs a tool to fetch it.
-- **Structured, guaranteed-shape outputs.** When you need a JSON object with specific fields rather than prose that happens to contain the information, a tool schema enforces the shape.
-- **Calling into existing systems.** Databases, internal APIs, file systems. Tool use is the bridge between natural-language requests and the systems that fulfill them.
+* **Actions with side effects.** Sending an email, writing a file, updating a record. The model can describe these actions, but only a tool can perform them.
+* **Fresh or external data.** Current prices, today's weather, the contents of a database. Anything outside the training data or specific to your system needs a tool to fetch it.
+* **Structured, guaranteed-shape outputs.** When you need a JSON object with specific fields rather than prose that happens to contain the information, a tool schema enforces the shape.
+* **Calling into existing systems.** Databases, internal APIs, file systems. Tool use is the bridge between natural-language requests and the systems that fulfill them.
 
 The tell that you should be using tools: if you're writing a regex to extract a decision from model output, that decision should have been a tool call. Parsing free-form text to recover structured intent is a sign the structure belongs in the schema.
 
 Tool use doesn't fit when:
 
-- The model can answer from training alone. Summarization, translation, and general-knowledge questions don't need a tool round trip.
-- The interaction is one-shot Q&A with no side effects. If there's nothing to execute, there's nothing for a tool to do.
-- Tool-calling latency would dominate a trivial response. Every tool call is at least one extra round trip; for lightweight tasks the overhead can exceed the work.
+* The model can answer from training alone. Summarization, translation, and general-knowledge questions don't need a tool round trip.
+* The interaction is one-shot Q\&A with no side effects. If there's nothing to execute, there's nothing for a tool to do.
+* Tool-calling latency would dominate a trivial response. Every tool call is at least one extra round trip; for lightweight tasks the overhead can exceed the work.
 
 ## Choosing between approaches
 
-| Approach | When to use it | What to expect | Learn more |
-| --- | --- | --- | --- |
-| User-defined client tools | Custom business logic, internal APIs, proprietary data | You handle execution and the agentic loop | [Define tools](./agents-and-tools-tool-use-define-tools.md) |
+| Approach                      | When to use it                                                | What to expect                                                                        | Learn more                                                          |
+| ----------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| User-defined client tools     | Custom business logic, internal APIs, proprietary data        | You handle execution and the agentic loop                                             | [Define tools](./agents-and-tools-tool-use-define-tools.md)     |
 | Anthropic-schema client tools | Standard dev operations (bash, file editing, browser control) | You handle execution; Claude calls the tool reliably because the schema is trained-in | [Tool reference](./agents-and-tools-tool-use-tool-reference.md) |
-| Server-executed tools | Web search, code sandbox, web fetch | Anthropic handles execution; you read the results instead of producing them | [Server tools](./agents-and-tools-tool-use-server-tools.md) |
+| Server-executed tools         | Web search, code sandbox, web fetch                           | Anthropic handles execution; you read the results instead of producing them           | [Server tools](./agents-and-tools-tool-use-server-tools.md)     |
 
 ## Next steps
 
@@ -95,9 +95,11 @@ Tool use doesn't fit when:
   <Card href="./agents-and-tools-tool-use-build-a-tool-using-agent.md" title="Tutorial: Build a tool-using agent">
     Build an agent step by step from a single tool call to production.
   </Card>
+
   <Card href="./agents-and-tools-tool-use-define-tools.md" title="Define tools">
-    Schema specification, descriptions, and tool_choice.
+    Schema specification, descriptions, and tool\_choice.
   </Card>
+
   <Card href="./agents-and-tools-tool-use-tool-reference.md" title="Tool reference">
     Directory of Anthropic-provided tools.
   </Card>

@@ -13,20 +13,29 @@ generated: true
 The API follows a predictable HTTP error code format:
 
 * 400 - `invalid_request_error`: There was an issue with the format or content of your request. This error type may also be used for other 4XX status codes not listed in this section.
+
 * 401 - `authentication_error`: There's an issue with your API key. On Claude Platform on AWS, this can also indicate a problem with your AWS credentials or SigV4 signature.
+
 * 402 - `billing_error`: There's an issue with your billing or payment information. Check your payment details in the [Claude Console](https://platform.claude.com), or in AWS Marketplace if you're using Claude Platform on AWS.
+
 * 403 - `permission_error`: Your API key does not have permission to use the specified resource.
+
 * 404 - `not_found_error`: The requested resource was not found.
+
 * 413 - `request_too_large`: Request exceeds the maximum allowed number of bytes. See [Request size limits](#request-size-limits) for per-endpoint maximums.
+
 * 429 - `rate_limit_error`: Your account has hit a rate limit.
+
 * 500 - `api_error`: An unexpected error has occurred internal to Anthropic's systems.
+
 * 504 - `timeout_error`: The request timed out while processing. Consider using [streaming](../build-with-claude/build-with-claude-streaming.md) for long-running requests.
+
 * 529 - `overloaded_error`: The API is temporarily overloaded.
 
   <Warning>
-  529 errors can occur when APIs experience high traffic across all users.
+    529 errors can occur when APIs experience high traffic across all users.
 
-  In rare cases, if your organization has a sharp increase in usage, you might see 429 errors because of acceleration limits on the API. To avoid hitting acceleration limits, ramp up your traffic gradually and maintain consistent usage patterns.
+    In rare cases, if your organization has a sharp increase in usage, you might see 429 errors because of acceleration limits on the API. To avoid hitting acceleration limits, ramp up your traffic gradually and maintain consistent usage patterns.
   </Warning>
 
 When receiving a [streaming](../build-with-claude/build-with-claude-streaming.md) response over SSE, it's possible that an error can occur after returning a 200 response, in which case error handling wouldn't follow these standard mechanisms.
@@ -35,12 +44,12 @@ When receiving a [streaming](../build-with-claude/build-with-claude-streaming.md
 
 The API enforces request size limits to ensure optimal performance:
 
-| Endpoint type | Maximum request size |
-|:---|:---|
-| Messages API | 32 MB |
-| Token Counting API | 32 MB |
-| [Batch API](../build-with-claude/build-with-claude-batch-processing.md) | 256 MB |
-| [Files API](../build-with-claude/build-with-claude-files.md) | 500 MB |
+| Endpoint type                                            | Maximum request size |
+| -------------------------------------------------------- | -------------------- |
+| Messages API                                             | 32 MB                |
+| Token Counting API                                       | 32 MB                |
+| [Batch API](../build-with-claude/build-with-claude-batch-processing.md) | 256 MB               |
+| [Files API](../build-with-claude/build-with-claude-files.md)            | 500 MB               |
 
 If you exceed these limits, you'll receive a 413 `request_too_large` error. On the direct Claude API, this error is returned from Cloudflare before the request reaches the API servers.
 
@@ -65,7 +74,7 @@ In accordance with the [versioning](./api-versioning.md) policy, the values with
 
 The official SDKs raise typed exceptions for these errors instead of returning raw JSON, and the class names and namespaces differ by language. For example, a 404 surfaces as `anthropic.NotFoundError` in Python, `Anthropic::Errors::NotFoundError` in Ruby, `com.anthropic.errors.NotFoundException` in Java, and as a single `*anthropic.Error` value (branch on `StatusCode`) in Go. Catch the SDK's typed classes rather than string-matching error messages, handling the most specific classes first. Each SDK page documents its full exception hierarchy:
 
-- [Python](https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/python.md#handling-errors) · [TypeScript](https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/typescript.md#handling-errors) · [C#](https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/csharp.md#error-handling) · [Go](https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/go.md#error-handling) · [Java](https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/java.md#error-handling) · [PHP](https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/php.md#error-handling) · [Ruby](https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/ruby.md#handling-errors)
+* [Python](https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/python.md#handling-errors) · [TypeScript](https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/typescript.md#handling-errors) · [C#](https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/csharp.md#error-handling) · [Go](https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/go.md#error-handling) · [Java](https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/java.md#error-handling) · [PHP](https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/php.md#error-handling) · [Ruby](https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/ruby.md#handling-errors)
 
 ## Request ID
 
@@ -84,9 +93,7 @@ The official SDKs provide the Anthropic request ID as a property on top-level re
     --message '{role: user, content: "Hello, Claude"}'
   ```
 
-  ```python Python hidelines={1..2}
-  import anthropic
-
+  ```python Python
   client = anthropic.Anthropic()
 
   message = client.messages.create(
@@ -97,9 +104,7 @@ The official SDKs provide the Anthropic request ID as a property on top-level re
   print(f"Request ID: {message._request_id}")
   ```
 
-  ```typescript TypeScript hidelines={1..2}
-  import Anthropic from "@anthropic-ai/sdk";
-
+  ```typescript TypeScript
   const client = new Anthropic();
 
   const message = await client.messages.create({
@@ -110,8 +115,7 @@ The official SDKs provide the Anthropic request ID as a property on top-level re
   console.log("Request ID:", message._request_id);
   ```
 
-  
-  ```python Python (Claude Platform on AWS) nocheck
+  ```python Python (Claude Platform on AWS)
   from anthropic import AnthropicAWS
 
   client = AnthropicAWS(aws_region="us-west-2")
@@ -126,8 +130,7 @@ The official SDKs provide the Anthropic request ID as a property on top-level re
   print(f"Anthropic request ID: {message._request_id}")
   ```
 
-  
-  ```typescript TypeScript (Claude Platform on AWS) nocheck
+  ```typescript TypeScript (Claude Platform on AWS)
   import AnthropicAws from "@anthropic-ai/aws-sdk";
 
   const client = new AnthropicAws({ awsRegion: "us-west-2" });
@@ -149,44 +152,40 @@ For Claude Platform on AWS request-ID examples in other languages, see [Request 
 ## Long requests
 
 <Warning>
- Consider using the [streaming Messages API](../build-with-claude/build-with-claude-streaming.md) or [Message Batches API](https://platform.claude.com/docs/en/api/creating-message-batches.md) for long running requests, especially those over 10 minutes.
+  Consider using the [streaming Messages API](../build-with-claude/build-with-claude-streaming.md) or [Message Batches API](https://platform.claude.com/docs/en/api/creating-message-batches.md) for long running requests, especially those over 10 minutes.
 </Warning>
 
-Avoid setting a large `max_tokens` value without using the [streaming Messages API](../build-with-claude/build-with-claude-streaming.md)
-or [Message Batches API](https://platform.claude.com/docs/en/api/creating-message-batches.md):
+Avoid setting a large `max_tokens` value without using the [streaming Messages API](../build-with-claude/build-with-claude-streaming.md) or [Message Batches API](https://platform.claude.com/docs/en/api/creating-message-batches.md):
 
-- Some networks may drop idle connections after a variable period of time, which
-can cause the request to fail or timeout without receiving a response from Anthropic.
-- Networks differ in reliability; the [Message Batches API](https://platform.claude.com/docs/en/api/creating-message-batches.md) can help you
-manage the risk of network issues by allowing you to poll for results rather than requiring an uninterrupted network connection.
+* Some networks may drop idle connections after a variable period of time, which can cause the request to fail or timeout without receiving a response from Anthropic.
+* Networks differ in reliability; the [Message Batches API](https://platform.claude.com/docs/en/api/creating-message-batches.md) can help you manage the risk of network issues by allowing you to poll for results rather than requiring an uninterrupted network connection.
 
 If you are building a direct API integration, you should be aware that setting a [TCP socket keep-alive](https://tldp.org/HOWTO/TCP-Keepalive-HOWTO/programming.html) can reduce the impact of idle connection timeouts on some networks.
 
-The [SDKs](https://platform.claude.com/docs/en/cli-sdks-libraries/overview.md) validate that your non-streaming Messages API requests are not expected to exceed a 10 minute timeout and
-also will set a socket option for TCP keep-alive.
+The [SDKs](https://platform.claude.com/docs/en/cli-sdks-libraries/overview.md) validate that your non-streaming Messages API requests are not expected to exceed a 10 minute timeout and also will set a socket option for TCP keep-alive.
 
 If you don't need to process events incrementally, use `.stream()` with `.get_final_message()` (Python) or `.finalMessage()` (TypeScript) to get the complete `Message` object without writing event-handling code:
 
 <CodeGroup>
-    ```python Python
-    with client.messages.stream(
-        max_tokens=128000,
-        messages=[{"role": "user", "content": "Write a detailed analysis..."}],
-        model="claude-opus-4-8",
-    ) as stream:
-        message = stream.get_final_message()
-    print(message.content)
-    ```
+  ```python Python
+  with client.messages.stream(
+      max_tokens=128000,
+      messages=[{"role": "user", "content": "Write a detailed analysis..."}],
+      model="claude-opus-4-8",
+  ) as stream:
+      message = stream.get_final_message()
+  print(message.content)
+  ```
 
-    ```typescript TypeScript
-    const stream = client.messages.stream({
-      max_tokens: 128000,
-      messages: [{ role: "user", content: "Write a detailed analysis..." }],
-      model: "claude-opus-4-8"
-    });
-    const message = await stream.finalMessage();
-    console.log(message.content);
-    ```
+  ```typescript TypeScript
+  const stream = client.messages.stream({
+    max_tokens: 128000,
+    messages: [{ role: "user", content: "Write a detailed analysis..." }],
+    model: "claude-opus-4-8"
+  });
+  const message = await stream.finalMessage();
+  console.log(message.content);
+  ```
 </CodeGroup>
 
 See [Streaming Messages](../build-with-claude/build-with-claude-streaming.md#get-the-final-message-without-handling-events) for more details.
@@ -213,7 +212,7 @@ Use [structured outputs](../build-with-claude/build-with-claude-structured-outpu
 
 If the most recent assistant message contains `thinking` or `redacted_thinking` blocks that were edited, reordered, filtered out, or reconstructed before being sent back to the API, the request returns a 400 `invalid_request_error`. The error message starts with the position of the offending block (for example, `messages.1.content.0`) and contains:
 
-```text
+```text wrap
 `thinking` or `redacted_thinking` blocks in the latest assistant message cannot be modified. These blocks must remain as they were in the original response.
 ```
 
