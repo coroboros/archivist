@@ -1,5 +1,28 @@
 # Changelog
 
+## 🤖 v1.5.12 - 28/06/2026
+
+File Changes:
+
+- Modified: `docs/agents-and-tools/agents-and-tools-README.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-advisor-tool.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-memory-tool.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-parallel-tool-use.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-programmatic-tool-calling.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-server-tools.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-tool-runner.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-web-fetch-tool.md`
+- Modified: `docs/api/api-README.md`
+- Modified: `docs/api/api-service-tiers.md`
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-hooks.md`
+- Modified: `docs/code/code-quickstart.md`
+- Modified: `docs/code/code-sessions.md`
+- Modified: `docs/manage-claude/manage-claude-README.md`
+- Modified: `docs/manage-claude/manage-claude-cmek.md`
+- Added: `docs/code/code-custom-tools.md`
+
+
 ## 🤖 v1.5.11 - 27/06/2026
 
 File Changes:
