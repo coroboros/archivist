@@ -1,5 +1,17 @@
 # Changelog
 
+## 🤖 v1.5.14 - 29/06/2026
+
+File Changes:
+
+- Deleted: `docs/code/code-2026-w14.md`
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-hooks.md`
+- Modified: `docs/code/code-quickstart.md`
+- Modified: `docs/code/code-sessions.md`
+- Modified: `docs/code/code-skills.md`
+
+
 ## 🤖 v1.5.13 - 28/06/2026
 
 File Changes:
