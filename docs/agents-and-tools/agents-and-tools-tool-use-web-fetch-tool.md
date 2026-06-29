@@ -42,7 +42,7 @@ For model support, see the [Tool reference](./agents-and-tools-tool-use-tool-ref
 
 ## How web fetch works
 
-Web fetch is a [server tool](./agents-and-tools-tool-use-server-tools.md): the API fetches the content during the request and inserts the results into the conversation. You don't run anything or return a `tool_result`.
+Web fetch is a [server tool](./agents-and-tools-tool-use-server-tools.md): the API fetches the content during the request and inserts the results into the conversation. You don't run anything or return a `tool_result`. The exception is when Claude calls web fetch and one of your client tools in the same group of parallel tool calls: the API returns the response with `stop_reason: "tool_use"` before that fetch has run, then runs the fetch when you send back the client `tool_result` blocks. See [Mixing server tools and client tools in one turn](./agents-and-tools-tool-use-server-tools.md#mixing-server-tools-and-client-tools-in-one-turn).
 
 When you add the web fetch tool to your API request:
 

@@ -1,5 +1,25 @@
 # Changelog
 
+## 🤖 v1.5.15 - 29/06/2026
+
+File Changes:
+
+- Modified: `docs/agents-and-tools/agents-and-tools-README.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-fine-grained-tool-streaming.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-server-tools.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-tool-search-tool.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-web-fetch-tool.md`
+- Modified: `docs/build-with-claude/build-with-claude-README.md`
+- Modified: `docs/build-with-claude/build-with-claude-compaction.md`
+- Modified: `docs/build-with-claude/build-with-claude-context-windows.md`
+- Modified: `docs/build-with-claude/build-with-claude-handling-stop-reasons.md`
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-overview.md`
+- Modified: `docs/code/code-quickstart.md`
+- Modified: `docs/code/code-skills.md`
+- Added: `docs/code/code-2026-w14.md`
+
+
 ## 🤖 v1.5.14 - 29/06/2026
 
 File Changes:
