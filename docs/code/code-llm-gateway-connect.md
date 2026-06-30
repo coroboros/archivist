@@ -259,7 +259,12 @@ The [Agent SDK](./code-agent-sdk/overview.md) has no gateway-specific options; i
 
 [Claude Code in Slack](./code-slack.md) and [Claude Code on the web](./code-claude-code-on-the-web.md) are Anthropic-hosted products that always use Anthropic's API; they aren't part of a gateway deployment. Gateway variables set in a cloud session's environment configuration are not applied. If your traffic must stay on the gateway, don't enable these surfaces for those users.
 
-[Remote Control](./code-remote-control.md) and [voice dictation](./code-voice-dictation.md) both rely on a claude.ai identity: Remote Control to pair a live session with your account, and voice dictation to reach the claude.ai transcription endpoint. They are unavailable while `ANTHROPIC_API_KEY`, `ANTHROPIC_AUTH_TOKEN`, or an `apiKeyHelper` is active. To use either, unset the gateway credential and log in with claude.ai instead; `/doctor` names the variable to unset.
+[Remote Control](./code-remote-control.md) and [voice dictation](./code-voice-dictation.md) both rely on a claude.ai identity: Remote Control to pair a live session with your account, and voice dictation to reach the claude.ai transcription endpoint. They are unavailable while `ANTHROPIC_API_KEY`, `ANTHROPIC_AUTH_TOKEN`, or an `apiKeyHelper` is active. {/* min-version: 2.1.196 */}As of v2.1.196, Remote Control is also disabled while `ANTHROPIC_BASE_URL` points at a non-Anthropic host, so signing in with claude.ai isn't enough on its own.
+
+To restore either feature, log in with claude.ai and unset the gateway variables it checks. `/doctor` names the credential variable to unset.
+
+* Voice dictation: unset the gateway credential
+* Remote Control: unset the gateway credential and `ANTHROPIC_BASE_URL`
 
 ## Additional configuration
 

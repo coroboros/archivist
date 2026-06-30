@@ -1,5 +1,56 @@
 # Changelog
 
+## 🤖 v1.5.17 - 30/06/2026
+
+File Changes:
+
+- Modified: `docs/code/code-2026-w23.md`
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-admin-setup.md`
+- Modified: `docs/code/code-agent-teams.md`
+- Modified: `docs/code/code-agent-view.md`
+- Modified: `docs/code/code-amazon-bedrock.md`
+- Modified: `docs/code/code-auto-mode-config.md`
+- Modified: `docs/code/code-claude-apps-gateway-config.md`
+- Modified: `docs/code/code-claude-apps-gateway-deploy.md`
+- Modified: `docs/code/code-claude-apps-gateway-spend-limits.md`
+- Modified: `docs/code/code-claude-apps-gateway.md`
+- Modified: `docs/code/code-claude-code-on-the-web.md`
+- Modified: `docs/code/code-commands.md`
+- Modified: `docs/code/code-computer-use.md`
+- Modified: `docs/code/code-debug-your-config.md`
+- Modified: `docs/code/code-deep-links.md`
+- Modified: `docs/code/code-discover-plugins.md`
+- Modified: `docs/code/code-env-vars.md`
+- Modified: `docs/code/code-errors.md`
+- Modified: `docs/code/code-fullscreen.md`
+- Modified: `docs/code/code-hooks.md`
+- Modified: `docs/code/code-hosting.md`
+- Modified: `docs/code/code-interactive-mode.md`
+- Modified: `docs/code/code-jetbrains.md`
+- Modified: `docs/code/code-llm-gateway-connect.md`
+- Modified: `docs/code/code-mcp.md`
+- Modified: `docs/code/code-model-config.md`
+- Modified: `docs/code/code-monitoring-usage.md`
+- Modified: `docs/code/code-permission-modes.md`
+- Modified: `docs/code/code-plugin-dependencies.md`
+- Modified: `docs/code/code-plugin-marketplaces.md`
+- Modified: `docs/code/code-plugins-reference.md`
+- Modified: `docs/code/code-plugins.md`
+- Modified: `docs/code/code-python.md`
+- Modified: `docs/code/code-remote-control.md`
+- Modified: `docs/code/code-scheduled-tasks.md`
+- Modified: `docs/code/code-session-storage.md`
+- Modified: `docs/code/code-sessions.md`
+- Modified: `docs/code/code-settings.md`
+- Modified: `docs/code/code-statusline.md`
+- Modified: `docs/code/code-sub-agents.md`
+- Modified: `docs/code/code-tools-reference.md`
+- Modified: `docs/code/code-typescript.md`
+- Modified: `docs/code/code-voice-dictation.md`
+- Modified: `docs/code/code-workflows.md`
+
+
 ## 🤖 v1.5.16 - 30/06/2026
 
 File Changes:
