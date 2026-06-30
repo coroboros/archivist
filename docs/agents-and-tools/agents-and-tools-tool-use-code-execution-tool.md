@@ -55,7 +55,7 @@ Code execution is available on:
 
 * **Claude API** (Anthropic)
 * **[Claude Platform on AWS](../build-with-claude/build-with-claude-claude-platform-on-aws.md)**
-* **[Microsoft Foundry](../build-with-claude/build-with-claude-claude-in-microsoft-foundry.md)**
+* **[Microsoft Foundry](../build-with-claude/build-with-claude-claude-in-microsoft-foundry.md)** (requires a [Hosted on Anthropic deployment](../build-with-claude/build-with-claude-claude-in-microsoft-foundry.md#additional-features-not-supported-when-hosted-on-azure))
 
 Code execution is not currently available on Amazon Bedrock or Google Cloud.
 
@@ -398,7 +398,7 @@ The Python environment can process various file types uploaded through the Files
 
   ```typescript TypeScript
   import Anthropic, { toFile } from "@anthropic-ai/sdk";
-  import { createReadStream } from "fs";
+  import { createReadStream } from "node:fs";
 
   const client = new Anthropic();
   // ...
@@ -692,7 +692,7 @@ When Claude creates files during code execution, you can retrieve these files us
 
   ```typescript TypeScript
   import Anthropic from "@anthropic-ai/sdk";
-  import { writeFile } from "fs/promises";
+  import { writeFile } from "node:fs/promises";
 
   const client = new Anthropic();
   // ...

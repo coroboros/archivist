@@ -1212,7 +1212,7 @@ All [active models](../about-claude/about-claude-models-overview.md) support tok
   ```
 
   ```typescript TypeScript
-  import { readFile } from "fs/promises";
+  import { readFile } from "node:fs/promises";
 
   const client = new Anthropic();
 

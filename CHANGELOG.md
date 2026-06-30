@@ -1,5 +1,76 @@
 # Changelog
 
+## 🤖 v1.5.16 - 30/06/2026
+
+File Changes:
+
+- Modified: `docs/agents-and-tools/agents-and-tools-README.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-agent-skills-overview.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-mcp-connector.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-code-execution-tool.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-parallel-tool-use.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-programmatic-tool-calling.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-web-fetch-tool.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-web-search-tool.md`
+- Modified: `docs/api/api-README.md`
+- Modified: `docs/api/api-rate-limits.md`
+- Modified: `docs/api/api-sdks-typescript.md`
+- Modified: `docs/build-with-claude/build-with-claude-README.md`
+- Modified: `docs/build-with-claude/build-with-claude-claude-in-microsoft-foundry.md`
+- Modified: `docs/build-with-claude/build-with-claude-context-windows.md`
+- Modified: `docs/build-with-claude/build-with-claude-data-residency.md`
+- Modified: `docs/build-with-claude/build-with-claude-fast-mode.md`
+- Modified: `docs/build-with-claude/build-with-claude-files.md`
+- Modified: `docs/build-with-claude/build-with-claude-mid-conversation-system-messages.md`
+- Modified: `docs/build-with-claude/build-with-claude-overview.md`
+- Modified: `docs/build-with-claude/build-with-claude-pdf-support.md`
+- Modified: `docs/build-with-claude/build-with-claude-prompt-caching.md`
+- Modified: `docs/build-with-claude/build-with-claude-skills-guide.md`
+- Modified: `docs/build-with-claude/build-with-claude-structured-outputs.md`
+- Modified: `docs/build-with-claude/build-with-claude-token-counting.md`
+- Modified: `docs/build-with-claude/build-with-claude-vision.md`
+- Modified: `docs/build-with-claude/build-with-claude-workspaces.md`
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-admin-setup.md`
+- Modified: `docs/code/code-authentication.md`
+- Modified: `docs/code/code-auto-mode-config.md`
+- Modified: `docs/code/code-cli-reference.md`
+- Modified: `docs/code/code-costs.md`
+- Modified: `docs/code/code-data-usage.md`
+- Modified: `docs/code/code-env-vars.md`
+- Modified: `docs/code/code-hooks.md`
+- Modified: `docs/code/code-llm-gateway-connect.md`
+- Modified: `docs/code/code-llm-gateway-protocol.md`
+- Modified: `docs/code/code-llm-gateway-rollout.md`
+- Modified: `docs/code/code-llm-gateway.md`
+- Modified: `docs/code/code-mcp.md`
+- Modified: `docs/code/code-monitoring-usage.md`
+- Modified: `docs/code/code-network-config.md`
+- Modified: `docs/code/code-overview.md`
+- Modified: `docs/code/code-permission-modes.md`
+- Modified: `docs/code/code-quickstart.md`
+- Modified: `docs/code/code-server-managed-settings.md`
+- Modified: `docs/code/code-sessions.md`
+- Modified: `docs/code/code-settings.md`
+- Modified: `docs/code/code-third-party-integrations.md`
+- Modified: `docs/manage-claude/manage-claude-README.md`
+- Modified: `docs/manage-claude/manage-claude-cmek.md`
+- Modified: `docs/manage-claude/manage-claude-data-residency.md`
+- Modified: `docs/manage-claude/manage-claude-workspaces.md`
+- Modified: `docs/managed-agents/managed-agents-README.md`
+- Modified: `docs/managed-agents/managed-agents-agent-setup.md`
+- Modified: `docs/managed-agents/managed-agents-memory.md`
+- Modified: `docs/managed-agents/managed-agents-skills.md`
+- Modified: `docs/release-notes/release-notes-README.md`
+- Modified: `docs/release-notes/release-notes-overview.md`
+- Added: `docs/code/code-claude-apps-gateway-config.md`
+- Added: `docs/code/code-claude-apps-gateway-deploy.md`
+- Added: `docs/code/code-claude-apps-gateway-on-gcp.md`
+- Added: `docs/code/code-claude-apps-gateway-spend-limits.md`
+- Added: `docs/code/code-claude-apps-gateway.md`
+- Added: `docs/code/code-gateways.md`
+
+
 ## 🤖 v1.5.15 - 29/06/2026
 
 File Changes:

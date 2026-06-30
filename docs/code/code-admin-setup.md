@@ -48,16 +48,18 @@ Proxy and firewall requirements in [Network configuration](./code-network-config
 
 ## Decide how settings reach devices
 
-Managed settings define policy that takes precedence over local developer configuration. Claude Code checks the four sources below in priority order and applies the first one that returns a non-empty configuration.
+Managed settings define policy that takes precedence over local developer configuration. Claude Code checks the four sources below in priority order and applies the first one that returns a non-empty configuration, with one exception: a small set of [cross-source lock keys](./code-settings.md#settings-precedence), such as the sandbox allowlist locks, is honored when any admin-controlled source sets them.
 
 | Mechanism               | Delivery                                                                                                                                                                                              | Priority | Platforms      |
 | :---------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------- | :------------- |
-| Server-managed          | claude.ai admin console                                                                                                                                                                               | Highest  | All            |
+| Server-managed          | claude.ai admin console, or a self-hosted [Claude apps gateway](./code-claude-apps-gateway.md) for gateway sign-ins                                                                                         | Highest  | All            |
 | plist / registry policy | macOS: `com.anthropic.claudecode` plist<br />Windows: `HKLM\SOFTWARE\Policies\ClaudeCode`                                                                                                             | High     | macOS, Windows |
 | File-based managed      | macOS: `/Library/Application Support/ClaudeCode/managed-settings.json`<br />Linux and WSL: `/etc/claude-code/managed-settings.json`<br />Windows: `C:\Program Files\ClaudeCode\managed-settings.json` | Medium   | All            |
 | Windows user registry   | `HKCU\SOFTWARE\Policies\ClaudeCode`                                                                                                                                                                   | Lowest   | Windows only   |
 
-Server-managed settings reach devices at authentication time and refresh hourly during active sessions, with no endpoint infrastructure. They require a Claude for Teams or Enterprise plan, so deployments on other providers need one of the file-based or OS-level mechanisms instead.
+A configured [`policyHelper`](./code-settings.md#compute-managed-settings-with-a-policy-helper) preempts all four sources: its output becomes the only managed configuration for the run. See [Settings precedence](./code-settings.md#settings-precedence).
+
+Server-managed settings reach devices at authentication time and refresh hourly during active sessions, with no endpoint infrastructure. Delivery through the claude.ai admin console requires a Claude for Teams or Enterprise plan. Deployments on Bedrock, Vertex AI, or Foundry can get the same remote delivery by running a [Claude apps gateway](./code-claude-apps-gateway.md), or use one of the file-based or OS-level mechanisms instead.
 
 If your organization mixes providers, configure [server-managed settings](./code-server-managed-settings.md) for claude.ai users plus a [file-based or plist/registry fallback](./code-settings.md#settings-files) so other users still receive managed policy.
 
@@ -96,11 +98,11 @@ For the threat model these controls defend against, see [Security](./code-securi
 
 Choose monitoring based on what you need to report on.
 
-| Capability          | What you get                                         | Availability   | Where to start                           |
-| :------------------ | :--------------------------------------------------- | :------------- | :--------------------------------------- |
-| Usage monitoring    | OpenTelemetry export of sessions, tools, and tokens  | All providers  | [Monitoring usage](./code-monitoring-usage.md) |
-| Analytics dashboard | Per-user metrics, contribution tracking, leaderboard | Anthropic only | [Analytics](./code-analytics.md)               |
-| Cost tracking       | Spend limits, rate limits, and usage attribution     | Anthropic only | [Costs](./code-costs.md)                       |
+| Capability          | What you get                                         | Availability                                                                                                                                                              | Where to start                           |
+| :------------------ | :--------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :--------------------------------------- |
+| Usage monitoring    | OpenTelemetry export of sessions, tools, and tokens  | All providers                                                                                                                                                             | [Monitoring usage](./code-monitoring-usage.md) |
+| Analytics dashboard | Per-user metrics, contribution tracking, leaderboard | Anthropic only                                                                                                                                                            | [Analytics](./code-analytics.md)               |
+| Cost tracking       | Spend limits, rate limits, and usage attribution     | Anthropic; on third-party clouds, a [Claude apps gateway](./code-claude-apps-gateway.md) provides per-user attribution and [spend limits](./code-claude-apps-gateway-spend-limits.md) | [Costs](./code-costs.md)                       |
 
 Cloud providers expose spend through AWS Cost Explorer, GCP Billing, or Azure Cost Management. Claude for Teams and Enterprise plans include a usage dashboard at [claude.ai/analytics/claude-code](https://claude.ai/analytics/claude-code).
 
@@ -114,7 +116,7 @@ On Team, Enterprise, Claude API, and cloud provider plans, Anthropic doesn't tra
 | Zero Data Retention (ZDR) | Nothing stored after the request completes. Available to qualified accounts on Claude for Enterprise | [Zero data retention](./code-zero-data-retention.md) |
 | Security architecture     | Network model, encryption, authentication, audit trail                                               | [Security](./code-security.md)                       |
 
-If you need request-level audit logging or to route traffic by data sensitivity, place an [LLM gateway](./code-llm-gateway.md) between developers and your provider. For regulatory requirements and certifications, see [Legal and compliance](./code-legal-and-compliance.md).
+If you need request-level audit logging or to route traffic by data sensitivity, place a gateway between developers and your provider: a self-hosted [Claude apps gateway](./code-claude-apps-gateway.md) records a per-request audit log with IdP identity, or use another [LLM gateway](./code-llm-gateway.md). For regulatory requirements and certifications, see [Legal and compliance](./code-legal-and-compliance.md).
 
 ## Verify and onboard
 
