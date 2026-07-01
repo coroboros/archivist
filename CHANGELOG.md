@@ -1,5 +1,17 @@
 # Changelog
 
+## 🤖 v1.5.19 - 01/07/2026
+
+File Changes:
+
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-env-vars.md`
+- Modified: `docs/code/code-overview.md`
+- Modified: `docs/code/code-permissions.md`
+- Modified: `docs/code/code-quickstart.md`
+- Modified: `docs/code/code-troubleshoot-install.md`
+
+
 ## 🤖 v1.5.18 - 01/07/2026
 
 File Changes:
