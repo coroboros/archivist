@@ -297,12 +297,11 @@ If you built an agent by calling `messages.create` in a `while` loop, executing 
       '{events: [{type: "user.message", content: [{type: "text", text: $text}]}]}')" \
     > /dev/null
 
-  # Read events until the session goes idle.
-  while IFS= read -r line; do
-    [[ ${line} == data:* ]] || continue
-    event_type=$(jq -r '.type // empty' 2>/dev/null <<< "${line#data: }" || true)
-    [[ ${event_type} == "session.status_idle" ]] && break
-  done < <(tail -f -n +1 "${stream_log}")
+  # Wait for the session to go idle. grep exits at the first match, and
+  # reading via process substitution means the shell doesn't wait for
+  # tail (a foreground `tail -f | grep -m1` pipeline would hang: tail
+  # only dies on its next write, which never comes once the stream is idle).
+  grep -m1 '"session.status_idle"' <(tail -f -n +1 "${stream_log}") > /dev/null
 
   kill "${stream_pid}" 2>/dev/null || true
   ```
@@ -329,9 +328,8 @@ If you built an agent by calling `messages.create` in a `while` loop, executing 
     --event "{type: user.message, content: [{type: text, text: \"$task\"}]}" \
   > /dev/null
 
-  while IFS= read -r -u "$stream" type; do
-    [[ $type == session.status_idle ]] && break
-  done
+  # Wait for the session to go idle (grep exits at the first match)
+  grep -m1 -x 'session.status_idle' <&"$stream" > /dev/null
   exec {stream}<&-
   ```
 

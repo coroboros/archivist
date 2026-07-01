@@ -36,7 +36,7 @@ Requires an API key with the `read:analytics` scope.
 
     - `assigned_seat_count: number`
 
-      Number of seats currently assigned to members
+      Number of seats currently assigned to members. Null when the response is scoped to an RBAC group — seat assignment is org-wide and has no per-group analogue.
 
     - `cowork_daily_active_user_count: number`
 
@@ -56,7 +56,7 @@ Requires an API key with the `read:analytics` scope.
 
     - `daily_adoption_rate: number`
 
-      Percentage of assigned seats with activity on the requested day (DAU / assigned_seat_count * 100)
+      Percentage of assigned seats with activity on the requested day (DAU / assigned_seat_count * 100). Null when the response is scoped to an RBAC group.
 
     - `ending_at: string`
 
@@ -68,11 +68,11 @@ Requires an API key with the `read:analytics` scope.
 
     - `monthly_adoption_rate: number`
 
-      Percentage of assigned seats with activity in the 30-day rolling window (MAU / assigned_seat_count * 100)
+      Percentage of assigned seats with activity in the 30-day rolling window (MAU / assigned_seat_count * 100). Null when the response is scoped to an RBAC group.
 
     - `pending_invite_count: number`
 
-      Number of pending invitations to join the organization
+      Number of pending invitations to join the organization. Null when the response is scoped to an RBAC group.
 
     - `starting_at: string`
 
@@ -84,7 +84,7 @@ Requires an API key with the `read:analytics` scope.
 
     - `weekly_adoption_rate: number`
 
-      Percentage of assigned seats with activity in the 7-day rolling window (WAU / assigned_seat_count * 100)
+      Percentage of assigned seats with activity in the 7-day rolling window (WAU / assigned_seat_count * 100). Null when the response is scoped to an RBAC group.
 
 ### Example
 

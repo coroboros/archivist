@@ -67,15 +67,15 @@ A key created in one organization cannot be used to manage a different organizat
 
 When you create a Claude Enterprise key, select every scope that the APIs you plan to call require. Scopes are fixed at creation; to add a scope later, create a new key.
 
-| To call...                                                                                                                         | Select these scopes                                        |
-| ---------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
-| [Spend Limits API](./manage-claude-spend-limits-api.md): read members' effective spend limits and increase requests            | `read:spend_limits`                                        |
-| [Spend Limits API](./manage-claude-spend-limits-api.md): set or clear per-user spend limits; approve or deny increase requests | `write:spend_limits`                                       |
-| [Claude Enterprise Analytics API](./manage-claude-analytics-api.md): engagement, adoption, cost, and usage reports             | `read:analytics`                                           |
-| [Compliance API Activity Feed](./manage-claude-compliance-activity-feed.md): organization-wide activity events                 | `read:compliance_activities`                               |
-| [Compliance API content endpoints](./manage-claude-compliance-content-data.md): read chats, files, projects, and users         | `read:compliance_user_data`                                |
-| [Compliance API content endpoints](./manage-claude-compliance-content-data.md): delete chats, files, and projects              | `delete:compliance_user_data`                              |
-| [Compliance API organization endpoints](./manage-claude-compliance-org-data.md): read organization metadata and settings       | `read:compliance_org_data`, `read:compliance_org_settings` |
+| To call...                                                                                                                             | Select these scopes           |
+| -------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------- |
+| [Spend Limits API](./manage-claude-spend-limits-api.md): read members' effective spend limits and increase requests                | `read:spend_limits`           |
+| [Spend Limits API](./manage-claude-spend-limits-api.md): set or clear per-user spend limits; approve or deny increase requests     | `write:spend_limits`          |
+| [Claude Enterprise Analytics API](./manage-claude-analytics-api.md): engagement, adoption, cost, and usage reports                 | `read:analytics`              |
+| [Compliance API Activity Feed](./manage-claude-compliance-activity-feed.md): organization-wide activity events                     | `read:compliance_activities`  |
+| [Compliance API content endpoints](./manage-claude-compliance-content-data.md): read chats, files, projects, and users             | `read:compliance_user_data`   |
+| [Compliance API content endpoints](./manage-claude-compliance-content-data.md): delete chats, files, and projects                  | `delete:compliance_user_data` |
+| [Compliance API organization endpoints](./manage-claude-compliance-org-data.md): read organization metadata and effective settings | `read:compliance_org_data`    |
 
 The Compliance and Analytics APIs must be enabled for your organization before keys with those scopes can be used. See [Get access to the Compliance API](./manage-claude-compliance-api-access.md#request-compliance-api-access) and [Analytics APIs](./manage-claude-analytics-api.md#get-access-to-the-claude-enterprise-analytics-api).
 

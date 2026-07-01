@@ -14,9 +14,9 @@ generated: true
 
 [Legacy] Create a Text Completion.
 
-The Text Completions API is a legacy API. We recommend using the [Messages API](https://docs.claude.com/en/api/messages) going forward.
+The Text Completions API is a legacy API. We recommend using the [Messages API](./api-messages.md) going forward.
 
-Future models and features will not be compatible with Text Completions. See our [migration guide](https://docs.claude.com/en/api/migrating-from-text-completions-to-messages) for guidance in migrating from Text Completions to Messages.
+Future models and features will not be compatible with Text Completions. See our [migration guide](../build-with-claude/build-with-claude-working-with-messages.md) for guidance in migrating from Text Completions to Messages.
 
 ### Parameters
 
@@ -118,7 +118,7 @@ Future models and features will not be compatible with Text Completions. See our
   Assistant:"
   ```
 
-  See [prompt validation](https://docs.claude.com/en/api/prompt-validation) and our guide to [prompt design](https://docs.claude.com/en/docs/intro-to-prompting) for more details.
+  See [prompt validation](../build-with-claude/build-with-claude-working-with-messages.md) and our guide to [prompt design](../build-with-claude/build-with-claude-prompt-engineering-overview.md) for more details.
 
 - `metadata: Metadata`
 
@@ -142,7 +142,7 @@ Future models and features will not be compatible with Text Completions. See our
 
   Whether to incrementally stream the response using server-sent events.
 
-  See [streaming](https://docs.claude.com/en/api/streaming) for details.
+  See [streaming](../build-with-claude/build-with-claude-streaming.md) for details.
 
 - `temperature: Float`
 

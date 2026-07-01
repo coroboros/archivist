@@ -283,6 +283,7 @@ When you use `tools`, the API also automatically includes a special system promp
 | Claude Opus 4.5                                                                                            | `auto`, `none`***`any`, `tool` | 496 tokens***588 tokens            |
 | Claude Opus 4.1 ([deprecated](../about-claude/about-claude-model-deprecations.md))                                   | `auto`, `none`***`any`, `tool` | 313 tokens***315 tokens            |
 | Claude Opus 4 ([retired, except on Google Cloud](../about-claude/about-claude-model-deprecations.md))                | `auto`, `none`***`any`, `tool` | 313 tokens***315 tokens            |
+| Claude Sonnet 5                                                                                            | `auto`, `none`***`any`, `tool` | 354 tokens***474 tokens            |
 | Claude Sonnet 4.6                                                                                          | `auto`, `none`***`any`, `tool` | 497 tokens***589 tokens            |
 | Claude Sonnet 4.5                                                                                          | `auto`, `none`***`any`, `tool` | 496 tokens***588 tokens            |
 | Claude Sonnet 4 ([retired, except on Bedrock and Google Cloud](../about-claude/about-claude-model-deprecations.md))  | `auto`, `none`***`any`, `tool` | 313 tokens***315 tokens            |

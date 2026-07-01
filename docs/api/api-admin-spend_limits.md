@@ -110,7 +110,7 @@ curl https://api.anthropic.com/v1/organizations/spend_limits \
     -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN" \
     -d '{
-          "amount": "amount",
+          "amount": "50000",
           "scope": {
             "type": "user",
             "user_id": "user_id"
@@ -123,9 +123,9 @@ curl https://api.anthropic.com/v1/organizations/spend_limits \
 ```json
 {
   "id": "id",
-  "amount": "amount",
+  "amount": "50000",
   "created_at": "2019-12-27T18:11:19.117Z",
-  "currency": "currency",
+  "currency": "USD",
   "period": "monthly",
   "scope": {
     "type": "user",
@@ -227,9 +227,9 @@ curl https://api.anthropic.com/v1/organizations/spend_limits/$SPEND_LIMIT_ID \
 ```json
 {
   "id": "id",
-  "amount": "amount",
+  "amount": "50000",
   "created_at": "2019-12-27T18:11:19.117Z",
-  "currency": "currency",
+  "currency": "USD",
   "period": "monthly",
   "scope": {
     "type": "user",
@@ -246,8 +246,9 @@ curl https://api.anthropic.com/v1/organizations/spend_limits/$SPEND_LIMIT_ID \
 
 Delete a per-user spend limit override.
 
-The member falls back to any inherited cap at that period. Seat-tier,
-group, and organization-level rows cannot be deleted via this endpoint.
+The member falls back to any inherited spend limit at that period.
+Seat-tier, group, and organization-level rows cannot be deleted via
+this endpoint.
 
 ### Path Parameters
 
@@ -287,9 +288,9 @@ curl https://api.anthropic.com/v1/organizations/spend_limits/$SPEND_LIMIT_ID \
 
 List each member's effective spend limit and period-to-date spend.
 
-Returns one row per (member, period) the member resolves a cap for, with
-the `source` scope the cap was inherited from. Paginates by member, so a
-member's periods never split across pages.
+Returns one row per (member, period) the member resolves a spend limit
+for, with the `source` scope the spend limit was inherited from.
+Paginates by member, so a member's periods never split across pages.
 
 ### Query Parameters
 
@@ -410,8 +411,8 @@ curl https://api.anthropic.com/v1/organizations/spend_limits/effective \
         "type": "user_actor",
         "user_id": "user_id"
       },
-      "amount": "amount",
-      "currency": "currency",
+      "amount": "50000",
+      "currency": "USD",
       "period": "monthly",
       "period_to_date_spend": "period_to_date_spend",
       "scope": {
@@ -838,8 +839,8 @@ curl https://api.anthropic.com/v1/organizations/spend_limit_increase_requests \
           "type": "user_actor",
           "user_id": "user_id"
         },
-        "amount": "amount",
-        "currency": "currency",
+        "amount": "50000",
+        "currency": "USD",
         "period": "monthly",
         "period_to_date_spend": "period_to_date_spend",
         "scope": {
@@ -1081,8 +1082,8 @@ curl https://api.anthropic.com/v1/organizations/spend_limit_increase_requests/$S
       "type": "user_actor",
       "user_id": "user_id"
     },
-    "amount": "amount",
-    "currency": "currency",
+    "amount": "50000",
+    "currency": "USD",
     "period": "monthly",
     "period_to_date_spend": "period_to_date_spend",
     "scope": {
@@ -1121,7 +1122,7 @@ the member was blocked on. Anthropic emails the requester unless
 
 - `amount: string`
 
-  New per-user cap as a non-negative integer decimal string (minor units).
+  New per-user spend limit as a non-negative integer decimal string (minor units).
 
 - `period: optional "monthly" or "daily" or "weekly"`
 
@@ -1371,7 +1372,7 @@ curl https://api.anthropic.com/v1/organizations/spend_limit_increase_requests/$S
     -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN" \
     -d '{
-          "amount": "amount"
+          "amount": "50000"
         }'
 ```
 
@@ -1399,9 +1400,9 @@ curl https://api.anthropic.com/v1/organizations/spend_limit_increase_requests/$S
   },
   "spend_limit": {
     "id": "id",
-    "amount": "amount",
+    "amount": "50000",
     "created_at": "2019-12-27T18:11:19.117Z",
-    "currency": "currency",
+    "currency": "USD",
     "period": "monthly",
     "scope": {
       "type": "user",
@@ -1418,8 +1419,8 @@ curl https://api.anthropic.com/v1/organizations/spend_limit_increase_requests/$S
       "type": "user_actor",
       "user_id": "user_id"
     },
-    "amount": "amount",
-    "currency": "currency",
+    "amount": "50000",
+    "currency": "USD",
     "period": "monthly",
     "period_to_date_spend": "period_to_date_spend",
     "scope": {
@@ -1432,7 +1433,7 @@ curl https://api.anthropic.com/v1/organizations/spend_limit_increase_requests/$S
     },
     "spend_limit_id": "spend_limit_id"
   },
-  "status": "pending",
+  "status": "approved",
   "type": "spend_limit_increase_request"
 }
 ```
@@ -1664,8 +1665,8 @@ curl https://api.anthropic.com/v1/organizations/spend_limit_increase_requests/$S
       "type": "user_actor",
       "user_id": "user_id"
     },
-    "amount": "amount",
-    "currency": "currency",
+    "amount": "50000",
+    "currency": "USD",
     "period": "monthly",
     "period_to_date_spend": "period_to_date_spend",
     "scope": {

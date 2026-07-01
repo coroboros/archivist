@@ -128,6 +128,8 @@ Go to the [AWS Console > Bedrock > Model Access](https://console.aws.amazon.com/
 
 <Note>
   Claude Fable 5, Claude Opus 4.8, and Claude Opus 4.7 are reachable through `InvokeModel` on `bedrock-runtime`. These requests are served by the same infrastructure as the [Claude in Amazon Bedrock](./build-with-claude-claude-in-amazon-bedrock.md) endpoint. For the native Messages API request shape and full feature parity, use that page. Claude Fable 5, Claude Opus 4.8, and Claude Opus 4.7 are omitted from the model table on this page because they do not have ARN-versioned model IDs.
+
+  Claude Sonnet 5 is not available on this surface; use [Claude in Amazon Bedrock](./build-with-claude-claude-in-amazon-bedrock.md) or [Claude Platform on AWS](./build-with-claude-claude-platform-on-aws.md).
 </Note>
 
 Lifecycle terms (Deprecated, Retired) are defined in [Model deprecations](../about-claude/about-claude-model-deprecations.md). Lifecycle dates on partner-operated platforms are set by the partner and can differ from the Claude API schedule. For the current retirement date of any model on Amazon Bedrock, see [Amazon Bedrock's model lifecycle page](https://docs.aws.amazon.com/bedrock/latest/userguide/model-lifecycle.html).

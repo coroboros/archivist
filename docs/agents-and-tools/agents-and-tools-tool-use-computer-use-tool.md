@@ -13,7 +13,7 @@ Claude can interact with computer environments through the computer use tool, wh
 <Note>
   Computer use is in beta and requires a [beta header](../api/api-beta-headers.md):
 
-  * `"computer-use-2025-11-24"` for Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 4.6, and Claude Opus 4.5
+  * `"computer-use-2025-11-24"` for Claude Sonnet 5, Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 4.6, and Claude Opus 4.5
   * `"computer-use-2025-01-24"` for Claude Sonnet 4.5, Claude Haiku 4.5, Claude Opus 4.1 ([deprecated](../about-claude/about-claude-model-deprecations.md)), Claude Sonnet 4 ([retired, except on Bedrock and Google Cloud](../about-claude/about-claude-model-deprecations.md)), and Claude Opus 4 ([retired, except on Google Cloud](../about-claude/about-claude-model-deprecations.md))
 
   Reach out through the [feedback form](https://forms.gle/H6UFuXaaLywri9hz6) to share your feedback on this feature.
@@ -740,7 +740,7 @@ The computer use tool supports these actions:
 * **hold\_key:** Hold down a key for a specified duration (in seconds)
 * **wait:** Pause between actions
 
-**Enhanced actions (`computer_20251124`)** Available in Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 4.6, and Claude Opus 4.5:
+**Enhanced actions (`computer_20251124`)** Available in Claude Sonnet 5, Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 4.6, and Claude Opus 4.5:
 
 * All actions from `computer_20250124`
 * **zoom:** View a specific region of the screen at full resolution. Requires `enable_zoom: true` in tool definition. Takes a `region` parameter with coordinates `[x1, y1, x2, y2]` defining top-left and bottom-right corners of the area to inspect.
@@ -783,7 +783,7 @@ The computer use tool supports these actions:
   }
   ```
 
-  Zoom to view region in detail (Claude Opus 4.8, Opus 4.7, Opus 4.6, Sonnet 4.6, and Opus 4.5):
+  Zoom to view region in detail (Claude Sonnet 5, Opus 4.8, Opus 4.7, Opus 4.6, Sonnet 4.6, and Opus 4.5):
 
   ```json
   {
@@ -1620,7 +1620,7 @@ When implementing the computer use tool, various errors might occur. Here's how 
 Screenshots sent to the computer tool must already fit within Claude's image size limits (see [image size limits](../build-with-claude/build-with-claude-vision.md#evaluate-image-size)). The API does not resize oversized images; a screenshot that exceeds the limit is rejected with an HTTP 400 validation error.
 
 <Note>
-  Limits vary by model. Claude Opus 4.8 and Claude Opus 4.7 accept up to 2576 pixels on the long edge; earlier models accept up to 1568 pixels on the long edge and approximately 1.15 megapixels total. The following example uses the earlier-model 1568 px / 1.15 MP limits; substitute your model's limit.
+  Limits vary by model. Claude Sonnet 5, Claude Opus 4.8, and Claude Opus 4.7 accept up to 2576 pixels on the long edge; earlier models accept up to 1568 pixels on the long edge and approximately 1.15 megapixels total. The following example uses the earlier-model 1568 px / 1.15 MP limits; substitute your model's limit.
 </Note>
 
 If your screen is larger than the limit, resize the screenshot before sending it, set `display_width_px`/`display_height_px` to the resized dimensions, and scale Claude's returned coordinates back to the original screen space:
