@@ -54,7 +54,11 @@ const message = await client.messages.create({
   model: "claude-opus-4-8"
 });
 
-console.log(message.content);
+for (const block of message.content) {
+  if (block.type === "text") {
+    console.log(block.text);
+  }
+}
 ```
 
 For authentication options including Workload Identity Federation, see [Authentication](../manage-claude/manage-claude-authentication.md).

@@ -27,15 +27,15 @@ Requests whose requester is no longer a member are excluded.
 
   Opaque cursor from a previous response's `next_page`.
 
-- `status: optional array of "pending" or "approved" or "denied"`
+- `status: optional array of "approved" or "denied" or "pending"`
 
   Filter by status. Omit to return all.
-
-  - `"pending"`
 
   - `"approved"`
 
   - `"denied"`
+
+  - `"pending"`
 
 ### Returns
 
@@ -63,11 +63,11 @@ Requests whose requester is no longer a member are excluded.
 
   - `created_at: string`
 
-  - `period: "monthly" or "daily" or "weekly"`
-
-    - `"monthly"`
+  - `period: "daily" or "monthly" or "weekly"`
 
     - `"daily"`
+
+    - `"monthly"`
 
     - `"weekly"`
 
@@ -133,11 +133,11 @@ Requests whose requester is no longer a member are excluded.
 
     - `currency: string`
 
-    - `period: "monthly" or "daily" or "weekly"`
-
-      - `"monthly"`
+    - `period: "daily" or "monthly" or "weekly"`
 
       - `"daily"`
+
+      - `"monthly"`
 
       - `"weekly"`
 
@@ -193,13 +193,13 @@ Requests whose requester is no longer a member are excluded.
 
     - `spend_limit_id: string`
 
-  - `status: "pending" or "approved" or "denied"`
-
-    - `"pending"`
+  - `status: "approved" or "denied" or "pending"`
 
     - `"approved"`
 
     - `"denied"`
+
+    - `"pending"`
 
   - `type: "spend_limit_increase_request"`
 
@@ -261,7 +261,7 @@ curl https://api.anthropic.com/v1/organizations/spend_limit_increase_requests \
         },
         "spend_limit_id": "spend_limit_id"
       },
-      "status": "pending",
+      "status": "approved",
       "type": "spend_limit_increase_request"
     }
   ],
@@ -310,11 +310,11 @@ requester at the request's period.
 
   - `created_at: string`
 
-  - `period: "monthly" or "daily" or "weekly"`
-
-    - `"monthly"`
+  - `period: "daily" or "monthly" or "weekly"`
 
     - `"daily"`
+
+    - `"monthly"`
 
     - `"weekly"`
 
@@ -380,11 +380,11 @@ requester at the request's period.
 
     - `currency: string`
 
-    - `period: "monthly" or "daily" or "weekly"`
-
-      - `"monthly"`
+    - `period: "daily" or "monthly" or "weekly"`
 
       - `"daily"`
+
+      - `"monthly"`
 
       - `"weekly"`
 
@@ -440,13 +440,13 @@ requester at the request's period.
 
     - `spend_limit_id: string`
 
-  - `status: "pending" or "approved" or "denied"`
-
-    - `"pending"`
+  - `status: "approved" or "denied" or "pending"`
 
     - `"approved"`
 
     - `"denied"`
+
+    - `"pending"`
 
   - `type: "spend_limit_increase_request"`
 
@@ -504,7 +504,7 @@ curl https://api.anthropic.com/v1/organizations/spend_limit_increase_requests/$S
     },
     "spend_limit_id": "spend_limit_id"
   },
-  "status": "pending",
+  "status": "approved",
   "type": "spend_limit_increase_request"
 }
 ```
@@ -532,11 +532,11 @@ the member was blocked on. Anthropic emails the requester unless
 
   New per-user spend limit as a non-negative integer decimal string (minor units).
 
-- `period: optional "monthly" or "daily" or "weekly"`
-
-  - `"monthly"`
+- `period: optional "daily" or "monthly" or "weekly"`
 
   - `"daily"`
+
+  - `"monthly"`
 
   - `"weekly"`
 
@@ -566,11 +566,11 @@ the member was blocked on. Anthropic emails the requester unless
 
 - `created_at: string`
 
-- `period: "monthly" or "daily" or "weekly"`
-
-  - `"monthly"`
+- `period: "daily" or "monthly" or "weekly"`
 
   - `"daily"`
+
+  - `"monthly"`
 
   - `"weekly"`
 
@@ -620,11 +620,11 @@ the member was blocked on. Anthropic emails the requester unless
 
   - `currency: string`
 
-  - `period: "monthly" or "daily" or "weekly"`
-
-    - `"monthly"`
+  - `period: "daily" or "monthly" or "weekly"`
 
     - `"daily"`
+
+    - `"monthly"`
 
     - `"weekly"`
 
@@ -700,11 +700,11 @@ the member was blocked on. Anthropic emails the requester unless
 
   - `currency: string`
 
-  - `period: "monthly" or "daily" or "weekly"`
-
-    - `"monthly"`
+  - `period: "daily" or "monthly" or "weekly"`
 
     - `"daily"`
+
+    - `"monthly"`
 
     - `"weekly"`
 
@@ -760,13 +760,13 @@ the member was blocked on. Anthropic emails the requester unless
 
   - `spend_limit_id: string`
 
-- `status: "pending" or "approved" or "denied"`
-
-  - `"pending"`
+- `status: "approved" or "denied" or "pending"`
 
   - `"approved"`
 
   - `"denied"`
+
+  - `"pending"`
 
 - `type: "spend_limit_increase_request"`
 
@@ -780,7 +780,8 @@ curl https://api.anthropic.com/v1/organizations/spend_limit_increase_requests/$S
     -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN" \
     -d '{
-          "amount": "50000"
+          "amount": "50000",
+          "period": "monthly"
         }'
 ```
 
@@ -891,11 +892,11 @@ Idempotent on `denied`; denying an already-`approved` request returns
 
   - `created_at: string`
 
-  - `period: "monthly" or "daily" or "weekly"`
-
-    - `"monthly"`
+  - `period: "daily" or "monthly" or "weekly"`
 
     - `"daily"`
+
+    - `"monthly"`
 
     - `"weekly"`
 
@@ -961,11 +962,11 @@ Idempotent on `denied`; denying an already-`approved` request returns
 
     - `currency: string`
 
-    - `period: "monthly" or "daily" or "weekly"`
-
-      - `"monthly"`
+    - `period: "daily" or "monthly" or "weekly"`
 
       - `"daily"`
+
+      - `"monthly"`
 
       - `"weekly"`
 
@@ -1021,13 +1022,13 @@ Idempotent on `denied`; denying an already-`approved` request returns
 
     - `spend_limit_id: string`
 
-  - `status: "pending" or "approved" or "denied"`
-
-    - `"pending"`
+  - `status: "approved" or "denied" or "pending"`
 
     - `"approved"`
 
     - `"denied"`
+
+    - `"pending"`
 
   - `type: "spend_limit_increase_request"`
 
@@ -1087,7 +1088,7 @@ curl https://api.anthropic.com/v1/organizations/spend_limit_increase_requests/$S
     },
     "spend_limit_id": "spend_limit_id"
   },
-  "status": "pending",
+  "status": "approved",
   "type": "spend_limit_increase_request"
 }
 ```
@@ -1120,11 +1121,11 @@ curl https://api.anthropic.com/v1/organizations/spend_limit_increase_requests/$S
 
   - `created_at: string`
 
-  - `period: "monthly" or "daily" or "weekly"`
-
-    - `"monthly"`
+  - `period: "daily" or "monthly" or "weekly"`
 
     - `"daily"`
+
+    - `"monthly"`
 
     - `"weekly"`
 
@@ -1190,11 +1191,11 @@ curl https://api.anthropic.com/v1/organizations/spend_limit_increase_requests/$S
 
     - `currency: string`
 
-    - `period: "monthly" or "daily" or "weekly"`
-
-      - `"monthly"`
+    - `period: "daily" or "monthly" or "weekly"`
 
       - `"daily"`
+
+      - `"monthly"`
 
       - `"weekly"`
 
@@ -1250,13 +1251,13 @@ curl https://api.anthropic.com/v1/organizations/spend_limit_increase_requests/$S
 
     - `spend_limit_id: string`
 
-  - `status: "pending" or "approved" or "denied"`
-
-    - `"pending"`
+  - `status: "approved" or "denied" or "pending"`
 
     - `"approved"`
 
     - `"denied"`
+
+    - `"pending"`
 
   - `type: "spend_limit_increase_request"`
 
@@ -1288,11 +1289,11 @@ curl https://api.anthropic.com/v1/organizations/spend_limit_increase_requests/$S
 
   - `created_at: string`
 
-  - `period: "monthly" or "daily" or "weekly"`
-
-    - `"monthly"`
+  - `period: "daily" or "monthly" or "weekly"`
 
     - `"daily"`
+
+    - `"monthly"`
 
     - `"weekly"`
 
@@ -1342,11 +1343,11 @@ curl https://api.anthropic.com/v1/organizations/spend_limit_increase_requests/$S
 
     - `currency: string`
 
-    - `period: "monthly" or "daily" or "weekly"`
-
-      - `"monthly"`
+    - `period: "daily" or "monthly" or "weekly"`
 
       - `"daily"`
+
+      - `"monthly"`
 
       - `"weekly"`
 
@@ -1422,11 +1423,11 @@ curl https://api.anthropic.com/v1/organizations/spend_limit_increase_requests/$S
 
     - `currency: string`
 
-    - `period: "monthly" or "daily" or "weekly"`
-
-      - `"monthly"`
+    - `period: "daily" or "monthly" or "weekly"`
 
       - `"daily"`
+
+      - `"monthly"`
 
       - `"weekly"`
 
@@ -1482,13 +1483,13 @@ curl https://api.anthropic.com/v1/organizations/spend_limit_increase_requests/$S
 
     - `spend_limit_id: string`
 
-  - `status: "pending" or "approved" or "denied"`
-
-    - `"pending"`
+  - `status: "approved" or "denied" or "pending"`
 
     - `"approved"`
 
     - `"denied"`
+
+    - `"pending"`
 
   - `type: "spend_limit_increase_request"`
 

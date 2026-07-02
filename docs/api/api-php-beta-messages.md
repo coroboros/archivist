@@ -438,7 +438,7 @@ $betaMessage = $client->beta->messages->create(
   fallbackCreditToken: 'x',
   fallbacks: [
     [
-      'model' => 'claude-fable-5',
+      'model' => 'claude-sonnet-5',
       'maxTokens' => 0,
       'outputConfig' => [
         'effort' => 'low',
@@ -597,7 +597,7 @@ var_dump($betaMessage);
         "cache_creation_input_tokens": 0,
         "cache_read_input_tokens": 0,
         "input_tokens": 0,
-        "model": "claude-fable-5",
+        "model": "claude-sonnet-5",
         "output_tokens": 0,
         "type": "message"
       }
@@ -6697,7 +6697,7 @@ $betaMessageBatch = $client->beta->messages->batches->create(
         'fallbackCreditToken' => 'x',
         'fallbacks' => [
           [
-            'model' => 'claude-fable-5',
+            'model' => 'claude-sonnet-5',
             'maxTokens' => 0,
             'outputConfig' => [
               'effort' => 'low',

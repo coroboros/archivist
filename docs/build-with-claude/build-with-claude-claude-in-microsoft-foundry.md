@@ -68,7 +68,7 @@ Anthropic's [client SDKs](https://platform.claude.com/docs/en/cli-sdks-libraries
     <Tabs>
       <Tab title="Gradle">
         ```kotlin
-        implementation("com.anthropic:anthropic-java-foundry:2.40.0")
+        implementation("com.anthropic:anthropic-java-foundry:2.47.0")
         ```
       </Tab>
 
@@ -77,7 +77,7 @@ Anthropic's [client SDKs](https://platform.claude.com/docs/en/cli-sdks-libraries
         <dependency>
             <groupId>com.anthropic</groupId>
             <artifactId>anthropic-java-foundry</artifactId>
-            <version>2.40.0</version>
+            <version>2.47.0</version>
         </dependency>
         ```
       </Tab>

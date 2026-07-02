@@ -966,11 +966,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 12 more`
+      - `Model = :"claude-sonnet-5" | :"claude-fable-5" | :"claude-mythos-5" | 13 more`
 
         The model that will complete your prompt.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `:"claude-sonnet-5"`
+
+          High-performance model for coding and agents
 
         - `:"claude-fable-5"`
 
@@ -3588,11 +3592,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 12 more`
+          - `Model = :"claude-sonnet-5" | :"claude-fable-5" | :"claude-mythos-5" | 13 more`
 
             The model that will complete your prompt.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `:"claude-sonnet-5"`
+
+              High-performance model for coding and agents
 
             - `:"claude-fable-5"`
 
@@ -3668,7 +3676,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           Structured information about a refusal.
 
-          - `category: :cyber | :bio | :frontier_llm | 2 more`
+          - `category: :cyber | :bio | :frontier_llm | :reasoning_extraction`
 
             The policy category that triggered a refusal.
 
@@ -3679,8 +3687,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             - `:frontier_llm`
 
             - `:reasoning_extraction`
-
-            - `:military_weapons`
 
           - `explanation: String`
 
@@ -4856,11 +4862,15 @@ puts(message_batch_individual_response)
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 12 more`
+          - `Model = :"claude-sonnet-5" | :"claude-fable-5" | :"claude-mythos-5" | 13 more`
 
             The model that will complete your prompt.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `:"claude-sonnet-5"`
+
+              High-performance model for coding and agents
 
             - `:"claude-fable-5"`
 
@@ -4936,7 +4946,7 @@ puts(message_batch_individual_response)
 
           Structured information about a refusal.
 
-          - `category: :cyber | :bio | :frontier_llm | 2 more`
+          - `category: :cyber | :bio | :frontier_llm | :reasoning_extraction`
 
             The policy category that triggered a refusal.
 
@@ -4947,8 +4957,6 @@ puts(message_batch_individual_response)
             - `:frontier_llm`
 
             - `:reasoning_extraction`
-
-            - `:military_weapons`
 
           - `explanation: String`
 
@@ -5920,11 +5928,15 @@ puts(message_batch_individual_response)
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-        - `Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 12 more`
+        - `Model = :"claude-sonnet-5" | :"claude-fable-5" | :"claude-mythos-5" | 13 more`
 
           The model that will complete your prompt.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `:"claude-sonnet-5"`
+
+            High-performance model for coding and agents
 
           - `:"claude-fable-5"`
 
@@ -6000,7 +6012,7 @@ puts(message_batch_individual_response)
 
         Structured information about a refusal.
 
-        - `category: :cyber | :bio | :frontier_llm | 2 more`
+        - `category: :cyber | :bio | :frontier_llm | :reasoning_extraction`
 
           The policy category that triggered a refusal.
 
@@ -6011,8 +6023,6 @@ puts(message_batch_individual_response)
           - `:frontier_llm`
 
           - `:reasoning_extraction`
-
-          - `:military_weapons`
 
         - `explanation: String`
 
@@ -6946,11 +6956,15 @@ puts(message_batch_individual_response)
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 12 more`
+      - `Model = :"claude-sonnet-5" | :"claude-fable-5" | :"claude-mythos-5" | 13 more`
 
         The model that will complete your prompt.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `:"claude-sonnet-5"`
+
+          High-performance model for coding and agents
 
         - `:"claude-fable-5"`
 
@@ -7026,7 +7040,7 @@ puts(message_batch_individual_response)
 
       Structured information about a refusal.
 
-      - `category: :cyber | :bio | :frontier_llm | 2 more`
+      - `category: :cyber | :bio | :frontier_llm | :reasoning_extraction`
 
         The policy category that triggered a refusal.
 
@@ -7037,8 +7051,6 @@ puts(message_batch_individual_response)
         - `:frontier_llm`
 
         - `:reasoning_extraction`
-
-        - `:military_weapons`
 
       - `explanation: String`
 

@@ -2707,6 +2707,10 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+      - `const ModelClaudeSonnet5 Model = "claude-sonnet-5"`
+
+        High-performance model for coding and agents
+
       - `const ModelClaudeFable5 Model = "claude-fable-5"`
 
         Next generation of intelligence for the hardest knowledge work and coding problems
@@ -2792,8 +2796,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       - `const RefusalStopDetailsCategoryFrontierLLM RefusalStopDetailsCategory = "frontier_llm"`
 
       - `const RefusalStopDetailsCategoryReasoningExtraction RefusalStopDetailsCategory = "reasoning_extraction"`
-
-      - `const RefusalStopDetailsCategoryMilitaryWeapons RefusalStopDetailsCategory = "military_weapons"`
 
     - `Explanation string`
 

@@ -491,3 +491,5 @@ Creating a session provisions the environment's sandbox but does not start any w
 See [Session event stream](./managed-agents-events-and-streaming.md) for how to stream the agent's responses and handle tool confirmations.
 
 See [Session statuses](./managed-agents-session-operations.md#session-statuses) for the statuses a session moves through, and [Session operations](./managed-agents-session-operations.md) for retrieving, listing, updating, archiving, and deleting sessions.
+
+To create sessions automatically on a recurring schedule, see [Scheduled deployments](./managed-agents-scheduled-deployments.md).

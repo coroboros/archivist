@@ -2491,6 +2491,10 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+              - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+                High-performance model for coding and agents
+
               - `CLAUDE_FABLE_5("claude-fable-5")`
 
                 Next generation of intelligence for the hardest knowledge work and coding problems
@@ -5015,6 +5019,10 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+          - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+            High-performance model for coding and agents
+
           - `CLAUDE_FABLE_5("claude-fable-5")`
 
             Next generation of intelligence for the hardest knowledge work and coding problems
@@ -5094,8 +5102,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
           - `FRONTIER_LLM("frontier_llm")`
 
           - `REASONING_EXTRACTION("reasoning_extraction")`
-
-          - `MILITARY_WEAPONS("military_weapons")`
 
         - `JsonValue; type "refusal"constant`
 
@@ -5237,8 +5243,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       - `FRONTIER_LLM("frontier_llm")`
 
       - `REASONING_EXTRACTION("reasoning_extraction")`
-
-      - `MILITARY_WEAPONS("military_weapons")`
 
     - `Optional<String> explanation`
 
@@ -5697,7 +5701,7 @@ public final class Main {
         "cache_creation_input_tokens": 0,
         "cache_read_input_tokens": 0,
         "input_tokens": 0,
-        "model": "claude-fable-5",
+        "model": "claude-sonnet-5",
         "output_tokens": 0,
         "type": "message"
       }
@@ -6879,6 +6883,10 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
               The model that will complete your prompt.
 
               See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+              - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+                High-performance model for coding and agents
 
               - `CLAUDE_FABLE_5("claude-fable-5")`
 
@@ -8424,6 +8432,10 @@ public final class Main {
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+    - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+      High-performance model for coding and agents
+
     - `CLAUDE_FABLE_5("claude-fable-5")`
 
       Next generation of intelligence for the hardest knowledge work and coding problems
@@ -8559,6 +8571,10 @@ public final class Main {
     The model that will complete your prompt.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+      High-performance model for coding and agents
 
     - `CLAUDE_FABLE_5("claude-fable-5")`
 
@@ -11412,6 +11428,10 @@ public final class Main {
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+        - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+          High-performance model for coding and agents
+
         - `CLAUDE_FABLE_5("claude-fable-5")`
 
           Next generation of intelligence for the hardest knowledge work and coding problems
@@ -11491,8 +11511,6 @@ public final class Main {
         - `FRONTIER_LLM("frontier_llm")`
 
         - `REASONING_EXTRACTION("reasoning_extraction")`
-
-        - `MILITARY_WEAPONS("military_weapons")`
 
       - `JsonValue; type "refusal"constant`
 
@@ -12535,6 +12553,10 @@ public final class Main {
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+        - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+          High-performance model for coding and agents
+
         - `CLAUDE_FABLE_5("claude-fable-5")`
 
           Next generation of intelligence for the hardest knowledge work and coding problems
@@ -13355,6 +13377,10 @@ public final class Main {
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+      - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+        High-performance model for coding and agents
+
       - `CLAUDE_FABLE_5("claude-fable-5")`
 
         Next generation of intelligence for the hardest knowledge work and coding problems
@@ -13435,8 +13461,6 @@ public final class Main {
 
       - `REASONING_EXTRACTION("reasoning_extraction")`
 
-      - `MILITARY_WEAPONS("military_weapons")`
-
     - `JsonValue; type "refusal"constant`
 
       - `REFUSAL("refusal")`
@@ -13472,6 +13496,10 @@ public final class Main {
       The model that will complete your prompt.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+        High-performance model for coding and agents
 
       - `CLAUDE_FABLE_5("claude-fable-5")`
 
@@ -13557,6 +13585,10 @@ public final class Main {
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+    - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+      High-performance model for coding and agents
+
     - `CLAUDE_FABLE_5("claude-fable-5")`
 
       Next generation of intelligence for the hardest knowledge work and coding problems
@@ -13628,6 +13660,10 @@ public final class Main {
     The model that will complete your prompt.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+      High-performance model for coding and agents
 
     - `CLAUDE_FABLE_5("claude-fable-5")`
 
@@ -13730,6 +13766,10 @@ public final class Main {
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+    - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+      High-performance model for coding and agents
+
     - `CLAUDE_FABLE_5("claude-fable-5")`
 
       Next generation of intelligence for the hardest knowledge work and coding problems
@@ -13816,6 +13856,10 @@ public final class Main {
     The model that will complete your prompt.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+      High-performance model for coding and agents
 
     - `CLAUDE_FABLE_5("claude-fable-5")`
 
@@ -13992,8 +14036,6 @@ public final class Main {
     - `FRONTIER_LLM("frontier_llm")`
 
     - `REASONING_EXTRACTION("reasoning_extraction")`
-
-    - `MILITARY_WEAPONS("military_weapons")`
 
   - `JsonValue; type "refusal"constant`
 
@@ -15531,6 +15573,10 @@ public final class Main {
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+          - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+            High-performance model for coding and agents
+
           - `CLAUDE_FABLE_5("claude-fable-5")`
 
             Next generation of intelligence for the hardest knowledge work and coding problems
@@ -15610,8 +15656,6 @@ public final class Main {
           - `FRONTIER_LLM("frontier_llm")`
 
           - `REASONING_EXTRACTION("reasoning_extraction")`
-
-          - `MILITARY_WEAPONS("military_weapons")`
 
         - `JsonValue; type "refusal"constant`
 
@@ -15753,8 +15797,6 @@ public final class Main {
       - `FRONTIER_LLM("frontier_llm")`
 
       - `REASONING_EXTRACTION("reasoning_extraction")`
-
-      - `MILITARY_WEAPONS("military_weapons")`
 
     - `Optional<String> explanation`
 
@@ -16167,6 +16209,10 @@ public final class Main {
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+        - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+          High-performance model for coding and agents
+
         - `CLAUDE_FABLE_5("claude-fable-5")`
 
           Next generation of intelligence for the hardest knowledge work and coding problems
@@ -16415,6 +16461,10 @@ public final class Main {
     The model that will complete your prompt.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+      High-performance model for coding and agents
 
     - `CLAUDE_FABLE_5("claude-fable-5")`
 
@@ -17522,6 +17572,10 @@ public final class Main {
             The model that will complete your prompt.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+              High-performance model for coding and agents
 
             - `CLAUDE_FABLE_5("claude-fable-5")`
 
@@ -18998,6 +19052,10 @@ public final class Main {
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+          - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+            High-performance model for coding and agents
+
           - `CLAUDE_FABLE_5("claude-fable-5")`
 
             Next generation of intelligence for the hardest knowledge work and coding problems
@@ -19077,8 +19135,6 @@ public final class Main {
           - `FRONTIER_LLM("frontier_llm")`
 
           - `REASONING_EXTRACTION("reasoning_extraction")`
-
-          - `MILITARY_WEAPONS("military_weapons")`
 
         - `JsonValue; type "refusal"constant`
 
@@ -19197,8 +19253,6 @@ public final class Main {
         - `FRONTIER_LLM("frontier_llm")`
 
         - `REASONING_EXTRACTION("reasoning_extraction")`
-
-        - `MILITARY_WEAPONS("military_weapons")`
 
       - `Optional<String> explanation`
 
@@ -19350,6 +19404,10 @@ public final class Main {
           The model that will complete your prompt.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+            High-performance model for coding and agents
 
           - `CLAUDE_FABLE_5("claude-fable-5")`
 
@@ -20417,6 +20475,10 @@ public final class Main {
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+            - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+              High-performance model for coding and agents
+
             - `CLAUDE_FABLE_5("claude-fable-5")`
 
               Next generation of intelligence for the hardest knowledge work and coding problems
@@ -20496,8 +20558,6 @@ public final class Main {
             - `FRONTIER_LLM("frontier_llm")`
 
             - `REASONING_EXTRACTION("reasoning_extraction")`
-
-            - `MILITARY_WEAPONS("military_weapons")`
 
           - `JsonValue; type "refusal"constant`
 
@@ -20639,8 +20699,6 @@ public final class Main {
         - `FRONTIER_LLM("frontier_llm")`
 
         - `REASONING_EXTRACTION("reasoning_extraction")`
-
-        - `MILITARY_WEAPONS("military_weapons")`
 
       - `Optional<String> explanation`
 
@@ -21860,6 +21918,10 @@ public final class Main {
 
               See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+              - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+                High-performance model for coding and agents
+
               - `CLAUDE_FABLE_5("claude-fable-5")`
 
                 Next generation of intelligence for the hardest knowledge work and coding problems
@@ -21939,8 +22001,6 @@ public final class Main {
               - `FRONTIER_LLM("frontier_llm")`
 
               - `REASONING_EXTRACTION("reasoning_extraction")`
-
-              - `MILITARY_WEAPONS("military_weapons")`
 
             - `JsonValue; type "refusal"constant`
 
@@ -22082,8 +22142,6 @@ public final class Main {
           - `FRONTIER_LLM("frontier_llm")`
 
           - `REASONING_EXTRACTION("reasoning_extraction")`
-
-          - `MILITARY_WEAPONS("military_weapons")`
 
         - `Optional<String> explanation`
 
@@ -22729,8 +22787,6 @@ public final class Main {
     - `FRONTIER_LLM("frontier_llm")`
 
     - `REASONING_EXTRACTION("reasoning_extraction")`
-
-    - `MILITARY_WEAPONS("military_weapons")`
 
   - `Optional<String> explanation`
 
@@ -27200,6 +27256,10 @@ public final class Main {
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+      - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+        High-performance model for coding and agents
+
       - `CLAUDE_FABLE_5("claude-fable-5")`
 
         Next generation of intelligence for the hardest knowledge work and coding problems
@@ -27635,6 +27695,10 @@ public final class Main {
         The model that will complete your prompt.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+          High-performance model for coding and agents
 
         - `CLAUDE_FABLE_5("claude-fable-5")`
 
@@ -30918,6 +30982,10 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
                   The model that will complete your prompt.
 
                   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                  - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+                    High-performance model for coding and agents
 
                   - `CLAUDE_FABLE_5("claude-fable-5")`
 
@@ -34653,6 +34721,10 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+                - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+                  High-performance model for coding and agents
+
                 - `CLAUDE_FABLE_5("claude-fable-5")`
 
                   Next generation of intelligence for the hardest knowledge work and coding problems
@@ -34732,8 +34804,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
                 - `FRONTIER_LLM("frontier_llm")`
 
                 - `REASONING_EXTRACTION("reasoning_extraction")`
-
-                - `MILITARY_WEAPONS("military_weapons")`
 
               - `JsonValue; type "refusal"constant`
 
@@ -34875,8 +34945,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             - `FRONTIER_LLM("frontier_llm")`
 
             - `REASONING_EXTRACTION("reasoning_extraction")`
-
-            - `MILITARY_WEAPONS("military_weapons")`
 
           - `Optional<String> explanation`
 
@@ -36438,6 +36506,10 @@ public final class Main {
 
                 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+                - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+                  High-performance model for coding and agents
+
                 - `CLAUDE_FABLE_5("claude-fable-5")`
 
                   Next generation of intelligence for the hardest knowledge work and coding problems
@@ -36517,8 +36589,6 @@ public final class Main {
                 - `FRONTIER_LLM("frontier_llm")`
 
                 - `REASONING_EXTRACTION("reasoning_extraction")`
-
-                - `MILITARY_WEAPONS("military_weapons")`
 
               - `JsonValue; type "refusal"constant`
 
@@ -36660,8 +36730,6 @@ public final class Main {
             - `FRONTIER_LLM("frontier_llm")`
 
             - `REASONING_EXTRACTION("reasoning_extraction")`
-
-            - `MILITARY_WEAPONS("military_weapons")`
 
           - `Optional<String> explanation`
 
@@ -38009,6 +38077,10 @@ public final class Main {
 
               See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+              - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+                High-performance model for coding and agents
+
               - `CLAUDE_FABLE_5("claude-fable-5")`
 
                 Next generation of intelligence for the hardest knowledge work and coding problems
@@ -38088,8 +38160,6 @@ public final class Main {
               - `FRONTIER_LLM("frontier_llm")`
 
               - `REASONING_EXTRACTION("reasoning_extraction")`
-
-              - `MILITARY_WEAPONS("military_weapons")`
 
             - `JsonValue; type "refusal"constant`
 
@@ -38231,8 +38301,6 @@ public final class Main {
           - `FRONTIER_LLM("frontier_llm")`
 
           - `REASONING_EXTRACTION("reasoning_extraction")`
-
-          - `MILITARY_WEAPONS("military_weapons")`
 
         - `Optional<String> explanation`
 
@@ -39542,6 +39610,10 @@ public final class Main {
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+            - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+              High-performance model for coding and agents
+
             - `CLAUDE_FABLE_5("claude-fable-5")`
 
               Next generation of intelligence for the hardest knowledge work and coding problems
@@ -39621,8 +39693,6 @@ public final class Main {
             - `FRONTIER_LLM("frontier_llm")`
 
             - `REASONING_EXTRACTION("reasoning_extraction")`
-
-            - `MILITARY_WEAPONS("military_weapons")`
 
           - `JsonValue; type "refusal"constant`
 
@@ -39764,8 +39834,6 @@ public final class Main {
         - `FRONTIER_LLM("frontier_llm")`
 
         - `REASONING_EXTRACTION("reasoning_extraction")`
-
-        - `MILITARY_WEAPONS("military_weapons")`
 
       - `Optional<String> explanation`
 
@@ -40206,6 +40274,10 @@ Create Agent
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+      - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+        High-performance model for coding and agents
+
       - `CLAUDE_FABLE_5("claude-fable-5")`
 
         Next generation of intelligence for the hardest knowledge work and coding problems
@@ -40543,6 +40615,10 @@ Create Agent
       The model that will power your agent.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+        High-performance model for coding and agents
 
       - `CLAUDE_FABLE_5("claude-fable-5")`
 
@@ -41026,6 +41102,10 @@ List Agents
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+      - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+        High-performance model for coding and agents
+
       - `CLAUDE_FABLE_5("claude-fable-5")`
 
         Next generation of intelligence for the hardest knowledge work and coding problems
@@ -41494,6 +41574,10 @@ Get Agent
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+      - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+        High-performance model for coding and agents
+
       - `CLAUDE_FABLE_5("claude-fable-5")`
 
         Next generation of intelligence for the hardest knowledge work and coding problems
@@ -41951,6 +42035,10 @@ Update Agent
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+      - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+        High-performance model for coding and agents
+
       - `CLAUDE_FABLE_5("claude-fable-5")`
 
         Next generation of intelligence for the hardest knowledge work and coding problems
@@ -42264,6 +42352,10 @@ Update Agent
       The model that will power your agent.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+        High-performance model for coding and agents
 
       - `CLAUDE_FABLE_5("claude-fable-5")`
 
@@ -42728,6 +42820,10 @@ Archive Agent
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+      - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+        High-performance model for coding and agents
+
       - `CLAUDE_FABLE_5("claude-fable-5")`
 
         Next generation of intelligence for the hardest knowledge work and coding problems
@@ -43114,6 +43210,10 @@ public final class Main {
       The model that will power your agent.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+        High-performance model for coding and agents
 
       - `CLAUDE_FABLE_5("claude-fable-5")`
 
@@ -44219,6 +44319,10 @@ public final class Main {
 
   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+  - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+    High-performance model for coding and agents
+
   - `CLAUDE_FABLE_5("claude-fable-5")`
 
     Next generation of intelligence for the hardest knowledge work and coding problems
@@ -44274,6 +44378,10 @@ public final class Main {
     The model that will power your agent.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+      High-performance model for coding and agents
 
     - `CLAUDE_FABLE_5("claude-fable-5")`
 
@@ -44338,6 +44446,10 @@ public final class Main {
     The model that will power your agent.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+      High-performance model for coding and agents
 
     - `CLAUDE_FABLE_5("claude-fable-5")`
 
@@ -44492,6 +44604,10 @@ public final class Main {
       The model that will power your agent.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+        High-performance model for coding and agents
 
       - `CLAUDE_FABLE_5("claude-fable-5")`
 
@@ -44898,6 +45014,10 @@ List Agent Versions
       The model that will power your agent.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+        High-performance model for coding and agents
 
       - `CLAUDE_FABLE_5("claude-fable-5")`
 
@@ -47682,6 +47802,10 @@ Retrieve detailed information about a specific work item.
 
     User-provided metadata key-value pairs associated with this work item
 
+  - `Optional<String> secret`
+
+    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
+
   - `Optional<String> startedAt`
 
     RFC 3339 timestamp when work execution started
@@ -47755,6 +47879,7 @@ public final class Main {
   "metadata": {
     "foo": "string"
   },
+  "secret": "secret",
   "started_at": "started_at",
   "state": "queued",
   "stop_requested_at": "stop_requested_at",
@@ -47899,6 +48024,10 @@ Long poll for work items in the queue.
 
     User-provided metadata key-value pairs associated with this work item
 
+  - `Optional<String> secret`
+
+    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
+
   - `Optional<String> startedAt`
 
     RFC 3339 timestamp when work execution started
@@ -47969,6 +48098,7 @@ public final class Main {
   "metadata": {
     "foo": "string"
   },
+  "secret": "secret",
   "started_at": "started_at",
   "state": "queued",
   "stop_requested_at": "stop_requested_at",
@@ -48103,6 +48233,10 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
 
     User-provided metadata key-value pairs associated with this work item
 
+  - `Optional<String> secret`
+
+    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
+
   - `Optional<String> startedAt`
 
     RFC 3339 timestamp when work execution started
@@ -48176,6 +48310,7 @@ public final class Main {
   "metadata": {
     "foo": "string"
   },
+  "secret": "secret",
   "started_at": "started_at",
   "state": "queued",
   "stop_requested_at": "stop_requested_at",
@@ -48475,6 +48610,10 @@ Stop a work item, initiating graceful or forced shutdown.
 
     User-provided metadata key-value pairs associated with this work item
 
+  - `Optional<String> secret`
+
+    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
+
   - `Optional<String> startedAt`
 
     RFC 3339 timestamp when work execution started
@@ -48550,6 +48689,7 @@ public final class Main {
   "metadata": {
     "foo": "string"
   },
+  "secret": "secret",
   "started_at": "started_at",
   "state": "queued",
   "stop_requested_at": "stop_requested_at",
@@ -48690,6 +48830,10 @@ List work items in an environment.
 
     User-provided metadata key-value pairs associated with this work item
 
+  - `Optional<String> secret`
+
+    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
+
   - `Optional<String> startedAt`
 
     RFC 3339 timestamp when work execution started
@@ -48761,6 +48905,7 @@ public final class Main {
       "metadata": {
         "foo": "string"
       },
+      "secret": "secret",
       "started_at": "started_at",
       "state": "queued",
       "stop_requested_at": "stop_requested_at",
@@ -48902,6 +49047,10 @@ Update work item metadata with merge semantics.
 
     User-provided metadata key-value pairs associated with this work item
 
+  - `Optional<String> secret`
+
+    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
+
   - `Optional<String> startedAt`
 
     RFC 3339 timestamp when work execution started
@@ -48982,6 +49131,7 @@ public final class Main {
   "metadata": {
     "foo": "string"
   },
+  "secret": "secret",
   "started_at": "started_at",
   "state": "queued",
   "stop_requested_at": "stop_requested_at",
@@ -49177,6 +49327,10 @@ public final class Main {
 
     User-provided metadata key-value pairs associated with this work item
 
+  - `Optional<String> secret`
+
+    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
+
   - `Optional<String> startedAt`
 
     RFC 3339 timestamp when work execution started
@@ -49294,6 +49448,10 @@ public final class Main {
     - `Metadata metadata`
 
       User-provided metadata key-value pairs associated with this work item
+
+    - `Optional<String> secret`
+
+      Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
 
     - `Optional<String> startedAt`
 
@@ -49496,6 +49654,318 @@ Create Session
 
         The specific `agent` version to use. Omit to use the latest version. Must be at least 1 if specified.
 
+    - `class BetaManagedAgentsAgentWithOverridesParams:`
+
+      Reference to an `agent` plus optional configuration overrides. Each provided field replaces the agent's value for the caller's use; the agent resource is unchanged.
+
+      - `String id`
+
+        The `agent` ID.
+
+      - `Type type`
+
+        - `AGENT_WITH_OVERRIDES("agent_with_overrides")`
+
+      - `Optional<List<BetaManagedAgentsUrlMcpServerParams>> mcpServers`
+
+        Replacement MCP server list. Full replacement: the provided array becomes the MCP servers. Send an empty array to clear; omit to preserve the agent's servers.
+
+        - `String name`
+
+          Unique name for this server, referenced by mcp_toolset configurations. 1-255 characters.
+
+        - `Type type`
+
+          - `URL("url")`
+
+        - `String url`
+
+          Endpoint URL for the MCP server.
+
+      - `Optional<Model> model`
+
+        Replacement model. Accepts the model string, e.g. `claude-opus-4-6`, or a `model_config` object. Omit to use the agent's model.
+
+        - `enum BetaManagedAgentsModel:`
+
+          The model that will power your agent.
+
+          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+            High-performance model for coding and agents
+
+          - `CLAUDE_FABLE_5("claude-fable-5")`
+
+            Next generation of intelligence for the hardest knowledge work and coding problems
+
+          - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
+
+            Frontier intelligence for long-running agents and coding
+
+          - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+            Most intelligent model for building agents and coding
+
+          - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+            Best combination of speed and intelligence
+
+          - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+            Fastest model with near-frontier intelligence
+
+          - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+            Fastest model with near-frontier intelligence
+
+          - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+            Premium model combining maximum intelligence with practical performance
+
+          - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+            High-performance model for agents and coding
+
+          - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+            High-performance model for agents and coding
+
+        - `class BetaManagedAgentsModelConfigParams:`
+
+          An object that defines additional configuration control over model use
+
+          - `BetaManagedAgentsModel id`
+
+            The model that will power your agent.
+
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `Optional<Speed> speed`
+
+            Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+            - `STANDARD("standard")`
+
+            - `FAST("fast")`
+
+      - `Optional<List<BetaManagedAgentsSkillParams>> skills`
+
+        Replacement skill list. Full replacement: the provided array becomes the skills. Send an empty array to clear; omit to preserve the agent's skills.
+
+        - `class BetaManagedAgentsAnthropicSkillParams:`
+
+          An Anthropic-managed skill.
+
+          - `String skillId`
+
+            Identifier of the Anthropic skill (e.g., "xlsx").
+
+          - `Type type`
+
+            - `ANTHROPIC("anthropic")`
+
+          - `Optional<String> version`
+
+            Version to pin. Defaults to latest if omitted.
+
+        - `class BetaManagedAgentsCustomSkillParams:`
+
+          A user-created custom skill.
+
+          - `String skillId`
+
+            Tagged ID of the custom skill (e.g., "skill_01XJ5...").
+
+          - `Type type`
+
+            - `CUSTOM("custom")`
+
+          - `Optional<String> version`
+
+            Version to pin. Defaults to latest if omitted.
+
+      - `Optional<String> system`
+
+        Replacement system prompt. Up to 100,000 characters. Set to null to clear the agent's system prompt; omit to preserve it.
+
+      - `Optional<List<Tool>> tools`
+
+        Replacement tool list. Full replacement: the provided array becomes the tool configuration. Send an empty array to clear; omit to preserve the agent's tools.
+
+        - `class BetaManagedAgentsAgentToolset20260401Params:`
+
+          Configuration for built-in agent tools. Use this to enable or disable groups of tools available to the agent.
+
+          - `Type type`
+
+            - `AGENT_TOOLSET_20260401("agent_toolset_20260401")`
+
+          - `Optional<List<BetaManagedAgentsAgentToolConfigParams>> configs`
+
+            Per-tool configuration overrides.
+
+            - `Name name`
+
+              Built-in agent tool identifier.
+
+              - `BASH("bash")`
+
+              - `EDIT("edit")`
+
+              - `READ("read")`
+
+              - `WRITE("write")`
+
+              - `GLOB("glob")`
+
+              - `GREP("grep")`
+
+              - `WEB_FETCH("web_fetch")`
+
+              - `WEB_SEARCH("web_search")`
+
+            - `Optional<Boolean> enabled`
+
+              Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+
+            - `Optional<PermissionPolicy> permissionPolicy`
+
+              Permission policy for tool execution.
+
+              - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                Tool calls are automatically approved without user confirmation.
+
+                - `Type type`
+
+                  - `ALWAYS_ALLOW("always_allow")`
+
+              - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                Tool calls require user confirmation before execution.
+
+                - `Type type`
+
+                  - `ALWAYS_ASK("always_ask")`
+
+          - `Optional<BetaManagedAgentsAgentToolsetDefaultConfigParams> defaultConfig`
+
+            Default configuration for all tools in a toolset.
+
+            - `Optional<Boolean> enabled`
+
+              Whether tools are enabled and available to Claude by default. Defaults to true if not specified.
+
+            - `Optional<PermissionPolicy> permissionPolicy`
+
+              Permission policy for tool execution.
+
+              - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                Tool calls are automatically approved without user confirmation.
+
+              - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                Tool calls require user confirmation before execution.
+
+        - `class BetaManagedAgentsMcpToolsetParams:`
+
+          Configuration for tools from an MCP server defined in `mcp_servers`.
+
+          - `String mcpServerName`
+
+            Name of the MCP server. Must match a server name from the mcp_servers array. 1-255 characters.
+
+          - `Type type`
+
+            - `MCP_TOOLSET("mcp_toolset")`
+
+          - `Optional<List<BetaManagedAgentsMcpToolConfigParams>> configs`
+
+            Per-tool configuration overrides.
+
+            - `String name`
+
+              Name of the MCP tool to configure. 1-128 characters.
+
+            - `Optional<Boolean> enabled`
+
+              Whether this tool is enabled. Overrides the `default_config` setting.
+
+            - `Optional<PermissionPolicy> permissionPolicy`
+
+              Permission policy for tool execution.
+
+              - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                Tool calls are automatically approved without user confirmation.
+
+              - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                Tool calls require user confirmation before execution.
+
+          - `Optional<BetaManagedAgentsMcpToolsetDefaultConfigParams> defaultConfig`
+
+            Default configuration for all tools from an MCP server.
+
+            - `Optional<Boolean> enabled`
+
+              Whether tools are enabled by default. Defaults to true if not specified.
+
+            - `Optional<PermissionPolicy> permissionPolicy`
+
+              Permission policy for tool execution.
+
+              - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                Tool calls are automatically approved without user confirmation.
+
+              - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                Tool calls require user confirmation before execution.
+
+        - `class BetaManagedAgentsCustomToolParams:`
+
+          A custom tool that is executed by the API client rather than the agent. When the agent calls this tool, an `agent.custom_tool_use` event is emitted and the session goes idle, waiting for the client to provide the result via a `user.custom_tool_result` event.
+
+          - `String description`
+
+            Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-1024 characters.
+
+          - `BetaManagedAgentsCustomToolInputSchema inputSchema`
+
+            JSON Schema for custom tool input parameters.
+
+            - `JsonValue; type "object"constant`
+
+              - `OBJECT("object")`
+
+            - `Optional<Properties> properties`
+
+            - `Optional<List<String>> required`
+
+          - `String name`
+
+            Unique name for the tool. 1-128 characters; letters, digits, underscores, and hyphens.
+
+          - `Type type`
+
+            - `CUSTOM("custom")`
+
+      - `Optional<Long> version`
+
+        The specific `agent` version to use. Omit to use the latest version.
+
   - `String environmentId`
 
     ID of the `environment` defining the container configuration for this session.
@@ -49635,6 +50105,10 @@ Create Session
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+          High-performance model for coding and agents
 
         - `CLAUDE_FABLE_5("claude-fable-5")`
 
@@ -50499,6 +50973,10 @@ List Sessions
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+        - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+          High-performance model for coding and agents
+
         - `CLAUDE_FABLE_5("claude-fable-5")`
 
           Next generation of intelligence for the hardest knowledge work and coding problems
@@ -51187,7 +51665,8 @@ public final class Main {
       "deployment_id": "deployment_id"
     }
   ],
-  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
+  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo=",
+  "prev_page": "page_MjAyNS0wNS0xM1QwMDowMDowMFo="
 }
 ```
 
@@ -51300,6 +51779,10 @@ Get Session
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+          High-performance model for coding and agents
 
         - `CLAUDE_FABLE_5("claude-fable-5")`
 
@@ -52113,6 +52596,10 @@ Update Session
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+          High-performance model for coding and agents
 
         - `CLAUDE_FABLE_5("claude-fable-5")`
 
@@ -53027,6 +53514,10 @@ Archive Session
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+        - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+          High-performance model for coding and agents
+
         - `CLAUDE_FABLE_5("claude-fable-5")`
 
           Next generation of intelligence for the hardest knowledge work and coding problems
@@ -53716,6 +54207,18 @@ public final class Main {
 
 ## Domain Types
 
+### Beta Managed Agents Agent Message Preview
+
+- `class BetaManagedAgentsAgentMessagePreview:`
+
+  - `String id`
+
+    The id the buffered agent.message will carry if it is emitted. Matches the event_id on this preview's event_delta events.
+
+  - `Type type`
+
+    - `AGENT_MESSAGE("agent.message")`
+
 ### Beta Managed Agents Agent Params
 
 - `class BetaManagedAgentsAgentParams:`
@@ -53733,6 +54236,332 @@ public final class Main {
   - `Optional<Long> version`
 
     The specific `agent` version to use. Omit to use the latest version. Must be at least 1 if specified.
+
+### Beta Managed Agents Agent Thinking Preview
+
+- `class BetaManagedAgentsAgentThinkingPreview:`
+
+  - `String id`
+
+    The id the buffered agent.thinking will carry if it is emitted. Start-only — no event_delta events follow.
+
+  - `Type type`
+
+    - `AGENT_THINKING("agent.thinking")`
+
+### Beta Managed Agents Agent With Overrides Params
+
+- `class BetaManagedAgentsAgentWithOverridesParams:`
+
+  Reference to an `agent` plus optional configuration overrides. Each provided field replaces the agent's value for the caller's use; the agent resource is unchanged.
+
+  - `String id`
+
+    The `agent` ID.
+
+  - `Type type`
+
+    - `AGENT_WITH_OVERRIDES("agent_with_overrides")`
+
+  - `Optional<List<BetaManagedAgentsUrlMcpServerParams>> mcpServers`
+
+    Replacement MCP server list. Full replacement: the provided array becomes the MCP servers. Send an empty array to clear; omit to preserve the agent's servers.
+
+    - `String name`
+
+      Unique name for this server, referenced by mcp_toolset configurations. 1-255 characters.
+
+    - `Type type`
+
+      - `URL("url")`
+
+    - `String url`
+
+      Endpoint URL for the MCP server.
+
+  - `Optional<Model> model`
+
+    Replacement model. Accepts the model string, e.g. `claude-opus-4-6`, or a `model_config` object. Omit to use the agent's model.
+
+    - `enum BetaManagedAgentsModel:`
+
+      The model that will power your agent.
+
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+        High-performance model for coding and agents
+
+      - `CLAUDE_FABLE_5("claude-fable-5")`
+
+        Next generation of intelligence for the hardest knowledge work and coding problems
+
+      - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
+
+        Frontier intelligence for long-running agents and coding
+
+      - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
+
+        Frontier intelligence for long-running agents and coding
+
+      - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+        Most intelligent model for building agents and coding
+
+      - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+        Best combination of speed and intelligence
+
+      - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+        Fastest model with near-frontier intelligence
+
+      - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+        Fastest model with near-frontier intelligence
+
+      - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+        Premium model combining maximum intelligence with practical performance
+
+      - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+        Premium model combining maximum intelligence with practical performance
+
+      - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+        High-performance model for agents and coding
+
+      - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+        High-performance model for agents and coding
+
+    - `class BetaManagedAgentsModelConfigParams:`
+
+      An object that defines additional configuration control over model use
+
+      - `BetaManagedAgentsModel id`
+
+        The model that will power your agent.
+
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `Optional<Speed> speed`
+
+        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+        - `STANDARD("standard")`
+
+        - `FAST("fast")`
+
+  - `Optional<List<BetaManagedAgentsSkillParams>> skills`
+
+    Replacement skill list. Full replacement: the provided array becomes the skills. Send an empty array to clear; omit to preserve the agent's skills.
+
+    - `class BetaManagedAgentsAnthropicSkillParams:`
+
+      An Anthropic-managed skill.
+
+      - `String skillId`
+
+        Identifier of the Anthropic skill (e.g., "xlsx").
+
+      - `Type type`
+
+        - `ANTHROPIC("anthropic")`
+
+      - `Optional<String> version`
+
+        Version to pin. Defaults to latest if omitted.
+
+    - `class BetaManagedAgentsCustomSkillParams:`
+
+      A user-created custom skill.
+
+      - `String skillId`
+
+        Tagged ID of the custom skill (e.g., "skill_01XJ5...").
+
+      - `Type type`
+
+        - `CUSTOM("custom")`
+
+      - `Optional<String> version`
+
+        Version to pin. Defaults to latest if omitted.
+
+  - `Optional<String> system`
+
+    Replacement system prompt. Up to 100,000 characters. Set to null to clear the agent's system prompt; omit to preserve it.
+
+  - `Optional<List<Tool>> tools`
+
+    Replacement tool list. Full replacement: the provided array becomes the tool configuration. Send an empty array to clear; omit to preserve the agent's tools.
+
+    - `class BetaManagedAgentsAgentToolset20260401Params:`
+
+      Configuration for built-in agent tools. Use this to enable or disable groups of tools available to the agent.
+
+      - `Type type`
+
+        - `AGENT_TOOLSET_20260401("agent_toolset_20260401")`
+
+      - `Optional<List<BetaManagedAgentsAgentToolConfigParams>> configs`
+
+        Per-tool configuration overrides.
+
+        - `Name name`
+
+          Built-in agent tool identifier.
+
+          - `BASH("bash")`
+
+          - `EDIT("edit")`
+
+          - `READ("read")`
+
+          - `WRITE("write")`
+
+          - `GLOB("glob")`
+
+          - `GREP("grep")`
+
+          - `WEB_FETCH("web_fetch")`
+
+          - `WEB_SEARCH("web_search")`
+
+        - `Optional<Boolean> enabled`
+
+          Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+
+        - `Optional<PermissionPolicy> permissionPolicy`
+
+          Permission policy for tool execution.
+
+          - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+            Tool calls are automatically approved without user confirmation.
+
+            - `Type type`
+
+              - `ALWAYS_ALLOW("always_allow")`
+
+          - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+            Tool calls require user confirmation before execution.
+
+            - `Type type`
+
+              - `ALWAYS_ASK("always_ask")`
+
+      - `Optional<BetaManagedAgentsAgentToolsetDefaultConfigParams> defaultConfig`
+
+        Default configuration for all tools in a toolset.
+
+        - `Optional<Boolean> enabled`
+
+          Whether tools are enabled and available to Claude by default. Defaults to true if not specified.
+
+        - `Optional<PermissionPolicy> permissionPolicy`
+
+          Permission policy for tool execution.
+
+          - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+            Tool calls are automatically approved without user confirmation.
+
+          - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+            Tool calls require user confirmation before execution.
+
+    - `class BetaManagedAgentsMcpToolsetParams:`
+
+      Configuration for tools from an MCP server defined in `mcp_servers`.
+
+      - `String mcpServerName`
+
+        Name of the MCP server. Must match a server name from the mcp_servers array. 1-255 characters.
+
+      - `Type type`
+
+        - `MCP_TOOLSET("mcp_toolset")`
+
+      - `Optional<List<BetaManagedAgentsMcpToolConfigParams>> configs`
+
+        Per-tool configuration overrides.
+
+        - `String name`
+
+          Name of the MCP tool to configure. 1-128 characters.
+
+        - `Optional<Boolean> enabled`
+
+          Whether this tool is enabled. Overrides the `default_config` setting.
+
+        - `Optional<PermissionPolicy> permissionPolicy`
+
+          Permission policy for tool execution.
+
+          - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+            Tool calls are automatically approved without user confirmation.
+
+          - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+            Tool calls require user confirmation before execution.
+
+      - `Optional<BetaManagedAgentsMcpToolsetDefaultConfigParams> defaultConfig`
+
+        Default configuration for all tools from an MCP server.
+
+        - `Optional<Boolean> enabled`
+
+          Whether tools are enabled by default. Defaults to true if not specified.
+
+        - `Optional<PermissionPolicy> permissionPolicy`
+
+          Permission policy for tool execution.
+
+          - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+            Tool calls are automatically approved without user confirmation.
+
+          - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+            Tool calls require user confirmation before execution.
+
+    - `class BetaManagedAgentsCustomToolParams:`
+
+      A custom tool that is executed by the API client rather than the agent. When the agent calls this tool, an `agent.custom_tool_use` event is emitted and the session goes idle, waiting for the client to provide the result via a `user.custom_tool_result` event.
+
+      - `String description`
+
+        Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-1024 characters.
+
+      - `BetaManagedAgentsCustomToolInputSchema inputSchema`
+
+        JSON Schema for custom tool input parameters.
+
+        - `JsonValue; type "object"constant`
+
+          - `OBJECT("object")`
+
+        - `Optional<Properties> properties`
+
+        - `Optional<List<String>> required`
+
+      - `String name`
+
+        Unique name for the tool. 1-128 characters; letters, digits, underscores, and hyphens.
+
+      - `Type type`
+
+        - `CUSTOM("custom")`
+
+  - `Optional<Long> version`
+
+    The specific `agent` version to use. Omit to use the latest version.
 
 ### Beta Managed Agents Branch Checkout
 
@@ -53783,6 +54612,78 @@ public final class Main {
   - `Type type`
 
     - `SESSION_DELETED("session_deleted")`
+
+### Beta Managed Agents Delta Content
+
+- `class BetaManagedAgentsDeltaContent:`
+
+  - `BetaManagedAgentsTextBlock content`
+
+    Regular text content.
+
+    - `String text`
+
+      The text content.
+
+    - `Type type`
+
+      - `TEXT("text")`
+
+  - `Type type`
+
+    - `CONTENT_DELTA("content_delta")`
+
+  - `Optional<Long> index`
+
+    Which entry in the previewed event's content array this fragment lands in. Insert content as that entry when the index is new; append to the existing entry otherwise.
+
+### Beta Managed Agents Delta Event
+
+- `class BetaManagedAgentsDeltaEvent:`
+
+  An incremental update to an event that is still being streamed. Deltas are best-effort and may stop early; when the buffered event with id == event_id is produced it carries the complete content. A model request that ends early (an error or interrupt) produces no buffered event — its terminal span.model_request_end closes the preview. Only sent on stream connections that opt in via event_deltas; never appears in event history.
+
+  - `BetaManagedAgentsDeltaContent delta`
+
+    One fragment of the previewed event. The delta type is named for the previewed event's field it streams into: agent.message events stream content_delta fragments, each a partial element of the content array.
+
+    - `BetaManagedAgentsTextBlock content`
+
+      Regular text content.
+
+      - `String text`
+
+        The text content.
+
+      - `Type type`
+
+        - `TEXT("text")`
+
+    - `Type type`
+
+      - `CONTENT_DELTA("content_delta")`
+
+    - `Optional<Long> index`
+
+      Which entry in the previewed event's content array this fragment lands in. Insert content as that entry when the index is new; append to the existing entry otherwise.
+
+  - `String eventId`
+
+    The id of the event being previewed. Matches event.id on the corresponding event_start and the buffered event that reconciles the preview.
+
+  - `Type type`
+
+    - `EVENT_DELTA("event_delta")`
+
+### Beta Managed Agents Delta Type
+
+- `enum BetaManagedAgentsDeltaType:`
+
+  EventDeltaType enum
+
+  - `AGENT_MESSAGE("agent.message")`
+
+  - `AGENT_THINKING("agent.thinking")`
 
 ### Beta Managed Agents File Resource Params
 
@@ -54037,6 +54938,10 @@ public final class Main {
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+          High-performance model for coding and agents
 
         - `CLAUDE_FABLE_5("claude-fable-5")`
 
@@ -54566,6 +55471,10 @@ public final class Main {
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+      - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+        High-performance model for coding and agents
+
       - `CLAUDE_FABLE_5("claude-fable-5")`
 
         Next generation of intelligence for the hardest knowledge work and coding problems
@@ -55070,6 +55979,10 @@ public final class Main {
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+        - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+          High-performance model for coding and agents
+
         - `CLAUDE_FABLE_5("claude-fable-5")`
 
           Next generation of intelligence for the hardest knowledge work and coding problems
@@ -55359,6 +56272,10 @@ public final class Main {
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+          High-performance model for coding and agents
 
         - `CLAUDE_FABLE_5("claude-fable-5")`
 
@@ -55681,6 +56598,64 @@ public final class Main {
   - `Optional<Long> outputTokens`
 
     Total output tokens generated across all turns.
+
+### Beta Managed Agents Start Event
+
+- `class BetaManagedAgentsStartEvent:`
+
+  Opens a preview of a buffered event. Carries the previewed event's type and id only. Followed by zero or more event_delta events with the same event id, normally concluded by the buffered event carrying that id. If the producing model request ends without that event (an error or interrupt mid-stream), its terminal span.model_request_end closes the preview. Only sent on stream connections that opt in via event_deltas; never appears in event history.
+
+  - `BetaManagedAgentsStartEventPreview event`
+
+    The previewed event's type and id. The event type determines which delta types the preview's event_delta events carry: agent.message events stream content_delta fragments; agent.thinking previews are start-only — no deltas follow, and the buffered agent.thinking with the same id concludes them.
+
+    - `class BetaManagedAgentsAgentMessagePreview:`
+
+      - `String id`
+
+        The id the buffered agent.message will carry if it is emitted. Matches the event_id on this preview's event_delta events.
+
+      - `Type type`
+
+        - `AGENT_MESSAGE("agent.message")`
+
+    - `class BetaManagedAgentsAgentThinkingPreview:`
+
+      - `String id`
+
+        The id the buffered agent.thinking will carry if it is emitted. Start-only — no event_delta events follow.
+
+      - `Type type`
+
+        - `AGENT_THINKING("agent.thinking")`
+
+  - `Type type`
+
+    - `EVENT_START("event_start")`
+
+### Beta Managed Agents Start Event Preview
+
+- `class BetaManagedAgentsStartEventPreview: A class that can be one of several variants.union`
+
+  - `class BetaManagedAgentsAgentMessagePreview:`
+
+    - `String id`
+
+      The id the buffered agent.message will carry if it is emitted. Matches the event_id on this preview's event_delta events.
+
+    - `Type type`
+
+      - `AGENT_MESSAGE("agent.message")`
+
+  - `class BetaManagedAgentsAgentThinkingPreview:`
+
+    - `String id`
+
+      The id the buffered agent.thinking will carry if it is emitted. Start-only — no event_delta events follow.
+
+    - `Type type`
+
+      - `AGENT_THINKING("agent.thinking")`
 
 ### Beta Managed Agents System Content Block
 
@@ -57512,6 +58487,10 @@ List Events
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+          - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+            High-performance model for coding and agents
+
           - `CLAUDE_FABLE_5("claude-fable-5")`
 
             Next generation of intelligence for the hardest knowledge work and coding problems
@@ -58825,6 +59804,14 @@ Stream Events
 - `EventStreamParams params`
 
   - `Optional<String> sessionId`
+
+  - `Optional<List<BetaManagedAgentsDeltaType>> eventDeltas`
+
+    When set, this connection also receives streaming deltas (`event_start`, `event_delta`) while an event is being produced, before the event itself arrives. Deltas are best-effort; when the final event is produced it carries the complete content. A model request that ends early (an error or interrupt) produces no final event — its terminal `span.model_request_end` closes the preview. Accepts one or more event types to preview and may be repeated: `agent.message` streams `content_delta` fragments; `agent.thinking` is start-only — a signal that the agent has begun extended thinking, concluded by the `agent.thinking` event itself. Only previews of the requested event types are sent.
+
+    - `AGENT_MESSAGE("agent.message")`
+
+    - `AGENT_THINKING("agent.thinking")`
 
   - `Optional<List<AnthropicBeta>> betas`
 
@@ -60348,6 +61335,10 @@ Stream Events
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+          - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+            High-performance model for coding and agents
+
           - `CLAUDE_FABLE_5("claude-fable-5")`
 
             Next generation of intelligence for the hardest knowledge work and coding problems
@@ -60639,6 +61630,66 @@ Stream Events
     - `Optional<String> title`
 
       The session's new title. Present only when the update changed it.
+
+  - `class BetaManagedAgentsStartEvent:`
+
+    Opens a preview of a buffered event. Carries the previewed event's type and id only. Followed by zero or more event_delta events with the same event id, normally concluded by the buffered event carrying that id. If the producing model request ends without that event (an error or interrupt mid-stream), its terminal span.model_request_end closes the preview. Only sent on stream connections that opt in via event_deltas; never appears in event history.
+
+    - `BetaManagedAgentsStartEventPreview event`
+
+      The previewed event's type and id. The event type determines which delta types the preview's event_delta events carry: agent.message events stream content_delta fragments; agent.thinking previews are start-only — no deltas follow, and the buffered agent.thinking with the same id concludes them.
+
+      - `class BetaManagedAgentsAgentMessagePreview:`
+
+        - `String id`
+
+          The id the buffered agent.message will carry if it is emitted. Matches the event_id on this preview's event_delta events.
+
+        - `Type type`
+
+          - `AGENT_MESSAGE("agent.message")`
+
+      - `class BetaManagedAgentsAgentThinkingPreview:`
+
+        - `String id`
+
+          The id the buffered agent.thinking will carry if it is emitted. Start-only — no event_delta events follow.
+
+        - `Type type`
+
+          - `AGENT_THINKING("agent.thinking")`
+
+    - `Type type`
+
+      - `EVENT_START("event_start")`
+
+  - `class BetaManagedAgentsDeltaEvent:`
+
+    An incremental update to an event that is still being streamed. Deltas are best-effort and may stop early; when the buffered event with id == event_id is produced it carries the complete content. A model request that ends early (an error or interrupt) produces no buffered event — its terminal span.model_request_end closes the preview. Only sent on stream connections that opt in via event_deltas; never appears in event history.
+
+    - `BetaManagedAgentsDeltaContent delta`
+
+      One fragment of the previewed event. The delta type is named for the previewed event's field it streams into: agent.message events stream content_delta fragments, each a partial element of the content array.
+
+      - `BetaManagedAgentsTextBlock content`
+
+        Regular text content.
+
+      - `Type type`
+
+        - `CONTENT_DELTA("content_delta")`
+
+      - `Optional<Long> index`
+
+        Which entry in the previewed event's content array this fragment lands in. Insert content as that entry when the index is new; append to the existing entry otherwise.
+
+    - `String eventId`
+
+      The id of the event being previewed. Matches event.id on the corresponding event_start and the buffered event that reconciles the preview.
+
+    - `Type type`
+
+      - `EVENT_DELTA("event_delta")`
 
   - `class BetaManagedAgentsSystemMessageEvent:`
 
@@ -64864,6 +65915,10 @@ public final class Main {
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+          - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+            High-performance model for coding and agents
+
           - `CLAUDE_FABLE_5("claude-fable-5")`
 
             Next generation of intelligence for the hardest knowledge work and coding problems
@@ -67156,6 +68211,10 @@ public final class Main {
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+          - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+            High-performance model for coding and agents
+
           - `CLAUDE_FABLE_5("claude-fable-5")`
 
             Next generation of intelligence for the hardest knowledge work and coding problems
@@ -67447,6 +68506,66 @@ public final class Main {
     - `Optional<String> title`
 
       The session's new title. Present only when the update changed it.
+
+  - `class BetaManagedAgentsStartEvent:`
+
+    Opens a preview of a buffered event. Carries the previewed event's type and id only. Followed by zero or more event_delta events with the same event id, normally concluded by the buffered event carrying that id. If the producing model request ends without that event (an error or interrupt mid-stream), its terminal span.model_request_end closes the preview. Only sent on stream connections that opt in via event_deltas; never appears in event history.
+
+    - `BetaManagedAgentsStartEventPreview event`
+
+      The previewed event's type and id. The event type determines which delta types the preview's event_delta events carry: agent.message events stream content_delta fragments; agent.thinking previews are start-only — no deltas follow, and the buffered agent.thinking with the same id concludes them.
+
+      - `class BetaManagedAgentsAgentMessagePreview:`
+
+        - `String id`
+
+          The id the buffered agent.message will carry if it is emitted. Matches the event_id on this preview's event_delta events.
+
+        - `Type type`
+
+          - `AGENT_MESSAGE("agent.message")`
+
+      - `class BetaManagedAgentsAgentThinkingPreview:`
+
+        - `String id`
+
+          The id the buffered agent.thinking will carry if it is emitted. Start-only — no event_delta events follow.
+
+        - `Type type`
+
+          - `AGENT_THINKING("agent.thinking")`
+
+    - `Type type`
+
+      - `EVENT_START("event_start")`
+
+  - `class BetaManagedAgentsDeltaEvent:`
+
+    An incremental update to an event that is still being streamed. Deltas are best-effort and may stop early; when the buffered event with id == event_id is produced it carries the complete content. A model request that ends early (an error or interrupt) produces no buffered event — its terminal span.model_request_end closes the preview. Only sent on stream connections that opt in via event_deltas; never appears in event history.
+
+    - `BetaManagedAgentsDeltaContent delta`
+
+      One fragment of the previewed event. The delta type is named for the previewed event's field it streams into: agent.message events stream content_delta fragments, each a partial element of the content array.
+
+      - `BetaManagedAgentsTextBlock content`
+
+        Regular text content.
+
+      - `Type type`
+
+        - `CONTENT_DELTA("content_delta")`
+
+      - `Optional<Long> index`
+
+        Which entry in the previewed event's content array this fragment lands in. Insert content as that entry when the index is new; append to the existing entry otherwise.
+
+    - `String eventId`
+
+      The id of the event being previewed. Matches event.id on the corresponding event_start and the buffered event that reconciles the preview.
+
+    - `Type type`
+
+      - `EVENT_DELTA("event_delta")`
 
   - `class BetaManagedAgentsSystemMessageEvent:`
 
@@ -70042,6 +71161,10 @@ List Session Threads
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+        - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+          High-performance model for coding and agents
+
         - `CLAUDE_FABLE_5("claude-fable-5")`
 
           Next generation of intelligence for the hardest knowledge work and coding problems
@@ -70563,6 +71686,10 @@ Get Session Thread
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+        - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+          High-performance model for coding and agents
+
         - `CLAUDE_FABLE_5("claude-fable-5")`
 
           Next generation of intelligence for the hardest knowledge work and coding problems
@@ -71083,6 +72210,10 @@ Archive Session Thread
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+        - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+          High-performance model for coding and agents
+
         - `CLAUDE_FABLE_5("claude-fable-5")`
 
           Next generation of intelligence for the hardest knowledge work and coding problems
@@ -71528,6 +72659,10 @@ public final class Main {
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+          High-performance model for coding and agents
 
         - `CLAUDE_FABLE_5("claude-fable-5")`
 
@@ -73359,6 +74494,10 @@ public final class Main {
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+          - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+            High-performance model for coding and agents
+
           - `CLAUDE_FABLE_5("claude-fable-5")`
 
             Next generation of intelligence for the hardest knowledge work and coding problems
@@ -73650,6 +74789,66 @@ public final class Main {
     - `Optional<String> title`
 
       The session's new title. Present only when the update changed it.
+
+  - `class BetaManagedAgentsStartEvent:`
+
+    Opens a preview of a buffered event. Carries the previewed event's type and id only. Followed by zero or more event_delta events with the same event id, normally concluded by the buffered event carrying that id. If the producing model request ends without that event (an error or interrupt mid-stream), its terminal span.model_request_end closes the preview. Only sent on stream connections that opt in via event_deltas; never appears in event history.
+
+    - `BetaManagedAgentsStartEventPreview event`
+
+      The previewed event's type and id. The event type determines which delta types the preview's event_delta events carry: agent.message events stream content_delta fragments; agent.thinking previews are start-only — no deltas follow, and the buffered agent.thinking with the same id concludes them.
+
+      - `class BetaManagedAgentsAgentMessagePreview:`
+
+        - `String id`
+
+          The id the buffered agent.message will carry if it is emitted. Matches the event_id on this preview's event_delta events.
+
+        - `Type type`
+
+          - `AGENT_MESSAGE("agent.message")`
+
+      - `class BetaManagedAgentsAgentThinkingPreview:`
+
+        - `String id`
+
+          The id the buffered agent.thinking will carry if it is emitted. Start-only — no event_delta events follow.
+
+        - `Type type`
+
+          - `AGENT_THINKING("agent.thinking")`
+
+    - `Type type`
+
+      - `EVENT_START("event_start")`
+
+  - `class BetaManagedAgentsDeltaEvent:`
+
+    An incremental update to an event that is still being streamed. Deltas are best-effort and may stop early; when the buffered event with id == event_id is produced it carries the complete content. A model request that ends early (an error or interrupt) produces no buffered event — its terminal span.model_request_end closes the preview. Only sent on stream connections that opt in via event_deltas; never appears in event history.
+
+    - `BetaManagedAgentsDeltaContent delta`
+
+      One fragment of the previewed event. The delta type is named for the previewed event's field it streams into: agent.message events stream content_delta fragments, each a partial element of the content array.
+
+      - `BetaManagedAgentsTextBlock content`
+
+        Regular text content.
+
+      - `Type type`
+
+        - `CONTENT_DELTA("content_delta")`
+
+      - `Optional<Long> index`
+
+        Which entry in the previewed event's content array this fragment lands in. Insert content as that entry when the index is new; append to the existing entry otherwise.
+
+    - `String eventId`
+
+      The id of the event being previewed. Matches event.id on the corresponding event_start and the buffered event that reconciles the preview.
+
+    - `Type type`
+
+      - `EVENT_DELTA("event_delta")`
 
   - `class BetaManagedAgentsSystemMessageEvent:`
 
@@ -75226,6 +76425,10 @@ List Session Thread Events
           The model that will power your agent.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+            High-performance model for coding and agents
 
           - `CLAUDE_FABLE_5("claude-fable-5")`
 
@@ -77131,6 +78334,10 @@ Stream Session Thread Events
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+          - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+            High-performance model for coding and agents
+
           - `CLAUDE_FABLE_5("claude-fable-5")`
 
             Next generation of intelligence for the hardest knowledge work and coding problems
@@ -77422,6 +78629,66 @@ Stream Session Thread Events
     - `Optional<String> title`
 
       The session's new title. Present only when the update changed it.
+
+  - `class BetaManagedAgentsStartEvent:`
+
+    Opens a preview of a buffered event. Carries the previewed event's type and id only. Followed by zero or more event_delta events with the same event id, normally concluded by the buffered event carrying that id. If the producing model request ends without that event (an error or interrupt mid-stream), its terminal span.model_request_end closes the preview. Only sent on stream connections that opt in via event_deltas; never appears in event history.
+
+    - `BetaManagedAgentsStartEventPreview event`
+
+      The previewed event's type and id. The event type determines which delta types the preview's event_delta events carry: agent.message events stream content_delta fragments; agent.thinking previews are start-only — no deltas follow, and the buffered agent.thinking with the same id concludes them.
+
+      - `class BetaManagedAgentsAgentMessagePreview:`
+
+        - `String id`
+
+          The id the buffered agent.message will carry if it is emitted. Matches the event_id on this preview's event_delta events.
+
+        - `Type type`
+
+          - `AGENT_MESSAGE("agent.message")`
+
+      - `class BetaManagedAgentsAgentThinkingPreview:`
+
+        - `String id`
+
+          The id the buffered agent.thinking will carry if it is emitted. Start-only — no event_delta events follow.
+
+        - `Type type`
+
+          - `AGENT_THINKING("agent.thinking")`
+
+    - `Type type`
+
+      - `EVENT_START("event_start")`
+
+  - `class BetaManagedAgentsDeltaEvent:`
+
+    An incremental update to an event that is still being streamed. Deltas are best-effort and may stop early; when the buffered event with id == event_id is produced it carries the complete content. A model request that ends early (an error or interrupt) produces no buffered event — its terminal span.model_request_end closes the preview. Only sent on stream connections that opt in via event_deltas; never appears in event history.
+
+    - `BetaManagedAgentsDeltaContent delta`
+
+      One fragment of the previewed event. The delta type is named for the previewed event's field it streams into: agent.message events stream content_delta fragments, each a partial element of the content array.
+
+      - `BetaManagedAgentsTextBlock content`
+
+        Regular text content.
+
+      - `Type type`
+
+        - `CONTENT_DELTA("content_delta")`
+
+      - `Optional<Long> index`
+
+        Which entry in the previewed event's content array this fragment lands in. Insert content as that entry when the index is new; append to the existing entry otherwise.
+
+    - `String eventId`
+
+      The id of the event being previewed. Matches event.id on the corresponding event_start and the buffered event that reconciles the preview.
+
+    - `Type type`
+
+      - `EVENT_DELTA("event_delta")`
 
   - `class BetaManagedAgentsSystemMessageEvent:`
 
@@ -87927,6 +89194,18 @@ Create Credential
 
         - `ENVIRONMENT_VARIABLE("environment_variable")`
 
+      - `Optional<BetaManagedAgentsInjectionLocationParams> injectionLocation`
+
+        Where in the outbound request the secret value may be substituted.
+
+        - `Optional<Boolean> body`
+
+          Substitute when the placeholder appears in the request body.
+
+        - `Optional<Boolean> header`
+
+          Substitute when the placeholder appears in a request header value.
+
   - `Optional<String> displayName`
 
     Human-readable name for the credential. Up to 255 characters.
@@ -88032,6 +89311,18 @@ Create Credential
     - `class BetaManagedAgentsEnvironmentVariableAuthResponse:`
 
       Environment variable credential details. The secret value is never returned.
+
+      - `BetaManagedAgentsInjectionLocationResponse injectionLocation`
+
+        Where in the outbound request the secret value is substituted.
+
+        - `boolean body`
+
+          Whether the placeholder is substituted in the request body.
+
+        - `boolean header`
+
+          Whether the placeholder is substituted in request header values.
 
       - `Networking networking`
 
@@ -88324,6 +89615,18 @@ List Credentials
 
       Environment variable credential details. The secret value is never returned.
 
+      - `BetaManagedAgentsInjectionLocationResponse injectionLocation`
+
+        Where in the outbound request the secret value is substituted.
+
+        - `boolean body`
+
+          Whether the placeholder is substituted in the request body.
+
+        - `boolean header`
+
+          Whether the placeholder is substituted in request header values.
+
       - `Networking networking`
 
         Outbound hosts the secret value is substituted on.
@@ -88601,6 +89904,18 @@ Get Credential
 
       Environment variable credential details. The secret value is never returned.
 
+      - `BetaManagedAgentsInjectionLocationResponse injectionLocation`
+
+        Where in the outbound request the secret value is substituted.
+
+        - `boolean body`
+
+          Whether the placeholder is substituted in the request body.
+
+        - `boolean header`
+
+          Whether the placeholder is substituted in request header values.
+
       - `Networking networking`
 
         Outbound hosts the secret value is substituted on.
@@ -88859,6 +90174,18 @@ Update Credential
 
         - `ENVIRONMENT_VARIABLE("environment_variable")`
 
+      - `Optional<BetaManagedAgentsInjectionLocationUpdateParams> injectionLocation`
+
+        Updated injection location.
+
+        - `Optional<Boolean> body`
+
+          Substitute when the placeholder appears in the request body.
+
+        - `Optional<Boolean> header`
+
+          Substitute when the placeholder appears in a request header value.
+
       - `Optional<BetaManagedAgentsCredentialNetworkingParams> networking`
 
         Updated networking scope. Full replacement.
@@ -88992,6 +90319,18 @@ Update Credential
     - `class BetaManagedAgentsEnvironmentVariableAuthResponse:`
 
       Environment variable credential details. The secret value is never returned.
+
+      - `BetaManagedAgentsInjectionLocationResponse injectionLocation`
+
+        Where in the outbound request the secret value is substituted.
+
+        - `boolean body`
+
+          Whether the placeholder is substituted in the request body.
+
+        - `boolean header`
+
+          Whether the placeholder is substituted in request header values.
 
       - `Networking networking`
 
@@ -89392,6 +90731,18 @@ Archive Credential
     - `class BetaManagedAgentsEnvironmentVariableAuthResponse:`
 
       Environment variable credential details. The secret value is never returned.
+
+      - `BetaManagedAgentsInjectionLocationResponse injectionLocation`
+
+        Where in the outbound request the secret value is substituted.
+
+        - `boolean body`
+
+          Whether the placeholder is substituted in the request body.
+
+        - `boolean header`
+
+          Whether the placeholder is substituted in request header values.
 
       - `Networking networking`
 
@@ -89811,6 +91162,18 @@ public final class Main {
 
       Environment variable credential details. The secret value is never returned.
 
+      - `BetaManagedAgentsInjectionLocationResponse injectionLocation`
+
+        Where in the outbound request the secret value is substituted.
+
+        - `boolean body`
+
+          Whether the placeholder is substituted in the request body.
+
+        - `boolean header`
+
+          Whether the placeholder is substituted in request header values.
+
       - `Networking networking`
 
         Outbound hosts the secret value is substituted on.
@@ -90009,6 +91372,18 @@ public final class Main {
 
   Environment variable credential details. The secret value is never returned.
 
+  - `BetaManagedAgentsInjectionLocationResponse injectionLocation`
+
+    Where in the outbound request the secret value is substituted.
+
+    - `boolean body`
+
+      Whether the placeholder is substituted in the request body.
+
+    - `boolean header`
+
+      Whether the placeholder is substituted in request header values.
+
   - `Networking networking`
 
     Outbound hosts the secret value is substituted on.
@@ -90083,6 +91458,18 @@ public final class Main {
 
     - `ENVIRONMENT_VARIABLE("environment_variable")`
 
+  - `Optional<BetaManagedAgentsInjectionLocationParams> injectionLocation`
+
+    Where in the outbound request the secret value may be substituted.
+
+    - `Optional<Boolean> body`
+
+      Substitute when the placeholder appears in the request body.
+
+    - `Optional<Boolean> header`
+
+      Substitute when the placeholder appears in a request header value.
+
 ### Beta Managed Agents Environment Variable Update Params
 
 - `class BetaManagedAgentsEnvironmentVariableUpdateParams:`
@@ -90092,6 +91479,18 @@ public final class Main {
   - `Type type`
 
     - `ENVIRONMENT_VARIABLE("environment_variable")`
+
+  - `Optional<BetaManagedAgentsInjectionLocationUpdateParams> injectionLocation`
+
+    Updated injection location.
+
+    - `Optional<Boolean> body`
+
+      Substitute when the placeholder appears in the request body.
+
+    - `Optional<Boolean> header`
+
+      Substitute when the placeholder appears in a request header value.
 
   - `Optional<BetaManagedAgentsCredentialNetworkingParams> networking`
 
@@ -90120,6 +91519,48 @@ public final class Main {
   - `Optional<String> secretValue`
 
     Updated secret value.
+
+### Beta Managed Agents Injection Location Params
+
+- `class BetaManagedAgentsInjectionLocationParams:`
+
+  Where in the outbound request the secret value may be substituted.
+
+  - `Optional<Boolean> body`
+
+    Substitute when the placeholder appears in the request body.
+
+  - `Optional<Boolean> header`
+
+    Substitute when the placeholder appears in a request header value.
+
+### Beta Managed Agents Injection Location Response
+
+- `class BetaManagedAgentsInjectionLocationResponse:`
+
+  Where in the outbound request the secret value is substituted.
+
+  - `boolean body`
+
+    Whether the placeholder is substituted in the request body.
+
+  - `boolean header`
+
+    Whether the placeholder is substituted in request header values.
+
+### Beta Managed Agents Injection Location Update Params
+
+- `class BetaManagedAgentsInjectionLocationUpdateParams:`
+
+  Updated injection location.
+
+  - `Optional<Boolean> body`
+
+    Substitute when the placeholder appears in the request body.
+
+  - `Optional<Boolean> header`
+
+    Substitute when the placeholder appears in a request header value.
 
 ### Beta Managed Agents Limited Credential Networking Params
 
@@ -97030,6 +98471,284 @@ public final class Main {
 
 ## Domain Types
 
+### Beta Webhook Agent Archived Event Data
+
+- `class BetaWebhookAgentArchivedEventData:`
+
+  - `String id`
+
+    ID of the agent that triggered the event.
+
+  - `String organizationId`
+
+  - `JsonValue; type "agent.archived"constant`
+
+    - `AGENT_ARCHIVED("agent.archived")`
+
+  - `String workspaceId`
+
+### Beta Webhook Agent Created Event Data
+
+- `class BetaWebhookAgentCreatedEventData:`
+
+  - `String id`
+
+    ID of the agent that triggered the event.
+
+  - `String organizationId`
+
+  - `JsonValue; type "agent.created"constant`
+
+    - `AGENT_CREATED("agent.created")`
+
+  - `String workspaceId`
+
+### Beta Webhook Agent Deleted Event Data
+
+- `class BetaWebhookAgentDeletedEventData:`
+
+  - `String id`
+
+    ID of the agent that triggered the event.
+
+  - `String organizationId`
+
+  - `JsonValue; type "agent.deleted"constant`
+
+    - `AGENT_DELETED("agent.deleted")`
+
+  - `String workspaceId`
+
+### Beta Webhook Agent Updated Event Data
+
+- `class BetaWebhookAgentUpdatedEventData:`
+
+  - `String id`
+
+    ID of the agent that triggered the event.
+
+  - `String organizationId`
+
+  - `JsonValue; type "agent.updated"constant`
+
+    - `AGENT_UPDATED("agent.updated")`
+
+  - `String workspaceId`
+
+### Beta Webhook Deployment Archived Event Data
+
+- `class BetaWebhookDeploymentArchivedEventData:`
+
+  - `String id`
+
+    ID of the deployment that triggered the event.
+
+  - `String organizationId`
+
+  - `JsonValue; type "deployment.archived"constant`
+
+    - `DEPLOYMENT_ARCHIVED("deployment.archived")`
+
+  - `String workspaceId`
+
+### Beta Webhook Deployment Created Event Data
+
+- `class BetaWebhookDeploymentCreatedEventData:`
+
+  - `String id`
+
+    ID of the deployment that triggered the event.
+
+  - `String organizationId`
+
+  - `JsonValue; type "deployment.created"constant`
+
+    - `DEPLOYMENT_CREATED("deployment.created")`
+
+  - `String workspaceId`
+
+### Beta Webhook Deployment Deleted Event Data
+
+- `class BetaWebhookDeploymentDeletedEventData:`
+
+  - `String id`
+
+    ID of the deployment that triggered the event.
+
+  - `String organizationId`
+
+  - `JsonValue; type "deployment.deleted"constant`
+
+    - `DEPLOYMENT_DELETED("deployment.deleted")`
+
+  - `String workspaceId`
+
+### Beta Webhook Deployment Paused Event Data
+
+- `class BetaWebhookDeploymentPausedEventData:`
+
+  - `String id`
+
+    ID of the deployment that triggered the event.
+
+  - `String organizationId`
+
+  - `JsonValue; type "deployment.paused"constant`
+
+    - `DEPLOYMENT_PAUSED("deployment.paused")`
+
+  - `String workspaceId`
+
+### Beta Webhook Deployment Run Failed Event Data
+
+- `class BetaWebhookDeploymentRunFailedEventData:`
+
+  - `String id`
+
+    ID of the deployment run that triggered the event.
+
+  - `String organizationId`
+
+  - `JsonValue; type "deployment_run.failed"constant`
+
+    - `DEPLOYMENT_RUN_FAILED("deployment_run.failed")`
+
+  - `String workspaceId`
+
+### Beta Webhook Deployment Run Started Event Data
+
+- `class BetaWebhookDeploymentRunStartedEventData:`
+
+  - `String id`
+
+    ID of the deployment run that triggered the event.
+
+  - `String organizationId`
+
+  - `JsonValue; type "deployment_run.started"constant`
+
+    - `DEPLOYMENT_RUN_STARTED("deployment_run.started")`
+
+  - `String workspaceId`
+
+### Beta Webhook Deployment Run Succeeded Event Data
+
+- `class BetaWebhookDeploymentRunSucceededEventData:`
+
+  - `String id`
+
+    ID of the deployment run that triggered the event.
+
+  - `String organizationId`
+
+  - `JsonValue; type "deployment_run.succeeded"constant`
+
+    - `DEPLOYMENT_RUN_SUCCEEDED("deployment_run.succeeded")`
+
+  - `String workspaceId`
+
+### Beta Webhook Deployment Unpaused Event Data
+
+- `class BetaWebhookDeploymentUnpausedEventData:`
+
+  - `String id`
+
+    ID of the deployment that triggered the event.
+
+  - `String organizationId`
+
+  - `JsonValue; type "deployment.unpaused"constant`
+
+    - `DEPLOYMENT_UNPAUSED("deployment.unpaused")`
+
+  - `String workspaceId`
+
+### Beta Webhook Deployment Updated Event Data
+
+- `class BetaWebhookDeploymentUpdatedEventData:`
+
+  - `String id`
+
+    ID of the deployment that triggered the event.
+
+  - `String organizationId`
+
+  - `JsonValue; type "deployment.updated"constant`
+
+    - `DEPLOYMENT_UPDATED("deployment.updated")`
+
+  - `String workspaceId`
+
+### Beta Webhook Environment Archived Event Data
+
+- `class BetaWebhookEnvironmentArchivedEventData:`
+
+  - `String id`
+
+    ID of the environment that triggered the event.
+
+  - `String organizationId`
+
+  - `JsonValue; type "environment.archived"constant`
+
+    - `ENVIRONMENT_ARCHIVED("environment.archived")`
+
+  - `String workspaceId`
+
+### Beta Webhook Environment Created Event Data
+
+- `class BetaWebhookEnvironmentCreatedEventData:`
+
+  - `String id`
+
+    ID of the environment that triggered the event.
+
+  - `String organizationId`
+
+  - `JsonValue; type "environment.created"constant`
+
+    - `ENVIRONMENT_CREATED("environment.created")`
+
+  - `String workspaceId`
+
+### Beta Webhook Environment Deleted Event Data
+
+- `class BetaWebhookEnvironmentDeletedEventData:`
+
+  - `String id`
+
+    ID of the environment that triggered the event.
+
+  - `String organizationId`
+
+  - `BetaWebhookEnvironmentDeletedEventType type`
+
+    - `ENVIRONMENT_DELETED("environment.deleted")`
+
+  - `String workspaceId`
+
+### Beta Webhook Environment Deleted Event Type
+
+- `enum BetaWebhookEnvironmentDeletedEventType:`
+
+  - `ENVIRONMENT_DELETED("environment.deleted")`
+
+### Beta Webhook Environment Updated Event Data
+
+- `class BetaWebhookEnvironmentUpdatedEventData:`
+
+  - `String id`
+
+    ID of the environment that triggered the event.
+
+  - `String organizationId`
+
+  - `JsonValue; type "environment.updated"constant`
+
+    - `ENVIRONMENT_UPDATED("environment.updated")`
+
+  - `String workspaceId`
+
 ### Beta Webhook Event
 
 - `class BetaWebhookEvent:`
@@ -97394,6 +99113,286 @@ public final class Main {
 
       - `String workspaceId`
 
+    - `class BetaWebhookAgentCreatedEventData:`
+
+      - `String id`
+
+        ID of the agent that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "agent.created"constant`
+
+        - `AGENT_CREATED("agent.created")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookAgentArchivedEventData:`
+
+      - `String id`
+
+        ID of the agent that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "agent.archived"constant`
+
+        - `AGENT_ARCHIVED("agent.archived")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookAgentDeletedEventData:`
+
+      - `String id`
+
+        ID of the agent that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "agent.deleted"constant`
+
+        - `AGENT_DELETED("agent.deleted")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookDeploymentPausedEventData:`
+
+      - `String id`
+
+        ID of the deployment that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "deployment.paused"constant`
+
+        - `DEPLOYMENT_PAUSED("deployment.paused")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookDeploymentRunFailedEventData:`
+
+      - `String id`
+
+        ID of the deployment run that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "deployment_run.failed"constant`
+
+        - `DEPLOYMENT_RUN_FAILED("deployment_run.failed")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookDeploymentCreatedEventData:`
+
+      - `String id`
+
+        ID of the deployment that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "deployment.created"constant`
+
+        - `DEPLOYMENT_CREATED("deployment.created")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookDeploymentUpdatedEventData:`
+
+      - `String id`
+
+        ID of the deployment that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "deployment.updated"constant`
+
+        - `DEPLOYMENT_UPDATED("deployment.updated")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookDeploymentUnpausedEventData:`
+
+      - `String id`
+
+        ID of the deployment that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "deployment.unpaused"constant`
+
+        - `DEPLOYMENT_UNPAUSED("deployment.unpaused")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookAgentUpdatedEventData:`
+
+      - `String id`
+
+        ID of the agent that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "agent.updated"constant`
+
+        - `AGENT_UPDATED("agent.updated")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookDeploymentArchivedEventData:`
+
+      - `String id`
+
+        ID of the deployment that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "deployment.archived"constant`
+
+        - `DEPLOYMENT_ARCHIVED("deployment.archived")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookDeploymentRunStartedEventData:`
+
+      - `String id`
+
+        ID of the deployment run that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "deployment_run.started"constant`
+
+        - `DEPLOYMENT_RUN_STARTED("deployment_run.started")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookDeploymentDeletedEventData:`
+
+      - `String id`
+
+        ID of the deployment that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "deployment.deleted"constant`
+
+        - `DEPLOYMENT_DELETED("deployment.deleted")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookDeploymentRunSucceededEventData:`
+
+      - `String id`
+
+        ID of the deployment run that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "deployment_run.succeeded"constant`
+
+        - `DEPLOYMENT_RUN_SUCCEEDED("deployment_run.succeeded")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookEnvironmentCreatedEventData:`
+
+      - `String id`
+
+        ID of the environment that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "environment.created"constant`
+
+        - `ENVIRONMENT_CREATED("environment.created")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookEnvironmentUpdatedEventData:`
+
+      - `String id`
+
+        ID of the environment that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "environment.updated"constant`
+
+        - `ENVIRONMENT_UPDATED("environment.updated")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookEnvironmentArchivedEventData:`
+
+      - `String id`
+
+        ID of the environment that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "environment.archived"constant`
+
+        - `ENVIRONMENT_ARCHIVED("environment.archived")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookEnvironmentDeletedEventData:`
+
+      - `String id`
+
+        ID of the environment that triggered the event.
+
+      - `String organizationId`
+
+      - `BetaWebhookEnvironmentDeletedEventType type`
+
+        - `ENVIRONMENT_DELETED("environment.deleted")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookMemoryStoreCreatedEventData:`
+
+      - `String id`
+
+        ID of the memory store that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "memory_store.created"constant`
+
+        - `MEMORY_STORE_CREATED("memory_store.created")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookMemoryStoreArchivedEventData:`
+
+      - `String id`
+
+        ID of the memory store that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "memory_store.archived"constant`
+
+        - `MEMORY_STORE_ARCHIVED("memory_store.archived")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookMemoryStoreDeletedEventData:`
+
+      - `String id`
+
+        ID of the memory store that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "memory_store.deleted"constant`
+
+        - `MEMORY_STORE_DELETED("memory_store.deleted")`
+
+      - `String workspaceId`
+
   - `JsonValue; type "event"constant`
 
     Object type. Always `event` for webhook payloads.
@@ -97753,6 +99752,334 @@ public final class Main {
       - `SESSION_UPDATED("session.updated")`
 
     - `String workspaceId`
+
+  - `class BetaWebhookAgentCreatedEventData:`
+
+    - `String id`
+
+      ID of the agent that triggered the event.
+
+    - `String organizationId`
+
+    - `JsonValue; type "agent.created"constant`
+
+      - `AGENT_CREATED("agent.created")`
+
+    - `String workspaceId`
+
+  - `class BetaWebhookAgentArchivedEventData:`
+
+    - `String id`
+
+      ID of the agent that triggered the event.
+
+    - `String organizationId`
+
+    - `JsonValue; type "agent.archived"constant`
+
+      - `AGENT_ARCHIVED("agent.archived")`
+
+    - `String workspaceId`
+
+  - `class BetaWebhookAgentDeletedEventData:`
+
+    - `String id`
+
+      ID of the agent that triggered the event.
+
+    - `String organizationId`
+
+    - `JsonValue; type "agent.deleted"constant`
+
+      - `AGENT_DELETED("agent.deleted")`
+
+    - `String workspaceId`
+
+  - `class BetaWebhookDeploymentPausedEventData:`
+
+    - `String id`
+
+      ID of the deployment that triggered the event.
+
+    - `String organizationId`
+
+    - `JsonValue; type "deployment.paused"constant`
+
+      - `DEPLOYMENT_PAUSED("deployment.paused")`
+
+    - `String workspaceId`
+
+  - `class BetaWebhookDeploymentRunFailedEventData:`
+
+    - `String id`
+
+      ID of the deployment run that triggered the event.
+
+    - `String organizationId`
+
+    - `JsonValue; type "deployment_run.failed"constant`
+
+      - `DEPLOYMENT_RUN_FAILED("deployment_run.failed")`
+
+    - `String workspaceId`
+
+  - `class BetaWebhookDeploymentCreatedEventData:`
+
+    - `String id`
+
+      ID of the deployment that triggered the event.
+
+    - `String organizationId`
+
+    - `JsonValue; type "deployment.created"constant`
+
+      - `DEPLOYMENT_CREATED("deployment.created")`
+
+    - `String workspaceId`
+
+  - `class BetaWebhookDeploymentUpdatedEventData:`
+
+    - `String id`
+
+      ID of the deployment that triggered the event.
+
+    - `String organizationId`
+
+    - `JsonValue; type "deployment.updated"constant`
+
+      - `DEPLOYMENT_UPDATED("deployment.updated")`
+
+    - `String workspaceId`
+
+  - `class BetaWebhookDeploymentUnpausedEventData:`
+
+    - `String id`
+
+      ID of the deployment that triggered the event.
+
+    - `String organizationId`
+
+    - `JsonValue; type "deployment.unpaused"constant`
+
+      - `DEPLOYMENT_UNPAUSED("deployment.unpaused")`
+
+    - `String workspaceId`
+
+  - `class BetaWebhookAgentUpdatedEventData:`
+
+    - `String id`
+
+      ID of the agent that triggered the event.
+
+    - `String organizationId`
+
+    - `JsonValue; type "agent.updated"constant`
+
+      - `AGENT_UPDATED("agent.updated")`
+
+    - `String workspaceId`
+
+  - `class BetaWebhookDeploymentArchivedEventData:`
+
+    - `String id`
+
+      ID of the deployment that triggered the event.
+
+    - `String organizationId`
+
+    - `JsonValue; type "deployment.archived"constant`
+
+      - `DEPLOYMENT_ARCHIVED("deployment.archived")`
+
+    - `String workspaceId`
+
+  - `class BetaWebhookDeploymentRunStartedEventData:`
+
+    - `String id`
+
+      ID of the deployment run that triggered the event.
+
+    - `String organizationId`
+
+    - `JsonValue; type "deployment_run.started"constant`
+
+      - `DEPLOYMENT_RUN_STARTED("deployment_run.started")`
+
+    - `String workspaceId`
+
+  - `class BetaWebhookDeploymentDeletedEventData:`
+
+    - `String id`
+
+      ID of the deployment that triggered the event.
+
+    - `String organizationId`
+
+    - `JsonValue; type "deployment.deleted"constant`
+
+      - `DEPLOYMENT_DELETED("deployment.deleted")`
+
+    - `String workspaceId`
+
+  - `class BetaWebhookDeploymentRunSucceededEventData:`
+
+    - `String id`
+
+      ID of the deployment run that triggered the event.
+
+    - `String organizationId`
+
+    - `JsonValue; type "deployment_run.succeeded"constant`
+
+      - `DEPLOYMENT_RUN_SUCCEEDED("deployment_run.succeeded")`
+
+    - `String workspaceId`
+
+  - `class BetaWebhookEnvironmentCreatedEventData:`
+
+    - `String id`
+
+      ID of the environment that triggered the event.
+
+    - `String organizationId`
+
+    - `JsonValue; type "environment.created"constant`
+
+      - `ENVIRONMENT_CREATED("environment.created")`
+
+    - `String workspaceId`
+
+  - `class BetaWebhookEnvironmentUpdatedEventData:`
+
+    - `String id`
+
+      ID of the environment that triggered the event.
+
+    - `String organizationId`
+
+    - `JsonValue; type "environment.updated"constant`
+
+      - `ENVIRONMENT_UPDATED("environment.updated")`
+
+    - `String workspaceId`
+
+  - `class BetaWebhookEnvironmentArchivedEventData:`
+
+    - `String id`
+
+      ID of the environment that triggered the event.
+
+    - `String organizationId`
+
+    - `JsonValue; type "environment.archived"constant`
+
+      - `ENVIRONMENT_ARCHIVED("environment.archived")`
+
+    - `String workspaceId`
+
+  - `class BetaWebhookEnvironmentDeletedEventData:`
+
+    - `String id`
+
+      ID of the environment that triggered the event.
+
+    - `String organizationId`
+
+    - `BetaWebhookEnvironmentDeletedEventType type`
+
+      - `ENVIRONMENT_DELETED("environment.deleted")`
+
+    - `String workspaceId`
+
+  - `class BetaWebhookMemoryStoreCreatedEventData:`
+
+    - `String id`
+
+      ID of the memory store that triggered the event.
+
+    - `String organizationId`
+
+    - `JsonValue; type "memory_store.created"constant`
+
+      - `MEMORY_STORE_CREATED("memory_store.created")`
+
+    - `String workspaceId`
+
+  - `class BetaWebhookMemoryStoreArchivedEventData:`
+
+    - `String id`
+
+      ID of the memory store that triggered the event.
+
+    - `String organizationId`
+
+    - `JsonValue; type "memory_store.archived"constant`
+
+      - `MEMORY_STORE_ARCHIVED("memory_store.archived")`
+
+    - `String workspaceId`
+
+  - `class BetaWebhookMemoryStoreDeletedEventData:`
+
+    - `String id`
+
+      ID of the memory store that triggered the event.
+
+    - `String organizationId`
+
+    - `JsonValue; type "memory_store.deleted"constant`
+
+      - `MEMORY_STORE_DELETED("memory_store.deleted")`
+
+    - `String workspaceId`
+
+### Beta Webhook Memory Store Archived Event Data
+
+- `class BetaWebhookMemoryStoreArchivedEventData:`
+
+  - `String id`
+
+    ID of the memory store that triggered the event.
+
+  - `String organizationId`
+
+  - `JsonValue; type "memory_store.archived"constant`
+
+    - `MEMORY_STORE_ARCHIVED("memory_store.archived")`
+
+  - `String workspaceId`
+
+### Beta Webhook Memory Store Created Event Data
+
+- `class BetaWebhookMemoryStoreCreatedEventData:`
+
+  - `String id`
+
+    ID of the memory store that triggered the event.
+
+  - `String organizationId`
+
+  - `JsonValue; type "memory_store.created"constant`
+
+    - `MEMORY_STORE_CREATED("memory_store.created")`
+
+  - `String workspaceId`
+
+### Beta Webhook Memory Store Deleted Event Data
+
+- `class BetaWebhookMemoryStoreDeletedEventData:`
+
+  - `String id`
+
+    ID of the memory store that triggered the event.
+
+  - `String organizationId`
+
+  - `JsonValue; type "memory_store.deleted"constant`
+
+    - `MEMORY_STORE_DELETED("memory_store.deleted")`
+
+  - `String workspaceId`
 
 ### Beta Webhook Session Archived Event Data
 
@@ -98511,6 +100838,286 @@ public final class Main {
       - `JsonValue; type "session.updated"constant`
 
         - `SESSION_UPDATED("session.updated")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookAgentCreatedEventData:`
+
+      - `String id`
+
+        ID of the agent that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "agent.created"constant`
+
+        - `AGENT_CREATED("agent.created")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookAgentArchivedEventData:`
+
+      - `String id`
+
+        ID of the agent that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "agent.archived"constant`
+
+        - `AGENT_ARCHIVED("agent.archived")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookAgentDeletedEventData:`
+
+      - `String id`
+
+        ID of the agent that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "agent.deleted"constant`
+
+        - `AGENT_DELETED("agent.deleted")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookDeploymentPausedEventData:`
+
+      - `String id`
+
+        ID of the deployment that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "deployment.paused"constant`
+
+        - `DEPLOYMENT_PAUSED("deployment.paused")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookDeploymentRunFailedEventData:`
+
+      - `String id`
+
+        ID of the deployment run that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "deployment_run.failed"constant`
+
+        - `DEPLOYMENT_RUN_FAILED("deployment_run.failed")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookDeploymentCreatedEventData:`
+
+      - `String id`
+
+        ID of the deployment that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "deployment.created"constant`
+
+        - `DEPLOYMENT_CREATED("deployment.created")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookDeploymentUpdatedEventData:`
+
+      - `String id`
+
+        ID of the deployment that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "deployment.updated"constant`
+
+        - `DEPLOYMENT_UPDATED("deployment.updated")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookDeploymentUnpausedEventData:`
+
+      - `String id`
+
+        ID of the deployment that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "deployment.unpaused"constant`
+
+        - `DEPLOYMENT_UNPAUSED("deployment.unpaused")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookAgentUpdatedEventData:`
+
+      - `String id`
+
+        ID of the agent that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "agent.updated"constant`
+
+        - `AGENT_UPDATED("agent.updated")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookDeploymentArchivedEventData:`
+
+      - `String id`
+
+        ID of the deployment that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "deployment.archived"constant`
+
+        - `DEPLOYMENT_ARCHIVED("deployment.archived")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookDeploymentRunStartedEventData:`
+
+      - `String id`
+
+        ID of the deployment run that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "deployment_run.started"constant`
+
+        - `DEPLOYMENT_RUN_STARTED("deployment_run.started")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookDeploymentDeletedEventData:`
+
+      - `String id`
+
+        ID of the deployment that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "deployment.deleted"constant`
+
+        - `DEPLOYMENT_DELETED("deployment.deleted")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookDeploymentRunSucceededEventData:`
+
+      - `String id`
+
+        ID of the deployment run that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "deployment_run.succeeded"constant`
+
+        - `DEPLOYMENT_RUN_SUCCEEDED("deployment_run.succeeded")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookEnvironmentCreatedEventData:`
+
+      - `String id`
+
+        ID of the environment that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "environment.created"constant`
+
+        - `ENVIRONMENT_CREATED("environment.created")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookEnvironmentUpdatedEventData:`
+
+      - `String id`
+
+        ID of the environment that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "environment.updated"constant`
+
+        - `ENVIRONMENT_UPDATED("environment.updated")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookEnvironmentArchivedEventData:`
+
+      - `String id`
+
+        ID of the environment that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "environment.archived"constant`
+
+        - `ENVIRONMENT_ARCHIVED("environment.archived")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookEnvironmentDeletedEventData:`
+
+      - `String id`
+
+        ID of the environment that triggered the event.
+
+      - `String organizationId`
+
+      - `BetaWebhookEnvironmentDeletedEventType type`
+
+        - `ENVIRONMENT_DELETED("environment.deleted")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookMemoryStoreCreatedEventData:`
+
+      - `String id`
+
+        ID of the memory store that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "memory_store.created"constant`
+
+        - `MEMORY_STORE_CREATED("memory_store.created")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookMemoryStoreArchivedEventData:`
+
+      - `String id`
+
+        ID of the memory store that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "memory_store.archived"constant`
+
+        - `MEMORY_STORE_ARCHIVED("memory_store.archived")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookMemoryStoreDeletedEventData:`
+
+      - `String id`
+
+        ID of the memory store that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "memory_store.deleted"constant`
+
+        - `MEMORY_STORE_DELETED("memory_store.deleted")`
 
       - `String workspaceId`
 

@@ -41,7 +41,9 @@ message = anthropic.messages.create(
   model: :"claude-opus-4-8"
 )
 
-puts(message.content)
+message.content.each do |block|
+  puts block.text if block.type == :text
+end
 ```
 
 For authentication options including Workload Identity Federation, see [Authentication](../manage-claude/manage-claude-authentication.md).

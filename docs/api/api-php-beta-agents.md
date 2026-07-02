@@ -1358,6 +1358,10 @@ var_dump($betaManagedAgentsAgent);
 
 - `BetaManagedAgentsModel`
 
+  - `"claude-sonnet-5"`
+
+    High-performance model for coding and agents
+
   - `"claude-fable-5"`
 
     Next generation of intelligence for the hardest knowledge work and coding problems
