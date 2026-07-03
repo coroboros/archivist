@@ -21,7 +21,7 @@ The Anthropic Java SDK provides convenient access to the Anthropic REST API from
 <Tabs>
   <Tab title="Gradle">
     ```kotlin
-    implementation("com.anthropic:anthropic-java:2.47.0")
+    implementation("com.anthropic:anthropic-java:2.47.1")
     ```
   </Tab>
 
@@ -30,7 +30,7 @@ The Anthropic Java SDK provides convenient access to the Anthropic REST API from
     <dependency>
         <groupId>com.anthropic</groupId>
         <artifactId>anthropic-java</artifactId>
-        <version>2.47.0</version>
+        <version>2.47.1</version>
     </dependency>
     ```
   </Tab>

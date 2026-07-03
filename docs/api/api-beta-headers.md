@@ -108,7 +108,7 @@ See the [Managed Agents overview](../managed-agents/managed-agents-overview.md) 
 
 ### Version naming conventions
 
-Beta feature names typically follow the pattern: `feature-name-YYYY-MM-DD`, where the date indicates when the beta version was released. Always use the exact beta feature name as documented.
+Beta feature names typically follow the pattern: `feature-name-YYYY-MM-DD`, where the date indicates when the beta was released. Always use the exact beta feature name as documented.
 
 ## Error handling
 

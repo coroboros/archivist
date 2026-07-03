@@ -60,14 +60,14 @@ Anthropic's [client SDKs](https://platform.claude.com/docs/en/cli-sdks-libraries
   <Tab title="Java">
     <CodeGroup>
       ```groovy Gradle
-      implementation("com.anthropic:anthropic-java-bedrock:2.47.0")
+      implementation("com.anthropic:anthropic-java-bedrock:2.47.1")
       ```
 
       ```xml Maven
       <dependency>
           <groupId>com.anthropic</groupId>
           <artifactId>anthropic-java-bedrock</artifactId>
-          <version>2.47.0</version>
+          <version>2.47.1</version>
       </dependency>
       ```
 

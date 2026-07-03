@@ -1,5 +1,94 @@
 # Changelog
 
+## 🤖 v1.5.22 - 03/07/2026
+
+File Changes:
+
+- Modified: `docs/agents-and-tools/agents-and-tools-README.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-mcp-tunnels-overview.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-computer-use-tool.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-programmatic-tool-calling.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-web-fetch-tool.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-web-search-tool.md`
+- Modified: `docs/api/api-README.md`
+- Modified: `docs/api/api-beta-headers.md`
+- Modified: `docs/api/api-get-started.md`
+- Modified: `docs/api/api-sdks-java.md`
+- Modified: `docs/build-with-claude/build-with-claude-README.md`
+- Modified: `docs/build-with-claude/build-with-claude-adaptive-thinking.md`
+- Modified: `docs/build-with-claude/build-with-claude-claude-in-amazon-bedrock.md`
+- Modified: `docs/build-with-claude/build-with-claude-claude-in-microsoft-foundry.md`
+- Modified: `docs/build-with-claude/build-with-claude-claude-on-amazon-bedrock-legacy.md`
+- Modified: `docs/build-with-claude/build-with-claude-claude-on-amazon-bedrock.md`
+- Modified: `docs/build-with-claude/build-with-claude-claude-on-vertex-ai.md`
+- Modified: `docs/build-with-claude/build-with-claude-claude-platform-on-aws.md`
+- Modified: `docs/build-with-claude/build-with-claude-embeddings.md`
+- Modified: `docs/build-with-claude/build-with-claude-files.md`
+- Modified: `docs/build-with-claude/build-with-claude-overview.md`
+- Modified: `docs/build-with-claude/build-with-claude-token-counting.md`
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-admin-setup.md`
+- Modified: `docs/code/code-advisor.md`
+- Modified: `docs/code/code-agent-teams.md`
+- Modified: `docs/code/code-agent-view.md`
+- Modified: `docs/code/code-agents.md`
+- Modified: `docs/code/code-amazon-bedrock.md`
+- Modified: `docs/code/code-artifacts.md`
+- Modified: `docs/code/code-auto-mode-config.md`
+- Modified: `docs/code/code-changelog.md`
+- Modified: `docs/code/code-chrome.md`
+- Modified: `docs/code/code-claude-apps-gateway-config.md`
+- Modified: `docs/code/code-claude-apps-gateway-deploy.md`
+- Modified: `docs/code/code-claude-apps-gateway.md`
+- Modified: `docs/code/code-claude-code-features.md`
+- Modified: `docs/code/code-claude-code-on-the-web.md`
+- Modified: `docs/code/code-claude-platform-on-aws.md`
+- Modified: `docs/code/code-cli-reference.md`
+- Modified: `docs/code/code-commands.md`
+- Modified: `docs/code/code-context-window.md`
+- Modified: `docs/code/code-costs.md`
+- Modified: `docs/code/code-debug-your-config.md`
+- Modified: `docs/code/code-desktop-linux.md`
+- Modified: `docs/code/code-desktop.md`
+- Modified: `docs/code/code-env-vars.md`
+- Modified: `docs/code/code-errors.md`
+- Modified: `docs/code/code-feature-availability.md`
+- Modified: `docs/code/code-file-checkpointing.md`
+- Modified: `docs/code/code-fullscreen.md`
+- Modified: `docs/code/code-gateways.md`
+- Modified: `docs/code/code-hooks-guide.md`
+- Modified: `docs/code/code-how-claude-code-works.md`
+- Modified: `docs/code/code-interactive-mode.md`
+- Modified: `docs/code/code-keybindings.md`
+- Modified: `docs/code/code-memory.md`
+- Modified: `docs/code/code-model-config.md`
+- Modified: `docs/code/code-monitoring-usage.md`
+- Modified: `docs/code/code-permission-modes.md`
+- Modified: `docs/code/code-permissions.md`
+- Modified: `docs/code/code-plugins-reference.md`
+- Modified: `docs/code/code-plugins.md`
+- Modified: `docs/code/code-python.md`
+- Modified: `docs/code/code-sandboxing.md`
+- Modified: `docs/code/code-server-managed-settings.md`
+- Modified: `docs/code/code-sessions.md`
+- Modified: `docs/code/code-settings.md`
+- Modified: `docs/code/code-setup.md`
+- Modified: `docs/code/code-skills.md`
+- Modified: `docs/code/code-sub-agents.md`
+- Modified: `docs/code/code-subagents.md`
+- Modified: `docs/code/code-third-party-integrations.md`
+- Modified: `docs/code/code-todo-tracking.md`
+- Modified: `docs/code/code-tools-reference.md`
+- Modified: `docs/code/code-typescript.md`
+- Modified: `docs/code/code-workflows.md`
+- Modified: `docs/code/code-worktrees.md`
+- Modified: `docs/managed-agents/managed-agents-README.md`
+- Modified: `docs/managed-agents/managed-agents-quickstart.md`
+- Modified: `docs/managed-agents/managed-agents-self-hosted-sandboxes.md`
+- Modified: `docs/release-notes/release-notes-README.md`
+- Modified: `docs/release-notes/release-notes-overview.md`
+
+
 ## 🤖 v1.5.21 - 02/07/2026
 
 File Changes:

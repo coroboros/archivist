@@ -21,7 +21,7 @@ Claude models in Microsoft Foundry are available in two hosting options. You cho
 |                      | Hosted on Azure                                            | Hosted on Anthropic                                                                                             |
 | -------------------- | ---------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
 | Where inference runs | Anthropic-operated service running on Azure infrastructure | Anthropic-operated service running on Anthropic infrastructure                                                  |
-| Model availability   | The latest models in the Opus and Haiku families           | All Claude models available on Microsoft Foundry                                                                |
+| Model availability   | The latest models in the Opus, Sonnet, and Haiku families  | All Claude models available on Microsoft Foundry                                                                |
 | Deployment types     | Global Standard, US Data Zone Standard                     | Global Standard                                                                                                 |
 | Recommended for      | Most workloads                                             | [Access to features or models not yet hosted on Azure](#additional-features-not-supported-when-hosted-on-azure) |
 
@@ -68,7 +68,7 @@ Anthropic's [client SDKs](https://platform.claude.com/docs/en/cli-sdks-libraries
     <Tabs>
       <Tab title="Gradle">
         ```kotlin
-        implementation("com.anthropic:anthropic-java-foundry:2.47.0")
+        implementation("com.anthropic:anthropic-java-foundry:2.47.1")
         ```
       </Tab>
 
@@ -77,7 +77,7 @@ Anthropic's [client SDKs](https://platform.claude.com/docs/en/cli-sdks-libraries
         <dependency>
             <groupId>com.anthropic</groupId>
             <artifactId>anthropic-java-foundry</artifactId>
-            <version>2.47.0</version>
+            <version>2.47.1</version>
         </dependency>
         ```
       </Tab>
@@ -554,7 +554,7 @@ The following Claude models are available through Foundry:
 | Claude Opus 4.6                                      | claude-opus-4-6         |                 | ✓                   |
 | Claude Opus 4.5                                      | claude-opus-4-5         |                 | ✓                   |
 | Claude Opus 4.1 Deprecated. Retiring August 5, 2026. | claude-opus-4-1         |                 | ✓                   |
-| Claude Sonnet 5 (preview)                            | `claude-sonnet-5`       |                 | ✓                   |
+| Claude Sonnet 5                                      | claude-sonnet-5         | ✓               | ✓                   |
 | Claude Sonnet 4.6                                    | claude-sonnet-4-6       |                 | ✓                   |
 | Claude Sonnet 4.5                                    | claude-sonnet-4-5       |                 | ✓                   |
 | Claude Haiku 4.5                                     | claude-haiku-4-5        | ✓               | ✓                   |
