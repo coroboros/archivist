@@ -1,5 +1,15 @@
 # Changelog
 
+## 🤖 v1.5.23 - 03/07/2026
+
+File Changes:
+
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-sessions.md`
+- Modified: `docs/code/code-skills.md`
+- Modified: `docs/code/code-typescript.md`
+
+
 ## 🤖 v1.5.22 - 03/07/2026
 
 File Changes:
