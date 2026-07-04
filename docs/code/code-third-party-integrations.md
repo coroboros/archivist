@@ -106,7 +106,7 @@ If your organization has specific infrastructure requirements, compare the optio
       <th>Anthropic Console</th>
       <th>Amazon Bedrock</th>
       <th>Claude Platform on AWS</th>
-      <th>Google Vertex AI</th>
+      <th>Google Cloud's Agent Platform, formerly Vertex AI</th>
       <th>Microsoft Foundry</th>
     </tr>
   </thead>
@@ -200,10 +200,10 @@ Select a deployment option to view setup instructions:
 
 * [Claude for Teams or Enterprise](./code-authentication.md#claude-for-teams-or-enterprise)
 * [Anthropic Console](./code-authentication.md#claude-console-authentication)
-* [Claude apps gateway](./code-claude-apps-gateway.md), a self-hosted gateway that adds IdP sign-in in front of Amazon Bedrock, Claude Platform on AWS, Google Vertex AI, Microsoft Foundry, or the Anthropic API
+* [Claude apps gateway](./code-claude-apps-gateway.md), a self-hosted gateway that adds IdP sign-in in front of Amazon Bedrock, Claude Platform on AWS, Google Cloud's Agent Platform, Microsoft Foundry, or the Anthropic API
 * [Amazon Bedrock](./code-amazon-bedrock.md)
 * [Claude Platform on AWS](./code-claude-platform-on-aws.md)
-* [Google Vertex AI](./code-google-vertex-ai.md)
+* [Google Cloud's Agent Platform](./code-google-vertex-ai.md)
 * [Microsoft Foundry](./code-microsoft-foundry.md)
 
 ## Configure proxies and gateways
@@ -219,7 +219,7 @@ The following examples show the environment variables to set in your shell or sh
 
 <Tabs>
   <Tab title="Corporate proxy">
-    Route Bedrock traffic through your corporate proxy by setting the following [environment variables](./code-env-vars.md):
+    Route Amazon Bedrock traffic through your corporate proxy by setting the following [environment variables](./code-env-vars.md):
 
     ```bash theme={null}
     # Enable Bedrock
@@ -232,7 +232,7 @@ The following examples show the environment variables to set in your shell or sh
   </Tab>
 
   <Tab title="LLM Gateway">
-    Route Bedrock traffic through your LLM gateway by setting the following [environment variables](./code-env-vars.md):
+    Route Amazon Bedrock traffic through your LLM gateway by setting the following [environment variables](./code-env-vars.md):
 
     ```bash theme={null}
     # Enable Bedrock
@@ -249,7 +249,7 @@ The following examples show the environment variables to set in your shell or sh
 
 <Tabs>
   <Tab title="Corporate proxy">
-    Route Foundry traffic through your corporate proxy by setting the following [environment variables](./code-env-vars.md):
+    Route Microsoft Foundry traffic through your corporate proxy by setting the following [environment variables](./code-env-vars.md):
 
     ```bash theme={null}
     # Enable Microsoft Foundry
@@ -263,7 +263,7 @@ The following examples show the environment variables to set in your shell or sh
   </Tab>
 
   <Tab title="LLM Gateway">
-    Route Foundry traffic through your LLM gateway by setting the following [environment variables](./code-env-vars.md):
+    Route Microsoft Foundry traffic through your LLM gateway by setting the following [environment variables](./code-env-vars.md):
 
     ```bash theme={null}
     # Enable Microsoft Foundry
@@ -276,14 +276,14 @@ The following examples show the environment variables to set in your shell or sh
   </Tab>
 </Tabs>
 
-### Google Vertex AI
+### Google Cloud's Agent Platform
 
 <Tabs>
   <Tab title="Corporate proxy">
-    Route Vertex AI traffic through your corporate proxy by setting the following [environment variables](./code-env-vars.md):
+    Route Google Cloud's Agent Platform traffic through your corporate proxy by setting the following [environment variables](./code-env-vars.md):
 
     ```bash theme={null}
-    # Enable Vertex
+    # Enable Agent Platform
     export CLAUDE_CODE_USE_VERTEX=1
     export CLOUD_ML_REGION=us-east5
     export ANTHROPIC_VERTEX_PROJECT_ID=your-project-id
@@ -294,10 +294,10 @@ The following examples show the environment variables to set in your shell or sh
   </Tab>
 
   <Tab title="LLM Gateway">
-    Route Vertex AI traffic through your LLM gateway by setting the following [environment variables](./code-env-vars.md):
+    Route Google Cloud's Agent Platform traffic through your LLM gateway by setting the following [environment variables](./code-env-vars.md):
 
     ```bash theme={null}
-    # Enable Vertex
+    # Enable Agent Platform
     export CLAUDE_CODE_USE_VERTEX=1
 
     # Configure LLM gateway
@@ -334,7 +334,7 @@ Encourage new users to try Claude Code for codebase Q\&A, or on smaller bug fixe
 
 ### Pin model versions for cloud providers
 
-If you deploy through [Bedrock](./code-amazon-bedrock.md), [Vertex AI](./code-google-vertex-ai.md), [Foundry](./code-microsoft-foundry.md), or [Claude Platform on AWS](./code-claude-platform-on-aws.md), pin specific model versions using `ANTHROPIC_DEFAULT_FABLE_MODEL`, `ANTHROPIC_DEFAULT_OPUS_MODEL`, `ANTHROPIC_DEFAULT_SONNET_MODEL`, and `ANTHROPIC_DEFAULT_HAIKU_MODEL`. Without pinning, model aliases resolve to Claude Code's built-in default for that provider, which can lag the newest release and may not yet be enabled in your account. Pinning lets you control when your users move to a new model. See [Model configuration](./code-model-config.md#pin-models-for-third-party-deployments) for what each provider does when the default is unavailable.
+If you deploy through [Amazon Bedrock](./code-amazon-bedrock.md), [Google Cloud's Agent Platform](./code-google-vertex-ai.md), [Microsoft Foundry](./code-microsoft-foundry.md), or [Claude Platform on AWS](./code-claude-platform-on-aws.md), pin specific model versions using `ANTHROPIC_DEFAULT_FABLE_MODEL`, `ANTHROPIC_DEFAULT_OPUS_MODEL`, `ANTHROPIC_DEFAULT_SONNET_MODEL`, and `ANTHROPIC_DEFAULT_HAIKU_MODEL`. Without pinning, model aliases resolve to Claude Code's built-in default for that provider, which can lag the newest release and may not yet be enabled in your account. Pinning lets you control when your users move to a new model. See [Model configuration](./code-model-config.md#pin-models-for-third-party-deployments) for what each provider does when the default is unavailable.
 
 ### Configure security policies
 

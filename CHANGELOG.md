@@ -1,5 +1,109 @@
 # Changelog
 
+## 🤖 v1.5.24 - 04/07/2026
+
+File Changes:
+
+- Modified: `docs/code/code-2026-w15.md`
+- Modified: `docs/code/code-2026-w16.md`
+- Modified: `docs/code/code-2026-w18.md`
+- Modified: `docs/code/code-2026-w21.md`
+- Modified: `docs/code/code-2026-w22.md`
+- Modified: `docs/code/code-2026-w23.md`
+- Modified: `docs/code/code-2026-w25.md`
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-admin-setup.md`
+- Modified: `docs/code/code-advisor.md`
+- Modified: `docs/code/code-agent-loop.md`
+- Modified: `docs/code/code-agent-view.md`
+- Modified: `docs/code/code-amazon-bedrock.md`
+- Modified: `docs/code/code-artifacts.md`
+- Modified: `docs/code/code-authentication.md`
+- Modified: `docs/code/code-auto-mode-config.md`
+- Modified: `docs/code/code-changelog.md`
+- Modified: `docs/code/code-channels.md`
+- Modified: `docs/code/code-chrome.md`
+- Modified: `docs/code/code-claude-apps-gateway-config.md`
+- Modified: `docs/code/code-claude-apps-gateway-deploy.md`
+- Modified: `docs/code/code-claude-apps-gateway-on-gcp.md`
+- Modified: `docs/code/code-claude-apps-gateway-spend-limits.md`
+- Modified: `docs/code/code-claude-apps-gateway.md`
+- Modified: `docs/code/code-claude-code-on-the-web.md`
+- Modified: `docs/code/code-claude-platform-on-aws.md`
+- Modified: `docs/code/code-cli-reference.md`
+- Modified: `docs/code/code-code-review.md`
+- Modified: `docs/code/code-commands.md`
+- Modified: `docs/code/code-common-workflows.md`
+- Modified: `docs/code/code-communications-kit.md`
+- Modified: `docs/code/code-computer-use.md`
+- Modified: `docs/code/code-cost-tracking.md`
+- Modified: `docs/code/code-costs.md`
+- Modified: `docs/code/code-data-usage.md`
+- Modified: `docs/code/code-debug-your-config.md`
+- Modified: `docs/code/code-desktop.md`
+- Modified: `docs/code/code-devcontainer.md`
+- Modified: `docs/code/code-env-vars.md`
+- Modified: `docs/code/code-errors.md`
+- Modified: `docs/code/code-fast-mode.md`
+- Modified: `docs/code/code-feature-availability.md`
+- Modified: `docs/code/code-file-checkpointing.md`
+- Modified: `docs/code/code-fullscreen.md`
+- Modified: `docs/code/code-github-actions.md`
+- Modified: `docs/code/code-github-enterprise-server.md`
+- Modified: `docs/code/code-gitlab-ci-cd.md`
+- Modified: `docs/code/code-glossary.md`
+- Modified: `docs/code/code-google-vertex-ai.md`
+- Modified: `docs/code/code-headless.md`
+- Modified: `docs/code/code-hosting.md`
+- Modified: `docs/code/code-interactive-mode.md`
+- Modified: `docs/code/code-keybindings.md`
+- Modified: `docs/code/code-legal-and-compliance.md`
+- Modified: `docs/code/code-llm-gateway-connect.md`
+- Modified: `docs/code/code-llm-gateway-protocol.md`
+- Modified: `docs/code/code-llm-gateway-rollout.md`
+- Modified: `docs/code/code-llm-gateway.md`
+- Modified: `docs/code/code-mcp.md`
+- Modified: `docs/code/code-microsoft-foundry.md`
+- Modified: `docs/code/code-model-config.md`
+- Modified: `docs/code/code-modifying-system-prompts.md`
+- Modified: `docs/code/code-monitoring-usage.md`
+- Modified: `docs/code/code-network-config.md`
+- Modified: `docs/code/code-observability.md`
+- Modified: `docs/code/code-overview.md`
+- Modified: `docs/code/code-permission-modes.md`
+- Modified: `docs/code/code-platforms.md`
+- Modified: `docs/code/code-prompt-caching.md`
+- Modified: `docs/code/code-python.md`
+- Modified: `docs/code/code-quickstart.md`
+- Modified: `docs/code/code-remote-control.md`
+- Modified: `docs/code/code-routines.md`
+- Modified: `docs/code/code-scheduled-tasks.md`
+- Modified: `docs/code/code-server-managed-settings.md`
+- Modified: `docs/code/code-sessions.md`
+- Modified: `docs/code/code-settings.md`
+- Modified: `docs/code/code-setup.md`
+- Modified: `docs/code/code-streaming-output.md`
+- Modified: `docs/code/code-sub-agents.md`
+- Modified: `docs/code/code-subagents.md`
+- Modified: `docs/code/code-third-party-integrations.md`
+- Modified: `docs/code/code-todo-tracking.md`
+- Modified: `docs/code/code-tool-search.md`
+- Modified: `docs/code/code-tools-reference.md`
+- Modified: `docs/code/code-troubleshoot-install.md`
+- Modified: `docs/code/code-troubleshooting.md`
+- Modified: `docs/code/code-typescript.md`
+- Modified: `docs/code/code-ultraplan.md`
+- Modified: `docs/code/code-ultrareview.md`
+- Modified: `docs/code/code-user-input.md`
+- Modified: `docs/code/code-voice-dictation.md`
+- Modified: `docs/code/code-vs-code.md`
+- Modified: `docs/code/code-web-quickstart.md`
+- Modified: `docs/code/code-whats-new.md`
+- Modified: `docs/code/code-workflows.md`
+- Modified: `docs/code/code-worktrees.md`
+- Modified: `docs/code/code-zero-data-retention.md`
+
+
 ## 🤖 v1.5.23 - 03/07/2026
 
 File Changes:
