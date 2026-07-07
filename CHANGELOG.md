@@ -1,5 +1,58 @@
 # Changelog
 
+## 🤖 v1.5.30 - 07/07/2026
+
+File Changes:
+
+- Modified: `docs/agents-and-tools/agents-and-tools-README.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-bash-tool.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-code-execution-tool.md`
+- Modified: `docs/api/api-README.md`
+- Modified: `docs/api/api-client-sdks.md`
+- Modified: `docs/api/api-errors.md`
+- Modified: `docs/api/api-rate-limits.md`
+- Modified: `docs/api/api-sdks-typescript.md`
+- Modified: `docs/build-with-claude/build-with-claude-README.md`
+- Modified: `docs/build-with-claude/build-with-claude-citations.md`
+- Modified: `docs/build-with-claude/build-with-claude-files.md`
+- Modified: `docs/build-with-claude/build-with-claude-overview.md`
+- Modified: `docs/build-with-claude/build-with-claude-pdf-support.md`
+- Modified: `docs/build-with-claude/build-with-claude-prompt-caching.md`
+- Modified: `docs/build-with-claude/build-with-claude-task-budgets.md`
+- Modified: `docs/build-with-claude/build-with-claude-vision-coordinates.md`
+- Modified: `docs/build-with-claude/build-with-claude-workspaces.md`
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-agent-view.md`
+- Modified: `docs/code/code-changelog.md`
+- Modified: `docs/code/code-commands.md`
+- Modified: `docs/code/code-desktop-linux.md`
+- Modified: `docs/code/code-env-vars.md`
+- Modified: `docs/code/code-errors.md`
+- Modified: `docs/code/code-hooks.md`
+- Modified: `docs/code/code-interactive-mode.md`
+- Modified: `docs/code/code-mcp.md`
+- Modified: `docs/code/code-monitoring-usage.md`
+- Modified: `docs/code/code-network-config.md`
+- Modified: `docs/code/code-permission-modes.md`
+- Modified: `docs/code/code-remote-control.md`
+- Modified: `docs/code/code-scheduled-tasks.md`
+- Modified: `docs/code/code-settings.md`
+- Modified: `docs/code/code-setup.md`
+- Modified: `docs/code/code-skills.md`
+- Modified: `docs/code/code-tools-reference.md`
+- Modified: `docs/code/code-troubleshooting.md`
+- Modified: `docs/code/code-typescript.md`
+- Modified: `docs/code/code-ultrareview.md`
+- Modified: `docs/code/code-voice-dictation.md`
+- Modified: `docs/code/code-workflows.md`
+- Modified: `docs/manage-claude/manage-claude-README.md`
+- Modified: `docs/manage-claude/manage-claude-workspaces.md`
+- Modified: `docs/managed-agents/managed-agents-README.md`
+- Modified: `docs/managed-agents/managed-agents-sessions.md`
+- Modified: `docs/release-notes/release-notes-README.md`
+- Modified: `docs/release-notes/release-notes-system-prompts.md`
+
+
 ## 🤖 v1.5.29 - 06/07/2026
 
 File Changes:

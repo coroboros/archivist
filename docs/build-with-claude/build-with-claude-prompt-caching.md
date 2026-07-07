@@ -509,7 +509,7 @@ Automatic caching uses the same underlying caching infrastructure. Pricing, mini
 * If the last block is not eligible as an automatic cache breakpoint target, the system silently walks backwards to find the nearest eligible block. If none is found, caching is skipped.
 
 <Note>
-  Automatic caching is available on the Claude API, [Claude Platform on AWS](./build-with-claude-claude-platform-on-aws.md), and [Microsoft Foundry](./build-with-claude-claude-in-microsoft-foundry.md). Bedrock and Google Cloud do not support automatic caching.
+  Automatic caching is available on the Claude API, [Claude Platform on AWS](./build-with-claude-claude-platform-on-aws.md), [Google Cloud](./build-with-claude-claude-on-vertex-ai.md), and [Microsoft Foundry](./build-with-claude-claude-in-microsoft-foundry.md). Bedrock does not support automatic caching.
 </Note>
 
 ***
