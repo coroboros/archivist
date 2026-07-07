@@ -1,5 +1,16 @@
 # Changelog
 
+## 🤖 v1.5.31 - 07/07/2026
+
+File Changes:
+
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-hooks.md`
+- Modified: `docs/code/code-mcp.md`
+- Modified: `docs/code/code-overview.md`
+- Modified: `docs/code/code-skills.md`
+
+
 ## 🤖 v1.5.30 - 07/07/2026
 
 File Changes:
