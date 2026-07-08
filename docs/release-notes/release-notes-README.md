@@ -2,7 +2,7 @@
 
 _This repository is a mirror of the official [Claude Platform](https://platform.claude.com/docs/en/) documentation (Platform | Release Notes). It is updated automatically._
 
-**Last updated:** Tue, 07 Jul 2026 02:56:42 GMT
+**Last updated:** Wed, 08 Jul 2026 02:33:02 GMT
 
 ---
 

@@ -1,5 +1,76 @@
 # Changelog
 
+## 🤖 v1.5.32 - 08/07/2026
+
+File Changes:
+
+- Modified: `docs/agents-and-tools/agents-and-tools-README.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-agent-skills-overview.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-agent-skills-quickstart.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-mcp-tunnels-deploy-compose.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-mcp-tunnels-deploy-helm.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-mcp-tunnels-quickstart.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-advisor-tool.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-tool-combinations.md`
+- Modified: `docs/api/api-README.md`
+- Modified: `docs/api/api-beta-headers.md`
+- Modified: `docs/api/api-compliance-activities-list.md`
+- Modified: `docs/api/api-compliance-activities.md`
+- Modified: `docs/api/api-compliance-apps-chats-list.md`
+- Modified: `docs/api/api-compliance-apps-chats-messages-list.md`
+- Modified: `docs/api/api-compliance-apps-chats-messages.md`
+- Modified: `docs/api/api-compliance-apps-chats.md`
+- Modified: `docs/api/api-compliance-apps.md`
+- Modified: `docs/api/api-compliance-code-artifacts-delete.md`
+- Modified: `docs/api/api-compliance-code-artifacts-list.md`
+- Modified: `docs/api/api-compliance-code-artifacts-retrieve_version.md`
+- Modified: `docs/api/api-compliance-code-artifacts.md`
+- Modified: `docs/api/api-compliance-code.md`
+- Modified: `docs/api/api-compliance-organizations-settings-retrieve.md`
+- Modified: `docs/api/api-compliance-organizations-settings.md`
+- Modified: `docs/api/api-compliance-organizations.md`
+- Modified: `docs/api/api-compliance.md`
+- Modified: `docs/build-with-claude/build-with-claude-README.md`
+- Modified: `docs/build-with-claude/build-with-claude-administration-api.md`
+- Modified: `docs/build-with-claude/build-with-claude-api-and-data-retention.md`
+- Modified: `docs/build-with-claude/build-with-claude-claude-in-microsoft-foundry.md`
+- Modified: `docs/build-with-claude/build-with-claude-claude-platform-on-aws.md`
+- Modified: `docs/build-with-claude/build-with-claude-structured-outputs.md`
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-agent-loop.md`
+- Modified: `docs/code/code-channels-reference.md`
+- Modified: `docs/code/code-custom-tools.md`
+- Modified: `docs/code/code-hooks-guide.md`
+- Modified: `docs/code/code-hooks.md`
+- Modified: `docs/code/code-mcp.md`
+- Modified: `docs/code/code-permissions.md`
+- Modified: `docs/code/code-plugins-reference.md`
+- Modified: `docs/code/code-python.md`
+- Modified: `docs/code/code-quickstart.md`
+- Modified: `docs/code/code-sessions.md`
+- Modified: `docs/code/code-setup.md`
+- Modified: `docs/code/code-user-input.md`
+- Modified: `docs/manage-claude/manage-claude-README.md`
+- Modified: `docs/manage-claude/manage-claude-admin-api-keys.md`
+- Modified: `docs/manage-claude/manage-claude-admin-api.md`
+- Modified: `docs/manage-claude/manage-claude-analytics-api.md`
+- Modified: `docs/manage-claude/manage-claude-api-and-data-retention.md`
+- Modified: `docs/manage-claude/manage-claude-compliance-activity-feed.md`
+- Modified: `docs/manage-claude/manage-claude-compliance-api-access.md`
+- Modified: `docs/manage-claude/manage-claude-compliance-api.md`
+- Modified: `docs/manage-claude/manage-claude-compliance-content-data.md`
+- Modified: `docs/manage-claude/manage-claude-compliance-errors.md`
+- Modified: `docs/manage-claude/manage-claude-compliance-faq.md`
+- Modified: `docs/manage-claude/manage-claude-compliance-integration-patterns.md`
+- Modified: `docs/manage-claude/manage-claude-compliance-org-data.md`
+- Modified: `docs/managed-agents/managed-agents-README.md`
+- Modified: `docs/managed-agents/managed-agents-self-hosted-sandboxes.md`
+- Modified: `docs/release-notes/release-notes-README.md`
+- Modified: `docs/release-notes/release-notes-overview.md`
+- Modified: `docs/test-and-evaluate/test-and-evaluate-README.md`
+- Modified: `docs/test-and-evaluate/test-and-evaluate-strengthen-guardrails-handle-streaming-refusals.md`
+
+
 ## 🤖 v1.5.31 - 07/07/2026
 
 File Changes:

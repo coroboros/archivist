@@ -132,7 +132,7 @@ If your organization uses Claude Code through Amazon Bedrock, the Claude Enterpr
     Endpoint reference for engagement, adoption, and cost data.
   </Card>
 
-  <Card title="Get access to the Compliance API" href="./manage-claude-compliance-api-access.md">
+  <Card title="Set up the Compliance API" href="./manage-claude-compliance-api-access.md">
     Audit and compliance data uses its own key types.
   </Card>
 </CardGroup>
