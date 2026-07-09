@@ -553,8 +553,7 @@ Use the [Files API](../build-with-claude/build-with-claude-files.md) to list fil
   ```bash CLI
   # List files associated with a session
   ant beta:files list --scope-id sesn_abc123 \
-    --beta files-api-2025-04-14 \
-    --beta managed-agents-2026-04-01
+    --beta files-api-2025-04-14,managed-agents-2026-04-01
 
   # Download a file
   ant beta:files download --file-id "$FILE_ID" --output output.txt
