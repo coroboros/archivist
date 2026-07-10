@@ -6,6 +6,8 @@ generated: true
 ---
 # Increase output consistency
 
+Make Claude's outputs more consistent by specifying exact formats, prefilling responses, constraining with examples, and grounding answers in retrieval.
+
 ---
 
 <Tip>

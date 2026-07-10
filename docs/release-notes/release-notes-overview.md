@@ -16,6 +16,15 @@ Updates to the Claude Platform, including the Claude API, client SDKs, and the C
   For updates to Claude Code, see the [complete CHANGELOG.md](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md) in the `claude-code` repository.
 </Tip>
 
+### July 8, 2026
+
+* You can now set an expiration when you create an API key or an Admin API key in the [Claude Console](https://platform.claude.com/settings/keys). Choose a preset, a custom duration, or **Never**. For keys with a lifetime of at least 7 days, Anthropic emails the creator before expiration. Existing keys are unaffected. The Admin API reports each key's expiration in the [`expires_at`](../api/api-admin-api_keys-list.md) field. See [Authentication](../manage-claude/manage-claude-authentication.md#key-expiration).
+
+### July 2, 2026
+
+* We've added the `agent-memory-2026-07-22` beta header, which changes how [listing memories](../managed-agents/managed-agents-memory.md#list-memories) (`GET /v1/memory_stores/{memory_store_id}/memories`) behaves: results are returned in a stable, server-defined order and the `order_by` and `order` parameters are ignored; `depth` accepts only `0`, `1`, or being omitted (other values return a `400` error); and `path_prefix` must end with `/` and matches whole path segments instead of a substring. Page cursors issued without the header aren't valid with it, so restart from the first page when you adopt it. On memory store endpoints, `agent-memory-2026-07-22` replaces `managed-agents-2026-04-01`; sending both returns a `400` error. On July 22, 2026, the `managed-agents-2026-04-01` header adopts the same list behavior. See [Beta headers](../api/api-beta-headers.md#endpoint-specific-headers).
+* The Python (0.116.0), TypeScript (0.110.0), Go (1.56.0), Java (2.48.0), Ruby (1.55.0), PHP (0.36.0), C# (12.35.0), and CLI (1.16.0) SDKs now send `agent-memory-2026-07-22` on all memory store calls instead of `managed-agents-2026-04-01`. If your code passes `betas` explicitly on memory store calls, replace `managed-agents-2026-04-01` with `agent-memory-2026-07-22` there rather than adding a second value.
+
 ### July 1, 2026
 
 * We've restored access to Claude Fable 5 and Claude Mythos 5. See [our statement](https://www.anthropic.com/news/redeploying-fable-5-mythos-5) for more information.

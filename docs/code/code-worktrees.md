@@ -44,6 +44,8 @@ You can also ask Claude to "work in a worktree" during a session, and it will cr
 
 Before using `--worktree` interactively in a directory for the first time, accept the workspace trust dialog by running `claude` once in that directory. If trust has not yet been accepted, `--worktree` exits with an error and prompts you to run `claude` in the directory first. Non-interactive runs with `-p` skip the [trust check](./code-security.md), so `claude -p --worktree` proceeds without it.
 
+If Claude Code can't enter the worktree directory at startup, for example because a [`WorktreeCreate` hook](./code-hooks.md#worktreecreate) printed something other than the directory it created, or because the directory was deleted after it was set up, Claude Code prints an error naming the path and exits with code 1. Before v2.1.205, this crashed the session, and with `-p` it stalled for about 30 seconds before exiting with code 0.
+
 {/* min-version: 2.1.200 */}Plugins installed at [project scope](./code-plugins-reference.md#plugin-installation-scopes) from the main checkout also load in worktrees of the same repository, so you don't need to reinstall them per worktree. This applies whether you create the worktree with `--worktree` or with `git worktree add`. Requires Claude Code v2.1.200 or later.
 
 <Tip>
@@ -103,6 +105,8 @@ When you exit a worktree session, cleanup depends on whether you made changes:
 Worktrees that Claude created for subagents and [background sessions](./code-agent-view.md#how-file-edits-are-isolated) are removed automatically once they are older than your [`cleanupPeriodDays`](./code-settings.md#available-settings) setting, provided they have no uncommitted changes, no untracked files, and no unpushed commits. Worktrees you create with `--worktree` are never removed by this sweep.
 
 While an agent is running, Claude runs `git worktree lock` on its worktree so that concurrent cleanup cannot remove it. The lock is released when the agent finishes. To clean up a worktree that the sweep keeps, run `git worktree remove`, adding `--force` if the worktree has uncommitted changes or untracked files.
+
+On Windows, before removing a worktree, Claude Code removes any NTFS junction or directory symlink at any depth inside it as a link entry, so removing the worktree doesn't delete the files a link points to. Before v2.1.205, Claude Code removed only top-level links as link entries, and removing a worktree with a junction nested in a subdirectory could delete the contents of the directory the link pointed to outside the worktree.
 
 ## Manage worktrees manually
 

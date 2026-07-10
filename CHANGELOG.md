@@ -1,5 +1,113 @@
 # Changelog
 
+## 🤖 v1.5.36 - 10/07/2026
+
+File Changes:
+
+- Modified: `docs/agents-and-tools/agents-and-tools-README.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-mcp-connector.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-remote-mcp-servers.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-text-editor-tool.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-tool-runner.md`
+- Modified: `docs/api/api-README.md`
+- Modified: `docs/api/api-beta-headers.md`
+- Modified: `docs/api/api-errors.md`
+- Modified: `docs/api/api-overview.md`
+- Modified: `docs/build-with-claude/build-with-claude-README.md`
+- Modified: `docs/build-with-claude/build-with-claude-administration-api.md`
+- Modified: `docs/build-with-claude/build-with-claude-api-and-data-retention.md`
+- Modified: `docs/build-with-claude/build-with-claude-batch-processing.md`
+- Modified: `docs/build-with-claude/build-with-claude-claude-on-amazon-bedrock-legacy.md`
+- Modified: `docs/build-with-claude/build-with-claude-claude-on-amazon-bedrock.md`
+- Modified: `docs/build-with-claude/build-with-claude-claude-platform-on-aws.md`
+- Modified: `docs/build-with-claude/build-with-claude-prompt-caching.md`
+- Modified: `docs/build-with-claude/build-with-claude-prompt-engineering-overview.md`
+- Modified: `docs/build-with-claude/build-with-claude-prompt-engineering-prompting-tools.md`
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-agent-loop.md`
+- Modified: `docs/code/code-agent-view.md`
+- Modified: `docs/code/code-auto-mode-config.md`
+- Modified: `docs/code/code-changelog.md`
+- Modified: `docs/code/code-claude-code-on-the-web.md`
+- Modified: `docs/code/code-cli-reference.md`
+- Modified: `docs/code/code-commands.md`
+- Modified: `docs/code/code-debug-your-config.md`
+- Modified: `docs/code/code-desktop-quickstart.md`
+- Modified: `docs/code/code-desktop.md`
+- Modified: `docs/code/code-env-vars.md`
+- Modified: `docs/code/code-errors.md`
+- Modified: `docs/code/code-fast-mode.md`
+- Modified: `docs/code/code-feature-availability.md`
+- Modified: `docs/code/code-headless.md`
+- Modified: `docs/code/code-hooks.md`
+- Modified: `docs/code/code-how-claude-code-works.md`
+- Modified: `docs/code/code-keybindings.md`
+- Modified: `docs/code/code-llm-gateway-connect.md`
+- Modified: `docs/code/code-llm-gateway-rollout.md`
+- Modified: `docs/code/code-mcp.md`
+- Modified: `docs/code/code-model-config.md`
+- Modified: `docs/code/code-monitoring-usage.md`
+- Modified: `docs/code/code-overview.md`
+- Modified: `docs/code/code-permission-modes.md`
+- Modified: `docs/code/code-platforms.md`
+- Modified: `docs/code/code-plugin-dependencies.md`
+- Modified: `docs/code/code-plugin-marketplaces.md`
+- Modified: `docs/code/code-plugins-reference.md`
+- Modified: `docs/code/code-plugins.md`
+- Modified: `docs/code/code-remote-control.md`
+- Modified: `docs/code/code-sandboxing.md`
+- Modified: `docs/code/code-sessions.md`
+- Modified: `docs/code/code-settings.md`
+- Modified: `docs/code/code-skills.md`
+- Modified: `docs/code/code-statusline.md`
+- Modified: `docs/code/code-structured-outputs.md`
+- Modified: `docs/code/code-sub-agents.md`
+- Modified: `docs/code/code-troubleshoot-install.md`
+- Modified: `docs/code/code-troubleshooting.md`
+- Modified: `docs/code/code-typescript.md`
+- Modified: `docs/code/code-vs-code.md`
+- Modified: `docs/code/code-web-quickstart.md`
+- Modified: `docs/code/code-worktrees.md`
+- Modified: `docs/manage-claude/manage-claude-README.md`
+- Modified: `docs/manage-claude/manage-claude-admin-api-keys.md`
+- Modified: `docs/manage-claude/manage-claude-admin-api.md`
+- Modified: `docs/manage-claude/manage-claude-api-and-data-retention.md`
+- Modified: `docs/manage-claude/manage-claude-authentication.md`
+- Modified: `docs/manage-claude/manage-claude-cmek.md`
+- Modified: `docs/managed-agents/managed-agents-README.md`
+- Modified: `docs/managed-agents/managed-agents-agent-setup.md`
+- Modified: `docs/managed-agents/managed-agents-cloud-containers.md`
+- Modified: `docs/managed-agents/managed-agents-cloud-sandboxes-reference.md`
+- Modified: `docs/managed-agents/managed-agents-define-outcomes.md`
+- Modified: `docs/managed-agents/managed-agents-environments.md`
+- Modified: `docs/managed-agents/managed-agents-events-and-streaming.md`
+- Modified: `docs/managed-agents/managed-agents-files.md`
+- Modified: `docs/managed-agents/managed-agents-github.md`
+- Modified: `docs/managed-agents/managed-agents-mcp-connector.md`
+- Modified: `docs/managed-agents/managed-agents-memory.md`
+- Modified: `docs/managed-agents/managed-agents-migration.md`
+- Modified: `docs/managed-agents/managed-agents-multi-agent.md`
+- Modified: `docs/managed-agents/managed-agents-onboarding.md`
+- Modified: `docs/managed-agents/managed-agents-permission-policies.md`
+- Modified: `docs/managed-agents/managed-agents-quickstart.md`
+- Modified: `docs/managed-agents/managed-agents-reference.md`
+- Modified: `docs/managed-agents/managed-agents-self-hosted-sandboxes.md`
+- Modified: `docs/managed-agents/managed-agents-session-operations.md`
+- Modified: `docs/managed-agents/managed-agents-sessions.md`
+- Modified: `docs/managed-agents/managed-agents-skills.md`
+- Modified: `docs/managed-agents/managed-agents-tools.md`
+- Modified: `docs/managed-agents/managed-agents-vaults.md`
+- Modified: `docs/release-notes/release-notes-README.md`
+- Modified: `docs/release-notes/release-notes-overview.md`
+- Modified: `docs/test-and-evaluate/test-and-evaluate-README.md`
+- Modified: `docs/test-and-evaluate/test-and-evaluate-develop-tests.md`
+- Modified: `docs/test-and-evaluate/test-and-evaluate-strengthen-guardrails-increase-consistency.md`
+- Modified: `docs/test-and-evaluate/test-and-evaluate-strengthen-guardrails-mitigate-jailbreaks.md`
+- Modified: `docs/test-and-evaluate/test-and-evaluate-strengthen-guardrails-reduce-hallucinations.md`
+- Modified: `docs/test-and-evaluate/test-and-evaluate-strengthen-guardrails-reduce-latency.md`
+- Modified: `docs/test-and-evaluate/test-and-evaluate-strengthen-guardrails-reduce-prompt-leak.md`
+
+
 ## 🤖 v1.5.35 - 09/07/2026
 
 File Changes:

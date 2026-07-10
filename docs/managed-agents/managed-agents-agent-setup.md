@@ -15,7 +15,7 @@ An agent is a reusable, versioned configuration that defines persona and capabil
 Create the agent once as a reusable resource and reference it by ID each time you [start a session](./managed-agents-sessions.md). Agents are versioned and easier to manage across many sessions.
 
 <Note>
-  All Managed Agents API requests require the `managed-agents-2026-04-01` beta header. The SDK sets the beta header automatically.
+  Managed Agents API requests require the `managed-agents-2026-04-01` beta header, except memory store endpoints, which use `agent-memory-2026-07-22` instead. The SDK sets the correct beta header automatically. See [Beta headers](../api/api-beta-headers.md#endpoint-specific-headers).
 </Note>
 
 ## Agent configuration fields

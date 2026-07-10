@@ -6,6 +6,8 @@ generated: true
 ---
 # Reduce prompt leak
 
+Reduce the risk of prompt leaks by separating context from user queries, filtering Claude's outputs, and auditing prompts, without degrading task performance.
+
 ---
 
 Prompt leaks can expose sensitive information that you expect to be "hidden" in your prompt. While no method is foolproof, the strategies below can significantly reduce the risk.

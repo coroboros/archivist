@@ -6,9 +6,11 @@ generated: true
 ---
 # Reducing latency
 
+Reduce Claude's response latency by choosing a faster model like Claude Haiku 4.5, trimming prompt and output tokens, and streaming responses.
+
 ---
 
-Latency refers to the time it takes for the model to process a prompt and and generate an output. Latency can be influenced by various factors, such as the size of the model, the complexity of the prompt, and the underlying infrastructure supporting the model and point of interaction.
+Latency refers to the time it takes for the model to process a prompt and generate an output. Latency can be influenced by various factors, such as the size of the model, the complexity of the prompt, and the underlying infrastructure supporting the model and point of interaction.
 
 <Note>
   It's always better to first engineer a prompt that works well without model or prompt constraints, and then try latency reduction strategies afterward. Trying to reduce latency prematurely might prevent you from discovering what top performance looks like.
@@ -61,9 +63,9 @@ Minimize the number of tokens in both your input prompt and the expected output,
 
 Here are some tips to help you optimize your prompts and outputs:
 
-* **Be clear but concise**: Aim to convey your intent clearly and concisely in the prompt. Avoid unnecessary details or redundant information, while keeping in mind that [claude lacks context](../build-with-claude/build-with-claude-prompt-engineering-claude-prompting-best-practices.md#be-clear-and-direct) on your use case and may not make the intended leaps of logic if instructions are unclear.
+* **Be clear but concise**: Aim to convey your intent clearly and concisely in the prompt. Avoid unnecessary details or redundant information, while keeping in mind that [Claude lacks context](../build-with-claude/build-with-claude-prompt-engineering-claude-prompting-best-practices.md#be-clear-and-direct) on your use case and may not make the intended leaps of logic if instructions are unclear.
 
-* **Ask for shorter responses:**: Ask Claude directly to be concise. The Claude 3 family of models has improved steerability over previous generations. If Claude is outputting unwanted length, ask Claude to [curb its chattiness](../build-with-claude/build-with-claude-prompt-engineering-claude-prompting-best-practices.md#be-clear-and-direct).
+* **Ask for shorter responses:** Ask Claude directly to be concise. The Claude 3 family of models has improved steerability over previous generations. If Claude is outputting unwanted length, ask Claude to [curb its chattiness](../build-with-claude/build-with-claude-prompt-engineering-claude-prompting-best-practices.md#be-clear-and-direct).
   <Tip>
     Due to how LLMs count 
 

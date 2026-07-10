@@ -6,6 +6,8 @@ generated: true
 ---
 # MCP connector
 
+Connect to remote MCP servers directly from the Messages API without an MCP client, and allowlist, denylist, or configure individual tools.
+
 ---
 
 Claude's Model Context Protocol (MCP) connector feature enables you to connect to remote MCP servers directly from the Messages API without a separate MCP client.

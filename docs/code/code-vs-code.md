@@ -102,7 +102,7 @@ The prompt box supports several features:
 
 * **Permission modes**: click the mode indicator at the bottom of the prompt box to switch modes, or set the default in VS Code settings under `claudeCode.initialPermissionMode`. See [permission modes](./code-permission-modes.md#switch-permission-modes) for every mode the indicator offers.
   * **Manual**: Claude asks permission before each action.
-  * **Plan mode**: Claude describes what it will do and waits for approval before making changes. VS Code automatically opens the plan as a full markdown document where you can add inline comments to give feedback before Claude begins.
+  * **Plan**: Claude describes what it will do and waits for approval before making changes. VS Code automatically opens the plan as a full Markdown document where you can add inline comments to give feedback before Claude begins.
   * **Edit automatically**: Claude makes edits without asking.
 * **Command menu**: click `/` or type `/` to open the command menu. Options include attaching files, switching models, toggling extended thinking, viewing plan usage (`/usage`), and starting a [Remote Control](./code-remote-control.md) session (`/remote-control`). The Customize section provides access to MCP servers, hooks, memory, permissions, and plugins. Items with a terminal icon open in the integrated terminal.
   * {/* min-version: 2.1.203 */}The Settings section includes **Enable Remote Control for all sessions**, which sets [`remoteControlAtStartup`](./code-settings.md#available-settings) so [every new interactive session connects to Remote Control automatically](./code-remote-control.md#enable-remote-control-for-all-sessions). Requires Claude Code v2.1.203 or later.
