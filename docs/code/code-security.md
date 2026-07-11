@@ -22,7 +22,7 @@ Your code's security is paramount. Claude Code is built with security at its cor
 
 Claude Code uses strict read-only permissions by default. When additional actions are needed (editing files, running tests, executing commands), Claude Code requests explicit permission. Users control whether to approve actions once or allow them automatically.
 
-Claude Code requires approval before running Bash commands that can modify your system. A built-in set of read-only commands such as `ls`, `cat`, and `git status` runs without a prompt. This approach lets users and organizations configure permissions directly.
+Claude Code requires approval before running Bash commands that can modify your system. A built-in set of [read-only commands](./code-permissions.md#read-only-commands) such as `ls`, `cat`, and `git status` runs without a prompt. This approach lets users and organizations configure permissions directly.
 
 For detailed permission configuration, see [Permissions](./code-permissions.md).
 
@@ -31,7 +31,7 @@ For detailed permission configuration, see [Permissions](./code-permissions.md).
 To mitigate risks in agentic systems:
 
 * **Sandboxed bash tool**: [Sandbox](./code-sandboxing.md) bash commands with filesystem and network isolation, reducing permission prompts while maintaining security. Enable with `/sandbox` to define boundaries where Claude Code can work autonomously
-* **Write access restriction**: Claude Code can only write to the folder where it was started and its subfolders—it cannot modify files in parent directories without explicit permission. While Claude Code can read files outside the working directory (useful for accessing system libraries and dependencies), write operations are strictly confined to the project scope, creating a clear security boundary
+* **Working directory boundary**: Claude Code can only write to the folder where it was started and its subfolders, and cannot modify files in parent directories without explicit permission. Reading paths outside this boundary with the Read, Grep, and Glob tools is possible after an approval prompt. Extend the boundary with [additional directories](./code-permissions.md#working-directories) to skip the prompt, or restrict the broader read access available to read-only Bash commands with [sandbox `denyRead` rules](./code-sandboxing.md#filesystem-isolation), which apply only when sandboxing is enabled
 * **Prompt fatigue mitigation**: Support for allowlisting frequently used safe commands per-user, per-codebase, or per-organization
 * **Accept Edits mode**: Auto-approves file edits and a fixed set of filesystem Bash commands like `mkdir`, `touch`, `rm`, `mv`, `cp`, and `sed` for paths in the working directory. Other Bash commands and out-of-scope paths still prompt
 
