@@ -36613,7 +36613,7 @@ ant beta:agents archive \
 
   - `description: string`
 
-    Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-1024 characters.
+    Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-4096 characters.
 
   - `input_schema: object { type, properties, required }`
 
@@ -39452,7 +39452,7 @@ Retrieve detailed information about a specific work item.
 
 ### Returns
 
-- `beta_self_hosted_work: object { id, acknowledged_at, created_at, 10 more }`
+- `beta_self_hosted_work: object { id, acknowledged_at, created_at, 9 more }`
 
   Work resource representing a unit of work in a self-hosted environment.
 
@@ -39495,10 +39495,6 @@ Retrieve detailed information about a specific work item.
   - `metadata: map[string]`
 
     User-provided metadata key-value pairs associated with this work item
-
-  - `secret: string`
-
-    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
 
   - `started_at: string`
 
@@ -39555,7 +39551,6 @@ ant beta:environments:work retrieve \
   "metadata": {
     "foo": "string"
   },
-  "secret": "secret",
   "started_at": "started_at",
   "state": "queued",
   "stop_requested_at": "stop_requested_at",
@@ -39598,7 +39593,7 @@ Long poll for work items in the queue.
 
 ### Returns
 
-- `beta_self_hosted_work: object { id, acknowledged_at, created_at, 10 more }`
+- `beta_self_hosted_work: object { id, acknowledged_at, created_at, 9 more }`
 
   Work resource representing a unit of work in a self-hosted environment.
 
@@ -39641,10 +39636,6 @@ Long poll for work items in the queue.
   - `metadata: map[string]`
 
     User-provided metadata key-value pairs associated with this work item
-
-  - `secret: string`
-
-    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
 
   - `started_at: string`
 
@@ -39700,7 +39691,6 @@ ant beta:environments:work poll \
   "metadata": {
     "foo": "string"
   },
-  "secret": "secret",
   "started_at": "started_at",
   "state": "queued",
   "stop_requested_at": "stop_requested_at",
@@ -39735,7 +39725,7 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
 
 ### Returns
 
-- `beta_self_hosted_work: object { id, acknowledged_at, created_at, 10 more }`
+- `beta_self_hosted_work: object { id, acknowledged_at, created_at, 9 more }`
 
   Work resource representing a unit of work in a self-hosted environment.
 
@@ -39778,10 +39768,6 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
   - `metadata: map[string]`
 
     User-provided metadata key-value pairs associated with this work item
-
-  - `secret: string`
-
-    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
 
   - `started_at: string`
 
@@ -39838,7 +39824,6 @@ ant beta:environments:work ack \
   "metadata": {
     "foo": "string"
   },
-  "secret": "secret",
   "started_at": "started_at",
   "state": "queued",
   "stop_requested_at": "stop_requested_at",
@@ -39966,7 +39951,7 @@ Stop a work item, initiating graceful or forced shutdown.
 
 ### Returns
 
-- `beta_self_hosted_work: object { id, acknowledged_at, created_at, 10 more }`
+- `beta_self_hosted_work: object { id, acknowledged_at, created_at, 9 more }`
 
   Work resource representing a unit of work in a self-hosted environment.
 
@@ -40009,10 +39994,6 @@ Stop a work item, initiating graceful or forced shutdown.
   - `metadata: map[string]`
 
     User-provided metadata key-value pairs associated with this work item
-
-  - `secret: string`
-
-    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
 
   - `started_at: string`
 
@@ -40069,7 +40050,6 @@ ant beta:environments:work stop \
   "metadata": {
     "foo": "string"
   },
-  "secret": "secret",
   "started_at": "started_at",
   "state": "queued",
   "stop_requested_at": "stop_requested_at",
@@ -40152,10 +40132,6 @@ List work items in an environment.
 
       User-provided metadata key-value pairs associated with this work item
 
-    - `secret: string`
-
-      Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
-
     - `started_at: string`
 
       RFC 3339 timestamp when work execution started
@@ -40216,7 +40192,6 @@ ant beta:environments:work list \
       "metadata": {
         "foo": "string"
       },
-      "secret": "secret",
       "started_at": "started_at",
       "state": "queued",
       "stop_requested_at": "stop_requested_at",
@@ -40258,7 +40233,7 @@ Update work item metadata with merge semantics.
 
 ### Returns
 
-- `beta_self_hosted_work: object { id, acknowledged_at, created_at, 10 more }`
+- `beta_self_hosted_work: object { id, acknowledged_at, created_at, 9 more }`
 
   Work resource representing a unit of work in a self-hosted environment.
 
@@ -40301,10 +40276,6 @@ Update work item metadata with merge semantics.
   - `metadata: map[string]`
 
     User-provided metadata key-value pairs associated with this work item
-
-  - `secret: string`
-
-    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
 
   - `started_at: string`
 
@@ -40362,7 +40333,6 @@ ant beta:environments:work update \
   "metadata": {
     "foo": "string"
   },
-  "secret": "secret",
   "started_at": "started_at",
   "state": "queued",
   "stop_requested_at": "stop_requested_at",
@@ -40439,7 +40409,7 @@ ant beta:environments:work stats \
 
 ### Beta Self Hosted Work
 
-- `beta_self_hosted_work: object { id, acknowledged_at, created_at, 10 more }`
+- `beta_self_hosted_work: object { id, acknowledged_at, created_at, 9 more }`
 
   Work resource representing a unit of work in a self-hosted environment.
 
@@ -40482,10 +40452,6 @@ ant beta:environments:work stats \
   - `metadata: map[string]`
 
     User-provided metadata key-value pairs associated with this work item
-
-  - `secret: string`
-
-    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
 
   - `started_at: string`
 
@@ -40598,10 +40564,6 @@ ant beta:environments:work stats \
     - `metadata: map[string]`
 
       User-provided metadata key-value pairs associated with this work item
-
-    - `secret: string`
-
-      Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
 
     - `started_at: string`
 
@@ -44875,7 +44837,7 @@ ant beta:sessions archive \
 
       - `description: string`
 
-        Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-1024 characters.
+        Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-4096 characters.
 
       - `input_schema: object { type, properties, required }`
 
@@ -46275,7 +46237,7 @@ ant beta:sessions archive \
 
       - `description: string`
 
-        Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-1024 characters.
+        Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-4096 characters.
 
       - `input_schema: object { type, properties, required }`
 
@@ -79737,31 +79699,23 @@ List memories
 
 - `--depth: optional number`
 
-  Query param: Query parameter for depth
+  Query param: `0` (or omitted) returns all descendants below `path_prefix` (recursive). `1` returns immediate children only; deeper entries roll up as `memory_prefix` items. `depth=1` behaves like `ls`; omitting `depth` behaves like `find`.
 
 - `--limit: optional number`
 
-  Query param: Query parameter for limit
-
-- `--order: optional "asc" or "desc"`
-
-  Query param: Query parameter for order
-
-- `--order-by: optional string`
-
-  Query param: Query parameter for order_by
+  Query param: Maximum number of items to return per page. Must be between 1 and 100. Defaults to 20 when omitted. Capped at 20 when `view=full`. Both `memory` and `memory_prefix` items count toward the limit.
 
 - `--page: optional string`
 
-  Query param: Query parameter for page
+  Query param: Opaque pagination cursor (a `page_...` value). Pass the `next_page` value from a previous response to fetch the next page; omit for the first page.
 
 - `--path-prefix: optional string`
 
-  Query param: Optional path prefix filter (raw string-prefix match; include a trailing slash for directory-scoped lists). This value appears in request URLs. Do not include secrets or personally identifiable information.
+  Query param: Optional path prefix filter. Must end with `/` (segment-aligned), e.g., `/notes/`. This value appears in request URLs. Do not include secrets or personally identifiable information.
 
 - `--view: optional "basic" or "full"`
 
-  Query param: Query parameter for view
+  Query param: Which projection of each `memory` to return. Defaults to `basic` (content omitted). `full` populates `content` on each item and caps `limit` at 20; use this as the bulk-read path for export and sync.
 
 - `--beta: optional array of AnthropicBeta`
 
@@ -79775,7 +79729,7 @@ List memories
 
   - `data: optional array of BetaManagedAgentsMemoryListItem`
 
-    One page of results. Each item is either a `memory` object or, when `depth` was set, a `memory_prefix` rollup marker. Items appear in the requested `order_by`/`order`.
+    One page of results. Each item is either a `memory` object or, when `depth` was set, a `memory_prefix` rollup marker. Items are returned in a stable, server-defined order.
 
     - `beta_managed_agents_memory: object { id, content_sha256, content_size_bytes, 7 more }`
 
@@ -81681,17 +81635,17 @@ Create Skill
 
 ### Parameters
 
+- `--file: array of string`
+
+  Body param: Files to upload for the skill.
+
+  All files must be in the same top-level directory and must include a SKILL.md file at the root of that directory.
+
 - `--display-title: optional string`
 
   Body param: Display title for the skill.
 
   This is a human-readable label that is not included in the prompt sent to the model.
-
-- `--file: optional array of string`
-
-  Body param: Files to upload for the skill.
-
-  All files must be in the same top-level directory and must include a SKILL.md file at the root of that directory.
 
 - `--beta: optional array of AnthropicBeta`
 
@@ -81746,7 +81700,8 @@ Create Skill
 
 ```cli
 ant beta:skills create \
-  --api-key my-anthropic-api-key
+  --api-key my-anthropic-api-key \
+  --file 'Example data'
 ```
 
 #### Response
@@ -82044,7 +81999,7 @@ Create Skill Version
 
   The format and length of IDs may change over time.
 
-- `--file: optional array of string`
+- `--file: array of string`
 
   Body param: Files to upload for the skill.
 
@@ -82107,7 +82062,8 @@ Create Skill Version
 ```cli
 ant beta:skills:versions create \
   --api-key my-anthropic-api-key \
-  --skill-id skill_id
+  --skill-id skill_id \
+  --file 'Example data'
 ```
 
 #### Response
@@ -83242,70 +83198,6 @@ ant beta:user-profiles create-enrollment-url \
 
   - `workspace_id: string`
 
-### Beta Webhook Environment Archived Event Data
-
-- `beta_webhook_environment_archived_event_data: object { id, organization_id, type, workspace_id }`
-
-  - `id: string`
-
-    ID of the environment that triggered the event.
-
-  - `organization_id: string`
-
-  - `type: "environment.archived"`
-
-  - `workspace_id: string`
-
-### Beta Webhook Environment Created Event Data
-
-- `beta_webhook_environment_created_event_data: object { id, organization_id, type, workspace_id }`
-
-  - `id: string`
-
-    ID of the environment that triggered the event.
-
-  - `organization_id: string`
-
-  - `type: "environment.created"`
-
-  - `workspace_id: string`
-
-### Beta Webhook Environment Deleted Event Data
-
-- `beta_webhook_environment_deleted_event_data: object { id, organization_id, type, workspace_id }`
-
-  - `id: string`
-
-    ID of the environment that triggered the event.
-
-  - `organization_id: string`
-
-  - `type: "environment.deleted"`
-
-    - `"environment.deleted"`
-
-  - `workspace_id: string`
-
-### Beta Webhook Environment Deleted Event Type
-
-- `beta_webhook_environment_deleted_event_type: "environment.deleted"`
-
-  - `"environment.deleted"`
-
-### Beta Webhook Environment Updated Event Data
-
-- `beta_webhook_environment_updated_event_data: object { id, organization_id, type, workspace_id }`
-
-  - `id: string`
-
-    ID of the environment that triggered the event.
-
-  - `organization_id: string`
-
-  - `type: "environment.updated"`
-
-  - `workspace_id: string`
-
 ### Beta Webhook Event
 
 - `beta_webhook_event: object { id, created_at, data, type }`
@@ -83318,7 +83210,7 @@ ant beta:user-profiles create-enrollment-url \
 
     RFC 3339 timestamp when the event occurred.
 
-  - `data: BetaWebhookSessionCreatedEventData or BetaWebhookSessionPendingEventData or BetaWebhookSessionRunningEventData or 40 more`
+  - `data: BetaWebhookSessionCreatedEventData or BetaWebhookSessionPendingEventData or BetaWebhookSessionRunningEventData or 33 more`
 
     - `beta_webhook_session_created_event_data: object { id, organization_id, type, workspace_id }`
 
@@ -83780,99 +83672,13 @@ ant beta:user-profiles create-enrollment-url \
 
       - `workspace_id: string`
 
-    - `beta_webhook_environment_created_event_data: object { id, organization_id, type, workspace_id }`
-
-      - `id: string`
-
-        ID of the environment that triggered the event.
-
-      - `organization_id: string`
-
-      - `type: "environment.created"`
-
-      - `workspace_id: string`
-
-    - `beta_webhook_environment_updated_event_data: object { id, organization_id, type, workspace_id }`
-
-      - `id: string`
-
-        ID of the environment that triggered the event.
-
-      - `organization_id: string`
-
-      - `type: "environment.updated"`
-
-      - `workspace_id: string`
-
-    - `beta_webhook_environment_archived_event_data: object { id, organization_id, type, workspace_id }`
-
-      - `id: string`
-
-        ID of the environment that triggered the event.
-
-      - `organization_id: string`
-
-      - `type: "environment.archived"`
-
-      - `workspace_id: string`
-
-    - `beta_webhook_environment_deleted_event_data: object { id, organization_id, type, workspace_id }`
-
-      - `id: string`
-
-        ID of the environment that triggered the event.
-
-      - `organization_id: string`
-
-      - `type: "environment.deleted"`
-
-        - `"environment.deleted"`
-
-      - `workspace_id: string`
-
-    - `beta_webhook_memory_store_created_event_data: object { id, organization_id, type, workspace_id }`
-
-      - `id: string`
-
-        ID of the memory store that triggered the event.
-
-      - `organization_id: string`
-
-      - `type: "memory_store.created"`
-
-      - `workspace_id: string`
-
-    - `beta_webhook_memory_store_archived_event_data: object { id, organization_id, type, workspace_id }`
-
-      - `id: string`
-
-        ID of the memory store that triggered the event.
-
-      - `organization_id: string`
-
-      - `type: "memory_store.archived"`
-
-      - `workspace_id: string`
-
-    - `beta_webhook_memory_store_deleted_event_data: object { id, organization_id, type, workspace_id }`
-
-      - `id: string`
-
-        ID of the memory store that triggered the event.
-
-      - `organization_id: string`
-
-      - `type: "memory_store.deleted"`
-
-      - `workspace_id: string`
-
   - `type: "event"`
 
     Object type. Always `event` for webhook payloads.
 
 ### Beta Webhook Event Data
 
-- `beta_webhook_event_data: BetaWebhookSessionCreatedEventData or BetaWebhookSessionPendingEventData or BetaWebhookSessionRunningEventData or 40 more`
+- `beta_webhook_event_data: BetaWebhookSessionCreatedEventData or BetaWebhookSessionPendingEventData or BetaWebhookSessionRunningEventData or 33 more`
 
   - `beta_webhook_session_created_event_data: object { id, organization_id, type, workspace_id }`
 
@@ -84334,134 +84140,6 @@ ant beta:user-profiles create-enrollment-url \
 
     - `workspace_id: string`
 
-  - `beta_webhook_environment_created_event_data: object { id, organization_id, type, workspace_id }`
-
-    - `id: string`
-
-      ID of the environment that triggered the event.
-
-    - `organization_id: string`
-
-    - `type: "environment.created"`
-
-    - `workspace_id: string`
-
-  - `beta_webhook_environment_updated_event_data: object { id, organization_id, type, workspace_id }`
-
-    - `id: string`
-
-      ID of the environment that triggered the event.
-
-    - `organization_id: string`
-
-    - `type: "environment.updated"`
-
-    - `workspace_id: string`
-
-  - `beta_webhook_environment_archived_event_data: object { id, organization_id, type, workspace_id }`
-
-    - `id: string`
-
-      ID of the environment that triggered the event.
-
-    - `organization_id: string`
-
-    - `type: "environment.archived"`
-
-    - `workspace_id: string`
-
-  - `beta_webhook_environment_deleted_event_data: object { id, organization_id, type, workspace_id }`
-
-    - `id: string`
-
-      ID of the environment that triggered the event.
-
-    - `organization_id: string`
-
-    - `type: "environment.deleted"`
-
-      - `"environment.deleted"`
-
-    - `workspace_id: string`
-
-  - `beta_webhook_memory_store_created_event_data: object { id, organization_id, type, workspace_id }`
-
-    - `id: string`
-
-      ID of the memory store that triggered the event.
-
-    - `organization_id: string`
-
-    - `type: "memory_store.created"`
-
-    - `workspace_id: string`
-
-  - `beta_webhook_memory_store_archived_event_data: object { id, organization_id, type, workspace_id }`
-
-    - `id: string`
-
-      ID of the memory store that triggered the event.
-
-    - `organization_id: string`
-
-    - `type: "memory_store.archived"`
-
-    - `workspace_id: string`
-
-  - `beta_webhook_memory_store_deleted_event_data: object { id, organization_id, type, workspace_id }`
-
-    - `id: string`
-
-      ID of the memory store that triggered the event.
-
-    - `organization_id: string`
-
-    - `type: "memory_store.deleted"`
-
-    - `workspace_id: string`
-
-### Beta Webhook Memory Store Archived Event Data
-
-- `beta_webhook_memory_store_archived_event_data: object { id, organization_id, type, workspace_id }`
-
-  - `id: string`
-
-    ID of the memory store that triggered the event.
-
-  - `organization_id: string`
-
-  - `type: "memory_store.archived"`
-
-  - `workspace_id: string`
-
-### Beta Webhook Memory Store Created Event Data
-
-- `beta_webhook_memory_store_created_event_data: object { id, organization_id, type, workspace_id }`
-
-  - `id: string`
-
-    ID of the memory store that triggered the event.
-
-  - `organization_id: string`
-
-  - `type: "memory_store.created"`
-
-  - `workspace_id: string`
-
-### Beta Webhook Memory Store Deleted Event Data
-
-- `beta_webhook_memory_store_deleted_event_data: object { id, organization_id, type, workspace_id }`
-
-  - `id: string`
-
-    ID of the memory store that triggered the event.
-
-  - `organization_id: string`
-
-  - `type: "memory_store.deleted"`
-
-  - `workspace_id: string`
-
 ### Beta Webhook Session Archived Event Data
 
 - `beta_webhook_session_archived_event_data: object { id, organization_id, type, workspace_id }`
@@ -84824,7 +84502,7 @@ ant beta:user-profiles create-enrollment-url \
 
     RFC 3339 timestamp when the event occurred.
 
-  - `data: BetaWebhookSessionCreatedEventData or BetaWebhookSessionPendingEventData or BetaWebhookSessionRunningEventData or 40 more`
+  - `data: BetaWebhookSessionCreatedEventData or BetaWebhookSessionPendingEventData or BetaWebhookSessionRunningEventData or 33 more`
 
     - `beta_webhook_session_created_event_data: object { id, organization_id, type, workspace_id }`
 
@@ -85283,92 +84961,6 @@ ant beta:user-profiles create-enrollment-url \
       - `organization_id: string`
 
       - `type: "deployment_run.succeeded"`
-
-      - `workspace_id: string`
-
-    - `beta_webhook_environment_created_event_data: object { id, organization_id, type, workspace_id }`
-
-      - `id: string`
-
-        ID of the environment that triggered the event.
-
-      - `organization_id: string`
-
-      - `type: "environment.created"`
-
-      - `workspace_id: string`
-
-    - `beta_webhook_environment_updated_event_data: object { id, organization_id, type, workspace_id }`
-
-      - `id: string`
-
-        ID of the environment that triggered the event.
-
-      - `organization_id: string`
-
-      - `type: "environment.updated"`
-
-      - `workspace_id: string`
-
-    - `beta_webhook_environment_archived_event_data: object { id, organization_id, type, workspace_id }`
-
-      - `id: string`
-
-        ID of the environment that triggered the event.
-
-      - `organization_id: string`
-
-      - `type: "environment.archived"`
-
-      - `workspace_id: string`
-
-    - `beta_webhook_environment_deleted_event_data: object { id, organization_id, type, workspace_id }`
-
-      - `id: string`
-
-        ID of the environment that triggered the event.
-
-      - `organization_id: string`
-
-      - `type: "environment.deleted"`
-
-        - `"environment.deleted"`
-
-      - `workspace_id: string`
-
-    - `beta_webhook_memory_store_created_event_data: object { id, organization_id, type, workspace_id }`
-
-      - `id: string`
-
-        ID of the memory store that triggered the event.
-
-      - `organization_id: string`
-
-      - `type: "memory_store.created"`
-
-      - `workspace_id: string`
-
-    - `beta_webhook_memory_store_archived_event_data: object { id, organization_id, type, workspace_id }`
-
-      - `id: string`
-
-        ID of the memory store that triggered the event.
-
-      - `organization_id: string`
-
-      - `type: "memory_store.archived"`
-
-      - `workspace_id: string`
-
-    - `beta_webhook_memory_store_deleted_event_data: object { id, organization_id, type, workspace_id }`
-
-      - `id: string`
-
-        ID of the memory store that triggered the event.
-
-      - `organization_id: string`
-
-      - `type: "memory_store.deleted"`
 
       - `workspace_id: string`
 
