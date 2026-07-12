@@ -1,5 +1,19 @@
 # Changelog
 
+## 🤖 v1.5.40 - 12/07/2026
+
+File Changes:
+
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-desktop-linux.md`
+- Modified: `docs/code/code-hooks.md`
+- Modified: `docs/code/code-mcp.md`
+- Modified: `docs/code/code-plugins.md`
+- Modified: `docs/code/code-sessions.md`
+- Modified: `docs/code/code-setup.md`
+- Modified: `docs/code/code-troubleshoot-install.md`
+
+
 ## 🤖 v1.5.39 - 11/07/2026
 
 File Changes:

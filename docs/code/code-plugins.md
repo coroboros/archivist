@@ -1,6 +1,6 @@
 ---
-title: "Create plugins"
-source: "https://code.claude.com/docs/en/plugins"
+title: "Plugins in the SDK"
+source: "https://code.claude.com/docs/en/agent-sdk/plugins"
 category: "code"
 generated: true
 ---
@@ -8,504 +8,357 @@ generated: true
 > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt
 > Use this file to discover all available pages before exploring further.
 
-# Create plugins
+# Plugins in the SDK
 
-> Create custom plugins to extend Claude Code with skills, agents, hooks, and MCP servers.
+> Load custom plugins to extend Claude Code with skills, agents, hooks, and MCP servers through the Agent SDK
 
-Plugins let you extend Claude Code with custom functionality that can be shared across projects and teams. This guide covers creating your own plugins with skills, agents, hooks, and MCP servers.
+Plugins allow you to extend Claude Code with custom functionality that can be shared across projects. Through the Agent SDK, you can programmatically load plugins from local directories to add skills, agents, hooks, and MCP servers to your agent sessions.
 
-Looking to install existing plugins? See [Discover and install plugins](./code-discover-plugins.md). For complete technical specifications, see [Plugins reference](./code-plugins-reference.md).
+## What are plugins?
 
-## When to use plugins vs standalone configuration
+Plugins are packages of Claude Code extensions that can include:
 
-Claude Code supports two ways to add custom skills, agents, and hooks:
-
-| Approach                                                                                                        | Skill names          | Best for                                                                                        |
-| :-------------------------------------------------------------------------------------------------------------- | :------------------- | :---------------------------------------------------------------------------------------------- |
-| **Standalone** (`.claude/` directory)                                                                           | `/hello`             | Personal workflows, project-specific customizations, quick experiments                          |
-| **Plugins** (self-contained directories with skills, agents, hooks, or a `.claude-plugin/plugin.json` manifest) | `/plugin-name:hello` | Sharing with teammates, distributing to community, versioned releases, reusable across projects |
-
-**Use standalone configuration when**:
-
-* You're customizing Claude Code for a single project
-* The configuration is personal and doesn't need to be shared
-* You're experimenting with skills or hooks before packaging them
-* You want short skill names like `/hello` or `/deploy`
-
-**Use plugins when**:
-
-* You want to share functionality with your team or community
-* You need the same skills/agents across multiple projects
-* You want version control and easy updates for your extensions
-* You're distributing through a marketplace
-* You're okay with namespaced skills like `/my-plugin:hello` (namespacing prevents conflicts between plugins)
-
-<Tip>
-  Start with standalone configuration in `.claude/` for quick iteration, then [convert to a plugin](#convert-existing-configurations-to-plugins) when you're ready to share.
-</Tip>
-
-## Quickstart
-
-This quickstart walks you through creating a plugin with a custom skill. You'll create a manifest (the configuration file that defines your plugin), add a skill, and test it locally using the `--plugin-dir` flag.
-
-### Prerequisites
-
-* Claude Code [installed and authenticated](./code-quickstart.md#step-1-install-claude-code)
+* **Skills**: Model-invoked capabilities that Claude uses autonomously (can also be invoked with `/skill-name`)
+* **Agents**: Specialized subagents for specific tasks
+* **Hooks**: Event handlers that respond to tool use and other events
+* **MCP servers**: External tool integrations via Model Context Protocol
 
 <Note>
-  If you don't see the `/plugin` command, update Claude Code to the latest version. See [Troubleshooting](./code-troubleshooting.md) for upgrade instructions.
+  The `commands/` directory is a legacy format. Use `skills/` for new plugins. Claude Code continues to support both formats for backward compatibility.
 </Note>
 
-### Create your first plugin
+For complete information on plugin structure and how to create plugins, see [Plugins](./code-plugins.md).
 
-<Steps>
-  <Step title="Create the plugin directory">
-    Every plugin lives in its own directory containing your skills, agents, or hooks, optionally alongside a `.claude-plugin/plugin.json` manifest. The location doesn't matter for this quickstart because you'll point Claude Code at the directory with `--plugin-dir` in the test step. Create it anywhere convenient, such as a scratch folder or a projects directory:
+## Loading plugins
 
-    ```bash theme={null}
-    mkdir my-first-plugin
-    ```
+Load plugins by providing their local file system paths in your options configuration. The `type` field must be `"local"`, the only value the SDK accepts. To use a plugin distributed through a [marketplace](./code-plugin-marketplaces.md) or remote repository, download it first and provide the local directory path. The SDK supports loading multiple plugins from different locations.
 
-    The remaining steps run from the parent directory and reference paths like `my-first-plugin/...` relative to it.
-  </Step>
+<CodeGroup>
+  ```typescript TypeScript theme={null}
+  import { query } from "@anthropic-ai/claude-agent-sdk";
 
-  <Step title="Create the plugin manifest">
-    The manifest file at `.claude-plugin/plugin.json` defines your plugin's identity: its name, description, and version. Claude Code uses this metadata to display your plugin in the plugin manager.
+  for await (const message of query({
+    prompt: "Hello",
+    options: {
+      plugins: [
+        { type: "local", path: "./my-plugin" },
+        { type: "local", path: "/absolute/path/to/another-plugin" }
+      ]
+    }
+  })) {
+    // Plugin commands, agents, and other features are now available
+  }
+  ```
 
-    Create the `.claude-plugin` directory inside your plugin folder:
+  ```python Python theme={null}
+  import asyncio
+  from claude_agent_sdk import query, ClaudeAgentOptions
 
-    ```bash theme={null}
-    mkdir my-first-plugin/.claude-plugin
-    ```
 
-    Then create `my-first-plugin/.claude-plugin/plugin.json` with this content:
+  async def main():
+      async for message in query(
+          prompt="Hello",
+          options=ClaudeAgentOptions(
+              plugins=[
+                  {"type": "local", "path": "./my-plugin"},
+                  {"type": "local", "path": "/absolute/path/to/another-plugin"},
+              ]
+          ),
+      ):
+          # Plugin commands, agents, and other features are now available
+          pass
 
-    ```json my-first-plugin/.claude-plugin/plugin.json theme={null}
-    {
-      "name": "my-first-plugin",
-      "description": "A greeting plugin to learn the basics",
-      "version": "1.0.0",
-      "author": {
-        "name": "Your Name"
+
+  asyncio.run(main())
+  ```
+</CodeGroup>
+
+### Path specifications
+
+Plugin paths can be:
+
+* **Relative paths**: Resolved relative to your current working directory (for example, `"./plugins/my-plugin"`)
+* **Absolute paths**: Full file system paths (for example, `"/home/user/plugins/my-plugin"`)
+
+<Note>
+  The path should point to the plugin's root directory: the parent of `skills/`, `agents/`, `hooks/`, `commands/` (legacy), or `.claude-plugin/`, not a subdirectory.
+</Note>
+
+## Verifying plugin installation
+
+When plugins load successfully, they appear in the system initialization message. You can verify that your plugins are available:
+
+<CodeGroup>
+  ```typescript TypeScript theme={null}
+  import { query } from "@anthropic-ai/claude-agent-sdk";
+
+  for await (const message of query({
+    prompt: "Hello",
+    options: {
+      plugins: [{ type: "local", path: "./my-plugin" }]
+    }
+  })) {
+    if (message.type === "system" && message.subtype === "init") {
+      // Check loaded plugins
+      console.log("Plugins:", message.plugins);
+      // Example: [{ name: "my-plugin", path: "./my-plugin" }]
+
+      // Plugin skills appear with the plugin name as a prefix
+      console.log("Skills:", message.skills);
+      // Example: ["my-plugin:greet"]
+
+      // Plugin commands use the same prefix, and skills appear here too
+      console.log("Commands:", message.slash_commands);
+      // Example: ["compact", "context", "my-plugin:custom-command", "my-plugin:greet"]
+    }
+  }
+  ```
+
+  ```python Python theme={null}
+  import asyncio
+  from claude_agent_sdk import query, ClaudeAgentOptions, SystemMessage
+
+
+  async def main():
+      async for message in query(
+          prompt="Hello",
+          options=ClaudeAgentOptions(
+              plugins=[{"type": "local", "path": "./my-plugin"}]
+          ),
+      ):
+          if isinstance(message, SystemMessage) and message.subtype == "init":
+              # Check loaded plugins
+              print("Plugins:", message.data.get("plugins"))
+              # Example: [{"name": "my-plugin", "path": "./my-plugin"}]
+
+              # Plugin skills appear with the plugin name as a prefix
+              print("Skills:", message.data.get("skills"))
+              # Example: ["my-plugin:greet"]
+
+              # Plugin commands use the same prefix, and skills appear here too
+              print("Commands:", message.data.get("slash_commands"))
+              # Example: ["compact", "context", "my-plugin:custom-command", "my-plugin:greet"]
+
+
+  asyncio.run(main())
+  ```
+</CodeGroup>
+
+## Using plugin skills
+
+Skills from plugins are automatically namespaced with the plugin name to avoid conflicts. To invoke one directly, send `/plugin-name:skill-name` as the prompt.
+
+<CodeGroup>
+  ```typescript TypeScript theme={null}
+  import { query } from "@anthropic-ai/claude-agent-sdk";
+
+  // Load a plugin with a custom /greet skill
+  for await (const message of query({
+    prompt: "/my-plugin:greet", // Use plugin skill with namespace
+    options: {
+      plugins: [{ type: "local", path: "./my-plugin" }]
+    }
+  })) {
+    // Claude executes the custom greeting skill from the plugin
+    if (message.type === "assistant") {
+      console.log(message.message.content);
+    }
+  }
+  ```
+
+  ```python Python theme={null}
+  import asyncio
+  from claude_agent_sdk import query, ClaudeAgentOptions, AssistantMessage, TextBlock
+
+
+  async def main():
+      # Load a plugin with a custom /greet skill
+      async for message in query(
+          prompt="/demo-plugin:greet",  # Use plugin skill with namespace
+          options=ClaudeAgentOptions(
+              plugins=[{"type": "local", "path": "./plugins/demo-plugin"}]
+          ),
+      ):
+          # Claude executes the custom greeting skill from the plugin
+          if isinstance(message, AssistantMessage):
+              for block in message.content:
+                  if isinstance(block, TextBlock):
+                      print(f"Claude: {block.text}")
+
+
+  asyncio.run(main())
+  ```
+</CodeGroup>
+
+<Note>
+  If you installed a plugin via the CLI (for example, `/plugin install my-plugin@marketplace`), you can still use it in the SDK by providing its installation path. Check `~/.claude/plugins/` for CLI-installed plugins.
+</Note>
+
+## Complete example
+
+Here's a full example demonstrating plugin loading and usage:
+
+<CodeGroup>
+  ```typescript TypeScript theme={null}
+  import { query } from "@anthropic-ai/claude-agent-sdk";
+  import * as path from "path";
+
+  async function runWithPlugin() {
+    const pluginPath = path.join(__dirname, "plugins", "my-plugin");
+
+    console.log("Loading plugin from:", pluginPath);
+
+    for await (const message of query({
+      prompt: "What custom commands do you have available?",
+      options: {
+        plugins: [{ type: "local", path: pluginPath }],
+        maxTurns: 3
+      }
+    })) {
+      if (message.type === "system" && message.subtype === "init") {
+        console.log("Loaded plugins:", message.plugins);
+        console.log("Available skills:", message.skills);
+        console.log("Available commands:", message.slash_commands);
+      }
+
+      if (message.type === "assistant") {
+        console.log("Assistant:", message.message.content);
       }
     }
-    ```
+  }
 
-    | Field         | Purpose                                                                                                                                                                                                                                                        |
-    | :------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-    | `name`        | Unique identifier and skill namespace. Skills are prefixed with this (e.g., `/my-first-plugin:hello`).                                                                                                                                                         |
-    | `description` | Shown in the plugin manager when browsing or installing plugins.                                                                                                                                                                                               |
-    | `version`     | Optional. If set, users only receive updates when you bump this field. If omitted and your plugin is distributed via git, the commit SHA is used and every commit counts as a new version. See [version management](./code-plugins-reference.md#version-management). |
-    | `author`      | Optional. Helpful for attribution.                                                                                                                                                                                                                             |
+  runWithPlugin().catch(console.error);
+  ```
 
-    For additional fields like `homepage`, `repository`, and `license`, see the [full manifest schema](./code-plugins-reference.md#plugin-manifest-schema).
-  </Step>
+  ```python Python theme={null}
+  #!/usr/bin/env python3
+  """Example demonstrating how to use plugins with the Agent SDK."""
 
-  <Step title="Add a skill">
-    Skills live in the `skills/` directory. Each skill is a folder containing a `SKILL.md` file. The folder name becomes the skill name, prefixed with the plugin's namespace (`hello/` in a plugin named `my-first-plugin` creates `/my-first-plugin:hello`).
+  from pathlib import Path
+  import anyio
+  from claude_agent_sdk import (
+      AssistantMessage,
+      ClaudeAgentOptions,
+      SystemMessage,
+      TextBlock,
+      query,
+  )
 
-    Create a skill directory in your plugin folder:
 
-    ```bash theme={null}
-    mkdir -p my-first-plugin/skills/hello
-    ```
+  async def run_with_plugin():
+      """Example using a custom plugin."""
+      plugin_path = Path(__file__).parent / "plugins" / "demo-plugin"
 
-    Then create `my-first-plugin/skills/hello/SKILL.md` with this content:
+      print(f"Loading plugin from: {plugin_path}")
 
-    ```markdown my-first-plugin/skills/hello/SKILL.md theme={null}
-    ---
-    description: Greet the user with a friendly message
-    disable-model-invocation: true
-    ---
+      options = ClaudeAgentOptions(
+          plugins=[{"type": "local", "path": str(plugin_path)}],
+          max_turns=3,
+      )
 
-    Greet the user warmly and ask how you can help them today.
-    ```
-  </Step>
+      async for message in query(
+          prompt="What custom commands do you have available?", options=options
+      ):
+          if isinstance(message, SystemMessage) and message.subtype == "init":
+              print(f"Loaded plugins: {message.data.get('plugins')}")
+              print(f"Available skills: {message.data.get('skills')}")
+              print(f"Available commands: {message.data.get('slash_commands')}")
 
-  <Step title="Test your plugin">
-    Run Claude Code with the `--plugin-dir` flag to load your plugin:
+          if isinstance(message, AssistantMessage):
+              for block in message.content:
+                  if isinstance(block, TextBlock):
+                      print(f"Assistant: {block.text}")
 
-    ```bash theme={null}
-    claude --plugin-dir ./my-first-plugin
-    ```
 
-    Once Claude Code starts, try your new skill:
+  if __name__ == "__main__":
+      anyio.run(run_with_plugin)
+  ```
+</CodeGroup>
 
-    ```shell theme={null}
-    /my-first-plugin:hello
-    ```
+## Plugin structure reference
 
-    You'll see Claude respond with a greeting. Run `/help` to see your skill listed under the plugin namespace.
-
-    <Note>
-      **Why namespacing?** Plugin skills are always namespaced (like `/my-first-plugin:hello`) to prevent conflicts when multiple plugins have skills with the same name.
-
-      To change the namespace prefix, update the `name` field in `plugin.json`.
-    </Note>
-  </Step>
-
-  <Step title="Add skill arguments">
-    Make your skill dynamic by accepting user input. The `$ARGUMENTS` placeholder captures any text the user provides after the skill name.
-
-    Update your `SKILL.md` file:
-
-    ```markdown my-first-plugin/skills/hello/SKILL.md theme={null}
-    ---
-    description: Greet the user with a personalized message
-    ---
-
-    # Hello Skill
-
-    Greet the user named "$ARGUMENTS" warmly and ask how you can help them today. Make the greeting personal and encouraging.
-    ```
-
-    Run `/reload-plugins` to pick up the changes, then try the skill with your name:
-
-    ```shell theme={null}
-    /my-first-plugin:hello Alex
-    ```
-
-    Claude will greet you by name. For more on passing arguments to skills, see [Skills](./code-skills.md#pass-arguments-to-skills).
-  </Step>
-</Steps>
-
-You've successfully created and tested a plugin with these key components:
-
-* **Plugin manifest** (`.claude-plugin/plugin.json`): describes your plugin's metadata
-* **Skills directory** (`skills/`): contains your custom skills
-* **Skill arguments** (`$ARGUMENTS`): captures user input for dynamic behavior
-
-<Tip>
-  The `--plugin-dir` flag is useful for development and testing. When you're ready to share your plugin with others, see [Create and distribute a plugin marketplace](./code-plugin-marketplaces.md).
-</Tip>
-
-## Develop a plugin in your skills directory
-
-Instead of passing `--plugin-dir` on every launch, you can keep a plugin in your skills directory and have Claude Code load it automatically. `claude plugin init` scaffolds one:
-
-```bash theme={null}
-claude plugin init my-tool
-```
-
-This creates `~/.claude/skills/my-tool/` with a `.claude-plugin/plugin.json` manifest and a starter `SKILL.md`. On the next session it loads as `my-tool@skills-dir` with no marketplace or install step.
-
-For the auto-load rules, personal vs. project scope, the workspace-trust requirement, and how to update or remove one, see [Skills-directory plugins](./code-plugins-reference.md#skills-directory-plugins).
-
-## Plugin structure overview
-
-You've created a plugin with a skill, but plugins can include much more: custom agents, hooks, MCP servers, LSP servers, and background monitors.
-
-<Warning>
-  **Common mistake**: Don't put `commands/`, `agents/`, `skills/`, or `hooks/` inside the `.claude-plugin/` directory. Only `plugin.json` goes inside `.claude-plugin/`. All other directories must be at the plugin root level.
-
-  The plugin root is the individual plugin's own directory: the one containing `.claude-plugin/plugin.json`. It is never `~/.claude/`. For example, Claude Code doesn't read a `.mcp.json` placed at `~/.claude/.mcp.json`.
-</Warning>
-
-| Directory         | Location    | Purpose                                                                        |
-| :---------------- | :---------- | :----------------------------------------------------------------------------- |
-| `.claude-plugin/` | Plugin root | Contains `plugin.json` manifest (optional if components use default locations) |
-| `skills/`         | Plugin root | Skills as `<name>/SKILL.md` directories                                        |
-| `commands/`       | Plugin root | Skills as flat Markdown files. Use `skills/` for new plugins                   |
-| `agents/`         | Plugin root | Custom agent definitions                                                       |
-| `hooks/`          | Plugin root | Event handlers in `hooks.json`                                                 |
-| `.mcp.json`       | Plugin root | MCP server configurations                                                      |
-| `.lsp.json`       | Plugin root | LSP server configurations for code intelligence                                |
-| `monitors/`       | Plugin root | Background monitor configurations in `monitors.json`                           |
-| `bin/`            | Plugin root | Executables added to the Bash tool's `PATH` while the plugin is enabled        |
-| `settings.json`   | Plugin root | Default [settings](./code-settings.md) applied when the plugin is enabled            |
-
-A plugin that ships exactly one skill can place `SKILL.md` directly at the plugin root instead of creating a `skills/` directory. Claude Code loads it as a single skill and uses the frontmatter `name` field for the invocation name. Use the `skills/` layout for plugins that may grow to more than one skill.
-
-<Note>
-  **Next steps**: Ready to add more features? Jump to [Develop more complex plugins](#develop-more-complex-plugins) to add agents, hooks, MCP servers, and LSP servers. For complete technical specifications of all plugin components, see [Plugins reference](./code-plugins-reference.md).
-</Note>
-
-## Develop more complex plugins
-
-Once you're comfortable with basic plugins, you can create more sophisticated extensions.
-
-### Add Skills to your plugin
-
-Plugins can include [Agent Skills](./code-skills.md) to extend Claude's capabilities. Skills are model-invoked: Claude automatically uses them based on the task context.
-
-Add a `skills/` directory at your plugin root with Skill folders containing `SKILL.md` files:
+A plugin directory typically contains a `.claude-plugin/plugin.json` manifest file. The manifest is optional. When omitted, Claude Code auto-discovers components from the directory layout. The directory can include:
 
 ```text theme={null}
 my-plugin/
 ├── .claude-plugin/
-│   └── plugin.json
-└── skills/
-    └── code-review/
-        └── SKILL.md
+│   └── plugin.json          # Plugin manifest (optional, components auto-discovered without it)
+├── skills/                   # Agent Skills (invoked autonomously or via /skill-name)
+│   └── my-skill/
+│       └── SKILL.md
+├── commands/                 # Legacy: use skills/ instead
+│   └── custom-cmd.md
+├── agents/                   # Custom agents
+│   └── specialist.md
+├── hooks/                    # Event handlers
+│   └── hooks.json
+└── .mcp.json                # MCP server definitions
 ```
 
-Each `SKILL.md` contains YAML frontmatter and instructions. Include a `description` so Claude knows when to use the skill:
+For detailed information on creating plugins, see:
 
-```yaml theme={null}
----
-description: Reviews code for best practices and potential issues. Use when reviewing code, checking PRs, or analyzing code quality.
----
+* [Plugins](./code-plugins.md) - Complete plugin development guide
+* [Plugins reference](./code-plugins-reference.md) - Technical specifications and schemas
 
-When reviewing code, check for:
-1. Code organization and structure
-2. Error handling
-3. Security concerns
-4. Test coverage
+## Common use cases
+
+### Development and testing
+
+Load plugins during development without installing them globally:
+
+```typescript theme={null}
+plugins: [{ type: "local", path: "./dev-plugins/my-plugin" }];
 ```
 
-After installing the plugin, run `/reload-plugins` to load the Skills. For complete Skill authoring guidance including progressive disclosure and tool restrictions, see [Agent Skills](./code-skills.md).
+### Project-specific extensions
 
-### Add LSP servers to your plugin
+Include plugins in your project repository for team-wide consistency:
 
-<Tip>
-  For common languages like TypeScript, Python, and Rust, install the pre-built LSP plugins from the official marketplace. Create custom LSP plugins only when you need support for languages not already covered.
-</Tip>
-
-LSP (Language Server Protocol) plugins give Claude real-time code intelligence. If you need to support a language that doesn't have an official LSP plugin, you can create your own by adding an `.lsp.json` file to your plugin:
-
-```json .lsp.json theme={null}
-{
-  "go": {
-    "command": "gopls",
-    "args": ["serve"],
-    "extensionToLanguage": {
-      ".go": "go"
-    }
-  }
-}
+```typescript theme={null}
+plugins: [{ type: "local", path: "./project-plugins/team-workflows" }];
 ```
 
-Users installing your plugin must have the language server binary installed on their machine.
+### Multiple plugin sources
 
-For complete LSP configuration options, see [LSP servers](./code-plugins-reference.md#lsp-servers).
+Combine plugins from different locations:
 
-### Add background monitors to your plugin
-
-Background monitors let your plugin watch logs, files, or external status in the background and notify Claude as events arrive. Claude Code starts each monitor automatically when the plugin is active, so you don't need to instruct Claude to start the watch.
-
-Add a `monitors/monitors.json` file at the plugin root with an array of monitor entries:
-
-```json monitors/monitors.json theme={null}
-[
-  {
-    "name": "error-log",
-    "command": "tail -F ./logs/error.log",
-    "description": "Application error log"
-  }
-]
+```typescript theme={null}
+plugins: [
+  { type: "local", path: "./local-plugin" },
+  { type: "local", path: "~/.claude/custom-plugins/shared-plugin" }
+];
 ```
 
-Each stdout line from `command` is delivered to Claude as a notification during the session. For the full schema, including the `when` trigger and variable substitution, see [Monitors](./code-plugins-reference.md#monitors).
+## Troubleshooting
 
-### Ship default settings with your plugin
+### Plugin not loading
 
-Plugins can include a `settings.json` file at the plugin root to apply default configuration when the plugin is enabled. Currently, only the `agent` and `subagentStatusLine` keys are supported.
+If your plugin doesn't appear in the init message:
 
-Setting `agent` activates one of the plugin's [custom agents](./code-sub-agents.md) as the main thread, applying its system prompt, tool restrictions, and model. This lets a plugin change how Claude Code behaves by default when enabled.
+1. **Check the path**: ensure the path points to the plugin root directory, the parent of `skills/`, `agents/`, `hooks/`, `commands/` (legacy), or `.claude-plugin/`
+2. **Validate plugin.json**: if your plugin includes a manifest, ensure it has valid JSON syntax
+3. **Check file permissions**: ensure the plugin directory is readable
 
-```json settings.json theme={null}
-{
-  "agent": "security-reviewer"
-}
-```
+### Skills not appearing
 
-This example activates the `security-reviewer` agent defined in the plugin's `agents/` directory. Settings from `settings.json` take priority over `settings` declared in `plugin.json`. Unknown keys are silently ignored.
+If plugin skills don't work:
 
-### Organize complex plugins
+1. **Use the namespace**: invoke plugin skills as `/plugin-name:skill-name`
+2. **Check init message**: verify the skill appears in the `skills` list with the correct namespace
+3. **Validate skill files**: ensure each skill has a `SKILL.md` file in its own subdirectory under `skills/`, for example `skills/my-skill/SKILL.md`
 
-For plugins with many components, organize your directory structure by functionality. For complete directory layouts and organization patterns, see [Plugin directory structure](./code-plugins-reference.md#plugin-directory-structure).
+### Path resolution issues
 
-### Test your plugins locally
+If relative paths don't work:
 
-Use the `--plugin-dir` flag to test plugins during development. This loads your plugin directly without requiring installation.
+1. **Check working directory**: Relative paths are resolved from your current working directory
+2. **Use absolute paths**: For reliability, consider using absolute paths
+3. **Normalize paths**: Use path utilities to construct paths correctly
 
-```bash theme={null}
-claude --plugin-dir ./my-plugin
-```
+## See also
 
-The flag also accepts a `.zip` archive of the plugin directory, which requires Claude Code v2.1.128 or later.
-
-```bash theme={null}
-claude --plugin-dir ./my-plugin.zip
-```
-
-When a `--plugin-dir` plugin has the same name as an installed marketplace plugin, the local copy takes precedence for that session. This lets you test changes to a plugin you already have installed without uninstalling it first. The exception is plugins that managed settings force-enable or force-disable: `--plugin-dir` cannot override those.
-
-As you make changes to your plugin, run `/reload-plugins` to pick up the updates without restarting. This reloads plugins, skills, agents, hooks, plugin MCP servers, and plugin LSP servers. Test your plugin components:
-
-* Try your skills with `/plugin-name:skill-name`
-* Check that agents appear in `/context` under Custom Agents, or @-mention one by its scoped name
-* Verify hooks work as expected
-
-<Tip>
-  You can load multiple plugins at once by specifying the flag multiple times:
-
-  ```bash theme={null}
-  claude --plugin-dir ./plugin-one --plugin-dir ./plugin-two
-  ```
-</Tip>
-
-To test a plugin that is already packaged as a `.zip` archive and hosted at a URL, such as a CI build artifact, use `--plugin-url` instead. Claude Code fetches the archive at startup and loads it for that session only. If the fetch fails or the archive is invalid, Claude Code reports a plugin load error and starts without it. The same [trust considerations](./code-discover-plugins.md#security) apply as for any plugin source: only point this flag at archives you control or trust.
-
-To load multiple plugins, repeat the flag for each URL:
-
-```bash theme={null}
-claude --plugin-url https://example.com/my-plugin.zip --plugin-url https://example.com/other.zip
-```
-
-Or pass space-separated URLs as one quoted argument:
-
-```bash theme={null}
-claude --plugin-url "https://example.com/my-plugin.zip https://example.com/other.zip"
-```
-
-### Debug plugin issues
-
-If your plugin isn't working as expected:
-
-1. **Check the structure**: Ensure your directories are at the plugin root, not inside `.claude-plugin/`
-2. **Test components individually**: Check each skill, agent, and hook separately
-3. **Use validation and debugging tools**: See [Debugging and development tools](./code-plugins-reference.md#debugging-and-development-tools) for CLI commands and troubleshooting techniques
-
-### Share your plugins
-
-When your plugin is ready to share:
-
-1. **Add documentation**: Include a `README.md` with installation and usage instructions
-2. **Choose a versioning strategy**: Decide whether to set an explicit `version` or rely on the git commit SHA. See [version management](./code-plugins-reference.md#version-management)
-3. **Create or use a marketplace**: Distribute through [plugin marketplaces](./code-plugin-marketplaces.md) for installation
-4. **Test with others**: Have team members test the plugin before wider distribution
-
-Once your plugin is in a marketplace, others can install it using the instructions in [Discover and install plugins](./code-discover-plugins.md). To keep a plugin internal to your team, host the marketplace in a [private repository](./code-plugin-marketplaces.md#private-repositories).
-
-### Submit your plugin to the community marketplace
-
-Anthropic maintains two public marketplaces for Claude Code plugins:
-
-* **`claude-plugins-official`**: a curated set of plugins maintained by Anthropic. Registered automatically the first time you start Claude Code interactively. A non-interactive script that runs before that first launch must add it explicitly with `claude plugin marketplace add anthropics/claude-plugins-official`.
-* **`claude-community`**: the public community marketplace where third-party submissions land after review. Users add it with `/plugin marketplace add anthropics/claude-plugins-community` and install from it as `@claude-community`.
-
-To submit your plugin for community-marketplace review, use one of the in-app forms:
-
-* **claude.ai**: [claude.ai/admin-settings/directory/submissions/plugins/new](https://claude.ai/admin-settings/directory/submissions/plugins/new)
-* **Console**: [platform.claude.com/plugins/submit](https://platform.claude.com/plugins/submit)
-
-The claude.ai form requires a Team or Enterprise organization and directory management access; organization Owners have this access by default. Individual authors who aren't part of a Team or Enterprise organization can use the Console form instead.
-
-Run `claude plugin validate` locally before you submit. The review pipeline runs the same check on every submission, along with automated safety screening.
-
-Approved plugins are pinned to a specific commit SHA in the [`anthropics/claude-plugins-community`](https://github.com/anthropics/claude-plugins-community) catalog, and CI bumps the pin automatically as you push new commits to your repository. The public catalog syncs nightly from the review pipeline, so there can be a delay between approval and your plugin appearing in `marketplace.json`. To check whether your plugin is installable yet, search for its name in the [community catalog](https://github.com/anthropics/claude-plugins-community/blob/main/.claude-plugin/marketplace.json).
-
-The official marketplace, `claude-plugins-official`, is curated separately. Anthropic decides which plugins to include at its discretion. There is no application process, and the submission form does not add plugins to the official marketplace.
-
-If Anthropic lists your plugin in the official marketplace, your CLI can prompt Claude Code users to install it. See [Recommend your plugin from your CLI](./code-plugin-hints.md).
-
-<Note>
-  For complete technical specifications, debugging techniques, and distribution strategies, see [Plugins reference](./code-plugins-reference.md).
-</Note>
-
-## Convert existing configurations to plugins
-
-If you already have skills or hooks in your `.claude/` directory, you can convert them into a plugin for easier sharing and distribution.
-
-### Migration steps
-
-<Steps>
-  <Step title="Create the plugin structure">
-    Create a new plugin directory in your project root, alongside the existing `.claude/` folder, so the relative `cp` paths in the next step resolve:
-
-    ```bash theme={null}
-    mkdir -p my-plugin/.claude-plugin
-    ```
-
-    Create the manifest file at `my-plugin/.claude-plugin/plugin.json`:
-
-    ```json my-plugin/.claude-plugin/plugin.json theme={null}
-    {
-      "name": "my-plugin",
-      "description": "Migrated from standalone configuration",
-      "version": "1.0.0"
-    }
-    ```
-  </Step>
-
-  <Step title="Copy your existing files">
-    Copy your existing configurations to the plugin directory:
-
-    ```bash theme={null}
-    # Copy commands
-    cp -r .claude/commands my-plugin/
-
-    # Copy agents (if any)
-    cp -r .claude/agents my-plugin/
-
-    # Copy skills (if any)
-    cp -r .claude/skills my-plugin/
-    ```
-  </Step>
-
-  <Step title="Migrate hooks">
-    If you have hooks in your settings, create a hooks directory:
-
-    ```bash theme={null}
-    mkdir my-plugin/hooks
-    ```
-
-    Create `my-plugin/hooks/hooks.json` with your hooks configuration. Copy the `hooks` object from your `.claude/settings.json` or `settings.local.json`, since the format is the same. The command receives hook input as JSON on stdin, so use `jq` to extract the file path:
-
-    ```json my-plugin/hooks/hooks.json theme={null}
-    {
-      "hooks": {
-        "PostToolUse": [
-          {
-            "matcher": "Write|Edit",
-            "hooks": [{ "type": "command", "command": "jq -r '.tool_input.file_path' | xargs npm run lint:fix" }]
-          }
-        ]
-      }
-    }
-    ```
-  </Step>
-
-  <Step title="Test your migrated plugin">
-    Load your plugin to verify everything works:
-
-    ```bash theme={null}
-    claude --plugin-dir ./my-plugin
-    ```
-
-    Test each component: run your commands, check that agents appear in `/context`, and verify hooks trigger correctly.
-  </Step>
-</Steps>
-
-### What changes when migrating
-
-| Standalone (`.claude/`)       | Plugin                           |
-| :---------------------------- | :------------------------------- |
-| Only available in one project | Can be shared via marketplaces   |
-| Files in `.claude/commands/`  | Files in `plugin-name/commands/` |
-| Hooks in `settings.json`      | Hooks in `hooks/hooks.json`      |
-| Must manually copy to share   | Install with `/plugin install`   |
-
-<Note>
-  After migrating, remove the original files from `.claude/` to avoid duplicates. Project and user `.claude/agents/` definitions override same-named plugin agents, so the plugin version only takes effect once the originals are removed.
-</Note>
-
-## Next steps
-
-Now that you understand Claude Code's plugin system, here are suggested paths for different goals:
-
-### For plugin users
-
-* [Discover and install plugins](./code-discover-plugins.md): browse marketplaces and install plugins
-* [Configure team marketplaces](./code-discover-plugins.md#configure-team-marketplaces): set up repository-level plugins for your team
-
-### For plugin developers
-
-* [Create and distribute a marketplace](./code-plugin-marketplaces.md): package and share your plugins
-* [Plugins reference](./code-plugins-reference.md): complete technical specifications
-* Dive deeper into specific plugin components:
-  * [Skills](./code-skills.md): skill development details
-  * [Subagents](./code-sub-agents.md): agent configuration and capabilities
-  * [Hooks](./code-hooks.md): event handling and automation
-  * [MCP](./code-mcp.md): external tool integration
+* [Plugins](./code-plugins.md) - Complete plugin development guide
+* [Plugins reference](./code-plugins-reference.md) - Technical specifications
+* [Commands](./code-agent-sdk/slash-commands.md) - Using commands in the SDK
+* [Subagents](./code-agent-sdk/subagents.md) - Working with specialized agents
+* [Skills](./code-agent-sdk/skills.md) - Using Agent Skills
