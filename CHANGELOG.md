@@ -1,5 +1,20 @@
 # Changelog
 
+## 🤖 v1.5.43 - 13/07/2026
+
+File Changes:
+
+- Modified: `docs/api/api-README.md`
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-admin-setup.md`
+- Modified: `docs/code/code-desktop-quickstart.md`
+- Modified: `docs/code/code-desktop.md`
+- Modified: `docs/code/code-mcp.md`
+- Modified: `docs/code/code-skills.md`
+- Added: `docs/api/api-cli-beta-sessions-threads-archive.md`
+- Added: `docs/code/code-desktop-wsl.md`
+
+
 ## 🤖 v1.5.42 - 13/07/2026
 
 File Changes:
