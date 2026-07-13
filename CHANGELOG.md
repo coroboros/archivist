@@ -1,5 +1,18 @@
 # Changelog
 
+## 🤖 v1.5.42 - 13/07/2026
+
+File Changes:
+
+- Modified: `docs/api/api-README.md`
+- Deleted: `docs/api/api-cli-beta-sessions-threads-archive.md`
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-hooks.md`
+- Modified: `docs/code/code-permissions.md`
+- Modified: `docs/code/code-plugins.md`
+- Modified: `docs/code/code-sessions.md`
+
+
 ## 🤖 v1.5.41 - 12/07/2026
 
 File Changes:
