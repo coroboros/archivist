@@ -11,7 +11,7 @@ To mitigate misuse and manage capacity on the API, limits are in place on how mu
 ---
 
 <Note>
-  **[Claude Platform on AWS](../build-with-claude/build-with-claude-claude-platform-on-aws.md):** The rate limits on this page apply to Claude Platform on AWS. Billing and spend limits differ: spend limits are not available, and billing is through AWS Marketplace (not Anthropic credit purchases). Organizations on Claude Platform on AWS are placed on the Start tier and do not move between usage tiers automatically. To request higher limits, contact your Anthropic account representative. Per-workspace rate limit configuration and [fast mode](../build-with-claude/build-with-claude-fast-mode.md) are not available on Claude Platform on AWS.
+  **[Claude Platform on AWS](../build-with-claude/build-with-claude-claude-platform-on-aws.md):** The rate limits on this page apply to Claude Platform on AWS, but billing and limit management differ. Billing is through AWS Marketplace (not Anthropic credit purchases). Organizations on Claude Platform on AWS are placed on the Start tier and do not move between usage tiers automatically. To request higher limits, contact your Anthropic account representative or [support](https://support.claude.com); the **Request rate limit increase** flow is not available. Spend limits are set in [Settings > Billing](/settings/billing) rather than **Settings > Limits**. Per-workspace rate limit configuration and [fast mode](../build-with-claude/build-with-claude-fast-mode.md) are not available on Claude Platform on AWS. For details, see [Rate limits and quotas on Claude Platform on AWS](../build-with-claude/build-with-claude-claude-platform-on-aws.md#rate-limits-and-quotas).
 </Note>
 
 There are two types of limits:
@@ -32,6 +32,10 @@ The API enforces service-configured limits at the organization level, but you ma
 * All limits described here represent maximum allowed usage, not guaranteed minimums. These limits are intended to reduce unintentional overspend and ensure fair distribution of resources among users.
 
 ## Spend limits
+
+<Note>
+  **[Claude Platform on AWS](../build-with-claude/build-with-claude-claude-platform-on-aws.md):** Spend limits work differently on Claude Platform on AWS. Set spend limits in [Settings > Billing](/settings/billing) instead of **Settings > Limits**. See [Spend limits on Claude Platform on AWS](../build-with-claude/build-with-claude-claude-platform-on-aws.md#spend-limits) for how spend caps and self-set spend limits apply to your organization.
+</Note>
 
 Each of the Start, Build, and Scale tiers carries a monthly spend cap, which is the maximum your organization can spend on the API each calendar month. Once you reach your tier's spend cap, API usage pauses until the next month unless you request a higher limit. You can view your organization's monthly spend cap on the [Limits](/settings/limits) page.
 
@@ -231,6 +235,10 @@ To request higher rate limits or a higher monthly spend cap, use **Request rate 
 
 <Note>
   Support can also raise limits. For urgent needs, contact [support](https://support.claude.com).
+</Note>
+
+<Note>
+  **[Claude Platform on AWS](../build-with-claude/build-with-claude-claude-platform-on-aws.md):** The **Request rate limit increase** flow is not available. Contact your Anthropic account representative or [support](https://support.claude.com), and include the models you need raised, your peak input and output tokens per minute for each model, and roughly what share of your input is cached or repeated context. See [Rate limits and quotas on Claude Platform on AWS](../build-with-claude/build-with-claude-claude-platform-on-aws.md#rate-limits-and-quotas).
 </Note>
 
 ## Setting lower limits for Workspaces

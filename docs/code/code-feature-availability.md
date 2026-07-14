@@ -53,7 +53,7 @@ These require signing in with a claude.ai account and are not reachable with an 
 * [Artifacts](./code-artifacts.md): Pro, Max, Team, and Enterprise plans
 * [Voice dictation](./code-voice-dictation.md)
 
-Desktop is the partial exception: Enterprise deployments can route Desktop to Google Cloud's Agent Platform or a gateway provider via [managed settings](https://support.claude.com/en/articles/12622667-enterprise-configuration), and [Claude Desktop on 3P](https://claude.com/docs/third-party/claude-desktop/overview) runs the Code tab on Amazon Bedrock, Google Cloud's Agent Platform, Microsoft Foundry, or a self-hosted LLM gateway. For per-plan availability of these features, see [Availability by subscription plan](#availability-by-subscription-plan).
+Desktop is the partial exception: Enterprise deployments can route Desktop to Google Cloud's Agent Platform or a gateway provider via [managed settings](https://claude.com/docs/third-party/claude-desktop/configuration), and [Claude Desktop on 3P](https://claude.com/docs/third-party/claude-desktop/overview) runs the Code tab on Amazon Bedrock, Google Cloud's Agent Platform, Microsoft Foundry, or a self-hosted LLM gateway. For per-plan availability of these features, see [Availability by subscription plan](#availability-by-subscription-plan).
 
 ### CLI capabilities that vary by provider
 
@@ -165,7 +165,7 @@ Organization-level controls and usage visibility.
   <tbody>
     <tr>
       <td>[Analytics dashboard and API](./code-analytics.md)</td>
-      <td>✓ (Team and Enterprise)</td>
+      <td>✓ (dashboard: Team and Enterprise; API: Enterprise)</td>
       <td>✓ <sup><a href="#fn5">5</a></sup></td>
       <td>✗</td>
       <td>✗</td>
@@ -196,7 +196,7 @@ Organization-level controls and usage visibility.
 </table>
 
 <span id="fn1" style={{display: 'block', position: 'relative', top: '-120px'}} /><sup>1</sup> On Google Cloud's Agent Platform, web search is available for Claude 4 models and later.<br />
-<span id="fn2" style={{display: 'block', position: 'relative', top: '-120px'}} /><sup>2</sup> Requires `CLAUDE_CODE_ENABLE_AUTO_MODE`. See [Auto mode configuration](./code-auto-mode-config.md).<br />
+<span id="fn2" style={{display: 'block', position: 'relative', top: '-120px'}} /><sup>2</sup> On these providers, auto mode supports only Claude Sonnet 5, Opus 4.7, and Opus 4.8. See [Auto mode configuration](./code-auto-mode-config.md). {/* min-version: 2.1.207 */}In v2.1.158 through v2.1.206, auto mode on these providers also required setting `CLAUDE_CODE_ENABLE_AUTO_MODE=1`; v2.1.207 removed the requirement.<br />
 <span id="fn3" style={{display: 'block', position: 'relative', top: '-120px'}} /><sup>3</sup> Explicit intervals such as `/loop every 2 hours` work on every provider. On Amazon Bedrock, Google Cloud's Agent Platform, and Microsoft Foundry, `/loop` cannot pick its own interval or supply the default maintenance prompt, so a prompt with no interval runs every 10 minutes, and `/loop` with no arguments shows the usage message. See [Scheduled tasks](./code-scheduled-tasks.md).<br />
 <span id="fn4" style={{display: 'block', position: 'relative', top: '-120px'}} /><sup>4</sup> Subject to your agreement with the cloud provider.<br />
 <span id="fn5" style={{display: 'block', position: 'relative', top: '-120px'}} /><sup>5</sup> Dashboard and API only. [Contribution metrics](./code-analytics.md#enable-contribution-metrics) requires a claude.ai Team or Enterprise organization.
@@ -216,7 +216,7 @@ Each tab lists what is unavailable or partially supported on that provider, with
     **Partial support:**
 
     * [Desktop](./code-desktop.md): only via [Claude Desktop on 3P](https://claude.com/docs/third-party/claude-desktop/overview)
-    * [Auto mode](./code-auto-mode-config.md): set `CLAUDE_CODE_ENABLE_AUTO_MODE`
+    * [Auto mode](./code-auto-mode-config.md): Sonnet 5, Opus 4.7, and Opus 4.8 only
     * [`/loop`](./code-scheduled-tasks.md): explicit intervals only
     * [Zero Data Retention](./code-zero-data-retention.md): subject to your AWS agreement
 
@@ -226,7 +226,7 @@ Each tab lists what is unavailable or partially supported on that provider, with
   <Tab title="Claude Platform on AWS">
     **Not available:** all [features that require a Claude subscription](#features-that-require-a-claude-subscription), plus [fast mode](./code-fast-mode.md), [Advisor](./code-advisor.md), [Channels](./code-channels.md), the [analytics dashboard](./code-analytics.md), and [server-managed settings](./code-server-managed-settings.md).
 
-    **Available** where Amazon Bedrock is not: [web search](./code-tools-reference.md#websearch-tool-behavior), [auto mode](./code-auto-mode-config.md) without an opt-in flag, and [`/loop` self-pacing](./code-scheduled-tasks.md).
+    **Available where Amazon Bedrock is not:** [web search](./code-tools-reference.md#websearch-tool-behavior) and [`/loop` self-pacing](./code-scheduled-tasks.md).
 
     **Alternatives:** for scheduling, use [`/loop`](./code-scheduled-tasks.md) instead of `/schedule`. For cloud sessions, use [GitHub Actions](./code-github-actions.md) or [GitLab CI/CD](./code-gitlab-ci-cd.md).
   </Tab>
@@ -236,9 +236,9 @@ Each tab lists what is unavailable or partially supported on that provider, with
 
     **Partial support:**
 
-    * [Desktop](./code-desktop.md): via [managed settings](https://support.claude.com/en/articles/12622667-enterprise-configuration) or [Claude Desktop on 3P](https://claude.com/docs/third-party/claude-desktop/overview)
+    * [Desktop](./code-desktop.md): via [managed settings](https://claude.com/docs/third-party/claude-desktop/configuration) or [Claude Desktop on 3P](https://claude.com/docs/third-party/claude-desktop/overview)
     * [Web search](./code-tools-reference.md#websearch-tool-behavior): Claude 4 models and later
-    * [Auto mode](./code-auto-mode-config.md): set `CLAUDE_CODE_ENABLE_AUTO_MODE`
+    * [Auto mode](./code-auto-mode-config.md): Sonnet 5, Opus 4.7, and Opus 4.8 only
     * [`/loop`](./code-scheduled-tasks.md): explicit intervals only
     * [Zero Data Retention](./code-zero-data-retention.md): subject to your Google Cloud agreement
 
@@ -251,7 +251,7 @@ Each tab lists what is unavailable or partially supported on that provider, with
     **Partial support:**
 
     * [Desktop](./code-desktop.md): only via [Claude Desktop on 3P](https://claude.com/docs/third-party/claude-desktop/overview)
-    * [Auto mode](./code-auto-mode-config.md): set `CLAUDE_CODE_ENABLE_AUTO_MODE`
+    * [Auto mode](./code-auto-mode-config.md): Sonnet 5, Opus 4.7, and Opus 4.8 only
     * [`/loop`](./code-scheduled-tasks.md): explicit intervals only
     * [Zero Data Retention](./code-zero-data-retention.md): subject to your Azure agreement
 
@@ -279,7 +279,8 @@ If you authenticate through Amazon Bedrock, Google Cloud's Agent Platform, Micro
 | Dispatch ([Desktop](./code-desktop.md#sessions-from-dispatch))                                | ✓   | ✓   | ✗             | ✗                                 |
 | [Code Review](./code-code-review.md)                                                          | ✗   | ✗   | ✓             | ✓                                 |
 | [Artifacts](./code-artifacts.md)                                                              | ✓   | ✓   | ✓             | Admin-enabled                     |
-| [Analytics dashboard, API, and contribution metrics](./code-analytics.md)                     | ✗   | ✗   | ✓             | ✓                                 |
+| [Analytics dashboard and contribution metrics](./code-analytics.md)                           | ✗   | ✗   | ✓             | ✓                                 |
+| [Enterprise Analytics API](./code-analytics.md#access-data-programmatically)                  | ✗   | ✗   | ✗             | ✓                                 |
 | [Server-managed settings](./code-server-managed-settings.md)                                  | ✗   | ✗   | ✓             | ✓                                 |
 | [SSO](https://support.claude.com/en/articles/9266767-what-is-the-team-plan)             | ✗   | ✗   | ✓             | ✓                                 |
 | SCIM                                                                                    | ✗   | ✗   | ✗             | ✓                                 |

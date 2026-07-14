@@ -967,7 +967,7 @@ When Skills create documents (Excel, PowerPoint, PDF, Word), they return `file_i
 </CodeGroup>
 
 <Note>
-  For complete details on the Files API, see the [Files API documentation](https://platform.claude.com/docs/en/api/files-content.md).
+  For complete details on the Files API, see the [Files API documentation](../api/api-beta-files-download.md).
 </Note>
 
 ### Multi-turn conversations

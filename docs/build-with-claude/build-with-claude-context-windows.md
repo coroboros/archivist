@@ -10,10 +10,6 @@ Understand how the context window works, how extended thinking and tool use coun
 
 ---
 
-<Note>
-  This feature is eligible for [Zero Data Retention (ZDR)](./build-with-claude-api-and-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
-</Note>
-
 As conversations grow, you'll eventually approach context window limits. For long-running conversations and agentic workflows, [server-side compaction](./build-with-claude-compaction.md) is the primary strategy for context management.
 
 ## How the context window works

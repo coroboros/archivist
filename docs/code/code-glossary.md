@@ -42,7 +42,7 @@ Learn more: [How Claude Code works](./code-how-claude-code-works.md#the-agentic-
 
 ### Artifact
 
-A live, interactive web page Claude Code publishes from your session to a private URL on claude.ai, so you can see output visually or share it inside your organization instead of reading terminal text. The page updates in place when the session republishes. Artifacts you create from Claude Code appear in the same gallery as artifacts created in claude.ai conversations, but their sharing stops at your organization and they cannot be made public.
+A live, interactive web page Claude Code publishes from your session to a private URL on claude.ai, so you can see output visually or share it instead of reading terminal text. The page updates in place when the session republishes. Artifacts you create from Claude Code appear in the same gallery as artifacts created in claude.ai conversations. Sharing depends on your plan: on Pro and Max, a public link that anyone can open; on Team and Enterprise, sharing within your organization, plus public links once an Owner enables them.
 
 Learn more: [Share session output as artifacts](./code-artifacts.md)
 
@@ -82,7 +82,7 @@ Learn more: [Channels](./code-channels.md)
 
 ### Checkpoint
 
-A restore point created at each prompt you send. Claude Code snapshots files before every edit so a checkpoint can revert them. Press `Esc` twice or run `/rewind` to restore code, conversation, or both to an earlier point, or to summarize part of the conversation from a selected message. Checkpoints are local to the session, separate from git, and don't track changes made through the Bash tool.
+A restore point created at each prompt you send. Claude Code snapshots files before every edit so a checkpoint can revert them. Press `Esc` twice or run `/rewind` to restore code, conversation, or both to an earlier point, or to summarize part of the conversation from a selected message. Checkpoints are saved with the conversation, so a resumed session can still `/rewind` to them. They're separate from git and don't track changes made through the Bash tool.
 
 Learn more: [Checkpointing](./code-checkpointing.md)
 
@@ -178,7 +178,7 @@ Learn more: [Scale with MCP Tool Search](./code-mcp.md#scale-with-mcp-tool-searc
 
 ### Non-interactive mode
 
-A mode that executes a single prompt and exits without a conversational session, invoked with `-p` or `--print`. Used for CI, scripts, and piping. The [Agent SDK](./code-agent-sdk/overview.md) is the Python and TypeScript equivalent. Formerly called headless mode.
+A mode that executes a single prompt and exits without an interactive prompt, invoked with `-p` or `--print`. Used for CI, scripts, and piping. The run is still saved as a resumable session unless you pass `--no-session-persistence`. The [Agent SDK](./code-agent-sdk/overview.md) is the Python and TypeScript equivalent. Formerly called headless mode.
 
 Learn more: [Run Claude Code programmatically](./code-headless.md)
 
@@ -196,7 +196,7 @@ Learn more: [Output styles](./code-output-styles.md)
 
 The baseline approval behavior for the session. Cycle with `Shift+Tab` in the CLI or use the mode selector in VS Code, Desktop, and claude.ai. Available modes are `default`, `acceptEdits`, `plan`, `auto`, `dontAsk`, and `bypassPermissions`.
 
-The `default` mode is labeled Manual in the CLI and in the VS Code and JetBrains extensions, and Claude Code accepts `manual` as an alias for the value.
+The `default` mode is labeled Manual in the CLI, in the VS Code and JetBrains extensions, and in the desktop app, and Claude Code accepts `manual` as an alias for the value.
 
 Learn more: [Choose a permission mode](./code-permission-modes.md)
 

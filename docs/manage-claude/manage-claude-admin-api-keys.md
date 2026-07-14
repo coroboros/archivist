@@ -10,7 +10,7 @@ Create an Admin API key for your Claude Console or Claude Enterprise organizatio
 
 ---
 
-Every API in the **Admin** section of this guide (the [Admin API](./manage-claude-admin-api.md), [Analytics APIs](./manage-claude-analytics-api.md), [Compliance API](./manage-claude-compliance-api.md), [Spend Limits API](./manage-claude-spend-limits-api.md), [Usage and Cost API](./manage-claude-usage-cost-api.md), and [Rate Limits API](./manage-claude-rate-limits-api.md)) is authenticated with an Admin API key. You do not need a separate key for each API.
+An Admin API key authenticates every API in the **Admin** section of this guide (the [Admin API](./manage-claude-admin-api.md), [Analytics APIs](./manage-claude-analytics-api.md), [Compliance API](./manage-claude-compliance-api.md), [Spend Limits API](./manage-claude-spend-limits-api.md), [Usage and Cost API](./manage-claude-usage-cost-api.md), and [Rate Limits API](./manage-claude-rate-limits-api.md)), with one exception: the Admin API's service-account, federation-issuer, and federation-rule endpoints accept only an OAuth bearer token with the `org:admin` scope; see [Obtain an OAuth bearer token](./manage-claude-admin-api.md#oauth-bearer-token). You do not need a separate key for each API.
 
 Where you create the key depends on which Claude product your organization uses.
 
@@ -35,7 +35,7 @@ A key created in one organization cannot be used to manage a different organizat
   </Step>
 
   <Step title="Create the key">
-    Click **Create key**, give it a name, choose an [expiration](./manage-claude-authentication.md#key-expiration), and click **Create**. Claude Console keys do not have selectable scopes; every key carries full Admin API access.
+    Click **Create key**, give it a name, choose an [expiration](./manage-claude-authentication.md#key-expiration), and click **Create**. Claude Console keys do not have selectable scopes; every key carries full access to all endpoints that accept Admin API keys (the service-account and federation endpoints noted at the top of this page do not accept Admin API keys).
   </Step>
 
   <Step title="Copy and store the secret">

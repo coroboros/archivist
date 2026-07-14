@@ -89,10 +89,6 @@ Enabling [fast mode](./code-fast-mode.md) adds a request header that is part of 
 
 The cost applies once per conversation. After the first fast mode turn, Claude Code keeps sending the header and varies only the request's speed setting, which is not part of the cache key. Turning fast mode off, the [automatic fallback to standard speed](./code-fast-mode.md#handle-rate-limits) after a rate limit, and turning it back on later all keep the cache. `/clear` and `/compact` reset this, since they rebuild the cache at those points anyway.
 
-<Note>
-  Keeping the header across toggles requires Claude Code v2.1.86 or later. On earlier versions, every fast mode toggle and rate-limit fallback invalidates the cache.
-</Note>
-
 ### Connecting or disconnecting an MCP server
 
 Tool definitions sit in the system prompt layer, so the cache invalidates when the set of tool definitions in the request changes between turns. Toggling the [advisor tool](./code-advisor.md) is an exception: its definition sits after the cache breakpoint, so enabling or disabling `/advisor` keeps the cached prefix intact. Whether an [MCP server](./code-mcp.md) change does this depends on whether its tools are deferred by [tool search](./code-mcp.md#scale-with-mcp-tool-search) or loaded into the prefix:

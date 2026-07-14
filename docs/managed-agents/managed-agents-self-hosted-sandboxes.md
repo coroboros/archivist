@@ -6,7 +6,7 @@ generated: true
 ---
 # Self-hosted sandboxes
 
-Run agent sessions in your own self-hosted sandbox environment.
+Run Claude Managed Agents sessions in self-hosted sandboxes, keeping tool execution, files, and network egress in your own infrastructure.
 
 ---
 
