@@ -16,6 +16,10 @@ This page is generated from the [CHANGELOG.md on GitHub](https://github.com/anth
 
 Run `claude --version` to check your installed version.
 
+<Update label="2.1.209" description="July 14, 2026">
+  * Fixed /model and other dialogs being blocked in `claude agents` background sessions (reverts an overly broad guard)
+</Update>
+
 <Update label="2.1.208" description="July 14, 2026">
   * Added screen reader mode: opt-in plain-text rendering for screen reader users. Run `claude --ax-screen-reader`, set CLAUDE\_AX\_SCREEN\_READER=1, or add "axScreenReader": true to settings.
   * Added `vimInsertModeRemaps` setting: map two-key insert-mode sequences like `jj` to Escape in vim mode
