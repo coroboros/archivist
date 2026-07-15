@@ -26,6 +26,10 @@ The [Admin API](../api/api-admin.md) allows you to programmatically manage your 
 </Check>
 
 <Note>
+  **Claude Enterprise:** Claude Enterprise (claude.ai) organizations use the Admin API too, with a scoped API key created in claude.ai. Of the endpoints on this page, only members and invites are available to them (in beta), alongside Claude-Enterprise-only endpoints: groups and custom-role reads (beta), and [spend limits](./manage-claude-spend-limits-api.md). See [User management](./manage-claude-user-management.md) for Claude Enterprise.
+</Note>
+
+<Note>
   **Claude Platform on AWS:** Most of the Admin API is not available on Claude Platform on AWS. Workspace endpoints (create, get, list, update, and archive on `/v1/organizations/workspaces`) are available. Other endpoints including organization members, workspace members, invites, API keys, usage reports, cost reports, and rate limit reports are not available. See [Claude Platform on AWS](../build-with-claude/build-with-claude-claude-platform-on-aws.md) for details.
 </Note>
 

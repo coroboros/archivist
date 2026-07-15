@@ -16,7 +16,7 @@ Ground Claude's responses in your source documents. Citations return the exact p
 
 Claude can provide detailed citations when answering questions about documents, helping you track and verify the sources behind each response.
 
-All [active models](../about-claude/about-claude-models-overview.md) support citations, with the exception of Claude Haiku 3.
+All [active models](../about-claude/about-claude-models-overview.md) support citations.
 
 <Tip>
   Share your feedback and suggestions about the citations feature using the [citations feedback form](https://forms.gle/9n9hSrKnKe3rpowH9).

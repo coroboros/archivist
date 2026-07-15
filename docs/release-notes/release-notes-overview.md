@@ -16,6 +16,10 @@ Updates to the Claude Platform, including the Claude API, client SDKs, and the C
   For updates to Claude Code, see the [complete CHANGELOG.md](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md) in the `claude-code` repository.
 </Tip>
 
+### July 14, 2026
+
+* You can now manage the people in your **Claude Enterprise** (claude.ai) organization with the [Admin API](../api/api-admin.md), in beta for all Claude Enterprise organizations: list members and look them up by email address, change a member's role, remove members, send and withdraw invites, manage groups and their membership, and read custom roles. Group and custom-role requests require the `anthropic-beta: ce-user-management-2026-07-13` beta header; member and invite requests take no beta header. An Admin API key with the `read:org_audit` scope can also call every user-management `GET` endpoint. See [User management](../manage-claude/manage-claude-user-management.md).
+
 ### July 10, 2026
 
 * [Dreams](../managed-agents/managed-agents-dreams.md) (research preview) now supports Claude Fable 5 and Claude Sonnet 5. See [Supported models](../managed-agents/managed-agents-dreams.md#limits).
@@ -87,7 +91,7 @@ Updates to the Claude Platform, including the Claude API, client SDKs, and the C
 * Claude Fable 5 requires 30-day data retention and is not available under zero data retention. See [Model-specific data retention requirements](../manage-claude/manage-claude-api-and-data-retention.md#model-specific-data-retention-requirements).
 * Claude Managed Agents now supports [scheduled deployments](../managed-agents/managed-agents-scheduled-deployments.md), letting you run sessions on a cron schedule without managing your own scheduler.
 * Claude Managed Agents vaults now support [environment variable credentials](../managed-agents/managed-agents-vaults.md#add-a-credential), so you can securely inject secrets into the agent's sandbox for CLIs, SDKs, and other services that authenticate through environment variables.
-* The `session.thread_*` webhook events now include a `session_thread_id` field identifying the multi-agent thread that triggered the event.
+* The `session.thread_*` webhook events now include a `session_thread_id` field identifying the multiagent thread that triggered the event.
 * We've released a [Swift package](https://platform.claude.com/docs/en/cli-sdks-libraries/libraries/apple-foundation-models.md) in beta that adds Claude as a server-side `LanguageModel` in Apple's Foundation Models framework. Call Claude through the same `LanguageModelSession` API as Apple's on-device model on iOS 27, macOS 27, visionOS 27, and watchOS 27 (beta).
 
 ### June 5, 2026
@@ -101,7 +105,7 @@ Updates to the Claude Platform, including the Claude API, client SDKs, and the C
 
 ### May 29, 2026
 
-* Claude Managed Agents [webhooks](../managed-agents/managed-agents-webhooks.md), [multi-agent orchestration](../managed-agents/managed-agents-multi-agent.md), and [self-hosted sandboxes](../managed-agents/managed-agents-self-hosted-sandboxes.md) are now available on [Claude Platform on AWS](../build-with-claude/build-with-claude-claude-platform-on-aws.md). See [IAM actions for Claude Platform on AWS](https://platform.claude.com/docs/en/api/claude-platform-on-aws-iam-actions.md) for the new IAM actions and the `AnthropicSelfHostedEnvironmentAccess` managed policy.
+* Claude Managed Agents [webhooks](../managed-agents/managed-agents-webhooks.md), [multiagent orchestration](../managed-agents/managed-agents-multiagent-orchestration.md), and [self-hosted sandboxes](../managed-agents/managed-agents-self-hosted-sandboxes.md) are now available on [Claude Platform on AWS](../build-with-claude/build-with-claude-claude-platform-on-aws.md). See [IAM actions for Claude Platform on AWS](https://platform.claude.com/docs/en/api/claude-platform-on-aws-iam-actions.md) for the new IAM actions and the `AnthropicSelfHostedEnvironmentAccess` managed policy.
 
 ### May 28, 2026
 
@@ -119,7 +123,7 @@ Updates to the Claude Platform, including the Claude API, client SDKs, and the C
 * Setting the sampling parameters `temperature`, `top_p`, or `top_k` to a non-default value returns a 400 error on Claude Opus 4.8, same as on Claude Opus 4.7. See the [migration guide](../about-claude/about-claude-models-migration-guide.md) for details.
 * In Claude Code, we've expanded Auto mode to more users for long-running tasks. See the [Claude Code documentation](https://code.claude.com/docs).
 * In Claude Code, Max plan users now default to [fast mode](../build-with-claude/build-with-claude-fast-mode.md) on Claude Opus 4.8. See the [Claude Code documentation](https://code.claude.com/docs).
-* In Claude Code, Workflows are available as a research preview, letting you define and run multi-step agentic plans. See the [Claude Code documentation](https://code.claude.com/docs).
+* In Claude Code, Workflows are available as a research preview, letting you define and run multistep agentic plans. See the [Claude Code documentation](https://code.claude.com/docs).
 * We've deprecated [fast mode](../build-with-claude/build-with-claude-fast-mode.md) for Claude Opus 4.6, with removal approximately 30 days after launch. Migrate to fast mode for Claude Opus 4.8 or Claude Opus 4.7. Read more in [Fast mode](../build-with-claude/build-with-claude-fast-mode.md#supported-models).
 * For updates to claude.ai, Cowork, Claude for Microsoft 365, and other Claude apps in this release, see the [release notes for Claude Apps](https://support.claude.com/en/articles/12138966-release-notes).
 
@@ -152,7 +156,7 @@ Updates to the Claude Platform, including the Claude API, client SDKs, and the C
 
 ### May 6, 2026
 
-* [Multi-agent sessions](../managed-agents/managed-agents-multi-agent.md) and [Outcomes](../managed-agents/managed-agents-define-outcomes.md) are now in public beta under the standard `managed-agents-2026-04-01` beta header.
+* [Multiagent orchestration](../managed-agents/managed-agents-multiagent-orchestration.md) and [Outcomes](../managed-agents/managed-agents-define-outcomes.md) are now in public beta under the standard `managed-agents-2026-04-01` beta header.
 * Claude Managed Agents vault credential background refresh is now supported for `mcp_oauth` credentials. See [Authenticate with vaults](../managed-agents/managed-agents-vaults.md).
 * Webhooks for Claude Managed Agents are now supported. Webhook event types include session and vault lifecycle events. See [Subscribe to webhooks](../managed-agents/managed-agents-webhooks.md).
 * Additional filtering and sorting options are now supported for Claude Managed Agents. Sessions can be filtered by status, and events can be filtered by type. Events can now be filtered by creation time.

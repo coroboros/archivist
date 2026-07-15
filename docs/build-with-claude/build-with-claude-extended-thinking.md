@@ -1985,7 +1985,7 @@ Here are some important considerations for interleaved thinking:
 [Prompt caching](./build-with-claude-prompt-caching.md) with thinking has several important considerations:
 
 <Tip>
-  Extended thinking tasks often take longer than 5 minutes to complete. Consider using the [1-hour cache duration](./build-with-claude-prompt-caching.md#1-hour-cache-duration) to maintain cache hits across longer thinking sessions and multi-step workflows.
+  Extended thinking tasks often take longer than 5 minutes to complete. Consider using the [1-hour cache duration](./build-with-claude-prompt-caching.md#1-hour-cache-duration) to maintain cache hits across longer thinking sessions and multistep workflows.
 </Tip>
 
 **Thinking block context removal**
@@ -2153,7 +2153,7 @@ User: [Text response, cache=True]
 
           # Break into lines and remove leading and trailing space on each
           lines = (line.strip() for line in text.splitlines())
-          # Break multi-headlines into a line each
+          # Split double-space-separated phrases onto their own lines
           chunks = (phrase.strip() for line in lines for phrase in line.split("  "))
           # Drop blank lines
           text = "\n".join(chunk for chunk in chunks if chunk)
@@ -2698,7 +2698,7 @@ User: [Text response, cache=True]
 
           # Break into lines and remove leading and trailing space on each
           lines = (line.strip() for line in text.splitlines())
-          # Break multi-headlines into a line each
+          # Split double-space-separated phrases onto their own lines
           chunks = (phrase.strip() for line in lines for phrase in line.split("  "))
           # Drop blank lines
           text = "\n".join(chunk for chunk in chunks if chunk)
@@ -3537,7 +3537,7 @@ Whether thinking blocks from previous assistant turns are preserved in context b
 
 **Benefits of thinking block preservation:**
 
-* **Cache optimization**: When using tool use, preserved thinking blocks enable cache hits as they are passed back with tool results and cached incrementally across the assistant turn, resulting in token savings in multi-step workflows
+* **Cache optimization**: When using tool use, preserved thinking blocks enable cache hits as they are passed back with tool results and cached incrementally across the assistant turn, resulting in token savings in multistep workflows
 * **No intelligence impact**: Preserving thinking blocks has no negative effect on model performance
 
 **Important considerations:**

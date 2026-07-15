@@ -990,7 +990,7 @@ The memory tool can also be paired with [compaction](../build-with-claude/build-
 
 For long-running agents, consider using both: compaction keeps the active context small without client-side bookkeeping, and memory preserves the information that must survive summarization.
 
-## Multi-session software development pattern
+## Multisession software development pattern
 
 For software projects that span multiple agent sessions, set up memory files deliberately instead of writing them ad hoc as work progresses. The following pattern turns memory into a recovery mechanism: each new session resumes from the state the last one recorded.
 

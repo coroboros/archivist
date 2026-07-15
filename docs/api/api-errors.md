@@ -1,10 +1,10 @@
 ---
-title: "Errors"
+title: "Claude API errors"
 source: "https://platform.claude.com/docs/en/api/errors"
 category: "api"
 generated: true
 ---
-# Errors
+# Claude API errors
 
 Understand the HTTP status codes, error response shape, and request IDs the Claude API returns, and handle errors with the SDKs' typed exceptions.
 

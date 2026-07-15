@@ -1,10 +1,10 @@
 ---
-title: "Claude on Amazon Bedrock (legacy)"
+title: "Claude on Amazon Bedrock (Opus 4.6 and earlier)"
 source: "https://platform.claude.com/docs/en/build-with-claude/claude-on-amazon-bedrock"
 category: "build-with-claude"
 generated: true
 ---
-# Claude on Amazon Bedrock (legacy)
+# Claude on Amazon Bedrock (Opus 4.6 and earlier)
 
 The legacy Amazon Bedrock integration for Claude models, using InvokeModel and Converse APIs with ARN-versioned model identifiers.
 

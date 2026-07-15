@@ -837,7 +837,7 @@ Runtime behavior:
 
 * When no MCP credential matches by `mcp_server_url`, the connection is attempted unauthenticated and will error if the server requires authentication.
 * When multiple vaults contain a matching credential, the first vault with a match wins.
-* In [multi-agent sessions](./managed-agents-multi-agent.md), vault credentials apply to every thread. An agent whose own definition declares the matching MCP server authenticates with these credentials. See [Connect agents to MCP servers](./managed-agents-multi-agent.md#connect-agents-to-mcp-servers).
+* In [multiagent sessions](./managed-agents-multiagent-orchestration.md), vault credentials apply to every thread. An agent whose own definition declares the matching MCP server authenticates with these credentials. See [Connect agents to MCP servers](./managed-agents-multiagent-orchestration.md#connect-agents-to-mcp-servers).
 
 ## Rotate a credential
 

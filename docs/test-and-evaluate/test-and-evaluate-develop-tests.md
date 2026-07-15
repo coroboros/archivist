@@ -661,7 +661,7 @@ Most use cases will need multidimensional evaluation along several success crite
           {
               "text": "Jane Doe, a local hero, made headlines last week for saving... In city hall news, the budget... Meteorologists predict...",
               "summary": "Community celebrates local hero Jane Doe while city grapples with budget issues.",
-          },  # Edge case: Multi-topic
+          },  # Edge case: Multitopic
           {
               "text": "You won't believe what this celebrity did! ... extensive charity work ...",
               "summary": "Celebrity's extensive charity work surprises fans",
@@ -707,7 +707,7 @@ Most use cases will need multidimensional evaluation along several success crite
         {
           text: "Jane Doe, a local hero, made headlines last week for saving... In city hall news, the budget... Meteorologists predict...",
           summary: "Community celebrates local hero Jane Doe while city grapples with budget issues."
-        }, // Edge case: Multi-topic
+        }, // Edge case: Multitopic
         {
           text: "You won't believe what this celebrity did! ... extensive charity work ...",
           summary: "Celebrity's extensive charity work surprises fans"
@@ -772,7 +772,7 @@ Most use cases will need multidimensional evaluation along several success crite
       [
           new("In a groundbreaking study, researchers at MIT...",
               "MIT scientists discover a new antibiotic..."),
-          // Edge case: Multi-topic
+          // Edge case: Multitopic
           new("Jane Doe, a local hero, made headlines last week for saving... In city hall news, the budget... Meteorologists predict...",
               "Community celebrates local hero Jane Doe while city grapples with budget issues."),
           // Edge case: Misleading title
@@ -870,7 +870,7 @@ Most use cases will need multidimensional evaluation along several success crite
       		"In a groundbreaking study, researchers at MIT...",
       		"MIT scientists discover a new antibiotic...",
       	},
-      	// Edge case: Multi-topic
+      	// Edge case: Multitopic
       	{
       		"Jane Doe, a local hero, made headlines last week for saving... In city hall news, the budget... Meteorologists predict...",
       		"Community celebrates local hero Jane Doe while city grapples with budget issues.",
@@ -948,7 +948,7 @@ Most use cases will need multidimensional evaluation along several success crite
           new Article(
               "In a groundbreaking study, researchers at MIT...",
               "MIT scientists discover a new antibiotic..."),
-          // Edge case: Multi-topic
+          // Edge case: Multitopic
           new Article(
               "Jane Doe, a local hero, made headlines last week for saving... In city hall news, the budget... Meteorologists predict...",
               "Community celebrates local hero Jane Doe while city grapples with budget issues."),
@@ -1022,7 +1022,7 @@ Most use cases will need multidimensional evaluation along several success crite
               'text' => 'In a groundbreaking study, researchers at MIT...',
               'summary' => 'MIT scientists discover a new antibiotic...',
           ],
-          // Edge case: Multi-topic
+          // Edge case: Multitopic
           [
               'text' => 'Jane Doe, a local hero, made headlines last week for saving... In city hall news, the budget... Meteorologists predict...',
               'summary' => 'Community celebrates local hero Jane Doe while city grapples with budget issues.',
@@ -1103,7 +1103,7 @@ Most use cases will need multidimensional evaluation along several success crite
           text: "In a groundbreaking study, researchers at MIT...",
           summary: "MIT scientists discover a new antibiotic..."
         },
-        # Edge case: Multi-topic
+        # Edge case: Multitopic
         {
           text: "Jane Doe, a local hero, made headlines last week for saving... In city hall news, the budget... Meteorologists predict...",
           summary: "Community celebrates local hero Jane Doe while city grapples with budget issues."

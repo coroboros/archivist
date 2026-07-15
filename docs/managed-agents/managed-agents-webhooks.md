@@ -18,18 +18,18 @@ Webhook events return the event `type` and `id`, not the full object. When you r
 
 <Tabs>
   <Tab title="Session events">
-    | Event                              | Trigger                                                                                                                                          |
-    | ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-    | `session.status_run_started`       | Agent execution kicked off. This triggers at every session status transition to `running`.                                                       |
-    | `session.status_idled`             | Agent awaiting input, for example a tool permission approval or a new user message.                                                              |
-    | `session.status_rescheduled`       | A transient error occurred and the session is retrying automatically.                                                                            |
-    | `session.status_terminated`        | The session hit a terminal error.                                                                                                                |
-    | `session.thread_created`           | New [multi-agent thread](./managed-agents-multi-agent.md) opened, meaning an additional agent called by the coordinator is kicking off work. |
-    | `session.thread_idled`             | An agent in a [multi-agent interaction](./managed-agents-multi-agent.md) is waiting for input.                                               |
-    | `session.thread_terminated`        | A [multi-agent thread](./managed-agents-multi-agent.md) was archived.                                                                        |
-    | `session.outcome_evaluation_ended` | [Outcome evaluation](./managed-agents-define-outcomes.md) for a single iteration completed.                                                  |
-    | `session.updated`                  | Session properties changed (for example, its name or configuration was updated).                                                                 |
-    | `session.deleted`                  | Session permanently deleted. There is no object left to fetch, so treat the event itself as final.                                               |
+    | Event                              | Trigger                                                                                                                                                      |
+    | ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+    | `session.status_run_started`       | Agent execution kicked off. This triggers at every session status transition to `running`.                                                                   |
+    | `session.status_idled`             | Agent awaiting input, for example a tool permission approval or a new user message.                                                                          |
+    | `session.status_rescheduled`       | A transient error occurred and the session is retrying automatically.                                                                                        |
+    | `session.status_terminated`        | The session hit a terminal error.                                                                                                                            |
+    | `session.thread_created`           | New [multiagent thread](./managed-agents-multiagent-orchestration.md) opened, meaning an additional agent called by the coordinator is kicking off work. |
+    | `session.thread_idled`             | An agent in a [multiagent interaction](./managed-agents-multiagent-orchestration.md) is waiting for input.                                               |
+    | `session.thread_terminated`        | A [multiagent thread](./managed-agents-multiagent-orchestration.md) was archived.                                                                        |
+    | `session.outcome_evaluation_ended` | [Outcome evaluation](./managed-agents-define-outcomes.md) for a single iteration completed.                                                              |
+    | `session.updated`                  | Session properties changed (for example, its name or configuration was updated).                                                                             |
+    | `session.deleted`                  | Session permanently deleted. There is no object left to fetch, so treat the event itself as final.                                                           |
   </Tab>
 
   <Tab title="Vault events">

@@ -647,7 +647,7 @@ For request middleware (`option.WithMiddleware`) and replacing the default `http
   For detailed platform setup guides with code examples, see:
 
   * [Amazon Bedrock](../build-with-claude/build-with-claude-claude-in-amazon-bedrock.md)
-  * [Amazon Bedrock (legacy)](../build-with-claude/build-with-claude-claude-on-amazon-bedrock-legacy.md)
+  * [Amazon Bedrock (Opus 4.6 and earlier)](../build-with-claude/build-with-claude-claude-on-amazon-bedrock-legacy.md)
   * [Google Cloud](../build-with-claude/build-with-claude-claude-on-vertex-ai.md)
   * [Claude Platform on AWS](../build-with-claude/build-with-claude-claude-platform-on-aws.md)
 </Note>
