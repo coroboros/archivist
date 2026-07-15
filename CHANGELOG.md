@@ -1,5 +1,17 @@
 # Changelog
 
+## 🤖 v1.5.47 - 15/07/2026
+
+File Changes:
+
+- Modified: `docs/api/api-README.md`
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-hooks.md`
+- Modified: `docs/code/code-overview.md`
+- Modified: `docs/code/code-quickstart.md`
+- Added: `docs/api/api-php-beta-sessions-update.md`
+
+
 ## 🤖 v1.5.46 - 15/07/2026
 
 File Changes:
