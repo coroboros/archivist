@@ -21,7 +21,7 @@ The Anthropic Java SDK provides convenient access to the Anthropic REST API from
 <Tabs>
   <Tab title="Gradle">
     ```kotlin
-    implementation("com.anthropic:anthropic-java:2.47.1")
+    implementation("com.anthropic:anthropic-java:2.48.0")
     ```
   </Tab>
 
@@ -30,7 +30,7 @@ The Anthropic Java SDK provides convenient access to the Anthropic REST API from
     <dependency>
         <groupId>com.anthropic</groupId>
         <artifactId>anthropic-java</artifactId>
-        <version>2.47.1</version>
+        <version>2.48.0</version>
     </dependency>
     ```
   </Tab>
@@ -453,7 +453,7 @@ private static Object callTool(BetaToolUseBlock toolUseBlock) {
 
 ### Tool name conversion
 
-Tool names are derived from the camel case tool class names (e.g., `GetWeather`) and converted to snake case (e.g., `get_weather`). Word boundaries begin where the current character is not the first character, is upper-case, and either the preceding character is lower-case, or the following character is lower-case. For example, `MyJSONParser` becomes `my_json_parser` and `ParseJSON` becomes `parse_json`. This conversion can be overridden using the `@JsonTypeName` annotation.
+Tool names are derived from the camel case tool class names (for example, `GetWeather`) and converted to snake case (for example, `get_weather`). Word boundaries begin where the current character is not the first character, is upper-case, and either the preceding character is lower-case, or the following character is lower-case. For example, `MyJSONParser` becomes `my_json_parser` and `ParseJSON` becomes `parse_json`. This conversion can be overridden using the `@JsonTypeName` annotation.
 
 ### Local tool JSON schema validation
 
@@ -589,7 +589,7 @@ The SDK throws custom unchecked exception types:
 * `AnthropicServiceException` - Base class for HTTP errors.
 * `AnthropicIoException` - I/O networking errors.
 * `AnthropicRetryableException` - Generic error indicating a failure that could be retried.
-* `AnthropicInvalidDataException` - Failure to interpret successfully parsed data (e.g., when accessing a property that's supposed to be required, but the API unexpectedly omitted it).
+* `AnthropicInvalidDataException` - Failure to interpret successfully parsed data (for example, when accessing a property that's supposed to be required, but the API unexpectedly omitted it).
 * `AnthropicException` - Base class for all exceptions.
 
 ### Status code mapping
@@ -1091,17 +1091,17 @@ To use a completely custom HTTP client:
 
   * [Amazon Bedrock](../build-with-claude/build-with-claude-claude-in-amazon-bedrock.md)
   * [Amazon Bedrock (Opus 4.6 and earlier)](../build-with-claude/build-with-claude-claude-on-amazon-bedrock-legacy.md)
+  * [Claude Platform on AWS](../build-with-claude/build-with-claude-claude-platform-on-aws.md)
   * [Google Cloud](../build-with-claude/build-with-claude-claude-on-vertex-ai.md)
   * [Microsoft Foundry](../build-with-claude/build-with-claude-claude-in-microsoft-foundry.md)
-  * [Claude Platform on AWS](../build-with-claude/build-with-claude-claude-platform-on-aws.md)
 </Note>
 
 The Java SDK supports the following platforms through separate dependencies that provide platform-specific `Backend` implementations:
 
-* **Bedrock:** `com.anthropic:anthropic-java-bedrock`: Use `BedrockMantleBackend.fromEnv()` or `BedrockMantleBackend.builder()` for the Messages-API Bedrock endpoint, or `BedrockBackend.fromEnv()` / `BedrockBackend.builder()` (`bedrock-runtime` path).
 * **Agent Platform:** `com.anthropic:anthropic-java-vertex`: Use `VertexBackend.fromEnv()` or `VertexBackend.builder()`.
-* **Foundry:** `com.anthropic:anthropic-java-foundry`: Use `FoundryBackend.fromEnv()` or `FoundryBackend.builder()`.
+* **Bedrock:** `com.anthropic:anthropic-java-bedrock`: Use `BedrockMantleBackend.fromEnv()` or `BedrockMantleBackend.builder()` for the Messages-API Bedrock endpoint, or `BedrockBackend.fromEnv()` / `BedrockBackend.builder()` (`bedrock-runtime` path).
 * **Claude Platform on AWS:** `com.anthropic:anthropic-java-aws`: Use `AwsBackend.fromEnv()` (reads `ANTHROPIC_AWS_WORKSPACE_ID` and the AWS default region/credential chain) or `AwsBackend.builder()`. Available in beta.
+* **Foundry:** `com.anthropic:anthropic-java-foundry`: Use `FoundryBackend.fromEnv()` or `FoundryBackend.builder()`.
 
 Use `BedrockMantleBackend` for new projects; `BedrockBackend` remains for existing applications using the Bedrock `InvokeModel` API.
 
@@ -1160,7 +1160,7 @@ export ANTHROPIC_LOG=debug
 <Accordion title="Jackson compatibility">
   The SDK depends on Jackson for JSON serialization/deserialization. It is compatible with version 2.13.4 or higher, but depends on version 2.18.2 by default.
 
-  The SDK throws an exception if it detects an incompatible Jackson version at runtime (e.g. if the default version was overridden in your Maven or Gradle config).
+  The SDK throws an exception if it detects an incompatible Jackson version at runtime (for example, if the default version was overridden in your Maven or Gradle config).
 
   If the SDK threw an exception, but you're certain the version is compatible, then disable the version check using `checkJacksonVersionCompatibility` on `AnthropicOkHttpClient` or `AnthropicOkHttpClientAsync`.
 

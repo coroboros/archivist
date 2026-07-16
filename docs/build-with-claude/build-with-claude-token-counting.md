@@ -792,7 +792,7 @@ All [active models](../about-claude/about-claude-models-overview.md) support tok
 ### Count tokens in messages with extended thinking
 
 <Note>
-  See [how the context window is calculated with extended thinking](./build-with-claude-extended-thinking.md#how-context-window-is-calculated-with-extended-thinking) for more details
+  See [how the context window is calculated with extended thinking](./build-with-claude-extended-thinking.md#how-context-window-is-calculated-with-extended-thinking) for more details.
 
   * Thinking blocks from **previous** assistant turns are ignored and **do not** count toward your input tokens
   * **Current** assistant turn thinking **does** count toward your input tokens
@@ -997,7 +997,7 @@ All [active models](../about-claude/about-claude-models-overview.md) support tok
   )
 
   response, err := client.Messages.CountTokens(context.TODO(), anthropic.MessageCountTokensParams{
-  	Model:    anthropic.Model("claude-sonnet-4-6"),
+  	Model:    anthropic.ModelClaudeSonnet4_6,
   	Thinking: anthropic.ThinkingConfigParamOfEnabled(16000),
   	Messages: []anthropic.MessageParam{
   		anthropic.NewUserMessage(anthropic.NewTextBlock("Are there an infinite number of prime numbers such that n mod 4 == 3?")),

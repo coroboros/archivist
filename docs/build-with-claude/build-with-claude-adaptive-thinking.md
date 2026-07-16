@@ -856,10 +856,10 @@ Full thinking content is encrypted and returned in the `signature` field. This f
 
 Here are some important considerations on thinking encryption:
 
-* When [streaming responses](./build-with-claude-extended-thinking.md#streaming-thinking), the signature is added via a `signature_delta` inside a `content_block_delta` event just before the `content_block_stop` event.
+* When [streaming responses](./build-with-claude-extended-thinking.md#streaming-thinking), the signature is added through a `signature_delta` inside a `content_block_delta` event just before the `content_block_stop` event.
 * `signature` values are significantly longer in Claude 4 models than in previous models.
 * The `signature` field is an opaque field and should not be interpreted or parsed.
-* `signature` values are compatible across platforms (Claude APIs, [Amazon Bedrock](./build-with-claude-claude-in-amazon-bedrock.md), and [Google Cloud](./build-with-claude-claude-on-vertex-ai.md)). Values generated on one platform will be compatible with another.
+* `signature` values are compatible across platforms (Claude APIs, [Amazon Bedrock](./build-with-claude-claude-in-amazon-bedrock.md), and [Google Cloud](./build-with-claude-claude-on-vertex-ai.md)). Values generated on one platform are compatible with another.
 
 ### Thinking output on Claude Fable 5 and Claude Mythos 5
 

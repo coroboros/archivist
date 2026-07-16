@@ -245,7 +245,7 @@ For Claude Platform on AWS request-ID examples in other languages, see [Request 
 ## Long requests
 
 <Warning>
-  Consider using the [streaming Messages API](../build-with-claude/build-with-claude-streaming.md) or [Message Batches API](./api-messages-batches-create.md) for long running requests, especially those over 10 minutes.
+  Consider using the [streaming Messages API](../build-with-claude/build-with-claude-streaming.md) or [Message Batches API](./api-messages-batches-create.md) for long-running requests, especially those over 10 minutes.
 </Warning>
 
 Avoid setting a large `max_tokens` value without using the [streaming Messages API](../build-with-claude/build-with-claude-streaming.md) or [Message Batches API](./api-messages-batches-create.md):

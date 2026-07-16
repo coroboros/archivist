@@ -1,10 +1,10 @@
 ---
-title: "Tool Runner (SDK)"
+title: "Tool runner (SDK)"
 source: "https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-runner"
 category: "agents-and-tools"
 generated: true
 ---
-# Tool Runner (SDK)
+# Tool runner (SDK)
 
 Use the SDK's tool runner to handle the agentic loop, error wrapping, and type safety automatically.
 

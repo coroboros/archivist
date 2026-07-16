@@ -617,7 +617,7 @@ The presentation was created in the code execution container and saved as a file
 </CodeGroup>
 
 <Note>
-  For complete details on working with generated files, see the [code execution tool documentation](./agents-and-tools-tool-use-code-execution-tool.md#retrieve-generated-files).
+  For complete details on working with generated files, see the [code execution tool](./agents-and-tools-tool-use-code-execution-tool.md#retrieve-generated-files) documentation.
 </Note>
 
 ## Try more examples

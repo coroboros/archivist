@@ -346,7 +346,7 @@ See [Mid-conversation system messages](./build-with-claude-mid-conversation-syst
 
 ## Putting words in Claude's mouth
 
-You can pre-fill part of Claude's response in the last position of the input messages list. This can be used to shape Claude's response. The example below uses `"max_tokens": 1` to get a single multiple choice answer from Claude.
+You can pre-fill part of Claude's response in the last position of the input messages list. This can be used to shape Claude's response. The following example uses `"max_tokens": 1` to get a single multiple choice answer from Claude.
 
 <Warning>
   Prefilling is not supported on Claude Fable 5, [Claude Mythos 5](https://anthropic.com/glasswing), [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 5, and Claude Sonnet 4.6. Requests using prefill with these models return a 400 error. Use [structured outputs](./build-with-claude-structured-outputs.md) on models that support it, or system prompt instructions, instead. See the [migration guide](../about-claude/about-claude-models-migration-guide.md) for migration patterns.
@@ -667,11 +667,11 @@ Claude can read both text and images in requests. Images can be supplied using t
   const anthropic = new Anthropic();
 
   // Option 1: Base64-encoded image
-  const image_url =
+  const imageUrl =
     "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg";
-  const image_media_type = "image/jpeg";
-  const image_array_buffer = await (await fetch(image_url)).arrayBuffer();
-  const image_data = Buffer.from(image_array_buffer).toString("base64");
+  const imageMediaType = "image/jpeg";
+  const imageArrayBuffer = await (await fetch(imageUrl)).arrayBuffer();
+  const imageData = Buffer.from(imageArrayBuffer).toString("base64");
 
   const message = await anthropic.messages.create({
     model: "claude-opus-4-8",
@@ -684,8 +684,8 @@ Claude can read both text and images in requests. Images can be supplied using t
             type: "image",
             source: {
               type: "base64",
-              media_type: image_media_type,
-              data: image_data
+              media_type: imageMediaType,
+              data: imageData
             }
           },
           {

@@ -395,16 +395,16 @@ response = anthropic.request(
 
   * [Amazon Bedrock](../build-with-claude/build-with-claude-claude-in-amazon-bedrock.md)
   * [Amazon Bedrock (Opus 4.6 and earlier)](../build-with-claude/build-with-claude-claude-on-amazon-bedrock-legacy.md)
-  * [Google Cloud](../build-with-claude/build-with-claude-claude-on-vertex-ai.md)
   * [Claude Platform on AWS](../build-with-claude/build-with-claude-claude-platform-on-aws.md)
+  * [Google Cloud](../build-with-claude/build-with-claude-claude-on-vertex-ai.md)
 </Note>
 
 The Ruby SDK supports the following platforms:
 
-* **Bedrock:** `Anthropic::BedrockMantleClient`, or `Anthropic::BedrockClient` for the `bedrock-runtime` path. `Anthropic::BedrockMantleClient` requires the `aws-sdk-core` gem; `Anthropic::BedrockClient` requires the `aws-sdk-bedrockruntime` gem.
 * **Agent Platform:** `Anthropic::VertexClient`. Requires the `googleauth` gem.
-* **Foundry:** Not currently supported in the Ruby SDK. See [Claude in Microsoft Foundry](../build-with-claude/build-with-claude-claude-in-microsoft-foundry.md) for supported SDKs.
+* **Bedrock:** `Anthropic::BedrockMantleClient`, or `Anthropic::BedrockClient` for the `bedrock-runtime` path. `Anthropic::BedrockMantleClient` requires the `aws-sdk-core` gem; `Anthropic::BedrockClient` requires the `aws-sdk-bedrockruntime` gem.
 * **Claude Platform on AWS:** Part of the main `anthropic` gem (requires the `aws-sdk-core` gem). Provides `Anthropic::AWSClient`. Pass `workspace_id:` to the constructor or set the `ANTHROPIC_AWS_WORKSPACE_ID` environment variable (see [Workspaces](../build-with-claude/build-with-claude-claude-platform-on-aws.md#workspaces)). Available in beta.
+* **Foundry:** Not currently supported in the Ruby SDK. See [Claude in Microsoft Foundry](../build-with-claude/build-with-claude-claude-in-microsoft-foundry.md) for supported SDKs.
 
 Use `Anthropic::BedrockMantleClient` for new projects; `Anthropic::BedrockClient` remains for existing applications using the Bedrock `InvokeModel` API.
 

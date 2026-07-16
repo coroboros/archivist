@@ -216,7 +216,7 @@ The [Get effective organization settings](../api/api-compliance-organizations-se
 This endpoint requires `read:compliance_org_data`; a key without that scope returns [403 Forbidden](./manage-claude-compliance-errors.md#403-forbidden). The target must be one of the parent's linked organizations: the parent organization itself is not a valid target. An unknown organization, an organization ID that is not a valid UUID, an organization outside your parent's tree, and a parent organization that does not yet have access to this endpoint all return the same [404 Not Found](./manage-claude-compliance-errors.md#404-not-found), so a 404 does not reveal whether an organization exists. The settings endpoint is enabled per parent organization separately from the rest of the Compliance API; if every request returns 404, contact your Anthropic representative.
 
 <Note>
-  Before June 30, 2026, this endpoint required the separate `read:compliance_org_settings` scope. That scope has been retired: it can no longer be selected or granted when creating a key, and a key that carries only the retired scope returns [403 Forbidden](./manage-claude-compliance-errors.md#403-forbidden) — create a new Compliance Access Key with `read:compliance_org_data` instead.
+  Before June 30, 2026, this endpoint required the separate `read:compliance_org_settings` scope. That scope has been retired: it can no longer be selected or granted when creating a key, and a key that carries only the retired scope returns [403 Forbidden](./manage-claude-compliance-errors.md#403-forbidden). Create a new Compliance Access Key with `read:compliance_org_data` instead.
 </Note>
 
 ```bash cURL

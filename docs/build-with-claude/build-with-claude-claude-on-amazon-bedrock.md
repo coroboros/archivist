@@ -60,14 +60,14 @@ Anthropic's [client SDKs](https://platform.claude.com/docs/en/cli-sdks-libraries
   <Tab title="Java">
     <CodeGroup>
       ```groovy Gradle
-      implementation("com.anthropic:anthropic-java-bedrock:2.47.1")
+      implementation("com.anthropic:anthropic-java-bedrock:2.48.0")
       ```
 
       ```xml Maven
       <dependency>
           <groupId>com.anthropic</groupId>
           <artifactId>anthropic-java-bedrock</artifactId>
-          <version>2.47.1</version>
+          <version>2.48.0</version>
       </dependency>
       ```
 
@@ -360,15 +360,12 @@ The following examples show how to generate text from Claude on Bedrock:
     awsRegion: "us-west-2"
   });
 
-  async function main() {
-    const message = await client.messages.create({
-      model: "global.anthropic.claude-opus-4-6-v1",
-      max_tokens: 256,
-      messages: [{ role: "user", content: "Hello, world" }]
-    });
-    console.log(message);
-  }
-  main().catch(console.error);
+  const message = await client.messages.create({
+    model: "global.anthropic.claude-opus-4-6-v1",
+    max_tokens: 256,
+    messages: [{ role: "user", content: "Hello, world" }]
+  });
+  console.log(message);
   ```
 
   ```csharp C#

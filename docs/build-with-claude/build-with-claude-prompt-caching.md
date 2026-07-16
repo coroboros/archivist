@@ -732,7 +732,7 @@ User: [Text response, cache=True]
 
 On earlier Opus/Sonnet models and all Haiku models, all previous thinking blocks are removed from context at this point. On Opus 4.5+ and Sonnet 4.6+, prior thinking blocks are kept by default and remain part of the cached prefix.
 
-For more detailed information, see the [extended thinking documentation](./build-with-claude-extended-thinking.md#understanding-thinking-block-caching-behavior).
+For more detailed information, see the [extended thinking](./build-with-claude-extended-thinking.md#understanding-thinking-block-caching-behavior) documentation.
 
 ### Cache storage and sharing
 
@@ -796,7 +796,7 @@ If experiencing unexpected behavior:
 If you find that 5 minutes is too short, Anthropic also offers a 1-hour cache duration [at additional cost](#pricing).
 
 <Note>
-  The 1-hour cache duration is available on the Claude API, [Claude Platform on AWS](./build-with-claude-claude-platform-on-aws.md), [Amazon Bedrock](./build-with-claude-claude-in-amazon-bedrock.md), [Amazon Bedrock (Opus 4.6 and earlier)](./build-with-claude-claude-on-amazon-bedrock-legacy.md), [Google Cloud](./build-with-claude-claude-on-vertex-ai.md), and [Microsoft Foundry](./build-with-claude-claude-in-microsoft-foundry.md).
+  The 1-hour cache duration is available on the Claude API, [Amazon Bedrock](./build-with-claude-claude-in-amazon-bedrock.md), [Amazon Bedrock (Opus 4.6 and earlier)](./build-with-claude-claude-on-amazon-bedrock-legacy.md), [Claude Platform on AWS](./build-with-claude-claude-platform-on-aws.md), [Google Cloud](./build-with-claude-claude-on-vertex-ai.md), and [Microsoft Foundry](./build-with-claude-claude-in-microsoft-foundry.md).
 </Note>
 
 To use the extended cache, include `ttl` in the `cache_control` definition like this:
@@ -828,7 +828,7 @@ The response will include detailed cache information like the following:
 
 Note that the current `cache_creation_input_tokens` field equals the sum of the values in the `cache_creation` object.
 
-If you see `ephemeral_5m_input_tokens` writes you didn't request while using server tools such as web search, see [this guide on prompt caching and tool use](../agents-and-tools/agents-and-tools-tool-use-tool-use-with-prompt-caching.md#server-tool-results-are-cached-automatically).
+If you see `ephemeral_5m_input_tokens` writes you didn't request while using server tools such as web search, see [Tool use with prompt caching](../agents-and-tools/agents-and-tools-tool-use-tool-use-with-prompt-caching.md#server-tool-results-are-cached-automatically).
 
 ### When to use the 1-hour cache
 
@@ -3204,7 +3204,7 @@ For ZDR eligibility across all features, see [API and data retention](../manage-
 
     For more details on cache invalidation, see [What invalidates the cache](#what-invalidates-the-cache).
 
-    For more on extended thinking, including its interaction with tool use and prompt caching, see the [extended thinking documentation](./build-with-claude-extended-thinking.md#extended-thinking-and-prompt-caching).
+    For more on extended thinking, including its interaction with tool use and prompt caching, see the [extended thinking](./build-with-claude-extended-thinking.md#extended-thinking-and-prompt-caching) documentation.
   </Accordion>
 
   <Accordion title="How do I enable prompt caching?">

@@ -202,7 +202,7 @@ For the credential, distribute one [`apiKeyHelper`](./code-llm-gateway-connect.m
 
 Some environments need separate delivery:
 
-* The desktop app reads gateway routing only from its MDM-delivered third-party inference configuration; deploy that file alongside managed settings so desktop sessions route through the gateway too. See the [desktop third-party configuration docs](https://claude.com/docs/third-party/claude-desktop/configuration) and the [desktop gateway docs](https://claude.com/docs/third-party/claude-desktop/gateway)
+* The desktop app reads gateway routing from its third-party inference configuration, not from managed settings; deploy that file through MDM alongside managed settings so desktop sessions route through the gateway too. See the [desktop third-party configuration docs](https://claude.com/docs/third-party/claude-desktop/configuration) and the [desktop gateway docs](https://claude.com/docs/third-party/claude-desktop/gateway)
 * CI runners need `ANTHROPIC_BASE_URL` and the credential set in the [runner's environment](./code-llm-gateway-connect.md#configure-each-surface)
 * WSL on managed Windows machines reads the Windows managed settings only when [`wslInheritsWindowsSettings`](./code-settings.md#available-settings) is `true`
 

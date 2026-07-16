@@ -1435,7 +1435,7 @@ See [Handle tool calls](./agents-and-tools-tool-use-handle-tool-calls.md) for ot
 
 **2. Weak prompting**
 
-Default prompting may not be sufficient. Use the stronger system prompt from [Maximizing parallel tool use](#maximizing-parallel-tool-use).
+Default prompting might not be sufficient. Use the stronger system prompt from [Maximizing parallel tool use](#maximizing-parallel-tool-use).
 
 **3. Measuring parallel tool usage**
 

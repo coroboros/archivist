@@ -10,7 +10,7 @@ Create an Admin API key for your Claude Console or Claude Enterprise organizatio
 
 ---
 
-An Admin API key authenticates every API in the **Admin** section of this guide (the [Admin API](./manage-claude-admin-api.md), [Analytics APIs](./manage-claude-analytics-api.md), [Compliance API](./manage-claude-compliance-api.md), [Spend Limits API](./manage-claude-spend-limits-api.md), [Usage and Cost API](./manage-claude-usage-cost-api.md), and [Rate Limits API](./manage-claude-rate-limits-api.md)), with one exception: the Admin API's service-account, federation-issuer, and federation-rule endpoints accept only an OAuth bearer token with the `org:admin` scope; see [Obtain an OAuth bearer token](./manage-claude-admin-api.md#oauth-bearer-token). You do not need a separate key for each API.
+An Admin API key authenticates every API in the **Admin** section of this guide: the [Admin API](./manage-claude-admin-api.md), [Analytics APIs](./manage-claude-analytics-api.md), [Compliance API](./manage-claude-compliance-api.md), [Spend Limits API](./manage-claude-spend-limits-api.md), [Usage and Cost API](./manage-claude-usage-cost-api.md), and [Rate Limits API](./manage-claude-rate-limits-api.md). You do not need a separate key for each API. The one exception is the Admin API's service-account, federation-issuer, and federation-rule endpoints, which accept only an OAuth bearer token with the `org:admin` scope. See [Obtain an OAuth bearer token](./manage-claude-admin-api.md#oauth-bearer-token).
 
 Where you create the key depends on which Claude product your organization uses.
 

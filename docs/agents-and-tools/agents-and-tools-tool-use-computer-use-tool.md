@@ -2149,15 +2149,15 @@ Because your application controls where and how computer use data is stored, com
 
 Computer use follows the standard [tool use pricing](./agents-and-tools-tool-use-overview.md#pricing). When using the computer use tool:
 
-**System prompt overhead**: The computer use beta adds 466-499 tokens to the system prompt
+**System prompt overhead:** The computer use beta adds 466-499 tokens to the system prompt
 
-**Computer use tool token usage**:
+**Computer use tool token usage:**
 
 | Model             | Input tokens per tool definition |
 | ----------------- | -------------------------------- |
 | Claude 4.x models | 735 tokens                       |
 
-**Additional token consumption**:
+**Additional token consumption:**
 
 * Screenshot images (see [Vision pricing](../build-with-claude/build-with-claude-vision.md))
 * Tool execution results returned to Claude
