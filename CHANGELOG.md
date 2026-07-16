@@ -1,5 +1,27 @@
 # Changelog
 
+## 🤖 v1.5.49 - 16/07/2026
+
+File Changes:
+
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-agent-view.md`
+- Modified: `docs/code/code-authentication.md`
+- Modified: `docs/code/code-auto-mode-config.md`
+- Modified: `docs/code/code-channels.md`
+- Modified: `docs/code/code-claude-code-on-the-web.md`
+- Modified: `docs/code/code-commands.md`
+- Modified: `docs/code/code-data-usage.md`
+- Modified: `docs/code/code-desktop.md`
+- Modified: `docs/code/code-env-vars.md`
+- Modified: `docs/code/code-hooks.md`
+- Modified: `docs/code/code-mcp.md`
+- Modified: `docs/code/code-overview.md`
+- Modified: `docs/code/code-remote-control.md`
+- Modified: `docs/code/code-sandbox-environments.md`
+- Modified: `docs/code/code-sessions.md`
+
+
 ## 🤖 v1.5.48 - 16/07/2026
 
 File Changes:
