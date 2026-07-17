@@ -94,6 +94,8 @@ If the Search tool, `@file` mentions, custom agents, or custom skills aren't fin
     ```bash theme={null}
     apk add ripgrep
     ```
+
+    `ripgrep` is in Alpine's community repository. If `apk` reports that the package is missing, see [Alpine Linux setup](./code-setup.md#alpine-linux-and-musl-based-distributions).
   </Tab>
 
   <Tab title="Arch">

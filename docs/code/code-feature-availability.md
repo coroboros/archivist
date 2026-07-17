@@ -202,7 +202,7 @@ Organization-level controls and usage visibility.
 </table>
 
 <span id="fn1" style={{display: 'block', position: 'relative', top: '-120px'}} /><sup>1</sup> On Google Cloud's Agent Platform, web search is available for Claude 4 models and later.<br />
-<span id="fn2" style={{display: 'block', position: 'relative', top: '-120px'}} /><sup>2</sup> On these providers, auto mode supports only Claude Sonnet 5, Opus 4.7, and Opus 4.8. See [Auto mode configuration](./code-auto-mode-config.md). {/* min-version: 2.1.207 */}In v2.1.158 through v2.1.206, auto mode on these providers also required setting `CLAUDE_CODE_ENABLE_AUTO_MODE=1`; v2.1.207 removed the requirement.<br />
+<span id="fn2" style={{display: 'block', position: 'relative', top: '-120px'}} /><sup>2</sup> On these providers, auto mode supports only Claude Sonnet 5, Opus 4.7, Opus 4.8, and Fable 5. See [Auto mode configuration](./code-auto-mode-config.md). {/* min-version: 2.1.207 */}In v2.1.158 through v2.1.206, auto mode on these providers also required setting `CLAUDE_CODE_ENABLE_AUTO_MODE=1`; v2.1.207 removed the requirement.<br />
 <span id="fn3" style={{display: 'block', position: 'relative', top: '-120px'}} /><sup>3</sup> Explicit intervals such as `/loop every 2 hours` work on every provider. On Amazon Bedrock, Claude Platform on AWS, Google Cloud's Agent Platform, and Microsoft Foundry, `/loop` cannot pick its own interval or supply the default maintenance prompt, so a prompt with no interval runs every 10 minutes, and `/loop` with no arguments shows the usage message. See [Scheduled tasks](./code-scheduled-tasks.md).<br />
 <span id="fn4" style={{display: 'block', position: 'relative', top: '-120px'}} /><sup>4</sup> Subject to your agreement with the cloud provider.<br />
 <span id="fn5" style={{display: 'block', position: 'relative', top: '-120px'}} /><sup>5</sup> Dashboard and API only. [Contribution metrics](./code-analytics.md#enable-contribution-metrics) requires a claude.ai Team or Enterprise organization.
@@ -222,7 +222,7 @@ Each tab lists what is unavailable or partially supported on that provider, with
     **Partial support:**
 
     * [Desktop](./code-desktop.md): only via [Claude Desktop on 3P](https://claude.com/docs/third-party/claude-desktop/overview)
-    * [Auto mode](./code-auto-mode-config.md): Sonnet 5, Opus 4.7, and Opus 4.8 only
+    * [Auto mode](./code-auto-mode-config.md): Sonnet 5, Opus 4.7, Opus 4.8, and Fable 5 only
     * [`/loop`](./code-scheduled-tasks.md): explicit intervals only
     * [Zero Data Retention](./code-zero-data-retention.md): subject to your AWS agreement
 
@@ -248,7 +248,7 @@ Each tab lists what is unavailable or partially supported on that provider, with
 
     * [Desktop](./code-desktop.md): via [managed settings](https://claude.com/docs/third-party/claude-desktop/configuration) or [Claude Desktop on 3P](https://claude.com/docs/third-party/claude-desktop/overview)
     * [Web search](./code-tools-reference.md#websearch-tool-behavior): Claude 4 models and later
-    * [Auto mode](./code-auto-mode-config.md): Sonnet 5, Opus 4.7, and Opus 4.8 only
+    * [Auto mode](./code-auto-mode-config.md): Sonnet 5, Opus 4.7, Opus 4.8, and Fable 5 only
     * [`/loop`](./code-scheduled-tasks.md): explicit intervals only
     * [Zero Data Retention](./code-zero-data-retention.md): subject to your Google Cloud agreement
 
@@ -261,7 +261,7 @@ Each tab lists what is unavailable or partially supported on that provider, with
     **Partial support:**
 
     * [Desktop](./code-desktop.md): only via [Claude Desktop on 3P](https://claude.com/docs/third-party/claude-desktop/overview)
-    * [Auto mode](./code-auto-mode-config.md): Sonnet 5, Opus 4.7, and Opus 4.8 only
+    * [Auto mode](./code-auto-mode-config.md): Sonnet 5, Opus 4.7, Opus 4.8, and Fable 5 only
     * [`/loop`](./code-scheduled-tasks.md): explicit intervals only
     * [Zero Data Retention](./code-zero-data-retention.md): subject to your Azure agreement
 

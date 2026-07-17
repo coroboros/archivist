@@ -66,7 +66,7 @@ As the loop runs, the SDK yields a stream of messages. Each message carries a ty
 * **`StreamEvent`:** only emitted when partial messages are enabled. Contains raw API streaming events (text deltas, tool input chunks). See [Stream responses](./code-agent-sdk/streaming-output.md).
 * **`ResultMessage`:** marks the end of the agent loop. Contains the final text result, token usage, cost, and session ID. Check the `subtype` field to determine whether the task succeeded or hit a limit. A small number of trailing system events, such as `prompt_suggestion`, can arrive after it, so iterate the stream to completion rather than breaking on the result. See [Handle the result](#handle-the-result).
 
-These five types cover the full agent loop lifecycle in both SDKs. The TypeScript SDK also yields additional observability events (hook events, tool progress, rate limits, task notifications) that provide extra detail but are not required to drive the loop. See the [Python message types reference](./code-agent-sdk/python.md#message-types) and [TypeScript message types reference](./code-agent-sdk/typescript.md#message-types) for the complete lists.
+These five types cover the full agent loop lifecycle. Both SDKs also yield observability events such as rate-limit status and task notifications that are not required to drive the loop. See the [Python message types reference](./code-agent-sdk/python.md#message-types) and [TypeScript message types reference](./code-agent-sdk/typescript.md#message-types) for the complete lists.
 
 ### Handle messages
 
@@ -231,7 +231,7 @@ If you don't set `model`, the SDK uses Claude Code's default, which depends on y
 
 ## The context window
 
-The context window is the total amount of information available to Claude during a session. It does not reset between turns within a session. Everything accumulates: the system prompt, tool definitions, conversation history, tool inputs, and tool outputs. Content that stays the same across turns (system prompt, tool definitions, CLAUDE.md) is automatically [prompt cached](https://platform.claude.com/docs/en/build-with-claude/prompt-caching), which reduces cost and latency for repeated prefixes.
+The context window is the total amount of information available to Claude during a session. It does not reset between turns within a session. Everything accumulates: the system prompt, tool definitions, conversation history, tool inputs, and tool outputs. Content that stays the same across turns (system prompt, tool definitions, CLAUDE.md) is automatically [prompt cached](https://platform.claude.com/docs/en/build-with-claude/prompt-caching), which reduces cost and latency for repeated prefixes. For how a custom system prompt or `append` text affects cache reuse across sessions, see [Modifying system prompts](./code-agent-sdk/modifying-system-prompts.md#improve-prompt-caching-across-users-and-machines).
 
 ### What consumes context
 
@@ -290,7 +290,7 @@ Each interaction with the SDK creates or continues a session. Capture the sessio
 
 When you resume, the full context from previous turns is restored: files that were read, analysis that was performed, and actions that were taken. You can also fork a session to branch into a different approach without modifying the original.
 
-See [Session management](./code-agent-sdk/sessions.md) for the full guide on resume, continue, and fork patterns.
+See [Session management](./code-agent-sdk/sessions.md) for the full guide on resume, continue, and fork patterns. To resume sessions across stateless containers or serverless hosts, pass a [`session_store` / `sessionStore` adapter](./code-agent-sdk/session-storage.md) so transcripts are mirrored to your own backend and any host can resume them. The Claude Code subprocess still writes to local disk first; point `CLAUDE_CONFIG_DIR` at a temp directory in `options.env` if the local copy needs to be ephemeral.
 
 <Note>
   In Python, `ClaudeSDKClient` handles session IDs automatically across multiple calls. See the [Python SDK reference](./code-agent-sdk/python.md#choosing-between-query-and-claudesdkclient) for details.
@@ -447,5 +447,6 @@ Now that you understand the loop, here's where to go depending on what you're bu
 * **Building an interactive UI?** Enable [streaming](./code-agent-sdk/streaming-output.md) to show live text and tool calls as the loop runs.
 * **Need tighter control over what the agent can do?** Lock down tool access with [permissions](./code-agent-sdk/permissions.md), and use [hooks](./code-agent-sdk/hooks.md) to audit, block, or transform tool calls before they execute.
 * **Running long or expensive tasks?** Offload isolated work to [subagents](./code-agent-sdk/subagents.md) to keep your main context lean.
+* **Deploying as a service?** See [Hosting the Agent SDK](./code-agent-sdk/hosting.md) for container and serverless guidance, and [Session storage](./code-agent-sdk/session-storage.md) to persist sessions to your own backend.
 
 For the broader conceptual picture of the agentic loop (not SDK-specific), see [How Claude Code works](./code-how-claude-code-works.md). For a practical guide to designing loops in Claude Code, from turn-based to goal-based and proactive loops, see [Loop engineering: getting started with loops](https://claude.com/blog/getting-started-with-loops) on the blog.

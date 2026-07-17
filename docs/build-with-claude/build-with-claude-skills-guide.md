@@ -38,7 +38,7 @@ Agent Skills extend Claude's capabilities through organized folders of instructi
 ## Overview
 
 <Note>
-  For a deep dive into the architecture and real-world applications of Agent Skills, read the engineering blog post: [Equipping agents for the real world with Agent Skills](https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills).
+  For a detailed look at the architecture and real-world applications of Agent Skills, read the engineering blog post: [Equipping agents for the real world with Agent Skills](https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills).
 </Note>
 
 Skills integrate with the Messages API through the [code execution tool](../agents-and-tools/agents-and-tools-tool-use-code-execution-tool.md). Whether using pre-built Skills managed by Anthropic or custom Skills you've uploaded, the integration shape is identical: both require code execution and use the same `container` structure.
@@ -63,7 +63,7 @@ Both skill sources are returned by the [List Skills endpoint](../api/api-beta-sk
 
 To use Skills, you need:
 
-1. **Claude API key** from the [Console](/settings/keys)
+1. **Claude API key** from the [Claude Console](/settings/keys)
 
 2. **Beta headers:**
 
@@ -79,7 +79,7 @@ To use Skills, you need:
 
 ### Container parameter
 
-Skills are specified using the `container` parameter in the Messages API. You can include up to 8 Skills per request.
+Skills are specified using the `container` parameter in the Messages API. You can include up to 8 Skills for each request.
 
 The structure is identical for both Anthropic and custom Skills. Specify the required `type` and `skill_id`, and optionally include `version` to pin to a specific version:
 
@@ -1137,7 +1137,7 @@ Reuse the same container across multiple messages by specifying the container ID
   // Carry the assistant's text forward; container.id carries the execution state
   var assistantText = string.Join(
       "\n",
-      response1.Content.Select(block => block.TryPickText(out var text) ? text.Text : null).Where(t => t is not null)
+      response1.Content.Select(block => block.TryPickText(out var text) ? text.Text : null).Where(text => text is not null)
   );
 
   var parameters2 = new MessageCreateParams
@@ -1900,7 +1900,7 @@ Skills may perform operations that require multiple turns. Handle `pause_turn` s
 </CodeGroup>
 
 <Note>
-  The response may include a `pause_turn` stop reason, which indicates that the API paused a long-running Skill operation. You can provide the response back as-is in a subsequent request to let Claude continue its turn, or modify the content if you wish to interrupt the conversation and provide additional guidance.
+  The response may include a `pause_turn` stop reason, which indicates that the API paused a long-running Skill operation. You can provide the response back as-is in a subsequent request to let Claude continue its turn, or modify the content if you want to interrupt the conversation and provide additional guidance.
 </Note>
 
 ### Using multiple Skills

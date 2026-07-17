@@ -12,8 +12,6 @@ generated: true
 
 > Artifacts turn Claude Code's work into live, interactive pages on claude.ai that you can keep private, share with your organization, or publish to a public link.
 
-{/* plan-availability: feature=artifacts plans=pro,max,team,enterprise providers=anthropic */}
-
 <Note>
   Artifacts are available on Pro, Max, Team, and Enterprise plans and require a session signed in with [`/login`](./code-setup.md#authenticate). See [Availability](#availability) for the full set of requirements.
 </Note>
@@ -176,7 +174,7 @@ Turn this migration plan into a checklist artifact. Check items off as you compl
 
 ## Improve the visual design
 
-As of Claude Code v2.1.183, Claude applies a built-in design skill when it builds an artifact, so pages get a deliberate palette, typography, and layout without extra prompting. That skill also looks for an existing design system in your project before choosing its own. To keep artifacts consistent with your product's branding, record your design tokens where Claude can find them, such as the project's [CLAUDE.md](./code-memory.md) or a theme file in your repository:
+{/* min-version: 2.1.182 */}Claude applies a built-in design skill when it builds an artifact, so pages get a deliberate palette, typography, and layout without extra prompting. Requires Claude Code v2.1.182 or later. That skill also looks for an existing design system in your project before choosing its own. Design tokens are the named color, typography, and spacing values your design system reuses. To keep artifacts consistent with your product's branding, record them where Claude can find them, such as the project's [CLAUDE.md](./code-memory.md) or a theme file in your repository:
 
 ```markdown theme={null}
 ## Design system

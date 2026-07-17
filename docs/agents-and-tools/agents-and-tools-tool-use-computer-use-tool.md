@@ -2149,7 +2149,7 @@ Because your application controls where and how computer use data is stored, com
 
 Computer use follows the standard [tool use pricing](./agents-and-tools-tool-use-overview.md#pricing). When using the computer use tool:
 
-**System prompt overhead:** The computer use beta adds 466-499 tokens to the system prompt
+**System prompt overhead:** The computer use beta adds 466–499 tokens to the system prompt
 
 **Computer use tool token usage:**
 

@@ -288,7 +288,7 @@ Cache entries written by the SDK use a 5-minute TTL by default when you authenti
 
 To request a 1-hour TTL on cache writes, set the [`ENABLE_PROMPT_CACHING_1H`](./code-env-vars.md) environment variable. You can export it in your shell or container environment, or pass it through `options.env`.
 
-The following example enables 1-hour TTL for an agent running on Amazon Bedrock:
+The following example enables 1-hour TTL for an agent running on Amazon Bedrock. Because it sets `CLAUDE_CODE_USE_BEDROCK`, it requires working AWS credentials for [Amazon Bedrock](./code-amazon-bedrock.md); without them the query fails.
 
 <CodeGroup>
   ```python Python theme={null}

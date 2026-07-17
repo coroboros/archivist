@@ -113,6 +113,8 @@ else
 fi
 ```
 
+This script and the Bash examples on this page that parse JSON input use `jq`, so install `jq` and make sure it is on your `PATH` before trying them.
+
 Now suppose Claude Code decides to run `Bash "rm -rf /tmp/build"`. Here's what happens:
 
 <Frame>
@@ -984,6 +986,8 @@ git -C ~/.claude/skills/team-skills pull --quiet 2>/dev/null || \
 echo '{"hookSpecificOutput": {"hookEventName": "SessionStart", "reloadSkills": true}}'
 ```
 
+The repository URL is a placeholder; replace it with your own skills repository. With the placeholder, the clone fails and prints a `fatal:` message to stderr. Stderr from a SessionStart hook that exits 0 is informational only, so the `reloadSkills` request still applies.
+
 #### Persist environment variables
 
 SessionStart hooks have access to the `CLAUDE_ENV_FILE` environment variable, which provides a file path where you can persist environment variables for subsequent Bash commands.
@@ -1039,6 +1043,8 @@ The matcher value corresponds to the CLI flag that triggered the hook:
 | `maintenance` | `claude -p --maintenance`                  |
 
 `--init-only` runs Setup hooks and `SessionStart` hooks with the `startup` matcher, then exits without starting a conversation. `--init` and `--maintenance` fire Setup hooks only when combined with `-p`; in an interactive session those two flags don't currently fire Setup hooks.
+
+On success, `--init-only` prints nothing to the terminal. To confirm the hooks ran, start with `claude --debug-file <path> --init-only`, replacing `<path>` with a log file location, and check the log for the Setup and SessionStart hook entries.
 
 Because Setup doesn't fire on every launch, a plugin that needs a dependency installed can't rely on Setup alone. The practical pattern is to check for the dependency on first use and install on miss, for example a hook or skill that tests for `${CLAUDE_PLUGIN_DATA}/node_modules` and runs `npm install` if absent. See the [persistent data directory](./code-plugins-reference.md#persistent-data-directory) for where to store installed dependencies.
 
@@ -1364,6 +1370,8 @@ Runs after Claude creates tool parameters and before processing the tool call. M
 
 Use [PreToolUse decision control](#pretooluse-decision-control) to allow, deny, ask, or defer the tool call.
 
+{/* min-version: 2.1.210 */}An [Agent SDK callback hook](./code-agent-sdk/hooks.md) on `PreToolUse` that exceeds its timeout blocks the tool call, and Claude receives an error result naming the timeout. An explicit deny returned by another hook still takes precedence.
+
 #### PreToolUse input
 
 In addition to the [common input fields](#common-input-fields), PreToolUse hooks receive `tool_name`, `tool_input`, and `tool_use_id`. The `tool_input` fields depend on the tool:
@@ -1516,6 +1524,8 @@ When multiple PreToolUse hooks return different decisions, precedence is `deny` 
 
 When a hook returns `"ask"`, the permission prompt displayed to the user includes a label identifying where the hook came from: for example, `[User]`, `[Project]`, `[Plugin]`, or `[Local]`. This helps users understand which configuration source is requesting confirmation.
 
+A hook's `"ask"` also forces a permission prompt in [auto mode](./code-permission-modes.md#eliminate-prompts-with-auto-mode): the classifier can still deny the tool call, but it can't approve the call silently. Before v2.1.211, the classifier could approve a Bash command running outside the [sandbox](./code-sandboxing.md) without showing the prompt the hook requested; the classifier still applied its own safety rules to that command, and a hook `"deny"` was always honored.
+
 ```json theme={null}
 {
   "hookSpecificOutput": {
@@ -1575,7 +1585,7 @@ There is no timeout or retry limit. The session remains on disk until you resume
 If the deferred tool is no longer available when you resume, the process exits with `stop_reason: "tool_deferred_unavailable"` and `is_error: true` before the hook fires. This happens when an MCP server that provided the tool is not connected for the resumed session. The `deferred_tool_use` payload is still included so you can identify which tool went missing.
 
 <Note>
-  `--resume` restores the permission mode that was active when the tool was deferred, so you don't need to pass `--permission-mode` again. The exceptions are `plan` and `bypassPermissions`, which are never carried over. Passing `--permission-mode` explicitly on resume overrides the restored value.
+  `--resume` restores the permission mode that was active when the tool was deferred, so you don't need to pass `--permission-mode` again. The exceptions are `plan` and `bypassPermissions`, which are never carried over, and `auto`, which is restored only when your account still meets the [auto mode requirements](./code-permission-modes.md#eliminate-prompts-with-auto-mode). Passing `--permission-mode` explicitly on resume overrides the restored value.
 </Note>
 
 ### PermissionRequest

@@ -34,7 +34,7 @@ Claude models in Microsoft Foundry are available in two hosting options. You cho
 Before you begin, ensure you have:
 
 * An active Azure subscription
-* Access to [Foundry](https://ai.azure.com/)
+* Access to the [Foundry portal](https://ai.azure.com/)
 * The [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli) installed (required for the Entra ID cURL example, optional otherwise)
 * An Azure RBAC role that allows you to use the resource, such as **Foundry User** (formerly Azure AI User) or **Cognitive Services User**
 
@@ -156,7 +156,7 @@ After creating your resource, deploy a Claude model to make it available for API
 
    * **Deployment name:** Defaults to the model ID, but you can customize it (for example, `my-claude-deployment`). The deployment name cannot be changed after creation.
    * **Region scope:** Select Global, or for models hosted on Azure, Data Zone. Selecting Data Zone creates a US Data Zone Standard deployment, which keeps inference within the United States and is equivalent to setting [`inference_geo: "us"`](../manage-claude/manage-claude-data-residency.md#inference-geo) on the Claude API.
-   * **Model version:** Expand **Model version settings** and select a version from the **Model version** dropdown. Each [hosting option](#hosting-options) is listed as a separate model version, labeled with its hosting option (for example, version 1 for Hosted on Anthropic, version 2 for Hosted on Azure).
+   * **Model version:** Expand **Model version settings** and select a version from the **Model version** dropdown menu. Each [hosting option](#hosting-options) is listed as a separate model version, labeled with its hosting option (for example, version 1 for Hosted on Anthropic, version 2 for Hosted on Azure).
 
 6. Select **Deploy** and wait for provisioning to complete.
 
@@ -578,8 +578,6 @@ Entra ID authentication lets you manage access with Azure RBAC, integrate with y
   ```
 
   ```php PHP
-  <?php
-
   use Anthropic\Foundry;
 
   // Obtain an Entra ID access token, for example using the Azure CLI:

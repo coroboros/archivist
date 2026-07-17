@@ -35,7 +35,7 @@ A key created in one organization cannot be used to manage a different organizat
   </Step>
 
   <Step title="Create the key">
-    Click **Create key**, give it a name, choose an [expiration](./manage-claude-authentication.md#key-expiration), and click **Create**. Claude Console keys do not have selectable scopes; every key carries full access to all endpoints that accept Admin API keys (the service-account and federation endpoints noted at the top of this page do not accept Admin API keys).
+    Click **Create key**, give it a name, choose a [key expiration](./manage-claude-authentication.md#key-expiration), and click **Create**. Claude Console keys do not have selectable scopes; every key carries full access to all endpoints that accept Admin API keys (the service-account and federation endpoints noted at the top of this page do not accept Admin API keys).
   </Step>
 
   <Step title="Copy and store the secret">
@@ -82,7 +82,7 @@ When you create a Claude Enterprise key, select every scope that the APIs you pl
 | [Compliance API organization endpoints](./manage-claude-compliance-org-data.md): read organization metadata and effective settings                                                                                                          | `read:compliance_org_data`    |
 | Admin API [user management](./manage-claude-user-management.md) read endpoints and every Compliance API read endpoint, with a single read-only scope (for security-audit integrations; does not include the Spend Limits or Analytics APIs) | `read:org_audit`              |
 
-The Compliance and Analytics APIs must be enabled for your organization before keys with those scopes can be used. See [Set up the Compliance API](./manage-claude-compliance-api-access.md#set-up-the-compliance-api) and [Analytics APIs](./manage-claude-analytics-api.md#get-access-to-the-claude-enterprise-analytics-api).
+The Compliance and Analytics APIs must be enabled for your organization before keys with those scopes can be used. See [Set up the Compliance API](./manage-claude-compliance-api-access.md#set-up-the-compliance-api) and [Get access to the Claude Enterprise Analytics API](./manage-claude-analytics-api.md#get-access-to-the-claude-enterprise-analytics-api).
 
 ## Use the key
 

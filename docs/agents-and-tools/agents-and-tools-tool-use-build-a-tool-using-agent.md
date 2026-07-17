@@ -22,7 +22,7 @@ The example tool is `create_calendar_event`. Its schema uses nested objects, arr
 
 The smallest possible tool-using program: one tool, one user message, one tool call, one result. The code is heavily commented so you can map each line to the [tool use lifecycle](./agents-and-tools-tool-use-how-tool-use-works.md).
 
-The request sends a `tools` array alongside the user message. When Claude decides to call a tool, the response comes back with `stop_reason: "tool_use"` and a `tool_use` content block containing the tool name, a unique `id`, and the structured `input`. Your code runs the tool, then sends the result back in a `tool_result` block whose `tool_use_id` matches the `id` from the call.
+The request sends a `tools` array alongside the user message. When Claude determines that a tool call is needed, the response comes back with `stop_reason: "tool_use"` and a `tool_use` content block containing the tool name, a unique `id`, and the structured `input`. Your code runs the tool, then sends the result back in a `tool_result` block whose `tool_use_id` matches the `id` from the call.
 
 <CodeGroup>
   ```bash cURL
@@ -4023,7 +4023,7 @@ The `is_error` flag is the only difference from a successful result. Claude sees
 
 Rings 2 through 4 wrote the same loop by hand: call the API, check `stop_reason`, run tools, append results, repeat. The Tool Runner does this for you. Define each tool as a function, pass the list to `tool_runner`, and retrieve the final message once the loop completes. Error wrapping, result formatting, and conversation management are handled internally.
 
-The Python SDK uses the `@beta_tool` decorator to infer the schema from type hints and the docstring. The TypeScript SDK uses `betaZodTool` with a Zod schema. The other SDKs follow the same pattern with their own helpers: `BetaRunnableTool` in C# and PHP, typed tool classes in Java and Ruby, and `toolrunner.NewBetaToolFromJSONSchema` in Go.
+Each SDK provides a helper that turns an ordinary function into a runnable tool and derives the input schema from its signature; the tabs below show the idiomatic form for each language.
 
 <Note>
   Tool Runner is available in all seven SDKs: Python, TypeScript, C#, Go, Java, PHP, and Ruby. See [Tool Runner](./agents-and-tools-tool-use-tool-runner.md) for the full reference. The cURL and CLI tabs show a note instead of code; keep the Ring 4 loop for curl- or CLI-based scripts.
@@ -4670,7 +4670,7 @@ You started with a single hardcoded tool call and ended with a production-shaped
     Schema specification and best practices.
   </Card>
 
-  <Card href="./agents-and-tools-tool-use-tool-runner.md" title="Tool Runner deep dive">
+  <Card href="./agents-and-tools-tool-use-tool-runner.md" title="Tool Runner">
     The full SDK abstraction reference.
   </Card>
 

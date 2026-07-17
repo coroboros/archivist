@@ -18,7 +18,7 @@ You can ask Claude about any text, pictures, charts, and tables in PDFs you prov
 
 * Analyzing financial reports and understanding charts/tables
 * Extracting key information from legal documents
-* Translation assistance for documents
+* Assisting with document translation
 * Converting document information into structured formats
 
 ## Before you begin
@@ -33,7 +33,7 @@ Claude works with any standard PDF. Ensure your request size meets these require
 | Maximum pages per request | 600 (100 when the request's context window is under 1M tokens)          |
 | Format                    | Standard PDF (no passwords/encryption)                                  |
 
-Both limits are on the entire request payload, including any other content sent alongside PDFs. For large PDFs, consider uploading with the [Files API](#option-3-files-api) and referencing by `file_id` to keep request payloads small.
+Both limits are on the entire request payload, including any other content sent alongside PDFs. For large PDFs, consider uploading with the [Files API](./build-with-claude-files.md) and referencing by `file_id` to keep request payloads small.
 
 <Tip>
   Dense PDFs (many small-font pages, complex tables, or heavy graphics) can fill the context window before reaching the page limit. Requests with large PDFs can also fail before reaching the page limit, even when using the Files API. Try splitting the document into sections; for large files, because each page is processed as an image, downsampling embedded images can also help.
@@ -72,8 +72,8 @@ When using PDF support through the Converse API, part of [Claude on Amazon Bedro
 
 #### Key limitations
 
-* **Converse API**: Visual PDF analysis requires citations to be enabled. There is currently no option to use visual analysis without citations (unlike the InvokeModel API).
-* **InvokeModel API**: Provides full control over PDF processing without forced citations.
+* **Converse API:** Visual PDF analysis requires citations to be enabled. There is currently no option to use visual analysis without citations (unlike the InvokeModel API).
+* **InvokeModel API:** Provides full control over PDF processing without forced citations.
 
 #### Common issues
 
@@ -1052,8 +1052,8 @@ When you send a PDF to Claude, the following steps occur:
   <Step title="Claude responds, referencing the PDF's contents if relevant.">
     Claude can reference both textual and visual content when it responds. You can further improve performance by integrating PDF support with:
 
-    * [Prompt caching](#use-prompt-caching): To improve performance for repeated analysis.
-    * [Batch processing](#process-document-batches): For high-volume document processing.
+    * [Use prompt caching](#use-prompt-caching): To improve performance for repeated analysis.
+    * [Process document batches](#process-document-batches): For high-volume document processing.
     * [Tool use](../agents-and-tools/agents-and-tools-tool-use-overview.md): To extract specific information from documents for use as tool inputs.
   </Step>
 </Steps>
@@ -1062,7 +1062,7 @@ When you send a PDF to Claude, the following steps occur:
 
 The token count of a PDF file depends on the total text extracted from the document and the number of pages:
 
-* Text token costs: Each page typically uses 1,500-3,000 tokens per page depending on content density. Standard API pricing applies with no additional PDF fees.
+* Text token costs: Each page typically uses 1,500–3,000 tokens per page depending on content density. Standard API pricing applies with no additional PDF fees.
 * Image token costs: Because each page is converted into an image, the same [image-based cost calculations](./build-with-claude-vision.md#evaluate-image-size) are applied.
 
 You can use [token counting](./build-with-claude-token-counting.md) to estimate costs for your specific PDFs.
@@ -1998,7 +1998,7 @@ Batches process asynchronously. To check progress and retrieve results once proc
   </Card>
 
   <Card title="Try PDF examples" icon="file" href="https://platform.claude.com/cookbook/multimodal-getting-started-with-vision">
-    Explore practical examples of PDF processing in the cookbook recipe.
+    Explore practical examples of PDF processing in the Claude Cookbook recipe.
   </Card>
 
   <Card title="View API reference" icon="code" href="../api/api-messages-create.md">

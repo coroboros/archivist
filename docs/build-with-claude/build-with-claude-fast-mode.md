@@ -53,19 +53,19 @@ Fast mode runs the same model with a faster inference configuration. There is no
 <CodeGroup>
   ```bash cURL
   curl https://api.anthropic.com/v1/messages \
-      --header "x-api-key: $ANTHROPIC_API_KEY" \
-      --header "anthropic-version: 2023-06-01" \
-      --header "anthropic-beta: fast-mode-2026-02-01" \
-      --header "content-type: application/json" \
-      --data '{
-          "model": "claude-opus-4-8",
-          "max_tokens": 4096,
-          "speed": "fast",
-          "messages": [{
-              "role": "user",
-              "content": "Refactor this module to use dependency injection"
-          }]
-      }'
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-beta: fast-mode-2026-02-01" \
+    -H "content-type: application/json" \
+    -d '{
+      "model": "claude-opus-4-8",
+      "max_tokens": 4096,
+      "speed": "fast",
+      "messages": [{
+        "role": "user",
+        "content": "Refactor this module to use dependency injection"
+      }]
+    }'
   ```
 
   ```bash CLI
@@ -121,6 +121,8 @@ Fast mode runs the same model with a faster inference configuration. There is no
   ```
 
   ```csharp C#
+  AnthropicClient client = new();
+
   var response = await client.Beta.Messages.Create(new MessageCreateParams
   {
       Model = "claude-opus-4-8",
@@ -213,7 +215,7 @@ Fast mode pricing stacks with other pricing modifiers:
 * [Prompt caching multipliers](../about-claude/about-claude-pricing.md#prompt-caching) apply on top of fast mode pricing
 * [Data residency](../manage-claude/manage-claude-data-residency.md) multipliers apply on top of fast mode pricing
 
-For complete pricing details, see the [pricing page](../about-claude/about-claude-pricing.md#fast-mode-pricing).
+For complete pricing details, see the [Pricing](../about-claude/about-claude-pricing.md#fast-mode-pricing) page.
 
 ## Rate limits
 
@@ -230,7 +232,7 @@ The response includes headers that indicate your fast mode rate limit status:
 | `anthropic-fast-output-tokens-remaining` | Remaining fast mode output tokens                 |
 | `anthropic-fast-output-tokens-reset`     | Time when the fast mode output token limit resets |
 
-For tier-specific rate limits, see the [rate limits page](../api/api-rate-limits.md).
+For tier-specific rate limits, see the [Rate limits](../api/api-rate-limits.md) page.
 
 ## Checking which speed was used
 
@@ -239,16 +241,16 @@ The response `usage` object includes a `speed` field that indicates which speed 
 <CodeGroup>
   ```bash cURL
   curl https://api.anthropic.com/v1/messages \
-      --header "x-api-key: $ANTHROPIC_API_KEY" \
-      --header "anthropic-version: 2023-06-01" \
-      --header "anthropic-beta: fast-mode-2026-02-01" \
-      --header "content-type: application/json" \
-      --data '{
-          "model": "claude-opus-4-8",
-          "max_tokens": 1024,
-          "speed": "fast",
-          "messages": [{"role": "user", "content": "Hello"}]
-      }'
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-beta: fast-mode-2026-02-01" \
+    -H "content-type: application/json" \
+    -d '{
+      "model": "claude-opus-4-8",
+      "max_tokens": 1024,
+      "speed": "fast",
+      "messages": [{"role": "user", "content": "Hello"}]
+    }'
   ```
 
   ```bash CLI
@@ -294,6 +296,8 @@ The response `usage` object includes a `speed` field that indicates which speed 
   ```
 
   ```csharp C#
+  AnthropicClient client = new();
+
   var response = await client.Beta.Messages.Create(new MessageCreateParams
   {
       Model = "claude-opus-4-8",
@@ -482,6 +486,8 @@ Because setting `max_retries` to `0` also disables retries for other transient e
   ```
 
   ```typescript TypeScript
+  const client = new Anthropic();
+
   async function createMessageWithFastFallback(
     params: Anthropic.Beta.MessageCreateParams,
     requestOptions?: Anthropic.RequestOptions,
@@ -522,6 +528,8 @@ Because setting `max_retries` to `0` also disables retries for other transient e
   ```
 
   ```csharp C#
+  AnthropicClient client = new();
+
   async Task<BetaMessage> CreateMessageWithFastFallback(
       MessageCreateParams parameters,
       int? maxRetries = null,
@@ -602,7 +610,7 @@ Because setting `max_retries` to `0` also disables retries for other transient e
   			Messages: []anthropic.BetaMessageParam{
   				anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Hello")),
   			},
-  			Speed: "fast",
+  			Speed: anthropic.BetaMessageNewParamsSpeedFast,
   			Betas: []anthropic.AnthropicBeta{anthropic.AnthropicBetaFastMode2026_02_01},
   		},
   		3,
