@@ -17,7 +17,7 @@ Token counting lets you determine the number of tokens in a message before you s
 * Optimize prompts to a specific length
 
 <Note>
-  This feature is eligible for [Zero Data Retention (ZDR)](./build-with-claude-api-and-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
+  For how zero data retention (ZDR) applies to this feature, see [API and data retention](../manage-claude/manage-claude-api-and-data-retention.md).
 </Note>
 
 ***

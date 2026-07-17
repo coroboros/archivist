@@ -21,7 +21,7 @@ Code execution also powers dynamic filtering in the [web search](./agents-and-to
 </Note>
 
 <Note>
-  This feature is **not** eligible for [Zero Data Retention (ZDR)](../build-with-claude/build-with-claude-api-and-data-retention.md). Data is retained according to the feature's standard retention policy.
+  For how zero data retention (ZDR) applies to this feature, see [API and data retention](../manage-claude/manage-claude-api-and-data-retention.md).
 </Note>
 
 ## Model compatibility

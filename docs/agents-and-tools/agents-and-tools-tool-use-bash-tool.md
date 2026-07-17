@@ -11,7 +11,7 @@ Let Claude request shell commands that your application runs in a persistent bas
 ---
 
 <Note>
-  This feature is eligible for [Zero Data Retention (ZDR)](../build-with-claude/build-with-claude-api-and-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
+  For how zero data retention (ZDR) applies to this feature, see [API and data retention](../manage-claude/manage-claude-api-and-data-retention.md).
 </Note>
 
 The bash tool is a [client tool](./agents-and-tools-tool-use-how-tool-use-works.md): Claude doesn't run commands itself. When you include the tool in a request, Claude replies with a `tool_use` block that names the command to run. Your application runs that command in a bash session it owns and returns the output in a `tool_result` block.

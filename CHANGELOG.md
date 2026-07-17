@@ -1,5 +1,55 @@
 # Changelog
 
+## 🤖 v1.5.51 - 17/07/2026
+
+File Changes:
+
+- Modified: `docs/agents-and-tools/agents-and-tools-README.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-agent-skills-overview.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-mcp-connector.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-advisor-tool.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-bash-tool.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-code-execution-tool.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-computer-use-tool.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-fine-grained-tool-streaming.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-memory-tool.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-programmatic-tool-calling.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-text-editor-tool.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-tool-search-tool.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-web-fetch-tool.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-web-search-tool.md`
+- Modified: `docs/build-with-claude/build-with-claude-README.md`
+- Modified: `docs/build-with-claude/build-with-claude-adaptive-thinking.md`
+- Modified: `docs/build-with-claude/build-with-claude-batch-processing.md`
+- Modified: `docs/build-with-claude/build-with-claude-cache-diagnostics.md`
+- Modified: `docs/build-with-claude/build-with-claude-citations.md`
+- Modified: `docs/build-with-claude/build-with-claude-claude-on-amazon-bedrock-legacy.md`
+- Modified: `docs/build-with-claude/build-with-claude-claude-on-amazon-bedrock.md`
+- Modified: `docs/build-with-claude/build-with-claude-claude-platform-on-aws.md`
+- Modified: `docs/build-with-claude/build-with-claude-compaction.md`
+- Modified: `docs/build-with-claude/build-with-claude-context-editing.md`
+- Modified: `docs/build-with-claude/build-with-claude-data-residency.md`
+- Modified: `docs/build-with-claude/build-with-claude-effort.md`
+- Modified: `docs/build-with-claude/build-with-claude-extended-thinking.md`
+- Modified: `docs/build-with-claude/build-with-claude-fast-mode.md`
+- Modified: `docs/build-with-claude/build-with-claude-files.md`
+- Modified: `docs/build-with-claude/build-with-claude-mid-conversation-system-messages.md`
+- Modified: `docs/build-with-claude/build-with-claude-pdf-support.md`
+- Modified: `docs/build-with-claude/build-with-claude-prompt-caching.md`
+- Modified: `docs/build-with-claude/build-with-claude-search-results.md`
+- Modified: `docs/build-with-claude/build-with-claude-skills-guide.md`
+- Modified: `docs/build-with-claude/build-with-claude-structured-outputs.md`
+- Modified: `docs/build-with-claude/build-with-claude-token-counting.md`
+- Modified: `docs/build-with-claude/build-with-claude-working-with-messages.md`
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-hooks.md`
+- Modified: `docs/code/code-permissions.md`
+- Modified: `docs/code/code-sessions.md`
+- Modified: `docs/code/code-skills.md`
+- Modified: `docs/manage-claude/manage-claude-README.md`
+- Modified: `docs/manage-claude/manage-claude-data-residency.md`
+
+
 ## 🤖 v1.5.50 - 17/07/2026
 
 File Changes:

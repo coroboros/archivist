@@ -11,7 +11,7 @@ Control how many tokens Claude uses when responding with the effort parameter, t
 ---
 
 <Note>
-  This feature is eligible for [Zero Data Retention (ZDR)](./build-with-claude-api-and-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
+  For how zero data retention (ZDR) applies to this feature, see [API and data retention](../manage-claude/manage-claude-api-and-data-retention.md).
 </Note>
 
 The effort parameter lets you control how many tokens Claude spends when responding to requests. You can trade off between response thoroughness and token efficiency with a single model. The effort parameter is available on all supported models with no beta header required.

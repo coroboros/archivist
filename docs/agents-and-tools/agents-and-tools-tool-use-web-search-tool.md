@@ -11,7 +11,7 @@ Give Claude access to current web content with cited sources, optional dynamic f
 ---
 
 <Note>
-  This feature is eligible for [Zero Data Retention (ZDR)](../build-with-claude/build-with-claude-api-and-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
+  For how zero data retention (ZDR) applies to this feature, see [API and data retention](../manage-claude/manage-claude-api-and-data-retention.md).
 </Note>
 
 The web search tool gives Claude direct access to real-time web content, allowing it to answer questions with up-to-date information beyond its knowledge cutoff. The response includes citations for sources drawn from search results.

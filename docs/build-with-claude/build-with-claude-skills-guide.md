@@ -20,7 +20,7 @@ Agent Skills extend Claude's capabilities through organized folders of instructi
 </Note>
 
 <Note>
-  This feature is **not** eligible for [Zero Data Retention (ZDR)](./build-with-claude-api-and-data-retention.md). Data is retained according to the feature's standard retention policy.
+  For how zero data retention (ZDR) applies to this feature, see [API and data retention](../manage-claude/manage-claude-api-and-data-retention.md).
 </Note>
 
 ## Quick links
