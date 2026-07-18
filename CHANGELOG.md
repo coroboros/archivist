@@ -1,5 +1,20 @@
 # Changelog
 
+## 🤖 v1.5.53 - 18/07/2026
+
+File Changes:
+
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-chrome.md`
+- Modified: `docs/code/code-commands.md`
+- Modified: `docs/code/code-desktop.md`
+- Modified: `docs/code/code-mcp.md`
+- Modified: `docs/code/code-quickstart.md`
+- Modified: `docs/code/code-sessions.md`
+- Modified: `docs/code/code-statusline.md`
+- Modified: `docs/code/code-troubleshooting.md`
+
+
 ## 🤖 v1.5.52 - 18/07/2026
 
 File Changes:
