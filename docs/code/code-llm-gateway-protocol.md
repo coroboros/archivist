@@ -56,6 +56,8 @@ Token-counting endpoints are the only optional ones: when they're absent, Claude
 
 A gateway also sees best-effort startup traffic it can reject without breaking anything: a `HEAD /` connectivity probe, and on Amazon Bedrock-format gateways a `GET /inference-profiles?type=SYSTEM_DEFINED` request.
 
+The [fast mode](./code-fast-mode.md) availability check never appears in gateway logs: it calls `api.anthropic.com` directly rather than following `ANTHROPIC_BASE_URL`, so on a network that blocks direct egress to `api.anthropic.com`, fast mode can report a connectivity error while inference through the gateway keeps working. The [WebFetch domain safety check](./code-data-usage.md#webfetch-domain-safety-check) also calls `api.anthropic.com` directly. [Use fast mode behind proxies and LLM gateways](./code-fast-mode.md#use-fast-mode-behind-proxies-and-llm-gateways) covers the variables that restore it.
+
 ### Streaming
 
 Inference responses must stream. Claude Code consumes server-sent events as they arrive, so a gateway that buffers complete responses before relaying them stalls the client.

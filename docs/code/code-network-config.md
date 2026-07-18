@@ -106,6 +106,17 @@ export CLAUDE_CODE_CLIENT_KEY_PASSPHRASE="your-passphrase"
 
 Claude Code reads the certificate and key files at startup and re-reads them each time it applies settings, including when settings change during a session. To rotate the certificate and key, replace the files at the same paths.
 
+In [cloud sessions](./code-claude-code-on-the-web.md), the hosting environment manages the connection to the API, so Claude Code ignores the following variables when they come from a settings file `env` block:
+
+* `CLAUDE_CODE_CLIENT_CERT`
+* `CLAUDE_CODE_CLIENT_KEY`
+* `CLAUDE_CODE_CLIENT_KEY_PASSPHRASE`
+* `NODE_EXTRA_CA_CERTS`
+* `NODE_TLS_REJECT_UNAUTHORIZED`
+* `CLAUDE_CODE_OAUTH_SCOPES`
+
+Claude Code notes each ignored key in the session's debug log.
+
 ## Apply network settings to background agents
 
 [Background agents](./code-agent-view.md) don't run inside the terminal that dispatched them. A per-user supervisor process starts on demand, outlives your shell, and hosts every `claude agents`, `--bg`, and `/background` session. See [How background sessions are hosted](./code-agent-view.md#how-background-sessions-are-hosted). This changes how the configuration on this page reaches those sessions.
@@ -148,6 +159,8 @@ If you install Claude Code through npm or manage your own binary distribution, e
 Claude Code also sends optional operational telemetry by default, which you can disable with environment variables. See [Telemetry services](./code-data-usage.md#telemetry-services) for how to disable it before finalizing your allowlist.
 
 When using [Amazon Bedrock](./code-amazon-bedrock.md), [Google Cloud's Agent Platform](./code-google-vertex-ai.md), [Microsoft Foundry](./code-microsoft-foundry.md), or a signed-in [Claude apps gateway](./code-claude-apps-gateway.md) session, model traffic and authentication go to your provider or gateway instead of `api.anthropic.com`, `claude.ai`, or `platform.claude.com`. The WebFetch tool still calls `api.anthropic.com` for its [domain safety check](./code-data-usage.md#webfetch-domain-safety-check) unless you set `skipWebFetchPreflight: true` in [settings](./code-settings.md).
+
+When routing through an [LLM gateway](./code-llm-gateway.md) with [`ANTHROPIC_BASE_URL`](./code-llm-gateway-connect.md#set-the-base-url-and-credential), the [fast mode](./code-fast-mode.md) availability check still calls `api.anthropic.com` rather than the gateway base URL. The check does honor a configured HTTP proxy, so where a network block is the cause, an allowlist entry for `api.anthropic.com` in the proxy is the fix. A network block fails the check only where the host is unreachable even through the proxy, and fast mode then reports a connectivity error. The same connectivity error appears when the check presents a gateway-issued credential that Anthropic rejects; allowlisting doesn't help there, since nothing is blocked. See [use fast mode behind proxies and LLM gateways](./code-fast-mode.md#use-fast-mode-behind-proxies-and-llm-gateways) for the variables that restore it.
 
 [Claude Code on the web](./code-claude-code-on-the-web.md) and [Code Review](./code-code-review.md) connect to your repositories from Anthropic-managed infrastructure. If your GitHub Enterprise Cloud organization restricts access by IP address, enable [IP allow list inheritance for installed GitHub Apps](https://docs.github.com/en/enterprise-cloud@latest/organizations/keeping-your-organization-secure/managing-security-settings-for-your-organization/managing-allowed-ip-addresses-for-your-organization#allowing-access-by-github-apps). The Claude GitHub App registers its IP ranges, so enabling this setting allows access without manual configuration. To [add the ranges to your allow list manually](https://docs.github.com/en/enterprise-cloud@latest/organizations/keeping-your-organization-secure/managing-security-settings-for-your-organization/managing-allowed-ip-addresses-for-your-organization#adding-an-allowed-ip-address) instead, or to configure other firewalls, see the [Anthropic API IP addresses](https://platform.claude.com/docs/en/api/ip-addresses).
 
