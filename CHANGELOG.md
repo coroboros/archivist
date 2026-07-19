@@ -1,5 +1,23 @@
 # Changelog
 
+## 🤖 v1.5.54 - 19/07/2026
+
+File Changes:
+
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-artifacts.md`
+- Modified: `docs/code/code-claude-apps-gateway-deploy.md`
+- Modified: `docs/code/code-claude-code-on-the-web.md`
+- Modified: `docs/code/code-hooks.md`
+- Modified: `docs/code/code-overview.md`
+- Modified: `docs/code/code-plugins.md`
+- Modified: `docs/code/code-routines.md`
+- Modified: `docs/code/code-sessions.md`
+- Modified: `docs/code/code-troubleshoot-install.md`
+- Modified: `docs/code/code-troubleshooting.md`
+- Modified: `docs/code/code-vs-code.md`
+
+
 ## 🤖 v1.5.53 - 18/07/2026
 
 File Changes:
