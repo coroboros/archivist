@@ -1,6 +1,6 @@
 ---
-title: "Agent SDK overview"
-source: "https://code.claude.com/docs/en/agent-sdk/overview"
+title: "Overview"
+source: "https://code.claude.com/docs/en/overview"
 category: "code"
 generated: true
 ---
@@ -8,652 +8,243 @@ generated: true
 > Fetch the complete documentation index at: https://code.claude.com/docs/llms.txt
 > Use this file to discover all available pages before exploring further.
 
-# Agent SDK overview
+# Overview
 
-> Build production AI agents with Claude Code as a library
+> Claude Code is an agentic coding tool that reads your codebase, edits files, runs commands, and integrates with your development tools. Available in your terminal, IDE, desktop app, and browser.
 
-Build AI agents that autonomously read files, run commands, search the web, edit code, and more. The Agent SDK gives you the same tools, agent loop, and context management that power Claude Code, programmable in Python and TypeScript. For other languages, [run the CLI programmatically](./code-headless.md) with the `-p` flag and `--output-format json`. For the thinking behind agent harness design, see [A harness for every task: dynamic workflows in Claude Code](https://claude.com/blog/a-harness-for-every-task-dynamic-workflows-in-claude-code) on the blog.
-
-<CodeGroup>
-  ```python Python theme={null}
-  import asyncio
-  from claude_agent_sdk import query, ClaudeAgentOptions
-
-
-  async def main():
-      async for message in query(
-          prompt="Find and fix the bug in auth.py",
-          options=ClaudeAgentOptions(allowed_tools=["Read", "Edit", "Bash"]),
-      ):
-          print(message)  # Claude reads the file, finds the bug, edits it
-
-
-  asyncio.run(main())
-  ```
-
-  ```typescript TypeScript theme={null}
-  import { query } from "@anthropic-ai/claude-agent-sdk";
-
-  for await (const message of query({
-    prompt: "Find and fix the bug in auth.ts",
-    options: { allowedTools: ["Read", "Edit", "Bash"] }
-  })) {
-    console.log(message); // Claude reads the file, finds the bug, edits it
-  }
-  ```
-</CodeGroup>
-
-The Agent SDK includes built-in tools for reading files, running commands, and editing code, so your agent can start working immediately without you implementing tool execution. Dive into the quickstart or explore real agents built with the SDK:
-
-<CardGroup cols={2}>
-  <Card title="Quickstart" icon="play" href="/en/agent-sdk/quickstart">
-    Build a bug-fixing agent in minutes
-  </Card>
-
-  <Card title="Example agents" icon="star" href="https://github.com/anthropics/claude-agent-sdk-demos">
-    Email assistant, research agent, and more
-  </Card>
-</CardGroup>
+Claude Code is an AI-powered coding assistant that helps you build features, fix bugs, and automate development tasks. It understands your entire codebase and can work across multiple files and tools to get things done.
 
 ## Get started
 
-<Steps>
-  <Step title="Install the SDK">
+Claude Code runs on several surfaces: the terminal, IDE extensions, a desktop app, and the web. Choose one from the tabs below to get started. Most surfaces require a [Claude subscription](https://claude.com/pricing?utm_source=claude_code\&utm_medium=docs\&utm_content=overview_pricing) or [Anthropic Console](https://console.anthropic.com/) account. The Terminal CLI and VS Code also support [third-party providers](./code-third-party-integrations.md).
+
+<Tabs>
+  <Tab title="Terminal">
+    The full-featured CLI for working with Claude Code directly in your terminal. Edit files, run commands, and manage your entire project from the command line.
+
+    To install Claude Code, use one of the following methods:
+
     <Tabs>
-      <Tab title="TypeScript">
-        ```bash theme={null}
-        npm install @anthropic-ai/claude-agent-sdk
+      <Tab title="Native Install (Recommended)">
+        **macOS, Linux, WSL:**
+
+        ```bash theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null}
+        curl -fsSL https://claude.ai/install.sh | bash
         ```
+
+        **Windows PowerShell:**
+
+        ```powershell theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null}
+        irm https://claude.ai/install.ps1 | iex
+        ```
+
+        **Windows CMD:**
+
+        ```batch theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null}
+        curl -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd && del install.cmd
+        ```
+
+        If you see `The token '&&' is not a valid statement separator`, you're in PowerShell, not CMD. If you see `'irm' is not recognized as an internal or external command`, you're in CMD, not PowerShell. Your prompt shows `PS C:\` when you're in PowerShell and `C:\` without the `PS` when you're in CMD.
+
+        If the install command fails with `syntax error near unexpected token '<'`, a `403`, or another curl error, see [Troubleshoot installation](./code-troubleshoot-install.md#find-your-error) to match the error to a fix and for alternative install methods.
+
+        [Git for Windows](https://git-scm.com/downloads/win) is recommended on native Windows so Claude Code can use the Bash tool. If Git for Windows is not installed, Claude Code uses PowerShell as the shell tool instead. WSL setups do not need Git for Windows.
+
+        <Info>
+          Native installations automatically update in the background to keep you on the latest version.
+        </Info>
       </Tab>
 
-      <Tab title="Python (uv)">
-        [uv](https://docs.astral.sh/uv/) is a fast Python package manager that handles virtual environments automatically:
-
-        ```bash theme={null}
-        uv init
-        uv add claude-agent-sdk
+      <Tab title="Homebrew">
+        ```bash theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null}
+        brew install --cask claude-code
         ```
+
+        Homebrew offers two casks. `claude-code` tracks the stable release channel, which is typically about a week behind and skips releases with major regressions. `claude-code@latest` tracks the latest channel and receives new versions as soon as they ship.
+
+        <Info>
+          Homebrew installations do not auto-update. Run `brew upgrade claude-code` or `brew upgrade claude-code@latest`, depending on which cask you installed, to get the latest features and security fixes.
+        </Info>
       </Tab>
 
-      <Tab title="Python (pip)">
-        Create and activate a virtual environment, then install the package. Installing into a virtual environment avoids the `error: externally-managed-environment` failure that system Python on recent Debian, Ubuntu, and Homebrew installs returns for `pip install` outside a venv.
-
-        On macOS or Linux:
-
-        ```bash theme={null}
-        python3 -m venv .venv
-        source .venv/bin/activate
-        pip install claude-agent-sdk
+      <Tab title="WinGet">
+        ```powershell theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null}
+        winget install Anthropic.ClaudeCode
         ```
 
-        On Windows:
-
-        ```powershell theme={null}
-        py -m venv .venv
-        .venv\Scripts\Activate.ps1
-        pip install claude-agent-sdk
-        ```
-
-        If PowerShell blocks `Activate.ps1` with an execution policy error, run `Set-ExecutionPolicy -Scope Process RemoteSigned` first.
-
-        The Python package requires Python 3.10 or later. If pip reports `No matching distribution found for claude-agent-sdk`, your interpreter is older than 3.10. Run `python3 --version` on macOS or Linux, or `py --version` on Windows, to check.
+        <Info>
+          WinGet installations do not auto-update. Run `winget upgrade Anthropic.ClaudeCode` periodically to get the latest features and security fixes.
+        </Info>
       </Tab>
     </Tabs>
 
-    <Note>
-      The TypeScript SDK bundles a native Claude Code binary for your platform as an optional dependency, so you don't need to install Claude Code separately.
-    </Note>
-  </Step>
+    You can also install with [apt, dnf, or apk](./code-setup.md#install-with-linux-package-managers) on Debian, Fedora, RHEL, and Alpine.
 
-  <Step title="Set your API key">
-    Get an API key from the [Console](https://platform.claude.com/), then set it as an environment variable.
-
-    On macOS or Linux:
+    Then start Claude Code in any project. Replace `your-project` with the path to a project directory on your machine:
 
     ```bash theme={null}
-    export ANTHROPIC_API_KEY=sk-ant-xxxxx
+    cd your-project
+    claude
     ```
 
-    On Windows PowerShell:
+    You'll be prompted to log in on first use. That's it! [Continue with the Quickstart →](./code-quickstart.md)
 
-    ```powershell theme={null}
-    $env:ANTHROPIC_API_KEY = "sk-ant-xxxxx"
-    ```
-
-    The SDK also supports authentication via third-party API providers:
-
-    * **Amazon Bedrock**: set `CLAUDE_CODE_USE_BEDROCK=1` environment variable and configure AWS credentials
-    * **Claude Platform on AWS**: set `CLAUDE_CODE_USE_ANTHROPIC_AWS=1` and `ANTHROPIC_AWS_WORKSPACE_ID`, then configure AWS credentials
-    * **Google Cloud's Agent Platform**: set `CLAUDE_CODE_USE_VERTEX=1` environment variable and configure Google Cloud credentials
-    * **Microsoft Foundry**: set `CLAUDE_CODE_USE_FOUNDRY=1` environment variable and configure Azure credentials
-
-    See the setup guides for [Amazon Bedrock](./code-amazon-bedrock.md), [Claude Platform on AWS](./code-claude-platform-on-aws.md), [Google Cloud's Agent Platform](./code-google-vertex-ai.md), or [Microsoft Foundry](./code-microsoft-foundry.md) for details.
-
-    <Note>
-      Unless previously approved, Anthropic does not allow third party developers to offer claude.ai login or rate limits for their products, including agents built on the Claude Agent SDK. Please use the API key authentication methods described in this document instead.
-    </Note>
-  </Step>
-
-  <Step title="Run your first agent">
-    This example creates an agent that lists files in your current directory using built-in tools.
-
-    <CodeGroup>
-      ```python Python theme={null}
-      import asyncio
-      from claude_agent_sdk import query, ClaudeAgentOptions
-
-
-      async def main():
-          async for message in query(
-              prompt="What files are in this directory?",
-              options=ClaudeAgentOptions(allowed_tools=["Bash", "Glob"]),
-          ):
-              if hasattr(message, "result"):
-                  print(message.result)
-
-
-      asyncio.run(main())
-      ```
-
-      ```typescript TypeScript theme={null}
-      import { query } from "@anthropic-ai/claude-agent-sdk";
-
-      for await (const message of query({
-        prompt: "What files are in this directory?",
-        options: { allowedTools: ["Bash", "Glob"] }
-      })) {
-        if ("result" in message) console.log(message.result);
-      }
-      ```
-    </CodeGroup>
-  </Step>
-</Steps>
-
-**Ready to build?** Follow the [Quickstart](./code-agent-sdk/quickstart.md) to create an agent that finds and fixes bugs in minutes.
-
-## Capabilities
-
-Everything that makes Claude Code powerful is available in the SDK:
-
-<Tabs>
-  <Tab title="Built-in tools">
-    Your agent can read files, run commands, and search codebases out of the box. Key tools include:
-
-    | Tool                                                                        | What it does                                                        |
-    | --------------------------------------------------------------------------- | ------------------------------------------------------------------- |
-    | **Read**                                                                    | Read any file in the working directory                              |
-    | **Write**                                                                   | Create new files                                                    |
-    | **Edit**                                                                    | Make precise edits to existing files                                |
-    | **Bash**                                                                    | Run terminal commands, scripts, git operations                      |
-    | **Monitor**                                                                 | Watch a background script and react to each output line as an event |
-    | **Glob**                                                                    | Find files by pattern (`**/*.ts`, `src/**/*.py`)                    |
-    | **Grep**                                                                    | Search file contents with regex                                     |
-    | **WebSearch**                                                               | Search the web for current information                              |
-    | **WebFetch**                                                                | Fetch and parse web page content                                    |
-    | **[AskUserQuestion](./code-agent-sdk/user-input.md#handle-clarifying-questions)** | Ask the user clarifying questions with multiple choice options      |
-
-    For the full list, including scheduling and worktree tools, see the [tools reference](./code-tools-reference.md).
-
-    This example creates an agent that searches your codebase for TODO comments:
-
-    <CodeGroup>
-      ```python Python theme={null}
-      import asyncio
-      from claude_agent_sdk import query, ClaudeAgentOptions
-
-
-      async def main():
-          async for message in query(
-              prompt="Find all TODO comments and create a summary",
-              options=ClaudeAgentOptions(allowed_tools=["Read", "Glob", "Grep"]),
-          ):
-              if hasattr(message, "result"):
-                  print(message.result)
-
-
-      asyncio.run(main())
-      ```
-
-      ```typescript TypeScript theme={null}
-      import { query } from "@anthropic-ai/claude-agent-sdk";
-
-      for await (const message of query({
-        prompt: "Find all TODO comments and create a summary",
-        options: { allowedTools: ["Read", "Glob", "Grep"] }
-      })) {
-        if ("result" in message) console.log(message.result);
-      }
-      ```
-    </CodeGroup>
+    <Tip>
+      See [advanced setup](./code-setup.md) for installation options, manual updates, or uninstallation instructions. Visit [installation troubleshooting](./code-troubleshoot-install.md) if you hit issues.
+    </Tip>
   </Tab>
 
-  <Tab title="Hooks">
-    Run custom code at key points in the agent lifecycle. SDK hooks use callback functions to validate, log, block, or transform agent behavior.
+  <Tab title="VS Code">
+    The VS Code extension provides inline diffs, @-mentions, plan review, and conversation history directly in your editor.
 
-    **Available hooks:** `PreToolUse`, `PostToolUse`, `Stop`, `SessionStart`, `SessionEnd`, `UserPromptSubmit`, and more.
+    * [Install for VS Code](vscode:extension/anthropic.claude-code)
+    * [Install for Cursor](cursor:extension/anthropic.claude-code)
 
-    This example logs all file changes to an audit file:
+    Or search for "Claude Code" in the Extensions view (`Cmd+Shift+X` on Mac, `Ctrl+Shift+X` on Windows/Linux). After installing, open the Command Palette (`Cmd+Shift+P` / `Ctrl+Shift+P`), type "Claude Code", and select **Open in New Tab**.
 
-    <CodeGroup>
-      ```python Python theme={null}
-      import asyncio
-      from datetime import datetime
-      from claude_agent_sdk import query, ClaudeAgentOptions, HookMatcher
-
-
-      async def log_file_change(input_data, tool_use_id, context):
-          file_path = input_data.get("tool_input", {}).get("file_path", "unknown")
-          with open("./audit.log", "a") as f:
-              f.write(f"{datetime.now()}: modified {file_path}\n")
-          return {}
-
-
-      async def main():
-          async for message in query(
-              prompt="Refactor utils.py to improve readability",
-              options=ClaudeAgentOptions(
-                  allowed_tools=["Read", "Edit"],
-                  permission_mode="acceptEdits",
-                  hooks={
-                      "PostToolUse": [
-                          HookMatcher(matcher="Edit|Write", hooks=[log_file_change])
-                      ]
-                  },
-              ),
-          ):
-              if hasattr(message, "result"):
-                  print(message.result)
-
-
-      asyncio.run(main())
-      ```
-
-      ```typescript TypeScript theme={null}
-      import { query, HookCallback } from "@anthropic-ai/claude-agent-sdk";
-      import { appendFile } from "fs/promises";
-
-      const logFileChange: HookCallback = async (input) => {
-        const filePath = (input as any).tool_input?.file_path ?? "unknown";
-        await appendFile("./audit.log", `${new Date().toISOString()}: modified ${filePath}\n`);
-        return {};
-      };
-
-      for await (const message of query({
-        prompt: "Refactor utils.py to improve readability",
-        options: {
-          allowedTools: ["Read", "Edit"],
-          permissionMode: "acceptEdits",
-          hooks: {
-            PostToolUse: [{ matcher: "Edit|Write", hooks: [logFileChange] }]
-          }
-        }
-      })) {
-        if ("result" in message) console.log(message.result);
-      }
-      ```
-    </CodeGroup>
-
-    [Learn more about hooks →](./code-agent-sdk/hooks.md)
+    [Get started with VS Code →](./code-vs-code.md#get-started)
   </Tab>
 
-  <Tab title="Subagents">
-    Spawn specialized agents to handle focused subtasks. Your main agent delegates work, and subagents report back with results.
+  <Tab title="Desktop app">
+    A standalone app for running Claude Code outside your IDE or terminal. Review diffs visually, run multiple sessions side by side, schedule recurring tasks, and kick off cloud sessions.
 
-    Define custom agents with specialized instructions. Subagents are invoked via the Agent tool, so include `Agent` in `allowedTools` to auto-approve those invocations:
+    Download and install:
 
-    <CodeGroup>
-      ```python Python theme={null}
-      import asyncio
-      from claude_agent_sdk import query, ClaudeAgentOptions, AgentDefinition
+    * [macOS](https://claude.ai/api/desktop/darwin/universal/dmg/latest/redirect?utm_source=claude_code\&utm_medium=docs) (Intel and Apple Silicon)
+    * [Windows](https://claude.ai/api/desktop/win32/x64/setup/latest/redirect?utm_source=claude_code\&utm_medium=docs) (x64)
+    * [Windows ARM64](https://claude.ai/api/desktop/win32/arm64/setup/latest/redirect?utm_source=claude_code\&utm_medium=docs)
 
+    After installing, launch Claude, sign in, and click the **Code** tab to start coding. A [paid subscription](https://claude.com/pricing?utm_source=claude_code\&utm_medium=docs\&utm_content=overview_desktop_pricing) is required.
 
-      async def main():
-          async for message in query(
-              prompt="Use the code-reviewer agent to review this codebase",
-              options=ClaudeAgentOptions(
-                  allowed_tools=["Read", "Glob", "Grep", "Agent"],
-                  agents={
-                      "code-reviewer": AgentDefinition(
-                          description="Expert code reviewer for quality and security reviews.",
-                          prompt="Analyze code quality and suggest improvements.",
-                          tools=["Read", "Glob", "Grep"],
-                      )
-                  },
-              ),
-          ):
-              if hasattr(message, "result"):
-                  print(message.result)
-
-
-      asyncio.run(main())
-      ```
-
-      ```typescript TypeScript theme={null}
-      import { query } from "@anthropic-ai/claude-agent-sdk";
-
-      for await (const message of query({
-        prompt: "Use the code-reviewer agent to review this codebase",
-        options: {
-          allowedTools: ["Read", "Glob", "Grep", "Agent"],
-          agents: {
-            "code-reviewer": {
-              description: "Expert code reviewer for quality and security reviews.",
-              prompt: "Analyze code quality and suggest improvements.",
-              tools: ["Read", "Glob", "Grep"]
-            }
-          }
-        }
-      })) {
-        if ("result" in message) console.log(message.result);
-      }
-      ```
-    </CodeGroup>
-
-    Messages from within a subagent's context include a `parent_tool_use_id` field, letting you track which messages belong to which subagent execution.
-
-    [Learn more about subagents →](./code-agent-sdk/subagents.md)
+    [Learn more about the desktop app →](./code-desktop-quickstart.md)
   </Tab>
 
-  <Tab title="MCP">
-    Connect to external systems via the Model Context Protocol: databases, browsers, APIs, and [hundreds more](https://github.com/modelcontextprotocol/servers).
+  <Tab title="Web">
+    Run Claude Code in your browser with no local setup. Kick off long-running tasks and check back when they're done, work on repos you don't have locally, or run multiple tasks in parallel. Available on desktop browsers and [the Claude app for iOS and Android](./code-mobile.md).
 
-    This example connects the [Playwright MCP server](https://github.com/microsoft/playwright-mcp) to give your agent browser automation capabilities:
+    Start coding at [claude.ai/code](https://claude.ai/code).
 
-    <CodeGroup>
-      ```python Python theme={null}
-      import asyncio
-      from claude_agent_sdk import query, ClaudeAgentOptions
-
-
-      async def main():
-          async for message in query(
-              prompt="Open example.com and describe what you see",
-              options=ClaudeAgentOptions(
-                  mcp_servers={
-                      "playwright": {"command": "npx", "args": ["@playwright/mcp@latest"]}
-                  }
-              ),
-          ):
-              if hasattr(message, "result"):
-                  print(message.result)
-
-
-      asyncio.run(main())
-      ```
-
-      ```typescript TypeScript theme={null}
-      import { query } from "@anthropic-ai/claude-agent-sdk";
-
-      for await (const message of query({
-        prompt: "Open example.com and describe what you see",
-        options: {
-          mcpServers: {
-            playwright: { command: "npx", args: ["@playwright/mcp@latest"] }
-          }
-        }
-      })) {
-        if ("result" in message) console.log(message.result);
-      }
-      ```
-    </CodeGroup>
-
-    [Learn more about MCP →](./code-agent-sdk/mcp.md)
+    [Get started on the web →](./code-web-quickstart.md)
   </Tab>
 
-  <Tab title="Permissions">
-    Control exactly which tools your agent can use. Allow safe operations, block dangerous ones, or require approval for sensitive actions.
+  <Tab title="JetBrains">
+    A plugin for IntelliJ IDEA, PyCharm, WebStorm, and other JetBrains IDEs with interactive diff viewing and selection context sharing.
 
-    <Note>
-      For interactive approval prompts and the `AskUserQuestion` tool, see [Handle approvals and user input](./code-agent-sdk/user-input.md).
-    </Note>
+    Install the [Claude Code plugin](https://plugins.jetbrains.com/plugin/27310-claude-code-beta-) from the JetBrains Marketplace and restart your IDE. The plugin requires the Claude Code CLI, installed separately; see the [JetBrains setup steps](./code-jetbrains.md#installation).
 
-    This example creates a read-only agent that can analyze but not modify code. `allowed_tools` pre-approves `Read`, `Glob`, and `Grep` so they run without prompting. Tools not listed are still available but fall through to the permission mode; to block tools entirely, use `disallowed_tools`.
-
-    <CodeGroup>
-      ```python Python theme={null}
-      import asyncio
-      from claude_agent_sdk import query, ClaudeAgentOptions
-
-
-      async def main():
-          async for message in query(
-              prompt="Review this code for best practices",
-              options=ClaudeAgentOptions(
-                  allowed_tools=["Read", "Glob", "Grep"],
-              ),
-          ):
-              if hasattr(message, "result"):
-                  print(message.result)
-
-
-      asyncio.run(main())
-      ```
-
-      ```typescript TypeScript theme={null}
-      import { query } from "@anthropic-ai/claude-agent-sdk";
-
-      for await (const message of query({
-        prompt: "Review this code for best practices",
-        options: {
-          allowedTools: ["Read", "Glob", "Grep"]
-        }
-      })) {
-        if ("result" in message) console.log(message.result);
-      }
-      ```
-    </CodeGroup>
-
-    [Learn more about permissions →](./code-agent-sdk/permissions.md)
-  </Tab>
-
-  <Tab title="Sessions">
-    Maintain context across multiple exchanges. Claude remembers files read, analysis done, and conversation history. Resume sessions later, or fork them to explore different approaches.
-
-    This example captures the session ID from the first query, then resumes to continue with full context:
-
-    <CodeGroup>
-      ```python Python theme={null}
-      import asyncio
-      from claude_agent_sdk import query, ClaudeAgentOptions, SystemMessage, ResultMessage
-
-
-      async def main():
-          session_id = None
-
-          # First query: capture the session ID
-          try:
-              async for message in query(
-                  prompt="Read the authentication module",
-                  options=ClaudeAgentOptions(allowed_tools=["Read", "Glob"]),
-              ):
-                  if isinstance(message, SystemMessage) and message.subtype == "init":
-                      session_id = message.data["session_id"]
-          except Exception as error:
-              # A single-shot query() raises after yielding an error result. If
-              # the failure was an error result, session_id was already captured
-              # by the loop above; connection or process failures yield no
-              # result message.
-              print(f"Session ended with an error: {error}")
-
-          # Resume with full context from the first query
-          async for message in query(
-              prompt="Now find all places that call it",  # "it" = auth module
-              options=ClaudeAgentOptions(resume=session_id),
-          ):
-              if isinstance(message, ResultMessage):
-                  print(message.result)
-
-
-      asyncio.run(main())
-      ```
-
-      ```typescript TypeScript theme={null}
-      import { query } from "@anthropic-ai/claude-agent-sdk";
-
-      let sessionId: string | undefined;
-
-      // First query: capture the session ID
-      try {
-        for await (const message of query({
-          prompt: "Read the authentication module",
-          options: { allowedTools: ["Read", "Glob"] }
-        })) {
-          if (message.type === "system" && message.subtype === "init") {
-            sessionId = message.session_id;
-          }
-        }
-      } catch (error) {
-        // A single-shot query() throws after yielding an error result. If the
-        // failure was an error result, sessionId was already captured by the
-        // loop above; connection or process failures yield no result message.
-        console.error(`Session ended with an error: ${error}`);
-      }
-
-      // Resume with full context from the first query
-      for await (const message of query({
-        prompt: "Now find all places that call it", // "it" = auth module
-        options: { resume: sessionId }
-      })) {
-        if ("result" in message) console.log(message.result);
-      }
-      ```
-    </CodeGroup>
-
-    [Learn more about sessions →](./code-agent-sdk/sessions.md)
+    [Get started with JetBrains →](./code-jetbrains.md)
   </Tab>
 </Tabs>
 
-### Claude Code features
+## What you can do
 
-The SDK also supports Claude Code's filesystem-based configuration. With default options the SDK loads these from `.claude/` in your working directory and `~/.claude/`. To restrict which sources load, set `setting_sources` (Python) or `settingSources` (TypeScript) in your options.
+Here are some of the ways you can use Claude Code:
 
-| Feature                                          | Description                                                                   | Location                           |
-| ------------------------------------------------ | ----------------------------------------------------------------------------- | ---------------------------------- |
-| [Skills](./code-agent-sdk/skills.md)                   | Specialized capabilities Claude uses automatically or you invoke with `/name` | `.claude/skills/*/SKILL.md`        |
-| [Commands](./code-agent-sdk/slash-commands.md)         | Custom commands in the legacy format. Use skills for new custom commands      | `.claude/commands/*.md`            |
-| [Memory](./code-agent-sdk/modifying-system-prompts.md) | Project context and instructions                                              | `CLAUDE.md` or `.claude/CLAUDE.md` |
-| [Plugins](./code-agent-sdk/plugins.md)                 | Extend with skills, agents, hooks, and MCP servers                            | Programmatic via `plugins` option  |
+<AccordionGroup>
+  <Accordion title="Automate the work you keep putting off" icon="wand-magic-sparkles">
+    Claude Code handles the tedious tasks that eat up your day: writing tests for untested code, fixing lint errors across a project, resolving merge conflicts, updating dependencies, and writing release notes.
 
-## Compare the Agent SDK to other Claude tools
+    ```bash theme={null}
+    claude "write tests for the auth module, run them, and fix any failures"
+    ```
+  </Accordion>
 
-The Claude Platform offers multiple ways to build with Claude. Here's how the Agent SDK fits in:
+  <Accordion title="Build features and fix bugs" icon="hammer">
+    Describe what you want in plain language. Claude Code plans the approach, writes the code across multiple files, and verifies it works.
 
-<Tabs>
-  <Tab title="Agent SDK vs Client SDK">
-    The [Anthropic Client SDK](https://platform.claude.com/docs/en/api/client-sdks) gives you direct API access: you send prompts and implement tool execution yourself. The **Agent SDK** gives you Claude with built-in tool execution.
+    For bugs, paste an error message or describe the symptom. Claude Code traces the issue through your codebase, identifies the root cause, and implements a fix. See [common workflows](./code-common-workflows.md) for more examples.
+  </Accordion>
 
-    With the Client SDK, you implement a tool loop. With the Agent SDK, Claude handles it:
+  <Accordion title="Create commits and pull requests" icon="code-branch">
+    Claude Code works directly with git. It stages changes, writes commit messages, creates branches, and opens pull requests.
 
-    <CodeGroup>
-      ```python Python theme={null}
-      # Client SDK: You implement the tool loop
-      response = client.messages.create(...)
-      while response.stop_reason == "tool_use":
-          result = your_tool_executor(response.tool_use)
-          response = client.messages.create(tool_result=result, **params)
+    ```bash theme={null}
+    claude "commit my changes with a descriptive message"
+    ```
 
-      # Agent SDK: Claude handles tools autonomously
-      async for message in query(prompt="Fix the bug in auth.py"):
-          print(message)
-      ```
+    In CI, you can automate code review and issue triage with [GitHub Actions](./code-github-actions.md) or [GitLab CI/CD](./code-gitlab-ci-cd.md).
+  </Accordion>
 
-      ```typescript TypeScript theme={null}
-      // Client SDK: You implement the tool loop
-      let response = await client.messages.create({ ...params });
-      while (response.stop_reason === "tool_use") {
-        const result = yourToolExecutor(response.tool_use);
-        response = await client.messages.create({ tool_result: result, ...params });
-      }
+  <Accordion title="Connect your tools with MCP" icon="plug">
+    The [Model Context Protocol (MCP)](./code-mcp.md) is an open standard for connecting AI tools to external data sources. With MCP, Claude Code can read your design docs in Google Drive, update tickets in Jira, pull data from Slack, or use your own custom tooling. The [MCP quickstart](./code-mcp-quickstart.md) connects your first server end to end.
+  </Accordion>
 
-      // Agent SDK: Claude handles tools autonomously
-      for await (const message of query({ prompt: "Fix the bug in auth.ts" })) {
-        console.log(message);
-      }
-      ```
-    </CodeGroup>
-  </Tab>
+  <Accordion title="Customize with instructions, skills, and hooks" icon="sliders">
+    [`CLAUDE.md`](./code-memory.md) is a markdown file you add to your project root that Claude Code reads at the start of every session. Use it to set coding standards, architecture decisions, preferred libraries, and review checklists. Claude also builds [auto memory](./code-memory.md#auto-memory) as it works, saving learnings like build commands and debugging insights across sessions without you writing anything.
 
-  <Tab title="Agent SDK vs Claude Code CLI">
-    Same capabilities, different interface:
+    Create [skills](./code-skills.md) to package repeatable workflows your team can share, like `/review-pr` or `/deploy-staging`.
 
-    | Use case                | Best choice |
-    | ----------------------- | ----------- |
-    | Interactive development | CLI         |
-    | CI/CD pipelines         | SDK         |
-    | Custom applications     | SDK         |
-    | One-off tasks           | CLI         |
-    | Production automation   | SDK         |
+    [Hooks](./code-hooks.md) let you run shell commands before or after Claude Code actions, like auto-formatting after every file edit or running lint before a commit.
+  </Accordion>
 
-    Many teams use both: CLI for daily development, SDK for production. Workflows translate directly between them.
-  </Tab>
+  <Accordion title="Run agent teams and build custom agents" icon="users">
+    Spawn [multiple Claude Code agents](./code-sub-agents.md) that work on different parts of a task simultaneously. A lead agent coordinates the work, assigns subtasks, and merges results.
 
-  <Tab title="Agent SDK vs Managed Agents">
-    [Managed Agents](https://platform.claude.com/docs/en/managed-agents/overview) is a hosted REST API: Anthropic runs the agent and the sandbox, and your application sends events and streams back results. The **Agent SDK** is a library that runs the agent loop inside your own process.
+    To run several full sessions in parallel and watch them from one screen, use [background agents](./code-agent-view.md). For fully custom workflows, the [Agent SDK](./code-agent-sdk/overview.md) lets you build your own agents powered by Claude Code's tools and capabilities, with full control over orchestration, tool access, and permissions.
+  </Accordion>
 
-    |                    | Agent SDK                                                                    | Managed Agents                                                                                                |
-    | ------------------ | ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-    | **Runs in**        | Your process, your infrastructure                                            | Anthropic-managed infrastructure                                                                              |
-    | **Interface**      | Python or TypeScript library                                                 | REST API                                                                                                      |
-    | **Agent works on** | Files on your infrastructure                                                 | A managed sandbox per session                                                                                 |
-    | **Session state**  | JSONL on your filesystem                                                     | Anthropic-hosted event log                                                                                    |
-    | **Custom tools**   | In-process Python or TypeScript functions                                    | Claude triggers the tool; you execute and return results                                                      |
-    | **Best for**       | Local prototyping, agents that work directly on your filesystem and services | Production agents without operating sandbox or session infrastructure, long-running and asynchronous sessions |
+  <Accordion title="Pipe, script, and automate with the CLI" icon="terminal">
+    Claude Code is composable and follows the Unix philosophy. Pipe logs into it, run it in CI, or chain it with other tools:
 
-    A common path is to prototype with the Agent SDK locally, then move to Managed Agents for production.
-  </Tab>
-</Tabs>
+    ```bash theme={null}
+    # Analyze recent log output
+    tail -200 app.log | claude -p "Slack me if you see any anomalies"
 
-## Changelog
+    # Automate translations in CI
+    claude -p "translate new strings into French and raise a PR for review"
 
-View the full changelog for SDK updates, bug fixes, and new features:
+    # Bulk operations across files
+    git diff main --name-only | claude -p "review these changed files for security issues"
+    ```
 
-* **TypeScript SDK**: [view CHANGELOG.md](https://github.com/anthropics/claude-agent-sdk-typescript/blob/main/CHANGELOG.md)
-* **Python SDK**: [view CHANGELOG.md](https://github.com/anthropics/claude-agent-sdk-python/blob/main/CHANGELOG.md)
+    See the [CLI reference](./code-cli-reference.md) for the full set of commands and flags.
+  </Accordion>
 
-## Reporting bugs
+  <Accordion title="Schedule recurring tasks" icon="clock">
+    Run Claude on a schedule to automate work that repeats: morning PR reviews, overnight CI failure analysis, weekly dependency audits, or syncing docs after PRs merge.
 
-If you encounter bugs or issues with the Agent SDK:
+    * [Routines](./code-routines.md) run on Anthropic-managed infrastructure, so they keep running even when your computer is off. They can also trigger on API calls or GitHub events. Create them from the web, the Desktop app, or by running `/schedule` in the CLI.
+    * [Desktop scheduled tasks](./code-desktop-scheduled-tasks.md) run on your machine, with direct access to your local files and tools
+    * [`/loop`](./code-scheduled-tasks.md) repeats a prompt within a CLI session for quick polling
+  </Accordion>
 
-* **TypeScript SDK**: [report issues on GitHub](https://github.com/anthropics/claude-agent-sdk-typescript/issues)
-* **Python SDK**: [report issues on GitHub](https://github.com/anthropics/claude-agent-sdk-python/issues)
+  <Accordion title="Work from anywhere" icon="globe">
+    Sessions aren't tied to a single surface. Move work between them as your context changes:
 
-## Branding guidelines
+    * Step away from your desk and keep working from your phone or any browser with [Remote Control](./code-remote-control.md)
+    * Message [Dispatch](./code-desktop.md#sessions-from-dispatch) a task from your phone and open the Desktop session it creates
+    * Kick off a long-running task on the [web](./code-claude-code-on-the-web.md) or the [Claude mobile app](./code-mobile.md), then pull it into your terminal with `claude --teleport`. Teleport requires a claude.ai subscription.
+    * Run `/desktop` to continue your current terminal session in the [Desktop app](./code-desktop.md), where you can review diffs visually. Available on macOS and x64 Windows.
+    * Route tasks from team chat: mention `@Claude` in [Slack](./code-slack.md) with a bug report and get a pull request back
+  </Accordion>
+</AccordionGroup>
 
-For partners integrating the Claude Agent SDK, use of Claude branding is optional. When referencing Claude in your product:
+## Use Claude Code everywhere
 
-**Allowed:**
+Each [surface](./code-glossary.md#surface) connects to the same underlying Claude Code engine, so your CLAUDE.md files, settings, and MCP servers work across all of them.
 
-* "Claude Agent" (preferred for dropdown menus)
-* "Claude" (when within a menu already labeled "Agents")
-* "{YourAgentName} Powered by Claude" (if you have an existing agent name)
+Beyond the [Terminal](./code-quickstart.md), [VS Code](./code-vs-code.md), [JetBrains](./code-jetbrains.md), [Desktop](./code-desktop.md), and [Web](./code-claude-code-on-the-web.md) surfaces above, Claude Code integrates with CI/CD, chat, and browser workflows:
 
-**Not permitted:**
-
-* "Claude Code" or "Claude Code Agent"
-* Claude Code-branded ASCII art or visual elements that mimic Claude Code
-
-Your product should maintain its own branding and not appear to be Claude Code or any Anthropic product. For questions about branding compliance, contact the Anthropic [sales team](https://www.anthropic.com/contact-sales).
-
-## License and terms
-
-Use of the Claude Agent SDK is governed by [Anthropic's Commercial Terms of Service](https://www.anthropic.com/legal/commercial-terms), including when you use it to power products and services that you make available to your own customers and end users, except to the extent a specific component or dependency is covered by a different license as indicated in that component's LICENSE file.
+| I want to...                                                                    | Best option                                                                                                   |
+| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| Continue a local session from my phone or another device                        | [Remote Control](./code-remote-control.md)                                                                          |
+| Push events from Telegram, Discord, iMessage, or my own webhooks into a session | [Channels](./code-channels.md)                                                                                      |
+| Start a task locally, continue on mobile                                        | [`claude --cloud`](./code-claude-code-on-the-web.md#from-terminal-to-web), then the [Claude mobile app](./code-mobile.md) |
+| Run Claude on a recurring schedule                                              | [Routines](./code-routines.md) or [Desktop scheduled tasks](./code-desktop-scheduled-tasks.md)                            |
+| Automate PR reviews and issue triage                                            | [GitHub Actions](./code-github-actions.md) or [GitLab CI/CD](./code-gitlab-ci-cd.md)                                      |
+| Get automatic code review on every PR                                           | [GitHub Code Review](./code-code-review.md)                                                                         |
+| Route bug reports from Slack to pull requests                                   | [Slack](./code-slack.md)                                                                                            |
+| Debug live web applications                                                     | [Chrome](./code-chrome.md)                                                                                          |
+| Build custom agents for your own workflows                                      | [Agent SDK](./code-agent-sdk/overview.md)                                                                           |
 
 ## Next steps
 
-<CardGroup cols={2}>
-  <Card title="Quickstart" icon="play" href="/en/agent-sdk/quickstart">
-    Build an agent that finds and fixes bugs in minutes
-  </Card>
+Once you've installed Claude Code, these guides help you go deeper.
 
-  <Card title="Example agents" icon="star" href="https://github.com/anthropics/claude-agent-sdk-demos">
-    Email assistant, research agent, and more
-  </Card>
-
-  <Card title="TypeScript SDK" icon="code" href="/en/agent-sdk/typescript">
-    Full TypeScript API reference and examples
-  </Card>
-
-  <Card title="Python SDK" icon="code" href="/en/agent-sdk/python">
-    Full Python API reference and examples
-  </Card>
-</CardGroup>
+* [Quickstart](./code-quickstart.md): walk through your first real task, from exploring a codebase to committing a fix
+* [Store instructions and memories](./code-memory.md): give Claude persistent instructions with CLAUDE.md files and auto memory
+* [Common workflows](./code-common-workflows.md) and [best practices](./code-best-practices.md): patterns for getting the most out of Claude Code
+* [A harness for every task](https://claude.com/blog/a-harness-for-every-task-dynamic-workflows-in-claude-code): how the Claude Code team uses [dynamic workflows](./code-workflows.md) to orchestrate subagents at scale
+* [Settings](./code-settings.md): customize Claude Code for your workflow
+* [Troubleshooting](./code-troubleshooting.md): solutions for common issues
+* [code.claude.com](https://code.claude.com/): demos, pricing, and product details
