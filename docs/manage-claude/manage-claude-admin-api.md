@@ -39,7 +39,7 @@ Authenticate with either credential. An Admin API key covers most endpoints; the
 
 ### OAuth bearer token
 
-Log in with the [`ant` CLI](https://platform.claude.com/docs/en/cli-sdks-libraries/cli/quickstart.md) under a dedicated profile, requesting the `org:admin` scope (see [Admin access](https://platform.claude.com/docs/en/cli-sdks-libraries/cli/authentication.md#admin-access)), then export the bearer token. A dedicated profile keeps your routine commands from running with elevated access:
+Log in with the [`ant` CLI](../general/general-cli-sdks-libraries-cli-quickstart.md) under a dedicated profile, requesting the `org:admin` scope (see [Admin access](../general/general-cli-sdks-libraries-cli-authentication.md#admin-access)), then export the bearer token. A dedicated profile keeps your routine commands from running with elevated access:
 
 ```bash CLI
 ant auth login --profile admin --scope "org:admin"

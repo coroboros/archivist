@@ -23,7 +23,7 @@ Anthropic provides three kinds of official tooling for building with the Claude 
 ## CLI
 
 <CardGroup cols={3}>
-  <Card title="ant CLI" href="https://platform.claude.com/docs/en/cli-sdks-libraries/cli/quickstart.md">
+  <Card title="ant CLI" href="../general/general-cli-sdks-libraries-cli-quickstart.md">
     Shell scripting, typed flags, response transforms
   </Card>
 </CardGroup>
@@ -31,31 +31,31 @@ Anthropic provides three kinds of official tooling for building with the Claude 
 ## Client SDKs
 
 <CardGroup cols={3}>
-  <Card title="Python" href="https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/python.md">
+  <Card title="Python" href="../general/general-cli-sdks-libraries-sdks-python.md">
     Sync and async clients, Pydantic models
   </Card>
 
-  <Card title="TypeScript" href="https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/typescript.md">
+  <Card title="TypeScript" href="../general/general-cli-sdks-libraries-sdks-typescript.md">
     Node.js, Deno, Bun, and browser support
   </Card>
 
-  <Card title="C#" href="https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/csharp.md">
+  <Card title="C#" href="../general/general-cli-sdks-libraries-sdks-csharp.md">
     .NET Standard 2.0+, IChatClient integration
   </Card>
 
-  <Card title="Go" href="https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/go.md">
+  <Card title="Go" href="../general/general-cli-sdks-libraries-sdks-go.md">
     Context-based cancellation, functional options
   </Card>
 
-  <Card title="Java" href="https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/java.md">
+  <Card title="Java" href="../general/general-cli-sdks-libraries-sdks-java.md">
     Builder pattern, CompletableFuture async
   </Card>
 
-  <Card title="PHP" href="https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/php.md">
+  <Card title="PHP" href="../general/general-cli-sdks-libraries-sdks-php.md">
     Value objects, builder pattern
   </Card>
 
-  <Card title="Ruby" href="https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/ruby.md">
+  <Card title="Ruby" href="../general/general-cli-sdks-libraries-sdks-ruby.md">
     Sorbet types, streaming helpers
   </Card>
 </CardGroup>
@@ -65,11 +65,11 @@ Anthropic provides three kinds of official tooling for building with the Claude 
 Libraries and integrations expose Claude through another framework's API surface. They are not general-purpose Messages API clients.
 
 <CardGroup cols={3}>
-  <Card title="Apple Foundation Models" href="https://platform.claude.com/docs/en/cli-sdks-libraries/libraries/apple-foundation-models.md">
+  <Card title="Apple Foundation Models" href="../general/general-cli-sdks-libraries-libraries-apple-foundation-models.md">
     Swift package for Apple's `LanguageModelSession` API
   </Card>
 
-  <Card title="OpenAI SDK compatibility" href="https://platform.claude.com/docs/en/cli-sdks-libraries/libraries/openai-sdk.md">
+  <Card title="OpenAI SDK compatibility" href="../general/general-cli-sdks-libraries-libraries-openai-sdk.md">
     Use Claude through the OpenAI SDK surface
   </Card>
 </CardGroup>

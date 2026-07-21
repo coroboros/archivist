@@ -13,7 +13,7 @@ Access experimental features before general availability with the `anthropic-bet
 Beta headers allow you to access experimental features and new model capabilities before they become part of the standard API.
 
 <Info>
-  Each [client SDK](https://platform.claude.com/docs/en/cli-sdks-libraries/overview.md) exposes a `beta` namespace for calling the API with beta features enabled.
+  Each [client SDK](../general/general-cli-sdks-libraries-overview.md) exposes a `beta` namespace for calling the API with beta features enabled.
 </Info>
 
 ## How to use beta headers

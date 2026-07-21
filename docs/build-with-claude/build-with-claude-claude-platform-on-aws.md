@@ -101,7 +101,7 @@ Setting up Claude Platform on AWS happens in four phases: sign up on the AWS Con
   <Step title="Sign in to the Claude Console">
     Access to the Claude Console is federated through AWS IAM:
 
-    1. Assume an IAM role with the `aws-external-anthropic:AssumeConsole` permission. See [IAM actions for Claude Platform on AWS](https://platform.claude.com/docs/en/api/claude-platform-on-aws-iam-actions.md#console-access).
+    1. Assume an IAM role with the `aws-external-anthropic:AssumeConsole` permission. See [IAM actions for Claude Platform on AWS](../api/api-claude-platform-on-aws-iam-actions.md#console-access).
     2. From the **Claude Platform on AWS** service page, choose **Open Claude Console**. The AWS Console issues a JWT and redirects you to `platform.claude.com`.
     3. On first sign-in, you're prompted for an email address. Enter your work email. The platform provisions your Claude Console user just-in-time.
 
@@ -278,7 +278,7 @@ The client reads `AWS_REGION` from the environment if `aws_region`/`awsRegion` i
 
 ## Install an SDK
 
-Anthropic's [client SDKs](https://platform.claude.com/docs/en/cli-sdks-libraries/overview.md) support Claude Platform on AWS. Each SDK provides a platform-specific client class that handles SigV4 signing, region-based base URL construction, and the `anthropic-workspace-id` header.
+Anthropic's [client SDKs](../general/general-cli-sdks-libraries-overview.md) support Claude Platform on AWS. Each SDK provides a platform-specific client class that handles SigV4 signing, region-based base URL construction, and the `anthropic-workspace-id` header.
 
 <Tabs>
   <Tab title="Python">
@@ -786,7 +786,7 @@ Claude Platform on AWS uses the standard Claude Console at [platform.claude.com]
 
 Access to the Claude Console is federated through AWS IAM. See [Set up your account](#set-up-your-account) for the full first-time sign-in flow. In short:
 
-1. Assume an IAM role with the `aws-external-anthropic:AssumeConsole` permission. See [IAM actions for Claude Platform on AWS](https://platform.claude.com/docs/en/api/claude-platform-on-aws-iam-actions.md#console-access).
+1. Assume an IAM role with the `aws-external-anthropic:AssumeConsole` permission. See [IAM actions for Claude Platform on AWS](../api/api-claude-platform-on-aws-iam-actions.md#console-access).
 2. Navigate to the Claude Platform on AWS page in the [AWS Console](https://console.aws.amazon.com/).
 3. Choose **Open Claude Console**. The AWS Console issues a JWT and redirects you to `platform.claude.com`.
 4. On first sign-in, you're prompted for an email address. Enter your work email. The platform provisions your Claude Console user just-in-time.
@@ -795,27 +795,27 @@ Two Claude Console roles are available: **Admin** and **Developer**. The Admin r
 
 ### Available pages
 
-The **Through AWS gateway** column indicates whether the page reads and writes data through the AWS gateway (and is therefore governed by [IAM actions](https://platform.claude.com/docs/en/api/claude-platform-on-aws-iam-actions.md)). Pages marked **No** read organization-level metadata directly from Anthropic and bypass IAM action checks.
+The **Through AWS gateway** column indicates whether the page reads and writes data through the AWS gateway (and is therefore governed by [IAM actions](../api/api-claude-platform-on-aws-iam-actions.md)). Pages marked **No** read organization-level metadata directly from Anthropic and bypass IAM action checks.
 
-| Page                  | Available     | Through AWS gateway | Notes                                                                                                                                                                  |
-| --------------------- | ------------- | ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Usage**             | Yes           | No                  | View token usage by model, workspace, and dimension. Data can take a few minutes to appear after a request.                                                            |
-| **Cost**              | Yes           | No                  | View cost breakdowns by model and workspace. AWS Cost Explorer shows the aggregated [Claude Consumption Unit (CCU)](#billing) line item.                               |
-| **Limits**            | Yes           | No                  | View rate limits (read-only). Tier increases go through your Anthropic account representative; see [Rate limits and quotas](#rate-limits-and-quotas).                  |
-| **Workspaces**        | Yes           | No                  | View per-region workspaces (read-only).                                                                                                                                |
-| **Files**             | Yes           | Yes                 | View and manage uploaded files.                                                                                                                                        |
-| **Skills**            | Yes           | Yes                 | View and manage Agent Skills.                                                                                                                                          |
-| **Batches**           | Yes           | Yes                 | View and manage batch processing jobs.                                                                                                                                 |
-| **Agents**            | Yes           | Yes                 | View and manage agent definitions.                                                                                                                                     |
-| **Sessions**          | Yes           | Yes                 | View agent sessions and event history.                                                                                                                                 |
-| **Environments**      | Yes           | Yes                 | View and manage cloud sandbox configurations for sessions.                                                                                                             |
-| **Credential vaults** | Yes           | Yes                 | View and manage credential vaults for session authentication.                                                                                                          |
-| **Memory stores**     | Yes           | Yes                 | View and manage persistent agent memory.                                                                                                                               |
-| **Webhooks**          | Yes           | Yes                 | View and manage webhook endpoints under **Settings → Webhooks**.                                                                                                       |
-| **API keys**          | No            | N/A                 | Manage API keys in the AWS Console (**Claude Platform on AWS → API keys**). See [API key authentication](#api-key-authentication).                                     |
-| **Members**           | No            | N/A                 | Not applicable. AWS IAM manages access.                                                                                                                                |
-| **Billing**           | Yes (limited) | No                  | Set an organization monthly spend limit and spend alerts; see [Spend limits](#spend-limits). AWS Marketplace manages invoicing. View cost breakdowns on the Cost page. |
-| **Claude Code**       | No            | N/A                 | View Claude Code usage on the Usage page.                                                                                                                              |
+| Page                  | Available     | Through AWS gateway | Notes                                                                                                                                                 |
+| --------------------- | ------------- | ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Usage**             | Yes           | No                  | View token usage by model, workspace, and dimension. Data can take a few minutes to appear after a request.                                           |
+| **Cost**              | Yes           | No                  | View cost breakdowns by model and workspace. AWS Cost Explorer shows the aggregated [Claude Consumption Unit (CCU)](#billing) line item.              |
+| **Limits**            | Yes           | No                  | View rate limits (read-only). Tier increases go through your Anthropic account representative; see [Rate limits and quotas](#rate-limits-and-quotas). |
+| **Workspaces**        | Yes           | No                  | View per-region workspaces (read-only).                                                                                                               |
+| **Files**             | Yes           | Yes                 | View and manage uploaded files.                                                                                                                       |
+| **Skills**            | Yes           | Yes                 | View and manage Agent Skills.                                                                                                                         |
+| **Batches**           | Yes           | Yes                 | View and manage batch processing jobs.                                                                                                                |
+| **Agents**            | Yes           | Yes                 | View and manage agent definitions.                                                                                                                    |
+| **Sessions**          | Yes           | Yes                 | View agent sessions and event history.                                                                                                                |
+| **Environments**      | Yes           | Yes                 | View and manage cloud sandbox configurations for sessions.                                                                                            |
+| **Credential vaults** | Yes           | Yes                 | View and manage credential vaults for session authentication.                                                                                         |
+| **Memory stores**     | Yes           | Yes                 | View and manage persistent agent memory.                                                                                                              |
+| **Webhooks**          | Yes           | Yes                 | View and manage webhook endpoints under **Settings → Webhooks**.                                                                                      |
+| **API keys**          | No            | N/A                 | Manage API keys in the AWS Console (**Claude Platform on AWS → API keys**). See [API key authentication](#api-key-authentication).                    |
+| **Members**           | No            | N/A                 | Not applicable. AWS IAM manages access.                                                                                                               |
+| **Billing**           | Yes (limited) | No                  | Set an organization monthly spend limit; see [Spend limits](#spend-limits). AWS Marketplace manages invoicing. View cost breakdowns on the Cost page. |
+| **Claude Code**       | No            | N/A                 | View Claude Code usage on the Usage page.                                                                                                             |
 
 ### Switching organizations
 
@@ -847,15 +847,14 @@ The Start, Build, and Scale usage tiers each carry a monthly spend cap; see [the
 
 You can also set your own monthly spend limit to cap what your organization spends:
 
-* **Organization spend limit:** Go to [Settings > Billing](/settings/billing) in the [Claude Console](#using-the-claude-console) to set a monthly spend limit and optional spend alerts. On Claude Platform on AWS, spend limits are managed on the Billing page rather than the Limits page.
+* **Organization spend limit:** Go to [Settings > Billing](/settings/billing) in the [Claude Console](#using-the-claude-console) to set a monthly spend limit. On Claude Platform on AWS, spend limits are managed on the Billing page rather than the Limits page.
 * **Workspace spend limits:** Set monthly spend limits for individual workspaces from each workspace's limits settings.
-* **Spend alerts:** Alerts are sent to the email addresses you list. Role-based recipients, such as all organization admins, are not supported on Claude Platform on AWS.
 
 The spend limits you set are soft limits: spend is calculated at list prices and can take about two hours to reflect recent usage.
 
 ## Monitoring and logging
 
-AWS CloudTrail can capture all requests to Claude Platform on AWS. Workspace, vault, and webhook operations are logged as Management events by default. Inference, batch, file, skill, model, user profile, and Claude Managed Agents operations (other than vaults and webhooks) are classified as Data events and require explicit data event logging configuration, which incurs additional CloudTrail charges. See the [IAM actions reference](https://platform.claude.com/docs/en/api/claude-platform-on-aws-iam-actions.md#route-to-action-mapping) for the full event type classification and the [AWS CloudTrail documentation](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/) for configuration details.
+AWS CloudTrail can capture all requests to Claude Platform on AWS. Workspace, vault, and webhook operations are logged as Management events by default. Inference, batch, file, skill, model, user profile, and Claude Managed Agents operations (other than vaults and webhooks) are classified as Data events and require explicit data event logging configuration, which incurs additional CloudTrail charges. See the [IAM actions reference](../api/api-claude-platform-on-aws-iam-actions.md#route-to-action-mapping) for the full event type classification and the [AWS CloudTrail documentation](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/) for configuration details.
 
 ### Request IDs
 
@@ -1124,17 +1123,17 @@ The following policy allows real-time inference while blocking batch processing:
 }
 ```
 
-The `GetBatchInference` action authorizes both the batch metadata route and the batch results route. Denying it blocks both reads. For a Deny-only policy suitable for ZDR-sensitive workloads, see [Feature lockdown for a ZDR-sensitive workspace](https://platform.claude.com/docs/en/api/claude-platform-on-aws-iam-actions.md#feature-lockdown-for-a-zdr-sensitive-workspace).
+The `GetBatchInference` action authorizes both the batch metadata route and the batch results route. Denying it blocks both reads. For a Deny-only policy suitable for ZDR-sensitive workloads, see [Feature lockdown for a ZDR-sensitive workspace](../api/api-claude-platform-on-aws-iam-actions.md#feature-lockdown-for-a-zdr-sensitive-workspace).
 
 <Note>
-  `ListWorkspaces` is account-scoped, so it appears in a separate Allow statement with `"Resource": "*"`. Specifying a workspace ARN on an account-scoped action has no effect (see [Provisioning automation](https://platform.claude.com/docs/en/api/claude-platform-on-aws-iam-actions.md#provisioning-automation)).
+  `ListWorkspaces` is account-scoped, so it appears in a separate Allow statement with `"Resource": "*"`. Specifying a workspace ARN on an account-scoped action has no effect (see [Provisioning automation](../api/api-claude-platform-on-aws-iam-actions.md#provisioning-automation)).
 
-  This policy assumes AWS SigV4 authentication. If the principal authenticates with an API key, also add `aws-external-anthropic:CallWithBearerToken` to the `"Resource": "*"` Allow statement. `CallWithBearerToken` is a route-less authentication-layer action that does not bind to a workspace ARN. See [Per-customer workspace isolation](https://platform.claude.com/docs/en/api/claude-platform-on-aws-iam-actions.md#per-customer-workspace-isolation) for the two-statement pattern.
+  This policy assumes AWS SigV4 authentication. If the principal authenticates with an API key, also add `aws-external-anthropic:CallWithBearerToken` to the `"Resource": "*"` Allow statement. `CallWithBearerToken` is a route-less authentication-layer action that does not bind to a workspace ARN. See [Per-customer workspace isolation](../api/api-claude-platform-on-aws-iam-actions.md#per-customer-workspace-isolation) for the two-statement pattern.
 </Note>
 
 ### Managed policies
 
-AWS provides five managed policies (`AnthropicFullAccess`, `AnthropicReadOnlyAccess`, `AnthropicInferenceAccess`, `AnthropicLimitedAccess`, and `AnthropicSelfHostedEnvironmentAccess`) for common access patterns. For the actions each policy grants, the complete list of IAM actions, the route-to-action mapping, and additional policy examples, see [IAM actions for Claude Platform on AWS](https://platform.claude.com/docs/en/api/claude-platform-on-aws-iam-actions.md#managed-policies).
+AWS provides five managed policies (`AnthropicFullAccess`, `AnthropicReadOnlyAccess`, `AnthropicInferenceAccess`, `AnthropicLimitedAccess`, and `AnthropicSelfHostedEnvironmentAccess`) for common access patterns. For the actions each policy grants, the complete list of IAM actions, the route-to-action mapping, and additional policy examples, see [IAM actions for Claude Platform on AWS](../api/api-claude-platform-on-aws-iam-actions.md#managed-policies).
 
 ## Next steps
 

@@ -62,7 +62,7 @@ This approach has two major advantages:
 Claude Sonnet 5 defaults to `high` effort.
 
 * **High effort (default):** Suitable for complex reasoning, coding, and agentic tasks where quality matters more than speed or cost.
-* **Xhigh effort:** For the hardest coding and agentic tasks. See [Prompting Claude Sonnet 5](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-sonnet-5.md#calibrating-effort-and-thinking-depth).
+* **Xhigh effort:** For the hardest coding and agentic tasks. See [Prompting Claude Sonnet 5](./build-with-claude-prompt-engineering-prompting-claude-sonnet-5.md#calibrating-effort-and-thinking-depth).
 * **Medium effort:** Cost-saving step-down from the default. Comparable to Claude Sonnet 4.6 at high effort.
 * **Low effort:** For high-volume or latency-sensitive workloads. Suitable for chat and non-coding use cases where faster turnaround is prioritized.
 * **Max effort:** For tasks requiring the absolute highest capability with no constraints on token spending.
@@ -106,7 +106,7 @@ When running Claude Opus 4.8 at `xhigh` or `max` effort, set a large `max_tokens
 
 Effort is the primary control for trading off intelligence, latency, and cost on Claude Fable 5. **Start with `high`, the default, for most tasks**, use `xhigh` for the most capability-sensitive workloads, and step down to `medium` or `low` for routine work. Lower effort settings on Claude Fable 5 still perform well and often exceed `xhigh` performance on prior models. At `high` and `xhigh`, set a large `max_tokens`: it is a hard limit on total output, thinking plus response text. See [Cost control](./build-with-claude-adaptive-thinking.md#cost-control).
 
-Reduce effort if a task completes but takes longer than necessary, or if you want a faster, more interactive working style. The same recommendations apply to Claude Mythos 5. For fuller guidance, see [Prompting Claude Fable 5](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5.md).
+Reduce effort if a task completes but takes longer than necessary, or if you want a faster, more interactive working style. The same recommendations apply to Claude Mythos 5. For fuller guidance, see [Prompting Claude Fable 5](./build-with-claude-prompt-engineering-prompting-claude-fable-5.md).
 
 ## Basic usage
 

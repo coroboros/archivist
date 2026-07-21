@@ -18,7 +18,7 @@ Related pages:
 
 * [Stop reasons and fallback](./build-with-claude-handling-stop-reasons.md): the full list of `stop_reason` values.
 * [Fallback credit](./build-with-claude-fallback-credit.md): how refused requests are billed, and how to avoid paying twice for prompt caching on a retry.
-* [SDK middleware](https://platform.claude.com/docs/en/cli-sdks-libraries/middleware.md): the SDK helper that wraps all of this.
+* [SDK middleware](../general/general-cli-sdks-libraries-middleware.md): the SDK helper that wraps all of this.
 * [Fallback and billing cookbook](https://platform.claude.com/cookbook/fable-5-fallback-billing-guide): a worked end-to-end example.
 
 The simplest setup: name a fallback model on the request, and the API handles the retry.
@@ -1030,7 +1030,7 @@ Server-side fallback is not available for batches (a batch request that includes
     Every `stop_reason` value and how to handle it.
   </Card>
 
-  <Card title="SDK middleware" icon="settings" href="https://platform.claude.com/docs/en/cli-sdks-libraries/middleware.md">
+  <Card title="SDK middleware" icon="settings" href="../general/general-cli-sdks-libraries-middleware.md">
     How SDK middleware works, including the refusal-fallback helper.
   </Card>
 

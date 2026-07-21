@@ -80,7 +80,7 @@ In accordance with the [versioning](./api-versioning.md) policy, the values with
 
 The official SDKs raise typed exceptions for these errors instead of returning raw JSON, and the class names and namespaces differ by language. For example, a 404 surfaces as `anthropic.NotFoundError` in Python, `Anthropic::Errors::NotFoundError` in Ruby, `com.anthropic.errors.NotFoundException` in Java, and as a single `*anthropic.Error` value (branch on `StatusCode`) in Go. Catch the SDK's typed classes rather than string-matching error messages, handling the most specific classes first. Each SDK page documents its full exception hierarchy:
 
-* [Python](https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/python.md#handling-errors) · [TypeScript](https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/typescript.md#handling-errors) · [C#](https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/csharp.md#error-handling) · [Go](https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/go.md#error-handling) · [Java](https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/java.md#error-handling) · [PHP](https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/php.md#error-handling) · [Ruby](https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/ruby.md#handling-errors)
+* [Python](../general/general-cli-sdks-libraries-sdks-python.md#handling-errors) · [TypeScript](../general/general-cli-sdks-libraries-sdks-typescript.md#handling-errors) · [C#](../general/general-cli-sdks-libraries-sdks-csharp.md#error-handling) · [Go](../general/general-cli-sdks-libraries-sdks-go.md#error-handling) · [Java](../general/general-cli-sdks-libraries-sdks-java.md#error-handling) · [PHP](../general/general-cli-sdks-libraries-sdks-php.md#error-handling) · [Ruby](../general/general-cli-sdks-libraries-sdks-ruby.md#handling-errors)
 
 ## Request ID
 
@@ -255,7 +255,7 @@ Avoid setting a large `max_tokens` value without using the [streaming Messages A
 
 If you are building a direct API integration, setting a [TCP socket keep-alive](https://tldp.org/HOWTO/TCP-Keepalive-HOWTO/programming.html) can reduce the impact of idle connection timeouts on some networks.
 
-The [SDKs](https://platform.claude.com/docs/en/cli-sdks-libraries/overview.md) validate that your non-streaming Messages API requests are not expected to exceed a 10-minute timeout. They also set a socket option for TCP keep-alive.
+The [SDKs](../general/general-cli-sdks-libraries-overview.md) validate that your non-streaming Messages API requests are not expected to exceed a 10-minute timeout. They also set a socket option for TCP keep-alive.
 
 If you don't need to process events incrementally, the SDKs can consume the stream for you and return the complete `Message` object, identical to what a non-streaming call returns:
 

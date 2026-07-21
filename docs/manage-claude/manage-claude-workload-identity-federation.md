@@ -336,7 +336,7 @@ The token-exchange response follows [RFC 6749 §5.1](https://www.rfc-editor.org/
 Every SDK resolves credentials in the same five-tier order: constructor arguments, then `ANTHROPIC_API_KEY` / `ANTHROPIC_AUTH_TOKEN`, then an explicit `ANTHROPIC_PROFILE`, then the federation environment variables, then the implicit active profile. The first source that yields a credential wins.
 
 <Warning>
-  `ANTHROPIC_API_KEY` sits above the federation tiers, so a leftover key in the environment silently shadows federation. When migrating a workload from API keys to Workload Identity Federation, confirm `ANTHROPIC_API_KEY` is unset everywhere that workload runs (container env, CI secrets, shell profiles). The CLI's [`ant auth status`](https://platform.claude.com/docs/en/cli-sdks-libraries/cli/authentication.md#check-authentication-status) command reports which source won.
+  `ANTHROPIC_API_KEY` sits above the federation tiers, so a leftover key in the environment silently shadows federation. When migrating a workload from API keys to Workload Identity Federation, confirm `ANTHROPIC_API_KEY` is unset everywhere that workload runs (container env, CI secrets, shell profiles). The CLI's [`ant auth status`](../general/general-cli-sdks-libraries-cli-authentication.md#check-authentication-status) command reports which source won.
 </Warning>
 
 For the full precedence table, the per-tier semantics, and the profile file schema, see [Credential precedence in the WIF reference](./manage-claude-wif-reference.md#credential-precedence).

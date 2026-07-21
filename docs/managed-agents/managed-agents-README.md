@@ -2,38 +2,38 @@
 
 _This repository is a mirror of the official [Claude Platform](https://platform.claude.com/docs/en/) documentation (Platform | Managed Agents). It is updated automatically._
 
-**Last updated:** Sat, 18 Jul 2026 02:21:18 GMT
+**Last updated:** Tue, 21 Jul 2026 02:31:41 GMT
 
 ---
 
 ## Managed Agents
 
-- [Files](./managed-agents-files.md)
+- [Skills](./managed-agents-skills.md)
 - [Environments](./managed-agents-environments.md)
-- [Overview](./managed-agents-overview.md)
 - [Self Hosted Sandboxes Security](./managed-agents-self-hosted-sandboxes-security.md)
-- [Migration](./managed-agents-migration.md)
-- [Onboarding](./managed-agents-onboarding.md)
 - [Sessions](./managed-agents-sessions.md)
 - [Session Operations](./managed-agents-session-operations.md)
-- [Define Outcomes](./managed-agents-define-outcomes.md)
-- [Multiagent Orchestration](./managed-agents-multiagent-orchestration.md)
-- [Skills](./managed-agents-skills.md)
-- [Tools](./managed-agents-tools.md)
-- [Mcp Connector](./managed-agents-mcp-connector.md)
-- [Quickstart](./managed-agents-quickstart.md)
-- [Memory](./managed-agents-memory.md)
-- [Agent Setup](./managed-agents-agent-setup.md)
-- [Permission Policies](./managed-agents-permission-policies.md)
-- [Scheduled Deployments](./managed-agents-scheduled-deployments.md)
-- [Webhooks](./managed-agents-webhooks.md)
-- [Github](./managed-agents-github.md)
-- [Reference](./managed-agents-reference.md)
-- [Vaults](./managed-agents-vaults.md)
-- [Cloud Sandboxes Reference](./managed-agents-cloud-sandboxes-reference.md)
 - [Self Hosted Sandboxes](./managed-agents-self-hosted-sandboxes.md)
+- [Vaults](./managed-agents-vaults.md)
 - [Events And Streaming](./managed-agents-events-and-streaming.md)
+- [Files](./managed-agents-files.md)
+- [Quickstart](./managed-agents-quickstart.md)
+- [Webhooks](./managed-agents-webhooks.md)
+- [Multiagent Orchestration](./managed-agents-multiagent-orchestration.md)
+- [Define Outcomes](./managed-agents-define-outcomes.md)
+- [Github](./managed-agents-github.md)
+- [Agent Setup](./managed-agents-agent-setup.md)
+- [Cloud Sandboxes Reference](./managed-agents-cloud-sandboxes-reference.md)
+- [Tools](./managed-agents-tools.md)
 - [Dreams](./managed-agents-dreams.md)
-- [Cloud Containers](./managed-agents-cloud-containers.md)
+- [Mcp Connector](./managed-agents-mcp-connector.md)
+- [Permission Policies](./managed-agents-permission-policies.md)
+- [Memory](./managed-agents-memory.md)
+- [Scheduled Deployments](./managed-agents-scheduled-deployments.md)
+- [Onboarding](./managed-agents-onboarding.md)
+- [Overview](./managed-agents-overview.md)
+- [Migration](./managed-agents-migration.md)
+- [Reference](./managed-agents-reference.md)
 - [Multi Agent](./managed-agents-multi-agent.md)
+- [Cloud Containers](./managed-agents-cloud-containers.md)
 

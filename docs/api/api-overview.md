@@ -77,7 +77,7 @@ Anthropic provides official SDKs that simplify API integration by handling authe
 * Streaming support
 * Request timeouts and connection management
 
-For a list of client SDKs, see [Client SDKs](https://platform.claude.com/docs/en/cli-sdks-libraries/overview.md).
+For a list of client SDKs, see [Client SDKs](../general/general-cli-sdks-libraries-overview.md).
 
 ## Claude API vs cloud platforms
 
@@ -150,7 +150,7 @@ List endpoints return results in pages. Most newer list endpoints use the `page`
 
 To go back a page, pass `prev_page` as the `page` parameter. `prev_page` is `null` when you're on the first page. Not all list endpoints support `prev_page`. Only `GET /v1/sessions` returns `prev_page`; on list endpoints that do not support backward pagination, the field is absent from the response rather than `null`. For a request walkthrough, see [Listing sessions](../managed-agents/managed-agents-session-operations.md#listing-sessions).
 
-Every SDK provides an auto-paginating iterator that follows `next_page` for you. In Python and TypeScript, you get it by iterating the list result directly. The other SDKs provide the iterator through a separate method. SDK auto-pagination is forward-only; to go back a page, read `prev_page` from the response and pass it back as the `page` parameter yourself. See [client SDKs](https://platform.claude.com/docs/en/cli-sdks-libraries/overview.md) for language-specific details.
+Every SDK provides an auto-paginating iterator that follows `next_page` for you. In Python and TypeScript, you get it by iterating the list result directly. The other SDKs provide the iterator through a separate method. SDK auto-pagination is forward-only; to go back a page, read `prev_page` from the response and pass it back as the `page` parameter yourself. See [client SDKs](../general/general-cli-sdks-libraries-overview.md) for language-specific details.
 
 <Note>
   Some list endpoints use a different cursor scheme. The [Message Batches API](../build-with-claude/build-with-claude-batch-processing.md), the [Files API](../build-with-claude/build-with-claude-files.md), the [Models API](./api-models-list.md), and several [Admin API](../manage-claude/manage-claude-admin-api.md) endpoints take `after_id` and `before_id` query parameters instead of `page`. Their responses return `has_more`, `first_id`, and `last_id` instead of `next_page`. Some endpoints that use the `page` scheme, such as `GET /v1/skills`, also return a `has_more` Boolean alongside `next_page`. See the reference page for each endpoint for its exact pagination fields.
@@ -184,7 +184,7 @@ The Claude API is available in [many countries and regions](./api-supported-regi
     Agents, Sessions, and Environments endpoints
   </Card>
 
-  <Card title="Client SDKs" icon="code" href="https://platform.claude.com/docs/en/cli-sdks-libraries/overview.md">
+  <Card title="Client SDKs" icon="code" href="../general/general-cli-sdks-libraries-overview.md">
     Python, TypeScript, C#, Go, Java, PHP, and Ruby
   </Card>
 

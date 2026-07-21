@@ -19,7 +19,7 @@ generated: true
 </Info>
 
 <Note>
-  This integration is built on top of the [Claude Code CLI and Agent SDK](./code-agent-sdk/overview.md), enabling programmatic use of Claude in your CI/CD jobs and custom automation workflows.
+  This integration is built on top of the [Claude Code CLI and Agent SDK](/docs/en/agent-sdk/overview), enabling programmatic use of Claude in your CI/CD jobs and custom automation workflows.
 </Note>
 
 ## Why use Claude Code with GitLab?

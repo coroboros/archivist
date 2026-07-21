@@ -15,13 +15,13 @@ The API for accessing Claude on Google Cloud's Agent Platform is nearly identica
 * On Agent Platform, `model` is not passed in the request body. Instead, it is specified in the Google Cloud endpoint URL.
 * On Agent Platform, `anthropic_version` is passed in the request body (rather than as a header), and must be set to the value `vertex-2023-10-16`.
 
-Agent Platform is also supported by Anthropic's official [client SDKs](https://platform.claude.com/docs/en/cli-sdks-libraries/overview.md). This guide walks you through making a request to Claude on Agent Platform using one of Anthropic's client SDKs.
+Agent Platform is also supported by Anthropic's official [client SDKs](../general/general-cli-sdks-libraries-overview.md). This guide walks you through making a request to Claude on Agent Platform using one of Anthropic's client SDKs.
 
 Note that this guide assumes you already have a Google Cloud project that is able to use Agent Platform. See [Anthropic Claude models on Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/partner-models/claude) for more information on the setup required and a full walkthrough.
 
 ## Install an SDK for accessing Agent Platform
 
-First, install Anthropic's [client SDK](https://platform.claude.com/docs/en/cli-sdks-libraries/overview.md) for your language of choice.
+First, install Anthropic's [client SDK](../general/general-cli-sdks-libraries-overview.md) for your language of choice.
 
 <Tabs>
   <Tab title="Python">
@@ -326,7 +326,7 @@ The following examples show how to generate text from Claude on Agent Platform:
   ```
 </CodeGroup>
 
-See the [client SDKs](https://platform.claude.com/docs/en/cli-sdks-libraries/overview.md) and the official [Agent Platform docs](https://cloud.google.com/vertex-ai/docs) for more details.
+See the [client SDKs](../general/general-cli-sdks-libraries-overview.md) and the official [Agent Platform docs](https://cloud.google.com/vertex-ai/docs) for more details.
 
 Claude is also available through [Amazon Bedrock](./build-with-claude-claude-in-amazon-bedrock.md), [Claude Platform on AWS](./build-with-claude-claude-platform-on-aws.md), and [Microsoft Foundry](./build-with-claude-claude-in-microsoft-foundry.md).
 

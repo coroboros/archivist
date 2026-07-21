@@ -639,7 +639,7 @@ See the [full list of request options](https://pkg.go.dev/github.com/anthropics/
 
 ## HTTP client customization
 
-For request middleware (`option.WithMiddleware`) and replacing the default `http.Client` (`option.WithHTTPClient`), see [SDK middleware](https://platform.claude.com/docs/en/cli-sdks-libraries/middleware.md).
+For request middleware (`option.WithMiddleware`) and replacing the default `http.Client` (`option.WithHTTPClient`), see [SDK middleware](../general/general-cli-sdks-libraries-middleware.md).
 
 ## Platform integrations
 

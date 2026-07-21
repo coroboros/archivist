@@ -62,7 +62,7 @@ You need:
 * **Two credentials:** an environment key (generated in the Console in the steps that follow) authenticates the worker to its queue; your Claude API key creates sessions and reads queue stats from outside the worker host. Key generation is Console-only.
 
 <Note>
-  On [Claude Platform on AWS](../build-with-claude/build-with-claude-claude-platform-on-aws.md), the worker authenticates with AWS IAM (SigV4) or an [API key generated in the AWS Console](../build-with-claude/build-with-claude-claude-platform-on-aws.md#api-key-authentication), not an environment key. Attach the [`AnthropicSelfHostedEnvironmentAccess`](https://platform.claude.com/docs/en/api/claude-platform-on-aws-iam-actions.md#managed-policies) managed policy to the IAM principal your worker runs as. Environment keys generated in the Claude Console don't work with the Claude Platform on AWS endpoint.
+  On [Claude Platform on AWS](../build-with-claude/build-with-claude-claude-platform-on-aws.md), the worker authenticates with AWS IAM (SigV4) or an [API key generated in the AWS Console](../build-with-claude/build-with-claude-claude-platform-on-aws.md#api-key-authentication), not an environment key. Attach the [`AnthropicSelfHostedEnvironmentAccess`](../api/api-claude-platform-on-aws-iam-actions.md#managed-policies) managed policy to the IAM principal your worker runs as. Environment keys generated in the Claude Console don't work with the Claude Platform on AWS endpoint.
 </Note>
 
 <Steps>

@@ -179,7 +179,7 @@ In each case, the skill loads the relevant language-specific documentation and g
     Learn about how Agent Skills work and the progressive disclosure model
   </Card>
 
-  <Card title="Client SDKs" icon="code" href="https://platform.claude.com/docs/en/cli-sdks-libraries/overview.md">
+  <Card title="Client SDKs" icon="code" href="../general/general-cli-sdks-libraries-overview.md">
     Browse the official Anthropic SDKs for all supported languages
   </Card>
 

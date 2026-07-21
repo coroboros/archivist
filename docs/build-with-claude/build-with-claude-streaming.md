@@ -336,7 +336,7 @@ data: {"type": "content_block_delta","index": 0,"delta": {"type": "text_delta", 
 
 The deltas for `tool_use` content blocks correspond to updates for the `input` field of the block. To support maximum granularity, the deltas are *partial JSON strings*, whereas the final `tool_use.input` is always an *object*.
 
-You can accumulate the string deltas and parse the JSON once you receive a `content_block_stop` event, by using a library like [Pydantic](https://docs.pydantic.dev/latest/concepts/json/#partial-json-parsing) to do partial JSON parsing, or by using the [SDKs](https://platform.claude.com/docs/en/cli-sdks-libraries/overview.md), which provide helpers to access parsed incremental values.
+You can accumulate the string deltas and parse the JSON once you receive a `content_block_stop` event, by using a library like [Pydantic](https://docs.pydantic.dev/latest/concepts/json/#partial-json-parsing) to do partial JSON parsing, or by using the [SDKs](../general/general-cli-sdks-libraries-overview.md), which provide helpers to access parsed incremental values.
 
 A `tool_use` content block delta looks like:
 
@@ -371,7 +371,7 @@ data: {"type": "content_block_delta", "index": 0, "delta": {"type": "signature_d
 
 ## Full HTTP stream response
 
-Use the [client SDKs](https://platform.claude.com/docs/en/cli-sdks-libraries/overview.md) when using streaming mode. However, if you are building a direct API integration, you need to handle these events yourself.
+Use the [client SDKs](../general/general-cli-sdks-libraries-overview.md) when using streaming mode. However, if you are building a direct API integration, you need to handle these events yourself.
 
 A stream response consists of:
 
@@ -1517,7 +1517,7 @@ For Claude 4.6 and later models, the same capture-and-resume strategy applies, b
     Stream extended thinking output with `thinking_delta` and `signature_delta` events.
   </Card>
 
-  <Card title="Client SDKs" icon="code" href="https://platform.claude.com/docs/en/cli-sdks-libraries/overview.md">
+  <Card title="Client SDKs" icon="code" href="../general/general-cli-sdks-libraries-overview.md">
     Use the official SDKs, which handle streaming, accumulation, and reconnection for you.
   </Card>
 

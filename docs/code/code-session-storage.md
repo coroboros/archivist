@@ -282,23 +282,23 @@ The SDK never deletes from your store on its own. Retention is the adapter's res
 
 The following TypeScript SDK functions accept a `sessionStore` option and operate against the store instead of the local filesystem when it is provided:
 
-* [`query()`](./code-agent-sdk/typescript.md#query)
-* [`startup()`](./code-agent-sdk/typescript.md#startup)
-* [`listSessions()`](./code-agent-sdk/typescript.md#listsessions)
-* [`getSessionInfo()`](./code-agent-sdk/typescript.md#getsessioninfo)
-* [`getSessionMessages()`](./code-agent-sdk/typescript.md#getsessionmessages)
-* [`renameSession()`](./code-agent-sdk/typescript.md#renamesession)
-* [`tagSession()`](./code-agent-sdk/typescript.md#tagsession)
-* [`deleteSession()`](./code-agent-sdk/typescript.md)
-* [`forkSession()`](./code-agent-sdk/typescript.md)
-* [`listSubagents()`](./code-agent-sdk/typescript.md)
-* [`getSubagentMessages()`](./code-agent-sdk/typescript.md)
+* [`query()`](/docs/en/agent-sdk/typescript#query)
+* [`startup()`](/docs/en/agent-sdk/typescript#startup)
+* [`listSessions()`](/docs/en/agent-sdk/typescript#listsessions)
+* [`getSessionInfo()`](/docs/en/agent-sdk/typescript#getsessioninfo)
+* [`getSessionMessages()`](/docs/en/agent-sdk/typescript#getsessionmessages)
+* [`renameSession()`](/docs/en/agent-sdk/typescript#renamesession)
+* [`tagSession()`](/docs/en/agent-sdk/typescript#tagsession)
+* [`deleteSession()`](/docs/en/agent-sdk/typescript)
+* [`forkSession()`](/docs/en/agent-sdk/typescript)
+* [`listSubagents()`](/docs/en/agent-sdk/typescript)
+* [`getSubagentMessages()`](/docs/en/agent-sdk/typescript)
 
-In the Python SDK, set `session_store` in [`ClaudeAgentOptions`](./code-agent-sdk/python.md#claudeagentoptions) to run `query()` against a store. The remaining operations each have a store-backed Python function that takes the store as an argument: `list_sessions_from_store()`, `get_session_info_from_store()`, `get_session_messages_from_store()`, `list_subagents_from_store()`, `get_subagent_messages_from_store()`, `rename_session_via_store()`, `tag_session_via_store()`, `delete_session_via_store()`, and `fork_session_via_store()`. `startup()` has no Python equivalent. The standalone functions documented in the [Python SDK reference](./code-agent-sdk/python.md#functions), such as `list_sessions()`, read local session files.
+In the Python SDK, set `session_store` in [`ClaudeAgentOptions`](/docs/en/agent-sdk/python#claudeagentoptions) to run `query()` against a store. The remaining operations each have a store-backed Python function that takes the store as an argument: `list_sessions_from_store()`, `get_session_info_from_store()`, `get_session_messages_from_store()`, `list_subagents_from_store()`, `get_subagent_messages_from_store()`, `rename_session_via_store()`, `tag_session_via_store()`, `delete_session_via_store()`, and `fork_session_via_store()`. `startup()` has no Python equivalent. The standalone functions documented in the [Python SDK reference](/docs/en/agent-sdk/python#functions), such as `list_sessions()`, read local session files.
 
 ## Related resources
 
-* [Work with sessions](./code-agent-sdk/sessions.md): Continue, resume, and fork without a custom store
-* [Host the SDK](./code-agent-sdk/hosting.md): Deployment patterns for multi-host environments
-* [TypeScript `Options`](./code-agent-sdk/typescript.md#options): Full option reference
+* [Work with sessions](/docs/en/agent-sdk/sessions): Continue, resume, and fork without a custom store
+* [Host the SDK](/docs/en/agent-sdk/hosting): Deployment patterns for multi-host environments
+* [TypeScript `Options`](/docs/en/agent-sdk/typescript#options): Full option reference
 * [`examples/session-stores/`](https://github.com/anthropics/claude-agent-sdk-typescript/tree/main/examples/session-stores): Runnable S3, Redis, and Postgres reference adapters

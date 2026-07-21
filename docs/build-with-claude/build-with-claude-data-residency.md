@@ -99,6 +99,101 @@ The `inference_geo` parameter controls where model inference runs for a specific
   // Check where inference actually ran
   console.log(`Inference geo: ${response.usage.inference_geo}`);
   ```
+
+  ```csharp C#
+  var client = new AnthropicClient();
+
+  var response = await client.Messages.Create(
+      new MessageCreateParams
+      {
+          Model = Model.ClaudeOpus4_8,
+          MaxTokens = 1024,
+          InferenceGeo = "us",
+          Messages =
+          [
+              new() { Role = Role.User, Content = "Summarize the key points of this document." },
+          ],
+      }
+  );
+
+  if (response.Content[0].TryPickText(out var textBlock))
+  {
+      Console.WriteLine(textBlock.Text);
+  }
+
+  // Check where inference actually ran
+  Console.WriteLine($"Inference geo: {response.Usage.InferenceGeo}");
+  ```
+
+  ```go Go
+  client := anthropic.NewClient()
+
+  message, err := client.Messages.New(context.Background(), anthropic.MessageNewParams{
+  	Model:        anthropic.ModelClaudeOpus4_8,
+  	MaxTokens:    1024,
+  	InferenceGeo: anthropic.String("us"),
+  	Messages: []anthropic.MessageParam{
+  		anthropic.NewUserMessage(anthropic.NewTextBlock("Summarize the key points of this document.")),
+  	},
+  })
+  if err != nil {
+  	log.Fatal(err)
+  }
+
+  fmt.Println(message.Content[0].Text)
+  // Check where inference actually ran
+  fmt.Printf("Inference geo: %s\n", message.Usage.InferenceGeo)
+  ```
+
+  ```java Java
+  AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+  Message response = client.messages().create(
+          MessageCreateParams.builder()
+                  .model(Model.CLAUDE_OPUS_4_8)
+                  .maxTokens(1024L)
+                  .inferenceGeo("us")
+                  .addUserMessage("Summarize the key points of this document.")
+                  .build());
+
+  IO.println(response.content().get(0).text().get().text());
+  // Check where inference actually ran
+  IO.println("Inference geo: " + response.usage().inferenceGeo().get());
+  ```
+
+  ```php PHP
+  $client = new Client();
+
+  $response = $client->messages->create(
+      model: 'claude-opus-4-8',
+      maxTokens: 1024,
+      inferenceGeo: 'us',
+      messages: [
+          ['role' => 'user', 'content' => 'Summarize the key points of this document.'],
+      ],
+  );
+
+  echo $response->content[0]->text, PHP_EOL;
+  // Check where inference actually ran
+  echo "Inference geo: {$response->usage->inferenceGeo}\n";
+  ```
+
+  ```ruby Ruby
+  client = Anthropic::Client.new
+
+  response = client.messages.create(
+    model: "claude-opus-4-8",
+    max_tokens: 1024,
+    inference_geo: "us",
+    messages: [
+      {role: "user", content: "Summarize the key points of this document."}
+    ]
+  )
+
+  puts response.content.first.text
+  # Check where inference actually ran
+  puts "Inference geo: #{response.usage.inference_geo}"
+  ```
 </CodeGroup>
 
 ### Response
@@ -120,7 +215,7 @@ The response `usage` object includes an `inference_geo` field indicating where i
 The `inference_geo` parameter is supported on Claude Opus 4.6, Claude Sonnet 4.6, and later models. Requests with `inference_geo` on Claude Opus 4.5, Claude Sonnet 4.5, Claude Haiku 4.5, or earlier models return a 400 error.
 
 <Note>
-  The `inference_geo` parameter is available on the Claude API (first-party) and [Claude Platform on AWS](./build-with-claude-claude-platform-on-aws.md). On Amazon Bedrock and Google Cloud, the inference region is determined by the endpoint URL or inference profile, so `inference_geo` is not applicable. On [Claude in Microsoft Foundry](./build-with-claude-claude-in-microsoft-foundry.md), `inference_geo` is likewise not applicable: deployments hosted on Azure can instead use the US Data Zone Standard deployment type, which keeps inference within the United States. The `inference_geo` parameter is also not available through the [OpenAI SDK compatibility endpoint](https://platform.claude.com/docs/en/cli-sdks-libraries/libraries/openai-sdk.md).
+  The `inference_geo` parameter is available on the Claude API (first-party) and [Claude Platform on AWS](./build-with-claude-claude-platform-on-aws.md). On Amazon Bedrock and Google Cloud, the inference region is determined by the endpoint URL or inference profile, so `inference_geo` is not applicable. On [Claude in Microsoft Foundry](./build-with-claude-claude-in-microsoft-foundry.md), `inference_geo` is likewise not applicable: deployments hosted on Azure can instead use the US Data Zone Standard deployment type, which keeps inference within the United States. The `inference_geo` parameter is also not available through the [OpenAI SDK compatibility endpoint](../general/general-cli-sdks-libraries-libraries-openai-sdk.md).
 </Note>
 
 ### Workspace-level restrictions

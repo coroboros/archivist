@@ -677,7 +677,7 @@ The sections below cover edge cases and the complete redemption rules. Most inte
     Every `stop_reason` value and how to handle it.
   </Card>
 
-  <Card title="SDK middleware" icon="settings" href="https://platform.claude.com/docs/en/cli-sdks-libraries/middleware.md">
+  <Card title="SDK middleware" icon="settings" href="../general/general-cli-sdks-libraries-middleware.md">
     The SDK helper that applies fallback credit automatically.
   </Card>
 </CardGroup>

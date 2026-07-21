@@ -947,7 +947,7 @@ The extended thinking page covers several topics in more detail with mode-specif
     Give Claude enhanced reasoning for complex tasks and control how thinking content is returned.
   </Card>
 
-  <Card title="Prompting Claude Sonnet 5" icon="terminal" href="https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-sonnet-5.md">
+  <Card title="Prompting Claude Sonnet 5" icon="terminal" href="./build-with-claude-prompt-engineering-prompting-claude-sonnet-5.md">
     Behavioral differences and prompting patterns for Claude Sonnet 5, covering effort, adaptive thinking defaults, tool use, and migration from Claude Sonnet 4.6.
   </Card>
 </CardGroup>

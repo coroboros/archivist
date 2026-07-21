@@ -6,7 +6,7 @@ generated: true
 ---
 # Versions
 
-When making API requests, you must send an `anthropic-version` request header. For example, `anthropic-version: 2023-06-01`. If you are using the [client SDKs](https://platform.claude.com/docs/en/cli-sdks-libraries/overview.md), this is handled for you automatically.
+When making API requests, you must send an `anthropic-version` request header. For example, `anthropic-version: 2023-06-01`. If you are using the [client SDKs](../general/general-cli-sdks-libraries-overview.md), this is handled for you automatically.
 
 ---
 

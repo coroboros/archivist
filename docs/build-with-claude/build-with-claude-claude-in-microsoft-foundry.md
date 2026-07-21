@@ -40,7 +40,7 @@ Before you begin, ensure you have:
 
 ## Install an SDK
 
-Anthropic's [client SDKs](https://platform.claude.com/docs/en/cli-sdks-libraries/overview.md) support Foundry through a platform-specific package or client class. The examples on this page also show requests with cURL and the ant CLI. To set up the CLI, see [CLI quickstart](https://platform.claude.com/docs/en/cli-sdks-libraries/cli/quickstart.md).
+Anthropic's [client SDKs](../general/general-cli-sdks-libraries-overview.md) support Foundry through a platform-specific package or client class. The examples on this page also show requests with cURL and the ant CLI. To set up the CLI, see [CLI quickstart](../general/general-cli-sdks-libraries-cli-quickstart.md).
 
 <Note>
   Foundry is supported by the C#, Java, PHP, Python, and TypeScript SDKs. Foundry is not currently available in the Go and Ruby SDKs.

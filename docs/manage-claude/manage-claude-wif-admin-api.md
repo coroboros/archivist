@@ -18,7 +18,7 @@ Every request on this page authenticates with an OAuth bearer token that carries
 
 ### Interactive (your terminal)
 
-Log in with the [`ant` CLI](https://platform.claude.com/docs/en/cli-sdks-libraries/cli/quickstart.md) under a dedicated profile, requesting the `org:admin` scope (see [Admin access](https://platform.claude.com/docs/en/cli-sdks-libraries/cli/authentication.md#admin-access)), then export the bearer token:
+Log in with the [`ant` CLI](../general/general-cli-sdks-libraries-cli-quickstart.md) under a dedicated profile, requesting the `org:admin` scope (see [Admin access](../general/general-cli-sdks-libraries-cli-authentication.md#admin-access)), then export the bearer token:
 
 ```bash CLI
 ant auth login --profile admin --scope "org:admin"

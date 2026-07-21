@@ -14,8 +14,8 @@ This tutorial shows you how to use Agent Skills to create a PowerPoint presentat
 
 ## Prerequisites
 
-* A [Claude API key](/settings/keys) or a logged-in [ant CLI](https://platform.claude.com/docs/en/cli-sdks-libraries/cli/authentication.md)
-* A [client SDK](https://platform.claude.com/docs/en/cli-sdks-libraries/overview.md) for your language, or `curl` and `jq`
+* A [Claude API key](/settings/keys) or a logged-in [ant CLI](../general/general-cli-sdks-libraries-cli-authentication.md)
+* A [client SDK](../general/general-cli-sdks-libraries-overview.md) for your language, or `curl` and `jq`
 * Basic familiarity with making API requests
 
 ## Agent Skills overview
