@@ -1,5 +1,56 @@
 # Changelog
 
+## 🤖 v1.5.60 - 22/07/2026
+
+File Changes:
+
+- Modified: `docs/agents-and-tools/agents-and-tools-README.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-mcp-tunnels-overview.md`
+- Modified: `docs/api/api-README.md`
+- Modified: `docs/api/api-rate-limits.md`
+- Modified: `docs/build-with-claude/build-with-claude-README.md`
+- Modified: `docs/build-with-claude/build-with-claude-search-results.md`
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-changelog.md`
+- Modified: `docs/code/code-channels.md`
+- Modified: `docs/code/code-checkpointing.md`
+- Modified: `docs/code/code-chrome.md`
+- Modified: `docs/code/code-cli-reference.md`
+- Modified: `docs/code/code-commands.md`
+- Modified: `docs/code/code-computer-use.md`
+- Modified: `docs/code/code-costs.md`
+- Modified: `docs/code/code-desktop.md`
+- Modified: `docs/code/code-discover-plugins.md`
+- Modified: `docs/code/code-errors.md`
+- Modified: `docs/code/code-headless.md`
+- Modified: `docs/code/code-hooks-guide.md`
+- Modified: `docs/code/code-how-claude-code-works.md`
+- Modified: `docs/code/code-interactive-mode.md`
+- Modified: `docs/code/code-jetbrains.md`
+- Modified: `docs/code/code-mcp.md`
+- Modified: `docs/code/code-memory.md`
+- Modified: `docs/code/code-model-config.md`
+- Modified: `docs/code/code-monitoring-usage.md`
+- Modified: `docs/code/code-observability.md`
+- Modified: `docs/code/code-permissions.md`
+- Modified: `docs/code/code-plugin-marketplaces.md`
+- Modified: `docs/code/code-quickstart.md`
+- Modified: `docs/code/code-remote-control.md`
+- Modified: `docs/code/code-sandboxing.md`
+- Modified: `docs/code/code-scheduled-tasks.md`
+- Modified: `docs/code/code-sessions.md`
+- Modified: `docs/general/general-README.md`
+- Modified: `docs/general/general-cli-sdks-libraries-cli-scripting.md`
+- Modified: `docs/manage-claude/manage-claude-README.md`
+- Modified: `docs/manage-claude/manage-claude-authentication.md`
+- Modified: `docs/manage-claude/manage-claude-cmek-aws-kms.md`
+- Modified: `docs/manage-claude/manage-claude-cmek.md`
+- Modified: `docs/managed-agents/managed-agents-README.md`
+- Modified: `docs/managed-agents/managed-agents-self-hosted-sandboxes.md`
+- Added: `docs/code/code-desktop-ios-simulator.md`
+- Added: `docs/general/general-get-api-key.md`
+
+
 ## 🤖 v1.5.59 - 21/07/2026
 
 File Changes:
