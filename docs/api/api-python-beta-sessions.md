@@ -172,6 +172,64 @@ Create Session
 
           - `str`
 
+        - `effort: Optional[Effort]`
+
+          How hard Claude works on each inference call. Accepts a bare level string (`"high"`) or `{"type": "high"}`. On create, omitting it resolves the per-model default; on update, omitting it leaves the stored value unchanged.
+
+          - `Literal["low", "medium", "high", 2 more]`
+
+            How hard Claude works on each turn. Higher levels favor reasoning depth over latency. Not all models accept every level; invalid combinations are rejected at create time.
+
+            - `"low"`
+
+            - `"medium"`
+
+            - `"high"`
+
+            - `"xhigh"`
+
+            - `"max"`
+
+          - `class BetaManagedAgentsEffortLow: …`
+
+            Low effort. Favors latency over reasoning depth.
+
+            - `type: Literal["low"]`
+
+              - `"low"`
+
+          - `class BetaManagedAgentsEffortMedium: …`
+
+            Medium effort. Balances latency and reasoning depth.
+
+            - `type: Literal["medium"]`
+
+              - `"medium"`
+
+          - `class BetaManagedAgentsEffortHigh: …`
+
+            High effort. Favors reasoning depth.
+
+            - `type: Literal["high"]`
+
+              - `"high"`
+
+          - `class BetaManagedAgentsEffortXhigh: …`
+
+            Extra-high effort. Not all models accept this level.
+
+            - `type: Literal["xhigh"]`
+
+              - `"xhigh"`
+
+          - `class BetaManagedAgentsEffortMax: …`
+
+            Maximum effort. Favors reasoning depth over latency.
+
+            - `type: Literal["max"]`
+
+              - `"max"`
+
         - `speed: Optional[Literal["standard", "fast"]]`
 
           Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
@@ -392,6 +450,208 @@ Create Session
 
   ID of the `environment` defining the container configuration for this session.
 
+- `initial_events: Optional[Iterable[InitialEvent]]`
+
+  Initial events to send to the `session` at creation, processed in order. Supports `user.message` and `user.define_outcome` events. Maximum 50 events.
+
+  - `class BetaManagedAgentsUserMessageEventParams: …`
+
+    Parameters for sending a user message to the session.
+
+    - `content: Iterable[Content]`
+
+      Array of content blocks for the user message.
+
+      - `class BetaManagedAgentsTextBlock: …`
+
+        Regular text content.
+
+        - `text: str`
+
+          The text content.
+
+        - `type: Literal["text"]`
+
+          - `"text"`
+
+      - `class BetaManagedAgentsImageBlock: …`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `source: Source`
+
+          Union type for image source variants.
+
+          - `class BetaManagedAgentsBase64ImageSource: …`
+
+            Base64-encoded image data.
+
+            - `data: str`
+
+              Base64-encoded image data.
+
+            - `media_type: str`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `type: Literal["base64"]`
+
+              - `"base64"`
+
+          - `class BetaManagedAgentsURLImageSource: …`
+
+            Image referenced by URL.
+
+            - `type: Literal["url"]`
+
+              - `"url"`
+
+            - `url: str`
+
+              URL of the image to fetch.
+
+          - `class BetaManagedAgentsFileImageSource: …`
+
+            Image referenced by file ID.
+
+            - `file_id: str`
+
+              ID of a previously uploaded file.
+
+            - `type: Literal["file"]`
+
+              - `"file"`
+
+        - `type: Literal["image"]`
+
+          - `"image"`
+
+      - `class BetaManagedAgentsDocumentBlock: …`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `source: Source`
+
+          Union type for document source variants.
+
+          - `class BetaManagedAgentsBase64DocumentSource: …`
+
+            Base64-encoded document data.
+
+            - `data: str`
+
+              Base64-encoded document data.
+
+            - `media_type: str`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `type: Literal["base64"]`
+
+              - `"base64"`
+
+          - `class BetaManagedAgentsPlainTextDocumentSource: …`
+
+            Plain text document content.
+
+            - `data: str`
+
+              The plain text content.
+
+            - `media_type: Literal["text/plain"]`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `"text/plain"`
+
+            - `type: Literal["text"]`
+
+              - `"text"`
+
+          - `class BetaManagedAgentsURLDocumentSource: …`
+
+            Document referenced by URL.
+
+            - `type: Literal["url"]`
+
+              - `"url"`
+
+            - `url: str`
+
+              URL of the document to fetch.
+
+          - `class BetaManagedAgentsFileDocumentSource: …`
+
+            Document referenced by file ID.
+
+            - `file_id: str`
+
+              ID of a previously uploaded file.
+
+            - `type: Literal["file"]`
+
+              - `"file"`
+
+        - `type: Literal["document"]`
+
+          - `"document"`
+
+        - `context: Optional[str]`
+
+          Additional context about the document for the model.
+
+        - `title: Optional[str]`
+
+          The title of the document.
+
+    - `type: Literal["user.message"]`
+
+      - `"user.message"`
+
+  - `class BetaManagedAgentsUserDefineOutcomeEventParams: …`
+
+    Parameters for defining an outcome the agent should work toward. The agent begins work on receipt.
+
+    - `description: str`
+
+      What the agent should produce. This is the task specification.
+
+    - `rubric: Rubric`
+
+      Rubric for grading the quality of an outcome.
+
+      - `class BetaManagedAgentsFileRubricParams: …`
+
+        Rubric referenced by a file uploaded via the Files API.
+
+        - `file_id: str`
+
+          ID of the rubric file.
+
+        - `type: Literal["file"]`
+
+          - `"file"`
+
+      - `class BetaManagedAgentsTextRubricParams: …`
+
+        Rubric content provided inline as text.
+
+        - `content: str`
+
+          Rubric content. Plain text or markdown — the grader treats it as freeform text. Maximum 262144 characters.
+
+        - `type: Literal["text"]`
+
+          - `"text"`
+
+    - `type: Literal["user.define_outcome"]`
+
+      - `"user.define_outcome"`
+
+    - `max_iterations: Optional[int]`
+
+      Eval→revision cycles before giving up. Default 3, max 20.
+
 - `metadata: Optional[Dict[str, str]]`
 
   Arbitrary key-value metadata attached to the session. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
@@ -498,7 +758,7 @@ Create Session
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -549,6 +809,8 @@ Create Session
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -662,6 +924,50 @@ Create Session
             High-performance model for agents and coding
 
         - `str`
+
+      - `effort: Optional[Effort]`
+
+        How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+        - `class BetaManagedAgentsEffortLow: …`
+
+          Low effort. Favors latency over reasoning depth.
+
+          - `type: Literal["low"]`
+
+            - `"low"`
+
+        - `class BetaManagedAgentsEffortMedium: …`
+
+          Medium effort. Balances latency and reasoning depth.
+
+          - `type: Literal["medium"]`
+
+            - `"medium"`
+
+        - `class BetaManagedAgentsEffortHigh: …`
+
+          High effort. Favors reasoning depth.
+
+          - `type: Literal["high"]`
+
+            - `"high"`
+
+        - `class BetaManagedAgentsEffortXhigh: …`
+
+          Extra-high effort. Not all models accept this level.
+
+          - `type: Literal["xhigh"]`
+
+            - `"xhigh"`
+
+        - `class BetaManagedAgentsEffortMax: …`
+
+          Maximum effort. Favors reasoning depth over latency.
+
+          - `type: Literal["max"]`
+
+            - `"max"`
 
       - `speed: Optional[Literal["standard", "fast"]]`
 
@@ -1150,6 +1456,9 @@ print(beta_managed_agents_session.id)
     ],
     "model": {
       "id": "claude-sonnet-4-6",
+      "effort": {
+        "type": "low"
+      },
       "speed": "standard"
     },
     "multiagent": {
@@ -1166,6 +1475,9 @@ print(beta_managed_agents_session.id)
           ],
           "model": {
             "id": "claude-sonnet-4-6",
+            "effort": {
+              "type": "low"
+            },
             "speed": "standard"
           },
           "name": "Researcher",
@@ -1381,7 +1693,7 @@ List Sessions
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -1432,6 +1744,8 @@ List Sessions
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -1545,6 +1859,50 @@ List Sessions
             High-performance model for agents and coding
 
         - `str`
+
+      - `effort: Optional[Effort]`
+
+        How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+        - `class BetaManagedAgentsEffortLow: …`
+
+          Low effort. Favors latency over reasoning depth.
+
+          - `type: Literal["low"]`
+
+            - `"low"`
+
+        - `class BetaManagedAgentsEffortMedium: …`
+
+          Medium effort. Balances latency and reasoning depth.
+
+          - `type: Literal["medium"]`
+
+            - `"medium"`
+
+        - `class BetaManagedAgentsEffortHigh: …`
+
+          High effort. Favors reasoning depth.
+
+          - `type: Literal["high"]`
+
+            - `"high"`
+
+        - `class BetaManagedAgentsEffortXhigh: …`
+
+          Extra-high effort. Not all models accept this level.
+
+          - `type: Literal["xhigh"]`
+
+            - `"xhigh"`
+
+        - `class BetaManagedAgentsEffortMax: …`
+
+          Maximum effort. Favors reasoning depth over latency.
+
+          - `type: Literal["max"]`
+
+            - `"max"`
 
       - `speed: Optional[Literal["standard", "fast"]]`
 
@@ -2033,6 +2391,9 @@ print(page.id)
         ],
         "model": {
           "id": "claude-sonnet-4-6",
+          "effort": {
+            "type": "low"
+          },
           "speed": "standard"
         },
         "multiagent": {
@@ -2049,6 +2410,9 @@ print(page.id)
               ],
               "model": {
                 "id": "claude-sonnet-4-6",
+                "effort": {
+                  "type": "low"
+                },
                 "speed": "standard"
               },
               "name": "Researcher",
@@ -2206,7 +2570,7 @@ Get Session
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -2257,6 +2621,8 @@ Get Session
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -2370,6 +2736,50 @@ Get Session
             High-performance model for agents and coding
 
         - `str`
+
+      - `effort: Optional[Effort]`
+
+        How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+        - `class BetaManagedAgentsEffortLow: …`
+
+          Low effort. Favors latency over reasoning depth.
+
+          - `type: Literal["low"]`
+
+            - `"low"`
+
+        - `class BetaManagedAgentsEffortMedium: …`
+
+          Medium effort. Balances latency and reasoning depth.
+
+          - `type: Literal["medium"]`
+
+            - `"medium"`
+
+        - `class BetaManagedAgentsEffortHigh: …`
+
+          High effort. Favors reasoning depth.
+
+          - `type: Literal["high"]`
+
+            - `"high"`
+
+        - `class BetaManagedAgentsEffortXhigh: …`
+
+          Extra-high effort. Not all models accept this level.
+
+          - `type: Literal["xhigh"]`
+
+            - `"xhigh"`
+
+        - `class BetaManagedAgentsEffortMax: …`
+
+          Maximum effort. Favors reasoning depth over latency.
+
+          - `type: Literal["max"]`
+
+            - `"max"`
 
       - `speed: Optional[Literal["standard", "fast"]]`
 
@@ -2857,6 +3267,9 @@ print(beta_managed_agents_session.id)
     ],
     "model": {
       "id": "claude-sonnet-4-6",
+      "effort": {
+        "type": "low"
+      },
       "speed": "standard"
     },
     "multiagent": {
@@ -2873,6 +3286,9 @@ print(beta_managed_agents_session.id)
           ],
           "model": {
             "id": "claude-sonnet-4-6",
+            "effort": {
+              "type": "low"
+            },
             "speed": "standard"
           },
           "name": "Researcher",
@@ -3222,7 +3638,7 @@ Update Session
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -3273,6 +3689,8 @@ Update Session
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -3386,6 +3804,50 @@ Update Session
             High-performance model for agents and coding
 
         - `str`
+
+      - `effort: Optional[Effort]`
+
+        How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+        - `class BetaManagedAgentsEffortLow: …`
+
+          Low effort. Favors latency over reasoning depth.
+
+          - `type: Literal["low"]`
+
+            - `"low"`
+
+        - `class BetaManagedAgentsEffortMedium: …`
+
+          Medium effort. Balances latency and reasoning depth.
+
+          - `type: Literal["medium"]`
+
+            - `"medium"`
+
+        - `class BetaManagedAgentsEffortHigh: …`
+
+          High effort. Favors reasoning depth.
+
+          - `type: Literal["high"]`
+
+            - `"high"`
+
+        - `class BetaManagedAgentsEffortXhigh: …`
+
+          Extra-high effort. Not all models accept this level.
+
+          - `type: Literal["xhigh"]`
+
+            - `"xhigh"`
+
+        - `class BetaManagedAgentsEffortMax: …`
+
+          Maximum effort. Favors reasoning depth over latency.
+
+          - `type: Literal["max"]`
+
+            - `"max"`
 
       - `speed: Optional[Literal["standard", "fast"]]`
 
@@ -3873,6 +4335,9 @@ print(beta_managed_agents_session.id)
     ],
     "model": {
       "id": "claude-sonnet-4-6",
+      "effort": {
+        "type": "low"
+      },
       "speed": "standard"
     },
     "multiagent": {
@@ -3889,6 +4354,9 @@ print(beta_managed_agents_session.id)
           ],
           "model": {
             "id": "claude-sonnet-4-6",
+            "effort": {
+              "type": "low"
+            },
             "speed": "standard"
           },
           "name": "Researcher",
@@ -4042,7 +4510,7 @@ Delete Session
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -4093,6 +4561,8 @@ Delete Session
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -4156,7 +4626,7 @@ Archive Session
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -4207,6 +4677,8 @@ Archive Session
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -4320,6 +4792,50 @@ Archive Session
             High-performance model for agents and coding
 
         - `str`
+
+      - `effort: Optional[Effort]`
+
+        How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+        - `class BetaManagedAgentsEffortLow: …`
+
+          Low effort. Favors latency over reasoning depth.
+
+          - `type: Literal["low"]`
+
+            - `"low"`
+
+        - `class BetaManagedAgentsEffortMedium: …`
+
+          Medium effort. Balances latency and reasoning depth.
+
+          - `type: Literal["medium"]`
+
+            - `"medium"`
+
+        - `class BetaManagedAgentsEffortHigh: …`
+
+          High effort. Favors reasoning depth.
+
+          - `type: Literal["high"]`
+
+            - `"high"`
+
+        - `class BetaManagedAgentsEffortXhigh: …`
+
+          Extra-high effort. Not all models accept this level.
+
+          - `type: Literal["xhigh"]`
+
+            - `"xhigh"`
+
+        - `class BetaManagedAgentsEffortMax: …`
+
+          Maximum effort. Favors reasoning depth over latency.
+
+          - `type: Literal["max"]`
+
+            - `"max"`
 
       - `speed: Optional[Literal["standard", "fast"]]`
 
@@ -4807,6 +5323,9 @@ print(beta_managed_agents_session.id)
     ],
     "model": {
       "id": "claude-sonnet-4-6",
+      "effort": {
+        "type": "low"
+      },
       "speed": "standard"
     },
     "multiagent": {
@@ -4823,6 +5342,9 @@ print(beta_managed_agents_session.id)
           ],
           "model": {
             "id": "claude-sonnet-4-6",
+            "effort": {
+              "type": "low"
+            },
             "speed": "standard"
           },
           "name": "Researcher",
@@ -5137,6 +5659,64 @@ print(beta_managed_agents_session.id)
           - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
 
         - `str`
+
+      - `effort: Optional[Effort]`
+
+        How hard Claude works on each inference call. Accepts a bare level string (`"high"`) or `{"type": "high"}`. On create, omitting it resolves the per-model default; on update, omitting it leaves the stored value unchanged.
+
+        - `Literal["low", "medium", "high", 2 more]`
+
+          How hard Claude works on each turn. Higher levels favor reasoning depth over latency. Not all models accept every level; invalid combinations are rejected at create time.
+
+          - `"low"`
+
+          - `"medium"`
+
+          - `"high"`
+
+          - `"xhigh"`
+
+          - `"max"`
+
+        - `class BetaManagedAgentsEffortLow: …`
+
+          Low effort. Favors latency over reasoning depth.
+
+          - `type: Literal["low"]`
+
+            - `"low"`
+
+        - `class BetaManagedAgentsEffortMedium: …`
+
+          Medium effort. Balances latency and reasoning depth.
+
+          - `type: Literal["medium"]`
+
+            - `"medium"`
+
+        - `class BetaManagedAgentsEffortHigh: …`
+
+          High effort. Favors reasoning depth.
+
+          - `type: Literal["high"]`
+
+            - `"high"`
+
+        - `class BetaManagedAgentsEffortXhigh: …`
+
+          Extra-high effort. Not all models accept this level.
+
+          - `type: Literal["xhigh"]`
+
+            - `"xhigh"`
+
+        - `class BetaManagedAgentsEffortMax: …`
+
+          Maximum effort. Favors reasoning depth over latency.
+
+          - `type: Literal["max"]`
+
+            - `"max"`
 
       - `speed: Optional[Literal["standard", "fast"]]`
 
@@ -5799,6 +6379,50 @@ print(beta_managed_agents_session.id)
 
         - `str`
 
+      - `effort: Optional[Effort]`
+
+        How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+        - `class BetaManagedAgentsEffortLow: …`
+
+          Low effort. Favors latency over reasoning depth.
+
+          - `type: Literal["low"]`
+
+            - `"low"`
+
+        - `class BetaManagedAgentsEffortMedium: …`
+
+          Medium effort. Balances latency and reasoning depth.
+
+          - `type: Literal["medium"]`
+
+            - `"medium"`
+
+        - `class BetaManagedAgentsEffortHigh: …`
+
+          High effort. Favors reasoning depth.
+
+          - `type: Literal["high"]`
+
+            - `"high"`
+
+        - `class BetaManagedAgentsEffortXhigh: …`
+
+          Extra-high effort. Not all models accept this level.
+
+          - `type: Literal["xhigh"]`
+
+            - `"xhigh"`
+
+        - `class BetaManagedAgentsEffortMax: …`
+
+          Maximum effort. Favors reasoning depth over latency.
+
+          - `type: Literal["max"]`
+
+            - `"max"`
+
       - `speed: Optional[Literal["standard", "fast"]]`
 
         Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
@@ -6352,6 +6976,50 @@ print(beta_managed_agents_session.id)
 
       - `str`
 
+    - `effort: Optional[Effort]`
+
+      How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+      - `class BetaManagedAgentsEffortLow: …`
+
+        Low effort. Favors latency over reasoning depth.
+
+        - `type: Literal["low"]`
+
+          - `"low"`
+
+      - `class BetaManagedAgentsEffortMedium: …`
+
+        Medium effort. Balances latency and reasoning depth.
+
+        - `type: Literal["medium"]`
+
+          - `"medium"`
+
+      - `class BetaManagedAgentsEffortHigh: …`
+
+        High effort. Favors reasoning depth.
+
+        - `type: Literal["high"]`
+
+          - `"high"`
+
+      - `class BetaManagedAgentsEffortXhigh: …`
+
+        Extra-high effort. Not all models accept this level.
+
+        - `type: Literal["xhigh"]`
+
+          - `"xhigh"`
+
+      - `class BetaManagedAgentsEffortMax: …`
+
+        Maximum effort. Favors reasoning depth over latency.
+
+        - `type: Literal["max"]`
+
+          - `"max"`
+
     - `speed: Optional[Literal["standard", "fast"]]`
 
       Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
@@ -6881,6 +7549,50 @@ print(beta_managed_agents_session.id)
 
         - `str`
 
+      - `effort: Optional[Effort]`
+
+        How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+        - `class BetaManagedAgentsEffortLow: …`
+
+          Low effort. Favors latency over reasoning depth.
+
+          - `type: Literal["low"]`
+
+            - `"low"`
+
+        - `class BetaManagedAgentsEffortMedium: …`
+
+          Medium effort. Balances latency and reasoning depth.
+
+          - `type: Literal["medium"]`
+
+            - `"medium"`
+
+        - `class BetaManagedAgentsEffortHigh: …`
+
+          High effort. Favors reasoning depth.
+
+          - `type: Literal["high"]`
+
+            - `"high"`
+
+        - `class BetaManagedAgentsEffortXhigh: …`
+
+          Extra-high effort. Not all models accept this level.
+
+          - `type: Literal["xhigh"]`
+
+            - `"xhigh"`
+
+        - `class BetaManagedAgentsEffortMax: …`
+
+          Maximum effort. Favors reasoning depth over latency.
+
+          - `type: Literal["max"]`
+
+            - `"max"`
+
       - `speed: Optional[Literal["standard", "fast"]]`
 
         Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
@@ -7195,6 +7907,50 @@ print(beta_managed_agents_session.id)
             High-performance model for agents and coding
 
         - `str`
+
+      - `effort: Optional[Effort]`
+
+        How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+        - `class BetaManagedAgentsEffortLow: …`
+
+          Low effort. Favors latency over reasoning depth.
+
+          - `type: Literal["low"]`
+
+            - `"low"`
+
+        - `class BetaManagedAgentsEffortMedium: …`
+
+          Medium effort. Balances latency and reasoning depth.
+
+          - `type: Literal["medium"]`
+
+            - `"medium"`
+
+        - `class BetaManagedAgentsEffortHigh: …`
+
+          High effort. Favors reasoning depth.
+
+          - `type: Literal["high"]`
+
+            - `"high"`
+
+        - `class BetaManagedAgentsEffortXhigh: …`
+
+          Extra-high effort. Not all models accept this level.
+
+          - `type: Literal["xhigh"]`
+
+            - `"xhigh"`
+
+        - `class BetaManagedAgentsEffortMax: …`
+
+          Maximum effort. Favors reasoning depth over latency.
+
+          - `type: Literal["max"]`
+
+            - `"max"`
 
       - `speed: Optional[Literal["standard", "fast"]]`
 
@@ -7844,7 +8600,7 @@ List Events
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -7895,6 +8651,8 @@ List Events
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -8884,7 +9642,7 @@ List Events
 
       - `class BetaManagedAgentsSessionRetriesExhausted: …`
 
-        The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+        The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
         - `type: Literal["retries_exhausted"]`
 
@@ -9220,7 +9978,7 @@ List Events
 
       - `class BetaManagedAgentsSessionRetriesExhausted: …`
 
-        The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+        The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
     - `type: Literal["session.thread_status_idle"]`
 
@@ -9434,6 +10192,50 @@ List Events
               High-performance model for agents and coding
 
           - `str`
+
+        - `effort: Optional[Effort]`
+
+          How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+          - `class BetaManagedAgentsEffortLow: …`
+
+            Low effort. Favors latency over reasoning depth.
+
+            - `type: Literal["low"]`
+
+              - `"low"`
+
+          - `class BetaManagedAgentsEffortMedium: …`
+
+            Medium effort. Balances latency and reasoning depth.
+
+            - `type: Literal["medium"]`
+
+              - `"medium"`
+
+          - `class BetaManagedAgentsEffortHigh: …`
+
+            High effort. Favors reasoning depth.
+
+            - `type: Literal["high"]`
+
+              - `"high"`
+
+          - `class BetaManagedAgentsEffortXhigh: …`
+
+            Extra-high effort. Not all models accept this level.
+
+            - `type: Literal["xhigh"]`
+
+              - `"xhigh"`
+
+          - `class BetaManagedAgentsEffortMax: …`
+
+            Maximum effort. Favors reasoning depth over latency.
+
+            - `type: Literal["max"]`
+
+              - `"max"`
 
         - `speed: Optional[Literal["standard", "fast"]]`
 
@@ -9779,7 +10581,7 @@ Send Events
 
     Parameters for sending a user message to the session.
 
-    - `content: List[Content]`
+    - `content: Iterable[Content]`
 
       Array of content blocks for the user message.
 
@@ -10139,7 +10941,7 @@ Send Events
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -10190,6 +10992,8 @@ Send Events
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -10707,7 +11511,7 @@ Stream Events
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -10758,6 +11562,8 @@ Stream Events
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -11747,7 +12553,7 @@ Stream Events
 
       - `class BetaManagedAgentsSessionRetriesExhausted: …`
 
-        The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+        The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
         - `type: Literal["retries_exhausted"]`
 
@@ -12083,7 +12889,7 @@ Stream Events
 
       - `class BetaManagedAgentsSessionRetriesExhausted: …`
 
-        The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+        The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
     - `type: Literal["session.thread_status_idle"]`
 
@@ -12297,6 +13103,50 @@ Stream Events
               High-performance model for agents and coding
 
           - `str`
+
+        - `effort: Optional[Effort]`
+
+          How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+          - `class BetaManagedAgentsEffortLow: …`
+
+            Low effort. Favors latency over reasoning depth.
+
+            - `type: Literal["low"]`
+
+              - `"low"`
+
+          - `class BetaManagedAgentsEffortMedium: …`
+
+            Medium effort. Balances latency and reasoning depth.
+
+            - `type: Literal["medium"]`
+
+              - `"medium"`
+
+          - `class BetaManagedAgentsEffortHigh: …`
+
+            High effort. Favors reasoning depth.
+
+            - `type: Literal["high"]`
+
+              - `"high"`
+
+          - `class BetaManagedAgentsEffortXhigh: …`
+
+            Extra-high effort. Not all models accept this level.
+
+            - `type: Literal["xhigh"]`
+
+              - `"xhigh"`
+
+          - `class BetaManagedAgentsEffortMax: …`
+
+            Maximum effort. Favors reasoning depth over latency.
+
+            - `type: Literal["max"]`
+
+              - `"max"`
 
         - `speed: Optional[Literal["standard", "fast"]]`
 
@@ -13825,7 +14675,7 @@ for event in client.beta.sessions.events.stream(
 
     Parameters for sending a user message to the session.
 
-    - `content: List[Content]`
+    - `content: Iterable[Content]`
 
       Array of content blocks for the user message.
 
@@ -16341,7 +17191,7 @@ for event in client.beta.sessions.events.stream(
 
       - `class BetaManagedAgentsSessionRetriesExhausted: …`
 
-        The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+        The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
         - `type: Literal["retries_exhausted"]`
 
@@ -16677,7 +17527,7 @@ for event in client.beta.sessions.events.stream(
 
       - `class BetaManagedAgentsSessionRetriesExhausted: …`
 
-        The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+        The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
     - `type: Literal["session.thread_status_idle"]`
 
@@ -16891,6 +17741,50 @@ for event in client.beta.sessions.events.stream(
               High-performance model for agents and coding
 
           - `str`
+
+        - `effort: Optional[Effort]`
+
+          How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+          - `class BetaManagedAgentsEffortLow: …`
+
+            Low effort. Favors latency over reasoning depth.
+
+            - `type: Literal["low"]`
+
+              - `"low"`
+
+          - `class BetaManagedAgentsEffortMedium: …`
+
+            Medium effort. Balances latency and reasoning depth.
+
+            - `type: Literal["medium"]`
+
+              - `"medium"`
+
+          - `class BetaManagedAgentsEffortHigh: …`
+
+            High effort. Favors reasoning depth.
+
+            - `type: Literal["high"]`
+
+              - `"high"`
+
+          - `class BetaManagedAgentsEffortXhigh: …`
+
+            Extra-high effort. Not all models accept this level.
+
+            - `type: Literal["xhigh"]`
+
+              - `"xhigh"`
+
+          - `class BetaManagedAgentsEffortMax: …`
+
+            Maximum effort. Favors reasoning depth over latency.
+
+            - `type: Literal["max"]`
+
+              - `"max"`
 
         - `speed: Optional[Literal["standard", "fast"]]`
 
@@ -17186,7 +18080,7 @@ for event in client.beta.sessions.events.stream(
 
 - `class BetaManagedAgentsSessionRetriesExhausted: …`
 
-  The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+  The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
   - `type: Literal["retries_exhausted"]`
 
@@ -17232,7 +18126,7 @@ for event in client.beta.sessions.events.stream(
 
     - `class BetaManagedAgentsSessionRetriesExhausted: …`
 
-      The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+      The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
       - `type: Literal["retries_exhausted"]`
 
@@ -17370,7 +18264,7 @@ for event in client.beta.sessions.events.stream(
 
     - `class BetaManagedAgentsSessionRetriesExhausted: …`
 
-      The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+      The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
       - `type: Literal["retries_exhausted"]`
 
@@ -18658,7 +19552,7 @@ for event in client.beta.sessions.events.stream(
 
       - `class BetaManagedAgentsSessionRetriesExhausted: …`
 
-        The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+        The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
         - `type: Literal["retries_exhausted"]`
 
@@ -18994,7 +19888,7 @@ for event in client.beta.sessions.events.stream(
 
       - `class BetaManagedAgentsSessionRetriesExhausted: …`
 
-        The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+        The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
     - `type: Literal["session.thread_status_idle"]`
 
@@ -19208,6 +20102,50 @@ for event in client.beta.sessions.events.stream(
               High-performance model for agents and coding
 
           - `str`
+
+        - `effort: Optional[Effort]`
+
+          How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+          - `class BetaManagedAgentsEffortLow: …`
+
+            Low effort. Favors latency over reasoning depth.
+
+            - `type: Literal["low"]`
+
+              - `"low"`
+
+          - `class BetaManagedAgentsEffortMedium: …`
+
+            Medium effort. Balances latency and reasoning depth.
+
+            - `type: Literal["medium"]`
+
+              - `"medium"`
+
+          - `class BetaManagedAgentsEffortHigh: …`
+
+            High effort. Favors reasoning depth.
+
+            - `type: Literal["high"]`
+
+              - `"high"`
+
+          - `class BetaManagedAgentsEffortXhigh: …`
+
+            Extra-high effort. Not all models accept this level.
+
+            - `type: Literal["xhigh"]`
+
+              - `"xhigh"`
+
+          - `class BetaManagedAgentsEffortMax: …`
+
+            Maximum effort. Favors reasoning depth over latency.
+
+            - `type: Literal["max"]`
+
+              - `"max"`
 
         - `speed: Optional[Literal["standard", "fast"]]`
 
@@ -20401,7 +21339,7 @@ for event in client.beta.sessions.events.stream(
 
   Parameters for sending a user message to the session.
 
-  - `content: List[Content]`
+  - `content: Iterable[Content]`
 
     Array of content blocks for the user message.
 
@@ -20847,7 +21785,7 @@ Add Session Resource
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -20898,6 +21836,8 @@ Add Session Resource
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -20985,7 +21925,7 @@ List Session Resources
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -21036,6 +21976,8 @@ List Session Resources
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -21215,7 +22157,7 @@ Get Session Resource
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -21266,6 +22208,8 @@ Get Session Resource
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -21436,7 +22380,7 @@ Update Session Resource
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -21487,6 +22431,8 @@ Update Session Resource
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -21654,7 +22600,7 @@ Delete Session Resource
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -21705,6 +22651,8 @@ Delete Session Resource
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -22209,7 +23157,7 @@ List Session Threads
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -22260,6 +23208,8 @@ List Session Threads
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -22375,6 +23325,50 @@ List Session Threads
             High-performance model for agents and coding
 
         - `str`
+
+      - `effort: Optional[Effort]`
+
+        How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+        - `class BetaManagedAgentsEffortLow: …`
+
+          Low effort. Favors latency over reasoning depth.
+
+          - `type: Literal["low"]`
+
+            - `"low"`
+
+        - `class BetaManagedAgentsEffortMedium: …`
+
+          Medium effort. Balances latency and reasoning depth.
+
+          - `type: Literal["medium"]`
+
+            - `"medium"`
+
+        - `class BetaManagedAgentsEffortHigh: …`
+
+          High effort. Favors reasoning depth.
+
+          - `type: Literal["high"]`
+
+            - `"high"`
+
+        - `class BetaManagedAgentsEffortXhigh: …`
+
+          Extra-high effort. Not all models accept this level.
+
+          - `type: Literal["xhigh"]`
+
+            - `"xhigh"`
+
+        - `class BetaManagedAgentsEffortMax: …`
+
+          Maximum effort. Favors reasoning depth over latency.
+
+          - `type: Literal["max"]`
+
+            - `"max"`
 
       - `speed: Optional[Literal["standard", "fast"]]`
 
@@ -22673,6 +23667,9 @@ print(page.id)
         ],
         "model": {
           "id": "claude-sonnet-4-6",
+          "effort": {
+            "type": "low"
+          },
           "speed": "standard"
         },
         "name": "Researcher",
@@ -22754,7 +23751,7 @@ Get Session Thread
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -22805,6 +23802,8 @@ Get Session Thread
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -22920,6 +23919,50 @@ Get Session Thread
             High-performance model for agents and coding
 
         - `str`
+
+      - `effort: Optional[Effort]`
+
+        How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+        - `class BetaManagedAgentsEffortLow: …`
+
+          Low effort. Favors latency over reasoning depth.
+
+          - `type: Literal["low"]`
+
+            - `"low"`
+
+        - `class BetaManagedAgentsEffortMedium: …`
+
+          Medium effort. Balances latency and reasoning depth.
+
+          - `type: Literal["medium"]`
+
+            - `"medium"`
+
+        - `class BetaManagedAgentsEffortHigh: …`
+
+          High effort. Favors reasoning depth.
+
+          - `type: Literal["high"]`
+
+            - `"high"`
+
+        - `class BetaManagedAgentsEffortXhigh: …`
+
+          Extra-high effort. Not all models accept this level.
+
+          - `type: Literal["xhigh"]`
+
+            - `"xhigh"`
+
+        - `class BetaManagedAgentsEffortMax: …`
+
+          Maximum effort. Favors reasoning depth over latency.
+
+          - `type: Literal["max"]`
+
+            - `"max"`
 
       - `speed: Optional[Literal["standard", "fast"]]`
 
@@ -23216,6 +24259,9 @@ print(beta_managed_agents_session_thread.id)
     ],
     "model": {
       "id": "claude-sonnet-4-6",
+      "effort": {
+        "type": "low"
+      },
       "speed": "standard"
     },
     "name": "Researcher",
@@ -23294,7 +24340,7 @@ Archive Session Thread
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -23345,6 +24391,8 @@ Archive Session Thread
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -23460,6 +24508,50 @@ Archive Session Thread
             High-performance model for agents and coding
 
         - `str`
+
+      - `effort: Optional[Effort]`
+
+        How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+        - `class BetaManagedAgentsEffortLow: …`
+
+          Low effort. Favors latency over reasoning depth.
+
+          - `type: Literal["low"]`
+
+            - `"low"`
+
+        - `class BetaManagedAgentsEffortMedium: …`
+
+          Medium effort. Balances latency and reasoning depth.
+
+          - `type: Literal["medium"]`
+
+            - `"medium"`
+
+        - `class BetaManagedAgentsEffortHigh: …`
+
+          High effort. Favors reasoning depth.
+
+          - `type: Literal["high"]`
+
+            - `"high"`
+
+        - `class BetaManagedAgentsEffortXhigh: …`
+
+          Extra-high effort. Not all models accept this level.
+
+          - `type: Literal["xhigh"]`
+
+            - `"xhigh"`
+
+        - `class BetaManagedAgentsEffortMax: …`
+
+          Maximum effort. Favors reasoning depth over latency.
+
+          - `type: Literal["max"]`
+
+            - `"max"`
 
       - `speed: Optional[Literal["standard", "fast"]]`
 
@@ -23756,6 +24848,9 @@ print(beta_managed_agents_session_thread.id)
     ],
     "model": {
       "id": "claude-sonnet-4-6",
+      "effort": {
+        "type": "low"
+      },
       "speed": "standard"
     },
     "name": "Researcher",
@@ -23922,6 +25017,50 @@ print(beta_managed_agents_session_thread.id)
             High-performance model for agents and coding
 
         - `str`
+
+      - `effort: Optional[Effort]`
+
+        How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+        - `class BetaManagedAgentsEffortLow: …`
+
+          Low effort. Favors latency over reasoning depth.
+
+          - `type: Literal["low"]`
+
+            - `"low"`
+
+        - `class BetaManagedAgentsEffortMedium: …`
+
+          Medium effort. Balances latency and reasoning depth.
+
+          - `type: Literal["medium"]`
+
+            - `"medium"`
+
+        - `class BetaManagedAgentsEffortHigh: …`
+
+          High effort. Favors reasoning depth.
+
+          - `type: Literal["high"]`
+
+            - `"high"`
+
+        - `class BetaManagedAgentsEffortXhigh: …`
+
+          Extra-high effort. Not all models accept this level.
+
+          - `type: Literal["xhigh"]`
+
+            - `"xhigh"`
+
+        - `class BetaManagedAgentsEffortMax: …`
+
+          Maximum effort. Favors reasoning depth over latency.
+
+          - `type: Literal["max"]`
+
+            - `"max"`
 
       - `speed: Optional[Literal["standard", "fast"]]`
 
@@ -25227,7 +26366,7 @@ print(beta_managed_agents_session_thread.id)
 
       - `class BetaManagedAgentsSessionRetriesExhausted: …`
 
-        The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+        The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
         - `type: Literal["retries_exhausted"]`
 
@@ -25563,7 +26702,7 @@ print(beta_managed_agents_session_thread.id)
 
       - `class BetaManagedAgentsSessionRetriesExhausted: …`
 
-        The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+        The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
     - `type: Literal["session.thread_status_idle"]`
 
@@ -25777,6 +26916,50 @@ print(beta_managed_agents_session_thread.id)
               High-performance model for agents and coding
 
           - `str`
+
+        - `effort: Optional[Effort]`
+
+          How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+          - `class BetaManagedAgentsEffortLow: …`
+
+            Low effort. Favors latency over reasoning depth.
+
+            - `type: Literal["low"]`
+
+              - `"low"`
+
+          - `class BetaManagedAgentsEffortMedium: …`
+
+            Medium effort. Balances latency and reasoning depth.
+
+            - `type: Literal["medium"]`
+
+              - `"medium"`
+
+          - `class BetaManagedAgentsEffortHigh: …`
+
+            High effort. Favors reasoning depth.
+
+            - `type: Literal["high"]`
+
+              - `"high"`
+
+          - `class BetaManagedAgentsEffortXhigh: …`
+
+            Extra-high effort. Not all models accept this level.
+
+            - `type: Literal["xhigh"]`
+
+              - `"xhigh"`
+
+          - `class BetaManagedAgentsEffortMax: …`
+
+            Maximum effort. Favors reasoning depth over latency.
+
+            - `type: Literal["max"]`
+
+              - `"max"`
 
         - `speed: Optional[Literal["standard", "fast"]]`
 
@@ -26144,7 +27327,7 @@ List Session Thread Events
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -26195,6 +27378,8 @@ List Session Thread Events
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -27184,7 +28369,7 @@ List Session Thread Events
 
       - `class BetaManagedAgentsSessionRetriesExhausted: …`
 
-        The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+        The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
         - `type: Literal["retries_exhausted"]`
 
@@ -27520,7 +28705,7 @@ List Session Thread Events
 
       - `class BetaManagedAgentsSessionRetriesExhausted: …`
 
-        The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+        The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
     - `type: Literal["session.thread_status_idle"]`
 
@@ -27734,6 +28919,50 @@ List Session Thread Events
               High-performance model for agents and coding
 
           - `str`
+
+        - `effort: Optional[Effort]`
+
+          How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+          - `class BetaManagedAgentsEffortLow: …`
+
+            Low effort. Favors latency over reasoning depth.
+
+            - `type: Literal["low"]`
+
+              - `"low"`
+
+          - `class BetaManagedAgentsEffortMedium: …`
+
+            Medium effort. Balances latency and reasoning depth.
+
+            - `type: Literal["medium"]`
+
+              - `"medium"`
+
+          - `class BetaManagedAgentsEffortHigh: …`
+
+            High effort. Favors reasoning depth.
+
+            - `type: Literal["high"]`
+
+              - `"high"`
+
+          - `class BetaManagedAgentsEffortXhigh: …`
+
+            Extra-high effort. Not all models accept this level.
+
+            - `type: Literal["xhigh"]`
+
+              - `"xhigh"`
+
+          - `class BetaManagedAgentsEffortMax: …`
+
+            Maximum effort. Favors reasoning depth over latency.
+
+            - `type: Literal["max"]`
+
+              - `"max"`
 
         - `speed: Optional[Literal["standard", "fast"]]`
 
@@ -28063,13 +29292,21 @@ Stream Session Thread Events
 
 - `thread_id: str`
 
+- `event_deltas: Optional[List[BetaManagedAgentsDeltaType]]`
+
+  When set, this connection also receives streaming deltas (`event_start`, `event_delta`) while an event is being produced, before the event itself arrives. Deltas are best-effort; when the final event is produced it carries the complete content. A model request that ends early (an error or interrupt) produces no final event — its terminal `span.model_request_end` closes the preview. Accepts one or more event types to preview and may be repeated: `agent.message` streams `content_delta` fragments; `agent.thinking` is start-only — a signal that the agent has begun extended thinking, concluded by the `agent.thinking` event itself. Only previews of the requested event types are sent.
+
+  - `"agent.message"`
+
+  - `"agent.thinking"`
+
 - `betas: Optional[List[AnthropicBetaParam]]`
 
   Optional header to specify the beta version(s) you want to use.
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -28120,6 +29357,8 @@ Stream Session Thread Events
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -29109,7 +30348,7 @@ Stream Session Thread Events
 
       - `class BetaManagedAgentsSessionRetriesExhausted: …`
 
-        The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+        The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
         - `type: Literal["retries_exhausted"]`
 
@@ -29445,7 +30684,7 @@ Stream Session Thread Events
 
       - `class BetaManagedAgentsSessionRetriesExhausted: …`
 
-        The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+        The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
     - `type: Literal["session.thread_status_idle"]`
 
@@ -29659,6 +30898,50 @@ Stream Session Thread Events
               High-performance model for agents and coding
 
           - `str`
+
+        - `effort: Optional[Effort]`
+
+          How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+          - `class BetaManagedAgentsEffortLow: …`
+
+            Low effort. Favors latency over reasoning depth.
+
+            - `type: Literal["low"]`
+
+              - `"low"`
+
+          - `class BetaManagedAgentsEffortMedium: …`
+
+            Medium effort. Balances latency and reasoning depth.
+
+            - `type: Literal["medium"]`
+
+              - `"medium"`
+
+          - `class BetaManagedAgentsEffortHigh: …`
+
+            High effort. Favors reasoning depth.
+
+            - `type: Literal["high"]`
+
+              - `"high"`
+
+          - `class BetaManagedAgentsEffortXhigh: …`
+
+            Extra-high effort. Not all models accept this level.
+
+            - `type: Literal["xhigh"]`
+
+              - `"xhigh"`
+
+          - `class BetaManagedAgentsEffortMax: …`
+
+            Maximum effort. Favors reasoning depth over latency.
+
+            - `type: Literal["max"]`
+
+              - `"max"`
 
         - `speed: Optional[Literal["standard", "fast"]]`
 

@@ -1495,7 +1495,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
 - `--speed: optional "standard" or "fast"`
 
-  Body param: The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
+  Body param: Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
 - `--stop-sequence: optional array of string`
 
@@ -2448,17 +2448,29 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         What caused the `from` model to hand over at this hop.
 
-        - `category: "cyber" or "bio" or "frontier_llm" or "reasoning_extraction"`
+        - `category: "cyber" or "bio" or "frontier_llm" or 2 more`
 
           The policy category that triggered a refusal.
 
           - `"cyber"`
 
+            The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
           - `"bio"`
+
+            The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
           - `"frontier_llm"`
 
+            The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
           - `"reasoning_extraction"`
+
+            The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../build-with-claude/build-with-claude-adaptive-thinking.md).
+
+          - `"general_harms"`
+
+            The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
         - `type: "refusal"`
 
@@ -2631,17 +2643,29 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     Structured information about a refusal.
 
-    - `category: "cyber" or "bio" or "frontier_llm" or "reasoning_extraction"`
+    - `category: "cyber" or "bio" or "frontier_llm" or 2 more`
 
       The policy category that triggered a refusal.
 
       - `"cyber"`
 
+        The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
       - `"bio"`
+
+        The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
       - `"frontier_llm"`
 
+        The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
       - `"reasoning_extraction"`
+
+        The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../build-with-claude/build-with-claude-adaptive-thinking.md).
+
+      - `"general_harms"`
+
+        The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
     - `explanation: string`
 
@@ -3200,7 +3224,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `speed: "standard" or "fast"`
 
-      The inference speed mode used for this request.
+      Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
       - `"standard"`
 
@@ -3222,7 +3246,7 @@ ant beta:messages create \
 {
   "id": "msg_013Zva2CMHLNnXjNJJKqJ2EF",
   "container": {
-    "id": "id",
+    "id": "container_011CpZohnwH4vuy7gazohgSP",
     "expires_at": "2019-12-27T18:11:19.117Z",
     "skills": [
       {
@@ -3236,11 +3260,11 @@ ant beta:messages create \
     {
       "citations": [
         {
-          "cited_text": "cited_text",
+          "cited_text": "The grass is green. The sky is blue.",
           "document_index": 0,
-          "document_title": "document_title",
+          "document_title": "My Document",
           "end_char_index": 0,
-          "file_id": "file_id",
+          "file_id": "file_011CNha8iCJcU1wXNR6q4V8w",
           "start_char_index": 0,
           "type": "char_location"
         }
@@ -3268,10 +3292,10 @@ ant beta:messages create \
   "role": "assistant",
   "stop_details": {
     "category": "cyber",
-    "explanation": "explanation",
-    "fallback_credit_token": "fallback_credit_token",
+    "explanation": "This request was declined because it conflicts with Anthropic's Usage Policy.",
+    "fallback_credit_token": "QW50aHJvcGljL0NsYXVkZQ==",
     "fallback_has_prefill_claim": true,
-    "recommended_model": "recommended_model",
+    "recommended_model": "claude-sonnet-4-6",
     "type": "refusal"
   },
   "stop_reason": "end_turn",
@@ -3284,7 +3308,7 @@ ant beta:messages create \
     },
     "cache_creation_input_tokens": 2051,
     "cache_read_input_tokens": 2051,
-    "inference_geo": "inference_geo",
+    "inference_geo": "global",
     "input_tokens": 2095,
     "iterations": [
       {
@@ -3411,7 +3435,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
 - `--speed: optional "standard" or "fast"`
 
-  Body param: The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
+  Body param: Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
 - `--system: optional string or array of BetaTextBlockParam`
 
@@ -6318,17 +6342,29 @@ ant beta:messages count-tokens \
 
       What caused the `from` model to hand over at this hop.
 
-      - `category: "cyber" or "bio" or "frontier_llm" or "reasoning_extraction"`
+      - `category: "cyber" or "bio" or "frontier_llm" or 2 more`
 
         The policy category that triggered a refusal.
 
         - `"cyber"`
 
+          The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
         - `"bio"`
+
+          The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
         - `"frontier_llm"`
 
+          The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
         - `"reasoning_extraction"`
+
+          The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../build-with-claude/build-with-claude-adaptive-thinking.md).
+
+        - `"general_harms"`
+
+          The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
       - `type: "refusal"`
 
@@ -8402,17 +8438,29 @@ ant beta:messages count-tokens \
 
     What caused the `from` model to hand over at this hop.
 
-    - `category: "cyber" or "bio" or "frontier_llm" or "reasoning_extraction"`
+    - `category: "cyber" or "bio" or "frontier_llm" or 2 more`
 
       The policy category that triggered a refusal.
 
       - `"cyber"`
 
+        The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
       - `"bio"`
+
+        The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
       - `"frontier_llm"`
 
+        The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
       - `"reasoning_extraction"`
+
+        The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../build-with-claude/build-with-claude-adaptive-thinking.md).
+
+      - `"general_harms"`
+
+        The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
     - `type: "refusal"`
 
@@ -8797,10 +8845,10 @@ ant beta:messages count-tokens \
 
   One entry in the `fallbacks` chain on a `/v1/messages` request.
 
-  `model` is required. The four override fields (`max_tokens`, `thinking`,
-  `output_config`, and `speed`) replace the corresponding top-level field
-  for this attempt only and are validated as if the request were made to
-  `model`. Any other key is rejected at parse time.
+  `model` is required. The override fields (`max_tokens`, `thinking`,
+  `output_config`, and `speed`) set the corresponding parameter for this
+  attempt only and are validated as if the request were made to `model`.
+  Any other key is rejected at parse time.
 
   - `model: "claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 13 more or string`
 
@@ -8918,6 +8966,8 @@ ant beta:messages count-tokens \
 
   - `speed: optional "standard" or "fast"`
 
+    Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
     - `"standard"`
 
     - `"fast"`
@@ -8966,17 +9016,29 @@ ant beta:messages count-tokens \
 
   The `from` model declined for policy reasons.
 
-  - `category: "cyber" or "bio" or "frontier_llm" or "reasoning_extraction"`
+  - `category: "cyber" or "bio" or "frontier_llm" or 2 more`
 
     The policy category that triggered a refusal.
 
     - `"cyber"`
 
+      The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
     - `"bio"`
+
+      The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
     - `"frontier_llm"`
 
+      The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
     - `"reasoning_extraction"`
+
+      The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../build-with-claude/build-with-claude-adaptive-thinking.md).
+
+    - `"general_harms"`
+
+      The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
   - `type: "refusal"`
 
@@ -10785,17 +10847,29 @@ ant beta:messages count-tokens \
 
         What caused the `from` model to hand over at this hop.
 
-        - `category: "cyber" or "bio" or "frontier_llm" or "reasoning_extraction"`
+        - `category: "cyber" or "bio" or "frontier_llm" or 2 more`
 
           The policy category that triggered a refusal.
 
           - `"cyber"`
 
+            The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
           - `"bio"`
+
+            The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
           - `"frontier_llm"`
 
+            The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
           - `"reasoning_extraction"`
+
+            The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../build-with-claude/build-with-claude-adaptive-thinking.md).
+
+          - `"general_harms"`
+
+            The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
         - `type: "refusal"`
 
@@ -10968,17 +11042,29 @@ ant beta:messages count-tokens \
 
     Structured information about a refusal.
 
-    - `category: "cyber" or "bio" or "frontier_llm" or "reasoning_extraction"`
+    - `category: "cyber" or "bio" or "frontier_llm" or 2 more`
 
       The policy category that triggered a refusal.
 
       - `"cyber"`
 
+        The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
       - `"bio"`
+
+        The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
       - `"frontier_llm"`
 
+        The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
       - `"reasoning_extraction"`
+
+        The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../build-with-claude/build-with-claude-adaptive-thinking.md).
+
+      - `"general_harms"`
+
+        The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
     - `explanation: string`
 
@@ -11537,7 +11623,7 @@ ant beta:messages count-tokens \
 
     - `speed: "standard" or "fast"`
 
-      The inference speed mode used for this request.
+      Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
       - `"standard"`
 
@@ -14710,17 +14796,29 @@ ant beta:messages count-tokens \
 
         What caused the `from` model to hand over at this hop.
 
-        - `category: "cyber" or "bio" or "frontier_llm" or "reasoning_extraction"`
+        - `category: "cyber" or "bio" or "frontier_llm" or 2 more`
 
           The policy category that triggered a refusal.
 
           - `"cyber"`
 
+            The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
           - `"bio"`
+
+            The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
           - `"frontier_llm"`
 
+            The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
           - `"reasoning_extraction"`
+
+            The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../build-with-claude/build-with-claude-adaptive-thinking.md).
+
+          - `"general_harms"`
+
+            The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
         - `type: "refusal"`
 
@@ -14816,17 +14914,29 @@ ant beta:messages count-tokens \
 
       Structured information about a refusal.
 
-      - `category: "cyber" or "bio" or "frontier_llm" or "reasoning_extraction"`
+      - `category: "cyber" or "bio" or "frontier_llm" or 2 more`
 
         The policy category that triggered a refusal.
 
         - `"cyber"`
 
+          The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
         - `"bio"`
+
+          The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
         - `"frontier_llm"`
 
+          The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
         - `"reasoning_extraction"`
+
+          The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../build-with-claude/build-with-claude-adaptive-thinking.md).
+
+        - `"general_harms"`
+
+          The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
       - `explanation: string`
 
@@ -16167,17 +16277,29 @@ ant beta:messages count-tokens \
 
           What caused the `from` model to hand over at this hop.
 
-          - `category: "cyber" or "bio" or "frontier_llm" or "reasoning_extraction"`
+          - `category: "cyber" or "bio" or "frontier_llm" or 2 more`
 
             The policy category that triggered a refusal.
 
             - `"cyber"`
 
+              The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
             - `"bio"`
+
+              The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
             - `"frontier_llm"`
 
+              The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
             - `"reasoning_extraction"`
+
+              The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../build-with-claude/build-with-claude-adaptive-thinking.md).
+
+            - `"general_harms"`
+
+              The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
           - `type: "refusal"`
 
@@ -16350,17 +16472,29 @@ ant beta:messages count-tokens \
 
       Structured information about a refusal.
 
-      - `category: "cyber" or "bio" or "frontier_llm" or "reasoning_extraction"`
+      - `category: "cyber" or "bio" or "frontier_llm" or 2 more`
 
         The policy category that triggered a refusal.
 
         - `"cyber"`
 
+          The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
         - `"bio"`
+
+          The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
         - `"frontier_llm"`
 
+          The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
         - `"reasoning_extraction"`
+
+          The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../build-with-claude/build-with-claude-adaptive-thinking.md).
+
+        - `"general_harms"`
+
+          The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
       - `explanation: string`
 
@@ -16919,7 +17053,7 @@ ant beta:messages count-tokens \
 
       - `speed: "standard" or "fast"`
 
-        The inference speed mode used for this request.
+        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
         - `"standard"`
 
@@ -17766,17 +17900,29 @@ ant beta:messages count-tokens \
 
             What caused the `from` model to hand over at this hop.
 
-            - `category: "cyber" or "bio" or "frontier_llm" or "reasoning_extraction"`
+            - `category: "cyber" or "bio" or "frontier_llm" or 2 more`
 
               The policy category that triggered a refusal.
 
               - `"cyber"`
 
+                The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
               - `"bio"`
+
+                The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
               - `"frontier_llm"`
 
+                The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
               - `"reasoning_extraction"`
+
+                The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../build-with-claude/build-with-claude-adaptive-thinking.md).
+
+              - `"general_harms"`
+
+                The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
             - `type: "refusal"`
 
@@ -17949,17 +18095,29 @@ ant beta:messages count-tokens \
 
         Structured information about a refusal.
 
-        - `category: "cyber" or "bio" or "frontier_llm" or "reasoning_extraction"`
+        - `category: "cyber" or "bio" or "frontier_llm" or 2 more`
 
           The policy category that triggered a refusal.
 
           - `"cyber"`
 
+            The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
           - `"bio"`
+
+            The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
           - `"frontier_llm"`
 
+            The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
           - `"reasoning_extraction"`
+
+            The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../build-with-claude/build-with-claude-adaptive-thinking.md).
+
+          - `"general_harms"`
+
+            The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
         - `explanation: string`
 
@@ -18518,7 +18676,7 @@ ant beta:messages count-tokens \
 
         - `speed: "standard" or "fast"`
 
-          The inference speed mode used for this request.
+          Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
           - `"standard"`
 
@@ -18558,7 +18716,7 @@ ant beta:messages count-tokens \
 
         Structured information about a refusal.
 
-        - `category: "cyber" or "bio" or "frontier_llm" or "reasoning_extraction"`
+        - `category: "cyber" or "bio" or "frontier_llm" or 2 more`
 
           The policy category that triggered a refusal.
 
@@ -19126,17 +19284,29 @@ ant beta:messages count-tokens \
 
   Structured information about a refusal.
 
-  - `category: "cyber" or "bio" or "frontier_llm" or "reasoning_extraction"`
+  - `category: "cyber" or "bio" or "frontier_llm" or 2 more`
 
     The policy category that triggered a refusal.
 
     - `"cyber"`
 
+      The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
     - `"bio"`
+
+      The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
     - `"frontier_llm"`
 
+      The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
     - `"reasoning_extraction"`
+
+      The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../build-with-claude/build-with-claude-adaptive-thinking.md).
+
+    - `"general_harms"`
+
+      The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
   - `explanation: string`
 
@@ -24457,7 +24627,7 @@ ant beta:messages count-tokens \
 
   - `speed: "standard" or "fast"`
 
-    The inference speed mode used for this request.
+    Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
     - `"standard"`
 
@@ -27686,17 +27856,29 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               What caused the `from` model to hand over at this hop.
 
-              - `category: "cyber" or "bio" or "frontier_llm" or "reasoning_extraction"`
+              - `category: "cyber" or "bio" or "frontier_llm" or 2 more`
 
                 The policy category that triggered a refusal.
 
                 - `"cyber"`
 
+                  The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
                 - `"bio"`
+
+                  The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
                 - `"frontier_llm"`
 
+                  The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
                 - `"reasoning_extraction"`
+
+                  The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../build-with-claude/build-with-claude-adaptive-thinking.md).
+
+                - `"general_harms"`
+
+                  The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
               - `type: "refusal"`
 
@@ -27869,17 +28051,29 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           Structured information about a refusal.
 
-          - `category: "cyber" or "bio" or "frontier_llm" or "reasoning_extraction"`
+          - `category: "cyber" or "bio" or "frontier_llm" or 2 more`
 
             The policy category that triggered a refusal.
 
             - `"cyber"`
 
+              The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
             - `"bio"`
+
+              The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
             - `"frontier_llm"`
 
+              The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
             - `"reasoning_extraction"`
+
+              The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../build-with-claude/build-with-claude-adaptive-thinking.md).
+
+            - `"general_harms"`
+
+              The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
           - `explanation: string`
 
@@ -28438,7 +28632,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           - `speed: "standard" or "fast"`
 
-            The inference speed mode used for this request.
+            Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
             - `"standard"`
 
@@ -29559,17 +29753,29 @@ ant beta:messages:batches results \
 
               What caused the `from` model to hand over at this hop.
 
-              - `category: "cyber" or "bio" or "frontier_llm" or "reasoning_extraction"`
+              - `category: "cyber" or "bio" or "frontier_llm" or 2 more`
 
                 The policy category that triggered a refusal.
 
                 - `"cyber"`
 
+                  The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
                 - `"bio"`
+
+                  The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
                 - `"frontier_llm"`
 
+                  The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
                 - `"reasoning_extraction"`
+
+                  The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../build-with-claude/build-with-claude-adaptive-thinking.md).
+
+                - `"general_harms"`
+
+                  The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
               - `type: "refusal"`
 
@@ -29742,17 +29948,29 @@ ant beta:messages:batches results \
 
           Structured information about a refusal.
 
-          - `category: "cyber" or "bio" or "frontier_llm" or "reasoning_extraction"`
+          - `category: "cyber" or "bio" or "frontier_llm" or 2 more`
 
             The policy category that triggered a refusal.
 
             - `"cyber"`
 
+              The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
             - `"bio"`
+
+              The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
             - `"frontier_llm"`
 
+              The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
             - `"reasoning_extraction"`
+
+              The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../build-with-claude/build-with-claude-adaptive-thinking.md).
+
+            - `"general_harms"`
+
+              The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
           - `explanation: string`
 
@@ -30311,7 +30529,7 @@ ant beta:messages:batches results \
 
           - `speed: "standard" or "fast"`
 
-            The inference speed mode used for this request.
+            Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
             - `"standard"`
 
@@ -31262,17 +31480,29 @@ ant beta:messages:batches results \
 
             What caused the `from` model to hand over at this hop.
 
-            - `category: "cyber" or "bio" or "frontier_llm" or "reasoning_extraction"`
+            - `category: "cyber" or "bio" or "frontier_llm" or 2 more`
 
               The policy category that triggered a refusal.
 
               - `"cyber"`
 
+                The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
               - `"bio"`
+
+                The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
               - `"frontier_llm"`
 
+                The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
               - `"reasoning_extraction"`
+
+                The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../build-with-claude/build-with-claude-adaptive-thinking.md).
+
+              - `"general_harms"`
+
+                The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
             - `type: "refusal"`
 
@@ -31445,17 +31675,29 @@ ant beta:messages:batches results \
 
         Structured information about a refusal.
 
-        - `category: "cyber" or "bio" or "frontier_llm" or "reasoning_extraction"`
+        - `category: "cyber" or "bio" or "frontier_llm" or 2 more`
 
           The policy category that triggered a refusal.
 
           - `"cyber"`
 
+            The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
           - `"bio"`
+
+            The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
           - `"frontier_llm"`
 
+            The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
           - `"reasoning_extraction"`
+
+            The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../build-with-claude/build-with-claude-adaptive-thinking.md).
+
+          - `"general_harms"`
+
+            The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
         - `explanation: string`
 
@@ -32014,7 +32256,7 @@ ant beta:messages:batches results \
 
         - `speed: "standard" or "fast"`
 
-          The inference speed mode used for this request.
+          Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
           - `"standard"`
 
@@ -32927,17 +33169,29 @@ ant beta:messages:batches results \
 
           What caused the `from` model to hand over at this hop.
 
-          - `category: "cyber" or "bio" or "frontier_llm" or "reasoning_extraction"`
+          - `category: "cyber" or "bio" or "frontier_llm" or 2 more`
 
             The policy category that triggered a refusal.
 
             - `"cyber"`
 
+              The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
             - `"bio"`
+
+              The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
             - `"frontier_llm"`
 
+              The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
             - `"reasoning_extraction"`
+
+              The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../build-with-claude/build-with-claude-adaptive-thinking.md).
+
+            - `"general_harms"`
+
+              The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
           - `type: "refusal"`
 
@@ -33110,17 +33364,29 @@ ant beta:messages:batches results \
 
       Structured information about a refusal.
 
-      - `category: "cyber" or "bio" or "frontier_llm" or "reasoning_extraction"`
+      - `category: "cyber" or "bio" or "frontier_llm" or 2 more`
 
         The policy category that triggered a refusal.
 
         - `"cyber"`
 
+          The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
         - `"bio"`
+
+          The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
         - `"frontier_llm"`
 
+          The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
         - `"reasoning_extraction"`
+
+          The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../build-with-claude/build-with-claude-adaptive-thinking.md).
+
+        - `"general_harms"`
+
+          The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
       - `explanation: string`
 
@@ -33679,7 +33945,7 @@ ant beta:messages:batches results \
 
       - `speed: "standard" or "fast"`
 
-        The inference speed mode used for this request.
+        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
         - `"standard"`
 
@@ -33769,7 +34035,7 @@ Create Agent
 
   - `metadata: map[string]`
 
-  - `model: object { id, speed }`
+  - `model: object { id, effort, speed }`
 
     Model identifier and configuration.
 
@@ -33826,6 +34092,50 @@ Create Agent
       - `"claude-sonnet-4-5-20250929"`
 
         High-performance model for agents and coding
+
+    - `effort: optional BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or BetaManagedAgentsEffortHigh or 2 more`
+
+      How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+      - `beta_managed_agents_effort_low: object { type }`
+
+        Low effort. Favors latency over reasoning depth.
+
+        - `type: "low"`
+
+          - `"low"`
+
+      - `beta_managed_agents_effort_medium: object { type }`
+
+        Medium effort. Balances latency and reasoning depth.
+
+        - `type: "medium"`
+
+          - `"medium"`
+
+      - `beta_managed_agents_effort_high: object { type }`
+
+        High effort. Favors reasoning depth.
+
+        - `type: "high"`
+
+          - `"high"`
+
+      - `beta_managed_agents_effort_xhigh: object { type }`
+
+        Extra-high effort. Not all models accept this level.
+
+        - `type: "xhigh"`
+
+          - `"xhigh"`
+
+      - `beta_managed_agents_effort_max: object { type }`
+
+        Maximum effort. Favors reasoning depth over latency.
+
+        - `type: "max"`
+
+          - `"max"`
 
     - `speed: optional "standard" or "fast"`
 
@@ -34038,7 +34348,7 @@ Create Agent
 ```cli
 ant beta:agents create \
   --api-key my-anthropic-api-key \
-  --model '{id: claude-opus-4-6}' \
+  --model '{id: claude-opus-4-8}' \
   --name 'My First Agent'
 ```
 
@@ -34062,6 +34372,9 @@ ant beta:agents create \
   },
   "model": {
     "id": "claude-sonnet-4-6",
+    "effort": {
+      "type": "low"
+    },
     "speed": "standard"
   },
   "multiagent": {
@@ -34182,7 +34495,7 @@ List Agents
 
     - `metadata: map[string]`
 
-    - `model: object { id, speed }`
+    - `model: object { id, effort, speed }`
 
       Model identifier and configuration.
 
@@ -34239,6 +34552,50 @@ List Agents
         - `"claude-sonnet-4-5-20250929"`
 
           High-performance model for agents and coding
+
+      - `effort: optional BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or BetaManagedAgentsEffortHigh or 2 more`
+
+        How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+        - `beta_managed_agents_effort_low: object { type }`
+
+          Low effort. Favors latency over reasoning depth.
+
+          - `type: "low"`
+
+            - `"low"`
+
+        - `beta_managed_agents_effort_medium: object { type }`
+
+          Medium effort. Balances latency and reasoning depth.
+
+          - `type: "medium"`
+
+            - `"medium"`
+
+        - `beta_managed_agents_effort_high: object { type }`
+
+          High effort. Favors reasoning depth.
+
+          - `type: "high"`
+
+            - `"high"`
+
+        - `beta_managed_agents_effort_xhigh: object { type }`
+
+          Extra-high effort. Not all models accept this level.
+
+          - `type: "xhigh"`
+
+            - `"xhigh"`
+
+        - `beta_managed_agents_effort_max: object { type }`
+
+          Maximum effort. Favors reasoning depth over latency.
+
+          - `type: "max"`
+
+            - `"max"`
 
       - `speed: optional "standard" or "fast"`
 
@@ -34479,6 +34836,9 @@ ant beta:agents list \
       },
       "model": {
         "id": "claude-sonnet-4-6",
+        "effort": {
+          "type": "low"
+        },
         "speed": "standard"
       },
       "multiagent": {
@@ -34586,7 +34946,7 @@ Get Agent
 
   - `metadata: map[string]`
 
-  - `model: object { id, speed }`
+  - `model: object { id, effort, speed }`
 
     Model identifier and configuration.
 
@@ -34643,6 +35003,50 @@ Get Agent
       - `"claude-sonnet-4-5-20250929"`
 
         High-performance model for agents and coding
+
+    - `effort: optional BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or BetaManagedAgentsEffortHigh or 2 more`
+
+      How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+      - `beta_managed_agents_effort_low: object { type }`
+
+        Low effort. Favors latency over reasoning depth.
+
+        - `type: "low"`
+
+          - `"low"`
+
+      - `beta_managed_agents_effort_medium: object { type }`
+
+        Medium effort. Balances latency and reasoning depth.
+
+        - `type: "medium"`
+
+          - `"medium"`
+
+      - `beta_managed_agents_effort_high: object { type }`
+
+        High effort. Favors reasoning depth.
+
+        - `type: "high"`
+
+          - `"high"`
+
+      - `beta_managed_agents_effort_xhigh: object { type }`
+
+        Extra-high effort. Not all models accept this level.
+
+        - `type: "xhigh"`
+
+          - `"xhigh"`
+
+      - `beta_managed_agents_effort_max: object { type }`
+
+        Maximum effort. Favors reasoning depth over latency.
+
+        - `type: "max"`
+
+          - `"max"`
 
     - `speed: optional "standard" or "fast"`
 
@@ -34878,6 +35282,9 @@ ant beta:agents retrieve \
   },
   "model": {
     "id": "claude-sonnet-4-6",
+    "effort": {
+      "type": "low"
+    },
     "speed": "standard"
   },
   "multiagent": {
@@ -34944,10 +35351,6 @@ Update Agent
 
   Path param: Path parameter agent_id
 
-- `--version: number`
-
-  Body param: The agent's current version, used to prevent concurrent overwrites. Obtain this value from a create or retrieve response. The request fails if this does not match the server's current version.
-
 - `--description: optional string`
 
   Body param: Description. Omit to preserve; send empty string or null to clear.
@@ -34984,6 +35387,10 @@ Update Agent
 
   Body param: Tool configurations available to the agent. Full replacement. Omit to preserve; send empty array or null to clear. Maximum of 128 tools across all toolsets allowed.
 
+- `--version: optional number`
+
+  Body param: The agent's current version, used to prevent concurrent overwrites. Obtain this value from a create or retrieve response. Must be at least 1 if specified. When supplied, the request fails if it does not match the server's current version; omit to apply the update unconditionally.
+
 - `--beta: optional array of AnthropicBeta`
 
   Header param: Optional header to specify the beta version(s) you want to use.
@@ -35018,7 +35425,7 @@ Update Agent
 
   - `metadata: map[string]`
 
-  - `model: object { id, speed }`
+  - `model: object { id, effort, speed }`
 
     Model identifier and configuration.
 
@@ -35075,6 +35482,50 @@ Update Agent
       - `"claude-sonnet-4-5-20250929"`
 
         High-performance model for agents and coding
+
+    - `effort: optional BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or BetaManagedAgentsEffortHigh or 2 more`
+
+      How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+      - `beta_managed_agents_effort_low: object { type }`
+
+        Low effort. Favors latency over reasoning depth.
+
+        - `type: "low"`
+
+          - `"low"`
+
+      - `beta_managed_agents_effort_medium: object { type }`
+
+        Medium effort. Balances latency and reasoning depth.
+
+        - `type: "medium"`
+
+          - `"medium"`
+
+      - `beta_managed_agents_effort_high: object { type }`
+
+        High effort. Favors reasoning depth.
+
+        - `type: "high"`
+
+          - `"high"`
+
+      - `beta_managed_agents_effort_xhigh: object { type }`
+
+        Extra-high effort. Not all models accept this level.
+
+        - `type: "xhigh"`
+
+          - `"xhigh"`
+
+      - `beta_managed_agents_effort_max: object { type }`
+
+        Maximum effort. Favors reasoning depth over latency.
+
+        - `type: "max"`
+
+          - `"max"`
 
     - `speed: optional "standard" or "fast"`
 
@@ -35287,8 +35738,7 @@ Update Agent
 ```cli
 ant beta:agents update \
   --api-key my-anthropic-api-key \
-  --agent-id agent_011CZkYpogX7uDKUyvBTophP \
-  --version 1
+  --agent-id agent_011CZkYpogX7uDKUyvBTophP
 ```
 
 #### Response
@@ -35311,6 +35761,9 @@ ant beta:agents update \
   },
   "model": {
     "id": "claude-sonnet-4-6",
+    "effort": {
+      "type": "low"
+    },
     "speed": "standard"
   },
   "multiagent": {
@@ -35411,7 +35864,7 @@ Archive Agent
 
   - `metadata: map[string]`
 
-  - `model: object { id, speed }`
+  - `model: object { id, effort, speed }`
 
     Model identifier and configuration.
 
@@ -35468,6 +35921,50 @@ Archive Agent
       - `"claude-sonnet-4-5-20250929"`
 
         High-performance model for agents and coding
+
+    - `effort: optional BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or BetaManagedAgentsEffortHigh or 2 more`
+
+      How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+      - `beta_managed_agents_effort_low: object { type }`
+
+        Low effort. Favors latency over reasoning depth.
+
+        - `type: "low"`
+
+          - `"low"`
+
+      - `beta_managed_agents_effort_medium: object { type }`
+
+        Medium effort. Balances latency and reasoning depth.
+
+        - `type: "medium"`
+
+          - `"medium"`
+
+      - `beta_managed_agents_effort_high: object { type }`
+
+        High effort. Favors reasoning depth.
+
+        - `type: "high"`
+
+          - `"high"`
+
+      - `beta_managed_agents_effort_xhigh: object { type }`
+
+        Extra-high effort. Not all models accept this level.
+
+        - `type: "xhigh"`
+
+          - `"xhigh"`
+
+      - `beta_managed_agents_effort_max: object { type }`
+
+        Maximum effort. Favors reasoning depth over latency.
+
+        - `type: "max"`
+
+          - `"max"`
 
     - `speed: optional "standard" or "fast"`
 
@@ -35703,6 +36200,9 @@ ant beta:agents archive \
   },
   "model": {
     "id": "claude-sonnet-4-6",
+    "effort": {
+      "type": "low"
+    },
     "speed": "standard"
   },
   "multiagent": {
@@ -35787,7 +36287,7 @@ ant beta:agents archive \
 
   - `metadata: map[string]`
 
-  - `model: object { id, speed }`
+  - `model: object { id, effort, speed }`
 
     Model identifier and configuration.
 
@@ -35844,6 +36344,50 @@ ant beta:agents archive \
       - `"claude-sonnet-4-5-20250929"`
 
         High-performance model for agents and coding
+
+    - `effort: optional BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or BetaManagedAgentsEffortHigh or 2 more`
+
+      How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+      - `beta_managed_agents_effort_low: object { type }`
+
+        Low effort. Favors latency over reasoning depth.
+
+        - `type: "low"`
+
+          - `"low"`
+
+      - `beta_managed_agents_effort_medium: object { type }`
+
+        Medium effort. Balances latency and reasoning depth.
+
+        - `type: "medium"`
+
+          - `"medium"`
+
+      - `beta_managed_agents_effort_high: object { type }`
+
+        High effort. Favors reasoning depth.
+
+        - `type: "high"`
+
+          - `"high"`
+
+      - `beta_managed_agents_effort_xhigh: object { type }`
+
+        Extra-high effort. Not all models accept this level.
+
+        - `type: "xhigh"`
+
+          - `"xhigh"`
+
+      - `beta_managed_agents_effort_max: object { type }`
+
+        Maximum effort. Favors reasoning depth over latency.
+
+        - `type: "max"`
+
+          - `"max"`
 
     - `speed: optional "standard" or "fast"`
 
@@ -36633,6 +37177,56 @@ ant beta:agents archive \
 
     - `"custom"`
 
+### Beta Managed Agents Effort High
+
+- `beta_managed_agents_effort_high: object { type }`
+
+  High effort. Favors reasoning depth.
+
+  - `type: "high"`
+
+    - `"high"`
+
+### Beta Managed Agents Effort Low
+
+- `beta_managed_agents_effort_low: object { type }`
+
+  Low effort. Favors latency over reasoning depth.
+
+  - `type: "low"`
+
+    - `"low"`
+
+### Beta Managed Agents Effort Max
+
+- `beta_managed_agents_effort_max: object { type }`
+
+  Maximum effort. Favors reasoning depth over latency.
+
+  - `type: "max"`
+
+    - `"max"`
+
+### Beta Managed Agents Effort Medium
+
+- `beta_managed_agents_effort_medium: object { type }`
+
+  Medium effort. Balances latency and reasoning depth.
+
+  - `type: "medium"`
+
+    - `"medium"`
+
+### Beta Managed Agents Effort Xhigh
+
+- `beta_managed_agents_effort_xhigh: object { type }`
+
+  Extra-high effort. Not all models accept this level.
+
+  - `type: "xhigh"`
+
+    - `"xhigh"`
+
 ### Beta Managed Agents MCP Server URL Definition
 
 - `beta_managed_agents_mcp_server_url_definition: object { name, type, url }`
@@ -36891,7 +37485,7 @@ ant beta:agents archive \
 
 ### Beta Managed Agents Model Config
 
-- `beta_managed_agents_model_config: object { id, speed }`
+- `beta_managed_agents_model_config: object { id, effort, speed }`
 
   Model identifier and configuration.
 
@@ -36949,6 +37543,50 @@ ant beta:agents archive \
 
       High-performance model for agents and coding
 
+  - `effort: optional BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or BetaManagedAgentsEffortHigh or 2 more`
+
+    How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+    - `beta_managed_agents_effort_low: object { type }`
+
+      Low effort. Favors latency over reasoning depth.
+
+      - `type: "low"`
+
+        - `"low"`
+
+    - `beta_managed_agents_effort_medium: object { type }`
+
+      Medium effort. Balances latency and reasoning depth.
+
+      - `type: "medium"`
+
+        - `"medium"`
+
+    - `beta_managed_agents_effort_high: object { type }`
+
+      High effort. Favors reasoning depth.
+
+      - `type: "high"`
+
+        - `"high"`
+
+    - `beta_managed_agents_effort_xhigh: object { type }`
+
+      Extra-high effort. Not all models accept this level.
+
+      - `type: "xhigh"`
+
+        - `"xhigh"`
+
+    - `beta_managed_agents_effort_max: object { type }`
+
+      Maximum effort. Favors reasoning depth over latency.
+
+      - `type: "max"`
+
+        - `"max"`
+
   - `speed: optional "standard" or "fast"`
 
     Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
@@ -36959,7 +37597,7 @@ ant beta:agents archive \
 
 ### Beta Managed Agents Model Config Params
 
-- `beta_managed_agents_model_config_params: object { id, speed }`
+- `beta_managed_agents_model_config_params: object { id, effort, speed }`
 
   An object that defines additional configuration control over model use
 
@@ -37016,6 +37654,64 @@ ant beta:agents archive \
     - `"claude-sonnet-4-5-20250929"`
 
       High-performance model for agents and coding
+
+  - `effort: optional "low" or "medium" or "high" or 2 more or BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or 3 more`
+
+    How hard Claude works on each inference call. Accepts a bare level string (`"high"`) or `{"type": "high"}`. On create, omitting it resolves the per-model default; on update, omitting it leaves the stored value unchanged.
+
+    - `BetaManagedAgentsEffortLevel: "low" or "medium" or "high" or 2 more`
+
+      How hard Claude works on each turn. Higher levels favor reasoning depth over latency. Not all models accept every level; invalid combinations are rejected at create time.
+
+      - `"low"`
+
+      - `"medium"`
+
+      - `"high"`
+
+      - `"xhigh"`
+
+      - `"max"`
+
+    - `beta_managed_agents_effort_low: object { type }`
+
+      Low effort. Favors latency over reasoning depth.
+
+      - `type: "low"`
+
+        - `"low"`
+
+    - `beta_managed_agents_effort_medium: object { type }`
+
+      Medium effort. Balances latency and reasoning depth.
+
+      - `type: "medium"`
+
+        - `"medium"`
+
+    - `beta_managed_agents_effort_high: object { type }`
+
+      High effort. Favors reasoning depth.
+
+      - `type: "high"`
+
+        - `"high"`
+
+    - `beta_managed_agents_effort_xhigh: object { type }`
+
+      Extra-high effort. Not all models accept this level.
+
+      - `type: "xhigh"`
+
+        - `"xhigh"`
+
+    - `beta_managed_agents_effort_max: object { type }`
+
+      Maximum effort. Favors reasoning depth over latency.
+
+      - `type: "max"`
+
+        - `"max"`
 
   - `speed: optional "standard" or "fast"`
 
@@ -37117,7 +37813,7 @@ ant beta:agents archive \
 
     - `url: string`
 
-  - `model: object { id, speed }`
+  - `model: object { id, effort, speed }`
 
     Model identifier and configuration.
 
@@ -37174,6 +37870,50 @@ ant beta:agents archive \
       - `"claude-sonnet-4-5-20250929"`
 
         High-performance model for agents and coding
+
+    - `effort: optional BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or BetaManagedAgentsEffortHigh or 2 more`
+
+      How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+      - `beta_managed_agents_effort_low: object { type }`
+
+        Low effort. Favors latency over reasoning depth.
+
+        - `type: "low"`
+
+          - `"low"`
+
+      - `beta_managed_agents_effort_medium: object { type }`
+
+        Medium effort. Balances latency and reasoning depth.
+
+        - `type: "medium"`
+
+          - `"medium"`
+
+      - `beta_managed_agents_effort_high: object { type }`
+
+        High effort. Favors reasoning depth.
+
+        - `type: "high"`
+
+          - `"high"`
+
+      - `beta_managed_agents_effort_xhigh: object { type }`
+
+        Extra-high effort. Not all models accept this level.
+
+        - `type: "xhigh"`
+
+          - `"xhigh"`
+
+      - `beta_managed_agents_effort_max: object { type }`
+
+        Maximum effort. Favors reasoning depth over latency.
+
+        - `type: "max"`
+
+          - `"max"`
 
     - `speed: optional "standard" or "fast"`
 
@@ -37473,7 +38213,7 @@ List Agent Versions
 
     - `metadata: map[string]`
 
-    - `model: object { id, speed }`
+    - `model: object { id, effort, speed }`
 
       Model identifier and configuration.
 
@@ -37530,6 +38270,50 @@ List Agent Versions
         - `"claude-sonnet-4-5-20250929"`
 
           High-performance model for agents and coding
+
+      - `effort: optional BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or BetaManagedAgentsEffortHigh or 2 more`
+
+        How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+        - `beta_managed_agents_effort_low: object { type }`
+
+          Low effort. Favors latency over reasoning depth.
+
+          - `type: "low"`
+
+            - `"low"`
+
+        - `beta_managed_agents_effort_medium: object { type }`
+
+          Medium effort. Balances latency and reasoning depth.
+
+          - `type: "medium"`
+
+            - `"medium"`
+
+        - `beta_managed_agents_effort_high: object { type }`
+
+          High effort. Favors reasoning depth.
+
+          - `type: "high"`
+
+            - `"high"`
+
+        - `beta_managed_agents_effort_xhigh: object { type }`
+
+          Extra-high effort. Not all models accept this level.
+
+          - `type: "xhigh"`
+
+            - `"xhigh"`
+
+        - `beta_managed_agents_effort_max: object { type }`
+
+          Maximum effort. Favors reasoning depth over latency.
+
+          - `type: "max"`
+
+            - `"max"`
 
       - `speed: optional "standard" or "fast"`
 
@@ -37771,6 +38555,9 @@ ant beta:agents:versions list \
       },
       "model": {
         "id": "claude-sonnet-4-6",
+        "effort": {
+          "type": "low"
+        },
         "speed": "standard"
       },
       "multiagent": {
@@ -38743,6 +39530,8 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
     The type of response
 
+    - `"environment_deleted"`
+
 ### Example
 
 ```cli
@@ -39273,6 +40062,8 @@ ant beta:environments archive \
 
     The type of response
 
+    - `"environment_deleted"`
+
 ### Beta Limited Network
 
 - `beta_limited_network: object { allow_mcp_servers, allow_package_managers, allowed_hosts, type }`
@@ -39452,7 +40243,7 @@ Retrieve detailed information about a specific work item.
 
 ### Returns
 
-- `beta_self_hosted_work: object { id, acknowledged_at, created_at, 9 more }`
+- `beta_self_hosted_work: object { id, acknowledged_at, created_at, 10 more }`
 
   Work resource representing a unit of work in a self-hosted environment.
 
@@ -39495,6 +40286,10 @@ Retrieve detailed information about a specific work item.
   - `metadata: map[string]`
 
     User-provided metadata key-value pairs associated with this work item
+
+  - `secret: string`
+
+    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
 
   - `started_at: string`
 
@@ -39551,6 +40346,7 @@ ant beta:environments:work retrieve \
   "metadata": {
     "foo": "string"
   },
+  "secret": "secret",
   "started_at": "started_at",
   "state": "queued",
   "stop_requested_at": "stop_requested_at",
@@ -39593,7 +40389,7 @@ Long poll for work items in the queue.
 
 ### Returns
 
-- `beta_self_hosted_work: object { id, acknowledged_at, created_at, 9 more }`
+- `beta_self_hosted_work: object { id, acknowledged_at, created_at, 10 more }`
 
   Work resource representing a unit of work in a self-hosted environment.
 
@@ -39636,6 +40432,10 @@ Long poll for work items in the queue.
   - `metadata: map[string]`
 
     User-provided metadata key-value pairs associated with this work item
+
+  - `secret: string`
+
+    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
 
   - `started_at: string`
 
@@ -39691,6 +40491,7 @@ ant beta:environments:work poll \
   "metadata": {
     "foo": "string"
   },
+  "secret": "secret",
   "started_at": "started_at",
   "state": "queued",
   "stop_requested_at": "stop_requested_at",
@@ -39725,7 +40526,7 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
 
 ### Returns
 
-- `beta_self_hosted_work: object { id, acknowledged_at, created_at, 9 more }`
+- `beta_self_hosted_work: object { id, acknowledged_at, created_at, 10 more }`
 
   Work resource representing a unit of work in a self-hosted environment.
 
@@ -39768,6 +40569,10 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
   - `metadata: map[string]`
 
     User-provided metadata key-value pairs associated with this work item
+
+  - `secret: string`
+
+    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
 
   - `started_at: string`
 
@@ -39824,6 +40629,7 @@ ant beta:environments:work ack \
   "metadata": {
     "foo": "string"
   },
+  "secret": "secret",
   "started_at": "started_at",
   "state": "queued",
   "stop_requested_at": "stop_requested_at",
@@ -39951,7 +40757,7 @@ Stop a work item, initiating graceful or forced shutdown.
 
 ### Returns
 
-- `beta_self_hosted_work: object { id, acknowledged_at, created_at, 9 more }`
+- `beta_self_hosted_work: object { id, acknowledged_at, created_at, 10 more }`
 
   Work resource representing a unit of work in a self-hosted environment.
 
@@ -39994,6 +40800,10 @@ Stop a work item, initiating graceful or forced shutdown.
   - `metadata: map[string]`
 
     User-provided metadata key-value pairs associated with this work item
+
+  - `secret: string`
+
+    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
 
   - `started_at: string`
 
@@ -40050,6 +40860,7 @@ ant beta:environments:work stop \
   "metadata": {
     "foo": "string"
   },
+  "secret": "secret",
   "started_at": "started_at",
   "state": "queued",
   "stop_requested_at": "stop_requested_at",
@@ -40132,6 +40943,10 @@ List work items in an environment.
 
       User-provided metadata key-value pairs associated with this work item
 
+    - `secret: string`
+
+      Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
+
     - `started_at: string`
 
       RFC 3339 timestamp when work execution started
@@ -40192,6 +41007,7 @@ ant beta:environments:work list \
       "metadata": {
         "foo": "string"
       },
+      "secret": "secret",
       "started_at": "started_at",
       "state": "queued",
       "stop_requested_at": "stop_requested_at",
@@ -40233,7 +41049,7 @@ Update work item metadata with merge semantics.
 
 ### Returns
 
-- `beta_self_hosted_work: object { id, acknowledged_at, created_at, 9 more }`
+- `beta_self_hosted_work: object { id, acknowledged_at, created_at, 10 more }`
 
   Work resource representing a unit of work in a self-hosted environment.
 
@@ -40276,6 +41092,10 @@ Update work item metadata with merge semantics.
   - `metadata: map[string]`
 
     User-provided metadata key-value pairs associated with this work item
+
+  - `secret: string`
+
+    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
 
   - `started_at: string`
 
@@ -40333,6 +41153,7 @@ ant beta:environments:work update \
   "metadata": {
     "foo": "string"
   },
+  "secret": "secret",
   "started_at": "started_at",
   "state": "queued",
   "stop_requested_at": "stop_requested_at",
@@ -40409,7 +41230,7 @@ ant beta:environments:work stats \
 
 ### Beta Self Hosted Work
 
-- `beta_self_hosted_work: object { id, acknowledged_at, created_at, 9 more }`
+- `beta_self_hosted_work: object { id, acknowledged_at, created_at, 10 more }`
 
   Work resource representing a unit of work in a self-hosted environment.
 
@@ -40452,6 +41273,10 @@ ant beta:environments:work stats \
   - `metadata: map[string]`
 
     User-provided metadata key-value pairs associated with this work item
+
+  - `secret: string`
+
+    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
 
   - `started_at: string`
 
@@ -40564,6 +41389,10 @@ ant beta:environments:work stats \
     - `metadata: map[string]`
 
       User-provided metadata key-value pairs associated with this work item
+
+    - `secret: string`
+
+      Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
 
     - `started_at: string`
 
@@ -40684,6 +41513,10 @@ Create Session
 
   Body param: ID of the `environment` defining the container configuration for this session.
 
+- `--initial-event: optional array of BetaManagedAgentsUserMessageEventParams or BetaManagedAgentsUserDefineOutcomeEventParams`
+
+  Body param: Initial events to send to the `session` at creation, processed in order. Supports `user.message` and `user.define_outcome` events. Maximum 50 events.
+
 - `--metadata: optional map[string]`
 
   Body param: Arbitrary key-value metadata attached to the session. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
@@ -40730,7 +41563,7 @@ Create Session
 
       - `url: string`
 
-    - `model: object { id, speed }`
+    - `model: object { id, effort, speed }`
 
       Model identifier and configuration.
 
@@ -40788,6 +41621,50 @@ Create Session
 
           High-performance model for agents and coding
 
+      - `effort: optional BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or BetaManagedAgentsEffortHigh or 2 more`
+
+        How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+        - `beta_managed_agents_effort_low: object { type }`
+
+          Low effort. Favors latency over reasoning depth.
+
+          - `type: "low"`
+
+            - `"low"`
+
+        - `beta_managed_agents_effort_medium: object { type }`
+
+          Medium effort. Balances latency and reasoning depth.
+
+          - `type: "medium"`
+
+            - `"medium"`
+
+        - `beta_managed_agents_effort_high: object { type }`
+
+          High effort. Favors reasoning depth.
+
+          - `type: "high"`
+
+            - `"high"`
+
+        - `beta_managed_agents_effort_xhigh: object { type }`
+
+          Extra-high effort. Not all models accept this level.
+
+          - `type: "xhigh"`
+
+            - `"xhigh"`
+
+        - `beta_managed_agents_effort_max: object { type }`
+
+          Maximum effort. Favors reasoning depth over latency.
+
+          - `type: "max"`
+
+            - `"max"`
+
       - `speed: optional "standard" or "fast"`
 
         Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
@@ -40816,7 +41693,7 @@ Create Session
 
           - `url: string`
 
-        - `model: object { id, speed }`
+        - `model: object { id, effort, speed }`
 
           Model identifier and configuration.
 
@@ -40825,6 +41702,10 @@ Create Session
             The model that will power your agent.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `effort: optional BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or BetaManagedAgentsEffortHigh or 2 more`
+
+            How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
 
           - `speed: optional "standard" or "fast"`
 
@@ -41276,6 +42157,9 @@ ant beta:sessions create \
     ],
     "model": {
       "id": "claude-sonnet-4-6",
+      "effort": {
+        "type": "low"
+      },
       "speed": "standard"
     },
     "multiagent": {
@@ -41292,6 +42176,9 @@ ant beta:sessions create \
           ],
           "model": {
             "id": "claude-sonnet-4-6",
+            "effort": {
+              "type": "low"
+            },
             "speed": "standard"
           },
           "name": "Researcher",
@@ -41523,7 +42410,7 @@ List Sessions
 
         - `url: string`
 
-      - `model: object { id, speed }`
+      - `model: object { id, effort, speed }`
 
         Model identifier and configuration.
 
@@ -41581,6 +42468,50 @@ List Sessions
 
             High-performance model for agents and coding
 
+        - `effort: optional BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or BetaManagedAgentsEffortHigh or 2 more`
+
+          How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+          - `beta_managed_agents_effort_low: object { type }`
+
+            Low effort. Favors latency over reasoning depth.
+
+            - `type: "low"`
+
+              - `"low"`
+
+          - `beta_managed_agents_effort_medium: object { type }`
+
+            Medium effort. Balances latency and reasoning depth.
+
+            - `type: "medium"`
+
+              - `"medium"`
+
+          - `beta_managed_agents_effort_high: object { type }`
+
+            High effort. Favors reasoning depth.
+
+            - `type: "high"`
+
+              - `"high"`
+
+          - `beta_managed_agents_effort_xhigh: object { type }`
+
+            Extra-high effort. Not all models accept this level.
+
+            - `type: "xhigh"`
+
+              - `"xhigh"`
+
+          - `beta_managed_agents_effort_max: object { type }`
+
+            Maximum effort. Favors reasoning depth over latency.
+
+            - `type: "max"`
+
+              - `"max"`
+
         - `speed: optional "standard" or "fast"`
 
           Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
@@ -41609,7 +42540,7 @@ List Sessions
 
             - `url: string`
 
-          - `model: object { id, speed }`
+          - `model: object { id, effort, speed }`
 
             Model identifier and configuration.
 
@@ -41618,6 +42549,10 @@ List Sessions
               The model that will power your agent.
 
               See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `effort: optional BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or BetaManagedAgentsEffortHigh or 2 more`
+
+              How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
 
             - `speed: optional "standard" or "fast"`
 
@@ -42077,6 +43012,9 @@ ant beta:sessions list \
         ],
         "model": {
           "id": "claude-sonnet-4-6",
+          "effort": {
+            "type": "low"
+          },
           "speed": "standard"
         },
         "multiagent": {
@@ -42093,6 +43031,9 @@ ant beta:sessions list \
               ],
               "model": {
                 "id": "claude-sonnet-4-6",
+                "effort": {
+                  "type": "low"
+                },
                 "speed": "standard"
               },
               "name": "Researcher",
@@ -42276,7 +43217,7 @@ Get Session
 
       - `url: string`
 
-    - `model: object { id, speed }`
+    - `model: object { id, effort, speed }`
 
       Model identifier and configuration.
 
@@ -42334,6 +43275,50 @@ Get Session
 
           High-performance model for agents and coding
 
+      - `effort: optional BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or BetaManagedAgentsEffortHigh or 2 more`
+
+        How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+        - `beta_managed_agents_effort_low: object { type }`
+
+          Low effort. Favors latency over reasoning depth.
+
+          - `type: "low"`
+
+            - `"low"`
+
+        - `beta_managed_agents_effort_medium: object { type }`
+
+          Medium effort. Balances latency and reasoning depth.
+
+          - `type: "medium"`
+
+            - `"medium"`
+
+        - `beta_managed_agents_effort_high: object { type }`
+
+          High effort. Favors reasoning depth.
+
+          - `type: "high"`
+
+            - `"high"`
+
+        - `beta_managed_agents_effort_xhigh: object { type }`
+
+          Extra-high effort. Not all models accept this level.
+
+          - `type: "xhigh"`
+
+            - `"xhigh"`
+
+        - `beta_managed_agents_effort_max: object { type }`
+
+          Maximum effort. Favors reasoning depth over latency.
+
+          - `type: "max"`
+
+            - `"max"`
+
       - `speed: optional "standard" or "fast"`
 
         Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
@@ -42362,7 +43347,7 @@ Get Session
 
           - `url: string`
 
-        - `model: object { id, speed }`
+        - `model: object { id, effort, speed }`
 
           Model identifier and configuration.
 
@@ -42371,6 +43356,10 @@ Get Session
             The model that will power your agent.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `effort: optional BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or BetaManagedAgentsEffortHigh or 2 more`
+
+            How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
 
           - `speed: optional "standard" or "fast"`
 
@@ -42821,6 +43810,9 @@ ant beta:sessions retrieve \
     ],
     "model": {
       "id": "claude-sonnet-4-6",
+      "effort": {
+        "type": "low"
+      },
       "speed": "standard"
     },
     "multiagent": {
@@ -42837,6 +43829,9 @@ ant beta:sessions retrieve \
           ],
           "model": {
             "id": "claude-sonnet-4-6",
+            "effort": {
+              "type": "low"
+            },
             "speed": "standard"
           },
           "name": "Researcher",
@@ -43032,7 +44027,7 @@ Update Session
 
       - `url: string`
 
-    - `model: object { id, speed }`
+    - `model: object { id, effort, speed }`
 
       Model identifier and configuration.
 
@@ -43090,6 +44085,50 @@ Update Session
 
           High-performance model for agents and coding
 
+      - `effort: optional BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or BetaManagedAgentsEffortHigh or 2 more`
+
+        How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+        - `beta_managed_agents_effort_low: object { type }`
+
+          Low effort. Favors latency over reasoning depth.
+
+          - `type: "low"`
+
+            - `"low"`
+
+        - `beta_managed_agents_effort_medium: object { type }`
+
+          Medium effort. Balances latency and reasoning depth.
+
+          - `type: "medium"`
+
+            - `"medium"`
+
+        - `beta_managed_agents_effort_high: object { type }`
+
+          High effort. Favors reasoning depth.
+
+          - `type: "high"`
+
+            - `"high"`
+
+        - `beta_managed_agents_effort_xhigh: object { type }`
+
+          Extra-high effort. Not all models accept this level.
+
+          - `type: "xhigh"`
+
+            - `"xhigh"`
+
+        - `beta_managed_agents_effort_max: object { type }`
+
+          Maximum effort. Favors reasoning depth over latency.
+
+          - `type: "max"`
+
+            - `"max"`
+
       - `speed: optional "standard" or "fast"`
 
         Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
@@ -43118,7 +44157,7 @@ Update Session
 
           - `url: string`
 
-        - `model: object { id, speed }`
+        - `model: object { id, effort, speed }`
 
           Model identifier and configuration.
 
@@ -43127,6 +44166,10 @@ Update Session
             The model that will power your agent.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `effort: optional BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or BetaManagedAgentsEffortHigh or 2 more`
+
+            How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
 
           - `speed: optional "standard" or "fast"`
 
@@ -43577,6 +44620,9 @@ ant beta:sessions update \
     ],
     "model": {
       "id": "claude-sonnet-4-6",
+      "effort": {
+        "type": "low"
+      },
       "speed": "standard"
     },
     "multiagent": {
@@ -43593,6 +44639,9 @@ ant beta:sessions update \
           ],
           "model": {
             "id": "claude-sonnet-4-6",
+            "effort": {
+              "type": "low"
+            },
             "speed": "standard"
           },
           "name": "Researcher",
@@ -43819,7 +44868,7 @@ Archive Session
 
       - `url: string`
 
-    - `model: object { id, speed }`
+    - `model: object { id, effort, speed }`
 
       Model identifier and configuration.
 
@@ -43877,6 +44926,50 @@ Archive Session
 
           High-performance model for agents and coding
 
+      - `effort: optional BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or BetaManagedAgentsEffortHigh or 2 more`
+
+        How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+        - `beta_managed_agents_effort_low: object { type }`
+
+          Low effort. Favors latency over reasoning depth.
+
+          - `type: "low"`
+
+            - `"low"`
+
+        - `beta_managed_agents_effort_medium: object { type }`
+
+          Medium effort. Balances latency and reasoning depth.
+
+          - `type: "medium"`
+
+            - `"medium"`
+
+        - `beta_managed_agents_effort_high: object { type }`
+
+          High effort. Favors reasoning depth.
+
+          - `type: "high"`
+
+            - `"high"`
+
+        - `beta_managed_agents_effort_xhigh: object { type }`
+
+          Extra-high effort. Not all models accept this level.
+
+          - `type: "xhigh"`
+
+            - `"xhigh"`
+
+        - `beta_managed_agents_effort_max: object { type }`
+
+          Maximum effort. Favors reasoning depth over latency.
+
+          - `type: "max"`
+
+            - `"max"`
+
       - `speed: optional "standard" or "fast"`
 
         Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
@@ -43905,7 +44998,7 @@ Archive Session
 
           - `url: string`
 
-        - `model: object { id, speed }`
+        - `model: object { id, effort, speed }`
 
           Model identifier and configuration.
 
@@ -43914,6 +45007,10 @@ Archive Session
             The model that will power your agent.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `effort: optional BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or BetaManagedAgentsEffortHigh or 2 more`
+
+            How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
 
           - `speed: optional "standard" or "fast"`
 
@@ -44364,6 +45461,9 @@ ant beta:sessions archive \
     ],
     "model": {
       "id": "claude-sonnet-4-6",
+      "effort": {
+        "type": "low"
+      },
       "speed": "standard"
     },
     "multiagent": {
@@ -44380,6 +45480,9 @@ ant beta:sessions archive \
           ],
           "model": {
             "id": "claude-sonnet-4-6",
+            "effort": {
+              "type": "low"
+            },
             "speed": "standard"
           },
           "name": "Researcher",
@@ -44646,6 +45749,64 @@ ant beta:sessions archive \
       - `"claude-sonnet-4-5-20250929"`
 
         High-performance model for agents and coding
+
+    - `effort: optional "low" or "medium" or "high" or 2 more or BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or 3 more`
+
+      How hard Claude works on each inference call. Accepts a bare level string (`"high"`) or `{"type": "high"}`. On create, omitting it resolves the per-model default; on update, omitting it leaves the stored value unchanged.
+
+      - `BetaManagedAgentsEffortLevel: "low" or "medium" or "high" or 2 more`
+
+        How hard Claude works on each turn. Higher levels favor reasoning depth over latency. Not all models accept every level; invalid combinations are rejected at create time.
+
+        - `"low"`
+
+        - `"medium"`
+
+        - `"high"`
+
+        - `"xhigh"`
+
+        - `"max"`
+
+      - `beta_managed_agents_effort_low: object { type }`
+
+        Low effort. Favors latency over reasoning depth.
+
+        - `type: "low"`
+
+          - `"low"`
+
+      - `beta_managed_agents_effort_medium: object { type }`
+
+        Medium effort. Balances latency and reasoning depth.
+
+        - `type: "medium"`
+
+          - `"medium"`
+
+      - `beta_managed_agents_effort_high: object { type }`
+
+        High effort. Favors reasoning depth.
+
+        - `type: "high"`
+
+          - `"high"`
+
+      - `beta_managed_agents_effort_xhigh: object { type }`
+
+        Extra-high effort. Not all models accept this level.
+
+        - `type: "xhigh"`
+
+          - `"xhigh"`
+
+      - `beta_managed_agents_effort_max: object { type }`
+
+        Maximum effort. Favors reasoning depth over latency.
+
+        - `type: "max"`
+
+          - `"max"`
 
     - `speed: optional "standard" or "fast"`
 
@@ -45227,7 +46388,7 @@ ant beta:sessions archive \
 
       - `url: string`
 
-    - `model: object { id, speed }`
+    - `model: object { id, effort, speed }`
 
       Model identifier and configuration.
 
@@ -45285,6 +46446,50 @@ ant beta:sessions archive \
 
           High-performance model for agents and coding
 
+      - `effort: optional BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or BetaManagedAgentsEffortHigh or 2 more`
+
+        How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+        - `beta_managed_agents_effort_low: object { type }`
+
+          Low effort. Favors latency over reasoning depth.
+
+          - `type: "low"`
+
+            - `"low"`
+
+        - `beta_managed_agents_effort_medium: object { type }`
+
+          Medium effort. Balances latency and reasoning depth.
+
+          - `type: "medium"`
+
+            - `"medium"`
+
+        - `beta_managed_agents_effort_high: object { type }`
+
+          High effort. Favors reasoning depth.
+
+          - `type: "high"`
+
+            - `"high"`
+
+        - `beta_managed_agents_effort_xhigh: object { type }`
+
+          Extra-high effort. Not all models accept this level.
+
+          - `type: "xhigh"`
+
+            - `"xhigh"`
+
+        - `beta_managed_agents_effort_max: object { type }`
+
+          Maximum effort. Favors reasoning depth over latency.
+
+          - `type: "max"`
+
+            - `"max"`
+
       - `speed: optional "standard" or "fast"`
 
         Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
@@ -45313,7 +46518,7 @@ ant beta:sessions archive \
 
           - `url: string`
 
-        - `model: object { id, speed }`
+        - `model: object { id, effort, speed }`
 
           Model identifier and configuration.
 
@@ -45322,6 +46527,10 @@ ant beta:sessions archive \
             The model that will power your agent.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `effort: optional BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or BetaManagedAgentsEffortHigh or 2 more`
+
+            How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
 
           - `speed: optional "standard" or "fast"`
 
@@ -45767,7 +46976,7 @@ ant beta:sessions archive \
 
     - `url: string`
 
-  - `model: object { id, speed }`
+  - `model: object { id, effort, speed }`
 
     Model identifier and configuration.
 
@@ -45825,6 +47034,50 @@ ant beta:sessions archive \
 
         High-performance model for agents and coding
 
+    - `effort: optional BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or BetaManagedAgentsEffortHigh or 2 more`
+
+      How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+      - `beta_managed_agents_effort_low: object { type }`
+
+        Low effort. Favors latency over reasoning depth.
+
+        - `type: "low"`
+
+          - `"low"`
+
+      - `beta_managed_agents_effort_medium: object { type }`
+
+        Medium effort. Balances latency and reasoning depth.
+
+        - `type: "medium"`
+
+          - `"medium"`
+
+      - `beta_managed_agents_effort_high: object { type }`
+
+        High effort. Favors reasoning depth.
+
+        - `type: "high"`
+
+          - `"high"`
+
+      - `beta_managed_agents_effort_xhigh: object { type }`
+
+        Extra-high effort. Not all models accept this level.
+
+        - `type: "xhigh"`
+
+          - `"xhigh"`
+
+      - `beta_managed_agents_effort_max: object { type }`
+
+        Maximum effort. Favors reasoning depth over latency.
+
+        - `type: "max"`
+
+          - `"max"`
+
     - `speed: optional "standard" or "fast"`
 
       Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
@@ -45853,7 +47106,7 @@ ant beta:sessions archive \
 
         - `url: string`
 
-      - `model: object { id, speed }`
+      - `model: object { id, effort, speed }`
 
         Model identifier and configuration.
 
@@ -45862,6 +47115,10 @@ ant beta:sessions archive \
           The model that will power your agent.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `effort: optional BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or BetaManagedAgentsEffortHigh or 2 more`
+
+          How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
 
         - `speed: optional "standard" or "fast"`
 
@@ -46281,7 +47538,7 @@ ant beta:sessions archive \
 
       - `url: string`
 
-    - `model: object { id, speed }`
+    - `model: object { id, effort, speed }`
 
       Model identifier and configuration.
 
@@ -46338,6 +47595,50 @@ ant beta:sessions archive \
         - `"claude-sonnet-4-5-20250929"`
 
           High-performance model for agents and coding
+
+      - `effort: optional BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or BetaManagedAgentsEffortHigh or 2 more`
+
+        How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+        - `beta_managed_agents_effort_low: object { type }`
+
+          Low effort. Favors latency over reasoning depth.
+
+          - `type: "low"`
+
+            - `"low"`
+
+        - `beta_managed_agents_effort_medium: object { type }`
+
+          Medium effort. Balances latency and reasoning depth.
+
+          - `type: "medium"`
+
+            - `"medium"`
+
+        - `beta_managed_agents_effort_high: object { type }`
+
+          High effort. Favors reasoning depth.
+
+          - `type: "high"`
+
+            - `"high"`
+
+        - `beta_managed_agents_effort_xhigh: object { type }`
+
+          Extra-high effort. Not all models accept this level.
+
+          - `type: "xhigh"`
+
+            - `"xhigh"`
+
+        - `beta_managed_agents_effort_max: object { type }`
+
+          Maximum effort. Favors reasoning depth over latency.
+
+          - `type: "max"`
+
+            - `"max"`
 
       - `speed: optional "standard" or "fast"`
 
@@ -46573,7 +47874,7 @@ ant beta:sessions archive \
 
       - `url: string`
 
-    - `model: object { id, speed }`
+    - `model: object { id, effort, speed }`
 
       Model identifier and configuration.
 
@@ -46631,6 +47932,50 @@ ant beta:sessions archive \
 
           High-performance model for agents and coding
 
+      - `effort: optional BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or BetaManagedAgentsEffortHigh or 2 more`
+
+        How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+        - `beta_managed_agents_effort_low: object { type }`
+
+          Low effort. Favors latency over reasoning depth.
+
+          - `type: "low"`
+
+            - `"low"`
+
+        - `beta_managed_agents_effort_medium: object { type }`
+
+          Medium effort. Balances latency and reasoning depth.
+
+          - `type: "medium"`
+
+            - `"medium"`
+
+        - `beta_managed_agents_effort_high: object { type }`
+
+          High effort. Favors reasoning depth.
+
+          - `type: "high"`
+
+            - `"high"`
+
+        - `beta_managed_agents_effort_xhigh: object { type }`
+
+          Extra-high effort. Not all models accept this level.
+
+          - `type: "xhigh"`
+
+            - `"xhigh"`
+
+        - `beta_managed_agents_effort_max: object { type }`
+
+          Maximum effort. Favors reasoning depth over latency.
+
+          - `type: "max"`
+
+            - `"max"`
+
       - `speed: optional "standard" or "fast"`
 
         Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
@@ -46659,7 +48004,7 @@ ant beta:sessions archive \
 
           - `url: string`
 
-        - `model: object { id, speed }`
+        - `model: object { id, effort, speed }`
 
           Model identifier and configuration.
 
@@ -46668,6 +48013,10 @@ ant beta:sessions archive \
             The model that will power your agent.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `effort: optional BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or BetaManagedAgentsEffortHigh or 2 more`
+
+            How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
 
           - `speed: optional "standard" or "fast"`
 
@@ -48267,7 +49616,7 @@ List Events
 
         - `beta_managed_agents_session_retries_exhausted: object { type }`
 
-          The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+          The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
           - `type: "retries_exhausted"`
 
@@ -48623,7 +49972,7 @@ List Events
 
         - `beta_managed_agents_session_retries_exhausted: object { type }`
 
-          The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+          The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
       - `type: "session.thread_status_idle"`
 
@@ -48759,7 +50108,7 @@ List Events
 
           - `url: string`
 
-        - `model: object { id, speed }`
+        - `model: object { id, effort, speed }`
 
           Model identifier and configuration.
 
@@ -48817,6 +50166,50 @@ List Events
 
               High-performance model for agents and coding
 
+          - `effort: optional BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or BetaManagedAgentsEffortHigh or 2 more`
+
+            How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+            - `beta_managed_agents_effort_low: object { type }`
+
+              Low effort. Favors latency over reasoning depth.
+
+              - `type: "low"`
+
+                - `"low"`
+
+            - `beta_managed_agents_effort_medium: object { type }`
+
+              Medium effort. Balances latency and reasoning depth.
+
+              - `type: "medium"`
+
+                - `"medium"`
+
+            - `beta_managed_agents_effort_high: object { type }`
+
+              High effort. Favors reasoning depth.
+
+              - `type: "high"`
+
+                - `"high"`
+
+            - `beta_managed_agents_effort_xhigh: object { type }`
+
+              Extra-high effort. Not all models accept this level.
+
+              - `type: "xhigh"`
+
+                - `"xhigh"`
+
+            - `beta_managed_agents_effort_max: object { type }`
+
+              Maximum effort. Favors reasoning depth over latency.
+
+              - `type: "max"`
+
+                - `"max"`
+
           - `speed: optional "standard" or "fast"`
 
             Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
@@ -48845,7 +50238,7 @@ List Events
 
               - `url: string`
 
-            - `model: object { id, speed }`
+            - `model: object { id, effort, speed }`
 
               Model identifier and configuration.
 
@@ -48854,6 +50247,10 @@ List Events
                 The model that will power your agent.
 
                 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+              - `effort: optional BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or BetaManagedAgentsEffortHigh or 2 more`
+
+                How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
 
               - `speed: optional "standard" or "fast"`
 
@@ -50638,7 +52035,7 @@ Stream Events
 
       - `beta_managed_agents_session_retries_exhausted: object { type }`
 
-        The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+        The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
         - `type: "retries_exhausted"`
 
@@ -50994,7 +52391,7 @@ Stream Events
 
       - `beta_managed_agents_session_retries_exhausted: object { type }`
 
-        The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+        The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
     - `type: "session.thread_status_idle"`
 
@@ -51130,7 +52527,7 @@ Stream Events
 
         - `url: string`
 
-      - `model: object { id, speed }`
+      - `model: object { id, effort, speed }`
 
         Model identifier and configuration.
 
@@ -51188,6 +52585,50 @@ Stream Events
 
             High-performance model for agents and coding
 
+        - `effort: optional BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or BetaManagedAgentsEffortHigh or 2 more`
+
+          How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+          - `beta_managed_agents_effort_low: object { type }`
+
+            Low effort. Favors latency over reasoning depth.
+
+            - `type: "low"`
+
+              - `"low"`
+
+          - `beta_managed_agents_effort_medium: object { type }`
+
+            Medium effort. Balances latency and reasoning depth.
+
+            - `type: "medium"`
+
+              - `"medium"`
+
+          - `beta_managed_agents_effort_high: object { type }`
+
+            High effort. Favors reasoning depth.
+
+            - `type: "high"`
+
+              - `"high"`
+
+          - `beta_managed_agents_effort_xhigh: object { type }`
+
+            Extra-high effort. Not all models accept this level.
+
+            - `type: "xhigh"`
+
+              - `"xhigh"`
+
+          - `beta_managed_agents_effort_max: object { type }`
+
+            Maximum effort. Favors reasoning depth over latency.
+
+            - `type: "max"`
+
+              - `"max"`
+
         - `speed: optional "standard" or "fast"`
 
           Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
@@ -51216,7 +52657,7 @@ Stream Events
 
             - `url: string`
 
-          - `model: object { id, speed }`
+          - `model: object { id, effort, speed }`
 
             Model identifier and configuration.
 
@@ -51225,6 +52666,10 @@ Stream Events
               The model that will power your agent.
 
               See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `effort: optional BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or BetaManagedAgentsEffortHigh or 2 more`
+
+              How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
 
             - `speed: optional "standard" or "fast"`
 
@@ -55238,7 +56683,7 @@ ant beta:sessions:events stream \
 
       - `beta_managed_agents_session_retries_exhausted: object { type }`
 
-        The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+        The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
         - `type: "retries_exhausted"`
 
@@ -55594,7 +57039,7 @@ ant beta:sessions:events stream \
 
       - `beta_managed_agents_session_retries_exhausted: object { type }`
 
-        The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+        The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
     - `type: "session.thread_status_idle"`
 
@@ -55730,7 +57175,7 @@ ant beta:sessions:events stream \
 
         - `url: string`
 
-      - `model: object { id, speed }`
+      - `model: object { id, effort, speed }`
 
         Model identifier and configuration.
 
@@ -55788,6 +57233,50 @@ ant beta:sessions:events stream \
 
             High-performance model for agents and coding
 
+        - `effort: optional BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or BetaManagedAgentsEffortHigh or 2 more`
+
+          How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+          - `beta_managed_agents_effort_low: object { type }`
+
+            Low effort. Favors latency over reasoning depth.
+
+            - `type: "low"`
+
+              - `"low"`
+
+          - `beta_managed_agents_effort_medium: object { type }`
+
+            Medium effort. Balances latency and reasoning depth.
+
+            - `type: "medium"`
+
+              - `"medium"`
+
+          - `beta_managed_agents_effort_high: object { type }`
+
+            High effort. Favors reasoning depth.
+
+            - `type: "high"`
+
+              - `"high"`
+
+          - `beta_managed_agents_effort_xhigh: object { type }`
+
+            Extra-high effort. Not all models accept this level.
+
+            - `type: "xhigh"`
+
+              - `"xhigh"`
+
+          - `beta_managed_agents_effort_max: object { type }`
+
+            Maximum effort. Favors reasoning depth over latency.
+
+            - `type: "max"`
+
+              - `"max"`
+
         - `speed: optional "standard" or "fast"`
 
           Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
@@ -55816,7 +57305,7 @@ ant beta:sessions:events stream \
 
             - `url: string`
 
-          - `model: object { id, speed }`
+          - `model: object { id, effort, speed }`
 
             Model identifier and configuration.
 
@@ -55825,6 +57314,10 @@ ant beta:sessions:events stream \
               The model that will power your agent.
 
               See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `effort: optional BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or BetaManagedAgentsEffortHigh or 2 more`
+
+              How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
 
             - `speed: optional "standard" or "fast"`
 
@@ -56090,7 +57583,7 @@ ant beta:sessions:events stream \
 
 - `beta_managed_agents_session_retries_exhausted: object { type }`
 
-  The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+  The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
   - `type: "retries_exhausted"`
 
@@ -56136,7 +57629,7 @@ ant beta:sessions:events stream \
 
     - `beta_managed_agents_session_retries_exhausted: object { type }`
 
-      The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+      The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
       - `type: "retries_exhausted"`
 
@@ -56274,7 +57767,7 @@ ant beta:sessions:events stream \
 
     - `beta_managed_agents_session_retries_exhausted: object { type }`
 
-      The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+      The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
       - `type: "retries_exhausted"`
 
@@ -57562,7 +59055,7 @@ ant beta:sessions:events stream \
 
       - `beta_managed_agents_session_retries_exhausted: object { type }`
 
-        The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+        The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
         - `type: "retries_exhausted"`
 
@@ -57918,7 +59411,7 @@ ant beta:sessions:events stream \
 
       - `beta_managed_agents_session_retries_exhausted: object { type }`
 
-        The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+        The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
     - `type: "session.thread_status_idle"`
 
@@ -58054,7 +59547,7 @@ ant beta:sessions:events stream \
 
         - `url: string`
 
-      - `model: object { id, speed }`
+      - `model: object { id, effort, speed }`
 
         Model identifier and configuration.
 
@@ -58112,6 +59605,50 @@ ant beta:sessions:events stream \
 
             High-performance model for agents and coding
 
+        - `effort: optional BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or BetaManagedAgentsEffortHigh or 2 more`
+
+          How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+          - `beta_managed_agents_effort_low: object { type }`
+
+            Low effort. Favors latency over reasoning depth.
+
+            - `type: "low"`
+
+              - `"low"`
+
+          - `beta_managed_agents_effort_medium: object { type }`
+
+            Medium effort. Balances latency and reasoning depth.
+
+            - `type: "medium"`
+
+              - `"medium"`
+
+          - `beta_managed_agents_effort_high: object { type }`
+
+            High effort. Favors reasoning depth.
+
+            - `type: "high"`
+
+              - `"high"`
+
+          - `beta_managed_agents_effort_xhigh: object { type }`
+
+            Extra-high effort. Not all models accept this level.
+
+            - `type: "xhigh"`
+
+              - `"xhigh"`
+
+          - `beta_managed_agents_effort_max: object { type }`
+
+            Maximum effort. Favors reasoning depth over latency.
+
+            - `type: "max"`
+
+              - `"max"`
+
         - `speed: optional "standard" or "fast"`
 
           Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
@@ -58140,7 +59677,7 @@ ant beta:sessions:events stream \
 
             - `url: string`
 
-          - `model: object { id, speed }`
+          - `model: object { id, effort, speed }`
 
             Model identifier and configuration.
 
@@ -58149,6 +59686,10 @@ ant beta:sessions:events stream \
               The model that will power your agent.
 
               See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `effort: optional BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or BetaManagedAgentsEffortHigh or 2 more`
+
+              How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
 
             - `speed: optional "standard" or "fast"`
 
@@ -60628,7 +62169,7 @@ List Session Threads
 
         - `url: string`
 
-      - `model: object { id, speed }`
+      - `model: object { id, effort, speed }`
 
         Model identifier and configuration.
 
@@ -60685,6 +62226,50 @@ List Session Threads
           - `"claude-sonnet-4-5-20250929"`
 
             High-performance model for agents and coding
+
+        - `effort: optional BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or BetaManagedAgentsEffortHigh or 2 more`
+
+          How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+          - `beta_managed_agents_effort_low: object { type }`
+
+            Low effort. Favors latency over reasoning depth.
+
+            - `type: "low"`
+
+              - `"low"`
+
+          - `beta_managed_agents_effort_medium: object { type }`
+
+            Medium effort. Balances latency and reasoning depth.
+
+            - `type: "medium"`
+
+              - `"medium"`
+
+          - `beta_managed_agents_effort_high: object { type }`
+
+            High effort. Favors reasoning depth.
+
+            - `type: "high"`
+
+              - `"high"`
+
+          - `beta_managed_agents_effort_xhigh: object { type }`
+
+            Extra-high effort. Not all models accept this level.
+
+            - `type: "xhigh"`
+
+              - `"xhigh"`
+
+          - `beta_managed_agents_effort_max: object { type }`
+
+            Maximum effort. Favors reasoning depth over latency.
+
+            - `type: "max"`
+
+              - `"max"`
 
         - `speed: optional "standard" or "fast"`
 
@@ -60977,6 +62562,9 @@ ant beta:sessions:threads list \
         ],
         "model": {
           "id": "claude-sonnet-4-6",
+          "effort": {
+            "type": "low"
+          },
           "speed": "standard"
         },
         "name": "Researcher",
@@ -61088,7 +62676,7 @@ Get Session Thread
 
       - `url: string`
 
-    - `model: object { id, speed }`
+    - `model: object { id, effort, speed }`
 
       Model identifier and configuration.
 
@@ -61145,6 +62733,50 @@ Get Session Thread
         - `"claude-sonnet-4-5-20250929"`
 
           High-performance model for agents and coding
+
+      - `effort: optional BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or BetaManagedAgentsEffortHigh or 2 more`
+
+        How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+        - `beta_managed_agents_effort_low: object { type }`
+
+          Low effort. Favors latency over reasoning depth.
+
+          - `type: "low"`
+
+            - `"low"`
+
+        - `beta_managed_agents_effort_medium: object { type }`
+
+          Medium effort. Balances latency and reasoning depth.
+
+          - `type: "medium"`
+
+            - `"medium"`
+
+        - `beta_managed_agents_effort_high: object { type }`
+
+          High effort. Favors reasoning depth.
+
+          - `type: "high"`
+
+            - `"high"`
+
+        - `beta_managed_agents_effort_xhigh: object { type }`
+
+          Extra-high effort. Not all models accept this level.
+
+          - `type: "xhigh"`
+
+            - `"xhigh"`
+
+        - `beta_managed_agents_effort_max: object { type }`
+
+          Maximum effort. Favors reasoning depth over latency.
+
+          - `type: "max"`
+
+            - `"max"`
 
       - `speed: optional "standard" or "fast"`
 
@@ -61432,6 +63064,9 @@ ant beta:sessions:threads retrieve \
     ],
     "model": {
       "id": "claude-sonnet-4-6",
+      "effort": {
+        "type": "low"
+      },
       "speed": "standard"
     },
     "name": "Researcher",
@@ -61540,7 +63175,7 @@ Archive Session Thread
 
       - `url: string`
 
-    - `model: object { id, speed }`
+    - `model: object { id, effort, speed }`
 
       Model identifier and configuration.
 
@@ -61597,6 +63232,50 @@ Archive Session Thread
         - `"claude-sonnet-4-5-20250929"`
 
           High-performance model for agents and coding
+
+      - `effort: optional BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or BetaManagedAgentsEffortHigh or 2 more`
+
+        How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+        - `beta_managed_agents_effort_low: object { type }`
+
+          Low effort. Favors latency over reasoning depth.
+
+          - `type: "low"`
+
+            - `"low"`
+
+        - `beta_managed_agents_effort_medium: object { type }`
+
+          Medium effort. Balances latency and reasoning depth.
+
+          - `type: "medium"`
+
+            - `"medium"`
+
+        - `beta_managed_agents_effort_high: object { type }`
+
+          High effort. Favors reasoning depth.
+
+          - `type: "high"`
+
+            - `"high"`
+
+        - `beta_managed_agents_effort_xhigh: object { type }`
+
+          Extra-high effort. Not all models accept this level.
+
+          - `type: "xhigh"`
+
+            - `"xhigh"`
+
+        - `beta_managed_agents_effort_max: object { type }`
+
+          Maximum effort. Favors reasoning depth over latency.
+
+          - `type: "max"`
+
+            - `"max"`
 
       - `speed: optional "standard" or "fast"`
 
@@ -61884,6 +63563,9 @@ ant beta:sessions:threads archive \
     ],
     "model": {
       "id": "claude-sonnet-4-6",
+      "effort": {
+        "type": "low"
+      },
       "speed": "standard"
     },
     "name": "Researcher",
@@ -61972,7 +63654,7 @@ ant beta:sessions:threads archive \
 
       - `url: string`
 
-    - `model: object { id, speed }`
+    - `model: object { id, effort, speed }`
 
       Model identifier and configuration.
 
@@ -62029,6 +63711,50 @@ ant beta:sessions:threads archive \
         - `"claude-sonnet-4-5-20250929"`
 
           High-performance model for agents and coding
+
+      - `effort: optional BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or BetaManagedAgentsEffortHigh or 2 more`
+
+        How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+        - `beta_managed_agents_effort_low: object { type }`
+
+          Low effort. Favors latency over reasoning depth.
+
+          - `type: "low"`
+
+            - `"low"`
+
+        - `beta_managed_agents_effort_medium: object { type }`
+
+          Medium effort. Balances latency and reasoning depth.
+
+          - `type: "medium"`
+
+            - `"medium"`
+
+        - `beta_managed_agents_effort_high: object { type }`
+
+          High effort. Favors reasoning depth.
+
+          - `type: "high"`
+
+            - `"high"`
+
+        - `beta_managed_agents_effort_xhigh: object { type }`
+
+          Extra-high effort. Not all models accept this level.
+
+          - `type: "xhigh"`
+
+            - `"xhigh"`
+
+        - `beta_managed_agents_effort_max: object { type }`
+
+          Maximum effort. Favors reasoning depth over latency.
+
+          - `type: "max"`
+
+            - `"max"`
 
       - `speed: optional "standard" or "fast"`
 
@@ -63332,7 +65058,7 @@ ant beta:sessions:threads archive \
 
       - `beta_managed_agents_session_retries_exhausted: object { type }`
 
-        The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+        The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
         - `type: "retries_exhausted"`
 
@@ -63688,7 +65414,7 @@ ant beta:sessions:threads archive \
 
       - `beta_managed_agents_session_retries_exhausted: object { type }`
 
-        The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+        The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
     - `type: "session.thread_status_idle"`
 
@@ -63824,7 +65550,7 @@ ant beta:sessions:threads archive \
 
         - `url: string`
 
-      - `model: object { id, speed }`
+      - `model: object { id, effort, speed }`
 
         Model identifier and configuration.
 
@@ -63882,6 +65608,50 @@ ant beta:sessions:threads archive \
 
             High-performance model for agents and coding
 
+        - `effort: optional BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or BetaManagedAgentsEffortHigh or 2 more`
+
+          How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+          - `beta_managed_agents_effort_low: object { type }`
+
+            Low effort. Favors latency over reasoning depth.
+
+            - `type: "low"`
+
+              - `"low"`
+
+          - `beta_managed_agents_effort_medium: object { type }`
+
+            Medium effort. Balances latency and reasoning depth.
+
+            - `type: "medium"`
+
+              - `"medium"`
+
+          - `beta_managed_agents_effort_high: object { type }`
+
+            High effort. Favors reasoning depth.
+
+            - `type: "high"`
+
+              - `"high"`
+
+          - `beta_managed_agents_effort_xhigh: object { type }`
+
+            Extra-high effort. Not all models accept this level.
+
+            - `type: "xhigh"`
+
+              - `"xhigh"`
+
+          - `beta_managed_agents_effort_max: object { type }`
+
+            Maximum effort. Favors reasoning depth over latency.
+
+            - `type: "max"`
+
+              - `"max"`
+
         - `speed: optional "standard" or "fast"`
 
           Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
@@ -63910,7 +65680,7 @@ ant beta:sessions:threads archive \
 
             - `url: string`
 
-          - `model: object { id, speed }`
+          - `model: object { id, effort, speed }`
 
             Model identifier and configuration.
 
@@ -63919,6 +65689,10 @@ ant beta:sessions:threads archive \
               The model that will power your agent.
 
               See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `effort: optional BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or BetaManagedAgentsEffortHigh or 2 more`
+
+              How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
 
             - `speed: optional "standard" or "fast"`
 
@@ -65248,7 +67022,7 @@ List Session Thread Events
 
         - `beta_managed_agents_session_retries_exhausted: object { type }`
 
-          The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+          The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
           - `type: "retries_exhausted"`
 
@@ -65604,7 +67378,7 @@ List Session Thread Events
 
         - `beta_managed_agents_session_retries_exhausted: object { type }`
 
-          The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+          The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
       - `type: "session.thread_status_idle"`
 
@@ -65740,7 +67514,7 @@ List Session Thread Events
 
           - `url: string`
 
-        - `model: object { id, speed }`
+        - `model: object { id, effort, speed }`
 
           Model identifier and configuration.
 
@@ -65798,6 +67572,50 @@ List Session Thread Events
 
               High-performance model for agents and coding
 
+          - `effort: optional BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or BetaManagedAgentsEffortHigh or 2 more`
+
+            How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+            - `beta_managed_agents_effort_low: object { type }`
+
+              Low effort. Favors latency over reasoning depth.
+
+              - `type: "low"`
+
+                - `"low"`
+
+            - `beta_managed_agents_effort_medium: object { type }`
+
+              Medium effort. Balances latency and reasoning depth.
+
+              - `type: "medium"`
+
+                - `"medium"`
+
+            - `beta_managed_agents_effort_high: object { type }`
+
+              High effort. Favors reasoning depth.
+
+              - `type: "high"`
+
+                - `"high"`
+
+            - `beta_managed_agents_effort_xhigh: object { type }`
+
+              Extra-high effort. Not all models accept this level.
+
+              - `type: "xhigh"`
+
+                - `"xhigh"`
+
+            - `beta_managed_agents_effort_max: object { type }`
+
+              Maximum effort. Favors reasoning depth over latency.
+
+              - `type: "max"`
+
+                - `"max"`
+
           - `speed: optional "standard" or "fast"`
 
             Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
@@ -65826,7 +67644,7 @@ List Session Thread Events
 
               - `url: string`
 
-            - `model: object { id, speed }`
+            - `model: object { id, effort, speed }`
 
               Model identifier and configuration.
 
@@ -65835,6 +67653,10 @@ List Session Thread Events
                 The model that will power your agent.
 
                 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+              - `effort: optional BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or BetaManagedAgentsEffortHigh or 2 more`
+
+                How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
 
               - `speed: optional "standard" or "fast"`
 
@@ -66133,6 +67955,10 @@ Stream Session Thread Events
 - `--thread-id: string`
 
   Path param: Path parameter thread_id
+
+- `--event-delta: optional array of BetaManagedAgentsDeltaType`
+
+  Query param: When set, this connection also receives streaming deltas (`event_start`, `event_delta`) while an event is being produced, before the event itself arrives. Deltas are best-effort; when the final event is produced it carries the complete content. A model request that ends early (an error or interrupt) produces no final event — its terminal `span.model_request_end` closes the preview. Accepts one or more event types to preview and may be repeated: `agent.message` streams `content_delta` fragments; `agent.thinking` is start-only — a signal that the agent has begun extended thinking, concluded by the `agent.thinking` event itself. Only previews of the requested event types are sent.
 
 - `--beta: optional array of AnthropicBeta`
 
@@ -67118,7 +68944,7 @@ Stream Session Thread Events
 
       - `beta_managed_agents_session_retries_exhausted: object { type }`
 
-        The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+        The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
         - `type: "retries_exhausted"`
 
@@ -67474,7 +69300,7 @@ Stream Session Thread Events
 
       - `beta_managed_agents_session_retries_exhausted: object { type }`
 
-        The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+        The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
     - `type: "session.thread_status_idle"`
 
@@ -67610,7 +69436,7 @@ Stream Session Thread Events
 
         - `url: string`
 
-      - `model: object { id, speed }`
+      - `model: object { id, effort, speed }`
 
         Model identifier and configuration.
 
@@ -67668,6 +69494,50 @@ Stream Session Thread Events
 
             High-performance model for agents and coding
 
+        - `effort: optional BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or BetaManagedAgentsEffortHigh or 2 more`
+
+          How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+          - `beta_managed_agents_effort_low: object { type }`
+
+            Low effort. Favors latency over reasoning depth.
+
+            - `type: "low"`
+
+              - `"low"`
+
+          - `beta_managed_agents_effort_medium: object { type }`
+
+            Medium effort. Balances latency and reasoning depth.
+
+            - `type: "medium"`
+
+              - `"medium"`
+
+          - `beta_managed_agents_effort_high: object { type }`
+
+            High effort. Favors reasoning depth.
+
+            - `type: "high"`
+
+              - `"high"`
+
+          - `beta_managed_agents_effort_xhigh: object { type }`
+
+            Extra-high effort. Not all models accept this level.
+
+            - `type: "xhigh"`
+
+              - `"xhigh"`
+
+          - `beta_managed_agents_effort_max: object { type }`
+
+            Maximum effort. Favors reasoning depth over latency.
+
+            - `type: "max"`
+
+              - `"max"`
+
         - `speed: optional "standard" or "fast"`
 
           Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
@@ -67696,7 +69566,7 @@ Stream Session Thread Events
 
             - `url: string`
 
-          - `model: object { id, speed }`
+          - `model: object { id, effort, speed }`
 
             Model identifier and configuration.
 
@@ -67705,6 +69575,10 @@ Stream Session Thread Events
               The model that will power your agent.
 
               See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `effort: optional BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or BetaManagedAgentsEffortHigh or 2 more`
+
+              How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
 
             - `speed: optional "standard" or "fast"`
 
@@ -83008,9 +84882,2060 @@ ant beta:user-profiles create-enrollment-url \
 
     - `"rejected"`
 
+# Dreams
+
+## Create a Dream
+
+`$ ant beta:dreams create`
+
+**post** `/v1/dreams`
+
+Create a Dream
+
+### Parameters
+
+- `--input: array of BetaDreamInput`
+
+  Body param
+
+- `--model: string or BetaDreamModelConfigParam`
+
+  Body param: Model identifier and configuration applied to every pipeline stage.
+
+- `--instructions: optional string`
+
+  Body param
+
+- `--beta: optional array of AnthropicBeta`
+
+  Header param: Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `beta_dream: object { id, archived_at, created_at, 10 more }`
+
+  An asynchronous memory-consolidation job that reads a memory store plus a set of session transcripts and writes consolidated memories into a new output memory store. The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to generally-available endpoints.
+
+  - `id: string`
+
+  - `archived_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `created_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `ended_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `error: object { message, type }`
+
+    Failure detail for a Dream whose `status` is `failed`.
+
+    - `message: string`
+
+    - `type: string`
+
+  - `inputs: array of BetaDreamInput`
+
+    - `beta_dream_memory_store_input: object { memory_store_id, type }`
+
+      An input memory store the dream reads from. The dream never mutates this store.
+
+      - `memory_store_id: string`
+
+      - `type: "memory_store"`
+
+        - `"memory_store"`
+
+    - `beta_dream_sessions_input: object { session_ids, type }`
+
+      Input session transcripts the dream reads.
+
+      - `session_ids: array of string`
+
+      - `type: "sessions"`
+
+        - `"sessions"`
+
+  - `instructions: string`
+
+  - `model: object { id, speed }`
+
+    Model identifier and configuration applied to every pipeline stage. Same wire shape as the Agents API ModelConfig.
+
+    - `id: string`
+
+      Model identifier, e.g. "claude-opus-4-7". 1-256 characters.
+
+    - `speed: optional "standard" or "fast"`
+
+      Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+      - `"standard"`
+
+      - `"fast"`
+
+  - `outputs: array of BetaDreamOutput`
+
+    - `memory_store_id: string`
+
+    - `type: "memory_store"`
+
+      - `"memory_store"`
+
+  - `session_id: string`
+
+  - `status: "pending" or "running" or "completed" or 2 more`
+
+    Lifecycle status of a Dream.
+
+    - `"pending"`
+
+    - `"running"`
+
+    - `"completed"`
+
+    - `"failed"`
+
+    - `"canceled"`
+
+  - `type: "dream"`
+
+    - `"dream"`
+
+  - `usage: object { cache_creation_input_tokens, cache_read_input_tokens, input_tokens, output_tokens }`
+
+    Cumulative token usage for the dream across every pipeline stage.
+
+    - `cache_creation_input_tokens: number`
+
+      Total tokens used to create prompt-cache entries (sum of all TTL tiers).
+
+    - `cache_read_input_tokens: number`
+
+      Total tokens read from prompt cache.
+
+    - `input_tokens: number`
+
+      Total uncached input tokens consumed across every pipeline stage.
+
+    - `output_tokens: number`
+
+      Total output tokens generated across every pipeline stage.
+
+### Example
+
+```cli
+ant beta:dreams create \
+  --api-key my-anthropic-api-key \
+  --input '{memory_store_id: x, type: memory_store}' \
+  --model string
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "archived_at": "2019-12-27T18:11:19.117Z",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "ended_at": "2019-12-27T18:11:19.117Z",
+  "error": {
+    "message": "message",
+    "type": "type"
+  },
+  "inputs": [
+    {
+      "memory_store_id": "x",
+      "type": "memory_store"
+    }
+  ],
+  "instructions": "instructions",
+  "model": {
+    "id": "x",
+    "speed": "standard"
+  },
+  "outputs": [
+    {
+      "memory_store_id": "memory_store_id",
+      "type": "memory_store"
+    }
+  ],
+  "session_id": "session_id",
+  "status": "pending",
+  "type": "dream",
+  "usage": {
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 0,
+    "input_tokens": 0,
+    "output_tokens": 0
+  }
+}
+```
+
+## List Dreams
+
+`$ ant beta:dreams list`
+
+**get** `/v1/dreams`
+
+List Dreams
+
+### Parameters
+
+- `--created-at-gt: optional string`
+
+  Query param: Return dreams with `created_at` strictly after this timestamp (exclusive lower bound, RFC 3339). Unset applies no lower bound.
+
+- `--created-at-lt: optional string`
+
+  Query param: Return dreams with `created_at` strictly before this timestamp (exclusive upper bound, RFC 3339). Unset applies no upper bound.
+
+- `--include-archived: optional boolean`
+
+  Query param: Query parameter for include_archived
+
+- `--limit: optional number`
+
+  Query param: Query parameter for limit
+
+- `--page: optional string`
+
+  Query param: Query parameter for page
+
+- `--status: optional array of BetaDreamStatus`
+
+  Query param: Filter by lifecycle status. Repeat the parameter to match any of multiple statuses. Empty applies no status filter.
+
+- `--beta: optional array of AnthropicBeta`
+
+  Header param: Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `BetaListDreamsResponse: object { data, next_page }`
+
+  - `data: array of BetaDream`
+
+    - `id: string`
+
+    - `archived_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `created_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `ended_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `error: object { message, type }`
+
+      Failure detail for a Dream whose `status` is `failed`.
+
+      - `message: string`
+
+      - `type: string`
+
+    - `inputs: array of BetaDreamInput`
+
+      - `beta_dream_memory_store_input: object { memory_store_id, type }`
+
+        An input memory store the dream reads from. The dream never mutates this store.
+
+        - `memory_store_id: string`
+
+        - `type: "memory_store"`
+
+          - `"memory_store"`
+
+      - `beta_dream_sessions_input: object { session_ids, type }`
+
+        Input session transcripts the dream reads.
+
+        - `session_ids: array of string`
+
+        - `type: "sessions"`
+
+          - `"sessions"`
+
+    - `instructions: string`
+
+    - `model: object { id, speed }`
+
+      Model identifier and configuration applied to every pipeline stage. Same wire shape as the Agents API ModelConfig.
+
+      - `id: string`
+
+        Model identifier, e.g. "claude-opus-4-7". 1-256 characters.
+
+      - `speed: optional "standard" or "fast"`
+
+        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+        - `"standard"`
+
+        - `"fast"`
+
+    - `outputs: array of BetaDreamOutput`
+
+      - `memory_store_id: string`
+
+      - `type: "memory_store"`
+
+        - `"memory_store"`
+
+    - `session_id: string`
+
+    - `status: "pending" or "running" or "completed" or 2 more`
+
+      Lifecycle status of a Dream.
+
+      - `"pending"`
+
+      - `"running"`
+
+      - `"completed"`
+
+      - `"failed"`
+
+      - `"canceled"`
+
+    - `type: "dream"`
+
+      - `"dream"`
+
+    - `usage: object { cache_creation_input_tokens, cache_read_input_tokens, input_tokens, output_tokens }`
+
+      Cumulative token usage for the dream across every pipeline stage.
+
+      - `cache_creation_input_tokens: number`
+
+        Total tokens used to create prompt-cache entries (sum of all TTL tiers).
+
+      - `cache_read_input_tokens: number`
+
+        Total tokens read from prompt cache.
+
+      - `input_tokens: number`
+
+        Total uncached input tokens consumed across every pipeline stage.
+
+      - `output_tokens: number`
+
+        Total output tokens generated across every pipeline stage.
+
+  - `next_page: string`
+
+### Example
+
+```cli
+ant beta:dreams list \
+  --api-key my-anthropic-api-key
+```
+
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "id": "id",
+      "archived_at": "2019-12-27T18:11:19.117Z",
+      "created_at": "2019-12-27T18:11:19.117Z",
+      "ended_at": "2019-12-27T18:11:19.117Z",
+      "error": {
+        "message": "message",
+        "type": "type"
+      },
+      "inputs": [
+        {
+          "memory_store_id": "x",
+          "type": "memory_store"
+        }
+      ],
+      "instructions": "instructions",
+      "model": {
+        "id": "x",
+        "speed": "standard"
+      },
+      "outputs": [
+        {
+          "memory_store_id": "memory_store_id",
+          "type": "memory_store"
+        }
+      ],
+      "session_id": "session_id",
+      "status": "pending",
+      "type": "dream",
+      "usage": {
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "input_tokens": 0,
+        "output_tokens": 0
+      }
+    }
+  ],
+  "next_page": "next_page"
+}
+```
+
+## Get a Dream
+
+`$ ant beta:dreams retrieve`
+
+**get** `/v1/dreams/{dream_id}`
+
+Get a Dream
+
+### Parameters
+
+- `--dream-id: string`
+
+  Path parameter dream_id
+
+- `--beta: optional array of AnthropicBeta`
+
+  Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `beta_dream: object { id, archived_at, created_at, 10 more }`
+
+  An asynchronous memory-consolidation job that reads a memory store plus a set of session transcripts and writes consolidated memories into a new output memory store. The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to generally-available endpoints.
+
+  - `id: string`
+
+  - `archived_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `created_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `ended_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `error: object { message, type }`
+
+    Failure detail for a Dream whose `status` is `failed`.
+
+    - `message: string`
+
+    - `type: string`
+
+  - `inputs: array of BetaDreamInput`
+
+    - `beta_dream_memory_store_input: object { memory_store_id, type }`
+
+      An input memory store the dream reads from. The dream never mutates this store.
+
+      - `memory_store_id: string`
+
+      - `type: "memory_store"`
+
+        - `"memory_store"`
+
+    - `beta_dream_sessions_input: object { session_ids, type }`
+
+      Input session transcripts the dream reads.
+
+      - `session_ids: array of string`
+
+      - `type: "sessions"`
+
+        - `"sessions"`
+
+  - `instructions: string`
+
+  - `model: object { id, speed }`
+
+    Model identifier and configuration applied to every pipeline stage. Same wire shape as the Agents API ModelConfig.
+
+    - `id: string`
+
+      Model identifier, e.g. "claude-opus-4-7". 1-256 characters.
+
+    - `speed: optional "standard" or "fast"`
+
+      Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+      - `"standard"`
+
+      - `"fast"`
+
+  - `outputs: array of BetaDreamOutput`
+
+    - `memory_store_id: string`
+
+    - `type: "memory_store"`
+
+      - `"memory_store"`
+
+  - `session_id: string`
+
+  - `status: "pending" or "running" or "completed" or 2 more`
+
+    Lifecycle status of a Dream.
+
+    - `"pending"`
+
+    - `"running"`
+
+    - `"completed"`
+
+    - `"failed"`
+
+    - `"canceled"`
+
+  - `type: "dream"`
+
+    - `"dream"`
+
+  - `usage: object { cache_creation_input_tokens, cache_read_input_tokens, input_tokens, output_tokens }`
+
+    Cumulative token usage for the dream across every pipeline stage.
+
+    - `cache_creation_input_tokens: number`
+
+      Total tokens used to create prompt-cache entries (sum of all TTL tiers).
+
+    - `cache_read_input_tokens: number`
+
+      Total tokens read from prompt cache.
+
+    - `input_tokens: number`
+
+      Total uncached input tokens consumed across every pipeline stage.
+
+    - `output_tokens: number`
+
+      Total output tokens generated across every pipeline stage.
+
+### Example
+
+```cli
+ant beta:dreams retrieve \
+  --api-key my-anthropic-api-key \
+  --dream-id dream_id
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "archived_at": "2019-12-27T18:11:19.117Z",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "ended_at": "2019-12-27T18:11:19.117Z",
+  "error": {
+    "message": "message",
+    "type": "type"
+  },
+  "inputs": [
+    {
+      "memory_store_id": "x",
+      "type": "memory_store"
+    }
+  ],
+  "instructions": "instructions",
+  "model": {
+    "id": "x",
+    "speed": "standard"
+  },
+  "outputs": [
+    {
+      "memory_store_id": "memory_store_id",
+      "type": "memory_store"
+    }
+  ],
+  "session_id": "session_id",
+  "status": "pending",
+  "type": "dream",
+  "usage": {
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 0,
+    "input_tokens": 0,
+    "output_tokens": 0
+  }
+}
+```
+
+## Cancel a Dream
+
+`$ ant beta:dreams cancel`
+
+**post** `/v1/dreams/{dream_id}/cancel`
+
+Cancel a Dream
+
+### Parameters
+
+- `--dream-id: string`
+
+  Path parameter dream_id
+
+- `--beta: optional array of AnthropicBeta`
+
+  Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `beta_dream: object { id, archived_at, created_at, 10 more }`
+
+  An asynchronous memory-consolidation job that reads a memory store plus a set of session transcripts and writes consolidated memories into a new output memory store. The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to generally-available endpoints.
+
+  - `id: string`
+
+  - `archived_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `created_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `ended_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `error: object { message, type }`
+
+    Failure detail for a Dream whose `status` is `failed`.
+
+    - `message: string`
+
+    - `type: string`
+
+  - `inputs: array of BetaDreamInput`
+
+    - `beta_dream_memory_store_input: object { memory_store_id, type }`
+
+      An input memory store the dream reads from. The dream never mutates this store.
+
+      - `memory_store_id: string`
+
+      - `type: "memory_store"`
+
+        - `"memory_store"`
+
+    - `beta_dream_sessions_input: object { session_ids, type }`
+
+      Input session transcripts the dream reads.
+
+      - `session_ids: array of string`
+
+      - `type: "sessions"`
+
+        - `"sessions"`
+
+  - `instructions: string`
+
+  - `model: object { id, speed }`
+
+    Model identifier and configuration applied to every pipeline stage. Same wire shape as the Agents API ModelConfig.
+
+    - `id: string`
+
+      Model identifier, e.g. "claude-opus-4-7". 1-256 characters.
+
+    - `speed: optional "standard" or "fast"`
+
+      Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+      - `"standard"`
+
+      - `"fast"`
+
+  - `outputs: array of BetaDreamOutput`
+
+    - `memory_store_id: string`
+
+    - `type: "memory_store"`
+
+      - `"memory_store"`
+
+  - `session_id: string`
+
+  - `status: "pending" or "running" or "completed" or 2 more`
+
+    Lifecycle status of a Dream.
+
+    - `"pending"`
+
+    - `"running"`
+
+    - `"completed"`
+
+    - `"failed"`
+
+    - `"canceled"`
+
+  - `type: "dream"`
+
+    - `"dream"`
+
+  - `usage: object { cache_creation_input_tokens, cache_read_input_tokens, input_tokens, output_tokens }`
+
+    Cumulative token usage for the dream across every pipeline stage.
+
+    - `cache_creation_input_tokens: number`
+
+      Total tokens used to create prompt-cache entries (sum of all TTL tiers).
+
+    - `cache_read_input_tokens: number`
+
+      Total tokens read from prompt cache.
+
+    - `input_tokens: number`
+
+      Total uncached input tokens consumed across every pipeline stage.
+
+    - `output_tokens: number`
+
+      Total output tokens generated across every pipeline stage.
+
+### Example
+
+```cli
+ant beta:dreams cancel \
+  --api-key my-anthropic-api-key \
+  --dream-id dream_id
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "archived_at": "2019-12-27T18:11:19.117Z",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "ended_at": "2019-12-27T18:11:19.117Z",
+  "error": {
+    "message": "message",
+    "type": "type"
+  },
+  "inputs": [
+    {
+      "memory_store_id": "x",
+      "type": "memory_store"
+    }
+  ],
+  "instructions": "instructions",
+  "model": {
+    "id": "x",
+    "speed": "standard"
+  },
+  "outputs": [
+    {
+      "memory_store_id": "memory_store_id",
+      "type": "memory_store"
+    }
+  ],
+  "session_id": "session_id",
+  "status": "pending",
+  "type": "dream",
+  "usage": {
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 0,
+    "input_tokens": 0,
+    "output_tokens": 0
+  }
+}
+```
+
+## Archive a Dream
+
+`$ ant beta:dreams archive`
+
+**post** `/v1/dreams/{dream_id}/archive`
+
+Archive a Dream
+
+### Parameters
+
+- `--dream-id: string`
+
+  Path parameter dream_id
+
+- `--beta: optional array of AnthropicBeta`
+
+  Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `beta_dream: object { id, archived_at, created_at, 10 more }`
+
+  An asynchronous memory-consolidation job that reads a memory store plus a set of session transcripts and writes consolidated memories into a new output memory store. The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to generally-available endpoints.
+
+  - `id: string`
+
+  - `archived_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `created_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `ended_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `error: object { message, type }`
+
+    Failure detail for a Dream whose `status` is `failed`.
+
+    - `message: string`
+
+    - `type: string`
+
+  - `inputs: array of BetaDreamInput`
+
+    - `beta_dream_memory_store_input: object { memory_store_id, type }`
+
+      An input memory store the dream reads from. The dream never mutates this store.
+
+      - `memory_store_id: string`
+
+      - `type: "memory_store"`
+
+        - `"memory_store"`
+
+    - `beta_dream_sessions_input: object { session_ids, type }`
+
+      Input session transcripts the dream reads.
+
+      - `session_ids: array of string`
+
+      - `type: "sessions"`
+
+        - `"sessions"`
+
+  - `instructions: string`
+
+  - `model: object { id, speed }`
+
+    Model identifier and configuration applied to every pipeline stage. Same wire shape as the Agents API ModelConfig.
+
+    - `id: string`
+
+      Model identifier, e.g. "claude-opus-4-7". 1-256 characters.
+
+    - `speed: optional "standard" or "fast"`
+
+      Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+      - `"standard"`
+
+      - `"fast"`
+
+  - `outputs: array of BetaDreamOutput`
+
+    - `memory_store_id: string`
+
+    - `type: "memory_store"`
+
+      - `"memory_store"`
+
+  - `session_id: string`
+
+  - `status: "pending" or "running" or "completed" or 2 more`
+
+    Lifecycle status of a Dream.
+
+    - `"pending"`
+
+    - `"running"`
+
+    - `"completed"`
+
+    - `"failed"`
+
+    - `"canceled"`
+
+  - `type: "dream"`
+
+    - `"dream"`
+
+  - `usage: object { cache_creation_input_tokens, cache_read_input_tokens, input_tokens, output_tokens }`
+
+    Cumulative token usage for the dream across every pipeline stage.
+
+    - `cache_creation_input_tokens: number`
+
+      Total tokens used to create prompt-cache entries (sum of all TTL tiers).
+
+    - `cache_read_input_tokens: number`
+
+      Total tokens read from prompt cache.
+
+    - `input_tokens: number`
+
+      Total uncached input tokens consumed across every pipeline stage.
+
+    - `output_tokens: number`
+
+      Total output tokens generated across every pipeline stage.
+
+### Example
+
+```cli
+ant beta:dreams archive \
+  --api-key my-anthropic-api-key \
+  --dream-id dream_id
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "archived_at": "2019-12-27T18:11:19.117Z",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "ended_at": "2019-12-27T18:11:19.117Z",
+  "error": {
+    "message": "message",
+    "type": "type"
+  },
+  "inputs": [
+    {
+      "memory_store_id": "x",
+      "type": "memory_store"
+    }
+  ],
+  "instructions": "instructions",
+  "model": {
+    "id": "x",
+    "speed": "standard"
+  },
+  "outputs": [
+    {
+      "memory_store_id": "memory_store_id",
+      "type": "memory_store"
+    }
+  ],
+  "session_id": "session_id",
+  "status": "pending",
+  "type": "dream",
+  "usage": {
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 0,
+    "input_tokens": 0,
+    "output_tokens": 0
+  }
+}
+```
+
+## Domain Types
+
+### Beta Dream
+
+- `beta_dream: object { id, archived_at, created_at, 10 more }`
+
+  An asynchronous memory-consolidation job that reads a memory store plus a set of session transcripts and writes consolidated memories into a new output memory store. The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to generally-available endpoints.
+
+  - `id: string`
+
+  - `archived_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `created_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `ended_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `error: object { message, type }`
+
+    Failure detail for a Dream whose `status` is `failed`.
+
+    - `message: string`
+
+    - `type: string`
+
+  - `inputs: array of BetaDreamInput`
+
+    - `beta_dream_memory_store_input: object { memory_store_id, type }`
+
+      An input memory store the dream reads from. The dream never mutates this store.
+
+      - `memory_store_id: string`
+
+      - `type: "memory_store"`
+
+        - `"memory_store"`
+
+    - `beta_dream_sessions_input: object { session_ids, type }`
+
+      Input session transcripts the dream reads.
+
+      - `session_ids: array of string`
+
+      - `type: "sessions"`
+
+        - `"sessions"`
+
+  - `instructions: string`
+
+  - `model: object { id, speed }`
+
+    Model identifier and configuration applied to every pipeline stage. Same wire shape as the Agents API ModelConfig.
+
+    - `id: string`
+
+      Model identifier, e.g. "claude-opus-4-7". 1-256 characters.
+
+    - `speed: optional "standard" or "fast"`
+
+      Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+      - `"standard"`
+
+      - `"fast"`
+
+  - `outputs: array of BetaDreamOutput`
+
+    - `memory_store_id: string`
+
+    - `type: "memory_store"`
+
+      - `"memory_store"`
+
+  - `session_id: string`
+
+  - `status: "pending" or "running" or "completed" or 2 more`
+
+    Lifecycle status of a Dream.
+
+    - `"pending"`
+
+    - `"running"`
+
+    - `"completed"`
+
+    - `"failed"`
+
+    - `"canceled"`
+
+  - `type: "dream"`
+
+    - `"dream"`
+
+  - `usage: object { cache_creation_input_tokens, cache_read_input_tokens, input_tokens, output_tokens }`
+
+    Cumulative token usage for the dream across every pipeline stage.
+
+    - `cache_creation_input_tokens: number`
+
+      Total tokens used to create prompt-cache entries (sum of all TTL tiers).
+
+    - `cache_read_input_tokens: number`
+
+      Total tokens read from prompt cache.
+
+    - `input_tokens: number`
+
+      Total uncached input tokens consumed across every pipeline stage.
+
+    - `output_tokens: number`
+
+      Total output tokens generated across every pipeline stage.
+
+### Beta Dream Error
+
+- `beta_dream_error: object { message, type }`
+
+  Failure detail for a Dream whose `status` is `failed`.
+
+  - `message: string`
+
+  - `type: string`
+
+### Beta Dream Input
+
+- `beta_dream_input: BetaDreamMemoryStoreInput or BetaDreamSessionsInput`
+
+  An input memory store the dream reads from. The dream never mutates this store.
+
+  - `beta_dream_memory_store_input: object { memory_store_id, type }`
+
+    An input memory store the dream reads from. The dream never mutates this store.
+
+    - `memory_store_id: string`
+
+    - `type: "memory_store"`
+
+      - `"memory_store"`
+
+  - `beta_dream_sessions_input: object { session_ids, type }`
+
+    Input session transcripts the dream reads.
+
+    - `session_ids: array of string`
+
+    - `type: "sessions"`
+
+      - `"sessions"`
+
+### Beta Dream Memory Store Input
+
+- `beta_dream_memory_store_input: object { memory_store_id, type }`
+
+  An input memory store the dream reads from. The dream never mutates this store.
+
+  - `memory_store_id: string`
+
+  - `type: "memory_store"`
+
+    - `"memory_store"`
+
+### Beta Dream Memory Store Output
+
+- `beta_dream_memory_store_output: object { memory_store_id, type }`
+
+  An output memory store the dream writes consolidated memories into.
+
+  - `memory_store_id: string`
+
+  - `type: "memory_store"`
+
+    - `"memory_store"`
+
+### Beta Dream Model Config
+
+- `beta_dream_model_config: object { id, speed }`
+
+  Model identifier and configuration applied to every pipeline stage. Same wire shape as the Agents API ModelConfig.
+
+  - `id: string`
+
+    Model identifier, e.g. "claude-opus-4-7". 1-256 characters.
+
+  - `speed: optional "standard" or "fast"`
+
+    Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+    - `"standard"`
+
+    - `"fast"`
+
+### Beta Dream Model Config Param
+
+- `beta_dream_model_config_param: object { id, speed }`
+
+  Model identifier and configuration applied to every pipeline stage.
+
+  - `id: string`
+
+    Model identifier, e.g. "claude-opus-4-7". 1-256 characters.
+
+  - `speed: optional "standard" or "fast"`
+
+    Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+    - `"standard"`
+
+    - `"fast"`
+
+### Beta Dream Output
+
+- `beta_dream_output: object { memory_store_id, type }`
+
+  An output memory store the dream writes consolidated memories into.
+
+  - `memory_store_id: string`
+
+  - `type: "memory_store"`
+
+    - `"memory_store"`
+
+### Beta Dream Sessions Input
+
+- `beta_dream_sessions_input: object { session_ids, type }`
+
+  Input session transcripts the dream reads.
+
+  - `session_ids: array of string`
+
+  - `type: "sessions"`
+
+    - `"sessions"`
+
+### Beta Dream Status
+
+- `beta_dream_status: "pending" or "running" or "completed" or 2 more`
+
+  Lifecycle status of a Dream.
+
+  - `"pending"`
+
+  - `"running"`
+
+  - `"completed"`
+
+  - `"failed"`
+
+  - `"canceled"`
+
+### Beta Dream Usage
+
+- `beta_dream_usage: object { cache_creation_input_tokens, cache_read_input_tokens, input_tokens, output_tokens }`
+
+  Cumulative token usage for the dream across every pipeline stage.
+
+  - `cache_creation_input_tokens: number`
+
+    Total tokens used to create prompt-cache entries (sum of all TTL tiers).
+
+  - `cache_read_input_tokens: number`
+
+    Total tokens read from prompt cache.
+
+  - `input_tokens: number`
+
+    Total uncached input tokens consumed across every pipeline stage.
+
+  - `output_tokens: number`
+
+    Total output tokens generated across every pipeline stage.
+
 # Tunnels
 
+## Create Tunnel
+
+`$ ant beta:tunnels create`
+
+**post** `/v1/tunnels`
+
+The Tunnels API is in research preview. It requires the `anthropic-beta: mcp-tunnels-2026-06-22` header and may change without a deprecation period. It supersedes the Admin API endpoints at `/v1/organizations/tunnels`, which remain available during a migration window.
+
+Creates a tunnel. Creation allocates a fresh hostname and provisions the tunnel; it is not idempotent. The new tunnel rejects MCP traffic until at least one CA certificate is added.
+
+### Parameters
+
+- `--display-name: optional string`
+
+  Body param: Optional human-readable name for the tunnel (1-255 characters).
+
+- `--beta: optional array of AnthropicBeta`
+
+  Header param: Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `beta_tunnel: object { id, archived_at, created_at, 3 more }`
+
+  An MCP tunnel.
+
+  - `id: string`
+
+    Unique identifier for the tunnel, prefixed with `tnl_`.
+
+  - `archived_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `created_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `display_name: string`
+
+    Human-readable name for the tunnel (1-255 characters). Null if unset.
+
+  - `domain: string`
+
+    Anthropic-assigned hostname for the tunnel. MCP server URLs whose host is a subdomain of this value are routed through the tunnel. Globally unique and never reused, even after the tunnel is archived.
+
+  - `type: "tunnel"`
+
+### Example
+
+```cli
+ant beta:tunnels create \
+  --api-key my-anthropic-api-key
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "archived_at": "2019-12-27T18:11:19.117Z",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "display_name": "display_name",
+  "domain": "domain",
+  "type": "tunnel"
+}
+```
+
+## Get Tunnel
+
+`$ ant beta:tunnels retrieve`
+
+**get** `/v1/tunnels/{tunnel_id}`
+
+The Tunnels API is in research preview. It requires the `anthropic-beta: mcp-tunnels-2026-06-22` header and may change without a deprecation period. It supersedes the Admin API endpoints at `/v1/organizations/tunnels`, which remain available during a migration window.
+
+Fetches a tunnel by ID.
+
+### Parameters
+
+- `--tunnel-id: string`
+
+  Path parameter tunnel_id
+
+- `--beta: optional array of AnthropicBeta`
+
+  Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `beta_tunnel: object { id, archived_at, created_at, 3 more }`
+
+  An MCP tunnel.
+
+  - `id: string`
+
+    Unique identifier for the tunnel, prefixed with `tnl_`.
+
+  - `archived_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `created_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `display_name: string`
+
+    Human-readable name for the tunnel (1-255 characters). Null if unset.
+
+  - `domain: string`
+
+    Anthropic-assigned hostname for the tunnel. MCP server URLs whose host is a subdomain of this value are routed through the tunnel. Globally unique and never reused, even after the tunnel is archived.
+
+  - `type: "tunnel"`
+
+### Example
+
+```cli
+ant beta:tunnels retrieve \
+  --api-key my-anthropic-api-key \
+  --tunnel-id tunnel_id
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "archived_at": "2019-12-27T18:11:19.117Z",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "display_name": "display_name",
+  "domain": "domain",
+  "type": "tunnel"
+}
+```
+
+## List Tunnels
+
+`$ ant beta:tunnels list`
+
+**get** `/v1/tunnels`
+
+The Tunnels API is in research preview. It requires the `anthropic-beta: mcp-tunnels-2026-06-22` header and may change without a deprecation period. It supersedes the Admin API endpoints at `/v1/organizations/tunnels`, which remain available during a migration window.
+
+Lists tunnels. Results are ordered by creation time, newest first; archived tunnels are excluded unless include_archived is set.
+
+### Parameters
+
+- `--include-archived: optional boolean`
+
+  Query param: Whether to include archived tunnels in the results. Defaults to false.
+
+- `--limit: optional number`
+
+  Query param: Maximum number of tunnels to return per page. Defaults to 20, maximum 1000.
+
+- `--page: optional string`
+
+  Query param: Opaque pagination cursor from a previous `list_tunnels` response.
+
+- `--beta: optional array of AnthropicBeta`
+
+  Header param: Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `BetaListTunnelsResponse: object { data, next_page }`
+
+  A paginated list of tunnels.
+
+  - `data: array of BetaTunnel`
+
+    List of tunnels, ordered by created_at descending.
+
+    - `id: string`
+
+      Unique identifier for the tunnel, prefixed with `tnl_`.
+
+    - `archived_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `created_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `display_name: string`
+
+      Human-readable name for the tunnel (1-255 characters). Null if unset.
+
+    - `domain: string`
+
+      Anthropic-assigned hostname for the tunnel. MCP server URLs whose host is a subdomain of this value are routed through the tunnel. Globally unique and never reused, even after the tunnel is archived.
+
+    - `type: "tunnel"`
+
+  - `next_page: string`
+
+    Pagination cursor for the next page, or null if no more results.
+
+### Example
+
+```cli
+ant beta:tunnels list \
+  --api-key my-anthropic-api-key
+```
+
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "id": "id",
+      "archived_at": "2019-12-27T18:11:19.117Z",
+      "created_at": "2019-12-27T18:11:19.117Z",
+      "display_name": "display_name",
+      "domain": "domain",
+      "type": "tunnel"
+    }
+  ],
+  "next_page": "next_page"
+}
+```
+
+## Archive Tunnel
+
+`$ ant beta:tunnels archive`
+
+**post** `/v1/tunnels/{tunnel_id}/archive`
+
+The Tunnels API is in research preview. It requires the `anthropic-beta: mcp-tunnels-2026-06-22` header and may change without a deprecation period. It supersedes the Admin API endpoints at `/v1/organizations/tunnels`, which remain available during a migration window.
+
+Archives a tunnel. Archival is irreversible: every non-archived certificate on the tunnel is archived in the same operation, the hostname is retired and never re-allocated, and the tunnel token is invalidated. Retrying against an already-archived tunnel returns the existing record unchanged.
+
+### Parameters
+
+- `--tunnel-id: string`
+
+  Path parameter tunnel_id
+
+- `--beta: optional array of AnthropicBeta`
+
+  Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `beta_tunnel: object { id, archived_at, created_at, 3 more }`
+
+  An MCP tunnel.
+
+  - `id: string`
+
+    Unique identifier for the tunnel, prefixed with `tnl_`.
+
+  - `archived_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `created_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `display_name: string`
+
+    Human-readable name for the tunnel (1-255 characters). Null if unset.
+
+  - `domain: string`
+
+    Anthropic-assigned hostname for the tunnel. MCP server URLs whose host is a subdomain of this value are routed through the tunnel. Globally unique and never reused, even after the tunnel is archived.
+
+  - `type: "tunnel"`
+
+### Example
+
+```cli
+ant beta:tunnels archive \
+  --api-key my-anthropic-api-key \
+  --tunnel-id tunnel_id
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "archived_at": "2019-12-27T18:11:19.117Z",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "display_name": "display_name",
+  "domain": "domain",
+  "type": "tunnel"
+}
+```
+
+## Reveal Tunnel Token
+
+`$ ant beta:tunnels reveal-token`
+
+**post** `/v1/tunnels/{tunnel_id}/reveal_token`
+
+The Tunnels API is in research preview. It requires the `anthropic-beta: mcp-tunnels-2026-06-22` header and may change without a deprecation period. It supersedes the Admin API endpoints at `/v1/organizations/tunnels`, which remain available during a migration window.
+
+Reveals a tunnel's connector token. The value is fetched live on each call; Anthropic does not store it. Repeated calls return the same value until the token is rotated. Exposed as POST so the token does not appear in intermediary access logs.
+
+### Parameters
+
+- `--tunnel-id: string`
+
+  Path parameter tunnel_id
+
+- `--beta: optional array of AnthropicBeta`
+
+  Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `beta_tunnel_token: object { id, tunnel_token, type }`
+
+  A tunnel's connector token.
+
+  - `id: string`
+
+    Stable identifier for the current token value. Changes when the token is rotated.
+
+  - `tunnel_token: string`
+
+    The connector token used to run the tunnel. Treat as a credential.
+
+  - `type: "tunnel_token"`
+
+### Example
+
+```cli
+ant beta:tunnels reveal-token \
+  --api-key my-anthropic-api-key \
+  --tunnel-id tunnel_id
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "tunnel_token": "tunnel_token",
+  "type": "tunnel_token"
+}
+```
+
+## Rotate Tunnel Token
+
+`$ ant beta:tunnels rotate-token`
+
+**post** `/v1/tunnels/{tunnel_id}/rotate_token`
+
+The Tunnels API is in research preview. It requires the `anthropic-beta: mcp-tunnels-2026-06-22` header and may change without a deprecation period. It supersedes the Admin API endpoints at `/v1/organizations/tunnels`, which remain available during a migration window.
+
+Rotates a tunnel's connector token. Rotation invalidates the current token for new connections and returns a fresh value; established connections are not severed. A connector restarted after rotation must use the new value.
+
+### Parameters
+
+- `--tunnel-id: string`
+
+  Path param: Path parameter tunnel_id
+
+- `--reason: optional string`
+
+  Body param: Optional free-text reason for the rotation, recorded for audit.
+
+- `--beta: optional array of AnthropicBeta`
+
+  Header param: Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `beta_tunnel_token: object { id, tunnel_token, type }`
+
+  A tunnel's connector token.
+
+  - `id: string`
+
+    Stable identifier for the current token value. Changes when the token is rotated.
+
+  - `tunnel_token: string`
+
+    The connector token used to run the tunnel. Treat as a credential.
+
+  - `type: "tunnel_token"`
+
+### Example
+
+```cli
+ant beta:tunnels rotate-token \
+  --api-key my-anthropic-api-key \
+  --tunnel-id tunnel_id
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "tunnel_token": "tunnel_token",
+  "type": "tunnel_token"
+}
+```
+
+## Domain Types
+
+### Beta Tunnel
+
+- `beta_tunnel: object { id, archived_at, created_at, 3 more }`
+
+  An MCP tunnel.
+
+  - `id: string`
+
+    Unique identifier for the tunnel, prefixed with `tnl_`.
+
+  - `archived_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `created_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `display_name: string`
+
+    Human-readable name for the tunnel (1-255 characters). Null if unset.
+
+  - `domain: string`
+
+    Anthropic-assigned hostname for the tunnel. MCP server URLs whose host is a subdomain of this value are routed through the tunnel. Globally unique and never reused, even after the tunnel is archived.
+
+  - `type: "tunnel"`
+
+### Beta Tunnel Token
+
+- `beta_tunnel_token: object { id, tunnel_token, type }`
+
+  A tunnel's connector token.
+
+  - `id: string`
+
+    Stable identifier for the current token value. Changes when the token is rotated.
+
+  - `tunnel_token: string`
+
+    The connector token used to run the tunnel. Treat as a credential.
+
+  - `type: "tunnel_token"`
+
 # Certificates
+
+## Create Tunnel Certificate
+
+`$ ant beta:tunnels:certificates create`
+
+**post** `/v1/tunnels/{tunnel_id}/certificates`
+
+The Tunnels API is in research preview. It requires the `anthropic-beta: mcp-tunnels-2026-06-22` header and may change without a deprecation period. It supersedes the Admin API endpoints at `/v1/organizations/tunnels`, which remain available during a migration window.
+
+Registers a public CA certificate on a tunnel. Anthropic verifies the gateway's server certificate against this CA when it terminates the inner TLS session. A tunnel holds at most two non-archived certificates.
+
+### Parameters
+
+- `--tunnel-id: string`
+
+  Path param: Path parameter tunnel_id
+
+- `--ca-certificate-pem: string`
+
+  Body param: PEM-encoded X.509 CA certificate. Must contain exactly one certificate and no private-key material. Maximum 8KB.
+
+- `--beta: optional array of AnthropicBeta`
+
+  Header param: Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `beta_tunnel_certificate: object { id, archived_at, created_at, 4 more }`
+
+  A CA certificate attached to a tunnel.
+
+  - `id: string`
+
+    Unique identifier for the certificate, prefixed with `tcrt_`.
+
+  - `archived_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `created_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `expires_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `fingerprint: string`
+
+    Lowercase hex SHA-256 fingerprint of the certificate's DER encoding.
+
+  - `tunnel_id: string`
+
+    ID of the tunnel the certificate is registered against.
+
+  - `type: "tunnel_certificate"`
+
+### Example
+
+```cli
+ant beta:tunnels:certificates create \
+  --api-key my-anthropic-api-key \
+  --tunnel-id tunnel_id \
+  --ca-certificate-pem ca_certificate_pem
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "archived_at": "2019-12-27T18:11:19.117Z",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "expires_at": "2019-12-27T18:11:19.117Z",
+  "fingerprint": "fingerprint",
+  "tunnel_id": "tunnel_id",
+  "type": "tunnel_certificate"
+}
+```
+
+## Get Tunnel Certificate
+
+`$ ant beta:tunnels:certificates retrieve`
+
+**get** `/v1/tunnels/{tunnel_id}/certificates/{certificate_id}`
+
+The Tunnels API is in research preview. It requires the `anthropic-beta: mcp-tunnels-2026-06-22` header and may change without a deprecation period. It supersedes the Admin API endpoints at `/v1/organizations/tunnels`, which remain available during a migration window.
+
+Fetches a tunnel certificate by ID.
+
+### Parameters
+
+- `--tunnel-id: string`
+
+  Path param: Path parameter tunnel_id
+
+- `--certificate-id: string`
+
+  Path param: Path parameter certificate_id
+
+- `--beta: optional array of AnthropicBeta`
+
+  Header param: Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `beta_tunnel_certificate: object { id, archived_at, created_at, 4 more }`
+
+  A CA certificate attached to a tunnel.
+
+  - `id: string`
+
+    Unique identifier for the certificate, prefixed with `tcrt_`.
+
+  - `archived_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `created_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `expires_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `fingerprint: string`
+
+    Lowercase hex SHA-256 fingerprint of the certificate's DER encoding.
+
+  - `tunnel_id: string`
+
+    ID of the tunnel the certificate is registered against.
+
+  - `type: "tunnel_certificate"`
+
+### Example
+
+```cli
+ant beta:tunnels:certificates retrieve \
+  --api-key my-anthropic-api-key \
+  --tunnel-id tunnel_id \
+  --certificate-id certificate_id
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "archived_at": "2019-12-27T18:11:19.117Z",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "expires_at": "2019-12-27T18:11:19.117Z",
+  "fingerprint": "fingerprint",
+  "tunnel_id": "tunnel_id",
+  "type": "tunnel_certificate"
+}
+```
+
+## List Tunnel Certificates
+
+`$ ant beta:tunnels:certificates list`
+
+**get** `/v1/tunnels/{tunnel_id}/certificates`
+
+The Tunnels API is in research preview. It requires the `anthropic-beta: mcp-tunnels-2026-06-22` header and may change without a deprecation period. It supersedes the Admin API endpoints at `/v1/organizations/tunnels`, which remain available during a migration window.
+
+Lists the certificates registered on a tunnel. Archived certificates are excluded unless include_archived is set.
+
+### Parameters
+
+- `--tunnel-id: string`
+
+  Path param: Path parameter tunnel_id
+
+- `--include-archived: optional boolean`
+
+  Query param: Whether to include archived certificates in the results. Defaults to false.
+
+- `--limit: optional number`
+
+  Query param: Maximum number of certificates to return per page. Defaults to 20, maximum 1000.
+
+- `--page: optional string`
+
+  Query param: Opaque pagination cursor from a previous `list_tunnel_certificates` response.
+
+- `--beta: optional array of AnthropicBeta`
+
+  Header param: Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `BetaListTunnelCertificatesResponse: object { data, next_page }`
+
+  The tunnel's certificates.
+
+  - `data: array of BetaTunnelCertificate`
+
+    List of certificates, ordered by created_at descending.
+
+    - `id: string`
+
+      Unique identifier for the certificate, prefixed with `tcrt_`.
+
+    - `archived_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `created_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `expires_at: string`
+
+      A timestamp in RFC 3339 format
+
+    - `fingerprint: string`
+
+      Lowercase hex SHA-256 fingerprint of the certificate's DER encoding.
+
+    - `tunnel_id: string`
+
+      ID of the tunnel the certificate is registered against.
+
+    - `type: "tunnel_certificate"`
+
+  - `next_page: string`
+
+    Pagination cursor for the next page, or null if no more results.
+
+### Example
+
+```cli
+ant beta:tunnels:certificates list \
+  --api-key my-anthropic-api-key \
+  --tunnel-id tunnel_id
+```
+
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "id": "id",
+      "archived_at": "2019-12-27T18:11:19.117Z",
+      "created_at": "2019-12-27T18:11:19.117Z",
+      "expires_at": "2019-12-27T18:11:19.117Z",
+      "fingerprint": "fingerprint",
+      "tunnel_id": "tunnel_id",
+      "type": "tunnel_certificate"
+    }
+  ],
+  "next_page": "next_page"
+}
+```
+
+## Archive Tunnel Certificate
+
+`$ ant beta:tunnels:certificates archive`
+
+**post** `/v1/tunnels/{tunnel_id}/certificates/{certificate_id}/archive`
+
+The Tunnels API is in research preview. It requires the `anthropic-beta: mcp-tunnels-2026-06-22` header and may change without a deprecation period. It supersedes the Admin API endpoints at `/v1/organizations/tunnels`, which remain available during a migration window.
+
+Archives a tunnel certificate, removing it from the set Anthropic trusts for the tunnel. The certificate record is retained. Archiving the last non-archived certificate is permitted; the tunnel rejects MCP traffic until a new certificate is added.
+
+### Parameters
+
+- `--tunnel-id: string`
+
+  Path param: Path parameter tunnel_id
+
+- `--certificate-id: string`
+
+  Path param: Path parameter certificate_id
+
+- `--beta: optional array of AnthropicBeta`
+
+  Header param: Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `beta_tunnel_certificate: object { id, archived_at, created_at, 4 more }`
+
+  A CA certificate attached to a tunnel.
+
+  - `id: string`
+
+    Unique identifier for the certificate, prefixed with `tcrt_`.
+
+  - `archived_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `created_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `expires_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `fingerprint: string`
+
+    Lowercase hex SHA-256 fingerprint of the certificate's DER encoding.
+
+  - `tunnel_id: string`
+
+    ID of the tunnel the certificate is registered against.
+
+  - `type: "tunnel_certificate"`
+
+### Example
+
+```cli
+ant beta:tunnels:certificates archive \
+  --api-key my-anthropic-api-key \
+  --tunnel-id tunnel_id \
+  --certificate-id certificate_id
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "archived_at": "2019-12-27T18:11:19.117Z",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "expires_at": "2019-12-27T18:11:19.117Z",
+  "fingerprint": "fingerprint",
+  "tunnel_id": "tunnel_id",
+  "type": "tunnel_certificate"
+}
+```
+
+## Domain Types
+
+### Beta Tunnel Certificate
+
+- `beta_tunnel_certificate: object { id, archived_at, created_at, 4 more }`
+
+  A CA certificate attached to a tunnel.
+
+  - `id: string`
+
+    Unique identifier for the certificate, prefixed with `tcrt_`.
+
+  - `archived_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `created_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `expires_at: string`
+
+    A timestamp in RFC 3339 format
+
+  - `fingerprint: string`
+
+    Lowercase hex SHA-256 fingerprint of the certificate's DER encoding.
+
+  - `tunnel_id: string`
+
+    ID of the tunnel the certificate is registered against.
+
+  - `type: "tunnel_certificate"`
 
 # Webhooks
 
@@ -83198,6 +87123,62 @@ ant beta:user-profiles create-enrollment-url \
 
   - `workspace_id: string`
 
+### Beta Webhook Environment Archived Event Data
+
+- `beta_webhook_environment_archived_event_data: object { id, organization_id, type, workspace_id }`
+
+  - `id: string`
+
+    ID of the environment that triggered the event.
+
+  - `organization_id: string`
+
+  - `type: "environment.archived"`
+
+  - `workspace_id: string`
+
+### Beta Webhook Environment Created Event Data
+
+- `beta_webhook_environment_created_event_data: object { id, organization_id, type, workspace_id }`
+
+  - `id: string`
+
+    ID of the environment that triggered the event.
+
+  - `organization_id: string`
+
+  - `type: "environment.created"`
+
+  - `workspace_id: string`
+
+### Beta Webhook Environment Deleted Event Data
+
+- `beta_webhook_environment_deleted_event_data: object { id, organization_id, type, workspace_id }`
+
+  - `id: string`
+
+    ID of the environment that triggered the event.
+
+  - `organization_id: string`
+
+  - `type: "environment.deleted"`
+
+  - `workspace_id: string`
+
+### Beta Webhook Environment Updated Event Data
+
+- `beta_webhook_environment_updated_event_data: object { id, organization_id, type, workspace_id }`
+
+  - `id: string`
+
+    ID of the environment that triggered the event.
+
+  - `organization_id: string`
+
+  - `type: "environment.updated"`
+
+  - `workspace_id: string`
+
 ### Beta Webhook Event
 
 - `beta_webhook_event: object { id, created_at, data, type }`
@@ -83210,7 +87191,7 @@ ant beta:user-profiles create-enrollment-url \
 
     RFC 3339 timestamp when the event occurred.
 
-  - `data: BetaWebhookSessionCreatedEventData or BetaWebhookSessionPendingEventData or BetaWebhookSessionRunningEventData or 33 more`
+  - `data: BetaWebhookSessionCreatedEventData or BetaWebhookSessionPendingEventData or BetaWebhookSessionRunningEventData or 40 more`
 
     - `beta_webhook_session_created_event_data: object { id, organization_id, type, workspace_id }`
 
@@ -83672,13 +87653,97 @@ ant beta:user-profiles create-enrollment-url \
 
       - `workspace_id: string`
 
+    - `beta_webhook_environment_created_event_data: object { id, organization_id, type, workspace_id }`
+
+      - `id: string`
+
+        ID of the environment that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "environment.created"`
+
+      - `workspace_id: string`
+
+    - `beta_webhook_environment_updated_event_data: object { id, organization_id, type, workspace_id }`
+
+      - `id: string`
+
+        ID of the environment that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "environment.updated"`
+
+      - `workspace_id: string`
+
+    - `beta_webhook_environment_archived_event_data: object { id, organization_id, type, workspace_id }`
+
+      - `id: string`
+
+        ID of the environment that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "environment.archived"`
+
+      - `workspace_id: string`
+
+    - `beta_webhook_environment_deleted_event_data: object { id, organization_id, type, workspace_id }`
+
+      - `id: string`
+
+        ID of the environment that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "environment.deleted"`
+
+      - `workspace_id: string`
+
+    - `beta_webhook_memory_store_created_event_data: object { id, organization_id, type, workspace_id }`
+
+      - `id: string`
+
+        ID of the memory store that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "memory_store.created"`
+
+      - `workspace_id: string`
+
+    - `beta_webhook_memory_store_archived_event_data: object { id, organization_id, type, workspace_id }`
+
+      - `id: string`
+
+        ID of the memory store that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "memory_store.archived"`
+
+      - `workspace_id: string`
+
+    - `beta_webhook_memory_store_deleted_event_data: object { id, organization_id, type, workspace_id }`
+
+      - `id: string`
+
+        ID of the memory store that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "memory_store.deleted"`
+
+      - `workspace_id: string`
+
   - `type: "event"`
 
     Object type. Always `event` for webhook payloads.
 
 ### Beta Webhook Event Data
 
-- `beta_webhook_event_data: BetaWebhookSessionCreatedEventData or BetaWebhookSessionPendingEventData or BetaWebhookSessionRunningEventData or 33 more`
+- `beta_webhook_event_data: BetaWebhookSessionCreatedEventData or BetaWebhookSessionPendingEventData or BetaWebhookSessionRunningEventData or 40 more`
 
   - `beta_webhook_session_created_event_data: object { id, organization_id, type, workspace_id }`
 
@@ -84140,6 +88205,132 @@ ant beta:user-profiles create-enrollment-url \
 
     - `workspace_id: string`
 
+  - `beta_webhook_environment_created_event_data: object { id, organization_id, type, workspace_id }`
+
+    - `id: string`
+
+      ID of the environment that triggered the event.
+
+    - `organization_id: string`
+
+    - `type: "environment.created"`
+
+    - `workspace_id: string`
+
+  - `beta_webhook_environment_updated_event_data: object { id, organization_id, type, workspace_id }`
+
+    - `id: string`
+
+      ID of the environment that triggered the event.
+
+    - `organization_id: string`
+
+    - `type: "environment.updated"`
+
+    - `workspace_id: string`
+
+  - `beta_webhook_environment_archived_event_data: object { id, organization_id, type, workspace_id }`
+
+    - `id: string`
+
+      ID of the environment that triggered the event.
+
+    - `organization_id: string`
+
+    - `type: "environment.archived"`
+
+    - `workspace_id: string`
+
+  - `beta_webhook_environment_deleted_event_data: object { id, organization_id, type, workspace_id }`
+
+    - `id: string`
+
+      ID of the environment that triggered the event.
+
+    - `organization_id: string`
+
+    - `type: "environment.deleted"`
+
+    - `workspace_id: string`
+
+  - `beta_webhook_memory_store_created_event_data: object { id, organization_id, type, workspace_id }`
+
+    - `id: string`
+
+      ID of the memory store that triggered the event.
+
+    - `organization_id: string`
+
+    - `type: "memory_store.created"`
+
+    - `workspace_id: string`
+
+  - `beta_webhook_memory_store_archived_event_data: object { id, organization_id, type, workspace_id }`
+
+    - `id: string`
+
+      ID of the memory store that triggered the event.
+
+    - `organization_id: string`
+
+    - `type: "memory_store.archived"`
+
+    - `workspace_id: string`
+
+  - `beta_webhook_memory_store_deleted_event_data: object { id, organization_id, type, workspace_id }`
+
+    - `id: string`
+
+      ID of the memory store that triggered the event.
+
+    - `organization_id: string`
+
+    - `type: "memory_store.deleted"`
+
+    - `workspace_id: string`
+
+### Beta Webhook Memory Store Archived Event Data
+
+- `beta_webhook_memory_store_archived_event_data: object { id, organization_id, type, workspace_id }`
+
+  - `id: string`
+
+    ID of the memory store that triggered the event.
+
+  - `organization_id: string`
+
+  - `type: "memory_store.archived"`
+
+  - `workspace_id: string`
+
+### Beta Webhook Memory Store Created Event Data
+
+- `beta_webhook_memory_store_created_event_data: object { id, organization_id, type, workspace_id }`
+
+  - `id: string`
+
+    ID of the memory store that triggered the event.
+
+  - `organization_id: string`
+
+  - `type: "memory_store.created"`
+
+  - `workspace_id: string`
+
+### Beta Webhook Memory Store Deleted Event Data
+
+- `beta_webhook_memory_store_deleted_event_data: object { id, organization_id, type, workspace_id }`
+
+  - `id: string`
+
+    ID of the memory store that triggered the event.
+
+  - `organization_id: string`
+
+  - `type: "memory_store.deleted"`
+
+  - `workspace_id: string`
+
 ### Beta Webhook Session Archived Event Data
 
 - `beta_webhook_session_archived_event_data: object { id, organization_id, type, workspace_id }`
@@ -84502,7 +88693,7 @@ ant beta:user-profiles create-enrollment-url \
 
     RFC 3339 timestamp when the event occurred.
 
-  - `data: BetaWebhookSessionCreatedEventData or BetaWebhookSessionPendingEventData or BetaWebhookSessionRunningEventData or 33 more`
+  - `data: BetaWebhookSessionCreatedEventData or BetaWebhookSessionPendingEventData or BetaWebhookSessionRunningEventData or 40 more`
 
     - `beta_webhook_session_created_event_data: object { id, organization_id, type, workspace_id }`
 
@@ -84961,6 +89152,90 @@ ant beta:user-profiles create-enrollment-url \
       - `organization_id: string`
 
       - `type: "deployment_run.succeeded"`
+
+      - `workspace_id: string`
+
+    - `beta_webhook_environment_created_event_data: object { id, organization_id, type, workspace_id }`
+
+      - `id: string`
+
+        ID of the environment that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "environment.created"`
+
+      - `workspace_id: string`
+
+    - `beta_webhook_environment_updated_event_data: object { id, organization_id, type, workspace_id }`
+
+      - `id: string`
+
+        ID of the environment that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "environment.updated"`
+
+      - `workspace_id: string`
+
+    - `beta_webhook_environment_archived_event_data: object { id, organization_id, type, workspace_id }`
+
+      - `id: string`
+
+        ID of the environment that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "environment.archived"`
+
+      - `workspace_id: string`
+
+    - `beta_webhook_environment_deleted_event_data: object { id, organization_id, type, workspace_id }`
+
+      - `id: string`
+
+        ID of the environment that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "environment.deleted"`
+
+      - `workspace_id: string`
+
+    - `beta_webhook_memory_store_created_event_data: object { id, organization_id, type, workspace_id }`
+
+      - `id: string`
+
+        ID of the memory store that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "memory_store.created"`
+
+      - `workspace_id: string`
+
+    - `beta_webhook_memory_store_archived_event_data: object { id, organization_id, type, workspace_id }`
+
+      - `id: string`
+
+        ID of the memory store that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "memory_store.archived"`
+
+      - `workspace_id: string`
+
+    - `beta_webhook_memory_store_deleted_event_data: object { id, organization_id, type, workspace_id }`
+
+      - `id: string`
+
+        ID of the memory store that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "memory_store.deleted"`
 
       - `workspace_id: string`
 

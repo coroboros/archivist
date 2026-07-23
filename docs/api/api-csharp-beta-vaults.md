@@ -80,6 +80,8 @@ Create Vault
 
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
 
+    - `"dreaming-2026-04-21"Dreaming2026_04_21`
+
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
     - `"server-side-fallback-2026-06-01"ServerSideFallback2026_06_01`
@@ -225,6 +227,8 @@ List Vaults
     - `"managed-agents-2026-04-01"ManagedAgents2026_04_01`
 
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
+
+    - `"dreaming-2026-04-21"Dreaming2026_04_21`
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
@@ -379,6 +383,8 @@ Get Vault
 
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
 
+    - `"dreaming-2026-04-21"Dreaming2026_04_21`
+
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
     - `"server-side-fallback-2026-06-01"ServerSideFallback2026_06_01`
@@ -528,6 +534,8 @@ Update Vault
 
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
 
+    - `"dreaming-2026-04-21"Dreaming2026_04_21`
+
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
     - `"server-side-fallback-2026-06-01"ServerSideFallback2026_06_01`
@@ -669,6 +677,8 @@ Delete Vault
 
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
 
+    - `"dreaming-2026-04-21"Dreaming2026_04_21`
+
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
     - `"server-side-fallback-2026-06-01"ServerSideFallback2026_06_01`
@@ -782,6 +792,8 @@ Archive Vault
     - `"managed-agents-2026-04-01"ManagedAgents2026_04_01`
 
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
+
+    - `"dreaming-2026-04-21"Dreaming2026_04_21`
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
@@ -1136,6 +1148,8 @@ Create Credential
 
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
 
+    - `"dreaming-2026-04-21"Dreaming2026_04_21`
+
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
     - `"server-side-fallback-2026-06-01"ServerSideFallback2026_06_01`
@@ -1431,6 +1445,8 @@ List Credentials
     - `"managed-agents-2026-04-01"ManagedAgents2026_04_01`
 
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
+
+    - `"dreaming-2026-04-21"Dreaming2026_04_21`
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
@@ -1728,6 +1744,8 @@ Get Credential
     - `"managed-agents-2026-04-01"ManagedAgents2026_04_01`
 
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
+
+    - `"dreaming-2026-04-21"Dreaming2026_04_21`
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
@@ -2140,6 +2158,8 @@ Update Credential
 
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
 
+    - `"dreaming-2026-04-21"Dreaming2026_04_21`
+
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
     - `"server-side-fallback-2026-06-01"ServerSideFallback2026_06_01`
@@ -2423,6 +2443,8 @@ Delete Credential
 
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
 
+    - `"dreaming-2026-04-21"Dreaming2026_04_21`
+
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
     - `"server-side-fallback-2026-06-01"ServerSideFallback2026_06_01`
@@ -2541,6 +2563,8 @@ Archive Credential
     - `"managed-agents-2026-04-01"ManagedAgents2026_04_01`
 
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
+
+    - `"dreaming-2026-04-21"Dreaming2026_04_21`
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 
@@ -2824,6 +2848,8 @@ Validate Credential
     - `"managed-agents-2026-04-01"ManagedAgents2026_04_01`
 
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
+
+    - `"dreaming-2026-04-21"Dreaming2026_04_21`
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 

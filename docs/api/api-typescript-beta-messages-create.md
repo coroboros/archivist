@@ -1456,6 +1456,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `speed?: "standard" | "fast" | null`
 
+        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
         - `"standard"`
 
         - `"fast"`
@@ -1560,7 +1562,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `speed?: "standard" | "fast" | null`
 
-      Body param: The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
+      Body param: Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
       - `"standard"`
 
@@ -2991,7 +2993,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `(string & {})`
 
-      - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 26 more`
+      - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 27 more`
 
         - `"message-batches-2024-09-24"`
 
@@ -3042,6 +3044,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         - `"managed-agents-2026-04-01"`
 
         - `"cache-diagnosis-2026-04-07"`
+
+        - `"dreaming-2026-04-21"`
 
         - `"thinking-token-count-2026-05-13"`
 
@@ -4000,17 +4004,29 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         What caused the `from` model to hand over at this hop.
 
-        - `category: "cyber" | "bio" | "frontier_llm" | "reasoning_extraction" | null`
+        - `category: "cyber" | "bio" | "frontier_llm" | 2 more | null`
 
           The policy category that triggered a refusal.
 
           - `"cyber"`
 
+            The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
           - `"bio"`
+
+            The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
           - `"frontier_llm"`
 
+            The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
           - `"reasoning_extraction"`
+
+            The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../build-with-claude/build-with-claude-adaptive-thinking.md).
+
+          - `"general_harms"`
+
+            The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
         - `type: "refusal"`
 
@@ -4141,17 +4157,29 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     Structured information about a refusal.
 
-    - `category: "cyber" | "bio" | "frontier_llm" | "reasoning_extraction" | null`
+    - `category: "cyber" | "bio" | "frontier_llm" | 2 more | null`
 
       The policy category that triggered a refusal.
 
       - `"cyber"`
 
+        The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
       - `"bio"`
+
+        The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
       - `"frontier_llm"`
 
+        The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
       - `"reasoning_extraction"`
+
+        The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../build-with-claude/build-with-claude-adaptive-thinking.md).
+
+      - `"general_harms"`
+
+        The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
     - `explanation: string | null`
 
@@ -4498,7 +4526,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `speed: "standard" | "fast" | null`
 
-      The inference speed mode used for this request.
+      Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
       - `"standard"`
 
@@ -4528,7 +4556,7 @@ console.log(betaMessage.id);
 {
   "id": "msg_013Zva2CMHLNnXjNJJKqJ2EF",
   "container": {
-    "id": "id",
+    "id": "container_011CpZohnwH4vuy7gazohgSP",
     "expires_at": "2019-12-27T18:11:19.117Z",
     "skills": [
       {
@@ -4542,11 +4570,11 @@ console.log(betaMessage.id);
     {
       "citations": [
         {
-          "cited_text": "cited_text",
+          "cited_text": "The grass is green. The sky is blue.",
           "document_index": 0,
-          "document_title": "document_title",
+          "document_title": "My Document",
           "end_char_index": 0,
-          "file_id": "file_id",
+          "file_id": "file_011CNha8iCJcU1wXNR6q4V8w",
           "start_char_index": 0,
           "type": "char_location"
         }
@@ -4574,10 +4602,10 @@ console.log(betaMessage.id);
   "role": "assistant",
   "stop_details": {
     "category": "cyber",
-    "explanation": "explanation",
-    "fallback_credit_token": "fallback_credit_token",
+    "explanation": "This request was declined because it conflicts with Anthropic's Usage Policy.",
+    "fallback_credit_token": "QW50aHJvcGljL0NsYXVkZQ==",
     "fallback_has_prefill_claim": true,
-    "recommended_model": "recommended_model",
+    "recommended_model": "claude-sonnet-4-6",
     "type": "refusal"
   },
   "stop_reason": "end_turn",
@@ -4590,7 +4618,7 @@ console.log(betaMessage.id);
     },
     "cache_creation_input_tokens": 2051,
     "cache_read_input_tokens": 2051,
-    "inference_geo": "inference_geo",
+    "inference_geo": "global",
     "input_tokens": 2095,
     "iterations": [
       {

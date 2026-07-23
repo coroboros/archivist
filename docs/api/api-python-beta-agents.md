@@ -122,6 +122,64 @@ Create Agent
 
       - `str`
 
+    - `effort: Optional[Effort]`
+
+      How hard Claude works on each inference call. Accepts a bare level string (`"high"`) or `{"type": "high"}`. On create, omitting it resolves the per-model default; on update, omitting it leaves the stored value unchanged.
+
+      - `Literal["low", "medium", "high", 2 more]`
+
+        How hard Claude works on each turn. Higher levels favor reasoning depth over latency. Not all models accept every level; invalid combinations are rejected at create time.
+
+        - `"low"`
+
+        - `"medium"`
+
+        - `"high"`
+
+        - `"xhigh"`
+
+        - `"max"`
+
+      - `class BetaManagedAgentsEffortLow: …`
+
+        Low effort. Favors latency over reasoning depth.
+
+        - `type: Literal["low"]`
+
+          - `"low"`
+
+      - `class BetaManagedAgentsEffortMedium: …`
+
+        Medium effort. Balances latency and reasoning depth.
+
+        - `type: Literal["medium"]`
+
+          - `"medium"`
+
+      - `class BetaManagedAgentsEffortHigh: …`
+
+        High effort. Favors reasoning depth.
+
+        - `type: Literal["high"]`
+
+          - `"high"`
+
+      - `class BetaManagedAgentsEffortXhigh: …`
+
+        Extra-high effort. Not all models accept this level.
+
+        - `type: Literal["xhigh"]`
+
+          - `"xhigh"`
+
+      - `class BetaManagedAgentsEffortMax: …`
+
+        Maximum effort. Favors reasoning depth over latency.
+
+        - `type: Literal["max"]`
+
+          - `"max"`
+
     - `speed: Optional[Literal["standard", "fast"]]`
 
       Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
@@ -406,7 +464,7 @@ Create Agent
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -457,6 +515,8 @@ Create Agent
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -574,6 +634,50 @@ Create Agent
           High-performance model for agents and coding
 
       - `str`
+
+    - `effort: Optional[Effort]`
+
+      How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+      - `class BetaManagedAgentsEffortLow: …`
+
+        Low effort. Favors latency over reasoning depth.
+
+        - `type: Literal["low"]`
+
+          - `"low"`
+
+      - `class BetaManagedAgentsEffortMedium: …`
+
+        Medium effort. Balances latency and reasoning depth.
+
+        - `type: Literal["medium"]`
+
+          - `"medium"`
+
+      - `class BetaManagedAgentsEffortHigh: …`
+
+        High effort. Favors reasoning depth.
+
+        - `type: Literal["high"]`
+
+          - `"high"`
+
+      - `class BetaManagedAgentsEffortXhigh: …`
+
+        Extra-high effort. Not all models accept this level.
+
+        - `type: Literal["xhigh"]`
+
+          - `"xhigh"`
+
+      - `class BetaManagedAgentsEffortMax: …`
+
+        Maximum effort. Favors reasoning depth over latency.
+
+        - `type: Literal["max"]`
+
+          - `"max"`
 
     - `speed: Optional[Literal["standard", "fast"]]`
 
@@ -819,6 +923,9 @@ print(beta_managed_agents_agent.id)
   },
   "model": {
     "id": "claude-sonnet-4-6",
+    "effort": {
+      "type": "low"
+    },
     "speed": "standard"
   },
   "multiagent": {
@@ -907,7 +1014,7 @@ List Agents
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -958,6 +1065,8 @@ List Agents
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -1075,6 +1184,50 @@ List Agents
           High-performance model for agents and coding
 
       - `str`
+
+    - `effort: Optional[Effort]`
+
+      How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+      - `class BetaManagedAgentsEffortLow: …`
+
+        Low effort. Favors latency over reasoning depth.
+
+        - `type: Literal["low"]`
+
+          - `"low"`
+
+      - `class BetaManagedAgentsEffortMedium: …`
+
+        Medium effort. Balances latency and reasoning depth.
+
+        - `type: Literal["medium"]`
+
+          - `"medium"`
+
+      - `class BetaManagedAgentsEffortHigh: …`
+
+        High effort. Favors reasoning depth.
+
+        - `type: Literal["high"]`
+
+          - `"high"`
+
+      - `class BetaManagedAgentsEffortXhigh: …`
+
+        Extra-high effort. Not all models accept this level.
+
+        - `type: Literal["xhigh"]`
+
+          - `"xhigh"`
+
+      - `class BetaManagedAgentsEffortMax: …`
+
+        Maximum effort. Favors reasoning depth over latency.
+
+        - `type: Literal["max"]`
+
+          - `"max"`
 
     - `speed: Optional[Literal["standard", "fast"]]`
 
@@ -1320,6 +1473,9 @@ print(page.id)
       },
       "model": {
         "id": "claude-sonnet-4-6",
+        "effort": {
+          "type": "low"
+        },
         "speed": "standard"
       },
       "multiagent": {
@@ -1397,7 +1553,7 @@ Get Agent
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -1448,6 +1604,8 @@ Get Agent
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -1565,6 +1723,50 @@ Get Agent
           High-performance model for agents and coding
 
       - `str`
+
+    - `effort: Optional[Effort]`
+
+      How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+      - `class BetaManagedAgentsEffortLow: …`
+
+        Low effort. Favors latency over reasoning depth.
+
+        - `type: Literal["low"]`
+
+          - `"low"`
+
+      - `class BetaManagedAgentsEffortMedium: …`
+
+        Medium effort. Balances latency and reasoning depth.
+
+        - `type: Literal["medium"]`
+
+          - `"medium"`
+
+      - `class BetaManagedAgentsEffortHigh: …`
+
+        High effort. Favors reasoning depth.
+
+        - `type: Literal["high"]`
+
+          - `"high"`
+
+      - `class BetaManagedAgentsEffortXhigh: …`
+
+        Extra-high effort. Not all models accept this level.
+
+        - `type: Literal["xhigh"]`
+
+          - `"xhigh"`
+
+      - `class BetaManagedAgentsEffortMax: …`
+
+        Maximum effort. Favors reasoning depth over latency.
+
+        - `type: Literal["max"]`
+
+          - `"max"`
 
     - `speed: Optional[Literal["standard", "fast"]]`
 
@@ -1809,6 +2011,9 @@ print(beta_managed_agents_agent.id)
   },
   "model": {
     "id": "claude-sonnet-4-6",
+    "effort": {
+      "type": "low"
+    },
     "speed": "standard"
   },
   "multiagent": {
@@ -1872,10 +2077,6 @@ Update Agent
 ### Parameters
 
 - `agent_id: str`
-
-- `version: int`
-
-  The agent's current version, used to prevent concurrent overwrites. Obtain this value from a create or retrieve response. The request fails if this does not match the server's current version.
 
 - `description: Optional[str]`
 
@@ -2006,6 +2207,64 @@ Update Agent
         - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
 
       - `str`
+
+    - `effort: Optional[Effort]`
+
+      How hard Claude works on each inference call. Accepts a bare level string (`"high"`) or `{"type": "high"}`. On create, omitting it resolves the per-model default; on update, omitting it leaves the stored value unchanged.
+
+      - `Literal["low", "medium", "high", 2 more]`
+
+        How hard Claude works on each turn. Higher levels favor reasoning depth over latency. Not all models accept every level; invalid combinations are rejected at create time.
+
+        - `"low"`
+
+        - `"medium"`
+
+        - `"high"`
+
+        - `"xhigh"`
+
+        - `"max"`
+
+      - `class BetaManagedAgentsEffortLow: …`
+
+        Low effort. Favors latency over reasoning depth.
+
+        - `type: Literal["low"]`
+
+          - `"low"`
+
+      - `class BetaManagedAgentsEffortMedium: …`
+
+        Medium effort. Balances latency and reasoning depth.
+
+        - `type: Literal["medium"]`
+
+          - `"medium"`
+
+      - `class BetaManagedAgentsEffortHigh: …`
+
+        High effort. Favors reasoning depth.
+
+        - `type: Literal["high"]`
+
+          - `"high"`
+
+      - `class BetaManagedAgentsEffortXhigh: …`
+
+        Extra-high effort. Not all models accept this level.
+
+        - `type: Literal["xhigh"]`
+
+          - `"xhigh"`
+
+      - `class BetaManagedAgentsEffortMax: …`
+
+        Maximum effort. Favors reasoning depth over latency.
+
+        - `type: Literal["max"]`
+
+          - `"max"`
 
     - `speed: Optional[Literal["standard", "fast"]]`
 
@@ -2261,13 +2520,17 @@ Update Agent
 
       - `"custom"`
 
+- `version: Optional[int]`
+
+  The agent's current version, used to prevent concurrent overwrites. Obtain this value from a create or retrieve response. Must be at least 1 if specified. When supplied, the request fails if it does not match the server's current version; omit to apply the update unconditionally.
+
 - `betas: Optional[List[AnthropicBetaParam]]`
 
   Optional header to specify the beta version(s) you want to use.
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -2318,6 +2581,8 @@ Update Agent
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -2435,6 +2700,50 @@ Update Agent
           High-performance model for agents and coding
 
       - `str`
+
+    - `effort: Optional[Effort]`
+
+      How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+      - `class BetaManagedAgentsEffortLow: …`
+
+        Low effort. Favors latency over reasoning depth.
+
+        - `type: Literal["low"]`
+
+          - `"low"`
+
+      - `class BetaManagedAgentsEffortMedium: …`
+
+        Medium effort. Balances latency and reasoning depth.
+
+        - `type: Literal["medium"]`
+
+          - `"medium"`
+
+      - `class BetaManagedAgentsEffortHigh: …`
+
+        High effort. Favors reasoning depth.
+
+        - `type: Literal["high"]`
+
+          - `"high"`
+
+      - `class BetaManagedAgentsEffortXhigh: …`
+
+        Extra-high effort. Not all models accept this level.
+
+        - `type: Literal["xhigh"]`
+
+          - `"xhigh"`
+
+      - `class BetaManagedAgentsEffortMax: …`
+
+        Maximum effort. Favors reasoning depth over latency.
+
+        - `type: Literal["max"]`
+
+          - `"max"`
 
     - `speed: Optional[Literal["standard", "fast"]]`
 
@@ -2655,7 +2964,7 @@ client = Anthropic(
 )
 beta_managed_agents_agent = client.beta.agents.update(
     agent_id="agent_011CZkYpogX7uDKUyvBTophP",
-    version=1,
+    description="updated",
 )
 print(beta_managed_agents_agent.id)
 ```
@@ -2680,6 +2989,9 @@ print(beta_managed_agents_agent.id)
   },
   "model": {
     "id": "claude-sonnet-4-6",
+    "effort": {
+      "type": "low"
+    },
     "speed": "standard"
   },
   "multiagent": {
@@ -2750,7 +3062,7 @@ Archive Agent
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -2801,6 +3113,8 @@ Archive Agent
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -2918,6 +3232,50 @@ Archive Agent
           High-performance model for agents and coding
 
       - `str`
+
+    - `effort: Optional[Effort]`
+
+      How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+      - `class BetaManagedAgentsEffortLow: …`
+
+        Low effort. Favors latency over reasoning depth.
+
+        - `type: Literal["low"]`
+
+          - `"low"`
+
+      - `class BetaManagedAgentsEffortMedium: …`
+
+        Medium effort. Balances latency and reasoning depth.
+
+        - `type: Literal["medium"]`
+
+          - `"medium"`
+
+      - `class BetaManagedAgentsEffortHigh: …`
+
+        High effort. Favors reasoning depth.
+
+        - `type: Literal["high"]`
+
+          - `"high"`
+
+      - `class BetaManagedAgentsEffortXhigh: …`
+
+        Extra-high effort. Not all models accept this level.
+
+        - `type: Literal["xhigh"]`
+
+          - `"xhigh"`
+
+      - `class BetaManagedAgentsEffortMax: …`
+
+        Maximum effort. Favors reasoning depth over latency.
+
+        - `type: Literal["max"]`
+
+          - `"max"`
 
     - `speed: Optional[Literal["standard", "fast"]]`
 
@@ -3162,6 +3520,9 @@ print(beta_managed_agents_agent.id)
   },
   "model": {
     "id": "claude-sonnet-4-6",
+    "effort": {
+      "type": "low"
+    },
     "speed": "standard"
   },
   "multiagent": {
@@ -3324,6 +3685,50 @@ print(beta_managed_agents_agent.id)
           High-performance model for agents and coding
 
       - `str`
+
+    - `effort: Optional[Effort]`
+
+      How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+      - `class BetaManagedAgentsEffortLow: …`
+
+        Low effort. Favors latency over reasoning depth.
+
+        - `type: Literal["low"]`
+
+          - `"low"`
+
+      - `class BetaManagedAgentsEffortMedium: …`
+
+        Medium effort. Balances latency and reasoning depth.
+
+        - `type: Literal["medium"]`
+
+          - `"medium"`
+
+      - `class BetaManagedAgentsEffortHigh: …`
+
+        High effort. Favors reasoning depth.
+
+        - `type: Literal["high"]`
+
+          - `"high"`
+
+      - `class BetaManagedAgentsEffortXhigh: …`
+
+        Extra-high effort. Not all models accept this level.
+
+        - `type: Literal["xhigh"]`
+
+          - `"xhigh"`
+
+      - `class BetaManagedAgentsEffortMax: …`
+
+        Maximum effort. Favors reasoning depth over latency.
+
+        - `type: Literal["max"]`
+
+          - `"max"`
 
     - `speed: Optional[Literal["standard", "fast"]]`
 
@@ -4121,6 +4526,56 @@ print(beta_managed_agents_agent.id)
 
     - `"custom"`
 
+### Beta Managed Agents Effort High
+
+- `class BetaManagedAgentsEffortHigh: …`
+
+  High effort. Favors reasoning depth.
+
+  - `type: Literal["high"]`
+
+    - `"high"`
+
+### Beta Managed Agents Effort Low
+
+- `class BetaManagedAgentsEffortLow: …`
+
+  Low effort. Favors latency over reasoning depth.
+
+  - `type: Literal["low"]`
+
+    - `"low"`
+
+### Beta Managed Agents Effort Max
+
+- `class BetaManagedAgentsEffortMax: …`
+
+  Maximum effort. Favors reasoning depth over latency.
+
+  - `type: Literal["max"]`
+
+    - `"max"`
+
+### Beta Managed Agents Effort Medium
+
+- `class BetaManagedAgentsEffortMedium: …`
+
+  Medium effort. Balances latency and reasoning depth.
+
+  - `type: Literal["medium"]`
+
+    - `"medium"`
+
+### Beta Managed Agents Effort Xhigh
+
+- `class BetaManagedAgentsEffortXhigh: …`
+
+  Extra-high effort. Not all models accept this level.
+
+  - `type: Literal["xhigh"]`
+
+    - `"xhigh"`
+
 ### Beta Managed Agents MCP Server URL Definition
 
 - `class BetaManagedAgentsMCPServerURLDefinition: …`
@@ -4535,6 +4990,50 @@ print(beta_managed_agents_agent.id)
 
     - `str`
 
+  - `effort: Optional[Effort]`
+
+    How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+    - `class BetaManagedAgentsEffortLow: …`
+
+      Low effort. Favors latency over reasoning depth.
+
+      - `type: Literal["low"]`
+
+        - `"low"`
+
+    - `class BetaManagedAgentsEffortMedium: …`
+
+      Medium effort. Balances latency and reasoning depth.
+
+      - `type: Literal["medium"]`
+
+        - `"medium"`
+
+    - `class BetaManagedAgentsEffortHigh: …`
+
+      High effort. Favors reasoning depth.
+
+      - `type: Literal["high"]`
+
+        - `"high"`
+
+    - `class BetaManagedAgentsEffortXhigh: …`
+
+      Extra-high effort. Not all models accept this level.
+
+      - `type: Literal["xhigh"]`
+
+        - `"xhigh"`
+
+    - `class BetaManagedAgentsEffortMax: …`
+
+      Maximum effort. Favors reasoning depth over latency.
+
+      - `type: Literal["max"]`
+
+        - `"max"`
+
   - `speed: Optional[Literal["standard", "fast"]]`
 
     Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
@@ -4623,6 +5122,64 @@ print(beta_managed_agents_agent.id)
         High-performance model for agents and coding
 
     - `str`
+
+  - `effort: Optional[Effort]`
+
+    How hard Claude works on each inference call. Accepts a bare level string (`"high"`) or `{"type": "high"}`. On create, omitting it resolves the per-model default; on update, omitting it leaves the stored value unchanged.
+
+    - `Literal["low", "medium", "high", 2 more]`
+
+      How hard Claude works on each turn. Higher levels favor reasoning depth over latency. Not all models accept every level; invalid combinations are rejected at create time.
+
+      - `"low"`
+
+      - `"medium"`
+
+      - `"high"`
+
+      - `"xhigh"`
+
+      - `"max"`
+
+    - `class BetaManagedAgentsEffortLow: …`
+
+      Low effort. Favors latency over reasoning depth.
+
+      - `type: Literal["low"]`
+
+        - `"low"`
+
+    - `class BetaManagedAgentsEffortMedium: …`
+
+      Medium effort. Balances latency and reasoning depth.
+
+      - `type: Literal["medium"]`
+
+        - `"medium"`
+
+    - `class BetaManagedAgentsEffortHigh: …`
+
+      High effort. Favors reasoning depth.
+
+      - `type: Literal["high"]`
+
+        - `"high"`
+
+    - `class BetaManagedAgentsEffortXhigh: …`
+
+      Extra-high effort. Not all models accept this level.
+
+      - `type: Literal["xhigh"]`
+
+        - `"xhigh"`
+
+    - `class BetaManagedAgentsEffortMax: …`
+
+      Maximum effort. Favors reasoning depth over latency.
+
+      - `type: Literal["max"]`
+
+        - `"max"`
 
   - `speed: Optional[Literal["standard", "fast"]]`
 
@@ -4802,6 +5359,50 @@ print(beta_managed_agents_agent.id)
           High-performance model for agents and coding
 
       - `str`
+
+    - `effort: Optional[Effort]`
+
+      How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+      - `class BetaManagedAgentsEffortLow: …`
+
+        Low effort. Favors latency over reasoning depth.
+
+        - `type: Literal["low"]`
+
+          - `"low"`
+
+      - `class BetaManagedAgentsEffortMedium: …`
+
+        Medium effort. Balances latency and reasoning depth.
+
+        - `type: Literal["medium"]`
+
+          - `"medium"`
+
+      - `class BetaManagedAgentsEffortHigh: …`
+
+        High effort. Favors reasoning depth.
+
+        - `type: Literal["high"]`
+
+          - `"high"`
+
+      - `class BetaManagedAgentsEffortXhigh: …`
+
+        Extra-high effort. Not all models accept this level.
+
+        - `type: Literal["xhigh"]`
+
+          - `"xhigh"`
+
+      - `class BetaManagedAgentsEffortMax: …`
+
+        Maximum effort. Favors reasoning depth over latency.
+
+        - `type: Literal["max"]`
+
+          - `"max"`
 
     - `speed: Optional[Literal["standard", "fast"]]`
 
@@ -5069,7 +5670,7 @@ List Agent Versions
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -5120,6 +5721,8 @@ List Agent Versions
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -5237,6 +5840,50 @@ List Agent Versions
           High-performance model for agents and coding
 
       - `str`
+
+    - `effort: Optional[Effort]`
+
+      How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+      - `class BetaManagedAgentsEffortLow: …`
+
+        Low effort. Favors latency over reasoning depth.
+
+        - `type: Literal["low"]`
+
+          - `"low"`
+
+      - `class BetaManagedAgentsEffortMedium: …`
+
+        Medium effort. Balances latency and reasoning depth.
+
+        - `type: Literal["medium"]`
+
+          - `"medium"`
+
+      - `class BetaManagedAgentsEffortHigh: …`
+
+        High effort. Favors reasoning depth.
+
+        - `type: Literal["high"]`
+
+          - `"high"`
+
+      - `class BetaManagedAgentsEffortXhigh: …`
+
+        Extra-high effort. Not all models accept this level.
+
+        - `type: Literal["xhigh"]`
+
+          - `"xhigh"`
+
+      - `class BetaManagedAgentsEffortMax: …`
+
+        Maximum effort. Favors reasoning depth over latency.
+
+        - `type: Literal["max"]`
+
+          - `"max"`
 
     - `speed: Optional[Literal["standard", "fast"]]`
 
@@ -5484,6 +6131,9 @@ print(page.id)
       },
       "model": {
         "id": "claude-sonnet-4-6",
+        "effort": {
+          "type": "low"
+        },
         "speed": "standard"
       },
       "multiagent": {

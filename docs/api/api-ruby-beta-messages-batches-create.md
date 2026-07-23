@@ -1472,6 +1472,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
       - `speed: :standard | :fast`
 
+        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
         - `:standard`
 
         - `:fast`
@@ -1576,7 +1578,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     - `speed: :standard | :fast`
 
-      The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
+      Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
       - `:standard`
 
@@ -3005,7 +3007,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 26 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 27 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -3056,6 +3058,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
     - `:"managed-agents-2026-04-01"`
 
     - `:"cache-diagnosis-2026-04-07"`
+
+    - `:"dreaming-2026-04-21"`
 
     - `:"thinking-token-count-2026-05-13"`
 

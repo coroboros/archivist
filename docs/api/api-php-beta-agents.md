@@ -170,6 +170,9 @@ var_dump($betaManagedAgentsAgent);
   },
   "model": {
     "id": "claude-sonnet-4-6",
+    "effort": {
+      "type": "low"
+    },
     "speed": "standard"
   },
   "multiagent": {
@@ -345,6 +348,9 @@ var_dump($page);
       },
       "model": {
         "id": "claude-sonnet-4-6",
+        "effort": {
+          "type": "low"
+        },
         "speed": "standard"
       },
       "multiagent": {
@@ -504,6 +510,9 @@ var_dump($betaManagedAgentsAgent);
   },
   "model": {
     "id": "claude-sonnet-4-6",
+    "effort": {
+      "type": "low"
+    },
     "speed": "standard"
   },
   "multiagent": {
@@ -558,7 +567,7 @@ var_dump($betaManagedAgentsAgent);
 
 ## Update Agent
 
-`$client->beta->agents->update(string agentID, int version, ?string description, ?list<BetaManagedAgentsURLMCPServerParams> mcpServers, ?array<string,string> metadata, ?Model model, ?BetaManagedAgentsMultiagentParams multiagent, ?string name, ?list<BetaManagedAgentsSkillParams> skills, ?string system, ?list<Tool> tools, ?list<AnthropicBeta> betas): BetaManagedAgentsAgent`
+`$client->beta->agents->update(string agentID, ?string description, ?list<BetaManagedAgentsURLMCPServerParams> mcpServers, ?array<string,string> metadata, ?Model model, ?BetaManagedAgentsMultiagentParams multiagent, ?string name, ?list<BetaManagedAgentsSkillParams> skills, ?string system, ?list<Tool> tools, ?int version, ?list<AnthropicBeta> betas): BetaManagedAgentsAgent`
 
 **post** `/v1/agents/{agent_id}`
 
@@ -567,10 +576,6 @@ Update Agent
 ### Parameters
 
 - `agentID: string`
-
-- `version: int`
-
-  The agent's current version, used to prevent concurrent overwrites. Obtain this value from a create or retrieve response. The request fails if this does not match the server's current version.
 
 - `description?:optional string`
 
@@ -607,6 +612,10 @@ Update Agent
 - `tools?:optional list<Tool>`
 
   Tool configurations available to the agent. Full replacement. Omit to preserve; send empty array or null to clear. Maximum of 128 tools across all toolsets allowed.
+
+- `version?:optional int`
+
+  The agent's current version, used to prevent concurrent overwrites. Obtain this value from a create or retrieve response. Must be at least 1 if specified. When supplied, the request fails if it does not match the server's current version; omit to apply the update unconditionally.
 
 - `betas?:optional list<AnthropicBeta>`
 
@@ -669,8 +678,7 @@ $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaManagedAgentsAgent = $client->beta->agents->update(
   'agent_011CZkYpogX7uDKUyvBTophP',
-  version: 1,
-  description: 'description',
+  description: 'updated',
   mcpServers: [
     [
       'name' => 'example-mcp',
@@ -679,7 +687,7 @@ $betaManagedAgentsAgent = $client->beta->agents->update(
     ],
   ],
   metadata: ['foo' => 'string'],
-  model: ['id' => 'claude-opus-4-6', 'speed' => 'standard'],
+  model: ['id' => 'claude-opus-4-8', 'effort' => 'low', 'speed' => 'standard'],
   multiagent: [
     'agents' => ['agent_011CZkYqphY8vELVzwCUpqiQ', ['type' => 'self']],
     'type' => 'coordinator',
@@ -702,6 +710,7 @@ $betaManagedAgentsAgent = $client->beta->agents->update(
       ],
     ],
   ],
+  version: 1,
   betas: ['message-batches-2024-09-24'],
 );
 
@@ -728,6 +737,9 @@ var_dump($betaManagedAgentsAgent);
   },
   "model": {
     "id": "claude-sonnet-4-6",
+    "effort": {
+      "type": "low"
+    },
     "speed": "standard"
   },
   "multiagent": {
@@ -878,6 +890,9 @@ var_dump($betaManagedAgentsAgent);
   },
   "model": {
     "id": "claude-sonnet-4-6",
+    "effort": {
+      "type": "low"
+    },
     "speed": "standard"
   },
   "multiagent": {
@@ -1262,6 +1277,36 @@ var_dump($betaManagedAgentsAgent);
 
   - `Type type`
 
+### Beta Managed Agents Effort High
+
+- `BetaManagedAgentsEffortHigh`
+
+  - `Type type`
+
+### Beta Managed Agents Effort Low
+
+- `BetaManagedAgentsEffortLow`
+
+  - `Type type`
+
+### Beta Managed Agents Effort Max
+
+- `BetaManagedAgentsEffortMax`
+
+  - `Type type`
+
+### Beta Managed Agents Effort Medium
+
+- `BetaManagedAgentsEffortMedium`
+
+  - `Type type`
+
+### Beta Managed Agents Effort Xhigh
+
+- `BetaManagedAgentsEffortXhigh`
+
+  - `Type type`
+
 ### Beta Managed Agents MCP Server URL Definition
 
 - `BetaManagedAgentsMCPServerURLDefinition`
@@ -1416,6 +1461,10 @@ var_dump($betaManagedAgentsAgent);
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+  - `?Effort effort`
+
+    How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
   - `?Speed speed`
 
     Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
@@ -1429,6 +1478,10 @@ var_dump($betaManagedAgentsAgent);
     The model that will power your agent.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+  - `?Effort effort`
+
+    How hard Claude works on each inference call. Accepts a bare level string (`"high"`) or `{"type": "high"}`. On create, omitting it resolves the per-model default; on update, omitting it leaves the stored value unchanged.
 
   - `?Speed speed`
 
@@ -1641,6 +1694,9 @@ var_dump($page);
       },
       "model": {
         "id": "claude-sonnet-4-6",
+        "effort": {
+          "type": "low"
+        },
         "speed": "standard"
       },
       "multiagent": {

@@ -34,7 +34,7 @@ Create Skill
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 26 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 27 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -85,6 +85,8 @@ Create Skill
     - `:"managed-agents-2026-04-01"`
 
     - `:"cache-diagnosis-2026-04-07"`
+
+    - `:"dreaming-2026-04-21"`
 
     - `:"thinking-token-count-2026-05-13"`
 
@@ -202,7 +204,7 @@ List Skills
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 26 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 27 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -253,6 +255,8 @@ List Skills
     - `:"managed-agents-2026-04-01"`
 
     - `:"cache-diagnosis-2026-04-07"`
+
+    - `:"dreaming-2026-04-21"`
 
     - `:"thinking-token-count-2026-05-13"`
 
@@ -361,7 +365,7 @@ Get Skill
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 26 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 27 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -412,6 +416,8 @@ Get Skill
     - `:"managed-agents-2026-04-01"`
 
     - `:"cache-diagnosis-2026-04-07"`
+
+    - `:"dreaming-2026-04-21"`
 
     - `:"thinking-token-count-2026-05-13"`
 
@@ -514,7 +520,7 @@ Delete Skill
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 26 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 27 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -565,6 +571,8 @@ Delete Skill
     - `:"managed-agents-2026-04-01"`
 
     - `:"cache-diagnosis-2026-04-07"`
+
+    - `:"dreaming-2026-04-21"`
 
     - `:"thinking-token-count-2026-05-13"`
 
@@ -794,7 +802,7 @@ Create Skill Version
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 26 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 27 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -845,6 +853,8 @@ Create Skill Version
     - `:"managed-agents-2026-04-01"`
 
     - `:"cache-diagnosis-2026-04-07"`
+
+    - `:"dreaming-2026-04-21"`
 
     - `:"thinking-token-count-2026-05-13"`
 
@@ -961,7 +971,7 @@ List Skill Versions
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 26 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 27 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -1012,6 +1022,8 @@ List Skill Versions
     - `:"managed-agents-2026-04-01"`
 
     - `:"cache-diagnosis-2026-04-07"`
+
+    - `:"dreaming-2026-04-21"`
 
     - `:"thinking-token-count-2026-05-13"`
 
@@ -1130,7 +1142,7 @@ Download a skill version's content as a zip archive.
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 26 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 27 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -1181,6 +1193,8 @@ Download a skill version's content as a zip archive.
     - `:"managed-agents-2026-04-01"`
 
     - `:"cache-diagnosis-2026-04-07"`
+
+    - `:"dreaming-2026-04-21"`
 
     - `:"thinking-token-count-2026-05-13"`
 
@@ -1234,7 +1248,7 @@ Get Skill Version
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 26 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 27 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -1285,6 +1299,8 @@ Get Skill Version
     - `:"managed-agents-2026-04-01"`
 
     - `:"cache-diagnosis-2026-04-07"`
+
+    - `:"dreaming-2026-04-21"`
 
     - `:"thinking-token-count-2026-05-13"`
 
@@ -1397,7 +1413,7 @@ Delete Skill Version
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 26 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 27 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -1448,6 +1464,8 @@ Delete Skill Version
     - `:"managed-agents-2026-04-01"`
 
     - `:"cache-diagnosis-2026-04-07"`
+
+    - `:"dreaming-2026-04-21"`
 
     - `:"thinking-token-count-2026-05-13"`
 

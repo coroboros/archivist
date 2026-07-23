@@ -36,7 +36,7 @@ Create a memory store
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 26 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 27 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -87,6 +87,8 @@ Create a memory store
       - `"managed-agents-2026-04-01"`
 
       - `"cache-diagnosis-2026-04-07"`
+
+      - `"dreaming-2026-04-21"`
 
       - `"thinking-token-count-2026-05-13"`
 
@@ -203,7 +205,7 @@ List memory stores
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 26 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 27 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -254,6 +256,8 @@ List memory stores
       - `"managed-agents-2026-04-01"`
 
       - `"cache-diagnosis-2026-04-07"`
+
+      - `"dreaming-2026-04-21"`
 
       - `"thinking-token-count-2026-05-13"`
 
@@ -358,7 +362,7 @@ Retrieve a memory store
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 26 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 27 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -409,6 +413,8 @@ Retrieve a memory store
       - `"managed-agents-2026-04-01"`
 
       - `"cache-diagnosis-2026-04-07"`
+
+      - `"dreaming-2026-04-21"`
 
       - `"thinking-token-count-2026-05-13"`
 
@@ -519,7 +525,7 @@ Update a memory store
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 26 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 27 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -570,6 +576,8 @@ Update a memory store
       - `"managed-agents-2026-04-01"`
 
       - `"cache-diagnosis-2026-04-07"`
+
+      - `"dreaming-2026-04-21"`
 
       - `"thinking-token-count-2026-05-13"`
 
@@ -668,7 +676,7 @@ Delete a memory store
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 26 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 27 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -719,6 +727,8 @@ Delete a memory store
       - `"managed-agents-2026-04-01"`
 
       - `"cache-diagnosis-2026-04-07"`
+
+      - `"dreaming-2026-04-21"`
 
       - `"thinking-token-count-2026-05-13"`
 
@@ -787,7 +797,7 @@ Archive a memory store
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 26 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 27 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -838,6 +848,8 @@ Archive a memory store
       - `"managed-agents-2026-04-01"`
 
       - `"cache-diagnosis-2026-04-07"`
+
+      - `"dreaming-2026-04-21"`
 
       - `"thinking-token-count-2026-05-13"`
 
@@ -1008,7 +1020,7 @@ Create a memory
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 26 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 27 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -1059,6 +1071,8 @@ Create a memory
       - `"managed-agents-2026-04-01"`
 
       - `"cache-diagnosis-2026-04-07"`
+
+      - `"dreaming-2026-04-21"`
 
       - `"thinking-token-count-2026-05-13"`
 
@@ -1192,7 +1206,7 @@ List memories
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 26 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 27 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -1243,6 +1257,8 @@ List memories
       - `"managed-agents-2026-04-01"`
 
       - `"cache-diagnosis-2026-04-07"`
+
+      - `"dreaming-2026-04-21"`
 
       - `"thinking-token-count-2026-05-13"`
 
@@ -1385,7 +1401,7 @@ Retrieve a memory
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 26 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 27 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -1436,6 +1452,8 @@ Retrieve a memory
       - `"managed-agents-2026-04-01"`
 
       - `"cache-diagnosis-2026-04-07"`
+
+      - `"dreaming-2026-04-21"`
 
       - `"thinking-token-count-2026-05-13"`
 
@@ -1576,7 +1594,7 @@ Update a memory
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 26 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 27 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -1627,6 +1645,8 @@ Update a memory
       - `"managed-agents-2026-04-01"`
 
       - `"cache-diagnosis-2026-04-07"`
+
+      - `"dreaming-2026-04-21"`
 
       - `"thinking-token-count-2026-05-13"`
 
@@ -1743,7 +1763,7 @@ Delete a memory
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 26 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 27 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -1794,6 +1814,8 @@ Delete a memory
       - `"managed-agents-2026-04-01"`
 
       - `"cache-diagnosis-2026-04-07"`
+
+      - `"dreaming-2026-04-21"`
 
       - `"thinking-token-count-2026-05-13"`
 
@@ -2224,7 +2246,7 @@ List memory versions
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 26 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 27 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -2275,6 +2297,8 @@ List memory versions
       - `"managed-agents-2026-04-01"`
 
       - `"cache-diagnosis-2026-04-07"`
+
+      - `"dreaming-2026-04-21"`
 
       - `"thinking-token-count-2026-05-13"`
 
@@ -2464,7 +2488,7 @@ Retrieve a memory version
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 26 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 27 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -2515,6 +2539,8 @@ Retrieve a memory version
       - `"managed-agents-2026-04-01"`
 
       - `"cache-diagnosis-2026-04-07"`
+
+      - `"dreaming-2026-04-21"`
 
       - `"thinking-token-count-2026-05-13"`
 
@@ -2691,7 +2717,7 @@ Redact a memory version
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 26 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 27 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -2742,6 +2768,8 @@ Redact a memory version
       - `"managed-agents-2026-04-01"`
 
       - `"cache-diagnosis-2026-04-07"`
+
+      - `"dreaming-2026-04-21"`
 
       - `"thinking-token-count-2026-05-13"`
 

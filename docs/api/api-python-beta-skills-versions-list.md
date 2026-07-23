@@ -36,7 +36,7 @@ List Skill Versions
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -87,6 +87,8 @@ List Skill Versions
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 

@@ -1491,6 +1491,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
       - `speed: Optional[Literal["standard", "fast"]]`
 
+        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
         - `"standard"`
 
         - `"fast"`
@@ -1595,7 +1597,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     - `speed: Optional[Literal["standard", "fast"]]`
 
-      The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
+      Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
       - `"standard"`
 
@@ -3024,7 +3026,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -3075,6 +3077,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -3248,7 +3252,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -3299,6 +3303,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -3468,7 +3474,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -3519,6 +3525,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -3686,7 +3694,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -3737,6 +3745,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -3898,7 +3908,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -3949,6 +3959,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -4022,7 +4034,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -4073,6 +4085,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -5048,17 +5062,29 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               What caused the `from` model to hand over at this hop.
 
-              - `category: Optional[Literal["cyber", "bio", "frontier_llm", "reasoning_extraction"]]`
+              - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
 
                 The policy category that triggered a refusal.
 
                 - `"cyber"`
 
+                  The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
                 - `"bio"`
+
+                  The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
                 - `"frontier_llm"`
 
+                  The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
                 - `"reasoning_extraction"`
+
+                  The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../build-with-claude/build-with-claude-adaptive-thinking.md).
+
+                - `"general_harms"`
+
+                  The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
               - `type: Literal["refusal"]`
 
@@ -5189,17 +5215,29 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           Structured information about a refusal.
 
-          - `category: Optional[Literal["cyber", "bio", "frontier_llm", "reasoning_extraction"]]`
+          - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
 
             The policy category that triggered a refusal.
 
             - `"cyber"`
 
+              The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
             - `"bio"`
+
+              The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
             - `"frontier_llm"`
 
+              The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
             - `"reasoning_extraction"`
+
+              The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../build-with-claude/build-with-claude-adaptive-thinking.md).
+
+            - `"general_harms"`
+
+              The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
           - `explanation: Optional[str]`
 
@@ -5546,7 +5584,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           - `speed: Optional[Literal["standard", "fast"]]`
 
-            The inference speed mode used for this request.
+            Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
             - `"standard"`
 
@@ -6851,17 +6889,29 @@ for batch in client.beta.messages.batches.results(
 
               What caused the `from` model to hand over at this hop.
 
-              - `category: Optional[Literal["cyber", "bio", "frontier_llm", "reasoning_extraction"]]`
+              - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
 
                 The policy category that triggered a refusal.
 
                 - `"cyber"`
 
+                  The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
                 - `"bio"`
+
+                  The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
                 - `"frontier_llm"`
 
+                  The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
                 - `"reasoning_extraction"`
+
+                  The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../build-with-claude/build-with-claude-adaptive-thinking.md).
+
+                - `"general_harms"`
+
+                  The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
               - `type: Literal["refusal"]`
 
@@ -6992,17 +7042,29 @@ for batch in client.beta.messages.batches.results(
 
           Structured information about a refusal.
 
-          - `category: Optional[Literal["cyber", "bio", "frontier_llm", "reasoning_extraction"]]`
+          - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
 
             The policy category that triggered a refusal.
 
             - `"cyber"`
 
+              The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
             - `"bio"`
+
+              The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
             - `"frontier_llm"`
 
+              The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
             - `"reasoning_extraction"`
+
+              The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../build-with-claude/build-with-claude-adaptive-thinking.md).
+
+            - `"general_harms"`
+
+              The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
           - `explanation: Optional[str]`
 
@@ -7349,7 +7411,7 @@ for batch in client.beta.messages.batches.results(
 
           - `speed: Optional[Literal["standard", "fast"]]`
 
-            The inference speed mode used for this request.
+            Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
             - `"standard"`
 
@@ -8447,17 +8509,29 @@ for batch in client.beta.messages.batches.results(
 
             What caused the `from` model to hand over at this hop.
 
-            - `category: Optional[Literal["cyber", "bio", "frontier_llm", "reasoning_extraction"]]`
+            - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
 
               The policy category that triggered a refusal.
 
               - `"cyber"`
 
+                The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
               - `"bio"`
+
+                The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
               - `"frontier_llm"`
 
+                The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
               - `"reasoning_extraction"`
+
+                The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../build-with-claude/build-with-claude-adaptive-thinking.md).
+
+              - `"general_harms"`
+
+                The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
             - `type: Literal["refusal"]`
 
@@ -8588,17 +8662,29 @@ for batch in client.beta.messages.batches.results(
 
         Structured information about a refusal.
 
-        - `category: Optional[Literal["cyber", "bio", "frontier_llm", "reasoning_extraction"]]`
+        - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
 
           The policy category that triggered a refusal.
 
           - `"cyber"`
 
+            The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
           - `"bio"`
+
+            The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
           - `"frontier_llm"`
 
+            The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
           - `"reasoning_extraction"`
+
+            The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../build-with-claude/build-with-claude-adaptive-thinking.md).
+
+          - `"general_harms"`
+
+            The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
         - `explanation: Optional[str]`
 
@@ -8945,7 +9031,7 @@ for batch in client.beta.messages.batches.results(
 
         - `speed: Optional[Literal["standard", "fast"]]`
 
-          The inference speed mode used for this request.
+          Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
           - `"standard"`
 
@@ -10005,17 +10091,29 @@ for batch in client.beta.messages.batches.results(
 
           What caused the `from` model to hand over at this hop.
 
-          - `category: Optional[Literal["cyber", "bio", "frontier_llm", "reasoning_extraction"]]`
+          - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
 
             The policy category that triggered a refusal.
 
             - `"cyber"`
 
+              The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
             - `"bio"`
+
+              The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
             - `"frontier_llm"`
 
+              The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
             - `"reasoning_extraction"`
+
+              The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../build-with-claude/build-with-claude-adaptive-thinking.md).
+
+            - `"general_harms"`
+
+              The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
           - `type: Literal["refusal"]`
 
@@ -10146,17 +10244,29 @@ for batch in client.beta.messages.batches.results(
 
       Structured information about a refusal.
 
-      - `category: Optional[Literal["cyber", "bio", "frontier_llm", "reasoning_extraction"]]`
+      - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
 
         The policy category that triggered a refusal.
 
         - `"cyber"`
 
+          The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
         - `"bio"`
+
+          The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
         - `"frontier_llm"`
 
+          The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
         - `"reasoning_extraction"`
+
+          The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../build-with-claude/build-with-claude-adaptive-thinking.md).
+
+        - `"general_harms"`
+
+          The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
       - `explanation: Optional[str]`
 
@@ -10503,7 +10613,7 @@ for batch in client.beta.messages.batches.results(
 
       - `speed: Optional[Literal["standard", "fast"]]`
 
-        The inference speed mode used for this request.
+        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
         - `"standard"`
 

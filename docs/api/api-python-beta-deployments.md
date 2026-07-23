@@ -50,7 +50,7 @@ Create Deployment
 
     Parameters for sending a user message to the session.
 
-    - `content: List[Content]`
+    - `content: Iterable[Content]`
 
       Array of content blocks for the user message.
 
@@ -390,7 +390,7 @@ Create Deployment
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -441,6 +441,8 @@ Create Deployment
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -1114,7 +1116,7 @@ List Deployments
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -1165,6 +1167,8 @@ List Deployments
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -1803,7 +1807,7 @@ Get Deployment
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -1854,6 +1858,8 @@ Get Deployment
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -2520,7 +2526,7 @@ Update Deployment
 
     Parameters for sending a user message to the session.
 
-    - `content: List[Content]`
+    - `content: Iterable[Content]`
 
       Array of content blocks for the user message.
 
@@ -2856,7 +2862,7 @@ Update Deployment
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -2907,6 +2913,8 @@ Update Deployment
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -3541,7 +3549,7 @@ Archive Deployment
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -3592,6 +3600,8 @@ Archive Deployment
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -4226,7 +4236,7 @@ Run Deployment Now
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -4277,6 +4287,8 @@ Run Deployment Now
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -4602,7 +4614,7 @@ Pause Deployment
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -4653,6 +4665,8 @@ Pause Deployment
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -5287,7 +5301,7 @@ Unpause Deployment
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -5338,6 +5352,8 @@ Unpause Deployment
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -6776,7 +6792,7 @@ print(beta_managed_agents_deployment.id)
 
     Parameters for sending a user message to the session.
 
-    - `content: List[Content]`
+    - `content: Iterable[Content]`
 
       Array of content blocks for the user message.
 

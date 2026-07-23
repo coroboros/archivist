@@ -1240,7 +1240,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
   - `Speed param.Field[BetaMessageCountTokensParamsSpeed]`
 
-    Body param: The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
+    Body param: Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
     - `const BetaMessageCountTokensParamsSpeedStandard BetaMessageCountTokensParamsSpeed = "standard"`
 
@@ -2622,6 +2622,8 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
 
       - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
+
+      - `const AnthropicBetaDreaming2026_04_21 AnthropicBeta = "dreaming-2026-04-21"`
 
       - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
 

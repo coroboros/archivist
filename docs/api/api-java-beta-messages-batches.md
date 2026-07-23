@@ -76,6 +76,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
 
+    - `DREAMING_2026_04_21("dreaming-2026-04-21")`
+
     - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
@@ -1534,6 +1536,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         - `Optional<Speed> speed`
 
+          Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
           - `STANDARD("standard")`
 
           - `FAST("fast")`
@@ -1638,7 +1642,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
       - `Optional<Speed> speed`
 
-        The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
+        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
         - `STANDARD("standard")`
 
@@ -3278,6 +3282,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
 
+    - `DREAMING_2026_04_21("dreaming-2026-04-21")`
+
     - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
@@ -3502,6 +3508,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
 
+    - `DREAMING_2026_04_21("dreaming-2026-04-21")`
+
     - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
@@ -3725,6 +3733,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
 
+    - `DREAMING_2026_04_21("dreaming-2026-04-21")`
+
     - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
@@ -3941,6 +3951,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
 
+    - `DREAMING_2026_04_21("dreaming-2026-04-21")`
+
     - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
@@ -4068,6 +4080,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
 
     - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
+
+    - `DREAMING_2026_04_21("dreaming-2026-04-21")`
 
     - `THINKING_TOKEN_COUNT_2026_05_13("thinking-token-count-2026-05-13")`
 
@@ -5024,11 +5038,23 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `CYBER("cyber")`
 
+                  The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
                 - `BIO("bio")`
+
+                  The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
                 - `FRONTIER_LLM("frontier_llm")`
 
+                  The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
                 - `REASONING_EXTRACTION("reasoning_extraction")`
+
+                  The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../build-with-claude/build-with-claude-adaptive-thinking.md).
+
+                - `GENERAL_HARMS("general_harms")`
+
+                  The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
               - `JsonValue; type "refusal"constant`
 
@@ -5165,11 +5191,23 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `CYBER("cyber")`
 
+              The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
             - `BIO("bio")`
+
+              The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
             - `FRONTIER_LLM("frontier_llm")`
 
+              The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
             - `REASONING_EXTRACTION("reasoning_extraction")`
+
+              The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../build-with-claude/build-with-claude-adaptive-thinking.md).
+
+            - `GENERAL_HARMS("general_harms")`
+
+              The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
           - `Optional<String> explanation`
 
@@ -5516,7 +5554,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           - `Optional<Speed> speed`
 
-            The inference speed mode used for this request.
+            Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
             - `STANDARD("standard")`
 
@@ -6809,11 +6847,23 @@ public final class Main {
 
                 - `CYBER("cyber")`
 
+                  The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
                 - `BIO("bio")`
+
+                  The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
                 - `FRONTIER_LLM("frontier_llm")`
 
+                  The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
                 - `REASONING_EXTRACTION("reasoning_extraction")`
+
+                  The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../build-with-claude/build-with-claude-adaptive-thinking.md).
+
+                - `GENERAL_HARMS("general_harms")`
+
+                  The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
               - `JsonValue; type "refusal"constant`
 
@@ -6950,11 +7000,23 @@ public final class Main {
 
             - `CYBER("cyber")`
 
+              The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
             - `BIO("bio")`
+
+              The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
             - `FRONTIER_LLM("frontier_llm")`
 
+              The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
             - `REASONING_EXTRACTION("reasoning_extraction")`
+
+              The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../build-with-claude/build-with-claude-adaptive-thinking.md).
+
+            - `GENERAL_HARMS("general_harms")`
+
+              The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
           - `Optional<String> explanation`
 
@@ -7301,7 +7363,7 @@ public final class Main {
 
           - `Optional<Speed> speed`
 
-            The inference speed mode used for this request.
+            Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
             - `STANDARD("standard")`
 
@@ -8380,11 +8442,23 @@ public final class Main {
 
               - `CYBER("cyber")`
 
+                The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
               - `BIO("bio")`
+
+                The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
               - `FRONTIER_LLM("frontier_llm")`
 
+                The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
               - `REASONING_EXTRACTION("reasoning_extraction")`
+
+                The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../build-with-claude/build-with-claude-adaptive-thinking.md).
+
+              - `GENERAL_HARMS("general_harms")`
+
+                The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
             - `JsonValue; type "refusal"constant`
 
@@ -8521,11 +8595,23 @@ public final class Main {
 
           - `CYBER("cyber")`
 
+            The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
           - `BIO("bio")`
+
+            The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
           - `FRONTIER_LLM("frontier_llm")`
 
+            The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
           - `REASONING_EXTRACTION("reasoning_extraction")`
+
+            The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../build-with-claude/build-with-claude-adaptive-thinking.md).
+
+          - `GENERAL_HARMS("general_harms")`
+
+            The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
         - `Optional<String> explanation`
 
@@ -8872,7 +8958,7 @@ public final class Main {
 
         - `Optional<Speed> speed`
 
-          The inference speed mode used for this request.
+          Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
           - `STANDARD("standard")`
 
@@ -9913,11 +9999,23 @@ public final class Main {
 
             - `CYBER("cyber")`
 
+              The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
             - `BIO("bio")`
+
+              The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
             - `FRONTIER_LLM("frontier_llm")`
 
+              The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
             - `REASONING_EXTRACTION("reasoning_extraction")`
+
+              The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../build-with-claude/build-with-claude-adaptive-thinking.md).
+
+            - `GENERAL_HARMS("general_harms")`
+
+              The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
           - `JsonValue; type "refusal"constant`
 
@@ -10054,11 +10152,23 @@ public final class Main {
 
         - `CYBER("cyber")`
 
+          The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
         - `BIO("bio")`
+
+          The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
         - `FRONTIER_LLM("frontier_llm")`
 
+          The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
         - `REASONING_EXTRACTION("reasoning_extraction")`
+
+          The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../build-with-claude/build-with-claude-adaptive-thinking.md).
+
+        - `GENERAL_HARMS("general_harms")`
+
+          The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
       - `Optional<String> explanation`
 
@@ -10405,7 +10515,7 @@ public final class Main {
 
       - `Optional<Speed> speed`
 
-        The inference speed mode used for this request.
+        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
         - `STANDARD("standard")`
 

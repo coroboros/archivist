@@ -190,6 +190,62 @@ generated: true
 
   - `string workspaceID`
 
+### Beta Webhook Environment Archived Event Data
+
+- `BetaWebhookEnvironmentArchivedEventData`
+
+  - `string id`
+
+    ID of the environment that triggered the event.
+
+  - `string organizationID`
+
+  - `"environment.archived" type`
+
+  - `string workspaceID`
+
+### Beta Webhook Environment Created Event Data
+
+- `BetaWebhookEnvironmentCreatedEventData`
+
+  - `string id`
+
+    ID of the environment that triggered the event.
+
+  - `string organizationID`
+
+  - `"environment.created" type`
+
+  - `string workspaceID`
+
+### Beta Webhook Environment Deleted Event Data
+
+- `BetaWebhookEnvironmentDeletedEventData`
+
+  - `string id`
+
+    ID of the environment that triggered the event.
+
+  - `string organizationID`
+
+  - `"environment.deleted" type`
+
+  - `string workspaceID`
+
+### Beta Webhook Environment Updated Event Data
+
+- `BetaWebhookEnvironmentUpdatedEventData`
+
+  - `string id`
+
+    ID of the environment that triggered the event.
+
+  - `string organizationID`
+
+  - `"environment.updated" type`
+
+  - `string workspaceID`
+
 ### Beta Webhook Event
 
 - `BetaWebhookEvent`
@@ -671,6 +727,132 @@ generated: true
     - `"deployment_run.succeeded" type`
 
     - `string workspaceID`
+
+  - `BetaWebhookEnvironmentCreatedEventData`
+
+    - `string id`
+
+      ID of the environment that triggered the event.
+
+    - `string organizationID`
+
+    - `"environment.created" type`
+
+    - `string workspaceID`
+
+  - `BetaWebhookEnvironmentUpdatedEventData`
+
+    - `string id`
+
+      ID of the environment that triggered the event.
+
+    - `string organizationID`
+
+    - `"environment.updated" type`
+
+    - `string workspaceID`
+
+  - `BetaWebhookEnvironmentArchivedEventData`
+
+    - `string id`
+
+      ID of the environment that triggered the event.
+
+    - `string organizationID`
+
+    - `"environment.archived" type`
+
+    - `string workspaceID`
+
+  - `BetaWebhookEnvironmentDeletedEventData`
+
+    - `string id`
+
+      ID of the environment that triggered the event.
+
+    - `string organizationID`
+
+    - `"environment.deleted" type`
+
+    - `string workspaceID`
+
+  - `BetaWebhookMemoryStoreCreatedEventData`
+
+    - `string id`
+
+      ID of the memory store that triggered the event.
+
+    - `string organizationID`
+
+    - `"memory_store.created" type`
+
+    - `string workspaceID`
+
+  - `BetaWebhookMemoryStoreArchivedEventData`
+
+    - `string id`
+
+      ID of the memory store that triggered the event.
+
+    - `string organizationID`
+
+    - `"memory_store.archived" type`
+
+    - `string workspaceID`
+
+  - `BetaWebhookMemoryStoreDeletedEventData`
+
+    - `string id`
+
+      ID of the memory store that triggered the event.
+
+    - `string organizationID`
+
+    - `"memory_store.deleted" type`
+
+    - `string workspaceID`
+
+### Beta Webhook Memory Store Archived Event Data
+
+- `BetaWebhookMemoryStoreArchivedEventData`
+
+  - `string id`
+
+    ID of the memory store that triggered the event.
+
+  - `string organizationID`
+
+  - `"memory_store.archived" type`
+
+  - `string workspaceID`
+
+### Beta Webhook Memory Store Created Event Data
+
+- `BetaWebhookMemoryStoreCreatedEventData`
+
+  - `string id`
+
+    ID of the memory store that triggered the event.
+
+  - `string organizationID`
+
+  - `"memory_store.created" type`
+
+  - `string workspaceID`
+
+### Beta Webhook Memory Store Deleted Event Data
+
+- `BetaWebhookMemoryStoreDeletedEventData`
+
+  - `string id`
+
+    ID of the memory store that triggered the event.
+
+  - `string organizationID`
+
+  - `"memory_store.deleted" type`
+
+  - `string workspaceID`
 
 ### Beta Webhook Session Archived Event Data
 

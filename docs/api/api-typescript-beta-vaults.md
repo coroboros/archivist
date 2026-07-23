@@ -32,7 +32,7 @@ Create Vault
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 26 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 27 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -83,6 +83,8 @@ Create Vault
       - `"managed-agents-2026-04-01"`
 
       - `"cache-diagnosis-2026-04-07"`
+
+      - `"dreaming-2026-04-21"`
 
       - `"thinking-token-count-2026-05-13"`
 
@@ -186,7 +188,7 @@ List Vaults
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 26 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 27 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -237,6 +239,8 @@ List Vaults
       - `"managed-agents-2026-04-01"`
 
       - `"cache-diagnosis-2026-04-07"`
+
+      - `"dreaming-2026-04-21"`
 
       - `"thinking-token-count-2026-05-13"`
 
@@ -336,7 +340,7 @@ Get Vault
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 26 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 27 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -387,6 +391,8 @@ Get Vault
       - `"managed-agents-2026-04-01"`
 
       - `"cache-diagnosis-2026-04-07"`
+
+      - `"dreaming-2026-04-21"`
 
       - `"thinking-token-count-2026-05-13"`
 
@@ -488,7 +494,7 @@ Update Vault
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 26 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 27 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -539,6 +545,8 @@ Update Vault
       - `"managed-agents-2026-04-01"`
 
       - `"cache-diagnosis-2026-04-07"`
+
+      - `"dreaming-2026-04-21"`
 
       - `"thinking-token-count-2026-05-13"`
 
@@ -632,7 +640,7 @@ Delete Vault
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 26 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 27 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -683,6 +691,8 @@ Delete Vault
       - `"managed-agents-2026-04-01"`
 
       - `"cache-diagnosis-2026-04-07"`
+
+      - `"dreaming-2026-04-21"`
 
       - `"thinking-token-count-2026-05-13"`
 
@@ -751,7 +761,7 @@ Archive Vault
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 26 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 27 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -802,6 +812,8 @@ Archive Vault
       - `"managed-agents-2026-04-01"`
 
       - `"cache-diagnosis-2026-04-07"`
+
+      - `"dreaming-2026-04-21"`
 
       - `"thinking-token-count-2026-05-13"`
 
@@ -1107,7 +1119,7 @@ Create Credential
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 26 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 27 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -1158,6 +1170,8 @@ Create Credential
       - `"managed-agents-2026-04-01"`
 
       - `"cache-diagnosis-2026-04-07"`
+
+      - `"dreaming-2026-04-21"`
 
       - `"thinking-token-count-2026-05-13"`
 
@@ -1409,7 +1423,7 @@ List Credentials
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 26 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 27 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -1460,6 +1474,8 @@ List Credentials
       - `"managed-agents-2026-04-01"`
 
       - `"cache-diagnosis-2026-04-07"`
+
+      - `"dreaming-2026-04-21"`
 
       - `"thinking-token-count-2026-05-13"`
 
@@ -1702,7 +1718,7 @@ Get Credential
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 26 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 27 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -1753,6 +1769,8 @@ Get Credential
       - `"managed-agents-2026-04-01"`
 
       - `"cache-diagnosis-2026-04-07"`
+
+      - `"dreaming-2026-04-21"`
 
       - `"thinking-token-count-2026-05-13"`
 
@@ -2118,7 +2136,7 @@ Update Credential
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 26 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 27 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -2169,6 +2187,8 @@ Update Credential
       - `"managed-agents-2026-04-01"`
 
       - `"cache-diagnosis-2026-04-07"`
+
+      - `"dreaming-2026-04-21"`
 
       - `"thinking-token-count-2026-05-13"`
 
@@ -2406,7 +2426,7 @@ Delete Credential
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 26 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 27 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -2457,6 +2477,8 @@ Delete Credential
       - `"managed-agents-2026-04-01"`
 
       - `"cache-diagnosis-2026-04-07"`
+
+      - `"dreaming-2026-04-21"`
 
       - `"thinking-token-count-2026-05-13"`
 
@@ -2530,7 +2552,7 @@ Archive Credential
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 26 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 27 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -2581,6 +2603,8 @@ Archive Credential
       - `"managed-agents-2026-04-01"`
 
       - `"cache-diagnosis-2026-04-07"`
+
+      - `"dreaming-2026-04-21"`
 
       - `"thinking-token-count-2026-05-13"`
 
@@ -2818,7 +2842,7 @@ Validate Credential
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 26 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 27 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -2869,6 +2893,8 @@ Validate Credential
       - `"managed-agents-2026-04-01"`
 
       - `"cache-diagnosis-2026-04-07"`
+
+      - `"dreaming-2026-04-21"`
 
       - `"thinking-token-count-2026-05-13"`
 

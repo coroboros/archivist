@@ -22,7 +22,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 26 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 27 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -73,6 +73,8 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -1466,7 +1468,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
 - `speed: optional "standard" or "fast"`
 
-  The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
+  Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
   - `"standard"`
 

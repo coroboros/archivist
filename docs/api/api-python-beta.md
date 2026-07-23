@@ -10,11 +10,11 @@ generated: true
 
 ### Anthropic Beta
 
-- `Union[str, Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]]`
+- `Union[str, Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]]`
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -65,6 +65,8 @@ generated: true
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -358,7 +360,7 @@ The Models API response can be used to determine which models are available for 
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -409,6 +411,8 @@ The Models API response can be used to determine which models are available for 
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -674,7 +678,7 @@ The Models API response can be used to determine information about a specific mo
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -725,6 +729,8 @@ The Models API response can be used to determine information about a specific mo
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -2787,6 +2793,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `speed: Optional[Literal["standard", "fast"]]`
 
+    Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
     - `"standard"`
 
     - `"fast"`
@@ -2891,7 +2899,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
 - `speed: Optional[Literal["standard", "fast"]]`
 
-  The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
+  Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
   - `"standard"`
 
@@ -4322,7 +4330,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -4373,6 +4381,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -5334,17 +5344,29 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         What caused the `from` model to hand over at this hop.
 
-        - `category: Optional[Literal["cyber", "bio", "frontier_llm", "reasoning_extraction"]]`
+        - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
 
           The policy category that triggered a refusal.
 
           - `"cyber"`
 
+            The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
           - `"bio"`
+
+            The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
           - `"frontier_llm"`
 
+            The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
           - `"reasoning_extraction"`
+
+            The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../build-with-claude/build-with-claude-adaptive-thinking.md).
+
+          - `"general_harms"`
+
+            The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
         - `type: Literal["refusal"]`
 
@@ -5475,17 +5497,29 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     Structured information about a refusal.
 
-    - `category: Optional[Literal["cyber", "bio", "frontier_llm", "reasoning_extraction"]]`
+    - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
 
       The policy category that triggered a refusal.
 
       - `"cyber"`
 
+        The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
       - `"bio"`
+
+        The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
       - `"frontier_llm"`
 
+        The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
       - `"reasoning_extraction"`
+
+        The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../build-with-claude/build-with-claude-adaptive-thinking.md).
+
+      - `"general_harms"`
+
+        The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
     - `explanation: Optional[str]`
 
@@ -5832,7 +5866,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `speed: Optional[Literal["standard", "fast"]]`
 
-      The inference speed mode used for this request.
+      Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
       - `"standard"`
 
@@ -5864,7 +5898,7 @@ for message in client.beta.messages.create(
 {
   "id": "msg_013Zva2CMHLNnXjNJJKqJ2EF",
   "container": {
-    "id": "id",
+    "id": "container_011CpZohnwH4vuy7gazohgSP",
     "expires_at": "2019-12-27T18:11:19.117Z",
     "skills": [
       {
@@ -5878,11 +5912,11 @@ for message in client.beta.messages.create(
     {
       "citations": [
         {
-          "cited_text": "cited_text",
+          "cited_text": "The grass is green. The sky is blue.",
           "document_index": 0,
-          "document_title": "document_title",
+          "document_title": "My Document",
           "end_char_index": 0,
-          "file_id": "file_id",
+          "file_id": "file_011CNha8iCJcU1wXNR6q4V8w",
           "start_char_index": 0,
           "type": "char_location"
         }
@@ -5910,10 +5944,10 @@ for message in client.beta.messages.create(
   "role": "assistant",
   "stop_details": {
     "category": "cyber",
-    "explanation": "explanation",
-    "fallback_credit_token": "fallback_credit_token",
+    "explanation": "This request was declined because it conflicts with Anthropic's Usage Policy.",
+    "fallback_credit_token": "QW50aHJvcGljL0NsYXVkZQ==",
     "fallback_has_prefill_claim": true,
-    "recommended_model": "recommended_model",
+    "recommended_model": "claude-sonnet-4-6",
     "type": "refusal"
   },
   "stop_reason": "end_turn",
@@ -5926,7 +5960,7 @@ for message in client.beta.messages.create(
     },
     "cache_creation_input_tokens": 2051,
     "cache_read_input_tokens": 2051,
-    "inference_geo": "inference_geo",
+    "inference_geo": "global",
     "input_tokens": 2095,
     "iterations": [
       {
@@ -7365,7 +7399,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
 - `speed: Optional[Literal["standard", "fast"]]`
 
-  The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
+  Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
   - `"standard"`
 
@@ -8792,7 +8826,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -8843,6 +8877,8 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -12083,17 +12119,29 @@ print(beta_message_tokens_count.context_management)
 
       What caused the `from` model to hand over at this hop.
 
-      - `category: Optional[Literal["cyber", "bio", "frontier_llm", "reasoning_extraction"]]`
+      - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
 
         The policy category that triggered a refusal.
 
         - `"cyber"`
 
+          The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
         - `"bio"`
+
+          The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
         - `"frontier_llm"`
 
+          The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
         - `"reasoning_extraction"`
+
+          The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../build-with-claude/build-with-claude-adaptive-thinking.md).
+
+        - `"general_harms"`
+
+          The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
       - `type: Literal["refusal"]`
 
@@ -14082,17 +14130,29 @@ print(beta_message_tokens_count.context_management)
 
     What caused the `from` model to hand over at this hop.
 
-    - `category: Optional[Literal["cyber", "bio", "frontier_llm", "reasoning_extraction"]]`
+    - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
 
       The policy category that triggered a refusal.
 
       - `"cyber"`
 
+        The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
       - `"bio"`
+
+        The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
       - `"frontier_llm"`
 
+        The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
       - `"reasoning_extraction"`
+
+        The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../build-with-claude/build-with-claude-adaptive-thinking.md).
+
+      - `"general_harms"`
+
+        The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
     - `type: Literal["refusal"]`
 
@@ -14579,10 +14639,10 @@ print(beta_message_tokens_count.context_management)
 
   One entry in the `fallbacks` chain on a `/v1/messages` request.
 
-  `model` is required. The four override fields (`max_tokens`, `thinking`,
-  `output_config`, and `speed`) replace the corresponding top-level field
-  for this attempt only and are validated as if the request were made to
-  `model`. Any other key is rejected at parse time.
+  `model` is required. The override fields (`max_tokens`, `thinking`,
+  `output_config`, and `speed`) set the corresponding parameter for this
+  attempt only and are validated as if the request were made to `model`.
+  Any other key is rejected at parse time.
 
   - `model: Model`
 
@@ -14729,6 +14789,8 @@ print(beta_message_tokens_count.context_management)
 
   - `speed: Optional[Literal["standard", "fast"]]`
 
+    Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
     - `"standard"`
 
     - `"fast"`
@@ -14783,17 +14845,29 @@ print(beta_message_tokens_count.context_management)
 
   The `from` model declined for policy reasons.
 
-  - `category: Optional[Literal["cyber", "bio", "frontier_llm", "reasoning_extraction"]]`
+  - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
 
     The policy category that triggered a refusal.
 
     - `"cyber"`
 
+      The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
     - `"bio"`
+
+      The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
     - `"frontier_llm"`
 
+      The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
     - `"reasoning_extraction"`
+
+      The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../build-with-claude/build-with-claude-adaptive-thinking.md).
+
+    - `"general_harms"`
+
+      The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
   - `type: Literal["refusal"]`
 
@@ -16680,17 +16754,29 @@ print(beta_message_tokens_count.context_management)
 
         What caused the `from` model to hand over at this hop.
 
-        - `category: Optional[Literal["cyber", "bio", "frontier_llm", "reasoning_extraction"]]`
+        - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
 
           The policy category that triggered a refusal.
 
           - `"cyber"`
 
+            The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
           - `"bio"`
+
+            The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
           - `"frontier_llm"`
 
+            The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
           - `"reasoning_extraction"`
+
+            The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../build-with-claude/build-with-claude-adaptive-thinking.md).
+
+          - `"general_harms"`
+
+            The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
         - `type: Literal["refusal"]`
 
@@ -16821,17 +16907,29 @@ print(beta_message_tokens_count.context_management)
 
     Structured information about a refusal.
 
-    - `category: Optional[Literal["cyber", "bio", "frontier_llm", "reasoning_extraction"]]`
+    - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
 
       The policy category that triggered a refusal.
 
       - `"cyber"`
 
+        The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
       - `"bio"`
+
+        The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
       - `"frontier_llm"`
 
+        The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
       - `"reasoning_extraction"`
+
+        The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../build-with-claude/build-with-claude-adaptive-thinking.md).
+
+      - `"general_harms"`
+
+        The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
     - `explanation: Optional[str]`
 
@@ -17178,7 +17276,7 @@ print(beta_message_tokens_count.context_management)
 
     - `speed: Optional[Literal["standard", "fast"]]`
 
-      The inference speed mode used for this request.
+      Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
       - `"standard"`
 
@@ -20259,17 +20357,29 @@ print(beta_message_tokens_count.context_management)
 
         What caused the `from` model to hand over at this hop.
 
-        - `category: Optional[Literal["cyber", "bio", "frontier_llm", "reasoning_extraction"]]`
+        - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
 
           The policy category that triggered a refusal.
 
           - `"cyber"`
 
+            The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
           - `"bio"`
+
+            The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
           - `"frontier_llm"`
 
+            The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
           - `"reasoning_extraction"`
+
+            The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../build-with-claude/build-with-claude-adaptive-thinking.md).
+
+          - `"general_harms"`
+
+            The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
         - `type: Literal["refusal"]`
 
@@ -20377,17 +20487,29 @@ print(beta_message_tokens_count.context_management)
 
       Structured information about a refusal.
 
-      - `category: Optional[Literal["cyber", "bio", "frontier_llm", "reasoning_extraction"]]`
+      - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
 
         The policy category that triggered a refusal.
 
         - `"cyber"`
 
+          The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
         - `"bio"`
+
+          The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
         - `"frontier_llm"`
 
+          The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
         - `"reasoning_extraction"`
+
+          The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../build-with-claude/build-with-claude-adaptive-thinking.md).
+
+        - `"general_harms"`
+
+          The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
       - `explanation: Optional[str]`
 
@@ -21732,17 +21854,29 @@ print(beta_message_tokens_count.context_management)
 
           What caused the `from` model to hand over at this hop.
 
-          - `category: Optional[Literal["cyber", "bio", "frontier_llm", "reasoning_extraction"]]`
+          - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
 
             The policy category that triggered a refusal.
 
             - `"cyber"`
 
+              The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
             - `"bio"`
+
+              The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
             - `"frontier_llm"`
 
+              The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
             - `"reasoning_extraction"`
+
+              The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../build-with-claude/build-with-claude-adaptive-thinking.md).
+
+            - `"general_harms"`
+
+              The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
           - `type: Literal["refusal"]`
 
@@ -21873,17 +22007,29 @@ print(beta_message_tokens_count.context_management)
 
       Structured information about a refusal.
 
-      - `category: Optional[Literal["cyber", "bio", "frontier_llm", "reasoning_extraction"]]`
+      - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
 
         The policy category that triggered a refusal.
 
         - `"cyber"`
 
+          The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
         - `"bio"`
+
+          The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
         - `"frontier_llm"`
 
+          The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
         - `"reasoning_extraction"`
+
+          The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../build-with-claude/build-with-claude-adaptive-thinking.md).
+
+        - `"general_harms"`
+
+          The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
       - `explanation: Optional[str]`
 
@@ -22230,7 +22376,7 @@ print(beta_message_tokens_count.context_management)
 
       - `speed: Optional[Literal["standard", "fast"]]`
 
-        The inference speed mode used for this request.
+        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
         - `"standard"`
 
@@ -23200,17 +23346,29 @@ print(beta_message_tokens_count.context_management)
 
             What caused the `from` model to hand over at this hop.
 
-            - `category: Optional[Literal["cyber", "bio", "frontier_llm", "reasoning_extraction"]]`
+            - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
 
               The policy category that triggered a refusal.
 
               - `"cyber"`
 
+                The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
               - `"bio"`
+
+                The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
               - `"frontier_llm"`
 
+                The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
               - `"reasoning_extraction"`
+
+                The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../build-with-claude/build-with-claude-adaptive-thinking.md).
+
+              - `"general_harms"`
+
+                The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
             - `type: Literal["refusal"]`
 
@@ -23341,17 +23499,29 @@ print(beta_message_tokens_count.context_management)
 
         Structured information about a refusal.
 
-        - `category: Optional[Literal["cyber", "bio", "frontier_llm", "reasoning_extraction"]]`
+        - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
 
           The policy category that triggered a refusal.
 
           - `"cyber"`
 
+            The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
           - `"bio"`
+
+            The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
           - `"frontier_llm"`
 
+            The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
           - `"reasoning_extraction"`
+
+            The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../build-with-claude/build-with-claude-adaptive-thinking.md).
+
+          - `"general_harms"`
+
+            The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
         - `explanation: Optional[str]`
 
@@ -23698,7 +23868,7 @@ print(beta_message_tokens_count.context_management)
 
         - `speed: Optional[Literal["standard", "fast"]]`
 
-          The inference speed mode used for this request.
+          Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
           - `"standard"`
 
@@ -23965,17 +24135,29 @@ print(beta_message_tokens_count.context_management)
 
   Structured information about a refusal.
 
-  - `category: Optional[Literal["cyber", "bio", "frontier_llm", "reasoning_extraction"]]`
+  - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
 
     The policy category that triggered a refusal.
 
     - `"cyber"`
 
+      The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
     - `"bio"`
+
+      The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
     - `"frontier_llm"`
 
+      The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
     - `"reasoning_extraction"`
+
+      The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../build-with-claude/build-with-claude-adaptive-thinking.md).
+
+    - `"general_harms"`
+
+      The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
   - `explanation: Optional[str]`
 
@@ -29164,7 +29346,7 @@ print(beta_message_tokens_count.context_management)
 
   - `speed: Optional[Literal["standard", "fast"]]`
 
-    The inference speed mode used for this request.
+    Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
     - `"standard"`
 
@@ -32517,6 +32699,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
       - `speed: Optional[Literal["standard", "fast"]]`
 
+        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
         - `"standard"`
 
         - `"fast"`
@@ -32621,7 +32805,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     - `speed: Optional[Literal["standard", "fast"]]`
 
-      The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
+      Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
       - `"standard"`
 
@@ -34050,7 +34234,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -34101,6 +34285,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -34274,7 +34460,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -34325,6 +34511,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -34494,7 +34682,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -34545,6 +34733,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -34712,7 +34902,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -34763,6 +34953,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -34924,7 +35116,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -34975,6 +35167,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -35048,7 +35242,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -35099,6 +35293,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -36074,17 +36270,29 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               What caused the `from` model to hand over at this hop.
 
-              - `category: Optional[Literal["cyber", "bio", "frontier_llm", "reasoning_extraction"]]`
+              - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
 
                 The policy category that triggered a refusal.
 
                 - `"cyber"`
 
+                  The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
                 - `"bio"`
+
+                  The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
                 - `"frontier_llm"`
 
+                  The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
                 - `"reasoning_extraction"`
+
+                  The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../build-with-claude/build-with-claude-adaptive-thinking.md).
+
+                - `"general_harms"`
+
+                  The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
               - `type: Literal["refusal"]`
 
@@ -36215,17 +36423,29 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           Structured information about a refusal.
 
-          - `category: Optional[Literal["cyber", "bio", "frontier_llm", "reasoning_extraction"]]`
+          - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
 
             The policy category that triggered a refusal.
 
             - `"cyber"`
 
+              The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
             - `"bio"`
+
+              The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
             - `"frontier_llm"`
 
+              The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
             - `"reasoning_extraction"`
+
+              The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../build-with-claude/build-with-claude-adaptive-thinking.md).
+
+            - `"general_harms"`
+
+              The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
           - `explanation: Optional[str]`
 
@@ -36572,7 +36792,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           - `speed: Optional[Literal["standard", "fast"]]`
 
-            The inference speed mode used for this request.
+            Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
             - `"standard"`
 
@@ -37877,17 +38097,29 @@ for batch in client.beta.messages.batches.results(
 
               What caused the `from` model to hand over at this hop.
 
-              - `category: Optional[Literal["cyber", "bio", "frontier_llm", "reasoning_extraction"]]`
+              - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
 
                 The policy category that triggered a refusal.
 
                 - `"cyber"`
 
+                  The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
                 - `"bio"`
+
+                  The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
                 - `"frontier_llm"`
 
+                  The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
                 - `"reasoning_extraction"`
+
+                  The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../build-with-claude/build-with-claude-adaptive-thinking.md).
+
+                - `"general_harms"`
+
+                  The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
               - `type: Literal["refusal"]`
 
@@ -38018,17 +38250,29 @@ for batch in client.beta.messages.batches.results(
 
           Structured information about a refusal.
 
-          - `category: Optional[Literal["cyber", "bio", "frontier_llm", "reasoning_extraction"]]`
+          - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
 
             The policy category that triggered a refusal.
 
             - `"cyber"`
 
+              The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
             - `"bio"`
+
+              The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
             - `"frontier_llm"`
 
+              The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
             - `"reasoning_extraction"`
+
+              The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../build-with-claude/build-with-claude-adaptive-thinking.md).
+
+            - `"general_harms"`
+
+              The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
           - `explanation: Optional[str]`
 
@@ -38375,7 +38619,7 @@ for batch in client.beta.messages.batches.results(
 
           - `speed: Optional[Literal["standard", "fast"]]`
 
-            The inference speed mode used for this request.
+            Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
             - `"standard"`
 
@@ -39473,17 +39717,29 @@ for batch in client.beta.messages.batches.results(
 
             What caused the `from` model to hand over at this hop.
 
-            - `category: Optional[Literal["cyber", "bio", "frontier_llm", "reasoning_extraction"]]`
+            - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
 
               The policy category that triggered a refusal.
 
               - `"cyber"`
 
+                The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
               - `"bio"`
+
+                The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
               - `"frontier_llm"`
 
+                The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
               - `"reasoning_extraction"`
+
+                The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../build-with-claude/build-with-claude-adaptive-thinking.md).
+
+              - `"general_harms"`
+
+                The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
             - `type: Literal["refusal"]`
 
@@ -39614,17 +39870,29 @@ for batch in client.beta.messages.batches.results(
 
         Structured information about a refusal.
 
-        - `category: Optional[Literal["cyber", "bio", "frontier_llm", "reasoning_extraction"]]`
+        - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
 
           The policy category that triggered a refusal.
 
           - `"cyber"`
 
+            The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
           - `"bio"`
+
+            The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
           - `"frontier_llm"`
 
+            The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
           - `"reasoning_extraction"`
+
+            The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../build-with-claude/build-with-claude-adaptive-thinking.md).
+
+          - `"general_harms"`
+
+            The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
         - `explanation: Optional[str]`
 
@@ -39971,7 +40239,7 @@ for batch in client.beta.messages.batches.results(
 
         - `speed: Optional[Literal["standard", "fast"]]`
 
-          The inference speed mode used for this request.
+          Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
           - `"standard"`
 
@@ -41031,17 +41299,29 @@ for batch in client.beta.messages.batches.results(
 
           What caused the `from` model to hand over at this hop.
 
-          - `category: Optional[Literal["cyber", "bio", "frontier_llm", "reasoning_extraction"]]`
+          - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
 
             The policy category that triggered a refusal.
 
             - `"cyber"`
 
+              The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
             - `"bio"`
+
+              The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
             - `"frontier_llm"`
 
+              The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
             - `"reasoning_extraction"`
+
+              The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../build-with-claude/build-with-claude-adaptive-thinking.md).
+
+            - `"general_harms"`
+
+              The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
           - `type: Literal["refusal"]`
 
@@ -41172,17 +41452,29 @@ for batch in client.beta.messages.batches.results(
 
       Structured information about a refusal.
 
-      - `category: Optional[Literal["cyber", "bio", "frontier_llm", "reasoning_extraction"]]`
+      - `category: Optional[Literal["cyber", "bio", "frontier_llm", 2 more]]`
 
         The policy category that triggered a refusal.
 
         - `"cyber"`
 
+          The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.
+
         - `"bio"`
+
+          The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.
 
         - `"frontier_llm"`
 
+          The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category.
+
         - `"reasoning_extraction"`
+
+          The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../build-with-claude/build-with-claude-adaptive-thinking.md).
+
+        - `"general_harms"`
+
+          The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
       - `explanation: Optional[str]`
 
@@ -41529,7 +41821,7 @@ for batch in client.beta.messages.batches.results(
 
       - `speed: Optional[Literal["standard", "fast"]]`
 
-        The inference speed mode used for this request.
+        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
         - `"standard"`
 
@@ -41656,6 +41948,64 @@ Create Agent
         - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
 
       - `str`
+
+    - `effort: Optional[Effort]`
+
+      How hard Claude works on each inference call. Accepts a bare level string (`"high"`) or `{"type": "high"}`. On create, omitting it resolves the per-model default; on update, omitting it leaves the stored value unchanged.
+
+      - `Literal["low", "medium", "high", 2 more]`
+
+        How hard Claude works on each turn. Higher levels favor reasoning depth over latency. Not all models accept every level; invalid combinations are rejected at create time.
+
+        - `"low"`
+
+        - `"medium"`
+
+        - `"high"`
+
+        - `"xhigh"`
+
+        - `"max"`
+
+      - `class BetaManagedAgentsEffortLow: …`
+
+        Low effort. Favors latency over reasoning depth.
+
+        - `type: Literal["low"]`
+
+          - `"low"`
+
+      - `class BetaManagedAgentsEffortMedium: …`
+
+        Medium effort. Balances latency and reasoning depth.
+
+        - `type: Literal["medium"]`
+
+          - `"medium"`
+
+      - `class BetaManagedAgentsEffortHigh: …`
+
+        High effort. Favors reasoning depth.
+
+        - `type: Literal["high"]`
+
+          - `"high"`
+
+      - `class BetaManagedAgentsEffortXhigh: …`
+
+        Extra-high effort. Not all models accept this level.
+
+        - `type: Literal["xhigh"]`
+
+          - `"xhigh"`
+
+      - `class BetaManagedAgentsEffortMax: …`
+
+        Maximum effort. Favors reasoning depth over latency.
+
+        - `type: Literal["max"]`
+
+          - `"max"`
 
     - `speed: Optional[Literal["standard", "fast"]]`
 
@@ -41941,7 +42291,7 @@ Create Agent
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -41992,6 +42342,8 @@ Create Agent
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -42109,6 +42461,50 @@ Create Agent
           High-performance model for agents and coding
 
       - `str`
+
+    - `effort: Optional[Effort]`
+
+      How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+      - `class BetaManagedAgentsEffortLow: …`
+
+        Low effort. Favors latency over reasoning depth.
+
+        - `type: Literal["low"]`
+
+          - `"low"`
+
+      - `class BetaManagedAgentsEffortMedium: …`
+
+        Medium effort. Balances latency and reasoning depth.
+
+        - `type: Literal["medium"]`
+
+          - `"medium"`
+
+      - `class BetaManagedAgentsEffortHigh: …`
+
+        High effort. Favors reasoning depth.
+
+        - `type: Literal["high"]`
+
+          - `"high"`
+
+      - `class BetaManagedAgentsEffortXhigh: …`
+
+        Extra-high effort. Not all models accept this level.
+
+        - `type: Literal["xhigh"]`
+
+          - `"xhigh"`
+
+      - `class BetaManagedAgentsEffortMax: …`
+
+        Maximum effort. Favors reasoning depth over latency.
+
+        - `type: Literal["max"]`
+
+          - `"max"`
 
     - `speed: Optional[Literal["standard", "fast"]]`
 
@@ -42354,6 +42750,9 @@ print(beta_managed_agents_agent.id)
   },
   "model": {
     "id": "claude-sonnet-4-6",
+    "effort": {
+      "type": "low"
+    },
     "speed": "standard"
   },
   "multiagent": {
@@ -42442,7 +42841,7 @@ List Agents
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -42493,6 +42892,8 @@ List Agents
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -42610,6 +43011,50 @@ List Agents
           High-performance model for agents and coding
 
       - `str`
+
+    - `effort: Optional[Effort]`
+
+      How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+      - `class BetaManagedAgentsEffortLow: …`
+
+        Low effort. Favors latency over reasoning depth.
+
+        - `type: Literal["low"]`
+
+          - `"low"`
+
+      - `class BetaManagedAgentsEffortMedium: …`
+
+        Medium effort. Balances latency and reasoning depth.
+
+        - `type: Literal["medium"]`
+
+          - `"medium"`
+
+      - `class BetaManagedAgentsEffortHigh: …`
+
+        High effort. Favors reasoning depth.
+
+        - `type: Literal["high"]`
+
+          - `"high"`
+
+      - `class BetaManagedAgentsEffortXhigh: …`
+
+        Extra-high effort. Not all models accept this level.
+
+        - `type: Literal["xhigh"]`
+
+          - `"xhigh"`
+
+      - `class BetaManagedAgentsEffortMax: …`
+
+        Maximum effort. Favors reasoning depth over latency.
+
+        - `type: Literal["max"]`
+
+          - `"max"`
 
     - `speed: Optional[Literal["standard", "fast"]]`
 
@@ -42855,6 +43300,9 @@ print(page.id)
       },
       "model": {
         "id": "claude-sonnet-4-6",
+        "effort": {
+          "type": "low"
+        },
         "speed": "standard"
       },
       "multiagent": {
@@ -42932,7 +43380,7 @@ Get Agent
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -42983,6 +43431,8 @@ Get Agent
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -43100,6 +43550,50 @@ Get Agent
           High-performance model for agents and coding
 
       - `str`
+
+    - `effort: Optional[Effort]`
+
+      How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+      - `class BetaManagedAgentsEffortLow: …`
+
+        Low effort. Favors latency over reasoning depth.
+
+        - `type: Literal["low"]`
+
+          - `"low"`
+
+      - `class BetaManagedAgentsEffortMedium: …`
+
+        Medium effort. Balances latency and reasoning depth.
+
+        - `type: Literal["medium"]`
+
+          - `"medium"`
+
+      - `class BetaManagedAgentsEffortHigh: …`
+
+        High effort. Favors reasoning depth.
+
+        - `type: Literal["high"]`
+
+          - `"high"`
+
+      - `class BetaManagedAgentsEffortXhigh: …`
+
+        Extra-high effort. Not all models accept this level.
+
+        - `type: Literal["xhigh"]`
+
+          - `"xhigh"`
+
+      - `class BetaManagedAgentsEffortMax: …`
+
+        Maximum effort. Favors reasoning depth over latency.
+
+        - `type: Literal["max"]`
+
+          - `"max"`
 
     - `speed: Optional[Literal["standard", "fast"]]`
 
@@ -43344,6 +43838,9 @@ print(beta_managed_agents_agent.id)
   },
   "model": {
     "id": "claude-sonnet-4-6",
+    "effort": {
+      "type": "low"
+    },
     "speed": "standard"
   },
   "multiagent": {
@@ -43407,10 +43904,6 @@ Update Agent
 ### Parameters
 
 - `agent_id: str`
-
-- `version: int`
-
-  The agent's current version, used to prevent concurrent overwrites. Obtain this value from a create or retrieve response. The request fails if this does not match the server's current version.
 
 - `description: Optional[str]`
 
@@ -43541,6 +44034,64 @@ Update Agent
         - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
 
       - `str`
+
+    - `effort: Optional[Effort]`
+
+      How hard Claude works on each inference call. Accepts a bare level string (`"high"`) or `{"type": "high"}`. On create, omitting it resolves the per-model default; on update, omitting it leaves the stored value unchanged.
+
+      - `Literal["low", "medium", "high", 2 more]`
+
+        How hard Claude works on each turn. Higher levels favor reasoning depth over latency. Not all models accept every level; invalid combinations are rejected at create time.
+
+        - `"low"`
+
+        - `"medium"`
+
+        - `"high"`
+
+        - `"xhigh"`
+
+        - `"max"`
+
+      - `class BetaManagedAgentsEffortLow: …`
+
+        Low effort. Favors latency over reasoning depth.
+
+        - `type: Literal["low"]`
+
+          - `"low"`
+
+      - `class BetaManagedAgentsEffortMedium: …`
+
+        Medium effort. Balances latency and reasoning depth.
+
+        - `type: Literal["medium"]`
+
+          - `"medium"`
+
+      - `class BetaManagedAgentsEffortHigh: …`
+
+        High effort. Favors reasoning depth.
+
+        - `type: Literal["high"]`
+
+          - `"high"`
+
+      - `class BetaManagedAgentsEffortXhigh: …`
+
+        Extra-high effort. Not all models accept this level.
+
+        - `type: Literal["xhigh"]`
+
+          - `"xhigh"`
+
+      - `class BetaManagedAgentsEffortMax: …`
+
+        Maximum effort. Favors reasoning depth over latency.
+
+        - `type: Literal["max"]`
+
+          - `"max"`
 
     - `speed: Optional[Literal["standard", "fast"]]`
 
@@ -43796,13 +44347,17 @@ Update Agent
 
       - `"custom"`
 
+- `version: Optional[int]`
+
+  The agent's current version, used to prevent concurrent overwrites. Obtain this value from a create or retrieve response. Must be at least 1 if specified. When supplied, the request fails if it does not match the server's current version; omit to apply the update unconditionally.
+
 - `betas: Optional[List[AnthropicBetaParam]]`
 
   Optional header to specify the beta version(s) you want to use.
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -43853,6 +44408,8 @@ Update Agent
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -43970,6 +44527,50 @@ Update Agent
           High-performance model for agents and coding
 
       - `str`
+
+    - `effort: Optional[Effort]`
+
+      How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+      - `class BetaManagedAgentsEffortLow: …`
+
+        Low effort. Favors latency over reasoning depth.
+
+        - `type: Literal["low"]`
+
+          - `"low"`
+
+      - `class BetaManagedAgentsEffortMedium: …`
+
+        Medium effort. Balances latency and reasoning depth.
+
+        - `type: Literal["medium"]`
+
+          - `"medium"`
+
+      - `class BetaManagedAgentsEffortHigh: …`
+
+        High effort. Favors reasoning depth.
+
+        - `type: Literal["high"]`
+
+          - `"high"`
+
+      - `class BetaManagedAgentsEffortXhigh: …`
+
+        Extra-high effort. Not all models accept this level.
+
+        - `type: Literal["xhigh"]`
+
+          - `"xhigh"`
+
+      - `class BetaManagedAgentsEffortMax: …`
+
+        Maximum effort. Favors reasoning depth over latency.
+
+        - `type: Literal["max"]`
+
+          - `"max"`
 
     - `speed: Optional[Literal["standard", "fast"]]`
 
@@ -44190,7 +44791,7 @@ client = Anthropic(
 )
 beta_managed_agents_agent = client.beta.agents.update(
     agent_id="agent_011CZkYpogX7uDKUyvBTophP",
-    version=1,
+    description="updated",
 )
 print(beta_managed_agents_agent.id)
 ```
@@ -44215,6 +44816,9 @@ print(beta_managed_agents_agent.id)
   },
   "model": {
     "id": "claude-sonnet-4-6",
+    "effort": {
+      "type": "low"
+    },
     "speed": "standard"
   },
   "multiagent": {
@@ -44285,7 +44889,7 @@ Archive Agent
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -44336,6 +44940,8 @@ Archive Agent
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -44453,6 +45059,50 @@ Archive Agent
           High-performance model for agents and coding
 
       - `str`
+
+    - `effort: Optional[Effort]`
+
+      How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+      - `class BetaManagedAgentsEffortLow: …`
+
+        Low effort. Favors latency over reasoning depth.
+
+        - `type: Literal["low"]`
+
+          - `"low"`
+
+      - `class BetaManagedAgentsEffortMedium: …`
+
+        Medium effort. Balances latency and reasoning depth.
+
+        - `type: Literal["medium"]`
+
+          - `"medium"`
+
+      - `class BetaManagedAgentsEffortHigh: …`
+
+        High effort. Favors reasoning depth.
+
+        - `type: Literal["high"]`
+
+          - `"high"`
+
+      - `class BetaManagedAgentsEffortXhigh: …`
+
+        Extra-high effort. Not all models accept this level.
+
+        - `type: Literal["xhigh"]`
+
+          - `"xhigh"`
+
+      - `class BetaManagedAgentsEffortMax: …`
+
+        Maximum effort. Favors reasoning depth over latency.
+
+        - `type: Literal["max"]`
+
+          - `"max"`
 
     - `speed: Optional[Literal["standard", "fast"]]`
 
@@ -44697,6 +45347,9 @@ print(beta_managed_agents_agent.id)
   },
   "model": {
     "id": "claude-sonnet-4-6",
+    "effort": {
+      "type": "low"
+    },
     "speed": "standard"
   },
   "multiagent": {
@@ -44859,6 +45512,50 @@ print(beta_managed_agents_agent.id)
           High-performance model for agents and coding
 
       - `str`
+
+    - `effort: Optional[Effort]`
+
+      How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+      - `class BetaManagedAgentsEffortLow: …`
+
+        Low effort. Favors latency over reasoning depth.
+
+        - `type: Literal["low"]`
+
+          - `"low"`
+
+      - `class BetaManagedAgentsEffortMedium: …`
+
+        Medium effort. Balances latency and reasoning depth.
+
+        - `type: Literal["medium"]`
+
+          - `"medium"`
+
+      - `class BetaManagedAgentsEffortHigh: …`
+
+        High effort. Favors reasoning depth.
+
+        - `type: Literal["high"]`
+
+          - `"high"`
+
+      - `class BetaManagedAgentsEffortXhigh: …`
+
+        Extra-high effort. Not all models accept this level.
+
+        - `type: Literal["xhigh"]`
+
+          - `"xhigh"`
+
+      - `class BetaManagedAgentsEffortMax: …`
+
+        Maximum effort. Favors reasoning depth over latency.
+
+        - `type: Literal["max"]`
+
+          - `"max"`
 
     - `speed: Optional[Literal["standard", "fast"]]`
 
@@ -45656,6 +46353,56 @@ print(beta_managed_agents_agent.id)
 
     - `"custom"`
 
+### Beta Managed Agents Effort High
+
+- `class BetaManagedAgentsEffortHigh: …`
+
+  High effort. Favors reasoning depth.
+
+  - `type: Literal["high"]`
+
+    - `"high"`
+
+### Beta Managed Agents Effort Low
+
+- `class BetaManagedAgentsEffortLow: …`
+
+  Low effort. Favors latency over reasoning depth.
+
+  - `type: Literal["low"]`
+
+    - `"low"`
+
+### Beta Managed Agents Effort Max
+
+- `class BetaManagedAgentsEffortMax: …`
+
+  Maximum effort. Favors reasoning depth over latency.
+
+  - `type: Literal["max"]`
+
+    - `"max"`
+
+### Beta Managed Agents Effort Medium
+
+- `class BetaManagedAgentsEffortMedium: …`
+
+  Medium effort. Balances latency and reasoning depth.
+
+  - `type: Literal["medium"]`
+
+    - `"medium"`
+
+### Beta Managed Agents Effort Xhigh
+
+- `class BetaManagedAgentsEffortXhigh: …`
+
+  Extra-high effort. Not all models accept this level.
+
+  - `type: Literal["xhigh"]`
+
+    - `"xhigh"`
+
 ### Beta Managed Agents MCP Server URL Definition
 
 - `class BetaManagedAgentsMCPServerURLDefinition: …`
@@ -46070,6 +46817,50 @@ print(beta_managed_agents_agent.id)
 
     - `str`
 
+  - `effort: Optional[Effort]`
+
+    How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+    - `class BetaManagedAgentsEffortLow: …`
+
+      Low effort. Favors latency over reasoning depth.
+
+      - `type: Literal["low"]`
+
+        - `"low"`
+
+    - `class BetaManagedAgentsEffortMedium: …`
+
+      Medium effort. Balances latency and reasoning depth.
+
+      - `type: Literal["medium"]`
+
+        - `"medium"`
+
+    - `class BetaManagedAgentsEffortHigh: …`
+
+      High effort. Favors reasoning depth.
+
+      - `type: Literal["high"]`
+
+        - `"high"`
+
+    - `class BetaManagedAgentsEffortXhigh: …`
+
+      Extra-high effort. Not all models accept this level.
+
+      - `type: Literal["xhigh"]`
+
+        - `"xhigh"`
+
+    - `class BetaManagedAgentsEffortMax: …`
+
+      Maximum effort. Favors reasoning depth over latency.
+
+      - `type: Literal["max"]`
+
+        - `"max"`
+
   - `speed: Optional[Literal["standard", "fast"]]`
 
     Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
@@ -46158,6 +46949,64 @@ print(beta_managed_agents_agent.id)
         High-performance model for agents and coding
 
     - `str`
+
+  - `effort: Optional[Effort]`
+
+    How hard Claude works on each inference call. Accepts a bare level string (`"high"`) or `{"type": "high"}`. On create, omitting it resolves the per-model default; on update, omitting it leaves the stored value unchanged.
+
+    - `Literal["low", "medium", "high", 2 more]`
+
+      How hard Claude works on each turn. Higher levels favor reasoning depth over latency. Not all models accept every level; invalid combinations are rejected at create time.
+
+      - `"low"`
+
+      - `"medium"`
+
+      - `"high"`
+
+      - `"xhigh"`
+
+      - `"max"`
+
+    - `class BetaManagedAgentsEffortLow: …`
+
+      Low effort. Favors latency over reasoning depth.
+
+      - `type: Literal["low"]`
+
+        - `"low"`
+
+    - `class BetaManagedAgentsEffortMedium: …`
+
+      Medium effort. Balances latency and reasoning depth.
+
+      - `type: Literal["medium"]`
+
+        - `"medium"`
+
+    - `class BetaManagedAgentsEffortHigh: …`
+
+      High effort. Favors reasoning depth.
+
+      - `type: Literal["high"]`
+
+        - `"high"`
+
+    - `class BetaManagedAgentsEffortXhigh: …`
+
+      Extra-high effort. Not all models accept this level.
+
+      - `type: Literal["xhigh"]`
+
+        - `"xhigh"`
+
+    - `class BetaManagedAgentsEffortMax: …`
+
+      Maximum effort. Favors reasoning depth over latency.
+
+      - `type: Literal["max"]`
+
+        - `"max"`
 
   - `speed: Optional[Literal["standard", "fast"]]`
 
@@ -46337,6 +47186,50 @@ print(beta_managed_agents_agent.id)
           High-performance model for agents and coding
 
       - `str`
+
+    - `effort: Optional[Effort]`
+
+      How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+      - `class BetaManagedAgentsEffortLow: …`
+
+        Low effort. Favors latency over reasoning depth.
+
+        - `type: Literal["low"]`
+
+          - `"low"`
+
+      - `class BetaManagedAgentsEffortMedium: …`
+
+        Medium effort. Balances latency and reasoning depth.
+
+        - `type: Literal["medium"]`
+
+          - `"medium"`
+
+      - `class BetaManagedAgentsEffortHigh: …`
+
+        High effort. Favors reasoning depth.
+
+        - `type: Literal["high"]`
+
+          - `"high"`
+
+      - `class BetaManagedAgentsEffortXhigh: …`
+
+        Extra-high effort. Not all models accept this level.
+
+        - `type: Literal["xhigh"]`
+
+          - `"xhigh"`
+
+      - `class BetaManagedAgentsEffortMax: …`
+
+        Maximum effort. Favors reasoning depth over latency.
+
+        - `type: Literal["max"]`
+
+          - `"max"`
 
     - `speed: Optional[Literal["standard", "fast"]]`
 
@@ -46604,7 +47497,7 @@ List Agent Versions
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -46655,6 +47548,8 @@ List Agent Versions
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -46772,6 +47667,50 @@ List Agent Versions
           High-performance model for agents and coding
 
       - `str`
+
+    - `effort: Optional[Effort]`
+
+      How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+      - `class BetaManagedAgentsEffortLow: …`
+
+        Low effort. Favors latency over reasoning depth.
+
+        - `type: Literal["low"]`
+
+          - `"low"`
+
+      - `class BetaManagedAgentsEffortMedium: …`
+
+        Medium effort. Balances latency and reasoning depth.
+
+        - `type: Literal["medium"]`
+
+          - `"medium"`
+
+      - `class BetaManagedAgentsEffortHigh: …`
+
+        High effort. Favors reasoning depth.
+
+        - `type: Literal["high"]`
+
+          - `"high"`
+
+      - `class BetaManagedAgentsEffortXhigh: …`
+
+        Extra-high effort. Not all models accept this level.
+
+        - `type: Literal["xhigh"]`
+
+          - `"xhigh"`
+
+      - `class BetaManagedAgentsEffortMax: …`
+
+        Maximum effort. Favors reasoning depth over latency.
+
+        - `type: Literal["max"]`
+
+          - `"max"`
 
     - `speed: Optional[Literal["standard", "fast"]]`
 
@@ -47019,6 +47958,9 @@ print(page.id)
       },
       "model": {
         "id": "claude-sonnet-4-6",
+        "effort": {
+          "type": "low"
+        },
         "speed": "standard"
       },
       "multiagent": {
@@ -47214,7 +48156,7 @@ Create a new environment with the specified configuration.
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -47265,6 +48207,8 @@ Create a new environment with the specified configuration.
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -47508,7 +48452,7 @@ List environments with pagination support.
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -47559,6 +48503,8 @@ List environments with pagination support.
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -47796,7 +48742,7 @@ Retrieve a specific environment by ID.
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -47847,6 +48793,8 @@ Retrieve a specific environment by ID.
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -48202,7 +49150,7 @@ Update an existing environment's configuration.
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -48253,6 +49201,8 @@ Update an existing environment's configuration.
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -48486,7 +49436,7 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -48537,6 +49487,8 @@ Delete an environment by ID. Returns a confirmation of the deletion.
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -48604,7 +49556,7 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -48655,6 +49607,8 @@ Archive an environment by ID. Archived environments cannot be used to create new
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -49387,7 +50341,7 @@ Retrieve detailed information about a specific work item.
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -49438,6 +50392,8 @@ Retrieve detailed information about a specific work item.
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -49494,6 +50450,10 @@ Retrieve detailed information about a specific work item.
   - `metadata: Dict[str, str]`
 
     User-provided metadata key-value pairs associated with this work item
+
+  - `secret: Optional[str]`
+
+    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
 
   - `started_at: Optional[str]`
 
@@ -49559,6 +50519,7 @@ print(beta_self_hosted_work.id)
   "metadata": {
     "foo": "string"
   },
+  "secret": "secret",
   "started_at": "started_at",
   "state": "queued",
   "stop_requested_at": "stop_requested_at",
@@ -49595,7 +50556,7 @@ Long poll for work items in the queue.
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -49646,6 +50607,8 @@ Long poll for work items in the queue.
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -49706,6 +50669,10 @@ Long poll for work items in the queue.
   - `metadata: Dict[str, str]`
 
     User-provided metadata key-value pairs associated with this work item
+
+  - `secret: Optional[str]`
+
+    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
 
   - `started_at: Optional[str]`
 
@@ -49770,6 +50737,7 @@ print(beta_self_hosted_work.id)
   "metadata": {
     "foo": "string"
   },
+  "secret": "secret",
   "started_at": "started_at",
   "state": "queued",
   "stop_requested_at": "stop_requested_at",
@@ -49800,7 +50768,7 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -49851,6 +50819,8 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -49907,6 +50877,10 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
   - `metadata: Dict[str, str]`
 
     User-provided metadata key-value pairs associated with this work item
+
+  - `secret: Optional[str]`
+
+    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
 
   - `started_at: Optional[str]`
 
@@ -49972,6 +50946,7 @@ print(beta_self_hosted_work.id)
   "metadata": {
     "foo": "string"
   },
+  "secret": "secret",
   "started_at": "started_at",
   "state": "queued",
   "stop_requested_at": "stop_requested_at",
@@ -50010,7 +50985,7 @@ Record a heartbeat for a work item to maintain the lease.
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -50061,6 +51036,8 @@ Record a heartbeat for a work item to maintain the lease.
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -50162,7 +51139,7 @@ Stop a work item, initiating graceful or forced shutdown.
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -50213,6 +51190,8 @@ Stop a work item, initiating graceful or forced shutdown.
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -50269,6 +51248,10 @@ Stop a work item, initiating graceful or forced shutdown.
   - `metadata: Dict[str, str]`
 
     User-provided metadata key-value pairs associated with this work item
+
+  - `secret: Optional[str]`
+
+    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
 
   - `started_at: Optional[str]`
 
@@ -50334,6 +51317,7 @@ print(beta_self_hosted_work.id)
   "metadata": {
     "foo": "string"
   },
+  "secret": "secret",
   "started_at": "started_at",
   "state": "queued",
   "stop_requested_at": "stop_requested_at",
@@ -50370,7 +51354,7 @@ List work items in an environment.
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -50421,6 +51405,8 @@ List work items in an environment.
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -50477,6 +51463,10 @@ List work items in an environment.
   - `metadata: Dict[str, str]`
 
     User-provided metadata key-value pairs associated with this work item
+
+  - `secret: Optional[str]`
+
+    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
 
   - `started_at: Optional[str]`
 
@@ -50544,6 +51534,7 @@ print(page.id)
       "metadata": {
         "foo": "string"
       },
+      "secret": "secret",
       "started_at": "started_at",
       "state": "queued",
       "stop_requested_at": "stop_requested_at",
@@ -50581,7 +51572,7 @@ Update work item metadata with merge semantics.
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -50632,6 +51623,8 @@ Update work item metadata with merge semantics.
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -50688,6 +51681,10 @@ Update work item metadata with merge semantics.
   - `metadata: Dict[str, str]`
 
     User-provided metadata key-value pairs associated with this work item
+
+  - `secret: Optional[str]`
+
+    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
 
   - `started_at: Optional[str]`
 
@@ -50756,6 +51753,7 @@ print(beta_self_hosted_work.id)
   "metadata": {
     "foo": "string"
   },
+  "secret": "secret",
   "started_at": "started_at",
   "state": "queued",
   "stop_requested_at": "stop_requested_at",
@@ -50782,7 +51780,7 @@ Get statistics about the work queue for an environment.
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -50833,6 +51831,8 @@ Get statistics about the work queue for an environment.
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -50948,6 +51948,10 @@ print(beta_self_hosted_work_queue_stats.depth)
   - `metadata: Dict[str, str]`
 
     User-provided metadata key-value pairs associated with this work item
+
+  - `secret: Optional[str]`
+
+    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
 
   - `started_at: Optional[str]`
 
@@ -51066,6 +52070,10 @@ print(beta_self_hosted_work_queue_stats.depth)
     - `metadata: Dict[str, str]`
 
       User-provided metadata key-value pairs associated with this work item
+
+    - `secret: Optional[str]`
+
+      Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
 
     - `started_at: Optional[str]`
 
@@ -51340,6 +52348,64 @@ Create Session
 
           - `str`
 
+        - `effort: Optional[Effort]`
+
+          How hard Claude works on each inference call. Accepts a bare level string (`"high"`) or `{"type": "high"}`. On create, omitting it resolves the per-model default; on update, omitting it leaves the stored value unchanged.
+
+          - `Literal["low", "medium", "high", 2 more]`
+
+            How hard Claude works on each turn. Higher levels favor reasoning depth over latency. Not all models accept every level; invalid combinations are rejected at create time.
+
+            - `"low"`
+
+            - `"medium"`
+
+            - `"high"`
+
+            - `"xhigh"`
+
+            - `"max"`
+
+          - `class BetaManagedAgentsEffortLow: …`
+
+            Low effort. Favors latency over reasoning depth.
+
+            - `type: Literal["low"]`
+
+              - `"low"`
+
+          - `class BetaManagedAgentsEffortMedium: …`
+
+            Medium effort. Balances latency and reasoning depth.
+
+            - `type: Literal["medium"]`
+
+              - `"medium"`
+
+          - `class BetaManagedAgentsEffortHigh: …`
+
+            High effort. Favors reasoning depth.
+
+            - `type: Literal["high"]`
+
+              - `"high"`
+
+          - `class BetaManagedAgentsEffortXhigh: …`
+
+            Extra-high effort. Not all models accept this level.
+
+            - `type: Literal["xhigh"]`
+
+              - `"xhigh"`
+
+          - `class BetaManagedAgentsEffortMax: …`
+
+            Maximum effort. Favors reasoning depth over latency.
+
+            - `type: Literal["max"]`
+
+              - `"max"`
+
         - `speed: Optional[Literal["standard", "fast"]]`
 
           Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
@@ -51560,6 +52626,208 @@ Create Session
 
   ID of the `environment` defining the container configuration for this session.
 
+- `initial_events: Optional[Iterable[InitialEvent]]`
+
+  Initial events to send to the `session` at creation, processed in order. Supports `user.message` and `user.define_outcome` events. Maximum 50 events.
+
+  - `class BetaManagedAgentsUserMessageEventParams: …`
+
+    Parameters for sending a user message to the session.
+
+    - `content: Iterable[Content]`
+
+      Array of content blocks for the user message.
+
+      - `class BetaManagedAgentsTextBlock: …`
+
+        Regular text content.
+
+        - `text: str`
+
+          The text content.
+
+        - `type: Literal["text"]`
+
+          - `"text"`
+
+      - `class BetaManagedAgentsImageBlock: …`
+
+        Image content specified directly as base64 data or as a reference via a URL.
+
+        - `source: Source`
+
+          Union type for image source variants.
+
+          - `class BetaManagedAgentsBase64ImageSource: …`
+
+            Base64-encoded image data.
+
+            - `data: str`
+
+              Base64-encoded image data.
+
+            - `media_type: str`
+
+              MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+            - `type: Literal["base64"]`
+
+              - `"base64"`
+
+          - `class BetaManagedAgentsURLImageSource: …`
+
+            Image referenced by URL.
+
+            - `type: Literal["url"]`
+
+              - `"url"`
+
+            - `url: str`
+
+              URL of the image to fetch.
+
+          - `class BetaManagedAgentsFileImageSource: …`
+
+            Image referenced by file ID.
+
+            - `file_id: str`
+
+              ID of a previously uploaded file.
+
+            - `type: Literal["file"]`
+
+              - `"file"`
+
+        - `type: Literal["image"]`
+
+          - `"image"`
+
+      - `class BetaManagedAgentsDocumentBlock: …`
+
+        Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+        - `source: Source`
+
+          Union type for document source variants.
+
+          - `class BetaManagedAgentsBase64DocumentSource: …`
+
+            Base64-encoded document data.
+
+            - `data: str`
+
+              Base64-encoded document data.
+
+            - `media_type: str`
+
+              MIME type of the document (e.g., "application/pdf").
+
+            - `type: Literal["base64"]`
+
+              - `"base64"`
+
+          - `class BetaManagedAgentsPlainTextDocumentSource: …`
+
+            Plain text document content.
+
+            - `data: str`
+
+              The plain text content.
+
+            - `media_type: Literal["text/plain"]`
+
+              MIME type of the text content. Must be "text/plain".
+
+              - `"text/plain"`
+
+            - `type: Literal["text"]`
+
+              - `"text"`
+
+          - `class BetaManagedAgentsURLDocumentSource: …`
+
+            Document referenced by URL.
+
+            - `type: Literal["url"]`
+
+              - `"url"`
+
+            - `url: str`
+
+              URL of the document to fetch.
+
+          - `class BetaManagedAgentsFileDocumentSource: …`
+
+            Document referenced by file ID.
+
+            - `file_id: str`
+
+              ID of a previously uploaded file.
+
+            - `type: Literal["file"]`
+
+              - `"file"`
+
+        - `type: Literal["document"]`
+
+          - `"document"`
+
+        - `context: Optional[str]`
+
+          Additional context about the document for the model.
+
+        - `title: Optional[str]`
+
+          The title of the document.
+
+    - `type: Literal["user.message"]`
+
+      - `"user.message"`
+
+  - `class BetaManagedAgentsUserDefineOutcomeEventParams: …`
+
+    Parameters for defining an outcome the agent should work toward. The agent begins work on receipt.
+
+    - `description: str`
+
+      What the agent should produce. This is the task specification.
+
+    - `rubric: Rubric`
+
+      Rubric for grading the quality of an outcome.
+
+      - `class BetaManagedAgentsFileRubricParams: …`
+
+        Rubric referenced by a file uploaded via the Files API.
+
+        - `file_id: str`
+
+          ID of the rubric file.
+
+        - `type: Literal["file"]`
+
+          - `"file"`
+
+      - `class BetaManagedAgentsTextRubricParams: …`
+
+        Rubric content provided inline as text.
+
+        - `content: str`
+
+          Rubric content. Plain text or markdown — the grader treats it as freeform text. Maximum 262144 characters.
+
+        - `type: Literal["text"]`
+
+          - `"text"`
+
+    - `type: Literal["user.define_outcome"]`
+
+      - `"user.define_outcome"`
+
+    - `max_iterations: Optional[int]`
+
+      Eval→revision cycles before giving up. Default 3, max 20.
+
 - `metadata: Optional[Dict[str, str]]`
 
   Arbitrary key-value metadata attached to the session. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
@@ -51666,7 +52934,7 @@ Create Session
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -51717,6 +52985,8 @@ Create Session
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -51830,6 +53100,50 @@ Create Session
             High-performance model for agents and coding
 
         - `str`
+
+      - `effort: Optional[Effort]`
+
+        How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+        - `class BetaManagedAgentsEffortLow: …`
+
+          Low effort. Favors latency over reasoning depth.
+
+          - `type: Literal["low"]`
+
+            - `"low"`
+
+        - `class BetaManagedAgentsEffortMedium: …`
+
+          Medium effort. Balances latency and reasoning depth.
+
+          - `type: Literal["medium"]`
+
+            - `"medium"`
+
+        - `class BetaManagedAgentsEffortHigh: …`
+
+          High effort. Favors reasoning depth.
+
+          - `type: Literal["high"]`
+
+            - `"high"`
+
+        - `class BetaManagedAgentsEffortXhigh: …`
+
+          Extra-high effort. Not all models accept this level.
+
+          - `type: Literal["xhigh"]`
+
+            - `"xhigh"`
+
+        - `class BetaManagedAgentsEffortMax: …`
+
+          Maximum effort. Favors reasoning depth over latency.
+
+          - `type: Literal["max"]`
+
+            - `"max"`
 
       - `speed: Optional[Literal["standard", "fast"]]`
 
@@ -52318,6 +53632,9 @@ print(beta_managed_agents_session.id)
     ],
     "model": {
       "id": "claude-sonnet-4-6",
+      "effort": {
+        "type": "low"
+      },
       "speed": "standard"
     },
     "multiagent": {
@@ -52334,6 +53651,9 @@ print(beta_managed_agents_session.id)
           ],
           "model": {
             "id": "claude-sonnet-4-6",
+            "effort": {
+              "type": "low"
+            },
             "speed": "standard"
           },
           "name": "Researcher",
@@ -52549,7 +53869,7 @@ List Sessions
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -52600,6 +53920,8 @@ List Sessions
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -52713,6 +54035,50 @@ List Sessions
             High-performance model for agents and coding
 
         - `str`
+
+      - `effort: Optional[Effort]`
+
+        How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+        - `class BetaManagedAgentsEffortLow: …`
+
+          Low effort. Favors latency over reasoning depth.
+
+          - `type: Literal["low"]`
+
+            - `"low"`
+
+        - `class BetaManagedAgentsEffortMedium: …`
+
+          Medium effort. Balances latency and reasoning depth.
+
+          - `type: Literal["medium"]`
+
+            - `"medium"`
+
+        - `class BetaManagedAgentsEffortHigh: …`
+
+          High effort. Favors reasoning depth.
+
+          - `type: Literal["high"]`
+
+            - `"high"`
+
+        - `class BetaManagedAgentsEffortXhigh: …`
+
+          Extra-high effort. Not all models accept this level.
+
+          - `type: Literal["xhigh"]`
+
+            - `"xhigh"`
+
+        - `class BetaManagedAgentsEffortMax: …`
+
+          Maximum effort. Favors reasoning depth over latency.
+
+          - `type: Literal["max"]`
+
+            - `"max"`
 
       - `speed: Optional[Literal["standard", "fast"]]`
 
@@ -53201,6 +54567,9 @@ print(page.id)
         ],
         "model": {
           "id": "claude-sonnet-4-6",
+          "effort": {
+            "type": "low"
+          },
           "speed": "standard"
         },
         "multiagent": {
@@ -53217,6 +54586,9 @@ print(page.id)
               ],
               "model": {
                 "id": "claude-sonnet-4-6",
+                "effort": {
+                  "type": "low"
+                },
                 "speed": "standard"
               },
               "name": "Researcher",
@@ -53374,7 +54746,7 @@ Get Session
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -53425,6 +54797,8 @@ Get Session
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -53538,6 +54912,50 @@ Get Session
             High-performance model for agents and coding
 
         - `str`
+
+      - `effort: Optional[Effort]`
+
+        How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+        - `class BetaManagedAgentsEffortLow: …`
+
+          Low effort. Favors latency over reasoning depth.
+
+          - `type: Literal["low"]`
+
+            - `"low"`
+
+        - `class BetaManagedAgentsEffortMedium: …`
+
+          Medium effort. Balances latency and reasoning depth.
+
+          - `type: Literal["medium"]`
+
+            - `"medium"`
+
+        - `class BetaManagedAgentsEffortHigh: …`
+
+          High effort. Favors reasoning depth.
+
+          - `type: Literal["high"]`
+
+            - `"high"`
+
+        - `class BetaManagedAgentsEffortXhigh: …`
+
+          Extra-high effort. Not all models accept this level.
+
+          - `type: Literal["xhigh"]`
+
+            - `"xhigh"`
+
+        - `class BetaManagedAgentsEffortMax: …`
+
+          Maximum effort. Favors reasoning depth over latency.
+
+          - `type: Literal["max"]`
+
+            - `"max"`
 
       - `speed: Optional[Literal["standard", "fast"]]`
 
@@ -54025,6 +55443,9 @@ print(beta_managed_agents_session.id)
     ],
     "model": {
       "id": "claude-sonnet-4-6",
+      "effort": {
+        "type": "low"
+      },
       "speed": "standard"
     },
     "multiagent": {
@@ -54041,6 +55462,9 @@ print(beta_managed_agents_session.id)
           ],
           "model": {
             "id": "claude-sonnet-4-6",
+            "effort": {
+              "type": "low"
+            },
             "speed": "standard"
           },
           "name": "Researcher",
@@ -54390,7 +55814,7 @@ Update Session
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -54441,6 +55865,8 @@ Update Session
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -54554,6 +55980,50 @@ Update Session
             High-performance model for agents and coding
 
         - `str`
+
+      - `effort: Optional[Effort]`
+
+        How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+        - `class BetaManagedAgentsEffortLow: …`
+
+          Low effort. Favors latency over reasoning depth.
+
+          - `type: Literal["low"]`
+
+            - `"low"`
+
+        - `class BetaManagedAgentsEffortMedium: …`
+
+          Medium effort. Balances latency and reasoning depth.
+
+          - `type: Literal["medium"]`
+
+            - `"medium"`
+
+        - `class BetaManagedAgentsEffortHigh: …`
+
+          High effort. Favors reasoning depth.
+
+          - `type: Literal["high"]`
+
+            - `"high"`
+
+        - `class BetaManagedAgentsEffortXhigh: …`
+
+          Extra-high effort. Not all models accept this level.
+
+          - `type: Literal["xhigh"]`
+
+            - `"xhigh"`
+
+        - `class BetaManagedAgentsEffortMax: …`
+
+          Maximum effort. Favors reasoning depth over latency.
+
+          - `type: Literal["max"]`
+
+            - `"max"`
 
       - `speed: Optional[Literal["standard", "fast"]]`
 
@@ -55041,6 +56511,9 @@ print(beta_managed_agents_session.id)
     ],
     "model": {
       "id": "claude-sonnet-4-6",
+      "effort": {
+        "type": "low"
+      },
       "speed": "standard"
     },
     "multiagent": {
@@ -55057,6 +56530,9 @@ print(beta_managed_agents_session.id)
           ],
           "model": {
             "id": "claude-sonnet-4-6",
+            "effort": {
+              "type": "low"
+            },
             "speed": "standard"
           },
           "name": "Researcher",
@@ -55210,7 +56686,7 @@ Delete Session
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -55261,6 +56737,8 @@ Delete Session
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -55324,7 +56802,7 @@ Archive Session
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -55375,6 +56853,8 @@ Archive Session
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -55488,6 +56968,50 @@ Archive Session
             High-performance model for agents and coding
 
         - `str`
+
+      - `effort: Optional[Effort]`
+
+        How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+        - `class BetaManagedAgentsEffortLow: …`
+
+          Low effort. Favors latency over reasoning depth.
+
+          - `type: Literal["low"]`
+
+            - `"low"`
+
+        - `class BetaManagedAgentsEffortMedium: …`
+
+          Medium effort. Balances latency and reasoning depth.
+
+          - `type: Literal["medium"]`
+
+            - `"medium"`
+
+        - `class BetaManagedAgentsEffortHigh: …`
+
+          High effort. Favors reasoning depth.
+
+          - `type: Literal["high"]`
+
+            - `"high"`
+
+        - `class BetaManagedAgentsEffortXhigh: …`
+
+          Extra-high effort. Not all models accept this level.
+
+          - `type: Literal["xhigh"]`
+
+            - `"xhigh"`
+
+        - `class BetaManagedAgentsEffortMax: …`
+
+          Maximum effort. Favors reasoning depth over latency.
+
+          - `type: Literal["max"]`
+
+            - `"max"`
 
       - `speed: Optional[Literal["standard", "fast"]]`
 
@@ -55975,6 +57499,9 @@ print(beta_managed_agents_session.id)
     ],
     "model": {
       "id": "claude-sonnet-4-6",
+      "effort": {
+        "type": "low"
+      },
       "speed": "standard"
     },
     "multiagent": {
@@ -55991,6 +57518,9 @@ print(beta_managed_agents_session.id)
           ],
           "model": {
             "id": "claude-sonnet-4-6",
+            "effort": {
+              "type": "low"
+            },
             "speed": "standard"
           },
           "name": "Researcher",
@@ -56305,6 +57835,64 @@ print(beta_managed_agents_session.id)
           - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
 
         - `str`
+
+      - `effort: Optional[Effort]`
+
+        How hard Claude works on each inference call. Accepts a bare level string (`"high"`) or `{"type": "high"}`. On create, omitting it resolves the per-model default; on update, omitting it leaves the stored value unchanged.
+
+        - `Literal["low", "medium", "high", 2 more]`
+
+          How hard Claude works on each turn. Higher levels favor reasoning depth over latency. Not all models accept every level; invalid combinations are rejected at create time.
+
+          - `"low"`
+
+          - `"medium"`
+
+          - `"high"`
+
+          - `"xhigh"`
+
+          - `"max"`
+
+        - `class BetaManagedAgentsEffortLow: …`
+
+          Low effort. Favors latency over reasoning depth.
+
+          - `type: Literal["low"]`
+
+            - `"low"`
+
+        - `class BetaManagedAgentsEffortMedium: …`
+
+          Medium effort. Balances latency and reasoning depth.
+
+          - `type: Literal["medium"]`
+
+            - `"medium"`
+
+        - `class BetaManagedAgentsEffortHigh: …`
+
+          High effort. Favors reasoning depth.
+
+          - `type: Literal["high"]`
+
+            - `"high"`
+
+        - `class BetaManagedAgentsEffortXhigh: …`
+
+          Extra-high effort. Not all models accept this level.
+
+          - `type: Literal["xhigh"]`
+
+            - `"xhigh"`
+
+        - `class BetaManagedAgentsEffortMax: …`
+
+          Maximum effort. Favors reasoning depth over latency.
+
+          - `type: Literal["max"]`
+
+            - `"max"`
 
       - `speed: Optional[Literal["standard", "fast"]]`
 
@@ -56967,6 +58555,50 @@ print(beta_managed_agents_session.id)
 
         - `str`
 
+      - `effort: Optional[Effort]`
+
+        How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+        - `class BetaManagedAgentsEffortLow: …`
+
+          Low effort. Favors latency over reasoning depth.
+
+          - `type: Literal["low"]`
+
+            - `"low"`
+
+        - `class BetaManagedAgentsEffortMedium: …`
+
+          Medium effort. Balances latency and reasoning depth.
+
+          - `type: Literal["medium"]`
+
+            - `"medium"`
+
+        - `class BetaManagedAgentsEffortHigh: …`
+
+          High effort. Favors reasoning depth.
+
+          - `type: Literal["high"]`
+
+            - `"high"`
+
+        - `class BetaManagedAgentsEffortXhigh: …`
+
+          Extra-high effort. Not all models accept this level.
+
+          - `type: Literal["xhigh"]`
+
+            - `"xhigh"`
+
+        - `class BetaManagedAgentsEffortMax: …`
+
+          Maximum effort. Favors reasoning depth over latency.
+
+          - `type: Literal["max"]`
+
+            - `"max"`
+
       - `speed: Optional[Literal["standard", "fast"]]`
 
         Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
@@ -57520,6 +59152,50 @@ print(beta_managed_agents_session.id)
 
       - `str`
 
+    - `effort: Optional[Effort]`
+
+      How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+      - `class BetaManagedAgentsEffortLow: …`
+
+        Low effort. Favors latency over reasoning depth.
+
+        - `type: Literal["low"]`
+
+          - `"low"`
+
+      - `class BetaManagedAgentsEffortMedium: …`
+
+        Medium effort. Balances latency and reasoning depth.
+
+        - `type: Literal["medium"]`
+
+          - `"medium"`
+
+      - `class BetaManagedAgentsEffortHigh: …`
+
+        High effort. Favors reasoning depth.
+
+        - `type: Literal["high"]`
+
+          - `"high"`
+
+      - `class BetaManagedAgentsEffortXhigh: …`
+
+        Extra-high effort. Not all models accept this level.
+
+        - `type: Literal["xhigh"]`
+
+          - `"xhigh"`
+
+      - `class BetaManagedAgentsEffortMax: …`
+
+        Maximum effort. Favors reasoning depth over latency.
+
+        - `type: Literal["max"]`
+
+          - `"max"`
+
     - `speed: Optional[Literal["standard", "fast"]]`
 
       Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
@@ -58049,6 +59725,50 @@ print(beta_managed_agents_session.id)
 
         - `str`
 
+      - `effort: Optional[Effort]`
+
+        How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+        - `class BetaManagedAgentsEffortLow: …`
+
+          Low effort. Favors latency over reasoning depth.
+
+          - `type: Literal["low"]`
+
+            - `"low"`
+
+        - `class BetaManagedAgentsEffortMedium: …`
+
+          Medium effort. Balances latency and reasoning depth.
+
+          - `type: Literal["medium"]`
+
+            - `"medium"`
+
+        - `class BetaManagedAgentsEffortHigh: …`
+
+          High effort. Favors reasoning depth.
+
+          - `type: Literal["high"]`
+
+            - `"high"`
+
+        - `class BetaManagedAgentsEffortXhigh: …`
+
+          Extra-high effort. Not all models accept this level.
+
+          - `type: Literal["xhigh"]`
+
+            - `"xhigh"`
+
+        - `class BetaManagedAgentsEffortMax: …`
+
+          Maximum effort. Favors reasoning depth over latency.
+
+          - `type: Literal["max"]`
+
+            - `"max"`
+
       - `speed: Optional[Literal["standard", "fast"]]`
 
         Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
@@ -58363,6 +60083,50 @@ print(beta_managed_agents_session.id)
             High-performance model for agents and coding
 
         - `str`
+
+      - `effort: Optional[Effort]`
+
+        How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+        - `class BetaManagedAgentsEffortLow: …`
+
+          Low effort. Favors latency over reasoning depth.
+
+          - `type: Literal["low"]`
+
+            - `"low"`
+
+        - `class BetaManagedAgentsEffortMedium: …`
+
+          Medium effort. Balances latency and reasoning depth.
+
+          - `type: Literal["medium"]`
+
+            - `"medium"`
+
+        - `class BetaManagedAgentsEffortHigh: …`
+
+          High effort. Favors reasoning depth.
+
+          - `type: Literal["high"]`
+
+            - `"high"`
+
+        - `class BetaManagedAgentsEffortXhigh: …`
+
+          Extra-high effort. Not all models accept this level.
+
+          - `type: Literal["xhigh"]`
+
+            - `"xhigh"`
+
+        - `class BetaManagedAgentsEffortMax: …`
+
+          Maximum effort. Favors reasoning depth over latency.
+
+          - `type: Literal["max"]`
+
+            - `"max"`
 
       - `speed: Optional[Literal["standard", "fast"]]`
 
@@ -59012,7 +60776,7 @@ List Events
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -59063,6 +60827,8 @@ List Events
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -60052,7 +61818,7 @@ List Events
 
       - `class BetaManagedAgentsSessionRetriesExhausted: …`
 
-        The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+        The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
         - `type: Literal["retries_exhausted"]`
 
@@ -60388,7 +62154,7 @@ List Events
 
       - `class BetaManagedAgentsSessionRetriesExhausted: …`
 
-        The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+        The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
     - `type: Literal["session.thread_status_idle"]`
 
@@ -60602,6 +62368,50 @@ List Events
               High-performance model for agents and coding
 
           - `str`
+
+        - `effort: Optional[Effort]`
+
+          How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+          - `class BetaManagedAgentsEffortLow: …`
+
+            Low effort. Favors latency over reasoning depth.
+
+            - `type: Literal["low"]`
+
+              - `"low"`
+
+          - `class BetaManagedAgentsEffortMedium: …`
+
+            Medium effort. Balances latency and reasoning depth.
+
+            - `type: Literal["medium"]`
+
+              - `"medium"`
+
+          - `class BetaManagedAgentsEffortHigh: …`
+
+            High effort. Favors reasoning depth.
+
+            - `type: Literal["high"]`
+
+              - `"high"`
+
+          - `class BetaManagedAgentsEffortXhigh: …`
+
+            Extra-high effort. Not all models accept this level.
+
+            - `type: Literal["xhigh"]`
+
+              - `"xhigh"`
+
+          - `class BetaManagedAgentsEffortMax: …`
+
+            Maximum effort. Favors reasoning depth over latency.
+
+            - `type: Literal["max"]`
+
+              - `"max"`
 
         - `speed: Optional[Literal["standard", "fast"]]`
 
@@ -60947,7 +62757,7 @@ Send Events
 
     Parameters for sending a user message to the session.
 
-    - `content: List[Content]`
+    - `content: Iterable[Content]`
 
       Array of content blocks for the user message.
 
@@ -61307,7 +63117,7 @@ Send Events
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -61358,6 +63168,8 @@ Send Events
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -61875,7 +63687,7 @@ Stream Events
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -61926,6 +63738,8 @@ Stream Events
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -62915,7 +64729,7 @@ Stream Events
 
       - `class BetaManagedAgentsSessionRetriesExhausted: …`
 
-        The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+        The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
         - `type: Literal["retries_exhausted"]`
 
@@ -63251,7 +65065,7 @@ Stream Events
 
       - `class BetaManagedAgentsSessionRetriesExhausted: …`
 
-        The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+        The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
     - `type: Literal["session.thread_status_idle"]`
 
@@ -63465,6 +65279,50 @@ Stream Events
               High-performance model for agents and coding
 
           - `str`
+
+        - `effort: Optional[Effort]`
+
+          How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+          - `class BetaManagedAgentsEffortLow: …`
+
+            Low effort. Favors latency over reasoning depth.
+
+            - `type: Literal["low"]`
+
+              - `"low"`
+
+          - `class BetaManagedAgentsEffortMedium: …`
+
+            Medium effort. Balances latency and reasoning depth.
+
+            - `type: Literal["medium"]`
+
+              - `"medium"`
+
+          - `class BetaManagedAgentsEffortHigh: …`
+
+            High effort. Favors reasoning depth.
+
+            - `type: Literal["high"]`
+
+              - `"high"`
+
+          - `class BetaManagedAgentsEffortXhigh: …`
+
+            Extra-high effort. Not all models accept this level.
+
+            - `type: Literal["xhigh"]`
+
+              - `"xhigh"`
+
+          - `class BetaManagedAgentsEffortMax: …`
+
+            Maximum effort. Favors reasoning depth over latency.
+
+            - `type: Literal["max"]`
+
+              - `"max"`
 
         - `speed: Optional[Literal["standard", "fast"]]`
 
@@ -64993,7 +66851,7 @@ for event in client.beta.sessions.events.stream(
 
     Parameters for sending a user message to the session.
 
-    - `content: List[Content]`
+    - `content: Iterable[Content]`
 
       Array of content blocks for the user message.
 
@@ -67509,7 +69367,7 @@ for event in client.beta.sessions.events.stream(
 
       - `class BetaManagedAgentsSessionRetriesExhausted: …`
 
-        The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+        The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
         - `type: Literal["retries_exhausted"]`
 
@@ -67845,7 +69703,7 @@ for event in client.beta.sessions.events.stream(
 
       - `class BetaManagedAgentsSessionRetriesExhausted: …`
 
-        The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+        The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
     - `type: Literal["session.thread_status_idle"]`
 
@@ -68059,6 +69917,50 @@ for event in client.beta.sessions.events.stream(
               High-performance model for agents and coding
 
           - `str`
+
+        - `effort: Optional[Effort]`
+
+          How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+          - `class BetaManagedAgentsEffortLow: …`
+
+            Low effort. Favors latency over reasoning depth.
+
+            - `type: Literal["low"]`
+
+              - `"low"`
+
+          - `class BetaManagedAgentsEffortMedium: …`
+
+            Medium effort. Balances latency and reasoning depth.
+
+            - `type: Literal["medium"]`
+
+              - `"medium"`
+
+          - `class BetaManagedAgentsEffortHigh: …`
+
+            High effort. Favors reasoning depth.
+
+            - `type: Literal["high"]`
+
+              - `"high"`
+
+          - `class BetaManagedAgentsEffortXhigh: …`
+
+            Extra-high effort. Not all models accept this level.
+
+            - `type: Literal["xhigh"]`
+
+              - `"xhigh"`
+
+          - `class BetaManagedAgentsEffortMax: …`
+
+            Maximum effort. Favors reasoning depth over latency.
+
+            - `type: Literal["max"]`
+
+              - `"max"`
 
         - `speed: Optional[Literal["standard", "fast"]]`
 
@@ -68354,7 +70256,7 @@ for event in client.beta.sessions.events.stream(
 
 - `class BetaManagedAgentsSessionRetriesExhausted: …`
 
-  The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+  The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
   - `type: Literal["retries_exhausted"]`
 
@@ -68400,7 +70302,7 @@ for event in client.beta.sessions.events.stream(
 
     - `class BetaManagedAgentsSessionRetriesExhausted: …`
 
-      The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+      The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
       - `type: Literal["retries_exhausted"]`
 
@@ -68538,7 +70440,7 @@ for event in client.beta.sessions.events.stream(
 
     - `class BetaManagedAgentsSessionRetriesExhausted: …`
 
-      The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+      The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
       - `type: Literal["retries_exhausted"]`
 
@@ -69826,7 +71728,7 @@ for event in client.beta.sessions.events.stream(
 
       - `class BetaManagedAgentsSessionRetriesExhausted: …`
 
-        The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+        The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
         - `type: Literal["retries_exhausted"]`
 
@@ -70162,7 +72064,7 @@ for event in client.beta.sessions.events.stream(
 
       - `class BetaManagedAgentsSessionRetriesExhausted: …`
 
-        The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+        The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
     - `type: Literal["session.thread_status_idle"]`
 
@@ -70376,6 +72278,50 @@ for event in client.beta.sessions.events.stream(
               High-performance model for agents and coding
 
           - `str`
+
+        - `effort: Optional[Effort]`
+
+          How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+          - `class BetaManagedAgentsEffortLow: …`
+
+            Low effort. Favors latency over reasoning depth.
+
+            - `type: Literal["low"]`
+
+              - `"low"`
+
+          - `class BetaManagedAgentsEffortMedium: …`
+
+            Medium effort. Balances latency and reasoning depth.
+
+            - `type: Literal["medium"]`
+
+              - `"medium"`
+
+          - `class BetaManagedAgentsEffortHigh: …`
+
+            High effort. Favors reasoning depth.
+
+            - `type: Literal["high"]`
+
+              - `"high"`
+
+          - `class BetaManagedAgentsEffortXhigh: …`
+
+            Extra-high effort. Not all models accept this level.
+
+            - `type: Literal["xhigh"]`
+
+              - `"xhigh"`
+
+          - `class BetaManagedAgentsEffortMax: …`
+
+            Maximum effort. Favors reasoning depth over latency.
+
+            - `type: Literal["max"]`
+
+              - `"max"`
 
         - `speed: Optional[Literal["standard", "fast"]]`
 
@@ -71569,7 +73515,7 @@ for event in client.beta.sessions.events.stream(
 
   Parameters for sending a user message to the session.
 
-  - `content: List[Content]`
+  - `content: Iterable[Content]`
 
     Array of content blocks for the user message.
 
@@ -72015,7 +73961,7 @@ Add Session Resource
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -72066,6 +74012,8 @@ Add Session Resource
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -72153,7 +74101,7 @@ List Session Resources
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -72204,6 +74152,8 @@ List Session Resources
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -72383,7 +74333,7 @@ Get Session Resource
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -72434,6 +74384,8 @@ Get Session Resource
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -72604,7 +74556,7 @@ Update Session Resource
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -72655,6 +74607,8 @@ Update Session Resource
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -72822,7 +74776,7 @@ Delete Session Resource
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -72873,6 +74827,8 @@ Delete Session Resource
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -73377,7 +75333,7 @@ List Session Threads
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -73428,6 +75384,8 @@ List Session Threads
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -73543,6 +75501,50 @@ List Session Threads
             High-performance model for agents and coding
 
         - `str`
+
+      - `effort: Optional[Effort]`
+
+        How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+        - `class BetaManagedAgentsEffortLow: …`
+
+          Low effort. Favors latency over reasoning depth.
+
+          - `type: Literal["low"]`
+
+            - `"low"`
+
+        - `class BetaManagedAgentsEffortMedium: …`
+
+          Medium effort. Balances latency and reasoning depth.
+
+          - `type: Literal["medium"]`
+
+            - `"medium"`
+
+        - `class BetaManagedAgentsEffortHigh: …`
+
+          High effort. Favors reasoning depth.
+
+          - `type: Literal["high"]`
+
+            - `"high"`
+
+        - `class BetaManagedAgentsEffortXhigh: …`
+
+          Extra-high effort. Not all models accept this level.
+
+          - `type: Literal["xhigh"]`
+
+            - `"xhigh"`
+
+        - `class BetaManagedAgentsEffortMax: …`
+
+          Maximum effort. Favors reasoning depth over latency.
+
+          - `type: Literal["max"]`
+
+            - `"max"`
 
       - `speed: Optional[Literal["standard", "fast"]]`
 
@@ -73841,6 +75843,9 @@ print(page.id)
         ],
         "model": {
           "id": "claude-sonnet-4-6",
+          "effort": {
+            "type": "low"
+          },
           "speed": "standard"
         },
         "name": "Researcher",
@@ -73922,7 +75927,7 @@ Get Session Thread
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -73973,6 +75978,8 @@ Get Session Thread
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -74088,6 +76095,50 @@ Get Session Thread
             High-performance model for agents and coding
 
         - `str`
+
+      - `effort: Optional[Effort]`
+
+        How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+        - `class BetaManagedAgentsEffortLow: …`
+
+          Low effort. Favors latency over reasoning depth.
+
+          - `type: Literal["low"]`
+
+            - `"low"`
+
+        - `class BetaManagedAgentsEffortMedium: …`
+
+          Medium effort. Balances latency and reasoning depth.
+
+          - `type: Literal["medium"]`
+
+            - `"medium"`
+
+        - `class BetaManagedAgentsEffortHigh: …`
+
+          High effort. Favors reasoning depth.
+
+          - `type: Literal["high"]`
+
+            - `"high"`
+
+        - `class BetaManagedAgentsEffortXhigh: …`
+
+          Extra-high effort. Not all models accept this level.
+
+          - `type: Literal["xhigh"]`
+
+            - `"xhigh"`
+
+        - `class BetaManagedAgentsEffortMax: …`
+
+          Maximum effort. Favors reasoning depth over latency.
+
+          - `type: Literal["max"]`
+
+            - `"max"`
 
       - `speed: Optional[Literal["standard", "fast"]]`
 
@@ -74384,6 +76435,9 @@ print(beta_managed_agents_session_thread.id)
     ],
     "model": {
       "id": "claude-sonnet-4-6",
+      "effort": {
+        "type": "low"
+      },
       "speed": "standard"
     },
     "name": "Researcher",
@@ -74462,7 +76516,7 @@ Archive Session Thread
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -74513,6 +76567,8 @@ Archive Session Thread
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -74628,6 +76684,50 @@ Archive Session Thread
             High-performance model for agents and coding
 
         - `str`
+
+      - `effort: Optional[Effort]`
+
+        How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+        - `class BetaManagedAgentsEffortLow: …`
+
+          Low effort. Favors latency over reasoning depth.
+
+          - `type: Literal["low"]`
+
+            - `"low"`
+
+        - `class BetaManagedAgentsEffortMedium: …`
+
+          Medium effort. Balances latency and reasoning depth.
+
+          - `type: Literal["medium"]`
+
+            - `"medium"`
+
+        - `class BetaManagedAgentsEffortHigh: …`
+
+          High effort. Favors reasoning depth.
+
+          - `type: Literal["high"]`
+
+            - `"high"`
+
+        - `class BetaManagedAgentsEffortXhigh: …`
+
+          Extra-high effort. Not all models accept this level.
+
+          - `type: Literal["xhigh"]`
+
+            - `"xhigh"`
+
+        - `class BetaManagedAgentsEffortMax: …`
+
+          Maximum effort. Favors reasoning depth over latency.
+
+          - `type: Literal["max"]`
+
+            - `"max"`
 
       - `speed: Optional[Literal["standard", "fast"]]`
 
@@ -74924,6 +77024,9 @@ print(beta_managed_agents_session_thread.id)
     ],
     "model": {
       "id": "claude-sonnet-4-6",
+      "effort": {
+        "type": "low"
+      },
       "speed": "standard"
     },
     "name": "Researcher",
@@ -75090,6 +77193,50 @@ print(beta_managed_agents_session_thread.id)
             High-performance model for agents and coding
 
         - `str`
+
+      - `effort: Optional[Effort]`
+
+        How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+        - `class BetaManagedAgentsEffortLow: …`
+
+          Low effort. Favors latency over reasoning depth.
+
+          - `type: Literal["low"]`
+
+            - `"low"`
+
+        - `class BetaManagedAgentsEffortMedium: …`
+
+          Medium effort. Balances latency and reasoning depth.
+
+          - `type: Literal["medium"]`
+
+            - `"medium"`
+
+        - `class BetaManagedAgentsEffortHigh: …`
+
+          High effort. Favors reasoning depth.
+
+          - `type: Literal["high"]`
+
+            - `"high"`
+
+        - `class BetaManagedAgentsEffortXhigh: …`
+
+          Extra-high effort. Not all models accept this level.
+
+          - `type: Literal["xhigh"]`
+
+            - `"xhigh"`
+
+        - `class BetaManagedAgentsEffortMax: …`
+
+          Maximum effort. Favors reasoning depth over latency.
+
+          - `type: Literal["max"]`
+
+            - `"max"`
 
       - `speed: Optional[Literal["standard", "fast"]]`
 
@@ -76395,7 +78542,7 @@ print(beta_managed_agents_session_thread.id)
 
       - `class BetaManagedAgentsSessionRetriesExhausted: …`
 
-        The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+        The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
         - `type: Literal["retries_exhausted"]`
 
@@ -76731,7 +78878,7 @@ print(beta_managed_agents_session_thread.id)
 
       - `class BetaManagedAgentsSessionRetriesExhausted: …`
 
-        The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+        The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
     - `type: Literal["session.thread_status_idle"]`
 
@@ -76945,6 +79092,50 @@ print(beta_managed_agents_session_thread.id)
               High-performance model for agents and coding
 
           - `str`
+
+        - `effort: Optional[Effort]`
+
+          How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+          - `class BetaManagedAgentsEffortLow: …`
+
+            Low effort. Favors latency over reasoning depth.
+
+            - `type: Literal["low"]`
+
+              - `"low"`
+
+          - `class BetaManagedAgentsEffortMedium: …`
+
+            Medium effort. Balances latency and reasoning depth.
+
+            - `type: Literal["medium"]`
+
+              - `"medium"`
+
+          - `class BetaManagedAgentsEffortHigh: …`
+
+            High effort. Favors reasoning depth.
+
+            - `type: Literal["high"]`
+
+              - `"high"`
+
+          - `class BetaManagedAgentsEffortXhigh: …`
+
+            Extra-high effort. Not all models accept this level.
+
+            - `type: Literal["xhigh"]`
+
+              - `"xhigh"`
+
+          - `class BetaManagedAgentsEffortMax: …`
+
+            Maximum effort. Favors reasoning depth over latency.
+
+            - `type: Literal["max"]`
+
+              - `"max"`
 
         - `speed: Optional[Literal["standard", "fast"]]`
 
@@ -77312,7 +79503,7 @@ List Session Thread Events
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -77363,6 +79554,8 @@ List Session Thread Events
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -78352,7 +80545,7 @@ List Session Thread Events
 
       - `class BetaManagedAgentsSessionRetriesExhausted: …`
 
-        The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+        The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
         - `type: Literal["retries_exhausted"]`
 
@@ -78688,7 +80881,7 @@ List Session Thread Events
 
       - `class BetaManagedAgentsSessionRetriesExhausted: …`
 
-        The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+        The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
     - `type: Literal["session.thread_status_idle"]`
 
@@ -78902,6 +81095,50 @@ List Session Thread Events
               High-performance model for agents and coding
 
           - `str`
+
+        - `effort: Optional[Effort]`
+
+          How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+          - `class BetaManagedAgentsEffortLow: …`
+
+            Low effort. Favors latency over reasoning depth.
+
+            - `type: Literal["low"]`
+
+              - `"low"`
+
+          - `class BetaManagedAgentsEffortMedium: …`
+
+            Medium effort. Balances latency and reasoning depth.
+
+            - `type: Literal["medium"]`
+
+              - `"medium"`
+
+          - `class BetaManagedAgentsEffortHigh: …`
+
+            High effort. Favors reasoning depth.
+
+            - `type: Literal["high"]`
+
+              - `"high"`
+
+          - `class BetaManagedAgentsEffortXhigh: …`
+
+            Extra-high effort. Not all models accept this level.
+
+            - `type: Literal["xhigh"]`
+
+              - `"xhigh"`
+
+          - `class BetaManagedAgentsEffortMax: …`
+
+            Maximum effort. Favors reasoning depth over latency.
+
+            - `type: Literal["max"]`
+
+              - `"max"`
 
         - `speed: Optional[Literal["standard", "fast"]]`
 
@@ -79231,13 +81468,21 @@ Stream Session Thread Events
 
 - `thread_id: str`
 
+- `event_deltas: Optional[List[BetaManagedAgentsDeltaType]]`
+
+  When set, this connection also receives streaming deltas (`event_start`, `event_delta`) while an event is being produced, before the event itself arrives. Deltas are best-effort; when the final event is produced it carries the complete content. A model request that ends early (an error or interrupt) produces no final event — its terminal `span.model_request_end` closes the preview. Accepts one or more event types to preview and may be repeated: `agent.message` streams `content_delta` fragments; `agent.thinking` is start-only — a signal that the agent has begun extended thinking, concluded by the `agent.thinking` event itself. Only previews of the requested event types are sent.
+
+  - `"agent.message"`
+
+  - `"agent.thinking"`
+
 - `betas: Optional[List[AnthropicBetaParam]]`
 
   Optional header to specify the beta version(s) you want to use.
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -79288,6 +81533,8 @@ Stream Session Thread Events
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -80277,7 +82524,7 @@ Stream Session Thread Events
 
       - `class BetaManagedAgentsSessionRetriesExhausted: …`
 
-        The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+        The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
         - `type: Literal["retries_exhausted"]`
 
@@ -80613,7 +82860,7 @@ Stream Session Thread Events
 
       - `class BetaManagedAgentsSessionRetriesExhausted: …`
 
-        The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
+        The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
     - `type: Literal["session.thread_status_idle"]`
 
@@ -80827,6 +83074,50 @@ Stream Session Thread Events
               High-performance model for agents and coding
 
           - `str`
+
+        - `effort: Optional[Effort]`
+
+          How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
+
+          - `class BetaManagedAgentsEffortLow: …`
+
+            Low effort. Favors latency over reasoning depth.
+
+            - `type: Literal["low"]`
+
+              - `"low"`
+
+          - `class BetaManagedAgentsEffortMedium: …`
+
+            Medium effort. Balances latency and reasoning depth.
+
+            - `type: Literal["medium"]`
+
+              - `"medium"`
+
+          - `class BetaManagedAgentsEffortHigh: …`
+
+            High effort. Favors reasoning depth.
+
+            - `type: Literal["high"]`
+
+              - `"high"`
+
+          - `class BetaManagedAgentsEffortXhigh: …`
+
+            Extra-high effort. Not all models accept this level.
+
+            - `type: Literal["xhigh"]`
+
+              - `"xhigh"`
+
+          - `class BetaManagedAgentsEffortMax: …`
+
+            Maximum effort. Favors reasoning depth over latency.
+
+            - `type: Literal["max"]`
+
+              - `"max"`
 
         - `speed: Optional[Literal["standard", "fast"]]`
 
@@ -81242,7 +83533,7 @@ Create Deployment
 
     Parameters for sending a user message to the session.
 
-    - `content: List[Content]`
+    - `content: Iterable[Content]`
 
       Array of content blocks for the user message.
 
@@ -81582,7 +83873,7 @@ Create Deployment
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -81633,6 +83924,8 @@ Create Deployment
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -82306,7 +84599,7 @@ List Deployments
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -82357,6 +84650,8 @@ List Deployments
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -82995,7 +85290,7 @@ Get Deployment
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -83046,6 +85341,8 @@ Get Deployment
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -83712,7 +86009,7 @@ Update Deployment
 
     Parameters for sending a user message to the session.
 
-    - `content: List[Content]`
+    - `content: Iterable[Content]`
 
       Array of content blocks for the user message.
 
@@ -84048,7 +86345,7 @@ Update Deployment
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -84099,6 +86396,8 @@ Update Deployment
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -84733,7 +87032,7 @@ Archive Deployment
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -84784,6 +87083,8 @@ Archive Deployment
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -85418,7 +87719,7 @@ Run Deployment Now
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -85469,6 +87770,8 @@ Run Deployment Now
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -85794,7 +88097,7 @@ Pause Deployment
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -85845,6 +88148,8 @@ Pause Deployment
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -86479,7 +88784,7 @@ Unpause Deployment
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -86530,6 +88835,8 @@ Unpause Deployment
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -87968,7 +90275,7 @@ print(beta_managed_agents_deployment.id)
 
     Parameters for sending a user message to the session.
 
-    - `content: List[Content]`
+    - `content: Iterable[Content]`
 
       Array of content blocks for the user message.
 
@@ -89212,7 +91519,7 @@ List Deployment Runs
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -89263,6 +91570,8 @@ List Deployment Runs
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -89592,7 +91901,7 @@ Get Deployment Run
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -89643,6 +91952,8 @@ Get Deployment Run
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -90520,7 +92831,7 @@ Create Vault
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -90571,6 +92882,8 @@ Create Vault
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -90673,7 +92986,7 @@ List Vaults
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -90724,6 +93037,8 @@ List Vaults
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -90820,7 +93135,7 @@ Get Vault
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -90871,6 +93186,8 @@ Get Vault
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -90971,7 +93288,7 @@ Update Vault
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -91022,6 +93339,8 @@ Update Vault
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -91114,7 +93433,7 @@ Delete Vault
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -91165,6 +93484,8 @@ Delete Vault
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -91230,7 +93551,7 @@ Archive Vault
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -91281,6 +93602,8 @@ Archive Vault
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -91585,7 +93908,7 @@ Create Credential
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -91636,6 +93959,8 @@ Create Credential
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -91882,7 +94207,7 @@ List Credentials
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -91933,6 +94258,8 @@ List Credentials
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -92170,7 +94497,7 @@ Get Credential
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -92221,6 +94548,8 @@ Get Credential
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -92581,7 +94910,7 @@ Update Credential
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -92632,6 +94961,8 @@ Update Credential
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -92864,7 +95195,7 @@ Delete Credential
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -92915,6 +95246,8 @@ Delete Credential
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -92983,7 +95316,7 @@ Archive Credential
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -93034,6 +95367,8 @@ Archive Credential
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -93266,7 +95601,7 @@ Validate Credential
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -93317,6 +95652,8 @@ Validate Credential
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -94627,7 +96964,7 @@ Create a memory store
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -94678,6 +97015,8 @@ Create a memory store
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -94793,7 +97132,7 @@ List memory stores
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -94844,6 +97183,8 @@ List memory stores
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -94945,7 +97286,7 @@ Retrieve a memory store
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -94996,6 +97337,8 @@ Retrieve a memory store
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -95105,7 +97448,7 @@ Update a memory store
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -95156,6 +97499,8 @@ Update a memory store
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -95253,7 +97598,7 @@ Delete a memory store
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -95304,6 +97649,8 @@ Delete a memory store
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -95369,7 +97716,7 @@ Archive a memory store
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -95420,6 +97767,8 @@ Archive a memory store
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -95589,7 +97938,7 @@ Create a memory
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -95640,6 +97989,8 @@ Create a memory
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -95771,7 +98122,7 @@ List memories
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -95822,6 +98173,8 @@ List memories
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -95959,7 +98312,7 @@ Retrieve a memory
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -96010,6 +98363,8 @@ Retrieve a memory
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -96146,7 +98501,7 @@ Update a memory
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -96197,6 +98552,8 @@ Update a memory
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -96309,7 +98666,7 @@ Delete a memory
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -96360,6 +98717,8 @@ Delete a memory
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -96788,7 +99147,7 @@ List memory versions
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -96839,6 +99198,8 @@ List memory versions
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -97023,7 +99384,7 @@ Retrieve a memory version
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -97074,6 +99435,8 @@ Retrieve a memory version
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -97245,7 +99608,7 @@ Redact a memory version
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -97296,6 +99659,8 @@ Redact a memory version
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -97667,7 +100032,7 @@ Upload File
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -97718,6 +100083,8 @@ Upload File
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -97846,7 +100213,7 @@ List Files
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -97897,6 +100264,8 @@ List Files
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -98017,7 +100386,7 @@ Download File
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -98068,6 +100437,8 @@ Download File
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -98118,7 +100489,7 @@ Get File Metadata
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -98169,6 +100540,8 @@ Get File Metadata
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -98283,7 +100656,7 @@ Delete File
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -98334,6 +100707,8 @@ Delete File
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -98497,7 +100872,7 @@ Create Skill
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -98548,6 +100923,8 @@ Create Skill
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -98668,7 +101045,7 @@ List Skills
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -98719,6 +101096,8 @@ List Skills
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -98829,7 +101208,7 @@ Get Skill
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -98880,6 +101259,8 @@ Get Skill
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -98985,7 +101366,7 @@ Delete Skill
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -99036,6 +101417,8 @@ Delete Skill
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -99268,7 +101651,7 @@ Create Skill Version
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -99319,6 +101702,8 @@ Create Skill Version
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -99439,7 +101824,7 @@ List Skill Versions
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -99490,6 +101875,8 @@ List Skill Versions
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -99612,7 +101999,7 @@ Download a skill version's content as a zip archive.
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -99663,6 +102050,8 @@ Download a skill version's content as a zip archive.
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -99722,7 +102111,7 @@ Get Skill Version
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -99773,6 +102162,8 @@ Get Skill Version
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -99889,7 +102280,7 @@ Delete Skill Version
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -99940,6 +102331,8 @@ Delete Skill Version
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -100192,7 +102585,7 @@ Create User Profile
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -100243,6 +102636,8 @@ Create User Profile
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -100375,7 +102770,7 @@ List User Profiles
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -100426,6 +102821,8 @@ List User Profiles
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -100550,7 +102947,7 @@ Get User Profile
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -100601,6 +102998,8 @@ Get User Profile
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -100743,7 +103142,7 @@ Update User Profile
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -100794,6 +103193,8 @@ Update User Profile
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -100914,7 +103315,7 @@ Create Enrollment URL
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 26 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -100965,6 +103366,8 @@ Create Enrollment URL
     - `"managed-agents-2026-04-01"`
 
     - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
 
     - `"thinking-token-count-2026-05-13"`
 
@@ -101109,9 +103512,3154 @@ print(beta_user_profile_enrollment_url.expires_at)
 
     - `"rejected"`
 
+# Dreams
+
+## Create a Dream
+
+`beta.dreams.create(DreamCreateParams**kwargs)  -> BetaDream`
+
+**post** `/v1/dreams`
+
+Create a Dream
+
+### Parameters
+
+- `inputs: Iterable[BetaDreamInputParam]`
+
+  - `class BetaDreamMemoryStoreInput: …`
+
+    An input memory store the dream reads from. The dream never mutates this store.
+
+    - `memory_store_id: str`
+
+    - `type: Literal["memory_store"]`
+
+      - `"memory_store"`
+
+  - `class BetaDreamSessionsInput: …`
+
+    Input session transcripts the dream reads.
+
+    - `session_ids: List[str]`
+
+    - `type: Literal["sessions"]`
+
+      - `"sessions"`
+
+- `model: Model`
+
+  Model identifier and configuration applied to every pipeline stage.
+
+  - `str`
+
+  - `class BetaDreamModelConfigParam: …`
+
+    Model identifier and configuration applied to every pipeline stage.
+
+    - `id: str`
+
+      Model identifier, e.g. "claude-opus-4-7". 1-256 characters.
+
+    - `speed: Optional[Literal["standard", "fast"]]`
+
+      Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+      - `"standard"`
+
+      - `"fast"`
+
+- `instructions: Optional[str]`
+
+- `betas: Optional[List[AnthropicBetaParam]]`
+
+  Optional header to specify the beta version(s) you want to use.
+
+  - `str`
+
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
+
+    - `"message-batches-2024-09-24"`
+
+    - `"prompt-caching-2024-07-31"`
+
+    - `"computer-use-2024-10-22"`
+
+    - `"computer-use-2025-01-24"`
+
+    - `"pdfs-2024-09-25"`
+
+    - `"token-counting-2024-11-01"`
+
+    - `"token-efficient-tools-2025-02-19"`
+
+    - `"output-128k-2025-02-19"`
+
+    - `"files-api-2025-04-14"`
+
+    - `"mcp-client-2025-04-04"`
+
+    - `"mcp-client-2025-11-20"`
+
+    - `"dev-full-thinking-2025-05-14"`
+
+    - `"interleaved-thinking-2025-05-14"`
+
+    - `"code-execution-2025-05-22"`
+
+    - `"extended-cache-ttl-2025-04-11"`
+
+    - `"context-1m-2025-08-07"`
+
+    - `"context-management-2025-06-27"`
+
+    - `"model-context-window-exceeded-2025-08-26"`
+
+    - `"skills-2025-10-02"`
+
+    - `"fast-mode-2026-02-01"`
+
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
+
+    - `"managed-agents-2026-04-01"`
+
+    - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"server-side-fallback-2026-06-01"`
+
+    - `"fallback-credit-2026-06-01"`
+
+    - `"agent-memory-2026-07-22"`
+
+### Returns
+
+- `class BetaDream: …`
+
+  An asynchronous memory-consolidation job that reads a memory store plus a set of session transcripts and writes consolidated memories into a new output memory store. The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to generally-available endpoints.
+
+  - `id: str`
+
+  - `archived_at: Optional[datetime]`
+
+    A timestamp in RFC 3339 format
+
+  - `created_at: datetime`
+
+    A timestamp in RFC 3339 format
+
+  - `ended_at: Optional[datetime]`
+
+    A timestamp in RFC 3339 format
+
+  - `error: Optional[BetaDreamError]`
+
+    Failure detail for a Dream whose `status` is `failed`.
+
+    - `message: str`
+
+    - `type: str`
+
+  - `inputs: List[BetaDreamInput]`
+
+    - `class BetaDreamMemoryStoreInput: …`
+
+      An input memory store the dream reads from. The dream never mutates this store.
+
+      - `memory_store_id: str`
+
+      - `type: Literal["memory_store"]`
+
+        - `"memory_store"`
+
+    - `class BetaDreamSessionsInput: …`
+
+      Input session transcripts the dream reads.
+
+      - `session_ids: List[str]`
+
+      - `type: Literal["sessions"]`
+
+        - `"sessions"`
+
+  - `instructions: Optional[str]`
+
+  - `model: BetaDreamModelConfig`
+
+    Model identifier and configuration applied to every pipeline stage. Same wire shape as the Agents API ModelConfig.
+
+    - `id: str`
+
+      Model identifier, e.g. "claude-opus-4-7". 1-256 characters.
+
+    - `speed: Optional[Literal["standard", "fast"]]`
+
+      Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+      - `"standard"`
+
+      - `"fast"`
+
+  - `outputs: List[BetaDreamOutput]`
+
+    - `memory_store_id: str`
+
+    - `type: Literal["memory_store"]`
+
+      - `"memory_store"`
+
+  - `session_id: Optional[str]`
+
+  - `status: BetaDreamStatus`
+
+    Lifecycle status of a Dream.
+
+    - `"pending"`
+
+    - `"running"`
+
+    - `"completed"`
+
+    - `"failed"`
+
+    - `"canceled"`
+
+  - `type: Literal["dream"]`
+
+    - `"dream"`
+
+  - `usage: BetaDreamUsage`
+
+    Cumulative token usage for the dream across every pipeline stage.
+
+    - `cache_creation_input_tokens: int`
+
+      Total tokens used to create prompt-cache entries (sum of all TTL tiers).
+
+    - `cache_read_input_tokens: int`
+
+      Total tokens read from prompt cache.
+
+    - `input_tokens: int`
+
+      Total uncached input tokens consumed across every pipeline stage.
+
+    - `output_tokens: int`
+
+      Total output tokens generated across every pipeline stage.
+
+### Example
+
+```python
+import os
+from anthropic import Anthropic
+
+client = Anthropic(
+    api_key=os.environ.get("ANTHROPIC_API_KEY"),  # This is the default and can be omitted
+)
+beta_dream = client.beta.dreams.create(
+    inputs=[{
+        "memory_store_id": "x",
+        "type": "memory_store",
+    }],
+    model="string",
+)
+print(beta_dream.id)
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "archived_at": "2019-12-27T18:11:19.117Z",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "ended_at": "2019-12-27T18:11:19.117Z",
+  "error": {
+    "message": "message",
+    "type": "type"
+  },
+  "inputs": [
+    {
+      "memory_store_id": "x",
+      "type": "memory_store"
+    }
+  ],
+  "instructions": "instructions",
+  "model": {
+    "id": "x",
+    "speed": "standard"
+  },
+  "outputs": [
+    {
+      "memory_store_id": "memory_store_id",
+      "type": "memory_store"
+    }
+  ],
+  "session_id": "session_id",
+  "status": "pending",
+  "type": "dream",
+  "usage": {
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 0,
+    "input_tokens": 0,
+    "output_tokens": 0
+  }
+}
+```
+
+## List Dreams
+
+`beta.dreams.list(DreamListParams**kwargs)  -> SyncPageCursor[BetaDream]`
+
+**get** `/v1/dreams`
+
+List Dreams
+
+### Parameters
+
+- `created_at_gt: Optional[Union[str, datetime]]`
+
+  Return dreams with `created_at` strictly after this timestamp (exclusive lower bound, RFC 3339). Unset applies no lower bound.
+
+- `created_at_lt: Optional[Union[str, datetime]]`
+
+  Return dreams with `created_at` strictly before this timestamp (exclusive upper bound, RFC 3339). Unset applies no upper bound.
+
+- `include_archived: Optional[bool]`
+
+  Query parameter for include_archived
+
+- `limit: Optional[int]`
+
+  Query parameter for limit
+
+- `page: Optional[str]`
+
+  Query parameter for page
+
+- `statuses: Optional[List[BetaDreamStatus]]`
+
+  Filter by lifecycle status. Repeat the parameter to match any of multiple statuses. Empty applies no status filter.
+
+  - `"pending"`
+
+  - `"running"`
+
+  - `"completed"`
+
+  - `"failed"`
+
+  - `"canceled"`
+
+- `betas: Optional[List[AnthropicBetaParam]]`
+
+  Optional header to specify the beta version(s) you want to use.
+
+  - `str`
+
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
+
+    - `"message-batches-2024-09-24"`
+
+    - `"prompt-caching-2024-07-31"`
+
+    - `"computer-use-2024-10-22"`
+
+    - `"computer-use-2025-01-24"`
+
+    - `"pdfs-2024-09-25"`
+
+    - `"token-counting-2024-11-01"`
+
+    - `"token-efficient-tools-2025-02-19"`
+
+    - `"output-128k-2025-02-19"`
+
+    - `"files-api-2025-04-14"`
+
+    - `"mcp-client-2025-04-04"`
+
+    - `"mcp-client-2025-11-20"`
+
+    - `"dev-full-thinking-2025-05-14"`
+
+    - `"interleaved-thinking-2025-05-14"`
+
+    - `"code-execution-2025-05-22"`
+
+    - `"extended-cache-ttl-2025-04-11"`
+
+    - `"context-1m-2025-08-07"`
+
+    - `"context-management-2025-06-27"`
+
+    - `"model-context-window-exceeded-2025-08-26"`
+
+    - `"skills-2025-10-02"`
+
+    - `"fast-mode-2026-02-01"`
+
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
+
+    - `"managed-agents-2026-04-01"`
+
+    - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"server-side-fallback-2026-06-01"`
+
+    - `"fallback-credit-2026-06-01"`
+
+    - `"agent-memory-2026-07-22"`
+
+### Returns
+
+- `class BetaDream: …`
+
+  An asynchronous memory-consolidation job that reads a memory store plus a set of session transcripts and writes consolidated memories into a new output memory store. The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to generally-available endpoints.
+
+  - `id: str`
+
+  - `archived_at: Optional[datetime]`
+
+    A timestamp in RFC 3339 format
+
+  - `created_at: datetime`
+
+    A timestamp in RFC 3339 format
+
+  - `ended_at: Optional[datetime]`
+
+    A timestamp in RFC 3339 format
+
+  - `error: Optional[BetaDreamError]`
+
+    Failure detail for a Dream whose `status` is `failed`.
+
+    - `message: str`
+
+    - `type: str`
+
+  - `inputs: List[BetaDreamInput]`
+
+    - `class BetaDreamMemoryStoreInput: …`
+
+      An input memory store the dream reads from. The dream never mutates this store.
+
+      - `memory_store_id: str`
+
+      - `type: Literal["memory_store"]`
+
+        - `"memory_store"`
+
+    - `class BetaDreamSessionsInput: …`
+
+      Input session transcripts the dream reads.
+
+      - `session_ids: List[str]`
+
+      - `type: Literal["sessions"]`
+
+        - `"sessions"`
+
+  - `instructions: Optional[str]`
+
+  - `model: BetaDreamModelConfig`
+
+    Model identifier and configuration applied to every pipeline stage. Same wire shape as the Agents API ModelConfig.
+
+    - `id: str`
+
+      Model identifier, e.g. "claude-opus-4-7". 1-256 characters.
+
+    - `speed: Optional[Literal["standard", "fast"]]`
+
+      Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+      - `"standard"`
+
+      - `"fast"`
+
+  - `outputs: List[BetaDreamOutput]`
+
+    - `memory_store_id: str`
+
+    - `type: Literal["memory_store"]`
+
+      - `"memory_store"`
+
+  - `session_id: Optional[str]`
+
+  - `status: BetaDreamStatus`
+
+    Lifecycle status of a Dream.
+
+    - `"pending"`
+
+    - `"running"`
+
+    - `"completed"`
+
+    - `"failed"`
+
+    - `"canceled"`
+
+  - `type: Literal["dream"]`
+
+    - `"dream"`
+
+  - `usage: BetaDreamUsage`
+
+    Cumulative token usage for the dream across every pipeline stage.
+
+    - `cache_creation_input_tokens: int`
+
+      Total tokens used to create prompt-cache entries (sum of all TTL tiers).
+
+    - `cache_read_input_tokens: int`
+
+      Total tokens read from prompt cache.
+
+    - `input_tokens: int`
+
+      Total uncached input tokens consumed across every pipeline stage.
+
+    - `output_tokens: int`
+
+      Total output tokens generated across every pipeline stage.
+
+### Example
+
+```python
+import os
+from anthropic import Anthropic
+
+client = Anthropic(
+    api_key=os.environ.get("ANTHROPIC_API_KEY"),  # This is the default and can be omitted
+)
+page = client.beta.dreams.list()
+page = page.data[0]
+print(page.id)
+```
+
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "id": "id",
+      "archived_at": "2019-12-27T18:11:19.117Z",
+      "created_at": "2019-12-27T18:11:19.117Z",
+      "ended_at": "2019-12-27T18:11:19.117Z",
+      "error": {
+        "message": "message",
+        "type": "type"
+      },
+      "inputs": [
+        {
+          "memory_store_id": "x",
+          "type": "memory_store"
+        }
+      ],
+      "instructions": "instructions",
+      "model": {
+        "id": "x",
+        "speed": "standard"
+      },
+      "outputs": [
+        {
+          "memory_store_id": "memory_store_id",
+          "type": "memory_store"
+        }
+      ],
+      "session_id": "session_id",
+      "status": "pending",
+      "type": "dream",
+      "usage": {
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "input_tokens": 0,
+        "output_tokens": 0
+      }
+    }
+  ],
+  "next_page": "next_page"
+}
+```
+
+## Get a Dream
+
+`beta.dreams.retrieve(strdream_id, DreamRetrieveParams**kwargs)  -> BetaDream`
+
+**get** `/v1/dreams/{dream_id}`
+
+Get a Dream
+
+### Parameters
+
+- `dream_id: str`
+
+- `betas: Optional[List[AnthropicBetaParam]]`
+
+  Optional header to specify the beta version(s) you want to use.
+
+  - `str`
+
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
+
+    - `"message-batches-2024-09-24"`
+
+    - `"prompt-caching-2024-07-31"`
+
+    - `"computer-use-2024-10-22"`
+
+    - `"computer-use-2025-01-24"`
+
+    - `"pdfs-2024-09-25"`
+
+    - `"token-counting-2024-11-01"`
+
+    - `"token-efficient-tools-2025-02-19"`
+
+    - `"output-128k-2025-02-19"`
+
+    - `"files-api-2025-04-14"`
+
+    - `"mcp-client-2025-04-04"`
+
+    - `"mcp-client-2025-11-20"`
+
+    - `"dev-full-thinking-2025-05-14"`
+
+    - `"interleaved-thinking-2025-05-14"`
+
+    - `"code-execution-2025-05-22"`
+
+    - `"extended-cache-ttl-2025-04-11"`
+
+    - `"context-1m-2025-08-07"`
+
+    - `"context-management-2025-06-27"`
+
+    - `"model-context-window-exceeded-2025-08-26"`
+
+    - `"skills-2025-10-02"`
+
+    - `"fast-mode-2026-02-01"`
+
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
+
+    - `"managed-agents-2026-04-01"`
+
+    - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"server-side-fallback-2026-06-01"`
+
+    - `"fallback-credit-2026-06-01"`
+
+    - `"agent-memory-2026-07-22"`
+
+### Returns
+
+- `class BetaDream: …`
+
+  An asynchronous memory-consolidation job that reads a memory store plus a set of session transcripts and writes consolidated memories into a new output memory store. The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to generally-available endpoints.
+
+  - `id: str`
+
+  - `archived_at: Optional[datetime]`
+
+    A timestamp in RFC 3339 format
+
+  - `created_at: datetime`
+
+    A timestamp in RFC 3339 format
+
+  - `ended_at: Optional[datetime]`
+
+    A timestamp in RFC 3339 format
+
+  - `error: Optional[BetaDreamError]`
+
+    Failure detail for a Dream whose `status` is `failed`.
+
+    - `message: str`
+
+    - `type: str`
+
+  - `inputs: List[BetaDreamInput]`
+
+    - `class BetaDreamMemoryStoreInput: …`
+
+      An input memory store the dream reads from. The dream never mutates this store.
+
+      - `memory_store_id: str`
+
+      - `type: Literal["memory_store"]`
+
+        - `"memory_store"`
+
+    - `class BetaDreamSessionsInput: …`
+
+      Input session transcripts the dream reads.
+
+      - `session_ids: List[str]`
+
+      - `type: Literal["sessions"]`
+
+        - `"sessions"`
+
+  - `instructions: Optional[str]`
+
+  - `model: BetaDreamModelConfig`
+
+    Model identifier and configuration applied to every pipeline stage. Same wire shape as the Agents API ModelConfig.
+
+    - `id: str`
+
+      Model identifier, e.g. "claude-opus-4-7". 1-256 characters.
+
+    - `speed: Optional[Literal["standard", "fast"]]`
+
+      Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+      - `"standard"`
+
+      - `"fast"`
+
+  - `outputs: List[BetaDreamOutput]`
+
+    - `memory_store_id: str`
+
+    - `type: Literal["memory_store"]`
+
+      - `"memory_store"`
+
+  - `session_id: Optional[str]`
+
+  - `status: BetaDreamStatus`
+
+    Lifecycle status of a Dream.
+
+    - `"pending"`
+
+    - `"running"`
+
+    - `"completed"`
+
+    - `"failed"`
+
+    - `"canceled"`
+
+  - `type: Literal["dream"]`
+
+    - `"dream"`
+
+  - `usage: BetaDreamUsage`
+
+    Cumulative token usage for the dream across every pipeline stage.
+
+    - `cache_creation_input_tokens: int`
+
+      Total tokens used to create prompt-cache entries (sum of all TTL tiers).
+
+    - `cache_read_input_tokens: int`
+
+      Total tokens read from prompt cache.
+
+    - `input_tokens: int`
+
+      Total uncached input tokens consumed across every pipeline stage.
+
+    - `output_tokens: int`
+
+      Total output tokens generated across every pipeline stage.
+
+### Example
+
+```python
+import os
+from anthropic import Anthropic
+
+client = Anthropic(
+    api_key=os.environ.get("ANTHROPIC_API_KEY"),  # This is the default and can be omitted
+)
+beta_dream = client.beta.dreams.retrieve(
+    dream_id="dream_id",
+)
+print(beta_dream.id)
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "archived_at": "2019-12-27T18:11:19.117Z",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "ended_at": "2019-12-27T18:11:19.117Z",
+  "error": {
+    "message": "message",
+    "type": "type"
+  },
+  "inputs": [
+    {
+      "memory_store_id": "x",
+      "type": "memory_store"
+    }
+  ],
+  "instructions": "instructions",
+  "model": {
+    "id": "x",
+    "speed": "standard"
+  },
+  "outputs": [
+    {
+      "memory_store_id": "memory_store_id",
+      "type": "memory_store"
+    }
+  ],
+  "session_id": "session_id",
+  "status": "pending",
+  "type": "dream",
+  "usage": {
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 0,
+    "input_tokens": 0,
+    "output_tokens": 0
+  }
+}
+```
+
+## Cancel a Dream
+
+`beta.dreams.cancel(strdream_id, DreamCancelParams**kwargs)  -> BetaDream`
+
+**post** `/v1/dreams/{dream_id}/cancel`
+
+Cancel a Dream
+
+### Parameters
+
+- `dream_id: str`
+
+- `betas: Optional[List[AnthropicBetaParam]]`
+
+  Optional header to specify the beta version(s) you want to use.
+
+  - `str`
+
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
+
+    - `"message-batches-2024-09-24"`
+
+    - `"prompt-caching-2024-07-31"`
+
+    - `"computer-use-2024-10-22"`
+
+    - `"computer-use-2025-01-24"`
+
+    - `"pdfs-2024-09-25"`
+
+    - `"token-counting-2024-11-01"`
+
+    - `"token-efficient-tools-2025-02-19"`
+
+    - `"output-128k-2025-02-19"`
+
+    - `"files-api-2025-04-14"`
+
+    - `"mcp-client-2025-04-04"`
+
+    - `"mcp-client-2025-11-20"`
+
+    - `"dev-full-thinking-2025-05-14"`
+
+    - `"interleaved-thinking-2025-05-14"`
+
+    - `"code-execution-2025-05-22"`
+
+    - `"extended-cache-ttl-2025-04-11"`
+
+    - `"context-1m-2025-08-07"`
+
+    - `"context-management-2025-06-27"`
+
+    - `"model-context-window-exceeded-2025-08-26"`
+
+    - `"skills-2025-10-02"`
+
+    - `"fast-mode-2026-02-01"`
+
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
+
+    - `"managed-agents-2026-04-01"`
+
+    - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"server-side-fallback-2026-06-01"`
+
+    - `"fallback-credit-2026-06-01"`
+
+    - `"agent-memory-2026-07-22"`
+
+### Returns
+
+- `class BetaDream: …`
+
+  An asynchronous memory-consolidation job that reads a memory store plus a set of session transcripts and writes consolidated memories into a new output memory store. The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to generally-available endpoints.
+
+  - `id: str`
+
+  - `archived_at: Optional[datetime]`
+
+    A timestamp in RFC 3339 format
+
+  - `created_at: datetime`
+
+    A timestamp in RFC 3339 format
+
+  - `ended_at: Optional[datetime]`
+
+    A timestamp in RFC 3339 format
+
+  - `error: Optional[BetaDreamError]`
+
+    Failure detail for a Dream whose `status` is `failed`.
+
+    - `message: str`
+
+    - `type: str`
+
+  - `inputs: List[BetaDreamInput]`
+
+    - `class BetaDreamMemoryStoreInput: …`
+
+      An input memory store the dream reads from. The dream never mutates this store.
+
+      - `memory_store_id: str`
+
+      - `type: Literal["memory_store"]`
+
+        - `"memory_store"`
+
+    - `class BetaDreamSessionsInput: …`
+
+      Input session transcripts the dream reads.
+
+      - `session_ids: List[str]`
+
+      - `type: Literal["sessions"]`
+
+        - `"sessions"`
+
+  - `instructions: Optional[str]`
+
+  - `model: BetaDreamModelConfig`
+
+    Model identifier and configuration applied to every pipeline stage. Same wire shape as the Agents API ModelConfig.
+
+    - `id: str`
+
+      Model identifier, e.g. "claude-opus-4-7". 1-256 characters.
+
+    - `speed: Optional[Literal["standard", "fast"]]`
+
+      Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+      - `"standard"`
+
+      - `"fast"`
+
+  - `outputs: List[BetaDreamOutput]`
+
+    - `memory_store_id: str`
+
+    - `type: Literal["memory_store"]`
+
+      - `"memory_store"`
+
+  - `session_id: Optional[str]`
+
+  - `status: BetaDreamStatus`
+
+    Lifecycle status of a Dream.
+
+    - `"pending"`
+
+    - `"running"`
+
+    - `"completed"`
+
+    - `"failed"`
+
+    - `"canceled"`
+
+  - `type: Literal["dream"]`
+
+    - `"dream"`
+
+  - `usage: BetaDreamUsage`
+
+    Cumulative token usage for the dream across every pipeline stage.
+
+    - `cache_creation_input_tokens: int`
+
+      Total tokens used to create prompt-cache entries (sum of all TTL tiers).
+
+    - `cache_read_input_tokens: int`
+
+      Total tokens read from prompt cache.
+
+    - `input_tokens: int`
+
+      Total uncached input tokens consumed across every pipeline stage.
+
+    - `output_tokens: int`
+
+      Total output tokens generated across every pipeline stage.
+
+### Example
+
+```python
+import os
+from anthropic import Anthropic
+
+client = Anthropic(
+    api_key=os.environ.get("ANTHROPIC_API_KEY"),  # This is the default and can be omitted
+)
+beta_dream = client.beta.dreams.cancel(
+    dream_id="dream_id",
+)
+print(beta_dream.id)
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "archived_at": "2019-12-27T18:11:19.117Z",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "ended_at": "2019-12-27T18:11:19.117Z",
+  "error": {
+    "message": "message",
+    "type": "type"
+  },
+  "inputs": [
+    {
+      "memory_store_id": "x",
+      "type": "memory_store"
+    }
+  ],
+  "instructions": "instructions",
+  "model": {
+    "id": "x",
+    "speed": "standard"
+  },
+  "outputs": [
+    {
+      "memory_store_id": "memory_store_id",
+      "type": "memory_store"
+    }
+  ],
+  "session_id": "session_id",
+  "status": "pending",
+  "type": "dream",
+  "usage": {
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 0,
+    "input_tokens": 0,
+    "output_tokens": 0
+  }
+}
+```
+
+## Archive a Dream
+
+`beta.dreams.archive(strdream_id, DreamArchiveParams**kwargs)  -> BetaDream`
+
+**post** `/v1/dreams/{dream_id}/archive`
+
+Archive a Dream
+
+### Parameters
+
+- `dream_id: str`
+
+- `betas: Optional[List[AnthropicBetaParam]]`
+
+  Optional header to specify the beta version(s) you want to use.
+
+  - `str`
+
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
+
+    - `"message-batches-2024-09-24"`
+
+    - `"prompt-caching-2024-07-31"`
+
+    - `"computer-use-2024-10-22"`
+
+    - `"computer-use-2025-01-24"`
+
+    - `"pdfs-2024-09-25"`
+
+    - `"token-counting-2024-11-01"`
+
+    - `"token-efficient-tools-2025-02-19"`
+
+    - `"output-128k-2025-02-19"`
+
+    - `"files-api-2025-04-14"`
+
+    - `"mcp-client-2025-04-04"`
+
+    - `"mcp-client-2025-11-20"`
+
+    - `"dev-full-thinking-2025-05-14"`
+
+    - `"interleaved-thinking-2025-05-14"`
+
+    - `"code-execution-2025-05-22"`
+
+    - `"extended-cache-ttl-2025-04-11"`
+
+    - `"context-1m-2025-08-07"`
+
+    - `"context-management-2025-06-27"`
+
+    - `"model-context-window-exceeded-2025-08-26"`
+
+    - `"skills-2025-10-02"`
+
+    - `"fast-mode-2026-02-01"`
+
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
+
+    - `"managed-agents-2026-04-01"`
+
+    - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"server-side-fallback-2026-06-01"`
+
+    - `"fallback-credit-2026-06-01"`
+
+    - `"agent-memory-2026-07-22"`
+
+### Returns
+
+- `class BetaDream: …`
+
+  An asynchronous memory-consolidation job that reads a memory store plus a set of session transcripts and writes consolidated memories into a new output memory store. The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to generally-available endpoints.
+
+  - `id: str`
+
+  - `archived_at: Optional[datetime]`
+
+    A timestamp in RFC 3339 format
+
+  - `created_at: datetime`
+
+    A timestamp in RFC 3339 format
+
+  - `ended_at: Optional[datetime]`
+
+    A timestamp in RFC 3339 format
+
+  - `error: Optional[BetaDreamError]`
+
+    Failure detail for a Dream whose `status` is `failed`.
+
+    - `message: str`
+
+    - `type: str`
+
+  - `inputs: List[BetaDreamInput]`
+
+    - `class BetaDreamMemoryStoreInput: …`
+
+      An input memory store the dream reads from. The dream never mutates this store.
+
+      - `memory_store_id: str`
+
+      - `type: Literal["memory_store"]`
+
+        - `"memory_store"`
+
+    - `class BetaDreamSessionsInput: …`
+
+      Input session transcripts the dream reads.
+
+      - `session_ids: List[str]`
+
+      - `type: Literal["sessions"]`
+
+        - `"sessions"`
+
+  - `instructions: Optional[str]`
+
+  - `model: BetaDreamModelConfig`
+
+    Model identifier and configuration applied to every pipeline stage. Same wire shape as the Agents API ModelConfig.
+
+    - `id: str`
+
+      Model identifier, e.g. "claude-opus-4-7". 1-256 characters.
+
+    - `speed: Optional[Literal["standard", "fast"]]`
+
+      Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+      - `"standard"`
+
+      - `"fast"`
+
+  - `outputs: List[BetaDreamOutput]`
+
+    - `memory_store_id: str`
+
+    - `type: Literal["memory_store"]`
+
+      - `"memory_store"`
+
+  - `session_id: Optional[str]`
+
+  - `status: BetaDreamStatus`
+
+    Lifecycle status of a Dream.
+
+    - `"pending"`
+
+    - `"running"`
+
+    - `"completed"`
+
+    - `"failed"`
+
+    - `"canceled"`
+
+  - `type: Literal["dream"]`
+
+    - `"dream"`
+
+  - `usage: BetaDreamUsage`
+
+    Cumulative token usage for the dream across every pipeline stage.
+
+    - `cache_creation_input_tokens: int`
+
+      Total tokens used to create prompt-cache entries (sum of all TTL tiers).
+
+    - `cache_read_input_tokens: int`
+
+      Total tokens read from prompt cache.
+
+    - `input_tokens: int`
+
+      Total uncached input tokens consumed across every pipeline stage.
+
+    - `output_tokens: int`
+
+      Total output tokens generated across every pipeline stage.
+
+### Example
+
+```python
+import os
+from anthropic import Anthropic
+
+client = Anthropic(
+    api_key=os.environ.get("ANTHROPIC_API_KEY"),  # This is the default and can be omitted
+)
+beta_dream = client.beta.dreams.archive(
+    dream_id="dream_id",
+)
+print(beta_dream.id)
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "archived_at": "2019-12-27T18:11:19.117Z",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "ended_at": "2019-12-27T18:11:19.117Z",
+  "error": {
+    "message": "message",
+    "type": "type"
+  },
+  "inputs": [
+    {
+      "memory_store_id": "x",
+      "type": "memory_store"
+    }
+  ],
+  "instructions": "instructions",
+  "model": {
+    "id": "x",
+    "speed": "standard"
+  },
+  "outputs": [
+    {
+      "memory_store_id": "memory_store_id",
+      "type": "memory_store"
+    }
+  ],
+  "session_id": "session_id",
+  "status": "pending",
+  "type": "dream",
+  "usage": {
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 0,
+    "input_tokens": 0,
+    "output_tokens": 0
+  }
+}
+```
+
+## Domain Types
+
+### Beta Dream
+
+- `class BetaDream: …`
+
+  An asynchronous memory-consolidation job that reads a memory store plus a set of session transcripts and writes consolidated memories into a new output memory store. The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to generally-available endpoints.
+
+  - `id: str`
+
+  - `archived_at: Optional[datetime]`
+
+    A timestamp in RFC 3339 format
+
+  - `created_at: datetime`
+
+    A timestamp in RFC 3339 format
+
+  - `ended_at: Optional[datetime]`
+
+    A timestamp in RFC 3339 format
+
+  - `error: Optional[BetaDreamError]`
+
+    Failure detail for a Dream whose `status` is `failed`.
+
+    - `message: str`
+
+    - `type: str`
+
+  - `inputs: List[BetaDreamInput]`
+
+    - `class BetaDreamMemoryStoreInput: …`
+
+      An input memory store the dream reads from. The dream never mutates this store.
+
+      - `memory_store_id: str`
+
+      - `type: Literal["memory_store"]`
+
+        - `"memory_store"`
+
+    - `class BetaDreamSessionsInput: …`
+
+      Input session transcripts the dream reads.
+
+      - `session_ids: List[str]`
+
+      - `type: Literal["sessions"]`
+
+        - `"sessions"`
+
+  - `instructions: Optional[str]`
+
+  - `model: BetaDreamModelConfig`
+
+    Model identifier and configuration applied to every pipeline stage. Same wire shape as the Agents API ModelConfig.
+
+    - `id: str`
+
+      Model identifier, e.g. "claude-opus-4-7". 1-256 characters.
+
+    - `speed: Optional[Literal["standard", "fast"]]`
+
+      Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+      - `"standard"`
+
+      - `"fast"`
+
+  - `outputs: List[BetaDreamOutput]`
+
+    - `memory_store_id: str`
+
+    - `type: Literal["memory_store"]`
+
+      - `"memory_store"`
+
+  - `session_id: Optional[str]`
+
+  - `status: BetaDreamStatus`
+
+    Lifecycle status of a Dream.
+
+    - `"pending"`
+
+    - `"running"`
+
+    - `"completed"`
+
+    - `"failed"`
+
+    - `"canceled"`
+
+  - `type: Literal["dream"]`
+
+    - `"dream"`
+
+  - `usage: BetaDreamUsage`
+
+    Cumulative token usage for the dream across every pipeline stage.
+
+    - `cache_creation_input_tokens: int`
+
+      Total tokens used to create prompt-cache entries (sum of all TTL tiers).
+
+    - `cache_read_input_tokens: int`
+
+      Total tokens read from prompt cache.
+
+    - `input_tokens: int`
+
+      Total uncached input tokens consumed across every pipeline stage.
+
+    - `output_tokens: int`
+
+      Total output tokens generated across every pipeline stage.
+
+### Beta Dream Error
+
+- `class BetaDreamError: …`
+
+  Failure detail for a Dream whose `status` is `failed`.
+
+  - `message: str`
+
+  - `type: str`
+
+### Beta Dream Input
+
+- `BetaDreamInput`
+
+  An input memory store the dream reads from. The dream never mutates this store.
+
+  - `class BetaDreamMemoryStoreInput: …`
+
+    An input memory store the dream reads from. The dream never mutates this store.
+
+    - `memory_store_id: str`
+
+    - `type: Literal["memory_store"]`
+
+      - `"memory_store"`
+
+  - `class BetaDreamSessionsInput: …`
+
+    Input session transcripts the dream reads.
+
+    - `session_ids: List[str]`
+
+    - `type: Literal["sessions"]`
+
+      - `"sessions"`
+
+### Beta Dream Memory Store Input
+
+- `class BetaDreamMemoryStoreInput: …`
+
+  An input memory store the dream reads from. The dream never mutates this store.
+
+  - `memory_store_id: str`
+
+  - `type: Literal["memory_store"]`
+
+    - `"memory_store"`
+
+### Beta Dream Memory Store Output
+
+- `class BetaDreamMemoryStoreOutput: …`
+
+  An output memory store the dream writes consolidated memories into.
+
+  - `memory_store_id: str`
+
+  - `type: Literal["memory_store"]`
+
+    - `"memory_store"`
+
+### Beta Dream Model Config
+
+- `class BetaDreamModelConfig: …`
+
+  Model identifier and configuration applied to every pipeline stage. Same wire shape as the Agents API ModelConfig.
+
+  - `id: str`
+
+    Model identifier, e.g. "claude-opus-4-7". 1-256 characters.
+
+  - `speed: Optional[Literal["standard", "fast"]]`
+
+    Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+    - `"standard"`
+
+    - `"fast"`
+
+### Beta Dream Model Config Param
+
+- `class BetaDreamModelConfigParam: …`
+
+  Model identifier and configuration applied to every pipeline stage.
+
+  - `id: str`
+
+    Model identifier, e.g. "claude-opus-4-7". 1-256 characters.
+
+  - `speed: Optional[Literal["standard", "fast"]]`
+
+    Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+    - `"standard"`
+
+    - `"fast"`
+
+### Beta Dream Output
+
+- `class BetaDreamOutput: …`
+
+  An output memory store the dream writes consolidated memories into.
+
+  - `memory_store_id: str`
+
+  - `type: Literal["memory_store"]`
+
+    - `"memory_store"`
+
+### Beta Dream Sessions Input
+
+- `class BetaDreamSessionsInput: …`
+
+  Input session transcripts the dream reads.
+
+  - `session_ids: List[str]`
+
+  - `type: Literal["sessions"]`
+
+    - `"sessions"`
+
+### Beta Dream Status
+
+- `Literal["pending", "running", "completed", 2 more]`
+
+  Lifecycle status of a Dream.
+
+  - `"pending"`
+
+  - `"running"`
+
+  - `"completed"`
+
+  - `"failed"`
+
+  - `"canceled"`
+
+### Beta Dream Usage
+
+- `class BetaDreamUsage: …`
+
+  Cumulative token usage for the dream across every pipeline stage.
+
+  - `cache_creation_input_tokens: int`
+
+    Total tokens used to create prompt-cache entries (sum of all TTL tiers).
+
+  - `cache_read_input_tokens: int`
+
+    Total tokens read from prompt cache.
+
+  - `input_tokens: int`
+
+    Total uncached input tokens consumed across every pipeline stage.
+
+  - `output_tokens: int`
+
+    Total output tokens generated across every pipeline stage.
+
 # Tunnels
 
+## Create Tunnel
+
+`beta.tunnels.create(TunnelCreateParams**kwargs)  -> BetaTunnel`
+
+**post** `/v1/tunnels`
+
+The Tunnels API is in research preview. It requires the `anthropic-beta: mcp-tunnels-2026-06-22` header and may change without a deprecation period. It supersedes the Admin API endpoints at `/v1/organizations/tunnels`, which remain available during a migration window.
+
+Creates a tunnel. Creation allocates a fresh hostname and provisions the tunnel; it is not idempotent. The new tunnel rejects MCP traffic until at least one CA certificate is added.
+
+### Parameters
+
+- `display_name: Optional[str]`
+
+  Optional human-readable name for the tunnel (1-255 characters).
+
+- `betas: Optional[List[AnthropicBetaParam]]`
+
+  Optional header to specify the beta version(s) you want to use.
+
+  - `str`
+
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
+
+    - `"message-batches-2024-09-24"`
+
+    - `"prompt-caching-2024-07-31"`
+
+    - `"computer-use-2024-10-22"`
+
+    - `"computer-use-2025-01-24"`
+
+    - `"pdfs-2024-09-25"`
+
+    - `"token-counting-2024-11-01"`
+
+    - `"token-efficient-tools-2025-02-19"`
+
+    - `"output-128k-2025-02-19"`
+
+    - `"files-api-2025-04-14"`
+
+    - `"mcp-client-2025-04-04"`
+
+    - `"mcp-client-2025-11-20"`
+
+    - `"dev-full-thinking-2025-05-14"`
+
+    - `"interleaved-thinking-2025-05-14"`
+
+    - `"code-execution-2025-05-22"`
+
+    - `"extended-cache-ttl-2025-04-11"`
+
+    - `"context-1m-2025-08-07"`
+
+    - `"context-management-2025-06-27"`
+
+    - `"model-context-window-exceeded-2025-08-26"`
+
+    - `"skills-2025-10-02"`
+
+    - `"fast-mode-2026-02-01"`
+
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
+
+    - `"managed-agents-2026-04-01"`
+
+    - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"server-side-fallback-2026-06-01"`
+
+    - `"fallback-credit-2026-06-01"`
+
+    - `"agent-memory-2026-07-22"`
+
+### Returns
+
+- `class BetaTunnel: …`
+
+  An MCP tunnel.
+
+  - `id: str`
+
+    Unique identifier for the tunnel, prefixed with `tnl_`.
+
+  - `archived_at: Optional[datetime]`
+
+    A timestamp in RFC 3339 format
+
+  - `created_at: datetime`
+
+    A timestamp in RFC 3339 format
+
+  - `display_name: Optional[str]`
+
+    Human-readable name for the tunnel (1-255 characters). Null if unset.
+
+  - `domain: str`
+
+    Anthropic-assigned hostname for the tunnel. MCP server URLs whose host is a subdomain of this value are routed through the tunnel. Globally unique and never reused, even after the tunnel is archived.
+
+  - `type: Literal["tunnel"]`
+
+    - `"tunnel"`
+
+### Example
+
+```python
+import os
+from anthropic import Anthropic
+
+client = Anthropic(
+    api_key=os.environ.get("ANTHROPIC_API_KEY"),  # This is the default and can be omitted
+)
+beta_tunnel = client.beta.tunnels.create()
+print(beta_tunnel.id)
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "archived_at": "2019-12-27T18:11:19.117Z",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "display_name": "display_name",
+  "domain": "domain",
+  "type": "tunnel"
+}
+```
+
+## Get Tunnel
+
+`beta.tunnels.retrieve(strtunnel_id, TunnelRetrieveParams**kwargs)  -> BetaTunnel`
+
+**get** `/v1/tunnels/{tunnel_id}`
+
+The Tunnels API is in research preview. It requires the `anthropic-beta: mcp-tunnels-2026-06-22` header and may change without a deprecation period. It supersedes the Admin API endpoints at `/v1/organizations/tunnels`, which remain available during a migration window.
+
+Fetches a tunnel by ID.
+
+### Parameters
+
+- `tunnel_id: str`
+
+- `betas: Optional[List[AnthropicBetaParam]]`
+
+  Optional header to specify the beta version(s) you want to use.
+
+  - `str`
+
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
+
+    - `"message-batches-2024-09-24"`
+
+    - `"prompt-caching-2024-07-31"`
+
+    - `"computer-use-2024-10-22"`
+
+    - `"computer-use-2025-01-24"`
+
+    - `"pdfs-2024-09-25"`
+
+    - `"token-counting-2024-11-01"`
+
+    - `"token-efficient-tools-2025-02-19"`
+
+    - `"output-128k-2025-02-19"`
+
+    - `"files-api-2025-04-14"`
+
+    - `"mcp-client-2025-04-04"`
+
+    - `"mcp-client-2025-11-20"`
+
+    - `"dev-full-thinking-2025-05-14"`
+
+    - `"interleaved-thinking-2025-05-14"`
+
+    - `"code-execution-2025-05-22"`
+
+    - `"extended-cache-ttl-2025-04-11"`
+
+    - `"context-1m-2025-08-07"`
+
+    - `"context-management-2025-06-27"`
+
+    - `"model-context-window-exceeded-2025-08-26"`
+
+    - `"skills-2025-10-02"`
+
+    - `"fast-mode-2026-02-01"`
+
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
+
+    - `"managed-agents-2026-04-01"`
+
+    - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"server-side-fallback-2026-06-01"`
+
+    - `"fallback-credit-2026-06-01"`
+
+    - `"agent-memory-2026-07-22"`
+
+### Returns
+
+- `class BetaTunnel: …`
+
+  An MCP tunnel.
+
+  - `id: str`
+
+    Unique identifier for the tunnel, prefixed with `tnl_`.
+
+  - `archived_at: Optional[datetime]`
+
+    A timestamp in RFC 3339 format
+
+  - `created_at: datetime`
+
+    A timestamp in RFC 3339 format
+
+  - `display_name: Optional[str]`
+
+    Human-readable name for the tunnel (1-255 characters). Null if unset.
+
+  - `domain: str`
+
+    Anthropic-assigned hostname for the tunnel. MCP server URLs whose host is a subdomain of this value are routed through the tunnel. Globally unique and never reused, even after the tunnel is archived.
+
+  - `type: Literal["tunnel"]`
+
+    - `"tunnel"`
+
+### Example
+
+```python
+import os
+from anthropic import Anthropic
+
+client = Anthropic(
+    api_key=os.environ.get("ANTHROPIC_API_KEY"),  # This is the default and can be omitted
+)
+beta_tunnel = client.beta.tunnels.retrieve(
+    tunnel_id="tunnel_id",
+)
+print(beta_tunnel.id)
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "archived_at": "2019-12-27T18:11:19.117Z",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "display_name": "display_name",
+  "domain": "domain",
+  "type": "tunnel"
+}
+```
+
+## List Tunnels
+
+`beta.tunnels.list(TunnelListParams**kwargs)  -> SyncPageCursor[BetaTunnel]`
+
+**get** `/v1/tunnels`
+
+The Tunnels API is in research preview. It requires the `anthropic-beta: mcp-tunnels-2026-06-22` header and may change without a deprecation period. It supersedes the Admin API endpoints at `/v1/organizations/tunnels`, which remain available during a migration window.
+
+Lists tunnels. Results are ordered by creation time, newest first; archived tunnels are excluded unless include_archived is set.
+
+### Parameters
+
+- `include_archived: Optional[bool]`
+
+  Whether to include archived tunnels in the results. Defaults to false.
+
+- `limit: Optional[int]`
+
+  Maximum number of tunnels to return per page. Defaults to 20, maximum 1000.
+
+- `page: Optional[str]`
+
+  Opaque pagination cursor from a previous `list_tunnels` response.
+
+- `betas: Optional[List[AnthropicBetaParam]]`
+
+  Optional header to specify the beta version(s) you want to use.
+
+  - `str`
+
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
+
+    - `"message-batches-2024-09-24"`
+
+    - `"prompt-caching-2024-07-31"`
+
+    - `"computer-use-2024-10-22"`
+
+    - `"computer-use-2025-01-24"`
+
+    - `"pdfs-2024-09-25"`
+
+    - `"token-counting-2024-11-01"`
+
+    - `"token-efficient-tools-2025-02-19"`
+
+    - `"output-128k-2025-02-19"`
+
+    - `"files-api-2025-04-14"`
+
+    - `"mcp-client-2025-04-04"`
+
+    - `"mcp-client-2025-11-20"`
+
+    - `"dev-full-thinking-2025-05-14"`
+
+    - `"interleaved-thinking-2025-05-14"`
+
+    - `"code-execution-2025-05-22"`
+
+    - `"extended-cache-ttl-2025-04-11"`
+
+    - `"context-1m-2025-08-07"`
+
+    - `"context-management-2025-06-27"`
+
+    - `"model-context-window-exceeded-2025-08-26"`
+
+    - `"skills-2025-10-02"`
+
+    - `"fast-mode-2026-02-01"`
+
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
+
+    - `"managed-agents-2026-04-01"`
+
+    - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"server-side-fallback-2026-06-01"`
+
+    - `"fallback-credit-2026-06-01"`
+
+    - `"agent-memory-2026-07-22"`
+
+### Returns
+
+- `class BetaTunnel: …`
+
+  An MCP tunnel.
+
+  - `id: str`
+
+    Unique identifier for the tunnel, prefixed with `tnl_`.
+
+  - `archived_at: Optional[datetime]`
+
+    A timestamp in RFC 3339 format
+
+  - `created_at: datetime`
+
+    A timestamp in RFC 3339 format
+
+  - `display_name: Optional[str]`
+
+    Human-readable name for the tunnel (1-255 characters). Null if unset.
+
+  - `domain: str`
+
+    Anthropic-assigned hostname for the tunnel. MCP server URLs whose host is a subdomain of this value are routed through the tunnel. Globally unique and never reused, even after the tunnel is archived.
+
+  - `type: Literal["tunnel"]`
+
+    - `"tunnel"`
+
+### Example
+
+```python
+import os
+from anthropic import Anthropic
+
+client = Anthropic(
+    api_key=os.environ.get("ANTHROPIC_API_KEY"),  # This is the default and can be omitted
+)
+page = client.beta.tunnels.list()
+page = page.data[0]
+print(page.id)
+```
+
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "id": "id",
+      "archived_at": "2019-12-27T18:11:19.117Z",
+      "created_at": "2019-12-27T18:11:19.117Z",
+      "display_name": "display_name",
+      "domain": "domain",
+      "type": "tunnel"
+    }
+  ],
+  "next_page": "next_page"
+}
+```
+
+## Archive Tunnel
+
+`beta.tunnels.archive(strtunnel_id, TunnelArchiveParams**kwargs)  -> BetaTunnel`
+
+**post** `/v1/tunnels/{tunnel_id}/archive`
+
+The Tunnels API is in research preview. It requires the `anthropic-beta: mcp-tunnels-2026-06-22` header and may change without a deprecation period. It supersedes the Admin API endpoints at `/v1/organizations/tunnels`, which remain available during a migration window.
+
+Archives a tunnel. Archival is irreversible: every non-archived certificate on the tunnel is archived in the same operation, the hostname is retired and never re-allocated, and the tunnel token is invalidated. Retrying against an already-archived tunnel returns the existing record unchanged.
+
+### Parameters
+
+- `tunnel_id: str`
+
+- `betas: Optional[List[AnthropicBetaParam]]`
+
+  Optional header to specify the beta version(s) you want to use.
+
+  - `str`
+
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
+
+    - `"message-batches-2024-09-24"`
+
+    - `"prompt-caching-2024-07-31"`
+
+    - `"computer-use-2024-10-22"`
+
+    - `"computer-use-2025-01-24"`
+
+    - `"pdfs-2024-09-25"`
+
+    - `"token-counting-2024-11-01"`
+
+    - `"token-efficient-tools-2025-02-19"`
+
+    - `"output-128k-2025-02-19"`
+
+    - `"files-api-2025-04-14"`
+
+    - `"mcp-client-2025-04-04"`
+
+    - `"mcp-client-2025-11-20"`
+
+    - `"dev-full-thinking-2025-05-14"`
+
+    - `"interleaved-thinking-2025-05-14"`
+
+    - `"code-execution-2025-05-22"`
+
+    - `"extended-cache-ttl-2025-04-11"`
+
+    - `"context-1m-2025-08-07"`
+
+    - `"context-management-2025-06-27"`
+
+    - `"model-context-window-exceeded-2025-08-26"`
+
+    - `"skills-2025-10-02"`
+
+    - `"fast-mode-2026-02-01"`
+
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
+
+    - `"managed-agents-2026-04-01"`
+
+    - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"server-side-fallback-2026-06-01"`
+
+    - `"fallback-credit-2026-06-01"`
+
+    - `"agent-memory-2026-07-22"`
+
+### Returns
+
+- `class BetaTunnel: …`
+
+  An MCP tunnel.
+
+  - `id: str`
+
+    Unique identifier for the tunnel, prefixed with `tnl_`.
+
+  - `archived_at: Optional[datetime]`
+
+    A timestamp in RFC 3339 format
+
+  - `created_at: datetime`
+
+    A timestamp in RFC 3339 format
+
+  - `display_name: Optional[str]`
+
+    Human-readable name for the tunnel (1-255 characters). Null if unset.
+
+  - `domain: str`
+
+    Anthropic-assigned hostname for the tunnel. MCP server URLs whose host is a subdomain of this value are routed through the tunnel. Globally unique and never reused, even after the tunnel is archived.
+
+  - `type: Literal["tunnel"]`
+
+    - `"tunnel"`
+
+### Example
+
+```python
+import os
+from anthropic import Anthropic
+
+client = Anthropic(
+    api_key=os.environ.get("ANTHROPIC_API_KEY"),  # This is the default and can be omitted
+)
+beta_tunnel = client.beta.tunnels.archive(
+    tunnel_id="tunnel_id",
+)
+print(beta_tunnel.id)
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "archived_at": "2019-12-27T18:11:19.117Z",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "display_name": "display_name",
+  "domain": "domain",
+  "type": "tunnel"
+}
+```
+
+## Reveal Tunnel Token
+
+`beta.tunnels.reveal_token(strtunnel_id, TunnelRevealTokenParams**kwargs)  -> BetaTunnelToken`
+
+**post** `/v1/tunnels/{tunnel_id}/reveal_token`
+
+The Tunnels API is in research preview. It requires the `anthropic-beta: mcp-tunnels-2026-06-22` header and may change without a deprecation period. It supersedes the Admin API endpoints at `/v1/organizations/tunnels`, which remain available during a migration window.
+
+Reveals a tunnel's connector token. The value is fetched live on each call; Anthropic does not store it. Repeated calls return the same value until the token is rotated. Exposed as POST so the token does not appear in intermediary access logs.
+
+### Parameters
+
+- `tunnel_id: str`
+
+- `betas: Optional[List[AnthropicBetaParam]]`
+
+  Optional header to specify the beta version(s) you want to use.
+
+  - `str`
+
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
+
+    - `"message-batches-2024-09-24"`
+
+    - `"prompt-caching-2024-07-31"`
+
+    - `"computer-use-2024-10-22"`
+
+    - `"computer-use-2025-01-24"`
+
+    - `"pdfs-2024-09-25"`
+
+    - `"token-counting-2024-11-01"`
+
+    - `"token-efficient-tools-2025-02-19"`
+
+    - `"output-128k-2025-02-19"`
+
+    - `"files-api-2025-04-14"`
+
+    - `"mcp-client-2025-04-04"`
+
+    - `"mcp-client-2025-11-20"`
+
+    - `"dev-full-thinking-2025-05-14"`
+
+    - `"interleaved-thinking-2025-05-14"`
+
+    - `"code-execution-2025-05-22"`
+
+    - `"extended-cache-ttl-2025-04-11"`
+
+    - `"context-1m-2025-08-07"`
+
+    - `"context-management-2025-06-27"`
+
+    - `"model-context-window-exceeded-2025-08-26"`
+
+    - `"skills-2025-10-02"`
+
+    - `"fast-mode-2026-02-01"`
+
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
+
+    - `"managed-agents-2026-04-01"`
+
+    - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"server-side-fallback-2026-06-01"`
+
+    - `"fallback-credit-2026-06-01"`
+
+    - `"agent-memory-2026-07-22"`
+
+### Returns
+
+- `class BetaTunnelToken: …`
+
+  A tunnel's connector token.
+
+  - `id: str`
+
+    Stable identifier for the current token value. Changes when the token is rotated.
+
+  - `tunnel_token: str`
+
+    The connector token used to run the tunnel. Treat as a credential.
+
+  - `type: Literal["tunnel_token"]`
+
+    - `"tunnel_token"`
+
+### Example
+
+```python
+import os
+from anthropic import Anthropic
+
+client = Anthropic(
+    api_key=os.environ.get("ANTHROPIC_API_KEY"),  # This is the default and can be omitted
+)
+beta_tunnel_token = client.beta.tunnels.reveal_token(
+    tunnel_id="tunnel_id",
+)
+print(beta_tunnel_token.id)
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "tunnel_token": "tunnel_token",
+  "type": "tunnel_token"
+}
+```
+
+## Rotate Tunnel Token
+
+`beta.tunnels.rotate_token(strtunnel_id, TunnelRotateTokenParams**kwargs)  -> BetaTunnelToken`
+
+**post** `/v1/tunnels/{tunnel_id}/rotate_token`
+
+The Tunnels API is in research preview. It requires the `anthropic-beta: mcp-tunnels-2026-06-22` header and may change without a deprecation period. It supersedes the Admin API endpoints at `/v1/organizations/tunnels`, which remain available during a migration window.
+
+Rotates a tunnel's connector token. Rotation invalidates the current token for new connections and returns a fresh value; established connections are not severed. A connector restarted after rotation must use the new value.
+
+### Parameters
+
+- `tunnel_id: str`
+
+- `reason: Optional[str]`
+
+  Optional free-text reason for the rotation, recorded for audit.
+
+- `betas: Optional[List[AnthropicBetaParam]]`
+
+  Optional header to specify the beta version(s) you want to use.
+
+  - `str`
+
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
+
+    - `"message-batches-2024-09-24"`
+
+    - `"prompt-caching-2024-07-31"`
+
+    - `"computer-use-2024-10-22"`
+
+    - `"computer-use-2025-01-24"`
+
+    - `"pdfs-2024-09-25"`
+
+    - `"token-counting-2024-11-01"`
+
+    - `"token-efficient-tools-2025-02-19"`
+
+    - `"output-128k-2025-02-19"`
+
+    - `"files-api-2025-04-14"`
+
+    - `"mcp-client-2025-04-04"`
+
+    - `"mcp-client-2025-11-20"`
+
+    - `"dev-full-thinking-2025-05-14"`
+
+    - `"interleaved-thinking-2025-05-14"`
+
+    - `"code-execution-2025-05-22"`
+
+    - `"extended-cache-ttl-2025-04-11"`
+
+    - `"context-1m-2025-08-07"`
+
+    - `"context-management-2025-06-27"`
+
+    - `"model-context-window-exceeded-2025-08-26"`
+
+    - `"skills-2025-10-02"`
+
+    - `"fast-mode-2026-02-01"`
+
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
+
+    - `"managed-agents-2026-04-01"`
+
+    - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"server-side-fallback-2026-06-01"`
+
+    - `"fallback-credit-2026-06-01"`
+
+    - `"agent-memory-2026-07-22"`
+
+### Returns
+
+- `class BetaTunnelToken: …`
+
+  A tunnel's connector token.
+
+  - `id: str`
+
+    Stable identifier for the current token value. Changes when the token is rotated.
+
+  - `tunnel_token: str`
+
+    The connector token used to run the tunnel. Treat as a credential.
+
+  - `type: Literal["tunnel_token"]`
+
+    - `"tunnel_token"`
+
+### Example
+
+```python
+import os
+from anthropic import Anthropic
+
+client = Anthropic(
+    api_key=os.environ.get("ANTHROPIC_API_KEY"),  # This is the default and can be omitted
+)
+beta_tunnel_token = client.beta.tunnels.rotate_token(
+    tunnel_id="tunnel_id",
+)
+print(beta_tunnel_token.id)
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "tunnel_token": "tunnel_token",
+  "type": "tunnel_token"
+}
+```
+
+## Domain Types
+
+### Beta Tunnel
+
+- `class BetaTunnel: …`
+
+  An MCP tunnel.
+
+  - `id: str`
+
+    Unique identifier for the tunnel, prefixed with `tnl_`.
+
+  - `archived_at: Optional[datetime]`
+
+    A timestamp in RFC 3339 format
+
+  - `created_at: datetime`
+
+    A timestamp in RFC 3339 format
+
+  - `display_name: Optional[str]`
+
+    Human-readable name for the tunnel (1-255 characters). Null if unset.
+
+  - `domain: str`
+
+    Anthropic-assigned hostname for the tunnel. MCP server URLs whose host is a subdomain of this value are routed through the tunnel. Globally unique and never reused, even after the tunnel is archived.
+
+  - `type: Literal["tunnel"]`
+
+    - `"tunnel"`
+
+### Beta Tunnel Token
+
+- `class BetaTunnelToken: …`
+
+  A tunnel's connector token.
+
+  - `id: str`
+
+    Stable identifier for the current token value. Changes when the token is rotated.
+
+  - `tunnel_token: str`
+
+    The connector token used to run the tunnel. Treat as a credential.
+
+  - `type: Literal["tunnel_token"]`
+
+    - `"tunnel_token"`
+
 # Certificates
+
+## Create Tunnel Certificate
+
+`beta.tunnels.certificates.create(strtunnel_id, CertificateCreateParams**kwargs)  -> BetaTunnelCertificate`
+
+**post** `/v1/tunnels/{tunnel_id}/certificates`
+
+The Tunnels API is in research preview. It requires the `anthropic-beta: mcp-tunnels-2026-06-22` header and may change without a deprecation period. It supersedes the Admin API endpoints at `/v1/organizations/tunnels`, which remain available during a migration window.
+
+Registers a public CA certificate on a tunnel. Anthropic verifies the gateway's server certificate against this CA when it terminates the inner TLS session. A tunnel holds at most two non-archived certificates.
+
+### Parameters
+
+- `tunnel_id: str`
+
+- `ca_certificate_pem: str`
+
+  PEM-encoded X.509 CA certificate. Must contain exactly one certificate and no private-key material. Maximum 8KB.
+
+- `betas: Optional[List[AnthropicBetaParam]]`
+
+  Optional header to specify the beta version(s) you want to use.
+
+  - `str`
+
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
+
+    - `"message-batches-2024-09-24"`
+
+    - `"prompt-caching-2024-07-31"`
+
+    - `"computer-use-2024-10-22"`
+
+    - `"computer-use-2025-01-24"`
+
+    - `"pdfs-2024-09-25"`
+
+    - `"token-counting-2024-11-01"`
+
+    - `"token-efficient-tools-2025-02-19"`
+
+    - `"output-128k-2025-02-19"`
+
+    - `"files-api-2025-04-14"`
+
+    - `"mcp-client-2025-04-04"`
+
+    - `"mcp-client-2025-11-20"`
+
+    - `"dev-full-thinking-2025-05-14"`
+
+    - `"interleaved-thinking-2025-05-14"`
+
+    - `"code-execution-2025-05-22"`
+
+    - `"extended-cache-ttl-2025-04-11"`
+
+    - `"context-1m-2025-08-07"`
+
+    - `"context-management-2025-06-27"`
+
+    - `"model-context-window-exceeded-2025-08-26"`
+
+    - `"skills-2025-10-02"`
+
+    - `"fast-mode-2026-02-01"`
+
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
+
+    - `"managed-agents-2026-04-01"`
+
+    - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"server-side-fallback-2026-06-01"`
+
+    - `"fallback-credit-2026-06-01"`
+
+    - `"agent-memory-2026-07-22"`
+
+### Returns
+
+- `class BetaTunnelCertificate: …`
+
+  A CA certificate attached to a tunnel.
+
+  - `id: str`
+
+    Unique identifier for the certificate, prefixed with `tcrt_`.
+
+  - `archived_at: Optional[datetime]`
+
+    A timestamp in RFC 3339 format
+
+  - `created_at: datetime`
+
+    A timestamp in RFC 3339 format
+
+  - `expires_at: Optional[datetime]`
+
+    A timestamp in RFC 3339 format
+
+  - `fingerprint: str`
+
+    Lowercase hex SHA-256 fingerprint of the certificate's DER encoding.
+
+  - `tunnel_id: str`
+
+    ID of the tunnel the certificate is registered against.
+
+  - `type: Literal["tunnel_certificate"]`
+
+    - `"tunnel_certificate"`
+
+### Example
+
+```python
+import os
+from anthropic import Anthropic
+
+client = Anthropic(
+    api_key=os.environ.get("ANTHROPIC_API_KEY"),  # This is the default and can be omitted
+)
+beta_tunnel_certificate = client.beta.tunnels.certificates.create(
+    tunnel_id="tunnel_id",
+    ca_certificate_pem="ca_certificate_pem",
+)
+print(beta_tunnel_certificate.id)
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "archived_at": "2019-12-27T18:11:19.117Z",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "expires_at": "2019-12-27T18:11:19.117Z",
+  "fingerprint": "fingerprint",
+  "tunnel_id": "tunnel_id",
+  "type": "tunnel_certificate"
+}
+```
+
+## Get Tunnel Certificate
+
+`beta.tunnels.certificates.retrieve(strcertificate_id, CertificateRetrieveParams**kwargs)  -> BetaTunnelCertificate`
+
+**get** `/v1/tunnels/{tunnel_id}/certificates/{certificate_id}`
+
+The Tunnels API is in research preview. It requires the `anthropic-beta: mcp-tunnels-2026-06-22` header and may change without a deprecation period. It supersedes the Admin API endpoints at `/v1/organizations/tunnels`, which remain available during a migration window.
+
+Fetches a tunnel certificate by ID.
+
+### Parameters
+
+- `tunnel_id: str`
+
+- `certificate_id: str`
+
+- `betas: Optional[List[AnthropicBetaParam]]`
+
+  Optional header to specify the beta version(s) you want to use.
+
+  - `str`
+
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
+
+    - `"message-batches-2024-09-24"`
+
+    - `"prompt-caching-2024-07-31"`
+
+    - `"computer-use-2024-10-22"`
+
+    - `"computer-use-2025-01-24"`
+
+    - `"pdfs-2024-09-25"`
+
+    - `"token-counting-2024-11-01"`
+
+    - `"token-efficient-tools-2025-02-19"`
+
+    - `"output-128k-2025-02-19"`
+
+    - `"files-api-2025-04-14"`
+
+    - `"mcp-client-2025-04-04"`
+
+    - `"mcp-client-2025-11-20"`
+
+    - `"dev-full-thinking-2025-05-14"`
+
+    - `"interleaved-thinking-2025-05-14"`
+
+    - `"code-execution-2025-05-22"`
+
+    - `"extended-cache-ttl-2025-04-11"`
+
+    - `"context-1m-2025-08-07"`
+
+    - `"context-management-2025-06-27"`
+
+    - `"model-context-window-exceeded-2025-08-26"`
+
+    - `"skills-2025-10-02"`
+
+    - `"fast-mode-2026-02-01"`
+
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
+
+    - `"managed-agents-2026-04-01"`
+
+    - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"server-side-fallback-2026-06-01"`
+
+    - `"fallback-credit-2026-06-01"`
+
+    - `"agent-memory-2026-07-22"`
+
+### Returns
+
+- `class BetaTunnelCertificate: …`
+
+  A CA certificate attached to a tunnel.
+
+  - `id: str`
+
+    Unique identifier for the certificate, prefixed with `tcrt_`.
+
+  - `archived_at: Optional[datetime]`
+
+    A timestamp in RFC 3339 format
+
+  - `created_at: datetime`
+
+    A timestamp in RFC 3339 format
+
+  - `expires_at: Optional[datetime]`
+
+    A timestamp in RFC 3339 format
+
+  - `fingerprint: str`
+
+    Lowercase hex SHA-256 fingerprint of the certificate's DER encoding.
+
+  - `tunnel_id: str`
+
+    ID of the tunnel the certificate is registered against.
+
+  - `type: Literal["tunnel_certificate"]`
+
+    - `"tunnel_certificate"`
+
+### Example
+
+```python
+import os
+from anthropic import Anthropic
+
+client = Anthropic(
+    api_key=os.environ.get("ANTHROPIC_API_KEY"),  # This is the default and can be omitted
+)
+beta_tunnel_certificate = client.beta.tunnels.certificates.retrieve(
+    certificate_id="certificate_id",
+    tunnel_id="tunnel_id",
+)
+print(beta_tunnel_certificate.id)
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "archived_at": "2019-12-27T18:11:19.117Z",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "expires_at": "2019-12-27T18:11:19.117Z",
+  "fingerprint": "fingerprint",
+  "tunnel_id": "tunnel_id",
+  "type": "tunnel_certificate"
+}
+```
+
+## List Tunnel Certificates
+
+`beta.tunnels.certificates.list(strtunnel_id, CertificateListParams**kwargs)  -> SyncPageCursor[BetaTunnelCertificate]`
+
+**get** `/v1/tunnels/{tunnel_id}/certificates`
+
+The Tunnels API is in research preview. It requires the `anthropic-beta: mcp-tunnels-2026-06-22` header and may change without a deprecation period. It supersedes the Admin API endpoints at `/v1/organizations/tunnels`, which remain available during a migration window.
+
+Lists the certificates registered on a tunnel. Archived certificates are excluded unless include_archived is set.
+
+### Parameters
+
+- `tunnel_id: str`
+
+- `include_archived: Optional[bool]`
+
+  Whether to include archived certificates in the results. Defaults to false.
+
+- `limit: Optional[int]`
+
+  Maximum number of certificates to return per page. Defaults to 20, maximum 1000.
+
+- `page: Optional[str]`
+
+  Opaque pagination cursor from a previous `list_tunnel_certificates` response.
+
+- `betas: Optional[List[AnthropicBetaParam]]`
+
+  Optional header to specify the beta version(s) you want to use.
+
+  - `str`
+
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
+
+    - `"message-batches-2024-09-24"`
+
+    - `"prompt-caching-2024-07-31"`
+
+    - `"computer-use-2024-10-22"`
+
+    - `"computer-use-2025-01-24"`
+
+    - `"pdfs-2024-09-25"`
+
+    - `"token-counting-2024-11-01"`
+
+    - `"token-efficient-tools-2025-02-19"`
+
+    - `"output-128k-2025-02-19"`
+
+    - `"files-api-2025-04-14"`
+
+    - `"mcp-client-2025-04-04"`
+
+    - `"mcp-client-2025-11-20"`
+
+    - `"dev-full-thinking-2025-05-14"`
+
+    - `"interleaved-thinking-2025-05-14"`
+
+    - `"code-execution-2025-05-22"`
+
+    - `"extended-cache-ttl-2025-04-11"`
+
+    - `"context-1m-2025-08-07"`
+
+    - `"context-management-2025-06-27"`
+
+    - `"model-context-window-exceeded-2025-08-26"`
+
+    - `"skills-2025-10-02"`
+
+    - `"fast-mode-2026-02-01"`
+
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
+
+    - `"managed-agents-2026-04-01"`
+
+    - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"server-side-fallback-2026-06-01"`
+
+    - `"fallback-credit-2026-06-01"`
+
+    - `"agent-memory-2026-07-22"`
+
+### Returns
+
+- `class BetaTunnelCertificate: …`
+
+  A CA certificate attached to a tunnel.
+
+  - `id: str`
+
+    Unique identifier for the certificate, prefixed with `tcrt_`.
+
+  - `archived_at: Optional[datetime]`
+
+    A timestamp in RFC 3339 format
+
+  - `created_at: datetime`
+
+    A timestamp in RFC 3339 format
+
+  - `expires_at: Optional[datetime]`
+
+    A timestamp in RFC 3339 format
+
+  - `fingerprint: str`
+
+    Lowercase hex SHA-256 fingerprint of the certificate's DER encoding.
+
+  - `tunnel_id: str`
+
+    ID of the tunnel the certificate is registered against.
+
+  - `type: Literal["tunnel_certificate"]`
+
+    - `"tunnel_certificate"`
+
+### Example
+
+```python
+import os
+from anthropic import Anthropic
+
+client = Anthropic(
+    api_key=os.environ.get("ANTHROPIC_API_KEY"),  # This is the default and can be omitted
+)
+page = client.beta.tunnels.certificates.list(
+    tunnel_id="tunnel_id",
+)
+page = page.data[0]
+print(page.id)
+```
+
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "id": "id",
+      "archived_at": "2019-12-27T18:11:19.117Z",
+      "created_at": "2019-12-27T18:11:19.117Z",
+      "expires_at": "2019-12-27T18:11:19.117Z",
+      "fingerprint": "fingerprint",
+      "tunnel_id": "tunnel_id",
+      "type": "tunnel_certificate"
+    }
+  ],
+  "next_page": "next_page"
+}
+```
+
+## Archive Tunnel Certificate
+
+`beta.tunnels.certificates.archive(strcertificate_id, CertificateArchiveParams**kwargs)  -> BetaTunnelCertificate`
+
+**post** `/v1/tunnels/{tunnel_id}/certificates/{certificate_id}/archive`
+
+The Tunnels API is in research preview. It requires the `anthropic-beta: mcp-tunnels-2026-06-22` header and may change without a deprecation period. It supersedes the Admin API endpoints at `/v1/organizations/tunnels`, which remain available during a migration window.
+
+Archives a tunnel certificate, removing it from the set Anthropic trusts for the tunnel. The certificate record is retained. Archiving the last non-archived certificate is permitted; the tunnel rejects MCP traffic until a new certificate is added.
+
+### Parameters
+
+- `tunnel_id: str`
+
+- `certificate_id: str`
+
+- `betas: Optional[List[AnthropicBetaParam]]`
+
+  Optional header to specify the beta version(s) you want to use.
+
+  - `str`
+
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
+
+    - `"message-batches-2024-09-24"`
+
+    - `"prompt-caching-2024-07-31"`
+
+    - `"computer-use-2024-10-22"`
+
+    - `"computer-use-2025-01-24"`
+
+    - `"pdfs-2024-09-25"`
+
+    - `"token-counting-2024-11-01"`
+
+    - `"token-efficient-tools-2025-02-19"`
+
+    - `"output-128k-2025-02-19"`
+
+    - `"files-api-2025-04-14"`
+
+    - `"mcp-client-2025-04-04"`
+
+    - `"mcp-client-2025-11-20"`
+
+    - `"dev-full-thinking-2025-05-14"`
+
+    - `"interleaved-thinking-2025-05-14"`
+
+    - `"code-execution-2025-05-22"`
+
+    - `"extended-cache-ttl-2025-04-11"`
+
+    - `"context-1m-2025-08-07"`
+
+    - `"context-management-2025-06-27"`
+
+    - `"model-context-window-exceeded-2025-08-26"`
+
+    - `"skills-2025-10-02"`
+
+    - `"fast-mode-2026-02-01"`
+
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
+
+    - `"advisor-tool-2026-03-01"`
+
+    - `"managed-agents-2026-04-01"`
+
+    - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"server-side-fallback-2026-06-01"`
+
+    - `"fallback-credit-2026-06-01"`
+
+    - `"agent-memory-2026-07-22"`
+
+### Returns
+
+- `class BetaTunnelCertificate: …`
+
+  A CA certificate attached to a tunnel.
+
+  - `id: str`
+
+    Unique identifier for the certificate, prefixed with `tcrt_`.
+
+  - `archived_at: Optional[datetime]`
+
+    A timestamp in RFC 3339 format
+
+  - `created_at: datetime`
+
+    A timestamp in RFC 3339 format
+
+  - `expires_at: Optional[datetime]`
+
+    A timestamp in RFC 3339 format
+
+  - `fingerprint: str`
+
+    Lowercase hex SHA-256 fingerprint of the certificate's DER encoding.
+
+  - `tunnel_id: str`
+
+    ID of the tunnel the certificate is registered against.
+
+  - `type: Literal["tunnel_certificate"]`
+
+    - `"tunnel_certificate"`
+
+### Example
+
+```python
+import os
+from anthropic import Anthropic
+
+client = Anthropic(
+    api_key=os.environ.get("ANTHROPIC_API_KEY"),  # This is the default and can be omitted
+)
+beta_tunnel_certificate = client.beta.tunnels.certificates.archive(
+    certificate_id="certificate_id",
+    tunnel_id="tunnel_id",
+)
+print(beta_tunnel_certificate.id)
+```
+
+#### Response
+
+```json
+{
+  "id": "id",
+  "archived_at": "2019-12-27T18:11:19.117Z",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "expires_at": "2019-12-27T18:11:19.117Z",
+  "fingerprint": "fingerprint",
+  "tunnel_id": "tunnel_id",
+  "type": "tunnel_certificate"
+}
+```
+
+## Domain Types
+
+### Beta Tunnel Certificate
+
+- `class BetaTunnelCertificate: …`
+
+  A CA certificate attached to a tunnel.
+
+  - `id: str`
+
+    Unique identifier for the certificate, prefixed with `tcrt_`.
+
+  - `archived_at: Optional[datetime]`
+
+    A timestamp in RFC 3339 format
+
+  - `created_at: datetime`
+
+    A timestamp in RFC 3339 format
+
+  - `expires_at: Optional[datetime]`
+
+    A timestamp in RFC 3339 format
+
+  - `fingerprint: str`
+
+    Lowercase hex SHA-256 fingerprint of the certificate's DER encoding.
+
+  - `tunnel_id: str`
+
+    ID of the tunnel the certificate is registered against.
+
+  - `type: Literal["tunnel_certificate"]`
+
+    - `"tunnel_certificate"`
 
 # Webhooks
 
@@ -101322,6 +106870,70 @@ print(beta_user_profile_enrollment_url.expires_at)
   - `type: Literal["deployment.updated"]`
 
     - `"deployment.updated"`
+
+  - `workspace_id: str`
+
+### Beta Webhook Environment Archived Event Data
+
+- `class BetaWebhookEnvironmentArchivedEventData: …`
+
+  - `id: str`
+
+    ID of the environment that triggered the event.
+
+  - `organization_id: str`
+
+  - `type: Literal["environment.archived"]`
+
+    - `"environment.archived"`
+
+  - `workspace_id: str`
+
+### Beta Webhook Environment Created Event Data
+
+- `class BetaWebhookEnvironmentCreatedEventData: …`
+
+  - `id: str`
+
+    ID of the environment that triggered the event.
+
+  - `organization_id: str`
+
+  - `type: Literal["environment.created"]`
+
+    - `"environment.created"`
+
+  - `workspace_id: str`
+
+### Beta Webhook Environment Deleted Event Data
+
+- `class BetaWebhookEnvironmentDeletedEventData: …`
+
+  - `id: str`
+
+    ID of the environment that triggered the event.
+
+  - `organization_id: str`
+
+  - `type: Literal["environment.deleted"]`
+
+    - `"environment.deleted"`
+
+  - `workspace_id: str`
+
+### Beta Webhook Environment Updated Event Data
+
+- `class BetaWebhookEnvironmentUpdatedEventData: …`
+
+  - `id: str`
+
+    ID of the environment that triggered the event.
+
+  - `organization_id: str`
+
+  - `type: Literal["environment.updated"]`
+
+    - `"environment.updated"`
 
   - `workspace_id: str`
 
@@ -101871,6 +107483,104 @@ print(beta_user_profile_enrollment_url.expires_at)
 
       - `workspace_id: str`
 
+    - `class BetaWebhookEnvironmentCreatedEventData: …`
+
+      - `id: str`
+
+        ID of the environment that triggered the event.
+
+      - `organization_id: str`
+
+      - `type: Literal["environment.created"]`
+
+        - `"environment.created"`
+
+      - `workspace_id: str`
+
+    - `class BetaWebhookEnvironmentUpdatedEventData: …`
+
+      - `id: str`
+
+        ID of the environment that triggered the event.
+
+      - `organization_id: str`
+
+      - `type: Literal["environment.updated"]`
+
+        - `"environment.updated"`
+
+      - `workspace_id: str`
+
+    - `class BetaWebhookEnvironmentArchivedEventData: …`
+
+      - `id: str`
+
+        ID of the environment that triggered the event.
+
+      - `organization_id: str`
+
+      - `type: Literal["environment.archived"]`
+
+        - `"environment.archived"`
+
+      - `workspace_id: str`
+
+    - `class BetaWebhookEnvironmentDeletedEventData: …`
+
+      - `id: str`
+
+        ID of the environment that triggered the event.
+
+      - `organization_id: str`
+
+      - `type: Literal["environment.deleted"]`
+
+        - `"environment.deleted"`
+
+      - `workspace_id: str`
+
+    - `class BetaWebhookMemoryStoreCreatedEventData: …`
+
+      - `id: str`
+
+        ID of the memory store that triggered the event.
+
+      - `organization_id: str`
+
+      - `type: Literal["memory_store.created"]`
+
+        - `"memory_store.created"`
+
+      - `workspace_id: str`
+
+    - `class BetaWebhookMemoryStoreArchivedEventData: …`
+
+      - `id: str`
+
+        ID of the memory store that triggered the event.
+
+      - `organization_id: str`
+
+      - `type: Literal["memory_store.archived"]`
+
+        - `"memory_store.archived"`
+
+      - `workspace_id: str`
+
+    - `class BetaWebhookMemoryStoreDeletedEventData: …`
+
+      - `id: str`
+
+        ID of the memory store that triggered the event.
+
+      - `organization_id: str`
+
+      - `type: Literal["memory_store.deleted"]`
+
+        - `"memory_store.deleted"`
+
+      - `workspace_id: str`
+
   - `type: Literal["event"]`
 
     Object type. Always `event` for webhook payloads.
@@ -102412,6 +108122,152 @@ print(beta_user_profile_enrollment_url.expires_at)
       - `"deployment_run.succeeded"`
 
     - `workspace_id: str`
+
+  - `class BetaWebhookEnvironmentCreatedEventData: …`
+
+    - `id: str`
+
+      ID of the environment that triggered the event.
+
+    - `organization_id: str`
+
+    - `type: Literal["environment.created"]`
+
+      - `"environment.created"`
+
+    - `workspace_id: str`
+
+  - `class BetaWebhookEnvironmentUpdatedEventData: …`
+
+    - `id: str`
+
+      ID of the environment that triggered the event.
+
+    - `organization_id: str`
+
+    - `type: Literal["environment.updated"]`
+
+      - `"environment.updated"`
+
+    - `workspace_id: str`
+
+  - `class BetaWebhookEnvironmentArchivedEventData: …`
+
+    - `id: str`
+
+      ID of the environment that triggered the event.
+
+    - `organization_id: str`
+
+    - `type: Literal["environment.archived"]`
+
+      - `"environment.archived"`
+
+    - `workspace_id: str`
+
+  - `class BetaWebhookEnvironmentDeletedEventData: …`
+
+    - `id: str`
+
+      ID of the environment that triggered the event.
+
+    - `organization_id: str`
+
+    - `type: Literal["environment.deleted"]`
+
+      - `"environment.deleted"`
+
+    - `workspace_id: str`
+
+  - `class BetaWebhookMemoryStoreCreatedEventData: …`
+
+    - `id: str`
+
+      ID of the memory store that triggered the event.
+
+    - `organization_id: str`
+
+    - `type: Literal["memory_store.created"]`
+
+      - `"memory_store.created"`
+
+    - `workspace_id: str`
+
+  - `class BetaWebhookMemoryStoreArchivedEventData: …`
+
+    - `id: str`
+
+      ID of the memory store that triggered the event.
+
+    - `organization_id: str`
+
+    - `type: Literal["memory_store.archived"]`
+
+      - `"memory_store.archived"`
+
+    - `workspace_id: str`
+
+  - `class BetaWebhookMemoryStoreDeletedEventData: …`
+
+    - `id: str`
+
+      ID of the memory store that triggered the event.
+
+    - `organization_id: str`
+
+    - `type: Literal["memory_store.deleted"]`
+
+      - `"memory_store.deleted"`
+
+    - `workspace_id: str`
+
+### Beta Webhook Memory Store Archived Event Data
+
+- `class BetaWebhookMemoryStoreArchivedEventData: …`
+
+  - `id: str`
+
+    ID of the memory store that triggered the event.
+
+  - `organization_id: str`
+
+  - `type: Literal["memory_store.archived"]`
+
+    - `"memory_store.archived"`
+
+  - `workspace_id: str`
+
+### Beta Webhook Memory Store Created Event Data
+
+- `class BetaWebhookMemoryStoreCreatedEventData: …`
+
+  - `id: str`
+
+    ID of the memory store that triggered the event.
+
+  - `organization_id: str`
+
+  - `type: Literal["memory_store.created"]`
+
+    - `"memory_store.created"`
+
+  - `workspace_id: str`
+
+### Beta Webhook Memory Store Deleted Event Data
+
+- `class BetaWebhookMemoryStoreDeletedEventData: …`
+
+  - `id: str`
+
+    ID of the memory store that triggered the event.
+
+  - `organization_id: str`
+
+  - `type: Literal["memory_store.deleted"]`
+
+    - `"memory_store.deleted"`
+
+  - `workspace_id: str`
 
 ### Beta Webhook Session Archived Event Data
 
@@ -103352,6 +109208,104 @@ print(beta_user_profile_enrollment_url.expires_at)
       - `type: Literal["deployment_run.succeeded"]`
 
         - `"deployment_run.succeeded"`
+
+      - `workspace_id: str`
+
+    - `class BetaWebhookEnvironmentCreatedEventData: …`
+
+      - `id: str`
+
+        ID of the environment that triggered the event.
+
+      - `organization_id: str`
+
+      - `type: Literal["environment.created"]`
+
+        - `"environment.created"`
+
+      - `workspace_id: str`
+
+    - `class BetaWebhookEnvironmentUpdatedEventData: …`
+
+      - `id: str`
+
+        ID of the environment that triggered the event.
+
+      - `organization_id: str`
+
+      - `type: Literal["environment.updated"]`
+
+        - `"environment.updated"`
+
+      - `workspace_id: str`
+
+    - `class BetaWebhookEnvironmentArchivedEventData: …`
+
+      - `id: str`
+
+        ID of the environment that triggered the event.
+
+      - `organization_id: str`
+
+      - `type: Literal["environment.archived"]`
+
+        - `"environment.archived"`
+
+      - `workspace_id: str`
+
+    - `class BetaWebhookEnvironmentDeletedEventData: …`
+
+      - `id: str`
+
+        ID of the environment that triggered the event.
+
+      - `organization_id: str`
+
+      - `type: Literal["environment.deleted"]`
+
+        - `"environment.deleted"`
+
+      - `workspace_id: str`
+
+    - `class BetaWebhookMemoryStoreCreatedEventData: …`
+
+      - `id: str`
+
+        ID of the memory store that triggered the event.
+
+      - `organization_id: str`
+
+      - `type: Literal["memory_store.created"]`
+
+        - `"memory_store.created"`
+
+      - `workspace_id: str`
+
+    - `class BetaWebhookMemoryStoreArchivedEventData: …`
+
+      - `id: str`
+
+        ID of the memory store that triggered the event.
+
+      - `organization_id: str`
+
+      - `type: Literal["memory_store.archived"]`
+
+        - `"memory_store.archived"`
+
+      - `workspace_id: str`
+
+    - `class BetaWebhookMemoryStoreDeletedEventData: …`
+
+      - `id: str`
+
+        ID of the memory store that triggered the event.
+
+      - `organization_id: str`
+
+      - `type: Literal["memory_store.deleted"]`
+
+        - `"memory_store.deleted"`
 
       - `workspace_id: str`
 

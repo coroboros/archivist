@@ -20,18 +20,18 @@ Once a session exists, use these operations to read, update, archive, or delete 
 
 Sessions progress through these statuses. See [Start a session](./managed-agents-sessions.md) for the session lifecycle.
 
-| Status         | Description                                                                                          |
-| -------------- | ---------------------------------------------------------------------------------------------------- |
-| `idle`         | Agent is waiting for input, including user messages or tool confirmations. Sessions start in `idle`. |
-| `running`      | Agent is actively executing.                                                                         |
-| `rescheduling` | Transient error occurred, retrying automatically.                                                    |
-| `terminated`   | Session has ended because of an unrecoverable error.                                                 |
+| Status         | Description                                                                                                                           |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| `idle`         | Agent is waiting for input, including user messages or tool confirmations. Sessions created without `initial_events` start in `idle`. |
+| `running`      | Agent is actively executing.                                                                                                          |
+| `rescheduling` | Transient error occurred, retrying automatically.                                                                                     |
+| `terminated`   | Session has ended, either because of an unrecoverable error or on completion.                                                         |
 
 ## Updating the agent configuration
 
 You can update a session's `agent.tools` and `agent.mcp_servers`, including permission policies, mid-session without creating a new agent version. Updates are session-local and do not propagate back to the underlying agent.
 
-Only the agent's `tools` and `mcp_servers` can change after a session is created. To run a session with `model`, `system`, or `skills` values other than the agent's, use [agent configuration overrides](./managed-agents-sessions.md#override-agent-configuration-for-a-session) when you create the session. The agent's configured `system` field is fixed for the session's lifetime. On models that support it, you can still replace the effective system prompt between turns by sending a [`system.message` event](./managed-agents-events-and-streaming.md#sending-system-messages).
+Only the agent's `tools` and `mcp_servers` can change after a session is created. To run a session with `model`, `system`, or `skills` values other than the agent's, use [agent configuration overrides](./managed-agents-sessions.md#override-agent-configuration-for-a-session) when you create the session. The agent's configured `system` field is fixed for the session's lifetime. On models that support it, you can still append system-level guidance mid-session by sending a [`system.message` event](./managed-agents-events-and-streaming.md#sending-system-messages).
 
 The semantics of a `tools` or `mcp_servers` update are full replacement: the provided array is the new value. To preserve existing entries, `GET` the session, modify the array, and `POST` it back.
 

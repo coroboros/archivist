@@ -101,7 +101,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
 - `--speed: optional "standard" or "fast"`
 
-  Body param: The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
+  Body param: Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
 - `--system: optional string or array of BetaTextBlockParam`
 

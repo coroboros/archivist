@@ -1110,7 +1110,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
   - `Speed? speed`
 
-    Body param: The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
+    Body param: Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
     - `"standard"Standard`
 
@@ -2390,6 +2390,8 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
     - `"managed-agents-2026-04-01"ManagedAgents2026_04_01`
 
     - `"cache-diagnosis-2026-04-07"CacheDiagnosis2026_04_07`
+
+    - `"dreaming-2026-04-21"Dreaming2026_04_21`
 
     - `"thinking-token-count-2026-05-13"ThinkingTokenCount2026_05_13`
 

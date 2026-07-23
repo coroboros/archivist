@@ -30,7 +30,7 @@ Stop a work item, initiating graceful or forced shutdown.
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 26 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 27 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -81,6 +81,8 @@ Stop a work item, initiating graceful or forced shutdown.
     - `:"managed-agents-2026-04-01"`
 
     - `:"cache-diagnosis-2026-04-07"`
+
+    - `:"dreaming-2026-04-21"`
 
     - `:"thinking-token-count-2026-05-13"`
 
@@ -137,6 +139,10 @@ Stop a work item, initiating graceful or forced shutdown.
   - `metadata: Hash[Symbol, String]`
 
     User-provided metadata key-value pairs associated with this work item
+
+  - `secret: String`
+
+    Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
 
   - `started_at: String`
 
@@ -198,6 +204,7 @@ puts(beta_self_hosted_work)
   "metadata": {
     "foo": "string"
   },
+  "secret": "secret",
   "started_at": "started_at",
   "state": "queued",
   "stop_requested_at": "stop_requested_at",
