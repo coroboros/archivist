@@ -842,9 +842,9 @@ The computer use tool supports these actions:
   **Important:** Your application must explicitly run the computer use tool; Claude cannot run it directly. You are responsible for implementing the screenshot capture, mouse movements, keyboard inputs, and other actions based on Claude's requests.
 </Note>
 
-### Combining with extended thinking
+### Combining with thinking
 
-For combining computer use with extended thinking, see [Extended thinking](../build-with-claude/build-with-claude-extended-thinking.md).
+For combining computer use with thinking, see [Thinking](../build-with-claude/build-with-claude-thinking.md).
 
 <Tip>
   For computer use specifically, internal benchmarking suggests these `effort` settings:

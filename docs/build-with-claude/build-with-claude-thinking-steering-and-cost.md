@@ -1,6 +1,6 @@
 ---
 title: "Steering thinking"
-source: "https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking"
+source: "https://platform.claude.com/docs/en/build-with-claude/thinking-steering-and-cost"
 category: "build-with-claude"
 generated: true
 ---

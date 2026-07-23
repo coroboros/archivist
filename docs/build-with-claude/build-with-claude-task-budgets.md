@@ -573,7 +573,7 @@ The minimum accepted `task_budget.total` is **20,000 tokens**; values below the 
 
 * **`max_tokens`:** Orthogonal to task budgets. `max_tokens` is a hard per-request cap on generated tokens, while `task_budget` is an advisory cap across the full agentic loop (potentially spanning many requests). At `xhigh` or `max` effort, set `max_tokens` to at least 64k to give Claude room to think and act on each request.
 * **[Effort](./build-with-claude-effort.md):** Effort controls how deeply Claude reasons per step. Task budgets control how much total work Claude does across an agentic loop. The two are complementary: effort tunes depth, task budgets tune breadth.
-* **[Adaptive thinking](./build-with-claude-adaptive-thinking.md):** Task budgets include thinking tokens in the count, so adaptive thinking naturally scales down as the budget depletes.
+* **[Adaptive thinking](./build-with-claude-thinking-steering-and-cost.md):** Task budgets include thinking tokens in the count, so adaptive thinking naturally scales down as the budget depletes.
 * **[Prompt caching](./build-with-claude-prompt-caching.md):** The budget-countdown marker is injected server-side per turn, so it does not match across requests. If your client decrements `task_budget.remaining` on each follow-up request, the changed value invalidates any cache prefix that contains it. To preserve caching, set the budget once on the initial request and let the model self-regulate against the server-side countdown rather than mutating the budget client-side.
 
 ## Feature support
@@ -598,7 +598,7 @@ Task budgets are not supported on [Claude Code](https://code.claude.com/docs/en/
     Control how thoroughly Claude reasons about each step of an agentic loop.
   </Card>
 
-  <Card title="Adaptive thinking" icon="brain" href="./build-with-claude-adaptive-thinking.md">
+  <Card title="Adaptive thinking" icon="brain" href="./build-with-claude-thinking-steering-and-cost.md">
     Let Claude decide when and how much to use extended thinking.
   </Card>
 

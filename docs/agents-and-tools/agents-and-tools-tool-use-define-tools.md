@@ -22,7 +22,7 @@ Use the latest Claude Opus (4.8) model for complex tools and ambiguous queries; 
 Use Claude Haiku models for straightforward tools, but note they may infer missing parameters.
 
 <Tip>
-  If using Claude with tool use and extended thinking, refer to the [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md) guide for more information.
+  If using Claude with tool use and thinking, see [Thinking](../build-with-claude/build-with-claude-thinking.md) for more information.
 </Tip>
 
 ## Specifying client tools
@@ -863,7 +863,7 @@ This diagram illustrates how each option works:
 Note that when you have `tool_choice` as `any` or `tool`, the API prefills the assistant message to force a tool to be used. This means that the models will not emit a natural language response or explanation before `tool_use` content blocks, even if explicitly asked to do so.
 
 <Note>
-  When using [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md) with tool use, `tool_choice: {"type": "any"}` and `tool_choice: {"type": "tool", "name": "..."}` are not supported and will result in an error. Only `tool_choice: {"type": "auto"}` (the default) and `tool_choice: {"type": "none"}` are compatible with extended thinking.
+  When using [thinking](../build-with-claude/build-with-claude-thinking.md) with tool use, `tool_choice: {"type": "any"}` and `tool_choice: {"type": "tool", "name": "..."}` are not supported and result in an error. Only `tool_choice: {"type": "auto"}` (the default) and `tool_choice: {"type": "none"}` are compatible with thinking.
 </Note>
 
 <Note>

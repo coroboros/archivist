@@ -1,5 +1,72 @@
 # Changelog
 
+## 🤖 v1.5.63 - 23/07/2026
+
+File Changes:
+
+- Modified: `docs/agents-and-tools/agents-and-tools-README.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-mcp-connector.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-computer-use-tool.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-define-tools.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-tool-use-with-prompt-caching.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-troubleshooting-tool-use.md`
+- Modified: `docs/api/api-README.md`
+- Modified: `docs/api/api-errors.md`
+- Modified: `docs/api/api-get-started.md`
+- Modified: `docs/api/api-openai-sdk.md`
+- Modified: `docs/api/api-sdks-java.md`
+- Modified: `docs/build-with-claude/build-with-claude-README.md`
+- Modified: `docs/build-with-claude/build-with-claude-adaptive-thinking.md`
+- Modified: `docs/build-with-claude/build-with-claude-api-and-data-retention.md`
+- Modified: `docs/build-with-claude/build-with-claude-claude-in-amazon-bedrock.md`
+- Modified: `docs/build-with-claude/build-with-claude-claude-in-microsoft-foundry.md`
+- Modified: `docs/build-with-claude/build-with-claude-claude-on-amazon-bedrock-legacy.md`
+- Modified: `docs/build-with-claude/build-with-claude-claude-on-amazon-bedrock.md`
+- Modified: `docs/build-with-claude/build-with-claude-claude-on-vertex-ai.md`
+- Modified: `docs/build-with-claude/build-with-claude-claude-platform-on-aws.md`
+- Modified: `docs/build-with-claude/build-with-claude-context-editing.md`
+- Modified: `docs/build-with-claude/build-with-claude-context-windows.md`
+- Modified: `docs/build-with-claude/build-with-claude-effort.md`
+- Modified: `docs/build-with-claude/build-with-claude-extended-thinking.md`
+- Modified: `docs/build-with-claude/build-with-claude-overview.md`
+- Modified: `docs/build-with-claude/build-with-claude-prompt-caching.md`
+- Modified: `docs/build-with-claude/build-with-claude-prompt-engineering-claude-prompting-best-practices.md`
+- Modified: `docs/build-with-claude/build-with-claude-prompt-engineering-prompting-claude-fable-5.md`
+- Modified: `docs/build-with-claude/build-with-claude-prompt-engineering-prompting-claude-sonnet-5.md`
+- Modified: `docs/build-with-claude/build-with-claude-prompt-engineering-prompting-tools.md`
+- Modified: `docs/build-with-claude/build-with-claude-refusals-and-fallback.md`
+- Modified: `docs/build-with-claude/build-with-claude-streaming.md`
+- Modified: `docs/build-with-claude/build-with-claude-structured-outputs.md`
+- Modified: `docs/build-with-claude/build-with-claude-task-budgets.md`
+- Modified: `docs/build-with-claude/build-with-claude-token-counting.md`
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-hooks.md`
+- Modified: `docs/code/code-sessions.md`
+- Modified: `docs/code/code-skills.md`
+- Modified: `docs/general/general-README.md`
+- Modified: `docs/general/general-claude_api_primer.md`
+- Modified: `docs/general/general-cli-sdks-libraries-cli-quickstart.md`
+- Modified: `docs/general/general-cli-sdks-libraries-libraries-openai-sdk.md`
+- Modified: `docs/general/general-cli-sdks-libraries-sdks-java.md`
+- Modified: `docs/manage-claude/manage-claude-README.md`
+- Modified: `docs/manage-claude/manage-claude-api-and-data-retention.md`
+- Modified: `docs/manage-claude/manage-claude-compliance-activity-feed.md`
+- Modified: `docs/manage-claude/manage-claude-compliance-api.md`
+- Modified: `docs/manage-claude/manage-claude-compliance-content-data.md`
+- Modified: `docs/manage-claude/manage-claude-compliance-errors.md`
+- Modified: `docs/manage-claude/manage-claude-compliance-integration-patterns.md`
+- Modified: `docs/manage-claude/manage-claude-compliance-org-data.md`
+- Modified: `docs/managed-agents/managed-agents-README.md`
+- Modified: `docs/managed-agents/managed-agents-quickstart.md`
+- Modified: `docs/managed-agents/managed-agents-self-hosted-sandboxes.md`
+- Modified: `docs/release-notes/release-notes-README.md`
+- Modified: `docs/release-notes/release-notes-overview.md`
+- Added: `docs/build-with-claude/build-with-claude-thinking-steering-and-cost.md`
+- Added: `docs/build-with-claude/build-with-claude-thinking-tool-workflows.md`
+- Added: `docs/build-with-claude/build-with-claude-thinking-troubleshooting.md`
+- Added: `docs/build-with-claude/build-with-claude-thinking.md`
+
+
 ## 🤖 v1.5.62 - 23/07/2026
 
 File Changes:

@@ -349,11 +349,11 @@ Note: Current models only support emitting one complete key and value property f
 
 ### Thinking delta
 
-When using [extended thinking](./build-with-claude-extended-thinking.md#streaming-thinking) with streaming enabled, you'll receive thinking content through `thinking_delta` events. These deltas correspond to the `thinking` field of the `thinking` content blocks.
+When using [thinking](./build-with-claude-thinking.md#streaming-thinking) with streaming enabled, you'll receive thinking content through `thinking_delta` events. These deltas correspond to the `thinking` field of the `thinking` content blocks.
 
 For thinking content, a special `signature_delta` event is sent just before the `content_block_stop` event. This signature is used to verify the integrity of the thinking block.
 
-When `display: "omitted"` is set on the thinking configuration, no `thinking_delta` events are sent. The thinking block opens, receives a single `signature_delta`, and closes. See [Controlling thinking display](./build-with-claude-extended-thinking.md#controlling-thinking-display).
+When `display: "omitted"` is set on the thinking configuration, no `thinking_delta` events are sent. The thinking block opens, receives a single `signature_delta`, and closes. See [Controlling thinking display](./build-with-claude-thinking.md#controlling-thinking-display).
 
 A typical thinking delta looks like:
 
@@ -1513,8 +1513,8 @@ For Claude 4.6 and later models, the same capture-and-resume strategy applies, b
     Stream tool input JSON without server-side buffering for lower latency.
   </Card>
 
-  <Card title="Extended thinking" icon="brain" href="./build-with-claude-extended-thinking.md">
-    Stream extended thinking output with `thinking_delta` and `signature_delta` events.
+  <Card title="Thinking" icon="brain" href="./build-with-claude-thinking.md">
+    Stream thinking output with `thinking_delta` and `signature_delta` events.
   </Card>
 
   <Card title="Client SDKs" icon="code" href="../general/general-cli-sdks-libraries-overview.md">

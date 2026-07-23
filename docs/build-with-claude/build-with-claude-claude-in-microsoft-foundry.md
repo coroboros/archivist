@@ -83,7 +83,7 @@ Anthropic's [client SDKs](../general/general-cli-sdks-libraries-overview.md) sup
     <Tabs>
       <Tab title="Gradle">
         ```kotlin
-        implementation("com.anthropic:anthropic-java-foundry:2.48.0")
+        implementation("com.anthropic:anthropic-java-foundry:2.50.0")
 
         // For Entra ID authentication, also add the Azure Identity library
         implementation("com.azure:azure-identity:1.18.3")
@@ -95,7 +95,7 @@ Anthropic's [client SDKs](../general/general-cli-sdks-libraries-overview.md) sup
         <dependency>
             <groupId>com.anthropic</groupId>
             <artifactId>anthropic-java-foundry</artifactId>
-            <version>2.48.0</version>
+            <version>2.50.0</version>
         </dependency>
         <!-- For Entra ID authentication, also add the Azure Identity library -->
         <dependency>

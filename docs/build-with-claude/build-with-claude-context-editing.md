@@ -61,7 +61,7 @@ The `clear_thinking_20251015` strategy manages `thinking` blocks in conversation
   Use this strategy to override the default. If your code runs across multiple model tiers, set `keep` explicitly rather than relying on the per-model default.
 </Tip>
 
-An assistant conversation turn may include multiple content blocks (for example, when using tools) and multiple thinking blocks (for example, with [interleaved thinking](./build-with-claude-extended-thinking.md#interleaved-thinking)).
+An assistant conversation turn may include multiple content blocks (for example, when using tools) and multiple thinking blocks (for example, with [interleaved thinking](./build-with-claude-thinking.md#interleaved-thinking)).
 
 ### Context editing happens server-side
 

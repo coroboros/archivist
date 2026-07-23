@@ -19,7 +19,7 @@ Anthropic provides a compatibility layer that enables you to use the OpenAI SDK 
 </Note>
 
 <Tip>
-  For the best experience and access to Claude API full feature set ([PDF processing](../build-with-claude/build-with-claude-pdf-support.md), [citations](../build-with-claude/build-with-claude-citations.md), [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md), and [prompt caching](../build-with-claude/build-with-claude-prompt-caching.md)), use the native [Claude API](../api/api-overview.md).
+  For the best experience and access to Claude API full feature set ([PDF processing](../build-with-claude/build-with-claude-pdf-support.md), [citations](../build-with-claude/build-with-claude-citations.md), [thinking](../build-with-claude/build-with-claude-thinking.md), and [prompt caching](../build-with-claude/build-with-claude-prompt-caching.md)), use the native [Claude API](../api/api-overview.md).
 </Tip>
 
 ## Getting started with the OpenAI SDK
@@ -34,7 +34,7 @@ To use the OpenAI SDK compatibility feature, you'll need to:
    * Replace your API key with a [Claude API key](/settings/keys)
    * Update your model name to use a [Claude model](../about-claude/about-claude-models-overview.md)
 
-3. Review the documentation below for what features are supported
+3. Review the following sections for what features are supported
 
 ### Quick start example
 
@@ -84,11 +84,11 @@ To use the OpenAI SDK compatibility feature, you'll need to:
 Here are the most substantial differences from using OpenAI:
 
 * The `strict` parameter for function calling is ignored, which means the tool use JSON is not guaranteed to follow the supplied schema. For guaranteed schema conformance, use the native [Claude API with Structured Outputs](../build-with-claude/build-with-claude-structured-outputs.md).
-* Audio input is not supported; it will simply be ignored and stripped from input
+* Audio input is not supported; it will be ignored and stripped from input
 * Prompt caching is not supported, but it is supported in the [Anthropic SDKs](./general-cli-sdks-libraries-overview.md)
 * System/developer messages are hoisted and concatenated to the beginning of the conversation, as Anthropic only supports a single initial system message.
 
-Most unsupported fields are silently ignored rather than producing errors. These are all documented below.
+Most unsupported fields are silently ignored rather than producing errors. These are all documented in the following sections.
 
 ### Output quality considerations
 

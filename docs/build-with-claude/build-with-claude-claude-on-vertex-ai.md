@@ -51,20 +51,20 @@ First, install Anthropic's [client SDK](../general/general-cli-sdks-libraries-ov
   <Tab title="Java">
     <CodeGroup exclude="shell, python, typescript, csharp, go, php, ruby">
       ```groovy Gradle
-      implementation("com.anthropic:anthropic-java:2.48.0")
-      implementation("com.anthropic:anthropic-java-vertex:2.48.0")
+      implementation("com.anthropic:anthropic-java:2.50.0")
+      implementation("com.anthropic:anthropic-java-vertex:2.50.0")
       ```
 
       ```xml Maven
       <dependency>
           <groupId>com.anthropic</groupId>
           <artifactId>anthropic-java</artifactId>
-          <version>2.48.0</version>
+          <version>2.50.0</version>
       </dependency>
       <dependency>
           <groupId>com.anthropic</groupId>
           <artifactId>anthropic-java-vertex</artifactId>
-          <version>2.48.0</version>
+          <version>2.50.0</version>
       </dependency>
       ```
 
@@ -352,7 +352,7 @@ For the full feature list with Google Cloud availability, see [Features overview
 
 * [Messages API](../api/api-messages-create.md)
 * [Prompt caching](./build-with-claude-prompt-caching.md)
-* [Extended thinking](./build-with-claude-extended-thinking.md)
+* [Thinking](./build-with-claude-thinking.md)
 * [Tool use](../agents-and-tools/agents-and-tools-tool-use-overview.md), including the [Bash tool](../agents-and-tools/agents-and-tools-tool-use-bash-tool.md), [Computer use tool](../agents-and-tools/agents-and-tools-tool-use-computer-use-tool.md), [Memory tool](../agents-and-tools/agents-and-tools-tool-use-memory-tool.md), and [Text editor tool](../agents-and-tools/agents-and-tools-tool-use-text-editor-tool.md)
 * [Web search tool](../agents-and-tools/agents-and-tools-tool-use-web-search-tool.md)
 * [Citations](./build-with-claude-citations.md)
