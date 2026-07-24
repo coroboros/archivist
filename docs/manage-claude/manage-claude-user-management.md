@@ -20,13 +20,13 @@ This page covers managing the people in your **Claude Enterprise** (claude.ai) o
 
 The Admin API is a single set of endpoints under `https://api.anthropic.com/v1/organizations/`. Claude Console and Claude Enterprise organizations authenticate with [different keys](./manage-claude-admin-api-keys.md) and each have access to a different subset of the endpoints:
 
-| Endpoints                                                                                                                                                                                                                                                                                             | Claude Console (Claude Platform)                             | Claude Enterprise (claude.ai)   |
-| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ | ------------------------------- |
-| [Members](#members) and [invites](#invites)                                                                                                                                                                                                                                                           | Available; see [Admin API](./manage-claude-admin-api.md) | **Beta** (this page)            |
-| [Groups](#groups)                                                                                                                                                                                                                                                                                     | Not available                                                | **Beta** (this page)            |
-| [Custom roles](#custom-roles)                                                                                                                                                                                                                                                                         | Not available                                                | **Beta**, read-only (this page) |
-| [Spend limits](./manage-claude-spend-limits-api.md)                                                                                                                                                                                                                                               | Not available                                                | Available                       |
-| [Workspaces](./manage-claude-workspaces.md), [API keys](./manage-claude-admin-api.md#api-keys), [usage and cost reports](./manage-claude-usage-cost-api.md), [rate limits](./manage-claude-rate-limits-api.md), and the other [Admin API](./manage-claude-admin-api.md) endpoints | Available                                                    | Not available                   |
+| Endpoints                                                                                                                                                                                                                                                                                                          | Claude Console (Claude Platform)                                       | Claude Enterprise (claude.ai)   |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------- | ------------------------------- |
+| [Members](#members) and [invites](#invites)                                                                                                                                                                                                                                                                        | Available; see the [Admin API guide](./manage-claude-admin-api.md) | **Beta** (this page)            |
+| [Groups](#groups)                                                                                                                                                                                                                                                                                                  | Not available                                                          | **Beta** (this page)            |
+| [Custom roles](#custom-roles)                                                                                                                                                                                                                                                                                      | Not available                                                          | **Beta**, read-only (this page) |
+| [Spend limits](./manage-claude-spend-limits-api.md)                                                                                                                                                                                                                                                            | Not available                                                          | Available                       |
+| [Workspaces](./manage-claude-workspaces.md), [API keys](./manage-claude-admin-api.md#api-keys), [usage and cost reports](./manage-claude-usage-cost-api.md), [rate limits](./manage-claude-rate-limits-api.md), and the other endpoints in the [Admin API guide](./manage-claude-admin-api.md) | Available                                                              | Not available                   |
 
 Members and invites are the same endpoints for both organization types; this page documents their Claude Enterprise behavior, including the Claude Enterprise [organization roles](#organization-roles). The group and custom-role endpoints exist only for Claude Enterprise.
 
@@ -556,6 +556,10 @@ On plans with a finite seat pool, yes: a `pending` invite holds a seat. Withdraw
 
 If your identity provider provisions users automatically (JIT or SCIM), invite creation returns 400. If it manages roles (advanced SSO or advanced SCIM provisioning), role updates return 400. If it manages membership (SCIM provisioning), member removals return 400. Reads work regardless.
 
+### What happens to an Admin API key when the person who created it leaves?
+
+The key keeps working. Admin API keys are scoped to the organization, not to individual users, and a key created in claude.ai does not expire. Removing the creator from the organization or deprovisioning them through your identity provider ends their own access, but not the keys they created. Downgrading their role does not change the keys either: each key stays active with its original scopes. When you offboard someone who created Admin API keys, delete those keys in the **Keys** section of [claude.ai > Organization settings > API](https://claude.ai/admin-settings/api-access) and create replacements.
+
 ## See also
 
 <CardGroup cols={2}>
@@ -563,8 +567,8 @@ If your identity provider provisions users automatically (JIT or SCIM), invite c
     Where your primary owner creates a scoped key and which scopes to select.
   </Card>
 
-  <Card title="Compliance API" href="./manage-claude-compliance-org-data.md">
-    Read organizations, users, roles, groups, and settings for audit and eDiscovery.
+  <Card title="Compliance API" href="./manage-claude-compliance-api.md">
+    Audit activity and retrieve or delete user content across your organization.
   </Card>
 
   <Card title="Analytics APIs" href="./manage-claude-analytics-api.md">
