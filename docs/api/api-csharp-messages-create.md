@@ -2455,13 +2455,17 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       Most capable model for cybersecurity and biology research
 
+    - `"claude-opus-5"ClaudeOpus5`
+
+      Powerful intelligence for long-running agents and coding
+
     - `"claude-opus-4-8"ClaudeOpus4_8`
 
-      Frontier intelligence for long-running agents and coding
+      Powerful intelligence for long-running agents and coding
 
     - `"claude-opus-4-7"ClaudeOpus4_7`
 
-      Frontier intelligence for long-running agents and coding
+      Powerful intelligence for long-running agents and coding
 
     - `"claude-mythos-preview"ClaudeMythosPreview`
 
@@ -2469,7 +2473,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `"claude-opus-4-6"ClaudeOpus4_6`
 
-      Frontier intelligence for long-running agents and coding
+      Powerful intelligence for long-running agents and coding
 
     - `"claude-sonnet-4-6"ClaudeSonnet4_6`
 
@@ -2485,11 +2489,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `"claude-opus-4-5"ClaudeOpus4_5`
 
-      Premium model combining maximum intelligence with practical performance
+      Powerful intelligence for long-running agents and coding
 
     - `"claude-opus-4-5-20251101"ClaudeOpus4_5_20251101`
 
-      Premium model combining maximum intelligence with practical performance
+      Powerful intelligence for long-running agents and coding
 
     - `"claude-sonnet-4-5"ClaudeSonnet4_5`
 
@@ -2501,11 +2505,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `"claude-opus-4-1"ClaudeOpus4_1`
 
-      Exceptional model for specialized complex tasks
+      Powerful intelligence for long-running agents and coding
 
     - `"claude-opus-4-1-20250805"ClaudeOpus4_1_20250805`
 
-      Exceptional model for specialized complex tasks
+      Powerful intelligence for long-running agents and coding
 
   - `JsonElement Role "assistant"constant`
 
@@ -2561,6 +2565,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
     * `"tool_use"`: the model invoked one or more tools
     * `"pause_turn"`: we paused a long-running turn. You may provide the response back as-is in a subsequent request to let the model continue.
     * `"refusal"`: when streaming classifiers intervene to handle potential policy violations
+    * `"model_context_window_exceeded"`: we exceeded the model's context window
 
     In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
@@ -2575,6 +2580,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
     - `"pause_turn"PauseTurn`
 
     - `"refusal"Refusal`
+
+    - `"model_context_window_exceeded"ModelContextWindowExceeded`
 
   - `required string? StopSequence`
 

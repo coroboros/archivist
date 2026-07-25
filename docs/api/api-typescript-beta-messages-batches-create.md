@@ -1082,19 +1082,109 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               Use this block to provide or update system-level instructions at a specific
               point in the conversation, rather than only via the top-level `system` parameter.
 
-              - `content: Array<BetaTextBlockParam>`
+              - `content: Array<BetaTextBlockParam | BetaRequestToolAdditionBlock | BetaRequestToolRemovalBlock>`
 
                 System instruction text blocks.
 
-                - `text: string`
+                - `BetaTextBlockParam`
 
-                - `type: "text"`
+                - `BetaRequestToolAdditionBlock`
 
-                - `cache_control?: BetaCacheControlEphemeral | null`
+                  Mid-conversation directive to surface a declared tool.
 
-                  Create a cache control breakpoint at this content block.
+                  `tool` references a tool (or MCP toolset) by name from the request's
+                  `tools`; it is offered to the model from this point in the
+                  conversation onward.
 
-                - `citations?: Array<BetaTextCitationParam> | null`
+                  - `tool: BetaToolChangeToolReference | BetaToolChangeMCPToolReference | BetaToolChangeMCPToolsetReference`
+
+                    Reference to a single tool the caller declared directly in
+                    `tools[]`. Does not accept the composed `{server}_{name}` form the
+                    server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+                    `mcp_toolset_reference` for those.
+
+                    - `BetaToolChangeToolReference`
+
+                      Reference to a single tool the caller declared directly in
+                      `tools[]`. Does not accept the composed `{server}_{name}` form the
+                      server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+                      `mcp_toolset_reference` for those.
+
+                      - `name: string`
+
+                      - `type: "tool_reference"`
+
+                        - `"tool_reference"`
+
+                    - `BetaToolChangeMCPToolReference`
+
+                      Reference to a single MCP tool by its server and remote name — the
+                      same `server_name`/`name` pair `mcp_tool_use` carries.
+
+                      - `name: string`
+
+                      - `server_name: string`
+
+                      - `type: "mcp_tool_reference"`
+
+                        - `"mcp_tool_reference"`
+
+                    - `BetaToolChangeMCPToolsetReference`
+
+                      Reference to every tool in the named MCP server's toolset.
+
+                      - `server_name: string`
+
+                      - `type: "mcp_toolset_reference"`
+
+                        - `"mcp_toolset_reference"`
+
+                  - `type: "tool_addition"`
+
+                    - `"tool_addition"`
+
+                  - `cache_control?: BetaCacheControlEphemeral | null`
+
+                    Create a cache control breakpoint at this content block.
+
+                - `BetaRequestToolRemovalBlock`
+
+                  Mid-conversation directive to withdraw a tool.
+
+                  `tool` references a tool (or MCP toolset) by name from the request's
+                  `tools`; it is no longer offered to the model from this point in the
+                  conversation onward.
+
+                  - `tool: BetaToolChangeToolReference | BetaToolChangeMCPToolReference | BetaToolChangeMCPToolsetReference`
+
+                    Reference to a single tool the caller declared directly in
+                    `tools[]`. Does not accept the composed `{server}_{name}` form the
+                    server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+                    `mcp_toolset_reference` for those.
+
+                    - `BetaToolChangeToolReference`
+
+                      Reference to a single tool the caller declared directly in
+                      `tools[]`. Does not accept the composed `{server}_{name}` form the
+                      server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+                      `mcp_toolset_reference` for those.
+
+                    - `BetaToolChangeMCPToolReference`
+
+                      Reference to a single MCP tool by its server and remote name — the
+                      same `server_name`/`name` pair `mcp_tool_use` carries.
+
+                    - `BetaToolChangeMCPToolsetReference`
+
+                      Reference to every tool in the named MCP server's toolset.
+
+                  - `type: "tool_removal"`
+
+                    - `"tool_removal"`
+
+                  - `cache_control?: BetaCacheControlEphemeral | null`
+
+                    Create a cache control breakpoint at this content block.
 
               - `type: "mid_conv_system"`
 
@@ -1103,6 +1193,22 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               - `cache_control?: BetaCacheControlEphemeral | null`
 
                 Create a cache control breakpoint at this content block.
+
+            - `BetaRequestToolAdditionBlock`
+
+              Mid-conversation directive to surface a declared tool.
+
+              `tool` references a tool (or MCP toolset) by name from the request's
+              `tools`; it is offered to the model from this point in the
+              conversation onward.
+
+            - `BetaRequestToolRemovalBlock`
+
+              Mid-conversation directive to withdraw a tool.
+
+              `tool` references a tool (or MCP toolset) by name from the request's
+              `tools`; it is no longer offered to the model from this point in the
+              conversation onward.
 
             - `BetaFallbackBlockParam`
 
@@ -1130,7 +1236,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-                  - `"claude-sonnet-5" | "claude-fable-5" | "claude-mythos-5" | 13 more`
+                  - `"claude-sonnet-5" | "claude-fable-5" | "claude-mythos-5" | 14 more`
 
                     - `"claude-sonnet-5"`
 
@@ -1144,13 +1250,17 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                       Most capable model for cybersecurity and biology research
 
+                    - `"claude-opus-5"`
+
+                      Powerful intelligence for long-running agents and coding
+
                     - `"claude-opus-4-8"`
 
-                      Frontier intelligence for long-running agents and coding
+                      Powerful intelligence for long-running agents and coding
 
                     - `"claude-opus-4-7"`
 
-                      Frontier intelligence for long-running agents and coding
+                      Powerful intelligence for long-running agents and coding
 
                     - `"claude-mythos-preview"`
 
@@ -1158,7 +1268,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     - `"claude-opus-4-6"`
 
-                      Frontier intelligence for long-running agents and coding
+                      Powerful intelligence for long-running agents and coding
 
                     - `"claude-sonnet-4-6"`
 
@@ -1174,11 +1284,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     - `"claude-opus-4-5"`
 
-                      Premium model combining maximum intelligence with practical performance
+                      Powerful intelligence for long-running agents and coding
 
                     - `"claude-opus-4-5-20251101"`
 
-                      Premium model combining maximum intelligence with practical performance
+                      Powerful intelligence for long-running agents and coding
 
                     - `"claude-sonnet-4-5"`
 
@@ -1190,11 +1300,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     - `"claude-opus-4-1"`
 
-                      Exceptional model for specialized complex tasks
+                      Powerful intelligence for long-running agents and coding
 
                     - `"claude-opus-4-1-20250805"`
 
-                      Exceptional model for specialized complex tasks
+                      Powerful intelligence for long-running agents and coding
 
                   - `(string & {})`
 
@@ -1387,7 +1497,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           The `id` (`msg_...`) from this client's previous /v1/messages response. The server compares that request's prompt fingerprint against this one and returns `diagnostics.cache_miss_reason` when the prompt-cache prefix could not be reused. Pass `null` on the first turn to opt in without a prior message to compare.
 
-      - `fallback_credit_token?: string | null`
+      - `fallback_credit_token?: string | BetaFallbackCreditTokenParam | null`
 
         The `fallback_credit_token` from a prior refusal's `stop_details`.
 
@@ -1410,115 +1520,145 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
         When the appended-assistant form is used on a model that otherwise disallows
         assistant-turn prefill, this token also authorizes that one prefill.
 
-      - `fallbacks?: Array<BetaFallbackParam> | null`
+        - `string`
 
-        Opt-in server-side retry on one or more substitute models when the requested model declines for policy reasons. Tried in order: if the first entry also declines, the second is tried, and so on.
+        - `BetaFallbackCreditTokenParam`
 
-        - `model: Model`
+          Object form of `fallback_credit_token`: the token plus a redemption
+          mode.
 
-          The model that will complete your prompt.
+          Requires `anthropic-beta: fallback-credit-2026-07-01`; without that
+          header the field accepts the bare string only. The bare string and the
+          mode-less object are equivalent (both select `strict`), so wrapping
+          an existing token changes nothing by itself.
 
-          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+          - `token: string`
 
-        - `max_tokens?: number | null`
+            The opaque `fallback_credit_token` from a prior refusal's `stop_details` — the same string the bare-string form carries.
 
-        - `output_config?: BetaOutputConfig | null`
+          - `mode?: "strict" | "best_effort"`
 
-          - `effort?: "low" | "medium" | "high" | 2 more | null`
+            How a failing token affects the retry. `strict` (the default, and the bare-string behavior): a failing redemption is a 400 and the retry is not served. `best_effort`: the retry is served either way — a token-layer failure no longer rejects the request; the retry proceeds at normal price and the outcome is reported on the response's `usage.fallback_credit`. Two failures stay hard in both modes: a malformed token, and combining `fallback_credit_token` with `fallbacks`.
 
-            All possible effort levels.
+            - `"strict"`
 
-            - `"low"`
+            - `"best_effort"`
 
-            - `"medium"`
+      - `fallbacks?: BetaFallbacksParam | null`
 
-            - `"high"`
+        Opt-in server-side retry on one or more substitute models when the requested model declines for policy reasons. Tried in order: if the first entry also declines, the second is tried, and so on. The string "default" requests the requested model's server-defined default fallback configuration.
 
-            - `"xhigh"`
+        - `Array<BetaFallbackParam>`
 
-            - `"max"`
+          - `model: Model`
 
-          - `format?: BetaJSONOutputFormat | null`
+            The model that will complete your prompt.
 
-            A schema to specify Claude's output format in responses. See [structured outputs](../build-with-claude/build-with-claude-structured-outputs.md)
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-            - `schema: Record<string, unknown>`
+          - `max_tokens?: number | null`
 
-              The JSON schema of the format
+          - `output_config?: BetaOutputConfig | null`
 
-            - `type: "json_schema"`
+            - `effort?: "low" | "medium" | "high" | 2 more | null`
 
-              - `"json_schema"`
+              All possible effort levels.
 
-          - `task_budget?: BetaTokenTaskBudget | null`
+              - `"low"`
 
-            User-configurable total token budget across contexts.
+              - `"medium"`
 
-            - `total: number`
+              - `"high"`
 
-              Total token budget across all contexts in the session.
+              - `"xhigh"`
 
-            - `type: "tokens"`
+              - `"max"`
 
-              The budget type. Currently only 'tokens' is supported.
+            - `format?: BetaJSONOutputFormat | null`
 
-              - `"tokens"`
+              A schema to specify Claude's output format in responses. See [structured outputs](../build-with-claude/build-with-claude-structured-outputs.md)
 
-            - `remaining?: number | null`
+              - `schema: Record<string, unknown>`
 
-              Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
+                The JSON schema of the format
 
-        - `speed?: "standard" | "fast" | null`
+              - `type: "json_schema"`
 
-          Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+                - `"json_schema"`
 
-          - `"standard"`
+            - `task_budget?: BetaTokenTaskBudget | null`
 
-          - `"fast"`
+              User-configurable total token budget across contexts.
 
-        - `thinking?: BetaThinkingConfigEnabled | BetaThinkingConfigDisabled | BetaThinkingConfigAdaptive | null`
+              - `total: number`
 
-          - `BetaThinkingConfigEnabled`
+                Total token budget across all contexts in the session.
 
-            - `budget_tokens: number`
+              - `type: "tokens"`
 
-              Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
+                The budget type. Currently only 'tokens' is supported.
 
-              Must be ≥1024 and less than `max_tokens`.
+                - `"tokens"`
 
-              See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md) for details.
+              - `remaining?: number | null`
 
-            - `type: "enabled"`
+                Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
-              - `"enabled"`
+          - `speed?: "standard" | "fast" | null`
 
-            - `display?: "summarized" | "omitted" | null`
+            Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-              Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+            - `"standard"`
 
-              - `"summarized"`
+            - `"fast"`
 
-              - `"omitted"`
+          - `thinking?: BetaThinkingConfigEnabled | BetaThinkingConfigDisabled | BetaThinkingConfigAdaptive | null`
 
-          - `BetaThinkingConfigDisabled`
+            - `BetaThinkingConfigEnabled`
 
-            - `type: "disabled"`
+              - `budget_tokens: number`
 
-              - `"disabled"`
+                Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
 
-          - `BetaThinkingConfigAdaptive`
+                Must be ≥1024 and less than `max_tokens`.
 
-            - `type: "adaptive"`
+                See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md) for details.
 
-              - `"adaptive"`
+              - `type: "enabled"`
 
-            - `display?: "summarized" | "omitted" | null`
+                - `"enabled"`
 
-              Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+              - `display?: "summarized" | "omitted" | null`
 
-              - `"summarized"`
+                Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
-              - `"omitted"`
+                - `"summarized"`
+
+                - `"omitted"`
+
+            - `BetaThinkingConfigDisabled`
+
+              - `type: "disabled"`
+
+                - `"disabled"`
+
+            - `BetaThinkingConfigAdaptive`
+
+              - `type: "adaptive"`
+
+                - `"adaptive"`
+
+              - `display?: "summarized" | "omitted" | null`
+
+                Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+
+                - `"summarized"`
+
+                - `"omitted"`
+
+        - `"default"`
+
+          - `"default"`
 
       - `inference_geo?: string | null`
 
@@ -3005,7 +3145,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 27 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 29 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -3063,7 +3203,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
       - `"server-side-fallback-2026-06-01"`
 
+      - `"server-side-fallback-2026-07-01"`
+
       - `"fallback-credit-2026-06-01"`
+
+      - `"fallback-credit-2026-07-01"`
 
       - `"agent-memory-2026-07-22"`
 

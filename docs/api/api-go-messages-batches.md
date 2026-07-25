@@ -982,13 +982,17 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             Most capable model for cybersecurity and biology research
 
+          - `const ModelClaudeOpus5 Model = "claude-opus-5"`
+
+            Powerful intelligence for long-running agents and coding
+
           - `const ModelClaudeOpus4_8 Model = "claude-opus-4-8"`
 
-            Frontier intelligence for long-running agents and coding
+            Powerful intelligence for long-running agents and coding
 
           - `const ModelClaudeOpus4_7 Model = "claude-opus-4-7"`
 
-            Frontier intelligence for long-running agents and coding
+            Powerful intelligence for long-running agents and coding
 
           - `const ModelClaudeMythosPreview Model = "claude-mythos-preview"`
 
@@ -996,7 +1000,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           - `const ModelClaudeOpus4_6 Model = "claude-opus-4-6"`
 
-            Frontier intelligence for long-running agents and coding
+            Powerful intelligence for long-running agents and coding
 
           - `const ModelClaudeSonnet4_6 Model = "claude-sonnet-4-6"`
 
@@ -1012,11 +1016,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           - `const ModelClaudeOpus4_5 Model = "claude-opus-4-5"`
 
-            Premium model combining maximum intelligence with practical performance
+            Powerful intelligence for long-running agents and coding
 
           - `const ModelClaudeOpus4_5_20251101 Model = "claude-opus-4-5-20251101"`
 
-            Premium model combining maximum intelligence with practical performance
+            Powerful intelligence for long-running agents and coding
 
           - `const ModelClaudeSonnet4_5 Model = "claude-sonnet-4-5"`
 
@@ -1028,11 +1032,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           - `const ModelClaudeOpus4_1 Model = "claude-opus-4-1"`
 
-            Exceptional model for specialized complex tasks
+            Powerful intelligence for long-running agents and coding
 
           - `const ModelClaudeOpus4_1_20250805 Model = "claude-opus-4-1-20250805"`
 
-            Exceptional model for specialized complex tasks
+            Powerful intelligence for long-running agents and coding
 
         - `string`
 
@@ -3684,13 +3688,17 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               Most capable model for cybersecurity and biology research
 
+            - `const ModelClaudeOpus5 Model = "claude-opus-5"`
+
+              Powerful intelligence for long-running agents and coding
+
             - `const ModelClaudeOpus4_8 Model = "claude-opus-4-8"`
 
-              Frontier intelligence for long-running agents and coding
+              Powerful intelligence for long-running agents and coding
 
             - `const ModelClaudeOpus4_7 Model = "claude-opus-4-7"`
 
-              Frontier intelligence for long-running agents and coding
+              Powerful intelligence for long-running agents and coding
 
             - `const ModelClaudeMythosPreview Model = "claude-mythos-preview"`
 
@@ -3698,7 +3706,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `const ModelClaudeOpus4_6 Model = "claude-opus-4-6"`
 
-              Frontier intelligence for long-running agents and coding
+              Powerful intelligence for long-running agents and coding
 
             - `const ModelClaudeSonnet4_6 Model = "claude-sonnet-4-6"`
 
@@ -3714,11 +3722,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `const ModelClaudeOpus4_5 Model = "claude-opus-4-5"`
 
-              Premium model combining maximum intelligence with practical performance
+              Powerful intelligence for long-running agents and coding
 
             - `const ModelClaudeOpus4_5_20251101 Model = "claude-opus-4-5-20251101"`
 
-              Premium model combining maximum intelligence with practical performance
+              Powerful intelligence for long-running agents and coding
 
             - `const ModelClaudeSonnet4_5 Model = "claude-sonnet-4-5"`
 
@@ -3730,11 +3738,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `const ModelClaudeOpus4_1 Model = "claude-opus-4-1"`
 
-              Exceptional model for specialized complex tasks
+              Powerful intelligence for long-running agents and coding
 
             - `const ModelClaudeOpus4_1_20250805 Model = "claude-opus-4-1-20250805"`
 
-              Exceptional model for specialized complex tasks
+              Powerful intelligence for long-running agents and coding
 
           - `string`
 
@@ -3796,6 +3804,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
           * `"tool_use"`: the model invoked one or more tools
           * `"pause_turn"`: we paused a long-running turn. You may provide the response back as-is in a subsequent request to let the model continue.
           * `"refusal"`: when streaming classifiers intervene to handle potential policy violations
+          * `"model_context_window_exceeded"`: we exceeded the model's context window
 
           In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
@@ -3810,6 +3819,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
           - `const StopReasonPauseTurn StopReason = "pause_turn"`
 
           - `const StopReasonRefusal StopReason = "refusal"`
+
+          - `const StopReasonModelContextWindowExceeded StopReason = "model_context_window_exceeded"`
 
         - `StopSequence string`
 
@@ -4982,13 +4993,17 @@ func main() {
 
               Most capable model for cybersecurity and biology research
 
+            - `const ModelClaudeOpus5 Model = "claude-opus-5"`
+
+              Powerful intelligence for long-running agents and coding
+
             - `const ModelClaudeOpus4_8 Model = "claude-opus-4-8"`
 
-              Frontier intelligence for long-running agents and coding
+              Powerful intelligence for long-running agents and coding
 
             - `const ModelClaudeOpus4_7 Model = "claude-opus-4-7"`
 
-              Frontier intelligence for long-running agents and coding
+              Powerful intelligence for long-running agents and coding
 
             - `const ModelClaudeMythosPreview Model = "claude-mythos-preview"`
 
@@ -4996,7 +5011,7 @@ func main() {
 
             - `const ModelClaudeOpus4_6 Model = "claude-opus-4-6"`
 
-              Frontier intelligence for long-running agents and coding
+              Powerful intelligence for long-running agents and coding
 
             - `const ModelClaudeSonnet4_6 Model = "claude-sonnet-4-6"`
 
@@ -5012,11 +5027,11 @@ func main() {
 
             - `const ModelClaudeOpus4_5 Model = "claude-opus-4-5"`
 
-              Premium model combining maximum intelligence with practical performance
+              Powerful intelligence for long-running agents and coding
 
             - `const ModelClaudeOpus4_5_20251101 Model = "claude-opus-4-5-20251101"`
 
-              Premium model combining maximum intelligence with practical performance
+              Powerful intelligence for long-running agents and coding
 
             - `const ModelClaudeSonnet4_5 Model = "claude-sonnet-4-5"`
 
@@ -5028,11 +5043,11 @@ func main() {
 
             - `const ModelClaudeOpus4_1 Model = "claude-opus-4-1"`
 
-              Exceptional model for specialized complex tasks
+              Powerful intelligence for long-running agents and coding
 
             - `const ModelClaudeOpus4_1_20250805 Model = "claude-opus-4-1-20250805"`
 
-              Exceptional model for specialized complex tasks
+              Powerful intelligence for long-running agents and coding
 
           - `string`
 
@@ -5094,6 +5109,7 @@ func main() {
           * `"tool_use"`: the model invoked one or more tools
           * `"pause_turn"`: we paused a long-running turn. You may provide the response back as-is in a subsequent request to let the model continue.
           * `"refusal"`: when streaming classifiers intervene to handle potential policy violations
+          * `"model_context_window_exceeded"`: we exceeded the model's context window
 
           In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
@@ -5108,6 +5124,8 @@ func main() {
           - `const StopReasonPauseTurn StopReason = "pause_turn"`
 
           - `const StopReasonRefusal StopReason = "refusal"`
+
+          - `const StopReasonModelContextWindowExceeded StopReason = "model_context_window_exceeded"`
 
         - `StopSequence string`
 
@@ -6060,13 +6078,17 @@ func main() {
 
             Most capable model for cybersecurity and biology research
 
+          - `const ModelClaudeOpus5 Model = "claude-opus-5"`
+
+            Powerful intelligence for long-running agents and coding
+
           - `const ModelClaudeOpus4_8 Model = "claude-opus-4-8"`
 
-            Frontier intelligence for long-running agents and coding
+            Powerful intelligence for long-running agents and coding
 
           - `const ModelClaudeOpus4_7 Model = "claude-opus-4-7"`
 
-            Frontier intelligence for long-running agents and coding
+            Powerful intelligence for long-running agents and coding
 
           - `const ModelClaudeMythosPreview Model = "claude-mythos-preview"`
 
@@ -6074,7 +6096,7 @@ func main() {
 
           - `const ModelClaudeOpus4_6 Model = "claude-opus-4-6"`
 
-            Frontier intelligence for long-running agents and coding
+            Powerful intelligence for long-running agents and coding
 
           - `const ModelClaudeSonnet4_6 Model = "claude-sonnet-4-6"`
 
@@ -6090,11 +6112,11 @@ func main() {
 
           - `const ModelClaudeOpus4_5 Model = "claude-opus-4-5"`
 
-            Premium model combining maximum intelligence with practical performance
+            Powerful intelligence for long-running agents and coding
 
           - `const ModelClaudeOpus4_5_20251101 Model = "claude-opus-4-5-20251101"`
 
-            Premium model combining maximum intelligence with practical performance
+            Powerful intelligence for long-running agents and coding
 
           - `const ModelClaudeSonnet4_5 Model = "claude-sonnet-4-5"`
 
@@ -6106,11 +6128,11 @@ func main() {
 
           - `const ModelClaudeOpus4_1 Model = "claude-opus-4-1"`
 
-            Exceptional model for specialized complex tasks
+            Powerful intelligence for long-running agents and coding
 
           - `const ModelClaudeOpus4_1_20250805 Model = "claude-opus-4-1-20250805"`
 
-            Exceptional model for specialized complex tasks
+            Powerful intelligence for long-running agents and coding
 
         - `string`
 
@@ -6172,6 +6194,7 @@ func main() {
         * `"tool_use"`: the model invoked one or more tools
         * `"pause_turn"`: we paused a long-running turn. You may provide the response back as-is in a subsequent request to let the model continue.
         * `"refusal"`: when streaming classifiers intervene to handle potential policy violations
+        * `"model_context_window_exceeded"`: we exceeded the model's context window
 
         In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
@@ -6186,6 +6209,8 @@ func main() {
         - `const StopReasonPauseTurn StopReason = "pause_turn"`
 
         - `const StopReasonRefusal StopReason = "refusal"`
+
+        - `const StopReasonModelContextWindowExceeded StopReason = "model_context_window_exceeded"`
 
       - `StopSequence string`
 
@@ -7100,13 +7125,17 @@ func main() {
 
           Most capable model for cybersecurity and biology research
 
+        - `const ModelClaudeOpus5 Model = "claude-opus-5"`
+
+          Powerful intelligence for long-running agents and coding
+
         - `const ModelClaudeOpus4_8 Model = "claude-opus-4-8"`
 
-          Frontier intelligence for long-running agents and coding
+          Powerful intelligence for long-running agents and coding
 
         - `const ModelClaudeOpus4_7 Model = "claude-opus-4-7"`
 
-          Frontier intelligence for long-running agents and coding
+          Powerful intelligence for long-running agents and coding
 
         - `const ModelClaudeMythosPreview Model = "claude-mythos-preview"`
 
@@ -7114,7 +7143,7 @@ func main() {
 
         - `const ModelClaudeOpus4_6 Model = "claude-opus-4-6"`
 
-          Frontier intelligence for long-running agents and coding
+          Powerful intelligence for long-running agents and coding
 
         - `const ModelClaudeSonnet4_6 Model = "claude-sonnet-4-6"`
 
@@ -7130,11 +7159,11 @@ func main() {
 
         - `const ModelClaudeOpus4_5 Model = "claude-opus-4-5"`
 
-          Premium model combining maximum intelligence with practical performance
+          Powerful intelligence for long-running agents and coding
 
         - `const ModelClaudeOpus4_5_20251101 Model = "claude-opus-4-5-20251101"`
 
-          Premium model combining maximum intelligence with practical performance
+          Powerful intelligence for long-running agents and coding
 
         - `const ModelClaudeSonnet4_5 Model = "claude-sonnet-4-5"`
 
@@ -7146,11 +7175,11 @@ func main() {
 
         - `const ModelClaudeOpus4_1 Model = "claude-opus-4-1"`
 
-          Exceptional model for specialized complex tasks
+          Powerful intelligence for long-running agents and coding
 
         - `const ModelClaudeOpus4_1_20250805 Model = "claude-opus-4-1-20250805"`
 
-          Exceptional model for specialized complex tasks
+          Powerful intelligence for long-running agents and coding
 
       - `string`
 
@@ -7212,6 +7241,7 @@ func main() {
       * `"tool_use"`: the model invoked one or more tools
       * `"pause_turn"`: we paused a long-running turn. You may provide the response back as-is in a subsequent request to let the model continue.
       * `"refusal"`: when streaming classifiers intervene to handle potential policy violations
+      * `"model_context_window_exceeded"`: we exceeded the model's context window
 
       In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
@@ -7226,6 +7256,8 @@ func main() {
       - `const StopReasonPauseTurn StopReason = "pause_turn"`
 
       - `const StopReasonRefusal StopReason = "refusal"`
+
+      - `const StopReasonModelContextWindowExceeded StopReason = "model_context_window_exceeded"`
 
     - `StopSequence string`
 

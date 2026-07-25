@@ -1080,19 +1080,109 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               Use this block to provide or update system-level instructions at a specific
               point in the conversation, rather than only via the top-level `system` parameter.
 
-              - `Content []BetaTextBlockParamResp`
+              - `Content []BetaMidConversationSystemBlockParamContentUnionResp`
 
                 System instruction text blocks.
 
-                - `Text string`
+                - `type BetaTextBlockParamResp struct{…}`
 
-                - `Type Text`
+                - `type BetaRequestToolAdditionBlock struct{…}`
 
-                - `CacheControl BetaCacheControlEphemeral`
+                  Mid-conversation directive to surface a declared tool.
 
-                  Create a cache control breakpoint at this content block.
+                  `tool` references a tool (or MCP toolset) by name from the request's
+                  `tools`; it is offered to the model from this point in the
+                  conversation onward.
 
-                - `Citations []BetaTextCitationParamUnionResp`
+                  - `Tool BetaRequestToolAdditionBlockToolUnion`
+
+                    Reference to a single tool the caller declared directly in
+                    `tools[]`. Does not accept the composed `{server}_{name}` form the
+                    server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+                    `mcp_toolset_reference` for those.
+
+                    - `type BetaToolChangeToolReference struct{…}`
+
+                      Reference to a single tool the caller declared directly in
+                      `tools[]`. Does not accept the composed `{server}_{name}` form the
+                      server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+                      `mcp_toolset_reference` for those.
+
+                      - `Name string`
+
+                      - `Type ToolReference`
+
+                        - `const ToolReferenceToolReference ToolReference = "tool_reference"`
+
+                    - `type BetaToolChangeMCPToolReference struct{…}`
+
+                      Reference to a single MCP tool by its server and remote name — the
+                      same `server_name`/`name` pair `mcp_tool_use` carries.
+
+                      - `Name string`
+
+                      - `ServerName string`
+
+                      - `Type MCPToolReference`
+
+                        - `const MCPToolReferenceMCPToolReference MCPToolReference = "mcp_tool_reference"`
+
+                    - `type BetaToolChangeMCPToolsetReference struct{…}`
+
+                      Reference to every tool in the named MCP server's toolset.
+
+                      - `ServerName string`
+
+                      - `Type MCPToolsetReference`
+
+                        - `const MCPToolsetReferenceMCPToolsetReference MCPToolsetReference = "mcp_toolset_reference"`
+
+                  - `Type ToolAddition`
+
+                    - `const ToolAdditionToolAddition ToolAddition = "tool_addition"`
+
+                  - `CacheControl BetaCacheControlEphemeral`
+
+                    Create a cache control breakpoint at this content block.
+
+                - `type BetaRequestToolRemovalBlock struct{…}`
+
+                  Mid-conversation directive to withdraw a tool.
+
+                  `tool` references a tool (or MCP toolset) by name from the request's
+                  `tools`; it is no longer offered to the model from this point in the
+                  conversation onward.
+
+                  - `Tool BetaRequestToolRemovalBlockToolUnion`
+
+                    Reference to a single tool the caller declared directly in
+                    `tools[]`. Does not accept the composed `{server}_{name}` form the
+                    server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+                    `mcp_toolset_reference` for those.
+
+                    - `type BetaToolChangeToolReference struct{…}`
+
+                      Reference to a single tool the caller declared directly in
+                      `tools[]`. Does not accept the composed `{server}_{name}` form the
+                      server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+                      `mcp_toolset_reference` for those.
+
+                    - `type BetaToolChangeMCPToolReference struct{…}`
+
+                      Reference to a single MCP tool by its server and remote name — the
+                      same `server_name`/`name` pair `mcp_tool_use` carries.
+
+                    - `type BetaToolChangeMCPToolsetReference struct{…}`
+
+                      Reference to every tool in the named MCP server's toolset.
+
+                  - `Type ToolRemoval`
+
+                    - `const ToolRemovalToolRemoval ToolRemoval = "tool_removal"`
+
+                  - `CacheControl BetaCacheControlEphemeral`
+
+                    Create a cache control breakpoint at this content block.
 
               - `Type MidConvSystem`
 
@@ -1101,6 +1191,22 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               - `CacheControl BetaCacheControlEphemeral`
 
                 Create a cache control breakpoint at this content block.
+
+            - `type BetaRequestToolAdditionBlock struct{…}`
+
+              Mid-conversation directive to surface a declared tool.
+
+              `tool` references a tool (or MCP toolset) by name from the request's
+              `tools`; it is offered to the model from this point in the
+              conversation onward.
+
+            - `type BetaRequestToolRemovalBlock struct{…}`
+
+              Mid-conversation directive to withdraw a tool.
+
+              `tool` references a tool (or MCP toolset) by name from the request's
+              `tools`; it is no longer offered to the model from this point in the
+              conversation onward.
 
             - `type BetaFallbackBlockParamResp struct{…}`
 
@@ -1146,13 +1252,17 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                       Most capable model for cybersecurity and biology research
 
+                    - `const ModelClaudeOpus5 Model = "claude-opus-5"`
+
+                      Powerful intelligence for long-running agents and coding
+
                     - `const ModelClaudeOpus4_8 Model = "claude-opus-4-8"`
 
-                      Frontier intelligence for long-running agents and coding
+                      Powerful intelligence for long-running agents and coding
 
                     - `const ModelClaudeOpus4_7 Model = "claude-opus-4-7"`
 
-                      Frontier intelligence for long-running agents and coding
+                      Powerful intelligence for long-running agents and coding
 
                     - `const ModelClaudeMythosPreview Model = "claude-mythos-preview"`
 
@@ -1160,7 +1270,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     - `const ModelClaudeOpus4_6 Model = "claude-opus-4-6"`
 
-                      Frontier intelligence for long-running agents and coding
+                      Powerful intelligence for long-running agents and coding
 
                     - `const ModelClaudeSonnet4_6 Model = "claude-sonnet-4-6"`
 
@@ -1176,11 +1286,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     - `const ModelClaudeOpus4_5 Model = "claude-opus-4-5"`
 
-                      Premium model combining maximum intelligence with practical performance
+                      Powerful intelligence for long-running agents and coding
 
                     - `const ModelClaudeOpus4_5_20251101 Model = "claude-opus-4-5-20251101"`
 
-                      Premium model combining maximum intelligence with practical performance
+                      Powerful intelligence for long-running agents and coding
 
                     - `const ModelClaudeSonnet4_5 Model = "claude-sonnet-4-5"`
 
@@ -1192,11 +1302,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     - `const ModelClaudeOpus4_1 Model = "claude-opus-4-1"`
 
-                      Exceptional model for specialized complex tasks
+                      Powerful intelligence for long-running agents and coding
 
                     - `const ModelClaudeOpus4_1_20250805 Model = "claude-opus-4-1-20250805"`
 
-                      Exceptional model for specialized complex tasks
+                      Powerful intelligence for long-running agents and coding
 
                   - `string`
 
@@ -1389,7 +1499,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           The `id` (`msg_...`) from this client's previous /v1/messages response. The server compares that request's prompt fingerprint against this one and returns `diagnostics.cache_miss_reason` when the prompt-cache prefix could not be reused. Pass `null` on the first turn to opt in without a prior message to compare.
 
-      - `FallbackCreditToken string`
+      - `FallbackCreditToken BetaMessageBatchNewParamsRequestParamsFallbackCreditTokenUnion`
 
         The `fallback_credit_token` from a prior refusal's `stop_details`.
 
@@ -1412,115 +1522,145 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
         When the appended-assistant form is used on a model that otherwise disallows
         assistant-turn prefill, this token also authorizes that one prefill.
 
-      - `Fallbacks []BetaFallbackParamResp`
+        - `string`
 
-        Opt-in server-side retry on one or more substitute models when the requested model declines for policy reasons. Tried in order: if the first entry also declines, the second is tried, and so on.
+        - `type BetaFallbackCreditTokenParamResp struct{…}`
 
-        - `Model Model`
+          Object form of `fallback_credit_token`: the token plus a redemption
+          mode.
 
-          The model that will complete your prompt.
+          Requires `anthropic-beta: fallback-credit-2026-07-01`; without that
+          header the field accepts the bare string only. The bare string and the
+          mode-less object are equivalent (both select `strict`), so wrapping
+          an existing token changes nothing by itself.
 
-          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+          - `Token string`
 
-        - `MaxTokens int64`
+            The opaque `fallback_credit_token` from a prior refusal's `stop_details` — the same string the bare-string form carries.
 
-        - `OutputConfig BetaOutputConfig`
+          - `Mode BetaFallbackCreditTokenParamMode`
 
-          - `Effort BetaOutputConfigEffort`
+            How a failing token affects the retry. `strict` (the default, and the bare-string behavior): a failing redemption is a 400 and the retry is not served. `best_effort`: the retry is served either way — a token-layer failure no longer rejects the request; the retry proceeds at normal price and the outcome is reported on the response's `usage.fallback_credit`. Two failures stay hard in both modes: a malformed token, and combining `fallback_credit_token` with `fallbacks`.
 
-            All possible effort levels.
+            - `const BetaFallbackCreditTokenParamModeStrict BetaFallbackCreditTokenParamMode = "strict"`
 
-            - `const BetaOutputConfigEffortLow BetaOutputConfigEffort = "low"`
+            - `const BetaFallbackCreditTokenParamModeBestEffort BetaFallbackCreditTokenParamMode = "best_effort"`
 
-            - `const BetaOutputConfigEffortMedium BetaOutputConfigEffort = "medium"`
+      - `Fallbacks BetaFallbacksParamUnionResp`
 
-            - `const BetaOutputConfigEffortHigh BetaOutputConfigEffort = "high"`
+        Opt-in server-side retry on one or more substitute models when the requested model declines for policy reasons. Tried in order: if the first entry also declines, the second is tried, and so on. The string "default" requests the requested model's server-defined default fallback configuration.
 
-            - `const BetaOutputConfigEffortXhigh BetaOutputConfigEffort = "xhigh"`
+        - `[]BetaFallbackParamResp`
 
-            - `const BetaOutputConfigEffortMax BetaOutputConfigEffort = "max"`
+          - `Model Model`
 
-          - `Format BetaJSONOutputFormat`
+            The model that will complete your prompt.
 
-            A schema to specify Claude's output format in responses. See [structured outputs](../build-with-claude/build-with-claude-structured-outputs.md)
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-            - `Schema map[string, any]`
+          - `MaxTokens int64`
 
-              The JSON schema of the format
+          - `OutputConfig BetaOutputConfig`
 
-            - `Type JSONSchema`
+            - `Effort BetaOutputConfigEffort`
 
-              - `const JSONSchemaJSONSchema JSONSchema = "json_schema"`
+              All possible effort levels.
 
-          - `TaskBudget BetaTokenTaskBudget`
+              - `const BetaOutputConfigEffortLow BetaOutputConfigEffort = "low"`
 
-            User-configurable total token budget across contexts.
+              - `const BetaOutputConfigEffortMedium BetaOutputConfigEffort = "medium"`
 
-            - `Total int64`
+              - `const BetaOutputConfigEffortHigh BetaOutputConfigEffort = "high"`
 
-              Total token budget across all contexts in the session.
+              - `const BetaOutputConfigEffortXhigh BetaOutputConfigEffort = "xhigh"`
 
-            - `Type Tokens`
+              - `const BetaOutputConfigEffortMax BetaOutputConfigEffort = "max"`
 
-              The budget type. Currently only 'tokens' is supported.
+            - `Format BetaJSONOutputFormat`
 
-              - `const TokensTokens Tokens = "tokens"`
+              A schema to specify Claude's output format in responses. See [structured outputs](../build-with-claude/build-with-claude-structured-outputs.md)
 
-            - `Remaining int64`
+              - `Schema map[string, any]`
 
-              Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
+                The JSON schema of the format
 
-        - `Speed BetaFallbackParamSpeed`
+              - `Type JSONSchema`
 
-          Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+                - `const JSONSchemaJSONSchema JSONSchema = "json_schema"`
 
-          - `const BetaFallbackParamSpeedStandard BetaFallbackParamSpeed = "standard"`
+            - `TaskBudget BetaTokenTaskBudget`
 
-          - `const BetaFallbackParamSpeedFast BetaFallbackParamSpeed = "fast"`
+              User-configurable total token budget across contexts.
 
-        - `Thinking BetaFallbackParamThinkingUnionResp`
+              - `Total int64`
 
-          - `type BetaThinkingConfigEnabled struct{…}`
+                Total token budget across all contexts in the session.
 
-            - `BudgetTokens int64`
+              - `Type Tokens`
 
-              Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
+                The budget type. Currently only 'tokens' is supported.
 
-              Must be ≥1024 and less than `max_tokens`.
+                - `const TokensTokens Tokens = "tokens"`
 
-              See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md) for details.
+              - `Remaining int64`
 
-            - `Type Enabled`
+                Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
-              - `const EnabledEnabled Enabled = "enabled"`
+          - `Speed BetaFallbackParamSpeed`
 
-            - `Display BetaThinkingConfigEnabledDisplay`
+            Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-              Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+            - `const BetaFallbackParamSpeedStandard BetaFallbackParamSpeed = "standard"`
 
-              - `const BetaThinkingConfigEnabledDisplaySummarized BetaThinkingConfigEnabledDisplay = "summarized"`
+            - `const BetaFallbackParamSpeedFast BetaFallbackParamSpeed = "fast"`
 
-              - `const BetaThinkingConfigEnabledDisplayOmitted BetaThinkingConfigEnabledDisplay = "omitted"`
+          - `Thinking BetaFallbackParamThinkingUnionResp`
 
-          - `type BetaThinkingConfigDisabled struct{…}`
+            - `type BetaThinkingConfigEnabled struct{…}`
 
-            - `Type Disabled`
+              - `BudgetTokens int64`
 
-              - `const DisabledDisabled Disabled = "disabled"`
+                Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
 
-          - `type BetaThinkingConfigAdaptive struct{…}`
+                Must be ≥1024 and less than `max_tokens`.
 
-            - `Type Adaptive`
+                See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md) for details.
 
-              - `const AdaptiveAdaptive Adaptive = "adaptive"`
+              - `Type Enabled`
 
-            - `Display BetaThinkingConfigAdaptiveDisplay`
+                - `const EnabledEnabled Enabled = "enabled"`
 
-              Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+              - `Display BetaThinkingConfigEnabledDisplay`
 
-              - `const BetaThinkingConfigAdaptiveDisplaySummarized BetaThinkingConfigAdaptiveDisplay = "summarized"`
+                Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
-              - `const BetaThinkingConfigAdaptiveDisplayOmitted BetaThinkingConfigAdaptiveDisplay = "omitted"`
+                - `const BetaThinkingConfigEnabledDisplaySummarized BetaThinkingConfigEnabledDisplay = "summarized"`
+
+                - `const BetaThinkingConfigEnabledDisplayOmitted BetaThinkingConfigEnabledDisplay = "omitted"`
+
+            - `type BetaThinkingConfigDisabled struct{…}`
+
+              - `Type Disabled`
+
+                - `const DisabledDisabled Disabled = "disabled"`
+
+            - `type BetaThinkingConfigAdaptive struct{…}`
+
+              - `Type Adaptive`
+
+                - `const AdaptiveAdaptive Adaptive = "adaptive"`
+
+              - `Display BetaThinkingConfigAdaptiveDisplay`
+
+                Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+
+                - `const BetaThinkingConfigAdaptiveDisplaySummarized BetaThinkingConfigAdaptiveDisplay = "summarized"`
+
+                - `const BetaThinkingConfigAdaptiveDisplayOmitted BetaThinkingConfigAdaptiveDisplay = "omitted"`
+
+        - `Default`
+
+          - `const DefaultDefault Default = "default"`
 
       - `InferenceGeo string`
 
@@ -3063,7 +3203,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
       - `const AnthropicBetaServerSideFallback2026_06_01 AnthropicBeta = "server-side-fallback-2026-06-01"`
 
+      - `const AnthropicBetaServerSideFallback2026_07_01 AnthropicBeta = "server-side-fallback-2026-07-01"`
+
       - `const AnthropicBetaFallbackCredit2026_06_01 AnthropicBeta = "fallback-credit-2026-06-01"`
+
+      - `const AnthropicBetaFallbackCredit2026_07_01 AnthropicBeta = "fallback-credit-2026-07-01"`
 
       - `const AnthropicBetaAgentMemory2026_07_22 AnthropicBeta = "agent-memory-2026-07-22"`
 
@@ -3307,7 +3451,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
       - `const AnthropicBetaServerSideFallback2026_06_01 AnthropicBeta = "server-side-fallback-2026-06-01"`
 
+      - `const AnthropicBetaServerSideFallback2026_07_01 AnthropicBeta = "server-side-fallback-2026-07-01"`
+
       - `const AnthropicBetaFallbackCredit2026_06_01 AnthropicBeta = "fallback-credit-2026-06-01"`
+
+      - `const AnthropicBetaFallbackCredit2026_07_01 AnthropicBeta = "fallback-credit-2026-07-01"`
 
       - `const AnthropicBetaAgentMemory2026_07_22 AnthropicBeta = "agent-memory-2026-07-22"`
 
@@ -3547,7 +3695,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
       - `const AnthropicBetaServerSideFallback2026_06_01 AnthropicBeta = "server-side-fallback-2026-06-01"`
 
+      - `const AnthropicBetaServerSideFallback2026_07_01 AnthropicBeta = "server-side-fallback-2026-07-01"`
+
       - `const AnthropicBetaFallbackCredit2026_06_01 AnthropicBeta = "fallback-credit-2026-06-01"`
+
+      - `const AnthropicBetaFallbackCredit2026_07_01 AnthropicBeta = "fallback-credit-2026-07-01"`
 
       - `const AnthropicBetaAgentMemory2026_07_22 AnthropicBeta = "agent-memory-2026-07-22"`
 
@@ -3782,7 +3934,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
       - `const AnthropicBetaServerSideFallback2026_06_01 AnthropicBeta = "server-side-fallback-2026-06-01"`
 
+      - `const AnthropicBetaServerSideFallback2026_07_01 AnthropicBeta = "server-side-fallback-2026-07-01"`
+
       - `const AnthropicBetaFallbackCredit2026_06_01 AnthropicBeta = "fallback-credit-2026-06-01"`
+
+      - `const AnthropicBetaFallbackCredit2026_07_01 AnthropicBeta = "fallback-credit-2026-07-01"`
 
       - `const AnthropicBetaAgentMemory2026_07_22 AnthropicBeta = "agent-memory-2026-07-22"`
 
@@ -4014,7 +4170,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
       - `const AnthropicBetaServerSideFallback2026_06_01 AnthropicBeta = "server-side-fallback-2026-06-01"`
 
+      - `const AnthropicBetaServerSideFallback2026_07_01 AnthropicBeta = "server-side-fallback-2026-07-01"`
+
       - `const AnthropicBetaFallbackCredit2026_06_01 AnthropicBeta = "fallback-credit-2026-06-01"`
+
+      - `const AnthropicBetaFallbackCredit2026_07_01 AnthropicBeta = "fallback-credit-2026-07-01"`
 
       - `const AnthropicBetaAgentMemory2026_07_22 AnthropicBeta = "agent-memory-2026-07-22"`
 
@@ -4158,7 +4318,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
       - `const AnthropicBetaServerSideFallback2026_06_01 AnthropicBeta = "server-side-fallback-2026-06-01"`
 
+      - `const AnthropicBetaServerSideFallback2026_07_01 AnthropicBeta = "server-side-fallback-2026-07-01"`
+
       - `const AnthropicBetaFallbackCredit2026_06_01 AnthropicBeta = "fallback-credit-2026-06-01"`
+
+      - `const AnthropicBetaFallbackCredit2026_07_01 AnthropicBeta = "fallback-credit-2026-07-01"`
 
       - `const AnthropicBetaAgentMemory2026_07_22 AnthropicBeta = "agent-memory-2026-07-22"`
 
@@ -5049,13 +5213,17 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     Most capable model for cybersecurity and biology research
 
+                  - `const ModelClaudeOpus5 Model = "claude-opus-5"`
+
+                    Powerful intelligence for long-running agents and coding
+
                   - `const ModelClaudeOpus4_8 Model = "claude-opus-4-8"`
 
-                    Frontier intelligence for long-running agents and coding
+                    Powerful intelligence for long-running agents and coding
 
                   - `const ModelClaudeOpus4_7 Model = "claude-opus-4-7"`
 
-                    Frontier intelligence for long-running agents and coding
+                    Powerful intelligence for long-running agents and coding
 
                   - `const ModelClaudeMythosPreview Model = "claude-mythos-preview"`
 
@@ -5063,7 +5231,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `const ModelClaudeOpus4_6 Model = "claude-opus-4-6"`
 
-                    Frontier intelligence for long-running agents and coding
+                    Powerful intelligence for long-running agents and coding
 
                   - `const ModelClaudeSonnet4_6 Model = "claude-sonnet-4-6"`
 
@@ -5079,11 +5247,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `const ModelClaudeOpus4_5 Model = "claude-opus-4-5"`
 
-                    Premium model combining maximum intelligence with practical performance
+                    Powerful intelligence for long-running agents and coding
 
                   - `const ModelClaudeOpus4_5_20251101 Model = "claude-opus-4-5-20251101"`
 
-                    Premium model combining maximum intelligence with practical performance
+                    Powerful intelligence for long-running agents and coding
 
                   - `const ModelClaudeSonnet4_5 Model = "claude-sonnet-4-5"`
 
@@ -5095,11 +5263,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `const ModelClaudeOpus4_1 Model = "claude-opus-4-1"`
 
-                    Exceptional model for specialized complex tasks
+                    Powerful intelligence for long-running agents and coding
 
                   - `const ModelClaudeOpus4_1_20250805 Model = "claude-opus-4-1-20250805"`
 
-                    Exceptional model for specialized complex tasks
+                    Powerful intelligence for long-running agents and coding
 
                 - `string`
 
@@ -5359,6 +5527,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
           * `"tool_use"`: the model invoked one or more tools
           * `"pause_turn"`: we paused a long-running turn. You may provide the response back as-is in a subsequent request to let the model continue.
           * `"refusal"`: when streaming classifiers intervene to handle potential policy violations
+          * `"model_context_window_exceeded"`: we exceeded the model's context window
 
           In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
@@ -5423,6 +5592,78 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
           - `CacheReadInputTokens int64`
 
             The number of input tokens read from the cache.
+
+          - `FallbackCredit BetaFallbackCreditUsage`
+
+            Outcome of the `fallback_credit_token` presented on this request.
+
+            - `Status BetaFallbackCreditUsageStatusUnion`
+
+              Whether the fallback-credit reprice was applied to this response's billing.
+
+              A union discriminated on `type`. `redeemed`: the retry is billed as if
+              the conversation had been on the retry model all along — including when the
+              resulting shift is zero because there was nothing to move. `not_applied`:
+              no reprice was applied; the arm's `reason` says why.
+
+              - `type BetaFallbackCreditRedeemed struct{…}`
+
+                The reprice was applied: the retry is billed as if the conversation
+                had been on the retry model all along.
+
+                - `Type Redeemed`
+
+                  - `const RedeemedRedeemed Redeemed = "redeemed"`
+
+              - `type BetaFallbackCreditNotApplied struct{…}`
+
+                No reprice was applied; `reason` says why.
+
+                - `Reason BetaFallbackCreditNotAppliedReason`
+
+                  Why the reprice was not applied.
+
+                  A closed enum; additions to the redemption-check vocabulary arrive as
+                  deliberate schema updates.
+
+                  - `const BetaFallbackCreditNotAppliedReasonBodyMismatch BetaFallbackCreditNotAppliedReason = "body_mismatch"`
+
+                  - `const BetaFallbackCreditNotAppliedReasonContinuationExcluded BetaFallbackCreditNotAppliedReason = "continuation_excluded"`
+
+                  - `const BetaFallbackCreditNotAppliedReasonContinuationOnly BetaFallbackCreditNotAppliedReason = "continuation_only"`
+
+                  - `const BetaFallbackCreditNotAppliedReasonExpired BetaFallbackCreditNotAppliedReason = "expired"`
+
+                  - `const BetaFallbackCreditNotAppliedReasonInvalidTargetModel BetaFallbackCreditNotAppliedReason = "invalid_target_model"`
+
+                  - `const BetaFallbackCreditNotAppliedReasonNotEnabled BetaFallbackCreditNotAppliedReason = "not_enabled"`
+
+                  - `const BetaFallbackCreditNotAppliedReasonRepriceUnavailable BetaFallbackCreditNotAppliedReason = "reprice_unavailable"`
+
+                  - `const BetaFallbackCreditNotAppliedReasonTemporarilyUnavailable BetaFallbackCreditNotAppliedReason = "temporarily_unavailable"`
+
+                  - `const BetaFallbackCreditNotAppliedReasonVariantFieldsPresent BetaFallbackCreditNotAppliedReason = "variant_fields_present"`
+
+                  - `const BetaFallbackCreditNotAppliedReasonWrongOrganization BetaFallbackCreditNotAppliedReason = "wrong_organization"`
+
+                  - `const BetaFallbackCreditNotAppliedReasonWrongPlatform BetaFallbackCreditNotAppliedReason = "wrong_platform"`
+
+                  - `const BetaFallbackCreditNotAppliedReasonWrongWorkspace BetaFallbackCreditNotAppliedReason = "wrong_workspace"`
+
+                - `Type NotApplied`
+
+                  - `const NotAppliedNotApplied NotApplied = "not_applied"`
+
+                - `RemoveToRedeem []string`
+
+                  Request fields to remove before retrying, so the retry can redeem this
+                  token.
+
+                  Present exactly when `reason` is `variant_fields_present` — never null,
+                  never an empty array; absent otherwise. Fields are named only from your own request, and only after
+                  the sealed variant hash matched. A served best-effort retry has already
+                  been billed at normal price; nothing redeems retroactively, but a corrected
+                  re-send inside the token's five-minute window can still redeem.
 
           - `InferenceGeo string`
 
@@ -6878,13 +7119,17 @@ func main() {
 
                     Most capable model for cybersecurity and biology research
 
+                  - `const ModelClaudeOpus5 Model = "claude-opus-5"`
+
+                    Powerful intelligence for long-running agents and coding
+
                   - `const ModelClaudeOpus4_8 Model = "claude-opus-4-8"`
 
-                    Frontier intelligence for long-running agents and coding
+                    Powerful intelligence for long-running agents and coding
 
                   - `const ModelClaudeOpus4_7 Model = "claude-opus-4-7"`
 
-                    Frontier intelligence for long-running agents and coding
+                    Powerful intelligence for long-running agents and coding
 
                   - `const ModelClaudeMythosPreview Model = "claude-mythos-preview"`
 
@@ -6892,7 +7137,7 @@ func main() {
 
                   - `const ModelClaudeOpus4_6 Model = "claude-opus-4-6"`
 
-                    Frontier intelligence for long-running agents and coding
+                    Powerful intelligence for long-running agents and coding
 
                   - `const ModelClaudeSonnet4_6 Model = "claude-sonnet-4-6"`
 
@@ -6908,11 +7153,11 @@ func main() {
 
                   - `const ModelClaudeOpus4_5 Model = "claude-opus-4-5"`
 
-                    Premium model combining maximum intelligence with practical performance
+                    Powerful intelligence for long-running agents and coding
 
                   - `const ModelClaudeOpus4_5_20251101 Model = "claude-opus-4-5-20251101"`
 
-                    Premium model combining maximum intelligence with practical performance
+                    Powerful intelligence for long-running agents and coding
 
                   - `const ModelClaudeSonnet4_5 Model = "claude-sonnet-4-5"`
 
@@ -6924,11 +7169,11 @@ func main() {
 
                   - `const ModelClaudeOpus4_1 Model = "claude-opus-4-1"`
 
-                    Exceptional model for specialized complex tasks
+                    Powerful intelligence for long-running agents and coding
 
                   - `const ModelClaudeOpus4_1_20250805 Model = "claude-opus-4-1-20250805"`
 
-                    Exceptional model for specialized complex tasks
+                    Powerful intelligence for long-running agents and coding
 
                 - `string`
 
@@ -7188,6 +7433,7 @@ func main() {
           * `"tool_use"`: the model invoked one or more tools
           * `"pause_turn"`: we paused a long-running turn. You may provide the response back as-is in a subsequent request to let the model continue.
           * `"refusal"`: when streaming classifiers intervene to handle potential policy violations
+          * `"model_context_window_exceeded"`: we exceeded the model's context window
 
           In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
@@ -7252,6 +7498,78 @@ func main() {
           - `CacheReadInputTokens int64`
 
             The number of input tokens read from the cache.
+
+          - `FallbackCredit BetaFallbackCreditUsage`
+
+            Outcome of the `fallback_credit_token` presented on this request.
+
+            - `Status BetaFallbackCreditUsageStatusUnion`
+
+              Whether the fallback-credit reprice was applied to this response's billing.
+
+              A union discriminated on `type`. `redeemed`: the retry is billed as if
+              the conversation had been on the retry model all along — including when the
+              resulting shift is zero because there was nothing to move. `not_applied`:
+              no reprice was applied; the arm's `reason` says why.
+
+              - `type BetaFallbackCreditRedeemed struct{…}`
+
+                The reprice was applied: the retry is billed as if the conversation
+                had been on the retry model all along.
+
+                - `Type Redeemed`
+
+                  - `const RedeemedRedeemed Redeemed = "redeemed"`
+
+              - `type BetaFallbackCreditNotApplied struct{…}`
+
+                No reprice was applied; `reason` says why.
+
+                - `Reason BetaFallbackCreditNotAppliedReason`
+
+                  Why the reprice was not applied.
+
+                  A closed enum; additions to the redemption-check vocabulary arrive as
+                  deliberate schema updates.
+
+                  - `const BetaFallbackCreditNotAppliedReasonBodyMismatch BetaFallbackCreditNotAppliedReason = "body_mismatch"`
+
+                  - `const BetaFallbackCreditNotAppliedReasonContinuationExcluded BetaFallbackCreditNotAppliedReason = "continuation_excluded"`
+
+                  - `const BetaFallbackCreditNotAppliedReasonContinuationOnly BetaFallbackCreditNotAppliedReason = "continuation_only"`
+
+                  - `const BetaFallbackCreditNotAppliedReasonExpired BetaFallbackCreditNotAppliedReason = "expired"`
+
+                  - `const BetaFallbackCreditNotAppliedReasonInvalidTargetModel BetaFallbackCreditNotAppliedReason = "invalid_target_model"`
+
+                  - `const BetaFallbackCreditNotAppliedReasonNotEnabled BetaFallbackCreditNotAppliedReason = "not_enabled"`
+
+                  - `const BetaFallbackCreditNotAppliedReasonRepriceUnavailable BetaFallbackCreditNotAppliedReason = "reprice_unavailable"`
+
+                  - `const BetaFallbackCreditNotAppliedReasonTemporarilyUnavailable BetaFallbackCreditNotAppliedReason = "temporarily_unavailable"`
+
+                  - `const BetaFallbackCreditNotAppliedReasonVariantFieldsPresent BetaFallbackCreditNotAppliedReason = "variant_fields_present"`
+
+                  - `const BetaFallbackCreditNotAppliedReasonWrongOrganization BetaFallbackCreditNotAppliedReason = "wrong_organization"`
+
+                  - `const BetaFallbackCreditNotAppliedReasonWrongPlatform BetaFallbackCreditNotAppliedReason = "wrong_platform"`
+
+                  - `const BetaFallbackCreditNotAppliedReasonWrongWorkspace BetaFallbackCreditNotAppliedReason = "wrong_workspace"`
+
+                - `Type NotApplied`
+
+                  - `const NotAppliedNotApplied NotApplied = "not_applied"`
+
+                - `RemoveToRedeem []string`
+
+                  Request fields to remove before retrying, so the retry can redeem this
+                  token.
+
+                  Present exactly when `reason` is `variant_fields_present` — never null,
+                  never an empty array; absent otherwise. Fields are named only from your own request, and only after
+                  the sealed variant hash matched. A served best-effort retry has already
+                  been billed at normal price; nothing redeems retroactively, but a corrected
+                  re-send inside the token's five-minute window can still redeem.
 
           - `InferenceGeo string`
 
@@ -8481,13 +8799,17 @@ func main() {
 
                   Most capable model for cybersecurity and biology research
 
+                - `const ModelClaudeOpus5 Model = "claude-opus-5"`
+
+                  Powerful intelligence for long-running agents and coding
+
                 - `const ModelClaudeOpus4_8 Model = "claude-opus-4-8"`
 
-                  Frontier intelligence for long-running agents and coding
+                  Powerful intelligence for long-running agents and coding
 
                 - `const ModelClaudeOpus4_7 Model = "claude-opus-4-7"`
 
-                  Frontier intelligence for long-running agents and coding
+                  Powerful intelligence for long-running agents and coding
 
                 - `const ModelClaudeMythosPreview Model = "claude-mythos-preview"`
 
@@ -8495,7 +8817,7 @@ func main() {
 
                 - `const ModelClaudeOpus4_6 Model = "claude-opus-4-6"`
 
-                  Frontier intelligence for long-running agents and coding
+                  Powerful intelligence for long-running agents and coding
 
                 - `const ModelClaudeSonnet4_6 Model = "claude-sonnet-4-6"`
 
@@ -8511,11 +8833,11 @@ func main() {
 
                 - `const ModelClaudeOpus4_5 Model = "claude-opus-4-5"`
 
-                  Premium model combining maximum intelligence with practical performance
+                  Powerful intelligence for long-running agents and coding
 
                 - `const ModelClaudeOpus4_5_20251101 Model = "claude-opus-4-5-20251101"`
 
-                  Premium model combining maximum intelligence with practical performance
+                  Powerful intelligence for long-running agents and coding
 
                 - `const ModelClaudeSonnet4_5 Model = "claude-sonnet-4-5"`
 
@@ -8527,11 +8849,11 @@ func main() {
 
                 - `const ModelClaudeOpus4_1 Model = "claude-opus-4-1"`
 
-                  Exceptional model for specialized complex tasks
+                  Powerful intelligence for long-running agents and coding
 
                 - `const ModelClaudeOpus4_1_20250805 Model = "claude-opus-4-1-20250805"`
 
-                  Exceptional model for specialized complex tasks
+                  Powerful intelligence for long-running agents and coding
 
               - `string`
 
@@ -8791,6 +9113,7 @@ func main() {
         * `"tool_use"`: the model invoked one or more tools
         * `"pause_turn"`: we paused a long-running turn. You may provide the response back as-is in a subsequent request to let the model continue.
         * `"refusal"`: when streaming classifiers intervene to handle potential policy violations
+        * `"model_context_window_exceeded"`: we exceeded the model's context window
 
         In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
@@ -8855,6 +9178,78 @@ func main() {
         - `CacheReadInputTokens int64`
 
           The number of input tokens read from the cache.
+
+        - `FallbackCredit BetaFallbackCreditUsage`
+
+          Outcome of the `fallback_credit_token` presented on this request.
+
+          - `Status BetaFallbackCreditUsageStatusUnion`
+
+            Whether the fallback-credit reprice was applied to this response's billing.
+
+            A union discriminated on `type`. `redeemed`: the retry is billed as if
+            the conversation had been on the retry model all along — including when the
+            resulting shift is zero because there was nothing to move. `not_applied`:
+            no reprice was applied; the arm's `reason` says why.
+
+            - `type BetaFallbackCreditRedeemed struct{…}`
+
+              The reprice was applied: the retry is billed as if the conversation
+              had been on the retry model all along.
+
+              - `Type Redeemed`
+
+                - `const RedeemedRedeemed Redeemed = "redeemed"`
+
+            - `type BetaFallbackCreditNotApplied struct{…}`
+
+              No reprice was applied; `reason` says why.
+
+              - `Reason BetaFallbackCreditNotAppliedReason`
+
+                Why the reprice was not applied.
+
+                A closed enum; additions to the redemption-check vocabulary arrive as
+                deliberate schema updates.
+
+                - `const BetaFallbackCreditNotAppliedReasonBodyMismatch BetaFallbackCreditNotAppliedReason = "body_mismatch"`
+
+                - `const BetaFallbackCreditNotAppliedReasonContinuationExcluded BetaFallbackCreditNotAppliedReason = "continuation_excluded"`
+
+                - `const BetaFallbackCreditNotAppliedReasonContinuationOnly BetaFallbackCreditNotAppliedReason = "continuation_only"`
+
+                - `const BetaFallbackCreditNotAppliedReasonExpired BetaFallbackCreditNotAppliedReason = "expired"`
+
+                - `const BetaFallbackCreditNotAppliedReasonInvalidTargetModel BetaFallbackCreditNotAppliedReason = "invalid_target_model"`
+
+                - `const BetaFallbackCreditNotAppliedReasonNotEnabled BetaFallbackCreditNotAppliedReason = "not_enabled"`
+
+                - `const BetaFallbackCreditNotAppliedReasonRepriceUnavailable BetaFallbackCreditNotAppliedReason = "reprice_unavailable"`
+
+                - `const BetaFallbackCreditNotAppliedReasonTemporarilyUnavailable BetaFallbackCreditNotAppliedReason = "temporarily_unavailable"`
+
+                - `const BetaFallbackCreditNotAppliedReasonVariantFieldsPresent BetaFallbackCreditNotAppliedReason = "variant_fields_present"`
+
+                - `const BetaFallbackCreditNotAppliedReasonWrongOrganization BetaFallbackCreditNotAppliedReason = "wrong_organization"`
+
+                - `const BetaFallbackCreditNotAppliedReasonWrongPlatform BetaFallbackCreditNotAppliedReason = "wrong_platform"`
+
+                - `const BetaFallbackCreditNotAppliedReasonWrongWorkspace BetaFallbackCreditNotAppliedReason = "wrong_workspace"`
+
+              - `Type NotApplied`
+
+                - `const NotAppliedNotApplied NotApplied = "not_applied"`
+
+              - `RemoveToRedeem []string`
+
+                Request fields to remove before retrying, so the retry can redeem this
+                token.
+
+                Present exactly when `reason` is `variant_fields_present` — never null,
+                never an empty array; absent otherwise. Fields are named only from your own request, and only after
+                the sealed variant hash matched. A served best-effort retry has already
+                been billed at normal price; nothing redeems retroactively, but a corrected
+                re-send inside the token's five-minute window can still redeem.
 
         - `InferenceGeo string`
 
@@ -10046,13 +10441,17 @@ func main() {
 
                 Most capable model for cybersecurity and biology research
 
+              - `const ModelClaudeOpus5 Model = "claude-opus-5"`
+
+                Powerful intelligence for long-running agents and coding
+
               - `const ModelClaudeOpus4_8 Model = "claude-opus-4-8"`
 
-                Frontier intelligence for long-running agents and coding
+                Powerful intelligence for long-running agents and coding
 
               - `const ModelClaudeOpus4_7 Model = "claude-opus-4-7"`
 
-                Frontier intelligence for long-running agents and coding
+                Powerful intelligence for long-running agents and coding
 
               - `const ModelClaudeMythosPreview Model = "claude-mythos-preview"`
 
@@ -10060,7 +10459,7 @@ func main() {
 
               - `const ModelClaudeOpus4_6 Model = "claude-opus-4-6"`
 
-                Frontier intelligence for long-running agents and coding
+                Powerful intelligence for long-running agents and coding
 
               - `const ModelClaudeSonnet4_6 Model = "claude-sonnet-4-6"`
 
@@ -10076,11 +10475,11 @@ func main() {
 
               - `const ModelClaudeOpus4_5 Model = "claude-opus-4-5"`
 
-                Premium model combining maximum intelligence with practical performance
+                Powerful intelligence for long-running agents and coding
 
               - `const ModelClaudeOpus4_5_20251101 Model = "claude-opus-4-5-20251101"`
 
-                Premium model combining maximum intelligence with practical performance
+                Powerful intelligence for long-running agents and coding
 
               - `const ModelClaudeSonnet4_5 Model = "claude-sonnet-4-5"`
 
@@ -10092,11 +10491,11 @@ func main() {
 
               - `const ModelClaudeOpus4_1 Model = "claude-opus-4-1"`
 
-                Exceptional model for specialized complex tasks
+                Powerful intelligence for long-running agents and coding
 
               - `const ModelClaudeOpus4_1_20250805 Model = "claude-opus-4-1-20250805"`
 
-                Exceptional model for specialized complex tasks
+                Powerful intelligence for long-running agents and coding
 
             - `string`
 
@@ -10356,6 +10755,7 @@ func main() {
       * `"tool_use"`: the model invoked one or more tools
       * `"pause_turn"`: we paused a long-running turn. You may provide the response back as-is in a subsequent request to let the model continue.
       * `"refusal"`: when streaming classifiers intervene to handle potential policy violations
+      * `"model_context_window_exceeded"`: we exceeded the model's context window
 
       In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
@@ -10420,6 +10820,78 @@ func main() {
       - `CacheReadInputTokens int64`
 
         The number of input tokens read from the cache.
+
+      - `FallbackCredit BetaFallbackCreditUsage`
+
+        Outcome of the `fallback_credit_token` presented on this request.
+
+        - `Status BetaFallbackCreditUsageStatusUnion`
+
+          Whether the fallback-credit reprice was applied to this response's billing.
+
+          A union discriminated on `type`. `redeemed`: the retry is billed as if
+          the conversation had been on the retry model all along — including when the
+          resulting shift is zero because there was nothing to move. `not_applied`:
+          no reprice was applied; the arm's `reason` says why.
+
+          - `type BetaFallbackCreditRedeemed struct{…}`
+
+            The reprice was applied: the retry is billed as if the conversation
+            had been on the retry model all along.
+
+            - `Type Redeemed`
+
+              - `const RedeemedRedeemed Redeemed = "redeemed"`
+
+          - `type BetaFallbackCreditNotApplied struct{…}`
+
+            No reprice was applied; `reason` says why.
+
+            - `Reason BetaFallbackCreditNotAppliedReason`
+
+              Why the reprice was not applied.
+
+              A closed enum; additions to the redemption-check vocabulary arrive as
+              deliberate schema updates.
+
+              - `const BetaFallbackCreditNotAppliedReasonBodyMismatch BetaFallbackCreditNotAppliedReason = "body_mismatch"`
+
+              - `const BetaFallbackCreditNotAppliedReasonContinuationExcluded BetaFallbackCreditNotAppliedReason = "continuation_excluded"`
+
+              - `const BetaFallbackCreditNotAppliedReasonContinuationOnly BetaFallbackCreditNotAppliedReason = "continuation_only"`
+
+              - `const BetaFallbackCreditNotAppliedReasonExpired BetaFallbackCreditNotAppliedReason = "expired"`
+
+              - `const BetaFallbackCreditNotAppliedReasonInvalidTargetModel BetaFallbackCreditNotAppliedReason = "invalid_target_model"`
+
+              - `const BetaFallbackCreditNotAppliedReasonNotEnabled BetaFallbackCreditNotAppliedReason = "not_enabled"`
+
+              - `const BetaFallbackCreditNotAppliedReasonRepriceUnavailable BetaFallbackCreditNotAppliedReason = "reprice_unavailable"`
+
+              - `const BetaFallbackCreditNotAppliedReasonTemporarilyUnavailable BetaFallbackCreditNotAppliedReason = "temporarily_unavailable"`
+
+              - `const BetaFallbackCreditNotAppliedReasonVariantFieldsPresent BetaFallbackCreditNotAppliedReason = "variant_fields_present"`
+
+              - `const BetaFallbackCreditNotAppliedReasonWrongOrganization BetaFallbackCreditNotAppliedReason = "wrong_organization"`
+
+              - `const BetaFallbackCreditNotAppliedReasonWrongPlatform BetaFallbackCreditNotAppliedReason = "wrong_platform"`
+
+              - `const BetaFallbackCreditNotAppliedReasonWrongWorkspace BetaFallbackCreditNotAppliedReason = "wrong_workspace"`
+
+            - `Type NotApplied`
+
+              - `const NotAppliedNotApplied NotApplied = "not_applied"`
+
+            - `RemoveToRedeem []string`
+
+              Request fields to remove before retrying, so the retry can redeem this
+              token.
+
+              Present exactly when `reason` is `variant_fields_present` — never null,
+              never an empty array; absent otherwise. Fields are named only from your own request, and only after
+              the sealed variant hash matched. A served best-effort retry has already
+              been billed at normal price; nothing redeems retroactively, but a corrected
+              re-send inside the token's five-minute window can still redeem.
 
       - `InferenceGeo string`
 

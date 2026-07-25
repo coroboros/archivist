@@ -68,7 +68,11 @@ generated: true
 
   - `"server-side-fallback-2026-06-01"`
 
+  - `"server-side-fallback-2026-07-01"`
+
   - `"fallback-credit-2026-06-01"`
+
+  - `"fallback-credit-2026-07-01"`
 
   - `"agent-memory-2026-07-22"`
 
@@ -700,7 +704,7 @@ var_dump($betaModelInfo);
 
 ## Create a Message
 
-`$client->beta->messages->create(int maxTokens, list<BetaMessageParam> messages, Model model, ?BetaCacheControlEphemeral cacheControl, ?Container container, ?BetaContextManagementConfig contextManagement, ?BetaDiagnosticsParam diagnostics, ?string fallbackCreditToken, ?list<BetaFallbackParam> fallbacks, ?string inferenceGeo, ?list<BetaRequestMCPServerURLDefinition> mcpServers, ?BetaMetadata metadata, ?BetaOutputConfig outputConfig, ?BetaJSONOutputFormat outputFormat, ?ServiceTier serviceTier, ?Speed speed, ?list<string> stopSequences, ?System system, ?float temperature, ?BetaThinkingConfigParam thinking, ?BetaToolChoice toolChoice, ?list<BetaToolUnion> tools, ?int topK, ?float topP, ?list<AnthropicBeta> betas, ?string userProfileID): BetaMessage`
+`$client->beta->messages->create(int maxTokens, list<BetaMessageParam> messages, Model model, ?BetaCacheControlEphemeral cacheControl, ?Container container, ?BetaContextManagementConfig contextManagement, ?BetaDiagnosticsParam diagnostics, ?FallbackCreditToken fallbackCreditToken, ?BetaFallbacksParam fallbacks, ?string inferenceGeo, ?list<BetaRequestMCPServerURLDefinition> mcpServers, ?BetaMetadata metadata, ?BetaOutputConfig outputConfig, ?BetaJSONOutputFormat outputFormat, ?ServiceTier serviceTier, ?Speed speed, ?list<string> stopSequences, ?System system, ?float temperature, ?BetaThinkingConfigParam thinking, ?BetaToolChoice toolChoice, ?list<BetaToolUnion> tools, ?int topK, ?float topP, ?list<AnthropicBeta> betas, ?string userProfileID): BetaMessage`
 
 **post** `/v1/messages`
 
@@ -798,7 +802,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
   Request-level diagnostics. Currently carries the previous response
   id for prompt-cache divergence reporting.
 
-- `fallbackCreditToken?:optional string`
+- `fallbackCreditToken?:optional FallbackCreditToken`
 
   The `fallback_credit_token` from a prior refusal's `stop_details`.
 
@@ -821,9 +825,9 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
   When the appended-assistant form is used on a model that otherwise disallows
   assistant-turn prefill, this token also authorizes that one prefill.
 
-- `fallbacks?:optional list<BetaFallbackParam>`
+- `fallbacks?:optional BetaFallbacksParam`
 
-  Opt-in server-side retry on one or more substitute models when the requested model declines for policy reasons. Tried in order: if the first entry also declines, the second is tried, and so on.
+  Opt-in server-side retry on one or more substitute models when the requested model declines for policy reasons. Tried in order: if the first entry also declines, the second is tried, and so on. The string "default" requests the requested model's server-defined default fallback configuration.
 
 - `inferenceGeo?:optional string`
 
@@ -1067,6 +1071,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
     * `"tool_use"`: the model invoked one or more tools
     * `"pause_turn"`: we paused a long-running turn. You may provide the response back as-is in a subsequent request to let the model continue.
     * `"refusal"`: when streaming classifiers intervene to handle potential policy violations
+    * `"model_context_window_exceeded"`: we exceeded the model's context window
 
     In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
@@ -1128,21 +1133,7 @@ $betaMessage = $client->beta->messages->create(
   ],
   diagnostics: ['previousMessageID' => 'previous_message_id'],
   fallbackCreditToken: 'x',
-  fallbacks: [
-    [
-      'model' => 'claude-sonnet-5',
-      'maxTokens' => 0,
-      'outputConfig' => [
-        'effort' => 'low',
-        'format' => ['schema' => ['foo' => 'bar'], 'type' => 'json_schema'],
-        'taskBudget' => ['total' => 1024, 'type' => 'tokens', 'remaining' => 0],
-      ],
-      'speed' => 'standard',
-      'thinking' => [
-        'budgetTokens' => 1024, 'type' => 'enabled', 'display' => 'summarized'
-      ],
-    ],
-  ],
+  fallbacks: 'default',
   inferenceGeo: 'inference_geo',
   mcpServers: [
     [
@@ -1278,6 +1269,11 @@ var_dump($betaMessage);
     },
     "cache_creation_input_tokens": 2051,
     "cache_read_input_tokens": 2051,
+    "fallback_credit": {
+      "status": {
+        "type": "redeemed"
+      }
+    },
     "inference_geo": "global",
     "input_tokens": 2095,
     "iterations": [
@@ -3136,11 +3132,41 @@ var_dump($betaMessageTokensCount);
 
   - `BetaMidConversationSystemBlockParam`
 
-    - `list<BetaTextBlockParam> content`
+    - `list<Content> content`
 
       System instruction text blocks.
 
     - `"mid_conv_system" type`
+
+    - `?BetaCacheControlEphemeral cacheControl`
+
+      Create a cache control breakpoint at this content block.
+
+  - `BetaRequestToolAdditionBlock`
+
+    - `Tool tool`
+
+      Reference to a single tool the caller declared directly in
+      `tools[]`. Does not accept the composed `{server}_{name}` form the
+      server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+      `mcp_toolset_reference` for those.
+
+    - `"tool_addition" type`
+
+    - `?BetaCacheControlEphemeral cacheControl`
+
+      Create a cache control breakpoint at this content block.
+
+  - `BetaRequestToolRemovalBlock`
+
+    - `Tool tool`
+
+      Reference to a single tool the caller declared directly in
+      `tools[]`. Does not accept the composed `{server}_{name}` form the
+      server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+      `mcp_toolset_reference` for those.
+
+    - `"tool_removal" type`
 
     - `?BetaCacheControlEphemeral cacheControl`
 
@@ -3322,6 +3348,61 @@ var_dump($betaMessageTokensCount);
 
     The response block's `trigger`, echoed verbatim. Accepted and ignored by the server; any object or `null` is allowed.
 
+### Beta Fallback Credit Not Applied
+
+- `BetaFallbackCreditNotApplied`
+
+  - `Reason reason`
+
+    Why the reprice was not applied.
+
+    A closed enum; additions to the redemption-check vocabulary arrive as
+    deliberate schema updates.
+
+  - `"not_applied" type`
+
+  - `?list<string> removeToRedeem`
+
+    Request fields to remove before retrying, so the retry can redeem this
+    token.
+
+    Present exactly when `reason` is `variant_fields_present` — never null,
+    never an empty array; absent otherwise. Fields are named only from your own request, and only after
+    the sealed variant hash matched. A served best-effort retry has already
+    been billed at normal price; nothing redeems retroactively, but a corrected
+    re-send inside the token's five-minute window can still redeem.
+
+### Beta Fallback Credit Redeemed
+
+- `BetaFallbackCreditRedeemed`
+
+  - `"redeemed" type`
+
+### Beta Fallback Credit Token Param
+
+- `BetaFallbackCreditTokenParam`
+
+  - `string token`
+
+    The opaque `fallback_credit_token` from a prior refusal's `stop_details` — the same string the bare-string form carries.
+
+  - `?Mode mode`
+
+    How a failing token affects the retry. `strict` (the default, and the bare-string behavior): a failing redemption is a 400 and the retry is not served. `best_effort`: the retry is served either way — a token-layer failure no longer rejects the request; the retry proceeds at normal price and the outcome is reported on the response's `usage.fallback_credit`. Two failures stay hard in both modes: a malformed token, and combining `fallback_credit_token` with `fallbacks`.
+
+### Beta Fallback Credit Usage
+
+- `BetaFallbackCreditUsage`
+
+  - `Status status`
+
+    Whether the fallback-credit reprice was applied to this response's billing.
+
+    A union discriminated on `type`. `redeemed`: the retry is billed as if
+    the conversation had been on the retry model all along — including when the
+    resulting shift is zero because there was nothing to move. `not_applied`:
+    no reprice was applied; the arm's `reason` says why.
+
 ### Beta Fallback Info
 
 - `BetaFallbackInfo`
@@ -3405,6 +3486,32 @@ var_dump($betaMessageTokensCount);
     The policy category that triggered a refusal.
 
   - `"refusal" type`
+
+### Beta Fallbacks Param
+
+- `BetaFallbacksParam`
+
+  - `list<BetaFallbackParam>`
+
+    - `Model model`
+
+      The model that will complete your prompt.
+
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `?int maxTokens`
+
+    - `?BetaOutputConfig outputConfig`
+
+    - `?Speed speed`
+
+      Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+    - `?Thinking thinking`
+
+  - `"default"`
+
+    - `"default"`
 
 ### Beta File Document Source
 
@@ -3984,6 +4091,7 @@ var_dump($betaMessageTokensCount);
     * `"tool_use"`: the model invoked one or more tools
     * `"pause_turn"`: we paused a long-running turn. You may provide the response back as-is in a subsequent request to let the model continue.
     * `"refusal"`: when streaming classifiers intervene to handle potential policy violations
+    * `"model_context_window_exceeded"`: we exceeded the model's context window
 
     In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
@@ -4022,6 +4130,10 @@ var_dump($betaMessageTokensCount);
   - `?int cacheReadInputTokens`
 
     The cumulative number of input tokens read from the cache.
+
+  - `?BetaFallbackCreditUsage fallbackCredit`
+
+    Outcome of the `fallback_credit_token` presented on this request.
 
   - `?int inputTokens`
 
@@ -4122,7 +4234,7 @@ var_dump($betaMessageTokensCount);
 
 - `BetaMidConversationSystemBlockParam`
 
-  - `list<BetaTextBlockParam> content`
+  - `list<Content> content`
 
     System instruction text blocks.
 
@@ -4485,6 +4597,40 @@ var_dump($betaMessageTokensCount);
   - `?Content content`
 
   - `?bool isError`
+
+### Beta Request Tool Addition Block
+
+- `BetaRequestToolAdditionBlock`
+
+  - `Tool tool`
+
+    Reference to a single tool the caller declared directly in
+    `tools[]`. Does not accept the composed `{server}_{name}` form the
+    server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+    `mcp_toolset_reference` for those.
+
+  - `"tool_addition" type`
+
+  - `?BetaCacheControlEphemeral cacheControl`
+
+    Create a cache control breakpoint at this content block.
+
+### Beta Request Tool Removal Block
+
+- `BetaRequestToolRemovalBlock`
+
+  - `Tool tool`
+
+    Reference to a single tool the caller declared directly in
+    `tools[]`. Does not accept the composed `{server}_{name}` form the
+    server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+    `mcp_toolset_reference` for those.
+
+  - `"tool_removal" type`
+
+  - `?BetaCacheControlEphemeral cacheControl`
+
+    Create a cache control breakpoint at this content block.
 
 ### Beta Search Result Block Param
 
@@ -5211,6 +5357,32 @@ var_dump($betaMessageTokensCount);
   - `?bool strict`
 
     When true, guarantees schema validation on tool names and inputs
+
+### Beta Tool Change MCP Tool Reference
+
+- `BetaToolChangeMCPToolReference`
+
+  - `string name`
+
+  - `string serverName`
+
+  - `"mcp_tool_reference" type`
+
+### Beta Tool Change MCP Toolset Reference
+
+- `BetaToolChangeMCPToolsetReference`
+
+  - `string serverName`
+
+  - `"mcp_toolset_reference" type`
+
+### Beta Tool Change Tool Reference
+
+- `BetaToolChangeToolReference`
+
+  - `string name`
+
+  - `"tool_reference" type`
 
 ### Beta Tool Choice
 
@@ -6640,6 +6812,10 @@ var_dump($betaMessageTokensCount);
 
     The number of input tokens read from the cache.
 
+  - `?BetaFallbackCreditUsage fallbackCredit`
+
+    Outcome of the `fallback_credit_token` presented on this request.
+
   - `?string inferenceGeo`
 
     The geographic region where inference was performed for this request.
@@ -7389,27 +7565,7 @@ $betaMessageBatch = $client->beta->messages->batches->create(
         ],
         'diagnostics' => ['previousMessageID' => 'previous_message_id'],
         'fallbackCreditToken' => 'x',
-        'fallbacks' => [
-          [
-            'model' => 'claude-sonnet-5',
-            'maxTokens' => 0,
-            'outputConfig' => [
-              'effort' => 'low',
-              'format' => [
-                'schema' => ['foo' => 'bar'], 'type' => 'json_schema'
-              ],
-              'taskBudget' => [
-                'total' => 1024, 'type' => 'tokens', 'remaining' => 0
-              ],
-            ],
-            'speed' => 'standard',
-            'thinking' => [
-              'budgetTokens' => 1024,
-              'type' => 'enabled',
-              'display' => 'summarized',
-            ],
-          ],
-        ],
+        'fallbacks' => 'default',
         'inferenceGeo' => 'inference_geo',
         'mcpServers' => [
           [
@@ -9565,17 +9721,21 @@ var_dump($betaManagedAgentsAgent);
 
     Next generation of intelligence for the hardest knowledge work and coding problems
 
+  - `"claude-opus-5"`
+
+    Powerful intelligence for long-running agents and coding
+
   - `"claude-opus-4-8"`
 
-    Frontier intelligence for long-running agents and coding
+    Powerful intelligence for long-running agents and coding
 
   - `"claude-opus-4-7"`
 
-    Frontier intelligence for long-running agents and coding
+    Powerful intelligence for long-running agents and coding
 
   - `"claude-opus-4-6"`
 
-    Most intelligent model for building agents and coding
+    Powerful intelligence for long-running agents and coding
 
   - `"claude-sonnet-4-6"`
 
@@ -9591,11 +9751,11 @@ var_dump($betaManagedAgentsAgent);
 
   - `"claude-opus-4-5"`
 
-    Premium model combining maximum intelligence with practical performance
+    Powerful intelligence for long-running agents and coding
 
   - `"claude-opus-4-5-20251101"`
 
-    Premium model combining maximum intelligence with practical performance
+    Powerful intelligence for long-running agents and coding
 
   - `"claude-sonnet-4-5"`
 
@@ -14019,19 +14179,19 @@ List Events
 
 - `createdAtGt?:optional \Datetime`
 
-  Return events created after this time (exclusive).
+  Return events created after this time (exclusive). Compared against the event's `processed_at` value.
 
 - `createdAtGte?:optional \Datetime`
 
-  Return events created at or after this time (inclusive).
+  Return events created at or after this time (inclusive). Compared against the event's `processed_at` value.
 
 - `createdAtLt?:optional \Datetime`
 
-  Return events created before this time (exclusive).
+  Return events created before this time (exclusive). Compared against the event's `processed_at` value.
 
 - `createdAtLte?:optional \Datetime`
 
-  Return events created at or before this time (inclusive).
+  Return events created at or before this time (inclusive). Compared against the event's `processed_at` value.
 
 - `limit?:optional int`
 
@@ -14039,7 +14199,7 @@ List Events
 
 - `order?:optional Order`
 
-  Sort direction for results, ordered by created_at. Defaults to asc (chronological).
+  Sort direction for results, ordered by the event's `processed_at`. Defaults to asc (chronological).
 
 - `page?:optional string`
 

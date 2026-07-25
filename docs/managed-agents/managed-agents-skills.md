@@ -145,8 +145,8 @@ These examples omit the optional `display_title` field, so the skill's title is 
           AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
           SkillCreateParams params = SkillCreateParams.builder()
-              .files(MultipartField.<List<InputStream>>builder()
-                  .value(List.of(Files.newInputStream(Path.of("example_skill.zip"))))
+              .addFile(MultipartField.<InputStream>builder()
+                  .value(Files.newInputStream(Path.of("example_skill.zip")))
                   .filename("example_skill.zip")
                   .contentType("application/zip")
                   .build())
@@ -221,11 +221,11 @@ Each entry in the `skills` array uses the following fields:
     --json @- <<'EOF'
   {
     "name": "Financial Analyst",
-    "model": "claude-opus-4-8",
+    "model": "claude-opus-5",
     "system": "You are a financial analysis agent.",
     "skills": [
       {"type": "anthropic", "skill_id": "xlsx"},
-      {"type": "custom", "skill_id": "skill_abc123", "version": "latest"}
+      {"type": "custom", "skill_id": "skill_01AbCdEfGhIjKlMnOpQrStUv", "version": "latest"}
     ]
   }
   EOF
@@ -235,13 +235,13 @@ Each entry in the `skills` array uses the following fields:
   ```bash CLI
   ant beta:agents create <<'YAML'
   name: Financial Analyst
-  model: claude-opus-4-8
+  model: claude-opus-5
   system: You are a financial analysis agent.
   skills:
     - type: anthropic
       skill_id: xlsx
     - type: custom
-      skill_id: skill_abc123
+      skill_id: skill_01AbCdEfGhIjKlMnOpQrStUv
       version: latest
   YAML
   ```
@@ -249,7 +249,7 @@ Each entry in the `skills` array uses the following fields:
   ```python Python
   agent = client.beta.agents.create(
       name="Financial Analyst",
-      model="claude-opus-4-8",
+      model="claude-opus-5",
       system="You are a financial analysis agent.",
       skills=[
           {
@@ -258,7 +258,7 @@ Each entry in the `skills` array uses the following fields:
           },
           {
               "type": "custom",
-              "skill_id": "skill_abc123",
+              "skill_id": "skill_01AbCdEfGhIjKlMnOpQrStUv",
               "version": "latest",
           },
       ],
@@ -268,7 +268,7 @@ Each entry in the `skills` array uses the following fields:
   ```typescript TypeScript
   const agent = await client.beta.agents.create({
     name: "Financial Analyst",
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     system: "You are a financial analysis agent.",
     skills: [
       {
@@ -277,7 +277,7 @@ Each entry in the `skills` array uses the following fields:
       },
       {
         type: "custom",
-        skill_id: "skill_abc123",
+        skill_id: "skill_01AbCdEfGhIjKlMnOpQrStUv",
         version: "latest"
       }
     ]
@@ -285,15 +285,17 @@ Each entry in the `skills` array uses the following fields:
   ```
 
   ```csharp C#
+  using Anthropic.Models.Beta.Agents;
+
   var agent = await client.Beta.Agents.Create(new()
   {
       Name = "Financial Analyst",
-      Model = BetaManagedAgentsModel.ClaudeOpus4_8,
+      Model = BetaManagedAgentsModel.ClaudeOpus5,
       System = "You are a financial analysis agent.",
       Skills =
       [
           new BetaManagedAgentsAnthropicSkillParams { Type = BetaManagedAgentsAnthropicSkillParamsType.Anthropic, SkillID = "xlsx" },
-          new BetaManagedAgentsCustomSkillParams { Type = BetaManagedAgentsCustomSkillParamsType.Custom, SkillID = "skill_abc123", Version = "latest" },
+          new BetaManagedAgentsCustomSkillParams { Type = BetaManagedAgentsCustomSkillParamsType.Custom, SkillID = "skill_01AbCdEfGhIjKlMnOpQrStUv", Version = "latest" },
       ],
   });
   ```
@@ -302,7 +304,7 @@ Each entry in the `skills` array uses the following fields:
   agent, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
   	Name: "Financial Analyst",
   	Model: anthropic.BetaManagedAgentsModelConfigParams{
-  		ID: "claude-opus-4-8",
+  		ID: "claude-opus-5",
   	},
   	System: anthropic.String("You are a financial analysis agent."),
   	Skills: []anthropic.BetaManagedAgentsSkillParamsUnion{
@@ -311,7 +313,7 @@ Each entry in the `skills` array uses the following fields:
   			Type:    anthropic.BetaManagedAgentsAnthropicSkillParamsTypeAnthropic,
   		}},
   		{OfCustom: &anthropic.BetaManagedAgentsCustomSkillParams{
-  			SkillID: "skill_abc123",
+  			SkillID: "skill_01AbCdEfGhIjKlMnOpQrStUv",
   			Type:    anthropic.BetaManagedAgentsCustomSkillParamsTypeCustom,
   			Version: anthropic.String("latest"),
   		}},
@@ -324,10 +326,12 @@ Each entry in the `skills` array uses the following fields:
   ```
 
   ```java Java
+  import com.anthropic.models.beta.agents.*;
+
   var agent = client.beta().agents().create(
       AgentCreateParams.builder()
           .name("Financial Analyst")
-          .model(BetaManagedAgentsModel.CLAUDE_OPUS_4_8)
+          .model(BetaManagedAgentsModel.CLAUDE_OPUS_5)
           .system("You are a financial analysis agent.")
           .addSkill(
               BetaManagedAgentsAnthropicSkillParams.builder()
@@ -338,7 +342,7 @@ Each entry in the `skills` array uses the following fields:
           .addSkill(
               BetaManagedAgentsCustomSkillParams.builder()
                   .type(BetaManagedAgentsCustomSkillParams.Type.CUSTOM)
-                  .skillId("skill_abc123")
+                  .skillId("skill_01AbCdEfGhIjKlMnOpQrStUv")
                   .version("latest")
                   .build()
           )
@@ -349,11 +353,11 @@ Each entry in the `skills` array uses the following fields:
   ```php PHP
   $agent = $client->beta->agents->create(
       name: 'Financial Analyst',
-      model: 'claude-opus-4-8',
+      model: 'claude-opus-5',
       system: 'You are a financial analysis agent.',
       skills: [
           ['type' => 'anthropic', 'skill_id' => 'xlsx'],
-          ['type' => 'custom', 'skill_id' => 'skill_abc123', 'version' => 'latest'],
+          ['type' => 'custom', 'skill_id' => 'skill_01AbCdEfGhIjKlMnOpQrStUv', 'version' => 'latest'],
       ],
   );
   ```
@@ -361,11 +365,11 @@ Each entry in the `skills` array uses the following fields:
   ```ruby Ruby
   agent = client.beta.agents.create(
     name: "Financial Analyst",
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     system_: "You are a financial analysis agent.",
     skills: [
       {type: "anthropic", skill_id: "xlsx"},
-      {type: "custom", skill_id: "skill_abc123", version: "latest"}
+      {type: "custom", skill_id: "skill_01AbCdEfGhIjKlMnOpQrStUv", version: "latest"}
     ]
   )
   ```

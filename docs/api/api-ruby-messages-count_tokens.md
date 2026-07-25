@@ -938,7 +938,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-  - `Model = :"claude-sonnet-5" | :"claude-fable-5" | :"claude-mythos-5" | 13 more`
+  - `Model = :"claude-sonnet-5" | :"claude-fable-5" | :"claude-mythos-5" | 14 more`
 
     The model that will complete your prompt.
 
@@ -956,13 +956,17 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       Most capable model for cybersecurity and biology research
 
+    - `:"claude-opus-5"`
+
+      Powerful intelligence for long-running agents and coding
+
     - `:"claude-opus-4-8"`
 
-      Frontier intelligence for long-running agents and coding
+      Powerful intelligence for long-running agents and coding
 
     - `:"claude-opus-4-7"`
 
-      Frontier intelligence for long-running agents and coding
+      Powerful intelligence for long-running agents and coding
 
     - `:"claude-mythos-preview"`
 
@@ -970,7 +974,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `:"claude-opus-4-6"`
 
-      Frontier intelligence for long-running agents and coding
+      Powerful intelligence for long-running agents and coding
 
     - `:"claude-sonnet-4-6"`
 
@@ -986,11 +990,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `:"claude-opus-4-5"`
 
-      Premium model combining maximum intelligence with practical performance
+      Powerful intelligence for long-running agents and coding
 
     - `:"claude-opus-4-5-20251101"`
 
-      Premium model combining maximum intelligence with practical performance
+      Powerful intelligence for long-running agents and coding
 
     - `:"claude-sonnet-4-5"`
 
@@ -1002,11 +1006,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `:"claude-opus-4-1"`
 
-      Exceptional model for specialized complex tasks
+      Powerful intelligence for long-running agents and coding
 
     - `:"claude-opus-4-1-20250805"`
 
-      Exceptional model for specialized complex tasks
+      Powerful intelligence for long-running agents and coding
 
   - `String = String`
 

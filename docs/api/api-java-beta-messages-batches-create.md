@@ -80,7 +80,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -1150,19 +1154,109 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               Use this block to provide or update system-level instructions at a specific
               point in the conversation, rather than only via the top-level `system` parameter.
 
-              - `List<BetaTextBlockParam> content`
+              - `List<Content> content`
 
                 System instruction text blocks.
 
-                - `String text`
+                - `class BetaTextBlockParam:`
 
-                - `JsonValue; type "text"constant`
+                - `class BetaRequestToolAdditionBlock:`
 
-                - `Optional<BetaCacheControlEphemeral> cacheControl`
+                  Mid-conversation directive to surface a declared tool.
 
-                  Create a cache control breakpoint at this content block.
+                  `tool` references a tool (or MCP toolset) by name from the request's
+                  `tools`; it is offered to the model from this point in the
+                  conversation onward.
 
-                - `Optional<List<BetaTextCitationParam>> citations`
+                  - `Tool tool`
+
+                    Reference to a single tool the caller declared directly in
+                    `tools[]`. Does not accept the composed `{server}_{name}` form the
+                    server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+                    `mcp_toolset_reference` for those.
+
+                    - `class BetaToolChangeToolReference:`
+
+                      Reference to a single tool the caller declared directly in
+                      `tools[]`. Does not accept the composed `{server}_{name}` form the
+                      server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+                      `mcp_toolset_reference` for those.
+
+                      - `String name`
+
+                      - `JsonValue; type "tool_reference"constant`
+
+                        - `TOOL_REFERENCE("tool_reference")`
+
+                    - `class BetaToolChangeMcpToolReference:`
+
+                      Reference to a single MCP tool by its server and remote name — the
+                      same `server_name`/`name` pair `mcp_tool_use` carries.
+
+                      - `String name`
+
+                      - `String serverName`
+
+                      - `JsonValue; type "mcp_tool_reference"constant`
+
+                        - `MCP_TOOL_REFERENCE("mcp_tool_reference")`
+
+                    - `class BetaToolChangeMcpToolsetReference:`
+
+                      Reference to every tool in the named MCP server's toolset.
+
+                      - `String serverName`
+
+                      - `JsonValue; type "mcp_toolset_reference"constant`
+
+                        - `MCP_TOOLSET_REFERENCE("mcp_toolset_reference")`
+
+                  - `JsonValue; type "tool_addition"constant`
+
+                    - `TOOL_ADDITION("tool_addition")`
+
+                  - `Optional<BetaCacheControlEphemeral> cacheControl`
+
+                    Create a cache control breakpoint at this content block.
+
+                - `class BetaRequestToolRemovalBlock:`
+
+                  Mid-conversation directive to withdraw a tool.
+
+                  `tool` references a tool (or MCP toolset) by name from the request's
+                  `tools`; it is no longer offered to the model from this point in the
+                  conversation onward.
+
+                  - `Tool tool`
+
+                    Reference to a single tool the caller declared directly in
+                    `tools[]`. Does not accept the composed `{server}_{name}` form the
+                    server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+                    `mcp_toolset_reference` for those.
+
+                    - `class BetaToolChangeToolReference:`
+
+                      Reference to a single tool the caller declared directly in
+                      `tools[]`. Does not accept the composed `{server}_{name}` form the
+                      server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+                      `mcp_toolset_reference` for those.
+
+                    - `class BetaToolChangeMcpToolReference:`
+
+                      Reference to a single MCP tool by its server and remote name — the
+                      same `server_name`/`name` pair `mcp_tool_use` carries.
+
+                    - `class BetaToolChangeMcpToolsetReference:`
+
+                      Reference to every tool in the named MCP server's toolset.
+
+                  - `JsonValue; type "tool_removal"constant`
+
+                    - `TOOL_REMOVAL("tool_removal")`
+
+                  - `Optional<BetaCacheControlEphemeral> cacheControl`
+
+                    Create a cache control breakpoint at this content block.
 
               - `JsonValue; type "mid_conv_system"constant`
 
@@ -1171,6 +1265,22 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               - `Optional<BetaCacheControlEphemeral> cacheControl`
 
                 Create a cache control breakpoint at this content block.
+
+            - `class BetaRequestToolAdditionBlock:`
+
+              Mid-conversation directive to surface a declared tool.
+
+              `tool` references a tool (or MCP toolset) by name from the request's
+              `tools`; it is offered to the model from this point in the
+              conversation onward.
+
+            - `class BetaRequestToolRemovalBlock:`
+
+              Mid-conversation directive to withdraw a tool.
+
+              `tool` references a tool (or MCP toolset) by name from the request's
+              `tools`; it is no longer offered to the model from this point in the
+              conversation onward.
 
             - `class BetaFallbackBlockParam:`
 
@@ -1210,13 +1320,17 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     Most capable model for cybersecurity and biology research
 
+                  - `CLAUDE_OPUS_5("claude-opus-5")`
+
+                    Powerful intelligence for long-running agents and coding
+
                   - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
-                    Frontier intelligence for long-running agents and coding
+                    Powerful intelligence for long-running agents and coding
 
                   - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
 
-                    Frontier intelligence for long-running agents and coding
+                    Powerful intelligence for long-running agents and coding
 
                   - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
 
@@ -1224,7 +1338,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-                    Frontier intelligence for long-running agents and coding
+                    Powerful intelligence for long-running agents and coding
 
                   - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
@@ -1240,11 +1354,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
 
-                    Premium model combining maximum intelligence with practical performance
+                    Powerful intelligence for long-running agents and coding
 
                   - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
-                    Premium model combining maximum intelligence with practical performance
+                    Powerful intelligence for long-running agents and coding
 
                   - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
 
@@ -1256,11 +1370,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
 
-                    Exceptional model for specialized complex tasks
+                    Powerful intelligence for long-running agents and coding
 
                   - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
 
-                    Exceptional model for specialized complex tasks
+                    Powerful intelligence for long-running agents and coding
 
               - `BetaFallbackInfoParam to`
 
@@ -1451,7 +1565,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           The `id` (`msg_...`) from this client's previous /v1/messages response. The server compares that request's prompt fingerprint against this one and returns `diagnostics.cache_miss_reason` when the prompt-cache prefix could not be reused. Pass `null` on the first turn to opt in without a prior message to compare.
 
-      - `Optional<String> fallbackCreditToken`
+      - `Optional<FallbackCreditToken> fallbackCreditToken`
 
         The `fallback_credit_token` from a prior refusal's `stop_details`.
 
@@ -1474,115 +1588,145 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
         When the appended-assistant form is used on a model that otherwise disallows
         assistant-turn prefill, this token also authorizes that one prefill.
 
-      - `Optional<List<BetaFallbackParam>> fallbacks`
+        - `String`
 
-        Opt-in server-side retry on one or more substitute models when the requested model declines for policy reasons. Tried in order: if the first entry also declines, the second is tried, and so on.
+        - `class BetaFallbackCreditTokenParam:`
 
-        - `Model model`
+          Object form of `fallback_credit_token`: the token plus a redemption
+          mode.
 
-          The model that will complete your prompt.
+          Requires `anthropic-beta: fallback-credit-2026-07-01`; without that
+          header the field accepts the bare string only. The bare string and the
+          mode-less object are equivalent (both select `strict`), so wrapping
+          an existing token changes nothing by itself.
 
-          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+          - `String token`
 
-        - `Optional<Long> maxTokens`
+            The opaque `fallback_credit_token` from a prior refusal's `stop_details` — the same string the bare-string form carries.
 
-        - `Optional<BetaOutputConfig> outputConfig`
+          - `Optional<Mode> mode`
 
-          - `Optional<Effort> effort`
+            How a failing token affects the retry. `strict` (the default, and the bare-string behavior): a failing redemption is a 400 and the retry is not served. `best_effort`: the retry is served either way — a token-layer failure no longer rejects the request; the retry proceeds at normal price and the outcome is reported on the response's `usage.fallback_credit`. Two failures stay hard in both modes: a malformed token, and combining `fallback_credit_token` with `fallbacks`.
 
-            All possible effort levels.
+            - `STRICT("strict")`
 
-            - `LOW("low")`
+            - `BEST_EFFORT("best_effort")`
 
-            - `MEDIUM("medium")`
+      - `Optional<BetaFallbacksParam> fallbacks`
 
-            - `HIGH("high")`
+        Opt-in server-side retry on one or more substitute models when the requested model declines for policy reasons. Tried in order: if the first entry also declines, the second is tried, and so on. The string "default" requests the requested model's server-defined default fallback configuration.
 
-            - `XHIGH("xhigh")`
+        - `List<BetaFallbackParam>`
 
-            - `MAX("max")`
+          - `Model model`
 
-          - `Optional<BetaJsonOutputFormat> format`
+            The model that will complete your prompt.
 
-            A schema to specify Claude's output format in responses. See [structured outputs](../build-with-claude/build-with-claude-structured-outputs.md)
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-            - `Schema schema`
+          - `Optional<Long> maxTokens`
 
-              The JSON schema of the format
+          - `Optional<BetaOutputConfig> outputConfig`
 
-            - `JsonValue; type "json_schema"constant`
+            - `Optional<Effort> effort`
 
-              - `JSON_SCHEMA("json_schema")`
+              All possible effort levels.
 
-          - `Optional<BetaTokenTaskBudget> taskBudget`
+              - `LOW("low")`
 
-            User-configurable total token budget across contexts.
+              - `MEDIUM("medium")`
 
-            - `long total`
+              - `HIGH("high")`
 
-              Total token budget across all contexts in the session.
+              - `XHIGH("xhigh")`
 
-            - `JsonValue; type "tokens"constant`
+              - `MAX("max")`
 
-              The budget type. Currently only 'tokens' is supported.
+            - `Optional<BetaJsonOutputFormat> format`
 
-              - `TOKENS("tokens")`
+              A schema to specify Claude's output format in responses. See [structured outputs](../build-with-claude/build-with-claude-structured-outputs.md)
 
-            - `Optional<Long> remaining`
+              - `Schema schema`
 
-              Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
+                The JSON schema of the format
 
-        - `Optional<Speed> speed`
+              - `JsonValue; type "json_schema"constant`
 
-          Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+                - `JSON_SCHEMA("json_schema")`
 
-          - `STANDARD("standard")`
+            - `Optional<BetaTokenTaskBudget> taskBudget`
 
-          - `FAST("fast")`
+              User-configurable total token budget across contexts.
 
-        - `Optional<Thinking> thinking`
+              - `long total`
 
-          - `class BetaThinkingConfigEnabled:`
+                Total token budget across all contexts in the session.
 
-            - `long budgetTokens`
+              - `JsonValue; type "tokens"constant`
 
-              Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
+                The budget type. Currently only 'tokens' is supported.
 
-              Must be ≥1024 and less than `max_tokens`.
+                - `TOKENS("tokens")`
 
-              See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md) for details.
+              - `Optional<Long> remaining`
 
-            - `JsonValue; type "enabled"constant`
+                Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
-              - `ENABLED("enabled")`
+          - `Optional<Speed> speed`
 
-            - `Optional<Display> display`
+            Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-              Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+            - `STANDARD("standard")`
 
-              - `SUMMARIZED("summarized")`
+            - `FAST("fast")`
 
-              - `OMITTED("omitted")`
+          - `Optional<Thinking> thinking`
 
-          - `class BetaThinkingConfigDisabled:`
+            - `class BetaThinkingConfigEnabled:`
 
-            - `JsonValue; type "disabled"constant`
+              - `long budgetTokens`
 
-              - `DISABLED("disabled")`
+                Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
 
-          - `class BetaThinkingConfigAdaptive:`
+                Must be ≥1024 and less than `max_tokens`.
 
-            - `JsonValue; type "adaptive"constant`
+                See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md) for details.
 
-              - `ADAPTIVE("adaptive")`
+              - `JsonValue; type "enabled"constant`
 
-            - `Optional<Display> display`
+                - `ENABLED("enabled")`
 
-              Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+              - `Optional<Display> display`
 
-              - `SUMMARIZED("summarized")`
+                Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
-              - `OMITTED("omitted")`
+                - `SUMMARIZED("summarized")`
+
+                - `OMITTED("omitted")`
+
+            - `class BetaThinkingConfigDisabled:`
+
+              - `JsonValue; type "disabled"constant`
+
+                - `DISABLED("disabled")`
+
+            - `class BetaThinkingConfigAdaptive:`
+
+              - `JsonValue; type "adaptive"constant`
+
+                - `ADAPTIVE("adaptive")`
+
+              - `Optional<Display> display`
+
+                Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+
+                - `SUMMARIZED("summarized")`
+
+                - `OMITTED("omitted")`
+
+        - `JsonValue;`
+
+          - `DEFAULT("default")`
 
       - `Optional<String> inferenceGeo`
 

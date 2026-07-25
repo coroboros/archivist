@@ -68,7 +68,11 @@ generated: true
 
   - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+  - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
   - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+  - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
   - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -412,7 +416,11 @@ The Models API response can be used to determine which models are available for 
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -735,7 +743,11 @@ The Models API response can be used to determine information about a specific mo
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -1405,7 +1417,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -2459,19 +2475,109 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
           Use this block to provide or update system-level instructions at a specific
           point in the conversation, rather than only via the top-level `system` parameter.
 
-          - `List<BetaTextBlockParam> content`
+          - `List<Content> content`
 
             System instruction text blocks.
 
-            - `String text`
+            - `class BetaTextBlockParam:`
 
-            - `JsonValue; type "text"constant`
+            - `class BetaRequestToolAdditionBlock:`
 
-            - `Optional<BetaCacheControlEphemeral> cacheControl`
+              Mid-conversation directive to surface a declared tool.
 
-              Create a cache control breakpoint at this content block.
+              `tool` references a tool (or MCP toolset) by name from the request's
+              `tools`; it is offered to the model from this point in the
+              conversation onward.
 
-            - `Optional<List<BetaTextCitationParam>> citations`
+              - `Tool tool`
+
+                Reference to a single tool the caller declared directly in
+                `tools[]`. Does not accept the composed `{server}_{name}` form the
+                server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+                `mcp_toolset_reference` for those.
+
+                - `class BetaToolChangeToolReference:`
+
+                  Reference to a single tool the caller declared directly in
+                  `tools[]`. Does not accept the composed `{server}_{name}` form the
+                  server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+                  `mcp_toolset_reference` for those.
+
+                  - `String name`
+
+                  - `JsonValue; type "tool_reference"constant`
+
+                    - `TOOL_REFERENCE("tool_reference")`
+
+                - `class BetaToolChangeMcpToolReference:`
+
+                  Reference to a single MCP tool by its server and remote name — the
+                  same `server_name`/`name` pair `mcp_tool_use` carries.
+
+                  - `String name`
+
+                  - `String serverName`
+
+                  - `JsonValue; type "mcp_tool_reference"constant`
+
+                    - `MCP_TOOL_REFERENCE("mcp_tool_reference")`
+
+                - `class BetaToolChangeMcpToolsetReference:`
+
+                  Reference to every tool in the named MCP server's toolset.
+
+                  - `String serverName`
+
+                  - `JsonValue; type "mcp_toolset_reference"constant`
+
+                    - `MCP_TOOLSET_REFERENCE("mcp_toolset_reference")`
+
+              - `JsonValue; type "tool_addition"constant`
+
+                - `TOOL_ADDITION("tool_addition")`
+
+              - `Optional<BetaCacheControlEphemeral> cacheControl`
+
+                Create a cache control breakpoint at this content block.
+
+            - `class BetaRequestToolRemovalBlock:`
+
+              Mid-conversation directive to withdraw a tool.
+
+              `tool` references a tool (or MCP toolset) by name from the request's
+              `tools`; it is no longer offered to the model from this point in the
+              conversation onward.
+
+              - `Tool tool`
+
+                Reference to a single tool the caller declared directly in
+                `tools[]`. Does not accept the composed `{server}_{name}` form the
+                server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+                `mcp_toolset_reference` for those.
+
+                - `class BetaToolChangeToolReference:`
+
+                  Reference to a single tool the caller declared directly in
+                  `tools[]`. Does not accept the composed `{server}_{name}` form the
+                  server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+                  `mcp_toolset_reference` for those.
+
+                - `class BetaToolChangeMcpToolReference:`
+
+                  Reference to a single MCP tool by its server and remote name — the
+                  same `server_name`/`name` pair `mcp_tool_use` carries.
+
+                - `class BetaToolChangeMcpToolsetReference:`
+
+                  Reference to every tool in the named MCP server's toolset.
+
+              - `JsonValue; type "tool_removal"constant`
+
+                - `TOOL_REMOVAL("tool_removal")`
+
+              - `Optional<BetaCacheControlEphemeral> cacheControl`
+
+                Create a cache control breakpoint at this content block.
 
           - `JsonValue; type "mid_conv_system"constant`
 
@@ -2480,6 +2586,22 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
           - `Optional<BetaCacheControlEphemeral> cacheControl`
 
             Create a cache control breakpoint at this content block.
+
+        - `class BetaRequestToolAdditionBlock:`
+
+          Mid-conversation directive to surface a declared tool.
+
+          `tool` references a tool (or MCP toolset) by name from the request's
+          `tools`; it is offered to the model from this point in the
+          conversation onward.
+
+        - `class BetaRequestToolRemovalBlock:`
+
+          Mid-conversation directive to withdraw a tool.
+
+          `tool` references a tool (or MCP toolset) by name from the request's
+          `tools`; it is no longer offered to the model from this point in the
+          conversation onward.
 
         - `class BetaFallbackBlockParam:`
 
@@ -2519,13 +2641,17 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                 Most capable model for cybersecurity and biology research
 
+              - `CLAUDE_OPUS_5("claude-opus-5")`
+
+                Powerful intelligence for long-running agents and coding
+
               - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
-                Frontier intelligence for long-running agents and coding
+                Powerful intelligence for long-running agents and coding
 
               - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
 
-                Frontier intelligence for long-running agents and coding
+                Powerful intelligence for long-running agents and coding
 
               - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
 
@@ -2533,7 +2659,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-                Frontier intelligence for long-running agents and coding
+                Powerful intelligence for long-running agents and coding
 
               - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
@@ -2549,11 +2675,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
 
-                Premium model combining maximum intelligence with practical performance
+                Powerful intelligence for long-running agents and coding
 
               - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
-                Premium model combining maximum intelligence with practical performance
+                Powerful intelligence for long-running agents and coding
 
               - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
 
@@ -2565,11 +2691,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
 
-                Exceptional model for specialized complex tasks
+                Powerful intelligence for long-running agents and coding
 
               - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
 
-                Exceptional model for specialized complex tasks
+                Powerful intelligence for long-running agents and coding
 
           - `BetaFallbackInfoParam to`
 
@@ -2646,7 +2772,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
     Request-level diagnostics. Currently carries the previous response
     id for prompt-cache divergence reporting.
 
-  - `Optional<String> fallbackCreditToken`
+  - `Optional<FallbackCreditToken> fallbackCreditToken`
 
     The `fallback_credit_token` from a prior refusal's `stop_details`.
 
@@ -2669,115 +2795,33 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
     When the appended-assistant form is used on a model that otherwise disallows
     assistant-turn prefill, this token also authorizes that one prefill.
 
-  - `Optional<List<BetaFallbackParam>> fallbacks`
+    - `String`
 
-    Opt-in server-side retry on one or more substitute models when the requested model declines for policy reasons. Tried in order: if the first entry also declines, the second is tried, and so on.
+    - `class BetaFallbackCreditTokenParam:`
 
-    - `Model model`
+      Object form of `fallback_credit_token`: the token plus a redemption
+      mode.
 
-      The model that will complete your prompt.
+      Requires `anthropic-beta: fallback-credit-2026-07-01`; without that
+      header the field accepts the bare string only. The bare string and the
+      mode-less object are equivalent (both select `strict`), so wrapping
+      an existing token changes nothing by itself.
 
-      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+      - `String token`
 
-    - `Optional<Long> maxTokens`
+        The opaque `fallback_credit_token` from a prior refusal's `stop_details` — the same string the bare-string form carries.
 
-    - `Optional<BetaOutputConfig> outputConfig`
+      - `Optional<Mode> mode`
 
-      - `Optional<Effort> effort`
+        How a failing token affects the retry. `strict` (the default, and the bare-string behavior): a failing redemption is a 400 and the retry is not served. `best_effort`: the retry is served either way — a token-layer failure no longer rejects the request; the retry proceeds at normal price and the outcome is reported on the response's `usage.fallback_credit`. Two failures stay hard in both modes: a malformed token, and combining `fallback_credit_token` with `fallbacks`.
 
-        All possible effort levels.
+        - `STRICT("strict")`
 
-        - `LOW("low")`
+        - `BEST_EFFORT("best_effort")`
 
-        - `MEDIUM("medium")`
+  - `Optional<BetaFallbacksParam> fallbacks`
 
-        - `HIGH("high")`
-
-        - `XHIGH("xhigh")`
-
-        - `MAX("max")`
-
-      - `Optional<BetaJsonOutputFormat> format`
-
-        A schema to specify Claude's output format in responses. See [structured outputs](../build-with-claude/build-with-claude-structured-outputs.md)
-
-        - `Schema schema`
-
-          The JSON schema of the format
-
-        - `JsonValue; type "json_schema"constant`
-
-          - `JSON_SCHEMA("json_schema")`
-
-      - `Optional<BetaTokenTaskBudget> taskBudget`
-
-        User-configurable total token budget across contexts.
-
-        - `long total`
-
-          Total token budget across all contexts in the session.
-
-        - `JsonValue; type "tokens"constant`
-
-          The budget type. Currently only 'tokens' is supported.
-
-          - `TOKENS("tokens")`
-
-        - `Optional<Long> remaining`
-
-          Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
-
-    - `Optional<Speed> speed`
-
-      Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
-
-      - `STANDARD("standard")`
-
-      - `FAST("fast")`
-
-    - `Optional<Thinking> thinking`
-
-      - `class BetaThinkingConfigEnabled:`
-
-        - `long budgetTokens`
-
-          Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
-
-          Must be ≥1024 and less than `max_tokens`.
-
-          See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md) for details.
-
-        - `JsonValue; type "enabled"constant`
-
-          - `ENABLED("enabled")`
-
-        - `Optional<Display> display`
-
-          Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
-
-          - `SUMMARIZED("summarized")`
-
-          - `OMITTED("omitted")`
-
-      - `class BetaThinkingConfigDisabled:`
-
-        - `JsonValue; type "disabled"constant`
-
-          - `DISABLED("disabled")`
-
-      - `class BetaThinkingConfigAdaptive:`
-
-        - `JsonValue; type "adaptive"constant`
-
-          - `ADAPTIVE("adaptive")`
-
-        - `Optional<Display> display`
-
-          Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
-
-          - `SUMMARIZED("summarized")`
-
-          - `OMITTED("omitted")`
+    Opt-in server-side retry on one or more substitute models when the requested model declines for policy reasons. Tried in order: if the first entry also declines, the second is tried, and so on. The string "default" requests the requested model's server-defined default fallback configuration.
 
   - `Optional<String> inferenceGeo`
 
@@ -5049,13 +5093,17 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             Most capable model for cybersecurity and biology research
 
+          - `CLAUDE_OPUS_5("claude-opus-5")`
+
+            Powerful intelligence for long-running agents and coding
+
           - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
-            Frontier intelligence for long-running agents and coding
+            Powerful intelligence for long-running agents and coding
 
           - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
 
-            Frontier intelligence for long-running agents and coding
+            Powerful intelligence for long-running agents and coding
 
           - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
 
@@ -5063,7 +5111,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-            Frontier intelligence for long-running agents and coding
+            Powerful intelligence for long-running agents and coding
 
           - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
@@ -5079,11 +5127,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
 
-            Premium model combining maximum intelligence with practical performance
+            Powerful intelligence for long-running agents and coding
 
           - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
-            Premium model combining maximum intelligence with practical performance
+            Powerful intelligence for long-running agents and coding
 
           - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
 
@@ -5095,11 +5143,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
 
-            Exceptional model for specialized complex tasks
+            Powerful intelligence for long-running agents and coding
 
           - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
 
-            Exceptional model for specialized complex tasks
+            Powerful intelligence for long-running agents and coding
 
       - `BetaFallbackInfo to`
 
@@ -5357,6 +5405,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
     * `"tool_use"`: the model invoked one or more tools
     * `"pause_turn"`: we paused a long-running turn. You may provide the response back as-is in a subsequent request to let the model continue.
     * `"refusal"`: when streaming classifiers intervene to handle potential policy violations
+    * `"model_context_window_exceeded"`: we exceeded the model's context window
 
     In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
@@ -5421,6 +5470,78 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
     - `Optional<Long> cacheReadInputTokens`
 
       The number of input tokens read from the cache.
+
+    - `Optional<BetaFallbackCreditUsage> fallbackCredit`
+
+      Outcome of the `fallback_credit_token` presented on this request.
+
+      - `Status status`
+
+        Whether the fallback-credit reprice was applied to this response's billing.
+
+        A union discriminated on `type`. `redeemed`: the retry is billed as if
+        the conversation had been on the retry model all along — including when the
+        resulting shift is zero because there was nothing to move. `not_applied`:
+        no reprice was applied; the arm's `reason` says why.
+
+        - `class BetaFallbackCreditRedeemed:`
+
+          The reprice was applied: the retry is billed as if the conversation
+          had been on the retry model all along.
+
+          - `JsonValue; type "redeemed"constant`
+
+            - `REDEEMED("redeemed")`
+
+        - `class BetaFallbackCreditNotApplied:`
+
+          No reprice was applied; `reason` says why.
+
+          - `Reason reason`
+
+            Why the reprice was not applied.
+
+            A closed enum; additions to the redemption-check vocabulary arrive as
+            deliberate schema updates.
+
+            - `BODY_MISMATCH("body_mismatch")`
+
+            - `CONTINUATION_EXCLUDED("continuation_excluded")`
+
+            - `CONTINUATION_ONLY("continuation_only")`
+
+            - `EXPIRED("expired")`
+
+            - `INVALID_TARGET_MODEL("invalid_target_model")`
+
+            - `NOT_ENABLED("not_enabled")`
+
+            - `REPRICE_UNAVAILABLE("reprice_unavailable")`
+
+            - `TEMPORARILY_UNAVAILABLE("temporarily_unavailable")`
+
+            - `VARIANT_FIELDS_PRESENT("variant_fields_present")`
+
+            - `WRONG_ORGANIZATION("wrong_organization")`
+
+            - `WRONG_PLATFORM("wrong_platform")`
+
+            - `WRONG_WORKSPACE("wrong_workspace")`
+
+          - `JsonValue; type "not_applied"constant`
+
+            - `NOT_APPLIED("not_applied")`
+
+          - `Optional<List<String>> removeToRedeem`
+
+            Request fields to remove before retrying, so the retry can redeem this
+            token.
+
+            Present exactly when `reason` is `variant_fields_present` — never null,
+            never an empty array; absent otherwise. Fields are named only from your own request, and only after
+            the sealed variant hash matched. A served best-effort retry has already
+            been billed at normal price; nothing redeems retroactively, but a corrected
+            re-send inside the token's five-minute window can still redeem.
 
     - `Optional<String> inferenceGeo`
 
@@ -5732,6 +5853,11 @@ public final class Main {
     },
     "cache_creation_input_tokens": 2051,
     "cache_read_input_tokens": 2051,
+    "fallback_credit": {
+      "status": {
+        "type": "redeemed"
+      }
+    },
     "inference_geo": "global",
     "input_tokens": 2095,
     "iterations": [
@@ -5838,7 +5964,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -6882,19 +7012,109 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
           Use this block to provide or update system-level instructions at a specific
           point in the conversation, rather than only via the top-level `system` parameter.
 
-          - `List<BetaTextBlockParam> content`
+          - `List<Content> content`
 
             System instruction text blocks.
 
-            - `String text`
+            - `class BetaTextBlockParam:`
 
-            - `JsonValue; type "text"constant`
+            - `class BetaRequestToolAdditionBlock:`
 
-            - `Optional<BetaCacheControlEphemeral> cacheControl`
+              Mid-conversation directive to surface a declared tool.
 
-              Create a cache control breakpoint at this content block.
+              `tool` references a tool (or MCP toolset) by name from the request's
+              `tools`; it is offered to the model from this point in the
+              conversation onward.
 
-            - `Optional<List<BetaTextCitationParam>> citations`
+              - `Tool tool`
+
+                Reference to a single tool the caller declared directly in
+                `tools[]`. Does not accept the composed `{server}_{name}` form the
+                server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+                `mcp_toolset_reference` for those.
+
+                - `class BetaToolChangeToolReference:`
+
+                  Reference to a single tool the caller declared directly in
+                  `tools[]`. Does not accept the composed `{server}_{name}` form the
+                  server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+                  `mcp_toolset_reference` for those.
+
+                  - `String name`
+
+                  - `JsonValue; type "tool_reference"constant`
+
+                    - `TOOL_REFERENCE("tool_reference")`
+
+                - `class BetaToolChangeMcpToolReference:`
+
+                  Reference to a single MCP tool by its server and remote name — the
+                  same `server_name`/`name` pair `mcp_tool_use` carries.
+
+                  - `String name`
+
+                  - `String serverName`
+
+                  - `JsonValue; type "mcp_tool_reference"constant`
+
+                    - `MCP_TOOL_REFERENCE("mcp_tool_reference")`
+
+                - `class BetaToolChangeMcpToolsetReference:`
+
+                  Reference to every tool in the named MCP server's toolset.
+
+                  - `String serverName`
+
+                  - `JsonValue; type "mcp_toolset_reference"constant`
+
+                    - `MCP_TOOLSET_REFERENCE("mcp_toolset_reference")`
+
+              - `JsonValue; type "tool_addition"constant`
+
+                - `TOOL_ADDITION("tool_addition")`
+
+              - `Optional<BetaCacheControlEphemeral> cacheControl`
+
+                Create a cache control breakpoint at this content block.
+
+            - `class BetaRequestToolRemovalBlock:`
+
+              Mid-conversation directive to withdraw a tool.
+
+              `tool` references a tool (or MCP toolset) by name from the request's
+              `tools`; it is no longer offered to the model from this point in the
+              conversation onward.
+
+              - `Tool tool`
+
+                Reference to a single tool the caller declared directly in
+                `tools[]`. Does not accept the composed `{server}_{name}` form the
+                server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+                `mcp_toolset_reference` for those.
+
+                - `class BetaToolChangeToolReference:`
+
+                  Reference to a single tool the caller declared directly in
+                  `tools[]`. Does not accept the composed `{server}_{name}` form the
+                  server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+                  `mcp_toolset_reference` for those.
+
+                - `class BetaToolChangeMcpToolReference:`
+
+                  Reference to a single MCP tool by its server and remote name — the
+                  same `server_name`/`name` pair `mcp_tool_use` carries.
+
+                - `class BetaToolChangeMcpToolsetReference:`
+
+                  Reference to every tool in the named MCP server's toolset.
+
+              - `JsonValue; type "tool_removal"constant`
+
+                - `TOOL_REMOVAL("tool_removal")`
+
+              - `Optional<BetaCacheControlEphemeral> cacheControl`
+
+                Create a cache control breakpoint at this content block.
 
           - `JsonValue; type "mid_conv_system"constant`
 
@@ -6903,6 +7123,22 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
           - `Optional<BetaCacheControlEphemeral> cacheControl`
 
             Create a cache control breakpoint at this content block.
+
+        - `class BetaRequestToolAdditionBlock:`
+
+          Mid-conversation directive to surface a declared tool.
+
+          `tool` references a tool (or MCP toolset) by name from the request's
+          `tools`; it is offered to the model from this point in the
+          conversation onward.
+
+        - `class BetaRequestToolRemovalBlock:`
+
+          Mid-conversation directive to withdraw a tool.
+
+          `tool` references a tool (or MCP toolset) by name from the request's
+          `tools`; it is no longer offered to the model from this point in the
+          conversation onward.
 
         - `class BetaFallbackBlockParam:`
 
@@ -6942,13 +7178,17 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 Most capable model for cybersecurity and biology research
 
+              - `CLAUDE_OPUS_5("claude-opus-5")`
+
+                Powerful intelligence for long-running agents and coding
+
               - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
-                Frontier intelligence for long-running agents and coding
+                Powerful intelligence for long-running agents and coding
 
               - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
 
-                Frontier intelligence for long-running agents and coding
+                Powerful intelligence for long-running agents and coding
 
               - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
 
@@ -6956,7 +7196,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-                Frontier intelligence for long-running agents and coding
+                Powerful intelligence for long-running agents and coding
 
               - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
@@ -6972,11 +7212,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
 
-                Premium model combining maximum intelligence with practical performance
+                Powerful intelligence for long-running agents and coding
 
               - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
-                Premium model combining maximum intelligence with practical performance
+                Powerful intelligence for long-running agents and coding
 
               - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
 
@@ -6988,11 +7228,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
 
-                Exceptional model for specialized complex tasks
+                Powerful intelligence for long-running agents and coding
 
               - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
 
-                Exceptional model for specialized complex tasks
+                Powerful intelligence for long-running agents and coding
 
           - `BetaFallbackInfoParam to`
 
@@ -8490,13 +8730,17 @@ public final class Main {
 
       Most capable model for cybersecurity and biology research
 
+    - `CLAUDE_OPUS_5("claude-opus-5")`
+
+      Powerful intelligence for long-running agents and coding
+
     - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
-      Frontier intelligence for long-running agents and coding
+      Powerful intelligence for long-running agents and coding
 
     - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
 
-      Frontier intelligence for long-running agents and coding
+      Powerful intelligence for long-running agents and coding
 
     - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
 
@@ -8504,7 +8748,7 @@ public final class Main {
 
     - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-      Frontier intelligence for long-running agents and coding
+      Powerful intelligence for long-running agents and coding
 
     - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
@@ -8520,11 +8764,11 @@ public final class Main {
 
     - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
 
-      Premium model combining maximum intelligence with practical performance
+      Powerful intelligence for long-running agents and coding
 
     - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
-      Premium model combining maximum intelligence with practical performance
+      Powerful intelligence for long-running agents and coding
 
     - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
 
@@ -8536,11 +8780,11 @@ public final class Main {
 
     - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
 
-      Exceptional model for specialized complex tasks
+      Powerful intelligence for long-running agents and coding
 
     - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
 
-      Exceptional model for specialized complex tasks
+      Powerful intelligence for long-running agents and coding
 
   - `long outputTokens`
 
@@ -8630,13 +8874,17 @@ public final class Main {
 
       Most capable model for cybersecurity and biology research
 
+    - `CLAUDE_OPUS_5("claude-opus-5")`
+
+      Powerful intelligence for long-running agents and coding
+
     - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
-      Frontier intelligence for long-running agents and coding
+      Powerful intelligence for long-running agents and coding
 
     - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
 
-      Frontier intelligence for long-running agents and coding
+      Powerful intelligence for long-running agents and coding
 
     - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
 
@@ -8644,7 +8892,7 @@ public final class Main {
 
     - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-      Frontier intelligence for long-running agents and coding
+      Powerful intelligence for long-running agents and coding
 
     - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
@@ -8660,11 +8908,11 @@ public final class Main {
 
     - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
 
-      Premium model combining maximum intelligence with practical performance
+      Powerful intelligence for long-running agents and coding
 
     - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
-      Premium model combining maximum intelligence with practical performance
+      Powerful intelligence for long-running agents and coding
 
     - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
 
@@ -8676,11 +8924,11 @@ public final class Main {
 
     - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
 
-      Exceptional model for specialized complex tasks
+      Powerful intelligence for long-running agents and coding
 
     - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
 
-      Exceptional model for specialized complex tasks
+      Powerful intelligence for long-running agents and coding
 
   - `JsonValue; name "advisor"constant`
 
@@ -11486,13 +11734,17 @@ public final class Main {
 
           Most capable model for cybersecurity and biology research
 
+        - `CLAUDE_OPUS_5("claude-opus-5")`
+
+          Powerful intelligence for long-running agents and coding
+
         - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
-          Frontier intelligence for long-running agents and coding
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
 
-          Frontier intelligence for long-running agents and coding
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
 
@@ -11500,7 +11752,7 @@ public final class Main {
 
         - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-          Frontier intelligence for long-running agents and coding
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
@@ -11516,11 +11768,11 @@ public final class Main {
 
         - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
 
-          Premium model combining maximum intelligence with practical performance
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
-          Premium model combining maximum intelligence with practical performance
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
 
@@ -11532,11 +11784,11 @@ public final class Main {
 
         - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
 
-          Exceptional model for specialized complex tasks
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
 
-          Exceptional model for specialized complex tasks
+          Powerful intelligence for long-running agents and coding
 
     - `BetaFallbackInfo to`
 
@@ -12563,19 +12815,109 @@ public final class Main {
     Use this block to provide or update system-level instructions at a specific
     point in the conversation, rather than only via the top-level `system` parameter.
 
-    - `List<BetaTextBlockParam> content`
+    - `List<Content> content`
 
       System instruction text blocks.
 
-      - `String text`
+      - `class BetaTextBlockParam:`
 
-      - `JsonValue; type "text"constant`
+      - `class BetaRequestToolAdditionBlock:`
 
-      - `Optional<BetaCacheControlEphemeral> cacheControl`
+        Mid-conversation directive to surface a declared tool.
 
-        Create a cache control breakpoint at this content block.
+        `tool` references a tool (or MCP toolset) by name from the request's
+        `tools`; it is offered to the model from this point in the
+        conversation onward.
 
-      - `Optional<List<BetaTextCitationParam>> citations`
+        - `Tool tool`
+
+          Reference to a single tool the caller declared directly in
+          `tools[]`. Does not accept the composed `{server}_{name}` form the
+          server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+          `mcp_toolset_reference` for those.
+
+          - `class BetaToolChangeToolReference:`
+
+            Reference to a single tool the caller declared directly in
+            `tools[]`. Does not accept the composed `{server}_{name}` form the
+            server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+            `mcp_toolset_reference` for those.
+
+            - `String name`
+
+            - `JsonValue; type "tool_reference"constant`
+
+              - `TOOL_REFERENCE("tool_reference")`
+
+          - `class BetaToolChangeMcpToolReference:`
+
+            Reference to a single MCP tool by its server and remote name — the
+            same `server_name`/`name` pair `mcp_tool_use` carries.
+
+            - `String name`
+
+            - `String serverName`
+
+            - `JsonValue; type "mcp_tool_reference"constant`
+
+              - `MCP_TOOL_REFERENCE("mcp_tool_reference")`
+
+          - `class BetaToolChangeMcpToolsetReference:`
+
+            Reference to every tool in the named MCP server's toolset.
+
+            - `String serverName`
+
+            - `JsonValue; type "mcp_toolset_reference"constant`
+
+              - `MCP_TOOLSET_REFERENCE("mcp_toolset_reference")`
+
+        - `JsonValue; type "tool_addition"constant`
+
+          - `TOOL_ADDITION("tool_addition")`
+
+        - `Optional<BetaCacheControlEphemeral> cacheControl`
+
+          Create a cache control breakpoint at this content block.
+
+      - `class BetaRequestToolRemovalBlock:`
+
+        Mid-conversation directive to withdraw a tool.
+
+        `tool` references a tool (or MCP toolset) by name from the request's
+        `tools`; it is no longer offered to the model from this point in the
+        conversation onward.
+
+        - `Tool tool`
+
+          Reference to a single tool the caller declared directly in
+          `tools[]`. Does not accept the composed `{server}_{name}` form the
+          server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+          `mcp_toolset_reference` for those.
+
+          - `class BetaToolChangeToolReference:`
+
+            Reference to a single tool the caller declared directly in
+            `tools[]`. Does not accept the composed `{server}_{name}` form the
+            server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+            `mcp_toolset_reference` for those.
+
+          - `class BetaToolChangeMcpToolReference:`
+
+            Reference to a single MCP tool by its server and remote name — the
+            same `server_name`/`name` pair `mcp_tool_use` carries.
+
+          - `class BetaToolChangeMcpToolsetReference:`
+
+            Reference to every tool in the named MCP server's toolset.
+
+        - `JsonValue; type "tool_removal"constant`
+
+          - `TOOL_REMOVAL("tool_removal")`
+
+        - `Optional<BetaCacheControlEphemeral> cacheControl`
+
+          Create a cache control breakpoint at this content block.
 
     - `JsonValue; type "mid_conv_system"constant`
 
@@ -12584,6 +12926,22 @@ public final class Main {
     - `Optional<BetaCacheControlEphemeral> cacheControl`
 
       Create a cache control breakpoint at this content block.
+
+  - `class BetaRequestToolAdditionBlock:`
+
+    Mid-conversation directive to surface a declared tool.
+
+    `tool` references a tool (or MCP toolset) by name from the request's
+    `tools`; it is offered to the model from this point in the
+    conversation onward.
+
+  - `class BetaRequestToolRemovalBlock:`
+
+    Mid-conversation directive to withdraw a tool.
+
+    `tool` references a tool (or MCP toolset) by name from the request's
+    `tools`; it is no longer offered to the model from this point in the
+    conversation onward.
 
   - `class BetaFallbackBlockParam:`
 
@@ -12623,13 +12981,17 @@ public final class Main {
 
           Most capable model for cybersecurity and biology research
 
+        - `CLAUDE_OPUS_5("claude-opus-5")`
+
+          Powerful intelligence for long-running agents and coding
+
         - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
-          Frontier intelligence for long-running agents and coding
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
 
-          Frontier intelligence for long-running agents and coding
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
 
@@ -12637,7 +12999,7 @@ public final class Main {
 
         - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-          Frontier intelligence for long-running agents and coding
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
@@ -12653,11 +13015,11 @@ public final class Main {
 
         - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
 
-          Premium model combining maximum intelligence with practical performance
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
-          Premium model combining maximum intelligence with practical performance
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
 
@@ -12669,11 +13031,11 @@ public final class Main {
 
         - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
 
-          Exceptional model for specialized complex tasks
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
 
-          Exceptional model for specialized complex tasks
+          Powerful intelligence for long-running agents and coding
 
     - `BetaFallbackInfoParam to`
 
@@ -13447,13 +13809,17 @@ public final class Main {
 
         Most capable model for cybersecurity and biology research
 
+      - `CLAUDE_OPUS_5("claude-opus-5")`
+
+        Powerful intelligence for long-running agents and coding
+
       - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
-        Frontier intelligence for long-running agents and coding
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
 
-        Frontier intelligence for long-running agents and coding
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
 
@@ -13461,7 +13827,7 @@ public final class Main {
 
       - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-        Frontier intelligence for long-running agents and coding
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
@@ -13477,11 +13843,11 @@ public final class Main {
 
       - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
 
-        Premium model combining maximum intelligence with practical performance
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
-        Premium model combining maximum intelligence with practical performance
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
 
@@ -13493,11 +13859,11 @@ public final class Main {
 
       - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
 
-        Exceptional model for specialized complex tasks
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
 
-        Exceptional model for specialized complex tasks
+        Powerful intelligence for long-running agents and coding
 
   - `BetaFallbackInfo to`
 
@@ -13579,13 +13945,17 @@ public final class Main {
 
         Most capable model for cybersecurity and biology research
 
+      - `CLAUDE_OPUS_5("claude-opus-5")`
+
+        Powerful intelligence for long-running agents and coding
+
       - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
-        Frontier intelligence for long-running agents and coding
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
 
-        Frontier intelligence for long-running agents and coding
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
 
@@ -13593,7 +13963,7 @@ public final class Main {
 
       - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-        Frontier intelligence for long-running agents and coding
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
@@ -13609,11 +13979,11 @@ public final class Main {
 
       - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
 
-        Premium model combining maximum intelligence with practical performance
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
-        Premium model combining maximum intelligence with practical performance
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
 
@@ -13625,11 +13995,11 @@ public final class Main {
 
       - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
 
-        Exceptional model for specialized complex tasks
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
 
-        Exceptional model for specialized complex tasks
+        Powerful intelligence for long-running agents and coding
 
   - `BetaFallbackInfoParam to`
 
@@ -13642,6 +14012,167 @@ public final class Main {
   - `Optional<JsonValue> trigger`
 
     The response block's `trigger`, echoed verbatim. Accepted and ignored by the server; any object or `null` is allowed.
+
+### Beta Fallback Credit Not Applied
+
+- `class BetaFallbackCreditNotApplied:`
+
+  No reprice was applied; `reason` says why.
+
+  - `Reason reason`
+
+    Why the reprice was not applied.
+
+    A closed enum; additions to the redemption-check vocabulary arrive as
+    deliberate schema updates.
+
+    - `BODY_MISMATCH("body_mismatch")`
+
+    - `CONTINUATION_EXCLUDED("continuation_excluded")`
+
+    - `CONTINUATION_ONLY("continuation_only")`
+
+    - `EXPIRED("expired")`
+
+    - `INVALID_TARGET_MODEL("invalid_target_model")`
+
+    - `NOT_ENABLED("not_enabled")`
+
+    - `REPRICE_UNAVAILABLE("reprice_unavailable")`
+
+    - `TEMPORARILY_UNAVAILABLE("temporarily_unavailable")`
+
+    - `VARIANT_FIELDS_PRESENT("variant_fields_present")`
+
+    - `WRONG_ORGANIZATION("wrong_organization")`
+
+    - `WRONG_PLATFORM("wrong_platform")`
+
+    - `WRONG_WORKSPACE("wrong_workspace")`
+
+  - `JsonValue; type "not_applied"constant`
+
+    - `NOT_APPLIED("not_applied")`
+
+  - `Optional<List<String>> removeToRedeem`
+
+    Request fields to remove before retrying, so the retry can redeem this
+    token.
+
+    Present exactly when `reason` is `variant_fields_present` — never null,
+    never an empty array; absent otherwise. Fields are named only from your own request, and only after
+    the sealed variant hash matched. A served best-effort retry has already
+    been billed at normal price; nothing redeems retroactively, but a corrected
+    re-send inside the token's five-minute window can still redeem.
+
+### Beta Fallback Credit Redeemed
+
+- `class BetaFallbackCreditRedeemed:`
+
+  The reprice was applied: the retry is billed as if the conversation
+  had been on the retry model all along.
+
+  - `JsonValue; type "redeemed"constant`
+
+    - `REDEEMED("redeemed")`
+
+### Beta Fallback Credit Token Param
+
+- `class BetaFallbackCreditTokenParam:`
+
+  Object form of `fallback_credit_token`: the token plus a redemption
+  mode.
+
+  Requires `anthropic-beta: fallback-credit-2026-07-01`; without that
+  header the field accepts the bare string only. The bare string and the
+  mode-less object are equivalent (both select `strict`), so wrapping
+  an existing token changes nothing by itself.
+
+  - `String token`
+
+    The opaque `fallback_credit_token` from a prior refusal's `stop_details` — the same string the bare-string form carries.
+
+  - `Optional<Mode> mode`
+
+    How a failing token affects the retry. `strict` (the default, and the bare-string behavior): a failing redemption is a 400 and the retry is not served. `best_effort`: the retry is served either way — a token-layer failure no longer rejects the request; the retry proceeds at normal price and the outcome is reported on the response's `usage.fallback_credit`. Two failures stay hard in both modes: a malformed token, and combining `fallback_credit_token` with `fallbacks`.
+
+    - `STRICT("strict")`
+
+    - `BEST_EFFORT("best_effort")`
+
+### Beta Fallback Credit Usage
+
+- `class BetaFallbackCreditUsage:`
+
+  Outcome of the `fallback_credit_token` presented on this request.
+
+  - `Status status`
+
+    Whether the fallback-credit reprice was applied to this response's billing.
+
+    A union discriminated on `type`. `redeemed`: the retry is billed as if
+    the conversation had been on the retry model all along — including when the
+    resulting shift is zero because there was nothing to move. `not_applied`:
+    no reprice was applied; the arm's `reason` says why.
+
+    - `class BetaFallbackCreditRedeemed:`
+
+      The reprice was applied: the retry is billed as if the conversation
+      had been on the retry model all along.
+
+      - `JsonValue; type "redeemed"constant`
+
+        - `REDEEMED("redeemed")`
+
+    - `class BetaFallbackCreditNotApplied:`
+
+      No reprice was applied; `reason` says why.
+
+      - `Reason reason`
+
+        Why the reprice was not applied.
+
+        A closed enum; additions to the redemption-check vocabulary arrive as
+        deliberate schema updates.
+
+        - `BODY_MISMATCH("body_mismatch")`
+
+        - `CONTINUATION_EXCLUDED("continuation_excluded")`
+
+        - `CONTINUATION_ONLY("continuation_only")`
+
+        - `EXPIRED("expired")`
+
+        - `INVALID_TARGET_MODEL("invalid_target_model")`
+
+        - `NOT_ENABLED("not_enabled")`
+
+        - `REPRICE_UNAVAILABLE("reprice_unavailable")`
+
+        - `TEMPORARILY_UNAVAILABLE("temporarily_unavailable")`
+
+        - `VARIANT_FIELDS_PRESENT("variant_fields_present")`
+
+        - `WRONG_ORGANIZATION("wrong_organization")`
+
+        - `WRONG_PLATFORM("wrong_platform")`
+
+        - `WRONG_WORKSPACE("wrong_workspace")`
+
+      - `JsonValue; type "not_applied"constant`
+
+        - `NOT_APPLIED("not_applied")`
+
+      - `Optional<List<String>> removeToRedeem`
+
+        Request fields to remove before retrying, so the retry can redeem this
+        token.
+
+        Present exactly when `reason` is `variant_fields_present` — never null,
+        never an empty array; absent otherwise. Fields are named only from your own request, and only after
+        the sealed variant hash matched. A served best-effort retry has already
+        been billed at normal price; nothing redeems retroactively, but a corrected
+        re-send inside the token's five-minute window can still redeem.
 
 ### Beta Fallback Info
 
@@ -13667,13 +14198,17 @@ public final class Main {
 
       Most capable model for cybersecurity and biology research
 
+    - `CLAUDE_OPUS_5("claude-opus-5")`
+
+      Powerful intelligence for long-running agents and coding
+
     - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
-      Frontier intelligence for long-running agents and coding
+      Powerful intelligence for long-running agents and coding
 
     - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
 
-      Frontier intelligence for long-running agents and coding
+      Powerful intelligence for long-running agents and coding
 
     - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
 
@@ -13681,7 +14216,7 @@ public final class Main {
 
     - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-      Frontier intelligence for long-running agents and coding
+      Powerful intelligence for long-running agents and coding
 
     - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
@@ -13697,11 +14232,11 @@ public final class Main {
 
     - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
 
-      Premium model combining maximum intelligence with practical performance
+      Powerful intelligence for long-running agents and coding
 
     - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
-      Premium model combining maximum intelligence with practical performance
+      Powerful intelligence for long-running agents and coding
 
     - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
 
@@ -13713,11 +14248,11 @@ public final class Main {
 
     - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
 
-      Exceptional model for specialized complex tasks
+      Powerful intelligence for long-running agents and coding
 
     - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
 
-      Exceptional model for specialized complex tasks
+      Powerful intelligence for long-running agents and coding
 
 ### Beta Fallback Info Param
 
@@ -13743,13 +14278,17 @@ public final class Main {
 
       Most capable model for cybersecurity and biology research
 
+    - `CLAUDE_OPUS_5("claude-opus-5")`
+
+      Powerful intelligence for long-running agents and coding
+
     - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
-      Frontier intelligence for long-running agents and coding
+      Powerful intelligence for long-running agents and coding
 
     - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
 
-      Frontier intelligence for long-running agents and coding
+      Powerful intelligence for long-running agents and coding
 
     - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
 
@@ -13757,7 +14296,7 @@ public final class Main {
 
     - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-      Frontier intelligence for long-running agents and coding
+      Powerful intelligence for long-running agents and coding
 
     - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
@@ -13773,11 +14312,11 @@ public final class Main {
 
     - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
 
-      Premium model combining maximum intelligence with practical performance
+      Powerful intelligence for long-running agents and coding
 
     - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
-      Premium model combining maximum intelligence with practical performance
+      Powerful intelligence for long-running agents and coding
 
     - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
 
@@ -13789,11 +14328,11 @@ public final class Main {
 
     - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
 
-      Exceptional model for specialized complex tasks
+      Powerful intelligence for long-running agents and coding
 
     - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
 
-      Exceptional model for specialized complex tasks
+      Powerful intelligence for long-running agents and coding
 
 ### Beta Fallback Message Iteration Usage
 
@@ -13848,13 +14387,17 @@ public final class Main {
 
       Most capable model for cybersecurity and biology research
 
+    - `CLAUDE_OPUS_5("claude-opus-5")`
+
+      Powerful intelligence for long-running agents and coding
+
     - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
-      Frontier intelligence for long-running agents and coding
+      Powerful intelligence for long-running agents and coding
 
     - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
 
-      Frontier intelligence for long-running agents and coding
+      Powerful intelligence for long-running agents and coding
 
     - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
 
@@ -13862,7 +14405,7 @@ public final class Main {
 
     - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-      Frontier intelligence for long-running agents and coding
+      Powerful intelligence for long-running agents and coding
 
     - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
@@ -13878,11 +14421,11 @@ public final class Main {
 
     - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
 
-      Premium model combining maximum intelligence with practical performance
+      Powerful intelligence for long-running agents and coding
 
     - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
-      Premium model combining maximum intelligence with practical performance
+      Powerful intelligence for long-running agents and coding
 
     - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
 
@@ -13894,11 +14437,11 @@ public final class Main {
 
     - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
 
-      Exceptional model for specialized complex tasks
+      Powerful intelligence for long-running agents and coding
 
     - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
 
-      Exceptional model for specialized complex tasks
+      Powerful intelligence for long-running agents and coding
 
   - `long outputTokens`
 
@@ -13939,13 +14482,17 @@ public final class Main {
 
       Most capable model for cybersecurity and biology research
 
+    - `CLAUDE_OPUS_5("claude-opus-5")`
+
+      Powerful intelligence for long-running agents and coding
+
     - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
-      Frontier intelligence for long-running agents and coding
+      Powerful intelligence for long-running agents and coding
 
     - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
 
-      Frontier intelligence for long-running agents and coding
+      Powerful intelligence for long-running agents and coding
 
     - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
 
@@ -13953,7 +14500,7 @@ public final class Main {
 
     - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-      Frontier intelligence for long-running agents and coding
+      Powerful intelligence for long-running agents and coding
 
     - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
@@ -13969,11 +14516,11 @@ public final class Main {
 
     - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
 
-      Premium model combining maximum intelligence with practical performance
+      Powerful intelligence for long-running agents and coding
 
     - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
-      Premium model combining maximum intelligence with practical performance
+      Powerful intelligence for long-running agents and coding
 
     - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
 
@@ -13985,11 +14532,11 @@ public final class Main {
 
     - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
 
-      Exceptional model for specialized complex tasks
+      Powerful intelligence for long-running agents and coding
 
     - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
 
-      Exceptional model for specialized complex tasks
+      Powerful intelligence for long-running agents and coding
 
   - `Optional<Long> maxTokens`
 
@@ -14124,6 +14671,192 @@ public final class Main {
   - `JsonValue; type "refusal"constant`
 
     - `REFUSAL("refusal")`
+
+### Beta Fallbacks Param
+
+- `class BetaFallbacksParam: A class that can be one of several variants.union`
+
+  Opt-in server-side retry on one or more substitute models when the requested model declines for policy reasons. Tried in order: if the first entry also declines, the second is tried, and so on. The string "default" requests the requested model's server-defined default fallback configuration.
+
+  - `List<BetaFallbackParam>`
+
+    - `Model model`
+
+      The model that will complete your prompt.
+
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `CLAUDE_SONNET_5("claude-sonnet-5")`
+
+        High-performance model for coding and agents
+
+      - `CLAUDE_FABLE_5("claude-fable-5")`
+
+        Next generation of intelligence for the hardest knowledge work and coding problems
+
+      - `CLAUDE_MYTHOS_5("claude-mythos-5")`
+
+        Most capable model for cybersecurity and biology research
+
+      - `CLAUDE_OPUS_5("claude-opus-5")`
+
+        Powerful intelligence for long-running agents and coding
+
+      - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
+
+        Powerful intelligence for long-running agents and coding
+
+      - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
+
+        Powerful intelligence for long-running agents and coding
+
+      - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
+
+        New class of intelligence, strongest in coding and cybersecurity
+
+      - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
+
+        Powerful intelligence for long-running agents and coding
+
+      - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
+
+        Best combination of speed and intelligence
+
+      - `CLAUDE_HAIKU_4_5("claude-haiku-4-5")`
+
+        Fastest model with near-frontier intelligence
+
+      - `CLAUDE_HAIKU_4_5_20251001("claude-haiku-4-5-20251001")`
+
+        Fastest model with near-frontier intelligence
+
+      - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
+
+        Powerful intelligence for long-running agents and coding
+
+      - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
+
+        Powerful intelligence for long-running agents and coding
+
+      - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
+
+        High-performance model for agents and coding
+
+      - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
+
+        High-performance model for agents and coding
+
+      - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
+
+        Powerful intelligence for long-running agents and coding
+
+      - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
+
+        Powerful intelligence for long-running agents and coding
+
+    - `Optional<Long> maxTokens`
+
+    - `Optional<BetaOutputConfig> outputConfig`
+
+      - `Optional<Effort> effort`
+
+        All possible effort levels.
+
+        - `LOW("low")`
+
+        - `MEDIUM("medium")`
+
+        - `HIGH("high")`
+
+        - `XHIGH("xhigh")`
+
+        - `MAX("max")`
+
+      - `Optional<BetaJsonOutputFormat> format`
+
+        A schema to specify Claude's output format in responses. See [structured outputs](../build-with-claude/build-with-claude-structured-outputs.md)
+
+        - `Schema schema`
+
+          The JSON schema of the format
+
+        - `JsonValue; type "json_schema"constant`
+
+          - `JSON_SCHEMA("json_schema")`
+
+      - `Optional<BetaTokenTaskBudget> taskBudget`
+
+        User-configurable total token budget across contexts.
+
+        - `long total`
+
+          Total token budget across all contexts in the session.
+
+        - `JsonValue; type "tokens"constant`
+
+          The budget type. Currently only 'tokens' is supported.
+
+          - `TOKENS("tokens")`
+
+        - `Optional<Long> remaining`
+
+          Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
+
+    - `Optional<Speed> speed`
+
+      Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+      - `STANDARD("standard")`
+
+      - `FAST("fast")`
+
+    - `Optional<Thinking> thinking`
+
+      - `class BetaThinkingConfigEnabled:`
+
+        - `long budgetTokens`
+
+          Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
+
+          Must be ≥1024 and less than `max_tokens`.
+
+          See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md) for details.
+
+        - `JsonValue; type "enabled"constant`
+
+          - `ENABLED("enabled")`
+
+        - `Optional<Display> display`
+
+          Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+
+          - `SUMMARIZED("summarized")`
+
+          - `OMITTED("omitted")`
+
+      - `class BetaThinkingConfigDisabled:`
+
+        - `JsonValue; type "disabled"constant`
+
+          - `DISABLED("disabled")`
+
+      - `class BetaThinkingConfigAdaptive:`
+
+        - `JsonValue; type "adaptive"constant`
+
+          - `ADAPTIVE("adaptive")`
+
+        - `Optional<Display> display`
+
+          Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+
+          - `SUMMARIZED("summarized")`
+
+          - `OMITTED("omitted")`
+
+  - `JsonValue;`
+
+    - `DEFAULT("default")`
 
 ### Beta File Document Source
 
@@ -15669,13 +16402,17 @@ public final class Main {
 
             Most capable model for cybersecurity and biology research
 
+          - `CLAUDE_OPUS_5("claude-opus-5")`
+
+            Powerful intelligence for long-running agents and coding
+
           - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
-            Frontier intelligence for long-running agents and coding
+            Powerful intelligence for long-running agents and coding
 
           - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
 
-            Frontier intelligence for long-running agents and coding
+            Powerful intelligence for long-running agents and coding
 
           - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
 
@@ -15683,7 +16420,7 @@ public final class Main {
 
           - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-            Frontier intelligence for long-running agents and coding
+            Powerful intelligence for long-running agents and coding
 
           - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
@@ -15699,11 +16436,11 @@ public final class Main {
 
           - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
 
-            Premium model combining maximum intelligence with practical performance
+            Powerful intelligence for long-running agents and coding
 
           - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
-            Premium model combining maximum intelligence with practical performance
+            Powerful intelligence for long-running agents and coding
 
           - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
 
@@ -15715,11 +16452,11 @@ public final class Main {
 
           - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
 
-            Exceptional model for specialized complex tasks
+            Powerful intelligence for long-running agents and coding
 
           - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
 
-            Exceptional model for specialized complex tasks
+            Powerful intelligence for long-running agents and coding
 
       - `BetaFallbackInfo to`
 
@@ -15977,6 +16714,7 @@ public final class Main {
     * `"tool_use"`: the model invoked one or more tools
     * `"pause_turn"`: we paused a long-running turn. You may provide the response back as-is in a subsequent request to let the model continue.
     * `"refusal"`: when streaming classifiers intervene to handle potential policy violations
+    * `"model_context_window_exceeded"`: we exceeded the model's context window
 
     In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
@@ -16041,6 +16779,78 @@ public final class Main {
     - `Optional<Long> cacheReadInputTokens`
 
       The number of input tokens read from the cache.
+
+    - `Optional<BetaFallbackCreditUsage> fallbackCredit`
+
+      Outcome of the `fallback_credit_token` presented on this request.
+
+      - `Status status`
+
+        Whether the fallback-credit reprice was applied to this response's billing.
+
+        A union discriminated on `type`. `redeemed`: the retry is billed as if
+        the conversation had been on the retry model all along — including when the
+        resulting shift is zero because there was nothing to move. `not_applied`:
+        no reprice was applied; the arm's `reason` says why.
+
+        - `class BetaFallbackCreditRedeemed:`
+
+          The reprice was applied: the retry is billed as if the conversation
+          had been on the retry model all along.
+
+          - `JsonValue; type "redeemed"constant`
+
+            - `REDEEMED("redeemed")`
+
+        - `class BetaFallbackCreditNotApplied:`
+
+          No reprice was applied; `reason` says why.
+
+          - `Reason reason`
+
+            Why the reprice was not applied.
+
+            A closed enum; additions to the redemption-check vocabulary arrive as
+            deliberate schema updates.
+
+            - `BODY_MISMATCH("body_mismatch")`
+
+            - `CONTINUATION_EXCLUDED("continuation_excluded")`
+
+            - `CONTINUATION_ONLY("continuation_only")`
+
+            - `EXPIRED("expired")`
+
+            - `INVALID_TARGET_MODEL("invalid_target_model")`
+
+            - `NOT_ENABLED("not_enabled")`
+
+            - `REPRICE_UNAVAILABLE("reprice_unavailable")`
+
+            - `TEMPORARILY_UNAVAILABLE("temporarily_unavailable")`
+
+            - `VARIANT_FIELDS_PRESENT("variant_fields_present")`
+
+            - `WRONG_ORGANIZATION("wrong_organization")`
+
+            - `WRONG_PLATFORM("wrong_platform")`
+
+            - `WRONG_WORKSPACE("wrong_workspace")`
+
+          - `JsonValue; type "not_applied"constant`
+
+            - `NOT_APPLIED("not_applied")`
+
+          - `Optional<List<String>> removeToRedeem`
+
+            Request fields to remove before retrying, so the retry can redeem this
+            token.
+
+            Present exactly when `reason` is `variant_fields_present` — never null,
+            never an empty array; absent otherwise. Fields are named only from your own request, and only after
+            the sealed variant hash matched. A served best-effort retry has already
+            been billed at normal price; nothing redeems retroactively, but a corrected
+            re-send inside the token's five-minute window can still redeem.
 
     - `Optional<String> inferenceGeo`
 
@@ -16269,6 +17079,78 @@ public final class Main {
 
     The cumulative number of input tokens read from the cache.
 
+  - `Optional<BetaFallbackCreditUsage> fallbackCredit`
+
+    Outcome of the `fallback_credit_token` presented on this request.
+
+    - `Status status`
+
+      Whether the fallback-credit reprice was applied to this response's billing.
+
+      A union discriminated on `type`. `redeemed`: the retry is billed as if
+      the conversation had been on the retry model all along — including when the
+      resulting shift is zero because there was nothing to move. `not_applied`:
+      no reprice was applied; the arm's `reason` says why.
+
+      - `class BetaFallbackCreditRedeemed:`
+
+        The reprice was applied: the retry is billed as if the conversation
+        had been on the retry model all along.
+
+        - `JsonValue; type "redeemed"constant`
+
+          - `REDEEMED("redeemed")`
+
+      - `class BetaFallbackCreditNotApplied:`
+
+        No reprice was applied; `reason` says why.
+
+        - `Reason reason`
+
+          Why the reprice was not applied.
+
+          A closed enum; additions to the redemption-check vocabulary arrive as
+          deliberate schema updates.
+
+          - `BODY_MISMATCH("body_mismatch")`
+
+          - `CONTINUATION_EXCLUDED("continuation_excluded")`
+
+          - `CONTINUATION_ONLY("continuation_only")`
+
+          - `EXPIRED("expired")`
+
+          - `INVALID_TARGET_MODEL("invalid_target_model")`
+
+          - `NOT_ENABLED("not_enabled")`
+
+          - `REPRICE_UNAVAILABLE("reprice_unavailable")`
+
+          - `TEMPORARILY_UNAVAILABLE("temporarily_unavailable")`
+
+          - `VARIANT_FIELDS_PRESENT("variant_fields_present")`
+
+          - `WRONG_ORGANIZATION("wrong_organization")`
+
+          - `WRONG_PLATFORM("wrong_platform")`
+
+          - `WRONG_WORKSPACE("wrong_workspace")`
+
+        - `JsonValue; type "not_applied"constant`
+
+          - `NOT_APPLIED("not_applied")`
+
+        - `Optional<List<String>> removeToRedeem`
+
+          Request fields to remove before retrying, so the retry can redeem this
+          token.
+
+          Present exactly when `reason` is `variant_fields_present` — never null,
+          never an empty array; absent otherwise. Fields are named only from your own request, and only after
+          the sealed variant hash matched. A served best-effort retry has already
+          been billed at normal price; nothing redeems retroactively, but a corrected
+          re-send inside the token's five-minute window can still redeem.
+
   - `Optional<Long> inputTokens`
 
     The cumulative number of input tokens which were used.
@@ -16329,13 +17211,17 @@ public final class Main {
 
           Most capable model for cybersecurity and biology research
 
+        - `CLAUDE_OPUS_5("claude-opus-5")`
+
+          Powerful intelligence for long-running agents and coding
+
         - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
-          Frontier intelligence for long-running agents and coding
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
 
-          Frontier intelligence for long-running agents and coding
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
 
@@ -16343,7 +17229,7 @@ public final class Main {
 
         - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-          Frontier intelligence for long-running agents and coding
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
@@ -16359,11 +17245,11 @@ public final class Main {
 
         - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
 
-          Premium model combining maximum intelligence with practical performance
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
-          Premium model combining maximum intelligence with practical performance
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
 
@@ -16375,11 +17261,11 @@ public final class Main {
 
         - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
 
-          Exceptional model for specialized complex tasks
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
 
-          Exceptional model for specialized complex tasks
+          Powerful intelligence for long-running agents and coding
 
       - `long outputTokens`
 
@@ -16582,13 +17468,17 @@ public final class Main {
 
       Most capable model for cybersecurity and biology research
 
+    - `CLAUDE_OPUS_5("claude-opus-5")`
+
+      Powerful intelligence for long-running agents and coding
+
     - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
-      Frontier intelligence for long-running agents and coding
+      Powerful intelligence for long-running agents and coding
 
     - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
 
-      Frontier intelligence for long-running agents and coding
+      Powerful intelligence for long-running agents and coding
 
     - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
 
@@ -16596,7 +17486,7 @@ public final class Main {
 
     - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-      Frontier intelligence for long-running agents and coding
+      Powerful intelligence for long-running agents and coding
 
     - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
@@ -16612,11 +17502,11 @@ public final class Main {
 
     - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
 
-      Premium model combining maximum intelligence with practical performance
+      Powerful intelligence for long-running agents and coding
 
     - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
-      Premium model combining maximum intelligence with practical performance
+      Powerful intelligence for long-running agents and coding
 
     - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
 
@@ -16628,11 +17518,11 @@ public final class Main {
 
     - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
 
-      Exceptional model for specialized complex tasks
+      Powerful intelligence for long-running agents and coding
 
     - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
 
-      Exceptional model for specialized complex tasks
+      Powerful intelligence for long-running agents and coding
 
   - `long outputTokens`
 
@@ -17633,19 +18523,109 @@ public final class Main {
         Use this block to provide or update system-level instructions at a specific
         point in the conversation, rather than only via the top-level `system` parameter.
 
-        - `List<BetaTextBlockParam> content`
+        - `List<Content> content`
 
           System instruction text blocks.
 
-          - `String text`
+          - `class BetaTextBlockParam:`
 
-          - `JsonValue; type "text"constant`
+          - `class BetaRequestToolAdditionBlock:`
 
-          - `Optional<BetaCacheControlEphemeral> cacheControl`
+            Mid-conversation directive to surface a declared tool.
 
-            Create a cache control breakpoint at this content block.
+            `tool` references a tool (or MCP toolset) by name from the request's
+            `tools`; it is offered to the model from this point in the
+            conversation onward.
 
-          - `Optional<List<BetaTextCitationParam>> citations`
+            - `Tool tool`
+
+              Reference to a single tool the caller declared directly in
+              `tools[]`. Does not accept the composed `{server}_{name}` form the
+              server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+              `mcp_toolset_reference` for those.
+
+              - `class BetaToolChangeToolReference:`
+
+                Reference to a single tool the caller declared directly in
+                `tools[]`. Does not accept the composed `{server}_{name}` form the
+                server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+                `mcp_toolset_reference` for those.
+
+                - `String name`
+
+                - `JsonValue; type "tool_reference"constant`
+
+                  - `TOOL_REFERENCE("tool_reference")`
+
+              - `class BetaToolChangeMcpToolReference:`
+
+                Reference to a single MCP tool by its server and remote name — the
+                same `server_name`/`name` pair `mcp_tool_use` carries.
+
+                - `String name`
+
+                - `String serverName`
+
+                - `JsonValue; type "mcp_tool_reference"constant`
+
+                  - `MCP_TOOL_REFERENCE("mcp_tool_reference")`
+
+              - `class BetaToolChangeMcpToolsetReference:`
+
+                Reference to every tool in the named MCP server's toolset.
+
+                - `String serverName`
+
+                - `JsonValue; type "mcp_toolset_reference"constant`
+
+                  - `MCP_TOOLSET_REFERENCE("mcp_toolset_reference")`
+
+            - `JsonValue; type "tool_addition"constant`
+
+              - `TOOL_ADDITION("tool_addition")`
+
+            - `Optional<BetaCacheControlEphemeral> cacheControl`
+
+              Create a cache control breakpoint at this content block.
+
+          - `class BetaRequestToolRemovalBlock:`
+
+            Mid-conversation directive to withdraw a tool.
+
+            `tool` references a tool (or MCP toolset) by name from the request's
+            `tools`; it is no longer offered to the model from this point in the
+            conversation onward.
+
+            - `Tool tool`
+
+              Reference to a single tool the caller declared directly in
+              `tools[]`. Does not accept the composed `{server}_{name}` form the
+              server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+              `mcp_toolset_reference` for those.
+
+              - `class BetaToolChangeToolReference:`
+
+                Reference to a single tool the caller declared directly in
+                `tools[]`. Does not accept the composed `{server}_{name}` form the
+                server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+                `mcp_toolset_reference` for those.
+
+              - `class BetaToolChangeMcpToolReference:`
+
+                Reference to a single MCP tool by its server and remote name — the
+                same `server_name`/`name` pair `mcp_tool_use` carries.
+
+              - `class BetaToolChangeMcpToolsetReference:`
+
+                Reference to every tool in the named MCP server's toolset.
+
+            - `JsonValue; type "tool_removal"constant`
+
+              - `TOOL_REMOVAL("tool_removal")`
+
+            - `Optional<BetaCacheControlEphemeral> cacheControl`
+
+              Create a cache control breakpoint at this content block.
 
         - `JsonValue; type "mid_conv_system"constant`
 
@@ -17654,6 +18634,22 @@ public final class Main {
         - `Optional<BetaCacheControlEphemeral> cacheControl`
 
           Create a cache control breakpoint at this content block.
+
+      - `class BetaRequestToolAdditionBlock:`
+
+        Mid-conversation directive to surface a declared tool.
+
+        `tool` references a tool (or MCP toolset) by name from the request's
+        `tools`; it is offered to the model from this point in the
+        conversation onward.
+
+      - `class BetaRequestToolRemovalBlock:`
+
+        Mid-conversation directive to withdraw a tool.
+
+        `tool` references a tool (or MCP toolset) by name from the request's
+        `tools`; it is no longer offered to the model from this point in the
+        conversation onward.
 
       - `class BetaFallbackBlockParam:`
 
@@ -17693,13 +18689,17 @@ public final class Main {
 
               Most capable model for cybersecurity and biology research
 
+            - `CLAUDE_OPUS_5("claude-opus-5")`
+
+              Powerful intelligence for long-running agents and coding
+
             - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
-              Frontier intelligence for long-running agents and coding
+              Powerful intelligence for long-running agents and coding
 
             - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
 
-              Frontier intelligence for long-running agents and coding
+              Powerful intelligence for long-running agents and coding
 
             - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
 
@@ -17707,7 +18707,7 @@ public final class Main {
 
             - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-              Frontier intelligence for long-running agents and coding
+              Powerful intelligence for long-running agents and coding
 
             - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
@@ -17723,11 +18723,11 @@ public final class Main {
 
             - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
 
-              Premium model combining maximum intelligence with practical performance
+              Powerful intelligence for long-running agents and coding
 
             - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
-              Premium model combining maximum intelligence with practical performance
+              Powerful intelligence for long-running agents and coding
 
             - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
 
@@ -17739,11 +18739,11 @@ public final class Main {
 
             - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
 
-              Exceptional model for specialized complex tasks
+              Powerful intelligence for long-running agents and coding
 
             - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
 
-              Exceptional model for specialized complex tasks
+              Powerful intelligence for long-running agents and coding
 
         - `BetaFallbackInfoParam to`
 
@@ -17800,144 +18800,244 @@ public final class Main {
   Use this block to provide or update system-level instructions at a specific
   point in the conversation, rather than only via the top-level `system` parameter.
 
-  - `List<BetaTextBlockParam> content`
+  - `List<Content> content`
 
     System instruction text blocks.
 
-    - `String text`
+    - `class BetaTextBlockParam:`
 
-    - `JsonValue; type "text"constant`
+      - `String text`
 
-      - `TEXT("text")`
+      - `JsonValue; type "text"constant`
 
-    - `Optional<BetaCacheControlEphemeral> cacheControl`
+        - `TEXT("text")`
 
-      Create a cache control breakpoint at this content block.
+      - `Optional<BetaCacheControlEphemeral> cacheControl`
 
-      - `JsonValue; type "ephemeral"constant`
+        Create a cache control breakpoint at this content block.
 
-        - `EPHEMERAL("ephemeral")`
+        - `JsonValue; type "ephemeral"constant`
 
-      - `Optional<Ttl> ttl`
+          - `EPHEMERAL("ephemeral")`
 
-        The time-to-live for the cache control breakpoint.
+        - `Optional<Ttl> ttl`
 
-        This may be one the following values:
+          The time-to-live for the cache control breakpoint.
 
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
+          This may be one the following values:
 
-        Defaults to `5m`. See [prompt caching pricing](../build-with-claude/build-with-claude-prompt-caching.md) for details.
+          - `5m`: 5 minutes
+          - `1h`: 1 hour
 
-        - `TTL_5M("5m")`
+          Defaults to `5m`. See [prompt caching pricing](../build-with-claude/build-with-claude-prompt-caching.md) for details.
 
-        - `TTL_1H("1h")`
+          - `TTL_5M("5m")`
 
-    - `Optional<List<BetaTextCitationParam>> citations`
+          - `TTL_1H("1h")`
 
-      - `class BetaCitationCharLocationParam:`
+      - `Optional<List<BetaTextCitationParam>> citations`
 
-        - `String citedText`
+        - `class BetaCitationCharLocationParam:`
 
-        - `long documentIndex`
+          - `String citedText`
 
-        - `Optional<String> documentTitle`
+          - `long documentIndex`
 
-        - `long endCharIndex`
+          - `Optional<String> documentTitle`
 
-        - `long startCharIndex`
+          - `long endCharIndex`
 
-        - `JsonValue; type "char_location"constant`
+          - `long startCharIndex`
 
-          - `CHAR_LOCATION("char_location")`
+          - `JsonValue; type "char_location"constant`
 
-      - `class BetaCitationPageLocationParam:`
+            - `CHAR_LOCATION("char_location")`
 
-        - `String citedText`
+        - `class BetaCitationPageLocationParam:`
 
-        - `long documentIndex`
+          - `String citedText`
 
-        - `Optional<String> documentTitle`
+          - `long documentIndex`
 
-        - `long endPageNumber`
+          - `Optional<String> documentTitle`
 
-        - `long startPageNumber`
+          - `long endPageNumber`
 
-        - `JsonValue; type "page_location"constant`
+          - `long startPageNumber`
 
-          - `PAGE_LOCATION("page_location")`
+          - `JsonValue; type "page_location"constant`
 
-      - `class BetaCitationContentBlockLocationParam:`
+            - `PAGE_LOCATION("page_location")`
 
-        - `String citedText`
+        - `class BetaCitationContentBlockLocationParam:`
 
-          The full text of the cited block range, concatenated.
+          - `String citedText`
 
-          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+            The full text of the cited block range, concatenated.
 
-        - `long documentIndex`
+            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-        - `Optional<String> documentTitle`
+          - `long documentIndex`
 
-        - `long endBlockIndex`
+          - `Optional<String> documentTitle`
 
-          Exclusive 0-based end index of the cited block range in the source's `content` array.
+          - `long endBlockIndex`
 
-          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+            Exclusive 0-based end index of the cited block range in the source's `content` array.
 
-        - `long startBlockIndex`
+            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-          0-based index of the first cited block in the source's `content` array.
+          - `long startBlockIndex`
 
-        - `JsonValue; type "content_block_location"constant`
+            0-based index of the first cited block in the source's `content` array.
 
-          - `CONTENT_BLOCK_LOCATION("content_block_location")`
+          - `JsonValue; type "content_block_location"constant`
 
-      - `class BetaCitationWebSearchResultLocationParam:`
+            - `CONTENT_BLOCK_LOCATION("content_block_location")`
 
-        - `String citedText`
+        - `class BetaCitationWebSearchResultLocationParam:`
 
-        - `String encryptedIndex`
+          - `String citedText`
 
-        - `Optional<String> title`
+          - `String encryptedIndex`
 
-        - `JsonValue; type "web_search_result_location"constant`
+          - `Optional<String> title`
 
-          - `WEB_SEARCH_RESULT_LOCATION("web_search_result_location")`
+          - `JsonValue; type "web_search_result_location"constant`
 
-        - `String url`
+            - `WEB_SEARCH_RESULT_LOCATION("web_search_result_location")`
 
-      - `class BetaCitationSearchResultLocationParam:`
+          - `String url`
 
-        - `String citedText`
+        - `class BetaCitationSearchResultLocationParam:`
 
-          The full text of the cited block range, concatenated.
+          - `String citedText`
 
-          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+            The full text of the cited block range, concatenated.
 
-        - `long endBlockIndex`
+            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-          Exclusive 0-based end index of the cited block range in the source's `content` array.
+          - `long endBlockIndex`
 
-          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+            Exclusive 0-based end index of the cited block range in the source's `content` array.
 
-        - `long searchResultIndex`
+            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-          0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+          - `long searchResultIndex`
 
-          Counted separately from `document_index`; server-side web search results are not included in this count.
+            0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
-        - `String source`
+            Counted separately from `document_index`; server-side web search results are not included in this count.
 
-        - `long startBlockIndex`
+          - `String source`
 
-          0-based index of the first cited block in the source's `content` array.
+          - `long startBlockIndex`
 
-        - `Optional<String> title`
+            0-based index of the first cited block in the source's `content` array.
 
-        - `JsonValue; type "search_result_location"constant`
+          - `Optional<String> title`
 
-          - `SEARCH_RESULT_LOCATION("search_result_location")`
+          - `JsonValue; type "search_result_location"constant`
+
+            - `SEARCH_RESULT_LOCATION("search_result_location")`
+
+    - `class BetaRequestToolAdditionBlock:`
+
+      Mid-conversation directive to surface a declared tool.
+
+      `tool` references a tool (or MCP toolset) by name from the request's
+      `tools`; it is offered to the model from this point in the
+      conversation onward.
+
+      - `Tool tool`
+
+        Reference to a single tool the caller declared directly in
+        `tools[]`. Does not accept the composed `{server}_{name}` form the
+        server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+        `mcp_toolset_reference` for those.
+
+        - `class BetaToolChangeToolReference:`
+
+          Reference to a single tool the caller declared directly in
+          `tools[]`. Does not accept the composed `{server}_{name}` form the
+          server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+          `mcp_toolset_reference` for those.
+
+          - `String name`
+
+          - `JsonValue; type "tool_reference"constant`
+
+            - `TOOL_REFERENCE("tool_reference")`
+
+        - `class BetaToolChangeMcpToolReference:`
+
+          Reference to a single MCP tool by its server and remote name — the
+          same `server_name`/`name` pair `mcp_tool_use` carries.
+
+          - `String name`
+
+          - `String serverName`
+
+          - `JsonValue; type "mcp_tool_reference"constant`
+
+            - `MCP_TOOL_REFERENCE("mcp_tool_reference")`
+
+        - `class BetaToolChangeMcpToolsetReference:`
+
+          Reference to every tool in the named MCP server's toolset.
+
+          - `String serverName`
+
+          - `JsonValue; type "mcp_toolset_reference"constant`
+
+            - `MCP_TOOLSET_REFERENCE("mcp_toolset_reference")`
+
+      - `JsonValue; type "tool_addition"constant`
+
+        - `TOOL_ADDITION("tool_addition")`
+
+      - `Optional<BetaCacheControlEphemeral> cacheControl`
+
+        Create a cache control breakpoint at this content block.
+
+    - `class BetaRequestToolRemovalBlock:`
+
+      Mid-conversation directive to withdraw a tool.
+
+      `tool` references a tool (or MCP toolset) by name from the request's
+      `tools`; it is no longer offered to the model from this point in the
+      conversation onward.
+
+      - `Tool tool`
+
+        Reference to a single tool the caller declared directly in
+        `tools[]`. Does not accept the composed `{server}_{name}` form the
+        server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+        `mcp_toolset_reference` for those.
+
+        - `class BetaToolChangeToolReference:`
+
+          Reference to a single tool the caller declared directly in
+          `tools[]`. Does not accept the composed `{server}_{name}` form the
+          server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+          `mcp_toolset_reference` for those.
+
+        - `class BetaToolChangeMcpToolReference:`
+
+          Reference to a single MCP tool by its server and remote name — the
+          same `server_name`/`name` pair `mcp_tool_use` carries.
+
+        - `class BetaToolChangeMcpToolsetReference:`
+
+          Reference to every tool in the named MCP server's toolset.
+
+      - `JsonValue; type "tool_removal"constant`
+
+        - `TOOL_REMOVAL("tool_removal")`
+
+      - `Optional<BetaCacheControlEphemeral> cacheControl`
+
+        Create a cache control breakpoint at this content block.
 
   - `JsonValue; type "mid_conv_system"constant`
 
@@ -19172,13 +20272,17 @@ public final class Main {
 
             Most capable model for cybersecurity and biology research
 
+          - `CLAUDE_OPUS_5("claude-opus-5")`
+
+            Powerful intelligence for long-running agents and coding
+
           - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
-            Frontier intelligence for long-running agents and coding
+            Powerful intelligence for long-running agents and coding
 
           - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
 
-            Frontier intelligence for long-running agents and coding
+            Powerful intelligence for long-running agents and coding
 
           - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
 
@@ -19186,7 +20290,7 @@ public final class Main {
 
           - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-            Frontier intelligence for long-running agents and coding
+            Powerful intelligence for long-running agents and coding
 
           - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
@@ -19202,11 +20306,11 @@ public final class Main {
 
           - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
 
-            Premium model combining maximum intelligence with practical performance
+            Powerful intelligence for long-running agents and coding
 
           - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
-            Premium model combining maximum intelligence with practical performance
+            Powerful intelligence for long-running agents and coding
 
           - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
 
@@ -19218,11 +20322,11 @@ public final class Main {
 
           - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
 
-            Exceptional model for specialized complex tasks
+            Powerful intelligence for long-running agents and coding
 
           - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
 
-            Exceptional model for specialized complex tasks
+            Powerful intelligence for long-running agents and coding
 
       - `BetaFallbackInfo to`
 
@@ -19489,6 +20593,78 @@ public final class Main {
 
       The cumulative number of input tokens read from the cache.
 
+    - `Optional<BetaFallbackCreditUsage> fallbackCredit`
+
+      Outcome of the `fallback_credit_token` presented on this request.
+
+      - `Status status`
+
+        Whether the fallback-credit reprice was applied to this response's billing.
+
+        A union discriminated on `type`. `redeemed`: the retry is billed as if
+        the conversation had been on the retry model all along — including when the
+        resulting shift is zero because there was nothing to move. `not_applied`:
+        no reprice was applied; the arm's `reason` says why.
+
+        - `class BetaFallbackCreditRedeemed:`
+
+          The reprice was applied: the retry is billed as if the conversation
+          had been on the retry model all along.
+
+          - `JsonValue; type "redeemed"constant`
+
+            - `REDEEMED("redeemed")`
+
+        - `class BetaFallbackCreditNotApplied:`
+
+          No reprice was applied; `reason` says why.
+
+          - `Reason reason`
+
+            Why the reprice was not applied.
+
+            A closed enum; additions to the redemption-check vocabulary arrive as
+            deliberate schema updates.
+
+            - `BODY_MISMATCH("body_mismatch")`
+
+            - `CONTINUATION_EXCLUDED("continuation_excluded")`
+
+            - `CONTINUATION_ONLY("continuation_only")`
+
+            - `EXPIRED("expired")`
+
+            - `INVALID_TARGET_MODEL("invalid_target_model")`
+
+            - `NOT_ENABLED("not_enabled")`
+
+            - `REPRICE_UNAVAILABLE("reprice_unavailable")`
+
+            - `TEMPORARILY_UNAVAILABLE("temporarily_unavailable")`
+
+            - `VARIANT_FIELDS_PRESENT("variant_fields_present")`
+
+            - `WRONG_ORGANIZATION("wrong_organization")`
+
+            - `WRONG_PLATFORM("wrong_platform")`
+
+            - `WRONG_WORKSPACE("wrong_workspace")`
+
+          - `JsonValue; type "not_applied"constant`
+
+            - `NOT_APPLIED("not_applied")`
+
+          - `Optional<List<String>> removeToRedeem`
+
+            Request fields to remove before retrying, so the retry can redeem this
+            token.
+
+            Present exactly when `reason` is `variant_fields_present` — never null,
+            never an empty array; absent otherwise. Fields are named only from your own request, and only after
+            the sealed variant hash matched. A served best-effort retry has already
+            been billed at normal price; nothing redeems retroactively, but a corrected
+            re-send inside the token's five-minute window can still redeem.
+
     - `Optional<Long> inputTokens`
 
       The cumulative number of input tokens which were used.
@@ -19549,13 +20725,17 @@ public final class Main {
 
             Most capable model for cybersecurity and biology research
 
+          - `CLAUDE_OPUS_5("claude-opus-5")`
+
+            Powerful intelligence for long-running agents and coding
+
           - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
-            Frontier intelligence for long-running agents and coding
+            Powerful intelligence for long-running agents and coding
 
           - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
 
-            Frontier intelligence for long-running agents and coding
+            Powerful intelligence for long-running agents and coding
 
           - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
 
@@ -19563,7 +20743,7 @@ public final class Main {
 
           - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-            Frontier intelligence for long-running agents and coding
+            Powerful intelligence for long-running agents and coding
 
           - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
@@ -19579,11 +20759,11 @@ public final class Main {
 
           - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
 
-            Premium model combining maximum intelligence with practical performance
+            Powerful intelligence for long-running agents and coding
 
           - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
-            Premium model combining maximum intelligence with practical performance
+            Powerful intelligence for long-running agents and coding
 
           - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
 
@@ -19595,11 +20775,11 @@ public final class Main {
 
           - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
 
-            Exceptional model for specialized complex tasks
+            Powerful intelligence for long-running agents and coding
 
           - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
 
-            Exceptional model for specialized complex tasks
+            Powerful intelligence for long-running agents and coding
 
         - `long outputTokens`
 
@@ -20619,13 +21799,17 @@ public final class Main {
 
               Most capable model for cybersecurity and biology research
 
+            - `CLAUDE_OPUS_5("claude-opus-5")`
+
+              Powerful intelligence for long-running agents and coding
+
             - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
-              Frontier intelligence for long-running agents and coding
+              Powerful intelligence for long-running agents and coding
 
             - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
 
-              Frontier intelligence for long-running agents and coding
+              Powerful intelligence for long-running agents and coding
 
             - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
 
@@ -20633,7 +21817,7 @@ public final class Main {
 
             - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-              Frontier intelligence for long-running agents and coding
+              Powerful intelligence for long-running agents and coding
 
             - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
@@ -20649,11 +21833,11 @@ public final class Main {
 
             - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
 
-              Premium model combining maximum intelligence with practical performance
+              Powerful intelligence for long-running agents and coding
 
             - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
-              Premium model combining maximum intelligence with practical performance
+              Powerful intelligence for long-running agents and coding
 
             - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
 
@@ -20665,11 +21849,11 @@ public final class Main {
 
             - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
 
-              Exceptional model for specialized complex tasks
+              Powerful intelligence for long-running agents and coding
 
             - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
 
-              Exceptional model for specialized complex tasks
+              Powerful intelligence for long-running agents and coding
 
         - `BetaFallbackInfo to`
 
@@ -20927,6 +22111,7 @@ public final class Main {
       * `"tool_use"`: the model invoked one or more tools
       * `"pause_turn"`: we paused a long-running turn. You may provide the response back as-is in a subsequent request to let the model continue.
       * `"refusal"`: when streaming classifiers intervene to handle potential policy violations
+      * `"model_context_window_exceeded"`: we exceeded the model's context window
 
       In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
@@ -20991,6 +22176,78 @@ public final class Main {
       - `Optional<Long> cacheReadInputTokens`
 
         The number of input tokens read from the cache.
+
+      - `Optional<BetaFallbackCreditUsage> fallbackCredit`
+
+        Outcome of the `fallback_credit_token` presented on this request.
+
+        - `Status status`
+
+          Whether the fallback-credit reprice was applied to this response's billing.
+
+          A union discriminated on `type`. `redeemed`: the retry is billed as if
+          the conversation had been on the retry model all along — including when the
+          resulting shift is zero because there was nothing to move. `not_applied`:
+          no reprice was applied; the arm's `reason` says why.
+
+          - `class BetaFallbackCreditRedeemed:`
+
+            The reprice was applied: the retry is billed as if the conversation
+            had been on the retry model all along.
+
+            - `JsonValue; type "redeemed"constant`
+
+              - `REDEEMED("redeemed")`
+
+          - `class BetaFallbackCreditNotApplied:`
+
+            No reprice was applied; `reason` says why.
+
+            - `Reason reason`
+
+              Why the reprice was not applied.
+
+              A closed enum; additions to the redemption-check vocabulary arrive as
+              deliberate schema updates.
+
+              - `BODY_MISMATCH("body_mismatch")`
+
+              - `CONTINUATION_EXCLUDED("continuation_excluded")`
+
+              - `CONTINUATION_ONLY("continuation_only")`
+
+              - `EXPIRED("expired")`
+
+              - `INVALID_TARGET_MODEL("invalid_target_model")`
+
+              - `NOT_ENABLED("not_enabled")`
+
+              - `REPRICE_UNAVAILABLE("reprice_unavailable")`
+
+              - `TEMPORARILY_UNAVAILABLE("temporarily_unavailable")`
+
+              - `VARIANT_FIELDS_PRESENT("variant_fields_present")`
+
+              - `WRONG_ORGANIZATION("wrong_organization")`
+
+              - `WRONG_PLATFORM("wrong_platform")`
+
+              - `WRONG_WORKSPACE("wrong_workspace")`
+
+            - `JsonValue; type "not_applied"constant`
+
+              - `NOT_APPLIED("not_applied")`
+
+            - `Optional<List<String>> removeToRedeem`
+
+              Request fields to remove before retrying, so the retry can redeem this
+              token.
+
+              Present exactly when `reason` is `variant_fields_present` — never null,
+              never an empty array; absent otherwise. Fields are named only from your own request, and only after
+              the sealed variant hash matched. A served best-effort retry has already
+              been billed at normal price; nothing redeems retroactively, but a corrected
+              re-send inside the token's five-minute window can still redeem.
 
       - `Optional<String> inferenceGeo`
 
@@ -22086,13 +23343,17 @@ public final class Main {
 
                 Most capable model for cybersecurity and biology research
 
+              - `CLAUDE_OPUS_5("claude-opus-5")`
+
+                Powerful intelligence for long-running agents and coding
+
               - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
-                Frontier intelligence for long-running agents and coding
+                Powerful intelligence for long-running agents and coding
 
               - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
 
-                Frontier intelligence for long-running agents and coding
+                Powerful intelligence for long-running agents and coding
 
               - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
 
@@ -22100,7 +23361,7 @@ public final class Main {
 
               - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-                Frontier intelligence for long-running agents and coding
+                Powerful intelligence for long-running agents and coding
 
               - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
@@ -22116,11 +23377,11 @@ public final class Main {
 
               - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
 
-                Premium model combining maximum intelligence with practical performance
+                Powerful intelligence for long-running agents and coding
 
               - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
-                Premium model combining maximum intelligence with practical performance
+                Powerful intelligence for long-running agents and coding
 
               - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
 
@@ -22132,11 +23393,11 @@ public final class Main {
 
               - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
 
-                Exceptional model for specialized complex tasks
+                Powerful intelligence for long-running agents and coding
 
               - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
 
-                Exceptional model for specialized complex tasks
+                Powerful intelligence for long-running agents and coding
 
           - `BetaFallbackInfo to`
 
@@ -22394,6 +23655,7 @@ public final class Main {
         * `"tool_use"`: the model invoked one or more tools
         * `"pause_turn"`: we paused a long-running turn. You may provide the response back as-is in a subsequent request to let the model continue.
         * `"refusal"`: when streaming classifiers intervene to handle potential policy violations
+        * `"model_context_window_exceeded"`: we exceeded the model's context window
 
         In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
@@ -22458,6 +23720,78 @@ public final class Main {
         - `Optional<Long> cacheReadInputTokens`
 
           The number of input tokens read from the cache.
+
+        - `Optional<BetaFallbackCreditUsage> fallbackCredit`
+
+          Outcome of the `fallback_credit_token` presented on this request.
+
+          - `Status status`
+
+            Whether the fallback-credit reprice was applied to this response's billing.
+
+            A union discriminated on `type`. `redeemed`: the retry is billed as if
+            the conversation had been on the retry model all along — including when the
+            resulting shift is zero because there was nothing to move. `not_applied`:
+            no reprice was applied; the arm's `reason` says why.
+
+            - `class BetaFallbackCreditRedeemed:`
+
+              The reprice was applied: the retry is billed as if the conversation
+              had been on the retry model all along.
+
+              - `JsonValue; type "redeemed"constant`
+
+                - `REDEEMED("redeemed")`
+
+            - `class BetaFallbackCreditNotApplied:`
+
+              No reprice was applied; `reason` says why.
+
+              - `Reason reason`
+
+                Why the reprice was not applied.
+
+                A closed enum; additions to the redemption-check vocabulary arrive as
+                deliberate schema updates.
+
+                - `BODY_MISMATCH("body_mismatch")`
+
+                - `CONTINUATION_EXCLUDED("continuation_excluded")`
+
+                - `CONTINUATION_ONLY("continuation_only")`
+
+                - `EXPIRED("expired")`
+
+                - `INVALID_TARGET_MODEL("invalid_target_model")`
+
+                - `NOT_ENABLED("not_enabled")`
+
+                - `REPRICE_UNAVAILABLE("reprice_unavailable")`
+
+                - `TEMPORARILY_UNAVAILABLE("temporarily_unavailable")`
+
+                - `VARIANT_FIELDS_PRESENT("variant_fields_present")`
+
+                - `WRONG_ORGANIZATION("wrong_organization")`
+
+                - `WRONG_PLATFORM("wrong_platform")`
+
+                - `WRONG_WORKSPACE("wrong_workspace")`
+
+              - `JsonValue; type "not_applied"constant`
+
+                - `NOT_APPLIED("not_applied")`
+
+              - `Optional<List<String>> removeToRedeem`
+
+                Request fields to remove before retrying, so the retry can redeem this
+                token.
+
+                Present exactly when `reason` is `variant_fields_present` — never null,
+                never an empty array; absent otherwise. Fields are named only from your own request, and only after
+                the sealed variant hash matched. A served best-effort retry has already
+                been billed at normal price; nothing redeems retroactively, but a corrected
+                re-send inside the token's five-minute window can still redeem.
 
         - `Optional<String> inferenceGeo`
 
@@ -22721,6 +24055,10 @@ public final class Main {
       - `Optional<Long> cacheReadInputTokens`
 
         The cumulative number of input tokens read from the cache.
+
+      - `Optional<BetaFallbackCreditUsage> fallbackCredit`
+
+        Outcome of the `fallback_credit_token` presented on this request.
 
       - `Optional<Long> inputTokens`
 
@@ -23480,6 +24818,166 @@ public final class Main {
             - `SEARCH_RESULT_LOCATION("search_result_location")`
 
   - `Optional<Boolean> isError`
+
+### Beta Request Tool Addition Block
+
+- `class BetaRequestToolAdditionBlock:`
+
+  Mid-conversation directive to surface a declared tool.
+
+  `tool` references a tool (or MCP toolset) by name from the request's
+  `tools`; it is offered to the model from this point in the
+  conversation onward.
+
+  - `Tool tool`
+
+    Reference to a single tool the caller declared directly in
+    `tools[]`. Does not accept the composed `{server}_{name}` form the
+    server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+    `mcp_toolset_reference` for those.
+
+    - `class BetaToolChangeToolReference:`
+
+      Reference to a single tool the caller declared directly in
+      `tools[]`. Does not accept the composed `{server}_{name}` form the
+      server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+      `mcp_toolset_reference` for those.
+
+      - `String name`
+
+      - `JsonValue; type "tool_reference"constant`
+
+        - `TOOL_REFERENCE("tool_reference")`
+
+    - `class BetaToolChangeMcpToolReference:`
+
+      Reference to a single MCP tool by its server and remote name — the
+      same `server_name`/`name` pair `mcp_tool_use` carries.
+
+      - `String name`
+
+      - `String serverName`
+
+      - `JsonValue; type "mcp_tool_reference"constant`
+
+        - `MCP_TOOL_REFERENCE("mcp_tool_reference")`
+
+    - `class BetaToolChangeMcpToolsetReference:`
+
+      Reference to every tool in the named MCP server's toolset.
+
+      - `String serverName`
+
+      - `JsonValue; type "mcp_toolset_reference"constant`
+
+        - `MCP_TOOLSET_REFERENCE("mcp_toolset_reference")`
+
+  - `JsonValue; type "tool_addition"constant`
+
+    - `TOOL_ADDITION("tool_addition")`
+
+  - `Optional<BetaCacheControlEphemeral> cacheControl`
+
+    Create a cache control breakpoint at this content block.
+
+    - `JsonValue; type "ephemeral"constant`
+
+      - `EPHEMERAL("ephemeral")`
+
+    - `Optional<Ttl> ttl`
+
+      The time-to-live for the cache control breakpoint.
+
+      This may be one the following values:
+
+      - `5m`: 5 minutes
+      - `1h`: 1 hour
+
+      Defaults to `5m`. See [prompt caching pricing](../build-with-claude/build-with-claude-prompt-caching.md) for details.
+
+      - `TTL_5M("5m")`
+
+      - `TTL_1H("1h")`
+
+### Beta Request Tool Removal Block
+
+- `class BetaRequestToolRemovalBlock:`
+
+  Mid-conversation directive to withdraw a tool.
+
+  `tool` references a tool (or MCP toolset) by name from the request's
+  `tools`; it is no longer offered to the model from this point in the
+  conversation onward.
+
+  - `Tool tool`
+
+    Reference to a single tool the caller declared directly in
+    `tools[]`. Does not accept the composed `{server}_{name}` form the
+    server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+    `mcp_toolset_reference` for those.
+
+    - `class BetaToolChangeToolReference:`
+
+      Reference to a single tool the caller declared directly in
+      `tools[]`. Does not accept the composed `{server}_{name}` form the
+      server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+      `mcp_toolset_reference` for those.
+
+      - `String name`
+
+      - `JsonValue; type "tool_reference"constant`
+
+        - `TOOL_REFERENCE("tool_reference")`
+
+    - `class BetaToolChangeMcpToolReference:`
+
+      Reference to a single MCP tool by its server and remote name — the
+      same `server_name`/`name` pair `mcp_tool_use` carries.
+
+      - `String name`
+
+      - `String serverName`
+
+      - `JsonValue; type "mcp_tool_reference"constant`
+
+        - `MCP_TOOL_REFERENCE("mcp_tool_reference")`
+
+    - `class BetaToolChangeMcpToolsetReference:`
+
+      Reference to every tool in the named MCP server's toolset.
+
+      - `String serverName`
+
+      - `JsonValue; type "mcp_toolset_reference"constant`
+
+        - `MCP_TOOLSET_REFERENCE("mcp_toolset_reference")`
+
+  - `JsonValue; type "tool_removal"constant`
+
+    - `TOOL_REMOVAL("tool_removal")`
+
+  - `Optional<BetaCacheControlEphemeral> cacheControl`
+
+    Create a cache control breakpoint at this content block.
+
+    - `JsonValue; type "ephemeral"constant`
+
+      - `EPHEMERAL("ephemeral")`
+
+    - `Optional<Ttl> ttl`
+
+      The time-to-live for the cache control breakpoint.
+
+      This may be one the following values:
+
+      - `5m`: 5 minutes
+      - `1h`: 1 hour
+
+      Defaults to `5m`. See [prompt caching pricing](../build-with-claude/build-with-claude-prompt-caching.md) for details.
+
+      - `TTL_5M("5m")`
+
+      - `TTL_1H("1h")`
 
 ### Beta Search Result Block Param
 
@@ -25079,6 +26577,48 @@ public final class Main {
   - `Optional<Boolean> strict`
 
     When true, guarantees schema validation on tool names and inputs
+
+### Beta Tool Change MCP Tool Reference
+
+- `class BetaToolChangeMcpToolReference:`
+
+  Reference to a single MCP tool by its server and remote name — the
+  same `server_name`/`name` pair `mcp_tool_use` carries.
+
+  - `String name`
+
+  - `String serverName`
+
+  - `JsonValue; type "mcp_tool_reference"constant`
+
+    - `MCP_TOOL_REFERENCE("mcp_tool_reference")`
+
+### Beta Tool Change MCP Toolset Reference
+
+- `class BetaToolChangeMcpToolsetReference:`
+
+  Reference to every tool in the named MCP server's toolset.
+
+  - `String serverName`
+
+  - `JsonValue; type "mcp_toolset_reference"constant`
+
+    - `MCP_TOOLSET_REFERENCE("mcp_toolset_reference")`
+
+### Beta Tool Change Tool Reference
+
+- `class BetaToolChangeToolReference:`
+
+  Reference to a single tool the caller declared directly in
+  `tools[]`. Does not accept the composed `{server}_{name}` form the
+  server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+  `mcp_toolset_reference` for those.
+
+  - `String name`
+
+  - `JsonValue; type "tool_reference"constant`
+
+    - `TOOL_REFERENCE("tool_reference")`
 
 ### Beta Tool Choice
 
@@ -27460,13 +29000,17 @@ public final class Main {
 
         Most capable model for cybersecurity and biology research
 
+      - `CLAUDE_OPUS_5("claude-opus-5")`
+
+        Powerful intelligence for long-running agents and coding
+
       - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
-        Frontier intelligence for long-running agents and coding
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
 
-        Frontier intelligence for long-running agents and coding
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
 
@@ -27474,7 +29018,7 @@ public final class Main {
 
       - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-        Frontier intelligence for long-running agents and coding
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
@@ -27490,11 +29034,11 @@ public final class Main {
 
       - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
 
-        Premium model combining maximum intelligence with practical performance
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
-        Premium model combining maximum intelligence with practical performance
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
 
@@ -27506,11 +29050,11 @@ public final class Main {
 
       - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
 
-        Exceptional model for specialized complex tasks
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
 
-        Exceptional model for specialized complex tasks
+        Powerful intelligence for long-running agents and coding
 
     - `JsonValue; name "advisor"constant`
 
@@ -27844,6 +29388,78 @@ public final class Main {
 
     The number of input tokens read from the cache.
 
+  - `Optional<BetaFallbackCreditUsage> fallbackCredit`
+
+    Outcome of the `fallback_credit_token` presented on this request.
+
+    - `Status status`
+
+      Whether the fallback-credit reprice was applied to this response's billing.
+
+      A union discriminated on `type`. `redeemed`: the retry is billed as if
+      the conversation had been on the retry model all along — including when the
+      resulting shift is zero because there was nothing to move. `not_applied`:
+      no reprice was applied; the arm's `reason` says why.
+
+      - `class BetaFallbackCreditRedeemed:`
+
+        The reprice was applied: the retry is billed as if the conversation
+        had been on the retry model all along.
+
+        - `JsonValue; type "redeemed"constant`
+
+          - `REDEEMED("redeemed")`
+
+      - `class BetaFallbackCreditNotApplied:`
+
+        No reprice was applied; `reason` says why.
+
+        - `Reason reason`
+
+          Why the reprice was not applied.
+
+          A closed enum; additions to the redemption-check vocabulary arrive as
+          deliberate schema updates.
+
+          - `BODY_MISMATCH("body_mismatch")`
+
+          - `CONTINUATION_EXCLUDED("continuation_excluded")`
+
+          - `CONTINUATION_ONLY("continuation_only")`
+
+          - `EXPIRED("expired")`
+
+          - `INVALID_TARGET_MODEL("invalid_target_model")`
+
+          - `NOT_ENABLED("not_enabled")`
+
+          - `REPRICE_UNAVAILABLE("reprice_unavailable")`
+
+          - `TEMPORARILY_UNAVAILABLE("temporarily_unavailable")`
+
+          - `VARIANT_FIELDS_PRESENT("variant_fields_present")`
+
+          - `WRONG_ORGANIZATION("wrong_organization")`
+
+          - `WRONG_PLATFORM("wrong_platform")`
+
+          - `WRONG_WORKSPACE("wrong_workspace")`
+
+        - `JsonValue; type "not_applied"constant`
+
+          - `NOT_APPLIED("not_applied")`
+
+        - `Optional<List<String>> removeToRedeem`
+
+          Request fields to remove before retrying, so the retry can redeem this
+          token.
+
+          Present exactly when `reason` is `variant_fields_present` — never null,
+          never an empty array; absent otherwise. Fields are named only from your own request, and only after
+          the sealed variant hash matched. A served best-effort retry has already
+          been billed at normal price; nothing redeems retroactively, but a corrected
+          re-send inside the token's five-minute window can still redeem.
+
   - `Optional<String> inferenceGeo`
 
     The geographic region where inference was performed for this request.
@@ -27900,13 +29516,17 @@ public final class Main {
 
           Most capable model for cybersecurity and biology research
 
+        - `CLAUDE_OPUS_5("claude-opus-5")`
+
+          Powerful intelligence for long-running agents and coding
+
         - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
-          Frontier intelligence for long-running agents and coding
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
 
-          Frontier intelligence for long-running agents and coding
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
 
@@ -27914,7 +29534,7 @@ public final class Main {
 
         - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-          Frontier intelligence for long-running agents and coding
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
@@ -27930,11 +29550,11 @@ public final class Main {
 
         - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
 
-          Premium model combining maximum intelligence with practical performance
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
-          Premium model combining maximum intelligence with practical performance
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
 
@@ -27946,11 +29566,11 @@ public final class Main {
 
         - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
 
-          Exceptional model for specialized complex tasks
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
 
-          Exceptional model for specialized complex tasks
+          Powerful intelligence for long-running agents and coding
 
       - `long outputTokens`
 
@@ -30061,7 +31681,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -31131,19 +32755,109 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               Use this block to provide or update system-level instructions at a specific
               point in the conversation, rather than only via the top-level `system` parameter.
 
-              - `List<BetaTextBlockParam> content`
+              - `List<Content> content`
 
                 System instruction text blocks.
 
-                - `String text`
+                - `class BetaTextBlockParam:`
 
-                - `JsonValue; type "text"constant`
+                - `class BetaRequestToolAdditionBlock:`
 
-                - `Optional<BetaCacheControlEphemeral> cacheControl`
+                  Mid-conversation directive to surface a declared tool.
 
-                  Create a cache control breakpoint at this content block.
+                  `tool` references a tool (or MCP toolset) by name from the request's
+                  `tools`; it is offered to the model from this point in the
+                  conversation onward.
 
-                - `Optional<List<BetaTextCitationParam>> citations`
+                  - `Tool tool`
+
+                    Reference to a single tool the caller declared directly in
+                    `tools[]`. Does not accept the composed `{server}_{name}` form the
+                    server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+                    `mcp_toolset_reference` for those.
+
+                    - `class BetaToolChangeToolReference:`
+
+                      Reference to a single tool the caller declared directly in
+                      `tools[]`. Does not accept the composed `{server}_{name}` form the
+                      server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+                      `mcp_toolset_reference` for those.
+
+                      - `String name`
+
+                      - `JsonValue; type "tool_reference"constant`
+
+                        - `TOOL_REFERENCE("tool_reference")`
+
+                    - `class BetaToolChangeMcpToolReference:`
+
+                      Reference to a single MCP tool by its server and remote name — the
+                      same `server_name`/`name` pair `mcp_tool_use` carries.
+
+                      - `String name`
+
+                      - `String serverName`
+
+                      - `JsonValue; type "mcp_tool_reference"constant`
+
+                        - `MCP_TOOL_REFERENCE("mcp_tool_reference")`
+
+                    - `class BetaToolChangeMcpToolsetReference:`
+
+                      Reference to every tool in the named MCP server's toolset.
+
+                      - `String serverName`
+
+                      - `JsonValue; type "mcp_toolset_reference"constant`
+
+                        - `MCP_TOOLSET_REFERENCE("mcp_toolset_reference")`
+
+                  - `JsonValue; type "tool_addition"constant`
+
+                    - `TOOL_ADDITION("tool_addition")`
+
+                  - `Optional<BetaCacheControlEphemeral> cacheControl`
+
+                    Create a cache control breakpoint at this content block.
+
+                - `class BetaRequestToolRemovalBlock:`
+
+                  Mid-conversation directive to withdraw a tool.
+
+                  `tool` references a tool (or MCP toolset) by name from the request's
+                  `tools`; it is no longer offered to the model from this point in the
+                  conversation onward.
+
+                  - `Tool tool`
+
+                    Reference to a single tool the caller declared directly in
+                    `tools[]`. Does not accept the composed `{server}_{name}` form the
+                    server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+                    `mcp_toolset_reference` for those.
+
+                    - `class BetaToolChangeToolReference:`
+
+                      Reference to a single tool the caller declared directly in
+                      `tools[]`. Does not accept the composed `{server}_{name}` form the
+                      server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+                      `mcp_toolset_reference` for those.
+
+                    - `class BetaToolChangeMcpToolReference:`
+
+                      Reference to a single MCP tool by its server and remote name — the
+                      same `server_name`/`name` pair `mcp_tool_use` carries.
+
+                    - `class BetaToolChangeMcpToolsetReference:`
+
+                      Reference to every tool in the named MCP server's toolset.
+
+                  - `JsonValue; type "tool_removal"constant`
+
+                    - `TOOL_REMOVAL("tool_removal")`
+
+                  - `Optional<BetaCacheControlEphemeral> cacheControl`
+
+                    Create a cache control breakpoint at this content block.
 
               - `JsonValue; type "mid_conv_system"constant`
 
@@ -31152,6 +32866,22 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               - `Optional<BetaCacheControlEphemeral> cacheControl`
 
                 Create a cache control breakpoint at this content block.
+
+            - `class BetaRequestToolAdditionBlock:`
+
+              Mid-conversation directive to surface a declared tool.
+
+              `tool` references a tool (or MCP toolset) by name from the request's
+              `tools`; it is offered to the model from this point in the
+              conversation onward.
+
+            - `class BetaRequestToolRemovalBlock:`
+
+              Mid-conversation directive to withdraw a tool.
+
+              `tool` references a tool (or MCP toolset) by name from the request's
+              `tools`; it is no longer offered to the model from this point in the
+              conversation onward.
 
             - `class BetaFallbackBlockParam:`
 
@@ -31191,13 +32921,17 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     Most capable model for cybersecurity and biology research
 
+                  - `CLAUDE_OPUS_5("claude-opus-5")`
+
+                    Powerful intelligence for long-running agents and coding
+
                   - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
-                    Frontier intelligence for long-running agents and coding
+                    Powerful intelligence for long-running agents and coding
 
                   - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
 
-                    Frontier intelligence for long-running agents and coding
+                    Powerful intelligence for long-running agents and coding
 
                   - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
 
@@ -31205,7 +32939,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-                    Frontier intelligence for long-running agents and coding
+                    Powerful intelligence for long-running agents and coding
 
                   - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
@@ -31221,11 +32955,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
 
-                    Premium model combining maximum intelligence with practical performance
+                    Powerful intelligence for long-running agents and coding
 
                   - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
-                    Premium model combining maximum intelligence with practical performance
+                    Powerful intelligence for long-running agents and coding
 
                   - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
 
@@ -31237,11 +32971,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
 
-                    Exceptional model for specialized complex tasks
+                    Powerful intelligence for long-running agents and coding
 
                   - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
 
-                    Exceptional model for specialized complex tasks
+                    Powerful intelligence for long-running agents and coding
 
               - `BetaFallbackInfoParam to`
 
@@ -31432,7 +33166,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           The `id` (`msg_...`) from this client's previous /v1/messages response. The server compares that request's prompt fingerprint against this one and returns `diagnostics.cache_miss_reason` when the prompt-cache prefix could not be reused. Pass `null` on the first turn to opt in without a prior message to compare.
 
-      - `Optional<String> fallbackCreditToken`
+      - `Optional<FallbackCreditToken> fallbackCreditToken`
 
         The `fallback_credit_token` from a prior refusal's `stop_details`.
 
@@ -31455,115 +33189,145 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
         When the appended-assistant form is used on a model that otherwise disallows
         assistant-turn prefill, this token also authorizes that one prefill.
 
-      - `Optional<List<BetaFallbackParam>> fallbacks`
+        - `String`
 
-        Opt-in server-side retry on one or more substitute models when the requested model declines for policy reasons. Tried in order: if the first entry also declines, the second is tried, and so on.
+        - `class BetaFallbackCreditTokenParam:`
 
-        - `Model model`
+          Object form of `fallback_credit_token`: the token plus a redemption
+          mode.
 
-          The model that will complete your prompt.
+          Requires `anthropic-beta: fallback-credit-2026-07-01`; without that
+          header the field accepts the bare string only. The bare string and the
+          mode-less object are equivalent (both select `strict`), so wrapping
+          an existing token changes nothing by itself.
 
-          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+          - `String token`
 
-        - `Optional<Long> maxTokens`
+            The opaque `fallback_credit_token` from a prior refusal's `stop_details` — the same string the bare-string form carries.
 
-        - `Optional<BetaOutputConfig> outputConfig`
+          - `Optional<Mode> mode`
 
-          - `Optional<Effort> effort`
+            How a failing token affects the retry. `strict` (the default, and the bare-string behavior): a failing redemption is a 400 and the retry is not served. `best_effort`: the retry is served either way — a token-layer failure no longer rejects the request; the retry proceeds at normal price and the outcome is reported on the response's `usage.fallback_credit`. Two failures stay hard in both modes: a malformed token, and combining `fallback_credit_token` with `fallbacks`.
 
-            All possible effort levels.
+            - `STRICT("strict")`
 
-            - `LOW("low")`
+            - `BEST_EFFORT("best_effort")`
 
-            - `MEDIUM("medium")`
+      - `Optional<BetaFallbacksParam> fallbacks`
 
-            - `HIGH("high")`
+        Opt-in server-side retry on one or more substitute models when the requested model declines for policy reasons. Tried in order: if the first entry also declines, the second is tried, and so on. The string "default" requests the requested model's server-defined default fallback configuration.
 
-            - `XHIGH("xhigh")`
+        - `List<BetaFallbackParam>`
 
-            - `MAX("max")`
+          - `Model model`
 
-          - `Optional<BetaJsonOutputFormat> format`
+            The model that will complete your prompt.
 
-            A schema to specify Claude's output format in responses. See [structured outputs](../build-with-claude/build-with-claude-structured-outputs.md)
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-            - `Schema schema`
+          - `Optional<Long> maxTokens`
 
-              The JSON schema of the format
+          - `Optional<BetaOutputConfig> outputConfig`
 
-            - `JsonValue; type "json_schema"constant`
+            - `Optional<Effort> effort`
 
-              - `JSON_SCHEMA("json_schema")`
+              All possible effort levels.
 
-          - `Optional<BetaTokenTaskBudget> taskBudget`
+              - `LOW("low")`
 
-            User-configurable total token budget across contexts.
+              - `MEDIUM("medium")`
 
-            - `long total`
+              - `HIGH("high")`
 
-              Total token budget across all contexts in the session.
+              - `XHIGH("xhigh")`
 
-            - `JsonValue; type "tokens"constant`
+              - `MAX("max")`
 
-              The budget type. Currently only 'tokens' is supported.
+            - `Optional<BetaJsonOutputFormat> format`
 
-              - `TOKENS("tokens")`
+              A schema to specify Claude's output format in responses. See [structured outputs](../build-with-claude/build-with-claude-structured-outputs.md)
 
-            - `Optional<Long> remaining`
+              - `Schema schema`
 
-              Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
+                The JSON schema of the format
 
-        - `Optional<Speed> speed`
+              - `JsonValue; type "json_schema"constant`
 
-          Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+                - `JSON_SCHEMA("json_schema")`
 
-          - `STANDARD("standard")`
+            - `Optional<BetaTokenTaskBudget> taskBudget`
 
-          - `FAST("fast")`
+              User-configurable total token budget across contexts.
 
-        - `Optional<Thinking> thinking`
+              - `long total`
 
-          - `class BetaThinkingConfigEnabled:`
+                Total token budget across all contexts in the session.
 
-            - `long budgetTokens`
+              - `JsonValue; type "tokens"constant`
 
-              Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
+                The budget type. Currently only 'tokens' is supported.
 
-              Must be ≥1024 and less than `max_tokens`.
+                - `TOKENS("tokens")`
 
-              See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md) for details.
+              - `Optional<Long> remaining`
 
-            - `JsonValue; type "enabled"constant`
+                Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
-              - `ENABLED("enabled")`
+          - `Optional<Speed> speed`
 
-            - `Optional<Display> display`
+            Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-              Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+            - `STANDARD("standard")`
 
-              - `SUMMARIZED("summarized")`
+            - `FAST("fast")`
 
-              - `OMITTED("omitted")`
+          - `Optional<Thinking> thinking`
 
-          - `class BetaThinkingConfigDisabled:`
+            - `class BetaThinkingConfigEnabled:`
 
-            - `JsonValue; type "disabled"constant`
+              - `long budgetTokens`
 
-              - `DISABLED("disabled")`
+                Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
 
-          - `class BetaThinkingConfigAdaptive:`
+                Must be ≥1024 and less than `max_tokens`.
 
-            - `JsonValue; type "adaptive"constant`
+                See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md) for details.
 
-              - `ADAPTIVE("adaptive")`
+              - `JsonValue; type "enabled"constant`
 
-            - `Optional<Display> display`
+                - `ENABLED("enabled")`
 
-              Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+              - `Optional<Display> display`
 
-              - `SUMMARIZED("summarized")`
+                Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
-              - `OMITTED("omitted")`
+                - `SUMMARIZED("summarized")`
+
+                - `OMITTED("omitted")`
+
+            - `class BetaThinkingConfigDisabled:`
+
+              - `JsonValue; type "disabled"constant`
+
+                - `DISABLED("disabled")`
+
+            - `class BetaThinkingConfigAdaptive:`
+
+              - `JsonValue; type "adaptive"constant`
+
+                - `ADAPTIVE("adaptive")`
+
+              - `Optional<Display> display`
+
+                Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+
+                - `SUMMARIZED("summarized")`
+
+                - `OMITTED("omitted")`
+
+        - `JsonValue;`
+
+          - `DEFAULT("default")`
 
       - `Optional<String> inferenceGeo`
 
@@ -33267,7 +35031,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -33493,7 +35261,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -33718,7 +35490,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -33936,7 +35712,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -34066,7 +35846,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -34951,13 +36735,17 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   Most capable model for cybersecurity and biology research
 
+                - `CLAUDE_OPUS_5("claude-opus-5")`
+
+                  Powerful intelligence for long-running agents and coding
+
                 - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
-                  Frontier intelligence for long-running agents and coding
+                  Powerful intelligence for long-running agents and coding
 
                 - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
 
-                  Frontier intelligence for long-running agents and coding
+                  Powerful intelligence for long-running agents and coding
 
                 - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
 
@@ -34965,7 +36753,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-                  Frontier intelligence for long-running agents and coding
+                  Powerful intelligence for long-running agents and coding
 
                 - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
@@ -34981,11 +36769,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
 
-                  Premium model combining maximum intelligence with practical performance
+                  Powerful intelligence for long-running agents and coding
 
                 - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
-                  Premium model combining maximum intelligence with practical performance
+                  Powerful intelligence for long-running agents and coding
 
                 - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
 
@@ -34997,11 +36785,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
 
-                  Exceptional model for specialized complex tasks
+                  Powerful intelligence for long-running agents and coding
 
                 - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
 
-                  Exceptional model for specialized complex tasks
+                  Powerful intelligence for long-running agents and coding
 
             - `BetaFallbackInfo to`
 
@@ -35259,6 +37047,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
           * `"tool_use"`: the model invoked one or more tools
           * `"pause_turn"`: we paused a long-running turn. You may provide the response back as-is in a subsequent request to let the model continue.
           * `"refusal"`: when streaming classifiers intervene to handle potential policy violations
+          * `"model_context_window_exceeded"`: we exceeded the model's context window
 
           In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
@@ -35323,6 +37112,78 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
           - `Optional<Long> cacheReadInputTokens`
 
             The number of input tokens read from the cache.
+
+          - `Optional<BetaFallbackCreditUsage> fallbackCredit`
+
+            Outcome of the `fallback_credit_token` presented on this request.
+
+            - `Status status`
+
+              Whether the fallback-credit reprice was applied to this response's billing.
+
+              A union discriminated on `type`. `redeemed`: the retry is billed as if
+              the conversation had been on the retry model all along — including when the
+              resulting shift is zero because there was nothing to move. `not_applied`:
+              no reprice was applied; the arm's `reason` says why.
+
+              - `class BetaFallbackCreditRedeemed:`
+
+                The reprice was applied: the retry is billed as if the conversation
+                had been on the retry model all along.
+
+                - `JsonValue; type "redeemed"constant`
+
+                  - `REDEEMED("redeemed")`
+
+              - `class BetaFallbackCreditNotApplied:`
+
+                No reprice was applied; `reason` says why.
+
+                - `Reason reason`
+
+                  Why the reprice was not applied.
+
+                  A closed enum; additions to the redemption-check vocabulary arrive as
+                  deliberate schema updates.
+
+                  - `BODY_MISMATCH("body_mismatch")`
+
+                  - `CONTINUATION_EXCLUDED("continuation_excluded")`
+
+                  - `CONTINUATION_ONLY("continuation_only")`
+
+                  - `EXPIRED("expired")`
+
+                  - `INVALID_TARGET_MODEL("invalid_target_model")`
+
+                  - `NOT_ENABLED("not_enabled")`
+
+                  - `REPRICE_UNAVAILABLE("reprice_unavailable")`
+
+                  - `TEMPORARILY_UNAVAILABLE("temporarily_unavailable")`
+
+                  - `VARIANT_FIELDS_PRESENT("variant_fields_present")`
+
+                  - `WRONG_ORGANIZATION("wrong_organization")`
+
+                  - `WRONG_PLATFORM("wrong_platform")`
+
+                  - `WRONG_WORKSPACE("wrong_workspace")`
+
+                - `JsonValue; type "not_applied"constant`
+
+                  - `NOT_APPLIED("not_applied")`
+
+                - `Optional<List<String>> removeToRedeem`
+
+                  Request fields to remove before retrying, so the retry can redeem this
+                  token.
+
+                  Present exactly when `reason` is `variant_fields_present` — never null,
+                  never an empty array; absent otherwise. Fields are named only from your own request, and only after
+                  the sealed variant hash matched. A served best-effort retry has already
+                  been billed at normal price; nothing redeems retroactively, but a corrected
+                  re-send inside the token's five-minute window can still redeem.
 
           - `Optional<String> inferenceGeo`
 
@@ -36760,13 +38621,17 @@ public final class Main {
 
                   Most capable model for cybersecurity and biology research
 
+                - `CLAUDE_OPUS_5("claude-opus-5")`
+
+                  Powerful intelligence for long-running agents and coding
+
                 - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
-                  Frontier intelligence for long-running agents and coding
+                  Powerful intelligence for long-running agents and coding
 
                 - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
 
-                  Frontier intelligence for long-running agents and coding
+                  Powerful intelligence for long-running agents and coding
 
                 - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
 
@@ -36774,7 +38639,7 @@ public final class Main {
 
                 - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-                  Frontier intelligence for long-running agents and coding
+                  Powerful intelligence for long-running agents and coding
 
                 - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
@@ -36790,11 +38655,11 @@ public final class Main {
 
                 - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
 
-                  Premium model combining maximum intelligence with practical performance
+                  Powerful intelligence for long-running agents and coding
 
                 - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
-                  Premium model combining maximum intelligence with practical performance
+                  Powerful intelligence for long-running agents and coding
 
                 - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
 
@@ -36806,11 +38671,11 @@ public final class Main {
 
                 - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
 
-                  Exceptional model for specialized complex tasks
+                  Powerful intelligence for long-running agents and coding
 
                 - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
 
-                  Exceptional model for specialized complex tasks
+                  Powerful intelligence for long-running agents and coding
 
             - `BetaFallbackInfo to`
 
@@ -37068,6 +38933,7 @@ public final class Main {
           * `"tool_use"`: the model invoked one or more tools
           * `"pause_turn"`: we paused a long-running turn. You may provide the response back as-is in a subsequent request to let the model continue.
           * `"refusal"`: when streaming classifiers intervene to handle potential policy violations
+          * `"model_context_window_exceeded"`: we exceeded the model's context window
 
           In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
@@ -37132,6 +38998,78 @@ public final class Main {
           - `Optional<Long> cacheReadInputTokens`
 
             The number of input tokens read from the cache.
+
+          - `Optional<BetaFallbackCreditUsage> fallbackCredit`
+
+            Outcome of the `fallback_credit_token` presented on this request.
+
+            - `Status status`
+
+              Whether the fallback-credit reprice was applied to this response's billing.
+
+              A union discriminated on `type`. `redeemed`: the retry is billed as if
+              the conversation had been on the retry model all along — including when the
+              resulting shift is zero because there was nothing to move. `not_applied`:
+              no reprice was applied; the arm's `reason` says why.
+
+              - `class BetaFallbackCreditRedeemed:`
+
+                The reprice was applied: the retry is billed as if the conversation
+                had been on the retry model all along.
+
+                - `JsonValue; type "redeemed"constant`
+
+                  - `REDEEMED("redeemed")`
+
+              - `class BetaFallbackCreditNotApplied:`
+
+                No reprice was applied; `reason` says why.
+
+                - `Reason reason`
+
+                  Why the reprice was not applied.
+
+                  A closed enum; additions to the redemption-check vocabulary arrive as
+                  deliberate schema updates.
+
+                  - `BODY_MISMATCH("body_mismatch")`
+
+                  - `CONTINUATION_EXCLUDED("continuation_excluded")`
+
+                  - `CONTINUATION_ONLY("continuation_only")`
+
+                  - `EXPIRED("expired")`
+
+                  - `INVALID_TARGET_MODEL("invalid_target_model")`
+
+                  - `NOT_ENABLED("not_enabled")`
+
+                  - `REPRICE_UNAVAILABLE("reprice_unavailable")`
+
+                  - `TEMPORARILY_UNAVAILABLE("temporarily_unavailable")`
+
+                  - `VARIANT_FIELDS_PRESENT("variant_fields_present")`
+
+                  - `WRONG_ORGANIZATION("wrong_organization")`
+
+                  - `WRONG_PLATFORM("wrong_platform")`
+
+                  - `WRONG_WORKSPACE("wrong_workspace")`
+
+                - `JsonValue; type "not_applied"constant`
+
+                  - `NOT_APPLIED("not_applied")`
+
+                - `Optional<List<String>> removeToRedeem`
+
+                  Request fields to remove before retrying, so the retry can redeem this
+                  token.
+
+                  Present exactly when `reason` is `variant_fields_present` — never null,
+                  never an empty array; absent otherwise. Fields are named only from your own request, and only after
+                  the sealed variant hash matched. A served best-effort retry has already
+                  been billed at normal price; nothing redeems retroactively, but a corrected
+                  re-send inside the token's five-minute window can still redeem.
 
           - `Optional<String> inferenceGeo`
 
@@ -38355,13 +40293,17 @@ public final class Main {
 
                 Most capable model for cybersecurity and biology research
 
+              - `CLAUDE_OPUS_5("claude-opus-5")`
+
+                Powerful intelligence for long-running agents and coding
+
               - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
-                Frontier intelligence for long-running agents and coding
+                Powerful intelligence for long-running agents and coding
 
               - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
 
-                Frontier intelligence for long-running agents and coding
+                Powerful intelligence for long-running agents and coding
 
               - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
 
@@ -38369,7 +40311,7 @@ public final class Main {
 
               - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-                Frontier intelligence for long-running agents and coding
+                Powerful intelligence for long-running agents and coding
 
               - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
@@ -38385,11 +40327,11 @@ public final class Main {
 
               - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
 
-                Premium model combining maximum intelligence with practical performance
+                Powerful intelligence for long-running agents and coding
 
               - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
-                Premium model combining maximum intelligence with practical performance
+                Powerful intelligence for long-running agents and coding
 
               - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
 
@@ -38401,11 +40343,11 @@ public final class Main {
 
               - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
 
-                Exceptional model for specialized complex tasks
+                Powerful intelligence for long-running agents and coding
 
               - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
 
-                Exceptional model for specialized complex tasks
+                Powerful intelligence for long-running agents and coding
 
           - `BetaFallbackInfo to`
 
@@ -38663,6 +40605,7 @@ public final class Main {
         * `"tool_use"`: the model invoked one or more tools
         * `"pause_turn"`: we paused a long-running turn. You may provide the response back as-is in a subsequent request to let the model continue.
         * `"refusal"`: when streaming classifiers intervene to handle potential policy violations
+        * `"model_context_window_exceeded"`: we exceeded the model's context window
 
         In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
@@ -38727,6 +40670,78 @@ public final class Main {
         - `Optional<Long> cacheReadInputTokens`
 
           The number of input tokens read from the cache.
+
+        - `Optional<BetaFallbackCreditUsage> fallbackCredit`
+
+          Outcome of the `fallback_credit_token` presented on this request.
+
+          - `Status status`
+
+            Whether the fallback-credit reprice was applied to this response's billing.
+
+            A union discriminated on `type`. `redeemed`: the retry is billed as if
+            the conversation had been on the retry model all along — including when the
+            resulting shift is zero because there was nothing to move. `not_applied`:
+            no reprice was applied; the arm's `reason` says why.
+
+            - `class BetaFallbackCreditRedeemed:`
+
+              The reprice was applied: the retry is billed as if the conversation
+              had been on the retry model all along.
+
+              - `JsonValue; type "redeemed"constant`
+
+                - `REDEEMED("redeemed")`
+
+            - `class BetaFallbackCreditNotApplied:`
+
+              No reprice was applied; `reason` says why.
+
+              - `Reason reason`
+
+                Why the reprice was not applied.
+
+                A closed enum; additions to the redemption-check vocabulary arrive as
+                deliberate schema updates.
+
+                - `BODY_MISMATCH("body_mismatch")`
+
+                - `CONTINUATION_EXCLUDED("continuation_excluded")`
+
+                - `CONTINUATION_ONLY("continuation_only")`
+
+                - `EXPIRED("expired")`
+
+                - `INVALID_TARGET_MODEL("invalid_target_model")`
+
+                - `NOT_ENABLED("not_enabled")`
+
+                - `REPRICE_UNAVAILABLE("reprice_unavailable")`
+
+                - `TEMPORARILY_UNAVAILABLE("temporarily_unavailable")`
+
+                - `VARIANT_FIELDS_PRESENT("variant_fields_present")`
+
+                - `WRONG_ORGANIZATION("wrong_organization")`
+
+                - `WRONG_PLATFORM("wrong_platform")`
+
+                - `WRONG_WORKSPACE("wrong_workspace")`
+
+              - `JsonValue; type "not_applied"constant`
+
+                - `NOT_APPLIED("not_applied")`
+
+              - `Optional<List<String>> removeToRedeem`
+
+                Request fields to remove before retrying, so the retry can redeem this
+                token.
+
+                Present exactly when `reason` is `variant_fields_present` — never null,
+                never an empty array; absent otherwise. Fields are named only from your own request, and only after
+                the sealed variant hash matched. A served best-effort retry has already
+                been billed at normal price; nothing redeems retroactively, but a corrected
+                re-send inside the token's five-minute window can still redeem.
 
         - `Optional<String> inferenceGeo`
 
@@ -39912,13 +41927,17 @@ public final class Main {
 
               Most capable model for cybersecurity and biology research
 
+            - `CLAUDE_OPUS_5("claude-opus-5")`
+
+              Powerful intelligence for long-running agents and coding
+
             - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
-              Frontier intelligence for long-running agents and coding
+              Powerful intelligence for long-running agents and coding
 
             - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
 
-              Frontier intelligence for long-running agents and coding
+              Powerful intelligence for long-running agents and coding
 
             - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
 
@@ -39926,7 +41945,7 @@ public final class Main {
 
             - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-              Frontier intelligence for long-running agents and coding
+              Powerful intelligence for long-running agents and coding
 
             - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
@@ -39942,11 +41961,11 @@ public final class Main {
 
             - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
 
-              Premium model combining maximum intelligence with practical performance
+              Powerful intelligence for long-running agents and coding
 
             - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
-              Premium model combining maximum intelligence with practical performance
+              Powerful intelligence for long-running agents and coding
 
             - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
 
@@ -39958,11 +41977,11 @@ public final class Main {
 
             - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
 
-              Exceptional model for specialized complex tasks
+              Powerful intelligence for long-running agents and coding
 
             - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
 
-              Exceptional model for specialized complex tasks
+              Powerful intelligence for long-running agents and coding
 
         - `BetaFallbackInfo to`
 
@@ -40220,6 +42239,7 @@ public final class Main {
       * `"tool_use"`: the model invoked one or more tools
       * `"pause_turn"`: we paused a long-running turn. You may provide the response back as-is in a subsequent request to let the model continue.
       * `"refusal"`: when streaming classifiers intervene to handle potential policy violations
+      * `"model_context_window_exceeded"`: we exceeded the model's context window
 
       In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
@@ -40284,6 +42304,78 @@ public final class Main {
       - `Optional<Long> cacheReadInputTokens`
 
         The number of input tokens read from the cache.
+
+      - `Optional<BetaFallbackCreditUsage> fallbackCredit`
+
+        Outcome of the `fallback_credit_token` presented on this request.
+
+        - `Status status`
+
+          Whether the fallback-credit reprice was applied to this response's billing.
+
+          A union discriminated on `type`. `redeemed`: the retry is billed as if
+          the conversation had been on the retry model all along — including when the
+          resulting shift is zero because there was nothing to move. `not_applied`:
+          no reprice was applied; the arm's `reason` says why.
+
+          - `class BetaFallbackCreditRedeemed:`
+
+            The reprice was applied: the retry is billed as if the conversation
+            had been on the retry model all along.
+
+            - `JsonValue; type "redeemed"constant`
+
+              - `REDEEMED("redeemed")`
+
+          - `class BetaFallbackCreditNotApplied:`
+
+            No reprice was applied; `reason` says why.
+
+            - `Reason reason`
+
+              Why the reprice was not applied.
+
+              A closed enum; additions to the redemption-check vocabulary arrive as
+              deliberate schema updates.
+
+              - `BODY_MISMATCH("body_mismatch")`
+
+              - `CONTINUATION_EXCLUDED("continuation_excluded")`
+
+              - `CONTINUATION_ONLY("continuation_only")`
+
+              - `EXPIRED("expired")`
+
+              - `INVALID_TARGET_MODEL("invalid_target_model")`
+
+              - `NOT_ENABLED("not_enabled")`
+
+              - `REPRICE_UNAVAILABLE("reprice_unavailable")`
+
+              - `TEMPORARILY_UNAVAILABLE("temporarily_unavailable")`
+
+              - `VARIANT_FIELDS_PRESENT("variant_fields_present")`
+
+              - `WRONG_ORGANIZATION("wrong_organization")`
+
+              - `WRONG_PLATFORM("wrong_platform")`
+
+              - `WRONG_WORKSPACE("wrong_workspace")`
+
+            - `JsonValue; type "not_applied"constant`
+
+              - `NOT_APPLIED("not_applied")`
+
+            - `Optional<List<String>> removeToRedeem`
+
+              Request fields to remove before retrying, so the retry can redeem this
+              token.
+
+              Present exactly when `reason` is `variant_fields_present` — never null,
+              never an empty array; absent otherwise. Fields are named only from your own request, and only after
+              the sealed variant hash matched. A served best-effort retry has already
+              been billed at normal price; nothing redeems retroactively, but a corrected
+              re-send inside the token's five-minute window can still redeem.
 
       - `Optional<String> inferenceGeo`
 
@@ -40578,7 +42670,11 @@ Create Agent
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -40600,17 +42696,21 @@ Create Agent
 
         Next generation of intelligence for the hardest knowledge work and coding problems
 
+      - `CLAUDE_OPUS_5("claude-opus-5")`
+
+        Powerful intelligence for long-running agents and coding
+
       - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
-        Frontier intelligence for long-running agents and coding
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
 
-        Frontier intelligence for long-running agents and coding
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-        Most intelligent model for building agents and coding
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
@@ -40626,11 +42726,11 @@ Create Agent
 
       - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
 
-        Premium model combining maximum intelligence with practical performance
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
-        Premium model combining maximum intelligence with practical performance
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
 
@@ -41000,17 +43100,21 @@ Create Agent
 
         Next generation of intelligence for the hardest knowledge work and coding problems
 
+      - `CLAUDE_OPUS_5("claude-opus-5")`
+
+        Powerful intelligence for long-running agents and coding
+
       - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
-        Frontier intelligence for long-running agents and coding
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
 
-        Frontier intelligence for long-running agents and coding
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-        Most intelligent model for building agents and coding
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
@@ -41026,11 +43130,11 @@ Create Agent
 
       - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
 
-        Premium model combining maximum intelligence with practical performance
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
-        Premium model combining maximum intelligence with practical performance
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
 
@@ -41485,7 +43589,11 @@ List Agents
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -41537,17 +43645,21 @@ List Agents
 
         Next generation of intelligence for the hardest knowledge work and coding problems
 
+      - `CLAUDE_OPUS_5("claude-opus-5")`
+
+        Powerful intelligence for long-running agents and coding
+
       - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
-        Frontier intelligence for long-running agents and coding
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
 
-        Frontier intelligence for long-running agents and coding
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-        Most intelligent model for building agents and coding
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
@@ -41563,11 +43675,11 @@ List Agents
 
       - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
 
-        Premium model combining maximum intelligence with practical performance
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
-        Premium model combining maximum intelligence with practical performance
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
 
@@ -42008,7 +44120,11 @@ Get Agent
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -42060,17 +44176,21 @@ Get Agent
 
         Next generation of intelligence for the hardest knowledge work and coding problems
 
+      - `CLAUDE_OPUS_5("claude-opus-5")`
+
+        Powerful intelligence for long-running agents and coding
+
       - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
-        Frontier intelligence for long-running agents and coding
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
 
-        Frontier intelligence for long-running agents and coding
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-        Most intelligent model for building agents and coding
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
@@ -42086,11 +44206,11 @@ Get Agent
 
       - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
 
-        Premium model combining maximum intelligence with practical performance
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
-        Premium model combining maximum intelligence with practical performance
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
 
@@ -42522,7 +44642,11 @@ Update Agent
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -42568,17 +44692,21 @@ Update Agent
 
         Next generation of intelligence for the hardest knowledge work and coding problems
 
+      - `CLAUDE_OPUS_5("claude-opus-5")`
+
+        Powerful intelligence for long-running agents and coding
+
       - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
-        Frontier intelligence for long-running agents and coding
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
 
-        Frontier intelligence for long-running agents and coding
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-        Most intelligent model for building agents and coding
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
@@ -42594,11 +44722,11 @@ Update Agent
 
       - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
 
-        Premium model combining maximum intelligence with practical performance
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
-        Premium model combining maximum intelligence with practical performance
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
 
@@ -42948,17 +45076,21 @@ Update Agent
 
         Next generation of intelligence for the hardest knowledge work and coding problems
 
+      - `CLAUDE_OPUS_5("claude-opus-5")`
+
+        Powerful intelligence for long-running agents and coding
+
       - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
-        Frontier intelligence for long-running agents and coding
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
 
-        Frontier intelligence for long-running agents and coding
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-        Most intelligent model for building agents and coding
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
@@ -42974,11 +45106,11 @@ Update Agent
 
       - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
 
-        Premium model combining maximum intelligence with practical performance
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
-        Premium model combining maximum intelligence with practical performance
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
 
@@ -43410,7 +45542,11 @@ Archive Agent
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -43462,17 +45598,21 @@ Archive Agent
 
         Next generation of intelligence for the hardest knowledge work and coding problems
 
+      - `CLAUDE_OPUS_5("claude-opus-5")`
+
+        Powerful intelligence for long-running agents and coding
+
       - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
-        Frontier intelligence for long-running agents and coding
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
 
-        Frontier intelligence for long-running agents and coding
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-        Most intelligent model for building agents and coding
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
@@ -43488,11 +45628,11 @@ Archive Agent
 
       - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
 
-        Premium model combining maximum intelligence with practical performance
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
-        Premium model combining maximum intelligence with practical performance
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
 
@@ -43900,17 +46040,21 @@ public final class Main {
 
         Next generation of intelligence for the hardest knowledge work and coding problems
 
+      - `CLAUDE_OPUS_5("claude-opus-5")`
+
+        Powerful intelligence for long-running agents and coding
+
       - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
-        Frontier intelligence for long-running agents and coding
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
 
-        Frontier intelligence for long-running agents and coding
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-        Most intelligent model for building agents and coding
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
@@ -43926,11 +46070,11 @@ public final class Main {
 
       - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
 
-        Premium model combining maximum intelligence with practical performance
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
-        Premium model combining maximum intelligence with practical performance
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
 
@@ -45102,17 +47246,21 @@ public final class Main {
 
     Next generation of intelligence for the hardest knowledge work and coding problems
 
+  - `CLAUDE_OPUS_5("claude-opus-5")`
+
+    Powerful intelligence for long-running agents and coding
+
   - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
-    Frontier intelligence for long-running agents and coding
+    Powerful intelligence for long-running agents and coding
 
   - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
 
-    Frontier intelligence for long-running agents and coding
+    Powerful intelligence for long-running agents and coding
 
   - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-    Most intelligent model for building agents and coding
+    Powerful intelligence for long-running agents and coding
 
   - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
@@ -45128,11 +47276,11 @@ public final class Main {
 
   - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
 
-    Premium model combining maximum intelligence with practical performance
+    Powerful intelligence for long-running agents and coding
 
   - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
-    Premium model combining maximum intelligence with practical performance
+    Powerful intelligence for long-running agents and coding
 
   - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
 
@@ -45162,17 +47310,21 @@ public final class Main {
 
       Next generation of intelligence for the hardest knowledge work and coding problems
 
+    - `CLAUDE_OPUS_5("claude-opus-5")`
+
+      Powerful intelligence for long-running agents and coding
+
     - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
-      Frontier intelligence for long-running agents and coding
+      Powerful intelligence for long-running agents and coding
 
     - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
 
-      Frontier intelligence for long-running agents and coding
+      Powerful intelligence for long-running agents and coding
 
     - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-      Most intelligent model for building agents and coding
+      Powerful intelligence for long-running agents and coding
 
     - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
@@ -45188,11 +47340,11 @@ public final class Main {
 
     - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
 
-      Premium model combining maximum intelligence with practical performance
+      Powerful intelligence for long-running agents and coding
 
     - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
-      Premium model combining maximum intelligence with practical performance
+      Powerful intelligence for long-running agents and coding
 
     - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
 
@@ -45274,17 +47426,21 @@ public final class Main {
 
       Next generation of intelligence for the hardest knowledge work and coding problems
 
+    - `CLAUDE_OPUS_5("claude-opus-5")`
+
+      Powerful intelligence for long-running agents and coding
+
     - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
-      Frontier intelligence for long-running agents and coding
+      Powerful intelligence for long-running agents and coding
 
     - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
 
-      Frontier intelligence for long-running agents and coding
+      Powerful intelligence for long-running agents and coding
 
     - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-      Most intelligent model for building agents and coding
+      Powerful intelligence for long-running agents and coding
 
     - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
@@ -45300,11 +47456,11 @@ public final class Main {
 
     - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
 
-      Premium model combining maximum intelligence with practical performance
+      Powerful intelligence for long-running agents and coding
 
     - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
-      Premium model combining maximum intelligence with practical performance
+      Powerful intelligence for long-running agents and coding
 
     - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
 
@@ -45490,17 +47646,21 @@ public final class Main {
 
         Next generation of intelligence for the hardest knowledge work and coding problems
 
+      - `CLAUDE_OPUS_5("claude-opus-5")`
+
+        Powerful intelligence for long-running agents and coding
+
       - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
-        Frontier intelligence for long-running agents and coding
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
 
-        Frontier intelligence for long-running agents and coding
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-        Most intelligent model for building agents and coding
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
@@ -45516,11 +47676,11 @@ public final class Main {
 
       - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
 
-        Premium model combining maximum intelligence with practical performance
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
-        Premium model combining maximum intelligence with practical performance
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
 
@@ -45896,7 +48056,11 @@ List Agent Versions
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -45948,17 +48112,21 @@ List Agent Versions
 
         Next generation of intelligence for the hardest knowledge work and coding problems
 
+      - `CLAUDE_OPUS_5("claude-opus-5")`
+
+        Powerful intelligence for long-running agents and coding
+
       - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
-        Frontier intelligence for long-running agents and coding
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
 
-        Frontier intelligence for long-running agents and coding
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-        Most intelligent model for building agents and coding
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
@@ -45974,11 +48142,11 @@ List Agent Versions
 
       - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
 
-        Premium model combining maximum intelligence with practical performance
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
-        Premium model combining maximum intelligence with practical performance
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
 
@@ -46415,7 +48583,11 @@ Create a new environment with the specified configuration.
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -46840,7 +49012,11 @@ List environments with pagination support.
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -47135,7 +49311,11 @@ Retrieve a specific environment by ID.
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -47425,7 +49605,11 @@ Update an existing environment's configuration.
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -47837,7 +50021,11 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -47961,7 +50149,11 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -48750,7 +50942,11 @@ Retrieve detailed information about a specific work item.
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -48972,7 +51168,11 @@ Long poll for work items in the queue.
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -49189,7 +51389,11 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -49413,7 +51617,11 @@ Record a heartbeat for a work item to maintain the lease.
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -49570,7 +51778,11 @@ Stop a work item, initiating graceful or forced shutdown.
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -49798,7 +52010,11 @@ List work items in an environment.
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -50015,7 +52231,11 @@ Update work item metadata with merge semantics.
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -50238,7 +52458,11 @@ Get statistics about the work queue for an environment.
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -50660,7 +52884,11 @@ Create Session
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -50732,17 +52960,21 @@ Create Session
 
             Next generation of intelligence for the hardest knowledge work and coding problems
 
+          - `CLAUDE_OPUS_5("claude-opus-5")`
+
+            Powerful intelligence for long-running agents and coding
+
           - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
-            Frontier intelligence for long-running agents and coding
+            Powerful intelligence for long-running agents and coding
 
           - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
 
-            Frontier intelligence for long-running agents and coding
+            Powerful intelligence for long-running agents and coding
 
           - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-            Most intelligent model for building agents and coding
+            Powerful intelligence for long-running agents and coding
 
           - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
@@ -50758,11 +52990,11 @@ Create Session
 
           - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
 
-            Premium model combining maximum intelligence with practical performance
+            Powerful intelligence for long-running agents and coding
 
           - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
-            Premium model combining maximum intelligence with practical performance
+            Powerful intelligence for long-running agents and coding
 
           - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
 
@@ -51406,17 +53638,21 @@ Create Session
 
           Next generation of intelligence for the hardest knowledge work and coding problems
 
+        - `CLAUDE_OPUS_5("claude-opus-5")`
+
+          Powerful intelligence for long-running agents and coding
+
         - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
-          Frontier intelligence for long-running agents and coding
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
 
-          Frontier intelligence for long-running agents and coding
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-          Most intelligent model for building agents and coding
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
@@ -51432,11 +53668,11 @@ Create Session
 
         - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
 
-          Premium model combining maximum intelligence with practical performance
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
-          Premium model combining maximum intelligence with practical performance
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
 
@@ -52279,7 +54515,11 @@ List Sessions
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -52327,17 +54567,21 @@ List Sessions
 
           Next generation of intelligence for the hardest knowledge work and coding problems
 
+        - `CLAUDE_OPUS_5("claude-opus-5")`
+
+          Powerful intelligence for long-running agents and coding
+
         - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
-          Frontier intelligence for long-running agents and coding
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
 
-          Frontier intelligence for long-running agents and coding
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-          Most intelligent model for building agents and coding
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
@@ -52353,11 +54597,11 @@ List Sessions
 
         - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
 
-          Premium model combining maximum intelligence with practical performance
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
-          Premium model combining maximum intelligence with practical performance
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
 
@@ -53140,7 +55384,11 @@ Get Session
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -53188,17 +55436,21 @@ Get Session
 
           Next generation of intelligence for the hardest knowledge work and coding problems
 
+        - `CLAUDE_OPUS_5("claude-opus-5")`
+
+          Powerful intelligence for long-running agents and coding
+
         - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
-          Frontier intelligence for long-running agents and coding
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
 
-          Frontier intelligence for long-running agents and coding
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-          Most intelligent model for building agents and coding
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
@@ -53214,11 +55466,11 @@ Get Session
 
         - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
 
-          Premium model combining maximum intelligence with practical performance
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
-          Premium model combining maximum intelligence with practical performance
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
 
@@ -53995,7 +56247,11 @@ Update Session
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -54059,17 +56315,21 @@ Update Session
 
           Next generation of intelligence for the hardest knowledge work and coding problems
 
+        - `CLAUDE_OPUS_5("claude-opus-5")`
+
+          Powerful intelligence for long-running agents and coding
+
         - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
-          Frontier intelligence for long-running agents and coding
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
 
-          Frontier intelligence for long-running agents and coding
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-          Most intelligent model for building agents and coding
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
@@ -54085,11 +56345,11 @@ Update Session
 
         - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
 
-          Premium model combining maximum intelligence with practical performance
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
-          Premium model combining maximum intelligence with practical performance
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
 
@@ -54866,7 +57126,11 @@ Delete Session
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -54986,7 +57250,11 @@ Archive Session
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -55034,17 +57302,21 @@ Archive Session
 
           Next generation of intelligence for the hardest knowledge work and coding problems
 
+        - `CLAUDE_OPUS_5("claude-opus-5")`
+
+          Powerful intelligence for long-running agents and coding
+
         - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
-          Frontier intelligence for long-running agents and coding
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
 
-          Frontier intelligence for long-running agents and coding
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-          Most intelligent model for building agents and coding
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
@@ -55060,11 +57332,11 @@ Archive Session
 
         - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
 
-          Premium model combining maximum intelligence with practical performance
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
-          Premium model combining maximum intelligence with practical performance
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
 
@@ -55859,17 +58131,21 @@ public final class Main {
 
         Next generation of intelligence for the hardest knowledge work and coding problems
 
+      - `CLAUDE_OPUS_5("claude-opus-5")`
+
+        Powerful intelligence for long-running agents and coding
+
       - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
-        Frontier intelligence for long-running agents and coding
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
 
-        Frontier intelligence for long-running agents and coding
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-        Most intelligent model for building agents and coding
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
@@ -55885,11 +58161,11 @@ public final class Main {
 
       - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
 
-        Premium model combining maximum intelligence with practical performance
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
-        Premium model combining maximum intelligence with practical performance
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
 
@@ -56567,17 +58843,21 @@ public final class Main {
 
           Next generation of intelligence for the hardest knowledge work and coding problems
 
+        - `CLAUDE_OPUS_5("claude-opus-5")`
+
+          Powerful intelligence for long-running agents and coding
+
         - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
-          Frontier intelligence for long-running agents and coding
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
 
-          Frontier intelligence for long-running agents and coding
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-          Most intelligent model for building agents and coding
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
@@ -56593,11 +58873,11 @@ public final class Main {
 
         - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
 
-          Premium model combining maximum intelligence with practical performance
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
-          Premium model combining maximum intelligence with practical performance
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
 
@@ -57143,17 +59423,21 @@ public final class Main {
 
         Next generation of intelligence for the hardest knowledge work and coding problems
 
+      - `CLAUDE_OPUS_5("claude-opus-5")`
+
+        Powerful intelligence for long-running agents and coding
+
       - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
-        Frontier intelligence for long-running agents and coding
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
 
-        Frontier intelligence for long-running agents and coding
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-        Most intelligent model for building agents and coding
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
@@ -57169,11 +59453,11 @@ public final class Main {
 
       - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
 
-        Premium model combining maximum intelligence with practical performance
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
-        Premium model combining maximum intelligence with practical performance
+        Powerful intelligence for long-running agents and coding
 
       - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
 
@@ -57695,17 +59979,21 @@ public final class Main {
 
           Next generation of intelligence for the hardest knowledge work and coding problems
 
+        - `CLAUDE_OPUS_5("claude-opus-5")`
+
+          Powerful intelligence for long-running agents and coding
+
         - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
-          Frontier intelligence for long-running agents and coding
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
 
-          Frontier intelligence for long-running agents and coding
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-          Most intelligent model for building agents and coding
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
@@ -57721,11 +60009,11 @@ public final class Main {
 
         - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
 
-          Premium model combining maximum intelligence with practical performance
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
-          Premium model combining maximum intelligence with practical performance
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
 
@@ -58033,17 +60321,21 @@ public final class Main {
 
           Next generation of intelligence for the hardest knowledge work and coding problems
 
+        - `CLAUDE_OPUS_5("claude-opus-5")`
+
+          Powerful intelligence for long-running agents and coding
+
         - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
-          Frontier intelligence for long-running agents and coding
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
 
-          Frontier intelligence for long-running agents and coding
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-          Most intelligent model for building agents and coding
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
@@ -58059,11 +60351,11 @@ public final class Main {
 
         - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
 
-          Premium model combining maximum intelligence with practical performance
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
-          Premium model combining maximum intelligence with practical performance
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
 
@@ -58727,19 +61019,19 @@ List Events
 
   - `Optional<LocalDateTime> createdAtGt`
 
-    Return events created after this time (exclusive).
+    Return events created after this time (exclusive). Compared against the event's `processed_at` value.
 
   - `Optional<LocalDateTime> createdAtGte`
 
-    Return events created at or after this time (inclusive).
+    Return events created at or after this time (inclusive). Compared against the event's `processed_at` value.
 
   - `Optional<LocalDateTime> createdAtLt`
 
-    Return events created before this time (exclusive).
+    Return events created before this time (exclusive). Compared against the event's `processed_at` value.
 
   - `Optional<LocalDateTime> createdAtLte`
 
-    Return events created at or before this time (inclusive).
+    Return events created at or before this time (inclusive). Compared against the event's `processed_at` value.
 
   - `Optional<Long> limit`
 
@@ -58747,7 +61039,7 @@ List Events
 
   - `Optional<Order> order`
 
-    Sort direction for results, ordered by created_at. Defaults to asc (chronological).
+    Sort direction for results, ordered by the event's `processed_at`. Defaults to asc (chronological).
 
     - `ASC("asc")`
 
@@ -58821,7 +61113,11 @@ List Events
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -60295,17 +62591,21 @@ List Events
 
             Next generation of intelligence for the hardest knowledge work and coding problems
 
+          - `CLAUDE_OPUS_5("claude-opus-5")`
+
+            Powerful intelligence for long-running agents and coding
+
           - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
-            Frontier intelligence for long-running agents and coding
+            Powerful intelligence for long-running agents and coding
 
           - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
 
-            Frontier intelligence for long-running agents and coding
+            Powerful intelligence for long-running agents and coding
 
           - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-            Most intelligent model for building agents and coding
+            Powerful intelligence for long-running agents and coding
 
           - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
@@ -60321,11 +62621,11 @@ List Events
 
           - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
 
-            Premium model combining maximum intelligence with practical performance
+            Powerful intelligence for long-running agents and coding
 
           - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
-            Premium model combining maximum intelligence with practical performance
+            Powerful intelligence for long-running agents and coding
 
           - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
 
@@ -60782,7 +63082,11 @@ Send Events
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -61721,7 +64025,11 @@ Stream Events
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -63195,17 +65503,21 @@ Stream Events
 
             Next generation of intelligence for the hardest knowledge work and coding problems
 
+          - `CLAUDE_OPUS_5("claude-opus-5")`
+
+            Powerful intelligence for long-running agents and coding
+
           - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
-            Frontier intelligence for long-running agents and coding
+            Powerful intelligence for long-running agents and coding
 
           - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
 
-            Frontier intelligence for long-running agents and coding
+            Powerful intelligence for long-running agents and coding
 
           - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-            Most intelligent model for building agents and coding
+            Powerful intelligence for long-running agents and coding
 
           - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
@@ -63221,11 +65533,11 @@ Stream Events
 
           - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
 
-            Premium model combining maximum intelligence with practical performance
+            Powerful intelligence for long-running agents and coding
 
           - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
-            Premium model combining maximum intelligence with practical performance
+            Powerful intelligence for long-running agents and coding
 
           - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
 
@@ -67819,17 +70131,21 @@ public final class Main {
 
             Next generation of intelligence for the hardest knowledge work and coding problems
 
+          - `CLAUDE_OPUS_5("claude-opus-5")`
+
+            Powerful intelligence for long-running agents and coding
+
           - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
-            Frontier intelligence for long-running agents and coding
+            Powerful intelligence for long-running agents and coding
 
           - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
 
-            Frontier intelligence for long-running agents and coding
+            Powerful intelligence for long-running agents and coding
 
           - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-            Most intelligent model for building agents and coding
+            Powerful intelligence for long-running agents and coding
 
           - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
@@ -67845,11 +70161,11 @@ public final class Main {
 
           - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
 
-            Premium model combining maximum intelligence with practical performance
+            Powerful intelligence for long-running agents and coding
 
           - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
-            Premium model combining maximum intelligence with practical performance
+            Powerful intelligence for long-running agents and coding
 
           - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
 
@@ -70159,17 +72475,21 @@ public final class Main {
 
             Next generation of intelligence for the hardest knowledge work and coding problems
 
+          - `CLAUDE_OPUS_5("claude-opus-5")`
+
+            Powerful intelligence for long-running agents and coding
+
           - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
-            Frontier intelligence for long-running agents and coding
+            Powerful intelligence for long-running agents and coding
 
           - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
 
-            Frontier intelligence for long-running agents and coding
+            Powerful intelligence for long-running agents and coding
 
           - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-            Most intelligent model for building agents and coding
+            Powerful intelligence for long-running agents and coding
 
           - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
@@ -70185,11 +72505,11 @@ public final class Main {
 
           - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
 
-            Premium model combining maximum intelligence with practical performance
+            Powerful intelligence for long-running agents and coding
 
           - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
-            Premium model combining maximum intelligence with practical performance
+            Powerful intelligence for long-running agents and coding
 
           - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
 
@@ -71925,7 +74245,11 @@ Add Session Resource
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -72079,7 +74403,11 @@ List Session Resources
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -72314,7 +74642,11 @@ Get Session Resource
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -72540,7 +74872,11 @@ Update Session Resource
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -72771,7 +75107,11 @@ Delete Session Resource
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -73127,7 +75467,11 @@ List Session Threads
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -73177,17 +75521,21 @@ List Session Threads
 
           Next generation of intelligence for the hardest knowledge work and coding problems
 
+        - `CLAUDE_OPUS_5("claude-opus-5")`
+
+          Powerful intelligence for long-running agents and coding
+
         - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
-          Frontier intelligence for long-running agents and coding
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
 
-          Frontier intelligence for long-running agents and coding
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-          Most intelligent model for building agents and coding
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
@@ -73203,11 +75551,11 @@ List Session Threads
 
         - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
 
-          Premium model combining maximum intelligence with practical performance
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
-          Premium model combining maximum intelligence with practical performance
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
 
@@ -73703,7 +76051,11 @@ Get Session Thread
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -73753,17 +76105,21 @@ Get Session Thread
 
           Next generation of intelligence for the hardest knowledge work and coding problems
 
+        - `CLAUDE_OPUS_5("claude-opus-5")`
+
+          Powerful intelligence for long-running agents and coding
+
         - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
-          Frontier intelligence for long-running agents and coding
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
 
-          Frontier intelligence for long-running agents and coding
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-          Most intelligent model for building agents and coding
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
@@ -73779,11 +76135,11 @@ Get Session Thread
 
         - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
 
-          Premium model combining maximum intelligence with practical performance
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
-          Premium model combining maximum intelligence with practical performance
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
 
@@ -74278,7 +76634,11 @@ Archive Session Thread
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -74328,17 +76688,21 @@ Archive Session Thread
 
           Next generation of intelligence for the hardest knowledge work and coding problems
 
+        - `CLAUDE_OPUS_5("claude-opus-5")`
+
+          Powerful intelligence for long-running agents and coding
+
         - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
-          Frontier intelligence for long-running agents and coding
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
 
-          Frontier intelligence for long-running agents and coding
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-          Most intelligent model for building agents and coding
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
@@ -74354,11 +76718,11 @@ Archive Session Thread
 
         - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
 
-          Premium model combining maximum intelligence with practical performance
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
-          Premium model combining maximum intelligence with practical performance
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
 
@@ -74825,17 +77189,21 @@ public final class Main {
 
           Next generation of intelligence for the hardest knowledge work and coding problems
 
+        - `CLAUDE_OPUS_5("claude-opus-5")`
+
+          Powerful intelligence for long-running agents and coding
+
         - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
-          Frontier intelligence for long-running agents and coding
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
 
-          Frontier intelligence for long-running agents and coding
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-          Most intelligent model for building agents and coding
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
@@ -74851,11 +77219,11 @@ public final class Main {
 
         - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
 
-          Premium model combining maximum intelligence with practical performance
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
-          Premium model combining maximum intelligence with practical performance
+          Powerful intelligence for long-running agents and coding
 
         - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
 
@@ -76703,17 +79071,21 @@ public final class Main {
 
             Next generation of intelligence for the hardest knowledge work and coding problems
 
+          - `CLAUDE_OPUS_5("claude-opus-5")`
+
+            Powerful intelligence for long-running agents and coding
+
           - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
-            Frontier intelligence for long-running agents and coding
+            Powerful intelligence for long-running agents and coding
 
           - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
 
-            Frontier intelligence for long-running agents and coding
+            Powerful intelligence for long-running agents and coding
 
           - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-            Most intelligent model for building agents and coding
+            Powerful intelligence for long-running agents and coding
 
           - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
@@ -76729,11 +79101,11 @@ public final class Main {
 
           - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
 
-            Premium model combining maximum intelligence with practical performance
+            Powerful intelligence for long-running agents and coding
 
           - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
-            Premium model combining maximum intelligence with practical performance
+            Powerful intelligence for long-running agents and coding
 
           - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
 
@@ -77209,7 +79581,11 @@ List Session Thread Events
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -78683,17 +81059,21 @@ List Session Thread Events
 
             Next generation of intelligence for the hardest knowledge work and coding problems
 
+          - `CLAUDE_OPUS_5("claude-opus-5")`
+
+            Powerful intelligence for long-running agents and coding
+
           - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
-            Frontier intelligence for long-running agents and coding
+            Powerful intelligence for long-running agents and coding
 
           - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
 
-            Frontier intelligence for long-running agents and coding
+            Powerful intelligence for long-running agents and coding
 
           - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-            Most intelligent model for building agents and coding
+            Powerful intelligence for long-running agents and coding
 
           - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
@@ -78709,11 +81089,11 @@ List Session Thread Events
 
           - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
 
-            Premium model combining maximum intelligence with practical performance
+            Powerful intelligence for long-running agents and coding
 
           - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
-            Premium model combining maximum intelligence with practical performance
+            Powerful intelligence for long-running agents and coding
 
           - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
 
@@ -79173,7 +81553,11 @@ Stream Session Thread Events
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -80647,17 +83031,21 @@ Stream Session Thread Events
 
             Next generation of intelligence for the hardest knowledge work and coding problems
 
+          - `CLAUDE_OPUS_5("claude-opus-5")`
+
+            Powerful intelligence for long-running agents and coding
+
           - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
-            Frontier intelligence for long-running agents and coding
+            Powerful intelligence for long-running agents and coding
 
           - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
 
-            Frontier intelligence for long-running agents and coding
+            Powerful intelligence for long-running agents and coding
 
           - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-            Most intelligent model for building agents and coding
+            Powerful intelligence for long-running agents and coding
 
           - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
@@ -80673,11 +83061,11 @@ Stream Session Thread Events
 
           - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
 
-            Premium model combining maximum intelligence with practical performance
+            Powerful intelligence for long-running agents and coding
 
           - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
-            Premium model combining maximum intelligence with practical performance
+            Powerful intelligence for long-running agents and coding
 
           - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
 
@@ -81183,7 +83571,11 @@ Create Deployment
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -82268,7 +84660,11 @@ List Deployments
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -82964,7 +85360,11 @@ Get Deployment
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -83655,7 +86055,11 @@ Update Deployment
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -84702,7 +87106,11 @@ Archive Deployment
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -85393,7 +87801,11 @@ Run Deployment Now
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -85775,7 +88187,11 @@ Pause Deployment
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -86466,7 +88882,11 @@ Unpause Deployment
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -89201,7 +91621,11 @@ List Deployment Runs
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -89588,7 +92012,11 @@ Get Deployment Run
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -90514,7 +92942,11 @@ Create Vault
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -90684,7 +93116,11 @@ List Vaults
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -90838,7 +93274,11 @@ Get Vault
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -90987,7 +93427,11 @@ Update Vault
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -91144,7 +93588,11 @@ Delete Vault
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -91266,7 +93714,11 @@ Archive Vault
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -91467,7 +93919,11 @@ Create Credential
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -91934,7 +94390,11 @@ List Credentials
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -92227,7 +94687,11 @@ Get Credential
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -92519,7 +94983,11 @@ Update Credential
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -92939,7 +95407,11 @@ Delete Credential
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -93067,7 +95539,11 @@ Archive Credential
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -93359,7 +95835,11 @@ Validate Credential
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -94717,7 +97197,11 @@ Create a memory store
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -94904,7 +97388,11 @@ List memory stores
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -95063,7 +97551,11 @@ Retrieve a memory store
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -95217,7 +97709,11 @@ Update a memory store
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -95383,7 +97879,11 @@ Delete a memory store
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -95505,7 +98005,11 @@ Archive a memory store
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -95719,7 +98223,11 @@ Create a memory
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -95914,7 +98422,11 @@ List memories
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -96103,7 +98615,11 @@ Retrieve a memory
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -96275,7 +98791,11 @@ Update a memory
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -96459,7 +98979,11 @@ Delete a memory
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -96937,7 +99461,11 @@ List memory versions
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -97173,7 +99701,11 @@ Retrieve a memory version
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -97404,7 +99936,11 @@ Redact a memory version
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -97831,7 +100367,11 @@ Upload File
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -98024,7 +100564,11 @@ List Files
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -98202,7 +100746,11 @@ Download File
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -98303,7 +100851,11 @@ Get File Metadata
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -98474,7 +101026,11 @@ Delete File
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -98682,7 +101238,11 @@ Create Skill
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -98875,7 +101435,11 @@ List Skills
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -99043,7 +101607,11 @@ Get Skill
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -99205,7 +101773,11 @@ Delete Skill
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -99335,7 +101907,11 @@ Create Skill Version
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -99522,7 +102098,11 @@ List Skill Versions
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -99700,7 +102280,11 @@ Download a skill version's content as a zip archive.
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -99813,7 +102397,11 @@ Get Skill Version
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -99989,7 +102577,11 @@ Delete Skill Version
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -100117,7 +102709,11 @@ Create User Profile
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -100330,7 +102926,11 @@ List User Profiles
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -100512,7 +103112,11 @@ Get User Profile
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -100689,7 +103293,11 @@ Update User Profile
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -100888,7 +103496,11 @@ Create Enrollment URL
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -101107,7 +103719,11 @@ Create a Dream
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -101445,7 +104061,11 @@ List Dreams
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -101706,7 +104326,11 @@ Get a Dream
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -101962,7 +104586,11 @@ Cancel a Dream
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -102218,7 +104846,11 @@ Archive a Dream
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -102752,7 +105384,11 @@ Creates a tunnel. Creation allocates a fresh hostname and provisions the tunnel;
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -102900,7 +105536,11 @@ Fetches a tunnel by ID.
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -103054,7 +105694,11 @@ Lists tunnels. Results are ordered by creation time, newest first; archived tunn
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -103203,7 +105847,11 @@ Archives a tunnel. Archival is irreversible: every non-archived certificate on t
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -103347,7 +105995,11 @@ Reveals a tunnel's connector token. The value is fetched live on each call; Anth
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -103476,7 +106128,11 @@ Rotates a tunnel's connector token. Rotation invalidates the current token for n
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -103661,7 +106317,11 @@ Registers a public CA certificate on a tunnel. Anthropic verifies the gateway's 
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -103820,7 +106480,11 @@ Fetches a tunnel certificate by ID.
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -103985,7 +106649,11 @@ Lists the certificates registered on a tunnel. Archived certificates are exclude
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -104141,7 +106809,11 @@ Archives a tunnel certificate, removing it from the set Anthropic trusts for the
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 

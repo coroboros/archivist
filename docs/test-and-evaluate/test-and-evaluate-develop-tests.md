@@ -155,11 +155,11 @@ Most use cases need multidimensional evaluation along several success criteria.
 
       def get_completion(prompt: str):
           message = client.messages.create(
-              model="claude-opus-4-8",
+              model="claude-opus-5",
               max_tokens=50,
               messages=[{"role": "user", "content": prompt}],
           )
-          return message.content[0].text
+          return next(block.text for block in message.content if block.type == "text")
 
 
       def evaluate_exact_match(model_output, correct_answer):
@@ -198,7 +198,7 @@ Most use cases need multidimensional evaluation along several success criteria.
 
       async function getCompletion(prompt: string): Promise<string> {
         const message = await client.messages.create({
-          model: "claude-opus-4-8",
+          model: "claude-opus-5",
           max_tokens: 50,
           messages: [{ role: "user", content: prompt }]
         });
@@ -240,7 +240,7 @@ Most use cases need multidimensional evaluation along several success criteria.
       {
           var message = await client.Messages.Create(new MessageCreateParams
           {
-              Model = Model.ClaudeOpus4_8,
+              Model = Model.ClaudeOpus5,
               MaxTokens = 50,
               Messages = [new() { Role = Role.User, Content = prompt }],
           });
@@ -310,7 +310,7 @@ Most use cases need multidimensional evaluation along several success criteria.
 
       func getCompletion(prompt string) string {
       	message, err := client.Messages.New(context.Background(), anthropic.MessageNewParams{
-      		Model:     anthropic.ModelClaudeOpus4_8,
+      		Model:     anthropic.ModelClaudeOpus5,
       		MaxTokens: 50,
       		Messages: []anthropic.MessageParam{
       			anthropic.NewUserMessage(anthropic.NewTextBlock(prompt)),
@@ -363,7 +363,7 @@ Most use cases need multidimensional evaluation along several success criteria.
 
       String getCompletion(String prompt) {
           var params = MessageCreateParams.builder()
-              .model(Model.CLAUDE_OPUS_4_8)
+              .model(Model.CLAUDE_OPUS_5)
               .maxTokens(50L)
               .addUserMessage(prompt)
               .build();
@@ -403,7 +403,7 @@ Most use cases need multidimensional evaluation along several success criteria.
       function getCompletion(Client $client, string $prompt): string
       {
           $message = $client->messages->create(
-              model: Model::CLAUDE_OPUS_4_8,
+              model: Model::CLAUDE_OPUS_5,
               maxTokens: 50,
               messages: [
                   [
@@ -463,7 +463,7 @@ Most use cases need multidimensional evaluation along several success criteria.
 
       def get_completion(client, prompt)
         message = client.messages.create(
-          model: Anthropic::Model::CLAUDE_OPUS_4_8,
+          model: Anthropic::Model::CLAUDE_OPUS_5,
           max_tokens: 50,
           messages: [
             {
@@ -532,11 +532,11 @@ Most use cases need multidimensional evaluation along several success criteria.
 
       def get_completion(prompt: str):
           message = client.messages.create(
-              model="claude-opus-4-8",
+              model="claude-opus-5",
               max_tokens=2048,
               messages=[{"role": "user", "content": prompt}],
           )
-          return message.content[0].text
+          return next(block.text for block in message.content if block.type == "text")
 
 
       def evaluate_cosine_similarity(outputs):
@@ -587,7 +587,7 @@ Most use cases need multidimensional evaluation along several success criteria.
 
       async function getCompletion(prompt: string): Promise<string> {
         const message = await client.messages.create({
-          model: "claude-opus-4-8",
+          model: "claude-opus-5",
           max_tokens: 2048,
           messages: [{ role: "user", content: prompt }]
         });
@@ -674,11 +674,11 @@ Most use cases need multidimensional evaluation along several success criteria.
 
       def get_completion(prompt: str):
           message = client.messages.create(
-              model="claude-opus-4-8",
+              model="claude-opus-5",
               max_tokens=1024,
               messages=[{"role": "user", "content": prompt}],
           )
-          return message.content[0].text
+          return next(block.text for block in message.content if block.type == "text")
 
 
       def evaluate_rouge_l(model_output, true_summary):
@@ -719,7 +719,7 @@ Most use cases need multidimensional evaluation along several success criteria.
 
       async function getCompletion(prompt: string): Promise<string> {
         const message = await client.messages.create({
-          model: "claude-opus-4-8",
+          model: "claude-opus-5",
           max_tokens: 1024,
           messages: [{ role: "user", content: prompt }]
         });
@@ -787,7 +787,7 @@ Most use cases need multidimensional evaluation along several success criteria.
       {
           var message = await client.Messages.Create(new MessageCreateParams
           {
-              Model = Model.ClaudeOpus4_8,
+              Model = Model.ClaudeOpus5,
               MaxTokens = 1024,
               Messages = [new() { Role = Role.User, Content = prompt }],
           });
@@ -885,7 +885,7 @@ Most use cases need multidimensional evaluation along several success criteria.
 
       func getCompletion(prompt string) string {
       	message, err := client.Messages.New(context.Background(), anthropic.MessageNewParams{
-      		Model:     anthropic.ModelClaudeOpus4_8,
+      		Model:     anthropic.ModelClaudeOpus5,
       		MaxTokens: 1024,
       		Messages: []anthropic.MessageParam{
       			anthropic.NewUserMessage(anthropic.NewTextBlock(prompt)),
@@ -971,7 +971,7 @@ Most use cases need multidimensional evaluation along several success criteria.
 
       String getCompletion(String prompt) {
           var params = MessageCreateParams.builder()
-              .model(Model.CLAUDE_OPUS_4_8)
+              .model(Model.CLAUDE_OPUS_5)
               .maxTokens(1024L)
               .addUserMessage(prompt)
               .build();
@@ -1038,7 +1038,7 @@ Most use cases need multidimensional evaluation along several success criteria.
       function getCompletion(Client $client, string $prompt): string
       {
           $message = $client->messages->create(
-              model: Model::CLAUDE_OPUS_4_8,
+              model: Model::CLAUDE_OPUS_5,
               maxTokens: 1024,
               messages: [
                   [
@@ -1122,7 +1122,7 @@ Most use cases need multidimensional evaluation along several success criteria.
 
       def get_completion(client, prompt)
         message = client.messages.create(
-          model: Anthropic::Model::CLAUDE_OPUS_4_8,
+          model: Anthropic::Model::CLAUDE_OPUS_5,
           max_tokens: 1024,
           messages: [
             {
@@ -1197,11 +1197,11 @@ Most use cases need multidimensional evaluation along several success criteria.
 
       def get_completion(prompt: str):
           message = client.messages.create(
-              model="claude-opus-4-8",
+              model="claude-opus-5",
               max_tokens=2048,
               messages=[{"role": "user", "content": prompt}],
           )
-          return message.content[0].text
+          return next(block.text for block in message.content if block.type == "text")
 
 
       def evaluate_likert(model_output, target_tone):
@@ -1213,11 +1213,13 @@ Most use cases need multidimensional evaluation along several success criteria.
 
           # Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
           response = client.messages.create(
-              model="claude-opus-4-8",
+              model="claude-opus-5",
               max_tokens=50,
               messages=[{"role": "user", "content": tone_prompt}],
           )
-          return int(response.content[0].text.strip())
+          return int(
+              next(block.text for block in response.content if block.type == "text").strip()
+          )
 
 
       outputs = [
@@ -1252,7 +1254,7 @@ Most use cases need multidimensional evaluation along several success criteria.
 
       async function getCompletion(prompt: string): Promise<string> {
         const message = await client.messages.create({
-          model: "claude-opus-4-8",
+          model: "claude-opus-5",
           max_tokens: 2048,
           messages: [{ role: "user", content: prompt }]
         });
@@ -1269,7 +1271,7 @@ Most use cases need multidimensional evaluation along several success criteria.
 
         // Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
         const response = await client.messages.create({
-          model: "claude-opus-4-8",
+          model: "claude-opus-5",
           max_tokens: 50,
           messages: [{ role: "user", content: tonePrompt }]
         });
@@ -1311,7 +1313,7 @@ Most use cases need multidimensional evaluation along several success criteria.
       {
           var message = await client.Messages.Create(new MessageCreateParams
           {
-              Model = Model.ClaudeOpus4_8,
+              Model = Model.ClaudeOpus5,
               MaxTokens = 2048,
               Messages = [new() { Role = Role.User, Content = prompt }],
           });
@@ -1331,7 +1333,7 @@ Most use cases need multidimensional evaluation along several success criteria.
           // Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
           var response = await client.Messages.Create(new MessageCreateParams
           {
-              Model = Model.ClaudeOpus4_8,
+              Model = Model.ClaudeOpus5,
               MaxTokens = 50,
               Messages = [new() { Role = Role.User, Content = tonePrompt }],
           });
@@ -1392,7 +1394,7 @@ Most use cases need multidimensional evaluation along several success criteria.
 
       func getCompletion(prompt string) string {
       	message, err := client.Messages.New(context.Background(), anthropic.MessageNewParams{
-      		Model:     anthropic.ModelClaudeOpus4_8,
+      		Model:     anthropic.ModelClaudeOpus5,
       		MaxTokens: 2048,
       		Messages: []anthropic.MessageParam{
       			anthropic.NewUserMessage(anthropic.NewTextBlock(prompt)),
@@ -1413,7 +1415,7 @@ Most use cases need multidimensional evaluation along several success criteria.
 
       	// Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
       	response, err := client.Messages.New(context.Background(), anthropic.MessageNewParams{
-      		Model:     anthropic.ModelClaudeOpus4_8,
+      		Model:     anthropic.ModelClaudeOpus5,
       		MaxTokens: 50,
       		Messages: []anthropic.MessageParam{
       			anthropic.NewUserMessage(anthropic.NewTextBlock(tonePrompt)),
@@ -1465,7 +1467,7 @@ Most use cases need multidimensional evaluation along several success criteria.
 
       String getCompletion(String prompt) {
           var params = MessageCreateParams.builder()
-              .model(Model.CLAUDE_OPUS_4_8)
+              .model(Model.CLAUDE_OPUS_5)
               .maxTokens(2048L)
               .addUserMessage(prompt)
               .build();
@@ -1482,7 +1484,7 @@ Most use cases need multidimensional evaluation along several success criteria.
 
           // Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
           var params = MessageCreateParams.builder()
-              .model(Model.CLAUDE_OPUS_4_8)
+              .model(Model.CLAUDE_OPUS_5)
               .maxTokens(50L)
               .addUserMessage(tonePrompt)
               .build();
@@ -1516,7 +1518,7 @@ Most use cases need multidimensional evaluation along several success criteria.
       function getCompletion(Client $client, string $prompt): string
       {
           $message = $client->messages->create(
-              model: Model::CLAUDE_OPUS_4_8,
+              model: Model::CLAUDE_OPUS_5,
               maxTokens: 2048,
               messages: [
                   [
@@ -1540,7 +1542,7 @@ Most use cases need multidimensional evaluation along several success criteria.
 
           // Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
           $response = $client->messages->create(
-              model: Model::CLAUDE_OPUS_4_8,
+              model: Model::CLAUDE_OPUS_5,
               maxTokens: 50,
               messages: [
                   [
@@ -1594,7 +1596,7 @@ Most use cases need multidimensional evaluation along several success criteria.
 
       def get_completion(client, prompt)
         message = client.messages.create(
-          model: Anthropic::Model::CLAUDE_OPUS_4_8,
+          model: Anthropic::Model::CLAUDE_OPUS_5,
           max_tokens: 2048,
           messages: [
             {
@@ -1617,7 +1619,7 @@ Most use cases need multidimensional evaluation along several success criteria.
 
         # Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
         response = client.messages.create(
-          model: Anthropic::Model::CLAUDE_OPUS_4_8,
+          model: Anthropic::Model::CLAUDE_OPUS_5,
           max_tokens: 50,
           messages: [
             {
@@ -1667,11 +1669,11 @@ Most use cases need multidimensional evaluation along several success criteria.
 
       def get_completion(prompt: str):
           message = client.messages.create(
-              model="claude-opus-4-8",
+              model="claude-opus-5",
               max_tokens=1024,
               messages=[{"role": "user", "content": prompt}],
           )
-          return message.content[0].text
+          return next(block.text for block in message.content if block.type == "text")
 
 
       def evaluate_binary(model_output, query_contains_phi):
@@ -1691,11 +1693,16 @@ Most use cases need multidimensional evaluation along several success criteria.
 
           # Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
           response = client.messages.create(
-              model="claude-opus-4-8",
+              model="claude-opus-5",
               max_tokens=50,
               messages=[{"role": "user", "content": binary_prompt}],
           )
-          return response.content[0].text.strip().lower() == "no"
+          return (
+              next(block.text for block in response.content if block.type == "text")
+              .strip()
+              .lower()
+              == "no"
+          )
 
 
       outputs = [
@@ -1734,7 +1741,7 @@ Most use cases need multidimensional evaluation along several success criteria.
 
       async function getCompletion(prompt: string): Promise<string> {
         const message = await client.messages.create({
-          model: "claude-opus-4-8",
+          model: "claude-opus-5",
           max_tokens: 1024,
           messages: [{ role: "user", content: prompt }]
         });
@@ -1763,7 +1770,7 @@ Most use cases need multidimensional evaluation along several success criteria.
 
         // Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
         const response = await client.messages.create({
-          model: "claude-opus-4-8",
+          model: "claude-opus-5",
           max_tokens: 50,
           messages: [{ role: "user", content: binaryPrompt }]
         });
@@ -1802,7 +1809,7 @@ Most use cases need multidimensional evaluation along several success criteria.
       {
           var message = await client.Messages.Create(new MessageCreateParams
           {
-              Model = Model.ClaudeOpus4_8,
+              Model = Model.ClaudeOpus5,
               MaxTokens = 1024,
               Messages = [new() { Role = Role.User, Content = prompt }],
           });
@@ -1832,7 +1839,7 @@ Most use cases need multidimensional evaluation along several success criteria.
           // Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
           var response = await client.Messages.Create(new MessageCreateParams
           {
-              Model = Model.ClaudeOpus4_8,
+              Model = Model.ClaudeOpus5,
               MaxTokens = 50,
               Messages = [new() { Role = Role.User, Content = binaryPrompt }],
           });
@@ -1898,7 +1905,7 @@ Most use cases need multidimensional evaluation along several success criteria.
 
       func getCompletion(prompt string) string {
       	message, err := client.Messages.New(context.Background(), anthropic.MessageNewParams{
-      		Model:     anthropic.ModelClaudeOpus4_8,
+      		Model:     anthropic.ModelClaudeOpus5,
       		MaxTokens: 1024,
       		Messages: []anthropic.MessageParam{
       			anthropic.NewUserMessage(anthropic.NewTextBlock(prompt)),
@@ -1928,7 +1935,7 @@ Most use cases need multidimensional evaluation along several success criteria.
 
       	// Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
       	response, err := client.Messages.New(context.Background(), anthropic.MessageNewParams{
-      		Model:     anthropic.ModelClaudeOpus4_8,
+      		Model:     anthropic.ModelClaudeOpus5,
       		MaxTokens: 50,
       		Messages: []anthropic.MessageParam{
       			anthropic.NewUserMessage(anthropic.NewTextBlock(binaryPrompt)),
@@ -1979,7 +1986,7 @@ Most use cases need multidimensional evaluation along several success criteria.
 
       String getCompletion(String prompt) {
           var params = MessageCreateParams.builder()
-              .model(Model.CLAUDE_OPUS_4_8)
+              .model(Model.CLAUDE_OPUS_5)
               .maxTokens(1024L)
               .addUserMessage(prompt)
               .build();
@@ -2005,7 +2012,7 @@ Most use cases need multidimensional evaluation along several success criteria.
 
           // Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
           var params = MessageCreateParams.builder()
-              .model(Model.CLAUDE_OPUS_4_8)
+              .model(Model.CLAUDE_OPUS_5)
               .maxTokens(50L)
               .addUserMessage(binaryPrompt)
               .build();
@@ -2043,7 +2050,7 @@ Most use cases need multidimensional evaluation along several success criteria.
       function getCompletion(Client $client, string $prompt): string
       {
           $message = $client->messages->create(
-              model: Model::CLAUDE_OPUS_4_8,
+              model: Model::CLAUDE_OPUS_5,
               maxTokens: 1024,
               messages: [
                   [
@@ -2076,7 +2083,7 @@ Most use cases need multidimensional evaluation along several success criteria.
 
           // Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
           $response = $client->messages->create(
-              model: Model::CLAUDE_OPUS_4_8,
+              model: Model::CLAUDE_OPUS_5,
               maxTokens: 50,
               messages: [
                   [
@@ -2132,7 +2139,7 @@ Most use cases need multidimensional evaluation along several success criteria.
 
       def get_completion(client, prompt)
         message = client.messages.create(
-          model: Anthropic::Model::CLAUDE_OPUS_4_8,
+          model: Anthropic::Model::CLAUDE_OPUS_5,
           max_tokens: 1024,
           messages: [
             {
@@ -2162,7 +2169,7 @@ Most use cases need multidimensional evaluation along several success criteria.
 
         # Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
         response = client.messages.create(
-          model: Anthropic::Model::CLAUDE_OPUS_4_8,
+          model: Anthropic::Model::CLAUDE_OPUS_5,
           max_tokens: 50,
           messages: [
             {
@@ -2241,11 +2248,11 @@ Most use cases need multidimensional evaluation along several success criteria.
 
       def get_completion(conversation: list):
           message = client.messages.create(
-              model="claude-opus-4-8",
+              model="claude-opus-5",
               max_tokens=1024,
               messages=conversation,
           )
-          return message.content[0].text
+          return next(block.text for block in message.content if block.type == "text")
 
 
       def evaluate_ordinal(model_output, conversation):
@@ -2260,11 +2267,13 @@ Most use cases need multidimensional evaluation along several success criteria.
 
           # Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
           response = client.messages.create(
-              model="claude-opus-4-8",
+              model="claude-opus-5",
               max_tokens=50,
               messages=[{"role": "user", "content": ordinal_prompt}],
           )
-          return int(response.content[0].text.strip())
+          return int(
+              next(block.text for block in response.content if block.type == "text").strip()
+          )
 
 
       outputs = [get_completion(conversation) for conversation in conversations]
@@ -2323,7 +2332,7 @@ Most use cases need multidimensional evaluation along several success criteria.
 
       async function getCompletion(conversation: Anthropic.MessageParam[]): Promise<string> {
         const message = await client.messages.create({
-          model: "claude-opus-4-8",
+          model: "claude-opus-5",
           max_tokens: 1024,
           messages: conversation
         });
@@ -2350,7 +2359,7 @@ Most use cases need multidimensional evaluation along several success criteria.
 
         // Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
         const response = await client.messages.create({
-          model: "claude-opus-4-8",
+          model: "claude-opus-5",
           max_tokens: 50,
           messages: [{ role: "user", content: ordinalPrompt }]
         });
@@ -2404,7 +2413,7 @@ Most use cases need multidimensional evaluation along several success criteria.
       {
           var message = await client.Messages.Create(new MessageCreateParams
           {
-              Model = Model.ClaudeOpus4_8,
+              Model = Model.ClaudeOpus5,
               MaxTokens = 1024,
               Messages = [.. conversation.Select(turn => new MessageParam
               {
@@ -2433,7 +2442,7 @@ Most use cases need multidimensional evaluation along several success criteria.
           // Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
           var response = await client.Messages.Create(new MessageCreateParams
           {
-              Model = Model.ClaudeOpus4_8,
+              Model = Model.ClaudeOpus5,
               MaxTokens = 50,
               Messages = [new() { Role = Role.User, Content = ordinalPrompt }],
           });
@@ -2518,7 +2527,7 @@ Most use cases need multidimensional evaluation along several success criteria.
 
       func getCompletion(conversation []turn) string {
       	message, err := client.Messages.New(context.Background(), anthropic.MessageNewParams{
-      		Model:     anthropic.ModelClaudeOpus4_8,
+      		Model:     anthropic.ModelClaudeOpus5,
       		MaxTokens: 1024,
       		Messages:  toMessageParams(conversation),
       	})
@@ -2543,7 +2552,7 @@ Most use cases need multidimensional evaluation along several success criteria.
 
       	// Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
       	response, err := client.Messages.New(context.Background(), anthropic.MessageNewParams{
-      		Model:     anthropic.ModelClaudeOpus4_8,
+      		Model:     anthropic.ModelClaudeOpus5,
       		MaxTokens: 50,
       		Messages: []anthropic.MessageParam{
       			anthropic.NewUserMessage(anthropic.NewTextBlock(ordinalPrompt)),
@@ -2604,7 +2613,7 @@ Most use cases need multidimensional evaluation along several success criteria.
 
       String getCompletion(List<Turn> conversation) {
           var builder = MessageCreateParams.builder()
-              .model(Model.CLAUDE_OPUS_4_8)
+              .model(Model.CLAUDE_OPUS_5)
               .maxTokens(1024L);
           for (var turn : conversation) {
               if (turn.role().equals("user")) {
@@ -2632,7 +2641,7 @@ Most use cases need multidimensional evaluation along several success criteria.
 
           // Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
           var params = MessageCreateParams.builder()
-              .model(Model.CLAUDE_OPUS_4_8)
+              .model(Model.CLAUDE_OPUS_5)
               .maxTokens(50L)
               .addUserMessage(ordinalPrompt)
               .build();
@@ -2678,7 +2687,7 @@ Most use cases need multidimensional evaluation along several success criteria.
       function getCompletion(Client $client, array $conversation): string
       {
           $message = $client->messages->create(
-              model: Model::CLAUDE_OPUS_4_8,
+              model: Model::CLAUDE_OPUS_5,
               maxTokens: 1024,
               messages: $conversation,
           );
@@ -2703,7 +2712,7 @@ Most use cases need multidimensional evaluation along several success criteria.
 
           // Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
           $response = $client->messages->create(
-              model: Model::CLAUDE_OPUS_4_8,
+              model: Model::CLAUDE_OPUS_5,
               maxTokens: 50,
               messages: [
                   [
@@ -2769,7 +2778,7 @@ Most use cases need multidimensional evaluation along several success criteria.
 
       def get_completion(client, conversation)
         message = client.messages.create(
-          model: Anthropic::Model::CLAUDE_OPUS_4_8,
+          model: Anthropic::Model::CLAUDE_OPUS_5,
           max_tokens: 1024,
           messages: conversation
         )
@@ -2790,7 +2799,7 @@ Most use cases need multidimensional evaluation along several success criteria.
 
         # Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
         response = client.messages.create(
-          model: Anthropic::Model::CLAUDE_OPUS_4_8,
+          model: Anthropic::Model::CLAUDE_OPUS_5,
           max_tokens: 50,
           messages: [
             {
@@ -2858,16 +2867,15 @@ When deciding which method to use to grade evals, choose the fastest, most relia
 
 
     def grade_completion(output, golden_answer):
-        grader_response = (
-            client.messages.create(
-                model="claude-opus-4-8",
-                max_tokens=2048,
-                messages=[
-                    {"role": "user", "content": build_grader_prompt(output, golden_answer)}
-                ],
-            )
-            .content[0]
-            .text
+        grader_message = client.messages.create(
+            model="claude-opus-5",
+            max_tokens=2048,
+            messages=[
+                {"role": "user", "content": build_grader_prompt(output, golden_answer)}
+            ],
+        )
+        grader_response = next(
+            block.text for block in grader_message.content if block.type == "text"
         )
 
         return (
@@ -2892,11 +2900,11 @@ When deciding which method to use to grade evals, choose the fastest, most relia
 
     def get_completion(prompt: str):
         message = client.messages.create(
-            model="claude-opus-4-8",
+            model="claude-opus-5",
             max_tokens=1024,
             messages=[{"role": "user", "content": prompt}],
         )
-        return message.content[0].text
+        return next(block.text for block in message.content if block.type == "text")
 
 
     outputs = [get_completion(item["question"]) for item in eval_data]
@@ -2919,7 +2927,7 @@ When deciding which method to use to grade evals, choose the fastest, most relia
 
     async function gradeCompletion(output: string, goldenAnswer: string): Promise<string> {
       const graderResponse = await client.messages.create({
-        model: "claude-opus-4-8",
+        model: "claude-opus-5",
         max_tokens: 2048,
         messages: [{ role: "user", content: buildGraderPrompt(output, goldenAnswer) }]
       });
@@ -2944,7 +2952,7 @@ When deciding which method to use to grade evals, choose the fastest, most relia
 
     async function getCompletion(prompt: string): Promise<string> {
       const message = await client.messages.create({
-        model: "claude-opus-4-8",
+        model: "claude-opus-5",
         max_tokens: 1024,
         messages: [{ role: "user", content: prompt }]
       });
@@ -2978,7 +2986,7 @@ When deciding which method to use to grade evals, choose the fastest, most relia
     {
         var graderResponse = await client.Messages.Create(new MessageCreateParams
         {
-            Model = Model.ClaudeOpus4_8,
+            Model = Model.ClaudeOpus5,
             MaxTokens = 2048,
             Messages = [new() { Role = Role.User, Content = BuildGraderPrompt(output, goldenAnswer) }],
         });
@@ -3000,7 +3008,7 @@ When deciding which method to use to grade evals, choose the fastest, most relia
     {
         var message = await client.Messages.Create(new MessageCreateParams
         {
-            Model = Model.ClaudeOpus4_8,
+            Model = Model.ClaudeOpus5,
             MaxTokens = 1024,
             Messages = [new() { Role = Role.User, Content = prompt }],
         });
@@ -3056,7 +3064,7 @@ When deciding which method to use to grade evals, choose the fastest, most relia
 
     func gradeCompletion(output, goldenAnswer string) string {
     	graderResponse, err := client.Messages.New(context.Background(), anthropic.MessageNewParams{
-    		Model:     anthropic.ModelClaudeOpus4_8,
+    		Model:     anthropic.ModelClaudeOpus5,
     		MaxTokens: 2048,
     		Messages: []anthropic.MessageParam{
     			anthropic.NewUserMessage(anthropic.NewTextBlock(buildGraderPrompt(output, goldenAnswer))),
@@ -3073,7 +3081,7 @@ When deciding which method to use to grade evals, choose the fastest, most relia
 
     func getCompletion(prompt string) string {
     	message, err := client.Messages.New(context.Background(), anthropic.MessageNewParams{
-    		Model:     anthropic.ModelClaudeOpus4_8,
+    		Model:     anthropic.ModelClaudeOpus5,
     		MaxTokens: 1024,
     		Messages: []anthropic.MessageParam{
     			anthropic.NewUserMessage(anthropic.NewTextBlock(prompt)),
@@ -3137,7 +3145,7 @@ When deciding which method to use to grade evals, choose the fastest, most relia
 
     String gradeCompletion(String output, String goldenAnswer) {
         var params = MessageCreateParams.builder()
-            .model(Model.CLAUDE_OPUS_4_8)
+            .model(Model.CLAUDE_OPUS_5)
             .maxTokens(2048L)
             .addUserMessage(buildGraderPrompt(output, goldenAnswer))
             .build();
@@ -3147,7 +3155,7 @@ When deciding which method to use to grade evals, choose the fastest, most relia
 
     String getCompletion(String prompt) {
         var params = MessageCreateParams.builder()
-            .model(Model.CLAUDE_OPUS_4_8)
+            .model(Model.CLAUDE_OPUS_5)
             .maxTokens(1024L)
             .addUserMessage(prompt)
             .build();
@@ -3182,7 +3190,7 @@ When deciding which method to use to grade evals, choose the fastest, most relia
     function gradeCompletion(Client $client, string $output, string $goldenAnswer): string
     {
         $graderResponse = $client->messages->create(
-            model: Model::CLAUDE_OPUS_4_8,
+            model: Model::CLAUDE_OPUS_5,
             maxTokens: 2048,
             messages: [
                 [
@@ -3211,7 +3219,7 @@ When deciding which method to use to grade evals, choose the fastest, most relia
     function getCompletion(Client $client, string $prompt): string
     {
         $message = $client->messages->create(
-            model: Model::CLAUDE_OPUS_4_8,
+            model: Model::CLAUDE_OPUS_5,
             maxTokens: 1024,
             messages: [
                 [
@@ -3262,7 +3270,7 @@ When deciding which method to use to grade evals, choose the fastest, most relia
 
     def grade_completion(client, output, golden_answer)
       grader_response = client.messages.create(
-        model: Anthropic::Model::CLAUDE_OPUS_4_8,
+        model: Anthropic::Model::CLAUDE_OPUS_5,
         max_tokens: 2048,
         messages: [
           {
@@ -3288,7 +3296,7 @@ When deciding which method to use to grade evals, choose the fastest, most relia
 
     def get_completion(client, prompt)
       message = client.messages.create(
-        model: Anthropic::Model::CLAUDE_OPUS_4_8,
+        model: Anthropic::Model::CLAUDE_OPUS_5,
         max_tokens: 1024,
         messages: [
           {

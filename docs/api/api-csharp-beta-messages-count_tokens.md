@@ -936,25 +936,121 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
           Use this block to provide or update system-level instructions at a specific
           point in the conversation, rather than only via the top-level `system` parameter.
 
-          - `required IReadOnlyList<BetaTextBlockParam> Content`
+          - `required IReadOnlyList<Content> Content`
 
             System instruction text blocks.
 
-            - `required string Text`
+            - `class BetaTextBlockParam:`
 
-            - `JsonElement Type "text"constant`
+            - `class BetaRequestToolAdditionBlock:`
 
-            - `BetaCacheControlEphemeral? CacheControl`
+              Mid-conversation directive to surface a declared tool.
 
-              Create a cache control breakpoint at this content block.
+              `tool` references a tool (or MCP toolset) by name from the request's
+              `tools`; it is offered to the model from this point in the
+              conversation onward.
 
-            - `IReadOnlyList<BetaTextCitationParam>? Citations`
+              - `required Tool Tool`
+
+                Reference to a single tool the caller declared directly in
+                `tools[]`. Does not accept the composed `{server}_{name}` form the
+                server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+                `mcp_toolset_reference` for those.
+
+                - `class BetaToolChangeToolReference:`
+
+                  Reference to a single tool the caller declared directly in
+                  `tools[]`. Does not accept the composed `{server}_{name}` form the
+                  server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+                  `mcp_toolset_reference` for those.
+
+                  - `required string Name`
+
+                  - `JsonElement Type "tool_reference"constant`
+
+                - `class BetaToolChangeMcpToolReference:`
+
+                  Reference to a single MCP tool by its server and remote name — the
+                  same `server_name`/`name` pair `mcp_tool_use` carries.
+
+                  - `required string Name`
+
+                  - `required string ServerName`
+
+                  - `JsonElement Type "mcp_tool_reference"constant`
+
+                - `class BetaToolChangeMcpToolsetReference:`
+
+                  Reference to every tool in the named MCP server's toolset.
+
+                  - `required string ServerName`
+
+                  - `JsonElement Type "mcp_toolset_reference"constant`
+
+              - `JsonElement Type "tool_addition"constant`
+
+              - `BetaCacheControlEphemeral? CacheControl`
+
+                Create a cache control breakpoint at this content block.
+
+            - `class BetaRequestToolRemovalBlock:`
+
+              Mid-conversation directive to withdraw a tool.
+
+              `tool` references a tool (or MCP toolset) by name from the request's
+              `tools`; it is no longer offered to the model from this point in the
+              conversation onward.
+
+              - `required Tool Tool`
+
+                Reference to a single tool the caller declared directly in
+                `tools[]`. Does not accept the composed `{server}_{name}` form the
+                server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+                `mcp_toolset_reference` for those.
+
+                - `class BetaToolChangeToolReference:`
+
+                  Reference to a single tool the caller declared directly in
+                  `tools[]`. Does not accept the composed `{server}_{name}` form the
+                  server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+                  `mcp_toolset_reference` for those.
+
+                - `class BetaToolChangeMcpToolReference:`
+
+                  Reference to a single MCP tool by its server and remote name — the
+                  same `server_name`/`name` pair `mcp_tool_use` carries.
+
+                - `class BetaToolChangeMcpToolsetReference:`
+
+                  Reference to every tool in the named MCP server's toolset.
+
+              - `JsonElement Type "tool_removal"constant`
+
+              - `BetaCacheControlEphemeral? CacheControl`
+
+                Create a cache control breakpoint at this content block.
 
           - `JsonElement Type "mid_conv_system"constant`
 
           - `BetaCacheControlEphemeral? CacheControl`
 
             Create a cache control breakpoint at this content block.
+
+        - `class BetaRequestToolAdditionBlock:`
+
+          Mid-conversation directive to surface a declared tool.
+
+          `tool` references a tool (or MCP toolset) by name from the request's
+          `tools`; it is offered to the model from this point in the
+          conversation onward.
+
+        - `class BetaRequestToolRemovalBlock:`
+
+          Mid-conversation directive to withdraw a tool.
+
+          `tool` references a tool (or MCP toolset) by name from the request's
+          `tools`; it is no longer offered to the model from this point in the
+          conversation onward.
 
         - `class BetaFallbackBlockParam:`
 
@@ -994,13 +1090,17 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 Most capable model for cybersecurity and biology research
 
+              - `"claude-opus-5"ClaudeOpus5`
+
+                Powerful intelligence for long-running agents and coding
+
               - `"claude-opus-4-8"ClaudeOpus4_8`
 
-                Frontier intelligence for long-running agents and coding
+                Powerful intelligence for long-running agents and coding
 
               - `"claude-opus-4-7"ClaudeOpus4_7`
 
-                Frontier intelligence for long-running agents and coding
+                Powerful intelligence for long-running agents and coding
 
               - `"claude-mythos-preview"ClaudeMythosPreview`
 
@@ -1008,7 +1108,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `"claude-opus-4-6"ClaudeOpus4_6`
 
-                Frontier intelligence for long-running agents and coding
+                Powerful intelligence for long-running agents and coding
 
               - `"claude-sonnet-4-6"ClaudeSonnet4_6`
 
@@ -1024,11 +1124,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `"claude-opus-4-5"ClaudeOpus4_5`
 
-                Premium model combining maximum intelligence with practical performance
+                Powerful intelligence for long-running agents and coding
 
               - `"claude-opus-4-5-20251101"ClaudeOpus4_5_20251101`
 
-                Premium model combining maximum intelligence with practical performance
+                Powerful intelligence for long-running agents and coding
 
               - `"claude-sonnet-4-5"ClaudeSonnet4_5`
 
@@ -1040,11 +1140,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `"claude-opus-4-1"ClaudeOpus4_1`
 
-                Exceptional model for specialized complex tasks
+                Powerful intelligence for long-running agents and coding
 
               - `"claude-opus-4-1-20250805"ClaudeOpus4_1_20250805`
 
-                Exceptional model for specialized complex tasks
+                Powerful intelligence for long-running agents and coding
 
           - `required BetaFallbackInfoParam To`
 
@@ -2397,7 +2497,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `"server-side-fallback-2026-06-01"ServerSideFallback2026_06_01`
 
+    - `"server-side-fallback-2026-07-01"ServerSideFallback2026_07_01`
+
     - `"fallback-credit-2026-06-01"FallbackCredit2026_06_01`
+
+    - `"fallback-credit-2026-07-01"FallbackCredit2026_07_01`
 
     - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
 

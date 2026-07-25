@@ -84,7 +84,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     - `SERVER_SIDE_FALLBACK_2026_06_01("server-side-fallback-2026-06-01")`
 
+    - `SERVER_SIDE_FALLBACK_2026_07_01("server-side-fallback-2026-07-01")`
+
     - `FALLBACK_CREDIT_2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
@@ -969,13 +973,17 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   Most capable model for cybersecurity and biology research
 
+                - `CLAUDE_OPUS_5("claude-opus-5")`
+
+                  Powerful intelligence for long-running agents and coding
+
                 - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
-                  Frontier intelligence for long-running agents and coding
+                  Powerful intelligence for long-running agents and coding
 
                 - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
 
-                  Frontier intelligence for long-running agents and coding
+                  Powerful intelligence for long-running agents and coding
 
                 - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
 
@@ -983,7 +991,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-                  Frontier intelligence for long-running agents and coding
+                  Powerful intelligence for long-running agents and coding
 
                 - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
@@ -999,11 +1007,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
 
-                  Premium model combining maximum intelligence with practical performance
+                  Powerful intelligence for long-running agents and coding
 
                 - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
-                  Premium model combining maximum intelligence with practical performance
+                  Powerful intelligence for long-running agents and coding
 
                 - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
 
@@ -1015,11 +1023,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
 
-                  Exceptional model for specialized complex tasks
+                  Powerful intelligence for long-running agents and coding
 
                 - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
 
-                  Exceptional model for specialized complex tasks
+                  Powerful intelligence for long-running agents and coding
 
             - `BetaFallbackInfo to`
 
@@ -1277,6 +1285,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
           * `"tool_use"`: the model invoked one or more tools
           * `"pause_turn"`: we paused a long-running turn. You may provide the response back as-is in a subsequent request to let the model continue.
           * `"refusal"`: when streaming classifiers intervene to handle potential policy violations
+          * `"model_context_window_exceeded"`: we exceeded the model's context window
 
           In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
@@ -1341,6 +1350,78 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
           - `Optional<Long> cacheReadInputTokens`
 
             The number of input tokens read from the cache.
+
+          - `Optional<BetaFallbackCreditUsage> fallbackCredit`
+
+            Outcome of the `fallback_credit_token` presented on this request.
+
+            - `Status status`
+
+              Whether the fallback-credit reprice was applied to this response's billing.
+
+              A union discriminated on `type`. `redeemed`: the retry is billed as if
+              the conversation had been on the retry model all along — including when the
+              resulting shift is zero because there was nothing to move. `not_applied`:
+              no reprice was applied; the arm's `reason` says why.
+
+              - `class BetaFallbackCreditRedeemed:`
+
+                The reprice was applied: the retry is billed as if the conversation
+                had been on the retry model all along.
+
+                - `JsonValue; type "redeemed"constant`
+
+                  - `REDEEMED("redeemed")`
+
+              - `class BetaFallbackCreditNotApplied:`
+
+                No reprice was applied; `reason` says why.
+
+                - `Reason reason`
+
+                  Why the reprice was not applied.
+
+                  A closed enum; additions to the redemption-check vocabulary arrive as
+                  deliberate schema updates.
+
+                  - `BODY_MISMATCH("body_mismatch")`
+
+                  - `CONTINUATION_EXCLUDED("continuation_excluded")`
+
+                  - `CONTINUATION_ONLY("continuation_only")`
+
+                  - `EXPIRED("expired")`
+
+                  - `INVALID_TARGET_MODEL("invalid_target_model")`
+
+                  - `NOT_ENABLED("not_enabled")`
+
+                  - `REPRICE_UNAVAILABLE("reprice_unavailable")`
+
+                  - `TEMPORARILY_UNAVAILABLE("temporarily_unavailable")`
+
+                  - `VARIANT_FIELDS_PRESENT("variant_fields_present")`
+
+                  - `WRONG_ORGANIZATION("wrong_organization")`
+
+                  - `WRONG_PLATFORM("wrong_platform")`
+
+                  - `WRONG_WORKSPACE("wrong_workspace")`
+
+                - `JsonValue; type "not_applied"constant`
+
+                  - `NOT_APPLIED("not_applied")`
+
+                - `Optional<List<String>> removeToRedeem`
+
+                  Request fields to remove before retrying, so the retry can redeem this
+                  token.
+
+                  Present exactly when `reason` is `variant_fields_present` — never null,
+                  never an empty array; absent otherwise. Fields are named only from your own request, and only after
+                  the sealed variant hash matched. A served best-effort retry has already
+                  been billed at normal price; nothing redeems retroactively, but a corrected
+                  re-send inside the token's five-minute window can still redeem.
 
           - `Optional<String> inferenceGeo`
 

@@ -948,25 +948,121 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
           Use this block to provide or update system-level instructions at a specific
           point in the conversation, rather than only via the top-level `system` parameter.
 
-          - `required IReadOnlyList<BetaTextBlockParam> Content`
+          - `required IReadOnlyList<Content> Content`
 
             System instruction text blocks.
 
-            - `required string Text`
+            - `class BetaTextBlockParam:`
 
-            - `JsonElement Type "text"constant`
+            - `class BetaRequestToolAdditionBlock:`
 
-            - `BetaCacheControlEphemeral? CacheControl`
+              Mid-conversation directive to surface a declared tool.
 
-              Create a cache control breakpoint at this content block.
+              `tool` references a tool (or MCP toolset) by name from the request's
+              `tools`; it is offered to the model from this point in the
+              conversation onward.
 
-            - `IReadOnlyList<BetaTextCitationParam>? Citations`
+              - `required Tool Tool`
+
+                Reference to a single tool the caller declared directly in
+                `tools[]`. Does not accept the composed `{server}_{name}` form the
+                server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+                `mcp_toolset_reference` for those.
+
+                - `class BetaToolChangeToolReference:`
+
+                  Reference to a single tool the caller declared directly in
+                  `tools[]`. Does not accept the composed `{server}_{name}` form the
+                  server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+                  `mcp_toolset_reference` for those.
+
+                  - `required string Name`
+
+                  - `JsonElement Type "tool_reference"constant`
+
+                - `class BetaToolChangeMcpToolReference:`
+
+                  Reference to a single MCP tool by its server and remote name — the
+                  same `server_name`/`name` pair `mcp_tool_use` carries.
+
+                  - `required string Name`
+
+                  - `required string ServerName`
+
+                  - `JsonElement Type "mcp_tool_reference"constant`
+
+                - `class BetaToolChangeMcpToolsetReference:`
+
+                  Reference to every tool in the named MCP server's toolset.
+
+                  - `required string ServerName`
+
+                  - `JsonElement Type "mcp_toolset_reference"constant`
+
+              - `JsonElement Type "tool_addition"constant`
+
+              - `BetaCacheControlEphemeral? CacheControl`
+
+                Create a cache control breakpoint at this content block.
+
+            - `class BetaRequestToolRemovalBlock:`
+
+              Mid-conversation directive to withdraw a tool.
+
+              `tool` references a tool (or MCP toolset) by name from the request's
+              `tools`; it is no longer offered to the model from this point in the
+              conversation onward.
+
+              - `required Tool Tool`
+
+                Reference to a single tool the caller declared directly in
+                `tools[]`. Does not accept the composed `{server}_{name}` form the
+                server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+                `mcp_toolset_reference` for those.
+
+                - `class BetaToolChangeToolReference:`
+
+                  Reference to a single tool the caller declared directly in
+                  `tools[]`. Does not accept the composed `{server}_{name}` form the
+                  server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+                  `mcp_toolset_reference` for those.
+
+                - `class BetaToolChangeMcpToolReference:`
+
+                  Reference to a single MCP tool by its server and remote name — the
+                  same `server_name`/`name` pair `mcp_tool_use` carries.
+
+                - `class BetaToolChangeMcpToolsetReference:`
+
+                  Reference to every tool in the named MCP server's toolset.
+
+              - `JsonElement Type "tool_removal"constant`
+
+              - `BetaCacheControlEphemeral? CacheControl`
+
+                Create a cache control breakpoint at this content block.
 
           - `JsonElement Type "mid_conv_system"constant`
 
           - `BetaCacheControlEphemeral? CacheControl`
 
             Create a cache control breakpoint at this content block.
+
+        - `class BetaRequestToolAdditionBlock:`
+
+          Mid-conversation directive to surface a declared tool.
+
+          `tool` references a tool (or MCP toolset) by name from the request's
+          `tools`; it is offered to the model from this point in the
+          conversation onward.
+
+        - `class BetaRequestToolRemovalBlock:`
+
+          Mid-conversation directive to withdraw a tool.
+
+          `tool` references a tool (or MCP toolset) by name from the request's
+          `tools`; it is no longer offered to the model from this point in the
+          conversation onward.
 
         - `class BetaFallbackBlockParam:`
 
@@ -1006,13 +1102,17 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                 Most capable model for cybersecurity and biology research
 
+              - `"claude-opus-5"ClaudeOpus5`
+
+                Powerful intelligence for long-running agents and coding
+
               - `"claude-opus-4-8"ClaudeOpus4_8`
 
-                Frontier intelligence for long-running agents and coding
+                Powerful intelligence for long-running agents and coding
 
               - `"claude-opus-4-7"ClaudeOpus4_7`
 
-                Frontier intelligence for long-running agents and coding
+                Powerful intelligence for long-running agents and coding
 
               - `"claude-mythos-preview"ClaudeMythosPreview`
 
@@ -1020,7 +1120,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               - `"claude-opus-4-6"ClaudeOpus4_6`
 
-                Frontier intelligence for long-running agents and coding
+                Powerful intelligence for long-running agents and coding
 
               - `"claude-sonnet-4-6"ClaudeSonnet4_6`
 
@@ -1036,11 +1136,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               - `"claude-opus-4-5"ClaudeOpus4_5`
 
-                Premium model combining maximum intelligence with practical performance
+                Powerful intelligence for long-running agents and coding
 
               - `"claude-opus-4-5-20251101"ClaudeOpus4_5_20251101`
 
-                Premium model combining maximum intelligence with practical performance
+                Powerful intelligence for long-running agents and coding
 
               - `"claude-sonnet-4-5"ClaudeSonnet4_5`
 
@@ -1052,11 +1152,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               - `"claude-opus-4-1"ClaudeOpus4_1`
 
-                Exceptional model for specialized complex tasks
+                Powerful intelligence for long-running agents and coding
 
               - `"claude-opus-4-1-20250805"ClaudeOpus4_1_20250805`
 
-                Exceptional model for specialized complex tasks
+                Powerful intelligence for long-running agents and coding
 
           - `required BetaFallbackInfoParam To`
 
@@ -1131,7 +1231,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
     Body param: Request-level diagnostics. Currently carries the previous response
     id for prompt-cache divergence reporting.
 
-  - `string? fallbackCreditToken`
+  - `FallbackCreditToken? fallbackCreditToken`
 
     Body param: The `fallback_credit_token` from a prior refusal's `stop_details`.
 
@@ -1154,105 +1254,33 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
     When the appended-assistant form is used on a model that otherwise disallows
     assistant-turn prefill, this token also authorizes that one prefill.
 
-  - `IReadOnlyList<BetaFallbackParam>? fallbacks`
+    - `string`
 
-    Body param: Opt-in server-side retry on one or more substitute models when the requested model declines for policy reasons. Tried in order: if the first entry also declines, the second is tried, and so on.
+    - `class BetaFallbackCreditTokenParam:`
 
-    - `required Model Model`
+      Object form of `fallback_credit_token`: the token plus a redemption
+      mode.
 
-      The model that will complete your prompt.
+      Requires `anthropic-beta: fallback-credit-2026-07-01`; without that
+      header the field accepts the bare string only. The bare string and the
+      mode-less object are equivalent (both select `strict`), so wrapping
+      an existing token changes nothing by itself.
 
-      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+      - `required string Token`
 
-    - `Long? MaxTokens`
+        The opaque `fallback_credit_token` from a prior refusal's `stop_details` — the same string the bare-string form carries.
 
-    - `BetaOutputConfig? OutputConfig`
+      - `Mode Mode`
 
-      - `Effort? Effort`
+        How a failing token affects the retry. `strict` (the default, and the bare-string behavior): a failing redemption is a 400 and the retry is not served. `best_effort`: the retry is served either way — a token-layer failure no longer rejects the request; the retry proceeds at normal price and the outcome is reported on the response's `usage.fallback_credit`. Two failures stay hard in both modes: a malformed token, and combining `fallback_credit_token` with `fallbacks`.
 
-        All possible effort levels.
+        - `"strict"Strict`
 
-        - `"low"Low`
+        - `"best_effort"BestEffort`
 
-        - `"medium"Medium`
+  - `BetaFallbacksParam? fallbacks`
 
-        - `"high"High`
-
-        - `"xhigh"Xhigh`
-
-        - `"max"Max`
-
-      - `BetaJsonOutputFormat? Format`
-
-        A schema to specify Claude's output format in responses. See [structured outputs](../build-with-claude/build-with-claude-structured-outputs.md)
-
-        - `required IReadOnlyDictionary<string, JsonElement> Schema`
-
-          The JSON schema of the format
-
-        - `JsonElement Type "json_schema"constant`
-
-      - `BetaTokenTaskBudget? TaskBudget`
-
-        User-configurable total token budget across contexts.
-
-        - `required Long Total`
-
-          Total token budget across all contexts in the session.
-
-        - `JsonElement Type "tokens"constant`
-
-          The budget type. Currently only 'tokens' is supported.
-
-        - `Long? Remaining`
-
-          Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
-
-    - `Speed? Speed`
-
-      Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
-
-      - `"standard"Standard`
-
-      - `"fast"Fast`
-
-    - `Thinking? Thinking`
-
-      - `class BetaThinkingConfigEnabled:`
-
-        - `required Long BudgetTokens`
-
-          Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
-
-          Must be ≥1024 and less than `max_tokens`.
-
-          See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md) for details.
-
-        - `JsonElement Type "enabled"constant`
-
-        - `Display? Display`
-
-          Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
-
-          - `"summarized"Summarized`
-
-          - `"omitted"Omitted`
-
-      - `class BetaThinkingConfigDisabled:`
-
-        - `JsonElement Type "disabled"constant`
-
-      - `class BetaThinkingConfigAdaptive:`
-
-        - `JsonElement Type "adaptive"constant`
-
-        - `Display? Display`
-
-          Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
-
-          - `"summarized"Summarized`
-
-          - `"omitted"Omitted`
+    Body param: Opt-in server-side retry on one or more substitute models when the requested model declines for policy reasons. Tried in order: if the first entry also declines, the second is tried, and so on. The string "default" requests the requested model's server-defined default fallback configuration.
 
   - `string? inferenceGeo`
 
@@ -2621,7 +2649,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `"server-side-fallback-2026-06-01"ServerSideFallback2026_06_01`
 
+    - `"server-side-fallback-2026-07-01"ServerSideFallback2026_07_01`
+
     - `"fallback-credit-2026-06-01"FallbackCredit2026_06_01`
+
+    - `"fallback-credit-2026-07-01"FallbackCredit2026_07_01`
 
     - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
 
@@ -3392,13 +3424,17 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             Most capable model for cybersecurity and biology research
 
+          - `"claude-opus-5"ClaudeOpus5`
+
+            Powerful intelligence for long-running agents and coding
+
           - `"claude-opus-4-8"ClaudeOpus4_8`
 
-            Frontier intelligence for long-running agents and coding
+            Powerful intelligence for long-running agents and coding
 
           - `"claude-opus-4-7"ClaudeOpus4_7`
 
-            Frontier intelligence for long-running agents and coding
+            Powerful intelligence for long-running agents and coding
 
           - `"claude-mythos-preview"ClaudeMythosPreview`
 
@@ -3406,7 +3442,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `"claude-opus-4-6"ClaudeOpus4_6`
 
-            Frontier intelligence for long-running agents and coding
+            Powerful intelligence for long-running agents and coding
 
           - `"claude-sonnet-4-6"ClaudeSonnet4_6`
 
@@ -3422,11 +3458,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `"claude-opus-4-5"ClaudeOpus4_5`
 
-            Premium model combining maximum intelligence with practical performance
+            Powerful intelligence for long-running agents and coding
 
           - `"claude-opus-4-5-20251101"ClaudeOpus4_5_20251101`
 
-            Premium model combining maximum intelligence with practical performance
+            Powerful intelligence for long-running agents and coding
 
           - `"claude-sonnet-4-5"ClaudeSonnet4_5`
 
@@ -3438,11 +3474,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           - `"claude-opus-4-1"ClaudeOpus4_1`
 
-            Exceptional model for specialized complex tasks
+            Powerful intelligence for long-running agents and coding
 
           - `"claude-opus-4-1-20250805"ClaudeOpus4_1_20250805`
 
-            Exceptional model for specialized complex tasks
+            Powerful intelligence for long-running agents and coding
 
       - `required BetaFallbackInfo To`
 
@@ -3676,6 +3712,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
     * `"tool_use"`: the model invoked one or more tools
     * `"pause_turn"`: we paused a long-running turn. You may provide the response back as-is in a subsequent request to let the model continue.
     * `"refusal"`: when streaming classifiers intervene to handle potential policy violations
+    * `"model_context_window_exceeded"`: we exceeded the model's context window
 
     In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
@@ -3738,6 +3775,74 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
     - `required Long? CacheReadInputTokens`
 
       The number of input tokens read from the cache.
+
+    - `required BetaFallbackCreditUsage? FallbackCredit`
+
+      Outcome of the `fallback_credit_token` presented on this request.
+
+      - `required Status Status`
+
+        Whether the fallback-credit reprice was applied to this response's billing.
+
+        A union discriminated on `type`. `redeemed`: the retry is billed as if
+        the conversation had been on the retry model all along — including when the
+        resulting shift is zero because there was nothing to move. `not_applied`:
+        no reprice was applied; the arm's `reason` says why.
+
+        - `class BetaFallbackCreditRedeemed:`
+
+          The reprice was applied: the retry is billed as if the conversation
+          had been on the retry model all along.
+
+          - `JsonElement Type "redeemed"constant`
+
+        - `class BetaFallbackCreditNotApplied:`
+
+          No reprice was applied; `reason` says why.
+
+          - `required Reason Reason`
+
+            Why the reprice was not applied.
+
+            A closed enum; additions to the redemption-check vocabulary arrive as
+            deliberate schema updates.
+
+            - `"body_mismatch"BodyMismatch`
+
+            - `"continuation_excluded"ContinuationExcluded`
+
+            - `"continuation_only"ContinuationOnly`
+
+            - `"expired"Expired`
+
+            - `"invalid_target_model"InvalidTargetModel`
+
+            - `"not_enabled"NotEnabled`
+
+            - `"reprice_unavailable"RepriceUnavailable`
+
+            - `"temporarily_unavailable"TemporarilyUnavailable`
+
+            - `"variant_fields_present"VariantFieldsPresent`
+
+            - `"wrong_organization"WrongOrganization`
+
+            - `"wrong_platform"WrongPlatform`
+
+            - `"wrong_workspace"WrongWorkspace`
+
+          - `JsonElement Type "not_applied"constant`
+
+          - `IReadOnlyList<string>? RemoveToRedeem`
+
+            Request fields to remove before retrying, so the retry can redeem this
+            token.
+
+            Present exactly when `reason` is `variant_fields_present` — never null,
+            never an empty array; absent otherwise. Fields are named only from your own request, and only after
+            the sealed variant hash matched. A served best-effort retry has already
+            been billed at normal price; nothing redeems retroactively, but a corrected
+            re-send inside the token's five-minute window can still redeem.
 
     - `required string? InferenceGeo`
 
@@ -4036,6 +4141,11 @@ Console.WriteLine(betaMessage);
     },
     "cache_creation_input_tokens": 2051,
     "cache_read_input_tokens": 2051,
+    "fallback_credit": {
+      "status": {
+        "type": "redeemed"
+      }
+    },
     "inference_geo": "global",
     "input_tokens": 2095,
     "iterations": [
@@ -4998,25 +5108,121 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
           Use this block to provide or update system-level instructions at a specific
           point in the conversation, rather than only via the top-level `system` parameter.
 
-          - `required IReadOnlyList<BetaTextBlockParam> Content`
+          - `required IReadOnlyList<Content> Content`
 
             System instruction text blocks.
 
-            - `required string Text`
+            - `class BetaTextBlockParam:`
 
-            - `JsonElement Type "text"constant`
+            - `class BetaRequestToolAdditionBlock:`
 
-            - `BetaCacheControlEphemeral? CacheControl`
+              Mid-conversation directive to surface a declared tool.
 
-              Create a cache control breakpoint at this content block.
+              `tool` references a tool (or MCP toolset) by name from the request's
+              `tools`; it is offered to the model from this point in the
+              conversation onward.
 
-            - `IReadOnlyList<BetaTextCitationParam>? Citations`
+              - `required Tool Tool`
+
+                Reference to a single tool the caller declared directly in
+                `tools[]`. Does not accept the composed `{server}_{name}` form the
+                server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+                `mcp_toolset_reference` for those.
+
+                - `class BetaToolChangeToolReference:`
+
+                  Reference to a single tool the caller declared directly in
+                  `tools[]`. Does not accept the composed `{server}_{name}` form the
+                  server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+                  `mcp_toolset_reference` for those.
+
+                  - `required string Name`
+
+                  - `JsonElement Type "tool_reference"constant`
+
+                - `class BetaToolChangeMcpToolReference:`
+
+                  Reference to a single MCP tool by its server and remote name — the
+                  same `server_name`/`name` pair `mcp_tool_use` carries.
+
+                  - `required string Name`
+
+                  - `required string ServerName`
+
+                  - `JsonElement Type "mcp_tool_reference"constant`
+
+                - `class BetaToolChangeMcpToolsetReference:`
+
+                  Reference to every tool in the named MCP server's toolset.
+
+                  - `required string ServerName`
+
+                  - `JsonElement Type "mcp_toolset_reference"constant`
+
+              - `JsonElement Type "tool_addition"constant`
+
+              - `BetaCacheControlEphemeral? CacheControl`
+
+                Create a cache control breakpoint at this content block.
+
+            - `class BetaRequestToolRemovalBlock:`
+
+              Mid-conversation directive to withdraw a tool.
+
+              `tool` references a tool (or MCP toolset) by name from the request's
+              `tools`; it is no longer offered to the model from this point in the
+              conversation onward.
+
+              - `required Tool Tool`
+
+                Reference to a single tool the caller declared directly in
+                `tools[]`. Does not accept the composed `{server}_{name}` form the
+                server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+                `mcp_toolset_reference` for those.
+
+                - `class BetaToolChangeToolReference:`
+
+                  Reference to a single tool the caller declared directly in
+                  `tools[]`. Does not accept the composed `{server}_{name}` form the
+                  server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+                  `mcp_toolset_reference` for those.
+
+                - `class BetaToolChangeMcpToolReference:`
+
+                  Reference to a single MCP tool by its server and remote name — the
+                  same `server_name`/`name` pair `mcp_tool_use` carries.
+
+                - `class BetaToolChangeMcpToolsetReference:`
+
+                  Reference to every tool in the named MCP server's toolset.
+
+              - `JsonElement Type "tool_removal"constant`
+
+              - `BetaCacheControlEphemeral? CacheControl`
+
+                Create a cache control breakpoint at this content block.
 
           - `JsonElement Type "mid_conv_system"constant`
 
           - `BetaCacheControlEphemeral? CacheControl`
 
             Create a cache control breakpoint at this content block.
+
+        - `class BetaRequestToolAdditionBlock:`
+
+          Mid-conversation directive to surface a declared tool.
+
+          `tool` references a tool (or MCP toolset) by name from the request's
+          `tools`; it is offered to the model from this point in the
+          conversation onward.
+
+        - `class BetaRequestToolRemovalBlock:`
+
+          Mid-conversation directive to withdraw a tool.
+
+          `tool` references a tool (or MCP toolset) by name from the request's
+          `tools`; it is no longer offered to the model from this point in the
+          conversation onward.
 
         - `class BetaFallbackBlockParam:`
 
@@ -5056,13 +5262,17 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 Most capable model for cybersecurity and biology research
 
+              - `"claude-opus-5"ClaudeOpus5`
+
+                Powerful intelligence for long-running agents and coding
+
               - `"claude-opus-4-8"ClaudeOpus4_8`
 
-                Frontier intelligence for long-running agents and coding
+                Powerful intelligence for long-running agents and coding
 
               - `"claude-opus-4-7"ClaudeOpus4_7`
 
-                Frontier intelligence for long-running agents and coding
+                Powerful intelligence for long-running agents and coding
 
               - `"claude-mythos-preview"ClaudeMythosPreview`
 
@@ -5070,7 +5280,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `"claude-opus-4-6"ClaudeOpus4_6`
 
-                Frontier intelligence for long-running agents and coding
+                Powerful intelligence for long-running agents and coding
 
               - `"claude-sonnet-4-6"ClaudeSonnet4_6`
 
@@ -5086,11 +5296,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `"claude-opus-4-5"ClaudeOpus4_5`
 
-                Premium model combining maximum intelligence with practical performance
+                Powerful intelligence for long-running agents and coding
 
               - `"claude-opus-4-5-20251101"ClaudeOpus4_5_20251101`
 
-                Premium model combining maximum intelligence with practical performance
+                Powerful intelligence for long-running agents and coding
 
               - `"claude-sonnet-4-5"ClaudeSonnet4_5`
 
@@ -5102,11 +5312,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `"claude-opus-4-1"ClaudeOpus4_1`
 
-                Exceptional model for specialized complex tasks
+                Powerful intelligence for long-running agents and coding
 
               - `"claude-opus-4-1-20250805"ClaudeOpus4_1_20250805`
 
-                Exceptional model for specialized complex tasks
+                Powerful intelligence for long-running agents and coding
 
           - `required BetaFallbackInfoParam To`
 
@@ -6459,7 +6669,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `"server-side-fallback-2026-06-01"ServerSideFallback2026_06_01`
 
+    - `"server-side-fallback-2026-07-01"ServerSideFallback2026_07_01`
+
     - `"fallback-credit-2026-06-01"FallbackCredit2026_06_01`
+
+    - `"fallback-credit-2026-07-01"FallbackCredit2026_07_01`
 
     - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
 
@@ -6565,13 +6779,17 @@ Console.WriteLine(betaMessageTokensCount);
 
       Most capable model for cybersecurity and biology research
 
+    - `"claude-opus-5"ClaudeOpus5`
+
+      Powerful intelligence for long-running agents and coding
+
     - `"claude-opus-4-8"ClaudeOpus4_8`
 
-      Frontier intelligence for long-running agents and coding
+      Powerful intelligence for long-running agents and coding
 
     - `"claude-opus-4-7"ClaudeOpus4_7`
 
-      Frontier intelligence for long-running agents and coding
+      Powerful intelligence for long-running agents and coding
 
     - `"claude-mythos-preview"ClaudeMythosPreview`
 
@@ -6579,7 +6797,7 @@ Console.WriteLine(betaMessageTokensCount);
 
     - `"claude-opus-4-6"ClaudeOpus4_6`
 
-      Frontier intelligence for long-running agents and coding
+      Powerful intelligence for long-running agents and coding
 
     - `"claude-sonnet-4-6"ClaudeSonnet4_6`
 
@@ -6595,11 +6813,11 @@ Console.WriteLine(betaMessageTokensCount);
 
     - `"claude-opus-4-5"ClaudeOpus4_5`
 
-      Premium model combining maximum intelligence with practical performance
+      Powerful intelligence for long-running agents and coding
 
     - `"claude-opus-4-5-20251101"ClaudeOpus4_5_20251101`
 
-      Premium model combining maximum intelligence with practical performance
+      Powerful intelligence for long-running agents and coding
 
     - `"claude-sonnet-4-5"ClaudeSonnet4_5`
 
@@ -6611,11 +6829,11 @@ Console.WriteLine(betaMessageTokensCount);
 
     - `"claude-opus-4-1"ClaudeOpus4_1`
 
-      Exceptional model for specialized complex tasks
+      Powerful intelligence for long-running agents and coding
 
     - `"claude-opus-4-1-20250805"ClaudeOpus4_1_20250805`
 
-      Exceptional model for specialized complex tasks
+      Powerful intelligence for long-running agents and coding
 
   - `required Long OutputTokens`
 
@@ -6695,13 +6913,17 @@ Console.WriteLine(betaMessageTokensCount);
 
       Most capable model for cybersecurity and biology research
 
+    - `"claude-opus-5"ClaudeOpus5`
+
+      Powerful intelligence for long-running agents and coding
+
     - `"claude-opus-4-8"ClaudeOpus4_8`
 
-      Frontier intelligence for long-running agents and coding
+      Powerful intelligence for long-running agents and coding
 
     - `"claude-opus-4-7"ClaudeOpus4_7`
 
-      Frontier intelligence for long-running agents and coding
+      Powerful intelligence for long-running agents and coding
 
     - `"claude-mythos-preview"ClaudeMythosPreview`
 
@@ -6709,7 +6931,7 @@ Console.WriteLine(betaMessageTokensCount);
 
     - `"claude-opus-4-6"ClaudeOpus4_6`
 
-      Frontier intelligence for long-running agents and coding
+      Powerful intelligence for long-running agents and coding
 
     - `"claude-sonnet-4-6"ClaudeSonnet4_6`
 
@@ -6725,11 +6947,11 @@ Console.WriteLine(betaMessageTokensCount);
 
     - `"claude-opus-4-5"ClaudeOpus4_5`
 
-      Premium model combining maximum intelligence with practical performance
+      Powerful intelligence for long-running agents and coding
 
     - `"claude-opus-4-5-20251101"ClaudeOpus4_5_20251101`
 
-      Premium model combining maximum intelligence with practical performance
+      Powerful intelligence for long-running agents and coding
 
     - `"claude-sonnet-4-5"ClaudeSonnet4_5`
 
@@ -6741,11 +6963,11 @@ Console.WriteLine(betaMessageTokensCount);
 
     - `"claude-opus-4-1"ClaudeOpus4_1`
 
-      Exceptional model for specialized complex tasks
+      Powerful intelligence for long-running agents and coding
 
     - `"claude-opus-4-1-20250805"ClaudeOpus4_1_20250805`
 
-      Exceptional model for specialized complex tasks
+      Powerful intelligence for long-running agents and coding
 
   - `JsonElement Name "advisor"constant`
 
@@ -9215,13 +9437,17 @@ Console.WriteLine(betaMessageTokensCount);
 
           Most capable model for cybersecurity and biology research
 
+        - `"claude-opus-5"ClaudeOpus5`
+
+          Powerful intelligence for long-running agents and coding
+
         - `"claude-opus-4-8"ClaudeOpus4_8`
 
-          Frontier intelligence for long-running agents and coding
+          Powerful intelligence for long-running agents and coding
 
         - `"claude-opus-4-7"ClaudeOpus4_7`
 
-          Frontier intelligence for long-running agents and coding
+          Powerful intelligence for long-running agents and coding
 
         - `"claude-mythos-preview"ClaudeMythosPreview`
 
@@ -9229,7 +9455,7 @@ Console.WriteLine(betaMessageTokensCount);
 
         - `"claude-opus-4-6"ClaudeOpus4_6`
 
-          Frontier intelligence for long-running agents and coding
+          Powerful intelligence for long-running agents and coding
 
         - `"claude-sonnet-4-6"ClaudeSonnet4_6`
 
@@ -9245,11 +9471,11 @@ Console.WriteLine(betaMessageTokensCount);
 
         - `"claude-opus-4-5"ClaudeOpus4_5`
 
-          Premium model combining maximum intelligence with practical performance
+          Powerful intelligence for long-running agents and coding
 
         - `"claude-opus-4-5-20251101"ClaudeOpus4_5_20251101`
 
-          Premium model combining maximum intelligence with practical performance
+          Powerful intelligence for long-running agents and coding
 
         - `"claude-sonnet-4-5"ClaudeSonnet4_5`
 
@@ -9261,11 +9487,11 @@ Console.WriteLine(betaMessageTokensCount);
 
         - `"claude-opus-4-1"ClaudeOpus4_1`
 
-          Exceptional model for specialized complex tasks
+          Powerful intelligence for long-running agents and coding
 
         - `"claude-opus-4-1-20250805"ClaudeOpus4_1_20250805`
 
-          Exceptional model for specialized complex tasks
+          Powerful intelligence for long-running agents and coding
 
     - `required BetaFallbackInfo To`
 
@@ -10168,25 +10394,121 @@ Console.WriteLine(betaMessageTokensCount);
     Use this block to provide or update system-level instructions at a specific
     point in the conversation, rather than only via the top-level `system` parameter.
 
-    - `required IReadOnlyList<BetaTextBlockParam> Content`
+    - `required IReadOnlyList<Content> Content`
 
       System instruction text blocks.
 
-      - `required string Text`
+      - `class BetaTextBlockParam:`
 
-      - `JsonElement Type "text"constant`
+      - `class BetaRequestToolAdditionBlock:`
 
-      - `BetaCacheControlEphemeral? CacheControl`
+        Mid-conversation directive to surface a declared tool.
 
-        Create a cache control breakpoint at this content block.
+        `tool` references a tool (or MCP toolset) by name from the request's
+        `tools`; it is offered to the model from this point in the
+        conversation onward.
 
-      - `IReadOnlyList<BetaTextCitationParam>? Citations`
+        - `required Tool Tool`
+
+          Reference to a single tool the caller declared directly in
+          `tools[]`. Does not accept the composed `{server}_{name}` form the
+          server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+          `mcp_toolset_reference` for those.
+
+          - `class BetaToolChangeToolReference:`
+
+            Reference to a single tool the caller declared directly in
+            `tools[]`. Does not accept the composed `{server}_{name}` form the
+            server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+            `mcp_toolset_reference` for those.
+
+            - `required string Name`
+
+            - `JsonElement Type "tool_reference"constant`
+
+          - `class BetaToolChangeMcpToolReference:`
+
+            Reference to a single MCP tool by its server and remote name — the
+            same `server_name`/`name` pair `mcp_tool_use` carries.
+
+            - `required string Name`
+
+            - `required string ServerName`
+
+            - `JsonElement Type "mcp_tool_reference"constant`
+
+          - `class BetaToolChangeMcpToolsetReference:`
+
+            Reference to every tool in the named MCP server's toolset.
+
+            - `required string ServerName`
+
+            - `JsonElement Type "mcp_toolset_reference"constant`
+
+        - `JsonElement Type "tool_addition"constant`
+
+        - `BetaCacheControlEphemeral? CacheControl`
+
+          Create a cache control breakpoint at this content block.
+
+      - `class BetaRequestToolRemovalBlock:`
+
+        Mid-conversation directive to withdraw a tool.
+
+        `tool` references a tool (or MCP toolset) by name from the request's
+        `tools`; it is no longer offered to the model from this point in the
+        conversation onward.
+
+        - `required Tool Tool`
+
+          Reference to a single tool the caller declared directly in
+          `tools[]`. Does not accept the composed `{server}_{name}` form the
+          server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+          `mcp_toolset_reference` for those.
+
+          - `class BetaToolChangeToolReference:`
+
+            Reference to a single tool the caller declared directly in
+            `tools[]`. Does not accept the composed `{server}_{name}` form the
+            server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+            `mcp_toolset_reference` for those.
+
+          - `class BetaToolChangeMcpToolReference:`
+
+            Reference to a single MCP tool by its server and remote name — the
+            same `server_name`/`name` pair `mcp_tool_use` carries.
+
+          - `class BetaToolChangeMcpToolsetReference:`
+
+            Reference to every tool in the named MCP server's toolset.
+
+        - `JsonElement Type "tool_removal"constant`
+
+        - `BetaCacheControlEphemeral? CacheControl`
+
+          Create a cache control breakpoint at this content block.
 
     - `JsonElement Type "mid_conv_system"constant`
 
     - `BetaCacheControlEphemeral? CacheControl`
 
       Create a cache control breakpoint at this content block.
+
+  - `class BetaRequestToolAdditionBlock:`
+
+    Mid-conversation directive to surface a declared tool.
+
+    `tool` references a tool (or MCP toolset) by name from the request's
+    `tools`; it is offered to the model from this point in the
+    conversation onward.
+
+  - `class BetaRequestToolRemovalBlock:`
+
+    Mid-conversation directive to withdraw a tool.
+
+    `tool` references a tool (or MCP toolset) by name from the request's
+    `tools`; it is no longer offered to the model from this point in the
+    conversation onward.
 
   - `class BetaFallbackBlockParam:`
 
@@ -10226,13 +10548,17 @@ Console.WriteLine(betaMessageTokensCount);
 
           Most capable model for cybersecurity and biology research
 
+        - `"claude-opus-5"ClaudeOpus5`
+
+          Powerful intelligence for long-running agents and coding
+
         - `"claude-opus-4-8"ClaudeOpus4_8`
 
-          Frontier intelligence for long-running agents and coding
+          Powerful intelligence for long-running agents and coding
 
         - `"claude-opus-4-7"ClaudeOpus4_7`
 
-          Frontier intelligence for long-running agents and coding
+          Powerful intelligence for long-running agents and coding
 
         - `"claude-mythos-preview"ClaudeMythosPreview`
 
@@ -10240,7 +10566,7 @@ Console.WriteLine(betaMessageTokensCount);
 
         - `"claude-opus-4-6"ClaudeOpus4_6`
 
-          Frontier intelligence for long-running agents and coding
+          Powerful intelligence for long-running agents and coding
 
         - `"claude-sonnet-4-6"ClaudeSonnet4_6`
 
@@ -10256,11 +10582,11 @@ Console.WriteLine(betaMessageTokensCount);
 
         - `"claude-opus-4-5"ClaudeOpus4_5`
 
-          Premium model combining maximum intelligence with practical performance
+          Powerful intelligence for long-running agents and coding
 
         - `"claude-opus-4-5-20251101"ClaudeOpus4_5_20251101`
 
-          Premium model combining maximum intelligence with practical performance
+          Powerful intelligence for long-running agents and coding
 
         - `"claude-sonnet-4-5"ClaudeSonnet4_5`
 
@@ -10272,11 +10598,11 @@ Console.WriteLine(betaMessageTokensCount);
 
         - `"claude-opus-4-1"ClaudeOpus4_1`
 
-          Exceptional model for specialized complex tasks
+          Powerful intelligence for long-running agents and coding
 
         - `"claude-opus-4-1-20250805"ClaudeOpus4_1_20250805`
 
-          Exceptional model for specialized complex tasks
+          Powerful intelligence for long-running agents and coding
 
     - `required BetaFallbackInfoParam To`
 
@@ -10946,13 +11272,17 @@ Console.WriteLine(betaMessageTokensCount);
 
         Most capable model for cybersecurity and biology research
 
+      - `"claude-opus-5"ClaudeOpus5`
+
+        Powerful intelligence for long-running agents and coding
+
       - `"claude-opus-4-8"ClaudeOpus4_8`
 
-        Frontier intelligence for long-running agents and coding
+        Powerful intelligence for long-running agents and coding
 
       - `"claude-opus-4-7"ClaudeOpus4_7`
 
-        Frontier intelligence for long-running agents and coding
+        Powerful intelligence for long-running agents and coding
 
       - `"claude-mythos-preview"ClaudeMythosPreview`
 
@@ -10960,7 +11290,7 @@ Console.WriteLine(betaMessageTokensCount);
 
       - `"claude-opus-4-6"ClaudeOpus4_6`
 
-        Frontier intelligence for long-running agents and coding
+        Powerful intelligence for long-running agents and coding
 
       - `"claude-sonnet-4-6"ClaudeSonnet4_6`
 
@@ -10976,11 +11306,11 @@ Console.WriteLine(betaMessageTokensCount);
 
       - `"claude-opus-4-5"ClaudeOpus4_5`
 
-        Premium model combining maximum intelligence with practical performance
+        Powerful intelligence for long-running agents and coding
 
       - `"claude-opus-4-5-20251101"ClaudeOpus4_5_20251101`
 
-        Premium model combining maximum intelligence with practical performance
+        Powerful intelligence for long-running agents and coding
 
       - `"claude-sonnet-4-5"ClaudeSonnet4_5`
 
@@ -10992,11 +11322,11 @@ Console.WriteLine(betaMessageTokensCount);
 
       - `"claude-opus-4-1"ClaudeOpus4_1`
 
-        Exceptional model for specialized complex tasks
+        Powerful intelligence for long-running agents and coding
 
       - `"claude-opus-4-1-20250805"ClaudeOpus4_1_20250805`
 
-        Exceptional model for specialized complex tasks
+        Powerful intelligence for long-running agents and coding
 
   - `required BetaFallbackInfo To`
 
@@ -11074,13 +11404,17 @@ Console.WriteLine(betaMessageTokensCount);
 
         Most capable model for cybersecurity and biology research
 
+      - `"claude-opus-5"ClaudeOpus5`
+
+        Powerful intelligence for long-running agents and coding
+
       - `"claude-opus-4-8"ClaudeOpus4_8`
 
-        Frontier intelligence for long-running agents and coding
+        Powerful intelligence for long-running agents and coding
 
       - `"claude-opus-4-7"ClaudeOpus4_7`
 
-        Frontier intelligence for long-running agents and coding
+        Powerful intelligence for long-running agents and coding
 
       - `"claude-mythos-preview"ClaudeMythosPreview`
 
@@ -11088,7 +11422,7 @@ Console.WriteLine(betaMessageTokensCount);
 
       - `"claude-opus-4-6"ClaudeOpus4_6`
 
-        Frontier intelligence for long-running agents and coding
+        Powerful intelligence for long-running agents and coding
 
       - `"claude-sonnet-4-6"ClaudeSonnet4_6`
 
@@ -11104,11 +11438,11 @@ Console.WriteLine(betaMessageTokensCount);
 
       - `"claude-opus-4-5"ClaudeOpus4_5`
 
-        Premium model combining maximum intelligence with practical performance
+        Powerful intelligence for long-running agents and coding
 
       - `"claude-opus-4-5-20251101"ClaudeOpus4_5_20251101`
 
-        Premium model combining maximum intelligence with practical performance
+        Powerful intelligence for long-running agents and coding
 
       - `"claude-sonnet-4-5"ClaudeSonnet4_5`
 
@@ -11120,11 +11454,11 @@ Console.WriteLine(betaMessageTokensCount);
 
       - `"claude-opus-4-1"ClaudeOpus4_1`
 
-        Exceptional model for specialized complex tasks
+        Powerful intelligence for long-running agents and coding
 
       - `"claude-opus-4-1-20250805"ClaudeOpus4_1_20250805`
 
-        Exceptional model for specialized complex tasks
+        Powerful intelligence for long-running agents and coding
 
   - `required BetaFallbackInfoParam To`
 
@@ -11135,6 +11469,159 @@ Console.WriteLine(betaMessageTokensCount);
   - `JsonElement Trigger`
 
     The response block's `trigger`, echoed verbatim. Accepted and ignored by the server; any object or `null` is allowed.
+
+### Beta Fallback Credit Not Applied
+
+- `class BetaFallbackCreditNotApplied:`
+
+  No reprice was applied; `reason` says why.
+
+  - `required Reason Reason`
+
+    Why the reprice was not applied.
+
+    A closed enum; additions to the redemption-check vocabulary arrive as
+    deliberate schema updates.
+
+    - `"body_mismatch"BodyMismatch`
+
+    - `"continuation_excluded"ContinuationExcluded`
+
+    - `"continuation_only"ContinuationOnly`
+
+    - `"expired"Expired`
+
+    - `"invalid_target_model"InvalidTargetModel`
+
+    - `"not_enabled"NotEnabled`
+
+    - `"reprice_unavailable"RepriceUnavailable`
+
+    - `"temporarily_unavailable"TemporarilyUnavailable`
+
+    - `"variant_fields_present"VariantFieldsPresent`
+
+    - `"wrong_organization"WrongOrganization`
+
+    - `"wrong_platform"WrongPlatform`
+
+    - `"wrong_workspace"WrongWorkspace`
+
+  - `JsonElement Type "not_applied"constant`
+
+  - `IReadOnlyList<string>? RemoveToRedeem`
+
+    Request fields to remove before retrying, so the retry can redeem this
+    token.
+
+    Present exactly when `reason` is `variant_fields_present` — never null,
+    never an empty array; absent otherwise. Fields are named only from your own request, and only after
+    the sealed variant hash matched. A served best-effort retry has already
+    been billed at normal price; nothing redeems retroactively, but a corrected
+    re-send inside the token's five-minute window can still redeem.
+
+### Beta Fallback Credit Redeemed
+
+- `class BetaFallbackCreditRedeemed:`
+
+  The reprice was applied: the retry is billed as if the conversation
+  had been on the retry model all along.
+
+  - `JsonElement Type "redeemed"constant`
+
+### Beta Fallback Credit Token Param
+
+- `class BetaFallbackCreditTokenParam:`
+
+  Object form of `fallback_credit_token`: the token plus a redemption
+  mode.
+
+  Requires `anthropic-beta: fallback-credit-2026-07-01`; without that
+  header the field accepts the bare string only. The bare string and the
+  mode-less object are equivalent (both select `strict`), so wrapping
+  an existing token changes nothing by itself.
+
+  - `required string Token`
+
+    The opaque `fallback_credit_token` from a prior refusal's `stop_details` — the same string the bare-string form carries.
+
+  - `Mode Mode`
+
+    How a failing token affects the retry. `strict` (the default, and the bare-string behavior): a failing redemption is a 400 and the retry is not served. `best_effort`: the retry is served either way — a token-layer failure no longer rejects the request; the retry proceeds at normal price and the outcome is reported on the response's `usage.fallback_credit`. Two failures stay hard in both modes: a malformed token, and combining `fallback_credit_token` with `fallbacks`.
+
+    - `"strict"Strict`
+
+    - `"best_effort"BestEffort`
+
+### Beta Fallback Credit Usage
+
+- `class BetaFallbackCreditUsage:`
+
+  Outcome of the `fallback_credit_token` presented on this request.
+
+  - `required Status Status`
+
+    Whether the fallback-credit reprice was applied to this response's billing.
+
+    A union discriminated on `type`. `redeemed`: the retry is billed as if
+    the conversation had been on the retry model all along — including when the
+    resulting shift is zero because there was nothing to move. `not_applied`:
+    no reprice was applied; the arm's `reason` says why.
+
+    - `class BetaFallbackCreditRedeemed:`
+
+      The reprice was applied: the retry is billed as if the conversation
+      had been on the retry model all along.
+
+      - `JsonElement Type "redeemed"constant`
+
+    - `class BetaFallbackCreditNotApplied:`
+
+      No reprice was applied; `reason` says why.
+
+      - `required Reason Reason`
+
+        Why the reprice was not applied.
+
+        A closed enum; additions to the redemption-check vocabulary arrive as
+        deliberate schema updates.
+
+        - `"body_mismatch"BodyMismatch`
+
+        - `"continuation_excluded"ContinuationExcluded`
+
+        - `"continuation_only"ContinuationOnly`
+
+        - `"expired"Expired`
+
+        - `"invalid_target_model"InvalidTargetModel`
+
+        - `"not_enabled"NotEnabled`
+
+        - `"reprice_unavailable"RepriceUnavailable`
+
+        - `"temporarily_unavailable"TemporarilyUnavailable`
+
+        - `"variant_fields_present"VariantFieldsPresent`
+
+        - `"wrong_organization"WrongOrganization`
+
+        - `"wrong_platform"WrongPlatform`
+
+        - `"wrong_workspace"WrongWorkspace`
+
+      - `JsonElement Type "not_applied"constant`
+
+      - `IReadOnlyList<string>? RemoveToRedeem`
+
+        Request fields to remove before retrying, so the retry can redeem this
+        token.
+
+        Present exactly when `reason` is `variant_fields_present` — never null,
+        never an empty array; absent otherwise. Fields are named only from your own request, and only after
+        the sealed variant hash matched. A served best-effort retry has already
+        been billed at normal price; nothing redeems retroactively, but a corrected
+        re-send inside the token's five-minute window can still redeem.
 
 ### Beta Fallback Info
 
@@ -11160,13 +11647,17 @@ Console.WriteLine(betaMessageTokensCount);
 
       Most capable model for cybersecurity and biology research
 
+    - `"claude-opus-5"ClaudeOpus5`
+
+      Powerful intelligence for long-running agents and coding
+
     - `"claude-opus-4-8"ClaudeOpus4_8`
 
-      Frontier intelligence for long-running agents and coding
+      Powerful intelligence for long-running agents and coding
 
     - `"claude-opus-4-7"ClaudeOpus4_7`
 
-      Frontier intelligence for long-running agents and coding
+      Powerful intelligence for long-running agents and coding
 
     - `"claude-mythos-preview"ClaudeMythosPreview`
 
@@ -11174,7 +11665,7 @@ Console.WriteLine(betaMessageTokensCount);
 
     - `"claude-opus-4-6"ClaudeOpus4_6`
 
-      Frontier intelligence for long-running agents and coding
+      Powerful intelligence for long-running agents and coding
 
     - `"claude-sonnet-4-6"ClaudeSonnet4_6`
 
@@ -11190,11 +11681,11 @@ Console.WriteLine(betaMessageTokensCount);
 
     - `"claude-opus-4-5"ClaudeOpus4_5`
 
-      Premium model combining maximum intelligence with practical performance
+      Powerful intelligence for long-running agents and coding
 
     - `"claude-opus-4-5-20251101"ClaudeOpus4_5_20251101`
 
-      Premium model combining maximum intelligence with practical performance
+      Powerful intelligence for long-running agents and coding
 
     - `"claude-sonnet-4-5"ClaudeSonnet4_5`
 
@@ -11206,11 +11697,11 @@ Console.WriteLine(betaMessageTokensCount);
 
     - `"claude-opus-4-1"ClaudeOpus4_1`
 
-      Exceptional model for specialized complex tasks
+      Powerful intelligence for long-running agents and coding
 
     - `"claude-opus-4-1-20250805"ClaudeOpus4_1_20250805`
 
-      Exceptional model for specialized complex tasks
+      Powerful intelligence for long-running agents and coding
 
 ### Beta Fallback Info Param
 
@@ -11236,13 +11727,17 @@ Console.WriteLine(betaMessageTokensCount);
 
       Most capable model for cybersecurity and biology research
 
+    - `"claude-opus-5"ClaudeOpus5`
+
+      Powerful intelligence for long-running agents and coding
+
     - `"claude-opus-4-8"ClaudeOpus4_8`
 
-      Frontier intelligence for long-running agents and coding
+      Powerful intelligence for long-running agents and coding
 
     - `"claude-opus-4-7"ClaudeOpus4_7`
 
-      Frontier intelligence for long-running agents and coding
+      Powerful intelligence for long-running agents and coding
 
     - `"claude-mythos-preview"ClaudeMythosPreview`
 
@@ -11250,7 +11745,7 @@ Console.WriteLine(betaMessageTokensCount);
 
     - `"claude-opus-4-6"ClaudeOpus4_6`
 
-      Frontier intelligence for long-running agents and coding
+      Powerful intelligence for long-running agents and coding
 
     - `"claude-sonnet-4-6"ClaudeSonnet4_6`
 
@@ -11266,11 +11761,11 @@ Console.WriteLine(betaMessageTokensCount);
 
     - `"claude-opus-4-5"ClaudeOpus4_5`
 
-      Premium model combining maximum intelligence with practical performance
+      Powerful intelligence for long-running agents and coding
 
     - `"claude-opus-4-5-20251101"ClaudeOpus4_5_20251101`
 
-      Premium model combining maximum intelligence with practical performance
+      Powerful intelligence for long-running agents and coding
 
     - `"claude-sonnet-4-5"ClaudeSonnet4_5`
 
@@ -11282,11 +11777,11 @@ Console.WriteLine(betaMessageTokensCount);
 
     - `"claude-opus-4-1"ClaudeOpus4_1`
 
-      Exceptional model for specialized complex tasks
+      Powerful intelligence for long-running agents and coding
 
     - `"claude-opus-4-1-20250805"ClaudeOpus4_1_20250805`
 
-      Exceptional model for specialized complex tasks
+      Powerful intelligence for long-running agents and coding
 
 ### Beta Fallback Message Iteration Usage
 
@@ -11341,13 +11836,17 @@ Console.WriteLine(betaMessageTokensCount);
 
       Most capable model for cybersecurity and biology research
 
+    - `"claude-opus-5"ClaudeOpus5`
+
+      Powerful intelligence for long-running agents and coding
+
     - `"claude-opus-4-8"ClaudeOpus4_8`
 
-      Frontier intelligence for long-running agents and coding
+      Powerful intelligence for long-running agents and coding
 
     - `"claude-opus-4-7"ClaudeOpus4_7`
 
-      Frontier intelligence for long-running agents and coding
+      Powerful intelligence for long-running agents and coding
 
     - `"claude-mythos-preview"ClaudeMythosPreview`
 
@@ -11355,7 +11854,7 @@ Console.WriteLine(betaMessageTokensCount);
 
     - `"claude-opus-4-6"ClaudeOpus4_6`
 
-      Frontier intelligence for long-running agents and coding
+      Powerful intelligence for long-running agents and coding
 
     - `"claude-sonnet-4-6"ClaudeSonnet4_6`
 
@@ -11371,11 +11870,11 @@ Console.WriteLine(betaMessageTokensCount);
 
     - `"claude-opus-4-5"ClaudeOpus4_5`
 
-      Premium model combining maximum intelligence with practical performance
+      Powerful intelligence for long-running agents and coding
 
     - `"claude-opus-4-5-20251101"ClaudeOpus4_5_20251101`
 
-      Premium model combining maximum intelligence with practical performance
+      Powerful intelligence for long-running agents and coding
 
     - `"claude-sonnet-4-5"ClaudeSonnet4_5`
 
@@ -11387,11 +11886,11 @@ Console.WriteLine(betaMessageTokensCount);
 
     - `"claude-opus-4-1"ClaudeOpus4_1`
 
-      Exceptional model for specialized complex tasks
+      Powerful intelligence for long-running agents and coding
 
     - `"claude-opus-4-1-20250805"ClaudeOpus4_1_20250805`
 
-      Exceptional model for specialized complex tasks
+      Powerful intelligence for long-running agents and coding
 
   - `required Long OutputTokens`
 
@@ -11430,13 +11929,17 @@ Console.WriteLine(betaMessageTokensCount);
 
       Most capable model for cybersecurity and biology research
 
+    - `"claude-opus-5"ClaudeOpus5`
+
+      Powerful intelligence for long-running agents and coding
+
     - `"claude-opus-4-8"ClaudeOpus4_8`
 
-      Frontier intelligence for long-running agents and coding
+      Powerful intelligence for long-running agents and coding
 
     - `"claude-opus-4-7"ClaudeOpus4_7`
 
-      Frontier intelligence for long-running agents and coding
+      Powerful intelligence for long-running agents and coding
 
     - `"claude-mythos-preview"ClaudeMythosPreview`
 
@@ -11444,7 +11947,7 @@ Console.WriteLine(betaMessageTokensCount);
 
     - `"claude-opus-4-6"ClaudeOpus4_6`
 
-      Frontier intelligence for long-running agents and coding
+      Powerful intelligence for long-running agents and coding
 
     - `"claude-sonnet-4-6"ClaudeSonnet4_6`
 
@@ -11460,11 +11963,11 @@ Console.WriteLine(betaMessageTokensCount);
 
     - `"claude-opus-4-5"ClaudeOpus4_5`
 
-      Premium model combining maximum intelligence with practical performance
+      Powerful intelligence for long-running agents and coding
 
     - `"claude-opus-4-5-20251101"ClaudeOpus4_5_20251101`
 
-      Premium model combining maximum intelligence with practical performance
+      Powerful intelligence for long-running agents and coding
 
     - `"claude-sonnet-4-5"ClaudeSonnet4_5`
 
@@ -11476,11 +11979,11 @@ Console.WriteLine(betaMessageTokensCount);
 
     - `"claude-opus-4-1"ClaudeOpus4_1`
 
-      Exceptional model for specialized complex tasks
+      Powerful intelligence for long-running agents and coding
 
     - `"claude-opus-4-1-20250805"ClaudeOpus4_1_20250805`
 
-      Exceptional model for specialized complex tasks
+      Powerful intelligence for long-running agents and coding
 
   - `Long? MaxTokens`
 
@@ -11603,6 +12106,180 @@ Console.WriteLine(betaMessageTokensCount);
       The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
   - `JsonElement Type "refusal"constant`
+
+### Beta Fallbacks Param
+
+- `class BetaFallbacksParam: A class that can be one of several variants.union`
+
+  Opt-in server-side retry on one or more substitute models when the requested model declines for policy reasons. Tried in order: if the first entry also declines, the second is tried, and so on. The string "default" requests the requested model's server-defined default fallback configuration.
+
+  - `IReadOnlyList<BetaFallbackParam>`
+
+    - `required Model Model`
+
+      The model that will complete your prompt.
+
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-sonnet-5"ClaudeSonnet5`
+
+        High-performance model for coding and agents
+
+      - `"claude-fable-5"ClaudeFable5`
+
+        Next generation of intelligence for the hardest knowledge work and coding problems
+
+      - `"claude-mythos-5"ClaudeMythos5`
+
+        Most capable model for cybersecurity and biology research
+
+      - `"claude-opus-5"ClaudeOpus5`
+
+        Powerful intelligence for long-running agents and coding
+
+      - `"claude-opus-4-8"ClaudeOpus4_8`
+
+        Powerful intelligence for long-running agents and coding
+
+      - `"claude-opus-4-7"ClaudeOpus4_7`
+
+        Powerful intelligence for long-running agents and coding
+
+      - `"claude-mythos-preview"ClaudeMythosPreview`
+
+        New class of intelligence, strongest in coding and cybersecurity
+
+      - `"claude-opus-4-6"ClaudeOpus4_6`
+
+        Powerful intelligence for long-running agents and coding
+
+      - `"claude-sonnet-4-6"ClaudeSonnet4_6`
+
+        Best combination of speed and intelligence
+
+      - `"claude-haiku-4-5"ClaudeHaiku4_5`
+
+        Fastest model with near-frontier intelligence
+
+      - `"claude-haiku-4-5-20251001"ClaudeHaiku4_5_20251001`
+
+        Fastest model with near-frontier intelligence
+
+      - `"claude-opus-4-5"ClaudeOpus4_5`
+
+        Powerful intelligence for long-running agents and coding
+
+      - `"claude-opus-4-5-20251101"ClaudeOpus4_5_20251101`
+
+        Powerful intelligence for long-running agents and coding
+
+      - `"claude-sonnet-4-5"ClaudeSonnet4_5`
+
+        High-performance model for agents and coding
+
+      - `"claude-sonnet-4-5-20250929"ClaudeSonnet4_5_20250929`
+
+        High-performance model for agents and coding
+
+      - `"claude-opus-4-1"ClaudeOpus4_1`
+
+        Powerful intelligence for long-running agents and coding
+
+      - `"claude-opus-4-1-20250805"ClaudeOpus4_1_20250805`
+
+        Powerful intelligence for long-running agents and coding
+
+    - `Long? MaxTokens`
+
+    - `BetaOutputConfig? OutputConfig`
+
+      - `Effort? Effort`
+
+        All possible effort levels.
+
+        - `"low"Low`
+
+        - `"medium"Medium`
+
+        - `"high"High`
+
+        - `"xhigh"Xhigh`
+
+        - `"max"Max`
+
+      - `BetaJsonOutputFormat? Format`
+
+        A schema to specify Claude's output format in responses. See [structured outputs](../build-with-claude/build-with-claude-structured-outputs.md)
+
+        - `required IReadOnlyDictionary<string, JsonElement> Schema`
+
+          The JSON schema of the format
+
+        - `JsonElement Type "json_schema"constant`
+
+      - `BetaTokenTaskBudget? TaskBudget`
+
+        User-configurable total token budget across contexts.
+
+        - `required Long Total`
+
+          Total token budget across all contexts in the session.
+
+        - `JsonElement Type "tokens"constant`
+
+          The budget type. Currently only 'tokens' is supported.
+
+        - `Long? Remaining`
+
+          Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
+
+    - `Speed? Speed`
+
+      Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+
+      - `"standard"Standard`
+
+      - `"fast"Fast`
+
+    - `Thinking? Thinking`
+
+      - `class BetaThinkingConfigEnabled:`
+
+        - `required Long BudgetTokens`
+
+          Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
+
+          Must be ≥1024 and less than `max_tokens`.
+
+          See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md) for details.
+
+        - `JsonElement Type "enabled"constant`
+
+        - `Display? Display`
+
+          Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+
+          - `"summarized"Summarized`
+
+          - `"omitted"Omitted`
+
+      - `class BetaThinkingConfigDisabled:`
+
+        - `JsonElement Type "disabled"constant`
+
+      - `class BetaThinkingConfigAdaptive:`
+
+        - `JsonElement Type "adaptive"constant`
+
+        - `Display? Display`
+
+          Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+
+          - `"summarized"Summarized`
+
+          - `"omitted"Omitted`
+
+  - `JsonElement`
 
 ### Beta File Document Source
 
@@ -12972,13 +13649,17 @@ Console.WriteLine(betaMessageTokensCount);
 
             Most capable model for cybersecurity and biology research
 
+          - `"claude-opus-5"ClaudeOpus5`
+
+            Powerful intelligence for long-running agents and coding
+
           - `"claude-opus-4-8"ClaudeOpus4_8`
 
-            Frontier intelligence for long-running agents and coding
+            Powerful intelligence for long-running agents and coding
 
           - `"claude-opus-4-7"ClaudeOpus4_7`
 
-            Frontier intelligence for long-running agents and coding
+            Powerful intelligence for long-running agents and coding
 
           - `"claude-mythos-preview"ClaudeMythosPreview`
 
@@ -12986,7 +13667,7 @@ Console.WriteLine(betaMessageTokensCount);
 
           - `"claude-opus-4-6"ClaudeOpus4_6`
 
-            Frontier intelligence for long-running agents and coding
+            Powerful intelligence for long-running agents and coding
 
           - `"claude-sonnet-4-6"ClaudeSonnet4_6`
 
@@ -13002,11 +13683,11 @@ Console.WriteLine(betaMessageTokensCount);
 
           - `"claude-opus-4-5"ClaudeOpus4_5`
 
-            Premium model combining maximum intelligence with practical performance
+            Powerful intelligence for long-running agents and coding
 
           - `"claude-opus-4-5-20251101"ClaudeOpus4_5_20251101`
 
-            Premium model combining maximum intelligence with practical performance
+            Powerful intelligence for long-running agents and coding
 
           - `"claude-sonnet-4-5"ClaudeSonnet4_5`
 
@@ -13018,11 +13699,11 @@ Console.WriteLine(betaMessageTokensCount);
 
           - `"claude-opus-4-1"ClaudeOpus4_1`
 
-            Exceptional model for specialized complex tasks
+            Powerful intelligence for long-running agents and coding
 
           - `"claude-opus-4-1-20250805"ClaudeOpus4_1_20250805`
 
-            Exceptional model for specialized complex tasks
+            Powerful intelligence for long-running agents and coding
 
       - `required BetaFallbackInfo To`
 
@@ -13256,6 +13937,7 @@ Console.WriteLine(betaMessageTokensCount);
     * `"tool_use"`: the model invoked one or more tools
     * `"pause_turn"`: we paused a long-running turn. You may provide the response back as-is in a subsequent request to let the model continue.
     * `"refusal"`: when streaming classifiers intervene to handle potential policy violations
+    * `"model_context_window_exceeded"`: we exceeded the model's context window
 
     In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
@@ -13318,6 +14000,74 @@ Console.WriteLine(betaMessageTokensCount);
     - `required Long? CacheReadInputTokens`
 
       The number of input tokens read from the cache.
+
+    - `required BetaFallbackCreditUsage? FallbackCredit`
+
+      Outcome of the `fallback_credit_token` presented on this request.
+
+      - `required Status Status`
+
+        Whether the fallback-credit reprice was applied to this response's billing.
+
+        A union discriminated on `type`. `redeemed`: the retry is billed as if
+        the conversation had been on the retry model all along — including when the
+        resulting shift is zero because there was nothing to move. `not_applied`:
+        no reprice was applied; the arm's `reason` says why.
+
+        - `class BetaFallbackCreditRedeemed:`
+
+          The reprice was applied: the retry is billed as if the conversation
+          had been on the retry model all along.
+
+          - `JsonElement Type "redeemed"constant`
+
+        - `class BetaFallbackCreditNotApplied:`
+
+          No reprice was applied; `reason` says why.
+
+          - `required Reason Reason`
+
+            Why the reprice was not applied.
+
+            A closed enum; additions to the redemption-check vocabulary arrive as
+            deliberate schema updates.
+
+            - `"body_mismatch"BodyMismatch`
+
+            - `"continuation_excluded"ContinuationExcluded`
+
+            - `"continuation_only"ContinuationOnly`
+
+            - `"expired"Expired`
+
+            - `"invalid_target_model"InvalidTargetModel`
+
+            - `"not_enabled"NotEnabled`
+
+            - `"reprice_unavailable"RepriceUnavailable`
+
+            - `"temporarily_unavailable"TemporarilyUnavailable`
+
+            - `"variant_fields_present"VariantFieldsPresent`
+
+            - `"wrong_organization"WrongOrganization`
+
+            - `"wrong_platform"WrongPlatform`
+
+            - `"wrong_workspace"WrongWorkspace`
+
+          - `JsonElement Type "not_applied"constant`
+
+          - `IReadOnlyList<string>? RemoveToRedeem`
+
+            Request fields to remove before retrying, so the retry can redeem this
+            token.
+
+            Present exactly when `reason` is `variant_fields_present` — never null,
+            never an empty array; absent otherwise. Fields are named only from your own request, and only after
+            the sealed variant hash matched. A served best-effort retry has already
+            been billed at normal price; nothing redeems retroactively, but a corrected
+            re-send inside the token's five-minute window can still redeem.
 
     - `required string? InferenceGeo`
 
@@ -13538,6 +14288,74 @@ Console.WriteLine(betaMessageTokensCount);
 
     The cumulative number of input tokens read from the cache.
 
+  - `required BetaFallbackCreditUsage? FallbackCredit`
+
+    Outcome of the `fallback_credit_token` presented on this request.
+
+    - `required Status Status`
+
+      Whether the fallback-credit reprice was applied to this response's billing.
+
+      A union discriminated on `type`. `redeemed`: the retry is billed as if
+      the conversation had been on the retry model all along — including when the
+      resulting shift is zero because there was nothing to move. `not_applied`:
+      no reprice was applied; the arm's `reason` says why.
+
+      - `class BetaFallbackCreditRedeemed:`
+
+        The reprice was applied: the retry is billed as if the conversation
+        had been on the retry model all along.
+
+        - `JsonElement Type "redeemed"constant`
+
+      - `class BetaFallbackCreditNotApplied:`
+
+        No reprice was applied; `reason` says why.
+
+        - `required Reason Reason`
+
+          Why the reprice was not applied.
+
+          A closed enum; additions to the redemption-check vocabulary arrive as
+          deliberate schema updates.
+
+          - `"body_mismatch"BodyMismatch`
+
+          - `"continuation_excluded"ContinuationExcluded`
+
+          - `"continuation_only"ContinuationOnly`
+
+          - `"expired"Expired`
+
+          - `"invalid_target_model"InvalidTargetModel`
+
+          - `"not_enabled"NotEnabled`
+
+          - `"reprice_unavailable"RepriceUnavailable`
+
+          - `"temporarily_unavailable"TemporarilyUnavailable`
+
+          - `"variant_fields_present"VariantFieldsPresent`
+
+          - `"wrong_organization"WrongOrganization`
+
+          - `"wrong_platform"WrongPlatform`
+
+          - `"wrong_workspace"WrongWorkspace`
+
+        - `JsonElement Type "not_applied"constant`
+
+        - `IReadOnlyList<string>? RemoveToRedeem`
+
+          Request fields to remove before retrying, so the retry can redeem this
+          token.
+
+          Present exactly when `reason` is `variant_fields_present` — never null,
+          never an empty array; absent otherwise. Fields are named only from your own request, and only after
+          the sealed variant hash matched. A served best-effort retry has already
+          been billed at normal price; nothing redeems retroactively, but a corrected
+          re-send inside the token's five-minute window can still redeem.
+
   - `required Long? InputTokens`
 
     The cumulative number of input tokens which were used.
@@ -13598,13 +14416,17 @@ Console.WriteLine(betaMessageTokensCount);
 
           Most capable model for cybersecurity and biology research
 
+        - `"claude-opus-5"ClaudeOpus5`
+
+          Powerful intelligence for long-running agents and coding
+
         - `"claude-opus-4-8"ClaudeOpus4_8`
 
-          Frontier intelligence for long-running agents and coding
+          Powerful intelligence for long-running agents and coding
 
         - `"claude-opus-4-7"ClaudeOpus4_7`
 
-          Frontier intelligence for long-running agents and coding
+          Powerful intelligence for long-running agents and coding
 
         - `"claude-mythos-preview"ClaudeMythosPreview`
 
@@ -13612,7 +14434,7 @@ Console.WriteLine(betaMessageTokensCount);
 
         - `"claude-opus-4-6"ClaudeOpus4_6`
 
-          Frontier intelligence for long-running agents and coding
+          Powerful intelligence for long-running agents and coding
 
         - `"claude-sonnet-4-6"ClaudeSonnet4_6`
 
@@ -13628,11 +14450,11 @@ Console.WriteLine(betaMessageTokensCount);
 
         - `"claude-opus-4-5"ClaudeOpus4_5`
 
-          Premium model combining maximum intelligence with practical performance
+          Powerful intelligence for long-running agents and coding
 
         - `"claude-opus-4-5-20251101"ClaudeOpus4_5_20251101`
 
-          Premium model combining maximum intelligence with practical performance
+          Powerful intelligence for long-running agents and coding
 
         - `"claude-sonnet-4-5"ClaudeSonnet4_5`
 
@@ -13644,11 +14466,11 @@ Console.WriteLine(betaMessageTokensCount);
 
         - `"claude-opus-4-1"ClaudeOpus4_1`
 
-          Exceptional model for specialized complex tasks
+          Powerful intelligence for long-running agents and coding
 
         - `"claude-opus-4-1-20250805"ClaudeOpus4_1_20250805`
 
-          Exceptional model for specialized complex tasks
+          Powerful intelligence for long-running agents and coding
 
       - `required Long OutputTokens`
 
@@ -13843,13 +14665,17 @@ Console.WriteLine(betaMessageTokensCount);
 
       Most capable model for cybersecurity and biology research
 
+    - `"claude-opus-5"ClaudeOpus5`
+
+      Powerful intelligence for long-running agents and coding
+
     - `"claude-opus-4-8"ClaudeOpus4_8`
 
-      Frontier intelligence for long-running agents and coding
+      Powerful intelligence for long-running agents and coding
 
     - `"claude-opus-4-7"ClaudeOpus4_7`
 
-      Frontier intelligence for long-running agents and coding
+      Powerful intelligence for long-running agents and coding
 
     - `"claude-mythos-preview"ClaudeMythosPreview`
 
@@ -13857,7 +14683,7 @@ Console.WriteLine(betaMessageTokensCount);
 
     - `"claude-opus-4-6"ClaudeOpus4_6`
 
-      Frontier intelligence for long-running agents and coding
+      Powerful intelligence for long-running agents and coding
 
     - `"claude-sonnet-4-6"ClaudeSonnet4_6`
 
@@ -13873,11 +14699,11 @@ Console.WriteLine(betaMessageTokensCount);
 
     - `"claude-opus-4-5"ClaudeOpus4_5`
 
-      Premium model combining maximum intelligence with practical performance
+      Powerful intelligence for long-running agents and coding
 
     - `"claude-opus-4-5-20251101"ClaudeOpus4_5_20251101`
 
-      Premium model combining maximum intelligence with practical performance
+      Powerful intelligence for long-running agents and coding
 
     - `"claude-sonnet-4-5"ClaudeSonnet4_5`
 
@@ -13889,11 +14715,11 @@ Console.WriteLine(betaMessageTokensCount);
 
     - `"claude-opus-4-1"ClaudeOpus4_1`
 
-      Exceptional model for specialized complex tasks
+      Powerful intelligence for long-running agents and coding
 
     - `"claude-opus-4-1-20250805"ClaudeOpus4_1_20250805`
 
-      Exceptional model for specialized complex tasks
+      Powerful intelligence for long-running agents and coding
 
   - `required Long OutputTokens`
 
@@ -14772,25 +15598,121 @@ Console.WriteLine(betaMessageTokensCount);
         Use this block to provide or update system-level instructions at a specific
         point in the conversation, rather than only via the top-level `system` parameter.
 
-        - `required IReadOnlyList<BetaTextBlockParam> Content`
+        - `required IReadOnlyList<Content> Content`
 
           System instruction text blocks.
 
-          - `required string Text`
+          - `class BetaTextBlockParam:`
 
-          - `JsonElement Type "text"constant`
+          - `class BetaRequestToolAdditionBlock:`
 
-          - `BetaCacheControlEphemeral? CacheControl`
+            Mid-conversation directive to surface a declared tool.
 
-            Create a cache control breakpoint at this content block.
+            `tool` references a tool (or MCP toolset) by name from the request's
+            `tools`; it is offered to the model from this point in the
+            conversation onward.
 
-          - `IReadOnlyList<BetaTextCitationParam>? Citations`
+            - `required Tool Tool`
+
+              Reference to a single tool the caller declared directly in
+              `tools[]`. Does not accept the composed `{server}_{name}` form the
+              server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+              `mcp_toolset_reference` for those.
+
+              - `class BetaToolChangeToolReference:`
+
+                Reference to a single tool the caller declared directly in
+                `tools[]`. Does not accept the composed `{server}_{name}` form the
+                server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+                `mcp_toolset_reference` for those.
+
+                - `required string Name`
+
+                - `JsonElement Type "tool_reference"constant`
+
+              - `class BetaToolChangeMcpToolReference:`
+
+                Reference to a single MCP tool by its server and remote name — the
+                same `server_name`/`name` pair `mcp_tool_use` carries.
+
+                - `required string Name`
+
+                - `required string ServerName`
+
+                - `JsonElement Type "mcp_tool_reference"constant`
+
+              - `class BetaToolChangeMcpToolsetReference:`
+
+                Reference to every tool in the named MCP server's toolset.
+
+                - `required string ServerName`
+
+                - `JsonElement Type "mcp_toolset_reference"constant`
+
+            - `JsonElement Type "tool_addition"constant`
+
+            - `BetaCacheControlEphemeral? CacheControl`
+
+              Create a cache control breakpoint at this content block.
+
+          - `class BetaRequestToolRemovalBlock:`
+
+            Mid-conversation directive to withdraw a tool.
+
+            `tool` references a tool (or MCP toolset) by name from the request's
+            `tools`; it is no longer offered to the model from this point in the
+            conversation onward.
+
+            - `required Tool Tool`
+
+              Reference to a single tool the caller declared directly in
+              `tools[]`. Does not accept the composed `{server}_{name}` form the
+              server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+              `mcp_toolset_reference` for those.
+
+              - `class BetaToolChangeToolReference:`
+
+                Reference to a single tool the caller declared directly in
+                `tools[]`. Does not accept the composed `{server}_{name}` form the
+                server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+                `mcp_toolset_reference` for those.
+
+              - `class BetaToolChangeMcpToolReference:`
+
+                Reference to a single MCP tool by its server and remote name — the
+                same `server_name`/`name` pair `mcp_tool_use` carries.
+
+              - `class BetaToolChangeMcpToolsetReference:`
+
+                Reference to every tool in the named MCP server's toolset.
+
+            - `JsonElement Type "tool_removal"constant`
+
+            - `BetaCacheControlEphemeral? CacheControl`
+
+              Create a cache control breakpoint at this content block.
 
         - `JsonElement Type "mid_conv_system"constant`
 
         - `BetaCacheControlEphemeral? CacheControl`
 
           Create a cache control breakpoint at this content block.
+
+      - `class BetaRequestToolAdditionBlock:`
+
+        Mid-conversation directive to surface a declared tool.
+
+        `tool` references a tool (or MCP toolset) by name from the request's
+        `tools`; it is offered to the model from this point in the
+        conversation onward.
+
+      - `class BetaRequestToolRemovalBlock:`
+
+        Mid-conversation directive to withdraw a tool.
+
+        `tool` references a tool (or MCP toolset) by name from the request's
+        `tools`; it is no longer offered to the model from this point in the
+        conversation onward.
 
       - `class BetaFallbackBlockParam:`
 
@@ -14830,13 +15752,17 @@ Console.WriteLine(betaMessageTokensCount);
 
               Most capable model for cybersecurity and biology research
 
+            - `"claude-opus-5"ClaudeOpus5`
+
+              Powerful intelligence for long-running agents and coding
+
             - `"claude-opus-4-8"ClaudeOpus4_8`
 
-              Frontier intelligence for long-running agents and coding
+              Powerful intelligence for long-running agents and coding
 
             - `"claude-opus-4-7"ClaudeOpus4_7`
 
-              Frontier intelligence for long-running agents and coding
+              Powerful intelligence for long-running agents and coding
 
             - `"claude-mythos-preview"ClaudeMythosPreview`
 
@@ -14844,7 +15770,7 @@ Console.WriteLine(betaMessageTokensCount);
 
             - `"claude-opus-4-6"ClaudeOpus4_6`
 
-              Frontier intelligence for long-running agents and coding
+              Powerful intelligence for long-running agents and coding
 
             - `"claude-sonnet-4-6"ClaudeSonnet4_6`
 
@@ -14860,11 +15786,11 @@ Console.WriteLine(betaMessageTokensCount);
 
             - `"claude-opus-4-5"ClaudeOpus4_5`
 
-              Premium model combining maximum intelligence with practical performance
+              Powerful intelligence for long-running agents and coding
 
             - `"claude-opus-4-5-20251101"ClaudeOpus4_5_20251101`
 
-              Premium model combining maximum intelligence with practical performance
+              Powerful intelligence for long-running agents and coding
 
             - `"claude-sonnet-4-5"ClaudeSonnet4_5`
 
@@ -14876,11 +15802,11 @@ Console.WriteLine(betaMessageTokensCount);
 
             - `"claude-opus-4-1"ClaudeOpus4_1`
 
-              Exceptional model for specialized complex tasks
+              Powerful intelligence for long-running agents and coding
 
             - `"claude-opus-4-1-20250805"ClaudeOpus4_1_20250805`
 
-              Exceptional model for specialized complex tasks
+              Powerful intelligence for long-running agents and coding
 
         - `required BetaFallbackInfoParam To`
 
@@ -14935,130 +15861,220 @@ Console.WriteLine(betaMessageTokensCount);
   Use this block to provide or update system-level instructions at a specific
   point in the conversation, rather than only via the top-level `system` parameter.
 
-  - `required IReadOnlyList<BetaTextBlockParam> Content`
+  - `required IReadOnlyList<Content> Content`
 
     System instruction text blocks.
 
-    - `required string Text`
+    - `class BetaTextBlockParam:`
 
-    - `JsonElement Type "text"constant`
+      - `required string Text`
 
-    - `BetaCacheControlEphemeral? CacheControl`
+      - `JsonElement Type "text"constant`
 
-      Create a cache control breakpoint at this content block.
+      - `BetaCacheControlEphemeral? CacheControl`
 
-      - `JsonElement Type "ephemeral"constant`
+        Create a cache control breakpoint at this content block.
 
-      - `Ttl Ttl`
+        - `JsonElement Type "ephemeral"constant`
 
-        The time-to-live for the cache control breakpoint.
+        - `Ttl Ttl`
 
-        This may be one the following values:
+          The time-to-live for the cache control breakpoint.
 
-        - `5m`: 5 minutes
-        - `1h`: 1 hour
+          This may be one the following values:
 
-        Defaults to `5m`. See [prompt caching pricing](../build-with-claude/build-with-claude-prompt-caching.md) for details.
+          - `5m`: 5 minutes
+          - `1h`: 1 hour
 
-        - `"5m"Ttl5m`
+          Defaults to `5m`. See [prompt caching pricing](../build-with-claude/build-with-claude-prompt-caching.md) for details.
 
-        - `"1h"Ttl1h`
+          - `"5m"Ttl5m`
 
-    - `IReadOnlyList<BetaTextCitationParam>? Citations`
+          - `"1h"Ttl1h`
 
-      - `class BetaCitationCharLocationParam:`
+      - `IReadOnlyList<BetaTextCitationParam>? Citations`
 
-        - `required string CitedText`
+        - `class BetaCitationCharLocationParam:`
 
-        - `required Long DocumentIndex`
+          - `required string CitedText`
 
-        - `required string? DocumentTitle`
+          - `required Long DocumentIndex`
 
-        - `required Long EndCharIndex`
+          - `required string? DocumentTitle`
 
-        - `required Long StartCharIndex`
+          - `required Long EndCharIndex`
 
-        - `JsonElement Type "char_location"constant`
+          - `required Long StartCharIndex`
 
-      - `class BetaCitationPageLocationParam:`
+          - `JsonElement Type "char_location"constant`
 
-        - `required string CitedText`
+        - `class BetaCitationPageLocationParam:`
 
-        - `required Long DocumentIndex`
+          - `required string CitedText`
 
-        - `required string? DocumentTitle`
+          - `required Long DocumentIndex`
 
-        - `required Long EndPageNumber`
+          - `required string? DocumentTitle`
 
-        - `required Long StartPageNumber`
+          - `required Long EndPageNumber`
 
-        - `JsonElement Type "page_location"constant`
+          - `required Long StartPageNumber`
 
-      - `class BetaCitationContentBlockLocationParam:`
+          - `JsonElement Type "page_location"constant`
 
-        - `required string CitedText`
+        - `class BetaCitationContentBlockLocationParam:`
 
-          The full text of the cited block range, concatenated.
+          - `required string CitedText`
 
-          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+            The full text of the cited block range, concatenated.
 
-        - `required Long DocumentIndex`
+            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-        - `required string? DocumentTitle`
+          - `required Long DocumentIndex`
 
-        - `required Long EndBlockIndex`
+          - `required string? DocumentTitle`
 
-          Exclusive 0-based end index of the cited block range in the source's `content` array.
+          - `required Long EndBlockIndex`
 
-          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+            Exclusive 0-based end index of the cited block range in the source's `content` array.
 
-        - `required Long StartBlockIndex`
+            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-          0-based index of the first cited block in the source's `content` array.
+          - `required Long StartBlockIndex`
 
-        - `JsonElement Type "content_block_location"constant`
+            0-based index of the first cited block in the source's `content` array.
 
-      - `class BetaCitationWebSearchResultLocationParam:`
+          - `JsonElement Type "content_block_location"constant`
 
-        - `required string CitedText`
+        - `class BetaCitationWebSearchResultLocationParam:`
 
-        - `required string EncryptedIndex`
+          - `required string CitedText`
 
-        - `required string? Title`
+          - `required string EncryptedIndex`
 
-        - `JsonElement Type "web_search_result_location"constant`
+          - `required string? Title`
 
-        - `required string Url`
+          - `JsonElement Type "web_search_result_location"constant`
 
-      - `class BetaCitationSearchResultLocationParam:`
+          - `required string Url`
 
-        - `required string CitedText`
+        - `class BetaCitationSearchResultLocationParam:`
 
-          The full text of the cited block range, concatenated.
+          - `required string CitedText`
 
-          Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+            The full text of the cited block range, concatenated.
 
-        - `required Long EndBlockIndex`
+            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
 
-          Exclusive 0-based end index of the cited block range in the source's `content` array.
+          - `required Long EndBlockIndex`
 
-          Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+            Exclusive 0-based end index of the cited block range in the source's `content` array.
 
-        - `required Long SearchResultIndex`
+            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-          0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+          - `required Long SearchResultIndex`
 
-          Counted separately from `document_index`; server-side web search results are not included in this count.
+            0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
 
-        - `required string Source`
+            Counted separately from `document_index`; server-side web search results are not included in this count.
 
-        - `required Long StartBlockIndex`
+          - `required string Source`
 
-          0-based index of the first cited block in the source's `content` array.
+          - `required Long StartBlockIndex`
 
-        - `required string? Title`
+            0-based index of the first cited block in the source's `content` array.
 
-        - `JsonElement Type "search_result_location"constant`
+          - `required string? Title`
+
+          - `JsonElement Type "search_result_location"constant`
+
+    - `class BetaRequestToolAdditionBlock:`
+
+      Mid-conversation directive to surface a declared tool.
+
+      `tool` references a tool (or MCP toolset) by name from the request's
+      `tools`; it is offered to the model from this point in the
+      conversation onward.
+
+      - `required Tool Tool`
+
+        Reference to a single tool the caller declared directly in
+        `tools[]`. Does not accept the composed `{server}_{name}` form the
+        server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+        `mcp_toolset_reference` for those.
+
+        - `class BetaToolChangeToolReference:`
+
+          Reference to a single tool the caller declared directly in
+          `tools[]`. Does not accept the composed `{server}_{name}` form the
+          server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+          `mcp_toolset_reference` for those.
+
+          - `required string Name`
+
+          - `JsonElement Type "tool_reference"constant`
+
+        - `class BetaToolChangeMcpToolReference:`
+
+          Reference to a single MCP tool by its server and remote name — the
+          same `server_name`/`name` pair `mcp_tool_use` carries.
+
+          - `required string Name`
+
+          - `required string ServerName`
+
+          - `JsonElement Type "mcp_tool_reference"constant`
+
+        - `class BetaToolChangeMcpToolsetReference:`
+
+          Reference to every tool in the named MCP server's toolset.
+
+          - `required string ServerName`
+
+          - `JsonElement Type "mcp_toolset_reference"constant`
+
+      - `JsonElement Type "tool_addition"constant`
+
+      - `BetaCacheControlEphemeral? CacheControl`
+
+        Create a cache control breakpoint at this content block.
+
+    - `class BetaRequestToolRemovalBlock:`
+
+      Mid-conversation directive to withdraw a tool.
+
+      `tool` references a tool (or MCP toolset) by name from the request's
+      `tools`; it is no longer offered to the model from this point in the
+      conversation onward.
+
+      - `required Tool Tool`
+
+        Reference to a single tool the caller declared directly in
+        `tools[]`. Does not accept the composed `{server}_{name}` form the
+        server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+        `mcp_toolset_reference` for those.
+
+        - `class BetaToolChangeToolReference:`
+
+          Reference to a single tool the caller declared directly in
+          `tools[]`. Does not accept the composed `{server}_{name}` form the
+          server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+          `mcp_toolset_reference` for those.
+
+        - `class BetaToolChangeMcpToolReference:`
+
+          Reference to a single MCP tool by its server and remote name — the
+          same `server_name`/`name` pair `mcp_tool_use` carries.
+
+        - `class BetaToolChangeMcpToolsetReference:`
+
+          Reference to every tool in the named MCP server's toolset.
+
+      - `JsonElement Type "tool_removal"constant`
+
+      - `BetaCacheControlEphemeral? CacheControl`
+
+        Create a cache control breakpoint at this content block.
 
   - `JsonElement Type "mid_conv_system"constant`
 
@@ -16137,13 +17153,17 @@ Console.WriteLine(betaMessageTokensCount);
 
             Most capable model for cybersecurity and biology research
 
+          - `"claude-opus-5"ClaudeOpus5`
+
+            Powerful intelligence for long-running agents and coding
+
           - `"claude-opus-4-8"ClaudeOpus4_8`
 
-            Frontier intelligence for long-running agents and coding
+            Powerful intelligence for long-running agents and coding
 
           - `"claude-opus-4-7"ClaudeOpus4_7`
 
-            Frontier intelligence for long-running agents and coding
+            Powerful intelligence for long-running agents and coding
 
           - `"claude-mythos-preview"ClaudeMythosPreview`
 
@@ -16151,7 +17171,7 @@ Console.WriteLine(betaMessageTokensCount);
 
           - `"claude-opus-4-6"ClaudeOpus4_6`
 
-            Frontier intelligence for long-running agents and coding
+            Powerful intelligence for long-running agents and coding
 
           - `"claude-sonnet-4-6"ClaudeSonnet4_6`
 
@@ -16167,11 +17187,11 @@ Console.WriteLine(betaMessageTokensCount);
 
           - `"claude-opus-4-5"ClaudeOpus4_5`
 
-            Premium model combining maximum intelligence with practical performance
+            Powerful intelligence for long-running agents and coding
 
           - `"claude-opus-4-5-20251101"ClaudeOpus4_5_20251101`
 
-            Premium model combining maximum intelligence with practical performance
+            Powerful intelligence for long-running agents and coding
 
           - `"claude-sonnet-4-5"ClaudeSonnet4_5`
 
@@ -16183,11 +17203,11 @@ Console.WriteLine(betaMessageTokensCount);
 
           - `"claude-opus-4-1"ClaudeOpus4_1`
 
-            Exceptional model for specialized complex tasks
+            Powerful intelligence for long-running agents and coding
 
           - `"claude-opus-4-1-20250805"ClaudeOpus4_1_20250805`
 
-            Exceptional model for specialized complex tasks
+            Powerful intelligence for long-running agents and coding
 
       - `required BetaFallbackInfo To`
 
@@ -16438,6 +17458,74 @@ Console.WriteLine(betaMessageTokensCount);
 
       The cumulative number of input tokens read from the cache.
 
+    - `required BetaFallbackCreditUsage? FallbackCredit`
+
+      Outcome of the `fallback_credit_token` presented on this request.
+
+      - `required Status Status`
+
+        Whether the fallback-credit reprice was applied to this response's billing.
+
+        A union discriminated on `type`. `redeemed`: the retry is billed as if
+        the conversation had been on the retry model all along — including when the
+        resulting shift is zero because there was nothing to move. `not_applied`:
+        no reprice was applied; the arm's `reason` says why.
+
+        - `class BetaFallbackCreditRedeemed:`
+
+          The reprice was applied: the retry is billed as if the conversation
+          had been on the retry model all along.
+
+          - `JsonElement Type "redeemed"constant`
+
+        - `class BetaFallbackCreditNotApplied:`
+
+          No reprice was applied; `reason` says why.
+
+          - `required Reason Reason`
+
+            Why the reprice was not applied.
+
+            A closed enum; additions to the redemption-check vocabulary arrive as
+            deliberate schema updates.
+
+            - `"body_mismatch"BodyMismatch`
+
+            - `"continuation_excluded"ContinuationExcluded`
+
+            - `"continuation_only"ContinuationOnly`
+
+            - `"expired"Expired`
+
+            - `"invalid_target_model"InvalidTargetModel`
+
+            - `"not_enabled"NotEnabled`
+
+            - `"reprice_unavailable"RepriceUnavailable`
+
+            - `"temporarily_unavailable"TemporarilyUnavailable`
+
+            - `"variant_fields_present"VariantFieldsPresent`
+
+            - `"wrong_organization"WrongOrganization`
+
+            - `"wrong_platform"WrongPlatform`
+
+            - `"wrong_workspace"WrongWorkspace`
+
+          - `JsonElement Type "not_applied"constant`
+
+          - `IReadOnlyList<string>? RemoveToRedeem`
+
+            Request fields to remove before retrying, so the retry can redeem this
+            token.
+
+            Present exactly when `reason` is `variant_fields_present` — never null,
+            never an empty array; absent otherwise. Fields are named only from your own request, and only after
+            the sealed variant hash matched. A served best-effort retry has already
+            been billed at normal price; nothing redeems retroactively, but a corrected
+            re-send inside the token's five-minute window can still redeem.
+
     - `required Long? InputTokens`
 
       The cumulative number of input tokens which were used.
@@ -16498,13 +17586,17 @@ Console.WriteLine(betaMessageTokensCount);
 
             Most capable model for cybersecurity and biology research
 
+          - `"claude-opus-5"ClaudeOpus5`
+
+            Powerful intelligence for long-running agents and coding
+
           - `"claude-opus-4-8"ClaudeOpus4_8`
 
-            Frontier intelligence for long-running agents and coding
+            Powerful intelligence for long-running agents and coding
 
           - `"claude-opus-4-7"ClaudeOpus4_7`
 
-            Frontier intelligence for long-running agents and coding
+            Powerful intelligence for long-running agents and coding
 
           - `"claude-mythos-preview"ClaudeMythosPreview`
 
@@ -16512,7 +17604,7 @@ Console.WriteLine(betaMessageTokensCount);
 
           - `"claude-opus-4-6"ClaudeOpus4_6`
 
-            Frontier intelligence for long-running agents and coding
+            Powerful intelligence for long-running agents and coding
 
           - `"claude-sonnet-4-6"ClaudeSonnet4_6`
 
@@ -16528,11 +17620,11 @@ Console.WriteLine(betaMessageTokensCount);
 
           - `"claude-opus-4-5"ClaudeOpus4_5`
 
-            Premium model combining maximum intelligence with practical performance
+            Powerful intelligence for long-running agents and coding
 
           - `"claude-opus-4-5-20251101"ClaudeOpus4_5_20251101`
 
-            Premium model combining maximum intelligence with practical performance
+            Powerful intelligence for long-running agents and coding
 
           - `"claude-sonnet-4-5"ClaudeSonnet4_5`
 
@@ -16544,11 +17636,11 @@ Console.WriteLine(betaMessageTokensCount);
 
           - `"claude-opus-4-1"ClaudeOpus4_1`
 
-            Exceptional model for specialized complex tasks
+            Powerful intelligence for long-running agents and coding
 
           - `"claude-opus-4-1-20250805"ClaudeOpus4_1_20250805`
 
-            Exceptional model for specialized complex tasks
+            Powerful intelligence for long-running agents and coding
 
         - `required Long OutputTokens`
 
@@ -17460,13 +18552,17 @@ Console.WriteLine(betaMessageTokensCount);
 
               Most capable model for cybersecurity and biology research
 
+            - `"claude-opus-5"ClaudeOpus5`
+
+              Powerful intelligence for long-running agents and coding
+
             - `"claude-opus-4-8"ClaudeOpus4_8`
 
-              Frontier intelligence for long-running agents and coding
+              Powerful intelligence for long-running agents and coding
 
             - `"claude-opus-4-7"ClaudeOpus4_7`
 
-              Frontier intelligence for long-running agents and coding
+              Powerful intelligence for long-running agents and coding
 
             - `"claude-mythos-preview"ClaudeMythosPreview`
 
@@ -17474,7 +18570,7 @@ Console.WriteLine(betaMessageTokensCount);
 
             - `"claude-opus-4-6"ClaudeOpus4_6`
 
-              Frontier intelligence for long-running agents and coding
+              Powerful intelligence for long-running agents and coding
 
             - `"claude-sonnet-4-6"ClaudeSonnet4_6`
 
@@ -17490,11 +18586,11 @@ Console.WriteLine(betaMessageTokensCount);
 
             - `"claude-opus-4-5"ClaudeOpus4_5`
 
-              Premium model combining maximum intelligence with practical performance
+              Powerful intelligence for long-running agents and coding
 
             - `"claude-opus-4-5-20251101"ClaudeOpus4_5_20251101`
 
-              Premium model combining maximum intelligence with practical performance
+              Powerful intelligence for long-running agents and coding
 
             - `"claude-sonnet-4-5"ClaudeSonnet4_5`
 
@@ -17506,11 +18602,11 @@ Console.WriteLine(betaMessageTokensCount);
 
             - `"claude-opus-4-1"ClaudeOpus4_1`
 
-              Exceptional model for specialized complex tasks
+              Powerful intelligence for long-running agents and coding
 
             - `"claude-opus-4-1-20250805"ClaudeOpus4_1_20250805`
 
-              Exceptional model for specialized complex tasks
+              Powerful intelligence for long-running agents and coding
 
         - `required BetaFallbackInfo To`
 
@@ -17744,6 +18840,7 @@ Console.WriteLine(betaMessageTokensCount);
       * `"tool_use"`: the model invoked one or more tools
       * `"pause_turn"`: we paused a long-running turn. You may provide the response back as-is in a subsequent request to let the model continue.
       * `"refusal"`: when streaming classifiers intervene to handle potential policy violations
+      * `"model_context_window_exceeded"`: we exceeded the model's context window
 
       In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
@@ -17806,6 +18903,74 @@ Console.WriteLine(betaMessageTokensCount);
       - `required Long? CacheReadInputTokens`
 
         The number of input tokens read from the cache.
+
+      - `required BetaFallbackCreditUsage? FallbackCredit`
+
+        Outcome of the `fallback_credit_token` presented on this request.
+
+        - `required Status Status`
+
+          Whether the fallback-credit reprice was applied to this response's billing.
+
+          A union discriminated on `type`. `redeemed`: the retry is billed as if
+          the conversation had been on the retry model all along — including when the
+          resulting shift is zero because there was nothing to move. `not_applied`:
+          no reprice was applied; the arm's `reason` says why.
+
+          - `class BetaFallbackCreditRedeemed:`
+
+            The reprice was applied: the retry is billed as if the conversation
+            had been on the retry model all along.
+
+            - `JsonElement Type "redeemed"constant`
+
+          - `class BetaFallbackCreditNotApplied:`
+
+            No reprice was applied; `reason` says why.
+
+            - `required Reason Reason`
+
+              Why the reprice was not applied.
+
+              A closed enum; additions to the redemption-check vocabulary arrive as
+              deliberate schema updates.
+
+              - `"body_mismatch"BodyMismatch`
+
+              - `"continuation_excluded"ContinuationExcluded`
+
+              - `"continuation_only"ContinuationOnly`
+
+              - `"expired"Expired`
+
+              - `"invalid_target_model"InvalidTargetModel`
+
+              - `"not_enabled"NotEnabled`
+
+              - `"reprice_unavailable"RepriceUnavailable`
+
+              - `"temporarily_unavailable"TemporarilyUnavailable`
+
+              - `"variant_fields_present"VariantFieldsPresent`
+
+              - `"wrong_organization"WrongOrganization`
+
+              - `"wrong_platform"WrongPlatform`
+
+              - `"wrong_workspace"WrongWorkspace`
+
+            - `JsonElement Type "not_applied"constant`
+
+            - `IReadOnlyList<string>? RemoveToRedeem`
+
+              Request fields to remove before retrying, so the retry can redeem this
+              token.
+
+              Present exactly when `reason` is `variant_fields_present` — never null,
+              never an empty array; absent otherwise. Fields are named only from your own request, and only after
+              the sealed variant hash matched. A served best-effort retry has already
+              been billed at normal price; nothing redeems retroactively, but a corrected
+              re-send inside the token's five-minute window can still redeem.
 
       - `required string? InferenceGeo`
 
@@ -18789,13 +19954,17 @@ Console.WriteLine(betaMessageTokensCount);
 
                 Most capable model for cybersecurity and biology research
 
+              - `"claude-opus-5"ClaudeOpus5`
+
+                Powerful intelligence for long-running agents and coding
+
               - `"claude-opus-4-8"ClaudeOpus4_8`
 
-                Frontier intelligence for long-running agents and coding
+                Powerful intelligence for long-running agents and coding
 
               - `"claude-opus-4-7"ClaudeOpus4_7`
 
-                Frontier intelligence for long-running agents and coding
+                Powerful intelligence for long-running agents and coding
 
               - `"claude-mythos-preview"ClaudeMythosPreview`
 
@@ -18803,7 +19972,7 @@ Console.WriteLine(betaMessageTokensCount);
 
               - `"claude-opus-4-6"ClaudeOpus4_6`
 
-                Frontier intelligence for long-running agents and coding
+                Powerful intelligence for long-running agents and coding
 
               - `"claude-sonnet-4-6"ClaudeSonnet4_6`
 
@@ -18819,11 +19988,11 @@ Console.WriteLine(betaMessageTokensCount);
 
               - `"claude-opus-4-5"ClaudeOpus4_5`
 
-                Premium model combining maximum intelligence with practical performance
+                Powerful intelligence for long-running agents and coding
 
               - `"claude-opus-4-5-20251101"ClaudeOpus4_5_20251101`
 
-                Premium model combining maximum intelligence with practical performance
+                Powerful intelligence for long-running agents and coding
 
               - `"claude-sonnet-4-5"ClaudeSonnet4_5`
 
@@ -18835,11 +20004,11 @@ Console.WriteLine(betaMessageTokensCount);
 
               - `"claude-opus-4-1"ClaudeOpus4_1`
 
-                Exceptional model for specialized complex tasks
+                Powerful intelligence for long-running agents and coding
 
               - `"claude-opus-4-1-20250805"ClaudeOpus4_1_20250805`
 
-                Exceptional model for specialized complex tasks
+                Powerful intelligence for long-running agents and coding
 
           - `required BetaFallbackInfo To`
 
@@ -19073,6 +20242,7 @@ Console.WriteLine(betaMessageTokensCount);
         * `"tool_use"`: the model invoked one or more tools
         * `"pause_turn"`: we paused a long-running turn. You may provide the response back as-is in a subsequent request to let the model continue.
         * `"refusal"`: when streaming classifiers intervene to handle potential policy violations
+        * `"model_context_window_exceeded"`: we exceeded the model's context window
 
         In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
@@ -19135,6 +20305,74 @@ Console.WriteLine(betaMessageTokensCount);
         - `required Long? CacheReadInputTokens`
 
           The number of input tokens read from the cache.
+
+        - `required BetaFallbackCreditUsage? FallbackCredit`
+
+          Outcome of the `fallback_credit_token` presented on this request.
+
+          - `required Status Status`
+
+            Whether the fallback-credit reprice was applied to this response's billing.
+
+            A union discriminated on `type`. `redeemed`: the retry is billed as if
+            the conversation had been on the retry model all along — including when the
+            resulting shift is zero because there was nothing to move. `not_applied`:
+            no reprice was applied; the arm's `reason` says why.
+
+            - `class BetaFallbackCreditRedeemed:`
+
+              The reprice was applied: the retry is billed as if the conversation
+              had been on the retry model all along.
+
+              - `JsonElement Type "redeemed"constant`
+
+            - `class BetaFallbackCreditNotApplied:`
+
+              No reprice was applied; `reason` says why.
+
+              - `required Reason Reason`
+
+                Why the reprice was not applied.
+
+                A closed enum; additions to the redemption-check vocabulary arrive as
+                deliberate schema updates.
+
+                - `"body_mismatch"BodyMismatch`
+
+                - `"continuation_excluded"ContinuationExcluded`
+
+                - `"continuation_only"ContinuationOnly`
+
+                - `"expired"Expired`
+
+                - `"invalid_target_model"InvalidTargetModel`
+
+                - `"not_enabled"NotEnabled`
+
+                - `"reprice_unavailable"RepriceUnavailable`
+
+                - `"temporarily_unavailable"TemporarilyUnavailable`
+
+                - `"variant_fields_present"VariantFieldsPresent`
+
+                - `"wrong_organization"WrongOrganization`
+
+                - `"wrong_platform"WrongPlatform`
+
+                - `"wrong_workspace"WrongWorkspace`
+
+              - `JsonElement Type "not_applied"constant`
+
+              - `IReadOnlyList<string>? RemoveToRedeem`
+
+                Request fields to remove before retrying, so the retry can redeem this
+                token.
+
+                Present exactly when `reason` is `variant_fields_present` — never null,
+                never an empty array; absent otherwise. Fields are named only from your own request, and only after
+                the sealed variant hash matched. A served best-effort retry has already
+                been billed at normal price; nothing redeems retroactively, but a corrected
+                re-send inside the token's five-minute window can still redeem.
 
         - `required string? InferenceGeo`
 
@@ -19386,6 +20624,10 @@ Console.WriteLine(betaMessageTokensCount);
       - `required Long? CacheReadInputTokens`
 
         The cumulative number of input tokens read from the cache.
+
+      - `required BetaFallbackCreditUsage? FallbackCredit`
+
+        Outcome of the `fallback_credit_token` presented on this request.
 
       - `required Long? InputTokens`
 
@@ -20042,6 +21284,146 @@ Console.WriteLine(betaMessageTokensCount);
           - `JsonElement Type "search_result_location"constant`
 
   - `Boolean IsError`
+
+### Beta Request Tool Addition Block
+
+- `class BetaRequestToolAdditionBlock:`
+
+  Mid-conversation directive to surface a declared tool.
+
+  `tool` references a tool (or MCP toolset) by name from the request's
+  `tools`; it is offered to the model from this point in the
+  conversation onward.
+
+  - `required Tool Tool`
+
+    Reference to a single tool the caller declared directly in
+    `tools[]`. Does not accept the composed `{server}_{name}` form the
+    server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+    `mcp_toolset_reference` for those.
+
+    - `class BetaToolChangeToolReference:`
+
+      Reference to a single tool the caller declared directly in
+      `tools[]`. Does not accept the composed `{server}_{name}` form the
+      server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+      `mcp_toolset_reference` for those.
+
+      - `required string Name`
+
+      - `JsonElement Type "tool_reference"constant`
+
+    - `class BetaToolChangeMcpToolReference:`
+
+      Reference to a single MCP tool by its server and remote name — the
+      same `server_name`/`name` pair `mcp_tool_use` carries.
+
+      - `required string Name`
+
+      - `required string ServerName`
+
+      - `JsonElement Type "mcp_tool_reference"constant`
+
+    - `class BetaToolChangeMcpToolsetReference:`
+
+      Reference to every tool in the named MCP server's toolset.
+
+      - `required string ServerName`
+
+      - `JsonElement Type "mcp_toolset_reference"constant`
+
+  - `JsonElement Type "tool_addition"constant`
+
+  - `BetaCacheControlEphemeral? CacheControl`
+
+    Create a cache control breakpoint at this content block.
+
+    - `JsonElement Type "ephemeral"constant`
+
+    - `Ttl Ttl`
+
+      The time-to-live for the cache control breakpoint.
+
+      This may be one the following values:
+
+      - `5m`: 5 minutes
+      - `1h`: 1 hour
+
+      Defaults to `5m`. See [prompt caching pricing](../build-with-claude/build-with-claude-prompt-caching.md) for details.
+
+      - `"5m"Ttl5m`
+
+      - `"1h"Ttl1h`
+
+### Beta Request Tool Removal Block
+
+- `class BetaRequestToolRemovalBlock:`
+
+  Mid-conversation directive to withdraw a tool.
+
+  `tool` references a tool (or MCP toolset) by name from the request's
+  `tools`; it is no longer offered to the model from this point in the
+  conversation onward.
+
+  - `required Tool Tool`
+
+    Reference to a single tool the caller declared directly in
+    `tools[]`. Does not accept the composed `{server}_{name}` form the
+    server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+    `mcp_toolset_reference` for those.
+
+    - `class BetaToolChangeToolReference:`
+
+      Reference to a single tool the caller declared directly in
+      `tools[]`. Does not accept the composed `{server}_{name}` form the
+      server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+      `mcp_toolset_reference` for those.
+
+      - `required string Name`
+
+      - `JsonElement Type "tool_reference"constant`
+
+    - `class BetaToolChangeMcpToolReference:`
+
+      Reference to a single MCP tool by its server and remote name — the
+      same `server_name`/`name` pair `mcp_tool_use` carries.
+
+      - `required string Name`
+
+      - `required string ServerName`
+
+      - `JsonElement Type "mcp_tool_reference"constant`
+
+    - `class BetaToolChangeMcpToolsetReference:`
+
+      Reference to every tool in the named MCP server's toolset.
+
+      - `required string ServerName`
+
+      - `JsonElement Type "mcp_toolset_reference"constant`
+
+  - `JsonElement Type "tool_removal"constant`
+
+  - `BetaCacheControlEphemeral? CacheControl`
+
+    Create a cache control breakpoint at this content block.
+
+    - `JsonElement Type "ephemeral"constant`
+
+    - `Ttl Ttl`
+
+      The time-to-live for the cache control breakpoint.
+
+      This may be one the following values:
+
+      - `5m`: 5 minutes
+      - `1h`: 1 hour
+
+      Defaults to `5m`. See [prompt caching pricing](../build-with-claude/build-with-claude-prompt-caching.md) for details.
+
+      - `"5m"Ttl5m`
+
+      - `"1h"Ttl1h`
 
 ### Beta Search Result Block Param
 
@@ -21477,6 +22859,42 @@ Console.WriteLine(betaMessageTokensCount);
   - `Boolean Strict`
 
     When true, guarantees schema validation on tool names and inputs
+
+### Beta Tool Change MCP Tool Reference
+
+- `class BetaToolChangeMcpToolReference:`
+
+  Reference to a single MCP tool by its server and remote name — the
+  same `server_name`/`name` pair `mcp_tool_use` carries.
+
+  - `required string Name`
+
+  - `required string ServerName`
+
+  - `JsonElement Type "mcp_tool_reference"constant`
+
+### Beta Tool Change MCP Toolset Reference
+
+- `class BetaToolChangeMcpToolsetReference:`
+
+  Reference to every tool in the named MCP server's toolset.
+
+  - `required string ServerName`
+
+  - `JsonElement Type "mcp_toolset_reference"constant`
+
+### Beta Tool Change Tool Reference
+
+- `class BetaToolChangeToolReference:`
+
+  Reference to a single tool the caller declared directly in
+  `tools[]`. Does not accept the composed `{server}_{name}` form the
+  server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+  `mcp_toolset_reference` for those.
+
+  - `required string Name`
+
+  - `JsonElement Type "tool_reference"constant`
 
 ### Beta Tool Choice
 
@@ -23620,13 +25038,17 @@ Console.WriteLine(betaMessageTokensCount);
 
         Most capable model for cybersecurity and biology research
 
+      - `"claude-opus-5"ClaudeOpus5`
+
+        Powerful intelligence for long-running agents and coding
+
       - `"claude-opus-4-8"ClaudeOpus4_8`
 
-        Frontier intelligence for long-running agents and coding
+        Powerful intelligence for long-running agents and coding
 
       - `"claude-opus-4-7"ClaudeOpus4_7`
 
-        Frontier intelligence for long-running agents and coding
+        Powerful intelligence for long-running agents and coding
 
       - `"claude-mythos-preview"ClaudeMythosPreview`
 
@@ -23634,7 +25056,7 @@ Console.WriteLine(betaMessageTokensCount);
 
       - `"claude-opus-4-6"ClaudeOpus4_6`
 
-        Frontier intelligence for long-running agents and coding
+        Powerful intelligence for long-running agents and coding
 
       - `"claude-sonnet-4-6"ClaudeSonnet4_6`
 
@@ -23650,11 +25072,11 @@ Console.WriteLine(betaMessageTokensCount);
 
       - `"claude-opus-4-5"ClaudeOpus4_5`
 
-        Premium model combining maximum intelligence with practical performance
+        Powerful intelligence for long-running agents and coding
 
       - `"claude-opus-4-5-20251101"ClaudeOpus4_5_20251101`
 
-        Premium model combining maximum intelligence with practical performance
+        Powerful intelligence for long-running agents and coding
 
       - `"claude-sonnet-4-5"ClaudeSonnet4_5`
 
@@ -23666,11 +25088,11 @@ Console.WriteLine(betaMessageTokensCount);
 
       - `"claude-opus-4-1"ClaudeOpus4_1`
 
-        Exceptional model for specialized complex tasks
+        Powerful intelligence for long-running agents and coding
 
       - `"claude-opus-4-1-20250805"ClaudeOpus4_1_20250805`
 
-        Exceptional model for specialized complex tasks
+        Powerful intelligence for long-running agents and coding
 
     - `JsonElement Name "advisor"constant`
 
@@ -23968,6 +25390,74 @@ Console.WriteLine(betaMessageTokensCount);
 
     The number of input tokens read from the cache.
 
+  - `required BetaFallbackCreditUsage? FallbackCredit`
+
+    Outcome of the `fallback_credit_token` presented on this request.
+
+    - `required Status Status`
+
+      Whether the fallback-credit reprice was applied to this response's billing.
+
+      A union discriminated on `type`. `redeemed`: the retry is billed as if
+      the conversation had been on the retry model all along — including when the
+      resulting shift is zero because there was nothing to move. `not_applied`:
+      no reprice was applied; the arm's `reason` says why.
+
+      - `class BetaFallbackCreditRedeemed:`
+
+        The reprice was applied: the retry is billed as if the conversation
+        had been on the retry model all along.
+
+        - `JsonElement Type "redeemed"constant`
+
+      - `class BetaFallbackCreditNotApplied:`
+
+        No reprice was applied; `reason` says why.
+
+        - `required Reason Reason`
+
+          Why the reprice was not applied.
+
+          A closed enum; additions to the redemption-check vocabulary arrive as
+          deliberate schema updates.
+
+          - `"body_mismatch"BodyMismatch`
+
+          - `"continuation_excluded"ContinuationExcluded`
+
+          - `"continuation_only"ContinuationOnly`
+
+          - `"expired"Expired`
+
+          - `"invalid_target_model"InvalidTargetModel`
+
+          - `"not_enabled"NotEnabled`
+
+          - `"reprice_unavailable"RepriceUnavailable`
+
+          - `"temporarily_unavailable"TemporarilyUnavailable`
+
+          - `"variant_fields_present"VariantFieldsPresent`
+
+          - `"wrong_organization"WrongOrganization`
+
+          - `"wrong_platform"WrongPlatform`
+
+          - `"wrong_workspace"WrongWorkspace`
+
+        - `JsonElement Type "not_applied"constant`
+
+        - `IReadOnlyList<string>? RemoveToRedeem`
+
+          Request fields to remove before retrying, so the retry can redeem this
+          token.
+
+          Present exactly when `reason` is `variant_fields_present` — never null,
+          never an empty array; absent otherwise. Fields are named only from your own request, and only after
+          the sealed variant hash matched. A served best-effort retry has already
+          been billed at normal price; nothing redeems retroactively, but a corrected
+          re-send inside the token's five-minute window can still redeem.
+
   - `required string? InferenceGeo`
 
     The geographic region where inference was performed for this request.
@@ -24024,13 +25514,17 @@ Console.WriteLine(betaMessageTokensCount);
 
           Most capable model for cybersecurity and biology research
 
+        - `"claude-opus-5"ClaudeOpus5`
+
+          Powerful intelligence for long-running agents and coding
+
         - `"claude-opus-4-8"ClaudeOpus4_8`
 
-          Frontier intelligence for long-running agents and coding
+          Powerful intelligence for long-running agents and coding
 
         - `"claude-opus-4-7"ClaudeOpus4_7`
 
-          Frontier intelligence for long-running agents and coding
+          Powerful intelligence for long-running agents and coding
 
         - `"claude-mythos-preview"ClaudeMythosPreview`
 
@@ -24038,7 +25532,7 @@ Console.WriteLine(betaMessageTokensCount);
 
         - `"claude-opus-4-6"ClaudeOpus4_6`
 
-          Frontier intelligence for long-running agents and coding
+          Powerful intelligence for long-running agents and coding
 
         - `"claude-sonnet-4-6"ClaudeSonnet4_6`
 
@@ -24054,11 +25548,11 @@ Console.WriteLine(betaMessageTokensCount);
 
         - `"claude-opus-4-5"ClaudeOpus4_5`
 
-          Premium model combining maximum intelligence with practical performance
+          Powerful intelligence for long-running agents and coding
 
         - `"claude-opus-4-5-20251101"ClaudeOpus4_5_20251101`
 
-          Premium model combining maximum intelligence with practical performance
+          Powerful intelligence for long-running agents and coding
 
         - `"claude-sonnet-4-5"ClaudeSonnet4_5`
 
@@ -24070,11 +25564,11 @@ Console.WriteLine(betaMessageTokensCount);
 
         - `"claude-opus-4-1"ClaudeOpus4_1`
 
-          Exceptional model for specialized complex tasks
+          Powerful intelligence for long-running agents and coding
 
         - `"claude-opus-4-1-20250805"ClaudeOpus4_1_20250805`
 
-          Exceptional model for specialized complex tasks
+          Powerful intelligence for long-running agents and coding
 
       - `required Long OutputTokens`
 
@@ -26839,25 +28333,121 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               Use this block to provide or update system-level instructions at a specific
               point in the conversation, rather than only via the top-level `system` parameter.
 
-              - `required IReadOnlyList<BetaTextBlockParam> Content`
+              - `required IReadOnlyList<Content> Content`
 
                 System instruction text blocks.
 
-                - `required string Text`
+                - `class BetaTextBlockParam:`
 
-                - `JsonElement Type "text"constant`
+                - `class BetaRequestToolAdditionBlock:`
 
-                - `BetaCacheControlEphemeral? CacheControl`
+                  Mid-conversation directive to surface a declared tool.
 
-                  Create a cache control breakpoint at this content block.
+                  `tool` references a tool (or MCP toolset) by name from the request's
+                  `tools`; it is offered to the model from this point in the
+                  conversation onward.
 
-                - `IReadOnlyList<BetaTextCitationParam>? Citations`
+                  - `required Tool Tool`
+
+                    Reference to a single tool the caller declared directly in
+                    `tools[]`. Does not accept the composed `{server}_{name}` form the
+                    server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+                    `mcp_toolset_reference` for those.
+
+                    - `class BetaToolChangeToolReference:`
+
+                      Reference to a single tool the caller declared directly in
+                      `tools[]`. Does not accept the composed `{server}_{name}` form the
+                      server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+                      `mcp_toolset_reference` for those.
+
+                      - `required string Name`
+
+                      - `JsonElement Type "tool_reference"constant`
+
+                    - `class BetaToolChangeMcpToolReference:`
+
+                      Reference to a single MCP tool by its server and remote name — the
+                      same `server_name`/`name` pair `mcp_tool_use` carries.
+
+                      - `required string Name`
+
+                      - `required string ServerName`
+
+                      - `JsonElement Type "mcp_tool_reference"constant`
+
+                    - `class BetaToolChangeMcpToolsetReference:`
+
+                      Reference to every tool in the named MCP server's toolset.
+
+                      - `required string ServerName`
+
+                      - `JsonElement Type "mcp_toolset_reference"constant`
+
+                  - `JsonElement Type "tool_addition"constant`
+
+                  - `BetaCacheControlEphemeral? CacheControl`
+
+                    Create a cache control breakpoint at this content block.
+
+                - `class BetaRequestToolRemovalBlock:`
+
+                  Mid-conversation directive to withdraw a tool.
+
+                  `tool` references a tool (or MCP toolset) by name from the request's
+                  `tools`; it is no longer offered to the model from this point in the
+                  conversation onward.
+
+                  - `required Tool Tool`
+
+                    Reference to a single tool the caller declared directly in
+                    `tools[]`. Does not accept the composed `{server}_{name}` form the
+                    server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+                    `mcp_toolset_reference` for those.
+
+                    - `class BetaToolChangeToolReference:`
+
+                      Reference to a single tool the caller declared directly in
+                      `tools[]`. Does not accept the composed `{server}_{name}` form the
+                      server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+                      `mcp_toolset_reference` for those.
+
+                    - `class BetaToolChangeMcpToolReference:`
+
+                      Reference to a single MCP tool by its server and remote name — the
+                      same `server_name`/`name` pair `mcp_tool_use` carries.
+
+                    - `class BetaToolChangeMcpToolsetReference:`
+
+                      Reference to every tool in the named MCP server's toolset.
+
+                  - `JsonElement Type "tool_removal"constant`
+
+                  - `BetaCacheControlEphemeral? CacheControl`
+
+                    Create a cache control breakpoint at this content block.
 
               - `JsonElement Type "mid_conv_system"constant`
 
               - `BetaCacheControlEphemeral? CacheControl`
 
                 Create a cache control breakpoint at this content block.
+
+            - `class BetaRequestToolAdditionBlock:`
+
+              Mid-conversation directive to surface a declared tool.
+
+              `tool` references a tool (or MCP toolset) by name from the request's
+              `tools`; it is offered to the model from this point in the
+              conversation onward.
+
+            - `class BetaRequestToolRemovalBlock:`
+
+              Mid-conversation directive to withdraw a tool.
+
+              `tool` references a tool (or MCP toolset) by name from the request's
+              `tools`; it is no longer offered to the model from this point in the
+              conversation onward.
 
             - `class BetaFallbackBlockParam:`
 
@@ -26897,13 +28487,17 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     Most capable model for cybersecurity and biology research
 
+                  - `"claude-opus-5"ClaudeOpus5`
+
+                    Powerful intelligence for long-running agents and coding
+
                   - `"claude-opus-4-8"ClaudeOpus4_8`
 
-                    Frontier intelligence for long-running agents and coding
+                    Powerful intelligence for long-running agents and coding
 
                   - `"claude-opus-4-7"ClaudeOpus4_7`
 
-                    Frontier intelligence for long-running agents and coding
+                    Powerful intelligence for long-running agents and coding
 
                   - `"claude-mythos-preview"ClaudeMythosPreview`
 
@@ -26911,7 +28505,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `"claude-opus-4-6"ClaudeOpus4_6`
 
-                    Frontier intelligence for long-running agents and coding
+                    Powerful intelligence for long-running agents and coding
 
                   - `"claude-sonnet-4-6"ClaudeSonnet4_6`
 
@@ -26927,11 +28521,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `"claude-opus-4-5"ClaudeOpus4_5`
 
-                    Premium model combining maximum intelligence with practical performance
+                    Powerful intelligence for long-running agents and coding
 
                   - `"claude-opus-4-5-20251101"ClaudeOpus4_5_20251101`
 
-                    Premium model combining maximum intelligence with practical performance
+                    Powerful intelligence for long-running agents and coding
 
                   - `"claude-sonnet-4-5"ClaudeSonnet4_5`
 
@@ -26943,11 +28537,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `"claude-opus-4-1"ClaudeOpus4_1`
 
-                    Exceptional model for specialized complex tasks
+                    Powerful intelligence for long-running agents and coding
 
                   - `"claude-opus-4-1-20250805"ClaudeOpus4_1_20250805`
 
-                    Exceptional model for specialized complex tasks
+                    Powerful intelligence for long-running agents and coding
 
               - `required BetaFallbackInfoParam To`
 
@@ -27116,7 +28710,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           The `id` (`msg_...`) from this client's previous /v1/messages response. The server compares that request's prompt fingerprint against this one and returns `diagnostics.cache_miss_reason` when the prompt-cache prefix could not be reused. Pass `null` on the first turn to opt in without a prior message to compare.
 
-      - `string? FallbackCreditToken`
+      - `FallbackCreditToken? FallbackCreditToken`
 
         The `fallback_credit_token` from a prior refusal's `stop_details`.
 
@@ -27139,105 +28733,133 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
         When the appended-assistant form is used on a model that otherwise disallows
         assistant-turn prefill, this token also authorizes that one prefill.
 
-      - `IReadOnlyList<BetaFallbackParam>? Fallbacks`
+        - `string`
 
-        Opt-in server-side retry on one or more substitute models when the requested model declines for policy reasons. Tried in order: if the first entry also declines, the second is tried, and so on.
+        - `class BetaFallbackCreditTokenParam:`
 
-        - `required Model Model`
+          Object form of `fallback_credit_token`: the token plus a redemption
+          mode.
 
-          The model that will complete your prompt.
+          Requires `anthropic-beta: fallback-credit-2026-07-01`; without that
+          header the field accepts the bare string only. The bare string and the
+          mode-less object are equivalent (both select `strict`), so wrapping
+          an existing token changes nothing by itself.
 
-          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+          - `required string Token`
 
-        - `Long? MaxTokens`
+            The opaque `fallback_credit_token` from a prior refusal's `stop_details` — the same string the bare-string form carries.
 
-        - `BetaOutputConfig? OutputConfig`
+          - `Mode Mode`
 
-          - `Effort? Effort`
+            How a failing token affects the retry. `strict` (the default, and the bare-string behavior): a failing redemption is a 400 and the retry is not served. `best_effort`: the retry is served either way — a token-layer failure no longer rejects the request; the retry proceeds at normal price and the outcome is reported on the response's `usage.fallback_credit`. Two failures stay hard in both modes: a malformed token, and combining `fallback_credit_token` with `fallbacks`.
 
-            All possible effort levels.
+            - `"strict"Strict`
 
-            - `"low"Low`
+            - `"best_effort"BestEffort`
 
-            - `"medium"Medium`
+      - `BetaFallbacksParam? Fallbacks`
 
-            - `"high"High`
+        Opt-in server-side retry on one or more substitute models when the requested model declines for policy reasons. Tried in order: if the first entry also declines, the second is tried, and so on. The string "default" requests the requested model's server-defined default fallback configuration.
 
-            - `"xhigh"Xhigh`
+        - `IReadOnlyList<BetaFallbackParam>`
 
-            - `"max"Max`
+          - `required Model Model`
 
-          - `BetaJsonOutputFormat? Format`
+            The model that will complete your prompt.
 
-            A schema to specify Claude's output format in responses. See [structured outputs](../build-with-claude/build-with-claude-structured-outputs.md)
+            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-            - `required IReadOnlyDictionary<string, JsonElement> Schema`
+          - `Long? MaxTokens`
 
-              The JSON schema of the format
+          - `BetaOutputConfig? OutputConfig`
 
-            - `JsonElement Type "json_schema"constant`
+            - `Effort? Effort`
 
-          - `BetaTokenTaskBudget? TaskBudget`
+              All possible effort levels.
 
-            User-configurable total token budget across contexts.
+              - `"low"Low`
 
-            - `required Long Total`
+              - `"medium"Medium`
 
-              Total token budget across all contexts in the session.
+              - `"high"High`
 
-            - `JsonElement Type "tokens"constant`
+              - `"xhigh"Xhigh`
 
-              The budget type. Currently only 'tokens' is supported.
+              - `"max"Max`
 
-            - `Long? Remaining`
+            - `BetaJsonOutputFormat? Format`
 
-              Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
+              A schema to specify Claude's output format in responses. See [structured outputs](../build-with-claude/build-with-claude-structured-outputs.md)
 
-        - `Speed? Speed`
+              - `required IReadOnlyDictionary<string, JsonElement> Schema`
 
-          Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+                The JSON schema of the format
 
-          - `"standard"Standard`
+              - `JsonElement Type "json_schema"constant`
 
-          - `"fast"Fast`
+            - `BetaTokenTaskBudget? TaskBudget`
 
-        - `Thinking? Thinking`
+              User-configurable total token budget across contexts.
 
-          - `class BetaThinkingConfigEnabled:`
+              - `required Long Total`
 
-            - `required Long BudgetTokens`
+                Total token budget across all contexts in the session.
 
-              Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
+              - `JsonElement Type "tokens"constant`
 
-              Must be ≥1024 and less than `max_tokens`.
+                The budget type. Currently only 'tokens' is supported.
 
-              See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md) for details.
+              - `Long? Remaining`
 
-            - `JsonElement Type "enabled"constant`
+                Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
-            - `Display? Display`
+          - `Speed? Speed`
 
-              Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+            Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-              - `"summarized"Summarized`
+            - `"standard"Standard`
 
-              - `"omitted"Omitted`
+            - `"fast"Fast`
 
-          - `class BetaThinkingConfigDisabled:`
+          - `Thinking? Thinking`
 
-            - `JsonElement Type "disabled"constant`
+            - `class BetaThinkingConfigEnabled:`
 
-          - `class BetaThinkingConfigAdaptive:`
+              - `required Long BudgetTokens`
 
-            - `JsonElement Type "adaptive"constant`
+                Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
 
-            - `Display? Display`
+                Must be ≥1024 and less than `max_tokens`.
 
-              Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+                See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md) for details.
 
-              - `"summarized"Summarized`
+              - `JsonElement Type "enabled"constant`
 
-              - `"omitted"Omitted`
+              - `Display? Display`
+
+                Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+
+                - `"summarized"Summarized`
+
+                - `"omitted"Omitted`
+
+            - `class BetaThinkingConfigDisabled:`
+
+              - `JsonElement Type "disabled"constant`
+
+            - `class BetaThinkingConfigAdaptive:`
+
+              - `JsonElement Type "adaptive"constant`
+
+              - `Display? Display`
+
+                Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+
+                - `"summarized"Summarized`
+
+                - `"omitted"Omitted`
+
+        - `JsonElement`
 
       - `string? InferenceGeo`
 
@@ -28670,7 +30292,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     - `"server-side-fallback-2026-06-01"ServerSideFallback2026_06_01`
 
+    - `"server-side-fallback-2026-07-01"ServerSideFallback2026_07_01`
+
     - `"fallback-credit-2026-06-01"FallbackCredit2026_06_01`
+
+    - `"fallback-credit-2026-07-01"FallbackCredit2026_07_01`
 
     - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
 
@@ -28824,36 +30450,7 @@ BatchCreateParams parameters = new()
                     PreviousMessageID = "previous_message_id"
                 },
                 FallbackCreditToken = "x",
-                Fallbacks =
-                [
-                    new()
-                    {
-                        Model = Model.ClaudeSonnet5,
-                        MaxTokens = 0,
-                        OutputConfig = new()
-                        {
-                            Effort = Effort.Low,
-                            Format = new()
-                            {
-                                Schema = new Dictionary<string, JsonElement>()
-                                {
-                                    { "foo", JsonSerializer.SerializeToElement("bar") },
-                                },
-                            },
-                            TaskBudget = new()
-                            {
-                                Total = 1024,
-                                Remaining = 0,
-                            },
-                        },
-                        Speed = Speed.Standard,
-                        Thinking = new BetaThinkingConfigEnabled()
-                        {
-                            BudgetTokens = 1024,
-                            Display = Display.Summarized,
-                        },
-                    },
-                ],
+                Fallbacks = new Default(),
                 InferenceGeo = "inference_geo",
                 McpServers =
                 [
@@ -29085,7 +30682,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     - `"server-side-fallback-2026-06-01"ServerSideFallback2026_06_01`
 
+    - `"server-side-fallback-2026-07-01"ServerSideFallback2026_07_01`
+
     - `"fallback-credit-2026-06-01"FallbackCredit2026_06_01`
+
+    - `"fallback-credit-2026-07-01"FallbackCredit2026_07_01`
 
     - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
 
@@ -29298,7 +30899,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     - `"server-side-fallback-2026-06-01"ServerSideFallback2026_06_01`
 
+    - `"server-side-fallback-2026-07-01"ServerSideFallback2026_07_01`
+
     - `"fallback-credit-2026-06-01"FallbackCredit2026_06_01`
+
+    - `"fallback-credit-2026-07-01"FallbackCredit2026_07_01`
 
     - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
 
@@ -29526,7 +31131,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     - `"server-side-fallback-2026-06-01"ServerSideFallback2026_06_01`
 
+    - `"server-side-fallback-2026-07-01"ServerSideFallback2026_07_01`
+
     - `"fallback-credit-2026-06-01"FallbackCredit2026_06_01`
+
+    - `"fallback-credit-2026-07-01"FallbackCredit2026_07_01`
 
     - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
 
@@ -29731,7 +31340,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     - `"server-side-fallback-2026-06-01"ServerSideFallback2026_06_01`
 
+    - `"server-side-fallback-2026-07-01"ServerSideFallback2026_07_01`
+
     - `"fallback-credit-2026-06-01"FallbackCredit2026_06_01`
+
+    - `"fallback-credit-2026-07-01"FallbackCredit2026_07_01`
 
     - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
 
@@ -29848,7 +31461,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     - `"server-side-fallback-2026-06-01"ServerSideFallback2026_06_01`
 
+    - `"server-side-fallback-2026-07-01"ServerSideFallback2026_07_01`
+
     - `"fallback-credit-2026-06-01"FallbackCredit2026_06_01`
+
+    - `"fallback-credit-2026-07-01"FallbackCredit2026_07_01`
 
     - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
 
@@ -30633,13 +32250,17 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   Most capable model for cybersecurity and biology research
 
+                - `"claude-opus-5"ClaudeOpus5`
+
+                  Powerful intelligence for long-running agents and coding
+
                 - `"claude-opus-4-8"ClaudeOpus4_8`
 
-                  Frontier intelligence for long-running agents and coding
+                  Powerful intelligence for long-running agents and coding
 
                 - `"claude-opus-4-7"ClaudeOpus4_7`
 
-                  Frontier intelligence for long-running agents and coding
+                  Powerful intelligence for long-running agents and coding
 
                 - `"claude-mythos-preview"ClaudeMythosPreview`
 
@@ -30647,7 +32268,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `"claude-opus-4-6"ClaudeOpus4_6`
 
-                  Frontier intelligence for long-running agents and coding
+                  Powerful intelligence for long-running agents and coding
 
                 - `"claude-sonnet-4-6"ClaudeSonnet4_6`
 
@@ -30663,11 +32284,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `"claude-opus-4-5"ClaudeOpus4_5`
 
-                  Premium model combining maximum intelligence with practical performance
+                  Powerful intelligence for long-running agents and coding
 
                 - `"claude-opus-4-5-20251101"ClaudeOpus4_5_20251101`
 
-                  Premium model combining maximum intelligence with practical performance
+                  Powerful intelligence for long-running agents and coding
 
                 - `"claude-sonnet-4-5"ClaudeSonnet4_5`
 
@@ -30679,11 +32300,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `"claude-opus-4-1"ClaudeOpus4_1`
 
-                  Exceptional model for specialized complex tasks
+                  Powerful intelligence for long-running agents and coding
 
                 - `"claude-opus-4-1-20250805"ClaudeOpus4_1_20250805`
 
-                  Exceptional model for specialized complex tasks
+                  Powerful intelligence for long-running agents and coding
 
             - `required BetaFallbackInfo To`
 
@@ -30917,6 +32538,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
           * `"tool_use"`: the model invoked one or more tools
           * `"pause_turn"`: we paused a long-running turn. You may provide the response back as-is in a subsequent request to let the model continue.
           * `"refusal"`: when streaming classifiers intervene to handle potential policy violations
+          * `"model_context_window_exceeded"`: we exceeded the model's context window
 
           In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
@@ -30979,6 +32601,74 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
           - `required Long? CacheReadInputTokens`
 
             The number of input tokens read from the cache.
+
+          - `required BetaFallbackCreditUsage? FallbackCredit`
+
+            Outcome of the `fallback_credit_token` presented on this request.
+
+            - `required Status Status`
+
+              Whether the fallback-credit reprice was applied to this response's billing.
+
+              A union discriminated on `type`. `redeemed`: the retry is billed as if
+              the conversation had been on the retry model all along — including when the
+              resulting shift is zero because there was nothing to move. `not_applied`:
+              no reprice was applied; the arm's `reason` says why.
+
+              - `class BetaFallbackCreditRedeemed:`
+
+                The reprice was applied: the retry is billed as if the conversation
+                had been on the retry model all along.
+
+                - `JsonElement Type "redeemed"constant`
+
+              - `class BetaFallbackCreditNotApplied:`
+
+                No reprice was applied; `reason` says why.
+
+                - `required Reason Reason`
+
+                  Why the reprice was not applied.
+
+                  A closed enum; additions to the redemption-check vocabulary arrive as
+                  deliberate schema updates.
+
+                  - `"body_mismatch"BodyMismatch`
+
+                  - `"continuation_excluded"ContinuationExcluded`
+
+                  - `"continuation_only"ContinuationOnly`
+
+                  - `"expired"Expired`
+
+                  - `"invalid_target_model"InvalidTargetModel`
+
+                  - `"not_enabled"NotEnabled`
+
+                  - `"reprice_unavailable"RepriceUnavailable`
+
+                  - `"temporarily_unavailable"TemporarilyUnavailable`
+
+                  - `"variant_fields_present"VariantFieldsPresent`
+
+                  - `"wrong_organization"WrongOrganization`
+
+                  - `"wrong_platform"WrongPlatform`
+
+                  - `"wrong_workspace"WrongWorkspace`
+
+                - `JsonElement Type "not_applied"constant`
+
+                - `IReadOnlyList<string>? RemoveToRedeem`
+
+                  Request fields to remove before retrying, so the retry can redeem this
+                  token.
+
+                  Present exactly when `reason` is `variant_fields_present` — never null,
+                  never an empty array; absent otherwise. Fields are named only from your own request, and only after
+                  the sealed variant hash matched. A served best-effort retry has already
+                  been billed at normal price; nothing redeems retroactively, but a corrected
+                  re-send inside the token's five-minute window can still redeem.
 
           - `required string? InferenceGeo`
 
@@ -32239,13 +33929,17 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                   Most capable model for cybersecurity and biology research
 
+                - `"claude-opus-5"ClaudeOpus5`
+
+                  Powerful intelligence for long-running agents and coding
+
                 - `"claude-opus-4-8"ClaudeOpus4_8`
 
-                  Frontier intelligence for long-running agents and coding
+                  Powerful intelligence for long-running agents and coding
 
                 - `"claude-opus-4-7"ClaudeOpus4_7`
 
-                  Frontier intelligence for long-running agents and coding
+                  Powerful intelligence for long-running agents and coding
 
                 - `"claude-mythos-preview"ClaudeMythosPreview`
 
@@ -32253,7 +33947,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                 - `"claude-opus-4-6"ClaudeOpus4_6`
 
-                  Frontier intelligence for long-running agents and coding
+                  Powerful intelligence for long-running agents and coding
 
                 - `"claude-sonnet-4-6"ClaudeSonnet4_6`
 
@@ -32269,11 +33963,11 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                 - `"claude-opus-4-5"ClaudeOpus4_5`
 
-                  Premium model combining maximum intelligence with practical performance
+                  Powerful intelligence for long-running agents and coding
 
                 - `"claude-opus-4-5-20251101"ClaudeOpus4_5_20251101`
 
-                  Premium model combining maximum intelligence with practical performance
+                  Powerful intelligence for long-running agents and coding
 
                 - `"claude-sonnet-4-5"ClaudeSonnet4_5`
 
@@ -32285,11 +33979,11 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                 - `"claude-opus-4-1"ClaudeOpus4_1`
 
-                  Exceptional model for specialized complex tasks
+                  Powerful intelligence for long-running agents and coding
 
                 - `"claude-opus-4-1-20250805"ClaudeOpus4_1_20250805`
 
-                  Exceptional model for specialized complex tasks
+                  Powerful intelligence for long-running agents and coding
 
             - `required BetaFallbackInfo To`
 
@@ -32523,6 +34217,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
           * `"tool_use"`: the model invoked one or more tools
           * `"pause_turn"`: we paused a long-running turn. You may provide the response back as-is in a subsequent request to let the model continue.
           * `"refusal"`: when streaming classifiers intervene to handle potential policy violations
+          * `"model_context_window_exceeded"`: we exceeded the model's context window
 
           In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
@@ -32585,6 +34280,74 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
           - `required Long? CacheReadInputTokens`
 
             The number of input tokens read from the cache.
+
+          - `required BetaFallbackCreditUsage? FallbackCredit`
+
+            Outcome of the `fallback_credit_token` presented on this request.
+
+            - `required Status Status`
+
+              Whether the fallback-credit reprice was applied to this response's billing.
+
+              A union discriminated on `type`. `redeemed`: the retry is billed as if
+              the conversation had been on the retry model all along — including when the
+              resulting shift is zero because there was nothing to move. `not_applied`:
+              no reprice was applied; the arm's `reason` says why.
+
+              - `class BetaFallbackCreditRedeemed:`
+
+                The reprice was applied: the retry is billed as if the conversation
+                had been on the retry model all along.
+
+                - `JsonElement Type "redeemed"constant`
+
+              - `class BetaFallbackCreditNotApplied:`
+
+                No reprice was applied; `reason` says why.
+
+                - `required Reason Reason`
+
+                  Why the reprice was not applied.
+
+                  A closed enum; additions to the redemption-check vocabulary arrive as
+                  deliberate schema updates.
+
+                  - `"body_mismatch"BodyMismatch`
+
+                  - `"continuation_excluded"ContinuationExcluded`
+
+                  - `"continuation_only"ContinuationOnly`
+
+                  - `"expired"Expired`
+
+                  - `"invalid_target_model"InvalidTargetModel`
+
+                  - `"not_enabled"NotEnabled`
+
+                  - `"reprice_unavailable"RepriceUnavailable`
+
+                  - `"temporarily_unavailable"TemporarilyUnavailable`
+
+                  - `"variant_fields_present"VariantFieldsPresent`
+
+                  - `"wrong_organization"WrongOrganization`
+
+                  - `"wrong_platform"WrongPlatform`
+
+                  - `"wrong_workspace"WrongWorkspace`
+
+                - `JsonElement Type "not_applied"constant`
+
+                - `IReadOnlyList<string>? RemoveToRedeem`
+
+                  Request fields to remove before retrying, so the retry can redeem this
+                  token.
+
+                  Present exactly when `reason` is `variant_fields_present` — never null,
+                  never an empty array; absent otherwise. Fields are named only from your own request, and only after
+                  the sealed variant hash matched. A served best-effort retry has already
+                  been billed at normal price; nothing redeems retroactively, but a corrected
+                  re-send inside the token's five-minute window can still redeem.
 
           - `required string? InferenceGeo`
 
@@ -33672,13 +35435,17 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                 Most capable model for cybersecurity and biology research
 
+              - `"claude-opus-5"ClaudeOpus5`
+
+                Powerful intelligence for long-running agents and coding
+
               - `"claude-opus-4-8"ClaudeOpus4_8`
 
-                Frontier intelligence for long-running agents and coding
+                Powerful intelligence for long-running agents and coding
 
               - `"claude-opus-4-7"ClaudeOpus4_7`
 
-                Frontier intelligence for long-running agents and coding
+                Powerful intelligence for long-running agents and coding
 
               - `"claude-mythos-preview"ClaudeMythosPreview`
 
@@ -33686,7 +35453,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
               - `"claude-opus-4-6"ClaudeOpus4_6`
 
-                Frontier intelligence for long-running agents and coding
+                Powerful intelligence for long-running agents and coding
 
               - `"claude-sonnet-4-6"ClaudeSonnet4_6`
 
@@ -33702,11 +35469,11 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
               - `"claude-opus-4-5"ClaudeOpus4_5`
 
-                Premium model combining maximum intelligence with practical performance
+                Powerful intelligence for long-running agents and coding
 
               - `"claude-opus-4-5-20251101"ClaudeOpus4_5_20251101`
 
-                Premium model combining maximum intelligence with practical performance
+                Powerful intelligence for long-running agents and coding
 
               - `"claude-sonnet-4-5"ClaudeSonnet4_5`
 
@@ -33718,11 +35485,11 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
               - `"claude-opus-4-1"ClaudeOpus4_1`
 
-                Exceptional model for specialized complex tasks
+                Powerful intelligence for long-running agents and coding
 
               - `"claude-opus-4-1-20250805"ClaudeOpus4_1_20250805`
 
-                Exceptional model for specialized complex tasks
+                Powerful intelligence for long-running agents and coding
 
           - `required BetaFallbackInfo To`
 
@@ -33956,6 +35723,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
         * `"tool_use"`: the model invoked one or more tools
         * `"pause_turn"`: we paused a long-running turn. You may provide the response back as-is in a subsequent request to let the model continue.
         * `"refusal"`: when streaming classifiers intervene to handle potential policy violations
+        * `"model_context_window_exceeded"`: we exceeded the model's context window
 
         In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
@@ -34018,6 +35786,74 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
         - `required Long? CacheReadInputTokens`
 
           The number of input tokens read from the cache.
+
+        - `required BetaFallbackCreditUsage? FallbackCredit`
+
+          Outcome of the `fallback_credit_token` presented on this request.
+
+          - `required Status Status`
+
+            Whether the fallback-credit reprice was applied to this response's billing.
+
+            A union discriminated on `type`. `redeemed`: the retry is billed as if
+            the conversation had been on the retry model all along — including when the
+            resulting shift is zero because there was nothing to move. `not_applied`:
+            no reprice was applied; the arm's `reason` says why.
+
+            - `class BetaFallbackCreditRedeemed:`
+
+              The reprice was applied: the retry is billed as if the conversation
+              had been on the retry model all along.
+
+              - `JsonElement Type "redeemed"constant`
+
+            - `class BetaFallbackCreditNotApplied:`
+
+              No reprice was applied; `reason` says why.
+
+              - `required Reason Reason`
+
+                Why the reprice was not applied.
+
+                A closed enum; additions to the redemption-check vocabulary arrive as
+                deliberate schema updates.
+
+                - `"body_mismatch"BodyMismatch`
+
+                - `"continuation_excluded"ContinuationExcluded`
+
+                - `"continuation_only"ContinuationOnly`
+
+                - `"expired"Expired`
+
+                - `"invalid_target_model"InvalidTargetModel`
+
+                - `"not_enabled"NotEnabled`
+
+                - `"reprice_unavailable"RepriceUnavailable`
+
+                - `"temporarily_unavailable"TemporarilyUnavailable`
+
+                - `"variant_fields_present"VariantFieldsPresent`
+
+                - `"wrong_organization"WrongOrganization`
+
+                - `"wrong_platform"WrongPlatform`
+
+                - `"wrong_workspace"WrongWorkspace`
+
+              - `JsonElement Type "not_applied"constant`
+
+              - `IReadOnlyList<string>? RemoveToRedeem`
+
+                Request fields to remove before retrying, so the retry can redeem this
+                token.
+
+                Present exactly when `reason` is `variant_fields_present` — never null,
+                never an empty array; absent otherwise. Fields are named only from your own request, and only after
+                the sealed variant hash matched. A served best-effort retry has already
+                been billed at normal price; nothing redeems retroactively, but a corrected
+                re-send inside the token's five-minute window can still redeem.
 
         - `required string? InferenceGeo`
 
@@ -35067,13 +36903,17 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
               Most capable model for cybersecurity and biology research
 
+            - `"claude-opus-5"ClaudeOpus5`
+
+              Powerful intelligence for long-running agents and coding
+
             - `"claude-opus-4-8"ClaudeOpus4_8`
 
-              Frontier intelligence for long-running agents and coding
+              Powerful intelligence for long-running agents and coding
 
             - `"claude-opus-4-7"ClaudeOpus4_7`
 
-              Frontier intelligence for long-running agents and coding
+              Powerful intelligence for long-running agents and coding
 
             - `"claude-mythos-preview"ClaudeMythosPreview`
 
@@ -35081,7 +36921,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
             - `"claude-opus-4-6"ClaudeOpus4_6`
 
-              Frontier intelligence for long-running agents and coding
+              Powerful intelligence for long-running agents and coding
 
             - `"claude-sonnet-4-6"ClaudeSonnet4_6`
 
@@ -35097,11 +36937,11 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
             - `"claude-opus-4-5"ClaudeOpus4_5`
 
-              Premium model combining maximum intelligence with practical performance
+              Powerful intelligence for long-running agents and coding
 
             - `"claude-opus-4-5-20251101"ClaudeOpus4_5_20251101`
 
-              Premium model combining maximum intelligence with practical performance
+              Powerful intelligence for long-running agents and coding
 
             - `"claude-sonnet-4-5"ClaudeSonnet4_5`
 
@@ -35113,11 +36953,11 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
             - `"claude-opus-4-1"ClaudeOpus4_1`
 
-              Exceptional model for specialized complex tasks
+              Powerful intelligence for long-running agents and coding
 
             - `"claude-opus-4-1-20250805"ClaudeOpus4_1_20250805`
 
-              Exceptional model for specialized complex tasks
+              Powerful intelligence for long-running agents and coding
 
         - `required BetaFallbackInfo To`
 
@@ -35351,6 +37191,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
       * `"tool_use"`: the model invoked one or more tools
       * `"pause_turn"`: we paused a long-running turn. You may provide the response back as-is in a subsequent request to let the model continue.
       * `"refusal"`: when streaming classifiers intervene to handle potential policy violations
+      * `"model_context_window_exceeded"`: we exceeded the model's context window
 
       In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
@@ -35413,6 +37254,74 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
       - `required Long? CacheReadInputTokens`
 
         The number of input tokens read from the cache.
+
+      - `required BetaFallbackCreditUsage? FallbackCredit`
+
+        Outcome of the `fallback_credit_token` presented on this request.
+
+        - `required Status Status`
+
+          Whether the fallback-credit reprice was applied to this response's billing.
+
+          A union discriminated on `type`. `redeemed`: the retry is billed as if
+          the conversation had been on the retry model all along — including when the
+          resulting shift is zero because there was nothing to move. `not_applied`:
+          no reprice was applied; the arm's `reason` says why.
+
+          - `class BetaFallbackCreditRedeemed:`
+
+            The reprice was applied: the retry is billed as if the conversation
+            had been on the retry model all along.
+
+            - `JsonElement Type "redeemed"constant`
+
+          - `class BetaFallbackCreditNotApplied:`
+
+            No reprice was applied; `reason` says why.
+
+            - `required Reason Reason`
+
+              Why the reprice was not applied.
+
+              A closed enum; additions to the redemption-check vocabulary arrive as
+              deliberate schema updates.
+
+              - `"body_mismatch"BodyMismatch`
+
+              - `"continuation_excluded"ContinuationExcluded`
+
+              - `"continuation_only"ContinuationOnly`
+
+              - `"expired"Expired`
+
+              - `"invalid_target_model"InvalidTargetModel`
+
+              - `"not_enabled"NotEnabled`
+
+              - `"reprice_unavailable"RepriceUnavailable`
+
+              - `"temporarily_unavailable"TemporarilyUnavailable`
+
+              - `"variant_fields_present"VariantFieldsPresent`
+
+              - `"wrong_organization"WrongOrganization`
+
+              - `"wrong_platform"WrongPlatform`
+
+              - `"wrong_workspace"WrongWorkspace`
+
+            - `JsonElement Type "not_applied"constant`
+
+            - `IReadOnlyList<string>? RemoveToRedeem`
+
+              Request fields to remove before retrying, so the retry can redeem this
+              token.
+
+              Present exactly when `reason` is `variant_fields_present` — never null,
+              never an empty array; absent otherwise. Fields are named only from your own request, and only after
+              the sealed variant hash matched. A served best-effort retry has already
+              been billed at normal price; nothing redeems retroactively, but a corrected
+              re-send inside the token's five-minute window can still redeem.
 
       - `required string? InferenceGeo`
 

@@ -874,13 +874,17 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           Most capable model for cybersecurity and biology research
 
+        - `"claude-opus-5"ClaudeOpus5`
+
+          Powerful intelligence for long-running agents and coding
+
         - `"claude-opus-4-8"ClaudeOpus4_8`
 
-          Frontier intelligence for long-running agents and coding
+          Powerful intelligence for long-running agents and coding
 
         - `"claude-opus-4-7"ClaudeOpus4_7`
 
-          Frontier intelligence for long-running agents and coding
+          Powerful intelligence for long-running agents and coding
 
         - `"claude-mythos-preview"ClaudeMythosPreview`
 
@@ -888,7 +892,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         - `"claude-opus-4-6"ClaudeOpus4_6`
 
-          Frontier intelligence for long-running agents and coding
+          Powerful intelligence for long-running agents and coding
 
         - `"claude-sonnet-4-6"ClaudeSonnet4_6`
 
@@ -904,11 +908,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         - `"claude-opus-4-5"ClaudeOpus4_5`
 
-          Premium model combining maximum intelligence with practical performance
+          Powerful intelligence for long-running agents and coding
 
         - `"claude-opus-4-5-20251101"ClaudeOpus4_5_20251101`
 
-          Premium model combining maximum intelligence with practical performance
+          Powerful intelligence for long-running agents and coding
 
         - `"claude-sonnet-4-5"ClaudeSonnet4_5`
 
@@ -920,11 +924,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         - `"claude-opus-4-1"ClaudeOpus4_1`
 
-          Exceptional model for specialized complex tasks
+          Powerful intelligence for long-running agents and coding
 
         - `"claude-opus-4-1-20250805"ClaudeOpus4_1_20250805`
 
-          Exceptional model for specialized complex tasks
+          Powerful intelligence for long-running agents and coding
 
       - `CacheControlEphemeral? CacheControl`
 

@@ -1052,19 +1052,109 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
           Use this block to provide or update system-level instructions at a specific
           point in the conversation, rather than only via the top-level `system` parameter.
 
-          - `Content []BetaTextBlockParamResp`
+          - `Content []BetaMidConversationSystemBlockParamContentUnionResp`
 
             System instruction text blocks.
 
-            - `Text string`
+            - `type BetaTextBlockParamResp struct{…}`
 
-            - `Type Text`
+            - `type BetaRequestToolAdditionBlock struct{…}`
 
-            - `CacheControl BetaCacheControlEphemeral`
+              Mid-conversation directive to surface a declared tool.
 
-              Create a cache control breakpoint at this content block.
+              `tool` references a tool (or MCP toolset) by name from the request's
+              `tools`; it is offered to the model from this point in the
+              conversation onward.
 
-            - `Citations []BetaTextCitationParamUnionResp`
+              - `Tool BetaRequestToolAdditionBlockToolUnion`
+
+                Reference to a single tool the caller declared directly in
+                `tools[]`. Does not accept the composed `{server}_{name}` form the
+                server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+                `mcp_toolset_reference` for those.
+
+                - `type BetaToolChangeToolReference struct{…}`
+
+                  Reference to a single tool the caller declared directly in
+                  `tools[]`. Does not accept the composed `{server}_{name}` form the
+                  server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+                  `mcp_toolset_reference` for those.
+
+                  - `Name string`
+
+                  - `Type ToolReference`
+
+                    - `const ToolReferenceToolReference ToolReference = "tool_reference"`
+
+                - `type BetaToolChangeMCPToolReference struct{…}`
+
+                  Reference to a single MCP tool by its server and remote name — the
+                  same `server_name`/`name` pair `mcp_tool_use` carries.
+
+                  - `Name string`
+
+                  - `ServerName string`
+
+                  - `Type MCPToolReference`
+
+                    - `const MCPToolReferenceMCPToolReference MCPToolReference = "mcp_tool_reference"`
+
+                - `type BetaToolChangeMCPToolsetReference struct{…}`
+
+                  Reference to every tool in the named MCP server's toolset.
+
+                  - `ServerName string`
+
+                  - `Type MCPToolsetReference`
+
+                    - `const MCPToolsetReferenceMCPToolsetReference MCPToolsetReference = "mcp_toolset_reference"`
+
+              - `Type ToolAddition`
+
+                - `const ToolAdditionToolAddition ToolAddition = "tool_addition"`
+
+              - `CacheControl BetaCacheControlEphemeral`
+
+                Create a cache control breakpoint at this content block.
+
+            - `type BetaRequestToolRemovalBlock struct{…}`
+
+              Mid-conversation directive to withdraw a tool.
+
+              `tool` references a tool (or MCP toolset) by name from the request's
+              `tools`; it is no longer offered to the model from this point in the
+              conversation onward.
+
+              - `Tool BetaRequestToolRemovalBlockToolUnion`
+
+                Reference to a single tool the caller declared directly in
+                `tools[]`. Does not accept the composed `{server}_{name}` form the
+                server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+                `mcp_toolset_reference` for those.
+
+                - `type BetaToolChangeToolReference struct{…}`
+
+                  Reference to a single tool the caller declared directly in
+                  `tools[]`. Does not accept the composed `{server}_{name}` form the
+                  server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+                  `mcp_toolset_reference` for those.
+
+                - `type BetaToolChangeMCPToolReference struct{…}`
+
+                  Reference to a single MCP tool by its server and remote name — the
+                  same `server_name`/`name` pair `mcp_tool_use` carries.
+
+                - `type BetaToolChangeMCPToolsetReference struct{…}`
+
+                  Reference to every tool in the named MCP server's toolset.
+
+              - `Type ToolRemoval`
+
+                - `const ToolRemovalToolRemoval ToolRemoval = "tool_removal"`
+
+              - `CacheControl BetaCacheControlEphemeral`
+
+                Create a cache control breakpoint at this content block.
 
           - `Type MidConvSystem`
 
@@ -1073,6 +1163,22 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
           - `CacheControl BetaCacheControlEphemeral`
 
             Create a cache control breakpoint at this content block.
+
+        - `type BetaRequestToolAdditionBlock struct{…}`
+
+          Mid-conversation directive to surface a declared tool.
+
+          `tool` references a tool (or MCP toolset) by name from the request's
+          `tools`; it is offered to the model from this point in the
+          conversation onward.
+
+        - `type BetaRequestToolRemovalBlock struct{…}`
+
+          Mid-conversation directive to withdraw a tool.
+
+          `tool` references a tool (or MCP toolset) by name from the request's
+          `tools`; it is no longer offered to the model from this point in the
+          conversation onward.
 
         - `type BetaFallbackBlockParamResp struct{…}`
 
@@ -1118,13 +1224,17 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                   Most capable model for cybersecurity and biology research
 
+                - `const ModelClaudeOpus5 Model = "claude-opus-5"`
+
+                  Powerful intelligence for long-running agents and coding
+
                 - `const ModelClaudeOpus4_8 Model = "claude-opus-4-8"`
 
-                  Frontier intelligence for long-running agents and coding
+                  Powerful intelligence for long-running agents and coding
 
                 - `const ModelClaudeOpus4_7 Model = "claude-opus-4-7"`
 
-                  Frontier intelligence for long-running agents and coding
+                  Powerful intelligence for long-running agents and coding
 
                 - `const ModelClaudeMythosPreview Model = "claude-mythos-preview"`
 
@@ -1132,7 +1242,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 - `const ModelClaudeOpus4_6 Model = "claude-opus-4-6"`
 
-                  Frontier intelligence for long-running agents and coding
+                  Powerful intelligence for long-running agents and coding
 
                 - `const ModelClaudeSonnet4_6 Model = "claude-sonnet-4-6"`
 
@@ -1148,11 +1258,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 - `const ModelClaudeOpus4_5 Model = "claude-opus-4-5"`
 
-                  Premium model combining maximum intelligence with practical performance
+                  Powerful intelligence for long-running agents and coding
 
                 - `const ModelClaudeOpus4_5_20251101 Model = "claude-opus-4-5-20251101"`
 
-                  Premium model combining maximum intelligence with practical performance
+                  Powerful intelligence for long-running agents and coding
 
                 - `const ModelClaudeSonnet4_5 Model = "claude-sonnet-4-5"`
 
@@ -1164,11 +1274,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 - `const ModelClaudeOpus4_1 Model = "claude-opus-4-1"`
 
-                  Exceptional model for specialized complex tasks
+                  Powerful intelligence for long-running agents and coding
 
                 - `const ModelClaudeOpus4_1_20250805 Model = "claude-opus-4-1-20250805"`
 
-                  Exceptional model for specialized complex tasks
+                  Powerful intelligence for long-running agents and coding
 
               - `string`
 
@@ -2629,7 +2739,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       - `const AnthropicBetaServerSideFallback2026_06_01 AnthropicBeta = "server-side-fallback-2026-06-01"`
 
+      - `const AnthropicBetaServerSideFallback2026_07_01 AnthropicBeta = "server-side-fallback-2026-07-01"`
+
       - `const AnthropicBetaFallbackCredit2026_06_01 AnthropicBeta = "fallback-credit-2026-06-01"`
+
+      - `const AnthropicBetaFallbackCredit2026_07_01 AnthropicBeta = "fallback-credit-2026-07-01"`
 
       - `const AnthropicBetaAgentMemory2026_07_22 AnthropicBeta = "agent-memory-2026-07-22"`
 

@@ -1054,19 +1054,109 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
         Use this block to provide or update system-level instructions at a specific
         point in the conversation, rather than only via the top-level `system` parameter.
 
-        - `content: List[BetaTextBlockParam]`
+        - `content: List[Content]`
 
           System instruction text blocks.
 
-          - `text: str`
+          - `class BetaTextBlockParam: …`
 
-          - `type: Literal["text"]`
+          - `class BetaRequestToolAdditionBlock: …`
 
-          - `cache_control: Optional[BetaCacheControlEphemeral]`
+            Mid-conversation directive to surface a declared tool.
 
-            Create a cache control breakpoint at this content block.
+            `tool` references a tool (or MCP toolset) by name from the request's
+            `tools`; it is offered to the model from this point in the
+            conversation onward.
 
-          - `citations: Optional[List[BetaTextCitationParam]]`
+            - `tool: Tool`
+
+              Reference to a single tool the caller declared directly in
+              `tools[]`. Does not accept the composed `{server}_{name}` form the
+              server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+              `mcp_toolset_reference` for those.
+
+              - `class BetaToolChangeToolReference: …`
+
+                Reference to a single tool the caller declared directly in
+                `tools[]`. Does not accept the composed `{server}_{name}` form the
+                server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+                `mcp_toolset_reference` for those.
+
+                - `name: str`
+
+                - `type: Literal["tool_reference"]`
+
+                  - `"tool_reference"`
+
+              - `class BetaToolChangeMCPToolReference: …`
+
+                Reference to a single MCP tool by its server and remote name — the
+                same `server_name`/`name` pair `mcp_tool_use` carries.
+
+                - `name: str`
+
+                - `server_name: str`
+
+                - `type: Literal["mcp_tool_reference"]`
+
+                  - `"mcp_tool_reference"`
+
+              - `class BetaToolChangeMCPToolsetReference: …`
+
+                Reference to every tool in the named MCP server's toolset.
+
+                - `server_name: str`
+
+                - `type: Literal["mcp_toolset_reference"]`
+
+                  - `"mcp_toolset_reference"`
+
+            - `type: Literal["tool_addition"]`
+
+              - `"tool_addition"`
+
+            - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+              Create a cache control breakpoint at this content block.
+
+          - `class BetaRequestToolRemovalBlock: …`
+
+            Mid-conversation directive to withdraw a tool.
+
+            `tool` references a tool (or MCP toolset) by name from the request's
+            `tools`; it is no longer offered to the model from this point in the
+            conversation onward.
+
+            - `tool: Tool`
+
+              Reference to a single tool the caller declared directly in
+              `tools[]`. Does not accept the composed `{server}_{name}` form the
+              server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+              `mcp_toolset_reference` for those.
+
+              - `class BetaToolChangeToolReference: …`
+
+                Reference to a single tool the caller declared directly in
+                `tools[]`. Does not accept the composed `{server}_{name}` form the
+                server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+                `mcp_toolset_reference` for those.
+
+              - `class BetaToolChangeMCPToolReference: …`
+
+                Reference to a single MCP tool by its server and remote name — the
+                same `server_name`/`name` pair `mcp_tool_use` carries.
+
+              - `class BetaToolChangeMCPToolsetReference: …`
+
+                Reference to every tool in the named MCP server's toolset.
+
+            - `type: Literal["tool_removal"]`
+
+              - `"tool_removal"`
+
+            - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+              Create a cache control breakpoint at this content block.
 
         - `type: Literal["mid_conv_system"]`
 
@@ -1075,6 +1165,22 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
           Create a cache control breakpoint at this content block.
+
+      - `class BetaRequestToolAdditionBlock: …`
+
+        Mid-conversation directive to surface a declared tool.
+
+        `tool` references a tool (or MCP toolset) by name from the request's
+        `tools`; it is offered to the model from this point in the
+        conversation onward.
+
+      - `class BetaRequestToolRemovalBlock: …`
+
+        Mid-conversation directive to withdraw a tool.
+
+        `tool` references a tool (or MCP toolset) by name from the request's
+        `tools`; it is no longer offered to the model from this point in the
+        conversation onward.
 
       - `class BetaFallbackBlockParam: …`
 
@@ -1102,7 +1208,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-            - `Literal["claude-sonnet-5", "claude-fable-5", "claude-mythos-5", 13 more]`
+            - `Literal["claude-sonnet-5", "claude-fable-5", "claude-mythos-5", 14 more]`
 
               The model that will complete your prompt.
 
@@ -1111,15 +1217,16 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
               - `claude-sonnet-5` - High-performance model for coding and agents
               - `claude-fable-5` - Next generation of intelligence for the hardest knowledge work and coding problems
               - `claude-mythos-5` - Most capable model for cybersecurity and biology research
-              - `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
-              - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
+              - `claude-opus-5` - Powerful intelligence for long-running agents and coding
+              - `claude-opus-4-8` - Powerful intelligence for long-running agents and coding
+              - `claude-opus-4-7` - Powerful intelligence for long-running agents and coding
               - `claude-mythos-preview` - Deprecated: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-              - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
+              - `claude-opus-4-6` - Powerful intelligence for long-running agents and coding
               - `claude-sonnet-4-6` - Best combination of speed and intelligence
               - `claude-haiku-4-5` - Fastest model with near-frontier intelligence
               - `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
-              - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
-              - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
+              - `claude-opus-4-5` - Powerful intelligence for long-running agents and coding
+              - `claude-opus-4-5-20251101` - Powerful intelligence for long-running agents and coding
               - `claude-sonnet-4-5` - High-performance model for agents and coding
               - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
               - `claude-opus-4-1` - Deprecated: Will reach end-of-life on August 5, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
@@ -1137,13 +1244,17 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 Most capable model for cybersecurity and biology research
 
+              - `"claude-opus-5"`
+
+                Powerful intelligence for long-running agents and coding
+
               - `"claude-opus-4-8"`
 
-                Frontier intelligence for long-running agents and coding
+                Powerful intelligence for long-running agents and coding
 
               - `"claude-opus-4-7"`
 
-                Frontier intelligence for long-running agents and coding
+                Powerful intelligence for long-running agents and coding
 
               - `"claude-mythos-preview"`
 
@@ -1151,7 +1262,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `"claude-opus-4-6"`
 
-                Frontier intelligence for long-running agents and coding
+                Powerful intelligence for long-running agents and coding
 
               - `"claude-sonnet-4-6"`
 
@@ -1167,11 +1278,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `"claude-opus-4-5"`
 
-                Premium model combining maximum intelligence with practical performance
+                Powerful intelligence for long-running agents and coding
 
               - `"claude-opus-4-5-20251101"`
 
-                Premium model combining maximum intelligence with practical performance
+                Powerful intelligence for long-running agents and coding
 
               - `"claude-sonnet-4-5"`
 
@@ -1183,11 +1294,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
               - `"claude-opus-4-1"`
 
-                Exceptional model for specialized complex tasks
+                Powerful intelligence for long-running agents and coding
 
               - `"claude-opus-4-1-20250805"`
 
-                Exceptional model for specialized complex tasks
+                Powerful intelligence for long-running agents and coding
 
             - `str`
 
@@ -2840,7 +2951,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 29 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -2898,7 +3009,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `"server-side-fallback-2026-06-01"`
 
+    - `"server-side-fallback-2026-07-01"`
+
     - `"fallback-credit-2026-06-01"`
+
+    - `"fallback-credit-2026-07-01"`
 
     - `"agent-memory-2026-07-22"`
 

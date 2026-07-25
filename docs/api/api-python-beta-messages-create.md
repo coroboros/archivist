@@ -1064,19 +1064,109 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         Use this block to provide or update system-level instructions at a specific
         point in the conversation, rather than only via the top-level `system` parameter.
 
-        - `content: List[BetaTextBlockParam]`
+        - `content: List[Content]`
 
           System instruction text blocks.
 
-          - `text: str`
+          - `class BetaTextBlockParam: …`
 
-          - `type: Literal["text"]`
+          - `class BetaRequestToolAdditionBlock: …`
 
-          - `cache_control: Optional[BetaCacheControlEphemeral]`
+            Mid-conversation directive to surface a declared tool.
 
-            Create a cache control breakpoint at this content block.
+            `tool` references a tool (or MCP toolset) by name from the request's
+            `tools`; it is offered to the model from this point in the
+            conversation onward.
 
-          - `citations: Optional[List[BetaTextCitationParam]]`
+            - `tool: Tool`
+
+              Reference to a single tool the caller declared directly in
+              `tools[]`. Does not accept the composed `{server}_{name}` form the
+              server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+              `mcp_toolset_reference` for those.
+
+              - `class BetaToolChangeToolReference: …`
+
+                Reference to a single tool the caller declared directly in
+                `tools[]`. Does not accept the composed `{server}_{name}` form the
+                server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+                `mcp_toolset_reference` for those.
+
+                - `name: str`
+
+                - `type: Literal["tool_reference"]`
+
+                  - `"tool_reference"`
+
+              - `class BetaToolChangeMCPToolReference: …`
+
+                Reference to a single MCP tool by its server and remote name — the
+                same `server_name`/`name` pair `mcp_tool_use` carries.
+
+                - `name: str`
+
+                - `server_name: str`
+
+                - `type: Literal["mcp_tool_reference"]`
+
+                  - `"mcp_tool_reference"`
+
+              - `class BetaToolChangeMCPToolsetReference: …`
+
+                Reference to every tool in the named MCP server's toolset.
+
+                - `server_name: str`
+
+                - `type: Literal["mcp_toolset_reference"]`
+
+                  - `"mcp_toolset_reference"`
+
+            - `type: Literal["tool_addition"]`
+
+              - `"tool_addition"`
+
+            - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+              Create a cache control breakpoint at this content block.
+
+          - `class BetaRequestToolRemovalBlock: …`
+
+            Mid-conversation directive to withdraw a tool.
+
+            `tool` references a tool (or MCP toolset) by name from the request's
+            `tools`; it is no longer offered to the model from this point in the
+            conversation onward.
+
+            - `tool: Tool`
+
+              Reference to a single tool the caller declared directly in
+              `tools[]`. Does not accept the composed `{server}_{name}` form the
+              server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+              `mcp_toolset_reference` for those.
+
+              - `class BetaToolChangeToolReference: …`
+
+                Reference to a single tool the caller declared directly in
+                `tools[]`. Does not accept the composed `{server}_{name}` form the
+                server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+                `mcp_toolset_reference` for those.
+
+              - `class BetaToolChangeMCPToolReference: …`
+
+                Reference to a single MCP tool by its server and remote name — the
+                same `server_name`/`name` pair `mcp_tool_use` carries.
+
+              - `class BetaToolChangeMCPToolsetReference: …`
+
+                Reference to every tool in the named MCP server's toolset.
+
+            - `type: Literal["tool_removal"]`
+
+              - `"tool_removal"`
+
+            - `cache_control: Optional[BetaCacheControlEphemeral]`
+
+              Create a cache control breakpoint at this content block.
 
         - `type: Literal["mid_conv_system"]`
 
@@ -1085,6 +1175,22 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         - `cache_control: Optional[BetaCacheControlEphemeral]`
 
           Create a cache control breakpoint at this content block.
+
+      - `class BetaRequestToolAdditionBlock: …`
+
+        Mid-conversation directive to surface a declared tool.
+
+        `tool` references a tool (or MCP toolset) by name from the request's
+        `tools`; it is offered to the model from this point in the
+        conversation onward.
+
+      - `class BetaRequestToolRemovalBlock: …`
+
+        Mid-conversation directive to withdraw a tool.
+
+        `tool` references a tool (or MCP toolset) by name from the request's
+        `tools`; it is no longer offered to the model from this point in the
+        conversation onward.
 
       - `class BetaFallbackBlockParam: …`
 
@@ -1112,7 +1218,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-            - `Literal["claude-sonnet-5", "claude-fable-5", "claude-mythos-5", 13 more]`
+            - `Literal["claude-sonnet-5", "claude-fable-5", "claude-mythos-5", 14 more]`
 
               The model that will complete your prompt.
 
@@ -1121,15 +1227,16 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
               - `claude-sonnet-5` - High-performance model for coding and agents
               - `claude-fable-5` - Next generation of intelligence for the hardest knowledge work and coding problems
               - `claude-mythos-5` - Most capable model for cybersecurity and biology research
-              - `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
-              - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
+              - `claude-opus-5` - Powerful intelligence for long-running agents and coding
+              - `claude-opus-4-8` - Powerful intelligence for long-running agents and coding
+              - `claude-opus-4-7` - Powerful intelligence for long-running agents and coding
               - `claude-mythos-preview` - Deprecated: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-              - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
+              - `claude-opus-4-6` - Powerful intelligence for long-running agents and coding
               - `claude-sonnet-4-6` - Best combination of speed and intelligence
               - `claude-haiku-4-5` - Fastest model with near-frontier intelligence
               - `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
-              - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
-              - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
+              - `claude-opus-4-5` - Powerful intelligence for long-running agents and coding
+              - `claude-opus-4-5-20251101` - Powerful intelligence for long-running agents and coding
               - `claude-sonnet-4-5` - High-performance model for agents and coding
               - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
               - `claude-opus-4-1` - Deprecated: Will reach end-of-life on August 5, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
@@ -1147,13 +1254,17 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                 Most capable model for cybersecurity and biology research
 
+              - `"claude-opus-5"`
+
+                Powerful intelligence for long-running agents and coding
+
               - `"claude-opus-4-8"`
 
-                Frontier intelligence for long-running agents and coding
+                Powerful intelligence for long-running agents and coding
 
               - `"claude-opus-4-7"`
 
-                Frontier intelligence for long-running agents and coding
+                Powerful intelligence for long-running agents and coding
 
               - `"claude-mythos-preview"`
 
@@ -1161,7 +1272,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               - `"claude-opus-4-6"`
 
-                Frontier intelligence for long-running agents and coding
+                Powerful intelligence for long-running agents and coding
 
               - `"claude-sonnet-4-6"`
 
@@ -1177,11 +1288,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               - `"claude-opus-4-5"`
 
-                Premium model combining maximum intelligence with practical performance
+                Powerful intelligence for long-running agents and coding
 
               - `"claude-opus-4-5-20251101"`
 
-                Premium model combining maximum intelligence with practical performance
+                Powerful intelligence for long-running agents and coding
 
               - `"claude-sonnet-4-5"`
 
@@ -1193,11 +1304,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               - `"claude-opus-4-1"`
 
-                Exceptional model for specialized complex tasks
+                Powerful intelligence for long-running agents and coding
 
               - `"claude-opus-4-1-20250805"`
 
-                Exceptional model for specialized complex tasks
+                Powerful intelligence for long-running agents and coding
 
             - `str`
 
@@ -1390,7 +1501,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     The `id` (`msg_...`) from this client's previous /v1/messages response. The server compares that request's prompt fingerprint against this one and returns `diagnostics.cache_miss_reason` when the prompt-cache prefix could not be reused. Pass `null` on the first turn to opt in without a prior message to compare.
 
-- `fallback_credit_token: Optional[str]`
+- `fallback_credit_token: Optional[FallbackCreditToken]`
 
   The `fallback_credit_token` from a prior refusal's `stop_details`.
 
@@ -1413,115 +1524,145 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
   When the appended-assistant form is used on a model that otherwise disallows
   assistant-turn prefill, this token also authorizes that one prefill.
 
-- `fallbacks: Optional[Iterable[BetaFallbackParam]]`
+  - `str`
 
-  Opt-in server-side retry on one or more substitute models when the requested model declines for policy reasons. Tried in order: if the first entry also declines, the second is tried, and so on.
+  - `class BetaFallbackCreditTokenParam: …`
 
-  - `model: Model`
+    Object form of `fallback_credit_token`: the token plus a redemption
+    mode.
 
-    The model that will complete your prompt.
+    Requires `anthropic-beta: fallback-credit-2026-07-01`; without that
+    header the field accepts the bare string only. The bare string and the
+    mode-less object are equivalent (both select `strict`), so wrapping
+    an existing token changes nothing by itself.
 
-    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+    - `token: str`
 
-  - `max_tokens: Optional[int]`
+      The opaque `fallback_credit_token` from a prior refusal's `stop_details` — the same string the bare-string form carries.
 
-  - `output_config: Optional[BetaOutputConfig]`
+    - `mode: Optional[Literal["strict", "best_effort"]]`
 
-    - `effort: Optional[Literal["low", "medium", "high", 2 more]]`
+      How a failing token affects the retry. `strict` (the default, and the bare-string behavior): a failing redemption is a 400 and the retry is not served. `best_effort`: the retry is served either way — a token-layer failure no longer rejects the request; the retry proceeds at normal price and the outcome is reported on the response's `usage.fallback_credit`. Two failures stay hard in both modes: a malformed token, and combining `fallback_credit_token` with `fallbacks`.
 
-      All possible effort levels.
+      - `"strict"`
 
-      - `"low"`
+      - `"best_effort"`
 
-      - `"medium"`
+- `fallbacks: Optional[BetaFallbacksParam]`
 
-      - `"high"`
+  Opt-in server-side retry on one or more substitute models when the requested model declines for policy reasons. Tried in order: if the first entry also declines, the second is tried, and so on. The string "default" requests the requested model's server-defined default fallback configuration.
 
-      - `"xhigh"`
+  - `List[BetaFallbackParam]`
 
-      - `"max"`
+    - `model: Model`
 
-    - `format: Optional[BetaJSONOutputFormat]`
+      The model that will complete your prompt.
 
-      A schema to specify Claude's output format in responses. See [structured outputs](../build-with-claude/build-with-claude-structured-outputs.md)
+      See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `schema: Dict[str, object]`
+    - `max_tokens: Optional[int]`
 
-        The JSON schema of the format
+    - `output_config: Optional[BetaOutputConfig]`
 
-      - `type: Literal["json_schema"]`
+      - `effort: Optional[Literal["low", "medium", "high", 2 more]]`
 
-        - `"json_schema"`
+        All possible effort levels.
 
-    - `task_budget: Optional[BetaTokenTaskBudget]`
+        - `"low"`
 
-      User-configurable total token budget across contexts.
+        - `"medium"`
 
-      - `total: int`
+        - `"high"`
 
-        Total token budget across all contexts in the session.
+        - `"xhigh"`
 
-      - `type: Literal["tokens"]`
+        - `"max"`
 
-        The budget type. Currently only 'tokens' is supported.
+      - `format: Optional[BetaJSONOutputFormat]`
 
-        - `"tokens"`
+        A schema to specify Claude's output format in responses. See [structured outputs](../build-with-claude/build-with-claude-structured-outputs.md)
 
-      - `remaining: Optional[int]`
+        - `schema: Dict[str, object]`
 
-        Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
+          The JSON schema of the format
 
-  - `speed: Optional[Literal["standard", "fast"]]`
+        - `type: Literal["json_schema"]`
 
-    Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+          - `"json_schema"`
 
-    - `"standard"`
+      - `task_budget: Optional[BetaTokenTaskBudget]`
 
-    - `"fast"`
+        User-configurable total token budget across contexts.
 
-  - `thinking: Optional[Thinking]`
+        - `total: int`
 
-    - `class BetaThinkingConfigEnabled: …`
+          Total token budget across all contexts in the session.
 
-      - `budget_tokens: int`
+        - `type: Literal["tokens"]`
 
-        Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
+          The budget type. Currently only 'tokens' is supported.
 
-        Must be ≥1024 and less than `max_tokens`.
+          - `"tokens"`
 
-        See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md) for details.
+        - `remaining: Optional[int]`
 
-      - `type: Literal["enabled"]`
+          Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
-        - `"enabled"`
+    - `speed: Optional[Literal["standard", "fast"]]`
 
-      - `display: Optional[Literal["summarized", "omitted"]]`
+      Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-        Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+      - `"standard"`
 
-        - `"summarized"`
+      - `"fast"`
 
-        - `"omitted"`
+    - `thinking: Optional[Thinking]`
 
-    - `class BetaThinkingConfigDisabled: …`
+      - `class BetaThinkingConfigEnabled: …`
 
-      - `type: Literal["disabled"]`
+        - `budget_tokens: int`
 
-        - `"disabled"`
+          Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
 
-    - `class BetaThinkingConfigAdaptive: …`
+          Must be ≥1024 and less than `max_tokens`.
 
-      - `type: Literal["adaptive"]`
+          See [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md) for details.
 
-        - `"adaptive"`
+        - `type: Literal["enabled"]`
 
-      - `display: Optional[Literal["summarized", "omitted"]]`
+          - `"enabled"`
 
-        Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+        - `display: Optional[Literal["summarized", "omitted"]]`
 
-        - `"summarized"`
+          Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
-        - `"omitted"`
+          - `"summarized"`
+
+          - `"omitted"`
+
+      - `class BetaThinkingConfigDisabled: …`
+
+        - `type: Literal["disabled"]`
+
+          - `"disabled"`
+
+      - `class BetaThinkingConfigAdaptive: …`
+
+        - `type: Literal["adaptive"]`
+
+          - `"adaptive"`
+
+        - `display: Optional[Literal["summarized", "omitted"]]`
+
+          Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+
+          - `"summarized"`
+
+          - `"omitted"`
+
+  - `Literal["default"]`
+
+    - `"default"`
 
 - `inference_geo: Optional[str]`
 
@@ -3010,7 +3151,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 27 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 29 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -3068,7 +3209,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `"server-side-fallback-2026-06-01"`
 
+    - `"server-side-fallback-2026-07-01"`
+
     - `"fallback-credit-2026-06-01"`
+
+    - `"fallback-credit-2026-07-01"`
 
     - `"agent-memory-2026-07-22"`
 
@@ -3927,7 +4072,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `Literal["claude-sonnet-5", "claude-fable-5", "claude-mythos-5", 13 more]`
+          - `Literal["claude-sonnet-5", "claude-fable-5", "claude-mythos-5", 14 more]`
 
             The model that will complete your prompt.
 
@@ -3936,15 +4081,16 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
             - `claude-sonnet-5` - High-performance model for coding and agents
             - `claude-fable-5` - Next generation of intelligence for the hardest knowledge work and coding problems
             - `claude-mythos-5` - Most capable model for cybersecurity and biology research
-            - `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
-            - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
+            - `claude-opus-5` - Powerful intelligence for long-running agents and coding
+            - `claude-opus-4-8` - Powerful intelligence for long-running agents and coding
+            - `claude-opus-4-7` - Powerful intelligence for long-running agents and coding
             - `claude-mythos-preview` - Deprecated: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-            - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
+            - `claude-opus-4-6` - Powerful intelligence for long-running agents and coding
             - `claude-sonnet-4-6` - Best combination of speed and intelligence
             - `claude-haiku-4-5` - Fastest model with near-frontier intelligence
             - `claude-haiku-4-5-20251001` - Fastest model with near-frontier intelligence
-            - `claude-opus-4-5` - Premium model combining maximum intelligence with practical performance
-            - `claude-opus-4-5-20251101` - Premium model combining maximum intelligence with practical performance
+            - `claude-opus-4-5` - Powerful intelligence for long-running agents and coding
+            - `claude-opus-4-5-20251101` - Powerful intelligence for long-running agents and coding
             - `claude-sonnet-4-5` - High-performance model for agents and coding
             - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
             - `claude-opus-4-1` - Deprecated: Will reach end-of-life on August 5, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
@@ -3962,13 +4108,17 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               Most capable model for cybersecurity and biology research
 
+            - `"claude-opus-5"`
+
+              Powerful intelligence for long-running agents and coding
+
             - `"claude-opus-4-8"`
 
-              Frontier intelligence for long-running agents and coding
+              Powerful intelligence for long-running agents and coding
 
             - `"claude-opus-4-7"`
 
-              Frontier intelligence for long-running agents and coding
+              Powerful intelligence for long-running agents and coding
 
             - `"claude-mythos-preview"`
 
@@ -3976,7 +4126,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `"claude-opus-4-6"`
 
-              Frontier intelligence for long-running agents and coding
+              Powerful intelligence for long-running agents and coding
 
             - `"claude-sonnet-4-6"`
 
@@ -3992,11 +4142,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `"claude-opus-4-5"`
 
-              Premium model combining maximum intelligence with practical performance
+              Powerful intelligence for long-running agents and coding
 
             - `"claude-opus-4-5-20251101"`
 
-              Premium model combining maximum intelligence with practical performance
+              Powerful intelligence for long-running agents and coding
 
             - `"claude-sonnet-4-5"`
 
@@ -4008,11 +4158,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             - `"claude-opus-4-1"`
 
-              Exceptional model for specialized complex tasks
+              Powerful intelligence for long-running agents and coding
 
             - `"claude-opus-4-1-20250805"`
 
-              Exceptional model for specialized complex tasks
+              Powerful intelligence for long-running agents and coding
 
           - `str`
 
@@ -4272,6 +4422,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
     * `"tool_use"`: the model invoked one or more tools
     * `"pause_turn"`: we paused a long-running turn. You may provide the response back as-is in a subsequent request to let the model continue.
     * `"refusal"`: when streaming classifiers intervene to handle potential policy violations
+    * `"model_context_window_exceeded"`: we exceeded the model's context window
 
     In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
@@ -4336,6 +4487,78 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
     - `cache_read_input_tokens: Optional[int]`
 
       The number of input tokens read from the cache.
+
+    - `fallback_credit: Optional[BetaFallbackCreditUsage]`
+
+      Outcome of the `fallback_credit_token` presented on this request.
+
+      - `status: Status`
+
+        Whether the fallback-credit reprice was applied to this response's billing.
+
+        A union discriminated on `type`. `redeemed`: the retry is billed as if
+        the conversation had been on the retry model all along — including when the
+        resulting shift is zero because there was nothing to move. `not_applied`:
+        no reprice was applied; the arm's `reason` says why.
+
+        - `class BetaFallbackCreditRedeemed: …`
+
+          The reprice was applied: the retry is billed as if the conversation
+          had been on the retry model all along.
+
+          - `type: Literal["redeemed"]`
+
+            - `"redeemed"`
+
+        - `class BetaFallbackCreditNotApplied: …`
+
+          No reprice was applied; `reason` says why.
+
+          - `reason: Literal["body_mismatch", "continuation_excluded", "continuation_only", 9 more]`
+
+            Why the reprice was not applied.
+
+            A closed enum; additions to the redemption-check vocabulary arrive as
+            deliberate schema updates.
+
+            - `"body_mismatch"`
+
+            - `"continuation_excluded"`
+
+            - `"continuation_only"`
+
+            - `"expired"`
+
+            - `"invalid_target_model"`
+
+            - `"not_enabled"`
+
+            - `"reprice_unavailable"`
+
+            - `"temporarily_unavailable"`
+
+            - `"variant_fields_present"`
+
+            - `"wrong_organization"`
+
+            - `"wrong_platform"`
+
+            - `"wrong_workspace"`
+
+          - `type: Literal["not_applied"]`
+
+            - `"not_applied"`
+
+          - `remove_to_redeem: Optional[List[str]]`
+
+            Request fields to remove before retrying, so the retry can redeem this
+            token.
+
+            Present exactly when `reason` is `variant_fields_present` — never null,
+            never an empty array; absent otherwise. Fields are named only from your own request, and only after
+            the sealed variant hash matched. A served best-effort retry has already
+            been billed at normal price; nothing redeems retroactively, but a corrected
+            re-send inside the token's five-minute window can still redeem.
 
     - `inference_geo: Optional[str]`
 
@@ -4640,6 +4863,11 @@ for message in client.beta.messages.create(
     },
     "cache_creation_input_tokens": 2051,
     "cache_read_input_tokens": 2051,
+    "fallback_credit": {
+      "status": {
+        "type": "redeemed"
+      }
+    },
     "inference_geo": "global",
     "input_tokens": 2095,
     "iterations": [

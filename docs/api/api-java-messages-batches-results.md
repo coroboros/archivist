@@ -743,13 +743,17 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             Most capable model for cybersecurity and biology research
 
+          - `CLAUDE_OPUS_5("claude-opus-5")`
+
+            Powerful intelligence for long-running agents and coding
+
           - `CLAUDE_OPUS_4_8("claude-opus-4-8")`
 
-            Frontier intelligence for long-running agents and coding
+            Powerful intelligence for long-running agents and coding
 
           - `CLAUDE_OPUS_4_7("claude-opus-4-7")`
 
-            Frontier intelligence for long-running agents and coding
+            Powerful intelligence for long-running agents and coding
 
           - `CLAUDE_MYTHOS_PREVIEW("claude-mythos-preview")`
 
@@ -757,7 +761,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           - `CLAUDE_OPUS_4_6("claude-opus-4-6")`
 
-            Frontier intelligence for long-running agents and coding
+            Powerful intelligence for long-running agents and coding
 
           - `CLAUDE_SONNET_4_6("claude-sonnet-4-6")`
 
@@ -773,11 +777,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           - `CLAUDE_OPUS_4_5("claude-opus-4-5")`
 
-            Premium model combining maximum intelligence with practical performance
+            Powerful intelligence for long-running agents and coding
 
           - `CLAUDE_OPUS_4_5_20251101("claude-opus-4-5-20251101")`
 
-            Premium model combining maximum intelligence with practical performance
+            Powerful intelligence for long-running agents and coding
 
           - `CLAUDE_SONNET_4_5("claude-sonnet-4-5")`
 
@@ -789,11 +793,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
 
-            Exceptional model for specialized complex tasks
+            Powerful intelligence for long-running agents and coding
 
           - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
 
-            Exceptional model for specialized complex tasks
+            Powerful intelligence for long-running agents and coding
 
         - `JsonValue; role "assistant"constant`
 
@@ -853,6 +857,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
           * `"tool_use"`: the model invoked one or more tools
           * `"pause_turn"`: we paused a long-running turn. You may provide the response back as-is in a subsequent request to let the model continue.
           * `"refusal"`: when streaming classifiers intervene to handle potential policy violations
+          * `"model_context_window_exceeded"`: we exceeded the model's context window
 
           In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
@@ -867,6 +872,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
           - `PAUSE_TURN("pause_turn")`
 
           - `REFUSAL("refusal")`
+
+          - `MODEL_CONTEXT_WINDOW_EXCEEDED("model_context_window_exceeded")`
 
         - `Optional<String> stopSequence`
 
