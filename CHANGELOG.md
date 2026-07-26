@@ -1,5 +1,22 @@
 # Changelog
 
+## 🤖 v1.5.68 - 26/07/2026
+
+File Changes:
+
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-agent-view.md`
+- Modified: `docs/code/code-env-vars.md`
+- Modified: `docs/code/code-hooks.md`
+- Modified: `docs/code/code-interactive-mode.md`
+- Modified: `docs/code/code-mcp.md`
+- Modified: `docs/code/code-overview.md`
+- Modified: `docs/code/code-permissions.md`
+- Modified: `docs/code/code-plugin-marketplaces.md`
+- Modified: `docs/code/code-quickstart.md`
+- Modified: `docs/code/code-troubleshoot-install.md`
+
+
 ## 🤖 v1.5.67 - 25/07/2026
 
 File Changes:
