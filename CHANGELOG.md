@@ -1,5 +1,17 @@
 # Changelog
 
+## 🤖 v1.5.71 - 27/07/2026
+
+File Changes:
+
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-hooks.md`
+- Modified: `docs/code/code-mcp.md`
+- Modified: `docs/code/code-plugins.md`
+- Modified: `docs/code/code-quickstart.md`
+- Modified: `docs/code/code-sessions.md`
+
+
 ## 🤖 v1.5.70 - 27/07/2026
 
 File Changes:
