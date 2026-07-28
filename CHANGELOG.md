@@ -1,5 +1,31 @@
 # Changelog
 
+## 🤖 v1.5.73 - 28/07/2026
+
+File Changes:
+
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-admin-setup.md`
+- Modified: `docs/code/code-claude-code-on-the-web.md`
+- Modified: `docs/code/code-commands.md`
+- Modified: `docs/code/code-data-usage.md`
+- Modified: `docs/code/code-desktop.md`
+- Modified: `docs/code/code-env-vars.md`
+- Modified: `docs/code/code-errors.md`
+- Modified: `docs/code/code-glossary.md`
+- Modified: `docs/code/code-mobile.md`
+- Modified: `docs/code/code-overview.md`
+- Modified: `docs/code/code-permission-modes.md`
+- Modified: `docs/code/code-remote-control.md`
+- Modified: `docs/code/code-routines.md`
+- Modified: `docs/code/code-security.md`
+- Modified: `docs/code/code-sessions.md`
+- Modified: `docs/code/code-settings.md`
+- Modified: `docs/code/code-ultraplan.md`
+- Modified: `docs/code/code-web-quickstart.md`
+- Added: `docs/code/code-cloud-environments.md`
+
+
 ## 🤖 v1.5.72 - 28/07/2026
 
 File Changes:
