@@ -1,5 +1,50 @@
 # Changelog
 
+## 🤖 v1.5.75 - 29/07/2026
+
+File Changes:
+
+- Modified: `docs/code/code-2026-w13.md`
+- Modified: `docs/code/code-2026-w14.md`
+- Modified: `docs/code/code-2026-w15.md`
+- Modified: `docs/code/code-2026-w22.md`
+- Modified: `docs/code/code-2026-w25.md`
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-accessibility.md`
+- Modified: `docs/code/code-agent-loop.md`
+- Modified: `docs/code/code-channels-reference.md`
+- Modified: `docs/code/code-chrome.md`
+- Modified: `docs/code/code-claude-apps-gateway-config.md`
+- Modified: `docs/code/code-claude-apps-gateway-deploy.md`
+- Modified: `docs/code/code-claude-apps-gateway-spend-limits.md`
+- Modified: `docs/code/code-claude-apps-gateway.md`
+- Modified: `docs/code/code-cost-tracking.md`
+- Modified: `docs/code/code-data-usage.md`
+- Modified: `docs/code/code-devcontainer.md`
+- Modified: `docs/code/code-features-overview.md`
+- Modified: `docs/code/code-gitlab-ci-cd.md`
+- Modified: `docs/code/code-headless.md`
+- Modified: `docs/code/code-hooks.md`
+- Modified: `docs/code/code-hosting.md`
+- Modified: `docs/code/code-how-claude-code-works.md`
+- Modified: `docs/code/code-interactive-mode.md`
+- Modified: `docs/code/code-mcp-quickstart.md`
+- Modified: `docs/code/code-mcp.md`
+- Modified: `docs/code/code-overview.md`
+- Modified: `docs/code/code-permissions.md`
+- Modified: `docs/code/code-plugin-marketplaces.md`
+- Modified: `docs/code/code-plugins.md`
+- Modified: `docs/code/code-prompt-caching.md`
+- Modified: `docs/code/code-quickstart.md`
+- Modified: `docs/code/code-server-managed-settings.md`
+- Modified: `docs/code/code-settings.md`
+- Modified: `docs/code/code-skills.md`
+- Modified: `docs/code/code-sub-agents.md`
+- Modified: `docs/code/code-typescript.md`
+- Modified: `docs/code/code-vs-code.md`
+- Added: `docs/code/code-claude-apps-gateway-on-aws.md`
+
+
 ## 🤖 v1.5.74 - 29/07/2026
 
 File Changes:
