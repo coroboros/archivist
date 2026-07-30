@@ -1,5 +1,60 @@
 # Changelog
 
+## 🤖 v1.5.76 - 30/07/2026
+
+File Changes:
+
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-agent-teams.md`
+- Modified: `docs/code/code-agent-view.md`
+- Modified: `docs/code/code-amazon-bedrock.md`
+- Modified: `docs/code/code-authentication.md`
+- Modified: `docs/code/code-channels-reference.md`
+- Modified: `docs/code/code-checkpointing.md`
+- Modified: `docs/code/code-chrome.md`
+- Modified: `docs/code/code-claude-apps-gateway-config.md`
+- Modified: `docs/code/code-custom-tools.md`
+- Modified: `docs/code/code-deep-links.md`
+- Modified: `docs/code/code-desktop-scheduled-tasks.md`
+- Modified: `docs/code/code-desktop-wsl.md`
+- Modified: `docs/code/code-desktop.md`
+- Modified: `docs/code/code-discover-plugins.md`
+- Modified: `docs/code/code-errors.md`
+- Modified: `docs/code/code-features-overview.md`
+- Modified: `docs/code/code-gateways.md`
+- Modified: `docs/code/code-goal.md`
+- Modified: `docs/code/code-google-vertex-ai.md`
+- Modified: `docs/code/code-headless.md`
+- Modified: `docs/code/code-hooks-guide.md`
+- Modified: `docs/code/code-hooks.md`
+- Modified: `docs/code/code-interactive-mode.md`
+- Modified: `docs/code/code-jetbrains.md`
+- Modified: `docs/code/code-llm-gateway-connect.md`
+- Modified: `docs/code/code-mcp.md`
+- Modified: `docs/code/code-model-config.md`
+- Modified: `docs/code/code-observability.md`
+- Modified: `docs/code/code-output-styles.md`
+- Modified: `docs/code/code-overview.md`
+- Modified: `docs/code/code-permissions.md`
+- Modified: `docs/code/code-plugin-hints.md`
+- Modified: `docs/code/code-plugins-reference.md`
+- Modified: `docs/code/code-plugins.md`
+- Modified: `docs/code/code-quickstart.md`
+- Modified: `docs/code/code-routines.md`
+- Modified: `docs/code/code-sandboxing.md`
+- Modified: `docs/code/code-secure-deployment.md`
+- Modified: `docs/code/code-sessions.md`
+- Modified: `docs/code/code-settings.md`
+- Modified: `docs/code/code-skills.md`
+- Modified: `docs/code/code-slash-commands.md`
+- Modified: `docs/code/code-sub-agents.md`
+- Modified: `docs/code/code-subagents.md`
+- Modified: `docs/code/code-todo-tracking.md`
+- Modified: `docs/code/code-ultrareview.md`
+- Modified: `docs/code/code-voice-dictation.md`
+- Modified: `docs/code/code-vs-code.md`
+
+
 ## 🤖 v1.5.75 - 29/07/2026
 
 File Changes:
