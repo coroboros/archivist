@@ -1,5 +1,14 @@
 # Changelog
 
+## 🤖 v1.5.78 - 31/07/2026
+
+File Changes:
+
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-permissions.md`
+- Modified: `docs/code/code-skills.md`
+
+
 ## 🤖 v1.5.77 - 30/07/2026
 
 File Changes:
