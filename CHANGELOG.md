@@ -1,5 +1,36 @@
 # Changelog
 
+## 🤖 v1.5.84 - 03/08/2026
+
+File Changes:
+
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-agent-loop.md`
+- Modified: `docs/code/code-custom-tools.md`
+- Modified: `docs/code/code-desktop.md`
+- Modified: `docs/code/code-discover-plugins.md`
+- Modified: `docs/code/code-env-vars.md`
+- Modified: `docs/code/code-fullscreen.md`
+- Modified: `docs/code/code-headless.md`
+- Modified: `docs/code/code-hooks-guide.md`
+- Modified: `docs/code/code-hooks.md`
+- Modified: `docs/code/code-interactive-mode.md`
+- Modified: `docs/code/code-keybindings.md`
+- Modified: `docs/code/code-mcp.md`
+- Modified: `docs/code/code-migration-guide.md`
+- Modified: `docs/code/code-overview.md`
+- Modified: `docs/code/code-permissions.md`
+- Modified: `docs/code/code-plugin-marketplaces.md`
+- Modified: `docs/code/code-plugins-reference.md`
+- Modified: `docs/code/code-quickstart.md`
+- Modified: `docs/code/code-routines.md`
+- Modified: `docs/code/code-sessions.md`
+- Modified: `docs/code/code-settings.md`
+- Modified: `docs/code/code-streaming-vs-single-mode.md`
+- Modified: `docs/code/code-sub-agents.md`
+- Modified: `docs/code/code-troubleshoot-install.md`
+
+
 ## 🤖 v1.5.83 - 02/08/2026
 
 File Changes:
