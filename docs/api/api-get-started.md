@@ -666,7 +666,7 @@ You made your first API call. Next, learn the Messages API patterns you'll use i
 
 Once you're comfortable with the basics, explore further:
 
-<CardGroup cols={3}>
+<CardGroup cols={2}>
   <Card title="Models overview" icon="brain" href="../about-claude/about-claude-models-overview.md">
     Compare Claude models by capability and cost.
   </Card>
@@ -677,5 +677,9 @@ Once you're comfortable with the basics, explore further:
 
   <Card title="Client SDKs" icon="code-brackets" href="../general/general-cli-sdks-libraries-overview.md">
     Reference documentation for Python, TypeScript, C#, and other client libraries.
+  </Card>
+
+  <Card title="Authentication" icon="lock" href="../manage-claude/manage-claude-authentication.md">
+    Compare API keys and Workload Identity Federation, and set key expiration.
   </Card>
 </CardGroup>

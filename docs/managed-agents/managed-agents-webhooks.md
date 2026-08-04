@@ -325,7 +325,7 @@ Set `ANTHROPIC_WEBHOOK_SIGNING_KEY` to the `whsec_`-prefixed secret shown at end
       halt 400, "invalid signature"
     end
 
-    if event.data.type == "session.status_idled"
+    if event.data.type == :"session.status_idled"
       puts "session idled: #{event.data.id}"
     end
     # handle other event types
@@ -408,7 +408,7 @@ Every event payload has the same structure, including the event type, identifier
   ```
 
   ```ruby Ruby
-  if event.data.type == "session.status_idled"
+  if event.data.type == :"session.status_idled"
     session = client.beta.sessions.retrieve(event.data.id)
     notify_user(session)
   end

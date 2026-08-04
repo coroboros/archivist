@@ -47,6 +47,12 @@ Follow these steps to go from zero to a working Claude integration.
     [Go to the quickstart](../api/api-get-started.md)
   </Step>
 
+  <Step title="Secure your credentials">
+    Set an expiration when you create your API key. Keep the key out of source control, client-side code, and prompts. Check whether your workload can use Workload Identity Federation instead of a static key.
+
+    [Read the authentication guide](../manage-claude/manage-claude-authentication.md)
+  </Step>
+
   <Step title="Understand the Messages API">
     Learn the core request and response structure, including multi-turn conversations, system prompts, and stop reasons.
 
