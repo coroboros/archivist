@@ -1,5 +1,106 @@
 # Changelog
 
+## 🤖 v1.5.88 - 05/08/2026
+
+File Changes:
+
+- Modified: `docs/agents-and-tools/agents-and-tools-README.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-advisor-tool.md`
+- Modified: `docs/api/api-README.md`
+- Modified: `docs/api/api-admin-analytics-artifacts-list.md`
+- Modified: `docs/api/api-admin-analytics-artifacts.md`
+- Modified: `docs/api/api-admin-analytics-chat_projects-list.md`
+- Modified: `docs/api/api-admin-analytics-chat_projects.md`
+- Modified: `docs/api/api-admin-analytics-connectors-list.md`
+- Modified: `docs/api/api-admin-analytics-connectors.md`
+- Modified: `docs/api/api-admin-analytics-cost-list.md`
+- Modified: `docs/api/api-admin-analytics-cost-list_by_user.md`
+- Modified: `docs/api/api-admin-analytics-cost.md`
+- Modified: `docs/api/api-admin-analytics-plugins-list.md`
+- Modified: `docs/api/api-admin-analytics-plugins.md`
+- Modified: `docs/api/api-admin-analytics-retrieve_summaries.md`
+- Modified: `docs/api/api-admin-analytics-skills-list.md`
+- Modified: `docs/api/api-admin-analytics-skills.md`
+- Modified: `docs/api/api-admin-analytics-usage-list.md`
+- Modified: `docs/api/api-admin-analytics-usage-list_by_user.md`
+- Modified: `docs/api/api-admin-analytics-usage.md`
+- Modified: `docs/api/api-admin-analytics-users-list.md`
+- Modified: `docs/api/api-admin-analytics-users.md`
+- Modified: `docs/api/api-admin-analytics.md`
+- Modified: `docs/api/api-admin-cost_report-retrieve.md`
+- Modified: `docs/api/api-admin-cost_report.md`
+- Modified: `docs/api/api-admin-rate_limits-list.md`
+- Modified: `docs/api/api-admin-rate_limits.md`
+- Modified: `docs/api/api-admin-usage_report-retrieve_claude_code.md`
+- Modified: `docs/api/api-admin-usage_report-retrieve_messages.md`
+- Modified: `docs/api/api-admin-usage_report.md`
+- Modified: `docs/api/api-admin-workspaces-create.md`
+- Modified: `docs/api/api-admin-workspaces-rate_limits-list.md`
+- Modified: `docs/api/api-admin-workspaces-rate_limits.md`
+- Modified: `docs/api/api-admin-workspaces-update.md`
+- Modified: `docs/api/api-admin-workspaces.md`
+- Modified: `docs/api/api-admin.md`
+- Modified: `docs/build-with-claude/build-with-claude-README.md`
+- Modified: `docs/build-with-claude/build-with-claude-compaction.md`
+- Modified: `docs/build-with-claude/build-with-claude-structured-outputs.md`
+- Modified: `docs/build-with-claude/build-with-claude-thinking.md`
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-accessibility.md`
+- Modified: `docs/code/code-agent-loop.md`
+- Modified: `docs/code/code-agent-view.md`
+- Modified: `docs/code/code-changelog.md`
+- Modified: `docs/code/code-channels.md`
+- Modified: `docs/code/code-claude-apps-gateway-config.md`
+- Modified: `docs/code/code-claude-apps-gateway.md`
+- Modified: `docs/code/code-claude-code-on-the-web.md`
+- Modified: `docs/code/code-claude-security.md`
+- Modified: `docs/code/code-cli-reference.md`
+- Modified: `docs/code/code-code-review.md`
+- Modified: `docs/code/code-commands.md`
+- Modified: `docs/code/code-common-workflows.md`
+- Modified: `docs/code/code-context-window.md`
+- Modified: `docs/code/code-costs.md`
+- Modified: `docs/code/code-desktop.md`
+- Modified: `docs/code/code-discover-plugins.md`
+- Modified: `docs/code/code-env-vars.md`
+- Modified: `docs/code/code-errors.md`
+- Modified: `docs/code/code-fast-mode.md`
+- Modified: `docs/code/code-feature-availability.md`
+- Modified: `docs/code/code-google-vertex-ai.md`
+- Modified: `docs/code/code-hooks-guide.md`
+- Modified: `docs/code/code-hosting.md`
+- Modified: `docs/code/code-large-codebases.md`
+- Modified: `docs/code/code-managed-mcp.md`
+- Modified: `docs/code/code-mcp.md`
+- Modified: `docs/code/code-permission-modes.md`
+- Modified: `docs/code/code-plugin-marketplaces.md`
+- Modified: `docs/code/code-plugins.md`
+- Modified: `docs/code/code-prompt-caching.md`
+- Modified: `docs/code/code-quickstart.md`
+- Modified: `docs/code/code-remote-control.md`
+- Modified: `docs/code/code-sandbox-environments.md`
+- Modified: `docs/code/code-sandboxing.md`
+- Modified: `docs/code/code-security-guidance.md`
+- Modified: `docs/code/code-security.md`
+- Modified: `docs/code/code-settings.md`
+- Modified: `docs/code/code-skills.md`
+- Modified: `docs/code/code-sub-agents.md`
+- Modified: `docs/code/code-terminal-config.md`
+- Modified: `docs/code/code-tool-search.md`
+- Modified: `docs/code/code-tools-reference.md`
+- Modified: `docs/code/code-troubleshooting.md`
+- Modified: `docs/code/code-typescript-v2-preview.md`
+- Modified: `docs/code/code-typescript.md`
+- Deleted: `docs/code/code-ultraplan.md`
+- Modified: `docs/code/code-ultrareview.md`
+- Modified: `docs/code/code-vs-code.md`
+- Modified: `docs/code/code-web-quickstart.md`
+- Modified: `docs/general/general-README.md`
+- Modified: `docs/general/general-cli-sdks-libraries-libraries-apple-foundation-models.md`
+- Modified: `docs/managed-agents/managed-agents-README.md`
+- Modified: `docs/managed-agents/managed-agents-migration.md`
+
+
 ## 🤖 v1.5.87 - 04/08/2026
 
 File Changes:
