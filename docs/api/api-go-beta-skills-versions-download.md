@@ -110,27 +110,27 @@ Download a skill version's content as a zip archive.
 package main
 
 import (
-  "context"
-  "fmt"
+	"context"
+	"fmt"
 
-  "github.com/anthropics/anthropic-sdk-go"
-  "github.com/anthropics/anthropic-sdk-go/option"
+	"github.com/anthropics/anthropic-sdk-go"
+	"github.com/anthropics/anthropic-sdk-go/option"
 )
 
 func main() {
-  client := anthropic.NewClient(
-    option.WithAPIKey("my-anthropic-api-key"),
-  )
-  response, err := client.Beta.Skills.Versions.Download(
-    context.TODO(),
-    "version",
-    anthropic.BetaSkillVersionDownloadParams{
-      SkillID: "skill_id",
-    },
-  )
-  if err != nil {
-    panic(err.Error())
-  }
-  fmt.Printf("%+v\n", response)
+	client := anthropic.NewClient(
+		option.WithAPIKey("my-anthropic-api-key"),
+	)
+	response, err := client.Beta.Skills.Versions.Download(
+		context.TODO(),
+		"version",
+		anthropic.BetaSkillVersionDownloadParams{
+			SkillID: "skill_id",
+		},
+	)
+	if err != nil {
+		panic(err.Error())
+	}
+	fmt.Printf("%+v\n", response)
 }
 ```

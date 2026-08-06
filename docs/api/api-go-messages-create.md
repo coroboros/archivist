@@ -2959,33 +2959,33 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 package main
 
 import (
-  "context"
-  "fmt"
+	"context"
+	"fmt"
 
-  "github.com/anthropics/anthropic-sdk-go"
-  "github.com/anthropics/anthropic-sdk-go/option"
+	"github.com/anthropics/anthropic-sdk-go"
+	"github.com/anthropics/anthropic-sdk-go/option"
 )
 
 func main() {
-  client := anthropic.NewClient(
-    option.WithAPIKey("my-anthropic-api-key"),
-  )
-  message, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-    MaxTokens: 1024,
-    Messages: []anthropic.MessageParam{anthropic.MessageParam{
-      Content: []anthropic.ContentBlockParamUnion{anthropic.ContentBlockParamUnion{
-        OfText: &anthropic.TextBlockParam{
-          Text: "x",
-        },
-      }},
-      Role: anthropic.MessageParamRoleUser,
-    }},
-    Model: anthropic.ModelClaudeOpus4_6,
-  })
-  if err != nil {
-    panic(err.Error())
-  }
-  fmt.Printf("%+v\n", message.ID)
+	client := anthropic.NewClient(
+		option.WithAPIKey("my-anthropic-api-key"),
+	)
+	message, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+		MaxTokens: 1024,
+		Messages: []anthropic.MessageParam{anthropic.MessageParam{
+			Content: []anthropic.ContentBlockParamUnion{anthropic.ContentBlockParamUnion{
+				OfText: &anthropic.TextBlockParam{
+					Text: "x",
+				},
+			}},
+			Role: anthropic.MessageParamRoleUser,
+		}},
+		Model: anthropic.ModelClaudeOpus4_6,
+	})
+	if err != nil {
+		panic(err.Error())
+	}
+	fmt.Printf("%+v\n", message.ID)
 }
 ```
 

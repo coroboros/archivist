@@ -154,30 +154,30 @@ Create Skill Version
 package main
 
 import (
-  "bytes"
-  "context"
-  "fmt"
-  "io"
+	"bytes"
+	"context"
+	"fmt"
+	"io"
 
-  "github.com/anthropics/anthropic-sdk-go"
-  "github.com/anthropics/anthropic-sdk-go/option"
+	"github.com/anthropics/anthropic-sdk-go"
+	"github.com/anthropics/anthropic-sdk-go/option"
 )
 
 func main() {
-  client := anthropic.NewClient(
-    option.WithAPIKey("my-anthropic-api-key"),
-  )
-  version, err := client.Beta.Skills.Versions.New(
-    context.TODO(),
-    "skill_id",
-    anthropic.BetaSkillVersionNewParams{
-      Files: []io.Reader{io.Reader(bytes.NewBuffer([]byte("Example data")))},
-    },
-  )
-  if err != nil {
-    panic(err.Error())
-  }
-  fmt.Printf("%+v\n", version.ID)
+	client := anthropic.NewClient(
+		option.WithAPIKey("my-anthropic-api-key"),
+	)
+	version, err := client.Beta.Skills.Versions.New(
+		context.TODO(),
+		"skill_id",
+		anthropic.BetaSkillVersionNewParams{
+			Files: []io.Reader{io.Reader(bytes.NewBuffer([]byte("Example data")))},
+		},
+	)
+	if err != nil {
+		panic(err.Error())
+	}
+	fmt.Printf("%+v\n", version.ID)
 }
 ```
 

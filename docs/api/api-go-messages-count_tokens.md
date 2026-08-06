@@ -1962,32 +1962,32 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 package main
 
 import (
-  "context"
-  "fmt"
+	"context"
+	"fmt"
 
-  "github.com/anthropics/anthropic-sdk-go"
-  "github.com/anthropics/anthropic-sdk-go/option"
+	"github.com/anthropics/anthropic-sdk-go"
+	"github.com/anthropics/anthropic-sdk-go/option"
 )
 
 func main() {
-  client := anthropic.NewClient(
-    option.WithAPIKey("my-anthropic-api-key"),
-  )
-  messageTokensCount, err := client.Messages.CountTokens(context.TODO(), anthropic.MessageCountTokensParams{
-    Messages: []anthropic.MessageParam{anthropic.MessageParam{
-      Content: []anthropic.ContentBlockParamUnion{anthropic.ContentBlockParamUnion{
-        OfText: &anthropic.TextBlockParam{
-          Text: "x",
-        },
-      }},
-      Role: anthropic.MessageParamRoleUser,
-    }},
-    Model: anthropic.ModelClaudeOpus4_6,
-  })
-  if err != nil {
-    panic(err.Error())
-  }
-  fmt.Printf("%+v\n", messageTokensCount.InputTokens)
+	client := anthropic.NewClient(
+		option.WithAPIKey("my-anthropic-api-key"),
+	)
+	messageTokensCount, err := client.Messages.CountTokens(context.TODO(), anthropic.MessageCountTokensParams{
+		Messages: []anthropic.MessageParam{anthropic.MessageParam{
+			Content: []anthropic.ContentBlockParamUnion{anthropic.ContentBlockParamUnion{
+				OfText: &anthropic.TextBlockParam{
+					Text: "x",
+				},
+			}},
+			Role: anthropic.MessageParamRoleUser,
+		}},
+		Model: anthropic.ModelClaudeOpus4_6,
+	})
+	if err != nil {
+		panic(err.Error())
+	}
+	fmt.Printf("%+v\n", messageTokensCount.InputTokens)
 }
 ```
 

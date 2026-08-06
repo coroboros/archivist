@@ -8,21 +8,21 @@ generated: true
 
 Give Claude screenshot, mouse, and keyboard control of a desktop environment with the computer use tool.
 
+## Compatibility
+- Status: Beta
+- [Beta header](../api/api-beta-headers.md): `computer-use-2025-11-24`
+- [ZDR](../manage-claude/manage-claude-api-and-data-retention.md): eligible (excludes [Covered Models](../manage-claude/manage-claude-api-and-data-retention.md#model-specific-data-retention-requirements))
+- Supported models: `claude-opus-5`, `claude-sonnet-5`, `claude-opus-4-8`, `claude-opus-4-7`, `claude-opus-4-6`, `claude-sonnet-4-6`, `claude-opus-4-5-20251101`
+- Platforms: Claude API (beta), Claude Platform on AWS (beta), Amazon Bedrock (beta), Google Cloud (beta), Microsoft Foundry (beta)
+
 ---
 
 Claude can interact with computer environments through the computer use tool, which provides screenshot capabilities and mouse/keyboard control for autonomous desktop interaction.
 
 <Note>
-  Computer use is in beta and requires a [beta header](../api/api-beta-headers.md):
-
-  * `"computer-use-2025-11-24"` for Claude Opus 5, Claude Sonnet 5, Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 4.6, and Claude Opus 4.5
-  * `"computer-use-2025-01-24"` for Claude Sonnet 4.5, Claude Haiku 4.5, Claude Opus 4.1 ([deprecated](../about-claude/about-claude-model-deprecations.md)), Claude Sonnet 4 ([retired, except on Bedrock and Google Cloud](../about-claude/about-claude-model-deprecations.md)), and Claude Opus 4 ([retired, except on Google Cloud](../about-claude/about-claude-model-deprecations.md))
+  On Claude Sonnet 4.5, Claude Haiku 4.5, Claude Opus 4.1 ([retired, except on Bedrock and Google Cloud](../about-claude/about-claude-model-deprecations.md)), Claude Sonnet 4 ([retired, except on Bedrock and Google Cloud](../about-claude/about-claude-model-deprecations.md)), and Claude Opus 4 ([retired, except on Google Cloud](../about-claude/about-claude-model-deprecations.md)), use the earlier `computer-use-2025-01-24` [beta header](../api/api-beta-headers.md) instead of `computer-use-2025-11-24`.
 
   Reach out through the [feedback form](https://forms.gle/H6UFuXaaLywri9hz6) to share your feedback on this feature.
-</Note>
-
-<Note>
-  For how zero data retention (ZDR) applies to this feature, see [API and data retention](../manage-claude/manage-claude-api-and-data-retention.md).
 </Note>
 
 ## Overview

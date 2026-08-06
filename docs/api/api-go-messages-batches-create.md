@@ -2332,38 +2332,38 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 package main
 
 import (
-  "context"
-  "fmt"
+	"context"
+	"fmt"
 
-  "github.com/anthropics/anthropic-sdk-go"
-  "github.com/anthropics/anthropic-sdk-go/option"
+	"github.com/anthropics/anthropic-sdk-go"
+	"github.com/anthropics/anthropic-sdk-go/option"
 )
 
 func main() {
-  client := anthropic.NewClient(
-    option.WithAPIKey("my-anthropic-api-key"),
-  )
-  messageBatch, err := client.Messages.Batches.New(context.TODO(), anthropic.MessageBatchNewParams{
-    Requests: []anthropic.MessageBatchNewParamsRequest{anthropic.MessageBatchNewParamsRequest{
-      CustomID: "my-custom-id-1",
-      Params: anthropic.MessageBatchNewParamsRequestParams{
-        MaxTokens: 1024,
-        Messages: []anthropic.MessageParam{anthropic.MessageParam{
-          Content: []anthropic.ContentBlockParamUnion{anthropic.ContentBlockParamUnion{
-            OfText: &anthropic.TextBlockParam{
-              Text: "x",
-            },
-          }},
-          Role: anthropic.MessageParamRoleUser,
-        }},
-        Model: anthropic.ModelClaudeOpus4_6,
-      },
-    }},
-  })
-  if err != nil {
-    panic(err.Error())
-  }
-  fmt.Printf("%+v\n", messageBatch.ID)
+	client := anthropic.NewClient(
+		option.WithAPIKey("my-anthropic-api-key"),
+	)
+	messageBatch, err := client.Messages.Batches.New(context.TODO(), anthropic.MessageBatchNewParams{
+		Requests: []anthropic.MessageBatchNewParamsRequest{anthropic.MessageBatchNewParamsRequest{
+			CustomID: "my-custom-id-1",
+			Params: anthropic.MessageBatchNewParamsRequestParams{
+				MaxTokens: 1024,
+				Messages: []anthropic.MessageParam{anthropic.MessageParam{
+					Content: []anthropic.ContentBlockParamUnion{anthropic.ContentBlockParamUnion{
+						OfText: &anthropic.TextBlockParam{
+							Text: "x",
+						},
+					}},
+					Role: anthropic.MessageParamRoleUser,
+				}},
+				Model: anthropic.ModelClaudeOpus4_6,
+			},
+		}},
+	})
+	if err != nil {
+		panic(err.Error())
+	}
+	fmt.Printf("%+v\n", messageBatch.ID)
 }
 ```
 

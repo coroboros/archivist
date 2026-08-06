@@ -99,7 +99,7 @@ The Batches API offers significant cost savings. All usage is charged at 50% of 
 | Claude Opus 4.7                                                                                               | $2.50 / MTok | $12.50 / MTok |
 | Claude Opus 4.6                                                                                               | $2.50 / MTok | $12.50 / MTok |
 | Claude Opus 4.5                                                                                               | $2.50 / MTok | $12.50 / MTok |
-| Claude Opus 4.1 ([deprecated](../about-claude/about-claude-model-deprecations.md))                                      | $7.50 / MTok | $37.50 / MTok |
+| Claude Opus 4.1 ([retired, except on Bedrock and Google Cloud](../about-claude/about-claude-model-deprecations.md))     | $7.50 / MTok | $37.50 / MTok |
 | Claude Opus 4 ([retired, except on Google Cloud](../about-claude/about-claude-model-deprecations.md))                   | $7.50 / MTok | $37.50 / MTok |
 | Claude Sonnet 5 [through August 31, 2026](../about-claude/about-claude-pricing.md#claude-sonnet-5-introductory-pricing) | $1 / MTok    | $5 / MTok     |
 | Claude Sonnet 5 starting September 1, 2026                                                                    | $1.50 / MTok | $7.50 / MTok  |

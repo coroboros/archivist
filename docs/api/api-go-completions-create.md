@@ -281,26 +281,26 @@ Future models and features will not be compatible with Text Completions. See our
 package main
 
 import (
-  "context"
-  "fmt"
+	"context"
+	"fmt"
 
-  "github.com/anthropics/anthropic-sdk-go"
-  "github.com/anthropics/anthropic-sdk-go/option"
+	"github.com/anthropics/anthropic-sdk-go"
+	"github.com/anthropics/anthropic-sdk-go/option"
 )
 
 func main() {
-  client := anthropic.NewClient(
-    option.WithAPIKey("my-anthropic-api-key"),
-  )
-  completion, err := client.Completions.New(context.TODO(), anthropic.CompletionNewParams{
-    MaxTokensToSample: 256,
-    Model: anthropic.ModelClaudeSonnet5,
-    Prompt: "\n\nHuman: Hello, world!\n\nAssistant:",
-  })
-  if err != nil {
-    panic(err.Error())
-  }
-  fmt.Printf("%+v\n", completion.ID)
+	client := anthropic.NewClient(
+		option.WithAPIKey("my-anthropic-api-key"),
+	)
+	completion, err := client.Completions.New(context.TODO(), anthropic.CompletionNewParams{
+		MaxTokensToSample: 256,
+		Model:             anthropic.ModelClaudeSonnet5,
+		Prompt:            "\n\nHuman: Hello, world!\n\nAssistant:",
+	})
+	if err != nil {
+		panic(err.Error())
+	}
+	fmt.Printf("%+v\n", completion.ID)
 }
 ```
 

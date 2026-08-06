@@ -8,11 +8,11 @@ generated: true
 
 Process PDFs with Claude: extract text, analyze charts, and understand visual content from your documents.
 
----
+## Compatibility
+- [ZDR](../manage-claude/manage-claude-api-and-data-retention.md): eligible (excludes [Covered Models](../manage-claude/manage-claude-api-and-data-retention.md#model-specific-data-retention-requirements))
+- Platforms: Claude API, Claude Platform on AWS, Amazon Bedrock, Google Cloud, Microsoft Foundry
 
-<Note>
-  For how zero data retention (ZDR) applies to this feature, see [API and data retention](../manage-claude/manage-claude-api-and-data-retention.md).
-</Note>
+---
 
 You can ask Claude about any text, pictures, charts, and tables in PDFs you provide. Some sample use cases:
 
@@ -43,7 +43,7 @@ Because PDF support relies on Claude's vision capabilities, it is subject to the
 
 ### Supported platforms and models
 
-PDF support is available on the Claude API, [Amazon Bedrock](./build-with-claude-claude-in-amazon-bedrock.md) (see [Amazon Bedrock PDF support](#amazon-bedrock-pdf-support)), [Claude Platform on AWS](./build-with-claude-claude-platform-on-aws.md), [Google Cloud](./build-with-claude-claude-on-vertex-ai.md), and [Microsoft Foundry](./build-with-claude-claude-in-microsoft-foundry.md). All [active models](../about-claude/about-claude-models-overview.md) support PDF processing.
+All [active models](../about-claude/about-claude-models-overview.md) support PDF processing. For PDF support through Amazon Bedrock's Converse API, see [Amazon Bedrock PDF support](#amazon-bedrock-pdf-support).
 
 ### Amazon Bedrock PDF support
 

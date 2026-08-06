@@ -132,24 +132,22 @@ Creates a tunnel. Creation allocates a fresh hostname and provisions the tunnel;
 package main
 
 import (
-  "context"
-  "fmt"
+	"context"
+	"fmt"
 
-  "github.com/anthropics/anthropic-sdk-go"
-  "github.com/anthropics/anthropic-sdk-go/option"
+	"github.com/anthropics/anthropic-sdk-go"
+	"github.com/anthropics/anthropic-sdk-go/option"
 )
 
 func main() {
-  client := anthropic.NewClient(
-    option.WithAPIKey("my-anthropic-api-key"),
-  )
-  betaTunnel, err := client.Beta.Tunnels.New(context.TODO(), anthropic.BetaTunnelNewParams{
-
-  })
-  if err != nil {
-    panic(err.Error())
-  }
-  fmt.Printf("%+v\n", betaTunnel.ID)
+	client := anthropic.NewClient(
+		option.WithAPIKey("my-anthropic-api-key"),
+	)
+	betaTunnel, err := client.Beta.Tunnels.New(context.TODO(), anthropic.BetaTunnelNewParams{})
+	if err != nil {
+		panic(err.Error())
+	}
+	fmt.Printf("%+v\n", betaTunnel.ID)
 }
 ```
 
@@ -290,28 +288,26 @@ Fetches a tunnel by ID.
 package main
 
 import (
-  "context"
-  "fmt"
+	"context"
+	"fmt"
 
-  "github.com/anthropics/anthropic-sdk-go"
-  "github.com/anthropics/anthropic-sdk-go/option"
+	"github.com/anthropics/anthropic-sdk-go"
+	"github.com/anthropics/anthropic-sdk-go/option"
 )
 
 func main() {
-  client := anthropic.NewClient(
-    option.WithAPIKey("my-anthropic-api-key"),
-  )
-  betaTunnel, err := client.Beta.Tunnels.Get(
-    context.TODO(),
-    "tunnel_id",
-    anthropic.BetaTunnelGetParams{
-
-    },
-  )
-  if err != nil {
-    panic(err.Error())
-  }
-  fmt.Printf("%+v\n", betaTunnel.ID)
+	client := anthropic.NewClient(
+		option.WithAPIKey("my-anthropic-api-key"),
+	)
+	betaTunnel, err := client.Beta.Tunnels.Get(
+		context.TODO(),
+		"tunnel_id",
+		anthropic.BetaTunnelGetParams{},
+	)
+	if err != nil {
+		panic(err.Error())
+	}
+	fmt.Printf("%+v\n", betaTunnel.ID)
 }
 ```
 
@@ -462,24 +458,22 @@ Lists tunnels. Results are ordered by creation time, newest first; archived tunn
 package main
 
 import (
-  "context"
-  "fmt"
+	"context"
+	"fmt"
 
-  "github.com/anthropics/anthropic-sdk-go"
-  "github.com/anthropics/anthropic-sdk-go/option"
+	"github.com/anthropics/anthropic-sdk-go"
+	"github.com/anthropics/anthropic-sdk-go/option"
 )
 
 func main() {
-  client := anthropic.NewClient(
-    option.WithAPIKey("my-anthropic-api-key"),
-  )
-  page, err := client.Beta.Tunnels.List(context.TODO(), anthropic.BetaTunnelListParams{
-
-  })
-  if err != nil {
-    panic(err.Error())
-  }
-  fmt.Printf("%+v\n", page)
+	client := anthropic.NewClient(
+		option.WithAPIKey("my-anthropic-api-key"),
+	)
+	page, err := client.Beta.Tunnels.List(context.TODO(), anthropic.BetaTunnelListParams{})
+	if err != nil {
+		panic(err.Error())
+	}
+	fmt.Printf("%+v\n", page)
 }
 ```
 
@@ -625,28 +619,26 @@ Archives a tunnel. Archival is irreversible: every non-archived certificate on t
 package main
 
 import (
-  "context"
-  "fmt"
+	"context"
+	"fmt"
 
-  "github.com/anthropics/anthropic-sdk-go"
-  "github.com/anthropics/anthropic-sdk-go/option"
+	"github.com/anthropics/anthropic-sdk-go"
+	"github.com/anthropics/anthropic-sdk-go/option"
 )
 
 func main() {
-  client := anthropic.NewClient(
-    option.WithAPIKey("my-anthropic-api-key"),
-  )
-  betaTunnel, err := client.Beta.Tunnels.Archive(
-    context.TODO(),
-    "tunnel_id",
-    anthropic.BetaTunnelArchiveParams{
-
-    },
-  )
-  if err != nil {
-    panic(err.Error())
-  }
-  fmt.Printf("%+v\n", betaTunnel.ID)
+	client := anthropic.NewClient(
+		option.WithAPIKey("my-anthropic-api-key"),
+	)
+	betaTunnel, err := client.Beta.Tunnels.Archive(
+		context.TODO(),
+		"tunnel_id",
+		anthropic.BetaTunnelArchiveParams{},
+	)
+	if err != nil {
+		panic(err.Error())
+	}
+	fmt.Printf("%+v\n", betaTunnel.ID)
 }
 ```
 
@@ -775,28 +767,26 @@ Reveals a tunnel's connector token. The value is fetched live on each call; Anth
 package main
 
 import (
-  "context"
-  "fmt"
+	"context"
+	"fmt"
 
-  "github.com/anthropics/anthropic-sdk-go"
-  "github.com/anthropics/anthropic-sdk-go/option"
+	"github.com/anthropics/anthropic-sdk-go"
+	"github.com/anthropics/anthropic-sdk-go/option"
 )
 
 func main() {
-  client := anthropic.NewClient(
-    option.WithAPIKey("my-anthropic-api-key"),
-  )
-  betaTunnelToken, err := client.Beta.Tunnels.RevealToken(
-    context.TODO(),
-    "tunnel_id",
-    anthropic.BetaTunnelRevealTokenParams{
-
-    },
-  )
-  if err != nil {
-    panic(err.Error())
-  }
-  fmt.Printf("%+v\n", betaTunnelToken.ID)
+	client := anthropic.NewClient(
+		option.WithAPIKey("my-anthropic-api-key"),
+	)
+	betaTunnelToken, err := client.Beta.Tunnels.RevealToken(
+		context.TODO(),
+		"tunnel_id",
+		anthropic.BetaTunnelRevealTokenParams{},
+	)
+	if err != nil {
+		panic(err.Error())
+	}
+	fmt.Printf("%+v\n", betaTunnelToken.ID)
 }
 ```
 
@@ -926,28 +916,26 @@ Rotates a tunnel's connector token. Rotation invalidates the current token for n
 package main
 
 import (
-  "context"
-  "fmt"
+	"context"
+	"fmt"
 
-  "github.com/anthropics/anthropic-sdk-go"
-  "github.com/anthropics/anthropic-sdk-go/option"
+	"github.com/anthropics/anthropic-sdk-go"
+	"github.com/anthropics/anthropic-sdk-go/option"
 )
 
 func main() {
-  client := anthropic.NewClient(
-    option.WithAPIKey("my-anthropic-api-key"),
-  )
-  betaTunnelToken, err := client.Beta.Tunnels.RotateToken(
-    context.TODO(),
-    "tunnel_id",
-    anthropic.BetaTunnelRotateTokenParams{
-
-    },
-  )
-  if err != nil {
-    panic(err.Error())
-  }
-  fmt.Printf("%+v\n", betaTunnelToken.ID)
+	client := anthropic.NewClient(
+		option.WithAPIKey("my-anthropic-api-key"),
+	)
+	betaTunnelToken, err := client.Beta.Tunnels.RotateToken(
+		context.TODO(),
+		"tunnel_id",
+		anthropic.BetaTunnelRotateTokenParams{},
+	)
+	if err != nil {
+		panic(err.Error())
+	}
+	fmt.Printf("%+v\n", betaTunnelToken.ID)
 }
 ```
 
@@ -1145,28 +1133,28 @@ Registers a public CA certificate on a tunnel. Anthropic verifies the gateway's 
 package main
 
 import (
-  "context"
-  "fmt"
+	"context"
+	"fmt"
 
-  "github.com/anthropics/anthropic-sdk-go"
-  "github.com/anthropics/anthropic-sdk-go/option"
+	"github.com/anthropics/anthropic-sdk-go"
+	"github.com/anthropics/anthropic-sdk-go/option"
 )
 
 func main() {
-  client := anthropic.NewClient(
-    option.WithAPIKey("my-anthropic-api-key"),
-  )
-  betaTunnelCertificate, err := client.Beta.Tunnels.Certificates.New(
-    context.TODO(),
-    "tunnel_id",
-    anthropic.BetaTunnelCertificateNewParams{
-      CaCertificatePem: "ca_certificate_pem",
-    },
-  )
-  if err != nil {
-    panic(err.Error())
-  }
-  fmt.Printf("%+v\n", betaTunnelCertificate.ID)
+	client := anthropic.NewClient(
+		option.WithAPIKey("my-anthropic-api-key"),
+	)
+	betaTunnelCertificate, err := client.Beta.Tunnels.Certificates.New(
+		context.TODO(),
+		"tunnel_id",
+		anthropic.BetaTunnelCertificateNewParams{
+			CaCertificatePem: "ca_certificate_pem",
+		},
+	)
+	if err != nil {
+		panic(err.Error())
+	}
+	fmt.Printf("%+v\n", betaTunnelCertificate.ID)
 }
 ```
 
@@ -1316,28 +1304,28 @@ Fetches a tunnel certificate by ID.
 package main
 
 import (
-  "context"
-  "fmt"
+	"context"
+	"fmt"
 
-  "github.com/anthropics/anthropic-sdk-go"
-  "github.com/anthropics/anthropic-sdk-go/option"
+	"github.com/anthropics/anthropic-sdk-go"
+	"github.com/anthropics/anthropic-sdk-go/option"
 )
 
 func main() {
-  client := anthropic.NewClient(
-    option.WithAPIKey("my-anthropic-api-key"),
-  )
-  betaTunnelCertificate, err := client.Beta.Tunnels.Certificates.Get(
-    context.TODO(),
-    "certificate_id",
-    anthropic.BetaTunnelCertificateGetParams{
-      TunnelID: "tunnel_id",
-    },
-  )
-  if err != nil {
-    panic(err.Error())
-  }
-  fmt.Printf("%+v\n", betaTunnelCertificate.ID)
+	client := anthropic.NewClient(
+		option.WithAPIKey("my-anthropic-api-key"),
+	)
+	betaTunnelCertificate, err := client.Beta.Tunnels.Certificates.Get(
+		context.TODO(),
+		"certificate_id",
+		anthropic.BetaTunnelCertificateGetParams{
+			TunnelID: "tunnel_id",
+		},
+	)
+	if err != nil {
+		panic(err.Error())
+	}
+	fmt.Printf("%+v\n", betaTunnelCertificate.ID)
 }
 ```
 
@@ -1495,28 +1483,26 @@ Lists the certificates registered on a tunnel. Archived certificates are exclude
 package main
 
 import (
-  "context"
-  "fmt"
+	"context"
+	"fmt"
 
-  "github.com/anthropics/anthropic-sdk-go"
-  "github.com/anthropics/anthropic-sdk-go/option"
+	"github.com/anthropics/anthropic-sdk-go"
+	"github.com/anthropics/anthropic-sdk-go/option"
 )
 
 func main() {
-  client := anthropic.NewClient(
-    option.WithAPIKey("my-anthropic-api-key"),
-  )
-  page, err := client.Beta.Tunnels.Certificates.List(
-    context.TODO(),
-    "tunnel_id",
-    anthropic.BetaTunnelCertificateListParams{
-
-    },
-  )
-  if err != nil {
-    panic(err.Error())
-  }
-  fmt.Printf("%+v\n", page)
+	client := anthropic.NewClient(
+		option.WithAPIKey("my-anthropic-api-key"),
+	)
+	page, err := client.Beta.Tunnels.Certificates.List(
+		context.TODO(),
+		"tunnel_id",
+		anthropic.BetaTunnelCertificateListParams{},
+	)
+	if err != nil {
+		panic(err.Error())
+	}
+	fmt.Printf("%+v\n", page)
 }
 ```
 
@@ -1671,28 +1657,28 @@ Archives a tunnel certificate, removing it from the set Anthropic trusts for the
 package main
 
 import (
-  "context"
-  "fmt"
+	"context"
+	"fmt"
 
-  "github.com/anthropics/anthropic-sdk-go"
-  "github.com/anthropics/anthropic-sdk-go/option"
+	"github.com/anthropics/anthropic-sdk-go"
+	"github.com/anthropics/anthropic-sdk-go/option"
 )
 
 func main() {
-  client := anthropic.NewClient(
-    option.WithAPIKey("my-anthropic-api-key"),
-  )
-  betaTunnelCertificate, err := client.Beta.Tunnels.Certificates.Archive(
-    context.TODO(),
-    "certificate_id",
-    anthropic.BetaTunnelCertificateArchiveParams{
-      TunnelID: "tunnel_id",
-    },
-  )
-  if err != nil {
-    panic(err.Error())
-  }
-  fmt.Printf("%+v\n", betaTunnelCertificate.ID)
+	client := anthropic.NewClient(
+		option.WithAPIKey("my-anthropic-api-key"),
+	)
+	betaTunnelCertificate, err := client.Beta.Tunnels.Certificates.Archive(
+		context.TODO(),
+		"certificate_id",
+		anthropic.BetaTunnelCertificateArchiveParams{
+			TunnelID: "tunnel_id",
+		},
+	)
+	if err != nil {
+		panic(err.Error())
+	}
+	fmt.Printf("%+v\n", betaTunnelCertificate.ID)
 }
 ```
 
