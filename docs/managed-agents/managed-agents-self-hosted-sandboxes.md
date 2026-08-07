@@ -1336,7 +1336,7 @@ The SDKs' [Client-side MCP helpers](../agents-and-tools/agents-and-tools-mcp-con
 
       	agent, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
       		Name:  "Internal tools agent",
-      		Model: anthropic.BetaManagedAgentsModelConfigParams{ID: "claude-opus-5"},
+      		Model: anthropic.BetaManagedAgentsModelConfigParams{ID: anthropic.BetaManagedAgentsModelClaudeOpus5},
       		Tools: tools,
       	})
       	if err != nil {

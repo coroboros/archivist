@@ -743,6 +743,7 @@ For the full feature list with Amazon Bedrock availability, see [Features overvi
 * API endpoints (Message Batches, Models, Admin, Compliance, Usage and Cost)
 * Claude Managed Agents
 * Server-side fallback (the [`fallbacks` parameter](./build-with-claude-refusals-and-fallback.md#server-side-fallback); use the [client-side fallback pattern](./build-with-claude-refusals-and-fallback.md#client-side-fallback) instead)
+* Automatic prompt caching (the [top-level `cache_control` field](./build-with-claude-prompt-caching.md#automatic-caching); use [explicit cache breakpoints](./build-with-claude-prompt-caching.md#explicit-cache-breakpoints) instead)
 
 ### PDF support on Bedrock
 

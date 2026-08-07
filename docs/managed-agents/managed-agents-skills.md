@@ -138,25 +138,22 @@ These examples omit the optional `display_title` field, so the skill's title is 
   import java.io.InputStream;
   import java.nio.file.Files;
   import java.nio.file.Path;
-  import java.util.List;
 
-  public class SkillCreate {
-      public static void main(String[] args) throws IOException {
-          AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+  void main() throws IOException {
+      AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-          SkillCreateParams params = SkillCreateParams.builder()
-              .addFile(MultipartField.<InputStream>builder()
-                  .value(Files.newInputStream(Path.of("example_skill.zip")))
-                  .filename("example_skill.zip")
-                  .contentType("application/zip")
-                  .build())
-              .build();
+      SkillCreateParams params = SkillCreateParams.builder()
+          .addFile(MultipartField.<InputStream>builder()
+              .value(Files.newInputStream(Path.of("example_skill.zip")))
+              .filename("example_skill.zip")
+              .contentType("application/zip")
+              .build())
+          .build();
 
-          SkillCreateResponse skill = client.beta().skills().create(params);
+      SkillCreateResponse skill = client.beta().skills().create(params);
 
-          System.out.println("Created skill: " + skill.id());
-          System.out.println("Latest version: " + skill.latestVersion().orElseThrow());
-      }
+      IO.println("Created skill: " + skill.id());
+      IO.println("Latest version: " + skill.latestVersion().orElseThrow());
   }
   ```
 
@@ -198,7 +195,7 @@ To list, retrieve, delete, and version custom skills, see [Managing custom skill
 
 ## Attach skills to an agent
 
-Attach skills when creating an agent. Each [session](./managed-agents-sessions.md) supports up to 500 skills total, counted across every agent in the session (see [Multiagent orchestration](./managed-agents-multiagent-orchestration.md)).
+Attach skills when creating an agent. Each [session](./managed-agents-sessions.md) supports up to 500 skills, counted as the deduplicated set across every agent in the session (see [Multiagent orchestration](./managed-agents-multiagent-orchestration.md)).
 
 <Note>
   Mounting more skills increases the time it takes for the session's sandbox to start. Attach only the skills each agent needs for its task.
