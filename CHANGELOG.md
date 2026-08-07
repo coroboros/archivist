@@ -1,5 +1,67 @@
 # Changelog
 
+## 🤖 v1.5.93 - 07/08/2026
+
+File Changes:
+
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-agents.md`
+- Modified: `docs/code/code-best-practices.md`
+- Modified: `docs/code/code-changelog.md`
+- Modified: `docs/code/code-checkpointing.md`
+- Modified: `docs/code/code-claude-code-on-the-web.md`
+- Modified: `docs/code/code-cli-reference.md`
+- Modified: `docs/code/code-cloud-environments.md`
+- Modified: `docs/code/code-commands.md`
+- Modified: `docs/code/code-common-workflows.md`
+- Modified: `docs/code/code-desktop-quickstart.md`
+- Modified: `docs/code/code-desktop-scheduled-tasks.md`
+- Modified: `docs/code/code-desktop.md`
+- Modified: `docs/code/code-discover-plugins.md`
+- Modified: `docs/code/code-env-vars.md`
+- Modified: `docs/code/code-errors.md`
+- Modified: `docs/code/code-github-enterprise-server.md`
+- Modified: `docs/code/code-headless.md`
+- Modified: `docs/code/code-hooks-guide.md`
+- Modified: `docs/code/code-hooks.md`
+- Modified: `docs/code/code-how-claude-code-works.md`
+- Modified: `docs/code/code-mobile.md`
+- Modified: `docs/code/code-model-config.md`
+- Modified: `docs/code/code-network-config.md`
+- Modified: `docs/code/code-overview.md`
+- Modified: `docs/code/code-permission-modes.md`
+- Modified: `docs/code/code-permissions.md`
+- Modified: `docs/code/code-platforms.md`
+- Modified: `docs/code/code-plugin-dependencies.md`
+- Modified: `docs/code/code-plugin-hints.md`
+- Modified: `docs/code/code-plugin-marketplaces.md`
+- Modified: `docs/code/code-plugin-relevance.md`
+- Modified: `docs/code/code-plugins-reference.md`
+- Modified: `docs/code/code-plugins.md`
+- Modified: `docs/code/code-quickstart.md`
+- Modified: `docs/code/code-remote-control.md`
+- Modified: `docs/code/code-routines.md`
+- Modified: `docs/code/code-sandbox-environments.md`
+- Modified: `docs/code/code-sandboxing.md`
+- Modified: `docs/code/code-scheduled-tasks.md`
+- Modified: `docs/code/code-security-guidance.md`
+- Modified: `docs/code/code-server-managed-settings.md`
+- Modified: `docs/code/code-settings.md`
+- Modified: `docs/code/code-sub-agents.md`
+- Modified: `docs/code/code-third-party-integrations.md`
+- Modified: `docs/code/code-tools-reference.md`
+- Modified: `docs/code/code-troubleshooting.md`
+- Modified: `docs/code/code-typescript.md`
+- Modified: `docs/code/code-web-quickstart.md`
+- Added: `docs/code/code-self-hosted-environments-configuration.md`
+- Added: `docs/code/code-self-hosted-environments-deploy.md`
+- Added: `docs/code/code-self-hosted-environments-identity.md`
+- Added: `docs/code/code-self-hosted-environments-quickstart.md`
+- Added: `docs/code/code-self-hosted-environments-reference.md`
+- Added: `docs/code/code-self-hosted-environments-testing.md`
+- Added: `docs/code/code-self-hosted-environments.md`
+
+
 ## 🤖 v1.5.92 - 07/08/2026
 
 File Changes:
