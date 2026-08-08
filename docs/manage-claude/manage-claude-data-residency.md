@@ -16,7 +16,7 @@ Data residency controls let you manage where your data is processed and stored. 
 * **Workspace geo:** Controls where data is stored at rest and where endpoint processing (such as image transcoding and code execution) happens. Configured at the workspace level in the [Claude Console](https://platform.claude.com).
 
 <Note>
-  [Claude Managed Agents](../managed-agents/managed-agents-overview.md) does not support the `inference_geo` parameter, but respects the Workspace geo configured in Console. With [self-hosted sandboxes](../managed-agents/managed-agents-self-hosted-sandboxes.md), tool execution and the sandbox filesystem stay on infrastructure you control.
+  [Claude Managed Agents](../managed-agents/managed-agents-overview.md) supports geographic pinning at the agent level: `inference_geo` on an [agent's model configuration](../managed-agents/managed-agents-agent-setup.md) pins the geography that serves model requests for sessions running that agent, with per-session overrides at session create. Agents without a pin follow the workspace's default inference geo on each request. Managed Agents also respects the Workspace geo configured in Console, and with [self-hosted sandboxes](../managed-agents/managed-agents-self-hosted-sandboxes.md), tool execution and the sandbox filesystem stay on infrastructure you control.
 </Note>
 
 ## Inference geo
@@ -267,6 +267,8 @@ Data residency pricing varies by model generation:
 * **Older models:** Don't support `inference_geo` (see [Model availability](#model-availability)); standard pricing applies. Requests that include the parameter return a 400 error.
 
 This pricing applies to the Claude API (first-party) and Claude Platform on AWS. On Claude in Microsoft Foundry, the same 1.1x multiplier applies to deployments hosted on Azure that use the US Data Zone Standard deployment type. Partner-operated platforms (Bedrock and Google Cloud) have their own regional pricing. See [Data residency pricing](../about-claude/about-claude-pricing.md#data-residency-pricing) for details.
+
+The same multiplier applies to [Claude Managed Agents](../managed-agents/managed-agents-overview.md): when an agent's [model configuration](../managed-agents/managed-agents-agent-setup.md) pins `inference_geo` to `"us"`, model requests in sessions running that agent are priced at 1.1x the standard rate.
 
 <Note>
   If you have a [Priority Tier](../api/api-service-tiers.md) commitment, the 1.1x multiplier for US-only inference also affects how tokens are counted against your Priority Tier capacity. Each token consumed with `inference_geo: "us"` draws down 1.1 tokens from your committed TPM, consistent with how other pricing multipliers (such as prompt caching) affect burndown rates.
