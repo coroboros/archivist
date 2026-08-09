@@ -1,5 +1,17 @@
 # Changelog
 
+## 🤖 v1.5.97 - 09/08/2026
+
+File Changes:
+
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-env-vars.md`
+- Modified: `docs/code/code-interactive-mode.md`
+- Modified: `docs/code/code-sessions.md`
+- Modified: `docs/code/code-settings.md`
+- Modified: `docs/code/code-troubleshooting.md`
+
+
 ## 🤖 v1.5.96 - 09/08/2026
 
 File Changes:
