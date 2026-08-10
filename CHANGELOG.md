@@ -1,5 +1,14 @@
 # Changelog
 
+## 🤖 v1.5.99 - 10/08/2026
+
+File Changes:
+
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-mcp.md`
+- Modified: `docs/code/code-overview.md`
+
+
 ## 🤖 v1.5.98 - 10/08/2026
 
 File Changes:
