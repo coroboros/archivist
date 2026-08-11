@@ -1,5 +1,19 @@
 # Changelog
 
+## 🤖 v1.5.101 - 11/08/2026
+
+File Changes:
+
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-costs.md`
+- Modified: `docs/code/code-desktop-ios-simulator.md`
+- Modified: `docs/code/code-fast-mode.md`
+- Modified: `docs/code/code-llm-gateway-protocol.md`
+- Modified: `docs/code/code-mcp.md`
+- Modified: `docs/code/code-plugin-dependencies.md`
+- Modified: `docs/code/code-troubleshooting.md`
+
+
 ## 🤖 v1.5.100 - 11/08/2026
 
 File Changes:
