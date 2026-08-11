@@ -928,10 +928,7 @@ All [active models](../about-claude/about-claude-models-overview.md) support tok
   using Anthropic;
   using Anthropic.Models.Messages;
 
-  AnthropicClient client = new()
-  {
-      ApiKey = Environment.GetEnvironmentVariable("ANTHROPIC_API_KEY")
-  };
+  AnthropicClient client = new();
 
   var parameters = new MessageCountTokensParams
   {

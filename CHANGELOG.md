@@ -1,5 +1,78 @@
 # Changelog
 
+## 🤖 v1.5.100 - 11/08/2026
+
+File Changes:
+
+- Modified: `docs/build-with-claude/build-with-claude-README.md`
+- Modified: `docs/build-with-claude/build-with-claude-claude-in-amazon-bedrock.md`
+- Modified: `docs/build-with-claude/build-with-claude-mid-conversation-system-messages.md`
+- Modified: `docs/build-with-claude/build-with-claude-prompt-caching.md`
+- Modified: `docs/build-with-claude/build-with-claude-structured-outputs.md`
+- Modified: `docs/build-with-claude/build-with-claude-token-counting.md`
+- Modified: `docs/build-with-claude/build-with-claude-usage-cost-api.md`
+- Modified: `docs/build-with-claude/build-with-claude-vision.md`
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-agent-loop.md`
+- Modified: `docs/code/code-agents.md`
+- Modified: `docs/code/code-changelog.md`
+- Modified: `docs/code/code-claude-apps-gateway-config.md`
+- Modified: `docs/code/code-claude-apps-gateway-deploy.md`
+- Modified: `docs/code/code-claude-apps-gateway-spend-limits.md`
+- Modified: `docs/code/code-claude-code-features.md`
+- Modified: `docs/code/code-claude-tag.md`
+- Modified: `docs/code/code-context-window.md`
+- Modified: `docs/code/code-cross-session-messaging.md`
+- Modified: `docs/code/code-custom-tools.md`
+- Modified: `docs/code/code-desktop.md`
+- Modified: `docs/code/code-env-vars.md`
+- Modified: `docs/code/code-feature-availability.md`
+- Modified: `docs/code/code-file-checkpointing.md`
+- Modified: `docs/code/code-hooks-guide.md`
+- Modified: `docs/code/code-hooks.md`
+- Modified: `docs/code/code-hosting.md`
+- Modified: `docs/code/code-mcp.md`
+- Modified: `docs/code/code-migration-guide.md`
+- Modified: `docs/code/code-modifying-system-prompts.md`
+- Modified: `docs/code/code-overview.md`
+- Modified: `docs/code/code-permission-modes.md`
+- Modified: `docs/code/code-permissions.md`
+- Modified: `docs/code/code-plugins.md`
+- Modified: `docs/code/code-python.md`
+- Modified: `docs/code/code-quickstart.md`
+- Modified: `docs/code/code-remote-control.md`
+- Modified: `docs/code/code-secure-deployment.md`
+- Modified: `docs/code/code-sessions.md`
+- Modified: `docs/code/code-settings.md`
+- Modified: `docs/code/code-skills.md`
+- Modified: `docs/code/code-slack.md`
+- Modified: `docs/code/code-slash-commands.md`
+- Modified: `docs/code/code-streaming-output.md`
+- Modified: `docs/code/code-streaming-vs-single-mode.md`
+- Modified: `docs/code/code-sub-agents.md`
+- Modified: `docs/code/code-subagents.md`
+- Modified: `docs/code/code-terminal-config.md`
+- Modified: `docs/code/code-todo-tracking.md`
+- Modified: `docs/code/code-tool-search.md`
+- Modified: `docs/code/code-tools-reference.md`
+- Modified: `docs/code/code-troubleshooting.md`
+- Modified: `docs/code/code-typescript.md`
+- Modified: `docs/code/code-whats-new.md`
+- Modified: `docs/general/general-README.md`
+- Modified: `docs/general/general-claude_api_primer.md`
+- Modified: `docs/general/general-intro.md`
+- Modified: `docs/general/general-resources-overview.md`
+- Modified: `docs/manage-claude/manage-claude-README.md`
+- Modified: `docs/manage-claude/manage-claude-cmek.md`
+- Modified: `docs/manage-claude/manage-claude-usage-cost-api.md`
+- Modified: `docs/managed-agents/managed-agents-README.md`
+- Modified: `docs/managed-agents/managed-agents-quickstart.md`
+- Modified: `docs/release-notes/release-notes-README.md`
+- Modified: `docs/release-notes/release-notes-overview.md`
+- Added: `docs/code/code-2026-w30.md`
+- Added: `docs/code/code-2026-w32.md`
+
+
 ## 🤖 v1.5.99 - 10/08/2026
 
 File Changes:
