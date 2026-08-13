@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/invites/delete"
 category: "api"
 generated: true
 ---
+---
+title: Delete Invite
+url: https://platform.claude.com/docs/en/api/admin/invites/delete
+---
+
 ## Delete Invite
 
 **delete** `/v1/organizations/invites/{invite_id}`

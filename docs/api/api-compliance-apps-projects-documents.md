@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/compliance/apps/projects/docume
 category: "api"
 generated: true
 ---
+---
+title: Documents
+url: https://platform.claude.com/docs/en/api/compliance/apps/projects/documents
+---
+
 # Documents
 
 ## Get project document content

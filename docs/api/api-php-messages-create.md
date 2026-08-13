@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/php/messages/create"
 category: "api"
 generated: true
 ---
+---
+title: Create a Message
+url: https://platform.claude.com/docs/en/api/php/messages/create
+---
+
 ## Create a Message
 
 `$client->messages->create(int maxTokens, list<MessageParam> messages, Model model, ?CacheControlEphemeral cacheControl, ?string container, ?string inferenceGeo, ?Metadata metadata, ?OutputConfig outputConfig, ?ServiceTier serviceTier, ?list<string> stopSequences, ?System system, ?float temperature, ?ThinkingConfigParam thinking, ?ToolChoice toolChoice, ?list<ToolUnion> tools, ?int topK, ?float topP, ?string userProfileID): Message`
@@ -346,7 +351,7 @@ $client = new Client(apiKey: 'my-anthropic-api-key');
 $message = $client->messages->create(
   maxTokens: 1024,
   messages: [['content' => 'Hello, world', 'role' => 'user']],
-  model: 'claude-opus-4-6',
+  model: Model::CLAUDE_OPUS_4_6,
   cacheControl: ['type' => 'ephemeral', 'ttl' => '5m'],
   container: 'container',
   inferenceGeo: 'inference_geo',

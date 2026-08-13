@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/ruby/beta/agents/list"
 category: "api"
 generated: true
 ---
+---
+title: List Agents
+url: https://platform.claude.com/docs/en/api/ruby/beta/agents/list
+---
+
 ## List Agents
 
 `beta.agents.list(**kwargs) -> PageCursor<BetaManagedAgentsAgent>`
@@ -40,7 +45,7 @@ List Agents
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 29 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 30 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -105,6 +110,8 @@ List Agents
     - `:"fallback-credit-2026-07-01"`
 
     - `:"agent-memory-2026-07-22"`
+
+    - `:"mid-conversation-tool-changes-2026-07-01"`
 
 ### Returns
 
@@ -250,6 +257,10 @@ List Agents
 
           - `:max`
 
+    - `inference_geo: String`
+
+      Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo.
+
     - `speed: :standard | :fast`
 
       Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
@@ -262,17 +273,33 @@ List Agents
 
     Resolved coordinator topology with a concrete agent roster.
 
-    - `agents: Array[BetaManagedAgentsAgentReference]`
+    - `agents: Array[BetaManagedAgentsAgentReference | BetaManagedAgentsAdvisor]`
 
       Agents the coordinator may spawn as session threads, each resolved to a specific version.
 
-      - `id: String`
+      - `class BetaManagedAgentsAgentReference`
 
-      - `type: :agent`
+        A resolved agent reference with a concrete version.
 
-        - `:agent`
+        - `id: String`
 
-      - `version: Integer`
+        - `type: :agent`
+
+          - `:agent`
+
+        - `version: Integer`
+
+      - `class BetaManagedAgentsAdvisor`
+
+        Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
+
+        - `model: String`
+
+          The advisor model id.
+
+        - `type: :advisor`
+
+          - `:advisor`
 
     - `type: :coordinator`
 
@@ -495,6 +522,7 @@ puts(page)
         "effort": {
           "type": "low"
         },
+        "inference_geo": "inference_geo",
         "speed": "standard"
       },
       "multiagent": {

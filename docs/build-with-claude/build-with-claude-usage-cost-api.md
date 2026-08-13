@@ -1,20 +1,20 @@
 ---
-title: "Usage and Cost API"
+title: "First request"
 source: "https://platform.claude.com/docs/en/build-with-claude/usage-cost-api"
 category: "build-with-claude"
 generated: true
 ---
-# Usage and Cost API
-
-Programmatically access your organization's API usage and cost data with the Usage & Cost Admin API.
-
+---
+title: Usage and Cost API
+url: https://platform.claude.com/docs/en/manage-claude/usage-cost-api
+description: Programmatically access your organization's API usage and cost data with the Usage & Cost Admin API.
 ---
 
 <Tip>
   **The Admin API is unavailable for individual accounts.** To collaborate with teammates and add members, set up your organization in **Console → Settings → Organization**.
 </Tip>
 
-The Usage & Cost Admin API provides programmatic and granular access to historical API usage and cost data for your organization. This data is similar to the information available in the [Usage](/usage) and [Cost](/cost) pages of the Claude Console.
+The Usage & Cost Admin API provides programmatic and granular access to historical API usage and cost data for your organization. This data is similar to the information available in the [Usage](https://platform.claude.com/usage) and [Cost](https://platform.claude.com/cost) pages of the Claude Console.
 
 This API enables you to better monitor, analyze, and optimize your Claude implementations:
 
@@ -28,7 +28,7 @@ This API enables you to better monitor, analyze, and optimize your Claude implem
   **Admin API key required.** These endpoints require an Admin API key, which is different from a standard Claude API key. See [Create an Admin API key](../manage-claude/manage-claude-admin-api-keys.md) to find where to create one for your organization type and which scopes to select.
 </Check>
 
-Claude Enterprise organizations use an Analytics API key with a different API instead; see [Which API do you need?](#which-api-do-you-need).
+Claude Enterprise organizations use an Analytics API key with a different API instead; see [Which API do you need?](../manage-claude/manage-claude-usage-cost-api.md#which-api-do-you-need).
 
 <Note>
   **Claude Platform on AWS:** The programmatic Usage and Cost API endpoints are not currently available. View usage and cost data on the **Usage** and **Cost** pages in the Claude Console instead.
@@ -38,9 +38,9 @@ Claude Enterprise organizations use an Analytics API key with a different API in
 
 Anthropic provides cost and usage reporting through two APIs, depending on which Claude product your organization manages:
 
-| Your organization                | API                                                                                          | Key type                             |
-| -------------------------------- | -------------------------------------------------------------------------------------------- | ------------------------------------ |
-| Claude Console (Claude Platform) | The Usage and Cost Admin API described on this page                                          | Admin API key (`sk-ant-admin01-...`) |
+| Your organization                | API                                                                                                                     | Key type                             |
+| -------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ------------------------------------ |
+| Claude Console (Claude Platform) | The Usage and Cost Admin API described on this page                                                                     | Admin API key (`sk-ant-admin01-...`) |
 | Claude Enterprise (claude.ai)    | The [Claude Enterprise Analytics API](../api/api-admin-analytics.md) cost and usage endpoints | Analytics API key                    |
 
 Claude Enterprise parent organizations do not appear in Claude Console and carry no Admin API keys, so for them the Analytics API key is the only path to this data. See [Analytics APIs](../manage-claude/manage-claude-analytics-api.md) for how to create each key type and which plans the Claude Enterprise cost data applies to.
@@ -326,7 +326,7 @@ Usage and costs attributed to the default workspace have a `null` value for `wor
 
 ### How do I get per-user cost breakdowns for Claude Code?
 
-Use the [Claude Code Analytics API](../manage-claude/manage-claude-claude-code-analytics-api.md), which provides per-user estimated costs and productivity metrics without the performance limitations of breaking down costs by many API keys. For general API usage with many keys, use the [Usage API](#usage-api) to track token consumption as a cost proxy.
+Use the [Claude Code Analytics API](../manage-claude/manage-claude-claude-code-analytics-api.md), which provides per-user estimated costs and productivity metrics without the performance limitations of breaking down costs by many API keys. For general API usage with many keys, use the [Usage API](../manage-claude/manage-claude-usage-cost-api.md#usage-api) to track token consumption as a cost proxy.
 
 ## See also
 

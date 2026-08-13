@@ -1,19 +1,19 @@
 ---
-title: "Task budgets"
+title: "Compatibility"
 source: "https://platform.claude.com/docs/en/build-with-claude/task-budgets"
 category: "build-with-claude"
 generated: true
 ---
-# Task budgets
-
-Give Claude an advisory token budget for the full agentic loop to help the model self-regulate on long agentic tasks.
+---
+title: Task budgets
+url: https://platform.claude.com/docs/en/build-with-claude/task-budgets
+description: Give Claude an advisory token budget for the full agentic loop to help the model self-regulate on long agentic tasks.
+---
 
 ## Compatibility
 - Status: Beta
 - [Beta header](../api/api-beta-headers.md): `task-budgets-2026-03-13`
 - Supported models: `claude-fable-5`, `claude-mythos-5`, `claude-opus-5`, `claude-opus-4-8`, `claude-opus-4-7`
-
----
 
 Task budgets let you tell Claude how many tokens it has for a full agentic loop, including thinking, tool calls, tool results, and output. The model sees a running countdown and uses it to prioritize work and finish gracefully as the budget is consumed.
 
@@ -250,7 +250,7 @@ The `task_budget` object has three fields:
 Claude sees a budget-countdown marker injected server-side throughout the conversation. The marker shows how many tokens remain in the current agentic loop and updates as the model generates thinking, tool calls, and output, and as it processes tool results. Claude uses this signal to pace itself and finish gracefully as the budget is consumed.
 
 <Note>
-  **The countdown is visible only to the model.** API responses do not include a remaining-budget field: there is no `task_budget` information in the response `usage` object, and SDKs have no accessor for it. To track spend client-side, sum token usage across the requests in your loop as shown in [Measure your current usage](#measure-your-current-usage), or pass your own figure forward with `remaining` when [carrying a budget across compaction](#carrying-a-budget-across-compaction-with-remaining).
+  **The countdown is visible only to the model.** API responses do not include a remaining-budget field: there is no `task_budget` information in the response `usage` object, and SDKs have no accessor for it. To track spend client-side, sum token usage across the requests in your loop as shown in [Measure your current usage](./build-with-claude-task-budgets.md#measure-your-current-usage), or pass your own figure forward with `remaining` when [carrying a budget across compaction](./build-with-claude-task-budgets.md#carrying-a-budget-across-compaction-with-remaining).
 </Note>
 
 <Warning>
@@ -449,7 +449,7 @@ For loops that resend the full uncompacted history on every turn, omit `remainin
 
 ## Changing the budget mid-conversation
 
-`task_budget` is a request-level setting. To change the budget partway through a task, for example to extend it when the user broadens the request, set a new `task_budget` in `output_config` on the next request. Keep the caching consequence in mind: the budget value participates in the rendered prompt, so a changed value does not match cache entries created under the old one (see [Feature support](#feature-support) below).
+`task_budget` is a request-level setting. To change the budget partway through a task, for example to extend it when the user broadens the request, set a new `task_budget` in `output_config` on the next request. Keep the caching consequence in mind: the budget value participates in the rendered prompt, so a changed value does not match cache entries created under the old one (see [Feature support](./build-with-claude-task-budgets.md#feature-support) below).
 
 ## Task budgets are advisory, not enforced
 
@@ -463,7 +463,7 @@ For a hard cap on cost or latency, combine task budgets with a reasonable `max_t
 Because `task_budget` spans the full agentic loop (potentially many requests) while `max_tokens` caps each individual request, the two values are independent; one is not required to be at or below the other.
 
 <Warning>
-  **A budget that is too small for the task can cause refusal-like behavior.** When Claude sees a budget that is clearly insufficient for the work being asked (for example, a 20,000-token budget for a multihour agentic coding task), it may decline to attempt the task at all, scope it down aggressively, or stop early with a partial result rather than start work it cannot finish. If you observe unexpected refusals or premature stops after setting a budget, raise the budget before debugging other parameters. Size budgets against your actual task-length distribution rather than a fixed default; see [Choosing a budget](#choosing-a-budget).
+  **A budget that is too small for the task can cause refusal-like behavior.** When Claude sees a budget that is clearly insufficient for the work being asked (for example, a 20,000-token budget for a multihour agentic coding task), it may decline to attempt the task at all, scope it down aggressively, or stop early with a partial result rather than start work it cannot finish. If you observe unexpected refusals or premature stops after setting a budget, raise the budget before debugging other parameters. Size budgets against your actual task-length distribution rather than a fixed default; see [Choosing a budget](./build-with-claude-task-budgets.md#choosing-a-budget).
 </Warning>
 
 ## Choosing a budget
@@ -593,7 +593,7 @@ Run a representative sample of tasks **without** `task_budget` set and record th
 
 Run this across a representative set of tasks and record the distribution. Start with the p99 of your per-task token spend to understand how providing the model with a task budget might modify the model's behavior, then test up or down as needed.
 
-The minimum accepted `task_budget.total` is model-specific; on every model that currently supports task budgets (see [Feature support](#feature-support)) it is **20,000 tokens**, and values below the minimum return a 400 error.
+The minimum accepted `task_budget.total` is model-specific; on every model that currently supports task budgets (see [Feature support](./build-with-claude-task-budgets.md#feature-support)) it is **20,000 tokens**, and values below the minimum return a 400 error.
 
 ## Interaction with other parameters
 
@@ -616,7 +616,7 @@ The minimum accepted `task_budget.total` is model-specific; on every model that 
 | Claude Sonnet 4.6 | Not supported                               |
 | Claude Haiku 4.5  | Not supported                               |
 
-Task budgets are not supported on [Claude Code](https://code.claude.com/docs/en/overview) or Cowork surfaces. Use task budgets directly through the Messages API on a [supported model](#feature-support).
+Task budgets are not supported on [Claude Code](https://code.claude.com/docs/en/overview) or Cowork surfaces. Use task budgets directly through the Messages API on a [supported model](./build-with-claude-task-budgets.md#feature-support).
 
 ## Next steps
 

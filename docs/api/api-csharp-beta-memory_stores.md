@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/csharp/beta/memory_stores"
 category: "api"
 generated: true
 ---
+---
+title: Memory Stores
+url: https://platform.claude.com/docs/en/api/csharp/beta/memory_stores
+---
+
 # Memory Stores
 
 ## Create a memory store
@@ -97,6 +102,8 @@ Create a memory store
     - `"fallback-credit-2026-07-01"FallbackCredit2026_07_01`
 
     - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
+
+    - `"mid-conversation-tool-changes-2026-07-01"MidConversationToolChanges2026_07_01`
 
 ### Returns
 
@@ -263,6 +270,8 @@ List memory stores
 
     - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
 
+    - `"mid-conversation-tool-changes-2026-07-01"MidConversationToolChanges2026_07_01`
+
 ### Returns
 
 - `class MemoryStoreListPageResponse:`
@@ -426,6 +435,8 @@ Retrieve a memory store
     - `"fallback-credit-2026-07-01"FallbackCredit2026_07_01`
 
     - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
+
+    - `"mid-conversation-tool-changes-2026-07-01"MidConversationToolChanges2026_07_01`
 
 ### Returns
 
@@ -591,6 +602,8 @@ Update a memory store
 
     - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
 
+    - `"mid-conversation-tool-changes-2026-07-01"MidConversationToolChanges2026_07_01`
+
 ### Returns
 
 - `class BetaManagedAgentsMemoryStore:`
@@ -743,6 +756,8 @@ Delete a memory store
 
     - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
 
+    - `"mid-conversation-tool-changes-2026-07-01"MidConversationToolChanges2026_07_01`
+
 ### Returns
 
 - `class BetaManagedAgentsDeletedMemoryStore:`
@@ -862,6 +877,8 @@ Archive a memory store
     - `"fallback-credit-2026-07-01"FallbackCredit2026_07_01`
 
     - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
+
+    - `"mid-conversation-tool-changes-2026-07-01"MidConversationToolChanges2026_07_01`
 
 ### Returns
 
@@ -1083,6 +1100,8 @@ Create a memory
 
     - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
 
+    - `"mid-conversation-tool-changes-2026-07-01"MidConversationToolChanges2026_07_01`
+
 ### Returns
 
 - `class BetaManagedAgentsMemory:`
@@ -1264,6 +1283,8 @@ List memories
     - `"fallback-credit-2026-07-01"FallbackCredit2026_07_01`
 
     - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
+
+    - `"mid-conversation-tool-changes-2026-07-01"MidConversationToolChanges2026_07_01`
 
 ### Returns
 
@@ -1461,6 +1482,8 @@ Retrieve a memory
 
     - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
 
+    - `"mid-conversation-tool-changes-2026-07-01"MidConversationToolChanges2026_07_01`
+
 ### Returns
 
 - `class BetaManagedAgentsMemory:`
@@ -1642,6 +1665,8 @@ Update a memory
 
     - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
 
+    - `"mid-conversation-tool-changes-2026-07-01"MidConversationToolChanges2026_07_01`
+
 ### Returns
 
 - `class BetaManagedAgentsMemory:`
@@ -1810,6 +1835,8 @@ Delete a memory
     - `"fallback-credit-2026-07-01"FallbackCredit2026_07_01`
 
     - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
+
+    - `"mid-conversation-tool-changes-2026-07-01"MidConversationToolChanges2026_07_01`
 
 ### Returns
 
@@ -2266,6 +2293,8 @@ List memory versions
 
     - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
 
+    - `"mid-conversation-tool-changes-2026-07-01"MidConversationToolChanges2026_07_01`
+
 ### Returns
 
 - `class MemoryVersionListPageResponse:`
@@ -2512,6 +2541,8 @@ Retrieve a memory version
 
     - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
 
+    - `"mid-conversation-tool-changes-2026-07-01"MidConversationToolChanges2026_07_01`
+
 ### Returns
 
 - `class BetaManagedAgentsMemoryVersion:`
@@ -2739,6 +2770,8 @@ Redact a memory version
     - `"fallback-credit-2026-07-01"FallbackCredit2026_07_01`
 
     - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
+
+    - `"mid-conversation-tool-changes-2026-07-01"MidConversationToolChanges2026_07_01`
 
 ### Returns
 

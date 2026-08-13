@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/spend_limits/retrieve"
 category: "api"
 generated: true
 ---
+---
+title: Get Spend Limit
+url: https://platform.claude.com/docs/en/api/admin/spend_limits/retrieve
+---
+
 ## Get Spend Limit
 
 **get** `/v1/organizations/spend_limits/{spend_limit_id}`

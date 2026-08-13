@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/typescript/models/retrieve"
 category: "api"
 generated: true
 ---
+---
+title: Get a Model
+url: https://platform.claude.com/docs/en/api/typescript/models/retrieve
+---
+
 ## Get a Model
 
 `client.models.retrieve(stringmodelID, ModelRetrieveParamsparams?, RequestOptionsoptions?): ModelInfo`
@@ -28,7 +33,7 @@ The Models API response can be used to determine information about a specific mo
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 29 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -93,6 +98,8 @@ The Models API response can be used to determine information about a specific mo
       - `"fallback-credit-2026-07-01"`
 
       - `"agent-memory-2026-07-22"`
+
+      - `"mid-conversation-tool-changes-2026-07-01"`
 
 ### Returns
 
@@ -229,13 +236,13 @@ The Models API response can be used to determine information about a specific mo
 ### Example
 
 ```typescript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic({
-  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
+  apiKey: process.env["ANTHROPIC_API_KEY"] // This is the default and can be omitted
 });
 
-const modelInfo = await client.models.retrieve('model_id');
+const modelInfo = await client.models.retrieve("model_id");
 
 console.log(modelInfo.id);
 ```

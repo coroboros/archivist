@@ -4,10 +4,10 @@ source: "https://platform.claude.com/docs/en/claude_api_primer"
 category: "general"
 generated: true
 ---
-# API usage primer for Claude
-
-This guide is designed to give Claude the basics of using the Claude API. It gives explanation and examples of model IDs/the basic messages API, tool use, streaming, thinking, and nothing else.
-
+---
+title: API usage primer for Claude
+url: https://platform.claude.com/docs/en/claude_api_primer
+description: This guide is designed to give Claude the basics of using the Claude API. It gives explanation and examples of model IDs/the basic messages API, tool use, streaming, thinking, and nothing else.
 ---
 
 # API usage primer for Claude
@@ -307,7 +307,7 @@ When thinking is on, Claude creates `thinking` content blocks where it outputs i
   ```
 </CodeGroup>
 
-Manual extended thinking (`thinking: {"type": "enabled", "budget_tokens": N}`) is the legacy mechanism. It works only on Claude 4 through 4.6 models that support thinking; Claude 4.7 and later models reject `type: enabled` with a 400 error and use [adaptive thinking](../build-with-claude/build-with-claude-thinking.md) instead. With manual extended thinking, `budget_tokens` sets the maximum number of tokens Claude is allowed to use for its internal reasoning process; the limit applies to full thinking tokens, not to the summarized output. Unless you are using [interleaved thinking](#interleaved-thinking), `budget_tokens` must be less than `max_tokens` so that Claude has space to write its response after thinking is complete.
+Manual extended thinking (`thinking: {"type": "enabled", "budget_tokens": N}`) is the legacy mechanism. It works only on Claude 4 through 4.6 models that support thinking; Claude 4.7 and later models reject `type: enabled` with a 400 error and use [adaptive thinking](../build-with-claude/build-with-claude-thinking.md) instead. With manual extended thinking, `budget_tokens` sets the maximum number of tokens Claude is allowed to use for its internal reasoning process; the limit applies to full thinking tokens, not to the summarized output. Unless you are using [interleaved thinking](./general-claude_api_primer.md#interleaved-thinking), `budget_tokens` must be less than `max_tokens` so that Claude has space to write its response after thinking is complete.
 
 ## Thinking with tool use
 

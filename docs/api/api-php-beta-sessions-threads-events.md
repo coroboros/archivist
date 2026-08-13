@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/php/beta/sessions/threads/event
 category: "api"
 generated: true
 ---
+---
+title: Events
+url: https://platform.claude.com/docs/en/api/php/beta/sessions/threads/events
+---
+
 # Events
 
 ## List Session Thread Events
@@ -154,7 +159,7 @@ List Session Thread Events
 
       Unique identifier for this event.
 
-    - `list<ManagedAgentsTextBlock> content`
+    - `list<Content> content`
 
       Array of text blocks comprising the agent response.
 
@@ -712,6 +717,10 @@ List Session Thread Events
 
       Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
 
+    - `?BetaManagedAgentsBudgetLimit budget`
+
+      A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+
     - `?array<string,string> metadata`
 
       The session's full metadata bag after the update. Present when the update set non-empty metadata; absent when metadata was unchanged or cleared to empty.
@@ -736,6 +745,26 @@ List Session Thread Events
 
       A timestamp in RFC 3339 format
 
+  - `BetaManagedAgentsSessionUsageEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+    - `ManagedAgentsSessionUsageSnapshot usage`
+
+      Point-in-time snapshot of a session's cumulative usage.
+
+    - `?BetaManagedAgentsBudgetLimit budget`
+
+      A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+
 ### Example
 
 ```php
@@ -750,7 +779,7 @@ $page = $client->beta->sessions->threads->events->list(
   sessionID: 'sesn_011CZkZAtmR3yMPDzynEDxu7',
   limit: 0,
   page: 'page',
-  betas: ['message-batches-2024-09-24'],
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
 );
 
 var_dump($page);
@@ -921,7 +950,7 @@ Stream Session Thread Events
 
       Unique identifier for this event.
 
-    - `list<ManagedAgentsTextBlock> content`
+    - `list<Content> content`
 
       Array of text blocks comprising the agent response.
 
@@ -1479,6 +1508,10 @@ Stream Session Thread Events
 
       Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
 
+    - `?BetaManagedAgentsBudgetLimit budget`
+
+      A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+
     - `?array<string,string> metadata`
 
       The session's full metadata bag after the update. Present when the update set non-empty metadata; absent when metadata was unchanged or cleared to empty.
@@ -1523,6 +1556,26 @@ Stream Session Thread Events
 
       A timestamp in RFC 3339 format
 
+  - `BetaManagedAgentsSessionUsageEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+    - `ManagedAgentsSessionUsageSnapshot usage`
+
+      Point-in-time snapshot of a session's cumulative usage.
+
+    - `?BetaManagedAgentsBudgetLimit budget`
+
+      A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+
 ### Example
 
 ```php
@@ -1541,7 +1594,7 @@ $betaManagedAgentsStreamSessionThreadEvents = $client
   'sthr_011CZkZVWa6oIjw0rgXZpnBt',
   sessionID: 'sesn_011CZkZAtmR3yMPDzynEDxu7',
   eventDeltas: [BetaManagedAgentsDeltaType::AGENT_MESSAGE],
-  betas: ['message-batches-2024-09-24'],
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
 );
 
 var_dump($betaManagedAgentsStreamSessionThreadEvents);

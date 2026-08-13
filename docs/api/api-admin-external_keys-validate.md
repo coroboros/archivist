@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/external_keys/validate"
 category: "api"
 generated: true
 ---
+---
+title: Validate External Key
+url: https://platform.claude.com/docs/en/api/admin/external_keys/validate
+---
+
 ## Validate External Key
 
 **post** `/v1/organizations/external_keys/{external_key_id}/validate`

@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/php/beta/messages/batches/creat
 category: "api"
 generated: true
 ---
+---
+title: Create a Message Batch
+url: https://platform.claude.com/docs/en/api/php/beta/messages/batches/create
+---
+
 ## Create a Message Batch
 
 `$client->beta->messages->batches->create(list<Request> requests, ?list<AnthropicBeta> betas, ?string userProfileID): MessageBatch`
@@ -100,7 +105,7 @@ $betaMessageBatch = $client->beta->messages->batches->create(
       'params' => [
         'maxTokens' => 1024,
         'messages' => [['content' => 'Hello, world', 'role' => 'user']],
-        'model' => 'claude-opus-4-6',
+        'model' => Model::CLAUDE_OPUS_4_6,
         'cacheControl' => ['type' => 'ephemeral', 'ttl' => '5m'],
         'container' => [
           'id' => 'id',
@@ -193,7 +198,7 @@ $betaMessageBatch = $client->beta->messages->batches->create(
       ],
     ],
   ],
-  betas: ['message-batches-2024-09-24'],
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
   userProfileID: 'anthropic-user-profile-id',
 );
 

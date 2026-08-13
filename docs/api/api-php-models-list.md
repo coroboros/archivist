@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/php/models/list"
 category: "api"
 generated: true
 ---
+---
+title: List Models
+url: https://platform.claude.com/docs/en/api/php/models/list
+---
+
 ## List Models
 
 `$client->models->list(?string afterID, ?string beforeID, ?int limit, ?list<AnthropicBeta> betas): Page<ModelInfo>`
@@ -81,7 +86,7 @@ $page = $client->models->list(
   afterID: 'after_id',
   beforeID: 'before_id',
   limit: 1,
-  betas: ['message-batches-2024-09-24'],
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
 );
 
 var_dump($page);

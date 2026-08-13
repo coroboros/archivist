@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/csharp/beta/environments/retrie
 category: "api"
 generated: true
 ---
+---
+title: Get Environment
+url: https://platform.claude.com/docs/en/api/csharp/beta/environments/retrieve
+---
+
 ## Get Environment
 
 `BetaEnvironment Beta.Environments.Retrieve(EnvironmentRetrieveParamsparameters, CancellationTokencancellationToken = default)`
@@ -85,6 +90,8 @@ Retrieve a specific environment by ID.
     - `"fallback-credit-2026-07-01"FallbackCredit2026_07_01`
 
     - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
+
+    - `"mid-conversation-tool-changes-2026-07-01"MidConversationToolChanges2026_07_01`
 
 ### Returns
 

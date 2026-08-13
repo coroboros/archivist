@@ -1,13 +1,13 @@
 ---
-title: "Get started with Claude Managed Agents"
+title: "Core concepts"
 source: "https://platform.claude.com/docs/en/managed-agents/quickstart"
 category: "managed-agents"
 generated: true
 ---
-# Get started with Claude Managed Agents
-
-Create your first autonomous agent.
-
+---
+title: Get started with Claude Managed Agents
+url: https://platform.claude.com/docs/en/managed-agents/quickstart
+description: Create your first autonomous agent.
 ---
 
 This guide walks you through creating an agent, setting up an environment, starting a session, and streaming agent responses.
@@ -28,7 +28,7 @@ This guide walks you through creating an agent, setting up an environment, start
 ## Prerequisites
 
 * A [Claude Console account](https://platform.claude.com)
-* An [API key](/settings/keys)
+* An [API key](https://platform.claude.com/settings/keys)
 
 ## Install the CLI
 
@@ -43,7 +43,7 @@ This guide walks you through creating an agent, setting up an environment, start
     For Linux environments, download the release binary directly.
 
     ```bash
-    VERSION=1.21.0
+    VERSION=1.22.1
     OS=$(uname -s | tr '[:upper:]' '[:lower:]')
     case $(uname -m) in
       x86_64) ARCH=amd64 ;;
@@ -94,7 +94,7 @@ ant --version
 
   <Tab title="Java">
     ```groovy Gradle
-    implementation("com.anthropic:anthropic-java:2.52.0")
+    implementation("com.anthropic:anthropic-java:2.53.0")
     ```
   </Tab>
 
@@ -140,7 +140,7 @@ export ANTHROPIC_API_KEY="your-api-key-here"
     Create an agent that defines the model, system prompt, and available tools.
 
     <CodeGroup defaultLanguage="CLI">
-      ```bash curl
+      ```bash cURL
       set -euo pipefail
 
       agent=$(
@@ -341,7 +341,7 @@ export ANTHROPIC_API_KEY="your-api-key-here"
     An environment defines the sandbox where your agent runs.
 
     <CodeGroup defaultLanguage="CLI">
-      ```bash curl
+      ```bash cURL
       environment=$(
         curl -sS --fail-with-body https://api.anthropic.com/v1/environments \
           -H "x-api-key: $ANTHROPIC_API_KEY" \
@@ -470,7 +470,7 @@ export ANTHROPIC_API_KEY="your-api-key-here"
     Create a session that references your agent and environment.
 
     <CodeGroup>
-      ```bash curl
+      ```bash cURL
       session=$(
         curl -sS --fail-with-body https://api.anthropic.com/v1/sessions \
           -H "x-api-key: $ANTHROPIC_API_KEY" \
@@ -581,7 +581,7 @@ export ANTHROPIC_API_KEY="your-api-key-here"
     Open a stream, send a user event, then process events as they arrive:
 
     <CodeGroup>
-      ```bash curl
+      ```bash cURL
       # This workflow does not translate well to a one-off shell command.
       # Use one of the SDK examples in this code group instead.
       ```
@@ -755,7 +755,7 @@ export ANTHROPIC_API_KEY="your-api-key-here"
           // Process streaming events
           for (var event : (Iterable<BetaManagedAgentsStreamSessionEvents>) stream.stream()::iterator) {
               if (event.isAgentMessage()) {
-                  event.asAgentMessage().content().forEach(block -> IO.print(block.text()));
+                  event.asAgentMessage().content().forEach(block -> block.text().ifPresent(textBlock -> IO.print(textBlock.text())));
               } else if (event.isAgentToolUse()) {
                   IO.println("\n[Using tool: " + event.asAgentToolUse().name() + "]");
               } else if (event.isSessionStatusIdle()) {

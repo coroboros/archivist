@@ -1,13 +1,13 @@
 ---
-title: "Self-hosted sandboxes"
+title: "How it differs from cloud environments"
 source: "https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes"
 category: "managed-agents"
 generated: true
 ---
-# Self-hosted sandboxes
-
-Run Claude Managed Agents sessions in self-hosted sandboxes, keeping tool execution, files, and network egress in your own infrastructure.
-
+---
+title: Self-hosted sandboxes
+url: https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes
+description: Run Claude Managed Agents sessions in self-hosted sandboxes, keeping tool execution, files, and network egress in your own infrastructure.
 ---
 
 By default, Managed Agents executes tools and code inside [Anthropic-managed cloud sandboxes](./managed-agents-cloud-sandboxes-reference.md). Self-hosted sandboxes keep the orchestration on Anthropic's side but move tool execution into infrastructure you control, so the agent's code, filesystem, and network egress never leave your environment.
@@ -33,7 +33,7 @@ For Zero Data Retention and HIPAA BAA eligibility, see [API and data retention](
 
 ## When to combine with MCP tunnels
 
-Self-hosting controls *where the agent's code executes*. [MCP tunnels](../agents-and-tools/agents-and-tools-mcp-tunnels-overview.md) control *how Anthropic reaches MCP servers in your network*. They are independent: a session running in Anthropic's cloud sandboxes can still reach private MCP servers through a tunnel, and a self-hosted session can use either tunneled or public MCP servers. Use both when you want execution and tool access to stay inside your boundary. To give the agent tools from an MCP server inside your network without running a tunnel, you can also [wrap the server as custom tools](#wrap-an-mcp-server-as-custom-tools) served by your worker.
+Self-hosting controls *where the agent's code executes*. [MCP tunnels](../agents-and-tools/agents-and-tools-mcp-tunnels-overview.md) control *how Anthropic reaches MCP servers in your network*. They are independent: a session running in Anthropic's cloud sandboxes can still reach private MCP servers through a tunnel, and a self-hosted session can use either tunneled or public MCP servers. Use both when you want execution and tool access to stay inside your boundary. To give the agent tools from an MCP server inside your network without running a tunnel, you can also [wrap the server as custom tools](./managed-agents-self-hosted-sandboxes.md#wrap-an-mcp-server-as-custom-tools) served by your worker.
 
 ## Environment worker
 
@@ -45,7 +45,7 @@ An environment worker is a process you run on your own infrastructure. It receiv
 
 Work items are claimed by polling the environment's queue: either by an **always-on worker** that polls continuously, or a **webhook-triggered handler** that wakes on `session.status_run_started` and starts polling.
 
-The CLI and SDK both ship pre-built workers. The `ant` CLI supports the always-on pattern only; the SDK supports both always-on and webhook-triggered. Both are configurable: see [Self-hosted worker](./managed-agents-reference.md#self-hosted-worker) in the reference for CLI flags, and [SDK helpers](#sdk-helpers) on this page for the SDK options. For more control, call the [Environments Work endpoints](../api/api-beta-environments-work.md) directly and implement your own worker.
+The CLI and SDK both ship pre-built workers. The `ant` CLI supports the always-on pattern only; the SDK supports both always-on and webhook-triggered. Both are configurable: see [Self-hosted worker](./managed-agents-reference.md#self-hosted-worker) in the reference for CLI flags, and [SDK helpers](./managed-agents-self-hosted-sandboxes.md#sdk-helpers) on this page for the SDK options. For more control, call the [Environments Work endpoints](../api/api-beta-environments-work.md) directly and implement your own worker.
 
 ### Sandbox filesystem
 
@@ -207,7 +207,7 @@ Choose **always-on** for the simplest setup: a long-running process polls the qu
             For Linux environments, download the release binary directly.
 
             ```bash
-            VERSION=1.21.0
+            VERSION=1.22.1
             OS=$(uname -s | tr '[:upper:]' '[:lower:]')
             case $(uname -m) in
               x86_64) ARCH=amd64 ;;
@@ -246,7 +246,7 @@ Choose **always-on** for the simplest setup: a long-running process polls the qu
 
         ```text
         FROM your-base-image
-        ARG ANT_VERSION=1.21.0
+        ARG ANT_VERSION=1.22.1
         ARG TARGETARCH
         RUN ARCH=$([ "$TARGETARCH" = "arm64" ] && echo arm64 || echo amd64) && \
             curl -fsSL "https://github.com/anthropics/anthropic-cli/releases/download/v${ANT_VERSION}/ant_${ANT_VERSION}_linux_${ARCH}.tar.gz" \
@@ -256,7 +256,7 @@ Choose **always-on** for the simplest setup: a long-running process polls the qu
         ENTRYPOINT ["ant", "beta:worker", "run"]
         ```
 
-        Then write a spawn script that forwards session details into a fresh sandbox. The poller injects `ANTHROPIC_SESSION_ID`, `ANTHROPIC_WORK_ID`, `ANTHROPIC_ENVIRONMENT_ID`, and `ANTHROPIC_ENVIRONMENT_KEY` into the script's environment. `ANTHROPIC_BASE_URL` is optional and is passed through only if it was set on the poller host; it overrides the default API endpoint. In the example, `/host/outputs` is a host directory you choose; it is bind-mounted to the sandbox's working directory (`/workspace`) so you can retrieve session deliverables after the sandbox exits. On self-hosted environments the agent writes deliverables under the working directory rather than `/mnt/session/outputs` (see [Sandbox filesystem](#sandbox-filesystem)), so mounting the working directory is what captures them; the mount also picks up the downloaded `skills/` tree and any intermediate files the agent creates.
+        Then write a spawn script that forwards session details into a fresh sandbox. The poller injects `ANTHROPIC_SESSION_ID`, `ANTHROPIC_WORK_ID`, `ANTHROPIC_ENVIRONMENT_ID`, and `ANTHROPIC_ENVIRONMENT_KEY` into the script's environment. `ANTHROPIC_BASE_URL` is optional and is passed through only if it was set on the poller host; it overrides the default API endpoint. In the example, `/host/outputs` is a host directory you choose; it is bind-mounted to the sandbox's working directory (`/workspace`) so you can retrieve session deliverables after the sandbox exits. On self-hosted environments the agent writes deliverables under the working directory rather than `/mnt/session/outputs` (see [Sandbox filesystem](./managed-agents-self-hosted-sandboxes.md#sandbox-filesystem)), so mounting the working directory is what captures them; the mount also picks up the downloaded `skills/` tree and any intermediate files the agent creates.
 
         ```bash
         #!/bin/bash
@@ -282,7 +282,7 @@ Choose **always-on** for the simplest setup: a long-running process polls the qu
   <Tab title="Always-on (SDK)">
     <Steps>
       <Step title="Run the worker">
-        `EnvironmentWorker` claims work items assigned to the environment, downloads skills, executes tool calls in the working directory, and posts results back. Authenticate with the environment key you generated in [Before you begin](#before-you-begin).
+        `EnvironmentWorker` claims work items assigned to the environment, downloads skills, executes tool calls in the working directory, and posts results back. Authenticate with the environment key you generated in [Before you begin](./managed-agents-self-hosted-sandboxes.md#before-you-begin).
 
         <CodeGroup exclude="shell">
           ```python Python
@@ -389,7 +389,7 @@ Choose **always-on** for the simplest setup: a long-running process polls the qu
       </Step>
 
       <Step title="Export the webhook signing key">
-        In addition to the environment ID and key from [Before you begin](#before-you-begin), export the webhook signing key on your handler host so the handler can verify incoming payloads. Signature verification in the Python handler needs the webhooks extra: `pip install "anthropic[webhooks]"`.
+        In addition to the environment ID and key from [Before you begin](./managed-agents-self-hosted-sandboxes.md#before-you-begin), export the webhook signing key on your handler host so the handler can verify incoming payloads. Signature verification in the Python handler needs the webhooks extra: `pip install "anthropic[webhooks]"`.
 
         ```bash
         export ANTHROPIC_WEBHOOK_SIGNING_KEY="whsec_..."
@@ -852,11 +852,11 @@ From a separate shell, with `ANTHROPIC_API_KEY` set to your Claude API key (not 
 ant beta:environments:work stats --environment-id "$ANTHROPIC_ENVIRONMENT_ID"
 ```
 
-If `workers_polling` stays at 0, the worker isn't reaching the queue: confirm `ANTHROPIC_ENVIRONMENT_KEY` and `ANTHROPIC_ENVIRONMENT_ID` are set on the worker host. See [Read queue depth](#read-queue-depth) for the full stats response and other language examples.
+If `workers_polling` stays at 0, the worker isn't reaching the queue: confirm `ANTHROPIC_ENVIRONMENT_KEY` and `ANTHROPIC_ENVIRONMENT_ID` are set on the worker host. See [Read queue depth](./managed-agents-self-hosted-sandboxes.md#read-queue-depth) for the full stats response and other language examples.
 
 ## Start a session
 
-Once your worker is running, create a session that targets the environment. Set `AGENT_ID` to the agent ID you noted in [Before you begin](#before-you-begin). The session enters the environment's work queue and waits there until a worker claims it; if no worker is connected, the session stays queued rather than failing.
+Once your worker is running, create a session that targets the environment. Set `AGENT_ID` to the agent ID you noted in [Before you begin](./managed-agents-self-hosted-sandboxes.md#before-you-begin). The session enters the environment's work queue and waits there until a worker claims it; if no worker is connected, the session stays queued rather than failing.
 
 Anthropic doesn't mount files or GitHub repositories into self-hosted sandboxes. To make session-specific files available, pass file references (such as an S3 path or commit SHA) in the session `metadata` field. The claimed work item doesn't carry the session's metadata, but it does carry the session ID: your spawn script or `--on-work` handler retrieves the session (`GET /v1/sessions/{session_id}`) to read the `metadata` field, then stages the files into the working directory before tool execution begins.
 
@@ -952,7 +952,7 @@ Anthropic doesn't mount files or GitHub repositories into self-hosted sandboxes.
   Self-hosted sandboxes don't support `resources` entries; a session that includes any resource on a self-hosted environment is rejected.
 </Note>
 
-See [Self-hosted worker](./managed-agents-reference.md#self-hosted-worker) in the reference for the full list of CLI flags, and [SDK helpers](#sdk-helpers) for the SDK helper options.
+See [Self-hosted worker](./managed-agents-reference.md#self-hosted-worker) in the reference for the full list of CLI flags, and [SDK helpers](./managed-agents-self-hosted-sandboxes.md#sdk-helpers) for the SDK helper options.
 
 ## Serve custom tools from your sandbox
 
@@ -983,7 +983,7 @@ See [Self-hosted worker](./managed-agents-reference.md#self-hosted-worker) in th
   </Step>
 
   <Step title="Register the implementation with the worker">
-    Pass the tool through the worker's `tools` factory (see [SDK helpers](#sdk-helpers)), alongside the built-in toolset:
+    Pass the tool through the worker's `tools` factory (see [SDK helpers](./managed-agents-self-hosted-sandboxes.md#sdk-helpers)), alongside the built-in toolset:
 
     <CodeGroup exclude="shell">
       ```python Python
@@ -1535,7 +1535,7 @@ The SDKs' [Client-side MCP helpers](../agents-and-tools/agents-and-tools-mcp-con
 Keep the following in mind when you wrap an MCP server:
 
 * **Tools are declared, not discovered at runtime.** The worker lists the MCP server's tools once at startup and cannot add tools to a running session. When the server's tools change, declare them again, on the agent or on an idle session through [Updating the agent configuration](./managed-agents-session-operations.md#updating-the-agent-configuration), and restart the worker.
-* **Names and descriptions must fit the Managed Agents API.** Custom tool names are unique per agent and use letters, digits, underscores, and hyphens (1–128 characters); a description is required (1–4,096 characters); and an agent's `tools` array takes at most 128 entries (each wrapped tool is one entry, and the built-in toolset is one more). The API rejects a declaration that reuses a tool name, names a custom tool after a built-in agent tool such as `bash` or `read`, or uses the reserved `mcp__` prefix. The MCP helpers keep the server's names and descriptions, so rename or trim where needed. When two servers expose the same tool name, define the wrapper yourself under a prefixed name and have it call the server's original tool name.
+* **Names and descriptions must fit the Managed Agents API.** Custom tool names are unique per agent and use letters, digits, underscores, and hyphens (1–128 characters); a non-empty description is required; and an agent's `tools` array takes at most 128 entries (each wrapped tool is one entry, and the built-in toolset is one more). The API rejects a declaration that reuses a tool name, names a custom tool after a built-in agent tool such as `bash` or `read`, or uses the reserved `mcp__` prefix. The MCP helpers keep the server's names and descriptions, so rename or trim where needed. When two servers expose the same tool name, define the wrapper yourself under a prefixed name and have it call the server's original tool name.
 * **Most schemas pass through unchanged.** The API accepts the JSON Schema keywords MCP servers commonly emit, such as `additionalProperties` and `title`. It rejects reference keywords such as `$ref` anywhere in a custom tool's `input_schema`, so inline the schemas that generators such as pydantic factor into `$defs`. It also rejects top-level `oneOf`, `anyOf`, and `allOf`, and property names outside letters, digits, underscores, dots, and hyphens (1–64 characters).
 * **Tool failures surface as error tool results.** When the MCP server reports a tool error, the worker posts an error tool result the model can react to. MCP content with no tool result equivalent, such as audio blocks and resource links, also surfaces as an error. Set a timeout on the MCP client for a faster and clearer failure, as the Python worker example does with `read_timeout_seconds`. Without one, a hung call becomes an error result only when the TypeScript MCP SDK's default request timeout fires (about a minute) or when the worker's own backstop does: about two and a half minutes in Python, and two minutes in Go, where the worker cancels a tool call that outlives its 120-second default and posts an error result.
 * **Wrap servers you operate or trust.** A wrapped tool's name, description, and results enter the model's context like any other tool's: untrusted input that can influence what the agent does with its other tools, including `bash` on the worker host. Declare only the tools you intend the agent to use.

@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/beta/environments/work/list"
 category: "api"
 generated: true
 ---
+---
+title: List Work Items
+url: https://platform.claude.com/docs/en/api/beta/environments/work/list
+---
+
 ## List Work Items
 
 **get** `/v1/environments/{environment_id}/work`
@@ -34,7 +39,7 @@ List work items in an environment.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 29 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 30 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -99,6 +104,8 @@ List work items in an environment.
     - `"fallback-credit-2026-07-01"`
 
     - `"agent-memory-2026-07-22"`
+
+    - `"mid-conversation-tool-changes-2026-07-01"`
 
 ### Returns
 

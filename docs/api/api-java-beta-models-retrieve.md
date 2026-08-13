@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/java/beta/models/retrieve"
 category: "api"
 generated: true
 ---
+---
+title: Get a Model
+url: https://platform.claude.com/docs/en/api/java/beta/models/retrieve
+---
+
 ## Get a Model
 
 `BetaModelInfo beta().models().retrieve(ModelRetrieveParamsparams = ModelRetrieveParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
@@ -89,6 +94,8 @@ The Models API response can be used to determine information about a specific mo
     - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
 ### Returns
 

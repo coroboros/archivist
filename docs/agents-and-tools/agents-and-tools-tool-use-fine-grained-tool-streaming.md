@@ -1,13 +1,13 @@
 ---
-title: "Fine-grained tool streaming"
+title: "How to use fine-grained tool streaming"
 source: "https://platform.claude.com/docs/en/agents-and-tools/tool-use/fine-grained-tool-streaming"
 category: "agents-and-tools"
 generated: true
 ---
-# Fine-grained tool streaming
-
-Stream tool inputs without server-side JSON buffering for latency-sensitive applications.
-
+---
+title: Fine-grained tool streaming
+url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/fine-grained-tool-streaming
+description: Stream tool inputs without server-side JSON buffering for latency-sensitive applications.
 ---
 
 <Note>
@@ -17,7 +17,7 @@ Stream tool inputs without server-side JSON buffering for latency-sensitive appl
 Fine-grained tool streaming delivers a tool's input to your client as Claude generates it, without server-side buffering or JSON validation. Skipping the buffering step reduces the time to the first fragment of a large parameter, such as a document or a block of code, and the fragments arrive through the same [Streaming messages](../build-with-claude/build-with-claude-streaming.md) events as standard tool use.
 
 <Warning>
-  Because the API does not buffer or validate a tool's input before streaming it, you might receive partial or invalid JSON. A response that ends with the [stop reason](../build-with-claude/build-with-claude-handling-stop-reasons.md) `max_tokens` can also cut a parameter off midway. Accumulate the fragments, guard the parse, and see [Handling invalid JSON in tool responses](#handling-invalid-json-in-tool-responses) for how to return unparseable input to Claude.
+  Because the API does not buffer or validate a tool's input before streaming it, you might receive partial or invalid JSON. A response that ends with the [stop reason](../build-with-claude/build-with-claude-handling-stop-reasons.md) `max_tokens` can also cut a parameter off midway. Accumulate the fragments, guard the parse, and see [Handling invalid JSON in tool responses](./agents-and-tools-tool-use-fine-grained-tool-streaming.md#handling-invalid-json-in-tool-responses) for how to return unparseable input to Claude.
 </Warning>
 
 ## How to use fine-grained tool streaming

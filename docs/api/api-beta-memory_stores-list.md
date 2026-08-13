@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/beta/memory_stores/list"
 category: "api"
 generated: true
 ---
+---
+title: List memory stores
+url: https://platform.claude.com/docs/en/api/beta/memory_stores/list
+---
+
 ## List memory stores
 
 **get** `/v1/memory_stores`
@@ -40,7 +45,7 @@ List memory stores
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 29 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 30 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -105,6 +110,8 @@ List memory stores
     - `"fallback-credit-2026-07-01"`
 
     - `"agent-memory-2026-07-22"`
+
+    - `"mid-conversation-tool-changes-2026-07-01"`
 
 ### Returns
 

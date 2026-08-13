@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/analytics/chat_projects"
 category: "api"
 generated: true
 ---
+---
+title: Chat Projects
+url: https://platform.claude.com/docs/en/api/admin/analytics/chat_projects
+---
+
 # Chat Projects
 
 ## Get Chat Project Usage

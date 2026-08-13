@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/php/beta/agents/update"
 category: "api"
 generated: true
 ---
+---
+title: Update Agent
+url: https://platform.claude.com/docs/en/api/php/beta/agents/update
+---
+
 ## Update Agent
 
 `$client->beta->agents->update(string agentID, ?string description, ?list<BetaManagedAgentsURLMCPServerParams> mcpServers, ?array<string,string> metadata, ?Model model, ?BetaManagedAgentsMultiagentParams multiagent, ?string name, ?list<BetaManagedAgentsSkillParams> skills, ?string system, ?list<Tool> tools, ?int version, ?list<AnthropicBeta> betas): BetaManagedAgentsAgent`
@@ -126,7 +131,12 @@ $betaManagedAgentsAgent = $client->beta->agents->update(
     ],
   ],
   metadata: ['foo' => 'string'],
-  model: ['id' => 'claude-opus-4-8', 'effort' => 'low', 'speed' => 'standard'],
+  model: [
+    'id' => BetaManagedAgentsModel::CLAUDE_OPUS_4_8,
+    'effort' => 'low',
+    'inferenceGeo' => 'inference_geo',
+    'speed' => 'standard',
+  ],
   multiagent: [
     'agents' => ['agent_011CZkYqphY8vELVzwCUpqiQ', ['type' => 'self']],
     'type' => 'coordinator',
@@ -150,7 +160,7 @@ $betaManagedAgentsAgent = $client->beta->agents->update(
     ],
   ],
   version: 1,
-  betas: ['message-batches-2024-09-24'],
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
 );
 
 var_dump($betaManagedAgentsAgent);
@@ -179,6 +189,7 @@ var_dump($betaManagedAgentsAgent);
     "effort": {
       "type": "low"
     },
+    "inference_geo": "inference_geo",
     "speed": "standard"
   },
   "multiagent": {

@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/go/messages/batches/retrieve"
 category: "api"
 generated: true
 ---
+---
+title: Retrieve a Message Batch
+url: https://platform.claude.com/docs/en/api/go/messages/batches/retrieve
+---
+
 ## Retrieve a Message Batch
 
 `client.Messages.Batches.Get(ctx, messageBatchID) (*MessageBatch, error)`

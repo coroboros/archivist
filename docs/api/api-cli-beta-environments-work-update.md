@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/cli/beta/environments/work/upda
 category: "api"
 generated: true
 ---
+---
+title: Update Work Item
+url: https://platform.claude.com/docs/en/api/cli/beta/environments/work/update
+---
+
 ## Update Work Item
 
 `$ ant beta:environments:work update`

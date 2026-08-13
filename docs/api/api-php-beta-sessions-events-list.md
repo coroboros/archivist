@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/php/beta/sessions/events/list"
 category: "api"
 generated: true
 ---
+---
+title: List Events
+url: https://platform.claude.com/docs/en/api/php/beta/sessions/events/list
+---
+
 ## List Events
 
 `$client->beta->sessions->events->list(string sessionID, ?\Datetime createdAtGt, ?\Datetime createdAtGte, ?\Datetime createdAtLt, ?\Datetime createdAtLte, ?int limit, ?Order order, ?string page, ?list<string> types, ?list<AnthropicBeta> betas): PageCursor<ManagedAgentsSessionEvent>`
@@ -174,7 +179,7 @@ List Events
 
       Unique identifier for this event.
 
-    - `list<ManagedAgentsTextBlock> content`
+    - `list<Content> content`
 
       Array of text blocks comprising the agent response.
 
@@ -732,6 +737,10 @@ List Events
 
       Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
 
+    - `?BetaManagedAgentsBudgetLimit budget`
+
+      A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+
     - `?array<string,string> metadata`
 
       The session's full metadata bag after the update. Present when the update set non-empty metadata; absent when metadata was unchanged or cleared to empty.
@@ -756,6 +765,26 @@ List Events
 
       A timestamp in RFC 3339 format
 
+  - `BetaManagedAgentsSessionUsageEvent`
+
+    - `string id`
+
+      Unique identifier for this event.
+
+    - `\Datetime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+    - `ManagedAgentsSessionUsageSnapshot usage`
+
+      Point-in-time snapshot of a session's cumulative usage.
+
+    - `?BetaManagedAgentsBudgetLimit budget`
+
+      A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+
 ### Example
 
 ```php
@@ -775,7 +804,7 @@ $page = $client->beta->sessions->events->list(
   order: 'asc',
   page: 'page',
   types: ['string'],
-  betas: ['message-batches-2024-09-24'],
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
 );
 
 var_dump($page);

@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/cli/beta/memory_stores/memories
 category: "api"
 generated: true
 ---
+---
+title: Memories
+url: https://platform.claude.com/docs/en/api/cli/beta/memory_stores/memories
+---
+
 # Memories
 
 ## Create a memory

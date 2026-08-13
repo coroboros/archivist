@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/cli/beta/sessions/resources/ret
 category: "api"
 generated: true
 ---
+---
+title: Get Session Resource
+url: https://platform.claude.com/docs/en/api/cli/beta/sessions/resources/retrieve
+---
+
 ## Get Session Resource
 
 `$ ant beta:sessions:resources retrieve`

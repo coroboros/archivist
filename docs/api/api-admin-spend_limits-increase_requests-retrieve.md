@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/spend_limits/increase_req
 category: "api"
 generated: true
 ---
+---
+title: Get Spend Limit Increase Request
+url: https://platform.claude.com/docs/en/api/admin/spend_limits/increase_requests/retrieve
+---
+
 ## Get Spend Limit Increase Request
 
 **get** `/v1/organizations/spend_limit_increase_requests/{spend_limit_increase_request_id}`

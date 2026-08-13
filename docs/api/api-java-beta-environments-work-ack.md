@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/java/beta/environments/work/ack
 category: "api"
 generated: true
 ---
+---
+title: Acknowledge Work
+url: https://platform.claude.com/docs/en/api/java/beta/environments/work/ack
+---
+
 ## Acknowledge Work
 
 `BetaSelfHostedWork beta().environments().work().ack(WorkAckParamsparams, RequestOptionsrequestOptions = RequestOptions.none())`
@@ -89,6 +94,8 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
     - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
 ### Returns
 

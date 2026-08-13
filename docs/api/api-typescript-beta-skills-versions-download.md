@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/typescript/beta/skills/versions
 category: "api"
 generated: true
 ---
+---
+title: Download Skill Version Content
+url: https://platform.claude.com/docs/en/api/typescript/beta/skills/versions/download
+---
+
 ## Download Skill Version Content
 
 `client.beta.skills.versions.download(stringversion, VersionDownloadParamsparams, RequestOptionsoptions?): Response`
@@ -34,7 +39,7 @@ Download a skill version's content as a zip archive.
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 29 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -100,20 +105,24 @@ Download a skill version's content as a zip archive.
 
       - `"agent-memory-2026-07-22"`
 
+      - `"mid-conversation-tool-changes-2026-07-01"`
+
 ### Returns
 
-- `unnamed_schema_3 = Response`
+- `unnamed_schema_1 = Response`
 
 ### Example
 
 ```typescript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic({
-  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
+  apiKey: process.env["ANTHROPIC_API_KEY"] // This is the default and can be omitted
 });
 
-const response = await client.beta.skills.versions.download('version', { skill_id: 'skill_id' });
+const response = await client.beta.skills.versions.download("version", {
+  skill_id: "skill_id"
+});
 
 console.log(response);
 

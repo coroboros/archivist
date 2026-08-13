@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/csharp/messages/batches/retriev
 category: "api"
 generated: true
 ---
+---
+title: Retrieve a Message Batch
+url: https://platform.claude.com/docs/en/api/csharp/messages/batches/retrieve
+---
+
 ## Retrieve a Message Batch
 
 `MessageBatch Messages.Batches.Retrieve(BatchRetrieveParamsparameters, CancellationTokencancellationToken = default)`

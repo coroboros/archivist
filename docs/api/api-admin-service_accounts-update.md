@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/service_accounts/update"
 category: "api"
 generated: true
 ---
+---
+title: Update Service Account
+url: https://platform.claude.com/docs/en/api/admin/service_accounts/update
+---
+
 ## Update Service Account
 
 **post** `/v1/organizations/service_accounts/{service_account_id}`

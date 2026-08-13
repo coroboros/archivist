@@ -1,13 +1,13 @@
 ---
-title: "Python SDK"
+title: "For Amazon Bedrock support"
 source: "https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/python"
 category: "general"
 generated: true
 ---
-# Python SDK
-
-Install and configure the Anthropic Python SDK with sync and async client support
-
+---
+title: Python SDK
+url: https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/python
+description: Install and configure the Anthropic Python SDK with sync and async client support
 ---
 
 The Anthropic Python SDK provides convenient access to the Anthropic REST API from Python applications. It supports both synchronous and asynchronous operations, streaming, and integrations with Amazon Bedrock, Claude Platform on AWS, Google Cloud, and Microsoft Foundry.
@@ -458,19 +458,19 @@ client.with_options(timeout=5.0).messages.create(
 
 On timeout, the SDK throws an `APITimeoutError`.
 
-Note that requests that time out are [retried twice by default](#retries).
+Note that requests that time out are [retried twice by default](./general-cli-sdks-libraries-sdks-python.md#retries).
 
 ## Long requests
 
 <Warning>
-  Consider using the streaming [Messages API](#streaming-responses) for longer running requests.
+  Consider using the streaming [Messages API](./general-cli-sdks-libraries-sdks-python.md#streaming-responses) for longer running requests.
 </Warning>
 
-Avoid setting a large `max_tokens` value without using streaming. Some networks may drop idle connections after a certain period of time, which can cause the request to fail or [timeout](#timeouts) without receiving a response from Anthropic.
+Avoid setting a large `max_tokens` value without using streaming. Some networks may drop idle connections after a certain period of time, which can cause the request to fail or [timeout](./general-cli-sdks-libraries-sdks-python.md#timeouts) without receiving a response from Anthropic.
 
 The SDK will throw a `ValueError` if a non-streaming request is expected to take longer than approximately 10 minutes. Passing `stream=True` or overriding the `timeout` option at the client or request level disables this error.
 
-An expected request latency longer than the [timeout](#timeouts) for a non-streaming request will result in the client terminating the connection and retrying without receiving a response.
+An expected request latency longer than the [timeout](./general-cli-sdks-libraries-sdks-python.md#timeouts) for a non-streaming request will result in the client terminating the connection and retrying without receiving a response.
 
 The SDK sets a [TCP socket keep-alive](https://tldp.org/HOWTO/TCP-Keepalive-HOWTO/overview.html) option to reduce the impact of idle connection timeouts on some networks. This can be overridden by passing a custom `http_client` option to the client.
 

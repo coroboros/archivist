@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/csharp/beta/environments/work/a
 category: "api"
 generated: true
 ---
+---
+title: Acknowledge Work
+url: https://platform.claude.com/docs/en/api/csharp/beta/environments/work/ack
+---
+
 ## Acknowledge Work
 
 `BetaSelfHostedWork Beta.Environments.Work.Ack(WorkAckParamsparameters, CancellationTokencancellationToken = default)`
@@ -93,6 +98,8 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
     - `"fallback-credit-2026-07-01"FallbackCredit2026_07_01`
 
     - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
+
+    - `"mid-conversation-tool-changes-2026-07-01"MidConversationToolChanges2026_07_01`
 
 ### Returns
 

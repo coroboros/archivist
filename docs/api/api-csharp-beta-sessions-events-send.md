@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/csharp/beta/sessions/events/sen
 category: "api"
 generated: true
 ---
+---
+title: Send Events
+url: https://platform.claude.com/docs/en/api/csharp/beta/sessions/events/send
+---
+
 ## Send Events
 
 `BetaManagedAgentsSendSessionEvents Beta.Sessions.Events.Send(EventSendParamsparameters, CancellationTokencancellationToken = default)`
@@ -173,6 +178,14 @@ Send Events
           - `string? Title`
 
             The title of the document.
+
+        - `class BetaManagedAgentsRedactedBlock:`
+
+          Placeholder for content withheld by Anthropic model policy.
+
+          - `required Type Type`
+
+            - `"redacted"Redacted`
 
       - `required Type Type`
 
@@ -450,6 +463,8 @@ Send Events
 
     - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
 
+    - `"mid-conversation-tool-changes-2026-07-01"MidConversationToolChanges2026_07_01`
+
 ### Returns
 
 - `class BetaManagedAgentsSendSessionEvents:`
@@ -613,6 +628,14 @@ Send Events
           - `string? Title`
 
             The title of the document.
+
+        - `class BetaManagedAgentsRedactedBlock:`
+
+          Placeholder for content withheld by Anthropic model policy.
+
+          - `required Type Type`
+
+            - `"redacted"Redacted`
 
       - `required Type Type`
 

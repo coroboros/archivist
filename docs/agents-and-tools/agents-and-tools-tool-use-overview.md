@@ -1,13 +1,13 @@
 ---
-title: "Tool use with Claude"
+title: "How tool use works"
 source: "https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview"
 category: "agents-and-tools"
 generated: true
 ---
-# Tool use with Claude
-
-Connect Claude to external tools and APIs. See where tools execute, when Claude calls them, and which tool fits your task.
-
+---
+title: Tool use with Claude
+url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview
+description: Connect Claude to external tools and APIs. See where tools execute, when Claude calls them, and which tool fits your task.
 ---
 
 Tool use lets Claude call functions that you define or that Anthropic provides. Claude determines when to call a tool based on the user's request and the tool's description. It then returns a structured call that your application executes (client tools) or that Anthropic executes (server tools).
@@ -140,7 +140,7 @@ Here's a minimal example using a server tool, the [Web search tool](./agents-and
   ```
 </CodeGroup>
 
-Claude runs the search on Anthropic's infrastructure and returns the cited results in the same response. To have Claude call a function that you define, pass a tool with an `input_schema`, then execute the call when Claude returns a `tool_use` block. [How tool use works](#how-tool-use-works) shows that round trip end to end. Learn more about [defining tools](./agents-and-tools-tool-use-define-tools.md) and [handling tool calls](./agents-and-tools-tool-use-handle-tool-calls.md).
+Claude runs the search on Anthropic's infrastructure and returns the cited results in the same response. To have Claude call a function that you define, pass a tool with an `input_schema`, then execute the call when Claude returns a `tool_use` block. [How tool use works](./agents-and-tools-tool-use-overview.md#how-tool-use-works) shows that round trip end to end. Learn more about [defining tools](./agents-and-tools-tool-use-define-tools.md) and [handling tool calls](./agents-and-tools-tool-use-handle-tool-calls.md).
 
 ## How tool use works
 
@@ -869,20 +869,20 @@ The additional tokens from tool use come from:
 
 When you use `tools`, the API also automatically includes a special system prompt for the model that enables tool use. The number of tool use tokens required for each model is listed in the following table (excluding the additional tokens listed earlier). Note that the table assumes at least 1 tool is provided. If no `tools` are provided, then a tool choice of `none` uses 0 additional system prompt tokens.
 
-| Model                                                                                                      | Tool choice                    | Tool use system prompt token count |
-| ---------------------------------------------------------------------------------------------------------- | ------------------------------ | ---------------------------------- |
-| Claude Opus 5                                                                                              | `auto`, `none`***`any`, `tool` | 286 tokens***406 tokens            |
-| Claude Opus 4.8                                                                                            | `auto`, `none`***`any`, `tool` | 290 tokens***410 tokens            |
-| Claude Opus 4.7                                                                                            | `auto`, `none`***`any`, `tool` | 675 tokens***804 tokens            |
-| Claude Opus 4.6                                                                                            | `auto`, `none`***`any`, `tool` | 497 tokens***589 tokens            |
-| Claude Opus 4.5                                                                                            | `auto`, `none`***`any`, `tool` | 496 tokens***588 tokens            |
+| Model                                                                                                                                 | Tool choice                    | Tool use system prompt token count |
+| ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------ | ---------------------------------- |
+| Claude Opus 5                                                                                                                         | `auto`, `none`***`any`, `tool` | 286 tokens***406 tokens            |
+| Claude Opus 4.8                                                                                                                       | `auto`, `none`***`any`, `tool` | 290 tokens***410 tokens            |
+| Claude Opus 4.7                                                                                                                       | `auto`, `none`***`any`, `tool` | 675 tokens***804 tokens            |
+| Claude Opus 4.6                                                                                                                       | `auto`, `none`***`any`, `tool` | 497 tokens***589 tokens            |
+| Claude Opus 4.5                                                                                                                       | `auto`, `none`***`any`, `tool` | 496 tokens***588 tokens            |
 | Claude Opus 4.1 ([retired, except on Bedrock and Google Cloud](../about-claude/about-claude-model-deprecations.md))  | `auto`, `none`***`any`, `tool` | 313 tokens***315 tokens            |
 | Claude Opus 4 ([retired, except on Google Cloud](../about-claude/about-claude-model-deprecations.md))                | `auto`, `none`***`any`, `tool` | 313 tokens***315 tokens            |
-| Claude Sonnet 5                                                                                            | `auto`, `none`***`any`, `tool` | 354 tokens***474 tokens            |
-| Claude Sonnet 4.6                                                                                          | `auto`, `none`***`any`, `tool` | 497 tokens***589 tokens            |
-| Claude Sonnet 4.5                                                                                          | `auto`, `none`***`any`, `tool` | 496 tokens***588 tokens            |
+| Claude Sonnet 5                                                                                                                       | `auto`, `none`***`any`, `tool` | 354 tokens***474 tokens            |
+| Claude Sonnet 4.6                                                                                                                     | `auto`, `none`***`any`, `tool` | 497 tokens***589 tokens            |
+| Claude Sonnet 4.5                                                                                                                     | `auto`, `none`***`any`, `tool` | 496 tokens***588 tokens            |
 | Claude Sonnet 4 ([retired, except on Bedrock and Google Cloud](../about-claude/about-claude-model-deprecations.md))  | `auto`, `none`***`any`, `tool` | 313 tokens***315 tokens            |
-| Claude Haiku 4.5                                                                                           | `auto`, `none`***`any`, `tool` | 496 tokens***588 tokens            |
+| Claude Haiku 4.5                                                                                                                      | `auto`, `none`***`any`, `tool` | 496 tokens***588 tokens            |
 | Claude Haiku 3.5 ([retired, except on Bedrock and Google Cloud](../about-claude/about-claude-model-deprecations.md)) | `auto`, `none`***`any`, `tool` | 264 tokens***355 tokens            |
 
 These token counts are added to your normal input and output tokens to calculate the total cost of a request.

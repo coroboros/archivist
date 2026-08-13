@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/cli/models"
 category: "api"
 generated: true
 ---
+---
+title: Models
+url: https://platform.claude.com/docs/en/api/cli/models
+---
+
 # Models
 
 ## List Models

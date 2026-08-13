@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/typescript/beta/messages/batche
 category: "api"
 generated: true
 ---
+---
+title: Delete a Message Batch
+url: https://platform.claude.com/docs/en/api/typescript/beta/messages/batches/delete
+---
+
 ## Delete a Message Batch
 
 `client.beta.messages.batches.delete(stringmessageBatchID, BatchDeleteParamsparams?, RequestOptionsoptions?): BetaDeletedMessageBatch`
@@ -30,7 +35,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 29 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -96,6 +101,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
       - `"agent-memory-2026-07-22"`
 
+      - `"mid-conversation-tool-changes-2026-07-01"`
+
 ### Returns
 
 - `BetaDeletedMessageBatch`
@@ -115,13 +122,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 ### Example
 
 ```typescript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic({
-  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
+  apiKey: process.env["ANTHROPIC_API_KEY"] // This is the default and can be omitted
 });
 
-const betaDeletedMessageBatch = await client.beta.messages.batches.delete('message_batch_id');
+const betaDeletedMessageBatch = await client.beta.messages.batches.delete("message_batch_id");
 
 console.log(betaDeletedMessageBatch.id);
 ```

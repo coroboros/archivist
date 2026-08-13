@@ -1,13 +1,13 @@
 ---
-title: "Reference"
+title: "Event types"
 source: "https://platform.claude.com/docs/en/managed-agents/reference"
 category: "managed-agents"
 generated: true
 ---
-# Reference
-
-Event types, self-hosted worker CLI flags, supported MCP server types, rate limits, and branding guidelines for Claude Managed Agents.
-
+---
+title: Reference
+url: https://platform.claude.com/docs/en/managed-agents/reference
+description: Event types, self-hosted worker CLI flags, supported MCP server types, rate limits, and branding guidelines for Claude Managed Agents.
 ---
 
 This page collects reference material for Claude Managed Agents. For task-oriented guides, follow the links in each section. For the operations on the session resource, see [Session operations](./managed-agents-session-operations.md).
@@ -22,27 +22,27 @@ Persisted event type strings follow a `{domain}.{action}` naming convention; the
 
 <Tabs>
   <Tab title="User events">
-    | Type                      | Description                                                                                                                                                                                                               |
-    | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-    | `user.message`            | A user message with text, image, or document content.                                                                                                                                                                     |
-    | `user.interrupt`          | Stop the agent mid-execution.                                                                                                                                                                                             |
-    | `user.custom_tool_result` | Response to a custom tool call from the agent.                                                                                                                                                                            |
-    | `user.tool_confirmation`  | Approve or deny an agent or MCP tool call when a permission policy requires confirmation.                                                                                                                                 |
+    | Type                      | Description                                                                                                                                                                                                                                          |
+    | ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+    | `user.message`            | A user message with text, image, or document content.                                                                                                                                                                                                |
+    | `user.interrupt`          | Stop the agent mid-execution.                                                                                                                                                                                                                        |
+    | `user.custom_tool_result` | Response to a custom tool call from the agent.                                                                                                                                                                                                       |
+    | `user.tool_confirmation`  | Approve or deny an agent or MCP tool call when a permission policy requires confirmation.                                                                                                                                                            |
     | `user.define_outcome`     | Define an [outcome](./managed-agents-define-outcomes.md) for the agent to work toward.                                                                                                                                |
     | `user.tool_result`        | For sessions with `self_hosted` [environments](./managed-agents-self-hosted-sandboxes.md) only, your integration is responsible for providing `agent_toolset` results. The SDK helpers and CLI do this automatically. |
   </Tab>
 
   <Tab title="Agent events">
-    | Type                             | Description                                                                                                                                                                                                                                         |
-    | -------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-    | `agent.message`                  | Agent response content blocks.                                                                                                                                                                                                                      |
-    | `agent.thinking`                 | Signals the agent is making forward progress through extended thinking. This is a progress signal only and does not carry the thinking content.                                                                                                     |
-    | `agent.tool_use`                 | Agent invokes a pre-built agent tool (bash, file operations, and so on).                                                                                                                                                                            |
-    | `agent.tool_result`              | Result of a pre-built agent tool execution.                                                                                                                                                                                                         |
-    | `agent.mcp_tool_use`             | Agent invokes an MCP server tool.                                                                                                                                                                                                                   |
-    | `agent.mcp_tool_result`          | Result of an MCP tool execution.                                                                                                                                                                                                                    |
-    | `agent.custom_tool_use`          | Agent invokes one of your custom tools. Respond with a `user.custom_tool_result` event.                                                                                                                                                             |
-    | `agent.thread_context_compacted` | Conversation history was compacted to fit the context window.                                                                                                                                                                                       |
+    | Type                             | Description                                                                                                                                                                                                                                                                    |
+    | -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+    | `agent.message`                  | Agent response content blocks.                                                                                                                                                                                                                                                 |
+    | `agent.thinking`                 | Signals the agent is making forward progress through extended thinking. This is a progress signal only and does not carry the thinking content.                                                                                                                                |
+    | `agent.tool_use`                 | Agent invokes a pre-built agent tool (bash, file operations, and so on).                                                                                                                                                                                                       |
+    | `agent.tool_result`              | Result of a pre-built agent tool execution.                                                                                                                                                                                                                                    |
+    | `agent.mcp_tool_use`             | Agent invokes an MCP server tool.                                                                                                                                                                                                                                              |
+    | `agent.mcp_tool_result`          | Result of an MCP tool execution.                                                                                                                                                                                                                                               |
+    | `agent.custom_tool_use`          | Agent invokes one of your custom tools. Respond with a `user.custom_tool_result` event.                                                                                                                                                                                        |
+    | `agent.thread_context_compacted` | Conversation history was compacted to fit the context window.                                                                                                                                                                                                                  |
     | `agent.thread_message_received`  | In a [multiagent](./managed-agents-multiagent-orchestration.md) session, a message from another thread arrived on the thread whose stream carries this event; on the primary thread, an agent sent a report or question to the coordinator.     |
     | `agent.thread_message_sent`      | In a [multiagent](./managed-agents-multiagent-orchestration.md) session, the thread whose stream carries this event sent a message to another thread; on the primary thread, the coordinator sent a task or follow-up message to another agent. |
 
@@ -50,30 +50,30 @@ Persisted event type strings follow a `{domain}.{action}` naming convention; the
   </Tab>
 
   <Tab title="Session events">
-    | Type                                | Description                                                                                                                                                                                                                          |
-    | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-    | `session.status_running`            | Agent is actively processing.                                                                                                                                                                                                        |
-    | `session.status_idle`               | Agent finished its current task and is waiting for input. Includes a `stop_reason` indicating why the agent stopped.                                                                                                                 |
-    | `session.status_rescheduled`        | A transient error occurred and the session is retrying automatically.                                                                                                                                                                |
-    | `session.status_terminated`         | Session ended, either because of an unrecoverable error or because it was archived.                                                                                                                                                  |
-    | `session.deleted`                   | Session was deleted. Terminates any active event stream; no further events are emitted for this session.                                                                                                                             |
-    | `session.updated`                   | Session update request changed at least one field. Includes only the fields that changed. Updates apply on the next turn.                                                                                                            |
-    | `session.error`                     | An error occurred during processing. Includes a typed `error` object with a `retry_status`.                                                                                                                                          |
-    | `session.usage`                     | Snapshot of the session's cumulative usage and tracked list cost. Carries the session's usage totals and an echo of the session's [budget](https://platform.claude.com/docs/en/managed-agents/budgets.md), or `null` when the session has none.                    |
+    | Type                                | Description                                                                                                                                                                                                                                                     |
+    | ----------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+    | `session.status_running`            | Agent is actively processing.                                                                                                                                                                                                                                   |
+    | `session.status_idle`               | Agent finished its current task and is waiting for input. Includes a `stop_reason` indicating why the agent stopped.                                                                                                                                            |
+    | `session.status_rescheduled`        | A transient error occurred and the session is retrying automatically.                                                                                                                                                                                           |
+    | `session.status_terminated`         | Session ended, either because of an unrecoverable error or because it was archived.                                                                                                                                                                             |
+    | `session.deleted`                   | Session was deleted. Terminates any active event stream; no further events are emitted for this session.                                                                                                                                                        |
+    | `session.updated`                   | Session update request changed at least one field. Includes only the fields that changed. Updates apply on the next turn.                                                                                                                                       |
+    | `session.error`                     | An error occurred during processing. Includes a typed `error` object with a `retry_status`.                                                                                                                                                                     |
+    | `session.usage`                     | Snapshot of the session's cumulative usage and tracked list cost. Carries the session's usage totals and an echo of the session's [budget](./managed-agents-budgets.md), or `null` when the session has none.                    |
     | `session.thread_created`            | A [multiagent](./managed-agents-multiagent-orchestration.md) thread was created.                                                                                                                                                 |
     | `session.thread_status_running`     | A session thread began executing. Every session emits this for its primary thread; in [multiagent](./managed-agents-multiagent-orchestration.md) sessions, child-thread transitions are also cross-posted to the primary stream. |
-    | `session.thread_status_idle`        | A session thread finished its turn and is awaiting input. Includes `stop_reason`.                                                                                                                                                    |
-    | `session.thread_status_rescheduled` | A session thread hit a transient error and is retrying automatically.                                                                                                                                                                |
-    | `session.thread_status_terminated`  | A session thread was archived or reached a terminal error.                                                                                                                                                                           |
+    | `session.thread_status_idle`        | A session thread finished its turn and is awaiting input. Includes `stop_reason`.                                                                                                                                                                               |
+    | `session.thread_status_rescheduled` | A session thread hit a transient error and is retrying automatically.                                                                                                                                                                                           |
+    | `session.thread_status_terminated`  | A session thread was archived or reached a terminal error.                                                                                                                                                                                                      |
   </Tab>
 
   <Tab title="Span events">
     Span events are observability markers that wrap activity for timing and usage tracking.
 
-    | Type                              | Description                                                                                                                                                                                                                   |
-    | --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-    | `span.model_request_start`        | A model inference call has started.                                                                                                                                                                                           |
-    | `span.model_request_end`          | A model inference call has completed. Includes `model_usage` with token counts.                                                                                                                                               |
+    | Type                              | Description                                                                                                                                                                                                                                              |
+    | --------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+    | `span.model_request_start`        | A model inference call has started.                                                                                                                                                                                                                      |
+    | `span.model_request_end`          | A model inference call has completed. Includes `model_usage` with token counts.                                                                                                                                                                          |
     | `span.outcome_evaluation_start`   | [Outcome](./managed-agents-define-outcomes.md) evaluation has started.                                                                                                                                                    |
     | `span.outcome_evaluation_ongoing` | Heartbeat during an ongoing [outcome](./managed-agents-define-outcomes.md) evaluation.                                                                                                                                    |
     | `span.outcome_evaluation_end`     | An [outcome](./managed-agents-define-outcomes.md) evaluation cycle has completed. A `needs_revision` result means another cycle follows; `satisfied`, `max_iterations_reached`, `failed`, and `interrupted` are terminal. |
@@ -99,15 +99,15 @@ Persisted event type strings follow a `{domain}.{action}` naming convention; the
 
 These are the `ant beta:worker` CLI flags for the pre-built worker that drives a `self_hosted` environment. See [Self-hosted sandboxes](./managed-agents-self-hosted-sandboxes.md) for setting up the environment, running a worker, and the SDK helper options.
 
-| Flag                   | Description                                                                                                                                                            |
-| ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `--environment-id`     | The environment to poll for work. Also reads from `ANTHROPIC_ENVIRONMENT_ID`.                                                                                          |
-| `--environment-key`    | Authenticates the worker with this environment. Also reads from `ANTHROPIC_ENVIRONMENT_KEY`.                                                                           |
-| `--workdir`            | Directory where skills are downloaded and tools read and write files. Defaults to `.` (the current directory); the system default working directory is `/workspace`.   |
-| `--on-work`            | Script to call for each claimed work item instead of running tools in-process. Receives session details as environment variables.                                      |
-| `--unrestricted-paths` | Allow the file tools to read and write paths outside `--workdir`. The workdir check is a guardrail for the file tools only, not a sandbox; it does not constrain bash. |
-| `--max-idle`           | How long to wait after the session goes idle with an `end_turn` [stop reason](https://platform.claude.com/docs/en/api/handling-stop-reasons.md) before shutting down. Defaults to `60s`.             |
-| `--log-format`         | Log output format. Use `json` for structured log ingestion. Defaults to `text`.                                                                                        |
+| Flag                   | Description                                                                                                                                                                           |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--environment-id`     | The environment to poll for work. Also reads from `ANTHROPIC_ENVIRONMENT_ID`.                                                                                                         |
+| `--environment-key`    | Authenticates the worker with this environment. Also reads from `ANTHROPIC_ENVIRONMENT_KEY`.                                                                                          |
+| `--workdir`            | Directory where skills are downloaded and tools read and write files. Defaults to `.` (the current directory); the system default working directory is `/workspace`.                  |
+| `--on-work`            | Script to call for each claimed work item instead of running tools in-process. Receives session details as environment variables.                                                     |
+| `--unrestricted-paths` | Allow the file tools to read and write paths outside `--workdir`. The workdir check is a guardrail for the file tools only, not a sandbox; it does not constrain bash.                |
+| `--max-idle`           | How long to wait after the session goes idle with an `end_turn` [stop reason](https://platform.claude.com/docs/en/api/handling-stop-reasons.md) before shutting down. Defaults to `60s`. |
+| `--log-format`         | Log output format. Use `json` for structured log ingestion. Defaults to `text`.                                                                                                       |
 
 ## Supported MCP server types
 

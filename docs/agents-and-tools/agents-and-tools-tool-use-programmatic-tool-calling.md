@@ -1,13 +1,13 @@
 ---
-title: "Programmatic tool calling"
+title: "Process results programmatically"
 source: "https://platform.claude.com/docs/en/agents-and-tools/tool-use/programmatic-tool-calling"
 category: "agents-and-tools"
 generated: true
 ---
-# Programmatic tool calling
-
-Let Claude call your tools from code in the code execution container, cutting model round trips and token use in multi-tool workflows.
-
+---
+title: Programmatic tool calling
+url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/programmatic-tool-calling
+description: Let Claude call your tools from code in the code execution container, cutting model round trips and token use in multi-tool workflows.
 ---
 
 Programmatic tool calling allows Claude to write code that calls your tools programmatically within a [code execution](./agents-and-tools-tool-use-code-execution-tool.md) container, rather than requiring round trips through the model for each tool invocation. This reduces latency for multi-tool workflows and decreases token consumption by allowing Claude to filter or process data before it reaches the model's context window. On agentic search benchmarks like [BrowseComp](https://arxiv.org/abs/2504.12516) and [DeepSearchQA](https://github.com/google-deepmind/deepsearchqa), which test multistep web research and complex information retrieval, adding programmatic tool calling on top of basic search tools improved performance by an average of 11% while using 24% fewer input tokens (see [Improved web search with dynamic filtering](https://claude.com/blog/improved-web-search-with-dynamic-filtering)).
@@ -365,7 +365,7 @@ Here's an example where Claude programmatically queries a database multiple time
   ```
 </CodeGroup>
 
-The response stops with `stop_reason: "tool_use"`, a `container` ID, and a `tool_use` block for `query_database` whose `caller` field identifies the code execution run that called it. Return the result as shown in [Step 3 of the example workflow](#step-3-provide-tool-result) so the code can finish.
+The response stops with `stop_reason: "tool_use"`, a `container` ID, and a `tool_use` block for `query_database` whose `caller` field identifies the code execution run that called it. Return the result as shown in [Step 3 of the example workflow](./agents-and-tools-tool-use-programmatic-tool-calling.md#step-3-provide-tool-result) so the code can finish.
 
 ## How programmatic tool calling works
 
@@ -463,7 +463,7 @@ Programmatic tool calling uses the same containers as code execution:
 * **Expiration:** `expires_at` tells you how long the container has left. Idle containers are currently reclaimed after about 5 minutes, and no container can be reused more than 30 days after it was created.
 
 <Warning>
-  While Claude's code is waiting for a programmatic tool result, the pending call times out after about 4 minutes and raises a `TimeoutError` inside the code. Return each tool result well before the `expires_at` timestamp on the paused response. See [Container expiration during tool call](#container-expiration-during-tool-call).
+  While Claude's code is waiting for a programmatic tool result, the pending call times out after about 4 minutes and raises a `TimeoutError` inside the code. Return each tool result well before the `expires_at` timestamp on the paused response. See [Container expiration during tool call](./agents-and-tools-tool-use-programmatic-tool-calling.md#container-expiration-during-tool-call).
 </Warning>
 
 ## Example workflow
@@ -478,7 +478,7 @@ Send a request with code execution and a tool that allows programmatic calling. 
   Provide detailed descriptions of your tool's output format in the tool description. If you specify that the tool returns JSON, Claude attempts to deserialize and process the result in code. The more detail you provide about the output schema, the better Claude can handle the response programmatically.
 </Note>
 
-The request shape is identical to the [Quick start](#quick-start) example: include `code_execution` in your tools list, add `allowed_callers: ["code_execution_20260120"]` to any tool you want Claude to invoke from code, and send your user message. The remaining steps in this workflow use the user message `"Query customer purchase history from the last quarter and identify our top 5 customers by revenue"`.
+The request shape is identical to the [Quick start](./agents-and-tools-tool-use-programmatic-tool-calling.md#quick-start) example: include `code_execution` in your tools list, add `allowed_callers: ["code_execution_20260120"]` to any tool you want Claude to invoke from code, and send your user message. The remaining steps in this workflow use the user message `"Query customer purchase history from the last quarter and identify our top 5 customers by revenue"`.
 
 ### Step 2: API response with tool call
 
@@ -523,7 +523,7 @@ Claude writes code that calls your tool. The API pauses and returns:
 
 Send the full conversation history plus your tool result. Three details matter on this request:
 
-* The user message that carries your result can contain only `tool_result` blocks. See [Message formatting restrictions](#message-formatting-restrictions).
+* The user message that carries your result can contain only `tool_result` blocks. See [Message formatting restrictions](./agents-and-tools-tool-use-programmatic-tool-calling.md#message-formatting-restrictions).
 * Pass the `container` ID from the paused response. The API rejects a continuation that has pending programmatic tool calls but no container ID.
 * Send the same `tools` array as the original request. The code execution tool must still be present for the paused code to resume, and the tools you send on this request are the definitions Claude and the running code can use for the rest of the turn.
 
@@ -1310,7 +1310,7 @@ When all tool calls are satisfied and code completes:
 
 | Error                                      | Where it appears                                                             | Description                                                                    | Solution                                                                                                                         |
 | ------------------------------------------ | ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------- |
-| `invalid_tool_input`                       | `error_code` on the `code_execution_tool_result` error block in the response | Invalid parameters were passed to the code execution tool                      | See the [code execution tool errors](./agents-and-tools-tool-use-code-execution-tool.md#errors)                              |
+| `invalid_tool_input`                       | `error_code` on the `code_execution_tool_result` error block in the response | Invalid parameters were passed to the code execution tool                      | See the [code execution tool errors](./agents-and-tools-tool-use-code-execution-tool.md#errors)   |
 | `invalid_request_error` (on `tool_choice`) | HTTP 400 error response                                                      | `tool_choice` names a tool whose `allowed_callers` does not include `"direct"` | Either add `"direct"` to that tool's `allowed_callers`, or remove the tool from `tool_choice` and let Claude invoke it from code |
 
 ### Container expiration during tool call
@@ -1442,7 +1442,7 @@ In Anthropic's internal evaluations on a production Claude model:
 * On [τ²-bench](https://arxiv.org/abs/2506.07982) (airline, retail, and telecom domains), where each turn makes one or two sequential tool calls, programmatic tool calling left scores unchanged and cost roughly 8% more. Sequential single-call workflows do not benefit.
 * Across production API traffic, requests whose `tools` array contains 10 to 49 tool definitions see typical token savings of 20% to 40% with programmatic tool calling enabled.
 
-Actual savings vary with workload shape. See [When to use programmatic calling](#when-to-use-programmatic-calling).
+Actual savings vary with workload shape. See [When to use programmatic calling](./agents-and-tools-tool-use-programmatic-tool-calling.md#when-to-use-programmatic-calling).
 
 ## Usage and pricing
 

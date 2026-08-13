@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/compliance/organizations/list"
 category: "api"
 generated: true
 ---
+---
+title: List organizations
+url: https://platform.claude.com/docs/en/api/compliance/organizations/list
+---
+
 ## List organizations
 
 **get** `/v1/compliance/organizations`

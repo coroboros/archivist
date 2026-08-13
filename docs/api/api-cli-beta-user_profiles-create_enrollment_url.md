@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/cli/beta/user_profiles/create_e
 category: "api"
 generated: true
 ---
+---
+title: Create Enrollment URL
+url: https://platform.claude.com/docs/en/api/cli/beta/user_profiles/create_enrollment_url
+---
+
 ## Create Enrollment URL
 
 `$ ant beta:user-profiles create-enrollment-url`

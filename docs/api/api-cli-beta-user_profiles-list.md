@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/cli/beta/user_profiles/list"
 category: "api"
 generated: true
 ---
+---
+title: List User Profiles
+url: https://platform.claude.com/docs/en/api/cli/beta/user_profiles/list
+---
+
 ## List User Profiles
 
 `$ ant beta:user-profiles list`

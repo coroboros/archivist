@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/php/beta/environments/delete"
 category: "api"
 generated: true
 ---
+---
+title: Delete Environment
+url: https://platform.claude.com/docs/en/api/php/beta/environments/delete
+---
+
 ## Delete Environment
 
 `$client->beta->environments->delete(string environmentID, ?list<AnthropicBeta> betas): BetaEnvironmentDeleteResponse`
@@ -42,7 +47,8 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaEnvironmentDeleteResponse = $client->beta->environments->delete(
-  'env_011CZkZ9X2dpNyB7HsEFoRfW', betas: ['message-batches-2024-09-24']
+  'env_011CZkZ9X2dpNyB7HsEFoRfW',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
 );
 
 var_dump($betaEnvironmentDeleteResponse);

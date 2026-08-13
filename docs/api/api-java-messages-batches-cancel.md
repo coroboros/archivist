@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/java/messages/batches/cancel"
 category: "api"
 generated: true
 ---
+---
+title: Cancel a Message Batch
+url: https://platform.claude.com/docs/en/api/java/messages/batches/cancel
+---
+
 ## Cancel a Message Batch
 
 `MessageBatch messages().batches().cancel(BatchCancelParamsparams = BatchCancelParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`

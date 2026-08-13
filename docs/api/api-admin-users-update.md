@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/users/update"
 category: "api"
 generated: true
 ---
+---
+title: Update User
+url: https://platform.claude.com/docs/en/api/admin/users/update
+---
+
 ## Update User
 
 **post** `/v1/organizations/users/{user_id}`

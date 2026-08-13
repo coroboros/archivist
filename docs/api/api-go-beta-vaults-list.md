@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/go/beta/vaults/list"
 category: "api"
 generated: true
 ---
+---
+title: List Vaults
+url: https://platform.claude.com/docs/en/api/go/beta/vaults/list
+---
+
 ## List Vaults
 
 `client.Beta.Vaults.List(ctx, params) (*PageCursor[BetaManagedAgentsVault], error)`
@@ -99,6 +104,8 @@ List Vaults
       - `const AnthropicBetaFallbackCredit2026_07_01 AnthropicBeta = "fallback-credit-2026-07-01"`
 
       - `const AnthropicBetaAgentMemory2026_07_22 AnthropicBeta = "agent-memory-2026-07-22"`
+
+      - `const AnthropicBetaMidConversationToolChanges2026_07_01 AnthropicBeta = "mid-conversation-tool-changes-2026-07-01"`
 
 ### Returns
 

@@ -1,13 +1,13 @@
 ---
-title: "MCP tunnels security"
+title: "Best practices"
 source: "https://platform.claude.com/docs/en/agents-and-tools/mcp-tunnels/security"
 category: "agents-and-tools"
 generated: true
 ---
-# MCP tunnels security
-
-Hardening guidance, credential rotation, breach response, and teardown for MCP tunnel deployments.
-
+---
+title: MCP tunnels security
+url: https://platform.claude.com/docs/en/agents-and-tools/mcp-tunnels/security
+description: Hardening guidance, credential rotation, breach response, and teardown for MCP tunnel deployments.
 ---
 
 <Note>

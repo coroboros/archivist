@@ -1,13 +1,13 @@
 ---
-title: "Use WIF with Okta"
+title: "Prerequisites"
 source: "https://platform.claude.com/docs/en/manage-claude/wif-providers/okta"
 category: "manage-claude"
 generated: true
 ---
-# Use WIF with Okta
-
-Federate Okta service application identities to the Claude API with Workload Identity Federation.
-
+---
+title: Use WIF with Okta
+url: https://platform.claude.com/docs/en/manage-claude/wif-providers/okta
+description: Federate Okta service application identities to the Claude API with Workload Identity Federation.
 ---
 
 Okta can act as a workload identity provider by issuing OIDC access tokens to a **service application** through the OAuth 2.0 `client_credentials` grant. Your workload authenticates to Okta (typically with `private_key_jwt`, so no shared secret is stored), receives a signed JSON Web Token (JWT), and exchanges that JWT with Anthropic for a short-lived access token.

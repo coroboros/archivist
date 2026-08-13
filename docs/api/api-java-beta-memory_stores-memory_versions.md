@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/java/beta/memory_stores/memory_
 category: "api"
 generated: true
 ---
+---
+title: Memory Versions
+url: https://platform.claude.com/docs/en/api/java/beta/memory_stores/memory_versions
+---
+
 # Memory Versions
 
 ## List memory versions
@@ -123,6 +128,8 @@ List memory versions
     - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
 ### Returns
 
@@ -364,6 +371,8 @@ Retrieve a memory version
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
+
 ### Returns
 
 - `class BetaManagedAgentsMemoryVersion:`
@@ -598,6 +607,8 @@ Redact a memory version
     - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
 ### Returns
 

@@ -1,12 +1,14 @@
 ---
-title: "Structured outputs"
+title: "Compatibility"
 source: "https://platform.claude.com/docs/en/build-with-claude/structured-outputs"
 category: "build-with-claude"
 generated: true
 ---
-# Structured outputs
-
-Get validated JSON results from agent workflows
+---
+title: Structured outputs
+url: https://platform.claude.com/docs/en/build-with-claude/structured-outputs
+description: Get validated JSON results from agent workflows
+---
 
 ## Compatibility
 - [ZDR](../manage-claude/manage-claude-api-and-data-retention.md): eligible (excludes [Covered Models](../manage-claude/manage-claude-api-and-data-retention.md#model-specific-data-retention-requirements))
@@ -14,8 +16,6 @@ Get validated JSON results from agent workflows
 - Platforms: Claude API, Claude Platform on AWS, Amazon Bedrock [1], Google Cloud, Microsoft Foundry [2]
 1. On Amazon Bedrock, structured outputs are available for Claude Opus 4.6, Claude Sonnet 4.6, Claude Sonnet 4.5, Claude Opus 4.5, and Claude Haiku 4.5.
 2. On [Microsoft Foundry](./build-with-claude-claude-in-microsoft-foundry.md), structured outputs require a [Hosted on Anthropic deployment](./build-with-claude-claude-in-microsoft-foundry.md#additional-features-not-supported-when-hosted-on-azure).
-
----
 
 Structured outputs constrain Claude's responses to follow a specific schema, ensuring valid, parseable output for downstream processing. Structured outputs provide two complementary features:
 
@@ -368,7 +368,7 @@ JSON outputs control Claude's response format, ensuring Claude returns valid JSO
 
 <Steps>
   <Step title="Define your JSON schema">
-    Create a JSON schema that describes the structure you want Claude to follow. The schema uses standard JSON Schema format with some limitations (see [JSON Schema limitations](#json-schema-limitations)).
+    Create a JSON schema that describes the structure you want Claude to follow. The schema uses standard JSON Schema format with some limitations (see [JSON Schema limitations](./build-with-claude-structured-outputs.md#json-schema-limitations)).
   </Step>
 
   <Step title="Add the output_config.format parameter">
@@ -838,7 +838,7 @@ Each SDK provides helpers that make working with structured outputs easier. See 
 
     **Type inference requires `as const`.** Use a literal object expression with a `const` assertion so TypeScript can narrow the property types. Without `as const`, the inferred type collapses to `unknown`.
 
-    **Schema transformation.** By default, the helper transforms the schema the same way `zodOutputFormat()` does: removing unsupported constraints, adding `additionalProperties: false` to objects, and filtering string formats. Pass `jsonSchemaOutputFormat(schema, { transform: false })` to send your schema to the API unchanged. See [How SDK transformation works](#how-sdk-transformation-works).
+    **Schema transformation.** By default, the helper transforms the schema the same way `zodOutputFormat()` does: removing unsupported constraints, adding `additionalProperties: false` to objects, and filtering string formats. Pass `jsonSchemaOutputFormat(schema, { transform: false })` to send your schema to the API unchanged. See [How SDK transformation works](./build-with-claude-structured-outputs.md#how-sdk-transformation-works).
   </Tab>
 
   <Tab title="C#">
@@ -2827,7 +2827,7 @@ Structured outputs support standard JSON Schema with some limitations. Both JSON
 
 <Accordion title="Supported features">
   * All basic types: object, array, string, integer, number, boolean, null
-  * `enum` (strings, numbers, bools, or nulls only - no complex types; see [Invalid outputs](#invalid-outputs) for a capitalization caveat)
+  * `enum` (strings, numbers, bools, or nulls only - no complex types; see [Invalid outputs](./build-with-claude-structured-outputs.md#invalid-outputs) for a capitalization caveat)
   * `const`
   * `anyOf` and `allOf` (with limitations - `allOf` with `$ref` not supported)
   * `$ref`, `$def`, and `definitions` (external `$ref` not supported)
@@ -2868,7 +2868,7 @@ Structured outputs support standard JSON Schema with some limitations. Both JSON
 </Accordion>
 
 <Tip>
-  The Python, TypeScript, Ruby, and PHP SDKs can automatically transform schemas with unsupported features by removing them and adding constraints to field descriptions. The C# and Go SDKs do the same when the schema is derived from a native type. See [SDK-specific methods](#sdk-specific-methods) for details.
+  The Python, TypeScript, Ruby, and PHP SDKs can automatically transform schemas with unsupported features by removing them and adding constraints to field descriptions. The C# and Go SDKs do the same when the schema is derived from a native type. See [SDK-specific methods](./build-with-claude-structured-outputs.md#sdk-specific-methods) for details.
 </Tip>
 
 ### Property ordering

@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/users/delete"
 category: "api"
 generated: true
 ---
+---
+title: Remove User
+url: https://platform.claude.com/docs/en/api/admin/users/delete
+---
+
 ## Remove User
 
 **delete** `/v1/organizations/users/{user_id}`

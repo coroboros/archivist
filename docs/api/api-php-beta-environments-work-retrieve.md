@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/php/beta/environments/work/retr
 category: "api"
 generated: true
 ---
+---
+title: Get Work Item
+url: https://platform.claude.com/docs/en/api/php/beta/environments/work/retrieve
+---
+
 ## Get Work Item
 
 `$client->beta->environments->work->retrieve(string workID, string environmentID, ?list<AnthropicBeta> betas): SelfHostedWork`
@@ -92,7 +97,7 @@ $client = new Client(apiKey: 'my-anthropic-api-key');
 $betaSelfHostedWork = $client->beta->environments->work->retrieve(
   'work_id',
   environmentID: 'env_011CZkZ9X2dpNyB7HsEFoRfW',
-  betas: ['message-batches-2024-09-24'],
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
 );
 
 var_dump($betaSelfHostedWork);

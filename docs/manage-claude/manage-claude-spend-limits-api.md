@@ -1,13 +1,13 @@
 ---
-title: "Spend Limits API"
+title: "Overview"
 source: "https://platform.claude.com/docs/en/manage-claude/spend-limits-api"
 category: "manage-claude"
 generated: true
 ---
-# Spend Limits API
-
-Set a spend limit on each Claude Enterprise member, see where each member's spend limit is inherited from, and review or act on members' requests for a higher limit.
-
+---
+title: Spend Limits API
+url: https://platform.claude.com/docs/en/manage-claude/spend-limits-api
+description: Set a spend limit on each Claude Enterprise member, see where each member's spend limit is inherited from, and review or act on members' requests for a higher limit.
 ---
 
 The Spend Limits API lets you set a spend limit on each Claude Enterprise member, see where each member's spend limit is inherited from, and review or act on members' requests for a higher limit.

@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/typescript/beta/environments/up
 category: "api"
 generated: true
 ---
+---
+title: Update Environment
+url: https://platform.claude.com/docs/en/api/typescript/beta/environments/update
+---
+
 ## Update Environment
 
 `client.beta.environments.update(stringenvironmentID, EnvironmentUpdateParamsparams, RequestOptionsoptions?): BetaEnvironment`
@@ -146,7 +151,7 @@ Update an existing environment's configuration.
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 29 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -211,6 +216,8 @@ Update an existing environment's configuration.
       - `"fallback-credit-2026-07-01"`
 
       - `"agent-memory-2026-07-22"`
+
+      - `"mid-conversation-tool-changes-2026-07-01"`
 
 ### Returns
 
@@ -357,13 +364,13 @@ Update an existing environment's configuration.
 ### Example
 
 ```typescript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic({
-  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
+  apiKey: process.env["ANTHROPIC_API_KEY"] // This is the default and can be omitted
 });
 
-const betaEnvironment = await client.beta.environments.update('env_011CZkZ9X2dpNyB7HsEFoRfW');
+const betaEnvironment = await client.beta.environments.update("env_011CZkZ9X2dpNyB7HsEFoRfW");
 
 console.log(betaEnvironment.id);
 ```

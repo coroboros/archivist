@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/cli/beta/environments"
 category: "api"
 generated: true
 ---
+---
+title: Environments
+url: https://platform.claude.com/docs/en/api/cli/beta/environments
+---
+
 # Environments
 
 ## Create Environment

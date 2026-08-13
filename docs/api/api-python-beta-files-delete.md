@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/python/beta/files/delete"
 category: "api"
 generated: true
 ---
+---
+title: Delete File
+url: https://platform.claude.com/docs/en/api/python/beta/files/delete
+---
+
 ## Delete File
 
 `beta.files.delete(strfile_id, FileDeleteParams**kwargs)  -> DeletedFile`
@@ -24,7 +29,7 @@ Delete File
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 29 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 30 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -89,6 +94,8 @@ Delete File
     - `"fallback-credit-2026-07-01"`
 
     - `"agent-memory-2026-07-22"`
+
+    - `"mid-conversation-tool-changes-2026-07-01"`
 
 ### Returns
 

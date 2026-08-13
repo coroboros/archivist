@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/csharp/beta/vaults/credentials/
 category: "api"
 generated: true
 ---
+---
+title: List Credentials
+url: https://platform.claude.com/docs/en/api/csharp/beta/vaults/credentials/list
+---
+
 ## List Credentials
 
 `CredentialListPageResponse Beta.Vaults.Credentials.List(CredentialListParamsparameters, CancellationTokencancellationToken = default)`
@@ -99,6 +104,8 @@ List Credentials
     - `"fallback-credit-2026-07-01"FallbackCredit2026_07_01`
 
     - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
+
+    - `"mid-conversation-tool-changes-2026-07-01"MidConversationToolChanges2026_07_01`
 
 ### Returns
 

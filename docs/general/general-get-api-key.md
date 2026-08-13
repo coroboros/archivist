@@ -1,13 +1,13 @@
 ---
-title: "Get your Claude API key"
+title: "Create an API key"
 source: "https://platform.claude.com/docs/en/get-api-key"
 category: "general"
 generated: true
 ---
-# Get your Claude API key
-
-Find, create, and manage your API keys for the Claude API in the Claude Console.
-
+---
+title: Get your Claude API key
+url: https://platform.claude.com/docs/en/get-api-key
+description: Find, create, and manage your API keys for the Claude API in the Claude Console.
 ---
 
 API keys for the Claude API (also called Anthropic API keys) live in the Claude Console. To view your existing keys or create a new one, go to [Settings → API keys](https://platform.claude.com/settings/keys).

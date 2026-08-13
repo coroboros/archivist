@@ -1,13 +1,13 @@
 ---
-title: "Tool reference"
+title: "Anthropic-provided tools"
 source: "https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-reference"
 category: "agents-and-tools"
 generated: true
 ---
-# Tool reference
-
-Directory of Anthropic-provided tools and reference for optional tool definition properties.
-
+---
+title: Tool reference
+url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-reference
+description: Directory of Anthropic-provided tools and reference for optional tool definition properties.
 ---
 
 This page is a reference for the tools Anthropic provides and the optional properties you can set on any tool definition. For a conceptual introduction to tool use, see [Tool use with Claude](./agents-and-tools-tool-use-overview.md). For guidance on implementing tool use in your application, see [Define tools](./agents-and-tools-tool-use-define-tools.md).
@@ -16,8 +16,8 @@ This page is a reference for the tools Anthropic provides and the optional prope
 
 Anthropic provides two kinds of tools: **server tools** that execute on Anthropic's infrastructure, and **client tools** where Anthropic defines the schema but your application handles execution. Both kinds appear in your request's `tools` array alongside any user-defined tools.
 
-| Tool                                                                          | `type`                                                                              | Execution | Status                                                    |
-| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | --------- | --------------------------------------------------------- |
+| Tool                                                                                                     | `type`                                                                              | Execution | Status                                                    |
+| -------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | --------- | --------------------------------------------------------- |
 | [Web search tool](./agents-and-tools-tool-use-web-search-tool.md)         | `web_search_20260318` `web_search_20260209` `web_search_20250305`                   | Server    | GA                                                        |
 | [Web fetch tool](./agents-and-tools-tool-use-web-fetch-tool.md)           | `web_fetch_20260318` `web_fetch_20260309` `web_fetch_20260209` `web_fetch_20250910` | Server    | GA                                                        |
 | [Code execution tool](./agents-and-tools-tool-use-code-execution-tool.md) | `code_execution_20260521` `code_execution_20260120` `code_execution_20250825`       | Server    | GA                                                        |
@@ -52,14 +52,14 @@ The `mcp_toolset` type is not date-versioned; versioning is carried in the `anth
 
 Every tool in the `tools` array, including user-defined tools, accepts optional properties that control how the tool is loaded, who can call it, and how its inputs are validated. These properties compose: you can set `defer_loading` and `cache_control` and `strict` on the same tool.
 
-| Property                | Purpose                                                                                                               | Available on                                                                                                               | Detailed guide                                                                                                      |
-| ----------------------- | --------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| `cache_control`         | Set a prompt-cache breakpoint at this tool definition                                                                 | All tools                                                                                                                  | [Prompt caching](../build-with-claude/build-with-claude-prompt-caching.md)                                                         |
-| `strict`                | Guarantee schema validation on tool names and inputs                                                                  | All tools except `mcp_toolset`                                                                                             | [Strict tool use](./agents-and-tools-tool-use-strict-tool-use.md)                                               |
+| Property                | Purpose                                                                                                               | Available on                                                                                                                                          | Detailed guide                                                                                                                                 |
+| ----------------------- | --------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| `cache_control`         | Set a prompt-cache breakpoint at this tool definition                                                                 | All tools                                                                                                                                             | [Prompt caching](../build-with-claude/build-with-claude-prompt-caching.md)                                                         |
+| `strict`                | Guarantee schema validation on tool names and inputs                                                                  | All tools except `mcp_toolset`                                                                                                                        | [Strict tool use](./agents-and-tools-tool-use-strict-tool-use.md)                                               |
 | `defer_loading`         | Exclude the tool from the initial system prompt; load it on demand when tool search returns a `tool_reference` for it | All tools (for `mcp_toolset`, see [tool configuration](./agents-and-tools-mcp-connector.md#mcp-toolset-configuration)) | [Tool search tool](./agents-and-tools-tool-use-tool-search-tool.md)                                             |
-| `allowed_callers`       | Restrict which callers can call the tool                                                                              | All tools except `mcp_toolset`                                                                                             | [Programmatic tool calling](./agents-and-tools-tool-use-programmatic-tool-calling.md#the-allowed-callers-field) |
-| `input_examples`        | Provide example input objects to help Claude understand how to call the tool                                          | User-defined and Anthropic-schema client tools. Not available on server tools.                                             | [Define tools](./agents-and-tools-tool-use-define-tools.md#providing-tool-use-examples)                         |
-| `eager_input_streaming` | Enable fine-grained input streaming (`true`) or keep standard buffered streaming (`false`) for this tool              | User-defined tools only                                                                                                    | [Fine-grained tool streaming](./agents-and-tools-tool-use-fine-grained-tool-streaming.md)                       |
+| `allowed_callers`       | Restrict which callers can call the tool                                                                              | All tools except `mcp_toolset`                                                                                                                        | [Programmatic tool calling](./agents-and-tools-tool-use-programmatic-tool-calling.md#the-allowed-callers-field) |
+| `input_examples`        | Provide example input objects to help Claude understand how to call the tool                                          | User-defined and Anthropic-schema client tools. Not available on server tools.                                                                        | [Define tools](./agents-and-tools-tool-use-define-tools.md#providing-tool-use-examples)                         |
+| `eager_input_streaming` | Enable fine-grained input streaming (`true`) or keep standard buffered streaming (`false`) for this tool              | User-defined tools only                                                                                                                               | [Fine-grained tool streaming](./agents-and-tools-tool-use-fine-grained-tool-streaming.md)                       |
 
 ### `allowed_callers` values
 

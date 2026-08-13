@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/php/messages/batches/create"
 category: "api"
 generated: true
 ---
+---
+title: Create a Message Batch
+url: https://platform.claude.com/docs/en/api/php/messages/batches/create
+---
+
 ## Create a Message Batch
 
 `$client->messages->batches->create(list<Request> requests, ?string userProfileID): MessageBatch`
@@ -96,7 +101,7 @@ $messageBatch = $client->messages->batches->create(
       'params' => [
         'maxTokens' => 1024,
         'messages' => [['content' => 'Hello, world', 'role' => 'user']],
-        'model' => 'claude-opus-4-6',
+        'model' => Model::CLAUDE_OPUS_4_6,
         'cacheControl' => ['type' => 'ephemeral', 'ttl' => '5m'],
         'container' => 'container',
         'inferenceGeo' => 'inference_geo',

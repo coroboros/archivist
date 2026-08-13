@@ -1,13 +1,13 @@
 ---
-title: "Web fetch tool"
+title: "How web fetch works"
 source: "https://platform.claude.com/docs/en/agents-and-tools/tool-use/web-fetch-tool"
 category: "agents-and-tools"
 generated: true
 ---
-# Web fetch tool
-
-Fetch and read content from specific URLs to augment Claude's context with live web content.
-
+---
+title: Web fetch tool
+url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/web-fetch-tool
+description: Fetch and read content from specific URLs to augment Claude's context with live web content.
 ---
 
 <Note>
@@ -16,7 +16,7 @@ Fetch and read content from specific URLs to augment Claude's context with live 
 
 The web fetch tool allows Claude to retrieve full content from specified web pages and PDF documents.
 
-The latest web fetch tool version (`web_fetch_20260318`) supports **dynamic filtering** with Claude Fable 5, Claude Opus 4.8, Claude Mythos 5, [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 5, and Claude Sonnet 4.6. Claude can write and execute code to filter fetched content before it reaches the context window, keeping only relevant information and discarding the rest. This reduces token consumption while maintaining response quality. `web_fetch_20260318` also adds [response inclusion](#response-inclusion) control for agentic workflows. The previous versions (`web_fetch_20260309` for dynamic filtering and [cache bypass](#cache-bypass), `web_fetch_20260209` for dynamic filtering only, `web_fetch_20250910` for basic fetch) remain available.
+The latest web fetch tool version (`web_fetch_20260318`) supports **dynamic filtering** with Claude Fable 5, Claude Opus 4.8, Claude Mythos 5, [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 5, and Claude Sonnet 4.6. Claude can write and execute code to filter fetched content before it reaches the context window, keeping only relevant information and discarding the rest. This reduces token consumption while maintaining response quality. `web_fetch_20260318` also adds [response inclusion](./agents-and-tools-tool-use-web-fetch-tool.md#response-inclusion) control for agentic workflows. The previous versions (`web_fetch_20260309` for dynamic filtering and [cache bypass](./agents-and-tools-tool-use-web-fetch-tool.md#cache-bypass), `web_fetch_20260209` for dynamic filtering only, `web_fetch_20250910` for basic fetch) remain available.
 
 Web fetch (with and without dynamic filtering) is available on the Claude API, [Claude Platform on AWS](../build-with-claude/build-with-claude-claude-platform-on-aws.md), and [Microsoft Foundry](../build-with-claude/build-with-claude-claude-in-microsoft-foundry.md). On Microsoft Foundry, web fetch requires a [Hosted on Anthropic deployment](../build-with-claude/build-with-claude-claude-in-microsoft-foundry.md#additional-features-not-supported-when-hosted-on-azure). It is not currently available on Amazon Bedrock or Google Cloud.
 
@@ -64,7 +64,7 @@ When you add the web fetch tool to your API request:
 Claude fetches when the request points at a specific page or document:
 
 * A URL is provided in the conversation (or a previous tool result)
-* The user names a specific resource (a particular article, README, pricing page, or documentation section) without a URL, and the [web search tool](./agents-and-tools-tool-use-web-search-tool.md) is also enabled so Claude can locate it first (see [Combined search and fetch](#combined-search-and-fetch))
+* The user names a specific resource (a particular article, README, pricing page, or documentation section) without a URL, and the [web search tool](./agents-and-tools-tool-use-web-search-tool.md) is also enabled so Claude can locate it first (see [Combined search and fetch](./agents-and-tools-tool-use-web-fetch-tool.md#combined-search-and-fetch))
 
 Claude does **not** fetch for general-knowledge or open-ended questions that don't reference a specific page. "Summarize this article: `<url>`" triggers a fetch. "What are best practices for REST API design?" is answered directly.
 
@@ -442,7 +442,7 @@ The web fetch tool supports the following parameters:
 }
 ```
 
-Later tool versions add two more optional parameters: `use_cache` requires `web_fetch_20260309` or later (see [Cache bypass](#cache-bypass)), and `response_inclusion` requires `web_fetch_20260318` or later (see [Response inclusion](#response-inclusion)).
+Later tool versions add two more optional parameters: `use_cache` requires `web_fetch_20260309` or later (see [Cache bypass](./agents-and-tools-tool-use-web-fetch-tool.md#cache-bypass)), and `response_inclusion` requires `web_fetch_20260318` or later (see [Response inclusion](./agents-and-tools-tool-use-web-fetch-tool.md#response-inclusion)).
 
 ### Max uses
 
@@ -591,7 +591,7 @@ Fetch results include:
 * `retrieved_at`: Timestamp when the content was retrieved
 
 <Note>
-  The web fetch tool caches results to improve performance and reduce redundant requests. The content returned may not always reflect the latest version available at the URL. The cache behavior is managed automatically and may change over time to optimize for different content types and usage patterns. To fetch fresh content, set `"use_cache": false` (see [Cache bypass](#cache-bypass)).
+  The web fetch tool caches results to improve performance and reduce redundant requests. The content returned may not always reflect the latest version available at the URL. The cache behavior is managed automatically and may change over time to optimize for different content types and usage patterns. To fetch fresh content, set `"use_cache": false` (see [Cache bypass](./agents-and-tools-tool-use-web-fetch-tool.md#cache-bypass)).
 </Note>
 
 For PDF documents, content is returned as base64-encoded data:
@@ -637,7 +637,7 @@ These are the possible error codes:
 * `invalid_tool_input`: Invalid tool input, such as a malformed URL or a non-HTTP(S) scheme
 * `url_too_long`: URL exceeds maximum length (250 characters)
 * `url_not_allowed`: URL blocked by domain filtering rules (including your organization's settings) or by Anthropic-side restrictions, such as private addresses and `robots.txt`
-* `url_not_in_prior_context`: URL did not appear earlier in the conversation (see [URL validation](#url-validation))
+* `url_not_in_prior_context`: URL did not appear earlier in the conversation (see [URL validation](./agents-and-tools-tool-use-web-fetch-tool.md#url-validation))
 * `url_not_accessible`: Failed to fetch content (HTTP error)
 * `too_many_requests`: Rate limit exceeded
 * `unsupported_content_type`: Content type not supported (only text, HTML, and PDF)

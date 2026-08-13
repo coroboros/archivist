@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/federation_rules/create"
 category: "api"
 generated: true
 ---
+---
+title: Create Federation Rule
+url: https://platform.claude.com/docs/en/api/admin/federation_rules/create
+---
+
 ## Create Federation Rule
 
 **post** `/v1/organizations/federation_rules`

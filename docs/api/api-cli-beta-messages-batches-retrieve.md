@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/cli/beta/messages/batches/retri
 category: "api"
 generated: true
 ---
+---
+title: Retrieve a Message Batch
+url: https://platform.claude.com/docs/en/api/cli/beta/messages/batches/retrieve
+---
+
 ## Retrieve a Message Batch
 
 `$ ant beta:messages:batches retrieve`

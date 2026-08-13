@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/csharp/beta/skills/list"
 category: "api"
 generated: true
 ---
+---
+title: List Skills
+url: https://platform.claude.com/docs/en/api/csharp/beta/skills/list
+---
+
 ## List Skills
 
 `SkillListPageResponse Beta.Skills.List(SkillListParams?parameters, CancellationTokencancellationToken = default)`
@@ -105,6 +110,8 @@ List Skills
 
     - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
 
+    - `"mid-conversation-tool-changes-2026-07-01"MidConversationToolChanges2026_07_01`
+
 ### Returns
 
 - `class SkillListPageResponse:`
@@ -164,7 +171,7 @@ List Skills
 
     Token for fetching the next page of results.
 
-    If `null`, there are no more results available. Pass this value to the `page_token` parameter in the next request to get the next page.
+    If `null`, there are no more results available. Pass this value to the `page` parameter in the next request to get the next page.
 
 ### Example
 

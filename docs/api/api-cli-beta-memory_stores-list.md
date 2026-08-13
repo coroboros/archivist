@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/cli/beta/memory_stores/list"
 category: "api"
 generated: true
 ---
+---
+title: List memory stores
+url: https://platform.claude.com/docs/en/api/cli/beta/memory_stores/list
+---
+
 ## List memory stores
 
 `$ ant beta:memory-stores list`

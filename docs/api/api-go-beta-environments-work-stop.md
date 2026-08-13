@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/go/beta/environments/work/stop"
 category: "api"
 generated: true
 ---
+---
+title: Stop Work
+url: https://platform.claude.com/docs/en/api/go/beta/environments/work/stop
+---
+
 ## Stop Work
 
 `client.Beta.Environments.Work.Stop(ctx, workID, params) (*BetaSelfHostedWork, error)`
@@ -99,6 +104,8 @@ Stop a work item, initiating graceful or forced shutdown.
       - `const AnthropicBetaFallbackCredit2026_07_01 AnthropicBeta = "fallback-credit-2026-07-01"`
 
       - `const AnthropicBetaAgentMemory2026_07_22 AnthropicBeta = "agent-memory-2026-07-22"`
+
+      - `const AnthropicBetaMidConversationToolChanges2026_07_01 AnthropicBeta = "mid-conversation-tool-changes-2026-07-01"`
 
 ### Returns
 

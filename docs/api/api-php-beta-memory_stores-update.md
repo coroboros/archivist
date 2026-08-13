@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/php/beta/memory_stores/update"
 category: "api"
 generated: true
 ---
+---
+title: Update a memory store
+url: https://platform.claude.com/docs/en/api/php/beta/memory_stores/update
+---
+
 ## Update a memory store
 
 `$client->beta->memoryStores->update(string memoryStoreID, ?string description, ?array<string,string> metadata, ?string name, ?list<AnthropicBeta> betas): BetaManagedAgentsMemoryStore`
@@ -80,7 +85,7 @@ $betaManagedAgentsMemoryStore = $client->beta->memoryStores->update(
   description: 'description',
   metadata: ['foo' => 'string'],
   name: 'x',
-  betas: ['message-batches-2024-09-24'],
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
 );
 
 var_dump($betaManagedAgentsMemoryStore);

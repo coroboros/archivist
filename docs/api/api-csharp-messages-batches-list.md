@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/csharp/messages/batches/list"
 category: "api"
 generated: true
 ---
+---
+title: List Message Batches
+url: https://platform.claude.com/docs/en/api/csharp/messages/batches/list
+---
+
 ## List Message Batches
 
 `BatchListPageResponse Messages.Batches.List(BatchListParams?parameters, CancellationTokencancellationToken = default)`

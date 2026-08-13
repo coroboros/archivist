@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/cli/beta/environments/work/ack"
 category: "api"
 generated: true
 ---
+---
+title: Acknowledge Work
+url: https://platform.claude.com/docs/en/api/cli/beta/environments/work/ack
+---
+
 ## Acknowledge Work
 
 `$ ant beta:environments:work ack`

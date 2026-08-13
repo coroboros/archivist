@@ -1,13 +1,13 @@
 ---
-title: "Build an orchestration mode"
+title: "Set up the loop"
 source: "https://platform.claude.com/docs/en/build-with-claude/mid-conversation-effort-example"
 category: "build-with-claude"
 generated: true
 ---
-# Build an orchestration mode
-
-Build a session-level mode that grants standing consent for multiagent fan-out, switched on and off with mid-conversation system messages.
-
+---
+title: Build an orchestration mode
+url: https://platform.claude.com/docs/en/build-with-claude/mid-conversation-effort-example
+description: Build a session-level mode that grants standing consent for multiagent fan-out, switched on and off with mid-conversation system messages.
 ---
 
 An orchestration mode is a session-level switch: when it is on, the model puts maximum thoroughness behind every substantive request, scouting the task itself and then fanning work out to parallel subagents by default. When it is off, the same orchestration tool goes back to per-request opt-in.

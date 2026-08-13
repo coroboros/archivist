@@ -1,13 +1,13 @@
 ---
-title: "Handle streaming refusals"
+title: "API response format"
 source: "https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/handle-streaming-refusals"
 category: "test-and-evaluate"
 generated: true
 ---
-# Handle streaming refusals
-
-Detect and handle refusal stop reasons in streaming responses, and retry refused requests on a fallback model.
-
+---
+title: Handle streaming refusals
+url: https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/handle-streaming-refusals
+description: Detect and handle refusal stop reasons in streaming responses, and retry refused requests on a fallback model.
 ---
 
 Starting with Claude 4 models, streaming responses from Claude's API return **`stop_reason`: `"refusal"`** when streaming classifiers intervene to handle potential policy violations. This safety feature helps maintain content compliance during real-time streaming.

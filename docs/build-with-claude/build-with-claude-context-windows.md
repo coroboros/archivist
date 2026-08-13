@@ -1,13 +1,13 @@
 ---
-title: "Context windows"
+title: "How the context window works"
 source: "https://platform.claude.com/docs/en/build-with-claude/context-windows"
 category: "build-with-claude"
 generated: true
 ---
-# Context windows
-
-Understand how the context window works, how extended thinking and tool use count toward it, and how to manage context as conversations grow.
-
+---
+title: Context windows
+url: https://platform.claude.com/docs/en/build-with-claude/context-windows
+description: Understand how the context window works, how extended thinking and tool use count toward it, and how to manage context as conversations grow.
 ---
 
 As conversations grow, you'll eventually approach context window limits. For long-running conversations and agentic workflows, [server-side compaction](./build-with-claude-compaction.md) is the primary strategy for context management.
@@ -22,13 +22,13 @@ The "context window" refers to all the text a language model can reference when 
 
 The following diagram illustrates the standard context window behavior for API requests1:
 
-![Diagram of turns accumulating in the context window until the conversation approaches the token limit](/docs/images/context-window.svg)
+![Diagram of turns accumulating in the context window until the conversation approaches the token limit](https://platform.claude.com/docs/images/context-window.svg)
 
 *1 Chat interfaces such as [claude.ai](https://claude.ai/) can also manage the context window on a rolling "first in, first out" basis.*
 
 * **Progressive token accumulation:** As the conversation advances through turns, each user message and assistant response accumulates within the context window, and previous turns are preserved completely.
 
-* **Context window capacity:** The context window ([up to 1M tokens, depending on the model](#context-window-sizes-by-model)) holds the conversation history plus the new output Claude generates.
+* **Context window capacity:** The context window ([up to 1M tokens, depending on the model](./build-with-claude-context-windows.md#context-window-sizes-by-model)) holds the conversation history plus the new output Claude generates.
 
 * **Input-output flow:** Each turn consists of:
 
@@ -59,7 +59,7 @@ Whether thinking blocks from previous assistant turns stay in the context window
 
 The following diagram shows how tokens are managed when thinking is enabled on a model that strips previous thinking blocks:
 
-![Diagram of thinking on a model that strips previous thinking blocks: each turn's thinking block is generated in the output and not carried into later turns' input](/docs/images/context-window-thinking.svg)
+![Diagram of thinking on a model that strips previous thinking blocks: each turn's thinking block is generated in the output and not carried into later turns' input](https://platform.claude.com/docs/images/context-window-thinking.svg)
 
 * **Stripping thinking blocks:** On models that strip previous thinking blocks, thinking blocks (shown in dark gray) are generated during each turn's output phase but are not carried forward as input tokens for subsequent turns. You do not need to strip the thinking blocks yourself: if you pass them back, the Claude API strips them automatically.
 * **Billing:** Thinking tokens are billed as output tokens once, when they are generated. On models that keep previous thinking blocks, the kept blocks are then part of later requests' input and are billed as input tokens, like the rest of the conversation history.
@@ -72,7 +72,7 @@ The following diagram shows how tokens are managed when thinking is enabled on a
 
 The following diagram illustrates how tokens are managed when you combine thinking with tool use on a model that strips previous thinking blocks:
 
-![Diagram of thinking with tool use: thinking is kept with its tool result, then dropped on the next user turn on models that strip previous thinking blocks](/docs/images/context-window-thinking-tools.svg)
+![Diagram of thinking with tool use: thinking is kept with its tool result, then dropped on the next user turn on models that strip previous thinking blocks](https://platform.claude.com/docs/images/context-window-thinking-tools.svg)
 
 <Steps>
   <Step title="First turn architecture">

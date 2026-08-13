@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/csharp/beta/environments/create
 category: "api"
 generated: true
 ---
+---
+title: Create Environment
+url: https://platform.claude.com/docs/en/api/csharp/beta/environments/create
+---
+
 ## Create Environment
 
 `BetaEnvironment Beta.Environments.Create(EnvironmentCreateParamsparameters, CancellationTokencancellationToken = default)`
@@ -197,6 +202,8 @@ Create a new environment with the specified configuration.
     - `"fallback-credit-2026-07-01"FallbackCredit2026_07_01`
 
     - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
+
+    - `"mid-conversation-tool-changes-2026-07-01"MidConversationToolChanges2026_07_01`
 
 ### Returns
 

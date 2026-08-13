@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/federation_rules/workspac
 category: "api"
 generated: true
 ---
+---
+title: List Federation Rule Workspaces
+url: https://platform.claude.com/docs/en/api/admin/federation_rules/workspaces/list
+---
+
 ## List Federation Rule Workspaces
 
 **get** `/v1/organizations/federation_rules/{federation_rule_id}/workspaces`

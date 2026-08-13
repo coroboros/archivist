@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/php/beta/webhooks"
 category: "api"
 generated: true
 ---
+---
+title: Webhooks
+url: https://platform.claude.com/docs/en/api/php/beta/webhooks
+---
+
 # Webhooks
 
 ## Domain Types
@@ -812,6 +817,18 @@ generated: true
 
     - `string workspaceID`
 
+  - `BetaWebhookSessionBudgetReachedEventData`
+
+    - `string id`
+
+      ID of the session that triggered the event.
+
+    - `string organizationID`
+
+    - `"session.budget_reached" type`
+
+    - `string workspaceID`
+
 ### Beta Webhook Memory Store Archived Event Data
 
 - `BetaWebhookMemoryStoreArchivedEventData`
@@ -865,6 +882,20 @@ generated: true
   - `string organizationID`
 
   - `"session.archived" type`
+
+  - `string workspaceID`
+
+### Beta Webhook Session Budget Reached Event Data
+
+- `BetaWebhookSessionBudgetReachedEventData`
+
+  - `string id`
+
+    ID of the session that triggered the event.
+
+  - `string organizationID`
+
+  - `"session.budget_reached" type`
 
   - `string workspaceID`
 

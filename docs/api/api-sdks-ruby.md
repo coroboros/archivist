@@ -1,13 +1,13 @@
 ---
-title: "Ruby SDK"
+title: "Automatically handles tool execution loop"
 source: "https://platform.claude.com/docs/en/api/sdks/ruby"
 category: "api"
 generated: true
 ---
-# Ruby SDK
-
-Install and configure the Anthropic Ruby SDK with Sorbet types, streaming helpers, and connection pooling
-
+---
+title: Ruby SDK
+url: https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/ruby
+description: Install and configure the Anthropic Ruby SDK with Sorbet types, streaming helpers, and connection pooling
 ---
 
 The Anthropic Ruby library provides convenient access to the Anthropic REST API from any Ruby 3.2.0+ application. It ships with comprehensive types and docstrings in Yard, RBS, and RBI. The standard library's `net/http` is used as the HTTP transport, with connection pooling through the `connection_pool` gem.
@@ -410,7 +410,7 @@ Use `Anthropic::BedrockMantleClient` for new projects; `Anthropic::BedrockClient
 
 ## Semantic versioning
 
-This package follows [SemVer](https://semver.org/spec/v2.0.0.html) conventions. As the library is in initial development and has a major version of `0`, APIs may change at any time.
+This package follows [SemVer](https://semver.org/spec/v2.0.0.html) conventions.
 
 This package considers improvements to the (non-runtime) `*.rbi` and `*.rbs` type definitions to be non-breaking changes.
 

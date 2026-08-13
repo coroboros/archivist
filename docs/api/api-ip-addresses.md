@@ -1,13 +1,13 @@
 ---
-title: "IP addresses"
+title: "Inbound IP addresses"
 source: "https://platform.claude.com/docs/en/api/ip-addresses"
 category: "api"
 generated: true
 ---
-# IP addresses
-
-Anthropic services use fixed IP addresses for both inbound and outbound connections. You can use these addresses to configure your firewall rules for secure access to the Claude API and Console. These addresses will not change without notice.
-
+---
+title: IP addresses
+url: https://platform.claude.com/docs/en/api/ip-addresses
+description: Anthropic services use fixed IP addresses for both inbound and outbound connections. You can use these addresses to configure your firewall rules for secure access to the Claude API and Console. These addresses will not change without notice.
 ---
 
 <Note>

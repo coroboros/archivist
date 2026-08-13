@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/cli/beta/environments/delete"
 category: "api"
 generated: true
 ---
+---
+title: Delete Environment
+url: https://platform.claude.com/docs/en/api/cli/beta/environments/delete
+---
+
 ## Delete Environment
 
 `$ ant beta:environments delete`

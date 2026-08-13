@@ -1,13 +1,13 @@
 ---
-title: "Adding files"
+title: "Uploading files"
 source: "https://platform.claude.com/docs/en/managed-agents/files"
 category: "managed-agents"
 generated: true
 ---
-# Adding files
-
-Upload files and mount them in your sandbox for reading and processing.
-
+---
+title: Adding files
+url: https://platform.claude.com/docs/en/managed-agents/files
+description: Upload files and mount them in your sandbox for reading and processing.
 ---
 
 You can provide files to your agent by uploading them through the Files API and mounting them in the session's sandbox.
@@ -21,7 +21,7 @@ You can provide files to your agent by uploading them through the Files API and 
 First, upload a file using the [Files API](../build-with-claude/build-with-claude-files.md):
 
 <CodeGroup>
-  ```bash curl
+  ```bash cURL
   file=$(curl --fail-with-body -sS "${auth[@]}" \
     "${base_url}/files" \
     -F file=@data.csv)
@@ -98,7 +98,7 @@ Mount uploaded files into the sandbox by adding them to the `resources` array wh
 </Tip>
 
 <CodeGroup>
-  ```bash curl
+  ```bash cURL
   session=$(
     jq -n \
       --arg agent_id "${agent_id}" \
@@ -241,7 +241,7 @@ Mount uploaded files into the sandbox by adding them to the `resources` array wh
   ```
 </CodeGroup>
 
-With the preceding `mount_path`, the agent reads the file at `/mnt/session/uploads/data.csv` (see [File paths](#file-paths)).
+With the preceding `mount_path`, the agent reads the file at `/mnt/session/uploads/data.csv` (see [File paths](./managed-agents-files.md#file-paths)).
 
 A new `file_id` is created that references the instance of the file in the session. These copies do not count against your [storage limits](../build-with-claude/build-with-claude-files.md).
 
@@ -250,7 +250,7 @@ A new `file_id` is created that references the instance of the file in the sessi
 Mount multiple files by adding entries to the `resources` array:
 
 <CodeGroup>
-  ```json curl
+  ```json cURL
   "resources": [
     { "type": "file", "file_id": "file_abc123", "mount_path": "/data.csv" },
     { "type": "file", "file_id": "file_def456", "mount_path": "/config.json" },
@@ -344,7 +344,7 @@ A maximum of 500 files is supported per session.
 You can add or remove files from a session after creation using the session resources API. Each resource has an `id` returned when it is added (or listed), which you use for deletes.
 
 <CodeGroup>
-  ```bash curl
+  ```bash cURL
   resource=$(
     jq -n --arg file_id "${file_id}" '{type: "file", file_id: $file_id}' \
       | curl --fail-with-body -sS "${auth[@]}" \
@@ -441,7 +441,7 @@ You can add or remove files from a session after creation using the session reso
 List all resources on a session with `resources.list`. To remove a file, call `resources.delete` with the resource ID:
 
 <CodeGroup>
-  ```bash curl
+  ```bash cURL
   curl --fail-with-body -sS "${auth[@]}" \
     "${base_url}/sessions/${session_id}/resources" \
     | jq -r '.data[] | "\(.id) \(.type)"'
@@ -546,7 +546,7 @@ List all resources on a session with `resources.list`. To remove a file, call `r
 Use the [Files API](../build-with-claude/build-with-claude-files.md) to list files scoped to a session and download them.
 
 <CodeGroup>
-  ```bash curl
+  ```bash cURL
   # List files associated with a session
   curl -fsSL "https://api.anthropic.com/v1/files?scope_id=sesn_abc123" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \

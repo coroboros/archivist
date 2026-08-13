@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/ruby/beta/vaults/credentials/mc
 category: "api"
 generated: true
 ---
+---
+title: Validate Credential
+url: https://platform.claude.com/docs/en/api/ruby/beta/vaults/credentials/mcp_oauth_validate
+---
+
 ## Validate Credential
 
 `beta.vaults.credentials.mcp_oauth_validate(credential_id, **kwargs) -> BetaManagedAgentsCredentialValidation`
@@ -24,7 +29,7 @@ Validate Credential
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 29 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 30 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -89,6 +94,8 @@ Validate Credential
     - `:"fallback-credit-2026-07-01"`
 
     - `:"agent-memory-2026-07-22"`
+
+    - `:"mid-conversation-tool-changes-2026-07-01"`
 
 ### Returns
 

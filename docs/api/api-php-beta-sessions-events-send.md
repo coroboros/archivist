@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/php/beta/sessions/events/send"
 category: "api"
 generated: true
 ---
+---
+title: Send Events
+url: https://platform.claude.com/docs/en/api/php/beta/sessions/events/send
+---
+
 ## Send Events
 
 `$client->beta->sessions->events->send(string sessionID, list<ManagedAgentsEventParams> events, ?list<AnthropicBeta> betas): ManagedAgentsSendSessionEvents`
@@ -49,7 +54,7 @@ $betaManagedAgentsSendSessionEvents = $client->beta->sessions->events->send(
       'type' => 'user.message',
     ],
   ],
-  betas: ['message-batches-2024-09-24'],
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
 );
 
 var_dump($betaManagedAgentsSendSessionEvents);

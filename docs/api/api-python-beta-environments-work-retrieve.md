@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/python/beta/environments/work/r
 category: "api"
 generated: true
 ---
+---
+title: Get Work Item
+url: https://platform.claude.com/docs/en/api/python/beta/environments/work/retrieve
+---
+
 ## Get Work Item
 
 `beta.environments.work.retrieve(strwork_id, WorkRetrieveParams**kwargs)  -> BetaSelfHostedWork`
@@ -26,7 +31,7 @@ Retrieve detailed information about a specific work item.
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 29 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 30 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -91,6 +96,8 @@ Retrieve detailed information about a specific work item.
     - `"fallback-credit-2026-07-01"`
 
     - `"agent-memory-2026-07-22"`
+
+    - `"mid-conversation-tool-changes-2026-07-01"`
 
 ### Returns
 

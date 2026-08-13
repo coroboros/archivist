@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/spend_limits"
 category: "api"
 generated: true
 ---
+---
+title: Spend Limits
+url: https://platform.claude.com/docs/en/api/admin/spend_limits
+---
+
 # Spend Limits
 
 ## Set Spend Limit

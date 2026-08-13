@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/compliance/apps/projects/docume
 category: "api"
 generated: true
 ---
+---
+title: Get project document metadata
+url: https://platform.claude.com/docs/en/api/compliance/apps/projects/documents/metadata
+---
+
 ## Get project document metadata
 
 **get** `/v1/compliance/apps/projects/documents/{document_id}/metadata`

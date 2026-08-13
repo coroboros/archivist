@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/beta/environments/work/heartbea
 category: "api"
 generated: true
 ---
+---
+title: Record Heartbeat
+url: https://platform.claude.com/docs/en/api/beta/environments/work/heartbeat
+---
+
 ## Record Heartbeat
 
 **post** `/v1/environments/{environment_id}/work/{work_id}/heartbeat`
@@ -36,7 +41,7 @@ Record a heartbeat for a work item to maintain the lease.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 29 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 30 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -101,6 +106,8 @@ Record a heartbeat for a work item to maintain the lease.
     - `"fallback-credit-2026-07-01"`
 
     - `"agent-memory-2026-07-22"`
+
+    - `"mid-conversation-tool-changes-2026-07-01"`
 
 ### Returns
 

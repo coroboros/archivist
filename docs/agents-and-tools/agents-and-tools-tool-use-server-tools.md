@@ -1,13 +1,13 @@
 ---
-title: "Server tools"
+title: "The server\_tool\_use block"
 source: "https://platform.claude.com/docs/en/agents-and-tools/tool-use/server-tools"
 category: "agents-and-tools"
 generated: true
 ---
-# Server tools
-
-Work with Anthropic-executed tools: server_tool_use blocks, pause_turn continuation, mixed server and client tool turns, and domain filtering.
-
+---
+title: Server tools
+url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/server-tools
+description: "Work with Anthropic-executed tools: server_tool_use blocks, pause_turn continuation, mixed server and client tool turns, and domain filtering."
 ---
 
 Server-executed tools share these mechanics: the `server_tool_use` block, `pause_turn` continuation, turns that mix server and client tools, Zero Data Retention (ZDR) eligibility, and domain filtering. For individual tools, see the [tool reference](./agents-and-tools-tool-use-tool-reference.md).
@@ -501,7 +501,7 @@ A `server_tool_use` block and its result block pair up by `tool_use_id`, not by 
   To give Claude more input, send it as a separate user message after the turn completes.
 </Warning>
 
-**How this differs from `pause_turn`:** A [`pause_turn` response](#the-server-side-loop-and-pause-turn) can also end with a `server_tool_use` block that has not run, but it never leaves a client `tool_use` block waiting on you, so you continue it by re-sending the assistant content as-is. A response that leaves a client `tool_use` block waiting on you never has a `stop_reason` of `pause_turn`: when Claude stops to call your tools, `stop_reason` is `tool_use`, and you continue it by sending the client `tool_result` blocks rather than by re-sending the response. In both cases the API runs the pending server tool at the start of the next request.
+**How this differs from `pause_turn`:** A [`pause_turn` response](./agents-and-tools-tool-use-server-tools.md#the-server-side-loop-and-pause-turn) can also end with a `server_tool_use` block that has not run, but it never leaves a client `tool_use` block waiting on you, so you continue it by re-sending the assistant content as-is. A response that leaves a client `tool_use` block waiting on you never has a `stop_reason` of `pause_turn`: when Claude stops to call your tools, `stop_reason` is `tool_use`, and you continue it by sending the client `tool_result` blocks rather than by re-sending the response. In both cases the API runs the pending server tool at the start of the next request.
 
 The following example enables web fetch together with a user-defined `run_command` tool and handles the mixed response:
 
@@ -1014,7 +1014,7 @@ The following example enables web fetch together with a user-defined `run_comman
   ```
 </CodeGroup>
 
-This code is also correct when Claude does not mix the two kinds of call. A turn with only client `tool_use` blocks takes the same continuation path, and a turn with only server tool calls needs no client `tool_result` blocks from you: its result blocks are normally already present, and one that comes back suspended, such as a [`pause_turn` response](#the-server-side-loop-and-pause-turn), is re-sent as-is instead.
+This code is also correct when Claude does not mix the two kinds of call. A turn with only client `tool_use` blocks takes the same continuation path, and a turn with only server tool calls needs no client `tool_result` blocks from you: its result blocks are normally already present, and one that comes back suspended, such as a [`pause_turn` response](./agents-and-tools-tool-use-server-tools.md#the-server-side-loop-and-pause-turn), is re-sent as-is instead.
 
 ## ZDR and allowed\_callers
 

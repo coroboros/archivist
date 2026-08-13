@@ -1,24 +1,23 @@
 ---
-title: "Using the Messages API"
+title: "Basic request and response"
 source: "https://platform.claude.com/docs/en/build-with-claude/working-with-messages"
 category: "build-with-claude"
 generated: true
 ---
-# Using the Messages API
-
-Practical patterns and examples for using the Messages API effectively
-
+---
+title: Using the Messages API
+url: https://platform.claude.com/docs/en/build-with-claude/working-with-messages
+description: Practical patterns and examples for using the Messages API effectively
 ---
 
 Anthropic offers two ways to build with Claude, each suited to different use cases:
 
-|                | Messages API                                                          | Claude Managed Agents                                                     |
-| -------------- | --------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| **What it is** | Direct model prompting access                                         | Pre-built, configurable agent harness that runs in managed infrastructure |
-| **Best for**   | Custom agent loops and fine-grained control                           | Long-running tasks and asynchronous work                                  |
-| **Learn more** | [Messages API docs](./build-with-claude-working-with-messages.md) | [Claude Managed Agents docs](../managed-agents/managed-agents-overview.md)            |
+|                | Messages API                                | Claude Managed Agents                                                     |
+| -------------- | ------------------------------------------- | ------------------------------------------------------------------------- |
+| **What it is** | Direct model prompting access               | Pre-built, configurable agent harness that runs in managed infrastructure |
+| **Best for**   | Custom agent loops and fine-grained control | Long-running tasks and asynchronous work                                  |
 
-This guide covers common patterns for working with the Messages API, including basic requests, multi-turn conversations, prefill techniques, and vision capabilities. For complete API specifications, see the [Messages API reference](../api/api-messages-create.md).
+This guide covers common patterns for working with the Messages API, including basic requests, multi-turn conversations, prefill techniques, and vision capabilities. For complete API specifications, see the [Messages API reference](../api/api-messages-create.md). For the managed agent harness instead, see the [Claude Managed Agents overview](../managed-agents/managed-agents-overview.md).
 
 <Note>
   For how zero data retention (ZDR) applies to this feature, see [API and data retention](../manage-claude/manage-claude-api-and-data-retention.md).

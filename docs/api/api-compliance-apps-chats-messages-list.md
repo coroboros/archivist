@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/compliance/apps/chats/messages/
 category: "api"
 generated: true
 ---
+---
+title: Get chat messages
+url: https://platform.claude.com/docs/en/api/compliance/apps/chats/messages/list
+---
+
 ## Get chat messages
 
 **get** `/v1/compliance/apps/chats/{claude_chat_id}/messages`

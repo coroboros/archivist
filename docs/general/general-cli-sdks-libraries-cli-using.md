@@ -1,13 +1,13 @@
 ---
-title: "Using the CLI"
+title: "Command structure"
 source: "https://platform.claude.com/docs/en/cli-sdks-libraries/cli/using"
 category: "general"
 generated: true
 ---
-# Using the CLI
-
-Command structure, output formats, GJSON transforms, request bodies, and debugging for the ant CLI.
-
+---
+title: Using the CLI
+url: https://platform.claude.com/docs/en/cli-sdks-libraries/cli/using
+description: Command structure, output formats, GJSON transforms, request bodies, and debugging for the ant CLI.
 ---
 
 This page covers the `ant` CLI's input and output mechanics that apply across every endpoint. For installing and authenticating, see the [Quickstart](./general-cli-sdks-libraries-cli-quickstart.md). For chaining commands and version-controlling resources, see [CLI scripting and automation](./general-cli-sdks-libraries-cli-scripting.md).
@@ -33,19 +33,19 @@ ant beta:sessions:events list --session-id session_01...
 
 ### Global flags
 
-| Flag                                  | Description                                                                                                                                                                                      |
-| ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Flag                                  | Description                                                                                                                                                                                                                 |
+| ------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `--profile`                           | Named profile to use for this invocation (equivalent to setting `ANTHROPIC_PROFILE`). See [Switch between workspaces](./general-cli-sdks-libraries-cli-authentication.md#switch-between-workspaces). |
-| `--format`                            | Output format: `auto`, `json`, `jsonl`, `yaml`, `pretty`, `raw`, `explore`                                                                                                                       |
-| `--transform`                         | Filter or reshape the response with a [GJSON path](#transform-output-with-gjson)                                                                                                                 |
-| `-r`, `--raw-output`                  | Print string results without surrounding quotes, like `jq -r`                                                                                                                                    |
-| `--base-url`                          | Override the API base URL                                                                                                                                                                        |
-| `--debug`                             | Print full HTTP request and response to stderr                                                                                                                                                   |
+| `--format`                            | Output format: `auto`, `json`, `jsonl`, `yaml`, `pretty`, `raw`, `explore`                                                                                                                                                  |
+| `--transform`                         | Filter or reshape the response with a [GJSON path](./general-cli-sdks-libraries-cli-using.md#transform-output-with-gjson)                                                                            |
+| `-r`, `--raw-output`                  | Print string results without surrounding quotes, like `jq -r`                                                                                                                                                               |
+| `--base-url`                          | Override the API base URL                                                                                                                                                                                                   |
+| `--debug`                             | Print full HTTP request and response to stderr                                                                                                                                                                              |
 | `--format-error`, `--transform-error` | Same as `--format` and `--transform` but applied to [error responses](./general-cli-sdks-libraries-cli-scripting.md#inspect-errors)                                                                  |
 
 ## Output formats
 
-`auto` pretty-prints JSON and is the default for commands that create or modify resources. List and retrieve commands default to the [interactive explorer](#interactive-explorer) when writing to a terminal, and to pretty-printed JSON when piped. Override either default with `--format`:
+`auto` pretty-prints JSON and is the default for commands that create or modify resources. List and retrieve commands default to the [interactive explorer](./general-cli-sdks-libraries-cli-using.md#interactive-explorer) when writing to a terminal, and to pretty-printed JSON when piped. Override either default with `--format`:
 
 ```bash
 ant models retrieve --model-id claude-opus-5 --format yaml
@@ -133,7 +133,7 @@ ant beta:agents create \
 
 ### Stdin
 
-Pipe a JSON or YAML document to stdin to supply the full request body. Fields from stdin are merged with flags, with flags taking precedence. Here `version` is the optimistic-locking token returned by an earlier `retrieve`, and `$AGENT_ID` was captured as in [Extract a scalar](#extract-a-scalar):
+Pipe a JSON or YAML document to stdin to supply the full request body. Fields from stdin are merged with flags, with flags taking precedence. Here `version` is the optimistic-locking token returned by an earlier `retrieve`, and `$AGENT_ID` was captured as in [Extract a scalar](./general-cli-sdks-libraries-cli-using.md#extract-a-scalar):
 
 ```bash
 echo '{"description": "Updated test agent.", "version": 1}' | \

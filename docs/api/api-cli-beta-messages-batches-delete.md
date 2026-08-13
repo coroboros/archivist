@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/cli/beta/messages/batches/delet
 category: "api"
 generated: true
 ---
+---
+title: Delete a Message Batch
+url: https://platform.claude.com/docs/en/api/cli/beta/messages/batches/delete
+---
+
 ## Delete a Message Batch
 
 `$ ant beta:messages:batches delete`

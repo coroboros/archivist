@@ -1,13 +1,13 @@
 ---
-title: "Manage WIF with the Admin API"
+title: "Create a service account"
 source: "https://platform.claude.com/docs/en/manage-claude/wif-admin-api"
 category: "manage-claude"
 generated: true
 ---
-# Manage WIF with the Admin API
-
-Create and manage Workload Identity Federation service accounts, issuers, and rules programmatically for infrastructure-as-code and CI workflows.
-
+---
+title: Manage WIF with the Admin API
+url: https://platform.claude.com/docs/en/manage-claude/wif-admin-api
+description: Create and manage Workload Identity Federation service accounts, issuers, and rules programmatically for infrastructure-as-code and CI workflows.
 ---
 
 The Admin API lets you create and manage [Workload Identity Federation](./manage-claude-workload-identity-federation.md) resources programmatically: service accounts, federation issuers, and federation rules. Use it to keep your federation configuration in infrastructure as code, provision it from CI, and reproduce it across organizations instead of clicking through the Claude Console. These endpoints share the `/v1/organizations` path prefix with the rest of the [Admin API](./manage-claude-admin-api.md).
@@ -53,7 +53,7 @@ One Console-created rule is enough to put the rest of your federation configurat
   </Step>
 </Steps>
 
-For the operations a workload-minted token can and cannot perform, see [Permissions and constraints](#permissions-and-constraints). If you already created issuers, service accounts, or rules with the **Connect workload** wizard, list them with the following endpoints and import them into your infrastructure-as-code state instead of recreating them.
+For the operations a workload-minted token can and cannot perform, see [Permissions and constraints](./manage-claude-wif-admin-api.md#permissions-and-constraints). If you already created issuers, service accounts, or rules with the **Connect workload** wizard, list them with the following endpoints and import them into your infrastructure-as-code state instead of recreating them.
 
 ## Authentication
 
@@ -143,7 +143,7 @@ curl --fail-with-body -sS -X POST "https://api.anthropic.com/v1/organizations/fe
   -H "authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
 ```
 
-To read or update a single issuer, use `GET` and `POST` on `/v1/organizations/federation_issuers/{issuer_id}`. An OAuth caller cannot update an issuer that backs a rule whose `oauth_scope` is anything other than `workspace:developer` or `workspace:inference`; see [Permissions and constraints](#permissions-and-constraints).
+To read or update a single issuer, use `GET` and `POST` on `/v1/organizations/federation_issuers/{issuer_id}`. An OAuth caller cannot update an issuer that backs a rule whose `oauth_scope` is anything other than `workspace:developer` or `workspace:inference`; see [Permissions and constraints](./manage-claude-wif-admin-api.md#permissions-and-constraints).
 
 For complete parameter details and response schemas, see the [Federation issuers API reference](../api/api-admin-federation_issuers.md).
 

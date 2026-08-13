@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/workspaces/create"
 category: "api"
 generated: true
 ---
+---
+title: Create Workspace
+url: https://platform.claude.com/docs/en/api/admin/workspaces/create
+---
+
 ## Create Workspace
 
 **post** `/v1/organizations/workspaces`

@@ -1,13 +1,13 @@
 ---
-title: "Versions"
+title: "Version history"
 source: "https://platform.claude.com/docs/en/api/versioning"
 category: "api"
 generated: true
 ---
-# Versions
-
-When making API requests, you must send an `anthropic-version` request header. For example, `anthropic-version: 2023-06-01`. If you are using the [client SDKs](../general/general-cli-sdks-libraries-overview.md), this is handled for you automatically.
-
+---
+title: Versions
+url: https://platform.claude.com/docs/en/api/versioning
+description: "When making API requests, you must send an `anthropic-version` request header. For example, `anthropic-version: 2023-06-01`. If you are using the [client SDKs](../general/general-cli-sdks-libraries-overview.md), this is handled for you automatically."
 ---
 
 For any given version with the Messages API, Anthropic preserves:

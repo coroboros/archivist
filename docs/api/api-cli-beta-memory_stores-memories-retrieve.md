@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/cli/beta/memory_stores/memories
 category: "api"
 generated: true
 ---
+---
+title: Retrieve a memory
+url: https://platform.claude.com/docs/en/api/cli/beta/memory_stores/memories/retrieve
+---
+
 ## Retrieve a memory
 
 `$ ant beta:memory-stores:memories retrieve`

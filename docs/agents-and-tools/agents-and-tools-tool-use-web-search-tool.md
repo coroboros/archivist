@@ -1,13 +1,13 @@
 ---
-title: "Web search tool"
+title: "How web search works"
 source: "https://platform.claude.com/docs/en/agents-and-tools/tool-use/web-search-tool"
 category: "agents-and-tools"
 generated: true
 ---
-# Web search tool
-
-Give Claude access to current web content with cited sources, optional dynamic filtering, and domain controls.
-
+---
+title: Web search tool
+url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/web-search-tool
+description: Give Claude access to current web content with cited sources, optional dynamic filtering, and domain controls.
 ---
 
 <Note>
@@ -21,8 +21,8 @@ With `web_search_20260209` and later versions, Claude can write and run code tha
 Three versions of the web search tool are available:
 
 * `web_search_20250305`: basic web search
-* `web_search_20260209`: adds [dynamic filtering](#dynamic-filtering)
-* `web_search_20260318`: adds [response inclusion](#response-inclusion) control for agentic workflows
+* `web_search_20260209`: adds [dynamic filtering](./agents-and-tools-tool-use-web-search-tool.md#dynamic-filtering)
+* `web_search_20260318`: adds [response inclusion](./agents-and-tools-tool-use-web-search-tool.md#response-inclusion) control for agentic workflows
 
 The examples on this page use `web_search_20250305` for basic search and `web_search_20260318` for dynamic filtering.
 
@@ -240,7 +240,7 @@ The following examples use `web_search_20260318`:
 ## How to use web search
 
 <Note>
-  Web search is enabled for your organization unless an administrator has disabled it in the [Claude Console](/settings/privacy), where they can also restrict which domains it searches. If it's disabled, a request that includes the tool fails with a 400 `invalid_request_error` that says web search is not enabled, rather than an [error code](#errors) inside a search result.
+  Web search is enabled for your organization unless an administrator has disabled it in the [Claude Console](https://platform.claude.com/settings/privacy), where they can also restrict which domains it searches. If it's disabled, a request that includes the tool fails with a 400 `invalid_request_error` that says web search is not enabled, rather than an [error code](./agents-and-tools-tool-use-web-search-tool.md#errors) inside a search result.
 </Note>
 
 Provide the web search tool in your API request:
@@ -438,7 +438,7 @@ The web search tool supports the following parameters:
 }
 ```
 
-All web search tool versions accept `allowed_callers`, which controls whether Claude calls web search directly or from code execution through [dynamic filtering](#dynamic-filtering). On `web_search_20260209` and later it defaults to `["code_execution_20260120"]` instead of `["direct"]`. See [Server tools](./agents-and-tools-tool-use-server-tools.md#zdr-and-allowed-callers) for how to configure it. `web_search_20260318` and later also accept [`response_inclusion`](#response-inclusion).
+All web search tool versions accept `allowed_callers`, which controls whether Claude calls web search directly or from code execution through [dynamic filtering](./agents-and-tools-tool-use-web-search-tool.md#dynamic-filtering). On `web_search_20260209` and later it defaults to `["code_execution_20260120"]` instead of `["direct"]`. See [Server tools](./agents-and-tools-tool-use-server-tools.md#zdr-and-allowed-callers) for how to configure it. `web_search_20260318` and later also accept [`response_inclusion`](./agents-and-tools-tool-use-web-search-tool.md#response-inclusion).
 
 ### Max uses
 
@@ -549,7 +549,7 @@ Here's an example response structure:
 }
 ```
 
-This example shows a direct search. When a search runs through [dynamic filtering](#dynamic-filtering), the response also contains the [code execution tool's](./agents-and-tools-tool-use-code-execution-tool.md) result blocks, and each nested `server_tool_use` and `web_search_tool_result` pair carries a `caller` field identifying the code execution call that made it.
+This example shows a direct search. When a search runs through [dynamic filtering](./agents-and-tools-tool-use-web-search-tool.md#dynamic-filtering), the response also contains the [code execution tool's](./agents-and-tools-tool-use-code-execution-tool.md) result blocks, and each nested `server_tool_use` and `web_search_tool_result` pair carries a `caller` field identifying the code execution call that made it.
 
 ### Search results
 
@@ -648,7 +648,7 @@ data: {"type": "content_block_start", "index": 2, "content_block": {"type": "web
 
 You can include the web search tool in the [Messages Batches API](../build-with-claude/build-with-claude-batch-processing.md). Web search tool calls through the Messages Batches API are priced the same as those in regular Messages API requests.
 
-To protect shared capacity, the Batches API throttles web search requests per organization, so large batches with many searches might take longer to complete. You can see your organization's web search rate limit on the [Rate limits](/settings/limits) page in the Claude Console. To request a higher limit, contact sales from that page.
+To protect shared capacity, the Batches API throttles web search requests per organization, so large batches with many searches might take longer to complete. You can see your organization's web search rate limit on the [Rate limits](https://platform.claude.com/settings/limits) page in the Claude Console. To request a higher limit, contact sales from that page.
 
 ## Usage and pricing
 

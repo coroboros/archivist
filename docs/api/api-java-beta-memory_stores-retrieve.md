@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/java/beta/memory_stores/retriev
 category: "api"
 generated: true
 ---
+---
+title: Retrieve a memory store
+url: https://platform.claude.com/docs/en/api/java/beta/memory_stores/retrieve
+---
+
 ## Retrieve a memory store
 
 `BetaManagedAgentsMemoryStore beta().memoryStores().retrieve(MemoryStoreRetrieveParamsparams = MemoryStoreRetrieveParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
@@ -85,6 +90,8 @@ Retrieve a memory store
     - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
 ### Returns
 

@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/ruby/beta/sessions/resources/ad
 category: "api"
 generated: true
 ---
+---
+title: Add Session Resource
+url: https://platform.claude.com/docs/en/api/ruby/beta/sessions/resources/add
+---
+
 ## Add Session Resource
 
 `beta.sessions.resources.add(session_id, **kwargs) -> BetaManagedAgentsFileResource`
@@ -34,7 +39,7 @@ Add Session Resource
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 29 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 30 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -99,6 +104,8 @@ Add Session Resource
     - `:"fallback-credit-2026-07-01"`
 
     - `:"agent-memory-2026-07-22"`
+
+    - `:"mid-conversation-tool-changes-2026-07-01"`
 
 ### Returns
 

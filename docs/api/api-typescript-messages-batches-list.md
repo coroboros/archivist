@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/typescript/messages/batches/lis
 category: "api"
 generated: true
 ---
+---
+title: List Message Batches
+url: https://platform.claude.com/docs/en/api/typescript/messages/batches/list
+---
+
 ## List Message Batches
 
 `client.messages.batches.list(BatchListParamsquery?, RequestOptionsoptions?): Page<MessageBatch>`
@@ -125,10 +130,10 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 ### Example
 
 ```typescript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic({
-  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
+  apiKey: process.env["ANTHROPIC_API_KEY"] // This is the default and can be omitted
 });
 
 // Automatically fetches more pages as needed.

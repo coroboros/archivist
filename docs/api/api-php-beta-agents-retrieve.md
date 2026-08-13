@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/php/beta/agents/retrieve"
 category: "api"
 generated: true
 ---
+---
+title: Get Agent
+url: https://platform.claude.com/docs/en/api/php/beta/agents/retrieve
+---
+
 ## Get Agent
 
 `$client->beta->agents->retrieve(string agentID, ?int version, ?list<AnthropicBeta> betas): BetaManagedAgentsAgent`
@@ -82,7 +87,7 @@ $client = new Client(apiKey: 'my-anthropic-api-key');
 $betaManagedAgentsAgent = $client->beta->agents->retrieve(
   'agent_011CZkYpogX7uDKUyvBTophP',
   version: 0,
-  betas: ['message-batches-2024-09-24'],
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
 );
 
 var_dump($betaManagedAgentsAgent);
@@ -111,6 +116,7 @@ var_dump($betaManagedAgentsAgent);
     "effort": {
       "type": "low"
     },
+    "inference_geo": "inference_geo",
     "speed": "standard"
   },
   "multiagent": {

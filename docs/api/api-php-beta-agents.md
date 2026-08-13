@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/php/beta/agents"
 category: "api"
 generated: true
 ---
+---
+title: Agents
+url: https://platform.claude.com/docs/en/api/php/beta/agents
+---
+
 # Agents
 
 ## Create Agent
@@ -112,7 +117,7 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaManagedAgentsAgent = $client->beta->agents->create(
-  model: 'claude-sonnet-4-6',
+  model: BetaManagedAgentsModel::CLAUDE_SONNET_4_6,
   name: 'My First Agent',
   description: 'A general-purpose starter agent.',
   mcpServers: [
@@ -144,7 +149,7 @@ $betaManagedAgentsAgent = $client->beta->agents->create(
       ],
     ],
   ],
-  betas: ['message-batches-2024-09-24'],
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
 );
 
 var_dump($betaManagedAgentsAgent);
@@ -173,6 +178,7 @@ var_dump($betaManagedAgentsAgent);
     "effort": {
       "type": "low"
     },
+    "inference_geo": "inference_geo",
     "speed": "standard"
   },
   "multiagent": {
@@ -320,7 +326,7 @@ $page = $client->beta->agents->list(
   includeArchived: true,
   limit: 0,
   page: 'page',
-  betas: ['message-batches-2024-09-24'],
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
 );
 
 var_dump($page);
@@ -351,6 +357,7 @@ var_dump($page);
         "effort": {
           "type": "low"
         },
+        "inference_geo": "inference_geo",
         "speed": "standard"
       },
       "multiagent": {
@@ -484,7 +491,7 @@ $client = new Client(apiKey: 'my-anthropic-api-key');
 $betaManagedAgentsAgent = $client->beta->agents->retrieve(
   'agent_011CZkYpogX7uDKUyvBTophP',
   version: 0,
-  betas: ['message-batches-2024-09-24'],
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
 );
 
 var_dump($betaManagedAgentsAgent);
@@ -513,6 +520,7 @@ var_dump($betaManagedAgentsAgent);
     "effort": {
       "type": "low"
     },
+    "inference_geo": "inference_geo",
     "speed": "standard"
   },
   "multiagent": {
@@ -687,7 +695,12 @@ $betaManagedAgentsAgent = $client->beta->agents->update(
     ],
   ],
   metadata: ['foo' => 'string'],
-  model: ['id' => 'claude-opus-4-8', 'effort' => 'low', 'speed' => 'standard'],
+  model: [
+    'id' => BetaManagedAgentsModel::CLAUDE_OPUS_4_8,
+    'effort' => 'low',
+    'inferenceGeo' => 'inference_geo',
+    'speed' => 'standard',
+  ],
   multiagent: [
     'agents' => ['agent_011CZkYqphY8vELVzwCUpqiQ', ['type' => 'self']],
     'type' => 'coordinator',
@@ -711,7 +724,7 @@ $betaManagedAgentsAgent = $client->beta->agents->update(
     ],
   ],
   version: 1,
-  betas: ['message-batches-2024-09-24'],
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
 );
 
 var_dump($betaManagedAgentsAgent);
@@ -740,6 +753,7 @@ var_dump($betaManagedAgentsAgent);
     "effort": {
       "type": "low"
     },
+    "inference_geo": "inference_geo",
     "speed": "standard"
   },
   "multiagent": {
@@ -864,7 +878,8 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaManagedAgentsAgent = $client->beta->agents->archive(
-  'agent_011CZkYpogX7uDKUyvBTophP', betas: ['message-batches-2024-09-24']
+  'agent_011CZkYpogX7uDKUyvBTophP',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
 );
 
 var_dump($betaManagedAgentsAgent);
@@ -893,6 +908,7 @@ var_dump($betaManagedAgentsAgent);
     "effort": {
       "type": "low"
     },
+    "inference_geo": "inference_geo",
     "speed": "standard"
   },
   "multiagent": {
@@ -946,6 +962,16 @@ var_dump($betaManagedAgentsAgent);
 ```
 
 ## Domain Types
+
+### Beta Managed Agents Advisor
+
+- `BetaManagedAgentsAdvisor`
+
+  - `string model`
+
+    The advisor model id.
+
+  - `Type type`
 
 ### Beta Managed Agents Agent
 
@@ -1265,7 +1291,7 @@ var_dump($betaManagedAgentsAgent);
 
   - `string description`
 
-    Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-4096 characters.
+    Description of what the tool does, shown to the agent to help it decide when to use the tool.
 
   - `BetaManagedAgentsCustomToolInputSchema inputSchema`
 
@@ -1469,6 +1495,10 @@ var_dump($betaManagedAgentsAgent);
 
     How hard Claude works on each turn. Sets `output_config.effort` on every Messages call the session makes.
 
+  - `?string inferenceGeo`
+
+    Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo.
+
   - `?Speed speed`
 
     Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
@@ -1487,6 +1517,10 @@ var_dump($betaManagedAgentsAgent);
 
     How hard Claude works on each inference call. Accepts a bare level string (`"high"`) or `{"type": "high"}`. On create, omitting it resolves the per-model default; on update, omitting it leaves the stored value unchanged.
 
+  - `?string inferenceGeo`
+
+    Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo. On update, `model` is whole-object replacement — omitting inference_geo clears it.
+
   - `?Speed speed`
 
     Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
@@ -1495,7 +1529,7 @@ var_dump($betaManagedAgentsAgent);
 
 - `BetaManagedAgentsMultiagentCoordinator`
 
-  - `list<BetaManagedAgentsAgentReference> agents`
+  - `list<Agent> agents`
 
     Agents the coordinator may spawn as session threads, each resolved to a specific version.
 
@@ -1670,7 +1704,7 @@ $page = $client->beta->agents->versions->list(
   'agent_011CZkYpogX7uDKUyvBTophP',
   limit: 0,
   page: 'page',
-  betas: ['message-batches-2024-09-24'],
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
 );
 
 var_dump($page);
@@ -1701,6 +1735,7 @@ var_dump($page);
         "effort": {
           "type": "low"
         },
+        "inference_geo": "inference_geo",
         "speed": "standard"
       },
       "multiagent": {

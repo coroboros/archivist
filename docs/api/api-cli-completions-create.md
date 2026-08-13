@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/cli/completions/create"
 category: "api"
 generated: true
 ---
+---
+title: Create a Text Completion
+url: https://platform.claude.com/docs/en/api/cli/completions/create
+---
+
 ## Create a Text Completion
 
 `$ ant completions create`
@@ -24,7 +29,7 @@ Future models and features will not be compatible with Text Completions. See our
 
   Note that our models may stop _before_ reaching this maximum. This parameter only specifies the absolute maximum number of tokens to generate.
 
-- `--model: "claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 14 more or string`
+- `--model: "claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 12 more or string`
 
   Body param: The model that will complete your prompt.
 
@@ -104,7 +109,7 @@ Future models and features will not be compatible with Text Completions. See our
 
     The resulting completion up to and excluding the stop sequences.
 
-  - `model: "claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 14 more or string`
+  - `model: "claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 12 more or string`
 
     The model that will complete your prompt.
 
@@ -169,14 +174,6 @@ Future models and features will not be compatible with Text Completions. See our
     - `"claude-sonnet-4-5-20250929"`
 
       High-performance model for agents and coding
-
-    - `"claude-opus-4-1"`
-
-      Powerful intelligence for long-running agents and coding
-
-    - `"claude-opus-4-1-20250805"`
-
-      Powerful intelligence for long-running agents and coding
 
   - `stop_reason: string`
 

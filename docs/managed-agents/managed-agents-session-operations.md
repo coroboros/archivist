@@ -1,13 +1,13 @@
 ---
-title: "Session operations"
+title: "Session statuses"
 source: "https://platform.claude.com/docs/en/managed-agents/session-operations"
 category: "managed-agents"
 generated: true
 ---
-# Session operations
-
-Retrieve, list, update, archive, and delete Claude Managed Agents sessions.
-
+---
+title: Session operations
+url: https://platform.claude.com/docs/en/managed-agents/session-operations
+description: Retrieve, list, update, archive, and delete Claude Managed Agents sessions.
 ---
 
 Once a session exists, use these operations to read, update, archive, or delete it. See [Start a session](./managed-agents-sessions.md) for creating a session and sending it work.
@@ -219,7 +219,7 @@ The session must be `idle` to update the agent. [Interrupt](./managed-agents-eve
 
 ## Updating the session budget
 
-A session [created with a budget](./managed-agents-sessions.md#set-a-session-budget) accepts two kinds of budget update: replacing the cap with a new `max_list_cost`, and removing it by setting `budget` to `null`. Both automatically resume work that paused when the session reached its cap. A replacement cap can be higher or lower than the current one, but it must be strictly greater than the session's consumed list cost, and removal is one-way: a non-null `budget` is accepted only on a session that currently has one, so you can't re-add a removed budget or add one to a session created without it. See [Session budgets](https://platform.claude.com/docs/en/managed-agents/budgets.md#resume-a-session-at-its-budget) for request examples, the error behaviors, and what counts toward list cost.
+A session [created with a budget](./managed-agents-sessions.md#set-a-session-budget) accepts two kinds of budget update: replacing the cap with a new `max_list_cost`, and removing it by setting `budget` to `null`. Both automatically resume work that paused when the session reached its cap. A replacement cap can be higher or lower than the current one, but it must be strictly greater than the session's consumed list cost, and removal is one-way: a non-null `budget` is accepted only on a session that currently has one, so you can't re-add a removed budget or add one to a session created without it. See [Session budgets](./managed-agents-budgets.md#resume-a-session-at-its-budget) for request examples, the error behaviors, and what counts toward list cost.
 
 ## Retrieving a session
 

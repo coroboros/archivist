@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/csharp/beta/environments/archiv
 category: "api"
 generated: true
 ---
+---
+title: Archive Environment
+url: https://platform.claude.com/docs/en/api/csharp/beta/environments/archive
+---
+
 ## Archive Environment
 
 `BetaEnvironment Beta.Environments.Archive(EnvironmentArchiveParamsparameters, CancellationTokencancellationToken = default)`
@@ -85,6 +90,8 @@ Archive an environment by ID. Archived environments cannot be used to create new
     - `"fallback-credit-2026-07-01"FallbackCredit2026_07_01`
 
     - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
+
+    - `"mid-conversation-tool-changes-2026-07-01"MidConversationToolChanges2026_07_01`
 
 ### Returns
 

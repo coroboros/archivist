@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/java/beta/environments"
 category: "api"
 generated: true
 ---
+---
+title: Environments
+url: https://platform.claude.com/docs/en/api/java/beta/environments
+---
+
 # Environments
 
 ## Create Environment
@@ -85,6 +90,8 @@ Create a new environment with the specified configuration.
     - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
   - `String name`
 
@@ -515,6 +522,8 @@ List environments with pagination support.
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
+
 ### Returns
 
 - `class BetaEnvironment:`
@@ -814,6 +823,8 @@ Retrieve a specific environment by ID.
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
+
 ### Returns
 
 - `class BetaEnvironment:`
@@ -1107,6 +1118,8 @@ Update an existing environment's configuration.
     - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
   - `Optional<Config> config`
 
@@ -1524,6 +1537,8 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
+
 ### Returns
 
 - `class BetaEnvironmentDeleteResponse:`
@@ -1651,6 +1666,8 @@ Archive an environment by ID. Archived environments cannot be used to create new
     - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
 ### Returns
 
@@ -2445,6 +2462,8 @@ Retrieve detailed information about a specific work item.
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
+
 ### Returns
 
 - `class BetaSelfHostedWork:`
@@ -2671,6 +2690,8 @@ Long poll for work items in the queue.
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
+
   - `Optional<String> anthropicWorkerId`
 
     Unique identifier for the specific worker polling, used to track aggregated environment-level work metrics in Console
@@ -2891,6 +2912,8 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
     - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
 ### Returns
 
@@ -3120,6 +3143,8 @@ Record a heartbeat for a work item to maintain the lease.
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
+
 ### Returns
 
 - `class BetaSelfHostedWorkHeartbeatResponse:`
@@ -3280,6 +3305,8 @@ Stop a work item, initiating graceful or forced shutdown.
     - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
   - `BetaSelfHostedWorkStopRequest betaSelfHostedWorkStopRequest`
 
@@ -3513,6 +3540,8 @@ List work items in an environment.
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
+
 ### Returns
 
 - `class BetaSelfHostedWork:`
@@ -3733,6 +3762,8 @@ Update work item metadata with merge semantics.
     - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
   - `BetaSelfHostedWorkUpdateRequest betaSelfHostedWorkUpdateRequest`
 
@@ -3960,6 +3991,8 @@ Get statistics about the work queue for an environment.
     - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
 ### Returns
 

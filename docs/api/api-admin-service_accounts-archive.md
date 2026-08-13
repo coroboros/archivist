@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/service_accounts/archive"
 category: "api"
 generated: true
 ---
+---
+title: Archive Service Account
+url: https://platform.claude.com/docs/en/api/admin/service_accounts/archive
+---
+
 ## Archive Service Account
 
 **post** `/v1/organizations/service_accounts/{service_account_id}/archive`

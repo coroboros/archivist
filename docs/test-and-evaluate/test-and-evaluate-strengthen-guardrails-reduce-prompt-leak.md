@@ -1,13 +1,13 @@
 ---
-title: "Reduce prompt leak"
+title: "Before you try to reduce prompt leak"
 source: "https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/reduce-prompt-leak"
 category: "test-and-evaluate"
 generated: true
 ---
-# Reduce prompt leak
-
-Reduce the risk of prompt leaks by separating context from user queries, filtering Claude's outputs, and auditing prompts, without degrading task performance.
-
+---
+title: Reduce prompt leak
+url: https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/reduce-prompt-leak
+description: Reduce the risk of prompt leaks by separating context from user queries, filtering Claude's outputs, and auditing prompts, without degrading task performance.
 ---
 
 Prompt leaks can expose sensitive information that you expect to be "hidden" in your prompt. While no method is foolproof, the strategies below can significantly reduce the risk.

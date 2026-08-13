@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/java/beta/files"
 category: "api"
 generated: true
 ---
+---
+title: Files
+url: https://platform.claude.com/docs/en/api/java/beta/files
+---
+
 # Files
 
 ## Upload File
@@ -85,6 +90,8 @@ Upload File
     - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
   - `String file`
 
@@ -283,6 +290,8 @@ List Files
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
+
 ### Returns
 
 - `class FileMetadata:`
@@ -465,6 +474,8 @@ Download File
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
+
 ### Example
 
 ```java
@@ -569,6 +580,8 @@ Get File Metadata
     - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
 ### Returns
 
@@ -744,6 +757,8 @@ Delete File
     - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
 ### Returns
 

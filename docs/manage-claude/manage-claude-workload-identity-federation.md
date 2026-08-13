@@ -1,13 +1,13 @@
 ---
-title: "Workload Identity Federation"
+title: "Concepts"
 source: "https://platform.claude.com/docs/en/manage-claude/workload-identity-federation"
 category: "manage-claude"
 generated: true
 ---
-# Workload Identity Federation
-
-Authenticate workloads to the Claude API with short-lived identity tokens from your own identity provider instead of long-lived static API keys.
-
+---
+title: Workload Identity Federation
+url: https://platform.claude.com/docs/en/manage-claude/workload-identity-federation
+description: Authenticate workloads to the Claude API with short-lived identity tokens from your own identity provider instead of long-lived static API keys.
 ---
 
 Workload Identity Federation (WIF) lets your workloads authenticate to the Claude API with short-lived OpenID Connect (OIDC) tokens instead of long-lived `sk-ant-...` API keys. The tokens come from an identity provider (IdP) you already operate: AWS IAM, Google Cloud, or any standards-compliant OIDC issuer such as GitHub Actions, Kubernetes, SPIFFE, Microsoft Entra ID, or Okta.
@@ -81,7 +81,7 @@ The **Connect workload** wizard creates all three resources (the issuer, the ser
   </Step>
 
   <Step title="Test the connection">
-    The wizard creates the issuer, service account, and federation rule, then listens for a successful token exchange for 15 minutes. Trigger an exchange from your workload within that window (see [Authenticate from your workload](#authenticate-from-your-workload)) to confirm the setup works. If the window elapses, the resources persist; you can re-run the test from the federation rule's detail page. Note the rule's ID (`fdrl_...`) and the service account ID (`svac_...`) the wizard creates: your workload passes both, along with your organization ID (and your workspace ID when the rule covers more than one workspace), in every token-exchange request.
+    The wizard creates the issuer, service account, and federation rule, then listens for a successful token exchange for 15 minutes. Trigger an exchange from your workload within that window (see [Authenticate from your workload](./manage-claude-workload-identity-federation.md#authenticate-from-your-workload)) to confirm the setup works. If the window elapses, the resources persist; you can re-run the test from the federation rule's detail page. Note the rule's ID (`fdrl_...`) and the service account ID (`svac_...`) the wizard creates: your workload passes both, along with your organization ID (and your workspace ID when the rule covers more than one workspace), in every token-exchange request.
   </Step>
 </Steps>
 
@@ -93,7 +93,7 @@ With federation configured, your workload exchanges its IdP-issued JWT for an An
 
 ### Construct the SDK client
 
-You can construct the client with explicit credentials or with no arguments. With no arguments, the SDK resolves credentials from environment variables or the active profile, as described under [Credential precedence](#credential-precedence). The zero-argument form is the recommended pattern for production workloads: ship the same container image everywhere and inject `ANTHROPIC_FEDERATION_RULE_ID`, `ANTHROPIC_ORGANIZATION_ID`, `ANTHROPIC_SERVICE_ACCOUNT_ID`, `ANTHROPIC_WORKSPACE_ID`, and `ANTHROPIC_IDENTITY_TOKEN_FILE` per environment.
+You can construct the client with explicit credentials or with no arguments. With no arguments, the SDK resolves credentials from environment variables or the active profile, as described under [Credential precedence](./manage-claude-workload-identity-federation.md#credential-precedence). The zero-argument form is the recommended pattern for production workloads: ship the same container image everywhere and inject `ANTHROPIC_FEDERATION_RULE_ID`, `ANTHROPIC_ORGANIZATION_ID`, `ANTHROPIC_SERVICE_ACCOUNT_ID`, `ANTHROPIC_WORKSPACE_ID`, and `ANTHROPIC_IDENTITY_TOKEN_FILE` per environment.
 
 <CodeGroup>
   ```bash cURL
@@ -351,7 +351,7 @@ For the full precedence table, the per-tier semantics, and the profile file sche
 
 To switch an existing workload from a static API key to federation without downtime:
 
-1. **Configure federation in parallel.** Complete the [setup walkthrough](#set-up-federation) and confirm the federation rule matches your workload's token. Leave the existing `ANTHROPIC_API_KEY` in place for now.
+1. **Configure federation in parallel.** Complete the [setup walkthrough](./manage-claude-workload-identity-federation.md#set-up-federation) and confirm the federation rule matches your workload's token. Leave the existing `ANTHROPIC_API_KEY` in place for now.
 2. **Smoke-test which credential wins.** Run `ant auth status` from inside the workload (or inspect SDK debug logs). Because `ANTHROPIC_API_KEY` sits above the federation tiers in the precedence chain, the API key still wins at this stage.
 3. **Unset `ANTHROPIC_API_KEY` everywhere it is injected.** Remove it from CI secrets, container environment, and shell profiles (see the preceding warning). Re-run `ant auth status` and confirm the federation source is now selected.
 4. **Revoke the API key.** Once the workload is running on the federated token, delete the key in the Claude Console under **Settings → API keys**.

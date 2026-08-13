@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/php/messages/batches/list"
 category: "api"
 generated: true
 ---
+---
+title: List Message Batches
+url: https://platform.claude.com/docs/en/api/php/messages/batches/list
+---
+
 ## List Message Batches
 
 `$client->messages->batches->list(?string afterID, ?string beforeID, ?int limit): Page<MessageBatch>`

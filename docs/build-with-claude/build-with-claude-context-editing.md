@@ -1,13 +1,13 @@
 ---
-title: "Context editing"
+title: "Overview"
 source: "https://platform.claude.com/docs/en/build-with-claude/context-editing"
 category: "build-with-claude"
 generated: true
 ---
-# Context editing
-
-Automatically manage conversation context as it grows with context editing.
-
+---
+title: Context editing
+url: https://platform.claude.com/docs/en/build-with-claude/context-editing
+description: Automatically manage conversation context as it grows with context editing.
 ---
 
 <Note>
@@ -26,10 +26,10 @@ Context editing allows you to selectively clear specific content from conversati
 * **Thinking block clearing** - For managing thinking blocks when using extended thinking, with options to preserve recent thinking for context continuity
 * **Client-side SDK compaction** - An SDK-based alternative for summary-based context management (server-side compaction is generally preferred)
 
-| Approach        | Where it runs | Strategies                                                                                            | How it works                                                                                                                                                                                                                                                                              |
-| --------------- | ------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Server-side** | API           | Tool result clearing (`clear_tool_uses_20250919`) Thinking block clearing (`clear_thinking_20251015`) | Applied before the prompt reaches Claude. Clears specific content from conversation history. Each strategy can be configured independently.                                                                                                                                               |
-| **Client-side** | SDK           | Compaction                                                                                            | Available in [Python, TypeScript, and Ruby SDKs](../general/general-cli-sdks-libraries-overview.md) when using [`tool_runner`](../agents-and-tools/agents-and-tools-tool-use-tool-runner.md). Generates a summary and replaces full conversation history. See [Client-side compaction](#client-side-compaction-sdk). |
+| Approach        | Where it runs | Strategies                                                                                            | How it works                                                                                                                                                                                                                                                                                                                                                                                                         |
+| --------------- | ------------- | ----------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Server-side** | API           | Tool result clearing (`clear_tool_uses_20250919`) Thinking block clearing (`clear_thinking_20251015`) | Applied before the prompt reaches Claude. Clears specific content from conversation history. Each strategy can be configured independently.                                                                                                                                                                                                                                                                          |
+| **Client-side** | SDK           | Compaction                                                                                            | Available in [Python, TypeScript, and Ruby SDKs](../general/general-cli-sdks-libraries-overview.md) when using [`tool_runner`](../agents-and-tools/agents-and-tools-tool-use-tool-runner.md). Generates a summary and replaces full conversation history. See [Client-side compaction](./build-with-claude-context-editing.md#client-side-compaction-sdk). |
 
 ## Server-side strategies
 
@@ -81,7 +81,7 @@ Context editing is available on all supported Claude models.
 
 ## Tool result clearing usage
 
-The simplest way to enable tool result clearing is to specify only the strategy type. All other [configuration options](#configuration-options-for-tool-result-clearing) use their default values:
+The simplest way to enable tool result clearing is to specify only the strategy type. All other [configuration options](./build-with-claude-context-editing.md#configuration-options-for-tool-result-clearing) use their default values:
 
 <CodeGroup>
   ```bash cURL
@@ -2485,12 +2485,12 @@ Claude continues working from this summary as if it were the original conversati
 
 ### Configuration options
 
-| Parameter                 | Type    | Required | Default                                               | Description                              |
-| ------------------------- | ------- | -------- | ----------------------------------------------------- | ---------------------------------------- |
-| `enabled`                 | boolean | Yes      | -                                                     | Whether to enable automatic compaction   |
-| `context_token_threshold` | number  | No       | 100,000                                               | Token count at which compaction triggers |
-| `model`                   | string  | No       | Same as main model                                    | Model to use for generating summaries    |
-| `summary_prompt`          | string  | No       | See [Default summary prompt](#default-summary-prompt) | Custom prompt for summary generation     |
+| Parameter                 | Type    | Required | Default                                                                                                                    | Description                              |
+| ------------------------- | ------- | -------- | -------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
+| `enabled`                 | boolean | Yes      | -                                                                                                                          | Whether to enable automatic compaction   |
+| `context_token_threshold` | number  | No       | 100,000                                                                                                                    | Token count at which compaction triggers |
+| `model`                   | string  | No       | Same as main model                                                                                                         | Model to use for generating summaries    |
+| `summary_prompt`          | string  | No       | See [Default summary prompt](./build-with-claude-context-editing.md#default-summary-prompt) | Custom prompt for summary generation     |
 
 #### Choosing a token threshold
 

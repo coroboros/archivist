@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/typescript/beta/messages/batche
 category: "api"
 generated: true
 ---
+---
+title: List Message Batches
+url: https://platform.claude.com/docs/en/api/typescript/beta/messages/batches/list
+---
+
 ## List Message Batches
 
 `client.beta.messages.batches.list(BatchListParamsparams?, RequestOptionsoptions?): Page<BetaMessageBatch>`
@@ -38,7 +43,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 29 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -103,6 +108,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
       - `"fallback-credit-2026-07-01"`
 
       - `"agent-memory-2026-07-22"`
+
+      - `"mid-conversation-tool-changes-2026-07-01"`
 
 ### Returns
 
@@ -197,10 +204,10 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 ### Example
 
 ```typescript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic({
-  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
+  apiKey: process.env["ANTHROPIC_API_KEY"] // This is the default and can be omitted
 });
 
 // Automatically fetches more pages as needed.

@@ -1,13 +1,13 @@
 ---
-title: "Manage tool context"
+title: "The four approaches"
 source: "https://platform.claude.com/docs/en/agents-and-tools/tool-use/manage-tool-context"
 category: "agents-and-tools"
 generated: true
 ---
-# Manage tool context
-
-Choose between tool search, programmatic tool calling, prompt caching, and context editing to manage context bloat.
-
+---
+title: Manage tool context
+url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/manage-tool-context
+description: Choose between tool search, programmatic tool calling, prompt caching, and context editing to manage context bloat.
 ---
 
 Tool definitions and accumulated `tool_result` blocks consume your context window. Long-running agents with many tools or many turns can exhaust available context before the task is finished. Four approaches address this at different points in the pipeline.
@@ -16,8 +16,8 @@ Tool definitions and accumulated `tool_result` blocks consume your context windo
 
 Each approach targets a different source of context pressure. Pick the one that matches where your tokens are going.
 
-| Approach                  | What it reduces                         | When it fits                                                         | Learn more                                                                                      |
-| ------------------------- | --------------------------------------- | -------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| Approach                  | What it reduces                         | When it fits                                                         | Learn more                                                                                                                 |
+| ------------------------- | --------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
 | Tool search               | Tool definitions loaded upfront         | Large toolsets (20+ tools) where most tools aren't needed every turn | [Tool search tool](./agents-and-tools-tool-use-tool-search-tool.md)                         |
 | Programmatic tool calling | `tool_result` roundtrips                | Chains of tool calls that can execute as a single script             | [Programmatic tool calling](./agents-and-tools-tool-use-programmatic-tool-calling.md)       |
 | Prompt caching            | Token cost of repeated tool definitions | Stable toolsets across many requests                                 | [Tool use with prompt caching](./agents-and-tools-tool-use-tool-use-with-prompt-caching.md) |

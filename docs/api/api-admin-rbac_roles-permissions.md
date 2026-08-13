@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/rbac_roles/permissions"
 category: "api"
 generated: true
 ---
+---
+title: Permissions
+url: https://platform.claude.com/docs/en/api/admin/rbac_roles/permissions
+---
+
 # Permissions
 
 ## List RBAC Role Permissions

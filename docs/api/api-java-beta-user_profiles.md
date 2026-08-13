@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/java/beta/user_profiles"
 category: "api"
 generated: true
 ---
+---
+title: User Profiles
+url: https://platform.claude.com/docs/en/api/java/beta/user_profiles
+---
+
 # User Profiles
 
 ## Create User Profile
@@ -85,6 +90,8 @@ Create User Profile
     - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
   - `Optional<String> externalId`
 
@@ -303,6 +310,8 @@ List User Profiles
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
+
 ### Returns
 
 - `class BetaUserProfile:`
@@ -489,6 +498,8 @@ Get User Profile
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
+
 ### Returns
 
 - `class BetaUserProfile:`
@@ -669,6 +680,8 @@ Update User Profile
     - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
   - `Optional<String> externalId`
 
@@ -872,6 +885,8 @@ Create Enrollment URL
     - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
 ### Returns
 

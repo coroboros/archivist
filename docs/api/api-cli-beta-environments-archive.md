@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/cli/beta/environments/archive"
 category: "api"
 generated: true
 ---
+---
+title: Archive Environment
+url: https://platform.claude.com/docs/en/api/cli/beta/environments/archive
+---
+
 ## Archive Environment
 
 `$ ant beta:environments archive`

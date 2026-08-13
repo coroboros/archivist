@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/cli/beta/vaults/archive"
 category: "api"
 generated: true
 ---
+---
+title: Archive Vault
+url: https://platform.claude.com/docs/en/api/cli/beta/vaults/archive
+---
+
 ## Archive Vault
 
 `$ ant beta:vaults archive`

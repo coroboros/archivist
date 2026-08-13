@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/java/beta/sessions/events"
 category: "api"
 generated: true
 ---
+---
+title: Events
+url: https://platform.claude.com/docs/en/api/java/beta/sessions/events
+---
+
 # Events
 
 ## List Events
@@ -123,6 +128,8 @@ List Events
     - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
 ### Returns
 
@@ -283,6 +290,14 @@ List Events
         - `Optional<String> title`
 
           The title of the document.
+
+      - `class BetaManagedAgentsRedactedBlock:`
+
+        Placeholder for content withheld by Anthropic model policy.
+
+        - `Type type`
+
+          - `REDACTED("redacted")`
 
     - `Type type`
 
@@ -464,15 +479,17 @@ List Events
 
       Unique identifier for this event.
 
-    - `List<BetaManagedAgentsTextBlock> content`
+    - `List<Content> content`
 
       Array of text blocks comprising the agent response.
 
-      - `String text`
+      - `class BetaManagedAgentsTextBlock:`
 
-        The text content.
+        Regular text content.
 
-      - `Type type`
+      - `class BetaManagedAgentsRedactedBlock:`
+
+        Placeholder for content withheld by Anthropic model policy.
 
     - `LocalDateTime processedAt`
 
@@ -690,6 +707,10 @@ List Events
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
+      - `class BetaManagedAgentsRedactedBlock:`
+
+        Placeholder for content withheld by Anthropic model policy.
+
     - `String fromSessionThreadId`
 
       Public `sthr_` ID of the thread that sent the message.
@@ -729,6 +750,10 @@ List Events
       - `class BetaManagedAgentsDocumentBlock:`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+      - `class BetaManagedAgentsRedactedBlock:`
+
+        Placeholder for content withheld by Anthropic model policy.
 
     - `LocalDateTime processedAt`
 
@@ -1110,6 +1135,14 @@ List Events
 
           - `RETRIES_EXHAUSTED("retries_exhausted")`
 
+      - `class BetaManagedAgentsSessionBudgetReached:`
+
+        The agent stopped because the session's tracked list cost reached its budget, or because its usage includes a model with no list price (which the budget cannot measure). Raise the budget to continue — or, if raising is rejected because a model has no list price, remove the budget.
+
+        - `Type type`
+
+          - `BUDGET_REACHED("budget_reached")`
+
     - `Type type`
 
       - `SESSION_STATUS_IDLE("session.status_idle")`
@@ -1442,6 +1475,10 @@ List Events
 
         The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
+      - `class BetaManagedAgentsSessionBudgetReached:`
+
+        The agent stopped because the session's tracked list cost reached its budget, or because its usage includes a model with no list price (which the budget cannot measure). Raise the budget to continue — or, if raising is rejected because a model has no list price, remove the budget.
+
     - `Type type`
 
       - `SESSION_THREAD_STATUS_IDLE("session.thread_status_idle")`
@@ -1682,6 +1719,10 @@ List Events
 
               - `MAX("max")`
 
+        - `Optional<String> inferenceGeo`
+
+          Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo.
+
         - `Optional<Speed> speed`
 
           Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
@@ -1694,199 +1735,215 @@ List Events
 
         Resolved coordinator topology with full agent definitions for each roster member.
 
-        - `List<BetaManagedAgentsSessionThreadAgent> agents`
+        - `List<Agent> agents`
 
           Full `agent` definitions the coordinator may spawn as session threads.
 
-          - `String id`
+          - `class BetaManagedAgentsSessionThreadAgent:`
 
-          - `Optional<String> description`
+            Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
-          - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
+            - `String id`
 
-            - `String name`
+            - `Optional<String> description`
 
-            - `Type type`
-
-            - `String url`
-
-          - `BetaManagedAgentsModelConfig model`
-
-            Model identifier and configuration.
-
-          - `String name`
-
-          - `List<Skill> skills`
-
-            - `class BetaManagedAgentsAnthropicSkill:`
-
-              A resolved Anthropic-managed skill.
-
-              - `String skillId`
-
-              - `Type type`
-
-                - `ANTHROPIC("anthropic")`
-
-              - `String version`
-
-            - `class BetaManagedAgentsCustomSkill:`
-
-              A resolved user-created custom skill.
-
-              - `String skillId`
-
-              - `Type type`
-
-                - `CUSTOM("custom")`
-
-              - `String version`
-
-          - `Optional<String> system`
-
-          - `List<Tool> tools`
-
-            - `class BetaManagedAgentsAgentToolset20260401:`
-
-              - `List<BetaManagedAgentsAgentToolConfig> configs`
-
-                - `boolean enabled`
-
-                - `Name name`
-
-                  Built-in agent tool identifier.
-
-                  - `BASH("bash")`
-
-                  - `EDIT("edit")`
-
-                  - `READ("read")`
-
-                  - `WRITE("write")`
-
-                  - `GLOB("glob")`
-
-                  - `GREP("grep")`
-
-                  - `WEB_FETCH("web_fetch")`
-
-                  - `WEB_SEARCH("web_search")`
-
-                - `PermissionPolicy permissionPolicy`
-
-                  Permission policy for tool execution.
-
-                  - `class BetaManagedAgentsAlwaysAllowPolicy:`
-
-                    Tool calls are automatically approved without user confirmation.
-
-                    - `Type type`
-
-                      - `ALWAYS_ALLOW("always_allow")`
-
-                  - `class BetaManagedAgentsAlwaysAskPolicy:`
-
-                    Tool calls require user confirmation before execution.
-
-                    - `Type type`
-
-                      - `ALWAYS_ASK("always_ask")`
-
-              - `BetaManagedAgentsAgentToolsetDefaultConfig defaultConfig`
-
-                Resolved default configuration for agent tools.
-
-                - `boolean enabled`
-
-                - `PermissionPolicy permissionPolicy`
-
-                  Permission policy for tool execution.
-
-                  - `class BetaManagedAgentsAlwaysAllowPolicy:`
-
-                    Tool calls are automatically approved without user confirmation.
-
-                  - `class BetaManagedAgentsAlwaysAskPolicy:`
-
-                    Tool calls require user confirmation before execution.
-
-              - `Type type`
-
-                - `AGENT_TOOLSET_20260401("agent_toolset_20260401")`
-
-            - `class BetaManagedAgentsMcpToolset:`
-
-              - `List<BetaManagedAgentsMcpToolConfig> configs`
-
-                - `boolean enabled`
-
-                - `String name`
-
-                - `PermissionPolicy permissionPolicy`
-
-                  Permission policy for tool execution.
-
-                  - `class BetaManagedAgentsAlwaysAllowPolicy:`
-
-                    Tool calls are automatically approved without user confirmation.
-
-                  - `class BetaManagedAgentsAlwaysAskPolicy:`
-
-                    Tool calls require user confirmation before execution.
-
-              - `BetaManagedAgentsMcpToolsetDefaultConfig defaultConfig`
-
-                Resolved default configuration for all tools from an MCP server.
-
-                - `boolean enabled`
-
-                - `PermissionPolicy permissionPolicy`
-
-                  Permission policy for tool execution.
-
-                  - `class BetaManagedAgentsAlwaysAllowPolicy:`
-
-                    Tool calls are automatically approved without user confirmation.
-
-                  - `class BetaManagedAgentsAlwaysAskPolicy:`
-
-                    Tool calls require user confirmation before execution.
-
-              - `String mcpServerName`
-
-              - `Type type`
-
-                - `MCP_TOOLSET("mcp_toolset")`
-
-            - `class BetaManagedAgentsCustomTool:`
-
-              A custom tool as returned in API responses.
-
-              - `String description`
-
-              - `BetaManagedAgentsCustomToolInputSchema inputSchema`
-
-                JSON Schema for custom tool input parameters.
-
-                - `JsonValue; type "object"constant`
-
-                  - `OBJECT("object")`
-
-                - `Optional<Properties> properties`
-
-                - `Optional<List<String>> required`
+            - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
               - `String name`
 
               - `Type type`
 
-                - `CUSTOM("custom")`
+              - `String url`
 
-          - `Type type`
+            - `BetaManagedAgentsModelConfig model`
 
-            - `AGENT("agent")`
+              Model identifier and configuration.
 
-          - `long version`
+            - `String name`
+
+            - `List<Skill> skills`
+
+              - `class BetaManagedAgentsAnthropicSkill:`
+
+                A resolved Anthropic-managed skill.
+
+                - `String skillId`
+
+                - `Type type`
+
+                  - `ANTHROPIC("anthropic")`
+
+                - `String version`
+
+              - `class BetaManagedAgentsCustomSkill:`
+
+                A resolved user-created custom skill.
+
+                - `String skillId`
+
+                - `Type type`
+
+                  - `CUSTOM("custom")`
+
+                - `String version`
+
+            - `Optional<String> system`
+
+            - `List<Tool> tools`
+
+              - `class BetaManagedAgentsAgentToolset20260401:`
+
+                - `List<BetaManagedAgentsAgentToolConfig> configs`
+
+                  - `boolean enabled`
+
+                  - `Name name`
+
+                    Built-in agent tool identifier.
+
+                    - `BASH("bash")`
+
+                    - `EDIT("edit")`
+
+                    - `READ("read")`
+
+                    - `WRITE("write")`
+
+                    - `GLOB("glob")`
+
+                    - `GREP("grep")`
+
+                    - `WEB_FETCH("web_fetch")`
+
+                    - `WEB_SEARCH("web_search")`
+
+                  - `PermissionPolicy permissionPolicy`
+
+                    Permission policy for tool execution.
+
+                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                      Tool calls are automatically approved without user confirmation.
+
+                      - `Type type`
+
+                        - `ALWAYS_ALLOW("always_allow")`
+
+                    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                      Tool calls require user confirmation before execution.
+
+                      - `Type type`
+
+                        - `ALWAYS_ASK("always_ask")`
+
+                - `BetaManagedAgentsAgentToolsetDefaultConfig defaultConfig`
+
+                  Resolved default configuration for agent tools.
+
+                  - `boolean enabled`
+
+                  - `PermissionPolicy permissionPolicy`
+
+                    Permission policy for tool execution.
+
+                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                      Tool calls are automatically approved without user confirmation.
+
+                    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                      Tool calls require user confirmation before execution.
+
+                - `Type type`
+
+                  - `AGENT_TOOLSET_20260401("agent_toolset_20260401")`
+
+              - `class BetaManagedAgentsMcpToolset:`
+
+                - `List<BetaManagedAgentsMcpToolConfig> configs`
+
+                  - `boolean enabled`
+
+                  - `String name`
+
+                  - `PermissionPolicy permissionPolicy`
+
+                    Permission policy for tool execution.
+
+                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                      Tool calls are automatically approved without user confirmation.
+
+                    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                      Tool calls require user confirmation before execution.
+
+                - `BetaManagedAgentsMcpToolsetDefaultConfig defaultConfig`
+
+                  Resolved default configuration for all tools from an MCP server.
+
+                  - `boolean enabled`
+
+                  - `PermissionPolicy permissionPolicy`
+
+                    Permission policy for tool execution.
+
+                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                      Tool calls are automatically approved without user confirmation.
+
+                    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                      Tool calls require user confirmation before execution.
+
+                - `String mcpServerName`
+
+                - `Type type`
+
+                  - `MCP_TOOLSET("mcp_toolset")`
+
+              - `class BetaManagedAgentsCustomTool:`
+
+                A custom tool as returned in API responses.
+
+                - `String description`
+
+                - `BetaManagedAgentsCustomToolInputSchema inputSchema`
+
+                  JSON Schema for custom tool input parameters.
+
+                  - `JsonValue; type "object"constant`
+
+                    - `OBJECT("object")`
+
+                  - `Optional<Properties> properties`
+
+                  - `Optional<List<String>> required`
+
+                - `String name`
+
+                - `Type type`
+
+                  - `CUSTOM("custom")`
+
+            - `Type type`
+
+              - `AGENT("agent")`
+
+            - `long version`
+
+          - `class BetaManagedAgentsAdvisor:`
+
+            Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
+
+            - `String model`
+
+              The advisor model id.
+
+            - `Type type`
+
+              - `ADVISOR("advisor")`
 
         - `Type type`
 
@@ -1921,6 +1978,28 @@ List Events
         - `AGENT("agent")`
 
       - `long version`
+
+    - `Optional<BetaManagedAgentsBudgetLimit> budget`
+
+      A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+
+      - `BetaMonetaryAmount maxListCost`
+
+        A monetary amount in a specific currency.
+
+        - `String amount`
+
+          Amount in minor units of the currency, as an integer decimal string with no leading zeros: "2500" is $25.00 and "50" is fifty cents. A string rather than a number so no float rounding is ever applied.
+
+        - `BetaCurrency currency`
+
+          Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
+
+          - `USD("USD")`
+
+      - `Type type`
+
+        - `LIMIT("limit")`
 
     - `Optional<Metadata> metadata`
 
@@ -1957,6 +2036,74 @@ List Events
     - `Optional<LocalDateTime> processedAt`
 
       A timestamp in RFC 3339 format
+
+  - `class BetaManagedAgentsSessionUsageEvent:`
+
+    Periodic snapshot of the session's cumulative usage and tracked list cost.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `SESSION_USAGE("session.usage")`
+
+    - `BetaManagedAgentsSessionUsageSnapshot usage`
+
+      Point-in-time snapshot of a session's cumulative usage.
+
+      - `Optional<Double> activeSeconds`
+
+        Cumulative time in seconds during which the session had at least one thread in running status. Overlapping activity from concurrent threads is counted once. This is the duration the session's runtime cost is priced on.
+
+      - `Optional<BetaManagedAgentsCacheCreationUsage> cacheCreation`
+
+        Prompt-cache creation token usage broken down by cache lifetime.
+
+        - `Optional<Long> ephemeral1hInputTokens`
+
+          Tokens used to create 1-hour ephemeral cache entries.
+
+        - `Optional<Long> ephemeral5mInputTokens`
+
+          Tokens used to create 5-minute ephemeral cache entries.
+
+      - `Optional<Long> cacheReadInputTokens`
+
+        Total tokens read from prompt cache.
+
+      - `Optional<Long> inputTokens`
+
+        Total input tokens consumed across all turns.
+
+      - `Optional<BetaMonetaryAmount> listCost`
+
+        A monetary amount in a specific currency.
+
+      - `Optional<Long> outputTokens`
+
+        Total output tokens generated across all turns.
+
+      - `Optional<BetaManagedAgentsServerToolUsage> serverToolUse`
+
+        Cumulative count of server-executed tool invocations, broken down by tool.
+
+        - `Optional<Long> webFetchRequests`
+
+          Number of server-executed web fetch requests.
+
+        - `Optional<Long> webSearchRequests`
+
+          Number of server-executed web search requests.
+
+    - `Optional<BetaManagedAgentsBudgetLimit> budget`
+
+      A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
 ### Example
 
@@ -2092,6 +2239,8 @@ Send Events
     - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
   - `List<BetaManagedAgentsEventParams> events`
 
@@ -2246,6 +2395,14 @@ Send Events
           - `Optional<String> title`
 
             The title of the document.
+
+        - `class BetaManagedAgentsRedactedBlock:`
+
+          Placeholder for content withheld by Anthropic model policy.
+
+          - `Type type`
+
+            - `REDACTED("redacted")`
 
       - `Type type`
 
@@ -2618,6 +2775,14 @@ Send Events
           - `Optional<String> title`
 
             The title of the document.
+
+        - `class BetaManagedAgentsRedactedBlock:`
+
+          Placeholder for content withheld by Anthropic model policy.
+
+          - `Type type`
+
+            - `REDACTED("redacted")`
 
       - `Type type`
 
@@ -3036,6 +3201,8 @@ Stream Events
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
+
 ### Returns
 
 - `class BetaManagedAgentsStreamSessionEvents: A class that can be one of several variants.union`
@@ -3195,6 +3362,14 @@ Stream Events
         - `Optional<String> title`
 
           The title of the document.
+
+      - `class BetaManagedAgentsRedactedBlock:`
+
+        Placeholder for content withheld by Anthropic model policy.
+
+        - `Type type`
+
+          - `REDACTED("redacted")`
 
     - `Type type`
 
@@ -3376,15 +3551,17 @@ Stream Events
 
       Unique identifier for this event.
 
-    - `List<BetaManagedAgentsTextBlock> content`
+    - `List<Content> content`
 
       Array of text blocks comprising the agent response.
 
-      - `String text`
+      - `class BetaManagedAgentsTextBlock:`
 
-        The text content.
+        Regular text content.
 
-      - `Type type`
+      - `class BetaManagedAgentsRedactedBlock:`
+
+        Placeholder for content withheld by Anthropic model policy.
 
     - `LocalDateTime processedAt`
 
@@ -3602,6 +3779,10 @@ Stream Events
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
+      - `class BetaManagedAgentsRedactedBlock:`
+
+        Placeholder for content withheld by Anthropic model policy.
+
     - `String fromSessionThreadId`
 
       Public `sthr_` ID of the thread that sent the message.
@@ -3641,6 +3822,10 @@ Stream Events
       - `class BetaManagedAgentsDocumentBlock:`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+      - `class BetaManagedAgentsRedactedBlock:`
+
+        Placeholder for content withheld by Anthropic model policy.
 
     - `LocalDateTime processedAt`
 
@@ -4022,6 +4207,14 @@ Stream Events
 
           - `RETRIES_EXHAUSTED("retries_exhausted")`
 
+      - `class BetaManagedAgentsSessionBudgetReached:`
+
+        The agent stopped because the session's tracked list cost reached its budget, or because its usage includes a model with no list price (which the budget cannot measure). Raise the budget to continue — or, if raising is rejected because a model has no list price, remove the budget.
+
+        - `Type type`
+
+          - `BUDGET_REACHED("budget_reached")`
+
     - `Type type`
 
       - `SESSION_STATUS_IDLE("session.status_idle")`
@@ -4354,6 +4547,10 @@ Stream Events
 
         The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
+      - `class BetaManagedAgentsSessionBudgetReached:`
+
+        The agent stopped because the session's tracked list cost reached its budget, or because its usage includes a model with no list price (which the budget cannot measure). Raise the budget to continue — or, if raising is rejected because a model has no list price, remove the budget.
+
     - `Type type`
 
       - `SESSION_THREAD_STATUS_IDLE("session.thread_status_idle")`
@@ -4594,6 +4791,10 @@ Stream Events
 
               - `MAX("max")`
 
+        - `Optional<String> inferenceGeo`
+
+          Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo.
+
         - `Optional<Speed> speed`
 
           Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
@@ -4606,199 +4807,215 @@ Stream Events
 
         Resolved coordinator topology with full agent definitions for each roster member.
 
-        - `List<BetaManagedAgentsSessionThreadAgent> agents`
+        - `List<Agent> agents`
 
           Full `agent` definitions the coordinator may spawn as session threads.
 
-          - `String id`
+          - `class BetaManagedAgentsSessionThreadAgent:`
 
-          - `Optional<String> description`
+            Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
-          - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
+            - `String id`
 
-            - `String name`
+            - `Optional<String> description`
 
-            - `Type type`
-
-            - `String url`
-
-          - `BetaManagedAgentsModelConfig model`
-
-            Model identifier and configuration.
-
-          - `String name`
-
-          - `List<Skill> skills`
-
-            - `class BetaManagedAgentsAnthropicSkill:`
-
-              A resolved Anthropic-managed skill.
-
-              - `String skillId`
-
-              - `Type type`
-
-                - `ANTHROPIC("anthropic")`
-
-              - `String version`
-
-            - `class BetaManagedAgentsCustomSkill:`
-
-              A resolved user-created custom skill.
-
-              - `String skillId`
-
-              - `Type type`
-
-                - `CUSTOM("custom")`
-
-              - `String version`
-
-          - `Optional<String> system`
-
-          - `List<Tool> tools`
-
-            - `class BetaManagedAgentsAgentToolset20260401:`
-
-              - `List<BetaManagedAgentsAgentToolConfig> configs`
-
-                - `boolean enabled`
-
-                - `Name name`
-
-                  Built-in agent tool identifier.
-
-                  - `BASH("bash")`
-
-                  - `EDIT("edit")`
-
-                  - `READ("read")`
-
-                  - `WRITE("write")`
-
-                  - `GLOB("glob")`
-
-                  - `GREP("grep")`
-
-                  - `WEB_FETCH("web_fetch")`
-
-                  - `WEB_SEARCH("web_search")`
-
-                - `PermissionPolicy permissionPolicy`
-
-                  Permission policy for tool execution.
-
-                  - `class BetaManagedAgentsAlwaysAllowPolicy:`
-
-                    Tool calls are automatically approved without user confirmation.
-
-                    - `Type type`
-
-                      - `ALWAYS_ALLOW("always_allow")`
-
-                  - `class BetaManagedAgentsAlwaysAskPolicy:`
-
-                    Tool calls require user confirmation before execution.
-
-                    - `Type type`
-
-                      - `ALWAYS_ASK("always_ask")`
-
-              - `BetaManagedAgentsAgentToolsetDefaultConfig defaultConfig`
-
-                Resolved default configuration for agent tools.
-
-                - `boolean enabled`
-
-                - `PermissionPolicy permissionPolicy`
-
-                  Permission policy for tool execution.
-
-                  - `class BetaManagedAgentsAlwaysAllowPolicy:`
-
-                    Tool calls are automatically approved without user confirmation.
-
-                  - `class BetaManagedAgentsAlwaysAskPolicy:`
-
-                    Tool calls require user confirmation before execution.
-
-              - `Type type`
-
-                - `AGENT_TOOLSET_20260401("agent_toolset_20260401")`
-
-            - `class BetaManagedAgentsMcpToolset:`
-
-              - `List<BetaManagedAgentsMcpToolConfig> configs`
-
-                - `boolean enabled`
-
-                - `String name`
-
-                - `PermissionPolicy permissionPolicy`
-
-                  Permission policy for tool execution.
-
-                  - `class BetaManagedAgentsAlwaysAllowPolicy:`
-
-                    Tool calls are automatically approved without user confirmation.
-
-                  - `class BetaManagedAgentsAlwaysAskPolicy:`
-
-                    Tool calls require user confirmation before execution.
-
-              - `BetaManagedAgentsMcpToolsetDefaultConfig defaultConfig`
-
-                Resolved default configuration for all tools from an MCP server.
-
-                - `boolean enabled`
-
-                - `PermissionPolicy permissionPolicy`
-
-                  Permission policy for tool execution.
-
-                  - `class BetaManagedAgentsAlwaysAllowPolicy:`
-
-                    Tool calls are automatically approved without user confirmation.
-
-                  - `class BetaManagedAgentsAlwaysAskPolicy:`
-
-                    Tool calls require user confirmation before execution.
-
-              - `String mcpServerName`
-
-              - `Type type`
-
-                - `MCP_TOOLSET("mcp_toolset")`
-
-            - `class BetaManagedAgentsCustomTool:`
-
-              A custom tool as returned in API responses.
-
-              - `String description`
-
-              - `BetaManagedAgentsCustomToolInputSchema inputSchema`
-
-                JSON Schema for custom tool input parameters.
-
-                - `JsonValue; type "object"constant`
-
-                  - `OBJECT("object")`
-
-                - `Optional<Properties> properties`
-
-                - `Optional<List<String>> required`
+            - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
               - `String name`
 
               - `Type type`
 
-                - `CUSTOM("custom")`
+              - `String url`
 
-          - `Type type`
+            - `BetaManagedAgentsModelConfig model`
 
-            - `AGENT("agent")`
+              Model identifier and configuration.
 
-          - `long version`
+            - `String name`
+
+            - `List<Skill> skills`
+
+              - `class BetaManagedAgentsAnthropicSkill:`
+
+                A resolved Anthropic-managed skill.
+
+                - `String skillId`
+
+                - `Type type`
+
+                  - `ANTHROPIC("anthropic")`
+
+                - `String version`
+
+              - `class BetaManagedAgentsCustomSkill:`
+
+                A resolved user-created custom skill.
+
+                - `String skillId`
+
+                - `Type type`
+
+                  - `CUSTOM("custom")`
+
+                - `String version`
+
+            - `Optional<String> system`
+
+            - `List<Tool> tools`
+
+              - `class BetaManagedAgentsAgentToolset20260401:`
+
+                - `List<BetaManagedAgentsAgentToolConfig> configs`
+
+                  - `boolean enabled`
+
+                  - `Name name`
+
+                    Built-in agent tool identifier.
+
+                    - `BASH("bash")`
+
+                    - `EDIT("edit")`
+
+                    - `READ("read")`
+
+                    - `WRITE("write")`
+
+                    - `GLOB("glob")`
+
+                    - `GREP("grep")`
+
+                    - `WEB_FETCH("web_fetch")`
+
+                    - `WEB_SEARCH("web_search")`
+
+                  - `PermissionPolicy permissionPolicy`
+
+                    Permission policy for tool execution.
+
+                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                      Tool calls are automatically approved without user confirmation.
+
+                      - `Type type`
+
+                        - `ALWAYS_ALLOW("always_allow")`
+
+                    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                      Tool calls require user confirmation before execution.
+
+                      - `Type type`
+
+                        - `ALWAYS_ASK("always_ask")`
+
+                - `BetaManagedAgentsAgentToolsetDefaultConfig defaultConfig`
+
+                  Resolved default configuration for agent tools.
+
+                  - `boolean enabled`
+
+                  - `PermissionPolicy permissionPolicy`
+
+                    Permission policy for tool execution.
+
+                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                      Tool calls are automatically approved without user confirmation.
+
+                    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                      Tool calls require user confirmation before execution.
+
+                - `Type type`
+
+                  - `AGENT_TOOLSET_20260401("agent_toolset_20260401")`
+
+              - `class BetaManagedAgentsMcpToolset:`
+
+                - `List<BetaManagedAgentsMcpToolConfig> configs`
+
+                  - `boolean enabled`
+
+                  - `String name`
+
+                  - `PermissionPolicy permissionPolicy`
+
+                    Permission policy for tool execution.
+
+                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                      Tool calls are automatically approved without user confirmation.
+
+                    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                      Tool calls require user confirmation before execution.
+
+                - `BetaManagedAgentsMcpToolsetDefaultConfig defaultConfig`
+
+                  Resolved default configuration for all tools from an MCP server.
+
+                  - `boolean enabled`
+
+                  - `PermissionPolicy permissionPolicy`
+
+                    Permission policy for tool execution.
+
+                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                      Tool calls are automatically approved without user confirmation.
+
+                    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                      Tool calls require user confirmation before execution.
+
+                - `String mcpServerName`
+
+                - `Type type`
+
+                  - `MCP_TOOLSET("mcp_toolset")`
+
+              - `class BetaManagedAgentsCustomTool:`
+
+                A custom tool as returned in API responses.
+
+                - `String description`
+
+                - `BetaManagedAgentsCustomToolInputSchema inputSchema`
+
+                  JSON Schema for custom tool input parameters.
+
+                  - `JsonValue; type "object"constant`
+
+                    - `OBJECT("object")`
+
+                  - `Optional<Properties> properties`
+
+                  - `Optional<List<String>> required`
+
+                - `String name`
+
+                - `Type type`
+
+                  - `CUSTOM("custom")`
+
+            - `Type type`
+
+              - `AGENT("agent")`
+
+            - `long version`
+
+          - `class BetaManagedAgentsAdvisor:`
+
+            Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
+
+            - `String model`
+
+              The advisor model id.
+
+            - `Type type`
+
+              - `ADVISOR("advisor")`
 
         - `Type type`
 
@@ -4833,6 +5050,28 @@ Stream Events
         - `AGENT("agent")`
 
       - `long version`
+
+    - `Optional<BetaManagedAgentsBudgetLimit> budget`
+
+      A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+
+      - `BetaMonetaryAmount maxListCost`
+
+        A monetary amount in a specific currency.
+
+        - `String amount`
+
+          Amount in minor units of the currency, as an integer decimal string with no leading zeros: "2500" is $25.00 and "50" is fifty cents. A string rather than a number so no float rounding is ever applied.
+
+        - `BetaCurrency currency`
+
+          Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
+
+          - `USD("USD")`
+
+      - `Type type`
+
+        - `LIMIT("limit")`
 
     - `Optional<Metadata> metadata`
 
@@ -4929,6 +5168,74 @@ Stream Events
     - `Optional<LocalDateTime> processedAt`
 
       A timestamp in RFC 3339 format
+
+  - `class BetaManagedAgentsSessionUsageEvent:`
+
+    Periodic snapshot of the session's cumulative usage and tracked list cost.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `SESSION_USAGE("session.usage")`
+
+    - `BetaManagedAgentsSessionUsageSnapshot usage`
+
+      Point-in-time snapshot of a session's cumulative usage.
+
+      - `Optional<Double> activeSeconds`
+
+        Cumulative time in seconds during which the session had at least one thread in running status. Overlapping activity from concurrent threads is counted once. This is the duration the session's runtime cost is priced on.
+
+      - `Optional<BetaManagedAgentsCacheCreationUsage> cacheCreation`
+
+        Prompt-cache creation token usage broken down by cache lifetime.
+
+        - `Optional<Long> ephemeral1hInputTokens`
+
+          Tokens used to create 1-hour ephemeral cache entries.
+
+        - `Optional<Long> ephemeral5mInputTokens`
+
+          Tokens used to create 5-minute ephemeral cache entries.
+
+      - `Optional<Long> cacheReadInputTokens`
+
+        Total tokens read from prompt cache.
+
+      - `Optional<Long> inputTokens`
+
+        Total input tokens consumed across all turns.
+
+      - `Optional<BetaMonetaryAmount> listCost`
+
+        A monetary amount in a specific currency.
+
+      - `Optional<Long> outputTokens`
+
+        Total output tokens generated across all turns.
+
+      - `Optional<BetaManagedAgentsServerToolUsage> serverToolUse`
+
+        Cumulative count of server-executed tool invocations, broken down by tool.
+
+        - `Optional<Long> webFetchRequests`
+
+          Number of server-executed web fetch requests.
+
+        - `Optional<Long> webSearchRequests`
+
+          Number of server-executed web search requests.
+
+    - `Optional<BetaManagedAgentsBudgetLimit> budget`
+
+      A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
 ### Example
 
@@ -5262,17 +5569,29 @@ public final class Main {
 
     Unique identifier for this event.
 
-  - `List<BetaManagedAgentsTextBlock> content`
+  - `List<Content> content`
 
     Array of text blocks comprising the agent response.
 
-    - `String text`
+    - `class BetaManagedAgentsTextBlock:`
 
-      The text content.
+      Regular text content.
 
-    - `Type type`
+      - `String text`
 
-      - `TEXT("text")`
+        The text content.
+
+      - `Type type`
+
+        - `TEXT("text")`
+
+    - `class BetaManagedAgentsRedactedBlock:`
+
+      Placeholder for content withheld by Anthropic model policy.
+
+      - `Type type`
+
+        - `REDACTED("redacted")`
 
   - `LocalDateTime processedAt`
 
@@ -5474,6 +5793,14 @@ public final class Main {
 
         The title of the document.
 
+    - `class BetaManagedAgentsRedactedBlock:`
+
+      Placeholder for content withheld by Anthropic model policy.
+
+      - `Type type`
+
+        - `REDACTED("redacted")`
+
   - `String fromSessionThreadId`
 
     Public `sthr_` ID of the thread that sent the message.
@@ -5645,6 +5972,14 @@ public final class Main {
       - `Optional<String> title`
 
         The title of the document.
+
+    - `class BetaManagedAgentsRedactedBlock:`
+
+      Placeholder for content withheld by Anthropic model policy.
+
+      - `Type type`
+
+        - `REDACTED("redacted")`
 
   - `LocalDateTime processedAt`
 
@@ -6274,6 +6609,14 @@ public final class Main {
 
           The title of the document.
 
+      - `class BetaManagedAgentsRedactedBlock:`
+
+        Placeholder for content withheld by Anthropic model policy.
+
+        - `Type type`
+
+          - `REDACTED("redacted")`
+
     - `Type type`
 
       - `USER_MESSAGE("user.message")`
@@ -6830,6 +7173,16 @@ public final class Main {
 
     - `TEXT("text")`
 
+### Beta Managed Agents Redacted Block
+
+- `class BetaManagedAgentsRedactedBlock:`
+
+  Placeholder for content withheld by Anthropic model policy.
+
+  - `Type type`
+
+    - `REDACTED("redacted")`
+
 ### Beta Managed Agents Retry Status Exhausted
 
 - `class BetaManagedAgentsRetryStatusExhausted:`
@@ -7085,6 +7438,14 @@ public final class Main {
           - `Optional<String> title`
 
             The title of the document.
+
+        - `class BetaManagedAgentsRedactedBlock:`
+
+          Placeholder for content withheld by Anthropic model policy.
+
+          - `Type type`
+
+            - `REDACTED("redacted")`
 
       - `Type type`
 
@@ -7361,6 +7722,16 @@ public final class Main {
       - `Optional<LocalDateTime> processedAt`
 
         A timestamp in RFC 3339 format
+
+### Beta Managed Agents Session Budget Reached
+
+- `class BetaManagedAgentsSessionBudgetReached:`
+
+  The agent stopped because the session's tracked list cost reached its budget, or because its usage includes a model with no list price (which the budget cannot measure). Raise the budget to continue — or, if raising is rejected because a model has no list price, remove the budget.
+
+  - `Type type`
+
+    - `BUDGET_REACHED("budget_reached")`
 
 ### Beta Managed Agents Session Deleted Event
 
@@ -7824,6 +8195,14 @@ public final class Main {
 
           The title of the document.
 
+      - `class BetaManagedAgentsRedactedBlock:`
+
+        Placeholder for content withheld by Anthropic model policy.
+
+        - `Type type`
+
+          - `REDACTED("redacted")`
+
     - `Type type`
 
       - `USER_MESSAGE("user.message")`
@@ -8004,15 +8383,17 @@ public final class Main {
 
       Unique identifier for this event.
 
-    - `List<BetaManagedAgentsTextBlock> content`
+    - `List<Content> content`
 
       Array of text blocks comprising the agent response.
 
-      - `String text`
+      - `class BetaManagedAgentsTextBlock:`
 
-        The text content.
+        Regular text content.
 
-      - `Type type`
+      - `class BetaManagedAgentsRedactedBlock:`
+
+        Placeholder for content withheld by Anthropic model policy.
 
     - `LocalDateTime processedAt`
 
@@ -8230,6 +8611,10 @@ public final class Main {
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
+      - `class BetaManagedAgentsRedactedBlock:`
+
+        Placeholder for content withheld by Anthropic model policy.
+
     - `String fromSessionThreadId`
 
       Public `sthr_` ID of the thread that sent the message.
@@ -8269,6 +8654,10 @@ public final class Main {
       - `class BetaManagedAgentsDocumentBlock:`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+      - `class BetaManagedAgentsRedactedBlock:`
+
+        Placeholder for content withheld by Anthropic model policy.
 
     - `LocalDateTime processedAt`
 
@@ -8650,6 +9039,14 @@ public final class Main {
 
           - `RETRIES_EXHAUSTED("retries_exhausted")`
 
+      - `class BetaManagedAgentsSessionBudgetReached:`
+
+        The agent stopped because the session's tracked list cost reached its budget, or because its usage includes a model with no list price (which the budget cannot measure). Raise the budget to continue — or, if raising is rejected because a model has no list price, remove the budget.
+
+        - `Type type`
+
+          - `BUDGET_REACHED("budget_reached")`
+
     - `Type type`
 
       - `SESSION_STATUS_IDLE("session.status_idle")`
@@ -8982,6 +9379,10 @@ public final class Main {
 
         The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
+      - `class BetaManagedAgentsSessionBudgetReached:`
+
+        The agent stopped because the session's tracked list cost reached its budget, or because its usage includes a model with no list price (which the budget cannot measure). Raise the budget to continue — or, if raising is rejected because a model has no list price, remove the budget.
+
     - `Type type`
 
       - `SESSION_THREAD_STATUS_IDLE("session.thread_status_idle")`
@@ -9222,6 +9623,10 @@ public final class Main {
 
               - `MAX("max")`
 
+        - `Optional<String> inferenceGeo`
+
+          Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo.
+
         - `Optional<Speed> speed`
 
           Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
@@ -9234,199 +9639,215 @@ public final class Main {
 
         Resolved coordinator topology with full agent definitions for each roster member.
 
-        - `List<BetaManagedAgentsSessionThreadAgent> agents`
+        - `List<Agent> agents`
 
           Full `agent` definitions the coordinator may spawn as session threads.
 
-          - `String id`
+          - `class BetaManagedAgentsSessionThreadAgent:`
 
-          - `Optional<String> description`
+            Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
-          - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
+            - `String id`
 
-            - `String name`
+            - `Optional<String> description`
 
-            - `Type type`
-
-            - `String url`
-
-          - `BetaManagedAgentsModelConfig model`
-
-            Model identifier and configuration.
-
-          - `String name`
-
-          - `List<Skill> skills`
-
-            - `class BetaManagedAgentsAnthropicSkill:`
-
-              A resolved Anthropic-managed skill.
-
-              - `String skillId`
-
-              - `Type type`
-
-                - `ANTHROPIC("anthropic")`
-
-              - `String version`
-
-            - `class BetaManagedAgentsCustomSkill:`
-
-              A resolved user-created custom skill.
-
-              - `String skillId`
-
-              - `Type type`
-
-                - `CUSTOM("custom")`
-
-              - `String version`
-
-          - `Optional<String> system`
-
-          - `List<Tool> tools`
-
-            - `class BetaManagedAgentsAgentToolset20260401:`
-
-              - `List<BetaManagedAgentsAgentToolConfig> configs`
-
-                - `boolean enabled`
-
-                - `Name name`
-
-                  Built-in agent tool identifier.
-
-                  - `BASH("bash")`
-
-                  - `EDIT("edit")`
-
-                  - `READ("read")`
-
-                  - `WRITE("write")`
-
-                  - `GLOB("glob")`
-
-                  - `GREP("grep")`
-
-                  - `WEB_FETCH("web_fetch")`
-
-                  - `WEB_SEARCH("web_search")`
-
-                - `PermissionPolicy permissionPolicy`
-
-                  Permission policy for tool execution.
-
-                  - `class BetaManagedAgentsAlwaysAllowPolicy:`
-
-                    Tool calls are automatically approved without user confirmation.
-
-                    - `Type type`
-
-                      - `ALWAYS_ALLOW("always_allow")`
-
-                  - `class BetaManagedAgentsAlwaysAskPolicy:`
-
-                    Tool calls require user confirmation before execution.
-
-                    - `Type type`
-
-                      - `ALWAYS_ASK("always_ask")`
-
-              - `BetaManagedAgentsAgentToolsetDefaultConfig defaultConfig`
-
-                Resolved default configuration for agent tools.
-
-                - `boolean enabled`
-
-                - `PermissionPolicy permissionPolicy`
-
-                  Permission policy for tool execution.
-
-                  - `class BetaManagedAgentsAlwaysAllowPolicy:`
-
-                    Tool calls are automatically approved without user confirmation.
-
-                  - `class BetaManagedAgentsAlwaysAskPolicy:`
-
-                    Tool calls require user confirmation before execution.
-
-              - `Type type`
-
-                - `AGENT_TOOLSET_20260401("agent_toolset_20260401")`
-
-            - `class BetaManagedAgentsMcpToolset:`
-
-              - `List<BetaManagedAgentsMcpToolConfig> configs`
-
-                - `boolean enabled`
-
-                - `String name`
-
-                - `PermissionPolicy permissionPolicy`
-
-                  Permission policy for tool execution.
-
-                  - `class BetaManagedAgentsAlwaysAllowPolicy:`
-
-                    Tool calls are automatically approved without user confirmation.
-
-                  - `class BetaManagedAgentsAlwaysAskPolicy:`
-
-                    Tool calls require user confirmation before execution.
-
-              - `BetaManagedAgentsMcpToolsetDefaultConfig defaultConfig`
-
-                Resolved default configuration for all tools from an MCP server.
-
-                - `boolean enabled`
-
-                - `PermissionPolicy permissionPolicy`
-
-                  Permission policy for tool execution.
-
-                  - `class BetaManagedAgentsAlwaysAllowPolicy:`
-
-                    Tool calls are automatically approved without user confirmation.
-
-                  - `class BetaManagedAgentsAlwaysAskPolicy:`
-
-                    Tool calls require user confirmation before execution.
-
-              - `String mcpServerName`
-
-              - `Type type`
-
-                - `MCP_TOOLSET("mcp_toolset")`
-
-            - `class BetaManagedAgentsCustomTool:`
-
-              A custom tool as returned in API responses.
-
-              - `String description`
-
-              - `BetaManagedAgentsCustomToolInputSchema inputSchema`
-
-                JSON Schema for custom tool input parameters.
-
-                - `JsonValue; type "object"constant`
-
-                  - `OBJECT("object")`
-
-                - `Optional<Properties> properties`
-
-                - `Optional<List<String>> required`
+            - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
               - `String name`
 
               - `Type type`
 
-                - `CUSTOM("custom")`
+              - `String url`
 
-          - `Type type`
+            - `BetaManagedAgentsModelConfig model`
 
-            - `AGENT("agent")`
+              Model identifier and configuration.
 
-          - `long version`
+            - `String name`
+
+            - `List<Skill> skills`
+
+              - `class BetaManagedAgentsAnthropicSkill:`
+
+                A resolved Anthropic-managed skill.
+
+                - `String skillId`
+
+                - `Type type`
+
+                  - `ANTHROPIC("anthropic")`
+
+                - `String version`
+
+              - `class BetaManagedAgentsCustomSkill:`
+
+                A resolved user-created custom skill.
+
+                - `String skillId`
+
+                - `Type type`
+
+                  - `CUSTOM("custom")`
+
+                - `String version`
+
+            - `Optional<String> system`
+
+            - `List<Tool> tools`
+
+              - `class BetaManagedAgentsAgentToolset20260401:`
+
+                - `List<BetaManagedAgentsAgentToolConfig> configs`
+
+                  - `boolean enabled`
+
+                  - `Name name`
+
+                    Built-in agent tool identifier.
+
+                    - `BASH("bash")`
+
+                    - `EDIT("edit")`
+
+                    - `READ("read")`
+
+                    - `WRITE("write")`
+
+                    - `GLOB("glob")`
+
+                    - `GREP("grep")`
+
+                    - `WEB_FETCH("web_fetch")`
+
+                    - `WEB_SEARCH("web_search")`
+
+                  - `PermissionPolicy permissionPolicy`
+
+                    Permission policy for tool execution.
+
+                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                      Tool calls are automatically approved without user confirmation.
+
+                      - `Type type`
+
+                        - `ALWAYS_ALLOW("always_allow")`
+
+                    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                      Tool calls require user confirmation before execution.
+
+                      - `Type type`
+
+                        - `ALWAYS_ASK("always_ask")`
+
+                - `BetaManagedAgentsAgentToolsetDefaultConfig defaultConfig`
+
+                  Resolved default configuration for agent tools.
+
+                  - `boolean enabled`
+
+                  - `PermissionPolicy permissionPolicy`
+
+                    Permission policy for tool execution.
+
+                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                      Tool calls are automatically approved without user confirmation.
+
+                    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                      Tool calls require user confirmation before execution.
+
+                - `Type type`
+
+                  - `AGENT_TOOLSET_20260401("agent_toolset_20260401")`
+
+              - `class BetaManagedAgentsMcpToolset:`
+
+                - `List<BetaManagedAgentsMcpToolConfig> configs`
+
+                  - `boolean enabled`
+
+                  - `String name`
+
+                  - `PermissionPolicy permissionPolicy`
+
+                    Permission policy for tool execution.
+
+                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                      Tool calls are automatically approved without user confirmation.
+
+                    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                      Tool calls require user confirmation before execution.
+
+                - `BetaManagedAgentsMcpToolsetDefaultConfig defaultConfig`
+
+                  Resolved default configuration for all tools from an MCP server.
+
+                  - `boolean enabled`
+
+                  - `PermissionPolicy permissionPolicy`
+
+                    Permission policy for tool execution.
+
+                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                      Tool calls are automatically approved without user confirmation.
+
+                    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                      Tool calls require user confirmation before execution.
+
+                - `String mcpServerName`
+
+                - `Type type`
+
+                  - `MCP_TOOLSET("mcp_toolset")`
+
+              - `class BetaManagedAgentsCustomTool:`
+
+                A custom tool as returned in API responses.
+
+                - `String description`
+
+                - `BetaManagedAgentsCustomToolInputSchema inputSchema`
+
+                  JSON Schema for custom tool input parameters.
+
+                  - `JsonValue; type "object"constant`
+
+                    - `OBJECT("object")`
+
+                  - `Optional<Properties> properties`
+
+                  - `Optional<List<String>> required`
+
+                - `String name`
+
+                - `Type type`
+
+                  - `CUSTOM("custom")`
+
+            - `Type type`
+
+              - `AGENT("agent")`
+
+            - `long version`
+
+          - `class BetaManagedAgentsAdvisor:`
+
+            Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
+
+            - `String model`
+
+              The advisor model id.
+
+            - `Type type`
+
+              - `ADVISOR("advisor")`
 
         - `Type type`
 
@@ -9461,6 +9882,28 @@ public final class Main {
         - `AGENT("agent")`
 
       - `long version`
+
+    - `Optional<BetaManagedAgentsBudgetLimit> budget`
+
+      A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+
+      - `BetaMonetaryAmount maxListCost`
+
+        A monetary amount in a specific currency.
+
+        - `String amount`
+
+          Amount in minor units of the currency, as an integer decimal string with no leading zeros: "2500" is $25.00 and "50" is fifty cents. A string rather than a number so no float rounding is ever applied.
+
+        - `BetaCurrency currency`
+
+          Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
+
+          - `USD("USD")`
+
+      - `Type type`
+
+        - `LIMIT("limit")`
 
     - `Optional<Metadata> metadata`
 
@@ -9497,6 +9940,74 @@ public final class Main {
     - `Optional<LocalDateTime> processedAt`
 
       A timestamp in RFC 3339 format
+
+  - `class BetaManagedAgentsSessionUsageEvent:`
+
+    Periodic snapshot of the session's cumulative usage and tracked list cost.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `SESSION_USAGE("session.usage")`
+
+    - `BetaManagedAgentsSessionUsageSnapshot usage`
+
+      Point-in-time snapshot of a session's cumulative usage.
+
+      - `Optional<Double> activeSeconds`
+
+        Cumulative time in seconds during which the session had at least one thread in running status. Overlapping activity from concurrent threads is counted once. This is the duration the session's runtime cost is priced on.
+
+      - `Optional<BetaManagedAgentsCacheCreationUsage> cacheCreation`
+
+        Prompt-cache creation token usage broken down by cache lifetime.
+
+        - `Optional<Long> ephemeral1hInputTokens`
+
+          Tokens used to create 1-hour ephemeral cache entries.
+
+        - `Optional<Long> ephemeral5mInputTokens`
+
+          Tokens used to create 5-minute ephemeral cache entries.
+
+      - `Optional<Long> cacheReadInputTokens`
+
+        Total tokens read from prompt cache.
+
+      - `Optional<Long> inputTokens`
+
+        Total input tokens consumed across all turns.
+
+      - `Optional<BetaMonetaryAmount> listCost`
+
+        A monetary amount in a specific currency.
+
+      - `Optional<Long> outputTokens`
+
+        Total output tokens generated across all turns.
+
+      - `Optional<BetaManagedAgentsServerToolUsage> serverToolUse`
+
+        Cumulative count of server-executed tool invocations, broken down by tool.
+
+        - `Optional<Long> webFetchRequests`
+
+          Number of server-executed web fetch requests.
+
+        - `Optional<Long> webSearchRequests`
+
+          Number of server-executed web search requests.
+
+    - `Optional<BetaManagedAgentsBudgetLimit> budget`
+
+      A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
 ### Beta Managed Agents Session Requires Action
 
@@ -9567,6 +10078,14 @@ public final class Main {
       - `Type type`
 
         - `RETRIES_EXHAUSTED("retries_exhausted")`
+
+    - `class BetaManagedAgentsSessionBudgetReached:`
+
+      The agent stopped because the session's tracked list cost reached its budget, or because its usage includes a model with no list price (which the budget cannot measure). Raise the budget to continue — or, if raising is rejected because a model has no list price, remove the budget.
+
+      - `Type type`
+
+        - `BUDGET_REACHED("budget_reached")`
 
   - `Type type`
 
@@ -9706,6 +10225,14 @@ public final class Main {
 
         - `RETRIES_EXHAUSTED("retries_exhausted")`
 
+    - `class BetaManagedAgentsSessionBudgetReached:`
+
+      The agent stopped because the session's tracked list cost reached its budget, or because its usage includes a model with no list price (which the budget cannot measure). Raise the budget to continue — or, if raising is rejected because a model has no list price, remove the budget.
+
+      - `Type type`
+
+        - `BUDGET_REACHED("budget_reached")`
+
   - `Type type`
 
     - `SESSION_THREAD_STATUS_IDLE("session.thread_status_idle")`
@@ -9787,6 +10314,66 @@ public final class Main {
   - `Type type`
 
     - `SESSION_THREAD_STATUS_TERMINATED("session.thread_status_terminated")`
+
+### Beta Managed Agents Session Usage Snapshot
+
+- `class BetaManagedAgentsSessionUsageSnapshot:`
+
+  Point-in-time snapshot of a session's cumulative usage.
+
+  - `Optional<Double> activeSeconds`
+
+    Cumulative time in seconds during which the session had at least one thread in running status. Overlapping activity from concurrent threads is counted once. This is the duration the session's runtime cost is priced on.
+
+  - `Optional<BetaManagedAgentsCacheCreationUsage> cacheCreation`
+
+    Prompt-cache creation token usage broken down by cache lifetime.
+
+    - `Optional<Long> ephemeral1hInputTokens`
+
+      Tokens used to create 1-hour ephemeral cache entries.
+
+    - `Optional<Long> ephemeral5mInputTokens`
+
+      Tokens used to create 5-minute ephemeral cache entries.
+
+  - `Optional<Long> cacheReadInputTokens`
+
+    Total tokens read from prompt cache.
+
+  - `Optional<Long> inputTokens`
+
+    Total input tokens consumed across all turns.
+
+  - `Optional<BetaMonetaryAmount> listCost`
+
+    A monetary amount in a specific currency.
+
+    - `String amount`
+
+      Amount in minor units of the currency, as an integer decimal string with no leading zeros: "2500" is $25.00 and "50" is fifty cents. A string rather than a number so no float rounding is ever applied.
+
+    - `BetaCurrency currency`
+
+      Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
+
+      - `USD("USD")`
+
+  - `Optional<Long> outputTokens`
+
+    Total output tokens generated across all turns.
+
+  - `Optional<BetaManagedAgentsServerToolUsage> serverToolUse`
+
+    Cumulative count of server-executed tool invocations, broken down by tool.
+
+    - `Optional<Long> webFetchRequests`
+
+      Number of server-executed web fetch requests.
+
+    - `Optional<Long> webSearchRequests`
+
+      Number of server-executed web search requests.
 
 ### Beta Managed Agents Span Model Request End Event
 
@@ -10168,6 +10755,14 @@ public final class Main {
 
           The title of the document.
 
+      - `class BetaManagedAgentsRedactedBlock:`
+
+        Placeholder for content withheld by Anthropic model policy.
+
+        - `Type type`
+
+          - `REDACTED("redacted")`
+
     - `Type type`
 
       - `USER_MESSAGE("user.message")`
@@ -10348,15 +10943,17 @@ public final class Main {
 
       Unique identifier for this event.
 
-    - `List<BetaManagedAgentsTextBlock> content`
+    - `List<Content> content`
 
       Array of text blocks comprising the agent response.
 
-      - `String text`
+      - `class BetaManagedAgentsTextBlock:`
 
-        The text content.
+        Regular text content.
 
-      - `Type type`
+      - `class BetaManagedAgentsRedactedBlock:`
+
+        Placeholder for content withheld by Anthropic model policy.
 
     - `LocalDateTime processedAt`
 
@@ -10574,6 +11171,10 @@ public final class Main {
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
+      - `class BetaManagedAgentsRedactedBlock:`
+
+        Placeholder for content withheld by Anthropic model policy.
+
     - `String fromSessionThreadId`
 
       Public `sthr_` ID of the thread that sent the message.
@@ -10613,6 +11214,10 @@ public final class Main {
       - `class BetaManagedAgentsDocumentBlock:`
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+      - `class BetaManagedAgentsRedactedBlock:`
+
+        Placeholder for content withheld by Anthropic model policy.
 
     - `LocalDateTime processedAt`
 
@@ -10994,6 +11599,14 @@ public final class Main {
 
           - `RETRIES_EXHAUSTED("retries_exhausted")`
 
+      - `class BetaManagedAgentsSessionBudgetReached:`
+
+        The agent stopped because the session's tracked list cost reached its budget, or because its usage includes a model with no list price (which the budget cannot measure). Raise the budget to continue — or, if raising is rejected because a model has no list price, remove the budget.
+
+        - `Type type`
+
+          - `BUDGET_REACHED("budget_reached")`
+
     - `Type type`
 
       - `SESSION_STATUS_IDLE("session.status_idle")`
@@ -11326,6 +11939,10 @@ public final class Main {
 
         The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
+      - `class BetaManagedAgentsSessionBudgetReached:`
+
+        The agent stopped because the session's tracked list cost reached its budget, or because its usage includes a model with no list price (which the budget cannot measure). Raise the budget to continue — or, if raising is rejected because a model has no list price, remove the budget.
+
     - `Type type`
 
       - `SESSION_THREAD_STATUS_IDLE("session.thread_status_idle")`
@@ -11566,6 +12183,10 @@ public final class Main {
 
               - `MAX("max")`
 
+        - `Optional<String> inferenceGeo`
+
+          Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo.
+
         - `Optional<Speed> speed`
 
           Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
@@ -11578,199 +12199,215 @@ public final class Main {
 
         Resolved coordinator topology with full agent definitions for each roster member.
 
-        - `List<BetaManagedAgentsSessionThreadAgent> agents`
+        - `List<Agent> agents`
 
           Full `agent` definitions the coordinator may spawn as session threads.
 
-          - `String id`
+          - `class BetaManagedAgentsSessionThreadAgent:`
 
-          - `Optional<String> description`
+            Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
-          - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
+            - `String id`
 
-            - `String name`
+            - `Optional<String> description`
 
-            - `Type type`
-
-            - `String url`
-
-          - `BetaManagedAgentsModelConfig model`
-
-            Model identifier and configuration.
-
-          - `String name`
-
-          - `List<Skill> skills`
-
-            - `class BetaManagedAgentsAnthropicSkill:`
-
-              A resolved Anthropic-managed skill.
-
-              - `String skillId`
-
-              - `Type type`
-
-                - `ANTHROPIC("anthropic")`
-
-              - `String version`
-
-            - `class BetaManagedAgentsCustomSkill:`
-
-              A resolved user-created custom skill.
-
-              - `String skillId`
-
-              - `Type type`
-
-                - `CUSTOM("custom")`
-
-              - `String version`
-
-          - `Optional<String> system`
-
-          - `List<Tool> tools`
-
-            - `class BetaManagedAgentsAgentToolset20260401:`
-
-              - `List<BetaManagedAgentsAgentToolConfig> configs`
-
-                - `boolean enabled`
-
-                - `Name name`
-
-                  Built-in agent tool identifier.
-
-                  - `BASH("bash")`
-
-                  - `EDIT("edit")`
-
-                  - `READ("read")`
-
-                  - `WRITE("write")`
-
-                  - `GLOB("glob")`
-
-                  - `GREP("grep")`
-
-                  - `WEB_FETCH("web_fetch")`
-
-                  - `WEB_SEARCH("web_search")`
-
-                - `PermissionPolicy permissionPolicy`
-
-                  Permission policy for tool execution.
-
-                  - `class BetaManagedAgentsAlwaysAllowPolicy:`
-
-                    Tool calls are automatically approved without user confirmation.
-
-                    - `Type type`
-
-                      - `ALWAYS_ALLOW("always_allow")`
-
-                  - `class BetaManagedAgentsAlwaysAskPolicy:`
-
-                    Tool calls require user confirmation before execution.
-
-                    - `Type type`
-
-                      - `ALWAYS_ASK("always_ask")`
-
-              - `BetaManagedAgentsAgentToolsetDefaultConfig defaultConfig`
-
-                Resolved default configuration for agent tools.
-
-                - `boolean enabled`
-
-                - `PermissionPolicy permissionPolicy`
-
-                  Permission policy for tool execution.
-
-                  - `class BetaManagedAgentsAlwaysAllowPolicy:`
-
-                    Tool calls are automatically approved without user confirmation.
-
-                  - `class BetaManagedAgentsAlwaysAskPolicy:`
-
-                    Tool calls require user confirmation before execution.
-
-              - `Type type`
-
-                - `AGENT_TOOLSET_20260401("agent_toolset_20260401")`
-
-            - `class BetaManagedAgentsMcpToolset:`
-
-              - `List<BetaManagedAgentsMcpToolConfig> configs`
-
-                - `boolean enabled`
-
-                - `String name`
-
-                - `PermissionPolicy permissionPolicy`
-
-                  Permission policy for tool execution.
-
-                  - `class BetaManagedAgentsAlwaysAllowPolicy:`
-
-                    Tool calls are automatically approved without user confirmation.
-
-                  - `class BetaManagedAgentsAlwaysAskPolicy:`
-
-                    Tool calls require user confirmation before execution.
-
-              - `BetaManagedAgentsMcpToolsetDefaultConfig defaultConfig`
-
-                Resolved default configuration for all tools from an MCP server.
-
-                - `boolean enabled`
-
-                - `PermissionPolicy permissionPolicy`
-
-                  Permission policy for tool execution.
-
-                  - `class BetaManagedAgentsAlwaysAllowPolicy:`
-
-                    Tool calls are automatically approved without user confirmation.
-
-                  - `class BetaManagedAgentsAlwaysAskPolicy:`
-
-                    Tool calls require user confirmation before execution.
-
-              - `String mcpServerName`
-
-              - `Type type`
-
-                - `MCP_TOOLSET("mcp_toolset")`
-
-            - `class BetaManagedAgentsCustomTool:`
-
-              A custom tool as returned in API responses.
-
-              - `String description`
-
-              - `BetaManagedAgentsCustomToolInputSchema inputSchema`
-
-                JSON Schema for custom tool input parameters.
-
-                - `JsonValue; type "object"constant`
-
-                  - `OBJECT("object")`
-
-                - `Optional<Properties> properties`
-
-                - `Optional<List<String>> required`
+            - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
               - `String name`
 
               - `Type type`
 
-                - `CUSTOM("custom")`
+              - `String url`
 
-          - `Type type`
+            - `BetaManagedAgentsModelConfig model`
 
-            - `AGENT("agent")`
+              Model identifier and configuration.
 
-          - `long version`
+            - `String name`
+
+            - `List<Skill> skills`
+
+              - `class BetaManagedAgentsAnthropicSkill:`
+
+                A resolved Anthropic-managed skill.
+
+                - `String skillId`
+
+                - `Type type`
+
+                  - `ANTHROPIC("anthropic")`
+
+                - `String version`
+
+              - `class BetaManagedAgentsCustomSkill:`
+
+                A resolved user-created custom skill.
+
+                - `String skillId`
+
+                - `Type type`
+
+                  - `CUSTOM("custom")`
+
+                - `String version`
+
+            - `Optional<String> system`
+
+            - `List<Tool> tools`
+
+              - `class BetaManagedAgentsAgentToolset20260401:`
+
+                - `List<BetaManagedAgentsAgentToolConfig> configs`
+
+                  - `boolean enabled`
+
+                  - `Name name`
+
+                    Built-in agent tool identifier.
+
+                    - `BASH("bash")`
+
+                    - `EDIT("edit")`
+
+                    - `READ("read")`
+
+                    - `WRITE("write")`
+
+                    - `GLOB("glob")`
+
+                    - `GREP("grep")`
+
+                    - `WEB_FETCH("web_fetch")`
+
+                    - `WEB_SEARCH("web_search")`
+
+                  - `PermissionPolicy permissionPolicy`
+
+                    Permission policy for tool execution.
+
+                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                      Tool calls are automatically approved without user confirmation.
+
+                      - `Type type`
+
+                        - `ALWAYS_ALLOW("always_allow")`
+
+                    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                      Tool calls require user confirmation before execution.
+
+                      - `Type type`
+
+                        - `ALWAYS_ASK("always_ask")`
+
+                - `BetaManagedAgentsAgentToolsetDefaultConfig defaultConfig`
+
+                  Resolved default configuration for agent tools.
+
+                  - `boolean enabled`
+
+                  - `PermissionPolicy permissionPolicy`
+
+                    Permission policy for tool execution.
+
+                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                      Tool calls are automatically approved without user confirmation.
+
+                    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                      Tool calls require user confirmation before execution.
+
+                - `Type type`
+
+                  - `AGENT_TOOLSET_20260401("agent_toolset_20260401")`
+
+              - `class BetaManagedAgentsMcpToolset:`
+
+                - `List<BetaManagedAgentsMcpToolConfig> configs`
+
+                  - `boolean enabled`
+
+                  - `String name`
+
+                  - `PermissionPolicy permissionPolicy`
+
+                    Permission policy for tool execution.
+
+                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                      Tool calls are automatically approved without user confirmation.
+
+                    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                      Tool calls require user confirmation before execution.
+
+                - `BetaManagedAgentsMcpToolsetDefaultConfig defaultConfig`
+
+                  Resolved default configuration for all tools from an MCP server.
+
+                  - `boolean enabled`
+
+                  - `PermissionPolicy permissionPolicy`
+
+                    Permission policy for tool execution.
+
+                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                      Tool calls are automatically approved without user confirmation.
+
+                    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                      Tool calls require user confirmation before execution.
+
+                - `String mcpServerName`
+
+                - `Type type`
+
+                  - `MCP_TOOLSET("mcp_toolset")`
+
+              - `class BetaManagedAgentsCustomTool:`
+
+                A custom tool as returned in API responses.
+
+                - `String description`
+
+                - `BetaManagedAgentsCustomToolInputSchema inputSchema`
+
+                  JSON Schema for custom tool input parameters.
+
+                  - `JsonValue; type "object"constant`
+
+                    - `OBJECT("object")`
+
+                  - `Optional<Properties> properties`
+
+                  - `Optional<List<String>> required`
+
+                - `String name`
+
+                - `Type type`
+
+                  - `CUSTOM("custom")`
+
+            - `Type type`
+
+              - `AGENT("agent")`
+
+            - `long version`
+
+          - `class BetaManagedAgentsAdvisor:`
+
+            Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
+
+            - `String model`
+
+              The advisor model id.
+
+            - `Type type`
+
+              - `ADVISOR("advisor")`
 
         - `Type type`
 
@@ -11805,6 +12442,28 @@ public final class Main {
         - `AGENT("agent")`
 
       - `long version`
+
+    - `Optional<BetaManagedAgentsBudgetLimit> budget`
+
+      A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+
+      - `BetaMonetaryAmount maxListCost`
+
+        A monetary amount in a specific currency.
+
+        - `String amount`
+
+          Amount in minor units of the currency, as an integer decimal string with no leading zeros: "2500" is $25.00 and "50" is fifty cents. A string rather than a number so no float rounding is ever applied.
+
+        - `BetaCurrency currency`
+
+          Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
+
+          - `USD("USD")`
+
+      - `Type type`
+
+        - `LIMIT("limit")`
 
     - `Optional<Metadata> metadata`
 
@@ -11901,6 +12560,74 @@ public final class Main {
     - `Optional<LocalDateTime> processedAt`
 
       A timestamp in RFC 3339 format
+
+  - `class BetaManagedAgentsSessionUsageEvent:`
+
+    Periodic snapshot of the session's cumulative usage and tracked list cost.
+
+    - `String id`
+
+      Unique identifier for this event.
+
+    - `LocalDateTime processedAt`
+
+      A timestamp in RFC 3339 format
+
+    - `Type type`
+
+      - `SESSION_USAGE("session.usage")`
+
+    - `BetaManagedAgentsSessionUsageSnapshot usage`
+
+      Point-in-time snapshot of a session's cumulative usage.
+
+      - `Optional<Double> activeSeconds`
+
+        Cumulative time in seconds during which the session had at least one thread in running status. Overlapping activity from concurrent threads is counted once. This is the duration the session's runtime cost is priced on.
+
+      - `Optional<BetaManagedAgentsCacheCreationUsage> cacheCreation`
+
+        Prompt-cache creation token usage broken down by cache lifetime.
+
+        - `Optional<Long> ephemeral1hInputTokens`
+
+          Tokens used to create 1-hour ephemeral cache entries.
+
+        - `Optional<Long> ephemeral5mInputTokens`
+
+          Tokens used to create 5-minute ephemeral cache entries.
+
+      - `Optional<Long> cacheReadInputTokens`
+
+        Total tokens read from prompt cache.
+
+      - `Optional<Long> inputTokens`
+
+        Total input tokens consumed across all turns.
+
+      - `Optional<BetaMonetaryAmount> listCost`
+
+        A monetary amount in a specific currency.
+
+      - `Optional<Long> outputTokens`
+
+        Total output tokens generated across all turns.
+
+      - `Optional<BetaManagedAgentsServerToolUsage> serverToolUse`
+
+        Cumulative count of server-executed tool invocations, broken down by tool.
+
+        - `Optional<Long> webFetchRequests`
+
+          Number of server-executed web fetch requests.
+
+        - `Optional<Long> webSearchRequests`
+
+          Number of server-executed web search requests.
+
+    - `Optional<BetaManagedAgentsBudgetLimit> budget`
+
+      A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
 ### Beta Managed Agents System Message Event Params
 
@@ -12744,6 +13471,14 @@ public final class Main {
 
         The title of the document.
 
+    - `class BetaManagedAgentsRedactedBlock:`
+
+      Placeholder for content withheld by Anthropic model policy.
+
+      - `Type type`
+
+        - `REDACTED("redacted")`
+
   - `Type type`
 
     - `USER_MESSAGE("user.message")`
@@ -12903,6 +13638,14 @@ public final class Main {
       - `Optional<String> title`
 
         The title of the document.
+
+    - `class BetaManagedAgentsRedactedBlock:`
+
+      Placeholder for content withheld by Anthropic model policy.
+
+      - `Type type`
+
+        - `REDACTED("redacted")`
 
   - `Type type`
 

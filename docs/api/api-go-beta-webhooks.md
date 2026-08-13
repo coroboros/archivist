@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/go/beta/webhooks"
 category: "api"
 generated: true
 ---
+---
+title: Webhooks
+url: https://platform.claude.com/docs/en/api/go/beta/webhooks
+---
+
 # Webhooks
 
 ## Domain Types
@@ -924,6 +929,20 @@ generated: true
 
       - `WorkspaceID string`
 
+    - `type BetaWebhookSessionBudgetReachedEventData struct{…}`
+
+      - `ID string`
+
+        ID of the session that triggered the event.
+
+      - `OrganizationID string`
+
+      - `Type SessionBudgetReached`
+
+        - `const SessionBudgetReachedSessionBudgetReached SessionBudgetReached = "session.budget_reached"`
+
+      - `WorkspaceID string`
+
   - `Type Event`
 
     Object type. Always `event` for webhook payloads.
@@ -1564,6 +1583,20 @@ generated: true
 
     - `WorkspaceID string`
 
+  - `type BetaWebhookSessionBudgetReachedEventData struct{…}`
+
+    - `ID string`
+
+      ID of the session that triggered the event.
+
+    - `OrganizationID string`
+
+    - `Type SessionBudgetReached`
+
+      - `const SessionBudgetReachedSessionBudgetReached SessionBudgetReached = "session.budget_reached"`
+
+    - `WorkspaceID string`
+
 ### Beta Webhook Memory Store Archived Event Data
 
 - `type BetaWebhookMemoryStoreArchivedEventData struct{…}`
@@ -1625,6 +1658,22 @@ generated: true
   - `Type SessionArchived`
 
     - `const SessionArchivedSessionArchived SessionArchived = "session.archived"`
+
+  - `WorkspaceID string`
+
+### Beta Webhook Session Budget Reached Event Data
+
+- `type BetaWebhookSessionBudgetReachedEventData struct{…}`
+
+  - `ID string`
+
+    ID of the session that triggered the event.
+
+  - `OrganizationID string`
+
+  - `Type SessionBudgetReached`
+
+    - `const SessionBudgetReachedSessionBudgetReached SessionBudgetReached = "session.budget_reached"`
 
   - `WorkspaceID string`
 
@@ -2649,6 +2698,20 @@ generated: true
       - `Type MemoryStoreDeleted`
 
         - `const MemoryStoreDeletedMemoryStoreDeleted MemoryStoreDeleted = "memory_store.deleted"`
+
+      - `WorkspaceID string`
+
+    - `type BetaWebhookSessionBudgetReachedEventData struct{…}`
+
+      - `ID string`
+
+        ID of the session that triggered the event.
+
+      - `OrganizationID string`
+
+      - `Type SessionBudgetReached`
+
+        - `const SessionBudgetReachedSessionBudgetReached SessionBudgetReached = "session.budget_reached"`
 
       - `WorkspaceID string`
 

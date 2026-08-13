@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/cli/beta/webhooks"
 category: "api"
 generated: true
 ---
+---
+title: Webhooks
+url: https://platform.claude.com/docs/en/api/cli/beta/webhooks
+---
+
 # Webhooks
 
 ## Domain Types
@@ -258,7 +263,7 @@ generated: true
 
     RFC 3339 timestamp when the event occurred.
 
-  - `data: BetaWebhookSessionCreatedEventData or BetaWebhookSessionPendingEventData or BetaWebhookSessionRunningEventData or 40 more`
+  - `data: BetaWebhookSessionCreatedEventData or BetaWebhookSessionPendingEventData or BetaWebhookSessionRunningEventData or 41 more`
 
     - `beta_webhook_session_created_event_data: object { id, organization_id, type, workspace_id }`
 
@@ -804,13 +809,25 @@ generated: true
 
       - `workspace_id: string`
 
+    - `beta_webhook_session_budget_reached_event_data: object { id, organization_id, type, workspace_id }`
+
+      - `id: string`
+
+        ID of the session that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "session.budget_reached"`
+
+      - `workspace_id: string`
+
   - `type: "event"`
 
     Object type. Always `event` for webhook payloads.
 
 ### Beta Webhook Event Data
 
-- `beta_webhook_event_data: BetaWebhookSessionCreatedEventData or BetaWebhookSessionPendingEventData or BetaWebhookSessionRunningEventData or 40 more`
+- `beta_webhook_event_data: BetaWebhookSessionCreatedEventData or BetaWebhookSessionPendingEventData or BetaWebhookSessionRunningEventData or 41 more`
 
   - `beta_webhook_session_created_event_data: object { id, organization_id, type, workspace_id }`
 
@@ -1356,6 +1373,18 @@ generated: true
 
     - `workspace_id: string`
 
+  - `beta_webhook_session_budget_reached_event_data: object { id, organization_id, type, workspace_id }`
+
+    - `id: string`
+
+      ID of the session that triggered the event.
+
+    - `organization_id: string`
+
+    - `type: "session.budget_reached"`
+
+    - `workspace_id: string`
+
 ### Beta Webhook Memory Store Archived Event Data
 
 - `beta_webhook_memory_store_archived_event_data: object { id, organization_id, type, workspace_id }`
@@ -1409,6 +1438,20 @@ generated: true
   - `organization_id: string`
 
   - `type: "session.archived"`
+
+  - `workspace_id: string`
+
+### Beta Webhook Session Budget Reached Event Data
+
+- `beta_webhook_session_budget_reached_event_data: object { id, organization_id, type, workspace_id }`
+
+  - `id: string`
+
+    ID of the session that triggered the event.
+
+  - `organization_id: string`
+
+  - `type: "session.budget_reached"`
 
   - `workspace_id: string`
 
@@ -1760,7 +1803,7 @@ generated: true
 
     RFC 3339 timestamp when the event occurred.
 
-  - `data: BetaWebhookSessionCreatedEventData or BetaWebhookSessionPendingEventData or BetaWebhookSessionRunningEventData or 40 more`
+  - `data: BetaWebhookSessionCreatedEventData or BetaWebhookSessionPendingEventData or BetaWebhookSessionRunningEventData or 41 more`
 
     - `beta_webhook_session_created_event_data: object { id, organization_id, type, workspace_id }`
 
@@ -2303,6 +2346,18 @@ generated: true
       - `organization_id: string`
 
       - `type: "memory_store.deleted"`
+
+      - `workspace_id: string`
+
+    - `beta_webhook_session_budget_reached_event_data: object { id, organization_id, type, workspace_id }`
+
+      - `id: string`
+
+        ID of the session that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "session.budget_reached"`
 
       - `workspace_id: string`
 

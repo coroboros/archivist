@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/csharp/beta/deployments/list"
 category: "api"
 generated: true
 ---
+---
+title: List Deployments
+url: https://platform.claude.com/docs/en/api/csharp/beta/deployments/list
+---
+
 ## List Deployments
 
 `DeploymentListPageResponse Beta.Deployments.List(DeploymentListParams?parameters, CancellationTokencancellationToken = default)`
@@ -111,6 +116,8 @@ List Deployments
     - `"fallback-credit-2026-07-01"FallbackCredit2026_07_01`
 
     - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
+
+    - `"mid-conversation-tool-changes-2026-07-01"MidConversationToolChanges2026_07_01`
 
 ### Returns
 
@@ -307,6 +314,14 @@ List Deployments
             - `string? Title`
 
               The title of the document.
+
+          - `class BetaManagedAgentsRedactedBlock:`
+
+            Placeholder for content withheld by Anthropic model policy.
+
+            - `required Type Type`
+
+              - `"redacted"Redacted`
 
         - `required Type Type`
 
@@ -648,6 +663,28 @@ List Deployments
 
       Vault IDs supplying stored credentials for sessions created from this deployment.
 
+    - `BetaManagedAgentsBudgetLimit? Budget`
+
+      A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
+
+      - `required BetaMonetaryAmount MaxListCost`
+
+        A monetary amount in a specific currency.
+
+        - `required string Amount`
+
+          Amount in minor units of the currency, as an integer decimal string with no leading zeros: "2500" is $25.00 and "50" is fifty cents. A string rather than a number so no float rounding is ever applied.
+
+        - `required BetaCurrency Currency`
+
+          Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
+
+          - `"USD"Usd`
+
+      - `required Type Type`
+
+        - `"limit"Limit`
+
   - `string? NextPage`
 
     Opaque cursor for the next page. Null when no more results.
@@ -722,7 +759,14 @@ await foreach (var item in page.Paginate())
       "updated_at": "2026-03-15T10:00:00Z",
       "vault_ids": [
         "vlt_011CZkZDLs7fYzm1hXNPeRjv"
-      ]
+      ],
+      "budget": {
+        "max_list_cost": {
+          "amount": "2500",
+          "currency": "USD"
+        },
+        "type": "limit"
+      }
     }
   ],
   "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="

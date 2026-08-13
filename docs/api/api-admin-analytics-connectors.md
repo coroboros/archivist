@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/analytics/connectors"
 category: "api"
 generated: true
 ---
+---
+title: Connectors
+url: https://platform.claude.com/docs/en/api/admin/analytics/connectors
+---
+
 # Connectors
 
 ## Get Connector Usage

@@ -1,13 +1,13 @@
 ---
-title: "Claude API errors"
+title: "HTTP errors"
 source: "https://platform.claude.com/docs/en/api/errors"
 category: "api"
 generated: true
 ---
-# Claude API errors
-
-Understand the HTTP status codes, error response shape, and request IDs the Claude API returns, and handle errors with the SDKs' typed exceptions.
-
+---
+title: Claude API errors
+url: https://platform.claude.com/docs/en/api/errors
+description: Understand the HTTP status codes, error response shape, and request IDs the Claude API returns, and handle errors with the SDKs' typed exceptions.
 ---
 
 ## HTTP errors
@@ -26,13 +26,13 @@ The API follows a predictable HTTP error code format:
 
 * 409 - `conflict_error`: The request conflicts with the current state of a resource. For example, the resource was modified concurrently, or a value that must be unique is already in use. Resolve the conflict, then retry the request.
 
-* 413 - `request_too_large`: Request exceeds the maximum allowed number of bytes. See [Request size limits](#request-size-limits) for per-endpoint maximums.
+* 413 - `request_too_large`: Request exceeds the maximum allowed number of bytes. See [Request size limits](./api-errors.md#request-size-limits) for per-endpoint maximums.
 
 * 429 - `rate_limit_error`: Your account has hit a rate limit.
 
-* 500 - `api_error`: An unexpected error has occurred internal to Anthropic's systems. Retry the request with exponential backoff; if the error persists, contact support with the [request ID](#request-id).
+* 500 - `api_error`: An unexpected error has occurred internal to Anthropic's systems. Retry the request with exponential backoff; if the error persists, contact support with the [request ID](./api-errors.md#request-id).
 
-* 504 - `timeout_error`: The request timed out while processing. Consider using the [streaming Messages API](../build-with-claude/build-with-claude-streaming.md) for long-running requests. See [Long requests](#long-requests) for more options.
+* 504 - `timeout_error`: The request timed out while processing. Consider using the [streaming Messages API](../build-with-claude/build-with-claude-streaming.md) for long-running requests. See [Long requests](./api-errors.md#long-requests) for more options.
 
 * 529 - `overloaded_error`: The API is temporarily overloaded.
 
@@ -50,10 +50,10 @@ When receiving a [streaming](../build-with-claude/build-with-claude-streaming.md
 
 The API enforces request size limits:
 
-| Endpoint type                                            | Maximum request size |
-| -------------------------------------------------------- | -------------------- |
-| Messages API                                             | 32 MB                |
-| Token Counting API                                       | 32 MB                |
+| Endpoint type                                                                       | Maximum request size |
+| ----------------------------------------------------------------------------------- | -------------------- |
+| Messages API                                                                        | 32 MB                |
+| Token Counting API                                                                  | 32 MB                |
 | [Batch API](../build-with-claude/build-with-claude-batch-processing.md) | 256 MB               |
 | [Files API](../build-with-claude/build-with-claude-files.md)            | 500 MB               |
 
@@ -84,11 +84,11 @@ The official SDKs raise typed exceptions for these errors instead of returning r
 
 ## Request ID
 
-Every API response includes a unique `request-id` header. This header contains a value such as `req_018EeWyXxfu5pfWkrYcMdjWG`. The same identifier appears as the `request_id` field in [error response bodies](#error-shapes). When contacting support about a specific request, include this ID to help quickly resolve your issue.
+Every API response includes a unique `request-id` header. This header contains a value such as `req_018EeWyXxfu5pfWkrYcMdjWG`. The same identifier appears as the `request_id` field in [error response bodies](./api-errors.md#error-shapes). When contacting support about a specific request, include this ID to help quickly resolve your issue.
 
 On [Claude Platform on AWS](../build-with-claude/build-with-claude-claude-platform-on-aws.md), responses include two request IDs: the AWS request ID (`x-amzn-requestid`, primary, indexed in CloudTrail) and the Anthropic request ID (`request-id`, secondary). Use the AWS request ID for CloudTrail lookups and the Anthropic request ID for Anthropic support tickets.
 
-The Python and TypeScript SDKs expose the request ID as a `_request_id` property on top-level response objects. The C#, Go, Java, and PHP SDKs expose it through their raw-response accessors, which also let you read any other response header. On Claude Platform on AWS, use the raw-response accessor to read the AWS request ID (`x-amzn-requestid`) as well:
+The Python and TypeScript SDKs expose the request ID as a `_request_id` property on top-level response objects. The C#, Go, Java, and PHP SDKs expose it through their raw-response accessors, and the Ruby SDK through [middleware](../general/general-cli-sdks-libraries-middleware.md). The same mechanisms, along with `with_raw_response` in Python and `.withResponse()` in TypeScript, read any other [response header](./api-overview.md#response-headers) too, such as `anthropic-organization-id` and [`anthropic-workspace-id`](../manage-claude/manage-claude-workspaces.md#identify-the-workspace-behind-an-api-response). On Claude Platform on AWS, use the raw-response accessor to read the AWS request ID (`x-amzn-requestid`) as well:
 
 <CodeGroup>
   ```bash cURL
@@ -137,7 +137,7 @@ The Python and TypeScript SDKs expose the request ID as a `_request_id` property
   ```csharp C#
   AnthropicClient client = new();
 
-  var response = await client.WithRawResponse.Messages.Create(new MessageCreateParams
+  using var response = await client.WithRawResponse.Messages.Create(new MessageCreateParams
   {
       Model = Model.ClaudeSonnet5,
       MaxTokens = 1024,
@@ -150,7 +150,7 @@ The Python and TypeScript SDKs expose the request ID as a `_request_id` property
   client := anthropic.NewClient()
 
   var response *http.Response
-  message, err := client.Messages.New(
+  _, err := client.Messages.New(
   	context.Background(),
   	anthropic.MessageNewParams{
   		Model:     anthropic.ModelClaudeSonnet5,
@@ -166,12 +166,6 @@ The Python and TypeScript SDKs expose the request ID as a `_request_id` property
   }
 
   fmt.Println("Request ID:", response.Header.Get("request-id"))
-  for _, block := range message.Content {
-  	if textBlock, ok := block.AsAny().(anthropic.TextBlock); ok {
-  		fmt.Println(textBlock.Text)
-  		break
-  	}
-  }
   ```
 
   ```java Java
@@ -209,8 +203,25 @@ The Python and TypeScript SDKs expose the request ID as a `_request_id` property
   ```
 
   ```ruby Ruby
-  # Accessing raw response headers is not currently supported in the Ruby SDK.
-  # To read the request-id header, use one of the other SDK examples.
+  client = Anthropic::Client.new
+
+  # Read response headers in per-request middleware, which receives the
+  # raw HTTP response before the SDK parses it
+  request_id = nil
+  read_request_id = lambda do |request, call_next|
+    response = call_next.call(request)
+    # Keys in response.headers are lowercase
+    request_id = response.headers["request-id"]
+    response
+  end
+
+  client.messages.create(
+    model: Anthropic::Model::CLAUDE_SONNET_5,
+    max_tokens: 1024,
+    messages: [{ role: "user", content: "Hello, Claude" }],
+    request_options: { middleware: [read_request_id] }
+  )
+  puts "Request ID: #{request_id}"
   ```
 
   ```python Python (Claude Platform on AWS)

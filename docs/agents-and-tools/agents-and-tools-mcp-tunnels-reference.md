@@ -1,13 +1,13 @@
 ---
-title: "MCP tunnels reference"
+title: "Proxy configuration"
 source: "https://platform.claude.com/docs/en/agents-and-tools/mcp-tunnels/reference"
 category: "agents-and-tools"
 generated: true
 ---
-# MCP tunnels reference
-
-Proxy configuration fields, the Tunnels REST API, certificate requirements, and the setup component.
-
+---
+title: MCP tunnels reference
+url: https://platform.claude.com/docs/en/agents-and-tools/mcp-tunnels/reference
+description: Proxy configuration fields, the Tunnels REST API, certificate requirements, and the setup component.
 ---
 
 <Note>
@@ -26,7 +26,7 @@ The [proxy](./agents-and-tools-mcp-tunnels-concepts.md#components) reads its con
 | `tunnel_domain`                   | Base domain assigned to the tunnel. When set, route lookup strips this suffix from incoming hostnames so `routes` keys can be bare subdomains (`wiki`). When empty, `routes` keys must be exact full hostnames. | Required when `routes` keys are bare subdomains |
 | `tls.cert_file`                   | Path to the server TLS certificate.                                                                                                                                                                             | Required                                        |
 | `tls.key_file`                    | Path to the server TLS private key.                                                                                                                                                                             | Required                                        |
-| `routes`                          | Map of subdomain or full hostname to upstream URL. See [Route matching](#route-matching).                                                                                                                       | Required                                        |
+| `routes`                          | Map of subdomain or full hostname to upstream URL. See [Route matching](./agents-and-tools-mcp-tunnels-reference.md#route-matching).                                             | Required                                        |
 | `upstream.allowed_ips`            | IPv4 CIDR ranges or single addresses the proxy is permitted to connect to. Mutually exclusive with `disable_ip_validation`.                                                                                     | RFC1918 private ranges                          |
 | `upstream.disable_ip_validation`  | Disable upstream IP validation entirely. Mutually exclusive with `allowed_ips`.                                                                                                                                 | `false`                                         |
 | `upstream.tls.ca_file`            | CA bundle for validating upstream TLS.                                                                                                                                                                          | None                                            |

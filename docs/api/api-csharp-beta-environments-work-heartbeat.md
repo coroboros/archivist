@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/csharp/beta/environments/work/h
 category: "api"
 generated: true
 ---
+---
+title: Record Heartbeat
+url: https://platform.claude.com/docs/en/api/csharp/beta/environments/work/heartbeat
+---
+
 ## Record Heartbeat
 
 `BetaSelfHostedWorkHeartbeatResponse Beta.Environments.Work.Heartbeat(WorkHeartbeatParamsparameters, CancellationTokencancellationToken = default)`
@@ -101,6 +106,8 @@ Record a heartbeat for a work item to maintain the lease.
     - `"fallback-credit-2026-07-01"FallbackCredit2026_07_01`
 
     - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
+
+    - `"mid-conversation-tool-changes-2026-07-01"MidConversationToolChanges2026_07_01`
 
 ### Returns
 

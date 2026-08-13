@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/php/beta/files/retrieve_metadat
 category: "api"
 generated: true
 ---
+---
+title: Get File Metadata
+url: https://platform.claude.com/docs/en/api/php/beta/files/retrieve_metadata
+---
+
 ## Get File Metadata
 
 `$client->beta->files->retrieveMetadata(string fileID, ?list<AnthropicBeta> betas): FileMetadata`
@@ -72,7 +77,7 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $fileMetadata = $client->beta->files->retrieveMetadata(
-  'file_id', betas: ['message-batches-2024-09-24']
+  'file_id', betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24]
 );
 
 var_dump($fileMetadata);

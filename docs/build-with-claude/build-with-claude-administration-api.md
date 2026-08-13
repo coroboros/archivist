@@ -1,20 +1,20 @@
 ---
-title: "Admin API"
+title: "Authentication"
 source: "https://platform.claude.com/docs/en/build-with-claude/administration-api"
 category: "build-with-claude"
 generated: true
 ---
-# Admin API
-
-Manage organization members, workspaces, invites, and API keys programmatically with the Admin API, using an Admin API key or an `org:admin` OAuth token.
-
+---
+title: Admin API
+url: https://platform.claude.com/docs/en/manage-claude/admin-api
+description: Manage organization members, workspaces, invites, and API keys programmatically with the Admin API, using an Admin API key or an `org:admin` OAuth token.
 ---
 
 <Tip>
   **The Admin API is unavailable for individual accounts.** To collaborate with teammates and add members, set up your organization in **Console → Settings → Organization**.
 </Tip>
 
-The [Admin API](../api/api-admin.md) allows you to programmatically manage your organization's resources, including organization members, workspaces, and API keys. This provides programmatic control over administrative tasks that would otherwise require manual configuration in the [Claude Console](/).
+The [Admin API](../api/api-admin.md) allows you to programmatically manage your organization's resources, including organization members, workspaces, and API keys. This provides programmatic control over administrative tasks that would otherwise require manual configuration in the [Claude Console](https://platform.claude.com/).
 
 <Check>
   **The Admin API requires special access**
@@ -22,7 +22,7 @@ The [Admin API](../api/api-admin.md) allows you to programmatically manage your 
   The Admin API accepts two credentials:
 
   * An **Admin API key** (starting with `sk-ant-admin...`) sent in the `x-api-key` header. Only organization members with the admin role can provision one. See [Create an Admin API key](../manage-claude/manage-claude-admin-api-keys.md).
-  * An **OAuth bearer token** with the `org:admin` scope sent in the `authorization: Bearer` header. Only members with the admin, owner, or primary owner role can obtain one. See [Obtain an OAuth bearer token](#oauth-bearer-token).
+  * An **OAuth bearer token** with the `org:admin` scope sent in the `authorization: Bearer` header. Only members with the admin, owner, or primary owner role can obtain one. See [Obtain an OAuth bearer token](../manage-claude/manage-claude-admin-api.md#oauth-bearer-token).
 </Check>
 
 <Note>
@@ -35,7 +35,7 @@ The [Admin API](../api/api-admin.md) allows you to programmatically manage your 
 
 ## Authentication
 
-Authenticate with either credential. An Admin API key covers most endpoints; the service-account, federation-issuer, and federation-rule endpoints accept only an `org:admin` OAuth token. The following examples call the [organization info endpoint](#accessing-organization-info) both ways.
+Authenticate with either credential. An Admin API key covers most endpoints; the service-account, federation-issuer, and federation-rule endpoints accept only an `org:admin` OAuth token. The following examples call the [organization info endpoint](../manage-claude/manage-claude-admin-api.md#accessing-organization-info) both ways.
 
 ### OAuth bearer token
 
@@ -56,7 +56,7 @@ curl --fail-with-body -sS "https://api.anthropic.com/v1/organizations/me" \
   --header "authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
 ```
 
-An `org:admin` token grants access to the whole organization, regardless of the workspace the underlying profile or [federation rule](#federation-rules) is bound to.
+An `org:admin` token grants access to the whole organization, regardless of the workspace the underlying profile or [federation rule](../manage-claude/manage-claude-admin-api.md#federation-rules) is bound to.
 
 For CI and other non-interactive workloads, mint the token with Workload Identity Federation instead of logging in interactively. See [Manage WIF with the Admin API](../manage-claude/manage-claude-wif-admin-api.md#workload-ci-and-automation).
 
@@ -74,7 +74,7 @@ curl --fail-with-body -sS "https://api.anthropic.com/v1/organizations/me" \
 
 When you use the Admin API:
 
-1. You make requests using either credential from the [Authentication](#authentication) section
+1. You make requests using either credential from the [Authentication](../manage-claude/manage-claude-admin-api.md#authentication) section
 
 2. The API allows you to manage:
 
@@ -289,7 +289,7 @@ To effectively use the Admin API:
 
 <AccordionGroup>
   <Accordion title="What permissions are needed to use the Admin API?">
-    The Admin API accepts either an Admin API key (starting with `sk-ant-admin`) or an OAuth bearer token with the `org:admin` scope. Only organization members with the admin role can provision Admin API keys, and only members with the admin, owner, or primary owner role can obtain `org:admin` tokens. See [Authentication](#authentication).
+    The Admin API accepts either an Admin API key (starting with `sk-ant-admin`) or an OAuth bearer token with the `org:admin` scope. Only organization members with the admin role can provision Admin API keys, and only members with the admin, owner, or primary owner role can obtain `org:admin` tokens. See [Authentication](../manage-claude/manage-claude-admin-api.md#authentication).
   </Accordion>
 
   <Accordion title="Can I create new API keys through the Admin API?">

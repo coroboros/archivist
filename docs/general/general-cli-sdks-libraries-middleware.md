@@ -1,13 +1,13 @@
 ---
-title: "SDK middleware"
+title: "Registering middleware"
 source: "https://platform.claude.com/docs/en/cli-sdks-libraries/middleware"
 category: "general"
 generated: true
 ---
-# SDK middleware
-
-Intercept and modify requests and responses in the Anthropic SDKs.
-
+---
+title: SDK middleware
+url: https://platform.claude.com/docs/en/cli-sdks-libraries/middleware
+description: Intercept and modify requests and responses in the Anthropic SDKs.
 ---
 
 The Anthropic SDKs provide a middleware (or interceptor) hook that lets you run code before a request is sent and after the response is received. Use middleware for cross-cutting concerns such as logging, custom retries, request annotation, and refusal fallback handling.

@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/messages/batches/delete"
 category: "api"
 generated: true
 ---
+---
+title: Delete a Message Batch
+url: https://platform.claude.com/docs/en/api/messages/batches/delete
+---
+
 ## Delete a Message Batch
 
 **delete** `/v1/messages/batches/{message_batch_id}`

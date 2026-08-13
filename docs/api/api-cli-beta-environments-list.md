@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/cli/beta/environments/list"
 category: "api"
 generated: true
 ---
+---
+title: List Environments
+url: https://platform.claude.com/docs/en/api/cli/beta/environments/list
+---
+
 ## List Environments
 
 `$ ant beta:environments list`

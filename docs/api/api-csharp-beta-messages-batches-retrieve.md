@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/csharp/beta/messages/batches/re
 category: "api"
 generated: true
 ---
+---
+title: Retrieve a Message Batch
+url: https://platform.claude.com/docs/en/api/csharp/beta/messages/batches/retrieve
+---
+
 ## Retrieve a Message Batch
 
 `BetaMessageBatch Beta.Messages.Batches.Retrieve(BatchRetrieveParamsparameters, CancellationTokencancellationToken = default)`
@@ -89,6 +94,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
     - `"fallback-credit-2026-07-01"FallbackCredit2026_07_01`
 
     - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
+
+    - `"mid-conversation-tool-changes-2026-07-01"MidConversationToolChanges2026_07_01`
 
 ### Returns
 

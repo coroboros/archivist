@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/cli/beta/environments/work/list
 category: "api"
 generated: true
 ---
+---
+title: List Work Items
+url: https://platform.claude.com/docs/en/api/cli/beta/environments/work/list
+---
+
 ## List Work Items
 
 `$ ant beta:environments:work list`

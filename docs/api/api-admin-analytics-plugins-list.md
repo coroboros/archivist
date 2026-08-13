@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/analytics/plugins/list"
 category: "api"
 generated: true
 ---
+---
+title: Get Plugin Usage
+url: https://platform.claude.com/docs/en/api/admin/analytics/plugins/list
+---
+
 ## Get Plugin Usage
 
 **get** `/v1/organizations/analytics/plugins`

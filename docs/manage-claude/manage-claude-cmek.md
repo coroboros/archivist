@@ -1,13 +1,13 @@
 ---
-title: "Customer-managed encryption keys"
+title: "How it works"
 source: "https://platform.claude.com/docs/en/manage-claude/cmek"
 category: "manage-claude"
 generated: true
 ---
-# Customer-managed encryption keys
-
-Encrypt Claude workspace data at rest with a key you control.
-
+---
+title: Customer-managed encryption keys
+url: https://platform.claude.com/docs/en/manage-claude/cmek
+description: Encrypt Claude workspace data at rest with a key you control.
 ---
 
 ```bash Learn more with the /claude-api skill in Claude Code
@@ -96,8 +96,7 @@ Some features are turned off or substantially modified when CMEK is enabled. Thi
 * Audit log exports are disabled.
 * Signed URLs for temporary file exchanges are disabled. These back organization data exports in claude.ai and Claude Code Remote file flows such as screenshot updates.
 * Personal preferences are disabled for users who belong to a CMEK-protected organization, across all organizations under the same parent. Users who do not belong to a CMEK-protected organization can still use them across all organizations.
-
-- Compliance API [local session transcripts](./manage-claude-compliance-content-data.md#retrieve-local-sessions) for Cowork and Claude Code currently return no message content. Session metadata is listed as usual, and the local session messages endpoint (`GET /v1/compliance/apps/sessions/local/{session_id}/messages`) returns each message with its content marked unavailable; see [Retrieve a local session transcript](./manage-claude-compliance-content-data.md#retrieve-a-local-session-transcript) for the response shape.
+* Compliance API [local session transcripts](./manage-claude-compliance-content-data.md#retrieve-local-sessions) for Cowork and Claude Code currently return no message content. Session metadata is listed as usual, and the local session messages endpoint (`GET /v1/compliance/apps/sessions/local/{session_id}/messages`) returns each message with its content marked unavailable; see [Retrieve a local session transcript](./manage-claude-compliance-content-data.md#retrieve-a-local-session-transcript) for the response shape.
 
 ### Not encrypted
 

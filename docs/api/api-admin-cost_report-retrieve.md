@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/cost_report/retrieve"
 category: "api"
 generated: true
 ---
+---
+title: Get Cost Report
+url: https://platform.claude.com/docs/en/api/admin/cost_report/retrieve
+---
+
 ## Get Cost Report
 
 **get** `/v1/organizations/cost_report`

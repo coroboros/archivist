@@ -1,13 +1,13 @@
 ---
-title: "Claude in Amazon Bedrock (Opus 4.7 and later)"
+title: "Access"
 source: "https://platform.claude.com/docs/en/build-with-claude/claude-in-amazon-bedrock"
 category: "build-with-claude"
 generated: true
 ---
-# Claude in Amazon Bedrock (Opus 4.7 and later)
-
-Access Claude models through Amazon Bedrock with AWS-native authentication, billing, and security boundaries.
-
+---
+title: Claude in Amazon Bedrock (Opus 4.7 and later)
+url: https://platform.claude.com/docs/en/build-with-claude/claude-in-amazon-bedrock
+description: Access Claude models through Amazon Bedrock with AWS-native authentication, billing, and security boundaries.
 ---
 
 This guide walks you through setting up and making API calls to Claude in Amazon Bedrock. Claude in Amazon Bedrock runs on AWS-managed infrastructure with zero operator access (Anthropic personnel have no access to the inference infrastructure), letting you build sensitive applications entirely inside the AWS security boundary while using the same Messages API shape you use with Anthropic's first-party API.
@@ -18,7 +18,7 @@ This guide walks you through setting up and making API calls to Claude in Amazon
 
 ## Access
 
-Amazon Bedrock sets access criteria for each Claude model individually. Claude Fable 5, Claude Opus 4.8, Claude Sonnet 5, Claude Opus 4.7, and Claude Haiku 4.5 are open to all Amazon Bedrock customers; for any other model's current criteria, check [Amazon Bedrock model access](https://console.aws.amazon.com/bedrock/home#/modelaccess) in the AWS console. Claude Mythos Preview requires an invitation; see [Project Glasswing](https://anthropic.com/glasswing). For region availability, see [Regions](#regions).
+Amazon Bedrock sets access criteria for each Claude model individually. Claude Fable 5, Claude Opus 4.8, Claude Sonnet 5, Claude Opus 4.7, and Claude Haiku 4.5 are open to all Amazon Bedrock customers; for any other model's current criteria, check [Amazon Bedrock model access](https://console.aws.amazon.com/bedrock/home#/modelaccess) in the AWS console. Claude Mythos Preview requires an invitation; see [Project Glasswing](https://anthropic.com/glasswing). For region availability, see [Regions](./build-with-claude-claude-in-amazon-bedrock.md#regions).
 
 ## Prerequisites
 
@@ -108,7 +108,7 @@ Anthropic's [client SDKs](../general/general-cli-sdks-libraries-overview.md) sup
     <Tabs>
       <Tab title="Gradle">
         ```kotlin
-        implementation("com.anthropic:anthropic-java-bedrock:2.52.0")
+        implementation("com.anthropic:anthropic-java-bedrock:2.53.0")
         ```
       </Tab>
 
@@ -117,7 +117,7 @@ Anthropic's [client SDKs](../general/general-cli-sdks-libraries-overview.md) sup
         <dependency>
             <groupId>com.anthropic</groupId>
             <artifactId>anthropic-java-bedrock</artifactId>
-            <version>2.52.0</version>
+            <version>2.53.0</version>
         </dependency>
         ```
       </Tab>
@@ -332,15 +332,15 @@ The SDK resolves credentials and region using the standard AWS precedence: const
 
 Model IDs in Claude in Amazon Bedrock carry an `anthropic.` provider prefix. Model capabilities and behaviors are documented on the [Models overview](../about-claude/about-claude-models-overview.md) page.
 
-| Model                 | Model ID                        | Access                                                                 |
-| --------------------- | ------------------------------- | ---------------------------------------------------------------------- |
-| Claude Fable 5        | anthropic.claude-fable-5        | Open                                                                   |
-| Claude Opus 5         | anthropic.claude-opus-5         | See [Access](#access)                                                  |
-| Claude Opus 4.8       | anthropic.claude-opus-4-8       | Open                                                                   |
-| Claude Opus 4.7       | anthropic.claude-opus-4-7       | Open                                                                   |
-| Claude Sonnet 5       | `anthropic.claude-sonnet-5`     | Open                                                                   |
-| Claude Haiku 4.5      | anthropic.claude-haiku-4-5      | Open                                                                   |
-| Claude Mythos Preview | anthropic.claude-mythos-preview | Invitation only ([Project Glasswing](https://anthropic.com/glasswing)) |
+| Model                 | Model ID                        | Access                                                                                              |
+| --------------------- | ------------------------------- | --------------------------------------------------------------------------------------------------- |
+| Claude Fable 5        | anthropic.claude-fable-5        | Open                                                                                                |
+| Claude Opus 5         | anthropic.claude-opus-5         | See [Access](./build-with-claude-claude-in-amazon-bedrock.md#access) |
+| Claude Opus 4.8       | anthropic.claude-opus-4-8       | Open                                                                                                |
+| Claude Opus 4.7       | anthropic.claude-opus-4-7       | Open                                                                                                |
+| Claude Sonnet 5       | `anthropic.claude-sonnet-5`     | Open                                                                                                |
+| Claude Haiku 4.5      | anthropic.claude-haiku-4-5      | Open                                                                                                |
+| Claude Mythos Preview | anthropic.claude-mythos-preview | Invitation only ([Project Glasswing](https://anthropic.com/glasswing))                              |
 
 <Tip>
   Upgrading to a newer Claude model? In Claude Code, run `/claude-api migrate` to apply model ID swaps and breaking parameter changes across your codebase. The skill detects which cloud platform your code targets and adjusts model ID formats and feature changes for that platform. See [Migrating to a newer Claude model](../agents-and-tools/agents-and-tools-agent-skills-claude-api-skill.md#migrating-to-a-newer-claude-model).

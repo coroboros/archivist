@@ -1,13 +1,13 @@
 ---
-title: "Search results"
+title: "How it works"
 source: "https://platform.claude.com/docs/en/build-with-claude/search-results"
 category: "build-with-claude"
 generated: true
 ---
-# Search results
-
-Enable natural citations for RAG applications by providing search results with source attribution
-
+---
+title: Search results
+url: https://platform.claude.com/docs/en/build-with-claude/search-results
+description: Enable natural citations for RAG applications by providing search results with source attribution
 ---
 
 <Note>
@@ -61,10 +61,10 @@ Search results use the following structure:
 
 ### Optional fields
 
-| Field           | Type   | Description                                                                                                                                                                                                                                                 |
-| --------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `citations`     | object | Citation configuration with `enabled` Boolean field. Citations are disabled by default; every example on this page sets `"enabled": true` explicitly. All search results in a request must use the same setting (see [Citation control](#citation-control)) |
-| `cache_control` | object | Cache control settings (for example, `{"type": "ephemeral"}`)                                                                                                                                                                                               |
+| Field           | Type   | Description                                                                                                                                                                                                                                                                                                                     |
+| --------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `citations`     | object | Citation configuration with `enabled` Boolean field. Citations are disabled by default; every example on this page sets `"enabled": true` explicitly. All search results in a request must use the same setting (see [Citation control](./build-with-claude-search-results.md#citation-control)) |
+| `cache_control` | object | Cache control settings (for example, `{"type": "ephemeral"}`)                                                                                                                                                                                                                                                                   |
 
 Each item in the `content` array must be a text block with:
 
@@ -1256,7 +1256,7 @@ Each citation includes:
 | `start_block_index`   | integer        | 0-based index of the first cited block in the search result's `content` array.                                                                                            |
 | `end_block_index`     | integer        | Exclusive end index of the cited block range in the search result's `content` array. Always greater than `start_block_index`.                                             |
 
-The block indices identify a slice of the search result's `content` array, and `cited_text` is the full text of that slice. The text block is the minimal citable unit: Claude cites whole blocks, not substrings within a block. To get finer-grained citations, split your search result content into smaller blocks (see [Multiple content blocks](#multiple-content-blocks)).
+The block indices identify a slice of the search result's `content` array, and `cited_text` is the full text of that slice. The text block is the minimal citable unit: Claude cites whole blocks, not substrings within a block. To get finer-grained citations, split your search result content into smaller blocks (see [Multiple content blocks](./build-with-claude-search-results.md#multiple-content-blocks)).
 
 ## Multiple content blocks
 

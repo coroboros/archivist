@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/java/beta/files/download"
 category: "api"
 generated: true
 ---
+---
+title: Download File
+url: https://platform.claude.com/docs/en/api/java/beta/files/download
+---
+
 ## Download File
 
 `HttpResponse beta().files().download(FileDownloadParamsparams = FileDownloadParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
@@ -87,6 +92,8 @@ Download File
     - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
 ### Example
 

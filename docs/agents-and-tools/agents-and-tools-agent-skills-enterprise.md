@@ -1,13 +1,13 @@
 ---
-title: "Skills for enterprise"
+title: "Security review and vetting"
 source: "https://platform.claude.com/docs/en/agents-and-tools/agent-skills/enterprise"
 category: "agents-and-tools"
 generated: true
 ---
-# Skills for enterprise
-
-Governance, security review, evaluation, and organizational guidance for deploying Agent Skills at enterprise scale.
-
+---
+title: Skills for enterprise
+url: https://platform.claude.com/docs/en/agents-and-tools/agent-skills/enterprise
+description: Governance, security review, evaluation, and organizational guidance for deploying Agent Skills at enterprise scale.
 ---
 
 This guide is for enterprise admins and architects who need to govern Agent Skills across an organization. It covers how to vet, evaluate, deploy, and manage Skills at scale. For authoring guidance, see [best practices](./agents-and-tools-agent-skills-best-practices.md). For architecture details, see the [Skills overview](./agents-and-tools-agent-skills-overview.md).
@@ -89,7 +89,7 @@ Evaluation results signal when to act:
   </Step>
 
   <Step title="Create and review">
-    Ensure the Skill author follows [best practices](./agents-and-tools-agent-skills-best-practices.md). Require a security review using the [review checklist](#review-checklist). Require an evaluation suite before approval. Establish separation of duties: Skill authors should not be their own reviewers.
+    Ensure the Skill author follows [best practices](./agents-and-tools-agent-skills-best-practices.md). Require a security review using the [review checklist](./agents-and-tools-agent-skills-enterprise.md#review-checklist). Require an evaluation suite before approval. Establish separation of duties: Skill authors should not be their own reviewers.
   </Step>
 
   <Step title="Test">

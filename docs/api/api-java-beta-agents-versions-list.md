@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/java/beta/agents/versions/list"
 category: "api"
 generated: true
 ---
+---
+title: List Agent Versions
+url: https://platform.claude.com/docs/en/api/java/beta/agents/versions/list
+---
+
 ## List Agent Versions
 
 `VersionListPage beta().agents().versions().list(VersionListParamsparams = VersionListParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
@@ -93,6 +98,8 @@ List Agent Versions
     - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
 ### Returns
 
@@ -230,6 +237,10 @@ List Agent Versions
 
           - `MAX("max")`
 
+    - `Optional<String> inferenceGeo`
+
+      Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo.
+
     - `Optional<Speed> speed`
 
       Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
@@ -242,17 +253,33 @@ List Agent Versions
 
     Resolved coordinator topology with a concrete agent roster.
 
-    - `List<BetaManagedAgentsAgentReference> agents`
+    - `List<Agent> agents`
 
       Agents the coordinator may spawn as session threads, each resolved to a specific version.
 
-      - `String id`
+      - `class BetaManagedAgentsAgentReference:`
 
-      - `Type type`
+        A resolved agent reference with a concrete version.
 
-        - `AGENT("agent")`
+        - `String id`
 
-      - `long version`
+        - `Type type`
+
+          - `AGENT("agent")`
+
+        - `long version`
+
+      - `class BetaManagedAgentsAdvisor:`
+
+        Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
+
+        - `String model`
+
+          The advisor model id.
+
+        - `Type type`
+
+          - `ADVISOR("advisor")`
 
     - `Type type`
 
@@ -484,6 +511,7 @@ public final class Main {
         "effort": {
           "type": "low"
         },
+        "inference_geo": "inference_geo",
         "speed": "standard"
       },
       "multiagent": {

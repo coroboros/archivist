@@ -1,13 +1,13 @@
 ---
-title: "Tool runner (SDK)"
+title: "Log at info level"
 source: "https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-runner"
 category: "agents-and-tools"
 generated: true
 ---
-# Tool runner (SDK)
-
-Use the SDK's tool runner to handle the agentic loop, error wrapping, and type safety automatically.
-
+---
+title: Tool runner (SDK)
+url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-runner
+description: Use the SDK's tool runner to handle the agentic loop, error wrapping, and type safety automatically.
 ---
 
 The tool runner handles the agentic loop, error wrapping, and type safety so you don't have to. When you need human-in-the-loop approval, custom logging, or conditional execution, use the [manual loop](./agents-and-tools-tool-use-handle-tool-calls.md) instead.
@@ -781,7 +781,7 @@ Within the loop, you can read each response message and modify the runner's stat
 4. When your loop body returns, the runner checks whether you modified its message history.
 
    * **If you did not modify message history:** If the message contains tool calls, the runner appends the assistant message and the tool results, then continues. If there are no tool calls, the loop exits.
-   * **If you modified message history:** The runner skips its automatic append and uses your state unchanged. See [Taking over message history](#taking-over-message-history).
+   * **If you modified message history:** The runner skips its automatic append and uses your state unchanged. See [Taking over message history](./agents-and-tools-tool-use-tool-runner.md#taking-over-message-history).
 
 ```mermaid
 sequenceDiagram
@@ -1247,7 +1247,7 @@ In the Python and TypeScript SDKs, use the tool response method (`generate_tool_
   </Tab>
 
   <Tab title="PHP">
-    The PHP tool runner does not currently expose tool results before they are appended. Exceptions thrown from a tool's `run` closure are caught and sent to Claude as tool results with `is_error: true` automatically. To inspect or replace error content, use the manual `pushMessages()` pattern shown in [Modifying tool results](#modifying-tool-results).
+    The PHP tool runner does not currently expose tool results before they are appended. Exceptions thrown from a tool's `run` closure are caught and sent to Claude as tool results with `is_error: true` automatically. To inspect or replace error content, use the manual `pushMessages()` pattern shown in [Modifying tool results](./agents-and-tools-tool-use-tool-runner.md#modifying-tool-results).
   </Tab>
 
   <Tab title="Ruby">

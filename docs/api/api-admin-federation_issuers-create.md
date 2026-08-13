@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/federation_issuers/create
 category: "api"
 generated: true
 ---
+---
+title: Create Federation Issuer
+url: https://platform.claude.com/docs/en/api/admin/federation_issuers/create
+---
+
 ## Create Federation Issuer
 
 **post** `/v1/organizations/federation_issuers`

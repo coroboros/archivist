@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/compliance/apps/projects"
 category: "api"
 generated: true
 ---
+---
+title: Projects
+url: https://platform.claude.com/docs/en/api/compliance/apps/projects
+---
+
 # Projects
 
 ## List projects

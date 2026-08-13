@@ -1,13 +1,13 @@
 ---
-title: "Tool search tool"
+title: "Model compatibility"
 source: "https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-search-tool"
 category: "agents-and-tools"
 generated: true
 ---
-# Tool search tool
-
-Scale to hundreds or thousands of tools by letting Claude search your tool catalog and load only the tools it needs.
-
+---
+title: Tool search tool
+url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-search-tool
+description: Scale to hundreds or thousands of tools by letting Claude search your tool catalog and load only the tools it needs.
 ---
 
 The tool search tool lets Claude work with hundreds or thousands of tools by discovering and loading them on demand. Instead of loading all tool definitions into the context window up front, Claude searches your tool catalog (including tool names, descriptions, argument names, and argument descriptions) and loads only the tools it needs.
@@ -17,13 +17,13 @@ Loading every tool definition up front causes two problems as a tool library gro
 * **Context bloat:** A typical multiserver setup (GitHub, Slack, Sentry, Grafana, and Splunk) can consume \~55k tokens in definitions before Claude does any work. Tool search typically reduces this by over 85 percent, loading only the 3–5 tools Claude needs for a given request.
 * **Tool selection accuracy:** Claude's ability to pick the right tool degrades once you exceed 30–50 available tools. Because tool search loads only a focused set of relevant tools on demand, selection accuracy stays high even across thousands of tools.
 
-Tool search is generally available on the Claude API. For supported models, see [Model compatibility](#model-compatibility).
+Tool search is generally available on the Claude API. For supported models, see [Model compatibility](./agents-and-tools-tool-use-tool-search-tool.md#model-compatibility).
 
 <Tip>
   For background on the scaling challenges that tool search solves, see [Advanced tool use](https://www.anthropic.com/engineering/advanced-tool-use). Tool search's on-demand loading is also an instance of the broader just-in-time retrieval principle described in [Effective context engineering](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents).
 </Tip>
 
-Tool search runs as a server-side tool, but you can also implement your own client-side tool search. See [Custom tool search implementation](#custom-tool-search-implementation) for details.
+Tool search runs as a server-side tool, but you can also implement your own client-side tool search. See [Custom tool search implementation](./agents-and-tools-tool-use-tool-search-tool.md#custom-tool-search-implementation) for details.
 
 <Note>
   Share feedback on this feature through the [feedback form](https://forms.gle/MhcGFFwLxuwnWTkYA).
@@ -73,7 +73,7 @@ When you enable the tool search tool:
 2. You provide every tool definition in the `tools` array and set `defer_loading: true` on the tools that shouldn't load up front. At least one tool, normally the tool search tool itself, must stay non-deferred.
 3. Initially, Claude's context contains only the tool search tool and any non-deferred tools.
 4. When Claude needs additional tools, it searches using a tool search tool.
-5. The API runs the search and returns the matching tools as `tool_reference` blocks (up to 5 by default).
+5. The API runs the search and returns the matching tools as `tool_reference` blocks (up to 5 by default; Claude can set a `limit` in its search input).
 6. The API automatically expands these references into full tool definitions.
 7. Claude selects from the discovered tools and calls them.
 
@@ -533,7 +533,7 @@ The following example includes the tool search tool and two deferred tools:
   ```
 </CodeGroup>
 
-Claude searches the catalog, discovers `get_weather`, and calls it. The response ends with `stop_reason: "tool_use"`. Execute the discovered tool and return a `tool_result` as in [Handle tool calls](./agents-and-tools-tool-use-handle-tool-calls.md). [Response format](#response-format) shows the blocks you get back and what to send next.
+Claude searches the catalog, discovers `get_weather`, and calls it. The response ends with `stop_reason: "tool_use"`. Execute the discovered tool and return a `tool_result` as in [Handle tool calls](./agents-and-tools-tool-use-handle-tool-calls.md). [Response format](./agents-and-tools-tool-use-tool-search-tool.md#response-format) shows the blocks you get back and what to send next.
 
 ## Tool definition
 
@@ -620,7 +620,8 @@ When Claude uses the tool search tool, the response includes the following block
       "id": "srvtoolu_01ABC123",
       "name": "tool_search_tool_regex",
       "input": {
-        "pattern": "weather"
+        "pattern": "weather",
+        "limit": 10
       }
     },
     {
@@ -648,7 +649,7 @@ When Claude uses the tool search tool, the response includes the following block
 
 ### Understanding the response
 
-* **`server_tool_use`:** Claude's call to the tool search tool. The search runs on Anthropic's servers. Never return a `tool_result` for its `srvtoolu_...` ID.
+* **`server_tool_use`:** Claude's call to the tool search tool. The search runs on Anthropic's servers. Never return a `tool_result` for its `srvtoolu_...` ID. The `input` holds the search (`pattern` for the regex variant, `query` for BM25) and may include an optional `limit`, an integer from 1 to 10,000 that caps how many matching tools the search returns (default: 5).
 * **`tool_search_tool_result`:** the search results, in a nested `tool_search_tool_search_result` object. Keep it in the message history as is.
 * **`tool_references`:** an array of `tool_reference` objects pointing to discovered tools. The API expands these for Claude. You never expand them yourself.
 * **`tool_use`:** Claude's call to a discovered tool. Execute it and return a `tool_result` exactly as in standard tool use.
@@ -678,7 +679,7 @@ You can implement your own tool search logic (for example, using embeddings or s
 Every tool referenced must have a corresponding tool definition in the top-level `tools` parameter, normally with `defer_loading: true`. This lets you use search methods the built-in variants don't provide, such as embedding-based retrieval, and the API expands the returned `tool_reference` blocks the same way.
 
 <Note>
-  The `tool_search_tool_result` format shown in the [Response format](#response-format) section is the server-side format used internally by Anthropic's built-in tool search. For custom client-side implementations, always use the standard `tool_result` format with `tool_reference` content blocks as shown in the preceding example.
+  The `tool_search_tool_result` format shown in the [Response format](./agents-and-tools-tool-use-tool-search-tool.md#response-format) section is the server-side format used internally by Anthropic's built-in tool search. For custom client-side implementations, always use the standard `tool_result` format with `tool_reference` content blocks as shown in the preceding example.
 </Note>
 
 For a complete example using embeddings, see the [tool search with embeddings](https://platform.claude.com/cookbook/tool-use-tool-search-with-embeddings) recipe.
@@ -821,9 +822,9 @@ You can include the tool search tool in the [Messages Batches API](../build-with
 ### Limits
 
 * **Maximum deferred tools:** 10,000 tools with `defer_loading: true` per request
-* **Search results:** each search returns up to 5 matching tools by default
+* **Search results:** each search returns up to 5 matching tools by default; Claude can set `limit` in its search input to any integer from 1 to 10,000
 * **Pattern and query length:** maximum 200 characters for regex patterns and 500 characters for BM25 queries
-* **Model support:** see [Model compatibility](#model-compatibility)
+* **Model support:** see [Model compatibility](./agents-and-tools-tool-use-tool-search-tool.md#model-compatibility)
 
 ### When to use tool search
 

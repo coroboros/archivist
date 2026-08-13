@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/api_keys/retrieve"
 category: "api"
 generated: true
 ---
+---
+title: Retrieve API Key (Admin API)
+url: https://platform.claude.com/docs/en/api/admin/api_keys/retrieve
+---
+
 ## Retrieve API Key (Admin API)
 
 **get** `/v1/organizations/api_keys/{api_key_id}`

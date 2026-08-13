@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/cli/beta/environments/work/poll
 category: "api"
 generated: true
 ---
+---
+title: Poll for Work
+url: https://platform.claude.com/docs/en/api/cli/beta/environments/work/poll
+---
+
 ## Poll for Work
 
 `$ ant beta:environments:work poll`

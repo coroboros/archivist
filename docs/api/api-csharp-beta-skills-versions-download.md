@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/csharp/beta/skills/versions/dow
 category: "api"
 generated: true
 ---
+---
+title: Download Skill Version Content
+url: https://platform.claude.com/docs/en/api/csharp/beta/skills/versions/download
+---
+
 ## Download Skill Version Content
 
 `HttpResponse Beta.Skills.Versions.Download(VersionDownloadParamsparameters, CancellationTokencancellationToken = default)`
@@ -95,6 +100,8 @@ Download a skill version's content as a zip archive.
     - `"fallback-credit-2026-07-01"FallbackCredit2026_07_01`
 
     - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
+
+    - `"mid-conversation-tool-changes-2026-07-01"MidConversationToolChanges2026_07_01`
 
 ### Example
 

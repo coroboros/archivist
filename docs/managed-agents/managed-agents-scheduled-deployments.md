@@ -1,13 +1,13 @@
 ---
-title: "Scheduled deployments"
+title: "Create a scheduled deployment"
 source: "https://platform.claude.com/docs/en/managed-agents/scheduled-deployments"
 category: "managed-agents"
 generated: true
 ---
-# Scheduled deployments
-
-Create and manage deployments with the Claude API: run an agent on a recurring cron schedule and inspect its run history.
-
+---
+title: Scheduled deployments
+url: https://platform.claude.com/docs/en/managed-agents/scheduled-deployments
+description: "Create and manage deployments with the Claude API: run an agent on a recurring cron schedule and inspect its run history."
 ---
 
 A **scheduled deployment** allows an [agent](./managed-agents-agent-setup.md) to start [sessions](./managed-agents-sessions.md) autonomously, enabling task completion over a predictable cadence. You create and manage deployments with the Deployments API, part of the Claude API.
@@ -27,7 +27,7 @@ When creating a deployment, you pass the [session configurations](./managed-agen
 * In the `schedule`, you define a cron `expression` and a `timezone`. Maximum granularity supported is at the minute level.
 
 <CodeGroup defaultLanguage="CLI">
-  ```bash curl
+  ```bash cURL
   DEPLOYMENT_ID=$(
     curl --fail-with-body -sS "https://api.anthropic.com/v1/deployments?beta=true" \
       -H "x-api-key: $ANTHROPIC_API_KEY" \
@@ -266,9 +266,9 @@ See the [Create Deployment reference](../api/api-beta-deployments-create.md) for
 
 ### Set a budget on each run
 
-Pass the optional `budget` object when you create or update the deployment. It takes the same shape as a [session budget](https://platform.claude.com/docs/en/managed-agents/budgets.md). The deployment copies the cap onto each session it starts, so the budget bounds every run separately rather than acting as a cumulative ceiling across runs: a deployment with a `"2000"` cap can spend up to about $20 on every run.
+Pass the optional `budget` object when you create or update the deployment. It takes the same shape as a [session budget](./managed-agents-budgets.md). The deployment copies the cap onto each session it starts, so the budget bounds every run separately rather than acting as a cumulative ceiling across runs: a deployment with a `"2000"` cap can spend up to about $20 on every run.
 
-A session started by the deployment behaves exactly like any other budgeted session: it pauses with `budget_reached` when its own list cost [reaches the cap](https://platform.claude.com/docs/en/managed-agents/budgets.md#when-a-session-reaches-its-budget). Changing the deployment's budget applies to runs started afterward; a session already running keeps the cap it started with, which you can [change through the session itself](./managed-agents-session-operations.md#updating-the-session-budget). Unlike a session budget, a deployment's budget can be removed with `"budget": null` and set again later.
+A session started by the deployment behaves exactly like any other budgeted session: it pauses with `budget_reached` when its own list cost [reaches the cap](./managed-agents-budgets.md#when-a-session-reaches-its-budget). Changing the deployment's budget applies to runs started afterward; a session already running keeps the cap it started with, which you can [change through the session itself](./managed-agents-session-operations.md#updating-the-session-budget). Unlike a session budget, a deployment's budget can be removed with `"budget": null` and set again later.
 
 The following example sets a budget on an existing deployment:
 
@@ -297,7 +297,7 @@ Successful deployments generate active sessions, and a successful deployment run
 List all deployment runs for a deployment as follows:
 
 <CodeGroup defaultLanguage="CLI">
-  ```bash curl
+  ```bash cURL
   curl --fail-with-body -sS "https://api.anthropic.com/v1/deployment_runs?beta=true&deployment_id=$DEPLOYMENT_ID" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
@@ -386,7 +386,7 @@ List all deployment runs for a deployment as follows:
 You can additionally filter on deployment runs with errors:
 
 <CodeGroup defaultLanguage="CLI">
-  ```bash curl
+  ```bash cURL
   curl --fail-with-body -sS "https://api.anthropic.com/v1/deployment_runs?beta=true&deployment_id=$DEPLOYMENT_ID&has_error=true" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
@@ -496,7 +496,7 @@ Each lifecycle change emits a [webhook event](./managed-agents-webhooks.md#suppo
 **Pause** suppresses scheduled triggers on a go-forward basis; running sessions from a prior deployment run continue to execute. Manual runs through the `run` endpoint are still allowed while paused. Pausing sets `paused_reason` to `{"type": "manual"}`; unpausing clears it.
 
 <CodeGroup defaultLanguage="CLI">
-  ```bash curl
+  ```bash cURL
   curl --fail-with-body -sS -X POST "https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/pause?beta=true" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
@@ -541,7 +541,7 @@ Each lifecycle change emits a [webhook event](./managed-agents-webhooks.md#suppo
 **Unpause** resumes the schedule from the next scheduled occurrence. Missed triggers are not backfilled.
 
 <CodeGroup defaultLanguage="CLI">
-  ```bash curl
+  ```bash cURL
   curl --fail-with-body -sS -X POST "https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause?beta=true" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
@@ -586,7 +586,7 @@ Each lifecycle change emits a [webhook event](./managed-agents-webhooks.md#suppo
 **Archive**, unlike **pause**, is terminal: the schedule terminates and the deployment cannot be modified.
 
 <CodeGroup defaultLanguage="CLI">
-  ```bash curl
+  ```bash cURL
   curl --fail-with-body -sS -X POST "https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/archive?beta=true" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
@@ -639,7 +639,7 @@ If a deployment's agent has been archived, the deployment is automatically archi
 To run a deployment outside its schedule, call the [`run` endpoint](../api/api-beta-deployments-run.md). This creates a session immediately and writes a deployment run with `trigger_context.type: "manual"`. This allows you to test a deployment before committing to the schedule.
 
 <CodeGroup defaultLanguage="CLI">
-  ```bash curl
+  ```bash cURL
   curl --fail-with-body -sS -X POST "https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/run?beta=true" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \

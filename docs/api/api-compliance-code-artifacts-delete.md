@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/compliance/code/artifacts/delet
 category: "api"
 generated: true
 ---
+---
+title: Delete Code Artifact
+url: https://platform.claude.com/docs/en/api/compliance/code/artifacts/delete
+---
+
 ## Delete Code Artifact
 
 **delete** `/v1/compliance/apps/code/artifacts/{artifact_id}`

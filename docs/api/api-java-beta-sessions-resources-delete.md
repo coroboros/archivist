@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/java/beta/sessions/resources/de
 category: "api"
 generated: true
 ---
+---
+title: Delete Session Resource
+url: https://platform.claude.com/docs/en/api/java/beta/sessions/resources/delete
+---
+
 ## Delete Session Resource
 
 `BetaManagedAgentsDeleteSessionResource beta().sessions().resources().delete(ResourceDeleteParamsparams, RequestOptionsrequestOptions = RequestOptions.none())`
@@ -87,6 +92,8 @@ Delete Session Resource
     - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
 ### Returns
 

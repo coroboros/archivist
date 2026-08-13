@@ -1,13 +1,13 @@
 ---
-title: "MCP connector"
+title: "Declare MCP servers on the agent"
 source: "https://platform.claude.com/docs/en/managed-agents/mcp-connector"
 category: "managed-agents"
 generated: true
 ---
-# MCP connector
-
-Connect MCP servers to your agents for access to external tools and data sources.
-
+---
+title: MCP connector
+url: https://platform.claude.com/docs/en/managed-agents/mcp-connector
+description: Connect MCP servers to your agents for access to external tools and data sources.
 ---
 
 Claude Managed Agents supports connecting [Model Context Protocol (MCP)](https://modelcontextprotocol.io) servers to your agents. This gives the agent access to external tools, data sources, and services through a standardized protocol.
@@ -30,7 +30,7 @@ Specify MCP servers in the `mcp_servers` array when creating an agent. Each serv
 Each declared server also needs a matching `mcp_toolset` entry in the `tools` array. The toolset's `mcp_server_name` must match the server's `name`.
 
 <CodeGroup defaultLanguage="CLI">
-  ```bash curl
+  ```bash cURL
   agent_response=$(curl -sS --fail-with-body https://api.anthropic.com/v1/agents \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
@@ -230,9 +230,9 @@ Each declared server also needs a matching `mcp_toolset` entry in the `tools` ar
 
 Each entry in the `mcp_servers` array defines one connection.
 
-| Field  | Description                                                                                                                                                                                                                                  |
-| ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `type` | Required. Must be `"url"`.                                                                                                                                                                                                                   |
+| Field  | Description                                                                                                                                                                                                                                                             |
+| ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type` | Required. Must be `"url"`.                                                                                                                                                                                                                                              |
 | `name` | Required. A unique name for this server within the agent (1–255 characters). Used as the `mcp_server_name` in the `tools` array and surfaced on MCP tool events in the [session event stream](./managed-agents-events-and-streaming.md). |
 | `url`  | Required. The endpoint of the remote MCP server (up to 2,048 characters). See [Supported MCP server types](./managed-agents-reference.md#supported-mcp-server-types) for transport requirements.                                         |
 
@@ -283,7 +283,7 @@ When an MCP tool output exceeds 100,000 characters (about 25,000 tokens), it is 
 When starting a session, pass `vault_ids` to provide credentials for your MCP servers. Vaults are collections of credentials that you register once and reference by ID. See [Authenticate with vaults](./managed-agents-vaults.md) for how to create vaults and manage credentials.
 
 <CodeGroup>
-  ```bash curl
+  ```bash cURL
   session_response=$(curl -sS --fail-with-body https://api.anthropic.com/v1/sessions \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \

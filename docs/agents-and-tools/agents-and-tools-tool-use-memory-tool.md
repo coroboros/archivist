@@ -1,13 +1,13 @@
 ---
-title: "Memory tool"
+title: "Use cases"
 source: "https://platform.claude.com/docs/en/agents-and-tools/tool-use/memory-tool"
 category: "agents-and-tools"
 generated: true
 ---
-# Memory tool
-
-Let Claude store and retrieve information across conversations by implementing the memory tool's file operations in your application.
-
+---
+title: Memory tool
+url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/memory-tool
+description: Let Claude store and retrieve information across conversations by implementing the memory tool's file operations in your application.
 ---
 
 The memory tool lets Claude store and retrieve information across conversations in a directory of memory files. Claude can create, read, update, and delete files that persist between sessions, building up knowledge over time without keeping everything in the context window.
@@ -34,7 +34,7 @@ The memory tool operates client-side: Claude requests file operations, and your 
 
 When the memory tool is enabled, Claude automatically checks its memory directory before starting a task. As it works, Claude stores what it learns in files under `/memories` and reads them back in later conversations to continue earlier work.
 
-Because the memory tool is client-side, Claude only requests memory operations. Your application executes each request against storage you control and returns the result in a `tool_result` block (see [Handle tool calls](./agents-and-tools-tool-use-handle-tool-calls.md)). The `/memories` path is a prefix that your handler maps onto real storage, such as a per-user directory or keys in a database. Memory lives entirely in your application. A later conversation continues from the same memory when it sends the same `tools` entry and your handler serves the same store. For security, restrict all memory operations to the `/memories` directory (see [Path traversal protection](#path-traversal-protection)).
+Because the memory tool is client-side, Claude only requests memory operations. Your application executes each request against storage you control and returns the result in a `tool_result` block (see [Handle tool calls](./agents-and-tools-tool-use-handle-tool-calls.md)). The `/memories` path is a prefix that your handler maps onto real storage, such as a per-user directory or keys in a database. Memory lives entirely in your application. A later conversation continues from the same memory when it sends the same `tools` entry and your handler serves the same store. For security, restrict all memory operations to the `/memories` directory (see [Path traversal protection](./agents-and-tools-tool-use-memory-tool.md#path-traversal-protection)).
 
 ### Example: How memory tool calls work
 
@@ -113,7 +113,7 @@ The memory tool is available on all Claude 4 and later models. For the full list
 The memory tool is generally available on the Messages API: no beta header is required. Using it takes two steps:
 
 1. Add the memory tool to your request. The `tools` entry `{"type": "memory_20250818", "name": "memory"}` is the entire configuration: the `name` must be `memory`, and you don't define an input schema for an Anthropic-provided tool.
-2. Implement a client-side handler for each memory command. Your handler must reject paths outside `/memories`, so read [Path traversal protection](#path-traversal-protection) before you write it.
+2. Implement a client-side handler for each memory command. Your handler must reject paths outside `/memories`, so read [Path traversal protection](./agents-and-tools-tool-use-memory-tool.md#path-traversal-protection) before you write it.
 
 ## Basic usage
 
@@ -716,7 +716,7 @@ Four SDKs provide memory tool helpers that handle the tool interface and the loo
   ```
 </CodeGroup>
 
-The in-memory stores in the Go, PHP, and Ruby examples keep them self-contained: each one dispatches on the `command` field in the `tool_use` block's `input` and returns the strings described under [Tool commands](#tool-commands). A production handler also needs the [path validation](#path-traversal-protection) these demonstration stores skip. For the SDKs' own complete examples, see:
+The in-memory stores in the Go, PHP, and Ruby examples keep them self-contained: each one dispatches on the `command` field in the `tool_use` block's `input` and returns the strings described under [Tool commands](./agents-and-tools-tool-use-memory-tool.md#tool-commands). A production handler also needs the [path validation](./agents-and-tools-tool-use-memory-tool.md#path-traversal-protection) these demonstration stores skip. For the SDKs' own complete examples, see:
 
 * Python: [examples/memory/basic.py](https://github.com/anthropics/anthropic-sdk-python/blob/main/examples/memory/basic.py)
 * TypeScript: [examples/tools-helpers-memory.ts](https://github.com/anthropics/anthropic-sdk-typescript/blob/main/examples/tools-helpers-memory.ts)
@@ -969,7 +969,7 @@ Consider these safeguards:
 
 ## Error handling
 
-The memory tool uses similar error-handling patterns to the [text editor tool](./agents-and-tools-tool-use-text-editor-tool.md#handle-errors). Each command's error messages are listed under [Tool commands](#tool-commands). To return an error to Claude, set `is_error` to `true` on the tool result and put the message in `content`:
+The memory tool uses similar error-handling patterns to the [text editor tool](./agents-and-tools-tool-use-text-editor-tool.md#handle-errors). Each command's error messages are listed under [Tool commands](./agents-and-tools-tool-use-memory-tool.md#tool-commands). To return an error to Claude, set `is_error` to `true` on the tool result and put the message in `content`:
 
 ```json
 {

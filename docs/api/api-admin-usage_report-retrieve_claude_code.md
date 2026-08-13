@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/usage_report/retrieve_cla
 category: "api"
 generated: true
 ---
+---
+title: Get Claude Code Usage Report
+url: https://platform.claude.com/docs/en/api/admin/usage_report/retrieve_claude_code
+---
+
 ## Get Claude Code Usage Report
 
 **get** `/v1/organizations/usage_report/claude_code`

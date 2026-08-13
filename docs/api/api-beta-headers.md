@@ -1,13 +1,13 @@
 ---
-title: "Beta headers"
+title: "How to use beta headers"
 source: "https://platform.claude.com/docs/en/api/beta-headers"
 category: "api"
 generated: true
 ---
-# Beta headers
-
-Access experimental features before general availability with the `anthropic-beta` header or the SDKs' `betas` parameter.
-
+---
+title: Beta headers
+url: https://platform.claude.com/docs/en/api/beta-headers
+description: Access experimental features before general availability with the `anthropic-beta` header or the SDKs' `betas` parameter.
 ---
 
 Beta headers allow you to access experimental features and new model capabilities before they become part of the standard API.

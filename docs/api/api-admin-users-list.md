@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/users/list"
 category: "api"
 generated: true
 ---
+---
+title: List Users
+url: https://platform.claude.com/docs/en/api/admin/users/list
+---
+
 ## List Users
 
 **get** `/v1/organizations/users`

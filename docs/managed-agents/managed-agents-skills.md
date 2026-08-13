@@ -1,23 +1,23 @@
 ---
-title: "Skills"
+title: "Create a custom skill"
 source: "https://platform.claude.com/docs/en/managed-agents/skills"
 category: "managed-agents"
 generated: true
 ---
-# Skills
-
-Attach reusable, filesystem-based expertise to your agent for domain-specific workflows.
-
+---
+title: Skills
+url: https://platform.claude.com/docs/en/managed-agents/skills
+description: Attach reusable, filesystem-based expertise to your agent for domain-specific workflows.
 ---
 
 Skills are reusable, filesystem-based resources that give your agent domain-specific expertise: workflows, context, and best practices that turn a general-purpose agent into a specialist. Each skill you add incurs a modest cost on the session's context window, adding instructions and metadata that help the model use the skill. Learn more in the [Agent Skills](../agents-and-tools/agents-and-tools-agent-skills-overview.md) overview.
 
-Skills reach your agent in two ways: attach them through the agent's `skills` array, or [load them from a GitHub repository](#load-skills-from-a-github-repository) mounted on the session. Attached skills come in two types. All skills work the same way: your agent invokes them automatically when they are relevant to the task.
+Skills reach your agent in two ways: attach them through the agent's `skills` array, or [load them from a GitHub repository](./managed-agents-skills.md#load-skills-from-a-github-repository) mounted on the session. Attached skills come in two types. All skills work the same way: your agent invokes them automatically when they are relevant to the task.
 
 * **Pre-built Anthropic skills:** Common document tasks such as PowerPoint, Excel, Word, and PDF handling (`pptx`, `xlsx`, `docx`, `pdf`).
 * **Custom skills:** Skills you author and upload to your workspace.
 
-To learn how to author custom skills, see [Agent Skills](../agents-and-tools/agents-and-tools-agent-skills-overview.md) and [Skill authoring best practices](../agents-and-tools/agents-and-tools-agent-skills-best-practices.md). To upload a custom skill to your workspace, see [Create a custom skill](#create-a-custom-skill).
+To learn how to author custom skills, see [Agent Skills](../agents-and-tools/agents-and-tools-agent-skills-overview.md) and [Skill authoring best practices](../agents-and-tools/agents-and-tools-agent-skills-best-practices.md). To upload a custom skill to your workspace, see [Create a custom skill](./managed-agents-skills.md#create-a-custom-skill).
 
 <Note>
   Managed Agents API requests require the `managed-agents-2026-04-01` beta header, except memory store endpoints, which use `agent-memory-2026-07-22` instead. The SDK sets the correct beta header automatically. See [Beta headers](../api/api-beta-headers.md#endpoint-specific-headers).
@@ -25,7 +25,7 @@ To learn how to author custom skills, see [Agent Skills](../agents-and-tools/age
 
 ## Create a custom skill
 
-A custom skill is a directory containing a `SKILL.md` file plus any supporting files, uploaded to your workspace as a zip archive or as individual files. Creating the skill returns the `skill_*` ID you reference when attaching it to an agent. Anthropic pre-built skills are already available in every workspace and don't require this step. To use only pre-built skills, skip to [Attach skills to an agent](#attach-skills-to-an-agent).
+A custom skill is a directory containing a `SKILL.md` file plus any supporting files, uploaded to your workspace as a zip archive or as individual files. Creating the skill returns the `skill_*` ID you reference when attaching it to an agent. Anthropic pre-built skills are already available in every workspace and don't require this step. To use only pre-built skills, skip to [Attach skills to an agent](./managed-agents-skills.md#attach-skills-to-an-agent).
 
 When you call the Skills API directly with cURL, pass the `anthropic-beta: skills-2025-10-02` header explicitly. The CLI and SDKs send it automatically.
 
@@ -203,11 +203,11 @@ Attach skills when creating an agent. Each [session](./managed-agents-sessions.m
 
 Each entry in the `skills` array uses the following fields:
 
-| Field      | Description                                                                                                                                                                                               |
-| ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `type`     | Either `anthropic` for pre-built skills or `custom` for workspace-authored skills.                                                                                                                        |
-| `skill_id` | The skill identifier. For Anthropic skills, use the short name (for example, `xlsx`). For custom skills, use the `skill_*` ID returned at creation (see [Create a custom skill](#create-a-custom-skill)). |
-| `version`  | Pin to a specific version or use `latest`. Optional. Defaults to `latest` when omitted. Applies to both Anthropic and custom skills.                                                                      |
+| Field      | Description                                                                                                                                                                                                                                                        |
+| ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `type`     | Either `anthropic` for pre-built skills or `custom` for workspace-authored skills.                                                                                                                                                                                 |
+| `skill_id` | The skill identifier. For Anthropic skills, use the short name (for example, `xlsx`). For custom skills, use the `skill_*` ID returned at creation (see [Create a custom skill](./managed-agents-skills.md#create-a-custom-skill)). |
+| `version`  | Pin to a specific version or use `latest`. Optional. Defaults to `latest` when omitted. Applies to both Anthropic and custom skills.                                                                                                                               |
 
 <CodeGroup defaultLanguage="CLI">
   ```bash cURL
@@ -409,27 +409,157 @@ A `.claude/skills` directory elsewhere in the repository, such as inside a packa
 
 Repository skills use the same `SKILL.md` format as the custom skills you upload. For the format and authoring guidance, see [Agent Skills](../agents-and-tools/agents-and-tools-agent-skills-overview.md) and [Skill authoring best practices](../agents-and-tools/agents-and-tools-agent-skills-best-practices.md).
 
-To load skills from a repository, create a session that mounts it:
+To load skills from a repository, create a session that mounts it. This is the same request shown in [Accessing GitHub](./managed-agents-github.md#token-permissions); `mount_path` is optional and defaults to `/workspace/<repo-name>`:
 
-```bash cURL
-curl -sS https://api.anthropic.com/v1/sessions \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: managed-agents-2026-04-01" \
-  --json @- <<'EOF'
-{
-  "agent": "agent_01J8XkN5uT3vHpLqRfWdY2",
-  "environment_id": "env_01K2mPsT7hNwR4jXuLvCqD8",
-  "resources": [
-    {
-      "type": "github_repository",
-      "url": "https://github.com/org/repo",
-      "authorization_token": "ghp_your_github_token"
-    }
-  ]
-}
-EOF
-```
+<CodeGroup defaultLanguage="CLI">
+  ```bash cURL
+  session_id=$(curl -fsS https://api.anthropic.com/v1/sessions \
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-beta: managed-agents-2026-04-01" \
+    -H "content-type: application/json" \
+    --data @- <<JSON | jq -r '.id'
+  {
+    "agent": "$agent_id",
+    "environment_id": "$environment_id",
+    "resources": [
+      {
+        "type": "github_repository",
+        "url": "https://github.com/org/repo",
+        "mount_path": "/workspace/repo",
+        "authorization_token": "ghp_your_github_token"
+      }
+    ]
+  }
+  JSON
+  )
+  ```
+
+  ```bash CLI
+  SESSION_ID=$(ant beta:sessions create \
+    --agent "$AGENT_ID" \
+    --environment-id "$ENVIRONMENT_ID" \
+    --transform id --raw-output <<'EOF'
+  resources:
+    - type: github_repository
+      url: https://github.com/org/repo
+      mount_path: /workspace/repo
+      authorization_token: ghp_your_github_token
+  EOF
+  )
+  ```
+
+  ```python Python
+  session = client.beta.sessions.create(
+      agent=agent.id,
+      environment_id=environment.id,
+      resources=[
+          {
+              "type": "github_repository",
+              "url": "https://github.com/org/repo",
+              "mount_path": "/workspace/repo",
+              "authorization_token": "ghp_your_github_token",
+          },
+      ],
+  )
+  ```
+
+  ```typescript TypeScript
+  const session = await client.beta.sessions.create({
+    agent: agent.id,
+    environment_id: environment.id,
+    resources: [
+      {
+        type: "github_repository",
+        url: "https://github.com/org/repo",
+        mount_path: "/workspace/repo",
+        authorization_token: "ghp_your_github_token",
+      },
+    ],
+  });
+  ```
+
+  ```csharp C#
+  var session = await client.Beta.Sessions.Create(new()
+  {
+      Agent = agent.ID,
+      EnvironmentID = environment.ID,
+      Resources =
+      [
+          new BetaManagedAgentsGitHubRepositoryResourceParams
+          {
+              Type = "github_repository",
+              Url = "https://github.com/org/repo",
+              MountPath = "/workspace/repo",
+              AuthorizationToken = "ghp_your_github_token",
+          },
+      ],
+  });
+  ```
+
+  ```go Go
+  session, err := client.Beta.Sessions.New(ctx, anthropic.BetaSessionNewParams{
+  	Agent:         anthropic.BetaSessionNewParamsAgentUnion{OfString: anthropic.String(agent.ID)},
+  	EnvironmentID: environment.ID,
+  	Resources: []anthropic.BetaSessionNewParamsResourceUnion{
+  		{
+  			OfGitHubRepository: &anthropic.BetaManagedAgentsGitHubRepositoryResourceParams{
+  				Type:               anthropic.BetaManagedAgentsGitHubRepositoryResourceParamsTypeGitHubRepository,
+  				URL:                "https://github.com/org/repo",
+  				MountPath:          anthropic.String("/workspace/repo"),
+  				AuthorizationToken: "ghp_your_github_token",
+  			},
+  		},
+  	},
+  })
+  if err != nil {
+  	panic(err)
+  }
+  ```
+
+  ```java Java
+  var session = client.beta().sessions().create(SessionCreateParams.builder()
+      .agent(agent.id())
+      .environmentId(environment.id())
+      .addResource(BetaManagedAgentsGitHubRepositoryResourceParams.builder()
+          .type(BetaManagedAgentsGitHubRepositoryResourceParams.Type.GITHUB_REPOSITORY)
+          .url("https://github.com/org/repo")
+          .mountPath("/workspace/repo")
+          .authorizationToken("ghp_your_github_token")
+          .build())
+      .build());
+  ```
+
+  ```php PHP
+  $session = $client->beta->sessions->create(
+      agent: $agent->id,
+      environmentID: $environment->id,
+      resources: [
+          [
+              'type' => 'github_repository',
+              'url' => 'https://github.com/org/repo',
+              'mountPath' => '/workspace/repo',
+              'authorizationToken' => 'ghp_your_github_token',
+          ],
+      ],
+  );
+  ```
+
+  ```ruby Ruby
+  session = client.beta.sessions.create(
+    agent: agent.id,
+    environment_id: environment.id,
+    resources: [
+      {
+        type: "github_repository",
+        url: "https://github.com/org/repo",
+        mount_path: "/workspace/repo",
+        authorization_token: "ghp_your_github_token"
+      }
+    ]
+  )
+  ```
+</CodeGroup>
 
 For private repositories, the resource's `authorization_token` must have access to the repository. This is the same personal access token flow used for any repository mount; see [Accessing GitHub](./managed-agents-github.md#token-permissions).
 

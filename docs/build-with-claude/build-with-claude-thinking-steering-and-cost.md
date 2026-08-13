@@ -1,13 +1,13 @@
 ---
-title: "Steering thinking"
+title: "How Claude decides when to think"
 source: "https://platform.claude.com/docs/en/build-with-claude/thinking-steering-and-cost"
 category: "build-with-claude"
 generated: true
 ---
-# Steering thinking
-
-Steer how often and how deeply Claude thinks with effort levels, system prompt guidance, and per-message steering, and understand thinking's cost and pricing.
-
+---
+title: Steering thinking
+url: https://platform.claude.com/docs/en/build-with-claude/thinking-steering-and-cost
+description: Steer how often and how deeply Claude thinks with effort levels, system prompt guidance, and per-message steering, and understand thinking's cost and pricing.
 ---
 
 <Note>
@@ -26,7 +26,7 @@ Thinking is optional for the model. On each request, Claude weighs the complexit
 
 The decision happens per request. The same conversation can contain turns with and without thinking, and a turn where Claude chose not to think contains no thinking block. Don't build application logic that assumes every assistant turn starts with one.
 
-The primary control over this decision is the [effort](./build-with-claude-effort.md) parameter, which acts as soft guidance for how willing Claude should be to think and how deeply; see [Effort levels](#effort-levels) on this page for what each level does.
+The primary control over this decision is the [effort](./build-with-claude-effort.md) parameter, which acts as soft guidance for how willing Claude should be to think and how deeply; see [Effort levels](./build-with-claude-thinking-steering-and-cost.md#effort-levels) on this page for what each level does.
 
 If you want Claude to think less often, lower the effort level before reaching for prompt-based steering.
 
@@ -124,7 +124,7 @@ The relaxation is about validation, not about what you should send. When you hav
 
 Consecutive requests that keep the same thinking configuration and effort level preserve prompt caching; see [Thinking and prompt caching](./build-with-claude-thinking.md#thinking-and-prompt-caching) for the full rules. The resolved effort value is rendered into the prompt, so changing it between requests invalidates cache breakpoints, just as changing the legacy [`budget_tokens`](./build-with-claude-extended-thinking.md#extended-thinking-with-prompt-caching) parameter does on models that use it. Setting `effort` explicitly to the model's default is equivalent to omitting it and does not break the cache.
 
-The practical consequence: pick a thinking configuration and an effort level per conversation and keep them. If some turns need more or less thinking, steer with [per-message prompting](#tuning-thinking-behavior): guidance appended to the newest user message leaves earlier cache breakpoints intact, where a configuration or effort change does not.
+The practical consequence: pick a thinking configuration and an effort level per conversation and keep them. If some turns need more or less thinking, steer with [per-message prompting](./build-with-claude-thinking-steering-and-cost.md#tuning-thinking-behavior): guidance appended to the newest user message leaves earlier cache breakpoints intact, where a configuration or effort change does not.
 
 The following example demonstrates the invalidation with a multi-turn script you can run yourself:
 

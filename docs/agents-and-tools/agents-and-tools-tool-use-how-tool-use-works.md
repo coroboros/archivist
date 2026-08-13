@@ -1,13 +1,13 @@
 ---
-title: "How tool use works"
+title: "The tool-use contract"
 source: "https://platform.claude.com/docs/en/agents-and-tools/tool-use/how-tool-use-works"
 category: "agents-and-tools"
 generated: true
 ---
-# How tool use works
-
-Understand the tool use loop, where tools execute, and when to use tools instead of prose.
-
+---
+title: How tool use works
+url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/how-tool-use-works
+description: Understand the tool use loop, where tools execute, and when to use tools instead of prose.
 ---
 
 This page explains the concepts behind tool use: where tools run, how the agentic loop works, and when tool use is the right approach. For hands-on guidance, start with the [Build a tool-using agent](./agents-and-tools-tool-use-build-a-tool-using-agent.md) tutorial or the [Define tools](./agents-and-tools-tool-use-define-tools.md) guide.
@@ -38,7 +38,7 @@ The execution model is identical to user-defined tools: the response contains a 
 
 For [`web_search`](./agents-and-tools-tool-use-web-search-tool.md), [`web_fetch`](./agents-and-tools-tool-use-web-fetch-tool.md), [`code_execution`](./agents-and-tools-tool-use-code-execution-tool.md), and [`tool_search`](./agents-and-tools-tool-use-tool-search-tool.md), Anthropic runs the code. You enable the tool in your request and the server handles everything else. You never construct a `tool_result` block for these tools. When a turn calls only [server tools](./agents-and-tools-tool-use-server-tools.md), the server-side loop executes the operation and feeds the output back to the model before the response reaches you, unless the loop stops before it finishes, most often because it pauses.
 
-The response you receive contains `server_tool_use` blocks showing what ran and what came back. In the common case, execution is already complete by the time you see them, and your application's job is to enable the tool and read the final answer rather than to participate in the execution loop; the main exceptions are a paused loop ([`pause_turn`](#the-server-side-loop)) and a turn that also calls a client tool.
+The response you receive contains `server_tool_use` blocks showing what ran and what came back. In the common case, execution is already complete by the time you see them, and your application's job is to enable the tool and read the final answer rather than to participate in the execution loop; the main exceptions are a paused loop ([`pause_turn`](./agents-and-tools-tool-use-how-tool-use-works.md#the-server-side-loop)) and a turn that also calls a client tool.
 
 ## The agentic loop (client tools)
 
@@ -83,8 +83,8 @@ Tool use doesn't fit when:
 
 ## Choosing between approaches
 
-| Approach                      | When to use it                                                | What to expect                                                                        | Learn more                                                          |
-| ----------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| Approach                      | When to use it                                                | What to expect                                                                        | Learn more                                                                                     |
+| ----------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
 | User-defined client tools     | Custom business logic, internal APIs, proprietary data        | You handle execution and the agentic loop                                             | [Define tools](./agents-and-tools-tool-use-define-tools.md)     |
 | Anthropic-schema client tools | Standard dev operations (bash, file editing, browser control) | You handle execution; Claude calls the tool reliably because the schema is trained-in | [Tool reference](./agents-and-tools-tool-use-tool-reference.md) |
 | Server-executed tools         | Web search, code sandbox, web fetch                           | Anthropic handles execution; you read the results instead of producing them           | [Server tools](./agents-and-tools-tool-use-server-tools.md)     |

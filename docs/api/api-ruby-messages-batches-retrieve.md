@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/ruby/messages/batches/retrieve"
 category: "api"
 generated: true
 ---
+---
+title: Retrieve a Message Batch
+url: https://platform.claude.com/docs/en/api/ruby/messages/batches/retrieve
+---
+
 ## Retrieve a Message Batch
 
 `messages.batches.retrieve(message_batch_id) -> MessageBatch`

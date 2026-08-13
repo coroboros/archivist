@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/invites"
 category: "api"
 generated: true
 ---
+---
+title: Invites
+url: https://platform.claude.com/docs/en/api/admin/invites
+---
+
 # Invites
 
 ## Create Invite

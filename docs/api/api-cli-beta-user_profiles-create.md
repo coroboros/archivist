@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/cli/beta/user_profiles/create"
 category: "api"
 generated: true
 ---
+---
+title: Create User Profile
+url: https://platform.claude.com/docs/en/api/cli/beta/user_profiles/create
+---
+
 ## Create User Profile
 
 `$ ant beta:user-profiles create`

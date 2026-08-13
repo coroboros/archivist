@@ -1,13 +1,13 @@
 ---
-title: "Query the Activity Feed"
+title: "Fetch the first page (newest activities first) and capture its trailing cursor."
 source: "https://platform.claude.com/docs/en/manage-claude/compliance-activity-feed"
 category: "manage-claude"
 generated: true
 ---
-# Query the Activity Feed
-
-Retrieve, filter, and paginate your organization's Compliance API Activity Feed.
-
+---
+title: Query the Activity Feed
+url: https://platform.claude.com/docs/en/manage-claude/compliance-activity-feed
+description: Retrieve, filter, and paginate your organization's Compliance API Activity Feed.
 ---
 
 <Note>
@@ -94,7 +94,7 @@ To page through activities:
 * Pass `first_id` as `before_id` to return to the previous page.
 * Stop when `has_more` is `false`.
 
-The cursor parameter sets the page direction; the endpoint's sort order sets the time direction. The same `after_id` parameter reaches older activities here. Chats sort oldest first; see [Retrieve and delete chats, files, and projects](./manage-claude-compliance-content-data.md) for the cursor semantics there.
+The cursor parameter sets the page direction; the endpoint's sort order sets the time direction. The same `after_id` parameter reaches older activities here. Chats sort oldest first; see [Retrieve and delete chats, files, projects, and sessions](./manage-claude-compliance-content-data.md) for the cursor semantics there.
 
 <Note>
   **Cursors are safe to reuse on retry.** A cursor or page token from a successfully returned page remains valid; a request that fails (5xx, timeout, network error) does not advance your position. Retry the same request with the same cursor. Only move to the next cursor after you have stored the page it points past.
@@ -140,14 +140,14 @@ persist(cursor)
 
 Every entry in `data` is an Activity with this top-level shape:
 
-| Field               | Type            | Description                                                                                                                                                                                                                  |
-| ------------------- | --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `id`                | string          | Unique identifier for the activity.                                                                                                                                                                                          |
-| `created_at`        | RFC 3339 string | When the activity occurred.                                                                                                                                                                                                  |
-| `organization_id`   | string or null  | Organization where the activity occurred, or `null` for events not tied to an organization (sign-in, sign-out, Compliance API calls).                                                                                        |
-| `organization_uuid` | string or null  | Same scoping as `organization_id`, expressed as a UUID.                                                                                                                                                                      |
-| `actor`             | Actor union     | Who or what performed the activity. See the following actor table.                                                                                                                                                           |
-| `type`              | string          | The activity type, for example `claude_chat_created`.                                                                                                                                                                        |
+| Field               | Type            | Description                                                                                                                                                                                                                                             |
+| ------------------- | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`                | string          | Unique identifier for the activity.                                                                                                                                                                                                                     |
+| `created_at`        | RFC 3339 string | When the activity occurred.                                                                                                                                                                                                                             |
+| `organization_id`   | string or null  | Organization where the activity occurred, or `null` for events not tied to an organization (sign-in, sign-out, Compliance API calls).                                                                                                                   |
+| `organization_uuid` | string or null  | Same scoping as `organization_id`, expressed as a UUID.                                                                                                                                                                                                 |
+| `actor`             | Actor union     | Who or what performed the activity. See the following actor table.                                                                                                                                                                                      |
+| `type`              | string          | The activity type, for example `claude_chat_created`.                                                                                                                                                                                                   |
 | *additional fields* | varies          | Type-specific fields, for example `claude_chat_id` on chat events or `filename` on file events. See [Query compliance activities](../api/api-compliance-activities-list.md) in the API reference for the per-type field list. |
 
 The `actor` field is a discriminated union. The `type` discriminator tells you which other fields are present:
@@ -172,7 +172,7 @@ The `actor` field is a discriminated union. The `type` discriminator tells you w
     The full request and response schema for `GET /v1/compliance/activities`, including every supported `activity_types[]` value.
   </Card>
 
-  <Card title="Retrieve and delete chats, files, and projects" href="./manage-claude-compliance-content-data.md">
+  <Card title="Retrieve and delete chats, files, projects, and sessions" href="./manage-claude-compliance-content-data.md">
     Query and delete the underlying content for activities you find in the feed (Compliance Access Key required).
   </Card>
 

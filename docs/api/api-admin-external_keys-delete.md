@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/external_keys/delete"
 category: "api"
 generated: true
 ---
+---
+title: Delete External Key
+url: https://platform.claude.com/docs/en/api/admin/external_keys/delete
+---
+
 ## Delete External Key
 
 **delete** `/v1/organizations/external_keys/{external_key_id}`

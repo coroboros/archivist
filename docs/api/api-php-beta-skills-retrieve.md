@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/php/beta/skills/retrieve"
 category: "api"
 generated: true
 ---
+---
+title: Get Skill
+url: https://platform.claude.com/docs/en/api/php/beta/skills/retrieve
+---
+
 ## Get Skill
 
 `$client->beta->skills->retrieve(string skillID, ?list<AnthropicBeta> betas): SkillGetResponse`
@@ -79,7 +84,7 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $skill = $client->beta->skills->retrieve(
-  'skill_id', betas: ['message-batches-2024-09-24']
+  'skill_id', betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24]
 );
 
 var_dump($skill);

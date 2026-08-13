@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/java/messages/batches/retrieve"
 category: "api"
 generated: true
 ---
+---
+title: Retrieve a Message Batch
+url: https://platform.claude.com/docs/en/api/java/messages/batches/retrieve
+---
+
 ## Retrieve a Message Batch
 
 `MessageBatch messages().batches().retrieve(BatchRetrieveParamsparams = BatchRetrieveParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`

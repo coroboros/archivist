@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/csharp/beta/user_profiles/retri
 category: "api"
 generated: true
 ---
+---
+title: Get User Profile
+url: https://platform.claude.com/docs/en/api/csharp/beta/user_profiles/retrieve
+---
+
 ## Get User Profile
 
 `BetaUserProfile Beta.UserProfiles.Retrieve(UserProfileRetrieveParamsparameters, CancellationTokencancellationToken = default)`
@@ -87,6 +92,8 @@ Get User Profile
     - `"fallback-credit-2026-07-01"FallbackCredit2026_07_01`
 
     - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
+
+    - `"mid-conversation-tool-changes-2026-07-01"MidConversationToolChanges2026_07_01`
 
 ### Returns
 

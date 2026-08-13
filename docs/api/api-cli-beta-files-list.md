@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/cli/beta/files/list"
 category: "api"
 generated: true
 ---
+---
+title: List Files
+url: https://platform.claude.com/docs/en/api/cli/beta/files/list
+---
+
 ## List Files
 
 `$ ant beta:files list`

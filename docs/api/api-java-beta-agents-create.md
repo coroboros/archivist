@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/java/beta/agents/create"
 category: "api"
 generated: true
 ---
+---
+title: Create Agent
+url: https://platform.claude.com/docs/en/api/java/beta/agents/create
+---
+
 ## Create Agent
 
 `BetaManagedAgentsAgent beta().agents().create(AgentCreateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())`
@@ -83,6 +88,8 @@ Create Agent
     - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
   - `Model model`
 
@@ -213,6 +220,10 @@ Create Agent
           - `Type type`
 
             - `MAX("max")`
+
+      - `Optional<String> inferenceGeo`
+
+        Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo. On update, `model` is whole-object replacement — omitting inference_geo clears it.
 
       - `Optional<Speed> speed`
 
@@ -436,7 +447,7 @@ Create Agent
 
       - `String description`
 
-        Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-4096 characters.
+        Description of what the tool does, shown to the agent to help it decide when to use the tool.
 
       - `BetaManagedAgentsCustomToolInputSchema inputSchema`
 
@@ -594,6 +605,10 @@ Create Agent
 
           - `MAX("max")`
 
+    - `Optional<String> inferenceGeo`
+
+      Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo.
+
     - `Optional<Speed> speed`
 
       Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
@@ -606,17 +621,33 @@ Create Agent
 
     Resolved coordinator topology with a concrete agent roster.
 
-    - `List<BetaManagedAgentsAgentReference> agents`
+    - `List<Agent> agents`
 
       Agents the coordinator may spawn as session threads, each resolved to a specific version.
 
-      - `String id`
+      - `class BetaManagedAgentsAgentReference:`
 
-      - `Type type`
+        A resolved agent reference with a concrete version.
 
-        - `AGENT("agent")`
+        - `String id`
 
-      - `long version`
+        - `Type type`
+
+          - `AGENT("agent")`
+
+        - `long version`
+
+      - `class BetaManagedAgentsAdvisor:`
+
+        Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
+
+        - `String model`
+
+          The advisor model id.
+
+        - `Type type`
+
+          - `ADVISOR("advisor")`
 
     - `Type type`
 
@@ -851,6 +882,7 @@ public final class Main {
     "effort": {
       "type": "low"
     },
+    "inference_geo": "inference_geo",
     "speed": "standard"
   },
   "multiagent": {

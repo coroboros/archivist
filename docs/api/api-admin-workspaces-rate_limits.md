@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/workspaces/rate_limits"
 category: "api"
 generated: true
 ---
+---
+title: Rate Limits
+url: https://platform.claude.com/docs/en/api/admin/workspaces/rate_limits
+---
+
 # Rate Limits
 
 ## List Workspace Rate Limits

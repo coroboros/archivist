@@ -1,13 +1,13 @@
 ---
-title: "Deploy MCP tunnels with Helm"
+title: "Before you begin"
 source: "https://platform.claude.com/docs/en/agents-and-tools/mcp-tunnels/deploy-helm"
 category: "agents-and-tools"
 generated: true
 ---
-# Deploy MCP tunnels with Helm
-
-Install the tunnel stack on a Kubernetes cluster using the Anthropic Helm chart.
-
+---
+title: Deploy MCP tunnels with Helm
+url: https://platform.claude.com/docs/en/agents-and-tools/mcp-tunnels/deploy-helm
+description: Install the tunnel stack on a Kubernetes cluster using the Anthropic Helm chart.
 ---
 
 <Note>
@@ -31,7 +31,7 @@ You need:
 
 * **Outbound network connectivity** from the cluster to `api.anthropic.com` (443 TCP) and the [tunnel edge](./agents-and-tools-mcp-tunnels-concepts.md#components) (7844 TCP and UDP). See the full [network requirements](./agents-and-tools-mcp-tunnels-overview.md#network-requirements).
 
-* **One or more MCP servers** running and reachable from the cluster on the addresses you'll configure under `gateway.config.routes`. If you don't have one yet, [use the sample server](#optional-use-a-sample-mcp-server).
+* **One or more MCP servers** running and reachable from the cluster on the addresses you'll configure under `gateway.config.routes`. If you don't have one yet, [use the sample server](./agents-and-tools-mcp-tunnels-deploy-helm.md#optional-use-a-sample-mcp-server).
 
 ## Optional: Use a sample MCP server
 
@@ -164,7 +164,7 @@ The Install steps that follow note where to add the corresponding route.
         With these routes, Claude reaches the servers at `docs.<your-tunnel-domain>` and `search.<your-tunnel-domain>`. Some managed Kubernetes distributions allocate the Service CIDR outside the standard private ranges; if your routes target in-cluster Services, add `gateway.config.upstream.allowed_ips` here per [Upstream IP validation](./agents-and-tools-mcp-tunnels-troubleshooting.md#upstream-ip-validation).
 
         <Note>
-          If you're using the [sample MCP server](#optional-use-a-sample-mcp-server), set `routes` to `echo: http://hello-mcp:9000` instead.
+          If you're using the [sample MCP server](./agents-and-tools-mcp-tunnels-deploy-helm.md#optional-use-a-sample-mcp-server), set `routes` to `echo: http://hello-mcp:9000` instead.
         </Note>
       </Step>
 
@@ -191,14 +191,14 @@ The Install steps that follow note where to add the corresponding route.
 
         The setup component runs as a Helm pre-install hook Job, so `helm install` blocks until it completes. On success Helm deletes the Job automatically. If `helm install` fails with a hook error, see [Setup component authentication failures](./agents-and-tools-mcp-tunnels-troubleshooting.md#setup-component-authentication-failures).
 
-        When `tunnel.id` is empty, the setup component creates the tunnel in the workspace your federation rule targets (the organization's default workspace unless you set `api.wif.workspaceId`) and stores its ID and domain in the `mcp-tunnel` Secret. Find the domain you'll need for [verification](#verify-the-deployment) on the tunnel's detail page in the Console under **Manage > MCP tunnels**, or read it from the Secret:
+        When `tunnel.id` is empty, the setup component creates the tunnel in the workspace your federation rule targets (the organization's default workspace unless you set `api.wif.workspaceId`) and stores its ID and domain in the `mcp-tunnel` Secret. Find the domain you'll need for [verification](./agents-and-tools-mcp-tunnels-deploy-helm.md#verify-the-deployment) on the tunnel's detail page in the Console under **Manage > MCP tunnels**, or read it from the Secret:
 
         ```bash
         kubectl -n mcp-tunnel get secret mcp-tunnel \
           -o jsonpath='{.data.tunnel-domain}' | base64 -d
         ```
 
-        Re-running the setup component (during [upgrades](#upgrades) or [token rotation](#rotate-the-tunnel-token)) reuses the tunnel ID stored in this Secret; it never creates a second tunnel.
+        Re-running the setup component (during [upgrades](./agents-and-tools-mcp-tunnels-deploy-helm.md#upgrades) or [token rotation](./agents-and-tools-mcp-tunnels-deploy-helm.md#rotate-the-tunnel-token)) reuses the tunnel ID stored in this Secret; it never creates a second tunnel.
 
         <Warning>
           The `api.wif.*` values are identifiers, not secrets, so storing them in Helm release-history Secrets is not a risk. The sensitive data at rest is the `mcp-tunnel` Secret the setup component creates, which holds the tunnel token and TLS private keys. Apply your organization's standard practices for protecting Kubernetes Secrets to this namespace.
@@ -259,7 +259,7 @@ The Install steps that follow note where to add the corresponding route.
       </Step>
 
       <Step title="Create the two Secrets">
-        The chart reads specific keys; the Secret names are configurable but the keys are not. The following namespace-creation command is a no-op if the namespace already exists (for example, from the [sample MCP server](#optional-use-a-sample-mcp-server) step).
+        The chart reads specific keys; the Secret names are configurable but the keys are not. The following namespace-creation command is a no-op if the namespace already exists (for example, from the [sample MCP server](./agents-and-tools-mcp-tunnels-deploy-helm.md#optional-use-a-sample-mcp-server) step).
 
         ```bash
         kubectl create namespace mcp-tunnel --dry-run=client -o yaml | kubectl apply -f -
@@ -305,7 +305,7 @@ The Install steps that follow note where to add the corresponding route.
         Some managed Kubernetes distributions allocate the Service CIDR outside the standard private ranges; if your routes target in-cluster Services, add `gateway.config.upstream.allowed_ips` here per [Upstream IP validation](./agents-and-tools-mcp-tunnels-troubleshooting.md#upstream-ip-validation).
 
         <Note>
-          If you're using the [sample MCP server](#optional-use-a-sample-mcp-server), set `routes` to `echo: http://hello-mcp:9000` instead.
+          If you're using the [sample MCP server](./agents-and-tools-mcp-tunnels-deploy-helm.md#optional-use-a-sample-mcp-server), set `routes` to `echo: http://hello-mcp:9000` instead.
         </Note>
       </Step>
 
@@ -334,7 +334,7 @@ The Install steps that follow note where to add the corresponding route.
 
 ## Verify the deployment
 
-Verify end to end from Anthropic's side: use `https://<route>.<your-tunnel-domain>/<path>` in a Managed Agent session or a Messages API request, where `<route>` is a key from `gateway.config.routes` and `<path>` is whatever the upstream MCP server serves at. With the [sample MCP server](#optional-use-a-sample-mcp-server), that's `https://echo.<your-tunnel-domain>/mcp`. See [Use the tunneled MCP servers](./agents-and-tools-mcp-tunnels-overview.md#use-the-tunneled-mcp-servers) for the request shapes.
+Verify end to end from Anthropic's side: use `https://<route>.<your-tunnel-domain>/<path>` in a Managed Agent session or a Messages API request, where `<route>` is a key from `gateway.config.routes` and `<path>` is whatever the upstream MCP server serves at. With the [sample MCP server](./agents-and-tools-mcp-tunnels-deploy-helm.md#optional-use-a-sample-mcp-server), that's `https://echo.<your-tunnel-domain>/mcp`. See [Use the tunneled MCP servers](./agents-and-tools-mcp-tunnels-overview.md#use-the-tunneled-mcp-servers) for the request shapes.
 
 If that fails, check the pod logs (`kubectl -n mcp-tunnel logs deploy/mcp-tunnel -c mcp-proxy` and `-c cloudflared`) and consult [Troubleshooting](./agents-and-tools-mcp-tunnels-troubleshooting.md).
 

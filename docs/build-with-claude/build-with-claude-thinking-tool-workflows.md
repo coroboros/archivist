@@ -1,13 +1,13 @@
 ---
-title: "Thinking in tool and multi-turn workflows"
+title: "The rules this walkthrough applies"
 source: "https://platform.claude.com/docs/en/build-with-claude/thinking-tool-workflows"
 category: "build-with-claude"
 generated: true
 ---
-# Thinking in tool and multi-turn workflows
-
-Walk through a complete two-turn tool-use round trip that preserves thinking blocks correctly, and see how interleaved thinking changes the flow.
-
+---
+title: Thinking in tool and multi-turn workflows
+url: https://platform.claude.com/docs/en/build-with-claude/thinking-tool-workflows
+description: Walk through a complete two-turn tool-use round trip that preserves thinking blocks correctly, and see how interleaved thinking changes the flow.
 ---
 
 <Note>

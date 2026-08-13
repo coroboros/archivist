@@ -1,13 +1,13 @@
 ---
-title: "Mitigate jailbreaks and prompt injections"
+title: "Jailbreaks and direct prompt injection"
 source: "https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/mitigate-jailbreaks"
 category: "test-and-evaluate"
 generated: true
 ---
-# Mitigate jailbreaks and prompt injections
-
-Defend your application against jailbreaks and prompt injection with input screening, hardened system prompts, and safe handling of untrusted tool content.
-
+---
+title: Mitigate jailbreaks and prompt injections
+url: https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/mitigate-jailbreaks
+description: Defend your application against jailbreaks and prompt injection with input screening, hardened system prompts, and safe handling of untrusted tool content.
 ---
 
 Jailbreaking and prompt injection are attempts to make Claude ignore its guidelines or your instructions. While Claude is inherently resilient to such attacks, the additional steps on this page strengthen your guardrails, particularly against uses that violate Anthropic's [Terms of Service](https://www.anthropic.com/legal/commercial-terms) or [Usage Policy](https://www.anthropic.com/legal/aup).

@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/organizations"
 category: "api"
 generated: true
 ---
+---
+title: Organizations
+url: https://platform.claude.com/docs/en/api/admin/organizations
+---
+
 # Organizations
 
 ## Get Current Organization

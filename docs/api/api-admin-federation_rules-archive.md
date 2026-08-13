@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/federation_rules/archive"
 category: "api"
 generated: true
 ---
+---
+title: Archive Federation Rule
+url: https://platform.claude.com/docs/en/api/admin/federation_rules/archive
+---
+
 ## Archive Federation Rule
 
 **post** `/v1/organizations/federation_rules/{federation_rule_id}/archive`

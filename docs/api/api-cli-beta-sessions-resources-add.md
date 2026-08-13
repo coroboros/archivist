@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/cli/beta/sessions/resources/add
 category: "api"
 generated: true
 ---
+---
+title: Add Session Resource
+url: https://platform.claude.com/docs/en/api/cli/beta/sessions/resources/add
+---
+
 ## Add Session Resource
 
 `$ ant beta:sessions:resources add`

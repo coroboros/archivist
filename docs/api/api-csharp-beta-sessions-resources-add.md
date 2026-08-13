@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/csharp/beta/sessions/resources/
 category: "api"
 generated: true
 ---
+---
+title: Add Session Resource
+url: https://platform.claude.com/docs/en/api/csharp/beta/sessions/resources/add
+---
+
 ## Add Session Resource
 
 `BetaManagedAgentsFileResource Beta.Sessions.Resources.Add(ResourceAddParamsparameters, CancellationTokencancellationToken = default)`
@@ -101,6 +106,8 @@ Add Session Resource
     - `"fallback-credit-2026-07-01"FallbackCredit2026_07_01`
 
     - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
+
+    - `"mid-conversation-tool-changes-2026-07-01"MidConversationToolChanges2026_07_01`
 
 ### Returns
 

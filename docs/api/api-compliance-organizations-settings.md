@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/compliance/organizations/settin
 category: "api"
 generated: true
 ---
+---
+title: Settings
+url: https://platform.claude.com/docs/en/api/compliance/organizations/settings
+---
+
 # Settings
 
 ## Get effective organization settings

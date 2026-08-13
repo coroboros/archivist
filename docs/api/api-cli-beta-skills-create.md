@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/cli/beta/skills/create"
 category: "api"
 generated: true
 ---
+---
+title: Create Skill
+url: https://platform.claude.com/docs/en/api/cli/beta/skills/create
+---
+
 ## Create Skill
 
 `$ ant beta:skills create`

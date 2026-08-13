@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/spend_limits/increase_req
 category: "api"
 generated: true
 ---
+---
+title: Deny Spend Limit Increase Request
+url: https://platform.claude.com/docs/en/api/admin/spend_limits/increase_requests/deny
+---
+
 ## Deny Spend Limit Increase Request
 
 **post** `/v1/organizations/spend_limit_increase_requests/{spend_limit_increase_request_id}/deny`

@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/cli/beta/sessions/resources/del
 category: "api"
 generated: true
 ---
+---
+title: Delete Session Resource
+url: https://platform.claude.com/docs/en/api/cli/beta/sessions/resources/delete
+---
+
 ## Delete Session Resource
 
 `$ ant beta:sessions:resources delete`

@@ -1,13 +1,13 @@
 ---
-title: "MCP tunnels quickstart"
+title: "What you'll build"
 source: "https://platform.claude.com/docs/en/agents-and-tools/mcp-tunnels/quickstart"
 category: "agents-and-tools"
 generated: true
 ---
-# MCP tunnels quickstart
-
-Connect Claude to a private MCP server using a local Docker Compose deployment.
-
+---
+title: MCP tunnels quickstart
+url: https://platform.claude.com/docs/en/agents-and-tools/mcp-tunnels/quickstart
+description: Connect Claude to a private MCP server using a local Docker Compose deployment.
 ---
 
 <Note>

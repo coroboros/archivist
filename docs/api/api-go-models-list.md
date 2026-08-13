@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/go/models/list"
 category: "api"
 generated: true
 ---
+---
+title: List Models
+url: https://platform.claude.com/docs/en/api/go/models/list
+---
+
 ## List Models
 
 `client.Models.List(ctx, params) (*Page[ModelInfo], error)`
@@ -103,6 +108,8 @@ The Models API response can be used to determine which models are available for 
       - `const AnthropicBetaFallbackCredit2026_07_01 AnthropicBeta = "fallback-credit-2026-07-01"`
 
       - `const AnthropicBetaAgentMemory2026_07_22 AnthropicBeta = "agent-memory-2026-07-22"`
+
+      - `const AnthropicBetaMidConversationToolChanges2026_07_01 AnthropicBeta = "mid-conversation-tool-changes-2026-07-01"`
 
 ### Returns
 

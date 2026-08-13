@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/service_accounts"
 category: "api"
 generated: true
 ---
+---
+title: Service Accounts
+url: https://platform.claude.com/docs/en/api/admin/service_accounts
+---
+
 # Service Accounts
 
 ## Create Service Account

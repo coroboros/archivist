@@ -1,13 +1,13 @@
 ---
-title: "PHP SDK"
+title: "Installation"
 source: "https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/php"
 category: "general"
 generated: true
 ---
-# PHP SDK
-
-Install and configure the Anthropic PHP SDK with value objects and builder patterns
-
+---
+title: PHP SDK
+url: https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/php
+description: Install and configure the Anthropic PHP SDK with value objects and builder patterns
 ---
 
 The Anthropic PHP library provides convenient access to the Anthropic REST API from any PHP 8.1.0+ application.

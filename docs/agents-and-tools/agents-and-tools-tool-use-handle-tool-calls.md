@@ -1,13 +1,13 @@
 ---
-title: "Handle tool calls"
+title: "Handling results from client tools"
 source: "https://platform.claude.com/docs/en/agents-and-tools/tool-use/handle-tool-calls"
 category: "agents-and-tools"
 generated: true
 ---
-# Handle tool calls
-
-Parse tool_use blocks, format tool_result responses, and handle errors with is_error.
-
+---
+title: Handle tool calls
+url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/handle-tool-calls
+description: Parse tool_use blocks, format tool_result responses, and handle errors with is_error.
 ---
 
 This page covers the tool-call lifecycle: reading `tool_use` blocks from Claude's response, formatting `tool_result` blocks in your reply, and signaling errors. For the SDK abstraction that handles this automatically, see [Tool Runner](./agents-and-tools-tool-use-tool-runner.md).

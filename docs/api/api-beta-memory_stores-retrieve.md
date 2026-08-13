@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/beta/memory_stores/retrieve"
 category: "api"
 generated: true
 ---
+---
+title: Retrieve a memory store
+url: https://platform.claude.com/docs/en/api/beta/memory_stores/retrieve
+---
+
 ## Retrieve a memory store
 
 **get** `/v1/memory_stores/{memory_store_id}`
@@ -22,7 +27,7 @@ Retrieve a memory store
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 29 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 30 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -87,6 +92,8 @@ Retrieve a memory store
     - `"fallback-credit-2026-07-01"`
 
     - `"agent-memory-2026-07-22"`
+
+    - `"mid-conversation-tool-changes-2026-07-01"`
 
 ### Returns
 

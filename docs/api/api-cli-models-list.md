@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/cli/models/list"
 category: "api"
 generated: true
 ---
+---
+title: List Models
+url: https://platform.claude.com/docs/en/api/cli/models/list
+---
+
 ## List Models
 
 `$ ant models list`

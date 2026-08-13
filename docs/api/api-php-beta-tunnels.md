@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/php/beta/tunnels"
 category: "api"
 generated: true
 ---
+---
+title: Tunnels
+url: https://platform.claude.com/docs/en/api/php/beta/tunnels
+---
+
 # Tunnels
 
 ## Create Tunnel
@@ -62,7 +67,7 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaTunnel = $client->beta->tunnels->create(
-  displayName: 'x', betas: ['message-batches-2024-09-24']
+  displayName: 'x', betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24]
 );
 
 var_dump($betaTunnel);
@@ -135,7 +140,7 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaTunnel = $client->beta->tunnels->retrieve(
-  'tunnel_id', betas: ['message-batches-2024-09-24']
+  'tunnel_id', betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24]
 );
 
 var_dump($betaTunnel);
@@ -221,7 +226,7 @@ $page = $client->beta->tunnels->list(
   includeArchived: true,
   limit: 0,
   page: 'page',
-  betas: ['message-batches-2024-09-24'],
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
 );
 
 var_dump($page);
@@ -299,7 +304,7 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaTunnel = $client->beta->tunnels->archive(
-  'tunnel_id', betas: ['message-batches-2024-09-24']
+  'tunnel_id', betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24]
 );
 
 var_dump($betaTunnel);
@@ -360,7 +365,7 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaTunnelToken = $client->beta->tunnels->revealToken(
-  'tunnel_id', betas: ['message-batches-2024-09-24']
+  'tunnel_id', betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24]
 );
 
 var_dump($betaTunnelToken);
@@ -422,7 +427,9 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaTunnelToken = $client->beta->tunnels->rotateToken(
-  'tunnel_id', reason: 'reason', betas: ['message-batches-2024-09-24']
+  'tunnel_id',
+  reason: 'reason',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
 );
 
 var_dump($betaTunnelToken);
@@ -546,7 +553,7 @@ $client = new Client(apiKey: 'my-anthropic-api-key');
 $betaTunnelCertificate = $client->beta->tunnels->certificates->create(
   'tunnel_id',
   caCertificatePem: 'ca_certificate_pem',
-  betas: ['message-batches-2024-09-24'],
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
 );
 
 var_dump($betaTunnelCertificate);
@@ -626,7 +633,9 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaTunnelCertificate = $client->beta->tunnels->certificates->retrieve(
-  'certificate_id', tunnelID: 'tunnel_id', betas: ['message-batches-2024-09-24']
+  'certificate_id',
+  tunnelID: 'tunnel_id',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
 );
 
 var_dump($betaTunnelCertificate);
@@ -720,7 +729,7 @@ $page = $client->beta->tunnels->certificates->list(
   includeArchived: true,
   limit: 0,
   page: 'page',
-  betas: ['message-batches-2024-09-24'],
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
 );
 
 var_dump($page);
@@ -805,7 +814,9 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaTunnelCertificate = $client->beta->tunnels->certificates->archive(
-  'certificate_id', tunnelID: 'tunnel_id', betas: ['message-batches-2024-09-24']
+  'certificate_id',
+  tunnelID: 'tunnel_id',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
 );
 
 var_dump($betaTunnelCertificate);

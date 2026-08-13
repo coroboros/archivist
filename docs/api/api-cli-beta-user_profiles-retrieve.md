@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/cli/beta/user_profiles/retrieve
 category: "api"
 generated: true
 ---
+---
+title: Get User Profile
+url: https://platform.claude.com/docs/en/api/cli/beta/user_profiles/retrieve
+---
+
 ## Get User Profile
 
 `$ ant beta:user-profiles retrieve`

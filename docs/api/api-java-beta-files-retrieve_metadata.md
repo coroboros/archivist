@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/java/beta/files/retrieve_metada
 category: "api"
 generated: true
 ---
+---
+title: Get File Metadata
+url: https://platform.claude.com/docs/en/api/java/beta/files/retrieve_metadata
+---
+
 ## Get File Metadata
 
 `FileMetadata beta().files().retrieveMetadata(FileRetrieveMetadataParamsparams = FileRetrieveMetadataParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
@@ -87,6 +92,8 @@ Get File Metadata
     - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
 ### Returns
 

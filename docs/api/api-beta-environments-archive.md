@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/beta/environments/archive"
 category: "api"
 generated: true
 ---
+---
+title: Archive Environment
+url: https://platform.claude.com/docs/en/api/beta/environments/archive
+---
+
 ## Archive Environment
 
 **post** `/v1/environments/{environment_id}/archive`
@@ -22,7 +27,7 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 29 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 30 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -87,6 +92,8 @@ Archive an environment by ID. Archived environments cannot be used to create new
     - `"fallback-credit-2026-07-01"`
 
     - `"agent-memory-2026-07-22"`
+
+    - `"mid-conversation-tool-changes-2026-07-01"`
 
 ### Returns
 

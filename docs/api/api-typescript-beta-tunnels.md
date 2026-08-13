@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/typescript/beta/tunnels"
 category: "api"
 generated: true
 ---
+---
+title: Tunnels
+url: https://platform.claude.com/docs/en/api/typescript/beta/tunnels
+---
+
 # Tunnels
 
 ## Create Tunnel
@@ -30,7 +35,7 @@ Creates a tunnel. Creation allocates a fresh hostname and provisions the tunnel;
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 29 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -96,6 +101,8 @@ Creates a tunnel. Creation allocates a fresh hostname and provisions the tunnel;
 
       - `"agent-memory-2026-07-22"`
 
+      - `"mid-conversation-tool-changes-2026-07-01"`
+
 ### Returns
 
 - `BetaTunnel`
@@ -129,10 +136,10 @@ Creates a tunnel. Creation allocates a fresh hostname and provisions the tunnel;
 ### Example
 
 ```typescript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic({
-  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
+  apiKey: process.env["ANTHROPIC_API_KEY"] // This is the default and can be omitted
 });
 
 const betaTunnel = await client.beta.tunnels.create();
@@ -175,7 +182,7 @@ Fetches a tunnel by ID.
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 29 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -241,6 +248,8 @@ Fetches a tunnel by ID.
 
       - `"agent-memory-2026-07-22"`
 
+      - `"mid-conversation-tool-changes-2026-07-01"`
+
 ### Returns
 
 - `BetaTunnel`
@@ -274,13 +283,13 @@ Fetches a tunnel by ID.
 ### Example
 
 ```typescript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic({
-  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
+  apiKey: process.env["ANTHROPIC_API_KEY"] // This is the default and can be omitted
 });
 
-const betaTunnel = await client.beta.tunnels.retrieve('tunnel_id');
+const betaTunnel = await client.beta.tunnels.retrieve("tunnel_id");
 
 console.log(betaTunnel.id);
 ```
@@ -330,7 +339,7 @@ Lists tunnels. Results are ordered by creation time, newest first; archived tunn
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 29 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -396,6 +405,8 @@ Lists tunnels. Results are ordered by creation time, newest first; archived tunn
 
       - `"agent-memory-2026-07-22"`
 
+      - `"mid-conversation-tool-changes-2026-07-01"`
+
 ### Returns
 
 - `BetaTunnel`
@@ -429,10 +440,10 @@ Lists tunnels. Results are ordered by creation time, newest first; archived tunn
 ### Example
 
 ```typescript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic({
-  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
+  apiKey: process.env["ANTHROPIC_API_KEY"] // This is the default and can be omitted
 });
 
 // Automatically fetches more pages as needed.
@@ -481,7 +492,7 @@ Archives a tunnel. Archival is irreversible: every non-archived certificate on t
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 29 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -547,6 +558,8 @@ Archives a tunnel. Archival is irreversible: every non-archived certificate on t
 
       - `"agent-memory-2026-07-22"`
 
+      - `"mid-conversation-tool-changes-2026-07-01"`
+
 ### Returns
 
 - `BetaTunnel`
@@ -580,13 +593,13 @@ Archives a tunnel. Archival is irreversible: every non-archived certificate on t
 ### Example
 
 ```typescript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic({
-  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
+  apiKey: process.env["ANTHROPIC_API_KEY"] // This is the default and can be omitted
 });
 
-const betaTunnel = await client.beta.tunnels.archive('tunnel_id');
+const betaTunnel = await client.beta.tunnels.archive("tunnel_id");
 
 console.log(betaTunnel.id);
 ```
@@ -626,7 +639,7 @@ Reveals a tunnel's connector token. The value is fetched live on each call; Anth
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 29 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -692,6 +705,8 @@ Reveals a tunnel's connector token. The value is fetched live on each call; Anth
 
       - `"agent-memory-2026-07-22"`
 
+      - `"mid-conversation-tool-changes-2026-07-01"`
+
 ### Returns
 
 - `BetaTunnelToken`
@@ -713,13 +728,13 @@ Reveals a tunnel's connector token. The value is fetched live on each call; Anth
 ### Example
 
 ```typescript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic({
-  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
+  apiKey: process.env["ANTHROPIC_API_KEY"] // This is the default and can be omitted
 });
 
-const betaTunnelToken = await client.beta.tunnels.revealToken('tunnel_id');
+const betaTunnelToken = await client.beta.tunnels.revealToken("tunnel_id");
 
 console.log(betaTunnelToken.id);
 ```
@@ -760,7 +775,7 @@ Rotates a tunnel's connector token. Rotation invalidates the current token for n
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 29 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -826,6 +841,8 @@ Rotates a tunnel's connector token. Rotation invalidates the current token for n
 
       - `"agent-memory-2026-07-22"`
 
+      - `"mid-conversation-tool-changes-2026-07-01"`
+
 ### Returns
 
 - `BetaTunnelToken`
@@ -847,13 +864,13 @@ Rotates a tunnel's connector token. Rotation invalidates the current token for n
 ### Example
 
 ```typescript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic({
-  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
+  apiKey: process.env["ANTHROPIC_API_KEY"] // This is the default and can be omitted
 });
 
-const betaTunnelToken = await client.beta.tunnels.rotateToken('tunnel_id');
+const betaTunnelToken = await client.beta.tunnels.rotateToken("tunnel_id");
 
 console.log(betaTunnelToken.id);
 ```
@@ -946,7 +963,7 @@ Registers a public CA certificate on a tunnel. Anthropic verifies the gateway's 
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 29 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -1012,6 +1029,8 @@ Registers a public CA certificate on a tunnel. Anthropic verifies the gateway's 
 
       - `"agent-memory-2026-07-22"`
 
+      - `"mid-conversation-tool-changes-2026-07-01"`
+
 ### Returns
 
 - `BetaTunnelCertificate`
@@ -1049,14 +1068,14 @@ Registers a public CA certificate on a tunnel. Anthropic verifies the gateway's 
 ### Example
 
 ```typescript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic({
-  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
+  apiKey: process.env["ANTHROPIC_API_KEY"] // This is the default and can be omitted
 });
 
-const betaTunnelCertificate = await client.beta.tunnels.certificates.create('tunnel_id', {
-  ca_certificate_pem: 'ca_certificate_pem',
+const betaTunnelCertificate = await client.beta.tunnels.certificates.create("tunnel_id", {
+  ca_certificate_pem: "ca_certificate_pem"
 });
 
 console.log(betaTunnelCertificate.id);
@@ -1102,7 +1121,7 @@ Fetches a tunnel certificate by ID.
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 29 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -1168,6 +1187,8 @@ Fetches a tunnel certificate by ID.
 
       - `"agent-memory-2026-07-22"`
 
+      - `"mid-conversation-tool-changes-2026-07-01"`
+
 ### Returns
 
 - `BetaTunnelCertificate`
@@ -1205,15 +1226,16 @@ Fetches a tunnel certificate by ID.
 ### Example
 
 ```typescript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic({
-  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
+  apiKey: process.env["ANTHROPIC_API_KEY"] // This is the default and can be omitted
 });
 
-const betaTunnelCertificate = await client.beta.tunnels.certificates.retrieve('certificate_id', {
-  tunnel_id: 'tunnel_id',
-});
+const betaTunnelCertificate = await client.beta.tunnels.certificates.retrieve(
+  "certificate_id",
+  { tunnel_id: "tunnel_id" }
+);
 
 console.log(betaTunnelCertificate.id);
 ```
@@ -1266,7 +1288,7 @@ Lists the certificates registered on a tunnel. Archived certificates are exclude
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 29 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -1332,6 +1354,8 @@ Lists the certificates registered on a tunnel. Archived certificates are exclude
 
       - `"agent-memory-2026-07-22"`
 
+      - `"mid-conversation-tool-changes-2026-07-01"`
+
 ### Returns
 
 - `BetaTunnelCertificate`
@@ -1369,14 +1393,14 @@ Lists the certificates registered on a tunnel. Archived certificates are exclude
 ### Example
 
 ```typescript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic({
-  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
+  apiKey: process.env["ANTHROPIC_API_KEY"] // This is the default and can be omitted
 });
 
 // Automatically fetches more pages as needed.
-for await (const betaTunnelCertificate of client.beta.tunnels.certificates.list('tunnel_id')) {
+for await (const betaTunnelCertificate of client.beta.tunnels.certificates.list("tunnel_id")) {
   console.log(betaTunnelCertificate.id);
 }
 ```
@@ -1426,7 +1450,7 @@ Archives a tunnel certificate, removing it from the set Anthropic trusts for the
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 29 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -1492,6 +1516,8 @@ Archives a tunnel certificate, removing it from the set Anthropic trusts for the
 
       - `"agent-memory-2026-07-22"`
 
+      - `"mid-conversation-tool-changes-2026-07-01"`
+
 ### Returns
 
 - `BetaTunnelCertificate`
@@ -1529,15 +1555,16 @@ Archives a tunnel certificate, removing it from the set Anthropic trusts for the
 ### Example
 
 ```typescript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic({
-  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
+  apiKey: process.env["ANTHROPIC_API_KEY"] // This is the default and can be omitted
 });
 
-const betaTunnelCertificate = await client.beta.tunnels.certificates.archive('certificate_id', {
-  tunnel_id: 'tunnel_id',
-});
+const betaTunnelCertificate = await client.beta.tunnels.certificates.archive(
+  "certificate_id",
+  { tunnel_id: "tunnel_id" }
+);
 
 console.log(betaTunnelCertificate.id);
 ```

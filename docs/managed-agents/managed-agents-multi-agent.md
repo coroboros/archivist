@@ -1,13 +1,13 @@
 ---
-title: "Multiagent orchestration"
+title: "How it works"
 source: "https://platform.claude.com/docs/en/managed-agents/multi-agent"
 category: "managed-agents"
 generated: true
 ---
-# Multiagent orchestration
-
-Coordinate multiple agents within a single session.
-
+---
+title: Multiagent orchestration
+url: https://platform.claude.com/docs/en/managed-agents/multiagent-orchestration
+description: Coordinate multiple agents within a single session.
 ---
 
 Multiagent orchestration lets one agent coordinate with others to complete complex work. Agents can act in parallel with their own isolated context, which helps improve output quality and can also improve time to completion.
@@ -41,7 +41,7 @@ Patterns that work well:
 When [defining your agent](./managed-agents-agent-setup.md), set `multiagent` to declare the roster of agents the coordinator can delegate to:
 
 <CodeGroup defaultLanguage="CLI">
-  ```bash curl
+  ```bash cURL
   coordinator=$(curl -fsS https://api.anthropic.com/v1/agents \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
@@ -233,7 +233,7 @@ When [defining your agent](./managed-agents-agent-setup.md), set `multiagent` to
 * `{"type": "agent", "id": agent.id}` references a previously created `agent` by ID. If no `version` is specified, the reference is pinned to the latest version of that agent at the time the coordinator is created.
 * `{"type": "agent", "id": agent.id, "version": agent.version}` pins a specific agent version.
 * `{"type": "self"}` allows the coordinator to spawn copies of itself. If the session was created with [agent configuration overrides](./managed-agents-sessions.md#override-agent-configuration-for-a-session), those overrides also apply to these copies; roster entries referenced by ID are unaffected.
-* `{"type": "advisor", "model": "<model id>"}` gives the session's primary thread an advisor it can consult mid-turn. At most one advisor entry per roster. See [Give the session an advisor](#give-the-session-an-advisor).
+* `{"type": "advisor", "model": "<model id>"}` gives the session's primary thread an advisor it can consult mid-turn. At most one advisor entry per roster. See [Give the session an advisor](./managed-agents-multiagent-orchestration.md#give-the-session-an-advisor).
 
 The coordinator's configuration, including its `multiagent.agents` roster, is snapshotted when the coordinator is created or updated. Referenced agents stay pinned to the versions resolved at that time and do not automatically pick up later updates to their definitions. To delegate to a newer version of a referenced agent, [update the coordinator](./managed-agents-agent-setup.md#update-an-agent) so its roster references that version.
 
@@ -290,7 +290,7 @@ A failed or interrupted consultation never fails the agent's turn: the agent con
 
 The advisor is not a roster agent: it is invisible to the coordinator's `list_agents` tool, it cannot be messaged with `send_to_agent`, and only the session's primary thread can consult it. Roster agents cannot.
 
-Advisor threads are exempt from the concurrent-thread limit. They appear in the session's [thread list](#threads) with `agent` set to the advisor form exactly as configured (`{"type": "advisor", "model": ...}`) and `parent_thread_id` set to the primary thread.
+Advisor threads are exempt from the concurrent-thread limit. They appear in the session's [thread list](./managed-agents-multiagent-orchestration.md#threads) with `agent` set to the advisor form exactly as configured (`{"type": "advisor", "model": ...}`) and `parent_thread_id` set to the primary thread.
 
 Prompt caching on the advisor's side is automatic; there is nothing to configure. Consultations are billed at the advisor model's rates, and their tokens appear in the advisor thread's usage and in the session's usage totals.
 
@@ -303,7 +303,7 @@ To remove the advisor, [update the agent](./managed-agents-agent-setup.md#update
 Create a session referencing the coordinator. The coordinator delegates to the agents in its roster as needed.
 
 <CodeGroup>
-  ```bash curl
+  ```bash cURL
   session=$(curl -fsSL https://api.anthropic.com/v1/sessions \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
@@ -391,7 +391,7 @@ MCP servers are agent-scoped (each agent definition declares its own servers and
 [Agent configuration overrides](./managed-agents-sessions.md#override-agent-configuration-for-a-session) at session creation can replace the coordinator's MCP servers and those of its `self` copies.
 
 <CodeGroup>
-  ```bash curl
+  ```bash cURL
   research_agent_id=$(curl --fail-with-body -sS "$BASE/v1/agents" "${H[@]}" --data @- <<'EOF' | jq -er '.id'
   {
     "name": "researcher",
@@ -755,10 +755,10 @@ The **session-level event stream** (`/v1/sessions/{session_id}/events/stream`) i
 
 The session `status` is an aggregation of all agent activity; if at least one thread is `running`, then the overall session status is `running` as well.
 
-A [session budget](https://platform.claude.com/docs/en/managed-agents/budgets.md) is a single shared cap across all of a session's threads. As the cap is reached, threads pause independently, and each thread's cost is priced at the thread's own served model.
+A [session budget](./managed-agents-budgets.md) is a single shared cap across all of a session's threads. As the cap is reached, threads pause independently, and each thread's cost is priced at the thread's own served model.
 
 <Note>
-  A maximum of 25 concurrent threads is supported. The coordinator can call multiple copies of a single agent in the roster, creating multiple threads associated with one `agent`. [Advisor](#give-the-session-an-advisor) consultation threads are exempt from this limit.
+  A maximum of 25 concurrent threads is supported. The coordinator can call multiple copies of a single agent in the roster, creating multiple threads associated with one `agent`. [Advisor](./managed-agents-multiagent-orchestration.md#give-the-session-an-advisor) consultation threads are exempt from this limit.
 </Note>
 
 <Tabs>
@@ -766,7 +766,7 @@ A [session budget](https://platform.claude.com/docs/en/managed-agents/budgets.md
     List all threads associated with a session as follows:
 
     <CodeGroup>
-      ```bash curl
+      ```bash cURL
       curl -fsS "https://api.anthropic.com/v1/sessions/$SESSION_ID/threads" \
         -H "x-api-key: $ANTHROPIC_API_KEY" \
         -H "anthropic-version: 2023-06-01" \
@@ -809,7 +809,8 @@ A [session budget](https://platform.claude.com/docs/en/managed-agents/budgets.md
 
       ```java Java
       for (var thread : client.beta().sessions().threads().list(session.id()).autoPager()) {
-          IO.println("[" + thread.agent().name() + "] " + thread.status());
+          var name = thread.agent().isAgent() ? thread.agent().asAgent().name() : "advisor";
+          IO.println("[" + name + "] " + thread.status());
       }
       ```
 
@@ -833,7 +834,7 @@ A [session budget](https://platform.claude.com/docs/en/managed-agents/budgets.md
     Send `user.interrupt` with `session_thread_id` to stop a specific thread. Omitting `session_thread_id` interrupts every non-archived thread in the session, including the primary.
 
     <CodeGroup>
-      ```bash curl
+      ```bash cURL
       curl -fsS "https://api.anthropic.com/v1/sessions/$SESSION_ID/events?beta=true" \
         -H "x-api-key: $ANTHROPIC_API_KEY" \
         -H "anthropic-version: 2023-06-01" \
@@ -923,7 +924,7 @@ A [session budget](https://platform.claude.com/docs/en/managed-agents/budgets.md
     Optionally archive a session thread when it has completed its work. This frees up a thread against the 25-thread limit.
 
     <CodeGroup>
-      ```bash curl
+      ```bash cURL
       curl -fsS -X POST "https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID/archive" \
         -H "x-api-key: $ANTHROPIC_API_KEY" \
         -H "anthropic-version: 2023-06-01" \
@@ -969,7 +970,7 @@ A [session budget](https://platform.claude.com/docs/en/managed-agents/budgets.md
           ThreadArchiveParams.builder()
               .sessionId(session.id())
               .build());
-      IO.println(archived.status() + " " + archived.archivedAt());
+      IO.println(archived.status() + " " + archived.archivedAt().orElseThrow());
       ```
 
       ```php PHP
@@ -986,7 +987,7 @@ A [session budget](https://platform.claude.com/docs/en/managed-agents/budgets.md
     Archive only succeeds if the thread is `idle`. A thread parked on `requires_action` counts as idle and can be archived directly; only a running thread must be interrupted first:
 
     <CodeGroup>
-      ```bash curl
+      ```bash cURL
       # Interrupt the thread, then archive it
       curl -fsS "https://api.anthropic.com/v1/sessions/$SESSION_ID/events?beta=true" \
         -H "x-api-key: $ANTHROPIC_API_KEY" \
@@ -1082,7 +1083,7 @@ A [session budget](https://platform.claude.com/docs/en/managed-agents/budgets.md
           ThreadArchiveParams.builder()
               .sessionId(session.id())
               .build());
-      IO.println(archived.status() + " " + archived.archivedAt());
+      IO.println(archived.status() + " " + archived.archivedAt().orElseThrow());
       ```
 
       ```php PHP
@@ -1119,7 +1120,7 @@ These events surface multiagent activity on the primary thread at `/v1/sessions/
 | `agent.thread_message_received`    | On the primary thread, an agent sent a report or question to the coordinator. Includes `from_session_thread_id`, `from_agent_name`, and `content`.         |
 | `agent.thread_message_sent`        | On the primary thread, the coordinator sent a task or follow-up message to another agent. Includes `to_session_thread_id`, `to_agent_name`, and `content`. |
 
-Advisor consultations emit these same thread events under the reserved name `anthropic.advisor` (as `agent_name` on the thread lifecycle events and `from_agent_name` on the advice delivery); see [Give the session an advisor](#give-the-session-an-advisor) for the sequence.
+Advisor consultations emit these same thread events under the reserved name `anthropic.advisor` (as `agent_name` on the thread lifecycle events and `from_agent_name` on the advice delivery); see [Give the session an advisor](./managed-agents-multiagent-orchestration.md#give-the-session-an-advisor) for the sequence.
 
 ### Session thread events
 
@@ -1130,7 +1131,7 @@ Each session thread has its own event stream at `/v1/sessions/{session_id}/threa
 <Tabs>
   <Tab title="Stream session thread events">
     <CodeGroup>
-      ```bash curl
+      ```bash cURL
       curl -fsSN "https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID/stream?beta=true" \
         -H "x-api-key: $ANTHROPIC_API_KEY" \
         -H "anthropic-version: 2023-06-01" \
@@ -1241,7 +1242,7 @@ Each session thread has its own event stream at `/v1/sessions/{session_id}/threa
           for (var event : (Iterable<BetaManagedAgentsStreamSessionThreadEvents>) streamResponse.stream()::iterator) {
               if (event.isAgentMessage()) {
                   for (var block : event.asAgentMessage().content()) {
-                      IO.print(block.text());
+                      block.text().ifPresent(textBlock -> IO.print(textBlock.text()));
                   }
               } else if (event.isSessionThreadStatusIdle()) {
                   break;
@@ -1288,7 +1289,7 @@ Each session thread has its own event stream at `/v1/sessions/{session_id}/threa
     List all past session thread events to pull a complete history.
 
     <CodeGroup>
-      ```bash curl
+      ```bash cURL
       curl -fsS "https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID/events" \
         -H "x-api-key: $ANTHROPIC_API_KEY" \
         -H "anthropic-version: 2023-06-01" \
@@ -1344,11 +1345,10 @@ Each session thread has its own event stream at `/v1/sessions/{session_id}/threa
               thread.id(),
               EventListParams.builder().sessionId(session.id()).build()
           ).autoPager()) {
-          var json = event._json().orElseThrow().asObject().orElseThrow();
-          var type = json.get("type").asStringOrThrow();
-          var processedAt = json.containsKey("processed_at")
-              ? json.get("processed_at").asStringOrThrow()
-              : "pending";
+          var type = event._json().orElseThrow() instanceof JsonObject json
+              ? json.values().get("type").asStringOrThrow()
+              : "unknown";
+          var processedAt = event.processedAt().map(OffsetDateTime::toString).orElse("pending");
           IO.println("[" + type + "] " + processedAt);
       }
       ```
@@ -1398,7 +1398,7 @@ Post `user.tool_confirmation` (with `tool_use_id`) or `user.custom_tool_result` 
 The following example extends the [tool confirmation handler](./managed-agents-events-and-streaming.md#tool-confirmation) to route replies. The same pattern applies to `user.custom_tool_result`.
 
 <CodeGroup>
-  ```bash curl
+  ```bash cURL
   while IFS= read -r event_id; do
     jq -n --arg id "$event_id" \
       '{events: [{type: "user.tool_confirmation", tool_use_id: $id, result: "allow"}]}' |

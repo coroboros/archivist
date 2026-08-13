@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/cli/beta/environments/work/stop
 category: "api"
 generated: true
 ---
+---
+title: Stop Work
+url: https://platform.claude.com/docs/en/api/cli/beta/environments/work/stop
+---
+
 ## Stop Work
 
 `$ ant beta:environments:work stop`

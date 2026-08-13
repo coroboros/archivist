@@ -1,13 +1,13 @@
 ---
-title: "C# SDK"
+title: "Installation"
 source: "https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/csharp"
 category: "general"
 generated: true
 ---
-# C# SDK
-
-Install and configure the Anthropic C# SDK for .NET applications with IChatClient integration
-
+---
+title: C# SDK
+url: https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/csharp
+description: Install and configure the Anthropic C# SDK for .NET applications with IChatClient integration
 ---
 
 The Anthropic C# SDK provides convenient access to the Anthropic REST API from applications written in C#.

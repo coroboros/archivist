@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/beta/dreams/list"
 category: "api"
 generated: true
 ---
+---
+title: List Dreams
+url: https://platform.claude.com/docs/en/api/beta/dreams/list
+---
+
 ## List Dreams
 
 **get** `/v1/dreams`
@@ -54,7 +59,7 @@ List Dreams
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 29 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 30 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -119,6 +124,8 @@ List Dreams
     - `"fallback-credit-2026-07-01"`
 
     - `"agent-memory-2026-07-22"`
+
+    - `"mid-conversation-tool-changes-2026-07-01"`
 
 ### Returns
 

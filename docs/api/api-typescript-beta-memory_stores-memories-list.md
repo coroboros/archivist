@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/typescript/beta/memory_stores/m
 category: "api"
 generated: true
 ---
+---
+title: List memories
+url: https://platform.claude.com/docs/en/api/typescript/beta/memory_stores/memories/list
+---
+
 ## List memories
 
 `client.beta.memoryStores.memories.list(stringmemoryStoreID, MemoryListParamsparams?, RequestOptionsoptions?): PageCursor<BetaManagedAgentsMemoryListItem>`
@@ -48,7 +53,7 @@ List memories
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 29 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -113,6 +118,8 @@ List memories
       - `"fallback-credit-2026-07-01"`
 
       - `"agent-memory-2026-07-22"`
+
+      - `"mid-conversation-tool-changes-2026-07-01"`
 
 ### Returns
 
@@ -179,15 +186,15 @@ List memories
 ### Example
 
 ```typescript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic({
-  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
+  apiKey: process.env["ANTHROPIC_API_KEY"] // This is the default and can be omitted
 });
 
 // Automatically fetches more pages as needed.
 for await (const betaManagedAgentsMemoryListItem of client.beta.memoryStores.memories.list(
-  'memory_store_id',
+  "memory_store_id"
 )) {
   console.log(betaManagedAgentsMemoryListItem);
 }

@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/mcp_tunnels/list"
 category: "api"
 generated: true
 ---
+---
+title: List Tunnels
+url: https://platform.claude.com/docs/en/api/admin/mcp_tunnels/list
+---
+
 ## List Tunnels
 
 **get** `/v1/organizations/tunnels`

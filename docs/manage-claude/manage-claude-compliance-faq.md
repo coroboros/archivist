@@ -1,13 +1,13 @@
 ---
-title: "Compliance API FAQ"
+title: "Access and scopes"
 source: "https://platform.claude.com/docs/en/manage-claude/compliance-faq"
 category: "manage-claude"
 generated: true
 ---
-# Compliance API FAQ
-
-Answers to common questions about Compliance API access, scopes, retention, and integration.
-
+---
+title: Compliance API FAQ
+url: https://platform.claude.com/docs/en/manage-claude/compliance-faq
+description: Answers to common questions about Compliance API access, scopes, retention, and integration.
 ---
 
 <Note>

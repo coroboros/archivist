@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/go/beta/skills/list"
 category: "api"
 generated: true
 ---
+---
+title: List Skills
+url: https://platform.claude.com/docs/en/api/go/beta/skills/list
+---
+
 ## List Skills
 
 `client.Beta.Skills.List(ctx, params) (*PageCursor[BetaSkillListResponse], error)`
@@ -108,6 +113,8 @@ List Skills
       - `const AnthropicBetaFallbackCredit2026_07_01 AnthropicBeta = "fallback-credit-2026-07-01"`
 
       - `const AnthropicBetaAgentMemory2026_07_22 AnthropicBeta = "agent-memory-2026-07-22"`
+
+      - `const AnthropicBetaMidConversationToolChanges2026_07_01 AnthropicBeta = "mid-conversation-tool-changes-2026-07-01"`
 
 ### Returns
 

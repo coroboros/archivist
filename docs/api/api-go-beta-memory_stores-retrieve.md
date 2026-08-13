@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/go/beta/memory_stores/retrieve"
 category: "api"
 generated: true
 ---
+---
+title: Retrieve a memory store
+url: https://platform.claude.com/docs/en/api/go/beta/memory_stores/retrieve
+---
+
 ## Retrieve a memory store
 
 `client.Beta.MemoryStores.Get(ctx, memoryStoreID, query) (*BetaManagedAgentsMemoryStore, error)`
@@ -89,6 +94,8 @@ Retrieve a memory store
       - `const AnthropicBetaFallbackCredit2026_07_01 AnthropicBeta = "fallback-credit-2026-07-01"`
 
       - `const AnthropicBetaAgentMemory2026_07_22 AnthropicBeta = "agent-memory-2026-07-22"`
+
+      - `const AnthropicBetaMidConversationToolChanges2026_07_01 AnthropicBeta = "mid-conversation-tool-changes-2026-07-01"`
 
 ### Returns
 

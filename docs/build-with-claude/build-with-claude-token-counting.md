@@ -1,18 +1,18 @@
 ---
-title: "Token counting"
+title: "Compatibility"
 source: "https://platform.claude.com/docs/en/build-with-claude/token-counting"
 category: "build-with-claude"
 generated: true
 ---
-# Token counting
-
-Count the tokens in a message before you send it to Claude. Use token counts to manage rate limits and costs, make model routing decisions, and fit prompts to a target length.
+---
+title: Token counting
+url: https://platform.claude.com/docs/en/build-with-claude/token-counting
+description: Count the tokens in a message before you send it to Claude. Use token counts to manage rate limits and costs, make model routing decisions, and fit prompts to a target length.
+---
 
 ## Compatibility
 - [ZDR](../manage-claude/manage-claude-api-and-data-retention.md): eligible (excludes [Covered Models](../manage-claude/manage-claude-api-and-data-retention.md#model-specific-data-retention-requirements))
 - Platforms: Claude API, Claude Platform on AWS, Amazon Bedrock, Google Cloud, Microsoft Foundry
-
----
 
 Token counting lets you determine the number of tokens in a message before you send it to Claude. This helps you make informed decisions about your prompts and usage. With token counting, you can:
 
@@ -1410,7 +1410,7 @@ Claude Fable 5 and Claude Mythos 5 use the tokenizer introduced with Claude Opus
 
 ## Pricing and rate limits
 
-Token counting is **free to use** but subject to requests per minute rate limits based on your [usage tier](../api/api-rate-limits.md#rate-limits). If you need higher limits, use **Request rate limit increase** on the [Rate limits](/settings/limits) page.
+Token counting is **free to use** but subject to requests per minute rate limits based on your [usage tier](../api/api-rate-limits.md#rate-limits). If you need higher limits, use **Request rate limit increase** on the [Rate limits](https://platform.claude.com/settings/limits) page.
 
 | Usage tier | Requests per minute (RPM) |
 | ---------- | ------------------------- |

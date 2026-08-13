@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/php/beta/memory_stores/memories
 category: "api"
 generated: true
 ---
+---
+title: Create a memory
+url: https://platform.claude.com/docs/en/api/php/beta/memory_stores/memories/create
+---
+
 ## Create a memory
 
 `$client->beta->memoryStores->memories->create(string memoryStoreID, ?string content, string path, ?ManagedAgentsMemoryView view, ?list<AnthropicBeta> betas): ManagedAgentsMemory`
@@ -88,7 +93,7 @@ $betaManagedAgentsMemory = $client->beta->memoryStores->memories->create(
   content: 'content',
   path: 'xx',
   view: ManagedAgentsMemoryView::BASIC,
-  betas: ['message-batches-2024-09-24'],
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
 );
 
 var_dump($betaManagedAgentsMemory);

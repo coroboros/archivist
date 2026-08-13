@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/compliance/organizations/roles/
 category: "api"
 generated: true
 ---
+---
+title: Permissions
+url: https://platform.claude.com/docs/en/api/compliance/organizations/roles/permissions
+---
+
 # Permissions
 
 ## List Compliance Role Permissions

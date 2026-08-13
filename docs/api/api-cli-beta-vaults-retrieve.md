@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/cli/beta/vaults/retrieve"
 category: "api"
 generated: true
 ---
+---
+title: Get Vault
+url: https://platform.claude.com/docs/en/api/cli/beta/vaults/retrieve
+---
+
 ## Get Vault
 
 `$ ant beta:vaults retrieve`

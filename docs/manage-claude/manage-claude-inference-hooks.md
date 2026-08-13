@@ -1,13 +1,13 @@
 ---
-title: "Inference hooks"
+title: "How Inference hooks work"
 source: "https://platform.claude.com/docs/en/manage-claude/inference-hooks"
 category: "manage-claude"
 generated: true
 ---
-# Inference hooks
-
-Send each governed prompt to your organization's AI security server for an allow or deny verdict before inference proceeds.
-
+---
+title: Inference hooks
+url: https://platform.claude.com/docs/en/manage-claude/inference-hooks
+description: Send each governed prompt to your organization's AI security server for an allow or deny verdict before inference proceeds.
 ---
 
 <Note>
@@ -31,7 +31,7 @@ Today the only hook event is `prompt`, which fires once per governed inference r
 
 The following diagram traces one example (a Cowork request where Claude also calls an O365 tool) to illustrate which parts of the flow are hooked. The hooked points are the diagram's steps 1 and 5, where the prompt arrives and the tool result returns; each results in the validation exchange with your AI security server shown in steps 2 and 6.
 
-![Flow diagram: the AI security server validates both the prompt and the tool result before inference proceeds](/docs/images/inference-hooks-flow.svg)
+![Flow diagram: the AI security server validates both the prompt and the tool result before inference proceeds](https://platform.claude.com/docs/images/inference-hooks-flow.svg)
 
 A verdict is a small JSON object: `{"action": "allow"}` lets the request proceed, and a deny carries the user-facing reason. For the full verdict schema, see [Return a verdict](./manage-claude-inference-hooks-endpoint.md#return-a-verdict).
 

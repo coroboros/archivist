@@ -1,13 +1,13 @@
 ---
-title: "Configure Inference hooks"
+title: "Before you begin"
 source: "https://platform.claude.com/docs/en/manage-claude/inference-hooks-configuration"
 category: "manage-claude"
 generated: true
 ---
-# Configure Inference hooks
-
-Allow Inference hooks for your Claude Enterprise organization, connect your AI security server, and control enforcement, failure handling, and rollout.
-
+---
+title: Configure Inference hooks
+url: https://platform.claude.com/docs/en/manage-claude/inference-hooks-configuration
+description: Allow Inference hooks for your Claude Enterprise organization, connect your AI security server, and control enforcement, failure handling, and rollout.
 ---
 
 <Note>
@@ -63,7 +63,7 @@ There are three enforcement states: **off** (**Enforce verdicts** is off: your A
   </Step>
 
   <Step title="Save and store your signing secret">
-    Save the endpoint configuration. The first save generates your webhook signing secret and reveals it once. Copy it and store it securely before closing the dialog: the secret cannot be retrieved later, only [rotated](#rotate-your-signing-secret).
+    Save the endpoint configuration. The first save generates your webhook signing secret and reveals it once. Copy it and store it securely before closing the dialog: the secret cannot be retrieved later, only [rotated](./manage-claude-inference-hooks-configuration.md#rotate-your-signing-secret).
 
     Your AI security server uses this secret to verify the signature on every request it receives. For the verification procedure, see [Verify the signature](./manage-claude-inference-hooks-endpoint.md#verify-the-signature).
   </Step>
@@ -74,7 +74,7 @@ There are three enforcement states: **off** (**Enforce verdicts** is off: your A
     * **Block the request:** stop inference when your AI security server can't deliver a verdict (fail closed).
     * **Allow the request:** let the request proceed to the model without inspection (fail open).
 
-    The dropdown's third option, **Shadow mode**, is a rollout tool rather than a failure policy; see [Shadow mode](#shadow-mode).
+    The dropdown's third option, **Shadow mode**, is a rollout tool rather than a failure policy; see [Shadow mode](./manage-claude-inference-hooks-configuration.md#shadow-mode).
 
     Then set **Prompt verdict timeout (ms)**: 1 to 10,000ms, with a default of 5,000ms. The budget covers the entire exchange, and a slower verdict counts as an unreachable server, so set the lowest value your server can reliably meet.
 
@@ -88,7 +88,7 @@ There are three enforcement states: **off** (**Enforce verdicts** is off: your A
   </Step>
 
   <Step title="Turn on Enforce verdicts">
-    To evaluate verdicts against live traffic without blocking anyone at first, set **Mode** to **Shadow mode** (step 6) before turning on enforcement; see [Shadow mode](#shadow-mode).
+    To evaluate verdicts against live traffic without blocking anyone at first, set **Mode** to **Shadow mode** (step 6) before turning on enforcement; see [Shadow mode](./manage-claude-inference-hooks-configuration.md#shadow-mode).
 
     Turn on **Enforce verdicts** to gate Claude on your AI security server's verdict for every governed prompt, then confirm in the dialog, which restates your failure handling choice. Allow about a minute for the change to reach every Anthropic server; requests already in flight finish under the old setting. Turning it off stops prompts from being sent to your AI security server, again within about a minute; your configuration is kept.
   </Step>

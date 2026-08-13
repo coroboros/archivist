@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/csharp/beta/environments/work/p
 category: "api"
 generated: true
 ---
+---
+title: Poll for Work
+url: https://platform.claude.com/docs/en/api/csharp/beta/environments/work/poll
+---
+
 ## Poll for Work
 
 `BetaSelfHostedWork? Beta.Environments.Work.Poll(WorkPollParamsparameters, CancellationTokencancellationToken = default)`
@@ -97,6 +102,8 @@ Long poll for work items in the queue.
     - `"fallback-credit-2026-07-01"FallbackCredit2026_07_01`
 
     - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
+
+    - `"mid-conversation-tool-changes-2026-07-01"MidConversationToolChanges2026_07_01`
 
   - `string anthropicWorkerID`
 

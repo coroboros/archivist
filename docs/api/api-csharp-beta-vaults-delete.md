@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/csharp/beta/vaults/delete"
 category: "api"
 generated: true
 ---
+---
+title: Delete Vault
+url: https://platform.claude.com/docs/en/api/csharp/beta/vaults/delete
+---
+
 ## Delete Vault
 
 `BetaManagedAgentsDeletedVault Beta.Vaults.Delete(VaultDeleteParamsparameters, CancellationTokencancellationToken = default)`
@@ -87,6 +92,8 @@ Delete Vault
     - `"fallback-credit-2026-07-01"FallbackCredit2026_07_01`
 
     - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
+
+    - `"mid-conversation-tool-changes-2026-07-01"MidConversationToolChanges2026_07_01`
 
 ### Returns
 

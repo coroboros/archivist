@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/cli/beta/memory_stores"
 category: "api"
 generated: true
 ---
+---
+title: Memory Stores
+url: https://platform.claude.com/docs/en/api/cli/beta/memory_stores
+---
+
 # Memory Stores
 
 ## Create a memory store

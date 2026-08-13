@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/php/beta/skills/create"
 category: "api"
 generated: true
 ---
+---
+title: Create Skill
+url: https://platform.claude.com/docs/en/api/php/beta/skills/create
+---
+
 ## Create Skill
 
 `$client->beta->skills->create(list<string> files, ?string displayTitle, ?list<AnthropicBeta> betas): SkillNewResponse`
@@ -89,7 +94,7 @@ $skill = $client->beta->skills->create(
     FileParam::fromString('Example data', filename: uniqid('file-upload-', true)),
   ],
   displayTitle: 'display_title',
-  betas: ['message-batches-2024-09-24'],
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
 );
 
 var_dump($skill);

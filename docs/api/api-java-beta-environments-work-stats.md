@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/java/beta/environments/work/sta
 category: "api"
 generated: true
 ---
+---
+title: Get Queue Statistics
+url: https://platform.claude.com/docs/en/api/java/beta/environments/work/stats
+---
+
 ## Get Queue Statistics
 
 `BetaSelfHostedWorkQueueStats beta().environments().work().stats(WorkStatsParamsparams = WorkStatsParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
@@ -85,6 +90,8 @@ Get statistics about the work queue for an environment.
     - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
 ### Returns
 

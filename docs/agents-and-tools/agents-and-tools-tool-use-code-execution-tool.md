@@ -1,13 +1,13 @@
 ---
-title: "Code execution tool"
+title: "Model compatibility"
 source: "https://platform.claude.com/docs/en/agents-and-tools/tool-use/code-execution-tool"
 category: "agents-and-tools"
 generated: true
 ---
-# Code execution tool
-
-Run Python and bash code in a sandboxed container to analyze data, generate files, and iterate on solutions.
-
+---
+title: Code execution tool
+url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/code-execution-tool
+description: Run Python and bash code in a sandboxed container to analyze data, generate files, and iterate on solutions.
 ---
 
 Claude can analyze data, create visualizations, perform complex calculations, run system commands, create and edit files, and process uploaded files directly within the API conversation. The code execution tool allows Claude to run Bash commands and manipulate files, including writing code, in a secure, sandboxed environment.
@@ -44,20 +44,20 @@ The code execution tool is available on the following models:
 
 Each tool version builds on the previous one:
 
-* `code_execution_20250825` supports Bash commands and file operations and is available on every model in the table.
+* `code_execution_20250825` supports Bash commands and file operations.
 * `code_execution_20260120` adds REPL state persistence and [programmatic tool calling](./agents-and-tools-tool-use-programmatic-tool-calling.md) from within the sandbox. Claude Haiku 4.5 accepts the `code_execution_20260120` and `code_execution_20260521` tool types, but programmatic tool calling and the REPL state persistence that depends on it aren't available on it, so the newer versions behave like `code_execution_20250825` there.
-* `code_execution_20260521` is the same runtime as `code_execution_20260120`. The difference is that the tool description tells Claude about the 90-second wall-clock limit on each Python cell in programmatic tool calling, so Claude can budget long-running cells. A cell that exceeds the limit returns a normal code execution result with a non-zero `return_code` and a `detection_timeout` status message in its output. This is separate from the `execution_time_exceeded` [error code](#errors), which the API returns when a whole tool invocation exceeds the maximum execution time.
+* `code_execution_20260521` is the same runtime as `code_execution_20260120`. The difference is that the tool description tells Claude about the 90-second wall-clock limit on each Python cell in programmatic tool calling, so Claude can budget long-running cells. A cell that exceeds the limit returns a normal code execution result with a non-zero `return_code` and a `detection_timeout` status message in its output. This is separate from the `execution_time_exceeded` [error code](./agents-and-tools-tool-use-code-execution-tool.md#errors), which the API returns when a whole tool invocation exceeds the maximum execution time.
 
 All three tool versions are generally available and don't require an `anthropic-beta` header. The legacy code execution beta headers remain valid opt-ins.
 
-The examples on this page use `code_execution_20250825` because every model in the table supports it. The current [web search](./agents-and-tools-tool-use-web-search-tool.md) and [web fetch](./agents-and-tools-tool-use-web-fetch-tool.md) tools (`web_search_20260209`, `web_fetch_20260209`, and later) require `code_execution_20260120` or later as their code execution version.
+The examples on this page use `code_execution_20250825`, which covers the Bash and file operations they demonstrate and behaves the same way on every model in the table; use `code_execution_20260120` or later when you need programmatic tool calling or REPL state persistence. The current [web search](./agents-and-tools-tool-use-web-search-tool.md) and [web fetch](./agents-and-tools-tool-use-web-fetch-tool.md) tools (`web_search_20260209`, `web_fetch_20260209`, and later) require `code_execution_20260120` or later as their code execution version.
 
 <Note>
-  If you're still using the legacy `code_execution_20250522` (Python only), see [Upgrade to latest tool version](#upgrade-to-latest-tool-version) to migrate from it.
+  If you're still using the legacy `code_execution_20250522` (Python only), see [Upgrade to latest tool version](./agents-and-tools-tool-use-code-execution-tool.md#upgrade-to-latest-tool-version) to migrate from it.
 </Note>
 
 <Warning>
-  Older tool versions are not guaranteed to be backwards-compatible with newer models. Always use the tool version that corresponds to your model version.
+  Older tool versions are not guaranteed to stay compatible with newer models. When you adopt a new model, check the [model compatibility table](./agents-and-tools-tool-use-code-execution-tool.md#model-compatibility) and prefer the newest tool version your integration supports.
 </Warning>
 
 ## Platform availability
@@ -235,7 +235,7 @@ Here's an example that asks Claude to perform a calculation:
   ```
 </CodeGroup>
 
-The response interleaves `server_tool_use` blocks (the commands Claude ran) with their tool result blocks, followed by Claude's text. The top level also includes a `container` object whose `id` you can [reuse across requests](#container-reuse). See [Response format](#response-format) for the block shapes.
+The response interleaves `server_tool_use` blocks (the commands Claude ran) with their tool result blocks, followed by Claude's text. The top level also includes a `container` object whose `id` you can [reuse across requests](./agents-and-tools-tool-use-code-execution-tool.md#container-reuse). See [Response format](./agents-and-tools-tool-use-code-execution-tool.md#response-format) for the block shapes.
 
 ## How code execution works
 
@@ -250,11 +250,11 @@ When you add the code execution tool to your API request:
 
 3. Claude can use any combination of these capabilities in a single request
 
-4. All operations run in a secure, sandboxed container. The container has no internet access, so Claude can't download packages at runtime: only the [pre-installed libraries](#pre-installed-libraries) are available
+4. All operations run in a secure, sandboxed container. The container has no internet access, so Claude can't download packages at runtime: only the [pre-installed libraries](./agents-and-tools-tool-use-code-execution-tool.md#pre-installed-libraries) are available
 
 5. The API runs every command server-side and returns the results to Claude within the same request, so you never execute code or send back `tool_result` blocks yourself. One exception is when Claude calls one of your client tools alongside code execution: the API returns the code execution call without its result. The result arrives in a later response, after you send back the `tool_result` blocks for your client tools
 
-6. Each request runs in a new container unless you pass an earlier response's container ID back (see [Container reuse](#container-reuse))
+6. Each request runs in a new container unless you pass an earlier response's container ID back (see [Container reuse](./agents-and-tools-tool-use-code-execution-tool.md#container-reuse))
 
 7. Claude provides results with any generated charts, calculations, or analysis
 
@@ -953,7 +953,7 @@ When you provide this tool, Claude automatically gains access to two sub-tools:
 * `bash_code_execution`: Run shell commands
 * `text_editor_code_execution`: View, create, and edit files, including writing code
 
-When Claude runs code, the response also includes a top-level `container` object with the container's `id` and `expires_at` timestamp. Pass that ID back in the top-level `container` request parameter to keep using the same container. See [Container reuse](#container-reuse).
+When Claude runs code, the response also includes a top-level `container` object with the container's `id` and `expires_at` timestamp. Pass that ID back in the top-level `container` request parameter to keep using the same container. See [Container reuse](./agents-and-tools-tool-use-code-execution-tool.md#container-reuse).
 
 ## Response format
 
@@ -1069,7 +1069,7 @@ Bash command results (`bash_code_execution_result`) include:
 * `stdout`: Output from successful execution
 * `stderr`: Error messages if execution fails
 * `return_code`: 0 for success, non-zero for failure
-* `content`: A list with an entry for each file the command created. Each entry carries the `file_id` to [retrieve the file](#retrieve-generated-files) with the Files API
+* `content`: A list with an entry for each file the command created. Each entry carries the `file_id` to [retrieve the file](./agents-and-tools-tool-use-code-execution-tool.md#retrieve-generated-files) with the Files API
 
 File operation results have their own fields:
 
@@ -1126,7 +1126,7 @@ The code execution tool runs in a secure, containerized environment designed spe
 * **Memory:** 5 GiB RAM
 * **Disk space:** 5 GiB workspace storage
 * **CPU:** 1 CPU
-* **Execution time:** A tool invocation that runs past the maximum execution time returns an `execution_time_exceeded` [error](#errors). With [programmatic tool calling](./agents-and-tools-tool-use-programmatic-tool-calling.md), each REPL cell also has a 90-second wall-clock limit
+* **Execution time:** A tool invocation that runs past the maximum execution time returns an `execution_time_exceeded` [error](./agents-and-tools-tool-use-code-execution-tool.md#errors). With [programmatic tool calling](./agents-and-tools-tool-use-programmatic-tool-calling.md), each REPL cell also has a 90-second wall-clock limit
 
 ### Networking and security
 
@@ -1509,7 +1509,7 @@ Code execution usage is tracked in the response:
 
 ## Upgrade to latest tool version
 
-The latest tool version is `code_execution_20260521`. To move between the three current versions, update the `type` string in your request: all three return the response blocks documented in [Response format](#response-format). See [Model compatibility](#model-compatibility) for what each version adds and which models support it.
+The latest tool version is `code_execution_20260521`. To move between the three current versions, update the `type` string in your request: all three return the response blocks documented in [Response format](./agents-and-tools-tool-use-code-execution-tool.md#response-format). See [Model compatibility](./agents-and-tools-tool-use-code-execution-tool.md#model-compatibility) for what each version adds and which models support it.
 
 The rest of this section covers migrating from the legacy Python-only `code_execution_20250522` to the current tool versions.
 
@@ -1539,7 +1539,7 @@ To upgrade, update the tool type in your API requests:
 **Review response handling** (if parsing responses programmatically):
 
 * The API no longer sends the previous blocks for Python execution responses
-* Instead, the API sends new response types for Bash and file operations (see [Response format](#response-format))
+* Instead, the API sends new response types for Bash and file operations (see [Response format](./agents-and-tools-tool-use-code-execution-tool.md#response-format))
 
 ## Data retention
 

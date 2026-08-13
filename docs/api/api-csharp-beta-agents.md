@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/csharp/beta/agents"
 category: "api"
 generated: true
 ---
+---
+title: Agents
+url: https://platform.claude.com/docs/en/api/csharp/beta/agents
+---
+
 # Agents
 
 ## Create Agent
@@ -199,6 +204,10 @@ Create Agent
           - `required Type Type`
 
             - `"max"Max`
+
+      - `string? InferenceGeo`
+
+        Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo. On update, `model` is whole-object replacement — omitting inference_geo clears it.
 
       - `Speed? Speed`
 
@@ -422,7 +431,7 @@ Create Agent
 
       - `required string Description`
 
-        Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-4096 characters.
+        Description of what the tool does, shown to the agent to help it decide when to use the tool.
 
       - `required BetaManagedAgentsCustomToolInputSchema InputSchema`
 
@@ -509,6 +518,8 @@ Create Agent
     - `"fallback-credit-2026-07-01"FallbackCredit2026_07_01`
 
     - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
+
+    - `"mid-conversation-tool-changes-2026-07-01"MidConversationToolChanges2026_07_01`
 
 ### Returns
 
@@ -646,6 +657,10 @@ Create Agent
 
           - `"max"Max`
 
+    - `string InferenceGeo`
+
+      Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo.
+
     - `Speed Speed`
 
       Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
@@ -658,17 +673,33 @@ Create Agent
 
     Resolved coordinator topology with a concrete agent roster.
 
-    - `required IReadOnlyList<BetaManagedAgentsAgentReference> Agents`
+    - `required IReadOnlyList<Agent> Agents`
 
       Agents the coordinator may spawn as session threads, each resolved to a specific version.
 
-      - `required string ID`
+      - `class BetaManagedAgentsAgentReference:`
 
-      - `required Type Type`
+        A resolved agent reference with a concrete version.
 
-        - `"agent"Agent`
+        - `required string ID`
 
-      - `required Int Version`
+        - `required Type Type`
+
+          - `"agent"Agent`
+
+        - `required Int Version`
+
+      - `class BetaManagedAgentsAdvisor:`
+
+        Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
+
+        - `required string Model`
+
+          The advisor model id.
+
+        - `required Type Type`
+
+          - `"advisor"Advisor`
 
     - `required Type Type`
 
@@ -889,6 +920,7 @@ Console.WriteLine(betaManagedAgentsAgent);
     "effort": {
       "type": "low"
     },
+    "inference_geo": "inference_geo",
     "speed": "standard"
   },
   "multiagent": {
@@ -1041,6 +1073,8 @@ List Agents
 
     - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
 
+    - `"mid-conversation-tool-changes-2026-07-01"MidConversationToolChanges2026_07_01`
+
 ### Returns
 
 - `class AgentListPageResponse:`
@@ -1181,6 +1215,10 @@ List Agents
 
             - `"max"Max`
 
+      - `string InferenceGeo`
+
+        Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo.
+
       - `Speed Speed`
 
         Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
@@ -1193,17 +1231,33 @@ List Agents
 
       Resolved coordinator topology with a concrete agent roster.
 
-      - `required IReadOnlyList<BetaManagedAgentsAgentReference> Agents`
+      - `required IReadOnlyList<Agent> Agents`
 
         Agents the coordinator may spawn as session threads, each resolved to a specific version.
 
-        - `required string ID`
+        - `class BetaManagedAgentsAgentReference:`
 
-        - `required Type Type`
+          A resolved agent reference with a concrete version.
 
-          - `"agent"Agent`
+          - `required string ID`
 
-        - `required Int Version`
+          - `required Type Type`
+
+            - `"agent"Agent`
+
+          - `required Int Version`
+
+        - `class BetaManagedAgentsAdvisor:`
+
+          Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
+
+          - `required string Model`
+
+            The advisor model id.
+
+          - `required Type Type`
+
+            - `"advisor"Advisor`
 
       - `required Type Type`
 
@@ -1428,6 +1482,7 @@ await foreach (var item in page.Paginate())
         "effort": {
           "type": "low"
         },
+        "inference_geo": "inference_geo",
         "speed": "standard"
       },
       "multiagent": {
@@ -1571,6 +1626,8 @@ Get Agent
 
     - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
 
+    - `"mid-conversation-tool-changes-2026-07-01"MidConversationToolChanges2026_07_01`
+
 ### Returns
 
 - `class BetaManagedAgentsAgent:`
@@ -1707,6 +1764,10 @@ Get Agent
 
           - `"max"Max`
 
+    - `string InferenceGeo`
+
+      Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo.
+
     - `Speed Speed`
 
       Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
@@ -1719,17 +1780,33 @@ Get Agent
 
     Resolved coordinator topology with a concrete agent roster.
 
-    - `required IReadOnlyList<BetaManagedAgentsAgentReference> Agents`
+    - `required IReadOnlyList<Agent> Agents`
 
       Agents the coordinator may spawn as session threads, each resolved to a specific version.
 
-      - `required string ID`
+      - `class BetaManagedAgentsAgentReference:`
 
-      - `required Type Type`
+        A resolved agent reference with a concrete version.
 
-        - `"agent"Agent`
+        - `required string ID`
 
-      - `required Int Version`
+        - `required Type Type`
+
+          - `"agent"Agent`
+
+        - `required Int Version`
+
+      - `class BetaManagedAgentsAdvisor:`
+
+        Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
+
+        - `required string Model`
+
+          The advisor model id.
+
+        - `required Type Type`
+
+          - `"advisor"Advisor`
 
     - `required Type Type`
 
@@ -1949,6 +2026,7 @@ Console.WriteLine(betaManagedAgentsAgent);
     "effort": {
       "type": "low"
     },
+    "inference_geo": "inference_geo",
     "speed": "standard"
   },
   "multiagent": {
@@ -2223,6 +2301,10 @@ Update Agent
 
             - `"max"Max`
 
+      - `string? InferenceGeo`
+
+        Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo. On update, `model` is whole-object replacement — omitting inference_geo clears it.
+
       - `Speed? Speed`
 
         Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
@@ -2421,7 +2503,7 @@ Update Agent
 
       - `required string Description`
 
-        Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-4096 characters.
+        Description of what the tool does, shown to the agent to help it decide when to use the tool.
 
       - `required BetaManagedAgentsCustomToolInputSchema InputSchema`
 
@@ -2512,6 +2594,8 @@ Update Agent
     - `"fallback-credit-2026-07-01"FallbackCredit2026_07_01`
 
     - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
+
+    - `"mid-conversation-tool-changes-2026-07-01"MidConversationToolChanges2026_07_01`
 
 ### Returns
 
@@ -2649,6 +2733,10 @@ Update Agent
 
           - `"max"Max`
 
+    - `string InferenceGeo`
+
+      Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo.
+
     - `Speed Speed`
 
       Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
@@ -2661,17 +2749,33 @@ Update Agent
 
     Resolved coordinator topology with a concrete agent roster.
 
-    - `required IReadOnlyList<BetaManagedAgentsAgentReference> Agents`
+    - `required IReadOnlyList<Agent> Agents`
 
       Agents the coordinator may spawn as session threads, each resolved to a specific version.
 
-      - `required string ID`
+      - `class BetaManagedAgentsAgentReference:`
 
-      - `required Type Type`
+        A resolved agent reference with a concrete version.
 
-        - `"agent"Agent`
+        - `required string ID`
 
-      - `required Int Version`
+        - `required Type Type`
+
+          - `"agent"Agent`
+
+        - `required Int Version`
+
+      - `class BetaManagedAgentsAdvisor:`
+
+        Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
+
+        - `required string Model`
+
+          The advisor model id.
+
+        - `required Type Type`
+
+          - `"advisor"Advisor`
 
     - `required Type Type`
 
@@ -2891,6 +2995,7 @@ Console.WriteLine(betaManagedAgentsAgent);
     "effort": {
       "type": "low"
     },
+    "inference_geo": "inference_geo",
     "speed": "standard"
   },
   "multiagent": {
@@ -3026,6 +3131,8 @@ Archive Agent
     - `"fallback-credit-2026-07-01"FallbackCredit2026_07_01`
 
     - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
+
+    - `"mid-conversation-tool-changes-2026-07-01"MidConversationToolChanges2026_07_01`
 
 ### Returns
 
@@ -3163,6 +3270,10 @@ Archive Agent
 
           - `"max"Max`
 
+    - `string InferenceGeo`
+
+      Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo.
+
     - `Speed Speed`
 
       Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
@@ -3175,17 +3286,33 @@ Archive Agent
 
     Resolved coordinator topology with a concrete agent roster.
 
-    - `required IReadOnlyList<BetaManagedAgentsAgentReference> Agents`
+    - `required IReadOnlyList<Agent> Agents`
 
       Agents the coordinator may spawn as session threads, each resolved to a specific version.
 
-      - `required string ID`
+      - `class BetaManagedAgentsAgentReference:`
 
-      - `required Type Type`
+        A resolved agent reference with a concrete version.
 
-        - `"agent"Agent`
+        - `required string ID`
 
-      - `required Int Version`
+        - `required Type Type`
+
+          - `"agent"Agent`
+
+        - `required Int Version`
+
+      - `class BetaManagedAgentsAdvisor:`
+
+        Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
+
+        - `required string Model`
+
+          The advisor model id.
+
+        - `required Type Type`
+
+          - `"advisor"Advisor`
 
     - `required Type Type`
 
@@ -3405,6 +3532,7 @@ Console.WriteLine(betaManagedAgentsAgent);
     "effort": {
       "type": "low"
     },
+    "inference_geo": "inference_geo",
     "speed": "standard"
   },
   "multiagent": {
@@ -3458,6 +3586,20 @@ Console.WriteLine(betaManagedAgentsAgent);
 ```
 
 ## Domain Types
+
+### Beta Managed Agents Advisor
+
+- `class BetaManagedAgentsAdvisor:`
+
+  Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
+
+  - `required string Model`
+
+    The advisor model id.
+
+  - `required Type Type`
+
+    - `"advisor"Advisor`
 
 ### Beta Managed Agents Agent
 
@@ -3595,6 +3737,10 @@ Console.WriteLine(betaManagedAgentsAgent);
 
           - `"max"Max`
 
+    - `string InferenceGeo`
+
+      Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo.
+
     - `Speed Speed`
 
       Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
@@ -3607,17 +3753,33 @@ Console.WriteLine(betaManagedAgentsAgent);
 
     Resolved coordinator topology with a concrete agent roster.
 
-    - `required IReadOnlyList<BetaManagedAgentsAgentReference> Agents`
+    - `required IReadOnlyList<Agent> Agents`
 
       Agents the coordinator may spawn as session threads, each resolved to a specific version.
 
-      - `required string ID`
+      - `class BetaManagedAgentsAgentReference:`
 
-      - `required Type Type`
+        A resolved agent reference with a concrete version.
 
-        - `"agent"Agent`
+        - `required string ID`
 
-      - `required Int Version`
+        - `required Type Type`
+
+          - `"agent"Agent`
+
+        - `required Int Version`
+
+      - `class BetaManagedAgentsAdvisor:`
+
+        Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
+
+        - `required string Model`
+
+          The advisor model id.
+
+        - `required Type Type`
+
+          - `"advisor"Advisor`
 
     - `required Type Type`
 
@@ -4363,7 +4525,7 @@ Console.WriteLine(betaManagedAgentsAgent);
 
   - `required string Description`
 
-    Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-4096 characters.
+    Description of what the tool does, shown to the agent to help it decide when to use the tool.
 
   - `required BetaManagedAgentsCustomToolInputSchema InputSchema`
 
@@ -4797,6 +4959,10 @@ Console.WriteLine(betaManagedAgentsAgent);
 
         - `"max"Max`
 
+  - `string InferenceGeo`
+
+    Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo.
+
   - `Speed Speed`
 
     Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
@@ -4927,6 +5093,10 @@ Console.WriteLine(betaManagedAgentsAgent);
 
         - `"max"Max`
 
+  - `string? InferenceGeo`
+
+    Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo. On update, `model` is whole-object replacement — omitting inference_geo clears it.
+
   - `Speed? Speed`
 
     Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
@@ -4941,17 +5111,33 @@ Console.WriteLine(betaManagedAgentsAgent);
 
   Resolved coordinator topology with a concrete agent roster.
 
-  - `required IReadOnlyList<BetaManagedAgentsAgentReference> Agents`
+  - `required IReadOnlyList<Agent> Agents`
 
     Agents the coordinator may spawn as session threads, each resolved to a specific version.
 
-    - `required string ID`
+    - `class BetaManagedAgentsAgentReference:`
 
-    - `required Type Type`
+      A resolved agent reference with a concrete version.
 
-      - `"agent"Agent`
+      - `required string ID`
 
-    - `required Int Version`
+      - `required Type Type`
+
+        - `"agent"Agent`
+
+      - `required Int Version`
+
+    - `class BetaManagedAgentsAdvisor:`
+
+      Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
+
+      - `required string Model`
+
+        The advisor model id.
+
+      - `required Type Type`
+
+        - `"advisor"Advisor`
 
   - `required Type Type`
 
@@ -4992,6 +5178,18 @@ Console.WriteLine(betaManagedAgentsAgent);
       - `required Type Type`
 
         - `"self"Self`
+
+    - `class BetaManagedAgentsAdvisorParams:`
+
+      Platform advisor roster entry: a model the session's primary thread may consult mid-turn. At most one per roster; the entry occupies the roster name `anthropic.advisor`.
+
+      - `required string Model`
+
+        A Claude model id. The model must be permitted as an advisor for this agent's model — see the sessions/threads/advisor spec.
+
+      - `required Type Type`
+
+        - `"advisor"Advisor`
 
   - `required Type Type`
 
@@ -5132,6 +5330,10 @@ Console.WriteLine(betaManagedAgentsAgent);
         - `required Type Type`
 
           - `"max"Max`
+
+    - `string InferenceGeo`
+
+      Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo.
 
     - `Speed Speed`
 
@@ -5463,6 +5665,8 @@ List Agent Versions
 
     - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
 
+    - `"mid-conversation-tool-changes-2026-07-01"MidConversationToolChanges2026_07_01`
+
 ### Returns
 
 - `class VersionListPageResponse:`
@@ -5603,6 +5807,10 @@ List Agent Versions
 
             - `"max"Max`
 
+      - `string InferenceGeo`
+
+        Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo.
+
       - `Speed Speed`
 
         Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
@@ -5615,17 +5823,33 @@ List Agent Versions
 
       Resolved coordinator topology with a concrete agent roster.
 
-      - `required IReadOnlyList<BetaManagedAgentsAgentReference> Agents`
+      - `required IReadOnlyList<Agent> Agents`
 
         Agents the coordinator may spawn as session threads, each resolved to a specific version.
 
-        - `required string ID`
+        - `class BetaManagedAgentsAgentReference:`
 
-        - `required Type Type`
+          A resolved agent reference with a concrete version.
 
-          - `"agent"Agent`
+          - `required string ID`
 
-        - `required Int Version`
+          - `required Type Type`
+
+            - `"agent"Agent`
+
+          - `required Int Version`
+
+        - `class BetaManagedAgentsAdvisor:`
+
+          Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
+
+          - `required string Model`
+
+            The advisor model id.
+
+          - `required Type Type`
+
+            - `"advisor"Advisor`
 
       - `required Type Type`
 
@@ -5853,6 +6077,7 @@ await foreach (var item in page.Paginate())
         "effort": {
           "type": "low"
         },
+        "inference_geo": "inference_geo",
         "speed": "standard"
       },
       "multiagent": {

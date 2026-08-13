@@ -1,13 +1,13 @@
 ---
-title: "App Attest for iOS and macOS apps"
+title: "How App Attest works"
 source: "https://platform.claude.com/docs/en/manage-claude/app-attest"
 category: "manage-claude"
 generated: true
 ---
-# App Attest for iOS and macOS apps
-
-Let genuine installations of your iOS or macOS app call the Claude API without shipping an API key or running a proxy, using Apple's App Attest service.
-
+---
+title: App Attest for iOS and macOS apps
+url: https://platform.claude.com/docs/en/manage-claude/app-attest
+description: Let genuine installations of your iOS or macOS app call the Claude API without shipping an API key or running a proxy, using Apple's App Attest service.
 ---
 
 App Attest authenticates iOS and macOS apps that call the Claude API directly from the device, with usage billed to your workspace. This page explains how App Attest works, how to register your app in the Claude Console, and how to revoke an app integration.

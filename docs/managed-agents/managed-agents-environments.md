@@ -1,13 +1,13 @@
 ---
-title: "Cloud environment setup"
+title: "Create an environment"
 source: "https://platform.claude.com/docs/en/managed-agents/environments"
 category: "managed-agents"
 generated: true
 ---
-# Cloud environment setup
-
-Customize cloud sandboxes for your sessions.
-
+---
+title: Cloud environment setup
+url: https://platform.claude.com/docs/en/managed-agents/environments
+description: Customize cloud sandboxes for your sessions.
 ---
 
 Environments define the sandbox configuration where your agent runs. You create an environment once, then reference its ID each time you start a session. Multiple sessions can share the same environment, but each session gets its own isolated sandbox (a fresh Linux container).
@@ -21,7 +21,7 @@ This page covers `type: cloud` environments. To run sandboxes on your own infras
 ## Create an environment
 
 <CodeGroup defaultLanguage="CLI">
-  ```bash curl
+  ```bash cURL
   environment=$(curl -fsS https://api.anthropic.com/v1/environments \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
@@ -141,7 +141,7 @@ Use a unique, descriptive `name` so you can tell environments apart.
 Pass the environment ID as a string when [creating a session](./managed-agents-sessions.md).
 
 <CodeGroup defaultLanguage="CLI">
-  ```bash curl
+  ```bash cURL
   session=$(curl -fsS https://api.anthropic.com/v1/sessions \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
@@ -225,7 +225,7 @@ Pass the environment ID as a string when [creating a session](./managed-agents-s
 The `packages` field pre-installs packages into the sandbox before the agent starts. Packages are installed by their respective package managers and cached across sessions that share the same environment. When multiple package managers are specified, they run in alphabetical order (apt, cargo, gem, go, npm, pip). You can optionally pin specific versions. Unpinned packages install the latest version.
 
 <CodeGroup defaultLanguage="CLI">
-  ```bash curl
+  ```bash cURL
   environment=$(curl -fsS https://api.anthropic.com/v1/environments \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
@@ -399,7 +399,7 @@ The `networking` field controls the sandbox's outbound network access. It does n
 The following example creates an environment with `limited` networking:
 
 <CodeGroup defaultLanguage="CLI">
-  ```bash curl
+  ```bash cURL
   curl -fsS https://api.anthropic.com/v1/environments \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
@@ -568,7 +568,7 @@ When using `limited` networking:
 ## Manage environments
 
 <CodeGroup defaultLanguage="CLI">
-  ```bash curl
+  ```bash cURL
   # List environments
   environments=$(curl -fsS https://api.anthropic.com/v1/environments \
     -H "x-api-key: $ANTHROPIC_API_KEY" \

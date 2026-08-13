@@ -1,13 +1,13 @@
 ---
-title: "Prompting Claude Sonnet 5"
+title: "Response length and verbosity"
 source: "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-sonnet-5"
 category: "build-with-claude"
 generated: true
 ---
-# Prompting Claude Sonnet 5
-
-Behavioral differences and prompting patterns for Claude Sonnet 5, covering effort, adaptive thinking defaults, tool use, and migration from Claude Sonnet 4.6.
-
+---
+title: Prompting Claude Sonnet 5
+url: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-sonnet-5
+description: Behavioral differences and prompting patterns for Claude Sonnet 5, covering effort, adaptive thinking defaults, tool use, and migration from Claude Sonnet 4.6.
 ---
 
 This guide covers the prompting patterns specific to Claude Sonnet 5. For the model's capabilities and API changes, see [What's new in Claude Sonnet 5](../about-claude/about-claude-models-whats-new-sonnet-5.md). For techniques that apply across all current Claude models, see [Prompting best practices](./build-with-claude-prompt-engineering-claude-prompting-best-practices.md).

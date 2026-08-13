@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/java/beta/sessions/resources/ad
 category: "api"
 generated: true
 ---
+---
+title: Add Session Resource
+url: https://platform.claude.com/docs/en/api/java/beta/sessions/resources/add
+---
+
 ## Add Session Resource
 
 `BetaManagedAgentsFileResource beta().sessions().resources().add(ResourceAddParamsparams, RequestOptionsrequestOptions = RequestOptions.none())`
@@ -85,6 +90,8 @@ Add Session Resource
     - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
   - `BetaManagedAgentsFileResourceParams betaManagedAgentsFileResourceParams`
 

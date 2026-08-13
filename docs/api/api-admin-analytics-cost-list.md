@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/analytics/cost/list"
 category: "api"
 generated: true
 ---
+---
+title: Get Cost Over Time
+url: https://platform.claude.com/docs/en/api/admin/analytics/cost/list
+---
+
 ## Get Cost Over Time
 
 **get** `/v1/organizations/analytics/cost_report`

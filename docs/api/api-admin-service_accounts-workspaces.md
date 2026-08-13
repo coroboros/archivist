@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/service_accounts/workspac
 category: "api"
 generated: true
 ---
+---
+title: Workspaces
+url: https://platform.claude.com/docs/en/api/admin/service_accounts/workspaces
+---
+
 # Workspaces
 
 ## Add Workspace To Service Account

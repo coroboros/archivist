@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/java/beta/webhooks"
 category: "api"
 generated: true
 ---
+---
+title: Webhooks
+url: https://platform.claude.com/docs/en/api/java/beta/webhooks
+---
+
 # Webhooks
 
 ## Domain Types
@@ -924,6 +929,20 @@ generated: true
 
       - `String workspaceId`
 
+    - `class BetaWebhookSessionBudgetReachedEventData:`
+
+      - `String id`
+
+        ID of the session that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "session.budget_reached"constant`
+
+        - `SESSION_BUDGET_REACHED("session.budget_reached")`
+
+      - `String workspaceId`
+
   - `JsonValue; type "event"constant`
 
     Object type. Always `event` for webhook payloads.
@@ -1564,6 +1583,20 @@ generated: true
 
     - `String workspaceId`
 
+  - `class BetaWebhookSessionBudgetReachedEventData:`
+
+    - `String id`
+
+      ID of the session that triggered the event.
+
+    - `String organizationId`
+
+    - `JsonValue; type "session.budget_reached"constant`
+
+      - `SESSION_BUDGET_REACHED("session.budget_reached")`
+
+    - `String workspaceId`
+
 ### Beta Webhook Memory Store Archived Event Data
 
 - `class BetaWebhookMemoryStoreArchivedEventData:`
@@ -1625,6 +1658,22 @@ generated: true
   - `JsonValue; type "session.archived"constant`
 
     - `SESSION_ARCHIVED("session.archived")`
+
+  - `String workspaceId`
+
+### Beta Webhook Session Budget Reached Event Data
+
+- `class BetaWebhookSessionBudgetReachedEventData:`
+
+  - `String id`
+
+    ID of the session that triggered the event.
+
+  - `String organizationId`
+
+  - `JsonValue; type "session.budget_reached"constant`
+
+    - `SESSION_BUDGET_REACHED("session.budget_reached")`
 
   - `String workspaceId`
 
@@ -2649,6 +2698,20 @@ generated: true
       - `JsonValue; type "memory_store.deleted"constant`
 
         - `MEMORY_STORE_DELETED("memory_store.deleted")`
+
+      - `String workspaceId`
+
+    - `class BetaWebhookSessionBudgetReachedEventData:`
+
+      - `String id`
+
+        ID of the session that triggered the event.
+
+      - `String organizationId`
+
+      - `JsonValue; type "session.budget_reached"constant`
+
+        - `SESSION_BUDGET_REACHED("session.budget_reached")`
 
       - `String workspaceId`
 

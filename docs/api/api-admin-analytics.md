@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/analytics"
 category: "api"
 generated: true
 ---
+---
+title: Analytics
+url: https://platform.claude.com/docs/en/api/admin/analytics
+---
+
 # Analytics
 
 ## Get Activity Summaries

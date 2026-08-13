@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/users/retrieve"
 category: "api"
 generated: true
 ---
+---
+title: Get User
+url: https://platform.claude.com/docs/en/api/admin/users/retrieve
+---
+
 ## Get User
 
 **get** `/v1/organizations/users/{user_id}`

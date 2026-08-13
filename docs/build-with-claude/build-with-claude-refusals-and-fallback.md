@@ -1,13 +1,13 @@
 ---
-title: "Refusals and fallback"
+title: "What a refusal looks like"
 source: "https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback"
 category: "build-with-claude"
 generated: true
 ---
-# Refusals and fallback
-
-How Claude Fable 5 and Claude Opus 5 return classifier refusals and how to retry refused requests on a fallback model.
-
+---
+title: Refusals and fallback
+url: https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback
+description: How Claude Fable 5 and Claude Opus 5 return classifier refusals and how to retry refused requests on a fallback model.
 ---
 
 Claude Fable 5 and Claude Opus 5 include safety classifiers that can decline a request. When that happens, you receive a normal response, not an error, with `stop_reason: "refusal"`. You can usually still get an answer by sending the same request to another Claude model. This page shows you how to recognize a refusal and how to set up that retry.
@@ -191,7 +191,7 @@ The `stop_details` object explains the decline:
 | `"cyber"`                | The request could enable cyber harm, such as malware or exploit development. Benign cybersecurity work can also trigger this category.                                                                                                    |
 | `"bio"`                  | The request could enable biological harm, such as dangerous lab methods. Beneficial life sciences work can also trigger this category.                                                                                                    |
 | `"frontier_llm"`         | The request could assist the development of competing AI models, which is restricted under [Anthropic's commercial terms](https://www.anthropic.com/legal/commercial-terms). Benign machine learning work can also trigger this category. |
-| `"reasoning_extraction"` | The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](./build-with-claude-thinking.md).                                         |
+| `"reasoning_extraction"` | The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](./build-with-claude-thinking.md).              |
 | `"general_harms"`        | The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.                                                                                                                |
 
 A refusal can arrive before any output, or mid-stream after partial output. In either case, treat any partial output as incomplete and discard it.
@@ -204,11 +204,11 @@ A refusal can arrive before any output, or mid-stream after partial output. In e
 
 There are three ways to retry a refused request on another model. The right one depends on where you are running and how much control you need.
 
-| Your situation                       | Use                                                                             | Why                                                         |
-| ------------------------------------ | ------------------------------------------------------------------------------- | ----------------------------------------------------------- |
-| Claude API, simplest setup           | [Server-side fallback](#server-side-fallback)                                   | One request, one response. The API handles the retry.       |
-| Any platform, using an Anthropic SDK | [The SDK middleware](#client-side-fallback)                                     | Configure once on the client. Retries happen automatically. |
-| Raw HTTP or custom retry logic       | Manual retry with [fallback credit](./build-with-claude-fallback-credit.md) | Full control. Fallback credit keeps the cost down.          |
+| Your situation                       | Use                                                                                                                      | Why                                                         |
+| ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------- |
+| Claude API, simplest setup           | [Server-side fallback](./build-with-claude-refusals-and-fallback.md#server-side-fallback) | One request, one response. The API handles the retry.       |
+| Any platform, using an Anthropic SDK | [The SDK middleware](./build-with-claude-refusals-and-fallback.md#client-side-fallback)   | Configure once on the client. Retries happen automatically. |
+| Raw HTTP or custom retry logic       | Manual retry with [fallback credit](./build-with-claude-fallback-credit.md)               | Full control. Fallback credit keeps the cost down.          |
 
 Server-side fallback and the SDK middleware apply fallback credit for you. You only need the [Fallback credit](./build-with-claude-fallback-credit.md) page when you build the retry yourself.
 
@@ -217,7 +217,7 @@ Server-side fallback and the SDK middleware apply fallback credit for you. You o
 Server-side fallback retries a refused request inside a single API call. In the default mode, when the primary model declines and the refusal category has a recommended fallback, the API runs the same request on the model Anthropic recommends for that category. You can instead name up to three fallback models of your own (below). Either way, you get back one response that names the model that answered, so your user gets an answer in one round trip.
 
 <Note>
-  Server-side fallback is in beta on the Claude API. The `fallbacks` parameter is not supported on the [Message Batches API](./build-with-claude-batch-processing.md) (a batch item that includes it comes back as an errored result) and is not available on Amazon Bedrock, Google Cloud, or Microsoft Foundry. On those platforms, use [client-side fallback with the SDK middleware](#client-side-fallback) instead.
+  Server-side fallback is in beta on the Claude API. The `fallbacks` parameter is not supported on the [Message Batches API](./build-with-claude-batch-processing.md) (a batch item that includes it comes back as an errored result) and is not available on Amazon Bedrock, Google Cloud, or Microsoft Foundry. On those platforms, use [client-side fallback with the SDK middleware](./build-with-claude-refusals-and-fallback.md#client-side-fallback) instead.
 </Note>
 
 ### Making the request

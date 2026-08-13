@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/rbac_groups/update"
 category: "api"
 generated: true
 ---
+---
+title: Update RBAC Group
+url: https://platform.claude.com/docs/en/api/admin/rbac_groups/update
+---
+
 ## Update RBAC Group
 
 **post** `/v1/organizations/rbac_groups/{group_id}`

@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/compliance/apps/projects/attach
 category: "api"
 generated: true
 ---
+---
+title: Attachments
+url: https://platform.claude.com/docs/en/api/compliance/apps/projects/attachments
+---
+
 # Attachments
 
 ## List project attachments

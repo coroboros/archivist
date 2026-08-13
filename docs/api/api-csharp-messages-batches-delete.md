@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/csharp/messages/batches/delete"
 category: "api"
 generated: true
 ---
+---
+title: Delete a Message Batch
+url: https://platform.claude.com/docs/en/api/csharp/messages/batches/delete
+---
+
 ## Delete a Message Batch
 
 `DeletedMessageBatch Messages.Batches.Delete(BatchDeleteParamsparameters, CancellationTokencancellationToken = default)`

@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/compliance/code/artifacts"
 category: "api"
 generated: true
 ---
+---
+title: Artifacts
+url: https://platform.claude.com/docs/en/api/compliance/code/artifacts
+---
+
 # Artifacts
 
 ## List Code Artifacts

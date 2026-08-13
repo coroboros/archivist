@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/cli/models/retrieve"
 category: "api"
 generated: true
 ---
+---
+title: Get a Model
+url: https://platform.claude.com/docs/en/api/cli/models/retrieve
+---
+
 ## Get a Model
 
 `$ ant models retrieve`

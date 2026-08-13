@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/workspaces/service_accoun
 category: "api"
 generated: true
 ---
+---
+title: Delete Service Account Workspace Member
+url: https://platform.claude.com/docs/en/api/admin/workspaces/service_accounts/delete
+---
+
 ## Delete Service Account Workspace Member
 
 **delete** `/v1/organizations/workspaces/{workspace_id}/service_accounts/{service_account_id}`

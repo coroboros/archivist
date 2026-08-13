@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/php/beta/agents/create"
 category: "api"
 generated: true
 ---
+---
+title: Create Agent
+url: https://platform.claude.com/docs/en/api/php/beta/agents/create
+---
+
 ## Create Agent
 
 `$client->beta->agents->create(Model model, string name, ?string description, ?list<BetaManagedAgentsURLMCPServerParams> mcpServers, ?array<string,string> metadata, ?BetaManagedAgentsMultiagentParams multiagent, ?list<BetaManagedAgentsSkillParams> skills, ?string system, ?list<Tool> tools, ?list<AnthropicBeta> betas): BetaManagedAgentsAgent`
@@ -110,7 +115,7 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaManagedAgentsAgent = $client->beta->agents->create(
-  model: 'claude-sonnet-4-6',
+  model: BetaManagedAgentsModel::CLAUDE_SONNET_4_6,
   name: 'My First Agent',
   description: 'A general-purpose starter agent.',
   mcpServers: [
@@ -142,7 +147,7 @@ $betaManagedAgentsAgent = $client->beta->agents->create(
       ],
     ],
   ],
-  betas: ['message-batches-2024-09-24'],
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
 );
 
 var_dump($betaManagedAgentsAgent);
@@ -171,6 +176,7 @@ var_dump($betaManagedAgentsAgent);
     "effort": {
       "type": "low"
     },
+    "inference_geo": "inference_geo",
     "speed": "standard"
   },
   "multiagent": {

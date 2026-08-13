@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/cli/beta/vaults/credentials/ret
 category: "api"
 generated: true
 ---
+---
+title: Get Credential
+url: https://platform.claude.com/docs/en/api/cli/beta/vaults/credentials/retrieve
+---
+
 ## Get Credential
 
 `$ ant beta:vaults:credentials retrieve`

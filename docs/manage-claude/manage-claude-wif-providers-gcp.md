@@ -1,13 +1,13 @@
 ---
-title: "Use WIF with Google Cloud"
+title: "Prerequisites"
 source: "https://platform.claude.com/docs/en/manage-claude/wif-providers/gcp"
 category: "manage-claude"
 generated: true
 ---
-# Use WIF with Google Cloud
-
-Federate Google Cloud workloads (Cloud Run, Cloud Functions, App Engine, GCE, GKE) to the Claude API using Google-signed identity tokens instead of static API keys.
-
+---
+title: Use WIF with Google Cloud
+url: https://platform.claude.com/docs/en/manage-claude/wif-providers/gcp
+description: Federate Google Cloud workloads (Cloud Run, Cloud Functions, App Engine, GCE, GKE) to the Claude API using Google-signed identity tokens instead of static API keys.
 ---
 
 Any Google Cloud compute environment with access to the instance metadata server (Cloud Run, Cloud Functions, App Engine, Compute Engine (GCE), and GKE with Workload Identity) can request a Google-signed identity token for its attached service account. The token's issuer is `https://accounts.google.com`, and Anthropic can validate it directly through standard OIDC discovery, with no extra Google Cloud configuration required.
@@ -49,7 +49,7 @@ Google issues identity tokens automatically to any workload with an attached ser
       --include-email
     ```
 
-    The SDK equivalents are shown in [Acquire and use the token](#acquire-and-use-the-token).
+    The SDK equivalents are shown in [Acquire and use the token](./manage-claude-wif-providers-gcp.md#acquire-and-use-the-token).
 
     The decoded token payload looks like this:
 

@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/beta/skills/list"
 category: "api"
 generated: true
 ---
+---
+title: List Skills
+url: https://platform.claude.com/docs/en/api/beta/skills/list
+---
+
 ## List Skills
 
 **get** `/v1/skills`
@@ -41,7 +46,7 @@ List Skills
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 29 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 30 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -107,6 +112,8 @@ List Skills
 
     - `"agent-memory-2026-07-22"`
 
+    - `"mid-conversation-tool-changes-2026-07-01"`
+
 ### Returns
 
 - `data: array of object { id, created_at, display_title, 4 more }`
@@ -164,7 +171,7 @@ List Skills
 
   Token for fetching the next page of results.
 
-  If `null`, there are no more results available. Pass this value to the `page_token` parameter in the next request to get the next page.
+  If `null`, there are no more results available. Pass this value to the `page` parameter in the next request to get the next page.
 
 ### Example
 

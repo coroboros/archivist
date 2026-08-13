@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/ruby/beta/environments/work/pol
 category: "api"
 generated: true
 ---
+---
+title: Poll for Work
+url: https://platform.claude.com/docs/en/api/ruby/beta/environments/work/poll
+---
+
 ## Poll for Work
 
 `beta.environments.work.poll(environment_id, **kwargs) -> BetaSelfHostedWork`
@@ -32,7 +37,7 @@ Long poll for work items in the queue.
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 29 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 30 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -97,6 +102,8 @@ Long poll for work items in the queue.
     - `:"fallback-credit-2026-07-01"`
 
     - `:"agent-memory-2026-07-22"`
+
+    - `:"mid-conversation-tool-changes-2026-07-01"`
 
 - `anthropic_worker_id: String`
 

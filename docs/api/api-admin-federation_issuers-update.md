@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/federation_issuers/update
 category: "api"
 generated: true
 ---
+---
+title: Update Federation Issuer
+url: https://platform.claude.com/docs/en/api/admin/federation_issuers/update
+---
+
 ## Update Federation Issuer
 
 **post** `/v1/organizations/federation_issuers/{federation_issuer_id}`

@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/cli/beta/environments/retrieve"
 category: "api"
 generated: true
 ---
+---
+title: Get Environment
+url: https://platform.claude.com/docs/en/api/cli/beta/environments/retrieve
+---
+
 ## Get Environment
 
 `$ ant beta:environments retrieve`

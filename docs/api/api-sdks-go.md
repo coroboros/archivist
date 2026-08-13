@@ -1,13 +1,13 @@
 ---
-title: "Go SDK"
+title: "Installation"
 source: "https://platform.claude.com/docs/en/api/sdks/go"
 category: "api"
 generated: true
 ---
-# Go SDK
-
-Install and configure the Anthropic Go SDK with context-based cancellation and functional options
-
+---
+title: Go SDK
+url: https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/go
+description: Install and configure the Anthropic Go SDK with context-based cancellation and functional options
 ---
 
 The Anthropic Go library provides convenient access to the Anthropic REST API from applications written in Go.
@@ -523,7 +523,7 @@ client := anthropic.NewClient(
 
 Non-streaming Messages requests time out after 10 minutes by default; other requests have no default timeout. Use context to configure a timeout for a request lifecycle.
 
-Note that if a request is [retried](#retries), the context timeout does not start over. To set a per-retry timeout, use `option.WithRequestTimeout()`.
+Note that if a request is [retried](../general/general-cli-sdks-libraries-sdks-go.md#retries), the context timeout does not start over. To set a per-retry timeout, use `option.WithRequestTimeout()`.
 
 ```go
 // This sets the timeout for the request, including all the retries.
@@ -555,9 +555,9 @@ defer cancel()
   Consider using the streaming Messages API for longer running requests.
 </Warning>
 
-Avoid setting a large `MaxTokens` value without using streaming as some networks may drop idle connections after a certain period of time, which can cause the request to fail or [timeout](#timeouts) without receiving a response from Anthropic.
+Avoid setting a large `MaxTokens` value without using streaming as some networks may drop idle connections after a certain period of time, which can cause the request to fail or [timeout](../general/general-cli-sdks-libraries-sdks-go.md#timeouts) without receiving a response from Anthropic.
 
-This SDK will also return an error if a non-streaming request is expected to be above roughly 10 minutes long. Calling `.Messages.NewStreaming()` or [setting a custom timeout](#timeouts) disables this error.
+This SDK will also return an error if a non-streaming request is expected to be above roughly 10 minutes long. Calling `.Messages.NewStreaming()` or [setting a custom timeout](../general/general-cli-sdks-libraries-sdks-go.md#timeouts) disables this error.
 
 ## File uploads
 

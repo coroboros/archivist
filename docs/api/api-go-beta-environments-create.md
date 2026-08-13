@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/go/beta/environments/create"
 category: "api"
 generated: true
 ---
+---
+title: Create Environment
+url: https://platform.claude.com/docs/en/api/go/beta/environments/create
+---
+
 ## Create Environment
 
 `client.Beta.Environments.New(ctx, params) (*BetaEnvironment, error)`
@@ -209,6 +214,8 @@ Create a new environment with the specified configuration.
       - `const AnthropicBetaFallbackCredit2026_07_01 AnthropicBeta = "fallback-credit-2026-07-01"`
 
       - `const AnthropicBetaAgentMemory2026_07_22 AnthropicBeta = "agent-memory-2026-07-22"`
+
+      - `const AnthropicBetaMidConversationToolChanges2026_07_01 AnthropicBeta = "mid-conversation-tool-changes-2026-07-01"`
 
 ### Returns
 

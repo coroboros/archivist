@@ -1,13 +1,13 @@
 ---
-title: "Permission policies"
+title: "Permission policy types"
 source: "https://platform.claude.com/docs/en/managed-agents/permission-policies"
 category: "managed-agents"
 generated: true
 ---
-# Permission policies
-
-Control when agent and MCP tools execute.
-
+---
+title: Permission policies
+url: https://platform.claude.com/docs/en/managed-agents/permission-policies
+description: Control when agent and MCP tools execute.
 ---
 
 Permission policies control whether server-executed tools (the pre-built agent toolset and MCP toolset) run automatically or wait for your approval. Custom tools are executed by your application and controlled by you, so they are not governed by permission policies.
@@ -18,10 +18,10 @@ Permission policies control whether server-executed tools (the pre-built agent t
 
 ## Permission policy types
 
-| Policy         | Behavior                                                                                                                                                       |
-| -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `always_allow` | The tool executes automatically with no confirmation.                                                                                                          |
-| `always_ask`   | The session pauses and waits for your approval before executing. See [Respond to confirmation requests](#respond-to-confirmation-requests) for the event flow. |
+| Policy         | Behavior                                                                                                                                                                                                                             |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `always_allow` | The tool executes automatically with no confirmation.                                                                                                                                                                                |
+| `always_ask`   | The session pauses and waits for your approval before executing. See [Respond to confirmation requests](./managed-agents-permission-policies.md#respond-to-confirmation-requests) for the event flow. |
 
 Each toolset kind has its own default: the agent toolset defaults to `always_allow`, and MCP toolsets default to `always_ask`.
 
@@ -36,7 +36,7 @@ You set permission policies in the agent's `tools` configuration when you create
 When creating an agent, you can apply a policy to every tool in `agent_toolset_20260401` using `default_config.permission_policy`:
 
 <CodeGroup defaultLanguage="CLI">
-  ```bash curl
+  ```bash cURL
   agent=$(curl -fsSL https://api.anthropic.com/v1/agents \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
@@ -215,7 +215,7 @@ The `mcp_server_name` must match the `name` of a server in the `mcp_servers` arr
 This example connects a GitHub MCP server and allows its tools to run without confirmation:
 
 <CodeGroup defaultLanguage="CLI">
-  ```bash curl
+  ```bash cURL
   agent=$(curl -fsSL https://api.anthropic.com/v1/agents \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
@@ -460,7 +460,7 @@ This example connects a GitHub MCP server and allows its tools to run without co
 Use the `configs` array to override the default for individual tools. The `name` values for the agent toolset are listed in [Available tools](./managed-agents-tools.md#available-tools). This example allows the full agent toolset by default but requires confirmation before any bash command runs:
 
 <CodeGroup defaultLanguage="CLI">
-  ```bash curl
+  ```bash cURL
   tools='[
     {
       "type": "agent_toolset_20260401",
@@ -663,7 +663,7 @@ When the agent invokes a tool with an `always_ask` policy:
 In the following examples, the tool-use event IDs come from the `stop_reason.event_ids` array of the `session.status_idle` event. Learn more about receiving events in the [Session event stream](./managed-agents-events-and-streaming.md#integrating-events) guide, or [subscribe to webhooks](./managed-agents-webhooks.md) to be notified when a session pauses for input.
 
 <CodeGroup defaultLanguage="CLI">
-  ```bash curl
+  ```bash cURL
   # Allow the tool to execute
   curl -fsSL "https://api.anthropic.com/v1/sessions/$SESSION_ID/events" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \

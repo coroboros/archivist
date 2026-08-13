@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/php/beta/messages/create"
 category: "api"
 generated: true
 ---
+---
+title: Create a Message
+url: https://platform.claude.com/docs/en/api/php/beta/messages/create
+---
+
 ## Create a Message
 
 `$client->beta->messages->create(int maxTokens, list<BetaMessageParam> messages, Model model, ?BetaCacheControlEphemeral cacheControl, ?Container container, ?BetaContextManagementConfig contextManagement, ?BetaDiagnosticsParam diagnostics, ?FallbackCreditToken fallbackCreditToken, ?BetaFallbacksParam fallbacks, ?string inferenceGeo, ?list<BetaRequestMCPServerURLDefinition> mcpServers, ?BetaMetadata metadata, ?BetaOutputConfig outputConfig, ?BetaJSONOutputFormat outputFormat, ?ServiceTier serviceTier, ?Speed speed, ?list<string> stopSequences, ?System system, ?float temperature, ?BetaThinkingConfigParam thinking, ?BetaToolChoice toolChoice, ?list<BetaToolUnion> tools, ?int topK, ?float topP, ?list<AnthropicBeta> betas, ?string userProfileID): BetaMessage`
@@ -413,7 +418,7 @@ $client = new Client(apiKey: 'my-anthropic-api-key');
 $betaMessage = $client->beta->messages->create(
   maxTokens: 1024,
   messages: [['content' => 'Hello, world', 'role' => 'user']],
-  model: 'claude-opus-4-6',
+  model: Model::CLAUDE_OPUS_4_6,
   cacheControl: ['type' => 'ephemeral', 'ttl' => '5m'],
   container: [
     'id' => 'id',
@@ -496,7 +501,7 @@ $betaMessage = $client->beta->messages->create(
   ],
   topK: 5,
   topP: 0.7,
-  betas: ['message-batches-2024-09-24'],
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
   userProfileID: 'anthropic-user-profile-id',
 );
 

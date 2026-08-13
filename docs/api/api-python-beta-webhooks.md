@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/python/beta/webhooks"
 category: "api"
 generated: true
 ---
+---
+title: Webhooks
+url: https://platform.claude.com/docs/en/api/python/beta/webhooks
+---
+
 # Webhooks
 
 ## Domain Types
@@ -924,6 +929,20 @@ generated: true
 
       - `workspace_id: str`
 
+    - `class BetaWebhookSessionBudgetReachedEventData: …`
+
+      - `id: str`
+
+        ID of the session that triggered the event.
+
+      - `organization_id: str`
+
+      - `type: Literal["session.budget_reached"]`
+
+        - `"session.budget_reached"`
+
+      - `workspace_id: str`
+
   - `type: Literal["event"]`
 
     Object type. Always `event` for webhook payloads.
@@ -1564,6 +1583,20 @@ generated: true
 
     - `workspace_id: str`
 
+  - `class BetaWebhookSessionBudgetReachedEventData: …`
+
+    - `id: str`
+
+      ID of the session that triggered the event.
+
+    - `organization_id: str`
+
+    - `type: Literal["session.budget_reached"]`
+
+      - `"session.budget_reached"`
+
+    - `workspace_id: str`
+
 ### Beta Webhook Memory Store Archived Event Data
 
 - `class BetaWebhookMemoryStoreArchivedEventData: …`
@@ -1625,6 +1658,22 @@ generated: true
   - `type: Literal["session.archived"]`
 
     - `"session.archived"`
+
+  - `workspace_id: str`
+
+### Beta Webhook Session Budget Reached Event Data
+
+- `class BetaWebhookSessionBudgetReachedEventData: …`
+
+  - `id: str`
+
+    ID of the session that triggered the event.
+
+  - `organization_id: str`
+
+  - `type: Literal["session.budget_reached"]`
+
+    - `"session.budget_reached"`
 
   - `workspace_id: str`
 
@@ -2649,6 +2698,20 @@ generated: true
       - `type: Literal["memory_store.deleted"]`
 
         - `"memory_store.deleted"`
+
+      - `workspace_id: str`
+
+    - `class BetaWebhookSessionBudgetReachedEventData: …`
+
+      - `id: str`
+
+        ID of the session that triggered the event.
+
+      - `organization_id: str`
+
+      - `type: Literal["session.budget_reached"]`
+
+        - `"session.budget_reached"`
 
       - `workspace_id: str`
 

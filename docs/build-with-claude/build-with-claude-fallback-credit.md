@@ -1,13 +1,13 @@
 ---
-title: "Fallback credit"
+title: "The basic flow"
 source: "https://platform.claude.com/docs/en/build-with-claude/fallback-credit"
 category: "build-with-claude"
 generated: true
 ---
-# Fallback credit
-
-Avoid paying the prompt-cache cost twice when you retry a refused Claude Fable 5 request on another model.
-
+---
+title: Fallback credit
+url: https://platform.claude.com/docs/en/build-with-claude/fallback-credit
+description: Avoid paying the prompt-cache cost twice when you retry a refused Claude Fable 5 request on another model.
 ---
 
 Prompt caches are per-model. When Claude Fable 5 declines a request and you retry on another model, the conversation prefix that was already cached for Claude Fable 5 must be written into the new model's cache from scratch. Cache writes cost more than cache reads. Fallback credit removes that extra cost. The refusal carries a credit token, you echo the token on the retry, and the retry is billed as though the conversation had been on the new model all along.
@@ -50,7 +50,7 @@ The `fallback_has_prefill_claim` field tells you whether the retry can continue 
 
 ## Example
 
-The following example makes a request that may be refused and redeems the credit token on a retry against Claude Opus 4.8. When a retry attempt is rejected, the example degrades through the rejection ladder: the sequence of progressively simpler retry shapes covered in [When a retry is rejected](#when-a-retry-is-rejected).
+The following example makes a request that may be refused and redeems the credit token on a retry against Claude Opus 4.8. When a retry attempt is rejected, the example degrades through the rejection ladder: the sequence of progressively simpler retry shapes covered in [When a retry is rejected](./build-with-claude-fallback-credit.md#when-a-retry-is-rejected).
 
 <CodeGroup>
   ```bash cURL
@@ -633,7 +633,7 @@ The sections below cover edge cases and the complete redemption rules. Most inte
 </Accordion>
 
 <Accordion title="When fallback_has_prefill_claim is absent">
-  The field is `null` only when the token is also `null`, so a value you observe while holding a token is never `null`. It can still surface as absent (`None` in the typed SDKs) on Amazon Bedrock, Google Cloud, and Microsoft Foundry while their support for the field rolls out. In that case, treat the retry shape as unknown rather than as `false`. Try the appended-assistant-message shape first, and rely on the rejection handling in [When a retry is rejected](#when-a-retry-is-rejected), which falls back to the unchanged body.
+  The field is `null` only when the token is also `null`, so a value you observe while holding a token is never `null`. It can still surface as absent (`None` in the typed SDKs) on Amazon Bedrock, Google Cloud, and Microsoft Foundry while their support for the field rolls out. In that case, treat the retry shape as unknown rather than as `false`. Try the appended-assistant-message shape first, and rely on the rejection handling in [When a retry is rejected](./build-with-claude-fallback-credit.md#when-a-retry-is-rejected), which falls back to the unchanged body.
 </Accordion>
 
 <Accordion title="Echoing the refused response's content">

@@ -1,13 +1,13 @@
 ---
-title: "Analytics APIs"
+title: "Which API do you need?"
 source: "https://platform.claude.com/docs/en/manage-claude/analytics-api"
 category: "manage-claude"
 generated: true
 ---
-# Analytics APIs
-
-Understand which analytics API and API key your organization needs, then provision access to Claude Code productivity metrics or Claude Enterprise engagement and adoption data.
-
+---
+title: Analytics APIs
+url: https://platform.claude.com/docs/en/manage-claude/analytics-api
+description: Understand which analytics API and API key your organization needs, then provision access to Claude Code productivity metrics or Claude Enterprise engagement and adoption data.
 ---
 
 Anthropic provides two analytics APIs, and which one you use depends on which Claude product your organization manages:

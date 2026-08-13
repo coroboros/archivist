@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/php/beta/skills/versions"
 category: "api"
 generated: true
 ---
+---
+title: Versions
+url: https://platform.claude.com/docs/en/api/php/beta/skills/versions
+---
+
 # Versions
 
 ## Create Skill Version
@@ -94,7 +99,7 @@ $version = $client->beta->skills->versions->create(
   files: [
     FileParam::fromString('Example data', filename: uniqid('file-upload-', true)),
   ],
-  betas: ['message-batches-2024-09-24'],
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
 );
 
 var_dump($version);
@@ -203,7 +208,10 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $page = $client->beta->skills->versions->list(
-  'skill_id', limit: 0, page: 'page', betas: ['message-batches-2024-09-24']
+  'skill_id',
+  limit: 0,
+  page: 'page',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
 );
 
 var_dump($page);
@@ -270,7 +278,9 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $response = $client->beta->skills->versions->download(
-  'version', skillID: 'skill_id', betas: ['message-batches-2024-09-24']
+  'version',
+  skillID: 'skill_id',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
 );
 
 var_dump($response);
@@ -360,7 +370,9 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $version = $client->beta->skills->versions->retrieve(
-  'version', skillID: 'skill_id', betas: ['message-batches-2024-09-24']
+  'version',
+  skillID: 'skill_id',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
 );
 
 var_dump($version);
@@ -433,7 +445,9 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $version = $client->beta->skills->versions->delete(
-  'version', skillID: 'skill_id', betas: ['message-batches-2024-09-24']
+  'version',
+  skillID: 'skill_id',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
 );
 
 var_dump($version);

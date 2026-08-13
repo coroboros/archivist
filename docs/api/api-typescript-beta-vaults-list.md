@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/typescript/beta/vaults/list"
 category: "api"
 generated: true
 ---
+---
+title: List Vaults
+url: https://platform.claude.com/docs/en/api/typescript/beta/vaults/list
+---
+
 ## List Vaults
 
 `client.beta.vaults.list(VaultListParamsparams?, RequestOptionsoptions?): PageCursor<BetaManagedAgentsVault>`
@@ -34,7 +39,7 @@ List Vaults
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 29 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -100,6 +105,8 @@ List Vaults
 
       - `"agent-memory-2026-07-22"`
 
+      - `"mid-conversation-tool-changes-2026-07-01"`
+
 ### Returns
 
 - `BetaManagedAgentsVault`
@@ -137,10 +144,10 @@ List Vaults
 ### Example
 
 ```typescript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic({
-  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
+  apiKey: process.env["ANTHROPIC_API_KEY"] // This is the default and can be omitted
 });
 
 // Automatically fetches more pages as needed.

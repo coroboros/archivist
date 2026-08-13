@@ -1,13 +1,13 @@
 ---
-title: "Troubleshooting thinking"
+title: "Configurations each model rejects"
 source: "https://platform.claude.com/docs/en/build-with-claude/thinking-troubleshooting"
 category: "build-with-claude"
 generated: true
 ---
-# Troubleshooting thinking
-
-Diagnose and fix the most common thinking failures: configuration 400 errors, empty or missing thinking blocks, max_tokens stops, and cache misses.
-
+---
+title: Troubleshooting thinking
+url: https://platform.claude.com/docs/en/build-with-claude/thinking-troubleshooting
+description: "Diagnose and fix the most common thinking failures: configuration 400 errors, empty or missing thinking blocks, max_tokens stops, and cache misses."
 ---
 
 <Note>
@@ -44,7 +44,7 @@ The table lists what each model supports, what it defaults to, and which `thinki
 
 Models marked `Always on` cannot turn thinking off. Models marked `On` default to thinking but accept `thinking: {type: "disabled"}`.
 
-Earlier Claude 4 models (Claude Opus 4.1, Claude Sonnet 4, and Claude Opus 4) support extended thinking only; see [model deprecations](../about-claude/about-claude-model-deprecations.md) for their availability. Claude Fable 5 and Claude Mythos 5 are not available under [zero data retention](../manage-claude/manage-claude-api-and-data-retention.md#model-specific-data-retention-requirements).
+Earlier Claude 4 models (Claude Opus 4.1, Claude Sonnet 4, and Claude Opus 4) support extended thinking only; see [Model deprecations](../about-claude/about-claude-model-deprecations.md) for their availability. Claude Fable 5 and Claude Mythos 5 are not available under [zero data retention](../manage-claude/manage-claude-api-and-data-retention.md#model-specific-data-retention-requirements).
 
 ## A 400 error says `"thinking.type.enabled"` is not supported
 
@@ -54,7 +54,7 @@ The request fails with a 400 error whose message reads:
 "thinking.type.enabled" is not supported for this model. Use "thinking.type.adaptive" and "output_config.effort" to control thinking behavior.
 ```
 
-This happens because the model you requested has removed extended thinking (see [Configurations each model rejects](#rejected-configurations)).
+This happens because the model you requested has removed extended thinking (see [Configurations each model rejects](./build-with-claude-thinking-troubleshooting.md#rejected-configurations)).
 
 Switch the request to `thinking: {type: "adaptive"}` and steer thinking depth with `effort` instead of `budget_tokens`. [Migrating to adaptive thinking](./build-with-claude-extended-thinking.md#migrating-to-adaptive-thinking) walks through the conversion.
 
@@ -80,7 +80,7 @@ The request fails with a 400 error whose message reads:
 adaptive thinking is not supported on this model
 ```
 
-This happens because the model supports only extended thinking (see [Configurations each model rejects](#rejected-configurations)).
+This happens because the model supports only extended thinking (see [Configurations each model rejects](./build-with-claude-thinking-troubleshooting.md#rejected-configurations)).
 
 Use `thinking: {type: "enabled", budget_tokens: N}` instead; see [Extended thinking](./build-with-claude-extended-thinking.md) for the configuration.
 

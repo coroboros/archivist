@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/cli/beta/environments/work/retr
 category: "api"
 generated: true
 ---
+---
+title: Get Work Item
+url: https://platform.claude.com/docs/en/api/cli/beta/environments/work/retrieve
+---
+
 ## Get Work Item
 
 `$ ant beta:environments:work retrieve`

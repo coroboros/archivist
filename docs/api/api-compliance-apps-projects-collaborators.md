@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/compliance/apps/projects/collab
 category: "api"
 generated: true
 ---
+---
+title: Collaborators
+url: https://platform.claude.com/docs/en/api/compliance/apps/projects/collaborators
+---
+
 # Collaborators
 
 ## List project collaborators

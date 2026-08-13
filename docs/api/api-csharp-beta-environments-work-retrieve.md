@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/csharp/beta/environments/work/r
 category: "api"
 generated: true
 ---
+---
+title: Get Work Item
+url: https://platform.claude.com/docs/en/api/csharp/beta/environments/work/retrieve
+---
+
 ## Get Work Item
 
 `BetaSelfHostedWork Beta.Environments.Work.Retrieve(WorkRetrieveParamsparameters, CancellationTokencancellationToken = default)`
@@ -93,6 +98,8 @@ Retrieve detailed information about a specific work item.
     - `"fallback-credit-2026-07-01"FallbackCredit2026_07_01`
 
     - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
+
+    - `"mid-conversation-tool-changes-2026-07-01"MidConversationToolChanges2026_07_01`
 
 ### Returns
 

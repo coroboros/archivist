@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/ruby/beta/agents"
 category: "api"
 generated: true
 ---
+---
+title: Agents
+url: https://platform.claude.com/docs/en/api/ruby/beta/agents
+---
+
 # Agents
 
 ## Create Agent
@@ -154,6 +159,10 @@ Create Agent
 
           - `:max`
 
+    - `inference_geo: String`
+
+      Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo. On update, `model` is whole-object replacement — omitting inference_geo clears it.
+
     - `speed: :standard | :fast`
 
       Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
@@ -223,6 +232,18 @@ Create Agent
       - `type: :self`
 
         - `:self`
+
+    - `class BetaManagedAgentsAdvisorParams`
+
+      Platform advisor roster entry: a model the session's primary thread may consult mid-turn. At most one per roster; the entry occupies the roster name `anthropic.advisor`.
+
+      - `model: String`
+
+        A Claude model id. The model must be permitted as an advisor for this agent's model — see the sessions/threads/advisor spec.
+
+      - `type: :advisor`
+
+        - `:advisor`
 
   - `type: :coordinator`
 
@@ -410,7 +431,7 @@ Create Agent
 
     - `description: String`
 
-      Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-4096 characters.
+      Description of what the tool does, shown to the agent to help it decide when to use the tool.
 
     - `input_schema: BetaManagedAgentsCustomToolInputSchema`
 
@@ -438,7 +459,7 @@ Create Agent
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 29 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 30 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -503,6 +524,8 @@ Create Agent
     - `:"fallback-credit-2026-07-01"`
 
     - `:"agent-memory-2026-07-22"`
+
+    - `:"mid-conversation-tool-changes-2026-07-01"`
 
 ### Returns
 
@@ -648,6 +671,10 @@ Create Agent
 
           - `:max`
 
+    - `inference_geo: String`
+
+      Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo.
+
     - `speed: :standard | :fast`
 
       Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
@@ -660,17 +687,33 @@ Create Agent
 
     Resolved coordinator topology with a concrete agent roster.
 
-    - `agents: Array[BetaManagedAgentsAgentReference]`
+    - `agents: Array[BetaManagedAgentsAgentReference | BetaManagedAgentsAdvisor]`
 
       Agents the coordinator may spawn as session threads, each resolved to a specific version.
 
-      - `id: String`
+      - `class BetaManagedAgentsAgentReference`
 
-      - `type: :agent`
+        A resolved agent reference with a concrete version.
 
-        - `:agent`
+        - `id: String`
 
-      - `version: Integer`
+        - `type: :agent`
+
+          - `:agent`
+
+        - `version: Integer`
+
+      - `class BetaManagedAgentsAdvisor`
+
+        Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
+
+        - `model: String`
+
+          The advisor model id.
+
+        - `type: :advisor`
+
+          - `:advisor`
 
     - `type: :coordinator`
 
@@ -863,7 +906,10 @@ require "anthropic"
 
 anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
 
-beta_managed_agents_agent = anthropic.beta.agents.create(model: :"claude-sonnet-4-6", name: "My First Agent")
+beta_managed_agents_agent = anthropic.beta.agents.create(
+  model: Anthropic::Beta::BetaManagedAgentsModel::CLAUDE_SONNET_4_6,
+  name: "My First Agent"
+)
 
 puts(beta_managed_agents_agent)
 ```
@@ -891,6 +937,7 @@ puts(beta_managed_agents_agent)
     "effort": {
       "type": "low"
     },
+    "inference_geo": "inference_geo",
     "speed": "standard"
   },
   "multiagent": {
@@ -979,7 +1026,7 @@ List Agents
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 29 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 30 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -1044,6 +1091,8 @@ List Agents
     - `:"fallback-credit-2026-07-01"`
 
     - `:"agent-memory-2026-07-22"`
+
+    - `:"mid-conversation-tool-changes-2026-07-01"`
 
 ### Returns
 
@@ -1189,6 +1238,10 @@ List Agents
 
           - `:max`
 
+    - `inference_geo: String`
+
+      Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo.
+
     - `speed: :standard | :fast`
 
       Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
@@ -1201,17 +1254,33 @@ List Agents
 
     Resolved coordinator topology with a concrete agent roster.
 
-    - `agents: Array[BetaManagedAgentsAgentReference]`
+    - `agents: Array[BetaManagedAgentsAgentReference | BetaManagedAgentsAdvisor]`
 
       Agents the coordinator may spawn as session threads, each resolved to a specific version.
 
-      - `id: String`
+      - `class BetaManagedAgentsAgentReference`
 
-      - `type: :agent`
+        A resolved agent reference with a concrete version.
 
-        - `:agent`
+        - `id: String`
 
-      - `version: Integer`
+        - `type: :agent`
+
+          - `:agent`
+
+        - `version: Integer`
+
+      - `class BetaManagedAgentsAdvisor`
+
+        Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
+
+        - `model: String`
+
+          The advisor model id.
+
+        - `type: :advisor`
+
+          - `:advisor`
 
     - `type: :coordinator`
 
@@ -1434,6 +1503,7 @@ puts(page)
         "effort": {
           "type": "low"
         },
+        "inference_geo": "inference_geo",
         "speed": "standard"
       },
       "multiagent": {
@@ -1511,7 +1581,7 @@ Get Agent
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 29 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 30 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -1576,6 +1646,8 @@ Get Agent
     - `:"fallback-credit-2026-07-01"`
 
     - `:"agent-memory-2026-07-22"`
+
+    - `:"mid-conversation-tool-changes-2026-07-01"`
 
 ### Returns
 
@@ -1721,6 +1793,10 @@ Get Agent
 
           - `:max`
 
+    - `inference_geo: String`
+
+      Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo.
+
     - `speed: :standard | :fast`
 
       Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
@@ -1733,17 +1809,33 @@ Get Agent
 
     Resolved coordinator topology with a concrete agent roster.
 
-    - `agents: Array[BetaManagedAgentsAgentReference]`
+    - `agents: Array[BetaManagedAgentsAgentReference | BetaManagedAgentsAdvisor]`
 
       Agents the coordinator may spawn as session threads, each resolved to a specific version.
 
-      - `id: String`
+      - `class BetaManagedAgentsAgentReference`
 
-      - `type: :agent`
+        A resolved agent reference with a concrete version.
 
-        - `:agent`
+        - `id: String`
 
-      - `version: Integer`
+        - `type: :agent`
+
+          - `:agent`
+
+        - `version: Integer`
+
+      - `class BetaManagedAgentsAdvisor`
+
+        Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
+
+        - `model: String`
+
+          The advisor model id.
+
+        - `type: :advisor`
+
+          - `:advisor`
 
     - `type: :coordinator`
 
@@ -1964,6 +2056,7 @@ puts(beta_managed_agents_agent)
     "effort": {
       "type": "low"
     },
+    "inference_geo": "inference_geo",
     "speed": "standard"
   },
   "multiagent": {
@@ -2190,6 +2283,10 @@ Update Agent
 
           - `:max`
 
+    - `inference_geo: String`
+
+      Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo. On update, `model` is whole-object replacement — omitting inference_geo clears it.
+
     - `speed: :standard | :fast`
 
       Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
@@ -2231,6 +2328,18 @@ Update Agent
       - `type: :self`
 
         - `:self`
+
+    - `class BetaManagedAgentsAdvisorParams`
+
+      Platform advisor roster entry: a model the session's primary thread may consult mid-turn. At most one per roster; the entry occupies the roster name `anthropic.advisor`.
+
+      - `model: String`
+
+        A Claude model id. The model must be permitted as an advisor for this agent's model — see the sessions/threads/advisor spec.
+
+      - `type: :advisor`
+
+        - `:advisor`
 
   - `type: :coordinator`
 
@@ -2422,7 +2531,7 @@ Update Agent
 
     - `description: String`
 
-      Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-4096 characters.
+      Description of what the tool does, shown to the agent to help it decide when to use the tool.
 
     - `input_schema: BetaManagedAgentsCustomToolInputSchema`
 
@@ -2454,7 +2563,7 @@ Update Agent
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 29 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 30 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -2519,6 +2628,8 @@ Update Agent
     - `:"fallback-credit-2026-07-01"`
 
     - `:"agent-memory-2026-07-22"`
+
+    - `:"mid-conversation-tool-changes-2026-07-01"`
 
 ### Returns
 
@@ -2664,6 +2775,10 @@ Update Agent
 
           - `:max`
 
+    - `inference_geo: String`
+
+      Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo.
+
     - `speed: :standard | :fast`
 
       Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
@@ -2676,17 +2791,33 @@ Update Agent
 
     Resolved coordinator topology with a concrete agent roster.
 
-    - `agents: Array[BetaManagedAgentsAgentReference]`
+    - `agents: Array[BetaManagedAgentsAgentReference | BetaManagedAgentsAdvisor]`
 
       Agents the coordinator may spawn as session threads, each resolved to a specific version.
 
-      - `id: String`
+      - `class BetaManagedAgentsAgentReference`
 
-      - `type: :agent`
+        A resolved agent reference with a concrete version.
 
-        - `:agent`
+        - `id: String`
 
-      - `version: Integer`
+        - `type: :agent`
+
+          - `:agent`
+
+        - `version: Integer`
+
+      - `class BetaManagedAgentsAdvisor`
+
+        Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
+
+        - `model: String`
+
+          The advisor model id.
+
+        - `type: :advisor`
+
+          - `:advisor`
 
     - `type: :coordinator`
 
@@ -2907,6 +3038,7 @@ puts(beta_managed_agents_agent)
     "effort": {
       "type": "low"
     },
+    "inference_geo": "inference_geo",
     "speed": "standard"
   },
   "multiagent": {
@@ -2977,7 +3109,7 @@ Archive Agent
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 29 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 30 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -3042,6 +3174,8 @@ Archive Agent
     - `:"fallback-credit-2026-07-01"`
 
     - `:"agent-memory-2026-07-22"`
+
+    - `:"mid-conversation-tool-changes-2026-07-01"`
 
 ### Returns
 
@@ -3187,6 +3321,10 @@ Archive Agent
 
           - `:max`
 
+    - `inference_geo: String`
+
+      Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo.
+
     - `speed: :standard | :fast`
 
       Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
@@ -3199,17 +3337,33 @@ Archive Agent
 
     Resolved coordinator topology with a concrete agent roster.
 
-    - `agents: Array[BetaManagedAgentsAgentReference]`
+    - `agents: Array[BetaManagedAgentsAgentReference | BetaManagedAgentsAdvisor]`
 
       Agents the coordinator may spawn as session threads, each resolved to a specific version.
 
-      - `id: String`
+      - `class BetaManagedAgentsAgentReference`
 
-      - `type: :agent`
+        A resolved agent reference with a concrete version.
 
-        - `:agent`
+        - `id: String`
 
-      - `version: Integer`
+        - `type: :agent`
+
+          - `:agent`
+
+        - `version: Integer`
+
+      - `class BetaManagedAgentsAdvisor`
+
+        Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
+
+        - `model: String`
+
+          The advisor model id.
+
+        - `type: :advisor`
+
+          - `:advisor`
 
     - `type: :coordinator`
 
@@ -3430,6 +3584,7 @@ puts(beta_managed_agents_agent)
     "effort": {
       "type": "low"
     },
+    "inference_geo": "inference_geo",
     "speed": "standard"
   },
   "multiagent": {
@@ -3483,6 +3638,20 @@ puts(beta_managed_agents_agent)
 ```
 
 ## Domain Types
+
+### Beta Managed Agents Advisor
+
+- `class BetaManagedAgentsAdvisor`
+
+  Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
+
+  - `model: String`
+
+    The advisor model id.
+
+  - `type: :advisor`
+
+    - `:advisor`
 
 ### Beta Managed Agents Agent
 
@@ -3628,6 +3797,10 @@ puts(beta_managed_agents_agent)
 
           - `:max`
 
+    - `inference_geo: String`
+
+      Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo.
+
     - `speed: :standard | :fast`
 
       Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
@@ -3640,17 +3813,33 @@ puts(beta_managed_agents_agent)
 
     Resolved coordinator topology with a concrete agent roster.
 
-    - `agents: Array[BetaManagedAgentsAgentReference]`
+    - `agents: Array[BetaManagedAgentsAgentReference | BetaManagedAgentsAdvisor]`
 
       Agents the coordinator may spawn as session threads, each resolved to a specific version.
 
-      - `id: String`
+      - `class BetaManagedAgentsAgentReference`
 
-      - `type: :agent`
+        A resolved agent reference with a concrete version.
 
-        - `:agent`
+        - `id: String`
 
-      - `version: Integer`
+        - `type: :agent`
+
+          - `:agent`
+
+        - `version: Integer`
+
+      - `class BetaManagedAgentsAdvisor`
+
+        Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
+
+        - `model: String`
+
+          The advisor model id.
+
+        - `type: :advisor`
+
+          - `:advisor`
 
     - `type: :coordinator`
 
@@ -4402,7 +4591,7 @@ puts(beta_managed_agents_agent)
 
   - `description: String`
 
-    Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-4096 characters.
+    Description of what the tool does, shown to the agent to help it decide when to use the tool.
 
   - `input_schema: BetaManagedAgentsCustomToolInputSchema`
 
@@ -4914,6 +5103,10 @@ puts(beta_managed_agents_agent)
 
         - `:max`
 
+  - `inference_geo: String`
+
+    Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo.
+
   - `speed: :standard | :fast`
 
     Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
@@ -5052,6 +5245,10 @@ puts(beta_managed_agents_agent)
 
         - `:max`
 
+  - `inference_geo: String`
+
+    Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo. On update, `model` is whole-object replacement — omitting inference_geo clears it.
+
   - `speed: :standard | :fast`
 
     Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
@@ -5066,17 +5263,33 @@ puts(beta_managed_agents_agent)
 
   Resolved coordinator topology with a concrete agent roster.
 
-  - `agents: Array[BetaManagedAgentsAgentReference]`
+  - `agents: Array[BetaManagedAgentsAgentReference | BetaManagedAgentsAdvisor]`
 
     Agents the coordinator may spawn as session threads, each resolved to a specific version.
 
-    - `id: String`
+    - `class BetaManagedAgentsAgentReference`
 
-    - `type: :agent`
+      A resolved agent reference with a concrete version.
 
-      - `:agent`
+      - `id: String`
 
-    - `version: Integer`
+      - `type: :agent`
+
+        - `:agent`
+
+      - `version: Integer`
+
+    - `class BetaManagedAgentsAdvisor`
+
+      Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
+
+      - `model: String`
+
+        The advisor model id.
+
+      - `type: :advisor`
+
+        - `:advisor`
 
   - `type: :coordinator`
 
@@ -5117,6 +5330,18 @@ puts(beta_managed_agents_agent)
       - `type: :self`
 
         - `:self`
+
+    - `class BetaManagedAgentsAdvisorParams`
+
+      Platform advisor roster entry: a model the session's primary thread may consult mid-turn. At most one per roster; the entry occupies the roster name `anthropic.advisor`.
+
+      - `model: String`
+
+        A Claude model id. The model must be permitted as an advisor for this agent's model — see the sessions/threads/advisor spec.
+
+      - `type: :advisor`
+
+        - `:advisor`
 
   - `type: :coordinator`
 
@@ -5265,6 +5490,10 @@ puts(beta_managed_agents_agent)
         - `type: :max`
 
           - `:max`
+
+    - `inference_geo: String`
+
+      Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo.
 
     - `speed: :standard | :fast`
 
@@ -5532,7 +5761,7 @@ List Agent Versions
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 29 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 30 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -5597,6 +5826,8 @@ List Agent Versions
     - `:"fallback-credit-2026-07-01"`
 
     - `:"agent-memory-2026-07-22"`
+
+    - `:"mid-conversation-tool-changes-2026-07-01"`
 
 ### Returns
 
@@ -5742,6 +5973,10 @@ List Agent Versions
 
           - `:max`
 
+    - `inference_geo: String`
+
+      Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo.
+
     - `speed: :standard | :fast`
 
       Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
@@ -5754,17 +5989,33 @@ List Agent Versions
 
     Resolved coordinator topology with a concrete agent roster.
 
-    - `agents: Array[BetaManagedAgentsAgentReference]`
+    - `agents: Array[BetaManagedAgentsAgentReference | BetaManagedAgentsAdvisor]`
 
       Agents the coordinator may spawn as session threads, each resolved to a specific version.
 
-      - `id: String`
+      - `class BetaManagedAgentsAgentReference`
 
-      - `type: :agent`
+        A resolved agent reference with a concrete version.
 
-        - `:agent`
+        - `id: String`
 
-      - `version: Integer`
+        - `type: :agent`
+
+          - `:agent`
+
+        - `version: Integer`
+
+      - `class BetaManagedAgentsAdvisor`
+
+        Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
+
+        - `model: String`
+
+          The advisor model id.
+
+        - `type: :advisor`
+
+          - `:advisor`
 
     - `type: :coordinator`
 
@@ -5987,6 +6238,7 @@ puts(page)
         "effort": {
           "type": "low"
         },
+        "inference_geo": "inference_geo",
         "speed": "standard"
       },
       "multiagent": {

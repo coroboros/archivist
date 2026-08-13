@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/ruby/beta/memory_stores/memory_
 category: "api"
 generated: true
 ---
+---
+title: Redact a memory version
+url: https://platform.claude.com/docs/en/api/ruby/beta/memory_stores/memory_versions/redact
+---
+
 ## Redact a memory version
 
 `beta.memory_stores.memory_versions.redact(memory_version_id, **kwargs) -> BetaManagedAgentsMemoryVersion`
@@ -24,7 +29,7 @@ Redact a memory version
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 29 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 30 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -89,6 +94,8 @@ Redact a memory version
     - `:"fallback-credit-2026-07-01"`
 
     - `:"agent-memory-2026-07-22"`
+
+    - `:"mid-conversation-tool-changes-2026-07-01"`
 
 ### Returns
 

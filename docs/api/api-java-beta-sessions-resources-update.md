@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/java/beta/sessions/resources/up
 category: "api"
 generated: true
 ---
+---
+title: Update Session Resource
+url: https://platform.claude.com/docs/en/api/java/beta/sessions/resources/update
+---
+
 ## Update Session Resource
 
 `ResourceUpdateResponse beta().sessions().resources().update(ResourceUpdateParamsparams, RequestOptionsrequestOptions = RequestOptions.none())`
@@ -87,6 +92,8 @@ Update Session Resource
     - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
   - `String authorizationToken`
 

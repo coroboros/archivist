@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/go/beta/memory_stores/archive"
 category: "api"
 generated: true
 ---
+---
+title: Archive a memory store
+url: https://platform.claude.com/docs/en/api/go/beta/memory_stores/archive
+---
+
 ## Archive a memory store
 
 `client.Beta.MemoryStores.Archive(ctx, memoryStoreID, body) (*BetaManagedAgentsMemoryStore, error)`
@@ -89,6 +94,8 @@ Archive a memory store
       - `const AnthropicBetaFallbackCredit2026_07_01 AnthropicBeta = "fallback-credit-2026-07-01"`
 
       - `const AnthropicBetaAgentMemory2026_07_22 AnthropicBeta = "agent-memory-2026-07-22"`
+
+      - `const AnthropicBetaMidConversationToolChanges2026_07_01 AnthropicBeta = "mid-conversation-tool-changes-2026-07-01"`
 
 ### Returns
 

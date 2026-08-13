@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/php/beta/environments/retrieve"
 category: "api"
 generated: true
 ---
+---
+title: Get Environment
+url: https://platform.claude.com/docs/en/api/php/beta/environments/retrieve
+---
+
 ## Get Environment
 
 `$client->beta->environments->retrieve(string environmentID, ?list<AnthropicBeta> betas): BetaEnvironment`
@@ -74,7 +79,8 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaEnvironment = $client->beta->environments->retrieve(
-  'env_011CZkZ9X2dpNyB7HsEFoRfW', betas: ['message-batches-2024-09-24']
+  'env_011CZkZ9X2dpNyB7HsEFoRfW',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
 );
 
 var_dump($betaEnvironment);

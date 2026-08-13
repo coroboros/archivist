@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/federation_rules/retrieve
 category: "api"
 generated: true
 ---
+---
+title: Get Federation Rule
+url: https://platform.claude.com/docs/en/api/admin/federation_rules/retrieve
+---
+
 ## Get Federation Rule
 
 **get** `/v1/organizations/federation_rules/{federation_rule_id}`

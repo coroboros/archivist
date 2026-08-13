@@ -1,13 +1,13 @@
 ---
-title: "Intro to Claude"
+title: "Recommended path for new developers"
 source: "https://platform.claude.com/docs/en/intro"
 category: "general"
 generated: true
 ---
-# Intro to Claude
-
-Claude is a highly performant, trustworthy, and intelligent AI platform built by Anthropic. Claude excels at tasks involving language, reasoning, analysis, coding, and more.
-
+---
+title: Intro to Claude
+url: https://platform.claude.com/docs/en/intro
+description: Claude is a highly performant, trustworthy, and intelligent AI platform built by Anthropic. Claude excels at tasks involving language, reasoning, analysis, coding, and more.
 ---
 
 <Tip>
@@ -30,11 +30,12 @@ Claude is a highly performant, trustworthy, and intelligent AI platform built by
 
 Anthropic offers two ways to build with Claude, each suited to different use cases:
 
-|                | Messages API                                                          | Claude Managed Agents                                                     |
-| -------------- | --------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| **What it is** | Direct model prompting access                                         | Pre-built, configurable agent harness that runs in managed infrastructure |
-| **Best for**   | Custom agent loops and fine-grained control                           | Long-running tasks and asynchronous work                                  |
-| **Learn more** | [Messages API docs](../build-with-claude/build-with-claude-working-with-messages.md) | [Claude Managed Agents docs](../managed-agents/managed-agents-overview.md)            |
+|                | Messages API                                | Claude Managed Agents                                                     |
+| -------------- | ------------------------------------------- | ------------------------------------------------------------------------- |
+| **What it is** | Direct model prompting access               | Pre-built, configurable agent harness that runs in managed infrastructure |
+| **Best for**   | Custom agent loops and fine-grained control | Long-running tasks and asynchronous work                                  |
+
+To learn more about each, see [Using the Messages API](../build-with-claude/build-with-claude-working-with-messages.md) and the [Claude Managed Agents overview](../managed-agents/managed-agents-overview.md).
 
 ## Recommended path for new developers
 
@@ -79,7 +80,7 @@ Follow these steps to go from zero to a working Claude integration.
 Anthropic provides developer tools to help you build and scale applications with Claude.
 
 <CardGroup cols={3}>
-  <Card title="Developer Console" icon="computer" href="/">
+  <Card title="Developer Console" icon="computer" href="https://platform.claude.com/">
     Prototype and test prompts in your browser with the Workbench.
   </Card>
 

@@ -1,13 +1,13 @@
 ---
-title: "Build in Console"
+title: "How to build an agent"
 source: "https://platform.claude.com/docs/en/managed-agents/onboarding"
 category: "managed-agents"
 generated: true
 ---
-# Build in Console
-
-Create, test, and iterate on agents visually in Console, then run them from your code with the API.
-
+---
+title: Build in Console
+url: https://platform.claude.com/docs/en/managed-agents/onboarding
+description: Create, test, and iterate on agents visually in Console, then run them from your code with the API.
 ---
 
 [Console](https://platform.claude.com/workspaces/default/agent-quickstart/) provides a visual interface for creating and configuring agents. It lets you iterate on configuration interactively before writing code.
@@ -39,7 +39,7 @@ Once your agent works as expected:
 2. Reference them in your code when [creating sessions](./managed-agents-sessions.md):
 
 <CodeGroup defaultLanguage="CLI">
-  ```bash curl
+  ```bash cURL
   session=$(curl -fsSL https://api.anthropic.com/v1/sessions \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \

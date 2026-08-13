@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/rbac_groups/retrieve"
 category: "api"
 generated: true
 ---
+---
+title: Get RBAC Group
+url: https://platform.claude.com/docs/en/api/admin/rbac_groups/retrieve
+---
+
 ## Get RBAC Group
 
 **get** `/v1/organizations/rbac_groups/{group_id}`

@@ -1,19 +1,19 @@
 ---
-title: "Get started with Claude"
+title: "Prerequisites"
 source: "https://platform.claude.com/docs/en/get-started"
 category: "api"
 generated: true
 ---
-# Get started with Claude
-
-Make your first API call to Claude and build a simple web search assistant.
-
+---
+title: Get started with Claude
+url: https://platform.claude.com/docs/en/get-started
+description: Make your first API call to Claude and build a simple web search assistant.
 ---
 
 ## Prerequisites
 
 * A [Claude Console account](https://platform.claude.com)
-* An [API key](/settings/keys)
+* An [API key](https://platform.claude.com/settings/keys)
 
 ## Call the API
 
@@ -442,7 +442,7 @@ Make your first API call to Claude and build a simple web search assistant.
             }
 
             dependencies {
-                implementation("com.anthropic:anthropic-java:2.52.0")
+                implementation("com.anthropic:anthropic-java:2.53.0")
             }
 
             application {
@@ -468,7 +468,7 @@ Make your first API call to Claude and build a simple web search assistant.
                 <dependency>
                   <groupId>com.anthropic</groupId>
                   <artifactId>anthropic-java</artifactId>
-                  <version>2.52.0</version>
+                  <version>2.53.0</version>
                 </dependency>
               </dependencies>
             </project>

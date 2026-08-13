@@ -1,13 +1,13 @@
 ---
-title: "Resources"
+title: "Model cards"
 source: "https://platform.claude.com/docs/en/resources/overview"
 category: "general"
 generated: true
 ---
-# Resources
-
-Model cards, learning resources, and documentation formats optimized for AI ingestion.
-
+---
+title: Resources
+url: https://platform.claude.com/docs/en/resources/overview
+description: Model cards, learning resources, and documentation formats optimized for AI ingestion.
 ---
 
 ## Model cards
@@ -113,11 +113,11 @@ Model cards, learning resources, and documentation formats optimized for AI inge
     Concise API guide meant for ingestion by Claude.
   </Card>
 
-  <Card title="Claude Platform docs overview" icon="robot" href="/docs/for-claude">
+  <Card title="Claude Platform docs overview" icon="robot" href="https://platform.claude.com/docs/for-claude">
     Concise overview of Claude Platform documentation, optimized for LLM ingestion.
   </Card>
 
-  <Card title="llms.txt" icon="file" href="/llms.txt">
+  <Card title="llms.txt" icon="file" href="https://platform.claude.com/llms.txt">
     LLM-optimized documentation index.
   </Card>
 </CardGroup>

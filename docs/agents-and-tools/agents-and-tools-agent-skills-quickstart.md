@@ -1,20 +1,20 @@
 ---
-title: "Get started with Agent Skills in the API"
+title: "Prerequisites"
 source: "https://platform.claude.com/docs/en/agents-and-tools/agent-skills/quickstart"
 category: "agents-and-tools"
 generated: true
 ---
-# Get started with Agent Skills in the API
-
-Learn how to use Agent Skills to create documents with the Claude API in under 10 minutes.
-
+---
+title: Get started with Agent Skills in the API
+url: https://platform.claude.com/docs/en/agents-and-tools/agent-skills/quickstart
+description: Learn how to use Agent Skills to create documents with the Claude API in under 10 minutes.
 ---
 
 This tutorial shows you how to use Agent Skills to create a PowerPoint presentation. You'll learn how to enable Skills, make a request, and access the generated file.
 
 ## Prerequisites
 
-* A [Claude API key](/settings/keys) or a logged-in [ant CLI](../general/general-cli-sdks-libraries-cli-authentication.md)
+* A [Claude API key](https://platform.claude.com/settings/keys) or a logged-in [ant CLI](../general/general-cli-sdks-libraries-cli-authentication.md)
 * A [client SDK](../general/general-cli-sdks-libraries-overview.md) for your language, or `curl` and `jq`
 * Basic familiarity with making API requests
 

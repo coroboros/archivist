@@ -1,13 +1,13 @@
 ---
-title: "MCP tunnels"
+title: "How it works"
 source: "https://platform.claude.com/docs/en/agents-and-tools/mcp-tunnels/overview"
 category: "agents-and-tools"
 generated: true
 ---
-# MCP tunnels
-
-Securely connect Claude to MCP servers running in your private network without opening inbound ports or exposing services to the public internet.
-
+---
+title: MCP tunnels
+url: https://platform.claude.com/docs/en/agents-and-tools/mcp-tunnels/overview
+description: Securely connect Claude to MCP servers running in your private network without opening inbound ports or exposing services to the public internet.
 ---
 
 MCP tunnels let you connect Claude to Model Context Protocol (MCP) servers that run inside your private network. Traffic flows over an outbound-only connection, so you don't need to open inbound firewall ports, expose services to the public internet, or allowlist Anthropic's IP ranges on your origin.
@@ -42,7 +42,7 @@ Before deploying, make sure you have:
 
 * One or more MCP servers running in your private network. See [Remote MCP servers](./agents-and-tools-remote-mcp-servers.md) for examples.
 
-* Outbound connectivity as listed under [Network requirements](#network-requirements).
+* Outbound connectivity as listed under [Network requirements](./agents-and-tools-mcp-tunnels-overview.md#network-requirements).
 
 ### Network requirements
 
@@ -64,7 +64,7 @@ Three independent layers protect every request:
 | Inner TLS from Anthropic's back end to your proxy                           | Payload inspection by the transport provider or any network intermediary |
 | OAuth on each MCP server                                                    | Unauthorized use of MCP tools by authenticated tunnel traffic            |
 
-The tunnel transport runs on Cloudflare's network. Because the proxy terminates inner TLS using a certificate that only you hold, Cloudflare cannot read request or response payloads. Anthropic does not connect to a tunnel until a CA certificate is registered, so payloads are always encrypted when they cross Cloudflare's network. Cloudflare does receive connection metadata; see [What the transport provider can observe](#what-the-transport-provider-can-observe).
+The tunnel transport runs on Cloudflare's network. Because the proxy terminates inner TLS using a certificate that only you hold, Cloudflare cannot read request or response payloads. Anthropic does not connect to a tunnel until a CA certificate is registered, so payloads are always encrypted when they cross Cloudflare's network. Cloudflare does receive connection metadata; see [What the transport provider can observe](./agents-and-tools-mcp-tunnels-overview.md#what-the-transport-provider-can-observe).
 
 ### Shared responsibility model
 

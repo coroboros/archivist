@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/ruby/beta/sessions/resources/re
 category: "api"
 generated: true
 ---
+---
+title: Get Session Resource
+url: https://platform.claude.com/docs/en/api/ruby/beta/sessions/resources/retrieve
+---
+
 ## Get Session Resource
 
 `beta.sessions.resources.retrieve(resource_id, **kwargs) -> ResourceRetrieveResponse`
@@ -24,7 +29,7 @@ Get Session Resource
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 29 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 30 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -89,6 +94,8 @@ Get Session Resource
     - `:"fallback-credit-2026-07-01"`
 
     - `:"agent-memory-2026-07-22"`
+
+    - `:"mid-conversation-tool-changes-2026-07-01"`
 
 ### Returns
 

@@ -1,13 +1,13 @@
 ---
-title: "Using Agent Skills with the API"
+title: "Quick links"
 source: "https://platform.claude.com/docs/en/build-with-claude/skills-guide"
 category: "build-with-claude"
 generated: true
 ---
-# Using Agent Skills with the API
-
-Learn how to use Agent Skills to extend Claude's capabilities through the API.
-
+---
+title: Using Agent Skills with the API
+url: https://platform.claude.com/docs/en/build-with-claude/skills-guide
+description: Learn how to use Agent Skills to extend Claude's capabilities through the API.
 ---
 
 Agent Skills extend Claude's capabilities through organized folders of instructions, scripts, and resources. This guide shows you how to use both pre-built and custom Skills with the Claude API.
@@ -49,13 +49,13 @@ Skills integrate identically in the Messages API regardless of source. You speci
 
 You can use Skills from two sources:
 
-| Aspect             | Anthropic Skills                           | Custom Skills                                                               |
-| ------------------ | ------------------------------------------ | --------------------------------------------------------------------------- |
-| **Type value**     | `anthropic`                                | `custom`                                                                    |
-| **Skill IDs**      | Short names: `pptx`, `xlsx`, `docx`, `pdf` | Generated: `skill_01AbCdEfGhIjKlMnOpQrStUv`                                 |
-| **Version format** | Date-based: `20251013` or `latest`         | Epoch timestamp: `1759178010641129` or `latest`                             |
+| Aspect             | Anthropic Skills                           | Custom Skills                                                                                          |
+| ------------------ | ------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
+| **Type value**     | `anthropic`                                | `custom`                                                                                               |
+| **Skill IDs**      | Short names: `pptx`, `xlsx`, `docx`, `pdf` | Generated: `skill_01AbCdEfGhIjKlMnOpQrStUv`                                                            |
+| **Version format** | Date-based: `20251013` or `latest`         | Epoch timestamp: `1759178010641129` or `latest`                                                        |
 | **Management**     | Pre-built and maintained by Anthropic      | Upload and manage through the [Skills API](../api/api-beta-skills-create.md) |
-| **Availability**   | Available to all users                     | Private to your workspace                                                   |
+| **Availability**   | Available to all users                     | Private to your workspace                                                                              |
 
 Both skill sources are returned by the [List Skills endpoint](../api/api-beta-skills-list.md) (use the `source` parameter to filter). The integration shape and execution environment are identical. The only difference is where the Skills come from and how they're managed.
 
@@ -63,7 +63,7 @@ Both skill sources are returned by the [List Skills endpoint](../api/api-beta-sk
 
 To use Skills, you need:
 
-1. **Claude API key** from the [Claude Console](/settings/keys)
+1. **Claude API key** from the [Claude Console](https://platform.claude.com/settings/keys)
 
 2. **Beta headers:**
 
@@ -3003,7 +3003,7 @@ Skills support versioning to manage updates safely:
 * Use `"latest"` to always get the most recent version
 * Create new versions when updating Skill files
 
-A new version is a complete snapshot, not a delta: upload the Skill's full file set each time, under the same top-level directory name used at creation. Files you omit are not carried over. The following examples re-upload the complete `financial_skill/` bundle from [Creating a Skill](#creating-a-skill).
+A new version is a complete snapshot, not a delta: upload the Skill's full file set each time, under the same top-level directory name used at creation. Files you omit are not carried over. The following examples re-upload the complete `financial_skill/` bundle from [Creating a Skill](./build-with-claude-skills-guide.md#creating-a-skill).
 
 <CodeGroup defaultLanguage="CLI">
   ```bash cURL
@@ -3943,7 +3943,7 @@ Combine Skills when tasks involve multiple document types or domains:
 
 The SDK tabs in this section show the `container` value to include in a Messages request. The cURL and CLI tabs show the full request.
 
-**For production:** pin a specific version, so Skill updates never change your deployed behavior. The version ID comes from the create-version response in [Versioning](#versioning) or from the [List Skill Versions API](../api/api-beta-skills-versions-list.md). The ID is always a string: quote epoch-timestamp IDs in JSON or YAML.
+**For production:** pin a specific version, so Skill updates never change your deployed behavior. The version ID comes from the create-version response in [Versioning](./build-with-claude-skills-guide.md#versioning) or from the [List Skill Versions API](../api/api-beta-skills-versions-list.md). The ID is always a string: quote epoch-timestamp IDs in JSON or YAML.
 
 <CodeGroup>
   ```bash cURL

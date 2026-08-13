@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/cli/beta/environments/work"
 category: "api"
 generated: true
 ---
+---
+title: Work
+url: https://platform.claude.com/docs/en/api/cli/beta/environments/work
+---
+
 # Work
 
 ## Get Work Item

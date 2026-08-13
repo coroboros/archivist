@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/typescript/beta/files/retrieve_
 category: "api"
 generated: true
 ---
+---
+title: Get File Metadata
+url: https://platform.claude.com/docs/en/api/typescript/beta/files/retrieve_metadata
+---
+
 ## Get File Metadata
 
 `client.beta.files.retrieveMetadata(stringfileID, FileRetrieveMetadataParamsparams?, RequestOptionsoptions?): FileMetadata`
@@ -26,7 +31,7 @@ Get File Metadata
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 29 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -92,6 +97,8 @@ Get File Metadata
 
       - `"agent-memory-2026-07-22"`
 
+      - `"mid-conversation-tool-changes-2026-07-01"`
+
 ### Returns
 
 - `FileMetadata`
@@ -147,13 +154,13 @@ Get File Metadata
 ### Example
 
 ```typescript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic({
-  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
+  apiKey: process.env["ANTHROPIC_API_KEY"] // This is the default and can be omitted
 });
 
-const fileMetadata = await client.beta.files.retrieveMetadata('file_id');
+const fileMetadata = await client.beta.files.retrieveMetadata("file_id");
 
 console.log(fileMetadata.id);
 ```

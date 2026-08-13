@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/php/beta/agents/versions"
 category: "api"
 generated: true
 ---
+---
+title: Versions
+url: https://platform.claude.com/docs/en/api/php/beta/agents/versions
+---
+
 # Versions
 
 ## List Agent Versions
@@ -89,7 +94,7 @@ $page = $client->beta->agents->versions->list(
   'agent_011CZkYpogX7uDKUyvBTophP',
   limit: 0,
   page: 'page',
-  betas: ['message-batches-2024-09-24'],
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
 );
 
 var_dump($page);
@@ -120,6 +125,7 @@ var_dump($page);
         "effort": {
           "type": "low"
         },
+        "inference_geo": "inference_geo",
         "speed": "standard"
       },
       "multiagent": {

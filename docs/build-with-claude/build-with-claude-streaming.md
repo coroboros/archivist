@@ -1,13 +1,13 @@
 ---
-title: "Streaming messages"
+title: "Streaming with SDKs"
 source: "https://platform.claude.com/docs/en/build-with-claude/streaming"
 category: "build-with-claude"
 generated: true
 ---
-# Streaming messages
-
-Stream Messages API responses incrementally with server-sent events, including text, tool use, and extended thinking deltas.
-
+---
+title: Streaming messages
+url: https://platform.claude.com/docs/en/build-with-claude/streaming
+description: Stream Messages API responses incrementally with server-sent events, including text, tool use, and extended thinking deltas.
 ---
 
 When creating a Message, you can set `"stream": true` to incrementally stream the response using [server-sent events](https://developer.mozilla.org/en-US/Web/API/Server-sent%5Fevents/Using%5Fserver-sent%5Fevents) (SSE).
@@ -397,7 +397,7 @@ A stream response consists of:
 
 4. A `message_stop` event
 
-There may be `ping` events dispersed throughout the response as well. See [Event types](#event-types) for more details on the format.
+There may be `ping` events dispersed throughout the response as well. See [Event types](./build-with-claude-streaming.md#event-types) for more details on the format.
 
 ### Basic streaming request
 

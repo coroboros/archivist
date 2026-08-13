@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/typescript/beta/memory_stores/m
 category: "api"
 generated: true
 ---
+---
+title: Memory Versions
+url: https://platform.claude.com/docs/en/api/typescript/beta/memory_stores/memory_versions
+---
+
 # Memory Versions
 
 ## List memory versions
@@ -72,7 +77,7 @@ List memory versions
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 29 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -137,6 +142,8 @@ List memory versions
       - `"fallback-credit-2026-07-01"`
 
       - `"agent-memory-2026-07-22"`
+
+      - `"mid-conversation-tool-changes-2026-07-01"`
 
 ### Returns
 
@@ -241,15 +248,15 @@ List memory versions
 ### Example
 
 ```typescript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic({
-  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
+  apiKey: process.env["ANTHROPIC_API_KEY"] // This is the default and can be omitted
 });
 
 // Automatically fetches more pages as needed.
 for await (const betaManagedAgentsMemoryVersion of client.beta.memoryStores.memoryVersions.list(
-  'memory_store_id',
+  "memory_store_id"
 )) {
   console.log(betaManagedAgentsMemoryVersion.id);
 }
@@ -318,7 +325,7 @@ Retrieve a memory version
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 29 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -383,6 +390,8 @@ Retrieve a memory version
       - `"fallback-credit-2026-07-01"`
 
       - `"agent-memory-2026-07-22"`
+
+      - `"mid-conversation-tool-changes-2026-07-01"`
 
 ### Returns
 
@@ -487,15 +496,15 @@ Retrieve a memory version
 ### Example
 
 ```typescript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic({
-  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
+  apiKey: process.env["ANTHROPIC_API_KEY"] // This is the default and can be omitted
 });
 
 const betaManagedAgentsMemoryVersion = await client.beta.memoryStores.memoryVersions.retrieve(
-  'memory_version_id',
-  { memory_store_id: 'memory_store_id' },
+  "memory_version_id",
+  { memory_store_id: "memory_store_id" }
 );
 
 console.log(betaManagedAgentsMemoryVersion.id);
@@ -551,7 +560,7 @@ Redact a memory version
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 29 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -616,6 +625,8 @@ Redact a memory version
       - `"fallback-credit-2026-07-01"`
 
       - `"agent-memory-2026-07-22"`
+
+      - `"mid-conversation-tool-changes-2026-07-01"`
 
 ### Returns
 
@@ -720,15 +731,15 @@ Redact a memory version
 ### Example
 
 ```typescript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic({
-  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
+  apiKey: process.env["ANTHROPIC_API_KEY"] // This is the default and can be omitted
 });
 
 const betaManagedAgentsMemoryVersion = await client.beta.memoryStores.memoryVersions.redact(
-  'memory_version_id',
-  { memory_store_id: 'memory_store_id' },
+  "memory_version_id",
+  { memory_store_id: "memory_store_id" }
 );
 
 console.log(betaManagedAgentsMemoryVersion.id);

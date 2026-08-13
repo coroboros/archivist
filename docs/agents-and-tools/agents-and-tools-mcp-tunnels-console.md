@@ -1,13 +1,13 @@
 ---
-title: "Manage tunnels in the Console"
+title: "Prerequisites"
 source: "https://platform.claude.com/docs/en/agents-and-tools/mcp-tunnels/console"
 category: "agents-and-tools"
 generated: true
 ---
-# Manage tunnels in the Console
-
-Create tunnels, register CA certificates, retrieve the tunnel token, and attach tunneled MCP servers to agents from the Claude Console.
-
+---
+title: Manage tunnels in the Console
+url: https://platform.claude.com/docs/en/agents-and-tools/mcp-tunnels/console
+description: Create tunnels, register CA certificates, retrieve the tunnel token, and attach tunneled MCP servers to agents from the Claude Console.
 ---
 
 <Note>
@@ -25,7 +25,7 @@ This page covers the Console side of an MCP tunnels deployment: creating a tunne
 * **A way for your stack to authenticate to the Tunnels API.** Choose one:
 
   * **[Programmatic access](./agents-and-tools-mcp-tunnels-concepts.md#credential-provisioning) (recommended).** Set up [Workload Identity Federation](../manage-claude/manage-claude-workload-identity-federation.md) during tunnel creation so your stack mints short-lived API tokens from your identity provider, fetches the tunnel token, and generates and registers a CA certificate automatically. Requires permission to manage federation rules, a registered OIDC issuer, and a federation rule with the `workspace:manage_tunnels` scope.
-  * **[Manual](./agents-and-tools-mcp-tunnels-concepts.md#credential-provisioning).** Skip programmatic access. After creating the tunnel, [get the tunnel token](#get-the-connection-details), generate and [register a CA certificate](#add-a-ca-certificate) yourself, and supply the token and your server certificate to your tunnel stack as secrets.
+  * **[Manual](./agents-and-tools-mcp-tunnels-concepts.md#credential-provisioning).** Skip programmatic access. After creating the tunnel, [get the tunnel token](./agents-and-tools-mcp-tunnels-console.md#get-the-connection-details), generate and [register a CA certificate](./agents-and-tools-mcp-tunnels-console.md#add-a-ca-certificate) yourself, and supply the token and your server certificate to your tunnel stack as secrets.
 
 ## Create a tunnel
 
@@ -62,10 +62,10 @@ This page covers the Console side of an MCP tunnels deployment: creating a tunne
 
     What else you need depends on the [credential-provisioning mode](./agents-and-tools-mcp-tunnels-concepts.md#credential-provisioning):
 
-    | With programmatic access                                                                                                                                                   | Without programmatic access                                                                                                                                                 |
-    | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-    | The **federation rule ID** (`fdrl_...`) of the rule you selected. The rule is org-level, not stored on the tunnel; find it under **Settings > Workload identity > Rules**. | The **tunnel token**, revealed with the eye icon next to **Token** on the detail page. Treat it as a secret. See [Get the connection details](#get-the-connection-details). |
-    | The **organization ID** (a UUID), shown under **Settings > Organization**.                                                                                                 | A **CA certificate** that you generate and [register on the tunnel](#add-a-ca-certificate).                                                                                 |
+    | With programmatic access                                                                                                                                                   | Without programmatic access                                                                                                                                                                                                                         |
+    | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+    | The **federation rule ID** (`fdrl_...`) of the rule you selected. The rule is org-level, not stored on the tunnel; find it under **Settings > Workload identity > Rules**. | The **tunnel token**, revealed with the eye icon next to **Token** on the detail page. Treat it as a secret. See [Get the connection details](./agents-and-tools-mcp-tunnels-console.md#get-the-connection-details). |
+    | The **organization ID** (a UUID), shown under **Settings > Organization**.                                                                                                 | A **CA certificate** that you generate and [register on the tunnel](./agents-and-tools-mcp-tunnels-console.md#add-a-ca-certificate).                                                                                 |
 
     With programmatic access, your stack fetches the tunnel token through the Tunnels API, generates the CA and server certificate locally (the private key never leaves your environment), and registers only the CA's public certificate with Anthropic. You're still responsible for securing the private keys and renewing the server certificate before it expires.
   </Step>

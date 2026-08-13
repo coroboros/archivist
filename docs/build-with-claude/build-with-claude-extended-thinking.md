@@ -1,13 +1,13 @@
 ---
-title: "Extended thinking"
+title: "Supported models"
 source: "https://platform.claude.com/docs/en/build-with-claude/extended-thinking"
 category: "build-with-claude"
 generated: true
 ---
-# Extended thinking
-
-Configure manual extended thinking with a fixed budget_tokens budget on Claude models that support it, and migrate to adaptive thinking.
-
+---
+title: Extended thinking
+url: https://platform.claude.com/docs/en/build-with-claude/extended-thinking
+description: Configure manual extended thinking with a fixed budget_tokens budget on Claude models that support it, and migrate to adaptive thinking.
 ---
 
 <Note>
@@ -17,11 +17,11 @@ Configure manual extended thinking with a fixed budget_tokens budget on Claude m
 <Warning>
   Extended thinking (`thinking.type: "enabled"` with `budget_tokens`) is deprecated on the Claude 4.6 models (requests using it still succeed). Claude 4.7 and later models do not support it and reject requests that use it, returning a 400 error. On Claude 4.5 and earlier models that support thinking, extended thinking is the only available thinking mode. Claude Mythos Preview supports both modes. Where both modes are available, use [adaptive thinking](./build-with-claude-thinking.md) instead.
 
-  See [Migrating to adaptive thinking](#migrating-to-adaptive-thinking) to move to adaptive thinking. If your model supports only extended thinking, this page describes the supported configuration; no change is needed until you move to a newer model.
+  See [Migrating to adaptive thinking](./build-with-claude-extended-thinking.md#migrating-to-adaptive-thinking) to move to adaptive thinking. If your model supports only extended thinking, this page describes the supported configuration; no change is needed until you move to a newer model.
 </Warning>
 
 <Note>
-  If a request fails with a 400 error whose message starts with `"thinking.type.enabled" is not supported`, your model uses adaptive thinking instead. See [Troubleshooting thinking](./build-with-claude-thinking-troubleshooting.md#error-thinking-type-enabled), or jump to [Migrating to adaptive thinking](#migrating-to-adaptive-thinking).
+  If a request fails with a 400 error whose message starts with `"thinking.type.enabled" is not supported`, your model uses adaptive thinking instead. See [Troubleshooting thinking](./build-with-claude-thinking-troubleshooting.md#error-thinking-type-enabled), or jump to [Migrating to adaptive thinking](./build-with-claude-extended-thinking.md#migrating-to-adaptive-thinking).
 </Note>
 
 Extended thinking in manual mode gives you direct control over how much Claude thinks. You set a thinking token budget on each request with `thinking: {type: "enabled", budget_tokens: N}`, and Claude thinks against that budget before it starts its final answer. Manual mode remains useful when your workload requires predictable latency or precise control over thinking costs. This page covers how to set and tune the budget, how manual mode interacts with interleaved thinking and prompt caching, and how to migrate to adaptive thinking.
@@ -276,7 +276,7 @@ The `budget_tokens` parameter sets a target for how many tokens Claude can use f
 `budget_tokens` must satisfy these constraints:
 
 * **Minimum of 1,024 tokens.** The API rejects smaller values.
-* **Less than `max_tokens`.** Thinking tokens count toward the `max_tokens` limit for the turn, so the budget must leave room for the final response. The one exception is [interleaved thinking](#interleaved-thinking), where `budget_tokens` can exceed `max_tokens` because the budget spans all thinking blocks within one assistant turn.
+* **Less than `max_tokens`.** Thinking tokens count toward the `max_tokens` limit for the turn, so the budget must leave room for the final response. The one exception is [interleaved thinking](./build-with-claude-extended-thinking.md#interleaved-thinking), where `budget_tokens` can exceed `max_tokens` because the budget spans all thinking blocks within one assistant turn.
 * **No cache pre-warming.** Because `budget_tokens` must be less than `max_tokens`, extended thinking cannot be combined with `max_tokens: 0` ([cache pre-warming](./build-with-claude-prompt-caching.md#pre-warming-the-cache)).
 
 The budget is a target rather than a strict cap. Actual token usage varies with the task, and Claude may stop reasoning well before the budget is exhausted; `max_tokens` remains the hard ceiling on total output.
@@ -290,7 +290,7 @@ To tune the budget:
 
 To track what a budget actually costs you, monitor the `usage.output_tokens_details.thinking_tokens` field in the response, which reports how many of the billed output tokens were internal reasoning. When streaming, this breakdown appears only on the final `message_delta` event.
 
-When you are ready to move off manual budgets, see [Migrating to adaptive thinking](#migrating-to-adaptive-thinking).
+When you are ready to move off manual budgets, see [Migrating to adaptive thinking](./build-with-claude-extended-thinking.md#migrating-to-adaptive-thinking).
 
 ## Interleaved thinking in manual mode
 
@@ -307,7 +307,7 @@ Claude Haiku 4.5 does not support interleaved thinking. On the Claude API, the b
 
 Two more considerations for interleaved thinking in manual mode:
 
-* `budget_tokens` can exceed `max_tokens` here; the [budget rules](#budget-rules-and-tuning) explain this exception.
+* `budget_tokens` can exceed `max_tokens` here; the [budget rules](./build-with-claude-extended-thinking.md#budget-rules-and-tuning) explain this exception.
 * Interleaved thinking is only supported for [tools used through the Messages API](../agents-and-tools/agents-and-tools-tool-use-overview.md).
 
 How platforms treat the beta header differs. The Claude API and [Claude Platform on AWS](./build-with-claude-claude-platform-on-aws.md) accept `interleaved-thinking-2025-05-14` on any model and ignore it where unsupported. Acceptance is not the same as effect: on models that reject `type: "enabled"` (4.7 and later) or lack manual-mode interleaving (Claude Opus 4.6), the header has no manual-mode effect; adaptive thinking interleaves automatically there.
@@ -392,7 +392,7 @@ becomes:
 
 Expect a behavioral difference, not just a syntax change. With a fixed budget, Claude thinks on every request. With adaptive thinking, Claude decides whether and how much to think on each request, and at lower [effort](./build-with-claude-effort.md) settings it may skip thinking entirely on easy inputs. You can also remove the `interleaved-thinking-2025-05-14` beta header after migrating: adaptive thinking interleaves automatically, and the Claude API ignores the header on these models. Thinking block preservation changes too: Claude Opus 4.5 and models numbered 4.6 and higher keep prior turns' thinking blocks in context and bill them as input, where Claude Sonnet 4.5, Claude Haiku 4.5, and earlier models stripped them; see [thinking block preservation by model](./build-with-claude-thinking.md#thinking-block-preservation-by-model).
 
-Switching modes is a thinking-configuration change, so the first request after the switch invalidates cache breakpoints, as described in [Prompt caching in manual mode](#extended-thinking-with-prompt-caching).
+Switching modes is a thinking-configuration change, so the first request after the switch invalidates cache breakpoints, as described in [Prompt caching in manual mode](./build-with-claude-extended-thinking.md#extended-thinking-with-prompt-caching).
 
 For full guidance, see [adaptive thinking](./build-with-claude-thinking.md), [effort](./build-with-claude-effort.md), and the [model migration guide](../about-claude/about-claude-models-migration-guide.md).
 

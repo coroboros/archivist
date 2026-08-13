@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/csharp/beta/memory_stores/archi
 category: "api"
 generated: true
 ---
+---
+title: Archive a memory store
+url: https://platform.claude.com/docs/en/api/csharp/beta/memory_stores/archive
+---
+
 ## Archive a memory store
 
 `BetaManagedAgentsMemoryStore Beta.MemoryStores.Archive(MemoryStoreArchiveParamsparameters, CancellationTokencancellationToken = default)`
@@ -87,6 +92,8 @@ Archive a memory store
     - `"fallback-credit-2026-07-01"FallbackCredit2026_07_01`
 
     - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
+
+    - `"mid-conversation-tool-changes-2026-07-01"MidConversationToolChanges2026_07_01`
 
 ### Returns
 

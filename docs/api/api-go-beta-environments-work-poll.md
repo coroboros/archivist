@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/go/beta/environments/work/poll"
 category: "api"
 generated: true
 ---
+---
+title: Poll for Work
+url: https://platform.claude.com/docs/en/api/go/beta/environments/work/poll
+---
+
 ## Poll for Work
 
 `client.Beta.Environments.Work.Poll(ctx, environmentID, params) (*BetaSelfHostedWork, error)`
@@ -99,6 +104,8 @@ Long poll for work items in the queue.
       - `const AnthropicBetaFallbackCredit2026_07_01 AnthropicBeta = "fallback-credit-2026-07-01"`
 
       - `const AnthropicBetaAgentMemory2026_07_22 AnthropicBeta = "agent-memory-2026-07-22"`
+
+      - `const AnthropicBetaMidConversationToolChanges2026_07_01 AnthropicBeta = "mid-conversation-tool-changes-2026-07-01"`
 
   - `AnthropicWorkerID param.Field[string]`
 

@@ -1,12 +1,14 @@
 ---
-title: "Computer use tool"
+title: "Compatibility"
 source: "https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool"
 category: "agents-and-tools"
 generated: true
 ---
-# Computer use tool
-
-Give Claude screenshot, mouse, and keyboard control of a desktop environment with the computer use tool.
+---
+title: Computer use tool
+url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool
+description: Give Claude screenshot, mouse, and keyboard control of a desktop environment with the computer use tool.
+---
 
 ## Compatibility
 - Status: Beta
@@ -14,8 +16,6 @@ Give Claude screenshot, mouse, and keyboard control of a desktop environment wit
 - [ZDR](../manage-claude/manage-claude-api-and-data-retention.md): eligible (excludes [Covered Models](../manage-claude/manage-claude-api-and-data-retention.md#model-specific-data-retention-requirements))
 - Supported models: `claude-opus-5`, `claude-sonnet-5`, `claude-opus-4-8`, `claude-opus-4-7`, `claude-opus-4-6`, `claude-sonnet-4-6`, `claude-opus-4-5-20251101`
 - Platforms: Claude API (beta), Claude Platform on AWS (beta), Amazon Bedrock (beta), Google Cloud (beta), Microsoft Foundry (beta)
-
----
 
 Claude can interact with computer environments through the computer use tool, which provides screenshot capabilities and mouse/keyboard control for autonomous desktop interaction.
 
@@ -410,7 +410,7 @@ A [reference implementation](https://github.com/anthropics/anthropic-quickstarts
 
 ### Understand the agent loop
 
-The core of computer use is the "agent loop": a cycle where Claude requests tool actions, your application runs them, and returns results to Claude. The loop uses the client you created in the [Quick start](#quick-start), a tool list shaped like the Quick start's `tools` array, and the tool-call processing helper defined in [Process Claude's tool calls](#implement-the-computer-use-tool). Here's a simplified example:
+The core of computer use is the "agent loop": a cycle where Claude requests tool actions, your application runs them, and returns results to Claude. The loop uses the client you created in the [Quick start](./agents-and-tools-tool-use-computer-use-tool.md#quick-start), a tool list shaped like the Quick start's `tools` array, and the tool-call processing helper defined in [Process Claude's tool calls](./agents-and-tools-tool-use-computer-use-tool.md#implement-the-computer-use-tool). Here's a simplified example:
 
 <CodeGroup>
   ```bash cURL
@@ -855,7 +855,7 @@ For combining computer use with thinking, see [Thinking](../build-with-claude/bu
 
 ### Augmenting computer use with other tools
 
-To add other tools alongside computer use, include them in the same `tools` array. The [Quick start](#quick-start) section shows this pattern with the [bash tool](./agents-and-tools-tool-use-bash-tool.md) and [text editor tool](./agents-and-tools-tool-use-text-editor-tool.md). You can add your own [custom tool definitions](./agents-and-tools-tool-use-define-tools.md) the same way.
+To add other tools alongside computer use, include them in the same `tools` array. The [Quick start](./agents-and-tools-tool-use-computer-use-tool.md#quick-start) section shows this pattern with the [bash tool](./agents-and-tools-tool-use-bash-tool.md) and [text editor tool](./agents-and-tools-tool-use-text-editor-tool.md). You can add your own [custom tool definitions](./agents-and-tools-tool-use-define-tools.md) the same way.
 
 ### Build a custom computer use environment
 

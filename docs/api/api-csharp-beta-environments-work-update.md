@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/csharp/beta/environments/work/u
 category: "api"
 generated: true
 ---
+---
+title: Update Work Item
+url: https://platform.claude.com/docs/en/api/csharp/beta/environments/work/update
+---
+
 ## Update Work Item
 
 `BetaSelfHostedWork Beta.Environments.Work.Update(WorkUpdateParamsparameters, CancellationTokencancellationToken = default)`
@@ -97,6 +102,8 @@ Update work item metadata with merge semantics.
     - `"fallback-credit-2026-07-01"FallbackCredit2026_07_01`
 
     - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
+
+    - `"mid-conversation-tool-changes-2026-07-01"MidConversationToolChanges2026_07_01`
 
 ### Returns
 

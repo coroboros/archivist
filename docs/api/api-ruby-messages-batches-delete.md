@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/ruby/messages/batches/delete"
 category: "api"
 generated: true
 ---
+---
+title: Delete a Message Batch
+url: https://platform.claude.com/docs/en/api/ruby/messages/batches/delete
+---
+
 ## Delete a Message Batch
 
 `messages.batches.delete(message_batch_id) -> DeletedMessageBatch`

@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/external_keys/create"
 category: "api"
 generated: true
 ---
+---
+title: Create External Key
+url: https://platform.claude.com/docs/en/api/admin/external_keys/create
+---
+
 ## Create External Key
 
 **post** `/v1/organizations/external_keys`

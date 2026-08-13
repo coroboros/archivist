@@ -1,13 +1,13 @@
 ---
-title: "Increase output consistency"
+title: "Specify the desired output format"
 source: "https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/increase-consistency"
 category: "test-and-evaluate"
 generated: true
 ---
-# Increase output consistency
-
-Make Claude's outputs more consistent by specifying exact formats, prefilling responses, constraining with examples, and grounding answers in retrieval.
-
+---
+title: Increase output consistency
+url: https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/increase-consistency
+description: Make Claude's outputs more consistent by specifying exact formats, prefilling responses, constraining with examples, and grounding answers in retrieval.
 ---
 
 <Tip>

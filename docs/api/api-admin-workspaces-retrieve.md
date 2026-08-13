@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/workspaces/retrieve"
 category: "api"
 generated: true
 ---
+---
+title: Get Workspace
+url: https://platform.claude.com/docs/en/api/admin/workspaces/retrieve
+---
+
 ## Get Workspace
 
 **get** `/v1/organizations/workspaces/{workspace_id}`

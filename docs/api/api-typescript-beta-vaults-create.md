@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/typescript/beta/vaults/create"
 category: "api"
 generated: true
 ---
+---
+title: Create Vault
+url: https://platform.claude.com/docs/en/api/typescript/beta/vaults/create
+---
+
 ## Create Vault
 
 `client.beta.vaults.create(VaultCreateParamsparams, RequestOptionsoptions?): BetaManagedAgentsVault`
@@ -30,7 +35,7 @@ Create Vault
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 29 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -96,6 +101,8 @@ Create Vault
 
       - `"agent-memory-2026-07-22"`
 
+      - `"mid-conversation-tool-changes-2026-07-01"`
+
 ### Returns
 
 - `BetaManagedAgentsVault`
@@ -133,13 +140,15 @@ Create Vault
 ### Example
 
 ```typescript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic({
-  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
+  apiKey: process.env["ANTHROPIC_API_KEY"] // This is the default and can be omitted
 });
 
-const betaManagedAgentsVault = await client.beta.vaults.create({ display_name: 'Example vault' });
+const betaManagedAgentsVault = await client.beta.vaults.create({
+  display_name: "Example vault"
+});
 
 console.log(betaManagedAgentsVault.id);
 ```

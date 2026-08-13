@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/federation_rules/update"
 category: "api"
 generated: true
 ---
+---
+title: Update Federation Rule
+url: https://platform.claude.com/docs/en/api/admin/federation_rules/update
+---
+
 ## Update Federation Rule
 
 **post** `/v1/organizations/federation_rules/{federation_rule_id}`

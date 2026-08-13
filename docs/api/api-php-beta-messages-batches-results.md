@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/php/beta/messages/batches/resul
 category: "api"
 generated: true
 ---
+---
+title: Retrieve Message Batch results
+url: https://platform.claude.com/docs/en/api/php/beta/messages/batches/results
+---
+
 ## Retrieve Message Batch results
 
 `$client->beta->messages->batches->results(string messageBatchID, ?list<AnthropicBeta> betas): MessageBatchIndividualResponse`
@@ -55,7 +60,9 @@ $betaMessageBatchIndividualResponse = $client
   ->beta
   ->messages
   ->batches
-  ->resultsStream('message_batch_id', betas: ['message-batches-2024-09-24']);
+  ->resultsStream(
+  'message_batch_id', betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24]
+);
 
 var_dump($betaMessageBatchIndividualResponse);
 ```

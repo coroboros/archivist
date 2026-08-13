@@ -1,13 +1,13 @@
 ---
-title: "Use WIF with Kubernetes"
+title: "Prerequisites"
 source: "https://platform.claude.com/docs/en/manage-claude/wif-providers/kubernetes"
 category: "manage-claude"
 generated: true
 ---
-# Use WIF with Kubernetes
-
-Authenticate to the Claude API from self-managed Kubernetes clusters using projected service account tokens.
-
+---
+title: Use WIF with Kubernetes
+url: https://platform.claude.com/docs/en/manage-claude/wif-providers/kubernetes
+description: Authenticate to the Claude API from self-managed Kubernetes clusters using projected service account tokens.
 ---
 
 Self-managed Kubernetes clusters (kubeadm, k3s, OpenShift, and on-premises distributions) sign OIDC JSON Web Tokens (JWTs) for every pod through [projected service account tokens](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#serviceaccount-token-volume-projection). The cluster's API server acts as the OIDC issuer, and each token's `sub` claim follows the form `system:serviceaccount:<namespace>:<service-account>`. You can find your cluster's issuer URL by reading its discovery document:
@@ -29,7 +29,7 @@ kubectl get --raw /.well-known/openid-configuration | jq -r .issuer
 * One of the following so Anthropic can validate token signatures:
 
   * The issuer's JWKS endpoint is reachable from the public internet over HTTPS on port 443, or
-  * You can fetch the JWKS from inside the cluster and register it in `inline` mode (covered in [Configure Anthropic](#configure-anthropic)).
+  * You can fetch the JWKS from inside the cluster and register it in `inline` mode (covered in [Configure Anthropic](./manage-claude-wif-providers-kubernetes.md#configure-anthropic)).
 
 * Permission to create service accounts, federation issuers, and federation rules in the Claude Console for your Anthropic organization.
 
@@ -130,7 +130,7 @@ Be as specific as the workload allows. Loosen `subject_prefix` to `system:servic
 
 ## Acquire and use the token
 
-The pod spec in [Configure Kubernetes](#configure-kubernetes) sets `ANTHROPIC_IDENTITY_TOKEN_FILE` to the projected mount path, along with `ANTHROPIC_FEDERATION_RULE_ID`, `ANTHROPIC_ORGANIZATION_ID`, `ANTHROPIC_SERVICE_ACCOUNT_ID`, and `ANTHROPIC_WORKSPACE_ID`. With those in place, the SDK reads the token from disk on every exchange and refreshes the Anthropic access token automatically.
+The pod spec in [Configure Kubernetes](./manage-claude-wif-providers-kubernetes.md#configure-kubernetes) sets `ANTHROPIC_IDENTITY_TOKEN_FILE` to the projected mount path, along with `ANTHROPIC_FEDERATION_RULE_ID`, `ANTHROPIC_ORGANIZATION_ID`, `ANTHROPIC_SERVICE_ACCOUNT_ID`, and `ANTHROPIC_WORKSPACE_ID`. With those in place, the SDK reads the token from disk on every exchange and refreshes the Anthropic access token automatically.
 
 <CodeGroup>
   ```bash cURL

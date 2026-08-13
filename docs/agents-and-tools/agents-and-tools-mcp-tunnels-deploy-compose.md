@@ -1,13 +1,13 @@
 ---
-title: "Deploy MCP tunnels with Docker Compose"
+title: "Edit docker-compose.yaml: increment the integer in the setup service's"
 source: "https://platform.claude.com/docs/en/agents-and-tools/mcp-tunnels/deploy-compose"
 category: "agents-and-tools"
 generated: true
 ---
-# Deploy MCP tunnels with Docker Compose
-
-Install the MCP tunnel stack on a VM using Docker Compose.
-
+---
+title: Deploy MCP tunnels with Docker Compose
+url: https://platform.claude.com/docs/en/agents-and-tools/mcp-tunnels/deploy-compose
+description: Install the MCP tunnel stack on a VM using Docker Compose.
 ---
 
 <Note>
@@ -31,7 +31,7 @@ You need:
 
 * **Outbound network connectivity** from the host to `api.anthropic.com` (443 TCP) and the [tunnel edge](./agents-and-tools-mcp-tunnels-concepts.md#components) (7844 TCP and UDP). See the full [network requirements](./agents-and-tools-mcp-tunnels-overview.md#network-requirements).
 
-* **One or more MCP servers** running and reachable from the host on the addresses you'll configure under `routes`. If you don't have one yet, [use the sample server](#optional-use-a-sample-mcp-server).
+* **One or more MCP servers** running and reachable from the host on the addresses you'll configure under `routes`. If you don't have one yet, [use the sample server](./agents-and-tools-mcp-tunnels-deploy-compose.md#optional-use-a-sample-mcp-server).
 
 ## Optional: Use a sample MCP server
 
@@ -149,7 +149,7 @@ This guide provides one reference approach using Docker Compose. You are respons
         EOF
         ```
 
-        If you're using the [sample MCP server](#optional-use-a-sample-mcp-server), append it as a service:
+        If you're using the [sample MCP server](./agents-and-tools-mcp-tunnels-deploy-compose.md#optional-use-a-sample-mcp-server), append it as a service:
 
         ```bash
         cat >> docker-compose.yaml <<'EOF'
@@ -217,7 +217,7 @@ This guide provides one reference approach using Docker Compose. You are respons
         EOF
         ```
 
-        The `echo:` route targets the [sample MCP server](#optional-use-a-sample-mcp-server); replace it with (or add) your own routes. See the [proxy configuration](./agents-and-tools-mcp-tunnels-reference.md#proxy-configuration) reference for all available fields.
+        The `echo:` route targets the [sample MCP server](./agents-and-tools-mcp-tunnels-deploy-compose.md#optional-use-a-sample-mcp-server); replace it with (or add) your own routes. See the [proxy configuration](./agents-and-tools-mcp-tunnels-reference.md#proxy-configuration) reference for all available fields.
       </Step>
 
       <Step title="Start the deployment">
@@ -313,7 +313,7 @@ This guide provides one reference approach using Docker Compose. You are respons
         EOF
         ```
 
-        The `echo:` route targets the [sample MCP server](#optional-use-a-sample-mcp-server); replace it with (or add) your own routes. See the [proxy configuration](./agents-and-tools-mcp-tunnels-reference.md#proxy-configuration) reference for all available fields.
+        The `echo:` route targets the [sample MCP server](./agents-and-tools-mcp-tunnels-deploy-compose.md#optional-use-a-sample-mcp-server); replace it with (or add) your own routes. See the [proxy configuration](./agents-and-tools-mcp-tunnels-reference.md#proxy-configuration) reference for all available fields.
       </Step>
 
       <Step title="Write docker-compose.yaml">
@@ -364,7 +364,7 @@ This guide provides one reference approach using Docker Compose. You are respons
         EOF
         ```
 
-        If you're using the [sample MCP server](#optional-use-a-sample-mcp-server), append it as a service:
+        If you're using the [sample MCP server](./agents-and-tools-mcp-tunnels-deploy-compose.md#optional-use-a-sample-mcp-server), append it as a service:
 
         ```bash
         cat >> docker-compose.yaml <<'EOF'
@@ -395,7 +395,7 @@ For a multi-VM deployment, copy the `mcp-tunnel/` directory to each host, set `T
 
 ## Verify the deployment
 
-Verify end to end by calling an [upstream MCP server](./agents-and-tools-mcp-tunnels-concepts.md#components) from Anthropic's side: see [Use the tunneled MCP servers](./agents-and-tools-mcp-tunnels-overview.md#use-the-tunneled-mcp-servers). With the [sample MCP server](#optional-use-a-sample-mcp-server), the routed URL is `https://echo.<your-tunnel-domain>/mcp`. If verification fails, see [Troubleshooting](./agents-and-tools-mcp-tunnels-troubleshooting.md).
+Verify end to end by calling an [upstream MCP server](./agents-and-tools-mcp-tunnels-concepts.md#components) from Anthropic's side: see [Use the tunneled MCP servers](./agents-and-tools-mcp-tunnels-overview.md#use-the-tunneled-mcp-servers). With the [sample MCP server](./agents-and-tools-mcp-tunnels-deploy-compose.md#optional-use-a-sample-mcp-server), the routed URL is `https://echo.<your-tunnel-domain>/mcp`. If verification fails, see [Troubleshooting](./agents-and-tools-mcp-tunnels-troubleshooting.md).
 
 ## Upgrades
 

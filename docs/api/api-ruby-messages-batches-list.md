@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/ruby/messages/batches/list"
 category: "api"
 generated: true
 ---
+---
+title: List Message Batches
+url: https://platform.claude.com/docs/en/api/ruby/messages/batches/list
+---
+
 ## List Message Batches
 
 `messages.batches.list(**kwargs) -> Page<MessageBatch>`

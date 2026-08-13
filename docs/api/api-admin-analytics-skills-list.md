@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/analytics/skills/list"
 category: "api"
 generated: true
 ---
+---
+title: Get Skill Usage
+url: https://platform.claude.com/docs/en/api/admin/analytics/skills/list
+---
+
 ## Get Skill Usage
 
 **get** `/v1/organizations/analytics/skills`

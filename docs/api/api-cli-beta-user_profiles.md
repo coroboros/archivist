@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/cli/beta/user_profiles"
 category: "api"
 generated: true
 ---
+---
+title: User Profiles
+url: https://platform.claude.com/docs/en/api/cli/beta/user_profiles
+---
+
 # User Profiles
 
 ## Create User Profile

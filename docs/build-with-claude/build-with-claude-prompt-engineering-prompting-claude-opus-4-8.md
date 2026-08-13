@@ -1,13 +1,13 @@
 ---
-title: "Prompting Claude Opus 4.8"
+title: "Response length and verbosity"
 source: "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-4-8"
 category: "build-with-claude"
 generated: true
 ---
-# Prompting Claude Opus 4.8
-
-Behavioral differences and prompting patterns for Claude Opus 4.8, covering verbosity, effort calibration, tool use, subagents, and frontend defaults.
-
+---
+title: Prompting Claude Opus 4.8
+url: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-4-8
+description: Behavioral differences and prompting patterns for Claude Opus 4.8, covering verbosity, effort calibration, tool use, subagents, and frontend defaults.
 ---
 
 This guide covers the prompting patterns specific to Claude Opus 4.8. For the API changes involved in moving from Claude Opus 4.8 to the latest Opus model, see [Migrating to Claude Opus 5 from Claude Opus 4.8](../about-claude/about-claude-models-migration-guide.md#migrating-from-claude-opus-4-8-to-claude-opus-5). For techniques that apply across all current Claude models, see [Prompting best practices](./build-with-claude-prompt-engineering-claude-prompting-best-practices.md).

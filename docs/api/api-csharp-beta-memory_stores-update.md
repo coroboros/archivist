@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/csharp/beta/memory_stores/updat
 category: "api"
 generated: true
 ---
+---
+title: Update a memory store
+url: https://platform.claude.com/docs/en/api/csharp/beta/memory_stores/update
+---
+
 ## Update a memory store
 
 `BetaManagedAgentsMemoryStore Beta.MemoryStores.Update(MemoryStoreUpdateParamsparameters, CancellationTokencancellationToken = default)`
@@ -99,6 +104,8 @@ Update a memory store
     - `"fallback-credit-2026-07-01"FallbackCredit2026_07_01`
 
     - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
+
+    - `"mid-conversation-tool-changes-2026-07-01"MidConversationToolChanges2026_07_01`
 
 ### Returns
 

@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/go/beta/skills/versions/create"
 category: "api"
 generated: true
 ---
+---
+title: Create Skill Version
+url: https://platform.claude.com/docs/en/api/go/beta/skills/versions/create
+---
+
 ## Create Skill Version
 
 `client.Beta.Skills.Versions.New(ctx, skillID, params) (*BetaSkillVersionNewResponse, error)`
@@ -99,6 +104,8 @@ Create Skill Version
       - `const AnthropicBetaFallbackCredit2026_07_01 AnthropicBeta = "fallback-credit-2026-07-01"`
 
       - `const AnthropicBetaAgentMemory2026_07_22 AnthropicBeta = "agent-memory-2026-07-22"`
+
+      - `const AnthropicBetaMidConversationToolChanges2026_07_01 AnthropicBeta = "mid-conversation-tool-changes-2026-07-01"`
 
 ### Returns
 

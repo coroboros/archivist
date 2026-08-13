@@ -1,19 +1,19 @@
 ---
-title: "Effort"
+title: "Compatibility"
 source: "https://platform.claude.com/docs/en/build-with-claude/effort"
 category: "build-with-claude"
 generated: true
 ---
-# Effort
-
-Control how many tokens Claude uses when responding with the effort parameter, trading off between response thoroughness and token efficiency.
+---
+title: Effort
+url: https://platform.claude.com/docs/en/build-with-claude/effort
+description: Control how many tokens Claude uses when responding with the effort parameter, trading off between response thoroughness and token efficiency.
+---
 
 ## Compatibility
 - [ZDR](../manage-claude/manage-claude-api-and-data-retention.md): eligible (excludes [Covered Models](../manage-claude/manage-claude-api-and-data-retention.md#model-specific-data-retention-requirements))
 - Supported models: `claude-fable-5`, `claude-mythos-5`, `claude-mythos-preview`, `claude-opus-5`, `claude-opus-4-8`, `claude-opus-4-7`, `claude-opus-4-6`, `claude-sonnet-5`, `claude-sonnet-4-6`, `claude-opus-4-5-20251101`
 - Platforms: Claude API, Claude Platform on AWS, Amazon Bedrock, Google Cloud, Microsoft Foundry
-
----
 
 The effort parameter lets you control how many tokens Claude spends when responding to requests. You can trade off between response thoroughness and token efficiency with a single model. The effort parameter is available on all supported models with no beta header required.
 
@@ -109,7 +109,7 @@ Effort controls thinking volume, not visible response length: on Claude Opus 5, 
 
 The API default is `high`. Set `effort` explicitly to use a different level; the value you pass overrides the default.
 
-On Claude Opus 5, thinking cannot be disabled at `xhigh` or `max` effort: requests that set `thinking: {"type": "disabled"}` at those levels return a 400 error. See [Effort with thinking](#effort-with-thinking).
+On Claude Opus 5, thinking cannot be disabled at `xhigh` or `max` effort: requests that set `thinking: {"type": "disabled"}` at those levels return a 400 error. See [Effort with thinking](./build-with-claude-effort.md#effort-with-thinking).
 
 When running Claude Opus 5 at `xhigh` or `max` effort, set a large `max_tokens` so the model has room to think and act across subagents and tool calls. Starting at 64k tokens and tuning from there is a reasonable default.
 
@@ -332,7 +332,7 @@ At higher effort levels, Claude thinks on most requests and at greater length; a
 
 On Claude Opus 4.5, the only extended-thinking-only model that supports effort, it works alongside [`budget_tokens`](./build-with-claude-extended-thinking.md): set the effort level for your task, then set the thinking token budget based on how much reasoning depth the task needs.
 
-For per-model thinking availability, see the [per-model configuration table](./build-with-claude-thinking-troubleshooting.md#supported-models). Effort works with or without thinking; see [How effort works](#how-effort-works).
+For per-model thinking availability, see the [per-model configuration table](./build-with-claude-thinking-troubleshooting.md#supported-models). Effort works with or without thinking; see [How effort works](./build-with-claude-effort.md#how-effort-works).
 
 ## Changing effort mid-conversation
 

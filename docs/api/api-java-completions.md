@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/java/completions"
 category: "api"
 generated: true
 ---
+---
+title: Completions
+url: https://platform.claude.com/docs/en/api/java/completions
+---
+
 # Completions
 
 ## Create a Text Completion
@@ -89,6 +94,8 @@ Future models and features will not be compatible with Text Completions. See our
     - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
   - `long maxTokensToSample`
 
@@ -238,14 +245,6 @@ Future models and features will not be compatible with Text Completions. See our
 
       High-performance model for agents and coding
 
-    - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
-
-      Powerful intelligence for long-running agents and coding
-
-    - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
-
-      Powerful intelligence for long-running agents and coding
-
   - `Optional<String> stopReason`
 
     The reason that we stopped.
@@ -383,14 +382,6 @@ public final class Main {
     - `CLAUDE_SONNET_4_5_20250929("claude-sonnet-4-5-20250929")`
 
       High-performance model for agents and coding
-
-    - `CLAUDE_OPUS_4_1("claude-opus-4-1")`
-
-      Powerful intelligence for long-running agents and coding
-
-    - `CLAUDE_OPUS_4_1_20250805("claude-opus-4-1-20250805")`
-
-      Powerful intelligence for long-running agents and coding
 
   - `Optional<String> stopReason`
 

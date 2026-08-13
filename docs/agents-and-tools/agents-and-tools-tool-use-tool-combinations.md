@@ -1,13 +1,13 @@
 ---
-title: "Tool combinations"
+title: "Research agent: web\_search + code\_execution"
 source: "https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-combinations"
 category: "agents-and-tools"
 generated: true
 ---
-# Tool combinations
-
-Common Anthropic tool pairings for research agents, coding agents, and long-running agents.
-
+---
+title: Tool combinations
+url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-combinations
+description: Common Anthropic tool pairings for research agents, coding agents, and long-running agents.
 ---
 
 Anthropic-provided tools are designed to work together. Common agent patterns pair tools that cover complementary stages of a workflow: one tool gathers or discovers, another processes or acts. The combinations below are starting points, not prescriptions. Mix them to fit your task.

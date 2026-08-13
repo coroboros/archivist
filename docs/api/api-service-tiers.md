@@ -1,13 +1,13 @@
 ---
-title: "Service tiers"
+title: "Standard Tier"
 source: "https://platform.claude.com/docs/en/api/service-tiers"
 category: "api"
 generated: true
 ---
-# Service tiers
-
-Different tiers of service allow you to balance availability, performance, and predictable costs based on your application's needs.
-
+---
+title: Service tiers
+url: https://platform.claude.com/docs/en/api/service-tiers
+description: Different tiers of service allow you to balance availability, performance, and predictable costs based on your application's needs.
 ---
 
 <Warning>
@@ -28,7 +28,7 @@ The standard tier is the default service tier for all API requests. The API prio
 
 The API prioritizes requests in this tier over all other requests. This prioritization helps minimize ["server overloaded" errors](./api-errors.md#http-errors), even during peak times.
 
-For more information, see [Existing Priority Tier commitments](#existing-priority-tier-commitments).
+For more information, see [Existing Priority Tier commitments](./api-service-tiers.md#existing-priority-tier-commitments).
 
 ## How requests get assigned tiers
 

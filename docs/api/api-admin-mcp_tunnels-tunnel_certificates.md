@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/mcp_tunnels/tunnel_certif
 category: "api"
 generated: true
 ---
+---
+title: Tunnel Certificates
+url: https://platform.claude.com/docs/en/api/admin/mcp_tunnels/tunnel_certificates
+---
+
 # Tunnel Certificates
 
 ## Create Tunnel Certificate
@@ -82,7 +87,7 @@ curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID/certificates 
     -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN" \
     -d '{
-          "ca_certificate_pem": "-----BEGIN CERTIFICATE-----\\nMIIBexampleEXAMPLEexampleEXAMPLEexampleEXAMPLEexampleEXAMPLEexa\\n...illustrative placeholder, not a real certificate...\\n-----END CERTIFICATE-----\\n"
+          "ca_certificate_pem": "-----BEGIN CERTIFICATE-----\nMIIBexampleEXAMPLEexampleEXAMPLEexampleEXAMPLEexampleEXAMPLEexa\n...illustrative placeholder, not a real certificate...\n-----END CERTIFICATE-----\n"
         }'
 ```
 

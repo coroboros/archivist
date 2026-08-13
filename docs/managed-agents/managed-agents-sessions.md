@@ -1,16 +1,16 @@
 ---
-title: "Start a session"
+title: "Creating a session"
 source: "https://platform.claude.com/docs/en/managed-agents/sessions"
 category: "managed-agents"
 generated: true
 ---
-# Start a session
-
-Create a session to run your agent and begin executing tasks.
-
+---
+title: Start a session
+url: https://platform.claude.com/docs/en/managed-agents/sessions
+description: Create a session to run your agent and begin executing tasks.
 ---
 
-A session is an agent instance within an environment. Each session references an [agent](./managed-agents-agent-setup.md) and an [environment](./managed-agents-environments.md) (both created separately), and maintains conversation history across multiple interactions. Sessions follow a two-step lifecycle: first [create the session](#creating-a-session), then [send a user event](#starting-the-session) to start work. You can also collapse both steps into one call with [`initial_events`](#seed-the-session-with-initial-events).
+A session is an agent instance within an environment. Each session references an [agent](./managed-agents-agent-setup.md) and an [environment](./managed-agents-environments.md) (both created separately), and maintains conversation history across multiple interactions. Sessions follow a two-step lifecycle: first [create the session](./managed-agents-sessions.md#creating-a-session), then [send a user event](./managed-agents-sessions.md#starting-the-session) to start work. You can also collapse both steps into one call with [`initial_events`](./managed-agents-sessions.md#seed-the-session-with-initial-events).
 
 <Note>
   Managed Agents API requests require the `managed-agents-2026-04-01` beta header, except memory store endpoints, which use `agent-memory-2026-07-22` instead. The SDK sets the correct beta header automatically. See [Beta headers](../api/api-beta-headers.md#endpoint-specific-headers).
@@ -455,12 +455,12 @@ Each event in `initial_events` is validated and persisted before the create resp
 
 The create request is rejected in the following cases:
 
-| Condition                                                                                                                      | Status |
-| ------------------------------------------------------------------------------------------------------------------------------ | ------ |
-| More than one `user.define_outcome` event                                                                                      | 400    |
-| A `user.define_outcome` event without a `rubric`                                                                               | 400    |
+| Condition                                                                                                                                                 | Status |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ |
+| More than one `user.define_outcome` event                                                                                                                 | 400    |
+| A `user.define_outcome` event without a `rubric`                                                                                                          | 400    |
 | More than 100 file-sourced [`document` content blocks](../build-with-claude/build-with-claude-files.md#document-blocks) across the whole list | 400    |
-| A request body over 32 MB                                                                                                      | 413    |
+| A request body over 32 MB                                                                                                                                 | 413    |
 
 A `user.define_outcome` event in `initial_events` is accepted under the same conditions as sending one to an existing session; see [Define outcomes](./managed-agents-define-outcomes.md).
 
@@ -479,9 +479,7 @@ Each overridable field follows the same three rules:
   * Clearing `mcp_servers` returns a 400 error when the session's effective `tools` still contains an `mcp_toolset` that references one of the agent's servers. Override `tools` in the same request to remove those `mcp_toolset` entries, then clear `mcp_servers`.
 
 * **Set the field to a value:** The value replaces the agent's value in full. Overrides never merge with the agent's configuration, so a `tools` override must list every tool the session should have. There is one exception:
-  * An `effort` level inside a per-session `model` override isn't applied. Set `effort` on the [agent](./managed-agents-agent-setup.md#agent-configuration-fields) instead.
-
-A `model` override also sets or clears the model's [`inference_geo`](../manage-claude/manage-claude-data-residency.md) pin for the session. Because the override replaces the agent's `model` object in full, an override that includes `inference_geo` pins the geography that serves the session's model requests, and one that omits it clears the agent's pin so the session follows the workspace's `default_inference_geo`. The overridden value is validated against the workspace's `allowed_inference_geos` when the session is created.
+  * An `effort` level inside a per-session `model` override isn't applied, and because the override replaces the agent's `model` object in full, the agent's own `effort` isn't carried over either: a session created with a `model` override runs at the model's default effort level. To run at a specific effort level, set `effort` on the [agent](./managed-agents-agent-setup.md#agent-configuration-fields) and don't override `model` for that session.
 
 Overrides apply only to the session you create. They do not modify the agent resource or create a new agent version, so other sessions that reference the same agent are unaffected.
 
@@ -655,13 +653,168 @@ The following example starts a session that overrides the model and clears the s
   ```
 </CodeGroup>
 
+#### Pin the inference geo for a session
+
+Because a `model` override replaces the agent's `model` object in full, it also sets or clears the model's [`inference_geo`](../manage-claude/manage-claude-data-residency.md) pin for the session: an override that includes `inference_geo` pins the geography that serves the session's model requests, and one that omits it clears the agent's pin so the session follows the workspace's `default_inference_geo`. The overridden value is validated against the workspace's `allowed_inference_geos` when the session is created.
+
+The following example starts a session from an agent whose model has no geo pin, pins the session's model requests to US inference by including `inference_geo` in the `model` override, and prints the value echoed in the response's `agent.model`:
+
+<CodeGroup defaultLanguage="CLI">
+  ```bash cURL
+  # Replaces the agent's `model` in full: restate `id`, add `inference_geo` to pin.
+  session=$(curl -fsSL https://api.anthropic.com/v1/sessions \
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-beta: managed-agents-2026-04-01" \
+    -H "content-type: application/json" \
+    -d @- <<EOF
+  {
+    "agent": {
+      "type": "agent_with_overrides",
+      "id": "$AGENT_ID",
+      "model": {"id": "claude-opus-5", "inference_geo": "us"}
+    },
+    "environment_id": "$ENVIRONMENT_ID"
+  }
+  EOF
+  )
+  echo "Inference geo: $(jq -r '.agent.model.inference_geo' <<< "$session")"
+  ```
+
+  ```bash CLI
+  # Replaces the agent's `model` in full: restate `id`, add `inference_geo` to pin.
+  session=$(ant beta:sessions create <<YAML
+  agent:
+    type: agent_with_overrides
+    id: $AGENT_ID
+    model:
+      id: claude-opus-5
+      inference_geo: us
+  environment_id: $ENVIRONMENT_ID
+  YAML
+  )
+  echo "Inference geo: $(jq -r '.agent.model.inference_geo' <<< "$session")"
+  ```
+
+  ```python Python
+  session = client.beta.sessions.create(
+      agent={
+          "type": "agent_with_overrides",
+          "id": agent.id,
+          # Replaces the agent's `model` in full: restate `id`, add `inference_geo` to pin.
+          "model": {"id": "claude-opus-5", "inference_geo": "us"},
+      },
+      environment_id=environment.id,
+  )
+  print(f"Inference geo: {session.agent.model.inference_geo}")
+  ```
+
+  ```typescript TypeScript
+  const session = await client.beta.sessions.create({
+    agent: {
+      type: "agent_with_overrides",
+      id: agent.id,
+      // Replaces the agent's `model` in full: restate `id`, add `inference_geo` to pin.
+      model: { id: "claude-opus-5", inference_geo: "us" }
+    },
+    environment_id: environment.id
+  });
+  console.log(`Inference geo: ${session.agent.model.inference_geo}`);
+  ```
+
+  ```csharp C#
+  var session = await client.Beta.Sessions.Create(new()
+  {
+      Agent = new BetaManagedAgentsAgentWithOverridesParams
+      {
+          Type = BetaManagedAgentsAgentWithOverridesParamsType.AgentWithOverrides,
+          ID = agent.ID,
+          // Replaces the agent's `model` in full: restate `id`, add `inference_geo` to pin.
+          Model = new BetaManagedAgentsModelConfigParams
+          {
+              ID = BetaManagedAgentsModel.ClaudeOpus5,
+              InferenceGeo = "us",
+          },
+      },
+      EnvironmentID = environment.ID,
+  });
+  Console.WriteLine($"Inference geo: {session.Agent.Model.InferenceGeo}");
+  ```
+
+  ```go Go
+  session, err := client.Beta.Sessions.New(ctx, anthropic.BetaSessionNewParams{
+  	Agent: anthropic.BetaSessionNewParamsAgentUnion{
+  		OfBetaManagedAgentsAgentWithOverridess: &anthropic.BetaManagedAgentsAgentWithOverridesParams{
+  			Type: anthropic.BetaManagedAgentsAgentWithOverridesParamsTypeAgentWithOverrides,
+  			ID:   agent.ID,
+  			// Replaces the agent's `model` in full: restate `id`, add `inference_geo` to pin.
+  			Model: anthropic.BetaManagedAgentsModelConfigParams{
+  				ID:           anthropic.BetaManagedAgentsModelClaudeOpus5,
+  				InferenceGeo: anthropic.String("us"),
+  			},
+  		},
+  	},
+  	EnvironmentID: environment.ID,
+  })
+  if err != nil {
+  	panic(err)
+  }
+  fmt.Printf("Inference geo: %s\n", session.Agent.Model.InferenceGeo)
+  ```
+
+  ```java Java
+  var session = client.beta().sessions().create(SessionCreateParams.builder()
+      .agent(BetaManagedAgentsAgentWithOverridesParams.builder()
+          .type(BetaManagedAgentsAgentWithOverridesParams.Type.AGENT_WITH_OVERRIDES)
+          .id(agent.id())
+          // Replaces the agent's `model` in full: restate `id`, add `inference_geo` to pin.
+          .model(BetaManagedAgentsModelConfigParams.builder()
+              .id(BetaManagedAgentsModel.CLAUDE_OPUS_5)
+              .inferenceGeo("us")
+              .build())
+          .build())
+      .environmentId(environment.id())
+      .build());
+  IO.println("Inference geo: " + session.agent().model().inferenceGeo().orElseThrow());
+  ```
+
+  ```php PHP
+  $session = $client->beta->sessions->create(
+      agent: BetaManagedAgentsAgentWithOverridesParams::with(
+          id: $agent->id,
+          type: 'agent_with_overrides',
+          // Replaces the agent's `model` in full: restate `id`, add `inference_geo` to pin.
+          model: BetaManagedAgentsModelConfigParams::with(
+              id: 'claude-opus-5',
+              inferenceGeo: 'us',
+          ),
+      ),
+      environmentID: $environment->id,
+  );
+  echo "Inference geo: {$session->agent->model->inferenceGeo}\n";
+  ```
+
+  ```ruby Ruby
+  session = client.beta.sessions.create(
+    agent: {
+      type: :agent_with_overrides,
+      id: agent.id,
+      # Replaces the agent's `model` in full: restate `id`, add `inference_geo` to pin.
+      model: {id: "claude-opus-5", inference_geo: "us"}
+    },
+    environment_id: environment.id
+  )
+  puts "Inference geo: #{session.agent.model.inference_geo}"
+  ```
+</CodeGroup>
+
 <Tip>
   The agent defines how Claude behaves within the session, including the model, system prompt, tools, and MCP servers. See [Define your agent](./managed-agents-agent-setup.md) for details.
 </Tip>
 
 ### Set a session budget
 
-To cap what a session can spend, pass the optional `budget` object when you create it. A budget is a hard ceiling on the session's list cost: the platform prices everything the session consumes at public list rates, and the session stops issuing new model requests once that running total reaches `max_list_cost`. Set `type` to `limit` and give `max_list_cost` an `amount` and a `currency`. `amount` is a whole number of US cents written as a string, such as `"2500"` for $25.00; the API takes a string rather than a number so no floating-point rounding is ever applied. `USD` is the only currency currently supported. When the session reaches the cap, it pauses and goes idle with the stop reason `budget_reached`. The cap is enforced between model requests, so the request that crosses it finishes first and the session's final list cost can land [a fraction past the cap](https://platform.claude.com/docs/en/managed-agents/budgets.md#when-a-session-reaches-its-budget). A budget can only be attached at creation: you can [change or remove](./managed-agents-session-operations.md#updating-the-session-budget) it later, but you can't add one to a session created without it.
+To cap what a session can spend, pass the optional `budget` object when you create it. A budget is a hard ceiling on the session's list cost: the platform prices everything the session consumes at public list rates, and the session stops issuing new model requests once that running total reaches `max_list_cost`. Set `type` to `limit` and give `max_list_cost` an `amount` and a `currency`. `amount` is a whole number of US cents written as a string, such as `"2500"` for $25.00; the API takes a string rather than a number so no floating-point rounding is ever applied. `USD` is the only currency currently supported. When the session reaches the cap, it pauses and goes idle with the stop reason `budget_reached`. The cap is enforced between model requests, so the request that crosses it finishes first and the session's final list cost can land [a fraction past the cap](./managed-agents-budgets.md#when-a-session-reaches-its-budget). A budget can only be attached at creation: you can [change or remove](./managed-agents-session-operations.md#updating-the-session-budget) it later, but you can't add one to a session created without it.
 
 The following example creates a session with a $25.00 budget; the response echoes the `budget` on the session resource:
 
@@ -683,7 +836,7 @@ curl -fsSL https://api.anthropic.com/v1/sessions \
 EOF
 ```
 
-See [Session budgets](https://platform.claude.com/docs/en/managed-agents/budgets.md) for how enforcement works, what counts toward list cost, and how budgets behave in multiagent sessions.
+See [Session budgets](./managed-agents-budgets.md) for how enforcement works, what counts toward list cost, and how budgets behave in multiagent sessions.
 
 ## MCP authentication through vaults
 
@@ -781,7 +934,7 @@ If your agent uses MCP tools that require authentication, pass `vault_ids` at se
 
 ## Starting the session
 
-Creating a session without `initial_events` registers the session but does not start any work; the environment's sandbox begins provisioning as soon as the session is created, so the first tool call does not wait on it. To delegate a task, send events to the session using a [user event](./managed-agents-reference.md#event-types). To supply the first event in the create request instead, see [Seed the session with initial events](#seed-the-session-with-initial-events). The session acts as a state machine that tracks progress while events drive the actual execution.
+Creating a session without `initial_events` registers the session but does not start any work; the environment's sandbox begins provisioning as soon as the session is created, so the first tool call does not wait on it. To delegate a task, send events to the session using a [user event](./managed-agents-reference.md#event-types). To supply the first event in the create request instead, see [Seed the session with initial events](./managed-agents-sessions.md#seed-the-session-with-initial-events). The session acts as a state machine that tracks progress while events drive the actual execution.
 
 <CodeGroup defaultLanguage="CLI">
   ```bash cURL

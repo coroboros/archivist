@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/cli/messages/batches/create"
 category: "api"
 generated: true
 ---
+---
+title: Create a Message Batch
+url: https://platform.claude.com/docs/en/api/cli/messages/batches/create
+---
+
 ## Create a Message Batch
 
 `$ ant messages:batches create`

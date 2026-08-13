@@ -1,13 +1,13 @@
 ---
-title: "Strict tool use"
+title: "Why strict tool use matters for agents"
 source: "https://platform.claude.com/docs/en/agents-and-tools/tool-use/strict-tool-use"
 category: "agents-and-tools"
 generated: true
 ---
-# Strict tool use
-
-Enforce JSON Schema compliance on Claude's tool inputs with grammar-constrained sampling.
-
+---
+title: Strict tool use
+url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/strict-tool-use
+description: Enforce JSON Schema compliance on Claude's tool inputs with grammar-constrained sampling.
 ---
 
 Setting `strict: true` on a tool definition guarantees Claude's tool inputs match your JSON Schema by constraining the model's token sampling to schema-valid outputs (a technique called grammar-constrained sampling). This page covers why strict mode matters for agents, how to enable it, and common use cases. For the supported JSON Schema subset, see [JSON Schema limitations](../build-with-claude/build-with-claude-structured-outputs.md#json-schema-limitations). For non-strict schema guidance, see [Define tools](./agents-and-tools-tool-use-define-tools.md).

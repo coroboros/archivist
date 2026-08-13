@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/ruby/beta/environments/update"
 category: "api"
 generated: true
 ---
+---
+title: Update Environment
+url: https://platform.claude.com/docs/en/api/ruby/beta/environments/update
+---
+
 ## Update Environment
 
 `beta.environments.update(environment_id, **kwargs) -> BetaEnvironment`
@@ -144,7 +149,7 @@ Update an existing environment's configuration.
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 29 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 30 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -209,6 +214,8 @@ Update an existing environment's configuration.
     - `:"fallback-credit-2026-07-01"`
 
     - `:"agent-memory-2026-07-22"`
+
+    - `:"mid-conversation-tool-changes-2026-07-01"`
 
 ### Returns
 

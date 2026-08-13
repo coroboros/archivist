@@ -1,19 +1,19 @@
 ---
-title: "CLI quickstart"
+title: "Installation"
 source: "https://platform.claude.com/docs/en/cli-sdks-libraries/cli/quickstart"
 category: "general"
 generated: true
 ---
-# CLI quickstart
-
-Install the ant command-line tool, authenticate, and send your first request to the Claude API.
-
+---
+title: CLI quickstart
+url: https://platform.claude.com/docs/en/cli-sdks-libraries/cli/quickstart
+description: Install the ant command-line tool, authenticate, and send your first request to the Claude API.
 ---
 
 The `ant` CLI provides access to the Claude API from your terminal. Every API resource is exposed as a subcommand, with output formatting, response filtering, and YAML or JSON file input.
 
 <Frame caption="The ant CLI in action.">
-  [](/docs/videos/ant-cli-demo.webm)
+  [](https://platform.claude.com/docs/videos/ant-cli-demo.webm)
 </Frame>
 
 Compared to `curl`, `ant` builds request bodies from typed flags or piped YAML instead of hand-written JSON, and inlines file contents into string fields with an `@path` reference. It extracts response fields with a built-in `--transform` query, so you don't need a separate tool such as `jq`, and it paginates list endpoints automatically.
@@ -35,7 +35,7 @@ Compared to `curl`, `ant` builds request bodies from typed flags or piped YAML i
     For Linux environments, download the release binary directly.
 
     ```bash
-    VERSION=1.21.0
+    VERSION=1.22.1
     OS=$(uname -s | tr '[:upper:]' '[:lower:]')
     case $(uname -m) in
       x86_64) ARCH=amd64 ;;

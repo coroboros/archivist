@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/rbac_groups/members/delet
 category: "api"
 generated: true
 ---
+---
+title: Remove RBAC Group Member
+url: https://platform.claude.com/docs/en/api/admin/rbac_groups/members/delete
+---
+
 ## Remove RBAC Group Member
 
 **delete** `/v1/organizations/rbac_groups/{group_id}/members/{user_id}`

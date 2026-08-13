@@ -1,13 +1,12 @@
 ---
-title: "Claude Platform release notes"
 source: "https://platform.claude.com/docs/en/release-notes/overview"
 category: "release-notes"
 generated: true
 ---
-# Claude Platform release notes
-
-Updates to the Claude Platform, including the Claude API, client SDKs, and the Claude Console.
-
+---
+title: Claude Platform release notes
+url: https://platform.claude.com/docs/en/release-notes/overview
+description: Updates to the Claude Platform, including the Claude API, client SDKs, and the Claude Console.
 ---
 
 <Tip>
@@ -19,6 +18,7 @@ Updates to the Claude Platform, including the Claude API, client SDKs, and the C
 ### August 11, 2026
 
 * The [Compliance API](../manage-claude/manage-claude-compliance-api.md) now returns transcripts of Cowork and Claude Code sessions that run on your users' machines, in beta for Claude Enterprise organizations. `GET /v1/compliance/apps/sessions/local` lists sessions across your organization, `GET /v1/compliance/apps/sessions/local/{session_id}` retrieves one session's metadata, and `GET /v1/compliance/apps/sessions/local/{session_id}/messages` returns its transcript, all with your existing Compliance Access Key and the `read:compliance_user_data` scope. See [Retrieve local sessions](../manage-claude/manage-claude-compliance-content-data.md#retrieve-local-sessions).
+* We've added the `anthropic-workspace-id` response header to the Claude API. It carries the `wrkspc_`-prefixed ID of the workspace that the request's API key or access token resolved to, including your organization's Default Workspace. See [Identify the workspace behind an API response](../manage-claude/manage-claude-workspaces.md#identify-the-workspace-behind-an-api-response).
 
 ### August 10, 2026
 
@@ -26,15 +26,15 @@ Updates to the Claude Platform, including the Claude API, client SDKs, and the C
 
 ### August 7, 2026
 
-* You can now set a budget on a Claude Managed Agents session: a hard cap on the session's spend, priced at public list rates. A session that reaches its budget pauses with the `budget_reached` stop reason instead of starting new model requests; changing or removing the budget resumes it. Deployments accept the same budget and apply it to each session they start. See [Session budgets](https://platform.claude.com/docs/en/managed-agents/budgets.md).
+* You can now set a budget on a Claude Managed Agents session: a hard cap on the session's spend, priced at public list rates. A session that reaches its budget pauses with the `budget_reached` stop reason instead of starting new model requests; changing or removing the budget resumes it. Deployments accept the same budget and apply it to each session they start. See [Session budgets](../managed-agents/managed-agents-budgets.md).
 * You can now give a Claude Managed Agents session an advisor: a model at least as capable as the agent's own that the session's primary thread can consult mid-turn for strategic guidance. Configure it as a `{"type": "advisor"}` entry in the agent's multiagent roster, naming the `model` to consult. See [Give the session an advisor](../managed-agents/managed-agents-multiagent-orchestration.md#give-the-session-an-advisor).
-* You can now control where model inference runs for a Claude Managed Agents agent. Set `inference_geo` inside the `model` object when you [create the agent](../managed-agents/managed-agents-agent-setup.md#create-an-agent), or override it for a single session. See [Data residency](../manage-claude/manage-claude-data-residency.md) for the available geos and pricing.
+* You can now control where model inference runs for a Claude Managed Agents agent. Set `inference_geo` inside the `model` object when you [create the agent](../managed-agents/managed-agents-agent-setup.md#pin-the-inference-geo), or [override it for a single session](../managed-agents/managed-agents-sessions.md#pin-the-inference-geo-for-a-session). See [Data residency](../manage-claude/manage-claude-data-residency.md) for the available geos and pricing.
 * Claude Managed Agents sessions can now [load skills from a GitHub repository](../managed-agents/managed-agents-skills.md#load-skills-from-a-github-repository). When a session [mounts a repository](../managed-agents/managed-agents-github.md), any skills in its root `.claude/skills` directory are discovered automatically at session start and available to the agent for that session.
 
 ### August 5, 2026
 
 * **Inference hooks** are now in beta for Claude Enterprise organizations. Point Claude at your organization's AI security server, and each governed prompt across claude.ai, Cowork, and Claude Code is held for the server's allow or deny verdict before inference proceeds. Requests are signed, failure handling is configurable, and every denial is recorded in the compliance [Activity Feed](../manage-claude/manage-claude-compliance-activity-feed.md). See [Inference hooks](../manage-claude/manage-claude-inference-hooks.md).
-* We've retired the Claude Opus 4.1 model (`claude-opus-4-1-20250805`). All requests to this model will now return an error. We recommend upgrading to [Claude Opus 5](../about-claude/about-claude-models-overview.md#latest-models-comparison). Researchers can request ongoing access through the [External Researcher Access Program](https://support.claude.com/en/articles/9125743-what-is-the-external-researcher-access-program).
+* We've retired the Claude Opus 4.1 model (`claude-opus-4-1-20250805`). All requests to this model on the Claude API will now return an error. We recommend upgrading to [Claude Opus 5](../about-claude/about-claude-models-overview.md#latest-models-comparison). Researchers can request ongoing access through the [External Researcher Access Program](https://support.claude.com/en/articles/9125743-what-is-the-external-researcher-access-program).
 
 ### August 3, 2026
 
@@ -107,7 +107,7 @@ Updates to the Claude Platform, including the Claude API, client SDKs, and the C
 
 ### June 26, 2026
 
-* We've raised [rate limits](../api/api-rate-limits.md) across the Claude API. Claude Sonnet and Claude Haiku rate limits now match Claude Opus at every usage tier, and usage tiers have been consolidated into three: Start, Build, and Scale. Most organizations move to a higher tier, no organization receives lower limits than before, and no action is required. You can view your tier and current limits in the [Claude Console](/settings/limits).
+* We've raised [rate limits](../api/api-rate-limits.md) across the Claude API. Claude Sonnet and Claude Haiku rate limits now match Claude Opus at every usage tier, and usage tiers have been consolidated into three: Start, Build, and Scale. Most organizations move to a higher tier, no organization receives lower limits than before, and no action is required. You can view your tier and current limits in the [Claude Console](https://platform.claude.com/settings/limits).
 
 ### June 25, 2026
 
@@ -123,7 +123,7 @@ Updates to the Claude Platform, including the Claude API, client SDKs, and the C
 
 ### June 15, 2026
 
-* We've retired the Claude Sonnet 4 model (`claude-sonnet-4-20250514`) and the Claude Opus 4 model (`claude-opus-4-20250514`). All requests to these models will now return an error. We recommend upgrading to [Claude Sonnet 4.6](../about-claude/about-claude-models-overview.md#latest-models-comparison) and [Claude Opus 4.8](../about-claude/about-claude-models-overview.md#latest-models-comparison) respectively. Researchers can request ongoing access through the [External Researcher Access Program](https://support.claude.com/en/articles/9125743-what-is-the-external-researcher-access-program).
+* We've retired the Claude Sonnet 4 model (`claude-sonnet-4-20250514`) and the Claude Opus 4 model (`claude-opus-4-20250514`). All requests to these models on the Claude API will now return an error. We recommend upgrading to [Claude Sonnet 4.6](../about-claude/about-claude-models-overview.md#latest-models-comparison) and [Claude Opus 4.8](../about-claude/about-claude-models-overview.md#latest-models-comparison) respectively. Researchers can request ongoing access through the [External Researcher Access Program](https://support.claude.com/en/articles/9125743-what-is-the-external-researcher-access-program).
 
 ### June 11, 2026
 
@@ -151,7 +151,7 @@ Updates to the Claude Platform, including the Claude API, client SDKs, and the C
 
 ### June 5, 2026
 
-* We announced the deprecation of the Claude Opus 4.1 model (`claude-opus-4-1-20250805`), with retirement on the Claude API scheduled for August 5, 2026. We recommend migrating to [Claude Opus 4.8](../about-claude/about-claude-models-migration-guide.md). Read more in [model deprecations](../about-claude/about-claude-model-deprecations.md).
+* We announced the deprecation of the Claude Opus 4.1 model (`claude-opus-4-1-20250805`), with retirement on the Claude API scheduled for August 5, 2026. We recommend migrating to [Claude Opus 4.8](../about-claude/about-claude-models-migration-guide.md). Read more in [Model deprecations](../about-claude/about-claude-model-deprecations.md).
 
 ### June 2, 2026
 
@@ -251,7 +251,7 @@ Updates to the Claude Platform, including the Claude API, client SDKs, and the C
 
 ### April 14, 2026
 
-* We announced the deprecation of the Claude Sonnet 4 model (`claude-sonnet-4-20250514`) and the Claude Opus 4 model (`claude-opus-4-20250514`), with retirement on the Claude API scheduled for June 15, 2026. We recommend migrating to [Claude Sonnet 4.6](../about-claude/about-claude-models-overview.md#latest-models-comparison) and [Claude Opus 4.8](../about-claude/about-claude-models-migration-guide.md) respectively. Read more in [model deprecations](../about-claude/about-claude-model-deprecations.md).
+* We announced the deprecation of the Claude Sonnet 4 model (`claude-sonnet-4-20250514`) and the Claude Opus 4 model (`claude-opus-4-20250514`), with retirement on the Claude API scheduled for June 15, 2026. We recommend migrating to [Claude Sonnet 4.6](../about-claude/about-claude-models-overview.md#latest-models-comparison) and [Claude Opus 4.8](../about-claude/about-claude-models-migration-guide.md) respectively. Read more in [Model deprecations](../about-claude/about-claude-model-deprecations.md).
 
 ### April 9, 2026
 
@@ -289,7 +289,7 @@ Updates to the Claude Platform, including the Claude API, client SDKs, and the C
 ### February 19, 2026
 
 * We've launched **automatic caching** for the Messages API. Add a single `cache_control` field to your request body and the system automatically caches the last cacheable block, moving the cache point forward as conversations grow. No manual breakpoint management required. Works alongside existing block-level cache control for fine-grained optimization. Available on the Claude API and Microsoft Foundry (preview). Learn more in [Prompt caching](../build-with-claude/build-with-claude-prompt-caching.md#automatic-caching).
-* We've retired the Claude Sonnet 3.7 model (`claude-3-7-sonnet-20250219`) and the Claude Haiku 3.5 model (`claude-3-5-haiku-20241022`). All requests to these models will now return an error. We recommend upgrading to [Claude Sonnet 4.6](../about-claude/about-claude-models-overview.md#latest-models-comparison) and [Claude Haiku 4.5](../about-claude/about-claude-models-overview.md#latest-models-comparison) respectively. Researchers can request ongoing access through the [External Researcher Access Program](https://support.claude.com/en/articles/9125743-what-is-the-external-researcher-access-program).
+* We've retired the Claude Sonnet 3.7 model (`claude-3-7-sonnet-20250219`) and the Claude Haiku 3.5 model (`claude-3-5-haiku-20241022`). All requests to Claude Sonnet 3.7 will now return an error. Requests to Claude Haiku 3.5 on the Claude API will now return an error; it remains available on Amazon Bedrock and Google Cloud. We recommend upgrading to [Claude Sonnet 4.6](../about-claude/about-claude-models-overview.md#latest-models-comparison) and [Claude Haiku 4.5](../about-claude/about-claude-models-overview.md#latest-models-comparison) respectively. Researchers can request ongoing access through the [External Researcher Access Program](https://support.claude.com/en/articles/9125743-what-is-the-external-researcher-access-program).
 * We announced the deprecation of the Claude Haiku 3 model (`claude-3-haiku-20240307`), with retirement scheduled for April 20, 2026. We recommend migrating to [Claude Haiku 4.5](../about-claude/about-claude-models-overview.md#latest-models-comparison). Read more in [Model deprecations](../about-claude/about-claude-model-deprecations.md).
 
 ### February 17, 2026
@@ -318,7 +318,7 @@ Updates to the Claude Platform, including the Claude API, client SDKs, and the C
 
 ### January 12, 2026
 
-* `console.anthropic.com` now redirects to `platform.claude.com`. The Claude Console has moved to its new home as part of our Claude brand consolidation. Existing bookmarks and links will continue working through an automatic redirect. For more details, see the [September 16, 2025 announcement](#september-16-2025).
+* `console.anthropic.com` now redirects to `platform.claude.com`. The Claude Console has moved to its new home as part of our Claude brand consolidation. Existing bookmarks and links will continue working through an automatic redirect. For more details, see the [September 16, 2025 announcement](./release-notes-overview.md#september-16-2025).
 
 ### January 5, 2026
 
@@ -579,7 +579,7 @@ Updates to the Claude Platform, including the Claude API, client SDKs, and the C
 
 The following features are now generally available in the Claude API:
 
-* [Models API](../api/api-models-list.md): Query available models, validate model IDs, and resolve [model aliases](https://platform.claude.com/docs/en/about-claude/models.md#model-names) to their canonical model IDs.
+* [Models API](../api/api-models-list.md): Query available models, validate model IDs, and resolve [model aliases](../about-claude/about-claude-models-overview.md) to their canonical model IDs.
 * [Message Batches API](../build-with-claude/build-with-claude-batch-processing.md): Process large batches of messages asynchronously at 50% of the standard API cost.
 * [Token counting API](../build-with-claude/build-with-claude-token-counting.md): Calculate token counts for Messages before sending them to Claude.
 * [Prompt Caching](../build-with-claude/build-with-claude-prompt-caching.md): Reduce costs by up to 90% and latency by up to 80% by caching and reusing prompt content.

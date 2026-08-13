@@ -1,13 +1,13 @@
 ---
-title: "Prompting Claude Fable 5"
+title: "Capability improvements"
 source: "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5"
 category: "build-with-claude"
 generated: true
 ---
-# Prompting Claude Fable 5
-
-Behavioral differences and prompting patterns for Claude Fable 5 and Claude Mythos 5, covering effort, instruction following, long runs, memory, and scaffolding changes.
-
+---
+title: Prompting Claude Fable 5
+url: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5
+description: Behavioral differences and prompting patterns for Claude Fable 5 and Claude Mythos 5, covering effort, instruction following, long runs, memory, and scaffolding changes.
 ---
 
 This guide covers the prompting and scaffolding patterns specific to Claude Fable 5 and Claude Mythos 5. For the model's capabilities, API changes, pricing, and availability, see [Introducing Claude Fable 5 and Claude Mythos 5](../about-claude/about-claude-models-introducing-claude-fable-5-and-claude-mythos-5.md). For techniques that apply across all current Claude models, see [Prompting best practices](./build-with-claude-prompt-engineering-claude-prompting-best-practices.md).
@@ -110,7 +110,7 @@ Reflect on the previous sessions we've had together. Use subagents to identify c
 
 ## Rare cases of early stopping
 
-Deep into a long session, Claude Fable 5 can occasionally end a turn with a text-only statement of intent ("I'll now run X") without issuing the corresponding tool call, or pause to ask permission when it already has enough to proceed. A "continue" or "go ahead and do it end to end" suffices. To define when pausing is appropriate, pair this with the checkpoint instruction in [Strong instruction following](#strong-instruction-following). For autonomous pipelines, add a system reminder:
+Deep into a long session, Claude Fable 5 can occasionally end a turn with a text-only statement of intent ("I'll now run X") without issuing the corresponding tool call, or pause to ask permission when it already has enough to proceed. A "continue" or "go ahead and do it end to end" suffices. To define when pausing is appropriate, pair this with the checkpoint instruction in [Strong instruction following](./build-with-claude-prompt-engineering-prompting-claude-fable-5.md#strong-instruction-following). For autonomous pipelines, add a system reminder:
 
 ```text wrap
 You are operating autonomously. The user is not watching in real time and cannot answer questions mid-task, so asking "Want me to…?" or "Shall I…?" will block the work. For reversible actions that follow from the original request, proceed without asking. Offering follow-ups after the task is done is fine; asking permission after already discussing with the user before doing the work is not. Before ending your turn, check your last paragraph. If it is a plan, an analysis, a question, a list of next steps, or a promise about work you have not done ("I'll…", "let me know when…"), do that work now with tool calls. End your turn only when the task is complete or you are blocked on input only the user can provide.
@@ -178,5 +178,5 @@ Do not route narration or internal reasoning through `send_to_user`; over-callin
 * **Start at the top of your difficulty range.** Pick a task harder than what you'd assign to prior models, and have Claude Fable 5 scope it, ask clarifying questions, and execute.
 * **Make self-verification explicit in long-run prompts.** Separate, fresh-context verifier subagents tend to outperform self-critique. For long-running tasks, instruct: `Establish a method for checking your own work at an interval of [X] as you build. Run this every [X interval], verifying your work with subagents against the specification.`
 * **Refactor existing prompts and skills.** Skills developed for prior models are often too prescriptive for Claude Fable 5 and can degrade output quality. Review and consider removing older instructions if default performance is better. Claude Fable 5 also does a good job of updating skills on the fly based on what it learns from the task at hand.
-* **Don't instruct Claude to reproduce its reasoning in the response.** Prompts, skills, or harness instructions that tell the model to echo, transcribe, or explain its internal reasoning as response text can trigger the [`reasoning_extraction` refusal category](./build-with-claude-refusals-and-fallback.md#refusal-response) on Claude Fable 5, causing elevated fallbacks to Claude Opus 4.8. Audit existing skills and system prompts for reflection or show-your-thinking instructions when migrating. If your application needs reasoning visibility, read the structured `thinking` blocks from [adaptive thinking](./build-with-claude-thinking.md) instead, and use a [send-to-user tool](#create-a-send-to-user-tool) to surface progress during long runs.
-* **Create a send-to-user tool.** For long, asynchronous agents, a client-side tool delivers messages to the user verbatim without ending the turn. See [Create a send-to-user tool](#create-a-send-to-user-tool).
+* **Don't instruct Claude to reproduce its reasoning in the response.** Prompts, skills, or harness instructions that tell the model to echo, transcribe, or explain its internal reasoning as response text can trigger the [`reasoning_extraction` refusal category](./build-with-claude-refusals-and-fallback.md#refusal-response) on Claude Fable 5, causing elevated fallbacks to Claude Opus 4.8. Audit existing skills and system prompts for reflection or show-your-thinking instructions when migrating. If your application needs reasoning visibility, read the structured `thinking` blocks from [adaptive thinking](./build-with-claude-thinking.md) instead, and use a [send-to-user tool](./build-with-claude-prompt-engineering-prompting-claude-fable-5.md#create-a-send-to-user-tool) to surface progress during long runs.
+* **Create a send-to-user tool.** For long, asynchronous agents, a client-side tool delivers messages to the user verbatim without ending the turn. See [Create a send-to-user tool](./build-with-claude-prompt-engineering-prompting-claude-fable-5.md#create-a-send-to-user-tool).

@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/csharp/beta/webhooks"
 category: "api"
 generated: true
 ---
+---
+title: Webhooks
+url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
+---
+
 # Webhooks
 
 ## Domain Types
@@ -804,6 +809,18 @@ generated: true
 
       - `required string WorkspaceID`
 
+    - `class BetaWebhookSessionBudgetReachedEventData:`
+
+      - `required string ID`
+
+        ID of the session that triggered the event.
+
+      - `required string OrganizationID`
+
+      - `JsonElement Type "session.budget_reached"constant`
+
+      - `required string WorkspaceID`
+
   - `JsonElement Type "event"constant`
 
     Object type. Always `event` for webhook payloads.
@@ -1356,6 +1373,18 @@ generated: true
 
     - `required string WorkspaceID`
 
+  - `class BetaWebhookSessionBudgetReachedEventData:`
+
+    - `required string ID`
+
+      ID of the session that triggered the event.
+
+    - `required string OrganizationID`
+
+    - `JsonElement Type "session.budget_reached"constant`
+
+    - `required string WorkspaceID`
+
 ### Beta Webhook Memory Store Archived Event Data
 
 - `class BetaWebhookMemoryStoreArchivedEventData:`
@@ -1409,6 +1438,20 @@ generated: true
   - `required string OrganizationID`
 
   - `JsonElement Type "session.archived"constant`
+
+  - `required string WorkspaceID`
+
+### Beta Webhook Session Budget Reached Event Data
+
+- `class BetaWebhookSessionBudgetReachedEventData:`
+
+  - `required string ID`
+
+    ID of the session that triggered the event.
+
+  - `required string OrganizationID`
+
+  - `JsonElement Type "session.budget_reached"constant`
 
   - `required string WorkspaceID`
 
@@ -2303,6 +2346,18 @@ generated: true
       - `required string OrganizationID`
 
       - `JsonElement Type "memory_store.deleted"constant`
+
+      - `required string WorkspaceID`
+
+    - `class BetaWebhookSessionBudgetReachedEventData:`
+
+      - `required string ID`
+
+        ID of the session that triggered the event.
+
+      - `required string OrganizationID`
+
+      - `JsonElement Type "session.budget_reached"constant`
 
       - `required string WorkspaceID`
 

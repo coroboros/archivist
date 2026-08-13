@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/analytics/cost/list_by_us
 category: "api"
 generated: true
 ---
+---
+title: Get Per-User Cost
+url: https://platform.claude.com/docs/en/api/admin/analytics/cost/list_by_user
+---
+
 ## Get Per-User Cost
 
 **get** `/v1/organizations/analytics/user_cost_report`

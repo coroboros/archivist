@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/csharp/beta/vaults/list"
 category: "api"
 generated: true
 ---
+---
+title: List Vaults
+url: https://platform.claude.com/docs/en/api/csharp/beta/vaults/list
+---
+
 ## List Vaults
 
 `VaultListPageResponse Beta.Vaults.List(VaultListParams?parameters, CancellationTokencancellationToken = default)`
@@ -95,6 +100,8 @@ List Vaults
     - `"fallback-credit-2026-07-01"FallbackCredit2026_07_01`
 
     - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
+
+    - `"mid-conversation-tool-changes-2026-07-01"MidConversationToolChanges2026_07_01`
 
 ### Returns
 

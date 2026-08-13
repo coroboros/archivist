@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/php/beta/messages/batches"
 category: "api"
 generated: true
 ---
+---
+title: Batches
+url: https://platform.claude.com/docs/en/api/php/beta/messages/batches
+---
+
 # Batches
 
 ## Create a Message Batch
@@ -102,7 +107,7 @@ $betaMessageBatch = $client->beta->messages->batches->create(
       'params' => [
         'maxTokens' => 1024,
         'messages' => [['content' => 'Hello, world', 'role' => 'user']],
-        'model' => 'claude-opus-4-6',
+        'model' => Model::CLAUDE_OPUS_4_6,
         'cacheControl' => ['type' => 'ephemeral', 'ttl' => '5m'],
         'container' => [
           'id' => 'id',
@@ -195,7 +200,7 @@ $betaMessageBatch = $client->beta->messages->batches->create(
       ],
     ],
   ],
-  betas: ['message-batches-2024-09-24'],
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
   userProfileID: 'anthropic-user-profile-id',
 );
 
@@ -309,7 +314,7 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaMessageBatch = $client->beta->messages->batches->retrieve(
-  'message_batch_id', betas: ['message-batches-2024-09-24']
+  'message_batch_id', betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24]
 );
 
 var_dump($betaMessageBatch);
@@ -435,7 +440,7 @@ $page = $client->beta->messages->batches->list(
   afterID: 'after_id',
   beforeID: 'before_id',
   limit: 1,
-  betas: ['message-batches-2024-09-24'],
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
 );
 
 var_dump($page);
@@ -557,7 +562,7 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaMessageBatch = $client->beta->messages->batches->cancel(
-  'message_batch_id', betas: ['message-batches-2024-09-24']
+  'message_batch_id', betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24]
 );
 
 var_dump($betaMessageBatch);
@@ -632,7 +637,7 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaDeletedMessageBatch = $client->beta->messages->batches->delete(
-  'message_batch_id', betas: ['message-batches-2024-09-24']
+  'message_batch_id', betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24]
 );
 
 var_dump($betaDeletedMessageBatch);
@@ -698,7 +703,9 @@ $betaMessageBatchIndividualResponse = $client
   ->beta
   ->messages
   ->batches
-  ->resultsStream('message_batch_id', betas: ['message-batches-2024-09-24']);
+  ->resultsStream(
+  'message_batch_id', betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24]
+);
 
 var_dump($betaMessageBatchIndividualResponse);
 ```

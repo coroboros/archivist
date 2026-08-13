@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/mcp_tunnels/reveal_token"
 category: "api"
 generated: true
 ---
+---
+title: Reveal Tunnel Token
+url: https://platform.claude.com/docs/en/api/admin/mcp_tunnels/reveal_token
+---
+
 ## Reveal Tunnel Token
 
 **post** `/v1/organizations/tunnels/{tunnel_id}/reveal_token`

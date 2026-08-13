@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/compliance"
 category: "api"
 generated: true
 ---
+---
+title: Compliance API
+url: https://platform.claude.com/docs/en/api/compliance
+---
+
 # Compliance API
 
 # Activities

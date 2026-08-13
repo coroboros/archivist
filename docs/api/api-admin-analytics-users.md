@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/analytics/users"
 category: "api"
 generated: true
 ---
+---
+title: Users
+url: https://platform.claude.com/docs/en/api/admin/analytics/users
+---
+
 # Users
 
 ## List User Activity

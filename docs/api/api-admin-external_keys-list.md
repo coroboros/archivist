@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/external_keys/list"
 category: "api"
 generated: true
 ---
+---
+title: List External Keys
+url: https://platform.claude.com/docs/en/api/admin/external_keys/list
+---
+
 ## List External Keys
 
 **get** `/v1/organizations/external_keys`

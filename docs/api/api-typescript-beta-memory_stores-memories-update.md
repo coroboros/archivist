@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/typescript/beta/memory_stores/m
 category: "api"
 generated: true
 ---
+---
+title: Update a memory
+url: https://platform.claude.com/docs/en/api/typescript/beta/memory_stores/memories/update
+---
+
 ## Update a memory
 
 `client.beta.memoryStores.memories.update(stringmemoryID, MemoryUpdateParamsparams, RequestOptionsoptions?): BetaManagedAgentsMemory`
@@ -56,7 +61,7 @@ Update a memory
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 29 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -122,6 +127,8 @@ Update a memory
 
       - `"agent-memory-2026-07-22"`
 
+      - `"mid-conversation-tool-changes-2026-07-01"`
+
 ### Returns
 
 - `BetaManagedAgentsMemory`
@@ -171,14 +178,14 @@ Update a memory
 ### Example
 
 ```typescript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic({
-  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
+  apiKey: process.env["ANTHROPIC_API_KEY"] // This is the default and can be omitted
 });
 
-const betaManagedAgentsMemory = await client.beta.memoryStores.memories.update('memory_id', {
-  memory_store_id: 'memory_store_id',
+const betaManagedAgentsMemory = await client.beta.memoryStores.memories.update("memory_id", {
+  memory_store_id: "memory_store_id"
 });
 
 console.log(betaManagedAgentsMemory.id);

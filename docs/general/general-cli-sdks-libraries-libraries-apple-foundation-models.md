@@ -1,13 +1,13 @@
 ---
-title: "Apple Foundation Models"
+title: "Requirements"
 source: "https://platform.claude.com/docs/en/cli-sdks-libraries/libraries/apple-foundation-models"
 category: "general"
 generated: true
 ---
-# Apple Foundation Models
-
-Use Claude on Apple platforms through the Foundation Models framework with the Claude for Foundation Models Swift package.
-
+---
+title: Apple Foundation Models
+url: https://platform.claude.com/docs/en/cli-sdks-libraries/libraries/apple-foundation-models
+description: Use Claude on Apple platforms through the Foundation Models framework with the Claude for Foundation Models Swift package.
 ---
 
 [Claude for Foundation Models](https://github.com/anthropics/ClaudeForFoundationModels) is a Swift package that makes Claude available as a server-side language model in Apple's [Foundation Models](https://developer.apple.com/documentation/foundationmodels) framework. The package conforms Claude to the framework's `LanguageModel` protocol, so you drive it with the same `LanguageModelSession` API you use for Apple's on-device model: `respond(to:)`, streaming, guided generation, and tool calling all work the same way.
@@ -26,7 +26,7 @@ Requests go directly from your app to the Claude API; Apple is not in the reques
 
 * iOS 27, macOS 27, visionOS 27, or watchOS 27 (all in beta): the OS releases whose Foundation Models framework supports server-side language models
 * Xcode 27 (beta)
-* A Claude API key from the [Claude Console](https://platform.claude.com/) for development. See [Authentication](#authentication) for production options.
+* A Claude API key from the [Claude Console](https://platform.claude.com/) for development. See [Authentication](./general-cli-sdks-libraries-libraries-apple-foundation-models.md#authentication) for production options.
 
 ## Install the package
 
@@ -65,13 +65,13 @@ let response = try await session.respond(to: "Plan a 4-day trip to Buenos Aires.
 print(response.content)
 ```
 
-The initializer also accepts `baseURL` (default `https://api.anthropic.com`), `timeout`, and `serverTools` (see [Server-side tools](#server-side-tools)).
+The initializer also accepts `baseURL` (default `https://api.anthropic.com`), `timeout`, and `serverTools` (see [Server-side tools](./general-cli-sdks-libraries-libraries-apple-foundation-models.md#server-side-tools)).
 
 For a complete working program, the repository includes [`Examples/ClaudeExample`](https://github.com/anthropics/ClaudeForFoundationModels/tree/main/Examples/ClaudeExample), a runnable command-line target that streams a chat turn to the terminal, with a `--search` flag that enables server-side web search for the turn. Running it requires a macOS 27 host.
 
 ## Choosing a model
 
-Model identifiers are values of `ClaudeModel`. Use a compiled-in constant, or construct one with explicit capabilities for an ID that isn't compiled in yet (see [Capabilities](#capabilities)):
+Model identifiers are values of `ClaudeModel`. Use a compiled-in constant, or construct one with explicit capabilities for an ID that isn't compiled in yet (see [Capabilities](./general-cli-sdks-libraries-libraries-apple-foundation-models.md#capabilities)):
 
 ```swift
 ClaudeLanguageModel(name: .opus5, auth: auth)
@@ -266,6 +266,6 @@ The package surfaces the Messages API capabilities that the Foundation Models pr
 | --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
 | [Apple Foundation Models documentation](https://developer.apple.com/documentation/foundationmodels) | `LanguageModelSession`, `@Generable`, `Transcript`, `Tool`, and the rest of the framework surface |
 | [`ClaudeForFoundationModels` on GitHub](https://github.com/anthropics/ClaudeForFoundationModels)    | Source, the runnable example, and the issue tracker                                               |
-| [Claude API reference](../api/api-overview.md)                                                       | The underlying Messages API                                                                       |
+| [Claude API reference](../api/api-overview.md)                            | The underlying Messages API                                                                       |
 
 The package is licensed under Apache 2.0. Bug reports are welcome through GitHub issues. External pull requests are not being accepted during the beta period.

@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/php/beta/user_profiles/list"
 category: "api"
 generated: true
 ---
+---
+title: List User Profiles
+url: https://platform.claude.com/docs/en/api/php/beta/user_profiles/list
+---
+
 ## List User Profiles
 
 `$client->beta->userProfiles->list(?int limit, ?Order order, ?string page, ?list<AnthropicBeta> betas): PageCursor<BetaUserProfile>`
@@ -80,7 +85,10 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $page = $client->beta->userProfiles->list(
-  limit: 0, order: 'asc', page: 'page', betas: ['message-batches-2024-09-24']
+  limit: 0,
+  order: 'asc',
+  page: 'page',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
 );
 
 var_dump($page);

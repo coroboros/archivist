@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/cli/beta/vaults/update"
 category: "api"
 generated: true
 ---
+---
+title: Update Vault
+url: https://platform.claude.com/docs/en/api/cli/beta/vaults/update
+---
+
 ## Update Vault
 
 `$ ant beta:vaults update`

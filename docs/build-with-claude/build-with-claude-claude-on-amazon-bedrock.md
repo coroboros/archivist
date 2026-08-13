@@ -1,13 +1,13 @@
 ---
-title: "Claude on Amazon Bedrock (Opus 4.6 and earlier)"
+title: "Install and configure the AWS CLI"
 source: "https://platform.claude.com/docs/en/build-with-claude/claude-on-amazon-bedrock"
 category: "build-with-claude"
 generated: true
 ---
-# Claude on Amazon Bedrock (Opus 4.6 and earlier)
-
-The legacy Amazon Bedrock integration for Claude models, using InvokeModel and Converse APIs with ARN-versioned model identifiers.
-
+---
+title: Claude on Amazon Bedrock (Opus 4.6 and earlier)
+url: https://platform.claude.com/docs/en/build-with-claude/claude-on-amazon-bedrock-legacy
+description: The legacy Amazon Bedrock integration for Claude models, using InvokeModel and Converse APIs with ARN-versioned model identifiers.
 ---
 
 <Note>
@@ -60,14 +60,14 @@ Anthropic's [client SDKs](../general/general-cli-sdks-libraries-overview.md) sup
   <Tab title="Java">
     <CodeGroup>
       ```groovy Gradle
-      implementation("com.anthropic:anthropic-java-bedrock:2.52.0")
+      implementation("com.anthropic:anthropic-java-bedrock:2.53.0")
       ```
 
       ```xml Maven
       <dependency>
           <groupId>com.anthropic</groupId>
           <artifactId>anthropic-java-bedrock</artifactId>
-          <version>2.52.0</version>
+          <version>2.53.0</version>
       </dependency>
       ```
 
@@ -142,7 +142,7 @@ AWS offers newer Claude models through [cross-region inference](https://docs.aws
 Invocation of model ID anthropic.claude-sonnet-4-5-20250929-v1:0 with on-demand throughput isn't supported. Retry your request with the ID or ARN of an inference profile that contains this model.
 ```
 
-To invoke these models, pass an inference profile instead of the base model ID. The inference profile ID is the base model ID with a prefix from a column marked "Yes" in the following table, for example us.anthropic.claude-sonnet-4-5-20250929-v1:0. You can also pass the full inference profile ARN, in the form `arn:aws:bedrock:{region}:{account-id}:inference-profile/{inference-profile-id}`. For AWS's authoritative list of available inference profiles, see [Supported Regions and models for inference profiles](https://docs.aws.amazon.com/bedrock/latest/userguide/inference-profiles-support.html). For how the prefixes affect routing and pricing, see the [Global versus regional endpoints](#global-vs-regional-endpoints) section.
+To invoke these models, pass an inference profile instead of the base model ID. The inference profile ID is the base model ID with a prefix from a column marked "Yes" in the following table, for example us.anthropic.claude-sonnet-4-5-20250929-v1:0. You can also pass the full inference profile ARN, in the form `arn:aws:bedrock:{region}:{account-id}:inference-profile/{inference-profile-id}`. For AWS's authoritative list of available inference profiles, see [Supported Regions and models for inference profiles](https://docs.aws.amazon.com/bedrock/latest/userguide/inference-profiles-support.html). For how the prefixes affect routing and pricing, see the [Global versus regional endpoints](./build-with-claude-claude-on-amazon-bedrock-legacy.md#global-vs-regional-endpoints) section.
 
 | Model                        | Base Bedrock model ID                     | `global` | `us` | `eu` | `jp` | `apac` |
 | ---------------------------- | ----------------------------------------- | -------- | ---- | ---- | ---- | ------ |
@@ -754,6 +754,12 @@ PDF support is available on Bedrock through both the Converse API and InvokeMode
 * Visual PDF analysis (charts, images, layouts) requires citations to be enabled
 * Without citations, only basic text extraction is available
 * For full control without forced citations, use the InvokeModel API
+
+### Mid-conversation system messages on Bedrock
+
+[Mid-conversation system messages](./build-with-claude-mid-conversation-system-messages.md) are available through the InvokeModel API for Claude Fable 5 and Claude Opus 4.8. As described in the note under [API model IDs](./build-with-claude-claude-on-amazon-bedrock-legacy.md#api-model-ids), these requests are served by the same infrastructure as the [Claude in Amazon Bedrock](./build-with-claude-claude-in-amazon-bedrock.md) endpoint. No beta header is required. This feature is not available on Claude Sonnet 5; use the top-level `system` field instead. It is not available for the ARN-versioned models in the model table on this page.
+
+**For Converse API users:** the Converse API accepts system instructions through its top-level [`system` parameter](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html). To add system instructions mid-conversation, use the InvokeModel API.
 
 ### Context window
 

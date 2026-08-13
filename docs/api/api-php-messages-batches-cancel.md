@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/php/messages/batches/cancel"
 category: "api"
 generated: true
 ---
+---
+title: Cancel a Message Batch
+url: https://platform.claude.com/docs/en/api/php/messages/batches/cancel
+---
+
 ## Cancel a Message Batch
 
 `$client->messages->batches->cancel(string messageBatchID): MessageBatch`

@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/cli/beta/messages/batches/cance
 category: "api"
 generated: true
 ---
+---
+title: Cancel a Message Batch
+url: https://platform.claude.com/docs/en/api/cli/beta/messages/batches/cancel
+---
+
 ## Cancel a Message Batch
 
 `$ ant beta:messages:batches cancel`

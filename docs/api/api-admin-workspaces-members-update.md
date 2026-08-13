@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/workspaces/members/update
 category: "api"
 generated: true
 ---
+---
+title: Update Workspace Member
+url: https://platform.claude.com/docs/en/api/admin/workspaces/members/update
+---
+
 ## Update Workspace Member
 
 **post** `/v1/organizations/workspaces/{workspace_id}/members/{user_id}`

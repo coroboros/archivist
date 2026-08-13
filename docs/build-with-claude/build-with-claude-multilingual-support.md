@@ -1,13 +1,13 @@
 ---
-title: "Multilingual support"
+title: "Overview"
 source: "https://platform.claude.com/docs/en/build-with-claude/multilingual-support"
 category: "build-with-claude"
 generated: true
 ---
-# Multilingual support
-
-Claude excels at tasks across multiple languages, maintaining strong cross-lingual performance relative to English.
-
+---
+title: Multilingual support
+url: https://platform.claude.com/docs/en/build-with-claude/multilingual-support
+description: Claude excels at tasks across multiple languages, maintaining strong cross-lingual performance relative to English.
 ---
 
 ## Overview

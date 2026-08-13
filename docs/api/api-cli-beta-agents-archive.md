@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/cli/beta/agents/archive"
 category: "api"
 generated: true
 ---
+---
+title: Archive Agent
+url: https://platform.claude.com/docs/en/api/cli/beta/agents/archive
+---
+
 ## Archive Agent
 
 `$ ant beta:agents archive`
@@ -52,7 +57,7 @@ Archive Agent
 
   - `metadata: map[string]`
 
-  - `model: object { id, effort, speed }`
+  - `model: object { id, effort, inference_geo, speed }`
 
     Model identifier and configuration.
 
@@ -158,6 +163,10 @@ Archive Agent
 
           - `"max"`
 
+    - `inference_geo: optional string`
+
+      Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo.
+
     - `speed: optional "standard" or "fast"`
 
       Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
@@ -170,17 +179,33 @@ Archive Agent
 
     Resolved coordinator topology with a concrete agent roster.
 
-    - `agents: array of BetaManagedAgentsAgentReference`
+    - `agents: array of BetaManagedAgentsAgentReference or BetaManagedAgentsAdvisor`
 
       Agents the coordinator may spawn as session threads, each resolved to a specific version.
 
-      - `id: string`
+      - `beta_managed_agents_agent_reference: object { id, type, version }`
 
-      - `type: "agent"`
+        A resolved agent reference with a concrete version.
 
-        - `"agent"`
+        - `id: string`
 
-      - `version: number`
+        - `type: "agent"`
+
+          - `"agent"`
+
+        - `version: number`
+
+      - `beta_managed_agents_advisor: object { model, type }`
+
+        Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
+
+        - `model: string`
+
+          The advisor model id.
+
+        - `type: "advisor"`
+
+          - `"advisor"`
 
     - `type: "coordinator"`
 
@@ -395,6 +420,7 @@ ant beta:agents archive \
     "effort": {
       "type": "low"
     },
+    "inference_geo": "inference_geo",
     "speed": "standard"
   },
   "multiagent": {

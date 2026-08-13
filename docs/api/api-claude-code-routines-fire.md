@@ -1,13 +1,13 @@
 ---
-title: "Trigger a routine through the API"
+title: "Differences from the Claude Platform"
 source: "https://platform.claude.com/docs/en/api/claude-code/routines-fire"
 category: "api"
 generated: true
 ---
-# Trigger a routine through the API
-
-Start a Claude Code routine session on demand by sending an authenticated POST request.
-
+---
+title: Trigger a routine through the API
+url: https://platform.claude.com/docs/en/api/claude-code/routines-fire
+description: Start a Claude Code routine session on demand by sending an authenticated POST request.
 ---
 
 <Warning>
@@ -24,14 +24,14 @@ Calling this endpoint requires a claude.ai account on a Pro, Max, Team, or Enter
 
 The routine fire endpoint belongs to the Claude Code product surface, which differs from the Claude Platform APIs and SDKs in a few ways:
 
-| Aspect         | This endpoint                                                                                                                               | Claude Platform APIs                                                 |
-| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------- |
-| Authentication | `Authorization: Bearer` with a per-routine token (`sk-ant-oat01-...`) created at [claude.ai/code/routines](https://claude.ai/code/routines) | `x-api-key` with a Claude API key from Claude Console                |
-| Token scope    | One routine only; no read access                                                                                                            | Workspace-level                                                      |
+| Aspect         | This endpoint                                                                                                                               | Claude Platform APIs                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| Authentication | `Authorization: Bearer` with a per-routine token (`sk-ant-oat01-...`) created at [claude.ai/code/routines](https://claude.ai/code/routines) | `x-api-key` with a Claude API key from Claude Console                                           |
+| Token scope    | One routine only; no read access                                                                                                            | Workspace-level                                                                                 |
 | SDK support    | None                                                                                                                                        | Available in all [client SDKs](../general/general-cli-sdks-libraries-overview.md) |
-| Billing        | Claude Code subscription usage on claude.ai                                                                                                 | Claude Platform usage                                                |
-| Path namespace | `/v1/claude_code/...`                                                                                                                       | `/v1/...`                                                            |
-| Stability      | Experimental; requires `anthropic-beta: experimental-cc-routine-2026-04-01`                                                                 | Stable or standard beta                                              |
+| Billing        | Claude Code subscription usage on claude.ai                                                                                                 | Claude Platform usage                                                                           |
+| Path namespace | `/v1/claude_code/...`                                                                                                                       | `/v1/...`                                                                                       |
+| Stability      | Experimental; requires `anthropic-beta: experimental-cc-routine-2026-04-01`                                                                 | Stable or standard beta                                                                         |
 
 ## Before you begin
 
@@ -83,7 +83,7 @@ The request returns once the session is created. It does not stream session outp
 | ------------------- | -------------------- | ---------------------------------------------------------------------------------------------------- |
 | `Authorization`     | Yes                  | `Bearer <token>`. The per-routine token created in the Claude Code web UI, prefixed `sk-ant-oat01-`. |
 | `anthropic-beta`    | Yes                  | Must include `experimental-cc-routine-2026-04-01`.                                                   |
-| `anthropic-version` | Yes                  | The [API version](./api-versioning.md), for example `2023-06-01`.                                |
+| `anthropic-version` | Yes                  | The [API version](./api-versioning.md), for example `2023-06-01`.     |
 | `Content-Type`      | When body is present | `application/json`.                                                                                  |
 
 ### Path parameters

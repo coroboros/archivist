@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/beta/deployments/run"
 category: "api"
 generated: true
 ---
+---
+title: Run Deployment Now
+url: https://platform.claude.com/docs/en/api/beta/deployments/run
+---
+
 ## Run Deployment Now
 
 **post** `/v1/deployments/{deployment_id}/run`
@@ -22,7 +27,7 @@ Run Deployment Now
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 29 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 30 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -87,6 +92,8 @@ Run Deployment Now
     - `"fallback-credit-2026-07-01"`
 
     - `"agent-memory-2026-07-22"`
+
+    - `"mid-conversation-tool-changes-2026-07-01"`
 
 ### Returns
 

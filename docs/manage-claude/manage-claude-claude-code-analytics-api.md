@@ -1,20 +1,20 @@
 ---
-title: "Claude Code Analytics API"
+title: "First request"
 source: "https://platform.claude.com/docs/en/manage-claude/claude-code-analytics-api"
 category: "manage-claude"
 generated: true
 ---
-# Claude Code Analytics API
-
-Programmatically access your organization's Claude Code usage analytics and productivity metrics with the Claude Code Analytics Admin API.
-
+---
+title: Claude Code Analytics API
+url: https://platform.claude.com/docs/en/manage-claude/claude-code-analytics-api
+description: Programmatically access your organization's Claude Code usage analytics and productivity metrics with the Claude Code Analytics Admin API.
 ---
 
 <Tip>
   **The Admin API is unavailable for individual accounts.** To collaborate with teammates and add members, set up your organization in **Console → Settings → Organization**.
 </Tip>
 
-The Claude Code Analytics Admin API provides programmatic access to daily aggregated usage metrics for Claude Code users, enabling organizations to analyze developer productivity and build custom dashboards. This API provides more detail than the basic [Analytics dashboard](/claude-code) without the complexity of the OpenTelemetry integration.
+The Claude Code Analytics Admin API provides programmatic access to daily aggregated usage metrics for Claude Code users, enabling organizations to analyze developer productivity and build custom dashboards. This API provides more detail than the basic [Analytics dashboard](https://platform.claude.com/claude-code) without the complexity of the OpenTelemetry integration.
 
 This API enables you to better monitor, analyze, and optimize your Claude Code adoption:
 
@@ -278,7 +278,7 @@ The Claude Code Analytics API helps you understand and optimize your team's deve
 
 * [Admin API](./manage-claude-admin-api.md)
 * [Admin API reference](../api/api-admin.md)
-* [Claude Code Analytics dashboard](/claude-code)
+* [Claude Code Analytics dashboard](https://platform.claude.com/claude-code)
 * [Usage and Cost API](./manage-claude-usage-cost-api.md) - Track API usage across all Anthropic services
 * [Compliance API](./manage-claude-compliance-api.md) - Retrieve audit and activity data
 * [Identity and access management](https://code.claude.com/docs/en/iam)

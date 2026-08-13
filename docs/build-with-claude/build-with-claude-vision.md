@@ -1,13 +1,13 @@
 ---
-title: "Vision"
+title: "Send images to Claude"
 source: "https://platform.claude.com/docs/en/build-with-claude/vision"
 category: "build-with-claude"
 generated: true
 ---
-# Vision
-
-Claude's vision capabilities allow it to understand and analyze images, opening up exciting possibilities for multimodal interaction.
-
+---
+title: Vision
+url: https://platform.claude.com/docs/en/build-with-claude/vision
+description: Claude's vision capabilities allow it to understand and analyze images, opening up exciting possibilities for multimodal interaction.
 ---
 
 This guide describes how to send images to Claude, the limits and costs that apply, and where to find guidance for [coordinate-based workflows](./build-with-claude-vision-coordinates.md).
@@ -19,7 +19,7 @@ This guide describes how to send images to Claude, the limits and costs that app
 Use Claude's vision capabilities through:
 
 * [claude.ai](https://claude.ai/). Upload an image like you would a file, or drag and drop an image directly into the chat window.
-* The [Workbench](/playground) in the Claude Console. Add images directly to any User message block.
+* The [Workbench](https://platform.claude.com/playground) in the Claude Console. Add images directly to any User message block.
 * API request. See the following examples.
 
 On the API, provide images to Claude as `image` content blocks using one of three source types:
@@ -1241,9 +1241,9 @@ The maximum size per image is:
 * 10 MB on [claude.ai](https://claude.ai/).
 
 <Note>
-  Although the API supports up to 600 images per request, [request size limits](../api/api-overview.md#request-size-limits) (32 MB for standard endpoints; lower on some partner-operated platforms, for example, Amazon Bedrock and Google Cloud) can be reached first. For many images, consider uploading with the [Files API](#files-api-image-example) and referencing by `file_id` to keep request payloads small.
+  Although the API supports up to 600 images per request, [request size limits](../api/api-overview.md#request-size-limits) (32 MB for standard endpoints; lower on some partner-operated platforms, for example, Amazon Bedrock and Google Cloud) can be reached first. For many images, consider uploading with the [Files API](./build-with-claude-vision.md#files-api-image-example) and referencing by `file_id` to keep request payloads small.
 
-  Even when using the Files API, requests with many large images can fail before reaching the 600-image count. Reduce image dimensions or file sizes (for example, by downsampling) before uploading (see [Resolution and token cost](#evaluate-image-size)).
+  Even when using the Files API, requests with many large images can fail before reaching the 600-image count. Reduce image dimensions or file sizes (for example, by downsampling) before uploading (see [Resolution and token cost](./build-with-claude-vision.md#evaluate-image-size)).
 </Note>
 
 ### Supported formats
@@ -1286,7 +1286,7 @@ When providing images to Claude, keep the following in mind for best results:
 
 * **Image clarity:** Ensure images are clear and not too blurry or pixelated.
 * **Text:** If the image contains important text, make sure it's legible and not too small. Avoid cropping out key visual context solely to enlarge the text.
-* **Resizing:** Take into account that your image might be resized if it is too large (see [Resolution and token cost](#evaluate-image-size)); this might, for example, make text less legible. Consider pre-resizing your images, cropping them, or both.
+* **Resizing:** Take into account that your image might be resized if it is too large (see [Resolution and token cost](./build-with-claude-vision.md#evaluate-image-size)); this might, for example, make text less legible. Consider pre-resizing your images, cropping them, or both.
 * **Image compression:** Compressing images before sending them, using a lossy format such as JPEG or WebP (lossy mode), can reduce latency by reducing the size of requests. However, this can introduce artifacts that are detrimental to model performance, especially when multiple compression passes are applied. For example, heavy JPEG compression can make text difficult to read. Confirm your compression settings are appropriate for the task by inspecting the actual images sent to the API.
 
 ***
@@ -1317,19 +1317,19 @@ Always carefully review and verify Claude's image interpretations, especially fo
 
 <AccordionGroup>
   <Accordion title="What image file types does Claude support?">
-    JPEG, PNG, GIF, and WebP. See [Supported formats](#supported-formats).
+    JPEG, PNG, GIF, and WebP. See [Supported formats](./build-with-claude-vision.md#supported-formats).
   </Accordion>
 
   <Accordion title="Can Claude read image URLs?">
-    Yes. Use the `url` source type instead of `base64` in the `image` content block. See the [URL-based image example](#url-based-image-example).
+    Yes. Use the `url` source type instead of `base64` in the `image` content block. See the [URL-based image example](./build-with-claude-vision.md#url-based-image-example).
   </Accordion>
 
   <Accordion title="Is there a limit to the image file size I can upload?">
-    Yes. See [Request limits](#request-limits) for per-image and overall request size limits across the Claude API, Amazon Bedrock, Google Cloud, and claude.ai.
+    Yes. See [Request limits](./build-with-claude-vision.md#request-limits) for per-image and overall request size limits across the Claude API, Amazon Bedrock, Google Cloud, and claude.ai.
   </Accordion>
 
   <Accordion title="How many images can I include in one request?">
-    Up to 600 per API request (100 for models with a 200k-token context window) and 20 per turn on claude.ai. See [Request limits](#request-limits) for details and the lower per-image dimension limit that applies above 20 images.
+    Up to 600 per API request (100 for models with a 200k-token context window) and 20 per turn on claude.ai. See [Request limits](./build-with-claude-vision.md#request-limits) for details and the lower per-image dimension limit that applies above 20 images.
   </Accordion>
 
   <Accordion title="Does Claude read image metadata?">

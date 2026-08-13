@@ -1,13 +1,13 @@
 ---
-title: "TypeScript SDK"
+title: "Installation"
 source: "https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/typescript"
 category: "general"
 generated: true
 ---
-# TypeScript SDK
-
-Install and configure the Anthropic TypeScript SDK for Node.js, Deno, Bun, and browser environments
-
+---
+title: TypeScript SDK
+url: https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/typescript
+description: Install and configure the Anthropic TypeScript SDK for Node.js, Deno, Bun, and browser environments
 ---
 
 This library provides convenient access to the Anthropic REST API from TypeScript or JavaScript.
@@ -476,21 +476,21 @@ await client.messages.create(
 
 On timeout, an `APIConnectionTimeoutError` is thrown.
 
-Note that requests that time out are [retried twice by default](#retries).
+Note that requests that time out are [retried twice by default](./general-cli-sdks-libraries-sdks-typescript.md#retries).
 
 ## Long requests
 
 <Warning>
-  Consider using the streaming [Messages API](#streaming-responses) for longer running requests.
+  Consider using the streaming [Messages API](./general-cli-sdks-libraries-sdks-typescript.md#streaming-responses) for longer running requests.
 </Warning>
 
-Avoid setting a large `max_tokens` value without using streaming. Some networks may drop idle connections after a certain period of time, which can cause the request to fail or [timeout](#timeouts) without receiving a response from Anthropic.
+Avoid setting a large `max_tokens` value without using streaming. Some networks may drop idle connections after a certain period of time, which can cause the request to fail or [timeout](./general-cli-sdks-libraries-sdks-typescript.md#timeouts) without receiving a response from Anthropic.
 
-This SDK also throws an error if a non-streaming request is expected to be above roughly 10 minutes long. Passing `stream: true` or [overriding](#timeouts) the `timeout` option at the client or request level disables this error.
+This SDK also throws an error if a non-streaming request is expected to be above roughly 10 minutes long. Passing `stream: true` or [overriding](./general-cli-sdks-libraries-sdks-typescript.md#timeouts) the `timeout` option at the client or request level disables this error.
 
-An expected request latency longer than the [timeout](#timeouts) for a non-streaming request will result in the client terminating the connection and retrying without receiving a response.
+An expected request latency longer than the [timeout](./general-cli-sdks-libraries-sdks-typescript.md#timeouts) for a non-streaming request will result in the client terminating the connection and retrying without receiving a response.
 
-When supported by the `fetch` implementation, the SDK sets a [TCP socket keep-alive](https://tldp.org/HOWTO/TCP-Keepalive-HOWTO/overview.html) option to reduce the impact of idle connection timeouts on some networks. This can be [overridden](#configuring-proxies) by configuring a custom proxy.
+When supported by the `fetch` implementation, the SDK sets a [TCP socket keep-alive](https://tldp.org/HOWTO/TCP-Keepalive-HOWTO/overview.html) option to reduce the impact of idle connection timeouts on some networks. This can be [overridden](./general-cli-sdks-libraries-sdks-typescript.md#configuring-proxies) by configuring a custom proxy.
 
 ## Auto-pagination
 

@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/cli/beta/skills"
 category: "api"
 generated: true
 ---
+---
+title: Skills
+url: https://platform.claude.com/docs/en/api/cli/beta/skills
+---
+
 # Skills
 
 ## Create Skill
@@ -193,7 +198,7 @@ List Skills
 
     Token for fetching the next page of results.
 
-    If `null`, there are no more results available. Pass this value to the `page_token` parameter in the next request to get the next page.
+    If `null`, there are no more results available. Pass this value to the `page` parameter in the next request to get the next page.
 
 ### Example
 
@@ -609,7 +614,7 @@ Download a skill version's content as a zip archive.
 
 ### Returns
 
-- `unnamed_schema_1: file path`
+- `unnamed_schema_3: file path`
 
 ### Example
 

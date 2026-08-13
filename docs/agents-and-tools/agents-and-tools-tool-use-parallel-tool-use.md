@@ -1,13 +1,13 @@
 ---
-title: "Parallel tool use"
+title: "Execution semantics"
 source: "https://platform.claude.com/docs/en/agents-and-tools/tool-use/parallel-tool-use"
 category: "agents-and-tools"
 generated: true
 ---
-# Parallel tool use
-
-Enable, format, and disable parallel tool calls, with message-history guidance and troubleshooting.
-
+---
+title: Parallel tool use
+url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/parallel-tool-use
+description: Enable, format, and disable parallel tool calls, with message-history guidance and troubleshooting.
 ---
 
 By default, Claude may call multiple tools in a single response. This page covers how to run those calls, how to format the message history so parallelism keeps working, and how to disable parallel tool use when you need to. For the single-call flow, see [Handle tool calls](./agents-and-tools-tool-use-handle-tool-calls.md).
@@ -1440,7 +1440,7 @@ See [Handle tool calls](./agents-and-tools-tool-use-handle-tool-calls.md) for ot
 
 **2. Weak prompting**
 
-Default prompting might not be sufficient. Use the stronger system prompt from [Maximizing parallel tool use](#maximizing-parallel-tool-use).
+Default prompting might not be sufficient. Use the stronger system prompt from [Maximizing parallel tool use](./agents-and-tools-tool-use-parallel-tool-use.md#maximizing-parallel-tool-use).
 
 **3. Measuring parallel tool usage**
 

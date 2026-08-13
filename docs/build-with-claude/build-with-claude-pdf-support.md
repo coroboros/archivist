@@ -1,18 +1,18 @@
 ---
-title: "PDF support"
+title: "Compatibility"
 source: "https://platform.claude.com/docs/en/build-with-claude/pdf-support"
 category: "build-with-claude"
 generated: true
 ---
-# PDF support
-
-Process PDFs with Claude: extract text, analyze charts, and understand visual content from your documents.
+---
+title: PDF support
+url: https://platform.claude.com/docs/en/build-with-claude/pdf-support
+description: "Process PDFs with Claude: extract text, analyze charts, and understand visual content from your documents."
+---
 
 ## Compatibility
 - [ZDR](../manage-claude/manage-claude-api-and-data-retention.md): eligible (excludes [Covered Models](../manage-claude/manage-claude-api-and-data-retention.md#model-specific-data-retention-requirements))
 - Platforms: Claude API, Claude Platform on AWS, Amazon Bedrock, Google Cloud, Microsoft Foundry
-
----
 
 You can ask Claude about any text, pictures, charts, and tables in PDFs you provide. Some sample use cases:
 
@@ -27,11 +27,11 @@ You can ask Claude about any text, pictures, charts, and tables in PDFs you prov
 
 Claude works with any standard PDF. Ensure your request size meets these requirements:
 
-| Requirement               | Limit                                                                   |
-| ------------------------- | ----------------------------------------------------------------------- |
+| Requirement               | Limit                                                                                              |
+| ------------------------- | -------------------------------------------------------------------------------------------------- |
 | Maximum request size      | 32 MB ([varies by platform](../api/api-overview.md#request-size-limits)) |
-| Maximum pages per request | 600 (100 when the request's context window is under 1M tokens)          |
-| Format                    | Standard PDF (no passwords/encryption)                                  |
+| Maximum pages per request | 600 (100 when the request's context window is under 1M tokens)                                     |
+| Format                    | Standard PDF (no passwords/encryption)                                                             |
 
 Both limits are on the entire request payload, including any other content sent alongside PDFs. For large PDFs, consider uploading with the [Files API](./build-with-claude-files.md) and referencing by `file_id` to keep request payloads small.
 
@@ -43,7 +43,7 @@ Because PDF support relies on Claude's vision capabilities, it is subject to the
 
 ### Supported platforms and models
 
-All [active models](../about-claude/about-claude-models-overview.md) support PDF processing. For PDF support through Amazon Bedrock's Converse API, see [Amazon Bedrock PDF support](#amazon-bedrock-pdf-support).
+All [active models](../about-claude/about-claude-models-overview.md) support PDF processing. For PDF support through Amazon Bedrock's Converse API, see [Amazon Bedrock PDF support](./build-with-claude-pdf-support.md#amazon-bedrock-pdf-support).
 
 ### Amazon Bedrock PDF support
 
@@ -1052,8 +1052,8 @@ When you send a PDF to Claude, the following steps occur:
   <Step title="Claude responds, referencing the PDF's contents if relevant.">
     Claude can reference both textual and visual content when it responds. You can further improve performance by integrating PDF support with:
 
-    * [Use prompt caching](#use-prompt-caching): To improve performance for repeated analysis.
-    * [Process document batches](#process-document-batches): For high-volume document processing.
+    * [Use prompt caching](./build-with-claude-pdf-support.md#use-prompt-caching): To improve performance for repeated analysis.
+    * [Process document batches](./build-with-claude-pdf-support.md#process-document-batches): For high-volume document processing.
     * [Tool use](../agents-and-tools/agents-and-tools-tool-use-overview.md): To extract specific information from documents for use as tool inputs.
   </Step>
 </Steps>

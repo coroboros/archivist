@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/cli/messages/batches/list"
 category: "api"
 generated: true
 ---
+---
+title: List Message Batches
+url: https://platform.claude.com/docs/en/api/cli/messages/batches/list
+---
+
 ## List Message Batches
 
 `$ ant messages:batches list`

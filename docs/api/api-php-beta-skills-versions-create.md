@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/php/beta/skills/versions/create
 category: "api"
 generated: true
 ---
+---
+title: Create Skill Version
+url: https://platform.claude.com/docs/en/api/php/beta/skills/versions/create
+---
+
 ## Create Skill Version
 
 `$client->beta->skills->versions->create(string skillID, list<string> files, ?list<AnthropicBeta> betas): VersionNewResponse`
@@ -92,7 +97,7 @@ $version = $client->beta->skills->versions->create(
   files: [
     FileParam::fromString('Example data', filename: uniqid('file-upload-', true)),
   ],
-  betas: ['message-batches-2024-09-24'],
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
 );
 
 var_dump($version);

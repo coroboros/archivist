@@ -1,13 +1,13 @@
 ---
-title: "Java SDK"
+title: "Installation"
 source: "https://platform.claude.com/docs/en/api/sdks/java"
 category: "api"
 generated: true
 ---
-# Java SDK
-
-Install and configure the Anthropic Java SDK with builder patterns and async support
-
+---
+title: Java SDK
+url: https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/java
+description: Install and configure the Anthropic Java SDK with builder patterns and async support
 ---
 
 The Anthropic Java SDK provides convenient access to the Anthropic REST API from applications written in Java. It uses the builder pattern for creating requests and supports both synchronous and asynchronous operations.
@@ -21,7 +21,7 @@ The Anthropic Java SDK provides convenient access to the Anthropic REST API from
 <Tabs>
   <Tab title="Gradle">
     ```kotlin
-    implementation("com.anthropic:anthropic-java:2.52.0")
+    implementation("com.anthropic:anthropic-java:2.53.0")
     ```
   </Tab>
 
@@ -30,7 +30,7 @@ The Anthropic Java SDK provides convenient access to the Anthropic REST API from
     <dependency>
         <groupId>com.anthropic</groupId>
         <artifactId>anthropic-java</artifactId>
-        <version>2.52.0</version>
+        <version>2.53.0</version>
     </dependency>
     ```
   </Tab>
@@ -464,7 +464,7 @@ You can use annotations to add further information about tools to the JSON schem
 
 ## Message batches
 
-The SDK provides support for [Batch processing](../build-with-claude/build-with-claude-batch-processing.md) under the `client.messages().batches()` namespace. See [Pagination](#pagination) for how to list and paginate through batches.
+The SDK provides support for [Batch processing](../build-with-claude/build-with-claude-batch-processing.md) under the `client.messages().batches()` namespace. See [Pagination](../general/general-cli-sdks-libraries-sdks-java.md#pagination) for how to list and paginate through batches.
 
 ## File uploads
 
@@ -610,7 +610,7 @@ try {
 
 ## Request IDs
 
-When using [raw responses](#raw-response-access), you can access the `request-id` response header using the `requestId()` method:
+When using [raw responses](../general/general-cli-sdks-libraries-sdks-java.md#raw-response-access), you can access the `request-id` response header using the `requestId()` method:
 
 ```java
 import com.anthropic.core.http.HttpResponseFor;
@@ -693,12 +693,12 @@ AnthropicClient client = AnthropicOkHttpClient.builder()
 ## Long requests
 
 <Warning>
-  Consider using [streaming](#streaming) for longer running requests.
+  Consider using [streaming](../general/general-cli-sdks-libraries-sdks-java.md#streaming) for longer running requests.
 </Warning>
 
-Avoid setting a large `maxTokens` value without using streaming. Some networks may drop idle connections after a certain period of time, which can cause the request to fail or [timeout](#timeouts) without receiving a response from Anthropic. The SDK periodically pings the API to keep the connection alive and reduce the impact of these networks.
+Avoid setting a large `maxTokens` value without using streaming. Some networks may drop idle connections after a certain period of time, which can cause the request to fail or [timeout](../general/general-cli-sdks-libraries-sdks-java.md#timeouts) without receiving a response from Anthropic. The SDK periodically pings the API to keep the connection alive and reduce the impact of these networks.
 
-The SDK throws an error if a non-streaming request is expected to take longer than 10 minutes. Using a [streaming method](#streaming) or [overriding the timeout](#timeouts) at the client or request level disables the error.
+The SDK throws an error if a non-streaming request is expected to take longer than 10 minutes. Using a [streaming method](../general/general-cli-sdks-libraries-sdks-java.md#streaming) or [overriding the timeout](../general/general-cli-sdks-libraries-sdks-java.md#timeouts) at the client or request level disables the error.
 
 ## Pagination
 
@@ -1052,7 +1052,7 @@ This structure allows replacing the SDK's default HTTP client without pulling in
 #### Customized OkHttpClient
 
 <Tip>
-  Try the available [network options](#retries) before replacing the default client.
+  Try the available [network options](../general/general-cli-sdks-libraries-sdks-java.md#retries) before replacing the default client.
 </Tip>
 
 To use a customized `OkHttpClient`:
@@ -1168,11 +1168,11 @@ The SDK is typed for convenient usage of the documented API. However, it also su
 
 #### Undocumented request parameters
 
-To set undocumented request parameters, use the `putAdditionalHeader`, `putAdditionalQueryParam`, or `putAdditionalBodyProperty` methods as described in [Undocumented parameters](#undocumented-parameters).
+To set undocumented request parameters, use the `putAdditionalHeader`, `putAdditionalQueryParam`, or `putAdditionalBodyProperty` methods as described in [Undocumented parameters](../general/general-cli-sdks-libraries-sdks-java.md#undocumented-parameters).
 
 #### Undocumented response properties
 
-To access undocumented response properties, use the `_additionalProperties()` method as described in [Response properties](#response-properties).
+To access undocumented response properties, use the `_additionalProperties()` method as described in [Response properties](../general/general-cli-sdks-libraries-sdks-java.md#response-properties).
 
 #### New or unreleased enum values
 
@@ -1243,7 +1243,7 @@ void main() {
   <Accordion title="Why doesn't the SDK use plain enum classes?">
     Java `enum` classes are not trivially forward compatible. Using them in the SDK could cause runtime exceptions if the API is updated to respond with a new enum value.
 
-    Because these classes are open, you can also construct them with any string value through their `of(String)` factory method. See [New or unreleased enum values](#new-or-unreleased-enum-values) if you need to use a value that isn't in your SDK version yet.
+    Because these classes are open, you can also construct them with any string value through their `of(String)` factory method. See [New or unreleased enum values](../general/general-cli-sdks-libraries-sdks-java.md#new-or-unreleased-enum-values) if you need to use a value that isn't in your SDK version yet.
   </Accordion>
 
   <Accordion title="Why are fields represented using JsonField<T> instead of just plain T?">

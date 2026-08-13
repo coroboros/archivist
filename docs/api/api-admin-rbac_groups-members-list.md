@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/rbac_groups/members/list"
 category: "api"
 generated: true
 ---
+---
+title: List RBAC Group Members
+url: https://platform.claude.com/docs/en/api/admin/rbac_groups/members/list
+---
+
 ## List RBAC Group Members
 
 **get** `/v1/organizations/rbac_groups/{group_id}/members`

@@ -1,13 +1,13 @@
 ---
-title: "Claude on Google Cloud"
+title: "Install an SDK for accessing Agent Platform"
 source: "https://platform.claude.com/docs/en/build-with-claude/claude-on-vertex-ai"
 category: "build-with-claude"
 generated: true
 ---
-# Claude on Google Cloud
-
-Anthropic's Claude models are available through [Google Cloud's Agent Platform](https://cloud.google.com/vertex-ai).
-
+---
+title: Claude on Google Cloud
+url: https://platform.claude.com/docs/en/build-with-claude/claude-on-vertex-ai
+description: Anthropic's Claude models are available through [Google Cloud's Agent Platform](https://cloud.google.com/vertex-ai).
 ---
 
 The API for accessing Claude on Google Cloud's Agent Platform is nearly identical to the [Messages API](../api/api-messages-create.md), with two key differences in request format:
@@ -51,20 +51,20 @@ First, install Anthropic's [client SDK](../general/general-cli-sdks-libraries-ov
   <Tab title="Java">
     <CodeGroup exclude="shell, python, typescript, csharp, go, php, ruby">
       ```groovy Gradle
-      implementation("com.anthropic:anthropic-java:2.52.0")
-      implementation("com.anthropic:anthropic-java-vertex:2.52.0")
+      implementation("com.anthropic:anthropic-java:2.53.0")
+      implementation("com.anthropic:anthropic-java-vertex:2.53.0")
       ```
 
       ```xml Maven
       <dependency>
           <groupId>com.anthropic</groupId>
           <artifactId>anthropic-java</artifactId>
-          <version>2.52.0</version>
+          <version>2.53.0</version>
       </dependency>
       <dependency>
           <groupId>com.anthropic</groupId>
           <artifactId>anthropic-java-vertex</artifactId>
-          <version>2.52.0</version>
+          <version>2.53.0</version>
       </dependency>
       ```
 

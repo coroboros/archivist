@@ -1,13 +1,13 @@
 ---
-title: "Tool use with prompt caching"
+title: "cache\_control on tool definitions"
 source: "https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-use-with-prompt-caching"
 category: "agents-and-tools"
 generated: true
 ---
-# Tool use with prompt caching
-
-Cache tool definitions across turns and understand what invalidates your cache.
-
+---
+title: Tool use with prompt caching
+url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-use-with-prompt-caching
+description: Cache tool definitions across turns and understand what invalidates your cache.
 ---
 
 This page covers prompt caching for tool definitions: where to place `cache_control` breakpoints, how `defer_loading` preserves your cache, and what invalidates it. For general prompt caching, see [Prompt caching](../build-with-claude/build-with-claude-prompt-caching.md).
@@ -60,15 +60,15 @@ This means adding tools dynamically through tool search does not break your cach
 
 The cache follows a prefix hierarchy (`tools` → `system` → `messages`), so a change at one level invalidates that level and everything after it:
 
-| Change                               | Invalidates                                                                                                                                                                                   |
-| ------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Modifying tool definitions           | Entire cache (tools, system, messages)                                                                                                                                                        |
-| Toggling web search or citations     | System and messages caches                                                                                                                                                                    |
-| Changing `tool_choice`               | Messages cache                                                                                                                                                                                |
-| Changing `disable_parallel_tool_use` | Messages cache                                                                                                                                                                                |
-| Toggling images present/absent       | Messages cache                                                                                                                                                                                |
+| Change                               | Invalidates                                                                                                                                                                                                              |
+| ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Modifying tool definitions           | Entire cache (tools, system, messages)                                                                                                                                                                                   |
+| Toggling web search or citations     | System and messages caches                                                                                                                                                                                               |
+| Changing `tool_choice`               | Messages cache                                                                                                                                                                                                           |
+| Changing `disable_parallel_tool_use` | Messages cache                                                                                                                                                                                                           |
+| Toggling images present/absent       | Messages cache                                                                                                                                                                                                           |
 | Changing thinking parameters         | Messages cache always; tool and system caches too on models that render the thinking configuration ahead of them ([details](../build-with-claude/build-with-claude-thinking.md#thinking-and-prompt-caching)) |
-| Changing `output_config.effort`      | Same as thinking parameters; setting the model's default explicitly is equivalent to omitting it                                                                                              |
+| Changing `output_config.effort`      | Same as thinking parameters; setting the model's default explicitly is equivalent to omitting it                                                                                                                         |
 
 <Note>
   If you need to vary `tool_choice` mid-conversation, consider placing cache breakpoints before the variation point.
@@ -84,8 +84,8 @@ This behavior only applies when your request already has at least one `cache_con
 
 ## Per-tool interaction table
 
-| Tool                                                                     | Caching considerations                                                    |
-| ------------------------------------------------------------------------ | ------------------------------------------------------------------------- |
+| Tool                                                                                                | Caching considerations                                                    |
+| --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
 | [Web search](./agents-and-tools-tool-use-web-search-tool.md)         | Enabling or disabling invalidates the system and messages caches          |
 | [Web fetch](./agents-and-tools-tool-use-web-fetch-tool.md)           | Enabling or disabling invalidates the system and messages caches          |
 | [Code execution](./agents-and-tools-tool-use-code-execution-tool.md) | Container state is independent of prompt cache                            |

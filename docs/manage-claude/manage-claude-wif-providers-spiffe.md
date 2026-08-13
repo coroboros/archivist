@@ -1,20 +1,20 @@
 ---
-title: "Use WIF with SPIFFE"
+title: "Replace NODE_UID with the node's UID:"
 source: "https://platform.claude.com/docs/en/manage-claude/wif-providers/spiffe"
 category: "manage-claude"
 generated: true
 ---
-# Use WIF with SPIFFE
-
-Authenticate SPIFFE workloads to the Claude API using JWT-SVIDs from SPIRE or any other SPIFFE-conformant issuer.
-
+---
+title: Use WIF with SPIFFE
+url: https://platform.claude.com/docs/en/manage-claude/wif-providers/spiffe
+description: Authenticate SPIFFE workloads to the Claude API using JWT-SVIDs from SPIRE or any other SPIFFE-conformant issuer.
 ---
 
 [SPIFFE](https://spiffe.io/) is the CNCF standard for issuing identity to workloads. [SPIRE](https://spiffe.io/docs/latest/spire-about/) is its open-source reference implementation, and several commercial products also issue SPIFFE-conformant identities. Anthropic federates with any SPIFFE implementation that emits OIDC-compatible JWT-SVIDs. For a current list of implementations, see [Commercial software that implements SPIFFE](https://spiffe.io/docs/latest/spiffe-about/overview/#commercial-software-that-implements-spiffe) on the SPIFFE project site.
 
 Federation works either through an OIDC discovery document at a public HTTPS URL (`discovery` mode, subject to the [URL constraints](./manage-claude-wif-reference.md#url-fields)) or by registering the JWKS directly (`inline` mode).
 
-The JWT-SVID spec defines `sub` as the workload's SPIFFE ID, and the SPIFFE Workload API requires the caller to supply `aud` at fetch time, so those claims are the same across implementations. Anthropic additionally requires `iss` and `iat`, neither of which the JWT-SVID spec mandates, so configure your implementation to populate both (in SPIRE, `iss` is the `jwt_issuer` server setting and `iat` is set automatically). With those in place, the [Configure Anthropic](#configure-anthropic), [Acquire and use the token](#acquire-and-use-the-token), and [Scope your rule](#scope-your-rule) sections of this guide apply to any SPIFFE implementation.
+The JWT-SVID spec defines `sub` as the workload's SPIFFE ID, and the SPIFFE Workload API requires the caller to supply `aud` at fetch time, so those claims are the same across implementations. Anthropic additionally requires `iss` and `iat`, neither of which the JWT-SVID spec mandates, so configure your implementation to populate both (in SPIRE, `iss` is the `jwt_issuer` server setting and `iat` is set automatically). With those in place, the [Configure Anthropic](./manage-claude-wif-providers-spiffe.md#configure-anthropic), [Acquire and use the token](./manage-claude-wif-providers-spiffe.md#acquire-and-use-the-token), and [Scope your rule](./manage-claude-wif-providers-spiffe.md#scope-your-rule) sections of this guide apply to any SPIFFE implementation.
 
 SPIFFE assigns every workload a stable identity URI of the form `spiffe://<trust-domain>/<path>`, and SPIRE issues that identity as a JWT-SVID on demand through the Workload API. A JWT-SVID is an ordinary signed JWT whose `sub` claim is the workload's SPIFFE ID and whose `aud` claim is supplied by the workload at fetch time.
 
@@ -39,7 +39,7 @@ The audience value to request when fetching a JWT-SVID is always `https://api.an
 
 ## Configure SPIRE
 
-The instructions in this section are SPIRE-specific. If you use a different SPIFFE issuer, configure its OIDC discovery endpoint and JWT-SVID retrieval according to its own documentation, then continue at [Configure Anthropic](#configure-anthropic).
+The instructions in this section are SPIRE-specific. If you use a different SPIFFE issuer, configure its OIDC discovery endpoint and JWT-SVID retrieval according to its own documentation, then continue at [Configure Anthropic](./manage-claude-wif-providers-spiffe.md#configure-anthropic).
 
 If you already run SPIRE with the OIDC Discovery Provider, federating with Anthropic requires three things on the SPIRE side: a `jwt_issuer` that matches the discovery URL, a registration entry for the workload that will call the Claude API, and a way for that workload to fetch a JWT-SVID with the Anthropic audience. The following subsections walk through each. The configuration snippets show only the settings relevant to Anthropic federation, not complete SPIRE deployment configs.
 
@@ -53,7 +53,7 @@ Anthropic validates a JWT-SVID by matching its `iss` claim against a registered 
 
 The trust domain and the issuer URL are independent. The trust domain (`spiffe://prod.example.com`) scopes the `sub` claim. The issuer URL (`https://oidc-discovery.prod.example.com`) is where Anthropic fetches signing keys. They do not need to share a hostname.
 
-Confirm `jwt_issuer` is set in SPIRE Server's configuration and points at the discovery provider's public URL. The following example also shows a default JWT-SVID lifetime. SPIRE's built-in default is 5 minutes, which is short enough that continuous rotation is required (see [Run spiffe-helper](#run-spiffe-helper)). Anthropic's token-exchange endpoint rejects any identity token whose lifetime exceeds the federation issuer's configured maximum, which is 1 hour by default (see [Validation rules](./manage-claude-wif-reference.md#validation-rules)). This check applies to every SPIFFE implementation, not only SPIRE, so keep `default_jwt_svid_ttl` (or any per-entry override) at or below that maximum.
+Confirm `jwt_issuer` is set in SPIRE Server's configuration and points at the discovery provider's public URL. The following example also shows a default JWT-SVID lifetime. SPIRE's built-in default is 5 minutes, which is short enough that continuous rotation is required (see [Run spiffe-helper](./manage-claude-wif-providers-spiffe.md#run-spiffe-helper)). Anthropic's token-exchange endpoint rejects any identity token whose lifetime exceeds the federation issuer's configured maximum, which is 1 hour by default (see [Validation rules](./manage-claude-wif-reference.md#validation-rules)). This check applies to every SPIFFE implementation, not only SPIRE, so keep `default_jwt_svid_ttl` (or any per-entry override) at or below that maximum.
 
 ```text server.conf
 server {
@@ -466,7 +466,7 @@ spire-agent api fetch jwt \
   | jq -rR 'split(".")[1] | gsub("-";"+") | gsub("_";"/") | @base64d | fromjson'
 ```
 
-The `-output json` flag returns the SVID response and bundle response as a two-element JSON array, so `jq -r '.[0].svids[0].svid'` extracts the bare token. On older SPIRE versions without `-output`, the command prints a labeled block instead. In that case, pipe the default output through `awk '/^[[:space:]]*eyJ/{print $1; exit}'` to extract the token line. Check that `iss` is the OIDC Discovery Provider URL you registered, `sub` is the workload's SPIFFE ID, and `aud` contains `https://api.anthropic.com`. Then run the cURL example from [Acquire and use the token](#acquire-and-use-the-token). A successful exchange returns an `access_token` beginning with `sk-ant-oat01-`. On `400 invalid_grant`, see [Troubleshoot a failed exchange](./manage-claude-wif-reference.md#troubleshoot-a-failed-exchange). The most common SPIRE-side cause is a mismatch between SPIRE Server's `jwt_issuer` and the URL registered as the federation issuer.
+The `-output json` flag returns the SVID response and bundle response as a two-element JSON array, so `jq -r '.[0].svids[0].svid'` extracts the bare token. On older SPIRE versions without `-output`, the command prints a labeled block instead. In that case, pipe the default output through `awk '/^[[:space:]]*eyJ/{print $1; exit}'` to extract the token line. Check that `iss` is the OIDC Discovery Provider URL you registered, `sub` is the workload's SPIFFE ID, and `aud` contains `https://api.anthropic.com`. Then run the cURL example from [Acquire and use the token](./manage-claude-wif-providers-spiffe.md#acquire-and-use-the-token). A successful exchange returns an `access_token` beginning with `sk-ant-oat01-`. On `400 invalid_grant`, see [Troubleshoot a failed exchange](./manage-claude-wif-reference.md#troubleshoot-a-failed-exchange). The most common SPIRE-side cause is a mismatch between SPIRE Server's `jwt_issuer` and the URL registered as the federation issuer.
 
 ## Scope your rule
 

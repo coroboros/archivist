@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/php/beta/messages/count_tokens"
 category: "api"
 generated: true
 ---
+---
+title: Count tokens in a Message
+url: https://platform.claude.com/docs/en/api/php/beta/messages/count_tokens
+---
+
 ## Count tokens in a Message
 
 `$client->beta->messages->countTokens(list<BetaMessageParam> messages, Model model, ?BetaCacheControlEphemeral cacheControl, ?BetaContextManagementConfig contextManagement, ?list<BetaRequestMCPServerURLDefinition> mcpServers, ?BetaOutputConfig outputConfig, ?BetaJSONOutputFormat outputFormat, ?Speed speed, ?System system, ?BetaThinkingConfigParam thinking, ?BetaToolChoice toolChoice, ?list<Tool> tools, ?list<AnthropicBeta> betas, ?string userProfileID): BetaMessageTokensCount`
@@ -216,7 +221,7 @@ $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaMessageTokensCount = $client->beta->messages->countTokens(
   messages: [['content' => 'Hello, world', 'role' => 'user']],
-  model: 'claude-opus-4-6',
+  model: Model::CLAUDE_OPUS_4_6,
   cacheControl: ['type' => 'ephemeral', 'ttl' => '5m'],
   contextManagement: [
     'edits' => [
@@ -283,7 +288,7 @@ $betaMessageTokensCount = $client->beta->messages->countTokens(
       'type' => 'custom',
     ],
   ],
-  betas: ['message-batches-2024-09-24'],
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
   userProfileID: 'anthropic-user-profile-id',
 );
 

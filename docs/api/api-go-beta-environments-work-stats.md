@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/go/beta/environments/work/stats
 category: "api"
 generated: true
 ---
+---
+title: Get Queue Statistics
+url: https://platform.claude.com/docs/en/api/go/beta/environments/work/stats
+---
+
 ## Get Queue Statistics
 
 `client.Beta.Environments.Work.Stats(ctx, environmentID, query) (*BetaSelfHostedWorkQueueStats, error)`
@@ -89,6 +94,8 @@ Get statistics about the work queue for an environment.
       - `const AnthropicBetaFallbackCredit2026_07_01 AnthropicBeta = "fallback-credit-2026-07-01"`
 
       - `const AnthropicBetaAgentMemory2026_07_22 AnthropicBeta = "agent-memory-2026-07-22"`
+
+      - `const AnthropicBetaMidConversationToolChanges2026_07_01 AnthropicBeta = "mid-conversation-tool-changes-2026-07-01"`
 
 ### Returns
 

@@ -1,13 +1,13 @@
 ---
-title: "Tutorial: Build a tool-using agent"
+title: "Ring 1: Single tool, single turn"
 source: "https://platform.claude.com/docs/en/agents-and-tools/tool-use/build-a-tool-using-agent"
 category: "agents-and-tools"
 generated: true
 ---
-# Tutorial: Build a tool-using agent
-
-A guided walkthrough from a single tool call to a production-ready agentic loop.
-
+---
+title: "Tutorial: Build a tool-using agent"
+url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/build-a-tool-using-agent
+description: A guided walkthrough from a single tool call to a production-ready agentic loop.
 ---
 
 This tutorial builds a calendar-management agent in five concentric rings. Each ring is a complete, runnable program that adds exactly one concept to the ring before it. By the end you will have written the agentic loop by hand and then replaced it with the Tool Runner SDK abstraction.

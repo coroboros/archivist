@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/spend_limits/delete"
 category: "api"
 generated: true
 ---
+---
+title: Delete Spend Limit
+url: https://platform.claude.com/docs/en/api/admin/spend_limits/delete
+---
+
 ## Delete Spend Limit
 
 **delete** `/v1/organizations/spend_limits/{spend_limit_id}`

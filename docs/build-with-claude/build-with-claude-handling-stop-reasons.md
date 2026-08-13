@@ -1,13 +1,13 @@
 ---
-title: "Stop reasons and fallback"
+title: "Quick reference"
 source: "https://platform.claude.com/docs/en/build-with-claude/handling-stop-reasons"
 category: "build-with-claude"
 generated: true
 ---
-# Stop reasons and fallback
-
-Learn what each stop_reason value means and how to handle truncation, tool use, paused turns, and refusals in your application.
-
+---
+title: Stop reasons and fallback
+url: https://platform.claude.com/docs/en/build-with-claude/handling-stop-reasons
+description: Learn what each stop_reason value means and how to handle truncation, tool use, paused turns, and refusals in your application.
 ---
 
 Every Messages API response includes a `stop_reason` field that tells you why Claude stopped generating. Check this field to decide whether to use the response as-is, continue the conversation, retry, or fall back to another model.
@@ -16,15 +16,15 @@ For the full response schema, see the [Messages API reference](../api/api-messag
 
 ## Quick reference
 
-| Value                                                             | When it occurs                                  | What to do                                                                                                           |
-| ----------------------------------------------------------------- | ----------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| [`end_turn`](#end-turn)                                           | Claude finished its response naturally.         | Use the response.                                                                                                    |
-| [`max_tokens`](#max-tokens)                                       | The response reached your `max_tokens` limit.   | Raise `max_tokens` or [continue the response](#ensuring-complete-responses).                                         |
-| [`stop_sequence`](#stop-sequence)                                 | Claude emitted one of your `stop_sequences`.    | Read `stop_sequence` to see which one fired.                                                                         |
-| [`tool_use`](#tool-use)                                           | Claude is calling a tool.                       | Run the tool and return the result. A server tool call still missing its result block completes in a later response. |
-| [`pause_turn`](#pause-turn)                                       | A server-tool loop reached its iteration limit. | Send the assistant content back to continue.                                                                         |
-| [`refusal`](#refusal)                                             | Claude declined to respond.                     | Read `stop_details` and [retry on a fallback model](./build-with-claude-refusals-and-fallback.md).               |
-| [`model_context_window_exceeded`](#model-context-window-exceeded) | The response filled the model's context window. | Treat the response as truncated.                                                                                     |
+| Value                                                                                                                                        | When it occurs                                  | What to do                                                                                                                                              |
+| -------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`end_turn`](./build-with-claude-handling-stop-reasons.md#end-turn)                                           | Claude finished its response naturally.         | Use the response.                                                                                                                                       |
+| [`max_tokens`](./build-with-claude-handling-stop-reasons.md#max-tokens)                                       | The response reached your `max_tokens` limit.   | Raise `max_tokens` or [continue the response](./build-with-claude-handling-stop-reasons.md#ensuring-complete-responses). |
+| [`stop_sequence`](./build-with-claude-handling-stop-reasons.md#stop-sequence)                                 | Claude emitted one of your `stop_sequences`.    | Read `stop_sequence` to see which one fired.                                                                                                            |
+| [`tool_use`](./build-with-claude-handling-stop-reasons.md#tool-use)                                           | Claude is calling a tool.                       | Run the tool and return the result. A server tool call still missing its result block completes in a later response.                                    |
+| [`pause_turn`](./build-with-claude-handling-stop-reasons.md#pause-turn)                                       | A server-tool loop reached its iteration limit. | Send the assistant content back to continue.                                                                                                            |
+| [`refusal`](./build-with-claude-handling-stop-reasons.md#refusal)                                             | Claude declined to respond.                     | Read `stop_details` and [retry on a fallback model](./build-with-claude-refusals-and-fallback.md).                       |
+| [`model_context_window_exceeded`](./build-with-claude-handling-stop-reasons.md#model-context-window-exceeded) | The response filled the model's context window. | Treat the response as truncated.                                                                                                                        |
 
 ## The stop\_reason field
 
@@ -1552,7 +1552,7 @@ Leaving out a `tool_result`, or putting one after other content, fails earlier w
 
 Returned when the server-side sampling loop reaches its iteration limit while executing [server tools](../agents-and-tools/agents-and-tools-tool-use-server-tools.md) such as web search. The default limit is 10 iterations per request.
 
-When this happens, the response may contain a `server_tool_use` block without a corresponding result block. To let Claude finish processing, continue the conversation by sending the response back as-is. A response that leaves a client `tool_use` block waiting on you never has a `stop_reason` of `pause_turn`: when Claude stops to call your tools, `stop_reason` is [`tool_use`](#tool-use), and you continue it by sending the client `tool_result` blocks instead of the response itself.
+When this happens, the response may contain a `server_tool_use` block without a corresponding result block. To let Claude finish processing, continue the conversation by sending the response back as-is. A response that leaves a client `tool_use` block waiting on you never has a `stop_reason` of `pause_turn`: when Claude stops to call your tools, `stop_reason` is [`tool_use`](./build-with-claude-handling-stop-reasons.md#tool-use), and you continue it by sending the client `tool_result` blocks instead of the response itself.
 
 <CodeGroup>
   ```bash cURL
@@ -1917,7 +1917,7 @@ Claude declined to generate a response. Safety classifiers return this stop reas
 </CodeGroup>
 
 <Tip>
-  If you encounter `refusal` stop reasons frequently while using Claude Sonnet 4.5 or Opus 4.1 (retired, except on Bedrock and Google Cloud; see [Model deprecations](../about-claude/about-claude-model-deprecations.md)), you can try updating your API calls to use Haiku 4.5 (`claude-haiku-4-5-20251001`), which has different usage restrictions. Learn more about [understanding Sonnet 4.5's API safety filters](https://support.claude.com/en/articles/12449294-understanding-sonnet-4-5-s-api-safety-filters).
+  If you encounter `refusal` stop reasons frequently while using Claude Sonnet 4.5 or Claude Opus 4.1 (the latter [retired, except on Bedrock and Google Cloud](../about-claude/about-claude-model-deprecations.md)), you can try updating your API calls to use Haiku 4.5 (`claude-haiku-4-5-20251001`), which has different usage restrictions. Learn more about [understanding Sonnet 4.5's API safety filters](https://support.claude.com/en/articles/12449294-understanding-sonnet-4-5-s-api-safety-filters).
 </Tip>
 
 On a refusal, the `stop_details` object identifies the policy category that triggered it. The categories and the full refusal response shape are covered on [Refusals and fallback](./build-with-claude-refusals-and-fallback.md#refusal-response). `stop_details` is `null` for all stop reasons other than `refusal`.
@@ -2223,7 +2223,7 @@ Make it a habit to check the `stop_reason` in your response handling logic:
 
 ### Handle truncated responses gracefully
 
-When a response is truncated because of token limits or the context window, append a notice so the reader knows the output is incomplete. To continue generating from where the response left off instead, see [Ensuring complete responses](#ensuring-complete-responses).
+When a response is truncated because of token limits or the context window, append a notice so the reader knows the output is incomplete. To continue generating from where the response left off instead, see [Ensuring complete responses](./build-with-claude-handling-stop-reasons.md#ensuring-complete-responses).
 
 <CodeGroup exclude="shell">
   ```python Python

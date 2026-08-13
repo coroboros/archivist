@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/php/beta/user_profiles/update"
 category: "api"
 generated: true
 ---
+---
+title: Update User Profile
+url: https://platform.claude.com/docs/en/api/php/beta/user_profiles/update
+---
+
 ## Update User Profile
 
 `$client->beta->userProfiles->update(string userProfileID, ?string externalID, ?array<string,string> metadata, ?string name, ?Relationship relationship, ?list<AnthropicBeta> betas): BetaUserProfile`
@@ -91,7 +96,7 @@ $betaUserProfile = $client->beta->userProfiles->update(
   metadata: ['foo' => 'string'],
   name: 'x',
   relationship: 'external',
-  betas: ['message-batches-2024-09-24'],
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
 );
 
 var_dump($betaUserProfile);

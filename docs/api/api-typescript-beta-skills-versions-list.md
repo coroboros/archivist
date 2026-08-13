@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/typescript/beta/skills/versions
 category: "api"
 generated: true
 ---
+---
+title: List Skill Versions
+url: https://platform.claude.com/docs/en/api/typescript/beta/skills/versions/list
+---
+
 ## List Skill Versions
 
 `client.beta.skills.versions.list(stringskillID, VersionListParamsparams?, RequestOptionsoptions?): PageCursor<VersionListResponse>`
@@ -38,7 +43,7 @@ List Skill Versions
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 29 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -104,6 +109,8 @@ List Skill Versions
 
       - `"agent-memory-2026-07-22"`
 
+      - `"mid-conversation-tool-changes-2026-07-01"`
+
 ### Returns
 
 - `VersionListResponse`
@@ -155,14 +162,14 @@ List Skill Versions
 ### Example
 
 ```typescript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic({
-  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
+  apiKey: process.env["ANTHROPIC_API_KEY"] // This is the default and can be omitted
 });
 
 // Automatically fetches more pages as needed.
-for await (const versionListResponse of client.beta.skills.versions.list('skill_id')) {
+for await (const versionListResponse of client.beta.skills.versions.list("skill_id")) {
   console.log(versionListResponse.id);
 }
 ```

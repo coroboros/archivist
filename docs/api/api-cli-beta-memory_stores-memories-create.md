@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/cli/beta/memory_stores/memories
 category: "api"
 generated: true
 ---
+---
+title: Create a memory
+url: https://platform.claude.com/docs/en/api/cli/beta/memory_stores/memories/create
+---
+
 ## Create a memory
 
 `$ ant beta:memory-stores:memories create`

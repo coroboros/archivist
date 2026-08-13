@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/csharp/beta/deployments/run"
 category: "api"
 generated: true
 ---
+---
+title: Run Deployment Now
+url: https://platform.claude.com/docs/en/api/csharp/beta/deployments/run
+---
+
 ## Run Deployment Now
 
 `BetaManagedAgentsDeploymentRun Beta.Deployments.Run(DeploymentRunParamsparameters, CancellationTokencancellationToken = default)`
@@ -87,6 +92,8 @@ Run Deployment Now
     - `"fallback-credit-2026-07-01"FallbackCredit2026_07_01`
 
     - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
+
+    - `"mid-conversation-tool-changes-2026-07-01"MidConversationToolChanges2026_07_01`
 
 ### Returns
 

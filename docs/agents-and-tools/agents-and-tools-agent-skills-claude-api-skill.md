@@ -1,13 +1,13 @@
 ---
-title: "Claude API skill"
+title: "What the skill provides"
 source: "https://platform.claude.com/docs/en/agents-and-tools/agent-skills/claude-api-skill"
 category: "agents-and-tools"
 generated: true
 ---
-# Claude API skill
-
-An open-source Agent Skill that provides Claude with up-to-date API reference material, SDK documentation, and best practices for building applications with the Claude API and Claude Managed Agents.
-
+---
+title: Claude API skill
+url: https://platform.claude.com/docs/en/agents-and-tools/agent-skills/claude-api-skill
+description: An open-source Agent Skill that provides Claude with up-to-date API reference material, SDK documentation, and best practices for building applications with the Claude API and Claude Managed Agents.
 ---
 
 The `claude-api` skill is an open-source [Agent Skill](./agents-and-tools-agent-skills-overview.md) that provides Claude with detailed, up-to-date reference material for building applications on two Anthropic surfaces:

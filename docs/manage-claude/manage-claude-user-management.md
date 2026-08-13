@@ -1,13 +1,13 @@
 ---
-title: "User management"
+title: "Which endpoints can your organization use?"
 source: "https://platform.claude.com/docs/en/manage-claude/user-management"
 category: "manage-claude"
 generated: true
 ---
-# User management
-
-Manage the people in your Claude Enterprise organization with the Admin API: list members and change roles, send and withdraw invites, manage groups, and read custom roles.
-
+---
+title: User management
+url: https://platform.claude.com/docs/en/manage-claude/user-management
+description: "Manage the people in your Claude Enterprise organization with the Admin API: list members and change roles, send and withdraw invites, manage groups, and read custom roles."
 ---
 
 This page covers managing the people in your **Claude Enterprise** (claude.ai) organization programmatically, using the [Admin API](../api/api-admin.md): list members and look them up by email address, change a member's role, remove members, send and withdraw invites, manage your enterprise's groups and their membership, and read your organization's custom roles. For Claude Console (Claude Platform) organizations, see the [Admin API guide for Claude Console](./manage-claude-admin-api.md).
@@ -20,15 +20,15 @@ This page covers managing the people in your **Claude Enterprise** (claude.ai) o
 
 The Admin API is a single set of endpoints under `https://api.anthropic.com/v1/organizations/`. Claude Console and Claude Enterprise organizations authenticate with [different keys](./manage-claude-admin-api-keys.md) and each have access to a different subset of the endpoints:
 
-| Endpoints                                                                                                                                                                                                                                                                                                          | Claude Console (Claude Platform)                                       | Claude Enterprise (claude.ai)   |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------- | ------------------------------- |
-| [Members](#members) and [invites](#invites)                                                                                                                                                                                                                                                                        | Available; see the [Admin API guide](./manage-claude-admin-api.md) | **Beta** (this page)            |
-| [Groups](#groups)                                                                                                                                                                                                                                                                                                  | Not available                                                          | **Beta** (this page)            |
-| [Custom roles](#custom-roles)                                                                                                                                                                                                                                                                                      | Not available                                                          | **Beta**, read-only (this page) |
-| [Spend limits](./manage-claude-spend-limits-api.md)                                                                                                                                                                                                                                                            | Not available                                                          | Available                       |
-| [Workspaces](./manage-claude-workspaces.md), [API keys](./manage-claude-admin-api.md#api-keys), [usage and cost reports](./manage-claude-usage-cost-api.md), [rate limits](./manage-claude-rate-limits-api.md), and the other endpoints in the [Admin API guide](./manage-claude-admin-api.md) | Available                                                              | Not available                   |
+| Endpoints                                                                                                                                                                                                                                                                                                                                                                                                                                                 | Claude Console (Claude Platform)                                                                  | Claude Enterprise (claude.ai)   |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------- |
+| [Members](./manage-claude-user-management.md#members) and [invites](./manage-claude-user-management.md#invites)                                                                                                                                                                                                                                                                             | Available; see the [Admin API guide](./manage-claude-admin-api.md) | **Beta** (this page)            |
+| [Groups](./manage-claude-user-management.md#groups)                                                                                                                                                                                                                                                                                                                                                                        | Not available                                                                                     | **Beta** (this page)            |
+| [Custom roles](./manage-claude-user-management.md#custom-roles)                                                                                                                                                                                                                                                                                                                                                            | Not available                                                                                     | **Beta**, read-only (this page) |
+| [Spend limits](./manage-claude-spend-limits-api.md)                                                                                                                                                                                                                                                                                                                                                                        | Not available                                                                                     | Available                       |
+| [Workspaces](./manage-claude-workspaces.md), [API keys](./manage-claude-admin-api.md#api-keys), [usage and cost reports](./manage-claude-usage-cost-api.md), [rate limits](./manage-claude-rate-limits-api.md), and the other endpoints in the [Admin API guide](./manage-claude-admin-api.md) | Available                                                                                         | Not available                   |
 
-Members and invites are the same endpoints for both organization types; this page documents their Claude Enterprise behavior, including the Claude Enterprise [organization roles](#organization-roles). The group and custom-role endpoints exist only for Claude Enterprise.
+Members and invites are the same endpoints for both organization types; this page documents their Claude Enterprise behavior, including the Claude Enterprise [organization roles](./manage-claude-user-management.md#organization-roles). The group and custom-role endpoints exist only for Claude Enterprise.
 
 <Check>
   **Scoped Admin API key required**
@@ -102,7 +102,7 @@ If your organization's plan draws members from a finite pool of purchased seats,
 
 ### Groups and roles
 
-Groups connect members to custom roles (role-based access control, the `rbac` in the endpoint paths and scope names). Groups are owned by your enterprise as a whole (the parent organization together with every organization under it) rather than by a single organization, so the group scopes (`read:rbac_groups` and `write:rbac_groups`) require a key created for all linked organizations. Each group carries a `source_type`: `direct` for groups created in claude.ai, `scim` for groups provisioned by your identity provider. A group's `roles` field lists the IDs of the custom roles attached to it; resolve them to names and permissions with the [custom role endpoints](#custom-roles), noting that the role catalog is per-organization while groups are enterprise-wide, so fetching a role that belongs to a different organization of your enterprise returns 404 for your key. The field is `null` (rather than `[]`) when role data was temporarily unavailable, so retry to distinguish a degraded read from a group with no roles.
+Groups connect members to custom roles (role-based access control, the `rbac` in the endpoint paths and scope names). Groups are owned by your enterprise as a whole (the parent organization together with every organization under it) rather than by a single organization, so the group scopes (`read:rbac_groups` and `write:rbac_groups`) require a key created for all linked organizations. Each group carries a `source_type`: `direct` for groups created in claude.ai, `scim` for groups provisioned by your identity provider. A group's `roles` field lists the IDs of the custom roles attached to it; resolve them to names and permissions with the [custom role endpoints](./manage-claude-user-management.md#custom-roles), noting that the role catalog is per-organization while groups are enterprise-wide, so fetching a role that belongs to a different organization of your enterprise returns 404 for your key. The field is `null` (rather than `[]`) when role data was temporarily unavailable, so retry to distinguish a degraded read from a group with no roles.
 
 ## Rate limits
 
@@ -384,7 +384,7 @@ curl "https://api.anthropic.com/v1/organizations/rbac_groups/rbac_group_01UvWxYz
 
 ### Add a member to a group
 
-`POST /v1/organizations/rbac_groups/{group_id}/members` adds an organization member to the group by `user_id`. The user must already be a member of one of your enterprise's organizations (the request returns 404 otherwise), and adding someone who is already in the group returns 400. For `scim` groups, membership is managed in your identity provider and this request returns 400. To assign groups to a person who has not joined yet, use `rbac_group_ids` on [invite creation](#create-an-invite) instead. Requires the `write:rbac_groups` scope.
+`POST /v1/organizations/rbac_groups/{group_id}/members` adds an organization member to the group by `user_id`. The user must already be a member of one of your enterprise's organizations (the request returns 404 otherwise), and adding someone who is already in the group returns 400. For `scim` groups, membership is managed in your identity provider and this request returns 400. To assign groups to a person who has not joined yet, use `rbac_group_ids` on [invite creation](./manage-claude-user-management.md#create-an-invite) instead. Requires the `write:rbac_groups` scope.
 
 For complete parameter details and response schemas, see [Add group member](../api/api-admin-rbac_groups-members-create.md) in the API reference.
 
@@ -538,7 +538,7 @@ curl "https://api.anthropic.com/v1/organizations/rbac_roles/rbac_role_01CdEfGhIj
 
 ### Is this a different API from the Admin API?
 
-No. The member and invite endpoints are the same `/v1/organizations/` endpoints that Claude Console organizations use; this page documents their Claude Enterprise behavior. The group and custom-role endpoints are part of the same API and exist only for Claude Enterprise organizations. The [availability table](#which-endpoints-can-your-organization-use) shows which endpoints each organization type can call.
+No. The member and invite endpoints are the same `/v1/organizations/` endpoints that Claude Console organizations use; this page documents their Claude Enterprise behavior. The group and custom-role endpoints are part of the same API and exist only for Claude Enterprise organizations. The [availability table](./manage-claude-user-management.md#which-endpoints-can-your-organization-use) shows which endpoints each organization type can call.
 
 ### Can I assign the owner or membership admin role through the API?
 
@@ -546,7 +546,7 @@ No. The API assigns only `user` and `managed`, on invite creation and role updat
 
 ### Can I create or modify groups through the API?
 
-Yes, with the `write:rbac_groups` scope: create, rename, and delete groups, and add or remove their members. Two things the API cannot change: groups provisioned by your identity provider (`source_type: "scim"`), whose name and membership are owned by the identity provider, and custom roles, which are managed in claude.ai organization settings (the API [reads them](#custom-roles)).
+Yes, with the `write:rbac_groups` scope: create, rename, and delete groups, and add or remove their members. Two things the API cannot change: groups provisioned by your identity provider (`source_type: "scim"`), whose name and membership are owned by the identity provider, and custom roles, which are managed in claude.ai organization settings (the API [reads them](./manage-claude-user-management.md#custom-roles)).
 
 ### Does an unaccepted invite consume a seat?
 

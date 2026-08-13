@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/cli/beta/skills/versions/delete
 category: "api"
 generated: true
 ---
+---
+title: Delete Skill Version
+url: https://platform.claude.com/docs/en/api/cli/beta/skills/versions/delete
+---
+
 ## Delete Skill Version
 
 `$ ant beta:skills:versions delete`

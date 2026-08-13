@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/php/beta/environments/work/stop
 category: "api"
 generated: true
 ---
+---
+title: Stop Work
+url: https://platform.claude.com/docs/en/api/php/beta/environments/work/stop
+---
+
 ## Stop Work
 
 `$client->beta->environments->work->stop(string workID, string environmentID, ?bool force, ?list<AnthropicBeta> betas): SelfHostedWork`
@@ -97,7 +102,7 @@ $betaSelfHostedWork = $client->beta->environments->work->stop(
   'work_id',
   environmentID: 'env_011CZkZ9X2dpNyB7HsEFoRfW',
   force: true,
-  betas: ['message-batches-2024-09-24'],
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
 );
 
 var_dump($betaSelfHostedWork);

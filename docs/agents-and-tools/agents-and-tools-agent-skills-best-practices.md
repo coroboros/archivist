@@ -1,13 +1,13 @@
 ---
-title: "Skill authoring best practices"
+title: "PDF Processing"
 source: "https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices"
 category: "agents-and-tools"
 generated: true
 ---
-# Skill authoring best practices
-
-Learn how to write effective Skills that Claude can discover and use successfully.
-
+---
+title: Skill authoring best practices
+url: https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices
+description: Learn how to write effective Skills that Claude can discover and use successfully.
 ---
 
 Good Skills are concise, well-structured, and tested with real usage. This guide provides practical authoring decisions to help you write Skills that Claude can discover and use effectively.
@@ -268,11 +268,11 @@ SKILL.md serves as an overview that points Claude to detailed materials as neede
 
 A basic Skill starts with just a SKILL.md file containing metadata and instructions:
 
-![Simple SKILL.md file showing YAML frontmatter and markdown body](/docs/images/agent-skills-simple-file.png)
+![Simple SKILL.md file showing YAML frontmatter and markdown body](https://platform.claude.com/docs/images/agent-skills-simple-file.png)
 
 As your Skill grows, you can bundle additional content that Claude loads only when needed:
 
-![Bundling additional reference files like reference.md and forms.md.](/docs/images/agent-skills-bundling-content.png)
+![Bundling additional reference files like reference.md and forms.md.](https://platform.claude.com/docs/images/agent-skills-bundling-content.png)
 
 The complete Skill directory structure might look like this:
 
@@ -427,7 +427,7 @@ For reference files longer than 100 lines, include a table of contents at the to
 
 Claude can then read the complete file or jump to specific sections as needed.
 
-For details on how this filesystem-based architecture enables progressive disclosure, see the [Runtime environment](#runtime-environment) section later in this guide.
+For details on how this filesystem-based architecture enables progressive disclosure, see the [Runtime environment](./agents-and-tools-agent-skills-best-practices.md#runtime-environment) section later in this guide.
 
 ## Workflows and feedback loops
 
@@ -872,7 +872,7 @@ For scanned PDFs requiring OCR, use pdf2image with pytesseract instead."
 
 ## Advanced: Skills with executable code
 
-The following sections focus on Skills that include executable scripts. If your Skill uses only markdown instructions, skip to [Checklist for effective Skills](#checklist-for-effective-skills).
+The following sections focus on Skills that include executable scripts. If your Skill uses only markdown instructions, skip to [Checklist for effective Skills](./agents-and-tools-agent-skills-best-practices.md#checklist-for-effective-skills).
 
 ### Solve, don't defer
 
@@ -938,7 +938,7 @@ Even if Claude could write a script, pre-made scripts offer advantages:
 * Save time (no code generation required)
 * Ensure consistency across uses
 
-![Bundling executable scripts alongside instruction files](/docs/images/agent-skills-executable-scripts.png)
+![Bundling executable scripts alongside instruction files](https://platform.claude.com/docs/images/agent-skills-executable-scripts.png)
 
 The preceding diagram shows how executable scripts work alongside instruction files. The instruction file (forms.md) references the script, and Claude can execute it without loading its contents into context.
 
@@ -947,7 +947,7 @@ The preceding diagram shows how executable scripts work alongside instruction fi
 * **Execute the script** (most common): "Run `analyze_form.py` to extract fields"
 * **Read it as reference** (for complex logic): "See `analyze_form.py` for the field extraction algorithm"
 
-For most utility scripts, execution is preferred because it's more reliable and efficient. See the following [Runtime environment](#runtime-environment) section for details on how script execution works.
+For most utility scripts, execution is preferred because it's more reliable and efficient. See the following [Runtime environment](./agents-and-tools-agent-skills-best-practices.md#runtime-environment) section for details on how script execution works.
 
 **Example:**
 

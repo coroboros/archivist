@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/python/beta/vaults/update"
 category: "api"
 generated: true
 ---
+---
+title: Update Vault
+url: https://platform.claude.com/docs/en/api/python/beta/vaults/update
+---
+
 ## Update Vault
 
 `beta.vaults.update(strvault_id, VaultUpdateParams**kwargs)  -> BetaManagedAgentsVault`
@@ -30,7 +35,7 @@ Update Vault
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 29 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 30 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -95,6 +100,8 @@ Update Vault
     - `"fallback-credit-2026-07-01"`
 
     - `"agent-memory-2026-07-22"`
+
+    - `"mid-conversation-tool-changes-2026-07-01"`
 
 ### Returns
 

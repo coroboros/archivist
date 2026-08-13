@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/csharp/beta/user_profiles/list"
 category: "api"
 generated: true
 ---
+---
+title: List User Profiles
+url: https://platform.claude.com/docs/en/api/csharp/beta/user_profiles/list
+---
+
 ## List User Profiles
 
 `UserProfileListPageResponse Beta.UserProfiles.List(UserProfileListParams?parameters, CancellationTokencancellationToken = default)`
@@ -99,6 +104,8 @@ List User Profiles
     - `"fallback-credit-2026-07-01"FallbackCredit2026_07_01`
 
     - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
+
+    - `"mid-conversation-tool-changes-2026-07-01"MidConversationToolChanges2026_07_01`
 
 ### Returns
 

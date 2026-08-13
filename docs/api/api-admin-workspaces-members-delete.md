@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/workspaces/members/delete
 category: "api"
 generated: true
 ---
+---
+title: Delete Workspace Member
+url: https://platform.claude.com/docs/en/api/admin/workspaces/members/delete
+---
+
 ## Delete Workspace Member
 
 **delete** `/v1/organizations/workspaces/{workspace_id}/members/{user_id}`

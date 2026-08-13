@@ -1,13 +1,13 @@
 ---
-title: "Dreams"
+title: "How it works"
 source: "https://platform.claude.com/docs/en/managed-agents/dreams"
 category: "managed-agents"
 generated: true
 ---
-# Dreams
-
-Let Claude reflect on past sessions to curate an agent's memory and surface new insights.
-
+---
+title: Dreams
+url: https://platform.claude.com/docs/en/managed-agents/dreams
+description: Let Claude reflect on past sessions to curate an agent's memory and surface new insights.
 ---
 
 <Tip>
@@ -36,7 +36,7 @@ The dream produces another **output memory store**, separate from the input. The
 ## Create a dream
 
 <CodeGroup>
-  ```bash curl
+  ```bash cURL
   dream=$(curl -s https://api.anthropic.com/v1/dreams \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
@@ -170,7 +170,7 @@ The dream produces another **output memory store**, separate from the input. The
   ```
 </CodeGroup>
 
-Dreaming inputs include the pre-existing memory store and an array of sessions. The selected model runs the dreaming pipeline; during the research preview `claude-opus-5`, `claude-fable-5`, `claude-opus-4-8`, `claude-opus-4-7`, `claude-sonnet-5`, and `claude-sonnet-4-6` are supported. You can optionally pass `instructions` to steer the dreaming process; see [Steer with instructions](#steer-with-instructions).
+Dreaming inputs include the pre-existing memory store and an array of sessions. The selected model runs the dreaming pipeline; during the research preview `claude-opus-5`, `claude-fable-5`, `claude-opus-4-8`, `claude-opus-4-7`, `claude-sonnet-5`, and `claude-sonnet-4-6` are supported. You can optionally pass `instructions` to steer the dreaming process; see [Steer with instructions](./managed-agents-dreams.md#steer-with-instructions).
 
 The response is the full `dream` resource with `status: "pending"`:
 
@@ -215,7 +215,7 @@ Use `instructions` for high-level synthesis guidance such as focus areas ("focus
 Dreams run asynchronously and typically take minutes to a few hours, driven by the number of input transcripts. Poll the dream by ID to check status:
 
 <CodeGroup>
-  ```bash curl
+  ```bash cURL
   while true; do
     dream=$(curl -s "https://api.anthropic.com/v1/dreams/$dream_id" \
       -H "x-api-key: $ANTHROPIC_API_KEY" \
@@ -315,7 +315,7 @@ When `status` reaches `completed`, the `memory_store` entry in `outputs[]` refer
 * **Discard it:** [delete the memory store](../api/api-beta-memory_stores-delete.md) or [archive the memory store](../api/api-beta-memory_stores-archive.md).
 
 <CodeGroup>
-  ```bash curl
+  ```bash cURL
   # After the dream ends, the memory_store output holds the rebuilt store
   output_store_id=$(jq -r 'first(.outputs[] | select(.type == "memory_store")).memory_store_id' <<< "$dream")
 
@@ -483,7 +483,7 @@ Cancel moves a `pending` or `running` dream to `canceled` immediately. Canceling
 </Note>
 
 <CodeGroup>
-  ```bash curl
+  ```bash cURL
   curl -s -X POST "https://api.anthropic.com/v1/dreams/$dream_id/cancel" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
@@ -531,7 +531,7 @@ Cancel moves a `pending` or `running` dream to `canceled` immediately. Canceling
 Archive sets `archived_at` on a dream that has reached a terminal state (`completed`, `failed`, or `canceled`); `status` is left unchanged. Archived dreams are excluded from default list responses but remain readable by ID. Archiving an already-archived dream is an idempotent no-op. Archiving a `pending` or `running` dream returns 400; cancel it first. There is no unarchive.
 
 <CodeGroup>
-  ```bash curl
+  ```bash cURL
   curl -s -X POST "https://api.anthropic.com/v1/dreams/$dream_id/archive" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
@@ -581,7 +581,7 @@ Archiving a dream does not touch its output memory store; manage that separately
 Returns all non-archived dreams in the workspace, newest first. Use `limit` (default 20, max 100) and the `page` cursor to paginate. Pass `include_archived=true` to include archived dreams.
 
 <CodeGroup>
-  ```bash curl
+  ```bash cURL
   curl -s "https://api.anthropic.com/v1/dreams?limit=20" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \

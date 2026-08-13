@@ -1,13 +1,13 @@
 ---
-title: "Reducing latency"
+title: "How to measure latency"
 source: "https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/reduce-latency"
 category: "test-and-evaluate"
 generated: true
 ---
-# Reducing latency
-
-Reduce Claude's response latency by choosing a faster model like Claude Haiku 4.5, trimming prompt and output tokens, and streaming responses.
-
+---
+title: Reducing latency
+url: https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/reduce-latency
+description: Reduce Claude's response latency by choosing a faster model like Claude Haiku 4.5, trimming prompt and output tokens, and streaming responses.
 ---
 
 Latency refers to the time it takes for the model to process a prompt and generate an output. Latency can be influenced by various factors, such as the size of the model, the complexity of the prompt, and the underlying infrastructure supporting the model and point of interaction.

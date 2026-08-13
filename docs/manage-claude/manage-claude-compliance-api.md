@@ -1,13 +1,13 @@
 ---
-title: "Compliance API"
+title: "How the Compliance API works"
 source: "https://platform.claude.com/docs/en/manage-claude/compliance-api"
 category: "manage-claude"
 generated: true
 ---
-# Compliance API
-
-Programmatic access to your organization's Claude activity, chats, files, projects, and users for compliance, audit, and governance.
-
+---
+title: Compliance API
+url: https://platform.claude.com/docs/en/manage-claude/compliance-api
+description: Programmatic access to your organization's Claude activity, chats, files, projects, sessions, and users for compliance, audit, and governance.
 ---
 
 The Compliance API gives Claude Enterprise and Claude Console customers programmatic access to their organization's Activity Feed. For Claude Enterprise organizations, it also covers the directory of users, roles, and groups across every linked organization, the effective settings in force for each organization, and, for claude.ai organizations, the underlying chats, files, projects, and sessions. Security, legal, and compliance teams use it to audit activity, retrieve or delete content, and feed events into downstream tooling.
@@ -99,7 +99,7 @@ Anthropic provides two analytics APIs: the Claude Enterprise Analytics API and t
     Retrieve, filter, and paginate the shared Activity Feed. Supported by both key types.
   </Card>
 
-  <Card href="./manage-claude-compliance-content-data.md" title="Retrieve and delete chats, files, and projects">
+  <Card href="./manage-claude-compliance-content-data.md" title="Retrieve and delete chats, files, projects, and sessions">
     Read chat content, attachments, and Cowork and Claude Code session transcripts; delete chats, files, and projects on demand. Compliance Access Key required.
   </Card>
 

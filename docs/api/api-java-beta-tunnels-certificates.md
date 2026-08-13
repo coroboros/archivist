@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/java/beta/tunnels/certificates"
 category: "api"
 generated: true
 ---
+---
+title: Certificates
+url: https://platform.claude.com/docs/en/api/java/beta/tunnels/certificates
+---
+
 # Certificates
 
 ## Create Tunnel Certificate
@@ -89,6 +94,8 @@ Registers a public CA certificate on a tunnel. Anthropic verifies the gateway's 
     - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
   - `String caCertificatePem`
 
@@ -252,6 +259,8 @@ Fetches a tunnel certificate by ID.
     - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
 ### Returns
 
@@ -422,6 +431,8 @@ Lists the certificates registered on a tunnel. Archived certificates are exclude
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
 
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
+
 ### Returns
 
 - `class BetaTunnelCertificate:`
@@ -581,6 +592,8 @@ Archives a tunnel certificate, removing it from the set Anthropic trusts for the
     - `FALLBACK_CREDIT_2026_07_01("fallback-credit-2026-07-01")`
 
     - `AGENT_MEMORY_2026_07_22("agent-memory-2026-07-22")`
+
+    - `MID_CONVERSATION_TOOL_CHANGES_2026_07_01("mid-conversation-tool-changes-2026-07-01")`
 
 ### Returns
 

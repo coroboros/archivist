@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/typescript/completions"
 category: "api"
 generated: true
 ---
+---
+title: Completions
+url: https://platform.claude.com/docs/en/api/typescript/completions
+---
+
 # Completions
 
 ## Create a Text Completion
@@ -36,7 +41,7 @@ Future models and features will not be compatible with Text Completions. See our
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `"claude-sonnet-5" | "claude-fable-5" | "claude-mythos-5" | 14 more`
+      - `"claude-sonnet-5" | "claude-fable-5" | "claude-mythos-5" | 12 more`
 
         - `"claude-sonnet-5"`
 
@@ -97,14 +102,6 @@ Future models and features will not be compatible with Text Completions. See our
         - `"claude-sonnet-4-5-20250929"`
 
           High-performance model for agents and coding
-
-        - `"claude-opus-4-1"`
-
-          Powerful intelligence for long-running agents and coding
-
-        - `"claude-opus-4-1-20250805"`
-
-          Powerful intelligence for long-running agents and coding
 
       - `(string & {})`
 
@@ -184,7 +181,7 @@ Future models and features will not be compatible with Text Completions. See our
 
       - `(string & {})`
 
-      - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 29 more`
+      - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
 
         - `"message-batches-2024-09-24"`
 
@@ -250,6 +247,8 @@ Future models and features will not be compatible with Text Completions. See our
 
         - `"agent-memory-2026-07-22"`
 
+        - `"mid-conversation-tool-changes-2026-07-01"`
+
   - `CompletionCreateParamsNonStreaming extends CompletionCreateParamsBase`
 
     - `stream?: false`
@@ -288,7 +287,7 @@ Future models and features will not be compatible with Text Completions. See our
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-    - `"claude-sonnet-5" | "claude-fable-5" | "claude-mythos-5" | 14 more`
+    - `"claude-sonnet-5" | "claude-fable-5" | "claude-mythos-5" | 12 more`
 
       - `"claude-sonnet-5"`
 
@@ -350,14 +349,6 @@ Future models and features will not be compatible with Text Completions. See our
 
         High-performance model for agents and coding
 
-      - `"claude-opus-4-1"`
-
-        Powerful intelligence for long-running agents and coding
-
-      - `"claude-opus-4-1-20250805"`
-
-        Powerful intelligence for long-running agents and coding
-
     - `(string & {})`
 
   - `stop_reason: string | null`
@@ -380,16 +371,16 @@ Future models and features will not be compatible with Text Completions. See our
 ### Example
 
 ```typescript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic({
-  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
+  apiKey: process.env["ANTHROPIC_API_KEY"] // This is the default and can be omitted
 });
 
 const completion = await client.completions.create({
   max_tokens_to_sample: 256,
-  model: 'claude-2.1',
-  prompt: '\n\nHuman: Hello, world!\n\nAssistant:',
+  model: "claude-2.1",
+  prompt: "\n\nHuman: Hello, world!\n\nAssistant:"
 });
 
 console.log(completion.id);
@@ -429,7 +420,7 @@ console.log(completion.id);
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-    - `"claude-sonnet-5" | "claude-fable-5" | "claude-mythos-5" | 14 more`
+    - `"claude-sonnet-5" | "claude-fable-5" | "claude-mythos-5" | 12 more`
 
       - `"claude-sonnet-5"`
 
@@ -490,14 +481,6 @@ console.log(completion.id);
       - `"claude-sonnet-4-5-20250929"`
 
         High-performance model for agents and coding
-
-      - `"claude-opus-4-1"`
-
-        Powerful intelligence for long-running agents and coding
-
-      - `"claude-opus-4-1-20250805"`
-
-        Powerful intelligence for long-running agents and coding
 
     - `(string & {})`
 

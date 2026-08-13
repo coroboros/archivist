@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/messages/batches/cancel"
 category: "api"
 generated: true
 ---
+---
+title: Cancel a Message Batch
+url: https://platform.claude.com/docs/en/api/messages/batches/cancel
+---
+
 ## Cancel a Message Batch
 
 **post** `/v1/messages/batches/{message_batch_id}/cancel`

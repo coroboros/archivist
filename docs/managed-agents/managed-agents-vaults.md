@@ -1,13 +1,13 @@
 ---
-title: "Authenticate with vaults"
+title: "Create a vault"
 source: "https://platform.claude.com/docs/en/managed-agents/vaults"
 category: "managed-agents"
 generated: true
 ---
-# Authenticate with vaults
-
-Register per-user credentials when creating sessions.
-
+---
+title: Authenticate with vaults
+url: https://platform.claude.com/docs/en/managed-agents/vaults
+description: Register per-user credentials when creating sessions.
 ---
 
 Vaults and credentials are authentication primitives that let you register credentials for third-party services once and reference them by ID at session creation. This means you don't need to run your own secret store, transmit tokens on every call, or lose track of which end user an agent acted on behalf of.
@@ -27,7 +27,7 @@ The vault reference is a per-session parameter, so you can manage your product a
 A vault is the collection of `credentials` associated with an end user. Give it a `display_name` and optionally tag it with `metadata` so you can map it back to your own user records.
 
 <CodeGroup defaultLanguage="CLI">
-  ```bash curl
+  ```bash cURL
   vault_id=$(curl --fail-with-body -sS https://api.anthropic.com/v1/vaults \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
@@ -152,7 +152,7 @@ The actual credential values you supply (`token`, `access_token`, `refresh_token
     * `client_secret_post`: client secret in the POST body
 
     <CodeGroup defaultLanguage="CLI">
-      ```bash curl
+      ```bash cURL
       credential_id=$(curl --fail-with-body -sS "https://api.anthropic.com/v1/vaults/$vault_id/credentials" \
         -H "x-api-key: $ANTHROPIC_API_KEY" \
         -H "anthropic-version: 2023-06-01" \
@@ -370,7 +370,7 @@ The actual credential values you supply (`token`, `access_token`, `refresh_token
     Use `static_bearer` when the MCP server accepts a fixed bearer token (API key, personal access token, or similar). No refresh flow is needed.
 
     <CodeGroup defaultLanguage="CLI">
-      ```bash curl
+      ```bash cURL
       curl --fail-with-body -sS "https://api.anthropic.com/v1/vaults/$vault_id/credentials" \
         -H "x-api-key: $ANTHROPIC_API_KEY" \
         -H "anthropic-version: 2023-06-01" \
@@ -503,7 +503,7 @@ The actual credential values you supply (`token`, `access_token`, `refresh_token
     The optional `injection_location` field scopes where the secret is substituted; the full semantics follow the example.
 
     <CodeGroup defaultLanguage="CLI">
-      ```bash curl
+      ```bash cURL
       curl --fail-with-body -sS "https://api.anthropic.com/v1/vaults/$vault_id/credentials" \
         -H "x-api-key: $ANTHROPIC_API_KEY" \
         -H "anthropic-version: 2023-06-01" \
@@ -741,7 +741,7 @@ Constraints:
 Pass `vault_ids` when creating a session:
 
 <CodeGroup defaultLanguage="CLI">
-  ```bash curl
+  ```bash cURL
   session_id=$(curl --fail-with-body -sS https://api.anthropic.com/v1/sessions \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
@@ -845,10 +845,10 @@ Runtime behavior:
 
 ## Rotate a credential
 
-Secret values, `display_name`, and (on environment variable credentials) `injection_location` can be updated. `injection_location` updates merge per field, as described in the Environment variable tab of [Add a credential](#add-a-credential). For a running session, an `injection_location` update propagates the same way as a secret rotation: the session's credentials are re-resolved without a restart, as described in [Credential lifecycle](#credential-lifecycle), and the updated locations apply to the session's subsequent outbound requests. Structural fields (`mcp_server_url`, `secret_name`, `token_endpoint`, `client_id`) are locked after creation. To change them, archive the credential and create a new one.
+Secret values, `display_name`, and (on environment variable credentials) `injection_location` can be updated. `injection_location` updates merge per field, as described in the Environment variable tab of [Add a credential](./managed-agents-vaults.md#add-a-credential). For a running session, an `injection_location` update propagates the same way as a secret rotation: the session's credentials are re-resolved without a restart, as described in [Credential lifecycle](./managed-agents-vaults.md#credential-lifecycle), and the updated locations apply to the session's subsequent outbound requests. Structural fields (`mcp_server_url`, `secret_name`, `token_endpoint`, `client_id`) are locked after creation. To change them, archive the credential and create a new one.
 
 <CodeGroup defaultLanguage="CLI">
-  ```bash curl
+  ```bash cURL
   curl --fail-with-body -sS \
     "https://api.anthropic.com/v1/vaults/$vault_id/credentials/$credential_id" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
@@ -1013,7 +1013,7 @@ The top-level `status` tells you what to do next:
 * `unknown`: a transient error (5xx, 429, or network failure). Wait and retry.
 
 <CodeGroup defaultLanguage="CLI">
-  ```bash curl
+  ```bash cURL
   curl --fail-with-body -sS -X POST \
     "https://api.anthropic.com/v1/vaults/$vault_id/credentials/$credential_id/mcp_oauth_validate?beta=true" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \

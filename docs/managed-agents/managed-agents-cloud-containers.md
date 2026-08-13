@@ -1,13 +1,13 @@
 ---
-title: "Cloud sandbox reference"
+title: "Programming languages"
 source: "https://platform.claude.com/docs/en/managed-agents/cloud-containers"
 category: "managed-agents"
 generated: true
 ---
-# Cloud sandbox reference
-
-Pre-installed packages, databases, and utilities available in cloud sandboxes.
-
+---
+title: Cloud sandbox reference
+url: https://platform.claude.com/docs/en/managed-agents/cloud-sandboxes-reference
+description: Pre-installed packages, databases, and utilities available in cloud sandboxes.
 ---
 
 Cloud sandboxes run as isolated Linux containers on Anthropic-managed infrastructure. They come pre-installed with a comprehensive set of programming languages, databases, and utilities. The agent can use these immediately without any installation steps.
@@ -70,10 +70,10 @@ These specifications apply to `cloud` environments. Self-hosted sandboxes run on
 
 ## Sandbox specifications
 
-| Property         | Value                                                                                                                                                                              |
-| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Operating system | Ubuntu 22.04 LTS                                                                                                                                                                   |
-| Architecture     | x86\_64 (amd64)                                                                                                                                                                    |
-| Memory           | Up to 8 GB                                                                                                                                                                         |
-| Disk space       | Up to 10 GB                                                                                                                                                                        |
+| Property         | Value                                                                                                                                                                                                         |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Operating system | Ubuntu 22.04 LTS                                                                                                                                                                                              |
+| Architecture     | x86\_64 (amd64)                                                                                                                                                                                               |
+| Memory           | Up to 8 GB                                                                                                                                                                                                    |
+| Disk space       | Up to 10 GB                                                                                                                                                                                                   |
 | Network          | API-created environments default to [`unrestricted` networking](./managed-agents-environments.md#networking); sandboxes provisioned through Claude Studio default to `limited` |

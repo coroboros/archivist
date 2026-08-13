@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/cli/beta/environments/update"
 category: "api"
 generated: true
 ---
+---
+title: Update Environment
+url: https://platform.claude.com/docs/en/api/cli/beta/environments/update
+---
+
 ## Update Environment
 
 `$ ant beta:environments update`

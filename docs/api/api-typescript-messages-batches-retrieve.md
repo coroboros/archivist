@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/typescript/messages/batches/ret
 category: "api"
 generated: true
 ---
+---
+title: Retrieve a Message Batch
+url: https://platform.claude.com/docs/en/api/typescript/messages/batches/retrieve
+---
+
 ## Retrieve a Message Batch
 
 `client.messages.batches.retrieve(stringmessageBatchID, RequestOptionsoptions?): MessageBatch`
@@ -113,13 +118,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 ### Example
 
 ```typescript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic({
-  apiKey: process.env['ANTHROPIC_API_KEY'], // This is the default and can be omitted
+  apiKey: process.env["ANTHROPIC_API_KEY"] // This is the default and can be omitted
 });
 
-const messageBatch = await client.messages.batches.retrieve('message_batch_id');
+const messageBatch = await client.messages.batches.retrieve("message_batch_id");
 
 console.log(messageBatch.id);
 ```

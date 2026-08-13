@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/admin/spend_limits/list_effecti
 category: "api"
 generated: true
 ---
+---
+title: List Effective Spend Limits
+url: https://platform.claude.com/docs/en/api/admin/spend_limits/list_effective
+---
+
 ## List Effective Spend Limits
 
 **get** `/v1/organizations/spend_limits/effective`

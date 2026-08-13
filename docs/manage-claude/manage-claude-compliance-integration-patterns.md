@@ -1,13 +1,13 @@
 ---
-title: "Design your compliance integration"
+title: "Choose a feed-consumption pattern"
 source: "https://platform.claude.com/docs/en/manage-claude/compliance-integration-patterns"
 category: "manage-claude"
 generated: true
 ---
-# Design your compliance integration
-
-Choose between polling and cursor-driven Activity Feed consumption, correlate Compliance API events with your SIEM, and plan retention.
-
+---
+title: Design your compliance integration
+url: https://platform.claude.com/docs/en/manage-claude/compliance-integration-patterns
+description: Choose between polling and cursor-driven Activity Feed consumption, correlate Compliance API events with your SIEM, and plan retention.
 ---
 
 <Note>
@@ -20,7 +20,7 @@ Choose between polling and cursor-driven Activity Feed consumption, correlate Co
 
 A production Compliance API integration makes three design choices: how it consumes the Activity Feed, how its output correlates with your security information and event management (SIEM) system, and where long-term copies of activity and content live. These choices are independent of the endpoints themselves; this page helps you evaluate the tradeoffs.
 
-This page assumes you have read [Query the Activity Feed](./manage-claude-compliance-activity-feed.md), which defines the parameters and pagination contract referenced throughout, and [Retrieve and delete chats, files, and projects](./manage-claude-compliance-content-data.md), which defines the content endpoints and `deleted_at` semantics referenced in [Plan content retention](#plan-content-retention).
+This page assumes you have read [Query the Activity Feed](./manage-claude-compliance-activity-feed.md), which defines the parameters and pagination contract referenced throughout, and [Retrieve and delete chats, files, projects, and sessions](./manage-claude-compliance-content-data.md), which defines the content endpoints and `deleted_at` semantics referenced in [Plan content retention](./manage-claude-compliance-integration-patterns.md#plan-content-retention).
 
 ## Choose a feed-consumption pattern
 
@@ -163,7 +163,7 @@ For chain of custody, store the exported records with provenance metadata: sourc
     Filter parameters, pagination, and the `Activity` object schema.
   </Card>
 
-  <Card title="Retrieve and delete chats, files, and projects" href="./manage-claude-compliance-content-data.md">
+  <Card title="Retrieve and delete chats, files, projects, and sessions" href="./manage-claude-compliance-content-data.md">
     The content and hard-delete endpoints.
   </Card>
 </CardGroup>

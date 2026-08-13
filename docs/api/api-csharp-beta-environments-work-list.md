@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/csharp/beta/environments/work/l
 category: "api"
 generated: true
 ---
+---
+title: List Work Items
+url: https://platform.claude.com/docs/en/api/csharp/beta/environments/work/list
+---
+
 ## List Work Items
 
 `BetaSelfHostedWorkListResponse Beta.Environments.Work.List(WorkListParamsparameters, CancellationTokencancellationToken = default)`
@@ -97,6 +102,8 @@ List work items in an environment.
     - `"fallback-credit-2026-07-01"FallbackCredit2026_07_01`
 
     - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
+
+    - `"mid-conversation-tool-changes-2026-07-01"MidConversationToolChanges2026_07_01`
 
 ### Returns
 

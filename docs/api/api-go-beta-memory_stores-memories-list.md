@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/go/beta/memory_stores/memories/
 category: "api"
 generated: true
 ---
+---
+title: List memories
+url: https://platform.claude.com/docs/en/api/go/beta/memory_stores/memories/list
+---
+
 ## List memories
 
 `client.Beta.MemoryStores.Memories.List(ctx, memoryStoreID, params) (*PageCursor[BetaManagedAgentsMemoryListItemUnion], error)`
@@ -109,6 +114,8 @@ List memories
       - `const AnthropicBetaFallbackCredit2026_07_01 AnthropicBeta = "fallback-credit-2026-07-01"`
 
       - `const AnthropicBetaAgentMemory2026_07_22 AnthropicBeta = "agent-memory-2026-07-22"`
+
+      - `const AnthropicBetaMidConversationToolChanges2026_07_01 AnthropicBeta = "mid-conversation-tool-changes-2026-07-01"`
 
 ### Returns
 

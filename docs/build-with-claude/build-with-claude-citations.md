@@ -1,18 +1,18 @@
 ---
-title: "Citations"
+title: "Compatibility"
 source: "https://platform.claude.com/docs/en/build-with-claude/citations"
 category: "build-with-claude"
 generated: true
 ---
-# Citations
-
-Ground Claude's responses in your source documents. Citations return the exact passages that support each claim, so you can verify answers and surface sources to your users.
+---
+title: Citations
+url: https://platform.claude.com/docs/en/build-with-claude/citations
+description: Ground Claude's responses in your source documents. Citations return the exact passages that support each claim, so you can verify answers and surface sources to your users.
+---
 
 ## Compatibility
 - [ZDR](../manage-claude/manage-claude-api-and-data-retention.md): eligible (excludes [Covered Models](../manage-claude/manage-claude-api-and-data-retention.md#model-specific-data-retention-requirements))
 - Platforms: Claude API, Claude Platform on AWS, Amazon Bedrock, Google Cloud, Microsoft Foundry
-
----
 
 Claude can provide detailed citations when answering questions about documents, helping you track and verify the sources behind each response.
 
@@ -324,7 +324,7 @@ Integrate citations with Claude in these steps:
 
 <Steps>
   <Step title="Provide document(s) and enable citations">
-    * Include documents in any of the supported formats: [PDFs](#pdf-documents), [plain text](#plain-text-documents), or [custom content](#custom-content-documents) documents.
+    * Include documents in any of the supported formats: [PDFs](./build-with-claude-citations.md#pdf-documents), [plain text](./build-with-claude-citations.md#plain-text-documents), or [custom content](./build-with-claude-citations.md#custom-content-documents) documents.
     * Set `citations.enabled=true` on each of your documents. Currently, citations must be enabled on all or none of the documents within a request.
     * Only text citations are currently supported. Image citations are not yet possible.
   </Step>
@@ -353,7 +353,7 @@ Integrate citations with Claude in these steps:
 <Tip>
   **Automatic chunking vs custom content**
 
-  By default, plain text and PDF documents are automatically chunked into sentences. If you need more control over citation granularity (for example, for bullet points or transcripts), use custom content documents instead. See [Document types](#document-types) for more details.
+  By default, plain text and PDF documents are automatically chunked into sentences. If you need more control over citation granularity (for example, for bullet points or transcripts), use custom content documents instead. See [Document types](./build-with-claude-citations.md#document-types) for more details.
 
   For example, if you want Claude to be able to cite specific sentences from your RAG chunks, you should put each RAG chunk into a plain text document. Otherwise, if you do not want any further chunking to be done, or if you want to customize any additional chunking, you can put RAG chunks into custom content document(s).
 </Tip>
@@ -990,14 +990,14 @@ Plain text documents are automatically chunked into sentences. You can provide t
 </Tabs>
 
 <Accordion title="Example plain text citation">
-  ```python
+  ```json
   {
-      "type": "char_location",
-      "cited_text": "The exact text being cited",  # not counted toward output tokens
-      "document_index": 0,
-      "document_title": "Document Title",
-      "start_char_index": 0,  # 0-indexed
-      "end_char_index": 50,  # exclusive
+    "type": "char_location",
+    "cited_text": "The exact text being cited", // not counted toward output tokens
+    "document_index": 0,
+    "document_title": "Document Title",
+    "start_char_index": 0, // 0-indexed
+    "end_char_index": 50 // exclusive
   }
   ```
 </Accordion>
@@ -1821,14 +1821,14 @@ PDF documents can be provided as base64-encoded data, a URL, or by `file_id`. PD
 </Tabs>
 
 <Accordion title="Example PDF citation">
-  ```python
+  ```json
   {
-      "type": "page_location",
-      "cited_text": "The exact text being cited",  # not counted toward output tokens
-      "document_index": 0,
-      "document_title": "Document Title",
-      "start_page_number": 1,  # 1-indexed
-      "end_page_number": 2,  # exclusive
+    "type": "page_location",
+    "cited_text": "The exact text being cited", // not counted toward output tokens
+    "document_index": 0,
+    "document_title": "Document Title",
+    "start_page_number": 1, // 1-indexed
+    "end_page_number": 2 // exclusive
   }
   ```
 </Accordion>
@@ -2141,14 +2141,14 @@ Custom content documents give you control over citation granularity. No addition
 </CodeGroup>
 
 <Accordion title="Example citation">
-  ```python
+  ```json
   {
-      "type": "content_block_location",
-      "cited_text": "The exact text being cited",  # not counted toward output tokens
-      "document_index": 0,
-      "document_title": "Document Title",
-      "start_block_index": 0,  # 0-indexed
-      "end_block_index": 1,  # exclusive
+    "type": "content_block_location",
+    "cited_text": "The exact text being cited", // not counted toward output tokens
+    "document_index": 0,
+    "document_title": "Document Title",
+    "start_block_index": 0, // 0-indexed
+    "end_block_index": 1 // exclusive
   }
   ```
 </Accordion>
@@ -2159,76 +2159,76 @@ Custom content documents give you control over citation granularity. No addition
 
 When citations are enabled, responses include multiple text blocks with citations:
 
-```python
+```json
 {
-    "content": [
-        {"type": "text", "text": "According to the document, "},
+  "content": [
+    { "type": "text", "text": "According to the document, " },
+    {
+      "type": "text",
+      "text": "the grass is green",
+      "citations": [
         {
-            "type": "text",
-            "text": "the grass is green",
-            "citations": [
-                {
-                    "type": "char_location",
-                    "cited_text": "The grass is green.",
-                    "document_index": 0,
-                    "document_title": "Example Document",
-                    "start_char_index": 0,
-                    "end_char_index": 20,
-                }
-            ],
-        },
-        {"type": "text", "text": " and "},
+          "type": "char_location",
+          "cited_text": "The grass is green.",
+          "document_index": 0,
+          "document_title": "Example Document",
+          "start_char_index": 0,
+          "end_char_index": 20
+        }
+      ]
+    },
+    { "type": "text", "text": " and " },
+    {
+      "type": "text",
+      "text": "the sky is blue",
+      "citations": [
         {
-            "type": "text",
-            "text": "the sky is blue",
-            "citations": [
-                {
-                    "type": "char_location",
-                    "cited_text": "The sky is blue.",
-                    "document_index": 0,
-                    "document_title": "Example Document",
-                    "start_char_index": 20,
-                    "end_char_index": 36,
-                }
-            ],
-        },
+          "type": "char_location",
+          "cited_text": "The sky is blue.",
+          "document_index": 0,
+          "document_title": "Example Document",
+          "start_char_index": 20,
+          "end_char_index": 36
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "text": ". Information from page 5 states that "
+    },
+    {
+      "type": "text",
+      "text": "water is essential",
+      "citations": [
         {
-            "type": "text",
-            "text": ". Information from page 5 states that ",
-        },
+          "type": "page_location",
+          "cited_text": "Water is essential for life.",
+          "document_index": 1,
+          "document_title": "PDF Document",
+          "start_page_number": 5,
+          "end_page_number": 6
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "text": ". The custom document mentions "
+    },
+    {
+      "type": "text",
+      "text": "important findings",
+      "citations": [
         {
-            "type": "text",
-            "text": "water is essential",
-            "citations": [
-                {
-                    "type": "page_location",
-                    "cited_text": "Water is essential for life.",
-                    "document_index": 1,
-                    "document_title": "PDF Document",
-                    "start_page_number": 5,
-                    "end_page_number": 6,
-                }
-            ],
-        },
-        {
-            "type": "text",
-            "text": ". The custom document mentions ",
-        },
-        {
-            "type": "text",
-            "text": "important findings",
-            "citations": [
-                {
-                    "type": "content_block_location",
-                    "cited_text": "These are important findings.",
-                    "document_index": 2,
-                    "document_title": "Custom Content Document",
-                    "start_block_index": 0,
-                    "end_block_index": 1,
-                }
-            ],
-        },
-    ]
+          "type": "content_block_location",
+          "cited_text": "These are important findings.",
+          "document_index": 2,
+          "document_title": "Custom Content Document",
+          "start_block_index": 0,
+          "end_block_index": 1
+        }
+      ]
+    }
+  ]
 }
 ```
 

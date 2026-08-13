@@ -1,12 +1,14 @@
 ---
-title: "Files API"
+title: "Compatibility"
 source: "https://platform.claude.com/docs/en/build-with-claude/files"
 category: "build-with-claude"
 generated: true
 ---
-# Files API
-
-Upload files once, reference them by file_id in Messages requests, and download outputs created by skills or the code execution tool.
+---
+title: Files API
+url: https://platform.claude.com/docs/en/build-with-claude/files
+description: Upload files once, reference them by file_id in Messages requests, and download outputs created by skills or the code execution tool.
+---
 
 ## Compatibility
 - Status: Beta
@@ -14,8 +16,6 @@ Upload files once, reference them by file_id in Messages requests, and download 
 - [ZDR](../manage-claude/manage-claude-api-and-data-retention.md): not eligible
 - Platforms: Claude API (beta), Claude Platform on AWS (beta), Microsoft Foundry (beta) [1]; not available on Amazon Bedrock, Google Cloud
 1. On [Microsoft Foundry](./build-with-claude-claude-in-microsoft-foundry.md), the Files API requires a [Hosted on Anthropic deployment](./build-with-claude-claude-in-microsoft-foundry.md#additional-features-not-supported-when-hosted-on-azure).
-
----
 
 The Files API lets you upload and manage files to use with the Claude API without re-uploading content with each request. This is particularly useful when using the [code execution tool](../agents-and-tools/agents-and-tools-tool-use-code-execution-tool.md) to provide inputs (for example, datasets and documents) and then download outputs (for example, charts). You can [explore the API reference directly](../api/api-beta-files-upload.md), in addition to this guide.
 
@@ -173,7 +173,7 @@ The response from uploading a file includes:
 }
 ```
 
-`downloadable` is `false` for files you upload. Only files created by [skills](./build-with-claude-skills-guide.md) or the [code execution tool](../agents-and-tools/agents-and-tools-tool-use-code-execution-tool.md) can be downloaded. See [Downloading a file](#downloading-a-file).
+`downloadable` is `false` for files you upload. Only files created by [skills](./build-with-claude-skills-guide.md) or the [code execution tool](../agents-and-tools/agents-and-tools-tool-use-code-execution-tool.md) can be downloaded. See [Downloading a file](./build-with-claude-files.md#downloading-a-file).
 
 ### Using a file in messages
 
@@ -405,11 +405,11 @@ Once uploaded, reference the file by passing the `id` from the upload response a
 
 The Files API supports different file types that correspond to different content block types:
 
-| File type                                                                                                    | MIME type                                            | Content block type | Use case                            |
-| ------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------- | ------------------ | ----------------------------------- |
-| PDF                                                                                                          | `application/pdf`                                    | `document`         | Text analysis, document processing  |
-| Plain text                                                                                                   | `text/plain`                                         | `document`         | Text analysis, processing           |
-| Images                                                                                                       | `image/jpeg`, `image/png`, `image/gif`, `image/webp` | `image`            | Image analysis, visual tasks        |
+| File type                                                                                                                               | MIME type                                            | Content block type | Use case                            |
+| --------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- | ------------------ | ----------------------------------- |
+| PDF                                                                                                                                     | `application/pdf`                                    | `document`         | Text analysis, document processing  |
+| Plain text                                                                                                                              | `text/plain`                                         | `document`         | Text analysis, processing           |
+| Images                                                                                                                                  | `image/jpeg`, `image/png`, `image/gif`, `image/webp` | `image`            | Image analysis, visual tasks        |
 | [Datasets, others](../agents-and-tools/agents-and-tools-tool-use-code-execution-tool.md#upload-and-analyze-your-own-files) | Varies                                               | `container_upload` | Analyze data, create visualizations |
 
 #### Document blocks
@@ -982,7 +982,7 @@ Download files that were created by [skills](./build-with-claude-skills-guide.md
 
 ### File lifecycle
 
-* Files are scoped to the workspace of the API key that uploaded them. Any API key in the same workspace can reference them; never accept file IDs from untrusted sources (see the [workspace access warning](#workspace-scoped-access))
+* Files are scoped to the workspace of the API key that uploaded them. Any API key in the same workspace can reference them; never accept file IDs from untrusted sources (see the [workspace access warning](./build-with-claude-files.md#workspace-scoped-access))
 * Files cannot be modified or renamed after upload. To change a file's content, upload a new file and delete the old one
 * Files persist until you delete them with the `DELETE /v1/files/{file_id}` endpoint
 * Deleted files cannot be recovered

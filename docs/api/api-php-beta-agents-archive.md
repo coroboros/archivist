@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/php/beta/agents/archive"
 category: "api"
 generated: true
 ---
+---
+title: Archive Agent
+url: https://platform.claude.com/docs/en/api/php/beta/agents/archive
+---
+
 ## Archive Agent
 
 `$client->beta->agents->archive(string agentID, ?list<AnthropicBeta> betas): BetaManagedAgentsAgent`
@@ -76,7 +81,8 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaManagedAgentsAgent = $client->beta->agents->archive(
-  'agent_011CZkYpogX7uDKUyvBTophP', betas: ['message-batches-2024-09-24']
+  'agent_011CZkYpogX7uDKUyvBTophP',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
 );
 
 var_dump($betaManagedAgentsAgent);
@@ -105,6 +111,7 @@ var_dump($betaManagedAgentsAgent);
     "effort": {
       "type": "low"
     },
+    "inference_geo": "inference_geo",
     "speed": "standard"
   },
   "multiagent": {

@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/python/completions"
 category: "api"
 generated: true
 ---
+---
+title: Completions
+url: https://platform.claude.com/docs/en/api/python/completions
+---
+
 # Completions
 
 ## Create a Text Completion
@@ -32,7 +37,7 @@ Future models and features will not be compatible with Text Completions. See our
 
   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-  - `Literal["claude-sonnet-5", "claude-fable-5", "claude-mythos-5", 14 more]`
+  - `Literal["claude-sonnet-5", "claude-fable-5", "claude-mythos-5", 12 more]`
 
     The model that will complete your prompt.
 
@@ -53,8 +58,6 @@ Future models and features will not be compatible with Text Completions. See our
     - `claude-opus-4-5-20251101` - Powerful intelligence for long-running agents and coding
     - `claude-sonnet-4-5` - High-performance model for agents and coding
     - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
-    - `claude-opus-4-1` - Deprecated: Will reach end-of-life on August 5, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-    - `claude-opus-4-1-20250805` - Deprecated: Will reach end-of-life on August 5, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
 
     - `"claude-sonnet-5"`
 
@@ -115,14 +118,6 @@ Future models and features will not be compatible with Text Completions. See our
     - `"claude-sonnet-4-5-20250929"`
 
       High-performance model for agents and coding
-
-    - `"claude-opus-4-1"`
-
-      Powerful intelligence for long-running agents and coding
-
-    - `"claude-opus-4-1-20250805"`
-
-      Powerful intelligence for long-running agents and coding
 
   - `str`
 
@@ -202,7 +197,7 @@ Future models and features will not be compatible with Text Completions. See our
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 29 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 30 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -268,6 +263,8 @@ Future models and features will not be compatible with Text Completions. See our
 
     - `"agent-memory-2026-07-22"`
 
+    - `"mid-conversation-tool-changes-2026-07-01"`
+
 ### Returns
 
 - `class Completion: …`
@@ -288,7 +285,7 @@ Future models and features will not be compatible with Text Completions. See our
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-    - `Literal["claude-sonnet-5", "claude-fable-5", "claude-mythos-5", 14 more]`
+    - `Literal["claude-sonnet-5", "claude-fable-5", "claude-mythos-5", 12 more]`
 
       The model that will complete your prompt.
 
@@ -309,8 +306,6 @@ Future models and features will not be compatible with Text Completions. See our
       - `claude-opus-4-5-20251101` - Powerful intelligence for long-running agents and coding
       - `claude-sonnet-4-5` - High-performance model for agents and coding
       - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
-      - `claude-opus-4-1` - Deprecated: Will reach end-of-life on August 5, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-      - `claude-opus-4-1-20250805` - Deprecated: Will reach end-of-life on August 5, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
 
       - `"claude-sonnet-5"`
 
@@ -372,14 +367,6 @@ Future models and features will not be compatible with Text Completions. See our
 
         High-performance model for agents and coding
 
-      - `"claude-opus-4-1"`
-
-        Powerful intelligence for long-running agents and coding
-
-      - `"claude-opus-4-1-20250805"`
-
-        Powerful intelligence for long-running agents and coding
-
     - `str`
 
   - `stop_reason: Optional[str]`
@@ -410,12 +397,12 @@ client = Anthropic(
         "ANTHROPIC_API_KEY"
     ),  # This is the default and can be omitted
 )
-for completion in client.completions.create(
+completion = client.completions.create(
     max_tokens_to_sample=256,
     model="claude-2.1",
     prompt="\n\nHuman: Hello, world!\n\nAssistant:",
-):
-    print(completion)
+)
+print(completion.id)
 ```
 
 #### Response
@@ -452,7 +439,7 @@ for completion in client.completions.create(
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-    - `Literal["claude-sonnet-5", "claude-fable-5", "claude-mythos-5", 14 more]`
+    - `Literal["claude-sonnet-5", "claude-fable-5", "claude-mythos-5", 12 more]`
 
       The model that will complete your prompt.
 
@@ -473,8 +460,6 @@ for completion in client.completions.create(
       - `claude-opus-4-5-20251101` - Powerful intelligence for long-running agents and coding
       - `claude-sonnet-4-5` - High-performance model for agents and coding
       - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
-      - `claude-opus-4-1` - Deprecated: Will reach end-of-life on August 5, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-      - `claude-opus-4-1-20250805` - Deprecated: Will reach end-of-life on August 5, 2026. Please migrate to a newer model. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
 
       - `"claude-sonnet-5"`
 
@@ -535,14 +520,6 @@ for completion in client.completions.create(
       - `"claude-sonnet-4-5-20250929"`
 
         High-performance model for agents and coding
-
-      - `"claude-opus-4-1"`
-
-        Powerful intelligence for long-running agents and coding
-
-      - `"claude-opus-4-1-20250805"`
-
-        Powerful intelligence for long-running agents and coding
 
     - `str`
 

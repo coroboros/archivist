@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/csharp/beta/tunnels"
 category: "api"
 generated: true
 ---
+---
+title: Tunnels
+url: https://platform.claude.com/docs/en/api/csharp/beta/tunnels
+---
+
 # Tunnels
 
 ## Create Tunnel
@@ -91,6 +96,8 @@ Creates a tunnel. Creation allocates a fresh hostname and provisions the tunnel;
     - `"fallback-credit-2026-07-01"FallbackCredit2026_07_01`
 
     - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
+
+    - `"mid-conversation-tool-changes-2026-07-01"MidConversationToolChanges2026_07_01`
 
 ### Returns
 
@@ -228,6 +235,8 @@ Fetches a tunnel by ID.
     - `"fallback-credit-2026-07-01"FallbackCredit2026_07_01`
 
     - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
+
+    - `"mid-conversation-tool-changes-2026-07-01"MidConversationToolChanges2026_07_01`
 
 ### Returns
 
@@ -373,6 +382,8 @@ Lists tunnels. Results are ordered by creation time, newest first; archived tunn
     - `"fallback-credit-2026-07-01"FallbackCredit2026_07_01`
 
     - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
+
+    - `"mid-conversation-tool-changes-2026-07-01"MidConversationToolChanges2026_07_01`
 
 ### Returns
 
@@ -526,6 +537,8 @@ Archives a tunnel. Archival is irreversible: every non-archived certificate on t
 
     - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
 
+    - `"mid-conversation-tool-changes-2026-07-01"MidConversationToolChanges2026_07_01`
+
 ### Returns
 
 - `class BetaTunnel:`
@@ -663,6 +676,8 @@ Reveals a tunnel's connector token. The value is fetched live on each call; Anth
 
     - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
 
+    - `"mid-conversation-tool-changes-2026-07-01"MidConversationToolChanges2026_07_01`
+
 ### Returns
 
 - `class BetaTunnelToken:`
@@ -788,6 +803,8 @@ Rotates a tunnel's connector token. Rotation invalidates the current token for n
     - `"fallback-credit-2026-07-01"FallbackCredit2026_07_01`
 
     - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
+
+    - `"mid-conversation-tool-changes-2026-07-01"MidConversationToolChanges2026_07_01`
 
 ### Returns
 
@@ -963,6 +980,8 @@ Registers a public CA certificate on a tunnel. Anthropic verifies the gateway's 
 
     - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
 
+    - `"mid-conversation-tool-changes-2026-07-01"MidConversationToolChanges2026_07_01`
+
 ### Returns
 
 - `class BetaTunnelCertificate:`
@@ -1112,6 +1131,8 @@ Fetches a tunnel certificate by ID.
     - `"fallback-credit-2026-07-01"FallbackCredit2026_07_01`
 
     - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
+
+    - `"mid-conversation-tool-changes-2026-07-01"MidConversationToolChanges2026_07_01`
 
 ### Returns
 
@@ -1270,6 +1291,8 @@ Lists the certificates registered on a tunnel. Archived certificates are exclude
     - `"fallback-credit-2026-07-01"FallbackCredit2026_07_01`
 
     - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
+
+    - `"mid-conversation-tool-changes-2026-07-01"MidConversationToolChanges2026_07_01`
 
 ### Returns
 
@@ -1431,6 +1454,8 @@ Archives a tunnel certificate, removing it from the set Anthropic trusts for the
     - `"fallback-credit-2026-07-01"FallbackCredit2026_07_01`
 
     - `"agent-memory-2026-07-22"AgentMemory2026_07_22`
+
+    - `"mid-conversation-tool-changes-2026-07-01"MidConversationToolChanges2026_07_01`
 
 ### Returns
 

@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/php/models/retrieve"
 category: "api"
 generated: true
 ---
+---
+title: Get a Model
+url: https://platform.claude.com/docs/en/api/php/models/retrieve
+---
+
 ## Get a Model
 
 `$client->models->retrieve(string modelID, ?list<AnthropicBeta> betas): ModelInfo`
@@ -68,7 +73,7 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $modelInfo = $client->models->retrieve(
-  'model_id', betas: ['message-batches-2024-09-24']
+  'model_id', betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24]
 );
 
 var_dump($modelInfo);

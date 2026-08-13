@@ -1,13 +1,13 @@
 ---
-title: "CLI authentication options"
+title: "On a remote host without a browser:"
 source: "https://platform.claude.com/docs/en/cli-sdks-libraries/cli/authentication"
 category: "general"
 generated: true
 ---
-# CLI authentication options
-
-Authenticate the ant CLI with interactive login, API keys, named profiles, and Workload Identity Federation.
-
+---
+title: CLI authentication options
+url: https://platform.claude.com/docs/en/cli-sdks-libraries/cli/authentication
+description: Authenticate the ant CLI with interactive login, API keys, named profiles, and Workload Identity Federation.
 ---
 
 The `ant` CLI supports several credential sources. The [Quickstart](./general-cli-sdks-libraries-cli-quickstart.md#authentication) covers the one-command happy path (`ant auth login`). This page covers every option in full.
@@ -30,7 +30,7 @@ ant auth login --workspace-id wrkspc_01...
 ant auth login --profile <profile-name>
 ```
 
-During the browser flow, you select an organization and then a [workspace](../manage-claude/manage-claude-workspaces.md). The issued token is [scoped to that workspace](../manage-claude/manage-claude-workspaces.md#api-keys-and-resource-scoping), so the CLI can only see resources that belong to it. Pass `--workspace-id` to bind directly and skip the picker. To work in more than one workspace, see [Switch between workspaces](#switch-between-workspaces).
+During the browser flow, you select an organization and then a [workspace](../manage-claude/manage-claude-workspaces.md). The issued token is [scoped to that workspace](../manage-claude/manage-claude-workspaces.md#api-keys-and-resource-scoping), so the CLI can only see resources that belong to it. Pass `--workspace-id` to bind directly and skip the picker. To work in more than one workspace, see [Switch between workspaces](./general-cli-sdks-libraries-cli-authentication.md#switch-between-workspaces).
 
 Interactive login is intended for local development and scripting on your own machine. For non-interactive workloads such as CI, servers, and containers, use [Workload Identity Federation](../manage-claude/manage-claude-workload-identity-federation.md) instead.
 
@@ -120,7 +120,7 @@ ant --profile other-ws models list
 ANTHROPIC_PROFILE=other-ws ant models list
 ```
 
-Run [`ant auth status`](#check-authentication-status) to confirm which profile and workspace are active.
+Run [`ant auth status`](./general-cli-sdks-libraries-cli-authentication.md#check-authentication-status) to confirm which profile and workspace are active.
 
 <Note>
   Profiles are only consulted when no API key is set. If `ANTHROPIC_API_KEY` is present in your environment, it overrides every profile and these commands all use whatever workspace that key is scoped to. Unset it before switching profiles.

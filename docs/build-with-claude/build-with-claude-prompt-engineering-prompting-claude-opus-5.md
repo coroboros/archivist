@@ -1,13 +1,13 @@
 ---
-title: "Prompting Claude Opus 5"
+title: "Capability improvements"
 source: "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5"
 category: "build-with-claude"
 generated: true
 ---
-# Prompting Claude Opus 5
-
-Behavioral differences and prompting patterns for Claude Opus 5, covering response verbosity, agentic narration, task scoping, subagent delegation, self-correction, and output artifacts when thinking is disabled.
-
+---
+title: Prompting Claude Opus 5
+url: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5
+description: Behavioral differences and prompting patterns for Claude Opus 5, covering response verbosity, agentic narration, task scoping, subagent delegation, self-correction, and output artifacts when thinking is disabled.
 ---
 
 This guide covers the prompting patterns specific to Claude Opus 5. For the model's capabilities and API changes, see [What's new in Claude Opus 5](../about-claude/about-claude-models-whats-new-opus-5.md). For techniques that apply across all current Claude models, see [Prompting best practices](./build-with-claude-prompt-engineering-claude-prompting-best-practices.md).
@@ -28,7 +28,7 @@ Compared with Claude Opus 4.8, the improvements most relevant to prompting are:
 * **Vision:** Claude Opus 5 is strong on chart, document, and diagram understanding, and on UI and frontend visual replication. Re-validate any prompt-side vision workarounds you tuned for prior models; they may no longer be needed. Vision performance is strongest when the model has tools to iteratively analyze, crop, and visually verify its work, and tool use is a more cost-effective lever than thinking alone.
 * **Long-context work:** Claude Opus 5 has a [1M token context window](./build-with-claude-context-windows.md) as both the default and the maximum, and its instruction following, tool calling, and reasoning stay consistent throughout the window.
 * **Office and document tasks:** Claude Opus 5 generates and works with complex, multi-sheet spreadsheets with non-trivial formulas, and it produces well-structured slide decks. Prompt it with any specific styles or templates it needs to follow.
-* **Multi-agent coordination:** Claude Opus 5 coordinates teams of subagents well, with effective writer-verifier patterns and few cases of agents overwriting each other's work. For cost-sensitive workloads, cap delegation; see [Controlling subagent spawning](#controlling-subagent-spawning).
+* **Multi-agent coordination:** Claude Opus 5 coordinates teams of subagents well, with effective writer-verifier patterns and few cases of agents overwriting each other's work. For cost-sensitive workloads, cap delegation; see [Controlling subagent spawning](./build-with-claude-prompt-engineering-prompting-claude-opus-5.md#controlling-subagent-spawning).
 
 ## Response length and verbosity
 

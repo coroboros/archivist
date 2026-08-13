@@ -1,13 +1,13 @@
 ---
-title: "Develop an Inference hooks integration"
+title: "Get a first verdict round trip"
 source: "https://platform.claude.com/docs/en/manage-claude/inference-hooks-endpoint"
 category: "manage-claude"
 generated: true
 ---
-# Develop an Inference hooks integration
-
-Build the AI security server that receives signed Inference hooks requests, verifies them, and returns allow or deny verdicts.
-
+---
+title: Develop an Inference hooks integration
+url: https://platform.claude.com/docs/en/manage-claude/inference-hooks-endpoint
+description: Build the AI security server that receives signed Inference hooks requests, verifies them, and returns allow or deny verdicts.
 ---
 
 <Note>
@@ -147,7 +147,7 @@ The smallest working integration is a server that reads each request and allows 
 </CodeGroup>
 
 <Note>
-  These servers accept every request, including unsigned ones. Add [signature verification](#verify-the-signature) before you enforce.
+  These servers accept every request, including unsigned ones. Add [signature verification](./manage-claude-inference-hooks-endpoint.md#verify-the-signature) before you enforce.
 </Note>
 
 ## Receive a request
@@ -156,7 +156,7 @@ Anthropic sends an HTTPS `POST` to the URL your administrator configures. The wh
 
 Host your AI security server where Anthropic can reach it: an `https://` URL on port 443, on a publicly routable host (private, loopback, and carrier-grade NAT ranges are refused at connect time), with a certificate that validates against the public CA trust store, responding without redirects. The configured URL must be the final destination. [Configure Inference hooks](./manage-claude-inference-hooks-configuration.md) covers how your administrator sets and tests the URL.
 
-Every request carries these fixed headers, along with any [custom request headers](./manage-claude-inference-hooks-configuration.md) your administrator configured and, once your organization has a signing secret, the `webhook-*` signature headers described in [Verify the signature](#verify-the-signature):
+Every request carries these fixed headers, along with any [custom request headers](./manage-claude-inference-hooks-configuration.md) your administrator configured and, once your organization has a signing secret, the `webhook-*` signature headers described in [Verify the signature](./manage-claude-inference-hooks-endpoint.md#verify-the-signature):
 
 | Header            | Value              |
 | ----------------- | ------------------ |
@@ -170,17 +170,17 @@ There is one hook event today: the prompt frame, sent once per governed inferenc
 
 The request body is a JSON object with these fields:
 
-| Field        | Type           | Description                                                                                                                                                                                                                                                           |
-| ------------ | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `type`       | string         | The hook event. Always `"prompt"` today; other event types will be introduced in the future, so handle an unrecognized value gracefully (see [Forward compatibility](#forward-compatibility)).                                                                        |
-| `request_id` | string         | Opaque per-inference-call identifier for correlation. Equals the `webhook-id` header.                                                                                                                                                                                 |
-| `tenant_id`  | string or null | Opaque identifier for the organization the request belongs to.                                                                                                                                                                                                        |
-| `actor`      | object         | The principal the request is attributed to, discriminated on `type` (`"user"` is the only value sent today): `id` (a tagged identifier, stable across requests for the same account) and `email_address` (when available). Both `id` and `email_address` can be null. |
-| `source`     | object         | The originating application: `application` (see [Source values](#source-values)).                                                                                                                                                                                     |
-| `messages`   | array          | The conversation transcript up to the point of inference. See [Content blocks](#content-blocks).                                                                                                                                                                      |
-| `session_id` | string or null | Opaque conversation identifier, when one exists. Don't parse it. For Claude Code it is a best-effort, client-asserted session identifier.                                                                                                                             |
-| `model`      | string or null | Public model identifier for this request, when available.                                                                                                                                                                                                             |
-| `metadata`   | object         | Reserved extension map of string keys to string values, sent empty today. Require nothing from it, and tolerate its absence, its presence, and any keys that appear.                                                                                                  |
+| Field        | Type           | Description                                                                                                                                                                                                                                                              |
+| ------------ | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `type`       | string         | The hook event. Always `"prompt"` today; other event types will be introduced in the future, so handle an unrecognized value gracefully (see [Forward compatibility](./manage-claude-inference-hooks-endpoint.md#forward-compatibility)). |
+| `request_id` | string         | Opaque per-inference-call identifier for correlation. Equals the `webhook-id` header.                                                                                                                                                                                    |
+| `tenant_id`  | string or null | Opaque identifier for the organization the request belongs to.                                                                                                                                                                                                           |
+| `actor`      | object         | The principal the request is attributed to, discriminated on `type` (`"user"` is the only value sent today): `id` (a tagged identifier, stable across requests for the same account) and `email_address` (when available). Both `id` and `email_address` can be null.    |
+| `source`     | object         | The originating application: `application` (see [Source values](./manage-claude-inference-hooks-endpoint.md#source-values)).                                                                                                              |
+| `messages`   | array          | The conversation transcript up to the point of inference. See [Content blocks](./manage-claude-inference-hooks-endpoint.md#content-blocks).                                                                                               |
+| `session_id` | string or null | Opaque conversation identifier, when one exists. Don't parse it. For Claude Code it is a best-effort, client-asserted session identifier.                                                                                                                                |
+| `model`      | string or null | Public model identifier for this request, when available.                                                                                                                                                                                                                |
+| `metadata`   | object         | Reserved extension map of string keys to string values, sent empty today. Require nothing from it, and tolerate its absence, its presence, and any keys that appear.                                                                                                     |
 
 <Note>
   Requests currently also carry deprecated legacy aliases of some of these fields. Read the field names documented on this page and ignore any others; the aliases exist only for earlier integrations.
@@ -272,10 +272,10 @@ To deny it:
 }
 ```
 
-| Field          | Constraints                                                     | Semantics                                                                                                                                                                                                                                                                |
-| -------------- | --------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `action`       | `"allow"` or `"deny"`; required                                 | `allow` lets inference proceed; `deny` rejects it.                                                                                                                                                                                                                       |
-| `deny_reason`  | string or null; at most 500 characters, longer values truncated | Shown to the end user when `action` is `deny`; ignored on `allow`.                                                                                                                                                                                                       |
+| Field          | Constraints                                                     | Semantics                                                                                                                                                                                                                                                                                           |
+| -------------- | --------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `action`       | `"allow"` or `"deny"`; required                                 | `allow` lets inference proceed; `deny` rejects it.                                                                                                                                                                                                                                                  |
+| `deny_reason`  | string or null; at most 500 characters, longer values truncated | Shown to the end user when `action` is `deny`; ignored on `allow`.                                                                                                                                                                                                                                  |
 | `reference_id` | string or null; at most 50 characters from `[A-Za-z0-9._:/-]`   | Your own identifier for this evaluation. It's recorded on the denial's `inference_hooks_request_denied` [compliance activity](./manage-claude-compliance-activity-feed.md) and never shown to the end user. Keep it opaque: no request content and no personal data. |
 
 A deny is never discarded over a formatting problem: an oversize `deny_reason` is truncated, a malformed `reference_id` is silently dropped, and the `action` is still honored.
@@ -715,7 +715,7 @@ The protocol grows without breaking correctly written servers. Your server must 
 
 Never reject a request because of an unrecognized block type or field; read the fields you know and skip the rest.
 
-Other hook event types will be introduced in the future. A new event type is an addition your server can't handle by skipping a field: the request still needs a verdict. When the top-level `type` is a value you don't recognize, return an allow verdict rather than an error status; an error response is a [webhook failure](#webhook-failures), and sustained failures trip the [circuit breaker](#circuit-breaker).
+Other hook event types will be introduced in the future. A new event type is an addition your server can't handle by skipping a field: the request still needs a verdict. When the top-level `type` is a value you don't recognize, return an allow verdict rather than an error status; an error response is a [webhook failure](./manage-claude-inference-hooks-endpoint.md#webhook-failures), and sustained failures trip the [circuit breaker](./manage-claude-inference-hooks-endpoint.md#circuit-breaker).
 
 ## Design your integration
 

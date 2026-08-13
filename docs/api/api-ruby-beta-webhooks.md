@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/ruby/beta/webhooks"
 category: "api"
 generated: true
 ---
+---
+title: Webhooks
+url: https://platform.claude.com/docs/en/api/ruby/beta/webhooks
+---
+
 # Webhooks
 
 ## Domain Types
@@ -924,6 +929,20 @@ generated: true
 
       - `workspace_id: String`
 
+    - `class BetaWebhookSessionBudgetReachedEventData`
+
+      - `id: String`
+
+        ID of the session that triggered the event.
+
+      - `organization_id: String`
+
+      - `type: :"session.budget_reached"`
+
+        - `:"session.budget_reached"`
+
+      - `workspace_id: String`
+
   - `type: :event`
 
     Object type. Always `event` for webhook payloads.
@@ -932,7 +951,7 @@ generated: true
 
 ### Beta Webhook Event Data
 
-- `BetaWebhookEventData = BetaWebhookSessionCreatedEventData | BetaWebhookSessionPendingEventData | BetaWebhookSessionRunningEventData | 40 more`
+- `BetaWebhookEventData = BetaWebhookSessionCreatedEventData | BetaWebhookSessionPendingEventData | BetaWebhookSessionRunningEventData | 41 more`
 
   - `class BetaWebhookSessionCreatedEventData`
 
@@ -1564,6 +1583,20 @@ generated: true
 
     - `workspace_id: String`
 
+  - `class BetaWebhookSessionBudgetReachedEventData`
+
+    - `id: String`
+
+      ID of the session that triggered the event.
+
+    - `organization_id: String`
+
+    - `type: :"session.budget_reached"`
+
+      - `:"session.budget_reached"`
+
+    - `workspace_id: String`
+
 ### Beta Webhook Memory Store Archived Event Data
 
 - `class BetaWebhookMemoryStoreArchivedEventData`
@@ -1625,6 +1658,22 @@ generated: true
   - `type: :"session.archived"`
 
     - `:"session.archived"`
+
+  - `workspace_id: String`
+
+### Beta Webhook Session Budget Reached Event Data
+
+- `class BetaWebhookSessionBudgetReachedEventData`
+
+  - `id: String`
+
+    ID of the session that triggered the event.
+
+  - `organization_id: String`
+
+  - `type: :"session.budget_reached"`
+
+    - `:"session.budget_reached"`
 
   - `workspace_id: String`
 
@@ -2649,6 +2698,20 @@ generated: true
       - `type: :"memory_store.deleted"`
 
         - `:"memory_store.deleted"`
+
+      - `workspace_id: String`
+
+    - `class BetaWebhookSessionBudgetReachedEventData`
+
+      - `id: String`
+
+        ID of the session that triggered the event.
+
+      - `organization_id: String`
+
+      - `type: :"session.budget_reached"`
+
+        - `:"session.budget_reached"`
 
       - `workspace_id: String`
 

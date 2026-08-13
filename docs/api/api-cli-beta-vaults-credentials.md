@@ -4,6 +4,11 @@ source: "https://platform.claude.com/docs/en/api/cli/beta/vaults/credentials"
 category: "api"
 generated: true
 ---
+---
+title: Credentials
+url: https://platform.claude.com/docs/en/api/cli/beta/vaults/credentials
+---
+
 # Credentials
 
 ## Create Credential

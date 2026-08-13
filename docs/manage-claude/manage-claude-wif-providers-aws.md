@@ -1,16 +1,16 @@
 ---
-title: "Use WIF with AWS"
+title: "Prerequisites"
 source: "https://platform.claude.com/docs/en/manage-claude/wif-providers/aws"
 category: "manage-claude"
 generated: true
 ---
-# Use WIF with AWS
-
-Authenticate AWS workloads on Lambda, EC2, ECS, or EKS to the Claude API with Workload Identity Federation and STS-issued identity tokens.
-
+---
+title: Use WIF with AWS
+url: https://platform.claude.com/docs/en/manage-claude/wif-providers/aws
+description: Authenticate AWS workloads on Lambda, EC2, ECS, or EKS to the Claude API with Workload Identity Federation and STS-issued identity tokens.
 ---
 
-AWS workloads can authenticate to the Claude API without static API keys by exchanging an AWS-signed OIDC identity token. The recommended path calls the AWS STS [`GetWebIdentityToken`](https://docs.aws.amazon.com/STS/latest/APIReference/API_GetWebIdentityToken.html) API, which works anywhere the workload has AWS credentials: Lambda, EC2, ECS, and EKS. EKS workloads can alternatively use the [Kubernetes projected-token path](#use-eks-projected-service-account-tokens), which has fewer configuration steps but only works inside a pod.
+AWS workloads can authenticate to the Claude API without static API keys by exchanging an AWS-signed OIDC identity token. The recommended path calls the AWS STS [`GetWebIdentityToken`](https://docs.aws.amazon.com/STS/latest/APIReference/API_GetWebIdentityToken.html) API, which works anywhere the workload has AWS credentials: Lambda, EC2, ECS, and EKS. EKS workloads can alternatively use the [Kubernetes projected-token path](./manage-claude-wif-providers-aws.md#use-eks-projected-service-account-tokens), which has fewer configuration steps but only works inside a pod.
 
 This guide shows both paths. For the underlying concepts (service accounts, federation issuers, and federation rules), see [Workload Identity Federation](./manage-claude-workload-identity-federation.md).
 

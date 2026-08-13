@@ -1,13 +1,13 @@
 ---
-title: "Use WIF with GitHub Actions"
+title: "Prerequisites"
 source: "https://platform.claude.com/docs/en/manage-claude/wif-providers/github-actions"
 category: "manage-claude"
 generated: true
 ---
-# Use WIF with GitHub Actions
-
-Authenticate GitHub Actions workflows to the Claude API with short-lived identity tokens instead of long-lived API keys.
-
+---
+title: Use WIF with GitHub Actions
+url: https://platform.claude.com/docs/en/manage-claude/wif-providers/github-actions
+description: Authenticate GitHub Actions workflows to the Claude API with short-lived identity tokens instead of long-lived API keys.
 ---
 
 Every GitHub Actions workflow run can request a signed identity token from GitHub's hosted issuer at `https://token.actions.githubusercontent.com`. With Workload Identity Federation, your workflow exchanges that token for a short-lived Anthropic access token, so your CI jobs can call the Claude API without an `ANTHROPIC_API_KEY` secret stored in your repository.
@@ -88,7 +88,7 @@ The wizard creates these resources for you. Use the following values whether you
 }
 ```
 
-**Federation rule:** Match only the workflow runs you intend to trust. See [Restrict which workflows can authenticate](#restrict-which-workflows-can-authenticate) for how to scope these claims safely.
+**Federation rule:** Match only the workflow runs you intend to trust. See [Restrict which workflows can authenticate](./manage-claude-wif-providers-github-actions.md#restrict-which-workflows-can-authenticate) for how to scope these claims safely.
 
 ```json
 {
