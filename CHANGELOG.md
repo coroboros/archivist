@@ -1,5 +1,16 @@
 # Changelog
 
+## 🤖 v1.5.105 - 13/08/2026
+
+File Changes:
+
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-changelog.md`
+- Modified: `docs/code/code-permissions.md`
+- Modified: `docs/code/code-sessions.md`
+- Modified: `docs/code/code-troubleshooting.md`
+
+
 ## 🤖 v1.5.104 - 13/08/2026
 
 File Changes:
