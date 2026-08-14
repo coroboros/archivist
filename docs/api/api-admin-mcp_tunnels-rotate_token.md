@@ -37,7 +37,7 @@ restarted after rotation must use the new value. An optional
 
 ### Body Parameters
 
-- `reason: optional string`
+- `reason: optional string or null`
 
   Optional free-text reason for the rotation, recorded for audit.
 

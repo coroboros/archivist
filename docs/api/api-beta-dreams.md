@@ -131,7 +131,7 @@ Create a Dream
 
       Model identifier, e.g. "claude-opus-4-7". 1-256 characters.
 
-    - `speed: optional "standard" or "fast"`
+    - `speed: optional "standard" or "fast" or null`
 
       Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
@@ -139,7 +139,7 @@ Create a Dream
 
       - `"fast"`
 
-- `instructions: optional string`
+- `instructions: optional string or null`
 
 ### Returns
 
@@ -149,7 +149,7 @@ Create a Dream
 
   - `id: string`
 
-  - `archived_at: string`
+  - `archived_at: string or null`
 
     A timestamp in RFC 3339 format
 
@@ -157,11 +157,11 @@ Create a Dream
 
     A timestamp in RFC 3339 format
 
-  - `ended_at: string`
+  - `ended_at: string or null`
 
     A timestamp in RFC 3339 format
 
-  - `error: BetaDreamError`
+  - `error: BetaDreamError or null`
 
     Failure detail for a Dream whose `status` is `failed`.
 
@@ -191,7 +191,7 @@ Create a Dream
 
         - `"sessions"`
 
-  - `instructions: string`
+  - `instructions: string or null`
 
   - `model: BetaDreamModelConfig`
 
@@ -217,7 +217,7 @@ Create a Dream
 
       - `"memory_store"`
 
-  - `session_id: string`
+  - `session_id: string or null`
 
   - `status: BetaDreamStatus`
 
@@ -441,7 +441,7 @@ List Dreams
 
   - `id: string`
 
-  - `archived_at: string`
+  - `archived_at: string or null`
 
     A timestamp in RFC 3339 format
 
@@ -449,11 +449,11 @@ List Dreams
 
     A timestamp in RFC 3339 format
 
-  - `ended_at: string`
+  - `ended_at: string or null`
 
     A timestamp in RFC 3339 format
 
-  - `error: BetaDreamError`
+  - `error: BetaDreamError or null`
 
     Failure detail for a Dream whose `status` is `failed`.
 
@@ -483,7 +483,7 @@ List Dreams
 
         - `"sessions"`
 
-  - `instructions: string`
+  - `instructions: string or null`
 
   - `model: BetaDreamModelConfig`
 
@@ -509,7 +509,7 @@ List Dreams
 
       - `"memory_store"`
 
-  - `session_id: string`
+  - `session_id: string or null`
 
   - `status: BetaDreamStatus`
 
@@ -549,7 +549,7 @@ List Dreams
 
       Total output tokens generated across every pipeline stage.
 
-- `next_page: string`
+- `next_page: string or null`
 
 ### Example
 
@@ -700,7 +700,7 @@ Get a Dream
 
   - `id: string`
 
-  - `archived_at: string`
+  - `archived_at: string or null`
 
     A timestamp in RFC 3339 format
 
@@ -708,11 +708,11 @@ Get a Dream
 
     A timestamp in RFC 3339 format
 
-  - `ended_at: string`
+  - `ended_at: string or null`
 
     A timestamp in RFC 3339 format
 
-  - `error: BetaDreamError`
+  - `error: BetaDreamError or null`
 
     Failure detail for a Dream whose `status` is `failed`.
 
@@ -742,7 +742,7 @@ Get a Dream
 
         - `"sessions"`
 
-  - `instructions: string`
+  - `instructions: string or null`
 
   - `model: BetaDreamModelConfig`
 
@@ -768,7 +768,7 @@ Get a Dream
 
       - `"memory_store"`
 
-  - `session_id: string`
+  - `session_id: string or null`
 
   - `status: BetaDreamStatus`
 
@@ -952,7 +952,7 @@ Cancel a Dream
 
   - `id: string`
 
-  - `archived_at: string`
+  - `archived_at: string or null`
 
     A timestamp in RFC 3339 format
 
@@ -960,11 +960,11 @@ Cancel a Dream
 
     A timestamp in RFC 3339 format
 
-  - `ended_at: string`
+  - `ended_at: string or null`
 
     A timestamp in RFC 3339 format
 
-  - `error: BetaDreamError`
+  - `error: BetaDreamError or null`
 
     Failure detail for a Dream whose `status` is `failed`.
 
@@ -994,7 +994,7 @@ Cancel a Dream
 
         - `"sessions"`
 
-  - `instructions: string`
+  - `instructions: string or null`
 
   - `model: BetaDreamModelConfig`
 
@@ -1020,7 +1020,7 @@ Cancel a Dream
 
       - `"memory_store"`
 
-  - `session_id: string`
+  - `session_id: string or null`
 
   - `status: BetaDreamStatus`
 
@@ -1205,7 +1205,7 @@ Archive a Dream
 
   - `id: string`
 
-  - `archived_at: string`
+  - `archived_at: string or null`
 
     A timestamp in RFC 3339 format
 
@@ -1213,11 +1213,11 @@ Archive a Dream
 
     A timestamp in RFC 3339 format
 
-  - `ended_at: string`
+  - `ended_at: string or null`
 
     A timestamp in RFC 3339 format
 
-  - `error: BetaDreamError`
+  - `error: BetaDreamError or null`
 
     Failure detail for a Dream whose `status` is `failed`.
 
@@ -1247,7 +1247,7 @@ Archive a Dream
 
         - `"sessions"`
 
-  - `instructions: string`
+  - `instructions: string or null`
 
   - `model: BetaDreamModelConfig`
 
@@ -1273,7 +1273,7 @@ Archive a Dream
 
       - `"memory_store"`
 
-  - `session_id: string`
+  - `session_id: string or null`
 
   - `status: BetaDreamStatus`
 
@@ -1374,7 +1374,7 @@ curl https://api.anthropic.com/v1/dreams/$DREAM_ID/archive \
 
   - `id: string`
 
-  - `archived_at: string`
+  - `archived_at: string or null`
 
     A timestamp in RFC 3339 format
 
@@ -1382,11 +1382,11 @@ curl https://api.anthropic.com/v1/dreams/$DREAM_ID/archive \
 
     A timestamp in RFC 3339 format
 
-  - `ended_at: string`
+  - `ended_at: string or null`
 
     A timestamp in RFC 3339 format
 
-  - `error: BetaDreamError`
+  - `error: BetaDreamError or null`
 
     Failure detail for a Dream whose `status` is `failed`.
 
@@ -1416,7 +1416,7 @@ curl https://api.anthropic.com/v1/dreams/$DREAM_ID/archive \
 
         - `"sessions"`
 
-  - `instructions: string`
+  - `instructions: string or null`
 
   - `model: BetaDreamModelConfig`
 
@@ -1442,7 +1442,7 @@ curl https://api.anthropic.com/v1/dreams/$DREAM_ID/archive \
 
       - `"memory_store"`
 
-  - `session_id: string`
+  - `session_id: string or null`
 
   - `status: BetaDreamStatus`
 
@@ -1570,7 +1570,7 @@ curl https://api.anthropic.com/v1/dreams/$DREAM_ID/archive \
 
     Model identifier, e.g. "claude-opus-4-7". 1-256 characters.
 
-  - `speed: optional "standard" or "fast"`
+  - `speed: optional "standard" or "fast" or null`
 
     Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 

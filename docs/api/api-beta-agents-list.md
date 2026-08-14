@@ -121,7 +121,7 @@ List Agents
 
   - `id: string`
 
-  - `archived_at: string`
+  - `archived_at: string or null`
 
     A timestamp in RFC 3339 format
 
@@ -129,7 +129,7 @@ List Agents
 
     A timestamp in RFC 3339 format
 
-  - `description: string`
+  - `description: string or null`
 
   - `mcp_servers: array of BetaManagedAgentsMCPServerURLDefinition`
 
@@ -269,7 +269,7 @@ List Agents
 
       - `"fast"`
 
-  - `multiagent: BetaManagedAgentsMultiagent`
+  - `multiagent: BetaManagedAgentsMultiagent or null`
 
     Resolved coordinator topology with a concrete agent roster.
 
@@ -333,7 +333,7 @@ List Agents
 
       - `version: string`
 
-  - `system: string`
+  - `system: string or null`
 
   - `tools: array of BetaManagedAgentsAgentToolset20260401 or BetaManagedAgentsMCPToolset or BetaManagedAgentsCustomTool`
 
@@ -463,9 +463,9 @@ List Agents
 
           - `"object"`
 
-        - `properties: optional map[unknown]`
+        - `properties: optional map[unknown] or null`
 
-        - `required: optional array of string`
+        - `required: optional array of string or null`
 
       - `name: string`
 
@@ -485,7 +485,7 @@ List Agents
 
     The agent's current version. Starts at 1 and increments when the agent is modified.
 
-- `next_page: optional string`
+- `next_page: optional string or null`
 
   Opaque cursor for the next page. Null when no more results.
 

@@ -45,7 +45,7 @@ certificate is added.
 
   ID of the Tunnel Certificate.
 
-- `archived_at: string`
+- `archived_at: string or null`
 
   RFC 3339 datetime string indicating when the certificate was archived, or
   `null` if it is not archived.
@@ -54,7 +54,7 @@ certificate is added.
 
   RFC 3339 datetime string indicating when the certificate was registered.
 
-- `expires_at: string`
+- `expires_at: string or null`
 
   RFC 3339 datetime string indicating when the certificate expires, or
   `null` if it does not expire.

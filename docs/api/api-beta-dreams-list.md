@@ -133,7 +133,7 @@ List Dreams
 
   - `id: string`
 
-  - `archived_at: string`
+  - `archived_at: string or null`
 
     A timestamp in RFC 3339 format
 
@@ -141,11 +141,11 @@ List Dreams
 
     A timestamp in RFC 3339 format
 
-  - `ended_at: string`
+  - `ended_at: string or null`
 
     A timestamp in RFC 3339 format
 
-  - `error: BetaDreamError`
+  - `error: BetaDreamError or null`
 
     Failure detail for a Dream whose `status` is `failed`.
 
@@ -175,7 +175,7 @@ List Dreams
 
         - `"sessions"`
 
-  - `instructions: string`
+  - `instructions: string or null`
 
   - `model: BetaDreamModelConfig`
 
@@ -201,7 +201,7 @@ List Dreams
 
       - `"memory_store"`
 
-  - `session_id: string`
+  - `session_id: string or null`
 
   - `status: BetaDreamStatus`
 
@@ -241,7 +241,7 @@ List Dreams
 
       Total output tokens generated across every pipeline stage.
 
-- `next_page: string`
+- `next_page: string or null`
 
 ### Example
 

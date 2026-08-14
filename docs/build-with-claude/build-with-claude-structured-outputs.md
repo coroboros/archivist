@@ -403,10 +403,9 @@ Instead of writing raw JSON schemas, you can use familiar schema definition tool
 
 <CodeGroup exclude="shell:cURL">
   ```bash CLI
-  { read -r _ NAME; read -r _ EMAIL; } < <(
-    ant messages create \
-      --transform 'content.#(type=="text").text|@fromstr|{name,email}' \
-      --format yaml <<'YAML'
+  ant messages create \
+    --transform 'content.#(type=="text").text|@fromstr|{name,email}' \
+    --format yaml <<'YAML'
   model: claude-opus-5
   max_tokens: 1024
   messages:
@@ -428,8 +427,6 @@ Instead of writing raw JSON schemas, you can use familiar schema definition tool
         required: [name, email, plan_interest, demo_requested]
         additionalProperties: false
   YAML
-  )
-  printf '%s (%s)\n' "$NAME" "$EMAIL"
   ```
 
   ```python Python

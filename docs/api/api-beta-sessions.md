@@ -225,7 +225,7 @@ Create Session
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-        - `effort: optional "low" or "medium" or "high" or 2 more or BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or 3 more`
+        - `effort: optional "low" or "medium" or "high" or 2 more or BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or 3 more or null`
 
           How hard Claude works on each inference call. Accepts a bare level string (`"high"`) or `{"type": "high"}`. On create, omitting it resolves the per-model default; on update, omitting it leaves the stored value unchanged.
 
@@ -283,11 +283,11 @@ Create Session
 
               - `"max"`
 
-        - `inference_geo: optional string`
+        - `inference_geo: optional string or null`
 
           Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo. On update, `model` is whole-object replacement — omitting inference_geo clears it.
 
-        - `speed: optional "standard" or "fast"`
+        - `speed: optional "standard" or "fast" or null`
 
           Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
@@ -311,7 +311,7 @@ Create Session
 
           - `"anthropic"`
 
-        - `version: optional string`
+        - `version: optional string or null`
 
           Version to pin. Defaults to latest if omitted.
 
@@ -327,11 +327,11 @@ Create Session
 
           - `"custom"`
 
-        - `version: optional string`
+        - `version: optional string or null`
 
           Version to pin. Defaults to latest if omitted.
 
-    - `system: optional string`
+    - `system: optional string or null`
 
       Replacement system prompt. Up to 100,000 characters. Set to null to clear the agent's system prompt; omit to preserve it.
 
@@ -371,11 +371,11 @@ Create Session
 
             - `"web_search"`
 
-          - `enabled: optional boolean`
+          - `enabled: optional boolean or null`
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `permission_policy: optional BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy`
+          - `permission_policy: optional BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy or null`
 
             Permission policy for tool execution.
 
@@ -395,15 +395,15 @@ Create Session
 
                 - `"always_ask"`
 
-        - `default_config: optional BetaManagedAgentsAgentToolsetDefaultConfigParams`
+        - `default_config: optional BetaManagedAgentsAgentToolsetDefaultConfigParams or null`
 
           Default configuration for all tools in a toolset.
 
-          - `enabled: optional boolean`
+          - `enabled: optional boolean or null`
 
             Whether tools are enabled and available to Claude by default. Defaults to true if not specified.
 
-          - `permission_policy: optional BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy`
+          - `permission_policy: optional BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy or null`
 
             Permission policy for tool execution.
 
@@ -435,11 +435,11 @@ Create Session
 
             Name of the MCP tool to configure. 1-128 characters.
 
-          - `enabled: optional boolean`
+          - `enabled: optional boolean or null`
 
             Whether this tool is enabled. Overrides the `default_config` setting.
 
-          - `permission_policy: optional BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy`
+          - `permission_policy: optional BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy or null`
 
             Permission policy for tool execution.
 
@@ -451,15 +451,15 @@ Create Session
 
               Tool calls require user confirmation before execution.
 
-        - `default_config: optional BetaManagedAgentsMCPToolsetDefaultConfigParams`
+        - `default_config: optional BetaManagedAgentsMCPToolsetDefaultConfigParams or null`
 
           Default configuration for all tools from an MCP server.
 
-          - `enabled: optional boolean`
+          - `enabled: optional boolean or null`
 
             Whether tools are enabled by default. Defaults to true if not specified.
 
-          - `permission_policy: optional BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy`
+          - `permission_policy: optional BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy or null`
 
             Permission policy for tool execution.
 
@@ -487,9 +487,9 @@ Create Session
 
             - `"object"`
 
-          - `properties: optional map[unknown]`
+          - `properties: optional map[unknown] or null`
 
-          - `required: optional array of string`
+          - `required: optional array of string or null`
 
         - `name: string`
 
@@ -675,11 +675,11 @@ Create Session
 
           - `"document"`
 
-        - `context: optional string`
+        - `context: optional string or null`
 
           Additional context about the document for the model.
 
-        - `title: optional string`
+        - `title: optional string or null`
 
           The title of the document.
 
@@ -735,7 +735,7 @@ Create Session
 
       - `"user.define_outcome"`
 
-    - `max_iterations: optional number`
+    - `max_iterations: optional number or null`
 
       Eval→revision cycles before giving up. Default 3, max 20.
 
@@ -763,7 +763,7 @@ Create Session
 
       Github URL of the repository
 
-    - `checkout: optional BetaManagedAgentsBranchCheckout or BetaManagedAgentsCommitCheckout`
+    - `checkout: optional BetaManagedAgentsBranchCheckout or BetaManagedAgentsCommitCheckout or null`
 
       Branch or commit to check out. Defaults to the repository's default branch.
 
@@ -787,7 +787,7 @@ Create Session
 
           - `"commit"`
 
-    - `mount_path: optional string`
+    - `mount_path: optional string or null`
 
       Mount path in the container. Defaults to `/workspace/<repo-name>`.
 
@@ -803,7 +803,7 @@ Create Session
 
       - `"file"`
 
-    - `mount_path: optional string`
+    - `mount_path: optional string or null`
 
       Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
 
@@ -819,7 +819,7 @@ Create Session
 
       - `"memory_store"`
 
-    - `access: optional "read_write" or "read_only"`
+    - `access: optional "read_write" or "read_only" or null`
 
       Access mode for an attached memory store.
 
@@ -827,11 +827,11 @@ Create Session
 
       - `"read_only"`
 
-    - `instructions: optional string`
+    - `instructions: optional string or null`
 
       Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
-- `title: optional string`
+- `title: optional string or null`
 
   Human-readable session title.
 
@@ -853,7 +853,7 @@ Create Session
 
     - `id: string`
 
-    - `description: string`
+    - `description: string or null`
 
     - `mcp_servers: array of BetaManagedAgentsMCPServerURLDefinition`
 
@@ -991,7 +991,7 @@ Create Session
 
         - `"fast"`
 
-    - `multiagent: BetaManagedAgentsSessionMultiagentCoordinator`
+    - `multiagent: BetaManagedAgentsSessionMultiagentCoordinator or null`
 
       Resolved coordinator topology with full agent definitions for each roster member.
 
@@ -1005,7 +1005,7 @@ Create Session
 
           - `id: string`
 
-          - `description: string`
+          - `description: string or null`
 
           - `mcp_servers: array of BetaManagedAgentsMCPServerURLDefinition`
 
@@ -1047,7 +1047,7 @@ Create Session
 
               - `version: string`
 
-          - `system: string`
+          - `system: string or null`
 
           - `tools: array of BetaManagedAgentsAgentToolset20260401 or BetaManagedAgentsMCPToolset or BetaManagedAgentsCustomTool`
 
@@ -1177,9 +1177,9 @@ Create Session
 
                   - `"object"`
 
-                - `properties: optional map[unknown]`
+                - `properties: optional map[unknown] or null`
 
-                - `required: optional array of string`
+                - `required: optional array of string or null`
 
               - `name: string`
 
@@ -1221,7 +1221,7 @@ Create Session
 
         A resolved user-created custom skill.
 
-    - `system: string`
+    - `system: string or null`
 
     - `tools: array of BetaManagedAgentsAgentToolset20260401 or BetaManagedAgentsMCPToolset or BetaManagedAgentsCustomTool`
 
@@ -1239,11 +1239,11 @@ Create Session
 
     - `version: number`
 
-  - `archived_at: string`
+  - `archived_at: string or null`
 
     A timestamp in RFC 3339 format
 
-  - `budget: BetaManagedAgentsBudgetLimit`
+  - `budget: BetaManagedAgentsBudgetLimit or null`
 
     A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
@@ -1277,7 +1277,7 @@ Create Session
 
     Per-outcome evaluation state. One entry per define_outcome event sent to the session.
 
-    - `completed_at: string`
+    - `completed_at: string or null`
 
       A timestamp in RFC 3339 format
 
@@ -1285,7 +1285,7 @@ Create Session
 
       What the agent should produce.
 
-    - `explanation: string`
+    - `explanation: string or null`
 
       Grader's verdict text from the most recent evaluation. For satisfied, explains why criteria are met; for needs_revision (intermediate), what's missing; for failed, why unrecoverable.
 
@@ -1327,7 +1327,7 @@ Create Session
 
       - `url: string`
 
-      - `checkout: optional BetaManagedAgentsBranchCheckout or BetaManagedAgentsCommitCheckout`
+      - `checkout: optional BetaManagedAgentsBranchCheckout or BetaManagedAgentsCommitCheckout or null`
 
         - `BetaManagedAgentsBranchCheckout object { name, type }`
 
@@ -1381,7 +1381,7 @@ Create Session
 
         - `"memory_store"`
 
-      - `access: optional "read_write" or "read_only"`
+      - `access: optional "read_write" or "read_only" or null`
 
         Access mode for an attached memory store.
 
@@ -1393,15 +1393,15 @@ Create Session
 
         Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
 
-      - `instructions: optional string`
+      - `instructions: optional string or null`
 
         Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
-      - `mount_path: optional string`
+      - `mount_path: optional string or null`
 
         Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
 
-      - `name: optional string`
+      - `name: optional string or null`
 
         Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
@@ -1429,7 +1429,7 @@ Create Session
 
     - `"terminated"`
 
-  - `title: string`
+  - `title: string or null`
 
   - `type: "session"`
 
@@ -1467,7 +1467,7 @@ Create Session
 
       Total input tokens consumed across all turns.
 
-    - `list_cost: optional BetaMonetaryAmount`
+    - `list_cost: optional BetaMonetaryAmount or null`
 
       A monetary amount in a specific currency.
 
@@ -1475,7 +1475,7 @@ Create Session
 
       Total output tokens generated across all turns.
 
-    - `server_tool_use: optional BetaManagedAgentsServerToolUsage`
+    - `server_tool_use: optional BetaManagedAgentsServerToolUsage or null`
 
       Cumulative count of server-executed tool invocations, broken down by tool.
 
@@ -1491,7 +1491,7 @@ Create Session
 
     Vault IDs attached to the session at creation. Empty when no vaults were supplied.
 
-  - `deployment_id: optional string`
+  - `deployment_id: optional string or null`
 
     Deployment ID when the session was created from a deployment reference. Null otherwise.
 
@@ -1864,7 +1864,7 @@ List Sessions
 
     - `id: string`
 
-    - `description: string`
+    - `description: string or null`
 
     - `mcp_servers: array of BetaManagedAgentsMCPServerURLDefinition`
 
@@ -2002,7 +2002,7 @@ List Sessions
 
         - `"fast"`
 
-    - `multiagent: BetaManagedAgentsSessionMultiagentCoordinator`
+    - `multiagent: BetaManagedAgentsSessionMultiagentCoordinator or null`
 
       Resolved coordinator topology with full agent definitions for each roster member.
 
@@ -2016,7 +2016,7 @@ List Sessions
 
           - `id: string`
 
-          - `description: string`
+          - `description: string or null`
 
           - `mcp_servers: array of BetaManagedAgentsMCPServerURLDefinition`
 
@@ -2058,7 +2058,7 @@ List Sessions
 
               - `version: string`
 
-          - `system: string`
+          - `system: string or null`
 
           - `tools: array of BetaManagedAgentsAgentToolset20260401 or BetaManagedAgentsMCPToolset or BetaManagedAgentsCustomTool`
 
@@ -2188,9 +2188,9 @@ List Sessions
 
                   - `"object"`
 
-                - `properties: optional map[unknown]`
+                - `properties: optional map[unknown] or null`
 
-                - `required: optional array of string`
+                - `required: optional array of string or null`
 
               - `name: string`
 
@@ -2232,7 +2232,7 @@ List Sessions
 
         A resolved user-created custom skill.
 
-    - `system: string`
+    - `system: string or null`
 
     - `tools: array of BetaManagedAgentsAgentToolset20260401 or BetaManagedAgentsMCPToolset or BetaManagedAgentsCustomTool`
 
@@ -2250,11 +2250,11 @@ List Sessions
 
     - `version: number`
 
-  - `archived_at: string`
+  - `archived_at: string or null`
 
     A timestamp in RFC 3339 format
 
-  - `budget: BetaManagedAgentsBudgetLimit`
+  - `budget: BetaManagedAgentsBudgetLimit or null`
 
     A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
@@ -2288,7 +2288,7 @@ List Sessions
 
     Per-outcome evaluation state. One entry per define_outcome event sent to the session.
 
-    - `completed_at: string`
+    - `completed_at: string or null`
 
       A timestamp in RFC 3339 format
 
@@ -2296,7 +2296,7 @@ List Sessions
 
       What the agent should produce.
 
-    - `explanation: string`
+    - `explanation: string or null`
 
       Grader's verdict text from the most recent evaluation. For satisfied, explains why criteria are met; for needs_revision (intermediate), what's missing; for failed, why unrecoverable.
 
@@ -2338,7 +2338,7 @@ List Sessions
 
       - `url: string`
 
-      - `checkout: optional BetaManagedAgentsBranchCheckout or BetaManagedAgentsCommitCheckout`
+      - `checkout: optional BetaManagedAgentsBranchCheckout or BetaManagedAgentsCommitCheckout or null`
 
         - `BetaManagedAgentsBranchCheckout object { name, type }`
 
@@ -2392,7 +2392,7 @@ List Sessions
 
         - `"memory_store"`
 
-      - `access: optional "read_write" or "read_only"`
+      - `access: optional "read_write" or "read_only" or null`
 
         Access mode for an attached memory store.
 
@@ -2404,15 +2404,15 @@ List Sessions
 
         Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
 
-      - `instructions: optional string`
+      - `instructions: optional string or null`
 
         Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
-      - `mount_path: optional string`
+      - `mount_path: optional string or null`
 
         Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
 
-      - `name: optional string`
+      - `name: optional string or null`
 
         Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
@@ -2440,7 +2440,7 @@ List Sessions
 
     - `"terminated"`
 
-  - `title: string`
+  - `title: string or null`
 
   - `type: "session"`
 
@@ -2478,7 +2478,7 @@ List Sessions
 
       Total input tokens consumed across all turns.
 
-    - `list_cost: optional BetaMonetaryAmount`
+    - `list_cost: optional BetaMonetaryAmount or null`
 
       A monetary amount in a specific currency.
 
@@ -2486,7 +2486,7 @@ List Sessions
 
       Total output tokens generated across all turns.
 
-    - `server_tool_use: optional BetaManagedAgentsServerToolUsage`
+    - `server_tool_use: optional BetaManagedAgentsServerToolUsage or null`
 
       Cumulative count of server-executed tool invocations, broken down by tool.
 
@@ -2502,15 +2502,15 @@ List Sessions
 
     Vault IDs attached to the session at creation. Empty when no vaults were supplied.
 
-  - `deployment_id: optional string`
+  - `deployment_id: optional string or null`
 
     Deployment ID when the session was created from a deployment reference. Null otherwise.
 
-- `next_page: optional string`
+- `next_page: optional string or null`
 
   Opaque cursor for the next page. Null when no more results.
 
-- `prev_page: optional string`
+- `prev_page: optional string or null`
 
   Opaque cursor for the previous page. Null when on the first page. Pass as the `page` parameter to navigate backward.
 
@@ -2821,7 +2821,7 @@ Get Session
 
     - `id: string`
 
-    - `description: string`
+    - `description: string or null`
 
     - `mcp_servers: array of BetaManagedAgentsMCPServerURLDefinition`
 
@@ -2959,7 +2959,7 @@ Get Session
 
         - `"fast"`
 
-    - `multiagent: BetaManagedAgentsSessionMultiagentCoordinator`
+    - `multiagent: BetaManagedAgentsSessionMultiagentCoordinator or null`
 
       Resolved coordinator topology with full agent definitions for each roster member.
 
@@ -2973,7 +2973,7 @@ Get Session
 
           - `id: string`
 
-          - `description: string`
+          - `description: string or null`
 
           - `mcp_servers: array of BetaManagedAgentsMCPServerURLDefinition`
 
@@ -3015,7 +3015,7 @@ Get Session
 
               - `version: string`
 
-          - `system: string`
+          - `system: string or null`
 
           - `tools: array of BetaManagedAgentsAgentToolset20260401 or BetaManagedAgentsMCPToolset or BetaManagedAgentsCustomTool`
 
@@ -3145,9 +3145,9 @@ Get Session
 
                   - `"object"`
 
-                - `properties: optional map[unknown]`
+                - `properties: optional map[unknown] or null`
 
-                - `required: optional array of string`
+                - `required: optional array of string or null`
 
               - `name: string`
 
@@ -3189,7 +3189,7 @@ Get Session
 
         A resolved user-created custom skill.
 
-    - `system: string`
+    - `system: string or null`
 
     - `tools: array of BetaManagedAgentsAgentToolset20260401 or BetaManagedAgentsMCPToolset or BetaManagedAgentsCustomTool`
 
@@ -3207,11 +3207,11 @@ Get Session
 
     - `version: number`
 
-  - `archived_at: string`
+  - `archived_at: string or null`
 
     A timestamp in RFC 3339 format
 
-  - `budget: BetaManagedAgentsBudgetLimit`
+  - `budget: BetaManagedAgentsBudgetLimit or null`
 
     A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
@@ -3245,7 +3245,7 @@ Get Session
 
     Per-outcome evaluation state. One entry per define_outcome event sent to the session.
 
-    - `completed_at: string`
+    - `completed_at: string or null`
 
       A timestamp in RFC 3339 format
 
@@ -3253,7 +3253,7 @@ Get Session
 
       What the agent should produce.
 
-    - `explanation: string`
+    - `explanation: string or null`
 
       Grader's verdict text from the most recent evaluation. For satisfied, explains why criteria are met; for needs_revision (intermediate), what's missing; for failed, why unrecoverable.
 
@@ -3295,7 +3295,7 @@ Get Session
 
       - `url: string`
 
-      - `checkout: optional BetaManagedAgentsBranchCheckout or BetaManagedAgentsCommitCheckout`
+      - `checkout: optional BetaManagedAgentsBranchCheckout or BetaManagedAgentsCommitCheckout or null`
 
         - `BetaManagedAgentsBranchCheckout object { name, type }`
 
@@ -3349,7 +3349,7 @@ Get Session
 
         - `"memory_store"`
 
-      - `access: optional "read_write" or "read_only"`
+      - `access: optional "read_write" or "read_only" or null`
 
         Access mode for an attached memory store.
 
@@ -3361,15 +3361,15 @@ Get Session
 
         Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
 
-      - `instructions: optional string`
+      - `instructions: optional string or null`
 
         Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
-      - `mount_path: optional string`
+      - `mount_path: optional string or null`
 
         Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
 
-      - `name: optional string`
+      - `name: optional string or null`
 
         Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
@@ -3397,7 +3397,7 @@ Get Session
 
     - `"terminated"`
 
-  - `title: string`
+  - `title: string or null`
 
   - `type: "session"`
 
@@ -3435,7 +3435,7 @@ Get Session
 
       Total input tokens consumed across all turns.
 
-    - `list_cost: optional BetaMonetaryAmount`
+    - `list_cost: optional BetaMonetaryAmount or null`
 
       A monetary amount in a specific currency.
 
@@ -3443,7 +3443,7 @@ Get Session
 
       Total output tokens generated across all turns.
 
-    - `server_tool_use: optional BetaManagedAgentsServerToolUsage`
+    - `server_tool_use: optional BetaManagedAgentsServerToolUsage or null`
 
       Cumulative count of server-executed tool invocations, broken down by tool.
 
@@ -3459,7 +3459,7 @@ Get Session
 
     Vault IDs attached to the session at creation. Empty when no vaults were supplied.
 
-  - `deployment_id: optional string`
+  - `deployment_id: optional string or null`
 
     Deployment ID when the session was created from a deployment reference. Null otherwise.
 
@@ -3808,11 +3808,11 @@ Update Session
 
           - `"web_search"`
 
-        - `enabled: optional boolean`
+        - `enabled: optional boolean or null`
 
           Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-        - `permission_policy: optional BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy`
+        - `permission_policy: optional BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy or null`
 
           Permission policy for tool execution.
 
@@ -3832,15 +3832,15 @@ Update Session
 
               - `"always_ask"`
 
-      - `default_config: optional BetaManagedAgentsAgentToolsetDefaultConfigParams`
+      - `default_config: optional BetaManagedAgentsAgentToolsetDefaultConfigParams or null`
 
         Default configuration for all tools in a toolset.
 
-        - `enabled: optional boolean`
+        - `enabled: optional boolean or null`
 
           Whether tools are enabled and available to Claude by default. Defaults to true if not specified.
 
-        - `permission_policy: optional BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy`
+        - `permission_policy: optional BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy or null`
 
           Permission policy for tool execution.
 
@@ -3872,11 +3872,11 @@ Update Session
 
           Name of the MCP tool to configure. 1-128 characters.
 
-        - `enabled: optional boolean`
+        - `enabled: optional boolean or null`
 
           Whether this tool is enabled. Overrides the `default_config` setting.
 
-        - `permission_policy: optional BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy`
+        - `permission_policy: optional BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy or null`
 
           Permission policy for tool execution.
 
@@ -3888,15 +3888,15 @@ Update Session
 
             Tool calls require user confirmation before execution.
 
-      - `default_config: optional BetaManagedAgentsMCPToolsetDefaultConfigParams`
+      - `default_config: optional BetaManagedAgentsMCPToolsetDefaultConfigParams or null`
 
         Default configuration for all tools from an MCP server.
 
-        - `enabled: optional boolean`
+        - `enabled: optional boolean or null`
 
           Whether tools are enabled by default. Defaults to true if not specified.
 
-        - `permission_policy: optional BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy`
+        - `permission_policy: optional BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy or null`
 
           Permission policy for tool execution.
 
@@ -3924,9 +3924,9 @@ Update Session
 
           - `"object"`
 
-        - `properties: optional map[unknown]`
+        - `properties: optional map[unknown] or null`
 
-        - `required: optional array of string`
+        - `required: optional array of string or null`
 
       - `name: string`
 
@@ -3936,7 +3936,7 @@ Update Session
 
         - `"custom"`
 
-- `budget: optional BetaManagedAgentsBudgetLimit`
+- `budget: optional BetaManagedAgentsBudgetLimit or null`
 
   A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
@@ -3958,11 +3958,11 @@ Update Session
 
     - `"limit"`
 
-- `metadata: optional map[string]`
+- `metadata: optional map[string] or null`
 
   Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve.
 
-- `title: optional string`
+- `title: optional string or null`
 
   Human-readable session title.
 
@@ -3984,7 +3984,7 @@ Update Session
 
     - `id: string`
 
-    - `description: string`
+    - `description: string or null`
 
     - `mcp_servers: array of BetaManagedAgentsMCPServerURLDefinition`
 
@@ -4122,7 +4122,7 @@ Update Session
 
         - `"fast"`
 
-    - `multiagent: BetaManagedAgentsSessionMultiagentCoordinator`
+    - `multiagent: BetaManagedAgentsSessionMultiagentCoordinator or null`
 
       Resolved coordinator topology with full agent definitions for each roster member.
 
@@ -4136,7 +4136,7 @@ Update Session
 
           - `id: string`
 
-          - `description: string`
+          - `description: string or null`
 
           - `mcp_servers: array of BetaManagedAgentsMCPServerURLDefinition`
 
@@ -4178,7 +4178,7 @@ Update Session
 
               - `version: string`
 
-          - `system: string`
+          - `system: string or null`
 
           - `tools: array of BetaManagedAgentsAgentToolset20260401 or BetaManagedAgentsMCPToolset or BetaManagedAgentsCustomTool`
 
@@ -4308,9 +4308,9 @@ Update Session
 
                   - `"object"`
 
-                - `properties: optional map[unknown]`
+                - `properties: optional map[unknown] or null`
 
-                - `required: optional array of string`
+                - `required: optional array of string or null`
 
               - `name: string`
 
@@ -4352,7 +4352,7 @@ Update Session
 
         A resolved user-created custom skill.
 
-    - `system: string`
+    - `system: string or null`
 
     - `tools: array of BetaManagedAgentsAgentToolset20260401 or BetaManagedAgentsMCPToolset or BetaManagedAgentsCustomTool`
 
@@ -4370,11 +4370,11 @@ Update Session
 
     - `version: number`
 
-  - `archived_at: string`
+  - `archived_at: string or null`
 
     A timestamp in RFC 3339 format
 
-  - `budget: BetaManagedAgentsBudgetLimit`
+  - `budget: BetaManagedAgentsBudgetLimit or null`
 
     A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
@@ -4408,7 +4408,7 @@ Update Session
 
     Per-outcome evaluation state. One entry per define_outcome event sent to the session.
 
-    - `completed_at: string`
+    - `completed_at: string or null`
 
       A timestamp in RFC 3339 format
 
@@ -4416,7 +4416,7 @@ Update Session
 
       What the agent should produce.
 
-    - `explanation: string`
+    - `explanation: string or null`
 
       Grader's verdict text from the most recent evaluation. For satisfied, explains why criteria are met; for needs_revision (intermediate), what's missing; for failed, why unrecoverable.
 
@@ -4458,7 +4458,7 @@ Update Session
 
       - `url: string`
 
-      - `checkout: optional BetaManagedAgentsBranchCheckout or BetaManagedAgentsCommitCheckout`
+      - `checkout: optional BetaManagedAgentsBranchCheckout or BetaManagedAgentsCommitCheckout or null`
 
         - `BetaManagedAgentsBranchCheckout object { name, type }`
 
@@ -4512,7 +4512,7 @@ Update Session
 
         - `"memory_store"`
 
-      - `access: optional "read_write" or "read_only"`
+      - `access: optional "read_write" or "read_only" or null`
 
         Access mode for an attached memory store.
 
@@ -4524,15 +4524,15 @@ Update Session
 
         Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
 
-      - `instructions: optional string`
+      - `instructions: optional string or null`
 
         Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
-      - `mount_path: optional string`
+      - `mount_path: optional string or null`
 
         Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
 
-      - `name: optional string`
+      - `name: optional string or null`
 
         Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
@@ -4560,7 +4560,7 @@ Update Session
 
     - `"terminated"`
 
-  - `title: string`
+  - `title: string or null`
 
   - `type: "session"`
 
@@ -4598,7 +4598,7 @@ Update Session
 
       Total input tokens consumed across all turns.
 
-    - `list_cost: optional BetaMonetaryAmount`
+    - `list_cost: optional BetaMonetaryAmount or null`
 
       A monetary amount in a specific currency.
 
@@ -4606,7 +4606,7 @@ Update Session
 
       Total output tokens generated across all turns.
 
-    - `server_tool_use: optional BetaManagedAgentsServerToolUsage`
+    - `server_tool_use: optional BetaManagedAgentsServerToolUsage or null`
 
       Cumulative count of server-executed tool invocations, broken down by tool.
 
@@ -4622,7 +4622,7 @@ Update Session
 
     Vault IDs attached to the session at creation. Empty when no vaults were supplied.
 
-  - `deployment_id: optional string`
+  - `deployment_id: optional string or null`
 
     Deployment ID when the session was created from a deployment reference. Null otherwise.
 
@@ -5048,7 +5048,7 @@ Archive Session
 
     - `id: string`
 
-    - `description: string`
+    - `description: string or null`
 
     - `mcp_servers: array of BetaManagedAgentsMCPServerURLDefinition`
 
@@ -5186,7 +5186,7 @@ Archive Session
 
         - `"fast"`
 
-    - `multiagent: BetaManagedAgentsSessionMultiagentCoordinator`
+    - `multiagent: BetaManagedAgentsSessionMultiagentCoordinator or null`
 
       Resolved coordinator topology with full agent definitions for each roster member.
 
@@ -5200,7 +5200,7 @@ Archive Session
 
           - `id: string`
 
-          - `description: string`
+          - `description: string or null`
 
           - `mcp_servers: array of BetaManagedAgentsMCPServerURLDefinition`
 
@@ -5242,7 +5242,7 @@ Archive Session
 
               - `version: string`
 
-          - `system: string`
+          - `system: string or null`
 
           - `tools: array of BetaManagedAgentsAgentToolset20260401 or BetaManagedAgentsMCPToolset or BetaManagedAgentsCustomTool`
 
@@ -5372,9 +5372,9 @@ Archive Session
 
                   - `"object"`
 
-                - `properties: optional map[unknown]`
+                - `properties: optional map[unknown] or null`
 
-                - `required: optional array of string`
+                - `required: optional array of string or null`
 
               - `name: string`
 
@@ -5416,7 +5416,7 @@ Archive Session
 
         A resolved user-created custom skill.
 
-    - `system: string`
+    - `system: string or null`
 
     - `tools: array of BetaManagedAgentsAgentToolset20260401 or BetaManagedAgentsMCPToolset or BetaManagedAgentsCustomTool`
 
@@ -5434,11 +5434,11 @@ Archive Session
 
     - `version: number`
 
-  - `archived_at: string`
+  - `archived_at: string or null`
 
     A timestamp in RFC 3339 format
 
-  - `budget: BetaManagedAgentsBudgetLimit`
+  - `budget: BetaManagedAgentsBudgetLimit or null`
 
     A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
@@ -5472,7 +5472,7 @@ Archive Session
 
     Per-outcome evaluation state. One entry per define_outcome event sent to the session.
 
-    - `completed_at: string`
+    - `completed_at: string or null`
 
       A timestamp in RFC 3339 format
 
@@ -5480,7 +5480,7 @@ Archive Session
 
       What the agent should produce.
 
-    - `explanation: string`
+    - `explanation: string or null`
 
       Grader's verdict text from the most recent evaluation. For satisfied, explains why criteria are met; for needs_revision (intermediate), what's missing; for failed, why unrecoverable.
 
@@ -5522,7 +5522,7 @@ Archive Session
 
       - `url: string`
 
-      - `checkout: optional BetaManagedAgentsBranchCheckout or BetaManagedAgentsCommitCheckout`
+      - `checkout: optional BetaManagedAgentsBranchCheckout or BetaManagedAgentsCommitCheckout or null`
 
         - `BetaManagedAgentsBranchCheckout object { name, type }`
 
@@ -5576,7 +5576,7 @@ Archive Session
 
         - `"memory_store"`
 
-      - `access: optional "read_write" or "read_only"`
+      - `access: optional "read_write" or "read_only" or null`
 
         Access mode for an attached memory store.
 
@@ -5588,15 +5588,15 @@ Archive Session
 
         Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
 
-      - `instructions: optional string`
+      - `instructions: optional string or null`
 
         Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
-      - `mount_path: optional string`
+      - `mount_path: optional string or null`
 
         Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
 
-      - `name: optional string`
+      - `name: optional string or null`
 
         Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
@@ -5624,7 +5624,7 @@ Archive Session
 
     - `"terminated"`
 
-  - `title: string`
+  - `title: string or null`
 
   - `type: "session"`
 
@@ -5662,7 +5662,7 @@ Archive Session
 
       Total input tokens consumed across all turns.
 
-    - `list_cost: optional BetaMonetaryAmount`
+    - `list_cost: optional BetaMonetaryAmount or null`
 
       A monetary amount in a specific currency.
 
@@ -5670,7 +5670,7 @@ Archive Session
 
       Total output tokens generated across all turns.
 
-    - `server_tool_use: optional BetaManagedAgentsServerToolUsage`
+    - `server_tool_use: optional BetaManagedAgentsServerToolUsage or null`
 
       Cumulative count of server-executed tool invocations, broken down by tool.
 
@@ -5686,7 +5686,7 @@ Archive Session
 
     Vault IDs attached to the session at creation. Empty when no vaults were supplied.
 
-  - `deployment_id: optional string`
+  - `deployment_id: optional string or null`
 
     Deployment ID when the session was created from a deployment reference. Null otherwise.
 
@@ -6060,7 +6060,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/archive \
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `effort: optional "low" or "medium" or "high" or 2 more or BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or 3 more`
+      - `effort: optional "low" or "medium" or "high" or 2 more or BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or 3 more or null`
 
         How hard Claude works on each inference call. Accepts a bare level string (`"high"`) or `{"type": "high"}`. On create, omitting it resolves the per-model default; on update, omitting it leaves the stored value unchanged.
 
@@ -6118,11 +6118,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/archive \
 
             - `"max"`
 
-      - `inference_geo: optional string`
+      - `inference_geo: optional string or null`
 
         Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo. On update, `model` is whole-object replacement — omitting inference_geo clears it.
 
-      - `speed: optional "standard" or "fast"`
+      - `speed: optional "standard" or "fast" or null`
 
         Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
@@ -6146,7 +6146,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/archive \
 
         - `"anthropic"`
 
-      - `version: optional string`
+      - `version: optional string or null`
 
         Version to pin. Defaults to latest if omitted.
 
@@ -6162,11 +6162,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/archive \
 
         - `"custom"`
 
-      - `version: optional string`
+      - `version: optional string or null`
 
         Version to pin. Defaults to latest if omitted.
 
-  - `system: optional string`
+  - `system: optional string or null`
 
     Replacement system prompt. Up to 100,000 characters. Set to null to clear the agent's system prompt; omit to preserve it.
 
@@ -6206,11 +6206,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/archive \
 
           - `"web_search"`
 
-        - `enabled: optional boolean`
+        - `enabled: optional boolean or null`
 
           Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-        - `permission_policy: optional BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy`
+        - `permission_policy: optional BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy or null`
 
           Permission policy for tool execution.
 
@@ -6230,15 +6230,15 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/archive \
 
               - `"always_ask"`
 
-      - `default_config: optional BetaManagedAgentsAgentToolsetDefaultConfigParams`
+      - `default_config: optional BetaManagedAgentsAgentToolsetDefaultConfigParams or null`
 
         Default configuration for all tools in a toolset.
 
-        - `enabled: optional boolean`
+        - `enabled: optional boolean or null`
 
           Whether tools are enabled and available to Claude by default. Defaults to true if not specified.
 
-        - `permission_policy: optional BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy`
+        - `permission_policy: optional BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy or null`
 
           Permission policy for tool execution.
 
@@ -6270,11 +6270,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/archive \
 
           Name of the MCP tool to configure. 1-128 characters.
 
-        - `enabled: optional boolean`
+        - `enabled: optional boolean or null`
 
           Whether this tool is enabled. Overrides the `default_config` setting.
 
-        - `permission_policy: optional BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy`
+        - `permission_policy: optional BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy or null`
 
           Permission policy for tool execution.
 
@@ -6286,15 +6286,15 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/archive \
 
             Tool calls require user confirmation before execution.
 
-      - `default_config: optional BetaManagedAgentsMCPToolsetDefaultConfigParams`
+      - `default_config: optional BetaManagedAgentsMCPToolsetDefaultConfigParams or null`
 
         Default configuration for all tools from an MCP server.
 
-        - `enabled: optional boolean`
+        - `enabled: optional boolean or null`
 
           Whether tools are enabled by default. Defaults to true if not specified.
 
-        - `permission_policy: optional BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy`
+        - `permission_policy: optional BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy or null`
 
           Permission policy for tool execution.
 
@@ -6322,9 +6322,9 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/archive \
 
           - `"object"`
 
-        - `properties: optional map[unknown]`
+        - `properties: optional map[unknown] or null`
 
-        - `required: optional array of string`
+        - `required: optional array of string or null`
 
       - `name: string`
 
@@ -6498,7 +6498,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/archive \
 
     - `"file"`
 
-  - `mount_path: optional string`
+  - `mount_path: optional string or null`
 
     Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
 
@@ -6520,7 +6520,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/archive \
 
     Github URL of the repository
 
-  - `checkout: optional BetaManagedAgentsBranchCheckout or BetaManagedAgentsCommitCheckout`
+  - `checkout: optional BetaManagedAgentsBranchCheckout or BetaManagedAgentsCommitCheckout or null`
 
     Branch or commit to check out. Defaults to the repository's default branch.
 
@@ -6544,7 +6544,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/archive \
 
         - `"commit"`
 
-  - `mount_path: optional string`
+  - `mount_path: optional string or null`
 
     Mount path in the container. Defaults to `/workspace/<repo-name>`.
 
@@ -6562,7 +6562,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/archive \
 
     - `"memory_store"`
 
-  - `access: optional "read_write" or "read_only"`
+  - `access: optional "read_write" or "read_only" or null`
 
     Access mode for an attached memory store.
 
@@ -6570,7 +6570,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/archive \
 
     - `"read_only"`
 
-  - `instructions: optional string`
+  - `instructions: optional string or null`
 
     Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
@@ -6714,7 +6714,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/archive \
 
   Evaluation state for a single outcome defined via a define_outcome event.
 
-  - `completed_at: string`
+  - `completed_at: string or null`
 
     A timestamp in RFC 3339 format
 
@@ -6722,7 +6722,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/archive \
 
     What the agent should produce.
 
-  - `explanation: string`
+  - `explanation: string or null`
 
     Grader's verdict text from the most recent evaluation. For satisfied, explains why criteria are met; for needs_revision (intermediate), what's missing; for failed, why unrecoverable.
 
@@ -6770,7 +6770,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/archive \
 
     - `id: string`
 
-    - `description: string`
+    - `description: string or null`
 
     - `mcp_servers: array of BetaManagedAgentsMCPServerURLDefinition`
 
@@ -6908,7 +6908,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/archive \
 
         - `"fast"`
 
-    - `multiagent: BetaManagedAgentsSessionMultiagentCoordinator`
+    - `multiagent: BetaManagedAgentsSessionMultiagentCoordinator or null`
 
       Resolved coordinator topology with full agent definitions for each roster member.
 
@@ -6922,7 +6922,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/archive \
 
           - `id: string`
 
-          - `description: string`
+          - `description: string or null`
 
           - `mcp_servers: array of BetaManagedAgentsMCPServerURLDefinition`
 
@@ -6964,7 +6964,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/archive \
 
               - `version: string`
 
-          - `system: string`
+          - `system: string or null`
 
           - `tools: array of BetaManagedAgentsAgentToolset20260401 or BetaManagedAgentsMCPToolset or BetaManagedAgentsCustomTool`
 
@@ -7094,9 +7094,9 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/archive \
 
                   - `"object"`
 
-                - `properties: optional map[unknown]`
+                - `properties: optional map[unknown] or null`
 
-                - `required: optional array of string`
+                - `required: optional array of string or null`
 
               - `name: string`
 
@@ -7138,7 +7138,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/archive \
 
         A resolved user-created custom skill.
 
-    - `system: string`
+    - `system: string or null`
 
     - `tools: array of BetaManagedAgentsAgentToolset20260401 or BetaManagedAgentsMCPToolset or BetaManagedAgentsCustomTool`
 
@@ -7156,11 +7156,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/archive \
 
     - `version: number`
 
-  - `archived_at: string`
+  - `archived_at: string or null`
 
     A timestamp in RFC 3339 format
 
-  - `budget: BetaManagedAgentsBudgetLimit`
+  - `budget: BetaManagedAgentsBudgetLimit or null`
 
     A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
@@ -7194,7 +7194,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/archive \
 
     Per-outcome evaluation state. One entry per define_outcome event sent to the session.
 
-    - `completed_at: string`
+    - `completed_at: string or null`
 
       A timestamp in RFC 3339 format
 
@@ -7202,7 +7202,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/archive \
 
       What the agent should produce.
 
-    - `explanation: string`
+    - `explanation: string or null`
 
       Grader's verdict text from the most recent evaluation. For satisfied, explains why criteria are met; for needs_revision (intermediate), what's missing; for failed, why unrecoverable.
 
@@ -7244,7 +7244,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/archive \
 
       - `url: string`
 
-      - `checkout: optional BetaManagedAgentsBranchCheckout or BetaManagedAgentsCommitCheckout`
+      - `checkout: optional BetaManagedAgentsBranchCheckout or BetaManagedAgentsCommitCheckout or null`
 
         - `BetaManagedAgentsBranchCheckout object { name, type }`
 
@@ -7298,7 +7298,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/archive \
 
         - `"memory_store"`
 
-      - `access: optional "read_write" or "read_only"`
+      - `access: optional "read_write" or "read_only" or null`
 
         Access mode for an attached memory store.
 
@@ -7310,15 +7310,15 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/archive \
 
         Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
 
-      - `instructions: optional string`
+      - `instructions: optional string or null`
 
         Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
-      - `mount_path: optional string`
+      - `mount_path: optional string or null`
 
         Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
 
-      - `name: optional string`
+      - `name: optional string or null`
 
         Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
@@ -7346,7 +7346,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/archive \
 
     - `"terminated"`
 
-  - `title: string`
+  - `title: string or null`
 
   - `type: "session"`
 
@@ -7384,7 +7384,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/archive \
 
       Total input tokens consumed across all turns.
 
-    - `list_cost: optional BetaMonetaryAmount`
+    - `list_cost: optional BetaMonetaryAmount or null`
 
       A monetary amount in a specific currency.
 
@@ -7392,7 +7392,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/archive \
 
       Total output tokens generated across all turns.
 
-    - `server_tool_use: optional BetaManagedAgentsServerToolUsage`
+    - `server_tool_use: optional BetaManagedAgentsServerToolUsage or null`
 
       Cumulative count of server-executed tool invocations, broken down by tool.
 
@@ -7408,7 +7408,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/archive \
 
     Vault IDs attached to the session at creation. Empty when no vaults were supplied.
 
-  - `deployment_id: optional string`
+  - `deployment_id: optional string or null`
 
     Deployment ID when the session was created from a deployment reference. Null otherwise.
 
@@ -7420,7 +7420,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/archive \
 
   - `id: string`
 
-  - `description: string`
+  - `description: string or null`
 
   - `mcp_servers: array of BetaManagedAgentsMCPServerURLDefinition`
 
@@ -7558,7 +7558,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/archive \
 
       - `"fast"`
 
-  - `multiagent: BetaManagedAgentsSessionMultiagentCoordinator`
+  - `multiagent: BetaManagedAgentsSessionMultiagentCoordinator or null`
 
     Resolved coordinator topology with full agent definitions for each roster member.
 
@@ -7572,7 +7572,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/archive \
 
         - `id: string`
 
-        - `description: string`
+        - `description: string or null`
 
         - `mcp_servers: array of BetaManagedAgentsMCPServerURLDefinition`
 
@@ -7614,7 +7614,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/archive \
 
             - `version: string`
 
-        - `system: string`
+        - `system: string or null`
 
         - `tools: array of BetaManagedAgentsAgentToolset20260401 or BetaManagedAgentsMCPToolset or BetaManagedAgentsCustomTool`
 
@@ -7744,9 +7744,9 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/archive \
 
                 - `"object"`
 
-              - `properties: optional map[unknown]`
+              - `properties: optional map[unknown] or null`
 
-              - `required: optional array of string`
+              - `required: optional array of string or null`
 
             - `name: string`
 
@@ -7788,7 +7788,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/archive \
 
       A resolved user-created custom skill.
 
-  - `system: string`
+  - `system: string or null`
 
   - `tools: array of BetaManagedAgentsAgentToolset20260401 or BetaManagedAgentsMCPToolset or BetaManagedAgentsCustomTool`
 
@@ -7864,11 +7864,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/archive \
 
           - `"web_search"`
 
-        - `enabled: optional boolean`
+        - `enabled: optional boolean or null`
 
           Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-        - `permission_policy: optional BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy`
+        - `permission_policy: optional BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy or null`
 
           Permission policy for tool execution.
 
@@ -7888,15 +7888,15 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/archive \
 
               - `"always_ask"`
 
-      - `default_config: optional BetaManagedAgentsAgentToolsetDefaultConfigParams`
+      - `default_config: optional BetaManagedAgentsAgentToolsetDefaultConfigParams or null`
 
         Default configuration for all tools in a toolset.
 
-        - `enabled: optional boolean`
+        - `enabled: optional boolean or null`
 
           Whether tools are enabled and available to Claude by default. Defaults to true if not specified.
 
-        - `permission_policy: optional BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy`
+        - `permission_policy: optional BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy or null`
 
           Permission policy for tool execution.
 
@@ -7928,11 +7928,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/archive \
 
           Name of the MCP tool to configure. 1-128 characters.
 
-        - `enabled: optional boolean`
+        - `enabled: optional boolean or null`
 
           Whether this tool is enabled. Overrides the `default_config` setting.
 
-        - `permission_policy: optional BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy`
+        - `permission_policy: optional BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy or null`
 
           Permission policy for tool execution.
 
@@ -7944,15 +7944,15 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/archive \
 
             Tool calls require user confirmation before execution.
 
-      - `default_config: optional BetaManagedAgentsMCPToolsetDefaultConfigParams`
+      - `default_config: optional BetaManagedAgentsMCPToolsetDefaultConfigParams or null`
 
         Default configuration for all tools from an MCP server.
 
-        - `enabled: optional boolean`
+        - `enabled: optional boolean or null`
 
           Whether tools are enabled by default. Defaults to true if not specified.
 
-        - `permission_policy: optional BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy`
+        - `permission_policy: optional BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy or null`
 
           Permission policy for tool execution.
 
@@ -7980,9 +7980,9 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/archive \
 
           - `"object"`
 
-        - `properties: optional map[unknown]`
+        - `properties: optional map[unknown] or null`
 
-        - `required: optional array of string`
+        - `required: optional array of string or null`
 
       - `name: string`
 
@@ -8008,7 +8008,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/archive \
 
       - `id: string`
 
-      - `description: string`
+      - `description: string or null`
 
       - `mcp_servers: array of BetaManagedAgentsMCPServerURLDefinition`
 
@@ -8174,7 +8174,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/archive \
 
           - `version: string`
 
-      - `system: string`
+      - `system: string or null`
 
       - `tools: array of BetaManagedAgentsAgentToolset20260401 or BetaManagedAgentsMCPToolset or BetaManagedAgentsCustomTool`
 
@@ -8304,9 +8304,9 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/archive \
 
               - `"object"`
 
-            - `properties: optional map[unknown]`
+            - `properties: optional map[unknown] or null`
 
-            - `required: optional array of string`
+            - `required: optional array of string or null`
 
           - `name: string`
 
@@ -8368,13 +8368,13 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/archive \
 
     - `"session.updated"`
 
-  - `agent: optional BetaManagedAgentsSessionAgent`
+  - `agent: optional BetaManagedAgentsSessionAgent or null`
 
     Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
 
     - `id: string`
 
-    - `description: string`
+    - `description: string or null`
 
     - `mcp_servers: array of BetaManagedAgentsMCPServerURLDefinition`
 
@@ -8512,7 +8512,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/archive \
 
         - `"fast"`
 
-    - `multiagent: BetaManagedAgentsSessionMultiagentCoordinator`
+    - `multiagent: BetaManagedAgentsSessionMultiagentCoordinator or null`
 
       Resolved coordinator topology with full agent definitions for each roster member.
 
@@ -8526,7 +8526,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/archive \
 
           - `id: string`
 
-          - `description: string`
+          - `description: string or null`
 
           - `mcp_servers: array of BetaManagedAgentsMCPServerURLDefinition`
 
@@ -8568,7 +8568,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/archive \
 
               - `version: string`
 
-          - `system: string`
+          - `system: string or null`
 
           - `tools: array of BetaManagedAgentsAgentToolset20260401 or BetaManagedAgentsMCPToolset or BetaManagedAgentsCustomTool`
 
@@ -8698,9 +8698,9 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/archive \
 
                   - `"object"`
 
-                - `properties: optional map[unknown]`
+                - `properties: optional map[unknown] or null`
 
-                - `required: optional array of string`
+                - `required: optional array of string or null`
 
               - `name: string`
 
@@ -8742,7 +8742,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/archive \
 
         A resolved user-created custom skill.
 
-    - `system: string`
+    - `system: string or null`
 
     - `tools: array of BetaManagedAgentsAgentToolset20260401 or BetaManagedAgentsMCPToolset or BetaManagedAgentsCustomTool`
 
@@ -8760,7 +8760,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/archive \
 
     - `version: number`
 
-  - `budget: optional BetaManagedAgentsBudgetLimit`
+  - `budget: optional BetaManagedAgentsBudgetLimit or null`
 
     A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
@@ -8786,7 +8786,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/archive \
 
     The session's full metadata bag after the update. Present when the update set non-empty metadata; absent when metadata was unchanged or cleared to empty.
 
-  - `title: optional string`
+  - `title: optional string or null`
 
     The session's new title. Present only when the update changed it.
 
@@ -8820,7 +8820,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/archive \
 
     Total input tokens consumed across all turns.
 
-  - `list_cost: optional BetaMonetaryAmount`
+  - `list_cost: optional BetaMonetaryAmount or null`
 
     A monetary amount in a specific currency.
 
@@ -8838,7 +8838,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/archive \
 
     Total output tokens generated across all turns.
 
-  - `server_tool_use: optional BetaManagedAgentsServerToolUsage`
+  - `server_tool_use: optional BetaManagedAgentsServerToolUsage or null`
 
     Cumulative count of server-executed tool invocations, broken down by tool.
 
@@ -8926,7 +8926,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/archive \
 
         Number of server-executed web search requests.
 
-  - `budget: optional BetaManagedAgentsBudgetLimit`
+  - `budget: optional BetaManagedAgentsBudgetLimit or null`
 
     A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
@@ -9036,7 +9036,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/archive \
 
     - `"system.message"`
 
-  - `processed_at: optional string`
+  - `processed_at: optional string or null`
 
     A timestamp in RFC 3339 format
 
@@ -9196,11 +9196,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/archive \
 
         - `"document"`
 
-      - `context: optional string`
+      - `context: optional string or null`
 
         Additional context about the document for the model.
 
-      - `title: optional string`
+      - `title: optional string or null`
 
         The title of the document.
 
@@ -9240,15 +9240,15 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/archive \
 
         - `"search_result"`
 
-  - `is_error: optional boolean`
+  - `is_error: optional boolean or null`
 
     Whether the tool execution resulted in an error.
 
-  - `processed_at: optional string`
+  - `processed_at: optional string or null`
 
     A timestamp in RFC 3339 format
 
-  - `session_thread_id: optional string`
+  - `session_thread_id: optional string or null`
 
     Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
 
@@ -9530,11 +9530,11 @@ List Events
 
           - `"document"`
 
-        - `context: optional string`
+        - `context: optional string or null`
 
           Additional context about the document for the model.
 
-        - `title: optional string`
+        - `title: optional string or null`
 
           The title of the document.
 
@@ -9550,7 +9550,7 @@ List Events
 
       - `"user.message"`
 
-    - `processed_at: optional string`
+    - `processed_at: optional string or null`
 
       A timestamp in RFC 3339 format
 
@@ -9566,11 +9566,11 @@ List Events
 
       - `"user.interrupt"`
 
-    - `processed_at: optional string`
+    - `processed_at: optional string or null`
 
       A timestamp in RFC 3339 format
 
-    - `session_thread_id: optional string`
+    - `session_thread_id: optional string or null`
 
       If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
@@ -9598,15 +9598,15 @@ List Events
 
       - `"user.tool_confirmation"`
 
-    - `deny_message: optional string`
+    - `deny_message: optional string or null`
 
       Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
-    - `processed_at: optional string`
+    - `processed_at: optional string or null`
 
       A timestamp in RFC 3339 format
 
-    - `session_thread_id: optional string`
+    - `session_thread_id: optional string or null`
 
       When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
@@ -9678,15 +9678,15 @@ List Events
 
           - `"search_result"`
 
-    - `is_error: optional boolean`
+    - `is_error: optional boolean or null`
 
       Whether the tool execution resulted in an error.
 
-    - `processed_at: optional string`
+    - `processed_at: optional string or null`
 
       A timestamp in RFC 3339 format
 
-    - `session_thread_id: optional string`
+    - `session_thread_id: optional string or null`
 
       Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
 
@@ -9714,7 +9714,7 @@ List Events
 
       - `"agent.custom_tool_use"`
 
-    - `session_thread_id: optional string`
+    - `session_thread_id: optional string or null`
 
       When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
 
@@ -9800,7 +9800,7 @@ List Events
 
       - `"deny"`
 
-    - `session_thread_id: optional string`
+    - `session_thread_id: optional string or null`
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
@@ -9844,7 +9844,7 @@ List Events
 
         A block containing a web search result.
 
-    - `is_error: optional boolean`
+    - `is_error: optional boolean or null`
 
       Whether the tool execution resulted in an error.
 
@@ -9882,7 +9882,7 @@ List Events
 
       - `"deny"`
 
-    - `session_thread_id: optional string`
+    - `session_thread_id: optional string or null`
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
@@ -9926,7 +9926,7 @@ List Events
 
         A block containing a web search result.
 
-    - `is_error: optional boolean`
+    - `is_error: optional boolean or null`
 
       Whether the tool execution resulted in an error.
 
@@ -9970,7 +9970,7 @@ List Events
 
       - `"agent.thread_message_received"`
 
-    - `from_agent_name: optional string`
+    - `from_agent_name: optional string or null`
 
       Name of the callable agent this message came from. Absent when received from the primary agent.
 
@@ -10014,7 +10014,7 @@ List Events
 
       - `"agent.thread_message_sent"`
 
-    - `to_agent_name: optional string`
+    - `to_agent_name: optional string or null`
 
       Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
@@ -10514,7 +10514,7 @@ List Events
 
         Output tokens generated by this request.
 
-      - `speed: optional "standard" or "fast"`
+      - `speed: optional "standard" or "fast" or null`
 
         Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
@@ -10546,7 +10546,7 @@ List Events
 
       Unique identifier for this event.
 
-    - `is_error: boolean`
+    - `is_error: boolean or null`
 
       Whether the model request resulted in an error.
 
@@ -10602,7 +10602,7 @@ List Events
 
       What the agent should produce. Copied from the input event.
 
-    - `max_iterations: number`
+    - `max_iterations: number or null`
 
       Evaluate-then-revise cycles before giving up. Default 3, max 20.
 
@@ -10790,15 +10790,15 @@ List Events
 
         A block containing a web search result.
 
-    - `is_error: optional boolean`
+    - `is_error: optional boolean or null`
 
       Whether the tool execution resulted in an error.
 
-    - `processed_at: optional string`
+    - `processed_at: optional string or null`
 
       A timestamp in RFC 3339 format
 
-    - `session_thread_id: optional string`
+    - `session_thread_id: optional string or null`
 
       Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
 
@@ -10842,13 +10842,13 @@ List Events
 
       - `"session.updated"`
 
-    - `agent: optional BetaManagedAgentsSessionAgent`
+    - `agent: optional BetaManagedAgentsSessionAgent or null`
 
       Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
 
       - `id: string`
 
-      - `description: string`
+      - `description: string or null`
 
       - `mcp_servers: array of BetaManagedAgentsMCPServerURLDefinition`
 
@@ -10986,7 +10986,7 @@ List Events
 
           - `"fast"`
 
-      - `multiagent: BetaManagedAgentsSessionMultiagentCoordinator`
+      - `multiagent: BetaManagedAgentsSessionMultiagentCoordinator or null`
 
         Resolved coordinator topology with full agent definitions for each roster member.
 
@@ -11000,7 +11000,7 @@ List Events
 
             - `id: string`
 
-            - `description: string`
+            - `description: string or null`
 
             - `mcp_servers: array of BetaManagedAgentsMCPServerURLDefinition`
 
@@ -11042,7 +11042,7 @@ List Events
 
                 - `version: string`
 
-            - `system: string`
+            - `system: string or null`
 
             - `tools: array of BetaManagedAgentsAgentToolset20260401 or BetaManagedAgentsMCPToolset or BetaManagedAgentsCustomTool`
 
@@ -11172,9 +11172,9 @@ List Events
 
                     - `"object"`
 
-                  - `properties: optional map[unknown]`
+                  - `properties: optional map[unknown] or null`
 
-                  - `required: optional array of string`
+                  - `required: optional array of string or null`
 
                 - `name: string`
 
@@ -11216,7 +11216,7 @@ List Events
 
           A resolved user-created custom skill.
 
-      - `system: string`
+      - `system: string or null`
 
       - `tools: array of BetaManagedAgentsAgentToolset20260401 or BetaManagedAgentsMCPToolset or BetaManagedAgentsCustomTool`
 
@@ -11234,7 +11234,7 @@ List Events
 
       - `version: number`
 
-    - `budget: optional BetaManagedAgentsBudgetLimit`
+    - `budget: optional BetaManagedAgentsBudgetLimit or null`
 
       A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
@@ -11260,7 +11260,7 @@ List Events
 
       The session's full metadata bag after the update. Present when the update set non-empty metadata; absent when metadata was unchanged or cleared to empty.
 
-    - `title: optional string`
+    - `title: optional string or null`
 
       The session's new title. Present only when the update changed it.
 
@@ -11288,7 +11288,7 @@ List Events
 
       - `"system.message"`
 
-    - `processed_at: optional string`
+    - `processed_at: optional string or null`
 
       A timestamp in RFC 3339 format
 
@@ -11356,11 +11356,11 @@ List Events
 
           Number of server-executed web search requests.
 
-    - `budget: optional BetaManagedAgentsBudgetLimit`
+    - `budget: optional BetaManagedAgentsBudgetLimit or null`
 
       A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
-- `next_page: optional string`
+- `next_page: optional string or null`
 
   Opaque cursor for the next page. Null when no more results.
 
@@ -11639,11 +11639,11 @@ Send Events
 
           - `"document"`
 
-        - `context: optional string`
+        - `context: optional string or null`
 
           Additional context about the document for the model.
 
-        - `title: optional string`
+        - `title: optional string or null`
 
           The title of the document.
 
@@ -11667,7 +11667,7 @@ Send Events
 
       - `"user.interrupt"`
 
-    - `session_thread_id: optional string`
+    - `session_thread_id: optional string or null`
 
       If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
@@ -11691,7 +11691,7 @@ Send Events
 
       - `"user.tool_confirmation"`
 
-    - `deny_message: optional string`
+    - `deny_message: optional string or null`
 
       Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
@@ -11759,7 +11759,7 @@ Send Events
 
           - `"search_result"`
 
-    - `is_error: optional boolean`
+    - `is_error: optional boolean or null`
 
       Whether the tool execution resulted in an error.
 
@@ -11803,7 +11803,7 @@ Send Events
 
       - `"user.define_outcome"`
 
-    - `max_iterations: optional number`
+    - `max_iterations: optional number or null`
 
       Eval→revision cycles before giving up. Default 3, max 20.
 
@@ -11839,7 +11839,7 @@ Send Events
 
         A block containing a web search result.
 
-    - `is_error: optional boolean`
+    - `is_error: optional boolean or null`
 
       Whether the tool execution resulted in an error.
 
@@ -12019,11 +12019,11 @@ Send Events
 
             - `"document"`
 
-          - `context: optional string`
+          - `context: optional string or null`
 
             Additional context about the document for the model.
 
-          - `title: optional string`
+          - `title: optional string or null`
 
             The title of the document.
 
@@ -12039,7 +12039,7 @@ Send Events
 
         - `"user.message"`
 
-      - `processed_at: optional string`
+      - `processed_at: optional string or null`
 
         A timestamp in RFC 3339 format
 
@@ -12055,11 +12055,11 @@ Send Events
 
         - `"user.interrupt"`
 
-      - `processed_at: optional string`
+      - `processed_at: optional string or null`
 
         A timestamp in RFC 3339 format
 
-      - `session_thread_id: optional string`
+      - `session_thread_id: optional string or null`
 
         If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
@@ -12087,15 +12087,15 @@ Send Events
 
         - `"user.tool_confirmation"`
 
-      - `deny_message: optional string`
+      - `deny_message: optional string or null`
 
         Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
-      - `processed_at: optional string`
+      - `processed_at: optional string or null`
 
         A timestamp in RFC 3339 format
 
-      - `session_thread_id: optional string`
+      - `session_thread_id: optional string or null`
 
         When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
@@ -12167,15 +12167,15 @@ Send Events
 
             - `"search_result"`
 
-      - `is_error: optional boolean`
+      - `is_error: optional boolean or null`
 
         Whether the tool execution resulted in an error.
 
-      - `processed_at: optional string`
+      - `processed_at: optional string or null`
 
         A timestamp in RFC 3339 format
 
-      - `session_thread_id: optional string`
+      - `session_thread_id: optional string or null`
 
         Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
 
@@ -12191,7 +12191,7 @@ Send Events
 
         What the agent should produce. Copied from the input event.
 
-      - `max_iterations: number`
+      - `max_iterations: number or null`
 
         Evaluate-then-revise cycles before giving up. Default 3, max 20.
 
@@ -12271,15 +12271,15 @@ Send Events
 
           A block containing a web search result.
 
-      - `is_error: optional boolean`
+      - `is_error: optional boolean or null`
 
         Whether the tool execution resulted in an error.
 
-      - `processed_at: optional string`
+      - `processed_at: optional string or null`
 
         A timestamp in RFC 3339 format
 
-      - `session_thread_id: optional string`
+      - `session_thread_id: optional string or null`
 
         Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
 
@@ -12307,7 +12307,7 @@ Send Events
 
         - `"system.message"`
 
-      - `processed_at: optional string`
+      - `processed_at: optional string or null`
 
         A timestamp in RFC 3339 format
 
@@ -12602,11 +12602,11 @@ Stream Events
 
           - `"document"`
 
-        - `context: optional string`
+        - `context: optional string or null`
 
           Additional context about the document for the model.
 
-        - `title: optional string`
+        - `title: optional string or null`
 
           The title of the document.
 
@@ -12622,7 +12622,7 @@ Stream Events
 
       - `"user.message"`
 
-    - `processed_at: optional string`
+    - `processed_at: optional string or null`
 
       A timestamp in RFC 3339 format
 
@@ -12638,11 +12638,11 @@ Stream Events
 
       - `"user.interrupt"`
 
-    - `processed_at: optional string`
+    - `processed_at: optional string or null`
 
       A timestamp in RFC 3339 format
 
-    - `session_thread_id: optional string`
+    - `session_thread_id: optional string or null`
 
       If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
@@ -12670,15 +12670,15 @@ Stream Events
 
       - `"user.tool_confirmation"`
 
-    - `deny_message: optional string`
+    - `deny_message: optional string or null`
 
       Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
-    - `processed_at: optional string`
+    - `processed_at: optional string or null`
 
       A timestamp in RFC 3339 format
 
-    - `session_thread_id: optional string`
+    - `session_thread_id: optional string or null`
 
       When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
@@ -12750,15 +12750,15 @@ Stream Events
 
           - `"search_result"`
 
-    - `is_error: optional boolean`
+    - `is_error: optional boolean or null`
 
       Whether the tool execution resulted in an error.
 
-    - `processed_at: optional string`
+    - `processed_at: optional string or null`
 
       A timestamp in RFC 3339 format
 
-    - `session_thread_id: optional string`
+    - `session_thread_id: optional string or null`
 
       Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
 
@@ -12786,7 +12786,7 @@ Stream Events
 
       - `"agent.custom_tool_use"`
 
-    - `session_thread_id: optional string`
+    - `session_thread_id: optional string or null`
 
       When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
 
@@ -12872,7 +12872,7 @@ Stream Events
 
       - `"deny"`
 
-    - `session_thread_id: optional string`
+    - `session_thread_id: optional string or null`
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
@@ -12916,7 +12916,7 @@ Stream Events
 
         A block containing a web search result.
 
-    - `is_error: optional boolean`
+    - `is_error: optional boolean or null`
 
       Whether the tool execution resulted in an error.
 
@@ -12954,7 +12954,7 @@ Stream Events
 
       - `"deny"`
 
-    - `session_thread_id: optional string`
+    - `session_thread_id: optional string or null`
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
@@ -12998,7 +12998,7 @@ Stream Events
 
         A block containing a web search result.
 
-    - `is_error: optional boolean`
+    - `is_error: optional boolean or null`
 
       Whether the tool execution resulted in an error.
 
@@ -13042,7 +13042,7 @@ Stream Events
 
       - `"agent.thread_message_received"`
 
-    - `from_agent_name: optional string`
+    - `from_agent_name: optional string or null`
 
       Name of the callable agent this message came from. Absent when received from the primary agent.
 
@@ -13086,7 +13086,7 @@ Stream Events
 
       - `"agent.thread_message_sent"`
 
-    - `to_agent_name: optional string`
+    - `to_agent_name: optional string or null`
 
       Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
@@ -13586,7 +13586,7 @@ Stream Events
 
         Output tokens generated by this request.
 
-      - `speed: optional "standard" or "fast"`
+      - `speed: optional "standard" or "fast" or null`
 
         Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
@@ -13618,7 +13618,7 @@ Stream Events
 
       Unique identifier for this event.
 
-    - `is_error: boolean`
+    - `is_error: boolean or null`
 
       Whether the model request resulted in an error.
 
@@ -13674,7 +13674,7 @@ Stream Events
 
       What the agent should produce. Copied from the input event.
 
-    - `max_iterations: number`
+    - `max_iterations: number or null`
 
       Evaluate-then-revise cycles before giving up. Default 3, max 20.
 
@@ -13862,15 +13862,15 @@ Stream Events
 
         A block containing a web search result.
 
-    - `is_error: optional boolean`
+    - `is_error: optional boolean or null`
 
       Whether the tool execution resulted in an error.
 
-    - `processed_at: optional string`
+    - `processed_at: optional string or null`
 
       A timestamp in RFC 3339 format
 
-    - `session_thread_id: optional string`
+    - `session_thread_id: optional string or null`
 
       Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
 
@@ -13914,13 +13914,13 @@ Stream Events
 
       - `"session.updated"`
 
-    - `agent: optional BetaManagedAgentsSessionAgent`
+    - `agent: optional BetaManagedAgentsSessionAgent or null`
 
       Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
 
       - `id: string`
 
-      - `description: string`
+      - `description: string or null`
 
       - `mcp_servers: array of BetaManagedAgentsMCPServerURLDefinition`
 
@@ -14058,7 +14058,7 @@ Stream Events
 
           - `"fast"`
 
-      - `multiagent: BetaManagedAgentsSessionMultiagentCoordinator`
+      - `multiagent: BetaManagedAgentsSessionMultiagentCoordinator or null`
 
         Resolved coordinator topology with full agent definitions for each roster member.
 
@@ -14072,7 +14072,7 @@ Stream Events
 
             - `id: string`
 
-            - `description: string`
+            - `description: string or null`
 
             - `mcp_servers: array of BetaManagedAgentsMCPServerURLDefinition`
 
@@ -14114,7 +14114,7 @@ Stream Events
 
                 - `version: string`
 
-            - `system: string`
+            - `system: string or null`
 
             - `tools: array of BetaManagedAgentsAgentToolset20260401 or BetaManagedAgentsMCPToolset or BetaManagedAgentsCustomTool`
 
@@ -14244,9 +14244,9 @@ Stream Events
 
                     - `"object"`
 
-                  - `properties: optional map[unknown]`
+                  - `properties: optional map[unknown] or null`
 
-                  - `required: optional array of string`
+                  - `required: optional array of string or null`
 
                 - `name: string`
 
@@ -14288,7 +14288,7 @@ Stream Events
 
           A resolved user-created custom skill.
 
-      - `system: string`
+      - `system: string or null`
 
       - `tools: array of BetaManagedAgentsAgentToolset20260401 or BetaManagedAgentsMCPToolset or BetaManagedAgentsCustomTool`
 
@@ -14306,7 +14306,7 @@ Stream Events
 
       - `version: number`
 
-    - `budget: optional BetaManagedAgentsBudgetLimit`
+    - `budget: optional BetaManagedAgentsBudgetLimit or null`
 
       A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
@@ -14332,7 +14332,7 @@ Stream Events
 
       The session's full metadata bag after the update. Present when the update set non-empty metadata; absent when metadata was unchanged or cleared to empty.
 
-    - `title: optional string`
+    - `title: optional string or null`
 
       The session's new title. Present only when the update changed it.
 
@@ -14420,7 +14420,7 @@ Stream Events
 
       - `"system.message"`
 
-    - `processed_at: optional string`
+    - `processed_at: optional string or null`
 
       A timestamp in RFC 3339 format
 
@@ -14488,7 +14488,7 @@ Stream Events
 
           Number of server-executed web search requests.
 
-    - `budget: optional BetaManagedAgentsBudgetLimit`
+    - `budget: optional BetaManagedAgentsBudgetLimit or null`
 
       A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
@@ -14545,7 +14545,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     - `"agent.custom_tool_use"`
 
-  - `session_thread_id: optional string`
+  - `session_thread_id: optional string or null`
 
     When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
 
@@ -14709,11 +14709,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         - `"document"`
 
-      - `context: optional string`
+      - `context: optional string or null`
 
         Additional context about the document for the model.
 
-      - `title: optional string`
+      - `title: optional string or null`
 
         The title of the document.
 
@@ -14753,7 +14753,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         - `"search_result"`
 
-  - `is_error: optional boolean`
+  - `is_error: optional boolean or null`
 
     Whether the tool execution resulted in an error.
 
@@ -14797,7 +14797,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     - `"deny"`
 
-  - `session_thread_id: optional string`
+  - `session_thread_id: optional string or null`
 
     When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
@@ -15027,11 +15027,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         - `"document"`
 
-      - `context: optional string`
+      - `context: optional string or null`
 
         Additional context about the document for the model.
 
-      - `title: optional string`
+      - `title: optional string or null`
 
         The title of the document.
 
@@ -15055,7 +15055,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     - `"agent.thread_message_received"`
 
-  - `from_agent_name: optional string`
+  - `from_agent_name: optional string or null`
 
     Name of the callable agent this message came from. Absent when received from the primary agent.
 
@@ -15207,11 +15207,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         - `"document"`
 
-      - `context: optional string`
+      - `context: optional string or null`
 
         Additional context about the document for the model.
 
-      - `title: optional string`
+      - `title: optional string or null`
 
         The title of the document.
 
@@ -15235,7 +15235,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     - `"agent.thread_message_sent"`
 
-  - `to_agent_name: optional string`
+  - `to_agent_name: optional string or null`
 
     Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
@@ -15399,11 +15399,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         - `"document"`
 
-      - `context: optional string`
+      - `context: optional string or null`
 
         Additional context about the document for the model.
 
-      - `title: optional string`
+      - `title: optional string or null`
 
         The title of the document.
 
@@ -15443,7 +15443,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         - `"search_result"`
 
-  - `is_error: optional boolean`
+  - `is_error: optional boolean or null`
 
     Whether the tool execution resulted in an error.
 
@@ -15483,7 +15483,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     - `"deny"`
 
-  - `session_thread_id: optional string`
+  - `session_thread_id: optional string or null`
 
     When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
@@ -15687,11 +15687,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     - `"document"`
 
-  - `context: optional string`
+  - `context: optional string or null`
 
     Additional context about the document for the model.
 
-  - `title: optional string`
+  - `title: optional string or null`
 
     The title of the document.
 
@@ -15843,11 +15843,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
           - `"document"`
 
-        - `context: optional string`
+        - `context: optional string or null`
 
           Additional context about the document for the model.
 
-        - `title: optional string`
+        - `title: optional string or null`
 
           The title of the document.
 
@@ -15871,7 +15871,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       - `"user.interrupt"`
 
-    - `session_thread_id: optional string`
+    - `session_thread_id: optional string or null`
 
       If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
@@ -15895,7 +15895,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       - `"user.tool_confirmation"`
 
-    - `deny_message: optional string`
+    - `deny_message: optional string or null`
 
       Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
@@ -15963,7 +15963,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
           - `"search_result"`
 
-    - `is_error: optional boolean`
+    - `is_error: optional boolean or null`
 
       Whether the tool execution resulted in an error.
 
@@ -16007,7 +16007,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       - `"user.define_outcome"`
 
-    - `max_iterations: optional number`
+    - `max_iterations: optional number or null`
 
       Eval→revision cycles before giving up. Default 3, max 20.
 
@@ -16043,7 +16043,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         A block containing a web search result.
 
-    - `is_error: optional boolean`
+    - `is_error: optional boolean or null`
 
       Whether the tool execution resulted in an error.
 
@@ -16673,11 +16673,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
             - `"document"`
 
-          - `context: optional string`
+          - `context: optional string or null`
 
             Additional context about the document for the model.
 
-          - `title: optional string`
+          - `title: optional string or null`
 
             The title of the document.
 
@@ -16693,7 +16693,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         - `"user.message"`
 
-      - `processed_at: optional string`
+      - `processed_at: optional string or null`
 
         A timestamp in RFC 3339 format
 
@@ -16709,11 +16709,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         - `"user.interrupt"`
 
-      - `processed_at: optional string`
+      - `processed_at: optional string or null`
 
         A timestamp in RFC 3339 format
 
-      - `session_thread_id: optional string`
+      - `session_thread_id: optional string or null`
 
         If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
@@ -16741,15 +16741,15 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         - `"user.tool_confirmation"`
 
-      - `deny_message: optional string`
+      - `deny_message: optional string or null`
 
         Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
-      - `processed_at: optional string`
+      - `processed_at: optional string or null`
 
         A timestamp in RFC 3339 format
 
-      - `session_thread_id: optional string`
+      - `session_thread_id: optional string or null`
 
         When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
@@ -16821,15 +16821,15 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
             - `"search_result"`
 
-      - `is_error: optional boolean`
+      - `is_error: optional boolean or null`
 
         Whether the tool execution resulted in an error.
 
-      - `processed_at: optional string`
+      - `processed_at: optional string or null`
 
         A timestamp in RFC 3339 format
 
-      - `session_thread_id: optional string`
+      - `session_thread_id: optional string or null`
 
         Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
 
@@ -16845,7 +16845,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         What the agent should produce. Copied from the input event.
 
-      - `max_iterations: number`
+      - `max_iterations: number or null`
 
         Evaluate-then-revise cycles before giving up. Default 3, max 20.
 
@@ -16925,15 +16925,15 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
           A block containing a web search result.
 
-      - `is_error: optional boolean`
+      - `is_error: optional boolean or null`
 
         Whether the tool execution resulted in an error.
 
-      - `processed_at: optional string`
+      - `processed_at: optional string or null`
 
         A timestamp in RFC 3339 format
 
-      - `session_thread_id: optional string`
+      - `session_thread_id: optional string or null`
 
         Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
 
@@ -16961,7 +16961,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         - `"system.message"`
 
-      - `processed_at: optional string`
+      - `processed_at: optional string or null`
 
         A timestamp in RFC 3339 format
 
@@ -17429,11 +17429,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
           - `"document"`
 
-        - `context: optional string`
+        - `context: optional string or null`
 
           Additional context about the document for the model.
 
-        - `title: optional string`
+        - `title: optional string or null`
 
           The title of the document.
 
@@ -17449,7 +17449,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       - `"user.message"`
 
-    - `processed_at: optional string`
+    - `processed_at: optional string or null`
 
       A timestamp in RFC 3339 format
 
@@ -17465,11 +17465,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       - `"user.interrupt"`
 
-    - `processed_at: optional string`
+    - `processed_at: optional string or null`
 
       A timestamp in RFC 3339 format
 
-    - `session_thread_id: optional string`
+    - `session_thread_id: optional string or null`
 
       If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
@@ -17497,15 +17497,15 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       - `"user.tool_confirmation"`
 
-    - `deny_message: optional string`
+    - `deny_message: optional string or null`
 
       Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
-    - `processed_at: optional string`
+    - `processed_at: optional string or null`
 
       A timestamp in RFC 3339 format
 
-    - `session_thread_id: optional string`
+    - `session_thread_id: optional string or null`
 
       When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
@@ -17577,15 +17577,15 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
           - `"search_result"`
 
-    - `is_error: optional boolean`
+    - `is_error: optional boolean or null`
 
       Whether the tool execution resulted in an error.
 
-    - `processed_at: optional string`
+    - `processed_at: optional string or null`
 
       A timestamp in RFC 3339 format
 
-    - `session_thread_id: optional string`
+    - `session_thread_id: optional string or null`
 
       Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
 
@@ -17613,7 +17613,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       - `"agent.custom_tool_use"`
 
-    - `session_thread_id: optional string`
+    - `session_thread_id: optional string or null`
 
       When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
 
@@ -17699,7 +17699,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       - `"deny"`
 
-    - `session_thread_id: optional string`
+    - `session_thread_id: optional string or null`
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
@@ -17743,7 +17743,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         A block containing a web search result.
 
-    - `is_error: optional boolean`
+    - `is_error: optional boolean or null`
 
       Whether the tool execution resulted in an error.
 
@@ -17781,7 +17781,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       - `"deny"`
 
-    - `session_thread_id: optional string`
+    - `session_thread_id: optional string or null`
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
@@ -17825,7 +17825,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         A block containing a web search result.
 
-    - `is_error: optional boolean`
+    - `is_error: optional boolean or null`
 
       Whether the tool execution resulted in an error.
 
@@ -17869,7 +17869,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       - `"agent.thread_message_received"`
 
-    - `from_agent_name: optional string`
+    - `from_agent_name: optional string or null`
 
       Name of the callable agent this message came from. Absent when received from the primary agent.
 
@@ -17913,7 +17913,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       - `"agent.thread_message_sent"`
 
-    - `to_agent_name: optional string`
+    - `to_agent_name: optional string or null`
 
       Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
@@ -18413,7 +18413,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         Output tokens generated by this request.
 
-      - `speed: optional "standard" or "fast"`
+      - `speed: optional "standard" or "fast" or null`
 
         Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
@@ -18445,7 +18445,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       Unique identifier for this event.
 
-    - `is_error: boolean`
+    - `is_error: boolean or null`
 
       Whether the model request resulted in an error.
 
@@ -18501,7 +18501,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       What the agent should produce. Copied from the input event.
 
-    - `max_iterations: number`
+    - `max_iterations: number or null`
 
       Evaluate-then-revise cycles before giving up. Default 3, max 20.
 
@@ -18689,15 +18689,15 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         A block containing a web search result.
 
-    - `is_error: optional boolean`
+    - `is_error: optional boolean or null`
 
       Whether the tool execution resulted in an error.
 
-    - `processed_at: optional string`
+    - `processed_at: optional string or null`
 
       A timestamp in RFC 3339 format
 
-    - `session_thread_id: optional string`
+    - `session_thread_id: optional string or null`
 
       Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
 
@@ -18741,13 +18741,13 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       - `"session.updated"`
 
-    - `agent: optional BetaManagedAgentsSessionAgent`
+    - `agent: optional BetaManagedAgentsSessionAgent or null`
 
       Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
 
       - `id: string`
 
-      - `description: string`
+      - `description: string or null`
 
       - `mcp_servers: array of BetaManagedAgentsMCPServerURLDefinition`
 
@@ -18885,7 +18885,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
           - `"fast"`
 
-      - `multiagent: BetaManagedAgentsSessionMultiagentCoordinator`
+      - `multiagent: BetaManagedAgentsSessionMultiagentCoordinator or null`
 
         Resolved coordinator topology with full agent definitions for each roster member.
 
@@ -18899,7 +18899,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
             - `id: string`
 
-            - `description: string`
+            - `description: string or null`
 
             - `mcp_servers: array of BetaManagedAgentsMCPServerURLDefinition`
 
@@ -18941,7 +18941,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
                 - `version: string`
 
-            - `system: string`
+            - `system: string or null`
 
             - `tools: array of BetaManagedAgentsAgentToolset20260401 or BetaManagedAgentsMCPToolset or BetaManagedAgentsCustomTool`
 
@@ -19071,9 +19071,9 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
                     - `"object"`
 
-                  - `properties: optional map[unknown]`
+                  - `properties: optional map[unknown] or null`
 
-                  - `required: optional array of string`
+                  - `required: optional array of string or null`
 
                 - `name: string`
 
@@ -19115,7 +19115,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
           A resolved user-created custom skill.
 
-      - `system: string`
+      - `system: string or null`
 
       - `tools: array of BetaManagedAgentsAgentToolset20260401 or BetaManagedAgentsMCPToolset or BetaManagedAgentsCustomTool`
 
@@ -19133,7 +19133,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       - `version: number`
 
-    - `budget: optional BetaManagedAgentsBudgetLimit`
+    - `budget: optional BetaManagedAgentsBudgetLimit or null`
 
       A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
@@ -19159,7 +19159,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       The session's full metadata bag after the update. Present when the update set non-empty metadata; absent when metadata was unchanged or cleared to empty.
 
-    - `title: optional string`
+    - `title: optional string or null`
 
       The session's new title. Present only when the update changed it.
 
@@ -19187,7 +19187,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       - `"system.message"`
 
-    - `processed_at: optional string`
+    - `processed_at: optional string or null`
 
       A timestamp in RFC 3339 format
 
@@ -19255,7 +19255,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
           Number of server-executed web search requests.
 
-    - `budget: optional BetaManagedAgentsBudgetLimit`
+    - `budget: optional BetaManagedAgentsBudgetLimit or null`
 
       A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
@@ -19635,7 +19635,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     Unique identifier for this event.
 
-  - `is_error: boolean`
+  - `is_error: boolean or null`
 
     Whether the model request resulted in an error.
 
@@ -19663,7 +19663,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       Output tokens generated by this request.
 
-    - `speed: optional "standard" or "fast"`
+    - `speed: optional "standard" or "fast" or null`
 
       Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
@@ -19719,7 +19719,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     Output tokens generated by this request.
 
-  - `speed: optional "standard" or "fast"`
+  - `speed: optional "standard" or "fast" or null`
 
     Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
@@ -19785,7 +19785,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       Output tokens generated by this request.
 
-    - `speed: optional "standard" or "fast"`
+    - `speed: optional "standard" or "fast" or null`
 
       Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
@@ -19997,11 +19997,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
           - `"document"`
 
-        - `context: optional string`
+        - `context: optional string or null`
 
           Additional context about the document for the model.
 
-        - `title: optional string`
+        - `title: optional string or null`
 
           The title of the document.
 
@@ -20017,7 +20017,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       - `"user.message"`
 
-    - `processed_at: optional string`
+    - `processed_at: optional string or null`
 
       A timestamp in RFC 3339 format
 
@@ -20033,11 +20033,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       - `"user.interrupt"`
 
-    - `processed_at: optional string`
+    - `processed_at: optional string or null`
 
       A timestamp in RFC 3339 format
 
-    - `session_thread_id: optional string`
+    - `session_thread_id: optional string or null`
 
       If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
@@ -20065,15 +20065,15 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       - `"user.tool_confirmation"`
 
-    - `deny_message: optional string`
+    - `deny_message: optional string or null`
 
       Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
-    - `processed_at: optional string`
+    - `processed_at: optional string or null`
 
       A timestamp in RFC 3339 format
 
-    - `session_thread_id: optional string`
+    - `session_thread_id: optional string or null`
 
       When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
@@ -20145,15 +20145,15 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
           - `"search_result"`
 
-    - `is_error: optional boolean`
+    - `is_error: optional boolean or null`
 
       Whether the tool execution resulted in an error.
 
-    - `processed_at: optional string`
+    - `processed_at: optional string or null`
 
       A timestamp in RFC 3339 format
 
-    - `session_thread_id: optional string`
+    - `session_thread_id: optional string or null`
 
       Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
 
@@ -20181,7 +20181,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       - `"agent.custom_tool_use"`
 
-    - `session_thread_id: optional string`
+    - `session_thread_id: optional string or null`
 
       When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
 
@@ -20267,7 +20267,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       - `"deny"`
 
-    - `session_thread_id: optional string`
+    - `session_thread_id: optional string or null`
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
@@ -20311,7 +20311,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         A block containing a web search result.
 
-    - `is_error: optional boolean`
+    - `is_error: optional boolean or null`
 
       Whether the tool execution resulted in an error.
 
@@ -20349,7 +20349,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       - `"deny"`
 
-    - `session_thread_id: optional string`
+    - `session_thread_id: optional string or null`
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
@@ -20393,7 +20393,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         A block containing a web search result.
 
-    - `is_error: optional boolean`
+    - `is_error: optional boolean or null`
 
       Whether the tool execution resulted in an error.
 
@@ -20437,7 +20437,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       - `"agent.thread_message_received"`
 
-    - `from_agent_name: optional string`
+    - `from_agent_name: optional string or null`
 
       Name of the callable agent this message came from. Absent when received from the primary agent.
 
@@ -20481,7 +20481,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       - `"agent.thread_message_sent"`
 
-    - `to_agent_name: optional string`
+    - `to_agent_name: optional string or null`
 
       Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
@@ -20981,7 +20981,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         Output tokens generated by this request.
 
-      - `speed: optional "standard" or "fast"`
+      - `speed: optional "standard" or "fast" or null`
 
         Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
@@ -21013,7 +21013,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       Unique identifier for this event.
 
-    - `is_error: boolean`
+    - `is_error: boolean or null`
 
       Whether the model request resulted in an error.
 
@@ -21069,7 +21069,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       What the agent should produce. Copied from the input event.
 
-    - `max_iterations: number`
+    - `max_iterations: number or null`
 
       Evaluate-then-revise cycles before giving up. Default 3, max 20.
 
@@ -21257,15 +21257,15 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         A block containing a web search result.
 
-    - `is_error: optional boolean`
+    - `is_error: optional boolean or null`
 
       Whether the tool execution resulted in an error.
 
-    - `processed_at: optional string`
+    - `processed_at: optional string or null`
 
       A timestamp in RFC 3339 format
 
-    - `session_thread_id: optional string`
+    - `session_thread_id: optional string or null`
 
       Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
 
@@ -21309,13 +21309,13 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       - `"session.updated"`
 
-    - `agent: optional BetaManagedAgentsSessionAgent`
+    - `agent: optional BetaManagedAgentsSessionAgent or null`
 
       Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
 
       - `id: string`
 
-      - `description: string`
+      - `description: string or null`
 
       - `mcp_servers: array of BetaManagedAgentsMCPServerURLDefinition`
 
@@ -21453,7 +21453,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
           - `"fast"`
 
-      - `multiagent: BetaManagedAgentsSessionMultiagentCoordinator`
+      - `multiagent: BetaManagedAgentsSessionMultiagentCoordinator or null`
 
         Resolved coordinator topology with full agent definitions for each roster member.
 
@@ -21467,7 +21467,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
             - `id: string`
 
-            - `description: string`
+            - `description: string or null`
 
             - `mcp_servers: array of BetaManagedAgentsMCPServerURLDefinition`
 
@@ -21509,7 +21509,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
                 - `version: string`
 
-            - `system: string`
+            - `system: string or null`
 
             - `tools: array of BetaManagedAgentsAgentToolset20260401 or BetaManagedAgentsMCPToolset or BetaManagedAgentsCustomTool`
 
@@ -21639,9 +21639,9 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
                     - `"object"`
 
-                  - `properties: optional map[unknown]`
+                  - `properties: optional map[unknown] or null`
 
-                  - `required: optional array of string`
+                  - `required: optional array of string or null`
 
                 - `name: string`
 
@@ -21683,7 +21683,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
           A resolved user-created custom skill.
 
-      - `system: string`
+      - `system: string or null`
 
       - `tools: array of BetaManagedAgentsAgentToolset20260401 or BetaManagedAgentsMCPToolset or BetaManagedAgentsCustomTool`
 
@@ -21701,7 +21701,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       - `version: number`
 
-    - `budget: optional BetaManagedAgentsBudgetLimit`
+    - `budget: optional BetaManagedAgentsBudgetLimit or null`
 
       A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
@@ -21727,7 +21727,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       The session's full metadata bag after the update. Present when the update set non-empty metadata; absent when metadata was unchanged or cleared to empty.
 
-    - `title: optional string`
+    - `title: optional string or null`
 
       The session's new title. Present only when the update changed it.
 
@@ -21815,7 +21815,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
       - `"system.message"`
 
-    - `processed_at: optional string`
+    - `processed_at: optional string or null`
 
       A timestamp in RFC 3339 format
 
@@ -21883,7 +21883,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
           Number of server-executed web search requests.
 
-    - `budget: optional BetaManagedAgentsBudgetLimit`
+    - `budget: optional BetaManagedAgentsBudgetLimit or null`
 
       A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
@@ -22177,11 +22177,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         - `"document"`
 
-      - `context: optional string`
+      - `context: optional string or null`
 
         Additional context about the document for the model.
 
-      - `title: optional string`
+      - `title: optional string or null`
 
         The title of the document.
 
@@ -22221,15 +22221,15 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         - `"search_result"`
 
-  - `is_error: optional boolean`
+  - `is_error: optional boolean or null`
 
     Whether the tool execution resulted in an error.
 
-  - `processed_at: optional string`
+  - `processed_at: optional string or null`
 
     A timestamp in RFC 3339 format
 
-  - `session_thread_id: optional string`
+  - `session_thread_id: optional string or null`
 
     Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
 
@@ -22385,11 +22385,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         - `"document"`
 
-      - `context: optional string`
+      - `context: optional string or null`
 
         Additional context about the document for the model.
 
-      - `title: optional string`
+      - `title: optional string or null`
 
         The title of the document.
 
@@ -22429,7 +22429,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         - `"search_result"`
 
-  - `is_error: optional boolean`
+  - `is_error: optional boolean or null`
 
     Whether the tool execution resulted in an error.
 
@@ -22447,7 +22447,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     What the agent should produce. Copied from the input event.
 
-  - `max_iterations: number`
+  - `max_iterations: number or null`
 
     Evaluate-then-revise cycles before giving up. Default 3, max 20.
 
@@ -22533,7 +22533,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     - `"user.define_outcome"`
 
-  - `max_iterations: optional number`
+  - `max_iterations: optional number or null`
 
     Eval→revision cycles before giving up. Default 3, max 20.
 
@@ -22551,11 +22551,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     - `"user.interrupt"`
 
-  - `processed_at: optional string`
+  - `processed_at: optional string or null`
 
     A timestamp in RFC 3339 format
 
-  - `session_thread_id: optional string`
+  - `session_thread_id: optional string or null`
 
     If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
@@ -22569,7 +22569,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     - `"user.interrupt"`
 
-  - `session_thread_id: optional string`
+  - `session_thread_id: optional string or null`
 
     If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
@@ -22721,11 +22721,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         - `"document"`
 
-      - `context: optional string`
+      - `context: optional string or null`
 
         Additional context about the document for the model.
 
-      - `title: optional string`
+      - `title: optional string or null`
 
         The title of the document.
 
@@ -22741,7 +22741,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     - `"user.message"`
 
-  - `processed_at: optional string`
+  - `processed_at: optional string or null`
 
     A timestamp in RFC 3339 format
 
@@ -22889,11 +22889,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         - `"document"`
 
-      - `context: optional string`
+      - `context: optional string or null`
 
         Additional context about the document for the model.
 
-      - `title: optional string`
+      - `title: optional string or null`
 
         The title of the document.
 
@@ -22935,15 +22935,15 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     - `"user.tool_confirmation"`
 
-  - `deny_message: optional string`
+  - `deny_message: optional string or null`
 
     Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
-  - `processed_at: optional string`
+  - `processed_at: optional string or null`
 
     A timestamp in RFC 3339 format
 
-  - `session_thread_id: optional string`
+  - `session_thread_id: optional string or null`
 
     When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
@@ -22969,7 +22969,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
     - `"user.tool_confirmation"`
 
-  - `deny_message: optional string`
+  - `deny_message: optional string or null`
 
     Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
@@ -23125,11 +23125,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         - `"document"`
 
-      - `context: optional string`
+      - `context: optional string or null`
 
         Additional context about the document for the model.
 
-      - `title: optional string`
+      - `title: optional string or null`
 
         The title of the document.
 
@@ -23169,7 +23169,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream \
 
         - `"search_result"`
 
-  - `is_error: optional boolean`
+  - `is_error: optional boolean or null`
 
     Whether the tool execution resulted in an error.
 
@@ -23271,7 +23271,7 @@ Add Session Resource
 
   - `"file"`
 
-- `mount_path: optional string`
+- `mount_path: optional string or null`
 
   Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
 
@@ -23447,7 +23447,7 @@ List Session Resources
 
     - `url: string`
 
-    - `checkout: optional BetaManagedAgentsBranchCheckout or BetaManagedAgentsCommitCheckout`
+    - `checkout: optional BetaManagedAgentsBranchCheckout or BetaManagedAgentsCommitCheckout or null`
 
       - `BetaManagedAgentsBranchCheckout object { name, type }`
 
@@ -23501,7 +23501,7 @@ List Session Resources
 
       - `"memory_store"`
 
-    - `access: optional "read_write" or "read_only"`
+    - `access: optional "read_write" or "read_only" or null`
 
       Access mode for an attached memory store.
 
@@ -23513,19 +23513,19 @@ List Session Resources
 
       Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
 
-    - `instructions: optional string`
+    - `instructions: optional string or null`
 
       Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
-    - `mount_path: optional string`
+    - `mount_path: optional string or null`
 
       Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
 
-    - `name: optional string`
+    - `name: optional string or null`
 
       Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
-- `next_page: optional string`
+- `next_page: optional string or null`
 
   Opaque cursor for the next page. Null when no more results.
 
@@ -23678,7 +23678,7 @@ Get Session Resource
 
   - `url: string`
 
-  - `checkout: optional BetaManagedAgentsBranchCheckout or BetaManagedAgentsCommitCheckout`
+  - `checkout: optional BetaManagedAgentsBranchCheckout or BetaManagedAgentsCommitCheckout or null`
 
     - `BetaManagedAgentsBranchCheckout object { name, type }`
 
@@ -23732,7 +23732,7 @@ Get Session Resource
 
     - `"memory_store"`
 
-  - `access: optional "read_write" or "read_only"`
+  - `access: optional "read_write" or "read_only" or null`
 
     Access mode for an attached memory store.
 
@@ -23744,15 +23744,15 @@ Get Session Resource
 
     Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
 
-  - `instructions: optional string`
+  - `instructions: optional string or null`
 
     Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
-  - `mount_path: optional string`
+  - `mount_path: optional string or null`
 
     Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
 
-  - `name: optional string`
+  - `name: optional string or null`
 
     Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
@@ -23898,7 +23898,7 @@ Update Session Resource
 
   - `url: string`
 
-  - `checkout: optional BetaManagedAgentsBranchCheckout or BetaManagedAgentsCommitCheckout`
+  - `checkout: optional BetaManagedAgentsBranchCheckout or BetaManagedAgentsCommitCheckout or null`
 
     - `BetaManagedAgentsBranchCheckout object { name, type }`
 
@@ -23952,7 +23952,7 @@ Update Session Resource
 
     - `"memory_store"`
 
-  - `access: optional "read_write" or "read_only"`
+  - `access: optional "read_write" or "read_only" or null`
 
     Access mode for an attached memory store.
 
@@ -23964,15 +23964,15 @@ Update Session Resource
 
     Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
 
-  - `instructions: optional string`
+  - `instructions: optional string or null`
 
     Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
-  - `mount_path: optional string`
+  - `mount_path: optional string or null`
 
     Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
 
-  - `name: optional string`
+  - `name: optional string or null`
 
     Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
@@ -24183,7 +24183,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/resources/$RESOURCE_ID \
 
   - `url: string`
 
-  - `checkout: optional BetaManagedAgentsBranchCheckout or BetaManagedAgentsCommitCheckout`
+  - `checkout: optional BetaManagedAgentsBranchCheckout or BetaManagedAgentsCommitCheckout or null`
 
     - `BetaManagedAgentsBranchCheckout object { name, type }`
 
@@ -24219,7 +24219,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/resources/$RESOURCE_ID \
 
     - `"memory_store"`
 
-  - `access: optional "read_write" or "read_only"`
+  - `access: optional "read_write" or "read_only" or null`
 
     Access mode for an attached memory store.
 
@@ -24231,15 +24231,15 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/resources/$RESOURCE_ID \
 
     Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
 
-  - `instructions: optional string`
+  - `instructions: optional string or null`
 
     Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
-  - `mount_path: optional string`
+  - `mount_path: optional string or null`
 
     Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
 
-  - `name: optional string`
+  - `name: optional string or null`
 
     Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
@@ -24269,7 +24269,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/resources/$RESOURCE_ID \
 
     - `url: string`
 
-    - `checkout: optional BetaManagedAgentsBranchCheckout or BetaManagedAgentsCommitCheckout`
+    - `checkout: optional BetaManagedAgentsBranchCheckout or BetaManagedAgentsCommitCheckout or null`
 
       - `BetaManagedAgentsBranchCheckout object { name, type }`
 
@@ -24323,7 +24323,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/resources/$RESOURCE_ID \
 
       - `"memory_store"`
 
-    - `access: optional "read_write" or "read_only"`
+    - `access: optional "read_write" or "read_only" or null`
 
       Access mode for an attached memory store.
 
@@ -24335,15 +24335,15 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/resources/$RESOURCE_ID \
 
       Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
 
-    - `instructions: optional string`
+    - `instructions: optional string or null`
 
       Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
-    - `mount_path: optional string`
+    - `mount_path: optional string or null`
 
       Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
 
-    - `name: optional string`
+    - `name: optional string or null`
 
       Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
@@ -24373,7 +24373,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/resources/$RESOURCE_ID \
 
     - `url: string`
 
-    - `checkout: optional BetaManagedAgentsBranchCheckout or BetaManagedAgentsCommitCheckout`
+    - `checkout: optional BetaManagedAgentsBranchCheckout or BetaManagedAgentsCommitCheckout or null`
 
       - `BetaManagedAgentsBranchCheckout object { name, type }`
 
@@ -24427,7 +24427,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/resources/$RESOURCE_ID \
 
       - `"memory_store"`
 
-    - `access: optional "read_write" or "read_only"`
+    - `access: optional "read_write" or "read_only" or null`
 
       Access mode for an attached memory store.
 
@@ -24439,15 +24439,15 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/resources/$RESOURCE_ID \
 
       Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
 
-    - `instructions: optional string`
+    - `instructions: optional string or null`
 
       Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
-    - `mount_path: optional string`
+    - `mount_path: optional string or null`
 
       Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
 
-    - `name: optional string`
+    - `name: optional string or null`
 
       Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
@@ -24477,7 +24477,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/resources/$RESOURCE_ID \
 
     - `url: string`
 
-    - `checkout: optional BetaManagedAgentsBranchCheckout or BetaManagedAgentsCommitCheckout`
+    - `checkout: optional BetaManagedAgentsBranchCheckout or BetaManagedAgentsCommitCheckout or null`
 
       - `BetaManagedAgentsBranchCheckout object { name, type }`
 
@@ -24531,7 +24531,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/resources/$RESOURCE_ID \
 
       - `"memory_store"`
 
-    - `access: optional "read_write" or "read_only"`
+    - `access: optional "read_write" or "read_only" or null`
 
       Access mode for an attached memory store.
 
@@ -24543,15 +24543,15 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/resources/$RESOURCE_ID \
 
       Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
 
-    - `instructions: optional string`
+    - `instructions: optional string or null`
 
       Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
-    - `mount_path: optional string`
+    - `mount_path: optional string or null`
 
       Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
 
-    - `name: optional string`
+    - `name: optional string or null`
 
       Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
@@ -24673,7 +24673,7 @@ List Session Threads
 
       - `id: string`
 
-      - `description: string`
+      - `description: string or null`
 
       - `mcp_servers: array of BetaManagedAgentsMCPServerURLDefinition`
 
@@ -24839,7 +24839,7 @@ List Session Threads
 
           - `version: string`
 
-      - `system: string`
+      - `system: string or null`
 
       - `tools: array of BetaManagedAgentsAgentToolset20260401 or BetaManagedAgentsMCPToolset or BetaManagedAgentsCustomTool`
 
@@ -24969,9 +24969,9 @@ List Session Threads
 
               - `"object"`
 
-            - `properties: optional map[unknown]`
+            - `properties: optional map[unknown] or null`
 
-            - `required: optional array of string`
+            - `required: optional array of string or null`
 
           - `name: string`
 
@@ -24997,7 +24997,7 @@ List Session Threads
 
         - `"advisor"`
 
-  - `archived_at: string`
+  - `archived_at: string or null`
 
     A timestamp in RFC 3339 format
 
@@ -25005,7 +25005,7 @@ List Session Threads
 
     A timestamp in RFC 3339 format
 
-  - `parent_thread_id: string`
+  - `parent_thread_id: string or null`
 
     Parent thread that spawned this thread. Null for the primary thread.
 
@@ -25013,7 +25013,7 @@ List Session Threads
 
     The session this thread belongs to.
 
-  - `stats: BetaManagedAgentsSessionThreadStats`
+  - `stats: BetaManagedAgentsSessionThreadStats or null`
 
     Timing statistics for a session thread.
 
@@ -25049,7 +25049,7 @@ List Session Threads
 
     A timestamp in RFC 3339 format
 
-  - `usage: BetaManagedAgentsSessionThreadUsage`
+  - `usage: BetaManagedAgentsSessionThreadUsage or null`
 
     Cumulative token usage for a session thread across all turns.
 
@@ -25077,7 +25077,7 @@ List Session Threads
 
       Total input tokens consumed across all turns.
 
-    - `list_cost: optional BetaMonetaryAmount`
+    - `list_cost: optional BetaMonetaryAmount or null`
 
       A monetary amount in a specific currency.
 
@@ -25095,7 +25095,7 @@ List Session Threads
 
       Total output tokens generated across all turns.
 
-    - `server_tool_use: optional BetaManagedAgentsServerToolUsage`
+    - `server_tool_use: optional BetaManagedAgentsServerToolUsage or null`
 
       Cumulative count of server-executed tool invocations, broken down by tool.
 
@@ -25107,7 +25107,7 @@ List Session Threads
 
         Number of server-executed web search requests.
 
-- `next_page: optional string`
+- `next_page: optional string or null`
 
   Opaque cursor for the next page. Null when no more results.
 
@@ -25321,7 +25321,7 @@ Get Session Thread
 
       - `id: string`
 
-      - `description: string`
+      - `description: string or null`
 
       - `mcp_servers: array of BetaManagedAgentsMCPServerURLDefinition`
 
@@ -25487,7 +25487,7 @@ Get Session Thread
 
           - `version: string`
 
-      - `system: string`
+      - `system: string or null`
 
       - `tools: array of BetaManagedAgentsAgentToolset20260401 or BetaManagedAgentsMCPToolset or BetaManagedAgentsCustomTool`
 
@@ -25617,9 +25617,9 @@ Get Session Thread
 
               - `"object"`
 
-            - `properties: optional map[unknown]`
+            - `properties: optional map[unknown] or null`
 
-            - `required: optional array of string`
+            - `required: optional array of string or null`
 
           - `name: string`
 
@@ -25645,7 +25645,7 @@ Get Session Thread
 
         - `"advisor"`
 
-  - `archived_at: string`
+  - `archived_at: string or null`
 
     A timestamp in RFC 3339 format
 
@@ -25653,7 +25653,7 @@ Get Session Thread
 
     A timestamp in RFC 3339 format
 
-  - `parent_thread_id: string`
+  - `parent_thread_id: string or null`
 
     Parent thread that spawned this thread. Null for the primary thread.
 
@@ -25661,7 +25661,7 @@ Get Session Thread
 
     The session this thread belongs to.
 
-  - `stats: BetaManagedAgentsSessionThreadStats`
+  - `stats: BetaManagedAgentsSessionThreadStats or null`
 
     Timing statistics for a session thread.
 
@@ -25697,7 +25697,7 @@ Get Session Thread
 
     A timestamp in RFC 3339 format
 
-  - `usage: BetaManagedAgentsSessionThreadUsage`
+  - `usage: BetaManagedAgentsSessionThreadUsage or null`
 
     Cumulative token usage for a session thread across all turns.
 
@@ -25725,7 +25725,7 @@ Get Session Thread
 
       Total input tokens consumed across all turns.
 
-    - `list_cost: optional BetaMonetaryAmount`
+    - `list_cost: optional BetaMonetaryAmount or null`
 
       A monetary amount in a specific currency.
 
@@ -25743,7 +25743,7 @@ Get Session Thread
 
       Total output tokens generated across all turns.
 
-    - `server_tool_use: optional BetaManagedAgentsServerToolUsage`
+    - `server_tool_use: optional BetaManagedAgentsServerToolUsage or null`
 
       Cumulative count of server-executed tool invocations, broken down by tool.
 
@@ -25960,7 +25960,7 @@ Archive Session Thread
 
       - `id: string`
 
-      - `description: string`
+      - `description: string or null`
 
       - `mcp_servers: array of BetaManagedAgentsMCPServerURLDefinition`
 
@@ -26126,7 +26126,7 @@ Archive Session Thread
 
           - `version: string`
 
-      - `system: string`
+      - `system: string or null`
 
       - `tools: array of BetaManagedAgentsAgentToolset20260401 or BetaManagedAgentsMCPToolset or BetaManagedAgentsCustomTool`
 
@@ -26256,9 +26256,9 @@ Archive Session Thread
 
               - `"object"`
 
-            - `properties: optional map[unknown]`
+            - `properties: optional map[unknown] or null`
 
-            - `required: optional array of string`
+            - `required: optional array of string or null`
 
           - `name: string`
 
@@ -26284,7 +26284,7 @@ Archive Session Thread
 
         - `"advisor"`
 
-  - `archived_at: string`
+  - `archived_at: string or null`
 
     A timestamp in RFC 3339 format
 
@@ -26292,7 +26292,7 @@ Archive Session Thread
 
     A timestamp in RFC 3339 format
 
-  - `parent_thread_id: string`
+  - `parent_thread_id: string or null`
 
     Parent thread that spawned this thread. Null for the primary thread.
 
@@ -26300,7 +26300,7 @@ Archive Session Thread
 
     The session this thread belongs to.
 
-  - `stats: BetaManagedAgentsSessionThreadStats`
+  - `stats: BetaManagedAgentsSessionThreadStats or null`
 
     Timing statistics for a session thread.
 
@@ -26336,7 +26336,7 @@ Archive Session Thread
 
     A timestamp in RFC 3339 format
 
-  - `usage: BetaManagedAgentsSessionThreadUsage`
+  - `usage: BetaManagedAgentsSessionThreadUsage or null`
 
     Cumulative token usage for a session thread across all turns.
 
@@ -26364,7 +26364,7 @@ Archive Session Thread
 
       Total input tokens consumed across all turns.
 
-    - `list_cost: optional BetaMonetaryAmount`
+    - `list_cost: optional BetaMonetaryAmount or null`
 
       A monetary amount in a specific currency.
 
@@ -26382,7 +26382,7 @@ Archive Session Thread
 
       Total output tokens generated across all turns.
 
-    - `server_tool_use: optional BetaManagedAgentsServerToolUsage`
+    - `server_tool_use: optional BetaManagedAgentsServerToolUsage or null`
 
       Cumulative count of server-executed tool invocations, broken down by tool.
 
@@ -26514,7 +26514,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID/archiv
 
       - `id: string`
 
-      - `description: string`
+      - `description: string or null`
 
       - `mcp_servers: array of BetaManagedAgentsMCPServerURLDefinition`
 
@@ -26680,7 +26680,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID/archiv
 
           - `version: string`
 
-      - `system: string`
+      - `system: string or null`
 
       - `tools: array of BetaManagedAgentsAgentToolset20260401 or BetaManagedAgentsMCPToolset or BetaManagedAgentsCustomTool`
 
@@ -26810,9 +26810,9 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID/archiv
 
               - `"object"`
 
-            - `properties: optional map[unknown]`
+            - `properties: optional map[unknown] or null`
 
-            - `required: optional array of string`
+            - `required: optional array of string or null`
 
           - `name: string`
 
@@ -26838,7 +26838,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID/archiv
 
         - `"advisor"`
 
-  - `archived_at: string`
+  - `archived_at: string or null`
 
     A timestamp in RFC 3339 format
 
@@ -26846,7 +26846,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID/archiv
 
     A timestamp in RFC 3339 format
 
-  - `parent_thread_id: string`
+  - `parent_thread_id: string or null`
 
     Parent thread that spawned this thread. Null for the primary thread.
 
@@ -26854,7 +26854,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID/archiv
 
     The session this thread belongs to.
 
-  - `stats: BetaManagedAgentsSessionThreadStats`
+  - `stats: BetaManagedAgentsSessionThreadStats or null`
 
     Timing statistics for a session thread.
 
@@ -26890,7 +26890,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID/archiv
 
     A timestamp in RFC 3339 format
 
-  - `usage: BetaManagedAgentsSessionThreadUsage`
+  - `usage: BetaManagedAgentsSessionThreadUsage or null`
 
     Cumulative token usage for a session thread across all turns.
 
@@ -26918,7 +26918,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID/archiv
 
       Total input tokens consumed across all turns.
 
-    - `list_cost: optional BetaMonetaryAmount`
+    - `list_cost: optional BetaMonetaryAmount or null`
 
       A monetary amount in a specific currency.
 
@@ -26936,7 +26936,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID/archiv
 
       Total output tokens generated across all turns.
 
-    - `server_tool_use: optional BetaManagedAgentsServerToolUsage`
+    - `server_tool_use: optional BetaManagedAgentsServerToolUsage or null`
 
       Cumulative count of server-executed tool invocations, broken down by tool.
 
@@ -27010,7 +27010,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID/archiv
 
     Total input tokens consumed across all turns.
 
-  - `list_cost: optional BetaMonetaryAmount`
+  - `list_cost: optional BetaMonetaryAmount or null`
 
     A monetary amount in a specific currency.
 
@@ -27028,7 +27028,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID/archiv
 
     Total output tokens generated across all turns.
 
-  - `server_tool_use: optional BetaManagedAgentsServerToolUsage`
+  - `server_tool_use: optional BetaManagedAgentsServerToolUsage or null`
 
     Cumulative count of server-executed tool invocations, broken down by tool.
 
@@ -27192,11 +27192,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID/archiv
 
           - `"document"`
 
-        - `context: optional string`
+        - `context: optional string or null`
 
           Additional context about the document for the model.
 
-        - `title: optional string`
+        - `title: optional string or null`
 
           The title of the document.
 
@@ -27212,7 +27212,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID/archiv
 
       - `"user.message"`
 
-    - `processed_at: optional string`
+    - `processed_at: optional string or null`
 
       A timestamp in RFC 3339 format
 
@@ -27228,11 +27228,11 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID/archiv
 
       - `"user.interrupt"`
 
-    - `processed_at: optional string`
+    - `processed_at: optional string or null`
 
       A timestamp in RFC 3339 format
 
-    - `session_thread_id: optional string`
+    - `session_thread_id: optional string or null`
 
       If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
@@ -27260,15 +27260,15 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID/archiv
 
       - `"user.tool_confirmation"`
 
-    - `deny_message: optional string`
+    - `deny_message: optional string or null`
 
       Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
-    - `processed_at: optional string`
+    - `processed_at: optional string or null`
 
       A timestamp in RFC 3339 format
 
-    - `session_thread_id: optional string`
+    - `session_thread_id: optional string or null`
 
       When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
@@ -27340,15 +27340,15 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID/archiv
 
           - `"search_result"`
 
-    - `is_error: optional boolean`
+    - `is_error: optional boolean or null`
 
       Whether the tool execution resulted in an error.
 
-    - `processed_at: optional string`
+    - `processed_at: optional string or null`
 
       A timestamp in RFC 3339 format
 
-    - `session_thread_id: optional string`
+    - `session_thread_id: optional string or null`
 
       Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
 
@@ -27376,7 +27376,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID/archiv
 
       - `"agent.custom_tool_use"`
 
-    - `session_thread_id: optional string`
+    - `session_thread_id: optional string or null`
 
       When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
 
@@ -27462,7 +27462,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID/archiv
 
       - `"deny"`
 
-    - `session_thread_id: optional string`
+    - `session_thread_id: optional string or null`
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
@@ -27506,7 +27506,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID/archiv
 
         A block containing a web search result.
 
-    - `is_error: optional boolean`
+    - `is_error: optional boolean or null`
 
       Whether the tool execution resulted in an error.
 
@@ -27544,7 +27544,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID/archiv
 
       - `"deny"`
 
-    - `session_thread_id: optional string`
+    - `session_thread_id: optional string or null`
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
@@ -27588,7 +27588,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID/archiv
 
         A block containing a web search result.
 
-    - `is_error: optional boolean`
+    - `is_error: optional boolean or null`
 
       Whether the tool execution resulted in an error.
 
@@ -27632,7 +27632,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID/archiv
 
       - `"agent.thread_message_received"`
 
-    - `from_agent_name: optional string`
+    - `from_agent_name: optional string or null`
 
       Name of the callable agent this message came from. Absent when received from the primary agent.
 
@@ -27676,7 +27676,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID/archiv
 
       - `"agent.thread_message_sent"`
 
-    - `to_agent_name: optional string`
+    - `to_agent_name: optional string or null`
 
       Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
@@ -28176,7 +28176,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID/archiv
 
         Output tokens generated by this request.
 
-      - `speed: optional "standard" or "fast"`
+      - `speed: optional "standard" or "fast" or null`
 
         Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
@@ -28208,7 +28208,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID/archiv
 
       Unique identifier for this event.
 
-    - `is_error: boolean`
+    - `is_error: boolean or null`
 
       Whether the model request resulted in an error.
 
@@ -28264,7 +28264,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID/archiv
 
       What the agent should produce. Copied from the input event.
 
-    - `max_iterations: number`
+    - `max_iterations: number or null`
 
       Evaluate-then-revise cycles before giving up. Default 3, max 20.
 
@@ -28452,15 +28452,15 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID/archiv
 
         A block containing a web search result.
 
-    - `is_error: optional boolean`
+    - `is_error: optional boolean or null`
 
       Whether the tool execution resulted in an error.
 
-    - `processed_at: optional string`
+    - `processed_at: optional string or null`
 
       A timestamp in RFC 3339 format
 
-    - `session_thread_id: optional string`
+    - `session_thread_id: optional string or null`
 
       Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
 
@@ -28504,13 +28504,13 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID/archiv
 
       - `"session.updated"`
 
-    - `agent: optional BetaManagedAgentsSessionAgent`
+    - `agent: optional BetaManagedAgentsSessionAgent or null`
 
       Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
 
       - `id: string`
 
-      - `description: string`
+      - `description: string or null`
 
       - `mcp_servers: array of BetaManagedAgentsMCPServerURLDefinition`
 
@@ -28648,7 +28648,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID/archiv
 
           - `"fast"`
 
-      - `multiagent: BetaManagedAgentsSessionMultiagentCoordinator`
+      - `multiagent: BetaManagedAgentsSessionMultiagentCoordinator or null`
 
         Resolved coordinator topology with full agent definitions for each roster member.
 
@@ -28662,7 +28662,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID/archiv
 
             - `id: string`
 
-            - `description: string`
+            - `description: string or null`
 
             - `mcp_servers: array of BetaManagedAgentsMCPServerURLDefinition`
 
@@ -28704,7 +28704,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID/archiv
 
                 - `version: string`
 
-            - `system: string`
+            - `system: string or null`
 
             - `tools: array of BetaManagedAgentsAgentToolset20260401 or BetaManagedAgentsMCPToolset or BetaManagedAgentsCustomTool`
 
@@ -28834,9 +28834,9 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID/archiv
 
                     - `"object"`
 
-                  - `properties: optional map[unknown]`
+                  - `properties: optional map[unknown] or null`
 
-                  - `required: optional array of string`
+                  - `required: optional array of string or null`
 
                 - `name: string`
 
@@ -28878,7 +28878,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID/archiv
 
           A resolved user-created custom skill.
 
-      - `system: string`
+      - `system: string or null`
 
       - `tools: array of BetaManagedAgentsAgentToolset20260401 or BetaManagedAgentsMCPToolset or BetaManagedAgentsCustomTool`
 
@@ -28896,7 +28896,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID/archiv
 
       - `version: number`
 
-    - `budget: optional BetaManagedAgentsBudgetLimit`
+    - `budget: optional BetaManagedAgentsBudgetLimit or null`
 
       A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
@@ -28922,7 +28922,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID/archiv
 
       The session's full metadata bag after the update. Present when the update set non-empty metadata; absent when metadata was unchanged or cleared to empty.
 
-    - `title: optional string`
+    - `title: optional string or null`
 
       The session's new title. Present only when the update changed it.
 
@@ -29010,7 +29010,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID/archiv
 
       - `"system.message"`
 
-    - `processed_at: optional string`
+    - `processed_at: optional string or null`
 
       A timestamp in RFC 3339 format
 
@@ -29078,7 +29078,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID/archiv
 
           Number of server-executed web search requests.
 
-    - `budget: optional BetaManagedAgentsBudgetLimit`
+    - `budget: optional BetaManagedAgentsBudgetLimit or null`
 
       A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
@@ -29334,11 +29334,11 @@ List Session Thread Events
 
           - `"document"`
 
-        - `context: optional string`
+        - `context: optional string or null`
 
           Additional context about the document for the model.
 
-        - `title: optional string`
+        - `title: optional string or null`
 
           The title of the document.
 
@@ -29354,7 +29354,7 @@ List Session Thread Events
 
       - `"user.message"`
 
-    - `processed_at: optional string`
+    - `processed_at: optional string or null`
 
       A timestamp in RFC 3339 format
 
@@ -29370,11 +29370,11 @@ List Session Thread Events
 
       - `"user.interrupt"`
 
-    - `processed_at: optional string`
+    - `processed_at: optional string or null`
 
       A timestamp in RFC 3339 format
 
-    - `session_thread_id: optional string`
+    - `session_thread_id: optional string or null`
 
       If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
@@ -29402,15 +29402,15 @@ List Session Thread Events
 
       - `"user.tool_confirmation"`
 
-    - `deny_message: optional string`
+    - `deny_message: optional string or null`
 
       Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
-    - `processed_at: optional string`
+    - `processed_at: optional string or null`
 
       A timestamp in RFC 3339 format
 
-    - `session_thread_id: optional string`
+    - `session_thread_id: optional string or null`
 
       When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
@@ -29482,15 +29482,15 @@ List Session Thread Events
 
           - `"search_result"`
 
-    - `is_error: optional boolean`
+    - `is_error: optional boolean or null`
 
       Whether the tool execution resulted in an error.
 
-    - `processed_at: optional string`
+    - `processed_at: optional string or null`
 
       A timestamp in RFC 3339 format
 
-    - `session_thread_id: optional string`
+    - `session_thread_id: optional string or null`
 
       Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
 
@@ -29518,7 +29518,7 @@ List Session Thread Events
 
       - `"agent.custom_tool_use"`
 
-    - `session_thread_id: optional string`
+    - `session_thread_id: optional string or null`
 
       When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
 
@@ -29604,7 +29604,7 @@ List Session Thread Events
 
       - `"deny"`
 
-    - `session_thread_id: optional string`
+    - `session_thread_id: optional string or null`
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
@@ -29648,7 +29648,7 @@ List Session Thread Events
 
         A block containing a web search result.
 
-    - `is_error: optional boolean`
+    - `is_error: optional boolean or null`
 
       Whether the tool execution resulted in an error.
 
@@ -29686,7 +29686,7 @@ List Session Thread Events
 
       - `"deny"`
 
-    - `session_thread_id: optional string`
+    - `session_thread_id: optional string or null`
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
@@ -29730,7 +29730,7 @@ List Session Thread Events
 
         A block containing a web search result.
 
-    - `is_error: optional boolean`
+    - `is_error: optional boolean or null`
 
       Whether the tool execution resulted in an error.
 
@@ -29774,7 +29774,7 @@ List Session Thread Events
 
       - `"agent.thread_message_received"`
 
-    - `from_agent_name: optional string`
+    - `from_agent_name: optional string or null`
 
       Name of the callable agent this message came from. Absent when received from the primary agent.
 
@@ -29818,7 +29818,7 @@ List Session Thread Events
 
       - `"agent.thread_message_sent"`
 
-    - `to_agent_name: optional string`
+    - `to_agent_name: optional string or null`
 
       Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
@@ -30318,7 +30318,7 @@ List Session Thread Events
 
         Output tokens generated by this request.
 
-      - `speed: optional "standard" or "fast"`
+      - `speed: optional "standard" or "fast" or null`
 
         Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
@@ -30350,7 +30350,7 @@ List Session Thread Events
 
       Unique identifier for this event.
 
-    - `is_error: boolean`
+    - `is_error: boolean or null`
 
       Whether the model request resulted in an error.
 
@@ -30406,7 +30406,7 @@ List Session Thread Events
 
       What the agent should produce. Copied from the input event.
 
-    - `max_iterations: number`
+    - `max_iterations: number or null`
 
       Evaluate-then-revise cycles before giving up. Default 3, max 20.
 
@@ -30594,15 +30594,15 @@ List Session Thread Events
 
         A block containing a web search result.
 
-    - `is_error: optional boolean`
+    - `is_error: optional boolean or null`
 
       Whether the tool execution resulted in an error.
 
-    - `processed_at: optional string`
+    - `processed_at: optional string or null`
 
       A timestamp in RFC 3339 format
 
-    - `session_thread_id: optional string`
+    - `session_thread_id: optional string or null`
 
       Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
 
@@ -30646,13 +30646,13 @@ List Session Thread Events
 
       - `"session.updated"`
 
-    - `agent: optional BetaManagedAgentsSessionAgent`
+    - `agent: optional BetaManagedAgentsSessionAgent or null`
 
       Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
 
       - `id: string`
 
-      - `description: string`
+      - `description: string or null`
 
       - `mcp_servers: array of BetaManagedAgentsMCPServerURLDefinition`
 
@@ -30790,7 +30790,7 @@ List Session Thread Events
 
           - `"fast"`
 
-      - `multiagent: BetaManagedAgentsSessionMultiagentCoordinator`
+      - `multiagent: BetaManagedAgentsSessionMultiagentCoordinator or null`
 
         Resolved coordinator topology with full agent definitions for each roster member.
 
@@ -30804,7 +30804,7 @@ List Session Thread Events
 
             - `id: string`
 
-            - `description: string`
+            - `description: string or null`
 
             - `mcp_servers: array of BetaManagedAgentsMCPServerURLDefinition`
 
@@ -30846,7 +30846,7 @@ List Session Thread Events
 
                 - `version: string`
 
-            - `system: string`
+            - `system: string or null`
 
             - `tools: array of BetaManagedAgentsAgentToolset20260401 or BetaManagedAgentsMCPToolset or BetaManagedAgentsCustomTool`
 
@@ -30976,9 +30976,9 @@ List Session Thread Events
 
                     - `"object"`
 
-                  - `properties: optional map[unknown]`
+                  - `properties: optional map[unknown] or null`
 
-                  - `required: optional array of string`
+                  - `required: optional array of string or null`
 
                 - `name: string`
 
@@ -31020,7 +31020,7 @@ List Session Thread Events
 
           A resolved user-created custom skill.
 
-      - `system: string`
+      - `system: string or null`
 
       - `tools: array of BetaManagedAgentsAgentToolset20260401 or BetaManagedAgentsMCPToolset or BetaManagedAgentsCustomTool`
 
@@ -31038,7 +31038,7 @@ List Session Thread Events
 
       - `version: number`
 
-    - `budget: optional BetaManagedAgentsBudgetLimit`
+    - `budget: optional BetaManagedAgentsBudgetLimit or null`
 
       A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
@@ -31064,7 +31064,7 @@ List Session Thread Events
 
       The session's full metadata bag after the update. Present when the update set non-empty metadata; absent when metadata was unchanged or cleared to empty.
 
-    - `title: optional string`
+    - `title: optional string or null`
 
       The session's new title. Present only when the update changed it.
 
@@ -31092,7 +31092,7 @@ List Session Thread Events
 
       - `"system.message"`
 
-    - `processed_at: optional string`
+    - `processed_at: optional string or null`
 
       A timestamp in RFC 3339 format
 
@@ -31160,11 +31160,11 @@ List Session Thread Events
 
           Number of server-executed web search requests.
 
-    - `budget: optional BetaManagedAgentsBudgetLimit`
+    - `budget: optional BetaManagedAgentsBudgetLimit or null`
 
       A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
-- `next_page: optional string`
+- `next_page: optional string or null`
 
   Opaque cursor for the next page. Null when no more results.
 
@@ -31448,11 +31448,11 @@ Stream Session Thread Events
 
           - `"document"`
 
-        - `context: optional string`
+        - `context: optional string or null`
 
           Additional context about the document for the model.
 
-        - `title: optional string`
+        - `title: optional string or null`
 
           The title of the document.
 
@@ -31468,7 +31468,7 @@ Stream Session Thread Events
 
       - `"user.message"`
 
-    - `processed_at: optional string`
+    - `processed_at: optional string or null`
 
       A timestamp in RFC 3339 format
 
@@ -31484,11 +31484,11 @@ Stream Session Thread Events
 
       - `"user.interrupt"`
 
-    - `processed_at: optional string`
+    - `processed_at: optional string or null`
 
       A timestamp in RFC 3339 format
 
-    - `session_thread_id: optional string`
+    - `session_thread_id: optional string or null`
 
       If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
@@ -31516,15 +31516,15 @@ Stream Session Thread Events
 
       - `"user.tool_confirmation"`
 
-    - `deny_message: optional string`
+    - `deny_message: optional string or null`
 
       Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
-    - `processed_at: optional string`
+    - `processed_at: optional string or null`
 
       A timestamp in RFC 3339 format
 
-    - `session_thread_id: optional string`
+    - `session_thread_id: optional string or null`
 
       When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
@@ -31596,15 +31596,15 @@ Stream Session Thread Events
 
           - `"search_result"`
 
-    - `is_error: optional boolean`
+    - `is_error: optional boolean or null`
 
       Whether the tool execution resulted in an error.
 
-    - `processed_at: optional string`
+    - `processed_at: optional string or null`
 
       A timestamp in RFC 3339 format
 
-    - `session_thread_id: optional string`
+    - `session_thread_id: optional string or null`
 
       Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
 
@@ -31632,7 +31632,7 @@ Stream Session Thread Events
 
       - `"agent.custom_tool_use"`
 
-    - `session_thread_id: optional string`
+    - `session_thread_id: optional string or null`
 
       When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
 
@@ -31718,7 +31718,7 @@ Stream Session Thread Events
 
       - `"deny"`
 
-    - `session_thread_id: optional string`
+    - `session_thread_id: optional string or null`
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
@@ -31762,7 +31762,7 @@ Stream Session Thread Events
 
         A block containing a web search result.
 
-    - `is_error: optional boolean`
+    - `is_error: optional boolean or null`
 
       Whether the tool execution resulted in an error.
 
@@ -31800,7 +31800,7 @@ Stream Session Thread Events
 
       - `"deny"`
 
-    - `session_thread_id: optional string`
+    - `session_thread_id: optional string or null`
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
@@ -31844,7 +31844,7 @@ Stream Session Thread Events
 
         A block containing a web search result.
 
-    - `is_error: optional boolean`
+    - `is_error: optional boolean or null`
 
       Whether the tool execution resulted in an error.
 
@@ -31888,7 +31888,7 @@ Stream Session Thread Events
 
       - `"agent.thread_message_received"`
 
-    - `from_agent_name: optional string`
+    - `from_agent_name: optional string or null`
 
       Name of the callable agent this message came from. Absent when received from the primary agent.
 
@@ -31932,7 +31932,7 @@ Stream Session Thread Events
 
       - `"agent.thread_message_sent"`
 
-    - `to_agent_name: optional string`
+    - `to_agent_name: optional string or null`
 
       Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
@@ -32432,7 +32432,7 @@ Stream Session Thread Events
 
         Output tokens generated by this request.
 
-      - `speed: optional "standard" or "fast"`
+      - `speed: optional "standard" or "fast" or null`
 
         Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
@@ -32464,7 +32464,7 @@ Stream Session Thread Events
 
       Unique identifier for this event.
 
-    - `is_error: boolean`
+    - `is_error: boolean or null`
 
       Whether the model request resulted in an error.
 
@@ -32520,7 +32520,7 @@ Stream Session Thread Events
 
       What the agent should produce. Copied from the input event.
 
-    - `max_iterations: number`
+    - `max_iterations: number or null`
 
       Evaluate-then-revise cycles before giving up. Default 3, max 20.
 
@@ -32708,15 +32708,15 @@ Stream Session Thread Events
 
         A block containing a web search result.
 
-    - `is_error: optional boolean`
+    - `is_error: optional boolean or null`
 
       Whether the tool execution resulted in an error.
 
-    - `processed_at: optional string`
+    - `processed_at: optional string or null`
 
       A timestamp in RFC 3339 format
 
-    - `session_thread_id: optional string`
+    - `session_thread_id: optional string or null`
 
       Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
 
@@ -32760,13 +32760,13 @@ Stream Session Thread Events
 
       - `"session.updated"`
 
-    - `agent: optional BetaManagedAgentsSessionAgent`
+    - `agent: optional BetaManagedAgentsSessionAgent or null`
 
       Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
 
       - `id: string`
 
-      - `description: string`
+      - `description: string or null`
 
       - `mcp_servers: array of BetaManagedAgentsMCPServerURLDefinition`
 
@@ -32904,7 +32904,7 @@ Stream Session Thread Events
 
           - `"fast"`
 
-      - `multiagent: BetaManagedAgentsSessionMultiagentCoordinator`
+      - `multiagent: BetaManagedAgentsSessionMultiagentCoordinator or null`
 
         Resolved coordinator topology with full agent definitions for each roster member.
 
@@ -32918,7 +32918,7 @@ Stream Session Thread Events
 
             - `id: string`
 
-            - `description: string`
+            - `description: string or null`
 
             - `mcp_servers: array of BetaManagedAgentsMCPServerURLDefinition`
 
@@ -32960,7 +32960,7 @@ Stream Session Thread Events
 
                 - `version: string`
 
-            - `system: string`
+            - `system: string or null`
 
             - `tools: array of BetaManagedAgentsAgentToolset20260401 or BetaManagedAgentsMCPToolset or BetaManagedAgentsCustomTool`
 
@@ -33090,9 +33090,9 @@ Stream Session Thread Events
 
                     - `"object"`
 
-                  - `properties: optional map[unknown]`
+                  - `properties: optional map[unknown] or null`
 
-                  - `required: optional array of string`
+                  - `required: optional array of string or null`
 
                 - `name: string`
 
@@ -33134,7 +33134,7 @@ Stream Session Thread Events
 
           A resolved user-created custom skill.
 
-      - `system: string`
+      - `system: string or null`
 
       - `tools: array of BetaManagedAgentsAgentToolset20260401 or BetaManagedAgentsMCPToolset or BetaManagedAgentsCustomTool`
 
@@ -33152,7 +33152,7 @@ Stream Session Thread Events
 
       - `version: number`
 
-    - `budget: optional BetaManagedAgentsBudgetLimit`
+    - `budget: optional BetaManagedAgentsBudgetLimit or null`
 
       A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 
@@ -33178,7 +33178,7 @@ Stream Session Thread Events
 
       The session's full metadata bag after the update. Present when the update set non-empty metadata; absent when metadata was unchanged or cleared to empty.
 
-    - `title: optional string`
+    - `title: optional string or null`
 
       The session's new title. Present only when the update changed it.
 
@@ -33266,7 +33266,7 @@ Stream Session Thread Events
 
       - `"system.message"`
 
-    - `processed_at: optional string`
+    - `processed_at: optional string or null`
 
       A timestamp in RFC 3339 format
 
@@ -33334,7 +33334,7 @@ Stream Session Thread Events
 
           Number of server-executed web search requests.
 
-    - `budget: optional BetaManagedAgentsBudgetLimit`
+    - `budget: optional BetaManagedAgentsBudgetLimit or null`
 
       A hard spend ceiling. The session stops issuing new model requests once the tracked list cost reaches `max_list_cost`.
 

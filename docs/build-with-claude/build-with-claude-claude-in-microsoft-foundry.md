@@ -338,7 +338,7 @@ The Foundry SDKs require an API key and either a resource name or base URL. The 
 
       client.messages().create(params).content().stream()
           .flatMap(block -> block.text().stream())
-          .forEach(textBlock -> System.out.println(textBlock.text()));
+          .forEach(textBlock -> IO.println(textBlock.text()));
   }
   ```
 
@@ -573,7 +573,7 @@ Entra ID authentication lets you manage access with Azure RBAC, integrate with y
 
       client.messages().create(params).content().stream()
           .flatMap(block -> block.text().stream())
-          .forEach(textBlock -> System.out.println(textBlock.text()));
+          .forEach(textBlock -> IO.println(textBlock.text()));
   }
   ```
 

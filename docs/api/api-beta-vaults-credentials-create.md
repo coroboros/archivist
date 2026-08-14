@@ -117,11 +117,11 @@ Create Credential
 
       - `"mcp_oauth"`
 
-    - `expires_at: optional string`
+    - `expires_at: optional string or null`
 
       A timestamp in RFC 3339 format
 
-    - `refresh: optional BetaManagedAgentsMCPOAuthRefreshParams`
+    - `refresh: optional BetaManagedAgentsMCPOAuthRefreshParams or null`
 
       OAuth refresh token parameters for creating a credential with refresh support.
 
@@ -173,11 +173,11 @@ Create Credential
 
             - `"client_secret_post"`
 
-      - `resource: optional string`
+      - `resource: optional string or null`
 
         OAuth resource indicator.
 
-      - `scope: optional string`
+      - `scope: optional string or null`
 
         OAuth scope for the refresh request.
 
@@ -249,7 +249,7 @@ Create Credential
 
         Substitute when the placeholder appears in a request header value.
 
-- `display_name: optional string`
+- `display_name: optional string or null`
 
   Human-readable name for the credential. Up to 255 characters.
 
@@ -267,7 +267,7 @@ Create Credential
 
     Unique identifier for the credential.
 
-  - `archived_at: string`
+  - `archived_at: string or null`
 
     A timestamp in RFC 3339 format
 
@@ -287,11 +287,11 @@ Create Credential
 
         - `"mcp_oauth"`
 
-      - `expires_at: optional string`
+      - `expires_at: optional string or null`
 
         A timestamp in RFC 3339 format
 
-      - `refresh: optional BetaManagedAgentsMCPOAuthRefreshResponse`
+      - `refresh: optional BetaManagedAgentsMCPOAuthRefreshResponse or null`
 
         OAuth refresh token configuration returned in credential responses.
 
@@ -331,11 +331,11 @@ Create Credential
 
               - `"client_secret_post"`
 
-        - `resource: optional string`
+        - `resource: optional string or null`
 
           OAuth resource indicator.
 
-        - `scope: optional string`
+        - `scope: optional string or null`
 
           OAuth scope for the refresh request.
 
@@ -419,7 +419,7 @@ Create Credential
 
     Identifier of the vault this credential belongs to.
 
-  - `display_name: optional string`
+  - `display_name: optional string or null`
 
     Human-readable name for the credential.
 

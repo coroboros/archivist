@@ -2,7 +2,7 @@
 
 _This repository is a mirror of the official [Claude Platform](https://platform.claude.com/docs/en/) documentation (Platform | General). It is updated automatically._
 
-**Last updated:** Thu, 13 Aug 2026 01:49:43 GMT
+**Last updated:** Fri, 14 Aug 2026 01:47:32 GMT
 
 ---
 
@@ -12,21 +12,21 @@ _This repository is a mirror of the official [Claude Platform](https://platform.
 
 ## Cli Sdks Libraries
 
+- [Overview](./general-cli-sdks-libraries-overview.md)
 - [Cli | Authentication](./general-cli-sdks-libraries-cli-authentication.md)
+- [Libraries | Apple Foundation Models](./general-cli-sdks-libraries-libraries-apple-foundation-models.md)
+- [Cli | Scripting](./general-cli-sdks-libraries-cli-scripting.md)
 - [Cli | Using](./general-cli-sdks-libraries-cli-using.md)
 - [Sdks | Go](./general-cli-sdks-libraries-sdks-go.md)
-- [Sdks | Csharp](./general-cli-sdks-libraries-sdks-csharp.md)
-- [Sdks | Typescript](./general-cli-sdks-libraries-sdks-typescript.md)
-- [Overview](./general-cli-sdks-libraries-overview.md)
-- [Sdks | Ruby](./general-cli-sdks-libraries-sdks-ruby.md)
-- [Cli | Quickstart](./general-cli-sdks-libraries-cli-quickstart.md)
 - [Sdks | Php](./general-cli-sdks-libraries-sdks-php.md)
-- [Cli | Scripting](./general-cli-sdks-libraries-cli-scripting.md)
+- [Sdks | Python](./general-cli-sdks-libraries-sdks-python.md)
+- [Sdks | Csharp](./general-cli-sdks-libraries-sdks-csharp.md)
+- [Sdks | Ruby](./general-cli-sdks-libraries-sdks-ruby.md)
+- [Sdks | Typescript](./general-cli-sdks-libraries-sdks-typescript.md)
+- [Cli | Quickstart](./general-cli-sdks-libraries-cli-quickstart.md)
 - [Libraries | Openai Sdk](./general-cli-sdks-libraries-libraries-openai-sdk.md)
 - [Sdks | Java](./general-cli-sdks-libraries-sdks-java.md)
 - [Middleware](./general-cli-sdks-libraries-middleware.md)
-- [Libraries | Apple Foundation Models](./general-cli-sdks-libraries-libraries-apple-foundation-models.md)
-- [Sdks | Python](./general-cli-sdks-libraries-sdks-python.md)
 
 ## Get Api Key
 

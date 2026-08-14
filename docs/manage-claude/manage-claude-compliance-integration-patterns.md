@@ -20,7 +20,11 @@ description: Choose between polling and cursor-driven Activity Feed consumption,
 
 A production Compliance API integration makes three design choices: how it consumes the Activity Feed, how its output correlates with your security information and event management (SIEM) system, and where long-term copies of activity and content live. These choices are independent of the endpoints themselves; this page helps you evaluate the tradeoffs.
 
-This page assumes you have read [Query the Activity Feed](./manage-claude-compliance-activity-feed.md), which defines the parameters and pagination contract referenced throughout, and [Retrieve and delete chats, files, projects, and sessions](./manage-claude-compliance-content-data.md), which defines the content endpoints and `deleted_at` semantics referenced in [Plan content retention](./manage-claude-compliance-integration-patterns.md#plan-content-retention).
+This page assumes you have read the following pages:
+
+* [Query the Activity Feed](./manage-claude-compliance-activity-feed.md), which defines the parameters and pagination contract referenced throughout.
+* [Retrieve and delete chats, files, and projects](./manage-claude-compliance-content-data.md), which defines the chat, file, and project endpoints and the `deleted_at` semantics referenced in [Plan content retention](./manage-claude-compliance-integration-patterns.md#plan-content-retention).
+* [Retrieve session transcripts](./manage-claude-compliance-sessions.md), which defines the local and remote session endpoints.
 
 ## Choose a feed-consumption pattern
 
@@ -31,7 +35,7 @@ Both patterns share these constraints:
 * Activities are queryable within 1 minute of occurring and retained for 6 years.
 * The maximum `limit` for each page is 5,000.
 * Cursor values are opaque strings that you must not parse.
-* Requests are limited to 600 per minute per [parent organization](./manage-claude-compliance-api.md#how-the-compliance-api-works), shared across every key, every linked organization, and every `/v1/compliance/*` endpoint; unlike the local session endpoints, the remote session endpoints carry an additional request budget on top. See [429 Too Many Requests](./manage-claude-compliance-errors.md#429-too-many-requests) for the response headers and retry contract.
+* Requests are limited to 600 per minute per [parent organization](./manage-claude-compliance-api.md#how-the-compliance-api-works), shared across every key, every linked organization, and every `/v1/compliance/*` endpoint; unlike the local session endpoints, the remote session endpoints carry a second request budget on top. See [429 Too Many Requests](./manage-claude-compliance-errors.md#429-too-many-requests) for the response headers and retry contract.
 
 | Pattern                         | Choose when                                                                                                                                                                                                     |
 | ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -111,13 +115,13 @@ Calls to the Compliance API itself emit `compliance_api_accessed` activities. In
 
 Five retention horizons govern what you can retrieve later:
 
-| Data                                                                  | Retained for                                                                                              | Controlled by                                                        |
-| --------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------- |
-| Activity Feed records                                                 | 6 years                                                                                                   | Anthropic                                                            |
-| Chat, file, and project content                                       | Your organization's claude.ai retention policy                                                            | Your organization                                                    |
-| Remote session transcripts (Cowork on claude.ai web and mobile)       | 6 years                                                                                                   | Anthropic                                                            |
-| Local session transcripts (Cowork and Claude Code on users' machines) | 6 years by default, or your organization's custom conversation retention period, when a finite one is set | Anthropic by default; your organization when it sets a custom period |
-| Content hard-deleted through the Compliance API                       | Not retained; deletion is immediate and permanent                                                         | The caller of the `DELETE` endpoint                                  |
+| Data                                                    | Retained for                                                                                             | Controlled by                                                        |
+| ------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| Activity Feed records                                   | 6 years                                                                                                  | Anthropic                                                            |
+| Chat, file, and project content                         | Your organization's claude.ai retention policy                                                           | Your organization                                                    |
+| Local session transcripts (sessions on users' machines) | 6 years by default, or your organization's custom conversation retention period when a finite one is set | Anthropic by default; your organization when it sets a custom period |
+| Remote session transcripts (sessions in the cloud)      | 6 years                                                                                                  | Anthropic                                                            |
+| Content hard-deleted through the Compliance API         | Not retained; deletion is immediate and permanent                                                        | The caller of the `DELETE` endpoint                                  |
 
 For how the rest of the Claude Platform handles retention, see [API and data retention](./manage-claude-api-and-data-retention.md).
 
@@ -139,7 +143,7 @@ The list endpoints do not return a `total_count` field or a checksum. To attest 
 * The number of records exported.
 * The run timestamp and the `request-id` of the final page.
 
-The content endpoints (chats, files, projects, project attachments, Cowork remote session transcripts, and Cowork and Claude Code local session transcripts) serve Claude Enterprise data only; the Activity Feed surfaces administrative and resource events organization-wide. The Compliance API does not include:
+The content endpoints (chats, files, projects, project attachments, and local and remote session transcripts) serve Claude Enterprise data only. The Activity Feed surfaces administrative and resource events organization-wide. The Compliance API does not include:
 
 * Prompt text or model responses from Claude Console, or from Claude API workloads authenticated with an API key.
 * On-device activity in local sessions that is never sent to Anthropic, such as local files that Claude did not read.
@@ -163,7 +167,11 @@ For chain of custody, store the exported records with provenance metadata: sourc
     Filter parameters, pagination, and the `Activity` object schema.
   </Card>
 
-  <Card title="Retrieve and delete chats, files, projects, and sessions" href="./manage-claude-compliance-content-data.md">
-    The content and hard-delete endpoints.
+  <Card title="Retrieve and delete chats, files, and projects" href="./manage-claude-compliance-content-data.md">
+    The chat, file, and project endpoints, including hard delete.
+  </Card>
+
+  <Card title="Retrieve session transcripts" href="./manage-claude-compliance-sessions.md">
+    List the sessions your users run in Claude apps and agents, such as Cowork and Claude Code, and retrieve their transcripts.
   </Card>
 </CardGroup>

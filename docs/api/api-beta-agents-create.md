@@ -173,7 +173,7 @@ Create Agent
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-    - `effort: optional "low" or "medium" or "high" or 2 more or BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or 3 more`
+    - `effort: optional "low" or "medium" or "high" or 2 more or BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or 3 more or null`
 
       How hard Claude works on each inference call. Accepts a bare level string (`"high"`) or `{"type": "high"}`. On create, omitting it resolves the per-model default; on update, omitting it leaves the stored value unchanged.
 
@@ -231,11 +231,11 @@ Create Agent
 
           - `"max"`
 
-    - `inference_geo: optional string`
+    - `inference_geo: optional string or null`
 
       Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo. On update, `model` is whole-object replacement — omitting inference_geo clears it.
 
-    - `speed: optional "standard" or "fast"`
+    - `speed: optional "standard" or "fast" or null`
 
       Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
@@ -247,7 +247,7 @@ Create Agent
 
   Human-readable name for the agent.
 
-- `description: optional string`
+- `description: optional string or null`
 
   Description of what the agent does.
 
@@ -271,7 +271,7 @@ Create Agent
 
   Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
-- `multiagent: optional BetaManagedAgentsMultiagentParams`
+- `multiagent: optional BetaManagedAgentsMultiagentParams or null`
 
   A coordinator topology: the session's primary thread orchestrates work by spawning session threads, each running an agent drawn from the `agents` roster.
 
@@ -337,7 +337,7 @@ Create Agent
 
       - `"anthropic"`
 
-    - `version: optional string`
+    - `version: optional string or null`
 
       Version to pin. Defaults to latest if omitted.
 
@@ -353,11 +353,11 @@ Create Agent
 
       - `"custom"`
 
-    - `version: optional string`
+    - `version: optional string or null`
 
       Version to pin. Defaults to latest if omitted.
 
-- `system: optional string`
+- `system: optional string or null`
 
   System prompt for the agent.
 
@@ -397,11 +397,11 @@ Create Agent
 
         - `"web_search"`
 
-      - `enabled: optional boolean`
+      - `enabled: optional boolean or null`
 
         Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-      - `permission_policy: optional BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy`
+      - `permission_policy: optional BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy or null`
 
         Permission policy for tool execution.
 
@@ -421,15 +421,15 @@ Create Agent
 
             - `"always_ask"`
 
-    - `default_config: optional BetaManagedAgentsAgentToolsetDefaultConfigParams`
+    - `default_config: optional BetaManagedAgentsAgentToolsetDefaultConfigParams or null`
 
       Default configuration for all tools in a toolset.
 
-      - `enabled: optional boolean`
+      - `enabled: optional boolean or null`
 
         Whether tools are enabled and available to Claude by default. Defaults to true if not specified.
 
-      - `permission_policy: optional BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy`
+      - `permission_policy: optional BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy or null`
 
         Permission policy for tool execution.
 
@@ -461,11 +461,11 @@ Create Agent
 
         Name of the MCP tool to configure. 1-128 characters.
 
-      - `enabled: optional boolean`
+      - `enabled: optional boolean or null`
 
         Whether this tool is enabled. Overrides the `default_config` setting.
 
-      - `permission_policy: optional BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy`
+      - `permission_policy: optional BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy or null`
 
         Permission policy for tool execution.
 
@@ -477,15 +477,15 @@ Create Agent
 
           Tool calls require user confirmation before execution.
 
-    - `default_config: optional BetaManagedAgentsMCPToolsetDefaultConfigParams`
+    - `default_config: optional BetaManagedAgentsMCPToolsetDefaultConfigParams or null`
 
       Default configuration for all tools from an MCP server.
 
-      - `enabled: optional boolean`
+      - `enabled: optional boolean or null`
 
         Whether tools are enabled by default. Defaults to true if not specified.
 
-      - `permission_policy: optional BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy`
+      - `permission_policy: optional BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy or null`
 
         Permission policy for tool execution.
 
@@ -513,9 +513,9 @@ Create Agent
 
         - `"object"`
 
-      - `properties: optional map[unknown]`
+      - `properties: optional map[unknown] or null`
 
-      - `required: optional array of string`
+      - `required: optional array of string or null`
 
     - `name: string`
 
@@ -533,7 +533,7 @@ Create Agent
 
   - `id: string`
 
-  - `archived_at: string`
+  - `archived_at: string or null`
 
     A timestamp in RFC 3339 format
 
@@ -541,7 +541,7 @@ Create Agent
 
     A timestamp in RFC 3339 format
 
-  - `description: string`
+  - `description: string or null`
 
   - `mcp_servers: array of BetaManagedAgentsMCPServerURLDefinition`
 
@@ -681,7 +681,7 @@ Create Agent
 
       - `"fast"`
 
-  - `multiagent: BetaManagedAgentsMultiagent`
+  - `multiagent: BetaManagedAgentsMultiagent or null`
 
     Resolved coordinator topology with a concrete agent roster.
 
@@ -745,7 +745,7 @@ Create Agent
 
       - `version: string`
 
-  - `system: string`
+  - `system: string or null`
 
   - `tools: array of BetaManagedAgentsAgentToolset20260401 or BetaManagedAgentsMCPToolset or BetaManagedAgentsCustomTool`
 
@@ -875,9 +875,9 @@ Create Agent
 
           - `"object"`
 
-        - `properties: optional map[unknown]`
+        - `properties: optional map[unknown] or null`
 
-        - `required: optional array of string`
+        - `required: optional array of string or null`
 
       - `name: string`
 

@@ -192,8 +192,6 @@ The following examples show how to print a list of all the Claude models availab
   ```
 
   ```csharp C#
-  using System;
-  using System.Threading.Tasks;
   using Amazon;
   using Amazon.Bedrock;
   using Amazon.Bedrock.Model;
@@ -399,8 +397,9 @@ The following examples show how to generate text from Claude on Bedrock:
 
     Console.WriteLine(
         string.Join("", response.Content
-            .Where(c => c.Value is TextBlock)
-            .Select(c => (c.Value as TextBlock)!.Text)));
+            .Select(block => block.Value)
+            .OfType<TextBlock>()
+            .Select(textBlock => textBlock.Text)));
     ```
   </Tab>
 
@@ -429,7 +428,7 @@ The following examples show how to generate text from Claude on Bedrock:
     	if err != nil {
     		panic(err)
     	}
-    	fmt.Printf("%+v\n", message.Content)
+    	fmt.Println(message.Content)
     ```
   </Tab>
 

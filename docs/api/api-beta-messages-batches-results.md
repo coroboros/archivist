@@ -129,7 +129,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           The format and length of IDs may change over time.
 
-        - `container: BetaContainer`
+        - `container: BetaContainer or null`
 
           Information about the container used in the request (for the code execution tool)
 
@@ -141,7 +141,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             The time at which the container will expire.
 
-          - `skills: array of BetaSkill`
+          - `skills: array of BetaSkill or null`
 
             Skills loaded in the container
 
@@ -192,7 +192,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           - `BetaTextBlock object { citations, text, type }`
 
-            - `citations: array of BetaTextCitation`
+            - `citations: array of BetaTextCitation or null`
 
               Citations supporting the text block.
 
@@ -204,11 +204,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `document_index: number`
 
-                - `document_title: string`
+                - `document_title: string or null`
 
                 - `end_char_index: number`
 
-                - `file_id: string`
+                - `file_id: string or null`
 
                 - `start_char_index: number`
 
@@ -222,11 +222,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `document_index: number`
 
-                - `document_title: string`
+                - `document_title: string or null`
 
                 - `end_page_number: number`
 
-                - `file_id: string`
+                - `file_id: string or null`
 
                 - `start_page_number: number`
 
@@ -244,7 +244,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `document_index: number`
 
-                - `document_title: string`
+                - `document_title: string or null`
 
                 - `end_block_index: number`
 
@@ -252,7 +252,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-                - `file_id: string`
+                - `file_id: string or null`
 
                 - `start_block_index: number`
 
@@ -268,7 +268,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `encrypted_index: string`
 
-                - `title: string`
+                - `title: string or null`
 
                 - `type: "web_search_result_location"`
 
@@ -302,7 +302,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   0-based index of the first cited block in the source's `content` array.
 
-                - `title: string`
+                - `title: string or null`
 
                 - `type: "search_result_location"`
 
@@ -458,7 +458,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `encrypted_content: string`
 
-                - `page_age: string`
+                - `page_age: string or null`
 
                 - `title: string`
 
@@ -522,7 +522,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `content: BetaDocumentBlock`
 
-                  - `citations: BetaCitationConfig`
+                  - `citations: BetaCitationConfig or null`
 
                     Citation configuration for the document
 
@@ -554,7 +554,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                         - `"text"`
 
-                  - `title: string`
+                  - `title: string or null`
 
                     The title of the document
 
@@ -562,7 +562,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     - `"document"`
 
-                - `retrieved_at: string`
+                - `retrieved_at: string or null`
 
                   ISO 8601 timestamp when the content was retrieved
 
@@ -622,7 +622,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               - `BetaAdvisorResultBlock object { stop_reason, text, type }`
 
-                - `stop_reason: string`
+                - `stop_reason: string or null`
 
                   The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
 
@@ -638,7 +638,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
 
-                - `stop_reason: string`
+                - `stop_reason: string or null`
 
                   The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
@@ -786,7 +786,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `"file_not_found"`
 
-                - `error_message: string`
+                - `error_message: string or null`
 
                 - `type: "text_editor_code_execution_tool_result_error"`
 
@@ -804,11 +804,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `"pdf"`
 
-                - `num_lines: number`
+                - `num_lines: number or null`
 
-                - `start_line: number`
+                - `start_line: number or null`
 
-                - `total_lines: number`
+                - `total_lines: number or null`
 
                 - `type: "text_editor_code_execution_view_result"`
 
@@ -824,15 +824,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               - `BetaTextEditorCodeExecutionStrReplaceResultBlock object { lines, new_lines, new_start, 3 more }`
 
-                - `lines: array of string`
+                - `lines: array of string or null`
 
-                - `new_lines: number`
+                - `new_lines: number or null`
 
-                - `new_start: number`
+                - `new_start: number or null`
 
-                - `old_lines: number`
+                - `old_lines: number or null`
 
-                - `old_start: number`
+                - `old_start: number or null`
 
                 - `type: "text_editor_code_execution_str_replace_result"`
 
@@ -860,7 +860,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `"execution_time_exceeded"`
 
-                - `error_message: string`
+                - `error_message: string or null`
 
                 - `type: "tool_search_tool_result_error"`
 
@@ -912,7 +912,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               - `BetaMCPToolResultBlockContent = array of BetaTextBlock`
 
-                - `citations: array of BetaTextCitation`
+                - `citations: array of BetaTextCitation or null`
 
                   Citations supporting the text block.
 
@@ -948,11 +948,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             summary (e.g., malformed output from the model). Clients may round-trip
             compaction blocks with null content; the server treats them as no-ops.
 
-            - `content: string`
+            - `content: string or null`
 
               Summary of compacted content, or null if compaction failed
 
-            - `encrypted_content: string`
+            - `encrypted_content: string or null`
 
               Opaque metadata from prior compaction, to be round-tripped verbatim
 
@@ -1060,7 +1060,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               What caused the `from` model to hand over at this hop.
 
-              - `category: "cyber" or "bio" or "frontier_llm" or 2 more`
+              - `category: "cyber" or "bio" or "frontier_llm" or 2 more or null`
 
                 The policy category that triggered a refusal.
 
@@ -1092,7 +1092,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               - `"fallback"`
 
-        - `context_management: BetaContextManagementResponse`
+        - `context_management: BetaContextManagementResponse or null`
 
           Context management response.
 
@@ -1134,12 +1134,12 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `"clear_thinking_20251015"`
 
-        - `diagnostics: BetaDiagnostics`
+        - `diagnostics: BetaDiagnostics or null`
 
           Response envelope for request-level diagnostics. Present (possibly
           null) whenever the caller supplied `diagnostics` on the request.
 
-          - `cache_miss_reason: BetaCacheMissModelChanged or BetaCacheMissSystemChanged or BetaCacheMissToolsChanged or 3 more`
+          - `cache_miss_reason: BetaCacheMissModelChanged or BetaCacheMissSystemChanged or BetaCacheMissToolsChanged or 3 more or null`
 
             Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
@@ -1209,11 +1209,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           - `"assistant"`
 
-        - `stop_details: BetaRefusalStopDetails`
+        - `stop_details: BetaRefusalStopDetails or null`
 
           Structured information about a refusal.
 
-          - `category: "cyber" or "bio" or "frontier_llm" or 2 more`
+          - `category: "cyber" or "bio" or "frontier_llm" or 2 more or null`
 
             The policy category that triggered a refusal.
 
@@ -1237,13 +1237,13 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
-          - `explanation: string`
+          - `explanation: string or null`
 
             Human-readable explanation of the refusal.
 
             This text is not guaranteed to be stable. `null` when no explanation is available for the category.
 
-          - `fallback_credit_token: string`
+          - `fallback_credit_token: string or null`
 
             Opaque code that refunds the cache-miss cost when retrying this refused
             request on the fallback model. Pass it as `fallback_credit_token` on the
@@ -1264,7 +1264,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             `null` when the refused model isn't eligible for a fallback credit.
 
-          - `fallback_has_prefill_claim: boolean`
+          - `fallback_has_prefill_claim: boolean or null`
 
             Whether the accompanying `fallback_credit_token` may be redeemed with the
             appended-assistant retry form. Only set when `fallback_credit_token` is
@@ -1288,7 +1288,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
             Advisory: if an appended-assistant retry is rejected with a 400 despite
             `true`, fall back to resending the original request body with the token.
 
-          - `recommended_model: string`
+          - `recommended_model: string or null`
 
             The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
@@ -1296,7 +1296,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `"refusal"`
 
-        - `stop_reason: BetaStopReason`
+        - `stop_reason: BetaStopReason or null`
 
           The reason that we stopped.
 
@@ -1328,7 +1328,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           - `"model_context_window_exceeded"`
 
-        - `stop_sequence: string`
+        - `stop_sequence: string or null`
 
           Which custom stop sequence was generated, if any.
 
@@ -1354,7 +1354,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
 
-          - `cache_creation: BetaCacheCreation`
+          - `cache_creation: BetaCacheCreation or null`
 
             Breakdown of cached tokens by TTL
 
@@ -1366,15 +1366,15 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               The number of input tokens used to create the 5 minute cache entry.
 
-          - `cache_creation_input_tokens: number`
+          - `cache_creation_input_tokens: number or null`
 
             The number of input tokens used to create the cache entry.
 
-          - `cache_read_input_tokens: number`
+          - `cache_read_input_tokens: number or null`
 
             The number of input tokens read from the cache.
 
-          - `fallback_credit: BetaFallbackCreditUsage`
+          - `fallback_credit: BetaFallbackCreditUsage or null`
 
             Outcome of the `fallback_credit_token` presented on this request.
 
@@ -1435,7 +1435,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                   - `"not_applied"`
 
-                - `remove_to_redeem: optional array of string`
+                - `remove_to_redeem: optional array of string or null`
 
                   Request fields to remove before retrying, so the retry can redeem this
                   token.
@@ -1446,7 +1446,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
                   been billed at normal price; nothing redeems retroactively, but a corrected
                   re-send inside the token's five-minute window can still redeem.
 
-          - `inference_geo: string`
+          - `inference_geo: string or null`
 
             The geographic region where inference was performed for this request.
 
@@ -1454,7 +1454,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             The number of input tokens which were used.
 
-          - `iterations: BetaIterationsUsage`
+          - `iterations: BetaIterationsUsage or null`
 
             Per-iteration token usage breakdown.
 
@@ -1468,7 +1468,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               Token usage for a sampling iteration.
 
-              - `cache_creation: BetaCacheCreation`
+              - `cache_creation: BetaCacheCreation or null`
 
                 Breakdown of cached tokens by TTL
 
@@ -1504,7 +1504,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               Token usage for a compaction iteration.
 
-              - `cache_creation: BetaCacheCreation`
+              - `cache_creation: BetaCacheCreation or null`
 
                 Breakdown of cached tokens by TTL
 
@@ -1534,7 +1534,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               Token usage for an advisor sub-inference iteration.
 
-              - `cache_creation: BetaCacheCreation`
+              - `cache_creation: BetaCacheCreation or null`
 
                 Breakdown of cached tokens by TTL
 
@@ -1575,7 +1575,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               a fallback model served the response is signalled by the presence of this
               entry in `usage.iterations`.
 
-              - `cache_creation: BetaCacheCreation`
+              - `cache_creation: BetaCacheCreation or null`
 
                 Breakdown of cached tokens by TTL
 
@@ -1611,7 +1611,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             The number of output tokens which were used.
 
-          - `output_tokens_details: BetaOutputTokensDetails`
+          - `output_tokens_details: BetaOutputTokensDetails or null`
 
             Breakdown of output tokens by category.
 
@@ -1631,7 +1631,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               generation count by a small number of tokens. Always ≤ `output_tokens`;
               `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
-          - `server_tool_use: BetaServerToolUsage`
+          - `server_tool_use: BetaServerToolUsage or null`
 
             The number of server tool requests.
 
@@ -1643,7 +1643,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               The number of web search tool requests.
 
-          - `service_tier: "standard" or "priority" or "batch"`
+          - `service_tier: "standard" or "priority" or "batch" or null`
 
             If the request used the priority, standard, or batch tier.
 
@@ -1653,7 +1653,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `"batch"`
 
-          - `speed: "standard" or "fast"`
+          - `speed: "standard" or "fast" or null`
 
             Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
@@ -1743,7 +1743,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
               - `"overloaded_error"`
 
-        - `request_id: string`
+        - `request_id: string or null`
 
         - `type: "error"`
 
