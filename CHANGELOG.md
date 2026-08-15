@@ -1,5 +1,77 @@
 # Changelog
 
+## 🤖 v1.5.108 - 15/08/2026
+
+File Changes:
+
+- Modified: `docs/agents-and-tools/agents-and-tools-README.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-agent-skills-best-practices.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-agent-skills-overview.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-advisor-tool.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-tool-use-code-execution-tool.md`
+- Modified: `docs/build-with-claude/build-with-claude-README.md`
+- Modified: `docs/build-with-claude/build-with-claude-prompt-engineering-prompting-claude-opus-5.md`
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-agent-teams.md`
+- Modified: `docs/code/code-artifacts.md`
+- Modified: `docs/code/code-auto-mode-config.md`
+- Modified: `docs/code/code-best-practices.md`
+- Modified: `docs/code/code-changelog.md`
+- Modified: `docs/code/code-channels-reference.md`
+- Modified: `docs/code/code-channels.md`
+- Modified: `docs/code/code-chrome.md`
+- Modified: `docs/code/code-claude-apps-gateway-config.md`
+- Modified: `docs/code/code-claude-security.md`
+- Modified: `docs/code/code-cli-reference.md`
+- Modified: `docs/code/code-commands.md`
+- Modified: `docs/code/code-common-workflows.md`
+- Modified: `docs/code/code-desktop-quickstart.md`
+- Modified: `docs/code/code-desktop.md`
+- Modified: `docs/code/code-env-vars.md`
+- Modified: `docs/code/code-errors.md`
+- Modified: `docs/code/code-features-overview.md`
+- Modified: `docs/code/code-glossary.md`
+- Modified: `docs/code/code-goal.md`
+- Modified: `docs/code/code-hooks-guide.md`
+- Modified: `docs/code/code-hooks.md`
+- Modified: `docs/code/code-how-claude-code-works.md`
+- Modified: `docs/code/code-interactive-mode.md`
+- Modified: `docs/code/code-jetbrains.md`
+- Modified: `docs/code/code-large-codebases.md`
+- Modified: `docs/code/code-mcp-quickstart.md`
+- Modified: `docs/code/code-model-config.md`
+- Modified: `docs/code/code-network-config.md`
+- Modified: `docs/code/code-output-styles.md`
+- Modified: `docs/code/code-permission-modes.md`
+- Modified: `docs/code/code-permissions.md`
+- Modified: `docs/code/code-plugins-reference.md`
+- Modified: `docs/code/code-prompt-caching.md`
+- Modified: `docs/code/code-prompt-library.md`
+- Modified: `docs/code/code-quickstart.md`
+- Modified: `docs/code/code-remote-control.md`
+- Modified: `docs/code/code-sandboxing.md`
+- Modified: `docs/code/code-scheduled-tasks.md`
+- Modified: `docs/code/code-self-hosted-environments-configuration.md`
+- Modified: `docs/code/code-self-hosted-environments-deploy.md`
+- Modified: `docs/code/code-sessions.md`
+- Modified: `docs/code/code-settings.md`
+- Modified: `docs/code/code-sub-agents.md`
+- Modified: `docs/code/code-terminal-config.md`
+- Modified: `docs/code/code-tools-reference.md`
+- Modified: `docs/code/code-troubleshoot-install.md`
+- Modified: `docs/code/code-troubleshooting.md`
+- Modified: `docs/code/code-voice-dictation.md`
+- Modified: `docs/code/code-web-quickstart.md`
+- Modified: `docs/code/code-workflows.md`
+- Modified: `docs/code/code-worktrees.md`
+- Modified: `docs/manage-claude/manage-claude-README.md`
+- Modified: `docs/manage-claude/manage-claude-cmek.md`
+- Modified: `docs/manage-claude/manage-claude-inference-hooks-configuration.md`
+- Modified: `docs/manage-claude/manage-claude-inference-hooks-endpoint.md`
+- Modified: `docs/managed-agents/managed-agents-README.md`
+- Modified: `docs/managed-agents/managed-agents-skills.md`
+
+
 ## 🤖 v1.5.107 - 14/08/2026
 
 File Changes:
