@@ -1,5 +1,38 @@
 # Changelog
 
+## 🤖 v1.5.115 - 18/08/2026
+
+File Changes:
+
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-accessibility.md`
+- Modified: `docs/code/code-admin-setup.md`
+- Modified: `docs/code/code-advisor.md`
+- Modified: `docs/code/code-agent-view.md`
+- Modified: `docs/code/code-best-practices.md`
+- Modified: `docs/code/code-channels-reference.md`
+- Modified: `docs/code/code-claude-apps-gateway-config.md`
+- Modified: `docs/code/code-claude-apps-gateway-deploy.md`
+- Modified: `docs/code/code-cli-reference.md`
+- Modified: `docs/code/code-desktop.md`
+- Modified: `docs/code/code-env-vars.md`
+- Modified: `docs/code/code-errors.md`
+- Modified: `docs/code/code-feature-availability.md`
+- Modified: `docs/code/code-glossary.md`
+- Modified: `docs/code/code-headless.md`
+- Modified: `docs/code/code-how-claude-code-works.md`
+- Modified: `docs/code/code-interactive-mode.md`
+- Modified: `docs/code/code-model-config.md`
+- Modified: `docs/code/code-overview.md`
+- Modified: `docs/code/code-permission-modes.md`
+- Modified: `docs/code/code-sandboxing.md`
+- Modified: `docs/code/code-security.md`
+- Modified: `docs/code/code-server-managed-settings.md`
+- Modified: `docs/code/code-settings.md`
+- Modified: `docs/code/code-skills.md`
+- Modified: `docs/code/code-vs-code.md`
+
+
 ## 🤖 v1.5.114 - 18/08/2026
 
 File Changes:
