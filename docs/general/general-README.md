@@ -2,7 +2,7 @@
 
 _This repository is a mirror of the official [Claude Platform](https://platform.claude.com/docs/en/) documentation (Platform | General). It is updated automatically._
 
-**Last updated:** Fri, 14 Aug 2026 01:47:32 GMT
+**Last updated:** Wed, 19 Aug 2026 01:07:26 GMT
 
 ---
 
@@ -12,21 +12,21 @@ _This repository is a mirror of the official [Claude Platform](https://platform.
 
 ## Cli Sdks Libraries
 
-- [Overview](./general-cli-sdks-libraries-overview.md)
 - [Cli | Authentication](./general-cli-sdks-libraries-cli-authentication.md)
-- [Libraries | Apple Foundation Models](./general-cli-sdks-libraries-libraries-apple-foundation-models.md)
-- [Cli | Scripting](./general-cli-sdks-libraries-cli-scripting.md)
-- [Cli | Using](./general-cli-sdks-libraries-cli-using.md)
-- [Sdks | Go](./general-cli-sdks-libraries-sdks-go.md)
 - [Sdks | Php](./general-cli-sdks-libraries-sdks-php.md)
-- [Sdks | Python](./general-cli-sdks-libraries-sdks-python.md)
 - [Sdks | Csharp](./general-cli-sdks-libraries-sdks-csharp.md)
-- [Sdks | Ruby](./general-cli-sdks-libraries-sdks-ruby.md)
-- [Sdks | Typescript](./general-cli-sdks-libraries-sdks-typescript.md)
-- [Cli | Quickstart](./general-cli-sdks-libraries-cli-quickstart.md)
-- [Libraries | Openai Sdk](./general-cli-sdks-libraries-libraries-openai-sdk.md)
 - [Sdks | Java](./general-cli-sdks-libraries-sdks-java.md)
+- [Overview](./general-cli-sdks-libraries-overview.md)
+- [Cli | Scripting](./general-cli-sdks-libraries-cli-scripting.md)
+- [Sdks | Python](./general-cli-sdks-libraries-sdks-python.md)
+- [Libraries | Openai Sdk](./general-cli-sdks-libraries-libraries-openai-sdk.md)
 - [Middleware](./general-cli-sdks-libraries-middleware.md)
+- [Cli | Using](./general-cli-sdks-libraries-cli-using.md)
+- [Libraries | Apple Foundation Models](./general-cli-sdks-libraries-libraries-apple-foundation-models.md)
+- [Sdks | Go](./general-cli-sdks-libraries-sdks-go.md)
+- [Sdks | Ruby](./general-cli-sdks-libraries-sdks-ruby.md)
+- [Cli | Quickstart](./general-cli-sdks-libraries-cli-quickstart.md)
+- [Sdks | Typescript](./general-cli-sdks-libraries-sdks-typescript.md)
 
 ## Get Api Key
 

@@ -246,7 +246,7 @@ Use Skills only from trusted sources: those you created yourself or obtained fro
 * **Data exposure:** Skills with access to sensitive data could be designed to leak information to external systems
 * **Treat like installing software:** Be especially careful when integrating Skills into production systems with access to sensitive data or critical operations
 
-For organization-scale governance, vetting, and deployment guidance, see [Skills for enterprise](./agents-and-tools-agent-skills-enterprise.md).
+For organization-scale governance, vetting, and deployment guidance, see [Skills for enterprise](./agents-and-tools-agent-skills-enterprise.md). Claude Enterprise organizations can also turn on [Skill content scanning](./agents-and-tools-agent-skills-enterprise.md#skill-content-scanning) for custom Skills uploaded in claude.ai and Claude Cowork. Scanning doesn't cover Skills uploaded through the Skills API or the Claude Console.
 
 ## Available Skills
 
@@ -276,6 +276,8 @@ For complete examples of custom Skills, see the [Skills cookbook](https://platfo
 Agent Skills is not covered by ZDR arrangements. Skill definitions and execution data are retained according to Anthropic's standard data retention policy.
 
 For ZDR eligibility across all features, see [API and data retention](../manage-claude/manage-claude-api-and-data-retention.md).
+
+For audit logging of Skills API operations, see [Audit logging](../build-with-claude/build-with-claude-skills-guide.md#audit-logging) in Using Agent Skills with the API.
 
 ## Limitations and constraints
 

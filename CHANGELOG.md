@@ -1,5 +1,73 @@
 # Changelog
 
+## 🤖 v1.5.116 - 19/08/2026
+
+File Changes:
+
+- Modified: `docs/agents-and-tools/agents-and-tools-README.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-agent-skills-enterprise.md`
+- Modified: `docs/agents-and-tools/agents-and-tools-agent-skills-overview.md`
+- Modified: `docs/api/api-README.md`
+- Modified: `docs/api/api-overview.md`
+- Modified: `docs/build-with-claude/build-with-claude-README.md`
+- Modified: `docs/build-with-claude/build-with-claude-administration-api.md`
+- Modified: `docs/build-with-claude/build-with-claude-api-and-data-retention.md`
+- Modified: `docs/build-with-claude/build-with-claude-files.md`
+- Modified: `docs/build-with-claude/build-with-claude-skills-guide.md`
+- Modified: `docs/build-with-claude/build-with-claude-usage-cost-api.md`
+- Modified: `docs/build-with-claude/build-with-claude-vision.md`
+- Modified: `docs/build-with-claude/build-with-claude-workspaces.md`
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-agent-loop.md`
+- Modified: `docs/code/code-agent-teams.md`
+- Modified: `docs/code/code-amazon-bedrock.md`
+- Modified: `docs/code/code-changelog.md`
+- Modified: `docs/code/code-commands.md`
+- Modified: `docs/code/code-cross-session-messaging.md`
+- Modified: `docs/code/code-debug-your-config.md`
+- Modified: `docs/code/code-desktop.md`
+- Modified: `docs/code/code-env-vars.md`
+- Modified: `docs/code/code-errors.md`
+- Modified: `docs/code/code-goal.md`
+- Modified: `docs/code/code-hooks.md`
+- Modified: `docs/code/code-interactive-mode.md`
+- Modified: `docs/code/code-mcp.md`
+- Modified: `docs/code/code-model-config.md`
+- Modified: `docs/code/code-overview.md`
+- Modified: `docs/code/code-permission-modes.md`
+- Modified: `docs/code/code-plugins.md`
+- Modified: `docs/code/code-sessions.md`
+- Modified: `docs/code/code-settings.md`
+- Modified: `docs/code/code-skills.md`
+- Deleted: `docs/code/code-slash-commands.md`
+- Modified: `docs/code/code-statusline.md`
+- Modified: `docs/code/code-sub-agents.md`
+- Modified: `docs/code/code-subagents.md`
+- Modified: `docs/general/general-README.md`
+- Modified: `docs/general/general-home.md`
+- Modified: `docs/general/general-intro.md`
+- Modified: `docs/manage-claude/manage-claude-README.md`
+- Modified: `docs/manage-claude/manage-claude-access-transparency.md`
+- Modified: `docs/manage-claude/manage-claude-admin-api.md`
+- Modified: `docs/manage-claude/manage-claude-api-and-data-retention.md`
+- Modified: `docs/manage-claude/manage-claude-cmek-aws-kms.md`
+- Modified: `docs/manage-claude/manage-claude-cmek-azure-key-vault.md`
+- Modified: `docs/manage-claude/manage-claude-cmek-google-cloud-kms.md`
+- Modified: `docs/manage-claude/manage-claude-cmek.md`
+- Modified: `docs/manage-claude/manage-claude-usage-cost-api.md`
+- Modified: `docs/manage-claude/manage-claude-wif-providers-aws.md`
+- Modified: `docs/manage-claude/manage-claude-wif-providers-azure.md`
+- Modified: `docs/manage-claude/manage-claude-wif-providers-gcp.md`
+- Modified: `docs/manage-claude/manage-claude-wif-providers-github-actions.md`
+- Modified: `docs/manage-claude/manage-claude-wif-providers-kubernetes.md`
+- Modified: `docs/manage-claude/manage-claude-wif-providers-okta.md`
+- Modified: `docs/manage-claude/manage-claude-wif-providers-spiffe.md`
+- Modified: `docs/manage-claude/manage-claude-wif-reference.md`
+- Modified: `docs/manage-claude/manage-claude-workspaces.md`
+- Modified: `docs/release-notes/release-notes-README.md`
+- Modified: `docs/release-notes/release-notes-overview.md`
+
+
 ## 🤖 v1.5.115 - 18/08/2026
 
 File Changes:
