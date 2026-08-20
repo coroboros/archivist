@@ -1,5 +1,26 @@
 # Changelog
 
+## 🤖 v1.5.119 - 20/08/2026
+
+File Changes:
+
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-changelog.md`
+- Modified: `docs/code/code-env-vars.md`
+- Modified: `docs/code/code-errors.md`
+- Modified: `docs/code/code-fullscreen.md`
+- Modified: `docs/code/code-keybindings.md`
+- Modified: `docs/code/code-model-config.md`
+- Modified: `docs/code/code-overview.md`
+- Modified: `docs/code/code-permissions.md`
+- Modified: `docs/code/code-plugin-marketplaces.md`
+- Modified: `docs/code/code-plugins-reference.md`
+- Modified: `docs/code/code-settings.md`
+- Modified: `docs/code/code-sub-agents.md`
+- Modified: `docs/code/code-troubleshooting.md`
+- Modified: `docs/code/code-typescript.md`
+
+
 ## 🤖 v1.5.118 - 20/08/2026
 
 File Changes:
