@@ -109,6 +109,8 @@ These are the `ant beta:worker` CLI flags for the pre-built worker that drives a
 | `--max-idle`           | How long to wait after the session goes idle with an `end_turn` [stop reason](https://platform.claude.com/docs/en/api/handling-stop-reasons.md) before shutting down. Defaults to `60s`. |
 | `--log-format`         | Log output format. Use `json` for structured log ingestion. Defaults to `text`.                                                                                                       |
 
+The CLI worker does not mount [memory stores](./managed-agents-memory.md): a session that attaches one still runs, but the agent finds nothing at the store's `mount_path` and no changes sync back to the store. To use memory stores in sessions on a self-hosted environment, run the SDK worker instead; see [Use memory stores](./managed-agents-self-hosted-sandboxes.md#use-memory-stores).
+
 ## Supported MCP server types
 
 Claude Managed Agents connects to [remote MCP servers](../agents-and-tools/agents-and-tools-remote-mcp-servers.md) that expose an HTTP endpoint, or to private MCP servers through [MCP tunnels](../agents-and-tools/agents-and-tools-mcp-tunnels-overview.md). The server should support the MCP protocol's streamable HTTP transport; servers that only support the deprecated SSE transport still work through an automatic fallback. See [MCP connector](./managed-agents-mcp-connector.md) for declaring servers on an agent.

@@ -26,7 +26,7 @@ The [Admin API](../api/api-admin.md) allows you to programmatically manage your 
 </Check>
 
 <Note>
-  **Claude Enterprise:** Claude Enterprise (claude.ai) organizations use the Admin API too, with a scoped API key created in claude.ai. Of the endpoints on this page, only members and invites are available to them (in beta), alongside Claude-Enterprise-only endpoints: groups and custom-role reads (beta), and [spend limits](./manage-claude-spend-limits-api.md). See [User management](./manage-claude-user-management.md) for Claude Enterprise.
+  **Claude Enterprise:** Claude Enterprise (claude.ai) organizations use the Admin API too, with a scoped API key created in claude.ai. Of the endpoints on this page, only members and invites are available to them, alongside Claude-Enterprise-only endpoints: groups and custom-role reads, and [spend limits](./manage-claude-spend-limits-api.md). See [User management](./manage-claude-user-management.md) for Claude Enterprise.
 </Note>
 
 <Note>

@@ -199,6 +199,10 @@ The Message Batches API has its own set of rate limits which are shared across a
 | Create endpoints (for example, agents, sessions, and environments) | 300 requests per minute   |
 | Read endpoints (for example, retrieve, list, and stream)           | 1,200 requests per minute |
 
+### Files API
+
+[Files API](../build-with-claude/build-with-claude-files.md) requests have their own per-organization limit, shared across upload, list, retrieve, download, and delete operations and separate from the Messages API limits described earlier on this page. See [Files API rate limits](../build-with-claude/build-with-claude-files.md#rate-limits) for the current value.
+
 ### Fast mode rate limits
 
 When using [fast mode](../build-with-claude/build-with-claude-fast-mode.md) (research preview) with `speed: "fast"` on Claude Opus 5 or Opus 4.8, dedicated rate limits apply that are separate from standard Opus rate limits. When fast mode rate limits are exceeded, the API returns a `429` error with a `retry-after` header. Fast mode is not available on Claude Opus 4.7 (requests return an error) or Claude Opus 4.6 (requests to `claude-opus-4-6` with `speed: "fast"` run at standard speed). See [Fast mode](../build-with-claude/build-with-claude-fast-mode.md#supported-models).

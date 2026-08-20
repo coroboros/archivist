@@ -746,7 +746,7 @@ Plain text documents are automatically chunked into sentences. You can provide t
 
   <Tab title="Files API">
     <Note>
-      Files API document sources are in beta. These examples use the beta client path; see [Files API](./build-with-claude-files.md) for upload details.
+      These examples reference the uploaded file as a `document` source. They use the SDK `beta` client path and send the `anthropic-beta: files-api-2025-04-14` header, which the API accepts but does not require. See [Files API](./build-with-claude-files.md) for upload details.
     </Note>
 
     <CodeGroup>
@@ -1577,7 +1577,7 @@ PDF documents can be provided as base64-encoded data, a URL, or by `file_id`. PD
 
   <Tab title="Files API">
     <Note>
-      Files API document sources are in beta. These examples use the beta client path; see [Files API](./build-with-claude-files.md) for upload details.
+      These examples reference the uploaded file as a `document` source. They use the SDK `beta` client path and send the `anthropic-beta: files-api-2025-04-14` header, which the API accepts but does not require. See [Files API](./build-with-claude-files.md) for upload details.
     </Note>
 
     <CodeGroup>

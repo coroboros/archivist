@@ -35,11 +35,11 @@ The Claude API includes the following APIs:
 * **[Message Batches API](./api-messages-batches-create.md)**: Process large volumes of Messages requests asynchronously with 50% cost reduction (`POST /v1/messages/batches`)
 * **[Token Counting API](https://platform.claude.com/docs/en/api/messages-count-tokens.md)**: Count tokens in a message before sending to manage costs and rate limits (`POST /v1/messages/count_tokens`)
 * **[Models API](./api-models-list.md)**: List available Claude models and their details (`GET /v1/models`)
+* **[Files API](./api-beta-files-upload.md)**: Upload and manage files for use across multiple API calls (`POST /v1/files`, `GET /v1/files`)
+* **[Skills API](https://platform.claude.com/docs/en/api/skills/create-skill.md)**: Create and manage custom agent skills (`POST /v1/skills`, `GET /v1/skills`)
 
 **Beta:**
 
-* **[Files API](./api-beta-files-upload.md)**: Upload and manage files for use across multiple API calls (`POST /v1/files`, `GET /v1/files`)
-* **[Skills API](https://platform.claude.com/docs/en/api/skills/create-skill.md)**: Create and manage custom agent skills (`POST /v1/skills`, `GET /v1/skills`)
 * **[Agents API](../managed-agents/managed-agents-agent-setup.md)**: Define reusable, versioned agent configurations for Claude Managed Agents (`POST /v1/agents`, `GET /v1/agents`)
 * **[Sessions API](../managed-agents/managed-agents-sessions.md)**: Run stateful agent sessions in managed cloud sandboxes (`POST /v1/sessions`, `GET /v1/sessions/{id}/events/stream`)
 * **[Environments API](../managed-agents/managed-agents-environments.md)**: Configure sandbox templates for agent sessions (`POST /v1/environments`, `GET /v1/environments`)
@@ -158,7 +158,7 @@ To go back a page, pass `prev_page` as the `page` parameter. `prev_page` is `nul
 Every SDK provides an auto-paginating iterator that follows `next_page` for you. In Python and TypeScript, you get it by iterating the list result directly. The other SDKs provide the iterator through a separate method. SDK auto-pagination is forward-only; to go back a page, read `prev_page` from the response and pass it back as the `page` parameter yourself. See [client SDKs](../general/general-cli-sdks-libraries-overview.md) for language-specific details.
 
 <Note>
-  Some list endpoints use a different cursor scheme. The [Message Batches API](../build-with-claude/build-with-claude-batch-processing.md), the [Files API](../build-with-claude/build-with-claude-files.md), the [Models API](./api-models-list.md), and several [Admin API](../manage-claude/manage-claude-admin-api.md) endpoints take `after_id` and `before_id` query parameters instead of `page`. Their responses return `has_more`, `first_id`, and `last_id` instead of `next_page`. Some endpoints that use the `page` scheme, such as `GET /v1/skills`, also return a `has_more` Boolean alongside `next_page`. See the reference page for each endpoint for its exact pagination fields.
+  Some list endpoints use a different cursor scheme. The [Message Batches API](../build-with-claude/build-with-claude-batch-processing.md), the [Models API](./api-models-list.md), and several [Admin API](../manage-claude/manage-claude-admin-api.md) endpoints take `after_id` and `before_id` query parameters instead of `page`. Their responses return `has_more`, `first_id`, and `last_id` instead of `next_page`. The [Files API](../build-with-claude/build-with-claude-files.md) also uses that scheme when a request includes the `files-api-2025-04-14` beta header; without the header, `GET /v1/files` takes `page` and returns `next_page`. Some endpoints that use the `page` scheme, such as `GET /v1/skills`, also return a `has_more` Boolean alongside `next_page`. See the reference page for each endpoint for its exact pagination fields.
 </Note>
 
 ## Rate limits and availability

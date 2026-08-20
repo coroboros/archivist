@@ -29,7 +29,7 @@ Sessions progress through these statuses. See [Start a session](./managed-agents
 
 ## Updating the agent configuration
 
-You can update a session's `agent.tools` and `agent.mcp_servers`, including permission policies, mid-session without creating a new agent version. Updates are session-local and do not propagate back to the underlying agent.
+You can update a session's `agent.tools` and `agent.mcp_servers`, including permission policies and per-tool web settings such as [domain filters](./managed-agents-tools.md#restrict-web-search-and-web-fetch-domains), mid-session without creating a new agent version. Updates are session-local and do not propagate back to the underlying agent. Updated `allowed_domains` and `blocked_domains` apply to the rest of the session.
 
 Only the agent's `tools` and `mcp_servers` can change after a session is created. To run a session with `model`, `system`, or `skills` values other than the agent's, use [agent configuration overrides](./managed-agents-sessions.md#override-agent-configuration-for-a-session) when you create the session. The agent's model configuration, including its [`inference_geo`](../manage-claude/manage-claude-data-residency.md) pin, also can't change mid-session: set the pin when you save the agent, or set or clear it for a single session with a `model` override when you create it. The agent's configured `system` field is fixed for the session's lifetime. On models that support it, you can still append system-level guidance mid-session by sending a [`system.message` event](./managed-agents-events-and-streaming.md#sending-system-messages).
 

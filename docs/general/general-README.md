@@ -2,7 +2,7 @@
 
 _This repository is a mirror of the official [Claude Platform](https://platform.claude.com/docs/en/) documentation (Platform | General). It is updated automatically._
 
-**Last updated:** Wed, 19 Aug 2026 01:07:26 GMT
+**Last updated:** Thu, 20 Aug 2026 01:06:51 GMT
 
 ---
 
@@ -12,21 +12,21 @@ _This repository is a mirror of the official [Claude Platform](https://platform.
 
 ## Cli Sdks Libraries
 
-- [Cli | Authentication](./general-cli-sdks-libraries-cli-authentication.md)
+- [Libraries | Apple Foundation Models](./general-cli-sdks-libraries-libraries-apple-foundation-models.md)
 - [Sdks | Php](./general-cli-sdks-libraries-sdks-php.md)
-- [Sdks | Csharp](./general-cli-sdks-libraries-sdks-csharp.md)
-- [Sdks | Java](./general-cli-sdks-libraries-sdks-java.md)
 - [Overview](./general-cli-sdks-libraries-overview.md)
-- [Cli | Scripting](./general-cli-sdks-libraries-cli-scripting.md)
-- [Sdks | Python](./general-cli-sdks-libraries-sdks-python.md)
+- [Sdks | Ruby](./general-cli-sdks-libraries-sdks-ruby.md)
+- [Sdks | Csharp](./general-cli-sdks-libraries-sdks-csharp.md)
 - [Libraries | Openai Sdk](./general-cli-sdks-libraries-libraries-openai-sdk.md)
+- [Cli | Authentication](./general-cli-sdks-libraries-cli-authentication.md)
+- [Cli | Quickstart](./general-cli-sdks-libraries-cli-quickstart.md)
+- [Cli | Scripting](./general-cli-sdks-libraries-cli-scripting.md)
 - [Middleware](./general-cli-sdks-libraries-middleware.md)
 - [Cli | Using](./general-cli-sdks-libraries-cli-using.md)
-- [Libraries | Apple Foundation Models](./general-cli-sdks-libraries-libraries-apple-foundation-models.md)
-- [Sdks | Go](./general-cli-sdks-libraries-sdks-go.md)
-- [Sdks | Ruby](./general-cli-sdks-libraries-sdks-ruby.md)
-- [Cli | Quickstart](./general-cli-sdks-libraries-cli-quickstart.md)
 - [Sdks | Typescript](./general-cli-sdks-libraries-sdks-typescript.md)
+- [Sdks | Python](./general-cli-sdks-libraries-sdks-python.md)
+- [Sdks | Java](./general-cli-sdks-libraries-sdks-java.md)
+- [Sdks | Go](./general-cli-sdks-libraries-sdks-go.md)
 
 ## Get Api Key
 

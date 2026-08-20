@@ -710,7 +710,7 @@ If you need to send PDFs from your local system or when a URL isn't available:
 
 #### Option 3: Files API
 
-For PDFs you'll use repeatedly, or when you want to avoid encoding overhead, use the [Files API](./build-with-claude-files.md) (beta):
+For PDFs you'll use repeatedly, or when you want to avoid encoding overhead, use the [Files API](./build-with-claude-files.md). These examples send the `anthropic-beta: files-api-2025-04-14` header, which the API accepts but doesn't require:
 
 <CodeGroup>
   ```bash cURL
