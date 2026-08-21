@@ -454,6 +454,8 @@ First check which resolution tier your model is on (see [Resolution and token co
 
 If you cannot pre-resize (for example, when the image comes from an upstream system you can't modify), use the resize helper from [Resize your image before uploading](./build-with-claude-vision-coordinates.md#resize-your-image-before-uploading) to recover the dimensions Claude saw, then map the coordinates Claude returns into normalized coordinates or back onto your original image. Claude resizes oversized images rather than rejecting them, up to the API's [request limits](./build-with-claude-vision.md#request-limits). Beyond those limits the request fails with a validation error instead. Pass the tier limits that match the model you called: the wrong tier's limits recover the wrong resized dimensions and silently shift every coordinate. This approach requires knowing the pixel dimensions of the image you uploaded, so it does not apply to PDF uploads.
 
+Screenshots and zoom images that you return to the [computer use](../agents-and-tools/agents-and-tools-tool-use-computer-use-tool.md#handle-coordinate-scaling-for-higher-resolutions) and [browser use](../agents-and-tools/agents-and-tools-tool-use-browser-use-tool.md#targets-and-coordinates) toolsets are an exception to automatic resizing. The API rejects a `tool_result` image that exceeds the model's limits with a validation error instead of resizing it. Resize those images in your application before returning them, then scale the coordinates Claude returns back to your screen's dimensions.
+
 <CodeGroup>
   ```bash cURL
   # This local coordinate conversion makes no API request, so there's nothing

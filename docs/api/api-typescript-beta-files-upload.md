@@ -11,7 +11,7 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/files/upload
 
 ## Upload File
 
-`client.beta.files.upload(FileUploadParamsparams, RequestOptionsoptions?): FileMetadata`
+`client.beta.files.upload(FileUploadParamsparams, RequestOptionsoptions?): BetaFileMetadata`
 
 **post** `/v1/files`
 
@@ -31,7 +31,7 @@ Upload File
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -77,6 +77,8 @@ Upload File
 
       - `"user-profiles-2026-03-24"`
 
+      - `"user-profiles-2026-08-18"`
+
       - `"advisor-tool-2026-03-01"`
 
       - `"managed-agents-2026-04-01"`
@@ -101,7 +103,7 @@ Upload File
 
 ### Returns
 
-- `FileMetadata`
+- `BetaFileMetadata`
 
   - `id: string`
 
@@ -161,11 +163,11 @@ const client = new Anthropic({
   apiKey: process.env["ANTHROPIC_API_KEY"] // This is the default and can be omitted
 });
 
-const fileMetadata = await client.beta.files.upload({
+const betaFileMetadata = await client.beta.files.upload({
   file: fs.createReadStream("path/to/file")
 });
 
-console.log(fileMetadata.id);
+console.log(betaFileMetadata.id);
 ```
 
 #### Response

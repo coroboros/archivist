@@ -11,7 +11,7 @@ url: https://platform.claude.com/docs/en/api/go/beta/files/upload
 
 ## Upload File
 
-`client.Beta.Files.Upload(ctx, params) (*FileMetadata, error)`
+`client.Beta.Files.Upload(ctx, params) (*BetaFileMetadata, error)`
 
 **post** `/v1/files`
 
@@ -77,6 +77,8 @@ Upload File
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -101,7 +103,7 @@ Upload File
 
 ### Returns
 
-- `type FileMetadata struct{…}`
+- `type BetaFileMetadata struct{…}`
 
   - `ID string`
 
@@ -170,13 +172,13 @@ func main() {
 	client := anthropic.NewClient(
 		option.WithAPIKey("my-anthropic-api-key"),
 	)
-	fileMetadata, err := client.Beta.Files.Upload(context.TODO(), anthropic.BetaFileUploadParams{
+	betaFileMetadata, err := client.Beta.Files.Upload(context.TODO(), anthropic.BetaFileUploadParams{
 		File: io.Reader(bytes.NewBuffer([]byte("Example data"))),
 	})
 	if err != nil {
 		panic(err.Error())
 	}
-	fmt.Printf("%+v\n", fileMetadata.ID)
+	fmt.Printf("%+v\n", betaFileMetadata.ID)
 }
 ```
 

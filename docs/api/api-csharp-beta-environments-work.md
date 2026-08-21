@@ -81,6 +81,8 @@ Retrieve detailed information about a specific work item.
 
     - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
+    - `"user-profiles-2026-08-18"UserProfiles2026_08_18`
+
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
     - `"managed-agents-2026-04-01"ManagedAgents2026_04_01`
@@ -296,6 +298,8 @@ Long poll for work items in the queue.
 
     - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
+    - `"user-profiles-2026-08-18"UserProfiles2026_08_18`
+
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
     - `"managed-agents-2026-04-01"ManagedAgents2026_04_01`
@@ -509,6 +513,8 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
     - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
+
+    - `"user-profiles-2026-08-18"UserProfiles2026_08_18`
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
@@ -729,6 +735,8 @@ Record a heartbeat for a work item to maintain the lease.
 
     - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
+    - `"user-profiles-2026-08-18"UserProfiles2026_08_18`
+
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
     - `"managed-agents-2026-04-01"ManagedAgents2026_04_01`
@@ -886,6 +894,8 @@ Stop a work item, initiating graceful or forced shutdown.
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
     - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
+
+    - `"user-profiles-2026-08-18"UserProfiles2026_08_18`
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
@@ -1101,6 +1111,8 @@ List work items in an environment.
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
     - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
+
+    - `"user-profiles-2026-08-18"UserProfiles2026_08_18`
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
@@ -1327,6 +1339,8 @@ Update work item metadata with merge semantics.
 
     - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
+    - `"user-profiles-2026-08-18"UserProfiles2026_08_18`
+
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
     - `"managed-agents-2026-04-01"ManagedAgents2026_04_01`
@@ -1530,6 +1544,8 @@ Get statistics about the work queue for an environment.
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
     - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
+
+    - `"user-profiles-2026-08-18"UserProfiles2026_08_18`
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 

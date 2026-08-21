@@ -834,7 +834,7 @@ For tasks spanning multiple context windows:
    * "Review progress.txt, tests.json, and the git logs."
    * "Manually run through a fundamental integration test before moving on to implementing new features."
 
-5. **Provide verification tools:** As the length of autonomous tasks grows, Claude needs to verify correctness without continuous human feedback. Tools like Playwright MCP server or computer use capabilities for testing UIs are helpful.
+5. **Provide verification tools:** As the length of autonomous tasks grows, Claude needs to verify correctness without continuous human feedback. Tools that let Claude verify UI work are helpful, such as the [computer use tool](../agents-and-tools/agents-and-tools-tool-use-computer-use-tool.md), the [browser use tool](../agents-and-tools/agents-and-tools-tool-use-browser-use-tool.md), or a browser automation MCP server.
 
 6. **Encourage complete usage of context:** Prompt Claude to efficiently complete components before moving on:
 

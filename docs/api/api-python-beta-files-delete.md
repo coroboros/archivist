@@ -11,7 +11,7 @@ url: https://platform.claude.com/docs/en/api/python/beta/files/delete
 
 ## Delete File
 
-`beta.files.delete(strfile_id, FileDeleteParams**kwargs)  -> DeletedFile`
+`beta.files.delete(strfile_id, FileDeleteParams**kwargs)  -> BetaDeletedFile`
 
 **delete** `/v1/files/{file_id}`
 
@@ -29,7 +29,7 @@ Delete File
 
   - `str`
 
-  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 30 more]`
+  - `Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 31 more]`
 
     - `"message-batches-2024-09-24"`
 
@@ -75,6 +75,8 @@ Delete File
 
     - `"user-profiles-2026-03-24"`
 
+    - `"user-profiles-2026-08-18"`
+
     - `"advisor-tool-2026-03-01"`
 
     - `"managed-agents-2026-04-01"`
@@ -99,7 +101,7 @@ Delete File
 
 ### Returns
 
-- `class DeletedFile: …`
+- `class BetaDeletedFile: …`
 
   - `id: str`
 
@@ -124,10 +126,10 @@ client = Anthropic(
         "ANTHROPIC_API_KEY"
     ),  # This is the default and can be omitted
 )
-deleted_file = client.beta.files.delete(
+beta_deleted_file = client.beta.files.delete(
     file_id="file_id",
 )
-print(deleted_file.id)
+print(beta_deleted_file.id)
 ```
 
 #### Response

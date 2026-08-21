@@ -149,7 +149,7 @@ Create a new environment with the specified configuration.
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 30 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 31 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -194,6 +194,8 @@ Create a new environment with the specified configuration.
     - `:"output-300k-2026-03-24"`
 
     - `:"user-profiles-2026-03-24"`
+
+    - `:"user-profiles-2026-08-18"`
 
     - `:"advisor-tool-2026-03-01"`
 
@@ -331,7 +333,7 @@ Create a new environment with the specified configuration.
 
   - `description: String`
 
-    User-provided description for the environment
+    User-provided description for the environment; null when unset
 
   - `metadata: Hash[Symbol, String]`
 
@@ -448,7 +450,7 @@ List environments with pagination support.
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 30 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 31 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -493,6 +495,8 @@ List environments with pagination support.
     - `:"output-300k-2026-03-24"`
 
     - `:"user-profiles-2026-03-24"`
+
+    - `:"user-profiles-2026-08-18"`
 
     - `:"advisor-tool-2026-03-01"`
 
@@ -630,7 +634,7 @@ List environments with pagination support.
 
   - `description: String`
 
-    User-provided description for the environment
+    User-provided description for the environment; null when unset
 
   - `metadata: Hash[Symbol, String]`
 
@@ -742,7 +746,7 @@ Retrieve a specific environment by ID.
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 30 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 31 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -787,6 +791,8 @@ Retrieve a specific environment by ID.
     - `:"output-300k-2026-03-24"`
 
     - `:"user-profiles-2026-03-24"`
+
+    - `:"user-profiles-2026-08-18"`
 
     - `:"advisor-tool-2026-03-01"`
 
@@ -924,7 +930,7 @@ Retrieve a specific environment by ID.
 
   - `description: String`
 
-    User-provided description for the environment
+    User-provided description for the environment; null when unset
 
   - `metadata: Hash[Symbol, String]`
 
@@ -1129,7 +1135,7 @@ Update an existing environment's configuration.
 
 - `description: String`
 
-  Updated description of the environment
+  Updated description of the environment. Omit to preserve; null clears to null; an empty string is stored as an empty string.
 
 - `metadata: Hash[Symbol, String]`
 
@@ -1153,7 +1159,7 @@ Update an existing environment's configuration.
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 30 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 31 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -1198,6 +1204,8 @@ Update an existing environment's configuration.
     - `:"output-300k-2026-03-24"`
 
     - `:"user-profiles-2026-03-24"`
+
+    - `:"user-profiles-2026-08-18"`
 
     - `:"advisor-tool-2026-03-01"`
 
@@ -1335,7 +1343,7 @@ Update an existing environment's configuration.
 
   - `description: String`
 
-    User-provided description for the environment
+    User-provided description for the environment; null when unset
 
   - `metadata: Hash[Symbol, String]`
 
@@ -1442,7 +1450,7 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 30 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 31 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -1487,6 +1495,8 @@ Delete an environment by ID. Returns a confirmation of the deletion.
     - `:"output-300k-2026-03-24"`
 
     - `:"user-profiles-2026-03-24"`
+
+    - `:"user-profiles-2026-08-18"`
 
     - `:"advisor-tool-2026-03-01"`
 
@@ -1565,7 +1575,7 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 30 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 31 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -1610,6 +1620,8 @@ Archive an environment by ID. Archived environments cannot be used to create new
     - `:"output-300k-2026-03-24"`
 
     - `:"user-profiles-2026-03-24"`
+
+    - `:"user-profiles-2026-08-18"`
 
     - `:"advisor-tool-2026-03-01"`
 
@@ -1747,7 +1759,7 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
   - `description: String`
 
-    User-provided description for the environment
+    User-provided description for the environment; null when unset
 
   - `metadata: Hash[Symbol, String]`
 
@@ -2124,7 +2136,7 @@ puts(beta_environment)
 
   - `description: String`
 
-    User-provided description for the environment
+    User-provided description for the environment; null when unset
 
   - `metadata: Hash[Symbol, String]`
 
@@ -2353,7 +2365,7 @@ Retrieve detailed information about a specific work item.
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 30 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 31 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -2398,6 +2410,8 @@ Retrieve detailed information about a specific work item.
     - `:"output-300k-2026-03-24"`
 
     - `:"user-profiles-2026-03-24"`
+
+    - `:"user-profiles-2026-08-18"`
 
     - `:"advisor-tool-2026-03-01"`
 
@@ -2570,7 +2584,7 @@ Long poll for work items in the queue.
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 30 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 31 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -2615,6 +2629,8 @@ Long poll for work items in the queue.
     - `:"output-300k-2026-03-24"`
 
     - `:"user-profiles-2026-03-24"`
+
+    - `:"user-profiles-2026-08-18"`
 
     - `:"advisor-tool-2026-03-01"`
 
@@ -2785,7 +2801,7 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 30 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 31 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -2830,6 +2846,8 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
     - `:"output-300k-2026-03-24"`
 
     - `:"user-profiles-2026-03-24"`
+
+    - `:"user-profiles-2026-08-18"`
 
     - `:"advisor-tool-2026-03-01"`
 
@@ -3004,7 +3022,7 @@ Record a heartbeat for a work item to maintain the lease.
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 30 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 31 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -3049,6 +3067,8 @@ Record a heartbeat for a work item to maintain the lease.
     - `:"output-300k-2026-03-24"`
 
     - `:"user-profiles-2026-03-24"`
+
+    - `:"user-profiles-2026-08-18"`
 
     - `:"advisor-tool-2026-03-01"`
 
@@ -3160,7 +3180,7 @@ Stop a work item, initiating graceful or forced shutdown.
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 30 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 31 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -3205,6 +3225,8 @@ Stop a work item, initiating graceful or forced shutdown.
     - `:"output-300k-2026-03-24"`
 
     - `:"user-profiles-2026-03-24"`
+
+    - `:"user-profiles-2026-08-18"`
 
     - `:"advisor-tool-2026-03-01"`
 
@@ -3377,7 +3399,7 @@ List work items in an environment.
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 30 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 31 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -3422,6 +3444,8 @@ List work items in an environment.
     - `:"output-300k-2026-03-24"`
 
     - `:"user-profiles-2026-03-24"`
+
+    - `:"user-profiles-2026-08-18"`
 
     - `:"advisor-tool-2026-03-01"`
 
@@ -3597,7 +3621,7 @@ Update work item metadata with merge semantics.
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 30 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 31 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -3642,6 +3666,8 @@ Update work item metadata with merge semantics.
     - `:"output-300k-2026-03-24"`
 
     - `:"user-profiles-2026-03-24"`
+
+    - `:"user-profiles-2026-08-18"`
 
     - `:"advisor-tool-2026-03-01"`
 
@@ -3808,7 +3834,7 @@ Get statistics about the work queue for an environment.
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 30 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 31 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -3853,6 +3879,8 @@ Get statistics about the work queue for an environment.
     - `:"output-300k-2026-03-24"`
 
     - `:"user-profiles-2026-03-24"`
+
+    - `:"user-profiles-2026-08-18"`
 
     - `:"advisor-tool-2026-03-01"`
 

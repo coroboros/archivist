@@ -81,6 +81,8 @@ Registers a public CA certificate on a tunnel. Anthropic verifies the gateway's 
 
     - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
+    - `"user-profiles-2026-08-18"UserProfiles2026_08_18`
+
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
     - `"managed-agents-2026-04-01"ManagedAgents2026_04_01`
@@ -232,6 +234,8 @@ Fetches a tunnel certificate by ID.
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
     - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
+
+    - `"user-profiles-2026-08-18"UserProfiles2026_08_18`
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
@@ -392,6 +396,8 @@ Lists the certificates registered on a tunnel. Archived certificates are exclude
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
     - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
+
+    - `"user-profiles-2026-08-18"UserProfiles2026_08_18`
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
@@ -555,6 +561,8 @@ Archives a tunnel certificate, removing it from the set Anthropic trusts for the
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
     - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
+
+    - `"user-profiles-2026-08-18"UserProfiles2026_08_18`
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 

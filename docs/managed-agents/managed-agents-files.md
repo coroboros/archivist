@@ -30,18 +30,18 @@ First, upload a file using the [Files API](../build-with-claude/build-with-claud
   ```
 
   ```bash CLI
-  FILE_ID=$(ant beta:files upload \
+  FILE_ID=$(ant files upload \
     --file data.csv \
     --transform id --raw-output)
   ```
 
   ```python Python
-  file = client.beta.files.upload(file=Path("data.csv"))
+  file = client.files.upload(file=Path("data.csv"))
   print(f"File ID: {file.id}")
   ```
 
   ```typescript TypeScript
-  const file = await client.beta.files.upload({
+  const file = await client.files.upload({
     file: await toFile(readFile("data.csv"), "data.csv", { type: "text/csv" }),
   });
   console.log(`File ID: ${file.id}`);
@@ -49,7 +49,7 @@ First, upload a file using the [Files API](../build-with-claude/build-with-claud
 
   ```csharp C#
   await using var stream = File.OpenRead(csvPath);
-  var file = await client.Beta.Files.Upload(new() { File = stream });
+  var file = await client.Files.Upload(new() { File = stream });
   Console.WriteLine($"File ID: {file.ID}");
   ```
 
@@ -60,7 +60,7 @@ First, upload a file using the [Files API](../build-with-claude/build-with-claud
   }
   defer csvFile.Close()
 
-  file, err := client.Beta.Files.Upload(ctx, anthropic.BetaFileUploadParams{
+  file, err := client.Files.Upload(ctx, anthropic.FileUploadParams{
   	File: csvFile,
   })
   if err != nil {
@@ -70,13 +70,14 @@ First, upload a file using the [Files API](../build-with-claude/build-with-claud
   ```
 
   ```java Java
-  var file = client.beta().files().upload(
+  var file = client.files().upload(
       FileUploadParams.builder().file(dataCsv).build()
   );
   IO.println("File ID: " + file.id());
   ```
 
   ```php PHP
+  // The PHP SDK exposes the Files API under the beta namespace; field names can differ from other SDKs.
   $file = $client->beta->files->upload(
       FileParam::fromResource(fopen($csvPath, 'r'), filename: 'data.csv', contentType: 'text/csv'),
   );
@@ -84,7 +85,7 @@ First, upload a file using the [Files API](../build-with-claude/build-with-claud
   ```
 
   ```ruby Ruby
-  file = client.beta.files.upload(file: Pathname(csv_path))
+  file = client.files.upload(file: Pathname(csv_path))
   puts "File ID: #{file.id}"
   ```
 </CodeGroup>
@@ -543,7 +544,7 @@ List all resources on a session with `resources.list`. To remove a file, call `r
 
 ## Listing and downloading session files
 
-Use the [Files API](../build-with-claude/build-with-claude-files.md) to list files scoped to a session and download them.
+Use the [Files API](../build-with-claude/build-with-claude-files.md) to list files scoped to a session and download them. Filtering by `scope_id` requires the `managed-agents-2026-04-01` beta header, so the list examples use the `beta` files namespace and pass that header explicitly.
 
 <CodeGroup>
   ```bash cURL
@@ -557,7 +558,6 @@ Use the [Files API](../build-with-claude/build-with-claude-files.md) to list fil
   curl -fsSL "https://api.anthropic.com/v1/files/$FILE_ID/content" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
-    -H "anthropic-beta: managed-agents-2026-04-01" \
     -o output.txt
   ```
 
@@ -567,7 +567,7 @@ Use the [Files API](../build-with-claude/build-with-claude-files.md) to list fil
     --beta managed-agents-2026-04-01
 
   # Download a file
-  ant beta:files download --file-id "$FILE_ID" --output output.txt
+  ant files download --file-id "$FILE_ID" --output output.txt
   ```
 
   ```python Python
@@ -580,11 +580,13 @@ Use the [Files API](../build-with-claude/build-with-claude-files.md) to list fil
       print(file.id, file.filename)
 
   # Download a file
-  content = client.beta.files.download(files.data[0].id)
+  content = client.files.download(files.data[0].id)
   content.write_to_file("output.txt")
   ```
 
   ```typescript TypeScript
+  import { writeFile } from "node:fs/promises";
+
   // List files associated with a session
   const files = await client.beta.files.list({
     scope_id: "sesn_abc123",
@@ -595,21 +597,22 @@ Use the [Files API](../build-with-claude/build-with-claude-files.md) to list fil
   }
 
   // Download a file
-  const content = await client.beta.files.download(files.data[0].id);
-  await content.writeToFile("output.txt");
+  const content = await client.files.download(files.data[0].id);
+  await writeFile("output.txt", new Uint8Array(await content.arrayBuffer()));
   ```
 
   ```csharp C#
   // List files associated with a session
-  var files = await client.Beta.Files.List(new FileListParams
+  var files = await client.Beta.Files.List(new()
   {
       ScopeID = "sesn_abc123",
       Betas = ["managed-agents-2026-04-01"],
   });
 
   // Download a file
-  byte[] content = await client.Beta.Files.Download(files.Data[0].ID);
-  await File.WriteAllBytesAsync("output.txt", content);
+  using var content = await client.Files.Download(files.Items[0].ID);
+  await using var output = File.Create("output.txt");
+  await (await content.ReadAsStream()).CopyToAsync(output);
   ```
 
   ```go Go
@@ -623,7 +626,7 @@ Use the [Files API](../build-with-claude/build-with-claude-files.md) to list fil
   }
 
   // Download a file
-  resp, err := client.Beta.Files.Download(ctx, files.Data[0].ID, anthropic.BetaFileDownloadParams{})
+  resp, err := client.Files.Download(ctx, files.Data[0].ID)
   if err != nil {
   	panic(err)
   }
@@ -646,7 +649,7 @@ Use the [Files API](../build-with-claude/build-with-claude-files.md) to list fil
       .build());
 
   // Download a file
-  try (HttpResponse response = client.beta().files().download(files.data().get(0).id())) {
+  try (HttpResponse response = client.files().download(files.data().get(0).id())) {
       try (InputStream body = response.body()) {
           Files.copy(body, Path.of("output.txt"), StandardCopyOption.REPLACE_EXISTING);
       }
@@ -654,6 +657,7 @@ Use the [Files API](../build-with-claude/build-with-claude-files.md) to list fil
   ```
 
   ```php PHP
+  // The PHP SDK exposes the Files API under the beta namespace; field names can differ from other SDKs.
   // List files associated with a session
   $files = $client->beta->files->list(
       scopeID: 'sesn_abc123',
@@ -673,7 +677,7 @@ Use the [Files API](../build-with-claude/build-with-claude-files.md) to list fil
   )
 
   # Download a file
-  content = client.beta.files.download(files.data[0].id)
+  content = client.files.download(files.data[0].id)
   File.binwrite("output.txt", content.read)
   ```
 </CodeGroup>

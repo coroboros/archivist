@@ -81,6 +81,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -389,6 +391,10 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
                 - `Type CodeExecution20260120`
 
                   - `const CodeExecution20260120CodeExecution20260120 CodeExecution20260120 = "code_execution_20260120"`
+
+            - `ToolsetName string`
+
+              For a toolset member tool_use, the toolset family.
 
           - `type BetaServerToolUseBlock struct{…}`
 

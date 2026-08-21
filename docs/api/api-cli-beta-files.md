@@ -31,7 +31,7 @@ Upload File
 
 ### Returns
 
-- `file_metadata: object { id, created_at, filename, 5 more }`
+- `beta_file_metadata: object { id, created_at, filename, 5 more }`
 
   - `id: string`
 
@@ -139,7 +139,7 @@ List Files
 
 - `BetaFileListResponse: object { data, first_id, has_more, last_id }`
 
-  - `data: array of FileMetadata`
+  - `data: array of BetaFileMetadata`
 
     List of file metadata objects.
 
@@ -251,7 +251,7 @@ Download File
 
 ### Returns
 
-- `unnamed_schema_2: file path`
+- `unnamed_schema_4: file path`
 
 ### Example
 
@@ -281,7 +281,7 @@ Get File Metadata
 
 ### Returns
 
-- `file_metadata: object { id, created_at, filename, 5 more }`
+- `beta_file_metadata: object { id, created_at, filename, 5 more }`
 
   - `id: string`
 
@@ -373,7 +373,7 @@ Delete File
 
 ### Returns
 
-- `deleted_file: object { id, type }`
+- `beta_deleted_file: object { id, type }`
 
   - `id: string`
 
@@ -406,21 +406,9 @@ ant beta:files delete \
 
 ## Domain Types
 
-### Beta File Scope
+### Beta Deleted File
 
-- `beta_file_scope: object { id, type }`
-
-  - `id: string`
-
-    The ID of the scoping resource (e.g., the session ID).
-
-  - `type: "session"`
-
-    The type of scope (e.g., `"session"`).
-
-### Deleted File
-
-- `deleted_file: object { id, type }`
+- `beta_deleted_file: object { id, type }`
 
   - `id: string`
 
@@ -434,9 +422,9 @@ ant beta:files delete \
 
     - `"file_deleted"`
 
-### File Metadata
+### Beta File Metadata
 
-- `file_metadata: object { id, created_at, filename, 5 more }`
+- `beta_file_metadata: object { id, created_at, filename, 5 more }`
 
   - `id: string`
 
@@ -481,3 +469,15 @@ ant beta:files delete \
     - `type: "session"`
 
       The type of scope (e.g., `"session"`).
+
+### Beta File Scope
+
+- `beta_file_scope: object { id, type }`
+
+  - `id: string`
+
+    The ID of the scoping resource (e.g., the session ID).
+
+  - `type: "session"`
+
+    The type of scope (e.g., `"session"`).

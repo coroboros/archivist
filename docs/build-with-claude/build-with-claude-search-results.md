@@ -2165,7 +2165,7 @@ When `citations.enabled` is set to `true`, Claude attaches citation references t
     Ground Claude's responses in your source documents. Citations return the exact passages that support each claim, so you can verify answers and surface sources to your users.
   </Card>
 
-  <Card title="Web search tool" icon="browser" href="../agents-and-tools/agents-and-tools-tool-use-web-search-tool.md">
+  <Card title="Web search tool" icon="magnifying-glass" href="../agents-and-tools/agents-and-tools-tool-use-web-search-tool.md">
     Give Claude access to current web content with cited sources, optional dynamic filtering, and domain controls.
   </Card>
 

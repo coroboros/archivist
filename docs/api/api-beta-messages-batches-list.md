@@ -41,7 +41,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 30 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 31 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -86,6 +86,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
     - `"output-300k-2026-03-24"`
 
     - `"user-profiles-2026-03-24"`
+
+    - `"user-profiles-2026-08-18"`
 
     - `"advisor-tool-2026-03-01"`
 

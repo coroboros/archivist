@@ -83,7 +83,7 @@ Anthropic's [client SDKs](../general/general-cli-sdks-libraries-overview.md) sup
     <Tabs>
       <Tab title="Gradle">
         ```kotlin
-        implementation("com.anthropic:anthropic-java-foundry:2.53.0")
+        implementation("com.anthropic:anthropic-java-foundry:2.57.0")
 
         // For Entra ID authentication, also add the Azure Identity library
         implementation("com.azure:azure-identity:1.18.3")
@@ -95,7 +95,7 @@ Anthropic's [client SDKs](../general/general-cli-sdks-libraries-overview.md) sup
         <dependency>
             <groupId>com.anthropic</groupId>
             <artifactId>anthropic-java-foundry</artifactId>
-            <version>2.53.0</version>
+            <version>2.57.0</version>
         </dependency>
         <!-- For Entra ID authentication, also add the Azure Identity library -->
         <dependency>
@@ -649,6 +649,7 @@ Claude Fable 5, Claude Opus 5, Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6
 * Models API
 * Message Batches API
 * Server-side fallback (the [`fallbacks` parameter](./build-with-claude-refusals-and-fallback.md#server-side-fallback); use the [client-side fallback pattern](./build-with-claude-refusals-and-fallback.md#client-side-fallback) instead)
+* [Computer use](../agents-and-tools/agents-and-tools-tool-use-computer-use-tool.md) and [browser use](../agents-and-tools/agents-and-tools-tool-use-browser-use-tool.md) toolsets (`computer_toolset_20260801` and `browser_toolset_20260801` are not currently available on Microsoft Foundry; the beta computer use tool versions remain available)
 
 ### Additional features not supported when hosted on Azure
 

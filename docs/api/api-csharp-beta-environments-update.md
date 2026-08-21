@@ -121,7 +121,7 @@ Update an existing environment's configuration.
 
   - `string? description`
 
-    Body param: Updated description of the environment
+    Body param: Updated description of the environment. Omit to preserve; null clears to null; an empty string is stored as an empty string.
 
   - `IReadOnlyDictionary<string, string> metadata`
 
@@ -186,6 +186,8 @@ Update an existing environment's configuration.
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
     - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
+
+    - `"user-profiles-2026-08-18"UserProfiles2026_08_18`
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
@@ -313,9 +315,9 @@ Update an existing environment's configuration.
 
     RFC 3339 timestamp when environment was created
 
-  - `required string Description`
+  - `required string? Description`
 
-    User-provided description for the environment
+    User-provided description for the environment; null when unset
 
   - `required IReadOnlyDictionary<string, string> Metadata`
 

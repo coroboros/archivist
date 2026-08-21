@@ -11,7 +11,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/files/list
 
 ## List Files
 
-`$client->beta->files->list(?string afterID, ?string beforeID, ?int limit, ?string scopeID, ?list<AnthropicBeta> betas): Page<FileMetadata>`
+`$client->beta->files->list(?string afterID, ?string beforeID, ?int limit, ?string scopeID, ?list<AnthropicBeta> betas): Page<BetaFileMetadata>`
 
 **get** `/v1/files`
 
@@ -43,7 +43,7 @@ List Files
 
 ### Returns
 
-- `FileMetadata`
+- `BetaFileMetadata`
 
   - `string id`
 

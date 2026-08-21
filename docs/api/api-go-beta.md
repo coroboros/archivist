@@ -65,6 +65,8 @@ url: https://platform.claude.com/docs/en/api/go/beta
 
     - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+    - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
     - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
     - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -441,6 +443,8 @@ The Models API response can be used to determine which models are available for 
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -630,7 +634,7 @@ func main() {
 {
   "data": [
     {
-      "id": "claude-opus-4-6",
+      "id": "claude-opus-5",
       "allowed_fallback_models": [
         "string"
       ],
@@ -695,8 +699,8 @@ func main() {
           }
         }
       },
-      "created_at": "2026-02-04T00:00:00Z",
-      "display_name": "Claude Opus 4.6",
+      "created_at": "2026-07-24T00:00:00Z",
+      "display_name": "Claude Opus 5",
       "max_input_tokens": 0,
       "max_tokens": 0,
       "type": "model"
@@ -777,6 +781,8 @@ The Models API response can be used to determine information about a specific mo
       - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
@@ -969,7 +975,7 @@ func main() {
 
 ```json
 {
-  "id": "claude-opus-4-6",
+  "id": "claude-opus-5",
   "allowed_fallback_models": [
     "string"
   ],
@@ -1034,8 +1040,8 @@ func main() {
       }
     }
   },
-  "created_at": "2026-02-04T00:00:00Z",
-  "display_name": "Claude Opus 4.6",
+  "created_at": "2026-07-24T00:00:00Z",
+  "display_name": "Claude Opus 5",
   "max_input_tokens": 0,
   "max_tokens": 0,
   "type": "model"
@@ -1662,6 +1668,18 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             Create a cache control breakpoint at this content block.
 
+          - `Transformations BetaImageTransformationsParamResp`
+
+            Configures the transformations the server applies to this image before the model observes it. Each key names a condition the server transforms images for; its value selects the transformation applied. Omitted keys keep their default behavior, and an empty object is equivalent to omitting the field.
+
+            - `OversizedImage BetaImageTransformationsParamOversizedImage`
+
+              What the server does when this image exceeds the model's maximum image size. `"downsize"` (the default) scales the image down to fit, which changes the dimensions the model observes without telling you. `"error"` instead rejects the request with a 400 error naming the image's dimensions and the largest dimensions that fit, so you can scale the image deliberately — your image is never silently scaled down.
+
+              - `const BetaImageTransformationsParamOversizedImageDownsize BetaImageTransformationsParamOversizedImage = "downsize"`
+
+              - `const BetaImageTransformationsParamOversizedImageError BetaImageTransformationsParamOversizedImage = "error"`
+
         - `type BetaRequestDocumentBlock struct{…}`
 
           - `Source BetaRequestDocumentBlockSourceUnion`
@@ -1838,6 +1856,10 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                 - `const CodeExecution20260120CodeExecution20260120 CodeExecution20260120 = "code_execution_20260120"`
 
+          - `ToolsetName string`
+
+            For a toolset member tool_use, the toolset family this member belongs to.
+
         - `type BetaToolResultBlockParamResp struct{…}`
 
           - `ToolUseID string`
@@ -1876,7 +1898,134 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                   Create a cache control breakpoint at this content block.
 
+              - `type BetaBrowserStateBlockParamResp struct{…}`
+
+                The caller's browser state after a browser toolset member call —
+                the full inventory of open tabs, which tab is active, and any side
+                effects (tabs opened, download state changes) the call produced.
+
+                At most one per `tool_result`, only on a non-error result answering a
+                browser toolset member `tool_use`. The server renders the
+                model-visible text from it; the model never sees the raw fields.
+
+                - `Tabs []BetaBrowserStateTabEntry`
+
+                  All tabs open in the browser after this call — the full inventory, not a delta. May be empty. Whenever non-empty, exactly one entry carries `active: true`.
+
+                  - `TabID string`
+
+                    The caller-assigned identifier for this tab, unique within the inventory.
+
+                  - `Title string`
+
+                    The title of the page the tab is showing. May be empty.
+
+                  - `URL string`
+
+                    The URL of the page the tab is showing. May be empty.
+
+                  - `Active bool`
+
+                    Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
+
+                - `Type BrowserState`
+
+                  - `const BrowserStateBrowserState BrowserState = "browser_state"`
+
+                - `CacheControl BetaCacheControlEphemeral`
+
+                  Create a cache control breakpoint at this content block.
+
+                - `StateChanges []BetaBrowserStateChangeUnion`
+
+                  Tabs opened and download state changes during this call. "Nothing to report" is expressed by omitting the field, never by an empty list.
+
+                  - `type BetaBrowserStateChangeTabOpened struct{…}`
+
+                    A tab this call's execution opened that remains open at its end —
+                    the creation delta of the `tabs` inventory, not an event log.
+
+                    Carries only the `tab_id`; the tab's `title` and `url` live on its
+                    `tabs` entry, which must include the same `tab_id`. A tab opened
+                    during a failed call gets no deferred `tab_opened`; it simply appears
+                    in the next result's `tabs` inventory.
+
+                    - `TabID string`
+
+                      The `tab_id` of the opened tab, present in `tabs`.
+
+                    - `Type TabOpened`
+
+                      - `const TabOpenedTabOpened TabOpened = "tab_opened"`
+
+                  - `type BetaBrowserStateChangeDownloadStarted struct{…}`
+
+                    A file download that started during this call.
+
+                    - `DownloadID string`
+
+                      The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+                    - `Type DownloadStarted`
+
+                      - `const DownloadStartedDownloadStarted DownloadStarted = "download_started"`
+
+                    - `URL string`
+
+                      The final post-redirect URL the download was served from.
+
+                  - `type BetaBrowserStateChangeDownloadCompleted struct{…}`
+
+                    A file download that finished during this call, reported with the
+                    same `download_id` as its `download_started` — or without a prior
+                    `download_started`, when the download finished during the call that
+                    started it (at most one state change per `download_id` per result).
+
+                    - `DownloadID string`
+
+                      The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+                    - `Type DownloadCompleted`
+
+                      - `const DownloadCompletedDownloadCompleted DownloadCompleted = "download_completed"`
+
+                    - `URL string`
+
+                      The final post-redirect URL the download was served from.
+
+                    - `Path string`
+
+                      Where the executor saved the file, on the executor's filesystem. Only included when another tool in the same environment can read the file at that path.
+
+                    - `SizeBytes int64`
+
+                      The completed download's size.
+
+                  - `type BetaBrowserStateChangeDownloadFailed struct{…}`
+
+                    A file download that failed — or was cancelled — during this call.
+
+                    - `DownloadID string`
+
+                      The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+                    - `Type DownloadFailed`
+
+                      - `const DownloadFailedDownloadFailed DownloadFailed = "download_failed"`
+
+                    - `URL string`
+
+                      The final post-redirect URL the download was served from.
+
+                    - `Error string`
+
+                      The failure or cancellation detail, when known.
+
           - `IsError bool`
+
+          - `ToolsetName string`
+
+            For a toolset member tool_result, the toolset family of the paired tool_use.
 
         - `type BetaServerToolUseBlockParamResp struct{…}`
 
@@ -2457,125 +2606,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             Opaque metadata from prior compaction, to be round-tripped verbatim
 
-        - `type BetaMidConversationSystemBlockParamResp struct{…}`
-
-          System instructions that appear mid-conversation.
-
-          Use this block to provide or update system-level instructions at a specific
-          point in the conversation, rather than only via the top-level `system` parameter.
-
-          - `Content []BetaMidConversationSystemBlockParamContentUnionResp`
-
-            System instruction text blocks.
-
-            - `type BetaTextBlockParamResp struct{…}`
-
-            - `type BetaRequestToolAdditionBlock struct{…}`
-
-              Mid-conversation directive to surface a declared tool.
-
-              `tool` references a tool (or MCP toolset) by name from the request's
-              `tools`; it is offered to the model from this point in the
-              conversation onward.
-
-              - `Tool BetaRequestToolAdditionBlockToolUnion`
-
-                Reference to a single tool the caller declared directly in
-                `tools[]`. Does not accept the composed `{server}_{name}` form the
-                server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-                `mcp_toolset_reference` for those.
-
-                - `type BetaToolChangeToolReference struct{…}`
-
-                  Reference to a single tool the caller declared directly in
-                  `tools[]`. Does not accept the composed `{server}_{name}` form the
-                  server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-                  `mcp_toolset_reference` for those.
-
-                  - `Name string`
-
-                  - `Type ToolReference`
-
-                    - `const ToolReferenceToolReference ToolReference = "tool_reference"`
-
-                - `type BetaToolChangeMCPToolReference struct{…}`
-
-                  Reference to a single MCP tool by its server and remote name — the
-                  same `server_name`/`name` pair `mcp_tool_use` carries.
-
-                  - `Name string`
-
-                  - `ServerName string`
-
-                  - `Type MCPToolReference`
-
-                    - `const MCPToolReferenceMCPToolReference MCPToolReference = "mcp_tool_reference"`
-
-                - `type BetaToolChangeMCPToolsetReference struct{…}`
-
-                  Reference to every tool in the named MCP server's toolset.
-
-                  - `ServerName string`
-
-                  - `Type MCPToolsetReference`
-
-                    - `const MCPToolsetReferenceMCPToolsetReference MCPToolsetReference = "mcp_toolset_reference"`
-
-              - `Type ToolAddition`
-
-                - `const ToolAdditionToolAddition ToolAddition = "tool_addition"`
-
-              - `CacheControl BetaCacheControlEphemeral`
-
-                Create a cache control breakpoint at this content block.
-
-            - `type BetaRequestToolRemovalBlock struct{…}`
-
-              Mid-conversation directive to withdraw a tool.
-
-              `tool` references a tool (or MCP toolset) by name from the request's
-              `tools`; it is no longer offered to the model from this point in the
-              conversation onward.
-
-              - `Tool BetaRequestToolRemovalBlockToolUnion`
-
-                Reference to a single tool the caller declared directly in
-                `tools[]`. Does not accept the composed `{server}_{name}` form the
-                server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-                `mcp_toolset_reference` for those.
-
-                - `type BetaToolChangeToolReference struct{…}`
-
-                  Reference to a single tool the caller declared directly in
-                  `tools[]`. Does not accept the composed `{server}_{name}` form the
-                  server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-                  `mcp_toolset_reference` for those.
-
-                - `type BetaToolChangeMCPToolReference struct{…}`
-
-                  Reference to a single MCP tool by its server and remote name — the
-                  same `server_name`/`name` pair `mcp_tool_use` carries.
-
-                - `type BetaToolChangeMCPToolsetReference struct{…}`
-
-                  Reference to every tool in the named MCP server's toolset.
-
-              - `Type ToolRemoval`
-
-                - `const ToolRemovalToolRemoval ToolRemoval = "tool_removal"`
-
-              - `CacheControl BetaCacheControlEphemeral`
-
-                Create a cache control breakpoint at this content block.
-
-          - `Type MidConvSystem`
-
-            - `const MidConvSystemMidConvSystem MidConvSystem = "mid_conv_system"`
-
-          - `CacheControl BetaCacheControlEphemeral`
-
-            Create a cache control breakpoint at this content block.
-
         - `type BetaRequestToolAdditionBlock struct{…}`
 
           Mid-conversation directive to surface a declared tool.
@@ -2584,6 +2614,57 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
           `tools`; it is offered to the model from this point in the
           conversation onward.
 
+          - `Tool BetaRequestToolAdditionBlockToolUnion`
+
+            Reference to a single tool the caller declared directly in
+            `tools[]`. Does not accept the composed `{server}_{name}` form the
+            server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+            `mcp_toolset_reference` for those.
+
+            - `type BetaToolChangeToolReference struct{…}`
+
+              Reference to a single tool the caller declared directly in
+              `tools[]`. Does not accept the composed `{server}_{name}` form the
+              server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+              `mcp_toolset_reference` for those.
+
+              - `Name string`
+
+              - `Type ToolReference`
+
+                - `const ToolReferenceToolReference ToolReference = "tool_reference"`
+
+            - `type BetaToolChangeMCPToolReference struct{…}`
+
+              Reference to a single MCP tool by its server and remote name — the
+              same `server_name`/`name` pair `mcp_tool_use` carries.
+
+              - `Name string`
+
+              - `ServerName string`
+
+              - `Type MCPToolReference`
+
+                - `const MCPToolReferenceMCPToolReference MCPToolReference = "mcp_tool_reference"`
+
+            - `type BetaToolChangeMCPToolsetReference struct{…}`
+
+              Reference to every tool in the named MCP server's toolset.
+
+              - `ServerName string`
+
+              - `Type MCPToolsetReference`
+
+                - `const MCPToolsetReferenceMCPToolsetReference MCPToolsetReference = "mcp_toolset_reference"`
+
+          - `Type ToolAddition`
+
+            - `const ToolAdditionToolAddition ToolAddition = "tool_addition"`
+
+          - `CacheControl BetaCacheControlEphemeral`
+
+            Create a cache control breakpoint at this content block.
+
         - `type BetaRequestToolRemovalBlock struct{…}`
 
           Mid-conversation directive to withdraw a tool.
@@ -2591,6 +2672,37 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
           `tool` references a tool (or MCP toolset) by name from the request's
           `tools`; it is no longer offered to the model from this point in the
           conversation onward.
+
+          - `Tool BetaRequestToolRemovalBlockToolUnion`
+
+            Reference to a single tool the caller declared directly in
+            `tools[]`. Does not accept the composed `{server}_{name}` form the
+            server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+            `mcp_toolset_reference` for those.
+
+            - `type BetaToolChangeToolReference struct{…}`
+
+              Reference to a single tool the caller declared directly in
+              `tools[]`. Does not accept the composed `{server}_{name}` form the
+              server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+              `mcp_toolset_reference` for those.
+
+            - `type BetaToolChangeMCPToolReference struct{…}`
+
+              Reference to a single MCP tool by its server and remote name — the
+              same `server_name`/`name` pair `mcp_tool_use` carries.
+
+            - `type BetaToolChangeMCPToolsetReference struct{…}`
+
+              Reference to every tool in the named MCP server's toolset.
+
+          - `Type ToolRemoval`
+
+            - `const ToolRemovalToolRemoval ToolRemoval = "tool_removal"`
+
+          - `CacheControl BetaCacheControlEphemeral`
+
+            Create a cache control breakpoint at this content block.
 
         - `type BetaFallbackBlockParamResp struct{…}`
 
@@ -3264,6 +3376,412 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         When true, guarantees schema validation on tool names and inputs
 
+    - `type BetaBrowserToolset20260801 struct{…}`
+
+      The browser toolset: a single `tools[]` entry (carrying no
+      `name`) that declares the browser tool family. The model is served
+      the family's tool with any members disabled via `configs` removed
+      from its schema.
+
+      - `Type BrowserToolset20260801`
+
+        - `const BrowserToolset20260801BrowserToolset20260801 BrowserToolset20260801 = "browser_toolset_20260801"`
+
+      - `AllowedCallers []string`
+
+        - `const BetaBrowserToolset20260801AllowedCallerDirect BetaBrowserToolset20260801AllowedCaller = "direct"`
+
+        - `const BetaBrowserToolset20260801AllowedCallerCodeExecution20250825 BetaBrowserToolset20260801AllowedCaller = "code_execution_20250825"`
+
+        - `const BetaBrowserToolset20260801AllowedCallerCodeExecution20260120 BetaBrowserToolset20260801AllowedCaller = "code_execution_20260120"`
+
+        - `const BetaBrowserToolset20260801AllowedCallerCodeExecution20260521 BetaBrowserToolset20260801AllowedCaller = "code_execution_20260521"`
+
+      - `CacheControl BetaCacheControlEphemeral`
+
+        Create a cache control breakpoint at this content block.
+
+      - `Configs BetaBrowserToolsetConfigs`
+
+        Per-member configuration for `browser_toolset_20260801`: one
+        optional field per member tool, keyed by the member name — the same
+        name the member's `tool_use` blocks carry. Every member is an
+        accepted key, and a member's defaults apply wherever its key is
+        absent. Unknown keys are rejected: the field set is this toolset
+        version's complete member set.
+
+        - `CloseTab BetaBrowserCloseTabConfig`
+
+          `close_tab`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `DoubleClick BetaBrowserDoubleClickConfig`
+
+          `double_click`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `FileUpload BetaBrowserFileUploadConfig`
+
+          `file_upload`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Find BetaBrowserFindConfig`
+
+          `find`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `FormInput BetaBrowserFormInputConfig`
+
+          `form_input`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `GetPageText BetaBrowserGetPageTextConfig`
+
+          `get_page_text`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `HoldKey BetaBrowserHoldKeyConfig`
+
+          `hold_key`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Hover BetaBrowserHoverConfig`
+
+          `hover`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `JavascriptExec BetaBrowserJavascriptExecConfig`
+
+          `javascript_exec`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Key BetaBrowserKeyConfig`
+
+          `key`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `LeftClick BetaBrowserLeftClickConfig`
+
+          `left_click`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `LeftClickDrag BetaBrowserLeftClickDragConfig`
+
+          `left_click_drag`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `LeftMouseDown BetaBrowserLeftMouseDownConfig`
+
+          `left_mouse_down`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `LeftMouseUp BetaBrowserLeftMouseUpConfig`
+
+          `left_mouse_up`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `ListTabs BetaBrowserListTabsConfig`
+
+          `list_tabs`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `MiddleClick BetaBrowserMiddleClickConfig`
+
+          `middle_click`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `MouseMove BetaBrowserMouseMoveConfig`
+
+          `mouse_move`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Navigate BetaBrowserNavigateConfig`
+
+          `navigate`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `NewTab BetaBrowserNewTabConfig`
+
+          `new_tab`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `ReadConsole BetaBrowserReadConsoleConfig`
+
+          `read_console`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `ReadNetwork BetaBrowserReadNetworkConfig`
+
+          `read_network`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `ReadPage BetaBrowserReadPageConfig`
+
+          `read_page`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `RightClick BetaBrowserRightClickConfig`
+
+          `right_click`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Screenshot BetaBrowserScreenshotConfig`
+
+          `screenshot`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Scroll BetaBrowserScrollConfig`
+
+          `scroll`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `ScrollTo BetaBrowserScrollToConfig`
+
+          `scroll_to`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `SwitchTab BetaBrowserSwitchTabConfig`
+
+          `switch_tab`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `TripleClick BetaBrowserTripleClickConfig`
+
+          `triple_click`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Type BetaBrowserTypeConfig`
+
+          `type`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Wait BetaBrowserWaitConfig`
+
+          `wait`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Zoom BetaBrowserZoomConfig`
+
+          `zoom`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
     - `type BetaToolComputerUse20241022 struct{…}`
 
       - `DisplayHeightPx int64`
@@ -3493,6 +4011,248 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       - `Strict bool`
 
         When true, guarantees schema validation on tool names and inputs
+
+    - `type BetaComputerToolset20260801 struct{…}`
+
+      The computer toolset: a single `tools[]` entry (carrying no
+      `name`) that declares the computer tool family. The model is
+      served the family's tool with any members disabled via `configs`
+      removed from its schema. Every member is enabled by default, zoom
+      included. The single-tool options `display_number` and
+      `enable_zoom` are not fields of a toolset entry — it carries only
+      `type`, `configs`, and `cache_control`; zoom is controlled
+      via `configs.zoom.enabled`.
+
+      - `Type ComputerToolset20260801`
+
+        - `const ComputerToolset20260801ComputerToolset20260801 ComputerToolset20260801 = "computer_toolset_20260801"`
+
+      - `AllowedCallers []string`
+
+        - `const BetaComputerToolset20260801AllowedCallerDirect BetaComputerToolset20260801AllowedCaller = "direct"`
+
+        - `const BetaComputerToolset20260801AllowedCallerCodeExecution20250825 BetaComputerToolset20260801AllowedCaller = "code_execution_20250825"`
+
+        - `const BetaComputerToolset20260801AllowedCallerCodeExecution20260120 BetaComputerToolset20260801AllowedCaller = "code_execution_20260120"`
+
+        - `const BetaComputerToolset20260801AllowedCallerCodeExecution20260521 BetaComputerToolset20260801AllowedCaller = "code_execution_20260521"`
+
+      - `CacheControl BetaCacheControlEphemeral`
+
+        Create a cache control breakpoint at this content block.
+
+      - `Configs BetaComputerToolsetConfigs`
+
+        Per-member configuration for `computer_toolset_20260801`: one
+        optional field per member tool, keyed by the member name — the same
+        name the member's `tool_use` blocks carry. Every member is an
+        accepted key, and a member's defaults apply wherever its key is
+        absent. Unknown keys are rejected: the field set is this toolset
+        version's complete member set.
+
+        - `CursorPosition BetaComputerCursorPositionConfig`
+
+          `cursor_position`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `DoubleClick BetaComputerDoubleClickConfig`
+
+          `double_click`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `HoldKey BetaComputerHoldKeyConfig`
+
+          `hold_key`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Key BetaComputerKeyConfig`
+
+          `key`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `LeftClick BetaComputerLeftClickConfig`
+
+          `left_click`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `LeftClickDrag BetaComputerLeftClickDragConfig`
+
+          `left_click_drag`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `LeftMouseDown BetaComputerLeftMouseDownConfig`
+
+          `left_mouse_down`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `LeftMouseUp BetaComputerLeftMouseUpConfig`
+
+          `left_mouse_up`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `MiddleClick BetaComputerMiddleClickConfig`
+
+          `middle_click`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `MouseMove BetaComputerMouseMoveConfig`
+
+          `mouse_move`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `RightClick BetaComputerRightClickConfig`
+
+          `right_click`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Screenshot BetaComputerScreenshotConfig`
+
+          `screenshot`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Scroll BetaComputerScrollConfig`
+
+          `scroll`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `TripleClick BetaComputerTripleClickConfig`
+
+          `triple_click`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Type BetaComputerTypeConfig`
+
+          `type`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Wait BetaComputerWaitConfig`
+
+          `wait`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Zoom BetaComputerZoomConfig`
+
+          `zoom`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
     - `type BetaToolTextEditor20250124 struct{…}`
 
@@ -4271,6 +5031,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -4565,6 +5327,10 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
           - `Type CodeExecution20260120`
 
             - `const CodeExecution20260120CodeExecution20260120 CodeExecution20260120 = "code_execution_20260120"`
+
+      - `ToolsetName string`
+
+        For a toolset member tool_use, the toolset family.
 
     - `type BetaServerToolUseBlock struct{…}`
 
@@ -5866,7 +6632,7 @@ func main() {
 			}},
 			Role: anthropic.BetaMessageParamRoleUser,
 		}},
-		Model: anthropic.ModelClaudeOpus4_6,
+		Model: anthropic.ModelClaudeOpus5,
 	})
 	if err != nil {
 		panic(err.Error())
@@ -5923,14 +6689,14 @@ func main() {
       "type": "model_changed"
     }
   },
-  "model": "claude-opus-4-6",
+  "model": "claude-opus-5",
   "role": "assistant",
   "stop_details": {
     "category": "cyber",
     "explanation": "This request was declined because it conflicts with Anthropic's Usage Policy.",
     "fallback_credit_token": "QW50aHJvcGljL0NsYXVkZQ==",
     "fallback_has_prefill_claim": true,
-    "recommended_model": "claude-sonnet-4-6",
+    "recommended_model": "claude-opus-4-8",
     "type": "refusal"
   },
   "stop_reason": "end_turn",
@@ -6232,6 +6998,18 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             Create a cache control breakpoint at this content block.
 
+          - `Transformations BetaImageTransformationsParamResp`
+
+            Configures the transformations the server applies to this image before the model observes it. Each key names a condition the server transforms images for; its value selects the transformation applied. Omitted keys keep their default behavior, and an empty object is equivalent to omitting the field.
+
+            - `OversizedImage BetaImageTransformationsParamOversizedImage`
+
+              What the server does when this image exceeds the model's maximum image size. `"downsize"` (the default) scales the image down to fit, which changes the dimensions the model observes without telling you. `"error"` instead rejects the request with a 400 error naming the image's dimensions and the largest dimensions that fit, so you can scale the image deliberately — your image is never silently scaled down.
+
+              - `const BetaImageTransformationsParamOversizedImageDownsize BetaImageTransformationsParamOversizedImage = "downsize"`
+
+              - `const BetaImageTransformationsParamOversizedImageError BetaImageTransformationsParamOversizedImage = "error"`
+
         - `type BetaRequestDocumentBlock struct{…}`
 
           - `Source BetaRequestDocumentBlockSourceUnion`
@@ -6408,6 +7186,10 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 - `const CodeExecution20260120CodeExecution20260120 CodeExecution20260120 = "code_execution_20260120"`
 
+          - `ToolsetName string`
+
+            For a toolset member tool_use, the toolset family this member belongs to.
+
         - `type BetaToolResultBlockParamResp struct{…}`
 
           - `ToolUseID string`
@@ -6446,7 +7228,134 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                   Create a cache control breakpoint at this content block.
 
+              - `type BetaBrowserStateBlockParamResp struct{…}`
+
+                The caller's browser state after a browser toolset member call —
+                the full inventory of open tabs, which tab is active, and any side
+                effects (tabs opened, download state changes) the call produced.
+
+                At most one per `tool_result`, only on a non-error result answering a
+                browser toolset member `tool_use`. The server renders the
+                model-visible text from it; the model never sees the raw fields.
+
+                - `Tabs []BetaBrowserStateTabEntry`
+
+                  All tabs open in the browser after this call — the full inventory, not a delta. May be empty. Whenever non-empty, exactly one entry carries `active: true`.
+
+                  - `TabID string`
+
+                    The caller-assigned identifier for this tab, unique within the inventory.
+
+                  - `Title string`
+
+                    The title of the page the tab is showing. May be empty.
+
+                  - `URL string`
+
+                    The URL of the page the tab is showing. May be empty.
+
+                  - `Active bool`
+
+                    Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
+
+                - `Type BrowserState`
+
+                  - `const BrowserStateBrowserState BrowserState = "browser_state"`
+
+                - `CacheControl BetaCacheControlEphemeral`
+
+                  Create a cache control breakpoint at this content block.
+
+                - `StateChanges []BetaBrowserStateChangeUnion`
+
+                  Tabs opened and download state changes during this call. "Nothing to report" is expressed by omitting the field, never by an empty list.
+
+                  - `type BetaBrowserStateChangeTabOpened struct{…}`
+
+                    A tab this call's execution opened that remains open at its end —
+                    the creation delta of the `tabs` inventory, not an event log.
+
+                    Carries only the `tab_id`; the tab's `title` and `url` live on its
+                    `tabs` entry, which must include the same `tab_id`. A tab opened
+                    during a failed call gets no deferred `tab_opened`; it simply appears
+                    in the next result's `tabs` inventory.
+
+                    - `TabID string`
+
+                      The `tab_id` of the opened tab, present in `tabs`.
+
+                    - `Type TabOpened`
+
+                      - `const TabOpenedTabOpened TabOpened = "tab_opened"`
+
+                  - `type BetaBrowserStateChangeDownloadStarted struct{…}`
+
+                    A file download that started during this call.
+
+                    - `DownloadID string`
+
+                      The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+                    - `Type DownloadStarted`
+
+                      - `const DownloadStartedDownloadStarted DownloadStarted = "download_started"`
+
+                    - `URL string`
+
+                      The final post-redirect URL the download was served from.
+
+                  - `type BetaBrowserStateChangeDownloadCompleted struct{…}`
+
+                    A file download that finished during this call, reported with the
+                    same `download_id` as its `download_started` — or without a prior
+                    `download_started`, when the download finished during the call that
+                    started it (at most one state change per `download_id` per result).
+
+                    - `DownloadID string`
+
+                      The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+                    - `Type DownloadCompleted`
+
+                      - `const DownloadCompletedDownloadCompleted DownloadCompleted = "download_completed"`
+
+                    - `URL string`
+
+                      The final post-redirect URL the download was served from.
+
+                    - `Path string`
+
+                      Where the executor saved the file, on the executor's filesystem. Only included when another tool in the same environment can read the file at that path.
+
+                    - `SizeBytes int64`
+
+                      The completed download's size.
+
+                  - `type BetaBrowserStateChangeDownloadFailed struct{…}`
+
+                    A file download that failed — or was cancelled — during this call.
+
+                    - `DownloadID string`
+
+                      The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+                    - `Type DownloadFailed`
+
+                      - `const DownloadFailedDownloadFailed DownloadFailed = "download_failed"`
+
+                    - `URL string`
+
+                      The final post-redirect URL the download was served from.
+
+                    - `Error string`
+
+                      The failure or cancellation detail, when known.
+
           - `IsError bool`
+
+          - `ToolsetName string`
+
+            For a toolset member tool_result, the toolset family of the paired tool_use.
 
         - `type BetaServerToolUseBlockParamResp struct{…}`
 
@@ -7027,125 +7936,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             Opaque metadata from prior compaction, to be round-tripped verbatim
 
-        - `type BetaMidConversationSystemBlockParamResp struct{…}`
-
-          System instructions that appear mid-conversation.
-
-          Use this block to provide or update system-level instructions at a specific
-          point in the conversation, rather than only via the top-level `system` parameter.
-
-          - `Content []BetaMidConversationSystemBlockParamContentUnionResp`
-
-            System instruction text blocks.
-
-            - `type BetaTextBlockParamResp struct{…}`
-
-            - `type BetaRequestToolAdditionBlock struct{…}`
-
-              Mid-conversation directive to surface a declared tool.
-
-              `tool` references a tool (or MCP toolset) by name from the request's
-              `tools`; it is offered to the model from this point in the
-              conversation onward.
-
-              - `Tool BetaRequestToolAdditionBlockToolUnion`
-
-                Reference to a single tool the caller declared directly in
-                `tools[]`. Does not accept the composed `{server}_{name}` form the
-                server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-                `mcp_toolset_reference` for those.
-
-                - `type BetaToolChangeToolReference struct{…}`
-
-                  Reference to a single tool the caller declared directly in
-                  `tools[]`. Does not accept the composed `{server}_{name}` form the
-                  server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-                  `mcp_toolset_reference` for those.
-
-                  - `Name string`
-
-                  - `Type ToolReference`
-
-                    - `const ToolReferenceToolReference ToolReference = "tool_reference"`
-
-                - `type BetaToolChangeMCPToolReference struct{…}`
-
-                  Reference to a single MCP tool by its server and remote name — the
-                  same `server_name`/`name` pair `mcp_tool_use` carries.
-
-                  - `Name string`
-
-                  - `ServerName string`
-
-                  - `Type MCPToolReference`
-
-                    - `const MCPToolReferenceMCPToolReference MCPToolReference = "mcp_tool_reference"`
-
-                - `type BetaToolChangeMCPToolsetReference struct{…}`
-
-                  Reference to every tool in the named MCP server's toolset.
-
-                  - `ServerName string`
-
-                  - `Type MCPToolsetReference`
-
-                    - `const MCPToolsetReferenceMCPToolsetReference MCPToolsetReference = "mcp_toolset_reference"`
-
-              - `Type ToolAddition`
-
-                - `const ToolAdditionToolAddition ToolAddition = "tool_addition"`
-
-              - `CacheControl BetaCacheControlEphemeral`
-
-                Create a cache control breakpoint at this content block.
-
-            - `type BetaRequestToolRemovalBlock struct{…}`
-
-              Mid-conversation directive to withdraw a tool.
-
-              `tool` references a tool (or MCP toolset) by name from the request's
-              `tools`; it is no longer offered to the model from this point in the
-              conversation onward.
-
-              - `Tool BetaRequestToolRemovalBlockToolUnion`
-
-                Reference to a single tool the caller declared directly in
-                `tools[]`. Does not accept the composed `{server}_{name}` form the
-                server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-                `mcp_toolset_reference` for those.
-
-                - `type BetaToolChangeToolReference struct{…}`
-
-                  Reference to a single tool the caller declared directly in
-                  `tools[]`. Does not accept the composed `{server}_{name}` form the
-                  server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-                  `mcp_toolset_reference` for those.
-
-                - `type BetaToolChangeMCPToolReference struct{…}`
-
-                  Reference to a single MCP tool by its server and remote name — the
-                  same `server_name`/`name` pair `mcp_tool_use` carries.
-
-                - `type BetaToolChangeMCPToolsetReference struct{…}`
-
-                  Reference to every tool in the named MCP server's toolset.
-
-              - `Type ToolRemoval`
-
-                - `const ToolRemovalToolRemoval ToolRemoval = "tool_removal"`
-
-              - `CacheControl BetaCacheControlEphemeral`
-
-                Create a cache control breakpoint at this content block.
-
-          - `Type MidConvSystem`
-
-            - `const MidConvSystemMidConvSystem MidConvSystem = "mid_conv_system"`
-
-          - `CacheControl BetaCacheControlEphemeral`
-
-            Create a cache control breakpoint at this content block.
-
         - `type BetaRequestToolAdditionBlock struct{…}`
 
           Mid-conversation directive to surface a declared tool.
@@ -7154,6 +7944,57 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
           `tools`; it is offered to the model from this point in the
           conversation onward.
 
+          - `Tool BetaRequestToolAdditionBlockToolUnion`
+
+            Reference to a single tool the caller declared directly in
+            `tools[]`. Does not accept the composed `{server}_{name}` form the
+            server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+            `mcp_toolset_reference` for those.
+
+            - `type BetaToolChangeToolReference struct{…}`
+
+              Reference to a single tool the caller declared directly in
+              `tools[]`. Does not accept the composed `{server}_{name}` form the
+              server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+              `mcp_toolset_reference` for those.
+
+              - `Name string`
+
+              - `Type ToolReference`
+
+                - `const ToolReferenceToolReference ToolReference = "tool_reference"`
+
+            - `type BetaToolChangeMCPToolReference struct{…}`
+
+              Reference to a single MCP tool by its server and remote name — the
+              same `server_name`/`name` pair `mcp_tool_use` carries.
+
+              - `Name string`
+
+              - `ServerName string`
+
+              - `Type MCPToolReference`
+
+                - `const MCPToolReferenceMCPToolReference MCPToolReference = "mcp_tool_reference"`
+
+            - `type BetaToolChangeMCPToolsetReference struct{…}`
+
+              Reference to every tool in the named MCP server's toolset.
+
+              - `ServerName string`
+
+              - `Type MCPToolsetReference`
+
+                - `const MCPToolsetReferenceMCPToolsetReference MCPToolsetReference = "mcp_toolset_reference"`
+
+          - `Type ToolAddition`
+
+            - `const ToolAdditionToolAddition ToolAddition = "tool_addition"`
+
+          - `CacheControl BetaCacheControlEphemeral`
+
+            Create a cache control breakpoint at this content block.
+
         - `type BetaRequestToolRemovalBlock struct{…}`
 
           Mid-conversation directive to withdraw a tool.
@@ -7161,6 +8002,37 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
           `tool` references a tool (or MCP toolset) by name from the request's
           `tools`; it is no longer offered to the model from this point in the
           conversation onward.
+
+          - `Tool BetaRequestToolRemovalBlockToolUnion`
+
+            Reference to a single tool the caller declared directly in
+            `tools[]`. Does not accept the composed `{server}_{name}` form the
+            server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+            `mcp_toolset_reference` for those.
+
+            - `type BetaToolChangeToolReference struct{…}`
+
+              Reference to a single tool the caller declared directly in
+              `tools[]`. Does not accept the composed `{server}_{name}` form the
+              server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+              `mcp_toolset_reference` for those.
+
+            - `type BetaToolChangeMCPToolReference struct{…}`
+
+              Reference to a single MCP tool by its server and remote name — the
+              same `server_name`/`name` pair `mcp_tool_use` carries.
+
+            - `type BetaToolChangeMCPToolsetReference struct{…}`
+
+              Reference to every tool in the named MCP server's toolset.
+
+          - `Type ToolRemoval`
+
+            - `const ToolRemovalToolRemoval ToolRemoval = "tool_removal"`
+
+          - `CacheControl BetaCacheControlEphemeral`
+
+            Create a cache control breakpoint at this content block.
 
         - `type BetaFallbackBlockParamResp struct{…}`
 
@@ -7710,6 +8582,412 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         When true, guarantees schema validation on tool names and inputs
 
+    - `type BetaBrowserToolset20260801 struct{…}`
+
+      The browser toolset: a single `tools[]` entry (carrying no
+      `name`) that declares the browser tool family. The model is served
+      the family's tool with any members disabled via `configs` removed
+      from its schema.
+
+      - `Type BrowserToolset20260801`
+
+        - `const BrowserToolset20260801BrowserToolset20260801 BrowserToolset20260801 = "browser_toolset_20260801"`
+
+      - `AllowedCallers []string`
+
+        - `const BetaBrowserToolset20260801AllowedCallerDirect BetaBrowserToolset20260801AllowedCaller = "direct"`
+
+        - `const BetaBrowserToolset20260801AllowedCallerCodeExecution20250825 BetaBrowserToolset20260801AllowedCaller = "code_execution_20250825"`
+
+        - `const BetaBrowserToolset20260801AllowedCallerCodeExecution20260120 BetaBrowserToolset20260801AllowedCaller = "code_execution_20260120"`
+
+        - `const BetaBrowserToolset20260801AllowedCallerCodeExecution20260521 BetaBrowserToolset20260801AllowedCaller = "code_execution_20260521"`
+
+      - `CacheControl BetaCacheControlEphemeral`
+
+        Create a cache control breakpoint at this content block.
+
+      - `Configs BetaBrowserToolsetConfigs`
+
+        Per-member configuration for `browser_toolset_20260801`: one
+        optional field per member tool, keyed by the member name — the same
+        name the member's `tool_use` blocks carry. Every member is an
+        accepted key, and a member's defaults apply wherever its key is
+        absent. Unknown keys are rejected: the field set is this toolset
+        version's complete member set.
+
+        - `CloseTab BetaBrowserCloseTabConfig`
+
+          `close_tab`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `DoubleClick BetaBrowserDoubleClickConfig`
+
+          `double_click`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `FileUpload BetaBrowserFileUploadConfig`
+
+          `file_upload`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Find BetaBrowserFindConfig`
+
+          `find`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `FormInput BetaBrowserFormInputConfig`
+
+          `form_input`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `GetPageText BetaBrowserGetPageTextConfig`
+
+          `get_page_text`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `HoldKey BetaBrowserHoldKeyConfig`
+
+          `hold_key`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Hover BetaBrowserHoverConfig`
+
+          `hover`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `JavascriptExec BetaBrowserJavascriptExecConfig`
+
+          `javascript_exec`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Key BetaBrowserKeyConfig`
+
+          `key`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `LeftClick BetaBrowserLeftClickConfig`
+
+          `left_click`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `LeftClickDrag BetaBrowserLeftClickDragConfig`
+
+          `left_click_drag`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `LeftMouseDown BetaBrowserLeftMouseDownConfig`
+
+          `left_mouse_down`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `LeftMouseUp BetaBrowserLeftMouseUpConfig`
+
+          `left_mouse_up`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `ListTabs BetaBrowserListTabsConfig`
+
+          `list_tabs`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `MiddleClick BetaBrowserMiddleClickConfig`
+
+          `middle_click`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `MouseMove BetaBrowserMouseMoveConfig`
+
+          `mouse_move`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Navigate BetaBrowserNavigateConfig`
+
+          `navigate`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `NewTab BetaBrowserNewTabConfig`
+
+          `new_tab`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `ReadConsole BetaBrowserReadConsoleConfig`
+
+          `read_console`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `ReadNetwork BetaBrowserReadNetworkConfig`
+
+          `read_network`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `ReadPage BetaBrowserReadPageConfig`
+
+          `read_page`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `RightClick BetaBrowserRightClickConfig`
+
+          `right_click`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Screenshot BetaBrowserScreenshotConfig`
+
+          `screenshot`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Scroll BetaBrowserScrollConfig`
+
+          `scroll`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `ScrollTo BetaBrowserScrollToConfig`
+
+          `scroll_to`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `SwitchTab BetaBrowserSwitchTabConfig`
+
+          `switch_tab`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `TripleClick BetaBrowserTripleClickConfig`
+
+          `triple_click`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Type BetaBrowserTypeConfig`
+
+          `type`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Wait BetaBrowserWaitConfig`
+
+          `wait`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Zoom BetaBrowserZoomConfig`
+
+          `zoom`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
     - `type BetaToolComputerUse20241022 struct{…}`
 
       - `DisplayHeightPx int64`
@@ -7939,6 +9217,248 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
       - `Strict bool`
 
         When true, guarantees schema validation on tool names and inputs
+
+    - `type BetaComputerToolset20260801 struct{…}`
+
+      The computer toolset: a single `tools[]` entry (carrying no
+      `name`) that declares the computer tool family. The model is
+      served the family's tool with any members disabled via `configs`
+      removed from its schema. Every member is enabled by default, zoom
+      included. The single-tool options `display_number` and
+      `enable_zoom` are not fields of a toolset entry — it carries only
+      `type`, `configs`, and `cache_control`; zoom is controlled
+      via `configs.zoom.enabled`.
+
+      - `Type ComputerToolset20260801`
+
+        - `const ComputerToolset20260801ComputerToolset20260801 ComputerToolset20260801 = "computer_toolset_20260801"`
+
+      - `AllowedCallers []string`
+
+        - `const BetaComputerToolset20260801AllowedCallerDirect BetaComputerToolset20260801AllowedCaller = "direct"`
+
+        - `const BetaComputerToolset20260801AllowedCallerCodeExecution20250825 BetaComputerToolset20260801AllowedCaller = "code_execution_20250825"`
+
+        - `const BetaComputerToolset20260801AllowedCallerCodeExecution20260120 BetaComputerToolset20260801AllowedCaller = "code_execution_20260120"`
+
+        - `const BetaComputerToolset20260801AllowedCallerCodeExecution20260521 BetaComputerToolset20260801AllowedCaller = "code_execution_20260521"`
+
+      - `CacheControl BetaCacheControlEphemeral`
+
+        Create a cache control breakpoint at this content block.
+
+      - `Configs BetaComputerToolsetConfigs`
+
+        Per-member configuration for `computer_toolset_20260801`: one
+        optional field per member tool, keyed by the member name — the same
+        name the member's `tool_use` blocks carry. Every member is an
+        accepted key, and a member's defaults apply wherever its key is
+        absent. Unknown keys are rejected: the field set is this toolset
+        version's complete member set.
+
+        - `CursorPosition BetaComputerCursorPositionConfig`
+
+          `cursor_position`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `DoubleClick BetaComputerDoubleClickConfig`
+
+          `double_click`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `HoldKey BetaComputerHoldKeyConfig`
+
+          `hold_key`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Key BetaComputerKeyConfig`
+
+          `key`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `LeftClick BetaComputerLeftClickConfig`
+
+          `left_click`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `LeftClickDrag BetaComputerLeftClickDragConfig`
+
+          `left_click_drag`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `LeftMouseDown BetaComputerLeftMouseDownConfig`
+
+          `left_mouse_down`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `LeftMouseUp BetaComputerLeftMouseUpConfig`
+
+          `left_mouse_up`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `MiddleClick BetaComputerMiddleClickConfig`
+
+          `middle_click`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `MouseMove BetaComputerMouseMoveConfig`
+
+          `mouse_move`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `RightClick BetaComputerRightClickConfig`
+
+          `right_click`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Screenshot BetaComputerScreenshotConfig`
+
+          `screenshot`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Scroll BetaComputerScrollConfig`
+
+          `scroll`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `TripleClick BetaComputerTripleClickConfig`
+
+          `triple_click`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Type BetaComputerTypeConfig`
+
+          `type`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Wait BetaComputerWaitConfig`
+
+          `wait`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Zoom BetaComputerZoomConfig`
+
+          `zoom`'s config overrides.
+
+          - `DeferLoading bool`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Enabled bool`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
     - `type BetaToolTextEditor20250124 struct{…}`
 
@@ -8701,6 +10221,8 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -8769,7 +10291,7 @@ func main() {
 			}},
 			Role: anthropic.BetaMessageParamRoleUser,
 		}},
-		Model: anthropic.ModelClaudeOpus4_6,
+		Model: anthropic.ModelClaudeOpus5,
 	})
 	if err != nil {
 		panic(err.Error())
@@ -9559,6 +11081,1605 @@ func main() {
   - `Type BashCodeExecutionToolResultError`
 
     - `const BashCodeExecutionToolResultErrorBashCodeExecutionToolResultError BashCodeExecutionToolResultError = "bash_code_execution_tool_result_error"`
+
+### Beta Browser Close Tab Config
+
+- `type BetaBrowserCloseTabConfig struct{…}`
+
+  `close_tab`'s config overrides.
+
+  - `DeferLoading bool`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Enabled bool`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Double Click Config
+
+- `type BetaBrowserDoubleClickConfig struct{…}`
+
+  `double_click`'s config overrides.
+
+  - `DeferLoading bool`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Enabled bool`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser File Upload Config
+
+- `type BetaBrowserFileUploadConfig struct{…}`
+
+  `file_upload`'s config overrides.
+
+  - `DeferLoading bool`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Enabled bool`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Find Config
+
+- `type BetaBrowserFindConfig struct{…}`
+
+  `find`'s config overrides.
+
+  - `DeferLoading bool`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Enabled bool`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Form Input Config
+
+- `type BetaBrowserFormInputConfig struct{…}`
+
+  `form_input`'s config overrides.
+
+  - `DeferLoading bool`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Enabled bool`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Get Page Text Config
+
+- `type BetaBrowserGetPageTextConfig struct{…}`
+
+  `get_page_text`'s config overrides.
+
+  - `DeferLoading bool`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Enabled bool`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Hold Key Config
+
+- `type BetaBrowserHoldKeyConfig struct{…}`
+
+  `hold_key`'s config overrides.
+
+  - `DeferLoading bool`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Enabled bool`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Hover Config
+
+- `type BetaBrowserHoverConfig struct{…}`
+
+  `hover`'s config overrides.
+
+  - `DeferLoading bool`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Enabled bool`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Javascript Exec Config
+
+- `type BetaBrowserJavascriptExecConfig struct{…}`
+
+  `javascript_exec`'s config overrides.
+
+  - `DeferLoading bool`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Enabled bool`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Key Config
+
+- `type BetaBrowserKeyConfig struct{…}`
+
+  `key`'s config overrides.
+
+  - `DeferLoading bool`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Enabled bool`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Left Click Config
+
+- `type BetaBrowserLeftClickConfig struct{…}`
+
+  `left_click`'s config overrides.
+
+  - `DeferLoading bool`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Enabled bool`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Left Click Drag Config
+
+- `type BetaBrowserLeftClickDragConfig struct{…}`
+
+  `left_click_drag`'s config overrides.
+
+  - `DeferLoading bool`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Enabled bool`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Left Mouse Down Config
+
+- `type BetaBrowserLeftMouseDownConfig struct{…}`
+
+  `left_mouse_down`'s config overrides.
+
+  - `DeferLoading bool`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Enabled bool`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Left Mouse Up Config
+
+- `type BetaBrowserLeftMouseUpConfig struct{…}`
+
+  `left_mouse_up`'s config overrides.
+
+  - `DeferLoading bool`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Enabled bool`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser List Tabs Config
+
+- `type BetaBrowserListTabsConfig struct{…}`
+
+  `list_tabs`'s config overrides.
+
+  - `DeferLoading bool`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Enabled bool`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Middle Click Config
+
+- `type BetaBrowserMiddleClickConfig struct{…}`
+
+  `middle_click`'s config overrides.
+
+  - `DeferLoading bool`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Enabled bool`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Mouse Move Config
+
+- `type BetaBrowserMouseMoveConfig struct{…}`
+
+  `mouse_move`'s config overrides.
+
+  - `DeferLoading bool`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Enabled bool`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Navigate Config
+
+- `type BetaBrowserNavigateConfig struct{…}`
+
+  `navigate`'s config overrides.
+
+  - `DeferLoading bool`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Enabled bool`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser New Tab Config
+
+- `type BetaBrowserNewTabConfig struct{…}`
+
+  `new_tab`'s config overrides.
+
+  - `DeferLoading bool`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Enabled bool`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Read Console Config
+
+- `type BetaBrowserReadConsoleConfig struct{…}`
+
+  `read_console`'s config overrides.
+
+  - `DeferLoading bool`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Enabled bool`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Read Network Config
+
+- `type BetaBrowserReadNetworkConfig struct{…}`
+
+  `read_network`'s config overrides.
+
+  - `DeferLoading bool`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Enabled bool`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Read Page Config
+
+- `type BetaBrowserReadPageConfig struct{…}`
+
+  `read_page`'s config overrides.
+
+  - `DeferLoading bool`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Enabled bool`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Right Click Config
+
+- `type BetaBrowserRightClickConfig struct{…}`
+
+  `right_click`'s config overrides.
+
+  - `DeferLoading bool`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Enabled bool`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Screenshot Config
+
+- `type BetaBrowserScreenshotConfig struct{…}`
+
+  `screenshot`'s config overrides.
+
+  - `DeferLoading bool`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Enabled bool`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Scroll Config
+
+- `type BetaBrowserScrollConfig struct{…}`
+
+  `scroll`'s config overrides.
+
+  - `DeferLoading bool`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Enabled bool`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Scroll To Config
+
+- `type BetaBrowserScrollToConfig struct{…}`
+
+  `scroll_to`'s config overrides.
+
+  - `DeferLoading bool`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Enabled bool`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser State Block Param
+
+- `type BetaBrowserStateBlockParamResp struct{…}`
+
+  The caller's browser state after a browser toolset member call —
+  the full inventory of open tabs, which tab is active, and any side
+  effects (tabs opened, download state changes) the call produced.
+
+  At most one per `tool_result`, only on a non-error result answering a
+  browser toolset member `tool_use`. The server renders the
+  model-visible text from it; the model never sees the raw fields.
+
+  - `Tabs []BetaBrowserStateTabEntry`
+
+    All tabs open in the browser after this call — the full inventory, not a delta. May be empty. Whenever non-empty, exactly one entry carries `active: true`.
+
+    - `TabID string`
+
+      The caller-assigned identifier for this tab, unique within the inventory.
+
+    - `Title string`
+
+      The title of the page the tab is showing. May be empty.
+
+    - `URL string`
+
+      The URL of the page the tab is showing. May be empty.
+
+    - `Active bool`
+
+      Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
+
+  - `Type BrowserState`
+
+    - `const BrowserStateBrowserState BrowserState = "browser_state"`
+
+  - `CacheControl BetaCacheControlEphemeral`
+
+    Create a cache control breakpoint at this content block.
+
+    - `Type Ephemeral`
+
+      - `const EphemeralEphemeral Ephemeral = "ephemeral"`
+
+    - `TTL BetaCacheControlEphemeralTTL`
+
+      The time-to-live for the cache control breakpoint.
+
+      This may be one the following values:
+
+      - `5m`: 5 minutes
+      - `1h`: 1 hour
+
+      Defaults to `5m`. See [prompt caching pricing](../build-with-claude/build-with-claude-prompt-caching.md) for details.
+
+      - `const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"`
+
+      - `const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"`
+
+  - `StateChanges []BetaBrowserStateChangeUnion`
+
+    Tabs opened and download state changes during this call. "Nothing to report" is expressed by omitting the field, never by an empty list.
+
+    - `type BetaBrowserStateChangeTabOpened struct{…}`
+
+      A tab this call's execution opened that remains open at its end —
+      the creation delta of the `tabs` inventory, not an event log.
+
+      Carries only the `tab_id`; the tab's `title` and `url` live on its
+      `tabs` entry, which must include the same `tab_id`. A tab opened
+      during a failed call gets no deferred `tab_opened`; it simply appears
+      in the next result's `tabs` inventory.
+
+      - `TabID string`
+
+        The `tab_id` of the opened tab, present in `tabs`.
+
+      - `Type TabOpened`
+
+        - `const TabOpenedTabOpened TabOpened = "tab_opened"`
+
+    - `type BetaBrowserStateChangeDownloadStarted struct{…}`
+
+      A file download that started during this call.
+
+      - `DownloadID string`
+
+        The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+      - `Type DownloadStarted`
+
+        - `const DownloadStartedDownloadStarted DownloadStarted = "download_started"`
+
+      - `URL string`
+
+        The final post-redirect URL the download was served from.
+
+    - `type BetaBrowserStateChangeDownloadCompleted struct{…}`
+
+      A file download that finished during this call, reported with the
+      same `download_id` as its `download_started` — or without a prior
+      `download_started`, when the download finished during the call that
+      started it (at most one state change per `download_id` per result).
+
+      - `DownloadID string`
+
+        The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+      - `Type DownloadCompleted`
+
+        - `const DownloadCompletedDownloadCompleted DownloadCompleted = "download_completed"`
+
+      - `URL string`
+
+        The final post-redirect URL the download was served from.
+
+      - `Path string`
+
+        Where the executor saved the file, on the executor's filesystem. Only included when another tool in the same environment can read the file at that path.
+
+      - `SizeBytes int64`
+
+        The completed download's size.
+
+    - `type BetaBrowserStateChangeDownloadFailed struct{…}`
+
+      A file download that failed — or was cancelled — during this call.
+
+      - `DownloadID string`
+
+        The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+      - `Type DownloadFailed`
+
+        - `const DownloadFailedDownloadFailed DownloadFailed = "download_failed"`
+
+      - `URL string`
+
+        The final post-redirect URL the download was served from.
+
+      - `Error string`
+
+        The failure or cancellation detail, when known.
+
+### Beta Browser State Change
+
+- `type BetaBrowserStateChangeUnion interface{…}`
+
+  A tab this call's execution opened that remains open at its end —
+  the creation delta of the `tabs` inventory, not an event log.
+
+  Carries only the `tab_id`; the tab's `title` and `url` live on its
+  `tabs` entry, which must include the same `tab_id`. A tab opened
+  during a failed call gets no deferred `tab_opened`; it simply appears
+  in the next result's `tabs` inventory.
+
+  - `type BetaBrowserStateChangeTabOpened struct{…}`
+
+    A tab this call's execution opened that remains open at its end —
+    the creation delta of the `tabs` inventory, not an event log.
+
+    Carries only the `tab_id`; the tab's `title` and `url` live on its
+    `tabs` entry, which must include the same `tab_id`. A tab opened
+    during a failed call gets no deferred `tab_opened`; it simply appears
+    in the next result's `tabs` inventory.
+
+    - `TabID string`
+
+      The `tab_id` of the opened tab, present in `tabs`.
+
+    - `Type TabOpened`
+
+      - `const TabOpenedTabOpened TabOpened = "tab_opened"`
+
+  - `type BetaBrowserStateChangeDownloadStarted struct{…}`
+
+    A file download that started during this call.
+
+    - `DownloadID string`
+
+      The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+    - `Type DownloadStarted`
+
+      - `const DownloadStartedDownloadStarted DownloadStarted = "download_started"`
+
+    - `URL string`
+
+      The final post-redirect URL the download was served from.
+
+  - `type BetaBrowserStateChangeDownloadCompleted struct{…}`
+
+    A file download that finished during this call, reported with the
+    same `download_id` as its `download_started` — or without a prior
+    `download_started`, when the download finished during the call that
+    started it (at most one state change per `download_id` per result).
+
+    - `DownloadID string`
+
+      The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+    - `Type DownloadCompleted`
+
+      - `const DownloadCompletedDownloadCompleted DownloadCompleted = "download_completed"`
+
+    - `URL string`
+
+      The final post-redirect URL the download was served from.
+
+    - `Path string`
+
+      Where the executor saved the file, on the executor's filesystem. Only included when another tool in the same environment can read the file at that path.
+
+    - `SizeBytes int64`
+
+      The completed download's size.
+
+  - `type BetaBrowserStateChangeDownloadFailed struct{…}`
+
+    A file download that failed — or was cancelled — during this call.
+
+    - `DownloadID string`
+
+      The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+    - `Type DownloadFailed`
+
+      - `const DownloadFailedDownloadFailed DownloadFailed = "download_failed"`
+
+    - `URL string`
+
+      The final post-redirect URL the download was served from.
+
+    - `Error string`
+
+      The failure or cancellation detail, when known.
+
+### Beta Browser State Change Download Completed
+
+- `type BetaBrowserStateChangeDownloadCompleted struct{…}`
+
+  A file download that finished during this call, reported with the
+  same `download_id` as its `download_started` — or without a prior
+  `download_started`, when the download finished during the call that
+  started it (at most one state change per `download_id` per result).
+
+  - `DownloadID string`
+
+    The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+  - `Type DownloadCompleted`
+
+    - `const DownloadCompletedDownloadCompleted DownloadCompleted = "download_completed"`
+
+  - `URL string`
+
+    The final post-redirect URL the download was served from.
+
+  - `Path string`
+
+    Where the executor saved the file, on the executor's filesystem. Only included when another tool in the same environment can read the file at that path.
+
+  - `SizeBytes int64`
+
+    The completed download's size.
+
+### Beta Browser State Change Download Failed
+
+- `type BetaBrowserStateChangeDownloadFailed struct{…}`
+
+  A file download that failed — or was cancelled — during this call.
+
+  - `DownloadID string`
+
+    The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+  - `Type DownloadFailed`
+
+    - `const DownloadFailedDownloadFailed DownloadFailed = "download_failed"`
+
+  - `URL string`
+
+    The final post-redirect URL the download was served from.
+
+  - `Error string`
+
+    The failure or cancellation detail, when known.
+
+### Beta Browser State Change Download Started
+
+- `type BetaBrowserStateChangeDownloadStarted struct{…}`
+
+  A file download that started during this call.
+
+  - `DownloadID string`
+
+    The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+  - `Type DownloadStarted`
+
+    - `const DownloadStartedDownloadStarted DownloadStarted = "download_started"`
+
+  - `URL string`
+
+    The final post-redirect URL the download was served from.
+
+### Beta Browser State Change Tab Opened
+
+- `type BetaBrowserStateChangeTabOpened struct{…}`
+
+  A tab this call's execution opened that remains open at its end —
+  the creation delta of the `tabs` inventory, not an event log.
+
+  Carries only the `tab_id`; the tab's `title` and `url` live on its
+  `tabs` entry, which must include the same `tab_id`. A tab opened
+  during a failed call gets no deferred `tab_opened`; it simply appears
+  in the next result's `tabs` inventory.
+
+  - `TabID string`
+
+    The `tab_id` of the opened tab, present in `tabs`.
+
+  - `Type TabOpened`
+
+    - `const TabOpenedTabOpened TabOpened = "tab_opened"`
+
+### Beta Browser State Tab Entry
+
+- `type BetaBrowserStateTabEntry struct{…}`
+
+  One open browser tab reported in a `browser_state` block's `tabs`
+  inventory.
+
+  `tab_id` is the caller-assigned identifier for the tab; `title` and
+  `url` describe the page the tab is currently showing and may be empty
+  strings (a blank tab legitimately has both empty). `active` marks the
+  tab that is active after this call; whenever `tabs` is non-empty,
+  exactly one entry is marked.
+
+  - `TabID string`
+
+    The caller-assigned identifier for this tab, unique within the inventory.
+
+  - `Title string`
+
+    The title of the page the tab is showing. May be empty.
+
+  - `URL string`
+
+    The URL of the page the tab is showing. May be empty.
+
+  - `Active bool`
+
+    Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
+
+### Beta Browser Switch Tab Config
+
+- `type BetaBrowserSwitchTabConfig struct{…}`
+
+  `switch_tab`'s config overrides.
+
+  - `DeferLoading bool`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Enabled bool`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Toolset 20260801
+
+- `type BetaBrowserToolset20260801 struct{…}`
+
+  The browser toolset: a single `tools[]` entry (carrying no
+  `name`) that declares the browser tool family. The model is served
+  the family's tool with any members disabled via `configs` removed
+  from its schema.
+
+  - `Type BrowserToolset20260801`
+
+    - `const BrowserToolset20260801BrowserToolset20260801 BrowserToolset20260801 = "browser_toolset_20260801"`
+
+  - `AllowedCallers []string`
+
+    - `const BetaBrowserToolset20260801AllowedCallerDirect BetaBrowserToolset20260801AllowedCaller = "direct"`
+
+    - `const BetaBrowserToolset20260801AllowedCallerCodeExecution20250825 BetaBrowserToolset20260801AllowedCaller = "code_execution_20250825"`
+
+    - `const BetaBrowserToolset20260801AllowedCallerCodeExecution20260120 BetaBrowserToolset20260801AllowedCaller = "code_execution_20260120"`
+
+    - `const BetaBrowserToolset20260801AllowedCallerCodeExecution20260521 BetaBrowserToolset20260801AllowedCaller = "code_execution_20260521"`
+
+  - `CacheControl BetaCacheControlEphemeral`
+
+    Create a cache control breakpoint at this content block.
+
+    - `Type Ephemeral`
+
+      - `const EphemeralEphemeral Ephemeral = "ephemeral"`
+
+    - `TTL BetaCacheControlEphemeralTTL`
+
+      The time-to-live for the cache control breakpoint.
+
+      This may be one the following values:
+
+      - `5m`: 5 minutes
+      - `1h`: 1 hour
+
+      Defaults to `5m`. See [prompt caching pricing](../build-with-claude/build-with-claude-prompt-caching.md) for details.
+
+      - `const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"`
+
+      - `const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"`
+
+  - `Configs BetaBrowserToolsetConfigs`
+
+    Per-member configuration for `browser_toolset_20260801`: one
+    optional field per member tool, keyed by the member name — the same
+    name the member's `tool_use` blocks carry. Every member is an
+    accepted key, and a member's defaults apply wherever its key is
+    absent. Unknown keys are rejected: the field set is this toolset
+    version's complete member set.
+
+    - `CloseTab BetaBrowserCloseTabConfig`
+
+      `close_tab`'s config overrides.
+
+      - `DeferLoading bool`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Enabled bool`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `DoubleClick BetaBrowserDoubleClickConfig`
+
+      `double_click`'s config overrides.
+
+      - `DeferLoading bool`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Enabled bool`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `FileUpload BetaBrowserFileUploadConfig`
+
+      `file_upload`'s config overrides.
+
+      - `DeferLoading bool`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Enabled bool`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `Find BetaBrowserFindConfig`
+
+      `find`'s config overrides.
+
+      - `DeferLoading bool`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Enabled bool`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `FormInput BetaBrowserFormInputConfig`
+
+      `form_input`'s config overrides.
+
+      - `DeferLoading bool`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Enabled bool`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `GetPageText BetaBrowserGetPageTextConfig`
+
+      `get_page_text`'s config overrides.
+
+      - `DeferLoading bool`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Enabled bool`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `HoldKey BetaBrowserHoldKeyConfig`
+
+      `hold_key`'s config overrides.
+
+      - `DeferLoading bool`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Enabled bool`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `Hover BetaBrowserHoverConfig`
+
+      `hover`'s config overrides.
+
+      - `DeferLoading bool`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Enabled bool`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `JavascriptExec BetaBrowserJavascriptExecConfig`
+
+      `javascript_exec`'s config overrides.
+
+      - `DeferLoading bool`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Enabled bool`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `Key BetaBrowserKeyConfig`
+
+      `key`'s config overrides.
+
+      - `DeferLoading bool`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Enabled bool`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `LeftClick BetaBrowserLeftClickConfig`
+
+      `left_click`'s config overrides.
+
+      - `DeferLoading bool`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Enabled bool`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `LeftClickDrag BetaBrowserLeftClickDragConfig`
+
+      `left_click_drag`'s config overrides.
+
+      - `DeferLoading bool`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Enabled bool`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `LeftMouseDown BetaBrowserLeftMouseDownConfig`
+
+      `left_mouse_down`'s config overrides.
+
+      - `DeferLoading bool`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Enabled bool`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `LeftMouseUp BetaBrowserLeftMouseUpConfig`
+
+      `left_mouse_up`'s config overrides.
+
+      - `DeferLoading bool`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Enabled bool`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `ListTabs BetaBrowserListTabsConfig`
+
+      `list_tabs`'s config overrides.
+
+      - `DeferLoading bool`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Enabled bool`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `MiddleClick BetaBrowserMiddleClickConfig`
+
+      `middle_click`'s config overrides.
+
+      - `DeferLoading bool`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Enabled bool`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `MouseMove BetaBrowserMouseMoveConfig`
+
+      `mouse_move`'s config overrides.
+
+      - `DeferLoading bool`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Enabled bool`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `Navigate BetaBrowserNavigateConfig`
+
+      `navigate`'s config overrides.
+
+      - `DeferLoading bool`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Enabled bool`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `NewTab BetaBrowserNewTabConfig`
+
+      `new_tab`'s config overrides.
+
+      - `DeferLoading bool`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Enabled bool`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `ReadConsole BetaBrowserReadConsoleConfig`
+
+      `read_console`'s config overrides.
+
+      - `DeferLoading bool`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Enabled bool`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `ReadNetwork BetaBrowserReadNetworkConfig`
+
+      `read_network`'s config overrides.
+
+      - `DeferLoading bool`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Enabled bool`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `ReadPage BetaBrowserReadPageConfig`
+
+      `read_page`'s config overrides.
+
+      - `DeferLoading bool`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Enabled bool`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `RightClick BetaBrowserRightClickConfig`
+
+      `right_click`'s config overrides.
+
+      - `DeferLoading bool`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Enabled bool`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `Screenshot BetaBrowserScreenshotConfig`
+
+      `screenshot`'s config overrides.
+
+      - `DeferLoading bool`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Enabled bool`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `Scroll BetaBrowserScrollConfig`
+
+      `scroll`'s config overrides.
+
+      - `DeferLoading bool`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Enabled bool`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `ScrollTo BetaBrowserScrollToConfig`
+
+      `scroll_to`'s config overrides.
+
+      - `DeferLoading bool`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Enabled bool`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `SwitchTab BetaBrowserSwitchTabConfig`
+
+      `switch_tab`'s config overrides.
+
+      - `DeferLoading bool`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Enabled bool`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `TripleClick BetaBrowserTripleClickConfig`
+
+      `triple_click`'s config overrides.
+
+      - `DeferLoading bool`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Enabled bool`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `Type BetaBrowserTypeConfig`
+
+      `type`'s config overrides.
+
+      - `DeferLoading bool`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Enabled bool`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `Wait BetaBrowserWaitConfig`
+
+      `wait`'s config overrides.
+
+      - `DeferLoading bool`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Enabled bool`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `Zoom BetaBrowserZoomConfig`
+
+      `zoom`'s config overrides.
+
+      - `DeferLoading bool`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Enabled bool`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Toolset Configs
+
+- `type BetaBrowserToolsetConfigs struct{…}`
+
+  Per-member configuration for `browser_toolset_20260801`: one
+  optional field per member tool, keyed by the member name — the same
+  name the member's `tool_use` blocks carry. Every member is an
+  accepted key, and a member's defaults apply wherever its key is
+  absent. Unknown keys are rejected: the field set is this toolset
+  version's complete member set.
+
+  - `CloseTab BetaBrowserCloseTabConfig`
+
+    `close_tab`'s config overrides.
+
+    - `DeferLoading bool`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Enabled bool`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `DoubleClick BetaBrowserDoubleClickConfig`
+
+    `double_click`'s config overrides.
+
+    - `DeferLoading bool`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Enabled bool`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `FileUpload BetaBrowserFileUploadConfig`
+
+    `file_upload`'s config overrides.
+
+    - `DeferLoading bool`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Enabled bool`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `Find BetaBrowserFindConfig`
+
+    `find`'s config overrides.
+
+    - `DeferLoading bool`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Enabled bool`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `FormInput BetaBrowserFormInputConfig`
+
+    `form_input`'s config overrides.
+
+    - `DeferLoading bool`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Enabled bool`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `GetPageText BetaBrowserGetPageTextConfig`
+
+    `get_page_text`'s config overrides.
+
+    - `DeferLoading bool`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Enabled bool`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `HoldKey BetaBrowserHoldKeyConfig`
+
+    `hold_key`'s config overrides.
+
+    - `DeferLoading bool`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Enabled bool`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `Hover BetaBrowserHoverConfig`
+
+    `hover`'s config overrides.
+
+    - `DeferLoading bool`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Enabled bool`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `JavascriptExec BetaBrowserJavascriptExecConfig`
+
+    `javascript_exec`'s config overrides.
+
+    - `DeferLoading bool`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Enabled bool`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `Key BetaBrowserKeyConfig`
+
+    `key`'s config overrides.
+
+    - `DeferLoading bool`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Enabled bool`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `LeftClick BetaBrowserLeftClickConfig`
+
+    `left_click`'s config overrides.
+
+    - `DeferLoading bool`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Enabled bool`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `LeftClickDrag BetaBrowserLeftClickDragConfig`
+
+    `left_click_drag`'s config overrides.
+
+    - `DeferLoading bool`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Enabled bool`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `LeftMouseDown BetaBrowserLeftMouseDownConfig`
+
+    `left_mouse_down`'s config overrides.
+
+    - `DeferLoading bool`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Enabled bool`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `LeftMouseUp BetaBrowserLeftMouseUpConfig`
+
+    `left_mouse_up`'s config overrides.
+
+    - `DeferLoading bool`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Enabled bool`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `ListTabs BetaBrowserListTabsConfig`
+
+    `list_tabs`'s config overrides.
+
+    - `DeferLoading bool`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Enabled bool`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `MiddleClick BetaBrowserMiddleClickConfig`
+
+    `middle_click`'s config overrides.
+
+    - `DeferLoading bool`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Enabled bool`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `MouseMove BetaBrowserMouseMoveConfig`
+
+    `mouse_move`'s config overrides.
+
+    - `DeferLoading bool`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Enabled bool`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `Navigate BetaBrowserNavigateConfig`
+
+    `navigate`'s config overrides.
+
+    - `DeferLoading bool`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Enabled bool`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `NewTab BetaBrowserNewTabConfig`
+
+    `new_tab`'s config overrides.
+
+    - `DeferLoading bool`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Enabled bool`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `ReadConsole BetaBrowserReadConsoleConfig`
+
+    `read_console`'s config overrides.
+
+    - `DeferLoading bool`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Enabled bool`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `ReadNetwork BetaBrowserReadNetworkConfig`
+
+    `read_network`'s config overrides.
+
+    - `DeferLoading bool`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Enabled bool`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `ReadPage BetaBrowserReadPageConfig`
+
+    `read_page`'s config overrides.
+
+    - `DeferLoading bool`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Enabled bool`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `RightClick BetaBrowserRightClickConfig`
+
+    `right_click`'s config overrides.
+
+    - `DeferLoading bool`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Enabled bool`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `Screenshot BetaBrowserScreenshotConfig`
+
+    `screenshot`'s config overrides.
+
+    - `DeferLoading bool`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Enabled bool`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `Scroll BetaBrowserScrollConfig`
+
+    `scroll`'s config overrides.
+
+    - `DeferLoading bool`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Enabled bool`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `ScrollTo BetaBrowserScrollToConfig`
+
+    `scroll_to`'s config overrides.
+
+    - `DeferLoading bool`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Enabled bool`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `SwitchTab BetaBrowserSwitchTabConfig`
+
+    `switch_tab`'s config overrides.
+
+    - `DeferLoading bool`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Enabled bool`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `TripleClick BetaBrowserTripleClickConfig`
+
+    `triple_click`'s config overrides.
+
+    - `DeferLoading bool`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Enabled bool`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `Type BetaBrowserTypeConfig`
+
+    `type`'s config overrides.
+
+    - `DeferLoading bool`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Enabled bool`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `Wait BetaBrowserWaitConfig`
+
+    `wait`'s config overrides.
+
+    - `DeferLoading bool`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Enabled bool`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `Zoom BetaBrowserZoomConfig`
+
+    `zoom`'s config overrides.
+
+    - `DeferLoading bool`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Enabled bool`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Triple Click Config
+
+- `type BetaBrowserTripleClickConfig struct{…}`
+
+  `triple_click`'s config overrides.
+
+  - `DeferLoading bool`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Enabled bool`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Type Config
+
+- `type BetaBrowserTypeConfig struct{…}`
+
+  `type`'s config overrides.
+
+  - `DeferLoading bool`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Enabled bool`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Wait Config
+
+- `type BetaBrowserWaitConfig struct{…}`
+
+  `wait`'s config overrides.
+
+  - `DeferLoading bool`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Enabled bool`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Zoom Config
+
+- `type BetaBrowserZoomConfig struct{…}`
+
+  `zoom`'s config overrides.
+
+  - `DeferLoading bool`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Enabled bool`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
 ### Beta Cache Control Ephemeral
 
@@ -10933,6 +14054,722 @@ func main() {
 
     - `const CompactionCompaction Compaction = "compaction"`
 
+### Beta Computer Cursor Position Config
+
+- `type BetaComputerCursorPositionConfig struct{…}`
+
+  `cursor_position`'s config overrides.
+
+  - `DeferLoading bool`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Enabled bool`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Double Click Config
+
+- `type BetaComputerDoubleClickConfig struct{…}`
+
+  `double_click`'s config overrides.
+
+  - `DeferLoading bool`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Enabled bool`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Hold Key Config
+
+- `type BetaComputerHoldKeyConfig struct{…}`
+
+  `hold_key`'s config overrides.
+
+  - `DeferLoading bool`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Enabled bool`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Key Config
+
+- `type BetaComputerKeyConfig struct{…}`
+
+  `key`'s config overrides.
+
+  - `DeferLoading bool`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Enabled bool`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Left Click Config
+
+- `type BetaComputerLeftClickConfig struct{…}`
+
+  `left_click`'s config overrides.
+
+  - `DeferLoading bool`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Enabled bool`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Left Click Drag Config
+
+- `type BetaComputerLeftClickDragConfig struct{…}`
+
+  `left_click_drag`'s config overrides.
+
+  - `DeferLoading bool`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Enabled bool`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Left Mouse Down Config
+
+- `type BetaComputerLeftMouseDownConfig struct{…}`
+
+  `left_mouse_down`'s config overrides.
+
+  - `DeferLoading bool`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Enabled bool`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Left Mouse Up Config
+
+- `type BetaComputerLeftMouseUpConfig struct{…}`
+
+  `left_mouse_up`'s config overrides.
+
+  - `DeferLoading bool`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Enabled bool`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Middle Click Config
+
+- `type BetaComputerMiddleClickConfig struct{…}`
+
+  `middle_click`'s config overrides.
+
+  - `DeferLoading bool`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Enabled bool`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Mouse Move Config
+
+- `type BetaComputerMouseMoveConfig struct{…}`
+
+  `mouse_move`'s config overrides.
+
+  - `DeferLoading bool`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Enabled bool`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Right Click Config
+
+- `type BetaComputerRightClickConfig struct{…}`
+
+  `right_click`'s config overrides.
+
+  - `DeferLoading bool`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Enabled bool`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Screenshot Config
+
+- `type BetaComputerScreenshotConfig struct{…}`
+
+  `screenshot`'s config overrides.
+
+  - `DeferLoading bool`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Enabled bool`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Scroll Config
+
+- `type BetaComputerScrollConfig struct{…}`
+
+  `scroll`'s config overrides.
+
+  - `DeferLoading bool`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Enabled bool`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Toolset 20260801
+
+- `type BetaComputerToolset20260801 struct{…}`
+
+  The computer toolset: a single `tools[]` entry (carrying no
+  `name`) that declares the computer tool family. The model is
+  served the family's tool with any members disabled via `configs`
+  removed from its schema. Every member is enabled by default, zoom
+  included. The single-tool options `display_number` and
+  `enable_zoom` are not fields of a toolset entry — it carries only
+  `type`, `configs`, and `cache_control`; zoom is controlled
+  via `configs.zoom.enabled`.
+
+  - `Type ComputerToolset20260801`
+
+    - `const ComputerToolset20260801ComputerToolset20260801 ComputerToolset20260801 = "computer_toolset_20260801"`
+
+  - `AllowedCallers []string`
+
+    - `const BetaComputerToolset20260801AllowedCallerDirect BetaComputerToolset20260801AllowedCaller = "direct"`
+
+    - `const BetaComputerToolset20260801AllowedCallerCodeExecution20250825 BetaComputerToolset20260801AllowedCaller = "code_execution_20250825"`
+
+    - `const BetaComputerToolset20260801AllowedCallerCodeExecution20260120 BetaComputerToolset20260801AllowedCaller = "code_execution_20260120"`
+
+    - `const BetaComputerToolset20260801AllowedCallerCodeExecution20260521 BetaComputerToolset20260801AllowedCaller = "code_execution_20260521"`
+
+  - `CacheControl BetaCacheControlEphemeral`
+
+    Create a cache control breakpoint at this content block.
+
+    - `Type Ephemeral`
+
+      - `const EphemeralEphemeral Ephemeral = "ephemeral"`
+
+    - `TTL BetaCacheControlEphemeralTTL`
+
+      The time-to-live for the cache control breakpoint.
+
+      This may be one the following values:
+
+      - `5m`: 5 minutes
+      - `1h`: 1 hour
+
+      Defaults to `5m`. See [prompt caching pricing](../build-with-claude/build-with-claude-prompt-caching.md) for details.
+
+      - `const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"`
+
+      - `const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"`
+
+  - `Configs BetaComputerToolsetConfigs`
+
+    Per-member configuration for `computer_toolset_20260801`: one
+    optional field per member tool, keyed by the member name — the same
+    name the member's `tool_use` blocks carry. Every member is an
+    accepted key, and a member's defaults apply wherever its key is
+    absent. Unknown keys are rejected: the field set is this toolset
+    version's complete member set.
+
+    - `CursorPosition BetaComputerCursorPositionConfig`
+
+      `cursor_position`'s config overrides.
+
+      - `DeferLoading bool`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Enabled bool`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `DoubleClick BetaComputerDoubleClickConfig`
+
+      `double_click`'s config overrides.
+
+      - `DeferLoading bool`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Enabled bool`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `HoldKey BetaComputerHoldKeyConfig`
+
+      `hold_key`'s config overrides.
+
+      - `DeferLoading bool`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Enabled bool`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `Key BetaComputerKeyConfig`
+
+      `key`'s config overrides.
+
+      - `DeferLoading bool`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Enabled bool`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `LeftClick BetaComputerLeftClickConfig`
+
+      `left_click`'s config overrides.
+
+      - `DeferLoading bool`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Enabled bool`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `LeftClickDrag BetaComputerLeftClickDragConfig`
+
+      `left_click_drag`'s config overrides.
+
+      - `DeferLoading bool`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Enabled bool`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `LeftMouseDown BetaComputerLeftMouseDownConfig`
+
+      `left_mouse_down`'s config overrides.
+
+      - `DeferLoading bool`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Enabled bool`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `LeftMouseUp BetaComputerLeftMouseUpConfig`
+
+      `left_mouse_up`'s config overrides.
+
+      - `DeferLoading bool`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Enabled bool`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `MiddleClick BetaComputerMiddleClickConfig`
+
+      `middle_click`'s config overrides.
+
+      - `DeferLoading bool`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Enabled bool`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `MouseMove BetaComputerMouseMoveConfig`
+
+      `mouse_move`'s config overrides.
+
+      - `DeferLoading bool`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Enabled bool`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `RightClick BetaComputerRightClickConfig`
+
+      `right_click`'s config overrides.
+
+      - `DeferLoading bool`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Enabled bool`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `Screenshot BetaComputerScreenshotConfig`
+
+      `screenshot`'s config overrides.
+
+      - `DeferLoading bool`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Enabled bool`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `Scroll BetaComputerScrollConfig`
+
+      `scroll`'s config overrides.
+
+      - `DeferLoading bool`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Enabled bool`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `TripleClick BetaComputerTripleClickConfig`
+
+      `triple_click`'s config overrides.
+
+      - `DeferLoading bool`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Enabled bool`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `Type BetaComputerTypeConfig`
+
+      `type`'s config overrides.
+
+      - `DeferLoading bool`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Enabled bool`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `Wait BetaComputerWaitConfig`
+
+      `wait`'s config overrides.
+
+      - `DeferLoading bool`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Enabled bool`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `Zoom BetaComputerZoomConfig`
+
+      `zoom`'s config overrides.
+
+      - `DeferLoading bool`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Enabled bool`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Toolset Configs
+
+- `type BetaComputerToolsetConfigs struct{…}`
+
+  Per-member configuration for `computer_toolset_20260801`: one
+  optional field per member tool, keyed by the member name — the same
+  name the member's `tool_use` blocks carry. Every member is an
+  accepted key, and a member's defaults apply wherever its key is
+  absent. Unknown keys are rejected: the field set is this toolset
+  version's complete member set.
+
+  - `CursorPosition BetaComputerCursorPositionConfig`
+
+    `cursor_position`'s config overrides.
+
+    - `DeferLoading bool`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Enabled bool`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `DoubleClick BetaComputerDoubleClickConfig`
+
+    `double_click`'s config overrides.
+
+    - `DeferLoading bool`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Enabled bool`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `HoldKey BetaComputerHoldKeyConfig`
+
+    `hold_key`'s config overrides.
+
+    - `DeferLoading bool`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Enabled bool`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `Key BetaComputerKeyConfig`
+
+    `key`'s config overrides.
+
+    - `DeferLoading bool`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Enabled bool`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `LeftClick BetaComputerLeftClickConfig`
+
+    `left_click`'s config overrides.
+
+    - `DeferLoading bool`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Enabled bool`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `LeftClickDrag BetaComputerLeftClickDragConfig`
+
+    `left_click_drag`'s config overrides.
+
+    - `DeferLoading bool`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Enabled bool`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `LeftMouseDown BetaComputerLeftMouseDownConfig`
+
+    `left_mouse_down`'s config overrides.
+
+    - `DeferLoading bool`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Enabled bool`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `LeftMouseUp BetaComputerLeftMouseUpConfig`
+
+    `left_mouse_up`'s config overrides.
+
+    - `DeferLoading bool`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Enabled bool`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `MiddleClick BetaComputerMiddleClickConfig`
+
+    `middle_click`'s config overrides.
+
+    - `DeferLoading bool`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Enabled bool`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `MouseMove BetaComputerMouseMoveConfig`
+
+    `mouse_move`'s config overrides.
+
+    - `DeferLoading bool`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Enabled bool`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `RightClick BetaComputerRightClickConfig`
+
+    `right_click`'s config overrides.
+
+    - `DeferLoading bool`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Enabled bool`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `Screenshot BetaComputerScreenshotConfig`
+
+    `screenshot`'s config overrides.
+
+    - `DeferLoading bool`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Enabled bool`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `Scroll BetaComputerScrollConfig`
+
+    `scroll`'s config overrides.
+
+    - `DeferLoading bool`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Enabled bool`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `TripleClick BetaComputerTripleClickConfig`
+
+    `triple_click`'s config overrides.
+
+    - `DeferLoading bool`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Enabled bool`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `Type BetaComputerTypeConfig`
+
+    `type`'s config overrides.
+
+    - `DeferLoading bool`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Enabled bool`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `Wait BetaComputerWaitConfig`
+
+    `wait`'s config overrides.
+
+    - `DeferLoading bool`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Enabled bool`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `Zoom BetaComputerZoomConfig`
+
+    `zoom`'s config overrides.
+
+    - `DeferLoading bool`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Enabled bool`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Triple Click Config
+
+- `type BetaComputerTripleClickConfig struct{…}`
+
+  `triple_click`'s config overrides.
+
+  - `DeferLoading bool`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Enabled bool`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Type Config
+
+- `type BetaComputerTypeConfig struct{…}`
+
+  `type`'s config overrides.
+
+  - `DeferLoading bool`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Enabled bool`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Wait Config
+
+- `type BetaComputerWaitConfig struct{…}`
+
+  `wait`'s config overrides.
+
+  - `DeferLoading bool`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Enabled bool`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Zoom Config
+
+- `type BetaComputerZoomConfig struct{…}`
+
+  `zoom`'s config overrides.
+
+  - `DeferLoading bool`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Enabled bool`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
 ### Beta Container
 
 - `type BetaContainer struct{…}`
@@ -11248,6 +15085,10 @@ func main() {
         - `Type CodeExecution20260120`
 
           - `const CodeExecution20260120CodeExecution20260120 CodeExecution20260120 = "code_execution_20260120"`
+
+    - `ToolsetName string`
+
+      For a toolset member tool_use, the toolset family.
 
   - `type BetaServerToolUseBlock struct{…}`
 
@@ -12142,6 +15983,18 @@ func main() {
 
       Create a cache control breakpoint at this content block.
 
+    - `Transformations BetaImageTransformationsParamResp`
+
+      Configures the transformations the server applies to this image before the model observes it. Each key names a condition the server transforms images for; its value selects the transformation applied. Omitted keys keep their default behavior, and an empty object is equivalent to omitting the field.
+
+      - `OversizedImage BetaImageTransformationsParamOversizedImage`
+
+        What the server does when this image exceeds the model's maximum image size. `"downsize"` (the default) scales the image down to fit, which changes the dimensions the model observes without telling you. `"error"` instead rejects the request with a 400 error naming the image's dimensions and the largest dimensions that fit, so you can scale the image deliberately — your image is never silently scaled down.
+
+        - `const BetaImageTransformationsParamOversizedImageDownsize BetaImageTransformationsParamOversizedImage = "downsize"`
+
+        - `const BetaImageTransformationsParamOversizedImageError BetaImageTransformationsParamOversizedImage = "error"`
+
   - `type BetaRequestDocumentBlock struct{…}`
 
     - `Source BetaRequestDocumentBlockSourceUnion`
@@ -12318,6 +16171,10 @@ func main() {
 
           - `const CodeExecution20260120CodeExecution20260120 CodeExecution20260120 = "code_execution_20260120"`
 
+    - `ToolsetName string`
+
+      For a toolset member tool_use, the toolset family this member belongs to.
+
   - `type BetaToolResultBlockParamResp struct{…}`
 
     - `ToolUseID string`
@@ -12356,7 +16213,134 @@ func main() {
 
             Create a cache control breakpoint at this content block.
 
+        - `type BetaBrowserStateBlockParamResp struct{…}`
+
+          The caller's browser state after a browser toolset member call —
+          the full inventory of open tabs, which tab is active, and any side
+          effects (tabs opened, download state changes) the call produced.
+
+          At most one per `tool_result`, only on a non-error result answering a
+          browser toolset member `tool_use`. The server renders the
+          model-visible text from it; the model never sees the raw fields.
+
+          - `Tabs []BetaBrowserStateTabEntry`
+
+            All tabs open in the browser after this call — the full inventory, not a delta. May be empty. Whenever non-empty, exactly one entry carries `active: true`.
+
+            - `TabID string`
+
+              The caller-assigned identifier for this tab, unique within the inventory.
+
+            - `Title string`
+
+              The title of the page the tab is showing. May be empty.
+
+            - `URL string`
+
+              The URL of the page the tab is showing. May be empty.
+
+            - `Active bool`
+
+              Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
+
+          - `Type BrowserState`
+
+            - `const BrowserStateBrowserState BrowserState = "browser_state"`
+
+          - `CacheControl BetaCacheControlEphemeral`
+
+            Create a cache control breakpoint at this content block.
+
+          - `StateChanges []BetaBrowserStateChangeUnion`
+
+            Tabs opened and download state changes during this call. "Nothing to report" is expressed by omitting the field, never by an empty list.
+
+            - `type BetaBrowserStateChangeTabOpened struct{…}`
+
+              A tab this call's execution opened that remains open at its end —
+              the creation delta of the `tabs` inventory, not an event log.
+
+              Carries only the `tab_id`; the tab's `title` and `url` live on its
+              `tabs` entry, which must include the same `tab_id`. A tab opened
+              during a failed call gets no deferred `tab_opened`; it simply appears
+              in the next result's `tabs` inventory.
+
+              - `TabID string`
+
+                The `tab_id` of the opened tab, present in `tabs`.
+
+              - `Type TabOpened`
+
+                - `const TabOpenedTabOpened TabOpened = "tab_opened"`
+
+            - `type BetaBrowserStateChangeDownloadStarted struct{…}`
+
+              A file download that started during this call.
+
+              - `DownloadID string`
+
+                The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+              - `Type DownloadStarted`
+
+                - `const DownloadStartedDownloadStarted DownloadStarted = "download_started"`
+
+              - `URL string`
+
+                The final post-redirect URL the download was served from.
+
+            - `type BetaBrowserStateChangeDownloadCompleted struct{…}`
+
+              A file download that finished during this call, reported with the
+              same `download_id` as its `download_started` — or without a prior
+              `download_started`, when the download finished during the call that
+              started it (at most one state change per `download_id` per result).
+
+              - `DownloadID string`
+
+                The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+              - `Type DownloadCompleted`
+
+                - `const DownloadCompletedDownloadCompleted DownloadCompleted = "download_completed"`
+
+              - `URL string`
+
+                The final post-redirect URL the download was served from.
+
+              - `Path string`
+
+                Where the executor saved the file, on the executor's filesystem. Only included when another tool in the same environment can read the file at that path.
+
+              - `SizeBytes int64`
+
+                The completed download's size.
+
+            - `type BetaBrowserStateChangeDownloadFailed struct{…}`
+
+              A file download that failed — or was cancelled — during this call.
+
+              - `DownloadID string`
+
+                The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+              - `Type DownloadFailed`
+
+                - `const DownloadFailedDownloadFailed DownloadFailed = "download_failed"`
+
+              - `URL string`
+
+                The final post-redirect URL the download was served from.
+
+              - `Error string`
+
+                The failure or cancellation detail, when known.
+
     - `IsError bool`
+
+    - `ToolsetName string`
+
+      For a toolset member tool_result, the toolset family of the paired tool_use.
 
   - `type BetaServerToolUseBlockParamResp struct{…}`
 
@@ -12937,125 +16921,6 @@ func main() {
 
       Opaque metadata from prior compaction, to be round-tripped verbatim
 
-  - `type BetaMidConversationSystemBlockParamResp struct{…}`
-
-    System instructions that appear mid-conversation.
-
-    Use this block to provide or update system-level instructions at a specific
-    point in the conversation, rather than only via the top-level `system` parameter.
-
-    - `Content []BetaMidConversationSystemBlockParamContentUnionResp`
-
-      System instruction text blocks.
-
-      - `type BetaTextBlockParamResp struct{…}`
-
-      - `type BetaRequestToolAdditionBlock struct{…}`
-
-        Mid-conversation directive to surface a declared tool.
-
-        `tool` references a tool (or MCP toolset) by name from the request's
-        `tools`; it is offered to the model from this point in the
-        conversation onward.
-
-        - `Tool BetaRequestToolAdditionBlockToolUnion`
-
-          Reference to a single tool the caller declared directly in
-          `tools[]`. Does not accept the composed `{server}_{name}` form the
-          server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-          `mcp_toolset_reference` for those.
-
-          - `type BetaToolChangeToolReference struct{…}`
-
-            Reference to a single tool the caller declared directly in
-            `tools[]`. Does not accept the composed `{server}_{name}` form the
-            server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-            `mcp_toolset_reference` for those.
-
-            - `Name string`
-
-            - `Type ToolReference`
-
-              - `const ToolReferenceToolReference ToolReference = "tool_reference"`
-
-          - `type BetaToolChangeMCPToolReference struct{…}`
-
-            Reference to a single MCP tool by its server and remote name — the
-            same `server_name`/`name` pair `mcp_tool_use` carries.
-
-            - `Name string`
-
-            - `ServerName string`
-
-            - `Type MCPToolReference`
-
-              - `const MCPToolReferenceMCPToolReference MCPToolReference = "mcp_tool_reference"`
-
-          - `type BetaToolChangeMCPToolsetReference struct{…}`
-
-            Reference to every tool in the named MCP server's toolset.
-
-            - `ServerName string`
-
-            - `Type MCPToolsetReference`
-
-              - `const MCPToolsetReferenceMCPToolsetReference MCPToolsetReference = "mcp_toolset_reference"`
-
-        - `Type ToolAddition`
-
-          - `const ToolAdditionToolAddition ToolAddition = "tool_addition"`
-
-        - `CacheControl BetaCacheControlEphemeral`
-
-          Create a cache control breakpoint at this content block.
-
-      - `type BetaRequestToolRemovalBlock struct{…}`
-
-        Mid-conversation directive to withdraw a tool.
-
-        `tool` references a tool (or MCP toolset) by name from the request's
-        `tools`; it is no longer offered to the model from this point in the
-        conversation onward.
-
-        - `Tool BetaRequestToolRemovalBlockToolUnion`
-
-          Reference to a single tool the caller declared directly in
-          `tools[]`. Does not accept the composed `{server}_{name}` form the
-          server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-          `mcp_toolset_reference` for those.
-
-          - `type BetaToolChangeToolReference struct{…}`
-
-            Reference to a single tool the caller declared directly in
-            `tools[]`. Does not accept the composed `{server}_{name}` form the
-            server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-            `mcp_toolset_reference` for those.
-
-          - `type BetaToolChangeMCPToolReference struct{…}`
-
-            Reference to a single MCP tool by its server and remote name — the
-            same `server_name`/`name` pair `mcp_tool_use` carries.
-
-          - `type BetaToolChangeMCPToolsetReference struct{…}`
-
-            Reference to every tool in the named MCP server's toolset.
-
-        - `Type ToolRemoval`
-
-          - `const ToolRemovalToolRemoval ToolRemoval = "tool_removal"`
-
-        - `CacheControl BetaCacheControlEphemeral`
-
-          Create a cache control breakpoint at this content block.
-
-    - `Type MidConvSystem`
-
-      - `const MidConvSystemMidConvSystem MidConvSystem = "mid_conv_system"`
-
-    - `CacheControl BetaCacheControlEphemeral`
-
-      Create a cache control breakpoint at this content block.
-
   - `type BetaRequestToolAdditionBlock struct{…}`
 
     Mid-conversation directive to surface a declared tool.
@@ -13064,6 +16929,57 @@ func main() {
     `tools`; it is offered to the model from this point in the
     conversation onward.
 
+    - `Tool BetaRequestToolAdditionBlockToolUnion`
+
+      Reference to a single tool the caller declared directly in
+      `tools[]`. Does not accept the composed `{server}_{name}` form the
+      server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+      `mcp_toolset_reference` for those.
+
+      - `type BetaToolChangeToolReference struct{…}`
+
+        Reference to a single tool the caller declared directly in
+        `tools[]`. Does not accept the composed `{server}_{name}` form the
+        server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+        `mcp_toolset_reference` for those.
+
+        - `Name string`
+
+        - `Type ToolReference`
+
+          - `const ToolReferenceToolReference ToolReference = "tool_reference"`
+
+      - `type BetaToolChangeMCPToolReference struct{…}`
+
+        Reference to a single MCP tool by its server and remote name — the
+        same `server_name`/`name` pair `mcp_tool_use` carries.
+
+        - `Name string`
+
+        - `ServerName string`
+
+        - `Type MCPToolReference`
+
+          - `const MCPToolReferenceMCPToolReference MCPToolReference = "mcp_tool_reference"`
+
+      - `type BetaToolChangeMCPToolsetReference struct{…}`
+
+        Reference to every tool in the named MCP server's toolset.
+
+        - `ServerName string`
+
+        - `Type MCPToolsetReference`
+
+          - `const MCPToolsetReferenceMCPToolsetReference MCPToolsetReference = "mcp_toolset_reference"`
+
+    - `Type ToolAddition`
+
+      - `const ToolAdditionToolAddition ToolAddition = "tool_addition"`
+
+    - `CacheControl BetaCacheControlEphemeral`
+
+      Create a cache control breakpoint at this content block.
+
   - `type BetaRequestToolRemovalBlock struct{…}`
 
     Mid-conversation directive to withdraw a tool.
@@ -13071,6 +16987,37 @@ func main() {
     `tool` references a tool (or MCP toolset) by name from the request's
     `tools`; it is no longer offered to the model from this point in the
     conversation onward.
+
+    - `Tool BetaRequestToolRemovalBlockToolUnion`
+
+      Reference to a single tool the caller declared directly in
+      `tools[]`. Does not accept the composed `{server}_{name}` form the
+      server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+      `mcp_toolset_reference` for those.
+
+      - `type BetaToolChangeToolReference struct{…}`
+
+        Reference to a single tool the caller declared directly in
+        `tools[]`. Does not accept the composed `{server}_{name}` form the
+        server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+        `mcp_toolset_reference` for those.
+
+      - `type BetaToolChangeMCPToolReference struct{…}`
+
+        Reference to a single MCP tool by its server and remote name — the
+        same `server_name`/`name` pair `mcp_tool_use` carries.
+
+      - `type BetaToolChangeMCPToolsetReference struct{…}`
+
+        Reference to every tool in the named MCP server's toolset.
+
+    - `Type ToolRemoval`
+
+      - `const ToolRemovalToolRemoval ToolRemoval = "tool_removal"`
+
+    - `CacheControl BetaCacheControlEphemeral`
+
+      Create a cache control breakpoint at this content block.
 
   - `type BetaFallbackBlockParamResp struct{…}`
 
@@ -13371,6 +17318,18 @@ func main() {
 
           Create a cache control breakpoint at this content block.
 
+        - `Transformations BetaImageTransformationsParamResp`
+
+          Configures the transformations the server applies to this image before the model observes it. Each key names a condition the server transforms images for; its value selects the transformation applied. Omitted keys keep their default behavior, and an empty object is equivalent to omitting the field.
+
+          - `OversizedImage BetaImageTransformationsParamOversizedImage`
+
+            What the server does when this image exceeds the model's maximum image size. `"downsize"` (the default) scales the image down to fit, which changes the dimensions the model observes without telling you. `"error"` instead rejects the request with a 400 error naming the image's dimensions and the largest dimensions that fit, so you can scale the image deliberately — your image is never silently scaled down.
+
+            - `const BetaImageTransformationsParamOversizedImageDownsize BetaImageTransformationsParamOversizedImage = "downsize"`
+
+            - `const BetaImageTransformationsParamOversizedImageError BetaImageTransformationsParamOversizedImage = "error"`
+
   - `Type Content`
 
     - `const ContentContent Content = "content"`
@@ -13561,6 +17520,18 @@ func main() {
     - `CacheControl BetaCacheControlEphemeral`
 
       Create a cache control breakpoint at this content block.
+
+    - `Transformations BetaImageTransformationsParamResp`
+
+      Configures the transformations the server applies to this image before the model observes it. Each key names a condition the server transforms images for; its value selects the transformation applied. Omitted keys keep their default behavior, and an empty object is equivalent to omitting the field.
+
+      - `OversizedImage BetaImageTransformationsParamOversizedImage`
+
+        What the server does when this image exceeds the model's maximum image size. `"downsize"` (the default) scales the image down to fit, which changes the dimensions the model observes without telling you. `"error"` instead rejects the request with a 400 error naming the image's dimensions and the largest dimensions that fit, so you can scale the image deliberately — your image is never silently scaled down.
+
+        - `const BetaImageTransformationsParamOversizedImageDownsize BetaImageTransformationsParamOversizedImage = "downsize"`
+
+        - `const BetaImageTransformationsParamOversizedImageError BetaImageTransformationsParamOversizedImage = "error"`
 
 ### Beta Context Management Config
 
@@ -15074,6 +19045,32 @@ func main() {
 
       - `const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"`
 
+  - `Transformations BetaImageTransformationsParamResp`
+
+    Configures the transformations the server applies to this image before the model observes it. Each key names a condition the server transforms images for; its value selects the transformation applied. Omitted keys keep their default behavior, and an empty object is equivalent to omitting the field.
+
+    - `OversizedImage BetaImageTransformationsParamOversizedImage`
+
+      What the server does when this image exceeds the model's maximum image size. `"downsize"` (the default) scales the image down to fit, which changes the dimensions the model observes without telling you. `"error"` instead rejects the request with a 400 error naming the image's dimensions and the largest dimensions that fit, so you can scale the image deliberately — your image is never silently scaled down.
+
+      - `const BetaImageTransformationsParamOversizedImageDownsize BetaImageTransformationsParamOversizedImage = "downsize"`
+
+      - `const BetaImageTransformationsParamOversizedImageError BetaImageTransformationsParamOversizedImage = "error"`
+
+### Beta Image Transformations Param
+
+- `type BetaImageTransformationsParamResp struct{…}`
+
+  Configures the transformations the server applies to this image before the model observes it. Each key names a condition the server transforms images for; its value selects the transformation applied. Omitted keys keep their default behavior, and an empty object is equivalent to omitting the field.
+
+  - `OversizedImage BetaImageTransformationsParamOversizedImage`
+
+    What the server does when this image exceeds the model's maximum image size. `"downsize"` (the default) scales the image down to fit, which changes the dimensions the model observes without telling you. `"error"` instead rejects the request with a 400 error naming the image's dimensions and the largest dimensions that fit, so you can scale the image deliberately — your image is never silently scaled down.
+
+    - `const BetaImageTransformationsParamOversizedImageDownsize BetaImageTransformationsParamOversizedImage = "downsize"`
+
+    - `const BetaImageTransformationsParamOversizedImageError BetaImageTransformationsParamOversizedImage = "error"`
+
 ### Beta Input JSON Delta
 
 - `type BetaInputJSONDelta struct{…}`
@@ -16167,6 +20164,10 @@ func main() {
           - `Type CodeExecution20260120`
 
             - `const CodeExecution20260120CodeExecution20260120 CodeExecution20260120 = "code_execution_20260120"`
+
+      - `ToolsetName string`
+
+        For a toolset member tool_use, the toolset family.
 
     - `type BetaServerToolUseBlock struct{…}`
 
@@ -18099,6 +22100,18 @@ func main() {
 
           Create a cache control breakpoint at this content block.
 
+        - `Transformations BetaImageTransformationsParamResp`
+
+          Configures the transformations the server applies to this image before the model observes it. Each key names a condition the server transforms images for; its value selects the transformation applied. Omitted keys keep their default behavior, and an empty object is equivalent to omitting the field.
+
+          - `OversizedImage BetaImageTransformationsParamOversizedImage`
+
+            What the server does when this image exceeds the model's maximum image size. `"downsize"` (the default) scales the image down to fit, which changes the dimensions the model observes without telling you. `"error"` instead rejects the request with a 400 error naming the image's dimensions and the largest dimensions that fit, so you can scale the image deliberately — your image is never silently scaled down.
+
+            - `const BetaImageTransformationsParamOversizedImageDownsize BetaImageTransformationsParamOversizedImage = "downsize"`
+
+            - `const BetaImageTransformationsParamOversizedImageError BetaImageTransformationsParamOversizedImage = "error"`
+
       - `type BetaRequestDocumentBlock struct{…}`
 
         - `Source BetaRequestDocumentBlockSourceUnion`
@@ -18275,6 +22288,10 @@ func main() {
 
               - `const CodeExecution20260120CodeExecution20260120 CodeExecution20260120 = "code_execution_20260120"`
 
+        - `ToolsetName string`
+
+          For a toolset member tool_use, the toolset family this member belongs to.
+
       - `type BetaToolResultBlockParamResp struct{…}`
 
         - `ToolUseID string`
@@ -18313,7 +22330,134 @@ func main() {
 
                 Create a cache control breakpoint at this content block.
 
+            - `type BetaBrowserStateBlockParamResp struct{…}`
+
+              The caller's browser state after a browser toolset member call —
+              the full inventory of open tabs, which tab is active, and any side
+              effects (tabs opened, download state changes) the call produced.
+
+              At most one per `tool_result`, only on a non-error result answering a
+              browser toolset member `tool_use`. The server renders the
+              model-visible text from it; the model never sees the raw fields.
+
+              - `Tabs []BetaBrowserStateTabEntry`
+
+                All tabs open in the browser after this call — the full inventory, not a delta. May be empty. Whenever non-empty, exactly one entry carries `active: true`.
+
+                - `TabID string`
+
+                  The caller-assigned identifier for this tab, unique within the inventory.
+
+                - `Title string`
+
+                  The title of the page the tab is showing. May be empty.
+
+                - `URL string`
+
+                  The URL of the page the tab is showing. May be empty.
+
+                - `Active bool`
+
+                  Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
+
+              - `Type BrowserState`
+
+                - `const BrowserStateBrowserState BrowserState = "browser_state"`
+
+              - `CacheControl BetaCacheControlEphemeral`
+
+                Create a cache control breakpoint at this content block.
+
+              - `StateChanges []BetaBrowserStateChangeUnion`
+
+                Tabs opened and download state changes during this call. "Nothing to report" is expressed by omitting the field, never by an empty list.
+
+                - `type BetaBrowserStateChangeTabOpened struct{…}`
+
+                  A tab this call's execution opened that remains open at its end —
+                  the creation delta of the `tabs` inventory, not an event log.
+
+                  Carries only the `tab_id`; the tab's `title` and `url` live on its
+                  `tabs` entry, which must include the same `tab_id`. A tab opened
+                  during a failed call gets no deferred `tab_opened`; it simply appears
+                  in the next result's `tabs` inventory.
+
+                  - `TabID string`
+
+                    The `tab_id` of the opened tab, present in `tabs`.
+
+                  - `Type TabOpened`
+
+                    - `const TabOpenedTabOpened TabOpened = "tab_opened"`
+
+                - `type BetaBrowserStateChangeDownloadStarted struct{…}`
+
+                  A file download that started during this call.
+
+                  - `DownloadID string`
+
+                    The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+                  - `Type DownloadStarted`
+
+                    - `const DownloadStartedDownloadStarted DownloadStarted = "download_started"`
+
+                  - `URL string`
+
+                    The final post-redirect URL the download was served from.
+
+                - `type BetaBrowserStateChangeDownloadCompleted struct{…}`
+
+                  A file download that finished during this call, reported with the
+                  same `download_id` as its `download_started` — or without a prior
+                  `download_started`, when the download finished during the call that
+                  started it (at most one state change per `download_id` per result).
+
+                  - `DownloadID string`
+
+                    The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+                  - `Type DownloadCompleted`
+
+                    - `const DownloadCompletedDownloadCompleted DownloadCompleted = "download_completed"`
+
+                  - `URL string`
+
+                    The final post-redirect URL the download was served from.
+
+                  - `Path string`
+
+                    Where the executor saved the file, on the executor's filesystem. Only included when another tool in the same environment can read the file at that path.
+
+                  - `SizeBytes int64`
+
+                    The completed download's size.
+
+                - `type BetaBrowserStateChangeDownloadFailed struct{…}`
+
+                  A file download that failed — or was cancelled — during this call.
+
+                  - `DownloadID string`
+
+                    The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+                  - `Type DownloadFailed`
+
+                    - `const DownloadFailedDownloadFailed DownloadFailed = "download_failed"`
+
+                  - `URL string`
+
+                    The final post-redirect URL the download was served from.
+
+                  - `Error string`
+
+                    The failure or cancellation detail, when known.
+
         - `IsError bool`
+
+        - `ToolsetName string`
+
+          For a toolset member tool_result, the toolset family of the paired tool_use.
 
       - `type BetaServerToolUseBlockParamResp struct{…}`
 
@@ -18894,125 +23038,6 @@ func main() {
 
           Opaque metadata from prior compaction, to be round-tripped verbatim
 
-      - `type BetaMidConversationSystemBlockParamResp struct{…}`
-
-        System instructions that appear mid-conversation.
-
-        Use this block to provide or update system-level instructions at a specific
-        point in the conversation, rather than only via the top-level `system` parameter.
-
-        - `Content []BetaMidConversationSystemBlockParamContentUnionResp`
-
-          System instruction text blocks.
-
-          - `type BetaTextBlockParamResp struct{…}`
-
-          - `type BetaRequestToolAdditionBlock struct{…}`
-
-            Mid-conversation directive to surface a declared tool.
-
-            `tool` references a tool (or MCP toolset) by name from the request's
-            `tools`; it is offered to the model from this point in the
-            conversation onward.
-
-            - `Tool BetaRequestToolAdditionBlockToolUnion`
-
-              Reference to a single tool the caller declared directly in
-              `tools[]`. Does not accept the composed `{server}_{name}` form the
-              server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-              `mcp_toolset_reference` for those.
-
-              - `type BetaToolChangeToolReference struct{…}`
-
-                Reference to a single tool the caller declared directly in
-                `tools[]`. Does not accept the composed `{server}_{name}` form the
-                server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-                `mcp_toolset_reference` for those.
-
-                - `Name string`
-
-                - `Type ToolReference`
-
-                  - `const ToolReferenceToolReference ToolReference = "tool_reference"`
-
-              - `type BetaToolChangeMCPToolReference struct{…}`
-
-                Reference to a single MCP tool by its server and remote name — the
-                same `server_name`/`name` pair `mcp_tool_use` carries.
-
-                - `Name string`
-
-                - `ServerName string`
-
-                - `Type MCPToolReference`
-
-                  - `const MCPToolReferenceMCPToolReference MCPToolReference = "mcp_tool_reference"`
-
-              - `type BetaToolChangeMCPToolsetReference struct{…}`
-
-                Reference to every tool in the named MCP server's toolset.
-
-                - `ServerName string`
-
-                - `Type MCPToolsetReference`
-
-                  - `const MCPToolsetReferenceMCPToolsetReference MCPToolsetReference = "mcp_toolset_reference"`
-
-            - `Type ToolAddition`
-
-              - `const ToolAdditionToolAddition ToolAddition = "tool_addition"`
-
-            - `CacheControl BetaCacheControlEphemeral`
-
-              Create a cache control breakpoint at this content block.
-
-          - `type BetaRequestToolRemovalBlock struct{…}`
-
-            Mid-conversation directive to withdraw a tool.
-
-            `tool` references a tool (or MCP toolset) by name from the request's
-            `tools`; it is no longer offered to the model from this point in the
-            conversation onward.
-
-            - `Tool BetaRequestToolRemovalBlockToolUnion`
-
-              Reference to a single tool the caller declared directly in
-              `tools[]`. Does not accept the composed `{server}_{name}` form the
-              server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-              `mcp_toolset_reference` for those.
-
-              - `type BetaToolChangeToolReference struct{…}`
-
-                Reference to a single tool the caller declared directly in
-                `tools[]`. Does not accept the composed `{server}_{name}` form the
-                server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-                `mcp_toolset_reference` for those.
-
-              - `type BetaToolChangeMCPToolReference struct{…}`
-
-                Reference to a single MCP tool by its server and remote name — the
-                same `server_name`/`name` pair `mcp_tool_use` carries.
-
-              - `type BetaToolChangeMCPToolsetReference struct{…}`
-
-                Reference to every tool in the named MCP server's toolset.
-
-            - `Type ToolRemoval`
-
-              - `const ToolRemovalToolRemoval ToolRemoval = "tool_removal"`
-
-            - `CacheControl BetaCacheControlEphemeral`
-
-              Create a cache control breakpoint at this content block.
-
-        - `Type MidConvSystem`
-
-          - `const MidConvSystemMidConvSystem MidConvSystem = "mid_conv_system"`
-
-        - `CacheControl BetaCacheControlEphemeral`
-
-          Create a cache control breakpoint at this content block.
-
       - `type BetaRequestToolAdditionBlock struct{…}`
 
         Mid-conversation directive to surface a declared tool.
@@ -19021,6 +23046,57 @@ func main() {
         `tools`; it is offered to the model from this point in the
         conversation onward.
 
+        - `Tool BetaRequestToolAdditionBlockToolUnion`
+
+          Reference to a single tool the caller declared directly in
+          `tools[]`. Does not accept the composed `{server}_{name}` form the
+          server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+          `mcp_toolset_reference` for those.
+
+          - `type BetaToolChangeToolReference struct{…}`
+
+            Reference to a single tool the caller declared directly in
+            `tools[]`. Does not accept the composed `{server}_{name}` form the
+            server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+            `mcp_toolset_reference` for those.
+
+            - `Name string`
+
+            - `Type ToolReference`
+
+              - `const ToolReferenceToolReference ToolReference = "tool_reference"`
+
+          - `type BetaToolChangeMCPToolReference struct{…}`
+
+            Reference to a single MCP tool by its server and remote name — the
+            same `server_name`/`name` pair `mcp_tool_use` carries.
+
+            - `Name string`
+
+            - `ServerName string`
+
+            - `Type MCPToolReference`
+
+              - `const MCPToolReferenceMCPToolReference MCPToolReference = "mcp_tool_reference"`
+
+          - `type BetaToolChangeMCPToolsetReference struct{…}`
+
+            Reference to every tool in the named MCP server's toolset.
+
+            - `ServerName string`
+
+            - `Type MCPToolsetReference`
+
+              - `const MCPToolsetReferenceMCPToolsetReference MCPToolsetReference = "mcp_toolset_reference"`
+
+        - `Type ToolAddition`
+
+          - `const ToolAdditionToolAddition ToolAddition = "tool_addition"`
+
+        - `CacheControl BetaCacheControlEphemeral`
+
+          Create a cache control breakpoint at this content block.
+
       - `type BetaRequestToolRemovalBlock struct{…}`
 
         Mid-conversation directive to withdraw a tool.
@@ -19028,6 +23104,37 @@ func main() {
         `tool` references a tool (or MCP toolset) by name from the request's
         `tools`; it is no longer offered to the model from this point in the
         conversation onward.
+
+        - `Tool BetaRequestToolRemovalBlockToolUnion`
+
+          Reference to a single tool the caller declared directly in
+          `tools[]`. Does not accept the composed `{server}_{name}` form the
+          server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+          `mcp_toolset_reference` for those.
+
+          - `type BetaToolChangeToolReference struct{…}`
+
+            Reference to a single tool the caller declared directly in
+            `tools[]`. Does not accept the composed `{server}_{name}` form the
+            server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+            `mcp_toolset_reference` for those.
+
+          - `type BetaToolChangeMCPToolReference struct{…}`
+
+            Reference to a single MCP tool by its server and remote name — the
+            same `server_name`/`name` pair `mcp_tool_use` carries.
+
+          - `type BetaToolChangeMCPToolsetReference struct{…}`
+
+            Reference to every tool in the named MCP server's toolset.
+
+        - `Type ToolRemoval`
+
+          - `const ToolRemovalToolRemoval ToolRemoval = "tool_removal"`
+
+        - `CacheControl BetaCacheControlEphemeral`
+
+          Create a cache control breakpoint at this content block.
 
       - `type BetaFallbackBlockParamResp struct{…}`
 
@@ -19168,262 +23275,6 @@ func main() {
     An external identifier for the user who is associated with the request.
 
     This should be a uuid, hash value, or other opaque identifier. Anthropic may use this id to help detect abuse. Do not include any identifying information such as name, email address, or phone number.
-
-### Beta Mid Conversation System Block Param
-
-- `type BetaMidConversationSystemBlockParamResp struct{…}`
-
-  System instructions that appear mid-conversation.
-
-  Use this block to provide or update system-level instructions at a specific
-  point in the conversation, rather than only via the top-level `system` parameter.
-
-  - `Content []BetaMidConversationSystemBlockParamContentUnionResp`
-
-    System instruction text blocks.
-
-    - `type BetaTextBlockParamResp struct{…}`
-
-      - `Text string`
-
-      - `Type Text`
-
-        - `const TextText Text = "text"`
-
-      - `CacheControl BetaCacheControlEphemeral`
-
-        Create a cache control breakpoint at this content block.
-
-        - `Type Ephemeral`
-
-          - `const EphemeralEphemeral Ephemeral = "ephemeral"`
-
-        - `TTL BetaCacheControlEphemeralTTL`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`. See [prompt caching pricing](../build-with-claude/build-with-claude-prompt-caching.md) for details.
-
-          - `const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"`
-
-          - `const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"`
-
-      - `Citations []BetaTextCitationParamUnionResp`
-
-        - `type BetaCitationCharLocationParamResp struct{…}`
-
-          - `CitedText string`
-
-          - `DocumentIndex int64`
-
-          - `DocumentTitle string`
-
-          - `EndCharIndex int64`
-
-          - `StartCharIndex int64`
-
-          - `Type CharLocation`
-
-            - `const CharLocationCharLocation CharLocation = "char_location"`
-
-        - `type BetaCitationPageLocationParamResp struct{…}`
-
-          - `CitedText string`
-
-          - `DocumentIndex int64`
-
-          - `DocumentTitle string`
-
-          - `EndPageNumber int64`
-
-          - `StartPageNumber int64`
-
-          - `Type PageLocation`
-
-            - `const PageLocationPageLocation PageLocation = "page_location"`
-
-        - `type BetaCitationContentBlockLocationParamResp struct{…}`
-
-          - `CitedText string`
-
-            The full text of the cited block range, concatenated.
-
-            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-          - `DocumentIndex int64`
-
-          - `DocumentTitle string`
-
-          - `EndBlockIndex int64`
-
-            Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-          - `StartBlockIndex int64`
-
-            0-based index of the first cited block in the source's `content` array.
-
-          - `Type ContentBlockLocation`
-
-            - `const ContentBlockLocationContentBlockLocation ContentBlockLocation = "content_block_location"`
-
-        - `type BetaCitationWebSearchResultLocationParamResp struct{…}`
-
-          - `CitedText string`
-
-          - `EncryptedIndex string`
-
-          - `Title string`
-
-          - `Type WebSearchResultLocation`
-
-            - `const WebSearchResultLocationWebSearchResultLocation WebSearchResultLocation = "web_search_result_location"`
-
-          - `URL string`
-
-        - `type BetaCitationSearchResultLocationParamResp struct{…}`
-
-          - `CitedText string`
-
-            The full text of the cited block range, concatenated.
-
-            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-          - `EndBlockIndex int64`
-
-            Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-          - `SearchResultIndex int64`
-
-            0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-            Counted separately from `document_index`; server-side web search results are not included in this count.
-
-          - `Source string`
-
-          - `StartBlockIndex int64`
-
-            0-based index of the first cited block in the source's `content` array.
-
-          - `Title string`
-
-          - `Type SearchResultLocation`
-
-            - `const SearchResultLocationSearchResultLocation SearchResultLocation = "search_result_location"`
-
-    - `type BetaRequestToolAdditionBlock struct{…}`
-
-      Mid-conversation directive to surface a declared tool.
-
-      `tool` references a tool (or MCP toolset) by name from the request's
-      `tools`; it is offered to the model from this point in the
-      conversation onward.
-
-      - `Tool BetaRequestToolAdditionBlockToolUnion`
-
-        Reference to a single tool the caller declared directly in
-        `tools[]`. Does not accept the composed `{server}_{name}` form the
-        server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-        `mcp_toolset_reference` for those.
-
-        - `type BetaToolChangeToolReference struct{…}`
-
-          Reference to a single tool the caller declared directly in
-          `tools[]`. Does not accept the composed `{server}_{name}` form the
-          server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-          `mcp_toolset_reference` for those.
-
-          - `Name string`
-
-          - `Type ToolReference`
-
-            - `const ToolReferenceToolReference ToolReference = "tool_reference"`
-
-        - `type BetaToolChangeMCPToolReference struct{…}`
-
-          Reference to a single MCP tool by its server and remote name — the
-          same `server_name`/`name` pair `mcp_tool_use` carries.
-
-          - `Name string`
-
-          - `ServerName string`
-
-          - `Type MCPToolReference`
-
-            - `const MCPToolReferenceMCPToolReference MCPToolReference = "mcp_tool_reference"`
-
-        - `type BetaToolChangeMCPToolsetReference struct{…}`
-
-          Reference to every tool in the named MCP server's toolset.
-
-          - `ServerName string`
-
-          - `Type MCPToolsetReference`
-
-            - `const MCPToolsetReferenceMCPToolsetReference MCPToolsetReference = "mcp_toolset_reference"`
-
-      - `Type ToolAddition`
-
-        - `const ToolAdditionToolAddition ToolAddition = "tool_addition"`
-
-      - `CacheControl BetaCacheControlEphemeral`
-
-        Create a cache control breakpoint at this content block.
-
-    - `type BetaRequestToolRemovalBlock struct{…}`
-
-      Mid-conversation directive to withdraw a tool.
-
-      `tool` references a tool (or MCP toolset) by name from the request's
-      `tools`; it is no longer offered to the model from this point in the
-      conversation onward.
-
-      - `Tool BetaRequestToolRemovalBlockToolUnion`
-
-        Reference to a single tool the caller declared directly in
-        `tools[]`. Does not accept the composed `{server}_{name}` form the
-        server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-        `mcp_toolset_reference` for those.
-
-        - `type BetaToolChangeToolReference struct{…}`
-
-          Reference to a single tool the caller declared directly in
-          `tools[]`. Does not accept the composed `{server}_{name}` form the
-          server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-          `mcp_toolset_reference` for those.
-
-        - `type BetaToolChangeMCPToolReference struct{…}`
-
-          Reference to a single MCP tool by its server and remote name — the
-          same `server_name`/`name` pair `mcp_tool_use` carries.
-
-        - `type BetaToolChangeMCPToolsetReference struct{…}`
-
-          Reference to every tool in the named MCP server's toolset.
-
-      - `Type ToolRemoval`
-
-        - `const ToolRemovalToolRemoval ToolRemoval = "tool_removal"`
-
-      - `CacheControl BetaCacheControlEphemeral`
-
-        Create a cache control breakpoint at this content block.
-
-  - `Type MidConvSystem`
-
-    - `const MidConvSystemMidConvSystem MidConvSystem = "mid_conv_system"`
-
-  - `CacheControl BetaCacheControlEphemeral`
-
-    Create a cache control breakpoint at this content block.
 
 ### Beta Output Config
 
@@ -20063,6 +23914,10 @@ func main() {
           - `Type CodeExecution20260120`
 
             - `const CodeExecution20260120CodeExecution20260120 CodeExecution20260120 = "code_execution_20260120"`
+
+      - `ToolsetName string`
+
+        For a toolset member tool_use, the toolset family.
 
     - `type BetaServerToolUseBlock struct{…}`
 
@@ -21604,6 +25459,10 @@ func main() {
             - `Type CodeExecution20260120`
 
               - `const CodeExecution20260120CodeExecution20260120 CodeExecution20260120 = "code_execution_20260120"`
+
+        - `ToolsetName string`
+
+          For a toolset member tool_use, the toolset family.
 
       - `type BetaServerToolUseBlock struct{…}`
 
@@ -23162,6 +27021,10 @@ func main() {
               - `Type CodeExecution20260120`
 
                 - `const CodeExecution20260120CodeExecution20260120 CodeExecution20260120 = "code_execution_20260120"`
+
+          - `ToolsetName string`
+
+            For a toolset member tool_use, the toolset family.
 
         - `type BetaServerToolUseBlock struct{…}`
 
@@ -25016,6 +28879,18 @@ func main() {
             - `CacheControl BetaCacheControlEphemeral`
 
               Create a cache control breakpoint at this content block.
+
+            - `Transformations BetaImageTransformationsParamResp`
+
+              Configures the transformations the server applies to this image before the model observes it. Each key names a condition the server transforms images for; its value selects the transformation applied. Omitted keys keep their default behavior, and an empty object is equivalent to omitting the field.
+
+              - `OversizedImage BetaImageTransformationsParamOversizedImage`
+
+                What the server does when this image exceeds the model's maximum image size. `"downsize"` (the default) scales the image down to fit, which changes the dimensions the model observes without telling you. `"error"` instead rejects the request with a 400 error naming the image's dimensions and the largest dimensions that fit, so you can scale the image deliberately — your image is never silently scaled down.
+
+                - `const BetaImageTransformationsParamOversizedImageDownsize BetaImageTransformationsParamOversizedImage = "downsize"`
+
+                - `const BetaImageTransformationsParamOversizedImageError BetaImageTransformationsParamOversizedImage = "error"`
 
       - `Type Content`
 
@@ -27642,6 +31517,18 @@ func main() {
 
           Create a cache control breakpoint at this content block.
 
+        - `Transformations BetaImageTransformationsParamResp`
+
+          Configures the transformations the server applies to this image before the model observes it. Each key names a condition the server transforms images for; its value selects the transformation applied. Omitted keys keep their default behavior, and an empty object is equivalent to omitting the field.
+
+          - `OversizedImage BetaImageTransformationsParamOversizedImage`
+
+            What the server does when this image exceeds the model's maximum image size. `"downsize"` (the default) scales the image down to fit, which changes the dimensions the model observes without telling you. `"error"` instead rejects the request with a 400 error naming the image's dimensions and the largest dimensions that fit, so you can scale the image deliberately — your image is never silently scaled down.
+
+            - `const BetaImageTransformationsParamOversizedImageDownsize BetaImageTransformationsParamOversizedImage = "downsize"`
+
+            - `const BetaImageTransformationsParamOversizedImageError BetaImageTransformationsParamOversizedImage = "error"`
+
       - `type BetaSearchResultBlockParamResp struct{…}`
 
         - `Content []BetaTextBlockParamResp`
@@ -27760,7 +31647,134 @@ func main() {
 
           Create a cache control breakpoint at this content block.
 
+      - `type BetaBrowserStateBlockParamResp struct{…}`
+
+        The caller's browser state after a browser toolset member call —
+        the full inventory of open tabs, which tab is active, and any side
+        effects (tabs opened, download state changes) the call produced.
+
+        At most one per `tool_result`, only on a non-error result answering a
+        browser toolset member `tool_use`. The server renders the
+        model-visible text from it; the model never sees the raw fields.
+
+        - `Tabs []BetaBrowserStateTabEntry`
+
+          All tabs open in the browser after this call — the full inventory, not a delta. May be empty. Whenever non-empty, exactly one entry carries `active: true`.
+
+          - `TabID string`
+
+            The caller-assigned identifier for this tab, unique within the inventory.
+
+          - `Title string`
+
+            The title of the page the tab is showing. May be empty.
+
+          - `URL string`
+
+            The URL of the page the tab is showing. May be empty.
+
+          - `Active bool`
+
+            Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
+
+        - `Type BrowserState`
+
+          - `const BrowserStateBrowserState BrowserState = "browser_state"`
+
+        - `CacheControl BetaCacheControlEphemeral`
+
+          Create a cache control breakpoint at this content block.
+
+        - `StateChanges []BetaBrowserStateChangeUnion`
+
+          Tabs opened and download state changes during this call. "Nothing to report" is expressed by omitting the field, never by an empty list.
+
+          - `type BetaBrowserStateChangeTabOpened struct{…}`
+
+            A tab this call's execution opened that remains open at its end —
+            the creation delta of the `tabs` inventory, not an event log.
+
+            Carries only the `tab_id`; the tab's `title` and `url` live on its
+            `tabs` entry, which must include the same `tab_id`. A tab opened
+            during a failed call gets no deferred `tab_opened`; it simply appears
+            in the next result's `tabs` inventory.
+
+            - `TabID string`
+
+              The `tab_id` of the opened tab, present in `tabs`.
+
+            - `Type TabOpened`
+
+              - `const TabOpenedTabOpened TabOpened = "tab_opened"`
+
+          - `type BetaBrowserStateChangeDownloadStarted struct{…}`
+
+            A file download that started during this call.
+
+            - `DownloadID string`
+
+              The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+            - `Type DownloadStarted`
+
+              - `const DownloadStartedDownloadStarted DownloadStarted = "download_started"`
+
+            - `URL string`
+
+              The final post-redirect URL the download was served from.
+
+          - `type BetaBrowserStateChangeDownloadCompleted struct{…}`
+
+            A file download that finished during this call, reported with the
+            same `download_id` as its `download_started` — or without a prior
+            `download_started`, when the download finished during the call that
+            started it (at most one state change per `download_id` per result).
+
+            - `DownloadID string`
+
+              The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+            - `Type DownloadCompleted`
+
+              - `const DownloadCompletedDownloadCompleted DownloadCompleted = "download_completed"`
+
+            - `URL string`
+
+              The final post-redirect URL the download was served from.
+
+            - `Path string`
+
+              Where the executor saved the file, on the executor's filesystem. Only included when another tool in the same environment can read the file at that path.
+
+            - `SizeBytes int64`
+
+              The completed download's size.
+
+          - `type BetaBrowserStateChangeDownloadFailed struct{…}`
+
+            A file download that failed — or was cancelled — during this call.
+
+            - `DownloadID string`
+
+              The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+            - `Type DownloadFailed`
+
+              - `const DownloadFailedDownloadFailed DownloadFailed = "download_failed"`
+
+            - `URL string`
+
+              The final post-redirect URL the download was served from.
+
+            - `Error string`
+
+              The failure or cancellation detail, when known.
+
   - `IsError bool`
+
+  - `ToolsetName string`
+
+    For a toolset member tool_result, the toolset family of the paired tool_use.
 
 ### Beta Tool Search Tool Bm25 20251119
 
@@ -28639,6 +32653,412 @@ func main() {
 
       When true, guarantees schema validation on tool names and inputs
 
+  - `type BetaBrowserToolset20260801 struct{…}`
+
+    The browser toolset: a single `tools[]` entry (carrying no
+    `name`) that declares the browser tool family. The model is served
+    the family's tool with any members disabled via `configs` removed
+    from its schema.
+
+    - `Type BrowserToolset20260801`
+
+      - `const BrowserToolset20260801BrowserToolset20260801 BrowserToolset20260801 = "browser_toolset_20260801"`
+
+    - `AllowedCallers []string`
+
+      - `const BetaBrowserToolset20260801AllowedCallerDirect BetaBrowserToolset20260801AllowedCaller = "direct"`
+
+      - `const BetaBrowserToolset20260801AllowedCallerCodeExecution20250825 BetaBrowserToolset20260801AllowedCaller = "code_execution_20250825"`
+
+      - `const BetaBrowserToolset20260801AllowedCallerCodeExecution20260120 BetaBrowserToolset20260801AllowedCaller = "code_execution_20260120"`
+
+      - `const BetaBrowserToolset20260801AllowedCallerCodeExecution20260521 BetaBrowserToolset20260801AllowedCaller = "code_execution_20260521"`
+
+    - `CacheControl BetaCacheControlEphemeral`
+
+      Create a cache control breakpoint at this content block.
+
+    - `Configs BetaBrowserToolsetConfigs`
+
+      Per-member configuration for `browser_toolset_20260801`: one
+      optional field per member tool, keyed by the member name — the same
+      name the member's `tool_use` blocks carry. Every member is an
+      accepted key, and a member's defaults apply wherever its key is
+      absent. Unknown keys are rejected: the field set is this toolset
+      version's complete member set.
+
+      - `CloseTab BetaBrowserCloseTabConfig`
+
+        `close_tab`'s config overrides.
+
+        - `DeferLoading bool`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Enabled bool`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `DoubleClick BetaBrowserDoubleClickConfig`
+
+        `double_click`'s config overrides.
+
+        - `DeferLoading bool`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Enabled bool`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `FileUpload BetaBrowserFileUploadConfig`
+
+        `file_upload`'s config overrides.
+
+        - `DeferLoading bool`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Enabled bool`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `Find BetaBrowserFindConfig`
+
+        `find`'s config overrides.
+
+        - `DeferLoading bool`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Enabled bool`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `FormInput BetaBrowserFormInputConfig`
+
+        `form_input`'s config overrides.
+
+        - `DeferLoading bool`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Enabled bool`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `GetPageText BetaBrowserGetPageTextConfig`
+
+        `get_page_text`'s config overrides.
+
+        - `DeferLoading bool`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Enabled bool`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `HoldKey BetaBrowserHoldKeyConfig`
+
+        `hold_key`'s config overrides.
+
+        - `DeferLoading bool`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Enabled bool`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `Hover BetaBrowserHoverConfig`
+
+        `hover`'s config overrides.
+
+        - `DeferLoading bool`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Enabled bool`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `JavascriptExec BetaBrowserJavascriptExecConfig`
+
+        `javascript_exec`'s config overrides.
+
+        - `DeferLoading bool`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Enabled bool`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `Key BetaBrowserKeyConfig`
+
+        `key`'s config overrides.
+
+        - `DeferLoading bool`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Enabled bool`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `LeftClick BetaBrowserLeftClickConfig`
+
+        `left_click`'s config overrides.
+
+        - `DeferLoading bool`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Enabled bool`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `LeftClickDrag BetaBrowserLeftClickDragConfig`
+
+        `left_click_drag`'s config overrides.
+
+        - `DeferLoading bool`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Enabled bool`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `LeftMouseDown BetaBrowserLeftMouseDownConfig`
+
+        `left_mouse_down`'s config overrides.
+
+        - `DeferLoading bool`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Enabled bool`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `LeftMouseUp BetaBrowserLeftMouseUpConfig`
+
+        `left_mouse_up`'s config overrides.
+
+        - `DeferLoading bool`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Enabled bool`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `ListTabs BetaBrowserListTabsConfig`
+
+        `list_tabs`'s config overrides.
+
+        - `DeferLoading bool`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Enabled bool`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `MiddleClick BetaBrowserMiddleClickConfig`
+
+        `middle_click`'s config overrides.
+
+        - `DeferLoading bool`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Enabled bool`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `MouseMove BetaBrowserMouseMoveConfig`
+
+        `mouse_move`'s config overrides.
+
+        - `DeferLoading bool`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Enabled bool`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `Navigate BetaBrowserNavigateConfig`
+
+        `navigate`'s config overrides.
+
+        - `DeferLoading bool`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Enabled bool`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `NewTab BetaBrowserNewTabConfig`
+
+        `new_tab`'s config overrides.
+
+        - `DeferLoading bool`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Enabled bool`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `ReadConsole BetaBrowserReadConsoleConfig`
+
+        `read_console`'s config overrides.
+
+        - `DeferLoading bool`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Enabled bool`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `ReadNetwork BetaBrowserReadNetworkConfig`
+
+        `read_network`'s config overrides.
+
+        - `DeferLoading bool`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Enabled bool`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `ReadPage BetaBrowserReadPageConfig`
+
+        `read_page`'s config overrides.
+
+        - `DeferLoading bool`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Enabled bool`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `RightClick BetaBrowserRightClickConfig`
+
+        `right_click`'s config overrides.
+
+        - `DeferLoading bool`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Enabled bool`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `Screenshot BetaBrowserScreenshotConfig`
+
+        `screenshot`'s config overrides.
+
+        - `DeferLoading bool`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Enabled bool`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `Scroll BetaBrowserScrollConfig`
+
+        `scroll`'s config overrides.
+
+        - `DeferLoading bool`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Enabled bool`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `ScrollTo BetaBrowserScrollToConfig`
+
+        `scroll_to`'s config overrides.
+
+        - `DeferLoading bool`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Enabled bool`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `SwitchTab BetaBrowserSwitchTabConfig`
+
+        `switch_tab`'s config overrides.
+
+        - `DeferLoading bool`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Enabled bool`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `TripleClick BetaBrowserTripleClickConfig`
+
+        `triple_click`'s config overrides.
+
+        - `DeferLoading bool`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Enabled bool`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `Type BetaBrowserTypeConfig`
+
+        `type`'s config overrides.
+
+        - `DeferLoading bool`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Enabled bool`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `Wait BetaBrowserWaitConfig`
+
+        `wait`'s config overrides.
+
+        - `DeferLoading bool`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Enabled bool`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `Zoom BetaBrowserZoomConfig`
+
+        `zoom`'s config overrides.
+
+        - `DeferLoading bool`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Enabled bool`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
   - `type BetaToolComputerUse20241022 struct{…}`
 
     - `DisplayHeightPx int64`
@@ -28868,6 +33288,248 @@ func main() {
     - `Strict bool`
 
       When true, guarantees schema validation on tool names and inputs
+
+  - `type BetaComputerToolset20260801 struct{…}`
+
+    The computer toolset: a single `tools[]` entry (carrying no
+    `name`) that declares the computer tool family. The model is
+    served the family's tool with any members disabled via `configs`
+    removed from its schema. Every member is enabled by default, zoom
+    included. The single-tool options `display_number` and
+    `enable_zoom` are not fields of a toolset entry — it carries only
+    `type`, `configs`, and `cache_control`; zoom is controlled
+    via `configs.zoom.enabled`.
+
+    - `Type ComputerToolset20260801`
+
+      - `const ComputerToolset20260801ComputerToolset20260801 ComputerToolset20260801 = "computer_toolset_20260801"`
+
+    - `AllowedCallers []string`
+
+      - `const BetaComputerToolset20260801AllowedCallerDirect BetaComputerToolset20260801AllowedCaller = "direct"`
+
+      - `const BetaComputerToolset20260801AllowedCallerCodeExecution20250825 BetaComputerToolset20260801AllowedCaller = "code_execution_20250825"`
+
+      - `const BetaComputerToolset20260801AllowedCallerCodeExecution20260120 BetaComputerToolset20260801AllowedCaller = "code_execution_20260120"`
+
+      - `const BetaComputerToolset20260801AllowedCallerCodeExecution20260521 BetaComputerToolset20260801AllowedCaller = "code_execution_20260521"`
+
+    - `CacheControl BetaCacheControlEphemeral`
+
+      Create a cache control breakpoint at this content block.
+
+    - `Configs BetaComputerToolsetConfigs`
+
+      Per-member configuration for `computer_toolset_20260801`: one
+      optional field per member tool, keyed by the member name — the same
+      name the member's `tool_use` blocks carry. Every member is an
+      accepted key, and a member's defaults apply wherever its key is
+      absent. Unknown keys are rejected: the field set is this toolset
+      version's complete member set.
+
+      - `CursorPosition BetaComputerCursorPositionConfig`
+
+        `cursor_position`'s config overrides.
+
+        - `DeferLoading bool`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Enabled bool`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `DoubleClick BetaComputerDoubleClickConfig`
+
+        `double_click`'s config overrides.
+
+        - `DeferLoading bool`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Enabled bool`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `HoldKey BetaComputerHoldKeyConfig`
+
+        `hold_key`'s config overrides.
+
+        - `DeferLoading bool`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Enabled bool`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `Key BetaComputerKeyConfig`
+
+        `key`'s config overrides.
+
+        - `DeferLoading bool`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Enabled bool`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `LeftClick BetaComputerLeftClickConfig`
+
+        `left_click`'s config overrides.
+
+        - `DeferLoading bool`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Enabled bool`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `LeftClickDrag BetaComputerLeftClickDragConfig`
+
+        `left_click_drag`'s config overrides.
+
+        - `DeferLoading bool`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Enabled bool`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `LeftMouseDown BetaComputerLeftMouseDownConfig`
+
+        `left_mouse_down`'s config overrides.
+
+        - `DeferLoading bool`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Enabled bool`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `LeftMouseUp BetaComputerLeftMouseUpConfig`
+
+        `left_mouse_up`'s config overrides.
+
+        - `DeferLoading bool`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Enabled bool`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `MiddleClick BetaComputerMiddleClickConfig`
+
+        `middle_click`'s config overrides.
+
+        - `DeferLoading bool`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Enabled bool`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `MouseMove BetaComputerMouseMoveConfig`
+
+        `mouse_move`'s config overrides.
+
+        - `DeferLoading bool`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Enabled bool`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `RightClick BetaComputerRightClickConfig`
+
+        `right_click`'s config overrides.
+
+        - `DeferLoading bool`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Enabled bool`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `Screenshot BetaComputerScreenshotConfig`
+
+        `screenshot`'s config overrides.
+
+        - `DeferLoading bool`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Enabled bool`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `Scroll BetaComputerScrollConfig`
+
+        `scroll`'s config overrides.
+
+        - `DeferLoading bool`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Enabled bool`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `TripleClick BetaComputerTripleClickConfig`
+
+        `triple_click`'s config overrides.
+
+        - `DeferLoading bool`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Enabled bool`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `Type BetaComputerTypeConfig`
+
+        `type`'s config overrides.
+
+        - `DeferLoading bool`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Enabled bool`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `Wait BetaComputerWaitConfig`
+
+        `wait`'s config overrides.
+
+        - `DeferLoading bool`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Enabled bool`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `Zoom BetaComputerZoomConfig`
+
+        `zoom`'s config overrides.
+
+        - `DeferLoading bool`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Enabled bool`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
   - `type BetaToolTextEditor20250124 struct{…}`
 
@@ -29692,6 +34354,10 @@ func main() {
 
         - `const CodeExecution20260120CodeExecution20260120 CodeExecution20260120 = "code_execution_20260120"`
 
+  - `ToolsetName string`
+
+    For a toolset member tool_use, the toolset family.
+
 ### Beta Tool Use Block Param
 
 - `type BetaToolUseBlockParamResp struct{…}`
@@ -29758,6 +34424,10 @@ func main() {
       - `Type CodeExecution20260120`
 
         - `const CodeExecution20260120CodeExecution20260120 CodeExecution20260120 = "code_execution_20260120"`
+
+  - `ToolsetName string`
+
+    For a toolset member tool_use, the toolset family this member belongs to.
 
 ### Beta Tool Uses Keep
 
@@ -30482,6 +35152,18 @@ func main() {
               - `CacheControl BetaCacheControlEphemeral`
 
                 Create a cache control breakpoint at this content block.
+
+              - `Transformations BetaImageTransformationsParamResp`
+
+                Configures the transformations the server applies to this image before the model observes it. Each key names a condition the server transforms images for; its value selects the transformation applied. Omitted keys keep their default behavior, and an empty object is equivalent to omitting the field.
+
+                - `OversizedImage BetaImageTransformationsParamOversizedImage`
+
+                  What the server does when this image exceeds the model's maximum image size. `"downsize"` (the default) scales the image down to fit, which changes the dimensions the model observes without telling you. `"error"` instead rejects the request with a 400 error naming the image's dimensions and the largest dimensions that fit, so you can scale the image deliberately — your image is never silently scaled down.
+
+                  - `const BetaImageTransformationsParamOversizedImageDownsize BetaImageTransformationsParamOversizedImage = "downsize"`
+
+                  - `const BetaImageTransformationsParamOversizedImageError BetaImageTransformationsParamOversizedImage = "error"`
 
         - `Type Content`
 
@@ -31241,6 +35923,18 @@ func main() {
                   - `CacheControl BetaCacheControlEphemeral`
 
                     Create a cache control breakpoint at this content block.
+
+                  - `Transformations BetaImageTransformationsParamResp`
+
+                    Configures the transformations the server applies to this image before the model observes it. Each key names a condition the server transforms images for; its value selects the transformation applied. Omitted keys keep their default behavior, and an empty object is equivalent to omitting the field.
+
+                    - `OversizedImage BetaImageTransformationsParamOversizedImage`
+
+                      What the server does when this image exceeds the model's maximum image size. `"downsize"` (the default) scales the image down to fit, which changes the dimensions the model observes without telling you. `"error"` instead rejects the request with a 400 error naming the image's dimensions and the largest dimensions that fit, so you can scale the image deliberately — your image is never silently scaled down.
+
+                      - `const BetaImageTransformationsParamOversizedImageDownsize BetaImageTransformationsParamOversizedImage = "downsize"`
+
+                      - `const BetaImageTransformationsParamOversizedImageError BetaImageTransformationsParamOversizedImage = "error"`
 
             - `Type Content`
 
@@ -32320,6 +37014,18 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 Create a cache control breakpoint at this content block.
 
+              - `Transformations BetaImageTransformationsParamResp`
+
+                Configures the transformations the server applies to this image before the model observes it. Each key names a condition the server transforms images for; its value selects the transformation applied. Omitted keys keep their default behavior, and an empty object is equivalent to omitting the field.
+
+                - `OversizedImage BetaImageTransformationsParamOversizedImage`
+
+                  What the server does when this image exceeds the model's maximum image size. `"downsize"` (the default) scales the image down to fit, which changes the dimensions the model observes without telling you. `"error"` instead rejects the request with a 400 error naming the image's dimensions and the largest dimensions that fit, so you can scale the image deliberately — your image is never silently scaled down.
+
+                  - `const BetaImageTransformationsParamOversizedImageDownsize BetaImageTransformationsParamOversizedImage = "downsize"`
+
+                  - `const BetaImageTransformationsParamOversizedImageError BetaImageTransformationsParamOversizedImage = "error"`
+
             - `type BetaRequestDocumentBlock struct{…}`
 
               - `Source BetaRequestDocumentBlockSourceUnion`
@@ -32496,6 +37202,10 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     - `const CodeExecution20260120CodeExecution20260120 CodeExecution20260120 = "code_execution_20260120"`
 
+              - `ToolsetName string`
+
+                For a toolset member tool_use, the toolset family this member belongs to.
+
             - `type BetaToolResultBlockParamResp struct{…}`
 
               - `ToolUseID string`
@@ -32534,7 +37244,134 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                       Create a cache control breakpoint at this content block.
 
+                  - `type BetaBrowserStateBlockParamResp struct{…}`
+
+                    The caller's browser state after a browser toolset member call —
+                    the full inventory of open tabs, which tab is active, and any side
+                    effects (tabs opened, download state changes) the call produced.
+
+                    At most one per `tool_result`, only on a non-error result answering a
+                    browser toolset member `tool_use`. The server renders the
+                    model-visible text from it; the model never sees the raw fields.
+
+                    - `Tabs []BetaBrowserStateTabEntry`
+
+                      All tabs open in the browser after this call — the full inventory, not a delta. May be empty. Whenever non-empty, exactly one entry carries `active: true`.
+
+                      - `TabID string`
+
+                        The caller-assigned identifier for this tab, unique within the inventory.
+
+                      - `Title string`
+
+                        The title of the page the tab is showing. May be empty.
+
+                      - `URL string`
+
+                        The URL of the page the tab is showing. May be empty.
+
+                      - `Active bool`
+
+                        Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
+
+                    - `Type BrowserState`
+
+                      - `const BrowserStateBrowserState BrowserState = "browser_state"`
+
+                    - `CacheControl BetaCacheControlEphemeral`
+
+                      Create a cache control breakpoint at this content block.
+
+                    - `StateChanges []BetaBrowserStateChangeUnion`
+
+                      Tabs opened and download state changes during this call. "Nothing to report" is expressed by omitting the field, never by an empty list.
+
+                      - `type BetaBrowserStateChangeTabOpened struct{…}`
+
+                        A tab this call's execution opened that remains open at its end —
+                        the creation delta of the `tabs` inventory, not an event log.
+
+                        Carries only the `tab_id`; the tab's `title` and `url` live on its
+                        `tabs` entry, which must include the same `tab_id`. A tab opened
+                        during a failed call gets no deferred `tab_opened`; it simply appears
+                        in the next result's `tabs` inventory.
+
+                        - `TabID string`
+
+                          The `tab_id` of the opened tab, present in `tabs`.
+
+                        - `Type TabOpened`
+
+                          - `const TabOpenedTabOpened TabOpened = "tab_opened"`
+
+                      - `type BetaBrowserStateChangeDownloadStarted struct{…}`
+
+                        A file download that started during this call.
+
+                        - `DownloadID string`
+
+                          The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+                        - `Type DownloadStarted`
+
+                          - `const DownloadStartedDownloadStarted DownloadStarted = "download_started"`
+
+                        - `URL string`
+
+                          The final post-redirect URL the download was served from.
+
+                      - `type BetaBrowserStateChangeDownloadCompleted struct{…}`
+
+                        A file download that finished during this call, reported with the
+                        same `download_id` as its `download_started` — or without a prior
+                        `download_started`, when the download finished during the call that
+                        started it (at most one state change per `download_id` per result).
+
+                        - `DownloadID string`
+
+                          The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+                        - `Type DownloadCompleted`
+
+                          - `const DownloadCompletedDownloadCompleted DownloadCompleted = "download_completed"`
+
+                        - `URL string`
+
+                          The final post-redirect URL the download was served from.
+
+                        - `Path string`
+
+                          Where the executor saved the file, on the executor's filesystem. Only included when another tool in the same environment can read the file at that path.
+
+                        - `SizeBytes int64`
+
+                          The completed download's size.
+
+                      - `type BetaBrowserStateChangeDownloadFailed struct{…}`
+
+                        A file download that failed — or was cancelled — during this call.
+
+                        - `DownloadID string`
+
+                          The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+                        - `Type DownloadFailed`
+
+                          - `const DownloadFailedDownloadFailed DownloadFailed = "download_failed"`
+
+                        - `URL string`
+
+                          The final post-redirect URL the download was served from.
+
+                        - `Error string`
+
+                          The failure or cancellation detail, when known.
+
               - `IsError bool`
+
+              - `ToolsetName string`
+
+                For a toolset member tool_result, the toolset family of the paired tool_use.
 
             - `type BetaServerToolUseBlockParamResp struct{…}`
 
@@ -33115,125 +37952,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 Opaque metadata from prior compaction, to be round-tripped verbatim
 
-            - `type BetaMidConversationSystemBlockParamResp struct{…}`
-
-              System instructions that appear mid-conversation.
-
-              Use this block to provide or update system-level instructions at a specific
-              point in the conversation, rather than only via the top-level `system` parameter.
-
-              - `Content []BetaMidConversationSystemBlockParamContentUnionResp`
-
-                System instruction text blocks.
-
-                - `type BetaTextBlockParamResp struct{…}`
-
-                - `type BetaRequestToolAdditionBlock struct{…}`
-
-                  Mid-conversation directive to surface a declared tool.
-
-                  `tool` references a tool (or MCP toolset) by name from the request's
-                  `tools`; it is offered to the model from this point in the
-                  conversation onward.
-
-                  - `Tool BetaRequestToolAdditionBlockToolUnion`
-
-                    Reference to a single tool the caller declared directly in
-                    `tools[]`. Does not accept the composed `{server}_{name}` form the
-                    server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-                    `mcp_toolset_reference` for those.
-
-                    - `type BetaToolChangeToolReference struct{…}`
-
-                      Reference to a single tool the caller declared directly in
-                      `tools[]`. Does not accept the composed `{server}_{name}` form the
-                      server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-                      `mcp_toolset_reference` for those.
-
-                      - `Name string`
-
-                      - `Type ToolReference`
-
-                        - `const ToolReferenceToolReference ToolReference = "tool_reference"`
-
-                    - `type BetaToolChangeMCPToolReference struct{…}`
-
-                      Reference to a single MCP tool by its server and remote name — the
-                      same `server_name`/`name` pair `mcp_tool_use` carries.
-
-                      - `Name string`
-
-                      - `ServerName string`
-
-                      - `Type MCPToolReference`
-
-                        - `const MCPToolReferenceMCPToolReference MCPToolReference = "mcp_tool_reference"`
-
-                    - `type BetaToolChangeMCPToolsetReference struct{…}`
-
-                      Reference to every tool in the named MCP server's toolset.
-
-                      - `ServerName string`
-
-                      - `Type MCPToolsetReference`
-
-                        - `const MCPToolsetReferenceMCPToolsetReference MCPToolsetReference = "mcp_toolset_reference"`
-
-                  - `Type ToolAddition`
-
-                    - `const ToolAdditionToolAddition ToolAddition = "tool_addition"`
-
-                  - `CacheControl BetaCacheControlEphemeral`
-
-                    Create a cache control breakpoint at this content block.
-
-                - `type BetaRequestToolRemovalBlock struct{…}`
-
-                  Mid-conversation directive to withdraw a tool.
-
-                  `tool` references a tool (or MCP toolset) by name from the request's
-                  `tools`; it is no longer offered to the model from this point in the
-                  conversation onward.
-
-                  - `Tool BetaRequestToolRemovalBlockToolUnion`
-
-                    Reference to a single tool the caller declared directly in
-                    `tools[]`. Does not accept the composed `{server}_{name}` form the
-                    server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-                    `mcp_toolset_reference` for those.
-
-                    - `type BetaToolChangeToolReference struct{…}`
-
-                      Reference to a single tool the caller declared directly in
-                      `tools[]`. Does not accept the composed `{server}_{name}` form the
-                      server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-                      `mcp_toolset_reference` for those.
-
-                    - `type BetaToolChangeMCPToolReference struct{…}`
-
-                      Reference to a single MCP tool by its server and remote name — the
-                      same `server_name`/`name` pair `mcp_tool_use` carries.
-
-                    - `type BetaToolChangeMCPToolsetReference struct{…}`
-
-                      Reference to every tool in the named MCP server's toolset.
-
-                  - `Type ToolRemoval`
-
-                    - `const ToolRemovalToolRemoval ToolRemoval = "tool_removal"`
-
-                  - `CacheControl BetaCacheControlEphemeral`
-
-                    Create a cache control breakpoint at this content block.
-
-              - `Type MidConvSystem`
-
-                - `const MidConvSystemMidConvSystem MidConvSystem = "mid_conv_system"`
-
-              - `CacheControl BetaCacheControlEphemeral`
-
-                Create a cache control breakpoint at this content block.
-
             - `type BetaRequestToolAdditionBlock struct{…}`
 
               Mid-conversation directive to surface a declared tool.
@@ -33242,6 +37960,57 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               `tools`; it is offered to the model from this point in the
               conversation onward.
 
+              - `Tool BetaRequestToolAdditionBlockToolUnion`
+
+                Reference to a single tool the caller declared directly in
+                `tools[]`. Does not accept the composed `{server}_{name}` form the
+                server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+                `mcp_toolset_reference` for those.
+
+                - `type BetaToolChangeToolReference struct{…}`
+
+                  Reference to a single tool the caller declared directly in
+                  `tools[]`. Does not accept the composed `{server}_{name}` form the
+                  server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+                  `mcp_toolset_reference` for those.
+
+                  - `Name string`
+
+                  - `Type ToolReference`
+
+                    - `const ToolReferenceToolReference ToolReference = "tool_reference"`
+
+                - `type BetaToolChangeMCPToolReference struct{…}`
+
+                  Reference to a single MCP tool by its server and remote name — the
+                  same `server_name`/`name` pair `mcp_tool_use` carries.
+
+                  - `Name string`
+
+                  - `ServerName string`
+
+                  - `Type MCPToolReference`
+
+                    - `const MCPToolReferenceMCPToolReference MCPToolReference = "mcp_tool_reference"`
+
+                - `type BetaToolChangeMCPToolsetReference struct{…}`
+
+                  Reference to every tool in the named MCP server's toolset.
+
+                  - `ServerName string`
+
+                  - `Type MCPToolsetReference`
+
+                    - `const MCPToolsetReferenceMCPToolsetReference MCPToolsetReference = "mcp_toolset_reference"`
+
+              - `Type ToolAddition`
+
+                - `const ToolAdditionToolAddition ToolAddition = "tool_addition"`
+
+              - `CacheControl BetaCacheControlEphemeral`
+
+                Create a cache control breakpoint at this content block.
+
             - `type BetaRequestToolRemovalBlock struct{…}`
 
               Mid-conversation directive to withdraw a tool.
@@ -33249,6 +38018,37 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               `tool` references a tool (or MCP toolset) by name from the request's
               `tools`; it is no longer offered to the model from this point in the
               conversation onward.
+
+              - `Tool BetaRequestToolRemovalBlockToolUnion`
+
+                Reference to a single tool the caller declared directly in
+                `tools[]`. Does not accept the composed `{server}_{name}` form the
+                server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+                `mcp_toolset_reference` for those.
+
+                - `type BetaToolChangeToolReference struct{…}`
+
+                  Reference to a single tool the caller declared directly in
+                  `tools[]`. Does not accept the composed `{server}_{name}` form the
+                  server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+                  `mcp_toolset_reference` for those.
+
+                - `type BetaToolChangeMCPToolReference struct{…}`
+
+                  Reference to a single MCP tool by its server and remote name — the
+                  same `server_name`/`name` pair `mcp_tool_use` carries.
+
+                - `type BetaToolChangeMCPToolsetReference struct{…}`
+
+                  Reference to every tool in the named MCP server's toolset.
+
+              - `Type ToolRemoval`
+
+                - `const ToolRemovalToolRemoval ToolRemoval = "tool_removal"`
+
+              - `CacheControl BetaCacheControlEphemeral`
+
+                Create a cache control breakpoint at this content block.
 
             - `type BetaFallbackBlockParamResp struct{…}`
 
@@ -34218,6 +39018,412 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             When true, guarantees schema validation on tool names and inputs
 
+        - `type BetaBrowserToolset20260801 struct{…}`
+
+          The browser toolset: a single `tools[]` entry (carrying no
+          `name`) that declares the browser tool family. The model is served
+          the family's tool with any members disabled via `configs` removed
+          from its schema.
+
+          - `Type BrowserToolset20260801`
+
+            - `const BrowserToolset20260801BrowserToolset20260801 BrowserToolset20260801 = "browser_toolset_20260801"`
+
+          - `AllowedCallers []string`
+
+            - `const BetaBrowserToolset20260801AllowedCallerDirect BetaBrowserToolset20260801AllowedCaller = "direct"`
+
+            - `const BetaBrowserToolset20260801AllowedCallerCodeExecution20250825 BetaBrowserToolset20260801AllowedCaller = "code_execution_20250825"`
+
+            - `const BetaBrowserToolset20260801AllowedCallerCodeExecution20260120 BetaBrowserToolset20260801AllowedCaller = "code_execution_20260120"`
+
+            - `const BetaBrowserToolset20260801AllowedCallerCodeExecution20260521 BetaBrowserToolset20260801AllowedCaller = "code_execution_20260521"`
+
+          - `CacheControl BetaCacheControlEphemeral`
+
+            Create a cache control breakpoint at this content block.
+
+          - `Configs BetaBrowserToolsetConfigs`
+
+            Per-member configuration for `browser_toolset_20260801`: one
+            optional field per member tool, keyed by the member name — the same
+            name the member's `tool_use` blocks carry. Every member is an
+            accepted key, and a member's defaults apply wherever its key is
+            absent. Unknown keys are rejected: the field set is this toolset
+            version's complete member set.
+
+            - `CloseTab BetaBrowserCloseTabConfig`
+
+              `close_tab`'s config overrides.
+
+              - `DeferLoading bool`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Enabled bool`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `DoubleClick BetaBrowserDoubleClickConfig`
+
+              `double_click`'s config overrides.
+
+              - `DeferLoading bool`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Enabled bool`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `FileUpload BetaBrowserFileUploadConfig`
+
+              `file_upload`'s config overrides.
+
+              - `DeferLoading bool`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Enabled bool`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `Find BetaBrowserFindConfig`
+
+              `find`'s config overrides.
+
+              - `DeferLoading bool`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Enabled bool`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `FormInput BetaBrowserFormInputConfig`
+
+              `form_input`'s config overrides.
+
+              - `DeferLoading bool`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Enabled bool`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `GetPageText BetaBrowserGetPageTextConfig`
+
+              `get_page_text`'s config overrides.
+
+              - `DeferLoading bool`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Enabled bool`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `HoldKey BetaBrowserHoldKeyConfig`
+
+              `hold_key`'s config overrides.
+
+              - `DeferLoading bool`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Enabled bool`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `Hover BetaBrowserHoverConfig`
+
+              `hover`'s config overrides.
+
+              - `DeferLoading bool`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Enabled bool`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `JavascriptExec BetaBrowserJavascriptExecConfig`
+
+              `javascript_exec`'s config overrides.
+
+              - `DeferLoading bool`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Enabled bool`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `Key BetaBrowserKeyConfig`
+
+              `key`'s config overrides.
+
+              - `DeferLoading bool`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Enabled bool`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `LeftClick BetaBrowserLeftClickConfig`
+
+              `left_click`'s config overrides.
+
+              - `DeferLoading bool`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Enabled bool`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `LeftClickDrag BetaBrowserLeftClickDragConfig`
+
+              `left_click_drag`'s config overrides.
+
+              - `DeferLoading bool`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Enabled bool`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `LeftMouseDown BetaBrowserLeftMouseDownConfig`
+
+              `left_mouse_down`'s config overrides.
+
+              - `DeferLoading bool`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Enabled bool`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `LeftMouseUp BetaBrowserLeftMouseUpConfig`
+
+              `left_mouse_up`'s config overrides.
+
+              - `DeferLoading bool`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Enabled bool`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `ListTabs BetaBrowserListTabsConfig`
+
+              `list_tabs`'s config overrides.
+
+              - `DeferLoading bool`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Enabled bool`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `MiddleClick BetaBrowserMiddleClickConfig`
+
+              `middle_click`'s config overrides.
+
+              - `DeferLoading bool`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Enabled bool`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `MouseMove BetaBrowserMouseMoveConfig`
+
+              `mouse_move`'s config overrides.
+
+              - `DeferLoading bool`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Enabled bool`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `Navigate BetaBrowserNavigateConfig`
+
+              `navigate`'s config overrides.
+
+              - `DeferLoading bool`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Enabled bool`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `NewTab BetaBrowserNewTabConfig`
+
+              `new_tab`'s config overrides.
+
+              - `DeferLoading bool`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Enabled bool`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `ReadConsole BetaBrowserReadConsoleConfig`
+
+              `read_console`'s config overrides.
+
+              - `DeferLoading bool`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Enabled bool`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `ReadNetwork BetaBrowserReadNetworkConfig`
+
+              `read_network`'s config overrides.
+
+              - `DeferLoading bool`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Enabled bool`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `ReadPage BetaBrowserReadPageConfig`
+
+              `read_page`'s config overrides.
+
+              - `DeferLoading bool`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Enabled bool`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `RightClick BetaBrowserRightClickConfig`
+
+              `right_click`'s config overrides.
+
+              - `DeferLoading bool`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Enabled bool`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `Screenshot BetaBrowserScreenshotConfig`
+
+              `screenshot`'s config overrides.
+
+              - `DeferLoading bool`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Enabled bool`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `Scroll BetaBrowserScrollConfig`
+
+              `scroll`'s config overrides.
+
+              - `DeferLoading bool`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Enabled bool`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `ScrollTo BetaBrowserScrollToConfig`
+
+              `scroll_to`'s config overrides.
+
+              - `DeferLoading bool`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Enabled bool`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `SwitchTab BetaBrowserSwitchTabConfig`
+
+              `switch_tab`'s config overrides.
+
+              - `DeferLoading bool`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Enabled bool`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `TripleClick BetaBrowserTripleClickConfig`
+
+              `triple_click`'s config overrides.
+
+              - `DeferLoading bool`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Enabled bool`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `Type BetaBrowserTypeConfig`
+
+              `type`'s config overrides.
+
+              - `DeferLoading bool`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Enabled bool`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `Wait BetaBrowserWaitConfig`
+
+              `wait`'s config overrides.
+
+              - `DeferLoading bool`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Enabled bool`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `Zoom BetaBrowserZoomConfig`
+
+              `zoom`'s config overrides.
+
+              - `DeferLoading bool`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Enabled bool`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
         - `type BetaToolComputerUse20241022 struct{…}`
 
           - `DisplayHeightPx int64`
@@ -34447,6 +39653,248 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
           - `Strict bool`
 
             When true, guarantees schema validation on tool names and inputs
+
+        - `type BetaComputerToolset20260801 struct{…}`
+
+          The computer toolset: a single `tools[]` entry (carrying no
+          `name`) that declares the computer tool family. The model is
+          served the family's tool with any members disabled via `configs`
+          removed from its schema. Every member is enabled by default, zoom
+          included. The single-tool options `display_number` and
+          `enable_zoom` are not fields of a toolset entry — it carries only
+          `type`, `configs`, and `cache_control`; zoom is controlled
+          via `configs.zoom.enabled`.
+
+          - `Type ComputerToolset20260801`
+
+            - `const ComputerToolset20260801ComputerToolset20260801 ComputerToolset20260801 = "computer_toolset_20260801"`
+
+          - `AllowedCallers []string`
+
+            - `const BetaComputerToolset20260801AllowedCallerDirect BetaComputerToolset20260801AllowedCaller = "direct"`
+
+            - `const BetaComputerToolset20260801AllowedCallerCodeExecution20250825 BetaComputerToolset20260801AllowedCaller = "code_execution_20250825"`
+
+            - `const BetaComputerToolset20260801AllowedCallerCodeExecution20260120 BetaComputerToolset20260801AllowedCaller = "code_execution_20260120"`
+
+            - `const BetaComputerToolset20260801AllowedCallerCodeExecution20260521 BetaComputerToolset20260801AllowedCaller = "code_execution_20260521"`
+
+          - `CacheControl BetaCacheControlEphemeral`
+
+            Create a cache control breakpoint at this content block.
+
+          - `Configs BetaComputerToolsetConfigs`
+
+            Per-member configuration for `computer_toolset_20260801`: one
+            optional field per member tool, keyed by the member name — the same
+            name the member's `tool_use` blocks carry. Every member is an
+            accepted key, and a member's defaults apply wherever its key is
+            absent. Unknown keys are rejected: the field set is this toolset
+            version's complete member set.
+
+            - `CursorPosition BetaComputerCursorPositionConfig`
+
+              `cursor_position`'s config overrides.
+
+              - `DeferLoading bool`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Enabled bool`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `DoubleClick BetaComputerDoubleClickConfig`
+
+              `double_click`'s config overrides.
+
+              - `DeferLoading bool`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Enabled bool`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `HoldKey BetaComputerHoldKeyConfig`
+
+              `hold_key`'s config overrides.
+
+              - `DeferLoading bool`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Enabled bool`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `Key BetaComputerKeyConfig`
+
+              `key`'s config overrides.
+
+              - `DeferLoading bool`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Enabled bool`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `LeftClick BetaComputerLeftClickConfig`
+
+              `left_click`'s config overrides.
+
+              - `DeferLoading bool`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Enabled bool`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `LeftClickDrag BetaComputerLeftClickDragConfig`
+
+              `left_click_drag`'s config overrides.
+
+              - `DeferLoading bool`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Enabled bool`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `LeftMouseDown BetaComputerLeftMouseDownConfig`
+
+              `left_mouse_down`'s config overrides.
+
+              - `DeferLoading bool`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Enabled bool`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `LeftMouseUp BetaComputerLeftMouseUpConfig`
+
+              `left_mouse_up`'s config overrides.
+
+              - `DeferLoading bool`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Enabled bool`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `MiddleClick BetaComputerMiddleClickConfig`
+
+              `middle_click`'s config overrides.
+
+              - `DeferLoading bool`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Enabled bool`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `MouseMove BetaComputerMouseMoveConfig`
+
+              `mouse_move`'s config overrides.
+
+              - `DeferLoading bool`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Enabled bool`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `RightClick BetaComputerRightClickConfig`
+
+              `right_click`'s config overrides.
+
+              - `DeferLoading bool`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Enabled bool`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `Screenshot BetaComputerScreenshotConfig`
+
+              `screenshot`'s config overrides.
+
+              - `DeferLoading bool`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Enabled bool`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `Scroll BetaComputerScrollConfig`
+
+              `scroll`'s config overrides.
+
+              - `DeferLoading bool`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Enabled bool`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `TripleClick BetaComputerTripleClickConfig`
+
+              `triple_click`'s config overrides.
+
+              - `DeferLoading bool`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Enabled bool`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `Type BetaComputerTypeConfig`
+
+              `type`'s config overrides.
+
+              - `DeferLoading bool`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Enabled bool`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `Wait BetaComputerWaitConfig`
+
+              `wait`'s config overrides.
+
+              - `DeferLoading bool`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Enabled bool`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `Zoom BetaComputerZoomConfig`
+
+              `zoom`'s config overrides.
+
+              - `DeferLoading bool`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Enabled bool`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
         - `type BetaToolTextEditor20250124 struct{…}`
 
@@ -35225,6 +40673,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -35371,7 +40821,7 @@ func main() {
 					}},
 					Role: anthropic.BetaMessageParamRoleUser,
 				}},
-				Model: anthropic.ModelClaudeOpus4_6,
+				Model: anthropic.ModelClaudeOpus5,
 			},
 		}},
 	})
@@ -35474,6 +40924,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
       - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
@@ -35719,6 +41171,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -35958,6 +41412,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -36194,6 +41650,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -36341,6 +41799,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
       - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
@@ -36650,6 +42110,10 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
                 - `Type CodeExecution20260120`
 
                   - `const CodeExecution20260120CodeExecution20260120 CodeExecution20260120 = "code_execution_20260120"`
+
+            - `ToolsetName string`
+
+              For a toolset member tool_use, the toolset family.
 
           - `type BetaServerToolUseBlock struct{…}`
 
@@ -38561,6 +44025,10 @@ func main() {
 
                   - `const CodeExecution20260120CodeExecution20260120 CodeExecution20260120 = "code_execution_20260120"`
 
+            - `ToolsetName string`
+
+              For a toolset member tool_use, the toolset family.
+
           - `type BetaServerToolUseBlock struct{…}`
 
             - `ID string`
@@ -40247,6 +45715,10 @@ func main() {
 
                 - `const CodeExecution20260120CodeExecution20260120 CodeExecution20260120 = "code_execution_20260120"`
 
+          - `ToolsetName string`
+
+            For a toolset member tool_use, the toolset family.
+
         - `type BetaServerToolUseBlock struct{…}`
 
           - `ID string`
@@ -41895,6 +47367,10 @@ func main() {
 
               - `const CodeExecution20260120CodeExecution20260120 CodeExecution20260120 = "code_execution_20260120"`
 
+        - `ToolsetName string`
+
+          For a toolset member tool_use, the toolset family.
+
       - `type BetaServerToolUseBlock struct{…}`
 
         - `ID string`
@@ -43188,7 +48664,7 @@ Create Agent
 
   - `Model param.Field[BetaManagedAgentsModelConfigParamsResp]`
 
-    Body param: Model identifier. Accepts the [model string](../about-claude/about-claude-models-overview.md#latest-models-comparison), e.g. `claude-opus-4-6`, or a `model_config` object for additional configuration control
+    Body param: Model identifier. Accepts the [model string](../about-claude/about-claude-models-overview.md#latest-models-comparison), e.g. `claude-opus-5`, or a `model_config` object for additional configuration control
 
     - `type BetaManagedAgentsModelConfigParamsResp struct{…}`
 
@@ -43616,6 +49092,8 @@ Create Agent
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -44029,7 +49507,7 @@ func main() {
 	)
 	betaManagedAgentsAgent, err := client.Beta.Agents.New(context.TODO(), anthropic.BetaAgentNewParams{
 		Model: anthropic.BetaManagedAgentsModelConfigParams{
-			ID: anthropic.BetaManagedAgentsModelClaudeOpus4_8,
+			ID: anthropic.BetaManagedAgentsModelClaudeOpus5,
 		},
 		Name: "My First Agent",
 	})
@@ -44059,7 +49537,7 @@ func main() {
     "foo": "bar"
   },
   "model": {
-    "id": "claude-sonnet-4-6",
+    "id": "claude-opus-5",
     "effort": {
       "type": "low"
     },
@@ -44199,6 +49677,8 @@ List Agents
       - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
@@ -44640,7 +50120,7 @@ func main() {
         "foo": "bar"
       },
       "model": {
-        "id": "claude-sonnet-4-6",
+        "id": "claude-opus-5",
         "effort": {
           "type": "low"
         },
@@ -44769,6 +50249,8 @@ Get Agent
       - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
@@ -45212,7 +50694,7 @@ func main() {
     "foo": "bar"
   },
   "model": {
-    "id": "claude-sonnet-4-6",
+    "id": "claude-opus-5",
     "effort": {
       "type": "low"
     },
@@ -45309,7 +50791,7 @@ Update Agent
 
   - `Model param.Field[BetaManagedAgentsModelConfigParamsResp]`
 
-    Body param: Model identifier. Accepts the [model string](../about-claude/about-claude-models-overview.md#latest-models-comparison), e.g. `claude-opus-4-6`, or a `model_config` object for additional configuration control. Omit to preserve. Cannot be cleared.
+    Body param: Model identifier. Accepts the [model string](../about-claude/about-claude-models-overview.md#latest-models-comparison), e.g. `claude-opus-5`, or a `model_config` object for additional configuration control. Omit to preserve. Cannot be cleared.
 
     - `type BetaManagedAgentsModelConfigParamsResp struct{…}`
 
@@ -45716,6 +51198,8 @@ Update Agent
       - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
@@ -46161,7 +51645,7 @@ func main() {
     "foo": "bar"
   },
   "model": {
-    "id": "claude-sonnet-4-6",
+    "id": "claude-opus-5",
     "effort": {
       "type": "low"
     },
@@ -46283,6 +51767,8 @@ Archive Agent
       - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
@@ -46726,7 +52212,7 @@ func main() {
     "foo": "bar"
   },
   "model": {
-    "id": "claude-sonnet-4-6",
+    "id": "claude-opus-5",
     "effort": {
       "type": "low"
     },
@@ -48953,6 +54439,8 @@ List Agent Versions
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -49397,7 +54885,7 @@ func main() {
         "foo": "bar"
       },
       "model": {
-        "id": "claude-sonnet-4-6",
+        "id": "claude-opus-5",
         "effort": {
           "type": "low"
         },
@@ -49645,6 +55133,8 @@ Create a new environment with the specified configuration.
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -49781,7 +55271,7 @@ Create a new environment with the specified configuration.
 
   - `Description string`
 
-    User-provided description for the environment
+    User-provided description for the environment; null when unset
 
   - `Metadata map[string, string]`
 
@@ -49961,6 +55451,8 @@ List environments with pagination support.
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -50097,7 +55589,7 @@ List environments with pagination support.
 
   - `Description string`
 
-    User-provided description for the environment
+    User-provided description for the environment; null when unset
 
   - `Metadata map[string, string]`
 
@@ -50270,6 +55762,8 @@ Retrieve a specific environment by ID.
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -50406,7 +55900,7 @@ Retrieve a specific environment by ID.
 
   - `Description string`
 
-    User-provided description for the environment
+    User-provided description for the environment; null when unset
 
   - `Metadata map[string, string]`
 
@@ -50630,7 +56124,7 @@ Update an existing environment's configuration.
 
   - `Description param.Field[string]`
 
-    Body param: Updated description of the environment
+    Body param: Updated description of the environment. Omit to preserve; null clears to null; an empty string is stored as an empty string.
 
   - `Metadata param.Field[map[string, string]]`
 
@@ -50699,6 +56193,8 @@ Update an existing environment's configuration.
       - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
@@ -50836,7 +56332,7 @@ Update an existing environment's configuration.
 
   - `Description string`
 
-    User-provided description for the environment
+    User-provided description for the environment; null when unset
 
   - `Metadata map[string, string]`
 
@@ -51008,6 +56504,8 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -51150,6 +56648,8 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -51286,7 +56786,7 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
   - `Description string`
 
-    User-provided description for the environment
+    User-provided description for the environment; null when unset
 
   - `Metadata map[string, string]`
 
@@ -51680,7 +57180,7 @@ func main() {
 
   - `Description string`
 
-    User-provided description for the environment
+    User-provided description for the environment; null when unset
 
   - `Metadata map[string, string]`
 
@@ -51959,6 +57459,8 @@ Retrieve detailed information about a specific work item.
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -52197,6 +57699,8 @@ Long poll for work items in the queue.
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -52432,6 +57936,8 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
       - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
@@ -52675,6 +58181,8 @@ Record a heartbeat for a work item to maintain the lease.
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -52853,6 +58361,8 @@ Stop a work item, initiating graceful or forced shutdown.
       - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
@@ -53092,6 +58602,8 @@ List work items in an environment.
       - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
@@ -53334,6 +58846,8 @@ Update work item metadata with merge semantics.
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -53566,6 +59080,8 @@ Get statistics about the work queue for an environment.
       - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
@@ -54007,7 +59523,7 @@ Create Session
 
       - `Model BetaManagedAgentsModelConfigParamsResp`
 
-        Replacement model. Accepts the model string, e.g. `claude-opus-4-6`, or a `model_config` object. Omit to use the agent's model.
+        Replacement model. Accepts the model string, e.g. `claude-opus-5`, or a `model_config` object. Omit to use the agent's model.
 
         - `type BetaManagedAgentsModelConfigParamsResp struct{…}`
 
@@ -54724,6 +60240,8 @@ Create Session
       - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
@@ -55449,7 +60967,7 @@ func main() {
       }
     ],
     "model": {
-      "id": "claude-sonnet-4-6",
+      "id": "claude-opus-5",
       "effort": {
         "type": "low"
       },
@@ -55469,7 +60987,7 @@ func main() {
             }
           ],
           "model": {
-            "id": "claude-sonnet-4-6",
+            "id": "claude-opus-5",
             "effort": {
               "type": "low"
             },
@@ -55752,6 +61270,8 @@ List Sessions
       - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
@@ -56474,7 +61994,7 @@ func main() {
           }
         ],
         "model": {
-          "id": "claude-sonnet-4-6",
+          "id": "claude-opus-5",
           "effort": {
             "type": "low"
           },
@@ -56494,7 +62014,7 @@ func main() {
                 }
               ],
               "model": {
-                "id": "claude-sonnet-4-6",
+                "id": "claude-opus-5",
                 "effort": {
                   "type": "low"
                 },
@@ -56719,6 +62239,8 @@ Get Session
       - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
@@ -57443,7 +62965,7 @@ func main() {
       }
     ],
     "model": {
-      "id": "claude-sonnet-4-6",
+      "id": "claude-opus-5",
       "effort": {
         "type": "low"
       },
@@ -57463,7 +62985,7 @@ func main() {
             }
           ],
           "model": {
-            "id": "claude-sonnet-4-6",
+            "id": "claude-opus-5",
             "effort": {
               "type": "low"
             },
@@ -57704,6 +63226,8 @@ Update Session
       - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
@@ -58428,7 +63952,7 @@ func main() {
       }
     ],
     "model": {
-      "id": "claude-sonnet-4-6",
+      "id": "claude-opus-5",
       "effort": {
         "type": "low"
       },
@@ -58448,7 +63972,7 @@ func main() {
             }
           ],
           "model": {
-            "id": "claude-sonnet-4-6",
+            "id": "claude-opus-5",
             "effort": {
               "type": "low"
             },
@@ -58670,6 +64194,8 @@ Delete Session
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -58807,6 +64333,8 @@ Archive Session
       - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
@@ -59531,7 +65059,7 @@ func main() {
       }
     ],
     "model": {
-      "id": "claude-sonnet-4-6",
+      "id": "claude-opus-5",
       "effort": {
         "type": "low"
       },
@@ -59551,7 +65079,7 @@ func main() {
             }
           ],
           "model": {
-            "id": "claude-sonnet-4-6",
+            "id": "claude-opus-5",
             "effort": {
               "type": "low"
             },
@@ -59797,7 +65325,7 @@ func main() {
 
   - `Model BetaManagedAgentsModelConfigParamsResp`
 
-    Replacement model. Accepts the model string, e.g. `claude-opus-4-6`, or a `model_config` object. Omit to use the agent's model.
+    Replacement model. Accepts the model string, e.g. `claude-opus-5`, or a `model_config` object. Omit to use the agent's model.
 
     - `type BetaManagedAgentsModelConfigParamsResp struct{…}`
 
@@ -63163,6 +68691,8 @@ List Events
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -65664,6 +71194,8 @@ Send Events
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -66268,6 +71800,8 @@ Stream Events
       - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
@@ -77109,6 +82643,8 @@ Add Session Resource
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -77273,6 +82809,8 @@ List Session Resources
       - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
@@ -77529,6 +83067,8 @@ Get Session Resource
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -77777,6 +83317,8 @@ Update Session Resource
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -78021,6 +83563,8 @@ Delete Session Resource
       - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
@@ -78393,6 +83937,8 @@ List Session Threads
       - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
@@ -78917,7 +84463,7 @@ func main() {
           }
         ],
         "model": {
-          "id": "claude-sonnet-4-6",
+          "id": "claude-opus-5",
           "effort": {
             "type": "low"
           },
@@ -79061,6 +84607,8 @@ Get Session Thread
       - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
@@ -79585,7 +85133,7 @@ func main() {
       }
     ],
     "model": {
-      "id": "claude-sonnet-4-6",
+      "id": "claude-opus-5",
       "effort": {
         "type": "low"
       },
@@ -79726,6 +85274,8 @@ Archive Session Thread
       - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
@@ -80250,7 +85800,7 @@ func main() {
       }
     ],
     "model": {
-      "id": "claude-sonnet-4-6",
+      "id": "claude-opus-5",
       "effort": {
         "type": "low"
       },
@@ -82992,6 +88542,8 @@ List Session Thread Events
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -85125,6 +90677,8 @@ Stream Session Thread Events
       - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
@@ -87674,6 +93228,8 @@ Create Deployment
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -88459,6 +94015,8 @@ List Deployments
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -89205,6 +94763,8 @@ Get Deployment
       - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
@@ -90320,6 +95880,8 @@ Update Deployment
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -91065,6 +96627,8 @@ Archive Deployment
       - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
@@ -91812,6 +97376,8 @@ Run Deployment Now
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -92211,6 +97777,8 @@ Pause Deployment
       - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
@@ -92957,6 +98525,8 @@ Unpause Deployment
       - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
@@ -95802,6 +101372,8 @@ List Deployment Runs
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -96202,6 +101774,8 @@ Get Deployment Run
       - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
@@ -97155,6 +102729,8 @@ Create Vault
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -97330,6 +102906,8 @@ List Vaults
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -97497,6 +103075,8 @@ Get Vault
       - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
@@ -97673,6 +103253,8 @@ Update Vault
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -97840,6 +103422,8 @@ Delete Vault
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -97979,6 +103563,8 @@ Archive Vault
       - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
@@ -98359,6 +103945,8 @@ Create Credential
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -98683,6 +104271,8 @@ List Credentials
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -98995,6 +104585,8 @@ Get Credential
       - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
@@ -99434,6 +105026,8 @@ Update Credential
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -99744,6 +105338,8 @@ Delete Credential
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -99889,6 +105485,8 @@ Archive Credential
       - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
@@ -100199,6 +105797,8 @@ Validate Credential
       - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
@@ -101586,6 +107186,8 @@ Create a memory store
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -101774,6 +107376,8 @@ List memory stores
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -101946,6 +107550,8 @@ Retrieve a memory store
       - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
@@ -102131,6 +107737,8 @@ Update a memory store
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -102303,6 +107911,8 @@ Delete a memory store
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -102442,6 +108052,8 @@ Archive a memory store
       - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
@@ -102683,6 +108295,8 @@ Create a memory
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -102885,6 +108499,8 @@ List memories
       - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
@@ -103095,6 +108711,8 @@ Retrieve a memory
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -103297,6 +108915,8 @@ Update a memory
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -103486,6 +109106,8 @@ Delete a memory
       - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
@@ -103921,6 +109543,10 @@ List memory versions
 
     Query param: Query parameter for page
 
+  - `ServiceAccountID param.Field[string]`
+
+    Query param: Query parameter for service_account_id
+
   - `SessionID param.Field[string]`
 
     Query param: Query parameter for session_id
@@ -103980,6 +109606,8 @@ List memory versions
       - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
@@ -104090,6 +109718,18 @@ List memory versions
       - `UserID string`
 
         ID of the user who performed the write (a `user_...` value).
+
+    - `type BetaManagedAgentsServiceAccountActor struct{…}`
+
+      Attribution for a write made by a workload authenticated as a service account, for example via Workload Identity Federation.
+
+      - `ServiceAccountID string`
+
+        ID of the service account that performed the write (a `svac_...` value).
+
+      - `Type ServiceAccountActor`
+
+        - `const ServiceAccountActorServiceAccountActor ServiceAccountActor = "service_account_actor"`
 
   - `Path string`
 
@@ -104237,6 +109877,8 @@ Retrieve a memory version
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -104346,6 +109988,18 @@ Retrieve a memory version
       - `UserID string`
 
         ID of the user who performed the write (a `user_...` value).
+
+    - `type BetaManagedAgentsServiceAccountActor struct{…}`
+
+      Attribution for a write made by a workload authenticated as a service account, for example via Workload Identity Federation.
+
+      - `ServiceAccountID string`
+
+        ID of the service account that performed the write (a `svac_...` value).
+
+      - `Type ServiceAccountActor`
+
+        - `const ServiceAccountActorServiceAccountActor ServiceAccountActor = "service_account_actor"`
 
   - `Path string`
 
@@ -104486,6 +110140,8 @@ Redact a memory version
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -104595,6 +110251,18 @@ Redact a memory version
       - `UserID string`
 
         ID of the user who performed the write (a `user_...` value).
+
+    - `type BetaManagedAgentsServiceAccountActor struct{…}`
+
+      Attribution for a write made by a workload authenticated as a service account, for example via Workload Identity Federation.
+
+      - `ServiceAccountID string`
+
+        ID of the service account that performed the write (a `svac_...` value).
+
+      - `Type ServiceAccountActor`
+
+        - `const ServiceAccountActorServiceAccountActor ServiceAccountActor = "service_account_actor"`
 
   - `Path string`
 
@@ -104709,6 +110377,18 @@ func main() {
 
       ID of the user who performed the write (a `user_...` value).
 
+  - `type BetaManagedAgentsServiceAccountActor struct{…}`
+
+    Attribution for a write made by a workload authenticated as a service account, for example via Workload Identity Federation.
+
+    - `ServiceAccountID string`
+
+      ID of the service account that performed the write (a `svac_...` value).
+
+    - `Type ServiceAccountActor`
+
+      - `const ServiceAccountActorServiceAccountActor ServiceAccountActor = "service_account_actor"`
+
 ### Beta Managed Agents API Actor
 
 - `type BetaManagedAgentsAPIActor struct{…}`
@@ -104811,6 +110491,18 @@ func main() {
 
         ID of the user who performed the write (a `user_...` value).
 
+    - `type BetaManagedAgentsServiceAccountActor struct{…}`
+
+      Attribution for a write made by a workload authenticated as a service account, for example via Workload Identity Federation.
+
+      - `ServiceAccountID string`
+
+        ID of the service account that performed the write (a `svac_...` value).
+
+      - `Type ServiceAccountActor`
+
+        - `const ServiceAccountActorServiceAccountActor ServiceAccountActor = "service_account_actor"`
+
   - `Path string`
 
     The memory's path at the time of this write. `null` if and only if `redacted_at` is set.
@@ -104834,6 +110526,20 @@ func main() {
   - `const BetaManagedAgentsMemoryVersionOperationModified BetaManagedAgentsMemoryVersionOperation = "modified"`
 
   - `const BetaManagedAgentsMemoryVersionOperationDeleted BetaManagedAgentsMemoryVersionOperation = "deleted"`
+
+### Beta Managed Agents Service Account Actor
+
+- `type BetaManagedAgentsServiceAccountActor struct{…}`
+
+  Attribution for a write made by a workload authenticated as a service account, for example via Workload Identity Federation.
+
+  - `ServiceAccountID string`
+
+    ID of the service account that performed the write (a `svac_...` value).
+
+  - `Type ServiceAccountActor`
+
+    - `const ServiceAccountActorServiceAccountActor ServiceAccountActor = "service_account_actor"`
 
 ### Beta Managed Agents Session Actor
 
@@ -104867,7 +110573,7 @@ func main() {
 
 ## Upload File
 
-`client.Beta.Files.Upload(ctx, params) (*FileMetadata, error)`
+`client.Beta.Files.Upload(ctx, params) (*BetaFileMetadata, error)`
 
 **post** `/v1/files`
 
@@ -104933,6 +110639,8 @@ Upload File
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -104957,7 +110665,7 @@ Upload File
 
 ### Returns
 
-- `type FileMetadata struct{…}`
+- `type BetaFileMetadata struct{…}`
 
   - `ID string`
 
@@ -105026,13 +110734,13 @@ func main() {
 	client := anthropic.NewClient(
 		option.WithAPIKey("my-anthropic-api-key"),
 	)
-	fileMetadata, err := client.Beta.Files.Upload(context.TODO(), anthropic.BetaFileUploadParams{
+	betaFileMetadata, err := client.Beta.Files.Upload(context.TODO(), anthropic.BetaFileUploadParams{
 		File: io.Reader(bytes.NewBuffer([]byte("Example data"))),
 	})
 	if err != nil {
 		panic(err.Error())
 	}
-	fmt.Printf("%+v\n", fileMetadata.ID)
+	fmt.Printf("%+v\n", betaFileMetadata.ID)
 }
 ```
 
@@ -105056,7 +110764,7 @@ func main() {
 
 ## List Files
 
-`client.Beta.Files.List(ctx, params) (*Page[FileMetadata], error)`
+`client.Beta.Files.List(ctx, params) (*Page[BetaFileMetadata], error)`
 
 **get** `/v1/files`
 
@@ -105136,6 +110844,8 @@ List Files
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -105160,7 +110870,7 @@ List Files
 
 ### Returns
 
-- `type FileMetadata struct{…}`
+- `type BetaFileMetadata struct{…}`
 
   - `ID string`
 
@@ -105328,6 +111038,8 @@ Download File
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -105385,7 +111097,7 @@ func main() {
 
 ## Get File Metadata
 
-`client.Beta.Files.GetMetadata(ctx, fileID, query) (*FileMetadata, error)`
+`client.Beta.Files.GetMetadata(ctx, fileID, query) (*BetaFileMetadata, error)`
 
 **get** `/v1/files/{file_id}`
 
@@ -105451,6 +111163,8 @@ Get File Metadata
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -105475,7 +111189,7 @@ Get File Metadata
 
 ### Returns
 
-- `type FileMetadata struct{…}`
+- `type BetaFileMetadata struct{…}`
 
   - `ID string`
 
@@ -105542,7 +111256,7 @@ func main() {
 	client := anthropic.NewClient(
 		option.WithAPIKey("my-anthropic-api-key"),
 	)
-	fileMetadata, err := client.Beta.Files.GetMetadata(
+	betaFileMetadata, err := client.Beta.Files.GetMetadata(
 		context.TODO(),
 		"file_id",
 		anthropic.BetaFileGetMetadataParams{},
@@ -105550,7 +111264,7 @@ func main() {
 	if err != nil {
 		panic(err.Error())
 	}
-	fmt.Printf("%+v\n", fileMetadata.ID)
+	fmt.Printf("%+v\n", betaFileMetadata.ID)
 }
 ```
 
@@ -105574,7 +111288,7 @@ func main() {
 
 ## Delete File
 
-`client.Beta.Files.Delete(ctx, fileID, body) (*DeletedFile, error)`
+`client.Beta.Files.Delete(ctx, fileID, body) (*BetaDeletedFile, error)`
 
 **delete** `/v1/files/{file_id}`
 
@@ -105640,6 +111354,8 @@ Delete File
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -105664,19 +111380,19 @@ Delete File
 
 ### Returns
 
-- `type DeletedFile struct{…}`
+- `type BetaDeletedFile struct{…}`
 
   - `ID string`
 
     ID of the deleted file.
 
-  - `Type DeletedFileType`
+  - `Type BetaDeletedFileType`
 
     Deleted object type.
 
     For file deletion, this is always `"file_deleted"`.
 
-    - `const DeletedFileTypeFileDeleted DeletedFileType = "file_deleted"`
+    - `const BetaDeletedFileTypeFileDeleted BetaDeletedFileType = "file_deleted"`
 
 ### Example
 
@@ -105695,7 +111411,7 @@ func main() {
 	client := anthropic.NewClient(
 		option.WithAPIKey("my-anthropic-api-key"),
 	)
-	deletedFile, err := client.Beta.Files.Delete(
+	betaDeletedFile, err := client.Beta.Files.Delete(
 		context.TODO(),
 		"file_id",
 		anthropic.BetaFileDeleteParams{},
@@ -105703,7 +111419,7 @@ func main() {
 	if err != nil {
 		panic(err.Error())
 	}
-	fmt.Printf("%+v\n", deletedFile.ID)
+	fmt.Printf("%+v\n", betaDeletedFile.ID)
 }
 ```
 
@@ -105718,39 +111434,25 @@ func main() {
 
 ## Domain Types
 
-### Beta File Scope
+### Beta Deleted File
 
-- `type BetaFileScope struct{…}`
-
-  - `ID string`
-
-    The ID of the scoping resource (e.g., the session ID).
-
-  - `Type Session`
-
-    The type of scope (e.g., `"session"`).
-
-    - `const SessionSession Session = "session"`
-
-### Deleted File
-
-- `type DeletedFile struct{…}`
+- `type BetaDeletedFile struct{…}`
 
   - `ID string`
 
     ID of the deleted file.
 
-  - `Type DeletedFileType`
+  - `Type BetaDeletedFileType`
 
     Deleted object type.
 
     For file deletion, this is always `"file_deleted"`.
 
-    - `const DeletedFileTypeFileDeleted DeletedFileType = "file_deleted"`
+    - `const BetaDeletedFileTypeFileDeleted BetaDeletedFileType = "file_deleted"`
 
-### File Metadata
+### Beta File Metadata
 
-- `type FileMetadata struct{…}`
+- `type BetaFileMetadata struct{…}`
 
   - `ID string`
 
@@ -105799,6 +111501,20 @@ func main() {
       The type of scope (e.g., `"session"`).
 
       - `const SessionSession Session = "session"`
+
+### Beta File Scope
+
+- `type BetaFileScope struct{…}`
+
+  - `ID string`
+
+    The ID of the scoping resource (e.g., the session ID).
+
+  - `Type Session`
+
+    The type of scope (e.g., `"session"`).
+
+    - `const SessionSession Session = "session"`
 
 # Skills
 
@@ -105877,6 +111593,8 @@ Create Skill
       - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
@@ -106073,6 +111791,8 @@ List Skills
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -106255,6 +111975,8 @@ Get Skill
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -106435,6 +112157,8 @@ Delete Skill
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -106588,6 +112312,8 @@ Create Skill Version
       - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
@@ -106787,6 +112513,8 @@ List Skill Versions
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -106983,6 +112711,8 @@ Download a skill version's content as a zip archive.
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -107115,6 +112845,8 @@ Get Skill Version
       - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
@@ -107308,6 +113040,8 @@ Delete Skill Version
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -107400,6 +113134,14 @@ Create User Profile
 
 - `params BetaUserProfileNewParams`
 
+  - `AccessType param.Field[BetaUserProfileNewParamsAccessType]`
+
+    Body param: How the platform uses the API on behalf of the entity this profile represents. `application`: the platform sells a product that uses the API behind the scenes, and the profile represents an individual end-user of that product. `passthrough`: the platform resells raw inference, and the profile identifies the resold-to company.
+
+    - `const BetaUserProfileNewParamsAccessTypeApplication BetaUserProfileNewParamsAccessType = "application"`
+
+    - `const BetaUserProfileNewParamsAccessTypePassthrough BetaUserProfileNewParamsAccessType = "passthrough"`
+
   - `ExternalID param.Field[string]`
 
     Body param: Platform's own identifier for this user. Not enforced unique. Maximum 255 characters.
@@ -107410,7 +113152,7 @@ Create User Profile
 
   - `Name param.Field[string]`
 
-    Body param: Display name of the entity this profile represents. Required when relationship is `resold` (the resold-to company's name); optional otherwise. Maximum 255 characters.
+    Body param: Optional for all profiles. Real-world name of the entity this profile represents (company or individual); for a resold-to company (`relationship` `resold` / `access_type` `passthrough`), that company's name where known. Maximum 255 characters.
 
   - `Relationship param.Field[BetaUserProfileNewParamsRelationship]`
 
@@ -107474,6 +113216,8 @@ Create User Profile
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -107512,16 +113256,6 @@ Create User Profile
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
-  - `Relationship BetaUserProfileRelationship`
-
-    How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
-
-    - `const BetaUserProfileRelationshipExternal BetaUserProfileRelationship = "external"`
-
-    - `const BetaUserProfileRelationshipResold BetaUserProfileRelationship = "resold"`
-
-    - `const BetaUserProfileRelationshipInternal BetaUserProfileRelationship = "internal"`
-
   - `TrustGrants map[string, BetaUserProfileTrustGrant]`
 
     Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
@@ -107546,13 +113280,31 @@ Create User Profile
 
     A timestamp in RFC 3339 format
 
+  - `AccessType BetaUserProfileAccessType`
+
+    How the platform uses the API on behalf of the entity this profile represents. `application`: the platform sells a product that uses the API behind the scenes, and the profile represents an individual end-user of that product. `passthrough`: the platform resells raw inference, and the profile identifies the resold-to company.
+
+    - `const BetaUserProfileAccessTypeApplication BetaUserProfileAccessType = "application"`
+
+    - `const BetaUserProfileAccessTypePassthrough BetaUserProfileAccessType = "passthrough"`
+
   - `ExternalID string`
 
     Platform's own identifier for this user. Not enforced unique.
 
   - `Name string`
 
-    Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
+    Real-world name of the entity this profile represents (company or individual). For a resold-to company (`access_type` `passthrough`, or `relationship` `resold` under the `user-profiles-2026-03-24` header) this is that company's name.
+
+  - `Relationship BetaUserProfileRelationship`
+
+    How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+
+    - `const BetaUserProfileRelationshipExternal BetaUserProfileRelationship = "external"`
+
+    - `const BetaUserProfileRelationshipResold BetaUserProfileRelationship = "resold"`
+
+    - `const BetaUserProfileRelationshipInternal BetaUserProfileRelationship = "internal"`
 
 ### Example
 
@@ -107586,7 +113338,6 @@ func main() {
   "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
   "created_at": "2026-03-15T10:00:00Z",
   "metadata": {},
-  "relationship": "external",
   "trust_grants": {
     "cyber": {
       "status": "active"
@@ -107594,8 +113345,10 @@ func main() {
   },
   "type": "user_profile",
   "updated_at": "2026-03-15T10:00:00Z",
+  "access_type": "application",
   "external_id": "user_12345",
-  "name": "Example User"
+  "name": "Example User",
+  "relationship": "external"
 }
 ```
 
@@ -107679,6 +113432,8 @@ List User Profiles
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -107717,16 +113472,6 @@ List User Profiles
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
-  - `Relationship BetaUserProfileRelationship`
-
-    How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
-
-    - `const BetaUserProfileRelationshipExternal BetaUserProfileRelationship = "external"`
-
-    - `const BetaUserProfileRelationshipResold BetaUserProfileRelationship = "resold"`
-
-    - `const BetaUserProfileRelationshipInternal BetaUserProfileRelationship = "internal"`
-
   - `TrustGrants map[string, BetaUserProfileTrustGrant]`
 
     Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
@@ -107751,13 +113496,31 @@ List User Profiles
 
     A timestamp in RFC 3339 format
 
+  - `AccessType BetaUserProfileAccessType`
+
+    How the platform uses the API on behalf of the entity this profile represents. `application`: the platform sells a product that uses the API behind the scenes, and the profile represents an individual end-user of that product. `passthrough`: the platform resells raw inference, and the profile identifies the resold-to company.
+
+    - `const BetaUserProfileAccessTypeApplication BetaUserProfileAccessType = "application"`
+
+    - `const BetaUserProfileAccessTypePassthrough BetaUserProfileAccessType = "passthrough"`
+
   - `ExternalID string`
 
     Platform's own identifier for this user. Not enforced unique.
 
   - `Name string`
 
-    Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
+    Real-world name of the entity this profile represents (company or individual). For a resold-to company (`access_type` `passthrough`, or `relationship` `resold` under the `user-profiles-2026-03-24` header) this is that company's name.
+
+  - `Relationship BetaUserProfileRelationship`
+
+    How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+
+    - `const BetaUserProfileRelationshipExternal BetaUserProfileRelationship = "external"`
+
+    - `const BetaUserProfileRelationshipResold BetaUserProfileRelationship = "resold"`
+
+    - `const BetaUserProfileRelationshipInternal BetaUserProfileRelationship = "internal"`
 
 ### Example
 
@@ -107793,7 +113556,6 @@ func main() {
       "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
       "created_at": "2026-03-15T10:00:00Z",
       "metadata": {},
-      "relationship": "external",
       "trust_grants": {
         "cyber": {
           "status": "active"
@@ -107801,8 +113563,10 @@ func main() {
       },
       "type": "user_profile",
       "updated_at": "2026-03-15T10:00:00Z",
+      "access_type": "application",
       "external_id": "user_12345",
-      "name": "Example User"
+      "name": "Example User",
+      "relationship": "external"
     }
   ],
   "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
@@ -107875,6 +113639,8 @@ Get User Profile
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -107913,16 +113679,6 @@ Get User Profile
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
-  - `Relationship BetaUserProfileRelationship`
-
-    How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
-
-    - `const BetaUserProfileRelationshipExternal BetaUserProfileRelationship = "external"`
-
-    - `const BetaUserProfileRelationshipResold BetaUserProfileRelationship = "resold"`
-
-    - `const BetaUserProfileRelationshipInternal BetaUserProfileRelationship = "internal"`
-
   - `TrustGrants map[string, BetaUserProfileTrustGrant]`
 
     Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
@@ -107947,13 +113703,31 @@ Get User Profile
 
     A timestamp in RFC 3339 format
 
+  - `AccessType BetaUserProfileAccessType`
+
+    How the platform uses the API on behalf of the entity this profile represents. `application`: the platform sells a product that uses the API behind the scenes, and the profile represents an individual end-user of that product. `passthrough`: the platform resells raw inference, and the profile identifies the resold-to company.
+
+    - `const BetaUserProfileAccessTypeApplication BetaUserProfileAccessType = "application"`
+
+    - `const BetaUserProfileAccessTypePassthrough BetaUserProfileAccessType = "passthrough"`
+
   - `ExternalID string`
 
     Platform's own identifier for this user. Not enforced unique.
 
   - `Name string`
 
-    Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
+    Real-world name of the entity this profile represents (company or individual). For a resold-to company (`access_type` `passthrough`, or `relationship` `resold` under the `user-profiles-2026-03-24` header) this is that company's name.
+
+  - `Relationship BetaUserProfileRelationship`
+
+    How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+
+    - `const BetaUserProfileRelationshipExternal BetaUserProfileRelationship = "external"`
+
+    - `const BetaUserProfileRelationshipResold BetaUserProfileRelationship = "resold"`
+
+    - `const BetaUserProfileRelationshipInternal BetaUserProfileRelationship = "internal"`
 
 ### Example
 
@@ -107991,7 +113765,6 @@ func main() {
   "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
   "created_at": "2026-03-15T10:00:00Z",
   "metadata": {},
-  "relationship": "external",
   "trust_grants": {
     "cyber": {
       "status": "active"
@@ -107999,8 +113772,10 @@ func main() {
   },
   "type": "user_profile",
   "updated_at": "2026-03-15T10:00:00Z",
+  "access_type": "application",
   "external_id": "user_12345",
-  "name": "Example User"
+  "name": "Example User",
+  "relationship": "external"
 }
 ```
 
@@ -108017,6 +113792,14 @@ Update User Profile
 - `userProfileID string`
 
 - `params BetaUserProfileUpdateParams`
+
+  - `AccessType param.Field[BetaUserProfileUpdateParamsAccessType]`
+
+    Body param: How the platform uses the API on behalf of the entity this profile represents. `application`: the platform sells a product that uses the API behind the scenes, and the profile represents an individual end-user of that product. `passthrough`: the platform resells raw inference, and the profile identifies the resold-to company.
+
+    - `const BetaUserProfileUpdateParamsAccessTypeApplication BetaUserProfileUpdateParamsAccessType = "application"`
+
+    - `const BetaUserProfileUpdateParamsAccessTypePassthrough BetaUserProfileUpdateParamsAccessType = "passthrough"`
 
   - `ExternalID param.Field[string]`
 
@@ -108092,6 +113875,8 @@ Update User Profile
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -108130,16 +113915,6 @@ Update User Profile
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
-  - `Relationship BetaUserProfileRelationship`
-
-    How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
-
-    - `const BetaUserProfileRelationshipExternal BetaUserProfileRelationship = "external"`
-
-    - `const BetaUserProfileRelationshipResold BetaUserProfileRelationship = "resold"`
-
-    - `const BetaUserProfileRelationshipInternal BetaUserProfileRelationship = "internal"`
-
   - `TrustGrants map[string, BetaUserProfileTrustGrant]`
 
     Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
@@ -108164,13 +113939,31 @@ Update User Profile
 
     A timestamp in RFC 3339 format
 
+  - `AccessType BetaUserProfileAccessType`
+
+    How the platform uses the API on behalf of the entity this profile represents. `application`: the platform sells a product that uses the API behind the scenes, and the profile represents an individual end-user of that product. `passthrough`: the platform resells raw inference, and the profile identifies the resold-to company.
+
+    - `const BetaUserProfileAccessTypeApplication BetaUserProfileAccessType = "application"`
+
+    - `const BetaUserProfileAccessTypePassthrough BetaUserProfileAccessType = "passthrough"`
+
   - `ExternalID string`
 
     Platform's own identifier for this user. Not enforced unique.
 
   - `Name string`
 
-    Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
+    Real-world name of the entity this profile represents (company or individual). For a resold-to company (`access_type` `passthrough`, or `relationship` `resold` under the `user-profiles-2026-03-24` header) this is that company's name.
+
+  - `Relationship BetaUserProfileRelationship`
+
+    How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+
+    - `const BetaUserProfileRelationshipExternal BetaUserProfileRelationship = "external"`
+
+    - `const BetaUserProfileRelationshipResold BetaUserProfileRelationship = "resold"`
+
+    - `const BetaUserProfileRelationshipInternal BetaUserProfileRelationship = "internal"`
 
 ### Example
 
@@ -108208,7 +114001,6 @@ func main() {
   "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
   "created_at": "2026-03-15T10:00:00Z",
   "metadata": {},
-  "relationship": "external",
   "trust_grants": {
     "cyber": {
       "status": "active"
@@ -108216,8 +114008,10 @@ func main() {
   },
   "type": "user_profile",
   "updated_at": "2026-03-15T10:00:00Z",
+  "access_type": "application",
   "external_id": "user_12345",
-  "name": "Example User"
+  "name": "Example User",
+  "relationship": "external"
 }
 ```
 
@@ -108286,6 +114080,8 @@ Create Enrollment URL
       - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
@@ -108384,16 +114180,6 @@ func main() {
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
-  - `Relationship BetaUserProfileRelationship`
-
-    How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
-
-    - `const BetaUserProfileRelationshipExternal BetaUserProfileRelationship = "external"`
-
-    - `const BetaUserProfileRelationshipResold BetaUserProfileRelationship = "resold"`
-
-    - `const BetaUserProfileRelationshipInternal BetaUserProfileRelationship = "internal"`
-
   - `TrustGrants map[string, BetaUserProfileTrustGrant]`
 
     Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
@@ -108418,13 +114204,31 @@ func main() {
 
     A timestamp in RFC 3339 format
 
+  - `AccessType BetaUserProfileAccessType`
+
+    How the platform uses the API on behalf of the entity this profile represents. `application`: the platform sells a product that uses the API behind the scenes, and the profile represents an individual end-user of that product. `passthrough`: the platform resells raw inference, and the profile identifies the resold-to company.
+
+    - `const BetaUserProfileAccessTypeApplication BetaUserProfileAccessType = "application"`
+
+    - `const BetaUserProfileAccessTypePassthrough BetaUserProfileAccessType = "passthrough"`
+
   - `ExternalID string`
 
     Platform's own identifier for this user. Not enforced unique.
 
   - `Name string`
 
-    Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
+    Real-world name of the entity this profile represents (company or individual). For a resold-to company (`access_type` `passthrough`, or `relationship` `resold` under the `user-profiles-2026-03-24` header) this is that company's name.
+
+  - `Relationship BetaUserProfileRelationship`
+
+    How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+
+    - `const BetaUserProfileRelationshipExternal BetaUserProfileRelationship = "external"`
+
+    - `const BetaUserProfileRelationshipResold BetaUserProfileRelationship = "resold"`
+
+    - `const BetaUserProfileRelationshipInternal BetaUserProfileRelationship = "internal"`
 
 ### Beta User Profile Enrollment URL
 
@@ -108478,7 +114282,7 @@ Create a Dream
 
     - `type BetaDreamMemoryStoreInput struct{…}`
 
-      An input memory store the dream reads from. The dream never mutates this store.
+      An input memory store the dream reads from. The dream never mutates this store unless it is also the destination: with output_behavior {type: "update_existing"} the job consolidates this store in place.
 
       - `MemoryStoreID string`
 
@@ -108508,7 +114312,7 @@ Create a Dream
 
       - `ID string`
 
-        Model identifier, e.g. "claude-opus-4-7". 1-256 characters.
+        Model identifier, e.g. "claude-opus-5". 1-256 characters.
 
       - `Speed BetaDreamModelConfigParamSpeed`
 
@@ -108521,6 +114325,10 @@ Create a Dream
   - `Instructions param.Field[string]`
 
     Body param
+
+  - `OutputBehavior param.Field[BetaOutputBehaviorUnion]`
+
+    Body param: The default destination: the job creates a new output memory store as a clone of the memory_store input and writes the consolidated memories into it. The input store is never mutated.
 
   - `Betas param.Field[[]AnthropicBeta]`
 
@@ -108574,6 +114382,8 @@ Create a Dream
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -108600,7 +114410,7 @@ Create a Dream
 
 - `type BetaDream struct{…}`
 
-  An asynchronous memory-consolidation job that reads a memory store plus a set of session transcripts and writes consolidated memories into a new output memory store. The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to generally-available endpoints.
+  An asynchronous memory-consolidation job that reads a memory store plus a set of session transcripts and writes consolidated memories into an output memory store — a new store by default, or an existing store chosen via output_behavior. The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to generally-available endpoints.
 
   - `ID string`
 
@@ -108628,7 +114438,7 @@ Create a Dream
 
     - `type BetaDreamMemoryStoreInput struct{…}`
 
-      An input memory store the dream reads from. The dream never mutates this store.
+      An input memory store the dream reads from. The dream never mutates this store unless it is also the destination: with output_behavior {type: "update_existing"} the job consolidates this store in place.
 
       - `MemoryStoreID string`
 
@@ -108654,7 +114464,7 @@ Create a Dream
 
     - `ID string`
 
-      Model identifier, e.g. "claude-opus-4-7". 1-256 characters.
+      Model identifier, e.g. "claude-opus-5". 1-256 characters.
 
     - `Speed BetaDreamModelConfigSpeed`
 
@@ -108663,6 +114473,28 @@ Create a Dream
       - `const BetaDreamModelConfigSpeedStandard BetaDreamModelConfigSpeed = "standard"`
 
       - `const BetaDreamModelConfigSpeedFast BetaDreamModelConfigSpeed = "fast"`
+
+  - `OutputBehavior BetaOutputBehaviorUnion`
+
+    The default destination: the job creates a new output memory store as a clone of the memory_store input and writes the consolidated memories into it. The input store is never mutated.
+
+    - `type BetaOutputBehaviorCreateNew struct{…}`
+
+      The default destination: the job creates a new output memory store as a clone of the memory_store input and writes the consolidated memories into it. The input store is never mutated.
+
+      - `Type BetaOutputBehaviorCreateNewType`
+
+        - `const BetaOutputBehaviorCreateNewTypeCreateNew BetaOutputBehaviorCreateNewType = "create_new"`
+
+    - `type BetaOutputBehaviorUpdateExisting struct{…}`
+
+      The job writes the consolidated memories into this existing memory store instead of creating one. In EAP the store must be the job's own memory_store input, so the job consolidates the store in place.
+
+      - `MemoryStoreID string`
+
+      - `Type BetaOutputBehaviorUpdateExistingType`
+
+        - `const BetaOutputBehaviorUpdateExistingTypeUpdateExisting BetaOutputBehaviorUpdateExistingType = "update_existing"`
 
   - `Outputs []BetaDreamOutput`
 
@@ -108769,6 +114601,9 @@ func main() {
   "model": {
     "id": "x",
     "speed": "standard"
+  },
+  "output_behavior": {
+    "type": "create_new"
   },
   "outputs": [
     {
@@ -108886,6 +114721,8 @@ List Dreams
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -108912,7 +114749,7 @@ List Dreams
 
 - `type BetaDream struct{…}`
 
-  An asynchronous memory-consolidation job that reads a memory store plus a set of session transcripts and writes consolidated memories into a new output memory store. The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to generally-available endpoints.
+  An asynchronous memory-consolidation job that reads a memory store plus a set of session transcripts and writes consolidated memories into an output memory store — a new store by default, or an existing store chosen via output_behavior. The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to generally-available endpoints.
 
   - `ID string`
 
@@ -108940,7 +114777,7 @@ List Dreams
 
     - `type BetaDreamMemoryStoreInput struct{…}`
 
-      An input memory store the dream reads from. The dream never mutates this store.
+      An input memory store the dream reads from. The dream never mutates this store unless it is also the destination: with output_behavior {type: "update_existing"} the job consolidates this store in place.
 
       - `MemoryStoreID string`
 
@@ -108966,7 +114803,7 @@ List Dreams
 
     - `ID string`
 
-      Model identifier, e.g. "claude-opus-4-7". 1-256 characters.
+      Model identifier, e.g. "claude-opus-5". 1-256 characters.
 
     - `Speed BetaDreamModelConfigSpeed`
 
@@ -108975,6 +114812,28 @@ List Dreams
       - `const BetaDreamModelConfigSpeedStandard BetaDreamModelConfigSpeed = "standard"`
 
       - `const BetaDreamModelConfigSpeedFast BetaDreamModelConfigSpeed = "fast"`
+
+  - `OutputBehavior BetaOutputBehaviorUnion`
+
+    The default destination: the job creates a new output memory store as a clone of the memory_store input and writes the consolidated memories into it. The input store is never mutated.
+
+    - `type BetaOutputBehaviorCreateNew struct{…}`
+
+      The default destination: the job creates a new output memory store as a clone of the memory_store input and writes the consolidated memories into it. The input store is never mutated.
+
+      - `Type BetaOutputBehaviorCreateNewType`
+
+        - `const BetaOutputBehaviorCreateNewTypeCreateNew BetaOutputBehaviorCreateNewType = "create_new"`
+
+    - `type BetaOutputBehaviorUpdateExisting struct{…}`
+
+      The job writes the consolidated memories into this existing memory store instead of creating one. In EAP the store must be the job's own memory_store input, so the job consolidates the store in place.
+
+      - `MemoryStoreID string`
+
+      - `Type BetaOutputBehaviorUpdateExistingType`
+
+        - `const BetaOutputBehaviorUpdateExistingTypeUpdateExisting BetaOutputBehaviorUpdateExistingType = "update_existing"`
 
   - `Outputs []BetaDreamOutput`
 
@@ -109074,6 +114933,9 @@ func main() {
         "id": "x",
         "speed": "standard"
       },
+      "output_behavior": {
+        "type": "create_new"
+      },
       "outputs": [
         {
           "memory_store_id": "memory_store_id",
@@ -109161,6 +115023,8 @@ Get a Dream
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -109187,7 +115051,7 @@ Get a Dream
 
 - `type BetaDream struct{…}`
 
-  An asynchronous memory-consolidation job that reads a memory store plus a set of session transcripts and writes consolidated memories into a new output memory store. The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to generally-available endpoints.
+  An asynchronous memory-consolidation job that reads a memory store plus a set of session transcripts and writes consolidated memories into an output memory store — a new store by default, or an existing store chosen via output_behavior. The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to generally-available endpoints.
 
   - `ID string`
 
@@ -109215,7 +115079,7 @@ Get a Dream
 
     - `type BetaDreamMemoryStoreInput struct{…}`
 
-      An input memory store the dream reads from. The dream never mutates this store.
+      An input memory store the dream reads from. The dream never mutates this store unless it is also the destination: with output_behavior {type: "update_existing"} the job consolidates this store in place.
 
       - `MemoryStoreID string`
 
@@ -109241,7 +115105,7 @@ Get a Dream
 
     - `ID string`
 
-      Model identifier, e.g. "claude-opus-4-7". 1-256 characters.
+      Model identifier, e.g. "claude-opus-5". 1-256 characters.
 
     - `Speed BetaDreamModelConfigSpeed`
 
@@ -109250,6 +115114,28 @@ Get a Dream
       - `const BetaDreamModelConfigSpeedStandard BetaDreamModelConfigSpeed = "standard"`
 
       - `const BetaDreamModelConfigSpeedFast BetaDreamModelConfigSpeed = "fast"`
+
+  - `OutputBehavior BetaOutputBehaviorUnion`
+
+    The default destination: the job creates a new output memory store as a clone of the memory_store input and writes the consolidated memories into it. The input store is never mutated.
+
+    - `type BetaOutputBehaviorCreateNew struct{…}`
+
+      The default destination: the job creates a new output memory store as a clone of the memory_store input and writes the consolidated memories into it. The input store is never mutated.
+
+      - `Type BetaOutputBehaviorCreateNewType`
+
+        - `const BetaOutputBehaviorCreateNewTypeCreateNew BetaOutputBehaviorCreateNewType = "create_new"`
+
+    - `type BetaOutputBehaviorUpdateExisting struct{…}`
+
+      The job writes the consolidated memories into this existing memory store instead of creating one. In EAP the store must be the job's own memory_store input, so the job consolidates the store in place.
+
+      - `MemoryStoreID string`
+
+      - `Type BetaOutputBehaviorUpdateExistingType`
+
+        - `const BetaOutputBehaviorUpdateExistingTypeUpdateExisting BetaOutputBehaviorUpdateExistingType = "update_existing"`
 
   - `Outputs []BetaDreamOutput`
 
@@ -109351,6 +115237,9 @@ func main() {
     "id": "x",
     "speed": "standard"
   },
+  "output_behavior": {
+    "type": "create_new"
+  },
   "outputs": [
     {
       "memory_store_id": "memory_store_id",
@@ -109435,6 +115324,8 @@ Cancel a Dream
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -109461,7 +115352,7 @@ Cancel a Dream
 
 - `type BetaDream struct{…}`
 
-  An asynchronous memory-consolidation job that reads a memory store plus a set of session transcripts and writes consolidated memories into a new output memory store. The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to generally-available endpoints.
+  An asynchronous memory-consolidation job that reads a memory store plus a set of session transcripts and writes consolidated memories into an output memory store — a new store by default, or an existing store chosen via output_behavior. The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to generally-available endpoints.
 
   - `ID string`
 
@@ -109489,7 +115380,7 @@ Cancel a Dream
 
     - `type BetaDreamMemoryStoreInput struct{…}`
 
-      An input memory store the dream reads from. The dream never mutates this store.
+      An input memory store the dream reads from. The dream never mutates this store unless it is also the destination: with output_behavior {type: "update_existing"} the job consolidates this store in place.
 
       - `MemoryStoreID string`
 
@@ -109515,7 +115406,7 @@ Cancel a Dream
 
     - `ID string`
 
-      Model identifier, e.g. "claude-opus-4-7". 1-256 characters.
+      Model identifier, e.g. "claude-opus-5". 1-256 characters.
 
     - `Speed BetaDreamModelConfigSpeed`
 
@@ -109524,6 +115415,28 @@ Cancel a Dream
       - `const BetaDreamModelConfigSpeedStandard BetaDreamModelConfigSpeed = "standard"`
 
       - `const BetaDreamModelConfigSpeedFast BetaDreamModelConfigSpeed = "fast"`
+
+  - `OutputBehavior BetaOutputBehaviorUnion`
+
+    The default destination: the job creates a new output memory store as a clone of the memory_store input and writes the consolidated memories into it. The input store is never mutated.
+
+    - `type BetaOutputBehaviorCreateNew struct{…}`
+
+      The default destination: the job creates a new output memory store as a clone of the memory_store input and writes the consolidated memories into it. The input store is never mutated.
+
+      - `Type BetaOutputBehaviorCreateNewType`
+
+        - `const BetaOutputBehaviorCreateNewTypeCreateNew BetaOutputBehaviorCreateNewType = "create_new"`
+
+    - `type BetaOutputBehaviorUpdateExisting struct{…}`
+
+      The job writes the consolidated memories into this existing memory store instead of creating one. In EAP the store must be the job's own memory_store input, so the job consolidates the store in place.
+
+      - `MemoryStoreID string`
+
+      - `Type BetaOutputBehaviorUpdateExistingType`
+
+        - `const BetaOutputBehaviorUpdateExistingTypeUpdateExisting BetaOutputBehaviorUpdateExistingType = "update_existing"`
 
   - `Outputs []BetaDreamOutput`
 
@@ -109625,6 +115538,9 @@ func main() {
     "id": "x",
     "speed": "standard"
   },
+  "output_behavior": {
+    "type": "create_new"
+  },
   "outputs": [
     {
       "memory_store_id": "memory_store_id",
@@ -109709,6 +115625,8 @@ Archive a Dream
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -109735,7 +115653,7 @@ Archive a Dream
 
 - `type BetaDream struct{…}`
 
-  An asynchronous memory-consolidation job that reads a memory store plus a set of session transcripts and writes consolidated memories into a new output memory store. The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to generally-available endpoints.
+  An asynchronous memory-consolidation job that reads a memory store plus a set of session transcripts and writes consolidated memories into an output memory store — a new store by default, or an existing store chosen via output_behavior. The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to generally-available endpoints.
 
   - `ID string`
 
@@ -109763,7 +115681,7 @@ Archive a Dream
 
     - `type BetaDreamMemoryStoreInput struct{…}`
 
-      An input memory store the dream reads from. The dream never mutates this store.
+      An input memory store the dream reads from. The dream never mutates this store unless it is also the destination: with output_behavior {type: "update_existing"} the job consolidates this store in place.
 
       - `MemoryStoreID string`
 
@@ -109789,7 +115707,7 @@ Archive a Dream
 
     - `ID string`
 
-      Model identifier, e.g. "claude-opus-4-7". 1-256 characters.
+      Model identifier, e.g. "claude-opus-5". 1-256 characters.
 
     - `Speed BetaDreamModelConfigSpeed`
 
@@ -109798,6 +115716,28 @@ Archive a Dream
       - `const BetaDreamModelConfigSpeedStandard BetaDreamModelConfigSpeed = "standard"`
 
       - `const BetaDreamModelConfigSpeedFast BetaDreamModelConfigSpeed = "fast"`
+
+  - `OutputBehavior BetaOutputBehaviorUnion`
+
+    The default destination: the job creates a new output memory store as a clone of the memory_store input and writes the consolidated memories into it. The input store is never mutated.
+
+    - `type BetaOutputBehaviorCreateNew struct{…}`
+
+      The default destination: the job creates a new output memory store as a clone of the memory_store input and writes the consolidated memories into it. The input store is never mutated.
+
+      - `Type BetaOutputBehaviorCreateNewType`
+
+        - `const BetaOutputBehaviorCreateNewTypeCreateNew BetaOutputBehaviorCreateNewType = "create_new"`
+
+    - `type BetaOutputBehaviorUpdateExisting struct{…}`
+
+      The job writes the consolidated memories into this existing memory store instead of creating one. In EAP the store must be the job's own memory_store input, so the job consolidates the store in place.
+
+      - `MemoryStoreID string`
+
+      - `Type BetaOutputBehaviorUpdateExistingType`
+
+        - `const BetaOutputBehaviorUpdateExistingTypeUpdateExisting BetaOutputBehaviorUpdateExistingType = "update_existing"`
 
   - `Outputs []BetaDreamOutput`
 
@@ -109899,6 +115839,9 @@ func main() {
     "id": "x",
     "speed": "standard"
   },
+  "output_behavior": {
+    "type": "create_new"
+  },
   "outputs": [
     {
       "memory_store_id": "memory_store_id",
@@ -109923,7 +115866,7 @@ func main() {
 
 - `type BetaDream struct{…}`
 
-  An asynchronous memory-consolidation job that reads a memory store plus a set of session transcripts and writes consolidated memories into a new output memory store. The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to generally-available endpoints.
+  An asynchronous memory-consolidation job that reads a memory store plus a set of session transcripts and writes consolidated memories into an output memory store — a new store by default, or an existing store chosen via output_behavior. The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to generally-available endpoints.
 
   - `ID string`
 
@@ -109951,7 +115894,7 @@ func main() {
 
     - `type BetaDreamMemoryStoreInput struct{…}`
 
-      An input memory store the dream reads from. The dream never mutates this store.
+      An input memory store the dream reads from. The dream never mutates this store unless it is also the destination: with output_behavior {type: "update_existing"} the job consolidates this store in place.
 
       - `MemoryStoreID string`
 
@@ -109977,7 +115920,7 @@ func main() {
 
     - `ID string`
 
-      Model identifier, e.g. "claude-opus-4-7". 1-256 characters.
+      Model identifier, e.g. "claude-opus-5". 1-256 characters.
 
     - `Speed BetaDreamModelConfigSpeed`
 
@@ -109986,6 +115929,28 @@ func main() {
       - `const BetaDreamModelConfigSpeedStandard BetaDreamModelConfigSpeed = "standard"`
 
       - `const BetaDreamModelConfigSpeedFast BetaDreamModelConfigSpeed = "fast"`
+
+  - `OutputBehavior BetaOutputBehaviorUnion`
+
+    The default destination: the job creates a new output memory store as a clone of the memory_store input and writes the consolidated memories into it. The input store is never mutated.
+
+    - `type BetaOutputBehaviorCreateNew struct{…}`
+
+      The default destination: the job creates a new output memory store as a clone of the memory_store input and writes the consolidated memories into it. The input store is never mutated.
+
+      - `Type BetaOutputBehaviorCreateNewType`
+
+        - `const BetaOutputBehaviorCreateNewTypeCreateNew BetaOutputBehaviorCreateNewType = "create_new"`
+
+    - `type BetaOutputBehaviorUpdateExisting struct{…}`
+
+      The job writes the consolidated memories into this existing memory store instead of creating one. In EAP the store must be the job's own memory_store input, so the job consolidates the store in place.
+
+      - `MemoryStoreID string`
+
+      - `Type BetaOutputBehaviorUpdateExistingType`
+
+        - `const BetaOutputBehaviorUpdateExistingTypeUpdateExisting BetaOutputBehaviorUpdateExistingType = "update_existing"`
 
   - `Outputs []BetaDreamOutput`
 
@@ -110049,11 +116014,11 @@ func main() {
 
 - `type BetaDreamInputUnion interface{…}`
 
-  An input memory store the dream reads from. The dream never mutates this store.
+  An input memory store the dream reads from. The dream never mutates this store unless it is also the destination: with output_behavior {type: "update_existing"} the job consolidates this store in place.
 
   - `type BetaDreamMemoryStoreInput struct{…}`
 
-    An input memory store the dream reads from. The dream never mutates this store.
+    An input memory store the dream reads from. The dream never mutates this store unless it is also the destination: with output_behavior {type: "update_existing"} the job consolidates this store in place.
 
     - `MemoryStoreID string`
 
@@ -110075,7 +116040,7 @@ func main() {
 
 - `type BetaDreamMemoryStoreInput struct{…}`
 
-  An input memory store the dream reads from. The dream never mutates this store.
+  An input memory store the dream reads from. The dream never mutates this store unless it is also the destination: with output_behavior {type: "update_existing"} the job consolidates this store in place.
 
   - `MemoryStoreID string`
 
@@ -110103,7 +116068,7 @@ func main() {
 
   - `ID string`
 
-    Model identifier, e.g. "claude-opus-4-7". 1-256 characters.
+    Model identifier, e.g. "claude-opus-5". 1-256 characters.
 
   - `Speed BetaDreamModelConfigSpeed`
 
@@ -110121,7 +116086,7 @@ func main() {
 
   - `ID string`
 
-    Model identifier, e.g. "claude-opus-4-7". 1-256 characters.
+    Model identifier, e.g. "claude-opus-5". 1-256 characters.
 
   - `Speed BetaDreamModelConfigParamSpeed`
 
@@ -110192,6 +116157,52 @@ func main() {
   - `OutputTokens int64`
 
     Total output tokens generated across every pipeline stage.
+
+### Beta Output Behavior
+
+- `type BetaOutputBehaviorUnion interface{…}`
+
+  The default destination: the job creates a new output memory store as a clone of the memory_store input and writes the consolidated memories into it. The input store is never mutated.
+
+  - `type BetaOutputBehaviorCreateNew struct{…}`
+
+    The default destination: the job creates a new output memory store as a clone of the memory_store input and writes the consolidated memories into it. The input store is never mutated.
+
+    - `Type BetaOutputBehaviorCreateNewType`
+
+      - `const BetaOutputBehaviorCreateNewTypeCreateNew BetaOutputBehaviorCreateNewType = "create_new"`
+
+  - `type BetaOutputBehaviorUpdateExisting struct{…}`
+
+    The job writes the consolidated memories into this existing memory store instead of creating one. In EAP the store must be the job's own memory_store input, so the job consolidates the store in place.
+
+    - `MemoryStoreID string`
+
+    - `Type BetaOutputBehaviorUpdateExistingType`
+
+      - `const BetaOutputBehaviorUpdateExistingTypeUpdateExisting BetaOutputBehaviorUpdateExistingType = "update_existing"`
+
+### Beta Output Behavior Create New
+
+- `type BetaOutputBehaviorCreateNew struct{…}`
+
+  The default destination: the job creates a new output memory store as a clone of the memory_store input and writes the consolidated memories into it. The input store is never mutated.
+
+  - `Type BetaOutputBehaviorCreateNewType`
+
+    - `const BetaOutputBehaviorCreateNewTypeCreateNew BetaOutputBehaviorCreateNewType = "create_new"`
+
+### Beta Output Behavior Update Existing
+
+- `type BetaOutputBehaviorUpdateExisting struct{…}`
+
+  The job writes the consolidated memories into this existing memory store instead of creating one. In EAP the store must be the job's own memory_store input, so the job consolidates the store in place.
+
+  - `MemoryStoreID string`
+
+  - `Type BetaOutputBehaviorUpdateExistingType`
+
+    - `const BetaOutputBehaviorUpdateExistingTypeUpdateExisting BetaOutputBehaviorUpdateExistingType = "update_existing"`
 
 # Tunnels
 
@@ -110264,6 +116275,8 @@ Creates a tunnel. Creation allocates a fresh hostname and provisions the tunnel;
       - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
@@ -110422,6 +116435,8 @@ Fetches a tunnel by ID.
       - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
@@ -110595,6 +116610,8 @@ Lists tunnels. Results are ordered by creation time, newest first; archived tunn
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -110758,6 +116775,8 @@ Archives a tunnel. Archival is irreversible: every non-archived certificate on t
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -110920,6 +116939,8 @@ Reveals a tunnel's connector token. The value is fetched live on each call; Anth
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -111070,6 +117091,8 @@ Rotates a tunnel's connector token. Rotation invalidates the current token for n
       - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
@@ -111274,6 +117297,8 @@ Registers a public CA certificate on a tunnel. Anthropic verifies the gateway's 
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -111446,6 +117471,8 @@ Fetches a tunnel certificate by ID.
       - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
@@ -111628,6 +117655,8 @@ Lists the certificates registered on a tunnel. Archived certificates are exclude
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -111803,6 +117832,8 @@ Archives a tunnel certificate, removing it from the set Anthropic trusts for the
       - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 

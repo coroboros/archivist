@@ -171,7 +171,7 @@ var_dump($betaManagedAgentsSession);
       }
     ],
     "model": {
-      "id": "claude-sonnet-4-6",
+      "id": "claude-opus-5",
       "effort": {
         "type": "low"
       },
@@ -191,7 +191,7 @@ var_dump($betaManagedAgentsSession);
             }
           ],
           "model": {
-            "id": "claude-sonnet-4-6",
+            "id": "claude-opus-5",
             "effort": {
               "type": "low"
             },
@@ -520,7 +520,7 @@ var_dump($page);
           }
         ],
         "model": {
-          "id": "claude-sonnet-4-6",
+          "id": "claude-opus-5",
           "effort": {
             "type": "low"
           },
@@ -540,7 +540,7 @@ var_dump($page);
                 }
               ],
               "model": {
-                "id": "claude-sonnet-4-6",
+                "id": "claude-opus-5",
                 "effort": {
                   "type": "low"
                 },
@@ -809,7 +809,7 @@ var_dump($betaManagedAgentsSession);
       }
     ],
     "model": {
-      "id": "claude-sonnet-4-6",
+      "id": "claude-opus-5",
       "effort": {
         "type": "low"
       },
@@ -829,7 +829,7 @@ var_dump($betaManagedAgentsSession);
             }
           ],
           "model": {
-            "id": "claude-sonnet-4-6",
+            "id": "claude-opus-5",
             "effort": {
               "type": "low"
             },
@@ -1145,7 +1145,7 @@ var_dump($betaManagedAgentsSession);
       }
     ],
     "model": {
-      "id": "claude-sonnet-4-6",
+      "id": "claude-opus-5",
       "effort": {
         "type": "low"
       },
@@ -1165,7 +1165,7 @@ var_dump($betaManagedAgentsSession);
             }
           ],
           "model": {
-            "id": "claude-sonnet-4-6",
+            "id": "claude-opus-5",
             "effort": {
               "type": "low"
             },
@@ -1480,7 +1480,7 @@ var_dump($betaManagedAgentsSession);
       }
     ],
     "model": {
-      "id": "claude-sonnet-4-6",
+      "id": "claude-opus-5",
       "effort": {
         "type": "low"
       },
@@ -1500,7 +1500,7 @@ var_dump($betaManagedAgentsSession);
             }
           ],
           "model": {
-            "id": "claude-sonnet-4-6",
+            "id": "claude-opus-5",
             "effort": {
               "type": "low"
             },
@@ -1718,7 +1718,7 @@ var_dump($betaManagedAgentsSession);
 
   - `?Model model`
 
-    Replacement model. Accepts the model string, e.g. `claude-opus-4-6`, or a `model_config` object. Omit to use the agent's model.
+    Replacement model. Accepts the model string, e.g. `claude-opus-5`, or a `model_config` object. Omit to use the agent's model.
 
   - `?list<BetaManagedAgentsSkillParams> skills`
 
@@ -7579,7 +7579,7 @@ var_dump($page);
           }
         ],
         "model": {
-          "id": "claude-sonnet-4-6",
+          "id": "claude-opus-5",
           "effort": {
             "type": "low"
           },
@@ -7752,7 +7752,7 @@ var_dump($betaManagedAgentsSessionThread);
       }
     ],
     "model": {
-      "id": "claude-sonnet-4-6",
+      "id": "claude-opus-5",
       "effort": {
         "type": "low"
       },
@@ -7922,7 +7922,7 @@ var_dump($betaManagedAgentsSessionThread);
       }
     ],
     "model": {
-      "id": "claude-sonnet-4-6",
+      "id": "claude-opus-5",
       "effort": {
         "type": "low"
       },

@@ -13,7 +13,7 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/files
 
 ## Upload File
 
-`client.beta.files.upload(FileUploadParamsparams, RequestOptionsoptions?): FileMetadata`
+`client.beta.files.upload(FileUploadParamsparams, RequestOptionsoptions?): BetaFileMetadata`
 
 **post** `/v1/files`
 
@@ -33,7 +33,7 @@ Upload File
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -79,6 +79,8 @@ Upload File
 
       - `"user-profiles-2026-03-24"`
 
+      - `"user-profiles-2026-08-18"`
+
       - `"advisor-tool-2026-03-01"`
 
       - `"managed-agents-2026-04-01"`
@@ -103,7 +105,7 @@ Upload File
 
 ### Returns
 
-- `FileMetadata`
+- `BetaFileMetadata`
 
   - `id: string`
 
@@ -163,11 +165,11 @@ const client = new Anthropic({
   apiKey: process.env["ANTHROPIC_API_KEY"] // This is the default and can be omitted
 });
 
-const fileMetadata = await client.beta.files.upload({
+const betaFileMetadata = await client.beta.files.upload({
   file: fs.createReadStream("path/to/file")
 });
 
-console.log(fileMetadata.id);
+console.log(betaFileMetadata.id);
 ```
 
 #### Response
@@ -190,7 +192,7 @@ console.log(fileMetadata.id);
 
 ## List Files
 
-`client.beta.files.list(FileListParamsparams?, RequestOptionsoptions?): Page<FileMetadata>`
+`client.beta.files.list(FileListParamsparams?, RequestOptionsoptions?): Page<BetaFileMetadata>`
 
 **get** `/v1/files`
 
@@ -224,7 +226,7 @@ List Files
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -270,6 +272,8 @@ List Files
 
       - `"user-profiles-2026-03-24"`
 
+      - `"user-profiles-2026-08-18"`
+
       - `"advisor-tool-2026-03-01"`
 
       - `"managed-agents-2026-04-01"`
@@ -294,7 +298,7 @@ List Files
 
 ### Returns
 
-- `FileMetadata`
+- `BetaFileMetadata`
 
   - `id: string`
 
@@ -354,8 +358,8 @@ const client = new Anthropic({
 });
 
 // Automatically fetches more pages as needed.
-for await (const fileMetadata of client.beta.files.list()) {
-  console.log(fileMetadata.id);
+for await (const betaFileMetadata of client.beta.files.list()) {
+  console.log(betaFileMetadata.id);
 }
 ```
 
@@ -406,7 +410,7 @@ Download File
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -452,6 +456,8 @@ Download File
 
       - `"user-profiles-2026-03-24"`
 
+      - `"user-profiles-2026-08-18"`
+
       - `"advisor-tool-2026-03-01"`
 
       - `"managed-agents-2026-04-01"`
@@ -476,7 +482,7 @@ Download File
 
 ### Returns
 
-- `unnamed_schema_0 = Response`
+- `unnamed_schema_1 = Response`
 
 ### Example
 
@@ -497,7 +503,7 @@ console.log(content);
 
 ## Get File Metadata
 
-`client.beta.files.retrieveMetadata(stringfileID, FileRetrieveMetadataParamsparams?, RequestOptionsoptions?): FileMetadata`
+`client.beta.files.retrieveMetadata(stringfileID, FileRetrieveMetadataParamsparams?, RequestOptionsoptions?): BetaFileMetadata`
 
 **get** `/v1/files/{file_id}`
 
@@ -517,7 +523,7 @@ Get File Metadata
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -563,6 +569,8 @@ Get File Metadata
 
       - `"user-profiles-2026-03-24"`
 
+      - `"user-profiles-2026-08-18"`
+
       - `"advisor-tool-2026-03-01"`
 
       - `"managed-agents-2026-04-01"`
@@ -587,7 +595,7 @@ Get File Metadata
 
 ### Returns
 
-- `FileMetadata`
+- `BetaFileMetadata`
 
   - `id: string`
 
@@ -646,9 +654,9 @@ const client = new Anthropic({
   apiKey: process.env["ANTHROPIC_API_KEY"] // This is the default and can be omitted
 });
 
-const fileMetadata = await client.beta.files.retrieveMetadata("file_id");
+const betaFileMetadata = await client.beta.files.retrieveMetadata("file_id");
 
-console.log(fileMetadata.id);
+console.log(betaFileMetadata.id);
 ```
 
 #### Response
@@ -671,7 +679,7 @@ console.log(fileMetadata.id);
 
 ## Delete File
 
-`client.beta.files.delete(stringfileID, FileDeleteParamsparams?, RequestOptionsoptions?): DeletedFile`
+`client.beta.files.delete(stringfileID, FileDeleteParamsparams?, RequestOptionsoptions?): BetaDeletedFile`
 
 **delete** `/v1/files/{file_id}`
 
@@ -691,7 +699,7 @@ Delete File
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -737,6 +745,8 @@ Delete File
 
       - `"user-profiles-2026-03-24"`
 
+      - `"user-profiles-2026-08-18"`
+
       - `"advisor-tool-2026-03-01"`
 
       - `"managed-agents-2026-04-01"`
@@ -761,7 +771,7 @@ Delete File
 
 ### Returns
 
-- `DeletedFile`
+- `BetaDeletedFile`
 
   - `id: string`
 
@@ -784,9 +794,9 @@ const client = new Anthropic({
   apiKey: process.env["ANTHROPIC_API_KEY"] // This is the default and can be omitted
 });
 
-const deletedFile = await client.beta.files.delete("file_id");
+const betaDeletedFile = await client.beta.files.delete("file_id");
 
-console.log(deletedFile.id);
+console.log(betaDeletedFile.id);
 ```
 
 #### Response
@@ -800,23 +810,9 @@ console.log(deletedFile.id);
 
 ## Domain Types
 
-### Beta File Scope
+### Beta Deleted File
 
-- `BetaFileScope`
-
-  - `id: string`
-
-    The ID of the scoping resource (e.g., the session ID).
-
-  - `type: "session"`
-
-    The type of scope (e.g., `"session"`).
-
-    - `"session"`
-
-### Deleted File
-
-- `DeletedFile`
+- `BetaDeletedFile`
 
   - `id: string`
 
@@ -830,9 +826,9 @@ console.log(deletedFile.id);
 
     - `"file_deleted"`
 
-### File Metadata
+### Beta File Metadata
 
-- `FileMetadata`
+- `BetaFileMetadata`
 
   - `id: string`
 
@@ -881,3 +877,17 @@ console.log(deletedFile.id);
       The type of scope (e.g., `"session"`).
 
       - `"session"`
+
+### Beta File Scope
+
+- `BetaFileScope`
+
+  - `id: string`
+
+    The ID of the scoping resource (e.g., the session ID).
+
+  - `type: "session"`
+
+    The type of scope (e.g., `"session"`).
+
+    - `"session"`

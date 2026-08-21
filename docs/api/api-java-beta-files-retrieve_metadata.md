@@ -11,7 +11,7 @@ url: https://platform.claude.com/docs/en/api/java/beta/files/retrieve_metadata
 
 ## Get File Metadata
 
-`FileMetadata beta().files().retrieveMetadata(FileRetrieveMetadataParamsparams = FileRetrieveMetadataParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
+`BetaFileMetadata beta().files().retrieveMetadata(FileRetrieveMetadataParamsparams = FileRetrieveMetadataParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`
 
 **get** `/v1/files/{file_id}`
 
@@ -73,6 +73,8 @@ Get File Metadata
 
     - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
+    - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
@@ -97,7 +99,7 @@ Get File Metadata
 
 ### Returns
 
-- `class FileMetadata:`
+- `class BetaFileMetadata:`
 
   - `String id`
 
@@ -154,7 +156,7 @@ package com.anthropic.example;
 
 import com.anthropic.client.AnthropicClient;
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
-import com.anthropic.models.beta.files.FileMetadata;
+import com.anthropic.models.beta.files.BetaFileMetadata;
 import com.anthropic.models.beta.files.FileRetrieveMetadataParams;
 
 public final class Main {
@@ -163,7 +165,7 @@ public final class Main {
     public static void main(String[] args) {
         AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-        FileMetadata fileMetadata = client.beta().files().retrieveMetadata("file_id");
+        BetaFileMetadata betaFileMetadata = client.beta().files().retrieveMetadata("file_id");
     }
 }
 ```

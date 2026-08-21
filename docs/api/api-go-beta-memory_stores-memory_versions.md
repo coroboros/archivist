@@ -53,6 +53,10 @@ List memory versions
 
     Query param: Query parameter for page
 
+  - `ServiceAccountID param.Field[string]`
+
+    Query param: Query parameter for service_account_id
+
   - `SessionID param.Field[string]`
 
     Query param: Query parameter for session_id
@@ -112,6 +116,8 @@ List memory versions
       - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
 
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
@@ -222,6 +228,18 @@ List memory versions
       - `UserID string`
 
         ID of the user who performed the write (a `user_...` value).
+
+    - `type BetaManagedAgentsServiceAccountActor struct{…}`
+
+      Attribution for a write made by a workload authenticated as a service account, for example via Workload Identity Federation.
+
+      - `ServiceAccountID string`
+
+        ID of the service account that performed the write (a `svac_...` value).
+
+      - `Type ServiceAccountActor`
+
+        - `const ServiceAccountActorServiceAccountActor ServiceAccountActor = "service_account_actor"`
 
   - `Path string`
 
@@ -369,6 +387,8 @@ Retrieve a memory version
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -478,6 +498,18 @@ Retrieve a memory version
       - `UserID string`
 
         ID of the user who performed the write (a `user_...` value).
+
+    - `type BetaManagedAgentsServiceAccountActor struct{…}`
+
+      Attribution for a write made by a workload authenticated as a service account, for example via Workload Identity Federation.
+
+      - `ServiceAccountID string`
+
+        ID of the service account that performed the write (a `svac_...` value).
+
+      - `Type ServiceAccountActor`
+
+        - `const ServiceAccountActorServiceAccountActor ServiceAccountActor = "service_account_actor"`
 
   - `Path string`
 
@@ -618,6 +650,8 @@ Redact a memory version
 
       - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
 
+      - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
       - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
 
       - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
@@ -727,6 +761,18 @@ Redact a memory version
       - `UserID string`
 
         ID of the user who performed the write (a `user_...` value).
+
+    - `type BetaManagedAgentsServiceAccountActor struct{…}`
+
+      Attribution for a write made by a workload authenticated as a service account, for example via Workload Identity Federation.
+
+      - `ServiceAccountID string`
+
+        ID of the service account that performed the write (a `svac_...` value).
+
+      - `Type ServiceAccountActor`
+
+        - `const ServiceAccountActorServiceAccountActor ServiceAccountActor = "service_account_actor"`
 
   - `Path string`
 
@@ -841,6 +887,18 @@ func main() {
 
       ID of the user who performed the write (a `user_...` value).
 
+  - `type BetaManagedAgentsServiceAccountActor struct{…}`
+
+    Attribution for a write made by a workload authenticated as a service account, for example via Workload Identity Federation.
+
+    - `ServiceAccountID string`
+
+      ID of the service account that performed the write (a `svac_...` value).
+
+    - `Type ServiceAccountActor`
+
+      - `const ServiceAccountActorServiceAccountActor ServiceAccountActor = "service_account_actor"`
+
 ### Beta Managed Agents API Actor
 
 - `type BetaManagedAgentsAPIActor struct{…}`
@@ -943,6 +1001,18 @@ func main() {
 
         ID of the user who performed the write (a `user_...` value).
 
+    - `type BetaManagedAgentsServiceAccountActor struct{…}`
+
+      Attribution for a write made by a workload authenticated as a service account, for example via Workload Identity Federation.
+
+      - `ServiceAccountID string`
+
+        ID of the service account that performed the write (a `svac_...` value).
+
+      - `Type ServiceAccountActor`
+
+        - `const ServiceAccountActorServiceAccountActor ServiceAccountActor = "service_account_actor"`
+
   - `Path string`
 
     The memory's path at the time of this write. `null` if and only if `redacted_at` is set.
@@ -966,6 +1036,20 @@ func main() {
   - `const BetaManagedAgentsMemoryVersionOperationModified BetaManagedAgentsMemoryVersionOperation = "modified"`
 
   - `const BetaManagedAgentsMemoryVersionOperationDeleted BetaManagedAgentsMemoryVersionOperation = "deleted"`
+
+### Beta Managed Agents Service Account Actor
+
+- `type BetaManagedAgentsServiceAccountActor struct{…}`
+
+  Attribution for a write made by a workload authenticated as a service account, for example via Workload Identity Federation.
+
+  - `ServiceAccountID string`
+
+    ID of the service account that performed the write (a `svac_...` value).
+
+  - `Type ServiceAccountActor`
+
+    - `const ServiceAccountActorServiceAccountActor ServiceAccountActor = "service_account_actor"`
 
 ### Beta Managed Agents Session Actor
 

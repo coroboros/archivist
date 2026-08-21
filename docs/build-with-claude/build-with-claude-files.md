@@ -15,7 +15,7 @@ description: Upload files once, reference them by file_id in Messages requests, 
 - Platforms: Claude API, Claude Platform on AWS (beta), Microsoft Foundry (beta) [1]; not available on Amazon Bedrock, Google Cloud
 1. On [Microsoft Foundry](./build-with-claude-claude-in-microsoft-foundry.md), the Files API requires a [Hosted on Anthropic deployment](./build-with-claude-claude-in-microsoft-foundry.md#additional-features-not-supported-when-hosted-on-azure).
 
-The Files API lets you upload and manage files to use with the Claude API without re-uploading content with each request. This is particularly useful when using the [code execution tool](../agents-and-tools/agents-and-tools-tool-use-code-execution-tool.md) to provide inputs (for example, datasets and documents) and then download outputs (for example, charts). You can [explore the API reference directly](../api/api-beta-files-upload.md), in addition to this guide.
+The Files API lets you upload and manage files to use with the Claude API without re-uploading content with each request. This is particularly useful when using the [code execution tool](../agents-and-tools/agents-and-tools-tool-use-code-execution-tool.md) to provide inputs (for example, datasets and documents) and then download outputs (for example, charts). You can [explore the API reference directly](../api/api-files-upload.md), in addition to this guide.
 
 ## File type support
 
@@ -38,13 +38,6 @@ The Files API provides a create-once, use-many-times approach for working with f
 
 ## How to use the Files API
 
-<Note>
-  Requests to the Files API endpoints (`/v1/files`) don't need a beta header, and neither do Messages or Message Batches requests that reference an uploaded file. Two things to know about the `anthropic-beta: files-api-2025-04-14` header the examples on this page still send:
-
-  * **Referencing a file from the Messages API.** Requests that use an uploaded file as a `document` or `image` source, or in a `container_upload` block for the code execution tool, work with or without the header. The SDK examples on this page still pass it through their `betas` parameter, which continues to work.
-  * **Sending the header on Files API requests.** The SDK `beta.files` methods and the CLI `ant beta:files` commands add the header automatically, and the cURL examples on this page include it. Those requests keep working and return the earlier response format: the list endpoint paginates with `before_id` and `after_id`, returns `has_more`, `first_id`, and `last_id` instead of `next_page`, and rejects the `page` and `ids[]` parameters as unknown fields. File objects returned under the header omit `expires_at` instead of returning `null` when no expiration is set. To use `page` and `ids[]` as described under [List files](./build-with-claude-files.md#list-files), send the request without the beta header.
-</Note>
-
 ### Uploading a file
 
 Upload a file to be referenced in future API calls:
@@ -54,13 +47,12 @@ Upload a file to be referenced in future API calls:
   FILE_ID=$(curl -X POST https://api.anthropic.com/v1/files \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
-    -H "anthropic-beta: files-api-2025-04-14" \
     -F "file=@/path/to/document.pdf" | jq -r '.id')
   echo "$FILE_ID"
   ```
 
   ```bash CLI
-  FILE_ID=$(ant beta:files upload \
+  FILE_ID=$(ant files upload \
     --file /path/to/document.pdf \
     --transform id \
     --raw-output)
@@ -68,7 +60,7 @@ Upload a file to be referenced in future API calls:
   ```
 
   ```python Python
-  uploaded = client.beta.files.upload(
+  uploaded = client.files.upload(
       file=("document.pdf", open("/path/to/document.pdf", "rb"), "application/pdf"),
   )
   file_id = uploaded.id
@@ -76,7 +68,7 @@ Upload a file to be referenced in future API calls:
   ```
 
   ```typescript TypeScript
-  const uploaded = await client.beta.files.upload({
+  const uploaded = await client.files.upload({
     file: await toFile(
       fs.createReadStream("/path/to/document.pdf"),
       undefined,
@@ -87,7 +79,7 @@ Upload a file to be referenced in future API calls:
   ```
 
   ```csharp C#
-  var uploaded = await client.Beta.Files.Upload(
+  var uploaded = await client.Files.Upload(
       new FileUploadParams
       {
           File = new BinaryContent
@@ -109,8 +101,8 @@ Upload a file to be referenced in future API calls:
   }
   defer f.Close()
 
-  response, err := client.Beta.Files.Upload(context.Background(),
-  	anthropic.BetaFileUploadParams{
+  response, err := client.Files.Upload(context.Background(),
+  	anthropic.FileUploadParams{
   		File: anthropic.File(f, "document.pdf", "application/pdf"),
   	})
   if err != nil {
@@ -122,7 +114,7 @@ Upload a file to be referenced in future API calls:
   ```
 
   ```java Java
-  FileMetadata file = client.beta().files().upload(
+  FileMetadata file = client.files().upload(
       FileUploadParams.builder()
           .file(MultipartField.<InputStream>builder()
               .value(Files.newInputStream(Path.of("/path/to/document.pdf")))
@@ -137,6 +129,7 @@ Upload a file to be referenced in future API calls:
   ```
 
   ```php PHP
+  // The PHP SDK exposes the Files API under the beta namespace; field names can differ from other SDKs.
   $file = $client->beta->files->upload(
       FileParam::fromResource(fopen('/path/to/document.pdf', 'rb'), contentType: 'application/pdf'),
   );
@@ -146,7 +139,7 @@ Upload a file to be referenced in future API calls:
   ```
 
   ```ruby Ruby
-  file = client.beta.files.upload(
+  file = client.files.upload(
     file: Anthropic::FilePart.new(
       Pathname("/path/to/document.pdf"),
       content_type: "application/pdf"
@@ -184,7 +177,6 @@ Once uploaded, reference the file by passing the `id` from the upload response a
   curl -X POST https://api.anthropic.com/v1/messages \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
-    -H "anthropic-beta: files-api-2025-04-14" \
     -H "content-type: application/json" \
     -d @- <<EOF
   {
@@ -213,7 +205,7 @@ Once uploaded, reference the file by passing the `id` from the upload response a
   ```
 
   ```bash CLI
-  ant beta:messages create --beta files-api-2025-04-14 <<YAML
+  ant messages create <<YAML
   model: claude-opus-5
   max_tokens: 1024
   messages:
@@ -229,7 +221,7 @@ Once uploaded, reference the file by passing the `id` from the upload response a
   ```
 
   ```python Python
-  response = client.beta.messages.create(
+  response = client.messages.create(
       model="claude-opus-5",
       max_tokens=1024,
       messages=[
@@ -247,13 +239,12 @@ Once uploaded, reference the file by passing the `id` from the upload response a
               ],
           }
       ],
-      betas=["files-api-2025-04-14"],
   )
   print(response)
   ```
 
   ```typescript TypeScript
-  const response = await client.beta.messages.create({
+  const response = await client.messages.create({
     model: "claude-opus-5",
     max_tokens: 1024,
     messages: [
@@ -274,30 +265,28 @@ Once uploaded, reference the file by passing the `id` from the upload response a
         ],
       },
     ],
-    betas: ["files-api-2025-04-14"],
   });
 
   console.log(response);
   ```
 
   ```csharp C#
-  var response = await client.Beta.Messages.Create(
+  var response = await client.Messages.Create(
       new MessageCreateParams
       {
-          Model = Messages::Model.ClaudeOpus5,
+          Model = Model.ClaudeOpus5,
           MaxTokens = 1024,
-          Betas = [AnthropicBeta.FilesApi2025_04_14],
           Messages =
           [
-              new BetaMessageParam
+              new MessageParam
               {
                   Role = Role.User,
-                  Content = new List<BetaContentBlockParam>
+                  Content = new List<ContentBlockParam>
                   {
-                      new BetaTextBlockParam { Text = "Please summarize this document for me." },
-                      new BetaRequestDocumentBlock
+                      new TextBlockParam { Text = "Please summarize this document for me." },
+                      new DocumentBlockParam
                       {
-                          Source = new BetaFileDocumentSource { FileID = fileId }
+                          Source = new FileDocumentSource { FileID = fileId }
                       }
                   }
               }
@@ -308,15 +297,14 @@ Once uploaded, reference the file by passing the `id` from the upload response a
   ```
 
   ```go Go
-  msg, err := client.Beta.Messages.New(context.Background(),
-  	anthropic.BetaMessageNewParams{
+  msg, err := client.Messages.New(context.Background(),
+  	anthropic.MessageNewParams{
   		Model:     anthropic.ModelClaudeOpus5,
   		MaxTokens: 1024,
-  		Betas:     []anthropic.AnthropicBeta{anthropic.AnthropicBetaFilesAPI2025_04_14},
-  		Messages: []anthropic.BetaMessageParam{
-  			anthropic.NewBetaUserMessage(
-  				anthropic.NewBetaTextBlock("Please summarize this document for me."),
-  				anthropic.NewBetaDocumentBlock(anthropic.BetaFileDocumentSourceParam{
+  		Messages: []anthropic.MessageParam{
+  			anthropic.NewUserMessage(
+  				anthropic.NewTextBlock("Please summarize this document for me."),
+  				anthropic.NewDocumentBlock(anthropic.FileDocumentSourceParam{
   					FileID: fileID,
   				}),
   			),
@@ -332,25 +320,23 @@ Once uploaded, reference the file by passing the `id` from the upload response a
   ```java Java
   MessageCreateParams params = MessageCreateParams.builder()
       .model(Model.CLAUDE_OPUS_5)
-      .addBeta("files-api-2025-04-14")
       .maxTokens(1024)
-      .addUserMessageOfBetaContentBlockParams(List.of(
-          BetaContentBlockParam.ofText(BetaTextBlockParam.builder()
+      .addUserMessageOfBlockParams(List.of(
+          ContentBlockParam.ofText(TextBlockParam.builder()
               .text("Please summarize this document for me.")
               .build()),
-          BetaContentBlockParam.ofDocument(BetaRequestDocumentBlock.builder()
-              .source(BetaFileDocumentSource.builder()
-                  .fileId(fileId)
-                  .build())
+          ContentBlockParam.ofDocument(DocumentBlockParam.builder()
+              .fileSource(fileId)
               .build())
       ))
       .build();
 
-  BetaMessage message = client.beta().messages().create(params);
+  Message message = client.messages().create(params);
   System.out.println(message);
   ```
 
   ```php PHP
+  // The PHP SDK supports file_id document and image sources only through $client->beta->messages with the files beta.
   $response = $client->beta->messages->create(
       maxTokens: 1024,
       messages: [
@@ -376,10 +362,9 @@ Once uploaded, reference the file by passing the `id` from the upload response a
   ```
 
   ```ruby Ruby
-  response = client.beta.messages.create(
+  response = client.messages.create(
     model: "claude-opus-5",
     max_tokens: 1024,
-    betas: ["files-api-2025-04-14"],
     messages: [
       {
         role: "user",
@@ -705,44 +690,43 @@ The following examples read a text file and send its contents as plain text:
 
 #### List files
 
-Retrieve a list of your uploaded files. The endpoint is paginated: each request returns up to `limit` files (20 by default, and at most 1,000), and the response's `next_page` cursor fetches the next page when passed back as the `page` parameter. Files are ordered newest first. See the [List Files API reference](../api/api-beta-files-list.md). The SDKs return the first page and provide auto-pagination helpers. The CLI example bounds the total with `--max-items`:
+Retrieve a list of your uploaded files. The endpoint is paginated: each request returns up to `limit` files (20 by default, and at most 1,000), and the response's `next_page` cursor fetches the next page when passed back as the `page` parameter. Files are ordered newest first. See the [List Files API reference](../api/api-files-list.md). The SDKs return the first page and provide auto-pagination helpers. The CLI example bounds the total with `--max-items`:
 
 <CodeGroup>
   ```bash cURL
   curl https://api.anthropic.com/v1/files \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
-    -H "anthropic-beta: files-api-2025-04-14"
+    -H "anthropic-version: 2023-06-01"
   ```
 
   ```bash CLI
-  ant beta:files list \
+  ant files list \
     --max-items 10
   ```
 
   ```python Python
   client = anthropic.Anthropic()
-  files = client.beta.files.list()
+  files = client.files.list()
   print(files)
   ```
 
   ```typescript TypeScript
   const client = new Anthropic();
-  const files = await client.beta.files.list();
+  const files = await client.files.list();
   console.log(files);
   ```
 
   ```csharp C#
   AnthropicClient client = new();
 
-  var files = await client.Beta.Files.List();
+  var files = await client.Files.List();
   Console.WriteLine(files);
   ```
 
   ```go Go
   client := anthropic.NewClient()
 
-  files, err := client.Beta.Files.List(context.TODO(), anthropic.BetaFileListParams{})
+  files, err := client.Files.List(context.TODO(), anthropic.FileListParams{})
   if err != nil {
   	log.Fatal(err)
   }
@@ -750,17 +734,19 @@ Retrieve a list of your uploaded files. The endpoint is paginated: each request 
   ```
 
   ```java Java
-  import com.anthropic.models.beta.files.FileListPage;
+  import com.anthropic.models.files.FileListPage;
   // ...
   void main() {
       AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-      FileListPage files = client.beta().files().list();
+      FileListPage files = client.files().list();
       System.out.println(files);
   }
   ```
 
   ```php PHP
+  // The PHP SDK exposes the Files API under the beta namespace; field names can differ from other SDKs.
+  // list() paginates with afterID, beforeID, and limit; page and ids[] are not parameters here.
   $client = new Client();
 
   $files = $client->beta->files->list();
@@ -770,14 +756,12 @@ Retrieve a list of your uploaded files. The endpoint is paginated: each request 
   ```ruby Ruby
   client = Anthropic::Client.new
 
-  files = client.beta.files.list
+  files = client.files.list
   puts files
   ```
 </CodeGroup>
 
 To check a known set of files in one request instead of paging, pass up to 100 file IDs as `ids[]` query parameters. An `ids[]` request always returns a single page (`next_page` is `null`), and any ID that does not resolve to a file in your workspace is silently omitted from `data`; compare the returned IDs against the requested IDs to detect misses. `ids[]` cannot be combined with `page` or `limit`.
-
-The `page` parameter, the `next_page` cursor, and the `ids[]` filter apply to requests sent without the `anthropic-beta: files-api-2025-04-14` header. The preceding examples send it (the SDKs and CLI add it for `beta.files` calls), so they receive the earlier list format described in the note under [How to use the Files API](./build-with-claude-files.md#how-to-use-the-files-api).
 
 #### Get file metadata
 
@@ -787,36 +771,31 @@ Retrieve information about a specific file:
   ```bash cURL
   curl "https://api.anthropic.com/v1/files/$FILE_ID" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
-    -H "anthropic-beta: files-api-2025-04-14"
+    -H "anthropic-version: 2023-06-01"
   ```
 
   ```bash CLI
-  ant beta:files retrieve-metadata \
+  ant files retrieve-metadata \
     --file-id "$FILE_ID"
   ```
 
   ```python Python
-  file = client.beta.files.retrieve_metadata(file_id)
+  file = client.files.retrieve_metadata(file_id)
   print(file)
   ```
 
   ```typescript TypeScript
-  const file = await client.beta.files.retrieveMetadata(uploaded.id);
+  const file = await client.files.retrieveMetadata(uploaded.id);
   console.log(file);
   ```
 
   ```csharp C#
-  var file = await client.Beta.Files.RetrieveMetadata(fileId);
+  var file = await client.Files.RetrieveMetadata(fileId);
   Console.WriteLine(file);
   ```
 
   ```go Go
-  metadata, err := client.Beta.Files.GetMetadata(
-  	context.TODO(),
-  	fileID,
-  	anthropic.BetaFileGetMetadataParams{},
-  )
+  metadata, err := client.Files.GetMetadata(context.TODO(), fileID)
   if err != nil {
   	log.Fatal(err)
   }
@@ -825,18 +804,19 @@ Retrieve information about a specific file:
   ```
 
   ```java Java
-  FileMetadata metadata = client.beta().files().retrieveMetadata(fileId);
+  FileMetadata metadata = client.files().retrieveMetadata(fileId);
 
   System.out.println(metadata);
   ```
 
   ```php PHP
+  // The PHP SDK exposes the Files API under the beta namespace; field names can differ from other SDKs.
   $file = $client->beta->files->retrieveMetadata($fileId);
   echo $file;
   ```
 
   ```ruby Ruby
-  file = client.beta.files.retrieve_metadata(file_id)
+  file = client.files.retrieve_metadata(file_id)
   puts file
   ```
 </CodeGroup>
@@ -849,48 +829,44 @@ Remove a file from your workspace:
   ```bash cURL
   curl -X DELETE "https://api.anthropic.com/v1/files/$FILE_ID" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
-    -H "anthropic-beta: files-api-2025-04-14"
+    -H "anthropic-version: 2023-06-01"
   ```
 
   ```bash CLI
-  ant beta:files delete \
+  ant files delete \
     --file-id "$FILE_ID"
   ```
 
   ```python Python
-  client.beta.files.delete(file_id)
+  client.files.delete(file_id)
   ```
 
   ```typescript TypeScript
-  await client.beta.files.delete(uploaded.id);
+  await client.files.delete(uploaded.id);
   ```
 
   ```csharp C#
-  await client.Beta.Files.Delete(fileId);
+  await client.Files.Delete(fileId);
   ```
 
   ```go Go
-  _, err = client.Beta.Files.Delete(
-  	context.TODO(),
-  	fileID,
-  	anthropic.BetaFileDeleteParams{},
-  )
+  _, err = client.Files.Delete(context.TODO(), fileID)
   if err != nil {
   	log.Fatal(err)
   }
   ```
 
   ```java Java
-  client.beta().files().delete(fileId);
+  client.files().delete(fileId);
   ```
 
   ```php PHP
+  // The PHP SDK exposes the Files API under the beta namespace; field names can differ from other SDKs.
   $client->beta->files->delete($fileId);
   ```
 
   ```ruby Ruby
-  client.beta.files.delete(file_id)
+  client.files.delete(file_id)
   ```
 </CodeGroup>
 
@@ -903,31 +879,30 @@ Download files that were created by [skills](./build-with-claude-skills-guide.md
   curl -X GET "https://api.anthropic.com/v1/files/$FILE_ID/content" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
-    -H "anthropic-beta: files-api-2025-04-14" \
     --output downloaded_file.txt
   ```
 
   ```bash CLI
-  ant beta:files download \
+  ant files download \
     --file-id "$FILE_ID" \
     --output downloaded_file.txt
   ```
 
   ```python Python
-  file_content = client.beta.files.download(file_id)
+  file_content = client.files.download(file_id)
 
   file_content.write_to_file("downloaded_file.txt")
   ```
 
   ```typescript TypeScript
-  const content = await client.beta.files.download(uploaded.id);
+  const content = await client.files.download(uploaded.id);
 
   const bytes = Buffer.from(await content.arrayBuffer());
   await fsp.writeFile("downloaded_file.txt", bytes);
   ```
 
   ```csharp C#
-  using var fileContent = await client.Beta.Files.Download(fileId);
+  using var fileContent = await client.Files.Download(fileId);
   await using var source = await fileContent.ReadAsStream();
   await using var destination = File.Create("downloaded_file.txt");
   await source.CopyToAsync(destination);
@@ -935,11 +910,7 @@ Download files that were created by [skills](./build-with-claude-skills-guide.md
 
   ```go Go
   func downloadFile(client anthropic.Client, fileID string) error {
-  	resp, err := client.Beta.Files.Download(
-  		context.TODO(),
-  		fileID,
-  		anthropic.BetaFileDownloadParams{},
-  	)
+  	resp, err := client.Files.Download(context.TODO(), fileID)
   	if err != nil {
   		return err
   	}
@@ -958,7 +929,7 @@ Download files that were created by [skills](./build-with-claude-skills-guide.md
   ```
 
   ```java Java
-  try (HttpResponse response = client.beta().files().download(fileId)) {
+  try (HttpResponse response = client.files().download(fileId)) {
       try (InputStream body = response.body()) {
           Files.copy(body, Path.of("downloaded_file.txt"),
               StandardCopyOption.REPLACE_EXISTING);
@@ -967,13 +938,14 @@ Download files that were created by [skills](./build-with-claude-skills-guide.md
   ```
 
   ```php PHP
+  // The PHP SDK exposes the Files API under the beta namespace; field names can differ from other SDKs.
   $fileContent = $client->beta->files->download($fileId);
 
   file_put_contents("downloaded_file.txt", $fileContent);
   ```
 
   ```ruby Ruby
-  file_content = client.beta.files.download(file_id)
+  file_content = client.files.download(file_id)
 
   File.binwrite("downloaded_file.txt", file_content.read)
   ```

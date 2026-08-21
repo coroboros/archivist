@@ -11,7 +11,7 @@ url: https://platform.claude.com/docs/en/api/ruby/beta/files/upload
 
 ## Upload File
 
-`beta.files.upload(**kwargs) -> FileMetadata`
+`beta.files.upload(**kwargs) -> BetaFileMetadata`
 
 **post** `/v1/files`
 
@@ -29,7 +29,7 @@ Upload File
 
   - `String = String`
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 30 more`
+  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 31 more`
 
     - `:"message-batches-2024-09-24"`
 
@@ -75,6 +75,8 @@ Upload File
 
     - `:"user-profiles-2026-03-24"`
 
+    - `:"user-profiles-2026-08-18"`
+
     - `:"advisor-tool-2026-03-01"`
 
     - `:"managed-agents-2026-04-01"`
@@ -99,7 +101,7 @@ Upload File
 
 ### Returns
 
-- `class FileMetadata`
+- `class BetaFileMetadata`
 
   - `id: String`
 
@@ -156,9 +158,9 @@ require "anthropic"
 
 anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
 
-file_metadata = anthropic.beta.files.upload(file: StringIO.new("Example data"))
+beta_file_metadata = anthropic.beta.files.upload(file: StringIO.new("Example data"))
 
-puts(file_metadata)
+puts(beta_file_metadata)
 ```
 
 #### Response

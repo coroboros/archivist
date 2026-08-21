@@ -754,7 +754,7 @@ ant beta:sessions create \
       }
     ],
     "model": {
-      "id": "claude-sonnet-4-6",
+      "id": "claude-opus-5",
       "effort": {
         "type": "low"
       },
@@ -774,7 +774,7 @@ ant beta:sessions create \
             }
           ],
           "model": {
-            "id": "claude-sonnet-4-6",
+            "id": "claude-opus-5",
             "effort": {
               "type": "low"
             },
@@ -1705,7 +1705,7 @@ ant beta:sessions list \
           }
         ],
         "model": {
-          "id": "claude-sonnet-4-6",
+          "id": "claude-opus-5",
           "effort": {
             "type": "low"
           },
@@ -1725,7 +1725,7 @@ ant beta:sessions list \
                 }
               ],
               "model": {
-                "id": "claude-sonnet-4-6",
+                "id": "claude-opus-5",
                 "effort": {
                   "type": "low"
                 },
@@ -2599,7 +2599,7 @@ ant beta:sessions retrieve \
       }
     ],
     "model": {
-      "id": "claude-sonnet-4-6",
+      "id": "claude-opus-5",
       "effort": {
         "type": "low"
       },
@@ -2619,7 +2619,7 @@ ant beta:sessions retrieve \
             }
           ],
           "model": {
-            "id": "claude-sonnet-4-6",
+            "id": "claude-opus-5",
             "effort": {
               "type": "low"
             },
@@ -3509,7 +3509,7 @@ ant beta:sessions update \
       }
     ],
     "model": {
-      "id": "claude-sonnet-4-6",
+      "id": "claude-opus-5",
       "effort": {
         "type": "low"
       },
@@ -3529,7 +3529,7 @@ ant beta:sessions update \
             }
           ],
           "model": {
-            "id": "claude-sonnet-4-6",
+            "id": "claude-opus-5",
             "effort": {
               "type": "low"
             },
@@ -4446,7 +4446,7 @@ ant beta:sessions archive \
       }
     ],
     "model": {
-      "id": "claude-sonnet-4-6",
+      "id": "claude-opus-5",
       "effort": {
         "type": "low"
       },
@@ -4466,7 +4466,7 @@ ant beta:sessions archive \
             }
           ],
           "model": {
-            "id": "claude-sonnet-4-6",
+            "id": "claude-opus-5",
             "effort": {
               "type": "low"
             },
@@ -4712,7 +4712,7 @@ ant beta:sessions archive \
 
   - `model: optional BetaManagedAgentsModelConfigParams`
 
-    Replacement model. Accepts the model string, e.g. `claude-opus-4-6`, or a `model_config` object. Omit to use the agent's model.
+    Replacement model. Accepts the model string, e.g. `claude-opus-5`, or a `model_config` object. Omit to use the agent's model.
 
     - `id: "claude-sonnet-5" or "claude-fable-5" or "claude-opus-5" or 10 more or string`
 
@@ -22837,7 +22837,7 @@ ant beta:sessions:threads list \
           }
         ],
         "model": {
-          "id": "claude-sonnet-4-6",
+          "id": "claude-opus-5",
           "effort": {
             "type": "low"
           },
@@ -23403,7 +23403,7 @@ ant beta:sessions:threads retrieve \
       }
     ],
     "model": {
-      "id": "claude-sonnet-4-6",
+      "id": "claude-opus-5",
       "effort": {
         "type": "low"
       },
@@ -23966,7 +23966,7 @@ ant beta:sessions:threads archive \
       }
     ],
     "model": {
-      "id": "claude-sonnet-4-6",
+      "id": "claude-opus-5",
       "effort": {
         "type": "low"
       },

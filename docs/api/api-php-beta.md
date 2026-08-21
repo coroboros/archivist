@@ -61,6 +61,8 @@ url: https://platform.claude.com/docs/en/api/php/beta
 
   - `"user-profiles-2026-03-24"`
 
+  - `"user-profiles-2026-08-18"`
+
   - `"advisor-tool-2026-03-01"`
 
   - `"managed-agents-2026-04-01"`
@@ -336,7 +338,7 @@ var_dump($page);
 {
   "data": [
     {
-      "id": "claude-opus-4-6",
+      "id": "claude-opus-5",
       "allowed_fallback_models": [
         "string"
       ],
@@ -401,8 +403,8 @@ var_dump($page);
           }
         }
       },
-      "created_at": "2026-02-04T00:00:00Z",
-      "display_name": "Claude Opus 4.6",
+      "created_at": "2026-07-24T00:00:00Z",
+      "display_name": "Claude Opus 5",
       "max_input_tokens": 0,
       "max_tokens": 0,
       "type": "model"
@@ -492,7 +494,7 @@ var_dump($betaModelInfo);
 
 ```json
 {
-  "id": "claude-opus-4-6",
+  "id": "claude-opus-5",
   "allowed_fallback_models": [
     "string"
   ],
@@ -557,8 +559,8 @@ var_dump($betaModelInfo);
       }
     }
   },
-  "created_at": "2026-02-04T00:00:00Z",
-  "display_name": "Claude Opus 4.6",
+  "created_at": "2026-07-24T00:00:00Z",
+  "display_name": "Claude Opus 5",
   "max_input_tokens": 0,
   "max_tokens": 0,
   "type": "model"
@@ -1136,7 +1138,7 @@ $client = new Client(apiKey: 'my-anthropic-api-key');
 $betaMessage = $client->beta->messages->create(
   maxTokens: 1024,
   messages: [['content' => 'Hello, world', 'role' => 'user']],
-  model: Model::CLAUDE_OPUS_4_6,
+  model: Model::CLAUDE_OPUS_5,
   cacheControl: ['type' => 'ephemeral', 'ttl' => '5m'],
   container: [
     'id' => 'id',
@@ -1274,14 +1276,14 @@ var_dump($betaMessage);
       "type": "model_changed"
     }
   },
-  "model": "claude-opus-4-6",
+  "model": "claude-opus-5",
   "role": "assistant",
   "stop_details": {
     "category": "cyber",
     "explanation": "This request was declined because it conflicts with Anthropic's Usage Policy.",
     "fallback_credit_token": "QW50aHJvcGljL0NsYXVkZQ==",
     "fallback_has_prefill_claim": true,
-    "recommended_model": "claude-sonnet-4-6",
+    "recommended_model": "claude-opus-4-8",
     "type": "refusal"
   },
   "stop_reason": "end_turn",
@@ -1541,7 +1543,7 @@ $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaMessageTokensCount = $client->beta->messages->countTokens(
   messages: [['content' => 'Hello, world', 'role' => 'user']],
-  model: Model::CLAUDE_OPUS_4_6,
+  model: Model::CLAUDE_OPUS_5,
   cacheControl: ['type' => 'ephemeral', 'ttl' => '5m'],
   contextManagement: [
     'edits' => [
@@ -1903,6 +1905,689 @@ var_dump($betaMessageTokensCount);
   - `ErrorCode errorCode`
 
   - `"bash_code_execution_tool_result_error" type`
+
+### Beta Browser Close Tab Config
+
+- `BetaBrowserCloseTabConfig`
+
+  - `?bool deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `?bool enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Double Click Config
+
+- `BetaBrowserDoubleClickConfig`
+
+  - `?bool deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `?bool enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser File Upload Config
+
+- `BetaBrowserFileUploadConfig`
+
+  - `?bool deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `?bool enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Find Config
+
+- `BetaBrowserFindConfig`
+
+  - `?bool deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `?bool enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Form Input Config
+
+- `BetaBrowserFormInputConfig`
+
+  - `?bool deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `?bool enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Get Page Text Config
+
+- `BetaBrowserGetPageTextConfig`
+
+  - `?bool deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `?bool enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Hold Key Config
+
+- `BetaBrowserHoldKeyConfig`
+
+  - `?bool deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `?bool enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Hover Config
+
+- `BetaBrowserHoverConfig`
+
+  - `?bool deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `?bool enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Javascript Exec Config
+
+- `BetaBrowserJavascriptExecConfig`
+
+  - `?bool deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `?bool enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Key Config
+
+- `BetaBrowserKeyConfig`
+
+  - `?bool deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `?bool enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Left Click Config
+
+- `BetaBrowserLeftClickConfig`
+
+  - `?bool deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `?bool enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Left Click Drag Config
+
+- `BetaBrowserLeftClickDragConfig`
+
+  - `?bool deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `?bool enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Left Mouse Down Config
+
+- `BetaBrowserLeftMouseDownConfig`
+
+  - `?bool deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `?bool enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Left Mouse Up Config
+
+- `BetaBrowserLeftMouseUpConfig`
+
+  - `?bool deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `?bool enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser List Tabs Config
+
+- `BetaBrowserListTabsConfig`
+
+  - `?bool deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `?bool enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Middle Click Config
+
+- `BetaBrowserMiddleClickConfig`
+
+  - `?bool deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `?bool enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Mouse Move Config
+
+- `BetaBrowserMouseMoveConfig`
+
+  - `?bool deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `?bool enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Navigate Config
+
+- `BetaBrowserNavigateConfig`
+
+  - `?bool deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `?bool enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser New Tab Config
+
+- `BetaBrowserNewTabConfig`
+
+  - `?bool deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `?bool enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Read Console Config
+
+- `BetaBrowserReadConsoleConfig`
+
+  - `?bool deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `?bool enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Read Network Config
+
+- `BetaBrowserReadNetworkConfig`
+
+  - `?bool deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `?bool enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Read Page Config
+
+- `BetaBrowserReadPageConfig`
+
+  - `?bool deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `?bool enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Right Click Config
+
+- `BetaBrowserRightClickConfig`
+
+  - `?bool deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `?bool enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Screenshot Config
+
+- `BetaBrowserScreenshotConfig`
+
+  - `?bool deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `?bool enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Scroll Config
+
+- `BetaBrowserScrollConfig`
+
+  - `?bool deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `?bool enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Scroll To Config
+
+- `BetaBrowserScrollToConfig`
+
+  - `?bool deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `?bool enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser State Block Param
+
+- `BetaBrowserStateBlockParam`
+
+  - `list<BetaBrowserStateTabEntry> tabs`
+
+    All tabs open in the browser after this call — the full inventory, not a delta. May be empty. Whenever non-empty, exactly one entry carries `active: true`.
+
+  - `"browser_state" type`
+
+  - `?BetaCacheControlEphemeral cacheControl`
+
+    Create a cache control breakpoint at this content block.
+
+  - `?list<BetaBrowserStateChange> stateChanges`
+
+    Tabs opened and download state changes during this call. "Nothing to report" is expressed by omitting the field, never by an empty list.
+
+### Beta Browser State Change
+
+- `BetaBrowserStateChange`
+
+  - `BetaBrowserStateChangeTabOpened`
+
+    - `string tabID`
+
+      The `tab_id` of the opened tab, present in `tabs`.
+
+    - `"tab_opened" type`
+
+  - `BetaBrowserStateChangeDownloadStarted`
+
+    - `string downloadID`
+
+      The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+    - `"download_started" type`
+
+    - `string url`
+
+      The final post-redirect URL the download was served from.
+
+  - `BetaBrowserStateChangeDownloadCompleted`
+
+    - `string downloadID`
+
+      The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+    - `"download_completed" type`
+
+    - `string url`
+
+      The final post-redirect URL the download was served from.
+
+    - `?string path`
+
+      Where the executor saved the file, on the executor's filesystem. Only included when another tool in the same environment can read the file at that path.
+
+    - `?int sizeBytes`
+
+      The completed download's size.
+
+  - `BetaBrowserStateChangeDownloadFailed`
+
+    - `string downloadID`
+
+      The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+    - `"download_failed" type`
+
+    - `string url`
+
+      The final post-redirect URL the download was served from.
+
+    - `?string error`
+
+      The failure or cancellation detail, when known.
+
+### Beta Browser State Change Download Completed
+
+- `BetaBrowserStateChangeDownloadCompleted`
+
+  - `string downloadID`
+
+    The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+  - `"download_completed" type`
+
+  - `string url`
+
+    The final post-redirect URL the download was served from.
+
+  - `?string path`
+
+    Where the executor saved the file, on the executor's filesystem. Only included when another tool in the same environment can read the file at that path.
+
+  - `?int sizeBytes`
+
+    The completed download's size.
+
+### Beta Browser State Change Download Failed
+
+- `BetaBrowserStateChangeDownloadFailed`
+
+  - `string downloadID`
+
+    The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+  - `"download_failed" type`
+
+  - `string url`
+
+    The final post-redirect URL the download was served from.
+
+  - `?string error`
+
+    The failure or cancellation detail, when known.
+
+### Beta Browser State Change Download Started
+
+- `BetaBrowserStateChangeDownloadStarted`
+
+  - `string downloadID`
+
+    The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+  - `"download_started" type`
+
+  - `string url`
+
+    The final post-redirect URL the download was served from.
+
+### Beta Browser State Change Tab Opened
+
+- `BetaBrowserStateChangeTabOpened`
+
+  - `string tabID`
+
+    The `tab_id` of the opened tab, present in `tabs`.
+
+  - `"tab_opened" type`
+
+### Beta Browser State Tab Entry
+
+- `BetaBrowserStateTabEntry`
+
+  - `string tabID`
+
+    The caller-assigned identifier for this tab, unique within the inventory.
+
+  - `string title`
+
+    The title of the page the tab is showing. May be empty.
+
+  - `string url`
+
+    The URL of the page the tab is showing. May be empty.
+
+  - `?bool active`
+
+    Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
+
+### Beta Browser Switch Tab Config
+
+- `BetaBrowserSwitchTabConfig`
+
+  - `?bool deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `?bool enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Toolset 20260801
+
+- `BetaBrowserToolset20260801`
+
+  - `"browser_toolset_20260801" type`
+
+  - `?list<AllowedCaller> allowedCallers`
+
+  - `?BetaCacheControlEphemeral cacheControl`
+
+    Create a cache control breakpoint at this content block.
+
+  - `?BetaBrowserToolsetConfigs configs`
+
+    Per-member configuration for `browser_toolset_20260801`: one
+    optional field per member tool, keyed by the member name — the same
+    name the member's `tool_use` blocks carry. Every member is an
+    accepted key, and a member's defaults apply wherever its key is
+    absent. Unknown keys are rejected: the field set is this toolset
+    version's complete member set.
+
+### Beta Browser Toolset Configs
+
+- `BetaBrowserToolsetConfigs`
+
+  - `?BetaBrowserCloseTabConfig closeTab`
+
+    `close_tab`'s config overrides.
+
+  - `?BetaBrowserDoubleClickConfig doubleClick`
+
+    `double_click`'s config overrides.
+
+  - `?BetaBrowserFileUploadConfig fileUpload`
+
+    `file_upload`'s config overrides.
+
+  - `?BetaBrowserFindConfig find`
+
+    `find`'s config overrides.
+
+  - `?BetaBrowserFormInputConfig formInput`
+
+    `form_input`'s config overrides.
+
+  - `?BetaBrowserGetPageTextConfig getPageText`
+
+    `get_page_text`'s config overrides.
+
+  - `?BetaBrowserHoldKeyConfig holdKey`
+
+    `hold_key`'s config overrides.
+
+  - `?BetaBrowserHoverConfig hover`
+
+    `hover`'s config overrides.
+
+  - `?BetaBrowserJavascriptExecConfig javascriptExec`
+
+    `javascript_exec`'s config overrides.
+
+  - `?BetaBrowserKeyConfig key`
+
+    `key`'s config overrides.
+
+  - `?BetaBrowserLeftClickConfig leftClick`
+
+    `left_click`'s config overrides.
+
+  - `?BetaBrowserLeftClickDragConfig leftClickDrag`
+
+    `left_click_drag`'s config overrides.
+
+  - `?BetaBrowserLeftMouseDownConfig leftMouseDown`
+
+    `left_mouse_down`'s config overrides.
+
+  - `?BetaBrowserLeftMouseUpConfig leftMouseUp`
+
+    `left_mouse_up`'s config overrides.
+
+  - `?BetaBrowserListTabsConfig listTabs`
+
+    `list_tabs`'s config overrides.
+
+  - `?BetaBrowserMiddleClickConfig middleClick`
+
+    `middle_click`'s config overrides.
+
+  - `?BetaBrowserMouseMoveConfig mouseMove`
+
+    `mouse_move`'s config overrides.
+
+  - `?BetaBrowserNavigateConfig navigate`
+
+    `navigate`'s config overrides.
+
+  - `?BetaBrowserNewTabConfig newTab`
+
+    `new_tab`'s config overrides.
+
+  - `?BetaBrowserReadConsoleConfig readConsole`
+
+    `read_console`'s config overrides.
+
+  - `?BetaBrowserReadNetworkConfig readNetwork`
+
+    `read_network`'s config overrides.
+
+  - `?BetaBrowserReadPageConfig readPage`
+
+    `read_page`'s config overrides.
+
+  - `?BetaBrowserRightClickConfig rightClick`
+
+    `right_click`'s config overrides.
+
+  - `?BetaBrowserScreenshotConfig screenshot`
+
+    `screenshot`'s config overrides.
+
+  - `?BetaBrowserScrollConfig scroll`
+
+    `scroll`'s config overrides.
+
+  - `?BetaBrowserScrollToConfig scrollTo`
+
+    `scroll_to`'s config overrides.
+
+  - `?BetaBrowserSwitchTabConfig switchTab`
+
+    `switch_tab`'s config overrides.
+
+  - `?BetaBrowserTripleClickConfig tripleClick`
+
+    `triple_click`'s config overrides.
+
+  - `?BetaBrowserTypeConfig type`
+
+    `type`'s config overrides.
+
+  - `?BetaBrowserWaitConfig wait`
+
+    `wait`'s config overrides.
+
+  - `?BetaBrowserZoomConfig zoom`
+
+    `zoom`'s config overrides.
+
+### Beta Browser Triple Click Config
+
+- `BetaBrowserTripleClickConfig`
+
+  - `?bool deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `?bool enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Type Config
+
+- `BetaBrowserTypeConfig`
+
+  - `?bool deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `?bool enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Wait Config
+
+- `BetaBrowserWaitConfig`
+
+  - `?bool deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `?bool enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Zoom Config
+
+- `BetaBrowserZoomConfig`
+
+  - `?bool deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `?bool enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
 ### Beta Cache Control Ephemeral
 
@@ -2649,6 +3334,303 @@ var_dump($betaMessageTokensCount);
 
     Usage for a compaction iteration
 
+### Beta Computer Cursor Position Config
+
+- `BetaComputerCursorPositionConfig`
+
+  - `?bool deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `?bool enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Double Click Config
+
+- `BetaComputerDoubleClickConfig`
+
+  - `?bool deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `?bool enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Hold Key Config
+
+- `BetaComputerHoldKeyConfig`
+
+  - `?bool deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `?bool enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Key Config
+
+- `BetaComputerKeyConfig`
+
+  - `?bool deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `?bool enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Left Click Config
+
+- `BetaComputerLeftClickConfig`
+
+  - `?bool deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `?bool enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Left Click Drag Config
+
+- `BetaComputerLeftClickDragConfig`
+
+  - `?bool deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `?bool enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Left Mouse Down Config
+
+- `BetaComputerLeftMouseDownConfig`
+
+  - `?bool deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `?bool enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Left Mouse Up Config
+
+- `BetaComputerLeftMouseUpConfig`
+
+  - `?bool deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `?bool enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Middle Click Config
+
+- `BetaComputerMiddleClickConfig`
+
+  - `?bool deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `?bool enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Mouse Move Config
+
+- `BetaComputerMouseMoveConfig`
+
+  - `?bool deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `?bool enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Right Click Config
+
+- `BetaComputerRightClickConfig`
+
+  - `?bool deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `?bool enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Screenshot Config
+
+- `BetaComputerScreenshotConfig`
+
+  - `?bool deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `?bool enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Scroll Config
+
+- `BetaComputerScrollConfig`
+
+  - `?bool deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `?bool enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Toolset 20260801
+
+- `BetaComputerToolset20260801`
+
+  - `"computer_toolset_20260801" type`
+
+  - `?list<AllowedCaller> allowedCallers`
+
+  - `?BetaCacheControlEphemeral cacheControl`
+
+    Create a cache control breakpoint at this content block.
+
+  - `?BetaComputerToolsetConfigs configs`
+
+    Per-member configuration for `computer_toolset_20260801`: one
+    optional field per member tool, keyed by the member name — the same
+    name the member's `tool_use` blocks carry. Every member is an
+    accepted key, and a member's defaults apply wherever its key is
+    absent. Unknown keys are rejected: the field set is this toolset
+    version's complete member set.
+
+### Beta Computer Toolset Configs
+
+- `BetaComputerToolsetConfigs`
+
+  - `?BetaComputerCursorPositionConfig cursorPosition`
+
+    `cursor_position`'s config overrides.
+
+  - `?BetaComputerDoubleClickConfig doubleClick`
+
+    `double_click`'s config overrides.
+
+  - `?BetaComputerHoldKeyConfig holdKey`
+
+    `hold_key`'s config overrides.
+
+  - `?BetaComputerKeyConfig key`
+
+    `key`'s config overrides.
+
+  - `?BetaComputerLeftClickConfig leftClick`
+
+    `left_click`'s config overrides.
+
+  - `?BetaComputerLeftClickDragConfig leftClickDrag`
+
+    `left_click_drag`'s config overrides.
+
+  - `?BetaComputerLeftMouseDownConfig leftMouseDown`
+
+    `left_mouse_down`'s config overrides.
+
+  - `?BetaComputerLeftMouseUpConfig leftMouseUp`
+
+    `left_mouse_up`'s config overrides.
+
+  - `?BetaComputerMiddleClickConfig middleClick`
+
+    `middle_click`'s config overrides.
+
+  - `?BetaComputerMouseMoveConfig mouseMove`
+
+    `mouse_move`'s config overrides.
+
+  - `?BetaComputerRightClickConfig rightClick`
+
+    `right_click`'s config overrides.
+
+  - `?BetaComputerScreenshotConfig screenshot`
+
+    `screenshot`'s config overrides.
+
+  - `?BetaComputerScrollConfig scroll`
+
+    `scroll`'s config overrides.
+
+  - `?BetaComputerTripleClickConfig tripleClick`
+
+    `triple_click`'s config overrides.
+
+  - `?BetaComputerTypeConfig type`
+
+    `type`'s config overrides.
+
+  - `?BetaComputerWaitConfig wait`
+
+    `wait`'s config overrides.
+
+  - `?BetaComputerZoomConfig zoom`
+
+    `zoom`'s config overrides.
+
+### Beta Computer Triple Click Config
+
+- `BetaComputerTripleClickConfig`
+
+  - `?bool deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `?bool enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Type Config
+
+- `BetaComputerTypeConfig`
+
+  - `?bool deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `?bool enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Wait Config
+
+- `BetaComputerWaitConfig`
+
+  - `?bool deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `?bool enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Zoom Config
+
+- `BetaComputerZoomConfig`
+
+  - `?bool deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `?bool enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
 ### Beta Container
 
 - `BetaContainer`
@@ -2754,6 +3736,10 @@ var_dump($betaMessageTokensCount);
     - `?Caller caller`
 
       Tool invocation directly from the model.
+
+    - `?string toolsetName`
+
+      For a toolset member tool_use, the toolset family.
 
   - `BetaServerToolUseBlock`
 
@@ -2921,6 +3907,10 @@ var_dump($betaMessageTokensCount);
 
       Create a cache control breakpoint at this content block.
 
+    - `?BetaImageTransformationsParam transformations`
+
+      Configures the transformations the server applies to this image before the model observes it. Each key names a condition the server transforms images for; its value selects the transformation applied. Omitted keys keep their default behavior, and an empty object is equivalent to omitting the field.
+
   - `BetaRequestDocumentBlock`
 
     - `Source source`
@@ -2993,6 +3983,10 @@ var_dump($betaMessageTokensCount);
 
       Tool invocation directly from the model.
 
+    - `?string toolsetName`
+
+      For a toolset member tool_use, the toolset family this member belongs to.
+
   - `BetaToolResultBlockParam`
 
     - `string toolUseID`
@@ -3006,6 +4000,10 @@ var_dump($betaMessageTokensCount);
     - `?Content content`
 
     - `?bool isError`
+
+    - `?string toolsetName`
+
+      For a toolset member tool_result, the toolset family of the paired tool_use.
 
   - `BetaServerToolUseBlockParam`
 
@@ -3177,18 +4175,6 @@ var_dump($betaMessageTokensCount);
 
       Opaque metadata from prior compaction, to be round-tripped verbatim
 
-  - `BetaMidConversationSystemBlockParam`
-
-    - `list<Content> content`
-
-      System instruction text blocks.
-
-    - `"mid_conv_system" type`
-
-    - `?BetaCacheControlEphemeral cacheControl`
-
-      Create a cache control breakpoint at this content block.
-
   - `BetaRequestToolAdditionBlock`
 
     - `Tool tool`
@@ -3268,6 +4254,10 @@ var_dump($betaMessageTokensCount);
     - `?BetaCacheControlEphemeral cacheControl`
 
       Create a cache control breakpoint at this content block.
+
+    - `?BetaImageTransformationsParam transformations`
+
+      Configures the transformations the server applies to this image before the model observes it. Each key names a condition the server transforms images for; its value selects the transformation applied. Omitted keys keep their default behavior, and an empty object is equivalent to omitting the field.
 
 ### Beta Context Management Config
 
@@ -3587,6 +4577,18 @@ var_dump($betaMessageTokensCount);
   - `?BetaCacheControlEphemeral cacheControl`
 
     Create a cache control breakpoint at this content block.
+
+  - `?BetaImageTransformationsParam transformations`
+
+    Configures the transformations the server applies to this image before the model observes it. Each key names a condition the server transforms images for; its value selects the transformation applied. Omitted keys keep their default behavior, and an empty object is equivalent to omitting the field.
+
+### Beta Image Transformations Param
+
+- `BetaImageTransformationsParam`
+
+  - `?OversizedImage oversizedImage`
+
+    What the server does when this image exceeds the model's maximum image size. `"downsize"` (the default) scales the image down to fit, which changes the dimensions the model observes without telling you. `"error"` instead rejects the request with a 400 error naming the image's dimensions and the largest dimensions that fit, so you can scale the image deliberately — your image is never silently scaled down.
 
 ### Beta Input JSON Delta
 
@@ -4276,20 +5278,6 @@ var_dump($betaMessageTokensCount);
     An external identifier for the user who is associated with the request.
 
     This should be a uuid, hash value, or other opaque identifier. Anthropic may use this id to help detect abuse. Do not include any identifying information such as name, email address, or phone number.
-
-### Beta Mid Conversation System Block Param
-
-- `BetaMidConversationSystemBlockParam`
-
-  - `list<Content> content`
-
-    System instruction text blocks.
-
-  - `"mid_conv_system" type`
-
-  - `?BetaCacheControlEphemeral cacheControl`
-
-    Create a cache control breakpoint at this content block.
 
 ### Beta Output Config
 
@@ -5709,6 +6697,10 @@ var_dump($betaMessageTokensCount);
 
   - `?bool isError`
 
+  - `?string toolsetName`
+
+    For a toolset member tool_result, the toolset family of the paired tool_use.
+
 ### Beta Tool Search Tool Bm25 20251119
 
 - `BetaToolSearchToolBm25_20251119`
@@ -6131,6 +7123,25 @@ var_dump($betaMessageTokensCount);
 
       When true, guarantees schema validation on tool names and inputs
 
+  - `BetaBrowserToolset20260801`
+
+    - `"browser_toolset_20260801" type`
+
+    - `?list<AllowedCaller> allowedCallers`
+
+    - `?BetaCacheControlEphemeral cacheControl`
+
+      Create a cache control breakpoint at this content block.
+
+    - `?BetaBrowserToolsetConfigs configs`
+
+      Per-member configuration for `browser_toolset_20260801`: one
+      optional field per member tool, keyed by the member name — the same
+      name the member's `tool_use` blocks carry. Every member is an
+      accepted key, and a member's defaults apply wherever its key is
+      absent. Unknown keys are rejected: the field set is this toolset
+      version's complete member set.
+
   - `BetaToolComputerUse20241022`
 
     - `int displayHeightPx`
@@ -6300,6 +7311,25 @@ var_dump($betaMessageTokensCount);
     - `?bool strict`
 
       When true, guarantees schema validation on tool names and inputs
+
+  - `BetaComputerToolset20260801`
+
+    - `"computer_toolset_20260801" type`
+
+    - `?list<AllowedCaller> allowedCallers`
+
+    - `?BetaCacheControlEphemeral cacheControl`
+
+      Create a cache control breakpoint at this content block.
+
+    - `?BetaComputerToolsetConfigs configs`
+
+      Per-member configuration for `computer_toolset_20260801`: one
+      optional field per member tool, keyed by the member name — the same
+      name the member's `tool_use` blocks carry. Every member is an
+      accepted key, and a member's defaults apply wherever its key is
+      absent. Unknown keys are rejected: the field set is this toolset
+      version's complete member set.
 
   - `BetaToolTextEditor20250124`
 
@@ -6821,6 +7851,10 @@ var_dump($betaMessageTokensCount);
 
     Tool invocation directly from the model.
 
+  - `?string toolsetName`
+
+    For a toolset member tool_use, the toolset family.
+
 ### Beta Tool Use Block Param
 
 - `BetaToolUseBlockParam`
@@ -6840,6 +7874,10 @@ var_dump($betaMessageTokensCount);
   - `?Caller caller`
 
     Tool invocation directly from the model.
+
+  - `?string toolsetName`
+
+    For a toolset member tool_use, the toolset family this member belongs to.
 
 ### Beta Tool Uses Keep
 
@@ -7620,7 +8658,7 @@ $betaMessageBatch = $client->beta->messages->batches->create(
       'params' => [
         'maxTokens' => 1024,
         'messages' => [['content' => 'Hello, world', 'role' => 'user']],
-        'model' => Model::CLAUDE_OPUS_4_6,
+        'model' => Model::CLAUDE_OPUS_5,
         'cacheControl' => ['type' => 'ephemeral', 'ttl' => '5m'],
         'container' => [
           'id' => 'id',
@@ -8407,7 +9445,7 @@ Create Agent
 
 - `model: Model`
 
-  Model identifier. Accepts the [model string](../about-claude/about-claude-models-overview.md#latest-models-comparison), e.g. `claude-opus-4-6`, or a `model_config` object for additional configuration control
+  Model identifier. Accepts the [model string](../about-claude/about-claude-models-overview.md#latest-models-comparison), e.g. `claude-opus-5`, or a `model_config` object for additional configuration control
 
 - `name: string`
 
@@ -8501,7 +9539,7 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaManagedAgentsAgent = $client->beta->agents->create(
-  model: BetaManagedAgentsModel::CLAUDE_SONNET_4_6,
+  model: BetaManagedAgentsModel::CLAUDE_OPUS_5,
   name: 'My First Agent',
   description: 'A general-purpose starter agent.',
   mcpServers: [
@@ -8558,7 +9596,7 @@ var_dump($betaManagedAgentsAgent);
     "foo": "bar"
   },
   "model": {
-    "id": "claude-sonnet-4-6",
+    "id": "claude-opus-5",
     "effort": {
       "type": "low"
     },
@@ -8737,7 +9775,7 @@ var_dump($page);
         "foo": "bar"
       },
       "model": {
-        "id": "claude-sonnet-4-6",
+        "id": "claude-opus-5",
         "effort": {
           "type": "low"
         },
@@ -8900,7 +9938,7 @@ var_dump($betaManagedAgentsAgent);
     "foo": "bar"
   },
   "model": {
-    "id": "claude-sonnet-4-6",
+    "id": "claude-opus-5",
     "effort": {
       "type": "low"
     },
@@ -8983,7 +10021,7 @@ Update Agent
 
 - `model?:optional Model`
 
-  Model identifier. Accepts the [model string](../about-claude/about-claude-models-overview.md#latest-models-comparison), e.g. `claude-opus-4-6`, or a `model_config` object for additional configuration control. Omit to preserve. Cannot be cleared.
+  Model identifier. Accepts the [model string](../about-claude/about-claude-models-overview.md#latest-models-comparison), e.g. `claude-opus-5`, or a `model_config` object for additional configuration control. Omit to preserve. Cannot be cleared.
 
 - `multiagent?:optional BetaManagedAgentsMultiagentParams`
 
@@ -9080,7 +10118,7 @@ $betaManagedAgentsAgent = $client->beta->agents->update(
   ],
   metadata: ['foo' => 'string'],
   model: [
-    'id' => BetaManagedAgentsModel::CLAUDE_OPUS_4_8,
+    'id' => BetaManagedAgentsModel::CLAUDE_OPUS_5,
     'effort' => 'low',
     'inferenceGeo' => 'inference_geo',
     'speed' => 'standard',
@@ -9133,7 +10171,7 @@ var_dump($betaManagedAgentsAgent);
     "foo": "bar"
   },
   "model": {
-    "id": "claude-sonnet-4-6",
+    "id": "claude-opus-5",
     "effort": {
       "type": "low"
     },
@@ -9288,7 +10326,7 @@ var_dump($betaManagedAgentsAgent);
     "foo": "bar"
   },
   "model": {
-    "id": "claude-sonnet-4-6",
+    "id": "claude-opus-5",
     "effort": {
       "type": "low"
     },
@@ -10115,7 +11153,7 @@ var_dump($page);
         "foo": "bar"
       },
       "model": {
-        "id": "claude-sonnet-4-6",
+        "id": "claude-opus-5",
         "effort": {
           "type": "low"
         },
@@ -10231,9 +11269,9 @@ Create a new environment with the specified configuration.
 
     RFC 3339 timestamp when environment was created
 
-  - `string description`
+  - `?string description`
 
-    User-provided description for the environment
+    User-provided description for the environment; null when unset
 
   - `array<string,string> metadata`
 
@@ -10388,9 +11426,9 @@ List environments with pagination support.
 
     RFC 3339 timestamp when environment was created
 
-  - `string description`
+  - `?string description`
 
-    User-provided description for the environment
+    User-provided description for the environment; null when unset
 
   - `array<string,string> metadata`
 
@@ -10521,9 +11559,9 @@ Retrieve a specific environment by ID.
 
     RFC 3339 timestamp when environment was created
 
-  - `string description`
+  - `?string description`
 
-    User-provided description for the environment
+    User-provided description for the environment; null when unset
 
   - `array<string,string> metadata`
 
@@ -10629,7 +11667,7 @@ Update an existing environment's configuration.
 
 - `description?:optional string`
 
-  Updated description of the environment
+  Updated description of the environment. Omit to preserve; null clears to null; an empty string is stored as an empty string.
 
 - `metadata?:optional array<string,string>`
 
@@ -10667,9 +11705,9 @@ Update an existing environment's configuration.
 
     RFC 3339 timestamp when environment was created
 
-  - `string description`
+  - `?string description`
 
-    User-provided description for the environment
+    User-provided description for the environment; null when unset
 
   - `array<string,string> metadata`
 
@@ -10869,9 +11907,9 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
     RFC 3339 timestamp when environment was created
 
-  - `string description`
+  - `?string description`
 
-    User-provided description for the environment
+    User-provided description for the environment; null when unset
 
   - `array<string,string> metadata`
 
@@ -11015,9 +12053,9 @@ var_dump($betaEnvironment);
 
     RFC 3339 timestamp when environment was created
 
-  - `string description`
+  - `?string description`
 
-    User-provided description for the environment
+    User-provided description for the environment; null when unset
 
   - `array<string,string> metadata`
 
@@ -12394,7 +13432,7 @@ var_dump($betaManagedAgentsSession);
       }
     ],
     "model": {
-      "id": "claude-sonnet-4-6",
+      "id": "claude-opus-5",
       "effort": {
         "type": "low"
       },
@@ -12414,7 +13452,7 @@ var_dump($betaManagedAgentsSession);
             }
           ],
           "model": {
-            "id": "claude-sonnet-4-6",
+            "id": "claude-opus-5",
             "effort": {
               "type": "low"
             },
@@ -12743,7 +13781,7 @@ var_dump($page);
           }
         ],
         "model": {
-          "id": "claude-sonnet-4-6",
+          "id": "claude-opus-5",
           "effort": {
             "type": "low"
           },
@@ -12763,7 +13801,7 @@ var_dump($page);
                 }
               ],
               "model": {
-                "id": "claude-sonnet-4-6",
+                "id": "claude-opus-5",
                 "effort": {
                   "type": "low"
                 },
@@ -13032,7 +14070,7 @@ var_dump($betaManagedAgentsSession);
       }
     ],
     "model": {
-      "id": "claude-sonnet-4-6",
+      "id": "claude-opus-5",
       "effort": {
         "type": "low"
       },
@@ -13052,7 +14090,7 @@ var_dump($betaManagedAgentsSession);
             }
           ],
           "model": {
-            "id": "claude-sonnet-4-6",
+            "id": "claude-opus-5",
             "effort": {
               "type": "low"
             },
@@ -13368,7 +14406,7 @@ var_dump($betaManagedAgentsSession);
       }
     ],
     "model": {
-      "id": "claude-sonnet-4-6",
+      "id": "claude-opus-5",
       "effort": {
         "type": "low"
       },
@@ -13388,7 +14426,7 @@ var_dump($betaManagedAgentsSession);
             }
           ],
           "model": {
-            "id": "claude-sonnet-4-6",
+            "id": "claude-opus-5",
             "effort": {
               "type": "low"
             },
@@ -13703,7 +14741,7 @@ var_dump($betaManagedAgentsSession);
       }
     ],
     "model": {
-      "id": "claude-sonnet-4-6",
+      "id": "claude-opus-5",
       "effort": {
         "type": "low"
       },
@@ -13723,7 +14761,7 @@ var_dump($betaManagedAgentsSession);
             }
           ],
           "model": {
-            "id": "claude-sonnet-4-6",
+            "id": "claude-opus-5",
             "effort": {
               "type": "low"
             },
@@ -13941,7 +14979,7 @@ var_dump($betaManagedAgentsSession);
 
   - `?Model model`
 
-    Replacement model. Accepts the model string, e.g. `claude-opus-4-6`, or a `model_config` object. Omit to use the agent's model.
+    Replacement model. Accepts the model string, e.g. `claude-opus-5`, or a `model_config` object. Omit to use the agent's model.
 
   - `?list<BetaManagedAgentsSkillParams> skills`
 
@@ -19802,7 +20840,7 @@ var_dump($page);
           }
         ],
         "model": {
-          "id": "claude-sonnet-4-6",
+          "id": "claude-opus-5",
           "effort": {
             "type": "low"
           },
@@ -19975,7 +21013,7 @@ var_dump($betaManagedAgentsSessionThread);
       }
     ],
     "model": {
-      "id": "claude-sonnet-4-6",
+      "id": "claude-opus-5",
       "effort": {
         "type": "low"
       },
@@ -20145,7 +21183,7 @@ var_dump($betaManagedAgentsSessionThread);
       }
     ],
     "model": {
-      "id": "claude-sonnet-4-6",
+      "id": "claude-opus-5",
       "effort": {
         "type": "low"
       },
@@ -28212,7 +29250,7 @@ var_dump($betaManagedAgentsDeletedMemory);
 
 ## List memory versions
 
-`$client->beta->memoryStores->memoryVersions->list(string memoryStoreID, ?string apiKeyID, ?\Datetime createdAtGte, ?\Datetime createdAtLte, ?int limit, ?string memoryID, ?ManagedAgentsMemoryVersionOperation operation, ?string page, ?string sessionID, ?ManagedAgentsMemoryView view, ?list<AnthropicBeta> betas): PageCursor<ManagedAgentsMemoryVersion>`
+`$client->beta->memoryStores->memoryVersions->list(string memoryStoreID, ?string apiKeyID, ?\Datetime createdAtGte, ?\Datetime createdAtLte, ?int limit, ?string memoryID, ?ManagedAgentsMemoryVersionOperation operation, ?string page, ?string serviceAccountID, ?string sessionID, ?ManagedAgentsMemoryView view, ?list<AnthropicBeta> betas): PageCursor<ManagedAgentsMemoryVersion>`
 
 **get** `/v1/memory_stores/{memory_store_id}/memory_versions`
 
@@ -28249,6 +29287,10 @@ List memory versions
 - `page?:optional string`
 
   Query parameter for page
+
+- `serviceAccountID?:optional string`
+
+  Query parameter for service_account_id
 
 - `sessionID?:optional string`
 
@@ -28334,6 +29376,7 @@ $page = $client->beta->memoryStores->memoryVersions->list(
   memoryID: 'memory_id',
   operation: ManagedAgentsMemoryVersionOperation::CREATED,
   page: 'page',
+  serviceAccountID: 'service_account_id',
   sessionID: 'session_id',
   view: ManagedAgentsMemoryView::BASIC,
   betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
@@ -28648,6 +29691,14 @@ var_dump($betaManagedAgentsMemoryVersion);
 
       ID of the user who performed the write (a `user_...` value).
 
+  - `ManagedAgentsServiceAccountActor`
+
+    - `string serviceAccountID`
+
+      ID of the service account that performed the write (a `svac_...` value).
+
+    - `"service_account_actor" type`
+
 ### Beta Managed Agents API Actor
 
 - `ManagedAgentsAPIActor`
@@ -28722,6 +29773,16 @@ var_dump($betaManagedAgentsMemoryVersion);
 
   - `"deleted"`
 
+### Beta Managed Agents Service Account Actor
+
+- `ManagedAgentsServiceAccountActor`
+
+  - `string serviceAccountID`
+
+    ID of the service account that performed the write (a `svac_...` value).
+
+  - `"service_account_actor" type`
+
 ### Beta Managed Agents Session Actor
 
 - `ManagedAgentsSessionActor`
@@ -28746,7 +29807,7 @@ var_dump($betaManagedAgentsMemoryVersion);
 
 ## Upload File
 
-`$client->beta->files->upload(string file, ?list<AnthropicBeta> betas): FileMetadata`
+`$client->beta->files->upload(string file, ?list<AnthropicBeta> betas): BetaFileMetadata`
 
 **post** `/v1/files`
 
@@ -28764,7 +29825,7 @@ Upload File
 
 ### Returns
 
-- `FileMetadata`
+- `BetaFileMetadata`
 
   - `string id`
 
@@ -28811,12 +29872,12 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
-$fileMetadata = $client->beta->files->upload(
+$betaFileMetadata = $client->beta->files->upload(
   file: FileParam::fromString('Example data', filename: uniqid('file-upload-', true)),
   betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
 );
 
-var_dump($fileMetadata);
+var_dump($betaFileMetadata);
 ```
 
 #### Response
@@ -28839,7 +29900,7 @@ var_dump($fileMetadata);
 
 ## List Files
 
-`$client->beta->files->list(?string afterID, ?string beforeID, ?int limit, ?string scopeID, ?list<AnthropicBeta> betas): Page<FileMetadata>`
+`$client->beta->files->list(?string afterID, ?string beforeID, ?int limit, ?string scopeID, ?list<AnthropicBeta> betas): Page<BetaFileMetadata>`
 
 **get** `/v1/files`
 
@@ -28871,7 +29932,7 @@ List Files
 
 ### Returns
 
-- `FileMetadata`
+- `BetaFileMetadata`
 
   - `string id`
 
@@ -28994,7 +30055,7 @@ var_dump($response);
 
 ## Get File Metadata
 
-`$client->beta->files->retrieveMetadata(string fileID, ?list<AnthropicBeta> betas): FileMetadata`
+`$client->beta->files->retrieveMetadata(string fileID, ?list<AnthropicBeta> betas): BetaFileMetadata`
 
 **get** `/v1/files/{file_id}`
 
@@ -29012,7 +30073,7 @@ Get File Metadata
 
 ### Returns
 
-- `FileMetadata`
+- `BetaFileMetadata`
 
   - `string id`
 
@@ -29059,11 +30120,11 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
-$fileMetadata = $client->beta->files->retrieveMetadata(
+$betaFileMetadata = $client->beta->files->retrieveMetadata(
   'file_id', betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24]
 );
 
-var_dump($fileMetadata);
+var_dump($betaFileMetadata);
 ```
 
 #### Response
@@ -29086,7 +30147,7 @@ var_dump($fileMetadata);
 
 ## Delete File
 
-`$client->beta->files->delete(string fileID, ?list<AnthropicBeta> betas): DeletedFile`
+`$client->beta->files->delete(string fileID, ?list<AnthropicBeta> betas): BetaDeletedFile`
 
 **delete** `/v1/files/{file_id}`
 
@@ -29104,7 +30165,7 @@ Delete File
 
 ### Returns
 
-- `DeletedFile`
+- `BetaDeletedFile`
 
   - `string id`
 
@@ -29125,11 +30186,11 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
-$deletedFile = $client->beta->files->delete(
+$betaDeletedFile = $client->beta->files->delete(
   'file_id', betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24]
 );
 
-var_dump($deletedFile);
+var_dump($betaDeletedFile);
 ```
 
 #### Response
@@ -29143,21 +30204,9 @@ var_dump($deletedFile);
 
 ## Domain Types
 
-### Beta File Scope
+### Beta Deleted File
 
-- `BetaFileScope`
-
-  - `string id`
-
-    The ID of the scoping resource (e.g., the session ID).
-
-  - `"session" type`
-
-    The type of scope (e.g., `"session"`).
-
-### Deleted File
-
-- `DeletedFile`
+- `BetaDeletedFile`
 
   - `string id`
 
@@ -29169,9 +30218,9 @@ var_dump($deletedFile);
 
     For file deletion, this is always `"file_deleted"`.
 
-### File Metadata
+### Beta File Metadata
 
-- `FileMetadata`
+- `BetaFileMetadata`
 
   - `string id`
 
@@ -29208,6 +30257,18 @@ var_dump($deletedFile);
   - `?BetaFileScope scope`
 
     The scope of this file, indicating the context in which it was created (e.g., a session).
+
+### Beta File Scope
+
+- `BetaFileScope`
+
+  - `string id`
+
+    The ID of the scoping resource (e.g., the session ID).
+
+  - `"session" type`
+
+    The type of scope (e.g., `"session"`).
 
 # Skills
 
@@ -30048,13 +31109,17 @@ var_dump($version);
 
 ## Create User Profile
 
-`$client->beta->userProfiles->create(?string externalID, ?array<string,string> metadata, ?string name, ?Relationship relationship, ?list<AnthropicBeta> betas): BetaUserProfile`
+`$client->beta->userProfiles->create(?AccessType accessType, ?string externalID, ?array<string,string> metadata, ?string name, ?Relationship relationship, ?list<AnthropicBeta> betas): BetaUserProfile`
 
 **post** `/v1/user_profiles`
 
 Create User Profile
 
 ### Parameters
+
+- `accessType?:optional AccessType`
+
+  How the platform uses the API on behalf of the entity this profile represents. `application`: the platform sells a product that uses the API behind the scenes, and the profile represents an individual end-user of that product. `passthrough`: the platform resells raw inference, and the profile identifies the resold-to company.
 
 - `externalID?:optional string`
 
@@ -30066,7 +31131,7 @@ Create User Profile
 
 - `name?:optional string`
 
-  Display name of the entity this profile represents. Required when relationship is `resold` (the resold-to company's name); optional otherwise. Maximum 255 characters.
+  Optional for all profiles. Real-world name of the entity this profile represents (company or individual); for a resold-to company (`relationship` `resold` / `access_type` `passthrough`), that company's name where known. Maximum 255 characters.
 
 - `relationship?:optional Relationship`
 
@@ -30092,10 +31157,6 @@ Create User Profile
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
-  - `Relationship relationship`
-
-    How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
-
   - `array<string,BetaUserProfileTrustGrant> trustGrants`
 
     Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
@@ -30108,13 +31169,21 @@ Create User Profile
 
     A timestamp in RFC 3339 format
 
+  - `?AccessType accessType`
+
+    How the platform uses the API on behalf of the entity this profile represents. `application`: the platform sells a product that uses the API behind the scenes, and the profile represents an individual end-user of that product. `passthrough`: the platform resells raw inference, and the profile identifies the resold-to company.
+
   - `?string externalID`
 
     Platform's own identifier for this user. Not enforced unique.
 
   - `?string name`
 
-    Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
+    Real-world name of the entity this profile represents (company or individual). For a resold-to company (`access_type` `passthrough`, or `relationship` `resold` under the `user-profiles-2026-03-24` header) this is that company's name.
+
+  - `?Relationship relationship`
+
+    How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
 
 ### Example
 
@@ -30126,6 +31195,7 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaUserProfile = $client->beta->userProfiles->create(
+  accessType: 'application',
   externalID: 'user_12345',
   metadata: [],
   name: 'x',
@@ -30143,7 +31213,6 @@ var_dump($betaUserProfile);
   "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
   "created_at": "2026-03-15T10:00:00Z",
   "metadata": {},
-  "relationship": "external",
   "trust_grants": {
     "cyber": {
       "status": "active"
@@ -30151,8 +31220,10 @@ var_dump($betaUserProfile);
   },
   "type": "user_profile",
   "updated_at": "2026-03-15T10:00:00Z",
+  "access_type": "application",
   "external_id": "user_12345",
-  "name": "Example User"
+  "name": "Example User",
+  "relationship": "external"
 }
 ```
 
@@ -30198,10 +31269,6 @@ List User Profiles
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
-  - `Relationship relationship`
-
-    How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
-
   - `array<string,BetaUserProfileTrustGrant> trustGrants`
 
     Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
@@ -30214,13 +31281,21 @@ List User Profiles
 
     A timestamp in RFC 3339 format
 
+  - `?AccessType accessType`
+
+    How the platform uses the API on behalf of the entity this profile represents. `application`: the platform sells a product that uses the API behind the scenes, and the profile represents an individual end-user of that product. `passthrough`: the platform resells raw inference, and the profile identifies the resold-to company.
+
   - `?string externalID`
 
     Platform's own identifier for this user. Not enforced unique.
 
   - `?string name`
 
-    Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
+    Real-world name of the entity this profile represents (company or individual). For a resold-to company (`access_type` `passthrough`, or `relationship` `resold` under the `user-profiles-2026-03-24` header) this is that company's name.
+
+  - `?Relationship relationship`
+
+    How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
 
 ### Example
 
@@ -30250,7 +31325,6 @@ var_dump($page);
       "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
       "created_at": "2026-03-15T10:00:00Z",
       "metadata": {},
-      "relationship": "external",
       "trust_grants": {
         "cyber": {
           "status": "active"
@@ -30258,8 +31332,10 @@ var_dump($page);
       },
       "type": "user_profile",
       "updated_at": "2026-03-15T10:00:00Z",
+      "access_type": "application",
       "external_id": "user_12345",
-      "name": "Example User"
+      "name": "Example User",
+      "relationship": "external"
     }
   ],
   "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
@@ -30298,10 +31374,6 @@ Get User Profile
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
-  - `Relationship relationship`
-
-    How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
-
   - `array<string,BetaUserProfileTrustGrant> trustGrants`
 
     Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
@@ -30314,13 +31386,21 @@ Get User Profile
 
     A timestamp in RFC 3339 format
 
+  - `?AccessType accessType`
+
+    How the platform uses the API on behalf of the entity this profile represents. `application`: the platform sells a product that uses the API behind the scenes, and the profile represents an individual end-user of that product. `passthrough`: the platform resells raw inference, and the profile identifies the resold-to company.
+
   - `?string externalID`
 
     Platform's own identifier for this user. Not enforced unique.
 
   - `?string name`
 
-    Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
+    Real-world name of the entity this profile represents (company or individual). For a resold-to company (`access_type` `passthrough`, or `relationship` `resold` under the `user-profiles-2026-03-24` header) this is that company's name.
+
+  - `?Relationship relationship`
+
+    How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
 
 ### Example
 
@@ -30346,7 +31426,6 @@ var_dump($betaUserProfile);
   "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
   "created_at": "2026-03-15T10:00:00Z",
   "metadata": {},
-  "relationship": "external",
   "trust_grants": {
     "cyber": {
       "status": "active"
@@ -30354,14 +31433,16 @@ var_dump($betaUserProfile);
   },
   "type": "user_profile",
   "updated_at": "2026-03-15T10:00:00Z",
+  "access_type": "application",
   "external_id": "user_12345",
-  "name": "Example User"
+  "name": "Example User",
+  "relationship": "external"
 }
 ```
 
 ## Update User Profile
 
-`$client->beta->userProfiles->update(string userProfileID, ?string externalID, ?array<string,string> metadata, ?string name, ?Relationship relationship, ?list<AnthropicBeta> betas): BetaUserProfile`
+`$client->beta->userProfiles->update(string userProfileID, ?AccessType accessType, ?string externalID, ?array<string,string> metadata, ?string name, ?Relationship relationship, ?list<AnthropicBeta> betas): BetaUserProfile`
 
 **post** `/v1/user_profiles/{user_profile_id}`
 
@@ -30370,6 +31451,10 @@ Update User Profile
 ### Parameters
 
 - `userProfileID: string`
+
+- `accessType?:optional AccessType`
+
+  How the platform uses the API on behalf of the entity this profile represents. `application`: the platform sells a product that uses the API behind the scenes, and the profile represents an individual end-user of that product. `passthrough`: the platform resells raw inference, and the profile identifies the resold-to company.
 
 - `externalID?:optional string`
 
@@ -30407,10 +31492,6 @@ Update User Profile
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
-  - `Relationship relationship`
-
-    How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
-
   - `array<string,BetaUserProfileTrustGrant> trustGrants`
 
     Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
@@ -30423,13 +31504,21 @@ Update User Profile
 
     A timestamp in RFC 3339 format
 
+  - `?AccessType accessType`
+
+    How the platform uses the API on behalf of the entity this profile represents. `application`: the platform sells a product that uses the API behind the scenes, and the profile represents an individual end-user of that product. `passthrough`: the platform resells raw inference, and the profile identifies the resold-to company.
+
   - `?string externalID`
 
     Platform's own identifier for this user. Not enforced unique.
 
   - `?string name`
 
-    Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
+    Real-world name of the entity this profile represents (company or individual). For a resold-to company (`access_type` `passthrough`, or `relationship` `resold` under the `user-profiles-2026-03-24` header) this is that company's name.
+
+  - `?Relationship relationship`
+
+    How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
 
 ### Example
 
@@ -30442,6 +31531,7 @@ $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaUserProfile = $client->beta->userProfiles->update(
   'uprof_011CZkZCu8hGbp5mYRQgUmz9',
+  accessType: 'application',
   externalID: 'user_12345',
   metadata: ['foo' => 'string'],
   name: 'x',
@@ -30459,7 +31549,6 @@ var_dump($betaUserProfile);
   "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
   "created_at": "2026-03-15T10:00:00Z",
   "metadata": {},
-  "relationship": "external",
   "trust_grants": {
     "cyber": {
       "status": "active"
@@ -30467,8 +31556,10 @@ var_dump($betaUserProfile);
   },
   "type": "user_profile",
   "updated_at": "2026-03-15T10:00:00Z",
+  "access_type": "application",
   "external_id": "user_12345",
-  "name": "Example User"
+  "name": "Example User",
+  "relationship": "external"
 }
 ```
 
@@ -30552,10 +31643,6 @@ var_dump($betaUserProfileEnrollmentURL);
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
-  - `Relationship relationship`
-
-    How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
-
   - `array<string,BetaUserProfileTrustGrant> trustGrants`
 
     Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
@@ -30568,13 +31655,21 @@ var_dump($betaUserProfileEnrollmentURL);
 
     A timestamp in RFC 3339 format
 
+  - `?AccessType accessType`
+
+    How the platform uses the API on behalf of the entity this profile represents. `application`: the platform sells a product that uses the API behind the scenes, and the profile represents an individual end-user of that product. `passthrough`: the platform resells raw inference, and the profile identifies the resold-to company.
+
   - `?string externalID`
 
     Platform's own identifier for this user. Not enforced unique.
 
   - `?string name`
 
-    Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
+    Real-world name of the entity this profile represents (company or individual). For a resold-to company (`access_type` `passthrough`, or `relationship` `resold` under the `user-profiles-2026-03-24` header) this is that company's name.
+
+  - `?Relationship relationship`
+
+    How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
 
 ### Beta User Profile Enrollment URL
 
@@ -30604,7 +31699,7 @@ var_dump($betaUserProfileEnrollmentURL);
 
 ## Create a Dream
 
-`$client->beta->dreams->create(list<BetaDreamInput> inputs, Model model, ?string instructions, ?list<AnthropicBeta> betas): BetaDream`
+`$client->beta->dreams->create(list<BetaDreamInput> inputs, Model model, ?string instructions, ?BetaOutputBehavior outputBehavior, ?list<AnthropicBeta> betas): BetaDream`
 
 **post** `/v1/dreams`
 
@@ -30619,6 +31714,10 @@ Create a Dream
   Model identifier and configuration applied to every pipeline stage.
 
 - `instructions?:optional string`
+
+- `outputBehavior?:optional BetaOutputBehavior`
+
+  The default destination: the job creates a new output memory store as a clone of the memory_store input and writes the consolidated memories into it. The input store is never mutated.
 
 - `betas?:optional list<AnthropicBeta>`
 
@@ -30654,6 +31753,10 @@ Create a Dream
 
     Model identifier and configuration applied to every pipeline stage. Same wire shape as the Agents API ModelConfig.
 
+  - `BetaOutputBehavior outputBehavior`
+
+    The default destination: the job creates a new output memory store as a clone of the memory_store input and writes the consolidated memories into it. The input store is never mutated.
+
   - `list<BetaDreamOutput> outputs`
 
   - `?string sessionID`
@@ -30681,6 +31784,7 @@ $betaDream = $client->beta->dreams->create(
   inputs: [['memoryStoreID' => 'x', 'type' => 'memory_store']],
   model: 'string',
   instructions: 'x',
+  outputBehavior: ['type' => 'create_new'],
   betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
 );
 
@@ -30709,6 +31813,9 @@ var_dump($betaDream);
   "model": {
     "id": "x",
     "speed": "standard"
+  },
+  "output_behavior": {
+    "type": "create_new"
   },
   "outputs": [
     {
@@ -30796,6 +31903,10 @@ List Dreams
 
     Model identifier and configuration applied to every pipeline stage. Same wire shape as the Agents API ModelConfig.
 
+  - `BetaOutputBehavior outputBehavior`
+
+    The default destination: the job creates a new output memory store as a clone of the memory_store input and writes the consolidated memories into it. The input store is never mutated.
+
   - `list<BetaDreamOutput> outputs`
 
   - `?string sessionID`
@@ -30856,6 +31967,9 @@ var_dump($page);
       "model": {
         "id": "x",
         "speed": "standard"
+      },
+      "output_behavior": {
+        "type": "create_new"
       },
       "outputs": [
         {
@@ -30924,6 +32038,10 @@ Get a Dream
 
     Model identifier and configuration applied to every pipeline stage. Same wire shape as the Agents API ModelConfig.
 
+  - `BetaOutputBehavior outputBehavior`
+
+    The default destination: the job creates a new output memory store as a clone of the memory_store input and writes the consolidated memories into it. The input store is never mutated.
+
   - `list<BetaDreamOutput> outputs`
 
   - `?string sessionID`
@@ -30976,6 +32094,9 @@ var_dump($betaDream);
   "model": {
     "id": "x",
     "speed": "standard"
+  },
+  "output_behavior": {
+    "type": "create_new"
   },
   "outputs": [
     {
@@ -31041,6 +32162,10 @@ Cancel a Dream
 
     Model identifier and configuration applied to every pipeline stage. Same wire shape as the Agents API ModelConfig.
 
+  - `BetaOutputBehavior outputBehavior`
+
+    The default destination: the job creates a new output memory store as a clone of the memory_store input and writes the consolidated memories into it. The input store is never mutated.
+
   - `list<BetaDreamOutput> outputs`
 
   - `?string sessionID`
@@ -31093,6 +32218,9 @@ var_dump($betaDream);
   "model": {
     "id": "x",
     "speed": "standard"
+  },
+  "output_behavior": {
+    "type": "create_new"
   },
   "outputs": [
     {
@@ -31158,6 +32286,10 @@ Archive a Dream
 
     Model identifier and configuration applied to every pipeline stage. Same wire shape as the Agents API ModelConfig.
 
+  - `BetaOutputBehavior outputBehavior`
+
+    The default destination: the job creates a new output memory store as a clone of the memory_store input and writes the consolidated memories into it. The input store is never mutated.
+
   - `list<BetaDreamOutput> outputs`
 
   - `?string sessionID`
@@ -31211,6 +32343,9 @@ var_dump($betaDream);
     "id": "x",
     "speed": "standard"
   },
+  "output_behavior": {
+    "type": "create_new"
+  },
   "outputs": [
     {
       "memory_store_id": "memory_store_id",
@@ -31260,6 +32395,10 @@ var_dump($betaDream);
   - `BetaDreamModelConfig model`
 
     Model identifier and configuration applied to every pipeline stage. Same wire shape as the Agents API ModelConfig.
+
+  - `BetaOutputBehavior outputBehavior`
+
+    The default destination: the job creates a new output memory store as a clone of the memory_store input and writes the consolidated memories into it. The input store is never mutated.
 
   - `list<BetaDreamOutput> outputs`
 
@@ -31321,7 +32460,7 @@ var_dump($betaDream);
 
   - `string id`
 
-    Model identifier, e.g. "claude-opus-4-7". 1-256 characters.
+    Model identifier, e.g. "claude-opus-5". 1-256 characters.
 
   - `?Speed speed`
 
@@ -31333,7 +32472,7 @@ var_dump($betaDream);
 
   - `string id`
 
-    Model identifier, e.g. "claude-opus-4-7". 1-256 characters.
+    Model identifier, e.g. "claude-opus-5". 1-256 characters.
 
   - `?Speed speed`
 
@@ -31388,6 +32527,34 @@ var_dump($betaDream);
   - `int outputTokens`
 
     Total output tokens generated across every pipeline stage.
+
+### Beta Output Behavior
+
+- `BetaOutputBehavior`
+
+  - `BetaOutputBehaviorCreateNew`
+
+    - `Type type`
+
+  - `BetaOutputBehaviorUpdateExisting`
+
+    - `string memoryStoreID`
+
+    - `Type type`
+
+### Beta Output Behavior Create New
+
+- `BetaOutputBehaviorCreateNew`
+
+  - `Type type`
+
+### Beta Output Behavior Update Existing
+
+- `BetaOutputBehaviorUpdateExisting`
+
+  - `string memoryStoreID`
+
+  - `Type type`
 
 # Tunnels
 

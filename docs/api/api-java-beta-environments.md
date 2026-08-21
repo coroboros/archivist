@@ -71,6 +71,8 @@ Create a new environment with the specified configuration.
 
     - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
+    - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
@@ -327,9 +329,9 @@ Create a new environment with the specified configuration.
 
     RFC 3339 timestamp when environment was created
 
-  - `String description`
+  - `Optional<String> description`
 
-    User-provided description for the environment
+    User-provided description for the environment; null when unset
 
   - `Metadata metadata`
 
@@ -502,6 +504,8 @@ List environments with pagination support.
 
     - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
+    - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
@@ -636,9 +640,9 @@ List environments with pagination support.
 
     RFC 3339 timestamp when environment was created
 
-  - `String description`
+  - `Optional<String> description`
 
-    User-provided description for the environment
+    User-provided description for the environment; null when unset
 
   - `Metadata metadata`
 
@@ -803,6 +807,8 @@ Retrieve a specific environment by ID.
 
     - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
+    - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
@@ -937,9 +943,9 @@ Retrieve a specific environment by ID.
 
     RFC 3339 timestamp when environment was created
 
-  - `String description`
+  - `Optional<String> description`
 
-    User-provided description for the environment
+    User-provided description for the environment; null when unset
 
   - `Metadata metadata`
 
@@ -1099,6 +1105,8 @@ Update an existing environment's configuration.
 
     - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
+    - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
@@ -1225,7 +1233,7 @@ Update an existing environment's configuration.
 
   - `Optional<String> description`
 
-    Updated description of the environment
+    Updated description of the environment. Omit to preserve; null clears to null; an empty string is stored as an empty string.
 
   - `Optional<Metadata> metadata`
 
@@ -1355,9 +1363,9 @@ Update an existing environment's configuration.
 
     RFC 3339 timestamp when environment was created
 
-  - `String description`
+  - `Optional<String> description`
 
-    User-provided description for the environment
+    User-provided description for the environment; null when unset
 
   - `Metadata metadata`
 
@@ -1517,6 +1525,8 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
     - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
+    - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
@@ -1646,6 +1656,8 @@ Archive an environment by ID. Archived environments cannot be used to create new
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
     - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
+
+    - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
@@ -1781,9 +1793,9 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
     RFC 3339 timestamp when environment was created
 
-  - `String description`
+  - `Optional<String> description`
 
-    User-provided description for the environment
+    User-provided description for the environment; null when unset
 
   - `Metadata metadata`
 
@@ -2167,9 +2179,9 @@ public final class Main {
 
     RFC 3339 timestamp when environment was created
 
-  - `String description`
+  - `Optional<String> description`
 
-    User-provided description for the environment
+    User-provided description for the environment; null when unset
 
   - `Metadata metadata`
 
@@ -2442,6 +2454,8 @@ Retrieve detailed information about a specific work item.
 
     - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
+    - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
@@ -2670,6 +2684,8 @@ Long poll for work items in the queue.
 
     - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
+    - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
@@ -2892,6 +2908,8 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
     - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
+
+    - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
@@ -3123,6 +3141,8 @@ Record a heartbeat for a work item to maintain the lease.
 
     - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
+    - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
@@ -3285,6 +3305,8 @@ Stop a work item, initiating graceful or forced shutdown.
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
     - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
+
+    - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
@@ -3520,6 +3542,8 @@ List work items in an environment.
 
     - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
+    - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
@@ -3742,6 +3766,8 @@ Update work item metadata with merge semantics.
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
     - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
+
+    - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
@@ -3971,6 +3997,8 @@ Get statistics about the work queue for an environment.
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
     - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
+
+    - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 

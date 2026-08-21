@@ -83,6 +83,8 @@ Create a memory store
 
     - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
+    - `"user-profiles-2026-08-18"UserProfiles2026_08_18`
+
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
     - `"managed-agents-2026-04-01"ManagedAgents2026_04_01`
@@ -250,6 +252,8 @@ List memory stores
 
     - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
+    - `"user-profiles-2026-08-18"UserProfiles2026_08_18`
+
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
     - `"managed-agents-2026-04-01"ManagedAgents2026_04_01`
@@ -415,6 +419,8 @@ Retrieve a memory store
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
     - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
+
+    - `"user-profiles-2026-08-18"UserProfiles2026_08_18`
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
@@ -582,6 +588,8 @@ Update a memory store
 
     - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
+    - `"user-profiles-2026-08-18"UserProfiles2026_08_18`
+
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
     - `"managed-agents-2026-04-01"ManagedAgents2026_04_01`
@@ -736,6 +744,8 @@ Delete a memory store
 
     - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
+    - `"user-profiles-2026-08-18"UserProfiles2026_08_18`
+
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
     - `"managed-agents-2026-04-01"ManagedAgents2026_04_01`
@@ -857,6 +867,8 @@ Archive a memory store
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
     - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
+
+    - `"user-profiles-2026-08-18"UserProfiles2026_08_18`
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
@@ -1080,6 +1092,8 @@ Create a memory
 
     - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
+    - `"user-profiles-2026-08-18"UserProfiles2026_08_18`
+
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
     - `"managed-agents-2026-04-01"ManagedAgents2026_04_01`
@@ -1263,6 +1277,8 @@ List memories
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
     - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
+
+    - `"user-profiles-2026-08-18"UserProfiles2026_08_18`
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
@@ -1462,6 +1478,8 @@ Retrieve a memory
 
     - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
+    - `"user-profiles-2026-08-18"UserProfiles2026_08_18`
+
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
     - `"managed-agents-2026-04-01"ManagedAgents2026_04_01`
@@ -1645,6 +1663,8 @@ Update a memory
 
     - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
+    - `"user-profiles-2026-08-18"UserProfiles2026_08_18`
+
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
     - `"managed-agents-2026-04-01"ManagedAgents2026_04_01`
@@ -1815,6 +1835,8 @@ Delete a memory
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
     - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
+
+    - `"user-profiles-2026-08-18"UserProfiles2026_08_18`
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
@@ -2217,6 +2239,10 @@ List memory versions
 
     Query param: Query parameter for page
 
+  - `string serviceAccountID`
+
+    Query param: Query parameter for service_account_id
+
   - `string sessionID`
 
     Query param: Query parameter for session_id
@@ -2272,6 +2298,8 @@ List memory versions
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
     - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
+
+    - `"user-profiles-2026-08-18"UserProfiles2026_08_18`
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
@@ -2386,6 +2414,16 @@ List memory versions
         - `required string UserID`
 
           ID of the user who performed the write (a `user_...` value).
+
+      - `class BetaManagedAgentsServiceAccountActor:`
+
+        Attribution for a write made by a workload authenticated as a service account, for example via Workload Identity Federation.
+
+        - `required string ServiceAccountID`
+
+          ID of the service account that performed the write (a `svac_...` value).
+
+        - `JsonElement Type "service_account_actor"constant`
 
     - `string? Path`
 
@@ -2521,6 +2559,8 @@ Retrieve a memory version
 
     - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
+    - `"user-profiles-2026-08-18"UserProfiles2026_08_18`
+
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
     - `"managed-agents-2026-04-01"ManagedAgents2026_04_01`
@@ -2630,6 +2670,16 @@ Retrieve a memory version
       - `required string UserID`
 
         ID of the user who performed the write (a `user_...` value).
+
+    - `class BetaManagedAgentsServiceAccountActor:`
+
+      Attribution for a write made by a workload authenticated as a service account, for example via Workload Identity Federation.
+
+      - `required string ServiceAccountID`
+
+        ID of the service account that performed the write (a `svac_...` value).
+
+      - `JsonElement Type "service_account_actor"constant`
 
   - `string? Path`
 
@@ -2751,6 +2801,8 @@ Redact a memory version
 
     - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
+    - `"user-profiles-2026-08-18"UserProfiles2026_08_18`
+
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
     - `"managed-agents-2026-04-01"ManagedAgents2026_04_01`
@@ -2861,6 +2913,16 @@ Redact a memory version
 
         ID of the user who performed the write (a `user_...` value).
 
+    - `class BetaManagedAgentsServiceAccountActor:`
+
+      Attribution for a write made by a workload authenticated as a service account, for example via Workload Identity Federation.
+
+      - `required string ServiceAccountID`
+
+        ID of the service account that performed the write (a `svac_...` value).
+
+      - `JsonElement Type "service_account_actor"constant`
+
   - `string? Path`
 
     The memory's path at the time of this write. `null` if and only if `redacted_at` is set.
@@ -2956,6 +3018,16 @@ Console.WriteLine(betaManagedAgentsMemoryVersion);
     - `required string UserID`
 
       ID of the user who performed the write (a `user_...` value).
+
+  - `class BetaManagedAgentsServiceAccountActor:`
+
+    Attribution for a write made by a workload authenticated as a service account, for example via Workload Identity Federation.
+
+    - `required string ServiceAccountID`
+
+      ID of the service account that performed the write (a `svac_...` value).
+
+    - `JsonElement Type "service_account_actor"constant`
 
 ### Beta Managed Agents API Actor
 
@@ -3059,6 +3131,16 @@ Console.WriteLine(betaManagedAgentsMemoryVersion);
 
         ID of the user who performed the write (a `user_...` value).
 
+    - `class BetaManagedAgentsServiceAccountActor:`
+
+      Attribution for a write made by a workload authenticated as a service account, for example via Workload Identity Federation.
+
+      - `required string ServiceAccountID`
+
+        ID of the service account that performed the write (a `svac_...` value).
+
+      - `JsonElement Type "service_account_actor"constant`
+
   - `string? Path`
 
     The memory's path at the time of this write. `null` if and only if `redacted_at` is set.
@@ -3082,6 +3164,18 @@ Console.WriteLine(betaManagedAgentsMemoryVersion);
   - `"modified"Modified`
 
   - `"deleted"Deleted`
+
+### Beta Managed Agents Service Account Actor
+
+- `class BetaManagedAgentsServiceAccountActor:`
+
+  Attribution for a write made by a workload authenticated as a service account, for example via Workload Identity Federation.
+
+  - `required string ServiceAccountID`
+
+    ID of the service account that performed the write (a `svac_...` value).
+
+  - `JsonElement Type "service_account_actor"constant`
 
 ### Beta Managed Agents Session Actor
 

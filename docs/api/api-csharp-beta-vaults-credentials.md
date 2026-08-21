@@ -235,6 +235,8 @@ Create Credential
 
     - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
+    - `"user-profiles-2026-08-18"UserProfiles2026_08_18`
+
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
     - `"managed-agents-2026-04-01"ManagedAgents2026_04_01`
@@ -538,6 +540,8 @@ List Credentials
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
     - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
+
+    - `"user-profiles-2026-08-18"UserProfiles2026_08_18`
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
@@ -843,6 +847,8 @@ Get Credential
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
     - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
+
+    - `"user-profiles-2026-08-18"UserProfiles2026_08_18`
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
@@ -1263,6 +1269,8 @@ Update Credential
 
     - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
+    - `"user-profiles-2026-08-18"UserProfiles2026_08_18`
+
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
     - `"managed-agents-2026-04-01"ManagedAgents2026_04_01`
@@ -1554,6 +1562,8 @@ Delete Credential
 
     - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
+    - `"user-profiles-2026-08-18"UserProfiles2026_08_18`
+
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
     - `"managed-agents-2026-04-01"ManagedAgents2026_04_01`
@@ -1680,6 +1690,8 @@ Archive Credential
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
     - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
+
+    - `"user-profiles-2026-08-18"UserProfiles2026_08_18`
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
@@ -1971,6 +1983,8 @@ Validate Credential
     - `"output-300k-2026-03-24"Output300k2026_03_24`
 
     - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
+
+    - `"user-profiles-2026-08-18"UserProfiles2026_08_18`
 
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 

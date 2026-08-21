@@ -81,6 +81,8 @@ List Session Threads
 
     - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
+    - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
@@ -588,7 +590,7 @@ public final class Main {
           }
         ],
         "model": {
-          "id": "claude-sonnet-4-6",
+          "id": "claude-opus-5",
           "effort": {
             "type": "low"
           },
@@ -726,6 +728,8 @@ Get Session Thread
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
     - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
+
+    - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
@@ -1236,7 +1240,7 @@ public final class Main {
       }
     ],
     "model": {
-      "id": "claude-sonnet-4-6",
+      "id": "claude-opus-5",
       "effort": {
         "type": "low"
       },
@@ -1371,6 +1375,8 @@ Archive Session Thread
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
     - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
+
+    - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
@@ -1881,7 +1887,7 @@ public final class Main {
       }
     ],
     "model": {
-      "id": "claude-sonnet-4-6",
+      "id": "claude-opus-5",
       "effort": {
         "type": "low"
       },
@@ -4601,6 +4607,8 @@ List Session Thread Events
 
     - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
+    - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
@@ -6714,6 +6722,8 @@ Stream Session Thread Events
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
     - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
+
+    - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 

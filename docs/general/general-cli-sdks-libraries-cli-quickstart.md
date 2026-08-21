@@ -35,7 +35,7 @@ Compared to `curl`, `ant` builds request bodies from typed flags or piped YAML i
     For Linux environments, download the release binary directly.
 
     ```bash
-    VERSION=1.22.1
+    VERSION=1.26.1
     OS=$(uname -s | tr '[:upper:]' '[:lower:]')
     case $(uname -m) in
       x86_64) ARCH=amd64 ;;
@@ -49,7 +49,7 @@ Compared to `curl`, `ant` builds request bodies from typed flags or piped YAML i
   </Tab>
 
   <Tab title="Go">
-    You can also install the CLI from source using `go install`. Requires Go 1.22 or later.
+    You can also install the CLI from source using `go install`. Requires Go 1.25 or later.
 
     ```bash
     go install github.com/anthropics/anthropic-cli/cmd/ant@latest

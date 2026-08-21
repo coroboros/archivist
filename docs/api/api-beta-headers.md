@@ -30,14 +30,14 @@ content-type: application/json
 
 Each feature's documentation states the exact beta name to send. The [API overview](./api-overview.md) lists the APIs currently in beta.
 
-The following examples show the same request with cURL, the `ant` CLI, and the SDKs. The SDKs take beta names in the `betas` parameter and send the `anthropic-beta` header for you:
+The following examples show the same request with cURL, the `ant` CLI, and the SDKs, using the [context editing](../build-with-claude/build-with-claude-context-editing.md) beta as the example. The SDKs take beta names in the `betas` parameter and send the `anthropic-beta` header for you:
 
 <CodeGroup>
   ```bash cURL
   curl https://api.anthropic.com/v1/messages \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
-    -H "anthropic-beta: files-api-2025-04-14" \
+    -H "anthropic-beta: context-management-2025-06-27" \
     -H "content-type: application/json" \
     -d '{
       "model": "claude-opus-5",
@@ -50,7 +50,7 @@ The following examples show the same request with cURL, the `ant` CLI, and the S
 
   ```bash CLI
   ant beta:messages create \
-    --beta files-api-2025-04-14 \
+    --beta context-management-2025-06-27 \
     --model claude-opus-5 \
     --max-tokens 1024 \
     --message '{role: user, content: "Hello, Claude"}'
@@ -63,7 +63,7 @@ The following examples show the same request with cURL, the `ant` CLI, and the S
       model="claude-opus-5",
       max_tokens=1024,
       messages=[{"role": "user", "content": "Hello, Claude"}],
-      betas=["files-api-2025-04-14"],
+      betas=["context-management-2025-06-27"],
   )
 
   print(response.content)
@@ -76,7 +76,7 @@ The following examples show the same request with cURL, the `ant` CLI, and the S
     model: "claude-opus-5",
     max_tokens: 1024,
     messages: [{ role: "user", content: "Hello, Claude" }],
-    betas: ["files-api-2025-04-14"]
+    betas: ["context-management-2025-06-27"]
   });
 
   console.log(msg.content);
@@ -91,7 +91,7 @@ The following examples show the same request with cURL, the `ant` CLI, and the S
           Model = "claude-opus-5",
           MaxTokens = 1024,
           Messages = [new() { Role = Role.User, Content = "Hello, Claude" }],
-          Betas = ["files-api-2025-04-14"],
+          Betas = ["context-management-2025-06-27"],
       }
   );
 
@@ -107,7 +107,7 @@ The following examples show the same request with cURL, the `ant` CLI, and the S
   	Messages: []anthropic.BetaMessageParam{
   		anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Hello, Claude")),
   	},
-  	Betas: []anthropic.AnthropicBeta{anthropic.AnthropicBetaFilesAPI2025_04_14},
+  	Betas: []anthropic.AnthropicBeta{anthropic.AnthropicBetaContextManagement2025_06_27},
   })
   if err != nil {
   	panic(err)
@@ -123,7 +123,7 @@ The following examples show the same request with cURL, the `ant` CLI, and the S
     .model(Model.CLAUDE_OPUS_5)
     .maxTokens(1024)
     .addUserMessage("Hello, Claude")
-    .addBeta(AnthropicBeta.FILES_API_2025_04_14)
+    .addBeta(AnthropicBeta.CONTEXT_MANAGEMENT_2025_06_27)
     .build();
 
   BetaMessage message = client.beta().messages().create(params);
@@ -137,7 +137,7 @@ The following examples show the same request with cURL, the `ant` CLI, and the S
       maxTokens: 1024,
       messages: [['role' => 'user', 'content' => 'Hello, Claude']],
       model: 'claude-opus-5',
-      betas: ['files-api-2025-04-14'],
+      betas: ['context-management-2025-06-27'],
   );
 
   echo $message;
@@ -150,7 +150,7 @@ The following examples show the same request with cURL, the `ant` CLI, and the S
     model: "claude-opus-5",
     max_tokens: 1024,
     messages: [{role: "user", content: "Hello, Claude"}],
-    betas: ["files-api-2025-04-14"]
+    betas: ["context-management-2025-06-27"]
   )
 
   puts(message.content)

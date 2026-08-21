@@ -191,7 +191,7 @@ Create Credential
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -236,6 +236,8 @@ Create Credential
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -501,7 +503,7 @@ List Credentials
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -546,6 +548,8 @@ List Credentials
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -802,7 +806,7 @@ Get Credential
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -847,6 +851,8 @@ Get Credential
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -1226,7 +1232,7 @@ Update Credential
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -1271,6 +1277,8 @@ Update Credential
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -1522,7 +1530,7 @@ Delete Credential
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -1567,6 +1575,8 @@ Delete Credential
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -1654,7 +1664,7 @@ Archive Credential
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -1699,6 +1709,8 @@ Archive Credential
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -1950,7 +1962,7 @@ Validate Credential
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -1995,6 +2007,8 @@ Validate Credential
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 

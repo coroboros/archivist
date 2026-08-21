@@ -124,7 +124,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 ```cli
 ant messages:batches create \
   --api-key my-anthropic-api-key \
-  --request '{custom_id: my-custom-id-1, params: {max_tokens: 1024, messages: [{content: [{text: x, type: text}], role: user}], model: claude-opus-4-6}}'
+  --request '{custom_id: my-custom-id-1, params: {max_tokens: 1024, messages: [{content: [{text: x, type: text}], role: user}], model: claude-opus-5}}'
 ```
 
 #### Response

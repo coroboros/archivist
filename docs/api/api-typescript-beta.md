@@ -15,11 +15,11 @@ url: https://platform.claude.com/docs/en/api/typescript/beta
 
 ### Anthropic Beta
 
-- `AnthropicBeta = (string & {}) | "message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+- `AnthropicBeta = (string & {}) | "message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
   - `(string & {})`
 
-  - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+  - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -64,6 +64,8 @@ url: https://platform.claude.com/docs/en/api/typescript/beta
     - `"output-300k-2026-03-24"`
 
     - `"user-profiles-2026-03-24"`
+
+    - `"user-profiles-2026-08-18"`
 
     - `"advisor-tool-2026-03-01"`
 
@@ -395,7 +397,7 @@ The Models API response can be used to determine which models are available for 
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -440,6 +442,8 @@ The Models API response can be used to determine which models are available for 
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -620,7 +624,7 @@ for await (const betaModelInfo of client.beta.models.list()) {
 {
   "data": [
     {
-      "id": "claude-opus-4-6",
+      "id": "claude-opus-5",
       "allowed_fallback_models": [
         "string"
       ],
@@ -685,8 +689,8 @@ for await (const betaModelInfo of client.beta.models.list()) {
           }
         }
       },
-      "created_at": "2026-02-04T00:00:00Z",
-      "display_name": "Claude Opus 4.6",
+      "created_at": "2026-07-24T00:00:00Z",
+      "display_name": "Claude Opus 5",
       "max_input_tokens": 0,
       "max_tokens": 0,
       "type": "model"
@@ -722,7 +726,7 @@ The Models API response can be used to determine information about a specific mo
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -767,6 +771,8 @@ The Models API response can be used to determine information about a specific mo
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -944,7 +950,7 @@ console.log(betaModelInfo.id);
 
 ```json
 {
-  "id": "claude-opus-4-6",
+  "id": "claude-opus-5",
   "allowed_fallback_models": [
     "string"
   ],
@@ -1009,8 +1015,8 @@ console.log(betaModelInfo.id);
       }
     }
   },
-  "created_at": "2026-02-04T00:00:00Z",
-  "display_name": "Claude Opus 4.6",
+  "created_at": "2026-07-24T00:00:00Z",
+  "display_name": "Claude Opus 5",
   "max_input_tokens": 0,
   "max_tokens": 0,
   "type": "model"
@@ -1641,6 +1647,18 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               Create a cache control breakpoint at this content block.
 
+            - `transformations?: BetaImageTransformationsParam | null`
+
+              Configures the transformations the server applies to this image before the model observes it. Each key names a condition the server transforms images for; its value selects the transformation applied. Omitted keys keep their default behavior, and an empty object is equivalent to omitting the field.
+
+              - `oversized_image?: "downsize" | "error"`
+
+                What the server does when this image exceeds the model's maximum image size. `"downsize"` (the default) scales the image down to fit, which changes the dimensions the model observes without telling you. `"error"` instead rejects the request with a 400 error naming the image's dimensions and the largest dimensions that fit, so you can scale the image deliberately — your image is never silently scaled down.
+
+                - `"downsize"`
+
+                - `"error"`
+
           - `BetaRequestDocumentBlock`
 
             - `source: BetaBase64PDFSource | BetaPlainTextSource | BetaContentBlockSource | 2 more`
@@ -1817,6 +1835,10 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                   - `"code_execution_20260120"`
 
+            - `toolset_name?: string | null`
+
+              For a toolset member tool_use, the toolset family this member belongs to.
+
           - `BetaToolResultBlockParam`
 
             - `tool_use_id: string`
@@ -1829,11 +1851,11 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               Create a cache control breakpoint at this content block.
 
-            - `content?: string | Array<BetaTextBlockParam | BetaImageBlockParam | BetaSearchResultBlockParam | 2 more>`
+            - `content?: string | Array<BetaTextBlockParam | BetaImageBlockParam | BetaSearchResultBlockParam | 3 more>`
 
               - `string`
 
-              - `Array<BetaTextBlockParam | BetaImageBlockParam | BetaSearchResultBlockParam | 2 more>`
+              - `Array<BetaTextBlockParam | BetaImageBlockParam | BetaSearchResultBlockParam | 3 more>`
 
                 - `BetaTextBlockParam`
 
@@ -1857,7 +1879,134 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                     Create a cache control breakpoint at this content block.
 
+                - `BetaBrowserStateBlockParam`
+
+                  The caller's browser state after a browser toolset member call —
+                  the full inventory of open tabs, which tab is active, and any side
+                  effects (tabs opened, download state changes) the call produced.
+
+                  At most one per `tool_result`, only on a non-error result answering a
+                  browser toolset member `tool_use`. The server renders the
+                  model-visible text from it; the model never sees the raw fields.
+
+                  - `tabs: Array<BetaBrowserStateTabEntry>`
+
+                    All tabs open in the browser after this call — the full inventory, not a delta. May be empty. Whenever non-empty, exactly one entry carries `active: true`.
+
+                    - `tab_id: string`
+
+                      The caller-assigned identifier for this tab, unique within the inventory.
+
+                    - `title: string`
+
+                      The title of the page the tab is showing. May be empty.
+
+                    - `url: string`
+
+                      The URL of the page the tab is showing. May be empty.
+
+                    - `active?: boolean`
+
+                      Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
+
+                  - `type: "browser_state"`
+
+                    - `"browser_state"`
+
+                  - `cache_control?: BetaCacheControlEphemeral | null`
+
+                    Create a cache control breakpoint at this content block.
+
+                  - `state_changes?: Array<BetaBrowserStateChange> | null`
+
+                    Tabs opened and download state changes during this call. "Nothing to report" is expressed by omitting the field, never by an empty list.
+
+                    - `BetaBrowserStateChangeTabOpened`
+
+                      A tab this call's execution opened that remains open at its end —
+                      the creation delta of the `tabs` inventory, not an event log.
+
+                      Carries only the `tab_id`; the tab's `title` and `url` live on its
+                      `tabs` entry, which must include the same `tab_id`. A tab opened
+                      during a failed call gets no deferred `tab_opened`; it simply appears
+                      in the next result's `tabs` inventory.
+
+                      - `tab_id: string`
+
+                        The `tab_id` of the opened tab, present in `tabs`.
+
+                      - `type: "tab_opened"`
+
+                        - `"tab_opened"`
+
+                    - `BetaBrowserStateChangeDownloadStarted`
+
+                      A file download that started during this call.
+
+                      - `download_id: string`
+
+                        The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+                      - `type: "download_started"`
+
+                        - `"download_started"`
+
+                      - `url: string`
+
+                        The final post-redirect URL the download was served from.
+
+                    - `BetaBrowserStateChangeDownloadCompleted`
+
+                      A file download that finished during this call, reported with the
+                      same `download_id` as its `download_started` — or without a prior
+                      `download_started`, when the download finished during the call that
+                      started it (at most one state change per `download_id` per result).
+
+                      - `download_id: string`
+
+                        The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+                      - `type: "download_completed"`
+
+                        - `"download_completed"`
+
+                      - `url: string`
+
+                        The final post-redirect URL the download was served from.
+
+                      - `path?: string | null`
+
+                        Where the executor saved the file, on the executor's filesystem. Only included when another tool in the same environment can read the file at that path.
+
+                      - `size_bytes?: number | null`
+
+                        The completed download's size.
+
+                    - `BetaBrowserStateChangeDownloadFailed`
+
+                      A file download that failed — or was cancelled — during this call.
+
+                      - `download_id: string`
+
+                        The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+                      - `type: "download_failed"`
+
+                        - `"download_failed"`
+
+                      - `url: string`
+
+                        The final post-redirect URL the download was served from.
+
+                      - `error?: string | null`
+
+                        The failure or cancellation detail, when known.
+
             - `is_error?: boolean`
+
+            - `toolset_name?: string | null`
+
+              For a toolset member tool_result, the toolset family of the paired tool_use.
 
           - `BetaServerToolUseBlockParam`
 
@@ -2438,125 +2587,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
               Opaque metadata from prior compaction, to be round-tripped verbatim
 
-          - `BetaMidConversationSystemBlockParam`
-
-            System instructions that appear mid-conversation.
-
-            Use this block to provide or update system-level instructions at a specific
-            point in the conversation, rather than only via the top-level `system` parameter.
-
-            - `content: Array<BetaTextBlockParam | BetaRequestToolAdditionBlock | BetaRequestToolRemovalBlock>`
-
-              System instruction text blocks.
-
-              - `BetaTextBlockParam`
-
-              - `BetaRequestToolAdditionBlock`
-
-                Mid-conversation directive to surface a declared tool.
-
-                `tool` references a tool (or MCP toolset) by name from the request's
-                `tools`; it is offered to the model from this point in the
-                conversation onward.
-
-                - `tool: BetaToolChangeToolReference | BetaToolChangeMCPToolReference | BetaToolChangeMCPToolsetReference`
-
-                  Reference to a single tool the caller declared directly in
-                  `tools[]`. Does not accept the composed `{server}_{name}` form the
-                  server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-                  `mcp_toolset_reference` for those.
-
-                  - `BetaToolChangeToolReference`
-
-                    Reference to a single tool the caller declared directly in
-                    `tools[]`. Does not accept the composed `{server}_{name}` form the
-                    server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-                    `mcp_toolset_reference` for those.
-
-                    - `name: string`
-
-                    - `type: "tool_reference"`
-
-                      - `"tool_reference"`
-
-                  - `BetaToolChangeMCPToolReference`
-
-                    Reference to a single MCP tool by its server and remote name — the
-                    same `server_name`/`name` pair `mcp_tool_use` carries.
-
-                    - `name: string`
-
-                    - `server_name: string`
-
-                    - `type: "mcp_tool_reference"`
-
-                      - `"mcp_tool_reference"`
-
-                  - `BetaToolChangeMCPToolsetReference`
-
-                    Reference to every tool in the named MCP server's toolset.
-
-                    - `server_name: string`
-
-                    - `type: "mcp_toolset_reference"`
-
-                      - `"mcp_toolset_reference"`
-
-                - `type: "tool_addition"`
-
-                  - `"tool_addition"`
-
-                - `cache_control?: BetaCacheControlEphemeral | null`
-
-                  Create a cache control breakpoint at this content block.
-
-              - `BetaRequestToolRemovalBlock`
-
-                Mid-conversation directive to withdraw a tool.
-
-                `tool` references a tool (or MCP toolset) by name from the request's
-                `tools`; it is no longer offered to the model from this point in the
-                conversation onward.
-
-                - `tool: BetaToolChangeToolReference | BetaToolChangeMCPToolReference | BetaToolChangeMCPToolsetReference`
-
-                  Reference to a single tool the caller declared directly in
-                  `tools[]`. Does not accept the composed `{server}_{name}` form the
-                  server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-                  `mcp_toolset_reference` for those.
-
-                  - `BetaToolChangeToolReference`
-
-                    Reference to a single tool the caller declared directly in
-                    `tools[]`. Does not accept the composed `{server}_{name}` form the
-                    server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-                    `mcp_toolset_reference` for those.
-
-                  - `BetaToolChangeMCPToolReference`
-
-                    Reference to a single MCP tool by its server and remote name — the
-                    same `server_name`/`name` pair `mcp_tool_use` carries.
-
-                  - `BetaToolChangeMCPToolsetReference`
-
-                    Reference to every tool in the named MCP server's toolset.
-
-                - `type: "tool_removal"`
-
-                  - `"tool_removal"`
-
-                - `cache_control?: BetaCacheControlEphemeral | null`
-
-                  Create a cache control breakpoint at this content block.
-
-            - `type: "mid_conv_system"`
-
-              - `"mid_conv_system"`
-
-            - `cache_control?: BetaCacheControlEphemeral | null`
-
-              Create a cache control breakpoint at this content block.
-
           - `BetaRequestToolAdditionBlock`
 
             Mid-conversation directive to surface a declared tool.
@@ -2565,6 +2595,57 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
             `tools`; it is offered to the model from this point in the
             conversation onward.
 
+            - `tool: BetaToolChangeToolReference | BetaToolChangeMCPToolReference | BetaToolChangeMCPToolsetReference`
+
+              Reference to a single tool the caller declared directly in
+              `tools[]`. Does not accept the composed `{server}_{name}` form the
+              server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+              `mcp_toolset_reference` for those.
+
+              - `BetaToolChangeToolReference`
+
+                Reference to a single tool the caller declared directly in
+                `tools[]`. Does not accept the composed `{server}_{name}` form the
+                server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+                `mcp_toolset_reference` for those.
+
+                - `name: string`
+
+                - `type: "tool_reference"`
+
+                  - `"tool_reference"`
+
+              - `BetaToolChangeMCPToolReference`
+
+                Reference to a single MCP tool by its server and remote name — the
+                same `server_name`/`name` pair `mcp_tool_use` carries.
+
+                - `name: string`
+
+                - `server_name: string`
+
+                - `type: "mcp_tool_reference"`
+
+                  - `"mcp_tool_reference"`
+
+              - `BetaToolChangeMCPToolsetReference`
+
+                Reference to every tool in the named MCP server's toolset.
+
+                - `server_name: string`
+
+                - `type: "mcp_toolset_reference"`
+
+                  - `"mcp_toolset_reference"`
+
+            - `type: "tool_addition"`
+
+              - `"tool_addition"`
+
+            - `cache_control?: BetaCacheControlEphemeral | null`
+
+              Create a cache control breakpoint at this content block.
+
           - `BetaRequestToolRemovalBlock`
 
             Mid-conversation directive to withdraw a tool.
@@ -2572,6 +2653,37 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
             `tool` references a tool (or MCP toolset) by name from the request's
             `tools`; it is no longer offered to the model from this point in the
             conversation onward.
+
+            - `tool: BetaToolChangeToolReference | BetaToolChangeMCPToolReference | BetaToolChangeMCPToolsetReference`
+
+              Reference to a single tool the caller declared directly in
+              `tools[]`. Does not accept the composed `{server}_{name}` form the
+              server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+              `mcp_toolset_reference` for those.
+
+              - `BetaToolChangeToolReference`
+
+                Reference to a single tool the caller declared directly in
+                `tools[]`. Does not accept the composed `{server}_{name}` form the
+                server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+                `mcp_toolset_reference` for those.
+
+              - `BetaToolChangeMCPToolReference`
+
+                Reference to a single MCP tool by its server and remote name — the
+                same `server_name`/`name` pair `mcp_tool_use` carries.
+
+              - `BetaToolChangeMCPToolsetReference`
+
+                Reference to every tool in the named MCP server's toolset.
+
+            - `type: "tool_removal"`
+
+              - `"tool_removal"`
+
+            - `cache_control?: BetaCacheControlEphemeral | null`
+
+              Create a cache control breakpoint at this content block.
 
           - `BetaFallbackBlockParam`
 
@@ -3541,6 +3653,412 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
           When true, guarantees schema validation on tool names and inputs
 
+      - `BetaBrowserToolset20260801`
+
+        The browser toolset: a single `tools[]` entry (carrying no
+        `name`) that declares the browser tool family. The model is served
+        the family's tool with any members disabled via `configs` removed
+        from its schema.
+
+        - `type: "browser_toolset_20260801"`
+
+          - `"browser_toolset_20260801"`
+
+        - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
+
+          - `"direct"`
+
+          - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
+
+          - `"code_execution_20260521"`
+
+        - `cache_control?: BetaCacheControlEphemeral | null`
+
+          Create a cache control breakpoint at this content block.
+
+        - `configs?: BetaBrowserToolsetConfigs | null`
+
+          Per-member configuration for `browser_toolset_20260801`: one
+          optional field per member tool, keyed by the member name — the same
+          name the member's `tool_use` blocks carry. Every member is an
+          accepted key, and a member's defaults apply wherever its key is
+          absent. Unknown keys are rejected: the field set is this toolset
+          version's complete member set.
+
+          - `close_tab?: BetaBrowserCloseTabConfig | null`
+
+            `close_tab`'s config overrides.
+
+            - `defer_loading?: boolean | null`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled?: boolean | null`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `double_click?: BetaBrowserDoubleClickConfig | null`
+
+            `double_click`'s config overrides.
+
+            - `defer_loading?: boolean | null`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled?: boolean | null`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `file_upload?: BetaBrowserFileUploadConfig | null`
+
+            `file_upload`'s config overrides.
+
+            - `defer_loading?: boolean | null`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled?: boolean | null`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `find?: BetaBrowserFindConfig | null`
+
+            `find`'s config overrides.
+
+            - `defer_loading?: boolean | null`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled?: boolean | null`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `form_input?: BetaBrowserFormInputConfig | null`
+
+            `form_input`'s config overrides.
+
+            - `defer_loading?: boolean | null`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled?: boolean | null`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `get_page_text?: BetaBrowserGetPageTextConfig | null`
+
+            `get_page_text`'s config overrides.
+
+            - `defer_loading?: boolean | null`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled?: boolean | null`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `hold_key?: BetaBrowserHoldKeyConfig | null`
+
+            `hold_key`'s config overrides.
+
+            - `defer_loading?: boolean | null`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled?: boolean | null`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `hover?: BetaBrowserHoverConfig | null`
+
+            `hover`'s config overrides.
+
+            - `defer_loading?: boolean | null`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled?: boolean | null`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `javascript_exec?: BetaBrowserJavascriptExecConfig | null`
+
+            `javascript_exec`'s config overrides.
+
+            - `defer_loading?: boolean | null`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled?: boolean | null`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `key?: BetaBrowserKeyConfig | null`
+
+            `key`'s config overrides.
+
+            - `defer_loading?: boolean | null`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled?: boolean | null`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `left_click?: BetaBrowserLeftClickConfig | null`
+
+            `left_click`'s config overrides.
+
+            - `defer_loading?: boolean | null`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled?: boolean | null`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `left_click_drag?: BetaBrowserLeftClickDragConfig | null`
+
+            `left_click_drag`'s config overrides.
+
+            - `defer_loading?: boolean | null`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled?: boolean | null`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `left_mouse_down?: BetaBrowserLeftMouseDownConfig | null`
+
+            `left_mouse_down`'s config overrides.
+
+            - `defer_loading?: boolean | null`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled?: boolean | null`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `left_mouse_up?: BetaBrowserLeftMouseUpConfig | null`
+
+            `left_mouse_up`'s config overrides.
+
+            - `defer_loading?: boolean | null`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled?: boolean | null`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `list_tabs?: BetaBrowserListTabsConfig | null`
+
+            `list_tabs`'s config overrides.
+
+            - `defer_loading?: boolean | null`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled?: boolean | null`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `middle_click?: BetaBrowserMiddleClickConfig | null`
+
+            `middle_click`'s config overrides.
+
+            - `defer_loading?: boolean | null`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled?: boolean | null`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `mouse_move?: BetaBrowserMouseMoveConfig | null`
+
+            `mouse_move`'s config overrides.
+
+            - `defer_loading?: boolean | null`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled?: boolean | null`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `navigate?: BetaBrowserNavigateConfig | null`
+
+            `navigate`'s config overrides.
+
+            - `defer_loading?: boolean | null`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled?: boolean | null`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `new_tab?: BetaBrowserNewTabConfig | null`
+
+            `new_tab`'s config overrides.
+
+            - `defer_loading?: boolean | null`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled?: boolean | null`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `read_console?: BetaBrowserReadConsoleConfig | null`
+
+            `read_console`'s config overrides.
+
+            - `defer_loading?: boolean | null`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled?: boolean | null`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `read_network?: BetaBrowserReadNetworkConfig | null`
+
+            `read_network`'s config overrides.
+
+            - `defer_loading?: boolean | null`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled?: boolean | null`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `read_page?: BetaBrowserReadPageConfig | null`
+
+            `read_page`'s config overrides.
+
+            - `defer_loading?: boolean | null`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled?: boolean | null`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `right_click?: BetaBrowserRightClickConfig | null`
+
+            `right_click`'s config overrides.
+
+            - `defer_loading?: boolean | null`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled?: boolean | null`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `screenshot?: BetaBrowserScreenshotConfig | null`
+
+            `screenshot`'s config overrides.
+
+            - `defer_loading?: boolean | null`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled?: boolean | null`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `scroll?: BetaBrowserScrollConfig | null`
+
+            `scroll`'s config overrides.
+
+            - `defer_loading?: boolean | null`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled?: boolean | null`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `scroll_to?: BetaBrowserScrollToConfig | null`
+
+            `scroll_to`'s config overrides.
+
+            - `defer_loading?: boolean | null`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled?: boolean | null`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `switch_tab?: BetaBrowserSwitchTabConfig | null`
+
+            `switch_tab`'s config overrides.
+
+            - `defer_loading?: boolean | null`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled?: boolean | null`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `triple_click?: BetaBrowserTripleClickConfig | null`
+
+            `triple_click`'s config overrides.
+
+            - `defer_loading?: boolean | null`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled?: boolean | null`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `type?: BetaBrowserTypeConfig | null`
+
+            `type`'s config overrides.
+
+            - `defer_loading?: boolean | null`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled?: boolean | null`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `wait?: BetaBrowserWaitConfig | null`
+
+            `wait`'s config overrides.
+
+            - `defer_loading?: boolean | null`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled?: boolean | null`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `zoom?: BetaBrowserZoomConfig | null`
+
+            `zoom`'s config overrides.
+
+            - `defer_loading?: boolean | null`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled?: boolean | null`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
       - `BetaToolComputerUse20241022`
 
         - `display_height_px: number`
@@ -3770,6 +4288,248 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         - `strict?: boolean`
 
           When true, guarantees schema validation on tool names and inputs
+
+      - `BetaComputerToolset20260801`
+
+        The computer toolset: a single `tools[]` entry (carrying no
+        `name`) that declares the computer tool family. The model is
+        served the family's tool with any members disabled via `configs`
+        removed from its schema. Every member is enabled by default, zoom
+        included. The single-tool options `display_number` and
+        `enable_zoom` are not fields of a toolset entry — it carries only
+        `type`, `configs`, and `cache_control`; zoom is controlled
+        via `configs.zoom.enabled`.
+
+        - `type: "computer_toolset_20260801"`
+
+          - `"computer_toolset_20260801"`
+
+        - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
+
+          - `"direct"`
+
+          - `"code_execution_20250825"`
+
+          - `"code_execution_20260120"`
+
+          - `"code_execution_20260521"`
+
+        - `cache_control?: BetaCacheControlEphemeral | null`
+
+          Create a cache control breakpoint at this content block.
+
+        - `configs?: BetaComputerToolsetConfigs | null`
+
+          Per-member configuration for `computer_toolset_20260801`: one
+          optional field per member tool, keyed by the member name — the same
+          name the member's `tool_use` blocks carry. Every member is an
+          accepted key, and a member's defaults apply wherever its key is
+          absent. Unknown keys are rejected: the field set is this toolset
+          version's complete member set.
+
+          - `cursor_position?: BetaComputerCursorPositionConfig | null`
+
+            `cursor_position`'s config overrides.
+
+            - `defer_loading?: boolean | null`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled?: boolean | null`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `double_click?: BetaComputerDoubleClickConfig | null`
+
+            `double_click`'s config overrides.
+
+            - `defer_loading?: boolean | null`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled?: boolean | null`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `hold_key?: BetaComputerHoldKeyConfig | null`
+
+            `hold_key`'s config overrides.
+
+            - `defer_loading?: boolean | null`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled?: boolean | null`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `key?: BetaComputerKeyConfig | null`
+
+            `key`'s config overrides.
+
+            - `defer_loading?: boolean | null`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled?: boolean | null`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `left_click?: BetaComputerLeftClickConfig | null`
+
+            `left_click`'s config overrides.
+
+            - `defer_loading?: boolean | null`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled?: boolean | null`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `left_click_drag?: BetaComputerLeftClickDragConfig | null`
+
+            `left_click_drag`'s config overrides.
+
+            - `defer_loading?: boolean | null`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled?: boolean | null`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `left_mouse_down?: BetaComputerLeftMouseDownConfig | null`
+
+            `left_mouse_down`'s config overrides.
+
+            - `defer_loading?: boolean | null`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled?: boolean | null`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `left_mouse_up?: BetaComputerLeftMouseUpConfig | null`
+
+            `left_mouse_up`'s config overrides.
+
+            - `defer_loading?: boolean | null`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled?: boolean | null`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `middle_click?: BetaComputerMiddleClickConfig | null`
+
+            `middle_click`'s config overrides.
+
+            - `defer_loading?: boolean | null`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled?: boolean | null`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `mouse_move?: BetaComputerMouseMoveConfig | null`
+
+            `mouse_move`'s config overrides.
+
+            - `defer_loading?: boolean | null`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled?: boolean | null`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `right_click?: BetaComputerRightClickConfig | null`
+
+            `right_click`'s config overrides.
+
+            - `defer_loading?: boolean | null`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled?: boolean | null`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `screenshot?: BetaComputerScreenshotConfig | null`
+
+            `screenshot`'s config overrides.
+
+            - `defer_loading?: boolean | null`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled?: boolean | null`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `scroll?: BetaComputerScrollConfig | null`
+
+            `scroll`'s config overrides.
+
+            - `defer_loading?: boolean | null`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled?: boolean | null`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `triple_click?: BetaComputerTripleClickConfig | null`
+
+            `triple_click`'s config overrides.
+
+            - `defer_loading?: boolean | null`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled?: boolean | null`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `type?: BetaComputerTypeConfig | null`
+
+            `type`'s config overrides.
+
+            - `defer_loading?: boolean | null`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled?: boolean | null`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `wait?: BetaComputerWaitConfig | null`
+
+            `wait`'s config overrides.
+
+            - `defer_loading?: boolean | null`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled?: boolean | null`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+          - `zoom?: BetaComputerZoomConfig | null`
+
+            `zoom`'s config overrides.
+
+            - `defer_loading?: boolean | null`
+
+              Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+            - `enabled?: boolean | null`
+
+              Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
       - `BetaToolTextEditor20250124`
 
@@ -4502,7 +5262,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `(string & {})`
 
-      - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+      - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
         - `"message-batches-2024-09-24"`
 
@@ -4547,6 +5307,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
         - `"output-300k-2026-03-24"`
 
         - `"user-profiles-2026-03-24"`
+
+        - `"user-profiles-2026-08-18"`
 
         - `"advisor-tool-2026-03-01"`
 
@@ -4860,6 +5622,10 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
           - `type: "code_execution_20260120"`
 
             - `"code_execution_20260120"`
+
+      - `toolset_name?: string | null`
+
+        For a toolset member tool_use, the toolset family.
 
     - `BetaServerToolUseBlock`
 
@@ -6142,7 +6908,7 @@ const client = new Anthropic({
 const betaMessage = await client.beta.messages.create({
   max_tokens: 1024,
   messages: [{ content: "Hello, world", role: "user" }],
-  model: "claude-opus-4-6"
+  model: "claude-opus-5"
 });
 
 console.log(betaMessage.id);
@@ -6196,14 +6962,14 @@ console.log(betaMessage.id);
       "type": "model_changed"
     }
   },
-  "model": "claude-opus-4-6",
+  "model": "claude-opus-5",
   "role": "assistant",
   "stop_details": {
     "category": "cyber",
     "explanation": "This request was declined because it conflicts with Anthropic's Usage Policy.",
     "fallback_credit_token": "QW50aHJvcGljL0NsYXVkZQ==",
     "fallback_has_prefill_claim": true,
-    "recommended_model": "claude-sonnet-4-6",
+    "recommended_model": "claude-opus-4-8",
     "type": "refusal"
   },
   "stop_reason": "end_turn",
@@ -6507,6 +7273,18 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             Create a cache control breakpoint at this content block.
 
+          - `transformations?: BetaImageTransformationsParam | null`
+
+            Configures the transformations the server applies to this image before the model observes it. Each key names a condition the server transforms images for; its value selects the transformation applied. Omitted keys keep their default behavior, and an empty object is equivalent to omitting the field.
+
+            - `oversized_image?: "downsize" | "error"`
+
+              What the server does when this image exceeds the model's maximum image size. `"downsize"` (the default) scales the image down to fit, which changes the dimensions the model observes without telling you. `"error"` instead rejects the request with a 400 error naming the image's dimensions and the largest dimensions that fit, so you can scale the image deliberately — your image is never silently scaled down.
+
+              - `"downsize"`
+
+              - `"error"`
+
         - `BetaRequestDocumentBlock`
 
           - `source: BetaBase64PDFSource | BetaPlainTextSource | BetaContentBlockSource | 2 more`
@@ -6683,6 +7461,10 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 - `"code_execution_20260120"`
 
+          - `toolset_name?: string | null`
+
+            For a toolset member tool_use, the toolset family this member belongs to.
+
         - `BetaToolResultBlockParam`
 
           - `tool_use_id: string`
@@ -6695,11 +7477,11 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             Create a cache control breakpoint at this content block.
 
-          - `content?: string | Array<BetaTextBlockParam | BetaImageBlockParam | BetaSearchResultBlockParam | 2 more>`
+          - `content?: string | Array<BetaTextBlockParam | BetaImageBlockParam | BetaSearchResultBlockParam | 3 more>`
 
             - `string`
 
-            - `Array<BetaTextBlockParam | BetaImageBlockParam | BetaSearchResultBlockParam | 2 more>`
+            - `Array<BetaTextBlockParam | BetaImageBlockParam | BetaSearchResultBlockParam | 3 more>`
 
               - `BetaTextBlockParam`
 
@@ -6723,7 +7505,134 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                   Create a cache control breakpoint at this content block.
 
+              - `BetaBrowserStateBlockParam`
+
+                The caller's browser state after a browser toolset member call —
+                the full inventory of open tabs, which tab is active, and any side
+                effects (tabs opened, download state changes) the call produced.
+
+                At most one per `tool_result`, only on a non-error result answering a
+                browser toolset member `tool_use`. The server renders the
+                model-visible text from it; the model never sees the raw fields.
+
+                - `tabs: Array<BetaBrowserStateTabEntry>`
+
+                  All tabs open in the browser after this call — the full inventory, not a delta. May be empty. Whenever non-empty, exactly one entry carries `active: true`.
+
+                  - `tab_id: string`
+
+                    The caller-assigned identifier for this tab, unique within the inventory.
+
+                  - `title: string`
+
+                    The title of the page the tab is showing. May be empty.
+
+                  - `url: string`
+
+                    The URL of the page the tab is showing. May be empty.
+
+                  - `active?: boolean`
+
+                    Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
+
+                - `type: "browser_state"`
+
+                  - `"browser_state"`
+
+                - `cache_control?: BetaCacheControlEphemeral | null`
+
+                  Create a cache control breakpoint at this content block.
+
+                - `state_changes?: Array<BetaBrowserStateChange> | null`
+
+                  Tabs opened and download state changes during this call. "Nothing to report" is expressed by omitting the field, never by an empty list.
+
+                  - `BetaBrowserStateChangeTabOpened`
+
+                    A tab this call's execution opened that remains open at its end —
+                    the creation delta of the `tabs` inventory, not an event log.
+
+                    Carries only the `tab_id`; the tab's `title` and `url` live on its
+                    `tabs` entry, which must include the same `tab_id`. A tab opened
+                    during a failed call gets no deferred `tab_opened`; it simply appears
+                    in the next result's `tabs` inventory.
+
+                    - `tab_id: string`
+
+                      The `tab_id` of the opened tab, present in `tabs`.
+
+                    - `type: "tab_opened"`
+
+                      - `"tab_opened"`
+
+                  - `BetaBrowserStateChangeDownloadStarted`
+
+                    A file download that started during this call.
+
+                    - `download_id: string`
+
+                      The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+                    - `type: "download_started"`
+
+                      - `"download_started"`
+
+                    - `url: string`
+
+                      The final post-redirect URL the download was served from.
+
+                  - `BetaBrowserStateChangeDownloadCompleted`
+
+                    A file download that finished during this call, reported with the
+                    same `download_id` as its `download_started` — or without a prior
+                    `download_started`, when the download finished during the call that
+                    started it (at most one state change per `download_id` per result).
+
+                    - `download_id: string`
+
+                      The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+                    - `type: "download_completed"`
+
+                      - `"download_completed"`
+
+                    - `url: string`
+
+                      The final post-redirect URL the download was served from.
+
+                    - `path?: string | null`
+
+                      Where the executor saved the file, on the executor's filesystem. Only included when another tool in the same environment can read the file at that path.
+
+                    - `size_bytes?: number | null`
+
+                      The completed download's size.
+
+                  - `BetaBrowserStateChangeDownloadFailed`
+
+                    A file download that failed — or was cancelled — during this call.
+
+                    - `download_id: string`
+
+                      The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+                    - `type: "download_failed"`
+
+                      - `"download_failed"`
+
+                    - `url: string`
+
+                      The final post-redirect URL the download was served from.
+
+                    - `error?: string | null`
+
+                      The failure or cancellation detail, when known.
+
           - `is_error?: boolean`
+
+          - `toolset_name?: string | null`
+
+            For a toolset member tool_result, the toolset family of the paired tool_use.
 
         - `BetaServerToolUseBlockParam`
 
@@ -7304,125 +8213,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             Opaque metadata from prior compaction, to be round-tripped verbatim
 
-        - `BetaMidConversationSystemBlockParam`
-
-          System instructions that appear mid-conversation.
-
-          Use this block to provide or update system-level instructions at a specific
-          point in the conversation, rather than only via the top-level `system` parameter.
-
-          - `content: Array<BetaTextBlockParam | BetaRequestToolAdditionBlock | BetaRequestToolRemovalBlock>`
-
-            System instruction text blocks.
-
-            - `BetaTextBlockParam`
-
-            - `BetaRequestToolAdditionBlock`
-
-              Mid-conversation directive to surface a declared tool.
-
-              `tool` references a tool (or MCP toolset) by name from the request's
-              `tools`; it is offered to the model from this point in the
-              conversation onward.
-
-              - `tool: BetaToolChangeToolReference | BetaToolChangeMCPToolReference | BetaToolChangeMCPToolsetReference`
-
-                Reference to a single tool the caller declared directly in
-                `tools[]`. Does not accept the composed `{server}_{name}` form the
-                server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-                `mcp_toolset_reference` for those.
-
-                - `BetaToolChangeToolReference`
-
-                  Reference to a single tool the caller declared directly in
-                  `tools[]`. Does not accept the composed `{server}_{name}` form the
-                  server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-                  `mcp_toolset_reference` for those.
-
-                  - `name: string`
-
-                  - `type: "tool_reference"`
-
-                    - `"tool_reference"`
-
-                - `BetaToolChangeMCPToolReference`
-
-                  Reference to a single MCP tool by its server and remote name — the
-                  same `server_name`/`name` pair `mcp_tool_use` carries.
-
-                  - `name: string`
-
-                  - `server_name: string`
-
-                  - `type: "mcp_tool_reference"`
-
-                    - `"mcp_tool_reference"`
-
-                - `BetaToolChangeMCPToolsetReference`
-
-                  Reference to every tool in the named MCP server's toolset.
-
-                  - `server_name: string`
-
-                  - `type: "mcp_toolset_reference"`
-
-                    - `"mcp_toolset_reference"`
-
-              - `type: "tool_addition"`
-
-                - `"tool_addition"`
-
-              - `cache_control?: BetaCacheControlEphemeral | null`
-
-                Create a cache control breakpoint at this content block.
-
-            - `BetaRequestToolRemovalBlock`
-
-              Mid-conversation directive to withdraw a tool.
-
-              `tool` references a tool (or MCP toolset) by name from the request's
-              `tools`; it is no longer offered to the model from this point in the
-              conversation onward.
-
-              - `tool: BetaToolChangeToolReference | BetaToolChangeMCPToolReference | BetaToolChangeMCPToolsetReference`
-
-                Reference to a single tool the caller declared directly in
-                `tools[]`. Does not accept the composed `{server}_{name}` form the
-                server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-                `mcp_toolset_reference` for those.
-
-                - `BetaToolChangeToolReference`
-
-                  Reference to a single tool the caller declared directly in
-                  `tools[]`. Does not accept the composed `{server}_{name}` form the
-                  server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-                  `mcp_toolset_reference` for those.
-
-                - `BetaToolChangeMCPToolReference`
-
-                  Reference to a single MCP tool by its server and remote name — the
-                  same `server_name`/`name` pair `mcp_tool_use` carries.
-
-                - `BetaToolChangeMCPToolsetReference`
-
-                  Reference to every tool in the named MCP server's toolset.
-
-              - `type: "tool_removal"`
-
-                - `"tool_removal"`
-
-              - `cache_control?: BetaCacheControlEphemeral | null`
-
-                Create a cache control breakpoint at this content block.
-
-          - `type: "mid_conv_system"`
-
-            - `"mid_conv_system"`
-
-          - `cache_control?: BetaCacheControlEphemeral | null`
-
-            Create a cache control breakpoint at this content block.
-
         - `BetaRequestToolAdditionBlock`
 
           Mid-conversation directive to surface a declared tool.
@@ -7431,6 +8221,57 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
           `tools`; it is offered to the model from this point in the
           conversation onward.
 
+          - `tool: BetaToolChangeToolReference | BetaToolChangeMCPToolReference | BetaToolChangeMCPToolsetReference`
+
+            Reference to a single tool the caller declared directly in
+            `tools[]`. Does not accept the composed `{server}_{name}` form the
+            server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+            `mcp_toolset_reference` for those.
+
+            - `BetaToolChangeToolReference`
+
+              Reference to a single tool the caller declared directly in
+              `tools[]`. Does not accept the composed `{server}_{name}` form the
+              server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+              `mcp_toolset_reference` for those.
+
+              - `name: string`
+
+              - `type: "tool_reference"`
+
+                - `"tool_reference"`
+
+            - `BetaToolChangeMCPToolReference`
+
+              Reference to a single MCP tool by its server and remote name — the
+              same `server_name`/`name` pair `mcp_tool_use` carries.
+
+              - `name: string`
+
+              - `server_name: string`
+
+              - `type: "mcp_tool_reference"`
+
+                - `"mcp_tool_reference"`
+
+            - `BetaToolChangeMCPToolsetReference`
+
+              Reference to every tool in the named MCP server's toolset.
+
+              - `server_name: string`
+
+              - `type: "mcp_toolset_reference"`
+
+                - `"mcp_toolset_reference"`
+
+          - `type: "tool_addition"`
+
+            - `"tool_addition"`
+
+          - `cache_control?: BetaCacheControlEphemeral | null`
+
+            Create a cache control breakpoint at this content block.
+
         - `BetaRequestToolRemovalBlock`
 
           Mid-conversation directive to withdraw a tool.
@@ -7438,6 +8279,37 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
           `tool` references a tool (or MCP toolset) by name from the request's
           `tools`; it is no longer offered to the model from this point in the
           conversation onward.
+
+          - `tool: BetaToolChangeToolReference | BetaToolChangeMCPToolReference | BetaToolChangeMCPToolsetReference`
+
+            Reference to a single tool the caller declared directly in
+            `tools[]`. Does not accept the composed `{server}_{name}` form the
+            server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+            `mcp_toolset_reference` for those.
+
+            - `BetaToolChangeToolReference`
+
+              Reference to a single tool the caller declared directly in
+              `tools[]`. Does not accept the composed `{server}_{name}` form the
+              server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+              `mcp_toolset_reference` for those.
+
+            - `BetaToolChangeMCPToolReference`
+
+              Reference to a single MCP tool by its server and remote name — the
+              same `server_name`/`name` pair `mcp_tool_use` carries.
+
+            - `BetaToolChangeMCPToolsetReference`
+
+              Reference to every tool in the named MCP server's toolset.
+
+          - `type: "tool_removal"`
+
+            - `"tool_removal"`
+
+          - `cache_control?: BetaCacheControlEphemeral | null`
+
+            Create a cache control breakpoint at this content block.
 
         - `BetaFallbackBlockParam`
 
@@ -7885,7 +8757,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         - `"none"`
 
-  - `tools?: Array<BetaTool | BetaToolBash20241022 | BetaToolBash20250124 | 23 more>`
+  - `tools?: Array<BetaTool | BetaToolBash20241022 | BetaToolBash20250124 | 25 more>`
 
     Body param: Definitions of tools that the model may use.
 
@@ -8233,6 +9105,412 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         When true, guarantees schema validation on tool names and inputs
 
+    - `BetaBrowserToolset20260801`
+
+      The browser toolset: a single `tools[]` entry (carrying no
+      `name`) that declares the browser tool family. The model is served
+      the family's tool with any members disabled via `configs` removed
+      from its schema.
+
+      - `type: "browser_toolset_20260801"`
+
+        - `"browser_toolset_20260801"`
+
+      - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
+
+        - `"direct"`
+
+        - `"code_execution_20250825"`
+
+        - `"code_execution_20260120"`
+
+        - `"code_execution_20260521"`
+
+      - `cache_control?: BetaCacheControlEphemeral | null`
+
+        Create a cache control breakpoint at this content block.
+
+      - `configs?: BetaBrowserToolsetConfigs | null`
+
+        Per-member configuration for `browser_toolset_20260801`: one
+        optional field per member tool, keyed by the member name — the same
+        name the member's `tool_use` blocks carry. Every member is an
+        accepted key, and a member's defaults apply wherever its key is
+        absent. Unknown keys are rejected: the field set is this toolset
+        version's complete member set.
+
+        - `close_tab?: BetaBrowserCloseTabConfig | null`
+
+          `close_tab`'s config overrides.
+
+          - `defer_loading?: boolean | null`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `enabled?: boolean | null`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `double_click?: BetaBrowserDoubleClickConfig | null`
+
+          `double_click`'s config overrides.
+
+          - `defer_loading?: boolean | null`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `enabled?: boolean | null`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `file_upload?: BetaBrowserFileUploadConfig | null`
+
+          `file_upload`'s config overrides.
+
+          - `defer_loading?: boolean | null`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `enabled?: boolean | null`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `find?: BetaBrowserFindConfig | null`
+
+          `find`'s config overrides.
+
+          - `defer_loading?: boolean | null`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `enabled?: boolean | null`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `form_input?: BetaBrowserFormInputConfig | null`
+
+          `form_input`'s config overrides.
+
+          - `defer_loading?: boolean | null`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `enabled?: boolean | null`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `get_page_text?: BetaBrowserGetPageTextConfig | null`
+
+          `get_page_text`'s config overrides.
+
+          - `defer_loading?: boolean | null`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `enabled?: boolean | null`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `hold_key?: BetaBrowserHoldKeyConfig | null`
+
+          `hold_key`'s config overrides.
+
+          - `defer_loading?: boolean | null`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `enabled?: boolean | null`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `hover?: BetaBrowserHoverConfig | null`
+
+          `hover`'s config overrides.
+
+          - `defer_loading?: boolean | null`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `enabled?: boolean | null`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `javascript_exec?: BetaBrowserJavascriptExecConfig | null`
+
+          `javascript_exec`'s config overrides.
+
+          - `defer_loading?: boolean | null`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `enabled?: boolean | null`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `key?: BetaBrowserKeyConfig | null`
+
+          `key`'s config overrides.
+
+          - `defer_loading?: boolean | null`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `enabled?: boolean | null`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `left_click?: BetaBrowserLeftClickConfig | null`
+
+          `left_click`'s config overrides.
+
+          - `defer_loading?: boolean | null`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `enabled?: boolean | null`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `left_click_drag?: BetaBrowserLeftClickDragConfig | null`
+
+          `left_click_drag`'s config overrides.
+
+          - `defer_loading?: boolean | null`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `enabled?: boolean | null`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `left_mouse_down?: BetaBrowserLeftMouseDownConfig | null`
+
+          `left_mouse_down`'s config overrides.
+
+          - `defer_loading?: boolean | null`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `enabled?: boolean | null`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `left_mouse_up?: BetaBrowserLeftMouseUpConfig | null`
+
+          `left_mouse_up`'s config overrides.
+
+          - `defer_loading?: boolean | null`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `enabled?: boolean | null`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `list_tabs?: BetaBrowserListTabsConfig | null`
+
+          `list_tabs`'s config overrides.
+
+          - `defer_loading?: boolean | null`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `enabled?: boolean | null`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `middle_click?: BetaBrowserMiddleClickConfig | null`
+
+          `middle_click`'s config overrides.
+
+          - `defer_loading?: boolean | null`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `enabled?: boolean | null`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `mouse_move?: BetaBrowserMouseMoveConfig | null`
+
+          `mouse_move`'s config overrides.
+
+          - `defer_loading?: boolean | null`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `enabled?: boolean | null`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `navigate?: BetaBrowserNavigateConfig | null`
+
+          `navigate`'s config overrides.
+
+          - `defer_loading?: boolean | null`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `enabled?: boolean | null`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `new_tab?: BetaBrowserNewTabConfig | null`
+
+          `new_tab`'s config overrides.
+
+          - `defer_loading?: boolean | null`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `enabled?: boolean | null`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `read_console?: BetaBrowserReadConsoleConfig | null`
+
+          `read_console`'s config overrides.
+
+          - `defer_loading?: boolean | null`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `enabled?: boolean | null`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `read_network?: BetaBrowserReadNetworkConfig | null`
+
+          `read_network`'s config overrides.
+
+          - `defer_loading?: boolean | null`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `enabled?: boolean | null`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `read_page?: BetaBrowserReadPageConfig | null`
+
+          `read_page`'s config overrides.
+
+          - `defer_loading?: boolean | null`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `enabled?: boolean | null`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `right_click?: BetaBrowserRightClickConfig | null`
+
+          `right_click`'s config overrides.
+
+          - `defer_loading?: boolean | null`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `enabled?: boolean | null`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `screenshot?: BetaBrowserScreenshotConfig | null`
+
+          `screenshot`'s config overrides.
+
+          - `defer_loading?: boolean | null`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `enabled?: boolean | null`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `scroll?: BetaBrowserScrollConfig | null`
+
+          `scroll`'s config overrides.
+
+          - `defer_loading?: boolean | null`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `enabled?: boolean | null`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `scroll_to?: BetaBrowserScrollToConfig | null`
+
+          `scroll_to`'s config overrides.
+
+          - `defer_loading?: boolean | null`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `enabled?: boolean | null`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `switch_tab?: BetaBrowserSwitchTabConfig | null`
+
+          `switch_tab`'s config overrides.
+
+          - `defer_loading?: boolean | null`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `enabled?: boolean | null`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `triple_click?: BetaBrowserTripleClickConfig | null`
+
+          `triple_click`'s config overrides.
+
+          - `defer_loading?: boolean | null`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `enabled?: boolean | null`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `type?: BetaBrowserTypeConfig | null`
+
+          `type`'s config overrides.
+
+          - `defer_loading?: boolean | null`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `enabled?: boolean | null`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `wait?: BetaBrowserWaitConfig | null`
+
+          `wait`'s config overrides.
+
+          - `defer_loading?: boolean | null`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `enabled?: boolean | null`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `zoom?: BetaBrowserZoomConfig | null`
+
+          `zoom`'s config overrides.
+
+          - `defer_loading?: boolean | null`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `enabled?: boolean | null`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
     - `BetaToolComputerUse20241022`
 
       - `display_height_px: number`
@@ -8462,6 +9740,248 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
       - `strict?: boolean`
 
         When true, guarantees schema validation on tool names and inputs
+
+    - `BetaComputerToolset20260801`
+
+      The computer toolset: a single `tools[]` entry (carrying no
+      `name`) that declares the computer tool family. The model is
+      served the family's tool with any members disabled via `configs`
+      removed from its schema. Every member is enabled by default, zoom
+      included. The single-tool options `display_number` and
+      `enable_zoom` are not fields of a toolset entry — it carries only
+      `type`, `configs`, and `cache_control`; zoom is controlled
+      via `configs.zoom.enabled`.
+
+      - `type: "computer_toolset_20260801"`
+
+        - `"computer_toolset_20260801"`
+
+      - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
+
+        - `"direct"`
+
+        - `"code_execution_20250825"`
+
+        - `"code_execution_20260120"`
+
+        - `"code_execution_20260521"`
+
+      - `cache_control?: BetaCacheControlEphemeral | null`
+
+        Create a cache control breakpoint at this content block.
+
+      - `configs?: BetaComputerToolsetConfigs | null`
+
+        Per-member configuration for `computer_toolset_20260801`: one
+        optional field per member tool, keyed by the member name — the same
+        name the member's `tool_use` blocks carry. Every member is an
+        accepted key, and a member's defaults apply wherever its key is
+        absent. Unknown keys are rejected: the field set is this toolset
+        version's complete member set.
+
+        - `cursor_position?: BetaComputerCursorPositionConfig | null`
+
+          `cursor_position`'s config overrides.
+
+          - `defer_loading?: boolean | null`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `enabled?: boolean | null`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `double_click?: BetaComputerDoubleClickConfig | null`
+
+          `double_click`'s config overrides.
+
+          - `defer_loading?: boolean | null`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `enabled?: boolean | null`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `hold_key?: BetaComputerHoldKeyConfig | null`
+
+          `hold_key`'s config overrides.
+
+          - `defer_loading?: boolean | null`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `enabled?: boolean | null`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `key?: BetaComputerKeyConfig | null`
+
+          `key`'s config overrides.
+
+          - `defer_loading?: boolean | null`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `enabled?: boolean | null`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `left_click?: BetaComputerLeftClickConfig | null`
+
+          `left_click`'s config overrides.
+
+          - `defer_loading?: boolean | null`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `enabled?: boolean | null`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `left_click_drag?: BetaComputerLeftClickDragConfig | null`
+
+          `left_click_drag`'s config overrides.
+
+          - `defer_loading?: boolean | null`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `enabled?: boolean | null`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `left_mouse_down?: BetaComputerLeftMouseDownConfig | null`
+
+          `left_mouse_down`'s config overrides.
+
+          - `defer_loading?: boolean | null`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `enabled?: boolean | null`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `left_mouse_up?: BetaComputerLeftMouseUpConfig | null`
+
+          `left_mouse_up`'s config overrides.
+
+          - `defer_loading?: boolean | null`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `enabled?: boolean | null`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `middle_click?: BetaComputerMiddleClickConfig | null`
+
+          `middle_click`'s config overrides.
+
+          - `defer_loading?: boolean | null`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `enabled?: boolean | null`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `mouse_move?: BetaComputerMouseMoveConfig | null`
+
+          `mouse_move`'s config overrides.
+
+          - `defer_loading?: boolean | null`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `enabled?: boolean | null`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `right_click?: BetaComputerRightClickConfig | null`
+
+          `right_click`'s config overrides.
+
+          - `defer_loading?: boolean | null`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `enabled?: boolean | null`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `screenshot?: BetaComputerScreenshotConfig | null`
+
+          `screenshot`'s config overrides.
+
+          - `defer_loading?: boolean | null`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `enabled?: boolean | null`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `scroll?: BetaComputerScrollConfig | null`
+
+          `scroll`'s config overrides.
+
+          - `defer_loading?: boolean | null`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `enabled?: boolean | null`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `triple_click?: BetaComputerTripleClickConfig | null`
+
+          `triple_click`'s config overrides.
+
+          - `defer_loading?: boolean | null`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `enabled?: boolean | null`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `type?: BetaComputerTypeConfig | null`
+
+          `type`'s config overrides.
+
+          - `defer_loading?: boolean | null`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `enabled?: boolean | null`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `wait?: BetaComputerWaitConfig | null`
+
+          `wait`'s config overrides.
+
+          - `defer_loading?: boolean | null`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `enabled?: boolean | null`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `zoom?: BetaComputerZoomConfig | null`
+
+          `zoom`'s config overrides.
+
+          - `defer_loading?: boolean | null`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `enabled?: boolean | null`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
     - `BetaToolTextEditor20250124`
 
@@ -9178,7 +10698,7 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -9223,6 +10743,8 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -9277,7 +10799,7 @@ const client = new Anthropic({
 
 const betaMessageTokensCount = await client.beta.messages.countTokens({
   messages: [{ content: "Hello, world", role: "user" }],
-  model: "claude-opus-4-6"
+  model: "claude-opus-5"
 });
 
 console.log(betaMessageTokensCount.context_management);
@@ -10056,6 +11578,1605 @@ console.log(betaMessageTokensCount.context_management);
   - `type: "bash_code_execution_tool_result_error"`
 
     - `"bash_code_execution_tool_result_error"`
+
+### Beta Browser Close Tab Config
+
+- `BetaBrowserCloseTabConfig`
+
+  `close_tab`'s config overrides.
+
+  - `defer_loading?: boolean | null`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `enabled?: boolean | null`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Double Click Config
+
+- `BetaBrowserDoubleClickConfig`
+
+  `double_click`'s config overrides.
+
+  - `defer_loading?: boolean | null`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `enabled?: boolean | null`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser File Upload Config
+
+- `BetaBrowserFileUploadConfig`
+
+  `file_upload`'s config overrides.
+
+  - `defer_loading?: boolean | null`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `enabled?: boolean | null`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Find Config
+
+- `BetaBrowserFindConfig`
+
+  `find`'s config overrides.
+
+  - `defer_loading?: boolean | null`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `enabled?: boolean | null`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Form Input Config
+
+- `BetaBrowserFormInputConfig`
+
+  `form_input`'s config overrides.
+
+  - `defer_loading?: boolean | null`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `enabled?: boolean | null`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Get Page Text Config
+
+- `BetaBrowserGetPageTextConfig`
+
+  `get_page_text`'s config overrides.
+
+  - `defer_loading?: boolean | null`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `enabled?: boolean | null`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Hold Key Config
+
+- `BetaBrowserHoldKeyConfig`
+
+  `hold_key`'s config overrides.
+
+  - `defer_loading?: boolean | null`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `enabled?: boolean | null`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Hover Config
+
+- `BetaBrowserHoverConfig`
+
+  `hover`'s config overrides.
+
+  - `defer_loading?: boolean | null`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `enabled?: boolean | null`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Javascript Exec Config
+
+- `BetaBrowserJavascriptExecConfig`
+
+  `javascript_exec`'s config overrides.
+
+  - `defer_loading?: boolean | null`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `enabled?: boolean | null`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Key Config
+
+- `BetaBrowserKeyConfig`
+
+  `key`'s config overrides.
+
+  - `defer_loading?: boolean | null`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `enabled?: boolean | null`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Left Click Config
+
+- `BetaBrowserLeftClickConfig`
+
+  `left_click`'s config overrides.
+
+  - `defer_loading?: boolean | null`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `enabled?: boolean | null`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Left Click Drag Config
+
+- `BetaBrowserLeftClickDragConfig`
+
+  `left_click_drag`'s config overrides.
+
+  - `defer_loading?: boolean | null`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `enabled?: boolean | null`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Left Mouse Down Config
+
+- `BetaBrowserLeftMouseDownConfig`
+
+  `left_mouse_down`'s config overrides.
+
+  - `defer_loading?: boolean | null`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `enabled?: boolean | null`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Left Mouse Up Config
+
+- `BetaBrowserLeftMouseUpConfig`
+
+  `left_mouse_up`'s config overrides.
+
+  - `defer_loading?: boolean | null`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `enabled?: boolean | null`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser List Tabs Config
+
+- `BetaBrowserListTabsConfig`
+
+  `list_tabs`'s config overrides.
+
+  - `defer_loading?: boolean | null`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `enabled?: boolean | null`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Middle Click Config
+
+- `BetaBrowserMiddleClickConfig`
+
+  `middle_click`'s config overrides.
+
+  - `defer_loading?: boolean | null`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `enabled?: boolean | null`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Mouse Move Config
+
+- `BetaBrowserMouseMoveConfig`
+
+  `mouse_move`'s config overrides.
+
+  - `defer_loading?: boolean | null`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `enabled?: boolean | null`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Navigate Config
+
+- `BetaBrowserNavigateConfig`
+
+  `navigate`'s config overrides.
+
+  - `defer_loading?: boolean | null`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `enabled?: boolean | null`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser New Tab Config
+
+- `BetaBrowserNewTabConfig`
+
+  `new_tab`'s config overrides.
+
+  - `defer_loading?: boolean | null`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `enabled?: boolean | null`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Read Console Config
+
+- `BetaBrowserReadConsoleConfig`
+
+  `read_console`'s config overrides.
+
+  - `defer_loading?: boolean | null`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `enabled?: boolean | null`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Read Network Config
+
+- `BetaBrowserReadNetworkConfig`
+
+  `read_network`'s config overrides.
+
+  - `defer_loading?: boolean | null`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `enabled?: boolean | null`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Read Page Config
+
+- `BetaBrowserReadPageConfig`
+
+  `read_page`'s config overrides.
+
+  - `defer_loading?: boolean | null`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `enabled?: boolean | null`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Right Click Config
+
+- `BetaBrowserRightClickConfig`
+
+  `right_click`'s config overrides.
+
+  - `defer_loading?: boolean | null`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `enabled?: boolean | null`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Screenshot Config
+
+- `BetaBrowserScreenshotConfig`
+
+  `screenshot`'s config overrides.
+
+  - `defer_loading?: boolean | null`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `enabled?: boolean | null`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Scroll Config
+
+- `BetaBrowserScrollConfig`
+
+  `scroll`'s config overrides.
+
+  - `defer_loading?: boolean | null`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `enabled?: boolean | null`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Scroll To Config
+
+- `BetaBrowserScrollToConfig`
+
+  `scroll_to`'s config overrides.
+
+  - `defer_loading?: boolean | null`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `enabled?: boolean | null`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser State Block Param
+
+- `BetaBrowserStateBlockParam`
+
+  The caller's browser state after a browser toolset member call —
+  the full inventory of open tabs, which tab is active, and any side
+  effects (tabs opened, download state changes) the call produced.
+
+  At most one per `tool_result`, only on a non-error result answering a
+  browser toolset member `tool_use`. The server renders the
+  model-visible text from it; the model never sees the raw fields.
+
+  - `tabs: Array<BetaBrowserStateTabEntry>`
+
+    All tabs open in the browser after this call — the full inventory, not a delta. May be empty. Whenever non-empty, exactly one entry carries `active: true`.
+
+    - `tab_id: string`
+
+      The caller-assigned identifier for this tab, unique within the inventory.
+
+    - `title: string`
+
+      The title of the page the tab is showing. May be empty.
+
+    - `url: string`
+
+      The URL of the page the tab is showing. May be empty.
+
+    - `active?: boolean`
+
+      Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
+
+  - `type: "browser_state"`
+
+    - `"browser_state"`
+
+  - `cache_control?: BetaCacheControlEphemeral | null`
+
+    Create a cache control breakpoint at this content block.
+
+    - `type: "ephemeral"`
+
+      - `"ephemeral"`
+
+    - `ttl?: "5m" | "1h"`
+
+      The time-to-live for the cache control breakpoint.
+
+      This may be one the following values:
+
+      - `5m`: 5 minutes
+      - `1h`: 1 hour
+
+      Defaults to `5m`. See [prompt caching pricing](../build-with-claude/build-with-claude-prompt-caching.md) for details.
+
+      - `"5m"`
+
+      - `"1h"`
+
+  - `state_changes?: Array<BetaBrowserStateChange> | null`
+
+    Tabs opened and download state changes during this call. "Nothing to report" is expressed by omitting the field, never by an empty list.
+
+    - `BetaBrowserStateChangeTabOpened`
+
+      A tab this call's execution opened that remains open at its end —
+      the creation delta of the `tabs` inventory, not an event log.
+
+      Carries only the `tab_id`; the tab's `title` and `url` live on its
+      `tabs` entry, which must include the same `tab_id`. A tab opened
+      during a failed call gets no deferred `tab_opened`; it simply appears
+      in the next result's `tabs` inventory.
+
+      - `tab_id: string`
+
+        The `tab_id` of the opened tab, present in `tabs`.
+
+      - `type: "tab_opened"`
+
+        - `"tab_opened"`
+
+    - `BetaBrowserStateChangeDownloadStarted`
+
+      A file download that started during this call.
+
+      - `download_id: string`
+
+        The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+      - `type: "download_started"`
+
+        - `"download_started"`
+
+      - `url: string`
+
+        The final post-redirect URL the download was served from.
+
+    - `BetaBrowserStateChangeDownloadCompleted`
+
+      A file download that finished during this call, reported with the
+      same `download_id` as its `download_started` — or without a prior
+      `download_started`, when the download finished during the call that
+      started it (at most one state change per `download_id` per result).
+
+      - `download_id: string`
+
+        The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+      - `type: "download_completed"`
+
+        - `"download_completed"`
+
+      - `url: string`
+
+        The final post-redirect URL the download was served from.
+
+      - `path?: string | null`
+
+        Where the executor saved the file, on the executor's filesystem. Only included when another tool in the same environment can read the file at that path.
+
+      - `size_bytes?: number | null`
+
+        The completed download's size.
+
+    - `BetaBrowserStateChangeDownloadFailed`
+
+      A file download that failed — or was cancelled — during this call.
+
+      - `download_id: string`
+
+        The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+      - `type: "download_failed"`
+
+        - `"download_failed"`
+
+      - `url: string`
+
+        The final post-redirect URL the download was served from.
+
+      - `error?: string | null`
+
+        The failure or cancellation detail, when known.
+
+### Beta Browser State Change
+
+- `BetaBrowserStateChange = BetaBrowserStateChangeTabOpened | BetaBrowserStateChangeDownloadStarted | BetaBrowserStateChangeDownloadCompleted | BetaBrowserStateChangeDownloadFailed`
+
+  A tab this call's execution opened that remains open at its end —
+  the creation delta of the `tabs` inventory, not an event log.
+
+  Carries only the `tab_id`; the tab's `title` and `url` live on its
+  `tabs` entry, which must include the same `tab_id`. A tab opened
+  during a failed call gets no deferred `tab_opened`; it simply appears
+  in the next result's `tabs` inventory.
+
+  - `BetaBrowserStateChangeTabOpened`
+
+    A tab this call's execution opened that remains open at its end —
+    the creation delta of the `tabs` inventory, not an event log.
+
+    Carries only the `tab_id`; the tab's `title` and `url` live on its
+    `tabs` entry, which must include the same `tab_id`. A tab opened
+    during a failed call gets no deferred `tab_opened`; it simply appears
+    in the next result's `tabs` inventory.
+
+    - `tab_id: string`
+
+      The `tab_id` of the opened tab, present in `tabs`.
+
+    - `type: "tab_opened"`
+
+      - `"tab_opened"`
+
+  - `BetaBrowserStateChangeDownloadStarted`
+
+    A file download that started during this call.
+
+    - `download_id: string`
+
+      The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+    - `type: "download_started"`
+
+      - `"download_started"`
+
+    - `url: string`
+
+      The final post-redirect URL the download was served from.
+
+  - `BetaBrowserStateChangeDownloadCompleted`
+
+    A file download that finished during this call, reported with the
+    same `download_id` as its `download_started` — or without a prior
+    `download_started`, when the download finished during the call that
+    started it (at most one state change per `download_id` per result).
+
+    - `download_id: string`
+
+      The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+    - `type: "download_completed"`
+
+      - `"download_completed"`
+
+    - `url: string`
+
+      The final post-redirect URL the download was served from.
+
+    - `path?: string | null`
+
+      Where the executor saved the file, on the executor's filesystem. Only included when another tool in the same environment can read the file at that path.
+
+    - `size_bytes?: number | null`
+
+      The completed download's size.
+
+  - `BetaBrowserStateChangeDownloadFailed`
+
+    A file download that failed — or was cancelled — during this call.
+
+    - `download_id: string`
+
+      The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+    - `type: "download_failed"`
+
+      - `"download_failed"`
+
+    - `url: string`
+
+      The final post-redirect URL the download was served from.
+
+    - `error?: string | null`
+
+      The failure or cancellation detail, when known.
+
+### Beta Browser State Change Download Completed
+
+- `BetaBrowserStateChangeDownloadCompleted`
+
+  A file download that finished during this call, reported with the
+  same `download_id` as its `download_started` — or without a prior
+  `download_started`, when the download finished during the call that
+  started it (at most one state change per `download_id` per result).
+
+  - `download_id: string`
+
+    The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+  - `type: "download_completed"`
+
+    - `"download_completed"`
+
+  - `url: string`
+
+    The final post-redirect URL the download was served from.
+
+  - `path?: string | null`
+
+    Where the executor saved the file, on the executor's filesystem. Only included when another tool in the same environment can read the file at that path.
+
+  - `size_bytes?: number | null`
+
+    The completed download's size.
+
+### Beta Browser State Change Download Failed
+
+- `BetaBrowserStateChangeDownloadFailed`
+
+  A file download that failed — or was cancelled — during this call.
+
+  - `download_id: string`
+
+    The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+  - `type: "download_failed"`
+
+    - `"download_failed"`
+
+  - `url: string`
+
+    The final post-redirect URL the download was served from.
+
+  - `error?: string | null`
+
+    The failure or cancellation detail, when known.
+
+### Beta Browser State Change Download Started
+
+- `BetaBrowserStateChangeDownloadStarted`
+
+  A file download that started during this call.
+
+  - `download_id: string`
+
+    The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+  - `type: "download_started"`
+
+    - `"download_started"`
+
+  - `url: string`
+
+    The final post-redirect URL the download was served from.
+
+### Beta Browser State Change Tab Opened
+
+- `BetaBrowserStateChangeTabOpened`
+
+  A tab this call's execution opened that remains open at its end —
+  the creation delta of the `tabs` inventory, not an event log.
+
+  Carries only the `tab_id`; the tab's `title` and `url` live on its
+  `tabs` entry, which must include the same `tab_id`. A tab opened
+  during a failed call gets no deferred `tab_opened`; it simply appears
+  in the next result's `tabs` inventory.
+
+  - `tab_id: string`
+
+    The `tab_id` of the opened tab, present in `tabs`.
+
+  - `type: "tab_opened"`
+
+    - `"tab_opened"`
+
+### Beta Browser State Tab Entry
+
+- `BetaBrowserStateTabEntry`
+
+  One open browser tab reported in a `browser_state` block's `tabs`
+  inventory.
+
+  `tab_id` is the caller-assigned identifier for the tab; `title` and
+  `url` describe the page the tab is currently showing and may be empty
+  strings (a blank tab legitimately has both empty). `active` marks the
+  tab that is active after this call; whenever `tabs` is non-empty,
+  exactly one entry is marked.
+
+  - `tab_id: string`
+
+    The caller-assigned identifier for this tab, unique within the inventory.
+
+  - `title: string`
+
+    The title of the page the tab is showing. May be empty.
+
+  - `url: string`
+
+    The URL of the page the tab is showing. May be empty.
+
+  - `active?: boolean`
+
+    Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
+
+### Beta Browser Switch Tab Config
+
+- `BetaBrowserSwitchTabConfig`
+
+  `switch_tab`'s config overrides.
+
+  - `defer_loading?: boolean | null`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `enabled?: boolean | null`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Toolset 20260801
+
+- `BetaBrowserToolset20260801`
+
+  The browser toolset: a single `tools[]` entry (carrying no
+  `name`) that declares the browser tool family. The model is served
+  the family's tool with any members disabled via `configs` removed
+  from its schema.
+
+  - `type: "browser_toolset_20260801"`
+
+    - `"browser_toolset_20260801"`
+
+  - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
+
+    - `"direct"`
+
+    - `"code_execution_20250825"`
+
+    - `"code_execution_20260120"`
+
+    - `"code_execution_20260521"`
+
+  - `cache_control?: BetaCacheControlEphemeral | null`
+
+    Create a cache control breakpoint at this content block.
+
+    - `type: "ephemeral"`
+
+      - `"ephemeral"`
+
+    - `ttl?: "5m" | "1h"`
+
+      The time-to-live for the cache control breakpoint.
+
+      This may be one the following values:
+
+      - `5m`: 5 minutes
+      - `1h`: 1 hour
+
+      Defaults to `5m`. See [prompt caching pricing](../build-with-claude/build-with-claude-prompt-caching.md) for details.
+
+      - `"5m"`
+
+      - `"1h"`
+
+  - `configs?: BetaBrowserToolsetConfigs | null`
+
+    Per-member configuration for `browser_toolset_20260801`: one
+    optional field per member tool, keyed by the member name — the same
+    name the member's `tool_use` blocks carry. Every member is an
+    accepted key, and a member's defaults apply wherever its key is
+    absent. Unknown keys are rejected: the field set is this toolset
+    version's complete member set.
+
+    - `close_tab?: BetaBrowserCloseTabConfig | null`
+
+      `close_tab`'s config overrides.
+
+      - `defer_loading?: boolean | null`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `enabled?: boolean | null`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `double_click?: BetaBrowserDoubleClickConfig | null`
+
+      `double_click`'s config overrides.
+
+      - `defer_loading?: boolean | null`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `enabled?: boolean | null`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `file_upload?: BetaBrowserFileUploadConfig | null`
+
+      `file_upload`'s config overrides.
+
+      - `defer_loading?: boolean | null`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `enabled?: boolean | null`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `find?: BetaBrowserFindConfig | null`
+
+      `find`'s config overrides.
+
+      - `defer_loading?: boolean | null`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `enabled?: boolean | null`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `form_input?: BetaBrowserFormInputConfig | null`
+
+      `form_input`'s config overrides.
+
+      - `defer_loading?: boolean | null`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `enabled?: boolean | null`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `get_page_text?: BetaBrowserGetPageTextConfig | null`
+
+      `get_page_text`'s config overrides.
+
+      - `defer_loading?: boolean | null`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `enabled?: boolean | null`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `hold_key?: BetaBrowserHoldKeyConfig | null`
+
+      `hold_key`'s config overrides.
+
+      - `defer_loading?: boolean | null`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `enabled?: boolean | null`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `hover?: BetaBrowserHoverConfig | null`
+
+      `hover`'s config overrides.
+
+      - `defer_loading?: boolean | null`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `enabled?: boolean | null`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `javascript_exec?: BetaBrowserJavascriptExecConfig | null`
+
+      `javascript_exec`'s config overrides.
+
+      - `defer_loading?: boolean | null`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `enabled?: boolean | null`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `key?: BetaBrowserKeyConfig | null`
+
+      `key`'s config overrides.
+
+      - `defer_loading?: boolean | null`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `enabled?: boolean | null`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `left_click?: BetaBrowserLeftClickConfig | null`
+
+      `left_click`'s config overrides.
+
+      - `defer_loading?: boolean | null`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `enabled?: boolean | null`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `left_click_drag?: BetaBrowserLeftClickDragConfig | null`
+
+      `left_click_drag`'s config overrides.
+
+      - `defer_loading?: boolean | null`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `enabled?: boolean | null`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `left_mouse_down?: BetaBrowserLeftMouseDownConfig | null`
+
+      `left_mouse_down`'s config overrides.
+
+      - `defer_loading?: boolean | null`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `enabled?: boolean | null`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `left_mouse_up?: BetaBrowserLeftMouseUpConfig | null`
+
+      `left_mouse_up`'s config overrides.
+
+      - `defer_loading?: boolean | null`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `enabled?: boolean | null`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `list_tabs?: BetaBrowserListTabsConfig | null`
+
+      `list_tabs`'s config overrides.
+
+      - `defer_loading?: boolean | null`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `enabled?: boolean | null`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `middle_click?: BetaBrowserMiddleClickConfig | null`
+
+      `middle_click`'s config overrides.
+
+      - `defer_loading?: boolean | null`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `enabled?: boolean | null`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `mouse_move?: BetaBrowserMouseMoveConfig | null`
+
+      `mouse_move`'s config overrides.
+
+      - `defer_loading?: boolean | null`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `enabled?: boolean | null`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `navigate?: BetaBrowserNavigateConfig | null`
+
+      `navigate`'s config overrides.
+
+      - `defer_loading?: boolean | null`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `enabled?: boolean | null`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `new_tab?: BetaBrowserNewTabConfig | null`
+
+      `new_tab`'s config overrides.
+
+      - `defer_loading?: boolean | null`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `enabled?: boolean | null`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `read_console?: BetaBrowserReadConsoleConfig | null`
+
+      `read_console`'s config overrides.
+
+      - `defer_loading?: boolean | null`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `enabled?: boolean | null`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `read_network?: BetaBrowserReadNetworkConfig | null`
+
+      `read_network`'s config overrides.
+
+      - `defer_loading?: boolean | null`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `enabled?: boolean | null`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `read_page?: BetaBrowserReadPageConfig | null`
+
+      `read_page`'s config overrides.
+
+      - `defer_loading?: boolean | null`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `enabled?: boolean | null`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `right_click?: BetaBrowserRightClickConfig | null`
+
+      `right_click`'s config overrides.
+
+      - `defer_loading?: boolean | null`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `enabled?: boolean | null`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `screenshot?: BetaBrowserScreenshotConfig | null`
+
+      `screenshot`'s config overrides.
+
+      - `defer_loading?: boolean | null`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `enabled?: boolean | null`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `scroll?: BetaBrowserScrollConfig | null`
+
+      `scroll`'s config overrides.
+
+      - `defer_loading?: boolean | null`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `enabled?: boolean | null`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `scroll_to?: BetaBrowserScrollToConfig | null`
+
+      `scroll_to`'s config overrides.
+
+      - `defer_loading?: boolean | null`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `enabled?: boolean | null`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `switch_tab?: BetaBrowserSwitchTabConfig | null`
+
+      `switch_tab`'s config overrides.
+
+      - `defer_loading?: boolean | null`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `enabled?: boolean | null`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `triple_click?: BetaBrowserTripleClickConfig | null`
+
+      `triple_click`'s config overrides.
+
+      - `defer_loading?: boolean | null`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `enabled?: boolean | null`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `type?: BetaBrowserTypeConfig | null`
+
+      `type`'s config overrides.
+
+      - `defer_loading?: boolean | null`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `enabled?: boolean | null`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `wait?: BetaBrowserWaitConfig | null`
+
+      `wait`'s config overrides.
+
+      - `defer_loading?: boolean | null`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `enabled?: boolean | null`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `zoom?: BetaBrowserZoomConfig | null`
+
+      `zoom`'s config overrides.
+
+      - `defer_loading?: boolean | null`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `enabled?: boolean | null`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Toolset Configs
+
+- `BetaBrowserToolsetConfigs`
+
+  Per-member configuration for `browser_toolset_20260801`: one
+  optional field per member tool, keyed by the member name — the same
+  name the member's `tool_use` blocks carry. Every member is an
+  accepted key, and a member's defaults apply wherever its key is
+  absent. Unknown keys are rejected: the field set is this toolset
+  version's complete member set.
+
+  - `close_tab?: BetaBrowserCloseTabConfig | null`
+
+    `close_tab`'s config overrides.
+
+    - `defer_loading?: boolean | null`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `enabled?: boolean | null`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `double_click?: BetaBrowserDoubleClickConfig | null`
+
+    `double_click`'s config overrides.
+
+    - `defer_loading?: boolean | null`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `enabled?: boolean | null`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `file_upload?: BetaBrowserFileUploadConfig | null`
+
+    `file_upload`'s config overrides.
+
+    - `defer_loading?: boolean | null`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `enabled?: boolean | null`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `find?: BetaBrowserFindConfig | null`
+
+    `find`'s config overrides.
+
+    - `defer_loading?: boolean | null`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `enabled?: boolean | null`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `form_input?: BetaBrowserFormInputConfig | null`
+
+    `form_input`'s config overrides.
+
+    - `defer_loading?: boolean | null`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `enabled?: boolean | null`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `get_page_text?: BetaBrowserGetPageTextConfig | null`
+
+    `get_page_text`'s config overrides.
+
+    - `defer_loading?: boolean | null`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `enabled?: boolean | null`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `hold_key?: BetaBrowserHoldKeyConfig | null`
+
+    `hold_key`'s config overrides.
+
+    - `defer_loading?: boolean | null`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `enabled?: boolean | null`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `hover?: BetaBrowserHoverConfig | null`
+
+    `hover`'s config overrides.
+
+    - `defer_loading?: boolean | null`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `enabled?: boolean | null`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `javascript_exec?: BetaBrowserJavascriptExecConfig | null`
+
+    `javascript_exec`'s config overrides.
+
+    - `defer_loading?: boolean | null`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `enabled?: boolean | null`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `key?: BetaBrowserKeyConfig | null`
+
+    `key`'s config overrides.
+
+    - `defer_loading?: boolean | null`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `enabled?: boolean | null`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `left_click?: BetaBrowserLeftClickConfig | null`
+
+    `left_click`'s config overrides.
+
+    - `defer_loading?: boolean | null`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `enabled?: boolean | null`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `left_click_drag?: BetaBrowserLeftClickDragConfig | null`
+
+    `left_click_drag`'s config overrides.
+
+    - `defer_loading?: boolean | null`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `enabled?: boolean | null`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `left_mouse_down?: BetaBrowserLeftMouseDownConfig | null`
+
+    `left_mouse_down`'s config overrides.
+
+    - `defer_loading?: boolean | null`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `enabled?: boolean | null`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `left_mouse_up?: BetaBrowserLeftMouseUpConfig | null`
+
+    `left_mouse_up`'s config overrides.
+
+    - `defer_loading?: boolean | null`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `enabled?: boolean | null`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `list_tabs?: BetaBrowserListTabsConfig | null`
+
+    `list_tabs`'s config overrides.
+
+    - `defer_loading?: boolean | null`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `enabled?: boolean | null`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `middle_click?: BetaBrowserMiddleClickConfig | null`
+
+    `middle_click`'s config overrides.
+
+    - `defer_loading?: boolean | null`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `enabled?: boolean | null`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `mouse_move?: BetaBrowserMouseMoveConfig | null`
+
+    `mouse_move`'s config overrides.
+
+    - `defer_loading?: boolean | null`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `enabled?: boolean | null`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `navigate?: BetaBrowserNavigateConfig | null`
+
+    `navigate`'s config overrides.
+
+    - `defer_loading?: boolean | null`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `enabled?: boolean | null`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `new_tab?: BetaBrowserNewTabConfig | null`
+
+    `new_tab`'s config overrides.
+
+    - `defer_loading?: boolean | null`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `enabled?: boolean | null`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `read_console?: BetaBrowserReadConsoleConfig | null`
+
+    `read_console`'s config overrides.
+
+    - `defer_loading?: boolean | null`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `enabled?: boolean | null`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `read_network?: BetaBrowserReadNetworkConfig | null`
+
+    `read_network`'s config overrides.
+
+    - `defer_loading?: boolean | null`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `enabled?: boolean | null`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `read_page?: BetaBrowserReadPageConfig | null`
+
+    `read_page`'s config overrides.
+
+    - `defer_loading?: boolean | null`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `enabled?: boolean | null`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `right_click?: BetaBrowserRightClickConfig | null`
+
+    `right_click`'s config overrides.
+
+    - `defer_loading?: boolean | null`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `enabled?: boolean | null`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `screenshot?: BetaBrowserScreenshotConfig | null`
+
+    `screenshot`'s config overrides.
+
+    - `defer_loading?: boolean | null`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `enabled?: boolean | null`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `scroll?: BetaBrowserScrollConfig | null`
+
+    `scroll`'s config overrides.
+
+    - `defer_loading?: boolean | null`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `enabled?: boolean | null`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `scroll_to?: BetaBrowserScrollToConfig | null`
+
+    `scroll_to`'s config overrides.
+
+    - `defer_loading?: boolean | null`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `enabled?: boolean | null`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `switch_tab?: BetaBrowserSwitchTabConfig | null`
+
+    `switch_tab`'s config overrides.
+
+    - `defer_loading?: boolean | null`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `enabled?: boolean | null`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `triple_click?: BetaBrowserTripleClickConfig | null`
+
+    `triple_click`'s config overrides.
+
+    - `defer_loading?: boolean | null`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `enabled?: boolean | null`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `type?: BetaBrowserTypeConfig | null`
+
+    `type`'s config overrides.
+
+    - `defer_loading?: boolean | null`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `enabled?: boolean | null`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `wait?: BetaBrowserWaitConfig | null`
+
+    `wait`'s config overrides.
+
+    - `defer_loading?: boolean | null`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `enabled?: boolean | null`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `zoom?: BetaBrowserZoomConfig | null`
+
+    `zoom`'s config overrides.
+
+    - `defer_loading?: boolean | null`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `enabled?: boolean | null`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Triple Click Config
+
+- `BetaBrowserTripleClickConfig`
+
+  `triple_click`'s config overrides.
+
+  - `defer_loading?: boolean | null`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `enabled?: boolean | null`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Type Config
+
+- `BetaBrowserTypeConfig`
+
+  `type`'s config overrides.
+
+  - `defer_loading?: boolean | null`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `enabled?: boolean | null`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Wait Config
+
+- `BetaBrowserWaitConfig`
+
+  `wait`'s config overrides.
+
+  - `defer_loading?: boolean | null`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `enabled?: boolean | null`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Zoom Config
+
+- `BetaBrowserZoomConfig`
+
+  `zoom`'s config overrides.
+
+  - `defer_loading?: boolean | null`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `enabled?: boolean | null`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
 ### Beta Cache Control Ephemeral
 
@@ -11430,6 +14551,722 @@ console.log(betaMessageTokensCount.context_management);
 
     - `"compaction"`
 
+### Beta Computer Cursor Position Config
+
+- `BetaComputerCursorPositionConfig`
+
+  `cursor_position`'s config overrides.
+
+  - `defer_loading?: boolean | null`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `enabled?: boolean | null`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Double Click Config
+
+- `BetaComputerDoubleClickConfig`
+
+  `double_click`'s config overrides.
+
+  - `defer_loading?: boolean | null`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `enabled?: boolean | null`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Hold Key Config
+
+- `BetaComputerHoldKeyConfig`
+
+  `hold_key`'s config overrides.
+
+  - `defer_loading?: boolean | null`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `enabled?: boolean | null`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Key Config
+
+- `BetaComputerKeyConfig`
+
+  `key`'s config overrides.
+
+  - `defer_loading?: boolean | null`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `enabled?: boolean | null`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Left Click Config
+
+- `BetaComputerLeftClickConfig`
+
+  `left_click`'s config overrides.
+
+  - `defer_loading?: boolean | null`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `enabled?: boolean | null`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Left Click Drag Config
+
+- `BetaComputerLeftClickDragConfig`
+
+  `left_click_drag`'s config overrides.
+
+  - `defer_loading?: boolean | null`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `enabled?: boolean | null`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Left Mouse Down Config
+
+- `BetaComputerLeftMouseDownConfig`
+
+  `left_mouse_down`'s config overrides.
+
+  - `defer_loading?: boolean | null`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `enabled?: boolean | null`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Left Mouse Up Config
+
+- `BetaComputerLeftMouseUpConfig`
+
+  `left_mouse_up`'s config overrides.
+
+  - `defer_loading?: boolean | null`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `enabled?: boolean | null`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Middle Click Config
+
+- `BetaComputerMiddleClickConfig`
+
+  `middle_click`'s config overrides.
+
+  - `defer_loading?: boolean | null`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `enabled?: boolean | null`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Mouse Move Config
+
+- `BetaComputerMouseMoveConfig`
+
+  `mouse_move`'s config overrides.
+
+  - `defer_loading?: boolean | null`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `enabled?: boolean | null`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Right Click Config
+
+- `BetaComputerRightClickConfig`
+
+  `right_click`'s config overrides.
+
+  - `defer_loading?: boolean | null`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `enabled?: boolean | null`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Screenshot Config
+
+- `BetaComputerScreenshotConfig`
+
+  `screenshot`'s config overrides.
+
+  - `defer_loading?: boolean | null`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `enabled?: boolean | null`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Scroll Config
+
+- `BetaComputerScrollConfig`
+
+  `scroll`'s config overrides.
+
+  - `defer_loading?: boolean | null`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `enabled?: boolean | null`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Toolset 20260801
+
+- `BetaComputerToolset20260801`
+
+  The computer toolset: a single `tools[]` entry (carrying no
+  `name`) that declares the computer tool family. The model is
+  served the family's tool with any members disabled via `configs`
+  removed from its schema. Every member is enabled by default, zoom
+  included. The single-tool options `display_number` and
+  `enable_zoom` are not fields of a toolset entry — it carries only
+  `type`, `configs`, and `cache_control`; zoom is controlled
+  via `configs.zoom.enabled`.
+
+  - `type: "computer_toolset_20260801"`
+
+    - `"computer_toolset_20260801"`
+
+  - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
+
+    - `"direct"`
+
+    - `"code_execution_20250825"`
+
+    - `"code_execution_20260120"`
+
+    - `"code_execution_20260521"`
+
+  - `cache_control?: BetaCacheControlEphemeral | null`
+
+    Create a cache control breakpoint at this content block.
+
+    - `type: "ephemeral"`
+
+      - `"ephemeral"`
+
+    - `ttl?: "5m" | "1h"`
+
+      The time-to-live for the cache control breakpoint.
+
+      This may be one the following values:
+
+      - `5m`: 5 minutes
+      - `1h`: 1 hour
+
+      Defaults to `5m`. See [prompt caching pricing](../build-with-claude/build-with-claude-prompt-caching.md) for details.
+
+      - `"5m"`
+
+      - `"1h"`
+
+  - `configs?: BetaComputerToolsetConfigs | null`
+
+    Per-member configuration for `computer_toolset_20260801`: one
+    optional field per member tool, keyed by the member name — the same
+    name the member's `tool_use` blocks carry. Every member is an
+    accepted key, and a member's defaults apply wherever its key is
+    absent. Unknown keys are rejected: the field set is this toolset
+    version's complete member set.
+
+    - `cursor_position?: BetaComputerCursorPositionConfig | null`
+
+      `cursor_position`'s config overrides.
+
+      - `defer_loading?: boolean | null`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `enabled?: boolean | null`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `double_click?: BetaComputerDoubleClickConfig | null`
+
+      `double_click`'s config overrides.
+
+      - `defer_loading?: boolean | null`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `enabled?: boolean | null`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `hold_key?: BetaComputerHoldKeyConfig | null`
+
+      `hold_key`'s config overrides.
+
+      - `defer_loading?: boolean | null`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `enabled?: boolean | null`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `key?: BetaComputerKeyConfig | null`
+
+      `key`'s config overrides.
+
+      - `defer_loading?: boolean | null`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `enabled?: boolean | null`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `left_click?: BetaComputerLeftClickConfig | null`
+
+      `left_click`'s config overrides.
+
+      - `defer_loading?: boolean | null`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `enabled?: boolean | null`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `left_click_drag?: BetaComputerLeftClickDragConfig | null`
+
+      `left_click_drag`'s config overrides.
+
+      - `defer_loading?: boolean | null`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `enabled?: boolean | null`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `left_mouse_down?: BetaComputerLeftMouseDownConfig | null`
+
+      `left_mouse_down`'s config overrides.
+
+      - `defer_loading?: boolean | null`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `enabled?: boolean | null`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `left_mouse_up?: BetaComputerLeftMouseUpConfig | null`
+
+      `left_mouse_up`'s config overrides.
+
+      - `defer_loading?: boolean | null`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `enabled?: boolean | null`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `middle_click?: BetaComputerMiddleClickConfig | null`
+
+      `middle_click`'s config overrides.
+
+      - `defer_loading?: boolean | null`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `enabled?: boolean | null`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `mouse_move?: BetaComputerMouseMoveConfig | null`
+
+      `mouse_move`'s config overrides.
+
+      - `defer_loading?: boolean | null`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `enabled?: boolean | null`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `right_click?: BetaComputerRightClickConfig | null`
+
+      `right_click`'s config overrides.
+
+      - `defer_loading?: boolean | null`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `enabled?: boolean | null`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `screenshot?: BetaComputerScreenshotConfig | null`
+
+      `screenshot`'s config overrides.
+
+      - `defer_loading?: boolean | null`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `enabled?: boolean | null`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `scroll?: BetaComputerScrollConfig | null`
+
+      `scroll`'s config overrides.
+
+      - `defer_loading?: boolean | null`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `enabled?: boolean | null`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `triple_click?: BetaComputerTripleClickConfig | null`
+
+      `triple_click`'s config overrides.
+
+      - `defer_loading?: boolean | null`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `enabled?: boolean | null`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `type?: BetaComputerTypeConfig | null`
+
+      `type`'s config overrides.
+
+      - `defer_loading?: boolean | null`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `enabled?: boolean | null`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `wait?: BetaComputerWaitConfig | null`
+
+      `wait`'s config overrides.
+
+      - `defer_loading?: boolean | null`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `enabled?: boolean | null`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `zoom?: BetaComputerZoomConfig | null`
+
+      `zoom`'s config overrides.
+
+      - `defer_loading?: boolean | null`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `enabled?: boolean | null`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Toolset Configs
+
+- `BetaComputerToolsetConfigs`
+
+  Per-member configuration for `computer_toolset_20260801`: one
+  optional field per member tool, keyed by the member name — the same
+  name the member's `tool_use` blocks carry. Every member is an
+  accepted key, and a member's defaults apply wherever its key is
+  absent. Unknown keys are rejected: the field set is this toolset
+  version's complete member set.
+
+  - `cursor_position?: BetaComputerCursorPositionConfig | null`
+
+    `cursor_position`'s config overrides.
+
+    - `defer_loading?: boolean | null`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `enabled?: boolean | null`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `double_click?: BetaComputerDoubleClickConfig | null`
+
+    `double_click`'s config overrides.
+
+    - `defer_loading?: boolean | null`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `enabled?: boolean | null`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `hold_key?: BetaComputerHoldKeyConfig | null`
+
+    `hold_key`'s config overrides.
+
+    - `defer_loading?: boolean | null`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `enabled?: boolean | null`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `key?: BetaComputerKeyConfig | null`
+
+    `key`'s config overrides.
+
+    - `defer_loading?: boolean | null`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `enabled?: boolean | null`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `left_click?: BetaComputerLeftClickConfig | null`
+
+    `left_click`'s config overrides.
+
+    - `defer_loading?: boolean | null`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `enabled?: boolean | null`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `left_click_drag?: BetaComputerLeftClickDragConfig | null`
+
+    `left_click_drag`'s config overrides.
+
+    - `defer_loading?: boolean | null`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `enabled?: boolean | null`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `left_mouse_down?: BetaComputerLeftMouseDownConfig | null`
+
+    `left_mouse_down`'s config overrides.
+
+    - `defer_loading?: boolean | null`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `enabled?: boolean | null`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `left_mouse_up?: BetaComputerLeftMouseUpConfig | null`
+
+    `left_mouse_up`'s config overrides.
+
+    - `defer_loading?: boolean | null`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `enabled?: boolean | null`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `middle_click?: BetaComputerMiddleClickConfig | null`
+
+    `middle_click`'s config overrides.
+
+    - `defer_loading?: boolean | null`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `enabled?: boolean | null`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `mouse_move?: BetaComputerMouseMoveConfig | null`
+
+    `mouse_move`'s config overrides.
+
+    - `defer_loading?: boolean | null`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `enabled?: boolean | null`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `right_click?: BetaComputerRightClickConfig | null`
+
+    `right_click`'s config overrides.
+
+    - `defer_loading?: boolean | null`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `enabled?: boolean | null`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `screenshot?: BetaComputerScreenshotConfig | null`
+
+    `screenshot`'s config overrides.
+
+    - `defer_loading?: boolean | null`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `enabled?: boolean | null`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `scroll?: BetaComputerScrollConfig | null`
+
+    `scroll`'s config overrides.
+
+    - `defer_loading?: boolean | null`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `enabled?: boolean | null`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `triple_click?: BetaComputerTripleClickConfig | null`
+
+    `triple_click`'s config overrides.
+
+    - `defer_loading?: boolean | null`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `enabled?: boolean | null`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `type?: BetaComputerTypeConfig | null`
+
+    `type`'s config overrides.
+
+    - `defer_loading?: boolean | null`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `enabled?: boolean | null`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `wait?: BetaComputerWaitConfig | null`
+
+    `wait`'s config overrides.
+
+    - `defer_loading?: boolean | null`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `enabled?: boolean | null`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `zoom?: BetaComputerZoomConfig | null`
+
+    `zoom`'s config overrides.
+
+    - `defer_loading?: boolean | null`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `enabled?: boolean | null`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Triple Click Config
+
+- `BetaComputerTripleClickConfig`
+
+  `triple_click`'s config overrides.
+
+  - `defer_loading?: boolean | null`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `enabled?: boolean | null`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Type Config
+
+- `BetaComputerTypeConfig`
+
+  `type`'s config overrides.
+
+  - `defer_loading?: boolean | null`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `enabled?: boolean | null`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Wait Config
+
+- `BetaComputerWaitConfig`
+
+  `wait`'s config overrides.
+
+  - `defer_loading?: boolean | null`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `enabled?: boolean | null`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Zoom Config
+
+- `BetaComputerZoomConfig`
+
+  `zoom`'s config overrides.
+
+  - `defer_loading?: boolean | null`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `enabled?: boolean | null`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
 ### Beta Container
 
 - `BetaContainer`
@@ -11745,6 +15582,10 @@ console.log(betaMessageTokensCount.context_management);
         - `type: "code_execution_20260120"`
 
           - `"code_execution_20260120"`
+
+    - `toolset_name?: string | null`
+
+      For a toolset member tool_use, the toolset family.
 
   - `BetaServerToolUseBlock`
 
@@ -12448,7 +16289,7 @@ console.log(betaMessageTokensCount.context_management);
 
 ### Beta Content Block Param
 
-- `BetaContentBlockParam = BetaTextBlockParam | BetaImageBlockParam | BetaRequestDocumentBlock | 21 more`
+- `BetaContentBlockParam = BetaTextBlockParam | BetaImageBlockParam | BetaRequestDocumentBlock | 20 more`
 
   Regular text content.
 
@@ -12635,6 +16476,18 @@ console.log(betaMessageTokensCount.context_management);
 
       Create a cache control breakpoint at this content block.
 
+    - `transformations?: BetaImageTransformationsParam | null`
+
+      Configures the transformations the server applies to this image before the model observes it. Each key names a condition the server transforms images for; its value selects the transformation applied. Omitted keys keep their default behavior, and an empty object is equivalent to omitting the field.
+
+      - `oversized_image?: "downsize" | "error"`
+
+        What the server does when this image exceeds the model's maximum image size. `"downsize"` (the default) scales the image down to fit, which changes the dimensions the model observes without telling you. `"error"` instead rejects the request with a 400 error naming the image's dimensions and the largest dimensions that fit, so you can scale the image deliberately — your image is never silently scaled down.
+
+        - `"downsize"`
+
+        - `"error"`
+
   - `BetaRequestDocumentBlock`
 
     - `source: BetaBase64PDFSource | BetaPlainTextSource | BetaContentBlockSource | 2 more`
@@ -12811,6 +16664,10 @@ console.log(betaMessageTokensCount.context_management);
 
           - `"code_execution_20260120"`
 
+    - `toolset_name?: string | null`
+
+      For a toolset member tool_use, the toolset family this member belongs to.
+
   - `BetaToolResultBlockParam`
 
     - `tool_use_id: string`
@@ -12823,11 +16680,11 @@ console.log(betaMessageTokensCount.context_management);
 
       Create a cache control breakpoint at this content block.
 
-    - `content?: string | Array<BetaTextBlockParam | BetaImageBlockParam | BetaSearchResultBlockParam | 2 more>`
+    - `content?: string | Array<BetaTextBlockParam | BetaImageBlockParam | BetaSearchResultBlockParam | 3 more>`
 
       - `string`
 
-      - `Array<BetaTextBlockParam | BetaImageBlockParam | BetaSearchResultBlockParam | 2 more>`
+      - `Array<BetaTextBlockParam | BetaImageBlockParam | BetaSearchResultBlockParam | 3 more>`
 
         - `BetaTextBlockParam`
 
@@ -12851,7 +16708,134 @@ console.log(betaMessageTokensCount.context_management);
 
             Create a cache control breakpoint at this content block.
 
+        - `BetaBrowserStateBlockParam`
+
+          The caller's browser state after a browser toolset member call —
+          the full inventory of open tabs, which tab is active, and any side
+          effects (tabs opened, download state changes) the call produced.
+
+          At most one per `tool_result`, only on a non-error result answering a
+          browser toolset member `tool_use`. The server renders the
+          model-visible text from it; the model never sees the raw fields.
+
+          - `tabs: Array<BetaBrowserStateTabEntry>`
+
+            All tabs open in the browser after this call — the full inventory, not a delta. May be empty. Whenever non-empty, exactly one entry carries `active: true`.
+
+            - `tab_id: string`
+
+              The caller-assigned identifier for this tab, unique within the inventory.
+
+            - `title: string`
+
+              The title of the page the tab is showing. May be empty.
+
+            - `url: string`
+
+              The URL of the page the tab is showing. May be empty.
+
+            - `active?: boolean`
+
+              Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
+
+          - `type: "browser_state"`
+
+            - `"browser_state"`
+
+          - `cache_control?: BetaCacheControlEphemeral | null`
+
+            Create a cache control breakpoint at this content block.
+
+          - `state_changes?: Array<BetaBrowserStateChange> | null`
+
+            Tabs opened and download state changes during this call. "Nothing to report" is expressed by omitting the field, never by an empty list.
+
+            - `BetaBrowserStateChangeTabOpened`
+
+              A tab this call's execution opened that remains open at its end —
+              the creation delta of the `tabs` inventory, not an event log.
+
+              Carries only the `tab_id`; the tab's `title` and `url` live on its
+              `tabs` entry, which must include the same `tab_id`. A tab opened
+              during a failed call gets no deferred `tab_opened`; it simply appears
+              in the next result's `tabs` inventory.
+
+              - `tab_id: string`
+
+                The `tab_id` of the opened tab, present in `tabs`.
+
+              - `type: "tab_opened"`
+
+                - `"tab_opened"`
+
+            - `BetaBrowserStateChangeDownloadStarted`
+
+              A file download that started during this call.
+
+              - `download_id: string`
+
+                The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+              - `type: "download_started"`
+
+                - `"download_started"`
+
+              - `url: string`
+
+                The final post-redirect URL the download was served from.
+
+            - `BetaBrowserStateChangeDownloadCompleted`
+
+              A file download that finished during this call, reported with the
+              same `download_id` as its `download_started` — or without a prior
+              `download_started`, when the download finished during the call that
+              started it (at most one state change per `download_id` per result).
+
+              - `download_id: string`
+
+                The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+              - `type: "download_completed"`
+
+                - `"download_completed"`
+
+              - `url: string`
+
+                The final post-redirect URL the download was served from.
+
+              - `path?: string | null`
+
+                Where the executor saved the file, on the executor's filesystem. Only included when another tool in the same environment can read the file at that path.
+
+              - `size_bytes?: number | null`
+
+                The completed download's size.
+
+            - `BetaBrowserStateChangeDownloadFailed`
+
+              A file download that failed — or was cancelled — during this call.
+
+              - `download_id: string`
+
+                The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+              - `type: "download_failed"`
+
+                - `"download_failed"`
+
+              - `url: string`
+
+                The final post-redirect URL the download was served from.
+
+              - `error?: string | null`
+
+                The failure or cancellation detail, when known.
+
     - `is_error?: boolean`
+
+    - `toolset_name?: string | null`
+
+      For a toolset member tool_result, the toolset family of the paired tool_use.
 
   - `BetaServerToolUseBlockParam`
 
@@ -13432,125 +17416,6 @@ console.log(betaMessageTokensCount.context_management);
 
       Opaque metadata from prior compaction, to be round-tripped verbatim
 
-  - `BetaMidConversationSystemBlockParam`
-
-    System instructions that appear mid-conversation.
-
-    Use this block to provide or update system-level instructions at a specific
-    point in the conversation, rather than only via the top-level `system` parameter.
-
-    - `content: Array<BetaTextBlockParam | BetaRequestToolAdditionBlock | BetaRequestToolRemovalBlock>`
-
-      System instruction text blocks.
-
-      - `BetaTextBlockParam`
-
-      - `BetaRequestToolAdditionBlock`
-
-        Mid-conversation directive to surface a declared tool.
-
-        `tool` references a tool (or MCP toolset) by name from the request's
-        `tools`; it is offered to the model from this point in the
-        conversation onward.
-
-        - `tool: BetaToolChangeToolReference | BetaToolChangeMCPToolReference | BetaToolChangeMCPToolsetReference`
-
-          Reference to a single tool the caller declared directly in
-          `tools[]`. Does not accept the composed `{server}_{name}` form the
-          server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-          `mcp_toolset_reference` for those.
-
-          - `BetaToolChangeToolReference`
-
-            Reference to a single tool the caller declared directly in
-            `tools[]`. Does not accept the composed `{server}_{name}` form the
-            server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-            `mcp_toolset_reference` for those.
-
-            - `name: string`
-
-            - `type: "tool_reference"`
-
-              - `"tool_reference"`
-
-          - `BetaToolChangeMCPToolReference`
-
-            Reference to a single MCP tool by its server and remote name — the
-            same `server_name`/`name` pair `mcp_tool_use` carries.
-
-            - `name: string`
-
-            - `server_name: string`
-
-            - `type: "mcp_tool_reference"`
-
-              - `"mcp_tool_reference"`
-
-          - `BetaToolChangeMCPToolsetReference`
-
-            Reference to every tool in the named MCP server's toolset.
-
-            - `server_name: string`
-
-            - `type: "mcp_toolset_reference"`
-
-              - `"mcp_toolset_reference"`
-
-        - `type: "tool_addition"`
-
-          - `"tool_addition"`
-
-        - `cache_control?: BetaCacheControlEphemeral | null`
-
-          Create a cache control breakpoint at this content block.
-
-      - `BetaRequestToolRemovalBlock`
-
-        Mid-conversation directive to withdraw a tool.
-
-        `tool` references a tool (or MCP toolset) by name from the request's
-        `tools`; it is no longer offered to the model from this point in the
-        conversation onward.
-
-        - `tool: BetaToolChangeToolReference | BetaToolChangeMCPToolReference | BetaToolChangeMCPToolsetReference`
-
-          Reference to a single tool the caller declared directly in
-          `tools[]`. Does not accept the composed `{server}_{name}` form the
-          server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-          `mcp_toolset_reference` for those.
-
-          - `BetaToolChangeToolReference`
-
-            Reference to a single tool the caller declared directly in
-            `tools[]`. Does not accept the composed `{server}_{name}` form the
-            server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-            `mcp_toolset_reference` for those.
-
-          - `BetaToolChangeMCPToolReference`
-
-            Reference to a single MCP tool by its server and remote name — the
-            same `server_name`/`name` pair `mcp_tool_use` carries.
-
-          - `BetaToolChangeMCPToolsetReference`
-
-            Reference to every tool in the named MCP server's toolset.
-
-        - `type: "tool_removal"`
-
-          - `"tool_removal"`
-
-        - `cache_control?: BetaCacheControlEphemeral | null`
-
-          Create a cache control breakpoint at this content block.
-
-    - `type: "mid_conv_system"`
-
-      - `"mid_conv_system"`
-
-    - `cache_control?: BetaCacheControlEphemeral | null`
-
-      Create a cache control breakpoint at this content block.
-
   - `BetaRequestToolAdditionBlock`
 
     Mid-conversation directive to surface a declared tool.
@@ -13559,6 +17424,57 @@ console.log(betaMessageTokensCount.context_management);
     `tools`; it is offered to the model from this point in the
     conversation onward.
 
+    - `tool: BetaToolChangeToolReference | BetaToolChangeMCPToolReference | BetaToolChangeMCPToolsetReference`
+
+      Reference to a single tool the caller declared directly in
+      `tools[]`. Does not accept the composed `{server}_{name}` form the
+      server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+      `mcp_toolset_reference` for those.
+
+      - `BetaToolChangeToolReference`
+
+        Reference to a single tool the caller declared directly in
+        `tools[]`. Does not accept the composed `{server}_{name}` form the
+        server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+        `mcp_toolset_reference` for those.
+
+        - `name: string`
+
+        - `type: "tool_reference"`
+
+          - `"tool_reference"`
+
+      - `BetaToolChangeMCPToolReference`
+
+        Reference to a single MCP tool by its server and remote name — the
+        same `server_name`/`name` pair `mcp_tool_use` carries.
+
+        - `name: string`
+
+        - `server_name: string`
+
+        - `type: "mcp_tool_reference"`
+
+          - `"mcp_tool_reference"`
+
+      - `BetaToolChangeMCPToolsetReference`
+
+        Reference to every tool in the named MCP server's toolset.
+
+        - `server_name: string`
+
+        - `type: "mcp_toolset_reference"`
+
+          - `"mcp_toolset_reference"`
+
+    - `type: "tool_addition"`
+
+      - `"tool_addition"`
+
+    - `cache_control?: BetaCacheControlEphemeral | null`
+
+      Create a cache control breakpoint at this content block.
+
   - `BetaRequestToolRemovalBlock`
 
     Mid-conversation directive to withdraw a tool.
@@ -13566,6 +17482,37 @@ console.log(betaMessageTokensCount.context_management);
     `tool` references a tool (or MCP toolset) by name from the request's
     `tools`; it is no longer offered to the model from this point in the
     conversation onward.
+
+    - `tool: BetaToolChangeToolReference | BetaToolChangeMCPToolReference | BetaToolChangeMCPToolsetReference`
+
+      Reference to a single tool the caller declared directly in
+      `tools[]`. Does not accept the composed `{server}_{name}` form the
+      server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+      `mcp_toolset_reference` for those.
+
+      - `BetaToolChangeToolReference`
+
+        Reference to a single tool the caller declared directly in
+        `tools[]`. Does not accept the composed `{server}_{name}` form the
+        server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+        `mcp_toolset_reference` for those.
+
+      - `BetaToolChangeMCPToolReference`
+
+        Reference to a single MCP tool by its server and remote name — the
+        same `server_name`/`name` pair `mcp_tool_use` carries.
+
+      - `BetaToolChangeMCPToolsetReference`
+
+        Reference to every tool in the named MCP server's toolset.
+
+    - `type: "tool_removal"`
+
+      - `"tool_removal"`
+
+    - `cache_control?: BetaCacheControlEphemeral | null`
+
+      Create a cache control breakpoint at this content block.
 
   - `BetaFallbackBlockParam`
 
@@ -13862,6 +17809,18 @@ console.log(betaMessageTokensCount.context_management);
 
           Create a cache control breakpoint at this content block.
 
+        - `transformations?: BetaImageTransformationsParam | null`
+
+          Configures the transformations the server applies to this image before the model observes it. Each key names a condition the server transforms images for; its value selects the transformation applied. Omitted keys keep their default behavior, and an empty object is equivalent to omitting the field.
+
+          - `oversized_image?: "downsize" | "error"`
+
+            What the server does when this image exceeds the model's maximum image size. `"downsize"` (the default) scales the image down to fit, which changes the dimensions the model observes without telling you. `"error"` instead rejects the request with a 400 error naming the image's dimensions and the largest dimensions that fit, so you can scale the image deliberately — your image is never silently scaled down.
+
+            - `"downsize"`
+
+            - `"error"`
+
   - `type: "content"`
 
     - `"content"`
@@ -14052,6 +18011,18 @@ console.log(betaMessageTokensCount.context_management);
     - `cache_control?: BetaCacheControlEphemeral | null`
 
       Create a cache control breakpoint at this content block.
+
+    - `transformations?: BetaImageTransformationsParam | null`
+
+      Configures the transformations the server applies to this image before the model observes it. Each key names a condition the server transforms images for; its value selects the transformation applied. Omitted keys keep their default behavior, and an empty object is equivalent to omitting the field.
+
+      - `oversized_image?: "downsize" | "error"`
+
+        What the server does when this image exceeds the model's maximum image size. `"downsize"` (the default) scales the image down to fit, which changes the dimensions the model observes without telling you. `"error"` instead rejects the request with a 400 error naming the image's dimensions and the largest dimensions that fit, so you can scale the image deliberately — your image is never silently scaled down.
+
+        - `"downsize"`
+
+        - `"error"`
 
 ### Beta Context Management Config
 
@@ -15537,6 +19508,32 @@ console.log(betaMessageTokensCount.context_management);
 
       - `"1h"`
 
+  - `transformations?: BetaImageTransformationsParam | null`
+
+    Configures the transformations the server applies to this image before the model observes it. Each key names a condition the server transforms images for; its value selects the transformation applied. Omitted keys keep their default behavior, and an empty object is equivalent to omitting the field.
+
+    - `oversized_image?: "downsize" | "error"`
+
+      What the server does when this image exceeds the model's maximum image size. `"downsize"` (the default) scales the image down to fit, which changes the dimensions the model observes without telling you. `"error"` instead rejects the request with a 400 error naming the image's dimensions and the largest dimensions that fit, so you can scale the image deliberately — your image is never silently scaled down.
+
+      - `"downsize"`
+
+      - `"error"`
+
+### Beta Image Transformations Param
+
+- `BetaImageTransformationsParam`
+
+  Configures the transformations the server applies to this image before the model observes it. Each key names a condition the server transforms images for; its value selects the transformation applied. Omitted keys keep their default behavior, and an empty object is equivalent to omitting the field.
+
+  - `oversized_image?: "downsize" | "error"`
+
+    What the server does when this image exceeds the model's maximum image size. `"downsize"` (the default) scales the image down to fit, which changes the dimensions the model observes without telling you. `"error"` instead rejects the request with a 400 error naming the image's dimensions and the largest dimensions that fit, so you can scale the image deliberately — your image is never silently scaled down.
+
+    - `"downsize"`
+
+    - `"error"`
+
 ### Beta Input JSON Delta
 
 - `BetaInputJSONDelta`
@@ -16626,6 +20623,10 @@ console.log(betaMessageTokensCount.context_management);
           - `type: "code_execution_20260120"`
 
             - `"code_execution_20260120"`
+
+      - `toolset_name?: string | null`
+
+        For a toolset member tool_use, the toolset family.
 
     - `BetaServerToolUseBlock`
 
@@ -18548,6 +22549,18 @@ console.log(betaMessageTokensCount.context_management);
 
           Create a cache control breakpoint at this content block.
 
+        - `transformations?: BetaImageTransformationsParam | null`
+
+          Configures the transformations the server applies to this image before the model observes it. Each key names a condition the server transforms images for; its value selects the transformation applied. Omitted keys keep their default behavior, and an empty object is equivalent to omitting the field.
+
+          - `oversized_image?: "downsize" | "error"`
+
+            What the server does when this image exceeds the model's maximum image size. `"downsize"` (the default) scales the image down to fit, which changes the dimensions the model observes without telling you. `"error"` instead rejects the request with a 400 error naming the image's dimensions and the largest dimensions that fit, so you can scale the image deliberately — your image is never silently scaled down.
+
+            - `"downsize"`
+
+            - `"error"`
+
       - `BetaRequestDocumentBlock`
 
         - `source: BetaBase64PDFSource | BetaPlainTextSource | BetaContentBlockSource | 2 more`
@@ -18724,6 +22737,10 @@ console.log(betaMessageTokensCount.context_management);
 
               - `"code_execution_20260120"`
 
+        - `toolset_name?: string | null`
+
+          For a toolset member tool_use, the toolset family this member belongs to.
+
       - `BetaToolResultBlockParam`
 
         - `tool_use_id: string`
@@ -18736,11 +22753,11 @@ console.log(betaMessageTokensCount.context_management);
 
           Create a cache control breakpoint at this content block.
 
-        - `content?: string | Array<BetaTextBlockParam | BetaImageBlockParam | BetaSearchResultBlockParam | 2 more>`
+        - `content?: string | Array<BetaTextBlockParam | BetaImageBlockParam | BetaSearchResultBlockParam | 3 more>`
 
           - `string`
 
-          - `Array<BetaTextBlockParam | BetaImageBlockParam | BetaSearchResultBlockParam | 2 more>`
+          - `Array<BetaTextBlockParam | BetaImageBlockParam | BetaSearchResultBlockParam | 3 more>`
 
             - `BetaTextBlockParam`
 
@@ -18764,7 +22781,134 @@ console.log(betaMessageTokensCount.context_management);
 
                 Create a cache control breakpoint at this content block.
 
+            - `BetaBrowserStateBlockParam`
+
+              The caller's browser state after a browser toolset member call —
+              the full inventory of open tabs, which tab is active, and any side
+              effects (tabs opened, download state changes) the call produced.
+
+              At most one per `tool_result`, only on a non-error result answering a
+              browser toolset member `tool_use`. The server renders the
+              model-visible text from it; the model never sees the raw fields.
+
+              - `tabs: Array<BetaBrowserStateTabEntry>`
+
+                All tabs open in the browser after this call — the full inventory, not a delta. May be empty. Whenever non-empty, exactly one entry carries `active: true`.
+
+                - `tab_id: string`
+
+                  The caller-assigned identifier for this tab, unique within the inventory.
+
+                - `title: string`
+
+                  The title of the page the tab is showing. May be empty.
+
+                - `url: string`
+
+                  The URL of the page the tab is showing. May be empty.
+
+                - `active?: boolean`
+
+                  Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
+
+              - `type: "browser_state"`
+
+                - `"browser_state"`
+
+              - `cache_control?: BetaCacheControlEphemeral | null`
+
+                Create a cache control breakpoint at this content block.
+
+              - `state_changes?: Array<BetaBrowserStateChange> | null`
+
+                Tabs opened and download state changes during this call. "Nothing to report" is expressed by omitting the field, never by an empty list.
+
+                - `BetaBrowserStateChangeTabOpened`
+
+                  A tab this call's execution opened that remains open at its end —
+                  the creation delta of the `tabs` inventory, not an event log.
+
+                  Carries only the `tab_id`; the tab's `title` and `url` live on its
+                  `tabs` entry, which must include the same `tab_id`. A tab opened
+                  during a failed call gets no deferred `tab_opened`; it simply appears
+                  in the next result's `tabs` inventory.
+
+                  - `tab_id: string`
+
+                    The `tab_id` of the opened tab, present in `tabs`.
+
+                  - `type: "tab_opened"`
+
+                    - `"tab_opened"`
+
+                - `BetaBrowserStateChangeDownloadStarted`
+
+                  A file download that started during this call.
+
+                  - `download_id: string`
+
+                    The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+                  - `type: "download_started"`
+
+                    - `"download_started"`
+
+                  - `url: string`
+
+                    The final post-redirect URL the download was served from.
+
+                - `BetaBrowserStateChangeDownloadCompleted`
+
+                  A file download that finished during this call, reported with the
+                  same `download_id` as its `download_started` — or without a prior
+                  `download_started`, when the download finished during the call that
+                  started it (at most one state change per `download_id` per result).
+
+                  - `download_id: string`
+
+                    The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+                  - `type: "download_completed"`
+
+                    - `"download_completed"`
+
+                  - `url: string`
+
+                    The final post-redirect URL the download was served from.
+
+                  - `path?: string | null`
+
+                    Where the executor saved the file, on the executor's filesystem. Only included when another tool in the same environment can read the file at that path.
+
+                  - `size_bytes?: number | null`
+
+                    The completed download's size.
+
+                - `BetaBrowserStateChangeDownloadFailed`
+
+                  A file download that failed — or was cancelled — during this call.
+
+                  - `download_id: string`
+
+                    The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+                  - `type: "download_failed"`
+
+                    - `"download_failed"`
+
+                  - `url: string`
+
+                    The final post-redirect URL the download was served from.
+
+                  - `error?: string | null`
+
+                    The failure or cancellation detail, when known.
+
         - `is_error?: boolean`
+
+        - `toolset_name?: string | null`
+
+          For a toolset member tool_result, the toolset family of the paired tool_use.
 
       - `BetaServerToolUseBlockParam`
 
@@ -19345,125 +23489,6 @@ console.log(betaMessageTokensCount.context_management);
 
           Opaque metadata from prior compaction, to be round-tripped verbatim
 
-      - `BetaMidConversationSystemBlockParam`
-
-        System instructions that appear mid-conversation.
-
-        Use this block to provide or update system-level instructions at a specific
-        point in the conversation, rather than only via the top-level `system` parameter.
-
-        - `content: Array<BetaTextBlockParam | BetaRequestToolAdditionBlock | BetaRequestToolRemovalBlock>`
-
-          System instruction text blocks.
-
-          - `BetaTextBlockParam`
-
-          - `BetaRequestToolAdditionBlock`
-
-            Mid-conversation directive to surface a declared tool.
-
-            `tool` references a tool (or MCP toolset) by name from the request's
-            `tools`; it is offered to the model from this point in the
-            conversation onward.
-
-            - `tool: BetaToolChangeToolReference | BetaToolChangeMCPToolReference | BetaToolChangeMCPToolsetReference`
-
-              Reference to a single tool the caller declared directly in
-              `tools[]`. Does not accept the composed `{server}_{name}` form the
-              server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-              `mcp_toolset_reference` for those.
-
-              - `BetaToolChangeToolReference`
-
-                Reference to a single tool the caller declared directly in
-                `tools[]`. Does not accept the composed `{server}_{name}` form the
-                server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-                `mcp_toolset_reference` for those.
-
-                - `name: string`
-
-                - `type: "tool_reference"`
-
-                  - `"tool_reference"`
-
-              - `BetaToolChangeMCPToolReference`
-
-                Reference to a single MCP tool by its server and remote name — the
-                same `server_name`/`name` pair `mcp_tool_use` carries.
-
-                - `name: string`
-
-                - `server_name: string`
-
-                - `type: "mcp_tool_reference"`
-
-                  - `"mcp_tool_reference"`
-
-              - `BetaToolChangeMCPToolsetReference`
-
-                Reference to every tool in the named MCP server's toolset.
-
-                - `server_name: string`
-
-                - `type: "mcp_toolset_reference"`
-
-                  - `"mcp_toolset_reference"`
-
-            - `type: "tool_addition"`
-
-              - `"tool_addition"`
-
-            - `cache_control?: BetaCacheControlEphemeral | null`
-
-              Create a cache control breakpoint at this content block.
-
-          - `BetaRequestToolRemovalBlock`
-
-            Mid-conversation directive to withdraw a tool.
-
-            `tool` references a tool (or MCP toolset) by name from the request's
-            `tools`; it is no longer offered to the model from this point in the
-            conversation onward.
-
-            - `tool: BetaToolChangeToolReference | BetaToolChangeMCPToolReference | BetaToolChangeMCPToolsetReference`
-
-              Reference to a single tool the caller declared directly in
-              `tools[]`. Does not accept the composed `{server}_{name}` form the
-              server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-              `mcp_toolset_reference` for those.
-
-              - `BetaToolChangeToolReference`
-
-                Reference to a single tool the caller declared directly in
-                `tools[]`. Does not accept the composed `{server}_{name}` form the
-                server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-                `mcp_toolset_reference` for those.
-
-              - `BetaToolChangeMCPToolReference`
-
-                Reference to a single MCP tool by its server and remote name — the
-                same `server_name`/`name` pair `mcp_tool_use` carries.
-
-              - `BetaToolChangeMCPToolsetReference`
-
-                Reference to every tool in the named MCP server's toolset.
-
-            - `type: "tool_removal"`
-
-              - `"tool_removal"`
-
-            - `cache_control?: BetaCacheControlEphemeral | null`
-
-              Create a cache control breakpoint at this content block.
-
-        - `type: "mid_conv_system"`
-
-          - `"mid_conv_system"`
-
-        - `cache_control?: BetaCacheControlEphemeral | null`
-
-          Create a cache control breakpoint at this content block.
-
       - `BetaRequestToolAdditionBlock`
 
         Mid-conversation directive to surface a declared tool.
@@ -19472,6 +23497,57 @@ console.log(betaMessageTokensCount.context_management);
         `tools`; it is offered to the model from this point in the
         conversation onward.
 
+        - `tool: BetaToolChangeToolReference | BetaToolChangeMCPToolReference | BetaToolChangeMCPToolsetReference`
+
+          Reference to a single tool the caller declared directly in
+          `tools[]`. Does not accept the composed `{server}_{name}` form the
+          server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+          `mcp_toolset_reference` for those.
+
+          - `BetaToolChangeToolReference`
+
+            Reference to a single tool the caller declared directly in
+            `tools[]`. Does not accept the composed `{server}_{name}` form the
+            server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+            `mcp_toolset_reference` for those.
+
+            - `name: string`
+
+            - `type: "tool_reference"`
+
+              - `"tool_reference"`
+
+          - `BetaToolChangeMCPToolReference`
+
+            Reference to a single MCP tool by its server and remote name — the
+            same `server_name`/`name` pair `mcp_tool_use` carries.
+
+            - `name: string`
+
+            - `server_name: string`
+
+            - `type: "mcp_tool_reference"`
+
+              - `"mcp_tool_reference"`
+
+          - `BetaToolChangeMCPToolsetReference`
+
+            Reference to every tool in the named MCP server's toolset.
+
+            - `server_name: string`
+
+            - `type: "mcp_toolset_reference"`
+
+              - `"mcp_toolset_reference"`
+
+        - `type: "tool_addition"`
+
+          - `"tool_addition"`
+
+        - `cache_control?: BetaCacheControlEphemeral | null`
+
+          Create a cache control breakpoint at this content block.
+
       - `BetaRequestToolRemovalBlock`
 
         Mid-conversation directive to withdraw a tool.
@@ -19479,6 +23555,37 @@ console.log(betaMessageTokensCount.context_management);
         `tool` references a tool (or MCP toolset) by name from the request's
         `tools`; it is no longer offered to the model from this point in the
         conversation onward.
+
+        - `tool: BetaToolChangeToolReference | BetaToolChangeMCPToolReference | BetaToolChangeMCPToolsetReference`
+
+          Reference to a single tool the caller declared directly in
+          `tools[]`. Does not accept the composed `{server}_{name}` form the
+          server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+          `mcp_toolset_reference` for those.
+
+          - `BetaToolChangeToolReference`
+
+            Reference to a single tool the caller declared directly in
+            `tools[]`. Does not accept the composed `{server}_{name}` form the
+            server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+            `mcp_toolset_reference` for those.
+
+          - `BetaToolChangeMCPToolReference`
+
+            Reference to a single MCP tool by its server and remote name — the
+            same `server_name`/`name` pair `mcp_tool_use` carries.
+
+          - `BetaToolChangeMCPToolsetReference`
+
+            Reference to every tool in the named MCP server's toolset.
+
+        - `type: "tool_removal"`
+
+          - `"tool_removal"`
+
+        - `cache_control?: BetaCacheControlEphemeral | null`
+
+          Create a cache control breakpoint at this content block.
 
       - `BetaFallbackBlockParam`
 
@@ -19615,262 +23722,6 @@ console.log(betaMessageTokensCount.context_management);
     An external identifier for the user who is associated with the request.
 
     This should be a uuid, hash value, or other opaque identifier. Anthropic may use this id to help detect abuse. Do not include any identifying information such as name, email address, or phone number.
-
-### Beta Mid Conversation System Block Param
-
-- `BetaMidConversationSystemBlockParam`
-
-  System instructions that appear mid-conversation.
-
-  Use this block to provide or update system-level instructions at a specific
-  point in the conversation, rather than only via the top-level `system` parameter.
-
-  - `content: Array<BetaTextBlockParam | BetaRequestToolAdditionBlock | BetaRequestToolRemovalBlock>`
-
-    System instruction text blocks.
-
-    - `BetaTextBlockParam`
-
-      - `text: string`
-
-      - `type: "text"`
-
-        - `"text"`
-
-      - `cache_control?: BetaCacheControlEphemeral | null`
-
-        Create a cache control breakpoint at this content block.
-
-        - `type: "ephemeral"`
-
-          - `"ephemeral"`
-
-        - `ttl?: "5m" | "1h"`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`. See [prompt caching pricing](../build-with-claude/build-with-claude-prompt-caching.md) for details.
-
-          - `"5m"`
-
-          - `"1h"`
-
-      - `citations?: Array<BetaTextCitationParam> | null`
-
-        - `BetaCitationCharLocationParam`
-
-          - `cited_text: string`
-
-          - `document_index: number`
-
-          - `document_title: string | null`
-
-          - `end_char_index: number`
-
-          - `start_char_index: number`
-
-          - `type: "char_location"`
-
-            - `"char_location"`
-
-        - `BetaCitationPageLocationParam`
-
-          - `cited_text: string`
-
-          - `document_index: number`
-
-          - `document_title: string | null`
-
-          - `end_page_number: number`
-
-          - `start_page_number: number`
-
-          - `type: "page_location"`
-
-            - `"page_location"`
-
-        - `BetaCitationContentBlockLocationParam`
-
-          - `cited_text: string`
-
-            The full text of the cited block range, concatenated.
-
-            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-          - `document_index: number`
-
-          - `document_title: string | null`
-
-          - `end_block_index: number`
-
-            Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-          - `start_block_index: number`
-
-            0-based index of the first cited block in the source's `content` array.
-
-          - `type: "content_block_location"`
-
-            - `"content_block_location"`
-
-        - `BetaCitationWebSearchResultLocationParam`
-
-          - `cited_text: string`
-
-          - `encrypted_index: string`
-
-          - `title: string | null`
-
-          - `type: "web_search_result_location"`
-
-            - `"web_search_result_location"`
-
-          - `url: string`
-
-        - `BetaCitationSearchResultLocationParam`
-
-          - `cited_text: string`
-
-            The full text of the cited block range, concatenated.
-
-            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-          - `end_block_index: number`
-
-            Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-          - `search_result_index: number`
-
-            0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-            Counted separately from `document_index`; server-side web search results are not included in this count.
-
-          - `source: string`
-
-          - `start_block_index: number`
-
-            0-based index of the first cited block in the source's `content` array.
-
-          - `title: string | null`
-
-          - `type: "search_result_location"`
-
-            - `"search_result_location"`
-
-    - `BetaRequestToolAdditionBlock`
-
-      Mid-conversation directive to surface a declared tool.
-
-      `tool` references a tool (or MCP toolset) by name from the request's
-      `tools`; it is offered to the model from this point in the
-      conversation onward.
-
-      - `tool: BetaToolChangeToolReference | BetaToolChangeMCPToolReference | BetaToolChangeMCPToolsetReference`
-
-        Reference to a single tool the caller declared directly in
-        `tools[]`. Does not accept the composed `{server}_{name}` form the
-        server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-        `mcp_toolset_reference` for those.
-
-        - `BetaToolChangeToolReference`
-
-          Reference to a single tool the caller declared directly in
-          `tools[]`. Does not accept the composed `{server}_{name}` form the
-          server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-          `mcp_toolset_reference` for those.
-
-          - `name: string`
-
-          - `type: "tool_reference"`
-
-            - `"tool_reference"`
-
-        - `BetaToolChangeMCPToolReference`
-
-          Reference to a single MCP tool by its server and remote name — the
-          same `server_name`/`name` pair `mcp_tool_use` carries.
-
-          - `name: string`
-
-          - `server_name: string`
-
-          - `type: "mcp_tool_reference"`
-
-            - `"mcp_tool_reference"`
-
-        - `BetaToolChangeMCPToolsetReference`
-
-          Reference to every tool in the named MCP server's toolset.
-
-          - `server_name: string`
-
-          - `type: "mcp_toolset_reference"`
-
-            - `"mcp_toolset_reference"`
-
-      - `type: "tool_addition"`
-
-        - `"tool_addition"`
-
-      - `cache_control?: BetaCacheControlEphemeral | null`
-
-        Create a cache control breakpoint at this content block.
-
-    - `BetaRequestToolRemovalBlock`
-
-      Mid-conversation directive to withdraw a tool.
-
-      `tool` references a tool (or MCP toolset) by name from the request's
-      `tools`; it is no longer offered to the model from this point in the
-      conversation onward.
-
-      - `tool: BetaToolChangeToolReference | BetaToolChangeMCPToolReference | BetaToolChangeMCPToolsetReference`
-
-        Reference to a single tool the caller declared directly in
-        `tools[]`. Does not accept the composed `{server}_{name}` form the
-        server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-        `mcp_toolset_reference` for those.
-
-        - `BetaToolChangeToolReference`
-
-          Reference to a single tool the caller declared directly in
-          `tools[]`. Does not accept the composed `{server}_{name}` form the
-          server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-          `mcp_toolset_reference` for those.
-
-        - `BetaToolChangeMCPToolReference`
-
-          Reference to a single MCP tool by its server and remote name — the
-          same `server_name`/`name` pair `mcp_tool_use` carries.
-
-        - `BetaToolChangeMCPToolsetReference`
-
-          Reference to every tool in the named MCP server's toolset.
-
-      - `type: "tool_removal"`
-
-        - `"tool_removal"`
-
-      - `cache_control?: BetaCacheControlEphemeral | null`
-
-        Create a cache control breakpoint at this content block.
-
-  - `type: "mid_conv_system"`
-
-    - `"mid_conv_system"`
-
-  - `cache_control?: BetaCacheControlEphemeral | null`
-
-    Create a cache control breakpoint at this content block.
 
 ### Beta Output Config
 
@@ -20510,6 +24361,10 @@ console.log(betaMessageTokensCount.context_management);
           - `type: "code_execution_20260120"`
 
             - `"code_execution_20260120"`
+
+      - `toolset_name?: string | null`
+
+        For a toolset member tool_use, the toolset family.
 
     - `BetaServerToolUseBlock`
 
@@ -22043,6 +25898,10 @@ console.log(betaMessageTokensCount.context_management);
             - `type: "code_execution_20260120"`
 
               - `"code_execution_20260120"`
+
+        - `toolset_name?: string | null`
+
+          For a toolset member tool_use, the toolset family.
 
       - `BetaServerToolUseBlock`
 
@@ -23597,6 +27456,10 @@ console.log(betaMessageTokensCount.context_management);
               - `type: "code_execution_20260120"`
 
                 - `"code_execution_20260120"`
+
+          - `toolset_name?: string | null`
+
+            For a toolset member tool_use, the toolset family.
 
         - `BetaServerToolUseBlock`
 
@@ -25447,6 +29310,18 @@ console.log(betaMessageTokensCount.context_management);
             - `cache_control?: BetaCacheControlEphemeral | null`
 
               Create a cache control breakpoint at this content block.
+
+            - `transformations?: BetaImageTransformationsParam | null`
+
+              Configures the transformations the server applies to this image before the model observes it. Each key names a condition the server transforms images for; its value selects the transformation applied. Omitted keys keep their default behavior, and an empty object is equivalent to omitting the field.
+
+              - `oversized_image?: "downsize" | "error"`
+
+                What the server does when this image exceeds the model's maximum image size. `"downsize"` (the default) scales the image down to fit, which changes the dimensions the model observes without telling you. `"error"` instead rejects the request with a 400 error naming the image's dimensions and the largest dimensions that fit, so you can scale the image deliberately — your image is never silently scaled down.
+
+                - `"downsize"`
+
+                - `"error"`
 
       - `type: "content"`
 
@@ -27905,11 +31780,11 @@ console.log(betaMessageTokensCount.context_management);
 
       - `"1h"`
 
-  - `content?: string | Array<BetaTextBlockParam | BetaImageBlockParam | BetaSearchResultBlockParam | 2 more>`
+  - `content?: string | Array<BetaTextBlockParam | BetaImageBlockParam | BetaSearchResultBlockParam | 3 more>`
 
     - `string`
 
-    - `Array<BetaTextBlockParam | BetaImageBlockParam | BetaSearchResultBlockParam | 2 more>`
+    - `Array<BetaTextBlockParam | BetaImageBlockParam | BetaSearchResultBlockParam | 3 more>`
 
       - `BetaTextBlockParam`
 
@@ -28075,6 +31950,18 @@ console.log(betaMessageTokensCount.context_management);
 
           Create a cache control breakpoint at this content block.
 
+        - `transformations?: BetaImageTransformationsParam | null`
+
+          Configures the transformations the server applies to this image before the model observes it. Each key names a condition the server transforms images for; its value selects the transformation applied. Omitted keys keep their default behavior, and an empty object is equivalent to omitting the field.
+
+          - `oversized_image?: "downsize" | "error"`
+
+            What the server does when this image exceeds the model's maximum image size. `"downsize"` (the default) scales the image down to fit, which changes the dimensions the model observes without telling you. `"error"` instead rejects the request with a 400 error naming the image's dimensions and the largest dimensions that fit, so you can scale the image deliberately — your image is never silently scaled down.
+
+            - `"downsize"`
+
+            - `"error"`
+
       - `BetaSearchResultBlockParam`
 
         - `content: Array<BetaTextBlockParam>`
@@ -28193,7 +32080,134 @@ console.log(betaMessageTokensCount.context_management);
 
           Create a cache control breakpoint at this content block.
 
+      - `BetaBrowserStateBlockParam`
+
+        The caller's browser state after a browser toolset member call —
+        the full inventory of open tabs, which tab is active, and any side
+        effects (tabs opened, download state changes) the call produced.
+
+        At most one per `tool_result`, only on a non-error result answering a
+        browser toolset member `tool_use`. The server renders the
+        model-visible text from it; the model never sees the raw fields.
+
+        - `tabs: Array<BetaBrowserStateTabEntry>`
+
+          All tabs open in the browser after this call — the full inventory, not a delta. May be empty. Whenever non-empty, exactly one entry carries `active: true`.
+
+          - `tab_id: string`
+
+            The caller-assigned identifier for this tab, unique within the inventory.
+
+          - `title: string`
+
+            The title of the page the tab is showing. May be empty.
+
+          - `url: string`
+
+            The URL of the page the tab is showing. May be empty.
+
+          - `active?: boolean`
+
+            Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
+
+        - `type: "browser_state"`
+
+          - `"browser_state"`
+
+        - `cache_control?: BetaCacheControlEphemeral | null`
+
+          Create a cache control breakpoint at this content block.
+
+        - `state_changes?: Array<BetaBrowserStateChange> | null`
+
+          Tabs opened and download state changes during this call. "Nothing to report" is expressed by omitting the field, never by an empty list.
+
+          - `BetaBrowserStateChangeTabOpened`
+
+            A tab this call's execution opened that remains open at its end —
+            the creation delta of the `tabs` inventory, not an event log.
+
+            Carries only the `tab_id`; the tab's `title` and `url` live on its
+            `tabs` entry, which must include the same `tab_id`. A tab opened
+            during a failed call gets no deferred `tab_opened`; it simply appears
+            in the next result's `tabs` inventory.
+
+            - `tab_id: string`
+
+              The `tab_id` of the opened tab, present in `tabs`.
+
+            - `type: "tab_opened"`
+
+              - `"tab_opened"`
+
+          - `BetaBrowserStateChangeDownloadStarted`
+
+            A file download that started during this call.
+
+            - `download_id: string`
+
+              The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+            - `type: "download_started"`
+
+              - `"download_started"`
+
+            - `url: string`
+
+              The final post-redirect URL the download was served from.
+
+          - `BetaBrowserStateChangeDownloadCompleted`
+
+            A file download that finished during this call, reported with the
+            same `download_id` as its `download_started` — or without a prior
+            `download_started`, when the download finished during the call that
+            started it (at most one state change per `download_id` per result).
+
+            - `download_id: string`
+
+              The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+            - `type: "download_completed"`
+
+              - `"download_completed"`
+
+            - `url: string`
+
+              The final post-redirect URL the download was served from.
+
+            - `path?: string | null`
+
+              Where the executor saved the file, on the executor's filesystem. Only included when another tool in the same environment can read the file at that path.
+
+            - `size_bytes?: number | null`
+
+              The completed download's size.
+
+          - `BetaBrowserStateChangeDownloadFailed`
+
+            A file download that failed — or was cancelled — during this call.
+
+            - `download_id: string`
+
+              The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+            - `type: "download_failed"`
+
+              - `"download_failed"`
+
+            - `url: string`
+
+              The final post-redirect URL the download was served from.
+
+            - `error?: string | null`
+
+              The failure or cancellation detail, when known.
+
   - `is_error?: boolean`
+
+  - `toolset_name?: string | null`
+
+    For a toolset member tool_result, the toolset family of the paired tool_use.
 
 ### Beta Tool Search Tool Bm25 20251119
 
@@ -28765,7 +32779,7 @@ console.log(betaMessageTokensCount.context_management);
 
 ### Beta Tool Union
 
-- `BetaToolUnion = BetaTool | BetaToolBash20241022 | BetaToolBash20250124 | 23 more`
+- `BetaToolUnion = BetaTool | BetaToolBash20241022 | BetaToolBash20250124 | 25 more`
 
   Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
@@ -29072,6 +33086,412 @@ console.log(betaMessageTokensCount.context_management);
 
       When true, guarantees schema validation on tool names and inputs
 
+  - `BetaBrowserToolset20260801`
+
+    The browser toolset: a single `tools[]` entry (carrying no
+    `name`) that declares the browser tool family. The model is served
+    the family's tool with any members disabled via `configs` removed
+    from its schema.
+
+    - `type: "browser_toolset_20260801"`
+
+      - `"browser_toolset_20260801"`
+
+    - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
+
+      - `"direct"`
+
+      - `"code_execution_20250825"`
+
+      - `"code_execution_20260120"`
+
+      - `"code_execution_20260521"`
+
+    - `cache_control?: BetaCacheControlEphemeral | null`
+
+      Create a cache control breakpoint at this content block.
+
+    - `configs?: BetaBrowserToolsetConfigs | null`
+
+      Per-member configuration for `browser_toolset_20260801`: one
+      optional field per member tool, keyed by the member name — the same
+      name the member's `tool_use` blocks carry. Every member is an
+      accepted key, and a member's defaults apply wherever its key is
+      absent. Unknown keys are rejected: the field set is this toolset
+      version's complete member set.
+
+      - `close_tab?: BetaBrowserCloseTabConfig | null`
+
+        `close_tab`'s config overrides.
+
+        - `defer_loading?: boolean | null`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `enabled?: boolean | null`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `double_click?: BetaBrowserDoubleClickConfig | null`
+
+        `double_click`'s config overrides.
+
+        - `defer_loading?: boolean | null`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `enabled?: boolean | null`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `file_upload?: BetaBrowserFileUploadConfig | null`
+
+        `file_upload`'s config overrides.
+
+        - `defer_loading?: boolean | null`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `enabled?: boolean | null`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `find?: BetaBrowserFindConfig | null`
+
+        `find`'s config overrides.
+
+        - `defer_loading?: boolean | null`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `enabled?: boolean | null`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `form_input?: BetaBrowserFormInputConfig | null`
+
+        `form_input`'s config overrides.
+
+        - `defer_loading?: boolean | null`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `enabled?: boolean | null`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `get_page_text?: BetaBrowserGetPageTextConfig | null`
+
+        `get_page_text`'s config overrides.
+
+        - `defer_loading?: boolean | null`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `enabled?: boolean | null`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `hold_key?: BetaBrowserHoldKeyConfig | null`
+
+        `hold_key`'s config overrides.
+
+        - `defer_loading?: boolean | null`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `enabled?: boolean | null`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `hover?: BetaBrowserHoverConfig | null`
+
+        `hover`'s config overrides.
+
+        - `defer_loading?: boolean | null`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `enabled?: boolean | null`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `javascript_exec?: BetaBrowserJavascriptExecConfig | null`
+
+        `javascript_exec`'s config overrides.
+
+        - `defer_loading?: boolean | null`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `enabled?: boolean | null`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `key?: BetaBrowserKeyConfig | null`
+
+        `key`'s config overrides.
+
+        - `defer_loading?: boolean | null`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `enabled?: boolean | null`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `left_click?: BetaBrowserLeftClickConfig | null`
+
+        `left_click`'s config overrides.
+
+        - `defer_loading?: boolean | null`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `enabled?: boolean | null`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `left_click_drag?: BetaBrowserLeftClickDragConfig | null`
+
+        `left_click_drag`'s config overrides.
+
+        - `defer_loading?: boolean | null`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `enabled?: boolean | null`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `left_mouse_down?: BetaBrowserLeftMouseDownConfig | null`
+
+        `left_mouse_down`'s config overrides.
+
+        - `defer_loading?: boolean | null`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `enabled?: boolean | null`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `left_mouse_up?: BetaBrowserLeftMouseUpConfig | null`
+
+        `left_mouse_up`'s config overrides.
+
+        - `defer_loading?: boolean | null`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `enabled?: boolean | null`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `list_tabs?: BetaBrowserListTabsConfig | null`
+
+        `list_tabs`'s config overrides.
+
+        - `defer_loading?: boolean | null`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `enabled?: boolean | null`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `middle_click?: BetaBrowserMiddleClickConfig | null`
+
+        `middle_click`'s config overrides.
+
+        - `defer_loading?: boolean | null`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `enabled?: boolean | null`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `mouse_move?: BetaBrowserMouseMoveConfig | null`
+
+        `mouse_move`'s config overrides.
+
+        - `defer_loading?: boolean | null`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `enabled?: boolean | null`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `navigate?: BetaBrowserNavigateConfig | null`
+
+        `navigate`'s config overrides.
+
+        - `defer_loading?: boolean | null`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `enabled?: boolean | null`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `new_tab?: BetaBrowserNewTabConfig | null`
+
+        `new_tab`'s config overrides.
+
+        - `defer_loading?: boolean | null`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `enabled?: boolean | null`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `read_console?: BetaBrowserReadConsoleConfig | null`
+
+        `read_console`'s config overrides.
+
+        - `defer_loading?: boolean | null`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `enabled?: boolean | null`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `read_network?: BetaBrowserReadNetworkConfig | null`
+
+        `read_network`'s config overrides.
+
+        - `defer_loading?: boolean | null`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `enabled?: boolean | null`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `read_page?: BetaBrowserReadPageConfig | null`
+
+        `read_page`'s config overrides.
+
+        - `defer_loading?: boolean | null`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `enabled?: boolean | null`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `right_click?: BetaBrowserRightClickConfig | null`
+
+        `right_click`'s config overrides.
+
+        - `defer_loading?: boolean | null`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `enabled?: boolean | null`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `screenshot?: BetaBrowserScreenshotConfig | null`
+
+        `screenshot`'s config overrides.
+
+        - `defer_loading?: boolean | null`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `enabled?: boolean | null`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `scroll?: BetaBrowserScrollConfig | null`
+
+        `scroll`'s config overrides.
+
+        - `defer_loading?: boolean | null`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `enabled?: boolean | null`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `scroll_to?: BetaBrowserScrollToConfig | null`
+
+        `scroll_to`'s config overrides.
+
+        - `defer_loading?: boolean | null`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `enabled?: boolean | null`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `switch_tab?: BetaBrowserSwitchTabConfig | null`
+
+        `switch_tab`'s config overrides.
+
+        - `defer_loading?: boolean | null`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `enabled?: boolean | null`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `triple_click?: BetaBrowserTripleClickConfig | null`
+
+        `triple_click`'s config overrides.
+
+        - `defer_loading?: boolean | null`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `enabled?: boolean | null`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `type?: BetaBrowserTypeConfig | null`
+
+        `type`'s config overrides.
+
+        - `defer_loading?: boolean | null`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `enabled?: boolean | null`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `wait?: BetaBrowserWaitConfig | null`
+
+        `wait`'s config overrides.
+
+        - `defer_loading?: boolean | null`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `enabled?: boolean | null`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `zoom?: BetaBrowserZoomConfig | null`
+
+        `zoom`'s config overrides.
+
+        - `defer_loading?: boolean | null`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `enabled?: boolean | null`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
   - `BetaToolComputerUse20241022`
 
     - `display_height_px: number`
@@ -29301,6 +33721,248 @@ console.log(betaMessageTokensCount.context_management);
     - `strict?: boolean`
 
       When true, guarantees schema validation on tool names and inputs
+
+  - `BetaComputerToolset20260801`
+
+    The computer toolset: a single `tools[]` entry (carrying no
+    `name`) that declares the computer tool family. The model is
+    served the family's tool with any members disabled via `configs`
+    removed from its schema. Every member is enabled by default, zoom
+    included. The single-tool options `display_number` and
+    `enable_zoom` are not fields of a toolset entry — it carries only
+    `type`, `configs`, and `cache_control`; zoom is controlled
+    via `configs.zoom.enabled`.
+
+    - `type: "computer_toolset_20260801"`
+
+      - `"computer_toolset_20260801"`
+
+    - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
+
+      - `"direct"`
+
+      - `"code_execution_20250825"`
+
+      - `"code_execution_20260120"`
+
+      - `"code_execution_20260521"`
+
+    - `cache_control?: BetaCacheControlEphemeral | null`
+
+      Create a cache control breakpoint at this content block.
+
+    - `configs?: BetaComputerToolsetConfigs | null`
+
+      Per-member configuration for `computer_toolset_20260801`: one
+      optional field per member tool, keyed by the member name — the same
+      name the member's `tool_use` blocks carry. Every member is an
+      accepted key, and a member's defaults apply wherever its key is
+      absent. Unknown keys are rejected: the field set is this toolset
+      version's complete member set.
+
+      - `cursor_position?: BetaComputerCursorPositionConfig | null`
+
+        `cursor_position`'s config overrides.
+
+        - `defer_loading?: boolean | null`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `enabled?: boolean | null`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `double_click?: BetaComputerDoubleClickConfig | null`
+
+        `double_click`'s config overrides.
+
+        - `defer_loading?: boolean | null`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `enabled?: boolean | null`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `hold_key?: BetaComputerHoldKeyConfig | null`
+
+        `hold_key`'s config overrides.
+
+        - `defer_loading?: boolean | null`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `enabled?: boolean | null`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `key?: BetaComputerKeyConfig | null`
+
+        `key`'s config overrides.
+
+        - `defer_loading?: boolean | null`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `enabled?: boolean | null`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `left_click?: BetaComputerLeftClickConfig | null`
+
+        `left_click`'s config overrides.
+
+        - `defer_loading?: boolean | null`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `enabled?: boolean | null`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `left_click_drag?: BetaComputerLeftClickDragConfig | null`
+
+        `left_click_drag`'s config overrides.
+
+        - `defer_loading?: boolean | null`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `enabled?: boolean | null`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `left_mouse_down?: BetaComputerLeftMouseDownConfig | null`
+
+        `left_mouse_down`'s config overrides.
+
+        - `defer_loading?: boolean | null`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `enabled?: boolean | null`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `left_mouse_up?: BetaComputerLeftMouseUpConfig | null`
+
+        `left_mouse_up`'s config overrides.
+
+        - `defer_loading?: boolean | null`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `enabled?: boolean | null`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `middle_click?: BetaComputerMiddleClickConfig | null`
+
+        `middle_click`'s config overrides.
+
+        - `defer_loading?: boolean | null`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `enabled?: boolean | null`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `mouse_move?: BetaComputerMouseMoveConfig | null`
+
+        `mouse_move`'s config overrides.
+
+        - `defer_loading?: boolean | null`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `enabled?: boolean | null`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `right_click?: BetaComputerRightClickConfig | null`
+
+        `right_click`'s config overrides.
+
+        - `defer_loading?: boolean | null`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `enabled?: boolean | null`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `screenshot?: BetaComputerScreenshotConfig | null`
+
+        `screenshot`'s config overrides.
+
+        - `defer_loading?: boolean | null`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `enabled?: boolean | null`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `scroll?: BetaComputerScrollConfig | null`
+
+        `scroll`'s config overrides.
+
+        - `defer_loading?: boolean | null`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `enabled?: boolean | null`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `triple_click?: BetaComputerTripleClickConfig | null`
+
+        `triple_click`'s config overrides.
+
+        - `defer_loading?: boolean | null`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `enabled?: boolean | null`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `type?: BetaComputerTypeConfig | null`
+
+        `type`'s config overrides.
+
+        - `defer_loading?: boolean | null`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `enabled?: boolean | null`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `wait?: BetaComputerWaitConfig | null`
+
+        `wait`'s config overrides.
+
+        - `defer_loading?: boolean | null`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `enabled?: boolean | null`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `zoom?: BetaComputerZoomConfig | null`
+
+        `zoom`'s config overrides.
+
+        - `defer_loading?: boolean | null`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `enabled?: boolean | null`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
   - `BetaToolTextEditor20250124`
 
@@ -30121,6 +34783,10 @@ console.log(betaMessageTokensCount.context_management);
 
         - `"code_execution_20260120"`
 
+  - `toolset_name?: string | null`
+
+    For a toolset member tool_use, the toolset family.
+
 ### Beta Tool Use Block Param
 
 - `BetaToolUseBlockParam`
@@ -30187,6 +34853,10 @@ console.log(betaMessageTokensCount.context_management);
       - `type: "code_execution_20260120"`
 
         - `"code_execution_20260120"`
+
+  - `toolset_name?: string | null`
+
+    For a toolset member tool_use, the toolset family this member belongs to.
 
 ### Beta Tool Uses Keep
 
@@ -30907,6 +35577,18 @@ console.log(betaMessageTokensCount.context_management);
               - `cache_control?: BetaCacheControlEphemeral | null`
 
                 Create a cache control breakpoint at this content block.
+
+              - `transformations?: BetaImageTransformationsParam | null`
+
+                Configures the transformations the server applies to this image before the model observes it. Each key names a condition the server transforms images for; its value selects the transformation applied. Omitted keys keep their default behavior, and an empty object is equivalent to omitting the field.
+
+                - `oversized_image?: "downsize" | "error"`
+
+                  What the server does when this image exceeds the model's maximum image size. `"downsize"` (the default) scales the image down to fit, which changes the dimensions the model observes without telling you. `"error"` instead rejects the request with a 400 error naming the image's dimensions and the largest dimensions that fit, so you can scale the image deliberately — your image is never silently scaled down.
+
+                  - `"downsize"`
+
+                  - `"error"`
 
         - `type: "content"`
 
@@ -31666,6 +36348,18 @@ console.log(betaMessageTokensCount.context_management);
                   - `cache_control?: BetaCacheControlEphemeral | null`
 
                     Create a cache control breakpoint at this content block.
+
+                  - `transformations?: BetaImageTransformationsParam | null`
+
+                    Configures the transformations the server applies to this image before the model observes it. Each key names a condition the server transforms images for; its value selects the transformation applied. Omitted keys keep their default behavior, and an empty object is equivalent to omitting the field.
+
+                    - `oversized_image?: "downsize" | "error"`
+
+                      What the server does when this image exceeds the model's maximum image size. `"downsize"` (the default) scales the image down to fit, which changes the dimensions the model observes without telling you. `"error"` instead rejects the request with a 400 error naming the image's dimensions and the largest dimensions that fit, so you can scale the image deliberately — your image is never silently scaled down.
+
+                      - `"downsize"`
+
+                      - `"error"`
 
             - `type: "content"`
 
@@ -32747,6 +37441,18 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 Create a cache control breakpoint at this content block.
 
+              - `transformations?: BetaImageTransformationsParam | null`
+
+                Configures the transformations the server applies to this image before the model observes it. Each key names a condition the server transforms images for; its value selects the transformation applied. Omitted keys keep their default behavior, and an empty object is equivalent to omitting the field.
+
+                - `oversized_image?: "downsize" | "error"`
+
+                  What the server does when this image exceeds the model's maximum image size. `"downsize"` (the default) scales the image down to fit, which changes the dimensions the model observes without telling you. `"error"` instead rejects the request with a 400 error naming the image's dimensions and the largest dimensions that fit, so you can scale the image deliberately — your image is never silently scaled down.
+
+                  - `"downsize"`
+
+                  - `"error"`
+
             - `BetaRequestDocumentBlock`
 
               - `source: BetaBase64PDFSource | BetaPlainTextSource | BetaContentBlockSource | 2 more`
@@ -32923,6 +37629,10 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     - `"code_execution_20260120"`
 
+              - `toolset_name?: string | null`
+
+                For a toolset member tool_use, the toolset family this member belongs to.
+
             - `BetaToolResultBlockParam`
 
               - `tool_use_id: string`
@@ -32935,11 +37645,11 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 Create a cache control breakpoint at this content block.
 
-              - `content?: string | Array<BetaTextBlockParam | BetaImageBlockParam | BetaSearchResultBlockParam | 2 more>`
+              - `content?: string | Array<BetaTextBlockParam | BetaImageBlockParam | BetaSearchResultBlockParam | 3 more>`
 
                 - `string`
 
-                - `Array<BetaTextBlockParam | BetaImageBlockParam | BetaSearchResultBlockParam | 2 more>`
+                - `Array<BetaTextBlockParam | BetaImageBlockParam | BetaSearchResultBlockParam | 3 more>`
 
                   - `BetaTextBlockParam`
 
@@ -32963,7 +37673,134 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                       Create a cache control breakpoint at this content block.
 
+                  - `BetaBrowserStateBlockParam`
+
+                    The caller's browser state after a browser toolset member call —
+                    the full inventory of open tabs, which tab is active, and any side
+                    effects (tabs opened, download state changes) the call produced.
+
+                    At most one per `tool_result`, only on a non-error result answering a
+                    browser toolset member `tool_use`. The server renders the
+                    model-visible text from it; the model never sees the raw fields.
+
+                    - `tabs: Array<BetaBrowserStateTabEntry>`
+
+                      All tabs open in the browser after this call — the full inventory, not a delta. May be empty. Whenever non-empty, exactly one entry carries `active: true`.
+
+                      - `tab_id: string`
+
+                        The caller-assigned identifier for this tab, unique within the inventory.
+
+                      - `title: string`
+
+                        The title of the page the tab is showing. May be empty.
+
+                      - `url: string`
+
+                        The URL of the page the tab is showing. May be empty.
+
+                      - `active?: boolean`
+
+                        Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
+
+                    - `type: "browser_state"`
+
+                      - `"browser_state"`
+
+                    - `cache_control?: BetaCacheControlEphemeral | null`
+
+                      Create a cache control breakpoint at this content block.
+
+                    - `state_changes?: Array<BetaBrowserStateChange> | null`
+
+                      Tabs opened and download state changes during this call. "Nothing to report" is expressed by omitting the field, never by an empty list.
+
+                      - `BetaBrowserStateChangeTabOpened`
+
+                        A tab this call's execution opened that remains open at its end —
+                        the creation delta of the `tabs` inventory, not an event log.
+
+                        Carries only the `tab_id`; the tab's `title` and `url` live on its
+                        `tabs` entry, which must include the same `tab_id`. A tab opened
+                        during a failed call gets no deferred `tab_opened`; it simply appears
+                        in the next result's `tabs` inventory.
+
+                        - `tab_id: string`
+
+                          The `tab_id` of the opened tab, present in `tabs`.
+
+                        - `type: "tab_opened"`
+
+                          - `"tab_opened"`
+
+                      - `BetaBrowserStateChangeDownloadStarted`
+
+                        A file download that started during this call.
+
+                        - `download_id: string`
+
+                          The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+                        - `type: "download_started"`
+
+                          - `"download_started"`
+
+                        - `url: string`
+
+                          The final post-redirect URL the download was served from.
+
+                      - `BetaBrowserStateChangeDownloadCompleted`
+
+                        A file download that finished during this call, reported with the
+                        same `download_id` as its `download_started` — or without a prior
+                        `download_started`, when the download finished during the call that
+                        started it (at most one state change per `download_id` per result).
+
+                        - `download_id: string`
+
+                          The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+                        - `type: "download_completed"`
+
+                          - `"download_completed"`
+
+                        - `url: string`
+
+                          The final post-redirect URL the download was served from.
+
+                        - `path?: string | null`
+
+                          Where the executor saved the file, on the executor's filesystem. Only included when another tool in the same environment can read the file at that path.
+
+                        - `size_bytes?: number | null`
+
+                          The completed download's size.
+
+                      - `BetaBrowserStateChangeDownloadFailed`
+
+                        A file download that failed — or was cancelled — during this call.
+
+                        - `download_id: string`
+
+                          The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+                        - `type: "download_failed"`
+
+                          - `"download_failed"`
+
+                        - `url: string`
+
+                          The final post-redirect URL the download was served from.
+
+                        - `error?: string | null`
+
+                          The failure or cancellation detail, when known.
+
               - `is_error?: boolean`
+
+              - `toolset_name?: string | null`
+
+                For a toolset member tool_result, the toolset family of the paired tool_use.
 
             - `BetaServerToolUseBlockParam`
 
@@ -33544,125 +38381,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 Opaque metadata from prior compaction, to be round-tripped verbatim
 
-            - `BetaMidConversationSystemBlockParam`
-
-              System instructions that appear mid-conversation.
-
-              Use this block to provide or update system-level instructions at a specific
-              point in the conversation, rather than only via the top-level `system` parameter.
-
-              - `content: Array<BetaTextBlockParam | BetaRequestToolAdditionBlock | BetaRequestToolRemovalBlock>`
-
-                System instruction text blocks.
-
-                - `BetaTextBlockParam`
-
-                - `BetaRequestToolAdditionBlock`
-
-                  Mid-conversation directive to surface a declared tool.
-
-                  `tool` references a tool (or MCP toolset) by name from the request's
-                  `tools`; it is offered to the model from this point in the
-                  conversation onward.
-
-                  - `tool: BetaToolChangeToolReference | BetaToolChangeMCPToolReference | BetaToolChangeMCPToolsetReference`
-
-                    Reference to a single tool the caller declared directly in
-                    `tools[]`. Does not accept the composed `{server}_{name}` form the
-                    server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-                    `mcp_toolset_reference` for those.
-
-                    - `BetaToolChangeToolReference`
-
-                      Reference to a single tool the caller declared directly in
-                      `tools[]`. Does not accept the composed `{server}_{name}` form the
-                      server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-                      `mcp_toolset_reference` for those.
-
-                      - `name: string`
-
-                      - `type: "tool_reference"`
-
-                        - `"tool_reference"`
-
-                    - `BetaToolChangeMCPToolReference`
-
-                      Reference to a single MCP tool by its server and remote name — the
-                      same `server_name`/`name` pair `mcp_tool_use` carries.
-
-                      - `name: string`
-
-                      - `server_name: string`
-
-                      - `type: "mcp_tool_reference"`
-
-                        - `"mcp_tool_reference"`
-
-                    - `BetaToolChangeMCPToolsetReference`
-
-                      Reference to every tool in the named MCP server's toolset.
-
-                      - `server_name: string`
-
-                      - `type: "mcp_toolset_reference"`
-
-                        - `"mcp_toolset_reference"`
-
-                  - `type: "tool_addition"`
-
-                    - `"tool_addition"`
-
-                  - `cache_control?: BetaCacheControlEphemeral | null`
-
-                    Create a cache control breakpoint at this content block.
-
-                - `BetaRequestToolRemovalBlock`
-
-                  Mid-conversation directive to withdraw a tool.
-
-                  `tool` references a tool (or MCP toolset) by name from the request's
-                  `tools`; it is no longer offered to the model from this point in the
-                  conversation onward.
-
-                  - `tool: BetaToolChangeToolReference | BetaToolChangeMCPToolReference | BetaToolChangeMCPToolsetReference`
-
-                    Reference to a single tool the caller declared directly in
-                    `tools[]`. Does not accept the composed `{server}_{name}` form the
-                    server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-                    `mcp_toolset_reference` for those.
-
-                    - `BetaToolChangeToolReference`
-
-                      Reference to a single tool the caller declared directly in
-                      `tools[]`. Does not accept the composed `{server}_{name}` form the
-                      server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-                      `mcp_toolset_reference` for those.
-
-                    - `BetaToolChangeMCPToolReference`
-
-                      Reference to a single MCP tool by its server and remote name — the
-                      same `server_name`/`name` pair `mcp_tool_use` carries.
-
-                    - `BetaToolChangeMCPToolsetReference`
-
-                      Reference to every tool in the named MCP server's toolset.
-
-                  - `type: "tool_removal"`
-
-                    - `"tool_removal"`
-
-                  - `cache_control?: BetaCacheControlEphemeral | null`
-
-                    Create a cache control breakpoint at this content block.
-
-              - `type: "mid_conv_system"`
-
-                - `"mid_conv_system"`
-
-              - `cache_control?: BetaCacheControlEphemeral | null`
-
-                Create a cache control breakpoint at this content block.
-
             - `BetaRequestToolAdditionBlock`
 
               Mid-conversation directive to surface a declared tool.
@@ -33671,6 +38389,57 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               `tools`; it is offered to the model from this point in the
               conversation onward.
 
+              - `tool: BetaToolChangeToolReference | BetaToolChangeMCPToolReference | BetaToolChangeMCPToolsetReference`
+
+                Reference to a single tool the caller declared directly in
+                `tools[]`. Does not accept the composed `{server}_{name}` form the
+                server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+                `mcp_toolset_reference` for those.
+
+                - `BetaToolChangeToolReference`
+
+                  Reference to a single tool the caller declared directly in
+                  `tools[]`. Does not accept the composed `{server}_{name}` form the
+                  server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+                  `mcp_toolset_reference` for those.
+
+                  - `name: string`
+
+                  - `type: "tool_reference"`
+
+                    - `"tool_reference"`
+
+                - `BetaToolChangeMCPToolReference`
+
+                  Reference to a single MCP tool by its server and remote name — the
+                  same `server_name`/`name` pair `mcp_tool_use` carries.
+
+                  - `name: string`
+
+                  - `server_name: string`
+
+                  - `type: "mcp_tool_reference"`
+
+                    - `"mcp_tool_reference"`
+
+                - `BetaToolChangeMCPToolsetReference`
+
+                  Reference to every tool in the named MCP server's toolset.
+
+                  - `server_name: string`
+
+                  - `type: "mcp_toolset_reference"`
+
+                    - `"mcp_toolset_reference"`
+
+              - `type: "tool_addition"`
+
+                - `"tool_addition"`
+
+              - `cache_control?: BetaCacheControlEphemeral | null`
+
+                Create a cache control breakpoint at this content block.
+
             - `BetaRequestToolRemovalBlock`
 
               Mid-conversation directive to withdraw a tool.
@@ -33678,6 +38447,37 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               `tool` references a tool (or MCP toolset) by name from the request's
               `tools`; it is no longer offered to the model from this point in the
               conversation onward.
+
+              - `tool: BetaToolChangeToolReference | BetaToolChangeMCPToolReference | BetaToolChangeMCPToolsetReference`
+
+                Reference to a single tool the caller declared directly in
+                `tools[]`. Does not accept the composed `{server}_{name}` form the
+                server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+                `mcp_toolset_reference` for those.
+
+                - `BetaToolChangeToolReference`
+
+                  Reference to a single tool the caller declared directly in
+                  `tools[]`. Does not accept the composed `{server}_{name}` form the
+                  server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+                  `mcp_toolset_reference` for those.
+
+                - `BetaToolChangeMCPToolReference`
+
+                  Reference to a single MCP tool by its server and remote name — the
+                  same `server_name`/`name` pair `mcp_tool_use` carries.
+
+                - `BetaToolChangeMCPToolsetReference`
+
+                  Reference to every tool in the named MCP server's toolset.
+
+              - `type: "tool_removal"`
+
+                - `"tool_removal"`
+
+              - `cache_control?: BetaCacheControlEphemeral | null`
+
+                Create a cache control breakpoint at this content block.
 
             - `BetaFallbackBlockParam`
 
@@ -34645,6 +39445,412 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             When true, guarantees schema validation on tool names and inputs
 
+        - `BetaBrowserToolset20260801`
+
+          The browser toolset: a single `tools[]` entry (carrying no
+          `name`) that declares the browser tool family. The model is served
+          the family's tool with any members disabled via `configs` removed
+          from its schema.
+
+          - `type: "browser_toolset_20260801"`
+
+            - `"browser_toolset_20260801"`
+
+          - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
+
+            - `"direct"`
+
+            - `"code_execution_20250825"`
+
+            - `"code_execution_20260120"`
+
+            - `"code_execution_20260521"`
+
+          - `cache_control?: BetaCacheControlEphemeral | null`
+
+            Create a cache control breakpoint at this content block.
+
+          - `configs?: BetaBrowserToolsetConfigs | null`
+
+            Per-member configuration for `browser_toolset_20260801`: one
+            optional field per member tool, keyed by the member name — the same
+            name the member's `tool_use` blocks carry. Every member is an
+            accepted key, and a member's defaults apply wherever its key is
+            absent. Unknown keys are rejected: the field set is this toolset
+            version's complete member set.
+
+            - `close_tab?: BetaBrowserCloseTabConfig | null`
+
+              `close_tab`'s config overrides.
+
+              - `defer_loading?: boolean | null`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `enabled?: boolean | null`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `double_click?: BetaBrowserDoubleClickConfig | null`
+
+              `double_click`'s config overrides.
+
+              - `defer_loading?: boolean | null`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `enabled?: boolean | null`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `file_upload?: BetaBrowserFileUploadConfig | null`
+
+              `file_upload`'s config overrides.
+
+              - `defer_loading?: boolean | null`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `enabled?: boolean | null`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `find?: BetaBrowserFindConfig | null`
+
+              `find`'s config overrides.
+
+              - `defer_loading?: boolean | null`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `enabled?: boolean | null`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `form_input?: BetaBrowserFormInputConfig | null`
+
+              `form_input`'s config overrides.
+
+              - `defer_loading?: boolean | null`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `enabled?: boolean | null`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `get_page_text?: BetaBrowserGetPageTextConfig | null`
+
+              `get_page_text`'s config overrides.
+
+              - `defer_loading?: boolean | null`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `enabled?: boolean | null`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `hold_key?: BetaBrowserHoldKeyConfig | null`
+
+              `hold_key`'s config overrides.
+
+              - `defer_loading?: boolean | null`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `enabled?: boolean | null`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `hover?: BetaBrowserHoverConfig | null`
+
+              `hover`'s config overrides.
+
+              - `defer_loading?: boolean | null`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `enabled?: boolean | null`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `javascript_exec?: BetaBrowserJavascriptExecConfig | null`
+
+              `javascript_exec`'s config overrides.
+
+              - `defer_loading?: boolean | null`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `enabled?: boolean | null`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `key?: BetaBrowserKeyConfig | null`
+
+              `key`'s config overrides.
+
+              - `defer_loading?: boolean | null`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `enabled?: boolean | null`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `left_click?: BetaBrowserLeftClickConfig | null`
+
+              `left_click`'s config overrides.
+
+              - `defer_loading?: boolean | null`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `enabled?: boolean | null`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `left_click_drag?: BetaBrowserLeftClickDragConfig | null`
+
+              `left_click_drag`'s config overrides.
+
+              - `defer_loading?: boolean | null`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `enabled?: boolean | null`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `left_mouse_down?: BetaBrowserLeftMouseDownConfig | null`
+
+              `left_mouse_down`'s config overrides.
+
+              - `defer_loading?: boolean | null`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `enabled?: boolean | null`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `left_mouse_up?: BetaBrowserLeftMouseUpConfig | null`
+
+              `left_mouse_up`'s config overrides.
+
+              - `defer_loading?: boolean | null`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `enabled?: boolean | null`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `list_tabs?: BetaBrowserListTabsConfig | null`
+
+              `list_tabs`'s config overrides.
+
+              - `defer_loading?: boolean | null`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `enabled?: boolean | null`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `middle_click?: BetaBrowserMiddleClickConfig | null`
+
+              `middle_click`'s config overrides.
+
+              - `defer_loading?: boolean | null`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `enabled?: boolean | null`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `mouse_move?: BetaBrowserMouseMoveConfig | null`
+
+              `mouse_move`'s config overrides.
+
+              - `defer_loading?: boolean | null`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `enabled?: boolean | null`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `navigate?: BetaBrowserNavigateConfig | null`
+
+              `navigate`'s config overrides.
+
+              - `defer_loading?: boolean | null`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `enabled?: boolean | null`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `new_tab?: BetaBrowserNewTabConfig | null`
+
+              `new_tab`'s config overrides.
+
+              - `defer_loading?: boolean | null`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `enabled?: boolean | null`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `read_console?: BetaBrowserReadConsoleConfig | null`
+
+              `read_console`'s config overrides.
+
+              - `defer_loading?: boolean | null`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `enabled?: boolean | null`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `read_network?: BetaBrowserReadNetworkConfig | null`
+
+              `read_network`'s config overrides.
+
+              - `defer_loading?: boolean | null`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `enabled?: boolean | null`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `read_page?: BetaBrowserReadPageConfig | null`
+
+              `read_page`'s config overrides.
+
+              - `defer_loading?: boolean | null`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `enabled?: boolean | null`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `right_click?: BetaBrowserRightClickConfig | null`
+
+              `right_click`'s config overrides.
+
+              - `defer_loading?: boolean | null`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `enabled?: boolean | null`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `screenshot?: BetaBrowserScreenshotConfig | null`
+
+              `screenshot`'s config overrides.
+
+              - `defer_loading?: boolean | null`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `enabled?: boolean | null`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `scroll?: BetaBrowserScrollConfig | null`
+
+              `scroll`'s config overrides.
+
+              - `defer_loading?: boolean | null`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `enabled?: boolean | null`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `scroll_to?: BetaBrowserScrollToConfig | null`
+
+              `scroll_to`'s config overrides.
+
+              - `defer_loading?: boolean | null`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `enabled?: boolean | null`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `switch_tab?: BetaBrowserSwitchTabConfig | null`
+
+              `switch_tab`'s config overrides.
+
+              - `defer_loading?: boolean | null`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `enabled?: boolean | null`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `triple_click?: BetaBrowserTripleClickConfig | null`
+
+              `triple_click`'s config overrides.
+
+              - `defer_loading?: boolean | null`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `enabled?: boolean | null`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `type?: BetaBrowserTypeConfig | null`
+
+              `type`'s config overrides.
+
+              - `defer_loading?: boolean | null`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `enabled?: boolean | null`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `wait?: BetaBrowserWaitConfig | null`
+
+              `wait`'s config overrides.
+
+              - `defer_loading?: boolean | null`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `enabled?: boolean | null`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `zoom?: BetaBrowserZoomConfig | null`
+
+              `zoom`'s config overrides.
+
+              - `defer_loading?: boolean | null`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `enabled?: boolean | null`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
         - `BetaToolComputerUse20241022`
 
           - `display_height_px: number`
@@ -34874,6 +40080,248 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
           - `strict?: boolean`
 
             When true, guarantees schema validation on tool names and inputs
+
+        - `BetaComputerToolset20260801`
+
+          The computer toolset: a single `tools[]` entry (carrying no
+          `name`) that declares the computer tool family. The model is
+          served the family's tool with any members disabled via `configs`
+          removed from its schema. Every member is enabled by default, zoom
+          included. The single-tool options `display_number` and
+          `enable_zoom` are not fields of a toolset entry — it carries only
+          `type`, `configs`, and `cache_control`; zoom is controlled
+          via `configs.zoom.enabled`.
+
+          - `type: "computer_toolset_20260801"`
+
+            - `"computer_toolset_20260801"`
+
+          - `allowed_callers?: Array<"direct" | "code_execution_20250825" | "code_execution_20260120" | "code_execution_20260521">`
+
+            - `"direct"`
+
+            - `"code_execution_20250825"`
+
+            - `"code_execution_20260120"`
+
+            - `"code_execution_20260521"`
+
+          - `cache_control?: BetaCacheControlEphemeral | null`
+
+            Create a cache control breakpoint at this content block.
+
+          - `configs?: BetaComputerToolsetConfigs | null`
+
+            Per-member configuration for `computer_toolset_20260801`: one
+            optional field per member tool, keyed by the member name — the same
+            name the member's `tool_use` blocks carry. Every member is an
+            accepted key, and a member's defaults apply wherever its key is
+            absent. Unknown keys are rejected: the field set is this toolset
+            version's complete member set.
+
+            - `cursor_position?: BetaComputerCursorPositionConfig | null`
+
+              `cursor_position`'s config overrides.
+
+              - `defer_loading?: boolean | null`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `enabled?: boolean | null`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `double_click?: BetaComputerDoubleClickConfig | null`
+
+              `double_click`'s config overrides.
+
+              - `defer_loading?: boolean | null`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `enabled?: boolean | null`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `hold_key?: BetaComputerHoldKeyConfig | null`
+
+              `hold_key`'s config overrides.
+
+              - `defer_loading?: boolean | null`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `enabled?: boolean | null`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `key?: BetaComputerKeyConfig | null`
+
+              `key`'s config overrides.
+
+              - `defer_loading?: boolean | null`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `enabled?: boolean | null`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `left_click?: BetaComputerLeftClickConfig | null`
+
+              `left_click`'s config overrides.
+
+              - `defer_loading?: boolean | null`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `enabled?: boolean | null`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `left_click_drag?: BetaComputerLeftClickDragConfig | null`
+
+              `left_click_drag`'s config overrides.
+
+              - `defer_loading?: boolean | null`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `enabled?: boolean | null`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `left_mouse_down?: BetaComputerLeftMouseDownConfig | null`
+
+              `left_mouse_down`'s config overrides.
+
+              - `defer_loading?: boolean | null`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `enabled?: boolean | null`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `left_mouse_up?: BetaComputerLeftMouseUpConfig | null`
+
+              `left_mouse_up`'s config overrides.
+
+              - `defer_loading?: boolean | null`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `enabled?: boolean | null`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `middle_click?: BetaComputerMiddleClickConfig | null`
+
+              `middle_click`'s config overrides.
+
+              - `defer_loading?: boolean | null`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `enabled?: boolean | null`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `mouse_move?: BetaComputerMouseMoveConfig | null`
+
+              `mouse_move`'s config overrides.
+
+              - `defer_loading?: boolean | null`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `enabled?: boolean | null`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `right_click?: BetaComputerRightClickConfig | null`
+
+              `right_click`'s config overrides.
+
+              - `defer_loading?: boolean | null`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `enabled?: boolean | null`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `screenshot?: BetaComputerScreenshotConfig | null`
+
+              `screenshot`'s config overrides.
+
+              - `defer_loading?: boolean | null`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `enabled?: boolean | null`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `scroll?: BetaComputerScrollConfig | null`
+
+              `scroll`'s config overrides.
+
+              - `defer_loading?: boolean | null`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `enabled?: boolean | null`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `triple_click?: BetaComputerTripleClickConfig | null`
+
+              `triple_click`'s config overrides.
+
+              - `defer_loading?: boolean | null`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `enabled?: boolean | null`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `type?: BetaComputerTypeConfig | null`
+
+              `type`'s config overrides.
+
+              - `defer_loading?: boolean | null`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `enabled?: boolean | null`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `wait?: BetaComputerWaitConfig | null`
+
+              `wait`'s config overrides.
+
+              - `defer_loading?: boolean | null`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `enabled?: boolean | null`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `zoom?: BetaComputerZoomConfig | null`
+
+              `zoom`'s config overrides.
+
+              - `defer_loading?: boolean | null`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `enabled?: boolean | null`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
         - `BetaToolTextEditor20250124`
 
@@ -35606,7 +41054,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -35651,6 +41099,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -35784,7 +41234,7 @@ const betaMessageBatch = await client.beta.messages.batches.create({
       params: {
         max_tokens: 1024,
         messages: [{ content: "Hello, world", role: "user" }],
-        model: "claude-opus-4-6"
+        model: "claude-opus-5"
       }
     }
   ]
@@ -35840,7 +41290,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -35885,6 +41335,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -36069,7 +41521,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -36114,6 +41566,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -36298,7 +41752,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -36343,6 +41797,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -36519,7 +41975,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -36564,6 +42020,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -36652,7 +42110,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -36697,6 +42155,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -37006,6 +42466,10 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
                 - `type: "code_execution_20260120"`
 
                   - `"code_execution_20260120"`
+
+            - `toolset_name?: string | null`
+
+              For a toolset member tool_use, the toolset family.
 
           - `BetaServerToolUseBlock`
 
@@ -38897,6 +44361,10 @@ console.log(betaMessageBatchIndividualResponse.custom_id);
 
                   - `"code_execution_20260120"`
 
+            - `toolset_name?: string | null`
+
+              For a toolset member tool_use, the toolset family.
+
           - `BetaServerToolUseBlock`
 
             - `id: string`
@@ -40579,6 +46047,10 @@ console.log(betaMessageBatchIndividualResponse.custom_id);
 
                 - `"code_execution_20260120"`
 
+          - `toolset_name?: string | null`
+
+            For a toolset member tool_use, the toolset family.
+
         - `BetaServerToolUseBlock`
 
           - `id: string`
@@ -42223,6 +47695,10 @@ console.log(betaMessageBatchIndividualResponse.custom_id);
 
               - `"code_execution_20260120"`
 
+        - `toolset_name?: string | null`
+
+          For a toolset member tool_use, the toolset family.
+
       - `BetaServerToolUseBlock`
 
         - `id: string`
@@ -43512,7 +48988,7 @@ Create Agent
 
   - `model: BetaManagedAgentsModel | BetaManagedAgentsModelConfigParams`
 
-    Body param: Model identifier. Accepts the [model string](../about-claude/about-claude-models-overview.md#latest-models-comparison), e.g. `claude-opus-4-6`, or a `model_config` object for additional configuration control
+    Body param: Model identifier. Accepts the [model string](../about-claude/about-claude-models-overview.md#latest-models-comparison), e.g. `claude-opus-5`, or a `model_config` object for additional configuration control
 
     - `BetaManagedAgentsModel = "claude-sonnet-5" | "claude-fable-5" | "claude-opus-5" | 10 more | (string & {})`
 
@@ -43942,7 +49418,7 @@ Create Agent
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -43987,6 +49463,8 @@ Create Agent
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -44388,7 +49866,7 @@ const client = new Anthropic({
 });
 
 const betaManagedAgentsAgent = await client.beta.agents.create({
-  model: "claude-sonnet-4-6",
+  model: "claude-opus-5",
   name: "My First Agent"
 });
 
@@ -44414,7 +49892,7 @@ console.log(betaManagedAgentsAgent.id);
     "foo": "bar"
   },
   "model": {
-    "id": "claude-sonnet-4-6",
+    "id": "claude-opus-5",
     "effort": {
       "type": "low"
     },
@@ -44509,7 +49987,7 @@ List Agents
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -44554,6 +50032,8 @@ List Agents
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -44981,7 +50461,7 @@ for await (const betaManagedAgentsAgent of client.beta.agents.list()) {
         "foo": "bar"
       },
       "model": {
-        "id": "claude-sonnet-4-6",
+        "id": "claude-opus-5",
         "effort": {
           "type": "low"
         },
@@ -45065,7 +50545,7 @@ Get Agent
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -45110,6 +50590,8 @@ Get Agent
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -45536,7 +51018,7 @@ console.log(betaManagedAgentsAgent.id);
     "foo": "bar"
   },
   "model": {
-    "id": "claude-sonnet-4-6",
+    "id": "claude-opus-5",
     "effort": {
       "type": "low"
     },
@@ -45633,7 +51115,7 @@ Update Agent
 
   - `model?: BetaManagedAgentsModel | BetaManagedAgentsModelConfigParams`
 
-    Body param: Model identifier. Accepts the [model string](../about-claude/about-claude-models-overview.md#latest-models-comparison), e.g. `claude-opus-4-6`, or a `model_config` object for additional configuration control. Omit to preserve. Cannot be cleared.
+    Body param: Model identifier. Accepts the [model string](../about-claude/about-claude-models-overview.md#latest-models-comparison), e.g. `claude-opus-5`, or a `model_config` object for additional configuration control. Omit to preserve. Cannot be cleared.
 
     - `BetaManagedAgentsModel = "claude-sonnet-5" | "claude-fable-5" | "claude-opus-5" | 10 more | (string & {})`
 
@@ -46043,7 +51525,7 @@ Update Agent
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -46088,6 +51570,8 @@ Update Agent
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -46515,7 +51999,7 @@ console.log(betaManagedAgentsAgent.id);
     "foo": "bar"
   },
   "model": {
-    "id": "claude-sonnet-4-6",
+    "id": "claude-opus-5",
     "effort": {
       "type": "low"
     },
@@ -46592,7 +52076,7 @@ Archive Agent
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -46637,6 +52121,8 @@ Archive Agent
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -47063,7 +52549,7 @@ console.log(betaManagedAgentsAgent.id);
     "foo": "bar"
   },
   "model": {
-    "id": "claude-sonnet-4-6",
+    "id": "claude-opus-5",
     "effort": {
       "type": "low"
     },
@@ -49224,7 +54710,7 @@ List Agent Versions
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -49269,6 +54755,8 @@ List Agent Versions
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -49698,7 +55186,7 @@ for await (const betaManagedAgentsAgent of client.beta.agents.versions.list(
         "foo": "bar"
       },
       "model": {
-        "id": "claude-sonnet-4-6",
+        "id": "claude-opus-5",
         "effort": {
           "type": "low"
         },
@@ -49900,7 +55388,7 @@ Create a new environment with the specified configuration.
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -49945,6 +55433,8 @@ Create a new environment with the specified configuration.
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -50080,9 +55570,9 @@ Create a new environment with the specified configuration.
 
     RFC 3339 timestamp when environment was created
 
-  - `description: string`
+  - `description: string | null`
 
-    User-provided description for the environment
+    User-provided description for the environment; null when unset
 
   - `metadata: Record<string, string>`
 
@@ -50205,7 +55695,7 @@ List environments with pagination support.
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -50250,6 +55740,8 @@ List environments with pagination support.
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -50385,9 +55877,9 @@ List environments with pagination support.
 
     RFC 3339 timestamp when environment was created
 
-  - `description: string`
+  - `description: string | null`
 
-    User-provided description for the environment
+    User-provided description for the environment; null when unset
 
   - `metadata: Record<string, string>`
 
@@ -50504,7 +55996,7 @@ Retrieve a specific environment by ID.
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -50549,6 +56041,8 @@ Retrieve a specific environment by ID.
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -50684,9 +56178,9 @@ Retrieve a specific environment by ID.
 
     RFC 3339 timestamp when environment was created
 
-  - `description: string`
+  - `description: string | null`
 
-    User-provided description for the environment
+    User-provided description for the environment; null when unset
 
   - `metadata: Record<string, string>`
 
@@ -50897,7 +56391,7 @@ Update an existing environment's configuration.
 
   - `description?: string | null`
 
-    Body param: Updated description of the environment
+    Body param: Updated description of the environment. Omit to preserve; null clears to null; an empty string is stored as an empty string.
 
   - `metadata?: Record<string, string | null>`
 
@@ -50921,7 +56415,7 @@ Update an existing environment's configuration.
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -50966,6 +56460,8 @@ Update an existing environment's configuration.
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -51101,9 +56597,9 @@ Update an existing environment's configuration.
 
     RFC 3339 timestamp when environment was created
 
-  - `description: string`
+  - `description: string | null`
 
-    User-provided description for the environment
+    User-provided description for the environment; null when unset
 
   - `metadata: Record<string, string>`
 
@@ -51214,7 +56710,7 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -51259,6 +56755,8 @@ Delete an environment by ID. Returns a confirmation of the deletion.
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -51343,7 +56841,7 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -51388,6 +56886,8 @@ Archive an environment by ID. Archived environments cannot be used to create new
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -51523,9 +57023,9 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
     RFC 3339 timestamp when environment was created
 
-  - `description: string`
+  - `description: string | null`
 
-    User-provided description for the environment
+    User-provided description for the environment; null when unset
 
   - `metadata: Record<string, string>`
 
@@ -51902,9 +57402,9 @@ console.log(betaEnvironment.id);
 
     RFC 3339 timestamp when environment was created
 
-  - `description: string`
+  - `description: string | null`
 
-    User-provided description for the environment
+    User-provided description for the environment; null when unset
 
   - `metadata: Record<string, string>`
 
@@ -52137,7 +57637,7 @@ Retrieve detailed information about a specific work item.
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -52182,6 +57682,8 @@ Retrieve detailed information about a specific work item.
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -52360,7 +57862,7 @@ Long poll for work items in the queue.
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -52405,6 +57907,8 @@ Long poll for work items in the queue.
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -52577,7 +58081,7 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -52622,6 +58126,8 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -52804,7 +58310,7 @@ Record a heartbeat for a work item to maintain the lease.
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -52849,6 +58355,8 @@ Record a heartbeat for a work item to maintain the lease.
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -52969,7 +58477,7 @@ Stop a work item, initiating graceful or forced shutdown.
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -53014,6 +58522,8 @@ Stop a work item, initiating graceful or forced shutdown.
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -53192,7 +58702,7 @@ List work items in an environment.
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -53237,6 +58747,8 @@ List work items in an environment.
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -53421,7 +58933,7 @@ Update work item metadata with merge semantics.
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -53466,6 +58978,8 @@ Update work item metadata with merge semantics.
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -53635,7 +59149,7 @@ Get statistics about the work queue for an environment.
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -53680,6 +59194,8 @@ Get statistics about the work queue for an environment.
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -54108,7 +59624,7 @@ Create Session
 
       - `model?: BetaManagedAgentsModel | BetaManagedAgentsModelConfigParams`
 
-        Replacement model. Accepts the model string, e.g. `claude-opus-4-6`, or a `model_config` object. Omit to use the agent's model.
+        Replacement model. Accepts the model string, e.g. `claude-opus-5`, or a `model_config` object. Omit to use the agent's model.
 
         - `BetaManagedAgentsModel = "claude-sonnet-5" | "claude-fable-5" | "claude-opus-5" | 10 more | (string & {})`
 
@@ -54800,7 +60316,7 @@ Create Session
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -54845,6 +60361,8 @@ Create Session
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -55553,7 +61071,7 @@ console.log(betaManagedAgentsSession.id);
       }
     ],
     "model": {
-      "id": "claude-sonnet-4-6",
+      "id": "claude-opus-5",
       "effort": {
         "type": "low"
       },
@@ -55573,7 +61091,7 @@ console.log(betaManagedAgentsSession.id);
             }
           ],
           "model": {
-            "id": "claude-sonnet-4-6",
+            "id": "claude-opus-5",
             "effort": {
               "type": "low"
             },
@@ -55811,7 +61329,7 @@ List Sessions
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -55856,6 +61374,8 @@ List Sessions
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -56564,7 +62084,7 @@ for await (const betaManagedAgentsSession of client.beta.sessions.list()) {
           }
         ],
         "model": {
-          "id": "claude-sonnet-4-6",
+          "id": "claude-opus-5",
           "effort": {
             "type": "low"
           },
@@ -56584,7 +62104,7 @@ for await (const betaManagedAgentsSession of client.beta.sessions.list()) {
                 }
               ],
               "model": {
-                "id": "claude-sonnet-4-6",
+                "id": "claude-opus-5",
                 "effort": {
                   "type": "low"
                 },
@@ -56764,7 +62284,7 @@ Get Session
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -56809,6 +62329,8 @@ Get Session
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -57516,7 +63038,7 @@ console.log(betaManagedAgentsSession.id);
       }
     ],
     "model": {
-      "id": "claude-sonnet-4-6",
+      "id": "claude-opus-5",
       "effort": {
         "type": "low"
       },
@@ -57536,7 +63058,7 @@ console.log(betaManagedAgentsSession.id);
             }
           ],
           "model": {
-            "id": "claude-sonnet-4-6",
+            "id": "claude-opus-5",
             "effort": {
               "type": "low"
             },
@@ -57930,7 +63452,7 @@ Update Session
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -57975,6 +63497,8 @@ Update Session
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -58682,7 +64206,7 @@ console.log(betaManagedAgentsSession.id);
       }
     ],
     "model": {
-      "id": "claude-sonnet-4-6",
+      "id": "claude-opus-5",
       "effort": {
         "type": "low"
       },
@@ -58702,7 +64226,7 @@ console.log(betaManagedAgentsSession.id);
             }
           ],
           "model": {
-            "id": "claude-sonnet-4-6",
+            "id": "claude-opus-5",
             "effort": {
               "type": "low"
             },
@@ -58878,7 +64402,7 @@ Delete Session
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -58923,6 +64447,8 @@ Delete Session
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -59003,7 +64529,7 @@ Archive Session
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -59048,6 +64574,8 @@ Archive Session
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -59755,7 +65283,7 @@ console.log(betaManagedAgentsSession.id);
       }
     ],
     "model": {
-      "id": "claude-sonnet-4-6",
+      "id": "claude-opus-5",
       "effort": {
         "type": "low"
       },
@@ -59775,7 +65303,7 @@ console.log(betaManagedAgentsSession.id);
             }
           ],
           "model": {
-            "id": "claude-sonnet-4-6",
+            "id": "claude-opus-5",
             "effort": {
               "type": "low"
             },
@@ -60021,7 +65549,7 @@ console.log(betaManagedAgentsSession.id);
 
   - `model?: BetaManagedAgentsModel | BetaManagedAgentsModelConfigParams`
 
-    Replacement model. Accepts the model string, e.g. `claude-opus-4-6`, or a `model_config` object. Omit to use the agent's model.
+    Replacement model. Accepts the model string, e.g. `claude-opus-5`, or a `model_config` object. Omit to use the agent's model.
 
     - `BetaManagedAgentsModel = "claude-sonnet-5" | "claude-fable-5" | "claude-opus-5" | 10 more | (string & {})`
 
@@ -63327,7 +68855,7 @@ List Events
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -63372,6 +68900,8 @@ List Events
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -65812,7 +71342,7 @@ Send Events
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -65857,6 +71387,8 @@ Send Events
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -66397,7 +71929,7 @@ Stream Events
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -66442,6 +71974,8 @@ Stream Events
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -77219,7 +82753,7 @@ Add Session Resource
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -77264,6 +82798,8 @@ Add Session Resource
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -77367,7 +82903,7 @@ List Session Resources
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -77412,6 +82948,8 @@ List Session Resources
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -77610,7 +83148,7 @@ Get Session Resource
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -77655,6 +83193,8 @@ Get Session Resource
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -77844,7 +83384,7 @@ Update Session Resource
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -77889,6 +83429,8 @@ Update Session Resource
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -78074,7 +83616,7 @@ Delete Session Resource
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -78119,6 +83661,8 @@ Delete Session Resource
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -78640,7 +84184,7 @@ List Session Threads
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -78685,6 +84229,8 @@ List Session Threads
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -79193,7 +84739,7 @@ for await (const betaManagedAgentsSessionThread of client.beta.sessions.threads.
           }
         ],
         "model": {
-          "id": "claude-sonnet-4-6",
+          "id": "claude-opus-5",
           "effort": {
             "type": "low"
           },
@@ -79292,7 +84838,7 @@ Get Session Thread
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -79337,6 +84883,8 @@ Get Session Thread
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -79843,7 +85391,7 @@ console.log(betaManagedAgentsSessionThread.id);
       }
     ],
     "model": {
-      "id": "claude-sonnet-4-6",
+      "id": "claude-opus-5",
       "effort": {
         "type": "low"
       },
@@ -79939,7 +85487,7 @@ Archive Session Thread
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -79984,6 +85532,8 @@ Archive Session Thread
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -80490,7 +86040,7 @@ console.log(betaManagedAgentsSessionThread.id);
       }
     ],
     "model": {
-      "id": "claude-sonnet-4-6",
+      "id": "claude-opus-5",
       "effort": {
         "type": "low"
       },
@@ -83178,7 +88728,7 @@ List Session Thread Events
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -83223,6 +88773,8 @@ List Session Thread Events
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -85295,7 +90847,7 @@ Stream Session Thread Events
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -85340,6 +90892,8 @@ Stream Session Thread Events
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -87852,7 +93406,7 @@ Create Deployment
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -87897,6 +93451,8 @@ Create Deployment
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -88620,7 +94176,7 @@ List Deployments
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -88665,6 +94221,8 @@ List Deployments
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -89357,7 +94915,7 @@ Get Deployment
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -89402,6 +94960,8 @@ Get Deployment
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -90488,7 +96048,7 @@ Update Deployment
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -90533,6 +96093,8 @@ Update Deployment
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -91221,7 +96783,7 @@ Archive Deployment
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -91266,6 +96828,8 @@ Archive Deployment
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -91954,7 +97518,7 @@ Run Deployment Now
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -91999,6 +97563,8 @@ Run Deployment Now
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -92341,7 +97907,7 @@ Pause Deployment
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -92386,6 +97952,8 @@ Pause Deployment
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -93074,7 +98642,7 @@ Unpause Deployment
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -93119,6 +98687,8 @@ Unpause Deployment
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -95909,7 +101479,7 @@ List Deployment Runs
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -95954,6 +101524,8 @@ List Deployment Runs
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -96300,7 +101872,7 @@ Get Deployment Run
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -96345,6 +101917,8 @@ Get Deployment Run
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -97239,7 +102813,7 @@ Create Vault
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -97284,6 +102858,8 @@ Create Vault
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -97403,7 +102979,7 @@ List Vaults
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -97448,6 +103024,8 @@ List Vaults
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -97561,7 +103139,7 @@ Get Vault
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -97606,6 +103184,8 @@ Get Vault
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -97723,7 +103303,7 @@ Update Vault
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -97768,6 +103348,8 @@ Update Vault
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -97875,7 +103457,7 @@ Delete Vault
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -97920,6 +103502,8 @@ Delete Vault
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -98002,7 +103586,7 @@ Archive Vault
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -98047,6 +103631,8 @@ Archive Vault
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -98368,7 +103954,7 @@ Create Credential
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -98413,6 +103999,8 @@ Create Credential
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -98678,7 +104266,7 @@ List Credentials
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -98723,6 +104311,8 @@ List Credentials
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -98979,7 +104569,7 @@ Get Credential
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -99024,6 +104614,8 @@ Get Credential
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -99403,7 +104995,7 @@ Update Credential
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -99448,6 +105040,8 @@ Update Credential
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -99699,7 +105293,7 @@ Delete Credential
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -99744,6 +105338,8 @@ Delete Credential
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -99831,7 +105427,7 @@ Archive Credential
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -99876,6 +105472,8 @@ Archive Credential
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -100127,7 +105725,7 @@ Validate Credential
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -100172,6 +105770,8 @@ Validate Credential
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -101499,7 +107099,7 @@ Create a memory store
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -101544,6 +107144,8 @@ Create a memory store
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -101674,7 +107276,7 @@ List memory stores
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -101719,6 +107321,8 @@ List memory stores
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -101837,7 +107441,7 @@ Retrieve a memory store
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -101882,6 +107486,8 @@ Retrieve a memory store
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -102008,7 +107614,7 @@ Update a memory store
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -102053,6 +107659,8 @@ Update a memory store
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -102165,7 +107773,7 @@ Delete a memory store
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -102210,6 +107818,8 @@ Delete a memory store
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -102292,7 +107902,7 @@ Archive a memory store
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -102337,6 +107947,8 @@ Archive a memory store
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -102521,7 +108133,7 @@ Create a memory
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -102566,6 +108178,8 @@ Create a memory
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -102713,7 +108327,7 @@ List memories
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -102758,6 +108372,8 @@ List memories
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -102914,7 +108530,7 @@ Retrieve a memory
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -102959,6 +108575,8 @@ Retrieve a memory
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -103113,7 +108731,7 @@ Update a memory
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -103158,6 +108776,8 @@ Update a memory
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -103288,7 +108908,7 @@ Delete a memory
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -103333,6 +108953,8 @@ Delete a memory
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -103760,6 +109382,10 @@ List memory versions
 
     Query param: Query parameter for page
 
+  - `service_account_id?: string`
+
+    Query param: Query parameter for service_account_id
+
   - `session_id?: string`
 
     Query param: Query parameter for session_id
@@ -103778,7 +109404,7 @@ List memory versions
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -103823,6 +109449,8 @@ List memory versions
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -103933,6 +109561,18 @@ List memory versions
       - `user_id: string`
 
         ID of the user who performed the write (a `user_...` value).
+
+    - `BetaManagedAgentsServiceAccountActor`
+
+      Attribution for a write made by a workload authenticated as a service account, for example via Workload Identity Federation.
+
+      - `service_account_id: string`
+
+        ID of the service account that performed the write (a `svac_...` value).
+
+      - `type: "service_account_actor"`
+
+        - `"service_account_actor"`
 
   - `path?: string | null`
 
@@ -104026,7 +109666,7 @@ Retrieve a memory version
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -104071,6 +109711,8 @@ Retrieve a memory version
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -104181,6 +109823,18 @@ Retrieve a memory version
       - `user_id: string`
 
         ID of the user who performed the write (a `user_...` value).
+
+    - `BetaManagedAgentsServiceAccountActor`
+
+      Attribution for a write made by a workload authenticated as a service account, for example via Workload Identity Federation.
+
+      - `service_account_id: string`
+
+        ID of the service account that performed the write (a `svac_...` value).
+
+      - `type: "service_account_actor"`
+
+        - `"service_account_actor"`
 
   - `path?: string | null`
 
@@ -104261,7 +109915,7 @@ Redact a memory version
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -104306,6 +109960,8 @@ Redact a memory version
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -104417,6 +110073,18 @@ Redact a memory version
 
         ID of the user who performed the write (a `user_...` value).
 
+    - `BetaManagedAgentsServiceAccountActor`
+
+      Attribution for a write made by a workload authenticated as a service account, for example via Workload Identity Federation.
+
+      - `service_account_id: string`
+
+        ID of the service account that performed the write (a `svac_...` value).
+
+      - `type: "service_account_actor"`
+
+        - `"service_account_actor"`
+
   - `path?: string | null`
 
     The memory's path at the time of this write. `null` if and only if `redacted_at` is set.
@@ -104476,7 +110144,7 @@ console.log(betaManagedAgentsMemoryVersion.id);
 
 ### Beta Managed Agents Actor
 
-- `BetaManagedAgentsActor = BetaManagedAgentsSessionActor | BetaManagedAgentsAPIActor | BetaManagedAgentsUserActor`
+- `BetaManagedAgentsActor = BetaManagedAgentsSessionActor | BetaManagedAgentsAPIActor | BetaManagedAgentsUserActor | BetaManagedAgentsServiceAccountActor`
 
   Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](https://platform.claude.com/docs/en/api/sessions-retrieve.md).
 
@@ -104515,6 +110183,18 @@ console.log(betaManagedAgentsMemoryVersion.id);
     - `user_id: string`
 
       ID of the user who performed the write (a `user_...` value).
+
+  - `BetaManagedAgentsServiceAccountActor`
+
+    Attribution for a write made by a workload authenticated as a service account, for example via Workload Identity Federation.
+
+    - `service_account_id: string`
+
+      ID of the service account that performed the write (a `svac_...` value).
+
+    - `type: "service_account_actor"`
+
+      - `"service_account_actor"`
 
 ### Beta Managed Agents API Actor
 
@@ -104618,6 +110298,18 @@ console.log(betaManagedAgentsMemoryVersion.id);
 
         ID of the user who performed the write (a `user_...` value).
 
+    - `BetaManagedAgentsServiceAccountActor`
+
+      Attribution for a write made by a workload authenticated as a service account, for example via Workload Identity Federation.
+
+      - `service_account_id: string`
+
+        ID of the service account that performed the write (a `svac_...` value).
+
+      - `type: "service_account_actor"`
+
+        - `"service_account_actor"`
+
   - `path?: string | null`
 
     The memory's path at the time of this write. `null` if and only if `redacted_at` is set.
@@ -104641,6 +110333,20 @@ console.log(betaManagedAgentsMemoryVersion.id);
   - `"modified"`
 
   - `"deleted"`
+
+### Beta Managed Agents Service Account Actor
+
+- `BetaManagedAgentsServiceAccountActor`
+
+  Attribution for a write made by a workload authenticated as a service account, for example via Workload Identity Federation.
+
+  - `service_account_id: string`
+
+    ID of the service account that performed the write (a `svac_...` value).
+
+  - `type: "service_account_actor"`
+
+    - `"service_account_actor"`
 
 ### Beta Managed Agents Session Actor
 
@@ -104674,7 +110380,7 @@ console.log(betaManagedAgentsMemoryVersion.id);
 
 ## Upload File
 
-`client.beta.files.upload(FileUploadParamsparams, RequestOptionsoptions?): FileMetadata`
+`client.beta.files.upload(FileUploadParamsparams, RequestOptionsoptions?): BetaFileMetadata`
 
 **post** `/v1/files`
 
@@ -104694,7 +110400,7 @@ Upload File
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -104740,6 +110446,8 @@ Upload File
 
       - `"user-profiles-2026-03-24"`
 
+      - `"user-profiles-2026-08-18"`
+
       - `"advisor-tool-2026-03-01"`
 
       - `"managed-agents-2026-04-01"`
@@ -104764,7 +110472,7 @@ Upload File
 
 ### Returns
 
-- `FileMetadata`
+- `BetaFileMetadata`
 
   - `id: string`
 
@@ -104824,11 +110532,11 @@ const client = new Anthropic({
   apiKey: process.env["ANTHROPIC_API_KEY"] // This is the default and can be omitted
 });
 
-const fileMetadata = await client.beta.files.upload({
+const betaFileMetadata = await client.beta.files.upload({
   file: fs.createReadStream("path/to/file")
 });
 
-console.log(fileMetadata.id);
+console.log(betaFileMetadata.id);
 ```
 
 #### Response
@@ -104851,7 +110559,7 @@ console.log(fileMetadata.id);
 
 ## List Files
 
-`client.beta.files.list(FileListParamsparams?, RequestOptionsoptions?): Page<FileMetadata>`
+`client.beta.files.list(FileListParamsparams?, RequestOptionsoptions?): Page<BetaFileMetadata>`
 
 **get** `/v1/files`
 
@@ -104885,7 +110593,7 @@ List Files
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -104931,6 +110639,8 @@ List Files
 
       - `"user-profiles-2026-03-24"`
 
+      - `"user-profiles-2026-08-18"`
+
       - `"advisor-tool-2026-03-01"`
 
       - `"managed-agents-2026-04-01"`
@@ -104955,7 +110665,7 @@ List Files
 
 ### Returns
 
-- `FileMetadata`
+- `BetaFileMetadata`
 
   - `id: string`
 
@@ -105015,8 +110725,8 @@ const client = new Anthropic({
 });
 
 // Automatically fetches more pages as needed.
-for await (const fileMetadata of client.beta.files.list()) {
-  console.log(fileMetadata.id);
+for await (const betaFileMetadata of client.beta.files.list()) {
+  console.log(betaFileMetadata.id);
 }
 ```
 
@@ -105067,7 +110777,7 @@ Download File
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -105113,6 +110823,8 @@ Download File
 
       - `"user-profiles-2026-03-24"`
 
+      - `"user-profiles-2026-08-18"`
+
       - `"advisor-tool-2026-03-01"`
 
       - `"managed-agents-2026-04-01"`
@@ -105137,7 +110849,7 @@ Download File
 
 ### Returns
 
-- `unnamed_schema_0 = Response`
+- `unnamed_schema_1 = Response`
 
 ### Example
 
@@ -105158,7 +110870,7 @@ console.log(content);
 
 ## Get File Metadata
 
-`client.beta.files.retrieveMetadata(stringfileID, FileRetrieveMetadataParamsparams?, RequestOptionsoptions?): FileMetadata`
+`client.beta.files.retrieveMetadata(stringfileID, FileRetrieveMetadataParamsparams?, RequestOptionsoptions?): BetaFileMetadata`
 
 **get** `/v1/files/{file_id}`
 
@@ -105178,7 +110890,7 @@ Get File Metadata
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -105224,6 +110936,8 @@ Get File Metadata
 
       - `"user-profiles-2026-03-24"`
 
+      - `"user-profiles-2026-08-18"`
+
       - `"advisor-tool-2026-03-01"`
 
       - `"managed-agents-2026-04-01"`
@@ -105248,7 +110962,7 @@ Get File Metadata
 
 ### Returns
 
-- `FileMetadata`
+- `BetaFileMetadata`
 
   - `id: string`
 
@@ -105307,9 +111021,9 @@ const client = new Anthropic({
   apiKey: process.env["ANTHROPIC_API_KEY"] // This is the default and can be omitted
 });
 
-const fileMetadata = await client.beta.files.retrieveMetadata("file_id");
+const betaFileMetadata = await client.beta.files.retrieveMetadata("file_id");
 
-console.log(fileMetadata.id);
+console.log(betaFileMetadata.id);
 ```
 
 #### Response
@@ -105332,7 +111046,7 @@ console.log(fileMetadata.id);
 
 ## Delete File
 
-`client.beta.files.delete(stringfileID, FileDeleteParamsparams?, RequestOptionsoptions?): DeletedFile`
+`client.beta.files.delete(stringfileID, FileDeleteParamsparams?, RequestOptionsoptions?): BetaDeletedFile`
 
 **delete** `/v1/files/{file_id}`
 
@@ -105352,7 +111066,7 @@ Delete File
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -105398,6 +111112,8 @@ Delete File
 
       - `"user-profiles-2026-03-24"`
 
+      - `"user-profiles-2026-08-18"`
+
       - `"advisor-tool-2026-03-01"`
 
       - `"managed-agents-2026-04-01"`
@@ -105422,7 +111138,7 @@ Delete File
 
 ### Returns
 
-- `DeletedFile`
+- `BetaDeletedFile`
 
   - `id: string`
 
@@ -105445,9 +111161,9 @@ const client = new Anthropic({
   apiKey: process.env["ANTHROPIC_API_KEY"] // This is the default and can be omitted
 });
 
-const deletedFile = await client.beta.files.delete("file_id");
+const betaDeletedFile = await client.beta.files.delete("file_id");
 
-console.log(deletedFile.id);
+console.log(betaDeletedFile.id);
 ```
 
 #### Response
@@ -105461,23 +111177,9 @@ console.log(deletedFile.id);
 
 ## Domain Types
 
-### Beta File Scope
+### Beta Deleted File
 
-- `BetaFileScope`
-
-  - `id: string`
-
-    The ID of the scoping resource (e.g., the session ID).
-
-  - `type: "session"`
-
-    The type of scope (e.g., `"session"`).
-
-    - `"session"`
-
-### Deleted File
-
-- `DeletedFile`
+- `BetaDeletedFile`
 
   - `id: string`
 
@@ -105491,9 +111193,9 @@ console.log(deletedFile.id);
 
     - `"file_deleted"`
 
-### File Metadata
+### Beta File Metadata
 
-- `FileMetadata`
+- `BetaFileMetadata`
 
   - `id: string`
 
@@ -105542,6 +111244,20 @@ console.log(deletedFile.id);
       The type of scope (e.g., `"session"`).
 
       - `"session"`
+
+### Beta File Scope
+
+- `BetaFileScope`
+
+  - `id: string`
+
+    The ID of the scoping resource (e.g., the session ID).
+
+  - `type: "session"`
+
+    The type of scope (e.g., `"session"`).
+
+    - `"session"`
 
 # Skills
 
@@ -105575,7 +111291,7 @@ Create Skill
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -105620,6 +111336,8 @@ Create Skill
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -105757,7 +111475,7 @@ List Skills
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -105802,6 +111520,8 @@ List Skills
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -105929,7 +111649,7 @@ Get Skill
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -105974,6 +111694,8 @@ Get Skill
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -106094,7 +111816,7 @@ Delete Skill
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -106139,6 +111861,8 @@ Delete Skill
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -106386,7 +112110,7 @@ Create Skill Version
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -106431,6 +112155,8 @@ Create Skill Version
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -106567,7 +112293,7 @@ List Skill Versions
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -106612,6 +112338,8 @@ List Skill Versions
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -106749,7 +112477,7 @@ Download a skill version's content as a zip archive.
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -106795,6 +112523,8 @@ Download a skill version's content as a zip archive.
 
       - `"user-profiles-2026-03-24"`
 
+      - `"user-profiles-2026-08-18"`
+
       - `"advisor-tool-2026-03-01"`
 
       - `"managed-agents-2026-04-01"`
@@ -106819,7 +112549,7 @@ Download a skill version's content as a zip archive.
 
 ### Returns
 
-- `unnamed_schema_1 = Response`
+- `unnamed_schema_2 = Response`
 
 ### Example
 
@@ -106870,7 +112600,7 @@ Get Skill Version
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -106915,6 +112645,8 @@ Get Skill Version
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -107047,7 +112779,7 @@ Delete Skill Version
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -107092,6 +112824,8 @@ Delete Skill Version
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -107330,6 +113064,14 @@ Create User Profile
 
 - `params: UserProfileCreateParams`
 
+  - `access_type?: "application" | "passthrough"`
+
+    Body param: How the platform uses the API on behalf of the entity this profile represents. `application`: the platform sells a product that uses the API behind the scenes, and the profile represents an individual end-user of that product. `passthrough`: the platform resells raw inference, and the profile identifies the resold-to company.
+
+    - `"application"`
+
+    - `"passthrough"`
+
   - `external_id?: string | null`
 
     Body param: Platform's own identifier for this user. Not enforced unique. Maximum 255 characters.
@@ -107340,7 +113082,7 @@ Create User Profile
 
   - `name?: string | null`
 
-    Body param: Display name of the entity this profile represents. Required when relationship is `resold` (the resold-to company's name); optional otherwise. Maximum 255 characters.
+    Body param: Optional for all profiles. Real-world name of the entity this profile represents (company or individual); for a resold-to company (`relationship` `resold` / `access_type` `passthrough`), that company's name where known. Maximum 255 characters.
 
   - `relationship?: "external" | "resold" | "internal"`
 
@@ -107358,7 +113100,7 @@ Create User Profile
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -107404,6 +113146,8 @@ Create User Profile
 
       - `"user-profiles-2026-03-24"`
 
+      - `"user-profiles-2026-08-18"`
+
       - `"advisor-tool-2026-03-01"`
 
       - `"managed-agents-2026-04-01"`
@@ -107442,16 +113186,6 @@ Create User Profile
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
-  - `relationship: "external" | "resold" | "internal"`
-
-    How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
-
-    - `"external"`
-
-    - `"resold"`
-
-    - `"internal"`
-
   - `trust_grants: Record<string, BetaUserProfileTrustGrant>`
 
     Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
@@ -107476,13 +113210,31 @@ Create User Profile
 
     A timestamp in RFC 3339 format
 
+  - `access_type?: "application" | "passthrough"`
+
+    How the platform uses the API on behalf of the entity this profile represents. `application`: the platform sells a product that uses the API behind the scenes, and the profile represents an individual end-user of that product. `passthrough`: the platform resells raw inference, and the profile identifies the resold-to company.
+
+    - `"application"`
+
+    - `"passthrough"`
+
   - `external_id?: string | null`
 
     Platform's own identifier for this user. Not enforced unique.
 
   - `name?: string | null`
 
-    Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
+    Real-world name of the entity this profile represents (company or individual). For a resold-to company (`access_type` `passthrough`, or `relationship` `resold` under the `user-profiles-2026-03-24` header) this is that company's name.
+
+  - `relationship?: "external" | "resold" | "internal"`
+
+    How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+
+    - `"external"`
+
+    - `"resold"`
+
+    - `"internal"`
 
 ### Example
 
@@ -107505,7 +113257,6 @@ console.log(betaUserProfile.id);
   "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
   "created_at": "2026-03-15T10:00:00Z",
   "metadata": {},
-  "relationship": "external",
   "trust_grants": {
     "cyber": {
       "status": "active"
@@ -107513,8 +113264,10 @@ console.log(betaUserProfile.id);
   },
   "type": "user_profile",
   "updated_at": "2026-03-15T10:00:00Z",
+  "access_type": "application",
   "external_id": "user_12345",
-  "name": "Example User"
+  "name": "Example User",
+  "relationship": "external"
 }
 ```
 
@@ -107552,7 +113305,7 @@ List User Profiles
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -107598,6 +113351,8 @@ List User Profiles
 
       - `"user-profiles-2026-03-24"`
 
+      - `"user-profiles-2026-08-18"`
+
       - `"advisor-tool-2026-03-01"`
 
       - `"managed-agents-2026-04-01"`
@@ -107636,16 +113391,6 @@ List User Profiles
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
-  - `relationship: "external" | "resold" | "internal"`
-
-    How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
-
-    - `"external"`
-
-    - `"resold"`
-
-    - `"internal"`
-
   - `trust_grants: Record<string, BetaUserProfileTrustGrant>`
 
     Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
@@ -107670,13 +113415,31 @@ List User Profiles
 
     A timestamp in RFC 3339 format
 
+  - `access_type?: "application" | "passthrough"`
+
+    How the platform uses the API on behalf of the entity this profile represents. `application`: the platform sells a product that uses the API behind the scenes, and the profile represents an individual end-user of that product. `passthrough`: the platform resells raw inference, and the profile identifies the resold-to company.
+
+    - `"application"`
+
+    - `"passthrough"`
+
   - `external_id?: string | null`
 
     Platform's own identifier for this user. Not enforced unique.
 
   - `name?: string | null`
 
-    Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
+    Real-world name of the entity this profile represents (company or individual). For a resold-to company (`access_type` `passthrough`, or `relationship` `resold` under the `user-profiles-2026-03-24` header) this is that company's name.
+
+  - `relationship?: "external" | "resold" | "internal"`
+
+    How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+
+    - `"external"`
+
+    - `"resold"`
+
+    - `"internal"`
 
 ### Example
 
@@ -107702,7 +113465,6 @@ for await (const betaUserProfile of client.beta.userProfiles.list()) {
       "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
       "created_at": "2026-03-15T10:00:00Z",
       "metadata": {},
-      "relationship": "external",
       "trust_grants": {
         "cyber": {
           "status": "active"
@@ -107710,8 +113472,10 @@ for await (const betaUserProfile of client.beta.userProfiles.list()) {
       },
       "type": "user_profile",
       "updated_at": "2026-03-15T10:00:00Z",
+      "access_type": "application",
       "external_id": "user_12345",
-      "name": "Example User"
+      "name": "Example User",
+      "relationship": "external"
     }
   ],
   "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
@@ -107738,7 +113502,7 @@ Get User Profile
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -107784,6 +113548,8 @@ Get User Profile
 
       - `"user-profiles-2026-03-24"`
 
+      - `"user-profiles-2026-08-18"`
+
       - `"advisor-tool-2026-03-01"`
 
       - `"managed-agents-2026-04-01"`
@@ -107822,16 +113588,6 @@ Get User Profile
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
-  - `relationship: "external" | "resold" | "internal"`
-
-    How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
-
-    - `"external"`
-
-    - `"resold"`
-
-    - `"internal"`
-
   - `trust_grants: Record<string, BetaUserProfileTrustGrant>`
 
     Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
@@ -107856,13 +113612,31 @@ Get User Profile
 
     A timestamp in RFC 3339 format
 
+  - `access_type?: "application" | "passthrough"`
+
+    How the platform uses the API on behalf of the entity this profile represents. `application`: the platform sells a product that uses the API behind the scenes, and the profile represents an individual end-user of that product. `passthrough`: the platform resells raw inference, and the profile identifies the resold-to company.
+
+    - `"application"`
+
+    - `"passthrough"`
+
   - `external_id?: string | null`
 
     Platform's own identifier for this user. Not enforced unique.
 
   - `name?: string | null`
 
-    Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
+    Real-world name of the entity this profile represents (company or individual). For a resold-to company (`access_type` `passthrough`, or `relationship` `resold` under the `user-profiles-2026-03-24` header) this is that company's name.
+
+  - `relationship?: "external" | "resold" | "internal"`
+
+    How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+
+    - `"external"`
+
+    - `"resold"`
+
+    - `"internal"`
 
 ### Example
 
@@ -107887,7 +113661,6 @@ console.log(betaUserProfile.id);
   "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
   "created_at": "2026-03-15T10:00:00Z",
   "metadata": {},
-  "relationship": "external",
   "trust_grants": {
     "cyber": {
       "status": "active"
@@ -107895,8 +113668,10 @@ console.log(betaUserProfile.id);
   },
   "type": "user_profile",
   "updated_at": "2026-03-15T10:00:00Z",
+  "access_type": "application",
   "external_id": "user_12345",
-  "name": "Example User"
+  "name": "Example User",
+  "relationship": "external"
 }
 ```
 
@@ -107913,6 +113688,14 @@ Update User Profile
 - `userProfileID: string`
 
 - `params: UserProfileUpdateParams`
+
+  - `access_type?: "application" | "passthrough" | null`
+
+    Body param: How the platform uses the API on behalf of the entity this profile represents. `application`: the platform sells a product that uses the API behind the scenes, and the profile represents an individual end-user of that product. `passthrough`: the platform resells raw inference, and the profile identifies the resold-to company.
+
+    - `"application"`
+
+    - `"passthrough"`
 
   - `external_id?: string | null`
 
@@ -107942,7 +113725,7 @@ Update User Profile
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -107987,6 +113770,8 @@ Update User Profile
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -108026,16 +113811,6 @@ Update User Profile
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
-  - `relationship: "external" | "resold" | "internal"`
-
-    How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
-
-    - `"external"`
-
-    - `"resold"`
-
-    - `"internal"`
-
   - `trust_grants: Record<string, BetaUserProfileTrustGrant>`
 
     Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
@@ -108060,13 +113835,31 @@ Update User Profile
 
     A timestamp in RFC 3339 format
 
+  - `access_type?: "application" | "passthrough"`
+
+    How the platform uses the API on behalf of the entity this profile represents. `application`: the platform sells a product that uses the API behind the scenes, and the profile represents an individual end-user of that product. `passthrough`: the platform resells raw inference, and the profile identifies the resold-to company.
+
+    - `"application"`
+
+    - `"passthrough"`
+
   - `external_id?: string | null`
 
     Platform's own identifier for this user. Not enforced unique.
 
   - `name?: string | null`
 
-    Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
+    Real-world name of the entity this profile represents (company or individual). For a resold-to company (`access_type` `passthrough`, or `relationship` `resold` under the `user-profiles-2026-03-24` header) this is that company's name.
+
+  - `relationship?: "external" | "resold" | "internal"`
+
+    How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+
+    - `"external"`
+
+    - `"resold"`
+
+    - `"internal"`
 
 ### Example
 
@@ -108091,7 +113884,6 @@ console.log(betaUserProfile.id);
   "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
   "created_at": "2026-03-15T10:00:00Z",
   "metadata": {},
-  "relationship": "external",
   "trust_grants": {
     "cyber": {
       "status": "active"
@@ -108099,8 +113891,10 @@ console.log(betaUserProfile.id);
   },
   "type": "user_profile",
   "updated_at": "2026-03-15T10:00:00Z",
+  "access_type": "application",
   "external_id": "user_12345",
-  "name": "Example User"
+  "name": "Example User",
+  "relationship": "external"
 }
 ```
 
@@ -108124,7 +113918,7 @@ Create Enrollment URL
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -108169,6 +113963,8 @@ Create Enrollment URL
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -108254,16 +114050,6 @@ console.log(betaUserProfileEnrollmentURL.expires_at);
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
-  - `relationship: "external" | "resold" | "internal"`
-
-    How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
-
-    - `"external"`
-
-    - `"resold"`
-
-    - `"internal"`
-
   - `trust_grants: Record<string, BetaUserProfileTrustGrant>`
 
     Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
@@ -108288,13 +114074,31 @@ console.log(betaUserProfileEnrollmentURL.expires_at);
 
     A timestamp in RFC 3339 format
 
+  - `access_type?: "application" | "passthrough"`
+
+    How the platform uses the API on behalf of the entity this profile represents. `application`: the platform sells a product that uses the API behind the scenes, and the profile represents an individual end-user of that product. `passthrough`: the platform resells raw inference, and the profile identifies the resold-to company.
+
+    - `"application"`
+
+    - `"passthrough"`
+
   - `external_id?: string | null`
 
     Platform's own identifier for this user. Not enforced unique.
 
   - `name?: string | null`
 
-    Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
+    Real-world name of the entity this profile represents (company or individual). For a resold-to company (`access_type` `passthrough`, or `relationship` `resold` under the `user-profiles-2026-03-24` header) this is that company's name.
+
+  - `relationship?: "external" | "resold" | "internal"`
+
+    How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
+
+    - `"external"`
+
+    - `"resold"`
+
+    - `"internal"`
 
 ### Beta User Profile Enrollment URL
 
@@ -108348,7 +114152,7 @@ Create a Dream
 
     - `BetaDreamMemoryStoreInput`
 
-      An input memory store the dream reads from. The dream never mutates this store.
+      An input memory store the dream reads from. The dream never mutates this store unless it is also the destination: with output_behavior {type: "update_existing"} the job consolidates this store in place.
 
       - `memory_store_id: string`
 
@@ -108378,7 +114182,7 @@ Create a Dream
 
       - `id: string`
 
-        Model identifier, e.g. "claude-opus-4-7". 1-256 characters.
+        Model identifier, e.g. "claude-opus-5". 1-256 characters.
 
       - `speed?: "standard" | "fast" | null`
 
@@ -108392,13 +114196,35 @@ Create a Dream
 
     Body param
 
+  - `output_behavior?: BetaOutputBehavior`
+
+    Body param: The default destination: the job creates a new output memory store as a clone of the memory_store input and writes the consolidated memories into it. The input store is never mutated.
+
+    - `BetaOutputBehaviorCreateNew`
+
+      The default destination: the job creates a new output memory store as a clone of the memory_store input and writes the consolidated memories into it. The input store is never mutated.
+
+      - `type: "create_new"`
+
+        - `"create_new"`
+
+    - `BetaOutputBehaviorUpdateExisting`
+
+      The job writes the consolidated memories into this existing memory store instead of creating one. In EAP the store must be the job's own memory_store input, so the job consolidates the store in place.
+
+      - `memory_store_id: string`
+
+      - `type: "update_existing"`
+
+        - `"update_existing"`
+
   - `betas?: Array<AnthropicBeta>`
 
     Header param: Optional header to specify the beta version(s) you want to use.
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -108444,6 +114270,8 @@ Create a Dream
 
       - `"user-profiles-2026-03-24"`
 
+      - `"user-profiles-2026-08-18"`
+
       - `"advisor-tool-2026-03-01"`
 
       - `"managed-agents-2026-04-01"`
@@ -108470,7 +114298,7 @@ Create a Dream
 
 - `BetaDream`
 
-  An asynchronous memory-consolidation job that reads a memory store plus a set of session transcripts and writes consolidated memories into a new output memory store. The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to generally-available endpoints.
+  An asynchronous memory-consolidation job that reads a memory store plus a set of session transcripts and writes consolidated memories into an output memory store — a new store by default, or an existing store chosen via output_behavior. The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to generally-available endpoints.
 
   - `id: string`
 
@@ -108498,7 +114326,7 @@ Create a Dream
 
     - `BetaDreamMemoryStoreInput`
 
-      An input memory store the dream reads from. The dream never mutates this store.
+      An input memory store the dream reads from. The dream never mutates this store unless it is also the destination: with output_behavior {type: "update_existing"} the job consolidates this store in place.
 
       - `memory_store_id: string`
 
@@ -108524,7 +114352,7 @@ Create a Dream
 
     - `id: string`
 
-      Model identifier, e.g. "claude-opus-4-7". 1-256 characters.
+      Model identifier, e.g. "claude-opus-5". 1-256 characters.
 
     - `speed?: "standard" | "fast"`
 
@@ -108533,6 +114361,28 @@ Create a Dream
       - `"standard"`
 
       - `"fast"`
+
+  - `output_behavior: BetaOutputBehavior`
+
+    The default destination: the job creates a new output memory store as a clone of the memory_store input and writes the consolidated memories into it. The input store is never mutated.
+
+    - `BetaOutputBehaviorCreateNew`
+
+      The default destination: the job creates a new output memory store as a clone of the memory_store input and writes the consolidated memories into it. The input store is never mutated.
+
+      - `type: "create_new"`
+
+        - `"create_new"`
+
+    - `BetaOutputBehaviorUpdateExisting`
+
+      The job writes the consolidated memories into this existing memory store instead of creating one. In EAP the store must be the job's own memory_store input, so the job consolidates the store in place.
+
+      - `memory_store_id: string`
+
+      - `type: "update_existing"`
+
+        - `"update_existing"`
 
   - `outputs: Array<BetaDreamOutput>`
 
@@ -108622,6 +114472,9 @@ console.log(betaDream.id);
     "id": "x",
     "speed": "standard"
   },
+  "output_behavior": {
+    "type": "create_new"
+  },
   "outputs": [
     {
       "memory_store_id": "memory_store_id",
@@ -108692,7 +114545,7 @@ List Dreams
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -108738,6 +114591,8 @@ List Dreams
 
       - `"user-profiles-2026-03-24"`
 
+      - `"user-profiles-2026-08-18"`
+
       - `"advisor-tool-2026-03-01"`
 
       - `"managed-agents-2026-04-01"`
@@ -108764,7 +114619,7 @@ List Dreams
 
 - `BetaDream`
 
-  An asynchronous memory-consolidation job that reads a memory store plus a set of session transcripts and writes consolidated memories into a new output memory store. The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to generally-available endpoints.
+  An asynchronous memory-consolidation job that reads a memory store plus a set of session transcripts and writes consolidated memories into an output memory store — a new store by default, or an existing store chosen via output_behavior. The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to generally-available endpoints.
 
   - `id: string`
 
@@ -108792,7 +114647,7 @@ List Dreams
 
     - `BetaDreamMemoryStoreInput`
 
-      An input memory store the dream reads from. The dream never mutates this store.
+      An input memory store the dream reads from. The dream never mutates this store unless it is also the destination: with output_behavior {type: "update_existing"} the job consolidates this store in place.
 
       - `memory_store_id: string`
 
@@ -108818,7 +114673,7 @@ List Dreams
 
     - `id: string`
 
-      Model identifier, e.g. "claude-opus-4-7". 1-256 characters.
+      Model identifier, e.g. "claude-opus-5". 1-256 characters.
 
     - `speed?: "standard" | "fast"`
 
@@ -108827,6 +114682,28 @@ List Dreams
       - `"standard"`
 
       - `"fast"`
+
+  - `output_behavior: BetaOutputBehavior`
+
+    The default destination: the job creates a new output memory store as a clone of the memory_store input and writes the consolidated memories into it. The input store is never mutated.
+
+    - `BetaOutputBehaviorCreateNew`
+
+      The default destination: the job creates a new output memory store as a clone of the memory_store input and writes the consolidated memories into it. The input store is never mutated.
+
+      - `type: "create_new"`
+
+        - `"create_new"`
+
+    - `BetaOutputBehaviorUpdateExisting`
+
+      The job writes the consolidated memories into this existing memory store instead of creating one. In EAP the store must be the job's own memory_store input, so the job consolidates the store in place.
+
+      - `memory_store_id: string`
+
+      - `type: "update_existing"`
+
+        - `"update_existing"`
 
   - `outputs: Array<BetaDreamOutput>`
 
@@ -108916,6 +114793,9 @@ for await (const betaDream of client.beta.dreams.list()) {
         "id": "x",
         "speed": "standard"
       },
+      "output_behavior": {
+        "type": "create_new"
+      },
       "outputs": [
         {
           "memory_store_id": "memory_store_id",
@@ -108957,7 +114837,7 @@ Get a Dream
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -109003,6 +114883,8 @@ Get a Dream
 
       - `"user-profiles-2026-03-24"`
 
+      - `"user-profiles-2026-08-18"`
+
       - `"advisor-tool-2026-03-01"`
 
       - `"managed-agents-2026-04-01"`
@@ -109029,7 +114911,7 @@ Get a Dream
 
 - `BetaDream`
 
-  An asynchronous memory-consolidation job that reads a memory store plus a set of session transcripts and writes consolidated memories into a new output memory store. The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to generally-available endpoints.
+  An asynchronous memory-consolidation job that reads a memory store plus a set of session transcripts and writes consolidated memories into an output memory store — a new store by default, or an existing store chosen via output_behavior. The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to generally-available endpoints.
 
   - `id: string`
 
@@ -109057,7 +114939,7 @@ Get a Dream
 
     - `BetaDreamMemoryStoreInput`
 
-      An input memory store the dream reads from. The dream never mutates this store.
+      An input memory store the dream reads from. The dream never mutates this store unless it is also the destination: with output_behavior {type: "update_existing"} the job consolidates this store in place.
 
       - `memory_store_id: string`
 
@@ -109083,7 +114965,7 @@ Get a Dream
 
     - `id: string`
 
-      Model identifier, e.g. "claude-opus-4-7". 1-256 characters.
+      Model identifier, e.g. "claude-opus-5". 1-256 characters.
 
     - `speed?: "standard" | "fast"`
 
@@ -109092,6 +114974,28 @@ Get a Dream
       - `"standard"`
 
       - `"fast"`
+
+  - `output_behavior: BetaOutputBehavior`
+
+    The default destination: the job creates a new output memory store as a clone of the memory_store input and writes the consolidated memories into it. The input store is never mutated.
+
+    - `BetaOutputBehaviorCreateNew`
+
+      The default destination: the job creates a new output memory store as a clone of the memory_store input and writes the consolidated memories into it. The input store is never mutated.
+
+      - `type: "create_new"`
+
+        - `"create_new"`
+
+    - `BetaOutputBehaviorUpdateExisting`
+
+      The job writes the consolidated memories into this existing memory store instead of creating one. In EAP the store must be the job's own memory_store input, so the job consolidates the store in place.
+
+      - `memory_store_id: string`
+
+      - `type: "update_existing"`
+
+        - `"update_existing"`
 
   - `outputs: Array<BetaDreamOutput>`
 
@@ -109178,6 +115082,9 @@ console.log(betaDream.id);
     "id": "x",
     "speed": "standard"
   },
+  "output_behavior": {
+    "type": "create_new"
+  },
   "outputs": [
     {
       "memory_store_id": "memory_store_id",
@@ -109216,7 +115123,7 @@ Cancel a Dream
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -109262,6 +115169,8 @@ Cancel a Dream
 
       - `"user-profiles-2026-03-24"`
 
+      - `"user-profiles-2026-08-18"`
+
       - `"advisor-tool-2026-03-01"`
 
       - `"managed-agents-2026-04-01"`
@@ -109288,7 +115197,7 @@ Cancel a Dream
 
 - `BetaDream`
 
-  An asynchronous memory-consolidation job that reads a memory store plus a set of session transcripts and writes consolidated memories into a new output memory store. The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to generally-available endpoints.
+  An asynchronous memory-consolidation job that reads a memory store plus a set of session transcripts and writes consolidated memories into an output memory store — a new store by default, or an existing store chosen via output_behavior. The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to generally-available endpoints.
 
   - `id: string`
 
@@ -109316,7 +115225,7 @@ Cancel a Dream
 
     - `BetaDreamMemoryStoreInput`
 
-      An input memory store the dream reads from. The dream never mutates this store.
+      An input memory store the dream reads from. The dream never mutates this store unless it is also the destination: with output_behavior {type: "update_existing"} the job consolidates this store in place.
 
       - `memory_store_id: string`
 
@@ -109342,7 +115251,7 @@ Cancel a Dream
 
     - `id: string`
 
-      Model identifier, e.g. "claude-opus-4-7". 1-256 characters.
+      Model identifier, e.g. "claude-opus-5". 1-256 characters.
 
     - `speed?: "standard" | "fast"`
 
@@ -109351,6 +115260,28 @@ Cancel a Dream
       - `"standard"`
 
       - `"fast"`
+
+  - `output_behavior: BetaOutputBehavior`
+
+    The default destination: the job creates a new output memory store as a clone of the memory_store input and writes the consolidated memories into it. The input store is never mutated.
+
+    - `BetaOutputBehaviorCreateNew`
+
+      The default destination: the job creates a new output memory store as a clone of the memory_store input and writes the consolidated memories into it. The input store is never mutated.
+
+      - `type: "create_new"`
+
+        - `"create_new"`
+
+    - `BetaOutputBehaviorUpdateExisting`
+
+      The job writes the consolidated memories into this existing memory store instead of creating one. In EAP the store must be the job's own memory_store input, so the job consolidates the store in place.
+
+      - `memory_store_id: string`
+
+      - `type: "update_existing"`
+
+        - `"update_existing"`
 
   - `outputs: Array<BetaDreamOutput>`
 
@@ -109437,6 +115368,9 @@ console.log(betaDream.id);
     "id": "x",
     "speed": "standard"
   },
+  "output_behavior": {
+    "type": "create_new"
+  },
   "outputs": [
     {
       "memory_store_id": "memory_store_id",
@@ -109475,7 +115409,7 @@ Archive a Dream
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -109521,6 +115455,8 @@ Archive a Dream
 
       - `"user-profiles-2026-03-24"`
 
+      - `"user-profiles-2026-08-18"`
+
       - `"advisor-tool-2026-03-01"`
 
       - `"managed-agents-2026-04-01"`
@@ -109547,7 +115483,7 @@ Archive a Dream
 
 - `BetaDream`
 
-  An asynchronous memory-consolidation job that reads a memory store plus a set of session transcripts and writes consolidated memories into a new output memory store. The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to generally-available endpoints.
+  An asynchronous memory-consolidation job that reads a memory store plus a set of session transcripts and writes consolidated memories into an output memory store — a new store by default, or an existing store chosen via output_behavior. The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to generally-available endpoints.
 
   - `id: string`
 
@@ -109575,7 +115511,7 @@ Archive a Dream
 
     - `BetaDreamMemoryStoreInput`
 
-      An input memory store the dream reads from. The dream never mutates this store.
+      An input memory store the dream reads from. The dream never mutates this store unless it is also the destination: with output_behavior {type: "update_existing"} the job consolidates this store in place.
 
       - `memory_store_id: string`
 
@@ -109601,7 +115537,7 @@ Archive a Dream
 
     - `id: string`
 
-      Model identifier, e.g. "claude-opus-4-7". 1-256 characters.
+      Model identifier, e.g. "claude-opus-5". 1-256 characters.
 
     - `speed?: "standard" | "fast"`
 
@@ -109610,6 +115546,28 @@ Archive a Dream
       - `"standard"`
 
       - `"fast"`
+
+  - `output_behavior: BetaOutputBehavior`
+
+    The default destination: the job creates a new output memory store as a clone of the memory_store input and writes the consolidated memories into it. The input store is never mutated.
+
+    - `BetaOutputBehaviorCreateNew`
+
+      The default destination: the job creates a new output memory store as a clone of the memory_store input and writes the consolidated memories into it. The input store is never mutated.
+
+      - `type: "create_new"`
+
+        - `"create_new"`
+
+    - `BetaOutputBehaviorUpdateExisting`
+
+      The job writes the consolidated memories into this existing memory store instead of creating one. In EAP the store must be the job's own memory_store input, so the job consolidates the store in place.
+
+      - `memory_store_id: string`
+
+      - `type: "update_existing"`
+
+        - `"update_existing"`
 
   - `outputs: Array<BetaDreamOutput>`
 
@@ -109696,6 +115654,9 @@ console.log(betaDream.id);
     "id": "x",
     "speed": "standard"
   },
+  "output_behavior": {
+    "type": "create_new"
+  },
   "outputs": [
     {
       "memory_store_id": "memory_store_id",
@@ -109720,7 +115681,7 @@ console.log(betaDream.id);
 
 - `BetaDream`
 
-  An asynchronous memory-consolidation job that reads a memory store plus a set of session transcripts and writes consolidated memories into a new output memory store. The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to generally-available endpoints.
+  An asynchronous memory-consolidation job that reads a memory store plus a set of session transcripts and writes consolidated memories into an output memory store — a new store by default, or an existing store chosen via output_behavior. The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to generally-available endpoints.
 
   - `id: string`
 
@@ -109748,7 +115709,7 @@ console.log(betaDream.id);
 
     - `BetaDreamMemoryStoreInput`
 
-      An input memory store the dream reads from. The dream never mutates this store.
+      An input memory store the dream reads from. The dream never mutates this store unless it is also the destination: with output_behavior {type: "update_existing"} the job consolidates this store in place.
 
       - `memory_store_id: string`
 
@@ -109774,7 +115735,7 @@ console.log(betaDream.id);
 
     - `id: string`
 
-      Model identifier, e.g. "claude-opus-4-7". 1-256 characters.
+      Model identifier, e.g. "claude-opus-5". 1-256 characters.
 
     - `speed?: "standard" | "fast"`
 
@@ -109783,6 +115744,28 @@ console.log(betaDream.id);
       - `"standard"`
 
       - `"fast"`
+
+  - `output_behavior: BetaOutputBehavior`
+
+    The default destination: the job creates a new output memory store as a clone of the memory_store input and writes the consolidated memories into it. The input store is never mutated.
+
+    - `BetaOutputBehaviorCreateNew`
+
+      The default destination: the job creates a new output memory store as a clone of the memory_store input and writes the consolidated memories into it. The input store is never mutated.
+
+      - `type: "create_new"`
+
+        - `"create_new"`
+
+    - `BetaOutputBehaviorUpdateExisting`
+
+      The job writes the consolidated memories into this existing memory store instead of creating one. In EAP the store must be the job's own memory_store input, so the job consolidates the store in place.
+
+      - `memory_store_id: string`
+
+      - `type: "update_existing"`
+
+        - `"update_existing"`
 
   - `outputs: Array<BetaDreamOutput>`
 
@@ -109846,11 +115829,11 @@ console.log(betaDream.id);
 
 - `BetaDreamInput = BetaDreamMemoryStoreInput | BetaDreamSessionsInput`
 
-  An input memory store the dream reads from. The dream never mutates this store.
+  An input memory store the dream reads from. The dream never mutates this store unless it is also the destination: with output_behavior {type: "update_existing"} the job consolidates this store in place.
 
   - `BetaDreamMemoryStoreInput`
 
-    An input memory store the dream reads from. The dream never mutates this store.
+    An input memory store the dream reads from. The dream never mutates this store unless it is also the destination: with output_behavior {type: "update_existing"} the job consolidates this store in place.
 
     - `memory_store_id: string`
 
@@ -109872,7 +115855,7 @@ console.log(betaDream.id);
 
 - `BetaDreamMemoryStoreInput`
 
-  An input memory store the dream reads from. The dream never mutates this store.
+  An input memory store the dream reads from. The dream never mutates this store unless it is also the destination: with output_behavior {type: "update_existing"} the job consolidates this store in place.
 
   - `memory_store_id: string`
 
@@ -109900,7 +115883,7 @@ console.log(betaDream.id);
 
   - `id: string`
 
-    Model identifier, e.g. "claude-opus-4-7". 1-256 characters.
+    Model identifier, e.g. "claude-opus-5". 1-256 characters.
 
   - `speed?: "standard" | "fast"`
 
@@ -109918,7 +115901,7 @@ console.log(betaDream.id);
 
   - `id: string`
 
-    Model identifier, e.g. "claude-opus-4-7". 1-256 characters.
+    Model identifier, e.g. "claude-opus-5". 1-256 characters.
 
   - `speed?: "standard" | "fast" | null`
 
@@ -109990,6 +115973,52 @@ console.log(betaDream.id);
 
     Total output tokens generated across every pipeline stage.
 
+### Beta Output Behavior
+
+- `BetaOutputBehavior = BetaOutputBehaviorCreateNew | BetaOutputBehaviorUpdateExisting`
+
+  The default destination: the job creates a new output memory store as a clone of the memory_store input and writes the consolidated memories into it. The input store is never mutated.
+
+  - `BetaOutputBehaviorCreateNew`
+
+    The default destination: the job creates a new output memory store as a clone of the memory_store input and writes the consolidated memories into it. The input store is never mutated.
+
+    - `type: "create_new"`
+
+      - `"create_new"`
+
+  - `BetaOutputBehaviorUpdateExisting`
+
+    The job writes the consolidated memories into this existing memory store instead of creating one. In EAP the store must be the job's own memory_store input, so the job consolidates the store in place.
+
+    - `memory_store_id: string`
+
+    - `type: "update_existing"`
+
+      - `"update_existing"`
+
+### Beta Output Behavior Create New
+
+- `BetaOutputBehaviorCreateNew`
+
+  The default destination: the job creates a new output memory store as a clone of the memory_store input and writes the consolidated memories into it. The input store is never mutated.
+
+  - `type: "create_new"`
+
+    - `"create_new"`
+
+### Beta Output Behavior Update Existing
+
+- `BetaOutputBehaviorUpdateExisting`
+
+  The job writes the consolidated memories into this existing memory store instead of creating one. In EAP the store must be the job's own memory_store input, so the job consolidates the store in place.
+
+  - `memory_store_id: string`
+
+  - `type: "update_existing"`
+
+    - `"update_existing"`
+
 # Tunnels
 
 ## Create Tunnel
@@ -110016,7 +116045,7 @@ Creates a tunnel. Creation allocates a fresh hostname and provisions the tunnel;
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -110061,6 +116090,8 @@ Creates a tunnel. Creation allocates a fresh hostname and provisions the tunnel;
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -110163,7 +116194,7 @@ Fetches a tunnel by ID.
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -110208,6 +116239,8 @@ Fetches a tunnel by ID.
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -110320,7 +116353,7 @@ Lists tunnels. Results are ordered by creation time, newest first; archived tunn
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -110365,6 +116398,8 @@ Lists tunnels. Results are ordered by creation time, newest first; archived tunn
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -110473,7 +116508,7 @@ Archives a tunnel. Archival is irreversible: every non-archived certificate on t
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -110518,6 +116553,8 @@ Archives a tunnel. Archival is irreversible: every non-archived certificate on t
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -110620,7 +116657,7 @@ Reveals a tunnel's connector token. The value is fetched live on each call; Anth
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -110665,6 +116702,8 @@ Reveals a tunnel's connector token. The value is fetched live on each call; Anth
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -110756,7 +116795,7 @@ Rotates a tunnel's connector token. Rotation invalidates the current token for n
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -110801,6 +116840,8 @@ Rotates a tunnel's connector token. Rotation invalidates the current token for n
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -110944,7 +116985,7 @@ Registers a public CA certificate on a tunnel. Anthropic verifies the gateway's 
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -110989,6 +117030,8 @@ Registers a public CA certificate on a tunnel. Anthropic verifies the gateway's 
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -111102,7 +117145,7 @@ Fetches a tunnel certificate by ID.
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -111147,6 +117190,8 @@ Fetches a tunnel certificate by ID.
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -111269,7 +117314,7 @@ Lists the certificates registered on a tunnel. Archived certificates are exclude
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -111314,6 +117359,8 @@ Lists the certificates registered on a tunnel. Archived certificates are exclude
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 
@@ -111431,7 +117478,7 @@ Archives a tunnel certificate, removing it from the set Anthropic trusts for the
 
     - `(string & {})`
 
-    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 30 more`
+    - `"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 31 more`
 
       - `"message-batches-2024-09-24"`
 
@@ -111476,6 +117523,8 @@ Archives a tunnel certificate, removing it from the set Anthropic trusts for the
       - `"output-300k-2026-03-24"`
 
       - `"user-profiles-2026-03-24"`
+
+      - `"user-profiles-2026-08-18"`
 
       - `"advisor-tool-2026-03-01"`
 

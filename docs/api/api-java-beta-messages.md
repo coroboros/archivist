@@ -75,6 +75,8 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
+    - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
@@ -351,6 +353,18 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             Create a cache control breakpoint at this content block.
 
+          - `Optional<BetaImageTransformationsParam> transformations`
+
+            Configures the transformations the server applies to this image before the model observes it. Each key names a condition the server transforms images for; its value selects the transformation applied. Omitted keys keep their default behavior, and an empty object is equivalent to omitting the field.
+
+            - `Optional<OversizedImage> oversizedImage`
+
+              What the server does when this image exceeds the model's maximum image size. `"downsize"` (the default) scales the image down to fit, which changes the dimensions the model observes without telling you. `"error"` instead rejects the request with a 400 error naming the image's dimensions and the largest dimensions that fit, so you can scale the image deliberately — your image is never silently scaled down.
+
+              - `DOWNSIZE("downsize")`
+
+              - `ERROR("error")`
+
         - `class BetaRequestDocumentBlock:`
 
           - `Source source`
@@ -527,6 +541,10 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                 - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+          - `Optional<String> toolsetName`
+
+            For a toolset member tool_use, the toolset family this member belongs to.
+
         - `class BetaToolResultBlockParam:`
 
           - `String toolUseId`
@@ -567,7 +585,134 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
                   Create a cache control breakpoint at this content block.
 
+              - `class BetaBrowserStateBlockParam:`
+
+                The caller's browser state after a browser toolset member call —
+                the full inventory of open tabs, which tab is active, and any side
+                effects (tabs opened, download state changes) the call produced.
+
+                At most one per `tool_result`, only on a non-error result answering a
+                browser toolset member `tool_use`. The server renders the
+                model-visible text from it; the model never sees the raw fields.
+
+                - `List<BetaBrowserStateTabEntry> tabs`
+
+                  All tabs open in the browser after this call — the full inventory, not a delta. May be empty. Whenever non-empty, exactly one entry carries `active: true`.
+
+                  - `String tabId`
+
+                    The caller-assigned identifier for this tab, unique within the inventory.
+
+                  - `String title`
+
+                    The title of the page the tab is showing. May be empty.
+
+                  - `String url`
+
+                    The URL of the page the tab is showing. May be empty.
+
+                  - `Optional<Boolean> active`
+
+                    Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
+
+                - `JsonValue; type "browser_state"constant`
+
+                  - `BROWSER_STATE("browser_state")`
+
+                - `Optional<BetaCacheControlEphemeral> cacheControl`
+
+                  Create a cache control breakpoint at this content block.
+
+                - `Optional<List<BetaBrowserStateChange>> stateChanges`
+
+                  Tabs opened and download state changes during this call. "Nothing to report" is expressed by omitting the field, never by an empty list.
+
+                  - `class BetaBrowserStateChangeTabOpened:`
+
+                    A tab this call's execution opened that remains open at its end —
+                    the creation delta of the `tabs` inventory, not an event log.
+
+                    Carries only the `tab_id`; the tab's `title` and `url` live on its
+                    `tabs` entry, which must include the same `tab_id`. A tab opened
+                    during a failed call gets no deferred `tab_opened`; it simply appears
+                    in the next result's `tabs` inventory.
+
+                    - `String tabId`
+
+                      The `tab_id` of the opened tab, present in `tabs`.
+
+                    - `JsonValue; type "tab_opened"constant`
+
+                      - `TAB_OPENED("tab_opened")`
+
+                  - `class BetaBrowserStateChangeDownloadStarted:`
+
+                    A file download that started during this call.
+
+                    - `String downloadId`
+
+                      The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+                    - `JsonValue; type "download_started"constant`
+
+                      - `DOWNLOAD_STARTED("download_started")`
+
+                    - `String url`
+
+                      The final post-redirect URL the download was served from.
+
+                  - `class BetaBrowserStateChangeDownloadCompleted:`
+
+                    A file download that finished during this call, reported with the
+                    same `download_id` as its `download_started` — or without a prior
+                    `download_started`, when the download finished during the call that
+                    started it (at most one state change per `download_id` per result).
+
+                    - `String downloadId`
+
+                      The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+                    - `JsonValue; type "download_completed"constant`
+
+                      - `DOWNLOAD_COMPLETED("download_completed")`
+
+                    - `String url`
+
+                      The final post-redirect URL the download was served from.
+
+                    - `Optional<String> path`
+
+                      Where the executor saved the file, on the executor's filesystem. Only included when another tool in the same environment can read the file at that path.
+
+                    - `Optional<Long> sizeBytes`
+
+                      The completed download's size.
+
+                  - `class BetaBrowserStateChangeDownloadFailed:`
+
+                    A file download that failed — or was cancelled — during this call.
+
+                    - `String downloadId`
+
+                      The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+                    - `JsonValue; type "download_failed"constant`
+
+                      - `DOWNLOAD_FAILED("download_failed")`
+
+                    - `String url`
+
+                      The final post-redirect URL the download was served from.
+
+                    - `Optional<String> error`
+
+                      The failure or cancellation detail, when known.
+
           - `Optional<Boolean> isError`
+
+          - `Optional<String> toolsetName`
+
+            For a toolset member tool_result, the toolset family of the paired tool_use.
 
         - `class BetaServerToolUseBlockParam:`
 
@@ -1148,125 +1293,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
             Opaque metadata from prior compaction, to be round-tripped verbatim
 
-        - `class BetaMidConversationSystemBlockParam:`
-
-          System instructions that appear mid-conversation.
-
-          Use this block to provide or update system-level instructions at a specific
-          point in the conversation, rather than only via the top-level `system` parameter.
-
-          - `List<Content> content`
-
-            System instruction text blocks.
-
-            - `class BetaTextBlockParam:`
-
-            - `class BetaRequestToolAdditionBlock:`
-
-              Mid-conversation directive to surface a declared tool.
-
-              `tool` references a tool (or MCP toolset) by name from the request's
-              `tools`; it is offered to the model from this point in the
-              conversation onward.
-
-              - `Tool tool`
-
-                Reference to a single tool the caller declared directly in
-                `tools[]`. Does not accept the composed `{server}_{name}` form the
-                server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-                `mcp_toolset_reference` for those.
-
-                - `class BetaToolChangeToolReference:`
-
-                  Reference to a single tool the caller declared directly in
-                  `tools[]`. Does not accept the composed `{server}_{name}` form the
-                  server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-                  `mcp_toolset_reference` for those.
-
-                  - `String name`
-
-                  - `JsonValue; type "tool_reference"constant`
-
-                    - `TOOL_REFERENCE("tool_reference")`
-
-                - `class BetaToolChangeMcpToolReference:`
-
-                  Reference to a single MCP tool by its server and remote name — the
-                  same `server_name`/`name` pair `mcp_tool_use` carries.
-
-                  - `String name`
-
-                  - `String serverName`
-
-                  - `JsonValue; type "mcp_tool_reference"constant`
-
-                    - `MCP_TOOL_REFERENCE("mcp_tool_reference")`
-
-                - `class BetaToolChangeMcpToolsetReference:`
-
-                  Reference to every tool in the named MCP server's toolset.
-
-                  - `String serverName`
-
-                  - `JsonValue; type "mcp_toolset_reference"constant`
-
-                    - `MCP_TOOLSET_REFERENCE("mcp_toolset_reference")`
-
-              - `JsonValue; type "tool_addition"constant`
-
-                - `TOOL_ADDITION("tool_addition")`
-
-              - `Optional<BetaCacheControlEphemeral> cacheControl`
-
-                Create a cache control breakpoint at this content block.
-
-            - `class BetaRequestToolRemovalBlock:`
-
-              Mid-conversation directive to withdraw a tool.
-
-              `tool` references a tool (or MCP toolset) by name from the request's
-              `tools`; it is no longer offered to the model from this point in the
-              conversation onward.
-
-              - `Tool tool`
-
-                Reference to a single tool the caller declared directly in
-                `tools[]`. Does not accept the composed `{server}_{name}` form the
-                server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-                `mcp_toolset_reference` for those.
-
-                - `class BetaToolChangeToolReference:`
-
-                  Reference to a single tool the caller declared directly in
-                  `tools[]`. Does not accept the composed `{server}_{name}` form the
-                  server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-                  `mcp_toolset_reference` for those.
-
-                - `class BetaToolChangeMcpToolReference:`
-
-                  Reference to a single MCP tool by its server and remote name — the
-                  same `server_name`/`name` pair `mcp_tool_use` carries.
-
-                - `class BetaToolChangeMcpToolsetReference:`
-
-                  Reference to every tool in the named MCP server's toolset.
-
-              - `JsonValue; type "tool_removal"constant`
-
-                - `TOOL_REMOVAL("tool_removal")`
-
-              - `Optional<BetaCacheControlEphemeral> cacheControl`
-
-                Create a cache control breakpoint at this content block.
-
-          - `JsonValue; type "mid_conv_system"constant`
-
-            - `MID_CONV_SYSTEM("mid_conv_system")`
-
-          - `Optional<BetaCacheControlEphemeral> cacheControl`
-
-            Create a cache control breakpoint at this content block.
-
         - `class BetaRequestToolAdditionBlock:`
 
           Mid-conversation directive to surface a declared tool.
@@ -1275,6 +1301,57 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
           `tools`; it is offered to the model from this point in the
           conversation onward.
 
+          - `Tool tool`
+
+            Reference to a single tool the caller declared directly in
+            `tools[]`. Does not accept the composed `{server}_{name}` form the
+            server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+            `mcp_toolset_reference` for those.
+
+            - `class BetaToolChangeToolReference:`
+
+              Reference to a single tool the caller declared directly in
+              `tools[]`. Does not accept the composed `{server}_{name}` form the
+              server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+              `mcp_toolset_reference` for those.
+
+              - `String name`
+
+              - `JsonValue; type "tool_reference"constant`
+
+                - `TOOL_REFERENCE("tool_reference")`
+
+            - `class BetaToolChangeMcpToolReference:`
+
+              Reference to a single MCP tool by its server and remote name — the
+              same `server_name`/`name` pair `mcp_tool_use` carries.
+
+              - `String name`
+
+              - `String serverName`
+
+              - `JsonValue; type "mcp_tool_reference"constant`
+
+                - `MCP_TOOL_REFERENCE("mcp_tool_reference")`
+
+            - `class BetaToolChangeMcpToolsetReference:`
+
+              Reference to every tool in the named MCP server's toolset.
+
+              - `String serverName`
+
+              - `JsonValue; type "mcp_toolset_reference"constant`
+
+                - `MCP_TOOLSET_REFERENCE("mcp_toolset_reference")`
+
+          - `JsonValue; type "tool_addition"constant`
+
+            - `TOOL_ADDITION("tool_addition")`
+
+          - `Optional<BetaCacheControlEphemeral> cacheControl`
+
+            Create a cache control breakpoint at this content block.
+
         - `class BetaRequestToolRemovalBlock:`
 
           Mid-conversation directive to withdraw a tool.
@@ -1282,6 +1359,37 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
           `tool` references a tool (or MCP toolset) by name from the request's
           `tools`; it is no longer offered to the model from this point in the
           conversation onward.
+
+          - `Tool tool`
+
+            Reference to a single tool the caller declared directly in
+            `tools[]`. Does not accept the composed `{server}_{name}` form the
+            server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+            `mcp_toolset_reference` for those.
+
+            - `class BetaToolChangeToolReference:`
+
+              Reference to a single tool the caller declared directly in
+              `tools[]`. Does not accept the composed `{server}_{name}` form the
+              server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+              `mcp_toolset_reference` for those.
+
+            - `class BetaToolChangeMcpToolReference:`
+
+              Reference to a single MCP tool by its server and remote name — the
+              same `server_name`/`name` pair `mcp_tool_use` carries.
+
+            - `class BetaToolChangeMcpToolsetReference:`
+
+              Reference to every tool in the named MCP server's toolset.
+
+          - `JsonValue; type "tool_removal"constant`
+
+            - `TOOL_REMOVAL("tool_removal")`
+
+          - `Optional<BetaCacheControlEphemeral> cacheControl`
+
+            Create a cache control breakpoint at this content block.
 
         - `class BetaFallbackBlockParam:`
 
@@ -1947,6 +2055,412 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
         When true, guarantees schema validation on tool names and inputs
 
+    - `class BetaBrowserToolset20260801:`
+
+      The browser toolset: a single `tools[]` entry (carrying no
+      `name`) that declares the browser tool family. The model is served
+      the family's tool with any members disabled via `configs` removed
+      from its schema.
+
+      - `JsonValue; type "browser_toolset_20260801"constant`
+
+        - `BROWSER_TOOLSET_20260801("browser_toolset_20260801")`
+
+      - `Optional<List<AllowedCaller>> allowedCallers`
+
+        - `DIRECT("direct")`
+
+        - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
+      - `Optional<BetaCacheControlEphemeral> cacheControl`
+
+        Create a cache control breakpoint at this content block.
+
+      - `Optional<BetaBrowserToolsetConfigs> configs`
+
+        Per-member configuration for `browser_toolset_20260801`: one
+        optional field per member tool, keyed by the member name — the same
+        name the member's `tool_use` blocks carry. Every member is an
+        accepted key, and a member's defaults apply wherever its key is
+        absent. Unknown keys are rejected: the field set is this toolset
+        version's complete member set.
+
+        - `Optional<BetaBrowserCloseTabConfig> closeTab`
+
+          `close_tab`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaBrowserDoubleClickConfig> doubleClick`
+
+          `double_click`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaBrowserFileUploadConfig> fileUpload`
+
+          `file_upload`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaBrowserFindConfig> find`
+
+          `find`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaBrowserFormInputConfig> formInput`
+
+          `form_input`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaBrowserGetPageTextConfig> getPageText`
+
+          `get_page_text`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaBrowserHoldKeyConfig> holdKey`
+
+          `hold_key`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaBrowserHoverConfig> hover`
+
+          `hover`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaBrowserJavascriptExecConfig> javascriptExec`
+
+          `javascript_exec`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaBrowserKeyConfig> key`
+
+          `key`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaBrowserLeftClickConfig> leftClick`
+
+          `left_click`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaBrowserLeftClickDragConfig> leftClickDrag`
+
+          `left_click_drag`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaBrowserLeftMouseDownConfig> leftMouseDown`
+
+          `left_mouse_down`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaBrowserLeftMouseUpConfig> leftMouseUp`
+
+          `left_mouse_up`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaBrowserListTabsConfig> listTabs`
+
+          `list_tabs`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaBrowserMiddleClickConfig> middleClick`
+
+          `middle_click`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaBrowserMouseMoveConfig> mouseMove`
+
+          `mouse_move`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaBrowserNavigateConfig> navigate`
+
+          `navigate`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaBrowserNewTabConfig> newTab`
+
+          `new_tab`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaBrowserReadConsoleConfig> readConsole`
+
+          `read_console`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaBrowserReadNetworkConfig> readNetwork`
+
+          `read_network`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaBrowserReadPageConfig> readPage`
+
+          `read_page`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaBrowserRightClickConfig> rightClick`
+
+          `right_click`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaBrowserScreenshotConfig> screenshot`
+
+          `screenshot`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaBrowserScrollConfig> scroll`
+
+          `scroll`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaBrowserScrollToConfig> scrollTo`
+
+          `scroll_to`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaBrowserSwitchTabConfig> switchTab`
+
+          `switch_tab`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaBrowserTripleClickConfig> tripleClick`
+
+          `triple_click`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaBrowserTypeConfig> type`
+
+          `type`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaBrowserWaitConfig> wait`
+
+          `wait`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaBrowserZoomConfig> zoom`
+
+          `zoom`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
     - `class BetaToolComputerUse20241022:`
 
       - `long displayHeightPx`
@@ -2176,6 +2690,248 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
       - `Optional<Boolean> strict`
 
         When true, guarantees schema validation on tool names and inputs
+
+    - `class BetaComputerToolset20260801:`
+
+      The computer toolset: a single `tools[]` entry (carrying no
+      `name`) that declares the computer tool family. The model is
+      served the family's tool with any members disabled via `configs`
+      removed from its schema. Every member is enabled by default, zoom
+      included. The single-tool options `display_number` and
+      `enable_zoom` are not fields of a toolset entry — it carries only
+      `type`, `configs`, and `cache_control`; zoom is controlled
+      via `configs.zoom.enabled`.
+
+      - `JsonValue; type "computer_toolset_20260801"constant`
+
+        - `COMPUTER_TOOLSET_20260801("computer_toolset_20260801")`
+
+      - `Optional<List<AllowedCaller>> allowedCallers`
+
+        - `DIRECT("direct")`
+
+        - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
+      - `Optional<BetaCacheControlEphemeral> cacheControl`
+
+        Create a cache control breakpoint at this content block.
+
+      - `Optional<BetaComputerToolsetConfigs> configs`
+
+        Per-member configuration for `computer_toolset_20260801`: one
+        optional field per member tool, keyed by the member name — the same
+        name the member's `tool_use` blocks carry. Every member is an
+        accepted key, and a member's defaults apply wherever its key is
+        absent. Unknown keys are rejected: the field set is this toolset
+        version's complete member set.
+
+        - `Optional<BetaComputerCursorPositionConfig> cursorPosition`
+
+          `cursor_position`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaComputerDoubleClickConfig> doubleClick`
+
+          `double_click`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaComputerHoldKeyConfig> holdKey`
+
+          `hold_key`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaComputerKeyConfig> key`
+
+          `key`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaComputerLeftClickConfig> leftClick`
+
+          `left_click`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaComputerLeftClickDragConfig> leftClickDrag`
+
+          `left_click_drag`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaComputerLeftMouseDownConfig> leftMouseDown`
+
+          `left_mouse_down`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaComputerLeftMouseUpConfig> leftMouseUp`
+
+          `left_mouse_up`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaComputerMiddleClickConfig> middleClick`
+
+          `middle_click`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaComputerMouseMoveConfig> mouseMove`
+
+          `mouse_move`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaComputerRightClickConfig> rightClick`
+
+          `right_click`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaComputerScreenshotConfig> screenshot`
+
+          `screenshot`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaComputerScrollConfig> scroll`
+
+          `scroll`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaComputerTripleClickConfig> tripleClick`
+
+          `triple_click`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaComputerTypeConfig> type`
+
+          `type`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaComputerWaitConfig> wait`
+
+          `wait`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaComputerZoomConfig> zoom`
+
+          `zoom`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
     - `class BetaToolTextEditor20250124:`
 
@@ -3170,6 +3926,10 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
           - `JsonValue; type "code_execution_20260120"constant`
 
             - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+      - `Optional<String> toolsetName`
+
+        For a toolset member tool_use, the toolset family.
 
     - `class BetaServerToolUseBlock:`
 
@@ -4456,7 +5216,7 @@ public final class Main {
         MessageCreateParams params = MessageCreateParams.builder()
             .maxTokens(1024L)
             .addUserMessage("Hello, world")
-            .model(Model.CLAUDE_OPUS_4_6)
+            .model(Model.CLAUDE_OPUS_5)
             .build();
         BetaMessage betaMessage = client.beta().messages().create(params);
     }
@@ -4511,14 +5271,14 @@ public final class Main {
       "type": "model_changed"
     }
   },
-  "model": "claude-opus-4-6",
+  "model": "claude-opus-5",
   "role": "assistant",
   "stop_details": {
     "category": "cyber",
     "explanation": "This request was declined because it conflicts with Anthropic's Usage Policy.",
     "fallback_credit_token": "QW50aHJvcGljL0NsYXVkZQ==",
     "fallback_has_prefill_claim": true,
-    "recommended_model": "claude-sonnet-4-6",
+    "recommended_model": "claude-opus-4-8",
     "type": "refusal"
   },
   "stop_reason": "end_turn",
@@ -4629,6 +5389,8 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
     - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
+
+    - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
@@ -4896,6 +5658,18 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             Create a cache control breakpoint at this content block.
 
+          - `Optional<BetaImageTransformationsParam> transformations`
+
+            Configures the transformations the server applies to this image before the model observes it. Each key names a condition the server transforms images for; its value selects the transformation applied. Omitted keys keep their default behavior, and an empty object is equivalent to omitting the field.
+
+            - `Optional<OversizedImage> oversizedImage`
+
+              What the server does when this image exceeds the model's maximum image size. `"downsize"` (the default) scales the image down to fit, which changes the dimensions the model observes without telling you. `"error"` instead rejects the request with a 400 error naming the image's dimensions and the largest dimensions that fit, so you can scale the image deliberately — your image is never silently scaled down.
+
+              - `DOWNSIZE("downsize")`
+
+              - `ERROR("error")`
+
         - `class BetaRequestDocumentBlock:`
 
           - `Source source`
@@ -5072,6 +5846,10 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                 - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+          - `Optional<String> toolsetName`
+
+            For a toolset member tool_use, the toolset family this member belongs to.
+
         - `class BetaToolResultBlockParam:`
 
           - `String toolUseId`
@@ -5112,7 +5890,134 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
                   Create a cache control breakpoint at this content block.
 
+              - `class BetaBrowserStateBlockParam:`
+
+                The caller's browser state after a browser toolset member call —
+                the full inventory of open tabs, which tab is active, and any side
+                effects (tabs opened, download state changes) the call produced.
+
+                At most one per `tool_result`, only on a non-error result answering a
+                browser toolset member `tool_use`. The server renders the
+                model-visible text from it; the model never sees the raw fields.
+
+                - `List<BetaBrowserStateTabEntry> tabs`
+
+                  All tabs open in the browser after this call — the full inventory, not a delta. May be empty. Whenever non-empty, exactly one entry carries `active: true`.
+
+                  - `String tabId`
+
+                    The caller-assigned identifier for this tab, unique within the inventory.
+
+                  - `String title`
+
+                    The title of the page the tab is showing. May be empty.
+
+                  - `String url`
+
+                    The URL of the page the tab is showing. May be empty.
+
+                  - `Optional<Boolean> active`
+
+                    Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
+
+                - `JsonValue; type "browser_state"constant`
+
+                  - `BROWSER_STATE("browser_state")`
+
+                - `Optional<BetaCacheControlEphemeral> cacheControl`
+
+                  Create a cache control breakpoint at this content block.
+
+                - `Optional<List<BetaBrowserStateChange>> stateChanges`
+
+                  Tabs opened and download state changes during this call. "Nothing to report" is expressed by omitting the field, never by an empty list.
+
+                  - `class BetaBrowserStateChangeTabOpened:`
+
+                    A tab this call's execution opened that remains open at its end —
+                    the creation delta of the `tabs` inventory, not an event log.
+
+                    Carries only the `tab_id`; the tab's `title` and `url` live on its
+                    `tabs` entry, which must include the same `tab_id`. A tab opened
+                    during a failed call gets no deferred `tab_opened`; it simply appears
+                    in the next result's `tabs` inventory.
+
+                    - `String tabId`
+
+                      The `tab_id` of the opened tab, present in `tabs`.
+
+                    - `JsonValue; type "tab_opened"constant`
+
+                      - `TAB_OPENED("tab_opened")`
+
+                  - `class BetaBrowserStateChangeDownloadStarted:`
+
+                    A file download that started during this call.
+
+                    - `String downloadId`
+
+                      The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+                    - `JsonValue; type "download_started"constant`
+
+                      - `DOWNLOAD_STARTED("download_started")`
+
+                    - `String url`
+
+                      The final post-redirect URL the download was served from.
+
+                  - `class BetaBrowserStateChangeDownloadCompleted:`
+
+                    A file download that finished during this call, reported with the
+                    same `download_id` as its `download_started` — or without a prior
+                    `download_started`, when the download finished during the call that
+                    started it (at most one state change per `download_id` per result).
+
+                    - `String downloadId`
+
+                      The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+                    - `JsonValue; type "download_completed"constant`
+
+                      - `DOWNLOAD_COMPLETED("download_completed")`
+
+                    - `String url`
+
+                      The final post-redirect URL the download was served from.
+
+                    - `Optional<String> path`
+
+                      Where the executor saved the file, on the executor's filesystem. Only included when another tool in the same environment can read the file at that path.
+
+                    - `Optional<Long> sizeBytes`
+
+                      The completed download's size.
+
+                  - `class BetaBrowserStateChangeDownloadFailed:`
+
+                    A file download that failed — or was cancelled — during this call.
+
+                    - `String downloadId`
+
+                      The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+                    - `JsonValue; type "download_failed"constant`
+
+                      - `DOWNLOAD_FAILED("download_failed")`
+
+                    - `String url`
+
+                      The final post-redirect URL the download was served from.
+
+                    - `Optional<String> error`
+
+                      The failure or cancellation detail, when known.
+
           - `Optional<Boolean> isError`
+
+          - `Optional<String> toolsetName`
+
+            For a toolset member tool_result, the toolset family of the paired tool_use.
 
         - `class BetaServerToolUseBlockParam:`
 
@@ -5693,125 +6598,6 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
             Opaque metadata from prior compaction, to be round-tripped verbatim
 
-        - `class BetaMidConversationSystemBlockParam:`
-
-          System instructions that appear mid-conversation.
-
-          Use this block to provide or update system-level instructions at a specific
-          point in the conversation, rather than only via the top-level `system` parameter.
-
-          - `List<Content> content`
-
-            System instruction text blocks.
-
-            - `class BetaTextBlockParam:`
-
-            - `class BetaRequestToolAdditionBlock:`
-
-              Mid-conversation directive to surface a declared tool.
-
-              `tool` references a tool (or MCP toolset) by name from the request's
-              `tools`; it is offered to the model from this point in the
-              conversation onward.
-
-              - `Tool tool`
-
-                Reference to a single tool the caller declared directly in
-                `tools[]`. Does not accept the composed `{server}_{name}` form the
-                server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-                `mcp_toolset_reference` for those.
-
-                - `class BetaToolChangeToolReference:`
-
-                  Reference to a single tool the caller declared directly in
-                  `tools[]`. Does not accept the composed `{server}_{name}` form the
-                  server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-                  `mcp_toolset_reference` for those.
-
-                  - `String name`
-
-                  - `JsonValue; type "tool_reference"constant`
-
-                    - `TOOL_REFERENCE("tool_reference")`
-
-                - `class BetaToolChangeMcpToolReference:`
-
-                  Reference to a single MCP tool by its server and remote name — the
-                  same `server_name`/`name` pair `mcp_tool_use` carries.
-
-                  - `String name`
-
-                  - `String serverName`
-
-                  - `JsonValue; type "mcp_tool_reference"constant`
-
-                    - `MCP_TOOL_REFERENCE("mcp_tool_reference")`
-
-                - `class BetaToolChangeMcpToolsetReference:`
-
-                  Reference to every tool in the named MCP server's toolset.
-
-                  - `String serverName`
-
-                  - `JsonValue; type "mcp_toolset_reference"constant`
-
-                    - `MCP_TOOLSET_REFERENCE("mcp_toolset_reference")`
-
-              - `JsonValue; type "tool_addition"constant`
-
-                - `TOOL_ADDITION("tool_addition")`
-
-              - `Optional<BetaCacheControlEphemeral> cacheControl`
-
-                Create a cache control breakpoint at this content block.
-
-            - `class BetaRequestToolRemovalBlock:`
-
-              Mid-conversation directive to withdraw a tool.
-
-              `tool` references a tool (or MCP toolset) by name from the request's
-              `tools`; it is no longer offered to the model from this point in the
-              conversation onward.
-
-              - `Tool tool`
-
-                Reference to a single tool the caller declared directly in
-                `tools[]`. Does not accept the composed `{server}_{name}` form the
-                server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-                `mcp_toolset_reference` for those.
-
-                - `class BetaToolChangeToolReference:`
-
-                  Reference to a single tool the caller declared directly in
-                  `tools[]`. Does not accept the composed `{server}_{name}` form the
-                  server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-                  `mcp_toolset_reference` for those.
-
-                - `class BetaToolChangeMcpToolReference:`
-
-                  Reference to a single MCP tool by its server and remote name — the
-                  same `server_name`/`name` pair `mcp_tool_use` carries.
-
-                - `class BetaToolChangeMcpToolsetReference:`
-
-                  Reference to every tool in the named MCP server's toolset.
-
-              - `JsonValue; type "tool_removal"constant`
-
-                - `TOOL_REMOVAL("tool_removal")`
-
-              - `Optional<BetaCacheControlEphemeral> cacheControl`
-
-                Create a cache control breakpoint at this content block.
-
-          - `JsonValue; type "mid_conv_system"constant`
-
-            - `MID_CONV_SYSTEM("mid_conv_system")`
-
-          - `Optional<BetaCacheControlEphemeral> cacheControl`
-
-            Create a cache control breakpoint at this content block.
-
         - `class BetaRequestToolAdditionBlock:`
 
           Mid-conversation directive to surface a declared tool.
@@ -5820,6 +6606,57 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
           `tools`; it is offered to the model from this point in the
           conversation onward.
 
+          - `Tool tool`
+
+            Reference to a single tool the caller declared directly in
+            `tools[]`. Does not accept the composed `{server}_{name}` form the
+            server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+            `mcp_toolset_reference` for those.
+
+            - `class BetaToolChangeToolReference:`
+
+              Reference to a single tool the caller declared directly in
+              `tools[]`. Does not accept the composed `{server}_{name}` form the
+              server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+              `mcp_toolset_reference` for those.
+
+              - `String name`
+
+              - `JsonValue; type "tool_reference"constant`
+
+                - `TOOL_REFERENCE("tool_reference")`
+
+            - `class BetaToolChangeMcpToolReference:`
+
+              Reference to a single MCP tool by its server and remote name — the
+              same `server_name`/`name` pair `mcp_tool_use` carries.
+
+              - `String name`
+
+              - `String serverName`
+
+              - `JsonValue; type "mcp_tool_reference"constant`
+
+                - `MCP_TOOL_REFERENCE("mcp_tool_reference")`
+
+            - `class BetaToolChangeMcpToolsetReference:`
+
+              Reference to every tool in the named MCP server's toolset.
+
+              - `String serverName`
+
+              - `JsonValue; type "mcp_toolset_reference"constant`
+
+                - `MCP_TOOLSET_REFERENCE("mcp_toolset_reference")`
+
+          - `JsonValue; type "tool_addition"constant`
+
+            - `TOOL_ADDITION("tool_addition")`
+
+          - `Optional<BetaCacheControlEphemeral> cacheControl`
+
+            Create a cache control breakpoint at this content block.
+
         - `class BetaRequestToolRemovalBlock:`
 
           Mid-conversation directive to withdraw a tool.
@@ -5827,6 +6664,37 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
           `tool` references a tool (or MCP toolset) by name from the request's
           `tools`; it is no longer offered to the model from this point in the
           conversation onward.
+
+          - `Tool tool`
+
+            Reference to a single tool the caller declared directly in
+            `tools[]`. Does not accept the composed `{server}_{name}` form the
+            server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+            `mcp_toolset_reference` for those.
+
+            - `class BetaToolChangeToolReference:`
+
+              Reference to a single tool the caller declared directly in
+              `tools[]`. Does not accept the composed `{server}_{name}` form the
+              server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+              `mcp_toolset_reference` for those.
+
+            - `class BetaToolChangeMcpToolReference:`
+
+              Reference to a single MCP tool by its server and remote name — the
+              same `server_name`/`name` pair `mcp_tool_use` carries.
+
+            - `class BetaToolChangeMcpToolsetReference:`
+
+              Reference to every tool in the named MCP server's toolset.
+
+          - `JsonValue; type "tool_removal"constant`
+
+            - `TOOL_REMOVAL("tool_removal")`
+
+          - `Optional<BetaCacheControlEphemeral> cacheControl`
+
+            Create a cache control breakpoint at this content block.
 
         - `class BetaFallbackBlockParam:`
 
@@ -6368,6 +7236,412 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
 
         When true, guarantees schema validation on tool names and inputs
 
+    - `class BetaBrowserToolset20260801:`
+
+      The browser toolset: a single `tools[]` entry (carrying no
+      `name`) that declares the browser tool family. The model is served
+      the family's tool with any members disabled via `configs` removed
+      from its schema.
+
+      - `JsonValue; type "browser_toolset_20260801"constant`
+
+        - `BROWSER_TOOLSET_20260801("browser_toolset_20260801")`
+
+      - `Optional<List<AllowedCaller>> allowedCallers`
+
+        - `DIRECT("direct")`
+
+        - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
+      - `Optional<BetaCacheControlEphemeral> cacheControl`
+
+        Create a cache control breakpoint at this content block.
+
+      - `Optional<BetaBrowserToolsetConfigs> configs`
+
+        Per-member configuration for `browser_toolset_20260801`: one
+        optional field per member tool, keyed by the member name — the same
+        name the member's `tool_use` blocks carry. Every member is an
+        accepted key, and a member's defaults apply wherever its key is
+        absent. Unknown keys are rejected: the field set is this toolset
+        version's complete member set.
+
+        - `Optional<BetaBrowserCloseTabConfig> closeTab`
+
+          `close_tab`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaBrowserDoubleClickConfig> doubleClick`
+
+          `double_click`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaBrowserFileUploadConfig> fileUpload`
+
+          `file_upload`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaBrowserFindConfig> find`
+
+          `find`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaBrowserFormInputConfig> formInput`
+
+          `form_input`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaBrowserGetPageTextConfig> getPageText`
+
+          `get_page_text`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaBrowserHoldKeyConfig> holdKey`
+
+          `hold_key`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaBrowserHoverConfig> hover`
+
+          `hover`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaBrowserJavascriptExecConfig> javascriptExec`
+
+          `javascript_exec`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaBrowserKeyConfig> key`
+
+          `key`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaBrowserLeftClickConfig> leftClick`
+
+          `left_click`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaBrowserLeftClickDragConfig> leftClickDrag`
+
+          `left_click_drag`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaBrowserLeftMouseDownConfig> leftMouseDown`
+
+          `left_mouse_down`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaBrowserLeftMouseUpConfig> leftMouseUp`
+
+          `left_mouse_up`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaBrowserListTabsConfig> listTabs`
+
+          `list_tabs`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaBrowserMiddleClickConfig> middleClick`
+
+          `middle_click`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaBrowserMouseMoveConfig> mouseMove`
+
+          `mouse_move`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaBrowserNavigateConfig> navigate`
+
+          `navigate`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaBrowserNewTabConfig> newTab`
+
+          `new_tab`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaBrowserReadConsoleConfig> readConsole`
+
+          `read_console`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaBrowserReadNetworkConfig> readNetwork`
+
+          `read_network`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaBrowserReadPageConfig> readPage`
+
+          `read_page`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaBrowserRightClickConfig> rightClick`
+
+          `right_click`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaBrowserScreenshotConfig> screenshot`
+
+          `screenshot`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaBrowserScrollConfig> scroll`
+
+          `scroll`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaBrowserScrollToConfig> scrollTo`
+
+          `scroll_to`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaBrowserSwitchTabConfig> switchTab`
+
+          `switch_tab`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaBrowserTripleClickConfig> tripleClick`
+
+          `triple_click`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaBrowserTypeConfig> type`
+
+          `type`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaBrowserWaitConfig> wait`
+
+          `wait`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaBrowserZoomConfig> zoom`
+
+          `zoom`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
     - `class BetaToolComputerUse20241022:`
 
       - `long displayHeightPx`
@@ -6597,6 +7871,248 @@ Learn more about token counting in our [user guide](../build-with-claude/build-w
       - `Optional<Boolean> strict`
 
         When true, guarantees schema validation on tool names and inputs
+
+    - `class BetaComputerToolset20260801:`
+
+      The computer toolset: a single `tools[]` entry (carrying no
+      `name`) that declares the computer tool family. The model is
+      served the family's tool with any members disabled via `configs`
+      removed from its schema. Every member is enabled by default, zoom
+      included. The single-tool options `display_number` and
+      `enable_zoom` are not fields of a toolset entry — it carries only
+      `type`, `configs`, and `cache_control`; zoom is controlled
+      via `configs.zoom.enabled`.
+
+      - `JsonValue; type "computer_toolset_20260801"constant`
+
+        - `COMPUTER_TOOLSET_20260801("computer_toolset_20260801")`
+
+      - `Optional<List<AllowedCaller>> allowedCallers`
+
+        - `DIRECT("direct")`
+
+        - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+        - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+        - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
+      - `Optional<BetaCacheControlEphemeral> cacheControl`
+
+        Create a cache control breakpoint at this content block.
+
+      - `Optional<BetaComputerToolsetConfigs> configs`
+
+        Per-member configuration for `computer_toolset_20260801`: one
+        optional field per member tool, keyed by the member name — the same
+        name the member's `tool_use` blocks carry. Every member is an
+        accepted key, and a member's defaults apply wherever its key is
+        absent. Unknown keys are rejected: the field set is this toolset
+        version's complete member set.
+
+        - `Optional<BetaComputerCursorPositionConfig> cursorPosition`
+
+          `cursor_position`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaComputerDoubleClickConfig> doubleClick`
+
+          `double_click`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaComputerHoldKeyConfig> holdKey`
+
+          `hold_key`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaComputerKeyConfig> key`
+
+          `key`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaComputerLeftClickConfig> leftClick`
+
+          `left_click`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaComputerLeftClickDragConfig> leftClickDrag`
+
+          `left_click_drag`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaComputerLeftMouseDownConfig> leftMouseDown`
+
+          `left_mouse_down`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaComputerLeftMouseUpConfig> leftMouseUp`
+
+          `left_mouse_up`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaComputerMiddleClickConfig> middleClick`
+
+          `middle_click`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaComputerMouseMoveConfig> mouseMove`
+
+          `mouse_move`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaComputerRightClickConfig> rightClick`
+
+          `right_click`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaComputerScreenshotConfig> screenshot`
+
+          `screenshot`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaComputerScrollConfig> scroll`
+
+          `scroll`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaComputerTripleClickConfig> tripleClick`
+
+          `triple_click`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaComputerTypeConfig> type`
+
+          `type`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaComputerWaitConfig> wait`
+
+          `wait`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+        - `Optional<BetaComputerZoomConfig> zoom`
+
+          `zoom`'s config overrides.
+
+          - `Optional<Boolean> deferLoading`
+
+            Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+          - `Optional<Boolean> enabled`
+
+            Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
     - `class BetaToolTextEditor20250124:`
 
@@ -7342,7 +8858,7 @@ public final class Main {
 
         MessageCountTokensParams params = MessageCountTokensParams.builder()
             .addUserMessage("Hello, world")
-            .model(Model.CLAUDE_OPUS_4_6)
+            .model(Model.CLAUDE_OPUS_5)
             .build();
         BetaMessageTokensCount betaMessageTokensCount = client.beta().messages().countTokens(params);
     }
@@ -8114,6 +9630,1605 @@ public final class Main {
   - `JsonValue; type "bash_code_execution_tool_result_error"constant`
 
     - `BASH_CODE_EXECUTION_TOOL_RESULT_ERROR("bash_code_execution_tool_result_error")`
+
+### Beta Browser Close Tab Config
+
+- `class BetaBrowserCloseTabConfig:`
+
+  `close_tab`'s config overrides.
+
+  - `Optional<Boolean> deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Optional<Boolean> enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Double Click Config
+
+- `class BetaBrowserDoubleClickConfig:`
+
+  `double_click`'s config overrides.
+
+  - `Optional<Boolean> deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Optional<Boolean> enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser File Upload Config
+
+- `class BetaBrowserFileUploadConfig:`
+
+  `file_upload`'s config overrides.
+
+  - `Optional<Boolean> deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Optional<Boolean> enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Find Config
+
+- `class BetaBrowserFindConfig:`
+
+  `find`'s config overrides.
+
+  - `Optional<Boolean> deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Optional<Boolean> enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Form Input Config
+
+- `class BetaBrowserFormInputConfig:`
+
+  `form_input`'s config overrides.
+
+  - `Optional<Boolean> deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Optional<Boolean> enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Get Page Text Config
+
+- `class BetaBrowserGetPageTextConfig:`
+
+  `get_page_text`'s config overrides.
+
+  - `Optional<Boolean> deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Optional<Boolean> enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Hold Key Config
+
+- `class BetaBrowserHoldKeyConfig:`
+
+  `hold_key`'s config overrides.
+
+  - `Optional<Boolean> deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Optional<Boolean> enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Hover Config
+
+- `class BetaBrowserHoverConfig:`
+
+  `hover`'s config overrides.
+
+  - `Optional<Boolean> deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Optional<Boolean> enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Javascript Exec Config
+
+- `class BetaBrowserJavascriptExecConfig:`
+
+  `javascript_exec`'s config overrides.
+
+  - `Optional<Boolean> deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Optional<Boolean> enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Key Config
+
+- `class BetaBrowserKeyConfig:`
+
+  `key`'s config overrides.
+
+  - `Optional<Boolean> deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Optional<Boolean> enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Left Click Config
+
+- `class BetaBrowserLeftClickConfig:`
+
+  `left_click`'s config overrides.
+
+  - `Optional<Boolean> deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Optional<Boolean> enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Left Click Drag Config
+
+- `class BetaBrowserLeftClickDragConfig:`
+
+  `left_click_drag`'s config overrides.
+
+  - `Optional<Boolean> deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Optional<Boolean> enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Left Mouse Down Config
+
+- `class BetaBrowserLeftMouseDownConfig:`
+
+  `left_mouse_down`'s config overrides.
+
+  - `Optional<Boolean> deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Optional<Boolean> enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Left Mouse Up Config
+
+- `class BetaBrowserLeftMouseUpConfig:`
+
+  `left_mouse_up`'s config overrides.
+
+  - `Optional<Boolean> deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Optional<Boolean> enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser List Tabs Config
+
+- `class BetaBrowserListTabsConfig:`
+
+  `list_tabs`'s config overrides.
+
+  - `Optional<Boolean> deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Optional<Boolean> enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Middle Click Config
+
+- `class BetaBrowserMiddleClickConfig:`
+
+  `middle_click`'s config overrides.
+
+  - `Optional<Boolean> deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Optional<Boolean> enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Mouse Move Config
+
+- `class BetaBrowserMouseMoveConfig:`
+
+  `mouse_move`'s config overrides.
+
+  - `Optional<Boolean> deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Optional<Boolean> enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Navigate Config
+
+- `class BetaBrowserNavigateConfig:`
+
+  `navigate`'s config overrides.
+
+  - `Optional<Boolean> deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Optional<Boolean> enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser New Tab Config
+
+- `class BetaBrowserNewTabConfig:`
+
+  `new_tab`'s config overrides.
+
+  - `Optional<Boolean> deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Optional<Boolean> enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Read Console Config
+
+- `class BetaBrowserReadConsoleConfig:`
+
+  `read_console`'s config overrides.
+
+  - `Optional<Boolean> deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Optional<Boolean> enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Read Network Config
+
+- `class BetaBrowserReadNetworkConfig:`
+
+  `read_network`'s config overrides.
+
+  - `Optional<Boolean> deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Optional<Boolean> enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Read Page Config
+
+- `class BetaBrowserReadPageConfig:`
+
+  `read_page`'s config overrides.
+
+  - `Optional<Boolean> deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Optional<Boolean> enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Right Click Config
+
+- `class BetaBrowserRightClickConfig:`
+
+  `right_click`'s config overrides.
+
+  - `Optional<Boolean> deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Optional<Boolean> enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Screenshot Config
+
+- `class BetaBrowserScreenshotConfig:`
+
+  `screenshot`'s config overrides.
+
+  - `Optional<Boolean> deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Optional<Boolean> enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Scroll Config
+
+- `class BetaBrowserScrollConfig:`
+
+  `scroll`'s config overrides.
+
+  - `Optional<Boolean> deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Optional<Boolean> enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Scroll To Config
+
+- `class BetaBrowserScrollToConfig:`
+
+  `scroll_to`'s config overrides.
+
+  - `Optional<Boolean> deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Optional<Boolean> enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser State Block Param
+
+- `class BetaBrowserStateBlockParam:`
+
+  The caller's browser state after a browser toolset member call —
+  the full inventory of open tabs, which tab is active, and any side
+  effects (tabs opened, download state changes) the call produced.
+
+  At most one per `tool_result`, only on a non-error result answering a
+  browser toolset member `tool_use`. The server renders the
+  model-visible text from it; the model never sees the raw fields.
+
+  - `List<BetaBrowserStateTabEntry> tabs`
+
+    All tabs open in the browser after this call — the full inventory, not a delta. May be empty. Whenever non-empty, exactly one entry carries `active: true`.
+
+    - `String tabId`
+
+      The caller-assigned identifier for this tab, unique within the inventory.
+
+    - `String title`
+
+      The title of the page the tab is showing. May be empty.
+
+    - `String url`
+
+      The URL of the page the tab is showing. May be empty.
+
+    - `Optional<Boolean> active`
+
+      Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
+
+  - `JsonValue; type "browser_state"constant`
+
+    - `BROWSER_STATE("browser_state")`
+
+  - `Optional<BetaCacheControlEphemeral> cacheControl`
+
+    Create a cache control breakpoint at this content block.
+
+    - `JsonValue; type "ephemeral"constant`
+
+      - `EPHEMERAL("ephemeral")`
+
+    - `Optional<Ttl> ttl`
+
+      The time-to-live for the cache control breakpoint.
+
+      This may be one the following values:
+
+      - `5m`: 5 minutes
+      - `1h`: 1 hour
+
+      Defaults to `5m`. See [prompt caching pricing](../build-with-claude/build-with-claude-prompt-caching.md) for details.
+
+      - `TTL_5M("5m")`
+
+      - `TTL_1H("1h")`
+
+  - `Optional<List<BetaBrowserStateChange>> stateChanges`
+
+    Tabs opened and download state changes during this call. "Nothing to report" is expressed by omitting the field, never by an empty list.
+
+    - `class BetaBrowserStateChangeTabOpened:`
+
+      A tab this call's execution opened that remains open at its end —
+      the creation delta of the `tabs` inventory, not an event log.
+
+      Carries only the `tab_id`; the tab's `title` and `url` live on its
+      `tabs` entry, which must include the same `tab_id`. A tab opened
+      during a failed call gets no deferred `tab_opened`; it simply appears
+      in the next result's `tabs` inventory.
+
+      - `String tabId`
+
+        The `tab_id` of the opened tab, present in `tabs`.
+
+      - `JsonValue; type "tab_opened"constant`
+
+        - `TAB_OPENED("tab_opened")`
+
+    - `class BetaBrowserStateChangeDownloadStarted:`
+
+      A file download that started during this call.
+
+      - `String downloadId`
+
+        The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+      - `JsonValue; type "download_started"constant`
+
+        - `DOWNLOAD_STARTED("download_started")`
+
+      - `String url`
+
+        The final post-redirect URL the download was served from.
+
+    - `class BetaBrowserStateChangeDownloadCompleted:`
+
+      A file download that finished during this call, reported with the
+      same `download_id` as its `download_started` — or without a prior
+      `download_started`, when the download finished during the call that
+      started it (at most one state change per `download_id` per result).
+
+      - `String downloadId`
+
+        The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+      - `JsonValue; type "download_completed"constant`
+
+        - `DOWNLOAD_COMPLETED("download_completed")`
+
+      - `String url`
+
+        The final post-redirect URL the download was served from.
+
+      - `Optional<String> path`
+
+        Where the executor saved the file, on the executor's filesystem. Only included when another tool in the same environment can read the file at that path.
+
+      - `Optional<Long> sizeBytes`
+
+        The completed download's size.
+
+    - `class BetaBrowserStateChangeDownloadFailed:`
+
+      A file download that failed — or was cancelled — during this call.
+
+      - `String downloadId`
+
+        The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+      - `JsonValue; type "download_failed"constant`
+
+        - `DOWNLOAD_FAILED("download_failed")`
+
+      - `String url`
+
+        The final post-redirect URL the download was served from.
+
+      - `Optional<String> error`
+
+        The failure or cancellation detail, when known.
+
+### Beta Browser State Change
+
+- `class BetaBrowserStateChange: A class that can be one of several variants.union`
+
+  A tab this call's execution opened that remains open at its end —
+  the creation delta of the `tabs` inventory, not an event log.
+
+  Carries only the `tab_id`; the tab's `title` and `url` live on its
+  `tabs` entry, which must include the same `tab_id`. A tab opened
+  during a failed call gets no deferred `tab_opened`; it simply appears
+  in the next result's `tabs` inventory.
+
+  - `class BetaBrowserStateChangeTabOpened:`
+
+    A tab this call's execution opened that remains open at its end —
+    the creation delta of the `tabs` inventory, not an event log.
+
+    Carries only the `tab_id`; the tab's `title` and `url` live on its
+    `tabs` entry, which must include the same `tab_id`. A tab opened
+    during a failed call gets no deferred `tab_opened`; it simply appears
+    in the next result's `tabs` inventory.
+
+    - `String tabId`
+
+      The `tab_id` of the opened tab, present in `tabs`.
+
+    - `JsonValue; type "tab_opened"constant`
+
+      - `TAB_OPENED("tab_opened")`
+
+  - `class BetaBrowserStateChangeDownloadStarted:`
+
+    A file download that started during this call.
+
+    - `String downloadId`
+
+      The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+    - `JsonValue; type "download_started"constant`
+
+      - `DOWNLOAD_STARTED("download_started")`
+
+    - `String url`
+
+      The final post-redirect URL the download was served from.
+
+  - `class BetaBrowserStateChangeDownloadCompleted:`
+
+    A file download that finished during this call, reported with the
+    same `download_id` as its `download_started` — or without a prior
+    `download_started`, when the download finished during the call that
+    started it (at most one state change per `download_id` per result).
+
+    - `String downloadId`
+
+      The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+    - `JsonValue; type "download_completed"constant`
+
+      - `DOWNLOAD_COMPLETED("download_completed")`
+
+    - `String url`
+
+      The final post-redirect URL the download was served from.
+
+    - `Optional<String> path`
+
+      Where the executor saved the file, on the executor's filesystem. Only included when another tool in the same environment can read the file at that path.
+
+    - `Optional<Long> sizeBytes`
+
+      The completed download's size.
+
+  - `class BetaBrowserStateChangeDownloadFailed:`
+
+    A file download that failed — or was cancelled — during this call.
+
+    - `String downloadId`
+
+      The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+    - `JsonValue; type "download_failed"constant`
+
+      - `DOWNLOAD_FAILED("download_failed")`
+
+    - `String url`
+
+      The final post-redirect URL the download was served from.
+
+    - `Optional<String> error`
+
+      The failure or cancellation detail, when known.
+
+### Beta Browser State Change Download Completed
+
+- `class BetaBrowserStateChangeDownloadCompleted:`
+
+  A file download that finished during this call, reported with the
+  same `download_id` as its `download_started` — or without a prior
+  `download_started`, when the download finished during the call that
+  started it (at most one state change per `download_id` per result).
+
+  - `String downloadId`
+
+    The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+  - `JsonValue; type "download_completed"constant`
+
+    - `DOWNLOAD_COMPLETED("download_completed")`
+
+  - `String url`
+
+    The final post-redirect URL the download was served from.
+
+  - `Optional<String> path`
+
+    Where the executor saved the file, on the executor's filesystem. Only included when another tool in the same environment can read the file at that path.
+
+  - `Optional<Long> sizeBytes`
+
+    The completed download's size.
+
+### Beta Browser State Change Download Failed
+
+- `class BetaBrowserStateChangeDownloadFailed:`
+
+  A file download that failed — or was cancelled — during this call.
+
+  - `String downloadId`
+
+    The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+  - `JsonValue; type "download_failed"constant`
+
+    - `DOWNLOAD_FAILED("download_failed")`
+
+  - `String url`
+
+    The final post-redirect URL the download was served from.
+
+  - `Optional<String> error`
+
+    The failure or cancellation detail, when known.
+
+### Beta Browser State Change Download Started
+
+- `class BetaBrowserStateChangeDownloadStarted:`
+
+  A file download that started during this call.
+
+  - `String downloadId`
+
+    The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+  - `JsonValue; type "download_started"constant`
+
+    - `DOWNLOAD_STARTED("download_started")`
+
+  - `String url`
+
+    The final post-redirect URL the download was served from.
+
+### Beta Browser State Change Tab Opened
+
+- `class BetaBrowserStateChangeTabOpened:`
+
+  A tab this call's execution opened that remains open at its end —
+  the creation delta of the `tabs` inventory, not an event log.
+
+  Carries only the `tab_id`; the tab's `title` and `url` live on its
+  `tabs` entry, which must include the same `tab_id`. A tab opened
+  during a failed call gets no deferred `tab_opened`; it simply appears
+  in the next result's `tabs` inventory.
+
+  - `String tabId`
+
+    The `tab_id` of the opened tab, present in `tabs`.
+
+  - `JsonValue; type "tab_opened"constant`
+
+    - `TAB_OPENED("tab_opened")`
+
+### Beta Browser State Tab Entry
+
+- `class BetaBrowserStateTabEntry:`
+
+  One open browser tab reported in a `browser_state` block's `tabs`
+  inventory.
+
+  `tab_id` is the caller-assigned identifier for the tab; `title` and
+  `url` describe the page the tab is currently showing and may be empty
+  strings (a blank tab legitimately has both empty). `active` marks the
+  tab that is active after this call; whenever `tabs` is non-empty,
+  exactly one entry is marked.
+
+  - `String tabId`
+
+    The caller-assigned identifier for this tab, unique within the inventory.
+
+  - `String title`
+
+    The title of the page the tab is showing. May be empty.
+
+  - `String url`
+
+    The URL of the page the tab is showing. May be empty.
+
+  - `Optional<Boolean> active`
+
+    Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
+
+### Beta Browser Switch Tab Config
+
+- `class BetaBrowserSwitchTabConfig:`
+
+  `switch_tab`'s config overrides.
+
+  - `Optional<Boolean> deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Optional<Boolean> enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Toolset 20260801
+
+- `class BetaBrowserToolset20260801:`
+
+  The browser toolset: a single `tools[]` entry (carrying no
+  `name`) that declares the browser tool family. The model is served
+  the family's tool with any members disabled via `configs` removed
+  from its schema.
+
+  - `JsonValue; type "browser_toolset_20260801"constant`
+
+    - `BROWSER_TOOLSET_20260801("browser_toolset_20260801")`
+
+  - `Optional<List<AllowedCaller>> allowedCallers`
+
+    - `DIRECT("direct")`
+
+    - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+    - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+    - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
+  - `Optional<BetaCacheControlEphemeral> cacheControl`
+
+    Create a cache control breakpoint at this content block.
+
+    - `JsonValue; type "ephemeral"constant`
+
+      - `EPHEMERAL("ephemeral")`
+
+    - `Optional<Ttl> ttl`
+
+      The time-to-live for the cache control breakpoint.
+
+      This may be one the following values:
+
+      - `5m`: 5 minutes
+      - `1h`: 1 hour
+
+      Defaults to `5m`. See [prompt caching pricing](../build-with-claude/build-with-claude-prompt-caching.md) for details.
+
+      - `TTL_5M("5m")`
+
+      - `TTL_1H("1h")`
+
+  - `Optional<BetaBrowserToolsetConfigs> configs`
+
+    Per-member configuration for `browser_toolset_20260801`: one
+    optional field per member tool, keyed by the member name — the same
+    name the member's `tool_use` blocks carry. Every member is an
+    accepted key, and a member's defaults apply wherever its key is
+    absent. Unknown keys are rejected: the field set is this toolset
+    version's complete member set.
+
+    - `Optional<BetaBrowserCloseTabConfig> closeTab`
+
+      `close_tab`'s config overrides.
+
+      - `Optional<Boolean> deferLoading`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Optional<Boolean> enabled`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `Optional<BetaBrowserDoubleClickConfig> doubleClick`
+
+      `double_click`'s config overrides.
+
+      - `Optional<Boolean> deferLoading`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Optional<Boolean> enabled`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `Optional<BetaBrowserFileUploadConfig> fileUpload`
+
+      `file_upload`'s config overrides.
+
+      - `Optional<Boolean> deferLoading`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Optional<Boolean> enabled`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `Optional<BetaBrowserFindConfig> find`
+
+      `find`'s config overrides.
+
+      - `Optional<Boolean> deferLoading`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Optional<Boolean> enabled`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `Optional<BetaBrowserFormInputConfig> formInput`
+
+      `form_input`'s config overrides.
+
+      - `Optional<Boolean> deferLoading`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Optional<Boolean> enabled`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `Optional<BetaBrowserGetPageTextConfig> getPageText`
+
+      `get_page_text`'s config overrides.
+
+      - `Optional<Boolean> deferLoading`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Optional<Boolean> enabled`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `Optional<BetaBrowserHoldKeyConfig> holdKey`
+
+      `hold_key`'s config overrides.
+
+      - `Optional<Boolean> deferLoading`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Optional<Boolean> enabled`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `Optional<BetaBrowserHoverConfig> hover`
+
+      `hover`'s config overrides.
+
+      - `Optional<Boolean> deferLoading`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Optional<Boolean> enabled`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `Optional<BetaBrowserJavascriptExecConfig> javascriptExec`
+
+      `javascript_exec`'s config overrides.
+
+      - `Optional<Boolean> deferLoading`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Optional<Boolean> enabled`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `Optional<BetaBrowserKeyConfig> key`
+
+      `key`'s config overrides.
+
+      - `Optional<Boolean> deferLoading`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Optional<Boolean> enabled`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `Optional<BetaBrowserLeftClickConfig> leftClick`
+
+      `left_click`'s config overrides.
+
+      - `Optional<Boolean> deferLoading`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Optional<Boolean> enabled`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `Optional<BetaBrowserLeftClickDragConfig> leftClickDrag`
+
+      `left_click_drag`'s config overrides.
+
+      - `Optional<Boolean> deferLoading`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Optional<Boolean> enabled`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `Optional<BetaBrowserLeftMouseDownConfig> leftMouseDown`
+
+      `left_mouse_down`'s config overrides.
+
+      - `Optional<Boolean> deferLoading`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Optional<Boolean> enabled`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `Optional<BetaBrowserLeftMouseUpConfig> leftMouseUp`
+
+      `left_mouse_up`'s config overrides.
+
+      - `Optional<Boolean> deferLoading`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Optional<Boolean> enabled`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `Optional<BetaBrowserListTabsConfig> listTabs`
+
+      `list_tabs`'s config overrides.
+
+      - `Optional<Boolean> deferLoading`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Optional<Boolean> enabled`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `Optional<BetaBrowserMiddleClickConfig> middleClick`
+
+      `middle_click`'s config overrides.
+
+      - `Optional<Boolean> deferLoading`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Optional<Boolean> enabled`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `Optional<BetaBrowserMouseMoveConfig> mouseMove`
+
+      `mouse_move`'s config overrides.
+
+      - `Optional<Boolean> deferLoading`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Optional<Boolean> enabled`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `Optional<BetaBrowserNavigateConfig> navigate`
+
+      `navigate`'s config overrides.
+
+      - `Optional<Boolean> deferLoading`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Optional<Boolean> enabled`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `Optional<BetaBrowserNewTabConfig> newTab`
+
+      `new_tab`'s config overrides.
+
+      - `Optional<Boolean> deferLoading`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Optional<Boolean> enabled`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `Optional<BetaBrowserReadConsoleConfig> readConsole`
+
+      `read_console`'s config overrides.
+
+      - `Optional<Boolean> deferLoading`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Optional<Boolean> enabled`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `Optional<BetaBrowserReadNetworkConfig> readNetwork`
+
+      `read_network`'s config overrides.
+
+      - `Optional<Boolean> deferLoading`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Optional<Boolean> enabled`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `Optional<BetaBrowserReadPageConfig> readPage`
+
+      `read_page`'s config overrides.
+
+      - `Optional<Boolean> deferLoading`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Optional<Boolean> enabled`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `Optional<BetaBrowserRightClickConfig> rightClick`
+
+      `right_click`'s config overrides.
+
+      - `Optional<Boolean> deferLoading`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Optional<Boolean> enabled`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `Optional<BetaBrowserScreenshotConfig> screenshot`
+
+      `screenshot`'s config overrides.
+
+      - `Optional<Boolean> deferLoading`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Optional<Boolean> enabled`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `Optional<BetaBrowserScrollConfig> scroll`
+
+      `scroll`'s config overrides.
+
+      - `Optional<Boolean> deferLoading`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Optional<Boolean> enabled`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `Optional<BetaBrowserScrollToConfig> scrollTo`
+
+      `scroll_to`'s config overrides.
+
+      - `Optional<Boolean> deferLoading`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Optional<Boolean> enabled`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `Optional<BetaBrowserSwitchTabConfig> switchTab`
+
+      `switch_tab`'s config overrides.
+
+      - `Optional<Boolean> deferLoading`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Optional<Boolean> enabled`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `Optional<BetaBrowserTripleClickConfig> tripleClick`
+
+      `triple_click`'s config overrides.
+
+      - `Optional<Boolean> deferLoading`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Optional<Boolean> enabled`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `Optional<BetaBrowserTypeConfig> type`
+
+      `type`'s config overrides.
+
+      - `Optional<Boolean> deferLoading`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Optional<Boolean> enabled`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `Optional<BetaBrowserWaitConfig> wait`
+
+      `wait`'s config overrides.
+
+      - `Optional<Boolean> deferLoading`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Optional<Boolean> enabled`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `Optional<BetaBrowserZoomConfig> zoom`
+
+      `zoom`'s config overrides.
+
+      - `Optional<Boolean> deferLoading`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Optional<Boolean> enabled`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Toolset Configs
+
+- `class BetaBrowserToolsetConfigs:`
+
+  Per-member configuration for `browser_toolset_20260801`: one
+  optional field per member tool, keyed by the member name — the same
+  name the member's `tool_use` blocks carry. Every member is an
+  accepted key, and a member's defaults apply wherever its key is
+  absent. Unknown keys are rejected: the field set is this toolset
+  version's complete member set.
+
+  - `Optional<BetaBrowserCloseTabConfig> closeTab`
+
+    `close_tab`'s config overrides.
+
+    - `Optional<Boolean> deferLoading`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Optional<Boolean> enabled`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `Optional<BetaBrowserDoubleClickConfig> doubleClick`
+
+    `double_click`'s config overrides.
+
+    - `Optional<Boolean> deferLoading`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Optional<Boolean> enabled`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `Optional<BetaBrowserFileUploadConfig> fileUpload`
+
+    `file_upload`'s config overrides.
+
+    - `Optional<Boolean> deferLoading`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Optional<Boolean> enabled`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `Optional<BetaBrowserFindConfig> find`
+
+    `find`'s config overrides.
+
+    - `Optional<Boolean> deferLoading`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Optional<Boolean> enabled`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `Optional<BetaBrowserFormInputConfig> formInput`
+
+    `form_input`'s config overrides.
+
+    - `Optional<Boolean> deferLoading`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Optional<Boolean> enabled`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `Optional<BetaBrowserGetPageTextConfig> getPageText`
+
+    `get_page_text`'s config overrides.
+
+    - `Optional<Boolean> deferLoading`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Optional<Boolean> enabled`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `Optional<BetaBrowserHoldKeyConfig> holdKey`
+
+    `hold_key`'s config overrides.
+
+    - `Optional<Boolean> deferLoading`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Optional<Boolean> enabled`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `Optional<BetaBrowserHoverConfig> hover`
+
+    `hover`'s config overrides.
+
+    - `Optional<Boolean> deferLoading`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Optional<Boolean> enabled`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `Optional<BetaBrowserJavascriptExecConfig> javascriptExec`
+
+    `javascript_exec`'s config overrides.
+
+    - `Optional<Boolean> deferLoading`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Optional<Boolean> enabled`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `Optional<BetaBrowserKeyConfig> key`
+
+    `key`'s config overrides.
+
+    - `Optional<Boolean> deferLoading`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Optional<Boolean> enabled`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `Optional<BetaBrowserLeftClickConfig> leftClick`
+
+    `left_click`'s config overrides.
+
+    - `Optional<Boolean> deferLoading`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Optional<Boolean> enabled`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `Optional<BetaBrowserLeftClickDragConfig> leftClickDrag`
+
+    `left_click_drag`'s config overrides.
+
+    - `Optional<Boolean> deferLoading`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Optional<Boolean> enabled`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `Optional<BetaBrowserLeftMouseDownConfig> leftMouseDown`
+
+    `left_mouse_down`'s config overrides.
+
+    - `Optional<Boolean> deferLoading`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Optional<Boolean> enabled`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `Optional<BetaBrowserLeftMouseUpConfig> leftMouseUp`
+
+    `left_mouse_up`'s config overrides.
+
+    - `Optional<Boolean> deferLoading`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Optional<Boolean> enabled`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `Optional<BetaBrowserListTabsConfig> listTabs`
+
+    `list_tabs`'s config overrides.
+
+    - `Optional<Boolean> deferLoading`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Optional<Boolean> enabled`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `Optional<BetaBrowserMiddleClickConfig> middleClick`
+
+    `middle_click`'s config overrides.
+
+    - `Optional<Boolean> deferLoading`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Optional<Boolean> enabled`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `Optional<BetaBrowserMouseMoveConfig> mouseMove`
+
+    `mouse_move`'s config overrides.
+
+    - `Optional<Boolean> deferLoading`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Optional<Boolean> enabled`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `Optional<BetaBrowserNavigateConfig> navigate`
+
+    `navigate`'s config overrides.
+
+    - `Optional<Boolean> deferLoading`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Optional<Boolean> enabled`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `Optional<BetaBrowserNewTabConfig> newTab`
+
+    `new_tab`'s config overrides.
+
+    - `Optional<Boolean> deferLoading`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Optional<Boolean> enabled`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `Optional<BetaBrowserReadConsoleConfig> readConsole`
+
+    `read_console`'s config overrides.
+
+    - `Optional<Boolean> deferLoading`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Optional<Boolean> enabled`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `Optional<BetaBrowserReadNetworkConfig> readNetwork`
+
+    `read_network`'s config overrides.
+
+    - `Optional<Boolean> deferLoading`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Optional<Boolean> enabled`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `Optional<BetaBrowserReadPageConfig> readPage`
+
+    `read_page`'s config overrides.
+
+    - `Optional<Boolean> deferLoading`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Optional<Boolean> enabled`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `Optional<BetaBrowserRightClickConfig> rightClick`
+
+    `right_click`'s config overrides.
+
+    - `Optional<Boolean> deferLoading`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Optional<Boolean> enabled`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `Optional<BetaBrowserScreenshotConfig> screenshot`
+
+    `screenshot`'s config overrides.
+
+    - `Optional<Boolean> deferLoading`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Optional<Boolean> enabled`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `Optional<BetaBrowserScrollConfig> scroll`
+
+    `scroll`'s config overrides.
+
+    - `Optional<Boolean> deferLoading`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Optional<Boolean> enabled`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `Optional<BetaBrowserScrollToConfig> scrollTo`
+
+    `scroll_to`'s config overrides.
+
+    - `Optional<Boolean> deferLoading`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Optional<Boolean> enabled`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `Optional<BetaBrowserSwitchTabConfig> switchTab`
+
+    `switch_tab`'s config overrides.
+
+    - `Optional<Boolean> deferLoading`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Optional<Boolean> enabled`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `Optional<BetaBrowserTripleClickConfig> tripleClick`
+
+    `triple_click`'s config overrides.
+
+    - `Optional<Boolean> deferLoading`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Optional<Boolean> enabled`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `Optional<BetaBrowserTypeConfig> type`
+
+    `type`'s config overrides.
+
+    - `Optional<Boolean> deferLoading`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Optional<Boolean> enabled`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `Optional<BetaBrowserWaitConfig> wait`
+
+    `wait`'s config overrides.
+
+    - `Optional<Boolean> deferLoading`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Optional<Boolean> enabled`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `Optional<BetaBrowserZoomConfig> zoom`
+
+    `zoom`'s config overrides.
+
+    - `Optional<Boolean> deferLoading`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Optional<Boolean> enabled`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Triple Click Config
+
+- `class BetaBrowserTripleClickConfig:`
+
+  `triple_click`'s config overrides.
+
+  - `Optional<Boolean> deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Optional<Boolean> enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Type Config
+
+- `class BetaBrowserTypeConfig:`
+
+  `type`'s config overrides.
+
+  - `Optional<Boolean> deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Optional<Boolean> enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Wait Config
+
+- `class BetaBrowserWaitConfig:`
+
+  `wait`'s config overrides.
+
+  - `Optional<Boolean> deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Optional<Boolean> enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Browser Zoom Config
+
+- `class BetaBrowserZoomConfig:`
+
+  `zoom`'s config overrides.
+
+  - `Optional<Boolean> deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Optional<Boolean> enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
 ### Beta Cache Control Ephemeral
 
@@ -9488,6 +12603,722 @@ public final class Main {
 
     - `COMPACTION("compaction")`
 
+### Beta Computer Cursor Position Config
+
+- `class BetaComputerCursorPositionConfig:`
+
+  `cursor_position`'s config overrides.
+
+  - `Optional<Boolean> deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Optional<Boolean> enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Double Click Config
+
+- `class BetaComputerDoubleClickConfig:`
+
+  `double_click`'s config overrides.
+
+  - `Optional<Boolean> deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Optional<Boolean> enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Hold Key Config
+
+- `class BetaComputerHoldKeyConfig:`
+
+  `hold_key`'s config overrides.
+
+  - `Optional<Boolean> deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Optional<Boolean> enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Key Config
+
+- `class BetaComputerKeyConfig:`
+
+  `key`'s config overrides.
+
+  - `Optional<Boolean> deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Optional<Boolean> enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Left Click Config
+
+- `class BetaComputerLeftClickConfig:`
+
+  `left_click`'s config overrides.
+
+  - `Optional<Boolean> deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Optional<Boolean> enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Left Click Drag Config
+
+- `class BetaComputerLeftClickDragConfig:`
+
+  `left_click_drag`'s config overrides.
+
+  - `Optional<Boolean> deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Optional<Boolean> enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Left Mouse Down Config
+
+- `class BetaComputerLeftMouseDownConfig:`
+
+  `left_mouse_down`'s config overrides.
+
+  - `Optional<Boolean> deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Optional<Boolean> enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Left Mouse Up Config
+
+- `class BetaComputerLeftMouseUpConfig:`
+
+  `left_mouse_up`'s config overrides.
+
+  - `Optional<Boolean> deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Optional<Boolean> enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Middle Click Config
+
+- `class BetaComputerMiddleClickConfig:`
+
+  `middle_click`'s config overrides.
+
+  - `Optional<Boolean> deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Optional<Boolean> enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Mouse Move Config
+
+- `class BetaComputerMouseMoveConfig:`
+
+  `mouse_move`'s config overrides.
+
+  - `Optional<Boolean> deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Optional<Boolean> enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Right Click Config
+
+- `class BetaComputerRightClickConfig:`
+
+  `right_click`'s config overrides.
+
+  - `Optional<Boolean> deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Optional<Boolean> enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Screenshot Config
+
+- `class BetaComputerScreenshotConfig:`
+
+  `screenshot`'s config overrides.
+
+  - `Optional<Boolean> deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Optional<Boolean> enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Scroll Config
+
+- `class BetaComputerScrollConfig:`
+
+  `scroll`'s config overrides.
+
+  - `Optional<Boolean> deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Optional<Boolean> enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Toolset 20260801
+
+- `class BetaComputerToolset20260801:`
+
+  The computer toolset: a single `tools[]` entry (carrying no
+  `name`) that declares the computer tool family. The model is
+  served the family's tool with any members disabled via `configs`
+  removed from its schema. Every member is enabled by default, zoom
+  included. The single-tool options `display_number` and
+  `enable_zoom` are not fields of a toolset entry — it carries only
+  `type`, `configs`, and `cache_control`; zoom is controlled
+  via `configs.zoom.enabled`.
+
+  - `JsonValue; type "computer_toolset_20260801"constant`
+
+    - `COMPUTER_TOOLSET_20260801("computer_toolset_20260801")`
+
+  - `Optional<List<AllowedCaller>> allowedCallers`
+
+    - `DIRECT("direct")`
+
+    - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+    - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+    - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
+  - `Optional<BetaCacheControlEphemeral> cacheControl`
+
+    Create a cache control breakpoint at this content block.
+
+    - `JsonValue; type "ephemeral"constant`
+
+      - `EPHEMERAL("ephemeral")`
+
+    - `Optional<Ttl> ttl`
+
+      The time-to-live for the cache control breakpoint.
+
+      This may be one the following values:
+
+      - `5m`: 5 minutes
+      - `1h`: 1 hour
+
+      Defaults to `5m`. See [prompt caching pricing](../build-with-claude/build-with-claude-prompt-caching.md) for details.
+
+      - `TTL_5M("5m")`
+
+      - `TTL_1H("1h")`
+
+  - `Optional<BetaComputerToolsetConfigs> configs`
+
+    Per-member configuration for `computer_toolset_20260801`: one
+    optional field per member tool, keyed by the member name — the same
+    name the member's `tool_use` blocks carry. Every member is an
+    accepted key, and a member's defaults apply wherever its key is
+    absent. Unknown keys are rejected: the field set is this toolset
+    version's complete member set.
+
+    - `Optional<BetaComputerCursorPositionConfig> cursorPosition`
+
+      `cursor_position`'s config overrides.
+
+      - `Optional<Boolean> deferLoading`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Optional<Boolean> enabled`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `Optional<BetaComputerDoubleClickConfig> doubleClick`
+
+      `double_click`'s config overrides.
+
+      - `Optional<Boolean> deferLoading`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Optional<Boolean> enabled`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `Optional<BetaComputerHoldKeyConfig> holdKey`
+
+      `hold_key`'s config overrides.
+
+      - `Optional<Boolean> deferLoading`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Optional<Boolean> enabled`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `Optional<BetaComputerKeyConfig> key`
+
+      `key`'s config overrides.
+
+      - `Optional<Boolean> deferLoading`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Optional<Boolean> enabled`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `Optional<BetaComputerLeftClickConfig> leftClick`
+
+      `left_click`'s config overrides.
+
+      - `Optional<Boolean> deferLoading`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Optional<Boolean> enabled`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `Optional<BetaComputerLeftClickDragConfig> leftClickDrag`
+
+      `left_click_drag`'s config overrides.
+
+      - `Optional<Boolean> deferLoading`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Optional<Boolean> enabled`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `Optional<BetaComputerLeftMouseDownConfig> leftMouseDown`
+
+      `left_mouse_down`'s config overrides.
+
+      - `Optional<Boolean> deferLoading`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Optional<Boolean> enabled`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `Optional<BetaComputerLeftMouseUpConfig> leftMouseUp`
+
+      `left_mouse_up`'s config overrides.
+
+      - `Optional<Boolean> deferLoading`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Optional<Boolean> enabled`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `Optional<BetaComputerMiddleClickConfig> middleClick`
+
+      `middle_click`'s config overrides.
+
+      - `Optional<Boolean> deferLoading`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Optional<Boolean> enabled`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `Optional<BetaComputerMouseMoveConfig> mouseMove`
+
+      `mouse_move`'s config overrides.
+
+      - `Optional<Boolean> deferLoading`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Optional<Boolean> enabled`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `Optional<BetaComputerRightClickConfig> rightClick`
+
+      `right_click`'s config overrides.
+
+      - `Optional<Boolean> deferLoading`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Optional<Boolean> enabled`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `Optional<BetaComputerScreenshotConfig> screenshot`
+
+      `screenshot`'s config overrides.
+
+      - `Optional<Boolean> deferLoading`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Optional<Boolean> enabled`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `Optional<BetaComputerScrollConfig> scroll`
+
+      `scroll`'s config overrides.
+
+      - `Optional<Boolean> deferLoading`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Optional<Boolean> enabled`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `Optional<BetaComputerTripleClickConfig> tripleClick`
+
+      `triple_click`'s config overrides.
+
+      - `Optional<Boolean> deferLoading`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Optional<Boolean> enabled`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `Optional<BetaComputerTypeConfig> type`
+
+      `type`'s config overrides.
+
+      - `Optional<Boolean> deferLoading`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Optional<Boolean> enabled`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `Optional<BetaComputerWaitConfig> wait`
+
+      `wait`'s config overrides.
+
+      - `Optional<Boolean> deferLoading`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Optional<Boolean> enabled`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+    - `Optional<BetaComputerZoomConfig> zoom`
+
+      `zoom`'s config overrides.
+
+      - `Optional<Boolean> deferLoading`
+
+        Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+      - `Optional<Boolean> enabled`
+
+        Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Toolset Configs
+
+- `class BetaComputerToolsetConfigs:`
+
+  Per-member configuration for `computer_toolset_20260801`: one
+  optional field per member tool, keyed by the member name — the same
+  name the member's `tool_use` blocks carry. Every member is an
+  accepted key, and a member's defaults apply wherever its key is
+  absent. Unknown keys are rejected: the field set is this toolset
+  version's complete member set.
+
+  - `Optional<BetaComputerCursorPositionConfig> cursorPosition`
+
+    `cursor_position`'s config overrides.
+
+    - `Optional<Boolean> deferLoading`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Optional<Boolean> enabled`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `Optional<BetaComputerDoubleClickConfig> doubleClick`
+
+    `double_click`'s config overrides.
+
+    - `Optional<Boolean> deferLoading`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Optional<Boolean> enabled`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `Optional<BetaComputerHoldKeyConfig> holdKey`
+
+    `hold_key`'s config overrides.
+
+    - `Optional<Boolean> deferLoading`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Optional<Boolean> enabled`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `Optional<BetaComputerKeyConfig> key`
+
+    `key`'s config overrides.
+
+    - `Optional<Boolean> deferLoading`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Optional<Boolean> enabled`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `Optional<BetaComputerLeftClickConfig> leftClick`
+
+    `left_click`'s config overrides.
+
+    - `Optional<Boolean> deferLoading`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Optional<Boolean> enabled`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `Optional<BetaComputerLeftClickDragConfig> leftClickDrag`
+
+    `left_click_drag`'s config overrides.
+
+    - `Optional<Boolean> deferLoading`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Optional<Boolean> enabled`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `Optional<BetaComputerLeftMouseDownConfig> leftMouseDown`
+
+    `left_mouse_down`'s config overrides.
+
+    - `Optional<Boolean> deferLoading`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Optional<Boolean> enabled`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `Optional<BetaComputerLeftMouseUpConfig> leftMouseUp`
+
+    `left_mouse_up`'s config overrides.
+
+    - `Optional<Boolean> deferLoading`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Optional<Boolean> enabled`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `Optional<BetaComputerMiddleClickConfig> middleClick`
+
+    `middle_click`'s config overrides.
+
+    - `Optional<Boolean> deferLoading`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Optional<Boolean> enabled`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `Optional<BetaComputerMouseMoveConfig> mouseMove`
+
+    `mouse_move`'s config overrides.
+
+    - `Optional<Boolean> deferLoading`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Optional<Boolean> enabled`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `Optional<BetaComputerRightClickConfig> rightClick`
+
+    `right_click`'s config overrides.
+
+    - `Optional<Boolean> deferLoading`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Optional<Boolean> enabled`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `Optional<BetaComputerScreenshotConfig> screenshot`
+
+    `screenshot`'s config overrides.
+
+    - `Optional<Boolean> deferLoading`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Optional<Boolean> enabled`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `Optional<BetaComputerScrollConfig> scroll`
+
+    `scroll`'s config overrides.
+
+    - `Optional<Boolean> deferLoading`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Optional<Boolean> enabled`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `Optional<BetaComputerTripleClickConfig> tripleClick`
+
+    `triple_click`'s config overrides.
+
+    - `Optional<Boolean> deferLoading`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Optional<Boolean> enabled`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `Optional<BetaComputerTypeConfig> type`
+
+    `type`'s config overrides.
+
+    - `Optional<Boolean> deferLoading`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Optional<Boolean> enabled`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `Optional<BetaComputerWaitConfig> wait`
+
+    `wait`'s config overrides.
+
+    - `Optional<Boolean> deferLoading`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Optional<Boolean> enabled`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+  - `Optional<BetaComputerZoomConfig> zoom`
+
+    `zoom`'s config overrides.
+
+    - `Optional<Boolean> deferLoading`
+
+      Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+    - `Optional<Boolean> enabled`
+
+      Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Triple Click Config
+
+- `class BetaComputerTripleClickConfig:`
+
+  `triple_click`'s config overrides.
+
+  - `Optional<Boolean> deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Optional<Boolean> enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Type Config
+
+- `class BetaComputerTypeConfig:`
+
+  `type`'s config overrides.
+
+  - `Optional<Boolean> deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Optional<Boolean> enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Wait Config
+
+- `class BetaComputerWaitConfig:`
+
+  `wait`'s config overrides.
+
+  - `Optional<Boolean> deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Optional<Boolean> enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Beta Computer Zoom Config
+
+- `class BetaComputerZoomConfig:`
+
+  `zoom`'s config overrides.
+
+  - `Optional<Boolean> deferLoading`
+
+    Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+  - `Optional<Boolean> enabled`
+
+    Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
 ### Beta Container
 
 - `class BetaContainer:`
@@ -9803,6 +13634,10 @@ public final class Main {
         - `JsonValue; type "code_execution_20260120"constant`
 
           - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+    - `Optional<String> toolsetName`
+
+      For a toolset member tool_use, the toolset family.
 
   - `class BetaServerToolUseBlock:`
 
@@ -10689,6 +14524,18 @@ public final class Main {
 
       Create a cache control breakpoint at this content block.
 
+    - `Optional<BetaImageTransformationsParam> transformations`
+
+      Configures the transformations the server applies to this image before the model observes it. Each key names a condition the server transforms images for; its value selects the transformation applied. Omitted keys keep their default behavior, and an empty object is equivalent to omitting the field.
+
+      - `Optional<OversizedImage> oversizedImage`
+
+        What the server does when this image exceeds the model's maximum image size. `"downsize"` (the default) scales the image down to fit, which changes the dimensions the model observes without telling you. `"error"` instead rejects the request with a 400 error naming the image's dimensions and the largest dimensions that fit, so you can scale the image deliberately — your image is never silently scaled down.
+
+        - `DOWNSIZE("downsize")`
+
+        - `ERROR("error")`
+
   - `class BetaRequestDocumentBlock:`
 
     - `Source source`
@@ -10865,6 +14712,10 @@ public final class Main {
 
           - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+    - `Optional<String> toolsetName`
+
+      For a toolset member tool_use, the toolset family this member belongs to.
+
   - `class BetaToolResultBlockParam:`
 
     - `String toolUseId`
@@ -10905,7 +14756,134 @@ public final class Main {
 
             Create a cache control breakpoint at this content block.
 
+        - `class BetaBrowserStateBlockParam:`
+
+          The caller's browser state after a browser toolset member call —
+          the full inventory of open tabs, which tab is active, and any side
+          effects (tabs opened, download state changes) the call produced.
+
+          At most one per `tool_result`, only on a non-error result answering a
+          browser toolset member `tool_use`. The server renders the
+          model-visible text from it; the model never sees the raw fields.
+
+          - `List<BetaBrowserStateTabEntry> tabs`
+
+            All tabs open in the browser after this call — the full inventory, not a delta. May be empty. Whenever non-empty, exactly one entry carries `active: true`.
+
+            - `String tabId`
+
+              The caller-assigned identifier for this tab, unique within the inventory.
+
+            - `String title`
+
+              The title of the page the tab is showing. May be empty.
+
+            - `String url`
+
+              The URL of the page the tab is showing. May be empty.
+
+            - `Optional<Boolean> active`
+
+              Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
+
+          - `JsonValue; type "browser_state"constant`
+
+            - `BROWSER_STATE("browser_state")`
+
+          - `Optional<BetaCacheControlEphemeral> cacheControl`
+
+            Create a cache control breakpoint at this content block.
+
+          - `Optional<List<BetaBrowserStateChange>> stateChanges`
+
+            Tabs opened and download state changes during this call. "Nothing to report" is expressed by omitting the field, never by an empty list.
+
+            - `class BetaBrowserStateChangeTabOpened:`
+
+              A tab this call's execution opened that remains open at its end —
+              the creation delta of the `tabs` inventory, not an event log.
+
+              Carries only the `tab_id`; the tab's `title` and `url` live on its
+              `tabs` entry, which must include the same `tab_id`. A tab opened
+              during a failed call gets no deferred `tab_opened`; it simply appears
+              in the next result's `tabs` inventory.
+
+              - `String tabId`
+
+                The `tab_id` of the opened tab, present in `tabs`.
+
+              - `JsonValue; type "tab_opened"constant`
+
+                - `TAB_OPENED("tab_opened")`
+
+            - `class BetaBrowserStateChangeDownloadStarted:`
+
+              A file download that started during this call.
+
+              - `String downloadId`
+
+                The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+              - `JsonValue; type "download_started"constant`
+
+                - `DOWNLOAD_STARTED("download_started")`
+
+              - `String url`
+
+                The final post-redirect URL the download was served from.
+
+            - `class BetaBrowserStateChangeDownloadCompleted:`
+
+              A file download that finished during this call, reported with the
+              same `download_id` as its `download_started` — or without a prior
+              `download_started`, when the download finished during the call that
+              started it (at most one state change per `download_id` per result).
+
+              - `String downloadId`
+
+                The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+              - `JsonValue; type "download_completed"constant`
+
+                - `DOWNLOAD_COMPLETED("download_completed")`
+
+              - `String url`
+
+                The final post-redirect URL the download was served from.
+
+              - `Optional<String> path`
+
+                Where the executor saved the file, on the executor's filesystem. Only included when another tool in the same environment can read the file at that path.
+
+              - `Optional<Long> sizeBytes`
+
+                The completed download's size.
+
+            - `class BetaBrowserStateChangeDownloadFailed:`
+
+              A file download that failed — or was cancelled — during this call.
+
+              - `String downloadId`
+
+                The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+              - `JsonValue; type "download_failed"constant`
+
+                - `DOWNLOAD_FAILED("download_failed")`
+
+              - `String url`
+
+                The final post-redirect URL the download was served from.
+
+              - `Optional<String> error`
+
+                The failure or cancellation detail, when known.
+
     - `Optional<Boolean> isError`
+
+    - `Optional<String> toolsetName`
+
+      For a toolset member tool_result, the toolset family of the paired tool_use.
 
   - `class BetaServerToolUseBlockParam:`
 
@@ -11486,125 +15464,6 @@ public final class Main {
 
       Opaque metadata from prior compaction, to be round-tripped verbatim
 
-  - `class BetaMidConversationSystemBlockParam:`
-
-    System instructions that appear mid-conversation.
-
-    Use this block to provide or update system-level instructions at a specific
-    point in the conversation, rather than only via the top-level `system` parameter.
-
-    - `List<Content> content`
-
-      System instruction text blocks.
-
-      - `class BetaTextBlockParam:`
-
-      - `class BetaRequestToolAdditionBlock:`
-
-        Mid-conversation directive to surface a declared tool.
-
-        `tool` references a tool (or MCP toolset) by name from the request's
-        `tools`; it is offered to the model from this point in the
-        conversation onward.
-
-        - `Tool tool`
-
-          Reference to a single tool the caller declared directly in
-          `tools[]`. Does not accept the composed `{server}_{name}` form the
-          server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-          `mcp_toolset_reference` for those.
-
-          - `class BetaToolChangeToolReference:`
-
-            Reference to a single tool the caller declared directly in
-            `tools[]`. Does not accept the composed `{server}_{name}` form the
-            server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-            `mcp_toolset_reference` for those.
-
-            - `String name`
-
-            - `JsonValue; type "tool_reference"constant`
-
-              - `TOOL_REFERENCE("tool_reference")`
-
-          - `class BetaToolChangeMcpToolReference:`
-
-            Reference to a single MCP tool by its server and remote name — the
-            same `server_name`/`name` pair `mcp_tool_use` carries.
-
-            - `String name`
-
-            - `String serverName`
-
-            - `JsonValue; type "mcp_tool_reference"constant`
-
-              - `MCP_TOOL_REFERENCE("mcp_tool_reference")`
-
-          - `class BetaToolChangeMcpToolsetReference:`
-
-            Reference to every tool in the named MCP server's toolset.
-
-            - `String serverName`
-
-            - `JsonValue; type "mcp_toolset_reference"constant`
-
-              - `MCP_TOOLSET_REFERENCE("mcp_toolset_reference")`
-
-        - `JsonValue; type "tool_addition"constant`
-
-          - `TOOL_ADDITION("tool_addition")`
-
-        - `Optional<BetaCacheControlEphemeral> cacheControl`
-
-          Create a cache control breakpoint at this content block.
-
-      - `class BetaRequestToolRemovalBlock:`
-
-        Mid-conversation directive to withdraw a tool.
-
-        `tool` references a tool (or MCP toolset) by name from the request's
-        `tools`; it is no longer offered to the model from this point in the
-        conversation onward.
-
-        - `Tool tool`
-
-          Reference to a single tool the caller declared directly in
-          `tools[]`. Does not accept the composed `{server}_{name}` form the
-          server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-          `mcp_toolset_reference` for those.
-
-          - `class BetaToolChangeToolReference:`
-
-            Reference to a single tool the caller declared directly in
-            `tools[]`. Does not accept the composed `{server}_{name}` form the
-            server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-            `mcp_toolset_reference` for those.
-
-          - `class BetaToolChangeMcpToolReference:`
-
-            Reference to a single MCP tool by its server and remote name — the
-            same `server_name`/`name` pair `mcp_tool_use` carries.
-
-          - `class BetaToolChangeMcpToolsetReference:`
-
-            Reference to every tool in the named MCP server's toolset.
-
-        - `JsonValue; type "tool_removal"constant`
-
-          - `TOOL_REMOVAL("tool_removal")`
-
-        - `Optional<BetaCacheControlEphemeral> cacheControl`
-
-          Create a cache control breakpoint at this content block.
-
-    - `JsonValue; type "mid_conv_system"constant`
-
-      - `MID_CONV_SYSTEM("mid_conv_system")`
-
-    - `Optional<BetaCacheControlEphemeral> cacheControl`
-
-      Create a cache control breakpoint at this content block.
-
   - `class BetaRequestToolAdditionBlock:`
 
     Mid-conversation directive to surface a declared tool.
@@ -11613,6 +15472,57 @@ public final class Main {
     `tools`; it is offered to the model from this point in the
     conversation onward.
 
+    - `Tool tool`
+
+      Reference to a single tool the caller declared directly in
+      `tools[]`. Does not accept the composed `{server}_{name}` form the
+      server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+      `mcp_toolset_reference` for those.
+
+      - `class BetaToolChangeToolReference:`
+
+        Reference to a single tool the caller declared directly in
+        `tools[]`. Does not accept the composed `{server}_{name}` form the
+        server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+        `mcp_toolset_reference` for those.
+
+        - `String name`
+
+        - `JsonValue; type "tool_reference"constant`
+
+          - `TOOL_REFERENCE("tool_reference")`
+
+      - `class BetaToolChangeMcpToolReference:`
+
+        Reference to a single MCP tool by its server and remote name — the
+        same `server_name`/`name` pair `mcp_tool_use` carries.
+
+        - `String name`
+
+        - `String serverName`
+
+        - `JsonValue; type "mcp_tool_reference"constant`
+
+          - `MCP_TOOL_REFERENCE("mcp_tool_reference")`
+
+      - `class BetaToolChangeMcpToolsetReference:`
+
+        Reference to every tool in the named MCP server's toolset.
+
+        - `String serverName`
+
+        - `JsonValue; type "mcp_toolset_reference"constant`
+
+          - `MCP_TOOLSET_REFERENCE("mcp_toolset_reference")`
+
+    - `JsonValue; type "tool_addition"constant`
+
+      - `TOOL_ADDITION("tool_addition")`
+
+    - `Optional<BetaCacheControlEphemeral> cacheControl`
+
+      Create a cache control breakpoint at this content block.
+
   - `class BetaRequestToolRemovalBlock:`
 
     Mid-conversation directive to withdraw a tool.
@@ -11620,6 +15530,37 @@ public final class Main {
     `tool` references a tool (or MCP toolset) by name from the request's
     `tools`; it is no longer offered to the model from this point in the
     conversation onward.
+
+    - `Tool tool`
+
+      Reference to a single tool the caller declared directly in
+      `tools[]`. Does not accept the composed `{server}_{name}` form the
+      server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+      `mcp_toolset_reference` for those.
+
+      - `class BetaToolChangeToolReference:`
+
+        Reference to a single tool the caller declared directly in
+        `tools[]`. Does not accept the composed `{server}_{name}` form the
+        server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+        `mcp_toolset_reference` for those.
+
+      - `class BetaToolChangeMcpToolReference:`
+
+        Reference to a single MCP tool by its server and remote name — the
+        same `server_name`/`name` pair `mcp_tool_use` carries.
+
+      - `class BetaToolChangeMcpToolsetReference:`
+
+        Reference to every tool in the named MCP server's toolset.
+
+    - `JsonValue; type "tool_removal"constant`
+
+      - `TOOL_REMOVAL("tool_removal")`
+
+    - `Optional<BetaCacheControlEphemeral> cacheControl`
+
+      Create a cache control breakpoint at this content block.
 
   - `class BetaFallbackBlockParam:`
 
@@ -11912,6 +15853,18 @@ public final class Main {
 
           Create a cache control breakpoint at this content block.
 
+        - `Optional<BetaImageTransformationsParam> transformations`
+
+          Configures the transformations the server applies to this image before the model observes it. Each key names a condition the server transforms images for; its value selects the transformation applied. Omitted keys keep their default behavior, and an empty object is equivalent to omitting the field.
+
+          - `Optional<OversizedImage> oversizedImage`
+
+            What the server does when this image exceeds the model's maximum image size. `"downsize"` (the default) scales the image down to fit, which changes the dimensions the model observes without telling you. `"error"` instead rejects the request with a 400 error naming the image's dimensions and the largest dimensions that fit, so you can scale the image deliberately — your image is never silently scaled down.
+
+            - `DOWNSIZE("downsize")`
+
+            - `ERROR("error")`
+
   - `JsonValue; type "content"constant`
 
     - `CONTENT("content")`
@@ -12102,6 +16055,18 @@ public final class Main {
     - `Optional<BetaCacheControlEphemeral> cacheControl`
 
       Create a cache control breakpoint at this content block.
+
+    - `Optional<BetaImageTransformationsParam> transformations`
+
+      Configures the transformations the server applies to this image before the model observes it. Each key names a condition the server transforms images for; its value selects the transformation applied. Omitted keys keep their default behavior, and an empty object is equivalent to omitting the field.
+
+      - `Optional<OversizedImage> oversizedImage`
+
+        What the server does when this image exceeds the model's maximum image size. `"downsize"` (the default) scales the image down to fit, which changes the dimensions the model observes without telling you. `"error"` instead rejects the request with a 400 error naming the image's dimensions and the largest dimensions that fit, so you can scale the image deliberately — your image is never silently scaled down.
+
+        - `DOWNSIZE("downsize")`
+
+        - `ERROR("error")`
 
 ### Beta Context Management Config
 
@@ -13559,6 +17524,32 @@ public final class Main {
 
       - `TTL_1H("1h")`
 
+  - `Optional<BetaImageTransformationsParam> transformations`
+
+    Configures the transformations the server applies to this image before the model observes it. Each key names a condition the server transforms images for; its value selects the transformation applied. Omitted keys keep their default behavior, and an empty object is equivalent to omitting the field.
+
+    - `Optional<OversizedImage> oversizedImage`
+
+      What the server does when this image exceeds the model's maximum image size. `"downsize"` (the default) scales the image down to fit, which changes the dimensions the model observes without telling you. `"error"` instead rejects the request with a 400 error naming the image's dimensions and the largest dimensions that fit, so you can scale the image deliberately — your image is never silently scaled down.
+
+      - `DOWNSIZE("downsize")`
+
+      - `ERROR("error")`
+
+### Beta Image Transformations Param
+
+- `class BetaImageTransformationsParam:`
+
+  Configures the transformations the server applies to this image before the model observes it. Each key names a condition the server transforms images for; its value selects the transformation applied. Omitted keys keep their default behavior, and an empty object is equivalent to omitting the field.
+
+  - `Optional<OversizedImage> oversizedImage`
+
+    What the server does when this image exceeds the model's maximum image size. `"downsize"` (the default) scales the image down to fit, which changes the dimensions the model observes without telling you. `"error"` instead rejects the request with a 400 error naming the image's dimensions and the largest dimensions that fit, so you can scale the image deliberately — your image is never silently scaled down.
+
+    - `DOWNSIZE("downsize")`
+
+    - `ERROR("error")`
+
 ### Beta Input JSON Delta
 
 - `class BetaInputJsonDelta:`
@@ -14421,6 +18412,10 @@ public final class Main {
           - `JsonValue; type "code_execution_20260120"constant`
 
             - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+      - `Optional<String> toolsetName`
+
+        For a toolset member tool_use, the toolset family.
 
     - `class BetaServerToolUseBlock:`
 
@@ -16331,6 +20326,18 @@ public final class Main {
 
           Create a cache control breakpoint at this content block.
 
+        - `Optional<BetaImageTransformationsParam> transformations`
+
+          Configures the transformations the server applies to this image before the model observes it. Each key names a condition the server transforms images for; its value selects the transformation applied. Omitted keys keep their default behavior, and an empty object is equivalent to omitting the field.
+
+          - `Optional<OversizedImage> oversizedImage`
+
+            What the server does when this image exceeds the model's maximum image size. `"downsize"` (the default) scales the image down to fit, which changes the dimensions the model observes without telling you. `"error"` instead rejects the request with a 400 error naming the image's dimensions and the largest dimensions that fit, so you can scale the image deliberately — your image is never silently scaled down.
+
+            - `DOWNSIZE("downsize")`
+
+            - `ERROR("error")`
+
       - `class BetaRequestDocumentBlock:`
 
         - `Source source`
@@ -16507,6 +20514,10 @@ public final class Main {
 
               - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+        - `Optional<String> toolsetName`
+
+          For a toolset member tool_use, the toolset family this member belongs to.
+
       - `class BetaToolResultBlockParam:`
 
         - `String toolUseId`
@@ -16547,7 +20558,134 @@ public final class Main {
 
                 Create a cache control breakpoint at this content block.
 
+            - `class BetaBrowserStateBlockParam:`
+
+              The caller's browser state after a browser toolset member call —
+              the full inventory of open tabs, which tab is active, and any side
+              effects (tabs opened, download state changes) the call produced.
+
+              At most one per `tool_result`, only on a non-error result answering a
+              browser toolset member `tool_use`. The server renders the
+              model-visible text from it; the model never sees the raw fields.
+
+              - `List<BetaBrowserStateTabEntry> tabs`
+
+                All tabs open in the browser after this call — the full inventory, not a delta. May be empty. Whenever non-empty, exactly one entry carries `active: true`.
+
+                - `String tabId`
+
+                  The caller-assigned identifier for this tab, unique within the inventory.
+
+                - `String title`
+
+                  The title of the page the tab is showing. May be empty.
+
+                - `String url`
+
+                  The URL of the page the tab is showing. May be empty.
+
+                - `Optional<Boolean> active`
+
+                  Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
+
+              - `JsonValue; type "browser_state"constant`
+
+                - `BROWSER_STATE("browser_state")`
+
+              - `Optional<BetaCacheControlEphemeral> cacheControl`
+
+                Create a cache control breakpoint at this content block.
+
+              - `Optional<List<BetaBrowserStateChange>> stateChanges`
+
+                Tabs opened and download state changes during this call. "Nothing to report" is expressed by omitting the field, never by an empty list.
+
+                - `class BetaBrowserStateChangeTabOpened:`
+
+                  A tab this call's execution opened that remains open at its end —
+                  the creation delta of the `tabs` inventory, not an event log.
+
+                  Carries only the `tab_id`; the tab's `title` and `url` live on its
+                  `tabs` entry, which must include the same `tab_id`. A tab opened
+                  during a failed call gets no deferred `tab_opened`; it simply appears
+                  in the next result's `tabs` inventory.
+
+                  - `String tabId`
+
+                    The `tab_id` of the opened tab, present in `tabs`.
+
+                  - `JsonValue; type "tab_opened"constant`
+
+                    - `TAB_OPENED("tab_opened")`
+
+                - `class BetaBrowserStateChangeDownloadStarted:`
+
+                  A file download that started during this call.
+
+                  - `String downloadId`
+
+                    The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+                  - `JsonValue; type "download_started"constant`
+
+                    - `DOWNLOAD_STARTED("download_started")`
+
+                  - `String url`
+
+                    The final post-redirect URL the download was served from.
+
+                - `class BetaBrowserStateChangeDownloadCompleted:`
+
+                  A file download that finished during this call, reported with the
+                  same `download_id` as its `download_started` — or without a prior
+                  `download_started`, when the download finished during the call that
+                  started it (at most one state change per `download_id` per result).
+
+                  - `String downloadId`
+
+                    The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+                  - `JsonValue; type "download_completed"constant`
+
+                    - `DOWNLOAD_COMPLETED("download_completed")`
+
+                  - `String url`
+
+                    The final post-redirect URL the download was served from.
+
+                  - `Optional<String> path`
+
+                    Where the executor saved the file, on the executor's filesystem. Only included when another tool in the same environment can read the file at that path.
+
+                  - `Optional<Long> sizeBytes`
+
+                    The completed download's size.
+
+                - `class BetaBrowserStateChangeDownloadFailed:`
+
+                  A file download that failed — or was cancelled — during this call.
+
+                  - `String downloadId`
+
+                    The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+                  - `JsonValue; type "download_failed"constant`
+
+                    - `DOWNLOAD_FAILED("download_failed")`
+
+                  - `String url`
+
+                    The final post-redirect URL the download was served from.
+
+                  - `Optional<String> error`
+
+                    The failure or cancellation detail, when known.
+
         - `Optional<Boolean> isError`
+
+        - `Optional<String> toolsetName`
+
+          For a toolset member tool_result, the toolset family of the paired tool_use.
 
       - `class BetaServerToolUseBlockParam:`
 
@@ -17128,125 +21266,6 @@ public final class Main {
 
           Opaque metadata from prior compaction, to be round-tripped verbatim
 
-      - `class BetaMidConversationSystemBlockParam:`
-
-        System instructions that appear mid-conversation.
-
-        Use this block to provide or update system-level instructions at a specific
-        point in the conversation, rather than only via the top-level `system` parameter.
-
-        - `List<Content> content`
-
-          System instruction text blocks.
-
-          - `class BetaTextBlockParam:`
-
-          - `class BetaRequestToolAdditionBlock:`
-
-            Mid-conversation directive to surface a declared tool.
-
-            `tool` references a tool (or MCP toolset) by name from the request's
-            `tools`; it is offered to the model from this point in the
-            conversation onward.
-
-            - `Tool tool`
-
-              Reference to a single tool the caller declared directly in
-              `tools[]`. Does not accept the composed `{server}_{name}` form the
-              server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-              `mcp_toolset_reference` for those.
-
-              - `class BetaToolChangeToolReference:`
-
-                Reference to a single tool the caller declared directly in
-                `tools[]`. Does not accept the composed `{server}_{name}` form the
-                server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-                `mcp_toolset_reference` for those.
-
-                - `String name`
-
-                - `JsonValue; type "tool_reference"constant`
-
-                  - `TOOL_REFERENCE("tool_reference")`
-
-              - `class BetaToolChangeMcpToolReference:`
-
-                Reference to a single MCP tool by its server and remote name — the
-                same `server_name`/`name` pair `mcp_tool_use` carries.
-
-                - `String name`
-
-                - `String serverName`
-
-                - `JsonValue; type "mcp_tool_reference"constant`
-
-                  - `MCP_TOOL_REFERENCE("mcp_tool_reference")`
-
-              - `class BetaToolChangeMcpToolsetReference:`
-
-                Reference to every tool in the named MCP server's toolset.
-
-                - `String serverName`
-
-                - `JsonValue; type "mcp_toolset_reference"constant`
-
-                  - `MCP_TOOLSET_REFERENCE("mcp_toolset_reference")`
-
-            - `JsonValue; type "tool_addition"constant`
-
-              - `TOOL_ADDITION("tool_addition")`
-
-            - `Optional<BetaCacheControlEphemeral> cacheControl`
-
-              Create a cache control breakpoint at this content block.
-
-          - `class BetaRequestToolRemovalBlock:`
-
-            Mid-conversation directive to withdraw a tool.
-
-            `tool` references a tool (or MCP toolset) by name from the request's
-            `tools`; it is no longer offered to the model from this point in the
-            conversation onward.
-
-            - `Tool tool`
-
-              Reference to a single tool the caller declared directly in
-              `tools[]`. Does not accept the composed `{server}_{name}` form the
-              server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-              `mcp_toolset_reference` for those.
-
-              - `class BetaToolChangeToolReference:`
-
-                Reference to a single tool the caller declared directly in
-                `tools[]`. Does not accept the composed `{server}_{name}` form the
-                server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-                `mcp_toolset_reference` for those.
-
-              - `class BetaToolChangeMcpToolReference:`
-
-                Reference to a single MCP tool by its server and remote name — the
-                same `server_name`/`name` pair `mcp_tool_use` carries.
-
-              - `class BetaToolChangeMcpToolsetReference:`
-
-                Reference to every tool in the named MCP server's toolset.
-
-            - `JsonValue; type "tool_removal"constant`
-
-              - `TOOL_REMOVAL("tool_removal")`
-
-            - `Optional<BetaCacheControlEphemeral> cacheControl`
-
-              Create a cache control breakpoint at this content block.
-
-        - `JsonValue; type "mid_conv_system"constant`
-
-          - `MID_CONV_SYSTEM("mid_conv_system")`
-
-        - `Optional<BetaCacheControlEphemeral> cacheControl`
-
-          Create a cache control breakpoint at this content block.
-
       - `class BetaRequestToolAdditionBlock:`
 
         Mid-conversation directive to surface a declared tool.
@@ -17255,6 +21274,57 @@ public final class Main {
         `tools`; it is offered to the model from this point in the
         conversation onward.
 
+        - `Tool tool`
+
+          Reference to a single tool the caller declared directly in
+          `tools[]`. Does not accept the composed `{server}_{name}` form the
+          server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+          `mcp_toolset_reference` for those.
+
+          - `class BetaToolChangeToolReference:`
+
+            Reference to a single tool the caller declared directly in
+            `tools[]`. Does not accept the composed `{server}_{name}` form the
+            server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+            `mcp_toolset_reference` for those.
+
+            - `String name`
+
+            - `JsonValue; type "tool_reference"constant`
+
+              - `TOOL_REFERENCE("tool_reference")`
+
+          - `class BetaToolChangeMcpToolReference:`
+
+            Reference to a single MCP tool by its server and remote name — the
+            same `server_name`/`name` pair `mcp_tool_use` carries.
+
+            - `String name`
+
+            - `String serverName`
+
+            - `JsonValue; type "mcp_tool_reference"constant`
+
+              - `MCP_TOOL_REFERENCE("mcp_tool_reference")`
+
+          - `class BetaToolChangeMcpToolsetReference:`
+
+            Reference to every tool in the named MCP server's toolset.
+
+            - `String serverName`
+
+            - `JsonValue; type "mcp_toolset_reference"constant`
+
+              - `MCP_TOOLSET_REFERENCE("mcp_toolset_reference")`
+
+        - `JsonValue; type "tool_addition"constant`
+
+          - `TOOL_ADDITION("tool_addition")`
+
+        - `Optional<BetaCacheControlEphemeral> cacheControl`
+
+          Create a cache control breakpoint at this content block.
+
       - `class BetaRequestToolRemovalBlock:`
 
         Mid-conversation directive to withdraw a tool.
@@ -17262,6 +21332,37 @@ public final class Main {
         `tool` references a tool (or MCP toolset) by name from the request's
         `tools`; it is no longer offered to the model from this point in the
         conversation onward.
+
+        - `Tool tool`
+
+          Reference to a single tool the caller declared directly in
+          `tools[]`. Does not accept the composed `{server}_{name}` form the
+          server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+          `mcp_toolset_reference` for those.
+
+          - `class BetaToolChangeToolReference:`
+
+            Reference to a single tool the caller declared directly in
+            `tools[]`. Does not accept the composed `{server}_{name}` form the
+            server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+            `mcp_toolset_reference` for those.
+
+          - `class BetaToolChangeMcpToolReference:`
+
+            Reference to a single MCP tool by its server and remote name — the
+            same `server_name`/`name` pair `mcp_tool_use` carries.
+
+          - `class BetaToolChangeMcpToolsetReference:`
+
+            Reference to every tool in the named MCP server's toolset.
+
+        - `JsonValue; type "tool_removal"constant`
+
+          - `TOOL_REMOVAL("tool_removal")`
+
+        - `Optional<BetaCacheControlEphemeral> cacheControl`
+
+          Create a cache control breakpoint at this content block.
 
       - `class BetaFallbackBlockParam:`
 
@@ -17394,262 +21495,6 @@ public final class Main {
     An external identifier for the user who is associated with the request.
 
     This should be a uuid, hash value, or other opaque identifier. Anthropic may use this id to help detect abuse. Do not include any identifying information such as name, email address, or phone number.
-
-### Beta Mid Conversation System Block Param
-
-- `class BetaMidConversationSystemBlockParam:`
-
-  System instructions that appear mid-conversation.
-
-  Use this block to provide or update system-level instructions at a specific
-  point in the conversation, rather than only via the top-level `system` parameter.
-
-  - `List<Content> content`
-
-    System instruction text blocks.
-
-    - `class BetaTextBlockParam:`
-
-      - `String text`
-
-      - `JsonValue; type "text"constant`
-
-        - `TEXT("text")`
-
-      - `Optional<BetaCacheControlEphemeral> cacheControl`
-
-        Create a cache control breakpoint at this content block.
-
-        - `JsonValue; type "ephemeral"constant`
-
-          - `EPHEMERAL("ephemeral")`
-
-        - `Optional<Ttl> ttl`
-
-          The time-to-live for the cache control breakpoint.
-
-          This may be one the following values:
-
-          - `5m`: 5 minutes
-          - `1h`: 1 hour
-
-          Defaults to `5m`. See [prompt caching pricing](../build-with-claude/build-with-claude-prompt-caching.md) for details.
-
-          - `TTL_5M("5m")`
-
-          - `TTL_1H("1h")`
-
-      - `Optional<List<BetaTextCitationParam>> citations`
-
-        - `class BetaCitationCharLocationParam:`
-
-          - `String citedText`
-
-          - `long documentIndex`
-
-          - `Optional<String> documentTitle`
-
-          - `long endCharIndex`
-
-          - `long startCharIndex`
-
-          - `JsonValue; type "char_location"constant`
-
-            - `CHAR_LOCATION("char_location")`
-
-        - `class BetaCitationPageLocationParam:`
-
-          - `String citedText`
-
-          - `long documentIndex`
-
-          - `Optional<String> documentTitle`
-
-          - `long endPageNumber`
-
-          - `long startPageNumber`
-
-          - `JsonValue; type "page_location"constant`
-
-            - `PAGE_LOCATION("page_location")`
-
-        - `class BetaCitationContentBlockLocationParam:`
-
-          - `String citedText`
-
-            The full text of the cited block range, concatenated.
-
-            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-          - `long documentIndex`
-
-          - `Optional<String> documentTitle`
-
-          - `long endBlockIndex`
-
-            Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-          - `long startBlockIndex`
-
-            0-based index of the first cited block in the source's `content` array.
-
-          - `JsonValue; type "content_block_location"constant`
-
-            - `CONTENT_BLOCK_LOCATION("content_block_location")`
-
-        - `class BetaCitationWebSearchResultLocationParam:`
-
-          - `String citedText`
-
-          - `String encryptedIndex`
-
-          - `Optional<String> title`
-
-          - `JsonValue; type "web_search_result_location"constant`
-
-            - `WEB_SEARCH_RESULT_LOCATION("web_search_result_location")`
-
-          - `String url`
-
-        - `class BetaCitationSearchResultLocationParam:`
-
-          - `String citedText`
-
-            The full text of the cited block range, concatenated.
-
-            Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
-
-          - `long endBlockIndex`
-
-            Exclusive 0-based end index of the cited block range in the source's `content` array.
-
-            Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
-
-          - `long searchResultIndex`
-
-            0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
-
-            Counted separately from `document_index`; server-side web search results are not included in this count.
-
-          - `String source`
-
-          - `long startBlockIndex`
-
-            0-based index of the first cited block in the source's `content` array.
-
-          - `Optional<String> title`
-
-          - `JsonValue; type "search_result_location"constant`
-
-            - `SEARCH_RESULT_LOCATION("search_result_location")`
-
-    - `class BetaRequestToolAdditionBlock:`
-
-      Mid-conversation directive to surface a declared tool.
-
-      `tool` references a tool (or MCP toolset) by name from the request's
-      `tools`; it is offered to the model from this point in the
-      conversation onward.
-
-      - `Tool tool`
-
-        Reference to a single tool the caller declared directly in
-        `tools[]`. Does not accept the composed `{server}_{name}` form the
-        server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-        `mcp_toolset_reference` for those.
-
-        - `class BetaToolChangeToolReference:`
-
-          Reference to a single tool the caller declared directly in
-          `tools[]`. Does not accept the composed `{server}_{name}` form the
-          server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-          `mcp_toolset_reference` for those.
-
-          - `String name`
-
-          - `JsonValue; type "tool_reference"constant`
-
-            - `TOOL_REFERENCE("tool_reference")`
-
-        - `class BetaToolChangeMcpToolReference:`
-
-          Reference to a single MCP tool by its server and remote name — the
-          same `server_name`/`name` pair `mcp_tool_use` carries.
-
-          - `String name`
-
-          - `String serverName`
-
-          - `JsonValue; type "mcp_tool_reference"constant`
-
-            - `MCP_TOOL_REFERENCE("mcp_tool_reference")`
-
-        - `class BetaToolChangeMcpToolsetReference:`
-
-          Reference to every tool in the named MCP server's toolset.
-
-          - `String serverName`
-
-          - `JsonValue; type "mcp_toolset_reference"constant`
-
-            - `MCP_TOOLSET_REFERENCE("mcp_toolset_reference")`
-
-      - `JsonValue; type "tool_addition"constant`
-
-        - `TOOL_ADDITION("tool_addition")`
-
-      - `Optional<BetaCacheControlEphemeral> cacheControl`
-
-        Create a cache control breakpoint at this content block.
-
-    - `class BetaRequestToolRemovalBlock:`
-
-      Mid-conversation directive to withdraw a tool.
-
-      `tool` references a tool (or MCP toolset) by name from the request's
-      `tools`; it is no longer offered to the model from this point in the
-      conversation onward.
-
-      - `Tool tool`
-
-        Reference to a single tool the caller declared directly in
-        `tools[]`. Does not accept the composed `{server}_{name}` form the
-        server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-        `mcp_toolset_reference` for those.
-
-        - `class BetaToolChangeToolReference:`
-
-          Reference to a single tool the caller declared directly in
-          `tools[]`. Does not accept the composed `{server}_{name}` form the
-          server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-          `mcp_toolset_reference` for those.
-
-        - `class BetaToolChangeMcpToolReference:`
-
-          Reference to a single MCP tool by its server and remote name — the
-          same `server_name`/`name` pair `mcp_tool_use` carries.
-
-        - `class BetaToolChangeMcpToolsetReference:`
-
-          Reference to every tool in the named MCP server's toolset.
-
-      - `JsonValue; type "tool_removal"constant`
-
-        - `TOOL_REMOVAL("tool_removal")`
-
-      - `Optional<BetaCacheControlEphemeral> cacheControl`
-
-        Create a cache control breakpoint at this content block.
-
-  - `JsonValue; type "mid_conv_system"constant`
-
-    - `MID_CONV_SYSTEM("mid_conv_system")`
-
-  - `Optional<BetaCacheControlEphemeral> cacheControl`
-
-    Create a cache control breakpoint at this content block.
 
 ### Beta Output Config
 
@@ -18289,6 +22134,10 @@ public final class Main {
           - `JsonValue; type "code_execution_20260120"constant`
 
             - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+      - `Optional<String> toolsetName`
+
+        For a toolset member tool_use, the toolset family.
 
     - `class BetaServerToolUseBlock:`
 
@@ -19814,6 +23663,10 @@ public final class Main {
             - `JsonValue; type "code_execution_20260120"constant`
 
               - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+        - `Optional<String> toolsetName`
+
+          For a toolset member tool_use, the toolset family.
 
       - `class BetaServerToolUseBlock:`
 
@@ -21364,6 +25217,10 @@ public final class Main {
               - `JsonValue; type "code_execution_20260120"constant`
 
                 - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+          - `Optional<String> toolsetName`
+
+            For a toolset member tool_use, the toolset family.
 
         - `class BetaServerToolUseBlock:`
 
@@ -23231,6 +27088,18 @@ public final class Main {
             - `Optional<BetaCacheControlEphemeral> cacheControl`
 
               Create a cache control breakpoint at this content block.
+
+            - `Optional<BetaImageTransformationsParam> transformations`
+
+              Configures the transformations the server applies to this image before the model observes it. Each key names a condition the server transforms images for; its value selects the transformation applied. Omitted keys keep their default behavior, and an empty object is equivalent to omitting the field.
+
+              - `Optional<OversizedImage> oversizedImage`
+
+                What the server does when this image exceeds the model's maximum image size. `"downsize"` (the default) scales the image down to fit, which changes the dimensions the model observes without telling you. `"error"` instead rejects the request with a 400 error naming the image's dimensions and the largest dimensions that fit, so you can scale the image deliberately — your image is never silently scaled down.
+
+                - `DOWNSIZE("downsize")`
+
+                - `ERROR("error")`
 
       - `JsonValue; type "content"constant`
 
@@ -25859,6 +29728,18 @@ public final class Main {
 
           Create a cache control breakpoint at this content block.
 
+        - `Optional<BetaImageTransformationsParam> transformations`
+
+          Configures the transformations the server applies to this image before the model observes it. Each key names a condition the server transforms images for; its value selects the transformation applied. Omitted keys keep their default behavior, and an empty object is equivalent to omitting the field.
+
+          - `Optional<OversizedImage> oversizedImage`
+
+            What the server does when this image exceeds the model's maximum image size. `"downsize"` (the default) scales the image down to fit, which changes the dimensions the model observes without telling you. `"error"` instead rejects the request with a 400 error naming the image's dimensions and the largest dimensions that fit, so you can scale the image deliberately — your image is never silently scaled down.
+
+            - `DOWNSIZE("downsize")`
+
+            - `ERROR("error")`
+
       - `class BetaSearchResultBlockParam:`
 
         - `List<BetaTextBlockParam> content`
@@ -25977,7 +29858,134 @@ public final class Main {
 
           Create a cache control breakpoint at this content block.
 
+      - `class BetaBrowserStateBlockParam:`
+
+        The caller's browser state after a browser toolset member call —
+        the full inventory of open tabs, which tab is active, and any side
+        effects (tabs opened, download state changes) the call produced.
+
+        At most one per `tool_result`, only on a non-error result answering a
+        browser toolset member `tool_use`. The server renders the
+        model-visible text from it; the model never sees the raw fields.
+
+        - `List<BetaBrowserStateTabEntry> tabs`
+
+          All tabs open in the browser after this call — the full inventory, not a delta. May be empty. Whenever non-empty, exactly one entry carries `active: true`.
+
+          - `String tabId`
+
+            The caller-assigned identifier for this tab, unique within the inventory.
+
+          - `String title`
+
+            The title of the page the tab is showing. May be empty.
+
+          - `String url`
+
+            The URL of the page the tab is showing. May be empty.
+
+          - `Optional<Boolean> active`
+
+            Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
+
+        - `JsonValue; type "browser_state"constant`
+
+          - `BROWSER_STATE("browser_state")`
+
+        - `Optional<BetaCacheControlEphemeral> cacheControl`
+
+          Create a cache control breakpoint at this content block.
+
+        - `Optional<List<BetaBrowserStateChange>> stateChanges`
+
+          Tabs opened and download state changes during this call. "Nothing to report" is expressed by omitting the field, never by an empty list.
+
+          - `class BetaBrowserStateChangeTabOpened:`
+
+            A tab this call's execution opened that remains open at its end —
+            the creation delta of the `tabs` inventory, not an event log.
+
+            Carries only the `tab_id`; the tab's `title` and `url` live on its
+            `tabs` entry, which must include the same `tab_id`. A tab opened
+            during a failed call gets no deferred `tab_opened`; it simply appears
+            in the next result's `tabs` inventory.
+
+            - `String tabId`
+
+              The `tab_id` of the opened tab, present in `tabs`.
+
+            - `JsonValue; type "tab_opened"constant`
+
+              - `TAB_OPENED("tab_opened")`
+
+          - `class BetaBrowserStateChangeDownloadStarted:`
+
+            A file download that started during this call.
+
+            - `String downloadId`
+
+              The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+            - `JsonValue; type "download_started"constant`
+
+              - `DOWNLOAD_STARTED("download_started")`
+
+            - `String url`
+
+              The final post-redirect URL the download was served from.
+
+          - `class BetaBrowserStateChangeDownloadCompleted:`
+
+            A file download that finished during this call, reported with the
+            same `download_id` as its `download_started` — or without a prior
+            `download_started`, when the download finished during the call that
+            started it (at most one state change per `download_id` per result).
+
+            - `String downloadId`
+
+              The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+            - `JsonValue; type "download_completed"constant`
+
+              - `DOWNLOAD_COMPLETED("download_completed")`
+
+            - `String url`
+
+              The final post-redirect URL the download was served from.
+
+            - `Optional<String> path`
+
+              Where the executor saved the file, on the executor's filesystem. Only included when another tool in the same environment can read the file at that path.
+
+            - `Optional<Long> sizeBytes`
+
+              The completed download's size.
+
+          - `class BetaBrowserStateChangeDownloadFailed:`
+
+            A file download that failed — or was cancelled — during this call.
+
+            - `String downloadId`
+
+              The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+            - `JsonValue; type "download_failed"constant`
+
+              - `DOWNLOAD_FAILED("download_failed")`
+
+            - `String url`
+
+              The final post-redirect URL the download was served from.
+
+            - `Optional<String> error`
+
+              The failure or cancellation detail, when known.
+
   - `Optional<Boolean> isError`
+
+  - `Optional<String> toolsetName`
+
+    For a toolset member tool_result, the toolset family of the paired tool_use.
 
 ### Beta Tool Search Tool Bm25 20251119
 
@@ -26856,6 +30864,412 @@ public final class Main {
 
       When true, guarantees schema validation on tool names and inputs
 
+  - `class BetaBrowserToolset20260801:`
+
+    The browser toolset: a single `tools[]` entry (carrying no
+    `name`) that declares the browser tool family. The model is served
+    the family's tool with any members disabled via `configs` removed
+    from its schema.
+
+    - `JsonValue; type "browser_toolset_20260801"constant`
+
+      - `BROWSER_TOOLSET_20260801("browser_toolset_20260801")`
+
+    - `Optional<List<AllowedCaller>> allowedCallers`
+
+      - `DIRECT("direct")`
+
+      - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+      - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+      - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
+    - `Optional<BetaCacheControlEphemeral> cacheControl`
+
+      Create a cache control breakpoint at this content block.
+
+    - `Optional<BetaBrowserToolsetConfigs> configs`
+
+      Per-member configuration for `browser_toolset_20260801`: one
+      optional field per member tool, keyed by the member name — the same
+      name the member's `tool_use` blocks carry. Every member is an
+      accepted key, and a member's defaults apply wherever its key is
+      absent. Unknown keys are rejected: the field set is this toolset
+      version's complete member set.
+
+      - `Optional<BetaBrowserCloseTabConfig> closeTab`
+
+        `close_tab`'s config overrides.
+
+        - `Optional<Boolean> deferLoading`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Optional<Boolean> enabled`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `Optional<BetaBrowserDoubleClickConfig> doubleClick`
+
+        `double_click`'s config overrides.
+
+        - `Optional<Boolean> deferLoading`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Optional<Boolean> enabled`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `Optional<BetaBrowserFileUploadConfig> fileUpload`
+
+        `file_upload`'s config overrides.
+
+        - `Optional<Boolean> deferLoading`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Optional<Boolean> enabled`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `Optional<BetaBrowserFindConfig> find`
+
+        `find`'s config overrides.
+
+        - `Optional<Boolean> deferLoading`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Optional<Boolean> enabled`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `Optional<BetaBrowserFormInputConfig> formInput`
+
+        `form_input`'s config overrides.
+
+        - `Optional<Boolean> deferLoading`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Optional<Boolean> enabled`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `Optional<BetaBrowserGetPageTextConfig> getPageText`
+
+        `get_page_text`'s config overrides.
+
+        - `Optional<Boolean> deferLoading`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Optional<Boolean> enabled`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `Optional<BetaBrowserHoldKeyConfig> holdKey`
+
+        `hold_key`'s config overrides.
+
+        - `Optional<Boolean> deferLoading`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Optional<Boolean> enabled`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `Optional<BetaBrowserHoverConfig> hover`
+
+        `hover`'s config overrides.
+
+        - `Optional<Boolean> deferLoading`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Optional<Boolean> enabled`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `Optional<BetaBrowserJavascriptExecConfig> javascriptExec`
+
+        `javascript_exec`'s config overrides.
+
+        - `Optional<Boolean> deferLoading`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Optional<Boolean> enabled`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `Optional<BetaBrowserKeyConfig> key`
+
+        `key`'s config overrides.
+
+        - `Optional<Boolean> deferLoading`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Optional<Boolean> enabled`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `Optional<BetaBrowserLeftClickConfig> leftClick`
+
+        `left_click`'s config overrides.
+
+        - `Optional<Boolean> deferLoading`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Optional<Boolean> enabled`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `Optional<BetaBrowserLeftClickDragConfig> leftClickDrag`
+
+        `left_click_drag`'s config overrides.
+
+        - `Optional<Boolean> deferLoading`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Optional<Boolean> enabled`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `Optional<BetaBrowserLeftMouseDownConfig> leftMouseDown`
+
+        `left_mouse_down`'s config overrides.
+
+        - `Optional<Boolean> deferLoading`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Optional<Boolean> enabled`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `Optional<BetaBrowserLeftMouseUpConfig> leftMouseUp`
+
+        `left_mouse_up`'s config overrides.
+
+        - `Optional<Boolean> deferLoading`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Optional<Boolean> enabled`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `Optional<BetaBrowserListTabsConfig> listTabs`
+
+        `list_tabs`'s config overrides.
+
+        - `Optional<Boolean> deferLoading`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Optional<Boolean> enabled`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `Optional<BetaBrowserMiddleClickConfig> middleClick`
+
+        `middle_click`'s config overrides.
+
+        - `Optional<Boolean> deferLoading`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Optional<Boolean> enabled`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `Optional<BetaBrowserMouseMoveConfig> mouseMove`
+
+        `mouse_move`'s config overrides.
+
+        - `Optional<Boolean> deferLoading`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Optional<Boolean> enabled`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `Optional<BetaBrowserNavigateConfig> navigate`
+
+        `navigate`'s config overrides.
+
+        - `Optional<Boolean> deferLoading`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Optional<Boolean> enabled`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `Optional<BetaBrowserNewTabConfig> newTab`
+
+        `new_tab`'s config overrides.
+
+        - `Optional<Boolean> deferLoading`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Optional<Boolean> enabled`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `Optional<BetaBrowserReadConsoleConfig> readConsole`
+
+        `read_console`'s config overrides.
+
+        - `Optional<Boolean> deferLoading`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Optional<Boolean> enabled`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `Optional<BetaBrowserReadNetworkConfig> readNetwork`
+
+        `read_network`'s config overrides.
+
+        - `Optional<Boolean> deferLoading`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Optional<Boolean> enabled`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `Optional<BetaBrowserReadPageConfig> readPage`
+
+        `read_page`'s config overrides.
+
+        - `Optional<Boolean> deferLoading`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Optional<Boolean> enabled`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `Optional<BetaBrowserRightClickConfig> rightClick`
+
+        `right_click`'s config overrides.
+
+        - `Optional<Boolean> deferLoading`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Optional<Boolean> enabled`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `Optional<BetaBrowserScreenshotConfig> screenshot`
+
+        `screenshot`'s config overrides.
+
+        - `Optional<Boolean> deferLoading`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Optional<Boolean> enabled`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `Optional<BetaBrowserScrollConfig> scroll`
+
+        `scroll`'s config overrides.
+
+        - `Optional<Boolean> deferLoading`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Optional<Boolean> enabled`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `Optional<BetaBrowserScrollToConfig> scrollTo`
+
+        `scroll_to`'s config overrides.
+
+        - `Optional<Boolean> deferLoading`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Optional<Boolean> enabled`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `Optional<BetaBrowserSwitchTabConfig> switchTab`
+
+        `switch_tab`'s config overrides.
+
+        - `Optional<Boolean> deferLoading`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Optional<Boolean> enabled`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `Optional<BetaBrowserTripleClickConfig> tripleClick`
+
+        `triple_click`'s config overrides.
+
+        - `Optional<Boolean> deferLoading`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Optional<Boolean> enabled`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `Optional<BetaBrowserTypeConfig> type`
+
+        `type`'s config overrides.
+
+        - `Optional<Boolean> deferLoading`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Optional<Boolean> enabled`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `Optional<BetaBrowserWaitConfig> wait`
+
+        `wait`'s config overrides.
+
+        - `Optional<Boolean> deferLoading`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Optional<Boolean> enabled`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `Optional<BetaBrowserZoomConfig> zoom`
+
+        `zoom`'s config overrides.
+
+        - `Optional<Boolean> deferLoading`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Optional<Boolean> enabled`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
   - `class BetaToolComputerUse20241022:`
 
     - `long displayHeightPx`
@@ -27085,6 +31499,248 @@ public final class Main {
     - `Optional<Boolean> strict`
 
       When true, guarantees schema validation on tool names and inputs
+
+  - `class BetaComputerToolset20260801:`
+
+    The computer toolset: a single `tools[]` entry (carrying no
+    `name`) that declares the computer tool family. The model is
+    served the family's tool with any members disabled via `configs`
+    removed from its schema. Every member is enabled by default, zoom
+    included. The single-tool options `display_number` and
+    `enable_zoom` are not fields of a toolset entry — it carries only
+    `type`, `configs`, and `cache_control`; zoom is controlled
+    via `configs.zoom.enabled`.
+
+    - `JsonValue; type "computer_toolset_20260801"constant`
+
+      - `COMPUTER_TOOLSET_20260801("computer_toolset_20260801")`
+
+    - `Optional<List<AllowedCaller>> allowedCallers`
+
+      - `DIRECT("direct")`
+
+      - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+      - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+      - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
+    - `Optional<BetaCacheControlEphemeral> cacheControl`
+
+      Create a cache control breakpoint at this content block.
+
+    - `Optional<BetaComputerToolsetConfigs> configs`
+
+      Per-member configuration for `computer_toolset_20260801`: one
+      optional field per member tool, keyed by the member name — the same
+      name the member's `tool_use` blocks carry. Every member is an
+      accepted key, and a member's defaults apply wherever its key is
+      absent. Unknown keys are rejected: the field set is this toolset
+      version's complete member set.
+
+      - `Optional<BetaComputerCursorPositionConfig> cursorPosition`
+
+        `cursor_position`'s config overrides.
+
+        - `Optional<Boolean> deferLoading`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Optional<Boolean> enabled`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `Optional<BetaComputerDoubleClickConfig> doubleClick`
+
+        `double_click`'s config overrides.
+
+        - `Optional<Boolean> deferLoading`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Optional<Boolean> enabled`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `Optional<BetaComputerHoldKeyConfig> holdKey`
+
+        `hold_key`'s config overrides.
+
+        - `Optional<Boolean> deferLoading`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Optional<Boolean> enabled`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `Optional<BetaComputerKeyConfig> key`
+
+        `key`'s config overrides.
+
+        - `Optional<Boolean> deferLoading`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Optional<Boolean> enabled`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `Optional<BetaComputerLeftClickConfig> leftClick`
+
+        `left_click`'s config overrides.
+
+        - `Optional<Boolean> deferLoading`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Optional<Boolean> enabled`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `Optional<BetaComputerLeftClickDragConfig> leftClickDrag`
+
+        `left_click_drag`'s config overrides.
+
+        - `Optional<Boolean> deferLoading`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Optional<Boolean> enabled`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `Optional<BetaComputerLeftMouseDownConfig> leftMouseDown`
+
+        `left_mouse_down`'s config overrides.
+
+        - `Optional<Boolean> deferLoading`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Optional<Boolean> enabled`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `Optional<BetaComputerLeftMouseUpConfig> leftMouseUp`
+
+        `left_mouse_up`'s config overrides.
+
+        - `Optional<Boolean> deferLoading`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Optional<Boolean> enabled`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `Optional<BetaComputerMiddleClickConfig> middleClick`
+
+        `middle_click`'s config overrides.
+
+        - `Optional<Boolean> deferLoading`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Optional<Boolean> enabled`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `Optional<BetaComputerMouseMoveConfig> mouseMove`
+
+        `mouse_move`'s config overrides.
+
+        - `Optional<Boolean> deferLoading`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Optional<Boolean> enabled`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `Optional<BetaComputerRightClickConfig> rightClick`
+
+        `right_click`'s config overrides.
+
+        - `Optional<Boolean> deferLoading`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Optional<Boolean> enabled`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `Optional<BetaComputerScreenshotConfig> screenshot`
+
+        `screenshot`'s config overrides.
+
+        - `Optional<Boolean> deferLoading`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Optional<Boolean> enabled`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `Optional<BetaComputerScrollConfig> scroll`
+
+        `scroll`'s config overrides.
+
+        - `Optional<Boolean> deferLoading`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Optional<Boolean> enabled`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `Optional<BetaComputerTripleClickConfig> tripleClick`
+
+        `triple_click`'s config overrides.
+
+        - `Optional<Boolean> deferLoading`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Optional<Boolean> enabled`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `Optional<BetaComputerTypeConfig> type`
+
+        `type`'s config overrides.
+
+        - `Optional<Boolean> deferLoading`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Optional<Boolean> enabled`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `Optional<BetaComputerWaitConfig> wait`
+
+        `wait`'s config overrides.
+
+        - `Optional<Boolean> deferLoading`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Optional<Boolean> enabled`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+      - `Optional<BetaComputerZoomConfig> zoom`
+
+        `zoom`'s config overrides.
+
+        - `Optional<Boolean> deferLoading`
+
+          Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+        - `Optional<Boolean> enabled`
+
+          Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
   - `class BetaToolTextEditor20250124:`
 
@@ -27901,6 +32557,10 @@ public final class Main {
 
         - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+  - `Optional<String> toolsetName`
+
+    For a toolset member tool_use, the toolset family.
+
 ### Beta Tool Use Block Param
 
 - `class BetaToolUseBlockParam:`
@@ -27967,6 +32627,10 @@ public final class Main {
       - `JsonValue; type "code_execution_20260120"constant`
 
         - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+  - `Optional<String> toolsetName`
+
+    For a toolset member tool_use, the toolset family this member belongs to.
 
 ### Beta Tool Uses Keep
 
@@ -28683,6 +33347,18 @@ public final class Main {
               - `Optional<BetaCacheControlEphemeral> cacheControl`
 
                 Create a cache control breakpoint at this content block.
+
+              - `Optional<BetaImageTransformationsParam> transformations`
+
+                Configures the transformations the server applies to this image before the model observes it. Each key names a condition the server transforms images for; its value selects the transformation applied. Omitted keys keep their default behavior, and an empty object is equivalent to omitting the field.
+
+                - `Optional<OversizedImage> oversizedImage`
+
+                  What the server does when this image exceeds the model's maximum image size. `"downsize"` (the default) scales the image down to fit, which changes the dimensions the model observes without telling you. `"error"` instead rejects the request with a 400 error naming the image's dimensions and the largest dimensions that fit, so you can scale the image deliberately — your image is never silently scaled down.
+
+                  - `DOWNSIZE("downsize")`
+
+                  - `ERROR("error")`
 
         - `JsonValue; type "content"constant`
 
@@ -29442,6 +34118,18 @@ public final class Main {
                   - `Optional<BetaCacheControlEphemeral> cacheControl`
 
                     Create a cache control breakpoint at this content block.
+
+                  - `Optional<BetaImageTransformationsParam> transformations`
+
+                    Configures the transformations the server applies to this image before the model observes it. Each key names a condition the server transforms images for; its value selects the transformation applied. Omitted keys keep their default behavior, and an empty object is equivalent to omitting the field.
+
+                    - `Optional<OversizedImage> oversizedImage`
+
+                      What the server does when this image exceeds the model's maximum image size. `"downsize"` (the default) scales the image down to fit, which changes the dimensions the model observes without telling you. `"error"` instead rejects the request with a 400 error naming the image's dimensions and the largest dimensions that fit, so you can scale the image deliberately — your image is never silently scaled down.
+
+                      - `DOWNSIZE("downsize")`
+
+                      - `ERROR("error")`
 
             - `JsonValue; type "content"constant`
 
@@ -30305,6 +34993,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
+    - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
@@ -30597,6 +35287,18 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 Create a cache control breakpoint at this content block.
 
+              - `Optional<BetaImageTransformationsParam> transformations`
+
+                Configures the transformations the server applies to this image before the model observes it. Each key names a condition the server transforms images for; its value selects the transformation applied. Omitted keys keep their default behavior, and an empty object is equivalent to omitting the field.
+
+                - `Optional<OversizedImage> oversizedImage`
+
+                  What the server does when this image exceeds the model's maximum image size. `"downsize"` (the default) scales the image down to fit, which changes the dimensions the model observes without telling you. `"error"` instead rejects the request with a 400 error naming the image's dimensions and the largest dimensions that fit, so you can scale the image deliberately — your image is never silently scaled down.
+
+                  - `DOWNSIZE("downsize")`
+
+                  - `ERROR("error")`
+
             - `class BetaRequestDocumentBlock:`
 
               - `Source source`
@@ -30773,6 +35475,10 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                     - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+              - `Optional<String> toolsetName`
+
+                For a toolset member tool_use, the toolset family this member belongs to.
+
             - `class BetaToolResultBlockParam:`
 
               - `String toolUseId`
@@ -30813,7 +35519,134 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                       Create a cache control breakpoint at this content block.
 
+                  - `class BetaBrowserStateBlockParam:`
+
+                    The caller's browser state after a browser toolset member call —
+                    the full inventory of open tabs, which tab is active, and any side
+                    effects (tabs opened, download state changes) the call produced.
+
+                    At most one per `tool_result`, only on a non-error result answering a
+                    browser toolset member `tool_use`. The server renders the
+                    model-visible text from it; the model never sees the raw fields.
+
+                    - `List<BetaBrowserStateTabEntry> tabs`
+
+                      All tabs open in the browser after this call — the full inventory, not a delta. May be empty. Whenever non-empty, exactly one entry carries `active: true`.
+
+                      - `String tabId`
+
+                        The caller-assigned identifier for this tab, unique within the inventory.
+
+                      - `String title`
+
+                        The title of the page the tab is showing. May be empty.
+
+                      - `String url`
+
+                        The URL of the page the tab is showing. May be empty.
+
+                      - `Optional<Boolean> active`
+
+                        Whether this tab is the active tab after this call. Whenever `tabs` is non-empty, exactly one entry is marked `active: true`.
+
+                    - `JsonValue; type "browser_state"constant`
+
+                      - `BROWSER_STATE("browser_state")`
+
+                    - `Optional<BetaCacheControlEphemeral> cacheControl`
+
+                      Create a cache control breakpoint at this content block.
+
+                    - `Optional<List<BetaBrowserStateChange>> stateChanges`
+
+                      Tabs opened and download state changes during this call. "Nothing to report" is expressed by omitting the field, never by an empty list.
+
+                      - `class BetaBrowserStateChangeTabOpened:`
+
+                        A tab this call's execution opened that remains open at its end —
+                        the creation delta of the `tabs` inventory, not an event log.
+
+                        Carries only the `tab_id`; the tab's `title` and `url` live on its
+                        `tabs` entry, which must include the same `tab_id`. A tab opened
+                        during a failed call gets no deferred `tab_opened`; it simply appears
+                        in the next result's `tabs` inventory.
+
+                        - `String tabId`
+
+                          The `tab_id` of the opened tab, present in `tabs`.
+
+                        - `JsonValue; type "tab_opened"constant`
+
+                          - `TAB_OPENED("tab_opened")`
+
+                      - `class BetaBrowserStateChangeDownloadStarted:`
+
+                        A file download that started during this call.
+
+                        - `String downloadId`
+
+                          The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+                        - `JsonValue; type "download_started"constant`
+
+                          - `DOWNLOAD_STARTED("download_started")`
+
+                        - `String url`
+
+                          The final post-redirect URL the download was served from.
+
+                      - `class BetaBrowserStateChangeDownloadCompleted:`
+
+                        A file download that finished during this call, reported with the
+                        same `download_id` as its `download_started` — or without a prior
+                        `download_started`, when the download finished during the call that
+                        started it (at most one state change per `download_id` per result).
+
+                        - `String downloadId`
+
+                          The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+                        - `JsonValue; type "download_completed"constant`
+
+                          - `DOWNLOAD_COMPLETED("download_completed")`
+
+                        - `String url`
+
+                          The final post-redirect URL the download was served from.
+
+                        - `Optional<String> path`
+
+                          Where the executor saved the file, on the executor's filesystem. Only included when another tool in the same environment can read the file at that path.
+
+                        - `Optional<Long> sizeBytes`
+
+                          The completed download's size.
+
+                      - `class BetaBrowserStateChangeDownloadFailed:`
+
+                        A file download that failed — or was cancelled — during this call.
+
+                        - `String downloadId`
+
+                          The caller-assigned identifier for this download, stable across the state changes reporting it.
+
+                        - `JsonValue; type "download_failed"constant`
+
+                          - `DOWNLOAD_FAILED("download_failed")`
+
+                        - `String url`
+
+                          The final post-redirect URL the download was served from.
+
+                        - `Optional<String> error`
+
+                          The failure or cancellation detail, when known.
+
               - `Optional<Boolean> isError`
+
+              - `Optional<String> toolsetName`
+
+                For a toolset member tool_result, the toolset family of the paired tool_use.
 
             - `class BetaServerToolUseBlockParam:`
 
@@ -31394,125 +36227,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 Opaque metadata from prior compaction, to be round-tripped verbatim
 
-            - `class BetaMidConversationSystemBlockParam:`
-
-              System instructions that appear mid-conversation.
-
-              Use this block to provide or update system-level instructions at a specific
-              point in the conversation, rather than only via the top-level `system` parameter.
-
-              - `List<Content> content`
-
-                System instruction text blocks.
-
-                - `class BetaTextBlockParam:`
-
-                - `class BetaRequestToolAdditionBlock:`
-
-                  Mid-conversation directive to surface a declared tool.
-
-                  `tool` references a tool (or MCP toolset) by name from the request's
-                  `tools`; it is offered to the model from this point in the
-                  conversation onward.
-
-                  - `Tool tool`
-
-                    Reference to a single tool the caller declared directly in
-                    `tools[]`. Does not accept the composed `{server}_{name}` form the
-                    server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-                    `mcp_toolset_reference` for those.
-
-                    - `class BetaToolChangeToolReference:`
-
-                      Reference to a single tool the caller declared directly in
-                      `tools[]`. Does not accept the composed `{server}_{name}` form the
-                      server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-                      `mcp_toolset_reference` for those.
-
-                      - `String name`
-
-                      - `JsonValue; type "tool_reference"constant`
-
-                        - `TOOL_REFERENCE("tool_reference")`
-
-                    - `class BetaToolChangeMcpToolReference:`
-
-                      Reference to a single MCP tool by its server and remote name — the
-                      same `server_name`/`name` pair `mcp_tool_use` carries.
-
-                      - `String name`
-
-                      - `String serverName`
-
-                      - `JsonValue; type "mcp_tool_reference"constant`
-
-                        - `MCP_TOOL_REFERENCE("mcp_tool_reference")`
-
-                    - `class BetaToolChangeMcpToolsetReference:`
-
-                      Reference to every tool in the named MCP server's toolset.
-
-                      - `String serverName`
-
-                      - `JsonValue; type "mcp_toolset_reference"constant`
-
-                        - `MCP_TOOLSET_REFERENCE("mcp_toolset_reference")`
-
-                  - `JsonValue; type "tool_addition"constant`
-
-                    - `TOOL_ADDITION("tool_addition")`
-
-                  - `Optional<BetaCacheControlEphemeral> cacheControl`
-
-                    Create a cache control breakpoint at this content block.
-
-                - `class BetaRequestToolRemovalBlock:`
-
-                  Mid-conversation directive to withdraw a tool.
-
-                  `tool` references a tool (or MCP toolset) by name from the request's
-                  `tools`; it is no longer offered to the model from this point in the
-                  conversation onward.
-
-                  - `Tool tool`
-
-                    Reference to a single tool the caller declared directly in
-                    `tools[]`. Does not accept the composed `{server}_{name}` form the
-                    server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-                    `mcp_toolset_reference` for those.
-
-                    - `class BetaToolChangeToolReference:`
-
-                      Reference to a single tool the caller declared directly in
-                      `tools[]`. Does not accept the composed `{server}_{name}` form the
-                      server assigns to MCP-resolved tools — use `mcp_tool_reference` or
-                      `mcp_toolset_reference` for those.
-
-                    - `class BetaToolChangeMcpToolReference:`
-
-                      Reference to a single MCP tool by its server and remote name — the
-                      same `server_name`/`name` pair `mcp_tool_use` carries.
-
-                    - `class BetaToolChangeMcpToolsetReference:`
-
-                      Reference to every tool in the named MCP server's toolset.
-
-                  - `JsonValue; type "tool_removal"constant`
-
-                    - `TOOL_REMOVAL("tool_removal")`
-
-                  - `Optional<BetaCacheControlEphemeral> cacheControl`
-
-                    Create a cache control breakpoint at this content block.
-
-              - `JsonValue; type "mid_conv_system"constant`
-
-                - `MID_CONV_SYSTEM("mid_conv_system")`
-
-              - `Optional<BetaCacheControlEphemeral> cacheControl`
-
-                Create a cache control breakpoint at this content block.
-
             - `class BetaRequestToolAdditionBlock:`
 
               Mid-conversation directive to surface a declared tool.
@@ -31521,6 +36235,57 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               `tools`; it is offered to the model from this point in the
               conversation onward.
 
+              - `Tool tool`
+
+                Reference to a single tool the caller declared directly in
+                `tools[]`. Does not accept the composed `{server}_{name}` form the
+                server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+                `mcp_toolset_reference` for those.
+
+                - `class BetaToolChangeToolReference:`
+
+                  Reference to a single tool the caller declared directly in
+                  `tools[]`. Does not accept the composed `{server}_{name}` form the
+                  server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+                  `mcp_toolset_reference` for those.
+
+                  - `String name`
+
+                  - `JsonValue; type "tool_reference"constant`
+
+                    - `TOOL_REFERENCE("tool_reference")`
+
+                - `class BetaToolChangeMcpToolReference:`
+
+                  Reference to a single MCP tool by its server and remote name — the
+                  same `server_name`/`name` pair `mcp_tool_use` carries.
+
+                  - `String name`
+
+                  - `String serverName`
+
+                  - `JsonValue; type "mcp_tool_reference"constant`
+
+                    - `MCP_TOOL_REFERENCE("mcp_tool_reference")`
+
+                - `class BetaToolChangeMcpToolsetReference:`
+
+                  Reference to every tool in the named MCP server's toolset.
+
+                  - `String serverName`
+
+                  - `JsonValue; type "mcp_toolset_reference"constant`
+
+                    - `MCP_TOOLSET_REFERENCE("mcp_toolset_reference")`
+
+              - `JsonValue; type "tool_addition"constant`
+
+                - `TOOL_ADDITION("tool_addition")`
+
+              - `Optional<BetaCacheControlEphemeral> cacheControl`
+
+                Create a cache control breakpoint at this content block.
+
             - `class BetaRequestToolRemovalBlock:`
 
               Mid-conversation directive to withdraw a tool.
@@ -31528,6 +36293,37 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
               `tool` references a tool (or MCP toolset) by name from the request's
               `tools`; it is no longer offered to the model from this point in the
               conversation onward.
+
+              - `Tool tool`
+
+                Reference to a single tool the caller declared directly in
+                `tools[]`. Does not accept the composed `{server}_{name}` form the
+                server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+                `mcp_toolset_reference` for those.
+
+                - `class BetaToolChangeToolReference:`
+
+                  Reference to a single tool the caller declared directly in
+                  `tools[]`. Does not accept the composed `{server}_{name}` form the
+                  server assigns to MCP-resolved tools — use `mcp_tool_reference` or
+                  `mcp_toolset_reference` for those.
+
+                - `class BetaToolChangeMcpToolReference:`
+
+                  Reference to a single MCP tool by its server and remote name — the
+                  same `server_name`/`name` pair `mcp_tool_use` carries.
+
+                - `class BetaToolChangeMcpToolsetReference:`
+
+                  Reference to every tool in the named MCP server's toolset.
+
+              - `JsonValue; type "tool_removal"constant`
+
+                - `TOOL_REMOVAL("tool_removal")`
+
+              - `Optional<BetaCacheControlEphemeral> cacheControl`
+
+                Create a cache control breakpoint at this content block.
 
             - `class BetaFallbackBlockParam:`
 
@@ -32491,6 +37287,412 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             When true, guarantees schema validation on tool names and inputs
 
+        - `class BetaBrowserToolset20260801:`
+
+          The browser toolset: a single `tools[]` entry (carrying no
+          `name`) that declares the browser tool family. The model is served
+          the family's tool with any members disabled via `configs` removed
+          from its schema.
+
+          - `JsonValue; type "browser_toolset_20260801"constant`
+
+            - `BROWSER_TOOLSET_20260801("browser_toolset_20260801")`
+
+          - `Optional<List<AllowedCaller>> allowedCallers`
+
+            - `DIRECT("direct")`
+
+            - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+            - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+            - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
+          - `Optional<BetaCacheControlEphemeral> cacheControl`
+
+            Create a cache control breakpoint at this content block.
+
+          - `Optional<BetaBrowserToolsetConfigs> configs`
+
+            Per-member configuration for `browser_toolset_20260801`: one
+            optional field per member tool, keyed by the member name — the same
+            name the member's `tool_use` blocks carry. Every member is an
+            accepted key, and a member's defaults apply wherever its key is
+            absent. Unknown keys are rejected: the field set is this toolset
+            version's complete member set.
+
+            - `Optional<BetaBrowserCloseTabConfig> closeTab`
+
+              `close_tab`'s config overrides.
+
+              - `Optional<Boolean> deferLoading`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Optional<Boolean> enabled`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `Optional<BetaBrowserDoubleClickConfig> doubleClick`
+
+              `double_click`'s config overrides.
+
+              - `Optional<Boolean> deferLoading`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Optional<Boolean> enabled`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `Optional<BetaBrowserFileUploadConfig> fileUpload`
+
+              `file_upload`'s config overrides.
+
+              - `Optional<Boolean> deferLoading`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Optional<Boolean> enabled`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `Optional<BetaBrowserFindConfig> find`
+
+              `find`'s config overrides.
+
+              - `Optional<Boolean> deferLoading`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Optional<Boolean> enabled`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `Optional<BetaBrowserFormInputConfig> formInput`
+
+              `form_input`'s config overrides.
+
+              - `Optional<Boolean> deferLoading`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Optional<Boolean> enabled`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `Optional<BetaBrowserGetPageTextConfig> getPageText`
+
+              `get_page_text`'s config overrides.
+
+              - `Optional<Boolean> deferLoading`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Optional<Boolean> enabled`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `Optional<BetaBrowserHoldKeyConfig> holdKey`
+
+              `hold_key`'s config overrides.
+
+              - `Optional<Boolean> deferLoading`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Optional<Boolean> enabled`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `Optional<BetaBrowserHoverConfig> hover`
+
+              `hover`'s config overrides.
+
+              - `Optional<Boolean> deferLoading`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Optional<Boolean> enabled`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `Optional<BetaBrowserJavascriptExecConfig> javascriptExec`
+
+              `javascript_exec`'s config overrides.
+
+              - `Optional<Boolean> deferLoading`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Optional<Boolean> enabled`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `Optional<BetaBrowserKeyConfig> key`
+
+              `key`'s config overrides.
+
+              - `Optional<Boolean> deferLoading`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Optional<Boolean> enabled`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `Optional<BetaBrowserLeftClickConfig> leftClick`
+
+              `left_click`'s config overrides.
+
+              - `Optional<Boolean> deferLoading`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Optional<Boolean> enabled`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `Optional<BetaBrowserLeftClickDragConfig> leftClickDrag`
+
+              `left_click_drag`'s config overrides.
+
+              - `Optional<Boolean> deferLoading`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Optional<Boolean> enabled`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `Optional<BetaBrowserLeftMouseDownConfig> leftMouseDown`
+
+              `left_mouse_down`'s config overrides.
+
+              - `Optional<Boolean> deferLoading`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Optional<Boolean> enabled`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `Optional<BetaBrowserLeftMouseUpConfig> leftMouseUp`
+
+              `left_mouse_up`'s config overrides.
+
+              - `Optional<Boolean> deferLoading`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Optional<Boolean> enabled`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `Optional<BetaBrowserListTabsConfig> listTabs`
+
+              `list_tabs`'s config overrides.
+
+              - `Optional<Boolean> deferLoading`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Optional<Boolean> enabled`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `Optional<BetaBrowserMiddleClickConfig> middleClick`
+
+              `middle_click`'s config overrides.
+
+              - `Optional<Boolean> deferLoading`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Optional<Boolean> enabled`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `Optional<BetaBrowserMouseMoveConfig> mouseMove`
+
+              `mouse_move`'s config overrides.
+
+              - `Optional<Boolean> deferLoading`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Optional<Boolean> enabled`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `Optional<BetaBrowserNavigateConfig> navigate`
+
+              `navigate`'s config overrides.
+
+              - `Optional<Boolean> deferLoading`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Optional<Boolean> enabled`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `Optional<BetaBrowserNewTabConfig> newTab`
+
+              `new_tab`'s config overrides.
+
+              - `Optional<Boolean> deferLoading`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Optional<Boolean> enabled`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `Optional<BetaBrowserReadConsoleConfig> readConsole`
+
+              `read_console`'s config overrides.
+
+              - `Optional<Boolean> deferLoading`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Optional<Boolean> enabled`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `Optional<BetaBrowserReadNetworkConfig> readNetwork`
+
+              `read_network`'s config overrides.
+
+              - `Optional<Boolean> deferLoading`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Optional<Boolean> enabled`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `Optional<BetaBrowserReadPageConfig> readPage`
+
+              `read_page`'s config overrides.
+
+              - `Optional<Boolean> deferLoading`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Optional<Boolean> enabled`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `Optional<BetaBrowserRightClickConfig> rightClick`
+
+              `right_click`'s config overrides.
+
+              - `Optional<Boolean> deferLoading`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Optional<Boolean> enabled`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `Optional<BetaBrowserScreenshotConfig> screenshot`
+
+              `screenshot`'s config overrides.
+
+              - `Optional<Boolean> deferLoading`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Optional<Boolean> enabled`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `Optional<BetaBrowserScrollConfig> scroll`
+
+              `scroll`'s config overrides.
+
+              - `Optional<Boolean> deferLoading`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Optional<Boolean> enabled`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `Optional<BetaBrowserScrollToConfig> scrollTo`
+
+              `scroll_to`'s config overrides.
+
+              - `Optional<Boolean> deferLoading`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Optional<Boolean> enabled`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `Optional<BetaBrowserSwitchTabConfig> switchTab`
+
+              `switch_tab`'s config overrides.
+
+              - `Optional<Boolean> deferLoading`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Optional<Boolean> enabled`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `Optional<BetaBrowserTripleClickConfig> tripleClick`
+
+              `triple_click`'s config overrides.
+
+              - `Optional<Boolean> deferLoading`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Optional<Boolean> enabled`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `Optional<BetaBrowserTypeConfig> type`
+
+              `type`'s config overrides.
+
+              - `Optional<Boolean> deferLoading`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Optional<Boolean> enabled`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `Optional<BetaBrowserWaitConfig> wait`
+
+              `wait`'s config overrides.
+
+              - `Optional<Boolean> deferLoading`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Optional<Boolean> enabled`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `Optional<BetaBrowserZoomConfig> zoom`
+
+              `zoom`'s config overrides.
+
+              - `Optional<Boolean> deferLoading`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Optional<Boolean> enabled`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
         - `class BetaToolComputerUse20241022:`
 
           - `long displayHeightPx`
@@ -32720,6 +37922,248 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
           - `Optional<Boolean> strict`
 
             When true, guarantees schema validation on tool names and inputs
+
+        - `class BetaComputerToolset20260801:`
+
+          The computer toolset: a single `tools[]` entry (carrying no
+          `name`) that declares the computer tool family. The model is
+          served the family's tool with any members disabled via `configs`
+          removed from its schema. Every member is enabled by default, zoom
+          included. The single-tool options `display_number` and
+          `enable_zoom` are not fields of a toolset entry — it carries only
+          `type`, `configs`, and `cache_control`; zoom is controlled
+          via `configs.zoom.enabled`.
+
+          - `JsonValue; type "computer_toolset_20260801"constant`
+
+            - `COMPUTER_TOOLSET_20260801("computer_toolset_20260801")`
+
+          - `Optional<List<AllowedCaller>> allowedCallers`
+
+            - `DIRECT("direct")`
+
+            - `CODE_EXECUTION_20250825("code_execution_20250825")`
+
+            - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+            - `CODE_EXECUTION_20260521("code_execution_20260521")`
+
+          - `Optional<BetaCacheControlEphemeral> cacheControl`
+
+            Create a cache control breakpoint at this content block.
+
+          - `Optional<BetaComputerToolsetConfigs> configs`
+
+            Per-member configuration for `computer_toolset_20260801`: one
+            optional field per member tool, keyed by the member name — the same
+            name the member's `tool_use` blocks carry. Every member is an
+            accepted key, and a member's defaults apply wherever its key is
+            absent. Unknown keys are rejected: the field set is this toolset
+            version's complete member set.
+
+            - `Optional<BetaComputerCursorPositionConfig> cursorPosition`
+
+              `cursor_position`'s config overrides.
+
+              - `Optional<Boolean> deferLoading`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Optional<Boolean> enabled`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `Optional<BetaComputerDoubleClickConfig> doubleClick`
+
+              `double_click`'s config overrides.
+
+              - `Optional<Boolean> deferLoading`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Optional<Boolean> enabled`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `Optional<BetaComputerHoldKeyConfig> holdKey`
+
+              `hold_key`'s config overrides.
+
+              - `Optional<Boolean> deferLoading`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Optional<Boolean> enabled`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `Optional<BetaComputerKeyConfig> key`
+
+              `key`'s config overrides.
+
+              - `Optional<Boolean> deferLoading`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Optional<Boolean> enabled`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `Optional<BetaComputerLeftClickConfig> leftClick`
+
+              `left_click`'s config overrides.
+
+              - `Optional<Boolean> deferLoading`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Optional<Boolean> enabled`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `Optional<BetaComputerLeftClickDragConfig> leftClickDrag`
+
+              `left_click_drag`'s config overrides.
+
+              - `Optional<Boolean> deferLoading`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Optional<Boolean> enabled`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `Optional<BetaComputerLeftMouseDownConfig> leftMouseDown`
+
+              `left_mouse_down`'s config overrides.
+
+              - `Optional<Boolean> deferLoading`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Optional<Boolean> enabled`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `Optional<BetaComputerLeftMouseUpConfig> leftMouseUp`
+
+              `left_mouse_up`'s config overrides.
+
+              - `Optional<Boolean> deferLoading`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Optional<Boolean> enabled`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `Optional<BetaComputerMiddleClickConfig> middleClick`
+
+              `middle_click`'s config overrides.
+
+              - `Optional<Boolean> deferLoading`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Optional<Boolean> enabled`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `Optional<BetaComputerMouseMoveConfig> mouseMove`
+
+              `mouse_move`'s config overrides.
+
+              - `Optional<Boolean> deferLoading`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Optional<Boolean> enabled`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `Optional<BetaComputerRightClickConfig> rightClick`
+
+              `right_click`'s config overrides.
+
+              - `Optional<Boolean> deferLoading`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Optional<Boolean> enabled`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `Optional<BetaComputerScreenshotConfig> screenshot`
+
+              `screenshot`'s config overrides.
+
+              - `Optional<Boolean> deferLoading`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Optional<Boolean> enabled`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `Optional<BetaComputerScrollConfig> scroll`
+
+              `scroll`'s config overrides.
+
+              - `Optional<Boolean> deferLoading`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Optional<Boolean> enabled`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `Optional<BetaComputerTripleClickConfig> tripleClick`
+
+              `triple_click`'s config overrides.
+
+              - `Optional<Boolean> deferLoading`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Optional<Boolean> enabled`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `Optional<BetaComputerTypeConfig> type`
+
+              `type`'s config overrides.
+
+              - `Optional<Boolean> deferLoading`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Optional<Boolean> enabled`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `Optional<BetaComputerWaitConfig> wait`
+
+              `wait`'s config overrides.
+
+              - `Optional<Boolean> deferLoading`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Optional<Boolean> enabled`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+            - `Optional<BetaComputerZoomConfig> zoom`
+
+              `zoom`'s config overrides.
+
+              - `Optional<Boolean> deferLoading`
+
+                Defer loading for this member. Must resolve to the same value on every enabled member of the toolset.
+
+              - `Optional<Boolean> enabled`
+
+                Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
         - `class BetaToolTextEditor20250124:`
 
@@ -33559,7 +39003,7 @@ public final class Main {
                 .params(BatchCreateParams.Request.Params.builder()
                     .maxTokens(1024L)
                     .addUserMessage("Hello, world")
-                    .model(Model.CLAUDE_OPUS_4_6)
+                    .model(Model.CLAUDE_OPUS_5)
                     .build())
                 .build())
             .build();
@@ -33656,6 +39100,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
     - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
+
+    - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
@@ -33889,6 +39335,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
+    - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
@@ -34120,6 +39568,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
+    - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
@@ -34344,6 +39794,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
     - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
 
+    - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
+
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
@@ -34479,6 +39931,8 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
     - `OUTPUT_300K_2026_03_24("output-300k-2026-03-24")`
 
     - `USER_PROFILES_2026_03_24("user-profiles-2026-03-24")`
+
+    - `USER_PROFILES_2026_08_18("user-profiles-2026-08-18")`
 
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
@@ -34788,6 +40242,10 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
                 - `JsonValue; type "code_execution_20260120"constant`
 
                   - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+            - `Optional<String> toolsetName`
+
+              For a toolset member tool_use, the toolset family.
 
           - `class BetaServerToolUseBlock:`
 
@@ -36681,6 +42139,10 @@ public final class Main {
 
                   - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+            - `Optional<String> toolsetName`
+
+              For a toolset member tool_use, the toolset family.
+
           - `class BetaServerToolUseBlock:`
 
             - `String id`
@@ -38359,6 +43821,10 @@ public final class Main {
 
                 - `CODE_EXECUTION_20260120("code_execution_20260120")`
 
+          - `Optional<String> toolsetName`
+
+            For a toolset member tool_use, the toolset family.
+
         - `class BetaServerToolUseBlock:`
 
           - `String id`
@@ -39998,6 +45464,10 @@ public final class Main {
             - `JsonValue; type "code_execution_20260120"constant`
 
               - `CODE_EXECUTION_20260120("code_execution_20260120")`
+
+        - `Optional<String> toolsetName`
+
+          For a toolset member tool_use, the toolset family.
 
       - `class BetaServerToolUseBlock:`
 

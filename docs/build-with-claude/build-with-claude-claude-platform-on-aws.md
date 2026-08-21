@@ -122,7 +122,7 @@ Plan a move from an existing organization as a cutover to a new one:
 
 Once the new organization is running, the differences are concentrated in billing and authentication, which are handled through AWS:
 
-* **Billing** moves to AWS Marketplace: usage is billed in Claude Consumption Units rather than prepaid credits (see [Billing](./build-with-claude-claude-platform-on-aws.md#billing)), and spend limits are managed on the Billing page rather than the Limits page (see [Spend limits](./build-with-claude-claude-platform-on-aws.md#spend-limits)). During the transition, billing stays separate: the existing organization continues to be billed as it is today.
+* **Billing** moves to AWS Marketplace: usage is billed in Claude Consumption Units rather than prepaid credits (see [Billing](./build-with-claude-claude-platform-on-aws.md#billing)), and you set spend limits on the Billing page (see [Spend limits](./build-with-claude-claude-platform-on-aws.md#spend-limits)). During the transition, billing stays separate: the existing organization continues to be billed as it is today.
 * **Authentication and access** move to AWS: requests authenticate with AWS credentials or with API keys generated in the AWS Console, not the Claude Console (see [Authentication](./build-with-claude-claude-platform-on-aws.md#authentication)). Organization membership is managed through AWS IAM rather than the Claude Console (see [Available pages](./build-with-claude-claude-platform-on-aws.md#available-pages)), and Anthropic's client SDKs provide platform-specific client classes (see [Install an SDK](./build-with-claude-claude-platform-on-aws.md#install-an-sdk)).
 * **Day-to-day API usage** works the way it does on the first-party Claude API, except where noted in the [feature limitations](./build-with-claude-claude-platform-on-aws.md#features-not-supported). Before shifting production traffic, check your rate limits: new organizations are placed on the Start tier, and limit increases go through your Anthropic account representative (see [Rate limits and quotas](./build-with-claude-claude-platform-on-aws.md#rate-limits-and-quotas)).
 
@@ -311,14 +311,14 @@ Anthropic's [client SDKs](../general/general-cli-sdks-libraries-overview.md) sup
 
   <Tab title="Java">
     ```kotlin Gradle
-    implementation("com.anthropic:anthropic-java-aws:2.53.0")
+    implementation("com.anthropic:anthropic-java-aws:2.57.0")
     ```
 
     ```xml Maven
     <dependency>
       <groupId>com.anthropic</groupId>
       <artifactId>anthropic-java-aws</artifactId>
-      <version>2.53.0</version>
+      <version>2.57.0</version>
     </dependency>
     ```
   </Tab>
@@ -539,7 +539,7 @@ Claude Platform on AWS uses Claude API endpoints directly, which means you get f
 
 * **Feature access:** Because Anthropic operates both platforms, most new features and beta headers become available on Claude Platform on AWS without a separate integration step. See [feature limitations](./build-with-claude-claude-platform-on-aws.md#features-not-supported) for exceptions.
 * **Beta features:** Pass the standard `anthropic-beta` header to access beta features, just as you would with the Claude API.
-* **Agent Skills:** Use pre-built and custom [Agent Skills](../agents-and-tools/agents-and-tools-agent-skills-overview.md) with the same `container.skills` parameter and beta headers as the Claude API. All pre-built Skills (PowerPoint, Excel, Word, PDF) work out of the box.
+* **Agent Skills:** Use pre-built and custom [Agent Skills](../agents-and-tools/agents-and-tools-agent-skills-overview.md) with the same `container.skills` parameter as the Claude API. All pre-built Skills (PowerPoint, Excel, Word, PDF) work out of the box.
 * **Code execution:** Run code in Anthropic's managed sandbox using the [code execution tool](../agents-and-tools/agents-and-tools-tool-use-code-execution-tool.md).
 * **Tool use:** Computer use and all other [tool use capabilities](../agents-and-tools/agents-and-tools-tool-use-overview.md) are available.
 * **Extended thinking:** Enable extended thinking with the same parameters as the Claude API.
@@ -566,6 +566,7 @@ Session behavior on Claude Platform on AWS differs from first-party Claude Manag
 The following capabilities are not currently available on Claude Platform on AWS:
 
 * **HIPAA readiness:** Anthropic's HIPAA-ready program is not available. See [API and data retention](../manage-claude/manage-claude-api-and-data-retention.md).
+* **Computer use and browser use toolsets:** `computer_toolset_20260801` and `browser_toolset_20260801` are not currently available on Claude Platform on AWS. The beta [computer use](../agents-and-tools/agents-and-tools-tool-use-computer-use-tool.md#earlier-tool-versions) tool versions remain available.
 
 - **Admin API:** Workspace endpoints (create, get, list, update, and archive on `/v1/organizations/workspaces`) are available. Other Admin API endpoints (organization members, workspace members, invites, API keys, usage reports, cost reports, rate limit reports, and external keys) are not currently available. Manage [CMEK](../manage-claude/manage-claude-cmek.md) keys in the Claude Console instead. View usage and cost data in the [Claude Console](./build-with-claude-claude-platform-on-aws.md#using-the-claude-console) instead. AWS IAM manages organization membership.
 - **Workspace member management:** Adding or removing users from individual workspaces is not available. AWS IAM policies on workspace ARNs control access.
@@ -803,7 +804,7 @@ The **Through AWS gateway** column indicates whether the page reads and writes d
 | **Usage**             | Yes           | No                  | View token usage by model, workspace, and dimension. Data can take a few minutes to appear after a request.                                                                                                                       |
 | **Cost**              | Yes           | No                  | View cost breakdowns by model and workspace. AWS Cost Explorer shows the aggregated [Claude Consumption Unit (CCU)](./build-with-claude-claude-platform-on-aws.md#billing) line item.              |
 | **Rate limits**       | Yes           | No                  | View rate limits (read-only). Tier increases go through your Anthropic account representative; see [Rate limits and quotas](./build-with-claude-claude-platform-on-aws.md#rate-limits-and-quotas). |
-| **Workspaces**        | Yes           | No                  | View per-region workspaces (read-only).                                                                                                                                                                                           |
+| **Workspaces**        | Yes           | No                  | View per-region workspaces (read-only) and set per-workspace [spend limits](./build-with-claude-claude-platform-on-aws.md#spend-limits).                                                           |
 | **Files**             | Yes           | Yes                 | View and manage uploaded files.                                                                                                                                                                                                   |
 | **Skills**            | Yes           | Yes                 | View and manage Agent Skills.                                                                                                                                                                                                     |
 | **Batches**           | Yes           | Yes                 | View and manage batch processing jobs.                                                                                                                                                                                            |
@@ -844,14 +845,16 @@ For the CCU price, conversion mechanics, discount application, and per-model tok
 
 ### Spend limits
 
-The Start, Build, and Scale usage tiers each carry a monthly spend cap; see [the per-tier spend caps](../api/api-rate-limits.md#spend-limits) for current values. The spend cap and rate limits belong to the same tier, so to raise the cap, request a tier increase through your Anthropic account representative or [support](https://support.claude.com) (see [Rate limits and quotas](./build-with-claude-claude-platform-on-aws.md#rate-limits-and-quotas)).
+The Start, Build, and Scale usage tiers each carry a monthly spend cap; see the [per-tier spend caps](../api/api-rate-limits.md#spend-limits) for current values. When your organization's usage for the calendar month reaches its tier's cap, API requests fail with the [spend-cap error](../api/api-rate-limits.md#reaching-your-spend-cap) until 00UTC on the first day of the next month, and retrying sooner doesn't succeed. The spend cap and rate limits belong to the same tier. To raise the cap, or to restore access after reaching it, request a tier increase through your Anthropic account representative or [Anthropic support](https://support.claude.com) (see [Rate limits and quotas](./build-with-claude-claude-platform-on-aws.md#rate-limits-and-quotas)).
 
-You can also set your own monthly spend limit to cap what your organization spends:
+You can also set your own monthly spend limits below the cap, after adding at least one recipient under **Email notifications** on the Billing page:
 
 * **Organization spend limit:** Go to [Settings > Billing](https://platform.claude.com/settings/billing) in the [Claude Console](./build-with-claude-claude-platform-on-aws.md#using-the-claude-console) to set a monthly spend limit.
-* **Workspace spend limits:** Set monthly spend limits for individual workspaces from each workspace's **Spend limits** settings.
+* **Workspace spend limits:** Select a workspace under [Settings > Workspaces](https://platform.claude.com/settings/workspaces) and open its **Spend limits** page. Workspace details are otherwise read-only in the Claude Console on Claude Platform on AWS.
 
-The spend limits you set are soft limits: spend is calculated at list prices and can take about two hours to reflect recent usage.
+When usage reaches a limit you set, requests fail with HTTP 400 (see the [spend limit error](../api/api-rate-limits.md#setting-your-own-spend-limit)) until 00UTC on the first day of the next month, or until you raise or remove the limit.
+
+Spend is calculated at list prices and can take about 2 hours to reflect recent usage, so usage can exceed the cap or a limit before requests start failing. The overshoot is billed. When the tier cap or an organization spend limit stops your requests, an email notice goes to the recipients listed under **Email notifications** on the Billing page. Role-based recipients, such as all admins, aren't available on Claude Platform on AWS. The tier-cap notice also goes to the email address used at AWS Marketplace sign-up.
 
 ## Monitoring and logging
 

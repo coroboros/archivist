@@ -13,7 +13,7 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/files
 
 ## Upload File
 
-`FileMetadata Beta.Files.Upload(FileUploadParamsparameters, CancellationTokencancellationToken = default)`
+`BetaFileMetadata Beta.Files.Upload(FileUploadParamsparameters, CancellationTokencancellationToken = default)`
 
 **post** `/v1/files`
 
@@ -75,6 +75,8 @@ Upload File
 
     - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
+    - `"user-profiles-2026-08-18"UserProfiles2026_08_18`
+
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
     - `"managed-agents-2026-04-01"ManagedAgents2026_04_01`
@@ -99,7 +101,7 @@ Upload File
 
 ### Returns
 
-- `class FileMetadata:`
+- `class BetaFileMetadata:`
 
   - `required string ID`
 
@@ -153,9 +155,9 @@ FileUploadParams parameters = new()
     File = Encoding.UTF8.GetBytes("Example data")
 };
 
-var fileMetadata = await client.Beta.Files.Upload(parameters);
+var betaFileMetadata = await client.Beta.Files.Upload(parameters);
 
-Console.WriteLine(fileMetadata);
+Console.WriteLine(betaFileMetadata);
 ```
 
 #### Response
@@ -254,6 +256,8 @@ List Files
 
     - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
+    - `"user-profiles-2026-08-18"UserProfiles2026_08_18`
+
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
     - `"managed-agents-2026-04-01"ManagedAgents2026_04_01`
@@ -280,7 +284,7 @@ List Files
 
 - `class FileListPageResponse:`
 
-  - `required IReadOnlyList<FileMetadata> Data`
+  - `required IReadOnlyList<BetaFileMetadata> Data`
 
     List of file metadata objects.
 
@@ -441,6 +445,8 @@ Download File
 
     - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
+    - `"user-profiles-2026-08-18"UserProfiles2026_08_18`
+
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
     - `"managed-agents-2026-04-01"ManagedAgents2026_04_01`
@@ -475,7 +481,7 @@ Console.WriteLine(response);
 
 ## Get File Metadata
 
-`FileMetadata Beta.Files.RetrieveMetadata(FileRetrieveMetadataParamsparameters, CancellationTokencancellationToken = default)`
+`BetaFileMetadata Beta.Files.RetrieveMetadata(FileRetrieveMetadataParamsparameters, CancellationTokencancellationToken = default)`
 
 **get** `/v1/files/{file_id}`
 
@@ -537,6 +543,8 @@ Get File Metadata
 
     - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
+    - `"user-profiles-2026-08-18"UserProfiles2026_08_18`
+
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
     - `"managed-agents-2026-04-01"ManagedAgents2026_04_01`
@@ -561,7 +569,7 @@ Get File Metadata
 
 ### Returns
 
-- `class FileMetadata:`
+- `class BetaFileMetadata:`
 
   - `required string ID`
 
@@ -612,9 +620,9 @@ Get File Metadata
 ```csharp
 FileRetrieveMetadataParams parameters = new() { FileID = "file_id" };
 
-var fileMetadata = await client.Beta.Files.RetrieveMetadata(parameters);
+var betaFileMetadata = await client.Beta.Files.RetrieveMetadata(parameters);
 
-Console.WriteLine(fileMetadata);
+Console.WriteLine(betaFileMetadata);
 ```
 
 #### Response
@@ -637,7 +645,7 @@ Console.WriteLine(fileMetadata);
 
 ## Delete File
 
-`DeletedFile Beta.Files.Delete(FileDeleteParamsparameters, CancellationTokencancellationToken = default)`
+`BetaDeletedFile Beta.Files.Delete(FileDeleteParamsparameters, CancellationTokencancellationToken = default)`
 
 **delete** `/v1/files/{file_id}`
 
@@ -699,6 +707,8 @@ Delete File
 
     - `"user-profiles-2026-03-24"UserProfiles2026_03_24`
 
+    - `"user-profiles-2026-08-18"UserProfiles2026_08_18`
+
     - `"advisor-tool-2026-03-01"AdvisorTool2026_03_01`
 
     - `"managed-agents-2026-04-01"ManagedAgents2026_04_01`
@@ -723,7 +733,7 @@ Delete File
 
 ### Returns
 
-- `class DeletedFile:`
+- `class BetaDeletedFile:`
 
   - `required string ID`
 
@@ -742,9 +752,9 @@ Delete File
 ```csharp
 FileDeleteParams parameters = new() { FileID = "file_id" };
 
-var deletedFile = await client.Beta.Files.Delete(parameters);
+var betaDeletedFile = await client.Beta.Files.Delete(parameters);
 
-Console.WriteLine(deletedFile);
+Console.WriteLine(betaDeletedFile);
 ```
 
 #### Response
@@ -758,21 +768,9 @@ Console.WriteLine(deletedFile);
 
 ## Domain Types
 
-### Beta File Scope
+### Beta Deleted File
 
-- `class BetaFileScope:`
-
-  - `required string ID`
-
-    The ID of the scoping resource (e.g., the session ID).
-
-  - `JsonElement Type "session"constant`
-
-    The type of scope (e.g., `"session"`).
-
-### Deleted File
-
-- `class DeletedFile:`
+- `class BetaDeletedFile:`
 
   - `required string ID`
 
@@ -786,9 +784,9 @@ Console.WriteLine(deletedFile);
 
     - `"file_deleted"FileDeleted`
 
-### File Metadata
+### Beta File Metadata
 
-- `class FileMetadata:`
+- `class BetaFileMetadata:`
 
   - `required string ID`
 
@@ -833,3 +831,15 @@ Console.WriteLine(deletedFile);
     - `JsonElement Type "session"constant`
 
       The type of scope (e.g., `"session"`).
+
+### Beta File Scope
+
+- `class BetaFileScope:`
+
+  - `required string ID`
+
+    The ID of the scoping resource (e.g., the session ID).
+
+  - `JsonElement Type "session"constant`
+
+    The type of scope (e.g., `"session"`).

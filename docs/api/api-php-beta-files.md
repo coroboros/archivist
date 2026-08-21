@@ -13,7 +13,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/files
 
 ## Upload File
 
-`$client->beta->files->upload(string file, ?list<AnthropicBeta> betas): FileMetadata`
+`$client->beta->files->upload(string file, ?list<AnthropicBeta> betas): BetaFileMetadata`
 
 **post** `/v1/files`
 
@@ -31,7 +31,7 @@ Upload File
 
 ### Returns
 
-- `FileMetadata`
+- `BetaFileMetadata`
 
   - `string id`
 
@@ -78,12 +78,12 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
-$fileMetadata = $client->beta->files->upload(
+$betaFileMetadata = $client->beta->files->upload(
   file: FileParam::fromString('Example data', filename: uniqid('file-upload-', true)),
   betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
 );
 
-var_dump($fileMetadata);
+var_dump($betaFileMetadata);
 ```
 
 #### Response
@@ -106,7 +106,7 @@ var_dump($fileMetadata);
 
 ## List Files
 
-`$client->beta->files->list(?string afterID, ?string beforeID, ?int limit, ?string scopeID, ?list<AnthropicBeta> betas): Page<FileMetadata>`
+`$client->beta->files->list(?string afterID, ?string beforeID, ?int limit, ?string scopeID, ?list<AnthropicBeta> betas): Page<BetaFileMetadata>`
 
 **get** `/v1/files`
 
@@ -138,7 +138,7 @@ List Files
 
 ### Returns
 
-- `FileMetadata`
+- `BetaFileMetadata`
 
   - `string id`
 
@@ -261,7 +261,7 @@ var_dump($response);
 
 ## Get File Metadata
 
-`$client->beta->files->retrieveMetadata(string fileID, ?list<AnthropicBeta> betas): FileMetadata`
+`$client->beta->files->retrieveMetadata(string fileID, ?list<AnthropicBeta> betas): BetaFileMetadata`
 
 **get** `/v1/files/{file_id}`
 
@@ -279,7 +279,7 @@ Get File Metadata
 
 ### Returns
 
-- `FileMetadata`
+- `BetaFileMetadata`
 
   - `string id`
 
@@ -326,11 +326,11 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
-$fileMetadata = $client->beta->files->retrieveMetadata(
+$betaFileMetadata = $client->beta->files->retrieveMetadata(
   'file_id', betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24]
 );
 
-var_dump($fileMetadata);
+var_dump($betaFileMetadata);
 ```
 
 #### Response
@@ -353,7 +353,7 @@ var_dump($fileMetadata);
 
 ## Delete File
 
-`$client->beta->files->delete(string fileID, ?list<AnthropicBeta> betas): DeletedFile`
+`$client->beta->files->delete(string fileID, ?list<AnthropicBeta> betas): BetaDeletedFile`
 
 **delete** `/v1/files/{file_id}`
 
@@ -371,7 +371,7 @@ Delete File
 
 ### Returns
 
-- `DeletedFile`
+- `BetaDeletedFile`
 
   - `string id`
 
@@ -392,11 +392,11 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
-$deletedFile = $client->beta->files->delete(
+$betaDeletedFile = $client->beta->files->delete(
   'file_id', betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24]
 );
 
-var_dump($deletedFile);
+var_dump($betaDeletedFile);
 ```
 
 #### Response
@@ -410,21 +410,9 @@ var_dump($deletedFile);
 
 ## Domain Types
 
-### Beta File Scope
+### Beta Deleted File
 
-- `BetaFileScope`
-
-  - `string id`
-
-    The ID of the scoping resource (e.g., the session ID).
-
-  - `"session" type`
-
-    The type of scope (e.g., `"session"`).
-
-### Deleted File
-
-- `DeletedFile`
+- `BetaDeletedFile`
 
   - `string id`
 
@@ -436,9 +424,9 @@ var_dump($deletedFile);
 
     For file deletion, this is always `"file_deleted"`.
 
-### File Metadata
+### Beta File Metadata
 
-- `FileMetadata`
+- `BetaFileMetadata`
 
   - `string id`
 
@@ -475,3 +463,15 @@ var_dump($deletedFile);
   - `?BetaFileScope scope`
 
     The scope of this file, indicating the context in which it was created (e.g., a session).
+
+### Beta File Scope
+
+- `BetaFileScope`
+
+  - `string id`
+
+    The ID of the scoping resource (e.g., the session ID).
+
+  - `"session" type`
+
+    The type of scope (e.g., `"session"`).

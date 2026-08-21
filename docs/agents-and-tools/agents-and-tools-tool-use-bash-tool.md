@@ -263,7 +263,7 @@ To handle `restart: true`, kill the shell process, start a new one, and return a
 
 `bash_20250124` is the current version of the tool, and it requires no beta header. Every model from Claude Sonnet 3.7 ([retired](../about-claude/about-claude-model-deprecations.md)) onward accepts it, including all current Claude models.
 
-The original `bash_20241022` version is part of the computer use beta, and the October 2024 Claude Sonnet 3.5 release ([retired](../about-claude/about-claude-model-deprecations.md)) is the only model that accepts it. Requests that use it need the `anthropic-beta: computer-use-2024-10-22` header, and the SDKs expose it only in their beta namespaces. New integrations should use `bash_20250124`.
+The original `bash_20241022` version works only with the October 2024 Claude Sonnet 3.5 model ([retired](../about-claude/about-claude-model-deprecations.md)). Requests that use it need the `anthropic-beta: computer-use-2024-10-22` header, and the SDKs expose it only in their beta namespaces. New integrations should use `bash_20250124`.
 
 ## Example: Multistep automation
 

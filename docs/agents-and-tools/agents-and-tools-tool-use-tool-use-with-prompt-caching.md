@@ -48,6 +48,8 @@ Place `cache_control: {"type": "ephemeral"}` on the last tool in your `tools` ar
 
 For `mcp_toolset`, the `cache_control` breakpoint lands on the last tool in the set. You don't control tool order within an MCP toolset, so place the breakpoint on the `mcp_toolset` entry itself and the API applies it to the final expanded tool.
 
+The [computer use](./agents-and-tools-tool-use-computer-use-tool.md) and [browser use](./agents-and-tools-tool-use-browser-use-tool.md) toolset entries follow the same rule: place `cache_control` on the toolset entry itself, and the breakpoint lands after the toolset's definition. It isn't accepted inside a member's `configs` entry, because the toolset's members load as one definition. Within a [batch action](./agents-and-tools-tool-use-computer-use-tool.md#batch-actions), a `cache_control` marker on any of the turn's member `tool_use` or `tool_result` blocks is accepted and takes effect at the end of that batch, so several markers in one batch act as a single breakpoint. Each marker still counts toward the request's limit of [four breakpoints](../build-with-claude/build-with-claude-prompt-caching.md#when-to-use-multiple-breakpoints), so use one per turn.
+
 ## defer\_loading and cache preservation
 
 Deferred tools are not included in the system-prompt prefix. When the model discovers a deferred tool through [tool search](./agents-and-tools-tool-use-tool-search-tool.md), the definition is appended inline as a `tool_reference` block in the conversation history. The prefix is untouched, so prompt caching is preserved.
@@ -84,16 +86,17 @@ This behavior only applies when your request already has at least one `cache_con
 
 ## Per-tool interaction table
 
-| Tool                                                                                                | Caching considerations                                                    |
-| --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| [Web search](./agents-and-tools-tool-use-web-search-tool.md)         | Enabling or disabling invalidates the system and messages caches          |
-| [Web fetch](./agents-and-tools-tool-use-web-fetch-tool.md)           | Enabling or disabling invalidates the system and messages caches          |
-| [Code execution](./agents-and-tools-tool-use-code-execution-tool.md) | Container state is independent of prompt cache                            |
-| [Tool search](./agents-and-tools-tool-use-tool-search-tool.md)       | Discovered tools load as `tool_reference` blocks, preserving prefix cache |
-| [Computer use](./agents-and-tools-tool-use-computer-use-tool.md)     | Screenshot presence affects messages cache                                |
-| [Text editor](./agents-and-tools-tool-use-text-editor-tool.md)       | Standard client tool, no special caching interaction                      |
-| [Bash](./agents-and-tools-tool-use-bash-tool.md)                     | Standard client tool, no special caching interaction                      |
-| [Memory](./agents-and-tools-tool-use-memory-tool.md)                 | Standard client tool, no special caching interaction                      |
+| Tool                                                                                                | Caching considerations                                                                                                                                                                                                                                         |
+| --------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Web search](./agents-and-tools-tool-use-web-search-tool.md)         | Enabling or disabling invalidates the system and messages caches                                                                                                                                                                                               |
+| [Web fetch](./agents-and-tools-tool-use-web-fetch-tool.md)           | Enabling or disabling invalidates the system and messages caches                                                                                                                                                                                               |
+| [Code execution](./agents-and-tools-tool-use-code-execution-tool.md) | Container state is independent of prompt cache                                                                                                                                                                                                                 |
+| [Tool search](./agents-and-tools-tool-use-tool-search-tool.md)       | Discovered tools load as `tool_reference` blocks, preserving prefix cache                                                                                                                                                                                      |
+| [Computer use](./agents-and-tools-tool-use-computer-use-tool.md)     | Screenshot presence affects messages cache; `cache_control` goes on the toolset entry (see [cache\_control on tool definitions](./agents-and-tools-tool-use-tool-use-with-prompt-caching.md#cache-control-on-tool-definitions)) |
+| [Browser use](./agents-and-tools-tool-use-browser-use-tool.md)       | Screenshot presence affects messages cache; `cache_control` goes on the toolset entry (see [cache\_control on tool definitions](./agents-and-tools-tool-use-tool-use-with-prompt-caching.md#cache-control-on-tool-definitions)) |
+| [Text editor](./agents-and-tools-tool-use-text-editor-tool.md)       | Standard client tool, no special caching interaction                                                                                                                                                                                                           |
+| [Bash](./agents-and-tools-tool-use-bash-tool.md)                     | Standard client tool, no special caching interaction                                                                                                                                                                                                           |
+| [Memory](./agents-and-tools-tool-use-memory-tool.md)                 | Standard client tool, no special caching interaction                                                                                                                                                                                                           |
 
 ## Next steps
 

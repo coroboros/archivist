@@ -30,7 +30,7 @@ When Claude calls one of your tools, the API response contains a `tool_use` bloc
 
 ### Anthropic-schema tools (client-executed)
 
-For a handful of common operations (managing scratchpad memory, running shell commands, editing files, controlling a browser), Anthropic publishes the tool schema and your application handles execution. The tools in this category are [`memory`](./agents-and-tools-tool-use-memory-tool.md), [`bash`](./agents-and-tools-tool-use-bash-tool.md), [`text_editor`](./agents-and-tools-tool-use-text-editor-tool.md), and [`computer`](./agents-and-tools-tool-use-computer-use-tool.md).
+For a handful of common operations (managing scratchpad memory, running shell commands, editing files, controlling a desktop or a browser), Anthropic publishes the tool schema and your application handles execution. The tools in this category are [`memory`](./agents-and-tools-tool-use-memory-tool.md), [`bash`](./agents-and-tools-tool-use-bash-tool.md), [`text_editor`](./agents-and-tools-tool-use-text-editor-tool.md), [`computer`](./agents-and-tools-tool-use-computer-use-tool.md), and [`browser`](./agents-and-tools-tool-use-browser-use-tool.md).
 
 The execution model is identical to user-defined tools: the response contains a `tool_use` block, your code runs the operation, and you send back a `tool_result`. The reason to use an Anthropic-schema tool instead of defining your own equivalent is that these schemas are trained-in. Claude has been optimized on thousands of successful trajectories that use these exact tool signatures, so it calls them more reliably and recovers from errors more gracefully than it would with a custom tool that does the same thing. The schema is the interface the model already expects.
 
@@ -83,11 +83,11 @@ Tool use doesn't fit when:
 
 ## Choosing between approaches
 
-| Approach                      | When to use it                                                | What to expect                                                                        | Learn more                                                                                     |
-| ----------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| User-defined client tools     | Custom business logic, internal APIs, proprietary data        | You handle execution and the agentic loop                                             | [Define tools](./agents-and-tools-tool-use-define-tools.md)     |
-| Anthropic-schema client tools | Standard dev operations (bash, file editing, browser control) | You handle execution; Claude calls the tool reliably because the schema is trained-in | [Tool reference](./agents-and-tools-tool-use-tool-reference.md) |
-| Server-executed tools         | Web search, code sandbox, web fetch                           | Anthropic handles execution; you read the results instead of producing them           | [Server tools](./agents-and-tools-tool-use-server-tools.md)     |
+| Approach                      | When to use it                                                            | What to expect                                                                        | Learn more                                                                                     |
+| ----------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| User-defined client tools     | Custom business logic, internal APIs, proprietary data                    | You handle execution and the agentic loop                                             | [Define tools](./agents-and-tools-tool-use-define-tools.md)     |
+| Anthropic-schema client tools | Standard dev operations (bash, file editing, desktop and browser control) | You handle execution; Claude calls the tool reliably because the schema is trained-in | [Tool reference](./agents-and-tools-tool-use-tool-reference.md) |
+| Server-executed tools         | Web search, code sandbox, web fetch                                       | Anthropic handles execution; you read the results instead of producing them           | [Server tools](./agents-and-tools-tool-use-server-tools.md)     |
 
 ## Next steps
 

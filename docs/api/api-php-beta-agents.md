@@ -23,7 +23,7 @@ Create Agent
 
 - `model: Model`
 
-  Model identifier. Accepts the [model string](../about-claude/about-claude-models-overview.md#latest-models-comparison), e.g. `claude-opus-4-6`, or a `model_config` object for additional configuration control
+  Model identifier. Accepts the [model string](../about-claude/about-claude-models-overview.md#latest-models-comparison), e.g. `claude-opus-5`, or a `model_config` object for additional configuration control
 
 - `name: string`
 
@@ -117,7 +117,7 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaManagedAgentsAgent = $client->beta->agents->create(
-  model: BetaManagedAgentsModel::CLAUDE_SONNET_4_6,
+  model: BetaManagedAgentsModel::CLAUDE_OPUS_5,
   name: 'My First Agent',
   description: 'A general-purpose starter agent.',
   mcpServers: [
@@ -174,7 +174,7 @@ var_dump($betaManagedAgentsAgent);
     "foo": "bar"
   },
   "model": {
-    "id": "claude-sonnet-4-6",
+    "id": "claude-opus-5",
     "effort": {
       "type": "low"
     },
@@ -353,7 +353,7 @@ var_dump($page);
         "foo": "bar"
       },
       "model": {
-        "id": "claude-sonnet-4-6",
+        "id": "claude-opus-5",
         "effort": {
           "type": "low"
         },
@@ -516,7 +516,7 @@ var_dump($betaManagedAgentsAgent);
     "foo": "bar"
   },
   "model": {
-    "id": "claude-sonnet-4-6",
+    "id": "claude-opus-5",
     "effort": {
       "type": "low"
     },
@@ -599,7 +599,7 @@ Update Agent
 
 - `model?:optional Model`
 
-  Model identifier. Accepts the [model string](../about-claude/about-claude-models-overview.md#latest-models-comparison), e.g. `claude-opus-4-6`, or a `model_config` object for additional configuration control. Omit to preserve. Cannot be cleared.
+  Model identifier. Accepts the [model string](../about-claude/about-claude-models-overview.md#latest-models-comparison), e.g. `claude-opus-5`, or a `model_config` object for additional configuration control. Omit to preserve. Cannot be cleared.
 
 - `multiagent?:optional BetaManagedAgentsMultiagentParams`
 
@@ -696,7 +696,7 @@ $betaManagedAgentsAgent = $client->beta->agents->update(
   ],
   metadata: ['foo' => 'string'],
   model: [
-    'id' => BetaManagedAgentsModel::CLAUDE_OPUS_4_8,
+    'id' => BetaManagedAgentsModel::CLAUDE_OPUS_5,
     'effort' => 'low',
     'inferenceGeo' => 'inference_geo',
     'speed' => 'standard',
@@ -749,7 +749,7 @@ var_dump($betaManagedAgentsAgent);
     "foo": "bar"
   },
   "model": {
-    "id": "claude-sonnet-4-6",
+    "id": "claude-opus-5",
     "effort": {
       "type": "low"
     },
@@ -904,7 +904,7 @@ var_dump($betaManagedAgentsAgent);
     "foo": "bar"
   },
   "model": {
-    "id": "claude-sonnet-4-6",
+    "id": "claude-opus-5",
     "effort": {
       "type": "low"
     },
@@ -1731,7 +1731,7 @@ var_dump($page);
         "foo": "bar"
       },
       "model": {
-        "id": "claude-sonnet-4-6",
+        "id": "claude-opus-5",
         "effort": {
           "type": "low"
         },
