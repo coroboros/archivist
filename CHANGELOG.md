@@ -1,5 +1,107 @@
 # Changelog
 
+## 🤖 v1.5.123 - 22/08/2026
+
+File Changes:
+
+- Modified: `docs/agents-and-tools/agents-and-tools-README.md`
+- Deleted: `docs/agents-and-tools/agents-and-tools-mcp-tunnels-deploy-helm.md`
+- Deleted: `docs/agents-and-tools/agents-and-tools-tool-use-handle-tool-calls.md`
+- Modified: `docs/api/api-README.md`
+- Deleted: `docs/api/api-admin-analytics-artifacts.md`
+- Deleted: `docs/api/api-admin-federation_rules-workspaces.md`
+- Deleted: `docs/api/api-admin-rate_limits.md`
+- Deleted: `docs/api/api-admin-rbac_groups.md`
+- Deleted: `docs/api/api-admin-rbac_roles-list.md`
+- Deleted: `docs/api/api-beta-deployments.md`
+- Deleted: `docs/api/api-beta-messages-batches-create.md`
+- Deleted: `docs/api/api-beta-sessions-events-send.md`
+- Deleted: `docs/api/api-beta-skills-retrieve.md`
+- Deleted: `docs/api/api-beta-tunnels-list.md`
+- Deleted: `docs/api/api-beta-user_profiles-list.md`
+- Deleted: `docs/api/api-cli-beta-environments.md`
+- Deleted: `docs/api/api-cli-beta-user_profiles.md`
+- Deleted: `docs/api/api-compliance-apps-projects-collaborators.md`
+- Deleted: `docs/api/api-compliance-apps-projects-documents.md`
+- Deleted: `docs/api/api-csharp-beta-sessions-list.md`
+- Deleted: `docs/api/api-csharp-beta-vaults-credentials-create.md`
+- Deleted: `docs/api/api-csharp-beta-vaults-retrieve.md`
+- Deleted: `docs/api/api-csharp-messages-count_tokens.md`
+- Deleted: `docs/api/api-go-beta-files-list.md`
+- Deleted: `docs/api/api-go-beta-memory_stores-retrieve.md`
+- Deleted: `docs/api/api-go-beta-sessions-threads-list.md`
+- Deleted: `docs/api/api-go-beta-user_profiles-update.md`
+- Deleted: `docs/api/api-java-beta-memory_stores-memories-create.md`
+- Deleted: `docs/api/api-java-beta-models-retrieve.md`
+- Deleted: `docs/api/api-java-beta-user_profiles-list.md`
+- Deleted: `docs/api/api-php-beta-models-retrieve.md`
+- Deleted: `docs/api/api-php-beta-skills-delete.md`
+- Deleted: `docs/api/api-python-beta-deployments-pause.md`
+- Deleted: `docs/api/api-python-beta-memory_stores-list.md`
+- Deleted: `docs/api/api-python-beta-memory_stores-memories.md`
+- Deleted: `docs/api/api-python-beta-memory_stores-memory_versions-list.md`
+- Deleted: `docs/api/api-ruby-beta-sessions-resources-add.md`
+- Deleted: `docs/api/api-ruby-beta-sessions-threads-events-stream.md`
+- Deleted: `docs/api/api-typescript-beta-agents-list.md`
+- Deleted: `docs/api/api-typescript-beta-models-retrieve.md`
+- Deleted: `docs/api/api-typescript-beta-sessions-events-stream.md`
+- Deleted: `docs/api/api-typescript-beta-skills-versions-download.md`
+- Deleted: `docs/api/api-typescript-beta-tunnels.md`
+- Deleted: `docs/api/api-typescript-completions.md`
+- Deleted: `docs/api/api-typescript-messages-create.md`
+- Modified: `docs/build-with-claude/build-with-claude-README.md`
+- Deleted: `docs/build-with-claude/build-with-claude-adaptive-thinking.md`
+- Deleted: `docs/build-with-claude/build-with-claude-claude-on-vertex-ai.md`
+- Deleted: `docs/build-with-claude/build-with-claude-refusals-and-fallback.md`
+- Deleted: `docs/build-with-claude/build-with-claude-task-budgets.md`
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-agent-view.md`
+- Modified: `docs/code/code-claude-code-on-the-web.md`
+- Modified: `docs/code/code-claude-directory.md`
+- Modified: `docs/code/code-cloud-environments.md`
+- Modified: `docs/code/code-commands.md`
+- Modified: `docs/code/code-common-workflows.md`
+- Modified: `docs/code/code-computer-use.md`
+- Modified: `docs/code/code-cross-session-messaging.md`
+- Modified: `docs/code/code-deep-links.md`
+- Modified: `docs/code/code-env-vars.md`
+- Modified: `docs/code/code-errors.md`
+- Modified: `docs/code/code-fullscreen.md`
+- Modified: `docs/code/code-goal.md`
+- Modified: `docs/code/code-headless.md`
+- Modified: `docs/code/code-hooks.md`
+- Modified: `docs/code/code-interactive-mode.md`
+- Modified: `docs/code/code-jetbrains.md`
+- Modified: `docs/code/code-llm-gateway-protocol.md`
+- Modified: `docs/code/code-managed-settings.md`
+- Modified: `docs/code/code-memory.md`
+- Modified: `docs/code/code-mobile.md`
+- Modified: `docs/code/code-network-config.md`
+- Modified: `docs/code/code-overview.md`
+- Modified: `docs/code/code-permissions.md`
+- Modified: `docs/code/code-plugin-marketplaces.md`
+- Modified: `docs/code/code-prompt-caching.md`
+- Modified: `docs/code/code-python.md`
+- Modified: `docs/code/code-quickstart.md`
+- Modified: `docs/code/code-self-hosted-environments-deploy.md`
+- Modified: `docs/code/code-server-managed-settings.md`
+- Modified: `docs/code/code-sessions.md`
+- Modified: `docs/code/code-settings-reference.md`
+- Modified: `docs/code/code-skills.md`
+- Modified: `docs/code/code-slack.md`
+- Modified: `docs/code/code-statusline.md`
+- Modified: `docs/code/code-tools-reference.md`
+- Modified: `docs/code/code-typescript.md`
+- Modified: `docs/code/code-voice-dictation.md`
+- Modified: `docs/code/code-web-quickstart.md`
+- Modified: `docs/manage-claude/manage-claude-README.md`
+- Deleted: `docs/manage-claude/manage-claude-wif-admin-api.md`
+- Modified: `docs/managed-agents/managed-agents-README.md`
+- Deleted: `docs/managed-agents/managed-agents-budgets.md`
+- Deleted: `docs/managed-agents/managed-agents-events-and-streaming.md`
+- Deleted: `docs/managed-agents/managed-agents-skills.md`
+
+
 ## 🤖 v1.5.122 - 22/08/2026
 
 File Changes:
