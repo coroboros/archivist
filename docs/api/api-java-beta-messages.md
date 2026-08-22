@@ -3698,7 +3698,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `String version`
 
-        Skill version or 'latest' for most recent version
+        The resolved version: a skill version ID for custom skills.
 
   - `List<BetaContentBlock> content`
 
@@ -13351,7 +13351,7 @@ public final class Main {
 
     - `String version`
 
-      Skill version or 'latest' for most recent version
+      The resolved version: a skill version ID for custom skills.
 
 ### Beta Container Params
 
@@ -18184,7 +18184,7 @@ public final class Main {
 
       - `String version`
 
-        Skill version or 'latest' for most recent version
+        The resolved version: a skill version ID for custom skills.
 
   - `List<BetaContentBlock> content`
 
@@ -22927,7 +22927,7 @@ public final class Main {
 
         - `String version`
 
-          Skill version or 'latest' for most recent version
+          The resolved version: a skill version ID for custom skills.
 
     - `Optional<BetaRefusalStopDetails> stopDetails`
 
@@ -23435,7 +23435,7 @@ public final class Main {
 
         - `String version`
 
-          Skill version or 'latest' for most recent version
+          The resolved version: a skill version ID for custom skills.
 
     - `List<BetaContentBlock> content`
 
@@ -24989,7 +24989,7 @@ public final class Main {
 
           - `String version`
 
-            Skill version or 'latest' for most recent version
+            The resolved version: a skill version ID for custom skills.
 
       - `List<BetaContentBlock> content`
 
@@ -27848,7 +27848,7 @@ public final class Main {
 
   - `String version`
 
-    Skill version or 'latest' for most recent version
+    The resolved version: a skill version ID for custom skills.
 
 ### Beta Skill Params
 
@@ -40014,7 +40014,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `String version`
 
-              Skill version or 'latest' for most recent version
+              The resolved version: a skill version ID for custom skills.
 
         - `List<BetaContentBlock> content`
 
@@ -41910,7 +41910,7 @@ public final class Main {
 
             - `String version`
 
-              Skill version or 'latest' for most recent version
+              The resolved version: a skill version ID for custom skills.
 
         - `List<BetaContentBlock> content`
 
@@ -43592,7 +43592,7 @@ public final class Main {
 
           - `String version`
 
-            Skill version or 'latest' for most recent version
+            The resolved version: a skill version ID for custom skills.
 
       - `List<BetaContentBlock> content`
 
@@ -45236,7 +45236,7 @@ public final class Main {
 
         - `String version`
 
-          Skill version or 'latest' for most recent version
+          The resolved version: a skill version ID for custom skills.
 
     - `List<BetaContentBlock> content`
 

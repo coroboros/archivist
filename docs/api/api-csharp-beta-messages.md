@@ -3452,7 +3452,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `required string Version`
 
-        Skill version or 'latest' for most recent version
+        The resolved version: a skill version ID for custom skills.
 
   - `required IReadOnlyList<BetaContentBlock> Content`
 
@@ -12435,7 +12435,7 @@ Console.WriteLine(betaMessageTokensCount);
 
     - `required string Version`
 
-      Skill version or 'latest' for most recent version
+      The resolved version: a skill version ID for custom skills.
 
 ### Beta Container Params
 
@@ -16798,7 +16798,7 @@ Console.WriteLine(betaMessageTokensCount);
 
       - `required string Version`
 
-        Skill version or 'latest' for most recent version
+        The resolved version: a skill version ID for custom skills.
 
   - `required IReadOnlyList<BetaContentBlock> Content`
 
@@ -21081,7 +21081,7 @@ Console.WriteLine(betaMessageTokensCount);
 
         - `required string Version`
 
-          Skill version or 'latest' for most recent version
+          The resolved version: a skill version ID for custom skills.
 
     - `required BetaRefusalStopDetails? StopDetails`
 
@@ -21573,7 +21573,7 @@ Console.WriteLine(betaMessageTokensCount);
 
         - `required string Version`
 
-          Skill version or 'latest' for most recent version
+          The resolved version: a skill version ID for custom skills.
 
     - `required IReadOnlyList<BetaContentBlock> Content`
 
@@ -22985,7 +22985,7 @@ Console.WriteLine(betaMessageTokensCount);
 
           - `required string Version`
 
-            Skill version or 'latest' for most recent version
+            The resolved version: a skill version ID for custom skills.
 
       - `required IReadOnlyList<BetaContentBlock> Content`
 
@@ -25539,7 +25539,7 @@ Console.WriteLine(betaMessageTokensCount);
 
   - `required string Version`
 
-    Skill version or 'latest' for most recent version
+    The resolved version: a skill version ID for custom skills.
 
 ### Beta Skill Params
 
@@ -36888,7 +36888,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `required string Version`
 
-              Skill version or 'latest' for most recent version
+              The resolved version: a skill version ID for custom skills.
 
         - `required IReadOnlyList<BetaContentBlock> Content`
 
@@ -38577,7 +38577,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
             - `required string Version`
 
-              Skill version or 'latest' for most recent version
+              The resolved version: a skill version ID for custom skills.
 
         - `required IReadOnlyList<BetaContentBlock> Content`
 
@@ -40093,7 +40093,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
           - `required string Version`
 
-            Skill version or 'latest' for most recent version
+            The resolved version: a skill version ID for custom skills.
 
       - `required IReadOnlyList<BetaContentBlock> Content`
 
@@ -41571,7 +41571,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
         - `required string Version`
 
-          Skill version or 'latest' for most recent version
+          The resolved version: a skill version ID for custom skills.
 
     - `required IReadOnlyList<BetaContentBlock> Content`
 

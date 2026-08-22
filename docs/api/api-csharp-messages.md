@@ -2657,7 +2657,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `required string Version`
 
-        Skill version or 'latest' for most recent version
+        The resolved version: a skill version ID for custom skills.
 
   - `required IReadOnlyList<ContentBlock> Content`
 
@@ -9622,7 +9622,7 @@ Console.WriteLine(messageTokensCount);
 
     - `required string Version`
 
-      Skill version or 'latest' for most recent version
+      The resolved version: a skill version ID for custom skills.
 
 ### Container Params
 
@@ -9674,7 +9674,7 @@ Console.WriteLine(messageTokensCount);
 
   - `required string Version`
 
-    Skill version or 'latest' for most recent version
+    The resolved version: a skill version ID for custom skills.
 
 ### Container Upload Block
 
@@ -12050,7 +12050,7 @@ Console.WriteLine(messageTokensCount);
 
       - `required string Version`
 
-        Skill version or 'latest' for most recent version
+        The resolved version: a skill version ID for custom skills.
 
   - `required IReadOnlyList<ContentBlock> Content`
 
@@ -16332,7 +16332,7 @@ Console.WriteLine(messageTokensCount);
 
         - `required string Version`
 
-          Skill version or 'latest' for most recent version
+          The resolved version: a skill version ID for custom skills.
 
     - `required RefusalStopDetails? StopDetails`
 
@@ -16492,7 +16492,7 @@ Console.WriteLine(messageTokensCount);
 
         - `required string Version`
 
-          Skill version or 'latest' for most recent version
+          The resolved version: a skill version ID for custom skills.
 
     - `required IReadOnlyList<ContentBlock> Content`
 
@@ -17375,7 +17375,7 @@ Console.WriteLine(messageTokensCount);
 
           - `required string Version`
 
-            Skill version or 'latest' for most recent version
+            The resolved version: a skill version ID for custom skills.
 
       - `required IReadOnlyList<ContentBlock> Content`
 
@@ -27821,7 +27821,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `required string Version`
 
-              Skill version or 'latest' for most recent version
+              The resolved version: a skill version ID for custom skills.
 
         - `required IReadOnlyList<ContentBlock> Content`
 
@@ -28981,7 +28981,7 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
 
             - `required string Version`
 
-              Skill version or 'latest' for most recent version
+              The resolved version: a skill version ID for custom skills.
 
         - `required IReadOnlyList<ContentBlock> Content`
 
@@ -29968,7 +29968,7 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
 
           - `required string Version`
 
-            Skill version or 'latest' for most recent version
+            The resolved version: a skill version ID for custom skills.
 
       - `required IReadOnlyList<ContentBlock> Content`
 
@@ -30917,7 +30917,7 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
 
         - `required string Version`
 
-          Skill version or 'latest' for most recent version
+          The resolved version: a skill version ID for custom skills.
 
     - `required IReadOnlyList<ContentBlock> Content`
 

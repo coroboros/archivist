@@ -42,7 +42,7 @@ with Claude"
           API reference
         </HomeCardLink>
 
-        <HomeCardLink icon="code-brackets" href="../api/api-client-sdks.md">
+        <HomeCardLink icon="code-brackets" href="./general-cli-sdks-libraries-overview.md">
           Client SDKs
         </HomeCardLink>
       </HomePlatformCard>
@@ -95,7 +95,7 @@ with Claude"
             Choose a model
           </HomeJourneyLink>
 
-          <HomeJourneyLink icon="code-brackets" href="../api/api-client-sdks.md">
+          <HomeJourneyLink icon="code-brackets" href="./general-cli-sdks-libraries-overview.md">
             Install an SDK
           </HomeJourneyLink>
 

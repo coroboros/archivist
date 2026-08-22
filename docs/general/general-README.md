@@ -2,7 +2,7 @@
 
 _This repository is a mirror of the official [Claude Platform](https://platform.claude.com/docs/en/) documentation (Platform | General). It is updated automatically._
 
-**Last updated:** Fri, 21 Aug 2026 01:10:35 GMT
+**Last updated:** Sat, 22 Aug 2026 01:07:19 GMT
 
 ---
 
@@ -12,21 +12,21 @@ _This repository is a mirror of the official [Claude Platform](https://platform.
 
 ## Cli Sdks Libraries
 
-- [Sdks | Php](./general-cli-sdks-libraries-sdks-php.md)
-- [Cli | Authentication](./general-cli-sdks-libraries-cli-authentication.md)
-- [Cli | Using](./general-cli-sdks-libraries-cli-using.md)
-- [Middleware](./general-cli-sdks-libraries-middleware.md)
-- [Cli | Quickstart](./general-cli-sdks-libraries-cli-quickstart.md)
-- [Overview](./general-cli-sdks-libraries-overview.md)
-- [Sdks | Ruby](./general-cli-sdks-libraries-sdks-ruby.md)
+- [Sdks | Python](./general-cli-sdks-libraries-sdks-python.md)
 - [Cli | Scripting](./general-cli-sdks-libraries-cli-scripting.md)
+- [Overview](./general-cli-sdks-libraries-overview.md)
+- [Sdks | Csharp](./general-cli-sdks-libraries-sdks-csharp.md)
+- [Cli | Quickstart](./general-cli-sdks-libraries-cli-quickstart.md)
+- [Sdks | Php](./general-cli-sdks-libraries-sdks-php.md)
+- [Libraries | Openai Sdk](./general-cli-sdks-libraries-libraries-openai-sdk.md)
+- [Libraries | Apple Foundation Models](./general-cli-sdks-libraries-libraries-apple-foundation-models.md)
+- [Middleware](./general-cli-sdks-libraries-middleware.md)
+- [Cli | Authentication](./general-cli-sdks-libraries-cli-authentication.md)
+- [Sdks | Java](./general-cli-sdks-libraries-sdks-java.md)
+- [Cli | Using](./general-cli-sdks-libraries-cli-using.md)
 - [Sdks | Go](./general-cli-sdks-libraries-sdks-go.md)
 - [Sdks | Typescript](./general-cli-sdks-libraries-sdks-typescript.md)
-- [Sdks | Csharp](./general-cli-sdks-libraries-sdks-csharp.md)
-- [Libraries | Apple Foundation Models](./general-cli-sdks-libraries-libraries-apple-foundation-models.md)
-- [Sdks | Python](./general-cli-sdks-libraries-sdks-python.md)
-- [Sdks | Java](./general-cli-sdks-libraries-sdks-java.md)
-- [Libraries | Openai Sdk](./general-cli-sdks-libraries-libraries-openai-sdk.md)
+- [Sdks | Ruby](./general-cli-sdks-libraries-sdks-ruby.md)
 
 ## Get Api Key
 

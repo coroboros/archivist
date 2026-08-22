@@ -17,14 +17,18 @@ The Claude Platform release notes list changes to the Claude API, the client SDK
   For updates to Claude Code, see the [complete CHANGELOG.md](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md) in the `claude-code` repository.
 </Tip>
 
+### August 20, 2026
+
+* We've released **v1.0 of the [Python SDK](../general/general-cli-sdks-libraries-sdks-python.md)**. The SDK's HTTP layer moves from `httpx` to [httpx2](https://httpx2.pydantic.dev), a maintained, API-compatible fork: build custom `http_client`, `Timeout`, and transport objects from `httpx2` (the `DefaultHttpxClient` helpers are unchanged), and call `httpx2.alias_httpx()` at startup if you rely on tracing or mocking libraries that patch `httpx`. v1.0 requires Python 3.10 or later and removes long-deprecated surface, including the legacy Text Completions API, the `temperature`, `top_p`, and `top_k` parameters on Messages methods, and the tool runner's client-side `compaction_control`. On the async client, `.with_raw_response` results now need `await response.parse()`, and `AnthropicBedrock` now raises an error when no AWS region is configured instead of defaulting to `us-east-1`. See the [v1 migration guide](https://github.com/anthropics/anthropic-sdk-python/blob/main/MIGRATION.md) for every change with before-and-after snippets.
+
 ### August 19, 2026
 
-* The [computer use tool](../agents-and-tools/agents-and-tools-tool-use-computer-use-tool.md) is now generally available on the Claude API as the `computer_toolset_20260801` toolset: no beta header, batch actions (several actions in one turn), `zoom` enabled by default, and per-member configuration through `configs`. Earlier beta versions remain available. Upgrading an existing integration changes the request shape and tool handling; see [Migrate from `computer_20251124`](../agents-and-tools/agents-and-tools-tool-use-computer-use-tool.md#migrate-from-computer-20251124).
+* The [computer use tool](../agents-and-tools/agents-and-tools-tool-use-computer-use-tool.md) is out of beta on the Claude API as the `computer_toolset_20260801` toolset: no beta header, batch actions (several actions in one turn), `zoom` enabled by default, and per-member configuration through `configs`. Earlier beta versions remain available. Upgrading an existing integration changes the request shape and tool handling; see [Migrate from `computer_20251124`](../agents-and-tools/agents-and-tools-tool-use-computer-use-tool.md#migrate-from-computer-20251124).
 * We've launched the [browser use tool](../agents-and-tools/agents-and-tools-tool-use-browser-use-tool.md) (`browser_toolset_20260801`), a client toolset for driving a browser that your application hosts. It works inside a browser viewport rather than a whole desktop, reading the page itself (its accessibility tree, elements, forms, and tabs) and adding element references, form input, tab management, download reporting, and opt-in file upload on top of screenshot-and-click control.
 * Both toolsets are available for Claude Fable 5, Claude Mythos 5, Claude Opus 5, Claude Sonnet 5, and Claude Opus 4.8 on the Claude API.
-* The [Files API](../build-with-claude/build-with-claude-files.md) is now generally available on the Claude API. Requests to the `/v1/files` endpoints, and Messages API requests that reference an uploaded file, no longer require the `files-api-2025-04-14` beta header. Requests sent without the header use the GA response format: [file expiration](../build-with-claude/build-with-claude-files.md#file-expiration) (set `expires_in_seconds` when you upload a file; file objects report `expires_at`), and `page` and `next_page` [pagination](../api/api-overview.md#pagination) plus an `ids[]` filter when you [list files](../build-with-claude/build-with-claude-files.md#list-files). `/v1/files` requests that still send the beta header keep working and return the previous response format.
-* [Agent Skills](../agents-and-tools/agents-and-tools-agent-skills-overview.md) and the Skills API (`/v1/skills`) are now generally available on the Claude API. Requests no longer require the `skills-2025-10-02` beta header, including Messages API requests that load Skills through the `container` parameter. Requests that still send the header continue to work unchanged. See [Using Agent Skills with the API](../build-with-claude/build-with-claude-skills-guide.md).
-* The [Admin API](../api/api-admin.md) user-management endpoints for **Claude Enterprise** (claude.ai) organizations (members, invites, groups, and custom roles) are now generally available. The `anthropic-beta: ce-user-management-2026-07-13` header is no longer required on group and custom-role requests; requests that still send it are accepted unchanged. See [User management](../manage-claude/manage-claude-user-management.md).
+* The [Files API](../build-with-claude/build-with-claude-files.md) is out of beta on the Claude API. Requests to the `/v1/files` endpoints, and Messages API requests that reference an uploaded file, no longer require the `files-api-2025-04-14` beta header. Requests sent without the header use the current response format: [file expiration](../build-with-claude/build-with-claude-files.md#file-expiration) (set `expires_in_seconds` when you upload a file; file objects report `expires_at`), and `page` and `next_page` [pagination](../api/api-overview.md#pagination) plus an `ids[]` filter when you [list files](../build-with-claude/build-with-claude-files.md#list-files). `/v1/files` requests that still send the beta header keep working and return the previous response format.
+* [Agent Skills](../agents-and-tools/agents-and-tools-agent-skills-overview.md) and the Skills API (`/v1/skills`) are out of beta on the Claude API. Requests no longer require the `skills-2025-10-02` beta header, including Messages API requests that load Skills through the `container` parameter. Requests that still send the header continue to work unchanged. See [Using Agent Skills with the API](../build-with-claude/build-with-claude-skills-guide.md).
+* The [Admin API](../api/api-admin.md) user-management endpoints for **Claude Enterprise** (claude.ai) organizations (members, invites, groups, and custom roles) are out of beta. The `anthropic-beta: ce-user-management-2026-07-13` header is no longer required on group and custom-role requests; requests that still send it are accepted unchanged. See [User management](../manage-claude/manage-claude-user-management.md).
 * You can now restrict which sites a Claude Managed Agents agent's `web_search` and `web_fetch` tools can reach. Set `allowed_domains` or `blocked_domains` on the tool's entry in the `agent_toolset_20260401` `configs` array; `web_fetch` also accepts `max_content_tokens` and `web_search` accepts `user_location`. Each `configs` entry is identified by its `name` and typed by an optional `type`, and requests that pass only `name`, `enabled`, and `permission_policy` continue to work; in the typed SDKs, `configs` entries become per-tool types. See [Restrict web search and web fetch domains](../managed-agents/managed-agents-tools.md#restrict-web-search-and-web-fetch-domains).
 * Claude Managed Agents sessions that run in a [self-hosted sandbox](../managed-agents/managed-agents-self-hosted-sandboxes.md) can now attach [memory stores](../managed-agents/managed-agents-memory.md). The Python, TypeScript, and Go SDK workers download each attached store into the sandbox at its `mount_path` and sync the agent's changes back to the store. See [Use memory stores](../managed-agents/managed-agents-self-hosted-sandboxes.md#use-memory-stores).
 * The session viewer in the Claude Console has been redesigned with a timeline minimap, a transcript grouped by model request, and an Inspector panel for session details and cost, raw events, per-tool statistics, mounted resources, and per-thread activity. See [Console observability](../managed-agents/managed-agents-events-and-streaming.md#console-observability).
@@ -64,7 +68,7 @@ The Claude Platform release notes list changes to the Claude API, the client SDK
 
 ### July 24, 2026
 
-* We've launched **Claude Opus 5** (`claude-opus-5`), a step-change improvement over Claude Opus 4.8. Claude Opus 5 supports a [1M token context window](../build-with-claude/build-with-claude-context-windows.md) (both the default and the maximum), 128k max output tokens, and [thinking](../build-with-claude/build-with-claude-thinking.md) on by default, at $5 / $25 USD per MTok, the same pricing as Claude Opus 4.8. It's available on the Claude API, [Claude in Amazon Bedrock](../build-with-claude/build-with-claude-claude-in-amazon-bedrock.md), [Claude on Google Cloud](../build-with-claude/build-with-claude-claude-on-vertex-ai.md), and [Claude in Microsoft Foundry](../build-with-claude/build-with-claude-claude-in-microsoft-foundry.md). See [What's new in Claude Opus 5](../about-claude/about-claude-models-whats-new-opus-5.md) for new features, behavior changes, and migration guidance, and the [models overview](../about-claude/about-claude-models-overview.md) for complete specs.
+* We've launched **Claude Opus 5** (`claude-opus-5`), a step-change improvement over Claude Opus 4.8. Claude Opus 5 supports a [1M token context window](../build-with-claude/build-with-claude-context-windows.md) (both the default and the maximum), 128k max output tokens, and [thinking](../build-with-claude/build-with-claude-thinking.md) on by default, at $5 / $25 USD per MTok, the same pricing as Claude Opus 4.8. It's available on the Claude API, [Claude in Amazon Bedrock](../build-with-claude/build-with-claude-claude-in-amazon-bedrock.md), [Claude Platform on AWS](../build-with-claude/build-with-claude-claude-platform-on-aws.md), [Claude on Google Cloud](../build-with-claude/build-with-claude-claude-on-vertex-ai.md), and [Claude in Microsoft Foundry](../build-with-claude/build-with-claude-claude-in-microsoft-foundry.md). See [What's new in Claude Opus 5](../about-claude/about-claude-models-whats-new-opus-5.md) for new features, behavior changes, and migration guidance, and the [models overview](../about-claude/about-claude-models-overview.md) for complete specs.
 * On Claude Opus 5, disabling thinking is allowed only at effort `high` or below: `thinking: {"type": "disabled"}` with effort `xhigh` or `max` returns a 400 error, a breaking change from Claude Opus 4.8. See [What's new in Claude Opus 5](../about-claude/about-claude-models-whats-new-opus-5.md#behavior-changes).
 * [Effort](../build-with-claude/build-with-claude-effort.md) is the primary control for steering Claude Opus 5: the model supports the full ladder (`low`, `medium`, `high`, `xhigh`, `max`), with `max` for capability-critical work.
 * Mid-conversation tool changes are now in beta on Claude Fable 5, Claude Mythos 5, Claude Opus 4.8, and Claude Opus 5: add or remove tools between turns of a conversation while preserving the prompt cache. Include the `mid-conversation-tool-changes-2026-07-01` beta header in your requests.
@@ -182,7 +186,7 @@ The Claude Platform release notes list changes to the Claude API, the client SDK
 
 ### May 28, 2026
 
-* We've launched **Claude Opus 4.8** (claude-opus-4-8), our most capable generally available model. Claude Opus 4.8 supports a [1M token context window](../build-with-claude/build-with-claude-context-windows.md) by default on the Claude API, Amazon Bedrock, Google Cloud, and Microsoft Foundry, 128k max output tokens, and the same set of tools and platform features as Claude Opus 4.7. See the [migration guide](../about-claude/about-claude-models-migration-guide.md) for baseline settings, features, and migration guidance.
+* We've launched **Claude Opus 4.8** (claude-opus-4-8), our most capable widely released model. Claude Opus 4.8 supports a [1M token context window](../build-with-claude/build-with-claude-context-windows.md) by default on the Claude API, Amazon Bedrock, Google Cloud, and Microsoft Foundry, 128k max output tokens, and the same set of tools and platform features as Claude Opus 4.7. See the [migration guide](../about-claude/about-claude-models-migration-guide.md) for baseline settings, features, and migration guidance.
 * We've launched [mid-conversation system messages](../build-with-claude/build-with-claude-mid-conversation-system-messages.md). On Claude Opus 4.8, you can send `role: "system"` messages after a user turn (subject to [placement rules](../build-with-claude/build-with-claude-mid-conversation-system-messages.md#limitations)) in the `messages` array, preserving prompt cache hits when instructions change during a long-running session. No beta header is required.
 * The [`stop_details`](../build-with-claude/build-with-claude-refusals-and-fallback.md#refusal-response) field on refusal responses is now publicly documented; it returns a `category` (`cyber`, `bio`, or `null`) and a human-readable `explanation`, so your application can route different classes of refusal to the right next step. No beta header is required.
 * On Claude Opus 4.8, the [effort parameter](../build-with-claude/build-with-claude-effort.md) defaults to `high` across all surfaces, including Claude Code and the Messages API.
@@ -237,11 +241,11 @@ The Claude Platform release notes list changes to the Claude API, the client SDK
 
 ### May 4, 2026
 
-* [Workload Identity Federation](../manage-claude/manage-claude-workload-identity-federation.md) is now generally available. Authenticate workloads to the Claude API with short-lived OIDC tokens from your own identity provider (AWS IAM, Google Cloud, GitHub Actions, Kubernetes, Microsoft Entra ID, Okta, SPIFFE, and more) instead of long-lived static API keys. Configure issuers and federation rules in the Claude Console, and the SDK handles token exchange and refresh automatically. See [Authentication](../manage-claude/manage-claude-authentication.md).
+* We've launched [Workload Identity Federation](../manage-claude/manage-claude-workload-identity-federation.md). Authenticate workloads to the Claude API with short-lived OIDC tokens from your own identity provider (AWS IAM, Google Cloud, GitHub Actions, Kubernetes, Microsoft Entra ID, Okta, SPIFFE, and more) instead of long-lived static API keys. Configure issuers and federation rules in the Claude Console, and the SDK handles token exchange and refresh automatically. See [Authentication](../manage-claude/manage-claude-authentication.md).
 
 ### April 30, 2026
 
-* We've retired the 1M token context window beta (`context-1m-2025-08-07`) for Claude Sonnet 4.5 and Claude Sonnet 4. The beta header now has no effect on these models, and requests exceeding the standard 200k-token context window return an error. To use the 1M context window, migrate to [Claude Sonnet 4.6](../about-claude/about-claude-models-overview.md#latest-models-comparison) or [Claude Opus 4.6](../about-claude/about-claude-models-overview.md#latest-models-comparison), where it's generally available at standard pricing with no beta header required.
+* We've retired the 1M token context window beta (`context-1m-2025-08-07`) for Claude Sonnet 4.5 and Claude Sonnet 4. The beta header now has no effect on these models, and requests exceeding the standard 200k-token context window return an error. To use the 1M context window, migrate to [Claude Sonnet 4.6](../about-claude/about-claude-models-overview.md#latest-models-comparison) or [Claude Opus 4.6](../about-claude/about-claude-models-overview.md#latest-models-comparison), where it's included at standard pricing with no beta header required.
 
 ### April 29, 2026
 
@@ -261,7 +265,7 @@ The Claude Platform release notes list changes to the Claude API, the client SDK
 
 ### April 16, 2026
 
-* We've launched [Claude Opus 4.7](https://www.anthropic.com/news/claude-opus-4-7), our most capable generally available model for complex reasoning and agentic coding, at the same $5 / $25 per MTok pricing as Opus 4.6. See [What's new in Claude Opus 4.7](../about-claude/about-claude-models-whats-new-claude-4-7.md) for capability improvements, new features, and the updated tokenizer. Opus 4.7 includes API breaking changes versus Opus 4.6; see the [migration guide](../about-claude/about-claude-models-migration-guide.md) before upgrading.
+* We've launched [Claude Opus 4.7](https://www.anthropic.com/news/claude-opus-4-7), our most capable widely released model for complex reasoning and agentic coding, at the same $5 / $25 per MTok pricing as Opus 4.6. See [What's new in Claude Opus 4.7](../about-claude/about-claude-models-whats-new-claude-4-7.md) for capability improvements, new features, and the updated tokenizer. Opus 4.7 includes API breaking changes versus Opus 4.6; see the [migration guide](../about-claude/about-claude-models-migration-guide.md) before upgrading.
 * [Claude in Amazon Bedrock](../build-with-claude/build-with-claude-claude-in-amazon-bedrock.md) is now open to all Amazon Bedrock customers. Claude Opus 4.7 and Claude Haiku 4.5 are available self-serve from the Bedrock console through the Messages API endpoint at `/anthropic/v1/messages`, in 27 AWS regions with global and regional endpoints.
 * We've launched [task budgets](../build-with-claude/build-with-claude-task-budgets.md) in beta on Claude Opus 4.7. Give Claude an advisory token budget for a full agentic loop (thinking, tool calls, tool results, and output) and the model sees a running countdown, using it to prioritize work and finish gracefully as the budget is consumed. Include the `task-budgets-2026-03-13` beta header in your requests.
 * Claude Opus 4.7 supports [high-resolution image input](../build-with-claude/build-with-claude-vision.md#high-resolution-image-support-on-claude-opus-4-7), raising the maximum image resolution from 1568 to 2576 pixels on the long edge for improved performance on computer use, screenshot understanding, and document analysis. High-resolution support is automatic and requires no beta header; images may use up to approximately 3x more image tokens than on prior models.
@@ -300,7 +304,7 @@ The Claude Platform release notes list changes to the Claude API, the client SDK
 
 ### March 13, 2026
 
-* The [1M token context window](../build-with-claude/build-with-claude-context-windows.md) is now generally available for Claude Opus 4.6 and Sonnet 4.6 at standard pricing. Requests over 200k tokens work automatically for these models with no beta header required. The 1M token context window remains in beta for Claude Sonnet 4.5 and Sonnet 4.
+* The [1M token context window](../build-with-claude/build-with-claude-context-windows.md) is out of beta for Claude Opus 4.6 and Sonnet 4.6, at standard pricing. Requests over 200k tokens work automatically for these models with no beta header required. The 1M token context window remains in beta for Claude Sonnet 4.5 and Sonnet 4.
 * We've removed the dedicated 1M rate limits for all supported models. Your standard account limits now apply across every context length.
 * We've raised the media limit from 100 to 600 images or PDF pages per request when using the 1M token context window.
 
@@ -314,8 +318,8 @@ The Claude Platform release notes list changes to the Claude API, the client SDK
 
 * We've launched [Claude Sonnet 4.6](https://www.anthropic.com/news/claude-sonnet-4-6), our latest balanced model combining speed and intelligence for everyday tasks. Sonnet 4.6 delivers improved agentic search performance while consuming fewer tokens. Sonnet 4.6 supports [extended thinking](../build-with-claude/build-with-claude-extended-thinking.md) and a [1M token context window](../build-with-claude/build-with-claude-context-windows.md) (beta). See [Models & Pricing](https://platform.claude.com/docs/en/about-claude/models.md) for details.
 * API [code execution](../agents-and-tools/agents-and-tools-tool-use-code-execution-tool.md) is now **free when used with web search or web fetch**. Sandboxed code execution improves model capability and token efficiency. See the [pricing details](../agents-and-tools/agents-and-tools-tool-use-code-execution-tool.md#usage-and-pricing) for standalone usage.
-* The [web search tool](../agents-and-tools/agents-and-tools-tool-use-web-search-tool.md) and [programmatic tool calling](../agents-and-tools/agents-and-tools-tool-use-programmatic-tool-calling.md) are now generally available (no beta header required). Web search and web fetch now support [dynamic filtering](../agents-and-tools/agents-and-tools-tool-use-web-search-tool.md#dynamic-filtering), which uses code execution to filter results before they reach the context window for better performance and reduced token cost.
-* The [code execution tool](../agents-and-tools/agents-and-tools-tool-use-code-execution-tool.md), [web fetch tool](../agents-and-tools/agents-and-tools-tool-use-web-fetch-tool.md), [tool search tool](../agents-and-tools/agents-and-tools-tool-use-tool-search-tool.md), [tool use examples](../agents-and-tools/agents-and-tools-tool-use-define-tools.md#providing-tool-use-examples), and [memory tool](../agents-and-tools/agents-and-tools-tool-use-memory-tool.md) are now generally available (no beta header required).
+* The [web search tool](../agents-and-tools/agents-and-tools-tool-use-web-search-tool.md) and [programmatic tool calling](../agents-and-tools/agents-and-tools-tool-use-programmatic-tool-calling.md) are available with no beta header required. Web search and web fetch now support [dynamic filtering](../agents-and-tools/agents-and-tools-tool-use-web-search-tool.md#dynamic-filtering), which uses code execution to filter results before they reach the context window for better performance and reduced token cost.
+* The [code execution tool](../agents-and-tools/agents-and-tools-tool-use-code-execution-tool.md), [web fetch tool](../agents-and-tools/agents-and-tools-tool-use-web-fetch-tool.md), [tool search tool](../agents-and-tools/agents-and-tools-tool-use-tool-search-tool.md), [tool use examples](../agents-and-tools/agents-and-tools-tool-use-define-tools.md#providing-tool-use-examples), and [memory tool](../agents-and-tools/agents-and-tools-tool-use-memory-tool.md) no longer require a beta header.
 
 ### February 7, 2026
 
@@ -324,15 +328,15 @@ The Claude Platform release notes list changes to the Claude API, the client SDK
 ### February 5, 2026
 
 * We've launched [Claude Opus 4.6](https://www.anthropic.com/news/claude-opus-4-6), our most intelligent model for complex agentic tasks and long-horizon work. Opus 4.6 recommends [adaptive thinking](../build-with-claude/build-with-claude-thinking.md) (`thinking: {type: "adaptive"}`); manual thinking (`type: "enabled"` with `budget_tokens`) is deprecated. Opus 4.6 does not support prefilling assistant messages. Learn more in [What's new in Claude 4.6](https://platform.claude.com/docs/en/about-claude/models/whats-new-claude-4-6.md).
-* The [effort parameter](../build-with-claude/build-with-claude-effort.md) is now generally available (no beta header required) and supports Claude Opus 4.6. Effort replaces `budget_tokens` for controlling thinking depth on new models.
+* The [effort parameter](../build-with-claude/build-with-claude-effort.md) no longer requires a beta header and now supports Claude Opus 4.6. Effort replaces `budget_tokens` for controlling thinking depth on new models.
 * We've launched the [compaction API](../build-with-claude/build-with-claude-compaction.md) in beta, providing server-side context summarization for effectively infinite conversations. Available on Opus 4.6.
 * We've introduced [data residency controls](../manage-claude/manage-claude-data-residency.md), allowing you to specify where model inference runs with the `inference_geo` parameter. US-only inference is available at 1.1x pricing for models released after February 1, 2026.
 * The [1M token context window](../build-with-claude/build-with-claude-context-windows.md) is now available in beta for Claude Opus 4.6, in addition to Sonnet 4.5 and Sonnet 4. [Long context pricing](../about-claude/about-claude-pricing.md#long-context-pricing) applies to requests exceeding 200k input tokens.
-* [Fine-grained tool streaming](../agents-and-tools/agents-and-tools-tool-use-fine-grained-tool-streaming.md) is now generally available on all models and platforms (no beta header required).
+* [Fine-grained tool streaming](../agents-and-tools/agents-and-tools-tool-use-fine-grained-tool-streaming.md) no longer requires a beta header on any model or platform.
 
 ### January 29, 2026
 
-* [Structured outputs](../build-with-claude/build-with-claude-structured-outputs.md) are now generally available on the Claude API for Claude Sonnet 4.5, Claude Opus 4.5, and Claude Haiku 4.5. GA includes expanded schema support, improved grammar compilation latency, and a simplified integration path with no beta header required. The `output_format` parameter has moved to `output_config.format`. Existing beta users can continue using the beta header during the transition period. Structured outputs remain in public beta on Amazon Bedrock and Microsoft Foundry.
+* [Structured outputs](../build-with-claude/build-with-claude-structured-outputs.md) are out of beta on the Claude API for Claude Sonnet 4.5, Claude Opus 4.5, and Claude Haiku 4.5. This release includes expanded schema support, improved grammar compilation latency, and a simplified integration path with no beta header required. The `output_format` parameter has moved to `output_config.format`. Existing beta users can continue using the beta header during the transition period. Structured outputs remain in public beta on Amazon Bedrock and Microsoft Foundry.
 
 ### January 12, 2026
 
@@ -360,7 +364,7 @@ The Claude Platform release notes list changes to the Claude API, the client SDK
 
 ### November 21, 2025
 
-* Search result content blocks are now generally available on Amazon Bedrock. Learn more in [Search results](../build-with-claude/build-with-claude-search-results.md).
+* Search result content blocks are now available on Amazon Bedrock with no beta header required. Learn more in [Search results](../build-with-claude/build-with-claude-search-results.md).
 
 ### November 19, 2025
 
@@ -456,7 +460,7 @@ The Claude Platform release notes list changes to the Claude API, the client SDK
 ### August 13, 2025
 
 * We announced the deprecation of the Claude Sonnet 3.5 models (`claude-3-5-sonnet-20240620` and `claude-3-5-sonnet-20241022`). These models will be retired on October 28, 2025. We recommend migrating to Claude Sonnet 4.5 (`claude-sonnet-4-5-20250929`) for improved performance and capabilities. Read more in [Model deprecations](../about-claude/about-claude-model-deprecations.md).
-* The 1-hour cache duration for prompt caching is now generally available. You can now use the extended cache TTL without a beta header. Learn more in [Prompt caching](../build-with-claude/build-with-claude-prompt-caching.md#1-hour-cache-duration).
+* The 1-hour cache duration for prompt caching no longer requires a beta header. Learn more in [Prompt caching](../build-with-claude/build-with-claude-prompt-caching.md#1-hour-cache-duration).
 
 ### August 12, 2025
 
@@ -468,7 +472,7 @@ The Claude Platform release notes list changes to the Claude API, the client SDK
 
 ### August 8, 2025
 
-* Search result content blocks are now generally available on the Claude API and Vertex AI. This feature enables natural citations for RAG applications with proper source attribution. The beta header `search-results-2025-06-09` is no longer required. Learn more in [Search results](../build-with-claude/build-with-claude-search-results.md).
+* Search result content blocks are out of beta on the Claude API and Vertex AI. This feature enables natural citations for RAG applications with proper source attribution. The beta header `search-results-2025-06-09` is no longer required. Learn more in [Search results](../build-with-claude/build-with-claude-search-results.md).
 
 ### August 5, 2025
 
@@ -517,12 +521,12 @@ The Claude Platform release notes list changes to the Claude API, the client SDK
 * We've launched the [Code execution tool](../agents-and-tools/agents-and-tools-tool-use-code-execution-tool.md) in public beta, a tool that enables Claude to execute Python code in a secure, sandboxed environment.
 * We've launched the [MCP connector](../agents-and-tools/agents-and-tools-mcp-connector.md) in public beta, a feature that allows you to connect to remote MCP servers directly from the Messages API.
 * To increase answer quality and decrease tool errors, we've changed the default value for the `top_p` [nucleus sampling](https://en.wikipedia.org/wiki/Top-p_sampling) parameter in the Messages API from 0.999 to 0.99 for all models. To revert this change, set `top_p` to 0.999. Additionally, when extended thinking is enabled, you can now set `top_p` to values between 0.95 and 1.
-* We've moved our [Go SDK](https://github.com/anthropics/anthropic-sdk-go) from beta to GA.
+* Our [Go SDK](https://github.com/anthropics/anthropic-sdk-go) has moved from beta to its first stable release.
 * We've included minute and hour level granularity to the [Usage](https://console.anthropic.com/settings/usage) page of Console alongside 429 error rates on the Usage page.
 
 ### May 21, 2025
 
-* We've moved our [Ruby SDK](https://github.com/anthropics/anthropic-sdk-ruby) from beta to GA.
+* Our [Ruby SDK](https://github.com/anthropics/anthropic-sdk-ruby) has moved from beta to its first stable release.
 
 ### May 7, 2025
 
@@ -538,7 +542,7 @@ The Claude Platform release notes list changes to the Claude API, the client SDK
 
 ### March 31st, 2025
 
-* We've moved our [Java SDK](https://github.com/anthropics/anthropic-sdk-java) from beta to GA.
+* Our [Java SDK](https://github.com/anthropics/anthropic-sdk-java) has moved from beta to its first stable release.
 * We've moved our [Go SDK](https://github.com/anthropics/anthropic-sdk-go) from alpha to beta.
 
 ### February 27th, 2025
@@ -595,7 +599,7 @@ The Claude Platform release notes list changes to the Claude API, the client SDK
 
 ### December 17th, 2024
 
-The following features are now generally available in the Claude API:
+The following features are now available in the Claude API without a beta header:
 
 * [Models API](../api/api-models-list.md): Query available models, validate model IDs, and resolve [model aliases](../about-claude/about-claude-models-overview.md) to their canonical model IDs.
 * [Message Batches API](../build-with-claude/build-with-claude-batch-processing.md): Process large batches of messages asynchronously at 50% of the standard API cost.
@@ -668,7 +672,7 @@ We also released new official SDKs:
 
 ### August 19th, 2024
 
-* We've moved 8,192 token outputs from beta to general availability for Claude Sonnet 3.5.
+* 8,192-token outputs on Claude Sonnet 3.5 are out of beta and no longer require the `max-tokens-3-5-sonnet-2024-07-15` header.
 
 ### August 14th, 2024
 
@@ -690,11 +694,11 @@ We also released new official SDKs:
 
 ### June 20th, 2024
 
-* [Claude Sonnet 3.5](https://www.anthropic.com/news/claude-3-5-sonnet), our most intelligent model yet, is now generally available across the Claude API, Amazon Bedrock, and Vertex AI.
+* [Claude Sonnet 3.5](https://www.anthropic.com/news/claude-3-5-sonnet), our most intelligent model yet, is now available across the Claude API, Amazon Bedrock, and Vertex AI.
 
 ### May 30th, 2024
 
-* [Tool use](../agents-and-tools/agents-and-tools-tool-use-overview.md) is now generally available across the Claude API, Amazon Bedrock, and Vertex AI.
+* [Tool use](../agents-and-tools/agents-and-tools-tool-use-overview.md) is out of beta across the Claude API, Amazon Bedrock, and Vertex AI, with no beta header required.
 
 ### May 10th, 2024
 

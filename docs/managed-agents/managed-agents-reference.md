@@ -18,7 +18,7 @@ This page collects reference material for Claude Managed Agents. For task-orient
 
 ## Event types
 
-Persisted event type strings follow a `{domain}.{action}` naming convention; the stream-only event deltas (see the Event deltas tab) are the exception. See [Session event stream](./managed-agents-events-and-streaming.md) for sending, streaming, and listing events.
+Persisted event type strings follow a `{domain}.{action}` naming convention; the stream-only event deltas (see the Event deltas tab) are the exception. See [Session event stream](./managed-agents-events-and-streaming.md) for sending, streaming, and listing events. Webhook event types are listed separately in [Subscribe to webhooks](./managed-agents-webhooks.md#supported-event-types), and some of their names differ from the stream's (for example, `session.status_idled` rather than `session.status_idle`).
 
 <Tabs>
   <Tab title="User events">

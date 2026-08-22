@@ -332,7 +332,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `version: string`
 
-        Skill version or 'latest' for most recent version
+        The resolved version: a skill version ID for custom skills.
 
   - `content: array of BetaContentBlock`
 
@@ -6520,7 +6520,7 @@ ant beta:messages count-tokens \
 
     - `version: string`
 
-      Skill version or 'latest' for most recent version
+      The resolved version: a skill version ID for custom skills.
 
 ### Beta Container Params
 
@@ -11653,7 +11653,7 @@ ant beta:messages count-tokens \
 
       - `version: string`
 
-        Skill version or 'latest' for most recent version
+        The resolved version: a skill version ID for custom skills.
 
   - `content: array of BetaContentBlock`
 
@@ -16723,7 +16723,7 @@ ant beta:messages count-tokens \
 
         - `version: string`
 
-          Skill version or 'latest' for most recent version
+          The resolved version: a skill version ID for custom skills.
 
     - `stop_details: object { category, explanation, fallback_credit_token, 3 more }`
 
@@ -17359,7 +17359,7 @@ ant beta:messages count-tokens \
 
         - `version: string`
 
-          Skill version or 'latest' for most recent version
+          The resolved version: a skill version ID for custom skills.
 
     - `content: array of BetaContentBlock`
 
@@ -19049,7 +19049,7 @@ ant beta:messages count-tokens \
 
           - `version: string`
 
-            Skill version or 'latest' for most recent version
+            The resolved version: a skill version ID for custom skills.
 
       - `content: array of BetaContentBlock`
 
@@ -22329,7 +22329,7 @@ ant beta:messages count-tokens \
 
   - `version: string`
 
-    Skill version or 'latest' for most recent version
+    The resolved version: a skill version ID for custom skills.
 
 ### Beta Skill Params
 
@@ -30221,7 +30221,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `version: string`
 
-              Skill version or 'latest' for most recent version
+              The resolved version: a skill version ID for custom skills.
 
         - `content: array of BetaContentBlock`
 
@@ -32185,7 +32185,7 @@ ant beta:messages:batches results \
 
             - `version: string`
 
-              Skill version or 'latest' for most recent version
+              The resolved version: a skill version ID for custom skills.
 
         - `content: array of BetaContentBlock`
 
@@ -33979,7 +33979,7 @@ ant beta:messages:batches results \
 
           - `version: string`
 
-            Skill version or 'latest' for most recent version
+            The resolved version: a skill version ID for custom skills.
 
       - `content: array of BetaContentBlock`
 
@@ -35735,7 +35735,7 @@ ant beta:messages:batches results \
 
         - `version: string`
 
-          Skill version or 'latest' for most recent version
+          The resolved version: a skill version ID for custom skills.
 
     - `content: array of BetaContentBlock`
 

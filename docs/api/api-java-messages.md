@@ -2849,7 +2849,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `String version`
 
-        Skill version or 'latest' for most recent version
+        The resolved version: a skill version ID for custom skills.
 
   - `List<ContentBlock> content`
 
@@ -10296,7 +10296,7 @@ public final class Main {
 
     - `String version`
 
-      Skill version or 'latest' for most recent version
+      The resolved version: a skill version ID for custom skills.
 
 ### Container Params
 
@@ -10348,7 +10348,7 @@ public final class Main {
 
   - `String version`
 
-    Skill version or 'latest' for most recent version
+    The resolved version: a skill version ID for custom skills.
 
 ### Container Upload Block
 
@@ -13060,7 +13060,7 @@ public final class Main {
 
       - `String version`
 
-        Skill version or 'latest' for most recent version
+        The resolved version: a skill version ID for custom skills.
 
   - `List<ContentBlock> content`
 
@@ -17834,7 +17834,7 @@ public final class Main {
 
         - `String version`
 
-          Skill version or 'latest' for most recent version
+          The resolved version: a skill version ID for custom skills.
 
     - `Optional<RefusalStopDetails> stopDetails`
 
@@ -17998,7 +17998,7 @@ public final class Main {
 
         - `String version`
 
-          Skill version or 'latest' for most recent version
+          The resolved version: a skill version ID for custom skills.
 
     - `List<ContentBlock> content`
 
@@ -18977,7 +18977,7 @@ public final class Main {
 
           - `String version`
 
-            Skill version or 'latest' for most recent version
+            The resolved version: a skill version ID for custom skills.
 
       - `List<ContentBlock> content`
 
@@ -30293,7 +30293,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `String version`
 
-              Skill version or 'latest' for most recent version
+              The resolved version: a skill version ID for custom skills.
 
         - `List<ContentBlock> content`
 
@@ -31614,7 +31614,7 @@ public final class Main {
 
             - `String version`
 
-              Skill version or 'latest' for most recent version
+              The resolved version: a skill version ID for custom skills.
 
         - `List<ContentBlock> content`
 
@@ -32721,7 +32721,7 @@ public final class Main {
 
           - `String version`
 
-            Skill version or 'latest' for most recent version
+            The resolved version: a skill version ID for custom skills.
 
       - `List<ContentBlock> content`
 
@@ -33790,7 +33790,7 @@ public final class Main {
 
         - `String version`
 
-          Skill version or 'latest' for most recent version
+          The resolved version: a skill version ID for custom skills.
 
     - `List<ContentBlock> content`
 

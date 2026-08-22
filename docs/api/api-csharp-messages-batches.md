@@ -3671,7 +3671,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `required string Version`
 
-              Skill version or 'latest' for most recent version
+              The resolved version: a skill version ID for custom skills.
 
         - `required IReadOnlyList<ContentBlock> Content`
 
@@ -4831,7 +4831,7 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
 
             - `required string Version`
 
-              Skill version or 'latest' for most recent version
+              The resolved version: a skill version ID for custom skills.
 
         - `required IReadOnlyList<ContentBlock> Content`
 
@@ -5818,7 +5818,7 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
 
           - `required string Version`
 
-            Skill version or 'latest' for most recent version
+            The resolved version: a skill version ID for custom skills.
 
       - `required IReadOnlyList<ContentBlock> Content`
 
@@ -6767,7 +6767,7 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
 
         - `required string Version`
 
-          Skill version or 'latest' for most recent version
+          The resolved version: a skill version ID for custom skills.
 
     - `required IReadOnlyList<ContentBlock> Content`
 

@@ -3832,7 +3832,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `Version string`
 
-              Skill version or 'latest' for most recent version
+              The resolved version: a skill version ID for custom skills.
 
         - `Content []ContentBlockUnion`
 
@@ -5167,7 +5167,7 @@ func main() {
 
             - `Version string`
 
-              Skill version or 'latest' for most recent version
+              The resolved version: a skill version ID for custom skills.
 
         - `Content []ContentBlockUnion`
 
@@ -6282,7 +6282,7 @@ func main() {
 
           - `Version string`
 
-            Skill version or 'latest' for most recent version
+            The resolved version: a skill version ID for custom skills.
 
       - `Content []ContentBlockUnion`
 
@@ -7359,7 +7359,7 @@ func main() {
 
         - `Version string`
 
-          Skill version or 'latest' for most recent version
+          The resolved version: a skill version ID for custom skills.
 
     - `Content []ContentBlockUnion`
 

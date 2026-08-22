@@ -1305,14 +1305,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
     - `citations: Optional[List[TextCitationParam]]`
 
-- `temperature: Optional[float]`
-
-  Amount of randomness injected into the response.
-
-  Defaults to `1.0`. Ranges from `0.0` to `1.0`. Use `temperature` closer to `0.0` for analytical / multiple choice, and closer to `1.0` for creative and generative tasks.
-
-  Note that even with `temperature` of `0.0`, the results will not be fully deterministic.
-
 - `thinking: Optional[ThinkingConfigParam]`
 
   Configuration for enabling Claude's extended thinking.
@@ -3037,22 +3029,6 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       When true, guarantees schema validation on tool names and inputs
 
-- `top_k: Optional[int]`
-
-  Only sample from the top K options for each subsequent token.
-
-  Used to remove "long tail" low probability responses. [Learn more technical details here](https://towardsdatascience.com/how-to-sample-from-language-models-682bceb97277).
-
-  Recommended for advanced use cases only.
-
-- `top_p: Optional[float]`
-
-  Use nucleus sampling.
-
-  In nucleus sampling, we compute the cumulative distribution over all the options for each subsequent token in decreasing probability order and cut it off once it reaches a particular probability specified by `top_p`.
-
-  Recommended for advanced use cases only.
-
 - `user_profile_id: Optional[str]`
 
   The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
@@ -3097,7 +3073,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `version: str`
 
-        Skill version or 'latest' for most recent version
+        The resolved version: a skill version ID for custom skills.
 
   - `content: List[ContentBlock]`
 
@@ -10766,7 +10742,7 @@ print(message_tokens_count.input_tokens)
 
     - `version: str`
 
-      Skill version or 'latest' for most recent version
+      The resolved version: a skill version ID for custom skills.
 
 ### Container Params
 
@@ -10818,7 +10794,7 @@ print(message_tokens_count.input_tokens)
 
   - `version: str`
 
-    Skill version or 'latest' for most recent version
+    The resolved version: a skill version ID for custom skills.
 
 ### Container Upload Block
 
@@ -13530,7 +13506,7 @@ print(message_tokens_count.input_tokens)
 
       - `version: str`
 
-        Skill version or 'latest' for most recent version
+        The resolved version: a skill version ID for custom skills.
 
   - `content: List[ContentBlock]`
 
@@ -18352,7 +18328,7 @@ print(message_tokens_count.input_tokens)
 
         - `version: str`
 
-          Skill version or 'latest' for most recent version
+          The resolved version: a skill version ID for custom skills.
 
     - `stop_details: Optional[RefusalStopDetails]`
 
@@ -18516,7 +18492,7 @@ print(message_tokens_count.input_tokens)
 
         - `version: str`
 
-          Skill version or 'latest' for most recent version
+          The resolved version: a skill version ID for custom skills.
 
     - `content: List[ContentBlock]`
 
@@ -19519,7 +19495,7 @@ print(message_tokens_count.input_tokens)
 
           - `version: str`
 
-            Skill version or 'latest' for most recent version
+            The resolved version: a skill version ID for custom skills.
 
       - `content: List[ContentBlock]`
 
@@ -28365,14 +28341,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
         - `citations: Optional[List[TextCitationParam]]`
 
-    - `temperature: Optional[float]`
-
-      Amount of randomness injected into the response.
-
-      Defaults to `1.0`. Ranges from `0.0` to `1.0`. Use `temperature` closer to `0.0` for analytical / multiple choice, and closer to `1.0` for creative and generative tasks.
-
-      Note that even with `temperature` of `0.0`, the results will not be fully deterministic.
-
     - `thinking: Optional[ThinkingConfigParam]`
 
       Configuration for enabling Claude's extended thinking.
@@ -30097,22 +30065,6 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
           When true, guarantees schema validation on tool names and inputs
 
-    - `top_k: Optional[int]`
-
-      Only sample from the top K options for each subsequent token.
-
-      Used to remove "long tail" low probability responses. [Learn more technical details here](https://towardsdatascience.com/how-to-sample-from-language-models-682bceb97277).
-
-      Recommended for advanced use cases only.
-
-    - `top_p: Optional[float]`
-
-      Use nucleus sampling.
-
-      In nucleus sampling, we compute the cumulative distribution over all the options for each subsequent token in decreasing probability order and cut it off once it reaches a particular probability specified by `top_p`.
-
-      Recommended for advanced use cases only.
-
 - `user_profile_id: Optional[str]`
 
   The user profile ID to attribute the requests in this batch to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header. Applies to every request in the batch; an individual request whose `user_profile_id` body field conflicts with this header is errored.
@@ -30853,7 +30805,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `version: str`
 
-              Skill version or 'latest' for most recent version
+              The resolved version: a skill version ID for custom skills.
 
         - `content: List[ContentBlock]`
 
@@ -32193,7 +32145,7 @@ for batch in client.messages.batches.results(
 
             - `version: str`
 
-              Skill version or 'latest' for most recent version
+              The resolved version: a skill version ID for custom skills.
 
         - `content: List[ContentBlock]`
 
@@ -33324,7 +33276,7 @@ for batch in client.messages.batches.results(
 
           - `version: str`
 
-            Skill version or 'latest' for most recent version
+            The resolved version: a skill version ID for custom skills.
 
       - `content: List[ContentBlock]`
 
@@ -34417,7 +34369,7 @@ for batch in client.messages.batches.results(
 
         - `version: str`
 
-          Skill version or 'latest' for most recent version
+          The resolved version: a skill version ID for custom skills.
 
     - `content: List[ContentBlock]`
 

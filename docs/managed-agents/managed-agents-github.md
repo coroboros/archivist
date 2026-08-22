@@ -395,7 +395,15 @@ Then create a session that mounts the GitHub repository:
   ```
 </CodeGroup>
 
-The `resources[].authorization_token` authenticates the repository clone operation and is not echoed in API responses.
+A `github_repository` resource accepts the following fields:
+
+| Field                 | Description                                                                                                                                                                                       |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type`                | Required. Must be `"github_repository"`.                                                                                                                                                          |
+| `url`                 | Required. The repository's HTTPS URL in the form `https://github.com/<owner>/<repo>`, without a `.git` suffix. Other forms, including SSH URLs, are rejected with an `invalid_request_error`.     |
+| `authorization_token` | Required. The GitHub token used to clone the repository. It is not echoed in API responses. See [Token permissions](./managed-agents-github.md#token-permissions). |
+| `mount_path`          | Optional. The directory under `/workspace` to clone the repository into. Defaults to `/workspace/<repo-name>`.                                                                                    |
+| `checkout`            | Optional. A branch (`{"type": "branch", "name": "main"}`) or commit (`{"type": "commit", "sha": "..."}`) to check out. Defaults to the repository's default branch.                               |
 
 Mounting a repository also loads any skills stored in its root `.claude/skills` directory. Skills are discovered once per session, from the repository state checked out at session start. See [Load skills from a GitHub repository](./managed-agents-skills.md#load-skills-from-a-github-repository).
 
@@ -751,9 +759,7 @@ With the GitHub MCP server, the agent can create branches, commit changes, and p
   ```
 
   ```bash CLI
-  ant beta:sessions:events send \
-    --session-id "$SESSION_ID" \
-    > /dev/null <<'EOF'
+  ant beta:sessions:events send --session-id "$SESSION_ID" > /dev/null <<'EOF'
   events:
     - type: user.message
       content:

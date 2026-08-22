@@ -3704,7 +3704,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `Version string`
 
-        Skill version or 'latest' for most recent version
+        The resolved version: a skill version ID for custom skills.
 
   - `Content []BetaContentBlockUnion`
 

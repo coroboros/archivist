@@ -2845,7 +2845,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `Version string`
 
-        Skill version or 'latest' for most recent version
+        The resolved version: a skill version ID for custom skills.
 
   - `Content []ContentBlockUnion`
 
@@ -10314,7 +10314,7 @@ func main() {
 
     - `Version string`
 
-      Skill version or 'latest' for most recent version
+      The resolved version: a skill version ID for custom skills.
 
 ### Container Params
 
@@ -10366,7 +10366,7 @@ func main() {
 
   - `Version string`
 
-    Skill version or 'latest' for most recent version
+    The resolved version: a skill version ID for custom skills.
 
 ### Container Upload Block
 
@@ -13076,7 +13076,7 @@ func main() {
 
       - `Version string`
 
-        Skill version or 'latest' for most recent version
+        The resolved version: a skill version ID for custom skills.
 
   - `Content []ContentBlockUnion`
 
@@ -17862,7 +17862,7 @@ func main() {
 
         - `Version string`
 
-          Skill version or 'latest' for most recent version
+          The resolved version: a skill version ID for custom skills.
 
     - `StopDetails RefusalStopDetails`
 
@@ -18026,7 +18026,7 @@ func main() {
 
         - `Version string`
 
-          Skill version or 'latest' for most recent version
+          The resolved version: a skill version ID for custom skills.
 
     - `Content []ContentBlockUnion`
 
@@ -19013,7 +19013,7 @@ func main() {
 
           - `Version string`
 
-            Skill version or 'latest' for most recent version
+            The resolved version: a skill version ID for custom skills.
 
       - `Content []ContentBlockUnion`
 
@@ -30354,7 +30354,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `Version string`
 
-              Skill version or 'latest' for most recent version
+              The resolved version: a skill version ID for custom skills.
 
         - `Content []ContentBlockUnion`
 
@@ -31689,7 +31689,7 @@ func main() {
 
             - `Version string`
 
-              Skill version or 'latest' for most recent version
+              The resolved version: a skill version ID for custom skills.
 
         - `Content []ContentBlockUnion`
 
@@ -32804,7 +32804,7 @@ func main() {
 
           - `Version string`
 
-            Skill version or 'latest' for most recent version
+            The resolved version: a skill version ID for custom skills.
 
       - `Content []ContentBlockUnion`
 
@@ -33881,7 +33881,7 @@ func main() {
 
         - `Version string`
 
-          Skill version or 'latest' for most recent version
+          The resolved version: a skill version ID for custom skills.
 
     - `Content []ContentBlockUnion`
 

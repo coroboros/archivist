@@ -4681,7 +4681,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `required string Version`
 
-        Skill version or 'latest' for most recent version
+        The resolved version: a skill version ID for custom skills.
 
   - `required IReadOnlyList<BetaContentBlock> Content`
 
@@ -13664,7 +13664,7 @@ Console.WriteLine(betaMessageTokensCount);
 
     - `required string Version`
 
-      Skill version or 'latest' for most recent version
+      The resolved version: a skill version ID for custom skills.
 
 ### Beta Container Params
 
@@ -18027,7 +18027,7 @@ Console.WriteLine(betaMessageTokensCount);
 
       - `required string Version`
 
-        Skill version or 'latest' for most recent version
+        The resolved version: a skill version ID for custom skills.
 
   - `required IReadOnlyList<BetaContentBlock> Content`
 
@@ -22310,7 +22310,7 @@ Console.WriteLine(betaMessageTokensCount);
 
         - `required string Version`
 
-          Skill version or 'latest' for most recent version
+          The resolved version: a skill version ID for custom skills.
 
     - `required BetaRefusalStopDetails? StopDetails`
 
@@ -22802,7 +22802,7 @@ Console.WriteLine(betaMessageTokensCount);
 
         - `required string Version`
 
-          Skill version or 'latest' for most recent version
+          The resolved version: a skill version ID for custom skills.
 
     - `required IReadOnlyList<BetaContentBlock> Content`
 
@@ -24214,7 +24214,7 @@ Console.WriteLine(betaMessageTokensCount);
 
           - `required string Version`
 
-            Skill version or 'latest' for most recent version
+            The resolved version: a skill version ID for custom skills.
 
       - `required IReadOnlyList<BetaContentBlock> Content`
 
@@ -26768,7 +26768,7 @@ Console.WriteLine(betaMessageTokensCount);
 
   - `required string Version`
 
-    Skill version or 'latest' for most recent version
+    The resolved version: a skill version ID for custom skills.
 
 ### Beta Skill Params
 
@@ -38117,7 +38117,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `required string Version`
 
-              Skill version or 'latest' for most recent version
+              The resolved version: a skill version ID for custom skills.
 
         - `required IReadOnlyList<BetaContentBlock> Content`
 
@@ -39806,7 +39806,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
             - `required string Version`
 
-              Skill version or 'latest' for most recent version
+              The resolved version: a skill version ID for custom skills.
 
         - `required IReadOnlyList<BetaContentBlock> Content`
 
@@ -41322,7 +41322,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
           - `required string Version`
 
-            Skill version or 'latest' for most recent version
+            The resolved version: a skill version ID for custom skills.
 
       - `required IReadOnlyList<BetaContentBlock> Content`
 
@@ -42800,7 +42800,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
         - `required string Version`
 
-          Skill version or 'latest' for most recent version
+          The resolved version: a skill version ID for custom skills.
 
     - `required IReadOnlyList<BetaContentBlock> Content`
 
@@ -44458,49 +44458,281 @@ Create Agent
 
         Per-tool configuration overrides.
 
-        - `required Name Name`
+        - `class BetaManagedAgentsBashToolConfigParams:`
 
-          Built-in agent tool identifier.
+          Configuration override for the bash tool.
 
-          - `"bash"Bash`
+          - `JsonElement Name "bash"constant`
 
-          - `"edit"Edit`
+            Must be "bash".
 
-          - `"read"Read`
+          - `Boolean? Enabled`
 
-          - `"write"Write`
+            Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `"glob"Glob`
+          - `PermissionPolicy? PermissionPolicy`
 
-          - `"grep"Grep`
+            Permission policy for tool execution.
 
-          - `"web_fetch"WebFetch`
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
 
-          - `"web_search"WebSearch`
+              Tool calls are automatically approved without user confirmation.
 
-        - `Boolean? Enabled`
+              - `required Type Type`
 
-          Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+                - `"always_allow"AlwaysAllow`
 
-        - `PermissionPolicy? PermissionPolicy`
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
 
-          Permission policy for tool execution.
+              Tool calls require user confirmation before execution.
 
-          - `class BetaManagedAgentsAlwaysAllowPolicy:`
+              - `required Type Type`
 
-            Tool calls are automatically approved without user confirmation.
+                - `"always_ask"AlwaysAsk`
 
-            - `required Type Type`
+          - `Type Type`
 
-              - `"always_allow"AlwaysAllow`
+            - `"bash"Bash`
 
-          - `class BetaManagedAgentsAlwaysAskPolicy:`
+        - `class BetaManagedAgentsEditToolConfigParams:`
 
-            Tool calls require user confirmation before execution.
+          Configuration override for the edit tool.
 
-            - `required Type Type`
+          - `JsonElement Name "edit"constant`
 
-              - `"always_ask"AlwaysAsk`
+            Must be "edit".
+
+          - `Boolean? Enabled`
+
+            Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+
+          - `PermissionPolicy? PermissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+          - `Type Type`
+
+            - `"edit"Edit`
+
+        - `class BetaManagedAgentsReadToolConfigParams:`
+
+          Configuration override for the read tool.
+
+          - `JsonElement Name "read"constant`
+
+            Must be "read".
+
+          - `Boolean? Enabled`
+
+            Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+
+          - `PermissionPolicy? PermissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+          - `Type Type`
+
+            - `"read"Read`
+
+        - `class BetaManagedAgentsWriteToolConfigParams:`
+
+          Configuration override for the write tool.
+
+          - `JsonElement Name "write"constant`
+
+            Must be "write".
+
+          - `Boolean? Enabled`
+
+            Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+
+          - `PermissionPolicy? PermissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+          - `Type Type`
+
+            - `"write"Write`
+
+        - `class BetaManagedAgentsGlobToolConfigParams:`
+
+          Configuration override for the glob tool.
+
+          - `JsonElement Name "glob"constant`
+
+            Must be "glob".
+
+          - `Boolean? Enabled`
+
+            Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+
+          - `PermissionPolicy? PermissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+          - `Type Type`
+
+            - `"glob"Glob`
+
+        - `class BetaManagedAgentsGrepToolConfigParams:`
+
+          Configuration override for the grep tool.
+
+          - `JsonElement Name "grep"constant`
+
+            Must be "grep".
+
+          - `Boolean? Enabled`
+
+            Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+
+          - `PermissionPolicy? PermissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+          - `Type Type`
+
+            - `"grep"Grep`
+
+        - `class BetaManagedAgentsWebFetchToolConfigParams:`
+
+          Configuration override for the web_fetch tool.
+
+          - `JsonElement Name "web_fetch"constant`
+
+            Must be "web_fetch".
+
+          - `IReadOnlyList<string> AllowedDomains`
+
+            Only fetch URLs whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "docs.example.com" (no scheme, port, or path). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with blocked_domains.
+
+          - `IReadOnlyList<string> BlockedDomains`
+
+            Never fetch URLs whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "ads.example.com" (no scheme, port, or path). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with allowed_domains.
+
+          - `Boolean? Enabled`
+
+            Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+
+          - `Int? MaxContentTokens`
+
+            Maximum number of tokens of fetched text content to include in context per call. Does not apply to binary content such as PDFs.
+
+          - `PermissionPolicy? PermissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+          - `Type Type`
+
+            - `"web_fetch"WebFetch`
+
+        - `class BetaManagedAgentsWebSearchToolConfigParams:`
+
+          Configuration override for the web_search tool.
+
+          - `JsonElement Name "web_search"constant`
+
+            Must be "web_search".
+
+          - `IReadOnlyList<string> AllowedDomains`
+
+            Only return search results whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "docs.example.com" (no scheme or port; an optional path suffix is accepted). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with blocked_domains.
+
+          - `IReadOnlyList<string> BlockedDomains`
+
+            Never return search results whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "ads.example.com" (no scheme or port; an optional path suffix is accepted). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with allowed_domains.
+
+          - `Boolean? Enabled`
+
+            Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+
+          - `PermissionPolicy? PermissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+          - `Type Type`
+
+            - `"web_search"WebSearch`
+
+          - `BetaManagedAgentsUserLocation? UserLocation`
+
+            Approximate user location for search result localization.
+
+            - `JsonElement Type "approximate"constant`
+
+              Location precision. Only "approximate" is supported.
+
+            - `string? City`
+
+              City name.
+
+            - `string? Country`
+
+              Two-letter ISO 3166-1 country code, uppercase.
+
+            - `string? Region`
+
+              Region or state name.
+
+            - `string? Timezone`
+
+              IANA timezone identifier, e.g. "America/Los_Angeles".
 
       - `BetaManagedAgentsAgentToolsetDefaultConfigParams? DefaultConfig`
 
@@ -44896,47 +45128,223 @@ Create Agent
 
       - `required IReadOnlyList<BetaManagedAgentsAgentToolConfig> Configs`
 
-        - `required Boolean Enabled`
+        - `class BetaManagedAgentsBashToolConfig:`
 
-        - `required Name Name`
+          Configuration for the bash tool.
 
-          Built-in agent tool identifier.
+          - `required Boolean Enabled`
 
-          - `"bash"Bash`
+          - `JsonElement Name "bash"constant`
 
-          - `"edit"Edit`
+          - `required PermissionPolicy PermissionPolicy`
 
-          - `"read"Read`
+            Permission policy for tool execution.
 
-          - `"write"Write`
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
 
-          - `"glob"Glob`
+              Tool calls are automatically approved without user confirmation.
 
-          - `"grep"Grep`
+              - `required Type Type`
 
-          - `"web_fetch"WebFetch`
+                - `"always_allow"AlwaysAllow`
 
-          - `"web_search"WebSearch`
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
 
-        - `required PermissionPolicy PermissionPolicy`
+              Tool calls require user confirmation before execution.
 
-          Permission policy for tool execution.
+              - `required Type Type`
 
-          - `class BetaManagedAgentsAlwaysAllowPolicy:`
+                - `"always_ask"AlwaysAsk`
 
-            Tool calls are automatically approved without user confirmation.
+          - `JsonElement Type "bash"constant`
 
-            - `required Type Type`
+        - `class BetaManagedAgentsEditToolConfig:`
 
-              - `"always_allow"AlwaysAllow`
+          Configuration for the edit tool.
 
-          - `class BetaManagedAgentsAlwaysAskPolicy:`
+          - `required Boolean Enabled`
 
-            Tool calls require user confirmation before execution.
+          - `JsonElement Name "edit"constant`
 
-            - `required Type Type`
+          - `required PermissionPolicy PermissionPolicy`
 
-              - `"always_ask"AlwaysAsk`
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+          - `JsonElement Type "edit"constant`
+
+        - `class BetaManagedAgentsReadToolConfig:`
+
+          Configuration for the read tool.
+
+          - `required Boolean Enabled`
+
+          - `JsonElement Name "read"constant`
+
+          - `required PermissionPolicy PermissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+          - `JsonElement Type "read"constant`
+
+        - `class BetaManagedAgentsWriteToolConfig:`
+
+          Configuration for the write tool.
+
+          - `required Boolean Enabled`
+
+          - `JsonElement Name "write"constant`
+
+          - `required PermissionPolicy PermissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+          - `JsonElement Type "write"constant`
+
+        - `class BetaManagedAgentsGlobToolConfig:`
+
+          Configuration for the glob tool.
+
+          - `required Boolean Enabled`
+
+          - `JsonElement Name "glob"constant`
+
+          - `required PermissionPolicy PermissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+          - `JsonElement Type "glob"constant`
+
+        - `class BetaManagedAgentsGrepToolConfig:`
+
+          Configuration for the grep tool.
+
+          - `required Boolean Enabled`
+
+          - `JsonElement Name "grep"constant`
+
+          - `required PermissionPolicy PermissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+          - `JsonElement Type "grep"constant`
+
+        - `class BetaManagedAgentsWebFetchToolConfig:`
+
+          Configuration for the web_fetch tool.
+
+          - `required Boolean Enabled`
+
+          - `JsonElement Name "web_fetch"constant`
+
+          - `required PermissionPolicy PermissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+          - `JsonElement Type "web_fetch"constant`
+
+          - `IReadOnlyList<string> AllowedDomains`
+
+          - `IReadOnlyList<string> BlockedDomains`
+
+          - `Int? MaxContentTokens`
+
+        - `class BetaManagedAgentsWebSearchToolConfig:`
+
+          Configuration for the web_search tool.
+
+          - `required Boolean Enabled`
+
+          - `JsonElement Name "web_search"constant`
+
+          - `required PermissionPolicy PermissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+          - `JsonElement Type "web_search"constant`
+
+          - `IReadOnlyList<string> AllowedDomains`
+
+          - `IReadOnlyList<string> BlockedDomains`
+
+          - `BetaManagedAgentsUserLocation? UserLocation`
+
+            Approximate user location for search result localization.
+
+            - `JsonElement Type "approximate"constant`
+
+              Location precision. Only "approximate" is supported.
+
+            - `string? City`
+
+              City name.
+
+            - `string? Country`
+
+              Two-letter ISO 3166-1 country code, uppercase.
+
+            - `string? Region`
+
+              Region or state name.
+
+            - `string? Timezone`
+
+              IANA timezone identifier, e.g. "America/Los_Angeles".
 
       - `required BetaManagedAgentsAgentToolsetDefaultConfig DefaultConfig`
 
@@ -45110,7 +45518,8 @@ Console.WriteLine(betaManagedAgentsAgent);
           "name": "bash",
           "permission_policy": {
             "type": "always_allow"
-          }
+          },
+          "type": "bash"
         }
       ],
       "default_config": {
@@ -45456,47 +45865,223 @@ List Agents
 
         - `required IReadOnlyList<BetaManagedAgentsAgentToolConfig> Configs`
 
-          - `required Boolean Enabled`
+          - `class BetaManagedAgentsBashToolConfig:`
 
-          - `required Name Name`
+            Configuration for the bash tool.
 
-            Built-in agent tool identifier.
+            - `required Boolean Enabled`
 
-            - `"bash"Bash`
+            - `JsonElement Name "bash"constant`
 
-            - `"edit"Edit`
+            - `required PermissionPolicy PermissionPolicy`
 
-            - `"read"Read`
+              Permission policy for tool execution.
 
-            - `"write"Write`
+              - `class BetaManagedAgentsAlwaysAllowPolicy:`
 
-            - `"glob"Glob`
+                Tool calls are automatically approved without user confirmation.
 
-            - `"grep"Grep`
+                - `required Type Type`
 
-            - `"web_fetch"WebFetch`
+                  - `"always_allow"AlwaysAllow`
 
-            - `"web_search"WebSearch`
+              - `class BetaManagedAgentsAlwaysAskPolicy:`
 
-          - `required PermissionPolicy PermissionPolicy`
+                Tool calls require user confirmation before execution.
 
-            Permission policy for tool execution.
+                - `required Type Type`
 
-            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+                  - `"always_ask"AlwaysAsk`
 
-              Tool calls are automatically approved without user confirmation.
+            - `JsonElement Type "bash"constant`
 
-              - `required Type Type`
+          - `class BetaManagedAgentsEditToolConfig:`
 
-                - `"always_allow"AlwaysAllow`
+            Configuration for the edit tool.
 
-            - `class BetaManagedAgentsAlwaysAskPolicy:`
+            - `required Boolean Enabled`
 
-              Tool calls require user confirmation before execution.
+            - `JsonElement Name "edit"constant`
 
-              - `required Type Type`
+            - `required PermissionPolicy PermissionPolicy`
 
-                - `"always_ask"AlwaysAsk`
+              Permission policy for tool execution.
+
+              - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                Tool calls are automatically approved without user confirmation.
+
+              - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                Tool calls require user confirmation before execution.
+
+            - `JsonElement Type "edit"constant`
+
+          - `class BetaManagedAgentsReadToolConfig:`
+
+            Configuration for the read tool.
+
+            - `required Boolean Enabled`
+
+            - `JsonElement Name "read"constant`
+
+            - `required PermissionPolicy PermissionPolicy`
+
+              Permission policy for tool execution.
+
+              - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                Tool calls are automatically approved without user confirmation.
+
+              - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                Tool calls require user confirmation before execution.
+
+            - `JsonElement Type "read"constant`
+
+          - `class BetaManagedAgentsWriteToolConfig:`
+
+            Configuration for the write tool.
+
+            - `required Boolean Enabled`
+
+            - `JsonElement Name "write"constant`
+
+            - `required PermissionPolicy PermissionPolicy`
+
+              Permission policy for tool execution.
+
+              - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                Tool calls are automatically approved without user confirmation.
+
+              - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                Tool calls require user confirmation before execution.
+
+            - `JsonElement Type "write"constant`
+
+          - `class BetaManagedAgentsGlobToolConfig:`
+
+            Configuration for the glob tool.
+
+            - `required Boolean Enabled`
+
+            - `JsonElement Name "glob"constant`
+
+            - `required PermissionPolicy PermissionPolicy`
+
+              Permission policy for tool execution.
+
+              - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                Tool calls are automatically approved without user confirmation.
+
+              - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                Tool calls require user confirmation before execution.
+
+            - `JsonElement Type "glob"constant`
+
+          - `class BetaManagedAgentsGrepToolConfig:`
+
+            Configuration for the grep tool.
+
+            - `required Boolean Enabled`
+
+            - `JsonElement Name "grep"constant`
+
+            - `required PermissionPolicy PermissionPolicy`
+
+              Permission policy for tool execution.
+
+              - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                Tool calls are automatically approved without user confirmation.
+
+              - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                Tool calls require user confirmation before execution.
+
+            - `JsonElement Type "grep"constant`
+
+          - `class BetaManagedAgentsWebFetchToolConfig:`
+
+            Configuration for the web_fetch tool.
+
+            - `required Boolean Enabled`
+
+            - `JsonElement Name "web_fetch"constant`
+
+            - `required PermissionPolicy PermissionPolicy`
+
+              Permission policy for tool execution.
+
+              - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                Tool calls are automatically approved without user confirmation.
+
+              - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                Tool calls require user confirmation before execution.
+
+            - `JsonElement Type "web_fetch"constant`
+
+            - `IReadOnlyList<string> AllowedDomains`
+
+            - `IReadOnlyList<string> BlockedDomains`
+
+            - `Int? MaxContentTokens`
+
+          - `class BetaManagedAgentsWebSearchToolConfig:`
+
+            Configuration for the web_search tool.
+
+            - `required Boolean Enabled`
+
+            - `JsonElement Name "web_search"constant`
+
+            - `required PermissionPolicy PermissionPolicy`
+
+              Permission policy for tool execution.
+
+              - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                Tool calls are automatically approved without user confirmation.
+
+              - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                Tool calls require user confirmation before execution.
+
+            - `JsonElement Type "web_search"constant`
+
+            - `IReadOnlyList<string> AllowedDomains`
+
+            - `IReadOnlyList<string> BlockedDomains`
+
+            - `BetaManagedAgentsUserLocation? UserLocation`
+
+              Approximate user location for search result localization.
+
+              - `JsonElement Type "approximate"constant`
+
+                Location precision. Only "approximate" is supported.
+
+              - `string? City`
+
+                City name.
+
+              - `string? Country`
+
+                Two-letter ISO 3166-1 country code, uppercase.
+
+              - `string? Region`
+
+                Region or state name.
+
+              - `string? Timezone`
+
+                IANA timezone identifier, e.g. "America/Los_Angeles".
 
         - `required BetaManagedAgentsAgentToolsetDefaultConfig DefaultConfig`
 
@@ -45674,7 +46259,8 @@ await foreach (var item in page.Paginate())
               "name": "bash",
               "permission_policy": {
                 "type": "always_allow"
-              }
+              },
+              "type": "bash"
             }
           ],
           "default_config": {
@@ -46007,47 +46593,223 @@ Get Agent
 
       - `required IReadOnlyList<BetaManagedAgentsAgentToolConfig> Configs`
 
-        - `required Boolean Enabled`
+        - `class BetaManagedAgentsBashToolConfig:`
 
-        - `required Name Name`
+          Configuration for the bash tool.
 
-          Built-in agent tool identifier.
+          - `required Boolean Enabled`
 
-          - `"bash"Bash`
+          - `JsonElement Name "bash"constant`
 
-          - `"edit"Edit`
+          - `required PermissionPolicy PermissionPolicy`
 
-          - `"read"Read`
+            Permission policy for tool execution.
 
-          - `"write"Write`
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
 
-          - `"glob"Glob`
+              Tool calls are automatically approved without user confirmation.
 
-          - `"grep"Grep`
+              - `required Type Type`
 
-          - `"web_fetch"WebFetch`
+                - `"always_allow"AlwaysAllow`
 
-          - `"web_search"WebSearch`
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
 
-        - `required PermissionPolicy PermissionPolicy`
+              Tool calls require user confirmation before execution.
 
-          Permission policy for tool execution.
+              - `required Type Type`
 
-          - `class BetaManagedAgentsAlwaysAllowPolicy:`
+                - `"always_ask"AlwaysAsk`
 
-            Tool calls are automatically approved without user confirmation.
+          - `JsonElement Type "bash"constant`
 
-            - `required Type Type`
+        - `class BetaManagedAgentsEditToolConfig:`
 
-              - `"always_allow"AlwaysAllow`
+          Configuration for the edit tool.
 
-          - `class BetaManagedAgentsAlwaysAskPolicy:`
+          - `required Boolean Enabled`
 
-            Tool calls require user confirmation before execution.
+          - `JsonElement Name "edit"constant`
 
-            - `required Type Type`
+          - `required PermissionPolicy PermissionPolicy`
 
-              - `"always_ask"AlwaysAsk`
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+          - `JsonElement Type "edit"constant`
+
+        - `class BetaManagedAgentsReadToolConfig:`
+
+          Configuration for the read tool.
+
+          - `required Boolean Enabled`
+
+          - `JsonElement Name "read"constant`
+
+          - `required PermissionPolicy PermissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+          - `JsonElement Type "read"constant`
+
+        - `class BetaManagedAgentsWriteToolConfig:`
+
+          Configuration for the write tool.
+
+          - `required Boolean Enabled`
+
+          - `JsonElement Name "write"constant`
+
+          - `required PermissionPolicy PermissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+          - `JsonElement Type "write"constant`
+
+        - `class BetaManagedAgentsGlobToolConfig:`
+
+          Configuration for the glob tool.
+
+          - `required Boolean Enabled`
+
+          - `JsonElement Name "glob"constant`
+
+          - `required PermissionPolicy PermissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+          - `JsonElement Type "glob"constant`
+
+        - `class BetaManagedAgentsGrepToolConfig:`
+
+          Configuration for the grep tool.
+
+          - `required Boolean Enabled`
+
+          - `JsonElement Name "grep"constant`
+
+          - `required PermissionPolicy PermissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+          - `JsonElement Type "grep"constant`
+
+        - `class BetaManagedAgentsWebFetchToolConfig:`
+
+          Configuration for the web_fetch tool.
+
+          - `required Boolean Enabled`
+
+          - `JsonElement Name "web_fetch"constant`
+
+          - `required PermissionPolicy PermissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+          - `JsonElement Type "web_fetch"constant`
+
+          - `IReadOnlyList<string> AllowedDomains`
+
+          - `IReadOnlyList<string> BlockedDomains`
+
+          - `Int? MaxContentTokens`
+
+        - `class BetaManagedAgentsWebSearchToolConfig:`
+
+          Configuration for the web_search tool.
+
+          - `required Boolean Enabled`
+
+          - `JsonElement Name "web_search"constant`
+
+          - `required PermissionPolicy PermissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+          - `JsonElement Type "web_search"constant`
+
+          - `IReadOnlyList<string> AllowedDomains`
+
+          - `IReadOnlyList<string> BlockedDomains`
+
+          - `BetaManagedAgentsUserLocation? UserLocation`
+
+            Approximate user location for search result localization.
+
+            - `JsonElement Type "approximate"constant`
+
+              Location precision. Only "approximate" is supported.
+
+            - `string? City`
+
+              City name.
+
+            - `string? Country`
+
+              Two-letter ISO 3166-1 country code, uppercase.
+
+            - `string? Region`
+
+              Region or state name.
+
+            - `string? Timezone`
+
+              IANA timezone identifier, e.g. "America/Los_Angeles".
 
       - `required BetaManagedAgentsAgentToolsetDefaultConfig DefaultConfig`
 
@@ -46220,7 +46982,8 @@ Console.WriteLine(betaManagedAgentsAgent);
           "name": "bash",
           "permission_policy": {
             "type": "always_allow"
-          }
+          },
+          "type": "bash"
         }
       ],
       "default_config": {
@@ -46536,49 +47299,281 @@ Update Agent
 
         Per-tool configuration overrides.
 
-        - `required Name Name`
+        - `class BetaManagedAgentsBashToolConfigParams:`
 
-          Built-in agent tool identifier.
+          Configuration override for the bash tool.
 
-          - `"bash"Bash`
+          - `JsonElement Name "bash"constant`
 
-          - `"edit"Edit`
+            Must be "bash".
 
-          - `"read"Read`
+          - `Boolean? Enabled`
 
-          - `"write"Write`
+            Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `"glob"Glob`
+          - `PermissionPolicy? PermissionPolicy`
 
-          - `"grep"Grep`
+            Permission policy for tool execution.
 
-          - `"web_fetch"WebFetch`
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
 
-          - `"web_search"WebSearch`
+              Tool calls are automatically approved without user confirmation.
 
-        - `Boolean? Enabled`
+              - `required Type Type`
 
-          Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+                - `"always_allow"AlwaysAllow`
 
-        - `PermissionPolicy? PermissionPolicy`
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
 
-          Permission policy for tool execution.
+              Tool calls require user confirmation before execution.
 
-          - `class BetaManagedAgentsAlwaysAllowPolicy:`
+              - `required Type Type`
 
-            Tool calls are automatically approved without user confirmation.
+                - `"always_ask"AlwaysAsk`
 
-            - `required Type Type`
+          - `Type Type`
 
-              - `"always_allow"AlwaysAllow`
+            - `"bash"Bash`
 
-          - `class BetaManagedAgentsAlwaysAskPolicy:`
+        - `class BetaManagedAgentsEditToolConfigParams:`
 
-            Tool calls require user confirmation before execution.
+          Configuration override for the edit tool.
 
-            - `required Type Type`
+          - `JsonElement Name "edit"constant`
 
-              - `"always_ask"AlwaysAsk`
+            Must be "edit".
+
+          - `Boolean? Enabled`
+
+            Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+
+          - `PermissionPolicy? PermissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+          - `Type Type`
+
+            - `"edit"Edit`
+
+        - `class BetaManagedAgentsReadToolConfigParams:`
+
+          Configuration override for the read tool.
+
+          - `JsonElement Name "read"constant`
+
+            Must be "read".
+
+          - `Boolean? Enabled`
+
+            Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+
+          - `PermissionPolicy? PermissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+          - `Type Type`
+
+            - `"read"Read`
+
+        - `class BetaManagedAgentsWriteToolConfigParams:`
+
+          Configuration override for the write tool.
+
+          - `JsonElement Name "write"constant`
+
+            Must be "write".
+
+          - `Boolean? Enabled`
+
+            Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+
+          - `PermissionPolicy? PermissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+          - `Type Type`
+
+            - `"write"Write`
+
+        - `class BetaManagedAgentsGlobToolConfigParams:`
+
+          Configuration override for the glob tool.
+
+          - `JsonElement Name "glob"constant`
+
+            Must be "glob".
+
+          - `Boolean? Enabled`
+
+            Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+
+          - `PermissionPolicy? PermissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+          - `Type Type`
+
+            - `"glob"Glob`
+
+        - `class BetaManagedAgentsGrepToolConfigParams:`
+
+          Configuration override for the grep tool.
+
+          - `JsonElement Name "grep"constant`
+
+            Must be "grep".
+
+          - `Boolean? Enabled`
+
+            Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+
+          - `PermissionPolicy? PermissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+          - `Type Type`
+
+            - `"grep"Grep`
+
+        - `class BetaManagedAgentsWebFetchToolConfigParams:`
+
+          Configuration override for the web_fetch tool.
+
+          - `JsonElement Name "web_fetch"constant`
+
+            Must be "web_fetch".
+
+          - `IReadOnlyList<string> AllowedDomains`
+
+            Only fetch URLs whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "docs.example.com" (no scheme, port, or path). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with blocked_domains.
+
+          - `IReadOnlyList<string> BlockedDomains`
+
+            Never fetch URLs whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "ads.example.com" (no scheme, port, or path). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with allowed_domains.
+
+          - `Boolean? Enabled`
+
+            Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+
+          - `Int? MaxContentTokens`
+
+            Maximum number of tokens of fetched text content to include in context per call. Does not apply to binary content such as PDFs.
+
+          - `PermissionPolicy? PermissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+          - `Type Type`
+
+            - `"web_fetch"WebFetch`
+
+        - `class BetaManagedAgentsWebSearchToolConfigParams:`
+
+          Configuration override for the web_search tool.
+
+          - `JsonElement Name "web_search"constant`
+
+            Must be "web_search".
+
+          - `IReadOnlyList<string> AllowedDomains`
+
+            Only return search results whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "docs.example.com" (no scheme or port; an optional path suffix is accepted). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with blocked_domains.
+
+          - `IReadOnlyList<string> BlockedDomains`
+
+            Never return search results whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "ads.example.com" (no scheme or port; an optional path suffix is accepted). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with allowed_domains.
+
+          - `Boolean? Enabled`
+
+            Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+
+          - `PermissionPolicy? PermissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+          - `Type Type`
+
+            - `"web_search"WebSearch`
+
+          - `BetaManagedAgentsUserLocation? UserLocation`
+
+            Approximate user location for search result localization.
+
+            - `JsonElement Type "approximate"constant`
+
+              Location precision. Only "approximate" is supported.
+
+            - `string? City`
+
+              City name.
+
+            - `string? Country`
+
+              Two-letter ISO 3166-1 country code, uppercase.
+
+            - `string? Region`
+
+              Region or state name.
+
+            - `string? Timezone`
+
+              IANA timezone identifier, e.g. "America/Los_Angeles".
 
       - `BetaManagedAgentsAgentToolsetDefaultConfigParams? DefaultConfig`
 
@@ -46978,47 +47973,223 @@ Update Agent
 
       - `required IReadOnlyList<BetaManagedAgentsAgentToolConfig> Configs`
 
-        - `required Boolean Enabled`
+        - `class BetaManagedAgentsBashToolConfig:`
 
-        - `required Name Name`
+          Configuration for the bash tool.
 
-          Built-in agent tool identifier.
+          - `required Boolean Enabled`
 
-          - `"bash"Bash`
+          - `JsonElement Name "bash"constant`
 
-          - `"edit"Edit`
+          - `required PermissionPolicy PermissionPolicy`
 
-          - `"read"Read`
+            Permission policy for tool execution.
 
-          - `"write"Write`
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
 
-          - `"glob"Glob`
+              Tool calls are automatically approved without user confirmation.
 
-          - `"grep"Grep`
+              - `required Type Type`
 
-          - `"web_fetch"WebFetch`
+                - `"always_allow"AlwaysAllow`
 
-          - `"web_search"WebSearch`
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
 
-        - `required PermissionPolicy PermissionPolicy`
+              Tool calls require user confirmation before execution.
 
-          Permission policy for tool execution.
+              - `required Type Type`
 
-          - `class BetaManagedAgentsAlwaysAllowPolicy:`
+                - `"always_ask"AlwaysAsk`
 
-            Tool calls are automatically approved without user confirmation.
+          - `JsonElement Type "bash"constant`
 
-            - `required Type Type`
+        - `class BetaManagedAgentsEditToolConfig:`
 
-              - `"always_allow"AlwaysAllow`
+          Configuration for the edit tool.
 
-          - `class BetaManagedAgentsAlwaysAskPolicy:`
+          - `required Boolean Enabled`
 
-            Tool calls require user confirmation before execution.
+          - `JsonElement Name "edit"constant`
 
-            - `required Type Type`
+          - `required PermissionPolicy PermissionPolicy`
 
-              - `"always_ask"AlwaysAsk`
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+          - `JsonElement Type "edit"constant`
+
+        - `class BetaManagedAgentsReadToolConfig:`
+
+          Configuration for the read tool.
+
+          - `required Boolean Enabled`
+
+          - `JsonElement Name "read"constant`
+
+          - `required PermissionPolicy PermissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+          - `JsonElement Type "read"constant`
+
+        - `class BetaManagedAgentsWriteToolConfig:`
+
+          Configuration for the write tool.
+
+          - `required Boolean Enabled`
+
+          - `JsonElement Name "write"constant`
+
+          - `required PermissionPolicy PermissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+          - `JsonElement Type "write"constant`
+
+        - `class BetaManagedAgentsGlobToolConfig:`
+
+          Configuration for the glob tool.
+
+          - `required Boolean Enabled`
+
+          - `JsonElement Name "glob"constant`
+
+          - `required PermissionPolicy PermissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+          - `JsonElement Type "glob"constant`
+
+        - `class BetaManagedAgentsGrepToolConfig:`
+
+          Configuration for the grep tool.
+
+          - `required Boolean Enabled`
+
+          - `JsonElement Name "grep"constant`
+
+          - `required PermissionPolicy PermissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+          - `JsonElement Type "grep"constant`
+
+        - `class BetaManagedAgentsWebFetchToolConfig:`
+
+          Configuration for the web_fetch tool.
+
+          - `required Boolean Enabled`
+
+          - `JsonElement Name "web_fetch"constant`
+
+          - `required PermissionPolicy PermissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+          - `JsonElement Type "web_fetch"constant`
+
+          - `IReadOnlyList<string> AllowedDomains`
+
+          - `IReadOnlyList<string> BlockedDomains`
+
+          - `Int? MaxContentTokens`
+
+        - `class BetaManagedAgentsWebSearchToolConfig:`
+
+          Configuration for the web_search tool.
+
+          - `required Boolean Enabled`
+
+          - `JsonElement Name "web_search"constant`
+
+          - `required PermissionPolicy PermissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+          - `JsonElement Type "web_search"constant`
+
+          - `IReadOnlyList<string> AllowedDomains`
+
+          - `IReadOnlyList<string> BlockedDomains`
+
+          - `BetaManagedAgentsUserLocation? UserLocation`
+
+            Approximate user location for search result localization.
+
+            - `JsonElement Type "approximate"constant`
+
+              Location precision. Only "approximate" is supported.
+
+            - `string? City`
+
+              City name.
+
+            - `string? Country`
+
+              Two-letter ISO 3166-1 country code, uppercase.
+
+            - `string? Region`
+
+              Region or state name.
+
+            - `string? Timezone`
+
+              IANA timezone identifier, e.g. "America/Los_Angeles".
 
       - `required BetaManagedAgentsAgentToolsetDefaultConfig DefaultConfig`
 
@@ -47191,7 +48362,8 @@ Console.WriteLine(betaManagedAgentsAgent);
           "name": "bash",
           "permission_policy": {
             "type": "always_allow"
-          }
+          },
+          "type": "bash"
         }
       ],
       "default_config": {
@@ -47517,47 +48689,223 @@ Archive Agent
 
       - `required IReadOnlyList<BetaManagedAgentsAgentToolConfig> Configs`
 
-        - `required Boolean Enabled`
+        - `class BetaManagedAgentsBashToolConfig:`
 
-        - `required Name Name`
+          Configuration for the bash tool.
 
-          Built-in agent tool identifier.
+          - `required Boolean Enabled`
 
-          - `"bash"Bash`
+          - `JsonElement Name "bash"constant`
 
-          - `"edit"Edit`
+          - `required PermissionPolicy PermissionPolicy`
 
-          - `"read"Read`
+            Permission policy for tool execution.
 
-          - `"write"Write`
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
 
-          - `"glob"Glob`
+              Tool calls are automatically approved without user confirmation.
 
-          - `"grep"Grep`
+              - `required Type Type`
 
-          - `"web_fetch"WebFetch`
+                - `"always_allow"AlwaysAllow`
 
-          - `"web_search"WebSearch`
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
 
-        - `required PermissionPolicy PermissionPolicy`
+              Tool calls require user confirmation before execution.
 
-          Permission policy for tool execution.
+              - `required Type Type`
 
-          - `class BetaManagedAgentsAlwaysAllowPolicy:`
+                - `"always_ask"AlwaysAsk`
 
-            Tool calls are automatically approved without user confirmation.
+          - `JsonElement Type "bash"constant`
 
-            - `required Type Type`
+        - `class BetaManagedAgentsEditToolConfig:`
 
-              - `"always_allow"AlwaysAllow`
+          Configuration for the edit tool.
 
-          - `class BetaManagedAgentsAlwaysAskPolicy:`
+          - `required Boolean Enabled`
 
-            Tool calls require user confirmation before execution.
+          - `JsonElement Name "edit"constant`
 
-            - `required Type Type`
+          - `required PermissionPolicy PermissionPolicy`
 
-              - `"always_ask"AlwaysAsk`
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+          - `JsonElement Type "edit"constant`
+
+        - `class BetaManagedAgentsReadToolConfig:`
+
+          Configuration for the read tool.
+
+          - `required Boolean Enabled`
+
+          - `JsonElement Name "read"constant`
+
+          - `required PermissionPolicy PermissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+          - `JsonElement Type "read"constant`
+
+        - `class BetaManagedAgentsWriteToolConfig:`
+
+          Configuration for the write tool.
+
+          - `required Boolean Enabled`
+
+          - `JsonElement Name "write"constant`
+
+          - `required PermissionPolicy PermissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+          - `JsonElement Type "write"constant`
+
+        - `class BetaManagedAgentsGlobToolConfig:`
+
+          Configuration for the glob tool.
+
+          - `required Boolean Enabled`
+
+          - `JsonElement Name "glob"constant`
+
+          - `required PermissionPolicy PermissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+          - `JsonElement Type "glob"constant`
+
+        - `class BetaManagedAgentsGrepToolConfig:`
+
+          Configuration for the grep tool.
+
+          - `required Boolean Enabled`
+
+          - `JsonElement Name "grep"constant`
+
+          - `required PermissionPolicy PermissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+          - `JsonElement Type "grep"constant`
+
+        - `class BetaManagedAgentsWebFetchToolConfig:`
+
+          Configuration for the web_fetch tool.
+
+          - `required Boolean Enabled`
+
+          - `JsonElement Name "web_fetch"constant`
+
+          - `required PermissionPolicy PermissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+          - `JsonElement Type "web_fetch"constant`
+
+          - `IReadOnlyList<string> AllowedDomains`
+
+          - `IReadOnlyList<string> BlockedDomains`
+
+          - `Int? MaxContentTokens`
+
+        - `class BetaManagedAgentsWebSearchToolConfig:`
+
+          Configuration for the web_search tool.
+
+          - `required Boolean Enabled`
+
+          - `JsonElement Name "web_search"constant`
+
+          - `required PermissionPolicy PermissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+          - `JsonElement Type "web_search"constant`
+
+          - `IReadOnlyList<string> AllowedDomains`
+
+          - `IReadOnlyList<string> BlockedDomains`
+
+          - `BetaManagedAgentsUserLocation? UserLocation`
+
+            Approximate user location for search result localization.
+
+            - `JsonElement Type "approximate"constant`
+
+              Location precision. Only "approximate" is supported.
+
+            - `string? City`
+
+              City name.
+
+            - `string? Country`
+
+              Two-letter ISO 3166-1 country code, uppercase.
+
+            - `string? Region`
+
+              Region or state name.
+
+            - `string? Timezone`
+
+              IANA timezone identifier, e.g. "America/Los_Angeles".
 
       - `required BetaManagedAgentsAgentToolsetDefaultConfig DefaultConfig`
 
@@ -47730,7 +49078,8 @@ Console.WriteLine(betaManagedAgentsAgent);
           "name": "bash",
           "permission_policy": {
             "type": "always_allow"
-          }
+          },
+          "type": "bash"
         }
       ],
       "default_config": {
@@ -47984,47 +49333,223 @@ Console.WriteLine(betaManagedAgentsAgent);
 
       - `required IReadOnlyList<BetaManagedAgentsAgentToolConfig> Configs`
 
-        - `required Boolean Enabled`
+        - `class BetaManagedAgentsBashToolConfig:`
 
-        - `required Name Name`
+          Configuration for the bash tool.
 
-          Built-in agent tool identifier.
+          - `required Boolean Enabled`
 
-          - `"bash"Bash`
+          - `JsonElement Name "bash"constant`
 
-          - `"edit"Edit`
+          - `required PermissionPolicy PermissionPolicy`
 
-          - `"read"Read`
+            Permission policy for tool execution.
 
-          - `"write"Write`
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
 
-          - `"glob"Glob`
+              Tool calls are automatically approved without user confirmation.
 
-          - `"grep"Grep`
+              - `required Type Type`
 
-          - `"web_fetch"WebFetch`
+                - `"always_allow"AlwaysAllow`
 
-          - `"web_search"WebSearch`
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
 
-        - `required PermissionPolicy PermissionPolicy`
+              Tool calls require user confirmation before execution.
 
-          Permission policy for tool execution.
+              - `required Type Type`
 
-          - `class BetaManagedAgentsAlwaysAllowPolicy:`
+                - `"always_ask"AlwaysAsk`
 
-            Tool calls are automatically approved without user confirmation.
+          - `JsonElement Type "bash"constant`
 
-            - `required Type Type`
+        - `class BetaManagedAgentsEditToolConfig:`
 
-              - `"always_allow"AlwaysAllow`
+          Configuration for the edit tool.
 
-          - `class BetaManagedAgentsAlwaysAskPolicy:`
+          - `required Boolean Enabled`
 
-            Tool calls require user confirmation before execution.
+          - `JsonElement Name "edit"constant`
 
-            - `required Type Type`
+          - `required PermissionPolicy PermissionPolicy`
 
-              - `"always_ask"AlwaysAsk`
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+          - `JsonElement Type "edit"constant`
+
+        - `class BetaManagedAgentsReadToolConfig:`
+
+          Configuration for the read tool.
+
+          - `required Boolean Enabled`
+
+          - `JsonElement Name "read"constant`
+
+          - `required PermissionPolicy PermissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+          - `JsonElement Type "read"constant`
+
+        - `class BetaManagedAgentsWriteToolConfig:`
+
+          Configuration for the write tool.
+
+          - `required Boolean Enabled`
+
+          - `JsonElement Name "write"constant`
+
+          - `required PermissionPolicy PermissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+          - `JsonElement Type "write"constant`
+
+        - `class BetaManagedAgentsGlobToolConfig:`
+
+          Configuration for the glob tool.
+
+          - `required Boolean Enabled`
+
+          - `JsonElement Name "glob"constant`
+
+          - `required PermissionPolicy PermissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+          - `JsonElement Type "glob"constant`
+
+        - `class BetaManagedAgentsGrepToolConfig:`
+
+          Configuration for the grep tool.
+
+          - `required Boolean Enabled`
+
+          - `JsonElement Name "grep"constant`
+
+          - `required PermissionPolicy PermissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+          - `JsonElement Type "grep"constant`
+
+        - `class BetaManagedAgentsWebFetchToolConfig:`
+
+          Configuration for the web_fetch tool.
+
+          - `required Boolean Enabled`
+
+          - `JsonElement Name "web_fetch"constant`
+
+          - `required PermissionPolicy PermissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+          - `JsonElement Type "web_fetch"constant`
+
+          - `IReadOnlyList<string> AllowedDomains`
+
+          - `IReadOnlyList<string> BlockedDomains`
+
+          - `Int? MaxContentTokens`
+
+        - `class BetaManagedAgentsWebSearchToolConfig:`
+
+          Configuration for the web_search tool.
+
+          - `required Boolean Enabled`
+
+          - `JsonElement Name "web_search"constant`
+
+          - `required PermissionPolicy PermissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+          - `JsonElement Type "web_search"constant`
+
+          - `IReadOnlyList<string> AllowedDomains`
+
+          - `IReadOnlyList<string> BlockedDomains`
+
+          - `BetaManagedAgentsUserLocation? UserLocation`
+
+            Approximate user location for search result localization.
+
+            - `JsonElement Type "approximate"constant`
+
+              Location precision. Only "approximate" is supported.
+
+            - `string? City`
+
+              City name.
+
+            - `string? Country`
+
+              Two-letter ISO 3166-1 country code, uppercase.
+
+            - `string? Region`
+
+              Region or state name.
+
+            - `string? Timezone`
+
+              IANA timezone identifier, e.g. "America/Los_Angeles".
 
       - `required BetaManagedAgentsAgentToolsetDefaultConfig DefaultConfig`
 
@@ -48142,101 +49667,509 @@ Console.WriteLine(betaManagedAgentsAgent);
 
 ### Beta Managed Agents Agent Tool Config
 
-- `class BetaManagedAgentsAgentToolConfig:`
+- `class BetaManagedAgentsAgentToolConfig: A class that can be one of several variants.union`
 
   Configuration for a specific agent tool.
 
-  - `required Boolean Enabled`
+  - `class BetaManagedAgentsBashToolConfig:`
 
-  - `required Name Name`
+    Configuration for the bash tool.
 
-    Built-in agent tool identifier.
+    - `required Boolean Enabled`
 
-    - `"bash"Bash`
+    - `JsonElement Name "bash"constant`
 
-    - `"edit"Edit`
+    - `required PermissionPolicy PermissionPolicy`
 
-    - `"read"Read`
+      Permission policy for tool execution.
 
-    - `"write"Write`
+      - `class BetaManagedAgentsAlwaysAllowPolicy:`
 
-    - `"glob"Glob`
+        Tool calls are automatically approved without user confirmation.
 
-    - `"grep"Grep`
+        - `required Type Type`
 
-    - `"web_fetch"WebFetch`
+          - `"always_allow"AlwaysAllow`
 
-    - `"web_search"WebSearch`
+      - `class BetaManagedAgentsAlwaysAskPolicy:`
 
-  - `required PermissionPolicy PermissionPolicy`
+        Tool calls require user confirmation before execution.
 
-    Permission policy for tool execution.
+        - `required Type Type`
 
-    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+          - `"always_ask"AlwaysAsk`
 
-      Tool calls are automatically approved without user confirmation.
+    - `JsonElement Type "bash"constant`
 
-      - `required Type Type`
+  - `class BetaManagedAgentsEditToolConfig:`
 
-        - `"always_allow"AlwaysAllow`
+    Configuration for the edit tool.
 
-    - `class BetaManagedAgentsAlwaysAskPolicy:`
+    - `required Boolean Enabled`
 
-      Tool calls require user confirmation before execution.
+    - `JsonElement Name "edit"constant`
 
-      - `required Type Type`
+    - `required PermissionPolicy PermissionPolicy`
 
-        - `"always_ask"AlwaysAsk`
+      Permission policy for tool execution.
+
+      - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+        Tool calls are automatically approved without user confirmation.
+
+      - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+        Tool calls require user confirmation before execution.
+
+    - `JsonElement Type "edit"constant`
+
+  - `class BetaManagedAgentsReadToolConfig:`
+
+    Configuration for the read tool.
+
+    - `required Boolean Enabled`
+
+    - `JsonElement Name "read"constant`
+
+    - `required PermissionPolicy PermissionPolicy`
+
+      Permission policy for tool execution.
+
+      - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+        Tool calls are automatically approved without user confirmation.
+
+      - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+        Tool calls require user confirmation before execution.
+
+    - `JsonElement Type "read"constant`
+
+  - `class BetaManagedAgentsWriteToolConfig:`
+
+    Configuration for the write tool.
+
+    - `required Boolean Enabled`
+
+    - `JsonElement Name "write"constant`
+
+    - `required PermissionPolicy PermissionPolicy`
+
+      Permission policy for tool execution.
+
+      - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+        Tool calls are automatically approved without user confirmation.
+
+      - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+        Tool calls require user confirmation before execution.
+
+    - `JsonElement Type "write"constant`
+
+  - `class BetaManagedAgentsGlobToolConfig:`
+
+    Configuration for the glob tool.
+
+    - `required Boolean Enabled`
+
+    - `JsonElement Name "glob"constant`
+
+    - `required PermissionPolicy PermissionPolicy`
+
+      Permission policy for tool execution.
+
+      - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+        Tool calls are automatically approved without user confirmation.
+
+      - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+        Tool calls require user confirmation before execution.
+
+    - `JsonElement Type "glob"constant`
+
+  - `class BetaManagedAgentsGrepToolConfig:`
+
+    Configuration for the grep tool.
+
+    - `required Boolean Enabled`
+
+    - `JsonElement Name "grep"constant`
+
+    - `required PermissionPolicy PermissionPolicy`
+
+      Permission policy for tool execution.
+
+      - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+        Tool calls are automatically approved without user confirmation.
+
+      - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+        Tool calls require user confirmation before execution.
+
+    - `JsonElement Type "grep"constant`
+
+  - `class BetaManagedAgentsWebFetchToolConfig:`
+
+    Configuration for the web_fetch tool.
+
+    - `required Boolean Enabled`
+
+    - `JsonElement Name "web_fetch"constant`
+
+    - `required PermissionPolicy PermissionPolicy`
+
+      Permission policy for tool execution.
+
+      - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+        Tool calls are automatically approved without user confirmation.
+
+      - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+        Tool calls require user confirmation before execution.
+
+    - `JsonElement Type "web_fetch"constant`
+
+    - `IReadOnlyList<string> AllowedDomains`
+
+    - `IReadOnlyList<string> BlockedDomains`
+
+    - `Int? MaxContentTokens`
+
+  - `class BetaManagedAgentsWebSearchToolConfig:`
+
+    Configuration for the web_search tool.
+
+    - `required Boolean Enabled`
+
+    - `JsonElement Name "web_search"constant`
+
+    - `required PermissionPolicy PermissionPolicy`
+
+      Permission policy for tool execution.
+
+      - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+        Tool calls are automatically approved without user confirmation.
+
+      - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+        Tool calls require user confirmation before execution.
+
+    - `JsonElement Type "web_search"constant`
+
+    - `IReadOnlyList<string> AllowedDomains`
+
+    - `IReadOnlyList<string> BlockedDomains`
+
+    - `BetaManagedAgentsUserLocation? UserLocation`
+
+      Approximate user location for search result localization.
+
+      - `JsonElement Type "approximate"constant`
+
+        Location precision. Only "approximate" is supported.
+
+      - `string? City`
+
+        City name.
+
+      - `string? Country`
+
+        Two-letter ISO 3166-1 country code, uppercase.
+
+      - `string? Region`
+
+        Region or state name.
+
+      - `string? Timezone`
+
+        IANA timezone identifier, e.g. "America/Los_Angeles".
 
 ### Beta Managed Agents Agent Tool Config Params
 
-- `class BetaManagedAgentsAgentToolConfigParams:`
+- `class BetaManagedAgentsAgentToolConfigParams: A class that can be one of several variants.union`
 
   Configuration override for a specific tool within a toolset.
 
-  - `required Name Name`
+  - `class BetaManagedAgentsBashToolConfigParams:`
 
-    Built-in agent tool identifier.
+    Configuration override for the bash tool.
 
-    - `"bash"Bash`
+    - `JsonElement Name "bash"constant`
 
-    - `"edit"Edit`
+      Must be "bash".
 
-    - `"read"Read`
+    - `Boolean? Enabled`
 
-    - `"write"Write`
+      Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-    - `"glob"Glob`
+    - `PermissionPolicy? PermissionPolicy`
 
-    - `"grep"Grep`
+      Permission policy for tool execution.
 
-    - `"web_fetch"WebFetch`
+      - `class BetaManagedAgentsAlwaysAllowPolicy:`
 
-    - `"web_search"WebSearch`
+        Tool calls are automatically approved without user confirmation.
 
-  - `Boolean? Enabled`
+        - `required Type Type`
 
-    Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+          - `"always_allow"AlwaysAllow`
 
-  - `PermissionPolicy? PermissionPolicy`
+      - `class BetaManagedAgentsAlwaysAskPolicy:`
 
-    Permission policy for tool execution.
+        Tool calls require user confirmation before execution.
 
-    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+        - `required Type Type`
 
-      Tool calls are automatically approved without user confirmation.
+          - `"always_ask"AlwaysAsk`
 
-      - `required Type Type`
+    - `Type Type`
 
-        - `"always_allow"AlwaysAllow`
+      - `"bash"Bash`
 
-    - `class BetaManagedAgentsAlwaysAskPolicy:`
+  - `class BetaManagedAgentsEditToolConfigParams:`
 
-      Tool calls require user confirmation before execution.
+    Configuration override for the edit tool.
 
-      - `required Type Type`
+    - `JsonElement Name "edit"constant`
 
-        - `"always_ask"AlwaysAsk`
+      Must be "edit".
+
+    - `Boolean? Enabled`
+
+      Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+
+    - `PermissionPolicy? PermissionPolicy`
+
+      Permission policy for tool execution.
+
+      - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+        Tool calls are automatically approved without user confirmation.
+
+      - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+        Tool calls require user confirmation before execution.
+
+    - `Type Type`
+
+      - `"edit"Edit`
+
+  - `class BetaManagedAgentsReadToolConfigParams:`
+
+    Configuration override for the read tool.
+
+    - `JsonElement Name "read"constant`
+
+      Must be "read".
+
+    - `Boolean? Enabled`
+
+      Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+
+    - `PermissionPolicy? PermissionPolicy`
+
+      Permission policy for tool execution.
+
+      - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+        Tool calls are automatically approved without user confirmation.
+
+      - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+        Tool calls require user confirmation before execution.
+
+    - `Type Type`
+
+      - `"read"Read`
+
+  - `class BetaManagedAgentsWriteToolConfigParams:`
+
+    Configuration override for the write tool.
+
+    - `JsonElement Name "write"constant`
+
+      Must be "write".
+
+    - `Boolean? Enabled`
+
+      Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+
+    - `PermissionPolicy? PermissionPolicy`
+
+      Permission policy for tool execution.
+
+      - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+        Tool calls are automatically approved without user confirmation.
+
+      - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+        Tool calls require user confirmation before execution.
+
+    - `Type Type`
+
+      - `"write"Write`
+
+  - `class BetaManagedAgentsGlobToolConfigParams:`
+
+    Configuration override for the glob tool.
+
+    - `JsonElement Name "glob"constant`
+
+      Must be "glob".
+
+    - `Boolean? Enabled`
+
+      Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+
+    - `PermissionPolicy? PermissionPolicy`
+
+      Permission policy for tool execution.
+
+      - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+        Tool calls are automatically approved without user confirmation.
+
+      - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+        Tool calls require user confirmation before execution.
+
+    - `Type Type`
+
+      - `"glob"Glob`
+
+  - `class BetaManagedAgentsGrepToolConfigParams:`
+
+    Configuration override for the grep tool.
+
+    - `JsonElement Name "grep"constant`
+
+      Must be "grep".
+
+    - `Boolean? Enabled`
+
+      Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+
+    - `PermissionPolicy? PermissionPolicy`
+
+      Permission policy for tool execution.
+
+      - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+        Tool calls are automatically approved without user confirmation.
+
+      - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+        Tool calls require user confirmation before execution.
+
+    - `Type Type`
+
+      - `"grep"Grep`
+
+  - `class BetaManagedAgentsWebFetchToolConfigParams:`
+
+    Configuration override for the web_fetch tool.
+
+    - `JsonElement Name "web_fetch"constant`
+
+      Must be "web_fetch".
+
+    - `IReadOnlyList<string> AllowedDomains`
+
+      Only fetch URLs whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "docs.example.com" (no scheme, port, or path). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with blocked_domains.
+
+    - `IReadOnlyList<string> BlockedDomains`
+
+      Never fetch URLs whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "ads.example.com" (no scheme, port, or path). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with allowed_domains.
+
+    - `Boolean? Enabled`
+
+      Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+
+    - `Int? MaxContentTokens`
+
+      Maximum number of tokens of fetched text content to include in context per call. Does not apply to binary content such as PDFs.
+
+    - `PermissionPolicy? PermissionPolicy`
+
+      Permission policy for tool execution.
+
+      - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+        Tool calls are automatically approved without user confirmation.
+
+      - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+        Tool calls require user confirmation before execution.
+
+    - `Type Type`
+
+      - `"web_fetch"WebFetch`
+
+  - `class BetaManagedAgentsWebSearchToolConfigParams:`
+
+    Configuration override for the web_search tool.
+
+    - `JsonElement Name "web_search"constant`
+
+      Must be "web_search".
+
+    - `IReadOnlyList<string> AllowedDomains`
+
+      Only return search results whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "docs.example.com" (no scheme or port; an optional path suffix is accepted). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with blocked_domains.
+
+    - `IReadOnlyList<string> BlockedDomains`
+
+      Never return search results whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "ads.example.com" (no scheme or port; an optional path suffix is accepted). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with allowed_domains.
+
+    - `Boolean? Enabled`
+
+      Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+
+    - `PermissionPolicy? PermissionPolicy`
+
+      Permission policy for tool execution.
+
+      - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+        Tool calls are automatically approved without user confirmation.
+
+      - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+        Tool calls require user confirmation before execution.
+
+    - `Type Type`
+
+      - `"web_search"WebSearch`
+
+    - `BetaManagedAgentsUserLocation? UserLocation`
+
+      Approximate user location for search result localization.
+
+      - `JsonElement Type "approximate"constant`
+
+        Location precision. Only "approximate" is supported.
+
+      - `string? City`
+
+        City name.
+
+      - `string? Country`
+
+        Two-letter ISO 3166-1 country code, uppercase.
+
+      - `string? Region`
+
+        Region or state name.
+
+      - `string? Timezone`
+
+        IANA timezone identifier, e.g. "America/Los_Angeles".
 
 ### Beta Managed Agents Agent Toolset Default Config
 
@@ -48302,47 +50235,223 @@ Console.WriteLine(betaManagedAgentsAgent);
 
   - `required IReadOnlyList<BetaManagedAgentsAgentToolConfig> Configs`
 
-    - `required Boolean Enabled`
+    - `class BetaManagedAgentsBashToolConfig:`
 
-    - `required Name Name`
+      Configuration for the bash tool.
 
-      Built-in agent tool identifier.
+      - `required Boolean Enabled`
 
-      - `"bash"Bash`
+      - `JsonElement Name "bash"constant`
 
-      - `"edit"Edit`
+      - `required PermissionPolicy PermissionPolicy`
 
-      - `"read"Read`
+        Permission policy for tool execution.
 
-      - `"write"Write`
+        - `class BetaManagedAgentsAlwaysAllowPolicy:`
 
-      - `"glob"Glob`
+          Tool calls are automatically approved without user confirmation.
 
-      - `"grep"Grep`
+          - `required Type Type`
 
-      - `"web_fetch"WebFetch`
+            - `"always_allow"AlwaysAllow`
 
-      - `"web_search"WebSearch`
+        - `class BetaManagedAgentsAlwaysAskPolicy:`
 
-    - `required PermissionPolicy PermissionPolicy`
+          Tool calls require user confirmation before execution.
 
-      Permission policy for tool execution.
+          - `required Type Type`
 
-      - `class BetaManagedAgentsAlwaysAllowPolicy:`
+            - `"always_ask"AlwaysAsk`
 
-        Tool calls are automatically approved without user confirmation.
+      - `JsonElement Type "bash"constant`
 
-        - `required Type Type`
+    - `class BetaManagedAgentsEditToolConfig:`
 
-          - `"always_allow"AlwaysAllow`
+      Configuration for the edit tool.
 
-      - `class BetaManagedAgentsAlwaysAskPolicy:`
+      - `required Boolean Enabled`
 
-        Tool calls require user confirmation before execution.
+      - `JsonElement Name "edit"constant`
 
-        - `required Type Type`
+      - `required PermissionPolicy PermissionPolicy`
 
-          - `"always_ask"AlwaysAsk`
+        Permission policy for tool execution.
+
+        - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+          Tool calls are automatically approved without user confirmation.
+
+        - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+          Tool calls require user confirmation before execution.
+
+      - `JsonElement Type "edit"constant`
+
+    - `class BetaManagedAgentsReadToolConfig:`
+
+      Configuration for the read tool.
+
+      - `required Boolean Enabled`
+
+      - `JsonElement Name "read"constant`
+
+      - `required PermissionPolicy PermissionPolicy`
+
+        Permission policy for tool execution.
+
+        - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+          Tool calls are automatically approved without user confirmation.
+
+        - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+          Tool calls require user confirmation before execution.
+
+      - `JsonElement Type "read"constant`
+
+    - `class BetaManagedAgentsWriteToolConfig:`
+
+      Configuration for the write tool.
+
+      - `required Boolean Enabled`
+
+      - `JsonElement Name "write"constant`
+
+      - `required PermissionPolicy PermissionPolicy`
+
+        Permission policy for tool execution.
+
+        - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+          Tool calls are automatically approved without user confirmation.
+
+        - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+          Tool calls require user confirmation before execution.
+
+      - `JsonElement Type "write"constant`
+
+    - `class BetaManagedAgentsGlobToolConfig:`
+
+      Configuration for the glob tool.
+
+      - `required Boolean Enabled`
+
+      - `JsonElement Name "glob"constant`
+
+      - `required PermissionPolicy PermissionPolicy`
+
+        Permission policy for tool execution.
+
+        - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+          Tool calls are automatically approved without user confirmation.
+
+        - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+          Tool calls require user confirmation before execution.
+
+      - `JsonElement Type "glob"constant`
+
+    - `class BetaManagedAgentsGrepToolConfig:`
+
+      Configuration for the grep tool.
+
+      - `required Boolean Enabled`
+
+      - `JsonElement Name "grep"constant`
+
+      - `required PermissionPolicy PermissionPolicy`
+
+        Permission policy for tool execution.
+
+        - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+          Tool calls are automatically approved without user confirmation.
+
+        - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+          Tool calls require user confirmation before execution.
+
+      - `JsonElement Type "grep"constant`
+
+    - `class BetaManagedAgentsWebFetchToolConfig:`
+
+      Configuration for the web_fetch tool.
+
+      - `required Boolean Enabled`
+
+      - `JsonElement Name "web_fetch"constant`
+
+      - `required PermissionPolicy PermissionPolicy`
+
+        Permission policy for tool execution.
+
+        - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+          Tool calls are automatically approved without user confirmation.
+
+        - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+          Tool calls require user confirmation before execution.
+
+      - `JsonElement Type "web_fetch"constant`
+
+      - `IReadOnlyList<string> AllowedDomains`
+
+      - `IReadOnlyList<string> BlockedDomains`
+
+      - `Int? MaxContentTokens`
+
+    - `class BetaManagedAgentsWebSearchToolConfig:`
+
+      Configuration for the web_search tool.
+
+      - `required Boolean Enabled`
+
+      - `JsonElement Name "web_search"constant`
+
+      - `required PermissionPolicy PermissionPolicy`
+
+        Permission policy for tool execution.
+
+        - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+          Tool calls are automatically approved without user confirmation.
+
+        - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+          Tool calls require user confirmation before execution.
+
+      - `JsonElement Type "web_search"constant`
+
+      - `IReadOnlyList<string> AllowedDomains`
+
+      - `IReadOnlyList<string> BlockedDomains`
+
+      - `BetaManagedAgentsUserLocation? UserLocation`
+
+        Approximate user location for search result localization.
+
+        - `JsonElement Type "approximate"constant`
+
+          Location precision. Only "approximate" is supported.
+
+        - `string? City`
+
+          City name.
+
+        - `string? Country`
+
+          Two-letter ISO 3166-1 country code, uppercase.
+
+        - `string? Region`
+
+          Region or state name.
+
+        - `string? Timezone`
+
+          IANA timezone identifier, e.g. "America/Los_Angeles".
 
   - `required BetaManagedAgentsAgentToolsetDefaultConfig DefaultConfig`
 
@@ -48463,49 +50572,281 @@ Console.WriteLine(betaManagedAgentsAgent);
 
     Per-tool configuration overrides.
 
-    - `required Name Name`
+    - `class BetaManagedAgentsBashToolConfigParams:`
 
-      Built-in agent tool identifier.
+      Configuration override for the bash tool.
 
-      - `"bash"Bash`
+      - `JsonElement Name "bash"constant`
 
-      - `"edit"Edit`
+        Must be "bash".
 
-      - `"read"Read`
+      - `Boolean? Enabled`
 
-      - `"write"Write`
+        Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-      - `"glob"Glob`
+      - `PermissionPolicy? PermissionPolicy`
 
-      - `"grep"Grep`
+        Permission policy for tool execution.
 
-      - `"web_fetch"WebFetch`
+        - `class BetaManagedAgentsAlwaysAllowPolicy:`
 
-      - `"web_search"WebSearch`
+          Tool calls are automatically approved without user confirmation.
 
-    - `Boolean? Enabled`
+          - `required Type Type`
 
-      Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+            - `"always_allow"AlwaysAllow`
 
-    - `PermissionPolicy? PermissionPolicy`
+        - `class BetaManagedAgentsAlwaysAskPolicy:`
 
-      Permission policy for tool execution.
+          Tool calls require user confirmation before execution.
 
-      - `class BetaManagedAgentsAlwaysAllowPolicy:`
+          - `required Type Type`
 
-        Tool calls are automatically approved without user confirmation.
+            - `"always_ask"AlwaysAsk`
 
-        - `required Type Type`
+      - `Type Type`
 
-          - `"always_allow"AlwaysAllow`
+        - `"bash"Bash`
 
-      - `class BetaManagedAgentsAlwaysAskPolicy:`
+    - `class BetaManagedAgentsEditToolConfigParams:`
 
-        Tool calls require user confirmation before execution.
+      Configuration override for the edit tool.
 
-        - `required Type Type`
+      - `JsonElement Name "edit"constant`
 
-          - `"always_ask"AlwaysAsk`
+        Must be "edit".
+
+      - `Boolean? Enabled`
+
+        Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+
+      - `PermissionPolicy? PermissionPolicy`
+
+        Permission policy for tool execution.
+
+        - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+          Tool calls are automatically approved without user confirmation.
+
+        - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+          Tool calls require user confirmation before execution.
+
+      - `Type Type`
+
+        - `"edit"Edit`
+
+    - `class BetaManagedAgentsReadToolConfigParams:`
+
+      Configuration override for the read tool.
+
+      - `JsonElement Name "read"constant`
+
+        Must be "read".
+
+      - `Boolean? Enabled`
+
+        Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+
+      - `PermissionPolicy? PermissionPolicy`
+
+        Permission policy for tool execution.
+
+        - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+          Tool calls are automatically approved without user confirmation.
+
+        - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+          Tool calls require user confirmation before execution.
+
+      - `Type Type`
+
+        - `"read"Read`
+
+    - `class BetaManagedAgentsWriteToolConfigParams:`
+
+      Configuration override for the write tool.
+
+      - `JsonElement Name "write"constant`
+
+        Must be "write".
+
+      - `Boolean? Enabled`
+
+        Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+
+      - `PermissionPolicy? PermissionPolicy`
+
+        Permission policy for tool execution.
+
+        - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+          Tool calls are automatically approved without user confirmation.
+
+        - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+          Tool calls require user confirmation before execution.
+
+      - `Type Type`
+
+        - `"write"Write`
+
+    - `class BetaManagedAgentsGlobToolConfigParams:`
+
+      Configuration override for the glob tool.
+
+      - `JsonElement Name "glob"constant`
+
+        Must be "glob".
+
+      - `Boolean? Enabled`
+
+        Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+
+      - `PermissionPolicy? PermissionPolicy`
+
+        Permission policy for tool execution.
+
+        - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+          Tool calls are automatically approved without user confirmation.
+
+        - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+          Tool calls require user confirmation before execution.
+
+      - `Type Type`
+
+        - `"glob"Glob`
+
+    - `class BetaManagedAgentsGrepToolConfigParams:`
+
+      Configuration override for the grep tool.
+
+      - `JsonElement Name "grep"constant`
+
+        Must be "grep".
+
+      - `Boolean? Enabled`
+
+        Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+
+      - `PermissionPolicy? PermissionPolicy`
+
+        Permission policy for tool execution.
+
+        - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+          Tool calls are automatically approved without user confirmation.
+
+        - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+          Tool calls require user confirmation before execution.
+
+      - `Type Type`
+
+        - `"grep"Grep`
+
+    - `class BetaManagedAgentsWebFetchToolConfigParams:`
+
+      Configuration override for the web_fetch tool.
+
+      - `JsonElement Name "web_fetch"constant`
+
+        Must be "web_fetch".
+
+      - `IReadOnlyList<string> AllowedDomains`
+
+        Only fetch URLs whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "docs.example.com" (no scheme, port, or path). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with blocked_domains.
+
+      - `IReadOnlyList<string> BlockedDomains`
+
+        Never fetch URLs whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "ads.example.com" (no scheme, port, or path). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with allowed_domains.
+
+      - `Boolean? Enabled`
+
+        Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+
+      - `Int? MaxContentTokens`
+
+        Maximum number of tokens of fetched text content to include in context per call. Does not apply to binary content such as PDFs.
+
+      - `PermissionPolicy? PermissionPolicy`
+
+        Permission policy for tool execution.
+
+        - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+          Tool calls are automatically approved without user confirmation.
+
+        - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+          Tool calls require user confirmation before execution.
+
+      - `Type Type`
+
+        - `"web_fetch"WebFetch`
+
+    - `class BetaManagedAgentsWebSearchToolConfigParams:`
+
+      Configuration override for the web_search tool.
+
+      - `JsonElement Name "web_search"constant`
+
+        Must be "web_search".
+
+      - `IReadOnlyList<string> AllowedDomains`
+
+        Only return search results whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "docs.example.com" (no scheme or port; an optional path suffix is accepted). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with blocked_domains.
+
+      - `IReadOnlyList<string> BlockedDomains`
+
+        Never return search results whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "ads.example.com" (no scheme or port; an optional path suffix is accepted). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with allowed_domains.
+
+      - `Boolean? Enabled`
+
+        Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+
+      - `PermissionPolicy? PermissionPolicy`
+
+        Permission policy for tool execution.
+
+        - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+          Tool calls are automatically approved without user confirmation.
+
+        - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+          Tool calls require user confirmation before execution.
+
+      - `Type Type`
+
+        - `"web_search"WebSearch`
+
+      - `BetaManagedAgentsUserLocation? UserLocation`
+
+        Approximate user location for search result localization.
+
+        - `JsonElement Type "approximate"constant`
+
+          Location precision. Only "approximate" is supported.
+
+        - `string? City`
+
+          City name.
+
+        - `string? Country`
+
+          Two-letter ISO 3166-1 country code, uppercase.
+
+        - `string? Region`
+
+          Region or state name.
+
+        - `string? Timezone`
+
+          IANA timezone identifier, e.g. "America/Los_Angeles".
 
   - `BetaManagedAgentsAgentToolsetDefaultConfigParams? DefaultConfig`
 
@@ -48612,6 +50953,76 @@ Console.WriteLine(betaManagedAgentsAgent);
 
     Version to pin. Defaults to latest if omitted.
 
+### Beta Managed Agents Bash Tool Config
+
+- `class BetaManagedAgentsBashToolConfig:`
+
+  Configuration for the bash tool.
+
+  - `required Boolean Enabled`
+
+  - `JsonElement Name "bash"constant`
+
+  - `required PermissionPolicy PermissionPolicy`
+
+    Permission policy for tool execution.
+
+    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+      Tool calls are automatically approved without user confirmation.
+
+      - `required Type Type`
+
+        - `"always_allow"AlwaysAllow`
+
+    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+      Tool calls require user confirmation before execution.
+
+      - `required Type Type`
+
+        - `"always_ask"AlwaysAsk`
+
+  - `JsonElement Type "bash"constant`
+
+### Beta Managed Agents Bash Tool Config Params
+
+- `class BetaManagedAgentsBashToolConfigParams:`
+
+  Configuration override for the bash tool.
+
+  - `JsonElement Name "bash"constant`
+
+    Must be "bash".
+
+  - `Boolean? Enabled`
+
+    Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+
+  - `PermissionPolicy? PermissionPolicy`
+
+    Permission policy for tool execution.
+
+    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+      Tool calls are automatically approved without user confirmation.
+
+      - `required Type Type`
+
+        - `"always_allow"AlwaysAllow`
+
+    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+      Tool calls require user confirmation before execution.
+
+      - `required Type Type`
+
+        - `"always_ask"AlwaysAsk`
+
+  - `Type Type`
+
+    - `"bash"Bash`
+
 ### Beta Managed Agents Custom Skill
 
 - `class BetaManagedAgentsCustomSkill:`
@@ -48708,6 +51119,76 @@ Console.WriteLine(betaManagedAgentsAgent);
 
     - `"custom"Custom`
 
+### Beta Managed Agents Edit Tool Config
+
+- `class BetaManagedAgentsEditToolConfig:`
+
+  Configuration for the edit tool.
+
+  - `required Boolean Enabled`
+
+  - `JsonElement Name "edit"constant`
+
+  - `required PermissionPolicy PermissionPolicy`
+
+    Permission policy for tool execution.
+
+    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+      Tool calls are automatically approved without user confirmation.
+
+      - `required Type Type`
+
+        - `"always_allow"AlwaysAllow`
+
+    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+      Tool calls require user confirmation before execution.
+
+      - `required Type Type`
+
+        - `"always_ask"AlwaysAsk`
+
+  - `JsonElement Type "edit"constant`
+
+### Beta Managed Agents Edit Tool Config Params
+
+- `class BetaManagedAgentsEditToolConfigParams:`
+
+  Configuration override for the edit tool.
+
+  - `JsonElement Name "edit"constant`
+
+    Must be "edit".
+
+  - `Boolean? Enabled`
+
+    Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+
+  - `PermissionPolicy? PermissionPolicy`
+
+    Permission policy for tool execution.
+
+    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+      Tool calls are automatically approved without user confirmation.
+
+      - `required Type Type`
+
+        - `"always_allow"AlwaysAllow`
+
+    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+      Tool calls require user confirmation before execution.
+
+      - `required Type Type`
+
+        - `"always_ask"AlwaysAsk`
+
+  - `Type Type`
+
+    - `"edit"Edit`
+
 ### Beta Managed Agents Effort High
 
 - `class BetaManagedAgentsEffortHigh:`
@@ -48757,6 +51238,146 @@ Console.WriteLine(betaManagedAgentsAgent);
   - `required Type Type`
 
     - `"xhigh"Xhigh`
+
+### Beta Managed Agents Glob Tool Config
+
+- `class BetaManagedAgentsGlobToolConfig:`
+
+  Configuration for the glob tool.
+
+  - `required Boolean Enabled`
+
+  - `JsonElement Name "glob"constant`
+
+  - `required PermissionPolicy PermissionPolicy`
+
+    Permission policy for tool execution.
+
+    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+      Tool calls are automatically approved without user confirmation.
+
+      - `required Type Type`
+
+        - `"always_allow"AlwaysAllow`
+
+    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+      Tool calls require user confirmation before execution.
+
+      - `required Type Type`
+
+        - `"always_ask"AlwaysAsk`
+
+  - `JsonElement Type "glob"constant`
+
+### Beta Managed Agents Glob Tool Config Params
+
+- `class BetaManagedAgentsGlobToolConfigParams:`
+
+  Configuration override for the glob tool.
+
+  - `JsonElement Name "glob"constant`
+
+    Must be "glob".
+
+  - `Boolean? Enabled`
+
+    Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+
+  - `PermissionPolicy? PermissionPolicy`
+
+    Permission policy for tool execution.
+
+    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+      Tool calls are automatically approved without user confirmation.
+
+      - `required Type Type`
+
+        - `"always_allow"AlwaysAllow`
+
+    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+      Tool calls require user confirmation before execution.
+
+      - `required Type Type`
+
+        - `"always_ask"AlwaysAsk`
+
+  - `Type Type`
+
+    - `"glob"Glob`
+
+### Beta Managed Agents Grep Tool Config
+
+- `class BetaManagedAgentsGrepToolConfig:`
+
+  Configuration for the grep tool.
+
+  - `required Boolean Enabled`
+
+  - `JsonElement Name "grep"constant`
+
+  - `required PermissionPolicy PermissionPolicy`
+
+    Permission policy for tool execution.
+
+    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+      Tool calls are automatically approved without user confirmation.
+
+      - `required Type Type`
+
+        - `"always_allow"AlwaysAllow`
+
+    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+      Tool calls require user confirmation before execution.
+
+      - `required Type Type`
+
+        - `"always_ask"AlwaysAsk`
+
+  - `JsonElement Type "grep"constant`
+
+### Beta Managed Agents Grep Tool Config Params
+
+- `class BetaManagedAgentsGrepToolConfigParams:`
+
+  Configuration override for the grep tool.
+
+  - `JsonElement Name "grep"constant`
+
+    Must be "grep".
+
+  - `Boolean? Enabled`
+
+    Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+
+  - `PermissionPolicy? PermissionPolicy`
+
+    Permission policy for tool execution.
+
+    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+      Tool calls are automatically approved without user confirmation.
+
+      - `required Type Type`
+
+        - `"always_allow"AlwaysAllow`
+
+    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+      Tool calls require user confirmation before execution.
+
+      - `required Type Type`
+
+        - `"always_ask"AlwaysAsk`
+
+  - `Type Type`
+
+    - `"grep"Grep`
 
 ### Beta Managed Agents MCP Server URL Definition
 
@@ -49368,6 +51989,76 @@ Console.WriteLine(betaManagedAgentsAgent);
 
     - `"self"Self`
 
+### Beta Managed Agents Read Tool Config
+
+- `class BetaManagedAgentsReadToolConfig:`
+
+  Configuration for the read tool.
+
+  - `required Boolean Enabled`
+
+  - `JsonElement Name "read"constant`
+
+  - `required PermissionPolicy PermissionPolicy`
+
+    Permission policy for tool execution.
+
+    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+      Tool calls are automatically approved without user confirmation.
+
+      - `required Type Type`
+
+        - `"always_allow"AlwaysAllow`
+
+    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+      Tool calls require user confirmation before execution.
+
+      - `required Type Type`
+
+        - `"always_ask"AlwaysAsk`
+
+  - `JsonElement Type "read"constant`
+
+### Beta Managed Agents Read Tool Config Params
+
+- `class BetaManagedAgentsReadToolConfigParams:`
+
+  Configuration override for the read tool.
+
+  - `JsonElement Name "read"constant`
+
+    Must be "read".
+
+  - `Boolean? Enabled`
+
+    Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+
+  - `PermissionPolicy? PermissionPolicy`
+
+    Permission policy for tool execution.
+
+    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+      Tool calls are automatically approved without user confirmation.
+
+      - `required Type Type`
+
+        - `"always_allow"AlwaysAllow`
+
+    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+      Tool calls require user confirmation before execution.
+
+      - `required Type Type`
+
+        - `"always_ask"AlwaysAsk`
+
+  - `Type Type`
+
+    - `"read"Read`
+
 ### Beta Managed Agents Session Thread Agent
 
 - `class BetaManagedAgentsSessionThreadAgent:`
@@ -49542,47 +52233,223 @@ Console.WriteLine(betaManagedAgentsAgent);
 
       - `required IReadOnlyList<BetaManagedAgentsAgentToolConfig> Configs`
 
-        - `required Boolean Enabled`
+        - `class BetaManagedAgentsBashToolConfig:`
 
-        - `required Name Name`
+          Configuration for the bash tool.
 
-          Built-in agent tool identifier.
+          - `required Boolean Enabled`
 
-          - `"bash"Bash`
+          - `JsonElement Name "bash"constant`
 
-          - `"edit"Edit`
+          - `required PermissionPolicy PermissionPolicy`
 
-          - `"read"Read`
+            Permission policy for tool execution.
 
-          - `"write"Write`
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
 
-          - `"glob"Glob`
+              Tool calls are automatically approved without user confirmation.
 
-          - `"grep"Grep`
+              - `required Type Type`
 
-          - `"web_fetch"WebFetch`
+                - `"always_allow"AlwaysAllow`
 
-          - `"web_search"WebSearch`
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
 
-        - `required PermissionPolicy PermissionPolicy`
+              Tool calls require user confirmation before execution.
 
-          Permission policy for tool execution.
+              - `required Type Type`
 
-          - `class BetaManagedAgentsAlwaysAllowPolicy:`
+                - `"always_ask"AlwaysAsk`
 
-            Tool calls are automatically approved without user confirmation.
+          - `JsonElement Type "bash"constant`
 
-            - `required Type Type`
+        - `class BetaManagedAgentsEditToolConfig:`
 
-              - `"always_allow"AlwaysAllow`
+          Configuration for the edit tool.
 
-          - `class BetaManagedAgentsAlwaysAskPolicy:`
+          - `required Boolean Enabled`
 
-            Tool calls require user confirmation before execution.
+          - `JsonElement Name "edit"constant`
 
-            - `required Type Type`
+          - `required PermissionPolicy PermissionPolicy`
 
-              - `"always_ask"AlwaysAsk`
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+          - `JsonElement Type "edit"constant`
+
+        - `class BetaManagedAgentsReadToolConfig:`
+
+          Configuration for the read tool.
+
+          - `required Boolean Enabled`
+
+          - `JsonElement Name "read"constant`
+
+          - `required PermissionPolicy PermissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+          - `JsonElement Type "read"constant`
+
+        - `class BetaManagedAgentsWriteToolConfig:`
+
+          Configuration for the write tool.
+
+          - `required Boolean Enabled`
+
+          - `JsonElement Name "write"constant`
+
+          - `required PermissionPolicy PermissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+          - `JsonElement Type "write"constant`
+
+        - `class BetaManagedAgentsGlobToolConfig:`
+
+          Configuration for the glob tool.
+
+          - `required Boolean Enabled`
+
+          - `JsonElement Name "glob"constant`
+
+          - `required PermissionPolicy PermissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+          - `JsonElement Type "glob"constant`
+
+        - `class BetaManagedAgentsGrepToolConfig:`
+
+          Configuration for the grep tool.
+
+          - `required Boolean Enabled`
+
+          - `JsonElement Name "grep"constant`
+
+          - `required PermissionPolicy PermissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+          - `JsonElement Type "grep"constant`
+
+        - `class BetaManagedAgentsWebFetchToolConfig:`
+
+          Configuration for the web_fetch tool.
+
+          - `required Boolean Enabled`
+
+          - `JsonElement Name "web_fetch"constant`
+
+          - `required PermissionPolicy PermissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+          - `JsonElement Type "web_fetch"constant`
+
+          - `IReadOnlyList<string> AllowedDomains`
+
+          - `IReadOnlyList<string> BlockedDomains`
+
+          - `Int? MaxContentTokens`
+
+        - `class BetaManagedAgentsWebSearchToolConfig:`
+
+          Configuration for the web_search tool.
+
+          - `required Boolean Enabled`
+
+          - `JsonElement Name "web_search"constant`
+
+          - `required PermissionPolicy PermissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+          - `JsonElement Type "web_search"constant`
+
+          - `IReadOnlyList<string> AllowedDomains`
+
+          - `IReadOnlyList<string> BlockedDomains`
+
+          - `BetaManagedAgentsUserLocation? UserLocation`
+
+            Approximate user location for search result localization.
+
+            - `JsonElement Type "approximate"constant`
+
+              Location precision. Only "approximate" is supported.
+
+            - `string? City`
+
+              City name.
+
+            - `string? Country`
+
+              Two-letter ISO 3166-1 country code, uppercase.
+
+            - `string? Region`
+
+              Region or state name.
+
+            - `string? Timezone`
+
+              IANA timezone identifier, e.g. "America/Los_Angeles".
 
       - `required BetaManagedAgentsAgentToolsetDefaultConfig DefaultConfig`
 
@@ -49733,6 +52600,320 @@ Console.WriteLine(betaManagedAgentsAgent);
   - `required string Url`
 
     Endpoint URL for the MCP server.
+
+### Beta Managed Agents User Location
+
+- `class BetaManagedAgentsUserLocation:`
+
+  Approximate user location for search result localization.
+
+  - `JsonElement Type "approximate"constant`
+
+    Location precision. Only "approximate" is supported.
+
+  - `string? City`
+
+    City name.
+
+  - `string? Country`
+
+    Two-letter ISO 3166-1 country code, uppercase.
+
+  - `string? Region`
+
+    Region or state name.
+
+  - `string? Timezone`
+
+    IANA timezone identifier, e.g. "America/Los_Angeles".
+
+### Beta Managed Agents Web Fetch Tool Config
+
+- `class BetaManagedAgentsWebFetchToolConfig:`
+
+  Configuration for the web_fetch tool.
+
+  - `required Boolean Enabled`
+
+  - `JsonElement Name "web_fetch"constant`
+
+  - `required PermissionPolicy PermissionPolicy`
+
+    Permission policy for tool execution.
+
+    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+      Tool calls are automatically approved without user confirmation.
+
+      - `required Type Type`
+
+        - `"always_allow"AlwaysAllow`
+
+    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+      Tool calls require user confirmation before execution.
+
+      - `required Type Type`
+
+        - `"always_ask"AlwaysAsk`
+
+  - `JsonElement Type "web_fetch"constant`
+
+  - `IReadOnlyList<string> AllowedDomains`
+
+  - `IReadOnlyList<string> BlockedDomains`
+
+  - `Int? MaxContentTokens`
+
+### Beta Managed Agents Web Fetch Tool Config Params
+
+- `class BetaManagedAgentsWebFetchToolConfigParams:`
+
+  Configuration override for the web_fetch tool.
+
+  - `JsonElement Name "web_fetch"constant`
+
+    Must be "web_fetch".
+
+  - `IReadOnlyList<string> AllowedDomains`
+
+    Only fetch URLs whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "docs.example.com" (no scheme, port, or path). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with blocked_domains.
+
+  - `IReadOnlyList<string> BlockedDomains`
+
+    Never fetch URLs whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "ads.example.com" (no scheme, port, or path). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with allowed_domains.
+
+  - `Boolean? Enabled`
+
+    Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+
+  - `Int? MaxContentTokens`
+
+    Maximum number of tokens of fetched text content to include in context per call. Does not apply to binary content such as PDFs.
+
+  - `PermissionPolicy? PermissionPolicy`
+
+    Permission policy for tool execution.
+
+    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+      Tool calls are automatically approved without user confirmation.
+
+      - `required Type Type`
+
+        - `"always_allow"AlwaysAllow`
+
+    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+      Tool calls require user confirmation before execution.
+
+      - `required Type Type`
+
+        - `"always_ask"AlwaysAsk`
+
+  - `Type Type`
+
+    - `"web_fetch"WebFetch`
+
+### Beta Managed Agents Web Search Tool Config
+
+- `class BetaManagedAgentsWebSearchToolConfig:`
+
+  Configuration for the web_search tool.
+
+  - `required Boolean Enabled`
+
+  - `JsonElement Name "web_search"constant`
+
+  - `required PermissionPolicy PermissionPolicy`
+
+    Permission policy for tool execution.
+
+    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+      Tool calls are automatically approved without user confirmation.
+
+      - `required Type Type`
+
+        - `"always_allow"AlwaysAllow`
+
+    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+      Tool calls require user confirmation before execution.
+
+      - `required Type Type`
+
+        - `"always_ask"AlwaysAsk`
+
+  - `JsonElement Type "web_search"constant`
+
+  - `IReadOnlyList<string> AllowedDomains`
+
+  - `IReadOnlyList<string> BlockedDomains`
+
+  - `BetaManagedAgentsUserLocation? UserLocation`
+
+    Approximate user location for search result localization.
+
+    - `JsonElement Type "approximate"constant`
+
+      Location precision. Only "approximate" is supported.
+
+    - `string? City`
+
+      City name.
+
+    - `string? Country`
+
+      Two-letter ISO 3166-1 country code, uppercase.
+
+    - `string? Region`
+
+      Region or state name.
+
+    - `string? Timezone`
+
+      IANA timezone identifier, e.g. "America/Los_Angeles".
+
+### Beta Managed Agents Web Search Tool Config Params
+
+- `class BetaManagedAgentsWebSearchToolConfigParams:`
+
+  Configuration override for the web_search tool.
+
+  - `JsonElement Name "web_search"constant`
+
+    Must be "web_search".
+
+  - `IReadOnlyList<string> AllowedDomains`
+
+    Only return search results whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "docs.example.com" (no scheme or port; an optional path suffix is accepted). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with blocked_domains.
+
+  - `IReadOnlyList<string> BlockedDomains`
+
+    Never return search results whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "ads.example.com" (no scheme or port; an optional path suffix is accepted). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with allowed_domains.
+
+  - `Boolean? Enabled`
+
+    Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+
+  - `PermissionPolicy? PermissionPolicy`
+
+    Permission policy for tool execution.
+
+    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+      Tool calls are automatically approved without user confirmation.
+
+      - `required Type Type`
+
+        - `"always_allow"AlwaysAllow`
+
+    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+      Tool calls require user confirmation before execution.
+
+      - `required Type Type`
+
+        - `"always_ask"AlwaysAsk`
+
+  - `Type Type`
+
+    - `"web_search"WebSearch`
+
+  - `BetaManagedAgentsUserLocation? UserLocation`
+
+    Approximate user location for search result localization.
+
+    - `JsonElement Type "approximate"constant`
+
+      Location precision. Only "approximate" is supported.
+
+    - `string? City`
+
+      City name.
+
+    - `string? Country`
+
+      Two-letter ISO 3166-1 country code, uppercase.
+
+    - `string? Region`
+
+      Region or state name.
+
+    - `string? Timezone`
+
+      IANA timezone identifier, e.g. "America/Los_Angeles".
+
+### Beta Managed Agents Write Tool Config
+
+- `class BetaManagedAgentsWriteToolConfig:`
+
+  Configuration for the write tool.
+
+  - `required Boolean Enabled`
+
+  - `JsonElement Name "write"constant`
+
+  - `required PermissionPolicy PermissionPolicy`
+
+    Permission policy for tool execution.
+
+    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+      Tool calls are automatically approved without user confirmation.
+
+      - `required Type Type`
+
+        - `"always_allow"AlwaysAllow`
+
+    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+      Tool calls require user confirmation before execution.
+
+      - `required Type Type`
+
+        - `"always_ask"AlwaysAsk`
+
+  - `JsonElement Type "write"constant`
+
+### Beta Managed Agents Write Tool Config Params
+
+- `class BetaManagedAgentsWriteToolConfigParams:`
+
+  Configuration override for the write tool.
+
+  - `JsonElement Name "write"constant`
+
+    Must be "write".
+
+  - `Boolean? Enabled`
+
+    Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+
+  - `PermissionPolicy? PermissionPolicy`
+
+    Permission policy for tool execution.
+
+    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+      Tool calls are automatically approved without user confirmation.
+
+      - `required Type Type`
+
+        - `"always_allow"AlwaysAllow`
+
+    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+      Tool calls require user confirmation before execution.
+
+      - `required Type Type`
+
+        - `"always_ask"AlwaysAsk`
+
+  - `Type Type`
+
+    - `"write"Write`
 
 # Versions
 
@@ -50056,47 +53237,223 @@ List Agent Versions
 
         - `required IReadOnlyList<BetaManagedAgentsAgentToolConfig> Configs`
 
-          - `required Boolean Enabled`
+          - `class BetaManagedAgentsBashToolConfig:`
 
-          - `required Name Name`
+            Configuration for the bash tool.
 
-            Built-in agent tool identifier.
+            - `required Boolean Enabled`
 
-            - `"bash"Bash`
+            - `JsonElement Name "bash"constant`
 
-            - `"edit"Edit`
+            - `required PermissionPolicy PermissionPolicy`
 
-            - `"read"Read`
+              Permission policy for tool execution.
 
-            - `"write"Write`
+              - `class BetaManagedAgentsAlwaysAllowPolicy:`
 
-            - `"glob"Glob`
+                Tool calls are automatically approved without user confirmation.
 
-            - `"grep"Grep`
+                - `required Type Type`
 
-            - `"web_fetch"WebFetch`
+                  - `"always_allow"AlwaysAllow`
 
-            - `"web_search"WebSearch`
+              - `class BetaManagedAgentsAlwaysAskPolicy:`
 
-          - `required PermissionPolicy PermissionPolicy`
+                Tool calls require user confirmation before execution.
 
-            Permission policy for tool execution.
+                - `required Type Type`
 
-            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+                  - `"always_ask"AlwaysAsk`
 
-              Tool calls are automatically approved without user confirmation.
+            - `JsonElement Type "bash"constant`
 
-              - `required Type Type`
+          - `class BetaManagedAgentsEditToolConfig:`
 
-                - `"always_allow"AlwaysAllow`
+            Configuration for the edit tool.
 
-            - `class BetaManagedAgentsAlwaysAskPolicy:`
+            - `required Boolean Enabled`
 
-              Tool calls require user confirmation before execution.
+            - `JsonElement Name "edit"constant`
 
-              - `required Type Type`
+            - `required PermissionPolicy PermissionPolicy`
 
-                - `"always_ask"AlwaysAsk`
+              Permission policy for tool execution.
+
+              - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                Tool calls are automatically approved without user confirmation.
+
+              - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                Tool calls require user confirmation before execution.
+
+            - `JsonElement Type "edit"constant`
+
+          - `class BetaManagedAgentsReadToolConfig:`
+
+            Configuration for the read tool.
+
+            - `required Boolean Enabled`
+
+            - `JsonElement Name "read"constant`
+
+            - `required PermissionPolicy PermissionPolicy`
+
+              Permission policy for tool execution.
+
+              - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                Tool calls are automatically approved without user confirmation.
+
+              - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                Tool calls require user confirmation before execution.
+
+            - `JsonElement Type "read"constant`
+
+          - `class BetaManagedAgentsWriteToolConfig:`
+
+            Configuration for the write tool.
+
+            - `required Boolean Enabled`
+
+            - `JsonElement Name "write"constant`
+
+            - `required PermissionPolicy PermissionPolicy`
+
+              Permission policy for tool execution.
+
+              - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                Tool calls are automatically approved without user confirmation.
+
+              - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                Tool calls require user confirmation before execution.
+
+            - `JsonElement Type "write"constant`
+
+          - `class BetaManagedAgentsGlobToolConfig:`
+
+            Configuration for the glob tool.
+
+            - `required Boolean Enabled`
+
+            - `JsonElement Name "glob"constant`
+
+            - `required PermissionPolicy PermissionPolicy`
+
+              Permission policy for tool execution.
+
+              - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                Tool calls are automatically approved without user confirmation.
+
+              - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                Tool calls require user confirmation before execution.
+
+            - `JsonElement Type "glob"constant`
+
+          - `class BetaManagedAgentsGrepToolConfig:`
+
+            Configuration for the grep tool.
+
+            - `required Boolean Enabled`
+
+            - `JsonElement Name "grep"constant`
+
+            - `required PermissionPolicy PermissionPolicy`
+
+              Permission policy for tool execution.
+
+              - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                Tool calls are automatically approved without user confirmation.
+
+              - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                Tool calls require user confirmation before execution.
+
+            - `JsonElement Type "grep"constant`
+
+          - `class BetaManagedAgentsWebFetchToolConfig:`
+
+            Configuration for the web_fetch tool.
+
+            - `required Boolean Enabled`
+
+            - `JsonElement Name "web_fetch"constant`
+
+            - `required PermissionPolicy PermissionPolicy`
+
+              Permission policy for tool execution.
+
+              - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                Tool calls are automatically approved without user confirmation.
+
+              - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                Tool calls require user confirmation before execution.
+
+            - `JsonElement Type "web_fetch"constant`
+
+            - `IReadOnlyList<string> AllowedDomains`
+
+            - `IReadOnlyList<string> BlockedDomains`
+
+            - `Int? MaxContentTokens`
+
+          - `class BetaManagedAgentsWebSearchToolConfig:`
+
+            Configuration for the web_search tool.
+
+            - `required Boolean Enabled`
+
+            - `JsonElement Name "web_search"constant`
+
+            - `required PermissionPolicy PermissionPolicy`
+
+              Permission policy for tool execution.
+
+              - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                Tool calls are automatically approved without user confirmation.
+
+              - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                Tool calls require user confirmation before execution.
+
+            - `JsonElement Type "web_search"constant`
+
+            - `IReadOnlyList<string> AllowedDomains`
+
+            - `IReadOnlyList<string> BlockedDomains`
+
+            - `BetaManagedAgentsUserLocation? UserLocation`
+
+              Approximate user location for search result localization.
+
+              - `JsonElement Type "approximate"constant`
+
+                Location precision. Only "approximate" is supported.
+
+              - `string? City`
+
+                City name.
+
+              - `string? Country`
+
+                Two-letter ISO 3166-1 country code, uppercase.
+
+              - `string? Region`
+
+                Region or state name.
+
+              - `string? Timezone`
+
+                IANA timezone identifier, e.g. "America/Los_Angeles".
 
         - `required BetaManagedAgentsAgentToolsetDefaultConfig DefaultConfig`
 
@@ -50277,7 +53634,8 @@ await foreach (var item in page.Paginate())
               "name": "bash",
               "permission_policy": {
                 "type": "always_allow"
-              }
+              },
+              "type": "bash"
             }
           ],
           "default_config": {
@@ -54729,49 +58087,281 @@ Create Session
 
             Per-tool configuration overrides.
 
-            - `required Name Name`
+            - `class BetaManagedAgentsBashToolConfigParams:`
 
-              Built-in agent tool identifier.
+              Configuration override for the bash tool.
 
-              - `"bash"Bash`
+              - `JsonElement Name "bash"constant`
 
-              - `"edit"Edit`
+                Must be "bash".
 
-              - `"read"Read`
+              - `Boolean? Enabled`
 
-              - `"write"Write`
+                Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-              - `"glob"Glob`
+              - `PermissionPolicy? PermissionPolicy`
 
-              - `"grep"Grep`
+                Permission policy for tool execution.
 
-              - `"web_fetch"WebFetch`
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
 
-              - `"web_search"WebSearch`
+                  Tool calls are automatically approved without user confirmation.
 
-            - `Boolean? Enabled`
+                  - `required Type Type`
 
-              Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+                    - `"always_allow"AlwaysAllow`
 
-            - `PermissionPolicy? PermissionPolicy`
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
 
-              Permission policy for tool execution.
+                  Tool calls require user confirmation before execution.
 
-              - `class BetaManagedAgentsAlwaysAllowPolicy:`
+                  - `required Type Type`
 
-                Tool calls are automatically approved without user confirmation.
+                    - `"always_ask"AlwaysAsk`
 
-                - `required Type Type`
+              - `Type Type`
 
-                  - `"always_allow"AlwaysAllow`
+                - `"bash"Bash`
 
-              - `class BetaManagedAgentsAlwaysAskPolicy:`
+            - `class BetaManagedAgentsEditToolConfigParams:`
 
-                Tool calls require user confirmation before execution.
+              Configuration override for the edit tool.
 
-                - `required Type Type`
+              - `JsonElement Name "edit"constant`
 
-                  - `"always_ask"AlwaysAsk`
+                Must be "edit".
+
+              - `Boolean? Enabled`
+
+                Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+
+              - `PermissionPolicy? PermissionPolicy`
+
+                Permission policy for tool execution.
+
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                  Tool calls require user confirmation before execution.
+
+              - `Type Type`
+
+                - `"edit"Edit`
+
+            - `class BetaManagedAgentsReadToolConfigParams:`
+
+              Configuration override for the read tool.
+
+              - `JsonElement Name "read"constant`
+
+                Must be "read".
+
+              - `Boolean? Enabled`
+
+                Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+
+              - `PermissionPolicy? PermissionPolicy`
+
+                Permission policy for tool execution.
+
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                  Tool calls require user confirmation before execution.
+
+              - `Type Type`
+
+                - `"read"Read`
+
+            - `class BetaManagedAgentsWriteToolConfigParams:`
+
+              Configuration override for the write tool.
+
+              - `JsonElement Name "write"constant`
+
+                Must be "write".
+
+              - `Boolean? Enabled`
+
+                Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+
+              - `PermissionPolicy? PermissionPolicy`
+
+                Permission policy for tool execution.
+
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                  Tool calls require user confirmation before execution.
+
+              - `Type Type`
+
+                - `"write"Write`
+
+            - `class BetaManagedAgentsGlobToolConfigParams:`
+
+              Configuration override for the glob tool.
+
+              - `JsonElement Name "glob"constant`
+
+                Must be "glob".
+
+              - `Boolean? Enabled`
+
+                Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+
+              - `PermissionPolicy? PermissionPolicy`
+
+                Permission policy for tool execution.
+
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                  Tool calls require user confirmation before execution.
+
+              - `Type Type`
+
+                - `"glob"Glob`
+
+            - `class BetaManagedAgentsGrepToolConfigParams:`
+
+              Configuration override for the grep tool.
+
+              - `JsonElement Name "grep"constant`
+
+                Must be "grep".
+
+              - `Boolean? Enabled`
+
+                Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+
+              - `PermissionPolicy? PermissionPolicy`
+
+                Permission policy for tool execution.
+
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                  Tool calls require user confirmation before execution.
+
+              - `Type Type`
+
+                - `"grep"Grep`
+
+            - `class BetaManagedAgentsWebFetchToolConfigParams:`
+
+              Configuration override for the web_fetch tool.
+
+              - `JsonElement Name "web_fetch"constant`
+
+                Must be "web_fetch".
+
+              - `IReadOnlyList<string> AllowedDomains`
+
+                Only fetch URLs whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "docs.example.com" (no scheme, port, or path). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with blocked_domains.
+
+              - `IReadOnlyList<string> BlockedDomains`
+
+                Never fetch URLs whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "ads.example.com" (no scheme, port, or path). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with allowed_domains.
+
+              - `Boolean? Enabled`
+
+                Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+
+              - `Int? MaxContentTokens`
+
+                Maximum number of tokens of fetched text content to include in context per call. Does not apply to binary content such as PDFs.
+
+              - `PermissionPolicy? PermissionPolicy`
+
+                Permission policy for tool execution.
+
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                  Tool calls require user confirmation before execution.
+
+              - `Type Type`
+
+                - `"web_fetch"WebFetch`
+
+            - `class BetaManagedAgentsWebSearchToolConfigParams:`
+
+              Configuration override for the web_search tool.
+
+              - `JsonElement Name "web_search"constant`
+
+                Must be "web_search".
+
+              - `IReadOnlyList<string> AllowedDomains`
+
+                Only return search results whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "docs.example.com" (no scheme or port; an optional path suffix is accepted). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with blocked_domains.
+
+              - `IReadOnlyList<string> BlockedDomains`
+
+                Never return search results whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "ads.example.com" (no scheme or port; an optional path suffix is accepted). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with allowed_domains.
+
+              - `Boolean? Enabled`
+
+                Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+
+              - `PermissionPolicy? PermissionPolicy`
+
+                Permission policy for tool execution.
+
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                  Tool calls require user confirmation before execution.
+
+              - `Type Type`
+
+                - `"web_search"WebSearch`
+
+              - `BetaManagedAgentsUserLocation? UserLocation`
+
+                Approximate user location for search result localization.
+
+                - `JsonElement Type "approximate"constant`
+
+                  Location precision. Only "approximate" is supported.
+
+                - `string? City`
+
+                  City name.
+
+                - `string? Country`
+
+                  Two-letter ISO 3166-1 country code, uppercase.
+
+                - `string? Region`
+
+                  Region or state name.
+
+                - `string? Timezone`
+
+                  IANA timezone identifier, e.g. "America/Los_Angeles".
 
           - `BetaManagedAgentsAgentToolsetDefaultConfigParams? DefaultConfig`
 
@@ -55477,47 +59067,223 @@ Create Session
 
               - `required IReadOnlyList<BetaManagedAgentsAgentToolConfig> Configs`
 
-                - `required Boolean Enabled`
+                - `class BetaManagedAgentsBashToolConfig:`
 
-                - `required Name Name`
+                  Configuration for the bash tool.
 
-                  Built-in agent tool identifier.
+                  - `required Boolean Enabled`
 
-                  - `"bash"Bash`
+                  - `JsonElement Name "bash"constant`
 
-                  - `"edit"Edit`
+                  - `required PermissionPolicy PermissionPolicy`
 
-                  - `"read"Read`
+                    Permission policy for tool execution.
 
-                  - `"write"Write`
+                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
 
-                  - `"glob"Glob`
+                      Tool calls are automatically approved without user confirmation.
 
-                  - `"grep"Grep`
+                      - `required Type Type`
 
-                  - `"web_fetch"WebFetch`
+                        - `"always_allow"AlwaysAllow`
 
-                  - `"web_search"WebSearch`
+                    - `class BetaManagedAgentsAlwaysAskPolicy:`
 
-                - `required PermissionPolicy PermissionPolicy`
+                      Tool calls require user confirmation before execution.
 
-                  Permission policy for tool execution.
+                      - `required Type Type`
 
-                  - `class BetaManagedAgentsAlwaysAllowPolicy:`
+                        - `"always_ask"AlwaysAsk`
 
-                    Tool calls are automatically approved without user confirmation.
+                  - `JsonElement Type "bash"constant`
 
-                    - `required Type Type`
+                - `class BetaManagedAgentsEditToolConfig:`
 
-                      - `"always_allow"AlwaysAllow`
+                  Configuration for the edit tool.
 
-                  - `class BetaManagedAgentsAlwaysAskPolicy:`
+                  - `required Boolean Enabled`
 
-                    Tool calls require user confirmation before execution.
+                  - `JsonElement Name "edit"constant`
 
-                    - `required Type Type`
+                  - `required PermissionPolicy PermissionPolicy`
 
-                      - `"always_ask"AlwaysAsk`
+                    Permission policy for tool execution.
+
+                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                      Tool calls are automatically approved without user confirmation.
+
+                    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                      Tool calls require user confirmation before execution.
+
+                  - `JsonElement Type "edit"constant`
+
+                - `class BetaManagedAgentsReadToolConfig:`
+
+                  Configuration for the read tool.
+
+                  - `required Boolean Enabled`
+
+                  - `JsonElement Name "read"constant`
+
+                  - `required PermissionPolicy PermissionPolicy`
+
+                    Permission policy for tool execution.
+
+                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                      Tool calls are automatically approved without user confirmation.
+
+                    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                      Tool calls require user confirmation before execution.
+
+                  - `JsonElement Type "read"constant`
+
+                - `class BetaManagedAgentsWriteToolConfig:`
+
+                  Configuration for the write tool.
+
+                  - `required Boolean Enabled`
+
+                  - `JsonElement Name "write"constant`
+
+                  - `required PermissionPolicy PermissionPolicy`
+
+                    Permission policy for tool execution.
+
+                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                      Tool calls are automatically approved without user confirmation.
+
+                    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                      Tool calls require user confirmation before execution.
+
+                  - `JsonElement Type "write"constant`
+
+                - `class BetaManagedAgentsGlobToolConfig:`
+
+                  Configuration for the glob tool.
+
+                  - `required Boolean Enabled`
+
+                  - `JsonElement Name "glob"constant`
+
+                  - `required PermissionPolicy PermissionPolicy`
+
+                    Permission policy for tool execution.
+
+                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                      Tool calls are automatically approved without user confirmation.
+
+                    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                      Tool calls require user confirmation before execution.
+
+                  - `JsonElement Type "glob"constant`
+
+                - `class BetaManagedAgentsGrepToolConfig:`
+
+                  Configuration for the grep tool.
+
+                  - `required Boolean Enabled`
+
+                  - `JsonElement Name "grep"constant`
+
+                  - `required PermissionPolicy PermissionPolicy`
+
+                    Permission policy for tool execution.
+
+                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                      Tool calls are automatically approved without user confirmation.
+
+                    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                      Tool calls require user confirmation before execution.
+
+                  - `JsonElement Type "grep"constant`
+
+                - `class BetaManagedAgentsWebFetchToolConfig:`
+
+                  Configuration for the web_fetch tool.
+
+                  - `required Boolean Enabled`
+
+                  - `JsonElement Name "web_fetch"constant`
+
+                  - `required PermissionPolicy PermissionPolicy`
+
+                    Permission policy for tool execution.
+
+                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                      Tool calls are automatically approved without user confirmation.
+
+                    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                      Tool calls require user confirmation before execution.
+
+                  - `JsonElement Type "web_fetch"constant`
+
+                  - `IReadOnlyList<string> AllowedDomains`
+
+                  - `IReadOnlyList<string> BlockedDomains`
+
+                  - `Int? MaxContentTokens`
+
+                - `class BetaManagedAgentsWebSearchToolConfig:`
+
+                  Configuration for the web_search tool.
+
+                  - `required Boolean Enabled`
+
+                  - `JsonElement Name "web_search"constant`
+
+                  - `required PermissionPolicy PermissionPolicy`
+
+                    Permission policy for tool execution.
+
+                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                      Tool calls are automatically approved without user confirmation.
+
+                    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                      Tool calls require user confirmation before execution.
+
+                  - `JsonElement Type "web_search"constant`
+
+                  - `IReadOnlyList<string> AllowedDomains`
+
+                  - `IReadOnlyList<string> BlockedDomains`
+
+                  - `BetaManagedAgentsUserLocation? UserLocation`
+
+                    Approximate user location for search result localization.
+
+                    - `JsonElement Type "approximate"constant`
+
+                      Location precision. Only "approximate" is supported.
+
+                    - `string? City`
+
+                      City name.
+
+                    - `string? Country`
+
+                      Two-letter ISO 3166-1 country code, uppercase.
+
+                    - `string? Region`
+
+                      Region or state name.
+
+                    - `string? Timezone`
+
+                      IANA timezone identifier, e.g. "America/Los_Angeles".
 
               - `required BetaManagedAgentsAgentToolsetDefaultConfig DefaultConfig`
 
@@ -55989,7 +59755,8 @@ Console.WriteLine(betaManagedAgentsSession);
                   "name": "bash",
                   "permission_policy": {
                     "type": "always_allow"
-                  }
+                  },
+                  "type": "bash"
                 }
               ],
               "default_config": {
@@ -56029,7 +59796,8 @@ Console.WriteLine(betaManagedAgentsSession);
             "name": "bash",
             "permission_policy": {
               "type": "always_allow"
-            }
+            },
+            "type": "bash"
           }
         ],
         "default_config": {
@@ -56481,47 +60249,223 @@ List Sessions
 
                 - `required IReadOnlyList<BetaManagedAgentsAgentToolConfig> Configs`
 
-                  - `required Boolean Enabled`
+                  - `class BetaManagedAgentsBashToolConfig:`
 
-                  - `required Name Name`
+                    Configuration for the bash tool.
 
-                    Built-in agent tool identifier.
+                    - `required Boolean Enabled`
 
-                    - `"bash"Bash`
+                    - `JsonElement Name "bash"constant`
 
-                    - `"edit"Edit`
+                    - `required PermissionPolicy PermissionPolicy`
 
-                    - `"read"Read`
+                      Permission policy for tool execution.
 
-                    - `"write"Write`
+                      - `class BetaManagedAgentsAlwaysAllowPolicy:`
 
-                    - `"glob"Glob`
+                        Tool calls are automatically approved without user confirmation.
 
-                    - `"grep"Grep`
+                        - `required Type Type`
 
-                    - `"web_fetch"WebFetch`
+                          - `"always_allow"AlwaysAllow`
 
-                    - `"web_search"WebSearch`
+                      - `class BetaManagedAgentsAlwaysAskPolicy:`
 
-                  - `required PermissionPolicy PermissionPolicy`
+                        Tool calls require user confirmation before execution.
 
-                    Permission policy for tool execution.
+                        - `required Type Type`
 
-                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+                          - `"always_ask"AlwaysAsk`
 
-                      Tool calls are automatically approved without user confirmation.
+                    - `JsonElement Type "bash"constant`
 
-                      - `required Type Type`
+                  - `class BetaManagedAgentsEditToolConfig:`
 
-                        - `"always_allow"AlwaysAllow`
+                    Configuration for the edit tool.
 
-                    - `class BetaManagedAgentsAlwaysAskPolicy:`
+                    - `required Boolean Enabled`
 
-                      Tool calls require user confirmation before execution.
+                    - `JsonElement Name "edit"constant`
 
-                      - `required Type Type`
+                    - `required PermissionPolicy PermissionPolicy`
 
-                        - `"always_ask"AlwaysAsk`
+                      Permission policy for tool execution.
+
+                      - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                        Tool calls are automatically approved without user confirmation.
+
+                      - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                        Tool calls require user confirmation before execution.
+
+                    - `JsonElement Type "edit"constant`
+
+                  - `class BetaManagedAgentsReadToolConfig:`
+
+                    Configuration for the read tool.
+
+                    - `required Boolean Enabled`
+
+                    - `JsonElement Name "read"constant`
+
+                    - `required PermissionPolicy PermissionPolicy`
+
+                      Permission policy for tool execution.
+
+                      - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                        Tool calls are automatically approved without user confirmation.
+
+                      - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                        Tool calls require user confirmation before execution.
+
+                    - `JsonElement Type "read"constant`
+
+                  - `class BetaManagedAgentsWriteToolConfig:`
+
+                    Configuration for the write tool.
+
+                    - `required Boolean Enabled`
+
+                    - `JsonElement Name "write"constant`
+
+                    - `required PermissionPolicy PermissionPolicy`
+
+                      Permission policy for tool execution.
+
+                      - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                        Tool calls are automatically approved without user confirmation.
+
+                      - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                        Tool calls require user confirmation before execution.
+
+                    - `JsonElement Type "write"constant`
+
+                  - `class BetaManagedAgentsGlobToolConfig:`
+
+                    Configuration for the glob tool.
+
+                    - `required Boolean Enabled`
+
+                    - `JsonElement Name "glob"constant`
+
+                    - `required PermissionPolicy PermissionPolicy`
+
+                      Permission policy for tool execution.
+
+                      - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                        Tool calls are automatically approved without user confirmation.
+
+                      - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                        Tool calls require user confirmation before execution.
+
+                    - `JsonElement Type "glob"constant`
+
+                  - `class BetaManagedAgentsGrepToolConfig:`
+
+                    Configuration for the grep tool.
+
+                    - `required Boolean Enabled`
+
+                    - `JsonElement Name "grep"constant`
+
+                    - `required PermissionPolicy PermissionPolicy`
+
+                      Permission policy for tool execution.
+
+                      - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                        Tool calls are automatically approved without user confirmation.
+
+                      - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                        Tool calls require user confirmation before execution.
+
+                    - `JsonElement Type "grep"constant`
+
+                  - `class BetaManagedAgentsWebFetchToolConfig:`
+
+                    Configuration for the web_fetch tool.
+
+                    - `required Boolean Enabled`
+
+                    - `JsonElement Name "web_fetch"constant`
+
+                    - `required PermissionPolicy PermissionPolicy`
+
+                      Permission policy for tool execution.
+
+                      - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                        Tool calls are automatically approved without user confirmation.
+
+                      - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                        Tool calls require user confirmation before execution.
+
+                    - `JsonElement Type "web_fetch"constant`
+
+                    - `IReadOnlyList<string> AllowedDomains`
+
+                    - `IReadOnlyList<string> BlockedDomains`
+
+                    - `Int? MaxContentTokens`
+
+                  - `class BetaManagedAgentsWebSearchToolConfig:`
+
+                    Configuration for the web_search tool.
+
+                    - `required Boolean Enabled`
+
+                    - `JsonElement Name "web_search"constant`
+
+                    - `required PermissionPolicy PermissionPolicy`
+
+                      Permission policy for tool execution.
+
+                      - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                        Tool calls are automatically approved without user confirmation.
+
+                      - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                        Tool calls require user confirmation before execution.
+
+                    - `JsonElement Type "web_search"constant`
+
+                    - `IReadOnlyList<string> AllowedDomains`
+
+                    - `IReadOnlyList<string> BlockedDomains`
+
+                    - `BetaManagedAgentsUserLocation? UserLocation`
+
+                      Approximate user location for search result localization.
+
+                      - `JsonElement Type "approximate"constant`
+
+                        Location precision. Only "approximate" is supported.
+
+                      - `string? City`
+
+                        City name.
+
+                      - `string? Country`
+
+                        Two-letter ISO 3166-1 country code, uppercase.
+
+                      - `string? Region`
+
+                        Region or state name.
+
+                      - `string? Timezone`
+
+                        IANA timezone identifier, e.g. "America/Los_Angeles".
 
                 - `required BetaManagedAgentsAgentToolsetDefaultConfig DefaultConfig`
 
@@ -57001,7 +60945,8 @@ await foreach (var item in page.Paginate())
                       "name": "bash",
                       "permission_policy": {
                         "type": "always_allow"
-                      }
+                      },
+                      "type": "bash"
                     }
                   ],
                   "default_config": {
@@ -57041,7 +60986,8 @@ await foreach (var item in page.Paginate())
                 "name": "bash",
                 "permission_policy": {
                   "type": "always_allow"
-                }
+                },
+                "type": "bash"
               }
             ],
             "default_config": {
@@ -57433,47 +61379,223 @@ Get Session
 
               - `required IReadOnlyList<BetaManagedAgentsAgentToolConfig> Configs`
 
-                - `required Boolean Enabled`
+                - `class BetaManagedAgentsBashToolConfig:`
 
-                - `required Name Name`
+                  Configuration for the bash tool.
 
-                  Built-in agent tool identifier.
+                  - `required Boolean Enabled`
 
-                  - `"bash"Bash`
+                  - `JsonElement Name "bash"constant`
 
-                  - `"edit"Edit`
+                  - `required PermissionPolicy PermissionPolicy`
 
-                  - `"read"Read`
+                    Permission policy for tool execution.
 
-                  - `"write"Write`
+                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
 
-                  - `"glob"Glob`
+                      Tool calls are automatically approved without user confirmation.
 
-                  - `"grep"Grep`
+                      - `required Type Type`
 
-                  - `"web_fetch"WebFetch`
+                        - `"always_allow"AlwaysAllow`
 
-                  - `"web_search"WebSearch`
+                    - `class BetaManagedAgentsAlwaysAskPolicy:`
 
-                - `required PermissionPolicy PermissionPolicy`
+                      Tool calls require user confirmation before execution.
 
-                  Permission policy for tool execution.
+                      - `required Type Type`
 
-                  - `class BetaManagedAgentsAlwaysAllowPolicy:`
+                        - `"always_ask"AlwaysAsk`
 
-                    Tool calls are automatically approved without user confirmation.
+                  - `JsonElement Type "bash"constant`
 
-                    - `required Type Type`
+                - `class BetaManagedAgentsEditToolConfig:`
 
-                      - `"always_allow"AlwaysAllow`
+                  Configuration for the edit tool.
 
-                  - `class BetaManagedAgentsAlwaysAskPolicy:`
+                  - `required Boolean Enabled`
 
-                    Tool calls require user confirmation before execution.
+                  - `JsonElement Name "edit"constant`
 
-                    - `required Type Type`
+                  - `required PermissionPolicy PermissionPolicy`
 
-                      - `"always_ask"AlwaysAsk`
+                    Permission policy for tool execution.
+
+                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                      Tool calls are automatically approved without user confirmation.
+
+                    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                      Tool calls require user confirmation before execution.
+
+                  - `JsonElement Type "edit"constant`
+
+                - `class BetaManagedAgentsReadToolConfig:`
+
+                  Configuration for the read tool.
+
+                  - `required Boolean Enabled`
+
+                  - `JsonElement Name "read"constant`
+
+                  - `required PermissionPolicy PermissionPolicy`
+
+                    Permission policy for tool execution.
+
+                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                      Tool calls are automatically approved without user confirmation.
+
+                    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                      Tool calls require user confirmation before execution.
+
+                  - `JsonElement Type "read"constant`
+
+                - `class BetaManagedAgentsWriteToolConfig:`
+
+                  Configuration for the write tool.
+
+                  - `required Boolean Enabled`
+
+                  - `JsonElement Name "write"constant`
+
+                  - `required PermissionPolicy PermissionPolicy`
+
+                    Permission policy for tool execution.
+
+                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                      Tool calls are automatically approved without user confirmation.
+
+                    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                      Tool calls require user confirmation before execution.
+
+                  - `JsonElement Type "write"constant`
+
+                - `class BetaManagedAgentsGlobToolConfig:`
+
+                  Configuration for the glob tool.
+
+                  - `required Boolean Enabled`
+
+                  - `JsonElement Name "glob"constant`
+
+                  - `required PermissionPolicy PermissionPolicy`
+
+                    Permission policy for tool execution.
+
+                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                      Tool calls are automatically approved without user confirmation.
+
+                    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                      Tool calls require user confirmation before execution.
+
+                  - `JsonElement Type "glob"constant`
+
+                - `class BetaManagedAgentsGrepToolConfig:`
+
+                  Configuration for the grep tool.
+
+                  - `required Boolean Enabled`
+
+                  - `JsonElement Name "grep"constant`
+
+                  - `required PermissionPolicy PermissionPolicy`
+
+                    Permission policy for tool execution.
+
+                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                      Tool calls are automatically approved without user confirmation.
+
+                    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                      Tool calls require user confirmation before execution.
+
+                  - `JsonElement Type "grep"constant`
+
+                - `class BetaManagedAgentsWebFetchToolConfig:`
+
+                  Configuration for the web_fetch tool.
+
+                  - `required Boolean Enabled`
+
+                  - `JsonElement Name "web_fetch"constant`
+
+                  - `required PermissionPolicy PermissionPolicy`
+
+                    Permission policy for tool execution.
+
+                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                      Tool calls are automatically approved without user confirmation.
+
+                    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                      Tool calls require user confirmation before execution.
+
+                  - `JsonElement Type "web_fetch"constant`
+
+                  - `IReadOnlyList<string> AllowedDomains`
+
+                  - `IReadOnlyList<string> BlockedDomains`
+
+                  - `Int? MaxContentTokens`
+
+                - `class BetaManagedAgentsWebSearchToolConfig:`
+
+                  Configuration for the web_search tool.
+
+                  - `required Boolean Enabled`
+
+                  - `JsonElement Name "web_search"constant`
+
+                  - `required PermissionPolicy PermissionPolicy`
+
+                    Permission policy for tool execution.
+
+                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                      Tool calls are automatically approved without user confirmation.
+
+                    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                      Tool calls require user confirmation before execution.
+
+                  - `JsonElement Type "web_search"constant`
+
+                  - `IReadOnlyList<string> AllowedDomains`
+
+                  - `IReadOnlyList<string> BlockedDomains`
+
+                  - `BetaManagedAgentsUserLocation? UserLocation`
+
+                    Approximate user location for search result localization.
+
+                    - `JsonElement Type "approximate"constant`
+
+                      Location precision. Only "approximate" is supported.
+
+                    - `string? City`
+
+                      City name.
+
+                    - `string? Country`
+
+                      Two-letter ISO 3166-1 country code, uppercase.
+
+                    - `string? Region`
+
+                      Region or state name.
+
+                    - `string? Timezone`
+
+                      IANA timezone identifier, e.g. "America/Los_Angeles".
 
               - `required BetaManagedAgentsAgentToolsetDefaultConfig DefaultConfig`
 
@@ -57944,7 +62066,8 @@ Console.WriteLine(betaManagedAgentsSession);
                   "name": "bash",
                   "permission_policy": {
                     "type": "always_allow"
-                  }
+                  },
+                  "type": "bash"
                 }
               ],
               "default_config": {
@@ -57984,7 +62107,8 @@ Console.WriteLine(betaManagedAgentsSession);
             "name": "bash",
             "permission_policy": {
               "type": "always_allow"
-            }
+            },
+            "type": "bash"
           }
         ],
         "default_config": {
@@ -58392,47 +62516,223 @@ Update Session
 
               - `required IReadOnlyList<BetaManagedAgentsAgentToolConfig> Configs`
 
-                - `required Boolean Enabled`
+                - `class BetaManagedAgentsBashToolConfig:`
 
-                - `required Name Name`
+                  Configuration for the bash tool.
 
-                  Built-in agent tool identifier.
+                  - `required Boolean Enabled`
 
-                  - `"bash"Bash`
+                  - `JsonElement Name "bash"constant`
 
-                  - `"edit"Edit`
+                  - `required PermissionPolicy PermissionPolicy`
 
-                  - `"read"Read`
+                    Permission policy for tool execution.
 
-                  - `"write"Write`
+                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
 
-                  - `"glob"Glob`
+                      Tool calls are automatically approved without user confirmation.
 
-                  - `"grep"Grep`
+                      - `required Type Type`
 
-                  - `"web_fetch"WebFetch`
+                        - `"always_allow"AlwaysAllow`
 
-                  - `"web_search"WebSearch`
+                    - `class BetaManagedAgentsAlwaysAskPolicy:`
 
-                - `required PermissionPolicy PermissionPolicy`
+                      Tool calls require user confirmation before execution.
 
-                  Permission policy for tool execution.
+                      - `required Type Type`
 
-                  - `class BetaManagedAgentsAlwaysAllowPolicy:`
+                        - `"always_ask"AlwaysAsk`
 
-                    Tool calls are automatically approved without user confirmation.
+                  - `JsonElement Type "bash"constant`
 
-                    - `required Type Type`
+                - `class BetaManagedAgentsEditToolConfig:`
 
-                      - `"always_allow"AlwaysAllow`
+                  Configuration for the edit tool.
 
-                  - `class BetaManagedAgentsAlwaysAskPolicy:`
+                  - `required Boolean Enabled`
 
-                    Tool calls require user confirmation before execution.
+                  - `JsonElement Name "edit"constant`
 
-                    - `required Type Type`
+                  - `required PermissionPolicy PermissionPolicy`
 
-                      - `"always_ask"AlwaysAsk`
+                    Permission policy for tool execution.
+
+                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                      Tool calls are automatically approved without user confirmation.
+
+                    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                      Tool calls require user confirmation before execution.
+
+                  - `JsonElement Type "edit"constant`
+
+                - `class BetaManagedAgentsReadToolConfig:`
+
+                  Configuration for the read tool.
+
+                  - `required Boolean Enabled`
+
+                  - `JsonElement Name "read"constant`
+
+                  - `required PermissionPolicy PermissionPolicy`
+
+                    Permission policy for tool execution.
+
+                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                      Tool calls are automatically approved without user confirmation.
+
+                    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                      Tool calls require user confirmation before execution.
+
+                  - `JsonElement Type "read"constant`
+
+                - `class BetaManagedAgentsWriteToolConfig:`
+
+                  Configuration for the write tool.
+
+                  - `required Boolean Enabled`
+
+                  - `JsonElement Name "write"constant`
+
+                  - `required PermissionPolicy PermissionPolicy`
+
+                    Permission policy for tool execution.
+
+                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                      Tool calls are automatically approved without user confirmation.
+
+                    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                      Tool calls require user confirmation before execution.
+
+                  - `JsonElement Type "write"constant`
+
+                - `class BetaManagedAgentsGlobToolConfig:`
+
+                  Configuration for the glob tool.
+
+                  - `required Boolean Enabled`
+
+                  - `JsonElement Name "glob"constant`
+
+                  - `required PermissionPolicy PermissionPolicy`
+
+                    Permission policy for tool execution.
+
+                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                      Tool calls are automatically approved without user confirmation.
+
+                    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                      Tool calls require user confirmation before execution.
+
+                  - `JsonElement Type "glob"constant`
+
+                - `class BetaManagedAgentsGrepToolConfig:`
+
+                  Configuration for the grep tool.
+
+                  - `required Boolean Enabled`
+
+                  - `JsonElement Name "grep"constant`
+
+                  - `required PermissionPolicy PermissionPolicy`
+
+                    Permission policy for tool execution.
+
+                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                      Tool calls are automatically approved without user confirmation.
+
+                    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                      Tool calls require user confirmation before execution.
+
+                  - `JsonElement Type "grep"constant`
+
+                - `class BetaManagedAgentsWebFetchToolConfig:`
+
+                  Configuration for the web_fetch tool.
+
+                  - `required Boolean Enabled`
+
+                  - `JsonElement Name "web_fetch"constant`
+
+                  - `required PermissionPolicy PermissionPolicy`
+
+                    Permission policy for tool execution.
+
+                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                      Tool calls are automatically approved without user confirmation.
+
+                    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                      Tool calls require user confirmation before execution.
+
+                  - `JsonElement Type "web_fetch"constant`
+
+                  - `IReadOnlyList<string> AllowedDomains`
+
+                  - `IReadOnlyList<string> BlockedDomains`
+
+                  - `Int? MaxContentTokens`
+
+                - `class BetaManagedAgentsWebSearchToolConfig:`
+
+                  Configuration for the web_search tool.
+
+                  - `required Boolean Enabled`
+
+                  - `JsonElement Name "web_search"constant`
+
+                  - `required PermissionPolicy PermissionPolicy`
+
+                    Permission policy for tool execution.
+
+                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                      Tool calls are automatically approved without user confirmation.
+
+                    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                      Tool calls require user confirmation before execution.
+
+                  - `JsonElement Type "web_search"constant`
+
+                  - `IReadOnlyList<string> AllowedDomains`
+
+                  - `IReadOnlyList<string> BlockedDomains`
+
+                  - `BetaManagedAgentsUserLocation? UserLocation`
+
+                    Approximate user location for search result localization.
+
+                    - `JsonElement Type "approximate"constant`
+
+                      Location precision. Only "approximate" is supported.
+
+                    - `string? City`
+
+                      City name.
+
+                    - `string? Country`
+
+                      Two-letter ISO 3166-1 country code, uppercase.
+
+                    - `string? Region`
+
+                      Region or state name.
+
+                    - `string? Timezone`
+
+                      IANA timezone identifier, e.g. "America/Los_Angeles".
 
               - `required BetaManagedAgentsAgentToolsetDefaultConfig DefaultConfig`
 
@@ -58903,7 +63203,8 @@ Console.WriteLine(betaManagedAgentsSession);
                   "name": "bash",
                   "permission_policy": {
                     "type": "always_allow"
-                  }
+                  },
+                  "type": "bash"
                 }
               ],
               "default_config": {
@@ -58943,7 +63244,8 @@ Console.WriteLine(betaManagedAgentsSession);
             "name": "bash",
             "permission_policy": {
               "type": "always_allow"
-            }
+            },
+            "type": "bash"
           }
         ],
         "default_config": {
@@ -59453,47 +63755,223 @@ Archive Session
 
               - `required IReadOnlyList<BetaManagedAgentsAgentToolConfig> Configs`
 
-                - `required Boolean Enabled`
+                - `class BetaManagedAgentsBashToolConfig:`
 
-                - `required Name Name`
+                  Configuration for the bash tool.
 
-                  Built-in agent tool identifier.
+                  - `required Boolean Enabled`
 
-                  - `"bash"Bash`
+                  - `JsonElement Name "bash"constant`
 
-                  - `"edit"Edit`
+                  - `required PermissionPolicy PermissionPolicy`
 
-                  - `"read"Read`
+                    Permission policy for tool execution.
 
-                  - `"write"Write`
+                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
 
-                  - `"glob"Glob`
+                      Tool calls are automatically approved without user confirmation.
 
-                  - `"grep"Grep`
+                      - `required Type Type`
 
-                  - `"web_fetch"WebFetch`
+                        - `"always_allow"AlwaysAllow`
 
-                  - `"web_search"WebSearch`
+                    - `class BetaManagedAgentsAlwaysAskPolicy:`
 
-                - `required PermissionPolicy PermissionPolicy`
+                      Tool calls require user confirmation before execution.
 
-                  Permission policy for tool execution.
+                      - `required Type Type`
 
-                  - `class BetaManagedAgentsAlwaysAllowPolicy:`
+                        - `"always_ask"AlwaysAsk`
 
-                    Tool calls are automatically approved without user confirmation.
+                  - `JsonElement Type "bash"constant`
 
-                    - `required Type Type`
+                - `class BetaManagedAgentsEditToolConfig:`
 
-                      - `"always_allow"AlwaysAllow`
+                  Configuration for the edit tool.
 
-                  - `class BetaManagedAgentsAlwaysAskPolicy:`
+                  - `required Boolean Enabled`
 
-                    Tool calls require user confirmation before execution.
+                  - `JsonElement Name "edit"constant`
 
-                    - `required Type Type`
+                  - `required PermissionPolicy PermissionPolicy`
 
-                      - `"always_ask"AlwaysAsk`
+                    Permission policy for tool execution.
+
+                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                      Tool calls are automatically approved without user confirmation.
+
+                    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                      Tool calls require user confirmation before execution.
+
+                  - `JsonElement Type "edit"constant`
+
+                - `class BetaManagedAgentsReadToolConfig:`
+
+                  Configuration for the read tool.
+
+                  - `required Boolean Enabled`
+
+                  - `JsonElement Name "read"constant`
+
+                  - `required PermissionPolicy PermissionPolicy`
+
+                    Permission policy for tool execution.
+
+                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                      Tool calls are automatically approved without user confirmation.
+
+                    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                      Tool calls require user confirmation before execution.
+
+                  - `JsonElement Type "read"constant`
+
+                - `class BetaManagedAgentsWriteToolConfig:`
+
+                  Configuration for the write tool.
+
+                  - `required Boolean Enabled`
+
+                  - `JsonElement Name "write"constant`
+
+                  - `required PermissionPolicy PermissionPolicy`
+
+                    Permission policy for tool execution.
+
+                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                      Tool calls are automatically approved without user confirmation.
+
+                    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                      Tool calls require user confirmation before execution.
+
+                  - `JsonElement Type "write"constant`
+
+                - `class BetaManagedAgentsGlobToolConfig:`
+
+                  Configuration for the glob tool.
+
+                  - `required Boolean Enabled`
+
+                  - `JsonElement Name "glob"constant`
+
+                  - `required PermissionPolicy PermissionPolicy`
+
+                    Permission policy for tool execution.
+
+                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                      Tool calls are automatically approved without user confirmation.
+
+                    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                      Tool calls require user confirmation before execution.
+
+                  - `JsonElement Type "glob"constant`
+
+                - `class BetaManagedAgentsGrepToolConfig:`
+
+                  Configuration for the grep tool.
+
+                  - `required Boolean Enabled`
+
+                  - `JsonElement Name "grep"constant`
+
+                  - `required PermissionPolicy PermissionPolicy`
+
+                    Permission policy for tool execution.
+
+                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                      Tool calls are automatically approved without user confirmation.
+
+                    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                      Tool calls require user confirmation before execution.
+
+                  - `JsonElement Type "grep"constant`
+
+                - `class BetaManagedAgentsWebFetchToolConfig:`
+
+                  Configuration for the web_fetch tool.
+
+                  - `required Boolean Enabled`
+
+                  - `JsonElement Name "web_fetch"constant`
+
+                  - `required PermissionPolicy PermissionPolicy`
+
+                    Permission policy for tool execution.
+
+                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                      Tool calls are automatically approved without user confirmation.
+
+                    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                      Tool calls require user confirmation before execution.
+
+                  - `JsonElement Type "web_fetch"constant`
+
+                  - `IReadOnlyList<string> AllowedDomains`
+
+                  - `IReadOnlyList<string> BlockedDomains`
+
+                  - `Int? MaxContentTokens`
+
+                - `class BetaManagedAgentsWebSearchToolConfig:`
+
+                  Configuration for the web_search tool.
+
+                  - `required Boolean Enabled`
+
+                  - `JsonElement Name "web_search"constant`
+
+                  - `required PermissionPolicy PermissionPolicy`
+
+                    Permission policy for tool execution.
+
+                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                      Tool calls are automatically approved without user confirmation.
+
+                    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                      Tool calls require user confirmation before execution.
+
+                  - `JsonElement Type "web_search"constant`
+
+                  - `IReadOnlyList<string> AllowedDomains`
+
+                  - `IReadOnlyList<string> BlockedDomains`
+
+                  - `BetaManagedAgentsUserLocation? UserLocation`
+
+                    Approximate user location for search result localization.
+
+                    - `JsonElement Type "approximate"constant`
+
+                      Location precision. Only "approximate" is supported.
+
+                    - `string? City`
+
+                      City name.
+
+                    - `string? Country`
+
+                      Two-letter ISO 3166-1 country code, uppercase.
+
+                    - `string? Region`
+
+                      Region or state name.
+
+                    - `string? Timezone`
+
+                      IANA timezone identifier, e.g. "America/Los_Angeles".
 
               - `required BetaManagedAgentsAgentToolsetDefaultConfig DefaultConfig`
 
@@ -59964,7 +64442,8 @@ Console.WriteLine(betaManagedAgentsSession);
                   "name": "bash",
                   "permission_policy": {
                     "type": "always_allow"
-                  }
+                  },
+                  "type": "bash"
                 }
               ],
               "default_config": {
@@ -60004,7 +64483,8 @@ Console.WriteLine(betaManagedAgentsSession);
             "name": "bash",
             "permission_policy": {
               "type": "always_allow"
-            }
+            },
+            "type": "bash"
           }
         ],
         "default_config": {
@@ -60434,49 +64914,281 @@ Console.WriteLine(betaManagedAgentsSession);
 
         Per-tool configuration overrides.
 
-        - `required Name Name`
+        - `class BetaManagedAgentsBashToolConfigParams:`
 
-          Built-in agent tool identifier.
+          Configuration override for the bash tool.
 
-          - `"bash"Bash`
+          - `JsonElement Name "bash"constant`
 
-          - `"edit"Edit`
+            Must be "bash".
 
-          - `"read"Read`
+          - `Boolean? Enabled`
 
-          - `"write"Write`
+            Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `"glob"Glob`
+          - `PermissionPolicy? PermissionPolicy`
 
-          - `"grep"Grep`
+            Permission policy for tool execution.
 
-          - `"web_fetch"WebFetch`
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
 
-          - `"web_search"WebSearch`
+              Tool calls are automatically approved without user confirmation.
 
-        - `Boolean? Enabled`
+              - `required Type Type`
 
-          Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+                - `"always_allow"AlwaysAllow`
 
-        - `PermissionPolicy? PermissionPolicy`
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
 
-          Permission policy for tool execution.
+              Tool calls require user confirmation before execution.
 
-          - `class BetaManagedAgentsAlwaysAllowPolicy:`
+              - `required Type Type`
 
-            Tool calls are automatically approved without user confirmation.
+                - `"always_ask"AlwaysAsk`
 
-            - `required Type Type`
+          - `Type Type`
 
-              - `"always_allow"AlwaysAllow`
+            - `"bash"Bash`
 
-          - `class BetaManagedAgentsAlwaysAskPolicy:`
+        - `class BetaManagedAgentsEditToolConfigParams:`
 
-            Tool calls require user confirmation before execution.
+          Configuration override for the edit tool.
 
-            - `required Type Type`
+          - `JsonElement Name "edit"constant`
 
-              - `"always_ask"AlwaysAsk`
+            Must be "edit".
+
+          - `Boolean? Enabled`
+
+            Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+
+          - `PermissionPolicy? PermissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+          - `Type Type`
+
+            - `"edit"Edit`
+
+        - `class BetaManagedAgentsReadToolConfigParams:`
+
+          Configuration override for the read tool.
+
+          - `JsonElement Name "read"constant`
+
+            Must be "read".
+
+          - `Boolean? Enabled`
+
+            Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+
+          - `PermissionPolicy? PermissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+          - `Type Type`
+
+            - `"read"Read`
+
+        - `class BetaManagedAgentsWriteToolConfigParams:`
+
+          Configuration override for the write tool.
+
+          - `JsonElement Name "write"constant`
+
+            Must be "write".
+
+          - `Boolean? Enabled`
+
+            Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+
+          - `PermissionPolicy? PermissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+          - `Type Type`
+
+            - `"write"Write`
+
+        - `class BetaManagedAgentsGlobToolConfigParams:`
+
+          Configuration override for the glob tool.
+
+          - `JsonElement Name "glob"constant`
+
+            Must be "glob".
+
+          - `Boolean? Enabled`
+
+            Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+
+          - `PermissionPolicy? PermissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+          - `Type Type`
+
+            - `"glob"Glob`
+
+        - `class BetaManagedAgentsGrepToolConfigParams:`
+
+          Configuration override for the grep tool.
+
+          - `JsonElement Name "grep"constant`
+
+            Must be "grep".
+
+          - `Boolean? Enabled`
+
+            Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+
+          - `PermissionPolicy? PermissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+          - `Type Type`
+
+            - `"grep"Grep`
+
+        - `class BetaManagedAgentsWebFetchToolConfigParams:`
+
+          Configuration override for the web_fetch tool.
+
+          - `JsonElement Name "web_fetch"constant`
+
+            Must be "web_fetch".
+
+          - `IReadOnlyList<string> AllowedDomains`
+
+            Only fetch URLs whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "docs.example.com" (no scheme, port, or path). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with blocked_domains.
+
+          - `IReadOnlyList<string> BlockedDomains`
+
+            Never fetch URLs whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "ads.example.com" (no scheme, port, or path). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with allowed_domains.
+
+          - `Boolean? Enabled`
+
+            Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+
+          - `Int? MaxContentTokens`
+
+            Maximum number of tokens of fetched text content to include in context per call. Does not apply to binary content such as PDFs.
+
+          - `PermissionPolicy? PermissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+          - `Type Type`
+
+            - `"web_fetch"WebFetch`
+
+        - `class BetaManagedAgentsWebSearchToolConfigParams:`
+
+          Configuration override for the web_search tool.
+
+          - `JsonElement Name "web_search"constant`
+
+            Must be "web_search".
+
+          - `IReadOnlyList<string> AllowedDomains`
+
+            Only return search results whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "docs.example.com" (no scheme or port; an optional path suffix is accepted). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with blocked_domains.
+
+          - `IReadOnlyList<string> BlockedDomains`
+
+            Never return search results whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "ads.example.com" (no scheme or port; an optional path suffix is accepted). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with allowed_domains.
+
+          - `Boolean? Enabled`
+
+            Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+
+          - `PermissionPolicy? PermissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+          - `Type Type`
+
+            - `"web_search"WebSearch`
+
+          - `BetaManagedAgentsUserLocation? UserLocation`
+
+            Approximate user location for search result localization.
+
+            - `JsonElement Type "approximate"constant`
+
+              Location precision. Only "approximate" is supported.
+
+            - `string? City`
+
+              City name.
+
+            - `string? Country`
+
+              Two-letter ISO 3166-1 country code, uppercase.
+
+            - `string? Region`
+
+              Region or state name.
+
+            - `string? Timezone`
+
+              IANA timezone identifier, e.g. "America/Los_Angeles".
 
       - `BetaManagedAgentsAgentToolsetDefaultConfigParams? DefaultConfig`
 
@@ -61210,47 +65922,223 @@ Console.WriteLine(betaManagedAgentsSession);
 
               - `required IReadOnlyList<BetaManagedAgentsAgentToolConfig> Configs`
 
-                - `required Boolean Enabled`
+                - `class BetaManagedAgentsBashToolConfig:`
 
-                - `required Name Name`
+                  Configuration for the bash tool.
 
-                  Built-in agent tool identifier.
+                  - `required Boolean Enabled`
 
-                  - `"bash"Bash`
+                  - `JsonElement Name "bash"constant`
 
-                  - `"edit"Edit`
+                  - `required PermissionPolicy PermissionPolicy`
 
-                  - `"read"Read`
+                    Permission policy for tool execution.
 
-                  - `"write"Write`
+                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
 
-                  - `"glob"Glob`
+                      Tool calls are automatically approved without user confirmation.
 
-                  - `"grep"Grep`
+                      - `required Type Type`
 
-                  - `"web_fetch"WebFetch`
+                        - `"always_allow"AlwaysAllow`
 
-                  - `"web_search"WebSearch`
+                    - `class BetaManagedAgentsAlwaysAskPolicy:`
 
-                - `required PermissionPolicy PermissionPolicy`
+                      Tool calls require user confirmation before execution.
 
-                  Permission policy for tool execution.
+                      - `required Type Type`
 
-                  - `class BetaManagedAgentsAlwaysAllowPolicy:`
+                        - `"always_ask"AlwaysAsk`
 
-                    Tool calls are automatically approved without user confirmation.
+                  - `JsonElement Type "bash"constant`
 
-                    - `required Type Type`
+                - `class BetaManagedAgentsEditToolConfig:`
 
-                      - `"always_allow"AlwaysAllow`
+                  Configuration for the edit tool.
 
-                  - `class BetaManagedAgentsAlwaysAskPolicy:`
+                  - `required Boolean Enabled`
 
-                    Tool calls require user confirmation before execution.
+                  - `JsonElement Name "edit"constant`
 
-                    - `required Type Type`
+                  - `required PermissionPolicy PermissionPolicy`
 
-                      - `"always_ask"AlwaysAsk`
+                    Permission policy for tool execution.
+
+                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                      Tool calls are automatically approved without user confirmation.
+
+                    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                      Tool calls require user confirmation before execution.
+
+                  - `JsonElement Type "edit"constant`
+
+                - `class BetaManagedAgentsReadToolConfig:`
+
+                  Configuration for the read tool.
+
+                  - `required Boolean Enabled`
+
+                  - `JsonElement Name "read"constant`
+
+                  - `required PermissionPolicy PermissionPolicy`
+
+                    Permission policy for tool execution.
+
+                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                      Tool calls are automatically approved without user confirmation.
+
+                    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                      Tool calls require user confirmation before execution.
+
+                  - `JsonElement Type "read"constant`
+
+                - `class BetaManagedAgentsWriteToolConfig:`
+
+                  Configuration for the write tool.
+
+                  - `required Boolean Enabled`
+
+                  - `JsonElement Name "write"constant`
+
+                  - `required PermissionPolicy PermissionPolicy`
+
+                    Permission policy for tool execution.
+
+                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                      Tool calls are automatically approved without user confirmation.
+
+                    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                      Tool calls require user confirmation before execution.
+
+                  - `JsonElement Type "write"constant`
+
+                - `class BetaManagedAgentsGlobToolConfig:`
+
+                  Configuration for the glob tool.
+
+                  - `required Boolean Enabled`
+
+                  - `JsonElement Name "glob"constant`
+
+                  - `required PermissionPolicy PermissionPolicy`
+
+                    Permission policy for tool execution.
+
+                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                      Tool calls are automatically approved without user confirmation.
+
+                    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                      Tool calls require user confirmation before execution.
+
+                  - `JsonElement Type "glob"constant`
+
+                - `class BetaManagedAgentsGrepToolConfig:`
+
+                  Configuration for the grep tool.
+
+                  - `required Boolean Enabled`
+
+                  - `JsonElement Name "grep"constant`
+
+                  - `required PermissionPolicy PermissionPolicy`
+
+                    Permission policy for tool execution.
+
+                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                      Tool calls are automatically approved without user confirmation.
+
+                    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                      Tool calls require user confirmation before execution.
+
+                  - `JsonElement Type "grep"constant`
+
+                - `class BetaManagedAgentsWebFetchToolConfig:`
+
+                  Configuration for the web_fetch tool.
+
+                  - `required Boolean Enabled`
+
+                  - `JsonElement Name "web_fetch"constant`
+
+                  - `required PermissionPolicy PermissionPolicy`
+
+                    Permission policy for tool execution.
+
+                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                      Tool calls are automatically approved without user confirmation.
+
+                    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                      Tool calls require user confirmation before execution.
+
+                  - `JsonElement Type "web_fetch"constant`
+
+                  - `IReadOnlyList<string> AllowedDomains`
+
+                  - `IReadOnlyList<string> BlockedDomains`
+
+                  - `Int? MaxContentTokens`
+
+                - `class BetaManagedAgentsWebSearchToolConfig:`
+
+                  Configuration for the web_search tool.
+
+                  - `required Boolean Enabled`
+
+                  - `JsonElement Name "web_search"constant`
+
+                  - `required PermissionPolicy PermissionPolicy`
+
+                    Permission policy for tool execution.
+
+                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                      Tool calls are automatically approved without user confirmation.
+
+                    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                      Tool calls require user confirmation before execution.
+
+                  - `JsonElement Type "web_search"constant`
+
+                  - `IReadOnlyList<string> AllowedDomains`
+
+                  - `IReadOnlyList<string> BlockedDomains`
+
+                  - `BetaManagedAgentsUserLocation? UserLocation`
+
+                    Approximate user location for search result localization.
+
+                    - `JsonElement Type "approximate"constant`
+
+                      Location precision. Only "approximate" is supported.
+
+                    - `string? City`
+
+                      City name.
+
+                    - `string? Country`
+
+                      Two-letter ISO 3166-1 country code, uppercase.
+
+                    - `string? Region`
+
+                      Region or state name.
+
+                    - `string? Timezone`
+
+                      IANA timezone identifier, e.g. "America/Los_Angeles".
 
               - `required BetaManagedAgentsAgentToolsetDefaultConfig DefaultConfig`
 
@@ -61850,47 +66738,223 @@ Console.WriteLine(betaManagedAgentsSession);
 
             - `required IReadOnlyList<BetaManagedAgentsAgentToolConfig> Configs`
 
-              - `required Boolean Enabled`
+              - `class BetaManagedAgentsBashToolConfig:`
 
-              - `required Name Name`
+                Configuration for the bash tool.
 
-                Built-in agent tool identifier.
+                - `required Boolean Enabled`
 
-                - `"bash"Bash`
+                - `JsonElement Name "bash"constant`
 
-                - `"edit"Edit`
+                - `required PermissionPolicy PermissionPolicy`
 
-                - `"read"Read`
+                  Permission policy for tool execution.
 
-                - `"write"Write`
+                  - `class BetaManagedAgentsAlwaysAllowPolicy:`
 
-                - `"glob"Glob`
+                    Tool calls are automatically approved without user confirmation.
 
-                - `"grep"Grep`
+                    - `required Type Type`
 
-                - `"web_fetch"WebFetch`
+                      - `"always_allow"AlwaysAllow`
 
-                - `"web_search"WebSearch`
+                  - `class BetaManagedAgentsAlwaysAskPolicy:`
 
-              - `required PermissionPolicy PermissionPolicy`
+                    Tool calls require user confirmation before execution.
 
-                Permission policy for tool execution.
+                    - `required Type Type`
 
-                - `class BetaManagedAgentsAlwaysAllowPolicy:`
+                      - `"always_ask"AlwaysAsk`
 
-                  Tool calls are automatically approved without user confirmation.
+                - `JsonElement Type "bash"constant`
 
-                  - `required Type Type`
+              - `class BetaManagedAgentsEditToolConfig:`
 
-                    - `"always_allow"AlwaysAllow`
+                Configuration for the edit tool.
 
-                - `class BetaManagedAgentsAlwaysAskPolicy:`
+                - `required Boolean Enabled`
 
-                  Tool calls require user confirmation before execution.
+                - `JsonElement Name "edit"constant`
 
-                  - `required Type Type`
+                - `required PermissionPolicy PermissionPolicy`
 
-                    - `"always_ask"AlwaysAsk`
+                  Permission policy for tool execution.
+
+                  - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                    Tool calls are automatically approved without user confirmation.
+
+                  - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                    Tool calls require user confirmation before execution.
+
+                - `JsonElement Type "edit"constant`
+
+              - `class BetaManagedAgentsReadToolConfig:`
+
+                Configuration for the read tool.
+
+                - `required Boolean Enabled`
+
+                - `JsonElement Name "read"constant`
+
+                - `required PermissionPolicy PermissionPolicy`
+
+                  Permission policy for tool execution.
+
+                  - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                    Tool calls are automatically approved without user confirmation.
+
+                  - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                    Tool calls require user confirmation before execution.
+
+                - `JsonElement Type "read"constant`
+
+              - `class BetaManagedAgentsWriteToolConfig:`
+
+                Configuration for the write tool.
+
+                - `required Boolean Enabled`
+
+                - `JsonElement Name "write"constant`
+
+                - `required PermissionPolicy PermissionPolicy`
+
+                  Permission policy for tool execution.
+
+                  - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                    Tool calls are automatically approved without user confirmation.
+
+                  - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                    Tool calls require user confirmation before execution.
+
+                - `JsonElement Type "write"constant`
+
+              - `class BetaManagedAgentsGlobToolConfig:`
+
+                Configuration for the glob tool.
+
+                - `required Boolean Enabled`
+
+                - `JsonElement Name "glob"constant`
+
+                - `required PermissionPolicy PermissionPolicy`
+
+                  Permission policy for tool execution.
+
+                  - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                    Tool calls are automatically approved without user confirmation.
+
+                  - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                    Tool calls require user confirmation before execution.
+
+                - `JsonElement Type "glob"constant`
+
+              - `class BetaManagedAgentsGrepToolConfig:`
+
+                Configuration for the grep tool.
+
+                - `required Boolean Enabled`
+
+                - `JsonElement Name "grep"constant`
+
+                - `required PermissionPolicy PermissionPolicy`
+
+                  Permission policy for tool execution.
+
+                  - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                    Tool calls are automatically approved without user confirmation.
+
+                  - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                    Tool calls require user confirmation before execution.
+
+                - `JsonElement Type "grep"constant`
+
+              - `class BetaManagedAgentsWebFetchToolConfig:`
+
+                Configuration for the web_fetch tool.
+
+                - `required Boolean Enabled`
+
+                - `JsonElement Name "web_fetch"constant`
+
+                - `required PermissionPolicy PermissionPolicy`
+
+                  Permission policy for tool execution.
+
+                  - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                    Tool calls are automatically approved without user confirmation.
+
+                  - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                    Tool calls require user confirmation before execution.
+
+                - `JsonElement Type "web_fetch"constant`
+
+                - `IReadOnlyList<string> AllowedDomains`
+
+                - `IReadOnlyList<string> BlockedDomains`
+
+                - `Int? MaxContentTokens`
+
+              - `class BetaManagedAgentsWebSearchToolConfig:`
+
+                Configuration for the web_search tool.
+
+                - `required Boolean Enabled`
+
+                - `JsonElement Name "web_search"constant`
+
+                - `required PermissionPolicy PermissionPolicy`
+
+                  Permission policy for tool execution.
+
+                  - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                    Tool calls are automatically approved without user confirmation.
+
+                  - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                    Tool calls require user confirmation before execution.
+
+                - `JsonElement Type "web_search"constant`
+
+                - `IReadOnlyList<string> AllowedDomains`
+
+                - `IReadOnlyList<string> BlockedDomains`
+
+                - `BetaManagedAgentsUserLocation? UserLocation`
+
+                  Approximate user location for search result localization.
+
+                  - `JsonElement Type "approximate"constant`
+
+                    Location precision. Only "approximate" is supported.
+
+                  - `string? City`
+
+                    City name.
+
+                  - `string? Country`
+
+                    Two-letter ISO 3166-1 country code, uppercase.
+
+                  - `string? Region`
+
+                    Region or state name.
+
+                  - `string? Timezone`
+
+                    IANA timezone identifier, e.g. "America/Los_Angeles".
 
             - `required BetaManagedAgentsAgentToolsetDefaultConfig DefaultConfig`
 
@@ -62070,49 +67134,281 @@ Console.WriteLine(betaManagedAgentsSession);
 
         Per-tool configuration overrides.
 
-        - `required Name Name`
+        - `class BetaManagedAgentsBashToolConfigParams:`
 
-          Built-in agent tool identifier.
+          Configuration override for the bash tool.
 
-          - `"bash"Bash`
+          - `JsonElement Name "bash"constant`
 
-          - `"edit"Edit`
+            Must be "bash".
 
-          - `"read"Read`
+          - `Boolean? Enabled`
 
-          - `"write"Write`
+            Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `"glob"Glob`
+          - `PermissionPolicy? PermissionPolicy`
 
-          - `"grep"Grep`
+            Permission policy for tool execution.
 
-          - `"web_fetch"WebFetch`
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
 
-          - `"web_search"WebSearch`
+              Tool calls are automatically approved without user confirmation.
 
-        - `Boolean? Enabled`
+              - `required Type Type`
 
-          Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+                - `"always_allow"AlwaysAllow`
 
-        - `PermissionPolicy? PermissionPolicy`
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
 
-          Permission policy for tool execution.
+              Tool calls require user confirmation before execution.
 
-          - `class BetaManagedAgentsAlwaysAllowPolicy:`
+              - `required Type Type`
 
-            Tool calls are automatically approved without user confirmation.
+                - `"always_ask"AlwaysAsk`
 
-            - `required Type Type`
+          - `Type Type`
 
-              - `"always_allow"AlwaysAllow`
+            - `"bash"Bash`
 
-          - `class BetaManagedAgentsAlwaysAskPolicy:`
+        - `class BetaManagedAgentsEditToolConfigParams:`
 
-            Tool calls require user confirmation before execution.
+          Configuration override for the edit tool.
 
-            - `required Type Type`
+          - `JsonElement Name "edit"constant`
 
-              - `"always_ask"AlwaysAsk`
+            Must be "edit".
+
+          - `Boolean? Enabled`
+
+            Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+
+          - `PermissionPolicy? PermissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+          - `Type Type`
+
+            - `"edit"Edit`
+
+        - `class BetaManagedAgentsReadToolConfigParams:`
+
+          Configuration override for the read tool.
+
+          - `JsonElement Name "read"constant`
+
+            Must be "read".
+
+          - `Boolean? Enabled`
+
+            Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+
+          - `PermissionPolicy? PermissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+          - `Type Type`
+
+            - `"read"Read`
+
+        - `class BetaManagedAgentsWriteToolConfigParams:`
+
+          Configuration override for the write tool.
+
+          - `JsonElement Name "write"constant`
+
+            Must be "write".
+
+          - `Boolean? Enabled`
+
+            Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+
+          - `PermissionPolicy? PermissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+          - `Type Type`
+
+            - `"write"Write`
+
+        - `class BetaManagedAgentsGlobToolConfigParams:`
+
+          Configuration override for the glob tool.
+
+          - `JsonElement Name "glob"constant`
+
+            Must be "glob".
+
+          - `Boolean? Enabled`
+
+            Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+
+          - `PermissionPolicy? PermissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+          - `Type Type`
+
+            - `"glob"Glob`
+
+        - `class BetaManagedAgentsGrepToolConfigParams:`
+
+          Configuration override for the grep tool.
+
+          - `JsonElement Name "grep"constant`
+
+            Must be "grep".
+
+          - `Boolean? Enabled`
+
+            Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+
+          - `PermissionPolicy? PermissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+          - `Type Type`
+
+            - `"grep"Grep`
+
+        - `class BetaManagedAgentsWebFetchToolConfigParams:`
+
+          Configuration override for the web_fetch tool.
+
+          - `JsonElement Name "web_fetch"constant`
+
+            Must be "web_fetch".
+
+          - `IReadOnlyList<string> AllowedDomains`
+
+            Only fetch URLs whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "docs.example.com" (no scheme, port, or path). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with blocked_domains.
+
+          - `IReadOnlyList<string> BlockedDomains`
+
+            Never fetch URLs whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "ads.example.com" (no scheme, port, or path). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with allowed_domains.
+
+          - `Boolean? Enabled`
+
+            Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+
+          - `Int? MaxContentTokens`
+
+            Maximum number of tokens of fetched text content to include in context per call. Does not apply to binary content such as PDFs.
+
+          - `PermissionPolicy? PermissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+          - `Type Type`
+
+            - `"web_fetch"WebFetch`
+
+        - `class BetaManagedAgentsWebSearchToolConfigParams:`
+
+          Configuration override for the web_search tool.
+
+          - `JsonElement Name "web_search"constant`
+
+            Must be "web_search".
+
+          - `IReadOnlyList<string> AllowedDomains`
+
+            Only return search results whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "docs.example.com" (no scheme or port; an optional path suffix is accepted). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with blocked_domains.
+
+          - `IReadOnlyList<string> BlockedDomains`
+
+            Never return search results whose host is one of these domains or a subdomain of one. Each entry is a plain hostname like "ads.example.com" (no scheme or port; an optional path suffix is accepted). At most 64 entries; an empty list is rejected (omit the field instead). Cannot be combined with allowed_domains.
+
+          - `Boolean? Enabled`
+
+            Whether this tool is enabled and available to Claude. Overrides the default_config setting.
+
+          - `PermissionPolicy? PermissionPolicy`
+
+            Permission policy for tool execution.
+
+            - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+              Tool calls are automatically approved without user confirmation.
+
+            - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+              Tool calls require user confirmation before execution.
+
+          - `Type Type`
+
+            - `"web_search"WebSearch`
+
+          - `BetaManagedAgentsUserLocation? UserLocation`
+
+            Approximate user location for search result localization.
+
+            - `JsonElement Type "approximate"constant`
+
+              Location precision. Only "approximate" is supported.
+
+            - `string? City`
+
+              City name.
+
+            - `string? Country`
+
+              Two-letter ISO 3166-1 country code, uppercase.
+
+            - `string? Region`
+
+              Region or state name.
+
+            - `string? Timezone`
+
+              IANA timezone identifier, e.g. "America/Los_Angeles".
 
       - `BetaManagedAgentsAgentToolsetDefaultConfigParams? DefaultConfig`
 
@@ -62398,47 +67694,223 @@ Console.WriteLine(betaManagedAgentsSession);
 
           - `required IReadOnlyList<BetaManagedAgentsAgentToolConfig> Configs`
 
-            - `required Boolean Enabled`
+            - `class BetaManagedAgentsBashToolConfig:`
 
-            - `required Name Name`
+              Configuration for the bash tool.
 
-              Built-in agent tool identifier.
+              - `required Boolean Enabled`
 
-              - `"bash"Bash`
+              - `JsonElement Name "bash"constant`
 
-              - `"edit"Edit`
+              - `required PermissionPolicy PermissionPolicy`
 
-              - `"read"Read`
+                Permission policy for tool execution.
 
-              - `"write"Write`
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
 
-              - `"glob"Glob`
+                  Tool calls are automatically approved without user confirmation.
 
-              - `"grep"Grep`
+                  - `required Type Type`
 
-              - `"web_fetch"WebFetch`
+                    - `"always_allow"AlwaysAllow`
 
-              - `"web_search"WebSearch`
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
 
-            - `required PermissionPolicy PermissionPolicy`
+                  Tool calls require user confirmation before execution.
 
-              Permission policy for tool execution.
+                  - `required Type Type`
 
-              - `class BetaManagedAgentsAlwaysAllowPolicy:`
+                    - `"always_ask"AlwaysAsk`
 
-                Tool calls are automatically approved without user confirmation.
+              - `JsonElement Type "bash"constant`
 
-                - `required Type Type`
+            - `class BetaManagedAgentsEditToolConfig:`
 
-                  - `"always_allow"AlwaysAllow`
+              Configuration for the edit tool.
 
-              - `class BetaManagedAgentsAlwaysAskPolicy:`
+              - `required Boolean Enabled`
 
-                Tool calls require user confirmation before execution.
+              - `JsonElement Name "edit"constant`
 
-                - `required Type Type`
+              - `required PermissionPolicy PermissionPolicy`
 
-                  - `"always_ask"AlwaysAsk`
+                Permission policy for tool execution.
+
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                  Tool calls require user confirmation before execution.
+
+              - `JsonElement Type "edit"constant`
+
+            - `class BetaManagedAgentsReadToolConfig:`
+
+              Configuration for the read tool.
+
+              - `required Boolean Enabled`
+
+              - `JsonElement Name "read"constant`
+
+              - `required PermissionPolicy PermissionPolicy`
+
+                Permission policy for tool execution.
+
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                  Tool calls require user confirmation before execution.
+
+              - `JsonElement Type "read"constant`
+
+            - `class BetaManagedAgentsWriteToolConfig:`
+
+              Configuration for the write tool.
+
+              - `required Boolean Enabled`
+
+              - `JsonElement Name "write"constant`
+
+              - `required PermissionPolicy PermissionPolicy`
+
+                Permission policy for tool execution.
+
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                  Tool calls require user confirmation before execution.
+
+              - `JsonElement Type "write"constant`
+
+            - `class BetaManagedAgentsGlobToolConfig:`
+
+              Configuration for the glob tool.
+
+              - `required Boolean Enabled`
+
+              - `JsonElement Name "glob"constant`
+
+              - `required PermissionPolicy PermissionPolicy`
+
+                Permission policy for tool execution.
+
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                  Tool calls require user confirmation before execution.
+
+              - `JsonElement Type "glob"constant`
+
+            - `class BetaManagedAgentsGrepToolConfig:`
+
+              Configuration for the grep tool.
+
+              - `required Boolean Enabled`
+
+              - `JsonElement Name "grep"constant`
+
+              - `required PermissionPolicy PermissionPolicy`
+
+                Permission policy for tool execution.
+
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                  Tool calls require user confirmation before execution.
+
+              - `JsonElement Type "grep"constant`
+
+            - `class BetaManagedAgentsWebFetchToolConfig:`
+
+              Configuration for the web_fetch tool.
+
+              - `required Boolean Enabled`
+
+              - `JsonElement Name "web_fetch"constant`
+
+              - `required PermissionPolicy PermissionPolicy`
+
+                Permission policy for tool execution.
+
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                  Tool calls require user confirmation before execution.
+
+              - `JsonElement Type "web_fetch"constant`
+
+              - `IReadOnlyList<string> AllowedDomains`
+
+              - `IReadOnlyList<string> BlockedDomains`
+
+              - `Int? MaxContentTokens`
+
+            - `class BetaManagedAgentsWebSearchToolConfig:`
+
+              Configuration for the web_search tool.
+
+              - `required Boolean Enabled`
+
+              - `JsonElement Name "web_search"constant`
+
+              - `required PermissionPolicy PermissionPolicy`
+
+                Permission policy for tool execution.
+
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                  Tool calls require user confirmation before execution.
+
+              - `JsonElement Type "web_search"constant`
+
+              - `IReadOnlyList<string> AllowedDomains`
+
+              - `IReadOnlyList<string> BlockedDomains`
+
+              - `BetaManagedAgentsUserLocation? UserLocation`
+
+                Approximate user location for search result localization.
+
+                - `JsonElement Type "approximate"constant`
+
+                  Location precision. Only "approximate" is supported.
+
+                - `string? City`
+
+                  City name.
+
+                - `string? Country`
+
+                  Two-letter ISO 3166-1 country code, uppercase.
+
+                - `string? Region`
+
+                  Region or state name.
+
+                - `string? Timezone`
+
+                  IANA timezone identifier, e.g. "America/Los_Angeles".
 
           - `required BetaManagedAgentsAgentToolsetDefaultConfig DefaultConfig`
 
@@ -62782,47 +68254,223 @@ Console.WriteLine(betaManagedAgentsSession);
 
               - `required IReadOnlyList<BetaManagedAgentsAgentToolConfig> Configs`
 
-                - `required Boolean Enabled`
+                - `class BetaManagedAgentsBashToolConfig:`
 
-                - `required Name Name`
+                  Configuration for the bash tool.
 
-                  Built-in agent tool identifier.
+                  - `required Boolean Enabled`
 
-                  - `"bash"Bash`
+                  - `JsonElement Name "bash"constant`
 
-                  - `"edit"Edit`
+                  - `required PermissionPolicy PermissionPolicy`
 
-                  - `"read"Read`
+                    Permission policy for tool execution.
 
-                  - `"write"Write`
+                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
 
-                  - `"glob"Glob`
+                      Tool calls are automatically approved without user confirmation.
 
-                  - `"grep"Grep`
+                      - `required Type Type`
 
-                  - `"web_fetch"WebFetch`
+                        - `"always_allow"AlwaysAllow`
 
-                  - `"web_search"WebSearch`
+                    - `class BetaManagedAgentsAlwaysAskPolicy:`
 
-                - `required PermissionPolicy PermissionPolicy`
+                      Tool calls require user confirmation before execution.
 
-                  Permission policy for tool execution.
+                      - `required Type Type`
 
-                  - `class BetaManagedAgentsAlwaysAllowPolicy:`
+                        - `"always_ask"AlwaysAsk`
 
-                    Tool calls are automatically approved without user confirmation.
+                  - `JsonElement Type "bash"constant`
 
-                    - `required Type Type`
+                - `class BetaManagedAgentsEditToolConfig:`
 
-                      - `"always_allow"AlwaysAllow`
+                  Configuration for the edit tool.
 
-                  - `class BetaManagedAgentsAlwaysAskPolicy:`
+                  - `required Boolean Enabled`
 
-                    Tool calls require user confirmation before execution.
+                  - `JsonElement Name "edit"constant`
 
-                    - `required Type Type`
+                  - `required PermissionPolicy PermissionPolicy`
 
-                      - `"always_ask"AlwaysAsk`
+                    Permission policy for tool execution.
+
+                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                      Tool calls are automatically approved without user confirmation.
+
+                    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                      Tool calls require user confirmation before execution.
+
+                  - `JsonElement Type "edit"constant`
+
+                - `class BetaManagedAgentsReadToolConfig:`
+
+                  Configuration for the read tool.
+
+                  - `required Boolean Enabled`
+
+                  - `JsonElement Name "read"constant`
+
+                  - `required PermissionPolicy PermissionPolicy`
+
+                    Permission policy for tool execution.
+
+                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                      Tool calls are automatically approved without user confirmation.
+
+                    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                      Tool calls require user confirmation before execution.
+
+                  - `JsonElement Type "read"constant`
+
+                - `class BetaManagedAgentsWriteToolConfig:`
+
+                  Configuration for the write tool.
+
+                  - `required Boolean Enabled`
+
+                  - `JsonElement Name "write"constant`
+
+                  - `required PermissionPolicy PermissionPolicy`
+
+                    Permission policy for tool execution.
+
+                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                      Tool calls are automatically approved without user confirmation.
+
+                    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                      Tool calls require user confirmation before execution.
+
+                  - `JsonElement Type "write"constant`
+
+                - `class BetaManagedAgentsGlobToolConfig:`
+
+                  Configuration for the glob tool.
+
+                  - `required Boolean Enabled`
+
+                  - `JsonElement Name "glob"constant`
+
+                  - `required PermissionPolicy PermissionPolicy`
+
+                    Permission policy for tool execution.
+
+                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                      Tool calls are automatically approved without user confirmation.
+
+                    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                      Tool calls require user confirmation before execution.
+
+                  - `JsonElement Type "glob"constant`
+
+                - `class BetaManagedAgentsGrepToolConfig:`
+
+                  Configuration for the grep tool.
+
+                  - `required Boolean Enabled`
+
+                  - `JsonElement Name "grep"constant`
+
+                  - `required PermissionPolicy PermissionPolicy`
+
+                    Permission policy for tool execution.
+
+                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                      Tool calls are automatically approved without user confirmation.
+
+                    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                      Tool calls require user confirmation before execution.
+
+                  - `JsonElement Type "grep"constant`
+
+                - `class BetaManagedAgentsWebFetchToolConfig:`
+
+                  Configuration for the web_fetch tool.
+
+                  - `required Boolean Enabled`
+
+                  - `JsonElement Name "web_fetch"constant`
+
+                  - `required PermissionPolicy PermissionPolicy`
+
+                    Permission policy for tool execution.
+
+                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                      Tool calls are automatically approved without user confirmation.
+
+                    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                      Tool calls require user confirmation before execution.
+
+                  - `JsonElement Type "web_fetch"constant`
+
+                  - `IReadOnlyList<string> AllowedDomains`
+
+                  - `IReadOnlyList<string> BlockedDomains`
+
+                  - `Int? MaxContentTokens`
+
+                - `class BetaManagedAgentsWebSearchToolConfig:`
+
+                  Configuration for the web_search tool.
+
+                  - `required Boolean Enabled`
+
+                  - `JsonElement Name "web_search"constant`
+
+                  - `required PermissionPolicy PermissionPolicy`
+
+                    Permission policy for tool execution.
+
+                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                      Tool calls are automatically approved without user confirmation.
+
+                    - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                      Tool calls require user confirmation before execution.
+
+                  - `JsonElement Type "web_search"constant`
+
+                  - `IReadOnlyList<string> AllowedDomains`
+
+                  - `IReadOnlyList<string> BlockedDomains`
+
+                  - `BetaManagedAgentsUserLocation? UserLocation`
+
+                    Approximate user location for search result localization.
+
+                    - `JsonElement Type "approximate"constant`
+
+                      Location precision. Only "approximate" is supported.
+
+                    - `string? City`
+
+                      City name.
+
+                    - `string? Country`
+
+                      Two-letter ISO 3166-1 country code, uppercase.
+
+                    - `string? Region`
+
+                      Region or state name.
+
+                    - `string? Timezone`
+
+                      IANA timezone identifier, e.g. "America/Los_Angeles".
 
               - `required BetaManagedAgentsAgentToolsetDefaultConfig DefaultConfig`
 
@@ -65250,47 +70898,223 @@ List Events
 
                   - `required IReadOnlyList<BetaManagedAgentsAgentToolConfig> Configs`
 
-                    - `required Boolean Enabled`
+                    - `class BetaManagedAgentsBashToolConfig:`
 
-                    - `required Name Name`
+                      Configuration for the bash tool.
 
-                      Built-in agent tool identifier.
+                      - `required Boolean Enabled`
 
-                      - `"bash"Bash`
+                      - `JsonElement Name "bash"constant`
 
-                      - `"edit"Edit`
+                      - `required PermissionPolicy PermissionPolicy`
 
-                      - `"read"Read`
+                        Permission policy for tool execution.
 
-                      - `"write"Write`
+                        - `class BetaManagedAgentsAlwaysAllowPolicy:`
 
-                      - `"glob"Glob`
+                          Tool calls are automatically approved without user confirmation.
 
-                      - `"grep"Grep`
+                          - `required Type Type`
 
-                      - `"web_fetch"WebFetch`
+                            - `"always_allow"AlwaysAllow`
 
-                      - `"web_search"WebSearch`
+                        - `class BetaManagedAgentsAlwaysAskPolicy:`
 
-                    - `required PermissionPolicy PermissionPolicy`
+                          Tool calls require user confirmation before execution.
 
-                      Permission policy for tool execution.
+                          - `required Type Type`
 
-                      - `class BetaManagedAgentsAlwaysAllowPolicy:`
+                            - `"always_ask"AlwaysAsk`
 
-                        Tool calls are automatically approved without user confirmation.
+                      - `JsonElement Type "bash"constant`
 
-                        - `required Type Type`
+                    - `class BetaManagedAgentsEditToolConfig:`
 
-                          - `"always_allow"AlwaysAllow`
+                      Configuration for the edit tool.
 
-                      - `class BetaManagedAgentsAlwaysAskPolicy:`
+                      - `required Boolean Enabled`
 
-                        Tool calls require user confirmation before execution.
+                      - `JsonElement Name "edit"constant`
 
-                        - `required Type Type`
+                      - `required PermissionPolicy PermissionPolicy`
 
-                          - `"always_ask"AlwaysAsk`
+                        Permission policy for tool execution.
+
+                        - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                          Tool calls are automatically approved without user confirmation.
+
+                        - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                          Tool calls require user confirmation before execution.
+
+                      - `JsonElement Type "edit"constant`
+
+                    - `class BetaManagedAgentsReadToolConfig:`
+
+                      Configuration for the read tool.
+
+                      - `required Boolean Enabled`
+
+                      - `JsonElement Name "read"constant`
+
+                      - `required PermissionPolicy PermissionPolicy`
+
+                        Permission policy for tool execution.
+
+                        - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                          Tool calls are automatically approved without user confirmation.
+
+                        - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                          Tool calls require user confirmation before execution.
+
+                      - `JsonElement Type "read"constant`
+
+                    - `class BetaManagedAgentsWriteToolConfig:`
+
+                      Configuration for the write tool.
+
+                      - `required Boolean Enabled`
+
+                      - `JsonElement Name "write"constant`
+
+                      - `required PermissionPolicy PermissionPolicy`
+
+                        Permission policy for tool execution.
+
+                        - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                          Tool calls are automatically approved without user confirmation.
+
+                        - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                          Tool calls require user confirmation before execution.
+
+                      - `JsonElement Type "write"constant`
+
+                    - `class BetaManagedAgentsGlobToolConfig:`
+
+                      Configuration for the glob tool.
+
+                      - `required Boolean Enabled`
+
+                      - `JsonElement Name "glob"constant`
+
+                      - `required PermissionPolicy PermissionPolicy`
+
+                        Permission policy for tool execution.
+
+                        - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                          Tool calls are automatically approved without user confirmation.
+
+                        - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                          Tool calls require user confirmation before execution.
+
+                      - `JsonElement Type "glob"constant`
+
+                    - `class BetaManagedAgentsGrepToolConfig:`
+
+                      Configuration for the grep tool.
+
+                      - `required Boolean Enabled`
+
+                      - `JsonElement Name "grep"constant`
+
+                      - `required PermissionPolicy PermissionPolicy`
+
+                        Permission policy for tool execution.
+
+                        - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                          Tool calls are automatically approved without user confirmation.
+
+                        - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                          Tool calls require user confirmation before execution.
+
+                      - `JsonElement Type "grep"constant`
+
+                    - `class BetaManagedAgentsWebFetchToolConfig:`
+
+                      Configuration for the web_fetch tool.
+
+                      - `required Boolean Enabled`
+
+                      - `JsonElement Name "web_fetch"constant`
+
+                      - `required PermissionPolicy PermissionPolicy`
+
+                        Permission policy for tool execution.
+
+                        - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                          Tool calls are automatically approved without user confirmation.
+
+                        - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                          Tool calls require user confirmation before execution.
+
+                      - `JsonElement Type "web_fetch"constant`
+
+                      - `IReadOnlyList<string> AllowedDomains`
+
+                      - `IReadOnlyList<string> BlockedDomains`
+
+                      - `Int? MaxContentTokens`
+
+                    - `class BetaManagedAgentsWebSearchToolConfig:`
+
+                      Configuration for the web_search tool.
+
+                      - `required Boolean Enabled`
+
+                      - `JsonElement Name "web_search"constant`
+
+                      - `required PermissionPolicy PermissionPolicy`
+
+                        Permission policy for tool execution.
+
+                        - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                          Tool calls are automatically approved without user confirmation.
+
+                        - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                          Tool calls require user confirmation before execution.
+
+                      - `JsonElement Type "web_search"constant`
+
+                      - `IReadOnlyList<string> AllowedDomains`
+
+                      - `IReadOnlyList<string> BlockedDomains`
+
+                      - `BetaManagedAgentsUserLocation? UserLocation`
+
+                        Approximate user location for search result localization.
+
+                        - `JsonElement Type "approximate"constant`
+
+                          Location precision. Only "approximate" is supported.
+
+                        - `string? City`
+
+                          City name.
+
+                        - `string? Country`
+
+                          Two-letter ISO 3166-1 country code, uppercase.
+
+                        - `string? Region`
+
+                          Region or state name.
+
+                        - `string? Timezone`
+
+                          IANA timezone identifier, e.g. "America/Los_Angeles".
 
                   - `required BetaManagedAgentsAgentToolsetDefaultConfig DefaultConfig`
 
@@ -68323,47 +74147,223 @@ Stream Events
 
                 - `required IReadOnlyList<BetaManagedAgentsAgentToolConfig> Configs`
 
-                  - `required Boolean Enabled`
+                  - `class BetaManagedAgentsBashToolConfig:`
 
-                  - `required Name Name`
+                    Configuration for the bash tool.
 
-                    Built-in agent tool identifier.
+                    - `required Boolean Enabled`
 
-                    - `"bash"Bash`
+                    - `JsonElement Name "bash"constant`
 
-                    - `"edit"Edit`
+                    - `required PermissionPolicy PermissionPolicy`
 
-                    - `"read"Read`
+                      Permission policy for tool execution.
 
-                    - `"write"Write`
+                      - `class BetaManagedAgentsAlwaysAllowPolicy:`
 
-                    - `"glob"Glob`
+                        Tool calls are automatically approved without user confirmation.
 
-                    - `"grep"Grep`
+                        - `required Type Type`
 
-                    - `"web_fetch"WebFetch`
+                          - `"always_allow"AlwaysAllow`
 
-                    - `"web_search"WebSearch`
+                      - `class BetaManagedAgentsAlwaysAskPolicy:`
 
-                  - `required PermissionPolicy PermissionPolicy`
+                        Tool calls require user confirmation before execution.
 
-                    Permission policy for tool execution.
+                        - `required Type Type`
 
-                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+                          - `"always_ask"AlwaysAsk`
 
-                      Tool calls are automatically approved without user confirmation.
+                    - `JsonElement Type "bash"constant`
 
-                      - `required Type Type`
+                  - `class BetaManagedAgentsEditToolConfig:`
 
-                        - `"always_allow"AlwaysAllow`
+                    Configuration for the edit tool.
 
-                    - `class BetaManagedAgentsAlwaysAskPolicy:`
+                    - `required Boolean Enabled`
 
-                      Tool calls require user confirmation before execution.
+                    - `JsonElement Name "edit"constant`
 
-                      - `required Type Type`
+                    - `required PermissionPolicy PermissionPolicy`
 
-                        - `"always_ask"AlwaysAsk`
+                      Permission policy for tool execution.
+
+                      - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                        Tool calls are automatically approved without user confirmation.
+
+                      - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                        Tool calls require user confirmation before execution.
+
+                    - `JsonElement Type "edit"constant`
+
+                  - `class BetaManagedAgentsReadToolConfig:`
+
+                    Configuration for the read tool.
+
+                    - `required Boolean Enabled`
+
+                    - `JsonElement Name "read"constant`
+
+                    - `required PermissionPolicy PermissionPolicy`
+
+                      Permission policy for tool execution.
+
+                      - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                        Tool calls are automatically approved without user confirmation.
+
+                      - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                        Tool calls require user confirmation before execution.
+
+                    - `JsonElement Type "read"constant`
+
+                  - `class BetaManagedAgentsWriteToolConfig:`
+
+                    Configuration for the write tool.
+
+                    - `required Boolean Enabled`
+
+                    - `JsonElement Name "write"constant`
+
+                    - `required PermissionPolicy PermissionPolicy`
+
+                      Permission policy for tool execution.
+
+                      - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                        Tool calls are automatically approved without user confirmation.
+
+                      - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                        Tool calls require user confirmation before execution.
+
+                    - `JsonElement Type "write"constant`
+
+                  - `class BetaManagedAgentsGlobToolConfig:`
+
+                    Configuration for the glob tool.
+
+                    - `required Boolean Enabled`
+
+                    - `JsonElement Name "glob"constant`
+
+                    - `required PermissionPolicy PermissionPolicy`
+
+                      Permission policy for tool execution.
+
+                      - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                        Tool calls are automatically approved without user confirmation.
+
+                      - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                        Tool calls require user confirmation before execution.
+
+                    - `JsonElement Type "glob"constant`
+
+                  - `class BetaManagedAgentsGrepToolConfig:`
+
+                    Configuration for the grep tool.
+
+                    - `required Boolean Enabled`
+
+                    - `JsonElement Name "grep"constant`
+
+                    - `required PermissionPolicy PermissionPolicy`
+
+                      Permission policy for tool execution.
+
+                      - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                        Tool calls are automatically approved without user confirmation.
+
+                      - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                        Tool calls require user confirmation before execution.
+
+                    - `JsonElement Type "grep"constant`
+
+                  - `class BetaManagedAgentsWebFetchToolConfig:`
+
+                    Configuration for the web_fetch tool.
+
+                    - `required Boolean Enabled`
+
+                    - `JsonElement Name "web_fetch"constant`
+
+                    - `required PermissionPolicy PermissionPolicy`
+
+                      Permission policy for tool execution.
+
+                      - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                        Tool calls are automatically approved without user confirmation.
+
+                      - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                        Tool calls require user confirmation before execution.
+
+                    - `JsonElement Type "web_fetch"constant`
+
+                    - `IReadOnlyList<string> AllowedDomains`
+
+                    - `IReadOnlyList<string> BlockedDomains`
+
+                    - `Int? MaxContentTokens`
+
+                  - `class BetaManagedAgentsWebSearchToolConfig:`
+
+                    Configuration for the web_search tool.
+
+                    - `required Boolean Enabled`
+
+                    - `JsonElement Name "web_search"constant`
+
+                    - `required PermissionPolicy PermissionPolicy`
+
+                      Permission policy for tool execution.
+
+                      - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                        Tool calls are automatically approved without user confirmation.
+
+                      - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                        Tool calls require user confirmation before execution.
+
+                    - `JsonElement Type "web_search"constant`
+
+                    - `IReadOnlyList<string> AllowedDomains`
+
+                    - `IReadOnlyList<string> BlockedDomains`
+
+                    - `BetaManagedAgentsUserLocation? UserLocation`
+
+                      Approximate user location for search result localization.
+
+                      - `JsonElement Type "approximate"constant`
+
+                        Location precision. Only "approximate" is supported.
+
+                      - `string? City`
+
+                        City name.
+
+                      - `string? Country`
+
+                        Two-letter ISO 3166-1 country code, uppercase.
+
+                      - `string? Region`
+
+                        Region or state name.
+
+                      - `string? Timezone`
+
+                        IANA timezone identifier, e.g. "America/Los_Angeles".
 
                 - `required BetaManagedAgentsAgentToolsetDefaultConfig DefaultConfig`
 
@@ -73145,47 +79145,223 @@ await foreach (var betaManagedAgentsStreamSessionEvents in client.Beta.Sessions.
 
                 - `required IReadOnlyList<BetaManagedAgentsAgentToolConfig> Configs`
 
-                  - `required Boolean Enabled`
+                  - `class BetaManagedAgentsBashToolConfig:`
 
-                  - `required Name Name`
+                    Configuration for the bash tool.
 
-                    Built-in agent tool identifier.
+                    - `required Boolean Enabled`
 
-                    - `"bash"Bash`
+                    - `JsonElement Name "bash"constant`
 
-                    - `"edit"Edit`
+                    - `required PermissionPolicy PermissionPolicy`
 
-                    - `"read"Read`
+                      Permission policy for tool execution.
 
-                    - `"write"Write`
+                      - `class BetaManagedAgentsAlwaysAllowPolicy:`
 
-                    - `"glob"Glob`
+                        Tool calls are automatically approved without user confirmation.
 
-                    - `"grep"Grep`
+                        - `required Type Type`
 
-                    - `"web_fetch"WebFetch`
+                          - `"always_allow"AlwaysAllow`
 
-                    - `"web_search"WebSearch`
+                      - `class BetaManagedAgentsAlwaysAskPolicy:`
 
-                  - `required PermissionPolicy PermissionPolicy`
+                        Tool calls require user confirmation before execution.
 
-                    Permission policy for tool execution.
+                        - `required Type Type`
 
-                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+                          - `"always_ask"AlwaysAsk`
 
-                      Tool calls are automatically approved without user confirmation.
+                    - `JsonElement Type "bash"constant`
 
-                      - `required Type Type`
+                  - `class BetaManagedAgentsEditToolConfig:`
 
-                        - `"always_allow"AlwaysAllow`
+                    Configuration for the edit tool.
 
-                    - `class BetaManagedAgentsAlwaysAskPolicy:`
+                    - `required Boolean Enabled`
 
-                      Tool calls require user confirmation before execution.
+                    - `JsonElement Name "edit"constant`
 
-                      - `required Type Type`
+                    - `required PermissionPolicy PermissionPolicy`
 
-                        - `"always_ask"AlwaysAsk`
+                      Permission policy for tool execution.
+
+                      - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                        Tool calls are automatically approved without user confirmation.
+
+                      - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                        Tool calls require user confirmation before execution.
+
+                    - `JsonElement Type "edit"constant`
+
+                  - `class BetaManagedAgentsReadToolConfig:`
+
+                    Configuration for the read tool.
+
+                    - `required Boolean Enabled`
+
+                    - `JsonElement Name "read"constant`
+
+                    - `required PermissionPolicy PermissionPolicy`
+
+                      Permission policy for tool execution.
+
+                      - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                        Tool calls are automatically approved without user confirmation.
+
+                      - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                        Tool calls require user confirmation before execution.
+
+                    - `JsonElement Type "read"constant`
+
+                  - `class BetaManagedAgentsWriteToolConfig:`
+
+                    Configuration for the write tool.
+
+                    - `required Boolean Enabled`
+
+                    - `JsonElement Name "write"constant`
+
+                    - `required PermissionPolicy PermissionPolicy`
+
+                      Permission policy for tool execution.
+
+                      - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                        Tool calls are automatically approved without user confirmation.
+
+                      - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                        Tool calls require user confirmation before execution.
+
+                    - `JsonElement Type "write"constant`
+
+                  - `class BetaManagedAgentsGlobToolConfig:`
+
+                    Configuration for the glob tool.
+
+                    - `required Boolean Enabled`
+
+                    - `JsonElement Name "glob"constant`
+
+                    - `required PermissionPolicy PermissionPolicy`
+
+                      Permission policy for tool execution.
+
+                      - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                        Tool calls are automatically approved without user confirmation.
+
+                      - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                        Tool calls require user confirmation before execution.
+
+                    - `JsonElement Type "glob"constant`
+
+                  - `class BetaManagedAgentsGrepToolConfig:`
+
+                    Configuration for the grep tool.
+
+                    - `required Boolean Enabled`
+
+                    - `JsonElement Name "grep"constant`
+
+                    - `required PermissionPolicy PermissionPolicy`
+
+                      Permission policy for tool execution.
+
+                      - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                        Tool calls are automatically approved without user confirmation.
+
+                      - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                        Tool calls require user confirmation before execution.
+
+                    - `JsonElement Type "grep"constant`
+
+                  - `class BetaManagedAgentsWebFetchToolConfig:`
+
+                    Configuration for the web_fetch tool.
+
+                    - `required Boolean Enabled`
+
+                    - `JsonElement Name "web_fetch"constant`
+
+                    - `required PermissionPolicy PermissionPolicy`
+
+                      Permission policy for tool execution.
+
+                      - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                        Tool calls are automatically approved without user confirmation.
+
+                      - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                        Tool calls require user confirmation before execution.
+
+                    - `JsonElement Type "web_fetch"constant`
+
+                    - `IReadOnlyList<string> AllowedDomains`
+
+                    - `IReadOnlyList<string> BlockedDomains`
+
+                    - `Int? MaxContentTokens`
+
+                  - `class BetaManagedAgentsWebSearchToolConfig:`
+
+                    Configuration for the web_search tool.
+
+                    - `required Boolean Enabled`
+
+                    - `JsonElement Name "web_search"constant`
+
+                    - `required PermissionPolicy PermissionPolicy`
+
+                      Permission policy for tool execution.
+
+                      - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                        Tool calls are automatically approved without user confirmation.
+
+                      - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                        Tool calls require user confirmation before execution.
+
+                    - `JsonElement Type "web_search"constant`
+
+                    - `IReadOnlyList<string> AllowedDomains`
+
+                    - `IReadOnlyList<string> BlockedDomains`
+
+                    - `BetaManagedAgentsUserLocation? UserLocation`
+
+                      Approximate user location for search result localization.
+
+                      - `JsonElement Type "approximate"constant`
+
+                        Location precision. Only "approximate" is supported.
+
+                      - `string? City`
+
+                        City name.
+
+                      - `string? Country`
+
+                        Two-letter ISO 3166-1 country code, uppercase.
+
+                      - `string? Region`
+
+                        Region or state name.
+
+                      - `string? Timezone`
+
+                        IANA timezone identifier, e.g. "America/Los_Angeles".
 
                 - `required BetaManagedAgentsAgentToolsetDefaultConfig DefaultConfig`
 
@@ -75703,47 +81879,223 @@ await foreach (var betaManagedAgentsStreamSessionEvents in client.Beta.Sessions.
 
                 - `required IReadOnlyList<BetaManagedAgentsAgentToolConfig> Configs`
 
-                  - `required Boolean Enabled`
+                  - `class BetaManagedAgentsBashToolConfig:`
 
-                  - `required Name Name`
+                    Configuration for the bash tool.
 
-                    Built-in agent tool identifier.
+                    - `required Boolean Enabled`
 
-                    - `"bash"Bash`
+                    - `JsonElement Name "bash"constant`
 
-                    - `"edit"Edit`
+                    - `required PermissionPolicy PermissionPolicy`
 
-                    - `"read"Read`
+                      Permission policy for tool execution.
 
-                    - `"write"Write`
+                      - `class BetaManagedAgentsAlwaysAllowPolicy:`
 
-                    - `"glob"Glob`
+                        Tool calls are automatically approved without user confirmation.
 
-                    - `"grep"Grep`
+                        - `required Type Type`
 
-                    - `"web_fetch"WebFetch`
+                          - `"always_allow"AlwaysAllow`
 
-                    - `"web_search"WebSearch`
+                      - `class BetaManagedAgentsAlwaysAskPolicy:`
 
-                  - `required PermissionPolicy PermissionPolicy`
+                        Tool calls require user confirmation before execution.
 
-                    Permission policy for tool execution.
+                        - `required Type Type`
 
-                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+                          - `"always_ask"AlwaysAsk`
 
-                      Tool calls are automatically approved without user confirmation.
+                    - `JsonElement Type "bash"constant`
 
-                      - `required Type Type`
+                  - `class BetaManagedAgentsEditToolConfig:`
 
-                        - `"always_allow"AlwaysAllow`
+                    Configuration for the edit tool.
 
-                    - `class BetaManagedAgentsAlwaysAskPolicy:`
+                    - `required Boolean Enabled`
 
-                      Tool calls require user confirmation before execution.
+                    - `JsonElement Name "edit"constant`
 
-                      - `required Type Type`
+                    - `required PermissionPolicy PermissionPolicy`
 
-                        - `"always_ask"AlwaysAsk`
+                      Permission policy for tool execution.
+
+                      - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                        Tool calls are automatically approved without user confirmation.
+
+                      - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                        Tool calls require user confirmation before execution.
+
+                    - `JsonElement Type "edit"constant`
+
+                  - `class BetaManagedAgentsReadToolConfig:`
+
+                    Configuration for the read tool.
+
+                    - `required Boolean Enabled`
+
+                    - `JsonElement Name "read"constant`
+
+                    - `required PermissionPolicy PermissionPolicy`
+
+                      Permission policy for tool execution.
+
+                      - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                        Tool calls are automatically approved without user confirmation.
+
+                      - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                        Tool calls require user confirmation before execution.
+
+                    - `JsonElement Type "read"constant`
+
+                  - `class BetaManagedAgentsWriteToolConfig:`
+
+                    Configuration for the write tool.
+
+                    - `required Boolean Enabled`
+
+                    - `JsonElement Name "write"constant`
+
+                    - `required PermissionPolicy PermissionPolicy`
+
+                      Permission policy for tool execution.
+
+                      - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                        Tool calls are automatically approved without user confirmation.
+
+                      - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                        Tool calls require user confirmation before execution.
+
+                    - `JsonElement Type "write"constant`
+
+                  - `class BetaManagedAgentsGlobToolConfig:`
+
+                    Configuration for the glob tool.
+
+                    - `required Boolean Enabled`
+
+                    - `JsonElement Name "glob"constant`
+
+                    - `required PermissionPolicy PermissionPolicy`
+
+                      Permission policy for tool execution.
+
+                      - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                        Tool calls are automatically approved without user confirmation.
+
+                      - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                        Tool calls require user confirmation before execution.
+
+                    - `JsonElement Type "glob"constant`
+
+                  - `class BetaManagedAgentsGrepToolConfig:`
+
+                    Configuration for the grep tool.
+
+                    - `required Boolean Enabled`
+
+                    - `JsonElement Name "grep"constant`
+
+                    - `required PermissionPolicy PermissionPolicy`
+
+                      Permission policy for tool execution.
+
+                      - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                        Tool calls are automatically approved without user confirmation.
+
+                      - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                        Tool calls require user confirmation before execution.
+
+                    - `JsonElement Type "grep"constant`
+
+                  - `class BetaManagedAgentsWebFetchToolConfig:`
+
+                    Configuration for the web_fetch tool.
+
+                    - `required Boolean Enabled`
+
+                    - `JsonElement Name "web_fetch"constant`
+
+                    - `required PermissionPolicy PermissionPolicy`
+
+                      Permission policy for tool execution.
+
+                      - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                        Tool calls are automatically approved without user confirmation.
+
+                      - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                        Tool calls require user confirmation before execution.
+
+                    - `JsonElement Type "web_fetch"constant`
+
+                    - `IReadOnlyList<string> AllowedDomains`
+
+                    - `IReadOnlyList<string> BlockedDomains`
+
+                    - `Int? MaxContentTokens`
+
+                  - `class BetaManagedAgentsWebSearchToolConfig:`
+
+                    Configuration for the web_search tool.
+
+                    - `required Boolean Enabled`
+
+                    - `JsonElement Name "web_search"constant`
+
+                    - `required PermissionPolicy PermissionPolicy`
+
+                      Permission policy for tool execution.
+
+                      - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                        Tool calls are automatically approved without user confirmation.
+
+                      - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                        Tool calls require user confirmation before execution.
+
+                    - `JsonElement Type "web_search"constant`
+
+                    - `IReadOnlyList<string> AllowedDomains`
+
+                    - `IReadOnlyList<string> BlockedDomains`
+
+                    - `BetaManagedAgentsUserLocation? UserLocation`
+
+                      Approximate user location for search result localization.
+
+                      - `JsonElement Type "approximate"constant`
+
+                        Location precision. Only "approximate" is supported.
+
+                      - `string? City`
+
+                        City name.
+
+                      - `string? Country`
+
+                        Two-letter ISO 3166-1 country code, uppercase.
+
+                      - `string? Region`
+
+                        Region or state name.
+
+                      - `string? Timezone`
+
+                        IANA timezone identifier, e.g. "America/Los_Angeles".
 
                 - `required BetaManagedAgentsAgentToolsetDefaultConfig DefaultConfig`
 
@@ -78860,47 +85212,223 @@ List Session Threads
 
             - `required IReadOnlyList<BetaManagedAgentsAgentToolConfig> Configs`
 
-              - `required Boolean Enabled`
+              - `class BetaManagedAgentsBashToolConfig:`
 
-              - `required Name Name`
+                Configuration for the bash tool.
 
-                Built-in agent tool identifier.
+                - `required Boolean Enabled`
 
-                - `"bash"Bash`
+                - `JsonElement Name "bash"constant`
 
-                - `"edit"Edit`
+                - `required PermissionPolicy PermissionPolicy`
 
-                - `"read"Read`
+                  Permission policy for tool execution.
 
-                - `"write"Write`
+                  - `class BetaManagedAgentsAlwaysAllowPolicy:`
 
-                - `"glob"Glob`
+                    Tool calls are automatically approved without user confirmation.
 
-                - `"grep"Grep`
+                    - `required Type Type`
 
-                - `"web_fetch"WebFetch`
+                      - `"always_allow"AlwaysAllow`
 
-                - `"web_search"WebSearch`
+                  - `class BetaManagedAgentsAlwaysAskPolicy:`
 
-              - `required PermissionPolicy PermissionPolicy`
+                    Tool calls require user confirmation before execution.
 
-                Permission policy for tool execution.
+                    - `required Type Type`
 
-                - `class BetaManagedAgentsAlwaysAllowPolicy:`
+                      - `"always_ask"AlwaysAsk`
 
-                  Tool calls are automatically approved without user confirmation.
+                - `JsonElement Type "bash"constant`
 
-                  - `required Type Type`
+              - `class BetaManagedAgentsEditToolConfig:`
 
-                    - `"always_allow"AlwaysAllow`
+                Configuration for the edit tool.
 
-                - `class BetaManagedAgentsAlwaysAskPolicy:`
+                - `required Boolean Enabled`
 
-                  Tool calls require user confirmation before execution.
+                - `JsonElement Name "edit"constant`
 
-                  - `required Type Type`
+                - `required PermissionPolicy PermissionPolicy`
 
-                    - `"always_ask"AlwaysAsk`
+                  Permission policy for tool execution.
+
+                  - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                    Tool calls are automatically approved without user confirmation.
+
+                  - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                    Tool calls require user confirmation before execution.
+
+                - `JsonElement Type "edit"constant`
+
+              - `class BetaManagedAgentsReadToolConfig:`
+
+                Configuration for the read tool.
+
+                - `required Boolean Enabled`
+
+                - `JsonElement Name "read"constant`
+
+                - `required PermissionPolicy PermissionPolicy`
+
+                  Permission policy for tool execution.
+
+                  - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                    Tool calls are automatically approved without user confirmation.
+
+                  - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                    Tool calls require user confirmation before execution.
+
+                - `JsonElement Type "read"constant`
+
+              - `class BetaManagedAgentsWriteToolConfig:`
+
+                Configuration for the write tool.
+
+                - `required Boolean Enabled`
+
+                - `JsonElement Name "write"constant`
+
+                - `required PermissionPolicy PermissionPolicy`
+
+                  Permission policy for tool execution.
+
+                  - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                    Tool calls are automatically approved without user confirmation.
+
+                  - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                    Tool calls require user confirmation before execution.
+
+                - `JsonElement Type "write"constant`
+
+              - `class BetaManagedAgentsGlobToolConfig:`
+
+                Configuration for the glob tool.
+
+                - `required Boolean Enabled`
+
+                - `JsonElement Name "glob"constant`
+
+                - `required PermissionPolicy PermissionPolicy`
+
+                  Permission policy for tool execution.
+
+                  - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                    Tool calls are automatically approved without user confirmation.
+
+                  - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                    Tool calls require user confirmation before execution.
+
+                - `JsonElement Type "glob"constant`
+
+              - `class BetaManagedAgentsGrepToolConfig:`
+
+                Configuration for the grep tool.
+
+                - `required Boolean Enabled`
+
+                - `JsonElement Name "grep"constant`
+
+                - `required PermissionPolicy PermissionPolicy`
+
+                  Permission policy for tool execution.
+
+                  - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                    Tool calls are automatically approved without user confirmation.
+
+                  - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                    Tool calls require user confirmation before execution.
+
+                - `JsonElement Type "grep"constant`
+
+              - `class BetaManagedAgentsWebFetchToolConfig:`
+
+                Configuration for the web_fetch tool.
+
+                - `required Boolean Enabled`
+
+                - `JsonElement Name "web_fetch"constant`
+
+                - `required PermissionPolicy PermissionPolicy`
+
+                  Permission policy for tool execution.
+
+                  - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                    Tool calls are automatically approved without user confirmation.
+
+                  - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                    Tool calls require user confirmation before execution.
+
+                - `JsonElement Type "web_fetch"constant`
+
+                - `IReadOnlyList<string> AllowedDomains`
+
+                - `IReadOnlyList<string> BlockedDomains`
+
+                - `Int? MaxContentTokens`
+
+              - `class BetaManagedAgentsWebSearchToolConfig:`
+
+                Configuration for the web_search tool.
+
+                - `required Boolean Enabled`
+
+                - `JsonElement Name "web_search"constant`
+
+                - `required PermissionPolicy PermissionPolicy`
+
+                  Permission policy for tool execution.
+
+                  - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                    Tool calls are automatically approved without user confirmation.
+
+                  - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                    Tool calls require user confirmation before execution.
+
+                - `JsonElement Type "web_search"constant`
+
+                - `IReadOnlyList<string> AllowedDomains`
+
+                - `IReadOnlyList<string> BlockedDomains`
+
+                - `BetaManagedAgentsUserLocation? UserLocation`
+
+                  Approximate user location for search result localization.
+
+                  - `JsonElement Type "approximate"constant`
+
+                    Location precision. Only "approximate" is supported.
+
+                  - `string? City`
+
+                    City name.
+
+                  - `string? Country`
+
+                    Two-letter ISO 3166-1 country code, uppercase.
+
+                  - `string? Region`
+
+                    Region or state name.
+
+                  - `string? Timezone`
+
+                    IANA timezone identifier, e.g. "America/Los_Angeles".
 
             - `required BetaManagedAgentsAgentToolsetDefaultConfig DefaultConfig`
 
@@ -79179,7 +85707,8 @@ await foreach (var item in page.Paginate())
                 "name": "bash",
                 "permission_policy": {
                   "type": "always_allow"
-                }
+                },
+                "type": "bash"
               }
             ],
             "default_config": {
@@ -79508,47 +86037,223 @@ Get Session Thread
 
           - `required IReadOnlyList<BetaManagedAgentsAgentToolConfig> Configs`
 
-            - `required Boolean Enabled`
+            - `class BetaManagedAgentsBashToolConfig:`
 
-            - `required Name Name`
+              Configuration for the bash tool.
 
-              Built-in agent tool identifier.
+              - `required Boolean Enabled`
 
-              - `"bash"Bash`
+              - `JsonElement Name "bash"constant`
 
-              - `"edit"Edit`
+              - `required PermissionPolicy PermissionPolicy`
 
-              - `"read"Read`
+                Permission policy for tool execution.
 
-              - `"write"Write`
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
 
-              - `"glob"Glob`
+                  Tool calls are automatically approved without user confirmation.
 
-              - `"grep"Grep`
+                  - `required Type Type`
 
-              - `"web_fetch"WebFetch`
+                    - `"always_allow"AlwaysAllow`
 
-              - `"web_search"WebSearch`
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
 
-            - `required PermissionPolicy PermissionPolicy`
+                  Tool calls require user confirmation before execution.
 
-              Permission policy for tool execution.
+                  - `required Type Type`
 
-              - `class BetaManagedAgentsAlwaysAllowPolicy:`
+                    - `"always_ask"AlwaysAsk`
 
-                Tool calls are automatically approved without user confirmation.
+              - `JsonElement Type "bash"constant`
 
-                - `required Type Type`
+            - `class BetaManagedAgentsEditToolConfig:`
 
-                  - `"always_allow"AlwaysAllow`
+              Configuration for the edit tool.
 
-              - `class BetaManagedAgentsAlwaysAskPolicy:`
+              - `required Boolean Enabled`
 
-                Tool calls require user confirmation before execution.
+              - `JsonElement Name "edit"constant`
 
-                - `required Type Type`
+              - `required PermissionPolicy PermissionPolicy`
 
-                  - `"always_ask"AlwaysAsk`
+                Permission policy for tool execution.
+
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                  Tool calls require user confirmation before execution.
+
+              - `JsonElement Type "edit"constant`
+
+            - `class BetaManagedAgentsReadToolConfig:`
+
+              Configuration for the read tool.
+
+              - `required Boolean Enabled`
+
+              - `JsonElement Name "read"constant`
+
+              - `required PermissionPolicy PermissionPolicy`
+
+                Permission policy for tool execution.
+
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                  Tool calls require user confirmation before execution.
+
+              - `JsonElement Type "read"constant`
+
+            - `class BetaManagedAgentsWriteToolConfig:`
+
+              Configuration for the write tool.
+
+              - `required Boolean Enabled`
+
+              - `JsonElement Name "write"constant`
+
+              - `required PermissionPolicy PermissionPolicy`
+
+                Permission policy for tool execution.
+
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                  Tool calls require user confirmation before execution.
+
+              - `JsonElement Type "write"constant`
+
+            - `class BetaManagedAgentsGlobToolConfig:`
+
+              Configuration for the glob tool.
+
+              - `required Boolean Enabled`
+
+              - `JsonElement Name "glob"constant`
+
+              - `required PermissionPolicy PermissionPolicy`
+
+                Permission policy for tool execution.
+
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                  Tool calls require user confirmation before execution.
+
+              - `JsonElement Type "glob"constant`
+
+            - `class BetaManagedAgentsGrepToolConfig:`
+
+              Configuration for the grep tool.
+
+              - `required Boolean Enabled`
+
+              - `JsonElement Name "grep"constant`
+
+              - `required PermissionPolicy PermissionPolicy`
+
+                Permission policy for tool execution.
+
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                  Tool calls require user confirmation before execution.
+
+              - `JsonElement Type "grep"constant`
+
+            - `class BetaManagedAgentsWebFetchToolConfig:`
+
+              Configuration for the web_fetch tool.
+
+              - `required Boolean Enabled`
+
+              - `JsonElement Name "web_fetch"constant`
+
+              - `required PermissionPolicy PermissionPolicy`
+
+                Permission policy for tool execution.
+
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                  Tool calls require user confirmation before execution.
+
+              - `JsonElement Type "web_fetch"constant`
+
+              - `IReadOnlyList<string> AllowedDomains`
+
+              - `IReadOnlyList<string> BlockedDomains`
+
+              - `Int? MaxContentTokens`
+
+            - `class BetaManagedAgentsWebSearchToolConfig:`
+
+              Configuration for the web_search tool.
+
+              - `required Boolean Enabled`
+
+              - `JsonElement Name "web_search"constant`
+
+              - `required PermissionPolicy PermissionPolicy`
+
+                Permission policy for tool execution.
+
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                  Tool calls require user confirmation before execution.
+
+              - `JsonElement Type "web_search"constant`
+
+              - `IReadOnlyList<string> AllowedDomains`
+
+              - `IReadOnlyList<string> BlockedDomains`
+
+              - `BetaManagedAgentsUserLocation? UserLocation`
+
+                Approximate user location for search result localization.
+
+                - `JsonElement Type "approximate"constant`
+
+                  Location precision. Only "approximate" is supported.
+
+                - `string? City`
+
+                  City name.
+
+                - `string? Country`
+
+                  Two-letter ISO 3166-1 country code, uppercase.
+
+                - `string? Region`
+
+                  Region or state name.
+
+                - `string? Timezone`
+
+                  IANA timezone identifier, e.g. "America/Los_Angeles".
 
           - `required BetaManagedAgentsAgentToolsetDefaultConfig DefaultConfig`
 
@@ -79820,7 +86525,8 @@ Console.WriteLine(betaManagedAgentsSessionThread);
             "name": "bash",
             "permission_policy": {
               "type": "always_allow"
-            }
+            },
+            "type": "bash"
           }
         ],
         "default_config": {
@@ -80146,47 +86852,223 @@ Archive Session Thread
 
           - `required IReadOnlyList<BetaManagedAgentsAgentToolConfig> Configs`
 
-            - `required Boolean Enabled`
+            - `class BetaManagedAgentsBashToolConfig:`
 
-            - `required Name Name`
+              Configuration for the bash tool.
 
-              Built-in agent tool identifier.
+              - `required Boolean Enabled`
 
-              - `"bash"Bash`
+              - `JsonElement Name "bash"constant`
 
-              - `"edit"Edit`
+              - `required PermissionPolicy PermissionPolicy`
 
-              - `"read"Read`
+                Permission policy for tool execution.
 
-              - `"write"Write`
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
 
-              - `"glob"Glob`
+                  Tool calls are automatically approved without user confirmation.
 
-              - `"grep"Grep`
+                  - `required Type Type`
 
-              - `"web_fetch"WebFetch`
+                    - `"always_allow"AlwaysAllow`
 
-              - `"web_search"WebSearch`
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
 
-            - `required PermissionPolicy PermissionPolicy`
+                  Tool calls require user confirmation before execution.
 
-              Permission policy for tool execution.
+                  - `required Type Type`
 
-              - `class BetaManagedAgentsAlwaysAllowPolicy:`
+                    - `"always_ask"AlwaysAsk`
 
-                Tool calls are automatically approved without user confirmation.
+              - `JsonElement Type "bash"constant`
 
-                - `required Type Type`
+            - `class BetaManagedAgentsEditToolConfig:`
 
-                  - `"always_allow"AlwaysAllow`
+              Configuration for the edit tool.
 
-              - `class BetaManagedAgentsAlwaysAskPolicy:`
+              - `required Boolean Enabled`
 
-                Tool calls require user confirmation before execution.
+              - `JsonElement Name "edit"constant`
 
-                - `required Type Type`
+              - `required PermissionPolicy PermissionPolicy`
 
-                  - `"always_ask"AlwaysAsk`
+                Permission policy for tool execution.
+
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                  Tool calls require user confirmation before execution.
+
+              - `JsonElement Type "edit"constant`
+
+            - `class BetaManagedAgentsReadToolConfig:`
+
+              Configuration for the read tool.
+
+              - `required Boolean Enabled`
+
+              - `JsonElement Name "read"constant`
+
+              - `required PermissionPolicy PermissionPolicy`
+
+                Permission policy for tool execution.
+
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                  Tool calls require user confirmation before execution.
+
+              - `JsonElement Type "read"constant`
+
+            - `class BetaManagedAgentsWriteToolConfig:`
+
+              Configuration for the write tool.
+
+              - `required Boolean Enabled`
+
+              - `JsonElement Name "write"constant`
+
+              - `required PermissionPolicy PermissionPolicy`
+
+                Permission policy for tool execution.
+
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                  Tool calls require user confirmation before execution.
+
+              - `JsonElement Type "write"constant`
+
+            - `class BetaManagedAgentsGlobToolConfig:`
+
+              Configuration for the glob tool.
+
+              - `required Boolean Enabled`
+
+              - `JsonElement Name "glob"constant`
+
+              - `required PermissionPolicy PermissionPolicy`
+
+                Permission policy for tool execution.
+
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                  Tool calls require user confirmation before execution.
+
+              - `JsonElement Type "glob"constant`
+
+            - `class BetaManagedAgentsGrepToolConfig:`
+
+              Configuration for the grep tool.
+
+              - `required Boolean Enabled`
+
+              - `JsonElement Name "grep"constant`
+
+              - `required PermissionPolicy PermissionPolicy`
+
+                Permission policy for tool execution.
+
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                  Tool calls require user confirmation before execution.
+
+              - `JsonElement Type "grep"constant`
+
+            - `class BetaManagedAgentsWebFetchToolConfig:`
+
+              Configuration for the web_fetch tool.
+
+              - `required Boolean Enabled`
+
+              - `JsonElement Name "web_fetch"constant`
+
+              - `required PermissionPolicy PermissionPolicy`
+
+                Permission policy for tool execution.
+
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                  Tool calls require user confirmation before execution.
+
+              - `JsonElement Type "web_fetch"constant`
+
+              - `IReadOnlyList<string> AllowedDomains`
+
+              - `IReadOnlyList<string> BlockedDomains`
+
+              - `Int? MaxContentTokens`
+
+            - `class BetaManagedAgentsWebSearchToolConfig:`
+
+              Configuration for the web_search tool.
+
+              - `required Boolean Enabled`
+
+              - `JsonElement Name "web_search"constant`
+
+              - `required PermissionPolicy PermissionPolicy`
+
+                Permission policy for tool execution.
+
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                  Tool calls require user confirmation before execution.
+
+              - `JsonElement Type "web_search"constant`
+
+              - `IReadOnlyList<string> AllowedDomains`
+
+              - `IReadOnlyList<string> BlockedDomains`
+
+              - `BetaManagedAgentsUserLocation? UserLocation`
+
+                Approximate user location for search result localization.
+
+                - `JsonElement Type "approximate"constant`
+
+                  Location precision. Only "approximate" is supported.
+
+                - `string? City`
+
+                  City name.
+
+                - `string? Country`
+
+                  Two-letter ISO 3166-1 country code, uppercase.
+
+                - `string? Region`
+
+                  Region or state name.
+
+                - `string? Timezone`
+
+                  IANA timezone identifier, e.g. "America/Los_Angeles".
 
           - `required BetaManagedAgentsAgentToolsetDefaultConfig DefaultConfig`
 
@@ -80458,7 +87340,8 @@ Console.WriteLine(betaManagedAgentsSessionThread);
             "name": "bash",
             "permission_policy": {
               "type": "always_allow"
-            }
+            },
+            "type": "bash"
           }
         ],
         "default_config": {
@@ -80694,47 +87577,223 @@ Console.WriteLine(betaManagedAgentsSessionThread);
 
           - `required IReadOnlyList<BetaManagedAgentsAgentToolConfig> Configs`
 
-            - `required Boolean Enabled`
+            - `class BetaManagedAgentsBashToolConfig:`
 
-            - `required Name Name`
+              Configuration for the bash tool.
 
-              Built-in agent tool identifier.
+              - `required Boolean Enabled`
 
-              - `"bash"Bash`
+              - `JsonElement Name "bash"constant`
 
-              - `"edit"Edit`
+              - `required PermissionPolicy PermissionPolicy`
 
-              - `"read"Read`
+                Permission policy for tool execution.
 
-              - `"write"Write`
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
 
-              - `"glob"Glob`
+                  Tool calls are automatically approved without user confirmation.
 
-              - `"grep"Grep`
+                  - `required Type Type`
 
-              - `"web_fetch"WebFetch`
+                    - `"always_allow"AlwaysAllow`
 
-              - `"web_search"WebSearch`
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
 
-            - `required PermissionPolicy PermissionPolicy`
+                  Tool calls require user confirmation before execution.
 
-              Permission policy for tool execution.
+                  - `required Type Type`
 
-              - `class BetaManagedAgentsAlwaysAllowPolicy:`
+                    - `"always_ask"AlwaysAsk`
 
-                Tool calls are automatically approved without user confirmation.
+              - `JsonElement Type "bash"constant`
 
-                - `required Type Type`
+            - `class BetaManagedAgentsEditToolConfig:`
 
-                  - `"always_allow"AlwaysAllow`
+              Configuration for the edit tool.
 
-              - `class BetaManagedAgentsAlwaysAskPolicy:`
+              - `required Boolean Enabled`
 
-                Tool calls require user confirmation before execution.
+              - `JsonElement Name "edit"constant`
 
-                - `required Type Type`
+              - `required PermissionPolicy PermissionPolicy`
 
-                  - `"always_ask"AlwaysAsk`
+                Permission policy for tool execution.
+
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                  Tool calls require user confirmation before execution.
+
+              - `JsonElement Type "edit"constant`
+
+            - `class BetaManagedAgentsReadToolConfig:`
+
+              Configuration for the read tool.
+
+              - `required Boolean Enabled`
+
+              - `JsonElement Name "read"constant`
+
+              - `required PermissionPolicy PermissionPolicy`
+
+                Permission policy for tool execution.
+
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                  Tool calls require user confirmation before execution.
+
+              - `JsonElement Type "read"constant`
+
+            - `class BetaManagedAgentsWriteToolConfig:`
+
+              Configuration for the write tool.
+
+              - `required Boolean Enabled`
+
+              - `JsonElement Name "write"constant`
+
+              - `required PermissionPolicy PermissionPolicy`
+
+                Permission policy for tool execution.
+
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                  Tool calls require user confirmation before execution.
+
+              - `JsonElement Type "write"constant`
+
+            - `class BetaManagedAgentsGlobToolConfig:`
+
+              Configuration for the glob tool.
+
+              - `required Boolean Enabled`
+
+              - `JsonElement Name "glob"constant`
+
+              - `required PermissionPolicy PermissionPolicy`
+
+                Permission policy for tool execution.
+
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                  Tool calls require user confirmation before execution.
+
+              - `JsonElement Type "glob"constant`
+
+            - `class BetaManagedAgentsGrepToolConfig:`
+
+              Configuration for the grep tool.
+
+              - `required Boolean Enabled`
+
+              - `JsonElement Name "grep"constant`
+
+              - `required PermissionPolicy PermissionPolicy`
+
+                Permission policy for tool execution.
+
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                  Tool calls require user confirmation before execution.
+
+              - `JsonElement Type "grep"constant`
+
+            - `class BetaManagedAgentsWebFetchToolConfig:`
+
+              Configuration for the web_fetch tool.
+
+              - `required Boolean Enabled`
+
+              - `JsonElement Name "web_fetch"constant`
+
+              - `required PermissionPolicy PermissionPolicy`
+
+                Permission policy for tool execution.
+
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                  Tool calls require user confirmation before execution.
+
+              - `JsonElement Type "web_fetch"constant`
+
+              - `IReadOnlyList<string> AllowedDomains`
+
+              - `IReadOnlyList<string> BlockedDomains`
+
+              - `Int? MaxContentTokens`
+
+            - `class BetaManagedAgentsWebSearchToolConfig:`
+
+              Configuration for the web_search tool.
+
+              - `required Boolean Enabled`
+
+              - `JsonElement Name "web_search"constant`
+
+              - `required PermissionPolicy PermissionPolicy`
+
+                Permission policy for tool execution.
+
+                - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                  Tool calls are automatically approved without user confirmation.
+
+                - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                  Tool calls require user confirmation before execution.
+
+              - `JsonElement Type "web_search"constant`
+
+              - `IReadOnlyList<string> AllowedDomains`
+
+              - `IReadOnlyList<string> BlockedDomains`
+
+              - `BetaManagedAgentsUserLocation? UserLocation`
+
+                Approximate user location for search result localization.
+
+                - `JsonElement Type "approximate"constant`
+
+                  Location precision. Only "approximate" is supported.
+
+                - `string? City`
+
+                  City name.
+
+                - `string? Country`
+
+                  Two-letter ISO 3166-1 country code, uppercase.
+
+                - `string? Region`
+
+                  Region or state name.
+
+                - `string? Timezone`
+
+                  IANA timezone identifier, e.g. "America/Los_Angeles".
 
           - `required BetaManagedAgentsAgentToolsetDefaultConfig DefaultConfig`
 
@@ -82708,47 +89767,223 @@ Console.WriteLine(betaManagedAgentsSessionThread);
 
                 - `required IReadOnlyList<BetaManagedAgentsAgentToolConfig> Configs`
 
-                  - `required Boolean Enabled`
+                  - `class BetaManagedAgentsBashToolConfig:`
 
-                  - `required Name Name`
+                    Configuration for the bash tool.
 
-                    Built-in agent tool identifier.
+                    - `required Boolean Enabled`
 
-                    - `"bash"Bash`
+                    - `JsonElement Name "bash"constant`
 
-                    - `"edit"Edit`
+                    - `required PermissionPolicy PermissionPolicy`
 
-                    - `"read"Read`
+                      Permission policy for tool execution.
 
-                    - `"write"Write`
+                      - `class BetaManagedAgentsAlwaysAllowPolicy:`
 
-                    - `"glob"Glob`
+                        Tool calls are automatically approved without user confirmation.
 
-                    - `"grep"Grep`
+                        - `required Type Type`
 
-                    - `"web_fetch"WebFetch`
+                          - `"always_allow"AlwaysAllow`
 
-                    - `"web_search"WebSearch`
+                      - `class BetaManagedAgentsAlwaysAskPolicy:`
 
-                  - `required PermissionPolicy PermissionPolicy`
+                        Tool calls require user confirmation before execution.
 
-                    Permission policy for tool execution.
+                        - `required Type Type`
 
-                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+                          - `"always_ask"AlwaysAsk`
 
-                      Tool calls are automatically approved without user confirmation.
+                    - `JsonElement Type "bash"constant`
 
-                      - `required Type Type`
+                  - `class BetaManagedAgentsEditToolConfig:`
 
-                        - `"always_allow"AlwaysAllow`
+                    Configuration for the edit tool.
 
-                    - `class BetaManagedAgentsAlwaysAskPolicy:`
+                    - `required Boolean Enabled`
 
-                      Tool calls require user confirmation before execution.
+                    - `JsonElement Name "edit"constant`
 
-                      - `required Type Type`
+                    - `required PermissionPolicy PermissionPolicy`
 
-                        - `"always_ask"AlwaysAsk`
+                      Permission policy for tool execution.
+
+                      - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                        Tool calls are automatically approved without user confirmation.
+
+                      - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                        Tool calls require user confirmation before execution.
+
+                    - `JsonElement Type "edit"constant`
+
+                  - `class BetaManagedAgentsReadToolConfig:`
+
+                    Configuration for the read tool.
+
+                    - `required Boolean Enabled`
+
+                    - `JsonElement Name "read"constant`
+
+                    - `required PermissionPolicy PermissionPolicy`
+
+                      Permission policy for tool execution.
+
+                      - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                        Tool calls are automatically approved without user confirmation.
+
+                      - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                        Tool calls require user confirmation before execution.
+
+                    - `JsonElement Type "read"constant`
+
+                  - `class BetaManagedAgentsWriteToolConfig:`
+
+                    Configuration for the write tool.
+
+                    - `required Boolean Enabled`
+
+                    - `JsonElement Name "write"constant`
+
+                    - `required PermissionPolicy PermissionPolicy`
+
+                      Permission policy for tool execution.
+
+                      - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                        Tool calls are automatically approved without user confirmation.
+
+                      - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                        Tool calls require user confirmation before execution.
+
+                    - `JsonElement Type "write"constant`
+
+                  - `class BetaManagedAgentsGlobToolConfig:`
+
+                    Configuration for the glob tool.
+
+                    - `required Boolean Enabled`
+
+                    - `JsonElement Name "glob"constant`
+
+                    - `required PermissionPolicy PermissionPolicy`
+
+                      Permission policy for tool execution.
+
+                      - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                        Tool calls are automatically approved without user confirmation.
+
+                      - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                        Tool calls require user confirmation before execution.
+
+                    - `JsonElement Type "glob"constant`
+
+                  - `class BetaManagedAgentsGrepToolConfig:`
+
+                    Configuration for the grep tool.
+
+                    - `required Boolean Enabled`
+
+                    - `JsonElement Name "grep"constant`
+
+                    - `required PermissionPolicy PermissionPolicy`
+
+                      Permission policy for tool execution.
+
+                      - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                        Tool calls are automatically approved without user confirmation.
+
+                      - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                        Tool calls require user confirmation before execution.
+
+                    - `JsonElement Type "grep"constant`
+
+                  - `class BetaManagedAgentsWebFetchToolConfig:`
+
+                    Configuration for the web_fetch tool.
+
+                    - `required Boolean Enabled`
+
+                    - `JsonElement Name "web_fetch"constant`
+
+                    - `required PermissionPolicy PermissionPolicy`
+
+                      Permission policy for tool execution.
+
+                      - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                        Tool calls are automatically approved without user confirmation.
+
+                      - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                        Tool calls require user confirmation before execution.
+
+                    - `JsonElement Type "web_fetch"constant`
+
+                    - `IReadOnlyList<string> AllowedDomains`
+
+                    - `IReadOnlyList<string> BlockedDomains`
+
+                    - `Int? MaxContentTokens`
+
+                  - `class BetaManagedAgentsWebSearchToolConfig:`
+
+                    Configuration for the web_search tool.
+
+                    - `required Boolean Enabled`
+
+                    - `JsonElement Name "web_search"constant`
+
+                    - `required PermissionPolicy PermissionPolicy`
+
+                      Permission policy for tool execution.
+
+                      - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                        Tool calls are automatically approved without user confirmation.
+
+                      - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                        Tool calls require user confirmation before execution.
+
+                    - `JsonElement Type "web_search"constant`
+
+                    - `IReadOnlyList<string> AllowedDomains`
+
+                    - `IReadOnlyList<string> BlockedDomains`
+
+                    - `BetaManagedAgentsUserLocation? UserLocation`
+
+                      Approximate user location for search result localization.
+
+                      - `JsonElement Type "approximate"constant`
+
+                        Location precision. Only "approximate" is supported.
+
+                      - `string? City`
+
+                        City name.
+
+                      - `string? Country`
+
+                        Two-letter ISO 3166-1 country code, uppercase.
+
+                      - `string? Region`
+
+                        Region or state name.
+
+                      - `string? Timezone`
+
+                        IANA timezone identifier, e.g. "America/Los_Angeles".
 
                 - `required BetaManagedAgentsAgentToolsetDefaultConfig DefaultConfig`
 
@@ -84846,47 +92081,223 @@ List Session Thread Events
 
                   - `required IReadOnlyList<BetaManagedAgentsAgentToolConfig> Configs`
 
-                    - `required Boolean Enabled`
+                    - `class BetaManagedAgentsBashToolConfig:`
 
-                    - `required Name Name`
+                      Configuration for the bash tool.
 
-                      Built-in agent tool identifier.
+                      - `required Boolean Enabled`
 
-                      - `"bash"Bash`
+                      - `JsonElement Name "bash"constant`
 
-                      - `"edit"Edit`
+                      - `required PermissionPolicy PermissionPolicy`
 
-                      - `"read"Read`
+                        Permission policy for tool execution.
 
-                      - `"write"Write`
+                        - `class BetaManagedAgentsAlwaysAllowPolicy:`
 
-                      - `"glob"Glob`
+                          Tool calls are automatically approved without user confirmation.
 
-                      - `"grep"Grep`
+                          - `required Type Type`
 
-                      - `"web_fetch"WebFetch`
+                            - `"always_allow"AlwaysAllow`
 
-                      - `"web_search"WebSearch`
+                        - `class BetaManagedAgentsAlwaysAskPolicy:`
 
-                    - `required PermissionPolicy PermissionPolicy`
+                          Tool calls require user confirmation before execution.
 
-                      Permission policy for tool execution.
+                          - `required Type Type`
 
-                      - `class BetaManagedAgentsAlwaysAllowPolicy:`
+                            - `"always_ask"AlwaysAsk`
 
-                        Tool calls are automatically approved without user confirmation.
+                      - `JsonElement Type "bash"constant`
 
-                        - `required Type Type`
+                    - `class BetaManagedAgentsEditToolConfig:`
 
-                          - `"always_allow"AlwaysAllow`
+                      Configuration for the edit tool.
 
-                      - `class BetaManagedAgentsAlwaysAskPolicy:`
+                      - `required Boolean Enabled`
 
-                        Tool calls require user confirmation before execution.
+                      - `JsonElement Name "edit"constant`
 
-                        - `required Type Type`
+                      - `required PermissionPolicy PermissionPolicy`
 
-                          - `"always_ask"AlwaysAsk`
+                        Permission policy for tool execution.
+
+                        - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                          Tool calls are automatically approved without user confirmation.
+
+                        - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                          Tool calls require user confirmation before execution.
+
+                      - `JsonElement Type "edit"constant`
+
+                    - `class BetaManagedAgentsReadToolConfig:`
+
+                      Configuration for the read tool.
+
+                      - `required Boolean Enabled`
+
+                      - `JsonElement Name "read"constant`
+
+                      - `required PermissionPolicy PermissionPolicy`
+
+                        Permission policy for tool execution.
+
+                        - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                          Tool calls are automatically approved without user confirmation.
+
+                        - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                          Tool calls require user confirmation before execution.
+
+                      - `JsonElement Type "read"constant`
+
+                    - `class BetaManagedAgentsWriteToolConfig:`
+
+                      Configuration for the write tool.
+
+                      - `required Boolean Enabled`
+
+                      - `JsonElement Name "write"constant`
+
+                      - `required PermissionPolicy PermissionPolicy`
+
+                        Permission policy for tool execution.
+
+                        - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                          Tool calls are automatically approved without user confirmation.
+
+                        - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                          Tool calls require user confirmation before execution.
+
+                      - `JsonElement Type "write"constant`
+
+                    - `class BetaManagedAgentsGlobToolConfig:`
+
+                      Configuration for the glob tool.
+
+                      - `required Boolean Enabled`
+
+                      - `JsonElement Name "glob"constant`
+
+                      - `required PermissionPolicy PermissionPolicy`
+
+                        Permission policy for tool execution.
+
+                        - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                          Tool calls are automatically approved without user confirmation.
+
+                        - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                          Tool calls require user confirmation before execution.
+
+                      - `JsonElement Type "glob"constant`
+
+                    - `class BetaManagedAgentsGrepToolConfig:`
+
+                      Configuration for the grep tool.
+
+                      - `required Boolean Enabled`
+
+                      - `JsonElement Name "grep"constant`
+
+                      - `required PermissionPolicy PermissionPolicy`
+
+                        Permission policy for tool execution.
+
+                        - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                          Tool calls are automatically approved without user confirmation.
+
+                        - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                          Tool calls require user confirmation before execution.
+
+                      - `JsonElement Type "grep"constant`
+
+                    - `class BetaManagedAgentsWebFetchToolConfig:`
+
+                      Configuration for the web_fetch tool.
+
+                      - `required Boolean Enabled`
+
+                      - `JsonElement Name "web_fetch"constant`
+
+                      - `required PermissionPolicy PermissionPolicy`
+
+                        Permission policy for tool execution.
+
+                        - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                          Tool calls are automatically approved without user confirmation.
+
+                        - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                          Tool calls require user confirmation before execution.
+
+                      - `JsonElement Type "web_fetch"constant`
+
+                      - `IReadOnlyList<string> AllowedDomains`
+
+                      - `IReadOnlyList<string> BlockedDomains`
+
+                      - `Int? MaxContentTokens`
+
+                    - `class BetaManagedAgentsWebSearchToolConfig:`
+
+                      Configuration for the web_search tool.
+
+                      - `required Boolean Enabled`
+
+                      - `JsonElement Name "web_search"constant`
+
+                      - `required PermissionPolicy PermissionPolicy`
+
+                        Permission policy for tool execution.
+
+                        - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                          Tool calls are automatically approved without user confirmation.
+
+                        - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                          Tool calls require user confirmation before execution.
+
+                      - `JsonElement Type "web_search"constant`
+
+                      - `IReadOnlyList<string> AllowedDomains`
+
+                      - `IReadOnlyList<string> BlockedDomains`
+
+                      - `BetaManagedAgentsUserLocation? UserLocation`
+
+                        Approximate user location for search result localization.
+
+                        - `JsonElement Type "approximate"constant`
+
+                          Location precision. Only "approximate" is supported.
+
+                        - `string? City`
+
+                          City name.
+
+                        - `string? Country`
+
+                          Two-letter ISO 3166-1 country code, uppercase.
+
+                        - `string? Region`
+
+                          Region or state name.
+
+                        - `string? Timezone`
+
+                          IANA timezone identifier, e.g. "America/Los_Angeles".
 
                   - `required BetaManagedAgentsAgentToolsetDefaultConfig DefaultConfig`
 
@@ -86959,47 +94370,223 @@ Stream Session Thread Events
 
                 - `required IReadOnlyList<BetaManagedAgentsAgentToolConfig> Configs`
 
-                  - `required Boolean Enabled`
+                  - `class BetaManagedAgentsBashToolConfig:`
 
-                  - `required Name Name`
+                    Configuration for the bash tool.
 
-                    Built-in agent tool identifier.
+                    - `required Boolean Enabled`
 
-                    - `"bash"Bash`
+                    - `JsonElement Name "bash"constant`
 
-                    - `"edit"Edit`
+                    - `required PermissionPolicy PermissionPolicy`
 
-                    - `"read"Read`
+                      Permission policy for tool execution.
 
-                    - `"write"Write`
+                      - `class BetaManagedAgentsAlwaysAllowPolicy:`
 
-                    - `"glob"Glob`
+                        Tool calls are automatically approved without user confirmation.
 
-                    - `"grep"Grep`
+                        - `required Type Type`
 
-                    - `"web_fetch"WebFetch`
+                          - `"always_allow"AlwaysAllow`
 
-                    - `"web_search"WebSearch`
+                      - `class BetaManagedAgentsAlwaysAskPolicy:`
 
-                  - `required PermissionPolicy PermissionPolicy`
+                        Tool calls require user confirmation before execution.
 
-                    Permission policy for tool execution.
+                        - `required Type Type`
 
-                    - `class BetaManagedAgentsAlwaysAllowPolicy:`
+                          - `"always_ask"AlwaysAsk`
 
-                      Tool calls are automatically approved without user confirmation.
+                    - `JsonElement Type "bash"constant`
 
-                      - `required Type Type`
+                  - `class BetaManagedAgentsEditToolConfig:`
 
-                        - `"always_allow"AlwaysAllow`
+                    Configuration for the edit tool.
 
-                    - `class BetaManagedAgentsAlwaysAskPolicy:`
+                    - `required Boolean Enabled`
 
-                      Tool calls require user confirmation before execution.
+                    - `JsonElement Name "edit"constant`
 
-                      - `required Type Type`
+                    - `required PermissionPolicy PermissionPolicy`
 
-                        - `"always_ask"AlwaysAsk`
+                      Permission policy for tool execution.
+
+                      - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                        Tool calls are automatically approved without user confirmation.
+
+                      - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                        Tool calls require user confirmation before execution.
+
+                    - `JsonElement Type "edit"constant`
+
+                  - `class BetaManagedAgentsReadToolConfig:`
+
+                    Configuration for the read tool.
+
+                    - `required Boolean Enabled`
+
+                    - `JsonElement Name "read"constant`
+
+                    - `required PermissionPolicy PermissionPolicy`
+
+                      Permission policy for tool execution.
+
+                      - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                        Tool calls are automatically approved without user confirmation.
+
+                      - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                        Tool calls require user confirmation before execution.
+
+                    - `JsonElement Type "read"constant`
+
+                  - `class BetaManagedAgentsWriteToolConfig:`
+
+                    Configuration for the write tool.
+
+                    - `required Boolean Enabled`
+
+                    - `JsonElement Name "write"constant`
+
+                    - `required PermissionPolicy PermissionPolicy`
+
+                      Permission policy for tool execution.
+
+                      - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                        Tool calls are automatically approved without user confirmation.
+
+                      - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                        Tool calls require user confirmation before execution.
+
+                    - `JsonElement Type "write"constant`
+
+                  - `class BetaManagedAgentsGlobToolConfig:`
+
+                    Configuration for the glob tool.
+
+                    - `required Boolean Enabled`
+
+                    - `JsonElement Name "glob"constant`
+
+                    - `required PermissionPolicy PermissionPolicy`
+
+                      Permission policy for tool execution.
+
+                      - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                        Tool calls are automatically approved without user confirmation.
+
+                      - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                        Tool calls require user confirmation before execution.
+
+                    - `JsonElement Type "glob"constant`
+
+                  - `class BetaManagedAgentsGrepToolConfig:`
+
+                    Configuration for the grep tool.
+
+                    - `required Boolean Enabled`
+
+                    - `JsonElement Name "grep"constant`
+
+                    - `required PermissionPolicy PermissionPolicy`
+
+                      Permission policy for tool execution.
+
+                      - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                        Tool calls are automatically approved without user confirmation.
+
+                      - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                        Tool calls require user confirmation before execution.
+
+                    - `JsonElement Type "grep"constant`
+
+                  - `class BetaManagedAgentsWebFetchToolConfig:`
+
+                    Configuration for the web_fetch tool.
+
+                    - `required Boolean Enabled`
+
+                    - `JsonElement Name "web_fetch"constant`
+
+                    - `required PermissionPolicy PermissionPolicy`
+
+                      Permission policy for tool execution.
+
+                      - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                        Tool calls are automatically approved without user confirmation.
+
+                      - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                        Tool calls require user confirmation before execution.
+
+                    - `JsonElement Type "web_fetch"constant`
+
+                    - `IReadOnlyList<string> AllowedDomains`
+
+                    - `IReadOnlyList<string> BlockedDomains`
+
+                    - `Int? MaxContentTokens`
+
+                  - `class BetaManagedAgentsWebSearchToolConfig:`
+
+                    Configuration for the web_search tool.
+
+                    - `required Boolean Enabled`
+
+                    - `JsonElement Name "web_search"constant`
+
+                    - `required PermissionPolicy PermissionPolicy`
+
+                      Permission policy for tool execution.
+
+                      - `class BetaManagedAgentsAlwaysAllowPolicy:`
+
+                        Tool calls are automatically approved without user confirmation.
+
+                      - `class BetaManagedAgentsAlwaysAskPolicy:`
+
+                        Tool calls require user confirmation before execution.
+
+                    - `JsonElement Type "web_search"constant`
+
+                    - `IReadOnlyList<string> AllowedDomains`
+
+                    - `IReadOnlyList<string> BlockedDomains`
+
+                    - `BetaManagedAgentsUserLocation? UserLocation`
+
+                      Approximate user location for search result localization.
+
+                      - `JsonElement Type "approximate"constant`
+
+                        Location precision. Only "approximate" is supported.
+
+                      - `string? City`
+
+                        City name.
+
+                      - `string? Country`
+
+                        Two-letter ISO 3166-1 country code, uppercase.
+
+                      - `string? Region`
+
+                        Region or state name.
+
+                      - `string? Timezone`
+
+                        IANA timezone identifier, e.g. "America/Los_Angeles".
 
                 - `required BetaManagedAgentsAgentToolsetDefaultConfig DefaultConfig`
 

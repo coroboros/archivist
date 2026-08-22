@@ -4026,7 +4026,7 @@ Learn more about the Messages API in our [user guide](./api-get-started.md)
 
       - `version: string`
 
-        Skill version or 'latest' for most recent version
+        The resolved version: a skill version ID for custom skills.
 
   - `content: Array<BetaContentBlock>`
 
@@ -13931,7 +13931,7 @@ console.log(betaMessageTokensCount.context_management);
 
     - `version: string`
 
-      Skill version or 'latest' for most recent version
+      The resolved version: a skill version ID for custom skills.
 
 ### Beta Container Params
 
@@ -19027,7 +19027,7 @@ console.log(betaMessageTokensCount.context_management);
 
       - `version: string`
 
-        Skill version or 'latest' for most recent version
+        The resolved version: a skill version ID for custom skills.
 
   - `content: Array<BetaContentBlock>`
 
@@ -23790,7 +23790,7 @@ console.log(betaMessageTokensCount.context_management);
 
         - `version: string`
 
-          Skill version or 'latest' for most recent version
+          The resolved version: a skill version ID for custom skills.
 
     - `stop_details: BetaRefusalStopDetails | null`
 
@@ -24302,7 +24302,7 @@ console.log(betaMessageTokensCount.context_management);
 
         - `version: string`
 
-          Skill version or 'latest' for most recent version
+          The resolved version: a skill version ID for custom skills.
 
     - `content: Array<BetaContentBlock>`
 
@@ -25860,7 +25860,7 @@ console.log(betaMessageTokensCount.context_management);
 
           - `version: string`
 
-            Skill version or 'latest' for most recent version
+            The resolved version: a skill version ID for custom skills.
 
       - `content: Array<BetaContentBlock>`
 
@@ -28702,7 +28702,7 @@ console.log(betaMessageTokensCount.context_management);
 
   - `version: string`
 
-    Skill version or 'latest' for most recent version
+    The resolved version: a skill version ID for custom skills.
 
 ### Beta Skill Params
 
@@ -40870,7 +40870,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `version: string`
 
-              Skill version or 'latest' for most recent version
+              The resolved version: a skill version ID for custom skills.
 
         - `content: Array<BetaContentBlock>`
 
@@ -42764,7 +42764,7 @@ console.log(betaMessageBatchIndividualResponse.custom_id);
 
             - `version: string`
 
-              Skill version or 'latest' for most recent version
+              The resolved version: a skill version ID for custom skills.
 
         - `content: Array<BetaContentBlock>`
 
@@ -44450,7 +44450,7 @@ console.log(betaMessageBatchIndividualResponse.custom_id);
 
           - `version: string`
 
-            Skill version or 'latest' for most recent version
+            The resolved version: a skill version ID for custom skills.
 
       - `content: Array<BetaContentBlock>`
 
@@ -46098,7 +46098,7 @@ console.log(betaMessageBatchIndividualResponse.custom_id);
 
         - `version: string`
 
-          Skill version or 'latest' for most recent version
+          The resolved version: a skill version ID for custom skills.
 
     - `content: Array<BetaContentBlock>`
 
