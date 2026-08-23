@@ -61,7 +61,7 @@ You can use the CLI to version control API resources such as skills, agents, env
   </Step>
 
   <Step title="Define the environment">
-    A session runs in an [environment](../api/api-cli-beta-environments.md), which defines the sandbox it executes in. Write the environment definition to `summarizer.environment.yaml`:
+    A session runs in an [environment](https://platform.claude.com/docs/en/api/cli/beta/environments.md), which defines the sandbox it executes in. Write the environment definition to `summarizer.environment.yaml`:
 
     ```yaml summarizer.environment.yaml
     name: summarizer-env

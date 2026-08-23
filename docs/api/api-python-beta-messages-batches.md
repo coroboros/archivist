@@ -6023,7 +6023,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
                 - `"reasoning_extraction"`
 
-                  The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../build-with-claude/build-with-claude-adaptive-thinking.md).
+                  The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking.md).
 
                 - `"general_harms"`
 
@@ -6176,7 +6176,7 @@ Learn more about the Message Batches API in our [user guide](../build-with-claud
 
             - `"reasoning_extraction"`
 
-              The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../build-with-claude/build-with-claude-adaptive-thinking.md).
+              The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking.md).
 
             - `"general_harms"`
 
@@ -7938,7 +7938,7 @@ for batch in client.beta.messages.batches.results(
 
                 - `"reasoning_extraction"`
 
-                  The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../build-with-claude/build-with-claude-adaptive-thinking.md).
+                  The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking.md).
 
                 - `"general_harms"`
 
@@ -8091,7 +8091,7 @@ for batch in client.beta.messages.batches.results(
 
             - `"reasoning_extraction"`
 
-              The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../build-with-claude/build-with-claude-adaptive-thinking.md).
+              The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking.md).
 
             - `"general_harms"`
 
@@ -9644,7 +9644,7 @@ for batch in client.beta.messages.batches.results(
 
               - `"reasoning_extraction"`
 
-                The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../build-with-claude/build-with-claude-adaptive-thinking.md).
+                The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking.md).
 
               - `"general_harms"`
 
@@ -9797,7 +9797,7 @@ for batch in client.beta.messages.batches.results(
 
           - `"reasoning_extraction"`
 
-            The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../build-with-claude/build-with-claude-adaptive-thinking.md).
+            The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking.md).
 
           - `"general_harms"`
 
@@ -11312,7 +11312,7 @@ for batch in client.beta.messages.batches.results(
 
             - `"reasoning_extraction"`
 
-              The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../build-with-claude/build-with-claude-adaptive-thinking.md).
+              The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking.md).
 
             - `"general_harms"`
 
@@ -11465,7 +11465,7 @@ for batch in client.beta.messages.batches.results(
 
         - `"reasoning_extraction"`
 
-          The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](../build-with-claude/build-with-claude-adaptive-thinking.md).
+          The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking.md).
 
         - `"general_harms"`
 
