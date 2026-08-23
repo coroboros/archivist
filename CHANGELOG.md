@@ -1,5 +1,16 @@
 # Changelog
 
+## 🤖 v1.5.125 - 23/08/2026
+
+File Changes:
+
+- Modified: `docs/code/code-README.md`
+- Modified: `docs/code/code-overview.md`
+- Modified: `docs/code/code-quickstart.md`
+- Modified: `docs/code/code-sessions.md`
+- Modified: `docs/code/code-skills.md`
+
+
 ## 🤖 v1.5.124 - 23/08/2026
 
 File Changes:
